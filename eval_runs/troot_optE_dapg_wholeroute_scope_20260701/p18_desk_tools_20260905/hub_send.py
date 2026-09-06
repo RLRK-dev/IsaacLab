@@ -8,41 +8,70 @@
 
 Design of record: eval_runs/troot_optE_dapg_wholeroute_scope_20260701/P18_D1_VERIFY_CYCLE2_20260905.md Part 2
 (PROPOSE v3, increment 1'). Authorized by Rs1 (the human): files = transcript line 39366; build = line 40230.
+Post-build fixes (2026-09-06, 層2/層5 cycle 1): CONTROLS_20260906.md in this directory lists them with the rows.
 
 Procedure (send):
 - Guard = a pane bind, not a two-factor bind: HERDR_PANE_ID must be w2:p18 and CLAUDE_CODE_SESSION_ID must equal
   the live w2:p18 agent session. Subagents and background jobs of the hub inherit both (measured 2026-09-05) and
-  cannot be excluded by the environment: they must not invoke this tool. Every row records hub_session_id.
+  cannot be excluded by the environment: they run this tool only as HUB_SEND_READONLY=1 ... --dry_run (nothing
+  is sent, pressed or written in that mode). Every row records hub_session_id and child_session.
 - Roster = non-comment lines of scripts/validations/nest_role_labels.txt read at run time, minus RETIRED.
   Resolution = `herdr agent list`, w2 agents only, name "w2:pN ROLE" -> exact match -> exactly one live agent.
+  --to_pane skips role resolution for the primary member: the pane must be a live w2 agent, the head carries the
+  pane's live label (row field resolved_by = "pane"); retired labels and the hub's own pane are still refused.
 - Order: resolve every member -> read every member -> decide every member -> only then allocate the id, compose the
   text once (head line + body + footer), write bodies/m-p18-N.txt, send the identical bytes to each member.
+  --id completes a held fan-out: the bytes are read back from bodies/m-p18-N.txt (never re-composed), the members
+  must belong to the recorded fan-out, and a --body_file whose body differs from the stored body is refused.
 - Pre-send decision (fail-closed): HELD when agent_status is not idle/done/working; when a herdr dialog marker is
-  in the viewport; when there is no composer line (prompt glyph + U+00A0) or more than one; when the composer shows
-  a folded paste; when the composer holds one of our own non-final messages; when the composer holds any text that
-  is not dim (SGR 2) in an ANSI read; when the destination is working and --queue was not given. Only dim text
-  (a UI suggestion) is typed over. Nothing is ever sent before the whole fan-out has been decided.
-- Post-send gate: after `herdr agent send` the composer is re-read (up to 6 x 0.25 s); the keypress (Enter, or
-  Tab with --queue on a working pane) is pressed only when the composer starts with the head line.
+  anywhere in the viewport (over-HELD by design, never under-HELD); when there is no composer line (prompt glyph +
+  U+00A0) or more than one; when the composer shows a folded paste; when the composer holds any non-dim text
+  (a draft, or one of our own non-final messages); when the destination is working and --queue was not given.
+  Dim text (SGR 2 = a UI suggestion) and the queue hint "Press up to edit queued messages" are not drafts.
+  Nothing is ever sent before the whole fan-out has been decided.
+- Post-send gate: after `herdr agent send` the composer is re-read (up to 6 x 0.25 s). The keypress is pressed only
+  when the composer line starts with the head line, or is exactly one folded-paste marker "[Pasted text #N +K lines]"
+  whose K+1 equals the line count of the sent text (Claude Code folds a multi-line paste; measured 2026-09-06 on
+  m-p18-323, n=1; the marker text is stored in the row as landed_as). A foreign paste of the same line count
+  arriving between the pre-send read and the post-send read is the documented residual. Before the keypress the
+  agent status is re-read; a working<->idle flip since the pre-send read holds (HELD(status_changed)) instead of
+  pressing. A post-send HELD stops the fan-out: members not yet sent get HELD(fanout_stopped) rows.
 - Observation: the state of a row comes from the destination transcript, never from the keypress.
   P1 DELIVERED = a user record (string content, promptSource typed|queued, no toolUseResult, not a compaction
-  summary, not a local-command echo) containing the sent bytes; position > 0 = DELIVERED(fused).
+  summary, not a local-command echo) containing the sent bytes; position > 0 = DELIVERED(fused) when the prefix
+  holds other hub heads, DELIVERED(fused_with_unknown_prefix) otherwise (the prefix's first 200 chars are printed,
+  never stored). DELIVERED at position 0 may still share its record with later hub messages: fused_with says so.
   Q1 QUEUED(observed) = an enqueue record with the sent bytes, or the queued marker in the viewport.
   Q2 ABSORBED(unacked) = a remove/popAll record followed by a queued_command attachment with the sent bytes
-  (the reason field is absent in 2600 of 2634 removes; it is an annotation, not the key). Non-terminal.
-  A1 DELIVERED(absorbed,acked) = after Q2, an assistant record (text or thinking) naming the bare id.
-  Q3 DELIVERED(turn_end) = the P1 shape with promptSource queued. Q4 REMOVED = a remove with no following
-  attachment or user record (1 of 2600 measured). Unknown queue operations surface as UNKNOWN(unmapped_op).
-  The tool never writes LOST.
+  (the reason field is absent in 2600 of 2634 removes measured 2026-09-05; it is an annotation, not the key).
+  Non-terminal. A1 DELIVERED(absorbed,acked) = after Q2, an assistant record (text or thinking) naming the bare
+  id. Q3 DELIVERED(turn_end) = the P1 shape with promptSource queued. Q4 REMOVED = a remove with no following
+  attachment or user record. Unknown queue operations on our bytes surface as UNKNOWN(unmapped_op).
+  The tool never writes LOST. A DELIVERED verify row after a send row with via "none" means the keypress came
+  from outside the tool (the documented operator recovery: read the composer, press Enter once, verify --id).
+  P1's string-content / no-toolUseResult rule comes from the two false by-hand verdicts of 2026-09-05
+  (m-p18-290@w2:p0, m-p18-291@w2:pZ; by_hand_20260905/verify_*.txt), which were tool_result records.
 - Measured semantics (2026-09-05): record 18-23 ms after Enter (n=2); Enter->working 0.29/0.41 s (n=2);
-  Tab->enqueue 4.6-314 s (n=10, 1/10 within 6 s); enqueue->absorb 5.9-72.1 s (n=9); Tab->terminal record
-  30.7-517.5 s (n=15, median 103 s); viewport 66-80 lines; composer line = U+276F U+00A0, echoes = U+276F U+0020.
+  Tab->enqueue 4.6-314 s (n=10, 1/10 within 6 s); enqueue->remove 5.9-72.1 s (n=9; the queued_command attachment
+  carries the enqueue time); Tab->terminal record (remove for absorbed, user record otherwise) 30.7-517.5 s
+  (n=15, median 103 s); viewport 66-80 lines; composer line = U+276F U+00A0, echoes = U+276F U+0020.
+- Rows: body_sha256 of a tool row = sha256 of the sent bytes (the file holds them plus one final newline); the
+  imported by-hand rows in by_hand_20260905/sent.jsonl keep their sha over the file. DELIVERED rows carry the byte
+  offset and the transcript line of the record.
 - verify re-reads every non-final row from its stored byte offset (a mid-line offset is resynchronised to the
-  next newline). --dry_run / HUB_SEND_READONLY=1 read and print, write nothing, send nothing.
-- resend --id re-sends the same body bytes with an appended "resend <date>" line as a new row.
-- init computes bodies/.floor by a closed query over all transcripts, the repo and every session scratchpad; it
-  refuses while the by-hand scratchpad directories (ids, desk_msgs) still exist un-renamed.
-Deviations from v3 section 3-D and from the node DoD are listed in the design of record (section 7).
+  next newline); rows without a body file are refused, never scanned. --dry_run (after the subcommand) and
+  HUB_SEND_READONLY=1 read and print, write nothing, send nothing.
+- resend --id re-sends the same body bytes with an appended "resend of <id> <date>" line as a new row of
+  row_type resend (field resend_of); rows of the hub's own control sends are not resent.
+- init computes bodies/.floor once by a closed query over the delivered heads of every project transcript, the
+  repo (tracked and untracked) and the id-shaped files of the hub's own session scratchpad; it refuses while
+  .floor exists or the by-hand scratchpad directories (ids, desk_msgs) still exist un-renamed.
+- Provenance: append_row's flock + loop-write + fsync core is copied from the untracked
+  scripts/verification_log_append.py:235-261 (sha256 30509c34b026f18a1a9eb3db44e786f989144d5f9042797b82d680cc75628f4c,
+  2026-09-06); the 層4 guard scripts/check_thread_vault_prior_art.sh is untracked too
+  (sha256 b8d85cdb99ab66737ee130e5d9624e4eee06ebef98b144ed97a2bcc3e40a5e48, 2026-09-06).
+Deviations from v3 section 3-D and from the node DoD are listed in the design of record (section 7) and in
+CONTROLS_20260906.md (size, the unmeasured draft half of control (h), the agent-type leg of T/C).
 """
 
 from __future__ import annotations
@@ -71,8 +100,8 @@ REPO = Path(os.environ.get("HUB_SEND_REPO") or DIR.parents[2])
 LABELS = REPO / "scripts" / "validations" / "nest_role_labels.txt"
 PROJECTS = Path.home() / ".claude" / "projects"
 SCRATCH_GLOB = "/tmp/claude-1000/-home-rlrk-IsaacLab/*/scratchpad"
-PROMPT = "❯ "
-ECHO = "❯ "
+SCRATCH_OWN = "/tmp/claude-1000/-home-rlrk-IsaacLab/" + os.environ.get("CLAUDE_CODE_SESSION_ID", "-") + "/scratchpad"
+PROMPT = "\u276f\u00a0"  # composer prompt = glyph + NO-BREAK SPACE; echo lines use U+0020 (measured 2026-09-05)
 DIALOG_MARKERS = (
     "do you want to proceed?",
     "esc to cancel",
@@ -83,13 +112,17 @@ DIALOG_MARKERS = (
     "showing detailed transcript",
     "run a dynamic workflow?",
 )
-QUEUED_MARKERS = ("press up to edit queued messages", "queued message")
+QUEUE_HINT = "press up to edit queued messages"
+QUEUED_MARKERS = (QUEUE_HINT, "queued message")
 EXCLUDED_PREFIXES = ("<local-command-", "<command-name>", "<task-notification>")
 ANSI_RE = re.compile(r"\x1b\[[0-9;?]*[A-Za-z]")
-ID_RE = re.compile(r"m-p18-(\d+)")
 FLOOR_RE = re.compile(r"^MSG m-p18-(\d+) /", re.MULTILINE)
 FLOOR_JSON_RE = re.compile(r'"content":"MSG m-p18-(\d+) /')
 HEAD_RE = re.compile(r"MSG (m-p18-\d+) /")
+PASTE_RE = re.compile(r"\[pasted text #\d+(?: \+(\d+) lines?)?\]")
+FOOTER_RE = re.compile(r"^\d{4}-\d\d-\d\d \d\d:\d\d:\d\d JST \(hub_send\.py\)$")
+RESEND_LINE_RE = re.compile(r"^resend of m-p18-\d+ \d{4}-\d\d-\d\d \d\d:\d\d:\d\d JST$")
+ID_FILE_RE = re.compile(r"^(?:body_)?m-p18-(\d+)(?:\.txt)?$")
 FINAL_STATES = ("DELIVERED", "refused")
 READONLY = os.environ.get("HUB_SEND_READONLY") == "1"
 
@@ -133,6 +166,12 @@ def roster() -> set[str]:
     return names - RETIRED
 
 
+def live_label(agent: dict) -> str:
+    name = str(agent.get("name", ""))
+    label = name.split(" ", 1)[1] if " " in name else ""
+    return label[len("T-ROOT-") :] if label.startswith("T-ROOT-") else label
+
+
 def resolve(role: str, agents: list[dict], control: bool) -> dict:
     if role in RETIRED:
         raise SystemExit(f"refused(retired): {role}")
@@ -140,18 +179,25 @@ def resolve(role: str, agents: list[dict], control: bool) -> dict:
         raise SystemExit("refused(self): use --control for the hub's own pane")
     if role not in roster() and role != HUB_ROLE:
         raise SystemExit(f"refused(unregistered): {role}")
-    hits = []
-    for a in agents:
-        name = str(a.get("name", ""))
-        label = name.split(" ", 1)[1] if " " in name else ""
-        label = label[len("T-ROOT-") :] if label.startswith("T-ROOT-") else label
-        if label == role:
-            hits.append(a)
+    hits = [a for a in agents if live_label(a) == role]
     if len(hits) != 1:
         raise SystemExit(
             f"refused({'unresolved' if not hits else 'ambiguous'}): {role} -> {[h['pane_id'] for h in hits]}"
         )
     return hits[0]
+
+
+def resolve_pane(pane: str, agents: list[dict], control: bool) -> tuple[str, dict]:
+    """The --to_pane escape: a live w2 agent by pane id; the role is its live label."""
+    forced = [a for a in agents if a.get("pane_id") == pane]
+    if not forced:
+        raise SystemExit(f"refused(unresolved): {pane} is not a live w2 agent")
+    label = live_label(forced[0])
+    if label in RETIRED:
+        raise SystemExit(f"refused(retired): {pane} carries the retired label {label}")
+    if pane == HUB_PANE and not control:
+        raise SystemExit("refused(self): use --control for the hub's own pane")
+    return label, forced[0]
 
 
 def read_view(pane: str) -> dict:
@@ -209,7 +255,7 @@ def dim_only(raw_line: str) -> bool:
     return seen
 
 
-def decide(status: str, view: dict, queue: bool, own_texts: dict[str, str]) -> tuple[str, dict]:
+def decide(status: str, view: dict, queue: bool, own_heads: dict[str, str]) -> tuple[str, dict]:
     """Return (reason, facts); reason == '' means send is allowed."""
     facts = {"status": status, "composer_before_kind": "empty", "composer_before_sha256": ""}
     if "error" in view:
@@ -230,13 +276,15 @@ def decide(status: str, view: dict, queue: bool, own_texts: dict[str, str]) -> t
         if "[pasted text" in comp.lower():
             facts["composer_before_kind"] = "paste"
             return "HELD(paste_in_composer)", facts
-        for mid, text in own_texts.items():
-            if comp.startswith("MSG m-p18-") and text.startswith(comp[:40]):
-                facts["composer_before_kind"] = "own_message"
-                return f"HELD(composer_holds_own_message id={mid})", facts
-        if view["composer_dim_only"]:
+        if comp.lower() == QUEUE_HINT:
+            facts["composer_before_kind"] = "queue_hint"
+        elif view["composer_dim_only"]:
             facts["composer_before_kind"] = "ghost"
         else:
+            for mid, head in own_heads.items():
+                if head and comp.startswith(head):
+                    facts["composer_before_kind"] = "own_message"
+                    return f"HELD(composer_holds_own_message id={mid})", facts
             facts["composer_before_kind"] = "draft"
             return "HELD(draft)", facts
     if status == "working" and not queue:
@@ -247,6 +295,19 @@ def decide(status: str, view: dict, queue: bool, own_texts: dict[str, str]) -> t
 def transcript_path(agent: dict) -> Path:
     proj = str(agent.get("cwd", "/home/rlrk/IsaacLab")).replace("/", "-")
     return PROJECTS / proj / f"{agent['agent_session']['value']}.jsonl"
+
+
+def line_of(path: Path, offset: int) -> int:
+    """1-based line number of the record that starts at byte offset."""
+    n, remaining = 1, offset
+    with open(path, "rb") as fh:
+        while remaining > 0:
+            chunk = fh.read(min(1 << 20, remaining))
+            if not chunk:
+                break
+            n += chunk.count(b"\n")
+            remaining -= len(chunk)
+    return n
 
 
 def append_row(row: dict) -> None:
@@ -285,8 +346,8 @@ def load_rows() -> list[dict]:
     return rows
 
 
-def latest_states(rows: list[dict]) -> dict[str, dict]:
-    latest: dict[str, dict] = {}
+def latest_states(rows: list[dict]) -> dict[tuple[str, str], dict]:
+    latest: dict[tuple[str, str], dict] = {}
     for r in rows:
         if r.get("row_type") in ("send", "resend", "verify", "held"):
             latest[(r["id"], r.get("pane", ""))] = r
@@ -321,8 +382,30 @@ def compose(mid: str, members: list[tuple[str, dict]], body: str, resend_of: str
     return text
 
 
+def strip_body(text: str) -> str:
+    """The body of a composed text: drop the head line and every trailing footer / resend line."""
+    lines = text.rstrip("\n").split("\n")[1:]
+    while lines and (FOOTER_RE.match(lines[-1]) or RESEND_LINE_RE.match(lines[-1])):
+        lines.pop()
+    return "\n".join(lines)
+
+
+def norm_body(body: str) -> str:
+    return "\n".join(ln.rstrip() for ln in body.rstrip("\n").split("\n"))
+
+
+def paste_marker_lines(comp: str) -> int:
+    """Line count a composer that is exactly one folded-paste marker stands for (``+K lines`` = K+1); else 0."""
+    m = PASTE_RE.fullmatch(comp.strip().lower())
+    if not m:
+        return 0
+    return int(m.group(1) or 0) + 1
+
+
 def scan(path: Path, offset: int, sent: str, head: str, mid: str) -> dict:
-    """Read the destination transcript from offset and classify (P1, Q1-Q4, A1)."""
+    """Read the destination transcript from offset and classify (P1, Q1-Q4, A1). Refuses an empty needle."""
+    if not sent or len(sent) < len(head):
+        raise ValueError("refused(no_body): scan needs the sent bytes")
     res = {"state": "UNKNOWN(no-record)", "evidence": "", "fused_with": [], "head_found": False}
     if not path.exists():
         res["state"] = "UNKNOWN(no-transcript)"
@@ -342,18 +425,21 @@ def scan(path: Path, offset: int, sent: str, head: str, mid: str) -> dict:
                 d = json.loads(raw.decode("utf-8", errors="replace"))
             except json.JSONDecodeError:
                 continue
+            if not isinstance(d, dict):
+                continue
             t = d.get("type")
             if t == "queue-operation":
                 op = d.get("operation")
                 content = str(d.get("content", ""))
-                if op == "enqueue" and sent in content:
-                    res.update(state="QUEUED(observed)", evidence=f"enqueue@{line_off}")
-                elif op in ("remove", "popAll") and sent in content:
-                    queue_seen = True
-                    res.update(state=f"REMOVED({d.get('reason')})", evidence=f"{op}@{line_off}")
-                elif op == "dequeue" or (op in ("remove", "popAll") and not content):
+                if sent not in content:
                     continue
-                elif op not in ("enqueue", "remove", "popAll", "dequeue"):
+                if op == "enqueue":
+                    res.update(state="QUEUED(observed)", evidence=f"enqueue@{line_off}")
+                elif op in ("remove", "popAll"):
+                    queue_seen = True
+                    reason = d.get("reason") or "reason=absent"
+                    res.update(state=f"REMOVED({reason})", evidence=f"{op}@{line_off}")
+                elif op != "dequeue":
                     res.update(state=f"UNKNOWN(unmapped_op={op})", evidence=f"queue-operation@{line_off}")
             elif t == "attachment" and (d.get("attachment") or {}).get("type") == "queued_command":
                 if sent in str(d["attachment"].get("prompt", "")) and queue_seen:
@@ -368,18 +454,25 @@ def scan(path: Path, offset: int, sent: str, head: str, mid: str) -> dict:
                 if sent in c:
                     k = c.find(sent)
                     others = sorted({m for m in HEAD_RE.findall(c) if m != mid})
-                    st = (
-                        "DELIVERED(turn_end)"
-                        if d.get("promptSource") == "queued"
-                        else ("DELIVERED" if k == 0 else "DELIVERED(fused)")
-                    )
+                    if d.get("promptSource") == "queued":
+                        st = "DELIVERED(turn_end)"
+                    elif k == 0:
+                        st = "DELIVERED"
+                    elif others:
+                        st = "DELIVERED(fused)"
+                    else:
+                        st = "DELIVERED(fused_with_unknown_prefix)"
+                        print("unknown_prefix (first 200 chars, not stored):", repr(c[:k][:200]))
                     res.update(
                         state=st,
                         evidence=f"user@{line_off}+{k}",
                         delivered_at=str(d.get("timestamp")),
                         fused_with=others,
                         head_found=head in c,
+                        line=line_of(path, line_off),
                     )
+                    if k > 0 and not others:
+                        res["unknown_prefix_len"] = k
                     return res
             elif t == "assistant" and absorbed_at is not None:
                 blocks = (d.get("message") or {}).get("content") or []
@@ -389,27 +482,62 @@ def scan(path: Path, offset: int, sent: str, head: str, mid: str) -> dict:
                         state="DELIVERED(absorbed,acked)",
                         evidence=f"assistant@{line_off}",
                         delivered_at=str(d.get("timestamp")),
+                        line=line_of(path, line_off),
                     )
                     return res
     return res
 
 
+def recorded_members(rows: list[dict], mid: str) -> set[str]:
+    panes: set[str] = set()
+    for r in rows:
+        if r.get("id") != mid:
+            continue
+        if r.get("row_type") == "held":
+            for m in r.get("members") or []:
+                panes.add(m if isinstance(m, str) else str(m.get("pane", "")))
+        elif r.get("row_type") in ("send", "resend") and r.get("pane"):
+            panes.add(r["pane"])
+    return panes
+
+
 def do_send(args: argparse.Namespace) -> int:
     agents = agent_list()
     hub_sid = guard(agents)
-    roles = [args.to, *(args.cc or [])]
-    members = [(r, resolve(r, agents, args.control)) for r in roles]
-    if args.to_pane:
-        forced = [a for a in agents if a.get("pane_id") == args.to_pane]
-        if not forced:
-            raise SystemExit(f"refused(unresolved): {args.to_pane}")
-        members[0] = (args.to, forced[0])
-        print("resolved_by=pane", args.to_pane)
     rows = load_rows()
+    latest = latest_states(rows)
+    resolved_by = "label"
+    if args.to_pane:
+        role0, a0 = resolve_pane(args.to_pane, agents, args.control)
+        members = [(role0 or args.to, a0)]
+        resolved_by = "pane"
+        print("resolved_by=pane", args.to_pane, "label=", role0 or "(none)")
+    else:
+        members = [(args.to, resolve(args.to, agents, args.control))]
+    members += [(r, resolve(r, agents, args.control)) for r in (args.cc or [])]
+    body_text = getattr(args, "body_text", None)
+    if body_text is None and args.body_file:
+        body_text = Path(args.body_file).read_text(encoding="utf-8")
+    if args.id:
+        if not any(r.get("id") == args.id and r.get("row_type") in ("held", "send", "resend") for r in rows):
+            raise SystemExit(f"refused(unknown_id): {args.id} has no held/send row")
+        bpath = BODIES / f"{args.id}.txt"
+        if not bpath.exists():
+            raise SystemExit(f"refused(no_body): {bpath} is missing")
+        text = bpath.read_text(encoding="utf-8").rstrip("\n")
+        if body_text is not None and norm_body(body_text) != strip_body(text):
+            raise SystemExit(f"refused(body_mismatch): --body_file differs from the stored body of {args.id}")
+        allowed = recorded_members(rows, args.id)
+        strangers = [a["pane_id"] for _, a in members if a["pane_id"] not in allowed]
+        if strangers:
+            raise SystemExit(f"refused(member_not_in_fanout): {strangers} not in {sorted(allowed)}")
+        mid = args.id
+    elif body_text is None:
+        raise SystemExit("refused(no_body): --body_file is required")
     own = {
         r["id"]: r.get("head", "")
-        for r in rows
-        if r.get("row_type") in ("send", "resend") and not r.get("state", "").startswith(FINAL_STATES)
+        for (r_id, _), r in latest.items()
+        if r.get("row_type") in ("send", "resend", "held") and not str(r.get("state", "")).startswith(FINAL_STATES)
     }
     decisions = []
     for role, a in members:
@@ -418,25 +546,29 @@ def do_send(args: argparse.Namespace) -> int:
         decisions.append((role, a, reason, facts))
         if reason:
             print(f"{a['pane_id']} {role}: {reason} status={st} composer={facts['composer_before_kind']}")
-    body = Path(args.body_file).read_text(encoding="utf-8")
-    mid = args.id or ("dry-run" if READONLY else alloc_id())
-    text = compose(mid, members, body, args.resend_of)
+    if not args.id:
+        mid = "dry-run" if READONLY else alloc_id()
+        text = compose(mid, members, body_text, args.resend_of)
+        if not READONLY:
+            (BODIES / f"{mid}.txt").write_text(text + "\n", encoding="utf-8")
     head = text.split("\n", 1)[0]
     sha = hashlib.sha256(text.encode("utf-8")).hexdigest()
-    if not READONLY and not args.id:
-        (BODIES / f"{mid}.txt").write_text(text + "\n", encoding="utf-8")
     base = {
         "id": mid,
         "body_sha256": sha,
         "head": head,
-        "to": args.to,
+        "to": members[0][0],
         "cc": args.cc or [],
+        "to_pane": args.to_pane or "",
+        "resolved_by": resolved_by,
         "hub_session_id": hub_sid,
         "child_session": os.environ.get("CLAUDE_CODE_CHILD_SESSION", ""),
         "herdr_version": run(["herdr", "--version"]).strip(),
         "control": bool(args.control),
         "queued_on_topic": bool(args.queue),
     }
+    if args.resend_of:
+        base["resend_of"] = args.resend_of
     if any(r for _, _, r, _ in decisions):
         append_row(
             {
@@ -444,27 +576,62 @@ def do_send(args: argparse.Namespace) -> int:
                 "row_type": "held",
                 "state": ";".join(r for _, _, r, _ in decisions if r),
                 "sent_at": jst_now(),
-                "members": [a["pane_id"] for _, a, _, _ in decisions],
+                "members": [
+                    {
+                        "pane": a["pane_id"],
+                        "role": role,
+                        "status": facts["status"],
+                        "composer_before_kind": facts["composer_before_kind"],
+                        "composer_before_sha256": facts["composer_before_sha256"],
+                        "reason": reason,
+                    }
+                    for role, a, reason, facts in decisions
+                ],
             }
         )
         return 2
     rc = 0
-    for role, a, _, facts in decisions:
+    pending = list(decisions)
+    while pending:
+        role, a, _, facts = pending.pop(0)
         if args.id and any(
             r.get("id") == mid and r.get("pane") == a["pane_id"] and str(r.get("state", "")).startswith("DELIVERED")
             for r in rows
         ):
             continue
-        rc |= send_one(mid, role, a, text, head, sha, base, facts, args.queue)
+        one = send_one(mid, role, a, text, head, sha, base, facts, args.queue)
+        rc |= one
+        if one == 2 and pending:
+            for role2, a2, _, facts2 in pending:
+                append_row({**base, **stopped_row(role2, a2, facts2)})
+                print(a2["pane_id"], "HELD(fanout_stopped)")
+            break
     return rc
 
 
-def paste_marker_lines(comp: str) -> int:
-    """Line count a folded-paste marker stands for (``[Pasted text #N +K lines]`` = K+1 lines); 0 if none."""
-    m = re.search(r"\[pasted text #\d+(?: \+(\d+) lines?)?\]", comp.lower())
-    if not m:
-        return 0
-    return int(m.group(1) or 0) + 1
+def stopped_row(role: str, a: dict, facts: dict) -> dict:
+    tpath = transcript_path(a)
+    return {
+        "row_type": "send",
+        "pane": a["pane_id"],
+        "role": role,
+        "session_id": a["agent_session"]["value"],
+        "transcript_path": str(tpath),
+        "pre_send_offset": tpath.stat().st_size if tpath.exists() else 0,
+        "via": "none",
+        "state": "HELD(fanout_stopped)",
+        "status": facts["status"],
+        "sent_at": jst_now(),
+        "composer_before_kind": facts["composer_before_kind"],
+        "composer_before_sha256": facts["composer_before_sha256"],
+    }
+
+
+def status_of(pane: str) -> str:
+    for a in agent_list():
+        if a.get("pane_id") == pane:
+            return str(a.get("agent_status"))
+    return "None"
 
 
 def send_one(mid: str, role: str, a: dict, text: str, head: str, sha: str, base: dict, facts: dict, queue: bool) -> int:
@@ -473,7 +640,7 @@ def send_one(mid: str, role: str, a: dict, text: str, head: str, sha: str, base:
     offset = tpath.stat().st_size if tpath.exists() else 0
     row = {
         **base,
-        "row_type": "send",
+        "row_type": "resend" if base.get("resend_of") else "send",
         "pane": pane,
         "role": role,
         "session_id": a["agent_session"]["value"],
@@ -481,6 +648,7 @@ def send_one(mid: str, role: str, a: dict, text: str, head: str, sha: str, base:
         "pre_send_offset": offset,
         "via": "none",
         "state": "",
+        "status": facts["status"],
         "sent_at": jst_now(),
         "composer_before_kind": facts["composer_before_kind"],
         "composer_before_sha256": facts["composer_before_sha256"],
@@ -490,15 +658,18 @@ def send_one(mid: str, role: str, a: dict, text: str, head: str, sha: str, base:
         append_row(row)
         return 0
     run(["herdr", "agent", "send", pane, text])
-    landed = False
+    landed = ""
     n_lines = text.count("\n") + 1
     for _ in range(6):
         v = read_view(pane)
         comp = v.get("composer_plain", "")
-        if comp.startswith(head) or paste_marker_lines(comp) == n_lines:
-            landed = True
+        if comp.startswith(head):
+            landed = "head"
             break
-        if "composer_plain" in v and v["composer_plain"] and not v["composer_plain"].startswith("MSG " + mid):
+        if paste_marker_lines(comp) == n_lines:
+            landed = comp.strip()
+            break
+        if comp and not comp.startswith("MSG " + mid):
             row["state"] = "HELD(foreign_text_in_composer)"
             append_row(row)
             print(pane, row["state"])
@@ -509,7 +680,15 @@ def send_one(mid: str, role: str, a: dict, text: str, head: str, sha: str, base:
         append_row(row)
         print(pane, row["state"])
         return 2
-    key = "Tab" if (a.get("agent_status") == "working" and queue) else "Enter"
+    row["landed_as"] = landed
+    before, now = str(a.get("agent_status")), status_of(pane)
+    row["status_at_keypress"] = now
+    if (before == "working") != (now == "working"):
+        row["state"] = f"HELD(status_changed:{before}->{now})"
+        append_row(row)
+        print(pane, row["state"])
+        return 2
+    key = "Tab" if (now == "working" and queue) else "Enter"
     run(["herdr", "pane", "send-keys", pane, key])
     row["via"] = key
     row["enter_at"] = jst_now()
@@ -543,9 +722,34 @@ def send_one(mid: str, role: str, a: dict, text: str, head: str, sha: str, base:
     return 0 if row["state"].startswith(("DELIVERED", "QUEUED")) else 1
 
 
+VERIFY_COPY = (
+    "id",
+    "pane",
+    "role",
+    "to",
+    "cc",
+    "to_pane",
+    "resolved_by",
+    "control",
+    "resend_of",
+    "session_id",
+    "transcript_path",
+    "pre_send_offset",
+    "head",
+    "body_sha256",
+    "hub_session_id",
+    "sent_at",
+    "via",
+    "enter_at",
+)
+
+
 def do_verify(args: argparse.Namespace) -> int:
+    if not READONLY:
+        guard(agent_list())
     rows = load_rows()
     latest = latest_states(rows)
+    rc = 0
     for (mid, pane), r in latest.items():
         if args.id and mid != args.id:
             continue
@@ -555,34 +759,32 @@ def do_verify(args: argparse.Namespace) -> int:
             or not r.get("transcript_path")
         ):
             continue
-        text = (
-            (BODIES / f"{mid}.txt").read_text(encoding="utf-8").rstrip("\n") if (BODIES / f"{mid}.txt").exists() else ""
-        )
-        res = scan(Path(r["transcript_path"]), int(r["pre_send_offset"]), text, r.get("head", ""), mid)
-        overdue = (_dt.datetime.now().astimezone() - _dt.datetime.fromisoformat(r["sent_at"])).total_seconds() > 3600
-        new = {
-            **{
-                k: r[k]
-                for k in (
-                    "id",
-                    "pane",
-                    "role",
-                    "transcript_path",
-                    "pre_send_offset",
-                    "head",
-                    "body_sha256",
-                    "hub_session_id",
-                )
-            },
-            "row_type": "verify",
-            "verified_at": jst_now(),
-            "overdue": overdue,
-            **res,
-        }
-        print(mid, pane, r.get("state"), "->", res["state"], res.get("evidence", ""))
-        if res["state"] != r.get("state"):
-            append_row(new)
-    return 0
+        try:
+            bpath = BODIES / f"{mid}.txt"
+            text = bpath.read_text(encoding="utf-8").rstrip("\n") if bpath.exists() else ""
+            if not text:
+                print(mid, pane, "refused(no_body): row skipped, nothing scanned")
+                rc = 1
+                continue
+            res = scan(Path(r["transcript_path"]), int(r["pre_send_offset"]), text, r.get("head", ""), mid)
+            sent_at = _dt.datetime.fromisoformat(r["sent_at"]) if r.get("sent_at") else None
+            overdue = (
+                (_dt.datetime.now().astimezone() - sent_at).total_seconds() > 3600 if sent_at is not None else None
+            )
+            new = {
+                **{k: r[k] for k in VERIFY_COPY if k in r},
+                "row_type": "verify",
+                "verified_at": jst_now(),
+                "overdue": overdue,
+                **res,
+            }
+            print(mid, pane, r.get("state"), "->", res["state"], res.get("evidence", ""))
+            if res["state"] != r.get("state"):
+                append_row(new)
+        except (OSError, ValueError, KeyError) as exc:
+            print(mid, pane, f"verify_error({type(exc).__name__}): {exc}")
+            rc = 1
+    return rc
 
 
 def do_resend(args: argparse.Namespace) -> int:
@@ -590,61 +792,78 @@ def do_resend(args: argparse.Namespace) -> int:
     src = [r for r in rows if r.get("id") == args.id and r.get("row_type") in ("send", "resend", "held")]
     if not src:
         raise SystemExit(f"refused(unknown_id): {args.id}")
+    if src[0].get("control"):
+        raise SystemExit(f"refused(control_row): {args.id} was a control send to the hub's own pane; not resent")
     body_path = BODIES / f"{args.id}.txt"
-    text = body_path.read_text(encoding="utf-8")
-    body = "\n".join(text.split("\n")[1:-2])
-    tmp = DIR / ".resend_body.txt"
-    tmp.write_text(body, encoding="utf-8")
+    if not body_path.exists():
+        raise SystemExit(f"refused(no_body): {body_path} is missing")
+    body = strip_body(body_path.read_text(encoding="utf-8"))
     ns = argparse.Namespace(
         to=src[0]["to"],
         cc=src[0].get("cc") or [],
-        body_file=str(tmp),
+        body_file=None,
+        body_text=body,
         queue=args.queue,
         id=None,
-        to_pane=None,
-        control=src[0].get("control", False),
+        to_pane=src[0].get("to_pane") or None,
+        control=False,
         resend_of=args.id,
     )
-    try:
-        return do_send(ns)
-    finally:
-        tmp.unlink(missing_ok=True)
+    return do_send(ns)
+
+
+def id_files(root: str) -> list[Path]:
+    return [Path(p) for p in glob.glob(root + "/**/*", recursive=True) if ID_FILE_RE.match(os.path.basename(p))]
 
 
 def do_init(_args: argparse.Namespace) -> int:
+    if not READONLY:
+        guard(agent_list())
+    if FLOOR.exists():
+        raise SystemExit(f"refused(floor_exists): {FLOOR} = {FLOOR.read_text().strip()}; init runs once")
     for d in glob.glob(SCRATCH_GLOB + "/ids") + glob.glob(SCRATCH_GLOB + "/desk_msgs"):
         raise SystemExit(f"refused(by_hand_alive): rename {d} first")
-    paths = list(PROJECTS.glob("-home-rlrk-IsaacLab/*.jsonl")) + [
-        Path(p) for p in glob.glob(SCRATCH_GLOB + "/**/*", recursive=True)
-    ]
+    transcripts = sorted(PROJECTS.glob("-home-rlrk-IsaacLab/*.jsonl"))
+    own_files = id_files(SCRATCH_OWN)
     top = 0
-    for p in paths:
+    for p in transcripts:
         try:
-            rx = FLOOR_JSON_RE if p.suffix == ".jsonl" else FLOOR_RE
-            for m in rx.finditer(p.read_text(encoding="utf-8", errors="replace")):
+            with open(p, encoding="utf-8", errors="replace") as fh:
+                for line in fh:
+                    m = FLOOR_JSON_RE.search(line)
+                    if m:
+                        top = max(top, int(m.group(1)))
+        except OSError:
+            continue
+    for p in own_files:
+        top = max(top, int(ID_FILE_RE.match(p.name).group(1)))
+        try:
+            for m in FLOOR_RE.finditer(p.read_text(encoding="utf-8", errors="replace")):
                 top = max(top, int(m.group(1)))
         except (OSError, UnicodeDecodeError):
             continue
-    git = run(["git", "-C", str(REPO), "grep", "-ohE", "MSG m-p18-[0-9]+ /", "--", "."])
+    git = run(["git", "-C", str(REPO), "grep", "--untracked", "-ohE", "MSG m-p18-[0-9]+ /", "--", "."])
     for m in FLOOR_RE.finditer(git):
         top = max(top, int(m.group(1)))
-    BODIES.mkdir(exist_ok=True)
+    query = (
+        "max N over delivered heads: transcripts (content starting with MSG m-p18-N /) in "
+        "~/.claude/projects/-home-rlrk-IsaacLab/*.jsonl; git grep --untracked (head tokens) in the repo; "
+        "id-shaped files ((body_)m-p18-N(.txt), name and line-start heads) under " + SCRATCH_OWN
+    )
     if READONLY:
-        print("dry_run floor:", top)
+        print("dry_run floor:", top, "| transcripts", len(transcripts), "| own id files", len(own_files))
         return 0
+    BODIES.mkdir(exist_ok=True)
     FLOOR.write_text(f"{top}\n")
     append_row(
         {
             "row_type": "init",
             "floor": top,
-            "query": (
-                "max N over delivered heads (jsonl: content starting with MSG m-p18-N /"
-                "; files: line-start MSG m-p18-N /) in ~/.claude/projects/-home-rlrk-Is"
-                "aacLab/*.jsonl, git grep, "
-            )
-            + SCRATCH_GLOB,
+            "query": query,
             "at": jst_now(),
-            "transcripts": len(paths),
+            "transcripts": len(transcripts),
+            "paths_scanned": len(transcripts) + len(own_files),
+            "hub_session_id": os.environ.get("CLAUDE_CODE_SESSION_ID", ""),
         }
     )
     print("floor", top)
@@ -657,7 +876,7 @@ def main(argv: list[str] | None = None) -> int:
     s = sub.add_parser("send")
     s.add_argument("--to", required=True)
     s.add_argument("--cc", nargs="*")
-    s.add_argument("--body_file", required=True)
+    s.add_argument("--body_file")
     s.add_argument("--queue", action="store_true")
     s.add_argument("--id")
     s.add_argument("--to_pane")
@@ -672,8 +891,8 @@ def main(argv: list[str] | None = None) -> int:
     r.set_defaults(func=do_resend)
     i = sub.add_parser("init")
     i.set_defaults(func=do_init)
-    for p in (ap, s, v, r, i):
-        p.add_argument("--dry_run", action="store_true", help="read and print only; set HUB_SEND_READONLY=1 as well")
+    for p in (s, v, r, i):
+        p.add_argument("--dry_run", action="store_true", help="after the subcommand: read and print only")
     args = ap.parse_args(argv)
     global READONLY
     READONLY = READONLY or bool(getattr(args, "dry_run", False))
