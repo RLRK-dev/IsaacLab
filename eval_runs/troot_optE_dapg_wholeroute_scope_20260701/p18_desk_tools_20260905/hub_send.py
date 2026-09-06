@@ -17,41 +17,64 @@ Procedure (send):
   is sent, pressed or written in that mode). Every row records hub_session_id and child_session.
 - Roster = non-comment lines of scripts/validations/nest_role_labels.txt read at run time, minus RETIRED.
   Resolution = `herdr agent list`, w2 agents only, name "w2:pN ROLE" -> exact match -> exactly one live agent.
-  --to_pane skips role resolution for the primary member: the pane must be a live w2 agent, the head carries the
-  pane's live label (row field resolved_by = "pane"); retired labels and the hub's own pane are still refused.
+  An agent whose `agent` kind is not claude is refused (refused(agent_type_not_banked)): no delivery table is
+  banked for other kinds (the node's codex exclusion), so the tool does not send to them (fail-closed; stricter
+  than the spec's UNKNOWN(table-not-banked)).
+  --to_pane skips role resolution for the primary member: the pane must be a live w2 agent with a live label in
+  the roster (--control lifts the roster check); the head carries that label (row fields resolved_by = "pane",
+  to_requested = the typed --to); a --to that itself resolves uniquely to another pane is refused
+  (refused(contradiction)); retired labels, unlabelled panes and the hub's own pane are refused.
+  HUB_SEND_REPO (env) redirects the repo root (roster file and init's git leg) for simulations from a copied
+  directory; unset in normal use.
 - Order: resolve every member -> read every member -> decide every member -> only then allocate the id, compose the
   text once (head line + body + footer), write bodies/m-p18-N.txt, send the identical bytes to each member.
   --id completes a held fan-out: the bytes are read back from bodies/m-p18-N.txt (never re-composed), the members
   must belong to the recorded fan-out, and a --body_file whose body differs from the stored body is refused.
+  Only members never handed to `herdr agent send` (a pre-send held row, or HELD(fanout_stopped)) are sent; every
+  other member is skipped with skipped(<state>) before any read, so one id never reaches a queue twice.
 - Pre-send decision (fail-closed): HELD when agent_status is not idle/done/working; when a herdr dialog marker is
   anywhere in the viewport (over-HELD by design, never under-HELD); when there is no composer line (prompt glyph +
   U+00A0) or more than one; when the composer shows a folded paste; when the composer holds any non-dim text
   (a draft, or one of our own non-final messages); when the destination is working and --queue was not given.
   Dim text (SGR 2 = a UI suggestion) and the queue hint "Press up to edit queued messages" are not drafts.
+  A folded paste hides its identity: our own un-pressed text in a composer reads as HELD(paste_in_composer), not
+  as composer_holds_own_message (that state needs an unfolded head line); correlate through the pane's held rows.
   Nothing is ever sent before the whole fan-out has been decided.
 - Post-send gate: after `herdr agent send` the composer is re-read (up to 6 x 0.25 s). The keypress is pressed only
   when the composer line starts with the head line, or is exactly one folded-paste marker "[Pasted text #N +K lines]"
   whose K+1 equals the line count of the sent text (Claude Code folds a multi-line paste; measured 2026-09-06 on
   m-p18-323, n=1; the marker text is stored in the row as landed_as). A foreign paste of the same line count
-  arriving between the pre-send read and the post-send read is the documented residual. Before the keypress the
-  agent status is re-read; a working<->idle flip since the pre-send read holds (HELD(status_changed)) instead of
-  pressing. A post-send HELD stops the fan-out: members not yet sent get HELD(fanout_stopped) rows.
+  arriving between the pre-send read and the post-send read is the documented residual; a fold whose count
+  differs from ours holds as HELD(paste_count_mismatch). Before the keypress the agent status is re-read (one
+  `agent list`, ~0.35 s; a flip inside the last ~0.8 s is invisible); a working<->idle flip, or a status outside
+  idle/done/working, holds (HELD(status_changed)) instead of pressing. Return codes of `agent send` and
+  `send-keys` are stored (send_rc, keypress_rc); a refused keypress holds (HELD(keypress_refused)) with via none.
+  A post-send HELD stops the fan-out: members not yet sent get HELD(fanout_stopped) rows. Any exception after the
+  text was placed still appends the row it has built (HELD(error:...) before the keypress, UNKNOWN(error:...)
+  after) before propagating.
 - Observation: the state of a row comes from the destination transcript, never from the keypress.
   P1 DELIVERED = a user record (string content, promptSource typed|queued, no toolUseResult, not a compaction
-  summary, not a local-command echo) containing the sent bytes; position > 0 = DELIVERED(fused) when the prefix
+  summary, not a local-command echo) containing the sent bytes (evidence user@<byte offset>+<k>, k = character
+  index into the decoded content); position > 0 = DELIVERED(fused) when the prefix
   holds other hub heads, DELIVERED(fused_with_unknown_prefix) otherwise (the prefix's first 200 chars are printed,
   never stored). DELIVERED at position 0 may still share its record with later hub messages: fused_with says so.
   Q1 QUEUED(observed) = an enqueue record with the sent bytes, or the queued marker in the viewport.
   Q2 ABSORBED(unacked) = a remove/popAll record followed by a queued_command attachment with the sent bytes
-  (the reason field is absent in 2600 of 2634 removes measured 2026-09-05; it is an annotation, not the key).
-  Non-terminal. A1 DELIVERED(absorbed,acked) = after Q2, an assistant record (text or thinking) naming the bare
-  id. Q3 DELIVERED(turn_end) = the P1 shape with promptSource queued. Q4 REMOVED = a remove with no following
+  (the reason field is absent in ~98% of removes: 2600 of 2634 counted 2026-09-05, 2561 of 2603 on 2026-09-06
+  over the 28 project transcripts; it is an annotation, not the key). The row keeps absorbed_at = the remove
+  record's timestamp (the attachment carries the enqueue time). Non-terminal. A1 DELIVERED(absorbed,acked) =
+  after Q2, an assistant record (text or thinking) naming the bare id. Q3 DELIVERED(turn_end) = the P1 shape
+  with promptSource queued. Q4 REMOVED = a remove with no following
   attachment or user record. Unknown queue operations on our bytes surface as UNKNOWN(unmapped_op).
   The tool never writes LOST. A DELIVERED verify row after a send row with via "none" means the keypress came
-  from outside the tool (the documented operator recovery: read the composer, press Enter once, verify --id).
+  from outside the tool (the documented operator recovery: read the composer, press Enter once, verify --id);
+  origin.kind of the record is "human" even when the tool pressed the key, so it never discriminates. verify
+  keeps a HELD state unless it observes something (never HELD -> UNKNOWN(no-record)), skips never-sent
+  HELD(fanout_stopped) rows, and computes overdue only for rows with a keypress.
   P1's string-content / no-toolUseResult rule comes from the two false by-hand verdicts of 2026-09-05
   (m-p18-290@w2:p0, m-p18-291@w2:pZ; by_hand_20260905/verify_*.txt), which were tool_result records.
-- Measured semantics (2026-09-05): record 18-23 ms after Enter (n=2); Enter->working 0.29/0.41 s (n=2);
+- Measured semantics (2026-09-05, one leg of each n=2 pair has no banked keypress stamp): record 18-23 ms after
+  Enter (n=2; the tool's own m-p18-324 on 2026-09-06 = 40 ms, n=3); Enter->working 0.29/0.41 s (n=2);
   Tab->enqueue 4.6-314 s (n=10, 1/10 within 6 s); enqueue->remove 5.9-72.1 s (n=9; the queued_command attachment
   carries the enqueue time); Tab->terminal record (remove for absorbed, user record otherwise) 30.7-517.5 s
   (n=15, median 103 s); viewport 66-80 lines; composer line = U+276F U+00A0, echoes = U+276F U+0020.
@@ -64,8 +87,13 @@ Procedure (send):
 - resend --id re-sends the same body bytes with an appended "resend of <id> <date>" line as a new row of
   row_type resend (field resend_of); rows of the hub's own control sends are not resent.
 - init computes bodies/.floor once by a closed query over the delivered heads of every project transcript, the
-  repo (tracked and untracked) and the id-shaped files of the hub's own session scratchpad; it refuses while
-  .floor exists or the by-hand scratchpad directories (ids, desk_msgs) still exist un-renamed.
+  head-shaped tokens of the repo (tracked and untracked, any position) and the id-shaped files of the retired
+  by-hand directories (ids_retired_*, desk_msgs_retired_*) of the hub's own session scratchpad — the hub's
+  subagents write into that scratchpad, so fixtures elsewhere in it are not counted; it refuses to write while
+  .floor exists (a dry run still prints the query's result beside the live floor) or while the by-hand
+  directories (ids, desk_msgs) exist un-renamed.
+- Operating rule: the row, body file and .floor of a send are committed (pathspec) in the same turn as the send;
+  a message body cites only artifacts that exist at send time, with full shas or none.
 - Provenance: append_row's flock + loop-write + fsync core is copied from the untracked
   scripts/verification_log_append.py:235-261 (sha256 30509c34b026f18a1a9eb3db44e786f989144d5f9042797b82d680cc75628f4c,
   2026-09-06); the 層4 guard scripts/check_thread_vault_prior_art.sh is untracked too
@@ -131,10 +159,14 @@ def jst_now() -> str:
     return _dt.datetime.now().astimezone().isoformat(timespec="milliseconds")
 
 
-def run(argv: list[str]) -> str:
-    """Run a command without a shell; return decoded stdout (errors replaced)."""
+def run_rc(argv: list[str]) -> tuple[str, int]:
+    """Run a command without a shell; return (decoded stdout, return code)."""
     out = subprocess.run(argv, capture_output=True, check=False)
-    return out.stdout.decode("utf-8", errors="replace")
+    return out.stdout.decode("utf-8", errors="replace"), out.returncode
+
+
+def run(argv: list[str]) -> str:
+    return run_rc(argv)[0]
 
 
 def herdr_json(argv: list[str]) -> dict | None:
@@ -172,6 +204,13 @@ def live_label(agent: dict) -> str:
     return label[len("T-ROOT-") :] if label.startswith("T-ROOT-") else label
 
 
+def check_kind(a: dict) -> dict:
+    kind = a.get("agent")
+    if kind not in (None, "claude"):
+        raise SystemExit(f"refused(agent_type_not_banked: {kind}): {a.get('pane_id')} has no banked delivery table")
+    return a
+
+
 def resolve(role: str, agents: list[dict], control: bool) -> dict:
     if role in RETIRED:
         raise SystemExit(f"refused(retired): {role}")
@@ -184,20 +223,27 @@ def resolve(role: str, agents: list[dict], control: bool) -> dict:
         raise SystemExit(
             f"refused({'unresolved' if not hits else 'ambiguous'}): {role} -> {[h['pane_id'] for h in hits]}"
         )
-    return hits[0]
+    return check_kind(hits[0])
 
 
-def resolve_pane(pane: str, agents: list[dict], control: bool) -> tuple[str, dict]:
-    """The --to_pane escape: a live w2 agent by pane id; the role is its live label."""
+def resolve_pane(pane: str, to: str, agents: list[dict], control: bool) -> tuple[str, dict]:
+    """The --to_pane escape: a live, labelled w2 agent by pane id; the role is its live label."""
     forced = [a for a in agents if a.get("pane_id") == pane]
     if not forced:
         raise SystemExit(f"refused(unresolved): {pane} is not a live w2 agent")
     label = live_label(forced[0])
+    if not label:
+        raise SystemExit(f"refused(unlabelled_pane): {pane} has no live label")
     if label in RETIRED:
         raise SystemExit(f"refused(retired): {pane} carries the retired label {label}")
     if pane == HUB_PANE and not control:
         raise SystemExit("refused(self): use --control for the hub's own pane")
-    return label, forced[0]
+    if label not in roster() and label != HUB_ROLE and not control:
+        raise SystemExit(f"refused(unregistered_label): {pane} carries {label}, not in the roster")
+    elsewhere = [a["pane_id"] for a in agents if live_label(a) == to and a.get("pane_id") != pane]
+    if to != label and len(elsewhere) == 1:
+        raise SystemExit(f"refused(contradiction): --to {to} resolves to {elsewhere[0]}, not {pane}")
+    return label, check_kind(forced[0])
 
 
 def read_view(pane: str) -> dict:
@@ -385,7 +431,9 @@ def compose(mid: str, members: list[tuple[str, dict]], body: str, resend_of: str
 def strip_body(text: str) -> str:
     """The body of a composed text: drop the head line and every trailing footer / resend line."""
     lines = text.rstrip("\n").split("\n")[1:]
-    while lines and (FOOTER_RE.match(lines[-1]) or RESEND_LINE_RE.match(lines[-1])):
+    if lines and RESEND_LINE_RE.match(lines[-1]):
+        lines.pop()
+    if lines and FOOTER_RE.match(lines[-1]):
         lines.pop()
     return "\n".join(lines)
 
@@ -417,7 +465,7 @@ def scan(path: Path, offset: int, sent: str, head: str, mid: str) -> dict:
             if fh.read(1) != b"\n":
                 fh.readline()
         pos = fh.tell()
-        absorbed_at, queue_seen = None, False
+        absorbed_at, queue_seen, removed_ts = None, False, ""
         for raw in fh:
             line_off = pos
             pos += len(raw)
@@ -437,6 +485,7 @@ def scan(path: Path, offset: int, sent: str, head: str, mid: str) -> dict:
                     res.update(state="QUEUED(observed)", evidence=f"enqueue@{line_off}")
                 elif op in ("remove", "popAll"):
                     queue_seen = True
+                    removed_ts = str(d.get("timestamp") or "")
                     reason = d.get("reason") or "reason=absent"
                     res.update(state=f"REMOVED({reason})", evidence=f"{op}@{line_off}")
                 elif op != "dequeue":
@@ -444,7 +493,12 @@ def scan(path: Path, offset: int, sent: str, head: str, mid: str) -> dict:
             elif t == "attachment" and (d.get("attachment") or {}).get("type") == "queued_command":
                 if sent in str(d["attachment"].get("prompt", "")) and queue_seen:
                     absorbed_at = line_off
-                    res.update(state="ABSORBED(unacked)", evidence=f"queued_command@{line_off}", delivered_at="")
+                    res.update(
+                        state="ABSORBED(unacked)",
+                        evidence=f"queued_command@{line_off}",
+                        delivered_at="",
+                        absorbed_at=removed_ts,
+                    )
             elif t == "user" and not d.get("isCompactSummary") and "toolUseResult" not in d:
                 c = (d.get("message") or {}).get("content")
                 if not isinstance(c, str) or d.get("promptSource") not in ("typed", "queued"):
@@ -508,10 +562,10 @@ def do_send(args: argparse.Namespace) -> int:
     latest = latest_states(rows)
     resolved_by = "label"
     if args.to_pane:
-        role0, a0 = resolve_pane(args.to_pane, agents, args.control)
-        members = [(role0 or args.to, a0)]
+        role0, a0 = resolve_pane(args.to_pane, args.to, agents, args.control)
+        members = [(role0, a0)]
         resolved_by = "pane"
-        print("resolved_by=pane", args.to_pane, "label=", role0 or "(none)")
+        print("resolved_by=pane", args.to_pane, "label=", role0)
     else:
         members = [(args.to, resolve(args.to, agents, args.control))]
     members += [(r, resolve(r, agents, args.control)) for r in (args.cc or [])]
@@ -532,12 +586,24 @@ def do_send(args: argparse.Namespace) -> int:
         if strangers:
             raise SystemExit(f"refused(member_not_in_fanout): {strangers} not in {sorted(allowed)}")
         mid = args.id
+        unsent = []
+        for role, a in members:
+            st = str(latest.get((mid, a["pane_id"]), {}).get("state", ""))
+            if st == "" or st == "HELD(fanout_stopped)":
+                unsent.append((role, a))
+            else:
+                print(f"{a['pane_id']} {role}: skipped({st})")
+        if not unsent:
+            print(f"{mid}: nothing to complete")
+            return 0
+        members = unsent
     elif body_text is None:
         raise SystemExit("refused(no_body): --body_file is required")
+    sent_ids = {r_id for (r_id, pane) in latest if pane}
     own = {
         r["id"]: r.get("head", "")
-        for (r_id, _), r in latest.items()
-        if r.get("row_type") in ("send", "resend", "held") and not str(r.get("state", "")).startswith(FINAL_STATES)
+        for (r_id, pane), r in latest.items()
+        if (pane or r_id not in sent_ids) and not str(r.get("state", "")).startswith(FINAL_STATES)
     }
     decisions = []
     for role, a in members:
@@ -558,6 +624,7 @@ def do_send(args: argparse.Namespace) -> int:
         "body_sha256": sha,
         "head": head,
         "to": members[0][0],
+        "to_requested": args.to,
         "cc": args.cc or [],
         "to_pane": args.to_pane or "",
         "resolved_by": resolved_by,
@@ -657,7 +724,23 @@ def send_one(mid: str, role: str, a: dict, text: str, head: str, sha: str, base:
         row["state"] = "dry_run(would_send)"
         append_row(row)
         return 0
-    run(["herdr", "agent", "send", pane, text])
+    _, row["send_rc"] = run_rc(["herdr", "agent", "send", pane, text])
+    try:
+        return _after_send(mid, a, text, head, row, queue)
+    except BaseException as exc:
+        if not row["state"]:
+            kind = "UNKNOWN" if row.get("via", "none") != "none" else "HELD"
+            row["state"] = f"{kind}(error:{type(exc).__name__})"
+            append_row(row)
+            print(a["pane_id"], row["state"])
+        raise
+
+
+def _after_send(mid: str, a: dict, text: str, head: str, row: dict, queue: bool) -> int:
+    """Post-send gate, status re-read, keypress and observation; the caller banks the row on any exception."""
+    pane = a["pane_id"]
+    tpath = Path(row["transcript_path"])
+    offset = int(row["pre_send_offset"])
     landed = ""
     n_lines = text.count("\n") + 1
     for _ in range(6):
@@ -666,9 +749,15 @@ def send_one(mid: str, role: str, a: dict, text: str, head: str, sha: str, base:
         if comp.startswith(head):
             landed = "head"
             break
-        if paste_marker_lines(comp) == n_lines:
+        pm = paste_marker_lines(comp)
+        if pm == n_lines:
             landed = comp.strip()
             break
+        if pm:
+            row["state"] = f"HELD(paste_count_mismatch:{pm}!={n_lines})"
+            append_row(row)
+            print(pane, row["state"])
+            return 2
         if comp and not comp.startswith("MSG " + mid):
             row["state"] = "HELD(foreign_text_in_composer)"
             append_row(row)
@@ -683,13 +772,18 @@ def send_one(mid: str, role: str, a: dict, text: str, head: str, sha: str, base:
     row["landed_as"] = landed
     before, now = str(a.get("agent_status")), status_of(pane)
     row["status_at_keypress"] = now
-    if (before == "working") != (now == "working"):
+    if now not in ("idle", "done", "working") or (before == "working") != (now == "working"):
         row["state"] = f"HELD(status_changed:{before}->{now})"
         append_row(row)
         print(pane, row["state"])
         return 2
     key = "Tab" if (now == "working" and queue) else "Enter"
-    run(["herdr", "pane", "send-keys", pane, key])
+    _, row["keypress_rc"] = run_rc(["herdr", "pane", "send-keys", pane, key])
+    if row["keypress_rc"] != 0:
+        row["state"] = f"HELD(keypress_refused:rc={row['keypress_rc']})"
+        append_row(row)
+        print(pane, row["state"])
+        return 2
     row["via"] = key
     row["enter_at"] = jst_now()
     if key == "Enter":
@@ -727,6 +821,7 @@ VERIFY_COPY = (
     "pane",
     "role",
     "to",
+    "to_requested",
     "cc",
     "to_pane",
     "resolved_by",
@@ -744,6 +839,11 @@ VERIFY_COPY = (
 )
 
 
+def norm_state(state: str) -> str:
+    """QUEUED(observed:viewport) and QUEUED(observed) are one state for the change test."""
+    return state.replace("(observed:viewport)", "(observed)")
+
+
 def do_verify(args: argparse.Namespace) -> int:
     if not READONLY:
         guard(agent_list())
@@ -753,9 +853,11 @@ def do_verify(args: argparse.Namespace) -> int:
     for (mid, pane), r in latest.items():
         if args.id and mid != args.id:
             continue
+        old = str(r.get("state", ""))
         if (
             r.get("row_type") == "held"
-            or str(r.get("state", "")).startswith(FINAL_STATES)
+            or old.startswith(FINAL_STATES)
+            or old == "HELD(fanout_stopped)"
             or not r.get("transcript_path")
         ):
             continue
@@ -767,9 +869,15 @@ def do_verify(args: argparse.Namespace) -> int:
                 rc = 1
                 continue
             res = scan(Path(r["transcript_path"]), int(r["pre_send_offset"]), text, r.get("head", ""), mid)
+            if old.startswith("HELD(") and res["state"] == "UNKNOWN(no-record)":
+                print(mid, pane, old, "-> kept (nothing observed)")
+                continue
             sent_at = _dt.datetime.fromisoformat(r["sent_at"]) if r.get("sent_at") else None
+            pressed = r.get("via", "none") != "none"
             overdue = (
-                (_dt.datetime.now().astimezone() - sent_at).total_seconds() > 3600 if sent_at is not None else None
+                (_dt.datetime.now().astimezone() - sent_at).total_seconds() > 3600
+                if (sent_at is not None and pressed)
+                else None
             )
             new = {
                 **{k: r[k] for k in VERIFY_COPY if k in r},
@@ -778,8 +886,8 @@ def do_verify(args: argparse.Namespace) -> int:
                 "overdue": overdue,
                 **res,
             }
-            print(mid, pane, r.get("state"), "->", res["state"], res.get("evidence", ""))
-            if res["state"] != r.get("state"):
+            print(mid, pane, old, "->", res["state"], res.get("evidence", ""))
+            if norm_state(res["state"]) != norm_state(old):
                 append_row(new)
         except (OSError, ValueError, KeyError) as exc:
             print(mid, pane, f"verify_error({type(exc).__name__}): {exc}")
@@ -813,14 +921,17 @@ def do_resend(args: argparse.Namespace) -> int:
 
 
 def id_files(root: str) -> list[Path]:
-    return [Path(p) for p in glob.glob(root + "/**/*", recursive=True) if ID_FILE_RE.match(os.path.basename(p))]
+    """Id-shaped files of the retired by-hand directories only (the hub's subagents write elsewhere in root)."""
+    paths = glob.glob(root + "/ids_retired_*/*") + glob.glob(root + "/desk_msgs_retired_*/*")
+    return [Path(p) for p in paths if ID_FILE_RE.match(os.path.basename(p))]
 
 
 def do_init(_args: argparse.Namespace) -> int:
     if not READONLY:
         guard(agent_list())
-    if FLOOR.exists():
-        raise SystemExit(f"refused(floor_exists): {FLOOR} = {FLOOR.read_text().strip()}; init runs once")
+    live = FLOOR.read_text().strip() if FLOOR.exists() else "absent"
+    if FLOOR.exists() and not READONLY:
+        raise SystemExit(f"refused(floor_exists): {FLOOR} = {live}; init runs once")
     for d in glob.glob(SCRATCH_GLOB + "/ids") + glob.glob(SCRATCH_GLOB + "/desk_msgs"):
         raise SystemExit(f"refused(by_hand_alive): rename {d} first")
     transcripts = sorted(PROJECTS.glob("-home-rlrk-IsaacLab/*.jsonl"))
@@ -848,10 +959,12 @@ def do_init(_args: argparse.Namespace) -> int:
     query = (
         "max N over delivered heads: transcripts (content starting with MSG m-p18-N /) in "
         "~/.claude/projects/-home-rlrk-IsaacLab/*.jsonl; git grep --untracked (head tokens) in the repo; "
-        "id-shaped files ((body_)m-p18-N(.txt), name and line-start heads) under " + SCRATCH_OWN
+        "id-shaped files ((body_)m-p18-N(.txt), name and line-start heads) under ids_retired_*/ and "
+        "desk_msgs_retired_*/ of " + SCRATCH_OWN
     )
     if READONLY:
-        print("dry_run floor:", top, "| transcripts", len(transcripts), "| own id files", len(own_files))
+        counts = f"transcripts {len(transcripts)} | own id files {len(own_files)}"
+        print(f"dry_run floor: {top} (live .floor = {live}) | {counts}")
         return 0
     BODIES.mkdir(exist_ok=True)
     FLOOR.write_text(f"{top}\n")
