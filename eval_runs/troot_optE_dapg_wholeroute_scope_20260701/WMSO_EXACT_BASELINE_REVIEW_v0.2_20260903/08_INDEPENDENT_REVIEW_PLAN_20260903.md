@@ -1,7 +1,7 @@
-# WMSO v0.2 — 同一完全 pin 参照の 3 軸独立設計レビュー計画 (v0.2.9 REVIEW CANDIDATE)
+# WMSO v0.2 — 同一完全 pin 参照の 3 軸独立設計レビュー計画 (v0.2.10 REVIEW CANDIDATE)
 
 - node: `T-WMSO`; 起草 = Claude Code web session（review candidate 起草・**authority 無し**・凍結物へ非接触）; 作成 = 2026-09-03（UTC・`date -u` 実測）
-- status: **REVIEW CANDIDATE v0.2.9（未 bank・two-key 未・Rs 未裁定・gate PASS を主張しない）** — v0.2 → v0.2.2 = 3 軸独立レビュー finding A-08 の fold（§10）
+- status: **REVIEW CANDIDATE v0.2.10（未 bank・two-key 未・Rs 未裁定・gate PASS を主張しない）** — v0.2 → v0.2.2 = 3 軸独立レビュー finding A-08 の fold（§10）
 - 土台（凍結・編集しない・4 file）: contracts_v2 DESIGN v2.11.2 `00192d20ca00b654cf6cfdb9d04b03ca14adfd0b93f2105c0fea28c295ff8aff` @ `54f90a7de1e02fb14eaf793bf3c60d9503d0d82e` ／ EP v1.9 md `c474acea7c58acc22050c2ad9944fd45a18f5c76967964b42d11922e28fa27e7` ／ EP JSON v1.9 `e63176af9bc3a246b1c32db369ec59f8d09a4c96c381bb03a3a6024bd9811c6e`（definition hash `e7ca43093084c167a209b008533a66d26a1fd3223d2a3c11274d28306c3ff803`）／ tensor_binding DESIGN v13 `5a1874d3be8b98b8aeaace73890d8021cbc7f9814e048741f7f58d6746f349a6` @ `07250f4a0208b3bbd27eae6fef7d980743c4b538`
 - 対象 = 本 package の 05（runtime spec v0.2）・06（industrial profile v0.2）・02/03（matrix）・04（EP 影響）・07（後継判断）。⛔ impl / training / closed-loop authority / production / push / freeze / slice = CLOSED 継続。`$D` = `eval_runs/troot_optE_dapg_wholeroute_scope_20260701`。
 
@@ -79,6 +79,9 @@
 - **HOLD** = CRITICAL / HIGH が残る、または pin 再測・機械検査・陽性対照のいずれかが未達。
 - **反証検証**: 各 finding を text / logic / impact の 3 lens で独立に反証する。既定 = refuted。過半が未反証の finding のみ fold。
 - **fold** = 候補文書の新版（v0.2.1）として 版歴 / fold-map に finding id → 節 → 変更を 1 行ずつ記録し、機械検査 FAIL = 0 を再確認する。凍結物は編集しない。
+- **trace 検証（必須・v0.2.10・Rs 裁定 2026-09-06 §4・`review_records/rs_consult/RS_DECISION_20260906.md`）**: trace = 入力・障害・状態遷移の時系列。各 finding / 裁定について (1) 初期状態・入力・事象の順序・満たすべき規範・期待結果を trace spec に記録し sha256 で固定する（期待結果の根拠 = 設計上の要求。修正後の本文 / 評価器の挙動から逆算しない。固定は本文編集より**前**に commit し順序を git 履歴で証明する）; (2) 同じ期待結果で修正前後を評価し、修正前で指摘した違反が現れ修正後で消えることを確認する（修正前でも満たす trace = 指摘の誤り / 前提不足 / モデル不足を再検討し regression control と記す）; (3) 正常系を対照として確認する（全操作を拒否するだけの修正は合格にしない。期待結果を変えるときは元の spec を上書きせず理由と新版を残す）。artifact = `review_records/trace/`（手続 = 同 dir `README.md`・spec = `TRACES_*.json`・pin = `PIN_*.sha256`・評価器 = `trace_eval.py`・結果 = `RESULTS_*.json`）。
+- **事後整備の明示**: 既に修正済みの版（v0.2.9）に対する trace は `POST_HOC` と label し「修正前に固定した」と主張しない。厳密な先行固定（`PRE_PINNED`）は v0.2.10 以降の修正に適用する。
+- **記録区分の分離**: 限定モデル検証・文書 checker・実装試験・実機試験の結果は別々に記録し、限定モデルの成功を実機の安全性へ読み替えない。checker の FAIL = 0 は時系列反例 / 対象取り違えの不在証明ではない。
 - 同じ finding が再発した場合は根本原因（型・順序・語彙）を直す。回数上限で止めない。
 
 ## 6. 本 session の AI 3 軸レビューの位置づけ
@@ -111,6 +114,7 @@
 
 - v0.1（前 package・参照不能）→ v0.2（本 doc）。handoff 決定 H（3 軸独立レビュー）を根拠に再構成。陽性対照・独立手続・AI レビューの位置づけ（§1 項 5-6・§6）は本 session の改良として追加。旧 v0.1 の識別子は本 doc に無い（05/06 で 削除）。
 - v0.2 → **v0.2.2**（2026-09-04 15:41 UTC）: A-08（CSV の機械検査手順）を §1 項 3 に反映。checklist は不変。実施記録 = `11_THREE_AXIS_REVIEW_RECORD_20260903.md`（A-08=CONFIRMED（LOW）/ v0.2.2 fold = RESOLVED）。
+- v0.2.9 → **v0.2.10**（2026-09-06 13:26 UTC）: §5 に trace 検証（期待結果先行固定・修正前後比較・正常系対照・記録区分の分離）を必須追加（Rs 裁定 2026-09-06 §4）。checklist の他の項は不変。
 
 ## 11. Review anchors
 

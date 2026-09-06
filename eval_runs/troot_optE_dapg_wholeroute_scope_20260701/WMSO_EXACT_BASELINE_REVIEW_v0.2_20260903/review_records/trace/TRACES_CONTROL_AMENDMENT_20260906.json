@@ -1,0 +1,21 @@
+{
+ "kind": "TRACE_CONTROL_AMENDMENT",
+ "created_utc": "2026-09-06T13:30:58Z",
+ "statement": "固定済み spec（PIN_20260906.sha256）は上書きしない。GA-01 と D6 の control は初期状態を本体 trace と共有しており（isl_heartbeat = lost）、control の意図（Stop 未発火）と矛盾していた = spec 側の欠陥。本 file は control の初期状態だけを上書きし、本体 trace の期待結果は変更しない。元の control の結果（VIOLATION）も RESULTS に残す。",
+ "amendments": [
+  {
+   "id": "GA-01",
+   "reason": "control『Stop 未発火・last_disposition なし = SafeHold』が初期状態 isl_heartbeat = lost と矛盾。control では ISL 心拍を正常にする。",
+   "initial_state_override": {
+    "isl_heartbeat": "ok"
+   }
+  },
+  {
+   "id": "D6",
+   "reason": "control『Stop が無ければ (ii) が通る』が初期状態 isl_heartbeat = lost と矛盾。control では ISL 心拍を正常にする。",
+   "initial_state_override": {
+    "isl_heartbeat": "ok"
+   }
+  }
+ ]
+}

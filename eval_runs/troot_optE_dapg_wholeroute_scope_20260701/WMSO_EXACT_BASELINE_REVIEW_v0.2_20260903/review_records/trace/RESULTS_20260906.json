@@ -1,0 +1,1283 @@
+{
+ "kind": "TRACE_EVAL_RESULTS",
+ "evaluation_kind": "限定モデル（trace_eval.py）— WMSO 実装 / 形式モデル / 実機ではない",
+ "evaluated_utc": "2026-09-06T13:30:58Z",
+ "spec_sha256_verified": {
+  "TRACES_GA_posthoc_20260906.json": "e51da8c231c752a11c421ec32b0c14cdc37858158875d05eab0043c5a1ac8132",
+  "TRACES_v0210_prepinned_20260906.json": "dd35004c6b626553e2fbba90b8b80648fa055c8e7a759043b0cee68f4b0f8ded"
+ },
+ "sets": [
+  {
+   "spec": "TRACES_GA_posthoc_20260906.json",
+   "label": "POST_HOC",
+   "pinned_before_fix": false,
+   "rows": [
+    {
+     "id": "GA-01",
+     "title": "gateway 局所で発火した Stop が manager 不読中に失われない",
+     "per_version": {
+      "v028": {
+       "expected": "VIOLATION",
+       "observed": "VIOLATION",
+       "match": true,
+       "obs": {
+        "output": "SAFE_HOLD",
+        "latch": false
+       }
+      },
+      "v029": {
+       "expected": "PASS",
+       "observed": "PASS",
+       "match": true,
+       "obs": {
+        "output": "SAFE_STOP",
+        "latch": true
+       }
+      },
+      "v0210": {
+       "expected": "PASS",
+       "observed": "PASS",
+       "match": true,
+       "obs": {
+        "output": "SAFE_STOP",
+        "latch": true
+       }
+      }
+     },
+     "control": {
+      "v028": {
+       "expected": "PASS",
+       "observed": "VIOLATION",
+       "match": false,
+       "obs": {
+        "output": "SAFE_STOP",
+        "latch": false
+       },
+       "amended": {
+        "observed": "PASS",
+        "match": true,
+        "obs": {
+         "output": "SAFE_HOLD",
+         "latch": false
+        },
+        "reason": "control『Stop 未発火・last_disposition なし = SafeHold』が初期状態 isl_heartbeat = lost と矛盾。control では ISL 心拍を正常にする。"
+       }
+      },
+      "v029": {
+       "expected": "PASS",
+       "observed": "VIOLATION",
+       "match": false,
+       "obs": {
+        "output": "SAFE_STOP",
+        "latch": false
+       },
+       "amended": {
+        "observed": "PASS",
+        "match": true,
+        "obs": {
+         "output": "SAFE_HOLD",
+         "latch": false
+        },
+        "reason": "control『Stop 未発火・last_disposition なし = SafeHold』が初期状態 isl_heartbeat = lost と矛盾。control では ISL 心拍を正常にする。"
+       }
+      },
+      "v0210": {
+       "expected": "PASS",
+       "observed": "VIOLATION",
+       "match": false,
+       "obs": {
+        "output": "SAFE_STOP",
+        "latch": false
+       },
+       "amended": {
+        "observed": "PASS",
+        "match": true,
+        "obs": {
+         "output": "SAFE_HOLD",
+         "latch": false
+        },
+        "reason": "control『Stop 未発火・last_disposition なし = SafeHold』が初期状態 isl_heartbeat = lost と矛盾。control では ISL 心拍を正常にする。"
+       }
+      }
+     }
+    },
+    {
+     "id": "GA-02",
+     "title": "certificate は本文 hash（SkillDefinitionHash）へ束縛される",
+     "per_version": {
+      "v028": {
+       "expected": "VIOLATION",
+       "observed": "VIOLATION",
+       "match": true,
+       "obs": {
+        "lease_accepted": true
+       }
+      },
+      "v029": {
+       "expected": "PASS",
+       "observed": "PASS",
+       "match": true,
+       "obs": {
+        "lease_accepted": false
+       }
+      },
+      "v0210": {
+       "expected": "PASS",
+       "observed": "PASS",
+       "match": true,
+       "obs": {
+        "lease_accepted": false
+       }
+      }
+     },
+     "control": {
+      "v028": {
+       "expected": "PASS",
+       "observed": "PASS",
+       "match": true,
+       "obs": {
+        "lease_accepted": true
+       }
+      },
+      "v029": {
+       "expected": "PASS",
+       "observed": "PASS",
+       "match": true,
+       "obs": {
+        "lease_accepted": true
+       }
+      },
+      "v0210": {
+       "expected": "PASS",
+       "observed": "PASS",
+       "match": true,
+       "obs": {
+        "lease_accepted": true
+       }
+      }
+     }
+    },
+    {
+     "id": "GA-03",
+     "title": "開始判断に使った belief が CAS 時点でも有効",
+     "per_version": {
+      "v028": {
+       "expected": "VIOLATION",
+       "observed": "VIOLATION",
+       "match": true,
+       "obs": {
+        "cas_accepted": true
+       }
+      },
+      "v029": {
+       "expected": "PASS",
+       "observed": "PASS",
+       "match": true,
+       "obs": {
+        "cas_accepted": false
+       }
+      },
+      "v0210": {
+       "expected": "PASS",
+       "observed": "PASS",
+       "match": true,
+       "obs": {
+        "cas_accepted": false
+       }
+      }
+     },
+     "control": {
+      "v028": {
+       "expected": "PASS",
+       "observed": "PASS",
+       "match": true,
+       "obs": {
+        "cas_accepted": true
+       }
+      },
+      "v029": {
+       "expected": "PASS",
+       "observed": "PASS",
+       "match": true,
+       "obs": {
+        "cas_accepted": true
+       }
+      },
+      "v0210": {
+       "expected": "PASS",
+       "observed": "PASS",
+       "match": true,
+       "obs": {
+        "cas_accepted": true
+       }
+      }
+     }
+    },
+    {
+     "id": "GA-04",
+     "title": "兄弟停止の key = 物理 cell の安定 id（構成 hash ではない）",
+     "per_version": {
+      "v028": {
+       "expected": "VIOLATION",
+       "observed": "VIOLATION",
+       "match": true,
+       "obs": {
+        "permit_issued": true
+       }
+      },
+      "v029": {
+       "expected": "PASS",
+       "observed": "PASS",
+       "match": true,
+       "obs": {
+        "permit_issued": false
+       }
+      },
+      "v0210": {
+       "expected": "PASS",
+       "observed": "PASS",
+       "match": true,
+       "obs": {
+        "permit_issued": false
+       }
+      }
+     },
+     "control": {
+      "v028": {
+       "expected": "PASS",
+       "observed": "PASS",
+       "match": true,
+       "obs": {
+        "permit_issued": true
+       }
+      },
+      "v029": {
+       "expected": "PASS",
+       "observed": "PASS",
+       "match": true,
+       "obs": {
+        "permit_issued": true
+       }
+      },
+      "v0210": {
+       "expected": "PASS",
+       "observed": "PASS",
+       "match": true,
+       "obs": {
+        "permit_issued": true
+       }
+      }
+     }
+    },
+    {
+     "id": "GA-05",
+     "title": "停止 event の対象 = 現に効いている ACCEPTED（PROPOSED は透過）",
+     "per_version": {
+      "v028": {
+       "expected": "VIOLATION",
+       "observed": "VIOLATION",
+       "match": true,
+       "obs": {
+        "event_target": "R2",
+        "lease_stopped": false
+       }
+      },
+      "v029": {
+       "expected": "PASS",
+       "observed": "PASS",
+       "match": true,
+       "obs": {
+        "event_target": "R1",
+        "lease_stopped": true
+       }
+      },
+      "v0210": {
+       "expected": "PASS",
+       "observed": "PASS",
+       "match": true,
+       "obs": {
+        "event_target": "R1",
+        "lease_stopped": true
+       }
+      }
+     },
+     "control": {
+      "v028": {
+       "expected": "PASS",
+       "observed": "PASS",
+       "match": true,
+       "obs": {
+        "event_target": "R1",
+        "lease_stopped": true
+       }
+      },
+      "v029": {
+       "expected": "PASS",
+       "observed": "PASS",
+       "match": true,
+       "obs": {
+        "event_target": "R1",
+        "lease_stopped": true
+       }
+      },
+      "v0210": {
+       "expected": "PASS",
+       "observed": "PASS",
+       "match": true,
+       "obs": {
+        "event_target": "R1",
+        "lease_stopped": true
+       }
+      }
+     }
+    },
+    {
+     "id": "GA-06",
+     "title": "epoch 単調不変量は CasKind ごとに述べる",
+     "per_version": {
+      "v028": {
+       "expected": "VIOLATION",
+       "observed": "VIOLATION",
+       "match": true,
+       "obs": {
+        "final_epoch": 4
+       }
+      },
+      "v029": {
+       "expected": "PASS",
+       "observed": "PASS",
+       "match": true,
+       "obs": {
+        "final_epoch": 4
+       }
+      },
+      "v0210": {
+       "expected": "PASS",
+       "observed": "PASS",
+       "match": true,
+       "obs": {
+        "final_epoch": 4
+       }
+      }
+     },
+     "control": {
+      "v028": {
+       "expected": "PASS",
+       "observed": "PASS",
+       "match": true,
+       "obs": {
+        "final_epoch": 4
+       }
+      },
+      "v029": {
+       "expected": "PASS",
+       "observed": "PASS",
+       "match": true,
+       "obs": {
+        "final_epoch": 4
+       }
+      },
+      "v0210": {
+       "expected": "PASS",
+       "observed": "PASS",
+       "match": true,
+       "obs": {
+        "final_epoch": 4
+       }
+      }
+     }
+    },
+    {
+     "id": "GA-07",
+     "title": "drift 許容値は baseline の明示 slot から解決する",
+     "per_version": {
+      "v028": {
+       "expected": "VIOLATION",
+       "observed": "VIOLATION",
+       "match": true,
+       "obs": {
+        "tolerance_used": "2.0",
+        "permit_issued": true
+       }
+      },
+      "v029": {
+       "expected": "PASS",
+       "observed": "PASS",
+       "match": true,
+       "obs": {
+        "tolerance_used": "None",
+        "permit_issued": false
+       }
+      },
+      "v0210": {
+       "expected": "PASS",
+       "observed": "PASS",
+       "match": true,
+       "obs": {
+        "tolerance_used": "None",
+        "permit_issued": false
+       }
+      }
+     },
+     "control": {
+      "v028": {
+       "expected": "N/A",
+       "observed": "N/A",
+       "match": true,
+       "obs": {
+        "note": "v028 has no tolerance slot (spec v028_note)"
+       }
+      },
+      "v029": {
+       "expected": "PASS",
+       "observed": "PASS",
+       "match": true,
+       "obs": {
+        "tolerance_used": "2.0",
+        "permit_issued": true
+       }
+      },
+      "v0210": {
+       "expected": "PASS",
+       "observed": "PASS",
+       "match": true,
+       "obs": {
+        "tolerance_used": "2.0",
+        "permit_issued": true
+       }
+      }
+     }
+    }
+   ]
+  },
+  {
+   "spec": "TRACES_v0210_prepinned_20260906.json",
+   "label": "PRE_PINNED",
+   "pinned_before_fix": true,
+   "rows": [
+    {
+     "id": "D1",
+     "title": "cell 単位参照の key = 正規 (site_id, cell_id)",
+     "per_version": {
+      "v028": {
+       "expected": "VIOLATION",
+       "observed": "VIOLATION",
+       "match": true,
+       "obs": {
+        "baseline_superseded_fired_for_S1": true
+       }
+      },
+      "v029": {
+       "expected": "VIOLATION",
+       "observed": "VIOLATION",
+       "match": true,
+       "obs": {
+        "baseline_superseded_fired_for_S1": true
+       }
+      },
+      "v0210": {
+       "expected": "PASS",
+       "observed": "PASS",
+       "match": true,
+       "obs": {
+        "baseline_superseded_fired_for_S1": false
+       }
+      }
+     },
+     "control": {
+      "v028": {
+       "expected": "PASS",
+       "observed": "PASS",
+       "match": true,
+       "obs": {
+        "baseline_superseded_fired_for_S1": true
+       }
+      },
+      "v029": {
+       "expected": "PASS",
+       "observed": "PASS",
+       "match": true,
+       "obs": {
+        "baseline_superseded_fired_for_S1": true
+       }
+      },
+      "v0210": {
+       "expected": "PASS",
+       "observed": "PASS",
+       "match": true,
+       "obs": {
+        "baseline_superseded_fired_for_S1": true
+       }
+      }
+     }
+    },
+    {
+     "id": "D2",
+     "title": "profile 再受理は cell 停止を解除しない",
+     "per_version": {
+      "v028": {
+       "expected": "VIOLATION",
+       "observed": "VIOLATION",
+       "match": true,
+       "obs": {
+        "canonical": [
+         "S1",
+         "C1"
+        ],
+        "resolved": true,
+        "unresolved_stop": false,
+        "sibling_suspended": false,
+        "permit_issued": true
+       }
+      },
+      "v029": {
+       "expected": "VIOLATION",
+       "observed": "VIOLATION",
+       "match": true,
+       "obs": {
+        "canonical": [
+         "S1",
+         "C1"
+        ],
+        "resolved": true,
+        "unresolved_stop": false,
+        "sibling_suspended": false,
+        "permit_issued": true
+       }
+      },
+      "v0210": {
+       "expected": "PASS",
+       "observed": "PASS",
+       "match": true,
+       "obs": {
+        "canonical": [
+         "S1",
+         "C1"
+        ],
+        "resolved": true,
+        "unresolved_stop": true,
+        "sibling_suspended": false,
+        "permit_issued": false
+       }
+      }
+     },
+     "control": {
+      "v028": {
+       "expected": "PASS",
+       "observed": "PASS",
+       "match": true,
+       "obs": {
+        "canonical": [
+         "S1",
+         "C1"
+        ],
+        "resolved": true,
+        "unresolved_stop": false,
+        "sibling_suspended": false,
+        "permit_issued": true
+       }
+      },
+      "v029": {
+       "expected": "PASS",
+       "observed": "PASS",
+       "match": true,
+       "obs": {
+        "canonical": [
+         "S1",
+         "C1"
+        ],
+        "resolved": true,
+        "unresolved_stop": false,
+        "sibling_suspended": false,
+        "permit_issued": true
+       }
+      },
+      "v0210": {
+       "expected": "PASS",
+       "observed": "PASS",
+       "match": true,
+       "obs": {
+        "canonical": [
+         "S1",
+         "C1"
+        ],
+        "resolved": true,
+        "unresolved_stop": false,
+        "sibling_suspended": false,
+        "permit_issued": true
+       }
+      }
+     }
+    },
+    {
+     "id": "D3",
+     "title": "別名は正規 id へ解決してから停止を照合する",
+     "per_version": {
+      "v028": {
+       "expected": "VIOLATION",
+       "observed": "VIOLATION",
+       "match": true,
+       "obs": {
+        "canonical": [
+         "S1",
+         "CELL-A"
+        ],
+        "resolved": true,
+        "unresolved_stop": false,
+        "sibling_suspended": false,
+        "permit_issued": true
+       }
+      },
+      "v029": {
+       "expected": "VIOLATION",
+       "observed": "VIOLATION",
+       "match": true,
+       "obs": {
+        "canonical": [
+         "S1",
+         "CELL-A"
+        ],
+        "resolved": true,
+        "unresolved_stop": false,
+        "sibling_suspended": false,
+        "permit_issued": true
+       }
+      },
+      "v0210": {
+       "expected": "PASS",
+       "observed": "PASS",
+       "match": true,
+       "obs": {
+        "canonical": [
+         "S1",
+         "C1"
+        ],
+        "resolved": true,
+        "unresolved_stop": true,
+        "sibling_suspended": false,
+        "permit_issued": false
+       }
+      }
+     },
+     "control": {
+      "v028": {
+       "expected": "PASS",
+       "observed": "PASS",
+       "match": true,
+       "obs": {
+        "canonical": [
+         "S1",
+         "CELL-B"
+        ],
+        "resolved": true,
+        "unresolved_stop": false,
+        "sibling_suspended": false,
+        "permit_issued": true
+       }
+      },
+      "v029": {
+       "expected": "PASS",
+       "observed": "PASS",
+       "match": true,
+       "obs": {
+        "canonical": [
+         "S1",
+         "CELL-B"
+        ],
+        "resolved": true,
+        "unresolved_stop": false,
+        "sibling_suspended": false,
+        "permit_issued": true
+       }
+      },
+      "v0210": {
+       "expected": "PASS",
+       "observed": "PASS",
+       "match": true,
+       "obs": {
+        "canonical": [
+         "S1",
+         "C2"
+        ],
+        "resolved": true,
+        "unresolved_stop": false,
+        "sibling_suspended": false,
+        "permit_issued": true
+       }
+      }
+     }
+    },
+    {
+     "id": "D4",
+     "title": "解除は独立した二者（同一人物の二役は不可）",
+     "per_version": {
+      "v028": {
+       "expected": "VIOLATION",
+       "observed": "VIOLATION",
+       "match": true,
+       "obs": {
+        "canonical": [
+         "S1",
+         "C1"
+        ],
+        "resolved": true,
+        "unresolved_stop": false,
+        "sibling_suspended": false,
+        "permit_issued": true,
+        "note": "structure absent: no cell-stop clearance record in this version; profile re-acceptance two-key is a different operation"
+       }
+      },
+      "v029": {
+       "expected": "VIOLATION",
+       "observed": "VIOLATION",
+       "match": true,
+       "obs": {
+        "canonical": [
+         "S1",
+         "C1"
+        ],
+        "resolved": true,
+        "unresolved_stop": false,
+        "sibling_suspended": false,
+        "permit_issued": true,
+        "note": "structure absent: no cell-stop clearance record in this version; profile re-acceptance two-key is a different operation"
+       }
+      },
+      "v0210": {
+       "expected": "PASS",
+       "observed": "PASS",
+       "match": true,
+       "obs": {
+        "canonical": [
+         "S1",
+         "C1"
+        ],
+        "resolved": true,
+        "unresolved_stop": true,
+        "sibling_suspended": false,
+        "permit_issued": false
+       }
+      }
+     },
+     "control": {
+      "v028": {
+       "expected": "PASS",
+       "observed": "PASS",
+       "match": true,
+       "obs": {
+        "canonical": [
+         "S1",
+         "C1"
+        ],
+        "resolved": true,
+        "unresolved_stop": false,
+        "sibling_suspended": false,
+        "permit_issued": true
+       }
+      },
+      "v029": {
+       "expected": "PASS",
+       "observed": "PASS",
+       "match": true,
+       "obs": {
+        "canonical": [
+         "S1",
+         "C1"
+        ],
+        "resolved": true,
+        "unresolved_stop": false,
+        "sibling_suspended": false,
+        "permit_issued": true
+       }
+      },
+      "v0210": {
+       "expected": "PASS",
+       "observed": "PASS",
+       "match": true,
+       "obs": {
+        "canonical": [
+         "S1",
+         "C1"
+        ],
+        "resolved": true,
+        "unresolved_stop": false,
+        "sibling_suspended": false,
+        "permit_issued": true
+       }
+      }
+     }
+    },
+    {
+     "id": "D5",
+     "title": "無関係な SAFEHOLD / seq 増加では latch を解除しない",
+     "per_version": {
+      "v028": {
+       "expected": "VIOLATION",
+       "observed": "VIOLATION",
+       "match": true,
+       "obs": {
+        "output": "SAFE_HOLD",
+        "latch": false
+       }
+      },
+      "v029": {
+       "expected": "VIOLATION",
+       "observed": "VIOLATION",
+       "match": true,
+       "obs": {
+        "output": "SAFE_HOLD",
+        "latch": false
+       }
+      },
+      "v0210": {
+       "expected": "PASS",
+       "observed": "PASS",
+       "match": true,
+       "obs": {
+        "output": "SAFE_STOP",
+        "latch": true
+       }
+      }
+     },
+     "control": {
+      "v028": {
+       "expected": "N/A",
+       "observed": "N/A",
+       "match": true,
+       "obs": {
+        "note": "v028 has no latch structure (spec v028_note)"
+       }
+      },
+      "v029": {
+       "expected": "PASS",
+       "observed": "PASS",
+       "match": true,
+       "obs": {
+        "output": "SAFE_STOP",
+        "latch": false
+       }
+      },
+      "v0210": {
+       "expected": "PASS",
+       "observed": "PASS",
+       "match": true,
+       "obs": {
+        "output": "SAFE_STOP",
+        "latch": false
+       }
+      }
+     }
+    },
+    {
+     "id": "D6",
+     "title": "心拍復帰 + 通信復旧 + owner EXECUTOR のままでも (ii) を再開しない",
+     "per_version": {
+      "v028": {
+       "expected": "VIOLATION",
+       "observed": "VIOLATION",
+       "match": true,
+       "obs": {
+        "output": "SETPOINT",
+        "latch": false
+       }
+      },
+      "v029": {
+       "expected": "PASS",
+       "observed": "PASS",
+       "match": true,
+       "obs": {
+        "output": "SAFE_STOP",
+        "latch": true
+       }
+      },
+      "v0210": {
+       "expected": "PASS",
+       "observed": "PASS",
+       "match": true,
+       "obs": {
+        "output": "SAFE_STOP",
+        "latch": true
+       }
+      }
+     },
+     "control": {
+      "v028": {
+       "expected": "PASS",
+       "observed": "VIOLATION",
+       "match": false,
+       "obs": {
+        "output": "SAFE_STOP",
+        "latch": false
+       },
+       "amended": {
+        "observed": "PASS",
+        "match": true,
+        "obs": {
+         "output": "SETPOINT",
+         "latch": false
+        },
+        "reason": "control『Stop が無ければ (ii) が通る』が初期状態 isl_heartbeat = lost と矛盾。control では ISL 心拍を正常にする。"
+       }
+      },
+      "v029": {
+       "expected": "PASS",
+       "observed": "VIOLATION",
+       "match": false,
+       "obs": {
+        "output": "SAFE_STOP",
+        "latch": false
+       },
+       "amended": {
+        "observed": "PASS",
+        "match": true,
+        "obs": {
+         "output": "SETPOINT",
+         "latch": false
+        },
+        "reason": "control『Stop が無ければ (ii) が通る』が初期状態 isl_heartbeat = lost と矛盾。control では ISL 心拍を正常にする。"
+       }
+      },
+      "v0210": {
+       "expected": "PASS",
+       "observed": "VIOLATION",
+       "match": false,
+       "obs": {
+        "output": "SAFE_STOP",
+        "latch": false
+       },
+       "amended": {
+        "observed": "PASS",
+        "match": true,
+        "obs": {
+         "output": "SETPOINT",
+         "latch": false
+        },
+        "reason": "control『Stop が無ければ (ii) が通る』が初期状態 isl_heartbeat = lost と矛盾。control では ISL 心拍を正常にする。"
+       }
+      }
+     }
+    },
+    {
+     "id": "D7",
+     "title": "誤差余裕の上限を評価できなければ permit を発行しない",
+     "per_version": {
+      "v028": {
+       "expected": "VIOLATION",
+       "observed": "VIOLATION",
+       "match": true,
+       "obs": {
+        "permit_issued": true,
+        "validity_deadline_mono": "650.0"
+       }
+      },
+      "v029": {
+       "expected": "VIOLATION",
+       "observed": "VIOLATION",
+       "match": true,
+       "obs": {
+        "permit_issued": true,
+        "validity_deadline_mono": "650.0"
+       }
+      },
+      "v0210": {
+       "expected": "PASS",
+       "observed": "PASS",
+       "match": true,
+       "obs": {
+        "permit_issued": false,
+        "validity_deadline_mono": null
+       }
+      }
+     },
+     "control": {
+      "v028": {
+       "expected": "PASS",
+       "observed": "PASS",
+       "match": true,
+       "obs": {
+        "permit_issued": true,
+        "validity_deadline_mono": "650.0"
+       }
+      },
+      "v029": {
+       "expected": "PASS",
+       "observed": "PASS",
+       "match": true,
+       "obs": {
+        "permit_issued": true,
+        "validity_deadline_mono": "650.0"
+       }
+      },
+      "v0210": {
+       "expected": "PASS",
+       "observed": "PASS",
+       "match": true,
+       "obs": {
+        "permit_issued": true,
+        "validity_deadline_mono": "649.5",
+        "deadline_matches_pinned": true
+       }
+      }
+     }
+    },
+    {
+     "id": "D8",
+     "title": "参照組の更新は既存 permit / lease の期限を延長しない",
+     "per_version": {
+      "v028": {
+       "expected": "PASS",
+       "observed": "PASS",
+       "match": true,
+       "obs": {
+        "permit_issued": true,
+        "validity_deadline_mono": "650.0"
+       }
+      },
+      "v029": {
+       "expected": "PASS",
+       "observed": "PASS",
+       "match": true,
+       "obs": {
+        "permit_issued": true,
+        "validity_deadline_mono": "650.0"
+       }
+      },
+      "v0210": {
+       "expected": "PASS",
+       "observed": "PASS",
+       "match": true,
+       "obs": {
+        "permit_issued": true,
+        "validity_deadline_mono": "649.5"
+       }
+      }
+     },
+     "control": {
+      "v028": {
+       "expected": "PASS",
+       "observed": "PASS",
+       "match": true,
+       "obs": {
+        "permit_issued": true,
+        "validity_deadline_mono": "650.0"
+       }
+      },
+      "v029": {
+       "expected": "PASS",
+       "observed": "PASS",
+       "match": true,
+       "obs": {
+        "permit_issued": true,
+        "validity_deadline_mono": "650.0"
+       }
+      },
+      "v0210": {
+       "expected": "PASS",
+       "observed": "PASS",
+       "match": true,
+       "obs": {
+        "permit_issued": true,
+        "validity_deadline_mono": "649.5"
+       }
+      }
+     }
+    },
+    {
+     "id": "D9",
+     "title": "別 host / 別 boot の単調時刻を変換根拠なしに比較しない",
+     "per_version": {
+      "v028": {
+       "expected": "VIOLATION",
+       "observed": "VIOLATION",
+       "match": true,
+       "obs": {
+        "permit_issued": true,
+        "validity_deadline_mono": null
+       }
+      },
+      "v029": {
+       "expected": "VIOLATION",
+       "observed": "VIOLATION",
+       "match": true,
+       "obs": {
+        "permit_issued": true,
+        "validity_deadline_mono": null
+       }
+      },
+      "v0210": {
+       "expected": "PASS",
+       "observed": "PASS",
+       "match": true,
+       "obs": {
+        "permit_issued": false,
+        "validity_deadline_mono": null
+       }
+      }
+     },
+     "control": {
+      "v028": {
+       "expected": "PASS",
+       "observed": "PASS",
+       "match": true,
+       "obs": {
+        "permit_issued": true,
+        "validity_deadline_mono": null
+       }
+      },
+      "v029": {
+       "expected": "PASS",
+       "observed": "PASS",
+       "match": true,
+       "obs": {
+        "permit_issued": true,
+        "validity_deadline_mono": null
+       }
+      },
+      "v0210": {
+       "expected": "PASS",
+       "observed": "PASS",
+       "match": true,
+       "obs": {
+        "permit_issued": true,
+        "validity_deadline_mono": null
+       }
+      }
+     }
+    },
+    {
+     "id": "D10",
+     "title": "wall/mono 差の検査と UTC 同期精度の確認を分離する",
+     "per_version": {
+      "v028": {
+       "expected": "VIOLATION",
+       "observed": "VIOLATION",
+       "match": true,
+       "obs": {
+        "permit_issued": true,
+        "validity_deadline_mono": null
+       }
+      },
+      "v029": {
+       "expected": "VIOLATION",
+       "observed": "VIOLATION",
+       "match": true,
+       "obs": {
+        "permit_issued": true,
+        "validity_deadline_mono": null
+       }
+      },
+      "v0210": {
+       "expected": "PASS",
+       "observed": "PASS",
+       "match": true,
+       "obs": {
+        "permit_issued": false,
+        "validity_deadline_mono": null
+       }
+      }
+     },
+     "control": {
+      "v028": {
+       "expected": "PASS",
+       "observed": "PASS",
+       "match": true,
+       "obs": {
+        "permit_issued": true,
+        "validity_deadline_mono": null
+       }
+      },
+      "v029": {
+       "expected": "PASS",
+       "observed": "PASS",
+       "match": true,
+       "obs": {
+        "permit_issued": true,
+        "validity_deadline_mono": null
+       }
+      },
+      "v0210": {
+       "expected": "PASS",
+       "observed": "PASS",
+       "match": true,
+       "obs": {
+        "permit_issued": true,
+        "validity_deadline_mono": null
+       }
+      }
+     }
+    },
+    {
+     "id": "D11",
+     "title": "manager 不読で SafeHold の成立を確認できなければ検証済み停止経路に委ねる",
+     "per_version": {
+      "v028": {
+       "expected": "VIOLATION",
+       "observed": "VIOLATION",
+       "match": true,
+       "obs": {
+        "output": "SAFE_HOLD",
+        "latch": false
+       }
+      },
+      "v029": {
+       "expected": "VIOLATION",
+       "observed": "VIOLATION",
+       "match": true,
+       "obs": {
+        "output": "SAFE_HOLD",
+        "latch": false
+       }
+      },
+      "v0210": {
+       "expected": "PASS",
+       "observed": "PASS",
+       "match": true,
+       "obs": {
+        "output": "VERIFIED_STOP_PATH",
+        "latch": false
+       }
+      }
+     },
+     "control": {
+      "v028": {
+       "expected": "PASS",
+       "observed": "PASS",
+       "match": true,
+       "obs": {
+        "output": "SAFE_HOLD",
+        "latch": false
+       }
+      },
+      "v029": {
+       "expected": "PASS",
+       "observed": "PASS",
+       "match": true,
+       "obs": {
+        "output": "SAFE_HOLD",
+        "latch": false
+       }
+      },
+      "v0210": {
+       "expected": "PASS",
+       "observed": "PASS",
+       "match": true,
+       "obs": {
+        "output": "SAFE_HOLD",
+        "latch": false
+       }
+      }
+     }
+    }
+   ]
+  }
+ ],
+ "control_amendment": {
+  "file": "TRACES_CONTROL_AMENDMENT_20260906.json",
+  "sha256": "42faa35a38087f0d3af5e3572c866fbaf20283f10e1d05f3c59325915b7b029b"
+ },
+ "summary": {
+  "match": 54,
+  "mismatch": 0,
+  "control_spec_defects_original": 6
+ }
+}
