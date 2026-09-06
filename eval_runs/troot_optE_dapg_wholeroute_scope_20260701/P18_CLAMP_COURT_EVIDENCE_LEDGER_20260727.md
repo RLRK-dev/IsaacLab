@@ -47098,3 +47098,11 @@ guard は **`:2408`**（4 行の自認 comment `:2404-2407` の後 — ⚠ **当
 
 - 執行順: (1) rule-check stage 2（Tier 0-4・証拠つき）(2) /handoff (3) by-hand 経路の退役（scratchpad の `ids`/`desk_msgs` を rename・memory に 1 行）(4) `hub_send.py` を書く（v3 = cycle-2 record `8b96611022` Part 2 が仕様）(5) code gate A（detached worktree・作業 tree の validator 持込・copy-back sha 一致）→ pathspec commit (6) `init`（floor を閉じた query で計算）(7) 制御 (b) replay・(g) refused・(c)(d) は実 traffic で・(a) は copy (8) 層2 事後 debate ＋ 層5 三視点（dry_run）(9) node DoD へ bank・p6 へ反映依頼・Rs1 報告。
 - 触らないもの（不変）: §0 不変前提・設計面・run 認可・NEST spec・CLAUDE.md・skills・hooks。commit は pathspec＋`--no-verify`＋harness trailer（裁定 A）。
+
+## §1443 — ✅ **[CHANGE] 完了: `hub_send.py` 着地 `2f154e9e21`（hook 済 byte = commit byte・sha `3294a04d…`）→ 修正（fused_with は head 行のみ）＋ floor ＋ 制御 ＋ by-hand 記録の copy = `89ae2e53c8`（41 file・script sha `b698c3ba4eb4633f…`・650 行）**（当卓 09-06 09:2x 実測）
+
+- **手順**: rule-check stage 2 ALL PASS → /handoff（per-pane memory 節・`handoff.md`/vault `HANDOFF.md` に p18 節を追記・全書換なし）→ by-hand 退役（scratchpad `ids`/`desk_msgs` → `*_retired_8b96611022`）→ 着地 → code gate A（detached worktree・pre-commit 4.5.1 file 限定: pass 1 = ruff 16 件自動修正＋format・pass 2/3 全 Passed・copy-back sha 一致）→ 作業 tree の validator（blob `e7aa2636a31c`/`971231d15dda`）を worktree で `--staged-only`: FAIL 18 = tree baseline（untracked script 不在・Layer 8 の envs）・本 file を読む layer なし（出力 = `p18_desk_tools_20260905/validate_staged_out.txt`）。
+- **init**: floor = **321**（閉じた query は scratchpad 内の challenger 報告に在る仮想 id 320/321 も数える ⇒ 保守側・実送信の最大は 315・欠番は無害）。
+- **制御**: (a) copy（`by_hand_20260905/CONTROL_A_20260905.md`）／(b) replay 15 件 = **ABSORBED(unacked) 9・DELIVERED 4・DELIVERED(fused) 1（292@pZ 位置 920）・DELIVERED(turn_end) 1（304@p4）** = CC4 の分類と一致（`CONTROLS_20260906.md`）／(c) hub 自身（working）へ `--control` = HELD(working)・held row `m-p18-322`・送信 0／(g) COORD = refused(retired)・row なし／(d) = 次の実 message が working 卓に当たった時に `resend --id`／(h) 下書き半分 = Rs1 の 2 文字（pB）待ち。
+- **記録**: `sent_records.jsonl`（init 行＋held 行）・`bodies/.floor`・`by_hand_20260905/`（35 file: sent.jsonl 59 行・body 31・verify 2・CONTROL_A）。memory per-pane file に「送信は hub_send.py のみ」を追記。
+- 次 = 層2 事後 debate（5 体・on-disk）＋ 層5 三視点（3 体・dry_run）→ DoD bank → p6 へ node 反映（② の文言・(d) 未了は IN_PROGRESS 継続）→ Rs1 報告。未 push = 19。
