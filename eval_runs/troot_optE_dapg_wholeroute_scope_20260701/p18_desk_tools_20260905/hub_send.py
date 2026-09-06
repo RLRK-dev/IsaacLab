@@ -87,6 +87,8 @@ QUEUED_MARKERS = ("press up to edit queued messages", "queued message")
 EXCLUDED_PREFIXES = ("<local-command-", "<command-name>", "<task-notification>")
 ANSI_RE = re.compile(r"\x1b\[[0-9;?]*[A-Za-z]")
 ID_RE = re.compile(r"m-p18-(\d+)")
+FLOOR_RE = re.compile(r"^MSG m-p18-(\d+) /", re.MULTILINE)
+FLOOR_JSON_RE = re.compile(r'"content":"MSG m-p18-(\d+) /')
 HEAD_RE = re.compile(r"MSG (m-p18-\d+) /")
 FINAL_STATES = ("DELIVERED", "refused")
 READONLY = os.environ.get("HUB_SEND_READONLY") == "1"
@@ -170,16 +172,33 @@ def read_view(pane: str) -> dict:
 
 
 def dim_only(raw_line: str) -> bool:
-    """True when every visible character after the prompt lies inside an SGR-2 (dim) run."""
+    """True when every visible character after the prompt lies inside an SGR-2 (dim) run.
+
+    SGR parameters are parsed as a list: ``2`` alone means dim, ``0``/``22`` clear it; the extended colour forms
+    ``38;5;n``, ``48;5;n``, ``38;2;r;g;b`` and ``48;2;r;g;b`` consume their arguments so that a colour whose
+    argument happens to be 2 is never read as dim.
+    """
     body = raw_line.split(PROMPT, 1)[1] if PROMPT in raw_line else raw_line
     dim, seen = False, False
     for tok in re.split(r"(\x1b\[[0-9;?]*[A-Za-z])", body):
         if tok.startswith("\x1b["):
-            params = tok[2:-1].split(";") if tok.endswith("m") else []
-            if "2" in params:
-                dim = True
-            if "0" in params or "22" in params or params == [""]:
+            if not tok.endswith("m"):
+                continue
+            params = [q for q in tok[2:-1].split(";")]
+            if params == [""]:
                 dim = False
+                continue
+            k = 0
+            while k < len(params):
+                q = params[k]
+                if q in ("38", "48", "58") and k + 1 < len(params):
+                    k += 3 if params[k + 1] == "5" else (5 if params[k + 1] == "2" else 1)
+                    continue
+                if q == "2":
+                    dim = True
+                elif q in ("0", "22", ""):
+                    dim = False
+                k += 1
             continue
         for ch in tok:
             if ch.isspace() or ch == "\r":
@@ -423,7 +442,7 @@ def do_send(args: argparse.Namespace) -> int:
             {
                 **base,
                 "row_type": "held",
-                "state": "HELD(" + ";".join(r for _, _, r, _ in decisions if r) + ")",
+                "state": ";".join(r for _, _, r, _ in decisions if r),
                 "sent_at": jst_now(),
                 "members": [a["pane_id"] for _, a, _, _ in decisions],
             }
@@ -551,7 +570,7 @@ def do_verify(args: argparse.Namespace) -> int:
             **res,
         }
         print(mid, pane, r.get("state"), "->", res["state"], res.get("evidence", ""))
-        if res["state"] != r.get("state") or args.always_write:
+        if res["state"] != r.get("state"):
             append_row(new)
     return 0
 
@@ -591,12 +610,13 @@ def do_init(_args: argparse.Namespace) -> int:
     top = 0
     for p in paths:
         try:
-            for m in ID_RE.finditer(p.read_text(encoding="utf-8", errors="replace")):
+            rx = FLOOR_JSON_RE if p.suffix == ".jsonl" else FLOOR_RE
+            for m in rx.finditer(p.read_text(encoding="utf-8", errors="replace")):
                 top = max(top, int(m.group(1)))
         except (OSError, UnicodeDecodeError):
             continue
-    git = run(["git", "-C", str(REPO), "grep", "-ohE", "m-p18-[0-9]+", "--", "."])
-    for m in ID_RE.finditer(git):
+    git = run(["git", "-C", str(REPO), "grep", "-ohE", "MSG m-p18-[0-9]+ /", "--", "."])
+    for m in FLOOR_RE.finditer(git):
         top = max(top, int(m.group(1)))
     BODIES.mkdir(exist_ok=True)
     if READONLY:
@@ -607,7 +627,8 @@ def do_init(_args: argparse.Namespace) -> int:
         {
             "row_type": "init",
             "floor": top,
-            "query": "max m-p18-N over ~/.claude/projects/-home-rlrk-IsaacLab/*.jsonl, git grep, " + SCRATCH_GLOB,
+            "query": "max N over delivered heads (jsonl: content starting with MSG m-p18-N /; files: line-start MSG m-p18-N /) in ~/.claude/projects/-home-rlrk-IsaacLab/*.jsonl, git grep, "
+            + SCRATCH_GLOB,
             "at": jst_now(),
             "transcripts": len(paths),
         }
@@ -630,7 +651,6 @@ def main(argv: list[str] | None = None) -> int:
     s.set_defaults(func=do_send, resend_of=None)
     v = sub.add_parser("verify")
     v.add_argument("--id")
-    v.add_argument("--always_write", action="store_true")
     v.set_defaults(func=do_verify)
     r = sub.add_parser("resend")
     r.add_argument("--id", required=True)
