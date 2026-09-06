@@ -47112,3 +47112,10 @@ guard は **`:2408`**（4 行の自認 comment `:2404-2407` の後 — ⚠ **当
 - 修正後の実測: dim_only = true dim True／truecolour・256 色・bold・plain False／`init --dry_run` = 322（head 行のみ）。hook 3 pass 全 Passed・copy-back sha 一致（`92061f21…`・674 行）。
 - **tool による初の実配達**（node ② の証拠）: p6 宛 node 反映依頼を `hub_send.py send --to PLAN-KEEPER` で送信 — 結果は sent_records.jsonl 行 3（本節の command 出力に貼付）。
 - 次: 7 体を再起動（bundle 更新 @ HEAD・view 1 を PART F に同梱）→ DECIDE → DoD bank。
+
+## §1445 — ✅ **tool による初の実配達 = `m-p18-323` → p6（node DoD ② の証拠: p6 transcript の `type=user` 文字列 record・byte offset 91049910・head_found True・delivered_at 2026-09-06T08:11:41.053Z = 17:11:41 JST）— ただし送信後 gate が折りたたみ表示 `[Pasted text #2 +4 lines]` を「他人の文字」と誤分類して keypress 前に停止（row 3 HELD(foreign_text_in_composer)）→ 当卓が composer を読み（marker = 1+4 行 = 送信文・pane idle）Enter を 1 回押し `verify --id` で DELIVERED（row 4）。gate 修正 = `paste_marker_lines()`（marker の行数 == 送信文の行数 → 着地）= `482c152df2`（hook 全 pass・sha `43362ad3…`・684 行）**（当卓 09-06 17:1x 実測）
+
+- 学び: Claude Code は複数行の貼付を折りたたみ表示するので、送信後 gate は head 行を見られない。by-hand 42 件が Enter で配達できていたのは、折りたたみでも Enter が submit するから（08-09 の 19 行の例は例外）。gate は「送信前は空だった composer に、自分の行数と一致する marker が現れた」を着地の証拠とする（送信前から在る paste は従来どおり HELD）。
+- fail-closed は守られた（keypress 0・blind 再送 0・Escape 0）。当卓の手押し Enter は composer を読んだ上の 1 回（07-27 の documented recovery）。
+- p6 へ依頼済（tool 経由）: custody field・§6.2 の読み統一・② ③(b) の文言・IN_PROGRESS 継続。
+- 次: 7 体を再起動（bundle @ HEAD・PART F = view 1・PART G = 本節）。
