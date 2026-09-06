@@ -1,0 +1,78 @@
+{
+  "sources": [
+    {
+      "file": "eval_runs/troot_optE_dapg_wholeroute_scope_20260701/WMSO_EXACT_BASELINE_REVIEW_v0.2_20260903/05_WMSO_RUNTIME_SPEC_v0.2_REVIEW_CANDIDATE_20260903.md",
+      "ref": "0c6f11c91bf42f3a0c0fa9a89190c8e298bd197d",
+      "read_ranges": "1-1082 (complete; line count supplied by request)"
+    },
+    {
+      "file": "eval_runs/troot_optE_dapg_wholeroute_scope_20260701/WMSO_EXACT_BASELINE_REVIEW_v0.2_20260903/06_WMSO_INDUSTRIAL_PROFILE_v0.2_REVIEW_CANDIDATE_20260903.md",
+      "ref": "0c6f11c91bf42f3a0c0fa9a89190c8e298bd197d",
+      "read_ranges": "1-773 (complete; line count supplied by request)"
+    },
+    {
+      "file": "eval_runs/troot_optE_dapg_wholeroute_scope_20260701/WMSO_EXACT_BASELINE_REVIEW_v0.2_20260903/08_INDEPENDENT_REVIEW_PLAN_20260903.md",
+      "ref": "0c6f11c91bf42f3a0c0fa9a89190c8e298bd197d",
+      "read_ranges": "1-EOF"
+    },
+    {
+      "file": "eval_runs/troot_optE_dapg_wholeroute_scope_20260701/WMSO_EXACT_BASELINE_REVIEW_v0.2_20260903/11_THREE_AXIS_REVIEW_RECORD_20260903.md",
+      "ref": "0c6f11c91bf42f3a0c0fa9a89190c8e298bd197d",
+      "read_ranges": "1-38;190-222;264-EOF; section 8 also retrieved through targeted search"
+    },
+    {
+      "file": "eval_runs/troot_optE_dapg_wholeroute_scope_20260701/WMSO_D11A_CONTRACTS_V2_DESIGN_RSTECHLEAD2_20260719.md",
+      "ref": "54f90a7de1e02fb14eaf793bf3c60d9503d0d82e",
+      "read_ranges": "126-164;284-385"
+    },
+    {
+      "file": "eval_runs/troot_optE_dapg_wholeroute_scope_20260701/WMSO_D0_ARCHITECTURE_DRAFT_RSTECHLEAD2_20260718.md",
+      "ref": "0c6f11c91bf42f3a0c0fa9a89190c8e298bd197d",
+      "read_ranges": "237-373"
+    },
+    {
+      "file": "eval_runs/troot_optE_dapg_wholeroute_scope_20260701/WMSO_D11B_TENSOR_BINDING_DESIGN_RSTECHLEAD2_20260720.md",
+      "ref": "07250f4a0208b3bbd27eae6fef7d980743c4b538",
+      "read_ranges": "18-186"
+    },
+    {
+      "file": "eval_runs/troot_optE_dapg_wholeroute_scope_20260701/WMSO_D11A_EVIDENCE_POLICY_V1_RSTECHLEAD2_20260719.md",
+      "ref": "0c6f11c91bf42f3a0c0fa9a89190c8e298bd197d",
+      "read_ranges": "127-EOF"
+    },
+    {
+      "file": "eval_runs/troot_optE_dapg_wholeroute_scope_20260701/WMSO_EvidencePolicy_v1.9.json",
+      "ref": "0c6f11c91bf42f3a0c0fa9a89190c8e298bd197d",
+      "read_ranges": "190-EOF"
+    },
+    {
+      "file": "eval_runs/troot_optE_dapg_wholeroute_scope_20260701/WMSO_EXACT_BASELINE_REVIEW_v0.2_20260903/04_EVIDENCE_POLICY_IMPACT_ASSESSMENT_20260903.md",
+      "ref": "0c6f11c91bf42f3a0c0fa9a89190c8e298bd197d",
+      "read_ranges": "1-EOF"
+    },
+    {
+      "file": "eval_runs/troot_optE_dapg_wholeroute_scope_20260701/WMSO_EXACT_BASELINE_REVIEW_v0.2_20260903/check_review_candidate.py",
+      "ref": "0c6f11c91bf42f3a0c0fa9a89190c8e298bd197d",
+      "read_ranges": "1-EOF; source inspection only"
+    },
+    {
+      "file": "eval_runs/troot_optE_dapg_wholeroute_scope_20260701/WMSO_EXACT_BASELINE_REVIEW_v0.2_20260903/SHA256SUMS.txt",
+      "ref": "0c6f11c91bf42f3a0c0fa9a89190c8e298bd197d",
+      "read_ranges": "1-14; comparison of declared hashes only"
+    }
+  ],
+  "not_read_completely": [
+    "frozen contracts_v2",
+    "D0 architecture",
+    "frozen tensor_binding v13",
+    "EP v1.9 markdown and JSON",
+    "11 historical record"
+  ],
+  "not_read_in_this_review": [
+    "02/03 matrices at v0.2.8",
+    "07 successor decision at v0.2.8",
+    "full individual Claude reviewer/verifier reports",
+    "complete repository or robot/controller implementation"
+  ],
+  "source_files_included_in_package": false
+}

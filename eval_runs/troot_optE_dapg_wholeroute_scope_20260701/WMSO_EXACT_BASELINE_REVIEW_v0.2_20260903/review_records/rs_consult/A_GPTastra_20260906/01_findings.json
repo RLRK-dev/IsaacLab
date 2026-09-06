@@ -1,0 +1,128 @@
+{
+  "review_id": "WMSO-GA-v0.2.8-20260906",
+  "review_date_jst": "2026-09-06",
+  "reviewer": "ChatGPT; single reviewing context, not an independent multi-agent panel",
+  "repository": "RLRK-dev/IsaacLab",
+  "target_commit": "0c6f11c91bf42f3a0c0fa9a89190c8e298bd197d",
+  "target_version": "v0.2.8",
+  "package_path": "eval_runs/troot_optE_dapg_wholeroute_scope_20260701/WMSO_EXACT_BASELINE_REVIEW_v0.2_20260903",
+  "verdict": "HOLD",
+  "verdict_role": "review recommendation; not an Rs ruling",
+  "blocking_findings": [
+    "GA-01",
+    "GA-02",
+    "GA-03",
+    "GA-04"
+  ],
+  "severity_counts": {
+    "HIGH": 4,
+    "MEDIUM": 3
+  },
+  "candidate_pins": {
+    "05": {
+      "file": "05_WMSO_RUNTIME_SPEC_v0.2_REVIEW_CANDIDATE_20260903.md",
+      "sha256_declared": "2e508b4e6a689b2dc14fb094d5c875efb1dc660dd301e2b157a733bc433010da",
+      "git_blob_returned": "ce176b4359e1364c0b71abc0da640e3f2fdaf86f",
+      "lines_declared": 1082
+    },
+    "06": {
+      "file": "06_WMSO_INDUSTRIAL_PROFILE_v0.2_REVIEW_CANDIDATE_20260903.md",
+      "sha256_declared": "45212f203f4b95f0dc6d28e5bd805c077e4ea64faaa356f46c65ac1dba8baa49",
+      "git_blob_returned": "b796830db84a43136584820f3c1525626fc6cef2",
+      "lines_declared": 773
+    }
+  },
+  "verification_scope": {
+    "main_candidate_text_read": "05 and 06 complete, including history and review anchors",
+    "candidate_sha256_source": "Q request and SHA256SUMS.txt at target; agreed as text declarations",
+    "candidate_sha256_recomputed_locally": false,
+    "frozen_pin_verifier_run": false,
+    "original_checker_run": false,
+    "blind_positive_controls_completed": false,
+    "independent_axes_completed": false,
+    "reviewer_derived_guard_witness_groups_run": 6,
+    "physical_robot_or_simulator_tests": false,
+    "repository_modified": false
+  },
+  "gates": {
+    "frozen_baseline_edit": "PROHIBITED",
+    "implementation": "CLOSED",
+    "training": "CLOSED",
+    "closed_loop_authority": "CLOSED",
+    "production": "CLOSED",
+    "freeze": "CLOSED",
+    "slice": "CLOSED"
+  },
+  "findings": [
+    {
+      "id": "GA-01",
+      "severity": "HIGH",
+      "doc": "05",
+      "doc_line": "05:82; 05:249; 05:513-525",
+      "frozen_ref": "WMSO_D0_ARCHITECTURE_DRAFT_RSTECHLEAD2_20260718.md:318-320",
+      "claim": "管理系の読取不能中にGatewayが自ら出したSafeStopを、解除なしにSafeHoldへ戻せる。",
+      "evidence": "05:82のlast_dispositionは「直近に成功した線形化読みで観測したsafehold_disposition」。05:518はISL心拍欠落でSafeStop、05:520は管理系が不読ならlast_dispositionで出力を選ぶ。反例: 最後の読取はEXECUTORでdisposition=None → 管理系との通信断 → ISL心拍も欠落して(i′)がSafeStop → 管理系は不読のままISL心拍だけ復帰。未解除SafetyDecisionがなく、解除記録も新しい状態読取もない場合、(i′)は外れ、(iii)は古いNoneからSafeHoldを選ぶ。pending_invalidateも(iii)へ送るだけで停止強度を保存しない。",
+      "fix": "Gatewayが実際に発行・要求した未解除の停止を局所ラッチし、現在のISL要求・検証済み管理状態・局所ラッチを合わせて出力制約を維持する。ラッチ解除は対象を束縛した正規の解除確認後のみ。AuthorityManagerの単独書込権は変えない。「不読なら常にSafeStop」を採る裁定とは別で、既に発火したStopを失わない修正。凍結schema delta=0。"
+    },
+    {
+      "id": "GA-02",
+      "severity": "HIGH",
+      "doc": "05",
+      "doc_line": "05:233-236; 05:414-442; 05:565-571",
+      "frozen_ref": "WMSO_D11A_CONTRACTS_V2_DESIGN_RSTECHLEAD2_20260719.md:157-160,306,372-382",
+      "claim": "consumerの証明書をSkillActionIdだけで照合し、実際に使用する契約本文のSkillDefinitionHashへ結び付けていない。",
+      "evidence": "05:234が比較するのはcertificate.skill_action_id == proposed_lease.skill_action_id、05:236はcertificateの存在。凍結A:158-159ではActionIdの入力とDefinitionHashの入力が異なる。反例: 同じ実行bundle・同じidentity・同じ挙動で来歴だけが異なるD_AとD_Bを用意する。ActionIdは同じ、DefinitionHashは異なる。D_Aのcertificate/AuthorityDecisionとD_Bのlease・開始検証を組み合わせても、記載されたActionId比較と開始条件の検査はこの取り違えを拒否しない。hash衝突を仮定した反例ではない。",
+      "fix": "certificate.skill_definition_hash == lease.skill_definition_hash == invocation.skill_definition_hash == H_WCJ(実際のconsumer definition)を必須化する。開始検証reportの対象・入力も同じruntime検証文脈へ束縛し、別のdefinitionの成功reportを転用させない。凍結certificate/reportへのfield追加ではなく、外側のruntime照合で行う。凍結schema delta=0。"
+    },
+    {
+      "id": "GA-03",
+      "severity": "HIGH",
+      "doc": "05",
+      "doc_line": "05:183-191; 05:230-234; 05:558-577",
+      "frozen_ref": "WMSO_D11A_CONTRACTS_V2_DESIGN_RSTECHLEAD2_20260719.md:151,372-380",
+      "claim": "開始条件の検証からCASまでの待機中にBeliefRefが失効しても、過去の成功reportで制御移譲できる。",
+      "evidence": "05:567-571で開始条件・鮮度を検証した後にACK待ち→permit→CASへ進む。05:233はreport.issuesが空であることを確認するだけ。05:188のeffective_expires_atはpermit・ACK・decision・deployment validityの期限であり、BeliefRefのTTL/開始判断の鮮度期限を含まない。反例の時刻順序: t_validate < t_belief_expiry <= t_CAS < t_effective_expiry。owner/epochと他の検査結果を維持すると、失効した開始判断でも記載条件を通る。",
+      "fix": "開始検証に用いたBeliefRef、definition hash、明示now、有効期限をruntime側で束縛する。TTLと適用される鮮度期限をpermitの実効期限へ含め、CAS時に失効していないことと開始条件の有効性を確認する。観測・初期化条件を更新した場合は対応する検証・ACK・permitを再取得する。mid-skill観測方針を決める修正ではない。凍結schema delta=0。"
+    },
+    {
+      "id": "GA-04",
+      "severity": "HIGH",
+      "doc": "05 (+06)",
+      "doc_line": "05:191,240,292; 06:75-100,255-260,507,531",
+      "frozen_ref": "",
+      "claim": "物理セル単位であるべき停止が構成全体のcell_identity_hashに束縛され、同じ設備の別profileへ伝わらない。",
+      "evidence": "06:507はcell_identity_hashをCellIdentity全体のhashとし、06:531と05:240の兄弟停止はその等値で対象を限定する。反例: 同じsite_id/cell_id・同じ左右ロボット対応・同じbaselineを持ち、cell.armsの列順だけが(left,right)と(right,left)で異なる、別途受理済みのprofile A/B。armの一意性・対応検査は両方で同じ結果だが、tuple→arrayで構成hashは異なる。Aにセル全体のINCIDENT停止を記録しても、Bは同一hashの兄弟ではないためセル停止拒否条件を満たさない。独立したlive SafetyDecisionを迂回できるという主張ではなく、セル単位の拒否条件の欠落である。",
+      "fix": "構成hashと、認証された安定した物理セルIDを分離する。セル全体の停止・未解消incidentは安定IDに束縛し、permit・CAS・head-checkの全評価点で、当該設備の全profile/世代に適用する。構成hashは構成一致の検査に維持する。IDの別名・改名でも未解消停止を消せないようcustody規則に結線する。凍結schema delta=0。"
+    },
+    {
+      "id": "GA-05",
+      "severity": "MEDIUM",
+      "doc": "05 (+06)",
+      "doc_line": "05:249,292; 06:529,538,540",
+      "frozen_ref": "",
+      "claim": "log headがPROPOSEDの場合、停止イベントの対象hashが活性leaseのACCEPTED recordを指さない。",
+      "evidence": "06:529はA_g(ACCEPTED)→P_(g+1)(PROPOSED)を許し、活性leaseはA_gのままとする。06:538,540はSUSPENDED.supersedes_record_hashにlog headを要求するため、SがPを指す経路になる。しかし05:249は「supersedeされたACCEPTEDのhash = SUSPENDED.supersedes_record_hash」と同一視し、活性lease.acceptance_record_hashとの等値で再試行を限定する。Sの直前がPならP != A_gで停止対象を取り違える。A_gを直接supersedeすると既にPがsupersedeしておりfork規則に抵触する。周期head-checkは後で停止し得るため、永続的な失効回避とは判定しない。",
+      "fix": "logの直前recordを指すsupersedes_record_hashと、今回停止させる有効ACCEPTED recordのhashを別概念として導出・束縛する。PROPOSEDを挟む場合や停止の再送でも、旧世代を止めつつ新たに受理された世代を誤停止しないよう対象を明示する。PROPOSEDを無条件で停止扱いへ変える必要はない。凍結schema delta=0。"
+    },
+    {
+      "id": "GA-06",
+      "severity": "MEDIUM",
+      "doc": "05",
+      "doc_line": "05:251,712; 05 §3.8 証明E / §10 T-16",
+      "frozen_ref": "",
+      "claim": "合法なMARK_BOUNDARY_WAITの成功が、全CAS成功でepochを増やすINV-02と矛盾する。",
+      "evidence": "05:251はMARK_BOUNDARY_WAIT成功時にseqだけを増やし、control_epochは進めないと規定する。05:712 INV-02は「全 CAS SUCCESS: new.control_epoch == expected.control_epoch + 1」。反例: EXECUTOR状態でTerminalOutcomeを受領し、MARK_BOUNDARY_WAITがSUCCESSとなる1遷移。本文の事後条件に従えばINV-02違反、INV-02に従えば本文と不一致。証明Eの全CAS成功に関する主張とT-16の検査対象も同じ矛盾を引き継ぐ。",
+      "fix": "epoch/seqの不変量・証明・テスト期待をCasKindと実際の遷移種別ごとに定義する。所有者/lease移譲と、同じlease内でのboundary記録を区別し、MARK_BOUNDARY_WAITのepoch不変を維持する。文言を合わせるためにMARKでepochを増やす修正はしない。凍結schema delta=0。"
+    },
+    {
+      "id": "GA-07",
+      "severity": "MEDIUM",
+      "doc": "05 (+06)",
+      "doc_line": "05:191 (l); 06:514-527,539",
+      "frozen_ref": "",
+      "claim": "CLOCK_DRIFTの許容を参照する判定に対し、baselineのdiagnostic_itemsには周期と検出時間しか定義されていない。",
+      "evidence": "05 §3.4(l)はwall/monoのdriftが「baseline diagnostic itemの許容内」であることを要求する。06:527のdiagnostic_itemsは(項目, 周期[s], worst-case detection[s])であり、06:539はCLOCK_DRIFTという項目名を必須化するだけ。周期と最悪検出時間を持つbaselineでも、どの量をどの許容値と比較するかは導出できない。数値をまだRs/RT0が決めていない問題ではなく、その値・判定規則を束縛する入力経路がない問題である。",
+      "fix": "非凍結のbaselineまたはそれがhashで参照する時計健全性仕様に、比較量・単位・判定規則・許容値・時計対応の前提を定義し、05(l)をその明示参照へ結線する。周期/最悪検出時間を許容誤差へ読み替えず、値未確定・解決不能は拒否する。数値決定はRs/RT0に残す。凍結schema delta=0。"
+    }
+  ]
+}

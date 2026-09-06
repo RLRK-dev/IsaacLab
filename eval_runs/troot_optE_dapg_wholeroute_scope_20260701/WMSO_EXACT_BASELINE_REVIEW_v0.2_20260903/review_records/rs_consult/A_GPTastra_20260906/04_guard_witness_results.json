@@ -1,0 +1,106 @@
+{
+  "kind": "REVIEWER_DERIVED_REDUCED_WITNESSES",
+  "target_version": "v0.2.8",
+  "target_commit": "0c6f11c91bf42f3a0c0fa9a89190c8e298bd197d",
+  "not_wmso_implementation": true,
+  "not_blind_or_independent_controls": true,
+  "physical_tests_performed": false,
+  "original_checker_run": false,
+  "original_source_sha256_recomputed": false,
+  "results": [
+    {
+      "finding": "GA-01",
+      "assumptions": [
+        "Manager remains unreadable; gateway does not restart.",
+        "No outstanding ISL SafetyDecision; heartbeat loss is detected by the consumer.",
+        "No clearance occurs and no newer AuthorityState read succeeds."
+      ],
+      "specified_branch_outputs": [
+        "SAFE_STOP",
+        "HOLD"
+      ],
+      "local_latch_control": [
+        "SAFE_STOP",
+        "SAFE_STOP"
+      ]
+    },
+    {
+      "finding": "GA-02",
+      "assumptions": [
+        "Provenance-only differences do not change the action identity projection.",
+        "All other relevant start guards are held constant and satisfied.",
+        "These are synthetic projections, not valid full SkillDefinition fixtures."
+      ],
+      "action_id_equality": true,
+      "definition_hash_equality": false,
+      "strengthened_guard_accepts": false
+    },
+    {
+      "finding": "GA-03",
+      "assumptions": [
+        "The same belief/start report is used; owner/epoch do not change during the wait.",
+        "ACK, authority decision, acceptance and deployment evidence remain valid at CAS.",
+        "Event labels are an ordering only; no numerical timeout is proposed."
+      ],
+      "event_order": [
+        "VALIDATE_OK",
+        "BELIEF_EXPIRES",
+        "CAS",
+        "OTHER_PERMIT_TERMS_EXPIRE"
+      ],
+      "selected_guard_accepts": true,
+      "belief_fresh_at_cas": false,
+      "freshness_conjoined_control_accepts": false
+    },
+    {
+      "finding": "GA-04",
+      "assumptions": [
+        "Both profile variants were separately accepted against the same baseline/role heads.",
+        "Per-arm checks address resource_id; there is no normative sorting of the arms tuple.",
+        "Unshown profile/cell fields are identical. This tests only the cell-veto predicate.",
+        "It does not bypass an independent live safety override or establish full permit admission."
+      ],
+      "same_resource_to_robot_mapping": true,
+      "configuration_hashes_equal": false,
+      "current_hash_based_cell_veto_for_b": false,
+      "stable_physical_cell_veto_for_b": true
+    },
+    {
+      "finding": "GA-05",
+      "assumptions": [
+        "Use the state-specific SUSPENDED append rule that supersedes the log head.",
+        "The transition table's omission of PROPOSED->SUSPENDED is a separate ambiguity.",
+        "The literal event target is S.supersedes_record_hash, as stated in 05:249.",
+        "Periodic head-check remains available and may stop the lease later."
+      ],
+      "log_head": "P_g_next",
+      "authority_head_before_suspension": "A_g",
+      "event_target": "P_g_next",
+      "active_lease_acceptance": "A_g",
+      "event_target_matches": false,
+      "corrected_causal_target_matches": true,
+      "periodic_head_check_would_reject": true
+    },
+    {
+      "finding": "GA-06",
+      "assumptions": [
+        "MARK_BOUNDARY_WAIT is an explicit CasKind with a successful transition.",
+        "Symbolic ordinals stand for epoch/sequence; this is not a runtime implementation."
+      ],
+      "before": {
+        "epoch": "e",
+        "seq": "q"
+      },
+      "legal_mark_after": {
+        "epoch": "e",
+        "seq": "q+1"
+      },
+      "universal_INV_02_holds": false,
+      "per_kind_control_holds": true
+    }
+  ],
+  "text_only_finding_not_executed": [
+    "GA-07"
+  ],
+  "completed_witness_groups": 6
+}
