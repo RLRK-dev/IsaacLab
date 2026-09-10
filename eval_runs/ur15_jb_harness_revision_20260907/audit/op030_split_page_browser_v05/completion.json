@@ -1,0 +1,158 @@
+{
+  "observed_at": "2026-09-10T14:55:35.415530+09:00",
+  "checks_succeeded": true,
+  "checks": {
+    "both_helpers_completed": true,
+    "same_page_in_both_checks": true,
+    "same_plan_in_main_check": true,
+    "plan_derived_chapter_count": true,
+    "all_chapter_labels_times_and_seeks": true,
+    "two_expected_video_sources": true,
+    "both_video_durations_match_plan": true,
+    "both_videos_actually_played": true,
+    "all_links_are_relative_and_resolve": true,
+    "no_javascript_exceptions": true,
+    "all_four_details_width_states": true,
+    "no_details_overflow_or_outside_links": true,
+    "owned_browsers_cleaned_up": true,
+    "page_plan_inventory_videos_unchanged": true
+  },
+  "runner_sha256": "8d9cddeba49899635d22d774241e41fb58f2fc32cf2a39ae23d69fd82748fd69",
+  "preflight": {
+    "observed_at": "2026-09-10T14:55:11.301330+09:00",
+    "status": "runner_preflight_only",
+    "browser_checks_executed": false,
+    "node": "/home/rlrk/.nvm/versions/node/v22.21.1/bin/node",
+    "node_version": "v22.21.1",
+    "browser": "/opt/google/chrome/chrome",
+    "helpers": {
+      "main": {
+        "path": "/home/rlrk/IsaacLab/eval_runs/ur15_jb_harness_revision_20260907/analysis/verify_op030_split_page.mjs",
+        "sha256": "8ba7dd1b328c840da0bdc909e2a0986ed44c9eb353f14348ad71967a58aa68c2"
+      },
+      "details": {
+        "path": "/home/rlrk/IsaacLab/eval_runs/ur15_jb_harness_revision_20260907/analysis/verify_op030_split_details_wrapped_width.mjs",
+        "sha256": "47d7f1f4c5178a0888e4d58bd4d0d02c358e7b2080862b1af33243f4c5321033"
+      }
+    },
+    "plan": {
+      "path": "/home/rlrk/IsaacLab/eval_runs/ur15_jb_harness_revision_20260907/deliverables/UR15_JB_OP030_20260910_v05/data/op030_split_shots_v05.json",
+      "sha256": "b829bb16bcace175efad978b43b53bd17a55144816cc64bc6c36f4038eb74b5e",
+      "chapter_count": 162,
+      "native_frames": 14826,
+      "native_sha256": "985c7edf11a80f0e1e15ba5176b3040b9d733c30315ae6b732b4c359239afc3d",
+      "expected_encoded_duration_s": 494.2
+    },
+    "stage_exists": true,
+    "page_exists": true,
+    "note": "Executable, helper syntax and plan checks only; no claim about v05 video playback or page layout"
+  },
+  "page_plan_inventory_videos_sha256": {
+    "review_OP030_split_v05.html": "2bc01f4a29b2fd832e41c526193b70f7649f858aec9551f39f2ff99f227c3a2f",
+    "data/op030_split_shots_v05.json": "b829bb16bcace175efad978b43b53bd17a55144816cc64bc6c36f4038eb74b5e",
+    "DELIVERY_SHA256.json": "5702342b53e04f39a8998b875bb51a506de26c3c837ccf3d7d9391c193baba8b",
+    "UR15_JB_OP030_split_process_v05_review.mp4": "987200443fe6ad22ec123a411f5e550d3131f66f1dbbe601d8a550ee02d89f3c",
+    "UR15_JB_OP030_split_wide_v05_review.mp4": "c0d0747910eabcc2716d0b680508885f98b17f7cf1616b42ab3e99e3bf341f39"
+  },
+  "reports": {
+    "main": {
+      "command": [
+        "/home/rlrk/.nvm/versions/node/v22.21.1/bin/node",
+        "/home/rlrk/IsaacLab/eval_runs/ur15_jb_harness_revision_20260907/analysis/verify_op030_split_page.mjs",
+        "--stage_path",
+        "/home/rlrk/IsaacLab/eval_runs/ur15_jb_harness_revision_20260907/deliverables/UR15_JB_OP030_20260910_v05",
+        "--page_path",
+        "/home/rlrk/IsaacLab/eval_runs/ur15_jb_harness_revision_20260907/deliverables/UR15_JB_OP030_20260910_v05/review_OP030_split_v05.html",
+        "--plan_name",
+        "data/op030_split_shots_v05.json",
+        "--chapter_field",
+        "phases",
+        "--output_dir",
+        "/home/rlrk/IsaacLab/eval_runs/ur15_jb_harness_revision_20260907/audit/op030_split_page_browser_v05/main",
+        "--browser",
+        "/opt/google/chrome/chrome",
+        "--timeout_ms",
+        "120000",
+        "--label",
+        "OP030_split_v05_delivery_main"
+      ],
+      "exit_code": 0,
+      "path": "/home/rlrk/IsaacLab/eval_runs/ur15_jb_harness_revision_20260907/audit/op030_split_page_browser_v05/main/page_browser_report.json",
+      "sha256": "4c00593ec47c69f1cdbb8176dafd2e79dbbcf979f4c2cebab94e33b176a56cfe"
+    },
+    "details": {
+      "command": [
+        "/home/rlrk/.nvm/versions/node/v22.21.1/bin/node",
+        "/home/rlrk/IsaacLab/eval_runs/ur15_jb_harness_revision_20260907/analysis/verify_op030_split_details_wrapped_width.mjs",
+        "--stage_path",
+        "/home/rlrk/IsaacLab/eval_runs/ur15_jb_harness_revision_20260907/deliverables/UR15_JB_OP030_20260910_v05",
+        "--page_path",
+        "/home/rlrk/IsaacLab/eval_runs/ur15_jb_harness_revision_20260907/deliverables/UR15_JB_OP030_20260910_v05/review_OP030_split_v05.html",
+        "--plan_name",
+        "data/op030_split_shots_v05.json",
+        "--chapter_field",
+        "phases",
+        "--output_dir",
+        "/home/rlrk/IsaacLab/eval_runs/ur15_jb_harness_revision_20260907/audit/op030_split_page_browser_v05/details",
+        "--browser",
+        "/opt/google/chrome/chrome",
+        "--timeout_ms",
+        "120000",
+        "--label",
+        "OP030_split_v05_delivery_details"
+      ],
+      "exit_code": 0,
+      "path": "/home/rlrk/IsaacLab/eval_runs/ur15_jb_harness_revision_20260907/audit/op030_split_page_browser_v05/details/page_browser_report.json",
+      "sha256": "ea2d727699e5fdb6b3fa0283b801fd2f955f01ebd3a9ca8a4c488f9514685d57"
+    }
+  },
+  "chapter_count": 162,
+  "successful_chapters": 162,
+  "played_video_count": 2,
+  "local_link_count": 51,
+  "successful_links": 51,
+  "javascript_exception_count": 0,
+  "details_width_states": [
+    {
+      "requested_width_px": 390,
+      "details_open": false,
+      "viewport_width_px": 375,
+      "scroll_width_px": 375,
+      "details_count": 1,
+      "overflow_links": [],
+      "horizontal_overflow_px": 0
+    },
+    {
+      "requested_width_px": 390,
+      "details_open": true,
+      "viewport_width_px": 375,
+      "scroll_width_px": 375,
+      "details_count": 1,
+      "overflow_links": [],
+      "horizontal_overflow_px": 0
+    },
+    {
+      "requested_width_px": 1200,
+      "details_open": false,
+      "viewport_width_px": 1185,
+      "scroll_width_px": 1185,
+      "details_count": 1,
+      "overflow_links": [],
+      "horizontal_overflow_px": 0
+    },
+    {
+      "requested_width_px": 1200,
+      "details_open": true,
+      "viewport_width_px": 1185,
+      "scroll_width_px": 1185,
+      "details_count": 1,
+      "overflow_links": [],
+      "horizontal_overflow_px": 0
+    }
+  ],
+  "checked_stage_inputs_unchanged": true,
+  "runner_writes_stage_files": false,
+  "formal_physical_validity_verdict": null,
+  "scope": "Actual isolated Chrome playback/seek/link/layout checks only; full-video decoding is a separate encoder audit",
+  "media_cancellation_rule": "The reused helper accepts only cancelled Media ERR_ABORTED for a source whose actual playback and all chapter seeks succeeded; raw events remain in the main report"
+}

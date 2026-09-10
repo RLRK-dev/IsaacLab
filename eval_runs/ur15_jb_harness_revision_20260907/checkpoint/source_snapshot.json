@@ -1,0 +1,4503 @@
+{
+  "observed_at": "2026-09-10T20:44:45.897334+09:00",
+  "base_ref": "fork/rlrk/optE-s2-substrate-swap",
+  "base_commit": "1ab60539330f76b0ecb1c2d6097a3d1a37beadef",
+  "v05_status": "delivered; excluded baked assets SHA pinned",
+  "v06_status": "WIP: final static pipe candidate complete; final connected B replay and integrated native validation pending at snapshot",
+  "closure_scope": "AST local imports over five observed import roots plus explicit authoring/replay/build/prepare/bake/review entrypoints; binary runtime inputs and CLI-specified assets excluded; not self-contained recreation",
+  "entrypoints": {
+    "v05": [
+      "prepare_op030_split_v05",
+      "animate_op030_split_v05",
+      "op030_support_motion_v05",
+      "op030_split_b_v05",
+      "op030_split_c_front_v05",
+      "package_op030_split_v05",
+      "verify_op030_delivery_v05",
+      "render_op030_v02",
+      "encode_op030_v02",
+      "op030_support_plan_v05",
+      "op030_support_replay_v05",
+      "op030_split_b_v05_replay",
+      "op030_c_front_indexed_replay_v05",
+      "split_tools_audit_support_ascent_v05",
+      "split_tools_audit_c_front_v05",
+      "probe_op030_front_integration_v05",
+      "deliver_op030_split_v05"
+    ],
+    "v06": [
+      "build_op030_stagger_static_v06",
+      "build_op030_stagger_supported_static_v06",
+      "op030_split_b_stagger_v06",
+      "op030_split_b_stagger_v06_connect",
+      "op030_split_b_stagger_v06_replay",
+      "probe_op030_stagger_integration_v06",
+      "probe_op030_stagger_background_v06",
+      "prepare_op030_split_v06",
+      "animate_op030_split_v06",
+      "package_op030_split_v06",
+      "verify_op030_delivery_v06",
+      "build_op030_stagger_air_clearance_static_v06",
+      "op030_split_b_stagger_v06_context",
+      "op030_split_b_stagger_v06_export",
+      "op030_split_b_stagger_v06_survey",
+      "op030_split_b_stagger_v06_identity",
+      "deliver_op030_split_v06"
+    ]
+  },
+  "closure_counts": {
+    "v05": 85,
+    "v06": 76
+  },
+  "entries": [
+    {
+      "path": "inputs/v02_source/inputs/v01_source/op010_base/original/render_ur15_line.py",
+      "source": "/home/rlrk/IsaacLab/eval_runs/ur15_jb_harness_revision_20260907/inputs/v02_source/inputs/v01_source/op010_base/original/render_ur15_line.py",
+      "bytes": 234605,
+      "sha256": "b87bd76092f3b6a9f279de2ce7f0f7976703e1f54637fcd4dc1c51ed686241f9",
+      "roles": [
+        "v05",
+        "v06"
+      ],
+      "frozen_v05_source": false,
+      "live_differs_from_source": false
+    },
+    {
+      "path": "inputs/v02_source/inputs/v01_source/op010_base/scripts/build_op010_blender.py",
+      "source": "/home/rlrk/IsaacLab/eval_runs/ur15_jb_harness_revision_20260907/deliverables/UR15_JB_OP030_20260910_v05/inputs/v02_source/inputs/v01_source/op010_base/scripts/build_op010_blender.py",
+      "bytes": 20489,
+      "sha256": "63bd16ea272c77c73fae253257adc9fa384e927a933230aaf324dcadf2557380",
+      "roles": [
+        "v05",
+        "v06"
+      ],
+      "frozen_v05_source": true,
+      "live_differs_from_source": false
+    },
+    {
+      "path": "inputs/v02_source/inputs/v01_source/op010_base/scripts/op010_revision.py",
+      "source": "/home/rlrk/IsaacLab/eval_runs/ur15_jb_harness_revision_20260907/inputs/v02_source/inputs/v01_source/op010_base/scripts/op010_revision.py",
+      "bytes": 18042,
+      "sha256": "8bb6714a4bfb35596b3b69fe7a6152ae0310d51319cd0a90793e6ade202d5d2b",
+      "roles": [
+        "v05",
+        "v06"
+      ],
+      "frozen_v05_source": false,
+      "live_differs_from_source": false
+    },
+    {
+      "path": "inputs/v02_source/inputs/v01_source/op010_base/scripts/probe_op010_grasp.py",
+      "source": "/home/rlrk/IsaacLab/eval_runs/ur15_jb_harness_revision_20260907/inputs/v02_source/inputs/v01_source/op010_base/scripts/probe_op010_grasp.py",
+      "bytes": 5357,
+      "sha256": "b18a0c1ef51a995e612a3b2bda12ef8ddacc076a1d54f455e72daea994a4af34",
+      "roles": [
+        "v05",
+        "v06"
+      ],
+      "frozen_v05_source": false,
+      "live_differs_from_source": false
+    },
+    {
+      "path": "inputs/v02_source/inputs/v01_source/scripts/build_cameras.py",
+      "source": "/home/rlrk/IsaacLab/eval_runs/ur15_jb_harness_revision_20260907/deliverables/UR15_JB_OP030_20260910_v05/inputs/v02_source/inputs/v01_source/scripts/build_cameras.py",
+      "bytes": 14698,
+      "sha256": "03af0357baf77faf494c1cd9538f855cec6f9d05a1d1733c972168aa6c5ff46b",
+      "roles": [
+        "v05",
+        "v06"
+      ],
+      "frozen_v05_source": true,
+      "live_differs_from_source": false
+    },
+    {
+      "path": "inputs/v02_source/inputs/v01_source/scripts/build_op020.py",
+      "source": "/home/rlrk/IsaacLab/eval_runs/ur15_jb_harness_revision_20260907/deliverables/UR15_JB_OP030_20260910_v05/inputs/v02_source/inputs/v01_source/scripts/build_op020.py",
+      "bytes": 36229,
+      "sha256": "f3490166a71e969186acced222bcfe54bce30baed1105b92e99427b474319bc0",
+      "roles": [
+        "v05",
+        "v06"
+      ],
+      "frozen_v05_source": true,
+      "live_differs_from_source": false
+    },
+    {
+      "path": "inputs/v02_source/inputs/v01_source/scripts/op020_motion.py",
+      "source": "/home/rlrk/IsaacLab/eval_runs/ur15_jb_harness_revision_20260907/inputs/v02_source/inputs/v01_source/scripts/op020_motion.py",
+      "bytes": 19545,
+      "sha256": "1d45b3b940fd6c3ed2ee419452e8478ec5feaab4df7d04542aba266b9eceafd6",
+      "roles": [
+        "v05",
+        "v06"
+      ],
+      "frozen_v05_source": false,
+      "live_differs_from_source": false
+    },
+    {
+      "path": "inputs/v02_source/scripts/stocker10_motion.py",
+      "source": "/home/rlrk/IsaacLab/eval_runs/ur15_jb_harness_revision_20260907/inputs/v02_source/scripts/stocker10_motion.py",
+      "bytes": 15619,
+      "sha256": "a5e4fa663acb2e82bbb606caa2c9938d44d8bb307eaef21aacd492501a430589",
+      "roles": [
+        "v05",
+        "v06"
+      ],
+      "frozen_v05_source": false,
+      "live_differs_from_source": false
+    },
+    {
+      "path": "scripts/allocation_product.py",
+      "source": "/home/rlrk/IsaacLab/eval_runs/ur15_jb_harness_revision_20260907/deliverables/UR15_JB_OP030_20260910_v05/scripts/allocation_product.py",
+      "bytes": 14391,
+      "sha256": "c1f2b355ef8a8baedbbba54df4a47563a60a2446f090f29a7c185c8baab8fe70",
+      "roles": [
+        "v05",
+        "v06"
+      ],
+      "frozen_v05_source": true,
+      "live_differs_from_source": false
+    },
+    {
+      "path": "scripts/animate_op030_split_v05.py",
+      "source": "/home/rlrk/IsaacLab/eval_runs/ur15_jb_harness_revision_20260907/deliverables/UR15_JB_OP030_20260910_v05/scripts/animate_op030_split_v05.py",
+      "bytes": 18073,
+      "sha256": "e00ceaa90e212aa9dec82bc7dc8c7fd655b0291a436f79e2d4559506967ae3da",
+      "roles": [
+        "v05"
+      ],
+      "frozen_v05_source": true,
+      "live_differs_from_source": false
+    },
+    {
+      "path": "scripts/animate_op030_split_v06.py",
+      "source": "/home/rlrk/IsaacLab/eval_runs/ur15_jb_harness_revision_20260907/scripts/animate_op030_split_v06.py",
+      "bytes": 18638,
+      "sha256": "8d8102e12da3aa60abd5e9242ff2666f7b234d5492a0a6231c72d9a20c1b756b",
+      "roles": [
+        "v06"
+      ],
+      "frozen_v05_source": false,
+      "live_differs_from_source": false
+    },
+    {
+      "path": "scripts/build_allocation_review.py",
+      "source": "/home/rlrk/IsaacLab/eval_runs/ur15_jb_harness_revision_20260907/deliverables/UR15_JB_OP030_20260910_v05/scripts/build_allocation_review.py",
+      "bytes": 8994,
+      "sha256": "f1ef58bc5bdb5ee934174ec10ab40d0dac732335d43fa4307ab442e49f7f08c5",
+      "roles": [
+        "v05",
+        "v06"
+      ],
+      "frozen_v05_source": true,
+      "live_differs_from_source": false
+    },
+    {
+      "path": "scripts/build_jb_op020.py",
+      "source": "/home/rlrk/IsaacLab/eval_runs/ur15_jb_harness_revision_20260907/deliverables/UR15_JB_OP030_20260910_v05/scripts/build_jb_op020.py",
+      "bytes": 13863,
+      "sha256": "4651176af57be16dde185a6618181956b26281da644fb5fbb68efb6cc6f3a8a2",
+      "roles": [
+        "v05",
+        "v06"
+      ],
+      "frozen_v05_source": true,
+      "live_differs_from_source": false
+    },
+    {
+      "path": "scripts/build_op030_split_v03.py",
+      "source": "/home/rlrk/IsaacLab/eval_runs/ur15_jb_harness_revision_20260907/scripts/build_op030_split_v03.py",
+      "bytes": 13021,
+      "sha256": "d905beea729d3674b1778c26085c6b5cbd1008e9043e6653c722316425a254c3",
+      "roles": [
+        "v06"
+      ],
+      "frozen_v05_source": false,
+      "live_differs_from_source": false
+    },
+    {
+      "path": "scripts/build_op030_split_v04.py",
+      "source": "/home/rlrk/IsaacLab/eval_runs/ur15_jb_harness_revision_20260907/scripts/build_op030_split_v04.py",
+      "bytes": 19134,
+      "sha256": "6fb451f4de5054f3fca3495c42b378d0334f85101963d536aa56db458c91be93",
+      "roles": [
+        "v06"
+      ],
+      "frozen_v05_source": false,
+      "live_differs_from_source": false
+    },
+    {
+      "path": "scripts/build_op030_stagger_air_clearance_static_v06.py",
+      "source": "/home/rlrk/IsaacLab/eval_runs/ur15_jb_harness_revision_20260907/scripts/build_op030_stagger_air_clearance_static_v06.py",
+      "bytes": 7146,
+      "sha256": "9d711b25ab50768a1d8b3470cf26d3a0e7dafc19b5e5de1c91c35f727b8d1b6c",
+      "roles": [
+        "v06"
+      ],
+      "frozen_v05_source": false,
+      "live_differs_from_source": false
+    },
+    {
+      "path": "scripts/build_op030_stagger_static_v06.py",
+      "source": "/home/rlrk/IsaacLab/eval_runs/ur15_jb_harness_revision_20260907/scripts/build_op030_stagger_static_v06.py",
+      "bytes": 12770,
+      "sha256": "c8f89a2ba96881ca617203bff0c5b45914dee45b05a3007919091aec172f6205",
+      "roles": [
+        "v06"
+      ],
+      "frozen_v05_source": false,
+      "live_differs_from_source": false
+    },
+    {
+      "path": "scripts/build_op030_stagger_supported_static_v06.py",
+      "source": "/home/rlrk/IsaacLab/eval_runs/ur15_jb_harness_revision_20260907/scripts/build_op030_stagger_supported_static_v06.py",
+      "bytes": 8859,
+      "sha256": "7cdaae0fbdcc787ff06ab7fc394fc6740197c900a97aa2eba2d117a3f642969a",
+      "roles": [
+        "v06"
+      ],
+      "frozen_v05_source": false,
+      "live_differs_from_source": false
+    },
+    {
+      "path": "scripts/clean_appearance.py",
+      "source": "/home/rlrk/IsaacLab/eval_runs/ur15_jb_harness_revision_20260907/deliverables/UR15_JB_OP030_20260910_v05/scripts/clean_appearance.py",
+      "bytes": 5734,
+      "sha256": "2ebd6f27c6480e4a48abeaad13f1eccdda500455a5f1d87ab94ec327ee5dd45b",
+      "roles": [
+        "v05",
+        "v06"
+      ],
+      "frozen_v05_source": true,
+      "live_differs_from_source": false
+    },
+    {
+      "path": "scripts/continuous_common.py",
+      "source": "/home/rlrk/IsaacLab/eval_runs/ur15_jb_harness_revision_20260907/deliverables/UR15_JB_OP030_20260910_v05/scripts/continuous_common.py",
+      "bytes": 4231,
+      "sha256": "fcb4167f03a30f532f5ab73b438c91aee9b9b8ac0da63ec3dbc012df410cde2c",
+      "roles": [
+        "v05",
+        "v06"
+      ],
+      "frozen_v05_source": true,
+      "live_differs_from_source": false
+    },
+    {
+      "path": "scripts/deliver_op030_split_v05.py",
+      "source": "/home/rlrk/IsaacLab/eval_runs/ur15_jb_harness_revision_20260907/scripts/deliver_op030_split_v05.py",
+      "bytes": 6534,
+      "sha256": "53710d78377f958f381dabf9597fa40e1b4bdf25ff4571e5b24096ea0ff5e301",
+      "roles": [
+        "v05"
+      ],
+      "frozen_v05_source": false,
+      "live_differs_from_source": false
+    },
+    {
+      "path": "scripts/deliver_op030_split_v06.py",
+      "source": "/home/rlrk/IsaacLab/eval_runs/ur15_jb_harness_revision_20260907/scripts/deliver_op030_split_v06.py",
+      "bytes": 6534,
+      "sha256": "4395eb81bfbd517d313772dd4470df1aeca74e58daa2a31733b8d3ec7c7ede12",
+      "roles": [
+        "v06"
+      ],
+      "frozen_v05_source": false,
+      "live_differs_from_source": false
+    },
+    {
+      "path": "scripts/direct_cable.py",
+      "source": "/home/rlrk/IsaacLab/eval_runs/ur15_jb_harness_revision_20260907/scripts/direct_cable.py",
+      "bytes": 2131,
+      "sha256": "0426f6c8200404fc802a7573ab7f9ff41ba305a1fc9d4a3b70b73b3fc6be3997",
+      "roles": [
+        "v05",
+        "v06"
+      ],
+      "frozen_v05_source": false,
+      "live_differs_from_source": false
+    },
+    {
+      "path": "scripts/encode_op030_v02.py",
+      "source": "/home/rlrk/IsaacLab/eval_runs/ur15_jb_harness_revision_20260907/deliverables/UR15_JB_OP030_20260910_v05/scripts/encode_op030_v02.py",
+      "bytes": 8840,
+      "sha256": "3967909fc233691a7dad0562443a70016e8696e1a67cc0806eeafc74a61256ab",
+      "roles": [
+        "v05",
+        "v06"
+      ],
+      "frozen_v05_source": true,
+      "live_differs_from_source": false
+    },
+    {
+      "path": "scripts/encode_review_video.py",
+      "source": "/home/rlrk/IsaacLab/eval_runs/ur15_jb_harness_revision_20260907/deliverables/UR15_JB_OP030_20260910_v05/scripts/encode_review_video.py",
+      "bytes": 6956,
+      "sha256": "db7af7a845a6043713647f38cc8d84f0f7724ee5abe85f04eef71827971aec9a",
+      "roles": [
+        "v05",
+        "v06"
+      ],
+      "frozen_v05_source": true,
+      "live_differs_from_source": false
+    },
+    {
+      "path": "scripts/jb_harness.py",
+      "source": "/home/rlrk/IsaacLab/eval_runs/ur15_jb_harness_revision_20260907/deliverables/UR15_JB_OP030_20260910_v05/scripts/jb_harness.py",
+      "bytes": 14269,
+      "sha256": "b0db065085fca79e7d0ef8a28357dc849eb5c2d4ee0bc4e0ff0c5b0e5e9b8935",
+      "roles": [
+        "v05",
+        "v06"
+      ],
+      "frozen_v05_source": true,
+      "live_differs_from_source": false
+    },
+    {
+      "path": "scripts/op020_jb_geometry.py",
+      "source": "/home/rlrk/IsaacLab/eval_runs/ur15_jb_harness_revision_20260907/deliverables/UR15_JB_OP030_20260910_v05/scripts/op020_jb_geometry.py",
+      "bytes": 13355,
+      "sha256": "abe345f6c323ab010fb0f77a54c3b92925160a9d3ead6885f1eb617805053646",
+      "roles": [
+        "v05",
+        "v06"
+      ],
+      "frozen_v05_source": true,
+      "live_differs_from_source": false
+    },
+    {
+      "path": "scripts/op020_jb_motion.py",
+      "source": "/home/rlrk/IsaacLab/eval_runs/ur15_jb_harness_revision_20260907/scripts/op020_jb_motion.py",
+      "bytes": 20945,
+      "sha256": "9db966b398a844d0290957250b6596dc7878cf6e7b30c6f786dbb75587d07c86",
+      "roles": [
+        "v05",
+        "v06"
+      ],
+      "frozen_v05_source": false,
+      "live_differs_from_source": false
+    },
+    {
+      "path": "scripts/op030_b_stagger_free_12d.py",
+      "source": "/home/rlrk/IsaacLab/eval_runs/ur15_jb_harness_revision_20260907/scripts/op030_b_stagger_free_12d.py",
+      "bytes": 7026,
+      "sha256": "a83de7aa755c73bba230ce8e14837b9e1311c44ef48855c7021de0777356e9da",
+      "roles": [
+        "v06"
+      ],
+      "frozen_v05_source": false,
+      "live_differs_from_source": false
+    },
+    {
+      "path": "scripts/op030_branch_boxes.py",
+      "source": "/home/rlrk/IsaacLab/eval_runs/ur15_jb_harness_revision_20260907/scripts/op030_branch_boxes.py",
+      "bytes": 3420,
+      "sha256": "f77fe5218173e0b52ec847395cd8d6121fc5d420dca6da914ea5a665e7ad1515",
+      "roles": [
+        "v05",
+        "v06"
+      ],
+      "frozen_v05_source": false,
+      "live_differs_from_source": false
+    },
+    {
+      "path": "scripts/op030_branch_choice.py",
+      "source": "/home/rlrk/IsaacLab/eval_runs/ur15_jb_harness_revision_20260907/scripts/op030_branch_choice.py",
+      "bytes": 8247,
+      "sha256": "e8f6e02fae47ffbaab5d4d6acf00a0960b2377540da97dc92749d34f1119c8fb",
+      "roles": [
+        "v05",
+        "v06"
+      ],
+      "frozen_v05_source": false,
+      "live_differs_from_source": false
+    },
+    {
+      "path": "scripts/op030_branch_meshes.py",
+      "source": "/home/rlrk/IsaacLab/eval_runs/ur15_jb_harness_revision_20260907/scripts/op030_branch_meshes.py",
+      "bytes": 5807,
+      "sha256": "09f86e47916d53a5e0625c6d564f9f028245db0d971d5fabef2fed569bd58bf3",
+      "roles": [
+        "v05",
+        "v06"
+      ],
+      "frozen_v05_source": false,
+      "live_differs_from_source": false
+    },
+    {
+      "path": "scripts/op030_c_cartesian_refill_v05.py",
+      "source": "/home/rlrk/IsaacLab/eval_runs/ur15_jb_harness_revision_20260907/scripts/op030_c_cartesian_refill_v05.py",
+      "bytes": 6782,
+      "sha256": "cdec66a9eb38f1fe509aeb869ef91dd89c4385bc5edb518c1fe7f1abdd8cf19f",
+      "roles": [
+        "v05"
+      ],
+      "frozen_v05_source": false,
+      "live_differs_from_source": false
+    },
+    {
+      "path": "scripts/op030_c_front_indexed_replay_v05.py",
+      "source": "/home/rlrk/IsaacLab/eval_runs/ur15_jb_harness_revision_20260907/scripts/op030_c_front_indexed_replay_v05.py",
+      "bytes": 13931,
+      "sha256": "0cd00f226c64ef60944c3f364d12454f98e45229390e4cdb001c44b26637949a",
+      "roles": [
+        "v05"
+      ],
+      "frozen_v05_source": false,
+      "live_differs_from_source": false
+    },
+    {
+      "path": "scripts/op030_c_front_replay_v05.py",
+      "source": "/home/rlrk/IsaacLab/eval_runs/ur15_jb_harness_revision_20260907/scripts/op030_c_front_replay_v05.py",
+      "bytes": 14070,
+      "sha256": "ed05fe02ce4cb5fa27f0777490864dfbb31219176a8b5e28e556f809be7ce24b",
+      "roles": [
+        "v05"
+      ],
+      "frozen_v05_source": false,
+      "live_differs_from_source": false
+    },
+    {
+      "path": "scripts/op030_c_front_roll_v05.py",
+      "source": "/home/rlrk/IsaacLab/eval_runs/ur15_jb_harness_revision_20260907/scripts/op030_c_front_roll_v05.py",
+      "bytes": 5954,
+      "sha256": "82490b0ff0241c8e8cd57f6516d3726a4ccc82fca5c93f094257081d547a92c5",
+      "roles": [
+        "v05"
+      ],
+      "frozen_v05_source": false,
+      "live_differs_from_source": false
+    },
+    {
+      "path": "scripts/op030_c_refill_v05.py",
+      "source": "/home/rlrk/IsaacLab/eval_runs/ur15_jb_harness_revision_20260907/scripts/op030_c_refill_v05.py",
+      "bytes": 3372,
+      "sha256": "da808bb23f340bd22b2704312c768345465e5f29d80b69e4f8c571b9418defd4",
+      "roles": [
+        "v05"
+      ],
+      "frozen_v05_source": false,
+      "live_differs_from_source": false
+    },
+    {
+      "path": "scripts/op030_c_replay_v05.py",
+      "source": "/home/rlrk/IsaacLab/eval_runs/ur15_jb_harness_revision_20260907/scripts/op030_c_replay_v05.py",
+      "bytes": 11221,
+      "sha256": "b54e01892b7dfcbb64dd94e084073046d78cb96d0674801dec85755a7a6433fb",
+      "roles": [
+        "v05"
+      ],
+      "frozen_v05_source": false,
+      "live_differs_from_source": false
+    },
+    {
+      "path": "scripts/op030_cable.py",
+      "source": "/home/rlrk/IsaacLab/eval_runs/ur15_jb_harness_revision_20260907/scripts/op030_cable.py",
+      "bytes": 2312,
+      "sha256": "dd3f81c97b94708ad62f0f8ed328f04761a92cbb3d0b946ea9131df855aa384d",
+      "roles": [
+        "v05",
+        "v06"
+      ],
+      "frozen_v05_source": false,
+      "live_differs_from_source": false
+    },
+    {
+      "path": "scripts/op030_contacts.py",
+      "source": "/home/rlrk/IsaacLab/eval_runs/ur15_jb_harness_revision_20260907/scripts/op030_contacts.py",
+      "bytes": 5626,
+      "sha256": "9021bd3d76f2f6b07d5f57e31d07b834a3fa4005e2f3f8bef3a49045c1406404",
+      "roles": [
+        "v05"
+      ],
+      "frozen_v05_source": false,
+      "live_differs_from_source": false
+    },
+    {
+      "path": "scripts/op030_definition.py",
+      "source": "/home/rlrk/IsaacLab/eval_runs/ur15_jb_harness_revision_20260907/deliverables/UR15_JB_OP030_20260910_v05/scripts/op030_definition.py",
+      "bytes": 3820,
+      "sha256": "0f0de2657b657c422f3642233b01febaaf4b1cf7be95aa5e46ec0f7d7782f667",
+      "roles": [
+        "v05",
+        "v06"
+      ],
+      "frozen_v05_source": true,
+      "live_differs_from_source": false
+    },
+    {
+      "path": "scripts/op030_fastener_operations_v04.py",
+      "source": "/home/rlrk/IsaacLab/eval_runs/ur15_jb_harness_revision_20260907/scripts/op030_fastener_operations_v04.py",
+      "bytes": 7485,
+      "sha256": "8a5fb08e8dcdb2c06dba9f1b82ef64893de45c23d96821f94285cbfc7c7f2184",
+      "roles": [
+        "v05"
+      ],
+      "frozen_v05_source": false,
+      "live_differs_from_source": false
+    },
+    {
+      "path": "scripts/op030_fixed_height_timeline_v04.py",
+      "source": "/home/rlrk/IsaacLab/eval_runs/ur15_jb_harness_revision_20260907/deliverables/UR15_JB_OP030_20260910_v05/scripts/op030_fixed_height_timeline_v04.py",
+      "bytes": 7536,
+      "sha256": "df50c6ab8a83103458ce41ddd653eef0e5602fc60c6e47e45332c0667bef303b",
+      "roles": [
+        "v05",
+        "v06"
+      ],
+      "frozen_v05_source": true,
+      "live_differs_from_source": false
+    },
+    {
+      "path": "scripts/op030_fk_fast.py",
+      "source": "/home/rlrk/IsaacLab/eval_runs/ur15_jb_harness_revision_20260907/scripts/op030_fk_fast.py",
+      "bytes": 3063,
+      "sha256": "5940c353e76c10edcb3d4449aa587e0681bb61ec7cd312e49d12907242dc75e1",
+      "roles": [
+        "v05",
+        "v06"
+      ],
+      "frozen_v05_source": false,
+      "live_differs_from_source": false
+    },
+    {
+      "path": "scripts/op030_free_paths.py",
+      "source": "/home/rlrk/IsaacLab/eval_runs/ur15_jb_harness_revision_20260907/scripts/op030_free_paths.py",
+      "bytes": 2953,
+      "sha256": "bd5e97f0d2c5b1e596da0afe30ebf948bdced987b64a69a6e6f4fdf4a9355400",
+      "roles": [
+        "v05",
+        "v06"
+      ],
+      "frozen_v05_source": false,
+      "live_differs_from_source": false
+    },
+    {
+      "path": "scripts/op030_geometry.py",
+      "source": "/home/rlrk/IsaacLab/eval_runs/ur15_jb_harness_revision_20260907/scripts/op030_geometry.py",
+      "bytes": 31330,
+      "sha256": "dd4efec4cecf13e50a9c0477ff65249bec9525b434cfe8abb40bf7a9243de45b",
+      "roles": [
+        "v05",
+        "v06"
+      ],
+      "frozen_v05_source": false,
+      "live_differs_from_source": false
+    },
+    {
+      "path": "scripts/op030_motion.py",
+      "source": "/home/rlrk/IsaacLab/eval_runs/ur15_jb_harness_revision_20260907/scripts/op030_motion.py",
+      "bytes": 21511,
+      "sha256": "1b5ec681f3e2d9651eed41fd355536d5fab43d18400a47986cbd0fccf9efa7cb",
+      "roles": [
+        "v05",
+        "v06"
+      ],
+      "frozen_v05_source": false,
+      "live_differs_from_source": false
+    },
+    {
+      "path": "scripts/op030_split_a_branches.py",
+      "source": "/home/rlrk/IsaacLab/eval_runs/ur15_jb_harness_revision_20260907/scripts/op030_split_a_branches.py",
+      "bytes": 5352,
+      "sha256": "28e32ccdc53f63bf3edf5e3ddad8fee2ea7aa09a9ae0cbe9dbca03c0a57061ef",
+      "roles": [
+        "v05"
+      ],
+      "frozen_v05_source": false,
+      "live_differs_from_source": false
+    },
+    {
+      "path": "scripts/op030_split_a_connect.py",
+      "source": "/home/rlrk/IsaacLab/eval_runs/ur15_jb_harness_revision_20260907/scripts/op030_split_a_connect.py",
+      "bytes": 9634,
+      "sha256": "33a510ddfadcb5023ca3f00d6c8875ab81a4ab7de4f83bbe540a040bfcb26b80",
+      "roles": [
+        "v05"
+      ],
+      "frozen_v05_source": false,
+      "live_differs_from_source": false
+    },
+    {
+      "path": "scripts/op030_split_a_plan.py",
+      "source": "/home/rlrk/IsaacLab/eval_runs/ur15_jb_harness_revision_20260907/scripts/op030_split_a_plan.py",
+      "bytes": 9466,
+      "sha256": "a1f00665028f5b9b066b9b3d34cd8e2f95a003b1656d657c7b30cfbb9066fce6",
+      "roles": [
+        "v05"
+      ],
+      "frozen_v05_source": false,
+      "live_differs_from_source": false
+    },
+    {
+      "path": "scripts/op030_split_a_replay.py",
+      "source": "/home/rlrk/IsaacLab/eval_runs/ur15_jb_harness_revision_20260907/scripts/op030_split_a_replay.py",
+      "bytes": 14578,
+      "sha256": "05767e04f37efdba68eb5083a574335a38ed2726b22c750529f0bbd3744dbb74",
+      "roles": [
+        "v05"
+      ],
+      "frozen_v05_source": false,
+      "live_differs_from_source": false
+    },
+    {
+      "path": "scripts/op030_split_ac_meshes.py",
+      "source": "/home/rlrk/IsaacLab/eval_runs/ur15_jb_harness_revision_20260907/scripts/op030_split_ac_meshes.py",
+      "bytes": 9749,
+      "sha256": "e6f7d8b16e54729cf7faca02a96033b9be05a48d7a268c49a4dc5254ad79dc69",
+      "roles": [
+        "v05",
+        "v06"
+      ],
+      "frozen_v05_source": false,
+      "live_differs_from_source": false
+    },
+    {
+      "path": "scripts/op030_split_animation.py",
+      "source": "/home/rlrk/IsaacLab/eval_runs/ur15_jb_harness_revision_20260907/deliverables/UR15_JB_OP030_20260910_v05/scripts/op030_split_animation.py",
+      "bytes": 3958,
+      "sha256": "dbecf2e05dbb8f6df5c730d49338c91d2b28e6cb780e305bc0c5b4daaf2757d0",
+      "roles": [
+        "v05",
+        "v06"
+      ],
+      "frozen_v05_source": true,
+      "live_differs_from_source": false
+    },
+    {
+      "path": "scripts/op030_split_b_check.py",
+      "source": "/home/rlrk/IsaacLab/eval_runs/ur15_jb_harness_revision_20260907/scripts/op030_split_b_check.py",
+      "bytes": 20186,
+      "sha256": "2925cc1bfaab03c4ed9d9b92f38fec07ddcb6da07c622aca27bc13942c1d95d0",
+      "roles": [
+        "v05",
+        "v06"
+      ],
+      "frozen_v05_source": false,
+      "live_differs_from_source": false
+    },
+    {
+      "path": "scripts/op030_split_b_plan.py",
+      "source": "/home/rlrk/IsaacLab/eval_runs/ur15_jb_harness_revision_20260907/scripts/op030_split_b_plan.py",
+      "bytes": 22574,
+      "sha256": "60dcca51094cd8739d4a246a202e08d163dc0ffd8abf77558e0afce6773532df",
+      "roles": [
+        "v05",
+        "v06"
+      ],
+      "frozen_v05_source": false,
+      "live_differs_from_source": false
+    },
+    {
+      "path": "scripts/op030_split_b_replay.py",
+      "source": "/home/rlrk/IsaacLab/eval_runs/ur15_jb_harness_revision_20260907/scripts/op030_split_b_replay.py",
+      "bytes": 13659,
+      "sha256": "68e065035fbf6bacd14d9fb9067aa49f4081feae9b0731ecdcae4b113a21e0db",
+      "roles": [
+        "v06"
+      ],
+      "frozen_v05_source": false,
+      "live_differs_from_source": false
+    },
+    {
+      "path": "scripts/op030_split_b_stagger_v06.py",
+      "source": "/home/rlrk/IsaacLab/eval_runs/ur15_jb_harness_revision_20260907/scripts/op030_split_b_stagger_v06.py",
+      "bytes": 12381,
+      "sha256": "66fd737c7b71a33b18ea260e44c02b36cdac9fd320ff76fdadeaf2395904b258",
+      "roles": [
+        "v06"
+      ],
+      "frozen_v05_source": false,
+      "live_differs_from_source": false
+    },
+    {
+      "path": "scripts/op030_split_b_stagger_v06_connect.py",
+      "source": "/home/rlrk/IsaacLab/eval_runs/ur15_jb_harness_revision_20260907/scripts/op030_split_b_stagger_v06_connect.py",
+      "bytes": 12347,
+      "sha256": "829d8cfa96d4f98b3a4f444adac793fce40574604dfb2ec8c838ec696f4bc875",
+      "roles": [
+        "v06"
+      ],
+      "frozen_v05_source": false,
+      "live_differs_from_source": false
+    },
+    {
+      "path": "scripts/op030_split_b_stagger_v06_context.py",
+      "source": "/home/rlrk/IsaacLab/eval_runs/ur15_jb_harness_revision_20260907/scripts/op030_split_b_stagger_v06_context.py",
+      "bytes": 4277,
+      "sha256": "2776cd4c7ad2def599c63689848250801e743d031828a52bbbdac6e117856a3e",
+      "roles": [
+        "v06"
+      ],
+      "frozen_v05_source": false,
+      "live_differs_from_source": false
+    },
+    {
+      "path": "scripts/op030_split_b_stagger_v06_export.py",
+      "source": "/home/rlrk/IsaacLab/eval_runs/ur15_jb_harness_revision_20260907/scripts/op030_split_b_stagger_v06_export.py",
+      "bytes": 14210,
+      "sha256": "a5642f5fc7521be16ee5c343060cb83a18f375d02649f3dd339a8a4214c3cf4d",
+      "roles": [
+        "v06"
+      ],
+      "frozen_v05_source": false,
+      "live_differs_from_source": false
+    },
+    {
+      "path": "scripts/op030_split_b_stagger_v06_identity.py",
+      "source": "/home/rlrk/IsaacLab/eval_runs/ur15_jb_harness_revision_20260907/scripts/op030_split_b_stagger_v06_identity.py",
+      "bytes": 7603,
+      "sha256": "81da2c2e1483999021867d0734896fed9a37831d1e9827cfe6332fb94cd23c04",
+      "roles": [
+        "v06"
+      ],
+      "frozen_v05_source": false,
+      "live_differs_from_source": false
+    },
+    {
+      "path": "scripts/op030_split_b_stagger_v06_plan.py",
+      "source": "/home/rlrk/IsaacLab/eval_runs/ur15_jb_harness_revision_20260907/scripts/op030_split_b_stagger_v06_plan.py",
+      "bytes": 5604,
+      "sha256": "9aebf08374b42834a7fd8c1b39a1e24c840e16ad4eff0ae7b4ee10b6ad43c3c3",
+      "roles": [
+        "v06"
+      ],
+      "frozen_v05_source": false,
+      "live_differs_from_source": false
+    },
+    {
+      "path": "scripts/op030_split_b_stagger_v06_replay.py",
+      "source": "/home/rlrk/IsaacLab/eval_runs/ur15_jb_harness_revision_20260907/scripts/op030_split_b_stagger_v06_replay.py",
+      "bytes": 18370,
+      "sha256": "d28d88ae85cc7aab7d901a10270a23da341125b368ea8df113aacab17a5a4b60",
+      "roles": [
+        "v06"
+      ],
+      "frozen_v05_source": false,
+      "live_differs_from_source": false
+    },
+    {
+      "path": "scripts/op030_split_b_stagger_v06_survey.py",
+      "source": "/home/rlrk/IsaacLab/eval_runs/ur15_jb_harness_revision_20260907/scripts/op030_split_b_stagger_v06_survey.py",
+      "bytes": 1883,
+      "sha256": "9b22db9cf08da6d7327331fc32a2cdc215777ea10cd8efa165e72b8437413381",
+      "roles": [
+        "v06"
+      ],
+      "frozen_v05_source": false,
+      "live_differs_from_source": false
+    },
+    {
+      "path": "scripts/op030_split_b_v04.py",
+      "source": "/home/rlrk/IsaacLab/eval_runs/ur15_jb_harness_revision_20260907/scripts/op030_split_b_v04.py",
+      "bytes": 10372,
+      "sha256": "3e3ad440782e3d9642ba3f367b72e94f9d4cc5504a46912abc4364a04cd12a19",
+      "roles": [
+        "v05",
+        "v06"
+      ],
+      "frozen_v05_source": false,
+      "live_differs_from_source": false
+    },
+    {
+      "path": "scripts/op030_split_b_v04_drawer.py",
+      "source": "/home/rlrk/IsaacLab/eval_runs/ur15_jb_harness_revision_20260907/scripts/op030_split_b_v04_drawer.py",
+      "bytes": 3205,
+      "sha256": "c17c9c08c97cb18aead5ca1e6c4239c24d4bbdcd9771c698fa791c474e809dad",
+      "roles": [
+        "v05",
+        "v06"
+      ],
+      "frozen_v05_source": false,
+      "live_differs_from_source": false
+    },
+    {
+      "path": "scripts/op030_split_b_v05.py",
+      "source": "/home/rlrk/IsaacLab/eval_runs/ur15_jb_harness_revision_20260907/scripts/op030_split_b_v05.py",
+      "bytes": 15035,
+      "sha256": "01826453ab8b56d6231daba863d68b970c9e53660ee9dea6eb4ff787cd3831d6",
+      "roles": [
+        "v05",
+        "v06"
+      ],
+      "frozen_v05_source": false,
+      "live_differs_from_source": false
+    },
+    {
+      "path": "scripts/op030_split_b_v05_replay.py",
+      "source": "/home/rlrk/IsaacLab/eval_runs/ur15_jb_harness_revision_20260907/scripts/op030_split_b_v05_replay.py",
+      "bytes": 11908,
+      "sha256": "cc336f01ff81a973259e23629cb4901499a08a40a4d759e9380b4c70ae6e2e4a",
+      "roles": [
+        "v05"
+      ],
+      "frozen_v05_source": false,
+      "live_differs_from_source": false
+    },
+    {
+      "path": "scripts/op030_split_c_front_v05.py",
+      "source": "/home/rlrk/IsaacLab/eval_runs/ur15_jb_harness_revision_20260907/scripts/op030_split_c_front_v05.py",
+      "bytes": 844,
+      "sha256": "d320242d6ddb6e15ebe8478b2f0ec1b0ceee77c5efa29833083cfdfecb6cb4de",
+      "roles": [
+        "v05"
+      ],
+      "frozen_v05_source": false,
+      "live_differs_from_source": false
+    },
+    {
+      "path": "scripts/op030_split_c_v04.py",
+      "source": "/home/rlrk/IsaacLab/eval_runs/ur15_jb_harness_revision_20260907/scripts/op030_split_c_v04.py",
+      "bytes": 17919,
+      "sha256": "cf17ea342ddef3a773351fd641e81935ce119b0be001789f9ca2e8aa569e5058",
+      "roles": [
+        "v05"
+      ],
+      "frozen_v05_source": false,
+      "live_differs_from_source": false
+    },
+    {
+      "path": "scripts/op030_split_c_v05.py",
+      "source": "/home/rlrk/IsaacLab/eval_runs/ur15_jb_harness_revision_20260907/scripts/op030_split_c_v05.py",
+      "bytes": 4330,
+      "sha256": "2caaec98eb6d8967693b0017cbe265e7ce2f36507d54001745ee66bff2427cbd",
+      "roles": [
+        "v05"
+      ],
+      "frozen_v05_source": false,
+      "live_differs_from_source": false
+    },
+    {
+      "path": "scripts/op030_split_c_v05_check.py",
+      "source": "/home/rlrk/IsaacLab/eval_runs/ur15_jb_harness_revision_20260907/scripts/op030_split_c_v05_check.py",
+      "bytes": 9627,
+      "sha256": "3cc37d1099e023645d31ac7c2022cd461b091ccf82b4168673ad95b674fa8c1a",
+      "roles": [
+        "v05"
+      ],
+      "frozen_v05_source": false,
+      "live_differs_from_source": false
+    },
+    {
+      "path": "scripts/op030_split_entry_clearance.py",
+      "source": "/home/rlrk/IsaacLab/eval_runs/ur15_jb_harness_revision_20260907/scripts/op030_split_entry_clearance.py",
+      "bytes": 9930,
+      "sha256": "daef6d0c9b20145c82496a8750d224d0e8b331873b96fbd1180b23d40132324a",
+      "roles": [
+        "v06"
+      ],
+      "frozen_v05_source": false,
+      "live_differs_from_source": false
+    },
+    {
+      "path": "scripts/op030_split_entry_slide.py",
+      "source": "/home/rlrk/IsaacLab/eval_runs/ur15_jb_harness_revision_20260907/scripts/op030_split_entry_slide.py",
+      "bytes": 7268,
+      "sha256": "2e7e954d62c3f71df453ae91deb7083b31ea0bb2e46b4af3a814990934fe21aa",
+      "roles": [
+        "v06"
+      ],
+      "frozen_v05_source": false,
+      "live_differs_from_source": false
+    },
+    {
+      "path": "scripts/op030_split_fastening_motion.py",
+      "source": "/home/rlrk/IsaacLab/eval_runs/ur15_jb_harness_revision_20260907/scripts/op030_split_fastening_motion.py",
+      "bytes": 20513,
+      "sha256": "3e9933eb95fecff1f8b965899083ea11ca42504764cf659e470d9d4bcb627323",
+      "roles": [
+        "v05"
+      ],
+      "frozen_v05_source": false,
+      "live_differs_from_source": false
+    },
+    {
+      "path": "scripts/op030_split_layout.py",
+      "source": "/home/rlrk/IsaacLab/eval_runs/ur15_jb_harness_revision_20260907/scripts/op030_split_layout.py",
+      "bytes": 20550,
+      "sha256": "4cacd47c8defc7782c5a0dc1902776eba6100dbe7fb61bd09c01e6d2880b02f2",
+      "roles": [
+        "v06"
+      ],
+      "frozen_v05_source": false,
+      "live_differs_from_source": false
+    },
+    {
+      "path": "scripts/op030_split_product_delta.py",
+      "source": "/home/rlrk/IsaacLab/eval_runs/ur15_jb_harness_revision_20260907/scripts/op030_split_product_delta.py",
+      "bytes": 12113,
+      "sha256": "f042b36c2e4d9460f4b1e788d79ce21139f49aa5cdb7456dbc066463c5c6f9cb",
+      "roles": [
+        "v05",
+        "v06"
+      ],
+      "frozen_v05_source": false,
+      "live_differs_from_source": false
+    },
+    {
+      "path": "scripts/op030_split_support_motion.py",
+      "source": "/home/rlrk/IsaacLab/eval_runs/ur15_jb_harness_revision_20260907/scripts/op030_split_support_motion.py",
+      "bytes": 4668,
+      "sha256": "994f27eda0f9c79a981a8711ce18b864015d2f293ea50f02fbedff5c2dd199ee",
+      "roles": [
+        "v05"
+      ],
+      "frozen_v05_source": false,
+      "live_differs_from_source": false
+    },
+    {
+      "path": "scripts/op030_split_tools.py",
+      "source": "/home/rlrk/IsaacLab/eval_runs/ur15_jb_harness_revision_20260907/scripts/op030_split_tools.py",
+      "bytes": 28508,
+      "sha256": "7b8d3cae180d62cb3891bb44c15b6682f2433e9d26f7d9cee7bff26b215ad77d",
+      "roles": [
+        "v05",
+        "v06"
+      ],
+      "frozen_v05_source": false,
+      "live_differs_from_source": false
+    },
+    {
+      "path": "scripts/op030_split_top_entry.py",
+      "source": "/home/rlrk/IsaacLab/eval_runs/ur15_jb_harness_revision_20260907/scripts/op030_split_top_entry.py",
+      "bytes": 10666,
+      "sha256": "5bfaa34ccb03a1bdc4a6a3707cbb245ee5e698d2e81d9d14cab06f3dbd7c02ec",
+      "roles": [
+        "v05",
+        "v06"
+      ],
+      "frozen_v05_source": false,
+      "live_differs_from_source": false
+    },
+    {
+      "path": "scripts/op030_split_top_entry_motion.py",
+      "source": "/home/rlrk/IsaacLab/eval_runs/ur15_jb_harness_revision_20260907/scripts/op030_split_top_entry_motion.py",
+      "bytes": 3559,
+      "sha256": "4c247c9ef24bfc6c683f1de2a5af038c888e14bfd17dfb46af4c735a6481cddc",
+      "roles": [
+        "v05"
+      ],
+      "frozen_v05_source": false,
+      "live_differs_from_source": false
+    },
+    {
+      "path": "scripts/op030_split_transfer_hardware.py",
+      "source": "/home/rlrk/IsaacLab/eval_runs/ur15_jb_harness_revision_20260907/scripts/op030_split_transfer_hardware.py",
+      "bytes": 8110,
+      "sha256": "211c8d50fd09d7aa2645f54a77e8bafa76ee58ea9ec55311444f407bfb41042a",
+      "roles": [
+        "v06"
+      ],
+      "frozen_v05_source": false,
+      "live_differs_from_source": false
+    },
+    {
+      "path": "scripts/op030_split_transport.py",
+      "source": "/home/rlrk/IsaacLab/eval_runs/ur15_jb_harness_revision_20260907/scripts/op030_split_transport.py",
+      "bytes": 24968,
+      "sha256": "4d0481ac6a97f60f74951b75dc438cd371a447dae87bb0aee3bbdbbcf354aaee",
+      "roles": [
+        "v06"
+      ],
+      "frozen_v05_source": false,
+      "live_differs_from_source": false
+    },
+    {
+      "path": "scripts/op030_split_wire.py",
+      "source": "/home/rlrk/IsaacLab/eval_runs/ur15_jb_harness_revision_20260907/scripts/op030_split_wire.py",
+      "bytes": 28533,
+      "sha256": "bd985b409a2d98027315ba28715eb4e3b9ea51cc9984314642041df9625290e9",
+      "roles": [
+        "v05",
+        "v06"
+      ],
+      "frozen_v05_source": false,
+      "live_differs_from_source": false
+    },
+    {
+      "path": "scripts/op030_split_wire_motion.py",
+      "source": "/home/rlrk/IsaacLab/eval_runs/ur15_jb_harness_revision_20260907/scripts/op030_split_wire_motion.py",
+      "bytes": 39370,
+      "sha256": "5855528266c3b90fe47e2760c6378355db7aeadac4d05b8bb8097634f15146db",
+      "roles": [
+        "v05",
+        "v06"
+      ],
+      "frozen_v05_source": false,
+      "live_differs_from_source": false
+    },
+    {
+      "path": "scripts/op030_support_motion_v04.py",
+      "source": "/home/rlrk/IsaacLab/eval_runs/ur15_jb_harness_revision_20260907/scripts/op030_support_motion_v04.py",
+      "bytes": 7166,
+      "sha256": "0b14c4a6df1d7c5bd4f6a3ff63ef72f1a6e8aee0895b5a731a742b9d45754bc8",
+      "roles": [
+        "v05"
+      ],
+      "frozen_v05_source": false,
+      "live_differs_from_source": false
+    },
+    {
+      "path": "scripts/op030_support_motion_v05.py",
+      "source": "/home/rlrk/IsaacLab/eval_runs/ur15_jb_harness_revision_20260907/scripts/op030_support_motion_v05.py",
+      "bytes": 6548,
+      "sha256": "b7d413891606349df6994b55dd59b8e81a7e0be267a4c96bc0ea429cc1ac4779",
+      "roles": [
+        "v05"
+      ],
+      "frozen_v05_source": false,
+      "live_differs_from_source": false
+    },
+    {
+      "path": "scripts/op030_support_plan_v04.py",
+      "source": "/home/rlrk/IsaacLab/eval_runs/ur15_jb_harness_revision_20260907/scripts/op030_support_plan_v04.py",
+      "bytes": 14618,
+      "sha256": "d30ee5f5ac64841f47fbdcb83329890d21237a33b3574409dcc8e064f39254f7",
+      "roles": [
+        "v05"
+      ],
+      "frozen_v05_source": false,
+      "live_differs_from_source": false
+    },
+    {
+      "path": "scripts/op030_support_plan_v05.py",
+      "source": "/home/rlrk/IsaacLab/eval_runs/ur15_jb_harness_revision_20260907/scripts/op030_support_plan_v05.py",
+      "bytes": 5613,
+      "sha256": "4ffa1e58725f153c75dc3202030bf5807ac8a542be57c530611c36d09e73dda7",
+      "roles": [
+        "v05"
+      ],
+      "frozen_v05_source": false,
+      "live_differs_from_source": false
+    },
+    {
+      "path": "scripts/op030_support_replay_v05.py",
+      "source": "/home/rlrk/IsaacLab/eval_runs/ur15_jb_harness_revision_20260907/scripts/op030_support_replay_v05.py",
+      "bytes": 20569,
+      "sha256": "633e9d42b91ddca3415dcb87e30631f3c0a540f4547d96a4c95559053f8de4af",
+      "roles": [
+        "v05"
+      ],
+      "frozen_v05_source": false,
+      "live_differs_from_source": false
+    },
+    {
+      "path": "scripts/package_op030_split_v05.py",
+      "source": "/home/rlrk/IsaacLab/eval_runs/ur15_jb_harness_revision_20260907/deliverables/UR15_JB_OP030_20260910_v05/scripts/package_op030_split_v05.py",
+      "bytes": 29135,
+      "sha256": "5725cc94305c55d6da3d5bb62c00df4629cce0c4d7b3690c10d207fc5b0c5994",
+      "roles": [
+        "v05"
+      ],
+      "frozen_v05_source": true,
+      "live_differs_from_source": false
+    },
+    {
+      "path": "scripts/package_op030_split_v06.py",
+      "source": "/home/rlrk/IsaacLab/eval_runs/ur15_jb_harness_revision_20260907/scripts/package_op030_split_v06.py",
+      "bytes": 29292,
+      "sha256": "f5f5c5e24eed001ddf806eb025bb17341624b746904ae2062c536454b9a296be",
+      "roles": [
+        "v06"
+      ],
+      "frozen_v05_source": false,
+      "live_differs_from_source": false
+    },
+    {
+      "path": "scripts/prepare_op030_split_v05.py",
+      "source": "/home/rlrk/IsaacLab/eval_runs/ur15_jb_harness_revision_20260907/scripts/prepare_op030_split_v05.py",
+      "bytes": 21344,
+      "sha256": "6f80c690153f4c42f6e06768da05333e65e114b9ce47fac93313ccc039d34dcc",
+      "roles": [
+        "v05"
+      ],
+      "frozen_v05_source": false,
+      "live_differs_from_source": false
+    },
+    {
+      "path": "scripts/prepare_op030_split_v06.py",
+      "source": "/home/rlrk/IsaacLab/eval_runs/ur15_jb_harness_revision_20260907/scripts/prepare_op030_split_v06.py",
+      "bytes": 23904,
+      "sha256": "007d7e6f22df45667c06b0fba55a2c0b2f1b7e1ecf74fc39e63e3069f2d6b1b1",
+      "roles": [
+        "v06"
+      ],
+      "frozen_v05_source": false,
+      "live_differs_from_source": false
+    },
+    {
+      "path": "scripts/probe_op030_front_integration_v05.py",
+      "source": "/home/rlrk/IsaacLab/eval_runs/ur15_jb_harness_revision_20260907/scripts/probe_op030_front_integration_v05.py",
+      "bytes": 13268,
+      "sha256": "c74ea6de86976dc35720462366fa30e06953379edc5445eec96e9203eeef5eb0",
+      "roles": [
+        "v05",
+        "v06"
+      ],
+      "frozen_v05_source": false,
+      "live_differs_from_source": false
+    },
+    {
+      "path": "scripts/probe_op030_split_a_payload.py",
+      "source": "/home/rlrk/IsaacLab/eval_runs/ur15_jb_harness_revision_20260907/scripts/probe_op030_split_a_payload.py",
+      "bytes": 14254,
+      "sha256": "684718885df039876c8c53744688160b45ce7b425969a60d9546bf082497eb9d",
+      "roles": [
+        "v05",
+        "v06"
+      ],
+      "frozen_v05_source": false,
+      "live_differs_from_source": false
+    },
+    {
+      "path": "scripts/probe_op030_split_v04_transfer.py",
+      "source": "/home/rlrk/IsaacLab/eval_runs/ur15_jb_harness_revision_20260907/scripts/probe_op030_split_v04_transfer.py",
+      "bytes": 18653,
+      "sha256": "91a003fcef70e8fc8ee139472ef946c13fbdddcb9e7b50fd54f47ece7773ffd6",
+      "roles": [
+        "v05",
+        "v06"
+      ],
+      "frozen_v05_source": false,
+      "live_differs_from_source": false
+    },
+    {
+      "path": "scripts/probe_op030_stagger_background_v06.py",
+      "source": "/home/rlrk/IsaacLab/eval_runs/ur15_jb_harness_revision_20260907/scripts/probe_op030_stagger_background_v06.py",
+      "bytes": 10630,
+      "sha256": "bde85e2b640a8ce2cbc11c0814ab4d775bf22e617411d9867fa7c87e9d41e19b",
+      "roles": [
+        "v06"
+      ],
+      "frozen_v05_source": false,
+      "live_differs_from_source": false
+    },
+    {
+      "path": "scripts/probe_op030_stagger_integration_v06.py",
+      "source": "/home/rlrk/IsaacLab/eval_runs/ur15_jb_harness_revision_20260907/scripts/probe_op030_stagger_integration_v06.py",
+      "bytes": 18448,
+      "sha256": "dfec8a58d3865b35a2d919b40eed99c2d7cc43db5fb1791222acad9101fe783a",
+      "roles": [
+        "v06"
+      ],
+      "frozen_v05_source": false,
+      "live_differs_from_source": false
+    },
+    {
+      "path": "scripts/probe_op030_v05_background.py",
+      "source": "/home/rlrk/IsaacLab/eval_runs/ur15_jb_harness_revision_20260907/scripts/probe_op030_v05_background.py",
+      "bytes": 10254,
+      "sha256": "8985364e1a42b487e45c32674d40dfdcca788b290d5c4927e761c01fef60c4b5",
+      "roles": [
+        "v05",
+        "v06"
+      ],
+      "frozen_v05_source": false,
+      "live_differs_from_source": false
+    },
+    {
+      "path": "scripts/probe_op030_v05_integration.py",
+      "source": "/home/rlrk/IsaacLab/eval_runs/ur15_jb_harness_revision_20260907/scripts/probe_op030_v05_integration.py",
+      "bytes": 18596,
+      "sha256": "76cb1443c28fa531e3b80dec0c2468e34888f3580e4ff76e18d23dc8362093c5",
+      "roles": [
+        "v05",
+        "v06"
+      ],
+      "frozen_v05_source": false,
+      "live_differs_from_source": false
+    },
+    {
+      "path": "scripts/render_op030_v02.py",
+      "source": "/home/rlrk/IsaacLab/eval_runs/ur15_jb_harness_revision_20260907/deliverables/UR15_JB_OP030_20260910_v05/scripts/render_op030_v02.py",
+      "bytes": 10744,
+      "sha256": "12c81396d4cf53844c387d9d1160b463f8ad66d57fb1591a975b020db2ddeede",
+      "roles": [
+        "v05"
+      ],
+      "frozen_v05_source": true,
+      "live_differs_from_source": false
+    },
+    {
+      "path": "scripts/replay_op030_motion.py",
+      "source": "/home/rlrk/IsaacLab/eval_runs/ur15_jb_harness_revision_20260907/scripts/replay_op030_motion.py",
+      "bytes": 14622,
+      "sha256": "4cafeb464bda27b613d90a6c7073195b2008f8f1e4a5fa43ad00e61f6f3bc7ef",
+      "roles": [
+        "v05",
+        "v06"
+      ],
+      "frozen_v05_source": false,
+      "live_differs_from_source": false
+    },
+    {
+      "path": "scripts/solve_op030_motion.py",
+      "source": "/home/rlrk/IsaacLab/eval_runs/ur15_jb_harness_revision_20260907/scripts/solve_op030_motion.py",
+      "bytes": 19764,
+      "sha256": "40375fe764e0502a7d4b9d69ec175ee5f211d3bb08ec8fb6eeae50d8c87cffc1",
+      "roles": [
+        "v05",
+        "v06"
+      ],
+      "frozen_v05_source": false,
+      "live_differs_from_source": false
+    },
+    {
+      "path": "scripts/split_tools_audit_a_bank_mesh_v04.py",
+      "source": "/home/rlrk/IsaacLab/eval_runs/ur15_jb_harness_revision_20260907/scripts/split_tools_audit_a_bank_mesh_v04.py",
+      "bytes": 13491,
+      "sha256": "efb9d75c27d88f4e26756bca69af80fad9112792408b99247fb5a0ed572da68e",
+      "roles": [
+        "v05"
+      ],
+      "frozen_v05_source": false,
+      "live_differs_from_source": false
+    },
+    {
+      "path": "scripts/split_tools_audit_c_front_v05.py",
+      "source": "/home/rlrk/IsaacLab/eval_runs/ur15_jb_harness_revision_20260907/scripts/split_tools_audit_c_front_v05.py",
+      "bytes": 14103,
+      "sha256": "da117e44d920c88062cf6fc42eee04f4b2b8d47971cb2e0640775ae484580814",
+      "roles": [
+        "v05"
+      ],
+      "frozen_v05_source": false,
+      "live_differs_from_source": false
+    },
+    {
+      "path": "scripts/split_tools_audit_support_ascent_v05.py",
+      "source": "/home/rlrk/IsaacLab/eval_runs/ur15_jb_harness_revision_20260907/scripts/split_tools_audit_support_ascent_v05.py",
+      "bytes": 7929,
+      "sha256": "1bb19b5cc3a44da28e470e01ebaa7ecb539646c741b962f99fac0e905ab17ac4",
+      "roles": [
+        "v05"
+      ],
+      "frozen_v05_source": false,
+      "live_differs_from_source": false
+    },
+    {
+      "path": "scripts/split_tools_c_top_entry_plan.py",
+      "source": "/home/rlrk/IsaacLab/eval_runs/ur15_jb_harness_revision_20260907/scripts/split_tools_c_top_entry_plan.py",
+      "bytes": 7845,
+      "sha256": "91748cc4db76d3b8d2335bf5886a0f3731b0ebb7bce0245e62861f2120aad6e4",
+      "roles": [
+        "v05"
+      ],
+      "frozen_v05_source": false,
+      "live_differs_from_source": false
+    },
+    {
+      "path": "scripts/split_tools_c_top_entry_replay.py",
+      "source": "/home/rlrk/IsaacLab/eval_runs/ur15_jb_harness_revision_20260907/scripts/split_tools_c_top_entry_replay.py",
+      "bytes": 12556,
+      "sha256": "34b75d67e86de96c905afb3445b4adf5f5fd29acba5a233931bcbd60a88ca474",
+      "roles": [
+        "v05"
+      ],
+      "frozen_v05_source": false,
+      "live_differs_from_source": false
+    },
+    {
+      "path": "scripts/transparent_enclosure.py",
+      "source": "/home/rlrk/IsaacLab/eval_runs/ur15_jb_harness_revision_20260907/deliverables/UR15_JB_OP030_20260910_v05/scripts/transparent_enclosure.py",
+      "bytes": 16515,
+      "sha256": "6893eb905c87fb07633f124ed1c377315ef3fe23f33af4648c303667256e8ed2",
+      "roles": [
+        "v05",
+        "v06"
+      ],
+      "frozen_v05_source": true,
+      "live_differs_from_source": false
+    },
+    {
+      "path": "scripts/verify_op030_delivery_v05.py",
+      "source": "/home/rlrk/IsaacLab/eval_runs/ur15_jb_harness_revision_20260907/scripts/verify_op030_delivery_v05.py",
+      "bytes": 12187,
+      "sha256": "8d9cddeba49899635d22d774241e41fb58f2fc32cf2a39ae23d69fd82748fd69",
+      "roles": [
+        "v05"
+      ],
+      "frozen_v05_source": false,
+      "live_differs_from_source": false
+    },
+    {
+      "path": "scripts/verify_op030_delivery_v06.py",
+      "source": "/home/rlrk/IsaacLab/eval_runs/ur15_jb_harness_revision_20260907/scripts/verify_op030_delivery_v06.py",
+      "bytes": 12187,
+      "sha256": "781dabbf6073985f99749ce7908fac1a83164b7f2494743dc53cb101c432583b",
+      "roles": [
+        "v06"
+      ],
+      "frozen_v05_source": false,
+      "live_differs_from_source": false
+    },
+    {
+      "path": "OP030_三ST工程・部品確認書_v05.md",
+      "source": "/home/rlrk/IsaacLab/eval_runs/ur15_jb_harness_revision_20260907/deliverables/UR15_JB_OP030_20260910_v05/OP030_三ST工程・部品確認書_v05.md",
+      "bytes": 18303,
+      "sha256": "45f5205d17d59f6376d9b5aacbc41222bd2df431757d50c27ef214e469386871",
+      "roles": [
+        "documentation_or_selected_evidence"
+      ],
+      "frozen_v05_source": true,
+      "live_differs_from_source": false
+    },
+    {
+      "path": "OP030_三ST工程・部品確認書_v06.md",
+      "source": "/home/rlrk/IsaacLab/eval_runs/ur15_jb_harness_revision_20260907/OP030_三ST工程・部品確認書_v06.md",
+      "bytes": 14357,
+      "sha256": "419277b518b36842b8a2587abf86213ffec15cf27ab77fef8d2459d617d6386d",
+      "roles": [
+        "documentation_or_selected_evidence"
+      ],
+      "frozen_v05_source": false,
+      "live_differs_from_source": false
+    },
+    {
+      "path": "analysis/OP030_v05_scope.md",
+      "source": "/home/rlrk/IsaacLab/eval_runs/ur15_jb_harness_revision_20260907/analysis/OP030_v05_scope.md",
+      "bytes": 6373,
+      "sha256": "d804b26dbcffcfcce2a385f3bbe629c5884f34720758f317022ea6c9dcb0737f",
+      "roles": [
+        "documentation_or_selected_evidence"
+      ],
+      "frozen_v05_source": false,
+      "live_differs_from_source": false
+    },
+    {
+      "path": "analysis/OP030_v06_scope.md",
+      "source": "/home/rlrk/IsaacLab/eval_runs/ur15_jb_harness_revision_20260907/analysis/OP030_v06_scope.md",
+      "bytes": 4162,
+      "sha256": "0b5fb98eb6490a0babae57b4beae525bc6faeeca3a5df544cc5a977e91a0c82a",
+      "roles": [
+        "documentation_or_selected_evidence"
+      ],
+      "frozen_v05_source": false,
+      "live_differs_from_source": false
+    },
+    {
+      "path": "analysis/op030_air_drop_v06_scope.md",
+      "source": "/home/rlrk/IsaacLab/eval_runs/ur15_jb_harness_revision_20260907/analysis/op030_air_drop_v06_scope.md",
+      "bytes": 3832,
+      "sha256": "e8b7482dcb0013028bd4a78a9baff548cfa24b253c9b8a93042b5cf1641159a7",
+      "roles": [
+        "documentation_or_selected_evidence"
+      ],
+      "frozen_v05_source": false,
+      "live_differs_from_source": false
+    },
+    {
+      "path": "analysis/op030_stagger_integration_v06_plan.md",
+      "source": "/home/rlrk/IsaacLab/eval_runs/ur15_jb_harness_revision_20260907/analysis/op030_stagger_integration_v06_plan.md",
+      "bytes": 4438,
+      "sha256": "04adf10a43abb13b1ecd35efe0f21ad993966bd5a28137de2a96c62995770a65",
+      "roles": [
+        "documentation_or_selected_evidence"
+      ],
+      "frozen_v05_source": false,
+      "live_differs_from_source": false
+    },
+    {
+      "path": "analysis/op040_process_inventory.md",
+      "source": "/home/rlrk/IsaacLab/eval_runs/ur15_jb_harness_revision_20260907/analysis/op040_process_inventory.md",
+      "bytes": 15505,
+      "sha256": "487ea35c26323fe2068d4e6c7d4e411318753298eddb854178264db002bad1d3",
+      "roles": [
+        "documentation_or_selected_evidence"
+      ],
+      "frozen_v05_source": false,
+      "live_differs_from_source": false
+    },
+    {
+      "path": "analysis/op030_b_stagger_free_12d_reuse.md",
+      "source": "/home/rlrk/IsaacLab/eval_runs/ur15_jb_harness_revision_20260907/analysis/op030_b_stagger_free_12d_reuse.md",
+      "bytes": 1991,
+      "sha256": "d3ba4ae733d8bf72475b572da7a0fee0df328d1e6ebba8a07c158fba8323e69c",
+      "roles": [
+        "documentation_or_selected_evidence"
+      ],
+      "frozen_v05_source": false,
+      "live_differs_from_source": false
+    },
+    {
+      "path": "audit/op030_split_delivery_v05.json",
+      "source": "/home/rlrk/IsaacLab/eval_runs/ur15_jb_harness_revision_20260907/audit/op030_split_delivery_v05.json",
+      "bytes": 1457,
+      "sha256": "ae219f69b9574f663b99e00bd050fe173e702dd613a59da3f297bd1976177274",
+      "roles": [
+        "documentation_or_selected_evidence"
+      ],
+      "frozen_v05_source": false,
+      "live_differs_from_source": false
+    },
+    {
+      "path": "audit/op030_support_delivery_v05.json",
+      "source": "/home/rlrk/IsaacLab/eval_runs/ur15_jb_harness_revision_20260907/audit/op030_support_delivery_v05.json",
+      "bytes": 6798,
+      "sha256": "e595057eac15ed3a67ab81c0223431766842c1a0e50b3ce4c5e8f8e0e0101cf5",
+      "roles": [
+        "documentation_or_selected_evidence"
+      ],
+      "frozen_v05_source": false,
+      "live_differs_from_source": false
+    },
+    {
+      "path": "audit/op030_c_front_delivery_v05.json",
+      "source": "/home/rlrk/IsaacLab/eval_runs/ur15_jb_harness_revision_20260907/audit/op030_c_front_delivery_v05.json",
+      "bytes": 8289,
+      "sha256": "95612e648db6011950d5e9f11b0548708bbac660ce6d92b4a1e888b438497885",
+      "roles": [
+        "documentation_or_selected_evidence"
+      ],
+      "frozen_v05_source": false,
+      "live_differs_from_source": false
+    },
+    {
+      "path": "audit/op030_c_front_feeders_v05_completion.json",
+      "source": "/home/rlrk/IsaacLab/eval_runs/ur15_jb_harness_revision_20260907/audit/op030_c_front_feeders_v05_completion.json",
+      "bytes": 19125,
+      "sha256": "c30f12aa64b35ab16aa9985dfdc27044ea443eed8438d90918fb266c0a382fc2",
+      "roles": [
+        "documentation_or_selected_evidence"
+      ],
+      "frozen_v05_source": false,
+      "live_differs_from_source": false
+    },
+    {
+      "path": "audit/op030_split_page_browser_v05/completion.json",
+      "source": "/home/rlrk/IsaacLab/eval_runs/ur15_jb_harness_revision_20260907/audit/op030_split_page_browser_v05/completion.json",
+      "bytes": 6740,
+      "sha256": "51c82252b857ae03724365e83ed1ea7e9ffee8fd2c6cada4edd55b80ecb47744",
+      "roles": [
+        "documentation_or_selected_evidence"
+      ],
+      "frozen_v05_source": false,
+      "live_differs_from_source": false
+    },
+    {
+      "path": "audit/op030_stagger_air_clearance_static_v06_completion.json",
+      "source": "/home/rlrk/IsaacLab/eval_runs/ur15_jb_harness_revision_20260907/audit/op030_stagger_air_clearance_static_v06_completion.json",
+      "bytes": 5358,
+      "sha256": "9b4a124db2d65edfa82ee6d5803de74e4c78e046a34bb238533b1faea39d1235",
+      "roles": [
+        "documentation_or_selected_evidence"
+      ],
+      "frozen_v05_source": false,
+      "live_differs_from_source": false
+    },
+    {
+      "path": "audit/op030_stagger_supported_static_v06_completion.json",
+      "source": "/home/rlrk/IsaacLab/eval_runs/ur15_jb_harness_revision_20260907/audit/op030_stagger_supported_static_v06_completion.json",
+      "bytes": 9382,
+      "sha256": "b1c99136a07f535939ccbbfd00ad0f680b2422023537d21bab7e37c8cf15b849",
+      "roles": [
+        "documentation_or_selected_evidence"
+      ],
+      "frozen_v05_source": false,
+      "live_differs_from_source": false
+    },
+    {
+      "path": "audit/op030_stagger_static_v06_completion.json",
+      "source": "/home/rlrk/IsaacLab/eval_runs/ur15_jb_harness_revision_20260907/audit/op030_stagger_static_v06_completion.json",
+      "bytes": 4243,
+      "sha256": "375af0d2fc1620967ab62098971bd4d8984e4cec6d7814123c745b6866d62efd",
+      "roles": [
+        "documentation_or_selected_evidence"
+      ],
+      "frozen_v05_source": false,
+      "live_differs_from_source": false
+    },
+    {
+      "path": "audit/op030_b_stagger_h1_yaw_01.json",
+      "source": "/home/rlrk/IsaacLab/eval_runs/ur15_jb_harness_revision_20260907/audit/op030_b_stagger_h1_yaw_01.json",
+      "bytes": 11028,
+      "sha256": "93b966e174d25baf0969a023a68f4fbacbd80a73b6211c799cf00eab5795e6ef",
+      "roles": [
+        "documentation_or_selected_evidence"
+      ],
+      "frozen_v05_source": false,
+      "live_differs_from_source": false
+    },
+    {
+      "path": "audit/op030_b_stagger_free_12d_smoke.json",
+      "source": "/home/rlrk/IsaacLab/eval_runs/ur15_jb_harness_revision_20260907/audit/op030_b_stagger_free_12d_smoke.json",
+      "bytes": 5694,
+      "sha256": "6ee891b2344926941676be011da395e0d18c0abca3830c275716d7aa6b60425b",
+      "roles": [
+        "documentation_or_selected_evidence"
+      ],
+      "frozen_v05_source": false,
+      "live_differs_from_source": false
+    },
+    {
+      "path": "inputs/v02_source/inputs/v01_source/data/op020_motion_profile.json",
+      "source": "/home/rlrk/IsaacLab/eval_runs/ur15_jb_harness_revision_20260907/inputs/v02_source/inputs/v01_source/data/op020_motion_profile.json",
+      "bytes": 8883,
+      "sha256": "bb8816882178b0247ad21ff13d32599c21bee514d1dd89a80ece31b309e32ecf",
+      "roles": [
+        "documentation_or_selected_evidence"
+      ],
+      "frozen_v05_source": false,
+      "live_differs_from_source": false
+    }
+  ],
+  "source_edges": [
+    [
+      "scripts/probe_op030_front_integration_v05.py",
+      "probe_op030_split_a_payload",
+      "scripts/probe_op030_split_a_payload.py"
+    ],
+    [
+      "scripts/probe_op030_front_integration_v05.py",
+      "probe_op030_split_v04_transfer",
+      "scripts/probe_op030_split_v04_transfer.py"
+    ],
+    [
+      "scripts/probe_op030_front_integration_v05.py",
+      "probe_op030_v05_integration",
+      "scripts/probe_op030_v05_integration.py"
+    ],
+    [
+      "scripts/probe_op030_front_integration_v05.py",
+      "op030_split_product_delta",
+      "scripts/op030_split_product_delta.py"
+    ],
+    [
+      "scripts/probe_op030_front_integration_v05.py",
+      "probe_op030_v05_background",
+      "scripts/probe_op030_v05_background.py"
+    ],
+    [
+      "scripts/probe_op030_v05_background.py",
+      "op030_definition",
+      "scripts/op030_definition.py"
+    ],
+    [
+      "scripts/probe_op030_v05_background.py",
+      "op030_split_ac_meshes",
+      "scripts/op030_split_ac_meshes.py"
+    ],
+    [
+      "scripts/probe_op030_v05_background.py",
+      "op030_split_b_check",
+      "scripts/op030_split_b_check.py"
+    ],
+    [
+      "scripts/probe_op030_v05_background.py",
+      "op030_split_b_v05",
+      "scripts/op030_split_b_v05.py"
+    ],
+    [
+      "scripts/probe_op030_v05_background.py",
+      "op030_split_product_delta",
+      "scripts/op030_split_product_delta.py"
+    ],
+    [
+      "scripts/probe_op030_v05_background.py",
+      "op030_split_wire_motion",
+      "scripts/op030_split_wire_motion.py"
+    ],
+    [
+      "scripts/op030_split_wire_motion.py",
+      "op020_jb_motion",
+      "scripts/op020_jb_motion.py"
+    ],
+    [
+      "scripts/op030_split_wire_motion.py",
+      "op030_cable",
+      "scripts/op030_cable.py"
+    ],
+    [
+      "scripts/op030_split_wire_motion.py",
+      "op030_definition",
+      "scripts/op030_definition.py"
+    ],
+    [
+      "scripts/op030_split_wire_motion.py",
+      "op030_fk_fast",
+      "scripts/op030_fk_fast.py"
+    ],
+    [
+      "scripts/op030_split_wire_motion.py",
+      "op030_motion",
+      "scripts/op030_motion.py"
+    ],
+    [
+      "scripts/op030_split_wire_motion.py",
+      "op030_split_top_entry",
+      "scripts/op030_split_top_entry.py"
+    ],
+    [
+      "scripts/op030_split_wire_motion.py",
+      "op030_split_wire",
+      "scripts/op030_split_wire.py"
+    ],
+    [
+      "scripts/op030_split_wire_motion.py",
+      "solve_op030_motion",
+      "scripts/solve_op030_motion.py"
+    ],
+    [
+      "scripts/solve_op030_motion.py",
+      "op020_jb_motion",
+      "scripts/op020_jb_motion.py"
+    ],
+    [
+      "scripts/solve_op030_motion.py",
+      "direct_cable",
+      "scripts/direct_cable.py"
+    ],
+    [
+      "scripts/solve_op030_motion.py",
+      "op030_cable",
+      "scripts/op030_cable.py"
+    ],
+    [
+      "scripts/solve_op030_motion.py",
+      "op030_definition",
+      "scripts/op030_definition.py"
+    ],
+    [
+      "scripts/solve_op030_motion.py",
+      "op030_motion",
+      "scripts/op030_motion.py"
+    ],
+    [
+      "scripts/solve_op030_motion.py",
+      "op030_fk_fast",
+      "scripts/op030_fk_fast.py"
+    ],
+    [
+      "scripts/solve_op030_motion.py",
+      "op030_fk_fast",
+      "scripts/op030_fk_fast.py"
+    ],
+    [
+      "scripts/solve_op030_motion.py",
+      "op030_branch_meshes",
+      "scripts/op030_branch_meshes.py"
+    ],
+    [
+      "scripts/solve_op030_motion.py",
+      "op030_branch_choice",
+      "scripts/op030_branch_choice.py"
+    ],
+    [
+      "scripts/solve_op030_motion.py",
+      "op030_branch_boxes",
+      "scripts/op030_branch_boxes.py"
+    ],
+    [
+      "scripts/solve_op030_motion.py",
+      "op020_jb_motion",
+      "scripts/op020_jb_motion.py"
+    ],
+    [
+      "scripts/solve_op030_motion.py",
+      "op030_free_paths",
+      "scripts/op030_free_paths.py"
+    ],
+    [
+      "scripts/op020_jb_motion.py",
+      "stocker10_motion",
+      "inputs/v02_source/scripts/stocker10_motion.py"
+    ],
+    [
+      "scripts/op020_jb_motion.py",
+      "jb_harness",
+      "scripts/jb_harness.py"
+    ],
+    [
+      "scripts/jb_harness.py",
+      "allocation_product",
+      "scripts/allocation_product.py"
+    ],
+    [
+      "scripts/jb_harness.py",
+      "allocation_product",
+      "scripts/allocation_product.py"
+    ],
+    [
+      "scripts/jb_harness.py",
+      "allocation_product",
+      "scripts/allocation_product.py"
+    ],
+    [
+      "scripts/jb_harness.py",
+      "allocation_product",
+      "scripts/allocation_product.py"
+    ],
+    [
+      "scripts/jb_harness.py",
+      "continuous_common",
+      "scripts/continuous_common.py"
+    ],
+    [
+      "scripts/continuous_common.py",
+      "build_op020",
+      "inputs/v02_source/inputs/v01_source/scripts/build_op020.py"
+    ],
+    [
+      "scripts/continuous_common.py",
+      "build_op020",
+      "inputs/v02_source/inputs/v01_source/scripts/build_op020.py"
+    ],
+    [
+      "scripts/continuous_common.py",
+      "build_op020",
+      "inputs/v02_source/inputs/v01_source/scripts/build_op020.py"
+    ],
+    [
+      "scripts/continuous_common.py",
+      "build_op020",
+      "inputs/v02_source/inputs/v01_source/scripts/build_op020.py"
+    ],
+    [
+      "scripts/continuous_common.py",
+      "build_cameras",
+      "inputs/v02_source/inputs/v01_source/scripts/build_cameras.py"
+    ],
+    [
+      "inputs/v02_source/inputs/v01_source/scripts/build_cameras.py",
+      "build_op010_blender",
+      "inputs/v02_source/inputs/v01_source/op010_base/scripts/build_op010_blender.py"
+    ],
+    [
+      "inputs/v02_source/inputs/v01_source/scripts/build_op020.py",
+      "build_cameras",
+      "inputs/v02_source/inputs/v01_source/scripts/build_cameras.py"
+    ],
+    [
+      "inputs/v02_source/inputs/v01_source/scripts/build_op020.py",
+      "build_op010_blender",
+      "inputs/v02_source/inputs/v01_source/op010_base/scripts/build_op010_blender.py"
+    ],
+    [
+      "scripts/allocation_product.py",
+      "continuous_common",
+      "scripts/continuous_common.py"
+    ],
+    [
+      "inputs/v02_source/scripts/stocker10_motion.py",
+      "op020_motion",
+      "inputs/v02_source/inputs/v01_source/scripts/op020_motion.py"
+    ],
+    [
+      "inputs/v02_source/scripts/stocker10_motion.py",
+      "probe_op010_grasp",
+      "inputs/v02_source/inputs/v01_source/op010_base/scripts/probe_op010_grasp.py"
+    ],
+    [
+      "inputs/v02_source/inputs/v01_source/op010_base/scripts/probe_op010_grasp.py",
+      "render_ur15_line",
+      "inputs/v02_source/inputs/v01_source/op010_base/original/render_ur15_line.py"
+    ],
+    [
+      "inputs/v02_source/inputs/v01_source/scripts/op020_motion.py",
+      "op010_revision",
+      "inputs/v02_source/inputs/v01_source/op010_base/scripts/op010_revision.py"
+    ],
+    [
+      "inputs/v02_source/inputs/v01_source/scripts/op020_motion.py",
+      "probe_op010_grasp",
+      "inputs/v02_source/inputs/v01_source/op010_base/scripts/probe_op010_grasp.py"
+    ],
+    [
+      "inputs/v02_source/inputs/v01_source/op010_base/scripts/op010_revision.py",
+      "probe_op010_grasp",
+      "inputs/v02_source/inputs/v01_source/op010_base/scripts/probe_op010_grasp.py"
+    ],
+    [
+      "inputs/v02_source/inputs/v01_source/op010_base/scripts/op010_revision.py",
+      "render_ur15_line",
+      "inputs/v02_source/inputs/v01_source/op010_base/original/render_ur15_line.py"
+    ],
+    [
+      "scripts/op030_branch_boxes.py",
+      "op030_definition",
+      "scripts/op030_definition.py"
+    ],
+    [
+      "scripts/op030_branch_choice.py",
+      "op030_motion",
+      "scripts/op030_motion.py"
+    ],
+    [
+      "scripts/op030_motion.py",
+      "op020_jb_motion",
+      "scripts/op020_jb_motion.py"
+    ],
+    [
+      "scripts/op030_motion.py",
+      "op030_definition",
+      "scripts/op030_definition.py"
+    ],
+    [
+      "scripts/op030_branch_meshes.py",
+      "op030_definition",
+      "scripts/op030_definition.py"
+    ],
+    [
+      "scripts/op030_fk_fast.py",
+      "op020_jb_motion",
+      "scripts/op020_jb_motion.py"
+    ],
+    [
+      "scripts/op030_cable.py",
+      "direct_cable",
+      "scripts/direct_cable.py"
+    ],
+    [
+      "scripts/op030_split_wire.py",
+      "op030_definition",
+      "scripts/op030_definition.py"
+    ],
+    [
+      "scripts/op030_split_wire.py",
+      "op030_split_top_entry",
+      "scripts/op030_split_top_entry.py"
+    ],
+    [
+      "scripts/op030_split_top_entry.py",
+      "op030_definition",
+      "scripts/op030_definition.py"
+    ],
+    [
+      "scripts/op030_split_top_entry.py",
+      "op030_split_tools",
+      "scripts/op030_split_tools.py"
+    ],
+    [
+      "scripts/op030_split_top_entry.py",
+      "op030_geometry",
+      "scripts/op030_geometry.py"
+    ],
+    [
+      "scripts/op030_split_top_entry.py",
+      "op030_geometry",
+      "scripts/op030_geometry.py"
+    ],
+    [
+      "scripts/op030_split_top_entry.py",
+      "op030_split_tools",
+      "scripts/op030_split_tools.py"
+    ],
+    [
+      "scripts/op030_split_top_entry.py",
+      "op030_geometry",
+      "scripts/op030_geometry.py"
+    ],
+    [
+      "scripts/op030_split_top_entry.py",
+      "op030_geometry",
+      "scripts/op030_geometry.py"
+    ],
+    [
+      "scripts/op030_split_top_entry.py",
+      "op030_split_wire",
+      "scripts/op030_split_wire.py"
+    ],
+    [
+      "scripts/op030_geometry.py",
+      "allocation_product",
+      "scripts/allocation_product.py"
+    ],
+    [
+      "scripts/op030_geometry.py",
+      "continuous_common",
+      "scripts/continuous_common.py"
+    ],
+    [
+      "scripts/op030_geometry.py",
+      "op020_jb_geometry",
+      "scripts/op020_jb_geometry.py"
+    ],
+    [
+      "scripts/op030_geometry.py",
+      "op030_definition",
+      "scripts/op030_definition.py"
+    ],
+    [
+      "scripts/op020_jb_geometry.py",
+      "allocation_product",
+      "scripts/allocation_product.py"
+    ],
+    [
+      "scripts/op020_jb_geometry.py",
+      "allocation_product",
+      "scripts/allocation_product.py"
+    ],
+    [
+      "scripts/op020_jb_geometry.py",
+      "jb_harness",
+      "scripts/jb_harness.py"
+    ],
+    [
+      "scripts/op020_jb_geometry.py",
+      "transparent_enclosure",
+      "scripts/transparent_enclosure.py"
+    ],
+    [
+      "scripts/transparent_enclosure.py",
+      "allocation_product",
+      "scripts/allocation_product.py"
+    ],
+    [
+      "scripts/transparent_enclosure.py",
+      "continuous_common",
+      "scripts/continuous_common.py"
+    ],
+    [
+      "scripts/op030_split_tools.py",
+      "allocation_product",
+      "scripts/allocation_product.py"
+    ],
+    [
+      "scripts/op030_split_tools.py",
+      "op020_jb_geometry",
+      "scripts/op020_jb_geometry.py"
+    ],
+    [
+      "scripts/op030_split_tools.py",
+      "op030_geometry",
+      "scripts/op030_geometry.py"
+    ],
+    [
+      "scripts/op030_split_product_delta.py",
+      "op030_split_ac_meshes",
+      "scripts/op030_split_ac_meshes.py"
+    ],
+    [
+      "scripts/op030_split_b_v05.py",
+      "op030_definition",
+      "scripts/op030_definition.py"
+    ],
+    [
+      "scripts/op030_split_b_v05.py",
+      "op030_fk_fast",
+      "scripts/op030_fk_fast.py"
+    ],
+    [
+      "scripts/op030_split_b_v05.py",
+      "op030_split_b_check",
+      "scripts/op030_split_b_check.py"
+    ],
+    [
+      "scripts/op030_split_b_v05.py",
+      "op030_split_b_plan",
+      "scripts/op030_split_b_plan.py"
+    ],
+    [
+      "scripts/op030_split_b_v05.py",
+      "op030_split_b_v04",
+      "scripts/op030_split_b_v04.py"
+    ],
+    [
+      "scripts/op030_split_b_v05.py",
+      "op030_split_wire_motion",
+      "scripts/op030_split_wire_motion.py"
+    ],
+    [
+      "scripts/op030_split_b_v05.py",
+      "replay_op030_motion",
+      "scripts/replay_op030_motion.py"
+    ],
+    [
+      "scripts/op030_split_b_v05.py",
+      "solve_op030_motion",
+      "scripts/solve_op030_motion.py"
+    ],
+    [
+      "scripts/op030_split_b_v05.py",
+      "op030_free_paths",
+      "scripts/op030_free_paths.py"
+    ],
+    [
+      "scripts/replay_op030_motion.py",
+      "direct_cable",
+      "scripts/direct_cable.py"
+    ],
+    [
+      "scripts/replay_op030_motion.py",
+      "op020_jb_motion",
+      "scripts/op020_jb_motion.py"
+    ],
+    [
+      "scripts/replay_op030_motion.py",
+      "op030_cable",
+      "scripts/op030_cable.py"
+    ],
+    [
+      "scripts/replay_op030_motion.py",
+      "op030_definition",
+      "scripts/op030_definition.py"
+    ],
+    [
+      "scripts/replay_op030_motion.py",
+      "op030_motion",
+      "scripts/op030_motion.py"
+    ],
+    [
+      "scripts/replay_op030_motion.py",
+      "solve_op030_motion",
+      "scripts/solve_op030_motion.py"
+    ],
+    [
+      "scripts/op030_split_b_v04.py",
+      "op030_definition",
+      "scripts/op030_definition.py"
+    ],
+    [
+      "scripts/op030_split_b_v04.py",
+      "op030_fk_fast",
+      "scripts/op030_fk_fast.py"
+    ],
+    [
+      "scripts/op030_split_b_v04.py",
+      "op030_motion",
+      "scripts/op030_motion.py"
+    ],
+    [
+      "scripts/op030_split_b_v04.py",
+      "op030_split_b_plan",
+      "scripts/op030_split_b_plan.py"
+    ],
+    [
+      "scripts/op030_split_b_v04.py",
+      "op030_split_wire_motion",
+      "scripts/op030_split_wire_motion.py"
+    ],
+    [
+      "scripts/op030_split_b_v04.py",
+      "solve_op030_motion",
+      "scripts/solve_op030_motion.py"
+    ],
+    [
+      "scripts/op030_split_b_plan.py",
+      "op030_definition",
+      "scripts/op030_definition.py"
+    ],
+    [
+      "scripts/op030_split_b_plan.py",
+      "op030_fk_fast",
+      "scripts/op030_fk_fast.py"
+    ],
+    [
+      "scripts/op030_split_b_plan.py",
+      "op030_motion",
+      "scripts/op030_motion.py"
+    ],
+    [
+      "scripts/op030_split_b_plan.py",
+      "op030_split_b_check",
+      "scripts/op030_split_b_check.py"
+    ],
+    [
+      "scripts/op030_split_b_plan.py",
+      "op030_split_wire_motion",
+      "scripts/op030_split_wire_motion.py"
+    ],
+    [
+      "scripts/op030_split_b_plan.py",
+      "solve_op030_motion",
+      "scripts/solve_op030_motion.py"
+    ],
+    [
+      "scripts/op030_split_b_plan.py",
+      "op030_free_paths",
+      "scripts/op030_free_paths.py"
+    ],
+    [
+      "scripts/op030_split_b_check.py",
+      "op030_branch_meshes",
+      "scripts/op030_branch_meshes.py"
+    ],
+    [
+      "scripts/op030_split_b_check.py",
+      "op030_definition",
+      "scripts/op030_definition.py"
+    ],
+    [
+      "scripts/op030_split_b_check.py",
+      "op030_motion",
+      "scripts/op030_motion.py"
+    ],
+    [
+      "scripts/op030_split_b_check.py",
+      "op030_split_wire_motion",
+      "scripts/op030_split_wire_motion.py"
+    ],
+    [
+      "scripts/op030_split_b_check.py",
+      "solve_op030_motion",
+      "scripts/solve_op030_motion.py"
+    ],
+    [
+      "scripts/probe_op030_v05_integration.py",
+      "op030_fixed_height_timeline_v04",
+      "scripts/op030_fixed_height_timeline_v04.py"
+    ],
+    [
+      "scripts/probe_op030_v05_integration.py",
+      "probe_op030_split_a_payload",
+      "scripts/probe_op030_split_a_payload.py"
+    ],
+    [
+      "scripts/op030_fixed_height_timeline_v04.py",
+      "op030_definition",
+      "scripts/op030_definition.py"
+    ],
+    [
+      "scripts/op030_fixed_height_timeline_v04.py",
+      "op030_split_b_v04_drawer",
+      "scripts/op030_split_b_v04_drawer.py"
+    ],
+    [
+      "scripts/probe_op030_split_v04_transfer.py",
+      "op030_definition",
+      "scripts/op030_definition.py"
+    ],
+    [
+      "scripts/probe_op030_split_v04_transfer.py",
+      "op030_fixed_height_timeline_v04",
+      "scripts/op030_fixed_height_timeline_v04.py"
+    ],
+    [
+      "scripts/probe_op030_split_v04_transfer.py",
+      "probe_op030_split_a_payload",
+      "scripts/probe_op030_split_a_payload.py"
+    ],
+    [
+      "scripts/probe_op030_split_v04_transfer.py",
+      "probe_op030_split_a_payload",
+      "scripts/probe_op030_split_a_payload.py"
+    ],
+    [
+      "scripts/probe_op030_split_v04_transfer.py",
+      "op030_split_b_v04_drawer",
+      "scripts/op030_split_b_v04_drawer.py"
+    ],
+    [
+      "scripts/probe_op030_split_v04_transfer.py",
+      "probe_op030_split_a_payload",
+      "scripts/probe_op030_split_a_payload.py"
+    ],
+    [
+      "scripts/split_tools_audit_c_front_v05.py",
+      "op030_c_refill_v05",
+      "scripts/op030_c_refill_v05.py"
+    ],
+    [
+      "scripts/split_tools_audit_c_front_v05.py",
+      "op030_definition",
+      "scripts/op030_definition.py"
+    ],
+    [
+      "scripts/split_tools_audit_c_front_v05.py",
+      "op030_split_c_front_v05",
+      "scripts/op030_split_c_front_v05.py"
+    ],
+    [
+      "scripts/split_tools_audit_c_front_v05.py",
+      "op030_split_c_v04",
+      "scripts/op030_split_c_v04.py"
+    ],
+    [
+      "scripts/split_tools_audit_c_front_v05.py",
+      "op030_split_c_v05",
+      "scripts/op030_split_c_v05.py"
+    ],
+    [
+      "scripts/split_tools_audit_c_front_v05.py",
+      "op030_split_tools",
+      "scripts/op030_split_tools.py"
+    ],
+    [
+      "scripts/op030_split_c_v05.py",
+      "op030_definition",
+      "scripts/op030_definition.py"
+    ],
+    [
+      "scripts/op030_split_c_v05.py",
+      "op030_split_c_v04",
+      "scripts/op030_split_c_v04.py"
+    ],
+    [
+      "scripts/op030_split_c_v04.py",
+      "op030_definition",
+      "scripts/op030_definition.py"
+    ],
+    [
+      "scripts/op030_split_c_v04.py",
+      "op030_fastener_operations_v04",
+      "scripts/op030_fastener_operations_v04.py"
+    ],
+    [
+      "scripts/op030_split_c_v04.py",
+      "op030_split_fastening_motion",
+      "scripts/op030_split_fastening_motion.py"
+    ],
+    [
+      "scripts/op030_split_c_v04.py",
+      "op030_split_top_entry",
+      "scripts/op030_split_top_entry.py"
+    ],
+    [
+      "scripts/op030_split_c_v04.py",
+      "op030_split_top_entry_motion",
+      "scripts/op030_split_top_entry_motion.py"
+    ],
+    [
+      "scripts/op030_split_c_v04.py",
+      "solve_op030_motion",
+      "scripts/solve_op030_motion.py"
+    ],
+    [
+      "scripts/op030_split_c_v04.py",
+      "split_tools_c_top_entry_replay",
+      "scripts/split_tools_c_top_entry_replay.py"
+    ],
+    [
+      "scripts/split_tools_c_top_entry_replay.py",
+      "op030_definition",
+      "scripts/op030_definition.py"
+    ],
+    [
+      "scripts/split_tools_c_top_entry_replay.py",
+      "op030_motion",
+      "scripts/op030_motion.py"
+    ],
+    [
+      "scripts/split_tools_c_top_entry_replay.py",
+      "op030_split_a_replay",
+      "scripts/op030_split_a_replay.py"
+    ],
+    [
+      "scripts/split_tools_c_top_entry_replay.py",
+      "op030_split_top_entry_motion",
+      "scripts/op030_split_top_entry_motion.py"
+    ],
+    [
+      "scripts/split_tools_c_top_entry_replay.py",
+      "solve_op030_motion",
+      "scripts/solve_op030_motion.py"
+    ],
+    [
+      "scripts/split_tools_c_top_entry_replay.py",
+      "split_tools_c_top_entry_plan",
+      "scripts/split_tools_c_top_entry_plan.py"
+    ],
+    [
+      "scripts/split_tools_c_top_entry_plan.py",
+      "op030_contacts",
+      "scripts/op030_contacts.py"
+    ],
+    [
+      "scripts/split_tools_c_top_entry_plan.py",
+      "op030_definition",
+      "scripts/op030_definition.py"
+    ],
+    [
+      "scripts/split_tools_c_top_entry_plan.py",
+      "op030_motion",
+      "scripts/op030_motion.py"
+    ],
+    [
+      "scripts/split_tools_c_top_entry_plan.py",
+      "op030_split_a_plan",
+      "scripts/op030_split_a_plan.py"
+    ],
+    [
+      "scripts/split_tools_c_top_entry_plan.py",
+      "op030_split_ac_meshes",
+      "scripts/op030_split_ac_meshes.py"
+    ],
+    [
+      "scripts/split_tools_c_top_entry_plan.py",
+      "op030_split_top_entry_motion",
+      "scripts/op030_split_top_entry_motion.py"
+    ],
+    [
+      "scripts/split_tools_c_top_entry_plan.py",
+      "solve_op030_motion",
+      "scripts/solve_op030_motion.py"
+    ],
+    [
+      "scripts/op030_split_top_entry_motion.py",
+      "op030_definition",
+      "scripts/op030_definition.py"
+    ],
+    [
+      "scripts/op030_split_top_entry_motion.py",
+      "op030_split_fastening_motion",
+      "scripts/op030_split_fastening_motion.py"
+    ],
+    [
+      "scripts/op030_split_top_entry_motion.py",
+      "op030_split_top_entry",
+      "scripts/op030_split_top_entry.py"
+    ],
+    [
+      "scripts/op030_split_fastening_motion.py",
+      "op030_definition",
+      "scripts/op030_definition.py"
+    ],
+    [
+      "scripts/op030_split_fastening_motion.py",
+      "op030_motion",
+      "scripts/op030_motion.py"
+    ],
+    [
+      "scripts/op030_split_fastening_motion.py",
+      "op030_split_tools",
+      "scripts/op030_split_tools.py"
+    ],
+    [
+      "scripts/op030_split_fastening_motion.py",
+      "op020_jb_motion",
+      "scripts/op020_jb_motion.py"
+    ],
+    [
+      "scripts/op030_split_fastening_motion.py",
+      "op020_jb_motion",
+      "scripts/op020_jb_motion.py"
+    ],
+    [
+      "scripts/op030_split_a_plan.py",
+      "op030_definition",
+      "scripts/op030_definition.py"
+    ],
+    [
+      "scripts/op030_split_a_plan.py",
+      "op030_fk_fast",
+      "scripts/op030_fk_fast.py"
+    ],
+    [
+      "scripts/op030_split_a_plan.py",
+      "op030_motion",
+      "scripts/op030_motion.py"
+    ],
+    [
+      "scripts/op030_split_a_plan.py",
+      "op030_split_support_motion",
+      "scripts/op030_split_support_motion.py"
+    ],
+    [
+      "scripts/op030_split_a_plan.py",
+      "op030_split_tools",
+      "scripts/op030_split_tools.py"
+    ],
+    [
+      "scripts/op030_split_a_plan.py",
+      "solve_op030_motion",
+      "scripts/solve_op030_motion.py"
+    ],
+    [
+      "scripts/op030_split_a_plan.py",
+      "op030_split_ac_meshes",
+      "scripts/op030_split_ac_meshes.py"
+    ],
+    [
+      "scripts/op030_split_support_motion.py",
+      "op030_definition",
+      "scripts/op030_definition.py"
+    ],
+    [
+      "scripts/op030_split_support_motion.py",
+      "op030_motion",
+      "scripts/op030_motion.py"
+    ],
+    [
+      "scripts/op030_split_support_motion.py",
+      "op030_split_tools",
+      "scripts/op030_split_tools.py"
+    ],
+    [
+      "scripts/op030_split_support_motion.py",
+      "op030_split_fastening_motion",
+      "scripts/op030_split_fastening_motion.py"
+    ],
+    [
+      "scripts/op030_split_support_motion.py",
+      "op030_split_fastening_motion",
+      "scripts/op030_split_fastening_motion.py"
+    ],
+    [
+      "scripts/op030_split_a_replay.py",
+      "op030_definition",
+      "scripts/op030_definition.py"
+    ],
+    [
+      "scripts/op030_split_a_replay.py",
+      "op030_fk_fast",
+      "scripts/op030_fk_fast.py"
+    ],
+    [
+      "scripts/op030_split_a_replay.py",
+      "op030_motion",
+      "scripts/op030_motion.py"
+    ],
+    [
+      "scripts/op030_split_a_replay.py",
+      "op030_split_a_plan",
+      "scripts/op030_split_a_plan.py"
+    ],
+    [
+      "scripts/op030_split_a_replay.py",
+      "op030_split_support_motion",
+      "scripts/op030_split_support_motion.py"
+    ],
+    [
+      "scripts/op030_split_a_replay.py",
+      "op030_split_tools",
+      "scripts/op030_split_tools.py"
+    ],
+    [
+      "scripts/op030_split_a_replay.py",
+      "replay_op030_motion",
+      "scripts/replay_op030_motion.py"
+    ],
+    [
+      "scripts/op030_split_a_replay.py",
+      "solve_op030_motion",
+      "scripts/solve_op030_motion.py"
+    ],
+    [
+      "scripts/op030_fastener_operations_v04.py",
+      "op030_definition",
+      "scripts/op030_definition.py"
+    ],
+    [
+      "scripts/op030_fastener_operations_v04.py",
+      "op030_motion",
+      "scripts/op030_motion.py"
+    ],
+    [
+      "scripts/op030_fastener_operations_v04.py",
+      "op030_split_fastening_motion",
+      "scripts/op030_split_fastening_motion.py"
+    ],
+    [
+      "scripts/op030_fastener_operations_v04.py",
+      "op030_split_tools",
+      "scripts/op030_split_tools.py"
+    ],
+    [
+      "scripts/op030_split_c_front_v05.py",
+      "op030_definition",
+      "scripts/op030_definition.py"
+    ],
+    [
+      "scripts/op030_split_c_front_v05.py",
+      "op030_split_c_v04",
+      "scripts/op030_split_c_v04.py"
+    ],
+    [
+      "scripts/op030_c_refill_v05.py",
+      "op030_definition",
+      "scripts/op030_definition.py"
+    ],
+    [
+      "scripts/op030_c_refill_v05.py",
+      "op030_split_c_v05",
+      "scripts/op030_split_c_v05.py"
+    ],
+    [
+      "scripts/op030_c_refill_v05.py",
+      "op030_split_c_v05_check",
+      "scripts/op030_split_c_v05_check.py"
+    ],
+    [
+      "scripts/op030_split_c_v05_check.py",
+      "op030_definition",
+      "scripts/op030_definition.py"
+    ],
+    [
+      "scripts/op030_split_c_v05_check.py",
+      "op030_split_ac_meshes",
+      "scripts/op030_split_ac_meshes.py"
+    ],
+    [
+      "scripts/op030_split_c_v05_check.py",
+      "op030_split_c_v04",
+      "scripts/op030_split_c_v04.py"
+    ],
+    [
+      "scripts/op030_split_c_v05_check.py",
+      "solve_op030_motion",
+      "scripts/solve_op030_motion.py"
+    ],
+    [
+      "scripts/op030_split_c_v05_check.py",
+      "split_tools_audit_a_bank_mesh_v04",
+      "scripts/split_tools_audit_a_bank_mesh_v04.py"
+    ],
+    [
+      "scripts/op030_split_c_v05_check.py",
+      "split_tools_c_top_entry_plan",
+      "scripts/split_tools_c_top_entry_plan.py"
+    ],
+    [
+      "scripts/op030_split_c_v05_check.py",
+      "op030_split_ac_meshes",
+      "scripts/op030_split_ac_meshes.py"
+    ],
+    [
+      "scripts/split_tools_audit_a_bank_mesh_v04.py",
+      "op030_definition",
+      "scripts/op030_definition.py"
+    ],
+    [
+      "scripts/split_tools_audit_a_bank_mesh_v04.py",
+      "op030_motion",
+      "scripts/op030_motion.py"
+    ],
+    [
+      "scripts/split_tools_audit_a_bank_mesh_v04.py",
+      "op030_split_ac_meshes",
+      "scripts/op030_split_ac_meshes.py"
+    ],
+    [
+      "scripts/split_tools_audit_a_bank_mesh_v04.py",
+      "op030_support_plan_v04",
+      "scripts/op030_support_plan_v04.py"
+    ],
+    [
+      "scripts/op030_support_plan_v04.py",
+      "op030_definition",
+      "scripts/op030_definition.py"
+    ],
+    [
+      "scripts/op030_support_plan_v04.py",
+      "op030_fk_fast",
+      "scripts/op030_fk_fast.py"
+    ],
+    [
+      "scripts/op030_support_plan_v04.py",
+      "op030_motion",
+      "scripts/op030_motion.py"
+    ],
+    [
+      "scripts/op030_support_plan_v04.py",
+      "op030_split_a_branches",
+      "scripts/op030_split_a_branches.py"
+    ],
+    [
+      "scripts/op030_support_plan_v04.py",
+      "op030_split_a_connect",
+      "scripts/op030_split_a_connect.py"
+    ],
+    [
+      "scripts/op030_support_plan_v04.py",
+      "op030_split_a_plan",
+      "scripts/op030_split_a_plan.py"
+    ],
+    [
+      "scripts/op030_support_plan_v04.py",
+      "op030_split_a_plan",
+      "scripts/op030_split_a_plan.py"
+    ],
+    [
+      "scripts/op030_support_plan_v04.py",
+      "op030_support_motion_v04",
+      "scripts/op030_support_motion_v04.py"
+    ],
+    [
+      "scripts/op030_support_plan_v04.py",
+      "solve_op030_motion",
+      "scripts/solve_op030_motion.py"
+    ],
+    [
+      "scripts/op030_support_motion_v04.py",
+      "op030_definition",
+      "scripts/op030_definition.py"
+    ],
+    [
+      "scripts/op030_support_motion_v04.py",
+      "op030_fastener_operations_v04",
+      "scripts/op030_fastener_operations_v04.py"
+    ],
+    [
+      "scripts/op030_support_motion_v04.py",
+      "op030_motion",
+      "scripts/op030_motion.py"
+    ],
+    [
+      "scripts/op030_support_motion_v04.py",
+      "op030_split_fastening_motion",
+      "scripts/op030_split_fastening_motion.py"
+    ],
+    [
+      "scripts/op030_support_motion_v04.py",
+      "op030_split_support_motion",
+      "scripts/op030_split_support_motion.py"
+    ],
+    [
+      "scripts/op030_split_a_connect.py",
+      "op030_definition",
+      "scripts/op030_definition.py"
+    ],
+    [
+      "scripts/op030_split_a_connect.py",
+      "op030_fk_fast",
+      "scripts/op030_fk_fast.py"
+    ],
+    [
+      "scripts/op030_split_a_connect.py",
+      "op030_free_paths",
+      "scripts/op030_free_paths.py"
+    ],
+    [
+      "scripts/op030_split_a_connect.py",
+      "op030_split_a_plan",
+      "scripts/op030_split_a_plan.py"
+    ],
+    [
+      "scripts/op030_split_a_branches.py",
+      "op030_definition",
+      "scripts/op030_definition.py"
+    ],
+    [
+      "scripts/op030_split_a_branches.py",
+      "op030_fk_fast",
+      "scripts/op030_fk_fast.py"
+    ],
+    [
+      "scripts/op030_split_a_branches.py",
+      "op030_motion",
+      "scripts/op030_motion.py"
+    ],
+    [
+      "scripts/op030_split_a_branches.py",
+      "op030_split_support_motion",
+      "scripts/op030_split_support_motion.py"
+    ],
+    [
+      "scripts/op030_split_a_branches.py",
+      "solve_op030_motion",
+      "scripts/solve_op030_motion.py"
+    ],
+    [
+      "scripts/split_tools_audit_support_ascent_v05.py",
+      "op030_definition",
+      "scripts/op030_definition.py"
+    ],
+    [
+      "scripts/split_tools_audit_support_ascent_v05.py",
+      "op030_support_motion_v05",
+      "scripts/op030_support_motion_v05.py"
+    ],
+    [
+      "scripts/split_tools_audit_support_ascent_v05.py",
+      "op030_support_plan_v04",
+      "scripts/op030_support_plan_v04.py"
+    ],
+    [
+      "scripts/op030_support_motion_v05.py",
+      "op030_motion",
+      "scripts/op030_motion.py"
+    ],
+    [
+      "scripts/op030_support_motion_v05.py",
+      "op030_support_motion_v04",
+      "scripts/op030_support_motion_v04.py"
+    ],
+    [
+      "scripts/op030_c_front_indexed_replay_v05.py",
+      "op030_c_front_roll_v05",
+      "scripts/op030_c_front_roll_v05.py"
+    ],
+    [
+      "scripts/op030_c_front_indexed_replay_v05.py",
+      "op030_c_refill_v05",
+      "scripts/op030_c_refill_v05.py"
+    ],
+    [
+      "scripts/op030_c_front_indexed_replay_v05.py",
+      "op030_c_replay_v05",
+      "scripts/op030_c_replay_v05.py"
+    ],
+    [
+      "scripts/op030_c_front_indexed_replay_v05.py",
+      "op030_definition",
+      "scripts/op030_definition.py"
+    ],
+    [
+      "scripts/op030_c_front_indexed_replay_v05.py",
+      "op030_fk_fast",
+      "scripts/op030_fk_fast.py"
+    ],
+    [
+      "scripts/op030_c_front_indexed_replay_v05.py",
+      "op030_split_c_v04",
+      "scripts/op030_split_c_v04.py"
+    ],
+    [
+      "scripts/op030_c_front_indexed_replay_v05.py",
+      "op030_split_c_v05",
+      "scripts/op030_split_c_v05.py"
+    ],
+    [
+      "scripts/op030_c_front_indexed_replay_v05.py",
+      "solve_op030_motion",
+      "scripts/solve_op030_motion.py"
+    ],
+    [
+      "scripts/op030_c_replay_v05.py",
+      "op030_c_refill_v05",
+      "scripts/op030_c_refill_v05.py"
+    ],
+    [
+      "scripts/op030_c_replay_v05.py",
+      "op030_definition",
+      "scripts/op030_definition.py"
+    ],
+    [
+      "scripts/op030_c_replay_v05.py",
+      "op030_split_c_v04",
+      "scripts/op030_split_c_v04.py"
+    ],
+    [
+      "scripts/op030_c_replay_v05.py",
+      "op030_split_c_v05",
+      "scripts/op030_split_c_v05.py"
+    ],
+    [
+      "scripts/op030_c_replay_v05.py",
+      "op030_split_c_v05_check",
+      "scripts/op030_split_c_v05_check.py"
+    ],
+    [
+      "scripts/op030_c_replay_v05.py",
+      "replay_op030_motion",
+      "scripts/replay_op030_motion.py"
+    ],
+    [
+      "scripts/op030_c_front_roll_v05.py",
+      "op030_c_cartesian_refill_v05",
+      "scripts/op030_c_cartesian_refill_v05.py"
+    ],
+    [
+      "scripts/op030_c_front_roll_v05.py",
+      "op030_c_front_replay_v05",
+      "scripts/op030_c_front_replay_v05.py"
+    ],
+    [
+      "scripts/op030_c_front_roll_v05.py",
+      "op030_c_refill_v05",
+      "scripts/op030_c_refill_v05.py"
+    ],
+    [
+      "scripts/op030_c_front_roll_v05.py",
+      "op030_c_replay_v05",
+      "scripts/op030_c_replay_v05.py"
+    ],
+    [
+      "scripts/op030_c_front_roll_v05.py",
+      "op030_definition",
+      "scripts/op030_definition.py"
+    ],
+    [
+      "scripts/op030_c_front_roll_v05.py",
+      "op030_fk_fast",
+      "scripts/op030_fk_fast.py"
+    ],
+    [
+      "scripts/op030_c_front_roll_v05.py",
+      "op030_split_c_v04",
+      "scripts/op030_split_c_v04.py"
+    ],
+    [
+      "scripts/op030_c_front_roll_v05.py",
+      "op030_split_c_v05",
+      "scripts/op030_split_c_v05.py"
+    ],
+    [
+      "scripts/op030_c_front_roll_v05.py",
+      "op030_split_c_v05_check",
+      "scripts/op030_split_c_v05_check.py"
+    ],
+    [
+      "scripts/op030_c_front_roll_v05.py",
+      "solve_op030_motion",
+      "scripts/solve_op030_motion.py"
+    ],
+    [
+      "scripts/op030_c_front_replay_v05.py",
+      "op030_c_refill_v05",
+      "scripts/op030_c_refill_v05.py"
+    ],
+    [
+      "scripts/op030_c_front_replay_v05.py",
+      "op030_c_replay_v05",
+      "scripts/op030_c_replay_v05.py"
+    ],
+    [
+      "scripts/op030_c_front_replay_v05.py",
+      "op030_definition",
+      "scripts/op030_definition.py"
+    ],
+    [
+      "scripts/op030_c_front_replay_v05.py",
+      "op030_fk_fast",
+      "scripts/op030_fk_fast.py"
+    ],
+    [
+      "scripts/op030_c_front_replay_v05.py",
+      "op030_split_c_v04",
+      "scripts/op030_split_c_v04.py"
+    ],
+    [
+      "scripts/op030_c_front_replay_v05.py",
+      "op030_split_c_v05",
+      "scripts/op030_split_c_v05.py"
+    ],
+    [
+      "scripts/op030_c_front_replay_v05.py",
+      "op030_split_c_v05_check",
+      "scripts/op030_split_c_v05_check.py"
+    ],
+    [
+      "scripts/op030_c_front_replay_v05.py",
+      "solve_op030_motion",
+      "scripts/solve_op030_motion.py"
+    ],
+    [
+      "scripts/op030_c_cartesian_refill_v05.py",
+      "op030_c_refill_v05",
+      "scripts/op030_c_refill_v05.py"
+    ],
+    [
+      "scripts/op030_c_cartesian_refill_v05.py",
+      "op030_definition",
+      "scripts/op030_definition.py"
+    ],
+    [
+      "scripts/op030_c_cartesian_refill_v05.py",
+      "op030_fk_fast",
+      "scripts/op030_fk_fast.py"
+    ],
+    [
+      "scripts/op030_c_cartesian_refill_v05.py",
+      "op030_split_c_v04",
+      "scripts/op030_split_c_v04.py"
+    ],
+    [
+      "scripts/op030_c_cartesian_refill_v05.py",
+      "op030_split_c_v05",
+      "scripts/op030_split_c_v05.py"
+    ],
+    [
+      "scripts/op030_c_cartesian_refill_v05.py",
+      "op030_split_c_v05_check",
+      "scripts/op030_split_c_v05_check.py"
+    ],
+    [
+      "scripts/op030_c_cartesian_refill_v05.py",
+      "solve_op030_motion",
+      "scripts/solve_op030_motion.py"
+    ],
+    [
+      "scripts/op030_split_b_v05_replay.py",
+      "op030_definition",
+      "scripts/op030_definition.py"
+    ],
+    [
+      "scripts/op030_split_b_v05_replay.py",
+      "op030_fk_fast",
+      "scripts/op030_fk_fast.py"
+    ],
+    [
+      "scripts/op030_split_b_v05_replay.py",
+      "op030_motion",
+      "scripts/op030_motion.py"
+    ],
+    [
+      "scripts/op030_split_b_v05_replay.py",
+      "op030_split_b_plan",
+      "scripts/op030_split_b_plan.py"
+    ],
+    [
+      "scripts/op030_split_b_v05_replay.py",
+      "op030_split_b_v04",
+      "scripts/op030_split_b_v04.py"
+    ],
+    [
+      "scripts/op030_split_b_v05_replay.py",
+      "op030_split_b_v05",
+      "scripts/op030_split_b_v05.py"
+    ],
+    [
+      "scripts/op030_split_b_v05_replay.py",
+      "replay_op030_motion",
+      "scripts/replay_op030_motion.py"
+    ],
+    [
+      "scripts/op030_split_b_v05_replay.py",
+      "solve_op030_motion",
+      "scripts/solve_op030_motion.py"
+    ],
+    [
+      "scripts/op030_support_replay_v05.py",
+      "op030_definition",
+      "scripts/op030_definition.py"
+    ],
+    [
+      "scripts/op030_support_replay_v05.py",
+      "op030_fk_fast",
+      "scripts/op030_fk_fast.py"
+    ],
+    [
+      "scripts/op030_support_replay_v05.py",
+      "op030_free_paths",
+      "scripts/op030_free_paths.py"
+    ],
+    [
+      "scripts/op030_support_replay_v05.py",
+      "op030_motion",
+      "scripts/op030_motion.py"
+    ],
+    [
+      "scripts/op030_support_replay_v05.py",
+      "op030_split_tools",
+      "scripts/op030_split_tools.py"
+    ],
+    [
+      "scripts/op030_support_replay_v05.py",
+      "op030_support_motion_v04",
+      "scripts/op030_support_motion_v04.py"
+    ],
+    [
+      "scripts/op030_support_replay_v05.py",
+      "op030_support_plan_v04",
+      "scripts/op030_support_plan_v04.py"
+    ],
+    [
+      "scripts/op030_support_replay_v05.py",
+      "op030_support_plan_v05",
+      "scripts/op030_support_plan_v05.py"
+    ],
+    [
+      "scripts/op030_support_replay_v05.py",
+      "replay_op030_motion",
+      "scripts/replay_op030_motion.py"
+    ],
+    [
+      "scripts/op030_support_replay_v05.py",
+      "solve_op030_motion",
+      "scripts/solve_op030_motion.py"
+    ],
+    [
+      "scripts/op030_support_replay_v05.py",
+      "split_tools_audit_a_bank_mesh_v04",
+      "scripts/split_tools_audit_a_bank_mesh_v04.py"
+    ],
+    [
+      "scripts/op030_support_plan_v05.py",
+      "op030_definition",
+      "scripts/op030_definition.py"
+    ],
+    [
+      "scripts/op030_support_plan_v05.py",
+      "op030_fk_fast",
+      "scripts/op030_fk_fast.py"
+    ],
+    [
+      "scripts/op030_support_plan_v05.py",
+      "op030_motion",
+      "scripts/op030_motion.py"
+    ],
+    [
+      "scripts/op030_support_plan_v05.py",
+      "op030_support_motion_v05",
+      "scripts/op030_support_motion_v05.py"
+    ],
+    [
+      "scripts/op030_support_plan_v05.py",
+      "op030_support_plan_v04",
+      "scripts/op030_support_plan_v04.py"
+    ],
+    [
+      "scripts/op030_support_plan_v05.py",
+      "op030_support_plan_v04",
+      "scripts/op030_support_plan_v04.py"
+    ],
+    [
+      "scripts/op030_support_plan_v05.py",
+      "solve_op030_motion",
+      "scripts/solve_op030_motion.py"
+    ],
+    [
+      "scripts/encode_op030_v02.py",
+      "encode_review_video",
+      "scripts/encode_review_video.py"
+    ],
+    [
+      "scripts/render_op030_v02.py",
+      "continuous_common",
+      "scripts/continuous_common.py"
+    ],
+    [
+      "scripts/package_op030_split_v05.py",
+      "encode_op030_v02",
+      "scripts/encode_op030_v02.py"
+    ],
+    [
+      "scripts/animate_op030_split_v05.py",
+      "continuous_common",
+      "scripts/continuous_common.py"
+    ],
+    [
+      "scripts/animate_op030_split_v05.py",
+      "op030_definition",
+      "scripts/op030_definition.py"
+    ],
+    [
+      "scripts/animate_op030_split_v05.py",
+      "op030_fixed_height_timeline_v04",
+      "scripts/op030_fixed_height_timeline_v04.py"
+    ],
+    [
+      "scripts/animate_op030_split_v05.py",
+      "op030_split_animation",
+      "scripts/op030_split_animation.py"
+    ],
+    [
+      "scripts/op030_split_animation.py",
+      "build_jb_op020",
+      "scripts/build_jb_op020.py"
+    ],
+    [
+      "scripts/op030_split_animation.py",
+      "continuous_common",
+      "scripts/continuous_common.py"
+    ],
+    [
+      "scripts/build_jb_op020.py",
+      "allocation_product",
+      "scripts/allocation_product.py"
+    ],
+    [
+      "scripts/build_jb_op020.py",
+      "build_allocation_review",
+      "scripts/build_allocation_review.py"
+    ],
+    [
+      "scripts/build_jb_op020.py",
+      "continuous_common",
+      "scripts/continuous_common.py"
+    ],
+    [
+      "scripts/build_jb_op020.py",
+      "jb_harness",
+      "scripts/jb_harness.py"
+    ],
+    [
+      "scripts/build_jb_op020.py",
+      "op020_jb_geometry",
+      "scripts/op020_jb_geometry.py"
+    ],
+    [
+      "scripts/build_allocation_review.py",
+      "allocation_product",
+      "scripts/allocation_product.py"
+    ],
+    [
+      "scripts/build_allocation_review.py",
+      "clean_appearance",
+      "scripts/clean_appearance.py"
+    ],
+    [
+      "scripts/build_allocation_review.py",
+      "continuous_common",
+      "scripts/continuous_common.py"
+    ],
+    [
+      "scripts/prepare_op030_split_v05.py",
+      "op030_definition",
+      "scripts/op030_definition.py"
+    ],
+    [
+      "scripts/prepare_op030_split_v05.py",
+      "op030_fixed_height_timeline_v04",
+      "scripts/op030_fixed_height_timeline_v04.py"
+    ],
+    [
+      "scripts/prepare_op030_split_v05.py",
+      "op030_split_wire_motion",
+      "scripts/op030_split_wire_motion.py"
+    ],
+    [
+      "scripts/op030_split_b_stagger_v06_identity.py",
+      "op030_definition",
+      "scripts/op030_definition.py"
+    ],
+    [
+      "scripts/op030_split_b_stagger_v06_identity.py",
+      "op030_split_b_plan",
+      "scripts/op030_split_b_plan.py"
+    ],
+    [
+      "scripts/op030_split_b_stagger_v06_identity.py",
+      "op030_split_b_stagger_v06",
+      "scripts/op030_split_b_stagger_v06.py"
+    ],
+    [
+      "scripts/op030_split_b_stagger_v06_identity.py",
+      "op030_split_b_v04",
+      "scripts/op030_split_b_v04.py"
+    ],
+    [
+      "scripts/op030_split_b_stagger_v06_identity.py",
+      "op030_split_wire",
+      "scripts/op030_split_wire.py"
+    ],
+    [
+      "scripts/op030_split_b_stagger_v06_identity.py",
+      "op030_split_wire_motion",
+      "scripts/op030_split_wire_motion.py"
+    ],
+    [
+      "scripts/op030_split_b_stagger_v06_identity.py",
+      "solve_op030_motion",
+      "scripts/solve_op030_motion.py"
+    ],
+    [
+      "scripts/solve_op030_motion.py",
+      "op020_jb_motion",
+      "scripts/op020_jb_motion.py"
+    ],
+    [
+      "scripts/solve_op030_motion.py",
+      "direct_cable",
+      "scripts/direct_cable.py"
+    ],
+    [
+      "scripts/solve_op030_motion.py",
+      "op030_cable",
+      "scripts/op030_cable.py"
+    ],
+    [
+      "scripts/solve_op030_motion.py",
+      "op030_definition",
+      "scripts/op030_definition.py"
+    ],
+    [
+      "scripts/solve_op030_motion.py",
+      "op030_motion",
+      "scripts/op030_motion.py"
+    ],
+    [
+      "scripts/solve_op030_motion.py",
+      "op030_fk_fast",
+      "scripts/op030_fk_fast.py"
+    ],
+    [
+      "scripts/solve_op030_motion.py",
+      "op030_fk_fast",
+      "scripts/op030_fk_fast.py"
+    ],
+    [
+      "scripts/solve_op030_motion.py",
+      "op030_branch_meshes",
+      "scripts/op030_branch_meshes.py"
+    ],
+    [
+      "scripts/solve_op030_motion.py",
+      "op030_branch_choice",
+      "scripts/op030_branch_choice.py"
+    ],
+    [
+      "scripts/solve_op030_motion.py",
+      "op030_branch_boxes",
+      "scripts/op030_branch_boxes.py"
+    ],
+    [
+      "scripts/solve_op030_motion.py",
+      "op020_jb_motion",
+      "scripts/op020_jb_motion.py"
+    ],
+    [
+      "scripts/solve_op030_motion.py",
+      "op030_free_paths",
+      "scripts/op030_free_paths.py"
+    ],
+    [
+      "scripts/op020_jb_motion.py",
+      "stocker10_motion",
+      "inputs/v02_source/scripts/stocker10_motion.py"
+    ],
+    [
+      "scripts/op020_jb_motion.py",
+      "jb_harness",
+      "scripts/jb_harness.py"
+    ],
+    [
+      "scripts/jb_harness.py",
+      "allocation_product",
+      "scripts/allocation_product.py"
+    ],
+    [
+      "scripts/jb_harness.py",
+      "allocation_product",
+      "scripts/allocation_product.py"
+    ],
+    [
+      "scripts/jb_harness.py",
+      "allocation_product",
+      "scripts/allocation_product.py"
+    ],
+    [
+      "scripts/jb_harness.py",
+      "allocation_product",
+      "scripts/allocation_product.py"
+    ],
+    [
+      "scripts/jb_harness.py",
+      "continuous_common",
+      "scripts/continuous_common.py"
+    ],
+    [
+      "scripts/continuous_common.py",
+      "build_op020",
+      "inputs/v02_source/inputs/v01_source/scripts/build_op020.py"
+    ],
+    [
+      "scripts/continuous_common.py",
+      "build_op020",
+      "inputs/v02_source/inputs/v01_source/scripts/build_op020.py"
+    ],
+    [
+      "scripts/continuous_common.py",
+      "build_op020",
+      "inputs/v02_source/inputs/v01_source/scripts/build_op020.py"
+    ],
+    [
+      "scripts/continuous_common.py",
+      "build_op020",
+      "inputs/v02_source/inputs/v01_source/scripts/build_op020.py"
+    ],
+    [
+      "scripts/continuous_common.py",
+      "build_cameras",
+      "inputs/v02_source/inputs/v01_source/scripts/build_cameras.py"
+    ],
+    [
+      "inputs/v02_source/inputs/v01_source/scripts/build_cameras.py",
+      "build_op010_blender",
+      "inputs/v02_source/inputs/v01_source/op010_base/scripts/build_op010_blender.py"
+    ],
+    [
+      "inputs/v02_source/inputs/v01_source/scripts/build_op020.py",
+      "build_cameras",
+      "inputs/v02_source/inputs/v01_source/scripts/build_cameras.py"
+    ],
+    [
+      "inputs/v02_source/inputs/v01_source/scripts/build_op020.py",
+      "build_op010_blender",
+      "inputs/v02_source/inputs/v01_source/op010_base/scripts/build_op010_blender.py"
+    ],
+    [
+      "scripts/allocation_product.py",
+      "continuous_common",
+      "scripts/continuous_common.py"
+    ],
+    [
+      "inputs/v02_source/scripts/stocker10_motion.py",
+      "op020_motion",
+      "inputs/v02_source/inputs/v01_source/scripts/op020_motion.py"
+    ],
+    [
+      "inputs/v02_source/scripts/stocker10_motion.py",
+      "probe_op010_grasp",
+      "inputs/v02_source/inputs/v01_source/op010_base/scripts/probe_op010_grasp.py"
+    ],
+    [
+      "inputs/v02_source/inputs/v01_source/op010_base/scripts/probe_op010_grasp.py",
+      "render_ur15_line",
+      "inputs/v02_source/inputs/v01_source/op010_base/original/render_ur15_line.py"
+    ],
+    [
+      "inputs/v02_source/inputs/v01_source/scripts/op020_motion.py",
+      "op010_revision",
+      "inputs/v02_source/inputs/v01_source/op010_base/scripts/op010_revision.py"
+    ],
+    [
+      "inputs/v02_source/inputs/v01_source/scripts/op020_motion.py",
+      "probe_op010_grasp",
+      "inputs/v02_source/inputs/v01_source/op010_base/scripts/probe_op010_grasp.py"
+    ],
+    [
+      "inputs/v02_source/inputs/v01_source/op010_base/scripts/op010_revision.py",
+      "probe_op010_grasp",
+      "inputs/v02_source/inputs/v01_source/op010_base/scripts/probe_op010_grasp.py"
+    ],
+    [
+      "inputs/v02_source/inputs/v01_source/op010_base/scripts/op010_revision.py",
+      "render_ur15_line",
+      "inputs/v02_source/inputs/v01_source/op010_base/original/render_ur15_line.py"
+    ],
+    [
+      "scripts/op030_branch_boxes.py",
+      "op030_definition",
+      "scripts/op030_definition.py"
+    ],
+    [
+      "scripts/op030_branch_choice.py",
+      "op030_motion",
+      "scripts/op030_motion.py"
+    ],
+    [
+      "scripts/op030_motion.py",
+      "op020_jb_motion",
+      "scripts/op020_jb_motion.py"
+    ],
+    [
+      "scripts/op030_motion.py",
+      "op030_definition",
+      "scripts/op030_definition.py"
+    ],
+    [
+      "scripts/op030_branch_meshes.py",
+      "op030_definition",
+      "scripts/op030_definition.py"
+    ],
+    [
+      "scripts/op030_fk_fast.py",
+      "op020_jb_motion",
+      "scripts/op020_jb_motion.py"
+    ],
+    [
+      "scripts/op030_cable.py",
+      "direct_cable",
+      "scripts/direct_cable.py"
+    ],
+    [
+      "scripts/op030_split_wire_motion.py",
+      "op020_jb_motion",
+      "scripts/op020_jb_motion.py"
+    ],
+    [
+      "scripts/op030_split_wire_motion.py",
+      "op030_cable",
+      "scripts/op030_cable.py"
+    ],
+    [
+      "scripts/op030_split_wire_motion.py",
+      "op030_definition",
+      "scripts/op030_definition.py"
+    ],
+    [
+      "scripts/op030_split_wire_motion.py",
+      "op030_fk_fast",
+      "scripts/op030_fk_fast.py"
+    ],
+    [
+      "scripts/op030_split_wire_motion.py",
+      "op030_motion",
+      "scripts/op030_motion.py"
+    ],
+    [
+      "scripts/op030_split_wire_motion.py",
+      "op030_split_top_entry",
+      "scripts/op030_split_top_entry.py"
+    ],
+    [
+      "scripts/op030_split_wire_motion.py",
+      "op030_split_wire",
+      "scripts/op030_split_wire.py"
+    ],
+    [
+      "scripts/op030_split_wire_motion.py",
+      "solve_op030_motion",
+      "scripts/solve_op030_motion.py"
+    ],
+    [
+      "scripts/op030_split_wire.py",
+      "op030_definition",
+      "scripts/op030_definition.py"
+    ],
+    [
+      "scripts/op030_split_wire.py",
+      "op030_split_top_entry",
+      "scripts/op030_split_top_entry.py"
+    ],
+    [
+      "scripts/op030_split_top_entry.py",
+      "op030_definition",
+      "scripts/op030_definition.py"
+    ],
+    [
+      "scripts/op030_split_top_entry.py",
+      "op030_split_tools",
+      "scripts/op030_split_tools.py"
+    ],
+    [
+      "scripts/op030_split_top_entry.py",
+      "op030_geometry",
+      "scripts/op030_geometry.py"
+    ],
+    [
+      "scripts/op030_split_top_entry.py",
+      "op030_geometry",
+      "scripts/op030_geometry.py"
+    ],
+    [
+      "scripts/op030_split_top_entry.py",
+      "op030_split_tools",
+      "scripts/op030_split_tools.py"
+    ],
+    [
+      "scripts/op030_split_top_entry.py",
+      "op030_geometry",
+      "scripts/op030_geometry.py"
+    ],
+    [
+      "scripts/op030_split_top_entry.py",
+      "op030_geometry",
+      "scripts/op030_geometry.py"
+    ],
+    [
+      "scripts/op030_split_top_entry.py",
+      "op030_split_wire",
+      "scripts/op030_split_wire.py"
+    ],
+    [
+      "scripts/op030_geometry.py",
+      "allocation_product",
+      "scripts/allocation_product.py"
+    ],
+    [
+      "scripts/op030_geometry.py",
+      "continuous_common",
+      "scripts/continuous_common.py"
+    ],
+    [
+      "scripts/op030_geometry.py",
+      "op020_jb_geometry",
+      "scripts/op020_jb_geometry.py"
+    ],
+    [
+      "scripts/op030_geometry.py",
+      "op030_definition",
+      "scripts/op030_definition.py"
+    ],
+    [
+      "scripts/op020_jb_geometry.py",
+      "allocation_product",
+      "scripts/allocation_product.py"
+    ],
+    [
+      "scripts/op020_jb_geometry.py",
+      "allocation_product",
+      "scripts/allocation_product.py"
+    ],
+    [
+      "scripts/op020_jb_geometry.py",
+      "jb_harness",
+      "scripts/jb_harness.py"
+    ],
+    [
+      "scripts/op020_jb_geometry.py",
+      "transparent_enclosure",
+      "scripts/transparent_enclosure.py"
+    ],
+    [
+      "scripts/transparent_enclosure.py",
+      "allocation_product",
+      "scripts/allocation_product.py"
+    ],
+    [
+      "scripts/transparent_enclosure.py",
+      "continuous_common",
+      "scripts/continuous_common.py"
+    ],
+    [
+      "scripts/op030_split_tools.py",
+      "allocation_product",
+      "scripts/allocation_product.py"
+    ],
+    [
+      "scripts/op030_split_tools.py",
+      "op020_jb_geometry",
+      "scripts/op020_jb_geometry.py"
+    ],
+    [
+      "scripts/op030_split_tools.py",
+      "op030_geometry",
+      "scripts/op030_geometry.py"
+    ],
+    [
+      "scripts/op030_split_b_v04.py",
+      "op030_definition",
+      "scripts/op030_definition.py"
+    ],
+    [
+      "scripts/op030_split_b_v04.py",
+      "op030_fk_fast",
+      "scripts/op030_fk_fast.py"
+    ],
+    [
+      "scripts/op030_split_b_v04.py",
+      "op030_motion",
+      "scripts/op030_motion.py"
+    ],
+    [
+      "scripts/op030_split_b_v04.py",
+      "op030_split_b_plan",
+      "scripts/op030_split_b_plan.py"
+    ],
+    [
+      "scripts/op030_split_b_v04.py",
+      "op030_split_wire_motion",
+      "scripts/op030_split_wire_motion.py"
+    ],
+    [
+      "scripts/op030_split_b_v04.py",
+      "solve_op030_motion",
+      "scripts/solve_op030_motion.py"
+    ],
+    [
+      "scripts/op030_split_b_plan.py",
+      "op030_definition",
+      "scripts/op030_definition.py"
+    ],
+    [
+      "scripts/op030_split_b_plan.py",
+      "op030_fk_fast",
+      "scripts/op030_fk_fast.py"
+    ],
+    [
+      "scripts/op030_split_b_plan.py",
+      "op030_motion",
+      "scripts/op030_motion.py"
+    ],
+    [
+      "scripts/op030_split_b_plan.py",
+      "op030_split_b_check",
+      "scripts/op030_split_b_check.py"
+    ],
+    [
+      "scripts/op030_split_b_plan.py",
+      "op030_split_wire_motion",
+      "scripts/op030_split_wire_motion.py"
+    ],
+    [
+      "scripts/op030_split_b_plan.py",
+      "solve_op030_motion",
+      "scripts/solve_op030_motion.py"
+    ],
+    [
+      "scripts/op030_split_b_plan.py",
+      "op030_free_paths",
+      "scripts/op030_free_paths.py"
+    ],
+    [
+      "scripts/op030_split_b_check.py",
+      "op030_branch_meshes",
+      "scripts/op030_branch_meshes.py"
+    ],
+    [
+      "scripts/op030_split_b_check.py",
+      "op030_definition",
+      "scripts/op030_definition.py"
+    ],
+    [
+      "scripts/op030_split_b_check.py",
+      "op030_motion",
+      "scripts/op030_motion.py"
+    ],
+    [
+      "scripts/op030_split_b_check.py",
+      "op030_split_wire_motion",
+      "scripts/op030_split_wire_motion.py"
+    ],
+    [
+      "scripts/op030_split_b_check.py",
+      "solve_op030_motion",
+      "scripts/solve_op030_motion.py"
+    ],
+    [
+      "scripts/op030_split_b_stagger_v06.py",
+      "op020_jb_motion",
+      "scripts/op020_jb_motion.py"
+    ],
+    [
+      "scripts/op030_split_b_stagger_v06.py",
+      "op030_definition",
+      "scripts/op030_definition.py"
+    ],
+    [
+      "scripts/op030_split_b_stagger_v06.py",
+      "op030_motion",
+      "scripts/op030_motion.py"
+    ],
+    [
+      "scripts/op030_split_b_stagger_v06.py",
+      "op030_split_b_v05",
+      "scripts/op030_split_b_v05.py"
+    ],
+    [
+      "scripts/op030_split_b_stagger_v06.py",
+      "op030_split_wire_motion",
+      "scripts/op030_split_wire_motion.py"
+    ],
+    [
+      "scripts/op030_split_b_v05.py",
+      "op030_definition",
+      "scripts/op030_definition.py"
+    ],
+    [
+      "scripts/op030_split_b_v05.py",
+      "op030_fk_fast",
+      "scripts/op030_fk_fast.py"
+    ],
+    [
+      "scripts/op030_split_b_v05.py",
+      "op030_split_b_check",
+      "scripts/op030_split_b_check.py"
+    ],
+    [
+      "scripts/op030_split_b_v05.py",
+      "op030_split_b_plan",
+      "scripts/op030_split_b_plan.py"
+    ],
+    [
+      "scripts/op030_split_b_v05.py",
+      "op030_split_b_v04",
+      "scripts/op030_split_b_v04.py"
+    ],
+    [
+      "scripts/op030_split_b_v05.py",
+      "op030_split_wire_motion",
+      "scripts/op030_split_wire_motion.py"
+    ],
+    [
+      "scripts/op030_split_b_v05.py",
+      "replay_op030_motion",
+      "scripts/replay_op030_motion.py"
+    ],
+    [
+      "scripts/op030_split_b_v05.py",
+      "solve_op030_motion",
+      "scripts/solve_op030_motion.py"
+    ],
+    [
+      "scripts/op030_split_b_v05.py",
+      "op030_free_paths",
+      "scripts/op030_free_paths.py"
+    ],
+    [
+      "scripts/replay_op030_motion.py",
+      "direct_cable",
+      "scripts/direct_cable.py"
+    ],
+    [
+      "scripts/replay_op030_motion.py",
+      "op020_jb_motion",
+      "scripts/op020_jb_motion.py"
+    ],
+    [
+      "scripts/replay_op030_motion.py",
+      "op030_cable",
+      "scripts/op030_cable.py"
+    ],
+    [
+      "scripts/replay_op030_motion.py",
+      "op030_definition",
+      "scripts/op030_definition.py"
+    ],
+    [
+      "scripts/replay_op030_motion.py",
+      "op030_motion",
+      "scripts/op030_motion.py"
+    ],
+    [
+      "scripts/replay_op030_motion.py",
+      "solve_op030_motion",
+      "scripts/solve_op030_motion.py"
+    ],
+    [
+      "scripts/op030_split_b_stagger_v06_survey.py",
+      "op030_definition",
+      "scripts/op030_definition.py"
+    ],
+    [
+      "scripts/op030_split_b_stagger_v06_survey.py",
+      "op030_split_b_plan",
+      "scripts/op030_split_b_plan.py"
+    ],
+    [
+      "scripts/op030_split_b_stagger_v06_survey.py",
+      "op030_split_b_stagger_v06",
+      "scripts/op030_split_b_stagger_v06.py"
+    ],
+    [
+      "scripts/op030_split_b_stagger_v06_survey.py",
+      "op030_split_wire_motion",
+      "scripts/op030_split_wire_motion.py"
+    ],
+    [
+      "scripts/op030_split_b_stagger_v06_export.py",
+      "build_op030_split_v03",
+      "scripts/build_op030_split_v03.py"
+    ],
+    [
+      "scripts/op030_split_b_stagger_v06_export.py",
+      "continuous_common",
+      "scripts/continuous_common.py"
+    ],
+    [
+      "scripts/op030_split_b_stagger_v06_export.py",
+      "op030_definition",
+      "scripts/op030_definition.py"
+    ],
+    [
+      "scripts/op030_split_b_stagger_v06_export.py",
+      "op030_split_transport",
+      "scripts/op030_split_transport.py"
+    ],
+    [
+      "scripts/op030_split_b_stagger_v06_export.py",
+      "op030_split_wire",
+      "scripts/op030_split_wire.py"
+    ],
+    [
+      "scripts/op030_split_transport.py",
+      "allocation_product",
+      "scripts/allocation_product.py"
+    ],
+    [
+      "scripts/op030_split_transport.py",
+      "op020_jb_geometry",
+      "scripts/op020_jb_geometry.py"
+    ],
+    [
+      "scripts/op030_split_transport.py",
+      "op030_geometry",
+      "scripts/op030_geometry.py"
+    ],
+    [
+      "scripts/op030_split_transport.py",
+      "op030_split_layout",
+      "scripts/op030_split_layout.py"
+    ],
+    [
+      "scripts/op030_split_transport.py",
+      "op030_split_top_entry",
+      "scripts/op030_split_top_entry.py"
+    ],
+    [
+      "scripts/op030_split_transport.py",
+      "op030_split_wire",
+      "scripts/op030_split_wire.py"
+    ],
+    [
+      "scripts/op030_split_transport.py",
+      "op030_split_tools",
+      "scripts/op030_split_tools.py"
+    ],
+    [
+      "scripts/op030_split_layout.py",
+      "allocation_product",
+      "scripts/allocation_product.py"
+    ],
+    [
+      "scripts/op030_split_layout.py",
+      "op020_jb_geometry",
+      "scripts/op020_jb_geometry.py"
+    ],
+    [
+      "scripts/build_op030_split_v03.py",
+      "build_allocation_review",
+      "scripts/build_allocation_review.py"
+    ],
+    [
+      "scripts/build_op030_split_v03.py",
+      "continuous_common",
+      "scripts/continuous_common.py"
+    ],
+    [
+      "scripts/build_op030_split_v03.py",
+      "op020_jb_geometry",
+      "scripts/op020_jb_geometry.py"
+    ],
+    [
+      "scripts/build_op030_split_v03.py",
+      "op030_definition",
+      "scripts/op030_definition.py"
+    ],
+    [
+      "scripts/build_op030_split_v03.py",
+      "op030_geometry",
+      "scripts/op030_geometry.py"
+    ],
+    [
+      "scripts/build_op030_split_v03.py",
+      "op030_split_entry_clearance",
+      "scripts/op030_split_entry_clearance.py"
+    ],
+    [
+      "scripts/build_op030_split_v03.py",
+      "op030_split_entry_slide",
+      "scripts/op030_split_entry_slide.py"
+    ],
+    [
+      "scripts/build_op030_split_v03.py",
+      "op030_split_layout",
+      "scripts/op030_split_layout.py"
+    ],
+    [
+      "scripts/build_op030_split_v03.py",
+      "op030_split_tools",
+      "scripts/op030_split_tools.py"
+    ],
+    [
+      "scripts/build_op030_split_v03.py",
+      "op030_split_top_entry",
+      "scripts/op030_split_top_entry.py"
+    ],
+    [
+      "scripts/build_op030_split_v03.py",
+      "op030_split_transfer_hardware",
+      "scripts/op030_split_transfer_hardware.py"
+    ],
+    [
+      "scripts/build_op030_split_v03.py",
+      "op030_split_transport",
+      "scripts/op030_split_transport.py"
+    ],
+    [
+      "scripts/build_op030_split_v03.py",
+      "op030_split_wire",
+      "scripts/op030_split_wire.py"
+    ],
+    [
+      "scripts/op030_split_transfer_hardware.py",
+      "op030_geometry",
+      "scripts/op030_geometry.py"
+    ],
+    [
+      "scripts/op030_split_entry_slide.py",
+      "op030_geometry",
+      "scripts/op030_geometry.py"
+    ],
+    [
+      "scripts/op030_split_entry_clearance.py",
+      "allocation_product",
+      "scripts/allocation_product.py"
+    ],
+    [
+      "scripts/op030_split_entry_clearance.py",
+      "op030_geometry",
+      "scripts/op030_geometry.py"
+    ],
+    [
+      "scripts/op030_split_entry_clearance.py",
+      "op030_split_layout",
+      "scripts/op030_split_layout.py"
+    ],
+    [
+      "scripts/build_allocation_review.py",
+      "allocation_product",
+      "scripts/allocation_product.py"
+    ],
+    [
+      "scripts/build_allocation_review.py",
+      "clean_appearance",
+      "scripts/clean_appearance.py"
+    ],
+    [
+      "scripts/build_allocation_review.py",
+      "continuous_common",
+      "scripts/continuous_common.py"
+    ],
+    [
+      "scripts/op030_split_b_stagger_v06_context.py",
+      "op030_definition",
+      "scripts/op030_definition.py"
+    ],
+    [
+      "scripts/op030_split_b_stagger_v06_context.py",
+      "op030_motion",
+      "scripts/op030_motion.py"
+    ],
+    [
+      "scripts/op030_split_b_stagger_v06_context.py",
+      "op030_split_b_plan",
+      "scripts/op030_split_b_plan.py"
+    ],
+    [
+      "scripts/op030_split_b_stagger_v06_context.py",
+      "op030_split_b_stagger_v06_plan",
+      "scripts/op030_split_b_stagger_v06_plan.py"
+    ],
+    [
+      "scripts/op030_split_b_stagger_v06_context.py",
+      "op030_split_b_v04",
+      "scripts/op030_split_b_v04.py"
+    ],
+    [
+      "scripts/op030_split_b_stagger_v06_context.py",
+      "op030_split_wire_motion",
+      "scripts/op030_split_wire_motion.py"
+    ],
+    [
+      "scripts/op030_split_b_stagger_v06_context.py",
+      "solve_op030_motion",
+      "scripts/solve_op030_motion.py"
+    ],
+    [
+      "scripts/op030_split_b_stagger_v06_plan.py",
+      "op030_definition",
+      "scripts/op030_definition.py"
+    ],
+    [
+      "scripts/op030_split_b_stagger_v06_plan.py",
+      "op030_split_b_check",
+      "scripts/op030_split_b_check.py"
+    ],
+    [
+      "scripts/op030_split_b_stagger_v06_plan.py",
+      "op030_split_b_plan",
+      "scripts/op030_split_b_plan.py"
+    ],
+    [
+      "scripts/op030_split_b_stagger_v06_plan.py",
+      "op030_split_b_stagger_v06",
+      "scripts/op030_split_b_stagger_v06.py"
+    ],
+    [
+      "scripts/op030_split_b_stagger_v06_plan.py",
+      "op030_split_b_v04",
+      "scripts/op030_split_b_v04.py"
+    ],
+    [
+      "scripts/op030_split_b_stagger_v06_plan.py",
+      "op030_split_b_v05",
+      "scripts/op030_split_b_v05.py"
+    ],
+    [
+      "scripts/op030_split_b_stagger_v06_plan.py",
+      "op030_split_wire_motion",
+      "scripts/op030_split_wire_motion.py"
+    ],
+    [
+      "scripts/op030_split_b_stagger_v06_plan.py",
+      "solve_op030_motion",
+      "scripts/solve_op030_motion.py"
+    ],
+    [
+      "scripts/build_op030_stagger_air_clearance_static_v06.py",
+      "build_op030_stagger_static_v06",
+      "scripts/build_op030_stagger_static_v06.py"
+    ],
+    [
+      "scripts/package_op030_split_v06.py",
+      "encode_op030_v02",
+      "scripts/encode_op030_v02.py"
+    ],
+    [
+      "scripts/encode_op030_v02.py",
+      "encode_review_video",
+      "scripts/encode_review_video.py"
+    ],
+    [
+      "scripts/animate_op030_split_v06.py",
+      "continuous_common",
+      "scripts/continuous_common.py"
+    ],
+    [
+      "scripts/animate_op030_split_v06.py",
+      "op030_definition",
+      "scripts/op030_definition.py"
+    ],
+    [
+      "scripts/animate_op030_split_v06.py",
+      "op030_fixed_height_timeline_v04",
+      "scripts/op030_fixed_height_timeline_v04.py"
+    ],
+    [
+      "scripts/animate_op030_split_v06.py",
+      "op030_split_animation",
+      "scripts/op030_split_animation.py"
+    ],
+    [
+      "scripts/op030_split_animation.py",
+      "build_jb_op020",
+      "scripts/build_jb_op020.py"
+    ],
+    [
+      "scripts/op030_split_animation.py",
+      "continuous_common",
+      "scripts/continuous_common.py"
+    ],
+    [
+      "scripts/build_jb_op020.py",
+      "allocation_product",
+      "scripts/allocation_product.py"
+    ],
+    [
+      "scripts/build_jb_op020.py",
+      "build_allocation_review",
+      "scripts/build_allocation_review.py"
+    ],
+    [
+      "scripts/build_jb_op020.py",
+      "continuous_common",
+      "scripts/continuous_common.py"
+    ],
+    [
+      "scripts/build_jb_op020.py",
+      "jb_harness",
+      "scripts/jb_harness.py"
+    ],
+    [
+      "scripts/build_jb_op020.py",
+      "op020_jb_geometry",
+      "scripts/op020_jb_geometry.py"
+    ],
+    [
+      "scripts/op030_fixed_height_timeline_v04.py",
+      "op030_definition",
+      "scripts/op030_definition.py"
+    ],
+    [
+      "scripts/op030_fixed_height_timeline_v04.py",
+      "op030_split_b_v04_drawer",
+      "scripts/op030_split_b_v04_drawer.py"
+    ],
+    [
+      "scripts/prepare_op030_split_v06.py",
+      "op030_definition",
+      "scripts/op030_definition.py"
+    ],
+    [
+      "scripts/prepare_op030_split_v06.py",
+      "op030_fixed_height_timeline_v04",
+      "scripts/op030_fixed_height_timeline_v04.py"
+    ],
+    [
+      "scripts/prepare_op030_split_v06.py",
+      "op030_split_wire_motion",
+      "scripts/op030_split_wire_motion.py"
+    ],
+    [
+      "scripts/probe_op030_stagger_background_v06.py",
+      "op030_split_b_check",
+      "scripts/op030_split_b_check.py"
+    ],
+    [
+      "scripts/probe_op030_stagger_background_v06.py",
+      "op030_split_product_delta",
+      "scripts/op030_split_product_delta.py"
+    ],
+    [
+      "scripts/probe_op030_stagger_background_v06.py",
+      "op030_split_wire_motion",
+      "scripts/op030_split_wire_motion.py"
+    ],
+    [
+      "scripts/probe_op030_stagger_background_v06.py",
+      "probe_op030_stagger_integration_v06",
+      "scripts/probe_op030_stagger_integration_v06.py"
+    ],
+    [
+      "scripts/probe_op030_stagger_background_v06.py",
+      "probe_op030_v05_background",
+      "scripts/probe_op030_v05_background.py"
+    ],
+    [
+      "scripts/probe_op030_stagger_background_v06.py",
+      "probe_op030_v05_integration",
+      "scripts/probe_op030_v05_integration.py"
+    ],
+    [
+      "scripts/probe_op030_stagger_background_v06.py",
+      "op030_split_b_stagger_v06",
+      "scripts/op030_split_b_stagger_v06.py"
+    ],
+    [
+      "scripts/probe_op030_v05_integration.py",
+      "op030_fixed_height_timeline_v04",
+      "scripts/op030_fixed_height_timeline_v04.py"
+    ],
+    [
+      "scripts/probe_op030_v05_integration.py",
+      "probe_op030_split_a_payload",
+      "scripts/probe_op030_split_a_payload.py"
+    ],
+    [
+      "scripts/probe_op030_v05_background.py",
+      "op030_definition",
+      "scripts/op030_definition.py"
+    ],
+    [
+      "scripts/probe_op030_v05_background.py",
+      "op030_split_ac_meshes",
+      "scripts/op030_split_ac_meshes.py"
+    ],
+    [
+      "scripts/probe_op030_v05_background.py",
+      "op030_split_b_check",
+      "scripts/op030_split_b_check.py"
+    ],
+    [
+      "scripts/probe_op030_v05_background.py",
+      "op030_split_b_v05",
+      "scripts/op030_split_b_v05.py"
+    ],
+    [
+      "scripts/probe_op030_v05_background.py",
+      "op030_split_product_delta",
+      "scripts/op030_split_product_delta.py"
+    ],
+    [
+      "scripts/probe_op030_v05_background.py",
+      "op030_split_wire_motion",
+      "scripts/op030_split_wire_motion.py"
+    ],
+    [
+      "scripts/op030_split_product_delta.py",
+      "op030_split_ac_meshes",
+      "scripts/op030_split_ac_meshes.py"
+    ],
+    [
+      "scripts/probe_op030_stagger_integration_v06.py",
+      "probe_op030_front_integration_v05",
+      "scripts/probe_op030_front_integration_v05.py"
+    ],
+    [
+      "scripts/probe_op030_stagger_integration_v06.py",
+      "probe_op030_split_a_payload",
+      "scripts/probe_op030_split_a_payload.py"
+    ],
+    [
+      "scripts/probe_op030_stagger_integration_v06.py",
+      "probe_op030_split_v04_transfer",
+      "scripts/probe_op030_split_v04_transfer.py"
+    ],
+    [
+      "scripts/probe_op030_stagger_integration_v06.py",
+      "probe_op030_v05_integration",
+      "scripts/probe_op030_v05_integration.py"
+    ],
+    [
+      "scripts/probe_op030_stagger_integration_v06.py",
+      "probe_op030_stagger_background_v06",
+      "scripts/probe_op030_stagger_background_v06.py"
+    ],
+    [
+      "scripts/probe_op030_split_v04_transfer.py",
+      "op030_definition",
+      "scripts/op030_definition.py"
+    ],
+    [
+      "scripts/probe_op030_split_v04_transfer.py",
+      "op030_fixed_height_timeline_v04",
+      "scripts/op030_fixed_height_timeline_v04.py"
+    ],
+    [
+      "scripts/probe_op030_split_v04_transfer.py",
+      "probe_op030_split_a_payload",
+      "scripts/probe_op030_split_a_payload.py"
+    ],
+    [
+      "scripts/probe_op030_split_v04_transfer.py",
+      "probe_op030_split_a_payload",
+      "scripts/probe_op030_split_a_payload.py"
+    ],
+    [
+      "scripts/probe_op030_split_v04_transfer.py",
+      "op030_split_b_v04_drawer",
+      "scripts/op030_split_b_v04_drawer.py"
+    ],
+    [
+      "scripts/probe_op030_split_v04_transfer.py",
+      "probe_op030_split_a_payload",
+      "scripts/probe_op030_split_a_payload.py"
+    ],
+    [
+      "scripts/probe_op030_front_integration_v05.py",
+      "probe_op030_split_a_payload",
+      "scripts/probe_op030_split_a_payload.py"
+    ],
+    [
+      "scripts/probe_op030_front_integration_v05.py",
+      "probe_op030_split_v04_transfer",
+      "scripts/probe_op030_split_v04_transfer.py"
+    ],
+    [
+      "scripts/probe_op030_front_integration_v05.py",
+      "probe_op030_v05_integration",
+      "scripts/probe_op030_v05_integration.py"
+    ],
+    [
+      "scripts/probe_op030_front_integration_v05.py",
+      "op030_split_product_delta",
+      "scripts/op030_split_product_delta.py"
+    ],
+    [
+      "scripts/probe_op030_front_integration_v05.py",
+      "probe_op030_v05_background",
+      "scripts/probe_op030_v05_background.py"
+    ],
+    [
+      "scripts/op030_split_b_stagger_v06_replay.py",
+      "op030_definition",
+      "scripts/op030_definition.py"
+    ],
+    [
+      "scripts/op030_split_b_stagger_v06_replay.py",
+      "op030_fk_fast",
+      "scripts/op030_fk_fast.py"
+    ],
+    [
+      "scripts/op030_split_b_stagger_v06_replay.py",
+      "op030_motion",
+      "scripts/op030_motion.py"
+    ],
+    [
+      "scripts/op030_split_b_stagger_v06_replay.py",
+      "op030_split_b_plan",
+      "scripts/op030_split_b_plan.py"
+    ],
+    [
+      "scripts/op030_split_b_stagger_v06_replay.py",
+      "op030_split_b_replay",
+      "scripts/op030_split_b_replay.py"
+    ],
+    [
+      "scripts/op030_split_b_stagger_v06_replay.py",
+      "op030_split_b_stagger_v06",
+      "scripts/op030_split_b_stagger_v06.py"
+    ],
+    [
+      "scripts/op030_split_b_stagger_v06_replay.py",
+      "op030_split_b_stagger_v06_connect",
+      "scripts/op030_split_b_stagger_v06_connect.py"
+    ],
+    [
+      "scripts/op030_split_b_stagger_v06_replay.py",
+      "op030_split_wire_motion",
+      "scripts/op030_split_wire_motion.py"
+    ],
+    [
+      "scripts/op030_split_b_stagger_v06_replay.py",
+      "replay_op030_motion",
+      "scripts/replay_op030_motion.py"
+    ],
+    [
+      "scripts/op030_split_b_stagger_v06_replay.py",
+      "solve_op030_motion",
+      "scripts/solve_op030_motion.py"
+    ],
+    [
+      "scripts/op030_split_b_stagger_v06_connect.py",
+      "op030_definition",
+      "scripts/op030_definition.py"
+    ],
+    [
+      "scripts/op030_split_b_stagger_v06_connect.py",
+      "op030_split_b_plan",
+      "scripts/op030_split_b_plan.py"
+    ],
+    [
+      "scripts/op030_split_b_stagger_v06_connect.py",
+      "op030_split_b_stagger_v06",
+      "scripts/op030_split_b_stagger_v06.py"
+    ],
+    [
+      "scripts/op030_split_b_stagger_v06_connect.py",
+      "op030_split_b_stagger_v06_plan",
+      "scripts/op030_split_b_stagger_v06_plan.py"
+    ],
+    [
+      "scripts/op030_split_b_stagger_v06_connect.py",
+      "op030_split_b_v04",
+      "scripts/op030_split_b_v04.py"
+    ],
+    [
+      "scripts/op030_split_b_stagger_v06_connect.py",
+      "op030_split_wire_motion",
+      "scripts/op030_split_wire_motion.py"
+    ],
+    [
+      "scripts/op030_split_b_stagger_v06_connect.py",
+      "replay_op030_motion",
+      "scripts/replay_op030_motion.py"
+    ],
+    [
+      "scripts/op030_split_b_stagger_v06_connect.py",
+      "op030_b_stagger_free_12d",
+      "scripts/op030_b_stagger_free_12d.py"
+    ],
+    [
+      "scripts/op030_b_stagger_free_12d.py",
+      "op030_free_paths",
+      "scripts/op030_free_paths.py"
+    ],
+    [
+      "scripts/op030_split_b_replay.py",
+      "op030_definition",
+      "scripts/op030_definition.py"
+    ],
+    [
+      "scripts/op030_split_b_replay.py",
+      "op030_fk_fast",
+      "scripts/op030_fk_fast.py"
+    ],
+    [
+      "scripts/op030_split_b_replay.py",
+      "op030_motion",
+      "scripts/op030_motion.py"
+    ],
+    [
+      "scripts/op030_split_b_replay.py",
+      "op030_split_b_plan",
+      "scripts/op030_split_b_plan.py"
+    ],
+    [
+      "scripts/op030_split_b_replay.py",
+      "op030_split_wire_motion",
+      "scripts/op030_split_wire_motion.py"
+    ],
+    [
+      "scripts/op030_split_b_replay.py",
+      "replay_op030_motion",
+      "scripts/replay_op030_motion.py"
+    ],
+    [
+      "scripts/op030_split_b_replay.py",
+      "solve_op030_motion",
+      "scripts/solve_op030_motion.py"
+    ],
+    [
+      "scripts/build_op030_stagger_supported_static_v06.py",
+      "build_op030_split_v04",
+      "scripts/build_op030_split_v04.py"
+    ],
+    [
+      "scripts/build_op030_stagger_supported_static_v06.py",
+      "build_op030_stagger_static_v06",
+      "scripts/build_op030_stagger_static_v06.py"
+    ],
+    [
+      "scripts/build_op030_split_v04.py",
+      "op030_split_layout",
+      "scripts/op030_split_layout.py"
+    ]
+  ],
+  "external_imports": [
+    "PIL",
+    "__future__",
+    "argparse",
+    "bisect",
+    "bmesh",
+    "bpy",
+    "collections",
+    "copy",
+    "dataclasses",
+    "datetime",
+    "difflib",
+    "fcl",
+    "functools",
+    "gzip",
+    "hashlib",
+    "html",
+    "importlib",
+    "itertools",
+    "json",
+    "math",
+    "mathutils",
+    "numpy",
+    "ompl",
+    "pathlib",
+    "pyrender",
+    "re",
+    "scipy",
+    "shutil",
+    "struct",
+    "subprocess",
+    "sys",
+    "tempfile",
+    "time",
+    "trimesh",
+    "types",
+    "typing",
+    "urllib",
+    "zipfile"
+  ],
+  "excluded_artifact_anchors": [
+    {
+      "path": "audit/op030_stagger_air_clearance_static_v06.json",
+      "source": "/home/rlrk/IsaacLab/eval_runs/ur15_jb_harness_revision_20260907/audit/op030_stagger_air_clearance_static_v06.json",
+      "bytes": 2298145,
+      "sha256": "cb0dd4d7bc7fef08b3b4b3132766898593efd41478ad4eb221e6a626a5407711",
+      "roles": [
+        "documentation_or_selected_evidence"
+      ],
+      "frozen_v05_source": false,
+      "live_differs_from_source": false,
+      "reason": "over existing hook size limit"
+    },
+    {
+      "path": "UR15_JB_OP030_split_v05.blend",
+      "source": "/home/rlrk/IsaacLab/eval_runs/ur15_jb_harness_revision_20260907/UR15_JB_OP030_split_v05.blend",
+      "bytes": 176278316,
+      "sha256": "985c7edf11a80f0e1e15ba5176b3040b9d733c30315ae6b732b4c359239afc3d",
+      "reason": "local artifact; excluded from Git source checkpoint"
+    },
+    {
+      "path": "data/op030_split_animation_v05.npz",
+      "source": "/home/rlrk/IsaacLab/eval_runs/ur15_jb_harness_revision_20260907/data/op030_split_animation_v05.npz",
+      "bytes": 45009978,
+      "sha256": "fbbb64e71cf068c9e6386c170c21932ad225cbcf84cf09e1b2b9a90b81155ebb",
+      "reason": "local artifact; excluded from Git source checkpoint"
+    },
+    {
+      "path": "data/op030_split_a_motion_v05.npz",
+      "source": "/home/rlrk/IsaacLab/eval_runs/ur15_jb_harness_revision_20260907/data/op030_split_a_motion_v05.npz",
+      "bytes": 9857656,
+      "sha256": "e56b610e5ee4642b16c03f7fb321936e3d1d11183218fe3fd0dbd3851dcc6c96",
+      "reason": "local artifact; excluded from Git source checkpoint"
+    },
+    {
+      "path": "data/op030_split_b_motion_v05.npz",
+      "source": "/home/rlrk/IsaacLab/eval_runs/ur15_jb_harness_revision_20260907/data/op030_split_b_motion_v05.npz",
+      "bytes": 15472372,
+      "sha256": "923ae01512f2d63e1ac57237b044316cce2b0fadba3701940b17f68e0dd2d1c6",
+      "reason": "local artifact; excluded from Git source checkpoint"
+    },
+    {
+      "path": "data/op030_split_c_front_indexed_motion_v05.npz",
+      "source": "/home/rlrk/IsaacLab/eval_runs/ur15_jb_harness_revision_20260907/data/op030_split_c_front_indexed_motion_v05.npz",
+      "bytes": 4760948,
+      "sha256": "238c6b233871f25c0e95113b0d4d92124a569218ab8a40926773637e1ad96e38",
+      "reason": "local artifact; excluded from Git source checkpoint"
+    },
+    {
+      "path": "analysis/op030_stagger_air_clearance_static_v06.blend",
+      "source": "/home/rlrk/IsaacLab/eval_runs/ur15_jb_harness_revision_20260907/analysis/op030_stagger_air_clearance_static_v06.blend",
+      "bytes": 54117497,
+      "sha256": "0de256bcfa2c377ac3c5048d0ae2d3a88ae057e7b6dd501ae58da821530f46d6",
+      "reason": "local artifact; excluded from Git source checkpoint"
+    },
+    {
+      "path": "deliverables/UR15_JB_OP030_20260910_v05/DELIVERY_SHA256.json",
+      "source": "/home/rlrk/IsaacLab/eval_runs/ur15_jb_harness_revision_20260907/deliverables/UR15_JB_OP030_20260910_v05/DELIVERY_SHA256.json",
+      "bytes": 13311,
+      "sha256": "5702342b53e04f39a8998b875bb51a506de26c3c837ccf3d7d9391c193baba8b",
+      "reason": "local artifact; excluded from Git source checkpoint"
+    },
+    {
+      "source": "/home/rlrk/Downloads/UR15_JB_OP030_20260910_v05.zip",
+      "bytes": 632161327,
+      "sha256": "ee592e8c33faf3c596259419c48127c36cf3c5ee4311b61a49789241ef49eb87",
+      "reason": "delivered local ZIP; excluded from Git"
+    }
+  ],
+  "live_frozen_conflicts": [],
+  "total_files": 131,
+  "total_bytes": 1792488
+}

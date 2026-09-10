@@ -1,0 +1,241 @@
+{
+  "observed_at": "2026-09-10T18:01:55.738228+09:00",
+  "native": "analysis/op030_stagger_supported_static_v06.blend",
+  "native_sha256": "e197a90c8c804425ee53db98b267ef4f052d945c8d4c7ae92f81e5bc5aef6311",
+  "source": "analysis/op030_stagger_static_v06.blend",
+  "source_sha256": "afb6428ae60ff87d845badaf34106227d04873b1b01940d131d39bdd6d220f59",
+  "evidence_basis": "Saved source/native comparison, evaluated surfaces and FCL raw output; auxiliary model check",
+  "references": [
+    {
+      "path": "audit/op030_stagger_supported_static_v06_geometry.json",
+      "sha256": "b84daa067d9ec0b448708dd9414ed69d5734e24a99a966695ff7bba4bd82a19b"
+    },
+    {
+      "path": "audit/op030_stagger_supported_static_v06_raw_check.json",
+      "sha256": "60b4f2b5164fdc8b7ab33b553055c3f24e6deddbcd5424ba5598b5b0652807a9"
+    },
+    {
+      "path": "audit/op030_stagger_supported_static_v06_readback.json",
+      "sha256": "c8aa2bb5f65cdf916b772f99d8a834d81148fc883c19984acaa527922fb096ee"
+    },
+    {
+      "path": "audit/op030_stagger_static_v06_completion.json",
+      "sha256": "375af0d2fc1620967ab62098971bd4d8984e4cec6d7814123c745b6866d62efd"
+    },
+    {
+      "path": "analysis/op030_stagger_support_v06_scope.md",
+      "sha256": "0ea5728a90a9107e61abf254392d83c78a0a044356f09efd8d53ad8537f2eab0"
+    },
+    {
+      "path": "audit/op030_stagger_support_v06_components.json",
+      "sha256": "9ad85b17e8ad735124db4e3f5c712d759b2dc6f624c3839254e2734b7bfc757e"
+    }
+  ],
+  "changed_mesh_count": 9,
+  "unchanged_object_count": 9562,
+  "added_objects": 0,
+  "added_equipment": 0,
+  "upper_work_geometry_unchanged": true,
+  "controller_body_and_hose_unchanged": true,
+  "original_stagger_interfaces_retained": "Right air-main branch and original grouted baseplate/floor unchanged",
+  "fixed_pair_count": 333,
+  "fcl_queries": 28,
+  "changed_mesh_count_in_check": 9,
+  "environment_mesh_count": 33,
+  "omitted_fixed_aabb_separated": 7197,
+  "raw_contact_count": 21,
+  "new_floor_support_pair_count": 5,
+  "retained_construction_pair_count": 16,
+  "unexpected_fixed_intersection_count": 0,
+  "classified_pairs": [
+    {
+      "first": "OP030B__source_0693_m0120_p01",
+      "second": "OP030B__source_0693_m0120_p00",
+      "role": "Original controller base/body or unchanged trim construction interface",
+      "original_pair_intersected": true
+    },
+    {
+      "first": "OP030B__source_0693_m0120_p01",
+      "second": "OP030B__source_0693_m0120_p02",
+      "role": "Original controller base/body or unchanged trim construction interface",
+      "original_pair_intersected": true
+    },
+    {
+      "first": "OP030B__source_0693_m0120_p01",
+      "second": "OP030B__source_0693_m0120_p03",
+      "role": "Original controller base/body or unchanged trim construction interface",
+      "original_pair_intersected": true
+    },
+    {
+      "first": "OP030B__source_0693_m0120_p01",
+      "second": "source_0001_m0001_p00",
+      "role": "Measured new support bottom / unchanged floor plane",
+      "original_pair_intersected": false
+    },
+    {
+      "first": "OP030B_wire_supply_foot_-1.94_-1.28",
+      "second": "source_0001_m0001_p00",
+      "role": "Measured new support bottom / unchanged floor plane",
+      "original_pair_intersected": false
+    },
+    {
+      "first": "OP030B_wire_supply_foot_-1.94_-2.12",
+      "second": "source_0001_m0001_p00",
+      "role": "Measured new support bottom / unchanged floor plane",
+      "original_pair_intersected": false
+    },
+    {
+      "first": "OP030B_wire_supply_foot_-2.22_-1.28",
+      "second": "source_0001_m0001_p00",
+      "role": "Measured new support bottom / unchanged floor plane",
+      "original_pair_intersected": false
+    },
+    {
+      "first": "OP030B_wire_supply_foot_-2.22_-2.12",
+      "second": "source_0001_m0001_p00",
+      "role": "Measured new support bottom / unchanged floor plane",
+      "original_pair_intersected": false
+    },
+    {
+      "first": "OP030B_wire_supply_leg_-1.94_-1.28",
+      "second": "OP030B_wire_supply__OP030_supply_base_crossmember_-1.27",
+      "role": "Original upright/crossmember or attached air-service support construction interface",
+      "original_pair_intersected": true
+    },
+    {
+      "first": "OP030B_wire_supply_leg_-1.94_-1.28",
+      "second": "OP030B_wire_supply_lower_long_rail_-1.94",
+      "role": "Original upright/crossmember or attached air-service support construction interface",
+      "original_pair_intersected": true
+    },
+    {
+      "first": "OP030B_wire_supply_leg_-1.94_-1.28",
+      "second": "OP030B_wire_supply_lower_cross_rail_-1.28",
+      "role": "Original upright/crossmember or attached air-service support construction interface",
+      "original_pair_intersected": true
+    },
+    {
+      "first": "OP030B_wire_supply_leg_-1.94_-2.12",
+      "second": "OP030B_wire_supply__OP030_supply_base_crossmember_-2.13",
+      "role": "Original upright/crossmember or attached air-service support construction interface",
+      "original_pair_intersected": true
+    },
+    {
+      "first": "OP030B_wire_supply_leg_-1.94_-2.12",
+      "second": "OP030B_wire_supply_lower_long_rail_-1.94",
+      "role": "Original upright/crossmember or attached air-service support construction interface",
+      "original_pair_intersected": true
+    },
+    {
+      "first": "OP030B_wire_supply_leg_-1.94_-2.12",
+      "second": "OP030B_wire_supply_lower_cross_rail_-2.12",
+      "role": "Original upright/crossmember or attached air-service support construction interface",
+      "original_pair_intersected": true
+    },
+    {
+      "first": "OP030B_wire_supply_leg_-2.22_-1.28",
+      "second": "OP030B_wire_supply__OP030_supply_base_crossmember_-1.27",
+      "role": "Original upright/crossmember or attached air-service support construction interface",
+      "original_pair_intersected": true
+    },
+    {
+      "first": "OP030B_wire_supply_leg_-2.22_-1.28",
+      "second": "OP030B_wire_supply_lower_long_rail_-2.22",
+      "role": "Original upright/crossmember or attached air-service support construction interface",
+      "original_pair_intersected": true
+    },
+    {
+      "first": "OP030B_wire_supply_leg_-2.22_-1.28",
+      "second": "OP030B_wire_supply_lower_cross_rail_-1.28",
+      "role": "Original upright/crossmember or attached air-service support construction interface",
+      "original_pair_intersected": true
+    },
+    {
+      "first": "OP030B_wire_supply_leg_-2.22_-2.12",
+      "second": "OP030B_wire_supply__OP030_supply_base_crossmember_-2.13",
+      "role": "Original upright/crossmember or attached air-service support construction interface",
+      "original_pair_intersected": true
+    },
+    {
+      "first": "OP030B_wire_supply_leg_-2.22_-2.12",
+      "second": "OP030B_wire_supply_lower_long_rail_-2.22",
+      "role": "Original upright/crossmember or attached air-service support construction interface",
+      "original_pair_intersected": true
+    },
+    {
+      "first": "OP030B_wire_supply_leg_-2.22_-2.12",
+      "second": "OP030B_wire_supply_lower_cross_rail_-2.12",
+      "role": "Original upright/crossmember or attached air-service support construction interface",
+      "original_pair_intersected": true
+    },
+    {
+      "first": "OP030B_wire_supply_leg_-2.22_-2.12",
+      "second": "OP030B_air_service_support_v04_cross_y",
+      "role": "Original upright/crossmember or attached air-service support construction interface",
+      "original_pair_intersected": true
+    }
+  ],
+  "supply_support_interfaces": [
+    {
+      "foot": "OP030B_wire_supply_foot_-2.22_-2.12",
+      "leg": "OP030B_wire_supply_leg_-2.22_-2.12",
+      "floor_to_foot_gap_m": -9.313225746154785e-10,
+      "foot_to_leg_gap_m": 6.51925802230835e-09,
+      "foot_leg_xy_overlap_m": [
+        0.03999999910593033,
+        0.03999999910593033
+      ],
+      "retained_leg_top_z_m": 0.7800000011920929
+    },
+    {
+      "foot": "OP030B_wire_supply_foot_-2.22_-1.28",
+      "leg": "OP030B_wire_supply_leg_-2.22_-1.28",
+      "floor_to_foot_gap_m": -9.313225746154785e-10,
+      "foot_to_leg_gap_m": 6.51925802230835e-09,
+      "foot_leg_xy_overlap_m": [
+        0.03999999910593033,
+        0.03999999910593033
+      ],
+      "retained_leg_top_z_m": 0.7800000011920929
+    },
+    {
+      "foot": "OP030B_wire_supply_foot_-1.94_-2.12",
+      "leg": "OP030B_wire_supply_leg_-1.94_-2.12",
+      "floor_to_foot_gap_m": -9.313225746154785e-10,
+      "foot_to_leg_gap_m": 6.51925802230835e-09,
+      "foot_leg_xy_overlap_m": [
+        0.03999999910593033,
+        0.03999999910593033
+      ],
+      "retained_leg_top_z_m": 0.7800000011920929
+    },
+    {
+      "foot": "OP030B_wire_supply_foot_-1.94_-1.28",
+      "leg": "OP030B_wire_supply_leg_-1.94_-1.28",
+      "floor_to_foot_gap_m": -9.313225746154785e-10,
+      "foot_to_leg_gap_m": 6.51925802230835e-09,
+      "foot_leg_xy_overlap_m": [
+        0.03999999910593033,
+        0.03999999910593033
+      ],
+      "retained_leg_top_z_m": 0.7800000011920929
+    }
+  ],
+  "controller_floor_gap_m": 0.0,
+  "controller_plate_bounds_m": [
+    [
+      1.409999966621399,
+      1.5300002098083496,
+      -0.032999999821186066
+    ],
+    [
+      1.8300000429153442,
+      1.9700002670288086,
+      0.03500000014901161
+    ]
+  ],
+  "maximum_saved_vertex_error_m": 6.198883073516015e-09,
+  "all_widths_depths_preserved": true,
+  "moving_robot_paths_included": false,
+  "formal_physical_validity_verdict": null
+}

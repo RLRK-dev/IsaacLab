@@ -1,0 +1,753 @@
+{
+  "observed_at": "2026-09-10T10:04:25.645022+09:00",
+  "evidence_basis": "Saved native readback, original source hashes and evaluated-mesh auxiliary measurements",
+  "references": {
+    "source": {
+      "path": "analysis/op030_split_restored_static_v04.blend",
+      "sha256": "8040312acf75a3b3dd64c48844dbec566d91f7e4614586483a1e6bd5d4a6738f"
+    },
+    "source_manifest": {
+      "path": "audit/op030_split_static_v04.json",
+      "sha256": "1625a22369ef837711757d37ce981c4f06148b3275873b26111301e3932860e4"
+    },
+    "native": {
+      "path": "analysis/op030_split_front_feeders_static_v05.blend",
+      "sha256": "b3d22be1dfba8e2c0247677a6f05eb8761d357572d9aac95a372b58f074fd22f"
+    },
+    "native_build": {
+      "path": "audit/op030_c_front_feeders_v05_native.json",
+      "sha256": "7f90fa5a8d1eecf5a81fde0af4156e2b8972a1592893c3cb125074a263765b47"
+    },
+    "native_readback": {
+      "path": "audit/op030_c_front_feeders_v05_readback.json",
+      "sha256": "176637483adc4c4a6ca553e8f63b25461d23fef265073eb4e1eb8ccdb8521da8"
+    },
+    "static_collision": {
+      "path": "audit/op030_c_front_feeders_v05_static_check.json",
+      "sha256": "b448c5dbeada6cf6605af17036804f679aa4adea7f7df00e79455bcac4b27050"
+    },
+    "c_actual_meshes": {
+      "path": "data/op030_split_c_front_feeders_v05_meshes.npz",
+      "sha256": "df89d0f56d0190d4abb35de251f172d0b817d0bca25a770211c36e05ea0982ac"
+    },
+    "c_export_metadata": {
+      "path": "data/op030_split_c_front_feeders_v05_meshes.json",
+      "sha256": "9fd1b54c55f09521fb1c16890bd9500a0d40619d2a02705a9f4563b0cf8a8600"
+    },
+    "world_feeder_meshes": {
+      "path": "data/op030_c_front_feeders_v05_world.npz",
+      "sha256": "41aaefa93bb98d2e64a7348c58684f6bd99d6e80661f4462c9daf2cdf966ca94"
+    },
+    "implementation": {
+      "path": "scripts/build_op030_front_feeders_static_v05.py",
+      "sha256": "b1e5dac86794cab1b98c58bfa7ad5ec01391712c47b488bdb8f2275534e0abfc"
+    },
+    "measured_delta": {
+      "path": "analysis/op030_c_front_feeders_v05_delta.md",
+      "sha256": "98e40907396f3d029b9186c001485a6ebfe18529abcf9ee5daa18b3fa9f6a2b6"
+    }
+  },
+  "families": {
+    "M6": {
+      "root": "OP030C_feeder_M6",
+      "root_world": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -0.550000011920929
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          2.1500000953674316
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.8399999737739563
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "canonical_export_world": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -0.550000011920929
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -2.449999904632568
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.8399999737739563
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "pickup_socket_tcp_world": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -0.550000011920929
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          2.1500000953674316
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.8418999910354614
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "mesh_count": 45,
+      "uid_count": 12,
+      "all_meshes_preserved_in_native": true,
+      "all_uids_in_motion_export": true,
+      "motion_export_mesh_count": 43,
+      "motion_export_omitted_floor_feet": [
+        "OP030C_feeder_M6_foot_-0.070",
+        "OP030C_feeder_M6_foot_-0.270"
+      ],
+      "floor_feet_covered_by_full_static_check": true
+    },
+    "M14": {
+      "root": "OP030C_feeder_M14",
+      "root_world": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -0.550000011920929
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          3.6500000953674316
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.8399999737739563
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "canonical_export_world": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -0.550000011920929
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -0.949999904632568
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.8399999737739563
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "pickup_socket_tcp_world": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -0.550000011920929
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          3.6500000953674316
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.842799961566925
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "mesh_count": 45,
+      "uid_count": 12,
+      "all_meshes_preserved_in_native": true,
+      "all_uids_in_motion_export": true,
+      "motion_export_mesh_count": 43,
+      "motion_export_omitted_floor_feet": [
+        "OP030C_feeder_M14_foot_-0.151",
+        "OP030C_feeder_M14_foot_-0.351"
+      ],
+      "floor_feet_covered_by_full_static_check": true
+    }
+  },
+  "meshes_total": 7214,
+  "meshes_world_changed": 90,
+  "meshes_world_unchanged": 7124,
+  "all_local_geometry_materials_and_parents_preserved": true,
+  "fixed_environment_meshes": 195,
+  "fcl_candidate_queries": 133,
+  "unexpected_intersections": 0,
+  "raw_support_interfaces": 4,
+  "support_interfaces": [
+    {
+      "lower": "source_0001_m0001_p00",
+      "upper": "OP030C_feeder_M6_foot_-0.070",
+      "interface": "floor top / foot underside",
+      "signed_z_gap_m": 3.632158041000366e-08,
+      "xy_overlap_m": [
+        0.11999999731779099,
+        0.20000000298023224
+      ]
+    },
+    {
+      "lower": "source_0001_m0001_p00",
+      "upper": "OP030C_feeder_M6_foot_-0.270",
+      "interface": "floor top / foot underside",
+      "signed_z_gap_m": 3.632158041000366e-08,
+      "xy_overlap_m": [
+        0.11999999731779099,
+        0.20000000298023224
+      ]
+    },
+    {
+      "lower": "OP030C_feeder_M6_foot_-0.070",
+      "upper": "OP030C_feeder_M6_stand_-0.070",
+      "interface": "foot top / upright bottom",
+      "signed_z_gap_m": -4.893329474953134e-08,
+      "xy_overlap_m": [
+        0.03999999910593033,
+        0.14000000059604645
+      ]
+    },
+    {
+      "lower": "OP030C_feeder_M6_stand_-0.070",
+      "upper": "OP030C_feeder_M6_base",
+      "interface": "upright top / base underside",
+      "signed_z_gap_m": 1.0671350025859283e-08,
+      "xy_overlap_m": [
+        0.03999999910593033,
+        0.14000000059604645
+      ]
+    },
+    {
+      "lower": "OP030C_feeder_M6_foot_-0.270",
+      "upper": "OP030C_feeder_M6_stand_-0.270",
+      "interface": "foot top / upright bottom",
+      "signed_z_gap_m": -4.893329474953134e-08,
+      "xy_overlap_m": [
+        0.03999999910593033,
+        0.14000000059604645
+      ]
+    },
+    {
+      "lower": "OP030C_feeder_M6_stand_-0.270",
+      "upper": "OP030C_feeder_M6_base",
+      "interface": "upright top / base underside",
+      "signed_z_gap_m": 1.0671350025859283e-08,
+      "xy_overlap_m": [
+        0.03999999910593033,
+        0.14000000059604645
+      ]
+    },
+    {
+      "lower": "source_0001_m0001_p00",
+      "upper": "OP030C_feeder_M14_foot_-0.151",
+      "interface": "floor top / foot underside",
+      "signed_z_gap_m": 3.632158041000366e-08,
+      "xy_overlap_m": [
+        0.11999999731779099,
+        0.20000000298023224
+      ]
+    },
+    {
+      "lower": "source_0001_m0001_p00",
+      "upper": "OP030C_feeder_M14_foot_-0.351",
+      "interface": "floor top / foot underside",
+      "signed_z_gap_m": 3.632158041000366e-08,
+      "xy_overlap_m": [
+        0.11999999731779099,
+        0.20000000298023224
+      ]
+    },
+    {
+      "lower": "OP030C_feeder_M14_foot_-0.151",
+      "upper": "OP030C_feeder_M14_stand_-0.151",
+      "interface": "foot top / upright bottom",
+      "signed_z_gap_m": -4.893329474953134e-08,
+      "xy_overlap_m": [
+        0.03999999910593033,
+        0.14000000059604645
+      ]
+    },
+    {
+      "lower": "OP030C_feeder_M14_stand_-0.151",
+      "upper": "OP030C_feeder_M14_base",
+      "interface": "upright top / base underside",
+      "signed_z_gap_m": 1.0671350025859283e-08,
+      "xy_overlap_m": [
+        0.03999999910593033,
+        0.14000000059604645
+      ]
+    },
+    {
+      "lower": "OP030C_feeder_M14_foot_-0.351",
+      "upper": "OP030C_feeder_M14_stand_-0.351",
+      "interface": "foot top / upright bottom",
+      "signed_z_gap_m": -4.893329474953134e-08,
+      "xy_overlap_m": [
+        0.03999999910593033,
+        0.14000000059604645
+      ]
+    },
+    {
+      "lower": "OP030C_feeder_M14_stand_-0.351",
+      "upper": "OP030C_feeder_M14_base",
+      "interface": "upright top / base underside",
+      "signed_z_gap_m": 1.0671350025859283e-08,
+      "xy_overlap_m": [
+        0.03999999910593033,
+        0.14000000059604645
+      ]
+    }
+  ],
+  "support_raw_depth_max_m": 4.893329474953134e-08,
+  "placement_bounds_m": {
+    "M6": [
+      [
+        -0.9400000274181366,
+        2.035000093281269,
+        -0.032999963499605656
+      ],
+      [
+        -0.5000000298023224,
+        2.265000097453594,
+        1.009999974630773
+      ]
+    ],
+    "M14": [
+      [
+        -1.1019999980926514,
+        3.535000093281269,
+        -0.032999963499605656
+      ],
+      [
+        -0.5,
+        3.765000097453594,
+        1.009999974630773
+      ]
+    ]
+  },
+  "nearest_pairs": [
+    {
+      "first": "OP030C_feeder_M6_foot_-0.070",
+      "second": "source_0001_m0001_p00",
+      "distance_m": 3.632158041000366e-08
+    },
+    {
+      "first": "OP030C_feeder_M6_foot_-0.270",
+      "second": "source_0001_m0001_p00",
+      "distance_m": 3.632158041000366e-08
+    },
+    {
+      "first": "OP030C_feeder_M14_foot_-0.151",
+      "second": "source_0001_m0001_p00",
+      "distance_m": 3.632158041000366e-08
+    },
+    {
+      "first": "OP030C_feeder_M14_foot_-0.351",
+      "second": "source_0001_m0001_p00",
+      "distance_m": 3.632158041000366e-08
+    },
+    {
+      "first": "OP030C_feeder_M6_stand_-0.070",
+      "second": "Split_bay_2__source_0779_m0206_p03",
+      "distance_m": 0.00750003382563591
+    },
+    {
+      "first": "OP030C_feeder_M6_stand_-0.070",
+      "second": "source_0001_m0001_p00",
+      "distance_m": 0.013999987820419335
+    },
+    {
+      "first": "OP030C_feeder_M6_stand_-0.270",
+      "second": "source_0001_m0001_p00",
+      "distance_m": 0.013999987820419335
+    },
+    {
+      "first": "OP030C_feeder_M14_stand_-0.151",
+      "second": "source_0001_m0001_p00",
+      "distance_m": 0.013999987820419335
+    },
+    {
+      "first": "OP030C_feeder_M14_stand_-0.351",
+      "second": "source_0001_m0001_p00",
+      "distance_m": 0.013999987820419335
+    },
+    {
+      "first": "OP030C_feeder_M6_stand_-0.070",
+      "second": "source_0779_m0206_p02",
+      "distance_m": 0.015000026673078537
+    },
+    {
+      "first": "OP030C_feeder_M6_stand_-0.070",
+      "second": "source_0779_m0206_p01",
+      "distance_m": 0.020000021904706955
+    },
+    {
+      "first": "OP030C_feeder_M14_stand_-0.151",
+      "second": "source_0779_m0206_p02",
+      "distance_m": 0.021000009030103683
+    },
+    {
+      "first": "OP030C_feeder_M14_stand_-0.351",
+      "second": "OP030C__source_0693_m0120_p04",
+      "distance_m": 0.021448593586683273
+    },
+    {
+      "first": "OP030C_feeder_M14_stand_-0.151",
+      "second": "source_0779_m0206_p01",
+      "distance_m": 0.0260000042617321
+    },
+    {
+      "first": "OP030C_feeder_M14_foot_-0.351",
+      "second": "OP030C__source_0693_m0120_p04",
+      "distance_m": 0.033661164244007044
+    },
+    {
+      "first": "OP030C_feeder_M14_base",
+      "second": "source_0007_m0007_p01",
+      "distance_m": 0.03475046417722123
+    },
+    {
+      "first": "OP030C_feeder_M6_base",
+      "second": "source_0007_m0007_p01",
+      "distance_m": 0.034750490077362396
+    },
+    {
+      "first": "OP030C_feeder_M6_nose_support",
+      "second": "source_0007_m0007_p02",
+      "distance_m": 0.03685235525974886
+    },
+    {
+      "first": "OP030C_feeder_M14_nose_support",
+      "second": "source_0007_m0007_p02",
+      "distance_m": 0.03685235525974886
+    },
+    {
+      "first": "OP030C_feeder_M6_nose_pedestal",
+      "second": "source_0007_m0007_p02",
+      "distance_m": 0.04350004345178604
+    },
+    {
+      "first": "OP030C_feeder_M14_nose_pedestal",
+      "second": "source_0007_m0007_p02",
+      "distance_m": 0.04350004345178604
+    },
+    {
+      "first": "OP030C_feeder_M14_base",
+      "second": "source_0007_m0007_p00",
+      "distance_m": 0.046000003814697266
+    },
+    {
+      "first": "OP030C_feeder_M6_base",
+      "second": "source_0007_m0007_p00",
+      "distance_m": 0.04600003361701965
+    },
+    {
+      "first": "OP030C_feeder_M6_nose_support",
+      "second": "source_0007_m0007_p01",
+      "distance_m": 0.048266199469540416
+    },
+    {
+      "first": "OP030C_feeder_M14_nose_support",
+      "second": "source_0007_m0007_p01",
+      "distance_m": 0.048266199469540416
+    },
+    {
+      "first": "OP030C_feeder_M6_nose_pedestal",
+      "second": "source_0007_m0007_p01",
+      "distance_m": 0.05150002986192703
+    },
+    {
+      "first": "OP030C_feeder_M14_nose_pedestal",
+      "second": "source_0007_m0007_p01",
+      "distance_m": 0.05150002986192703
+    },
+    {
+      "first": "OP030C_feeder_M6_gate_actuator",
+      "second": "source_0007_m0007_p02",
+      "distance_m": 0.06413298460809232
+    },
+    {
+      "first": "OP030C_feeder_M6_nose_pedestal",
+      "second": "source_0007_m0007_p00",
+      "distance_m": 0.0675000324845314
+    },
+    {
+      "first": "OP030C_feeder_M14_nose_pedestal",
+      "second": "source_0007_m0007_p00",
+      "distance_m": 0.0675000324845314
+    },
+    {
+      "first": "OP030C_feeder_M6_present_sensor",
+      "second": "source_0007_m0007_p02",
+      "distance_m": 0.06792502929409909
+    },
+    {
+      "first": "OP030C_feeder_M14_present_sensor",
+      "second": "source_0007_m0007_p02",
+      "distance_m": 0.06792502929409909
+    },
+    {
+      "first": "OP030C_feeder_M6_nose_support",
+      "second": "source_0007_m0007_p00",
+      "distance_m": 0.0679999923005016
+    },
+    {
+      "first": "OP030C_feeder_M14_nose_support",
+      "second": "source_0007_m0007_p00",
+      "distance_m": 0.0679999923005016
+    },
+    {
+      "first": "OP030C_feeder_M14_gate_actuator",
+      "second": "source_0007_m0007_p02",
+      "distance_m": 0.07195166847785436
+    },
+    {
+      "first": "OP030C_feeder_M6_gate_actuator",
+      "second": "source_0007_m0007_p01",
+      "distance_m": 0.0751894197568758
+    },
+    {
+      "first": "OP030C_feeder_M14_base",
+      "second": "source_0007_m0007_p02",
+      "distance_m": 0.07567330347769669
+    },
+    {
+      "first": "OP030C_feeder_M6_base",
+      "second": "source_0007_m0007_p02",
+      "distance_m": 0.07567331357191893
+    },
+    {
+      "first": "OP030C_feeder_M6_stand_-0.270",
+      "second": "Split_bay_2__source_0779_m0206_p03",
+      "distance_m": 0.13250009343028069
+    },
+    {
+      "first": "OP030C_feeder_M14_stand_-0.151",
+      "second": "source_0779_m0206_p03",
+      "distance_m": 0.1710584813392663
+    }
+  ],
+  "saved_signature_count": 7214,
+  "evaluated_saved_mesh_count": 285,
+  "evaluated_saved_error_m": 0.0,
+  "c_export": {
+    "original_mesh_count": 619,
+    "current_mesh_count": 627,
+    "removed_old_names": [],
+    "added_names": [
+      "OP030_duct_support_v04_Split_bay_2_conveyor_stand_v04_left",
+      "OP030_duct_support_v04_Split_bay_2_conveyor_stand_v04_right",
+      "OP030_duct_support_v04_source_0020_left",
+      "OP030_duct_support_v04_source_0020_right",
+      "source_1171_m0360_p00",
+      "source_1171_m0360_p01",
+      "source_1211_m0364_p00",
+      "source_1211_m0364_p01"
+    ],
+    "old_roles": {
+      "geometry": 559,
+      "onhand_camera": 10,
+      "fixed_tool": 48,
+      "support_insulator": 2
+    },
+    "new_roles": {
+      "geometry": 567,
+      "onhand_camera": 10,
+      "fixed_tool": 48,
+      "support_insulator": 2
+    },
+    "offset_y_m": 4.6,
+    "offset_applied_once": true,
+    "installed_a_fasteners": {
+      "OP030A_feeder_M4_UID001": [
+        [
+          -0.6234898018587359,
+          -0.7818314824680279,
+          0.0,
+          -0.16
+        ],
+        [
+          0.7818314824680279,
+          -0.6234898018587359,
+          0.0,
+          -0.17900000000000005
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.013000000000000012
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "OP030A_feeder_M4_UID002": [
+        [
+          -0.6234898018587359,
+          -0.7818314824680279,
+          0.0,
+          -0.16
+        ],
+        [
+          0.7818314824680279,
+          -0.6234898018587359,
+          0.0,
+          -0.11099999999999999
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.013000000000000012
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "OP030A_feeder_M4_UID003": [
+        [
+          -0.6234898018587359,
+          -0.7818314824680279,
+          0.0,
+          0.16
+        ],
+        [
+          0.7818314824680279,
+          -0.6234898018587359,
+          0.0,
+          -0.17900000000000005
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.013000000000000012
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "OP030A_feeder_M4_UID004": [
+        [
+          -0.6234898018587359,
+          -0.7818314824680279,
+          0.0,
+          0.16
+        ],
+        [
+          0.7818314824680279,
+          -0.6234898018587359,
+          0.0,
+          -0.11099999999999999
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.013000000000000012
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    "installed_wire_uids": {
+      "2": "OP030B_H03_2_UID001",
+      "1": "OP030B_H03_1_UID005"
+    },
+    "neighbor_parks": [
+      {
+        "cell": "OP030A",
+        "bank": "data/op030_split_a_motion_v05.npz",
+        "bank_sha256": "e56b610e5ee4642b16c03f7fb321936e3d1d11183218fe3fd0dbd3851dcc6c96",
+        "frame_index": -1
+      },
+      {
+        "cell": "OP030B",
+        "bank": "data/op030_split_b_motion_v05.npz",
+        "bank_sha256": "923ae01512f2d63e1ac57237b044316cce2b0fadba3701940b17f68e0dd2d1c6",
+        "frame_index": -1
+      }
+    ]
+  },
+  "full_motion_status": "C path and all-frame checks owned by fixed_tools; not asserted by this static report",
+  "aisle_scope": "Feeder bounds and actual local gaps are dimension observations; no dedicated aisle polygon is defined",
+  "native_or_motion_changed_during_finalization": false,
+  "formal_physical_validity_verdict": null
+}

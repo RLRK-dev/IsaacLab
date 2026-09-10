@@ -1,0 +1,272 @@
+{
+  "observed_at": "2026-09-10T21:11:46.086974+09:00",
+  "source_assets_modified": false,
+  "captured_source_drift": [],
+  "stage_digests_are_original_evidence": true,
+  "copied_source_runtime_revalidated": false,
+  "changed_entries": [
+    {
+      "path": "inputs/v02_source/inputs/v01_source/op010_base/original/render_ur15_line.py",
+      "source_sha256": "b87bd76092f3b6a9f279de2ce7f0f7976703e1f54637fcd4dc1c51ed686241f9",
+      "checkpoint_sha256": "bab4737819cf90b7f59cd25e171a62b0f2a6fa9091df9ee7f61a9c7e27036ce7",
+      "ast_equal": false
+    },
+    {
+      "path": "inputs/v02_source/inputs/v01_source/scripts/build_cameras.py",
+      "source_sha256": "03af0357baf77faf494c1cd9538f855cec6f9d05a1d1733c972168aa6c5ff46b",
+      "checkpoint_sha256": "19729c55308b6cb02a6bb77624aed4f5393544d35f5cfb776e32068bd45bec75",
+      "ast_equal": true
+    },
+    {
+      "path": "inputs/v02_source/inputs/v01_source/scripts/build_op020.py",
+      "source_sha256": "f3490166a71e969186acced222bcfe54bce30baed1105b92e99427b474319bc0",
+      "checkpoint_sha256": "0ef3c01c0eb045d22f8ef7cea79ef24fcc861f683f48a6cc617953e432e0aec1",
+      "ast_equal": true
+    },
+    {
+      "path": "inputs/v02_source/inputs/v01_source/scripts/op020_motion.py",
+      "source_sha256": "1d45b3b940fd6c3ed2ee419452e8478ec5feaab4df7d04542aba266b9eceafd6",
+      "checkpoint_sha256": "559c28e53d2bfb1b6afb4d94cd3f0de24424f9078c4725f204382331abcd2621",
+      "ast_equal": true
+    },
+    {
+      "path": "inputs/v02_source/scripts/stocker10_motion.py",
+      "source_sha256": "a5e4fa663acb2e82bbb606caa2c9938d44d8bb307eaef21aacd492501a430589",
+      "checkpoint_sha256": "27b4ba50c22a43100ea10b92a3686b8613b9583a4d8992c56f6a01f7a2a41f1d",
+      "ast_equal": true
+    },
+    {
+      "path": "scripts/allocation_product.py",
+      "source_sha256": "c1f2b355ef8a8baedbbba54df4a47563a60a2446f090f29a7c185c8baab8fe70",
+      "checkpoint_sha256": "19c07cdd2085cd60970cf35d6368b6156c39406277063e235e620803c69a11f7",
+      "ast_equal": true
+    },
+    {
+      "path": "scripts/build_allocation_review.py",
+      "source_sha256": "f1ef58bc5bdb5ee934174ec10ab40d0dac732335d43fa4307ab442e49f7f08c5",
+      "checkpoint_sha256": "a0359b38107699204c97560fe99ae4de6c01dd183fef6a8d9321ba9153feb61b",
+      "ast_equal": true
+    },
+    {
+      "path": "scripts/build_op030_stagger_air_clearance_static_v06.py",
+      "source_sha256": "9d711b25ab50768a1d8b3470cf26d3a0e7dafc19b5e5de1c91c35f727b8d1b6c",
+      "checkpoint_sha256": "6f624a9804d0b104e6e0d2148cac37e82a8a243509b16be2dc6d89b7a2831b5f",
+      "ast_equal": false
+    },
+    {
+      "path": "scripts/build_op030_stagger_static_v06.py",
+      "source_sha256": "c8f89a2ba96881ca617203bff0c5b45914dee45b05a3007919091aec172f6205",
+      "checkpoint_sha256": "8d48426d247a378411ad85ef8330d05aaaf3b00e4bc38499f49aef6fa12adcc6",
+      "ast_equal": false
+    },
+    {
+      "path": "scripts/build_op030_stagger_supported_static_v06.py",
+      "source_sha256": "7cdaae0fbdcc787ff06ab7fc394fc6740197c900a97aa2eba2d117a3f642969a",
+      "checkpoint_sha256": "1ac82d8876905990e512cf3ee918e6aeace2fb3177b48d6c22ae3eedd4bb8733",
+      "ast_equal": false
+    },
+    {
+      "path": "scripts/clean_appearance.py",
+      "source_sha256": "2ebd6f27c6480e4a48abeaad13f1eccdda500455a5f1d87ab94ec327ee5dd45b",
+      "checkpoint_sha256": "4187e0ffdd1b38af006d97a1285ec234a55bec75800ba9ba225cd196fb0ec033",
+      "ast_equal": true
+    },
+    {
+      "path": "scripts/continuous_common.py",
+      "source_sha256": "fcb4167f03a30f532f5ab73b438c91aee9b9b8ac0da63ec3dbc012df410cde2c",
+      "checkpoint_sha256": "684068e8af9d7acbefebb33a8d0c919241e1d66b57224e0ee817dba4a5aa4dcf",
+      "ast_equal": false
+    },
+    {
+      "path": "scripts/jb_harness.py",
+      "source_sha256": "b0db065085fca79e7d0ef8a28357dc849eb5c2d4ee0bc4e0ff0c5b0e5e9b8935",
+      "checkpoint_sha256": "b3b74321323593122845b24d514a08bc2018847ccd031e4728e0a7e2c3ff1906",
+      "ast_equal": true
+    },
+    {
+      "path": "scripts/op030_branch_boxes.py",
+      "source_sha256": "f77fe5218173e0b52ec847395cd8d6121fc5d420dca6da914ea5a665e7ad1515",
+      "checkpoint_sha256": "2d9b5651330da7b60f3477a5c4ae1297399d08ebc7efe51270c6f6b406f18cbf",
+      "ast_equal": true
+    },
+    {
+      "path": "scripts/op030_branch_choice.py",
+      "source_sha256": "e8f6e02fae47ffbaab5d4d6acf00a0960b2377540da97dc92749d34f1119c8fb",
+      "checkpoint_sha256": "58315a973f5c7e973b02a8b56a2be2c13f1e701d360f7ac530e85d87ef385ab1",
+      "ast_equal": true
+    },
+    {
+      "path": "scripts/op030_branch_meshes.py",
+      "source_sha256": "09f86e47916d53a5e0625c6d564f9f028245db0d971d5fabef2fed569bd58bf3",
+      "checkpoint_sha256": "192d54dc5ae8e08c2e919096a3f30c4af28aeabfe4c9f8ad498f507de3a0d759",
+      "ast_equal": true
+    },
+    {
+      "path": "scripts/op030_c_front_replay_v05.py",
+      "source_sha256": "ed05fe02ce4cb5fa27f0777490864dfbb31219176a8b5e28e556f809be7ce24b",
+      "checkpoint_sha256": "5f4aa8ec2b6bae9aab94e9a94b48455f60da175a70c5b469c804eb190edc3958",
+      "ast_equal": true
+    },
+    {
+      "path": "scripts/op030_c_refill_v05.py",
+      "source_sha256": "da808bb23f340bd22b2704312c768345465e5f29d80b69e4f8c571b9418defd4",
+      "checkpoint_sha256": "980ae7d1339af81ebbf05377e350f4f6be6a91c197be2da120f7f2b57d267587",
+      "ast_equal": true
+    },
+    {
+      "path": "scripts/op030_c_replay_v05.py",
+      "source_sha256": "b54e01892b7dfcbb64dd94e084073046d78cb96d0674801dec85755a7a6433fb",
+      "checkpoint_sha256": "09a813b9e266491eedd035045ed68f28bc8b5c59057f285c0f9b7d242aee27ea",
+      "ast_equal": true
+    },
+    {
+      "path": "scripts/op030_cable.py",
+      "source_sha256": "dd3f81c97b94708ad62f0f8ed328f04761a92cbb3d0b946ea9131df855aa384d",
+      "checkpoint_sha256": "ff33314d47b68f4bdf07ae69795fcf98f4af94afc21ecb6e0562b20a4d298800",
+      "ast_equal": false
+    },
+    {
+      "path": "scripts/op030_fk_fast.py",
+      "source_sha256": "5940c353e76c10edcb3d4449aa587e0681bb61ec7cd312e49d12907242dc75e1",
+      "checkpoint_sha256": "a9be5092d59a82a82224aefd9ec26fce0985a091b1312bc3fceeadffae1ccb9e",
+      "ast_equal": false
+    },
+    {
+      "path": "scripts/op030_free_paths.py",
+      "source_sha256": "bd5e97f0d2c5b1e596da0afe30ebf948bdced987b64a69a6e6f4fdf4a9355400",
+      "checkpoint_sha256": "2fb0f2d3a2161dbd833e115b2503e5d47dff63b52510b8712a08d3f783508ddf",
+      "ast_equal": false
+    },
+    {
+      "path": "scripts/op030_geometry.py",
+      "source_sha256": "dd4efec4cecf13e50a9c0477ff65249bec9525b434cfe8abb40bf7a9243de45b",
+      "checkpoint_sha256": "53800753382120466dbf642d5f0574ba46cd9a9e54bb2048d6259a3a32107287",
+      "ast_equal": false
+    },
+    {
+      "path": "scripts/op030_motion.py",
+      "source_sha256": "1b5ec681f3e2d9651eed41fd355536d5fab43d18400a47986cbd0fccf9efa7cb",
+      "checkpoint_sha256": "d3c486a614dae18aa2b2fdb02d84267377a51443ba4bb217b61648d0c37682d4",
+      "ast_equal": false
+    },
+    {
+      "path": "scripts/op030_split_b_stagger_v06_plan.py",
+      "source_sha256": "9aebf08374b42834a7fd8c1b39a1e24c840e16ad4eff0ae7b4ee10b6ad43c3c3",
+      "checkpoint_sha256": "a9f29c18024dff19459f6c2376149d2b596b3ee105902e074c5b58607eb73225",
+      "ast_equal": true
+    },
+    {
+      "path": "scripts/op030_split_b_v04_drawer.py",
+      "source_sha256": "c17c9c08c97cb18aead5ca1e6c4239c24d4bbdcd9771c698fa791c474e809dad",
+      "checkpoint_sha256": "b1ed3814729cc5ca15632b5d962763ac0c69591cd16cc90282518eeb4790b118",
+      "ast_equal": true
+    },
+    {
+      "path": "scripts/op030_split_c_v05.py",
+      "source_sha256": "2caaec98eb6d8967693b0017cbe265e7ce2f36507d54001745ee66bff2427cbd",
+      "checkpoint_sha256": "ce60d9005d8186852e237a2f4584aea504e0b4d47f9835313c6ff83bc275ebc3",
+      "ast_equal": true
+    },
+    {
+      "path": "scripts/op030_split_c_v05_check.py",
+      "source_sha256": "3cc37d1099e023645d31ac7c2022cd461b091ccf82b4168673ad95b674fa8c1a",
+      "checkpoint_sha256": "62a170ecb22d9886821d0662b701bde5a007ab35e29ff4a4f7bc76a322621c47",
+      "ast_equal": true
+    },
+    {
+      "path": "scripts/op030_split_top_entry.py",
+      "source_sha256": "5bfaa34ccb03a1bdc4a6a3707cbb245ee5e698d2e81d9d14cab06f3dbd7c02ec",
+      "checkpoint_sha256": "cac216417c21f5d9974d805f6a5c0994f175de39c1a3c6c907a26e45f47cfdae",
+      "ast_equal": true
+    },
+    {
+      "path": "scripts/op030_support_motion_v05.py",
+      "source_sha256": "b7d413891606349df6994b55dd59b8e81a7e0be267a4c96bc0ea429cc1ac4779",
+      "checkpoint_sha256": "3b469429e368bf9e06e7665d119d96ec9a8bcbd0748da5cdba5662f9c86d3fdf",
+      "ast_equal": true
+    },
+    {
+      "path": "scripts/op030_support_plan_v05.py",
+      "source_sha256": "4ffa1e58725f153c75dc3202030bf5807ac8a542be57c530611c36d09e73dda7",
+      "checkpoint_sha256": "b18936773826336702ce2280137f3bf6096d9fffe0deacd48b714690f98b8368",
+      "ast_equal": true
+    },
+    {
+      "path": "scripts/op030_support_replay_v05.py",
+      "source_sha256": "633e9d42b91ddca3415dcb87e30631f3c0a540f4547d96a4c95559053f8de4af",
+      "checkpoint_sha256": "46e00a2ad5a44c1f9c645c7ab3abf87528c4bf148a9ab57131fd64037590e080",
+      "ast_equal": true
+    },
+    {
+      "path": "scripts/package_op030_split_v05.py",
+      "source_sha256": "5725cc94305c55d6da3d5bb62c00df4629cce0c4d7b3690c10d207fc5b0c5994",
+      "checkpoint_sha256": "f9f30d847e57c2e51d4457fe71025a44ea2ca6004fd5d9557dee0730f0ea5107",
+      "ast_equal": false
+    },
+    {
+      "path": "scripts/package_op030_split_v06.py",
+      "source_sha256": "f5f5c5e24eed001ddf806eb025bb17341624b746904ae2062c536454b9a296be",
+      "checkpoint_sha256": "7c957eed02c8b7a4630c175ad7fa105a6f12049fb01ea8dcf2e79993da1b8a61",
+      "ast_equal": false
+    },
+    {
+      "path": "scripts/probe_op030_front_integration_v05.py",
+      "source_sha256": "c74ea6de86976dc35720462366fa30e06953379edc5445eec96e9203eeef5eb0",
+      "checkpoint_sha256": "509154c5062bb7d333a5349699afa4387e07e790d530503786998b2ca1c15f7d",
+      "ast_equal": false
+    },
+    {
+      "path": "scripts/probe_op030_split_v04_transfer.py",
+      "source_sha256": "91a003fcef70e8fc8ee139472ef946c13fbdddcb9e7b50fd54f47ece7773ffd6",
+      "checkpoint_sha256": "b901793816a267541309fdd4e5b8d88ab4e50272210b5281f6873725bc3220f6",
+      "ast_equal": false
+    },
+    {
+      "path": "scripts/probe_op030_stagger_integration_v06.py",
+      "source_sha256": "dfec8a58d3865b35a2d919b40eed99c2d7cc43db5fb1791222acad9101fe783a",
+      "checkpoint_sha256": "dac3238760d98133b9649620446478e7fff5b2d79b33e639d4b0ac91aad88f16",
+      "ast_equal": false
+    },
+    {
+      "path": "scripts/probe_op030_v05_background.py",
+      "source_sha256": "8985364e1a42b487e45c32674d40dfdcca788b290d5c4927e761c01fef60c4b5",
+      "checkpoint_sha256": "0452746e8a4376727397c14dfa7531758f47d08f521e38a5e6b75b9b5400e6ca",
+      "ast_equal": false
+    },
+    {
+      "path": "scripts/probe_op030_v05_integration.py",
+      "source_sha256": "76cb1443c28fa531e3b80dec0c2468e34888f3580e4ff76e18d23dc8362093c5",
+      "checkpoint_sha256": "3c1ef0e56d57074bce2cbd488326c8c35264a3cca73429c28cabb51acada07f0",
+      "ast_equal": false
+    },
+    {
+      "path": "scripts/solve_op030_motion.py",
+      "source_sha256": "40375fe764e0502a7d4b9d69ec175ee5f211d3bb08ec8fb6eeae50d8c87cffc1",
+      "checkpoint_sha256": "1b65ffb33e210aabba32b2cad437b3ffa03efac4f8e3eeb37c52191faf8b56f2",
+      "ast_equal": false
+    },
+    {
+      "path": "scripts/split_tools_audit_support_ascent_v05.py",
+      "source_sha256": "1bb19b5cc3a44da28e470e01ebaa7ecb539646c741b962f99fac0e905ab17ac4",
+      "checkpoint_sha256": "55e208721614068366c5425f9bd35098710950f12f11cf8bd44eef465ec3cdb5",
+      "ast_equal": true
+    },
+    {
+      "path": "analysis/op040_process_inventory.md",
+      "source_sha256": "487ea35c26323fe2068d4e6c7d4e411318753298eddb854178264db002bad1d3",
+      "checkpoint_sha256": "f872aae8941be9d83060580842400e6997474583085461f49612118c77cd7cdb",
+      "ast_equal": null
+    }
+  ],
+  "all_python_compile_pass": true,
+  "changes_reviewed": [
+    "Ruff wrapping/import sorting and removal of unused imports",
+    "functools lru_cache(maxsize=None) converted to cache; quoted UR15 annotations normalized under future annotations",
+    "Two-letter local mesh-face-offset variable renamed mesh_face_offsets by Python NAME tokens",
+    "Wire-shape docstring wording changed; station-count page title gained one space",
+    "Connector manufacturer spelling retained with narrow lowercase codespell inline ignores",
+    "two archived high-complexity authoring functions retain their bodies with explicit C901 line annotations",
+    "eight inherited shebang scripts made executable in Git; no mechanism or target changes"
+  ],
+  "current_validation": "Checkpoint Ruff passes and every copied Python file compiles; mandatory second -f and base failures recorded separately. No runtime replay of formatted copies is claimed."
+}

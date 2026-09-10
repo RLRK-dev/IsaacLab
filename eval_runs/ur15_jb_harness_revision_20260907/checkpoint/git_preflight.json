@@ -1,0 +1,66 @@
+{
+  "observed_at": "2026-09-10T21:45:59.713130+09:00",
+  "evidence_basis": "Git staged index, byte hashes and file modes read from the preserved earlier worktree",
+  "remote": {
+    "name": "fork",
+    "url": "https://github.com/RLRK-dev/IsaacLab.git"
+  },
+  "base": {
+    "ref": "fork/main",
+    "commit": "3e73d6dd79080fd7632488c061052a6edd52e230"
+  },
+  "feature_branch": "rlrk/ur15-op030-checkpoint-20260910",
+  "excluded_unpublished_commit_count": 19,
+  "allowlist_count": 136,
+  "allowlist_prefix": "eval_runs/ur15_jb_harness_revision_20260907/",
+  "all_selected_paths_inside_prefix": true,
+  "copied_bytes_match_staged_blobs": true,
+  "file_modes_preserved": true,
+  "earlier_base": {
+    "ref": "fork/rlrk/optE-s2-substrate-swap",
+    "commit": "1ab60539330f76b0ecb1c2d6097a3d1a37beadef"
+  },
+  "earlier_checks": {
+    "selected_checkpoint_hooks": "PASS",
+    "unrelated_full_base_ruff_violations": 42,
+    "unrelated_full_base_executable_mode_violations": 7
+  },
+  "reason": "Keep the checkpoint on main without importing 19 unpublished commits or unrelated base repairs",
+  "original_preflight": {
+    "path": "/home/rlrk/IsaacLab-op030-checkpoint-20260910/eval_runs/ur15_jb_harness_revision_20260907/checkpoint/git_preflight.json",
+    "sha256": "87cae52997e224a7ad593ea0d5eb42db44f3ce69c8a0a2ae8dca1ea1c19070dd"
+  },
+  "retained_provenance": [
+    "checkpoint/source_snapshot.json",
+    "checkpoint/formatter_review.json"
+  ],
+  "changes_after_copy": [
+    "CHECKPOINT.md",
+    "checkpoint/git_preflight.json"
+  ],
+  "mainbase_full_hook_status": "PASS: first full isaaclab.sh -f before staging",
+  "commit_created": false,
+  "push_executed": false,
+  "mainbase_launcher_delta": {
+    "first_attempt": "Stopped before hooks because tabs rejected terminal type dumb",
+    "retry_environment": "TERM=xterm-256color; existing pre-commit executable and cache unchanged",
+    "source_changes": false
+  },
+  "mainbase_full_hook_report": {
+    "path": "/tmp/op030_checkpoint_mainbase_format_first_hooks.log",
+    "sha256": "39dc8177e327f40f1af7656a158050b976723379f2aab220e35c168b30a1e32d",
+    "passed": 20,
+    "skipped": 1,
+    "command": "TERM=xterm-256color PATH=<existing-env>/bin:$PATH VIRTUAL_ENV=<existing-env> ./isaaclab.sh -f",
+    "files_modified_by_hooks": 0
+  },
+  "copied_source_sha_invariance": {
+    "unmodified_files": 134,
+    "changed_metadata_files": [
+      "eval_runs/ur15_jb_harness_revision_20260907/CHECKPOINT.md",
+      "eval_runs/ur15_jb_harness_revision_20260907/checkpoint/git_preflight.json"
+    ],
+    "source_snapshot_sha256": "b786f6b3ae5d20dc83e65286c18cf69355024f55993c4f6d36fd8af38dddb9e9",
+    "formatter_review_sha256": "0e036eb29219c7030e5272b135c9c3f5aa0f79aa9eb217fcb4c311c9c12358d0"
+  }
+}

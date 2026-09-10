@@ -1,0 +1,35 @@
+{
+  "observed_at": "2026-09-10T14:59:24.740053+09:00",
+  "directory": "/home/rlrk/Downloads/UR15_JB_OP030_20260910_v05",
+  "archive": "/home/rlrk/Downloads/UR15_JB_OP030_20260910_v05.zip",
+  "archive_sha256": "ee592e8c33faf3c596259419c48127c36cf3c5ee4311b61a49789241ef49eb87",
+  "archive_bytes": 632161327,
+  "native_sha256": "985c7edf11a80f0e1e15ba5176b3040b9d733c30315ae6b732b4c359239afc3d",
+  "inventory_sha256": "5702342b53e04f39a8998b875bb51a506de26c3c837ccf3d7d9391c193baba8b",
+  "files": 86,
+  "file_bytes": 674566153,
+  "checks": {
+    "directory_names": true,
+    "directory_sha256": true,
+    "archive_names": true,
+    "archive_crc": true,
+    "archive_entry_sha256": true
+  },
+  "browser": {
+    "path": "/home/rlrk/IsaacLab/eval_runs/ur15_jb_harness_revision_20260907/audit/op030_split_page_browser_v05/completion.json",
+    "sha256": "51c82252b857ae03724365e83ed1ea7e9ffee8fd2c6cada4edd55b80ecb47744",
+    "page_sha256": "2bc01f4a29b2fd832e41c526193b70f7649f858aec9551f39f2ff99f227c3a2f",
+    "passed": true
+  },
+  "previous_delivery_observation": {
+    "UR15_JB_OP030_20260909_v04.zip": {
+      "sha256": "da6da7d9b747fca8dc85168873d62a53f8d2ed732cbc740cb5c65fa66a91f9b5",
+      "matches_prior": true
+    },
+    "UR15_JB_OP030_20260909_v04/UR15_JB_OP030_split_v04.blend": {
+      "sha256": "cc7634f3f6d7baae57eda5e205f46952789d0fa3e88316a645dadee737e1cf4a",
+      "matches_prior": true
+    }
+  },
+  "formal_physical_validity_verdict": null
+}

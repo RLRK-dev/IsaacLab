@@ -1,0 +1,354 @@
+{
+  "status": "detour340/timewarp50ms numeric checks passed at30Hz full788 and60Hz held512; final re-exported scene/cable audit remains required",
+  "source_candidate": "detour340_timewarp50ms",
+  "source_arrays": "data/op020_motion.npz",
+  "units": {
+    "position": "m",
+    "angles": "rad",
+    "time": "s"
+  },
+  "parameters": {
+    "left_pan_rad": -2.6229980148,
+    "shoulder_lead": 0.0,
+    "inner_radius": 1.0,
+    "left_wrist1_delta": 0.8,
+    "right_shoulder_first": 0.1,
+    "unfold": 1.0,
+    "unfold_end_s": 14.3,
+    "fold_yaw_bump_deg": 30.0,
+    "staged_early": 1.0,
+    "extraction_x_m": 1.85,
+    "extraction_z_m": 1.35,
+    "right_tool_x_detour_m": -0.34,
+    "right_tool_detour_axis": 0,
+    "left_unfold_lead": 0.12,
+    "fold_time_warp_s": 0.05
+  },
+  "part_from_tool": {
+    "left": [
+      [
+        -0.7071067811865475,
+        -1.2246467991473532e-16,
+        -0.7071067811865476,
+        0.0021213203435596637
+      ],
+      [
+        1.7431527984210495e-32,
+        1.0,
+        -1.7319121124709866e-16,
+        8.318800866872375e-18
+      ],
+      [
+        0.7071067811865476,
+        -1.2246467991473532e-16,
+        -0.7071067811865475,
+        0.17424890681159275
+      ],
+      [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    ],
+    "right": [
+      [
+        0.7071067811865475,
+        0.0,
+        0.7071067811865476,
+        -0.0021213203435596637
+      ],
+      [
+        -8.659560562354934e-17,
+        -1.0,
+        8.659560562354932e-17,
+        -1.1201201460944976e-18
+      ],
+      [
+        0.7071067811865476,
+        -1.2246467991473532e-16,
+        -0.7071067811865475,
+        0.17424890681159275
+      ],
+      [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    ]
+  },
+  "extraction_end_joints_rad": {
+    "left": [
+      -1.8752689787390435,
+      -0.7220975757422973,
+      1.698257650461243,
+      -0.43101589186029166,
+      1.8390199119047475,
+      -2.366756584487945
+    ],
+    "right": [
+      1.8752689787390666,
+      3.8636902293321103,
+      -1.698257650461245,
+      3.5726085454500685,
+      -1.8390199119047266,
+      2.3667565844879563
+    ]
+  },
+  "fold_target_joints_rad": {
+    "left": [
+      -2.6229980148,
+      -1.5,
+      2.2,
+      0.6672896915000001,
+      1.1957625414,
+      -2.7553996334
+    ],
+    "right": [
+      0.0,
+      3.9269908169872414,
+      -2.2,
+      3.988904798692345,
+      -1.1957625414,
+      2.7553996334
+    ]
+  },
+  "unfold_goal_joints_rad": {
+    "left": [
+      -3.161509077848264,
+      -0.4189387793307069,
+      2.427585504101917,
+      -1.2088642817606727,
+      0.7714161792759133,
+      -3.1617935294110535
+    ],
+    "right": [
+      3.1615090778483923,
+      3.560531432920986,
+      -2.427585504101877,
+      4.350456935349852,
+      -0.7714161792757851,
+      3.1617935294111836
+    ]
+  },
+  "times_s": {
+    "grasp": 5.8,
+    "lift_end": 6.17,
+    "pull_end": 6.62,
+    "fold_start": 7.12,
+    "fold_end": 9.2,
+    "turn_end": 12.76,
+    "unfold_end": 14.3
+  },
+  "extraction": {
+    "stock_xyz_left": [
+      1.908199429512024,
+      -3.16875741481781,
+      0.7604363560676575
+    ],
+    "stock_xyz_right": [
+      1.908199429512024,
+      -2.53124258518219,
+      0.7604363560676575
+    ],
+    "lift_m": 0.03,
+    "retract_x_m": 1.85,
+    "raised_z_m": 1.35,
+    "part_rotation": "identity",
+    "interpolation": "quintic smoothstep per sequential segment"
+  },
+  "fold": {
+    "phase": "u=(tau-7.12)/(9.2-7.12)",
+    "all_joint_weights": "S(u)",
+    "right_joint1_weight": "S(u/0.9)",
+    "S": "v=clip(u,0,1); v^3*(10-15*v+6*v^2)"
+  },
+  "body_yaw_bump": {
+    "amplitude_deg": 30,
+    "phase": "u=(tau-7.12)/(9.2-7.12)",
+    "formula": "radians(30)*S(u/(0.7/1.55))*(1-S((u-1/1.55)/(0.55/1.55)))",
+    "action": "pre-multiply reflected source root rotation by RZ(bump); retain source translation/lift; node565 rotation root, node566 lifted root"
+  },
+  "right_tool_detour": {
+    "offset_world_m": [
+      -0.34,
+      0,
+      0
+    ],
+    "envelope": "S((tau-7.4)/0.45)*(1-S((tau-8.3)/0.45))",
+    "procedure": "Nominal fold q -> FK world tool; add offset*envelope to translation without rotation change; solve source IK from nominal q; derive plug from solved tool and fixed part_from_tool"
+  },
+  "unfold": {
+    "phase": "u=clip((t-12.76)/(14.3-12.76),0,1)",
+    "right_weight": "u^2*(3-2*u)",
+    "left_weight": "v=clip(u/0.88,0,1); v^2*(3-2*v)",
+    "goal_part_left_xyz_m": [
+      0.5,
+      -2.49,
+      1.05
+    ],
+    "goal_part_right_xyz_m": [
+      0.5,
+      -3.21,
+      1.05
+    ],
+    "goal_part_rotation": "RZ(pi)"
+  },
+  "cable": {
+    "length_m": 0.9,
+    "radius_m": 0.014,
+    "sample_points": 81,
+    "tube_vertices": 1330,
+    "direction_source": "Peirce dynamic routing under development; current saved vertices are spatial w0 with default up direction",
+    "endpoint_local_m": [
+      -0.096,
+      0,
+      0
+    ],
+    "outward_direction": "-part_world_rotation[:,0]"
+  },
+  "context": "Concept-process replay geometry; not live robot controls or a formal physical-validity verdict.",
+  "guard": "OP020 fold_timewarp detour340:zero findings/blockers",
+  "source_preservation": "Existing source geometry, motion_op020, source motion and robot models were not modified by this probe.",
+  "intentional_contacts": [
+    {
+      "nodes": [
+        564,
+        565
+      ],
+      "basis": "Original fixed stator / yaw turret mechanical union; retained baseline pair"
+    },
+    {
+      "nodes": [
+        565,
+        566
+      ],
+      "basis": "Original yaw turret / lift column mechanical union"
+    },
+    {
+      "nodes": [
+        565,
+        780
+      ],
+      "basis": "Original service-header mounting pair, previously recorded baseline"
+    },
+    {
+      "nodes": [
+        566,
+        959
+      ],
+      "basis": "Original left robot base mounting face"
+    },
+    {
+      "nodes": [
+        566,
+        999
+      ],
+      "basis": "Original right robot base mounting face"
+    },
+    {
+      "nodes": [
+        991,
+        997
+      ],
+      "basis": "Left gripper pad / held plug shell intended grasp"
+    },
+    {
+      "nodes": [
+        996,
+        997
+      ],
+      "basis": "Left gripper pad / held plug shell intended grasp"
+    },
+    {
+      "nodes": [
+        1031,
+        1037
+      ],
+      "basis": "Right gripper pad / held plug shell intended grasp"
+    },
+    {
+      "nodes": [
+        1036,
+        1037
+      ],
+      "basis": "Right gripper pad / held plug shell intended grasp"
+    },
+    {
+      "nodes": [
+        575,
+        997
+      ],
+      "times_s": [
+        5.8
+      ],
+      "basis": "Unlifted stock plug / support at grasp instant"
+    },
+    {
+      "nodes": [
+        575,
+        1037
+      ],
+      "times_s": [
+        5.8
+      ],
+      "basis": "Unlifted stock plug / support at grasp instant"
+    },
+    {
+      "nodes": [
+        997,
+        1683
+      ],
+      "basis": "Cable end / own boot exit face; routing final shape requires own-end contact classification"
+    },
+    {
+      "nodes": [
+        1037,
+        1683
+      ],
+      "basis": "Cable end / own boot exit face; routing final shape requires own-end contact classification"
+    }
+  ],
+  "history": [
+    {
+      "name": "detour220 initial candidate",
+      "profile": "audit/op020_motion_profile_detour220_history.json",
+      "checks": "audit/op020_motion_checks_detour220_history.json",
+      "motion": "audit/op020_motion_detour220_history.npz",
+      "finding": "91 sparse samples cleared hard bodies; final30Hz found plug/pipe atframes242/243"
+    },
+    {
+      "name": "detour340 unwarped",
+      "poses": "audit/op020_detour340_all_60hz.npz",
+      "checks": "audit/op020_detour340_all_60hz.json",
+      "hard_scene": "audit/op020_detour340_native_hard_scene.json",
+      "finding": "46 native hard-body samples clear; rightq0 speed3.393087916rad/s exceededpi"
+    }
+  ],
+  "motion_time": {
+    "helper": "op020_motion.motion_time(playback_seconds)",
+    "fold_interval_s": [
+      7.12,
+      9.2
+    ],
+    "amplitude_s": 0.05,
+    "formula": "tau=t+0.05*sin(2*pi*(t-7.12)/2.08) insidefold; tau=t outside",
+    "shared_by": [
+      "foldjointweights",
+      "righttooldetour",
+      "rootyaw",
+      "rootlift",
+      "cable_route_profile"
+    ],
+    "avoid_double_mapping": "Publiccell_root/cell_rotation_root/folded_target/targetacceptplaybacktandmapinternally. Exportcallsmotion_time(t)onlyforcablerouting.",
+    "minimum_derivative": 0.8489618916543368
+  },
+  "current_checks": {
+    "native_30hz": "audit/op020_motion_checks.json",
+    "held_60hz": "audit/op020_detour340_timewarp_60hz.json",
+    "time_mapping_equivalence": "audit/op020_motion_time_equivalence.json",
+    "geometry_before_timewarp": "audit/op020_detour340_native_hard_scene.json",
+    "pending": "Re-export geometry/poses with final cable route and run final full-scene intersection audit"
+  }
+}

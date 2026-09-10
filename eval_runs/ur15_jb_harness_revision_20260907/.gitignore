@@ -1,0 +1,17 @@
+# Generated local artifacts are carried separately by SHA.
+*.blend
+*.blend1
+*.mp4
+*.npz
+*.png
+*.jpg
+*.zip
+*.gz
+*.log
+*.pdf
+*.stp
+*.step
+*.dae
+*.glb
+*.stl
+__pycache__/

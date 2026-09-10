@@ -1,0 +1,169 @@
+{
+  "observed_at": "2026-09-10T20:30:41.722131+09:00",
+  "native": "analysis/op030_stagger_air_clearance_static_v06.blend",
+  "native_sha256": "0de256bcfa2c377ac3c5048d0ae2d3a88ae057e7b6dd501ae58da821530f46d6",
+  "source": "analysis/op030_stagger_supported_static_v06.blend",
+  "source_sha256": "e197a90c8c804425ee53db98b267ef4f052d945c8d4c7ae92f81e5bc5aef6311",
+  "evidence_basis": "Actual surface FCL, finite saved FK poses, four-part native readback, original suspended assembly",
+  "moved_objects": [
+    "Split_bay_1__source_0782_m0209_p00",
+    "Split_bay_1__source_0782_m0209_p01",
+    "Split_bay_1__source_0782_m0209_p02",
+    "Split_bay_1__source_0782_m0209_p03"
+  ],
+  "displacement_global_m": [
+    0.0,
+    -0.78,
+    0.0
+  ],
+  "retained_object_count": 9567,
+  "retained_object_signature": "2de8f873de1fa8c7b65c0a111aaad20e7337c413f215abb952246c31e3dd71ac",
+  "local_geometry_unchanged": true,
+  "parent_unchanged": true,
+  "readback_mismatches": 0,
+  "finite_motion_pose_count": 975,
+  "dynamic_mesh_count": 179,
+  "motion_fcl_queries": 119,
+  "finite_motion_intersections": 0,
+  "omitted_fixed_aabb_overlaps": [],
+  "unexpected_fixed_intersections": 0,
+  "classified_main_interfaces": [
+    {
+      "first": "Split_bay_1__source_0782_m0209_p00",
+      "second": "source_0780_m0207_p03",
+      "role": "Retained upper tube/tee intersection with continuous right air main",
+      "selected_main_triangle_count": 10,
+      "main_radius_m": 0.032,
+      "maximum_radial_error_m": 8.002222146724636e-08,
+      "contact_positions_m": [
+        [
+          1.434000015258789,
+          -0.33000007152557376,
+          2.609999895095825
+        ],
+        [
+          1.432124376296997,
+          -0.3230001020431519,
+          2.609999895095825
+        ],
+        [
+          1.432124376296997,
+          -0.33700004100799563,
+          2.609999895095825
+        ],
+        [
+          1.4270000457763672,
+          -0.317875771522522,
+          2.609999895095825
+        ],
+        [
+          1.4270000457763672,
+          -0.3421243715286255,
+          2.609999895095825
+        ]
+      ]
+    },
+    {
+      "first": "Split_bay_1__source_0782_m0209_p01",
+      "second": "source_0780_m0207_p03",
+      "role": "Retained upper tube/tee intersection with continuous right air main",
+      "selected_main_triangle_count": 22,
+      "main_radius_m": 0.032,
+      "maximum_radial_error_m": 8.002222146724636e-08,
+      "contact_positions_m": [
+        [
+          1.444432020187378,
+          -0.33889260768890384,
+          2.6067800521850586
+        ],
+        [
+          1.444432020187378,
+          -0.3211075353622437,
+          2.6067800521850586
+        ],
+        [
+          1.444432020187378,
+          -0.3211075353622437,
+          2.6067800521850586
+        ],
+        [
+          1.444432020187378,
+          -0.33889260768890384,
+          2.6067800521850586
+        ],
+        [
+          1.444432020187378,
+          -0.33889260768890384,
+          2.6067800521850586
+        ]
+      ]
+    }
+  ],
+  "internal_pair_invariance": [
+    {
+      "first": "Split_bay_1__source_0782_m0209_p00",
+      "second": "Split_bay_1__source_0782_m0209_p01",
+      "original_intersection": true,
+      "relocated_intersection": true
+    },
+    {
+      "first": "Split_bay_1__source_0782_m0209_p00",
+      "second": "Split_bay_1__source_0782_m0209_p02",
+      "original_intersection": false,
+      "relocated_intersection": false
+    },
+    {
+      "first": "Split_bay_1__source_0782_m0209_p00",
+      "second": "Split_bay_1__source_0782_m0209_p03",
+      "original_intersection": false,
+      "relocated_intersection": false
+    },
+    {
+      "first": "Split_bay_1__source_0782_m0209_p01",
+      "second": "Split_bay_1__source_0782_m0209_p02",
+      "original_intersection": true,
+      "relocated_intersection": true
+    },
+    {
+      "first": "Split_bay_1__source_0782_m0209_p01",
+      "second": "Split_bay_1__source_0782_m0209_p03",
+      "original_intersection": true,
+      "relocated_intersection": true
+    },
+    {
+      "first": "Split_bay_1__source_0782_m0209_p02",
+      "second": "Split_bay_1__source_0782_m0209_p03",
+      "original_intersection": false,
+      "relocated_intersection": false
+    }
+  ],
+  "full_motion_bank_complete": false,
+  "pending": "Unconnected free intervals and final B 30 Hz bank",
+  "references": [
+    {
+      "path": "audit/op030_stagger_air_clearance_static_v06_geometry.json",
+      "sha256": "70900559b0b960699349960a40c9e69e2d4faab5ecbe9e8d597d377ccc441b13"
+    },
+    {
+      "path": "audit/op030_air_drop_v06_candidate_03.json",
+      "sha256": "c7657e05129e6daccf5f32929e45ee6a888d7bfe76612f0200b8e577a0fbec09"
+    },
+    {
+      "path": "audit/op030_air_drop_v06_full_envelope.json",
+      "sha256": "46eb9528dfc8ba3e0b3bca8a7fe01aecab7e811da4fee239542007b628760aa1"
+    },
+    {
+      "path": "audit/op030_air_drop_v06_environment.json",
+      "sha256": "e7c916e88c18ce1d549161d4fc7e037dd7c9707c75d686c9a93c08da6bed6177"
+    },
+    {
+      "path": "analysis/op030_air_drop_v06_scope.md",
+      "sha256": "e8b7482dcb0013028bd4a78a9baff548cfa24b253c9b8a93042b5cf1641159a7"
+    },
+    {
+      "path": "audit/op030_stagger_supported_static_v06_completion.json",
+      "sha256": "b1c99136a07f535939ccbbfd00ad0f680b2422023537d21bab7e37c8cf15b849"
+    }
+  ],
+  "formal_physical_validity_verdict": null
+}

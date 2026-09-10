@@ -1,0 +1,393 @@
+{
+  "observed_at": "2026-09-10T19:18:24.827923+09:00",
+  "prior_art_guard": {
+    "keywords": [
+      "OP030B",
+      "h1_yaw",
+      "1059"
+    ],
+    "findings": 0,
+    "blockers": 0
+  },
+  "delta": "Two explicit transient H1 yaw biases +/-15 deg; phase22 only; task/tool/material endpoints unchanged.",
+  "survey": "/home/rlrk/IsaacLab/eval_runs/ur15_jb_harness_revision_20260907/analysis/op030_split_b_stagger_v06_survey_09.npz",
+  "survey_sha256": "836e3cc4a71c6d99b3b0be7072b8982a06ca8109cdd308d296468e2f7aac0b90",
+  "held_audit_sha256": "0188ce1401742c9d8a9830520bf8dfe03447e50c10bd5e681f887e15abed5c27",
+  "source_mesh": "/home/rlrk/IsaacLab/eval_runs/ur15_jb_harness_revision_20260907/data/op030_split_b_stagger_v06_meshes.npz",
+  "source_mesh_sha256": "de0d297e45f7b67820626c2be2c085bc1e39bb82ad1ce46a830ec20f058975e5",
+  "factory_sha256_before": "06d5ad87595b86b9c6a68f7e15c0b27768261b3449deb62b09094a688e28df9b",
+  "factory_sha256_after": "06d5ad87595b86b9c6a68f7e15c0b27768261b3449deb62b09094a688e28df9b",
+  "profiles": [
+    {
+      "h1_yaw_bias_degrees": 15.0,
+      "array_key": "plus15_joints",
+      "samples": 361,
+      "sampled_complete": true,
+      "failures": [],
+      "hit_frames": 6,
+      "hits": [
+        {
+          "time_s": 73.0,
+          "phase": 22,
+          "pairs": [
+            [
+              "OP030B__source_1054_m0309_p00",
+              "Split_bay_1__source_0782_m0209_p00"
+            ]
+          ],
+          "pipe_0782": [
+            [
+              "OP030B__source_1054_m0309_p00",
+              "Split_bay_1__source_0782_m0209_p00"
+            ]
+          ],
+          "other_pairs": []
+        },
+        {
+          "time_s": 73.1,
+          "phase": 22,
+          "pairs": [
+            [
+              "OP030B__source_1054_m0309_p00",
+              "Split_bay_1__source_0782_m0209_p00"
+            ]
+          ],
+          "pipe_0782": [
+            [
+              "OP030B__source_1054_m0309_p00",
+              "Split_bay_1__source_0782_m0209_p00"
+            ]
+          ],
+          "other_pairs": []
+        },
+        {
+          "time_s": 73.2,
+          "phase": 22,
+          "pairs": [
+            [
+              "OP030B__source_1054_m0309_p00",
+              "Split_bay_1__source_0782_m0209_p00"
+            ]
+          ],
+          "pipe_0782": [
+            [
+              "OP030B__source_1054_m0309_p00",
+              "Split_bay_1__source_0782_m0209_p00"
+            ]
+          ],
+          "other_pairs": []
+        },
+        {
+          "time_s": 73.3,
+          "phase": 22,
+          "pairs": [
+            [
+              "OP030B__source_1054_m0309_p00",
+              "Split_bay_1__source_0782_m0209_p00"
+            ]
+          ],
+          "pipe_0782": [
+            [
+              "OP030B__source_1054_m0309_p00",
+              "Split_bay_1__source_0782_m0209_p00"
+            ]
+          ],
+          "other_pairs": []
+        },
+        {
+          "time_s": 73.4,
+          "phase": 22,
+          "pairs": [
+            [
+              "OP030B__source_1054_m0309_p00",
+              "Split_bay_1__source_0782_m0209_p00"
+            ]
+          ],
+          "pipe_0782": [
+            [
+              "OP030B__source_1054_m0309_p00",
+              "Split_bay_1__source_0782_m0209_p00"
+            ]
+          ],
+          "other_pairs": []
+        },
+        {
+          "time_s": 73.5,
+          "phase": 22,
+          "pairs": [
+            [
+              "OP030B__source_1054_m0309_p00",
+              "Split_bay_1__source_0782_m0209_p00"
+            ]
+          ],
+          "pipe_0782": [
+            [
+              "OP030B__source_1054_m0309_p00",
+              "Split_bay_1__source_0782_m0209_p00"
+            ]
+          ],
+          "other_pairs": []
+        }
+      ],
+      "pipe_0782_hit_frames": 6,
+      "other_hit_frames": 0,
+      "pair_counts": [
+        {
+          "pair": [
+            "OP030B__source_1054_m0309_p00",
+            "Split_bay_1__source_0782_m0209_p00"
+          ],
+          "count": 6
+        }
+      ],
+      "old_grid_other_hit_frames": 6,
+      "new_on_old_grid_other_hit_frames": 0,
+      "maximum_original_fk_matrix_error": 2.472588321589253e-09,
+      "maximum_joint_step_rad": 0.17077009112983393,
+      "maximum_fixed_hand_gap_material_target_error": 0.0,
+      "endpoint_root_errors": [
+        0.0,
+        0.0
+      ],
+      "intersection_free": false,
+      "pipe_exempted_from_acceptance": false
+    },
+    {
+      "h1_yaw_bias_degrees": -15.0,
+      "array_key": "minus15_joints",
+      "samples": 361,
+      "sampled_complete": false,
+      "failures": [
+        {
+          "time_s": 76.0,
+          "arm": 0,
+          "residual": 0.02277481862361022,
+          "maximum_step_rad": 0.07618130096118891,
+          "within_limits": true
+        }
+      ],
+      "hit_frames": 5,
+      "hits": [
+        {
+          "time_s": 76.1,
+          "phase": 22,
+          "pairs": [
+            [
+              "OP030B__onhand_OP030_left_housing",
+              "OP030B__source_1059_m0314_p00"
+            ],
+            [
+              "OP030B__onhand_OP030_left_mount_tab",
+              "OP030B__source_1059_m0314_p00"
+            ],
+            [
+              "OP030B__onhand_OP030_left_support_arm",
+              "OP030B__source_1059_m0314_p00"
+            ],
+            [
+              "OP030B__source_1059_m0314_p00",
+              "OP030B__source_1066_m0321_p00"
+            ],
+            [
+              "OP030B__source_1059_m0314_p00",
+              "OP030B__source_1067_m0322_p00"
+            ],
+            [
+              "OP030B__source_1059_m0314_p00",
+              "OP030B__source_1073_m0328_p00"
+            ]
+          ],
+          "pipe_0782": [],
+          "other_pairs": [
+            [
+              "OP030B__onhand_OP030_left_housing",
+              "OP030B__source_1059_m0314_p00"
+            ],
+            [
+              "OP030B__onhand_OP030_left_mount_tab",
+              "OP030B__source_1059_m0314_p00"
+            ],
+            [
+              "OP030B__onhand_OP030_left_support_arm",
+              "OP030B__source_1059_m0314_p00"
+            ],
+            [
+              "OP030B__source_1059_m0314_p00",
+              "OP030B__source_1066_m0321_p00"
+            ],
+            [
+              "OP030B__source_1059_m0314_p00",
+              "OP030B__source_1067_m0322_p00"
+            ],
+            [
+              "OP030B__source_1059_m0314_p00",
+              "OP030B__source_1073_m0328_p00"
+            ]
+          ]
+        },
+        {
+          "time_s": 76.2,
+          "phase": 22,
+          "pairs": [
+            [
+              "OP030B__onhand_OP030_left_housing",
+              "OP030B__source_1059_m0314_p00"
+            ],
+            [
+              "OP030B__source_1059_m0314_p00",
+              "OP030B__source_1066_m0321_p00"
+            ],
+            [
+              "OP030B__source_1059_m0314_p00",
+              "OP030B__source_1067_m0322_p00"
+            ],
+            [
+              "OP030B__source_1059_m0314_p00",
+              "OP030B__source_1073_m0328_p00"
+            ]
+          ],
+          "pipe_0782": [],
+          "other_pairs": [
+            [
+              "OP030B__onhand_OP030_left_housing",
+              "OP030B__source_1059_m0314_p00"
+            ],
+            [
+              "OP030B__source_1059_m0314_p00",
+              "OP030B__source_1066_m0321_p00"
+            ],
+            [
+              "OP030B__source_1059_m0314_p00",
+              "OP030B__source_1067_m0322_p00"
+            ],
+            [
+              "OP030B__source_1059_m0314_p00",
+              "OP030B__source_1073_m0328_p00"
+            ]
+          ]
+        },
+        {
+          "time_s": 76.3,
+          "phase": 22,
+          "pairs": [
+            [
+              "OP030B__source_1059_m0314_p00",
+              "OP030B__source_1066_m0321_p00"
+            ],
+            [
+              "OP030B__source_1059_m0314_p00",
+              "OP030B__source_1067_m0322_p00"
+            ]
+          ],
+          "pipe_0782": [],
+          "other_pairs": [
+            [
+              "OP030B__source_1059_m0314_p00",
+              "OP030B__source_1066_m0321_p00"
+            ],
+            [
+              "OP030B__source_1059_m0314_p00",
+              "OP030B__source_1067_m0322_p00"
+            ]
+          ]
+        },
+        {
+          "time_s": 76.4,
+          "phase": 22,
+          "pairs": [
+            [
+              "OP030B__source_1059_m0314_p00",
+              "OP030B__source_1066_m0321_p00"
+            ]
+          ],
+          "pipe_0782": [],
+          "other_pairs": [
+            [
+              "OP030B__source_1059_m0314_p00",
+              "OP030B__source_1066_m0321_p00"
+            ]
+          ]
+        },
+        {
+          "time_s": 76.5,
+          "phase": 22,
+          "pairs": [
+            [
+              "OP030B__source_1059_m0314_p00",
+              "OP030B__source_1066_m0321_p00"
+            ]
+          ],
+          "pipe_0782": [],
+          "other_pairs": [
+            [
+              "OP030B__source_1059_m0314_p00",
+              "OP030B__source_1066_m0321_p00"
+            ]
+          ]
+        }
+      ],
+      "pipe_0782_hit_frames": 0,
+      "other_hit_frames": 5,
+      "pair_counts": [
+        {
+          "pair": [
+            "OP030B__onhand_OP030_left_housing",
+            "OP030B__source_1059_m0314_p00"
+          ],
+          "count": 2
+        },
+        {
+          "pair": [
+            "OP030B__onhand_OP030_left_mount_tab",
+            "OP030B__source_1059_m0314_p00"
+          ],
+          "count": 1
+        },
+        {
+          "pair": [
+            "OP030B__onhand_OP030_left_support_arm",
+            "OP030B__source_1059_m0314_p00"
+          ],
+          "count": 1
+        },
+        {
+          "pair": [
+            "OP030B__source_1059_m0314_p00",
+            "OP030B__source_1066_m0321_p00"
+          ],
+          "count": 5
+        },
+        {
+          "pair": [
+            "OP030B__source_1059_m0314_p00",
+            "OP030B__source_1067_m0322_p00"
+          ],
+          "count": 3
+        },
+        {
+          "pair": [
+            "OP030B__source_1059_m0314_p00",
+            "OP030B__source_1073_m0328_p00"
+          ],
+          "count": 2
+        }
+      ],
+      "old_grid_other_hit_frames": 6,
+      "new_on_old_grid_other_hit_frames": 2,
+      "maximum_original_fk_matrix_error": 0.005252685528191081,
+      "maximum_joint_step_rad": 0.17671360594089233,
+      "maximum_fixed_hand_gap_material_target_error": 0.0,
+      "endpoint_root_errors": [
+        0.0,
+        0.0
+      ],
+      "intersection_free": false,
+      "pipe_exempted_from_acceptance": false
+    }
+  ],
+  "output": "/home/rlrk/IsaacLab/eval_runs/ur15_jb_harness_revision_20260907/analysis/op030_b_stagger_h1_yaw_01.npz",
+  "output_sha256": "8a49e63a11e17b3d65cd68188fb2e086909611bea433a0ddef4ccde74038e0e7",
+  "contact_exemptions_added": [],
+  "scope": "H1 held interval only; raw pipe contacts retained; no global path promotion.",
+  "formal_physical_validity_verdict": null
+}

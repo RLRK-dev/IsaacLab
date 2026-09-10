@@ -1,0 +1,193 @@
+{
+  "observed_at": "2026-09-10T05:55:23.981802+09:00",
+  "passed": true,
+  "factory": "op030_support_motion_v05:support_sequence_v05",
+  "bank_sha256": "e56b610e5ee4642b16c03f7fb321936e3d1d11183218fe3fd0dbd3851dcc6c96",
+  "files": [
+    {
+      "path": "data/op030_split_a_motion_v05.npz",
+      "sha256": "e56b610e5ee4642b16c03f7fb321936e3d1d11183218fe3fd0dbd3851dcc6c96",
+      "bytes": 9857656
+    },
+    {
+      "path": "data/op030_split_a_motion_v04.npz",
+      "sha256": "8df40f5e363ba66234fa44e6a6b29ae3c0a48c2470488e592b2873d2a5c076b8",
+      "bytes": 9731245
+    },
+    {
+      "path": "data/op030_split_a_final_supported_v04_meshes.npz",
+      "sha256": "4c11e13e1c14a11a4c2a3312a94830d98a74142926cf54c1dc06c533704aa180",
+      "bytes": 7993920
+    },
+    {
+      "path": "data/op030_duct_support_v04_world_02.npz",
+      "sha256": "2eccf1a6347d16045c40190ca1437114c5d7661cb42975d9d4b5bfc029b8360f",
+      "bytes": 12124
+    },
+    {
+      "path": "data/op030_downstream_restored_v04_world.npz",
+      "sha256": "3c3d4fdc95c7d4e981aa02d45f338856e14126d1199126fb2f93086a37980589",
+      "bytes": 17291
+    },
+    {
+      "path": "audit/op030_split_a_motion_v05.json",
+      "sha256": "48afc93721ddc194eeb05f3414e00b348f44cb2fcdb8e417fae95454e96de796",
+      "bytes": 20015
+    },
+    {
+      "path": "audit/op030_support_ascent_saved_v05.json",
+      "sha256": "ce2cfc0d14fe282589b6a9ce3225f1fad2a52ad76f908431da36885e99e9da81",
+      "bytes": 6374
+    },
+    {
+      "path": "audit/op030_support_release_v05.json",
+      "sha256": "387b85bd5af354c7a846ef787152f5e185a864ed49d64b12386de1c6d9bf32cd",
+      "bytes": 3128
+    },
+    {
+      "path": "audit/op030_support_ascent_v05.json",
+      "sha256": "449bbe46ae84c6bf2b54fd55027018c5f26134bad7dd9ba6c1aecd9dab8af348",
+      "bytes": 3118
+    },
+    {
+      "path": "audit/op030_support_connected_v05.json",
+      "sha256": "f606cb6ecf7298a93c5da10bc1cc77940a4c5ee988799cab12f09f1c0f43c4d9",
+      "bytes": 5951
+    },
+    {
+      "path": "audit/op030_split_a_motion_v04.json",
+      "sha256": "cd879faa0aaef02ee00bc5ce1d716e596a086f9905acb1f914963dae0b65bfc2",
+      "bytes": 27108
+    },
+    {
+      "path": "audit/op030_split_a_final_supported_v04_check.json",
+      "sha256": "d9d4d852583273acff97549c1c16b0f96169fa5f0e3fe2c067fda3dbfb723a6a",
+      "bytes": 51887
+    },
+    {
+      "path": "audit/op030_downstream_restored_v04_motion_delta.json",
+      "sha256": "a25baad8eef7bf0b996281ef35dff151c722b91219bb2b93664f5a7acb48b050",
+      "bytes": 310644
+    },
+    {
+      "path": "scripts/op030_support_motion_v05.py",
+      "sha256": "b7d413891606349df6994b55dd59b8e81a7e0be267a4c96bc0ea429cc1ac4779",
+      "bytes": 6548
+    },
+    {
+      "path": "scripts/op030_support_plan_v05.py",
+      "sha256": "4ffa1e58725f153c75dc3202030bf5807ac8a542be57c530611c36d09e73dda7",
+      "bytes": 5613
+    },
+    {
+      "path": "scripts/op030_support_replay_v05.py",
+      "sha256": "633e9d42b91ddca3415dcb87e30631f3c0a540f4547d96a4c95559053f8de4af",
+      "bytes": 20569
+    },
+    {
+      "path": "scripts/split_tools_audit_support_ascent_v05.py",
+      "sha256": "1bb19b5cc3a44da28e470e01ebaa7ecb539646c741b962f99fac0e905ab17ac4",
+      "bytes": 7929
+    }
+  ],
+  "document": {
+    "path": "analysis/OP030_A_v05_同時上昇_確認.md",
+    "sha256": "47fb2d1618af707678052a20a876c7cfc8cd2b0179443cacde06270fef19bba6"
+  },
+  "saved_checks": {
+    "new_bank_matches_motion_report": true,
+    "both_pairs_begin_ascent_together": true,
+    "both_arms_240mm_vertical": true,
+    "orientation_retained": true,
+    "no_downward_ascent_step": true,
+    "assembled_payload_static": true,
+    "both_bolts_installed_before_release": true,
+    "exact_v04_arrays_outside_changes": true,
+    "entire_bank_ledger_matches_factory": true,
+    "fixed_pallet_and_jb_height": true,
+    "first_385_prefill_overlap_identical": true,
+    "final_park_objects_and_loaded_uid005_identical": true,
+    "author_times_monotone": true,
+    "original_and_candidate_inputs_unchanged": true
+  },
+  "critical_events": [
+    {
+      "support_uid": "OP030_T01_UID001",
+      "first_frame": 2818,
+      "release_complete_frame": 2840,
+      "ascent_complete_frame": 2954,
+      "release_duration_s": 0.7333333333333343,
+      "ascent_duration_s": 3.799999999999997,
+      "first_positive_ascent_frame": [
+        2841,
+        2841
+      ],
+      "positive_ascent_threshold_m": 1e-06,
+      "same_first_positive_ascent_frame": true,
+      "xyz_displacement_m": [
+        [
+          -3.2193692156567977e-13,
+          -7.349676423018536e-14,
+          0.23999999999998556
+        ],
+        [
+          -4.4883541328033516e-13,
+          -1.2434497875801753e-13,
+          0.23999999999998756
+        ]
+      ],
+      "maximum_xy_drift_m": 9.147670954057219e-10,
+      "maximum_rotation_matrix_delta": 2.514337623696215e-10,
+      "maximum_left_right_z_increment_difference_m": 2.3920354585982295e-10,
+      "minimum_frame_z_increment_m": 4.9404266417862885e-06,
+      "maximum_fixed_payload_matrix_delta": {
+        "JB_OP020_UID001": 2.220446049250313e-16,
+        "source_0292": 2.220446049250313e-16,
+        "OP030_T01_UID001": 2.220446049250313e-16,
+        "OP030A_feeder_M4_UID001": 2.220446049250313e-16,
+        "OP030A_feeder_M4_UID002": 2.220446049250313e-16
+      },
+      "both_bolts_installed_before_release_and_during_ascent": true
+    },
+    {
+      "support_uid": "OP030_T02_UID001",
+      "first_frame": 6026,
+      "release_complete_frame": 6047,
+      "ascent_complete_frame": 6162,
+      "release_duration_s": 0.6999999999999886,
+      "ascent_duration_s": 3.833333333333343,
+      "first_positive_ascent_frame": [
+        6048,
+        6048
+      ],
+      "positive_ascent_threshold_m": 1e-06,
+      "same_first_positive_ascent_frame": true,
+      "xyz_displacement_m": [
+        [
+          -4.0034642267983145e-13,
+          -2.708944180085382e-14,
+          0.24000000000009214
+        ],
+        [
+          -5.181965967437918e-13,
+          -2.0405899192610377e-13,
+          0.23999999999995447
+        ]
+      ],
+      "maximum_xy_drift_m": 6.342482095078594e-10,
+      "maximum_rotation_matrix_delta": 4.820974825911854e-10,
+      "maximum_left_right_z_increment_difference_m": 4.1833425612480823e-11,
+      "minimum_frame_z_increment_m": 4.678229864829575e-06,
+      "maximum_fixed_payload_matrix_delta": {
+        "JB_OP020_UID001": 2.220446049250313e-16,
+        "source_0292": 2.220446049250313e-16,
+        "OP030_T02_UID001": 2.220446049250313e-16,
+        "OP030A_feeder_M4_UID003": 2.220446049250313e-16,
+        "OP030A_feeder_M4_UID004": 2.220446049250313e-16
+      },
+      "both_bolts_installed_before_release_and_during_ascent": true
+    }
+  ],
+  "formal_physical_validity_verdict": null,
+  "original_v04_assets_modified": false
+}

@@ -1,0 +1,116 @@
+{
+  "observed_at": "2026-09-10T17:13:08.169724+09:00",
+  "evidence_basis": "Saved native readback, evaluated world triangles, FCL command output, and original source definition",
+  "native": "analysis/op030_stagger_static_v06.blend",
+  "native_sha256": "afb6428ae60ff87d845badaf34106227d04873b1b01940d131d39bdd6d220f59",
+  "source": "analysis/op030_split_front_feeders_static_v05.blend",
+  "source_sha256": "b3d22be1dfba8e2c0247677a6f05eb8761d357572d9aac95a372b58f074fd22f",
+  "references": [
+    {
+      "path": "audit/op030_stagger_static_v06_geometry.json",
+      "sha256": "d8c0864a626130c4211bdc54e73bd6e2346acc5085e4b21ac04823f99e510b10"
+    },
+    {
+      "path": "audit/op030_stagger_static_v06_raw_check.json",
+      "sha256": "a97d1db6da7f7fb1defc2d7d59a747515173440a3164f43b40d896d685b0b9e0"
+    },
+    {
+      "path": "audit/op030_stagger_static_v06_readback.json",
+      "sha256": "596fd122fc38c46d687b7352515a53e94260da5c3bd8fb88c3d8af035dec804f"
+    },
+    {
+      "path": "audit/op030_split_v04_prefill_installation_classified.json",
+      "sha256": "ce55a69a5d7c8cb1f696848512893dddd926c1e528ea78ee990ca09e0a94a4b5"
+    },
+    {
+      "path": "analysis/op030_stagger_static_v06_delta.md",
+      "sha256": "7c14d1d7118792337a4ebb413c16d4e5e6608076b909b41cba6baae0c9e61834"
+    }
+  ],
+  "moved_object_count": 420,
+  "added_empty_count": 1,
+  "fixed_object_world_unchanged_count": 9150,
+  "unchanged_local_geometry_count": 7239,
+  "moved_actual_mesh_count": 294,
+  "fixed_actual_mesh_count": 8,
+  "aabb_separated_fixed_mesh_count": 6937,
+  "fixed_candidate_pair_count": 2352,
+  "fcl_query_count": 144,
+  "unexpected_fixed_intersection_count": 0,
+  "raw_construction_interface_count": 2,
+  "classified_interfaces": [
+    {
+      "first": "OP030B__OP030_air_service_connections_header_branch",
+      "second": "source_0780_m0207_p03",
+      "role": "Existing-form branch entry into right air main",
+      "affected_fixed_triangles": 16,
+      "header_radius_m": 0.032,
+      "maximum_radial_surface_error_m": 8.002222146724636e-08,
+      "endpoint_world_m": [
+        1.42,
+        1.105,
+        2.62
+      ],
+      "branch_radius_m": 0.014,
+      "original_branch_geometry_unchanged": true
+    },
+    {
+      "first": "OP030B__source_0576_m0050_p00",
+      "second": "source_0001_m0001_p00",
+      "role": "Retained original grouted baseplate/floor installation",
+      "base_underside_z_m": -0.03999999910593033,
+      "floor_z_m": -0.032999999821186066,
+      "overlap_m": 0.006999999284744263,
+      "source": "inputs/v02_source/inputs/v01_source/op010_base/original/render_ur15_line.py:1394"
+    }
+  ],
+  "retained_support_gaps": [
+    {
+      "name": "OP030B_wire_supply_foot_-1.94_-1.28",
+      "bottom_z_m": 0.0,
+      "floor_z_m": -0.032999999821186066,
+      "gap_m": 0.032999999821186066,
+      "unchanged_by_relocation": true
+    },
+    {
+      "name": "OP030B_wire_supply_foot_-1.94_-2.12",
+      "bottom_z_m": 0.0,
+      "floor_z_m": -0.032999999821186066,
+      "gap_m": 0.032999999821186066,
+      "unchanged_by_relocation": true
+    },
+    {
+      "name": "OP030B_wire_supply_foot_-2.22_-1.28",
+      "bottom_z_m": 0.0,
+      "floor_z_m": -0.032999999821186066,
+      "gap_m": 0.032999999821186066,
+      "unchanged_by_relocation": true
+    },
+    {
+      "name": "OP030B_wire_supply_foot_-2.22_-2.12",
+      "bottom_z_m": 0.0,
+      "floor_z_m": -0.032999999821186066,
+      "gap_m": 0.032999999821186066,
+      "unchanged_by_relocation": true
+    },
+    {
+      "name": "OP030B__source_0693_m0120_p00",
+      "bottom_z_m": 6.705522803684971e-10,
+      "floor_z_m": -0.032999999821186066,
+      "gap_m": 0.033000000491738346,
+      "unchanged_by_relocation": true
+    }
+  ],
+  "support_gap_scope": "Old 33 mm floor gaps are retained and reported; no new footing/contact geometry is claimed",
+  "drawer_extensions_checked_m": [
+    0.0,
+    0.17,
+    0.34
+  ],
+  "maximum_evaluated_drawer_vertex_error_m": 1.952051322806625e-07,
+  "maximum_rigid_matrix_error": 2.384185791015625e-07,
+  "internal_moved_pair_scope": "All unchanged under one proper rigid transform; not independently newly qualified",
+  "moving_robot_paths_included": false,
+  "formal_physical_validity_verdict": null,
+  "native_modified": false
+}

@@ -1,0 +1,204 @@
+{
+  "scope": "Synthetic callback API/12D OMPL verification only; no actual B connection attempted",
+  "direct": {
+    "reused_source": "/home/rlrk/IsaacLab/eval_runs/ur15_jb_harness_revision_20260907/scripts/op030_free_paths.py",
+    "reused_source_sha256": "bd5e97f0d2c5b1e596da0afe30ebf948bdced987b64a69a6e6f4fdf4a9355400",
+    "state_dimension": 12,
+    "physical_arm_order": [
+      "left",
+      "right"
+    ],
+    "joint_limits_rad": [
+      [
+        6.283184307179586,
+        6.283184307179586,
+        3.141591653589793,
+        6.283184307179586,
+        6.283184307179586,
+        6.283184307179586
+      ],
+      [
+        6.283184307179586,
+        6.283184307179586,
+        3.141591653589793,
+        6.283184307179586,
+        6.283184307179586,
+        6.283184307179586
+      ]
+    ],
+    "solve_limit_s": 25.0,
+    "maximum_solve_calls": 1,
+    "solve_calls": 0,
+    "internal_euclidean_step_rad": 0.005,
+    "final_euclidean_step_rad": 0.0025,
+    "actual_score_calls": 9,
+    "invalid_numeric_scores": 0,
+    "direct_samples_checked": 7,
+    "final_samples_checked": 7,
+    "exact_solution": true,
+    "accepted": true,
+    "formal_physical_validity_verdict": null,
+    "endpoints_clear": [
+      true,
+      true
+    ],
+    "solution_kind": "simultaneous_straight",
+    "reason": "Direct 12D segment passed the final-spacing actual-mesh query",
+    "elapsed_wall_s": 0.00030966801568865776,
+    "waypoints": 2,
+    "joint_path_length_rad": 0.01414213562373095
+  },
+  "outside_limits": {
+    "reused_source": "/home/rlrk/IsaacLab/eval_runs/ur15_jb_harness_revision_20260907/scripts/op030_free_paths.py",
+    "reused_source_sha256": "bd5e97f0d2c5b1e596da0afe30ebf948bdced987b64a69a6e6f4fdf4a9355400",
+    "state_dimension": 12,
+    "physical_arm_order": [
+      "left",
+      "right"
+    ],
+    "joint_limits_rad": [
+      [
+        6.283184307179586,
+        6.283184307179586,
+        3.141591653589793,
+        6.283184307179586,
+        6.283184307179586,
+        6.283184307179586
+      ],
+      [
+        6.283184307179586,
+        6.283184307179586,
+        3.141591653589793,
+        6.283184307179586,
+        6.283184307179586,
+        6.283184307179586
+      ]
+    ],
+    "solve_limit_s": 25.0,
+    "maximum_solve_calls": 1,
+    "solve_calls": 0,
+    "internal_euclidean_step_rad": 0.005,
+    "final_euclidean_step_rad": 0.0025,
+    "actual_score_calls": 0,
+    "invalid_numeric_scores": 0,
+    "direct_samples_checked": 0,
+    "final_samples_checked": 0,
+    "exact_solution": false,
+    "accepted": false,
+    "formal_physical_validity_verdict": null,
+    "reason": "Endpoint outside retained joint limits",
+    "elapsed_wall_s": 7.038796320557594e-05
+  },
+  "nonfinite_score": {
+    "reused_source": "/home/rlrk/IsaacLab/eval_runs/ur15_jb_harness_revision_20260907/scripts/op030_free_paths.py",
+    "reused_source_sha256": "bd5e97f0d2c5b1e596da0afe30ebf948bdced987b64a69a6e6f4fdf4a9355400",
+    "state_dimension": 12,
+    "physical_arm_order": [
+      "left",
+      "right"
+    ],
+    "joint_limits_rad": [
+      [
+        6.283184307179586,
+        6.283184307179586,
+        3.141591653589793,
+        6.283184307179586,
+        6.283184307179586,
+        6.283184307179586
+      ],
+      [
+        6.283184307179586,
+        6.283184307179586,
+        3.141591653589793,
+        6.283184307179586,
+        6.283184307179586,
+        6.283184307179586
+      ]
+    ],
+    "solve_limit_s": 25.0,
+    "maximum_solve_calls": 1,
+    "solve_calls": 0,
+    "internal_euclidean_step_rad": 0.005,
+    "final_euclidean_step_rad": 0.0025,
+    "actual_score_calls": 2,
+    "invalid_numeric_scores": 2,
+    "direct_samples_checked": 0,
+    "final_samples_checked": 0,
+    "exact_solution": false,
+    "accepted": false,
+    "formal_physical_validity_verdict": null,
+    "endpoints_clear": [
+      false,
+      false
+    ],
+    "reason": "Start or goal failed the simultaneous actual-mesh query",
+    "elapsed_wall_s": 7.977010682225227e-05
+  },
+  "synthetic_coupled_obstacle": {
+    "reused_source": "/home/rlrk/IsaacLab/eval_runs/ur15_jb_harness_revision_20260907/scripts/op030_free_paths.py",
+    "reused_source_sha256": "bd5e97f0d2c5b1e596da0afe30ebf948bdced987b64a69a6e6f4fdf4a9355400",
+    "state_dimension": 12,
+    "physical_arm_order": [
+      "left",
+      "right"
+    ],
+    "joint_limits_rad": [
+      [
+        6.283184307179586,
+        6.283184307179586,
+        3.141591653589793,
+        6.283184307179586,
+        6.283184307179586,
+        6.283184307179586
+      ],
+      [
+        6.283184307179586,
+        6.283184307179586,
+        3.141591653589793,
+        6.283184307179586,
+        6.283184307179586,
+        6.283184307179586
+      ]
+    ],
+    "solve_limit_s": 25.0,
+    "maximum_solve_calls": 1,
+    "solve_calls": 1,
+    "internal_euclidean_step_rad": 0.005,
+    "final_euclidean_step_rad": 0.0025,
+    "actual_score_calls": 1073,
+    "invalid_numeric_scores": 0,
+    "direct_samples_checked": 3,
+    "final_samples_checked": 26,
+    "exact_solution": true,
+    "accepted": true,
+    "formal_physical_validity_verdict": null,
+    "endpoints_clear": [
+      true,
+      true
+    ],
+    "direct_rejected_q_rad": [
+      [
+        0.003333333333333333,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.003333333333333333,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    ],
+    "solve_wall_s": 0.002483926946297288,
+    "solution_kind": "simultaneous_rrt_connect",
+    "reason": "Exact simultaneous OMPL path passed the final-spacing actual-mesh query",
+    "elapsed_wall_s": 0.012953376863151789,
+    "waypoints": 3,
+    "joint_path_length_rad": 0.05610919498545771
+  }
+}
