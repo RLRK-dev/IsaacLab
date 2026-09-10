@@ -39,6 +39,10 @@ def read_prepared(path: Path) -> tuple[dict, dict]:
         raise ValueError("Prepared static native digest mismatch")
     if digest(absolute(static["manifest"])) != static["manifest_sha256"]:
         raise ValueError("Prepared static manifest digest mismatch")
+    if path.name.endswith("_v06.npz") and metadata.get("b_factory") != (
+        "op030_split_b_stagger_v06:build_sequence_final"
+    ):
+        raise ValueError("Prepared v06 data must name the final staggered B factory")
     return metadata, load_banks(metadata)
 
 
@@ -231,6 +235,10 @@ def check_native_binding(args) -> None:
         row for row in metadata["parallel_operations"] if row["purpose"] == "present_10_wires_while_A_works"
     )
     presentation = np.arange(interval["first_frame"], interval["last_frame"] + 1)
+    return_interval = next(
+        row for row in metadata["parallel_operations"] if row["purpose"] == "return_remaining_8_during_outfeed"
+    )
+    return_frames = np.arange(return_interval["first_frame"], return_interval["last_frame"] + 1)
     frames = sorted(
         set(
             presentation.tolist()
@@ -306,6 +314,22 @@ def check_native_binding(args) -> None:
             for uid in uids
             if uid not in stock_end
         }
+        # The native baker writes individual world tracks and removes parents.
+        # Verify the actual retained relationship instead of requiring hierarchy.
+        drawer_track = saved["drawer_B_world"]
+        returned_relative, returned_world_errors, returned_drawer_errors = [], [], []
+        for frame in return_frames:
+            scene.frame_set(int(frame))
+            world = np.asarray(drawer.matrix_world).copy()
+            returned_drawer_errors.append(float(np.max(abs(world - drawer_track[frame - 1]))))
+            actual = np.asarray([np.asarray(bpy.data.objects[uid].matrix_world) for uid in remaining_parents])
+            # Remaining wire roots share the drawer datum; per-wire geometry
+            # offsets are below these roots. animate_op030_split_v06.py writes
+            # world(wire["uid"], data["drawer_B_world"]) for these eight UIDs.
+            expected = drawer_track[frame - 1][None]
+            returned_world_errors.append(float(np.max(abs(actual - expected))))
+            returned_relative.append(np.linalg.inv(world) @ actual)
+        returned_relative = np.asarray(returned_relative)
     result = dict(
         b_pose_maximum_error=float(max(differences)),
         b_pose_sample_frames=len(frames),
@@ -320,7 +344,30 @@ def check_native_binding(args) -> None:
         stock_uid_count=len(uids),
         stock_relative_to_drawer_maximum_error=float(np.max(abs(relative - relative[:1]))),
         remaining_stock_after_B=remaining_parents,
+        remaining_stock_return_frames=return_frames.tolist(),
+        remaining_stock_return_relative_maximum_error=float(np.max(abs(returned_relative - returned_relative[:1]))),
+        remaining_stock_prepared_pose_maximum_error=max(returned_world_errors),
+        return_drawer_prepared_pose_maximum_error=max(returned_drawer_errors),
+        native_stock_binding="Individual baked world tracks; parent names are descriptive only.",
+        remaining_stock_expected_track="drawer_B_world, shared root datum; unique geometry below each UID root",
+        baker_source="scripts/animate_op030_split_v06.py",
+        baker_source_sha256=digest(ROOT / "scripts/animate_op030_split_v06.py"),
     )
+    checks = {
+        "original_b_nodes_match_prepared": result["b_pose_maximum_error"] < 2e-6,
+        "retained_a_c_nodes_match_prepared": max(result["retained_a_c_maximum_pose_errors"].values()) < 2e-6,
+        "proper_stagger_parent_rotation": abs(result["positive_stagger_parent_determinant_minimum"] - 1) < 2e-6,
+        "drawer_moves_world_minus_x": result["drawer_world_minus_x_error_m"] < 2e-6,
+        "ten_uids_present": result["stock_uid_count"] == 10,
+        "ten_uids_follow_drawer": result["stock_relative_to_drawer_maximum_error"] < 2e-6,
+        "eight_remaining_uids_follow_returning_drawer": len(remaining_parents) == 8
+        and result["remaining_stock_return_relative_maximum_error"] < 2e-6,
+        "remaining_uids_and_drawer_match_prepared": max(
+            result["remaining_stock_prepared_pose_maximum_error"],
+            result["return_drawer_prepared_pose_maximum_error"],
+        )
+        < 2e-6,
+    }
     write(
         args.report,
         dict(
@@ -330,11 +377,15 @@ def check_native_binding(args) -> None:
             prepared_sha256=digest(args.prepared),
             source_static=metadata["static_native"],
             results=result,
+            checks=checks,
+            failed_checks=[name for name, passed in checks.items() if not passed],
             scope="Saved world poses and stock identities only; separate triangle checks cover concurrent geometry.",
             formal_physical_validity_verdict=None,
         ),
     )
     print("V06_NATIVE_BINDING", json.dumps(result, ensure_ascii=False), flush=True)
+    if not all(checks.values()):
+        raise SystemExit(1)
 
 
 def main() -> None:

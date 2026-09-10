@@ -1,0 +1,68 @@
+{
+  "observed_at": "2026-09-10T21:31:56.755020+09:00",
+  "scope": "OP030B standalone stagger motion auxiliary saved-frame geometry and FK; line integration is separate",
+  "passed": true,
+  "factory": "op030_split_b_stagger_v06:build_sequence_final",
+  "frame_count": 3787,
+  "duration_s": 126.2,
+  "author_duration_s": 101.0,
+  "phase_count": 33,
+  "original_fk_matrix_error": 1.3736504040317883e-08,
+  "mesh_hit_frames": 0,
+  "all_native_frames_checked": true,
+  "speed_caps_pass": true,
+  "physical_arm_assignment": {
+    "left": "J1",
+    "right": "T"
+  },
+  "fixed_product_final_wires_match_v05": true,
+  "wire_inventory": 10,
+  "active_wire_uids": [
+    "OP030B_H03_2_UID001",
+    "OP030B_H03_1_UID005"
+  ],
+  "new_contact_exemptions": [],
+  "coordinate_frame": "B baseline world; root (+0.9,-1.7,0) m; main preparer adds global Y+2.3 once",
+  "free_constrained_samples": 811,
+  "simultaneous_free_routes": [
+    {
+      "phase": 1,
+      "kind": "simultaneous_straight",
+      "waypoints": 2,
+      "gap_samples": 2815
+    },
+    {
+      "phase": 15,
+      "kind": "simultaneous_rrt_connect",
+      "waypoints": 4,
+      "gap_samples": 0
+    },
+    {
+      "phase": 17,
+      "kind": "simultaneous_straight",
+      "waypoints": 2,
+      "gap_samples": 2819
+    },
+    {
+      "phase": 31,
+      "kind": "simultaneous_rrt_connect",
+      "waypoints": 3,
+      "gap_samples": 0
+    }
+  ],
+  "artifacts": {
+    "data/op030_split_b_stagger_motion_v06.npz": "41b353e220db025f432b06f384e9a256262fd9f76fa30b31da7353c4b5b4854d",
+    "audit/op030_split_b_stagger_motion_v06.json": "a59e4a9a72a212926fafeca7312d989fda5796d2bcbf11907c6f3c5a30561ac1",
+    "audit/op030_split_b_stagger_v06_identity_12.json": "8307046caa426dde806d861aa6bbc0361a0ea319ad52df3b1932ea9085b4b605",
+    "audit/op030_split_b_stagger_v06_connection_11.json": "e1186e25aa9b282ed500b1a8ef5aa533daa95979912bbae59f5b6e3e1a0ba88a",
+    "data/op030_split_b_stagger_air_clearance_v06_meshes.npz": "f6c9b07d1e065536bb27b49c53f3a11187623700fd2ea0e5e38157cd67eed9fa",
+    "audit/op030_split_b_stagger_air_clearance_v06_meshes.json": "29fca228d9767cc71fd4a4360d309c8cb81c759690c18305c94f177af14aec91",
+    "analysis/op030_split_b_stagger_air_clearance_v06_meshes_snapshot.blend": "c5dde79f986b4fd5b20126420c2ee39cb66b250165348a5f941d47180844e1f9",
+    "analysis/op030_stagger_air_clearance_static_v06.blend": "0de256bcfa2c377ac3c5048d0ae2d3a88ae057e7b6dd501ae58da821530f46d6",
+    "audit/op030_stagger_air_clearance_static_v06.json": "cb0dd4d7bc7fef08b3b4b3132766898593efd41478ad4eb221e6a626a5407711",
+    "scripts/op030_split_b_stagger_v06.py": "66fd737c7b71a33b18ea260e44c02b36cdac9fd320ff76fdadeaf2395904b258",
+    "analysis/op030_split_b_stagger_v06_reuse_contract.md": "dc4b1f76a6f82854af720d0e4255da44a9e2645e7665f0fbaa99e342ff1ae146",
+    "audit/op030_split_b_stagger_v06_promotion_guard.log": "bb2089ba948f9d02360b5e4bb7f3f6799674d1b1954d4bdbd537b3e4e7195440"
+  },
+  "formal_physical_verdict": null
+}

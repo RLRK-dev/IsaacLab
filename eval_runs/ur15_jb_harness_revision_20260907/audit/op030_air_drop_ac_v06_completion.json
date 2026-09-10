@@ -1,0 +1,34 @@
+{
+  "observed_at": "2026-09-10T21:26:33.639687+09:00",
+  "static_native": "analysis/op030_stagger_air_clearance_static_v06.blend",
+  "static_sha256": "0de256bcfa2c377ac3c5048d0ae2d3a88ae057e7b6dd501ae58da821530f46d6",
+  "four_part_world_sha256": "dd0e98f1f89fc235fb38ce100596794740c96cf868cfdc4a3e981709889ae9e6",
+  "reports": [
+    {
+      "cell": "A",
+      "report": "audit/op030_air_drop_a_v06.json",
+      "report_sha256": "8dd858dff1eeba0070314aceaed78469ab3b2b3262ecc4fbea2e61ed695f1afe",
+      "frames": 7165,
+      "active_mesh_count": 623,
+      "minimum_swept_aabb_distance_m": 0.9989688862220261,
+      "candidate_background_names": [],
+      "collision_frames": 0,
+      "narrow_phase_queries": 0,
+      "inputs_unchanged": true
+    },
+    {
+      "cell": "C",
+      "report": "audit/op030_air_drop_c_v06.json",
+      "report_sha256": "6e56e669ad3fecfd154ecdca59a4c0bc56666cf11db29a3957bd75fa8f45e15c",
+      "frames": 2430,
+      "active_mesh_count": 175,
+      "minimum_swept_aabb_distance_m": 2.471703473374412,
+      "candidate_background_names": [],
+      "collision_frames": 0,
+      "narrow_phase_queries": 0,
+      "inputs_unchanged": true
+    }
+  ],
+  "scope": "Frozen A/C v05 full saved banks against relocated 0782 four surfaces; conservative positive swept AABB separation at every saved pose. No FCL narrow-phase calls required, no contact exemptions. B and transfer integration are separate.",
+  "formal_physical_validity_verdict": null
+}

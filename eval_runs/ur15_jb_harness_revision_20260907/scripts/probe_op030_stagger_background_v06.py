@@ -182,6 +182,51 @@ def background_check(args) -> None:
     if digest(args.background) != metadata["output_sha256"]:
         raise ValueError("Background export digest changed")
     station = StationV06(args.cell, args.mesh, args.bank, args.config)
+    inherited = []
+    if args.cell in "AC":
+        # This exact fixed delta already has complete saved-bank evidence.
+        # Bind evaluated triangles before reusing it; do not repeat its query.
+        report_path = ROOT / f"audit/op030_air_drop_{args.cell.lower()}_v06.json"
+        previous = json.loads(report_path.read_text())
+        delta_path = ROOT / "data/op030_stagger_air_clearance_static_v06_world.npz"
+        delta = load(delta_path)
+        inputs = previous["input_digests"]
+        for path in (args.bank, args.mesh, delta_path):
+            if inputs[str(path.relative_to(ROOT))] != digest(path):
+                raise ValueError("Inherited air-drop evidence input changed")
+        fixed = metadata["fixed_source_comparison"]
+        source_matches = inputs[str(Path(fixed["source"]).relative_to(ROOT))] == fixed["source_sha256"]
+        if not fixed["fixed_background_reuse"] or not source_matches:
+            raise ValueError("Background and inherited air-drop source disagree")
+        if previous["frames"] != len(station.bank["times"]) or previous["results"]["hit_frames"]:
+            raise ValueError("Inherited air-drop report is incomplete or contains contacts")
+        lookup = {str(name): index for index, name in enumerate(data["names"])}
+        errors = {}
+        for index, name in enumerate(delta["names"]):
+            actual, actual_faces = mesh_points(data, lookup[str(name)])
+            expected, expected_faces = mesh_points(delta, index)
+            if actual.shape != expected.shape or not np.array_equal(actual_faces, expected_faces):
+                raise ValueError("Inherited air-drop triangle topology changed")
+            errors[str(name)] = float(np.max(abs(actual - expected)))
+        if len(errors) != 4 or max(errors.values()) > 5e-6:
+            raise ValueError("Inherited air-drop world geometry changed")
+        inherited.append(
+            dict(
+                report=str(report_path),
+                report_sha256=digest(report_path),
+                world_meshes=str(delta_path),
+                world_meshes_sha256=digest(delta_path),
+                mesh_names=list(errors),
+                maximum_world_vertex_errors_m=errors,
+                geometry_matches=True,
+                frames=previous["frames"],
+                bank_sha256=digest(args.bank),
+                mesh_sha256=digest(args.mesh),
+                static_sha256=fixed["source_sha256"],
+                reason="Exact four-mesh delta already checked over this entire unchanged bank.",
+            )
+        )
+        data = subset(data, np.flatnonzero(~np.isin(data["names"], list(errors))))
     result = screen_world(station, data, range(len(station.bank["times"])), skip_equal_context=True)
     write(
         args.output,
@@ -197,6 +242,7 @@ def background_check(args) -> None:
             native=metadata["native"],
             native_sha256=metadata["native_sha256"],
             prepared_sha256=metadata["prepared_sha256"],
+            inherited_complete_delta_checks=inherited,
             **result,
             scope=(
                 "Saved station motion versus actual fixed native geometry outside its equal-triangle context. "

@@ -1,10 +1,20 @@
 # OP030 production-line source checkpoint
 
-Snapshot: 2026-09-10T20:44:45.897334+09:00.
+Initial snapshot: 2026-09-10T20:44:45.897334+09:00. The camera-final update is recorded separately below.
 
 The completed v05 review has three OP030 stations: support placement and M4 fastening (A), two-wire placement (B), and parallel M6/M14 fastening with replenishment (C). Robot motion and interference reports are auxiliary geometric checks; this checkpoint does not certify force, torque, grasp stability, or physical validity.
 
-The v06 files are work in progress for a staggered B robot and supply table. The final static air-pipe candidate has been saved. At this checkpoint the final B connection/replay and integrated native checks are still pending; no completed v06 delivery is claimed. See `analysis/OP030_v06_scope.md` and the v06 process document for the intended change.
+At the initial snapshot, v06 was work in progress for a staggered B robot and supply table. The final static air-pipe candidate had been saved, while the final B connection/replay and integrated native checks were pending at that timestamp. See `analysis/OP030_v06_scope.md` and the v06 process document for the intended change.
+
+## Camera-final update (2026-09-11)
+
+B now stands on the opposite side of the conveyor. A and C retain their v05 motion banks, and all three stations retain the fixed pallet origin at 789 mm. The final B bank contains 3,787 frames and 126.2 seconds of saved motion. It preserves cable identity and length while coordinating both arms for pickup, bending, placement and the 180 mm retreat. Its auxiliary geometric checks report no unexpected moving-mesh intersections across all saved B frames; this does not establish physical grasp stability or real-machine takt.
+
+The integrated final native contains 14,062 frames. Its SHA-256 is `e65bef607c1d29671fc982d14d72d4c2694420edd284378cb2f1445f18f354ed`. Mechanical reports retain their original native SHA and are linked to this final native through strict equality of all non-camera records. The final camera version also completed an isolated rebake using exactly 23 copied inputs. The source and artifact identities are recorded in `checkpoint/camera_final_sources_20260911.json`.
+
+At that update's timestamp, the two final views were being rendered in six disjoint ranges using the unchanged renderer. The completed prefix images were preserved. Four final MP4 files, browser checks and a v06 Downloads archive had not yet completed. The current v06 process document is explicitly a pre-video snapshot; a later delivery record must establish video completion.
+
+The external blue F01 support is unchanged. Lower-level empty-pallet return and end lifts remain unimplemented. OP040 connection endpoints are still undefined; `analysis/op040_process_inventory.md` records the information needed before adding its wiring.
 
 ## Included source
 

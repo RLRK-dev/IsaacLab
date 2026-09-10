@@ -1,0 +1,41 @@
+{
+  "observed_at": "2026-09-10T22:59:43.575372+09:00",
+  "source_before": "analysis/op030_candidate_8674_v06/scripts/animate_op030_split_v06.py",
+  "source_before_sha256": "8d8102e12da3aa60abd5e9242ff2666f7b234d5492a0a6231c72d9a20c1b756b",
+  "source_after": "scripts/animate_op030_split_v06.py",
+  "source_after_sha256": "e6a91b1e5abf0c48185891511995f1a10757c007d74c3297e22d08cd0c4d36fe",
+  "changed_lines": [
+    [
+      53,
+      "        \"split_B\": ((-1.80, -0.65, 2.45), (0.60, 0.60, 1.18), 34),",
+      "        \"split_B\": ((-1.80, -0.65, 2.45), (0.60, 0.60, 1.45), 24),"
+    ],
+    [
+      54,
+      "        \"split_B_joint\": ((-0.65, 1.65, 1.70), (0.02, 0.75, 0.93), 48),",
+      "        \"split_B_joint\": ((0.80, 1.60, 1.90), (0.08, 0.78, 0.96), 48),"
+    ]
+  ],
+  "changed_camera_objects": [
+    "Review_OP030_split_B",
+    "Review_OP030_split_B_joint"
+  ],
+  "attributes": [
+    "location",
+    "rotation_euler",
+    "data.lens"
+  ],
+  "unchanged_attributes": [
+    "clip_start",
+    "clip_end",
+    "sensor",
+    "light",
+    "material",
+    "all_other_objects"
+  ],
+  "selected_candidate": 1,
+  "selected_png_manifest": "previews/op030_stagger_camera_v06_candidate_01/manifest.json",
+  "native_saved": false,
+  "native_sha256": "8674c2483ac1fe7e3dc42e6b1d14fdc4919f28818784de4f53f878477714d338",
+  "formal_physical_validity_verdict": null
+}

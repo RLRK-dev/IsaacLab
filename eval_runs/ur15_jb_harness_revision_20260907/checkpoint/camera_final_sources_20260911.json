@@ -1,0 +1,294 @@
+{
+  "observed_at": "2026-09-11T07:55:43.199419+09:00",
+  "previous_checkpoint_commit": "4d9c9ca60c07a33a4e93e058074363d02742653f",
+  "source_root": "/home/rlrk/IsaacLab/eval_runs/ur15_jb_harness_revision_20260907",
+  "entries": [
+    {
+      "path": "scripts/animate_op030_split_v06.py",
+      "source_sha256": "e6a91b1e5abf0c48185891511995f1a10757c007d74c3297e22d08cd0c4d36fe",
+      "copied_sha256": "e6a91b1e5abf0c48185891511995f1a10757c007d74c3297e22d08cd0c4d36fe",
+      "previous_checkpoint_sha256": "8d8102e12da3aa60abd5e9242ff2666f7b234d5492a0a6231c72d9a20c1b756b",
+      "bytes": 18637
+    },
+    {
+      "path": "scripts/probe_op030_stagger_background_v06.py",
+      "source_sha256": "50cf04bf58c9621033667e8f437783e46a4da4976a8643ab1728fd9ee5074bd7",
+      "copied_sha256": "50cf04bf58c9621033667e8f437783e46a4da4976a8643ab1728fd9ee5074bd7",
+      "previous_checkpoint_sha256": "bde85e2b640a8ce2cbc11c0814ab4d775bf22e617411d9867fa7c87e9d41e19b",
+      "bytes": 13190
+    },
+    {
+      "path": "scripts/probe_op030_stagger_integration_v06.py",
+      "source_sha256": "b7881fb9b8a81757a3c1b1593928a754acf5cfdd79f466edc7b27d3a6402dd06",
+      "copied_sha256": "b7881fb9b8a81757a3c1b1593928a754acf5cfdd79f466edc7b27d3a6402dd06",
+      "previous_checkpoint_sha256": "dac3238760d98133b9649620446478e7fff5b2d79b33e639d4b0ac91aad88f16",
+      "bytes": 21855
+    },
+    {
+      "path": "scripts/probe_op030_air_drop_ac_v06.py",
+      "source_sha256": "0d9de3d3c7374a2b08f391cbac330f66792d40dfff4df2308f7e2bc856537899",
+      "copied_sha256": "0d9de3d3c7374a2b08f391cbac330f66792d40dfff4df2308f7e2bc856537899",
+      "previous_checkpoint_sha256": null,
+      "bytes": 5089
+    },
+    {
+      "path": "scripts/collect_op030_stagger_integration_v06.py",
+      "source_sha256": "4c1145a03efd7438d990632226b69f1f563150a88425296eb9667c076bb318e9",
+      "copied_sha256": "4c1145a03efd7438d990632226b69f1f563150a88425296eb9667c076bb318e9",
+      "previous_checkpoint_sha256": null,
+      "bytes": 48442
+    },
+    {
+      "path": "scripts/verify_op030_camera_delta_v06.py",
+      "source_sha256": "fa12be940afb935be877586071fb447b0ea5d9aba36fcee8801024c25413ad18",
+      "copied_sha256": "fa12be940afb935be877586071fb447b0ea5d9aba36fcee8801024c25413ad18",
+      "previous_checkpoint_sha256": null,
+      "bytes": 24190
+    },
+    {
+      "path": "scripts/verify_op030_camera_driver_names_v06.py",
+      "source_sha256": "636cd91eabbdf51fd46a92303c2f44bdc32877803ada46c2364080c843e24b5c",
+      "copied_sha256": "636cd91eabbdf51fd46a92303c2f44bdc32877803ada46c2364080c843e24b5c",
+      "previous_checkpoint_sha256": null,
+      "bytes": 3825
+    },
+    {
+      "path": "scripts/link_op030_camera_delta_evidence_v06.py",
+      "source_sha256": "4150e89abe4bba1f2a4badf0bcd2aae09a4ef609d60cb85a87864ad978924603",
+      "copied_sha256": "4150e89abe4bba1f2a4badf0bcd2aae09a4ef609d60cb85a87864ad978924603",
+      "previous_checkpoint_sha256": null,
+      "bytes": 8246
+    },
+    {
+      "path": "scripts/preserve_op030_camera_baseline_v06.py",
+      "source_sha256": "781f6f1ce05acad6b1732487b68304aa6696f7426bb814c3b23c87cd565bc1cf",
+      "copied_sha256": "781f6f1ce05acad6b1732487b68304aa6696f7426bb814c3b23c87cd565bc1cf",
+      "previous_checkpoint_sha256": null,
+      "bytes": 3966
+    },
+    {
+      "path": "analysis/split_layout_portable_rebake_v06.py",
+      "source_sha256": "7c24f79496fc05487a546e432fb2cc401680ab293d0bbd7c2efb4a78e16f0b7a",
+      "copied_sha256": "7c24f79496fc05487a546e432fb2cc401680ab293d0bbd7c2efb4a78e16f0b7a",
+      "previous_checkpoint_sha256": null,
+      "bytes": 13955
+    },
+    {
+      "path": "analysis/split_layout_portable_rebake_camera_final_v06.py",
+      "source_sha256": "90d48ee14a39846096d77ef101689b6b63d5a97f2e52388b9c5e283d14e5bbcf",
+      "copied_sha256": "90d48ee14a39846096d77ef101689b6b63d5a97f2e52388b9c5e283d14e5bbcf",
+      "previous_checkpoint_sha256": null,
+      "bytes": 14523
+    },
+    {
+      "path": "analysis/prepare_op030_v06_document_evidence.py",
+      "source_sha256": "ce59fde2369edda217a56abcd93d0ea2be6ea860a0f527269358fd15949f0881",
+      "copied_sha256": "ce59fde2369edda217a56abcd93d0ea2be6ea860a0f527269358fd15949f0881",
+      "previous_checkpoint_sha256": null,
+      "bytes": 36879
+    },
+    {
+      "path": "analysis/render_split_parallel_v06.py",
+      "source_sha256": "d8f9cfc274ec0d2d3c69a95c77d452c5d0afa0ca9a553b6e7f45d2db26c1cf52",
+      "copied_sha256": "d8f9cfc274ec0d2d3c69a95c77d452c5d0afa0ca9a553b6e7f45d2db26c1cf52",
+      "previous_checkpoint_sha256": null,
+      "bytes": 13115
+    },
+    {
+      "path": "analysis/render_split_view_v06.sh",
+      "source_sha256": "ef67fa1cd47afceb2e296f48b6c13c481cd56bead84bd9f9f9b0dabe3fc086c4",
+      "copied_sha256": "ef67fa1cd47afceb2e296f48b6c13c481cd56bead84bd9f9f9b0dabe3fc086c4",
+      "previous_checkpoint_sha256": null,
+      "bytes": 1284
+    },
+    {
+      "path": "analysis/encode_split_when_rendered_v06.py",
+      "source_sha256": "4d12d30eaa4882c3298e2a62e51b35e0477874257012d4133339a4e277581062",
+      "copied_sha256": "4d12d30eaa4882c3298e2a62e51b35e0477874257012d4133339a4e277581062",
+      "previous_checkpoint_sha256": null,
+      "bytes": 3244
+    },
+    {
+      "path": "analysis/finalize_render_cache_v06.py",
+      "source_sha256": "b7f60ed41cd9e8b47e72807945fa61587b7c0b4abeb30a7178126aedcab8b78c",
+      "copied_sha256": "b7f60ed41cd9e8b47e72807945fa61587b7c0b4abeb30a7178126aedcab8b78c",
+      "previous_checkpoint_sha256": null,
+      "bytes": 3060
+    },
+    {
+      "path": "analysis/op030_stagger_integration_v06_plan.md",
+      "source_sha256": "67617a69cf34fb58d7a6579ac339d1f41f04ac699adc842cd8f5efa92ffacc0a",
+      "copied_sha256": "67617a69cf34fb58d7a6579ac339d1f41f04ac699adc842cd8f5efa92ffacc0a",
+      "previous_checkpoint_sha256": "04adf10a43abb13b1ecd35efe0f21ad993966bd5a28137de2a96c62995770a65",
+      "bytes": 5704
+    },
+    {
+      "path": "analysis/op030_stagger_v06_integration_evidence.md",
+      "source_sha256": "e13ef1dd51ac664cd961dbe98114c39306ae0df38a420672146a747d91b77d00",
+      "copied_sha256": "e13ef1dd51ac664cd961dbe98114c39306ae0df38a420672146a747d91b77d00",
+      "previous_checkpoint_sha256": null,
+      "bytes": 1979
+    },
+    {
+      "path": "analysis/op030_v06_parallel_render_scope.md",
+      "source_sha256": "4c0b908087bc4e8a4cb2e1e24d2613dd5045575cb69f8ea3bed5bfe616a372c5",
+      "copied_sha256": "4c0b908087bc4e8a4cb2e1e24d2613dd5045575cb69f8ea3bed5bfe616a372c5",
+      "previous_checkpoint_sha256": null,
+      "bytes": 1905
+    },
+    {
+      "path": "audit/op030_camera_delta_v06_final.json",
+      "source_sha256": "c5f069ddb1e4c83c3115c3ec8d7af3c7b9c032559a13fff1d625fc9e7dd92d54",
+      "copied_sha256": "c5f069ddb1e4c83c3115c3ec8d7af3c7b9c032559a13fff1d625fc9e7dd92d54",
+      "previous_checkpoint_sha256": null,
+      "bytes": 43000
+    },
+    {
+      "path": "audit/op030_camera_delta_v06_evidence.json",
+      "source_sha256": "8c701fcca27ad7de59920f806db3585113f5df2028394934554044e6c9bf5762",
+      "copied_sha256": "8c701fcca27ad7de59920f806db3585113f5df2028394934554044e6c9bf5762",
+      "previous_checkpoint_sha256": null,
+      "bytes": 25841
+    },
+    {
+      "path": "audit/op030_camera_delta_v06_evidence.md",
+      "source_sha256": "54fb2e66dd37220267ed045f203d00cd187a672a4c45b27c85cbc0e9adfe9e9c",
+      "copied_sha256": "54fb2e66dd37220267ed045f203d00cd187a672a4c45b27c85cbc0e9adfe9e9c",
+      "previous_checkpoint_sha256": null,
+      "bytes": 785
+    },
+    {
+      "path": "audit/op030_split_b_stagger_v06_completion.json",
+      "source_sha256": "0fe77aa15e59099c8703aa5c8d314c9886055a729a742207901f11e303446f82",
+      "copied_sha256": "0fe77aa15e59099c8703aa5c8d314c9886055a729a742207901f11e303446f82",
+      "previous_checkpoint_sha256": null,
+      "bytes": 2968
+    },
+    {
+      "path": "audit/op030_split_layout_portable_rebake_v06.json",
+      "source_sha256": "e1183f85ad09d8d9a739285f2cca2aa8616b95caa17296463407948c9c5253b2",
+      "copied_sha256": "e1183f85ad09d8d9a739285f2cca2aa8616b95caa17296463407948c9c5253b2",
+      "previous_checkpoint_sha256": null,
+      "bytes": 29069
+    },
+    {
+      "path": "audit/op030_split_native_v06.json",
+      "source_sha256": "94131bdf7cd66352b3065d2402af649a589baceec75ebb0f24b837ae6b27e8c5",
+      "copied_sha256": "94131bdf7cd66352b3065d2402af649a589baceec75ebb0f24b837ae6b27e8c5",
+      "previous_checkpoint_sha256": null,
+      "bytes": 32623
+    },
+    {
+      "path": "audit/op030_air_drop_ac_v06_completion.json",
+      "source_sha256": "eb1872562a8b3030aba993174f935e8c4ee82d7b9805163b1330db94b10aebc0",
+      "copied_sha256": "eb1872562a8b3030aba993174f935e8c4ee82d7b9805163b1330db94b10aebc0",
+      "previous_checkpoint_sha256": null,
+      "bytes": 1466
+    },
+    {
+      "path": "audit/op030_stagger_v06_integration_evidence.json",
+      "source_sha256": "3d54ace48a1440c06e11de2e08df67498f29572f3a707a56ed947cf64ea3c6fa",
+      "copied_sha256": "3d54ace48a1440c06e11de2e08df67498f29572f3a707a56ed947cf64ea3c6fa",
+      "previous_checkpoint_sha256": null,
+      "bytes": 34751
+    },
+    {
+      "path": "audit/op030_stagger_camera_v06_selection.json",
+      "source_sha256": "98ff70ad61f8c0494d83efaf1e282d6592538f16d4f52c6e61cd4f04f2fb6b75",
+      "copied_sha256": "98ff70ad61f8c0494d83efaf1e282d6592538f16d4f52c6e61cd4f04f2fb6b75",
+      "previous_checkpoint_sha256": null,
+      "bytes": 1361
+    },
+    {
+      "path": "audit/op030_split_b_stagger_motion_v06.json",
+      "source_sha256": "a59e4a9a72a212926fafeca7312d989fda5796d2bcbf11907c6f3c5a30561ac1",
+      "copied_sha256": "a59e4a9a72a212926fafeca7312d989fda5796d2bcbf11907c6f3c5a30561ac1",
+      "previous_checkpoint_sha256": null,
+      "bytes": 21671
+    },
+    {
+      "path": "OP030_三ST工程・部品確認書_v06.md",
+      "source_sha256": "20877104a155f6da48c77b226825de7563216e9e77999aa68561eafa5cc4003f",
+      "copied_sha256": "20877104a155f6da48c77b226825de7563216e9e77999aa68561eafa5cc4003f",
+      "previous_checkpoint_sha256": "419277b518b36842b8a2587abf86213ffec15cf27ab77fef8d2459d617d6386d",
+      "bytes": 24131
+    },
+    {
+      "path": "analysis/finalize_op030_v06_delivery.py",
+      "source_sha256": "46c3731711e1ef55a0f4b36c972760cacf3cac11546b6649a968eb9d32b8cde0",
+      "copied_sha256": "46c3731711e1ef55a0f4b36c972760cacf3cac11546b6649a968eb9d32b8cde0",
+      "previous_checkpoint_sha256": null,
+      "bytes": 9354
+    }
+  ],
+  "artifacts": {
+    "UR15_JB_OP030_split_v06.blend": {
+      "sha256": "e65bef607c1d29671fc982d14d72d4c2694420edd284378cb2f1445f18f354ed",
+      "bytes": 175441196,
+      "local_path": "/home/rlrk/IsaacLab/eval_runs/ur15_jb_harness_revision_20260907/UR15_JB_OP030_split_v06.blend",
+      "included_in_git": false
+    },
+    "data/op030_split_animation_v06.npz": {
+      "sha256": "660d47df3dac122337e4ff82c3c4ce92c8e15ef3edf68dbc9dd9b24ed943f296",
+      "bytes": 51239568,
+      "local_path": "/home/rlrk/IsaacLab/eval_runs/ur15_jb_harness_revision_20260907/data/op030_split_animation_v06.npz",
+      "included_in_git": false
+    },
+    "data/op030_split_animation_v06.json": {
+      "sha256": "0327cf57bfb91b6437ba2ab9fec43f4ac1a04e0a1c4a6633c8b833dcbd63e897",
+      "bytes": 46531,
+      "local_path": "/home/rlrk/IsaacLab/eval_runs/ur15_jb_harness_revision_20260907/data/op030_split_animation_v06.json",
+      "included_in_git": false
+    },
+    "data/op030_split_shots_v06.json": {
+      "sha256": "f2c13dae9cdec7a19856950733ec4dd892ce9cb8b879e8d7dc46d07f53bd3d49",
+      "bytes": 37796,
+      "local_path": "/home/rlrk/IsaacLab/eval_runs/ur15_jb_harness_revision_20260907/data/op030_split_shots_v06.json",
+      "included_in_git": false
+    },
+    "data/op030_split_b_stagger_motion_v06.npz": {
+      "sha256": "41b353e220db025f432b06f384e9a256262fd9f76fa30b31da7353c4b5b4854d",
+      "bytes": 15020778,
+      "local_path": "/home/rlrk/IsaacLab/eval_runs/ur15_jb_harness_revision_20260907/data/op030_split_b_stagger_motion_v06.npz",
+      "included_in_git": false
+    },
+    "analysis/op030_stagger_air_clearance_static_v06.blend": {
+      "sha256": "0de256bcfa2c377ac3c5048d0ae2d3a88ae057e7b6dd501ae58da821530f46d6",
+      "bytes": 54117497,
+      "local_path": "/home/rlrk/IsaacLab/eval_runs/ur15_jb_harness_revision_20260907/analysis/op030_stagger_air_clearance_static_v06.blend",
+      "included_in_git": false
+    }
+  },
+  "status": "Final B/native/camera and isolated rebake verified; six disjoint render ranges running at observation; final videos and delivery still pending",
+  "physical_validity_verdict": null,
+  "original_sources_modified": false,
+  "formatter_review_pending": false,
+  "copied_sources_runtime_revalidated": false,
+  "formatter_changes": [
+    {
+      "path": "scripts/probe_op030_stagger_background_v06.py",
+      "source_sha256": "50cf04bf58c9621033667e8f437783e46a4da4976a8643ab1728fd9ee5074bd7",
+      "checkpoint_sha256": "82b3d0b2352ee727f70625a5f5d98898ca38c07eb3274a59a125fd36729152c2",
+      "ast_equal": true
+    },
+    {
+      "path": "scripts/probe_op030_stagger_integration_v06.py",
+      "source_sha256": "b7881fb9b8a81757a3c1b1593928a754acf5cfdd79f466edc7b27d3a6402dd06",
+      "checkpoint_sha256": "3759b945ab77af346799efab26086e45b0e09b98f8d9c0d97bb6dec3b4df86d5",
+      "ast_equal": false
+    }
+  ],
+  "formatter_review": "Two copied Python files were line-wrapped by Ruff; one local face-offset variable was restored to mesh_face_offsets to retain the previous checkpoint codespell correction. No frozen input was edited.",
+  "all_selected_python_compile_pass": true,
+  "copy_mode_changes": [
+    {
+      "path": "analysis/render_split_view_v06.sh",
+      "checkpoint_mode": "0755",
+      "reason": "Required shebang/executable pre-commit check"
+    }
+  ],
+  "full_repository_precommit": {
+    "pre_stage": "passed after reviewed formatting/codespell copy-only corrections",
+    "staged": "passed; final repeat required after this record update"
+  }
+}

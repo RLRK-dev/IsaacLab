@@ -1,0 +1,1332 @@
+{
+  "observed_at": "2026-09-11T06:03:05.826942+09:00",
+  "original": "/home/rlrk/IsaacLab/eval_runs/ur15_jb_harness_revision_20260907/analysis/op030_candidate_8674_v06/UR15_JB_OP030_split_v06.blend",
+  "original_sha256": "8674c2483ac1fe7e3dc42e6b1d14fdc4919f28818784de4f53f878477714d338",
+  "final": "/home/rlrk/IsaacLab/eval_runs/ur15_jb_harness_revision_20260907/UR15_JB_OP030_split_v06.blend",
+  "final_sha256": "e65bef607c1d29671fc982d14d72d4c2694420edd284378cb2f1445f18f354ed",
+  "allowed_review_cameras": [
+    "Review_OP030_split_B",
+    "Review_OP030_split_B_joint"
+  ],
+  "archive_manifest": "/home/rlrk/IsaacLab/eval_runs/ur15_jb_harness_revision_20260907/analysis/op030_candidate_8674_v06/manifest.json",
+  "archive_manifest_sha256": "cb2e55e492dd54413dde85d599ccef3e7b24eac1a236cb38dc8e8ce7d52b527e",
+  "source_sha256": "fa12be940afb935be877586071fb447b0ea5d9aba36fcee8801024c25413ad18",
+  "result": {
+    "strict_non_camera_equality": true,
+    "non_camera_changes": [],
+    "missing_records": [],
+    "missing_arrays": [],
+    "changed_arrays": [],
+    "matrix_roundoff_only": [],
+    "unexpected_review_camera_changes": [],
+    "existing_matrix_tolerance": 2e-06,
+    "eligible_to_inherit_geometry_checks": true,
+    "checked_record_count": 64304,
+    "checked_array_count": 133316,
+    "array_elements": 229617034,
+    "original_counts": {
+      "CAMERA": 82,
+      "MESH": 7214,
+      "meshes": 4155,
+      "EMPTY": 2226,
+      "LIGHT": 26,
+      "light_energy_W": 5813.410919189453,
+      "fcurves": 2478,
+      "keyframe_points": 12729135,
+      "driver_fcurves": 144,
+      "CURVE": 25,
+      "shape_key_datablocks": 4,
+      "shape_key_blocks": 1047
+    },
+    "final_counts": {
+      "CAMERA": 82,
+      "MESH": 7214,
+      "meshes": 4155,
+      "EMPTY": 2226,
+      "LIGHT": 26,
+      "light_energy_W": 5813.410919189453,
+      "fcurves": 2478,
+      "keyframe_points": 12729135,
+      "driver_fcurves": 144,
+      "CURVE": 25,
+      "shape_key_datablocks": 4,
+      "shape_key_blocks": 1047
+    },
+    "camera_changes": {
+      "Review_OP030_split_B": {
+        "before": {
+          "object": {
+            "type": "CAMERA",
+            "parent": null,
+            "data": {
+              "id": "Review_OP030_split_B",
+              "type": "Camera"
+            },
+            "settings": {
+              "use_fake_user": false,
+              "use_extra_user": false,
+              "is_runtime_data": false,
+              "tag": false,
+              "asset_data": null,
+              "data": {
+                "id": "Review_OP030_split_B",
+                "type": "Camera"
+              },
+              "parent": null,
+              "parent_type": "OBJECT",
+              "parent_vertices": [
+                0,
+                0,
+                0
+              ],
+              "parent_bone": "",
+              "use_parent_final_indices": false,
+              "use_camera_lock_parent": false,
+              "track_axis": "NEG_Z",
+              "up_axis": "Y",
+              "active_material": null,
+              "active_material_index": 0,
+              "location": [
+                -1.7999999523162842,
+                -0.6499999761581421,
+                2.450000047683716
+              ],
+              "rotation_quaternion": [
+                1.0,
+                0.0,
+                0.0,
+                0.0
+              ],
+              "rotation_axis_angle": [
+                0.0,
+                0.0,
+                1.0,
+                0.0
+              ],
+              "rotation_euler": [
+                1.131988286972046,
+                1.5788501173119585e-07,
+                -1.0906214714050293
+              ],
+              "rotation_mode": "XYZ",
+              "scale": [
+                1.0,
+                1.0,
+                1.0
+              ],
+              "dimensions": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "delta_location": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "delta_rotation_euler": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "delta_rotation_quaternion": [
+                1.0,
+                0.0,
+                0.0,
+                0.0
+              ],
+              "delta_scale": [
+                1.0,
+                1.0,
+                1.0
+              ],
+              "lock_location": [
+                false,
+                false,
+                false
+              ],
+              "lock_rotation": [
+                false,
+                false,
+                false
+              ],
+              "lock_rotation_w": false,
+              "lock_rotations_4d": true,
+              "lock_scale": [
+                false,
+                false,
+                false
+              ],
+              "empty_display_type": "PLAIN_AXES",
+              "empty_display_size": 1.0,
+              "empty_image_offset": [
+                0.0,
+                0.0
+              ],
+              "empty_image_depth": "DEFAULT",
+              "show_empty_image_perspective": true,
+              "show_empty_image_orthographic": true,
+              "show_empty_image_only_axis_aligned": false,
+              "use_empty_image_alpha": false,
+              "empty_image_side": "DOUBLE_SIDED",
+              "add_rest_position_attribute": false,
+              "pass_index": 0,
+              "color": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "use_simulation_cache": true,
+              "hide_viewport": false,
+              "hide_select": false,
+              "hide_render": false,
+              "hide_probe_volume": false,
+              "hide_probe_sphere": false,
+              "hide_probe_plane": false,
+              "show_instancer_for_render": true,
+              "show_instancer_for_viewport": true,
+              "visible_camera": true,
+              "visible_diffuse": true,
+              "visible_glossy": true,
+              "visible_transmission": true,
+              "visible_volume_scatter": true,
+              "visible_shadow": true,
+              "is_holdout": false,
+              "is_shadow_catcher": false,
+              "instance_type": "NONE",
+              "use_instance_vertices_rotation": false,
+              "use_instance_faces_scale": false,
+              "instance_faces_scale": 1.0,
+              "instance_collection": null,
+              "display_type": "TEXTURED",
+              "show_bounds": false,
+              "display_bounds_type": "BOX",
+              "show_name": false,
+              "show_axis": false,
+              "show_texture_space": false,
+              "show_wire": false,
+              "show_all_edges": false,
+              "use_grease_pencil_lights": false,
+              "show_transparent": false,
+              "show_in_front": false,
+              "show_only_shape_key": false,
+              "use_shape_key_edit_mode": false,
+              "active_shape_key_index": 0,
+              "use_mesh_mirror_x": false,
+              "use_mesh_mirror_y": false,
+              "use_mesh_mirror_z": false,
+              "lightgroup": "",
+              "shadow_terminator_normal_offset": 0.0,
+              "shadow_terminator_geometry_offset": 0.10000000149011612,
+              "shadow_terminator_shading_offset": 0.0,
+              "active_selection_set": 0
+            },
+            "properties": {},
+            "collections": [
+              "Scene Collection"
+            ],
+            "modifiers": [],
+            "constraints": [],
+            "material_slots": [],
+            "vertex_groups": []
+          },
+          "camera": {
+            "use_fake_user": false,
+            "use_extra_user": false,
+            "is_runtime_data": false,
+            "tag": false,
+            "asset_data": null,
+            "type": "PERSP",
+            "sensor_fit": "AUTO",
+            "passepartout_alpha": 0.5,
+            "angle_x": 0.9737985134124756,
+            "angle_y": 0.6785852313041687,
+            "angle": 0.9737985134124756,
+            "clip_start": 0.009999999776482582,
+            "clip_end": 1000.0,
+            "lens": 34.0,
+            "sensor_width": 36.0,
+            "sensor_height": 24.0,
+            "ortho_scale": 6.0,
+            "display_size": 1.0,
+            "shift_x": 0.0,
+            "shift_y": 0.0,
+            "show_limits": false,
+            "show_mist": false,
+            "show_passepartout": true,
+            "show_safe_areas": false,
+            "show_safe_center": false,
+            "show_name": false,
+            "show_sensor": false,
+            "show_background_images": false,
+            "lens_unit": "MILLIMETERS",
+            "show_composition_center": false,
+            "show_composition_center_diagonal": false,
+            "show_composition_thirds": false,
+            "show_composition_golden": false,
+            "show_composition_golden_tria_a": false,
+            "show_composition_golden_tria_b": false,
+            "show_composition_harmony_tri_a": false,
+            "show_composition_harmony_tri_b": false,
+            "panorama_type": "FISHEYE_EQUISOLID",
+            "fisheye_fov": 3.1415927410125732,
+            "fisheye_lens": 10.5,
+            "latitude_min": -1.5707963705062866,
+            "latitude_max": 1.5707963705062866,
+            "longitude_min": -3.1415927410125732,
+            "longitude_max": 3.1415927410125732,
+            "fisheye_polynomial_k0": -1.1735143743862864e-05,
+            "fisheye_polynomial_k1": -0.019988736137747765,
+            "fisheye_polynomial_k2": -3.3525323033245513e-06,
+            "fisheye_polynomial_k3": 3.0992753181635635e-06,
+            "fisheye_polynomial_k4": -2.60646473293491e-08,
+            "central_cylindrical_range_u_min": -3.1415927410125732,
+            "central_cylindrical_range_u_max": 3.1415927410125732,
+            "central_cylindrical_range_v_min": -1.0,
+            "central_cylindrical_range_v_max": 1.0,
+            "central_cylindrical_radius": 1.0,
+            "custom_filepath": "",
+            "custom_shader": null,
+            "custom_mode": "INTERNAL",
+            "custom_bytecode": "",
+            "custom_bytecode_hash": ""
+          },
+          "world": [
+            [
+              0.46193426847457886,
+              0.3768150806427002,
+              -0.8028867244720459,
+              -1.7999999523162842
+            ],
+            [
+              -0.8869141936302185,
+              0.1962576061487198,
+              -0.41817009449005127,
+              -0.6499999761581421
+            ],
+            [
+              -1.5788501173119585e-07,
+              0.9052587151527405,
+              0.42486074566841125,
+              2.450000047683716
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "parent_inverse": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        },
+        "after": {
+          "object": {
+            "type": "CAMERA",
+            "parent": null,
+            "data": {
+              "id": "Review_OP030_split_B",
+              "type": "Camera"
+            },
+            "settings": {
+              "use_fake_user": false,
+              "use_extra_user": false,
+              "is_runtime_data": false,
+              "tag": false,
+              "asset_data": null,
+              "data": {
+                "id": "Review_OP030_split_B",
+                "type": "Camera"
+              },
+              "parent": null,
+              "parent_type": "OBJECT",
+              "parent_vertices": [
+                0,
+                0,
+                0
+              ],
+              "parent_bone": "",
+              "use_parent_final_indices": false,
+              "use_camera_lock_parent": false,
+              "track_axis": "NEG_Z",
+              "up_axis": "Y",
+              "active_material": null,
+              "active_material_index": 0,
+              "location": [
+                -1.7999999523162842,
+                -0.6499999761581421,
+                2.450000047683716
+              ],
+              "rotation_quaternion": [
+                1.0,
+                0.0,
+                0.0,
+                0.0
+              ],
+              "rotation_axis_angle": [
+                0.0,
+                0.0,
+                1.0,
+                0.0
+              ],
+              "rotation_euler": [
+                1.2168147563934326,
+                -2.95351441081948e-08,
+                -1.0906214714050293
+              ],
+              "rotation_mode": "XYZ",
+              "scale": [
+                1.0,
+                1.0,
+                1.0
+              ],
+              "dimensions": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "delta_location": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "delta_rotation_euler": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "delta_rotation_quaternion": [
+                1.0,
+                0.0,
+                0.0,
+                0.0
+              ],
+              "delta_scale": [
+                1.0,
+                1.0,
+                1.0
+              ],
+              "lock_location": [
+                false,
+                false,
+                false
+              ],
+              "lock_rotation": [
+                false,
+                false,
+                false
+              ],
+              "lock_rotation_w": false,
+              "lock_rotations_4d": true,
+              "lock_scale": [
+                false,
+                false,
+                false
+              ],
+              "empty_display_type": "PLAIN_AXES",
+              "empty_display_size": 1.0,
+              "empty_image_offset": [
+                0.0,
+                0.0
+              ],
+              "empty_image_depth": "DEFAULT",
+              "show_empty_image_perspective": true,
+              "show_empty_image_orthographic": true,
+              "show_empty_image_only_axis_aligned": false,
+              "use_empty_image_alpha": false,
+              "empty_image_side": "DOUBLE_SIDED",
+              "add_rest_position_attribute": false,
+              "pass_index": 0,
+              "color": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "use_simulation_cache": true,
+              "hide_viewport": false,
+              "hide_select": false,
+              "hide_render": false,
+              "hide_probe_volume": false,
+              "hide_probe_sphere": false,
+              "hide_probe_plane": false,
+              "show_instancer_for_render": true,
+              "show_instancer_for_viewport": true,
+              "visible_camera": true,
+              "visible_diffuse": true,
+              "visible_glossy": true,
+              "visible_transmission": true,
+              "visible_volume_scatter": true,
+              "visible_shadow": true,
+              "is_holdout": false,
+              "is_shadow_catcher": false,
+              "instance_type": "NONE",
+              "use_instance_vertices_rotation": false,
+              "use_instance_faces_scale": false,
+              "instance_faces_scale": 1.0,
+              "instance_collection": null,
+              "display_type": "TEXTURED",
+              "show_bounds": false,
+              "display_bounds_type": "BOX",
+              "show_name": false,
+              "show_axis": false,
+              "show_texture_space": false,
+              "show_wire": false,
+              "show_all_edges": false,
+              "use_grease_pencil_lights": false,
+              "show_transparent": false,
+              "show_in_front": false,
+              "show_only_shape_key": false,
+              "use_shape_key_edit_mode": false,
+              "active_shape_key_index": 0,
+              "use_mesh_mirror_x": false,
+              "use_mesh_mirror_y": false,
+              "use_mesh_mirror_z": false,
+              "lightgroup": "",
+              "shadow_terminator_normal_offset": 0.0,
+              "shadow_terminator_geometry_offset": 0.10000000149011612,
+              "shadow_terminator_shading_offset": 0.0,
+              "active_selection_set": 0
+            },
+            "properties": {},
+            "collections": [
+              "Scene Collection"
+            ],
+            "modifiers": [],
+            "constraints": [],
+            "material_slots": [],
+            "vertex_groups": []
+          },
+          "camera": {
+            "use_fake_user": false,
+            "use_extra_user": false,
+            "is_runtime_data": false,
+            "tag": false,
+            "asset_data": null,
+            "type": "PERSP",
+            "sensor_fit": "AUTO",
+            "passepartout_alpha": 0.5,
+            "angle_x": 1.2870022058486938,
+            "angle_y": 0.9272952079772949,
+            "angle": 1.2870022058486938,
+            "clip_start": 0.009999999776482582,
+            "clip_end": 1000.0,
+            "lens": 24.0,
+            "sensor_width": 36.0,
+            "sensor_height": 24.0,
+            "ortho_scale": 6.0,
+            "display_size": 1.0,
+            "shift_x": 0.0,
+            "shift_y": 0.0,
+            "show_limits": false,
+            "show_mist": false,
+            "show_passepartout": true,
+            "show_safe_areas": false,
+            "show_safe_center": false,
+            "show_name": false,
+            "show_sensor": false,
+            "show_background_images": false,
+            "lens_unit": "MILLIMETERS",
+            "show_composition_center": false,
+            "show_composition_center_diagonal": false,
+            "show_composition_thirds": false,
+            "show_composition_golden": false,
+            "show_composition_golden_tria_a": false,
+            "show_composition_golden_tria_b": false,
+            "show_composition_harmony_tri_a": false,
+            "show_composition_harmony_tri_b": false,
+            "panorama_type": "FISHEYE_EQUISOLID",
+            "fisheye_fov": 3.1415927410125732,
+            "fisheye_lens": 10.5,
+            "latitude_min": -1.5707963705062866,
+            "latitude_max": 1.5707963705062866,
+            "longitude_min": -3.1415927410125732,
+            "longitude_max": 3.1415927410125732,
+            "fisheye_polynomial_k0": -1.1735143743862864e-05,
+            "fisheye_polynomial_k1": -0.019988736137747765,
+            "fisheye_polynomial_k2": -3.3525323033245513e-06,
+            "fisheye_polynomial_k3": 3.0992753181635635e-06,
+            "fisheye_polynomial_k4": -2.60646473293491e-08,
+            "central_cylindrical_range_u_min": -3.1415927410125732,
+            "central_cylindrical_range_u_max": 3.1415927410125732,
+            "central_cylindrical_range_v_min": -1.0,
+            "central_cylindrical_range_v_max": 1.0,
+            "central_cylindrical_radius": 1.0,
+            "custom_filepath": "",
+            "custom_shader": null,
+            "custom_mode": "INTERNAL",
+            "custom_bytecode": "",
+            "custom_bytecode_hash": ""
+          },
+          "world": [
+            [
+              0.46193426847457886,
+              0.3074357211589813,
+              -0.8319255113601685,
+              -1.7999999523162842
+            ],
+            [
+              -0.8869141936302185,
+              0.16012272238731384,
+              -0.4332943260669708,
+              -0.6499999761581421
+            ],
+            [
+              2.95351441081948e-08,
+              0.9380000233650208,
+              0.34663525223731995,
+              2.450000047683716
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "parent_inverse": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        }
+      },
+      "Review_OP030_split_B_joint": {
+        "before": {
+          "object": {
+            "type": "CAMERA",
+            "parent": null,
+            "data": {
+              "id": "Review_OP030_split_B_joint",
+              "type": "Camera"
+            },
+            "settings": {
+              "use_fake_user": false,
+              "use_extra_user": false,
+              "is_runtime_data": false,
+              "tag": false,
+              "asset_data": null,
+              "data": {
+                "id": "Review_OP030_split_B_joint",
+                "type": "Camera"
+              },
+              "parent": null,
+              "parent_type": "OBJECT",
+              "parent_vertices": [
+                0,
+                0,
+                0
+              ],
+              "parent_bone": "",
+              "use_parent_final_indices": false,
+              "use_camera_lock_parent": false,
+              "track_axis": "NEG_Z",
+              "up_axis": "Y",
+              "active_material": null,
+              "active_material_index": 0,
+              "location": [
+                -0.6499999761581421,
+                1.649999976158142,
+                1.7000000476837158
+              ],
+              "rotation_quaternion": [
+                1.0,
+                0.0,
+                0.0,
+                0.0
+              ],
+              "rotation_axis_angle": [
+                0.0,
+                0.0,
+                1.0,
+                0.0
+              ],
+              "rotation_euler": [
+                0.9693446755409241,
+                -9.673478729155249e-08,
+                -2.5016567707061768
+              ],
+              "rotation_mode": "XYZ",
+              "scale": [
+                1.0,
+                0.9999999403953552,
+                1.0
+              ],
+              "dimensions": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "delta_location": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "delta_rotation_euler": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "delta_rotation_quaternion": [
+                1.0,
+                0.0,
+                0.0,
+                0.0
+              ],
+              "delta_scale": [
+                1.0,
+                1.0,
+                1.0
+              ],
+              "lock_location": [
+                false,
+                false,
+                false
+              ],
+              "lock_rotation": [
+                false,
+                false,
+                false
+              ],
+              "lock_rotation_w": false,
+              "lock_rotations_4d": true,
+              "lock_scale": [
+                false,
+                false,
+                false
+              ],
+              "empty_display_type": "PLAIN_AXES",
+              "empty_display_size": 1.0,
+              "empty_image_offset": [
+                0.0,
+                0.0
+              ],
+              "empty_image_depth": "DEFAULT",
+              "show_empty_image_perspective": true,
+              "show_empty_image_orthographic": true,
+              "show_empty_image_only_axis_aligned": false,
+              "use_empty_image_alpha": false,
+              "empty_image_side": "DOUBLE_SIDED",
+              "add_rest_position_attribute": false,
+              "pass_index": 0,
+              "color": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "use_simulation_cache": true,
+              "hide_viewport": false,
+              "hide_select": false,
+              "hide_render": false,
+              "hide_probe_volume": false,
+              "hide_probe_sphere": false,
+              "hide_probe_plane": false,
+              "show_instancer_for_render": true,
+              "show_instancer_for_viewport": true,
+              "visible_camera": true,
+              "visible_diffuse": true,
+              "visible_glossy": true,
+              "visible_transmission": true,
+              "visible_volume_scatter": true,
+              "visible_shadow": true,
+              "is_holdout": false,
+              "is_shadow_catcher": false,
+              "instance_type": "NONE",
+              "use_instance_vertices_rotation": false,
+              "use_instance_faces_scale": false,
+              "instance_faces_scale": 1.0,
+              "instance_collection": null,
+              "display_type": "TEXTURED",
+              "show_bounds": false,
+              "display_bounds_type": "BOX",
+              "show_name": false,
+              "show_axis": false,
+              "show_texture_space": false,
+              "show_wire": false,
+              "show_all_edges": false,
+              "use_grease_pencil_lights": false,
+              "show_transparent": false,
+              "show_in_front": false,
+              "show_only_shape_key": false,
+              "use_shape_key_edit_mode": false,
+              "active_shape_key_index": 0,
+              "use_mesh_mirror_x": false,
+              "use_mesh_mirror_y": false,
+              "use_mesh_mirror_z": false,
+              "lightgroup": "",
+              "shadow_terminator_normal_offset": 0.0,
+              "shadow_terminator_geometry_offset": 0.10000000149011612,
+              "shadow_terminator_shading_offset": 0.0,
+              "active_selection_set": 0
+            },
+            "properties": {},
+            "collections": [
+              "Scene Collection"
+            ],
+            "modifiers": [],
+            "constraints": [],
+            "material_slots": [],
+            "vertex_groups": []
+          },
+          "camera": {
+            "use_fake_user": false,
+            "use_extra_user": false,
+            "is_runtime_data": false,
+            "tag": false,
+            "asset_data": null,
+            "type": "PERSP",
+            "sensor_fit": "AUTO",
+            "passepartout_alpha": 0.5,
+            "angle_x": 0.7175413370132446,
+            "angle_y": 0.489957332611084,
+            "angle": 0.7175413370132446,
+            "clip_start": 0.009999999776482582,
+            "clip_end": 1000.0,
+            "lens": 48.0,
+            "sensor_width": 36.0,
+            "sensor_height": 24.0,
+            "ortho_scale": 6.0,
+            "display_size": 1.0,
+            "shift_x": 0.0,
+            "shift_y": 0.0,
+            "show_limits": false,
+            "show_mist": false,
+            "show_passepartout": true,
+            "show_safe_areas": false,
+            "show_safe_center": false,
+            "show_name": false,
+            "show_sensor": false,
+            "show_background_images": false,
+            "lens_unit": "MILLIMETERS",
+            "show_composition_center": false,
+            "show_composition_center_diagonal": false,
+            "show_composition_thirds": false,
+            "show_composition_golden": false,
+            "show_composition_golden_tria_a": false,
+            "show_composition_golden_tria_b": false,
+            "show_composition_harmony_tri_a": false,
+            "show_composition_harmony_tri_b": false,
+            "panorama_type": "FISHEYE_EQUISOLID",
+            "fisheye_fov": 3.1415927410125732,
+            "fisheye_lens": 10.5,
+            "latitude_min": -1.5707963705062866,
+            "latitude_max": 1.5707963705062866,
+            "longitude_min": -3.1415927410125732,
+            "longitude_max": 3.1415927410125732,
+            "fisheye_polynomial_k0": -1.1735143743862864e-05,
+            "fisheye_polynomial_k1": -0.019988736137747765,
+            "fisheye_polynomial_k2": -3.3525323033245513e-06,
+            "fisheye_polynomial_k3": 3.0992753181635635e-06,
+            "fisheye_polynomial_k4": -2.60646473293491e-08,
+            "central_cylindrical_range_u_min": -3.1415927410125732,
+            "central_cylindrical_range_u_max": 3.1415927410125732,
+            "central_cylindrical_range_v_min": -1.0,
+            "central_cylindrical_range_v_max": 1.0,
+            "central_cylindrical_radius": 1.0,
+            "custom_filepath": "",
+            "custom_shader": null,
+            "custom_mode": "INTERNAL",
+            "custom_bytecode": "",
+            "custom_bytecode_hash": ""
+          },
+          "world": [
+            [
+              -0.8021340370178223,
+              0.3378880023956299,
+              -0.49235421419143677,
+              -0.6499999761581421
+            ],
+            [
+              -0.5971440076828003,
+              -0.4538794457912445,
+              0.661371648311615,
+              1.649999976158142
+            ],
+            [
+              9.673478729155249e-08,
+              0.8245150446891785,
+              0.5658400058746338,
+              1.7000000476837158
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "parent_inverse": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        },
+        "after": {
+          "object": {
+            "type": "CAMERA",
+            "parent": null,
+            "data": {
+              "id": "Review_OP030_split_B_joint",
+              "type": "Camera"
+            },
+            "settings": {
+              "use_fake_user": false,
+              "use_extra_user": false,
+              "is_runtime_data": false,
+              "tag": false,
+              "asset_data": null,
+              "data": {
+                "id": "Review_OP030_split_B_joint",
+                "type": "Camera"
+              },
+              "parent": null,
+              "parent_type": "OBJECT",
+              "parent_vertices": [
+                0,
+                0,
+                0
+              ],
+              "parent_bone": "",
+              "use_parent_final_indices": false,
+              "use_camera_lock_parent": false,
+              "track_axis": "NEG_Z",
+              "up_axis": "Y",
+              "active_material": null,
+              "active_material_index": 0,
+              "location": [
+                0.800000011920929,
+                1.600000023841858,
+                1.899999976158142
+              ],
+              "rotation_quaternion": [
+                1.0,
+                0.0,
+                0.0,
+                0.0
+              ],
+              "rotation_axis_angle": [
+                0.0,
+                0.0,
+                1.0,
+                0.0
+              ],
+              "rotation_euler": [
+                0.8597172498703003,
+                -1.1357322904359535e-07,
+                2.4210386276245117
+              ],
+              "rotation_mode": "XYZ",
+              "scale": [
+                1.0,
+                0.9999999403953552,
+                1.0
+              ],
+              "dimensions": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "delta_location": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "delta_rotation_euler": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "delta_rotation_quaternion": [
+                1.0,
+                0.0,
+                0.0,
+                0.0
+              ],
+              "delta_scale": [
+                1.0,
+                1.0,
+                1.0
+              ],
+              "lock_location": [
+                false,
+                false,
+                false
+              ],
+              "lock_rotation": [
+                false,
+                false,
+                false
+              ],
+              "lock_rotation_w": false,
+              "lock_rotations_4d": true,
+              "lock_scale": [
+                false,
+                false,
+                false
+              ],
+              "empty_display_type": "PLAIN_AXES",
+              "empty_display_size": 1.0,
+              "empty_image_offset": [
+                0.0,
+                0.0
+              ],
+              "empty_image_depth": "DEFAULT",
+              "show_empty_image_perspective": true,
+              "show_empty_image_orthographic": true,
+              "show_empty_image_only_axis_aligned": false,
+              "use_empty_image_alpha": false,
+              "empty_image_side": "DOUBLE_SIDED",
+              "add_rest_position_attribute": false,
+              "pass_index": 0,
+              "color": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "use_simulation_cache": true,
+              "hide_viewport": false,
+              "hide_select": false,
+              "hide_render": false,
+              "hide_probe_volume": false,
+              "hide_probe_sphere": false,
+              "hide_probe_plane": false,
+              "show_instancer_for_render": true,
+              "show_instancer_for_viewport": true,
+              "visible_camera": true,
+              "visible_diffuse": true,
+              "visible_glossy": true,
+              "visible_transmission": true,
+              "visible_volume_scatter": true,
+              "visible_shadow": true,
+              "is_holdout": false,
+              "is_shadow_catcher": false,
+              "instance_type": "NONE",
+              "use_instance_vertices_rotation": false,
+              "use_instance_faces_scale": false,
+              "instance_faces_scale": 1.0,
+              "instance_collection": null,
+              "display_type": "TEXTURED",
+              "show_bounds": false,
+              "display_bounds_type": "BOX",
+              "show_name": false,
+              "show_axis": false,
+              "show_texture_space": false,
+              "show_wire": false,
+              "show_all_edges": false,
+              "use_grease_pencil_lights": false,
+              "show_transparent": false,
+              "show_in_front": false,
+              "show_only_shape_key": false,
+              "use_shape_key_edit_mode": false,
+              "active_shape_key_index": 0,
+              "use_mesh_mirror_x": false,
+              "use_mesh_mirror_y": false,
+              "use_mesh_mirror_z": false,
+              "lightgroup": "",
+              "shadow_terminator_normal_offset": 0.0,
+              "shadow_terminator_geometry_offset": 0.10000000149011612,
+              "shadow_terminator_shading_offset": 0.0,
+              "active_selection_set": 0
+            },
+            "properties": {},
+            "collections": [
+              "Scene Collection"
+            ],
+            "modifiers": [],
+            "constraints": [],
+            "material_slots": [],
+            "vertex_groups": []
+          },
+          "camera": {
+            "use_fake_user": false,
+            "use_extra_user": false,
+            "is_runtime_data": false,
+            "tag": false,
+            "asset_data": null,
+            "type": "PERSP",
+            "sensor_fit": "AUTO",
+            "passepartout_alpha": 0.5,
+            "angle_x": 0.7175413370132446,
+            "angle_y": 0.489957332611084,
+            "angle": 0.7175413370132446,
+            "clip_start": 0.009999999776482582,
+            "clip_end": 1000.0,
+            "lens": 48.0,
+            "sensor_width": 36.0,
+            "sensor_height": 24.0,
+            "ortho_scale": 6.0,
+            "display_size": 1.0,
+            "shift_x": 0.0,
+            "shift_y": 0.0,
+            "show_limits": false,
+            "show_mist": false,
+            "show_passepartout": true,
+            "show_safe_areas": false,
+            "show_safe_center": false,
+            "show_name": false,
+            "show_sensor": false,
+            "show_background_images": false,
+            "lens_unit": "MILLIMETERS",
+            "show_composition_center": false,
+            "show_composition_center_diagonal": false,
+            "show_composition_thirds": false,
+            "show_composition_golden": false,
+            "show_composition_golden_tria_a": false,
+            "show_composition_golden_tria_b": false,
+            "show_composition_harmony_tri_a": false,
+            "show_composition_harmony_tri_b": false,
+            "panorama_type": "FISHEYE_EQUISOLID",
+            "fisheye_fov": 3.1415927410125732,
+            "fisheye_lens": 10.5,
+            "latitude_min": -1.5707963705062866,
+            "latitude_max": 1.5707963705062866,
+            "longitude_min": -3.1415927410125732,
+            "longitude_max": 3.1415927410125732,
+            "fisheye_polynomial_k0": -1.1735143743862864e-05,
+            "fisheye_polynomial_k1": -0.019988736137747765,
+            "fisheye_polynomial_k2": -3.3525323033245513e-06,
+            "fisheye_polynomial_k3": 3.0992753181635635e-06,
+            "fisheye_polynomial_k4": -2.60646473293491e-08,
+            "central_cylindrical_range_u_min": -3.1415927410125732,
+            "central_cylindrical_range_u_max": 3.1415927410125732,
+            "central_cylindrical_range_v_min": -1.0,
+            "central_cylindrical_range_v_max": 1.0,
+            "central_cylindrical_radius": 1.0,
+            "custom_filepath": "",
+            "custom_shader": null,
+            "custom_mode": "INTERNAL",
+            "custom_bytecode": "",
+            "custom_bytecode_hash": ""
+          },
+          "world": [
+            [
+              -0.7514402866363525,
+              -0.4306202232837677,
+              0.49990367889404297,
+              0.800000011920929
+            ],
+            [
+              0.6598010659217834,
+              -0.4904288351535797,
+              0.5693347454071045,
+              1.600000023841858
+            ],
+            [
+              1.1357322904359535e-07,
+              0.7576580047607422,
+              0.6526517271995544,
+              1.899999976158142
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "parent_inverse": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        }
+      }
+    },
+    "category_signatures": {
+      "original": {
+        "collection": {
+          "sha256": "1d386bf60bb10c52e88eba1fa2c76fb6aa4b2a68e7a30df612fe27efff77ea48",
+          "records": 71
+        },
+        "curve": {
+          "sha256": "d7dd54dcfa0559d1a084ba76a807c87dbf8862cac0f29704f88069fc4f0d008c",
+          "records": 69,
+          "arrays": 207
+        },
+        "animation": {
+          "sha256": "bbf4da3f5cfce65c64e227fe211337278473e1925da34e155312c0d7be41a73f",
+          "records": 13952,
+          "arrays": 29736
+        },
+        "image": {
+          "sha256": "dee2627c40e4d56c2165c905289b7429ae37e045fb205fb4a3a4cb3b9ac691d3",
+          "records": 38
+        },
+        "material": {
+          "sha256": "b9b03c8f3981c0da0b1aa3c2cdaa75ac94dd26e19559575d7baefaf2a11dd28c",
+          "records": 194
+        },
+        "mesh": {
+          "sha256": "54e5469d2b400b20fd4a32d9934f85ed1b9a17aeec72a4d6e29cad90442ab3b0",
+          "records": 39114,
+          "arrays": 64042
+        },
+        "object": {
+          "sha256": "308f7f50e0d18965d5543cb5b4babfc8e854669b0622e3b6e4a9db542916d596",
+          "records": 9809,
+          "arrays": 38284
+        },
+        "review_camera": {
+          "sha256": "cebc18d89201bb39d20426a8ccf0959691e8960758bffecb64af61f74bf145d2",
+          "records": 2
+        },
+        "scene": {
+          "sha256": "c685e3bbb5e4298cf7a7159aa79240dc335f171444b4c549a2b8325feb022cb0",
+          "records": 2
+        },
+        "shape_key": {
+          "sha256": "f6be794c3288e2b0595a6e7d4d67f8336d104b26968fb1432a0a231619a7def8",
+          "records": 1051,
+          "arrays": 1047
+        },
+        "world": {
+          "sha256": "2bd259212f246c13c5800a1428b5fed86224106ead2892053cc33bf43b12c9c8",
+          "records": 2
+        }
+      },
+      "final": {
+        "collection": {
+          "sha256": "1d386bf60bb10c52e88eba1fa2c76fb6aa4b2a68e7a30df612fe27efff77ea48",
+          "records": 71
+        },
+        "curve": {
+          "sha256": "d7dd54dcfa0559d1a084ba76a807c87dbf8862cac0f29704f88069fc4f0d008c",
+          "records": 69,
+          "arrays": 207
+        },
+        "animation": {
+          "sha256": "bbf4da3f5cfce65c64e227fe211337278473e1925da34e155312c0d7be41a73f",
+          "records": 13952,
+          "arrays": 29736
+        },
+        "image": {
+          "sha256": "dee2627c40e4d56c2165c905289b7429ae37e045fb205fb4a3a4cb3b9ac691d3",
+          "records": 38
+        },
+        "material": {
+          "sha256": "b9b03c8f3981c0da0b1aa3c2cdaa75ac94dd26e19559575d7baefaf2a11dd28c",
+          "records": 194
+        },
+        "mesh": {
+          "sha256": "54e5469d2b400b20fd4a32d9934f85ed1b9a17aeec72a4d6e29cad90442ab3b0",
+          "records": 39114,
+          "arrays": 64042
+        },
+        "object": {
+          "sha256": "308f7f50e0d18965d5543cb5b4babfc8e854669b0622e3b6e4a9db542916d596",
+          "records": 9809,
+          "arrays": 38284
+        },
+        "review_camera": {
+          "sha256": "cebc18d89201bb39d20426a8ccf0959691e8960758bffecb64af61f74bf145d2",
+          "records": 2
+        },
+        "scene": {
+          "sha256": "c685e3bbb5e4298cf7a7159aa79240dc335f171444b4c549a2b8325feb022cb0",
+          "records": 2
+        },
+        "shape_key": {
+          "sha256": "f6be794c3288e2b0595a6e7d4d67f8336d104b26968fb1432a0a231619a7def8",
+          "records": 1051,
+          "arrays": 1047
+        },
+        "world": {
+          "sha256": "2bd259212f246c13c5800a1428b5fed86224106ead2892053cc33bf43b12c9c8",
+          "records": 2
+        }
+      }
+    }
+  },
+  "scope": "Saved Blender data equivalence only. Original raw geometry evidence retains its native SHA. No new force, physical validity, or collision verdict.",
+  "formal_physical_validity_verdict": null
+}

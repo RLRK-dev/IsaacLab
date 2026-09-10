@@ -9,7 +9,7 @@
 - `probe_op030_front_integration_v05.py::export_changed`：完成 native の entry / A→B / B→C の全保存時刻から、payload・移動機構・近傍の evaluated triangles と full affine 行列を取得する。
 - `probe_op030_v05_integration.py::native_export`：C prefill と B drawer の同時刻、全固定背景を実 native から取得する。固定背景は新しい pinned static の world triangles と一致するかを別記する。
 - `probe_op030_split_a_payload.py::check`：一定 stretch を頂点に焼込み、実 triangle FCL と接触面を記録する。`check_fixtures` は明示された同一機構の内部だけを外部照合から省く。外部接触例外は増やさない。
-- `probe_op030_v05_background.py::Station` と `op030_split_product_delta.py::DeltaCheck`：元 FK bank と工具 spindle / UID / 変形被覆の対応を再利用する。B は新 factory `op030_split_b_stagger_v06:build_sequence(config)` を明示して使用し、旧 factory への差替えは行わない。
+- `probe_op030_v05_background.py::Station` と `op030_split_product_delta.py::DeltaCheck`：元 FK bank と工具 spindle / UID / 変形被覆の対応を再利用する。B は新 factory `op030_split_b_stagger_v06:build_sequence_final(config)` を明示して使用し、旧 factory への差替えは行わない。
 - 新規 `probe_op030_stagger_integration_v06.py`：saved array identity、B 初期/終端 park の world mesh export、native B 全 node と drawer / 10 UID の座標対応。
 - 新規 `probe_op030_stagger_background_v06.py`：A/C の保存動作対新 B park、B 対 C loaded park、各 station context の外にある新固定背景。名前が同じでも world triangles が異なる旧 B 配置は照合対象に戻す。
 
@@ -19,8 +19,8 @@
 |---|---|
 | A/C banks | v05 の SHA が不変。A 7,165 frames、C 2,430 frames / preload 264 frames。 |
 | B bank | `data/op030_split_b_stagger_motion_v06.npz`。78 node IDs、baseline root (+.9, −1.7, 0)、world 化は Y+2.3 を一度。v05 bank 同一 SHA の場合は検査を停止する。 |
-| B factory/config | `op030_split_b_stagger_v06:build_sequence(config)`。active UIDs、wire points/lug frames/material parameter 契約を保持。 |
-| Static | `analysis/op030_stagger_static_v06.blend` / `audit/op030_stagger_static_v06.json` を予定。移設 root `OP030B_robot_supply_stagger_root`、既存 actor 名は保持。 |
+| B factory/config | `op030_split_b_stagger_v06:build_sequence_final(config)`。active UIDs、wire points/lug frames/material parameter 契約を保持。 |
+| Static | `analysis/op030_stagger_air_clearance_static_v06.blend` / `audit/op030_stagger_air_clearance_static_v06.json` を使用。移設 root `OP030B_robot_supply_stagger_root`、既存 actor 名は保持。 |
 | B supply | 新親 local +X 0..340 mm = world −X。10 UID は引出しへ追従し、使用 2 UID は製品へ、残り 8 UID は戻る。 |
 | Prepared/native | root が生成した v06 NPZ/JSON と scene `split_animation_sha256` の一致が必須。旧 v05 配列を代用しない。 |
 
@@ -34,3 +34,7 @@
 6. native の B 78 node の world 行列、D の正の行列式、drawer の world −340 mm X、10 UID の drawer 相対姿勢、背景の新 static 対応。これにより取り残し/二重回転を数値で区別する。
 
 全件は保存時刻での幾何・個体・座標の補助確認。接触力、摩擦、締付品質、実機安全性、正式な物理妥当性は判定しない。検査した discrete frames 間の連続衝突保証も行わない。
+
+2026-09-10T21:41:20.461237+09:00 追記: B 最終 bank は SHA `41b353e220db025f432b06f384e9a256262fd9f76fa30b31da7353c4b5b4854d`、3,787 frames / 126.2 秒、final factory は 33 phase / 101 author 秒へ確定した。ROOT による新 prepared/native 生成後に以下を実行する。新0782四部材に対する A/C 全 bank の差分は `audit/op030_air_drop_ac_v06_completion.json` に全時刻の保守的離隔を保存済みであり、同じ入力で再実行しない。
+
+2026-09-10T22:31:26.951650+09:00 追記: native binding の最初の parent 必須 assertion は、baker が残り8 UIDへ個別 world トラックを書き親を解除する契約と異なった。失敗 JSON `audit/op030_stagger_v06_integration_entry_binding_parent_assert.json` は保存した。`animate_op030_split_v06.py` の world(wire[uid], drawer_B_world) と対応し、全return76時刻の UID world と drawer world、相対行列で検査した結果は相対変化0、prepared差2.3841858043383013e-08。中間の object_poses 参照は残り8 UIDがその配列に存在せずKeyErrorとなり、ログを保全。最終検査は明示 drawer_B_world を期待値に用いた。native/source/bankは変更していない。
