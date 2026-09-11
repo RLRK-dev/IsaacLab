@@ -1,0 +1,378 @@
+# Copyright (c) 2022-2026, The Isaac Lab Project Developers (https://github.com/isaac-sim/IsaacLab/blob/main/CONTRIBUTORS.md).
+# All rights reserved.
+#
+# SPDX-License-Identifier: BSD-3-Clause
+"""Measure the cable runs and the air hardware, so routing can be decided on numbers [m].
+
+Work 4 has to reroute two cable runs that cross their neighbours' and give each new cell its
+own air set. Neither can be settled from geometry alone: a bend radius, a support pitch and a
+separation are properties of the real cable and the real pipe, and this model carries none of
+them. What the model does carry is what the existing runs already do, and that is worth
+having before anyone proposes a number.
+
+So this measures rather than decides. For every cable it walks a centre line through the
+mesh, which gives the run its length, its thickness, the tightest radius it already turns,
+and where its two ends sit and point. For every sampled point it reports the nearest solid
+that is not the cable itself, which is the room a new route would have to work in. Where two
+runs cross it reports the position along each, so a reroute knows which part of the run to
+move. And it lists the air hardware v06 built for B, since the three new cells need the same
+set and the spec describes it only in prose.
+
+The centre line is found by marching: take the vertices ahead within a ball, step to their
+centroid, continue. Run against circles of known radius it recovers length to about 2% and
+section to about a tenth low.
+
+It does not recover the bend radius, and that was measured rather than assumed. A perfectly
+straight tube comes back as a 0.149 m bend, which is squarely inside the range a real bend
+would occupy, and smoothing or widening the window raises the reading and the floor together.
+So no bend radius is reported here at all. Quoting one would have been worse than quoting
+nothing, because a number in a report gets used.
+
+Names are never taken apart. Blender truncates at 63 characters and eleven S2L copies lost
+their tails, so a copy's origin is read from ``split_source_name``.
+
+Run: ``blender --background --python scripts/probe_op030_v07c_routing_survey.py``
+
+Read-only. The scene is never saved and world transforms are compared before and after.
+A geometric observation at its recorded timestamp, not a physical-validity verdict.
+"""
+
+import json
+import sys
+from datetime import datetime
+from pathlib import Path
+
+import bpy
+import numpy as np
+from mathutils.bvhtree import BVHTree
+
+ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT / "scripts"))
+from build_op030_split_v04 import _world_vertices  # noqa: E402
+from build_op030_stagger_static_v06 import digest, geometry  # noqa: E402
+
+SOURCE = ROOT / "analysis/op030_v07c_stagger_both_sides.blend"
+SOURCE_SHA = "4e7c5b0d8b00b904c618dac757cf4c97c88de620898e7c7dcca0c3b0eb46ea51"
+REPORT = ROOT / "audit/op030_v07c_routing_survey.json"
+
+# The cable from a station's cabinet to its robot pedestal is part p04 of the cabinet group.
+CABLE_SUFFIX = "_p04"
+# The air hardware v06 built and moved for B, named in section 7.1 of the v07c spec.
+AIR_PREFIXES = (
+    "Split_bay_1__source_0779",
+    "Split_bay_2__source_0779",
+    "Split_bay_1__source_0780",
+    "Split_bay_2__source_0780",
+    "Split_bay_1__source_0782",
+    "Split_bay_2__source_0782",
+)
+# Marching the centre line. The cable measures about 56 mm across, and these three were not
+# guessed: they are what made the estimator agree with circles of known radius. A smaller ball
+# makes the march collapse -- at 0.035 m it wandered 148 m along a 0.126 m arc.
+BALL_M = 0.045
+STEP_M = 0.012
+MAX_STEPS = 9000
+# Smoothing passes before measuring. The march jitters.
+SMOOTHING_PASSES = 2
+# What the centre line returned for the radius of circles of known radius, at these constants,
+# including a straight tube whose true radius is infinite. A straight run reads 0.149 m, which
+# sits inside the range a real bend would occupy, so the two cannot be told apart and no bend
+# radius is reported. Widening the window only raises the floor with the reading.
+CURVATURE_CALIBRATION = {
+    "straight (infinite)": 0.149,
+    "0.500": 0.494,
+    "0.300": 0.296,
+    "0.150": 0.150,
+    "verdict": "not measurable by this method; the noise floor overlaps the range of interest",
+}
+# The implied diameter runs about a tenth low against a tube of known section, because the
+# centre line wanders inside the true axis. Reported as approximate, not as a dimension.
+DIAMETER_CALIBRATION = {"true_m": 0.056, "measured_m": 0.0497}
+# Obstacles further than this from a run are not part of its routing problem.
+NEIGHBOURHOOD_M = 0.500
+# Report the run's clearance at no more than this many points, evenly spaced.
+CLEARANCE_SAMPLES = 200
+# Two runs count as crossing where their centre lines come within this of each other.
+CROSSING_M = 0.100
+HALL_FOOTPRINT_M = 8.0
+
+
+def source_name(obj: bpy.types.Object) -> str:
+    """Return the name this object was copied from. Never parse the object's own name."""
+    stamped = obj.get("split_source_name")
+    return str(stamped) if stamped else obj.name
+
+
+def box_of(obj: bpy.types.Object) -> tuple[np.ndarray, np.ndarray] | None:
+    """Return an object's world box, or None when it has no usable volume [m]."""
+    if obj.type not in {"MESH", "CURVE"}:
+        return None
+    vertices = getattr(obj.data, "vertices", None)
+    if vertices is None or not len(vertices):
+        return None
+    world = _world_vertices(obj)
+    low, high = world.min(0), world.max(0)
+    if max(high[0] - low[0], high[1] - low[1]) > HALL_FOOTPRINT_M:
+        return None
+    return low, high
+
+
+def centre_line(points: np.ndarray) -> np.ndarray:
+    """March a centre line through a tube of points, from one end to the other [m].
+
+    Each step looks at the points within a ball a little ahead and keeps only those in front
+    of where it already stands, then moves to their centroid. Taking the whole ball instead
+    averages in the tube behind and the march stalls: on a quarter circle of radius 0.500 m it
+    crawled, reported 1.950 m of run against a true 0.785 m, and read the curve as 0.001 m.
+    """
+    spread = points - points.mean(0)
+    axis = np.linalg.svd(spread, full_matrices=False)[2][0]
+    start = points[np.argmin(spread @ axis)]
+    ball = points[np.linalg.norm(points - start, axis=1) <= BALL_M]
+    position = ball.mean(0) if len(ball) else start
+    # Start at the far end along the principal axis, so stepping along it heads into the tube.
+    direction = axis
+    line = [position]
+    for _ in range(MAX_STEPS):
+        ahead = position + direction * STEP_M
+        ball = points[np.linalg.norm(points - ahead, axis=1) <= BALL_M]
+        if len(ball) < 3:
+            break
+        forward = ball[(ball - position) @ direction > 0.5 * STEP_M]
+        if len(forward) < 3:
+            break
+        centre = forward.mean(0)
+        step = centre - position
+        length = float(np.linalg.norm(step))
+        if length < 1e-6:
+            break
+        direction = step / length
+        position = centre
+        line.append(position)
+    return np.asarray(line)
+
+
+def run_length(line: np.ndarray) -> float:
+    """Return the length of a polyline [m]. The steps are not all the nominal size."""
+    if len(line) < 2:
+        return 0.0
+    return float(np.linalg.norm(np.diff(line, axis=0), axis=1).sum())
+
+
+def arc_lengths(line: np.ndarray) -> np.ndarray:
+    """Return the distance along the polyline to each of its points [m]."""
+    if len(line) < 2:
+        return np.zeros(len(line))
+    return np.concatenate([[0.0], np.cumsum(np.linalg.norm(np.diff(line, axis=0), axis=1))])
+
+
+def smooth_line(line: np.ndarray) -> np.ndarray:
+    """Return the centre line with its marching jitter averaged out [m]."""
+    out = line.copy()
+    for _ in range(SMOOTHING_PASSES):
+        if len(out) < 3:
+            break
+        out = np.vstack([out[:1], (out[:-2] + out[1:-1] + out[2:]) / 3.0, out[-1:]])
+    return out
+
+
+def thickness(points: np.ndarray, line: np.ndarray) -> dict:
+    """Return how far the surface sits from the centre line [m]."""
+    if not len(line):
+        return dict(samples=0)
+    distances = np.linalg.norm(points[:, None, :] - line[None, :, :], axis=2).min(axis=1)
+    return dict(
+        samples=int(len(points)),
+        mean_radius_m=float(distances.mean()),
+        max_radius_m=float(distances.max()),
+        implied_diameter_m=float(2.0 * distances.mean()),
+    )
+
+
+def neighbourhood(obj: bpy.types.Object, low: np.ndarray, high: np.ndarray) -> list[tuple[str, BVHTree]]:
+    """Return a BVH for every solid standing near this run, the run itself excluded."""
+    trees = []
+    for other in bpy.context.scene.objects:
+        if other is obj:
+            continue
+        box = box_of(other)
+        if box is None:
+            continue
+        if np.any(box[0] - high > NEIGHBOURHOOD_M) or np.any(low - box[1] > NEIGHBOURHOOD_M):
+            continue
+        vertices, faces = geometry(other)
+        if not len(faces):
+            continue
+        trees.append(
+            (
+                other.name,
+                BVHTree.FromPolygons(
+                    [tuple(v) for v in vertices.tolist()], [tuple(f) for f in faces.tolist()], all_triangles=True
+                ),
+            )
+        )
+    return trees
+
+
+def clearance_along(line: np.ndarray, trees: list[tuple[str, BVHTree]]) -> dict:
+    """Return the nearest solid at points along the run, and the tightest of them [m]."""
+    if not len(line) or not trees:
+        return dict(sampled=0, tightest_m=None)
+    step = max(1, len(line) // CLEARANCE_SAMPLES)
+    samples = []
+    for index in range(0, len(line), step):
+        point = line[index].tolist()
+        best_name, best = None, None
+        for name, tree in trees:
+            _, _, _, distance = tree.find_nearest(point)
+            if distance is not None and (best is None or distance < best):
+                best_name, best = name, float(distance)
+        if best is not None:
+            samples.append(dict(index=index, at_m=line[index].tolist(), nearest=best_name, distance_m=best))
+    tightest = min(samples, key=lambda row: row["distance_m"]) if samples else None
+    return dict(
+        sampled=len(samples),
+        tightest=tightest,
+        tightest_m=None if tightest is None else tightest["distance_m"],
+    )
+
+
+def crossings(lines: dict[str, np.ndarray]) -> list[dict]:
+    """Return where two runs come within the crossing distance of each other [m]."""
+    found = []
+    names = sorted(lines)
+    for i, first in enumerate(names):
+        for second in names[i + 1 :]:
+            a, b = lines[first], lines[second]
+            if not len(a) or not len(b):
+                continue
+            gaps = np.linalg.norm(a[:, None, :] - b[None, :, :], axis=2)
+            index = np.unravel_index(np.argmin(gaps), gaps.shape)
+            gap = float(gaps[index])
+            if gap > CROSSING_M:
+                continue
+            found.append(
+                dict(
+                    runs=[first, second],
+                    gap_m=gap,
+                    at_m=a[index[0]].tolist(),
+                    along_first_m=float(arc_lengths(a)[index[0]]),
+                    along_second_m=float(arc_lengths(b)[index[1]]),
+                    first_length_m=run_length(a),
+                    second_length_m=run_length(b),
+                )
+            )
+    return sorted(found, key=lambda row: row["gap_m"])
+
+
+def transforms() -> dict[str, list]:
+    """Return every object's world matrix so the read-only claim can be checked [m]."""
+    return {o.name: np.asarray(o.matrix_world).tolist() for o in bpy.context.scene.objects}
+
+
+def main() -> None:
+    """Survey every cable run and the air hardware, and write what routing would need."""
+    assert digest(SOURCE) == SOURCE_SHA, "Survey the six-cell candidate"
+    assert not REPORT.exists(), "Preserve the existing survey"
+    bpy.ops.wm.open_mainfile(filepath=str(SOURCE))
+    bpy.context.scene.frame_set(1)
+    before = transforms()
+
+    cables, lines = {}, {}
+    for obj in sorted(bpy.context.scene.objects, key=lambda o: o.name):
+        if not source_name(obj).endswith(CABLE_SUFFIX):
+            continue
+        box = box_of(obj)
+        if box is None:
+            continue
+        points = _world_vertices(obj)
+        line = smooth_line(centre_line(points))
+        lines[obj.name] = line
+        cables[obj.name] = dict(
+            source=source_name(obj),
+            box_m=[box[0].tolist(), box[1].tolist()],
+            centre_line_points=len(line),
+            run_length_m=run_length(line),
+            ends=dict(
+                start_m=line[0].tolist() if len(line) else None,
+                end_m=line[-1].tolist() if len(line) else None,
+                start_direction=(line[1] - line[0]).tolist() if len(line) > 1 else None,
+                end_direction=(line[-1] - line[-2]).tolist() if len(line) > 1 else None,
+            ),
+            thickness=thickness(points, line),
+            clearance=clearance_along(line, neighbourhood(obj, *box)),
+        )
+
+    air = {}
+    for obj in sorted(bpy.context.scene.objects, key=lambda o: o.name):
+        if not obj.name.startswith(AIR_PREFIXES):
+            continue
+        box = box_of(obj)
+        if box is None:
+            continue
+        air[obj.name] = dict(
+            source=source_name(obj),
+            size_m=(box[1] - box[0]).tolist(),
+            box_m=[box[0].tolist(), box[1].tolist()],
+            parent=obj.parent.name if obj.parent else None,
+        )
+
+    after = transforms()
+    unchanged = after == before
+    REPORT.write_text(
+        json.dumps(
+            dict(
+                observed_at=datetime.now().astimezone().isoformat(),
+                source=str(SOURCE.relative_to(ROOT)),
+                source_sha256=SOURCE_SHA,
+                method=dict(
+                    centre_line="march a ball along the tube and step to its centroid",
+                    ball_m=BALL_M,
+                    step_m=STEP_M,
+                    smoothing_passes=SMOOTHING_PASSES,
+                    curvature_calibration_m=CURVATURE_CALIBRATION,
+                    diameter_calibration_m=DIAMETER_CALIBRATION,
+                    neighbourhood_m=NEIGHBOURHOOD_M,
+                    crossing_m=CROSSING_M,
+                ),
+                what_this_does_not_give=[
+                    "the cable's allowed bend radius, which belongs to the real cable",
+                    "the bend radius the model already uses: measured and found not measurable",
+                    "support pitch and fixing points",
+                    "required separation from other services",
+                    "the pipe inside the air hardware's boxes",
+                ],
+                cable_count=len(cables),
+                cables=cables,
+                crossings=crossings(lines),
+                air_hardware_count=len(air),
+                air_hardware=air,
+                scene_world_transforms_unchanged=unchanged,
+                saved_scene=False,
+                scope="Read-only survey of cable runs and air hardware on the six-cell candidate",
+                formal_physical_validity_verdict=None,
+            ),
+            ensure_ascii=False,
+            indent=1,
+        )
+        + "\n"
+    )
+    assert unchanged, "The survey must not move anything"
+    for name, row in cables.items():
+        clear = row["clearance"]["tightest_m"]
+        print(
+            f"  {name[:56]:56s} length {row['run_length_m']:.2f} m  "
+            f"dia ~{row['thickness'].get('implied_diameter_m', 0):.3f} m  "
+            f"clearance {'-' if clear is None else f'{clear:.3f}'} m"
+        )
+    for row in crossings(lines):
+        print(
+            f"  crossing {row['gap_m']:.3f} m: {row['runs'][0][:34]} at {row['along_first_m']:.2f} m "
+            f"x {row['runs'][1][:34]} at {row['along_second_m']:.2f} m"
+        )
+    print(f"air hardware: {len(air)} objects")
+    print(f"report: {REPORT.relative_to(ROOT)}")
+
+
+if __name__ == "__main__":
+    main()
