@@ -19,6 +19,14 @@ measures the clearance at every step, against everything that stays and against 
 the mirrored cell, which will be standing there too. What comes back is the free intervals,
 the smallest move that clears, and what limits each side.
 
+The cabinet's p04 piece is not the cabinet. Every one of the twelve stations carries the same
+0.538 x 1.956 x 0.193 plate and its robot pedestal stands on it, so the plate belongs to the
+robot and mirrors with it. Sweeping it along with the cabinet is what made the first run find
+no free position anywhere: the plate can never leave the pedestal standing on it. The plate is
+therefore held at the mirrored position, treated as an obstacle to the cabinet, and asked a
+different question -- how much of it would have to be cut away to clear what it lands on, and
+whether the pedestal still stands wholly on what is left.
+
 Nothing here decides the placement. It reports where a placement is possible.
 
 Run: ``blender --background --python scripts/probe_op030_v07c_controller_placement.py``
@@ -54,6 +62,15 @@ REPORT = ROOT / "audit/op030_v07c_controller_placement.json"
 
 # The controller of each cell, by the name its parts carry.
 CONTROLLERS = {"A": "source_0693", "B": "OP030B__source_0693", "C": "OP030C__source_0693"}
+# p04 is grouped under the controller by the CAD import but is not part of the cabinet. It is
+# the floor plate the robot pedestal stands on: every one of the twelve stations carries the
+# same 0.538 x 1.956 x 0.193 plate, and the pedestal meets it at each. So it mirrors with the
+# robot and cannot be carried around with the cabinet -- sweeping it together with the cabinet
+# is what made the first run find no free position anywhere, since the plate can never leave
+# the pedestal that stands on it.
+FLOOR_PLATE_SUFFIX = "_p04"
+# The robot pedestal, which the plate has to keep supporting after any trim.
+PEDESTALS = {"A": "source_0576_m0050", "B": "OP030B__source_0576_m0050", "C": "OP030C__source_0576_m0050"}
 # How far along Y the cabinet is allowed to travel, and how finely it is sampled.
 TRAVEL_M = 2.000
 STEP_M = 0.025
@@ -63,16 +80,22 @@ MARGIN_M = 0.100
 TOUCH_M = 0.000
 
 
-def boxes_of(names: list[str], station_y: float) -> list[tuple[np.ndarray, np.ndarray]]:
-    """Return the mirrored boxes of these objects, skipping what has no volume [m]."""
-    out = []
+def boxes_of(names: list[str], station_y: float) -> tuple[list[str], list[tuple[np.ndarray, np.ndarray]]]:
+    """Return the mirrored boxes of these objects, and the names they belong to [m].
+
+    The names come back with the boxes because the two must stay aligned. Returning boxes
+    alone and pairing them against the original list off by the objects that have no volume
+    is what made the first run name the wrong limiting part.
+    """
+    kept, out = [], []
     for name in names:
         obj = bpy.data.objects.get(name)
         box = None if obj is None else box_of(obj)
         if box is None or hall_sized(*box):
             continue
+        kept.append(name)
         out.append(mirror_box(*box, station_y))
-    return out
+    return kept, out
 
 
 def clearance(box: tuple[np.ndarray, np.ndarray], lows: np.ndarray, highs: np.ndarray) -> tuple[float, int]:
@@ -123,6 +146,63 @@ def smallest_move(rows: list[dict], threshold: float) -> dict | None:
     return min(allowed, key=lambda row: (abs(row["offset_m"]), -row["clearance_m"]))
 
 
+def union(boxes: list[tuple[np.ndarray, np.ndarray]]) -> tuple[np.ndarray, np.ndarray] | None:
+    """Return the box enclosing these boxes [m]."""
+    if not boxes:
+        return None
+    return np.array([box[0] for box in boxes]).min(0), np.array([box[1] for box in boxes]).max(0)
+
+
+def plate_fit(
+    plate: tuple[np.ndarray, np.ndarray],
+    pedestal: tuple[np.ndarray, np.ndarray] | None,
+    lows: np.ndarray,
+    highs: np.ndarray,
+    names: list[str],
+) -> list[dict]:
+    """Ask what a mirrored floor plate would have to give up to clear what it lands on [m].
+
+    The plate carries the pedestal, so it cannot move. It can be shortened. For each thing it
+    lands on, this gives the two ways to cut it back along Y and whether the pedestal still
+    stands wholly on what is left.
+    """
+    low, high = plate
+    separation = np.maximum(lows - high, low - highs).max(axis=1)
+    rows = []
+    for index in np.flatnonzero(separation < 0):
+        obstacle_low, obstacle_high = lows[index], highs[index]
+        options = []
+        for label, new_low, new_high in (
+            ("cut_back_the_high_end", low[1], float(obstacle_low[1])),
+            ("cut_back_the_low_end", float(obstacle_high[1]), high[1]),
+        ):
+            remaining = float(new_high) - float(new_low)
+            if remaining <= 0:
+                options.append(dict(option=label, remaining_length_m=remaining, pedestal_supported=False))
+                continue
+            margin = None
+            if pedestal is not None:
+                margin = float(min(pedestal[0][1] - new_low, new_high - pedestal[1][1]))
+            options.append(
+                dict(
+                    option=label,
+                    cut_m=float(high[1] - new_high if label.endswith("high_end") else new_low - low[1]),
+                    remaining_length_m=remaining,
+                    pedestal_supported=None if margin is None else bool(margin >= 0.0),
+                    pedestal_margin_m=margin,
+                )
+            )
+        rows.append(
+            dict(
+                obstacle=names[index],
+                overlap_y_m=float(min(high[1], obstacle_high[1]) - max(low[1], obstacle_low[1])),
+                obstacle_y_m=[float(obstacle_low[1]), float(obstacle_high[1])],
+                options=options,
+            )
+        )
+    return sorted(rows, key=lambda row: -row["overlap_y_m"])
+
+
 def transforms() -> dict[str, list]:
     """Return every object's world matrix so the read-only claim can be checked [m]."""
     return {o.name: np.asarray(o.matrix_world).tolist() for o in bpy.context.scene.objects}
@@ -142,22 +222,46 @@ def main() -> None:
     for cell, (destination, station_y) in MIRRORS.items():
         moving = set(moving_names(cell, covered[cell])["names"])
         prefix = CONTROLLERS[cell]
-        controller = sorted(name for name in moving if name.startswith(prefix))
-        rest = sorted(moving - set(controller))
+        grouped = sorted(name for name in moving if name.startswith(prefix))
+        plate = [name for name in grouped if name.endswith(FLOOR_PLATE_SUFFIX)]
+        cabinet = [name for name in grouped if name not in set(plate)]
+        # The plate stays at the mirrored position with the robot, so it is an obstacle to the
+        # cabinet like anything else standing there.
+        rest = sorted((moving - set(cabinet)) | set(plate))
         static_names, static_lows, static_highs = obstacles(moving)
-        rest_boxes = boxes_of(rest, station_y)
+        rest_names, rest_boxes = boxes_of(rest, station_y)
         lows = np.vstack([static_lows, np.array([box[0] for box in rest_boxes])])
         highs = np.vstack([static_highs, np.array([box[1] for box in rest_boxes])])
-        names = static_names + [f"(mirrored own cell) {name}" for name in rest]
-        controller_boxes = boxes_of(controller, station_y)
+        names = static_names + [f"(mirrored own cell) {name}" for name in rest_names]
+        cabinet_names, cabinet_boxes = boxes_of(cabinet, station_y)
+        controller_boxes = cabinet_boxes
         rows = sweep(controller_boxes, lows, highs, names)
         at_mirror = next(row for row in rows if row["offset_m"] == 0.0)
+        plate_names, plate_boxes = boxes_of(plate, station_y)
+        pedestal_names = sorted(name for name in moving if name.startswith(PEDESTALS[cell]))
+        _, pedestal_boxes = boxes_of(pedestal_names, station_y)
+        plate_box, pedestal_box = union(plate_boxes), union(pedestal_boxes)
         cells[cell] = dict(
             destination=destination,
             station_y_m=station_y,
             controller_prefix=prefix,
-            controller_parts=len(controller_boxes),
-            controller_names=controller,
+            cabinet_parts=len(cabinet_boxes),
+            cabinet_names=cabinet_names,
+            floor_plate_names=plate,
+            floor_plate_note="mirrored with the robot, not swept; it is the pedestal's base",
+            floor_plate=dict(
+                parts=plate_names,
+                mirrored_box_m=None if plate_box is None else [plate_box[0].tolist(), plate_box[1].tolist()],
+                pedestal_parts=len(pedestal_boxes),
+                pedestal_mirrored_box_m=(
+                    None if pedestal_box is None else [pedestal_box[0].tolist(), pedestal_box[1].tolist()]
+                ),
+                lands_on=(
+                    []
+                    if plate_box is None
+                    else plate_fit(plate_box, pedestal_box, static_lows, static_highs, static_names)
+                ),
+            ),
             obstacle_count=len(names),
             at_mirrored_position=at_mirror,
             free_intervals_touch=intervals(rows, TOUCH_M),
@@ -199,9 +303,24 @@ def main() -> None:
     for cell, row in cells.items():
         mirror = row["at_mirrored_position"]
         print(
-            f"  {cell} -> {row['destination']}: parts={row['controller_parts']} "
+            f"  {cell} -> {row['destination']}: cabinet parts={row['cabinet_parts']} "
             f"at mirror clearance={mirror['clearance_m']:.3f} limited by {mirror['limited_by']}"
         )
+        for landing in row["floor_plate"]["lands_on"]:
+            best = max(
+                (option for option in landing["options"] if option.get("pedestal_supported")),
+                key=lambda option: option["remaining_length_m"],
+                default=None,
+            )
+            summary = (
+                "no cut keeps the pedestal on the plate"
+                if best is None
+                else (
+                    f"cut {best['cut_m']:.3f} m, {best['remaining_length_m']:.3f} m left, "
+                    f"pedestal margin {best['pedestal_margin_m']:.3f} m"
+                )
+            )
+            print(f"    plate lands on {landing['obstacle']} over {landing['overlap_y_m']:.3f} m: {summary}")
         for label in ("touch", "margin"):
             move = row[f"smallest_move_{label}"]
             spans = row[f"free_intervals_{label}"]
