@@ -146,7 +146,12 @@ CLEARANCE_SAMPLES = 200
 CROSSING_M = 0.100
 # Where two runs meet, how much of the first stays within each of these of the second. One
 # cable diameter is 0.056 m, so the last of them is "touching along their length".
-CO_RUN_LIMITS_M = (0.003, 0.010, 0.056)
+CO_RUN_LIMITS_M = (0.010, 0.030, 0.056)
+# The centre line wanders. Its thickness reads 0.060 m against a true 0.056, so the line sits a
+# couple of millimetres off the true axis, and a threshold under this measures the instrument
+# rather than the cable: at 3 mm one pair had a single point of seventy-four inside, while the
+# mesh says the two run 0.7 to 3.3 mm apart for 0.25 m. Limits below this are flagged.
+CENTRE_LINE_NOISE_M = 0.010
 HALL_FOOTPRINT_M = 8.0
 
 
@@ -394,8 +399,10 @@ def co_run(first: np.ndarray, second: np.ndarray, limits: tuple[float, ...]) -> 
     0.35 m, which is why the reported point of closest approach moved by 0.35 m when the
     measurement changed and the gap barely did. What work 4 has to separate is a length.
 
-    A span counts a step when either of its ends is inside it, so the extent reads up to one
-    step long at each end: a true 0.400 m at 3 mm came back as 0.415 m.
+    The spans are given one by one rather than as a first and last. A run can come close,
+    part, and close again, and reporting only the outer bounds turned two approaches of 0.34 m
+    into a range of 0.79 m. Each span counts a step when either of its ends is inside it, so
+    the extent reads up to one step long at each end: a true 0.400 m at 3 mm came back 0.415 m.
     """
     if len(first) < 2 or len(second) < 2:
         return []
@@ -406,16 +413,24 @@ def co_run(first: np.ndarray, second: np.ndarray, limits: tuple[float, ...]) -> 
     out = []
     for limit in limits:
         inside = gaps < limit
-        if not inside.any():
-            out.append(dict(within_m=limit, extent_m=0.0, from_m=None, to_m=None))
-            continue
-        covered = float(np.diff(along)[inside[:-1] | inside[1:]].sum())
+        spans, start = [], None
+        for index, close in enumerate(inside):
+            if close and start is None:
+                start = index
+            elif not close and start is not None:
+                spans.append((start, index - 1))
+                start = None
+        if start is not None:
+            spans.append((start, len(inside) - 1))
+        steps = np.diff(along)
         out.append(
             dict(
                 within_m=limit,
-                extent_m=covered,
-                from_m=float(along[inside].min()),
-                to_m=float(along[inside].max()),
+                below_centre_line_noise=bool(limit < CENTRE_LINE_NOISE_M),
+                points_inside=int(inside.sum()),
+                span_count=len(spans),
+                extent_m=float(sum(steps[max(0, a - 1) : min(len(steps), b + 1)].sum() for a, b in spans)),
+                spans=[dict(from_m=float(along[a]), to_m=float(along[b]), points=b - a + 1) for a, b in spans],
                 closest_m=float(gaps.min()),
             )
         )
@@ -521,11 +536,13 @@ def main() -> None:
                     crossing_m=CROSSING_M,
                     crossing_measured="segment to segment, so the gap does not depend on the step",
                     co_run_limits_m=list(CO_RUN_LIMITS_M),
+                    centre_line_noise_m=CENTRE_LINE_NOISE_M,
                 ),
                 what_this_does_not_give=[
                     "the cable's allowed bend radius, which belongs to the real cable",
                     "the bend radius the model already uses: measured and found not measurable",
                     "clearance at the terminations, which is contact by design and is trimmed away",
+                    f"a co-run tighter than {CENTRE_LINE_NOISE_M} m, which is inside the centre line's own wander",
                     "support pitch and fixing points",
                     "required separation from other services",
                     "the pipe inside the air hardware's boxes",
