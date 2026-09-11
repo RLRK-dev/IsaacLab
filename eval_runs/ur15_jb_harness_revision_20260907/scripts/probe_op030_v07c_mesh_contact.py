@@ -21,7 +21,11 @@ Nearest distance is measured from one shape's vertices to the other shape's surf
 an upper bound on the true surface-to-surface gap. It is reported to rank pairs, not to
 certify a clearance.
 
-Each pair also carries its box overlap on all three axes, not just the smallest. The single
+Each pair also carries its box overlap on all three axes, not just the smallest.
+
+Triangle overlap sees surfaces crossing, so it misses one shape lying wholly inside another,
+which is interference with nothing to cross. Every pair therefore also reports whether one
+box contains the other. A pair that is contained but not touching is the case to look at. The single
 depth the box stage reports cannot say what a fix would cost: 0.193 m that turns out to be a
 part's full height means the two sit at the same level and the overlap in plan is larger,
 while 0.193 m along Y is the distance something has to move.
@@ -142,6 +146,11 @@ def resolve(rows: list[dict], station_y: float) -> list[dict]:
             continue
         overlap = moving_tree.overlap(obstacle_tree)
         gap = None if overlap else nearest_gap(obstacle_tree, vertices)
+        moving_low, moving_high = np.asarray(row["moving_box_m"][0]), np.asarray(row["moving_box_m"][1])
+        obstacle_low, obstacle_high = np.asarray(row["obstacle_box_m"][0]), np.asarray(row["obstacle_box_m"][1])
+        inside = bool(np.all(moving_low >= obstacle_low) and np.all(moving_high <= obstacle_high)) or bool(
+            np.all(obstacle_low >= moving_low) and np.all(obstacle_high <= moving_high)
+        )
         resolved.append(
             dict(
                 row,
@@ -149,6 +158,7 @@ def resolve(rows: list[dict], station_y: float) -> list[dict]:
                 contact=bool(overlap),
                 triangle_pairs=len(overlap),
                 nearest_m=gap,
+                one_box_inside_the_other=inside,
             )
         )
     return resolved
@@ -160,10 +170,11 @@ def summarize(resolved: list[dict]) -> list[dict]:
     for row in resolved:
         owner = owners.setdefault(
             row.get("owner", "unknown"),
-            dict(owner=row.get("owner", "unknown"), pairs=0, contacts=0, triangle_pairs=0, nearest_m=None),
+            dict(owner=row.get("owner", "unknown"), pairs=0, contacts=0, contained=0, triangle_pairs=0, nearest_m=None),
         )
         owner["pairs"] += 1
         owner["contacts"] += int(bool(row.get("contact")))
+        owner["contained"] += int(bool(row.get("one_box_inside_the_other")))
         owner["triangle_pairs"] += row.get("triangle_pairs", 0)
         gap = row.get("nearest_m")
         if gap is not None and (owner["nearest_m"] is None or gap < owner["nearest_m"]):
@@ -200,6 +211,8 @@ def main() -> None:
             candidate_pairs=len(rows),
             contact_pairs=len(touching),
             clear_pairs=len(resolved) - len(touching),
+            contained_pairs=sum(1 for row in resolved if row.get("one_box_inside_the_other")),
+            contained=[row for row in resolved if row.get("one_box_inside_the_other") and not row.get("contact")],
             by_owner=summarize(resolved),
             contacts=sorted(touching, key=lambda row: -row["triangle_pairs"]),
             closest_clear=clear[:20],
@@ -232,7 +245,7 @@ def main() -> None:
     for cell, row in cells.items():
         print(
             f"  {cell} -> {row['destination']}: candidates={row['candidate_pairs']} "
-            f"contact={row['contact_pairs']} clear={row['clear_pairs']}"
+            f"contact={row['contact_pairs']} clear={row['clear_pairs']} contained={row['contained_pairs']}"
         )
         for owner in row["by_owner"]:
             gap = "-" if owner["nearest_m"] is None else f"{owner['nearest_m']:.3f}"
