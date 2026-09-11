@@ -18,9 +18,16 @@ runs cross it reports the position along each, so a reroute knows which part of 
 move. And it lists the air hardware v06 built for B, since the three new cells need the same
 set and the spec describes it only in prose.
 
-The centre line is found by marching: take the vertices ahead within a ball, step to their
-centroid, continue. Run against circles of known radius it recovers length to about 2% and
-section to about a tenth low.
+Points are scattered over the triangles first, then a ball marches through them. Marching the
+vertices alone does not work on this geometry: the cable's straight floor section carries no
+vertex between its two ends, a gap of 1.095 m, and no ball small enough to follow a 56 mm tube
+can cross it. Against a tube built the same way the vertex march returned one point and no
+length at all, and sampling the surface returns 1.905 m against a true 1.893 m, with the
+section within half a percent.
+
+Cables are chosen by size rather than by name. Their part happens to end in _p04, but that
+suffix only means "the fifth part of an imported group" and matches 177 objects where fifteen
+are cables.
 
 It does not recover the bend radius, and that was measured rather than assumed. A perfectly
 straight tube comes back as a 0.149 m bend, which is squarely inside the range a real bend
@@ -55,8 +62,11 @@ SOURCE = ROOT / "analysis/op030_v07c_stagger_both_sides.blend"
 SOURCE_SHA = "4e7c5b0d8b00b904c618dac757cf4c97c88de620898e7c7dcca0c3b0eb46ea51"
 REPORT = ROOT / "audit/op030_v07c_routing_survey.json"
 
-# The cable from a station's cabinet to its robot pedestal is part p04 of the cabinet group.
-CABLE_SUFFIX = "_p04"
+# A cable is chosen by its size, not by its name. Every station's cabinet-to-pedestal cable
+# measures the same, and the first version picked objects whose name ended in _p04: that is
+# only "the fifth part of an imported group" and caught 177 objects where 15 are cables.
+CABLE_SIZE_M = (0.193, 0.538, 1.956)
+CABLE_SIZE_TOLERANCE_M = 0.002
 # The air hardware v06 built and moved for B, named in section 7.1 of the v07c spec.
 AIR_PREFIXES = (
     "Split_bay_1__source_0779",
@@ -72,6 +82,15 @@ AIR_PREFIXES = (
 BALL_M = 0.045
 STEP_M = 0.012
 MAX_STEPS = 9000
+# Points are scattered over the triangles at about this spacing before marching. Marching the
+# vertices alone does not work here: the cable's straight floor section has no vertex between
+# its ends, a gap of 1.095 m, and no ball small enough to follow the tube can cross it. On a
+# tube built that way the vertex march produced one point and a length of 0.000 m.
+SURFACE_SPACING_M = 0.006
+SURFACE_SEED = 0
+# Thickness is measured against this many of those points, which is plenty and keeps the
+# distance matrix small.
+THICKNESS_SAMPLES = 3000
 # Smoothing passes before measuring. The march jitters.
 SMOOTHING_PASSES = 2
 # What the centre line returned for the radius of circles of known radius, at these constants,
@@ -79,15 +98,16 @@ SMOOTHING_PASSES = 2
 # sits inside the range a real bend would occupy, so the two cannot be told apart and no bend
 # radius is reported. Widening the window only raises the floor with the reading.
 CURVATURE_CALIBRATION = {
-    "straight (infinite)": 0.149,
-    "0.500": 0.494,
-    "0.300": 0.296,
-    "0.150": 0.150,
-    "verdict": "not measurable by this method; the noise floor overlaps the range of interest",
+    "vertex_march": {"straight (infinite)": 0.149, "0.500": 0.494, "0.300": 0.296, "0.150": 0.150},
+    "surface_sampled": {"straight (infinite)": 0.072, "0.300": 0.095, "0.150": 0.123},
+    "verdict": (
+        "not measurable by this method. A straight tube reads as a bend inside the range a real "
+        "bend occupies, before and after the sampling fix, so no radius is reported"
+    ),
 }
 # The implied diameter runs about a tenth low against a tube of known section, because the
 # centre line wanders inside the true axis. Reported as approximate, not as a dimension.
-DIAMETER_CALIBRATION = {"true_m": 0.056, "measured_m": 0.0497}
+DIAMETER_CALIBRATION = {"true_m": 0.056, "measured_m": 0.0558, "from": "surface sampling; vertices alone gave 0.0497"}
 # Obstacles further than this from a run are not part of its routing problem.
 NEIGHBOURHOOD_M = 0.500
 # Report the run's clearance at no more than this many points, evenly spaced.
@@ -101,6 +121,34 @@ def source_name(obj: bpy.types.Object) -> str:
     """Return the name this object was copied from. Never parse the object's own name."""
     stamped = obj.get("split_source_name")
     return str(stamped) if stamped else obj.name
+
+
+def surface_points(vertices: np.ndarray, faces: np.ndarray) -> np.ndarray:
+    """Scatter points across the triangles so a long flat face is not a gap [m].
+
+    Area-weighted, with the vertices kept as well. On a tube whose 1.5 m straight section has
+    rings only at its two ends -- which is how the real cable is built -- marching the vertices
+    found one point and no length, and this recovers 1.905 m against a true 1.893 m.
+    """
+    generator = np.random.default_rng(SURFACE_SEED)
+    triangles = vertices[faces]
+    first, second, third = triangles[:, 0], triangles[:, 1], triangles[:, 2]
+    area = 0.5 * np.linalg.norm(np.cross(second - first, third - first), axis=1)
+    counts = np.maximum(1, np.ceil(area / (SURFACE_SPACING_M * SURFACE_SPACING_M)).astype(int))
+    cloud = [vertices]
+    for index, count in enumerate(counts):
+        u, v = generator.random(count), generator.random(count)
+        outside = u + v > 1.0
+        u[outside], v[outside] = 1.0 - u[outside], 1.0 - v[outside]
+        cloud.append(
+            first[index] + np.outer(u, second[index] - first[index]) + np.outer(v, third[index] - first[index])
+        )
+    return np.vstack(cloud)
+
+
+def is_cable(low: np.ndarray, high: np.ndarray) -> bool:
+    """Return whether a box is one of the cabinet-to-pedestal cables [m]."""
+    return bool(np.allclose(np.sort(high - low), np.sort(CABLE_SIZE_M), atol=CABLE_SIZE_TOLERANCE_M))
 
 
 def box_of(obj: bpy.types.Object) -> tuple[np.ndarray, np.ndarray] | None:
@@ -278,14 +326,16 @@ def main() -> None:
     bpy.context.scene.frame_set(1)
     before = transforms()
 
-    cables, lines = {}, {}
+    cables, lines, rejected = {}, {}, 0
     for obj in sorted(bpy.context.scene.objects, key=lambda o: o.name):
-        if not source_name(obj).endswith(CABLE_SUFFIX):
-            continue
         box = box_of(obj)
         if box is None:
             continue
-        points = _world_vertices(obj)
+        if not is_cable(*box):
+            rejected += 1
+            continue
+        vertices, faces = geometry(obj)
+        points = surface_points(vertices, faces)
         line = smooth_line(centre_line(points))
         lines[obj.name] = line
         cables[obj.name] = dict(
@@ -299,7 +349,8 @@ def main() -> None:
                 start_direction=(line[1] - line[0]).tolist() if len(line) > 1 else None,
                 end_direction=(line[-1] - line[-2]).tolist() if len(line) > 1 else None,
             ),
-            thickness=thickness(points, line),
+            thickness=thickness(points[:: max(1, len(points) // THICKNESS_SAMPLES)], line),
+            surface_points=len(points),
             clearance=clearance_along(line, neighbourhood(obj, *box)),
         )
 
@@ -327,6 +378,7 @@ def main() -> None:
                 source_sha256=SOURCE_SHA,
                 method=dict(
                     centre_line="march a ball along the tube and step to its centroid",
+                    surface_spacing_m=SURFACE_SPACING_M,
                     ball_m=BALL_M,
                     step_m=STEP_M,
                     smoothing_passes=SMOOTHING_PASSES,
@@ -343,6 +395,8 @@ def main() -> None:
                     "the pipe inside the air hardware's boxes",
                 ],
                 cable_count=len(cables),
+                objects_measured_and_rejected=rejected,
+                cable_rule=f"box sorted to {CABLE_SIZE_M} within {CABLE_SIZE_TOLERANCE_M} m",
                 cables=cables,
                 crossings=crossings(lines),
                 air_hardware_count=len(air),
