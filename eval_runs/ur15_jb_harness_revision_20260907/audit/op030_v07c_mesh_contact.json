@@ -1,5 +1,5 @@
 {
- "observed_at": "2026-09-12T05:51:09.521341+09:00",
+ "observed_at": "2026-09-12T06:04:51.084852+09:00",
  "source": "analysis/op030_v07c_support_repair.blend",
  "source_sha256": "1091683a5d15072e46553b487a30d58a21050bf40515f0d09b9d4d879c01ecce",
  "read_from": {
@@ -10,7 +10,8 @@
   "manifest_sha256": "bc82917686f8292bf081bdefa2922dbc6851733552eea390c1b725c2cd8b9f8f"
  },
  "method": "box stage recomputed, then BVH triangle overlap on evaluated meshes",
- "nearest_distance_note": "vertex to surface, an upper bound on the true gap",
+ "nearest_distance_note": "the smaller of the two vertex-to-surface measurements, an upper bound",
+ "touching_m": 1e-05,
  "reported_gap_m": 1.0,
  "cells": {
   "A": {
@@ -20,6 +21,8 @@
    "candidate_pairs": 126,
    "contact_pairs": 2,
    "clear_pairs": 124,
+   "touching_pairs": 0,
+   "touching": [],
    "contained_pairs": 85,
    "contained": [
     {
@@ -60,6 +63,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 1.3638956546783447,
+     "nearest_from_moving_m": 1.3638956546783447,
+     "nearest_from_obstacle_m": 1.3639854192733765,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -100,6 +106,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 1.3609086275100708,
+     "nearest_from_moving_m": 1.3609086275100708,
+     "nearest_from_obstacle_m": 1.3609974384307861,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -140,6 +149,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 1.3670696020126343,
+     "nearest_from_moving_m": 1.3670696020126343,
+     "nearest_from_obstacle_m": 1.3671599626541138,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -180,6 +192,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 1.3638956546783447,
+     "nearest_from_moving_m": 1.3638956546783447,
+     "nearest_from_obstacle_m": 1.3648204803466797,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -220,6 +235,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 1.3609086275100708,
+     "nearest_from_moving_m": 1.3609086275100708,
+     "nearest_from_obstacle_m": 1.3618354797363281,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -260,6 +278,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 1.3670696020126343,
+     "nearest_from_moving_m": 1.3670696020126343,
+     "nearest_from_obstacle_m": 1.3680062294006348,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -300,6 +321,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 1.3610671758651733,
+     "nearest_from_moving_m": 1.3610671758651733,
+     "nearest_from_obstacle_m": 1.3619840145111084,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -340,6 +364,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 1.3580739498138428,
+     "nearest_from_moving_m": 1.3580739498138428,
+     "nearest_from_obstacle_m": 1.3589911460876465,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -380,6 +407,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 1.3641958236694336,
+     "nearest_from_moving_m": 1.3641958236694336,
+     "nearest_from_obstacle_m": 1.365128517150879,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -420,6 +450,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 1.3610671758651733,
+     "nearest_from_moving_m": 1.3610671758651733,
+     "nearest_from_obstacle_m": 1.3611546754837036,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -460,6 +493,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 1.3580739498138428,
+     "nearest_from_moving_m": 1.3580739498138428,
+     "nearest_from_obstacle_m": 1.3581613302230835,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -500,6 +536,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 1.3641958236694336,
+     "nearest_from_moving_m": 1.3641958236694336,
+     "nearest_from_obstacle_m": 1.364284873008728,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -540,6 +579,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 1.1710765361785889,
+     "nearest_from_moving_m": 1.1710765361785889,
+     "nearest_from_obstacle_m": 1.1710765361785889,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -580,6 +622,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 1.3157404661178589,
+     "nearest_from_moving_m": 1.3157404661178589,
+     "nearest_from_obstacle_m": 1.3163673877716064,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -620,6 +665,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 1.1669408082962036,
+     "nearest_from_moving_m": 1.1669408082962036,
+     "nearest_from_obstacle_m": 1.1669408082962036,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -660,6 +708,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 1.3544065952301025,
+     "nearest_from_moving_m": 1.3544065952301025,
+     "nearest_from_obstacle_m": 1.3547629117965698,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -700,6 +751,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 1.2567490339279175,
+     "nearest_from_moving_m": 1.2567490339279175,
+     "nearest_from_obstacle_m": 1.2568572759628296,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -740,6 +794,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 1.2451847791671753,
+     "nearest_from_moving_m": 1.2451847791671753,
+     "nearest_from_obstacle_m": 1.2455934286117554,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -780,6 +837,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 1.102401852607727,
+     "nearest_from_moving_m": 1.102401852607727,
+     "nearest_from_obstacle_m": 1.1028910875320435,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -820,6 +880,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 1.0784214735031128,
+     "nearest_from_moving_m": 1.0784214735031128,
+     "nearest_from_obstacle_m": 1.0789151191711426,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -860,6 +923,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 1.0784214735031128,
+     "nearest_from_moving_m": 1.0784214735031128,
+     "nearest_from_obstacle_m": 1.0789151191711426,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -900,6 +966,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 1.3631482124328613,
+     "nearest_from_moving_m": 1.3631482124328613,
+     "nearest_from_obstacle_m": 1.3634282350540161,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -940,6 +1009,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 0.6874537467956543,
+     "nearest_from_moving_m": 0.6874537467956543,
+     "nearest_from_obstacle_m": 0.6874537467956543,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -980,6 +1052,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 0.6747730374336243,
+     "nearest_from_moving_m": 0.6747730374336243,
+     "nearest_from_obstacle_m": 0.6747730374336243,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -1020,6 +1095,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 0.6864945292472839,
+     "nearest_from_moving_m": 0.6864945292472839,
+     "nearest_from_obstacle_m": 0.6864945292472839,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -1060,6 +1138,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 0.6903206706047058,
+     "nearest_from_moving_m": 0.6903206706047058,
+     "nearest_from_obstacle_m": 0.6903206706047058,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -1100,6 +1181,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 0.6776759028434753,
+     "nearest_from_moving_m": 0.6776759028434753,
+     "nearest_from_obstacle_m": 0.6776759028434753,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -1140,6 +1224,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 0.689328670501709,
+     "nearest_from_moving_m": 0.689328670501709,
+     "nearest_from_obstacle_m": 0.689328670501709,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -1180,6 +1267,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 0.6940768361091614,
+     "nearest_from_moving_m": 0.6940768361091614,
+     "nearest_from_obstacle_m": 0.6940768361091614,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -1220,6 +1310,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 0.6814765334129333,
+     "nearest_from_moving_m": 0.6814765334129333,
+     "nearest_from_obstacle_m": 0.6814765334129333,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -1260,6 +1353,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 0.6930438280105591,
+     "nearest_from_moving_m": 0.6930438280105591,
+     "nearest_from_obstacle_m": 0.6930438280105591,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -1300,6 +1396,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 0.6987078785896301,
+     "nearest_from_moving_m": 0.6987078785896301,
+     "nearest_from_obstacle_m": 0.6987078785896301,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -1340,6 +1439,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 0.686166524887085,
+     "nearest_from_moving_m": 0.686166524887085,
+     "nearest_from_obstacle_m": 0.686166524887085,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -1380,6 +1482,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 0.697626531124115,
+     "nearest_from_moving_m": 0.697626531124115,
+     "nearest_from_obstacle_m": 0.697626531124115,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -1420,6 +1525,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 0.7041964530944824,
+     "nearest_from_moving_m": 0.7041964530944824,
+     "nearest_from_obstacle_m": 0.7041964530944824,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -1460,6 +1568,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 0.6917217969894409,
+     "nearest_from_moving_m": 0.6917217969894409,
+     "nearest_from_obstacle_m": 0.6917217969894409,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -1500,6 +1611,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 0.7030564546585083,
+     "nearest_from_moving_m": 0.7030564546585083,
+     "nearest_from_obstacle_m": 0.7030564546585083,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -1540,6 +1654,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 0.7105227708816528,
+     "nearest_from_moving_m": 0.7105227708816528,
+     "nearest_from_obstacle_m": 0.7105227708816528,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -1580,6 +1697,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 0.6981274485588074,
+     "nearest_from_moving_m": 0.6981274485588074,
+     "nearest_from_obstacle_m": 0.6981274485588074,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -1620,6 +1740,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 0.7093198895454407,
+     "nearest_from_moving_m": 0.7093198895454407,
+     "nearest_from_obstacle_m": 0.7093198895454407,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -1660,6 +1783,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 0.7175774574279785,
+     "nearest_from_moving_m": 0.7175774574279785,
+     "nearest_from_obstacle_m": 0.7175774574279785,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -1700,6 +1826,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 0.7053570747375488,
+     "nearest_from_moving_m": 0.7053570747375488,
+     "nearest_from_obstacle_m": 0.7053570747375488,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -1740,6 +1869,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 0.7163952589035034,
+     "nearest_from_moving_m": 0.7163952589035034,
+     "nearest_from_obstacle_m": 0.7163952589035034,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -1780,6 +1912,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 0.7253912091255188,
+     "nearest_from_moving_m": 0.7253912091255188,
+     "nearest_from_obstacle_m": 0.7253912091255188,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -1820,6 +1955,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 0.7133868336677551,
+     "nearest_from_moving_m": 0.7133868336677551,
+     "nearest_from_obstacle_m": 0.7133868336677551,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -1860,6 +1998,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 0.7242546677589417,
+     "nearest_from_moving_m": 0.7242546677589417,
+     "nearest_from_obstacle_m": 0.7242546677589417,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -1900,6 +2041,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 0.7339737415313721,
+     "nearest_from_moving_m": 0.7339737415313721,
+     "nearest_from_obstacle_m": 0.7339737415313721,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -1940,6 +2084,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 0.7221932411193848,
+     "nearest_from_moving_m": 0.7221932411193848,
+     "nearest_from_obstacle_m": 0.7221932411193848,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -1980,6 +2127,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 0.7328807711601257,
+     "nearest_from_moving_m": 0.7328807711601257,
+     "nearest_from_obstacle_m": 0.7328807711601257,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -2020,6 +2170,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 0.743298351764679,
+     "nearest_from_moving_m": 0.743298351764679,
+     "nearest_from_obstacle_m": 0.743298351764679,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -2060,6 +2213,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 0.7317417860031128,
+     "nearest_from_moving_m": 0.7317417860031128,
+     "nearest_from_obstacle_m": 0.7317417860031128,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -2100,6 +2256,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 0.7422395944595337,
+     "nearest_from_moving_m": 0.7422395944595337,
+     "nearest_from_obstacle_m": 0.7422395944595337,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -2140,6 +2299,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 0.753337562084198,
+     "nearest_from_moving_m": 0.753337562084198,
+     "nearest_from_obstacle_m": 0.753337562084198,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -2180,6 +2342,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 0.742009699344635,
+     "nearest_from_moving_m": 0.742009699344635,
+     "nearest_from_obstacle_m": 0.742009699344635,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -2220,6 +2385,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 0.7523126006126404,
+     "nearest_from_moving_m": 0.7523126006126404,
+     "nearest_from_obstacle_m": 0.7523126006126404,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -2260,6 +2428,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 0.7640631198883057,
+     "nearest_from_moving_m": 0.7640631198883057,
+     "nearest_from_obstacle_m": 0.7640631198883057,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -2300,6 +2471,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 0.7529680132865906,
+     "nearest_from_moving_m": 0.7529680132865906,
+     "nearest_from_obstacle_m": 0.7529680132865906,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -2340,6 +2514,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 0.7630630135536194,
+     "nearest_from_moving_m": 0.7630630135536194,
+     "nearest_from_obstacle_m": 0.7630630135536194,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -2380,6 +2557,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 0.4801243245601654,
+     "nearest_from_moving_m": 0.4801243245601654,
+     "nearest_from_obstacle_m": 0.4801243245601654,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -2420,6 +2600,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 0.5546309351921082,
+     "nearest_from_moving_m": 0.5546309351921082,
+     "nearest_from_obstacle_m": 0.5546309351921082,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -2460,6 +2643,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 0.6866394281387329,
+     "nearest_from_moving_m": 0.6866394281387329,
+     "nearest_from_obstacle_m": 0.6866394281387329,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -2500,6 +2686,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 0.6813946962356567,
+     "nearest_from_moving_m": 0.6813946962356567,
+     "nearest_from_obstacle_m": 0.6813946962356567,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -2540,6 +2729,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 0.6760683059692383,
+     "nearest_from_moving_m": 0.6760683059692383,
+     "nearest_from_obstacle_m": 0.6760683059692383,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -2580,6 +2772,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 0.5869291424751282,
+     "nearest_from_moving_m": 0.5869291424751282,
+     "nearest_from_obstacle_m": 0.5869291424751282,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -2620,6 +2815,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 0.6680939793586731,
+     "nearest_from_moving_m": 0.6680939793586731,
+     "nearest_from_obstacle_m": 0.6680939793586731,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -2660,6 +2858,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 0.6285009384155273,
+     "nearest_from_moving_m": 0.6285009384155273,
+     "nearest_from_obstacle_m": 0.6285009384155273,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -2700,6 +2901,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 0.675726592540741,
+     "nearest_from_moving_m": 0.675726592540741,
+     "nearest_from_obstacle_m": 0.675726592540741,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -2740,6 +2944,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 0.8826925158500671,
+     "nearest_from_moving_m": 0.8826925158500671,
+     "nearest_from_obstacle_m": 0.8826925158500671,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -2780,6 +2987,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 0.8138808608055115,
+     "nearest_from_moving_m": 0.8138808608055115,
+     "nearest_from_obstacle_m": 0.8138808608055115,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -2820,6 +3030,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 0.5431926846504211,
+     "nearest_from_moving_m": 0.5431926846504211,
+     "nearest_from_obstacle_m": 0.5431926846504211,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -2860,6 +3073,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 0.6102132797241211,
+     "nearest_from_moving_m": 0.6102132797241211,
+     "nearest_from_obstacle_m": 0.6102132797241211,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -2900,6 +3116,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 0.687666654586792,
+     "nearest_from_moving_m": 0.687666654586792,
+     "nearest_from_obstacle_m": 0.687666654586792,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -2940,6 +3159,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 0.6801636219024658,
+     "nearest_from_moving_m": 0.6801636219024658,
+     "nearest_from_obstacle_m": 0.6801636219024658,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -2980,6 +3202,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 0.6741188764572144,
+     "nearest_from_moving_m": 0.6741188764572144,
+     "nearest_from_obstacle_m": 0.6741188764572144,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -3020,6 +3245,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 0.6606971025466919,
+     "nearest_from_moving_m": 0.6606971025466919,
+     "nearest_from_obstacle_m": 0.6606971025466919,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -3060,6 +3288,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 1.1841869354248047,
+     "nearest_from_moving_m": 1.1841869354248047,
+     "nearest_from_obstacle_m": 1.1841965913772583,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -3100,6 +3331,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 1.184151291847229,
+     "nearest_from_moving_m": 1.184151291847229,
+     "nearest_from_obstacle_m": 1.1842694282531738,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -3140,6 +3374,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 1.1846450567245483,
+     "nearest_from_moving_m": 1.1846450567245483,
+     "nearest_from_obstacle_m": 1.1847857236862183,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -3180,6 +3417,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 1.164278507232666,
+     "nearest_from_moving_m": 1.164278507232666,
+     "nearest_from_obstacle_m": 1.164278507232666,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -3220,6 +3460,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 1.1696714162826538,
+     "nearest_from_moving_m": 1.1696714162826538,
+     "nearest_from_obstacle_m": 1.1696714162826538,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -3260,6 +3503,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 1.528324842453003,
+     "nearest_from_moving_m": 1.528324842453003,
+     "nearest_from_obstacle_m": 1.528324842453003,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -3300,6 +3546,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 1.4259661436080933,
+     "nearest_from_moving_m": 1.4259661436080933,
+     "nearest_from_obstacle_m": 1.4259661436080933,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -3340,6 +3589,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 1.4441713094711304,
+     "nearest_from_moving_m": 1.4441713094711304,
+     "nearest_from_obstacle_m": 1.4449361562728882,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -3380,6 +3632,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 1.4279927015304565,
+     "nearest_from_moving_m": 1.4279927015304565,
+     "nearest_from_obstacle_m": 1.4279927015304565,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -3420,6 +3675,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 1.4630411863327026,
+     "nearest_from_moving_m": 1.4630411863327026,
+     "nearest_from_obstacle_m": 1.4630411863327026,
+     "touching": false,
      "one_box_inside_the_other": true
     }
    ],
@@ -3428,6 +3686,7 @@
      "owner": "source_0681",
      "pairs": 2,
      "contacts": 1,
+     "touching": 0,
      "contained": 0,
      "triangle_pairs": 328,
      "nearest_m": 0.030737940222024918
@@ -3436,33 +3695,37 @@
      "owner": "OP020_direct_mating_station",
      "pairs": 4,
      "contacts": 1,
+     "touching": 0,
      "contained": 0,
      "triangle_pairs": 36,
-     "nearest_m": 0.02165961265563965
+     "nearest_m": 0.02043537050485611
     },
     {
      "owner": "Split_bay_1__source_0780_m0207_p03",
      "pairs": 102,
      "contacts": 0,
+     "touching": 0,
      "contained": 85,
      "triangle_pairs": 0,
-     "nearest_m": 0.37491536140441895
+     "nearest_m": 0.3046625554561615
     },
     {
      "owner": "source_0564",
      "pairs": 1,
      "contacts": 0,
+     "touching": 0,
      "contained": 0,
      "triangle_pairs": 0,
-     "nearest_m": 0.03133752569556236
+     "nearest_m": 0.030737707391381264
     },
     {
      "owner": "OP020_direct_cell_rotation",
      "pairs": 17,
      "contacts": 0,
+     "touching": 0,
      "contained": 0,
      "triangle_pairs": 0,
-     "nearest_m": 0.23582147061824799
+     "nearest_m": 0.23523561656475067
     }
    ],
    "contacts": [
@@ -3504,6 +3767,9 @@
      "contact": true,
      "triangle_pairs": 328,
      "nearest_m": null,
+     "nearest_from_moving_m": null,
+     "nearest_from_obstacle_m": null,
+     "touching": false,
      "one_box_inside_the_other": false
     },
     {
@@ -3544,6 +3810,9 @@
      "contact": true,
      "triangle_pairs": 36,
      "nearest_m": null,
+     "nearest_from_moving_m": null,
+     "nearest_from_obstacle_m": null,
+     "touching": false,
      "one_box_inside_the_other": false
     }
    ],
@@ -3585,7 +3854,53 @@
      "owner": "OP020_direct_mating_station",
      "contact": false,
      "triangle_pairs": 0,
-     "nearest_m": 0.02165961265563965,
+     "nearest_m": 0.02043537050485611,
+     "nearest_from_moving_m": 0.02165961265563965,
+     "nearest_from_obstacle_m": 0.02043537050485611,
+     "touching": false,
+     "one_box_inside_the_other": false
+    },
+    {
+     "moving": "source_0693_m0120_p04",
+     "obstacle": "source_0564_m0045_p05",
+     "box_gap_m": 0.02745038866996774,
+     "box_depth_m": 0.0,
+     "box_overlap_xyz_m": [
+      0.05755135230720043,
+      -0.02745038866996774,
+      0.05908846855163574
+     ],
+     "moving_box_m": [
+      [
+       0.8724486231803894,
+       -2.4775495171546935,
+       0.00010750644287327304
+      ],
+      [
+       1.409999966621399,
+       -0.521999979019165,
+       0.19300000369548798
+      ]
+     ],
+     "obstacle_box_m": [
+      [
+       0.8699999768286943,
+       -2.564999908208847,
+       0.13045576214790344
+      ],
+      [
+       0.9299999754875898,
+       -2.5049999058246613,
+       0.18954423069953918
+      ]
+     ],
+     "owner": "source_0564",
+     "contact": false,
+     "triangle_pairs": 0,
+     "nearest_m": 0.030737707391381264,
+     "nearest_from_moving_m": 0.03133752569556236,
+     "nearest_from_obstacle_m": 0.030737707391381264,
+     "touching": false,
      "one_box_inside_the_other": false
     },
     {
@@ -3626,46 +3941,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 0.030737940222024918,
-     "one_box_inside_the_other": false
-    },
-    {
-     "moving": "source_0693_m0120_p04",
-     "obstacle": "source_0564_m0045_p05",
-     "box_gap_m": 0.02745038866996774,
-     "box_depth_m": 0.0,
-     "box_overlap_xyz_m": [
-      0.05755135230720043,
-      -0.02745038866996774,
-      0.05908846855163574
-     ],
-     "moving_box_m": [
-      [
-       0.8724486231803894,
-       -2.4775495171546935,
-       0.00010750644287327304
-      ],
-      [
-       1.409999966621399,
-       -0.521999979019165,
-       0.19300000369548798
-      ]
-     ],
-     "obstacle_box_m": [
-      [
-       0.8699999768286943,
-       -2.564999908208847,
-       0.13045576214790344
-      ],
-      [
-       0.9299999754875898,
-       -2.5049999058246613,
-       0.18954423069953918
-      ]
-     ],
-     "owner": "source_0564",
-     "contact": false,
-     "triangle_pairs": 0,
-     "nearest_m": 0.03133752569556236,
+     "nearest_from_moving_m": 0.030737940222024918,
+     "nearest_from_obstacle_m": 0.03133774176239967,
+     "touching": false,
      "one_box_inside_the_other": false
     },
     {
@@ -3706,6 +3984,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 0.13619451224803925,
+     "nearest_from_moving_m": 0.13619451224803925,
+     "nearest_from_obstacle_m": 0.13619451224803925,
+     "touching": false,
      "one_box_inside_the_other": false
     },
     {
@@ -3746,6 +4027,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 0.17751391232013702,
+     "nearest_from_moving_m": 0.17751391232013702,
+     "nearest_from_obstacle_m": 0.17785818874835968,
+     "touching": false,
      "one_box_inside_the_other": false
     },
     {
@@ -3785,7 +4069,10 @@
      "owner": "OP020_direct_cell_rotation",
      "contact": false,
      "triangle_pairs": 0,
-     "nearest_m": 0.23582147061824799,
+     "nearest_m": 0.23523561656475067,
+     "nearest_from_moving_m": 0.23582147061824799,
+     "nearest_from_obstacle_m": 0.23523561656475067,
+     "touching": false,
      "one_box_inside_the_other": false
     },
     {
@@ -3826,6 +4113,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 0.24418827891349792,
+     "nearest_from_moving_m": 0.24418827891349792,
+     "nearest_from_obstacle_m": 0.24418827891349792,
+     "touching": false,
      "one_box_inside_the_other": false
     },
     {
@@ -3866,6 +4156,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 0.2452470064163208,
+     "nearest_from_moving_m": 0.2452470064163208,
+     "nearest_from_obstacle_m": 0.245307058095932,
+     "touching": false,
      "one_box_inside_the_other": false
     },
     {
@@ -3906,6 +4199,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 0.25087976455688477,
+     "nearest_from_moving_m": 0.25087976455688477,
+     "nearest_from_obstacle_m": 0.25087976455688477,
+     "touching": false,
      "one_box_inside_the_other": false
     },
     {
@@ -3945,7 +4241,10 @@
      "owner": "OP020_direct_cell_rotation",
      "contact": false,
      "triangle_pairs": 0,
-     "nearest_m": 0.259750634431839,
+     "nearest_m": 0.2596951723098755,
+     "nearest_from_moving_m": 0.259750634431839,
+     "nearest_from_obstacle_m": 0.2596951723098755,
+     "touching": false,
      "one_box_inside_the_other": false
     },
     {
@@ -3985,7 +4284,10 @@
      "owner": "OP020_direct_cell_rotation",
      "contact": false,
      "triangle_pairs": 0,
-     "nearest_m": 0.27733224630355835,
+     "nearest_m": 0.2772434651851654,
+     "nearest_from_moving_m": 0.27733224630355835,
+     "nearest_from_obstacle_m": 0.2772434651851654,
+     "touching": false,
      "one_box_inside_the_other": false
     },
     {
@@ -4026,6 +4328,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 0.28308555483818054,
+     "nearest_from_moving_m": 0.28308555483818054,
+     "nearest_from_obstacle_m": 0.28308555483818054,
+     "touching": false,
      "one_box_inside_the_other": false
     },
     {
@@ -4066,6 +4371,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 0.28843602538108826,
+     "nearest_from_moving_m": 0.28843602538108826,
+     "nearest_from_obstacle_m": 0.28843602538108826,
+     "touching": false,
      "one_box_inside_the_other": false
     },
     {
@@ -4106,6 +4414,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 0.29426833987236023,
+     "nearest_from_moving_m": 0.29426833987236023,
+     "nearest_from_obstacle_m": 0.29495730996131897,
+     "touching": false,
      "one_box_inside_the_other": false
     },
     {
@@ -4146,6 +4457,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 0.29875773191452026,
+     "nearest_from_moving_m": 0.29875773191452026,
+     "nearest_from_obstacle_m": 0.29875773191452026,
+     "touching": false,
      "one_box_inside_the_other": false
     },
     {
@@ -4186,6 +4500,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 0.3028755784034729,
+     "nearest_from_moving_m": 0.3028755784034729,
+     "nearest_from_obstacle_m": 0.3028755784034729,
+     "touching": false,
      "one_box_inside_the_other": false
     },
     {
@@ -4225,7 +4542,10 @@
      "owner": "Split_bay_1__source_0780_m0207_p03",
      "contact": false,
      "triangle_pairs": 0,
-     "nearest_m": 0.37491536140441895,
+     "nearest_m": 0.3046625554561615,
+     "nearest_from_moving_m": 0.37491536140441895,
+     "nearest_from_obstacle_m": 0.3046625554561615,
+     "touching": false,
      "one_box_inside_the_other": false
     },
     {
@@ -4266,6 +4586,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 0.37759679555892944,
+     "nearest_from_moving_m": 0.37759679555892944,
+     "nearest_from_obstacle_m": 0.37759679555892944,
+     "touching": false,
      "one_box_inside_the_other": false
     },
     {
@@ -4306,6 +4629,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 0.38868606090545654,
+     "nearest_from_moving_m": 0.38868606090545654,
+     "nearest_from_obstacle_m": 0.38868606090545654,
+     "touching": false,
      "one_box_inside_the_other": false
     },
     {
@@ -4345,7 +4671,10 @@
      "owner": "OP020_direct_cell_rotation",
      "contact": false,
      "triangle_pairs": 0,
-     "nearest_m": 0.39437180757522583,
+     "nearest_m": 0.39437153935432434,
+     "nearest_from_moving_m": 0.39437180757522583,
+     "nearest_from_obstacle_m": 0.39437153935432434,
+     "touching": false,
      "one_box_inside_the_other": false
     }
    ]
@@ -4357,6 +4686,8 @@
    "candidate_pairs": 78,
    "contact_pairs": 0,
    "clear_pairs": 78,
+   "touching_pairs": 0,
+   "touching": [],
    "contained_pairs": 55,
    "contained": [
     {
@@ -4397,6 +4728,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 1.1893489360809326,
+     "nearest_from_moving_m": 1.1893489360809326,
+     "nearest_from_obstacle_m": 1.1893489360809326,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -4437,6 +4771,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 1.1977314949035645,
+     "nearest_from_moving_m": 1.1977314949035645,
+     "nearest_from_obstacle_m": 1.1977314949035645,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -4477,6 +4814,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 1.2524604797363281,
+     "nearest_from_moving_m": 1.2524604797363281,
+     "nearest_from_obstacle_m": 1.2524604797363281,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -4517,6 +4857,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 1.2018603086471558,
+     "nearest_from_moving_m": 1.2018603086471558,
+     "nearest_from_obstacle_m": 1.2018603086471558,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -4557,6 +4900,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 1.2102710008621216,
+     "nearest_from_moving_m": 1.2102710008621216,
+     "nearest_from_obstacle_m": 1.2102710008621216,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -4597,6 +4943,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 1.2644509077072144,
+     "nearest_from_moving_m": 1.2644509077072144,
+     "nearest_from_obstacle_m": 1.2644509077072144,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -4637,6 +4986,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 1.1986024379730225,
+     "nearest_from_moving_m": 1.1986024379730225,
+     "nearest_from_obstacle_m": 1.1986024379730225,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -4677,6 +5029,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 1.2132956981658936,
+     "nearest_from_moving_m": 1.2132956981658936,
+     "nearest_from_obstacle_m": 1.2132956981658936,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -4717,6 +5072,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 1.2163300514221191,
+     "nearest_from_moving_m": 1.2163300514221191,
+     "nearest_from_obstacle_m": 1.2163300514221191,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -4757,6 +5115,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 1.157301902770996,
+     "nearest_from_moving_m": 1.157301902770996,
+     "nearest_from_obstacle_m": 1.157301902770996,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -4797,6 +5158,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 1.1756671667099,
+     "nearest_from_moving_m": 1.1756671667099,
+     "nearest_from_obstacle_m": 1.1756671667099,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -4837,6 +5201,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 0.07306164503097534,
+     "nearest_from_moving_m": 0.07306164503097534,
+     "nearest_from_obstacle_m": 0.07306164503097534,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -4877,6 +5244,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 0.2316063642501831,
+     "nearest_from_moving_m": 0.2316063642501831,
+     "nearest_from_obstacle_m": 0.2316063642501831,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -4917,6 +5287,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 0.2944762408733368,
+     "nearest_from_moving_m": 0.2944762408733368,
+     "nearest_from_obstacle_m": 0.2944762408733368,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -4957,6 +5330,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 0.9792242050170898,
+     "nearest_from_moving_m": 0.9792242050170898,
+     "nearest_from_obstacle_m": 0.9792242050170898,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -4997,6 +5373,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 1.1787575483322144,
+     "nearest_from_moving_m": 1.1787575483322144,
+     "nearest_from_obstacle_m": 1.1787575483322144,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -5037,6 +5416,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 1.1437301635742188,
+     "nearest_from_moving_m": 1.1437301635742188,
+     "nearest_from_obstacle_m": 1.1437301635742188,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -5077,6 +5459,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 1.3718706369400024,
+     "nearest_from_moving_m": 1.3718706369400024,
+     "nearest_from_obstacle_m": 1.3718706369400024,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -5117,6 +5502,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 1.3574501276016235,
+     "nearest_from_moving_m": 1.3574501276016235,
+     "nearest_from_obstacle_m": 1.3574501276016235,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -5157,6 +5545,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 1.0704126358032227,
+     "nearest_from_moving_m": 1.0704126358032227,
+     "nearest_from_obstacle_m": 1.0704126358032227,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -5197,6 +5588,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 1.0531245470046997,
+     "nearest_from_moving_m": 1.0531245470046997,
+     "nearest_from_obstacle_m": 1.0531245470046997,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -5237,6 +5631,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 1.0646647214889526,
+     "nearest_from_moving_m": 1.0646647214889526,
+     "nearest_from_obstacle_m": 1.0646647214889526,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -5277,6 +5674,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 0.9428456425666809,
+     "nearest_from_moving_m": 0.9428456425666809,
+     "nearest_from_obstacle_m": 0.9428456425666809,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -5317,6 +5717,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 0.926231324672699,
+     "nearest_from_moving_m": 0.926231324672699,
+     "nearest_from_obstacle_m": 0.926231324672699,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -5357,6 +5760,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 0.8046818971633911,
+     "nearest_from_moving_m": 0.8046818971633911,
+     "nearest_from_obstacle_m": 0.8046818971633911,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -5397,6 +5803,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 0.8920508623123169,
+     "nearest_from_moving_m": 0.8920508623123169,
+     "nearest_from_obstacle_m": 0.8920508623123169,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -5437,6 +5846,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 0.7922112941741943,
+     "nearest_from_moving_m": 0.7922112941741943,
+     "nearest_from_obstacle_m": 0.7922112941741943,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -5477,6 +5889,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 0.7863057851791382,
+     "nearest_from_moving_m": 0.7863057851791382,
+     "nearest_from_obstacle_m": 0.7863057851791382,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -5517,6 +5932,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 0.7896249890327454,
+     "nearest_from_moving_m": 0.7896249890327454,
+     "nearest_from_obstacle_m": 0.7896249890327454,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -5557,6 +5975,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 1.0750495195388794,
+     "nearest_from_moving_m": 1.0750495195388794,
+     "nearest_from_obstacle_m": 1.0750495195388794,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -5597,6 +6018,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 1.1162798404693604,
+     "nearest_from_moving_m": 1.1162798404693604,
+     "nearest_from_obstacle_m": 1.1162798404693604,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -5637,6 +6061,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 0.9745503664016724,
+     "nearest_from_moving_m": 0.9745503664016724,
+     "nearest_from_obstacle_m": 0.9745503664016724,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -5677,6 +6104,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 1.0084131956100464,
+     "nearest_from_moving_m": 1.0084131956100464,
+     "nearest_from_obstacle_m": 1.0084131956100464,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -5717,6 +6147,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 1.0100154876708984,
+     "nearest_from_moving_m": 1.0100154876708984,
+     "nearest_from_obstacle_m": 1.0100154876708984,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -5757,6 +6190,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 0.9767996668815613,
+     "nearest_from_moving_m": 0.9767996668815613,
+     "nearest_from_obstacle_m": 0.9767996668815613,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -5797,6 +6233,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 0.9804853200912476,
+     "nearest_from_moving_m": 0.9804853200912476,
+     "nearest_from_obstacle_m": 0.9804853200912476,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -5837,6 +6276,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 0.9771702289581299,
+     "nearest_from_moving_m": 0.9771702289581299,
+     "nearest_from_obstacle_m": 0.9771702289581299,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -5877,6 +6319,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 0.9815976023674011,
+     "nearest_from_moving_m": 0.9815976023674011,
+     "nearest_from_obstacle_m": 0.9815976023674011,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -5917,6 +6362,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 1.0352535247802734,
+     "nearest_from_moving_m": 1.0352535247802734,
+     "nearest_from_obstacle_m": 1.0352535247802734,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -5957,6 +6405,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 1.0474658012390137,
+     "nearest_from_moving_m": 1.0474658012390137,
+     "nearest_from_obstacle_m": 1.0474658012390137,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -5997,6 +6448,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 1.0966241359710693,
+     "nearest_from_moving_m": 1.0966241359710693,
+     "nearest_from_obstacle_m": 1.0966241359710693,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -6037,6 +6491,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 1.175693392753601,
+     "nearest_from_moving_m": 1.175693392753601,
+     "nearest_from_obstacle_m": 1.175693392753601,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -6077,6 +6534,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 1.1875133514404297,
+     "nearest_from_moving_m": 1.1875133514404297,
+     "nearest_from_obstacle_m": 1.1875133514404297,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -6117,6 +6577,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 1.1839699745178223,
+     "nearest_from_moving_m": 1.1839699745178223,
+     "nearest_from_obstacle_m": 1.1839699745178223,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -6157,6 +6620,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 1.1792625188827515,
+     "nearest_from_moving_m": 1.1792625188827515,
+     "nearest_from_obstacle_m": 1.1792625188827515,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -6197,6 +6663,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 1.178945541381836,
+     "nearest_from_moving_m": 1.178945541381836,
+     "nearest_from_obstacle_m": 1.178945541381836,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -6237,6 +6706,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 1.102874994277954,
+     "nearest_from_moving_m": 1.102874994277954,
+     "nearest_from_obstacle_m": 1.102874994277954,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -6277,6 +6749,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 1.1500500440597534,
+     "nearest_from_moving_m": 1.1500500440597534,
+     "nearest_from_obstacle_m": 1.1500500440597534,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -6317,6 +6792,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 1.1447720527648926,
+     "nearest_from_moving_m": 1.1447720527648926,
+     "nearest_from_obstacle_m": 1.1447720527648926,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -6357,6 +6835,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 1.1509591341018677,
+     "nearest_from_moving_m": 1.1509591341018677,
+     "nearest_from_obstacle_m": 1.1509591341018677,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -6397,6 +6878,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 1.1820179224014282,
+     "nearest_from_moving_m": 1.1820179224014282,
+     "nearest_from_obstacle_m": 1.1820179224014282,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -6437,6 +6921,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 1.1621549129486084,
+     "nearest_from_moving_m": 1.1621549129486084,
+     "nearest_from_obstacle_m": 1.1621549129486084,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -6477,6 +6964,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 1.1643953323364258,
+     "nearest_from_moving_m": 1.1643953323364258,
+     "nearest_from_obstacle_m": 1.1643953323364258,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -6517,6 +7007,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 1.154962182044983,
+     "nearest_from_moving_m": 1.154962182044983,
+     "nearest_from_obstacle_m": 1.154962182044983,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -6557,6 +7050,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 1.2013936042785645,
+     "nearest_from_moving_m": 1.2013936042785645,
+     "nearest_from_obstacle_m": 1.2013936042785645,
+     "touching": false,
      "one_box_inside_the_other": true
     }
    ],
@@ -6565,17 +7061,19 @@
      "owner": "Split_bay_1__source_0779_m0206_p03",
      "pairs": 68,
      "contacts": 0,
+     "touching": 0,
      "contained": 53,
      "triangle_pairs": 0,
-     "nearest_m": 0.03583763912320137
+     "nearest_m": 0.035835687071084976
     },
     {
      "owner": "Split_bay_2__source_0779_m0206_p03",
      "pairs": 10,
      "contacts": 0,
+     "touching": 0,
      "contained": 2,
      "triangle_pairs": 0,
-     "nearest_m": 0.22720041871070862
+     "nearest_m": 0.20808778703212738
     }
    ],
    "contacts": [],
@@ -6617,7 +7115,10 @@
      "owner": "Split_bay_1__source_0779_m0206_p03",
      "contact": false,
      "triangle_pairs": 0,
-     "nearest_m": 0.03583763912320137,
+     "nearest_m": 0.035835687071084976,
+     "nearest_from_moving_m": 0.03583763912320137,
+     "nearest_from_obstacle_m": 0.035835687071084976,
+     "touching": false,
      "one_box_inside_the_other": false
     },
     {
@@ -6657,7 +7158,10 @@
      "owner": "Split_bay_1__source_0779_m0206_p03",
      "contact": false,
      "triangle_pairs": 0,
-     "nearest_m": 0.050880368798971176,
+     "nearest_m": 0.05081891641020775,
+     "nearest_from_moving_m": 0.050880368798971176,
+     "nearest_from_obstacle_m": 0.05081891641020775,
+     "touching": false,
      "one_box_inside_the_other": false
     },
     {
@@ -6698,6 +7202,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 0.07306164503097534,
+     "nearest_from_moving_m": 0.07306164503097534,
+     "nearest_from_obstacle_m": 0.07306164503097534,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -6738,6 +7245,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 0.0911293551325798,
+     "nearest_from_moving_m": 0.0911293551325798,
+     "nearest_from_obstacle_m": 0.09130125492811203,
+     "touching": false,
      "one_box_inside_the_other": false
     },
     {
@@ -6778,6 +7288,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 0.10665178298950195,
+     "nearest_from_moving_m": 0.10665178298950195,
+     "nearest_from_obstacle_m": 0.10665178298950195,
+     "touching": false,
      "one_box_inside_the_other": false
     },
     {
@@ -6817,7 +7330,10 @@
      "owner": "Split_bay_1__source_0779_m0206_p03",
      "contact": false,
      "triangle_pairs": 0,
-     "nearest_m": 0.12478592991828918,
+     "nearest_m": 0.12462770938873291,
+     "nearest_from_moving_m": 0.12478592991828918,
+     "nearest_from_obstacle_m": 0.12462770938873291,
+     "touching": false,
      "one_box_inside_the_other": false
     },
     {
@@ -6857,47 +7373,10 @@
      "owner": "Split_bay_1__source_0779_m0206_p03",
      "contact": false,
      "triangle_pairs": 0,
-     "nearest_m": 0.14675970375537872,
-     "one_box_inside_the_other": false
-    },
-    {
-     "moving": "OP030B__source_0578_m0052_p00",
-     "obstacle": "Split_bay_1__source_0779_m0206_p03",
-     "box_gap_m": -0.3534677348694448,
-     "box_depth_m": 0.3534677348694448,
-     "box_overlap_xyz_m": [
-      0.20400002050399735,
-      0.3534677348694448,
-      1.2520215511322021
-     ],
-     "moving_box_m": [
-      [
-       -1.0019999864101408,
-       0.35653224367288305,
-       0.3700000047683716
-      ],
-      [
-       -0.7979999659061434,
-       0.843467708643401,
-       1.6220215559005737
-      ]
-     ],
-     "obstacle_box_m": [
-      [
-       -1.4600000381469727,
-       -1.1100001335144043,
-       0.19699999690055847
-      ],
-      [
-       -0.512499988079071,
-       0.7099999785423279,
-       3.319999933242798
-      ]
-     ],
-     "owner": "Split_bay_1__source_0779_m0206_p03",
-     "contact": false,
-     "triangle_pairs": 0,
-     "nearest_m": 0.21612320840358734,
+     "nearest_m": 0.14674153923988342,
+     "nearest_from_moving_m": 0.14675970375537872,
+     "nearest_from_obstacle_m": 0.14674153923988342,
+     "touching": false,
      "one_box_inside_the_other": false
     },
     {
@@ -6937,7 +7416,53 @@
      "owner": "Split_bay_2__source_0779_m0206_p03",
      "contact": false,
      "triangle_pairs": 0,
-     "nearest_m": 0.22720041871070862,
+     "nearest_m": 0.20808778703212738,
+     "nearest_from_moving_m": 0.22720041871070862,
+     "nearest_from_obstacle_m": 0.20808778703212738,
+     "touching": false,
+     "one_box_inside_the_other": false
+    },
+    {
+     "moving": "OP030B__source_0578_m0052_p00",
+     "obstacle": "Split_bay_1__source_0779_m0206_p03",
+     "box_gap_m": -0.3534677348694448,
+     "box_depth_m": 0.3534677348694448,
+     "box_overlap_xyz_m": [
+      0.20400002050399735,
+      0.3534677348694448,
+      1.2520215511322021
+     ],
+     "moving_box_m": [
+      [
+       -1.0019999864101408,
+       0.35653224367288305,
+       0.3700000047683716
+      ],
+      [
+       -0.7979999659061434,
+       0.843467708643401,
+       1.6220215559005737
+      ]
+     ],
+     "obstacle_box_m": [
+      [
+       -1.4600000381469727,
+       -1.1100001335144043,
+       0.19699999690055847
+      ],
+      [
+       -0.512499988079071,
+       0.7099999785423279,
+       3.319999933242798
+      ]
+     ],
+     "owner": "Split_bay_1__source_0779_m0206_p03",
+     "contact": false,
+     "triangle_pairs": 0,
+     "nearest_m": 0.21611298620700836,
+     "nearest_from_moving_m": 0.21612320840358734,
+     "nearest_from_obstacle_m": 0.21611298620700836,
+     "touching": false,
      "one_box_inside_the_other": false
     },
     {
@@ -6978,6 +7503,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 0.2316063642501831,
+     "nearest_from_moving_m": 0.2316063642501831,
+     "nearest_from_obstacle_m": 0.2316063642501831,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -7018,6 +7546,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 0.2944762408733368,
+     "nearest_from_moving_m": 0.2944762408733368,
+     "nearest_from_obstacle_m": 0.2944762408733368,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -7058,6 +7589,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 0.31651392579078674,
+     "nearest_from_moving_m": 0.31651392579078674,
+     "nearest_from_obstacle_m": 0.31651392579078674,
+     "touching": false,
      "one_box_inside_the_other": false
     },
     {
@@ -7098,6 +7632,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 0.4054020345211029,
+     "nearest_from_moving_m": 0.4054020345211029,
+     "nearest_from_obstacle_m": 0.4054020345211029,
+     "touching": false,
      "one_box_inside_the_other": false
     },
     {
@@ -7138,6 +7675,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 0.43641844391822815,
+     "nearest_from_moving_m": 0.43641844391822815,
+     "nearest_from_obstacle_m": 0.43641844391822815,
+     "touching": false,
      "one_box_inside_the_other": false
     },
     {
@@ -7177,7 +7717,10 @@
      "owner": "Split_bay_1__source_0779_m0206_p03",
      "contact": false,
      "triangle_pairs": 0,
-     "nearest_m": 0.772413969039917,
+     "nearest_m": 0.7484265565872192,
+     "nearest_from_moving_m": 0.772413969039917,
+     "nearest_from_obstacle_m": 0.7484265565872192,
+     "touching": false,
      "one_box_inside_the_other": false
     },
     {
@@ -7218,6 +7761,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 0.7742056846618652,
+     "nearest_from_moving_m": 0.7742056846618652,
+     "nearest_from_obstacle_m": 0.7742056846618652,
+     "touching": false,
      "one_box_inside_the_other": false
     },
     {
@@ -7258,6 +7804,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 0.7863057851791382,
+     "nearest_from_moving_m": 0.7863057851791382,
+     "nearest_from_obstacle_m": 0.7863057851791382,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -7298,6 +7847,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 0.7896249890327454,
+     "nearest_from_moving_m": 0.7896249890327454,
+     "nearest_from_obstacle_m": 0.7896249890327454,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -7338,6 +7890,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 0.7922112941741943,
+     "nearest_from_moving_m": 0.7922112941741943,
+     "nearest_from_obstacle_m": 0.7922112941741943,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -7378,6 +7933,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 0.8046818971633911,
+     "nearest_from_moving_m": 0.8046818971633911,
+     "nearest_from_obstacle_m": 0.8046818971633911,
+     "touching": false,
      "one_box_inside_the_other": true
     }
    ]
@@ -7389,6 +7947,95 @@
    "candidate_pairs": 197,
    "contact_pairs": 1,
    "clear_pairs": 196,
+   "touching_pairs": 2,
+   "touching": [
+    {
+     "moving": "OP030C_feeder_M6_foot_-0.070",
+     "obstacle": "source_0588_m0055_p00",
+     "box_gap_m": 2.726912500250478e-07,
+     "box_depth_m": 0.0,
+     "box_overlap_xyz_m": [
+      0.11999999731779099,
+      -2.726912500250478e-07,
+      0.014000000432133675
+     ],
+     "moving_box_m": [
+      [
+       0.6349999941885471,
+       3.549999903142452,
+       -0.032999963499605656
+      ],
+      [
+       0.7549999915063381,
+       3.7499999061226843,
+       -0.01899996306747198
+      ]
+     ],
+     "obstacle_box_m": [
+      [
+       0.6199999749660492,
+       3.7500001788139343,
+       -0.03999999910593033
+      ],
+      [
+       1.179999977350235,
+       4.350000202655792,
+       0.029999999329447746
+      ]
+     ],
+     "owner": "source_0588",
+     "contact": false,
+     "triangle_pairs": 0,
+     "nearest_m": 2.4578449142609315e-07,
+     "nearest_from_moving_m": 2.4578449142609315e-07,
+     "nearest_from_obstacle_m": 0.007176457904279232,
+     "touching": true,
+     "one_box_inside_the_other": false
+    },
+    {
+     "moving": "OP030C_feeder_M6_foot_-0.270",
+     "obstacle": "source_0588_m0055_p00",
+     "box_gap_m": 2.726912500250478e-07,
+     "box_depth_m": 0.0,
+     "box_overlap_xyz_m": [
+      0.11999999731779099,
+      -2.726912500250478e-07,
+      0.014000000432133675
+     ],
+     "moving_box_m": [
+      [
+       0.7600000537931919,
+       3.549999903142452,
+       -0.032999963499605656
+      ],
+      [
+       0.8800000511109829,
+       3.7499999061226843,
+       -0.01899996306747198
+      ]
+     ],
+     "obstacle_box_m": [
+      [
+       0.6199999749660492,
+       3.7500001788139343,
+       -0.03999999910593033
+      ],
+      [
+       1.179999977350235,
+       4.350000202655792,
+       0.029999999329447746
+      ]
+     ],
+     "owner": "source_0588",
+     "contact": false,
+     "triangle_pairs": 0,
+     "nearest_m": 3.82545778165877e-07,
+     "nearest_from_moving_m": 3.82545778165877e-07,
+     "nearest_from_obstacle_m": 0.1320095658302307,
+     "touching": true,
+     "one_box_inside_the_other": false
+    }
+   ],
    "contained_pairs": 86,
    "contained": [
     {
@@ -7428,7 +8075,10 @@
      "owner": "Split_bay_2__source_0780_m0207_p03",
      "contact": false,
      "triangle_pairs": 0,
-     "nearest_m": 0.4226967990398407,
+     "nearest_m": 0.4226967692375183,
+     "nearest_from_moving_m": 0.4226967990398407,
+     "nearest_from_obstacle_m": 0.4226967692375183,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -7469,6 +8119,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 1.040613055229187,
+     "nearest_from_moving_m": 1.040613055229187,
+     "nearest_from_obstacle_m": 1.040613055229187,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -7509,6 +8162,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 1.0301698446273804,
+     "nearest_from_moving_m": 1.0301698446273804,
+     "nearest_from_obstacle_m": 1.0301698446273804,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -7549,6 +8205,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 1.1895443201065063,
+     "nearest_from_moving_m": 1.1895443201065063,
+     "nearest_from_obstacle_m": 1.1895443201065063,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -7589,6 +8248,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 1.2024009227752686,
+     "nearest_from_moving_m": 1.2024009227752686,
+     "nearest_from_obstacle_m": 1.2024009227752686,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -7629,6 +8291,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 1.2403148412704468,
+     "nearest_from_moving_m": 1.2403148412704468,
+     "nearest_from_obstacle_m": 1.240321159362793,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -7669,6 +8334,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 0.1937403529882431,
+     "nearest_from_moving_m": 0.1937403529882431,
+     "nearest_from_obstacle_m": 0.1937403529882431,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -7709,6 +8377,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 0.21062462031841278,
+     "nearest_from_moving_m": 0.21062462031841278,
+     "nearest_from_obstacle_m": 0.21062462031841278,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -7749,6 +8420,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 1.0394768714904785,
+     "nearest_from_moving_m": 1.0394768714904785,
+     "nearest_from_obstacle_m": 1.0394768714904785,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -7789,6 +8463,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 1.0185353755950928,
+     "nearest_from_moving_m": 1.0185353755950928,
+     "nearest_from_obstacle_m": 1.0185353755950928,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -7829,6 +8506,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 1.032537817955017,
+     "nearest_from_moving_m": 1.032537817955017,
+     "nearest_from_obstacle_m": 1.032537817955017,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -7869,6 +8549,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 0.9073532223701477,
+     "nearest_from_moving_m": 0.9073532223701477,
+     "nearest_from_obstacle_m": 0.9073532223701477,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -7909,6 +8592,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 0.9056134819984436,
+     "nearest_from_moving_m": 0.9056134819984436,
+     "nearest_from_obstacle_m": 0.9056134819984436,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -7949,6 +8635,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 0.9141074419021606,
+     "nearest_from_moving_m": 0.9141074419021606,
+     "nearest_from_obstacle_m": 0.9141074419021606,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -7989,6 +8678,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 1.1777441501617432,
+     "nearest_from_moving_m": 1.1777441501617432,
+     "nearest_from_obstacle_m": 1.1777441501617432,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -8029,6 +8721,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 0.8954557776451111,
+     "nearest_from_moving_m": 0.8954557776451111,
+     "nearest_from_obstacle_m": 0.8954557776451111,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -8069,6 +8764,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 0.9103607535362244,
+     "nearest_from_moving_m": 0.9103607535362244,
+     "nearest_from_obstacle_m": 0.9103607535362244,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -8109,6 +8807,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 0.907180905342102,
+     "nearest_from_moving_m": 0.907180905342102,
+     "nearest_from_obstacle_m": 0.907180905342102,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -8149,6 +8850,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 1.1908785104751587,
+     "nearest_from_moving_m": 1.1908785104751587,
+     "nearest_from_obstacle_m": 1.1908785104751587,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -8189,6 +8893,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 1.1748912334442139,
+     "nearest_from_moving_m": 1.1748912334442139,
+     "nearest_from_obstacle_m": 1.1748912334442139,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -8229,6 +8936,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 1.157495141029358,
+     "nearest_from_moving_m": 1.157495141029358,
+     "nearest_from_obstacle_m": 1.157495141029358,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -8269,6 +8979,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 1.1939873695373535,
+     "nearest_from_moving_m": 1.1939873695373535,
+     "nearest_from_obstacle_m": 1.1939873695373535,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -8309,6 +9022,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 1.1893386840820312,
+     "nearest_from_moving_m": 1.1893386840820312,
+     "nearest_from_obstacle_m": 1.1893386840820312,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -8349,6 +9065,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 1.2351680994033813,
+     "nearest_from_moving_m": 1.2351680994033813,
+     "nearest_from_obstacle_m": 1.2363502979278564,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -8389,6 +9108,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 1.2485570907592773,
+     "nearest_from_moving_m": 1.2485570907592773,
+     "nearest_from_obstacle_m": 1.24979567527771,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -8429,6 +9151,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 1.276053786277771,
+     "nearest_from_moving_m": 1.276053786277771,
+     "nearest_from_obstacle_m": 1.2773187160491943,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -8469,6 +9194,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 1.1322195529937744,
+     "nearest_from_moving_m": 1.1322195529937744,
+     "nearest_from_obstacle_m": 1.1323217153549194,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -8509,6 +9237,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 1.1292232275009155,
+     "nearest_from_moving_m": 1.1292232275009155,
+     "nearest_from_obstacle_m": 1.129325270652771,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -8549,6 +9280,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 1.1353174448013306,
+     "nearest_from_moving_m": 1.1353174448013306,
+     "nearest_from_obstacle_m": 1.1354225873947144,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -8589,6 +9323,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 1.1322195529937744,
+     "nearest_from_moving_m": 1.1322195529937744,
+     "nearest_from_obstacle_m": 1.1332956552505493,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -8629,6 +9366,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 1.1292232275009155,
+     "nearest_from_moving_m": 1.1292232275009155,
+     "nearest_from_obstacle_m": 1.1303006410598755,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -8669,6 +9409,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 1.1353174448013306,
+     "nearest_from_moving_m": 1.1353174448013306,
+     "nearest_from_obstacle_m": 1.1364225149154663,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -8709,6 +9452,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 1.1310009956359863,
+     "nearest_from_moving_m": 1.1310009956359863,
+     "nearest_from_obstacle_m": 1.1320213079452515,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -8749,6 +9495,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 1.1280015707015991,
+     "nearest_from_moving_m": 1.1280015707015991,
+     "nearest_from_obstacle_m": 1.129023790359497,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -8789,6 +9538,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 1.1340398788452148,
+     "nearest_from_moving_m": 1.1340398788452148,
+     "nearest_from_obstacle_m": 1.1351120471954346,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -8829,6 +9581,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 1.1310009956359863,
+     "nearest_from_moving_m": 1.1310009956359863,
+     "nearest_from_obstacle_m": 1.1310924291610718,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -8869,6 +9624,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 1.1280015707015991,
+     "nearest_from_moving_m": 1.1280015707015991,
+     "nearest_from_obstacle_m": 1.1280931234359741,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -8909,6 +9667,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 1.1340398788452148,
+     "nearest_from_moving_m": 1.1340398788452148,
+     "nearest_from_obstacle_m": 1.134138822555542,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -8949,6 +9710,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 1.0512571334838867,
+     "nearest_from_moving_m": 1.0512571334838867,
+     "nearest_from_obstacle_m": 1.0527743101119995,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -8989,6 +9753,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 1.1004562377929688,
+     "nearest_from_moving_m": 1.1004562377929688,
+     "nearest_from_obstacle_m": 1.1022971868515015,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -9029,6 +9796,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 1.1241008043289185,
+     "nearest_from_moving_m": 1.1241008043289185,
+     "nearest_from_obstacle_m": 1.1244206428527832,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -9069,6 +9839,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 1.0261552333831787,
+     "nearest_from_moving_m": 1.0261552333831787,
+     "nearest_from_obstacle_m": 1.0262879133224487,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -9109,6 +9882,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 1.0143049955368042,
+     "nearest_from_moving_m": 1.0143049955368042,
+     "nearest_from_obstacle_m": 1.0147255659103394,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -9149,6 +9925,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 0.8706738352775574,
+     "nearest_from_moving_m": 0.8706738352775574,
+     "nearest_from_obstacle_m": 0.8712538480758667,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -9189,6 +9968,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 0.8462632298469543,
+     "nearest_from_moving_m": 0.8462632298469543,
+     "nearest_from_obstacle_m": 0.8467132449150085,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -9229,6 +10011,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 0.8462632298469543,
+     "nearest_from_moving_m": 0.8462632298469543,
+     "nearest_from_obstacle_m": 0.8467132449150085,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -9269,6 +10054,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 1.133818507194519,
+     "nearest_from_moving_m": 1.133818507194519,
+     "nearest_from_obstacle_m": 1.1339402198791504,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -9309,6 +10097,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 0.6162952184677124,
+     "nearest_from_moving_m": 0.6162952184677124,
+     "nearest_from_obstacle_m": 0.6170607209205627,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -9349,6 +10140,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 0.6137336492538452,
+     "nearest_from_moving_m": 0.6137336492538452,
+     "nearest_from_obstacle_m": 0.6143906116485596,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -9389,6 +10183,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 0.6162952184677124,
+     "nearest_from_moving_m": 0.6162952184677124,
+     "nearest_from_obstacle_m": 0.6196110844612122,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -9429,6 +10226,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 0.6137336492538452,
+     "nearest_from_moving_m": 0.6137336492538452,
+     "nearest_from_obstacle_m": 0.6169793009757996,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -9469,6 +10269,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 0.6162952184677124,
+     "nearest_from_moving_m": 0.6162952184677124,
+     "nearest_from_obstacle_m": 0.6169214248657227,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -9509,6 +10312,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 0.6137336492538452,
+     "nearest_from_moving_m": 0.6137336492538452,
+     "nearest_from_obstacle_m": 0.614237904548645,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -9549,6 +10355,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 0.6164219379425049,
+     "nearest_from_moving_m": 0.6164219379425049,
+     "nearest_from_obstacle_m": 0.6164219379425049,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -9589,6 +10398,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 0.6138213276863098,
+     "nearest_from_moving_m": 0.6138213276863098,
+     "nearest_from_obstacle_m": 0.6138213276863098,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -9629,6 +10441,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 0.6181827783584595,
+     "nearest_from_moving_m": 0.6181827783584595,
+     "nearest_from_obstacle_m": 0.6181827783584595,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -9669,6 +10484,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 0.6155569553375244,
+     "nearest_from_moving_m": 0.6155569553375244,
+     "nearest_from_obstacle_m": 0.6155569553375244,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -9709,6 +10527,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 0.6225495338439941,
+     "nearest_from_moving_m": 0.6225495338439941,
+     "nearest_from_obstacle_m": 0.6225495338439941,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -9749,6 +10570,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 0.6198739409446716,
+     "nearest_from_moving_m": 0.6198739409446716,
+     "nearest_from_obstacle_m": 0.6198739409446716,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -9789,6 +10613,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 0.6296935081481934,
+     "nearest_from_moving_m": 0.6296935081481934,
+     "nearest_from_obstacle_m": 0.6296935081481934,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -9828,7 +10655,10 @@
      "owner": "Split_bay_2__source_0780_m0207_p03",
      "contact": false,
      "triangle_pairs": 0,
-     "nearest_m": 0.6269112229347229,
+     "nearest_m": 0.6269111633300781,
+     "nearest_from_moving_m": 0.6269112229347229,
+     "nearest_from_obstacle_m": 0.6269111633300781,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -9869,6 +10699,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 0.6395216584205627,
+     "nearest_from_moving_m": 0.6395216584205627,
+     "nearest_from_obstacle_m": 0.6395216584205627,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -9909,6 +10742,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 0.6366164684295654,
+     "nearest_from_moving_m": 0.6366164684295654,
+     "nearest_from_obstacle_m": 0.6366164684295654,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -9949,6 +10785,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 0.65191251039505,
+     "nearest_from_moving_m": 0.65191251039505,
+     "nearest_from_obstacle_m": 0.65191251039505,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -9989,6 +10828,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 0.6488897800445557,
+     "nearest_from_moving_m": 0.6488897800445557,
+     "nearest_from_obstacle_m": 0.6488897800445557,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -10029,6 +10871,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 0.6667233109474182,
+     "nearest_from_moving_m": 0.6667233109474182,
+     "nearest_from_obstacle_m": 0.6667233109474182,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -10069,6 +10914,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 0.6635916233062744,
+     "nearest_from_moving_m": 0.6635916233062744,
+     "nearest_from_obstacle_m": 0.6635916233062744,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -10109,6 +10957,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 0.6837967038154602,
+     "nearest_from_moving_m": 0.6837967038154602,
+     "nearest_from_obstacle_m": 0.6837967038154602,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -10149,6 +11000,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 0.6805715560913086,
+     "nearest_from_moving_m": 0.6805715560913086,
+     "nearest_from_obstacle_m": 0.6805715560913086,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -10189,6 +11043,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 0.7029679417610168,
+     "nearest_from_moving_m": 0.7029679417610168,
+     "nearest_from_obstacle_m": 0.7029679417610168,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -10229,6 +11086,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 0.69966059923172,
+     "nearest_from_moving_m": 0.69966059923172,
+     "nearest_from_obstacle_m": 0.69966059923172,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -10268,7 +11128,10 @@
      "owner": "Split_bay_2__source_0780_m0207_p03",
      "contact": false,
      "triangle_pairs": 0,
-     "nearest_m": 0.4901922643184662,
+     "nearest_m": 0.4883463978767395,
+     "nearest_from_moving_m": 0.4901922643184662,
+     "nearest_from_obstacle_m": 0.4883463978767395,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -10309,6 +11172,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 0.6145715713500977,
+     "nearest_from_moving_m": 0.6145715713500977,
+     "nearest_from_obstacle_m": 0.6168526411056519,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -10349,6 +11215,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 0.6051867008209229,
+     "nearest_from_moving_m": 0.6051867008209229,
+     "nearest_from_obstacle_m": 0.6051867008209229,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -10389,6 +11258,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 0.603786051273346,
+     "nearest_from_moving_m": 0.603786051273346,
+     "nearest_from_obstacle_m": 0.603786051273346,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -10429,6 +11301,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 0.548003613948822,
+     "nearest_from_moving_m": 0.548003613948822,
+     "nearest_from_obstacle_m": 0.5490229725837708,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -10469,6 +11344,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 0.6139999628067017,
+     "nearest_from_moving_m": 0.6139999628067017,
+     "nearest_from_obstacle_m": 0.616172730922699,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -10509,6 +11387,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 0.5750019550323486,
+     "nearest_from_moving_m": 0.5750019550323486,
+     "nearest_from_obstacle_m": 0.5769176483154297,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -10548,7 +11429,10 @@
      "owner": "Split_bay_2__source_0780_m0207_p03",
      "contact": false,
      "triangle_pairs": 0,
-     "nearest_m": 0.6253941059112549,
+     "nearest_m": 0.6242079138755798,
+     "nearest_from_moving_m": 0.6253941059112549,
+     "nearest_from_obstacle_m": 0.6242079138755798,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -10589,6 +11473,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 0.8115134239196777,
+     "nearest_from_moving_m": 0.8115134239196777,
+     "nearest_from_obstacle_m": 0.8115134239196777,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -10628,7 +11515,10 @@
      "owner": "Split_bay_2__source_0780_m0207_p03",
      "contact": false,
      "triangle_pairs": 0,
-     "nearest_m": 0.7790990471839905,
+     "nearest_m": 0.7779390215873718,
+     "nearest_from_moving_m": 0.7790990471839905,
+     "nearest_from_obstacle_m": 0.7779390215873718,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -10669,6 +11559,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 0.4660686254501343,
+     "nearest_from_moving_m": 0.4660686254501343,
+     "nearest_from_obstacle_m": 0.46611395478248596,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -10709,6 +11602,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 0.5430588722229004,
+     "nearest_from_moving_m": 0.5430588722229004,
+     "nearest_from_obstacle_m": 0.5433440804481506,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -10749,6 +11645,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 0.6078894138336182,
+     "nearest_from_moving_m": 0.6078894138336182,
+     "nearest_from_obstacle_m": 0.6078894138336182,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -10789,6 +11688,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 0.6055245399475098,
+     "nearest_from_moving_m": 0.6055245399475098,
+     "nearest_from_obstacle_m": 0.6055245399475098,
+     "touching": false,
      "one_box_inside_the_other": true
     },
     {
@@ -10829,6 +11731,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 0.6015621423721313,
+     "nearest_from_moving_m": 0.6015621423721313,
+     "nearest_from_obstacle_m": 0.6021575331687927,
+     "touching": false,
      "one_box_inside_the_other": true
     }
    ],
@@ -10837,30 +11742,34 @@
      "owner": "source_0705",
      "pairs": 12,
      "contacts": 1,
+     "touching": 0,
      "contained": 0,
      "triangle_pairs": 207,
-     "nearest_m": 0.06532537937164307
+     "nearest_m": 0.061582714319229126
     },
     {
      "owner": "Split_bay_2__source_0780_m0207_p03",
      "pairs": 111,
      "contacts": 0,
+     "touching": 0,
      "contained": 84,
      "triangle_pairs": 0,
-     "nearest_m": 0.035837482661008835
+     "nearest_m": 0.013500034809112549
     },
     {
      "owner": "source_1140",
      "pairs": 8,
      "contacts": 0,
+     "touching": 0,
      "contained": 0,
      "triangle_pairs": 0,
-     "nearest_m": 0.15746179223060608
+     "nearest_m": 0.14291054010391235
     },
     {
      "owner": "source_1145",
      "pairs": 4,
      "contacts": 0,
+     "touching": 0,
      "contained": 0,
      "triangle_pairs": 0,
      "nearest_m": 0.2868722677230835
@@ -10869,6 +11778,7 @@
      "owner": "source_1146",
      "pairs": 3,
      "contacts": 0,
+     "touching": 0,
      "contained": 0,
      "triangle_pairs": 0,
      "nearest_m": 0.26615166664123535
@@ -10877,6 +11787,7 @@
      "owner": "source_1147",
      "pairs": 3,
      "contacts": 0,
+     "touching": 0,
      "contained": 0,
      "triangle_pairs": 0,
      "nearest_m": 0.2809829115867615
@@ -10885,6 +11796,7 @@
      "owner": "source_0599",
      "pairs": 5,
      "contacts": 0,
+     "touching": 0,
      "contained": 0,
      "triangle_pairs": 0,
      "nearest_m": 0.07239997386932373
@@ -10893,6 +11805,7 @@
      "owner": "source_0588",
      "pairs": 12,
      "contacts": 0,
+     "touching": 2,
      "contained": 0,
      "triangle_pairs": 0,
      "nearest_m": 2.4578449142609315e-07
@@ -10901,62 +11814,70 @@
      "owner": "source_0589",
      "pairs": 1,
      "contacts": 0,
+     "touching": 0,
      "contained": 0,
      "triangle_pairs": 0,
-     "nearest_m": 0.10192528367042542
+     "nearest_m": 0.10188071429729462
     },
     {
      "owner": "source_0590",
      "pairs": 21,
      "contacts": 0,
+     "touching": 0,
      "contained": 0,
      "triangle_pairs": 0,
-     "nearest_m": 0.17739452421665192
+     "nearest_m": 0.1733216792345047
     },
     {
      "owner": "source_1133",
      "pairs": 3,
      "contacts": 0,
+     "touching": 0,
      "contained": 0,
      "triangle_pairs": 0,
-     "nearest_m": 0.18206952512264252
+     "nearest_m": 0.16803637146949768
     },
     {
      "owner": "source_1134",
      "pairs": 3,
      "contacts": 0,
+     "touching": 0,
      "contained": 1,
      "triangle_pairs": 0,
-     "nearest_m": 0.15298691391944885
+     "nearest_m": 0.13980257511138916
     },
     {
      "owner": "source_1135",
      "pairs": 3,
      "contacts": 0,
+     "touching": 0,
      "contained": 1,
      "triangle_pairs": 0,
-     "nearest_m": 0.17248927056789398
+     "nearest_m": 0.15873953700065613
     },
     {
      "owner": "source_1136",
      "pairs": 3,
      "contacts": 0,
+     "touching": 0,
      "contained": 0,
      "triangle_pairs": 0,
-     "nearest_m": 0.018594585359096527
+     "nearest_m": 0.0058752442710101604
     },
     {
      "owner": "source_1137",
      "pairs": 3,
      "contacts": 0,
+     "touching": 0,
      "contained": 0,
      "triangle_pairs": 0,
-     "nearest_m": 0.13758206367492676
+     "nearest_m": 0.12354635447263718
     },
     {
      "owner": "source_1138",
      "pairs": 1,
      "contacts": 0,
+     "touching": 0,
      "contained": 0,
      "triangle_pairs": 0,
      "nearest_m": 0.34237542748451233
@@ -10965,6 +11886,7 @@
      "owner": "source_1142",
      "pairs": 1,
      "contacts": 0,
+     "touching": 0,
      "contained": 0,
      "triangle_pairs": 0,
      "nearest_m": 0.2198396474123001
@@ -11009,6 +11931,9 @@
      "contact": true,
      "triangle_pairs": 207,
      "nearest_m": null,
+     "nearest_from_moving_m": null,
+     "nearest_from_obstacle_m": null,
+     "touching": false,
      "one_box_inside_the_other": false
     }
    ],
@@ -11051,6 +11976,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 2.4578449142609315e-07,
+     "nearest_from_moving_m": 2.4578449142609315e-07,
+     "nearest_from_obstacle_m": 0.007176457904279232,
+     "touching": true,
      "one_box_inside_the_other": false
     },
     {
@@ -11091,6 +12019,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 3.82545778165877e-07,
+     "nearest_from_moving_m": 3.82545778165877e-07,
+     "nearest_from_obstacle_m": 0.1320095658302307,
+     "touching": true,
      "one_box_inside_the_other": false
     },
     {
@@ -11130,7 +12061,53 @@
      "owner": "source_1136",
      "contact": false,
      "triangle_pairs": 0,
-     "nearest_m": 0.018594585359096527,
+     "nearest_m": 0.0058752442710101604,
+     "nearest_from_moving_m": 0.018594585359096527,
+     "nearest_from_obstacle_m": 0.0058752442710101604,
+     "touching": false,
+     "one_box_inside_the_other": false
+    },
+    {
+     "moving": "OP030C_feeder_M14_stand_-0.151",
+     "obstacle": "Split_bay_2__source_0780_m0207_p03",
+     "box_gap_m": -0.2084999866783619,
+     "box_depth_m": 0.2084999866783619,
+     "box_overlap_xyz_m": [
+      0.03999999910593033,
+      0.14000000059604645,
+      0.47099994452830884
+     ],
+     "moving_box_m": [
+      [
+       0.6809999756515026,
+       2.079999904334545,
+       -0.01900001200076673
+      ],
+      [
+       0.7209999747574329,
+       2.2199999049305914,
+       0.6679999414288673
+      ]
+     ],
+     "obstacle_box_m": [
+      [
+       0.512499988079071,
+       1.1899999380111694,
+       0.19699999690055847
+      ],
+      [
+       1.4600000381469727,
+       3.009999990463257,
+       3.319999933242798
+      ]
+     ],
+     "owner": "Split_bay_2__source_0780_m0207_p03",
+     "contact": false,
+     "triangle_pairs": 0,
+     "nearest_m": 0.013500034809112549,
+     "nearest_from_moving_m": 0.2155000865459442,
+     "nearest_from_obstacle_m": 0.013500034809112549,
+     "touching": false,
      "one_box_inside_the_other": false
     },
     {
@@ -11171,6 +12148,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 0.03000044822692871,
+     "nearest_from_moving_m": 0.03000044822692871,
+     "nearest_from_obstacle_m": 0.0563340038061142,
+     "touching": false,
      "one_box_inside_the_other": false
     },
     {
@@ -11211,6 +12191,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 0.03000044822692871,
+     "nearest_from_moving_m": 0.03000044822692871,
+     "nearest_from_obstacle_m": 0.17486083507537842,
+     "touching": false,
      "one_box_inside_the_other": false
     },
     {
@@ -11250,7 +12233,10 @@
      "owner": "Split_bay_2__source_0780_m0207_p03",
      "contact": false,
      "triangle_pairs": 0,
-     "nearest_m": 0.035837482661008835,
+     "nearest_m": 0.03583553433418274,
+     "nearest_from_moving_m": 0.035837482661008835,
+     "nearest_from_obstacle_m": 0.03583553433418274,
+     "touching": false,
      "one_box_inside_the_other": false
     },
     {
@@ -11290,7 +12276,53 @@
      "owner": "Split_bay_2__source_0780_m0207_p03",
      "contact": false,
      "triangle_pairs": 0,
-     "nearest_m": 0.05187997967004776,
+     "nearest_m": 0.051022954285144806,
+     "nearest_from_moving_m": 0.05187997967004776,
+     "nearest_from_obstacle_m": 0.051022954285144806,
+     "touching": false,
+     "one_box_inside_the_other": false
+    },
+    {
+     "moving": "OP030C_feeder_M6_stand_-0.070",
+     "obstacle": "source_0588_m0055_p03",
+     "box_gap_m": 0.0478402718901636,
+     "box_depth_m": 0.0,
+     "box_overlap_xyz_m": [
+      0.03999999910593033,
+      -0.0478402718901636,
+      0.19499999471008778
+     ],
+     "moving_box_m": [
+      [
+       0.6749999932944775,
+       3.579999904334545,
+       -0.01900001200076673
+      ],
+      [
+       0.7149999924004078,
+       3.7199999049305914,
+       0.6679999414288673
+      ]
+     ],
+     "obstacle_box_m": [
+      [
+       0.6378399729728699,
+       3.767840176820755,
+       0.029999999329447746
+      ],
+      [
+       1.1621599793434143,
+       4.332160204648972,
+       0.22499999403953552
+      ]
+     ],
+     "owner": "source_0588",
+     "contact": false,
+     "triangle_pairs": 0,
+     "nearest_m": 0.051263630390167236,
+     "nearest_from_moving_m": 0.06983568519353867,
+     "nearest_from_obstacle_m": 0.051263630390167236,
+     "touching": false,
      "one_box_inside_the_other": false
     },
     {
@@ -11330,7 +12362,53 @@
      "owner": "source_0588",
      "contact": false,
      "triangle_pairs": 0,
-     "nearest_m": 0.054440584033727646,
+     "nearest_m": 0.05259568989276886,
+     "nearest_from_moving_m": 0.054440584033727646,
+     "nearest_from_obstacle_m": 0.05259568989276886,
+     "touching": false,
+     "one_box_inside_the_other": false
+    },
+    {
+     "moving": "OP030C__source_0576_m0050_p00",
+     "obstacle": "source_0705_m0132_p04",
+     "box_gap_m": -0.029892492886574473,
+     "box_depth_m": 0.029892492886574473,
+     "box_overlap_xyz_m": [
+      0.3075513541698456,
+      0.32800029516220075,
+      0.029892492886574473
+     ],
+     "moving_box_m": [
+      [
+       0.6199999749660492,
+       2.6000001311302183,
+       -0.03999999910593033
+      ],
+      [
+       1.179999977350235,
+       3.2000001549720762,
+       0.029999999329447746
+      ]
+     ],
+     "obstacle_box_m": [
+      [
+       0.8724486231803894,
+       2.8719998598098755,
+       0.00010750644287327304
+      ],
+      [
+       1.409999966621399,
+       4.827549397945404,
+       0.19300000369548798
+      ]
+     ],
+     "owner": "source_0705",
+     "contact": false,
+     "triangle_pairs": 0,
+     "nearest_m": 0.061582714319229126,
+     "nearest_from_moving_m": 0.06532537937164307,
+     "nearest_from_obstacle_m": 0.061582714319229126,
+     "touching": false,
      "one_box_inside_the_other": false
     },
     {
@@ -11371,86 +12449,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 0.061582714319229126,
-     "one_box_inside_the_other": false
-    },
-    {
-     "moving": "OP030C__source_0576_m0050_p00",
-     "obstacle": "source_0705_m0132_p04",
-     "box_gap_m": -0.029892492886574473,
-     "box_depth_m": 0.029892492886574473,
-     "box_overlap_xyz_m": [
-      0.3075513541698456,
-      0.32800029516220075,
-      0.029892492886574473
-     ],
-     "moving_box_m": [
-      [
-       0.6199999749660492,
-       2.6000001311302183,
-       -0.03999999910593033
-      ],
-      [
-       1.179999977350235,
-       3.2000001549720762,
-       0.029999999329447746
-      ]
-     ],
-     "obstacle_box_m": [
-      [
-       0.8724486231803894,
-       2.8719998598098755,
-       0.00010750644287327304
-      ],
-      [
-       1.409999966621399,
-       4.827549397945404,
-       0.19300000369548798
-      ]
-     ],
-     "owner": "source_0705",
-     "contact": false,
-     "triangle_pairs": 0,
-     "nearest_m": 0.06532537937164307,
-     "one_box_inside_the_other": false
-    },
-    {
-     "moving": "OP030C_feeder_M6_stand_-0.070",
-     "obstacle": "source_0588_m0055_p03",
-     "box_gap_m": 0.0478402718901636,
-     "box_depth_m": 0.0,
-     "box_overlap_xyz_m": [
-      0.03999999910593033,
-      -0.0478402718901636,
-      0.19499999471008778
-     ],
-     "moving_box_m": [
-      [
-       0.6749999932944775,
-       3.579999904334545,
-       -0.01900001200076673
-      ],
-      [
-       0.7149999924004078,
-       3.7199999049305914,
-       0.6679999414288673
-      ]
-     ],
-     "obstacle_box_m": [
-      [
-       0.6378399729728699,
-       3.767840176820755,
-       0.029999999329447746
-      ],
-      [
-       1.1621599793434143,
-       4.332160204648972,
-       0.22499999403953552
-      ]
-     ],
-     "owner": "source_0588",
-     "contact": false,
-     "triangle_pairs": 0,
-     "nearest_m": 0.06983568519353867,
+     "nearest_from_moving_m": 0.061582714319229126,
+     "nearest_from_obstacle_m": 0.06532535701990128,
+     "touching": false,
      "one_box_inside_the_other": false
     },
     {
@@ -11491,6 +12492,52 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 0.07239997386932373,
+     "nearest_from_moving_m": 0.07239997386932373,
+     "nearest_from_obstacle_m": 0.25808340311050415,
+     "touching": false,
+     "one_box_inside_the_other": false
+    },
+    {
+     "moving": "OP030C__source_0576_m0050_p01",
+     "obstacle": "source_0705_m0132_p04",
+     "box_gap_m": -0.06039249322930118,
+     "box_depth_m": 0.06039249322930118,
+     "box_overlap_xyz_m": [
+      0.2775513529777527,
+      0.29800029397010785,
+      0.02499999850988388
+     ],
+     "moving_box_m": [
+      [
+       0.6499999761581421,
+       2.6300001323223112,
+       0.03550000116229057
+      ],
+      [
+       1.149999976158142,
+       3.1700001537799833,
+       0.060499999672174454
+      ]
+     ],
+     "obstacle_box_m": [
+      [
+       0.8724486231803894,
+       2.8719998598098755,
+       0.00010750644287327304
+      ],
+      [
+       1.409999966621399,
+       4.827549397945404,
+       0.19300000369548798
+      ]
+     ],
+     "owner": "source_0705",
+     "contact": false,
+     "triangle_pairs": 0,
+     "nearest_m": 0.07461507618427277,
+     "nearest_from_moving_m": 0.08665772527456284,
+     "nearest_from_obstacle_m": 0.07461507618427277,
+     "touching": false,
      "one_box_inside_the_other": false
     },
     {
@@ -11531,6 +12578,52 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 0.07461507618427277,
+     "nearest_from_moving_m": 0.07461507618427277,
+     "nearest_from_obstacle_m": 0.08665768802165985,
+     "touching": false,
+     "one_box_inside_the_other": false
+    },
+    {
+     "moving": "OP030C__source_0576_m0050_p02",
+     "obstacle": "source_0705_m0132_p04",
+     "box_gap_m": -0.12300000339746475,
+     "box_depth_m": 0.12300000339746475,
+     "box_overlap_xyz_m": [
+      0.24255135655403137,
+      0.24300028681755048,
+      0.12300000339746475
+     ],
+     "moving_box_m": [
+      [
+       0.6849999725818634,
+       2.6850001394748686,
+       0.07000000029802322
+      ],
+      [
+       1.1149999797344208,
+       3.115000146627426,
+       0.2199999988079071
+      ]
+     ],
+     "obstacle_box_m": [
+      [
+       0.8724486231803894,
+       2.8719998598098755,
+       0.00010750644287327304
+      ],
+      [
+       1.409999966621399,
+       4.827549397945404,
+       0.19300000369548798
+      ]
+     ],
+     "owner": "source_0705",
+     "contact": false,
+     "triangle_pairs": 0,
+     "nearest_m": 0.07637687027454376,
+     "nearest_from_moving_m": 0.09502194076776505,
+     "nearest_from_obstacle_m": 0.07637687027454376,
+     "touching": false,
      "one_box_inside_the_other": false
     },
     {
@@ -11571,6 +12664,52 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 0.0763770267367363,
+     "nearest_from_moving_m": 0.0763770267367363,
+     "nearest_from_obstacle_m": 0.09502195566892624,
+     "touching": false,
+     "one_box_inside_the_other": false
+    },
+    {
+     "moving": "OP030C__source_0693_m0120_p04",
+     "obstacle": "source_0588_m0055_p03",
+     "box_gap_m": -0.16300000436604023,
+     "box_depth_m": 0.16300000436604023,
+     "box_overlap_xyz_m": [
+      0.2897113561630249,
+      0.3101599395275114,
+      0.16300000436604023
+     ],
+     "moving_box_m": [
+      [
+       0.8724486231803894,
+       2.122450578212738,
+       0.00010750644287327304
+      ],
+      [
+       1.409999966621399,
+       4.078000116348266,
+       0.19300000369548798
+      ]
+     ],
+     "obstacle_box_m": [
+      [
+       0.6378399729728699,
+       3.767840176820755,
+       0.029999999329447746
+      ],
+      [
+       1.1621599793434143,
+       4.332160204648972,
+       0.22499999403953552
+      ]
+     ],
+     "owner": "source_0588",
+     "contact": false,
+     "triangle_pairs": 0,
+     "nearest_m": 0.077049121260643,
+     "nearest_from_moving_m": 0.07767249643802643,
+     "nearest_from_obstacle_m": 0.077049121260643,
+     "touching": false,
      "one_box_inside_the_other": false
     },
     {
@@ -11611,46 +12750,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 0.07704922556877136,
-     "one_box_inside_the_other": false
-    },
-    {
-     "moving": "OP030C__source_0693_m0120_p04",
-     "obstacle": "source_0588_m0055_p03",
-     "box_gap_m": -0.16300000436604023,
-     "box_depth_m": 0.16300000436604023,
-     "box_overlap_xyz_m": [
-      0.2897113561630249,
-      0.3101599395275114,
-      0.16300000436604023
-     ],
-     "moving_box_m": [
-      [
-       0.8724486231803894,
-       2.122450578212738,
-       0.00010750644287327304
-      ],
-      [
-       1.409999966621399,
-       4.078000116348266,
-       0.19300000369548798
-      ]
-     ],
-     "obstacle_box_m": [
-      [
-       0.6378399729728699,
-       3.767840176820755,
-       0.029999999329447746
-      ],
-      [
-       1.1621599793434143,
-       4.332160204648972,
-       0.22499999403953552
-      ]
-     ],
-     "owner": "source_0588",
-     "contact": false,
-     "triangle_pairs": 0,
-     "nearest_m": 0.07767249643802643,
+     "nearest_from_moving_m": 0.07704922556877136,
+     "nearest_from_obstacle_m": 0.07767261564731598,
+     "touching": false,
      "one_box_inside_the_other": false
     },
     {
@@ -11691,126 +12793,9 @@
      "contact": false,
      "triangle_pairs": 0,
      "nearest_m": 0.08030052483081818,
-     "one_box_inside_the_other": false
-    },
-    {
-     "moving": "OP030C__source_0576_m0050_p01",
-     "obstacle": "source_0705_m0132_p04",
-     "box_gap_m": -0.06039249322930118,
-     "box_depth_m": 0.06039249322930118,
-     "box_overlap_xyz_m": [
-      0.2775513529777527,
-      0.29800029397010785,
-      0.02499999850988388
-     ],
-     "moving_box_m": [
-      [
-       0.6499999761581421,
-       2.6300001323223112,
-       0.03550000116229057
-      ],
-      [
-       1.149999976158142,
-       3.1700001537799833,
-       0.060499999672174454
-      ]
-     ],
-     "obstacle_box_m": [
-      [
-       0.8724486231803894,
-       2.8719998598098755,
-       0.00010750644287327304
-      ],
-      [
-       1.409999966621399,
-       4.827549397945404,
-       0.19300000369548798
-      ]
-     ],
-     "owner": "source_0705",
-     "contact": false,
-     "triangle_pairs": 0,
-     "nearest_m": 0.08665772527456284,
-     "one_box_inside_the_other": false
-    },
-    {
-     "moving": "OP030C__source_0693_m0120_p01",
-     "obstacle": "source_0599_m0059_p00",
-     "box_gap_m": 0.011199474334716797,
-     "box_depth_m": 0.0,
-     "box_overlap_xyz_m": [
-      -0.011199474334716797,
-      0.440000057220459,
-      0.637499988079071
-     ],
-     "moving_box_m": [
-      [
-       1.3990000486373901,
-       3.8300002098083494,
-       -0.032999999821186066
-      ],
-      [
-       1.8359999656677246,
-       4.270000267028808,
-       0.637499988079071
-      ]
-     ],
-     "obstacle_box_m": [
-      [
-       1.8471994400024414,
-       3.5749999284744263,
-       0.0
-      ],
-      [
-       2.2899999618530273,
-       4.524999901652336,
-       1.2599999904632568
-      ]
-     ],
-     "owner": "source_0599",
-     "contact": false,
-     "triangle_pairs": 0,
-     "nearest_m": 0.08754215389490128,
-     "one_box_inside_the_other": false
-    },
-    {
-     "moving": "OP030C__source_0576_m0050_p03",
-     "obstacle": "Split_bay_2__source_0780_m0207_p03",
-     "box_gap_m": -0.02799999713897705,
-     "box_depth_m": 0.02799999713897705,
-     "box_overlap_xyz_m": [
-      0.5243200063705444,
-      0.39215986132621783,
-      0.02799999713897705
-     ],
-     "moving_box_m": [
-      [
-       0.6378399729728699,
-       2.617840129137039,
-       0.029999999329447746
-      ],
-      [
-       1.1621599793434143,
-       3.1821601569652556,
-       0.22499999403953552
-      ]
-     ],
-     "obstacle_box_m": [
-      [
-       0.512499988079071,
-       1.1899999380111694,
-       0.19699999690055847
-      ],
-      [
-       1.4600000381469727,
-       3.009999990463257,
-       3.319999933242798
-      ]
-     ],
-     "owner": "Split_bay_2__source_0780_m0207_p03",
-     "contact": false,
-     "triangle_pairs": 0,
-     "nearest_m": 0.09112902730703354,
+     "nearest_from_moving_m": 0.08030052483081818,
+     "nearest_from_obstacle_m": 0.08030052483081818,
+     "touching": false,
      "one_box_inside_the_other": false
     }
    ]
