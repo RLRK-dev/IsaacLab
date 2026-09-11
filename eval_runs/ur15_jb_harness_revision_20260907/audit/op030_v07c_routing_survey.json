@@ -1,5 +1,5 @@
 {
- "observed_at": "2026-09-12T08:07:47.107931+09:00",
+ "observed_at": "2026-09-12T08:21:42.018647+09:00",
  "source": "analysis/op030_v07c_stagger_both_sides.blend",
  "source_sha256": "4e7c5b0d8b00b904c618dac757cf4c97c88de620898e7c7dcca0c3b0eb46ea51",
  "method": {
@@ -41,15 +41,17 @@
   "crossing_m": 0.1,
   "crossing_measured": "segment to segment, so the gap does not depend on the step",
   "co_run_limits_m": [
-   0.003,
    0.01,
+   0.03,
    0.056
-  ]
+  ],
+  "centre_line_noise_m": 0.01
  },
  "what_this_does_not_give": [
   "the cable's allowed bend radius, which belongs to the real cable",
   "the bend radius the model already uses: measured and found not measurable",
   "clearance at the terminations, which is contact by design and is trimmed away",
+  "a co-run tighter than 0.01 m, which is inside the centre line's own wander",
   "support pitch and fixing points",
   "required separation from other services",
   "the pipe inside the air hardware's boxes"
@@ -1007,24 +1009,73 @@
    "second_length_m": 2.7946707184994906,
    "co_run": [
     {
-     "within_m": 0.003,
-     "extent_m": 0.07977381794988503,
-     "from_m": 2.5669666906371424,
-     "to_m": 2.5669666906371424,
+     "within_m": 0.01,
+     "below_centre_line_noise": false,
+     "points_inside": 5,
+     "span_count": 4,
+     "extent_m": 0.33953324342318614,
+     "spans": [
+      {
+       "from_m": 1.938180860428544,
+       "to_m": 1.938180860428544,
+       "points": 1
+      },
+      {
+       "from_m": 2.419445854967908,
+       "to_m": 2.419445854967908,
+       "points": 1
+      },
+      {
+       "from_m": 2.5669666906371424,
+       "to_m": 2.606610104069601,
+       "points": 2
+      },
+      {
+       "from_m": 2.726253743020023,
+       "to_m": 2.726253743020023,
+       "points": 1
+      }
+     ],
      "closest_m": 0.00033135399484541145
     },
     {
-     "within_m": 0.01,
-     "extent_m": 0.33953324342318614,
-     "from_m": 1.938180860428544,
-     "to_m": 2.726253743020023,
+     "within_m": 0.03,
+     "below_centre_line_noise": false,
+     "points_inside": 11,
+     "span_count": 2,
+     "extent_m": 0.4911420949749179,
+     "spans": [
+      {
+       "from_m": 1.938180860428544,
+       "to_m": 1.938180860428544,
+       "points": 1
+      },
+      {
+       "from_m": 2.419445854967908,
+       "to_m": 2.764312969226293,
+       "points": 10
+      }
+     ],
      "closest_m": 0.00033135399484541145
     },
     {
      "within_m": 0.056,
+     "below_centre_line_noise": false,
+     "points_inside": 14,
+     "span_count": 2,
      "extent_m": 0.6018988593199202,
-     "from_m": 1.8998153788207919,
-     "to_m": 2.764312969226293,
+     "spans": [
+      {
+       "from_m": 1.8998153788207919,
+       "to_m": 1.9770886315396157,
+       "points": 3
+      },
+      {
+       "from_m": 2.386928682545028,
+       "to_m": 2.764312969226293,
+       "points": 11
+      }
+     ],
      "closest_m": 0.00033135399484541145
     }
    ]
@@ -1046,24 +1097,48 @@
    "second_length_m": 2.794670660158064,
    "co_run": [
     {
-     "within_m": 0.003,
-     "extent_m": 0.4787838348533082,
-     "from_m": 0.5807733639213556,
-     "to_m": 0.9796297666728555,
+     "within_m": 0.01,
+     "below_centre_line_noise": false,
+     "points_inside": 13,
+     "span_count": 1,
+     "extent_m": 0.5589351367170835,
+     "spans": [
+      {
+       "from_m": 0.540836311020934,
+       "to_m": 1.0196201458742422,
+       "points": 13
+      }
+     ],
      "closest_m": 0.0009225161343814332
     },
     {
-     "within_m": 0.01,
-     "extent_m": 0.5589351367170835,
-     "from_m": 0.540836311020934,
-     "to_m": 1.0196201458742422,
+     "within_m": 0.03,
+     "below_centre_line_noise": false,
+     "points_inside": 17,
+     "span_count": 1,
+     "extent_m": 0.7192048604856884,
+     "spans": [
+      {
+       "from_m": 0.46089938192864993,
+       "to_m": 1.0999273111531034,
+       "points": 17
+      }
+     ],
      "closest_m": 0.0009225161343814332
     },
     {
      "within_m": 0.056,
+     "below_centre_line_noise": false,
+     "points_inside": 19,
+     "span_count": 1,
      "extent_m": 0.7990736780777571,
-     "from_m": 0.4210929901395886,
-     "to_m": 1.140297850625277,
+     "spans": [
+      {
+       "from_m": 0.4210929901395886,
+       "to_m": 1.140297850625277,
+       "points": 19
+      }
+     ],
      "closest_m": 0.0009225161343814332
     }
    ]
