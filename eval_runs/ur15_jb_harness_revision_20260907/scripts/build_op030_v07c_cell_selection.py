@@ -23,6 +23,10 @@ and ``OP030C__<source>`` on C.
 
 The manifest is local working material and is not in Git. A missing or different file stops the run.
 
+Each cell's set is also checked against the 76 objects v06 kept in place. Work 3 takes the
+closure at the cell, so the check covers the extras that closure brings in -- the cell's own
+tools -- not only the objects matched by name.
+
 Run: ``blender --background --python scripts/build_op030_v07c_cell_selection.py``
 
 Read-only. The scene is never saved and world transforms are compared before and after.
@@ -169,12 +173,21 @@ def main() -> None:
                 missing.append(dict(template=name, expected=prefix + source_of(name)))
             else:
                 found.append(counterpart)
+        names = {obj.name for obj in found}
+        shape = structure(names)
+        # Work 3 takes the closure at each cell, so the extras it brings are part of the set
+        # that must stay clear of the objects v06 kept in place.
+        covered = names | set(shape["closure_brings_extra"])
+        overlap = sorted(covered & fixed)
         targets[label] = dict(
             prefix=prefix or "(unprefixed original)",
             matched_count=len(found),
             missing_count=len(missing),
             missing=missing,
-            structure=structure({obj.name for obj in found}),
+            structure=shape,
+            closure_covered_count=len(covered),
+            disjoint_from_fixed=not overlap,
+            overlap_with_fixed=overlap,
             selection=[describe(obj) for obj in found],
         )
 
@@ -211,7 +224,8 @@ def main() -> None:
     for label, row in targets.items():
         print(
             f"  {label}: matched={row['matched_count']} missing={row['missing_count']} "
-            f"roots={row['structure']['root_count']} closure={row['structure']['closure_matches_selection']}"
+            f"roots={row['structure']['root_count']} closure={row['structure']['closure_matches_selection']} "
+            f"covered={row['closure_covered_count']} disjoint_from_fixed={row['disjoint_from_fixed']}"
         )
     print(f"report: {REPORT.relative_to(ROOT)}")
 

@@ -84,9 +84,25 @@ manifest op030_stagger_static_v06.json stagger_v06: roots=104 moved=420 fixed=76
 
 こうすればそのセル自身の工具が自動的に入り、B の工具は入らない。現在の `closure_brings_extra` がその工具であり、捨てずに使う。
 
-### 残っている確認
+### 残っている確認 — スクリプトに入れた。再実行が要る
 
-- **A と C の集合が固定側 76 個と重ならないこと。** 現スクリプトは A・C について根と閉包しか見ていない。B については `disjoint: True` を確認済み。
+**A と C の集合が固定側 76 個と重ならないこと。** `build_op030_v07c_cell_selection.py` に
+`disjoint_from_fixed` / `overlap_with_fixed` を追加した。作業3は各セルで閉包を取るので、
+名前で一致した集合だけでなく**閉包が連れてくる追加分（そのセル自身の工具）も含めて**照合する。
+
+A 側が危ないのは、A の名前が無印（`OP030B__<source>` → `<source>`）だからである。v06 が
+据え置いた 76 個に無印の搬送・治具が含まれていれば、そこで衝突する。B は `disjoint: True`
+を確認済みだが、それは A の保証にならない。
+
+再実行の手順（読取専用。native は開くだけ）:
+
+```
+rm analysis/op030_v07c_cell_selection.json
+blender --background --python scripts/build_op030_v07c_cell_selection.py
+```
+
+出力行の末尾に `disjoint_from_fixed=True` が A・C とも出れば通過。**False なら作業3へ進まない**。
+`overlap_with_fixed` に衝突したオブジェクト名が入るので、それを送ってください。
 
 ---
 
