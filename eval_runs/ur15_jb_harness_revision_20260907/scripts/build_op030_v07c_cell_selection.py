@@ -27,6 +27,10 @@ Each cell's set is also checked against the 76 objects v06 kept in place. Work 3
 closure at the cell, so the check covers the extras that closure brings in -- the cell's own
 tools -- not only the objects matched by name.
 
+Those 76 all carry B's prefix, so comparing them to A and C by name can only come back empty.
+The check that can fail is against each cell's own counterparts of them, mapped the same way
+the selection is, and both forms are reported.
+
 Run: ``blender --background --python scripts/build_op030_v07c_cell_selection.py``
 
 Read-only. The scene is never saved and world transforms are compared before and after.
@@ -178,7 +182,12 @@ def main() -> None:
         # Work 3 takes the closure at each cell, so the extras it brings are part of the set
         # that must stay clear of the objects v06 kept in place.
         covered = names | set(shape["closure_brings_extra"])
-        overlap = sorted(covered & fixed)
+        # Every fixed name carries B's prefix, so comparing them to A and C directly can only
+        # ever come back empty. The check that can fail is against each cell's counterparts of
+        # those objects, which is what the copies at that cell would collide with.
+        mapped = {prefix + source_of(name) for name in fixed if name.startswith(COPY_PREFIX)}
+        literal_overlap = sorted(covered & fixed)
+        mapped_overlap = sorted(covered & mapped)
         targets[label] = dict(
             prefix=prefix or "(unprefixed original)",
             matched_count=len(found),
@@ -186,8 +195,12 @@ def main() -> None:
             missing=missing,
             structure=shape,
             closure_covered_count=len(covered),
-            disjoint_from_fixed=not overlap,
-            overlap_with_fixed=overlap,
+            disjoint_from_fixed=not literal_overlap and not mapped_overlap,
+            overlap_with_fixed=literal_overlap,
+            fixed_mapped_count=len(mapped),
+            fixed_mapped_present=sum(name in bpy.data.objects for name in mapped),
+            fixed_unmappable=sorted(name for name in fixed if not name.startswith(COPY_PREFIX)),
+            overlap_with_fixed_mapped=mapped_overlap,
             selection=[describe(obj) for obj in found],
         )
 
@@ -225,7 +238,9 @@ def main() -> None:
         print(
             f"  {label}: matched={row['matched_count']} missing={row['missing_count']} "
             f"roots={row['structure']['root_count']} closure={row['structure']['closure_matches_selection']} "
-            f"covered={row['closure_covered_count']} disjoint_from_fixed={row['disjoint_from_fixed']}"
+            f"covered={row['closure_covered_count']} disjoint_from_fixed={row['disjoint_from_fixed']} "
+            f"(literal {len(row['overlap_with_fixed'])}, mapped {len(row['overlap_with_fixed_mapped'])} "
+            f"of {row['fixed_mapped_present']}/{row['fixed_mapped_count']} present)"
         )
     print(f"report: {REPORT.relative_to(ROOT)}")
 
