@@ -1,9 +1,9 @@
 {
- "observed_at": "2026-09-12T06:04:31.922906+09:00",
+ "observed_at": "2026-09-12T06:32:42.388333+09:00",
  "builder": "scripts/build_op030_v07c_stagger_both_sides.py",
- "builder_sha256": "e07fe4c70c21bb3ca73565f410b91f8ce40e476fac57afe9e8d2af891412856d",
+ "builder_sha256": "0a78e91562d1d1c3c59fb2270d5d9ca772f658c176d6d6daaab5de6abc0d2444",
  "output": "analysis/op030_v07c_stagger_both_sides.blend",
- "output_sha256": "2664bf541efdc081d9c4a9f718b080e380ded5cd14f55cd469589462949baec7",
+ "output_sha256": "4e7c5b0d8b00b904c618dac757cf4c97c88de620898e7c7dcca0c3b0eb46ea51",
  "stagger_both_sides": {
   "source": "analysis/op030_v07c_support_repair.blend",
   "source_sha256": "1091683a5d15072e46553b487a30d58a21050bf40515f0d09b9d4d879c01ecce",
@@ -11,8 +11,10 @@
    "selection": "analysis/op030_v07c_cell_selection.json",
    "selection_sha256": "8d09c9b1c3095249a1042bbae22c19db8864c8137dd5ff103983ba7b3909a90f",
    "selection_observed_at": "2026-09-12T03:22:05.411241+09:00",
-   "manifest": "audit/op030_stagger_static_v06.json",
-   "manifest_sha256": "bc82917686f8292bf081bdefa2922dbc6851733552eea390c1b725c2cd8b9f8f"
+   "relocation": "analysis/op030_v06_relocation_selection.json",
+   "relocation_sha256": "50214dc1e08831108e2f1df00819f4c897079110e03b17db62fa7f2f1d75e448",
+   "local_manifest_present": true,
+   "local_manifest_agrees": true
   },
   "scope": "Three mirrored cell copies onto S1R, S2L and S3R; nothing existing is moved",
   "moving_set_rule": "work 1 selection plus the cell's own supply by prefix; line hardware stays",
@@ -30,10 +32,78 @@
     "requested": 300,
     "duplicated": 300,
     "not_in_scene": [],
+    "rebased_roots": 7,
+    "rebased_animated": 0,
+    "rebased": [
+     {
+      "copy": "OP030_S1R__OP030_air_service_connections",
+      "source": "OP030_air_service_connections",
+      "source_parent": "OP030A_cell",
+      "animated": false
+     },
+     {
+      "copy": "OP030_S1R__source_0576",
+      "source": "source_0576",
+      "source_parent": "OP030A_cell",
+      "animated": false
+     },
+     {
+      "copy": "OP030_S1R__source_0688",
+      "source": "source_0688",
+      "source_parent": "OP030A_cell",
+      "animated": false
+     },
+     {
+      "copy": "OP030_S1R__source_0689",
+      "source": "source_0689",
+      "source_parent": "OP030A_cell",
+      "animated": false
+     },
+     {
+      "copy": "OP030_S1R__source_0690",
+      "source": "source_0690",
+      "source_parent": "OP030A_cell",
+      "animated": false
+     },
+     {
+      "copy": "OP030_S1R__source_0693",
+      "source": "source_0693",
+      "source_parent": "OP030A_cell",
+      "animated": false
+     },
+     {
+      "copy": "OP030_S1R__source_0694",
+      "source": "source_0694",
+      "source_parent": "OP030A_cell",
+      "animated": false
+     }
+    ],
     "placement": {
+     "frames_checked": [
+      1,
+      7031,
+      14062
+     ],
+     "per_frame": [
+      {
+       "frame": 1,
+       "worst_placed": "OP030_S1R__OP030A_feeder_M4",
+       "worst_placement_error_m": 2.384185791015625e-07
+      },
+      {
+       "frame": 7031,
+       "worst_placed": "OP030_S1R__OP030A_feeder_M4",
+       "worst_placement_error_m": 2.384185791015625e-07
+      },
+      {
+       "frame": 14062,
+       "worst_placed": "OP030_S1R__OP030A_feeder_M4_UID001",
+       "worst_placement_error_m": 2.682209014892578e-07
+      }
+     ],
      "copy_count": 300,
-     "worst_placement_error_m": 5.066394805908203e-07,
-     "worst_placed": "OP030_S1R__source_1051",
+     "worst_placement_error_m": 2.682209014892578e-07,
+     "worst_placed": "OP030_S1R__OP030A_feeder_M4_UID001",
      "within_single_precision_rounding": true,
      "single_precision_step_m": 4.76837158203125e-07,
      "determinant": 1.0
@@ -352,10 +422,132 @@
     "requested": 420,
     "duplicated": 420,
     "not_in_scene": [],
+    "rebased_roots": 16,
+    "rebased_animated": 1,
+    "rebased": [
+     {
+      "copy": "OP030_S2L__OP030B__OP030_air_service_connections",
+      "source": "OP030B__OP030_air_service_connections",
+      "source_parent": "OP030B_robot_supply_stagger_root",
+      "animated": false
+     },
+     {
+      "copy": "OP030_S2L__OP030B__source_0576",
+      "source": "OP030B__source_0576",
+      "source_parent": "OP030B_robot_supply_stagger_root",
+      "animated": false
+     },
+     {
+      "copy": "OP030_S2L__OP030B__source_0688",
+      "source": "OP030B__source_0688",
+      "source_parent": "OP030B_robot_supply_stagger_root",
+      "animated": false
+     },
+     {
+      "copy": "OP030_S2L__OP030B__source_0689",
+      "source": "OP030B__source_0689",
+      "source_parent": "OP030B_robot_supply_stagger_root",
+      "animated": false
+     },
+     {
+      "copy": "OP030_S2L__OP030B__source_0690",
+      "source": "OP030B__source_0690",
+      "source_parent": "OP030B_robot_supply_stagger_root",
+      "animated": false
+     },
+     {
+      "copy": "OP030_S2L__OP030B__source_0693",
+      "source": "OP030B__source_0693",
+      "source_parent": "OP030B_robot_supply_stagger_root",
+      "animated": false
+     },
+     {
+      "copy": "OP030_S2L__OP030B__source_0694",
+      "source": "OP030B__source_0694",
+      "source_parent": "OP030B_robot_supply_stagger_root",
+      "animated": false
+     },
+     {
+      "copy": "OP030_S2L__OP030B_air_service_support_v04_cross_x",
+      "source": "OP030B_air_service_support_v04_cross_x",
+      "source_parent": "OP030B_robot_supply_stagger_root",
+      "animated": false
+     },
+     {
+      "copy": "OP030_S2L__OP030B_air_service_support_v04_cross_y",
+      "source": "OP030B_air_service_support_v04_cross_y",
+      "source_parent": "OP030B_robot_supply_stagger_root",
+      "animated": false
+     },
+     {
+      "copy": "OP030_S2L__OP030B_air_service_support_v04_vertical",
+      "source": "OP030B_air_service_support_v04_vertical",
+      "source_parent": "OP030B_robot_supply_stagger_root",
+      "animated": false
+     },
+     {
+      "copy": "OP030_S2L__OP030B_wire_supply_drawer",
+      "source": "OP030B_wire_supply_drawer",
+      "source_parent": "OP030B_robot_supply_stagger_root",
+      "animated": true
+     },
+     {
+      "copy": "OP030_S2L__OP030B_wire_supply_fixed",
+      "source": "OP030B_wire_supply_fixed",
+      "source_parent": "OP030B_robot_supply_stagger_root",
+      "animated": false
+     },
+     {
+      "copy": "OP030_S2L__Split_bay_1__source_0783_m0210_p00",
+      "source": "Split_bay_1__source_0783_m0210_p00",
+      "source_parent": "OP030B_robot_supply_stagger_root",
+      "animated": false
+     },
+     {
+      "copy": "OP030_S2L__Split_bay_1__source_0783_m0210_p01",
+      "source": "Split_bay_1__source_0783_m0210_p01",
+      "source_parent": "OP030B_robot_supply_stagger_root",
+      "animated": false
+     },
+     {
+      "copy": "OP030_S2L__Split_bay_1__source_0783_m0210_p02",
+      "source": "Split_bay_1__source_0783_m0210_p02",
+      "source_parent": "OP030B_robot_supply_stagger_root",
+      "animated": false
+     },
+     {
+      "copy": "OP030_S2L__Split_bay_1__source_0783_m0210_p03",
+      "source": "Split_bay_1__source_0783_m0210_p03",
+      "source_parent": "OP030B_robot_supply_stagger_root",
+      "animated": false
+     }
+    ],
     "placement": {
+     "frames_checked": [
+      1,
+      7031,
+      14062
+     ],
+     "per_frame": [
+      {
+       "frame": 1,
+       "worst_placed": "OP030_S2L__OP030B_wire_supply__OP030_supply_actuator_kit_clevis",
+       "worst_placement_error_m": 3.5762786865234375e-07
+      },
+      {
+       "frame": 7031,
+       "worst_placed": "OP030_S2L__OP030B__source_1052",
+       "worst_placement_error_m": 2.384185791015625e-07
+      },
+      {
+       "frame": 14062,
+       "worst_placed": "OP030_S2L__OP030B_wire_supply__OP030_supply_actuator_kit_clevis",
+       "worst_placement_error_m": 3.5762786865234375e-07
+      }
+     ],
      "copy_count": 420,
-     "worst_placement_error_m": 4.76837158203125e-07,
-     "worst_placed": "OP030_S2L__OP030B__OP030_air_service_connections_stocker_mount",
+     "worst_placement_error_m": 3.5762786865234375e-07,
+     "worst_placed": "OP030_S2L__OP030B_wire_supply__OP030_supply_actuator_kit_clevis",
      "within_single_precision_rounding": true,
      "single_precision_step_m": 4.76837158203125e-07,
      "determinant": 1.0
@@ -794,10 +986,78 @@
     "requested": 354,
     "duplicated": 354,
     "not_in_scene": [],
+    "rebased_roots": 7,
+    "rebased_animated": 0,
+    "rebased": [
+     {
+      "copy": "OP030_S3R__OP030C__OP030_air_service_connections",
+      "source": "OP030C__OP030_air_service_connections",
+      "source_parent": "OP030C_cell",
+      "animated": false
+     },
+     {
+      "copy": "OP030_S3R__OP030C__source_0576",
+      "source": "OP030C__source_0576",
+      "source_parent": "OP030C_cell",
+      "animated": false
+     },
+     {
+      "copy": "OP030_S3R__OP030C__source_0688",
+      "source": "OP030C__source_0688",
+      "source_parent": "OP030C_cell",
+      "animated": false
+     },
+     {
+      "copy": "OP030_S3R__OP030C__source_0689",
+      "source": "OP030C__source_0689",
+      "source_parent": "OP030C_cell",
+      "animated": false
+     },
+     {
+      "copy": "OP030_S3R__OP030C__source_0690",
+      "source": "OP030C__source_0690",
+      "source_parent": "OP030C_cell",
+      "animated": false
+     },
+     {
+      "copy": "OP030_S3R__OP030C__source_0693",
+      "source": "OP030C__source_0693",
+      "source_parent": "OP030C_cell",
+      "animated": false
+     },
+     {
+      "copy": "OP030_S3R__OP030C__source_0694",
+      "source": "OP030C__source_0694",
+      "source_parent": "OP030C_cell",
+      "animated": false
+     }
+    ],
     "placement": {
+     "frames_checked": [
+      1,
+      7031,
+      14062
+     ],
+     "per_frame": [
+      {
+       "frame": 1,
+       "worst_placed": "OP030_S3R__OP030C__source_0689",
+       "worst_placement_error_m": 4.76837158203125e-07
+      },
+      {
+       "frame": 7031,
+       "worst_placed": "OP030_S3R__OP030C__source_0689",
+       "worst_placement_error_m": 4.76837158203125e-07
+      },
+      {
+       "frame": 14062,
+       "worst_placed": "OP030_S3R__OP030C__source_0689",
+       "worst_placement_error_m": 4.76837158203125e-07
+      }
+     ],
      "copy_count": 354,
-     "worst_placement_error_m": 4.021447637114761e-07,
-     "worst_placed": "OP030_S3R__OP030C__OP030_air_service_connections",
+     "worst_placement_error_m": 4.76837158203125e-07,
+     "worst_placed": "OP030_S3R__OP030C__source_0689",
      "within_single_precision_rounding": true,
      "single_precision_step_m": 4.76837158203125e-07,
      "determinant": 1.0
