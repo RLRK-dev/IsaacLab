@@ -1,5 +1,5 @@
 {
- "observed_at": "2026-09-12T07:58:51.662838+09:00",
+ "observed_at": "2026-09-12T08:07:47.107931+09:00",
  "source": "analysis/op030_v07c_stagger_both_sides.blend",
  "source_sha256": "4e7c5b0d8b00b904c618dac757cf4c97c88de620898e7c7dcca0c3b0eb46ea51",
  "method": {
@@ -39,7 +39,12 @@
   },
   "neighbourhood_m": 0.5,
   "crossing_m": 0.1,
-  "crossing_measured": "segment to segment, so the gap does not depend on the step"
+  "crossing_measured": "segment to segment, so the gap does not depend on the step",
+  "co_run_limits_m": [
+   0.003,
+   0.01,
+   0.056
+  ]
  },
  "what_this_does_not_give": [
   "the cable's allowed bend radius, which belongs to the real cable",
@@ -68,7 +73,7 @@
     ]
    ],
    "centre_line_points": 74,
-   "run_length_m": 2.8007975248011125,
+   "run_length_m": 2.800797524801114,
    "ends": {
     "start_m": [
      1.399012126861353,
@@ -192,7 +197,7 @@
     ]
    ],
    "centre_line_points": 74,
-   "run_length_m": 2.8007975248011214,
+   "run_length_m": 2.8007975248011223,
    "ends": {
     "start_m": [
      1.3990118765337662,
@@ -254,7 +259,7 @@
     ]
    ],
    "centre_line_points": 74,
-   "run_length_m": 2.800797524801121,
+   "run_length_m": 2.800797524801122,
    "ends": {
     "start_m": [
      -1.3990119726988122,
@@ -316,7 +321,7 @@
     ]
    ],
    "centre_line_points": 74,
-   "run_length_m": 2.8007975248011205,
+   "run_length_m": 2.800797524801121,
    "ends": {
     "start_m": [
      1.39901227867853,
@@ -378,7 +383,7 @@
     ]
    ],
    "centre_line_points": 74,
-   "run_length_m": 2.8007974789164454,
+   "run_length_m": 2.8007974789164445,
    "ends": {
     "start_m": [
      -1.399012126861353,
@@ -440,7 +445,7 @@
     ]
    ],
    "centre_line_points": 74,
-   "run_length_m": 2.79467071849949,
+   "run_length_m": 2.7946707184994906,
    "ends": {
     "start_m": [
      1.3988106293406801,
@@ -502,7 +507,7 @@
     ]
    ],
    "centre_line_points": 74,
-   "run_length_m": 2.8007975248011117,
+   "run_length_m": 2.8007975248011125,
    "ends": {
     "start_m": [
      -1.399012126861353,
@@ -564,7 +569,7 @@
     ]
    ],
    "centre_line_points": 74,
-   "run_length_m": 2.7946706601580638,
+   "run_length_m": 2.794670660158064,
    "ends": {
     "start_m": [
      1.3988106293406801,
@@ -626,7 +631,7 @@
     ]
    ],
    "centre_line_points": 74,
-   "run_length_m": 2.8007975138002412,
+   "run_length_m": 2.8007975138002417,
    "ends": {
     "start_m": [
      -1.399012126861353,
@@ -688,7 +693,7 @@
     ]
    ],
    "centre_line_points": 74,
-   "run_length_m": 2.794670639008654,
+   "run_length_m": 2.7946706390086544,
    "ends": {
     "start_m": [
      1.3988106293406801,
@@ -750,7 +755,7 @@
     ]
    ],
    "centre_line_points": 74,
-   "run_length_m": 2.800797618216206,
+   "run_length_m": 2.800797618216205,
    "ends": {
     "start_m": [
      -1.399012126861353,
@@ -812,7 +817,7 @@
     ]
    ],
    "centre_line_points": 74,
-   "run_length_m": 2.7946707008589526,
+   "run_length_m": 2.794670700858952,
    "ends": {
     "start_m": [
      1.3988106293406801,
@@ -936,7 +941,7 @@
     ]
    ],
    "centre_line_points": 74,
-   "run_length_m": 2.7946704835785674,
+   "run_length_m": 2.7946704835785687,
    "ends": {
     "start_m": [
      1.3988106293406801,
@@ -999,7 +1004,30 @@
    "along_first_m": 2.568370311630682,
    "along_second_m": 2.5842772181964637,
    "first_length_m": 2.8007975248011223,
-   "second_length_m": 2.7946707184994906
+   "second_length_m": 2.7946707184994906,
+   "co_run": [
+    {
+     "within_m": 0.003,
+     "extent_m": 0.07977381794988503,
+     "from_m": 2.5669666906371424,
+     "to_m": 2.5669666906371424,
+     "closest_m": 0.00033135399484541145
+    },
+    {
+     "within_m": 0.01,
+     "extent_m": 0.33953324342318614,
+     "from_m": 1.938180860428544,
+     "to_m": 2.726253743020023,
+     "closest_m": 0.00033135399484541145
+    },
+    {
+     "within_m": 0.056,
+     "extent_m": 0.6018988593199202,
+     "from_m": 1.8998153788207919,
+     "to_m": 2.764312969226293,
+     "closest_m": 0.00033135399484541145
+    }
+   ]
   },
   {
    "runs": [
@@ -1015,7 +1043,30 @@
    "along_first_m": 0.950227638602902,
    "along_second_m": 0.603644195221678,
    "first_length_m": 2.800797524801121,
-   "second_length_m": 2.794670660158064
+   "second_length_m": 2.794670660158064,
+   "co_run": [
+    {
+     "within_m": 0.003,
+     "extent_m": 0.4787838348533082,
+     "from_m": 0.5807733639213556,
+     "to_m": 0.9796297666728555,
+     "closest_m": 0.0009225161343814332
+    },
+    {
+     "within_m": 0.01,
+     "extent_m": 0.5589351367170835,
+     "from_m": 0.540836311020934,
+     "to_m": 1.0196201458742422,
+     "closest_m": 0.0009225161343814332
+    },
+    {
+     "within_m": 0.056,
+     "extent_m": 0.7990736780777571,
+     "from_m": 0.4210929901395886,
+     "to_m": 1.140297850625277,
+     "closest_m": 0.0009225161343814332
+    }
+   ]
   }
  ],
  "air_hardware_count": 12,
