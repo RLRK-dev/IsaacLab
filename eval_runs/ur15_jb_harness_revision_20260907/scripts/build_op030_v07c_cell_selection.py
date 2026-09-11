@@ -11,17 +11,17 @@ of the scene were tried and both missed:
   the cell subtree; ``build_op030_stagger_static_v06.py`` re-parented curated roots away from
   it, and four of them were never cell children at all.
 * ``descendants(OP030B_robot_supply_stagger_root)`` gave 125 with only 16 direct children
-  against the 108 roots v06 parented there. The delivered native is several steps past that
+  against the 104 roots v06 parented there. The delivered native is several steps past that
   candidate -- support repair, air clearance, then a portable rebake -- and the hierarchy no
   longer matches.
 
-The selection does not need inferring. v06 read it from
-``analysis/op040_stagger_layout_inventory.json`` and recorded that file's SHA alongside the
-result. This reads the same key, checks it against the scene, and maps each member to its A
-and C counterpart through the naming ``duplicate_set`` established: ``OP030B__<source>``
-corresponds to ``<source>`` on A and ``OP030C__<source>`` on C.
+The selection does not need inferring. v06 wrote its final lists, after appending the four air
+drops, to the ``stagger_v06`` key of ``audit/op030_stagger_static_v06.json``. This reads that
+key, checks it against the scene, and maps each member to its A and C counterpart through the
+naming ``duplicate_set`` established: ``OP030B__<source>`` corresponds to ``<source>`` on A
+and ``OP030C__<source>`` on C.
 
-The inventory is local working material and is not in Git. A missing file stops the run.
+The manifest is local working material and is not in Git. A missing or different file stops the run.
 
 Run: ``blender --background --python scripts/build_op030_v07c_cell_selection.py``
 
@@ -44,7 +44,8 @@ from op030_split_layout import descendants  # noqa: E402
 
 SOURCE = ROOT / "UR15_JB_OP030_split_v06.blend"
 SOURCE_SHA = "e65bef607c1d29671fc982d14d72d4c2694420edd284378cb2f1445f18f354ed"
-INVENTORY = ROOT / "analysis/op040_stagger_layout_inventory.json"
+MANIFEST = ROOT / "audit/op030_stagger_static_v06.json"
+MANIFEST_SHA = "bc82917686f8292bf081bdefa2922dbc6851733552eea390c1b725c2cd8b9f8f"
 REPORT = ROOT / "analysis/op030_v07c_cell_selection.json"
 
 # The air drops v06 appended to the inventory roots before relocating.
@@ -106,14 +107,15 @@ def transforms() -> dict[str, list]:
 def main() -> None:
     """Write v06's selection, its per-cell counterparts, and what has no counterpart."""
     assert digest(SOURCE) == SOURCE_SHA, "Read the delivered v06 native"
-    assert INVENTORY.exists(), f"Local working material missing: {INVENTORY}"
+    assert MANIFEST.exists(), f"Local working material missing: {MANIFEST}"
+    assert digest(MANIFEST) == MANIFEST_SHA, "Read the v06 static manifest"
     assert not REPORT.exists(), "Preserve the existing selection"
-    inventory = json.loads(INVENTORY.read_text())
-    selection = inventory["B_candidate_exact_selection"]
-    # v06 appended the drops to the inventory roots before counting 104.
-    roots = list(selection["move_rigid_subtree_roots"]) + DROPS
-    moved = set(selection["all_selected_object_names"]) | set(DROPS)
-    fixed = set(selection["all_kept_conveyor_fixture_objects"])
+    binding = json.loads(MANIFEST.read_text())["stagger_v06"]
+    # v06 recorded the drops inside these lists already, so nothing is appended here.
+    assert binding["added_drop_meshes"] == DROPS, "Unexpected drop list in the manifest"
+    roots = list(binding["moved_roots"])
+    moved = set(binding["moved_objects"])
+    fixed = set(binding["fixed_line_objects"])
 
     bpy.ops.wm.open_mainfile(filepath=str(SOURCE))
     bpy.context.scene.frame_set(1)
@@ -128,8 +130,9 @@ def main() -> None:
     group_members = {o.name for o in descendants(group) if o is not group} if group else set()
 
     source = dict(
-        inventory=str(INVENTORY.relative_to(ROOT)),
-        inventory_sha256=digest(INVENTORY),
+        manifest=str(MANIFEST.relative_to(ROOT)),
+        manifest_sha256=MANIFEST_SHA,
+        moved_listed=len(binding["moved_objects"]),
         root_count=len(roots),
         moved_count=len(moved),
         fixed_count=len(fixed),
@@ -200,7 +203,7 @@ def main() -> None:
         )
     )
     assert unchanged, "The mapping must not move anything"
-    print(f"inventory {INVENTORY.name}: roots={len(roots)} moved={len(moved)} fixed={len(fixed)}")
+    print(f"manifest {MANIFEST.name} stagger_v06: roots={len(roots)} moved={len(moved)} fixed={len(fixed)}")
     print(f"  matches v06 counts (104/420/76): {source['matches_v06_counts']}")
     print(f"  present in native: {len(present)} / {len(moved)}  disjoint: {source['moved_disjoint_from_fixed']}")
     print(f"  by kind: {source['counts_by_kind']}")
