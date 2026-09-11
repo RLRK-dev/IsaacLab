@@ -55,7 +55,7 @@ manifest op030_stagger_static_v06.json stagger_v06: roots=104 moved=420 fixed=76
 
 ### `missing` と `closure=False` はエンドエフェクタの違いである
 
-異常ではない。v06 の工程・部品確認書 v06 の 3ST 表が、セルごとに工具構成が違うと記録している。
+異常ではない。v06 の工程・部品確認書が、セルごとに工具構成が違うと記録している。
 
 | ST | 左腕 | 右腕 |
 |---|---|---|
@@ -194,7 +194,7 @@ manifest op030_stagger_static_v06.json stagger_v06: roots=104 moved=420 fixed=76
 - **設計は Rs 専権**。本ブランチの文書はすべて提案であり、acceptance を発明しない。
 - **正式な物理妥当性判定をしない。** 判定は VaultProtocol V12 の独立レビュー経路による。
 - **サイトの参照映像（v7、26.27 秒、`83ce966a…`）を設計根拠に使わない。**
-- リポジトリの pre-commit / ruff（line-length 120、E/W/F/I/UP/C90/SIM/RET）を通す。
+- リポジトリの pre-commit / ruff（line-length 120、E/W/F/I/UP/C90/SIM/RET）を通す。**codespell も走る。** 英数字の略語を単独の語として書くと誤検出されることがある。
 - 検査スクリプトは**読取専用**。シーンを保存せず、world 行列の前後一致を確認する。
 - 出力 JSON は既存があると止まる設計。新しいパスを使うか既存を退避する。**既存の出力は消さない。**
 - **マニフェスト（約 2.2 MB）と native は pre-commit の 2 MB 制限によりコミットできない。** 手元の資料として扱う。
