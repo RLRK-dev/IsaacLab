@@ -1,0 +1,13 @@
+{
+  "user_instruction_date": "2026-09-11",
+  "user_instruction": "今後はその1種類のみの動画生成にして",
+  "view": "process",
+  "variant": "review",
+  "filename_pattern": "*_split_process_*_review.mp4",
+  "generate_raw_mp4": false,
+  "generate_wide_video": false,
+  "downloads_video_types": 1,
+  "zip_video_types": 1,
+  "encoder": "scripts/encode_process_review_video.py",
+  "notes": "Render process PNG frames and encode them directly with the process labels. Native models and reproduction files remain separate deliverables. Earlier completed artifacts are historical observations."
+}

@@ -1,0 +1,1870 @@
+{
+  "observed_at": "2026-09-11T19:30:42.294305+09:00",
+  "status": "one_process_review_video_selected_browser_check_follows",
+  "basis": "Pinned final B and A/C banks; original 8674-native integration evidence inherited through strict camera-only delta; final saved native/prepared/shot hashes and document references",
+  "native_sha256": "e65bef607c1d29671fc982d14d72d4c2694420edd284378cb2f1445f18f354ed",
+  "static_native": {
+    "path": "analysis/op030_stagger_air_clearance_static_v06.blend",
+    "sha256": "0de256bcfa2c377ac3c5048d0ae2d3a88ae057e7b6dd501ae58da821530f46d6"
+  },
+  "static_manifest": {
+    "path": "audit/op030_stagger_air_clearance_static_v06.json",
+    "sha256": "cb0dd4d7bc7fef08b3b4b3132766898593efd41478ad4eb221e6a626a5407711"
+  },
+  "purpose": "Final-camera evidence selection; browser and copy/archive verification follow the frozen stage",
+  "final_native": {
+    "path": "UR15_JB_OP030_split_v06.blend",
+    "sha256": "e65bef607c1d29671fc982d14d72d4c2694420edd284378cb2f1445f18f354ed",
+    "frames": 14062,
+    "native_fps": 30,
+    "first_to_last_frame_duration_s": 468.7,
+    "audit": {
+      "path": "audit/op030_split_native_v06.json",
+      "sha256": "94131bdf7cd66352b3065d2402af649a589baceec75ebb0f24b837ae6b27e8c5"
+    },
+    "prepared_npz": {
+      "path": "data/op030_split_animation_v06.npz",
+      "sha256": "660d47df3dac122337e4ff82c3c4ce92c8e15ef3edf68dbc9dd9b24ed943f296"
+    },
+    "prepared_json": {
+      "path": "data/op030_split_animation_v06.json",
+      "sha256": "0327cf57bfb91b6437ba2ab9fec43f4ac1a04e0a1c4a6633c8b833dcbd63e897"
+    },
+    "shots": {
+      "path": "data/op030_split_shots_v06.json",
+      "sha256": "f2c13dae9cdec7a19856950733ec4dd892ce9cb8b879e8d7dc46d07f53bd3d49",
+      "count": 49
+    },
+    "detailed_phase_count": 160,
+    "native_readback": {
+      "frames": [
+        1,
+        38,
+        98,
+        121,
+        122,
+        210,
+        323,
+        345,
+        346,
+        355,
+        469,
+        487,
+        609,
+        610,
+        650,
+        781,
+        782,
+        898,
+        938,
+        979,
+        1056,
+        1090,
+        1147,
+        1282,
+        1283,
+        1381,
+        1407,
+        1450,
+        1510,
+        1511,
+        1540,
+        1600,
+        1660,
+        1720,
+        1750,
+        1751,
+        1829,
+        1875,
+        1908,
+        1909,
+        1938,
+        1991,
+        2103,
+        2220,
+        2247,
+        2248,
+        2277,
+        2322,
+        2337,
+        2338,
+        2344,
+        2345,
+        2367,
+        2390,
+        2397,
+        2398,
+        2457,
+        2517,
+        2518,
+        2547,
+        2607,
+        2667,
+        2697,
+        2698,
+        2727,
+        2813,
+        2817,
+        2877,
+        2878,
+        2907,
+        2960,
+        3073,
+        3163,
+        3164,
+        3174,
+        3212,
+        3269,
+        3281,
+        3307,
+        3329,
+        3344,
+        3345,
+        3435,
+        3606,
+        3746,
+        3750,
+        3851,
+        3986,
+        3987,
+        4103,
+        4184,
+        4219,
+        4260,
+        4294,
+        4351,
+        4486,
+        4487,
+        4576,
+        4577,
+        4584,
+        4606,
+        4629,
+        4636,
+        4637,
+        4688,
+        4696,
+        4756,
+        4757,
+        4786,
+        4846,
+        4906,
+        4966,
+        4996,
+        4997,
+        5056,
+        5116,
+        5117,
+        5146,
+        5156,
+        5199,
+        5311,
+        5428,
+        5455,
+        5456,
+        5485,
+        5530,
+        5545,
+        5546,
+        5553,
+        5575,
+        5598,
+        5605,
+        5606,
+        5625,
+        5665,
+        5725,
+        5726,
+        5755,
+        5815,
+        5875,
+        5905,
+        5906,
+        5935,
+        6025,
+        6085,
+        6086,
+        6094,
+        6115,
+        6168,
+        6281,
+        6371,
+        6372,
+        6382,
+        6420,
+        6477,
+        6515,
+        6537,
+        6552,
+        6553,
+        6562,
+        6612,
+        6753,
+        6872,
+        6924,
+        6939,
+        6940,
+        6947,
+        6969,
+        6992,
+        6999,
+        7000,
+        7031,
+        7059,
+        7119,
+        7120,
+        7149,
+        7209,
+        7269,
+        7299,
+        7300,
+        7329,
+        7419,
+        7495,
+        7500,
+        7510,
+        7511,
+        7532,
+        7644,
+        7757,
+        7779,
+        7780,
+        7794,
+        7810,
+        7811,
+        7917,
+        7968,
+        8063,
+        8115,
+        8175,
+        8227,
+        8235,
+        8242,
+        8250,
+        8257,
+        8265,
+        8272,
+        8280,
+        8287,
+        8295,
+        8303,
+        8310,
+        8318,
+        8325,
+        8333,
+        8340,
+        8348,
+        8355,
+        8363,
+        8370,
+        8378,
+        8382,
+        8383,
+        8386,
+        8393,
+        8401,
+        8408,
+        8416,
+        8423,
+        8431,
+        8437,
+        8438,
+        8446,
+        8453,
+        8461,
+        8469,
+        8476,
+        8484,
+        8491,
+        8499,
+        8506,
+        8514,
+        8521,
+        8529,
+        8536,
+        8544,
+        8619,
+        8711,
+        8715,
+        8719,
+        8723,
+        8727,
+        8731,
+        8735,
+        8739,
+        8756,
+        8767,
+        8776,
+        8781,
+        8784,
+        8785,
+        8844,
+        8906,
+        8949,
+        9009,
+        9018,
+        9027,
+        9031,
+        9035,
+        9039,
+        9041,
+        9072,
+        9077,
+        9081,
+        9099,
+        9114,
+        9115,
+        9129,
+        9189,
+        9249,
+        9375,
+        9420,
+        9678,
+        9679,
+        9680,
+        9843,
+        9889,
+        10035,
+        10087,
+        10147,
+        10201,
+        10209,
+        10217,
+        10226,
+        10234,
+        10242,
+        10250,
+        10259,
+        10267,
+        10275,
+        10283,
+        10292,
+        10300,
+        10308,
+        10312,
+        10316,
+        10325,
+        10333,
+        10341,
+        10349,
+        10358,
+        10366,
+        10372,
+        10373,
+        10374,
+        10382,
+        10391,
+        10399,
+        10407,
+        10415,
+        10424,
+        10432,
+        10440,
+        10448,
+        10457,
+        10465,
+        10473,
+        10481,
+        10490,
+        10498,
+        10506,
+        10514,
+        10523,
+        10531,
+        10539,
+        10547,
+        10626,
+        10705,
+        10709,
+        10717,
+        10722,
+        10739,
+        10746,
+        10748,
+        10752,
+        10757,
+        10761,
+        10765,
+        10774,
+        10778,
+        10781,
+        10782,
+        10786,
+        10791,
+        10792,
+        10851,
+        10956,
+        11025,
+        11046,
+        11051,
+        11060,
+        11064,
+        11068,
+        11081,
+        11106,
+        11121,
+        11122,
+        11136,
+        11196,
+        11249,
+        11256,
+        11388,
+        11536,
+        11566,
+        11567,
+        11588,
+        11700,
+        11718,
+        11813,
+        11835,
+        11836,
+        11868,
+        11961,
+        12070,
+        12187,
+        12209,
+        12327,
+        12385,
+        12476,
+        12569,
+        12655,
+        12723,
+        12908,
+        13038,
+        13124,
+        13153,
+        13292,
+        13410,
+        13468,
+        13566,
+        13593,
+        13696,
+        13880,
+        14002,
+        14003,
+        14032,
+        14062
+      ],
+      "max_error": 6.242837476966301e-07,
+      "failures": []
+    }
+  },
+  "mechanical_inheritance": {
+    "link": {
+      "path": "audit/op030_camera_delta_v06_evidence.json",
+      "sha256": "8c701fcca27ad7de59920f806db3585113f5df2028394934554044e6c9bf5762"
+    },
+    "original_native": {
+      "path": "/home/rlrk/IsaacLab/eval_runs/ur15_jb_harness_revision_20260907/analysis/op030_candidate_8674_v06/UR15_JB_OP030_split_v06.blend",
+      "sha256": "8674c2483ac1fe7e3dc42e6b1d14fdc4919f28818784de4f53f878477714d338"
+    },
+    "original_mechanical_evidence": {
+      "path": "/home/rlrk/IsaacLab/eval_runs/ur15_jb_harness_revision_20260907/analysis/op030_candidate_8674_v06/audit/op030_stagger_v06_integration_evidence.json",
+      "sha256": "3d54ace48a1440c06e11de2e08df67498f29572f3a707a56ed947cf64ea3c6fa"
+    },
+    "camera_delta": {
+      "path": "/home/rlrk/IsaacLab/eval_runs/ur15_jb_harness_revision_20260907/audit/op030_camera_delta_v06_final.json",
+      "sha256": "c5f069ddb1e4c83c3115c3ec8d7af3c7b9c032559a13fff1d625fc9e7dd92d54"
+    },
+    "checked_records": 64304,
+    "checked_arrays": 133316,
+    "strict_non_camera_equality": true,
+    "matrix_roundoff_only": [],
+    "collision_checks_reexecuted": false,
+    "raw_report_sha_pins_rewritten": false,
+    "relation": "The final native differs only in the two specified review-camera fits. The original 33 reports remain pinned to their original native and retain all raw contacts. Their unchanged mechanical data is inherited through this separate delta proof."
+  },
+  "video_plan": {
+    "status": "encoded_measured_and_full_decode_verified",
+    "views": 1,
+    "sample_count_per_view": 7031,
+    "fps": 15,
+    "planned_encoded_duration_s": 468.73333333333335,
+    "native_sample_frames": {
+      "first": 1,
+      "last": 14061,
+      "step": 2
+    },
+    "measured_duration_s": {
+      "UR15_JB_OP030_split_process_v06_review.mp4": 468.733333
+    },
+    "measured_video_sha256": {
+      "UR15_JB_OP030_split_process_v06_review.mp4": "2030ae0e6de5e53e90bc5f2a86977f65fcb6cf15bed62e1d391d4a2011f35004"
+    },
+    "qualification": "Saved encoder observations and unchanged file hashes; browser delivery is a separate gate",
+    "videos": {
+      "UR15_JB_OP030_split_process_v06_review.mp4": {
+        "sha256": "2030ae0e6de5e53e90bc5f2a86977f65fcb6cf15bed62e1d391d4a2011f35004",
+        "bytes": 45645168,
+        "duration_s": 468.733333,
+        "frames": 7031,
+        "fps": "15/1",
+        "width": 1280,
+        "height": 720,
+        "full_decode_exit_code": 0,
+        "full_black_intervals": []
+      }
+    },
+    "reports": {
+      "process": {
+        "path": "audit/UR15_JB_OP030_split_process_v06_video.json",
+        "sha256": "605ab5bb44e3df37a8a74221ea44700e05038264e2cc55a9bda2713595c17070"
+      }
+    }
+  },
+  "portable_execution": {
+    "path": "audit/op030_split_layout_portable_rebake_camera_final_v06.json",
+    "sha256": "e1183f85ad09d8d9a739285f2cca2aa8616b95caa17296463407948c9c5253b2",
+    "executed": true
+  },
+  "B_final": {
+    "bank": {
+      "path": "data/op030_split_b_stagger_motion_v06.npz",
+      "sha256": "41b353e220db025f432b06f384e9a256262fd9f76fa30b31da7353c4b5b4854d"
+    },
+    "report": {
+      "path": "audit/op030_split_b_stagger_motion_v06.json",
+      "sha256": "a59e4a9a72a212926fafeca7312d989fda5796d2bcbf11907c6f3c5a30561ac1"
+    },
+    "factory": "op030_split_b_stagger_v06:build_sequence_final",
+    "factory_sha256": "66fd737c7b71a33b18ea260e44c02b36cdac9fd320ff76fdadeaf2395904b258",
+    "frames": 3787,
+    "duration_s": 126.2,
+    "authored_duration_s": 101.0,
+    "phases": 33,
+    "physical_arm_assignment": {
+      "left": "J1",
+      "right": "T"
+    },
+    "normal_height_retained": true,
+    "bend_during_turn": true,
+    "simultaneous_grip_and_180mm_rise": true,
+    "all_native_frames_checked": true,
+    "original_fk_matrix_error": 1.3736504040317883e-08,
+    "moving_mesh_hit_frames": 0,
+    "speed_caps_pass": true,
+    "previous_v05_frames": 4551,
+    "previous_v05_duration_s": 151.66666666666666,
+    "animation_duration_reduction_s": 25.466666666666654,
+    "comparison_scope": "Complete saved standalone B animation banks, two cable pickups/placements/retreats; not hardware takt or mathematical path optimum"
+  },
+  "AC_air_delta": {
+    "path": "audit/op030_air_drop_ac_v06_completion.json",
+    "sha256": "eb1872562a8b3030aba993174f935e8c4ee82d7b9805163b1330db94b10aebc0",
+    "reports": [
+      {
+        "cell": "A",
+        "report": "audit/op030_air_drop_a_v06.json",
+        "report_sha256": "8dd858dff1eeba0070314aceaed78469ab3b2b3262ecc4fbea2e61ed695f1afe",
+        "frames": 7165,
+        "active_mesh_count": 623,
+        "minimum_swept_aabb_distance_m": 0.9989688862220261,
+        "candidate_background_names": [],
+        "collision_frames": 0,
+        "narrow_phase_queries": 0,
+        "inputs_unchanged": true
+      },
+      {
+        "cell": "C",
+        "report": "audit/op030_air_drop_c_v06.json",
+        "report_sha256": "6e56e669ad3fecfd154ecdca59a4c0bc56666cf11db29a3957bd75fa8f45e15c",
+        "frames": 2430,
+        "active_mesh_count": 175,
+        "minimum_swept_aabb_distance_m": 2.471703473374412,
+        "candidate_background_names": [],
+        "collision_frames": 0,
+        "narrow_phase_queries": 0,
+        "inputs_unchanged": true
+      }
+    ]
+  },
+  "evidence_paths": [
+    "audit/op030_support_delivery_v05.json",
+    "audit/op030_split_a_motion_v05.json",
+    "audit/op030_support_ascent_saved_v05.json",
+    "analysis/OP030_A_v05_同時上昇_確認.md",
+    "audit/op030_split_a_motion_v04.json",
+    "audit/op030_split_a_final_supported_v04_check.json",
+    "audit/op030_c_front_delivery_v05.json",
+    "audit/op030_c_front_final_mesh_v05.json",
+    "audit/op030_c_front_saved_identity_v05_02.json",
+    "audit/op030_c_front_indexed_replay_v05.json",
+    "analysis/OP030_C_v05_近接供給_同時締付_確認.md",
+    "audit/op030_c_front_feeders_v05_completion.json",
+    "audit/op030_c_front_feeders_v05_static_check.json",
+    "audit/op030_c_front_feeders_v05_readback.json",
+    "analysis/OP030_C_v05_供給器手前配置_確認.md",
+    "audit/op030_fixed_height_v05_readonly.json",
+    "audit/op030_height_version_v05_readonly.json",
+    "audit/op030_fixed_height_v04_completion.json",
+    "audit/op030_duct_support_trim_v04_contacts.json",
+    "audit/op030_downstream_park_v04_classification.json",
+    "audit/op030_split_wire_top_entry_geometry.json",
+    "audit/op030_split_top_entry_insertion_geometry.json",
+    "analysis/OP030_v06_scope.md",
+    "analysis/op030_stagger_static_v06_delta.md",
+    "audit/op030_stagger_static_v06_completion.json",
+    "audit/op030_stagger_static_v06_geometry.json",
+    "audit/op030_stagger_static_v06_raw_check.json",
+    "audit/op030_stagger_static_v06_readback.json",
+    "analysis/op030_stagger_static_v06_completion.md",
+    "analysis/op030_stagger_support_v06_scope.md",
+    "audit/op030_stagger_support_v06_components.json",
+    "audit/op030_stagger_supported_static_v06_completion.json",
+    "audit/op030_stagger_supported_static_v06_geometry.json",
+    "audit/op030_stagger_supported_static_v06_raw_check.json",
+    "audit/op030_stagger_supported_static_v06_readback.json",
+    "analysis/op030_stagger_supported_static_v06_completion.md",
+    "analysis/op030_air_drop_v06_scope.md",
+    "audit/op030_air_drop_v06_full_envelope.json",
+    "audit/op030_air_drop_v06_environment.json",
+    "audit/op030_air_drop_v06_candidate_03.json",
+    "audit/op030_stagger_air_clearance_static_v06_geometry.json",
+    "audit/op030_stagger_air_clearance_static_v06_completion.json",
+    "audit/op030_split_b_stagger_v06_completion.json",
+    "audit/op030_split_b_stagger_motion_v06.json",
+    "audit/op030_split_b_stagger_v06_identity_12.json",
+    "audit/op030_split_b_stagger_v06_connection_11.json",
+    "audit/op030_split_b_stagger_air_clearance_v06_meshes.json",
+    "analysis/op030_split_b_stagger_v06_reuse_contract.md",
+    "audit/op030_air_drop_ac_v06_completion.json",
+    "audit/op030_air_drop_a_v06.json",
+    "audit/op030_air_drop_c_v06.json",
+    "audit/op030_split_b_motion_v05.json",
+    "audit/op030_split_v04_prefill_installation_classified.json",
+    "analysis/op030_v06_portable_rebake_plan.json",
+    "analysis/op030_candidate_8674_v06/audit/op030_stagger_v06_integration_evidence.json",
+    "audit/op030_camera_delta_v06_final.json",
+    "audit/op030_camera_delta_v06_driver_names.json",
+    "analysis/op030_candidate_8674_v06/manifest.json",
+    "analysis/op030_candidate_8674_v06/recovered_observation_source_manifest.json",
+    "audit/op030_stagger_camera_v06_selection.json",
+    "audit/op030_camera_delta_v06_evidence.json",
+    "audit/op030_camera_delta_v06_evidence.md",
+    "analysis/op030_candidate_8674_v06/audit/op030_air_drop_a_v06.json",
+    "analysis/op030_candidate_8674_v06/audit/op030_air_drop_ac_v06_completion.json",
+    "analysis/op030_candidate_8674_v06/audit/op030_air_drop_c_v06.json",
+    "analysis/op030_candidate_8674_v06/audit/op030_split_native_v06.json",
+    "analysis/op030_candidate_8674_v06/audit/op030_split_v04_prefill_installation_classified.json",
+    "analysis/op030_candidate_8674_v06/audit/op030_stagger_air_clearance_static_v06.json",
+    "analysis/op030_candidate_8674_v06/audit/op030_stagger_air_clearance_static_v06_completion.json",
+    "analysis/op030_candidate_8674_v06/audit/op030_stagger_air_clearance_static_v06_geometry.json",
+    "analysis/op030_candidate_8674_v06/audit/op030_stagger_v06_background_A.json",
+    "analysis/op030_candidate_8674_v06/audit/op030_stagger_v06_background_B.json",
+    "analysis/op030_candidate_8674_v06/audit/op030_stagger_v06_background_C.json",
+    "analysis/op030_candidate_8674_v06/audit/op030_stagger_v06_integration_a_b_check.json",
+    "analysis/op030_candidate_8674_v06/audit/op030_stagger_v06_integration_a_b_check_fixtures.json",
+    "analysis/op030_candidate_8674_v06/audit/op030_stagger_v06_integration_a_b_export.json",
+    "analysis/op030_candidate_8674_v06/audit/op030_stagger_v06_integration_b_c_check.json",
+    "analysis/op030_candidate_8674_v06/audit/op030_stagger_v06_integration_b_c_check_fixtures.json",
+    "analysis/op030_candidate_8674_v06/audit/op030_stagger_v06_integration_b_c_export.json",
+    "analysis/op030_candidate_8674_v06/audit/op030_stagger_v06_integration_b_final_C_check_wait.json",
+    "analysis/op030_candidate_8674_v06/audit/op030_stagger_v06_integration_b_final_export.json",
+    "analysis/op030_candidate_8674_v06/audit/op030_stagger_v06_integration_b_initial_A_check_wait.json",
+    "analysis/op030_candidate_8674_v06/audit/op030_stagger_v06_integration_b_initial_export.json",
+    "analysis/op030_candidate_8674_v06/audit/op030_stagger_v06_integration_background_classified.json",
+    "analysis/op030_candidate_8674_v06/audit/op030_stagger_v06_integration_background_export.json",
+    "analysis/op030_candidate_8674_v06/audit/op030_stagger_v06_integration_c_loaded_A_check_wait.json",
+    "analysis/op030_candidate_8674_v06/audit/op030_stagger_v06_integration_c_loaded_B_check_wait.json",
+    "analysis/op030_candidate_8674_v06/audit/op030_stagger_v06_integration_c_loaded_export.json",
+    "analysis/op030_candidate_8674_v06/audit/op030_stagger_v06_integration_drawer_check.json",
+    "analysis/op030_candidate_8674_v06/audit/op030_stagger_v06_integration_drawer_export.json",
+    "analysis/op030_candidate_8674_v06/audit/op030_stagger_v06_integration_entry_binding.json",
+    "analysis/op030_candidate_8674_v06/audit/op030_stagger_v06_integration_entry_binding_parent_assert.json",
+    "analysis/op030_candidate_8674_v06/audit/op030_stagger_v06_integration_entry_check.json",
+    "analysis/op030_candidate_8674_v06/audit/op030_stagger_v06_integration_entry_check_fixtures.json",
+    "analysis/op030_candidate_8674_v06/audit/op030_stagger_v06_integration_entry_export.json",
+    "analysis/op030_candidate_8674_v06/audit/op030_stagger_v06_integration_prefill_check.json",
+    "analysis/op030_candidate_8674_v06/audit/op030_stagger_v06_integration_prefill_classified.json",
+    "analysis/op030_candidate_8674_v06/audit/op030_stagger_v06_integration_prefill_export.json",
+    "analysis/op030_candidate_8674_v06/audit/op030_stagger_v06_integration_prefill_plan.json",
+    "analysis/op030_candidate_8674_v06/data/op030_split_animation_v05.json",
+    "analysis/op030_candidate_8674_v06/data/op030_split_animation_v06.json",
+    "audit/op030_split_layout_portable_rebake_camera_final_v06.json",
+    "audit/op030_split_layout_portable_rebake_v06.json",
+    "audit/op030_split_layout_portable_rebake_native_camera_final_v06.json",
+    "audit/op030_split_layout_portable_rebake_camera_final_v06.log",
+    "audit/op030_v06_render_parallel_completion.json",
+    "analysis/render_split_parallel_v06.py",
+    "analysis/render_split_view_v06.sh",
+    "analysis/op030_v06_parallel_render_scope.md",
+    "audit/op030_v06_render_shards/process_prefix_manifest.json",
+    "audit/op030_v06_render_shards/process_prefix_render.log.gz",
+    "audit/op030_v06_render_shards/op030_split_process_v06_part1_manifest.json",
+    "audit/op030_split_process_v06_part1_render.log.gz",
+    "audit/op030_v06_render_shards/op030_split_process_v06_part2_manifest.json",
+    "audit/op030_split_process_v06_part2_render.log.gz",
+    "audit/op030_v06_render_shards/op030_split_process_v06_part3_manifest.json",
+    "audit/op030_split_process_v06_part3_render.log.gz",
+    "audit/op030_v06_render_shards/wide_prefix_manifest.json",
+    "audit/op030_v06_render_shards/wide_prefix_render.log.gz",
+    "audit/op030_v06_render_shards/op030_split_wide_v06_part1_manifest.json",
+    "audit/op030_split_wide_v06_part1_render.log.gz",
+    "audit/op030_v06_render_shards/op030_split_wide_v06_part2_manifest.json",
+    "audit/op030_split_wide_v06_part2_render.log.gz",
+    "audit/op030_v06_render_shards/op030_split_wide_v06_part3_manifest.json",
+    "audit/op030_split_wide_v06_part3_render.log.gz"
+  ],
+  "files": {
+    "audit/op030_support_delivery_v05.json": {
+      "sha256": "e595057eac15ed3a67ab81c0223431766842c1a0e50b3ce4c5e8f8e0e0101cf5",
+      "bytes": 6798,
+      "group": "inherited_A_final",
+      "reason": "A最終bank・保存14項目・主記録のSHA索引。",
+      "qualification": "Inherited A/C/geometry basis; B standalone and v06 integration are recorded separately. Camera-final inheritance requires the original native pin and non-camera identity delta.",
+      "prior_qualification": null
+    },
+    "audit/op030_split_a_motion_v05.json": {
+      "sha256": "48afc93721ddc194eeb05f3414e00b348f44cb2fcdb8e417fae95454e96de796",
+      "bytes": 20015,
+      "group": "inherited_A_final",
+      "reason": "A 7,165姿勢の構成、変更988姿勢のFK/FCL、6,177姿勢の保存配列同一性。",
+      "qualification": "Inherited A/C/geometry basis; B standalone and v06 integration are recorded separately. Camera-final inheritance requires the original native pin and non-camera identity delta.",
+      "prior_qualification": "全7,165姿勢を新規FCL実行した記録ではない。継承部分は同梱v04 A記録と最終front背景確認を併用する。"
+    },
+    "audit/op030_support_ascent_saved_v05.json": {
+      "sha256": "ce2cfc0d14fe282589b6a9ce3225f1fad2a52ad76f908431da36885e99e9da81",
+      "bytes": 6374,
+      "group": "inherited_A_final",
+      "reason": "2本目着座までの右指保持、開放後の両腕240 mm同時上昇、支持部とM4の保存配置を14項目で照合。",
+      "qualification": "Inherited A/C/geometry basis; B standalone and v06 integration are recorded separately. Camera-final inheritance requires the original native pin and non-camera identity delta.",
+      "prior_qualification": null
+    },
+    "analysis/OP030_A_v05_同時上昇_確認.md": {
+      "sha256": "47fb2d1618af707678052a20a876c7cfc8cd2b0179443cacde06270fef19bba6",
+      "bytes": 3301,
+      "group": "inherited_A_final",
+      "reason": "A変更内容・238.8秒・保存時間・継承範囲を説明する確認書直接参照文書。",
+      "qualification": "Inherited A/C/geometry basis; B standalone and v06 integration are recorded separately. Camera-final inheritance requires the original native pin and non-camera identity delta.",
+      "prior_qualification": null
+    },
+    "audit/op030_split_a_motion_v04.json": {
+      "sha256": "cd879faa0aaef02ee00bc5ce1d716e596a086f9905acb1f914963dae0b65bfc2",
+      "bytes": 27108,
+      "group": "inherited_A_inherited",
+      "reason": "Aの変更外6,177姿勢が厳密転用するv04全7,254姿勢の元FK/FCL記録。",
+      "qualification": "Inherited A/C/geometry basis; B standalone and v06 integration are recorded separately. Camera-final inheritance requires the original native pin and non-camera identity delta.",
+      "prior_qualification": "v04の時刻・フレーム数であり、v05全体の値へ読み替えない。"
+    },
+    "audit/op030_split_a_final_supported_v04_check.json": {
+      "sha256": "d9d4d852583273acff97549c1c16b0f96169fa5f0e3fe2c067fda3dbfb723a6a",
+      "bytes": 51887,
+      "group": "inherited_A_inherited",
+      "reason": "元A全7,254姿勢に対する最終支持追加・低ダクト差分と941メッシュ厳密不変性の根拠。",
+      "qualification": "Inherited A/C/geometry basis; B standalone and v06 integration are recorded separately. Camera-final inheritance requires the original native pin and non-camera identity delta.",
+      "prior_qualification": "v05 C移設や新待機姿勢は最終front統合記録で補う。"
+    },
+    "audit/op030_c_front_delivery_v05.json": {
+      "sha256": "95612e648db6011950d5e9f11b0548708bbac660ce6d92b4a1e888b438497885",
+      "bytes": 8289,
+      "group": "inherited_C_final",
+      "reason": "最終C 2,430姿勢/80.966667秒、同時締結・短経路・UIDの総合索引。",
+      "qualification": "Inherited A/C/geometry basis; B standalone and v06 integration are recorded separately. Camera-final inheritance requires the original native pin and non-camera identity delta.",
+      "prior_qualification": null
+    },
+    "audit/op030_c_front_final_mesh_v05.json": {
+      "sha256": "c811153b022ec205da44c25c7f7279a745573e59350c0b4c5f28e2a43b06d579",
+      "bytes": 4689,
+      "group": "inherited_C_final",
+      "reason": "最終保存C全2,430姿勢の原FK・実メッシュ・個体姿勢の独立読戻し。",
+      "qualification": "Inherited A/C/geometry basis; B standalone and v06 integration are recorded separately. Camera-final inheritance requires the original native pin and non-camera identity delta.",
+      "prior_qualification": null
+    },
+    "audit/op030_c_front_saved_identity_v05_02.json": {
+      "sha256": "20257b88892f2427a137c0d540294f2ad1915e96e5d24e8f1ce27b3f4c79906e",
+      "bytes": 15058,
+      "group": "inherited_C_final",
+      "reason": "工具、ねじ、供給残列、同期、spindle位相を扱う最終19項目の保存個体照合。",
+      "qualification": "Inherited A/C/geometry basis; B standalone and v06 integration are recorded separately. Camera-final inheritance requires the original native pin and non-camera identity delta.",
+      "prior_qualification": "初版の誤った未巻戻し位相判定を修正した_02が採用記録。旧初版は除外する。"
+    },
+    "audit/op030_c_front_indexed_replay_v05.json": {
+      "sha256": "54aa5a0dd428db90e2f39442d15b37887346cb710dc8815187aa72d9c07f15cd",
+      "bytes": 12593,
+      "group": "inherited_C_final",
+      "reason": "不要なM6本体旋回を除去しspindle位相へ対応させた最終時間配分・工程境界の記録。",
+      "qualification": "Inherited A/C/geometry basis; B standalone and v06 integration are recorded separately. Camera-final inheritance requires the original native pin and non-camera identity delta.",
+      "prior_qualification": null
+    },
+    "analysis/OP030_C_v05_近接供給_同時締付_確認.md": {
+      "sha256": "c1a9547cdaaf1355533114ba2c9eb952adf5dc964c055fa74c338b5fcc737964",
+      "bytes": 3840,
+      "group": "inherited_C_final",
+      "reason": "手前供給器、大小同時締結・80 mm同時軸抜き、M6追加160 mm、範囲を揃えた実TCP距離比較を説明。",
+      "qualification": "Inherited A/C/geometry basis; B standalone and v06 integration are recorded separately. Camera-final inheritance requires the original native pin and non-camera identity delta.",
+      "prior_qualification": "TCP距離の比較範囲は80 mm軸抜き完了から供給器上方まで。最短経路の保証ではない。"
+    },
+    "audit/op030_c_front_feeders_v05_completion.json": {
+      "sha256": "c30f12aa64b35ab16aa9985dfdc27044ea443eed8438d90918fb266c0a382fc2",
+      "bytes": 19125,
+      "group": "inherited_C_fixed_layout",
+      "reason": "C供給器の確定取得座・脚/足の差分、90変更/7,124不変メッシュと最終固定配置の総合記録。",
+      "qualification": "Inherited A/C/geometry basis; B standalone and v06 integration are recorded separately. Camera-final inheritance requires the original native pin and non-camera identity delta.",
+      "prior_qualification": null
+    },
+    "audit/op030_c_front_feeders_v05_static_check.json": {
+      "sha256": "b448c5dbeada6cf6605af17036804f679aa4adea7f7df00e79455bcac4b27050",
+      "bytes": 21726,
+      "group": "inherited_C_fixed_layout",
+      "reason": "C移設供給器90メッシュと固定環境195メッシュの限定FCL、12支持接合面および最小離隔。",
+      "qualification": "Inherited A/C/geometry basis; B standalone and v06 integration are recorded separately. Camera-final inheritance requires the original native pin and non-camera identity delta.",
+      "prior_qualification": null
+    },
+    "audit/op030_c_front_feeders_v05_readback.json": {
+      "sha256": "176637483adc4c4a6ca553e8f63b25461d23fef265073eb4e1eb8ccdb8521da8",
+      "bytes": 615,
+      "group": "inherited_C_fixed_layout",
+      "reason": "保存静的nativeの全7,214メッシュ署名と評価後表面の読戻し一致。",
+      "qualification": "Inherited A/C/geometry basis; B standalone and v06 integration are recorded separately. Camera-final inheritance requires the original native pin and non-camera identity delta.",
+      "prior_qualification": null
+    },
+    "analysis/OP030_C_v05_供給器手前配置_確認.md": {
+      "sha256": "220730c26f3b20266ed726af8ca9c05d651f53ffa103b80d0b75e34589574096",
+      "bytes": 2518,
+      "group": "inherited_C_fixed_layout",
+      "reason": "取得座X=-0.55 m、4足33 mm下降/脚延長、M6前脚75 mm・M14後脚70 mmの支持差分を説明。",
+      "qualification": "Inherited A/C/geometry basis; B standalone and v06 integration are recorded separately. Camera-final inheritance requires the original native pin and non-camera identity delta.",
+      "prior_qualification": null
+    },
+    "audit/op030_fixed_height_v05_readonly.json": {
+      "sha256": "df15b0173b06b0ce7eaa7b0ca36fa748db18b0cd248fcb905df139aafb83d666",
+      "bytes": 1584775,
+      "group": "inherited_fixed_height",
+      "reason": "確認書直接参照。保存v04実頂点・ローラー/パレット接触面・13時刻・停止パレット21個の高さ測定。",
+      "qualification": "Inherited A/C/geometry basis; B standalone and v06 integration are recorded separately. Camera-final inheritance requires the original native pin and non-camera identity delta.",
+      "prior_qualification": "v05へ形状と一定高さを継承する元モデルの読取寸法記録。最終v05時系列は自動同梱native読戻しとfront統合記録を参照。"
+    },
+    "audit/op030_height_version_v05_readonly.json": {
+      "sha256": "0c01fe18c09c61813290a15ce138cef273bb3ade027d731d90adcc696647a9e7",
+      "bytes": 6282,
+      "group": "inherited_fixed_height",
+      "reason": "v03昇降ありと最終v04一定高さの差を保存配置で切り分けた確認書直接参照記録。",
+      "qualification": "Inherited A/C/geometry basis; B standalone and v06 integration are recorded separately. Camera-final inheritance requires the original native pin and non-camera identity delta.",
+      "prior_qualification": null
+    },
+    "audit/op030_fixed_height_v04_completion.json": {
+      "sha256": "b1afcb4f9f237feea1f7036622a95d4394eb58750dbfaecb59a8eed900d22dc2",
+      "bytes": 22845,
+      "group": "inherited_fixed_height_inherited",
+      "reason": "固定パレット原点789 mm、製品884.5 mm、支持ローラー756.5 mm、37 mmピン、支持追加と下流復帰の継承元索引。",
+      "qualification": "Inherited A/C/geometry basis; B standalone and v06 integration are recorded separately. Camera-final inheritance requires the original native pin and non-camera identity delta.",
+      "prior_qualification": "記載A/B/Cフレーム数と旧C待機条件はv04の履歴。今回の搬送成立根拠には最終frontの346/271/271姿勢を採用し、旧搬送結果のみで代用しない。2段循環は未実装。"
+    },
+    "audit/op030_duct_support_trim_v04_contacts.json": {
+      "sha256": "ce557faf2aeff26cfe56bdf9fb191730be6d9a2ed6552586bebffa3438231301",
+      "bytes": 27266,
+      "group": "inherited_fixed_height_inherited",
+      "reason": "継承した24横受けの脚/ダクト接続と、1本だけ195 mmへ短縮した最小約5 mm隙間の実メッシュ根拠。",
+      "qualification": "Inherited A/C/geometry basis; B standalone and v06 integration are recorded separately. Camera-final inheritance requires the original native pin and non-camera identity delta.",
+      "prior_qualification": null
+    },
+    "audit/op030_downstream_park_v04_classification.json": {
+      "sha256": "23ecd198cc8ddb73d1841597f2f7b9d1a138548c46907ddc088ec4ab459982be",
+      "bytes": 21400,
+      "group": "inherited_fixed_height_inherited",
+      "reason": "床/基台7 mmグラウト据付と固定ヨーク接合を動作交差から区別した元役割同定。",
+      "qualification": "Inherited A/C/geometry basis; B standalone and v06 integration are recorded separately. Camera-final inheritance requires the original native pin and non-camera identity delta.",
+      "prior_qualification": "旧固定配置の分類記録。最終prefillに現れる6静的ペアと全背景の床3ペアは最終front分類記録に名前/不変性を記載。"
+    },
+    "audit/op030_split_wire_top_entry_geometry.json": {
+      "sha256": "805f27656b5750f92bb09042d585494696e3948f31eb79bff04f652c11077118",
+      "bytes": 7502,
+      "group": "inherited_wire_geometry_inherited",
+      "reason": "確認書直接参照。継承したトップ入口配線の401形状と端子寸法・曲線幾何の根拠。",
+      "qualification": "Inherited A/C/geometry basis; B standalone and v06 integration are recorded separately. Camera-final inheritance requires the original native pin and non-camera identity delta.",
+      "prior_qualification": "v03由来の保持された配線幾何。v05動作/FK/FCLは各最終bank記録で別途確認。"
+    },
+    "audit/op030_split_top_entry_insertion_geometry.json": {
+      "sha256": "eca42574761fbf8798191ecfd756eb4056ed5acd82ad537d25c659160ee169ae",
+      "bytes": 795,
+      "group": "inherited_wire_geometry_inherited",
+      "reason": "トップ入口の101挿入形状・曲率と鉛直M6進入の幾何記録。",
+      "qualification": "Inherited A/C/geometry basis; B standalone and v06 integration are recorded separately. Camera-final inheritance requires the original native pin and non-camera identity delta.",
+      "prior_qualification": null
+    },
+    "analysis/OP030_v06_scope.md": {
+      "sha256": "0b5fb98eb6490a0babae57b4beae525bc6faeeca3a5df544cc5a977e91a0c82a",
+      "bytes": 4162,
+      "group": "v06_scope",
+      "reason": "User-directed B-only stagger, fixed product/F01 and process boundary"
+    },
+    "analysis/op030_stagger_static_v06_delta.md": {
+      "sha256": "7c14d1d7118792337a4ebb413c16d4e5e6608076b909b41cba6baae0c9e61834",
+      "bytes": 1876,
+      "group": "v06_static",
+      "reason": "420-object rigid selection including four actual air-drop parts"
+    },
+    "audit/op030_stagger_static_v06_completion.json": {
+      "sha256": "375af0d2fc1620967ab62098971bd4d8984e4cec6d7814123c745b6866d62efd",
+      "bytes": 4243,
+      "group": "v06_static",
+      "reason": "Rigid move, fixed geometry, air-main interface classification"
+    },
+    "audit/op030_stagger_static_v06_geometry.json": {
+      "sha256": "d8c0864a626130c4211bdc54e73bd6e2346acc5085e4b21ac04823f99e510b10",
+      "bytes": 2827746,
+      "group": "v06_static",
+      "reason": "Explicit 420 world transforms/local signatures and all omitted fixed AABBs"
+    },
+    "audit/op030_stagger_static_v06_raw_check.json": {
+      "sha256": "a97d1db6da7f7fb1defc2d7d59a747515173440a3164f43b40d896d685b0b9e0",
+      "bytes": 42448,
+      "group": "v06_static",
+      "reason": "2352 fixed pairs / 144 FCL queries and two individual construction contacts"
+    },
+    "audit/op030_stagger_static_v06_readback.json": {
+      "sha256": "596fd122fc38c46d687b7352515a53e94260da5c3bd8fb88c3d8af035dec804f",
+      "bytes": 64328,
+      "group": "v06_static",
+      "reason": "Saved native identity and drawer0/170/340 evaluated-shape comparison"
+    },
+    "analysis/op030_stagger_static_v06_completion.md": {
+      "sha256": "77445809d7b5a4b9da24f2fe6b459b2b365163d3774e320f3007d4aff4d287e9",
+      "bytes": 2711,
+      "group": "v06_static",
+      "reason": "Static scope and retained initial floor gap before repair"
+    },
+    "analysis/op030_stagger_support_v06_scope.md": {
+      "sha256": "0ea5728a90a9107e61abf254392d83c78a0a044356f09efd8d53ad8537f2eab0",
+      "bytes": 2015,
+      "group": "v06_support",
+      "reason": "Bounded correction reason, reused implementation and dimensions"
+    },
+    "audit/op030_stagger_support_v06_components.json": {
+      "sha256": "9ad85b17e8ad735124db4e3f5c712d759b2dc6f624c3839254e2734b7bfc757e",
+      "bytes": 2588,
+      "group": "v06_support",
+      "reason": "Actual existing controller base-plate component identification"
+    },
+    "audit/op030_stagger_supported_static_v06_completion.json": {
+      "sha256": "b1c99136a07f535939ccbbfd00ad0f680b2422023537d21bab7e37c8cf15b849",
+      "bytes": 9382,
+      "group": "v06_support",
+      "reason": "Final support repair summary and individual intended contacts"
+    },
+    "audit/op030_stagger_supported_static_v06_geometry.json": {
+      "sha256": "b84daa067d9ec0b448708dd9414ed69d5734e24a99a966695ff7bba4bd82a19b",
+      "bytes": 2238245,
+      "group": "v06_support",
+      "reason": "Nine changed meshes, preserved upper objects/vertices and omitted AABBs"
+    },
+    "audit/op030_stagger_supported_static_v06_raw_check.json": {
+      "sha256": "60b4f2b5164fdc8b7ab33b553055c3f24e6deddbcd5424ba5598b5b0652807a9",
+      "bytes": 528789,
+      "group": "v06_support",
+      "reason": "333 pairs / 28 FCL, five floor surfaces and sixteen old construction pairs"
+    },
+    "audit/op030_stagger_supported_static_v06_readback.json": {
+      "sha256": "c8aa2bb5f65cdf916b772f99d8a834d81148fc883c19984acaa527922fb096ee",
+      "bytes": 4247,
+      "group": "v06_support",
+      "reason": "Saved nine-mesh correction, 9562 unchanged objects and exact support gaps"
+    },
+    "analysis/op030_stagger_supported_static_v06_completion.md": {
+      "sha256": "97a691a303708012083b0cfb053dac44ca5a2571e1a2842d6339fe82f9ea8e53",
+      "bytes": 2266,
+      "group": "v06_support",
+      "reason": "Support repair explanation; 0782 unchanged statement is superseded by later four-part air-drop shift"
+    },
+    "analysis/op030_air_drop_v06_scope.md": {
+      "sha256": "e8b7482dcb0013028bd4a78a9baff548cfa24b253c9b8a93042b5cf1641159a7",
+      "bytes": 3832,
+      "group": "v06_air_clearance",
+      "reason": "Three finite positions and measured full-sweep displacement reason"
+    },
+    "audit/op030_air_drop_v06_full_envelope.json": {
+      "sha256": "46eb9528dfc8ba3e0b3bca8a7fe01aecab7e811da4fee239542007b628760aa1",
+      "bytes": 5176,
+      "group": "v06_air_clearance",
+      "reason": "975-pose per-solid X/Z surface projection selecting third center Y-.33 m"
+    },
+    "audit/op030_air_drop_v06_environment.json": {
+      "sha256": "e7c916e88c18ce1d549161d4fc7e037dd7c9707c75d686c9a93c08da6bed6177",
+      "bytes": 2202436,
+      "group": "v06_air_clearance",
+      "reason": "Actual main/nearby geometry source and omitted fixed-object AABB coverage"
+    },
+    "audit/op030_air_drop_v06_candidate_03.json": {
+      "sha256": "c7657e05129e6daccf5f32929e45ee6a888d7bfe76612f0200b8e577a0fbec09",
+      "bytes": 25428,
+      "group": "v06_air_clearance",
+      "reason": "975 finite poses/179 moving meshes/119 FCL queries; zero moving hits"
+    },
+    "audit/op030_stagger_air_clearance_static_v06_geometry.json": {
+      "sha256": "70900559b0b960699349960a40c9e69e2d4faab5ecbe9e8d597d377ccc441b13",
+      "bytes": 9969,
+      "group": "v06_air_clearance",
+      "reason": "Four saved translations, 9567 unchanged object signatures, complete native readback"
+    },
+    "audit/op030_stagger_air_clearance_static_v06_completion.json": {
+      "sha256": "9b4a124db2d65edfa82ee6d5803de74e4c78e046a34bb238533b1faea39d1235",
+      "bytes": 5358,
+      "group": "v06_air_clearance",
+      "reason": "Two exact main-cylinder interfaces, internal rigid assembly and finite-motion scope; its historical pending-B field is superseded by final B records"
+    },
+    "audit/op030_split_b_stagger_v06_completion.json": {
+      "sha256": "0fe77aa15e59099c8703aa5c8d314c9886055a729a742207901f11e303446f82",
+      "bytes": 2968,
+      "group": "v06_B_final",
+      "reason": "Final B artifact/SHA index: 3787 frames, 126.2 s, fixed product/UIDs, actual mesh and original FK"
+    },
+    "audit/op030_split_b_stagger_motion_v06.json": {
+      "sha256": "a59e4a9a72a212926fafeca7312d989fda5796d2bcbf11907c6f3c5a30561ac1",
+      "bytes": 21671,
+      "group": "v06_B_final",
+      "reason": "Final B config/factory, 33 phases, every-frame FK/FCL and joint/torso speed caps; complete native_12 result copied with the same bank digest"
+    },
+    "audit/op030_split_b_stagger_v06_identity_12.json": {
+      "sha256": "8307046caa426dde806d861aa6bbc0361a0ea319ad52df3b1932ea9085b4b605",
+      "bytes": 9779,
+      "group": "v06_B_final",
+      "reason": "Independent saved-array checks of the identical final bank bytes: 78 node IDs, L=J1/R=T, ten wires, lengths, simultaneous approach/open/180 mm rise and final v05 equality"
+    },
+    "audit/op030_split_b_stagger_v06_connection_11.json": {
+      "sha256": "e1186e25aa9b282ed500b1a8ef5aa533daa95979912bbae59f5b6e3e1a0ba88a",
+      "bytes": 14575,
+      "group": "v06_B_final",
+      "reason": "811 retained constrained samples, four simultaneous 12D connections and 5634 actual time-varying grip samples"
+    },
+    "audit/op030_split_b_stagger_air_clearance_v06_meshes.json": {
+      "sha256": "29fca228d9767cc71fd4a4360d309c8cb81c759690c18305c94f177af14aec91",
+      "bytes": 8693,
+      "group": "v06_B_actual_geometry",
+      "reason": "Final static0de256 actual B export: 569 rigid meshes, ten reconstructed tubes, A installed M4 and current A/C park context"
+    },
+    "analysis/op030_split_b_stagger_v06_reuse_contract.md": {
+      "sha256": "dc4b1f76a6f82854af720d0e4255da44a9e2645e7665f0fbaa99e342ff1ae146",
+      "bytes": 3856,
+      "group": "v06_B_contract",
+      "reason": "Final one-argument factory, baseline/global transformation, drawer axis, original physical arms and fixed product/UID contract"
+    },
+    "audit/op030_air_drop_ac_v06_completion.json": {
+      "sha256": "eb1872562a8b3030aba993174f935e8c4ee82d7b9805163b1330db94b10aebc0",
+      "bytes": 1466,
+      "group": "v06_AC_air_delta",
+      "reason": "New 0782 four surfaces versus unchanged full A/C banks: positive swept AABB separation, no narrow-phase candidates or exemptions"
+    },
+    "audit/op030_air_drop_a_v06.json": {
+      "sha256": "8dd858dff1eeba0070314aceaed78469ab3b2b3262ecc4fbea2e61ed695f1afe",
+      "bytes": 31665,
+      "group": "v06_AC_air_delta",
+      "reason": "A7165 frames/623 tracked meshes: minimum swept AABB separation 0.998969 m from new pipe; inputs unchanged"
+    },
+    "audit/op030_air_drop_c_v06.json": {
+      "sha256": "6e56e669ad3fecfd154ecdca59a4c0bc56666cf11db29a3957bd75fa8f45e15c",
+      "bytes": 8876,
+      "group": "v06_AC_air_delta",
+      "reason": "C2430 frames/175 tracked meshes: minimum swept AABB separation 2.471703 m from new pipe; inputs unchanged"
+    },
+    "audit/op030_split_b_motion_v05.json": {
+      "sha256": "9116068c8ee77ba99ae4c2c52f680a6764ad6adc8cfdd9bf739afb2901698d62",
+      "bytes": 12338,
+      "group": "v05_B_time_comparison_only",
+      "reason": "Previous B bank 4551 frames/151.666667 s for saved animation-time comparison only; not proof for the new B layout"
+    },
+    "audit/op030_split_v04_prefill_installation_classified.json": {
+      "sha256": "ce55a69a5d7c8cb1f696848512893dddd926c1e528ea78ee990ca09e0a94a4b5",
+      "bytes": 6980,
+      "group": "inherited_installation",
+      "reason": "Original exact 7 mm grouted baseplate/floor role used by static classification"
+    },
+    "analysis/op030_v06_portable_rebake_plan.json": {
+      "sha256": "41586a0df0eac12cfc04746fbea0f98d16e55b2219cc4f7eff18e1413987ec00",
+      "bytes": 10074,
+      "group": "v06_portable_preparation",
+      "reason": "Final 23-input dependency/hash contract; actual rebake claims belong to the separate execution report"
+    },
+    "analysis/op030_candidate_8674_v06/audit/op030_stagger_v06_integration_evidence.json": {
+      "sha256": "3d54ace48a1440c06e11de2e08df67498f29572f3a707a56ed947cf64ea3c6fa",
+      "bytes": 34751,
+      "group": "v06_camera_inheritance",
+      "reason": "Original-native mechanical evidence and separately verified camera-only provenance; no direct FCL rerun on the camera-final native"
+    },
+    "audit/op030_camera_delta_v06_final.json": {
+      "sha256": "c5f069ddb1e4c83c3115c3ec8d7af3c7b9c032559a13fff1d625fc9e7dd92d54",
+      "bytes": 43000,
+      "group": "v06_camera_inheritance",
+      "reason": "Original-native mechanical evidence and separately verified camera-only provenance; no direct FCL rerun on the camera-final native"
+    },
+    "audit/op030_camera_delta_v06_driver_names.json": {
+      "sha256": "f2ffa9244dc766f199250b8d7e376fe910d5c96e6076419051ec3a4235f95f18",
+      "bytes": 278909,
+      "group": "v06_camera_inheritance",
+      "reason": "Original-native mechanical evidence and separately verified camera-only provenance; no direct FCL rerun on the camera-final native"
+    },
+    "analysis/op030_candidate_8674_v06/manifest.json": {
+      "sha256": "cb2e55e492dd54413dde85d599ccef3e7b24eac1a236cb38dc8e8ce7d52b527e",
+      "bytes": 15106,
+      "group": "v06_camera_inheritance",
+      "reason": "Original-native mechanical evidence and separately verified camera-only provenance; no direct FCL rerun on the camera-final native"
+    },
+    "analysis/op030_candidate_8674_v06/recovered_observation_source_manifest.json": {
+      "sha256": "d1835eb90a39e2e7ed164eb991003cb0f48060890416bca6ca3a93e7d105afd0",
+      "bytes": 1005,
+      "group": "v06_camera_inheritance",
+      "reason": "Original-native mechanical evidence and separately verified camera-only provenance; no direct FCL rerun on the camera-final native"
+    },
+    "audit/op030_stagger_camera_v06_selection.json": {
+      "sha256": "98ff70ad61f8c0494d83efaf1e282d6592538f16d4f52c6e61cd4f04f2fb6b75",
+      "bytes": 1361,
+      "group": "v06_camera_inheritance",
+      "reason": "Original-native mechanical evidence and separately verified camera-only provenance; no direct FCL rerun on the camera-final native"
+    },
+    "audit/op030_camera_delta_v06_evidence.json": {
+      "sha256": "8c701fcca27ad7de59920f806db3585113f5df2028394934554044e6c9bf5762",
+      "bytes": 25841,
+      "group": "v06_camera_inheritance",
+      "reason": "Final-native link retaining all original raw report/native SHA pins"
+    },
+    "audit/op030_camera_delta_v06_evidence.md": {
+      "sha256": "54fb2e66dd37220267ed045f203d00cd187a672a4c45b27c85cbc0e9adfe9e9c",
+      "bytes": 785,
+      "group": "v06_camera_inheritance",
+      "reason": "Human-readable scope of the camera-only inheritance link"
+    },
+    "analysis/op030_candidate_8674_v06/audit/op030_air_drop_a_v06.json": {
+      "sha256": "8dd858dff1eeba0070314aceaed78469ab3b2b3262ecc4fbea2e61ed695f1afe",
+      "bytes": 31665,
+      "group": "v06_original_native_integration",
+      "reason": "Original 8674-native input/report pin retained; inherited only via the strict non-camera delta"
+    },
+    "analysis/op030_candidate_8674_v06/audit/op030_air_drop_ac_v06_completion.json": {
+      "sha256": "eb1872562a8b3030aba993174f935e8c4ee82d7b9805163b1330db94b10aebc0",
+      "bytes": 1466,
+      "group": "v06_original_native_integration",
+      "reason": "Original 8674-native input/report pin retained; inherited only via the strict non-camera delta"
+    },
+    "analysis/op030_candidate_8674_v06/audit/op030_air_drop_c_v06.json": {
+      "sha256": "6e56e669ad3fecfd154ecdca59a4c0bc56666cf11db29a3957bd75fa8f45e15c",
+      "bytes": 8876,
+      "group": "v06_original_native_integration",
+      "reason": "Original 8674-native input/report pin retained; inherited only via the strict non-camera delta"
+    },
+    "analysis/op030_candidate_8674_v06/audit/op030_split_native_v06.json": {
+      "sha256": "aa633cf21da9400d0b6a0b8fcf7a101544c323984d5e3fc83190c919be1a5dfe",
+      "bytes": 32626,
+      "group": "v06_original_native_integration",
+      "reason": "Original 8674-native input/report pin retained; inherited only via the strict non-camera delta"
+    },
+    "analysis/op030_candidate_8674_v06/audit/op030_split_v04_prefill_installation_classified.json": {
+      "sha256": "ce55a69a5d7c8cb1f696848512893dddd926c1e528ea78ee990ca09e0a94a4b5",
+      "bytes": 6980,
+      "group": "v06_original_native_integration",
+      "reason": "Original 8674-native input/report pin retained; inherited only via the strict non-camera delta"
+    },
+    "analysis/op030_candidate_8674_v06/audit/op030_stagger_air_clearance_static_v06.json": {
+      "sha256": "cb0dd4d7bc7fef08b3b4b3132766898593efd41478ad4eb221e6a626a5407711",
+      "bytes": 2298145,
+      "group": "v06_original_native_integration",
+      "reason": "Original 8674-native input/report pin retained; inherited only via the strict non-camera delta"
+    },
+    "analysis/op030_candidate_8674_v06/audit/op030_stagger_air_clearance_static_v06_completion.json": {
+      "sha256": "9b4a124db2d65edfa82ee6d5803de74e4c78e046a34bb238533b1faea39d1235",
+      "bytes": 5358,
+      "group": "v06_original_native_integration",
+      "reason": "Original 8674-native input/report pin retained; inherited only via the strict non-camera delta"
+    },
+    "analysis/op030_candidate_8674_v06/audit/op030_stagger_air_clearance_static_v06_geometry.json": {
+      "sha256": "70900559b0b960699349960a40c9e69e2d4faab5ecbe9e8d597d377ccc441b13",
+      "bytes": 9969,
+      "group": "v06_original_native_integration",
+      "reason": "Original 8674-native input/report pin retained; inherited only via the strict non-camera delta"
+    },
+    "analysis/op030_candidate_8674_v06/audit/op030_stagger_v06_background_A.json": {
+      "sha256": "456bdbe0506860ddf995303357a659daba4c1d8753e226a186b60206da97e5e6",
+      "bytes": 238894,
+      "group": "v06_original_native_integration",
+      "reason": "Original 8674-native input/report pin retained; inherited only via the strict non-camera delta"
+    },
+    "analysis/op030_candidate_8674_v06/audit/op030_stagger_v06_background_B.json": {
+      "sha256": "4e9e65d3555f3f520b42f7c25ce505b33fc5afb88b54efb6515820908ac44e08",
+      "bytes": 122924,
+      "group": "v06_original_native_integration",
+      "reason": "Original 8674-native input/report pin retained; inherited only via the strict non-camera delta"
+    },
+    "analysis/op030_candidate_8674_v06/audit/op030_stagger_v06_background_C.json": {
+      "sha256": "9cc6f05a44f3cbfcaf8d79370611bf248b1522b0cd23b0f4a9052f8db5c8450d",
+      "bytes": 84500,
+      "group": "v06_original_native_integration",
+      "reason": "Original 8674-native input/report pin retained; inherited only via the strict non-camera delta"
+    },
+    "analysis/op030_candidate_8674_v06/audit/op030_stagger_v06_integration_a_b_check.json": {
+      "sha256": "c26955a62c2f9a49a8f9a77625cd8dbdefb95eed792256940db701261e84c272",
+      "bytes": 838,
+      "group": "v06_original_native_integration",
+      "reason": "Original 8674-native input/report pin retained; inherited only via the strict non-camera delta"
+    },
+    "analysis/op030_candidate_8674_v06/audit/op030_stagger_v06_integration_a_b_check_fixtures.json": {
+      "sha256": "765f3aab7289785c11397b846448e7a1234de4a7f17a47fc74d57e6cb26550ad",
+      "bytes": 7735,
+      "group": "v06_original_native_integration",
+      "reason": "Original 8674-native input/report pin retained; inherited only via the strict non-camera delta"
+    },
+    "analysis/op030_candidate_8674_v06/audit/op030_stagger_v06_integration_a_b_export.json": {
+      "sha256": "7f4d7215fc657ca2cd995628d3dc69eb9e017dd8152c19f2ea7f341df5ed9619",
+      "bytes": 12426,
+      "group": "v06_original_native_integration",
+      "reason": "Original 8674-native input/report pin retained; inherited only via the strict non-camera delta"
+    },
+    "analysis/op030_candidate_8674_v06/audit/op030_stagger_v06_integration_b_c_check.json": {
+      "sha256": "0e1a13b16085c7cd0c8cbb5d579cb418708f98b8a781c888fce24c508c40c379",
+      "bytes": 889,
+      "group": "v06_original_native_integration",
+      "reason": "Original 8674-native input/report pin retained; inherited only via the strict non-camera delta"
+    },
+    "analysis/op030_candidate_8674_v06/audit/op030_stagger_v06_integration_b_c_check_fixtures.json": {
+      "sha256": "2f8507d084ed6db0c2d22401b13b3e6b79f56a2fd1e6a580fc555ef9c491382e",
+      "bytes": 16390,
+      "group": "v06_original_native_integration",
+      "reason": "Original 8674-native input/report pin retained; inherited only via the strict non-camera delta"
+    },
+    "analysis/op030_candidate_8674_v06/audit/op030_stagger_v06_integration_b_c_export.json": {
+      "sha256": "a4fbe26083b0ca5937c4f3a10be72f90b812af5db79f80e1ee18203822e3ef6f",
+      "bytes": 13349,
+      "group": "v06_original_native_integration",
+      "reason": "Original 8674-native input/report pin retained; inherited only via the strict non-camera delta"
+    },
+    "analysis/op030_candidate_8674_v06/audit/op030_stagger_v06_integration_b_final_C_check_wait.json": {
+      "sha256": "c77c7e494b864dcd7fc327f409eb9757c6168b40ae19a16ca0cee9a35bf6f0e4",
+      "bytes": 8585,
+      "group": "v06_original_native_integration",
+      "reason": "Original 8674-native input/report pin retained; inherited only via the strict non-camera delta"
+    },
+    "analysis/op030_candidate_8674_v06/audit/op030_stagger_v06_integration_b_final_export.json": {
+      "sha256": "660a7910a93e730909d29688ffcaec13bb1ba8d491d366a2c8be288b99d5550e",
+      "bytes": 3071,
+      "group": "v06_original_native_integration",
+      "reason": "Original 8674-native input/report pin retained; inherited only via the strict non-camera delta"
+    },
+    "analysis/op030_candidate_8674_v06/audit/op030_stagger_v06_integration_b_initial_A_check_wait.json": {
+      "sha256": "90ec81864d1deab44f9efa90b146f3fe6f99345df9a1174214b4f7a676459fde",
+      "bytes": 31385,
+      "group": "v06_original_native_integration",
+      "reason": "Original 8674-native input/report pin retained; inherited only via the strict non-camera delta"
+    },
+    "analysis/op030_candidate_8674_v06/audit/op030_stagger_v06_integration_b_initial_export.json": {
+      "sha256": "d2a7226c4d797547dd23fa6a5042ea6cd9b2aa00c281481723781036ea897bb3",
+      "bytes": 3126,
+      "group": "v06_original_native_integration",
+      "reason": "Original 8674-native input/report pin retained; inherited only via the strict non-camera delta"
+    },
+    "analysis/op030_candidate_8674_v06/audit/op030_stagger_v06_integration_background_classified.json": {
+      "sha256": "d904270260051dd4f35ca66153eacf603fff5847cf1257548b2beee1dde9d0a7",
+      "bytes": 4415,
+      "group": "v06_original_native_integration",
+      "reason": "Original 8674-native input/report pin retained; inherited only via the strict non-camera delta"
+    },
+    "analysis/op030_candidate_8674_v06/audit/op030_stagger_v06_integration_background_export.json": {
+      "sha256": "71db4dea03ccdc3de70f795b15347a01785b6327552708fe6c73dee9f05ee64d",
+      "bytes": 9441,
+      "group": "v06_original_native_integration",
+      "reason": "Original 8674-native input/report pin retained; inherited only via the strict non-camera delta"
+    },
+    "analysis/op030_candidate_8674_v06/audit/op030_stagger_v06_integration_c_loaded_A_check_wait.json": {
+      "sha256": "de88bb17c7713937a9e86d6de6647517de200ffe2bc2799855819acc58c95c7e",
+      "bytes": 31312,
+      "group": "v06_original_native_integration",
+      "reason": "Original 8674-native input/report pin retained; inherited only via the strict non-camera delta"
+    },
+    "analysis/op030_candidate_8674_v06/audit/op030_stagger_v06_integration_c_loaded_B_check_wait.json": {
+      "sha256": "f1fa3b7efcdd350f697219af85a3bcc15de88e957cf8e9e3f08a04d59b8724c9",
+      "bytes": 12446,
+      "group": "v06_original_native_integration",
+      "reason": "Original 8674-native input/report pin retained; inherited only via the strict non-camera delta"
+    },
+    "analysis/op030_candidate_8674_v06/audit/op030_stagger_v06_integration_c_loaded_export.json": {
+      "sha256": "07e885ee31a02f25d37ae440ce49b354f9aba3dca9f4bb0eb1b32a5cf2d21d4d",
+      "bytes": 3616,
+      "group": "v06_original_native_integration",
+      "reason": "Original 8674-native input/report pin retained; inherited only via the strict non-camera delta"
+    },
+    "analysis/op030_candidate_8674_v06/audit/op030_stagger_v06_integration_drawer_check.json": {
+      "sha256": "4bb08b97c86cd74f334cded1896bbfb470456fbfa87587a5e6d1dd3e36b9a087",
+      "bytes": 636,
+      "group": "v06_original_native_integration",
+      "reason": "Original 8674-native input/report pin retained; inherited only via the strict non-camera delta"
+    },
+    "analysis/op030_candidate_8674_v06/audit/op030_stagger_v06_integration_drawer_export.json": {
+      "sha256": "63fdf674c3e243891349aca8327e0a0f6b282c063856dbbe58529d5c7ccc8d42",
+      "bytes": 14815,
+      "group": "v06_original_native_integration",
+      "reason": "Original 8674-native input/report pin retained; inherited only via the strict non-camera delta"
+    },
+    "analysis/op030_candidate_8674_v06/audit/op030_stagger_v06_integration_entry_binding.json": {
+      "sha256": "1516397fe11f4060452d9415ab7792fc8048cf9965b3468f624f325040e13b60",
+      "bytes": 5067,
+      "group": "v06_original_native_integration",
+      "reason": "Original 8674-native input/report pin retained; inherited only via the strict non-camera delta"
+    },
+    "analysis/op030_candidate_8674_v06/audit/op030_stagger_v06_integration_entry_binding_parent_assert.json": {
+      "sha256": "5b622a459a40668716bcb82c5e5f32a3ee20985f3e4dbf11054b61b8938e134f",
+      "bytes": 3477,
+      "group": "v06_original_native_integration",
+      "reason": "Original 8674-native input/report pin retained; inherited only via the strict non-camera delta"
+    },
+    "analysis/op030_candidate_8674_v06/audit/op030_stagger_v06_integration_entry_check.json": {
+      "sha256": "09760ff0ae47df778f49b94e0f6398f99fc2ac7f27bdfa57d492ed86e7bf2d58",
+      "bytes": 1359,
+      "group": "v06_original_native_integration",
+      "reason": "Original 8674-native input/report pin retained; inherited only via the strict non-camera delta"
+    },
+    "analysis/op030_candidate_8674_v06/audit/op030_stagger_v06_integration_entry_check_fixtures.json": {
+      "sha256": "b6e44f585af08b0f8f68e03d0f90d266a0f879753feb6f8f5bd8ce1b96ce31a9",
+      "bytes": 14569,
+      "group": "v06_original_native_integration",
+      "reason": "Original 8674-native input/report pin retained; inherited only via the strict non-camera delta"
+    },
+    "analysis/op030_candidate_8674_v06/audit/op030_stagger_v06_integration_entry_export.json": {
+      "sha256": "566996a04fc07872e51a8ac15874caa8307f00f1789851a601d3a5405a5bd997",
+      "bytes": 10967,
+      "group": "v06_original_native_integration",
+      "reason": "Original 8674-native input/report pin retained; inherited only via the strict non-camera delta"
+    },
+    "analysis/op030_candidate_8674_v06/audit/op030_stagger_v06_integration_prefill_check.json": {
+      "sha256": "7f996a978cb810856210480d029fa2961718d2d081e506a32eefd3c71e2b75ba",
+      "bytes": 22016120,
+      "group": "v06_original_native_integration",
+      "reason": "Original 8674-native input/report pin retained; inherited only via the strict non-camera delta"
+    },
+    "analysis/op030_candidate_8674_v06/audit/op030_stagger_v06_integration_prefill_classified.json": {
+      "sha256": "5c87a34de410e6d8de0e107d35ab9e8bf57d3cffddc624f688bff438b57a9e99",
+      "bytes": 25431,
+      "group": "v06_original_native_integration",
+      "reason": "Original 8674-native input/report pin retained; inherited only via the strict non-camera delta"
+    },
+    "analysis/op030_candidate_8674_v06/audit/op030_stagger_v06_integration_prefill_export.json": {
+      "sha256": "60310d318d4b158d74f37e0081ccc792f9eab78683236e87489ca6831c185048",
+      "bytes": 21628,
+      "group": "v06_original_native_integration",
+      "reason": "Original 8674-native input/report pin retained; inherited only via the strict non-camera delta"
+    },
+    "analysis/op030_candidate_8674_v06/audit/op030_stagger_v06_integration_prefill_plan.json": {
+      "sha256": "120770538c3cb5bed0e256beec15400e6b4f830c345756784cc5cc6085f2395b",
+      "bytes": 9209,
+      "group": "v06_original_native_integration",
+      "reason": "Original 8674-native input/report pin retained; inherited only via the strict non-camera delta"
+    },
+    "analysis/op030_candidate_8674_v06/data/op030_split_animation_v05.json": {
+      "sha256": "4ce81475d51688f9b7541897bb1057b3361d8e6041acfe146d103d4f4d040ef2",
+      "bytes": 46081,
+      "group": "v06_original_native_integration",
+      "reason": "Original 8674-native input/report pin retained; inherited only via the strict non-camera delta"
+    },
+    "analysis/op030_candidate_8674_v06/data/op030_split_animation_v06.json": {
+      "sha256": "0327cf57bfb91b6437ba2ab9fec43f4ac1a04e0a1c4a6633c8b833dcbd63e897",
+      "bytes": 46531,
+      "group": "v06_original_native_integration",
+      "reason": "Original 8674-native input/report pin retained; inherited only via the strict non-camera delta"
+    },
+    "audit/op030_split_layout_portable_rebake_camera_final_v06.json": {
+      "sha256": "e1183f85ad09d8d9a739285f2cca2aa8616b95caa17296463407948c9c5253b2",
+      "bytes": 29069,
+      "group": "v06_camera_final_portable",
+      "reason": "Final-camera isolated actual rebake from 23 copied inputs"
+    },
+    "audit/op030_split_layout_portable_rebake_v06.json": {
+      "sha256": "e1183f85ad09d8d9a739285f2cca2aa8616b95caa17296463407948c9c5253b2",
+      "bytes": 29069,
+      "group": "v06_camera_final_portable",
+      "reason": "Final-camera isolated actual rebake from 23 copied inputs"
+    },
+    "audit/op030_split_layout_portable_rebake_native_camera_final_v06.json": {
+      "sha256": "3ebcd5d35f41e7fc3d4f5031d36a901c411ddcd6a5cbd0aea54ed89e4f87ac23",
+      "bytes": 32579,
+      "group": "v06_camera_final_portable",
+      "reason": "Saved final-camera isolated rebake readback/runtime record"
+    },
+    "audit/op030_split_layout_portable_rebake_camera_final_v06.log": {
+      "sha256": "0dba4b23c0cf9b21442b2bae2c0a58104e0c28cd23a351c2b89046f369854172",
+      "bytes": 2529,
+      "group": "v06_camera_final_portable",
+      "reason": "Saved final-camera isolated rebake readback/runtime record"
+    },
+    "audit/op030_v06_render_parallel_completion.json": {
+      "sha256": "10be4809de35fa596936fd67db90089899dd8f44bb44b94cb4076c2bb77c9eb6",
+      "bytes": 5822,
+      "group": "v06_render_sources",
+      "reason": "Unchanged renderer, disjoint native ranges and PNG provenance"
+    },
+    "analysis/render_split_parallel_v06.py": {
+      "sha256": "d8f9cfc274ec0d2d3c69a95c77d452c5d0afa0ca9a553b6e7f45d2db26c1cf52",
+      "bytes": 13115,
+      "group": "v06_render_sources",
+      "reason": "Unchanged renderer, disjoint native ranges and PNG provenance"
+    },
+    "analysis/render_split_view_v06.sh": {
+      "sha256": "ef67fa1cd47afceb2e296f48b6c13c481cd56bead84bd9f9f9b0dabe3fc086c4",
+      "bytes": 1284,
+      "group": "v06_render_sources",
+      "reason": "Unchanged renderer, disjoint native ranges and PNG provenance"
+    },
+    "analysis/op030_v06_parallel_render_scope.md": {
+      "sha256": "4c0b908087bc4e8a4cb2e1e24d2613dd5045575cb69f8ea3bed5bfe616a372c5",
+      "bytes": 1905,
+      "group": "v06_render_sources",
+      "reason": "Unchanged renderer, disjoint native ranges and PNG provenance"
+    },
+    "audit/op030_v06_render_shards/process_prefix_manifest.json": {
+      "sha256": "ed4156517e945b7bdf2f6c65ed1154a8fba21ced4d82231fe3485c5202eca17d",
+      "bytes": 211404,
+      "group": "v06_render_sources",
+      "reason": "process: saved range 1..1679"
+    },
+    "audit/op030_v06_render_shards/process_prefix_render.log.gz": {
+      "sha256": "e7f1c178553638e67fd8f0e874c9c4d7a6b09098141042e9c97e271a97e7d176",
+      "bytes": 15216235,
+      "group": "v06_render_sources",
+      "reason": "process: saved range 1..1679"
+    },
+    "audit/op030_v06_render_shards/op030_split_process_v06_part1_manifest.json": {
+      "sha256": "910bdad76de297d8a96bcc2299199aeaa1213eb693f95a0b4c1485762247b792",
+      "bytes": 518572,
+      "group": "v06_render_sources",
+      "reason": "process: saved range 1681..5805"
+    },
+    "audit/op030_split_process_v06_part1_render.log.gz": {
+      "sha256": "9b6f7ac53b47dc21e5e6b2ac8fef8adf2c8166cf0aee84e29a398b3c3e33efc5",
+      "bytes": 40169663,
+      "group": "v06_render_sources",
+      "reason": "process: saved range 1681..5805"
+    },
+    "audit/op030_v06_render_shards/op030_split_process_v06_part2_manifest.json": {
+      "sha256": "7fb3c6201333fb19625ba8b5b7149a3697000ab925700c49ec3e5c267da88a28",
+      "bytes": 517867,
+      "group": "v06_render_sources",
+      "reason": "process: saved range 5807..9933"
+    },
+    "audit/op030_split_process_v06_part2_render.log.gz": {
+      "sha256": "02930b789d09b4e309cd0de32a6cd46a0ef788b1107dc5b53e2b4ed372823a9c",
+      "bytes": 39748132,
+      "group": "v06_render_sources",
+      "reason": "process: saved range 5807..9933"
+    },
+    "audit/op030_v06_render_shards/op030_split_process_v06_part3_manifest.json": {
+      "sha256": "d236ae3172e15a4a0d6e8b2d2c93c99a4693099455f0945a9bb0c3806d1f2af0",
+      "bytes": 515934,
+      "group": "v06_render_sources",
+      "reason": "process: saved range 9935..14061"
+    },
+    "audit/op030_split_process_v06_part3_render.log.gz": {
+      "sha256": "8f03dd2abcc37df7007e802c5d6ea19c6e13df3bf5a210aa49fb65d4ae74100b",
+      "bytes": 38150775,
+      "group": "v06_render_sources",
+      "reason": "process: saved range 9935..14061"
+    },
+    "audit/op030_v06_render_shards/wide_prefix_manifest.json": {
+      "sha256": "5ef7ab8ba3ffa03c973cadd294af0bdbf21487acd127b39aa8eaa3005d0b9b0e",
+      "bytes": 229228,
+      "group": "v06_render_sources",
+      "reason": "wide: saved range 1..1919"
+    },
+    "audit/op030_v06_render_shards/wide_prefix_render.log.gz": {
+      "sha256": "aa4890fd59b388ce12c8f0d376d48b874e9fafc9a04b9b6263dabb834e4ab13d",
+      "bytes": 16531700,
+      "group": "v06_render_sources",
+      "reason": "wide: saved range 1..1919"
+    },
+    "audit/op030_v06_render_shards/op030_split_wide_v06_part1_manifest.json": {
+      "sha256": "c50d1f93533650295d0a24511536a92edd661f9871824039421280adf6f09f10",
+      "bytes": 482174,
+      "group": "v06_render_sources",
+      "reason": "wide: saved range 1921..5965"
+    },
+    "audit/op030_split_wide_v06_part1_render.log.gz": {
+      "sha256": "9a20c078e3ecca5af01da16dd0cdc31aac508f89bc0bd5c4d6962ab03f65bbaa",
+      "bytes": 36760028,
+      "group": "v06_render_sources",
+      "reason": "wide: saved range 1921..5965"
+    },
+    "audit/op030_v06_render_shards/op030_split_wide_v06_part2_manifest.json": {
+      "sha256": "ac5b582111bd1b36213d23bb07f29c5cb70509ddec50abc36e1dbfdfe2c424ac",
+      "bytes": 482398,
+      "group": "v06_render_sources",
+      "reason": "wide: saved range 5967..10013"
+    },
+    "audit/op030_split_wide_v06_part2_render.log.gz": {
+      "sha256": "6a0324afed350ba567b65aae630637e29303c43586a7fa49d05d09eeddb0b6bc",
+      "bytes": 36551125,
+      "group": "v06_render_sources",
+      "reason": "wide: saved range 5967..10013"
+    },
+    "audit/op030_v06_render_shards/op030_split_wide_v06_part3_manifest.json": {
+      "sha256": "764f973d258bc7e0019688a298dc7df7cb3bbcd8a8a20bbd9befc382bee4a02e",
+      "bytes": 484444,
+      "group": "v06_render_sources",
+      "reason": "wide: saved range 10015..14061"
+    },
+    "audit/op030_split_wide_v06_part3_render.log.gz": {
+      "sha256": "4bd184c8f3eb78ee77d661b42f3ef743db2ed521fea74dd03e0a91377a9ca343",
+      "bytes": 37054573,
+      "group": "v06_render_sources",
+      "reason": "wide: saved range 10015..14061"
+    }
+  },
+  "file_count": 125,
+  "total_bytes": 299351686,
+  "group_totals": {
+    "inherited_A_final": {
+      "files": 4,
+      "bytes": 36488
+    },
+    "inherited_A_inherited": {
+      "files": 2,
+      "bytes": 78995
+    },
+    "inherited_C_final": {
+      "files": 5,
+      "bytes": 44469
+    },
+    "inherited_C_fixed_layout": {
+      "files": 4,
+      "bytes": 43984
+    },
+    "inherited_fixed_height": {
+      "files": 2,
+      "bytes": 1591057
+    },
+    "inherited_fixed_height_inherited": {
+      "files": 3,
+      "bytes": 71511
+    },
+    "inherited_wire_geometry_inherited": {
+      "files": 2,
+      "bytes": 8297
+    },
+    "v06_scope": {
+      "files": 1,
+      "bytes": 4162
+    },
+    "v06_static": {
+      "files": 6,
+      "bytes": 2943352
+    },
+    "v06_support": {
+      "files": 7,
+      "bytes": 2787532
+    },
+    "v06_air_clearance": {
+      "files": 6,
+      "bytes": 2252199
+    },
+    "v06_B_final": {
+      "files": 4,
+      "bytes": 48993
+    },
+    "v06_B_actual_geometry": {
+      "files": 1,
+      "bytes": 8693
+    },
+    "v06_B_contract": {
+      "files": 1,
+      "bytes": 3856
+    },
+    "v06_AC_air_delta": {
+      "files": 3,
+      "bytes": 42007
+    },
+    "v05_B_time_comparison_only": {
+      "files": 1,
+      "bytes": 12338
+    },
+    "inherited_installation": {
+      "files": 1,
+      "bytes": 6980
+    },
+    "v06_portable_preparation": {
+      "files": 1,
+      "bytes": 10074
+    },
+    "v06_camera_inheritance": {
+      "files": 8,
+      "bytes": 400758
+    },
+    "v06_original_native_integration": {
+      "files": 39,
+      "bytes": 25216317
+    },
+    "v06_camera_final_portable": {
+      "files": 4,
+      "bytes": 93246
+    },
+    "v06_render_sources": {
+      "files": 20,
+      "bytes": 263646378
+    }
+  },
+  "document": {
+    "path": "OP030_三ST工程・部品確認書_v06.md",
+    "sha256": "c52088f053144f099e26a62cae7e46a435899a2c17573c6e5d59d5177f867c38",
+    "draft": false
+  },
+  "document_reference_coverage": [
+    {
+      "path": "analysis/op030_candidate_8674_v06/audit/op030_stagger_v06_integration_evidence.json",
+      "exists": true,
+      "sha256": "3d54ace48a1440c06e11de2e08df67498f29572f3a707a56ed947cf64ea3c6fa",
+      "included": true,
+      "automatic": false
+    },
+    {
+      "path": "analysis/op030_v06_portable_rebake_plan.json",
+      "exists": true,
+      "sha256": "41586a0df0eac12cfc04746fbea0f98d16e55b2219cc4f7eff18e1413987ec00",
+      "included": true,
+      "automatic": false
+    },
+    {
+      "path": "audit/UR15_JB_OP030_split_process_v06_video.json",
+      "exists": true,
+      "sha256": "605ab5bb44e3df37a8a74221ea44700e05038264e2cc55a9bda2713595c17070",
+      "included": false,
+      "automatic": true
+    },
+    {
+      "path": "audit/UR15_JB_OP030_split_wide_v06_video.json",
+      "exists": true,
+      "sha256": "9f9338e3eeea888623e181a4f31d588d534e8e86083ecd3b1b7197d0ad0eb665",
+      "included": false,
+      "automatic": true
+    },
+    {
+      "path": "audit/op030_air_drop_a_v06.json",
+      "exists": true,
+      "sha256": "8dd858dff1eeba0070314aceaed78469ab3b2b3262ecc4fbea2e61ed695f1afe",
+      "included": true,
+      "automatic": false
+    },
+    {
+      "path": "audit/op030_air_drop_ac_v06_completion.json",
+      "exists": true,
+      "sha256": "eb1872562a8b3030aba993174f935e8c4ee82d7b9805163b1330db94b10aebc0",
+      "included": true,
+      "automatic": false
+    },
+    {
+      "path": "audit/op030_air_drop_c_v06.json",
+      "exists": true,
+      "sha256": "6e56e669ad3fecfd154ecdca59a4c0bc56666cf11db29a3957bd75fa8f45e15c",
+      "included": true,
+      "automatic": false
+    },
+    {
+      "path": "audit/op030_air_drop_v06_candidate_03.json",
+      "exists": true,
+      "sha256": "c7657e05129e6daccf5f32929e45ee6a888d7bfe76612f0200b8e577a0fbec09",
+      "included": true,
+      "automatic": false
+    },
+    {
+      "path": "audit/op030_c_front_delivery_v05.json",
+      "exists": true,
+      "sha256": "95612e648db6011950d5e9f11b0548708bbac660ce6d92b4a1e888b438497885",
+      "included": true,
+      "automatic": false
+    },
+    {
+      "path": "audit/op030_c_front_feeders_v05_completion.json",
+      "exists": true,
+      "sha256": "c30f12aa64b35ab16aa9985dfdc27044ea443eed8438d90918fb266c0a382fc2",
+      "included": true,
+      "automatic": false
+    },
+    {
+      "path": "audit/op030_c_front_saved_identity_v05_02.json",
+      "exists": true,
+      "sha256": "20257b88892f2427a137c0d540294f2ad1915e96e5d24e8f1ce27b3f4c79906e",
+      "included": true,
+      "automatic": false
+    },
+    {
+      "path": "audit/op030_camera_delta_v06_driver_names.json",
+      "exists": true,
+      "sha256": "f2ffa9244dc766f199250b8d7e376fe910d5c96e6076419051ec3a4235f95f18",
+      "included": true,
+      "automatic": false
+    },
+    {
+      "path": "audit/op030_camera_delta_v06_evidence.json",
+      "exists": true,
+      "sha256": "8c701fcca27ad7de59920f806db3585113f5df2028394934554044e6c9bf5762",
+      "included": true,
+      "automatic": false
+    },
+    {
+      "path": "audit/op030_camera_delta_v06_final.json",
+      "exists": true,
+      "sha256": "c5f069ddb1e4c83c3115c3ec8d7af3c7b9c032559a13fff1d625fc9e7dd92d54",
+      "included": true,
+      "automatic": false
+    },
+    {
+      "path": "audit/op030_fixed_height_v05_readonly.json",
+      "exists": true,
+      "sha256": "df15b0173b06b0ce7eaa7b0ca36fa748db18b0cd248fcb905df139aafb83d666",
+      "included": true,
+      "automatic": false
+    },
+    {
+      "path": "audit/op030_height_version_v05_readonly.json",
+      "exists": true,
+      "sha256": "0c01fe18c09c61813290a15ce138cef273bb3ade027d731d90adcc696647a9e7",
+      "included": true,
+      "automatic": false
+    },
+    {
+      "path": "audit/op030_split_b_motion_v05.json",
+      "exists": true,
+      "sha256": "9116068c8ee77ba99ae4c2c52f680a6764ad6adc8cfdd9bf739afb2901698d62",
+      "included": true,
+      "automatic": false
+    },
+    {
+      "path": "audit/op030_split_b_stagger_air_clearance_v06_meshes.json",
+      "exists": true,
+      "sha256": "29fca228d9767cc71fd4a4360d309c8cb81c759690c18305c94f177af14aec91",
+      "included": true,
+      "automatic": false
+    },
+    {
+      "path": "audit/op030_split_b_stagger_motion_v06.json",
+      "exists": true,
+      "sha256": "a59e4a9a72a212926fafeca7312d989fda5796d2bcbf11907c6f3c5a30561ac1",
+      "included": true,
+      "automatic": false
+    },
+    {
+      "path": "audit/op030_split_b_stagger_v06_completion.json",
+      "exists": true,
+      "sha256": "0fe77aa15e59099c8703aa5c8d314c9886055a729a742207901f11e303446f82",
+      "included": true,
+      "automatic": false
+    },
+    {
+      "path": "audit/op030_split_b_stagger_v06_connection_11.json",
+      "exists": true,
+      "sha256": "e1186e25aa9b282ed500b1a8ef5aa533daa95979912bbae59f5b6e3e1a0ba88a",
+      "included": true,
+      "automatic": false
+    },
+    {
+      "path": "audit/op030_split_b_stagger_v06_identity_12.json",
+      "exists": true,
+      "sha256": "8307046caa426dde806d861aa6bbc0361a0ea319ad52df3b1932ea9085b4b605",
+      "included": true,
+      "automatic": false
+    },
+    {
+      "path": "audit/op030_split_layout_portable_rebake_native_camera_final_v06.json",
+      "exists": true,
+      "sha256": "3ebcd5d35f41e7fc3d4f5031d36a901c411ddcd6a5cbd0aea54ed89e4f87ac23",
+      "included": true,
+      "automatic": false
+    },
+    {
+      "path": "audit/op030_split_layout_portable_rebake_v06.json",
+      "exists": true,
+      "sha256": "e1183f85ad09d8d9a739285f2cca2aa8616b95caa17296463407948c9c5253b2",
+      "included": true,
+      "automatic": false
+    },
+    {
+      "path": "audit/op030_split_native_v06.json",
+      "exists": true,
+      "sha256": "94131bdf7cd66352b3065d2402af649a589baceec75ebb0f24b837ae6b27e8c5",
+      "included": false,
+      "automatic": true
+    },
+    {
+      "path": "audit/op030_stagger_air_clearance_static_v06.json",
+      "exists": true,
+      "sha256": "cb0dd4d7bc7fef08b3b4b3132766898593efd41478ad4eb221e6a626a5407711",
+      "included": false,
+      "automatic": true
+    },
+    {
+      "path": "audit/op030_stagger_air_clearance_static_v06_completion.json",
+      "exists": true,
+      "sha256": "9b4a124db2d65edfa82ee6d5803de74e4c78e046a34bb238533b1faea39d1235",
+      "included": true,
+      "automatic": false
+    },
+    {
+      "path": "audit/op030_stagger_static_v06_completion.json",
+      "exists": true,
+      "sha256": "375af0d2fc1620967ab62098971bd4d8984e4cec6d7814123c745b6866d62efd",
+      "included": true,
+      "automatic": false
+    },
+    {
+      "path": "audit/op030_stagger_static_v06_readback.json",
+      "exists": true,
+      "sha256": "596fd122fc38c46d687b7352515a53e94260da5c3bd8fb88c3d8af035dec804f",
+      "included": true,
+      "automatic": false
+    },
+    {
+      "path": "audit/op030_stagger_supported_static_v06_completion.json",
+      "exists": true,
+      "sha256": "b1c99136a07f535939ccbbfd00ad0f680b2422023537d21bab7e37c8cf15b849",
+      "included": true,
+      "automatic": false
+    },
+    {
+      "path": "audit/op030_stagger_supported_static_v06_readback.json",
+      "exists": true,
+      "sha256": "c8aa2bb5f65cdf916b772f99d8a834d81148fc883c19984acaa527922fb096ee",
+      "included": true,
+      "automatic": false
+    },
+    {
+      "path": "audit/op030_support_ascent_saved_v05.json",
+      "exists": true,
+      "sha256": "ce2cfc0d14fe282589b6a9ce3225f1fad2a52ad76f908431da36885e99e9da81",
+      "included": true,
+      "automatic": false
+    },
+    {
+      "path": "audit/op030_support_delivery_v05.json",
+      "exists": true,
+      "sha256": "e595057eac15ed3a67ab81c0223431766842c1a0e50b3ce4c5e8f8e0e0101cf5",
+      "included": true,
+      "automatic": false
+    }
+  ],
+  "automatic_package_inputs": {
+    "package": "scripts/package_op030_split_v06.py",
+    "sha256": "f5f5c5e24eed001ddf806eb025bb17341624b746904ae2062c536454b9a296be",
+    "helper_count": 19,
+    "exact_rebake_input_count": 23,
+    "excluded_from_extra_evidence": "Static/native/manifest, prepared, plan, document, 19 helpers and video reports are auto-included"
+  },
+  "pending_required_records": [
+    "Browser delivery check and exact copy/archive inventory verification"
+  ],
+  "exclusions": [
+    "Old v05 B report is included only for saved animation duration comparison, not as collision/identity proof for the new B path",
+    "Old v05 integration/portable success is not substituted for v06 execution",
+    "Incomplete B seeds, failed candidates, old videos, huge mesh NPZ/inventory and diagnostic natives; selected identity_12/connection_11 are completed final evidence",
+    "Initial afb642 and repaired e197a90 are provenance; final active static is air-clearance0de256"
+  ],
+  "qualifications": [
+    "A/C saved banks remain unchanged. New B background/transfer records retain original 8674 native pins and are inherited via the separately recorded non-camera identity delta",
+    "Initial static completion notes 33mm support gaps; supported completion records their bounded correction",
+    "Pipe selection completion records historical pending-B scope; later full B final records complete that standalone motion check",
+    "No formal physical validity, hardware takt or shortest-path proof is made; encoded-video completion is stated only when all four actual files match their full-decode reports",
+    "F01 remains unchanged; two-level pallet return is not implemented; OP040 connection diagram inquiry pending"
+  ],
+  "previous_v05_preserved": {
+    "selection_path": "analysis/op030_v05_package_evidence.json",
+    "selection_sha256": "21a85cc3d317e49b5b0435c9f84dfd2a637d4f74ef297a17b470732fe753ce24",
+    "document_path": "OP030_三ST工程・部品確認書_v05.md",
+    "document_sha256": "45f5205d17d59f6376d9b5aacbc41222bd2df431757d50c27ef214e469386871"
+  },
+  "stage_downloads_vault_modified": false,
+  "rebake_executed": true,
+  "formal_physical_validity_verdict": null,
+  "source_selection_before_process_only": {
+    "sha256": "5abe2b3dbce9abd14e16ff092fa5503e808990add51fcba7ea58aa0dfec8e37c",
+    "archive_sha256": "96cf056ef52a0b8057b897d837d40688100f1e0389d9a2ce3943f87e162cf533"
+  }
+}

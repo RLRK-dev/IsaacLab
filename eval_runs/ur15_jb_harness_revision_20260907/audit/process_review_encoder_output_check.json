@@ -1,0 +1,17 @@
+{
+  "observed_at": "2026-09-11T19:32:33.307692+09:00",
+  "encoder_sha256": "ad150af188741a26c1570564e28c301ea9d50275656a50db695fbe245fb8be50",
+  "synthetic_fixture": true,
+  "scope": "Short encoder output/metadata/decode check only; no native, motion, or physical-validity conclusion",
+  "actual_mp4_names": [
+    "CHECK_split_process_encoder_smoke_review.mp4"
+  ],
+  "raw_mp4_count": 0,
+  "wide_video_count": 0,
+  "frames": 3,
+  "fps": 15,
+  "duration_s": 0.2,
+  "full_decode_exit_code": 0,
+  "passed": true,
+  "temporary_artifacts_removed_on_exit": true
+}

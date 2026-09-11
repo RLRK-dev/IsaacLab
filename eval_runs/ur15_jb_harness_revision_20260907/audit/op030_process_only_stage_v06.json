@@ -1,0 +1,25 @@
+{
+  "observed_at": "2026-09-11T19:30:42.351215+09:00",
+  "user_instruction": "Only *_split_process_*_review.mp4 for future generation and Downloads/ZIP video delivery",
+  "source_stage": "/home/rlrk/IsaacLab/eval_runs/ur15_jb_harness_revision_20260907/deliverables/UR15_JB_OP030_20260910_v06",
+  "source_inventory_sha256": "601509809c4affa6ff1108e2f9d71cd880fdebf9fc3d0014c456d4048a102dde",
+  "original_delivery_report_sha256": "a9f22d69fe33f439ff066ff63129db0c3a0bfc5154bd890788abf78874b9320b",
+  "original_archive_sha256": "96cf056ef52a0b8057b897d837d40688100f1e0389d9a2ce3943f87e162cf533",
+  "native_sha256": "e65bef607c1d29671fc982d14d72d4c2694420edd284378cb2f1445f18f354ed",
+  "video": "UR15_JB_OP030_split_process_v06_review.mp4",
+  "video_sha256": "2030ae0e6de5e53e90bc5f2a86977f65fcb6cf15bed62e1d391d4a2011f35004",
+  "video_reencoded": false,
+  "removed_video_files": [
+    "UR15_JB_OP030_split_process_v06_raw.mp4",
+    "UR15_JB_OP030_split_wide_v06_raw.mp4",
+    "UR15_JB_OP030_split_wide_v06_review.mp4"
+  ],
+  "exact_rebake_inputs_unchanged": 23,
+  "future_encoder": "scripts/encode_process_review_video.py",
+  "future_generated_mp4_count": 1,
+  "future_raw_mp4_intermediate": false,
+  "formal_physical_validity_verdict": null,
+  "stage": "/home/rlrk/IsaacLab/eval_runs/ur15_jb_harness_revision_20260907/deliverables/UR15_JB_OP030_20260910_v06_process_only",
+  "inventory_sha256": "3497f50f08062f35270d03adbb0b472428de38d6d21ec61872dd335945f75652",
+  "file_count": 171
+}

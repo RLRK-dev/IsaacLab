@@ -1,0 +1,231 @@
+{
+  "observed_at": "2026-09-11T20:00:22.603042+09:00",
+  "user_directives": [
+    "Generate and deliver only *_split_process_*_review.mp4",
+    "v06 video reviewed; proceed to OP040",
+    "Push appropriate checkpoints"
+  ],
+  "prior_commit": "05021edc0e87cb3d2dbcb32df0ea93663d0f5fe0",
+  "included_files": [
+    {
+      "path": "AGENTS.md",
+      "source": "/home/rlrk/IsaacLab/eval_runs/ur15_jb_harness_revision_20260907/AGENTS.md",
+      "source_sha256": "73f3c90414e2a6fcedcf1ac1568a8bf70f932dfc613f437d1f564752b3f2cc08",
+      "checkpoint_sha256": "73f3c90414e2a6fcedcf1ac1568a8bf70f932dfc613f437d1f564752b3f2cc08",
+      "previous_checkpoint_sha256": null
+    },
+    {
+      "path": "data/video_delivery_policy.json",
+      "source": "/home/rlrk/IsaacLab/eval_runs/ur15_jb_harness_revision_20260907/data/video_delivery_policy.json",
+      "source_sha256": "5a883719c95bba0dca0bd2dd5c82d58064e99866b3635986c0668e3e9f147be6",
+      "checkpoint_sha256": "5a883719c95bba0dca0bd2dd5c82d58064e99866b3635986c0668e3e9f147be6",
+      "previous_checkpoint_sha256": null
+    },
+    {
+      "path": "scripts/encode_process_review_video.py",
+      "source": "/home/rlrk/IsaacLab/eval_runs/ur15_jb_harness_revision_20260907/scripts/encode_process_review_video.py",
+      "source_sha256": "ad150af188741a26c1570564e28c301ea9d50275656a50db695fbe245fb8be50",
+      "checkpoint_sha256": "ad150af188741a26c1570564e28c301ea9d50275656a50db695fbe245fb8be50",
+      "previous_checkpoint_sha256": null
+    },
+    {
+      "path": "scripts/verify_process_review_package.py",
+      "source": "/home/rlrk/IsaacLab/eval_runs/ur15_jb_harness_revision_20260907/scripts/verify_process_review_package.py",
+      "source_sha256": "8ae64639c46fede3c1320e6c3594a75c4e38e985b14d0dd35c47f9bebb0f9868",
+      "checkpoint_sha256": "8ae64639c46fede3c1320e6c3594a75c4e38e985b14d0dd35c47f9bebb0f9868",
+      "previous_checkpoint_sha256": null
+    },
+    {
+      "path": "analysis/package_process_only_v06.py",
+      "source": "/home/rlrk/IsaacLab/eval_runs/ur15_jb_harness_revision_20260907/analysis/package_process_only_v06.py",
+      "source_sha256": "5273a0fc20333aba1412241979456dba41a413ce1aaf8686ffd03c343a41bd49",
+      "checkpoint_sha256": "dd51a3f8c5bbf6a239ca49e4ac2c71aed501f2f788ea2a645f60439f1b32b026",
+      "previous_checkpoint_sha256": null
+    },
+    {
+      "path": "analysis/process_only_delivery_scope_v06.md",
+      "source": "/home/rlrk/IsaacLab/eval_runs/ur15_jb_harness_revision_20260907/analysis/process_only_delivery_scope_v06.md",
+      "source_sha256": "340400e591e130710b932516025614bbe0a6e3769bdeacf3f8e55e7b578e07a2",
+      "checkpoint_sha256": "340400e591e130710b932516025614bbe0a6e3769bdeacf3f8e55e7b578e07a2",
+      "previous_checkpoint_sha256": null
+    },
+    {
+      "path": "analysis/verify_op030_split_process_page.mjs",
+      "source": "/home/rlrk/IsaacLab/eval_runs/ur15_jb_harness_revision_20260907/analysis/verify_op030_split_process_page.mjs",
+      "source_sha256": "f799408aceb9882907f1de208297ae33f33822d6a4dc4fe697456eebcd5299ba",
+      "checkpoint_sha256": "f799408aceb9882907f1de208297ae33f33822d6a4dc4fe697456eebcd5299ba",
+      "previous_checkpoint_sha256": null
+    },
+    {
+      "path": "scripts/verify_op030_process_delivery_v06.py",
+      "source": "/home/rlrk/IsaacLab/eval_runs/ur15_jb_harness_revision_20260907/scripts/verify_op030_process_delivery_v06.py",
+      "source_sha256": "fb380edab8ad11381964eb9d31f90eef1dce08f2ef9d8259c9ce7f2273d569cd",
+      "checkpoint_sha256": "fb380edab8ad11381964eb9d31f90eef1dce08f2ef9d8259c9ce7f2273d569cd",
+      "previous_checkpoint_sha256": null
+    },
+    {
+      "path": "scripts/deliver_op030_process_v06.py",
+      "source": "/home/rlrk/IsaacLab/eval_runs/ur15_jb_harness_revision_20260907/scripts/deliver_op030_process_v06.py",
+      "source_sha256": "f366b3f8c7c576b147fbf318659d12f2e1bd39190ccd846a306416076a146b57",
+      "checkpoint_sha256": "f366b3f8c7c576b147fbf318659d12f2e1bd39190ccd846a306416076a146b57",
+      "previous_checkpoint_sha256": null
+    },
+    {
+      "path": "OP030_三ST工程・部品確認書_v06.md",
+      "source": "/home/rlrk/IsaacLab/eval_runs/ur15_jb_harness_revision_20260907/OP030_三ST工程・部品確認書_v06.md",
+      "source_sha256": "c52088f053144f099e26a62cae7e46a435899a2c17573c6e5d59d5177f867c38",
+      "checkpoint_sha256": "c52088f053144f099e26a62cae7e46a435899a2c17573c6e5d59d5177f867c38",
+      "previous_checkpoint_sha256": "20877104a155f6da48c77b226825de7563216e9e77999aa68561eafa5cc4003f"
+    },
+    {
+      "path": "README_OP030_split_v06.md",
+      "source": "/home/rlrk/IsaacLab/eval_runs/ur15_jb_harness_revision_20260907/README_OP030_split_v06.md",
+      "source_sha256": "add3ec794936398e817004d02e2567b6ee4594f1be2648aee85f1e7d15a7dd5f",
+      "checkpoint_sha256": "add3ec794936398e817004d02e2567b6ee4594f1be2648aee85f1e7d15a7dd5f",
+      "previous_checkpoint_sha256": null
+    },
+    {
+      "path": "analysis/op030_v06_package_evidence.json",
+      "source": "/home/rlrk/IsaacLab/eval_runs/ur15_jb_harness_revision_20260907/analysis/op030_v06_package_evidence.json",
+      "source_sha256": "61f2de161079574628613ff97c3a79af70484ac0abb90c123f68602572a3230c",
+      "checkpoint_sha256": "61f2de161079574628613ff97c3a79af70484ac0abb90c123f68602572a3230c",
+      "previous_checkpoint_sha256": null
+    },
+    {
+      "path": "audit/op030_process_only_delivery_v06.json",
+      "source": "/home/rlrk/IsaacLab/eval_runs/ur15_jb_harness_revision_20260907/audit/op030_process_only_delivery_v06.json",
+      "source_sha256": "e0bdc5cc34386e07d9b5b1a9bf5accc4536f91e50e747d1f6ed5a31952b5ce25",
+      "checkpoint_sha256": "e0bdc5cc34386e07d9b5b1a9bf5accc4536f91e50e747d1f6ed5a31952b5ce25",
+      "previous_checkpoint_sha256": null
+    },
+    {
+      "path": "audit/op030_process_only_stage_v06.json",
+      "source": "/home/rlrk/IsaacLab/eval_runs/ur15_jb_harness_revision_20260907/audit/op030_process_only_stage_v06.json",
+      "source_sha256": "7cd4b5c945e37c44d26b9e0b81fb32f5cfeaac4f6d291596ddac1eb6f6cbc0de",
+      "checkpoint_sha256": "7cd4b5c945e37c44d26b9e0b81fb32f5cfeaac4f6d291596ddac1eb6f6cbc0de",
+      "previous_checkpoint_sha256": null
+    },
+    {
+      "path": "audit/op030_split_process_page_browser_v06/completion.json",
+      "source": "/home/rlrk/IsaacLab/eval_runs/ur15_jb_harness_revision_20260907/audit/op030_split_process_page_browser_v06/completion.json",
+      "source_sha256": "6eb2ef6ff0cf4f8b6b36f9fa1f87e77bcc88cf70846552ba684b96349c3aa3fe",
+      "checkpoint_sha256": "6eb2ef6ff0cf4f8b6b36f9fa1f87e77bcc88cf70846552ba684b96349c3aa3fe",
+      "previous_checkpoint_sha256": null
+    },
+    {
+      "path": "audit/process_review_encoder_output_check.json",
+      "source": "/home/rlrk/IsaacLab/eval_runs/ur15_jb_harness_revision_20260907/audit/process_review_encoder_output_check.json",
+      "source_sha256": "1969fb6a8d00bf89b9b80ee6b10e6363183c631c5c5e2a4f7e058a7a17e9b38e",
+      "checkpoint_sha256": "1969fb6a8d00bf89b9b80ee6b10e6363183c631c5c5e2a4f7e058a7a17e9b38e",
+      "previous_checkpoint_sha256": null
+    },
+    {
+      "path": "audit/op030_v06_render_parallel_completion.json",
+      "source": "/home/rlrk/IsaacLab/eval_runs/ur15_jb_harness_revision_20260907/audit/op030_v06_render_parallel_completion.json",
+      "source_sha256": "10be4809de35fa596936fd67db90089899dd8f44bb44b94cb4076c2bb77c9eb6",
+      "checkpoint_sha256": "10be4809de35fa596936fd67db90089899dd8f44bb44b94cb4076c2bb77c9eb6",
+      "previous_checkpoint_sha256": null
+    },
+    {
+      "path": "audit/op030_split_delivery_v06.json",
+      "source": "/home/rlrk/IsaacLab/eval_runs/ur15_jb_harness_revision_20260907/audit/op030_split_delivery_v06.json",
+      "source_sha256": "a9f22d69fe33f439ff066ff63129db0c3a0bfc5154bd890788abf78874b9320b",
+      "checkpoint_sha256": "a9f22d69fe33f439ff066ff63129db0c3a0bfc5154bd890788abf78874b9320b",
+      "previous_checkpoint_sha256": null
+    },
+    {
+      "path": "audit/op030_process_only_derivation_v06.json",
+      "source": "/home/rlrk/IsaacLab/eval_runs/ur15_jb_harness_revision_20260907/deliverables/UR15_JB_OP030_20260910_v06_process_only/audit/op030_process_only_derivation_v06.json",
+      "source_sha256": "046fd8f57986b8fbf0aa549fcd6db82c9bd96034e60c01984d431b5495ffebcc",
+      "checkpoint_sha256": "046fd8f57986b8fbf0aa549fcd6db82c9bd96034e60c01984d431b5495ffebcc",
+      "previous_checkpoint_sha256": null
+    }
+  ],
+  "delivery": {
+    "observed_at": "2026-09-11T19:37:31.763717+09:00",
+    "directory": "/home/rlrk/Downloads/UR15_JB_OP030_20260910_v06",
+    "archive": "/home/rlrk/Downloads/UR15_JB_OP030_20260910_v06.zip",
+    "archive_sha256": "1c66b66a96661706d59d2931496bc9d7e62c42580ac988b774a7e9cc20a97ded",
+    "archive_bytes": 592879592,
+    "native_sha256": "e65bef607c1d29671fc982d14d72d4c2694420edd284378cb2f1445f18f354ed",
+    "inventory_sha256": "3497f50f08062f35270d03adbb0b472428de38d6d21ec61872dd335945f75652",
+    "files": 171,
+    "file_bytes": 666111268,
+    "checks": {
+      "directory_names": true,
+      "directory_sha256": true,
+      "archive_names": true,
+      "archive_crc": true,
+      "archive_entry_sha256": true
+    },
+    "browser": {
+      "path": "/home/rlrk/IsaacLab/eval_runs/ur15_jb_harness_revision_20260907/audit/op030_split_process_page_browser_v06/completion.json",
+      "sha256": "6eb2ef6ff0cf4f8b6b36f9fa1f87e77bcc88cf70846552ba684b96349c3aa3fe",
+      "page_sha256": "9b380c65577d907cc53bde5c4d6b608b65eb2eeb4108abd8433d7bca1eaf93ee",
+      "passed": true
+    },
+    "previous_delivery_observation": {
+      "UR15_JB_OP030_20260910_v05.zip": {
+        "sha256": "ee592e8c33faf3c596259419c48127c36cf3c5ee4311b61a49789241ef49eb87",
+        "matches_prior": true
+      },
+      "UR15_JB_OP030_20260910_v05/UR15_JB_OP030_split_v05.blend": {
+        "sha256": "985c7edf11a80f0e1e15ba5176b3040b9d733c30315ae6b732b4c359239afc3d",
+        "matches_prior": true
+      }
+    },
+    "replaced_v06_delivery": {
+      "report": "/home/rlrk/IsaacLab/eval_runs/ur15_jb_harness_revision_20260907/audit/op030_split_delivery_v06.json",
+      "report_sha256": "a9f22d69fe33f439ff066ff63129db0c3a0bfc5154bd890788abf78874b9320b",
+      "directory": "/home/rlrk/IsaacLab/eval_runs/ur15_jb_harness_revision_20260907/analysis/op030_v06_full_delivery_before_process_only/UR15_JB_OP030_20260910_v06",
+      "archive": "/home/rlrk/IsaacLab/eval_runs/ur15_jb_harness_revision_20260907/analysis/op030_v06_full_delivery_before_process_only/UR15_JB_OP030_20260910_v06.zip",
+      "archive_sha256": "96cf056ef52a0b8057b897d837d40688100f1e0389d9a2ce3943f87e162cf533",
+      "preserved": true
+    },
+    "delivered_mp4_count": 1,
+    "video": {
+      "path": "UR15_JB_OP030_split_process_v06_review.mp4",
+      "sha256": "2030ae0e6de5e53e90bc5f2a86977f65fcb6cf15bed62e1d391d4a2011f35004",
+      "reencoded": false
+    },
+    "future_policy": {
+      "path": "data/video_delivery_policy.json",
+      "sha256": "5a883719c95bba0dca0bd2dd5c82d58064e99866b3635986c0668e3e9f147be6"
+    },
+    "formal_physical_validity_verdict": null
+  },
+  "production_line_state_source": {
+    "path": "/home/rlrk/IsaacLab/thread_isaac_lab/thread-vault/T-PRODUCTION-LINE/state.md",
+    "sha256": "7978d877778e7b81cc02befe3010c956ac2a788d070e8e7368d34b2d73237449"
+  },
+  "new_encoder_output_check": {
+    "observed_at": "2026-09-11T19:32:33.307692+09:00",
+    "encoder_sha256": "ad150af188741a26c1570564e28c301ea9d50275656a50db695fbe245fb8be50",
+    "synthetic_fixture": true,
+    "scope": "Short encoder output/metadata/decode check only; no native, motion, or physical-validity conclusion",
+    "actual_mp4_names": [
+      "CHECK_split_process_encoder_smoke_review.mp4"
+    ],
+    "raw_mp4_count": 0,
+    "wide_video_count": 0,
+    "frames": 3,
+    "fps": 15,
+    "duration_s": 0.2,
+    "full_decode_exit_code": 0,
+    "passed": true,
+    "temporary_artifacts_removed_on_exit": true
+  },
+  "immutable_rebake_input_count": 23,
+  "provenance_note": "Original native, banks and exact rebake helpers were not edited. Source digest pairs refer to this capture; any hook formatting of these isolated copies must be recorded separately. The newly delivered MP4 is the completed original process review, not a run of the new encoder.",
+  "formal_physical_validity_verdict": null,
+  "isolated_formatter_changes": [
+    {
+      "path": "analysis/package_process_only_v06.py",
+      "source_sha256": "5273a0fc20333aba1412241979456dba41a413ce1aaf8686ffd03c343a41bd49",
+      "checkpoint_sha256": "dd51a3f8c5bbf6a239ca49e4ac2c71aed501f2f788ea2a645f60439f1b32b026",
+      "ast_equal": true
+    }
+  ],
+  "isolated_executable_mode_change": "analysis/verify_op030_split_process_page.mjs marked executable to match its existing shebang; bytes unchanged",
+  "validation_note": "Full hooks passed before staging. First hook run including all 22 staged files wrapped one package expression and required the existing JavaScript shebang to be executable. The formatter AST comparison and compile checks passed; a final full hook run follows before commit."
+}

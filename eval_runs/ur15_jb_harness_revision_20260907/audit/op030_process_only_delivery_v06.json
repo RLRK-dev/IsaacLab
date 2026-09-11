@@ -1,0 +1,53 @@
+{
+  "observed_at": "2026-09-11T19:37:31.763717+09:00",
+  "directory": "/home/rlrk/Downloads/UR15_JB_OP030_20260910_v06",
+  "archive": "/home/rlrk/Downloads/UR15_JB_OP030_20260910_v06.zip",
+  "archive_sha256": "1c66b66a96661706d59d2931496bc9d7e62c42580ac988b774a7e9cc20a97ded",
+  "archive_bytes": 592879592,
+  "native_sha256": "e65bef607c1d29671fc982d14d72d4c2694420edd284378cb2f1445f18f354ed",
+  "inventory_sha256": "3497f50f08062f35270d03adbb0b472428de38d6d21ec61872dd335945f75652",
+  "files": 171,
+  "file_bytes": 666111268,
+  "checks": {
+    "directory_names": true,
+    "directory_sha256": true,
+    "archive_names": true,
+    "archive_crc": true,
+    "archive_entry_sha256": true
+  },
+  "browser": {
+    "path": "/home/rlrk/IsaacLab/eval_runs/ur15_jb_harness_revision_20260907/audit/op030_split_process_page_browser_v06/completion.json",
+    "sha256": "6eb2ef6ff0cf4f8b6b36f9fa1f87e77bcc88cf70846552ba684b96349c3aa3fe",
+    "page_sha256": "9b380c65577d907cc53bde5c4d6b608b65eb2eeb4108abd8433d7bca1eaf93ee",
+    "passed": true
+  },
+  "previous_delivery_observation": {
+    "UR15_JB_OP030_20260910_v05.zip": {
+      "sha256": "ee592e8c33faf3c596259419c48127c36cf3c5ee4311b61a49789241ef49eb87",
+      "matches_prior": true
+    },
+    "UR15_JB_OP030_20260910_v05/UR15_JB_OP030_split_v05.blend": {
+      "sha256": "985c7edf11a80f0e1e15ba5176b3040b9d733c30315ae6b732b4c359239afc3d",
+      "matches_prior": true
+    }
+  },
+  "replaced_v06_delivery": {
+    "report": "/home/rlrk/IsaacLab/eval_runs/ur15_jb_harness_revision_20260907/audit/op030_split_delivery_v06.json",
+    "report_sha256": "a9f22d69fe33f439ff066ff63129db0c3a0bfc5154bd890788abf78874b9320b",
+    "directory": "/home/rlrk/IsaacLab/eval_runs/ur15_jb_harness_revision_20260907/analysis/op030_v06_full_delivery_before_process_only/UR15_JB_OP030_20260910_v06",
+    "archive": "/home/rlrk/IsaacLab/eval_runs/ur15_jb_harness_revision_20260907/analysis/op030_v06_full_delivery_before_process_only/UR15_JB_OP030_20260910_v06.zip",
+    "archive_sha256": "96cf056ef52a0b8057b897d837d40688100f1e0389d9a2ce3943f87e162cf533",
+    "preserved": true
+  },
+  "delivered_mp4_count": 1,
+  "video": {
+    "path": "UR15_JB_OP030_split_process_v06_review.mp4",
+    "sha256": "2030ae0e6de5e53e90bc5f2a86977f65fcb6cf15bed62e1d391d4a2011f35004",
+    "reencoded": false
+  },
+  "future_policy": {
+    "path": "data/video_delivery_policy.json",
+    "sha256": "5a883719c95bba0dca0bd2dd5c82d58064e99866b3635986c0668e3e9f147be6"
+  },
+  "formal_physical_validity_verdict": null
+}

@@ -6,6 +6,18 @@ The completed v05 review has three OP030 stations: support placement and M4 fast
 
 At the initial snapshot, v06 was work in progress for a staggered B robot and supply table. The final static air-pipe candidate had been saved, while the final B connection/replay and integrated native checks were pending at that timestamp. See `analysis/OP030_v06_scope.md` and the v06 process document for the intended change.
 
+## Latest delivery and generation policy (2026-09-11)
+
+The v06 staggered review is complete, and the user confirmed watching its process review before requesting OP040. The current Downloads directory and ZIP contain only `UR15_JB_OP030_split_process_v06_review.mp4`. All future revisions generate only `*_split_process_*_review.mp4`: render the process PNGs and use `scripts/encode_process_review_video.py` to composite labels directly, without a raw MP4 intermediate or a wide-view movie. See `AGENTS.md`, `data/video_delivery_policy.json`, and `README_OP030_split_v06.md`.
+
+The retained process video has 7,031 frames at 15 fps, 1280 by 720 pixels, and a duration of about 7 minutes 49 seconds. It passed complete decode, and the one-video page passed actual playback, 160 chapter checks, 133 relative links and four narrow/wide layout conditions without JavaScript exceptions or overflow. The short output-type check for the new encoder separately created only one three-frame review MP4; it is not robot-motion evidence. No rerender or reencoding was needed to project the completed v06 delivery to one video.
+
+The current ZIP `/home/rlrk/Downloads/UR15_JB_OP030_20260910_v06.zip` is 592879592 bytes, SHA-256 `1c66b66a96661706d59d2931496bc9d7e62c42580ac988b774a7e9cc20a97ded`. All 171 delivered files and ZIP entries passed name, size, SHA and CRC checks. The video SHA-256 is `2030ae0e6de5e53e90bc5f2a86977f65fcb6cf15bed62e1d391d4a2011f35004`. Exact source and artifact observations are in `checkpoint/process_delivery_sources_20260911.json` and `audit/op030_process_only_delivery_v06.json`.
+
+The previously completed four-video v06 directory and ZIP are preserved under `analysis/op030_v06_full_delivery_before_process_only/` in the local working folder. The former ZIP digest remains `96cf056ef52a0b8057b897d837d40688100f1e0389d9a2ce3943f87e162cf533`. Earlier reports retain their timestamps and original artifact digests. The 23 exact rebake inputs are unchanged in the new delivery. Older multi-video scripts are retained as historical inputs; they are not the generation default.
+
+The following initial and camera-final sections describe earlier observations. The current v06 document now describes the completed one-video delivery. OP040 starts from the accepted product state; its new branch connections still need a connection definition. No formal physical-validity verdict is issued by this checkpoint or by the user's video review.
+
 ## Camera-final update (2026-09-11)
 
 B now stands on the opposite side of the conveyor. A and C retain their v05 motion banks, and all three stations retain the fixed pallet origin at 789 mm. The final B bank contains 3,787 frames and 126.2 seconds of saved motion. It preserves cable identity and length while coordinating both arms for pickup, bending, placement and the 180 mm retreat. Its auxiliary geometric checks report no unexpected moving-mesh intersections across all saved B frames; this does not establish physical grasp stability or real-machine takt.
