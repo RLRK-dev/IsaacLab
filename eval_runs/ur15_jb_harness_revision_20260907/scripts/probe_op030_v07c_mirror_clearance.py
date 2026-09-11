@@ -14,7 +14,10 @@ half turn about a vertical axis, and the mirrored box is tested against every ob
 not moving. What comes back is the list of obstacles the copy would be built inside of.
 
 The moving set is the work 1 selection plus the cell's own supply, added by prefix because
-the completeness probe measured A's 72 feeder objects and C's 120 carried at zero. Transport
+the completeness probe measured A's 72 feeder objects and C's 120 carried at zero. B's own
+selection comes from ``analysis/op030_v06_relocation_selection.json``, which is v06's list
+committed to the repository; the 10.5 MB inventory it was lifted from stays local, and the
+local manifest is only cross-checked when it happens to be present. Transport
 and fixtures are not in it: the conveyor, the lift and the sensors are the line, the mirrored
 cell works over the same line, and v06 kept them in place for that reason.
 
@@ -51,6 +54,11 @@ from build_op030_stagger_static_v06 import digest  # noqa: E402
 SOURCE = ROOT / "analysis/op030_v07c_support_repair.blend"
 SOURCE_SHA = "1091683a5d15072e46553b487a30d58a21050bf40515f0d09b9d4d879c01ecce"
 SELECTION = ROOT / "analysis/op030_v07c_cell_selection.json"
+# v06's own selection, lifted out of the 10.5 MB local inventory and committed. Reading it
+# from here rather than from local working material is what keeps every later run reproducible
+# on a fresh checkout; three attempts at work 1 were lost to not having it.
+RELOCATION = ROOT / "analysis/op030_v06_relocation_selection.json"
+# The local manifest carries the same lists. Checked against them when it happens to be there.
 MANIFEST = ROOT / "audit/op030_stagger_static_v06.json"
 MANIFEST_SHA = "bc82917686f8292bf081bdefa2922dbc6851733552eea390c1b725c2cd8b9f8f"
 REPORT = ROOT / "audit/op030_v07c_mirror_clearance.json"
@@ -122,17 +130,23 @@ def moving_names(cell: str, covered: set[str]) -> dict:
 def covered_sets() -> tuple[dict[str, set[str]], dict]:
     """Return each cell's work 1 selection and what it was read from."""
     report = json.loads(SELECTION.read_text())
-    binding = json.loads(MANIFEST.read_text())["stagger_v06"]
-    covered = {"B": set(binding["moved_objects"])}
+    relocation = json.loads(RELOCATION.read_text())
+    covered = {"B": set(relocation["all_selected_object_names"])}
     for label in ("A", "C"):
         row = report["targets"][label]
         covered[label] = {entry["name"] for entry in row["selection"]} | set(row["structure"]["closure_brings_extra"])
+    agrees = None
+    if MANIFEST.exists() and digest(MANIFEST) == MANIFEST_SHA:
+        agrees = set(json.loads(MANIFEST.read_text())["stagger_v06"]["moved_objects"]) == covered["B"]
+        assert agrees, "The committed selection and the local manifest disagree"
     read_from = dict(
         selection=str(SELECTION.relative_to(ROOT)),
         selection_sha256=digest(SELECTION),
         selection_observed_at=report["observed_at"],
-        manifest=str(MANIFEST.relative_to(ROOT)),
-        manifest_sha256=MANIFEST_SHA,
+        relocation=str(RELOCATION.relative_to(ROOT)),
+        relocation_sha256=digest(RELOCATION),
+        local_manifest_present=MANIFEST.exists(),
+        local_manifest_agrees=agrees,
     )
     return covered, read_from
 
@@ -204,7 +218,7 @@ def transforms() -> dict[str, list]:
 def main() -> None:
     """Mirror each cell's set and report what already stands where it would go."""
     assert digest(SOURCE) == SOURCE_SHA, "Probe the repaired candidate work 3 copies"
-    assert MANIFEST.exists() and digest(MANIFEST) == MANIFEST_SHA, "Read the v06 static manifest"
+    assert RELOCATION.exists(), f"Missing v06's committed selection: {RELOCATION}"
     assert not REPORT.exists(), "Preserve the existing report"
     covered, read_from = covered_sets()
 

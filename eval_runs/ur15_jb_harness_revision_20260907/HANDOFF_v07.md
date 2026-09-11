@@ -155,7 +155,37 @@ manifest op030_stagger_static_v06.json stagger_v06: roots=104 moved=420 fixed=76
 
 こうすればそのセル自身の工具が自動的に入り、B の工具は入らない。現在の `closure_brings_extra` がその工具であり、捨てずに使う。
 
-### 固定側との照合（2026-09-12 完了）
+### inventory が届いた。ローカル依存を1つ外した（2026-09-12）
+
+`analysis/op040_stagger_layout_inventory.json`（10.5 MB、`9bc2e8f5…`）が手に入った。作業1で
+3回外した原因になった当のファイルである。**中身は v06 が読んだものと一致する**:
+
+- `move_rigid_subtree_roots` 100 ＋ drops 4 = **104**
+- `all_selected_object_names` 416 ＋ drops 4 = **420**
+- `all_kept_conveyor_fixture_objects` = **76**
+- `source_static.sha256` が `build_op030_stagger_static_v06.py` の `SOURCE_SHA` と一致
+
+**選択を `analysis/op030_v06_relocation_selection.json`（21.8 KB）として切り出し、コミットした。**
+`covered_sets()` はこれを読む。ローカルのマニフェストは、あれば照合するだけになった。
+**新しいチェックアウトでも作業3以降が走る。**
+
+### `equipment_id` による所有者の確認（2026-09-12）
+
+| 部材 | `equipment_id` |
+|---|---|
+| `source_0681` | `station_hardware_02`（OP020） |
+| `source_0693` | `station_hardware_03`（OP030） |
+| `source_0705` | `station_hardware_04`（OP040） |
+| `source_0588` / `0590` | `assembly_cell_04` |
+| `source_1133`〜`1137` | `robot_OP040_left` |
+| `source_0599` | `stocker_04` |
+| `source_0690` | `station_hardware_03` |
+
+`station_hardware_01`〜`_10` があり、**`p04` は 12 個すべて 0.538×1.956×0.193、z +0.0001〜+0.1930
+で同一**（10 局 ＋ B・C のコピー）。`source_0690_m0117_p00` は **0.094×0.094×0.050** の角柱で
+底面 −8.0850。板ではない。
+
+### 固定側との照合（2026-09-12 完了。遠隔側で独立に再現済み）
 
 A・C とも `disjoint_from_fixed: True`。A は閉包込み 228 個、C は 234 個。
 
@@ -167,8 +197,11 @@ A・C とも `disjoint_from_fixed: True`。A は閉包込み 228 個、C は 234
 スクリプトに恒久化した（`overlap_with_fixed_mapped`、`fixed_mapped_present`）。現在の
 出力は素朴形と写像形の両方を出し、`disjoint_from_fixed` は**両方が空のときだけ True** になる。
 
-写せない 5 個（`OP030B_` 接頭辞のみ）は B 固有のハードウェアで、各セルに対応物が無い。
-`fixed_unmappable` に記録している。
+写せない 5 個（`OP030B_` 接頭辞のみ）の正体も確認した。`OP030B_positioner_base_v04`、
+`OP030B_sensor_extension_bracket_RFID` / `_photoeye`、`OP030B_stopper_drop_bracket_+1` / `_-1`。
+**すべてライン側の治具とセンサ**で、セルごとの対応物を持たないのが当然の部材である。
+
+照合は遠隔側でも独立に再現した（別のコード、同じ結論）。A 228 / C 234、素朴形・写像形とも 0。
 
 ---
 
