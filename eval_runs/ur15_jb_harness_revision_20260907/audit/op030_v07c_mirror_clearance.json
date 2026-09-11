@@ -1,0 +1,719 @@
+{
+ "observed_at": "2026-09-12T04:02:30.785455+09:00",
+ "source": "analysis/op030_v07c_support_repair.blend",
+ "source_sha256": "1091683a5d15072e46553b487a30d58a21050bf40515f0d09b9d4d879c01ecce",
+ "read_from": {
+  "selection": "analysis/op030_v07c_cell_selection.json",
+  "selection_sha256": "8d09c9b1c3095249a1042bbae22c19db8864c8137dd5ff103983ba7b3909a90f",
+  "selection_observed_at": "2026-09-12T03:22:05.411241+09:00",
+  "manifest": "audit/op030_stagger_static_v06.json",
+  "manifest_sha256": "bc82917686f8292bf081bdefa2922dbc6851733552eea390c1b725c2cd8b9f8f"
+ },
+ "overlap_m": 0.05,
+ "hall_footprint_m": 8.0,
+ "moving_set_rule": "work 1 selection plus the cell's own supply by prefix; line hardware stays",
+ "cells": {
+  "A": {
+   "destination": "S1R",
+   "station_y_m": -1.7,
+   "mirror_rule": "M(-1.7): (x, y) -> (-x, -3.400 - y)",
+   "moving": {
+    "selection_count": 228,
+    "supply_count": 72,
+    "supply_added_count": 72,
+    "supply_added": [
+     "OP030A_feeder_M4",
+     "OP030A_feeder_M4_UID001",
+     "OP030A_feeder_M4_UID001_hex_head",
+     "OP030A_feeder_M4_UID001_thread",
+     "OP030A_feeder_M4_UID001_washer",
+     "OP030A_feeder_M4_UID002",
+     "OP030A_feeder_M4_UID002_hex_head",
+     "OP030A_feeder_M4_UID002_thread",
+     "OP030A_feeder_M4_UID002_washer",
+     "OP030A_feeder_M4_UID003",
+     "OP030A_feeder_M4_UID003_hex_head",
+     "OP030A_feeder_M4_UID003_thread",
+     "OP030A_feeder_M4_UID003_washer",
+     "OP030A_feeder_M4_UID004",
+     "OP030A_feeder_M4_UID004_hex_head",
+     "OP030A_feeder_M4_UID004_thread",
+     "OP030A_feeder_M4_UID004_washer",
+     "OP030A_feeder_M4_UID005",
+     "OP030A_feeder_M4_UID005_hex_head",
+     "OP030A_feeder_M4_UID005_thread",
+     "OP030A_feeder_M4_UID005_washer",
+     "OP030A_feeder_M4_UID006",
+     "OP030A_feeder_M4_UID006_hex_head",
+     "OP030A_feeder_M4_UID006_thread",
+     "OP030A_feeder_M4_UID006_washer",
+     "OP030A_feeder_M4_UID007",
+     "OP030A_feeder_M4_UID007_hex_head",
+     "OP030A_feeder_M4_UID007_thread",
+     "OP030A_feeder_M4_UID007_washer",
+     "OP030A_feeder_M4_UID008",
+     "OP030A_feeder_M4_UID008_hex_head",
+     "OP030A_feeder_M4_UID008_thread",
+     "OP030A_feeder_M4_UID008_washer",
+     "OP030A_feeder_M4_UID009",
+     "OP030A_feeder_M4_UID009_hex_head",
+     "OP030A_feeder_M4_UID009_thread",
+     "OP030A_feeder_M4_UID009_washer",
+     "OP030A_feeder_M4_UID010",
+     "OP030A_feeder_M4_UID010_hex_head",
+     "OP030A_feeder_M4_UID010_thread",
+     "OP030A_feeder_M4_UID010_washer",
+     "OP030A_feeder_M4_UID011",
+     "OP030A_feeder_M4_UID011_hex_head",
+     "OP030A_feeder_M4_UID011_thread",
+     "OP030A_feeder_M4_UID011_washer",
+     "OP030A_feeder_M4_UID012",
+     "OP030A_feeder_M4_UID012_hex_head",
+     "OP030A_feeder_M4_UID012_thread",
+     "OP030A_feeder_M4_UID012_washer",
+     "OP030A_feeder_M4_base",
+     "OP030A_feeder_M4_drive_enclosure",
+     "OP030A_feeder_M4_escapement",
+     "OP030A_feeder_M4_escapement_gate",
+     "OP030A_feeder_M4_feed_rail_-1",
+     "OP030A_feeder_M4_feed_rail_1",
+     "OP030A_feeder_M4_foot_-0.093",
+     "OP030A_feeder_M4_foot_-0.293",
+     "OP030A_feeder_M4_gate_actuator",
+     "OP030A_feeder_M4_gate_connection_neck_v04",
+     "OP030A_feeder_M4_gate_slide",
+     "OP030A_feeder_M4_hopper_body",
+     "OP030A_feeder_M4_hopper_handle",
+     "OP030A_feeder_M4_hopper_lid",
+     "OP030A_feeder_M4_nose_pedestal",
+     "OP030A_feeder_M4_nose_support",
+     "OP030A_feeder_M4_outer_guide_-1",
+     "OP030A_feeder_M4_outer_guide_1",
+     "OP030A_feeder_M4_pick_nest",
+     "OP030A_feeder_M4_pickup_socket_tcp",
+     "OP030A_feeder_M4_present_sensor",
+     "OP030A_feeder_M4_stand_-0.093",
+     "OP030A_feeder_M4_stand_-0.293"
+    ],
+    "names": 300
+   },
+   "measured_members": 188,
+   "source_envelope": {
+    "low_m": [
+     -2.309999905526638,
+     -3.1100001335144043,
+     -8.085000419989228
+    ],
+    "high_m": [
+     -0.4243646487895444,
+     -0.6993906957371462,
+     2.275103009114331
+    ],
+    "member_count": 188
+   },
+   "mirrored_envelope": {
+    "low_m": [
+     0.4243646487895444,
+     -2.7006093042628536,
+     -8.085000419989228
+    ],
+    "high_m": [
+     2.309999905526638,
+     -0.2899998664855956,
+     2.275103009114331
+    ],
+    "member_count": 188
+   },
+   "clash_count": 18,
+   "clashing_moving_members": 18,
+   "by_owner": [
+    {
+     "owner": "Split_bay_1__source_0780_m0207_p03",
+     "obstacle_count": 17,
+     "deepest_m": 0.21193408170415617,
+     "moving_count": 17
+    },
+    {
+     "owner": "source_0681",
+     "obstacle_count": 1,
+     "deepest_m": 0.1928924972526147,
+     "moving_count": 1
+    }
+   ],
+   "worst": [
+    {
+     "moving": "source_1053_m0308_p00",
+     "obstacle": "Split_bay_1__source_0780_m0207_p03",
+     "obstacle_owner": "Split_bay_1__source_0780_m0207_p03",
+     "depth_m": 0.21193408170415617
+    },
+    {
+     "moving": "source_1058_m0313_p00",
+     "obstacle": "Split_bay_1__source_0780_m0207_p03",
+     "obstacle_owner": "Split_bay_1__source_0780_m0207_p03",
+     "depth_m": 0.19916210256222788
+    },
+    {
+     "moving": "source_0693_m0120_p04",
+     "obstacle": "source_0681_m0108_p04",
+     "obstacle_owner": "source_0681",
+     "depth_m": 0.1928924972526147
+    },
+    {
+     "moving": "source_1055_m0310_p00",
+     "obstacle": "Split_bay_1__source_0780_m0207_p03",
+     "obstacle_owner": "Split_bay_1__source_0780_m0207_p03",
+     "depth_m": 0.1681398512548511
+    },
+    {
+     "moving": "OP030A_feeder_M4_hopper_body",
+     "obstacle": "Split_bay_1__source_0780_m0207_p03",
+     "obstacle_owner": "Split_bay_1__source_0780_m0207_p03",
+     "depth_m": 0.1599999964237213
+    },
+    {
+     "moving": "source_1060_m0315_p00",
+     "obstacle": "Split_bay_1__source_0780_m0207_p03",
+     "obstacle_owner": "Split_bay_1__source_0780_m0207_p03",
+     "depth_m": 0.15470816206799132
+    },
+    {
+     "moving": "source_1059_m0314_p00",
+     "obstacle": "Split_bay_1__source_0780_m0207_p03",
+     "obstacle_owner": "Split_bay_1__source_0780_m0207_p03",
+     "depth_m": 0.1511773285456286
+    },
+    {
+     "moving": "source_1054_m0309_p00",
+     "obstacle": "Split_bay_1__source_0780_m0207_p03",
+     "obstacle_owner": "Split_bay_1__source_0780_m0207_p03",
+     "depth_m": 0.15052599165669878
+    },
+    {
+     "moving": "OP030A_feeder_M4_drive_enclosure",
+     "obstacle": "Split_bay_1__source_0780_m0207_p03",
+     "obstacle_owner": "Split_bay_1__source_0780_m0207_p03",
+     "depth_m": 0.12999999523162842
+    },
+    {
+     "moving": "source_1064_m0319_p00",
+     "obstacle": "Split_bay_1__source_0780_m0207_p03",
+     "obstacle_owner": "Split_bay_1__source_0780_m0207_p03",
+     "depth_m": 0.08316899954184531
+    },
+    {
+     "moving": "source_1052_m0307_p00",
+     "obstacle": "Split_bay_1__source_0780_m0207_p03",
+     "obstacle_owner": "Split_bay_1__source_0780_m0207_p03",
+     "depth_m": 0.07306450709673573
+    },
+    {
+     "moving": "source_1066_m0321_p00",
+     "obstacle": "Split_bay_1__source_0780_m0207_p03",
+     "obstacle_owner": "Split_bay_1__source_0780_m0207_p03",
+     "depth_m": 0.07139644594635186
+    },
+    {
+     "moving": "source_0693_m0120_p01",
+     "obstacle": "Split_bay_1__source_0780_m0207_p03",
+     "obstacle_owner": "Split_bay_1__source_0780_m0207_p03",
+     "depth_m": 0.06099998950958252
+    },
+    {
+     "moving": "source_1057_m0312_p00",
+     "obstacle": "Split_bay_1__source_0780_m0207_p03",
+     "obstacle_owner": "Split_bay_1__source_0780_m0207_p03",
+     "depth_m": 0.05895897688227025
+    },
+    {
+     "moving": "source_1056_m0311_p00",
+     "obstacle": "Split_bay_1__source_0780_m0207_p03",
+     "obstacle_owner": "Split_bay_1__source_0780_m0207_p03",
+     "depth_m": 0.05365554062427891
+    }
+   ]
+  },
+  "B": {
+   "destination": "S2L",
+   "station_y_m": 0.6,
+   "mirror_rule": "M(0.6): (x, y) -> (-x, 1.200 - y)",
+   "moving": {
+    "selection_count": 420,
+    "supply_count": 91,
+    "supply_added_count": 0,
+    "supply_added": [],
+    "names": 420
+   },
+   "measured_members": 292,
+   "source_envelope": {
+    "low_m": [
+     0.5749999416775986,
+     -0.4006104091580821,
+     -8.085000419989228
+    ],
+    "high_m": [
+     2.4200000762939453,
+     2.010000228881836,
+     2.612499952316284
+    ],
+    "member_count": 292
+   },
+   "mirrored_envelope": {
+    "low_m": [
+     -2.4200000762939453,
+     -0.810000228881836,
+     -8.085000419989228
+    ],
+    "high_m": [
+     -0.5749999416775986,
+     1.6006104091580822,
+     2.612499952316284
+    ],
+    "member_count": 292
+   },
+   "clash_count": 45,
+   "clashing_moving_members": 45,
+   "by_owner": [
+    {
+     "owner": "Split_bay_1__source_0779_m0206_p03",
+     "obstacle_count": 37,
+     "deepest_m": 0.3566377503567981,
+     "moving_count": 37
+    },
+    {
+     "owner": "Split_bay_2__source_0779_m0206_p03",
+     "obstacle_count": 8,
+     "deepest_m": 0.3545588682369176,
+     "moving_count": 8
+    }
+   ],
+   "worst": [
+    {
+     "moving": "OP030B__source_1093_m0308_p00",
+     "obstacle": "Split_bay_1__source_0779_m0206_p03",
+     "obstacle_owner": "Split_bay_1__source_0779_m0206_p03",
+     "depth_m": 0.3566377503567981
+    },
+    {
+     "moving": "OP030B__source_1053_m0308_p00",
+     "obstacle": "Split_bay_2__source_0779_m0206_p03",
+     "obstacle_owner": "Split_bay_2__source_0779_m0206_p03",
+     "depth_m": 0.3545588682369176
+    },
+    {
+     "moving": "OP030B__source_0578_m0052_p01",
+     "obstacle": "Split_bay_1__source_0779_m0206_p03",
+     "obstacle_owner": "Split_bay_1__source_0779_m0206_p03",
+     "depth_m": 0.3507704799325927
+    },
+    {
+     "moving": "OP030B__source_1095_m0310_p00",
+     "obstacle": "Split_bay_1__source_0779_m0206_p03",
+     "obstacle_owner": "Split_bay_1__source_0779_m0206_p03",
+     "depth_m": 0.2671793168518404
+    },
+    {
+     "moving": "OP030B__source_1055_m0310_p00",
+     "obstacle": "Split_bay_2__source_0779_m0206_p03",
+     "obstacle_owner": "Split_bay_2__source_0779_m0206_p03",
+     "depth_m": 0.2671792527993597
+    },
+    {
+     "moving": "OP030B__source_1094_m0309_p00",
+     "obstacle": "Split_bay_1__source_0779_m0206_p03",
+     "obstacle_owner": "Split_bay_1__source_0779_m0206_p03",
+     "depth_m": 0.25838874220524644
+    },
+    {
+     "moving": "OP030B__source_0577_m0051_p03",
+     "obstacle": "Split_bay_1__source_0779_m0206_p03",
+     "obstacle_owner": "Split_bay_1__source_0779_m0206_p03",
+     "depth_m": 0.2380000237226494
+    },
+    {
+     "moving": "OP030B__source_0578_m0052_p04",
+     "obstacle": "Split_bay_1__source_0779_m0206_p03",
+     "obstacle_owner": "Split_bay_1__source_0779_m0206_p03",
+     "depth_m": 0.23000004379029104
+    },
+    {
+     "moving": "OP030B__source_0578_m0052_p02",
+     "obstacle": "Split_bay_1__source_0779_m0206_p03",
+     "obstacle_owner": "Split_bay_1__source_0779_m0206_p03",
+     "depth_m": 0.22916002323150586
+    },
+    {
+     "moving": "OP030B__source_1054_m0309_p00",
+     "obstacle": "Split_bay_2__source_0779_m0206_p03",
+     "obstacle_owner": "Split_bay_2__source_0779_m0206_p03",
+     "depth_m": 0.2221340574445323
+    },
+    {
+     "moving": "OP030B__source_1058_m0313_p00",
+     "obstacle": "Split_bay_2__source_0779_m0206_p03",
+     "obstacle_owner": "Split_bay_2__source_0779_m0206_p03",
+     "depth_m": 0.212644240126447
+    },
+    {
+     "moving": "OP030B__source_1098_m0313_p00",
+     "obstacle": "Split_bay_1__source_0779_m0206_p03",
+     "obstacle_owner": "Split_bay_1__source_0779_m0206_p03",
+     "depth_m": 0.21262124207958477
+    },
+    {
+     "moving": "OP030B__source_0578_m0052_p00",
+     "obstacle": "Split_bay_1__source_0779_m0206_p03",
+     "obstacle_owner": "Split_bay_1__source_0779_m0206_p03",
+     "depth_m": 0.20400002050399735
+    },
+    {
+     "moving": "OP030B__source_1089_m0304_p00",
+     "obstacle": "Split_bay_1__source_0779_m0206_p03",
+     "obstacle_owner": "Split_bay_1__source_0779_m0206_p03",
+     "depth_m": 0.191981601406368
+    },
+    {
+     "moving": "OP030B__source_1086_m0301_p00",
+     "obstacle": "Split_bay_1__source_0779_m0206_p03",
+     "obstacle_owner": "Split_bay_1__source_0779_m0206_p03",
+     "depth_m": 0.1794955334209254
+    }
+   ]
+  },
+  "C": {
+   "destination": "S3R",
+   "station_y_m": 2.9,
+   "mirror_rule": "M(2.9): (x, y) -> (-x, 5.800 - y)",
+   "moving": {
+    "selection_count": 234,
+    "supply_count": 120,
+    "supply_added_count": 120,
+    "supply_added": [
+     "OP030C_feeder_M14",
+     "OP030C_feeder_M14_UID001",
+     "OP030C_feeder_M14_UID001_hex",
+     "OP030C_feeder_M14_UID001_washer",
+     "OP030C_feeder_M14_UID002",
+     "OP030C_feeder_M14_UID002_hex",
+     "OP030C_feeder_M14_UID002_washer",
+     "OP030C_feeder_M14_UID003",
+     "OP030C_feeder_M14_UID003_hex",
+     "OP030C_feeder_M14_UID003_washer",
+     "OP030C_feeder_M14_UID004",
+     "OP030C_feeder_M14_UID004_hex",
+     "OP030C_feeder_M14_UID004_washer",
+     "OP030C_feeder_M14_UID005",
+     "OP030C_feeder_M14_UID005_hex",
+     "OP030C_feeder_M14_UID005_washer",
+     "OP030C_feeder_M14_UID006",
+     "OP030C_feeder_M14_UID006_hex",
+     "OP030C_feeder_M14_UID006_washer",
+     "OP030C_feeder_M14_UID007",
+     "OP030C_feeder_M14_UID007_hex",
+     "OP030C_feeder_M14_UID007_washer",
+     "OP030C_feeder_M14_UID008",
+     "OP030C_feeder_M14_UID008_hex",
+     "OP030C_feeder_M14_UID008_washer",
+     "OP030C_feeder_M14_UID009",
+     "OP030C_feeder_M14_UID009_hex",
+     "OP030C_feeder_M14_UID009_washer",
+     "OP030C_feeder_M14_UID010",
+     "OP030C_feeder_M14_UID010_hex",
+     "OP030C_feeder_M14_UID010_washer",
+     "OP030C_feeder_M14_UID011",
+     "OP030C_feeder_M14_UID011_hex",
+     "OP030C_feeder_M14_UID011_washer",
+     "OP030C_feeder_M14_UID012",
+     "OP030C_feeder_M14_UID012_hex",
+     "OP030C_feeder_M14_UID012_washer",
+     "OP030C_feeder_M14_base",
+     "OP030C_feeder_M14_drive_enclosure",
+     "OP030C_feeder_M14_escapement",
+     "OP030C_feeder_M14_escapement_gate",
+     "OP030C_feeder_M14_feed_rail_-1",
+     "OP030C_feeder_M14_feed_rail_1",
+     "OP030C_feeder_M14_foot_-0.151",
+     "OP030C_feeder_M14_foot_-0.351",
+     "OP030C_feeder_M14_gate_actuator",
+     "OP030C_feeder_M14_gate_connection_neck_v04",
+     "OP030C_feeder_M14_gate_slide",
+     "OP030C_feeder_M14_hopper_body",
+     "OP030C_feeder_M14_hopper_handle",
+     "OP030C_feeder_M14_hopper_lid",
+     "OP030C_feeder_M14_nose_pedestal",
+     "OP030C_feeder_M14_nose_support",
+     "OP030C_feeder_M14_outer_guide_-1",
+     "OP030C_feeder_M14_outer_guide_1",
+     "OP030C_feeder_M14_pick_nest",
+     "OP030C_feeder_M14_pickup_socket_tcp",
+     "OP030C_feeder_M14_present_sensor",
+     "OP030C_feeder_M14_stand_-0.151",
+     "OP030C_feeder_M14_stand_-0.351",
+     "OP030C_feeder_M6",
+     "OP030C_feeder_M6_UID001",
+     "OP030C_feeder_M6_UID001_hex",
+     "OP030C_feeder_M6_UID001_washer",
+     "OP030C_feeder_M6_UID002",
+     "OP030C_feeder_M6_UID002_hex",
+     "OP030C_feeder_M6_UID002_washer",
+     "OP030C_feeder_M6_UID003",
+     "OP030C_feeder_M6_UID003_hex",
+     "OP030C_feeder_M6_UID003_washer",
+     "OP030C_feeder_M6_UID004",
+     "OP030C_feeder_M6_UID004_hex",
+     "OP030C_feeder_M6_UID004_washer",
+     "OP030C_feeder_M6_UID005",
+     "OP030C_feeder_M6_UID005_hex",
+     "OP030C_feeder_M6_UID005_washer",
+     "OP030C_feeder_M6_UID006",
+     "OP030C_feeder_M6_UID006_hex",
+     "OP030C_feeder_M6_UID006_washer",
+     "OP030C_feeder_M6_UID007",
+     "OP030C_feeder_M6_UID007_hex",
+     "OP030C_feeder_M6_UID007_washer",
+     "OP030C_feeder_M6_UID008",
+     "OP030C_feeder_M6_UID008_hex",
+     "OP030C_feeder_M6_UID008_washer",
+     "OP030C_feeder_M6_UID009",
+     "OP030C_feeder_M6_UID009_hex",
+     "OP030C_feeder_M6_UID009_washer",
+     "OP030C_feeder_M6_UID010",
+     "OP030C_feeder_M6_UID010_hex",
+     "OP030C_feeder_M6_UID010_washer",
+     "OP030C_feeder_M6_UID011",
+     "OP030C_feeder_M6_UID011_hex",
+     "OP030C_feeder_M6_UID011_washer",
+     "OP030C_feeder_M6_UID012",
+     "OP030C_feeder_M6_UID012_hex",
+     "OP030C_feeder_M6_UID012_washer",
+     "OP030C_feeder_M6_base",
+     "OP030C_feeder_M6_drive_enclosure",
+     "OP030C_feeder_M6_escapement",
+     "OP030C_feeder_M6_escapement_gate",
+     "OP030C_feeder_M6_feed_rail_-1",
+     "OP030C_feeder_M6_feed_rail_1",
+     "OP030C_feeder_M6_foot_-0.070",
+     "OP030C_feeder_M6_foot_-0.270",
+     "OP030C_feeder_M6_gate_actuator",
+     "OP030C_feeder_M6_gate_connection_neck_v04",
+     "OP030C_feeder_M6_gate_slide",
+     "OP030C_feeder_M6_hopper_body",
+     "OP030C_feeder_M6_hopper_handle",
+     "OP030C_feeder_M6_hopper_lid",
+     "OP030C_feeder_M6_nose_pedestal",
+     "OP030C_feeder_M6_nose_support",
+     "OP030C_feeder_M6_outer_guide_-1",
+     "OP030C_feeder_M6_outer_guide_1",
+     "OP030C_feeder_M6_pick_nest",
+     "OP030C_feeder_M6_pickup_socket_tcp",
+     "OP030C_feeder_M6_present_sensor",
+     "OP030C_feeder_M6_stand_-0.070",
+     "OP030C_feeder_M6_stand_-0.270"
+    ],
+    "names": 354
+   },
+   "measured_members": 224,
+   "source_envelope": {
+    "low_m": [
+     -2.309999905526638,
+     1.489999771118164,
+     -8.085000419989228
+    ],
+    "high_m": [
+     -0.3926102226953665,
+     3.9216812967901697,
+     2.0910000801086426
+    ],
+    "member_count": 224
+   },
+   "mirrored_envelope": {
+    "low_m": [
+     0.3926102226953665,
+     1.87831870320983,
+     -8.085000419989228
+    ],
+    "high_m": [
+     2.309999905526638,
+     4.310000228881836,
+     2.0910000801086426
+    ],
+    "member_count": 224
+   },
+   "clash_count": 55,
+   "clashing_moving_members": 40,
+   "by_owner": [
+    {
+     "owner": "Split_bay_2__source_0780_m0207_p03",
+     "obstacle_count": 34,
+     "deepest_m": 0.41508163413624777,
+     "moving_count": 34
+    },
+    {
+     "owner": "source_0705",
+     "obstacle_count": 3,
+     "deepest_m": 0.1928924972526147,
+     "moving_count": 3
+    },
+    {
+     "owner": "source_0588",
+     "obstacle_count": 2,
+     "deepest_m": 0.16300000436604023,
+     "moving_count": 1
+    },
+    {
+     "owner": "source_1136",
+     "obstacle_count": 3,
+     "deepest_m": 0.16248812830588577,
+     "moving_count": 3
+    },
+    {
+     "owner": "source_1134",
+     "obstacle_count": 3,
+     "deepest_m": 0.1199578892915536,
+     "moving_count": 3
+    },
+    {
+     "owner": "source_1135",
+     "obstacle_count": 3,
+     "deepest_m": 0.11279768718669425,
+     "moving_count": 3
+    },
+    {
+     "owner": "source_1133",
+     "obstacle_count": 3,
+     "deepest_m": 0.11039190378324815,
+     "moving_count": 3
+    },
+    {
+     "owner": "source_0590",
+     "obstacle_count": 3,
+     "deepest_m": 0.09867867167978783,
+     "moving_count": 1
+    },
+    {
+     "owner": "source_1137",
+     "obstacle_count": 1,
+     "deepest_m": 0.06276231739177984,
+     "moving_count": 1
+    }
+   ],
+   "worst": [
+    {
+     "moving": "OP030C__source_0578_m0052_p01",
+     "obstacle": "Split_bay_2__source_0780_m0207_p03",
+     "obstacle_owner": "Split_bay_2__source_0780_m0207_p03",
+     "depth_m": 0.41508163413624777
+    },
+    {
+     "moving": "OP030C__source_0578_m0052_p02",
+     "obstacle": "Split_bay_2__source_0780_m0207_p03",
+     "obstacle_owner": "Split_bay_2__source_0780_m0207_p03",
+     "depth_m": 0.3433906897920913
+    },
+    {
+     "moving": "OP030C__source_0578_m0052_p00",
+     "obstacle": "Split_bay_2__source_0780_m0207_p03",
+     "obstacle_owner": "Split_bay_2__source_0780_m0207_p03",
+     "depth_m": 0.33010239772984384
+    },
+    {
+     "moving": "OP030C__source_1093_m0308_p00",
+     "obstacle": "Split_bay_2__source_0780_m0207_p03",
+     "obstacle_owner": "Split_bay_2__source_0780_m0207_p03",
+     "depth_m": 0.30595464115796434
+    },
+    {
+     "moving": "OP030C__source_1098_m0313_p00",
+     "obstacle": "Split_bay_2__source_0780_m0207_p03",
+     "obstacle_owner": "Split_bay_2__source_0780_m0207_p03",
+     "depth_m": 0.3004157775570764
+    },
+    {
+     "moving": "OP030C__source_0578_m0052_p04",
+     "obstacle": "Split_bay_2__source_0780_m0207_p03",
+     "obstacle_owner": "Split_bay_2__source_0780_m0207_p03",
+     "depth_m": 0.2975500579268946
+    },
+    {
+     "moving": "OP030C__source_1100_m0315_p00",
+     "obstacle": "Split_bay_2__source_0780_m0207_p03",
+     "obstacle_owner": "Split_bay_2__source_0780_m0207_p03",
+     "depth_m": 0.2869066806696259
+    },
+    {
+     "moving": "OP030C__source_0577_m0051_p03",
+     "obstacle": "Split_bay_2__source_0780_m0207_p03",
+     "obstacle_owner": "Split_bay_2__source_0780_m0207_p03",
+     "depth_m": 0.2377424189657349
+    },
+    {
+     "moving": "OP030C__source_1095_m0310_p00",
+     "obstacle": "Split_bay_2__source_0780_m0207_p03",
+     "obstacle_owner": "Split_bay_2__source_0780_m0207_p03",
+     "depth_m": 0.22666802668214325
+    },
+    {
+     "moving": "OP030C__source_1094_m0309_p00",
+     "obstacle": "Split_bay_2__source_0780_m0207_p03",
+     "obstacle_owner": "Split_bay_2__source_0780_m0207_p03",
+     "depth_m": 0.22066617301645564
+    },
+    {
+     "moving": "OP030C__source_1099_m0314_p00",
+     "obstacle": "Split_bay_2__source_0780_m0207_p03",
+     "obstacle_owner": "Split_bay_2__source_0780_m0207_p03",
+     "depth_m": 0.21071513425739408
+    },
+    {
+     "moving": "OP030C__source_0578_m0052_p05",
+     "obstacle": "Split_bay_2__source_0780_m0207_p03",
+     "obstacle_owner": "Split_bay_2__source_0780_m0207_p03",
+     "depth_m": 0.20712658550147411
+    },
+    {
+     "moving": "OP030C__source_1089_m0304_p00",
+     "obstacle": "Split_bay_2__source_0780_m0207_p03",
+     "obstacle_owner": "Split_bay_2__source_0780_m0207_p03",
+     "depth_m": 0.19593638256214518
+    },
+    {
+     "moving": "OP030C__source_0693_m0120_p04",
+     "obstacle": "source_0705_m0132_p04",
+     "obstacle_owner": "source_0705",
+     "depth_m": 0.1928924972526147
+    },
+    {
+     "moving": "OP030C__source_1086_m0301_p00",
+     "obstacle": "Split_bay_2__source_0780_m0207_p03",
+     "obstacle_owner": "Split_bay_2__source_0780_m0207_p03",
+     "depth_m": 0.17949554992358285
+    }
+   ]
+  }
+ },
+ "pallet_supply_on_a_only": {
+  "OP030_supply_kit": 2,
+  "OP030_supply_fixed": 1,
+  "source_0587": 5
+ },
+ "pallet_supply_names": {
+  "OP030_supply_kit": [
+   "OP030_supply_kit",
+   "OP030_supply_kit_plate"
+  ],
+  "OP030_supply_fixed": [
+   "OP030_supply_fixed"
+  ],
+  "source_0587": [
+   "source_0587",
+   "source_0587_m0054_p00",
+   "source_0587_m0054_p01",
+   "source_0587_m0054_p02",
+   "source_0587_m0054_p04"
+  ]
+ },
+ "scene_world_transforms_unchanged": true,
+ "saved_scene": false,
+ "scope": "Read-only box clearance of each mirrored cell against what already stands there",
+ "formal_physical_validity_verdict": null
+}
