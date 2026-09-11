@@ -144,6 +144,9 @@ NEIGHBOURHOOD_M = 0.500
 CLEARANCE_SAMPLES = 200
 # Two runs count as crossing where their centre lines come within this of each other.
 CROSSING_M = 0.100
+# Where two runs meet, how much of the first stays within each of these of the second. One
+# cable diameter is 0.056 m, so the last of them is "touching along their length".
+CO_RUN_LIMITS_M = (0.003, 0.010, 0.056)
 HALL_FOOTPRINT_M = 8.0
 
 
@@ -246,13 +249,6 @@ def centre_line(points: np.ndarray) -> np.ndarray:
     return np.asarray(line)
 
 
-def run_length(line: np.ndarray) -> float:
-    """Return the length of a polyline [m]. The steps are not all the nominal size."""
-    if len(line) < 2:
-        return 0.0
-    return float(np.linalg.norm(np.diff(line, axis=0), axis=1).sum())
-
-
 def arc_lengths(line: np.ndarray) -> np.ndarray:
     """Return the distance along the polyline to each of its points [m]."""
     if len(line) < 2:
@@ -268,6 +264,15 @@ def smooth_line(line: np.ndarray) -> np.ndarray:
             break
         out = np.vstack([out[:1], (out[:-2] + out[1:-1] + out[2:]) / 3.0, out[-1:]])
     return out
+
+
+def run_length(line: np.ndarray) -> float:
+    """Return the length of a polyline [m]. The steps are not all the nominal size.
+
+    Taken from the same cumulative sum the arc lengths use, so a run does not read two ways in
+    one report: summing the steps separately differed in the sixteenth digit.
+    """
+    return float(arc_lengths(line)[-1]) if len(line) >= 2 else 0.0
 
 
 def thickness(points: np.ndarray, line: np.ndarray) -> dict:
@@ -381,6 +386,39 @@ def closest_approach(first: np.ndarray, second: np.ndarray) -> dict | None:
     return best
 
 
+def co_run(first: np.ndarray, second: np.ndarray, limits: tuple[float, ...]) -> list[dict]:
+    """Return how much of the first run stays within each distance of the second [m].
+
+    Two runs that meet at 53 micrometres are not crossing at a point. Measured in slabs the
+    axes here stay inside a diameter of each other for about 0.75 m and inside 3 mm for about
+    0.35 m, which is why the reported point of closest approach moved by 0.35 m when the
+    measurement changed and the gap barely did. What work 4 has to separate is a length.
+    """
+    if len(first) < 2 or len(second) < 2:
+        return []
+    along = arc_lengths(first)
+    gaps = np.array(
+        [min(segment_gap(point, point, second[j], second[j + 1])[0] for j in range(len(second) - 1)) for point in first]
+    )
+    out = []
+    for limit in limits:
+        inside = gaps < limit
+        if not inside.any():
+            out.append(dict(within_m=limit, extent_m=0.0, from_m=None, to_m=None))
+            continue
+        covered = float(np.diff(along)[inside[:-1] | inside[1:]].sum())
+        out.append(
+            dict(
+                within_m=limit,
+                extent_m=covered,
+                from_m=float(along[inside].min()),
+                to_m=float(along[inside].max()),
+                closest_m=float(gaps.min()),
+            )
+        )
+    return out
+
+
 def crossings(lines: dict[str, np.ndarray]) -> list[dict]:
     """Return where two runs come within the crossing distance of each other [m]."""
     found = []
@@ -390,7 +428,13 @@ def crossings(lines: dict[str, np.ndarray]) -> list[dict]:
             best = closest_approach(lines[first], lines[second])
             if best is None or best["gap_m"] > CROSSING_M:
                 continue
-            found.append(dict(runs=[first, second], **best))
+            found.append(
+                dict(
+                    runs=[first, second],
+                    **best,
+                    co_run=co_run(lines[first], lines[second], CO_RUN_LIMITS_M),
+                )
+            )
     return sorted(found, key=lambda row: row["gap_m"])
 
 
@@ -473,6 +517,7 @@ def main() -> None:
                     neighbourhood_m=NEIGHBOURHOOD_M,
                     crossing_m=CROSSING_M,
                     crossing_measured="segment to segment, so the gap does not depend on the step",
+                    co_run_limits_m=list(CO_RUN_LIMITS_M),
                 ),
                 what_this_does_not_give=[
                     "the cable's allowed bend radius, which belongs to the real cable",
