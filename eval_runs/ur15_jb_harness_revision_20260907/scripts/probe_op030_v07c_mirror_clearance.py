@@ -18,6 +18,14 @@ the completeness probe measured A's 72 feeder objects and C's 120 carried at zer
 and fixtures are not in it: the conveyor, the lift and the sensors are the line, the mirrored
 cell works over the same line, and v06 kept them in place for that reason.
 
+Box overlap is an upper bound on interference, not interference. Two boxes can overlap while
+the shapes inside them miss each other, which is common for an arm. A clash here means look,
+not stop.
+
+Members whose box is taller than a cell are listed, because one stray vertex stretches a box
+until it overlaps in Z with everything and leaves XY deciding alone. Members skipped for
+being hall-sized are listed too, so nothing leaves the measurement silently.
+
 An overlap here is not automatically fatal. The cells straddle the conveyor by design, so an
 obstacle that is line hardware is expected. An obstacle owned by OP020 or OP040 is not.
 
@@ -61,6 +69,9 @@ OVERLAP_M = 0.050
 # Anything this wide is the floor or the hall, and is not an obstacle to a cell.
 HALL_FOOTPRINT_M = 8.0
 WORST_LISTED = 15
+# A cell is about 2.5 m tall. A member taller than this is reported, because one stray vertex
+# stretches a box until it overlaps in Z with everything and leaves XY deciding alone.
+SUSPECT_Z_M = 3.000
 
 
 def box_of(obj: bpy.types.Object) -> tuple[np.ndarray, np.ndarray] | None:
@@ -71,10 +82,12 @@ def box_of(obj: bpy.types.Object) -> tuple[np.ndarray, np.ndarray] | None:
     if vertices is None or not len(vertices):
         return None
     world = _world_vertices(obj)
-    low, high = world.min(0), world.max(0)
-    if max(high[0] - low[0], high[1] - low[1]) > HALL_FOOTPRINT_M:
-        return None
-    return low, high
+    return world.min(0), world.max(0)
+
+
+def hall_sized(low: np.ndarray, high: np.ndarray) -> bool:
+    """Return whether a box is the floor or the hall rather than a piece of equipment."""
+    return max(high[0] - low[0], high[1] - low[1]) > HALL_FOOTPRINT_M
 
 
 def mirror_box(low: np.ndarray, high: np.ndarray, station_y: float) -> tuple[np.ndarray, np.ndarray]:
@@ -129,7 +142,7 @@ def obstacles(exclude: set[str]) -> tuple[list[str], np.ndarray, np.ndarray]:
         if obj.name in exclude:
             continue
         box = box_of(obj)
-        if box is None:
+        if box is None or hall_sized(*box):
             continue
         names.append(obj.name)
         lows.append(box[0])
@@ -190,11 +203,19 @@ def main() -> None:
         names = set(moving["names"])
         obstacle_names, lows, highs = obstacles(names)
         source_boxes, mirrored_boxes, rows = [], [], []
+        no_geometry, hall_skipped, tall = [], [], []
         for name in sorted(names):
             obj = bpy.data.objects.get(name)
             box = None if obj is None else box_of(obj)
             if box is None:
+                no_geometry.append(name)
                 continue
+            if hall_sized(*box):
+                hall_skipped.append(name)
+                continue
+            extent = float(box[1][2] - box[0][2])
+            if extent > SUSPECT_Z_M:
+                tall.append(dict(name=name, z_low_m=float(box[0][2]), z_high_m=float(box[1][2]), z_extent_m=extent))
             source_boxes.append(box)
             mirrored = mirror_box(*box, station_y)
             mirrored_boxes.append(mirrored)
@@ -216,6 +237,9 @@ def main() -> None:
             mirror_rule=f"M({station_y}): (x, y) -> (-x, {2.0 * station_y:.3f} - y)",
             moving=dict(moving, names=len(moving["names"])),
             measured_members=len(source_boxes),
+            without_geometry=len(no_geometry),
+            hall_sized_skipped=hall_skipped,
+            tall_members=sorted(tall, key=lambda row: -row["z_extent_m"])[:WORST_LISTED],
             source_envelope=envelope(source_boxes) if source_boxes else None,
             mirrored_envelope=envelope(mirrored_boxes) if mirrored_boxes else None,
             clash_count=len(rows),
