@@ -39,6 +39,7 @@ OP030 v06（`e65bef60…`、7分49秒、千鳥配置）が完了済み。その*
 | `scripts/probe_op030_v07c_mirror_clearance.py` | 作業3 箱判定 | **実行済み**（§4） |
 | `scripts/probe_op030_v07c_mesh_contact.py` | 作業3 形状判定 | **実行済み。接触は2件のみ**（§4） |
 | `scripts/probe_op030_v07c_controller_placement.py` | 作業3 盤と床板 | **要再実行**。初版は `p04` の扱いを誤っていた |
+| `scripts/build_op030_v07c_stagger_both_sides.py` | 作業3 複製 | **未実行**。S1R・S2L・S3R を作る |
 
 ---
 
@@ -361,6 +362,30 @@ blender --background --python scripts/probe_op030_v07c_controller_placement.py
 
 床板は切り詰められる据付部材である。台座が支持され続けるなら、隣工程に触らずに解決できる。
 
+---
+
+### 作業3 のスクリプトは書いた（床板の結論を待たずに走らせてよい）
+
+```
+blender --background --python scripts/build_op030_v07c_stagger_both_sides.py
+```
+
+出力は `analysis/op030_v07c_stagger_both_sides.blend` と
+`audit/op030_v07c_stagger_both_sides.json`。補修済み候補を読み、書き換えない。
+
+**鏡映は1か所でしか適用しない。** `duplicate_set` は複製した根を
+`parent.matrix_world @ source_world` に置く。したがって**新セルの親 EMPTY の姿勢を M(y0) に
+するだけで、全部材が追従する**。部材ごとの変換は書かない。
+
+- 複製集合 = 作業1 の選択 ＋ そのセルの供給器（接頭辞一致）
+- 形状データは複製元と共有（裁定どおり）。**作業2 の補修が複製先にも効く**のはこのため
+- 名前は `duplicate_set` の慣行 `OP030_S1R__<source>`。単一アンダースコア案は裁定待ち（§9-1）
+- 検証: 全複製の世界行列が `M(y0) @ 元の世界行列` と 1e-9 以内で一致すること、
+  **既存オブジェクトが1つも変化しないこと**、個数が一致すること。すべて assert
+
+**床板の重なりは意図的に残す。** 隠さず、別の補修として扱う。マニフェストの
+`known_unresolved` に、床板・腕どうし 19 mm・空圧ドロップ未整備の3点を記録する。
+
 #### 検査の穴を1つ塞いだ（実行側の指摘）
 
 **三角形交差は「片方が他方の内側に丸ごと入っている」場合を検出しない。** 面が交わらないためで
@@ -512,7 +537,7 @@ blender --background --python scripts/probe_op030_v07c_controller_placement.py
 | 0 | 床面基準の確定 | — | 要 | **完了** |
 | 1 | A と C の複製対象集合を作る | — | 要 | **完了** |
 | 2 | A の供給器足・脚と、A・C の制御盤下部板を補修 | 0, 1 | 要 | **完了**（§3。検査6件すべて 2.4e-08 m 以下） |
-| 3 | S1R・S2L・S3R の静的複製 | 1, 2 | 要 | 形状判定の後（§4）。複製集合 = 写像閉包＋供給器 |
+| 3 | S1R・S2L・S3R の静的複製 | 1, 2 | 要 | **スクリプト作成済み**（§4）。複製集合 = 写像閉包＋供給器 |
 | 4 | 空圧ドロップの配置と離隔確認 | 3 | 要 | 各セルに1組。現状はベイ用役の4本のみ |
 | 5 | A/B/C の bank を window 単位で分離 | — | 不要 | |
 | 6 | 各セルの製品側動作を再計画 | 3, 5 | 要 | |
