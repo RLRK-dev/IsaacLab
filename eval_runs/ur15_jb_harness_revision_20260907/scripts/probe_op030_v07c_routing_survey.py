@@ -393,6 +393,9 @@ def co_run(first: np.ndarray, second: np.ndarray, limits: tuple[float, ...]) -> 
     axes here stay inside a diameter of each other for about 0.75 m and inside 3 mm for about
     0.35 m, which is why the reported point of closest approach moved by 0.35 m when the
     measurement changed and the gap barely did. What work 4 has to separate is a length.
+
+    A span counts a step when either of its ends is inside it, so the extent reads up to one
+    step long at each end: a true 0.400 m at 3 mm came back as 0.415 m.
     """
     if len(first) < 2 or len(second) < 2:
         return []
