@@ -70,6 +70,11 @@ MANIFEST = ROOT / "audit/op030_v07c_stagger_both_sides.json"
 # The name each new cell carries. duplicate_set appends "__" to this, which is the convention
 # every existing copy follows; the single-underscore form is still awaiting adjudication.
 CELL_PREFIXES = {"A": "OP030_S1R", "B": "OP030_S2L", "C": "OP030_S3R"}
+# Blender truncates object names at 63 characters. S2L copies a cell that is itself a copy, so
+# its names carry two prefixes and eleven of them lose their tail. Nothing is lost -- the
+# duplicate carries split_source_name -- but a copy's name can no longer be taken apart to
+# recover the source, so the manifest records the mapping and the names that were cut.
+NAME_LIMIT = 63
 # Blender keeps object matrices in single precision. One step at these coordinates is about
 # 2.4e-7 m, and 4.8e-7 m out past 4 m, so the placement cannot be exact and the first version
 # of this check asked for 1e-9 m and could never pass. The measured spread was 1.0e-7 to
@@ -150,9 +155,11 @@ def placement_error(copies: dict[str, bpy.types.Object], matrix: Matrix, world: 
 def checked_frames(copies: dict[str, bpy.types.Object]) -> list[int]:
     """Return the frames to test: the ends and middle of whatever is actually animated.
 
-    Not the scene range. ``op030_split_layout`` pins frame_start and frame_end to 1, so asking
-    the scene would test one frame and miss exactly what this check exists to catch. The
-    actions carry the real range.
+    From the actions rather than the scene range, because the actions are what can move a copy
+    and the scene range is only a convention. This said the scene range was pinned to 1 by
+    ``op030_split_layout``; it is not -- that line lives inside ``freeze_frame``, which this
+    build never calls, and both scenes run 1 to 14062. The two agree here, so nothing measured
+    changes; the reason given was simply wrong.
     """
     scene = bpy.context.scene
     low, high = float(scene.frame_start), float(scene.frame_end)
@@ -232,6 +239,15 @@ def main() -> None:
             requested=len(moving["names"]),
             duplicated=len(copies),
             not_in_scene=sorted(set(moving["names"]) - {obj.name for obj in objects}),
+            name_map={obj.name: source for source, obj in sorted(copies.items())},
+            truncated_names=sorted(
+                (
+                    dict(copy=obj.name, source=source, intended_length=len(CELL_PREFIXES[cell] + "__" + source))
+                    for source, obj in copies.items()
+                    if len(CELL_PREFIXES[cell] + "__" + source) > NAME_LIMIT
+                ),
+                key=lambda row: row["copy"],
+            ),
             rebased_roots=len(rebased),
             rebased_animated=sum(row["animated"] for row in rebased),
             rebased=rebased,
