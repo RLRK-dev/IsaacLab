@@ -80,7 +80,11 @@ AIR_PREFIXES = (
 # guessed: they are what made the estimator agree with circles of known radius. A smaller ball
 # makes the march collapse -- at 0.035 m it wandered 148 m along a 0.126 m arc.
 BALL_M = 0.045
-STEP_M = 0.012
+# The step was 0.012 and that inflated length. Each step carries a little lateral wander, and
+# at 0.012 m there are enough of them to add 13% to a straight tube while a gentle arc came out
+# right, so the error depended on the mesh rather than on the shape. At 0.030 m the same three
+# test shapes land within 2.5% of each other: straight -1.9%, a slack loop -0.8%, an arc -2.3%.
+STEP_M = 0.030
 MAX_STEPS = 9000
 # Points are scattered over the triangles at about this spacing before marching. Marching the
 # vertices alone does not work here: the cable's straight floor section has no vertex between
@@ -91,12 +95,34 @@ SURFACE_SEED = 0
 # Thickness is measured against this many of those points, which is plenty and keeps the
 # distance matrix small.
 THICKNESS_SAMPLES = 3000
+# The march stops if it comes back this close to where it has already been, having walked at
+# least this many steps since. A cable with a slack loop runs back alongside itself, the ball
+# sees the outgoing tube as the way ahead, and the walk retraces it: ten of the fifteen runs
+# came back as 5.648 m, exactly twice the 2.823 m the other five reported. The two legs of the
+# slack loop itself stand further apart than this, so the loop survives and the hop does not.
+FOLD_M = 0.060
+# How far back along the walk to look for that return, as a distance rather than a step count,
+# so it does not change meaning when the step does.
+FOLD_LOOKBACK_M = 0.240
+# Terminations are not clearance. A cable touches its own cabinet where it leaves and its own
+# pedestal where it lands, and fourteen of fifteen runs reported one of those at 0.1 to 0.4 mm
+# as their tightest point. The clearance that matters is the route between them, so this much
+# is trimmed from each end before the tightest is taken.
+TERMINAL_TRIM_M = 0.150
 # Smoothing passes before measuring. The march jitters.
 SMOOTHING_PASSES = 2
 # What the centre line returned for the radius of circles of known radius, at these constants,
 # including a straight tube whose true radius is infinite. A straight run reads 0.149 m, which
 # sits inside the range a real bend would occupy, so the two cannot be told apart and no bend
 # radius is reported. Widening the window only raises the floor with the reading.
+LENGTH_CALIBRATION = {
+    "straight 1.500, dense mesh": -0.013,
+    "straight 1.500, coarse mesh": -0.010,
+    "arc R=0.500, 0.785": -0.010,
+    "slack loop 2.421": -0.002,
+    "sparse tube 1.893, 1.095 m vertex gap, end curving away": -0.000,
+    "note": "fractional error at the shipped constants, on tubes of 56 mm section",
+}
 CURVATURE_CALIBRATION = {
     "vertex_march": {"straight (infinite)": 0.149, "0.500": 0.494, "0.300": 0.296, "0.150": 0.150},
     "surface_sampled": {"straight (infinite)": 0.072, "0.300": 0.095, "0.150": 0.123},
@@ -107,7 +133,11 @@ CURVATURE_CALIBRATION = {
 }
 # The implied diameter runs about a tenth low against a tube of known section, because the
 # centre line wanders inside the true axis. Reported as approximate, not as a dimension.
-DIAMETER_CALIBRATION = {"true_m": 0.056, "measured_m": 0.0558, "from": "surface sampling; vertices alone gave 0.0497"}
+DIAMETER_CALIBRATION = {
+    "true_m": 0.056,
+    "measured_m": 0.060,
+    "note": "about 7% high at the 0.030 m step, which cuts corners; a size, not a dimension",
+}
 # Obstacles further than this from a run are not part of its routing problem.
 NEIGHBOURHOOD_M = 0.500
 # Report the run's clearance at no more than this many points, evenly spaced.
@@ -178,8 +208,17 @@ def centre_line(points: np.ndarray) -> np.ndarray:
     start = points[np.argmin(spread @ axis)]
     ball = points[np.linalg.norm(points - start, axis=1) <= BALL_M]
     position = ball.mean(0) if len(ball) else start
-    # Start at the far end along the principal axis, so stepping along it heads into the tube.
-    direction = axis
+    # Set off along the tube as it lies at this end, not along the cloud's principal axis. The
+    # two need not agree: on a run that ends in a bend, the end points across the axis, and
+    # stepping along the axis walks straight out of the tube. That is what returned a length of
+    # zero on a tube whose far end curved away. The sign is the one with more of the tube ahead.
+    local = ball - ball.mean(0) if len(ball) > 2 else spread
+    direction = np.linalg.svd(local, full_matrices=False)[2][0]
+    ahead_counts = [
+        len(points[np.linalg.norm(points - (position + sign * direction * STEP_M), axis=1) <= BALL_M])
+        for sign in (1.0, -1.0)
+    ]
+    direction = direction * (1.0 if ahead_counts[0] >= ahead_counts[1] else -1.0)
     line = [position]
     for _ in range(MAX_STEPS):
         ahead = position + direction * STEP_M
@@ -193,6 +232,13 @@ def centre_line(points: np.ndarray) -> np.ndarray:
         step = centre - position
         length = float(np.linalg.norm(step))
         if length < 1e-6:
+            break
+        # Look back over distance actually walked, not over a count of steps. A step is usually
+        # shorter than its nominal size, so counting steps looked back less far than intended
+        # and the guard fired on a straight tube, cutting it to nothing.
+        travelled = np.concatenate([[0.0], np.cumsum(np.linalg.norm(np.diff(np.asarray(line), axis=0), axis=1))])
+        behind = np.asarray(line)[travelled <= travelled[-1] - FOLD_LOOKBACK_M]
+        if len(behind) and np.min(np.linalg.norm(behind - centre, axis=1)) < FOLD_M:
             break
         direction = step / length
         position = centre
@@ -263,9 +309,12 @@ def neighbourhood(obj: bpy.types.Object, low: np.ndarray, high: np.ndarray) -> l
 
 
 def clearance_along(line: np.ndarray, trees: list[tuple[str, BVHTree]]) -> dict:
-    """Return the nearest solid at points along the run, and the tightest of them [m]."""
+    """Return the nearest solid along the route, with the terminations trimmed off [m]."""
     if not len(line) or not trees:
         return dict(sampled=0, tightest_m=None)
+    along = arc_lengths(line)
+    interior = (along >= TERMINAL_TRIM_M) & (along <= along[-1] - TERMINAL_TRIM_M)
+    line = line[interior] if interior.sum() >= 2 else line
     step = max(1, len(line) // CLEARANCE_SAMPLES)
     samples = []
     for index in range(0, len(line), step):
@@ -352,6 +401,8 @@ def main() -> None:
             thickness=thickness(points[:: max(1, len(points) // THICKNESS_SAMPLES)], line),
             surface_points=len(points),
             clearance=clearance_along(line, neighbourhood(obj, *box)),
+            terminal_trim_m=TERMINAL_TRIM_M,
+            ends_separation_m=float(np.linalg.norm(line[-1] - line[0])) if len(line) > 1 else 0.0,
         )
 
     air = {}
@@ -380,8 +431,11 @@ def main() -> None:
                     centre_line="march a ball along the tube and step to its centroid",
                     surface_spacing_m=SURFACE_SPACING_M,
                     ball_m=BALL_M,
+                    fold_m=FOLD_M,
+                    terminal_trim_m=TERMINAL_TRIM_M,
                     step_m=STEP_M,
                     smoothing_passes=SMOOTHING_PASSES,
+                    length_calibration_fraction=LENGTH_CALIBRATION,
                     curvature_calibration_m=CURVATURE_CALIBRATION,
                     diameter_calibration_m=DIAMETER_CALIBRATION,
                     neighbourhood_m=NEIGHBOURHOOD_M,
@@ -390,6 +444,7 @@ def main() -> None:
                 what_this_does_not_give=[
                     "the cable's allowed bend radius, which belongs to the real cable",
                     "the bend radius the model already uses: measured and found not measurable",
+                    "clearance at the terminations, which is contact by design and is trimmed away",
                     "support pitch and fixing points",
                     "required separation from other services",
                     "the pipe inside the air hardware's boxes",
