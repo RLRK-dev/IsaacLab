@@ -650,6 +650,9 @@ blender --background --python scripts/probe_op030_v07c_routing_survey.py
 
 実行側が走らせ直した。葉ごとの突き合わせは予定外の変化 0 件、`cables` は完全に同一。
 
+**以下の数値は実行側の報告からの書き写しであり、レポート JSON はまだ push されていない。**
+`op030_v07c_routing_survey.json`（`357799ac…`、33,181 バイト）が入ったら**桁を突き合わせること**。
+
 | 組 | 欄 | `span_shape_resolved` | `extent_sampled_m`–`extent_upper_m` |
 |---|---|---|---|
 | S1R × OP020 | 10 mm | **false** | 0.0396–0.3395 |
