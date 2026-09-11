@@ -1,0 +1,576 @@
+{
+ "observed_at": "2026-09-12T04:16:47.944655+09:00",
+ "source": "analysis/op030_v07c_support_repair.blend",
+ "source_sha256": "1091683a5d15072e46553b487a30d58a21050bf40515f0d09b9d4d879c01ecce",
+ "read_from": {
+  "selection": "analysis/op030_v07c_cell_selection.json",
+  "selection_sha256": "8d09c9b1c3095249a1042bbae22c19db8864c8137dd5ff103983ba7b3909a90f",
+  "selection_observed_at": "2026-09-12T03:22:05.411241+09:00",
+  "manifest": "audit/op030_stagger_static_v06.json",
+  "manifest_sha256": "bc82917686f8292bf081bdefa2922dbc6851733552eea390c1b725c2cd8b9f8f"
+ },
+ "method": "box stage recomputed, then BVH triangle overlap on evaluated meshes",
+ "nearest_distance_note": "vertex to surface, an upper bound on the true gap",
+ "reported_gap_m": 1.0,
+ "cells": {
+  "A": {
+   "destination": "S1R",
+   "station_y_m": -1.7,
+   "moving_count": 300,
+   "candidate_pairs": 18,
+   "contact_pairs": 1,
+   "clear_pairs": 17,
+   "by_owner": [
+    {
+     "owner": "source_0681",
+     "pairs": 1,
+     "contacts": 1,
+     "triangle_pairs": 328,
+     "nearest_m": null
+    },
+    {
+     "owner": "Split_bay_1__source_0780_m0207_p03",
+     "pairs": 17,
+     "contacts": 0,
+     "triangle_pairs": 0,
+     "nearest_m": 0.5546309351921082
+    }
+   ],
+   "contacts": [
+    {
+     "moving": "source_0693_m0120_p04",
+     "obstacle": "source_0681_m0108_p04",
+     "box_depth_m": 0.1928924972526147,
+     "owner": "source_0681",
+     "contact": true,
+     "triangle_pairs": 328,
+     "nearest_m": null
+    }
+   ],
+   "closest_clear": [
+    {
+     "moving": "OP030A_feeder_M4_drive_enclosure",
+     "obstacle": "Split_bay_1__source_0780_m0207_p03",
+     "box_depth_m": 0.12999999523162842,
+     "owner": "Split_bay_1__source_0780_m0207_p03",
+     "contact": false,
+     "triangle_pairs": 0,
+     "nearest_m": 0.5546309351921082
+    },
+    {
+     "moving": "OP030A_feeder_M4_nose_support",
+     "obstacle": "Split_bay_1__source_0780_m0207_p03",
+     "box_depth_m": 0.05000000074505806,
+     "owner": "Split_bay_1__source_0780_m0207_p03",
+     "contact": false,
+     "triangle_pairs": 0,
+     "nearest_m": 0.6102132797241211
+    },
+    {
+     "moving": "OP030A_feeder_M4_hopper_body",
+     "obstacle": "Split_bay_1__source_0780_m0207_p03",
+     "box_depth_m": 0.1599999964237213,
+     "owner": "Split_bay_1__source_0780_m0207_p03",
+     "contact": false,
+     "triangle_pairs": 0,
+     "nearest_m": 0.675726592540741
+    },
+    {
+     "moving": "source_0693_m0120_p00",
+     "obstacle": "Split_bay_1__source_0780_m0207_p03",
+     "box_depth_m": 0.05000007152557373,
+     "owner": "Split_bay_1__source_0780_m0207_p03",
+     "contact": false,
+     "triangle_pairs": 0,
+     "nearest_m": 0.7724139094352722
+    },
+    {
+     "moving": "source_0693_m0120_p01",
+     "obstacle": "Split_bay_1__source_0780_m0207_p03",
+     "box_depth_m": 0.06099998950958252,
+     "owner": "Split_bay_1__source_0780_m0207_p03",
+     "contact": false,
+     "triangle_pairs": 0,
+     "nearest_m": 0.7742056250572205
+    }
+   ]
+  },
+  "B": {
+   "destination": "S2L",
+   "station_y_m": 0.6,
+   "moving_count": 420,
+   "candidate_pairs": 45,
+   "contact_pairs": 0,
+   "clear_pairs": 45,
+   "by_owner": [
+    {
+     "owner": "Split_bay_1__source_0779_m0206_p03",
+     "pairs": 37,
+     "contacts": 0,
+     "triangle_pairs": 0,
+     "nearest_m": 0.050880368798971176
+    },
+    {
+     "owner": "Split_bay_2__source_0779_m0206_p03",
+     "pairs": 8,
+     "contacts": 0,
+     "triangle_pairs": 0,
+     "nearest_m": 1.3574501276016235
+    }
+   ],
+   "contacts": [],
+   "closest_clear": [
+    {
+     "moving": "OP030B__source_0577_m0051_p00",
+     "obstacle": "Split_bay_1__source_0779_m0206_p03",
+     "box_depth_m": 0.10050001740455627,
+     "owner": "Split_bay_1__source_0779_m0206_p03",
+     "contact": false,
+     "triangle_pairs": 0,
+     "nearest_m": 0.050880368798971176
+    },
+    {
+     "moving": "OP030B__source_0577_m0051_p04",
+     "obstacle": "Split_bay_1__source_0779_m0206_p03",
+     "box_depth_m": 0.13000003007651195,
+     "owner": "Split_bay_1__source_0779_m0206_p03",
+     "contact": false,
+     "triangle_pairs": 0,
+     "nearest_m": 0.07306164503097534
+    },
+    {
+     "moving": "OP030B__source_0577_m0051_p01",
+     "obstacle": "Split_bay_1__source_0779_m0206_p03",
+     "box_depth_m": 0.09999999403953552,
+     "owner": "Split_bay_1__source_0779_m0206_p03",
+     "contact": false,
+     "triangle_pairs": 0,
+     "nearest_m": 0.12478592991828918
+    },
+    {
+     "moving": "OP030B__source_0577_m0051_p03",
+     "obstacle": "Split_bay_1__source_0779_m0206_p03",
+     "box_depth_m": 0.2380000237226494,
+     "owner": "Split_bay_1__source_0779_m0206_p03",
+     "contact": false,
+     "triangle_pairs": 0,
+     "nearest_m": 0.14675970375537872
+    },
+    {
+     "moving": "OP030B__source_0578_m0052_p00",
+     "obstacle": "Split_bay_1__source_0779_m0206_p03",
+     "box_depth_m": 0.20400002050399735,
+     "owner": "Split_bay_1__source_0779_m0206_p03",
+     "contact": false,
+     "triangle_pairs": 0,
+     "nearest_m": 0.21612320840358734
+    },
+    {
+     "moving": "OP030B__source_0577_m0051_p05",
+     "obstacle": "Split_bay_1__source_0779_m0206_p03",
+     "box_depth_m": 0.05000001144484001,
+     "owner": "Split_bay_1__source_0779_m0206_p03",
+     "contact": false,
+     "triangle_pairs": 0,
+     "nearest_m": 0.2316063642501831
+    },
+    {
+     "moving": "OP030B__source_0578_m0052_p03",
+     "obstacle": "Split_bay_1__source_0779_m0206_p03",
+     "box_depth_m": 0.05500001472309579,
+     "owner": "Split_bay_1__source_0779_m0206_p03",
+     "contact": false,
+     "triangle_pairs": 0,
+     "nearest_m": 0.2944762408733368
+    },
+    {
+     "moving": "OP030B__source_0578_m0052_p01",
+     "obstacle": "Split_bay_1__source_0779_m0206_p03",
+     "box_depth_m": 0.3507704799325927,
+     "owner": "Split_bay_1__source_0779_m0206_p03",
+     "contact": false,
+     "triangle_pairs": 0,
+     "nearest_m": 0.4054020345211029
+    },
+    {
+     "moving": "OP030B__source_0578_m0052_p02",
+     "obstacle": "Split_bay_1__source_0779_m0206_p03",
+     "box_depth_m": 0.22916002323150586,
+     "owner": "Split_bay_1__source_0779_m0206_p03",
+     "contact": false,
+     "triangle_pairs": 0,
+     "nearest_m": 0.43641844391822815
+    },
+    {
+     "moving": "OP030B__source_0693_m0120_p00",
+     "obstacle": "Split_bay_1__source_0779_m0206_p03",
+     "box_depth_m": 0.05000007152557373,
+     "owner": "Split_bay_1__source_0779_m0206_p03",
+     "contact": false,
+     "triangle_pairs": 0,
+     "nearest_m": 0.772413969039917
+    },
+    {
+     "moving": "OP030B__source_0693_m0120_p01",
+     "obstacle": "Split_bay_1__source_0779_m0206_p03",
+     "box_depth_m": 0.06099998950958252,
+     "owner": "Split_bay_1__source_0779_m0206_p03",
+     "contact": false,
+     "triangle_pairs": 0,
+     "nearest_m": 0.7742056846618652
+    },
+    {
+     "moving": "OP030B__source_1094_m0309_p00",
+     "obstacle": "Split_bay_1__source_0779_m0206_p03",
+     "box_depth_m": 0.25838874220524644,
+     "owner": "Split_bay_1__source_0779_m0206_p03",
+     "contact": false,
+     "triangle_pairs": 0,
+     "nearest_m": 0.7863057851791382
+    },
+    {
+     "moving": "OP030B__source_1095_m0310_p00",
+     "obstacle": "Split_bay_1__source_0779_m0206_p03",
+     "box_depth_m": 0.2671793168518404,
+     "owner": "Split_bay_1__source_0779_m0206_p03",
+     "contact": false,
+     "triangle_pairs": 0,
+     "nearest_m": 0.7896249890327454
+    },
+    {
+     "moving": "OP030B__source_1093_m0308_p00",
+     "obstacle": "Split_bay_1__source_0779_m0206_p03",
+     "box_depth_m": 0.3566377503567981,
+     "owner": "Split_bay_1__source_0779_m0206_p03",
+     "contact": false,
+     "triangle_pairs": 0,
+     "nearest_m": 0.7922112941741943
+    },
+    {
+     "moving": "OP030B__source_1091_m0306_p00",
+     "obstacle": "Split_bay_1__source_0779_m0206_p03",
+     "box_depth_m": 0.08551423609867259,
+     "owner": "Split_bay_1__source_0779_m0206_p03",
+     "contact": false,
+     "triangle_pairs": 0,
+     "nearest_m": 0.8046818971633911
+    },
+    {
+     "moving": "OP030B__source_1092_m0307_p00",
+     "obstacle": "Split_bay_1__source_0779_m0206_p03",
+     "box_depth_m": 0.05994208151422531,
+     "owner": "Split_bay_1__source_0779_m0206_p03",
+     "contact": false,
+     "triangle_pairs": 0,
+     "nearest_m": 0.8920508623123169
+    },
+    {
+     "moving": "OP030B__source_1090_m0305_p00",
+     "obstacle": "Split_bay_1__source_0779_m0206_p03",
+     "box_depth_m": 0.10803126864125023,
+     "owner": "Split_bay_1__source_0779_m0206_p03",
+     "contact": false,
+     "triangle_pairs": 0,
+     "nearest_m": 0.926231324672699
+    },
+    {
+     "moving": "OP030B__source_1089_m0304_p00",
+     "obstacle": "Split_bay_1__source_0779_m0206_p03",
+     "box_depth_m": 0.191981601406368,
+     "owner": "Split_bay_1__source_0779_m0206_p03",
+     "contact": false,
+     "triangle_pairs": 0,
+     "nearest_m": 0.9428456425666809
+    },
+    {
+     "moving": "OP030B__source_1098_m0313_p00",
+     "obstacle": "Split_bay_1__source_0779_m0206_p03",
+     "box_depth_m": 0.21262124207958477,
+     "owner": "Split_bay_1__source_0779_m0206_p03",
+     "contact": false,
+     "triangle_pairs": 0,
+     "nearest_m": 0.9745503664016724
+    },
+    {
+     "moving": "OP030B__source_1101_m0316_p00",
+     "obstacle": "Split_bay_1__source_0779_m0206_p03",
+     "box_depth_m": 0.10653709635227404,
+     "owner": "Split_bay_1__source_0779_m0206_p03",
+     "contact": false,
+     "triangle_pairs": 0,
+     "nearest_m": 0.9767996668815613
+    }
+   ]
+  },
+  "C": {
+   "destination": "S3R",
+   "station_y_m": 2.9,
+   "moving_count": 354,
+   "candidate_pairs": 55,
+   "contact_pairs": 1,
+   "clear_pairs": 54,
+   "by_owner": [
+    {
+     "owner": "source_0705",
+     "pairs": 3,
+     "contacts": 1,
+     "triangle_pairs": 207,
+     "nearest_m": 0.07704922556877136
+    },
+    {
+     "owner": "Split_bay_2__source_0780_m0207_p03",
+     "pairs": 34,
+     "contacts": 0,
+     "triangle_pairs": 0,
+     "nearest_m": 0.05187997967004776
+    },
+    {
+     "owner": "source_0588",
+     "pairs": 2,
+     "contacts": 0,
+     "triangle_pairs": 0,
+     "nearest_m": 0.0763770267367363
+    },
+    {
+     "owner": "source_0590",
+     "pairs": 3,
+     "contacts": 0,
+     "triangle_pairs": 0,
+     "nearest_m": 0.2528870105743408
+    },
+    {
+     "owner": "source_1133",
+     "pairs": 3,
+     "contacts": 0,
+     "triangle_pairs": 0,
+     "nearest_m": 0.18206952512264252
+    },
+    {
+     "owner": "source_1134",
+     "pairs": 3,
+     "contacts": 0,
+     "triangle_pairs": 0,
+     "nearest_m": 0.15298691391944885
+    },
+    {
+     "owner": "source_1135",
+     "pairs": 3,
+     "contacts": 0,
+     "triangle_pairs": 0,
+     "nearest_m": 0.17248927056789398
+    },
+    {
+     "owner": "source_1136",
+     "pairs": 3,
+     "contacts": 0,
+     "triangle_pairs": 0,
+     "nearest_m": 0.018594585359096527
+    },
+    {
+     "owner": "source_1137",
+     "pairs": 1,
+     "contacts": 0,
+     "triangle_pairs": 0,
+     "nearest_m": 0.17983117699623108
+    }
+   ],
+   "contacts": [
+    {
+     "moving": "OP030C__source_0693_m0120_p04",
+     "obstacle": "source_0705_m0132_p04",
+     "box_depth_m": 0.1928924972526147,
+     "owner": "source_0705",
+     "contact": true,
+     "triangle_pairs": 207,
+     "nearest_m": null
+    }
+   ],
+   "closest_clear": [
+    {
+     "moving": "OP030C__source_1054_m0309_p00",
+     "obstacle": "source_1136_m0304_p00",
+     "box_depth_m": 0.11073903565232912,
+     "owner": "source_1136",
+     "contact": false,
+     "triangle_pairs": 0,
+     "nearest_m": 0.018594585359096527
+    },
+    {
+     "moving": "OP030C__source_0577_m0051_p00",
+     "obstacle": "Split_bay_2__source_0780_m0207_p03",
+     "box_depth_m": 0.10050001740455627,
+     "owner": "Split_bay_2__source_0780_m0207_p03",
+     "contact": false,
+     "triangle_pairs": 0,
+     "nearest_m": 0.05187997967004776
+    },
+    {
+     "moving": "OP030C__source_0693_m0120_p04",
+     "obstacle": "source_0588_m0055_p02",
+     "box_depth_m": 0.12300000339746475,
+     "owner": "source_0588",
+     "contact": false,
+     "triangle_pairs": 0,
+     "nearest_m": 0.0763770267367363
+    },
+    {
+     "moving": "OP030C__source_0576_m0050_p03",
+     "obstacle": "source_0705_m0132_p04",
+     "box_depth_m": 0.16300000436604023,
+     "owner": "source_0705",
+     "contact": false,
+     "triangle_pairs": 0,
+     "nearest_m": 0.07704922556877136
+    },
+    {
+     "moving": "OP030C__source_0693_m0120_p04",
+     "obstacle": "source_0588_m0055_p03",
+     "box_depth_m": 0.16300000436604023,
+     "owner": "source_0588",
+     "contact": false,
+     "triangle_pairs": 0,
+     "nearest_m": 0.07767249643802643
+    },
+    {
+     "moving": "OP030C__source_1055_m0310_p00",
+     "obstacle": "source_1136_m0304_p00",
+     "box_depth_m": 0.11784896515423104,
+     "owner": "source_1136",
+     "contact": false,
+     "triangle_pairs": 0,
+     "nearest_m": 0.08030052483081818
+    },
+    {
+     "moving": "OP030C__source_1053_m0308_p00",
+     "obstacle": "source_1136_m0304_p00",
+     "box_depth_m": 0.16248812830588577,
+     "owner": "source_1136",
+     "contact": false,
+     "triangle_pairs": 0,
+     "nearest_m": 0.0947890356183052
+    },
+    {
+     "moving": "OP030C__source_0576_m0050_p02",
+     "obstacle": "source_0705_m0132_p04",
+     "box_depth_m": 0.12300000339746475,
+     "owner": "source_0705",
+     "contact": false,
+     "triangle_pairs": 0,
+     "nearest_m": 0.09502194076776505
+    },
+    {
+     "moving": "OP030C__source_0577_m0051_p01",
+     "obstacle": "Split_bay_2__source_0780_m0207_p03",
+     "box_depth_m": 0.09999999403953552,
+     "owner": "Split_bay_2__source_0780_m0207_p03",
+     "contact": false,
+     "triangle_pairs": 0,
+     "nearest_m": 0.12485367059707642
+    },
+    {
+     "moving": "OP030C__source_0577_m0051_p03",
+     "obstacle": "Split_bay_2__source_0780_m0207_p03",
+     "box_depth_m": 0.2377424189657349,
+     "owner": "Split_bay_2__source_0780_m0207_p03",
+     "contact": false,
+     "triangle_pairs": 0,
+     "nearest_m": 0.14658670127391815
+    },
+    {
+     "moving": "OP030C__source_1054_m0309_p00",
+     "obstacle": "source_1134_m0302_p00",
+     "box_depth_m": 0.07315169238525776,
+     "owner": "source_1134",
+     "contact": false,
+     "triangle_pairs": 0,
+     "nearest_m": 0.15298691391944885
+    },
+    {
+     "moving": "OP030C__source_1054_m0309_p00",
+     "obstacle": "source_1135_m0303_p00",
+     "box_depth_m": 0.05914659633927055,
+     "owner": "source_1135",
+     "contact": false,
+     "triangle_pairs": 0,
+     "nearest_m": 0.17248927056789398
+    },
+    {
+     "moving": "OP030C__source_1053_m0308_p00",
+     "obstacle": "source_1137_m0305_p00",
+     "box_depth_m": 0.06276231739177984,
+     "owner": "source_1137",
+     "contact": false,
+     "triangle_pairs": 0,
+     "nearest_m": 0.17983117699623108
+    },
+    {
+     "moving": "OP030C__source_1054_m0309_p00",
+     "obstacle": "source_1133_m0301_p00",
+     "box_depth_m": 0.052284710775029275,
+     "owner": "source_1133",
+     "contact": false,
+     "triangle_pairs": 0,
+     "nearest_m": 0.18206952512264252
+    },
+    {
+     "moving": "OP030C__source_1055_m0310_p00",
+     "obstacle": "source_1134_m0302_p00",
+     "box_depth_m": 0.08098883814175739,
+     "owner": "source_1134",
+     "contact": false,
+     "triangle_pairs": 0,
+     "nearest_m": 0.18419542908668518
+    },
+    {
+     "moving": "OP030C__source_1053_m0308_p00",
+     "obstacle": "source_1134_m0302_p00",
+     "box_depth_m": 0.1199578892915536,
+     "owner": "source_1134",
+     "contact": false,
+     "triangle_pairs": 0,
+     "nearest_m": 0.1937403529882431
+    },
+    {
+     "moving": "OP030C__source_1055_m0310_p00",
+     "obstacle": "source_1135_m0303_p00",
+     "box_depth_m": 0.06698374209577018,
+     "owner": "source_1135",
+     "contact": false,
+     "triangle_pairs": 0,
+     "nearest_m": 0.20160415768623352
+    },
+    {
+     "moving": "OP030C__source_1055_m0310_p00",
+     "obstacle": "source_1133_m0301_p00",
+     "box_depth_m": 0.060121856531528906,
+     "owner": "source_1133",
+     "contact": false,
+     "triangle_pairs": 0,
+     "nearest_m": 0.21029093861579895
+    },
+    {
+     "moving": "OP030C__source_1053_m0308_p00",
+     "obstacle": "source_1135_m0303_p00",
+     "box_depth_m": 0.11279768718669425,
+     "owner": "source_1135",
+     "contact": false,
+     "triangle_pairs": 0,
+     "nearest_m": 0.21062462031841278
+    },
+    {
+     "moving": "OP030C__source_0578_m0052_p00",
+     "obstacle": "Split_bay_2__source_0780_m0207_p03",
+     "box_depth_m": 0.33010239772984384,
+     "owner": "Split_bay_2__source_0780_m0207_p03",
+     "contact": false,
+     "triangle_pairs": 0,
+     "nearest_m": 0.21619491279125214
+    }
+   ]
+  }
+ },
+ "scene_world_transforms_unchanged": true,
+ "saved_scene": false,
+ "scope": "Read-only triangle-level resolution of the mirrored cell clearances",
+ "formal_physical_validity_verdict": null
+}
