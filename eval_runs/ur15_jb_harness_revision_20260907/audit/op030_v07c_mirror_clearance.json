@@ -1,5 +1,5 @@
 {
- "observed_at": "2026-09-12T04:02:30.785455+09:00",
+ "observed_at": "2026-09-12T05:50:57.385716+09:00",
  "source": "analysis/op030_v07c_support_repair.blend",
  "source_sha256": "1091683a5d15072e46553b487a30d58a21050bf40515f0d09b9d4d879c01ecce",
  "read_from": {
@@ -9,7 +9,7 @@
   "manifest": "audit/op030_stagger_static_v06.json",
   "manifest_sha256": "bc82917686f8292bf081bdefa2922dbc6851733552eea390c1b725c2cd8b9f8f"
  },
- "overlap_m": 0.05,
+ "candidate_band_m": 0.05,
  "hall_footprint_m": 8.0,
  "moving_set_rule": "work 1 selection plus the cell's own supply by prefix; line hardware stays",
  "cells": {
@@ -98,6 +98,9 @@
     "names": 300
    },
    "measured_members": 188,
+   "without_geometry": 112,
+   "hall_sized_skipped": [],
+   "tall_members": [],
    "source_envelope": {
     "low_m": [
      -2.309999905526638,
@@ -124,112 +127,171 @@
     ],
     "member_count": 188
    },
-   "clash_count": 18,
-   "clashing_moving_members": 18,
+   "candidate_count": 126,
+   "overlapping_count": 106,
+   "clashing_moving_members": 102,
    "by_owner": [
     {
      "owner": "Split_bay_1__source_0780_m0207_p03",
-     "obstacle_count": 17,
-     "deepest_m": 0.21193408170415617,
-     "moving_count": 17
+     "obstacle_count": 102,
+     "overlapping_count": 100,
+     "deepest_m": 0.4649999747052789,
+     "closest_gap_m": -0.4649999747052789,
+     "moving_count": 102
     },
     {
      "owner": "source_0681",
-     "obstacle_count": 1,
+     "obstacle_count": 2,
+     "overlapping_count": 1,
      "deepest_m": 0.1928924972526147,
+     "closest_gap_m": -0.1928924972526147,
+     "moving_count": 2
+    },
+    {
+     "owner": "OP020_direct_mating_station",
+     "obstacle_count": 4,
+     "overlapping_count": 4,
+     "deepest_m": 0.09999992325901985,
+     "closest_gap_m": -0.09999992325901985,
+     "moving_count": 1
+    },
+    {
+     "owner": "OP020_direct_cell_rotation",
+     "obstacle_count": 17,
+     "overlapping_count": 1,
+     "deepest_m": 0.035999479561778513,
+     "closest_gap_m": -0.035999479561778513,
+     "moving_count": 4
+    },
+    {
+     "owner": "source_0564",
+     "obstacle_count": 1,
+     "overlapping_count": 0,
+     "deepest_m": 0.0,
+     "closest_gap_m": 0.02745038866996774,
      "moving_count": 1
     }
    ],
    "worst": [
     {
-     "moving": "source_1053_m0308_p00",
+     "moving": "OP030A_feeder_M4_base",
      "obstacle": "Split_bay_1__source_0780_m0207_p03",
      "obstacle_owner": "Split_bay_1__source_0780_m0207_p03",
-     "depth_m": 0.21193408170415617
-    },
-    {
-     "moving": "source_1058_m0313_p00",
-     "obstacle": "Split_bay_1__source_0780_m0207_p03",
-     "obstacle_owner": "Split_bay_1__source_0780_m0207_p03",
-     "depth_m": 0.19916210256222788
-    },
-    {
-     "moving": "source_0693_m0120_p04",
-     "obstacle": "source_0681_m0108_p04",
-     "obstacle_owner": "source_0681",
-     "depth_m": 0.1928924972526147
-    },
-    {
-     "moving": "source_1055_m0310_p00",
-     "obstacle": "Split_bay_1__source_0780_m0207_p03",
-     "obstacle_owner": "Split_bay_1__source_0780_m0207_p03",
-     "depth_m": 0.1681398512548511
-    },
-    {
-     "moving": "OP030A_feeder_M4_hopper_body",
-     "obstacle": "Split_bay_1__source_0780_m0207_p03",
-     "obstacle_owner": "Split_bay_1__source_0780_m0207_p03",
-     "depth_m": 0.1599999964237213
-    },
-    {
-     "moving": "source_1060_m0315_p00",
-     "obstacle": "Split_bay_1__source_0780_m0207_p03",
-     "obstacle_owner": "Split_bay_1__source_0780_m0207_p03",
-     "depth_m": 0.15470816206799132
-    },
-    {
-     "moving": "source_1059_m0314_p00",
-     "obstacle": "Split_bay_1__source_0780_m0207_p03",
-     "obstacle_owner": "Split_bay_1__source_0780_m0207_p03",
-     "depth_m": 0.1511773285456286
-    },
-    {
-     "moving": "source_1054_m0309_p00",
-     "obstacle": "Split_bay_1__source_0780_m0207_p03",
-     "obstacle_owner": "Split_bay_1__source_0780_m0207_p03",
-     "depth_m": 0.15052599165669878
+     "gap_m": -0.4649999747052789,
+     "depth_m": 0.4649999747052789,
+     "overlapping": true
     },
     {
      "moving": "OP030A_feeder_M4_drive_enclosure",
      "obstacle": "Split_bay_1__source_0780_m0207_p03",
      "obstacle_owner": "Split_bay_1__source_0780_m0207_p03",
-     "depth_m": 0.12999999523162842
+     "gap_m": -0.46000023037195215,
+     "depth_m": 0.46000023037195215,
+     "overlapping": true
     },
     {
-     "moving": "source_1064_m0319_p00",
+     "moving": "OP030A_feeder_M4_hopper_lid",
      "obstacle": "Split_bay_1__source_0780_m0207_p03",
      "obstacle_owner": "Split_bay_1__source_0780_m0207_p03",
-     "depth_m": 0.08316899954184531
+     "gap_m": -0.46000023037195215,
+     "depth_m": 0.46000023037195215,
+     "overlapping": true
     },
     {
-     "moving": "source_1052_m0307_p00",
+     "moving": "OP030A_feeder_M4_hopper_body",
      "obstacle": "Split_bay_1__source_0780_m0207_p03",
      "obstacle_owner": "Split_bay_1__source_0780_m0207_p03",
-     "depth_m": 0.07306450709673573
+     "gap_m": -0.45500022768974313,
+     "depth_m": 0.45500022768974313,
+     "overlapping": true
     },
     {
-     "moving": "source_1066_m0321_p00",
+     "moving": "OP030A_feeder_M4_stand_-0.293",
      "obstacle": "Split_bay_1__source_0780_m0207_p03",
      "obstacle_owner": "Split_bay_1__source_0780_m0207_p03",
-     "depth_m": 0.07139644594635186
+     "gap_m": -0.43000022917985925,
+     "depth_m": 0.43000022917985925,
+     "overlapping": true
     },
     {
-     "moving": "source_0693_m0120_p01",
+     "moving": "OP030A_feeder_M4_outer_guide_-1",
      "obstacle": "Split_bay_1__source_0780_m0207_p03",
      "obstacle_owner": "Split_bay_1__source_0780_m0207_p03",
-     "depth_m": 0.06099998950958252
+     "gap_m": -0.3695001622196288,
+     "depth_m": 0.3695001622196288,
+     "overlapping": true
     },
     {
-     "moving": "source_1057_m0312_p00",
+     "moving": "OP030A_feeder_M4_feed_rail_-1",
      "obstacle": "Split_bay_1__source_0780_m0207_p03",
      "obstacle_owner": "Split_bay_1__source_0780_m0207_p03",
-     "depth_m": 0.05895897688227025
+     "gap_m": -0.3683002739213408,
+     "depth_m": 0.3683002739213408,
+     "overlapping": true
     },
     {
-     "moving": "source_1056_m0311_p00",
+     "moving": "OP030A_feeder_M4_hopper_handle",
      "obstacle": "Split_bay_1__source_0780_m0207_p03",
      "obstacle_owner": "Split_bay_1__source_0780_m0207_p03",
-     "depth_m": 0.05365554062427891
+     "gap_m": -0.36750022871419796,
+     "depth_m": 0.36750022871419796,
+     "overlapping": true
+    },
+    {
+     "moving": "OP030A_feeder_M4_UID007_washer",
+     "obstacle": "Split_bay_1__source_0780_m0207_p03",
+     "obstacle_owner": "Split_bay_1__source_0780_m0207_p03",
+     "gap_m": -0.36450022868812093,
+     "depth_m": 0.36450022868812093,
+     "overlapping": true
+    },
+    {
+     "moving": "OP030A_feeder_M4_UID008_washer",
+     "obstacle": "Split_bay_1__source_0780_m0207_p03",
+     "obstacle_owner": "Split_bay_1__source_0780_m0207_p03",
+     "gap_m": -0.36450022868812093,
+     "depth_m": 0.36450022868812093,
+     "overlapping": true
+    },
+    {
+     "moving": "OP030A_feeder_M4_UID009_washer",
+     "obstacle": "Split_bay_1__source_0780_m0207_p03",
+     "obstacle_owner": "Split_bay_1__source_0780_m0207_p03",
+     "gap_m": -0.36450022868812093,
+     "depth_m": 0.36450022868812093,
+     "overlapping": true
+    },
+    {
+     "moving": "OP030A_feeder_M4_UID010_washer",
+     "obstacle": "Split_bay_1__source_0780_m0207_p03",
+     "obstacle_owner": "Split_bay_1__source_0780_m0207_p03",
+     "gap_m": -0.36450022868812093,
+     "depth_m": 0.36450022868812093,
+     "overlapping": true
+    },
+    {
+     "moving": "OP030A_feeder_M4_UID011_washer",
+     "obstacle": "Split_bay_1__source_0780_m0207_p03",
+     "obstacle_owner": "Split_bay_1__source_0780_m0207_p03",
+     "gap_m": -0.36450022868812093,
+     "depth_m": 0.36450022868812093,
+     "overlapping": true
+    },
+    {
+     "moving": "OP030A_feeder_M4_UID012_washer",
+     "obstacle": "Split_bay_1__source_0780_m0207_p03",
+     "obstacle_owner": "Split_bay_1__source_0780_m0207_p03",
+     "gap_m": -0.36450022868812093,
+     "depth_m": 0.36450022868812093,
+     "overlapping": true
+    },
+    {
+     "moving": "OP030A_feeder_M4_UID007_hex_head",
+     "obstacle": "Split_bay_1__source_0780_m0207_p03",
+     "obstacle_owner": "Split_bay_1__source_0780_m0207_p03",
+     "gap_m": -0.3640416808244389,
+     "depth_m": 0.3640416808244389,
+     "overlapping": true
     }
    ]
   },
@@ -245,6 +307,9 @@
     "names": 420
    },
    "measured_members": 292,
+   "without_geometry": 128,
+   "hall_sized_skipped": [],
+   "tall_members": [],
    "source_envelope": {
     "low_m": [
      0.5749999416775986,
@@ -271,20 +336,25 @@
     ],
     "member_count": 292
    },
-   "clash_count": 45,
-   "clashing_moving_members": 45,
+   "candidate_count": 78,
+   "overlapping_count": 74,
+   "clashing_moving_members": 74,
    "by_owner": [
     {
      "owner": "Split_bay_1__source_0779_m0206_p03",
-     "obstacle_count": 37,
-     "deepest_m": 0.3566377503567981,
-     "moving_count": 37
+     "obstacle_count": 68,
+     "overlapping_count": 66,
+     "deepest_m": 0.51997073591529,
+     "closest_gap_m": -0.51997073591529,
+     "moving_count": 68
     },
     {
      "owner": "Split_bay_2__source_0779_m0206_p03",
-     "obstacle_count": 8,
-     "deepest_m": 0.3545588682369176,
-     "moving_count": 8
+     "obstacle_count": 10,
+     "overlapping_count": 8,
+     "deepest_m": 0.4070776480784506,
+     "closest_gap_m": -0.4070776480784506,
+     "moving_count": 10
     }
    ],
    "worst": [
@@ -292,91 +362,121 @@
      "moving": "OP030B__source_1093_m0308_p00",
      "obstacle": "Split_bay_1__source_0779_m0206_p03",
      "obstacle_owner": "Split_bay_1__source_0779_m0206_p03",
-     "depth_m": 0.3566377503567981
+     "gap_m": -0.51997073591529,
+     "depth_m": 0.51997073591529,
+     "overlapping": true
     },
     {
-     "moving": "OP030B__source_1053_m0308_p00",
-     "obstacle": "Split_bay_2__source_0779_m0206_p03",
-     "obstacle_owner": "Split_bay_2__source_0779_m0206_p03",
-     "depth_m": 0.3545588682369176
-    },
-    {
-     "moving": "OP030B__source_0578_m0052_p01",
+     "moving": "OP030B__source_1090_m0305_p00",
      "obstacle": "Split_bay_1__source_0779_m0206_p03",
      "obstacle_owner": "Split_bay_1__source_0779_m0206_p03",
-     "depth_m": 0.3507704799325927
-    },
-    {
-     "moving": "OP030B__source_1095_m0310_p00",
-     "obstacle": "Split_bay_1__source_0779_m0206_p03",
-     "obstacle_owner": "Split_bay_1__source_0779_m0206_p03",
-     "depth_m": 0.2671793168518404
-    },
-    {
-     "moving": "OP030B__source_1055_m0310_p00",
-     "obstacle": "Split_bay_2__source_0779_m0206_p03",
-     "obstacle_owner": "Split_bay_2__source_0779_m0206_p03",
-     "depth_m": 0.2671792527993597
-    },
-    {
-     "moving": "OP030B__source_1094_m0309_p00",
-     "obstacle": "Split_bay_1__source_0779_m0206_p03",
-     "obstacle_owner": "Split_bay_1__source_0779_m0206_p03",
-     "depth_m": 0.25838874220524644
-    },
-    {
-     "moving": "OP030B__source_0577_m0051_p03",
-     "obstacle": "Split_bay_1__source_0779_m0206_p03",
-     "obstacle_owner": "Split_bay_1__source_0779_m0206_p03",
-     "depth_m": 0.2380000237226494
-    },
-    {
-     "moving": "OP030B__source_0578_m0052_p04",
-     "obstacle": "Split_bay_1__source_0779_m0206_p03",
-     "obstacle_owner": "Split_bay_1__source_0779_m0206_p03",
-     "depth_m": 0.23000004379029104
-    },
-    {
-     "moving": "OP030B__source_0578_m0052_p02",
-     "obstacle": "Split_bay_1__source_0779_m0206_p03",
-     "obstacle_owner": "Split_bay_1__source_0779_m0206_p03",
-     "depth_m": 0.22916002323150586
-    },
-    {
-     "moving": "OP030B__source_1054_m0309_p00",
-     "obstacle": "Split_bay_2__source_0779_m0206_p03",
-     "obstacle_owner": "Split_bay_2__source_0779_m0206_p03",
-     "depth_m": 0.2221340574445323
-    },
-    {
-     "moving": "OP030B__source_1058_m0313_p00",
-     "obstacle": "Split_bay_2__source_0779_m0206_p03",
-     "obstacle_owner": "Split_bay_2__source_0779_m0206_p03",
-     "depth_m": 0.212644240126447
-    },
-    {
-     "moving": "OP030B__source_1098_m0313_p00",
-     "obstacle": "Split_bay_1__source_0779_m0206_p03",
-     "obstacle_owner": "Split_bay_1__source_0779_m0206_p03",
-     "depth_m": 0.21262124207958477
-    },
-    {
-     "moving": "OP030B__source_0578_m0052_p00",
-     "obstacle": "Split_bay_1__source_0779_m0206_p03",
-     "obstacle_owner": "Split_bay_1__source_0779_m0206_p03",
-     "depth_m": 0.20400002050399735
+     "gap_m": -0.5132484972222102,
+     "depth_m": 0.5132484972222102,
+     "overlapping": true
     },
     {
      "moving": "OP030B__source_1089_m0304_p00",
      "obstacle": "Split_bay_1__source_0779_m0206_p03",
      "obstacle_owner": "Split_bay_1__source_0779_m0206_p03",
-     "depth_m": 0.191981601406368
+     "gap_m": -0.5038147693928468,
+     "depth_m": 0.5038147693928468,
+     "overlapping": true
+    },
+    {
+     "moving": "OP030B__source_1087_m0302_p00",
+     "obstacle": "Split_bay_1__source_0779_m0206_p03",
+     "obstacle_owner": "Split_bay_1__source_0779_m0206_p03",
+     "gap_m": -0.45823765821938645,
+     "depth_m": 0.45823765821938645,
+     "overlapping": true
+    },
+    {
+     "moving": "OP030B__source_1088_m0303_p00",
+     "obstacle": "Split_bay_1__source_0779_m0206_p03",
+     "obstacle_owner": "Split_bay_1__source_0779_m0206_p03",
+     "gap_m": -0.44423256099203656,
+     "depth_m": 0.44423256099203656,
+     "overlapping": true
     },
     {
      "moving": "OP030B__source_1086_m0301_p00",
      "obstacle": "Split_bay_1__source_0779_m0206_p03",
      "obstacle_owner": "Split_bay_1__source_0779_m0206_p03",
-     "depth_m": 0.1794955334209254
+     "gap_m": -0.43737067484893133,
+     "depth_m": 0.43737067484893133,
+     "overlapping": true
+    },
+    {
+     "moving": "OP030B__source_0578_m0052_p01",
+     "obstacle": "Split_bay_1__source_0779_m0206_p03",
+     "obstacle_owner": "Split_bay_1__source_0779_m0206_p03",
+     "gap_m": -0.42565744705884545,
+     "depth_m": 0.42565744705884545,
+     "overlapping": true
+    },
+    {
+     "moving": "OP030B__source_1095_m0310_p00",
+     "obstacle": "Split_bay_1__source_0779_m0206_p03",
+     "obstacle_owner": "Split_bay_1__source_0779_m0206_p03",
+     "gap_m": -0.42556510411677806,
+     "depth_m": 0.42556510411677806,
+     "overlapping": true
+    },
+    {
+     "moving": "OP030B__source_1094_m0309_p00",
+     "obstacle": "Split_bay_1__source_0779_m0206_p03",
+     "obstacle_owner": "Split_bay_1__source_0779_m0206_p03",
+     "gap_m": -0.42020036372561,
+     "depth_m": 0.42020036372561,
+     "overlapping": true
+    },
+    {
+     "moving": "OP030B__source_1097_m0312_p00",
+     "obstacle": "Split_bay_1__source_0779_m0206_p03",
+     "obstacle_owner": "Split_bay_1__source_0779_m0206_p03",
+     "gap_m": -0.4119607186477836,
+     "depth_m": 0.4119607186477836,
+     "overlapping": true
+    },
+    {
+     "moving": "OP030B__source_1098_m0313_p00",
+     "obstacle": "Split_bay_1__source_0779_m0206_p03",
+     "obstacle_owner": "Split_bay_1__source_0779_m0206_p03",
+     "gap_m": -0.4093328088858532,
+     "depth_m": 0.4093328088858532,
+     "overlapping": true
+    },
+    {
+     "moving": "OP030B__source_1058_m0313_p00",
+     "obstacle": "Split_bay_2__source_0779_m0206_p03",
+     "obstacle_owner": "Split_bay_2__source_0779_m0206_p03",
+     "gap_m": -0.4070776480784506,
+     "depth_m": 0.4070776480784506,
+     "overlapping": true
+    },
+    {
+     "moving": "OP030B__source_1100_m0315_p00",
+     "obstacle": "Split_bay_1__source_0779_m0206_p03",
+     "obstacle_owner": "Split_bay_1__source_0779_m0206_p03",
+     "gap_m": -0.40374497042775115,
+     "depth_m": 0.40374497042775115,
+     "overlapping": true
+    },
+    {
+     "moving": "OP030B__source_1099_m0314_p00",
+     "obstacle": "Split_bay_1__source_0779_m0206_p03",
+     "obstacle_owner": "Split_bay_1__source_0779_m0206_p03",
+     "gap_m": -0.4023484521257006,
+     "depth_m": 0.4023484521257006,
+     "overlapping": true
+    },
+    {
+     "moving": "OP030B__source_1091_m0306_p00",
+     "obstacle": "Split_bay_1__source_0779_m0206_p03",
+     "obstacle_owner": "Split_bay_1__source_0779_m0206_p03",
+     "gap_m": -0.3982481108679048,
+     "depth_m": 0.3982481108679048,
+     "overlapping": true
     }
    ]
   },
@@ -513,6 +613,9 @@
     "names": 354
    },
    "measured_members": 224,
+   "without_geometry": 130,
+   "hall_sized_skipped": [],
+   "tall_members": [],
    "source_envelope": {
     "low_m": [
      -2.309999905526638,
@@ -539,154 +642,267 @@
     ],
     "member_count": 224
    },
-   "clash_count": 55,
-   "clashing_moving_members": 40,
+   "candidate_count": 197,
+   "overlapping_count": 156,
+   "clashing_moving_members": 115,
    "by_owner": [
     {
      "owner": "Split_bay_2__source_0780_m0207_p03",
-     "obstacle_count": 34,
-     "deepest_m": 0.41508163413624777,
-     "moving_count": 34
+     "obstacle_count": 111,
+     "overlapping_count": 103,
+     "deepest_m": 0.5545000359416008,
+     "closest_gap_m": -0.5545000359416008,
+     "moving_count": 111
     },
     {
      "owner": "source_0705",
-     "obstacle_count": 3,
+     "obstacle_count": 12,
+     "overlapping_count": 8,
      "deepest_m": 0.1928924972526147,
-     "moving_count": 3
+     "closest_gap_m": -0.1928924972526147,
+     "moving_count": 10
     },
     {
      "owner": "source_0588",
-     "obstacle_count": 2,
+     "obstacle_count": 12,
+     "overlapping_count": 4,
      "deepest_m": 0.16300000436604023,
-     "moving_count": 1
+     "closest_gap_m": -0.16300000436604023,
+     "moving_count": 5
     },
     {
      "owner": "source_1136",
      "obstacle_count": 3,
+     "overlapping_count": 3,
      "deepest_m": 0.16248812830588577,
+     "closest_gap_m": -0.16248812830588577,
      "moving_count": 3
     },
     {
      "owner": "source_1134",
      "obstacle_count": 3,
-     "deepest_m": 0.1199578892915536,
+     "overlapping_count": 3,
+     "deepest_m": 0.13125888539347663,
+     "closest_gap_m": -0.13125888539347663,
      "moving_count": 3
     },
     {
      "owner": "source_1135",
      "obstacle_count": 3,
-     "deepest_m": 0.11279768718669425,
+     "overlapping_count": 3,
+     "deepest_m": 0.11725378934748942,
+     "closest_gap_m": -0.11725378934748942,
      "moving_count": 3
     },
     {
      "owner": "source_1133",
      "obstacle_count": 3,
+     "overlapping_count": 3,
      "deepest_m": 0.11039190378324815,
+     "closest_gap_m": -0.11039190378324815,
      "moving_count": 3
     },
     {
      "owner": "source_0590",
-     "obstacle_count": 3,
+     "obstacle_count": 21,
+     "overlapping_count": 14,
      "deepest_m": 0.09867867167978783,
-     "moving_count": 1
+     "closest_gap_m": -0.09867867167978783,
+     "moving_count": 8
     },
     {
      "owner": "source_1137",
-     "obstacle_count": 1,
+     "obstacle_count": 3,
+     "overlapping_count": 3,
      "deepest_m": 0.06276231739177984,
+     "closest_gap_m": -0.06276231739177984,
+     "moving_count": 3
+    },
+    {
+     "owner": "source_1140",
+     "obstacle_count": 8,
+     "overlapping_count": 2,
+     "deepest_m": 0.046785215878979436,
+     "closest_gap_m": -0.046785215878979436,
+     "moving_count": 8
+    },
+    {
+     "owner": "source_1145",
+     "obstacle_count": 4,
+     "overlapping_count": 3,
+     "deepest_m": 0.0419471691255795,
+     "closest_gap_m": -0.0419471691255795,
+     "moving_count": 4
+    },
+    {
+     "owner": "source_1147",
+     "obstacle_count": 3,
+     "overlapping_count": 3,
+     "deepest_m": 0.036360469478697865,
+     "closest_gap_m": -0.036360469478697865,
+     "moving_count": 3
+    },
+    {
+     "owner": "source_1146",
+     "obstacle_count": 3,
+     "overlapping_count": 2,
+     "deepest_m": 0.034951367397816124,
+     "closest_gap_m": -0.034951367397816124,
+     "moving_count": 3
+    },
+    {
+     "owner": "source_0599",
+     "obstacle_count": 5,
+     "overlapping_count": 1,
+     "deepest_m": 0.017800569534301758,
+     "closest_gap_m": -0.017800569534301758,
+     "moving_count": 4
+    },
+    {
+     "owner": "source_0589",
+     "obstacle_count": 1,
+     "overlapping_count": 1,
+     "deepest_m": 0.0005000084638595581,
+     "closest_gap_m": -0.0005000084638595581,
+     "moving_count": 1
+    },
+    {
+     "owner": "source_1138",
+     "obstacle_count": 1,
+     "overlapping_count": 0,
+     "deepest_m": 0.0,
+     "closest_gap_m": 0.03805735802371002,
+     "moving_count": 1
+    },
+    {
+     "owner": "source_1142",
+     "obstacle_count": 1,
+     "overlapping_count": 0,
+     "deepest_m": 0.0,
+     "closest_gap_m": 0.04761741617628257,
      "moving_count": 1
     }
    ],
    "worst": [
     {
-     "moving": "OP030C__source_0578_m0052_p01",
+     "moving": "OP030C_feeder_M14_drive_enclosure",
      "obstacle": "Split_bay_2__source_0780_m0207_p03",
      "obstacle_owner": "Split_bay_2__source_0780_m0207_p03",
-     "depth_m": 0.41508163413624777
+     "gap_m": -0.5545000359416008,
+     "depth_m": 0.5545000359416008,
+     "overlapping": true
     },
     {
-     "moving": "OP030C__source_0578_m0052_p02",
+     "moving": "OP030C_feeder_M14_hopper_lid",
      "obstacle": "Split_bay_2__source_0780_m0207_p03",
      "obstacle_owner": "Split_bay_2__source_0780_m0207_p03",
-     "depth_m": 0.3433906897920913
+     "gap_m": -0.5545000359416008,
+     "depth_m": 0.5545000359416008,
+     "overlapping": true
     },
     {
-     "moving": "OP030C__source_0578_m0052_p00",
+     "moving": "OP030C_feeder_M14_hopper_body",
      "obstacle": "Split_bay_2__source_0780_m0207_p03",
      "obstacle_owner": "Split_bay_2__source_0780_m0207_p03",
-     "depth_m": 0.33010239772984384
-    },
-    {
-     "moving": "OP030C__source_1093_m0308_p00",
-     "obstacle": "Split_bay_2__source_0780_m0207_p03",
-     "obstacle_owner": "Split_bay_2__source_0780_m0207_p03",
-     "depth_m": 0.30595464115796434
-    },
-    {
-     "moving": "OP030C__source_1098_m0313_p00",
-     "obstacle": "Split_bay_2__source_0780_m0207_p03",
-     "obstacle_owner": "Split_bay_2__source_0780_m0207_p03",
-     "depth_m": 0.3004157775570764
-    },
-    {
-     "moving": "OP030C__source_0578_m0052_p04",
-     "obstacle": "Split_bay_2__source_0780_m0207_p03",
-     "obstacle_owner": "Split_bay_2__source_0780_m0207_p03",
-     "depth_m": 0.2975500579268946
-    },
-    {
-     "moving": "OP030C__source_1100_m0315_p00",
-     "obstacle": "Split_bay_2__source_0780_m0207_p03",
-     "obstacle_owner": "Split_bay_2__source_0780_m0207_p03",
-     "depth_m": 0.2869066806696259
-    },
-    {
-     "moving": "OP030C__source_0577_m0051_p03",
-     "obstacle": "Split_bay_2__source_0780_m0207_p03",
-     "obstacle_owner": "Split_bay_2__source_0780_m0207_p03",
-     "depth_m": 0.2377424189657349
-    },
-    {
-     "moving": "OP030C__source_1095_m0310_p00",
-     "obstacle": "Split_bay_2__source_0780_m0207_p03",
-     "obstacle_owner": "Split_bay_2__source_0780_m0207_p03",
-     "depth_m": 0.22666802668214325
-    },
-    {
-     "moving": "OP030C__source_1094_m0309_p00",
-     "obstacle": "Split_bay_2__source_0780_m0207_p03",
-     "obstacle_owner": "Split_bay_2__source_0780_m0207_p03",
-     "depth_m": 0.22066617301645564
-    },
-    {
-     "moving": "OP030C__source_1099_m0314_p00",
-     "obstacle": "Split_bay_2__source_0780_m0207_p03",
-     "obstacle_owner": "Split_bay_2__source_0780_m0207_p03",
-     "depth_m": 0.21071513425739408
-    },
-    {
-     "moving": "OP030C__source_0578_m0052_p05",
-     "obstacle": "Split_bay_2__source_0780_m0207_p03",
-     "obstacle_owner": "Split_bay_2__source_0780_m0207_p03",
-     "depth_m": 0.20712658550147411
+     "gap_m": -0.5495000332593918,
+     "depth_m": 0.5495000332593918,
+     "overlapping": true
     },
     {
      "moving": "OP030C__source_1089_m0304_p00",
      "obstacle": "Split_bay_2__source_0780_m0207_p03",
      "obstacle_owner": "Split_bay_2__source_0780_m0207_p03",
-     "depth_m": 0.19593638256214518
+     "gap_m": -0.5480802084978338,
+     "depth_m": 0.5480802084978338,
+     "overlapping": true
     },
     {
-     "moving": "OP030C__source_0693_m0120_p04",
-     "obstacle": "source_0705_m0132_p04",
-     "obstacle_owner": "source_0705",
-     "depth_m": 0.1928924972526147
-    },
-    {
-     "moving": "OP030C__source_1086_m0301_p00",
+     "moving": "OP030C_feeder_M14_outer_guide_-1",
      "obstacle": "Split_bay_2__source_0780_m0207_p03",
      "obstacle_owner": "Split_bay_2__source_0780_m0207_p03",
-     "depth_m": 0.17949554992358285
+     "gap_m": -0.5395000576972961,
+     "depth_m": 0.5395000576972961,
+     "overlapping": true
+    },
+    {
+     "moving": "OP030C_feeder_M14_outer_guide_1",
+     "obstacle": "Split_bay_2__source_0780_m0207_p03",
+     "obstacle_owner": "Split_bay_2__source_0780_m0207_p03",
+     "gap_m": -0.5395000576972961,
+     "depth_m": 0.5395000576972961,
+     "overlapping": true
+    },
+    {
+     "moving": "OP030C_feeder_M14_feed_rail_-1",
+     "obstacle": "Split_bay_2__source_0780_m0207_p03",
+     "obstacle_owner": "Split_bay_2__source_0780_m0207_p03",
+     "gap_m": -0.5394999980926514,
+     "depth_m": 0.5394999980926514,
+     "overlapping": true
+    },
+    {
+     "moving": "OP030C_feeder_M14_feed_rail_1",
+     "obstacle": "Split_bay_2__source_0780_m0207_p03",
+     "obstacle_owner": "Split_bay_2__source_0780_m0207_p03",
+     "gap_m": -0.5394999980926514,
+     "depth_m": 0.5394999980926514,
+     "overlapping": true
+    },
+    {
+     "moving": "OP030C__source_1090_m0305_p00",
+     "obstacle": "Split_bay_2__source_0780_m0207_p03",
+     "obstacle_owner": "Split_bay_2__source_0780_m0207_p03",
+     "gap_m": -0.489520552756499,
+     "depth_m": 0.489520552756499,
+     "overlapping": true
+    },
+    {
+     "moving": "OP030C_feeder_M14_base",
+     "obstacle": "Split_bay_2__source_0780_m0207_p03",
+     "obstacle_owner": "Split_bay_2__source_0780_m0207_p03",
+     "gap_m": -0.48499995563179255,
+     "depth_m": 0.48499995563179255,
+     "overlapping": true
+    },
+    {
+     "moving": "OP030C__source_1093_m0308_p00",
+     "obstacle": "Split_bay_2__source_0780_m0207_p03",
+     "obstacle_owner": "Split_bay_2__source_0780_m0207_p03",
+     "gap_m": -0.4733188323632942,
+     "depth_m": 0.4733188323632942,
+     "overlapping": true
+    },
+    {
+     "moving": "OP030C_feeder_M14_UID011_washer",
+     "obstacle": "Split_bay_2__source_0780_m0207_p03",
+     "obstacle_owner": "Split_bay_2__source_0780_m0207_p03",
+     "gap_m": -0.4715000409632921,
+     "depth_m": 0.4715000409632921,
+     "overlapping": true
+    },
+    {
+     "moving": "OP030C_feeder_M14_UID011_hex",
+     "obstacle": "Split_bay_2__source_0780_m0207_p03",
+     "obstacle_owner": "Split_bay_2__source_0780_m0207_p03",
+     "gap_m": -0.4685000404715538,
+     "depth_m": 0.4685000404715538,
+     "overlapping": true
+    },
+    {
+     "moving": "OP030C_feeder_M14_hopper_handle",
+     "obstacle": "Split_bay_2__source_0780_m0207_p03",
+     "obstacle_owner": "Split_bay_2__source_0780_m0207_p03",
+     "gap_m": -0.4670000337064266,
+     "depth_m": 0.4670000337064266,
+     "overlapping": true
+    },
+    {
+     "moving": "OP030C_feeder_M14_UID012_washer",
+     "obstacle": "Split_bay_2__source_0780_m0207_p03",
+     "obstacle_owner": "Split_bay_2__source_0780_m0207_p03",
+     "gap_m": -0.46200007386505604,
+     "depth_m": 0.46200007386505604,
+     "overlapping": true
     }
    ]
   }
