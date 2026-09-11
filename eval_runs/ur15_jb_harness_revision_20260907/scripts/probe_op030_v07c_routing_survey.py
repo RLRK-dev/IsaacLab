@@ -408,18 +408,26 @@ def co_run(first: np.ndarray, second: np.ndarray, limits: tuple[float, ...]) -> 
     part, and close again, and reporting only the outer bounds turned two approaches of 0.34 m
     into a range of 0.79 m.
 
-    The extent is a pair of bounds, not a number. A span of one point witnesses no length at
-    all, yet padding it by a step at each end credits it with two. One pair read 0.3395 m
-    across four spans of which three were single points: the points witness 0.0396 m and the
-    rest is padding. Lower is the span ends as measured, upper pads each end by the step it
-    could have crossed before the next sample.
+    The extent is a pair, not a number. A span of one point witnesses no length at all, yet
+    padding it by a step at each end credits it with two. One pair read 0.3395 m across four
+    spans of which three were single points: the samples span 0.0396 m and the rest is padding.
+
+    Only the upper one is a bound. The true end of a span lies between the last sample inside
+    and the first outside, so padding by a step cannot undershoot. The sampled figure is not
+    the matching lower bound and is not named one: a dip out of the limit narrower than the
+    step is invisible, and where it happens the samples span more than the runs truly do. An
+    independent slab measurement of S3R came back 0.029 m under it at 10 mm.
 
     A boundary only means something if the gap there is further from the limit than the gap
     itself is uncertain. The same pair broke into four spans at 10 mm while the mesh says the
     two run 0.7 to 9.8 mm apart for 0.325 m without ever parting: the gaps sit on the limit, so
     the samples cross it in and out. Boundaries that close are counted, and a shape built on
-    them is marked unresolved. The extent bounds still hold when the shape does not: the same
-    pair's bounds, 0.0396 to 0.3395 m, contain the 0.325 m measured from the mesh.
+    them is marked unresolved. The extent still holds when the shape does not: the same pair's
+    0.0396 to 0.3395 m contains the 0.325 m measured from the mesh.
+
+    Each boundary carries its own margin, because one end of a span can be firm while the
+    other is not: S3R at 56 mm sits 2.1 mm from the limit at one end and 7.1 mm at the other,
+    which the count alone cannot say.
     """
     if len(first) < 2 or len(second) < 2:
         return []
@@ -455,7 +463,7 @@ def co_run(first: np.ndarray, second: np.ndarray, limits: tuple[float, ...]) -> 
                 points_inside=int(inside.sum()),
                 span_count=len(spans),
                 zero_width_spans=sum(1 for a, b in spans if a == b),
-                extent_lower_m=float(sum(along[b] - along[a] for a, b in spans)),
+                extent_sampled_m=float(sum(along[b] - along[a] for a, b in spans)),
                 extent_upper_m=float(sum(steps[max(0, a - 1) : min(len(steps), b + 1)].sum() for a, b in spans)),
                 boundaries_on_the_limit=len(on_the_limit),
                 span_shape_resolved=not on_the_limit,
@@ -467,6 +475,8 @@ def co_run(first: np.ndarray, second: np.ndarray, limits: tuple[float, ...]) -> 
                         width_m=float(along[b] - along[a]),
                         points=b - a + 1,
                         parted_before_m=float(along[a] - along[spans[index - 1][1]]) if index else None,
+                        margin_before_m=float(min(margins[a - 1], margins[a])) if a > 0 else None,
+                        margin_after_m=float(min(margins[b], margins[b + 1])) if b + 1 < len(gaps) else None,
                     )
                     for index, (a, b) in enumerate(spans)
                 ],
@@ -577,7 +587,7 @@ def main() -> None:
                     co_run_limits_m=list(CO_RUN_LIMITS_M),
                     centre_line_noise_m=CENTRE_LINE_NOISE_M,
                     centre_line_gap_uncertainty_m=CENTRE_LINE_GAP_UNCERTAINTY_M,
-                    co_run_extent="a pair of bounds: lower is what the points witness, upper pads a step per end",
+                    co_run_extent="upper is a bound; sampled is what the samples span and is not a lower bound",
                     co_run_shape="unresolved where a boundary gap sits within the wander of the limit",
                 ),
                 what_this_does_not_give=[
@@ -586,6 +596,7 @@ def main() -> None:
                     "clearance at the terminations, which is contact by design and is trimmed away",
                     f"a co-run tighter than {CENTRE_LINE_NOISE_M} m, which is inside the centre line's own wander",
                     "where a co-run starts and stops, when its boundary gaps sit on the limit: see span_shape_resolved",
+                    "a lower bound on a co-run: a dip out of the limit narrower than the step is invisible",
                     "support pitch and fixing points",
                     "required separation from other services",
                     "the pipe inside the air hardware's boxes",

@@ -93,25 +93,73 @@ def close_enough(want: object, have: object) -> bool:
     return want == have
 
 
+def one_firm_end_and_one_soft() -> bool:
+    """A span can be firm at one end and on the limit at the other.
+
+    S3R at 56 mm sits 2.1 mm from the limit at one end and 7.1 mm at the other, which the
+    executor had to measure by hand because only the count was reported. Each boundary now
+    carries its own margin, so the asymmetry is readable without a second instrument.
+    """
+    uncertainty = probe.CENTRE_LINE_GAP_UNCERTAINTY_M
+    # Held well inside the limit, then tapering onto it just before parting.
+    second = partner(60, [(10, 19, 0.002), (19, 20, 0.0099)])
+    got = probe.co_run(straight(60), second, (LIMIT,))[0]
+    span = got["spans"][0]
+    before, after = span["margin_before_m"], span["margin_after_m"]
+    ok = before is not None and after is not None and before > uncertainty > after
+    print(f"{'ok  ' if ok else 'FAIL'} a span firm at one end and on the limit at the other")
+    print(f"       margin before {before:.4f} m, after {after:.4f} m, against {uncertainty:.4f} m of uncertainty")
+    return ok
+
+
+def invisible_dip_is_not_a_lower_bound() -> bool:
+    """Show that extent_sampled_m can exceed the length the runs are truly together.
+
+    The second run spikes away between two samples of the first and comes straight back. No
+    sample sees it, so co_run reports one unbroken span, while the runs have in fact parted.
+    This is why the sampled figure is not named a lower bound.
+    """
+    first = straight(40)
+    close, away = 0.002, 0.200
+    second = [[close, index * STEP, 0.0] for index in range(10, 15)]
+    second += [[away, 14 * STEP + STEP / 2, 0.0]]  # the spike, between two samples
+    second += [[close, index * STEP, 0.0] for index in range(15, 21)]
+    got = probe.co_run(first, np.array(second), (LIMIT,))[0]
+    # Every sample from 10 to 20 is within the limit of some segment, so one span is reported.
+    reported = got["extent_sampled_m"]
+    midpoint = np.array([0.0, 14 * STEP + STEP / 2, 0.0])
+    truly_apart = min(
+        probe.segment_gap(midpoint, midpoint, np.array(second[j]), np.array(second[j + 1]))[0]
+        for j in range(len(second) - 1)
+    )
+    ok = got["span_count"] == 1 and truly_apart > LIMIT and reported > 0.0
+    print(f"{'ok  ' if ok else 'FAIL'} the sampled extent is not a lower bound")
+    print(
+        f"       reported one span of {reported:.4f} m, while midway between two samples the"
+        f" runs are {truly_apart:.4f} m apart, which is outside the {LIMIT} m limit"
+    )
+    return ok
+
+
 def main() -> int:
     print(f"step {STEP} m, limit {LIMIT} m, gap uncertainty {probe.CENTRE_LINE_GAP_UNCERTAINTY_M:.4f} m\n")
     results = [
         # Fourteen points held at 2 mm: thirteen steps of witnessed width, padded by one each end.
         case(
             "one continuous approach witnesses its own width",
-            dict(span_count=1, extent_lower_m=13 * STEP, extent_upper_m=15 * STEP, span_shape_resolved=True),
+            dict(span_count=1, extent_sampled_m=13 * STEP, extent_upper_m=15 * STEP, span_shape_resolved=True),
             partner(60, [(10, 24, 0.002)]),
         ),
         # Two approaches with a real parting between them must not be reported as one.
         case(
             "two approaches stay two",
-            dict(span_count=2, extent_lower_m=10 * STEP, zero_width_spans=0, span_shape_resolved=True),
+            dict(span_count=2, extent_sampled_m=10 * STEP, zero_width_spans=0, span_shape_resolved=True),
             partner(60, [(10, 16, 0.002), (26, 32, 0.002)]),
         ),
         # A single sample witnesses no length. The old extent credited it with two steps.
         case(
             "a single point witnesses nothing",
-            dict(span_count=1, zero_width_spans=1, extent_lower_m=0.0, extent_upper_m=2 * STEP),
+            dict(span_count=1, zero_width_spans=1, extent_sampled_m=0.0, extent_upper_m=2 * STEP),
             partner(60, [(20, 21, 0.002)]),
         ),
         # Gaps sitting on the limit: the samples cross it in and out and the shape is an artefact.
@@ -141,10 +189,12 @@ def main() -> int:
         # Most pairs in the survey never come close. This must return an empty span list.
         case(
             "no approach at all returns nothing, and does not raise",
-            dict(span_count=0, points_inside=0, extent_lower_m=0.0, extent_upper_m=0.0, spans=[]),
+            dict(span_count=0, points_inside=0, extent_sampled_m=0.0, extent_upper_m=0.0, spans=[]),
             partner(60, []),
         ),
     ]
+    results.append(one_firm_end_and_one_soft())
+    results.append(invisible_dip_is_not_a_lower_bound())
     failed = results.count(False)
     print(f"\n{len(results) - failed} of {len(results)} cases hold")
     return 1 if failed else 0
