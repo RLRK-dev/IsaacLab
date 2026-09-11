@@ -18,9 +18,9 @@ so the mirror is applied once, as the pose of the new cell's parent empty, and e
 follows. Mesh data stays shared with the original, as adjudicated, which is also how work 2's
 repair reaches the copies.
 
-Two things this does not do. The floor plates land on the neighbouring stations' plates at
-S1R and S3R, by 0.405 m and 1.206 m along Y; that is a separate repair and is left visible
-rather than papered over. And the naming is ``duplicate_set``'s own ``OP030_S1R__<source>``,
+Two things this does not do. The cable from cabinet to pedestal crosses the neighbouring
+station's cable at S1R and S3R, over 0.405 m and 1.206 m along Y; rerouting belongs with work
+4 and is left visible rather than papered over. And the naming is ``duplicate_set``'s own ``OP030_S1R__<source>``,
 the existing convention, while the single-underscore form is still awaiting adjudication.
 
 Run: ``blender --background --python scripts/build_op030_v07c_stagger_both_sides.py``
@@ -157,7 +157,7 @@ def main() -> None:
         objects_after=len(after),
         added_count=len(added),
         known_unresolved=[
-            "floor plates land on the neighbouring stations' plates at S1R (0.405 m) and S3R (1.206 m)",
+            "the cabinet-to-pedestal cable crosses the neighbour's at S1R (0.405 m) and S3R (1.206 m)",
             "arm to arm at S3R measured 0.019 m at frame 1, an upper bound, with both robots moving",
             "air drops are bay service only; each cell still needs its own set (work 4)",
         ],

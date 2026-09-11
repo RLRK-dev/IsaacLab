@@ -5,9 +5,14 @@
 """Decide the box overlaps at triangle level, so the layout question can be settled [m].
 
 The clearance probe compares axis-aligned boxes, which is an upper bound: two boxes overlap
-whenever the shapes inside them might touch, and for an arm they usually do not. It found
-118 box overlaps, and one of them decides something -- S3R against OP040's left robot, 13
-overlaps, deepest 0.162 m. A box overlap there is not a reason to move a robot.
+whenever the shapes inside them might touch, and for an arm they usually do not. Every pair
+it hands over is answered here at triangle level, whether the boxes overlap deeply, barely,
+or merely come within the candidate band.
+
+That band matters. The first version of the box stage required a 50 mm overlap on every axis
+before a pair was passed on, which quietly hid every shallower case: the mirrored cabinet
+turned out to clear everything by 67 mm or more, but nothing had measured it. The band now
+admits near misses, so the triangle stage sees the whole population.
 
 So this takes every pair the box stage produces and asks the exact question of the triangles,
 through the same BVH Blender uses for its own collision queries. A pair either has triangles
@@ -108,15 +113,16 @@ def candidates(cell: str, covered: set[str]) -> tuple[list[dict], dict]:
         if box is None or hall_sized(*box):
             continue
         mirrored = mirror_box(*box, station_y)
-        hit, depth = clashes(mirrored[0], mirrored[1], lows, highs)
-        for index, value in zip(hit, depth):
+        hit, gaps = clashes(mirrored[0], mirrored[1], lows, highs)
+        for index, value in zip(hit, gaps):
             obstacle_low, obstacle_high = lows[index], highs[index]
             overlap = np.minimum(mirrored[1], obstacle_high) - np.maximum(mirrored[0], obstacle_low)
             rows.append(
                 dict(
                     moving=name,
                     obstacle=obstacle_names[index],
-                    box_depth_m=float(value),
+                    box_gap_m=float(value),
+                    box_depth_m=float(max(0.0, -value)),
                     # The depth above is the smallest of these three. Which axis it comes from
                     # decides what a fix costs: a shallow Z is a height, a shallow Y is a shift.
                     box_overlap_xyz_m=overlap.tolist(),
@@ -203,7 +209,12 @@ def main() -> None:
         resolved = resolve(rows, meta["station_y_m"])
         touching = [row for row in resolved if row.get("contact")]
         clear = sorted(
-            (row for row in resolved if row.get("contact") is False and (row["nearest_m"] or 0) <= REPORTED_GAP_M),
+            (
+                row
+                for row in resolved
+                if row.get("contact") is False
+                and (row["nearest_m"] if row["nearest_m"] is not None else 0) <= REPORTED_GAP_M
+            ),
             key=lambda row: row["nearest_m"] if row["nearest_m"] is not None else 1e9,
         )
         cells[cell] = dict(

@@ -19,13 +19,13 @@ measures the clearance at every step, against everything that stays and against 
 the mirrored cell, which will be standing there too. What comes back is the free intervals,
 the smallest move that clears, and what limits each side.
 
-The cabinet's p04 piece is not the cabinet. Every one of the twelve stations carries the same
-0.538 x 1.956 x 0.193 plate and its robot pedestal stands on it, so the plate belongs to the
-robot and mirrors with it. Sweeping it along with the cabinet is what made the first run find
-no free position anywhere: the plate can never leave the pedestal standing on it. The plate is
-therefore held at the mirrored position, treated as an obstacle to the cabinet, and asked a
-different question -- how much of it would have to be cut away to clear what it lands on, and
-whether the pedestal still stands wholly on what is left.
+The cabinet's p04 piece is not the cabinet, and it is not a floor plate either. It is one
+connected strand about 56 mm thick that leaves the cabinet's side near z = 0.19, drops to the
+floor, runs about a metre and loops up to end at the robot pedestal: the cable between them.
+Sweeping it along with the cabinet is what made the first run find no free position anywhere,
+because a cable fixed at both ends cannot travel. It is therefore held at the mirrored
+position, treated as an obstacle to the cabinet, and asked its own question -- how far its run
+would have to be pulled back to clear what it meets.
 
 Nothing here decides the placement. It reports where a placement is possible.
 
@@ -62,14 +62,14 @@ REPORT = ROOT / "audit/op030_v07c_controller_placement.json"
 
 # The controller of each cell, by the name its parts carry.
 CONTROLLERS = {"A": "source_0693", "B": "OP030B__source_0693", "C": "OP030C__source_0693"}
-# p04 is grouped under the controller by the CAD import but is not part of the cabinet. It is
-# the floor plate the robot pedestal stands on: every one of the twelve stations carries the
-# same 0.538 x 1.956 x 0.193 plate, and the pedestal meets it at each. So it mirrors with the
-# robot and cannot be carried around with the cabinet -- sweeping it together with the cabinet
-# is what made the first run find no free position anywhere, since the plate can never leave
-# the pedestal that stands on it.
-FLOOR_PLATE_SUFFIX = "_p04"
-# The robot pedestal, which the plate has to keep supporting after any trim.
+# p04 is grouped under the controller by the CAD import but is not the cabinet, and it is not
+# a floor plate either, which is what this said first. It is one connected strand about 56 mm
+# thick that leaves the cabinet's side around z = 0.19, drops to the floor, runs about a metre
+# and loops up to end at the pedestal: the cable from the cabinet to the robot. It is measured
+# separately because it is attached at both ends and so cannot travel with the cabinet.
+CABLE_SUFFIX = "_p04"
+# The robot pedestal. The cable ends at it; it does not stand on the cable, so the reported
+# margin says where the pedestal sits relative to a shortened cable, not whether it is held up.
 PEDESTALS = {"A": "source_0576_m0050", "B": "OP030B__source_0576_m0050", "C": "OP030C__source_0576_m0050"}
 # How far along Y the cabinet is allowed to travel, and how finely it is sampled.
 TRAVEL_M = 2.000
@@ -153,18 +153,19 @@ def union(boxes: list[tuple[np.ndarray, np.ndarray]]) -> tuple[np.ndarray, np.nd
     return np.array([box[0] for box in boxes]).min(0), np.array([box[1] for box in boxes]).max(0)
 
 
-def plate_fit(
+def cable_fit(
     plate: tuple[np.ndarray, np.ndarray],
     pedestal: tuple[np.ndarray, np.ndarray] | None,
     lows: np.ndarray,
     highs: np.ndarray,
     names: list[str],
 ) -> list[dict]:
-    """Ask what a mirrored floor plate would have to give up to clear what it lands on [m].
+    """Ask how far a mirrored cable run would have to be pulled back to clear what it meets [m].
 
-    The plate carries the pedestal, so it cannot move. It can be shortened. For each thing it
-    lands on, this gives the two ways to cut it back along Y and whether the pedestal still
-    stands wholly on what is left.
+    The cable is fixed at both ends, so it cannot travel with the cabinet, but a route can be
+    changed. For each thing it meets, this gives the two ways to shorten its run along Y and
+    how the pedestal end sits relative to what is left. That margin is a position, not a
+    structural claim: nothing stands on the cable.
     """
     low, high = plate
     separation = np.maximum(lows - high, low - highs).max(axis=1)
@@ -178,7 +179,7 @@ def plate_fit(
         ):
             remaining = float(new_high) - float(new_low)
             if remaining <= 0:
-                options.append(dict(option=label, remaining_length_m=remaining, pedestal_supported=False))
+                options.append(dict(option=label, remaining_length_m=remaining, pedestal_within_remainder=False))
                 continue
             margin = None
             if pedestal is not None:
@@ -188,7 +189,7 @@ def plate_fit(
                     option=label,
                     cut_m=float(high[1] - new_high if label.endswith("high_end") else new_low - low[1]),
                     remaining_length_m=remaining,
-                    pedestal_supported=None if margin is None else bool(margin >= 0.0),
+                    pedestal_within_remainder=None if margin is None else bool(margin >= 0.0),
                     pedestal_margin_m=margin,
                 )
             )
@@ -223,7 +224,7 @@ def main() -> None:
         moving = set(moving_names(cell, covered[cell])["names"])
         prefix = CONTROLLERS[cell]
         grouped = sorted(name for name in moving if name.startswith(prefix))
-        plate = [name for name in grouped if name.endswith(FLOOR_PLATE_SUFFIX)]
+        plate = [name for name in grouped if name.endswith(CABLE_SUFFIX)]
         cabinet = [name for name in grouped if name not in set(plate)]
         # The plate stays at the mirrored position with the robot, so it is an obstacle to the
         # cabinet like anything else standing there.
@@ -247,9 +248,9 @@ def main() -> None:
             controller_prefix=prefix,
             cabinet_parts=len(cabinet_boxes),
             cabinet_names=cabinet_names,
-            floor_plate_names=plate,
-            floor_plate_note="mirrored with the robot, not swept; it is the pedestal's base",
-            floor_plate=dict(
+            cable_names=plate,
+            cable_note="fixed at both ends, so it is held at the mirrored position rather than swept",
+            cable=dict(
                 parts=plate_names,
                 mirrored_box_m=None if plate_box is None else [plate_box[0].tolist(), plate_box[1].tolist()],
                 pedestal_parts=len(pedestal_boxes),
@@ -259,7 +260,7 @@ def main() -> None:
                 lands_on=(
                     []
                     if plate_box is None
-                    else plate_fit(plate_box, pedestal_box, static_lows, static_highs, static_names)
+                    else cable_fit(plate_box, pedestal_box, static_lows, static_highs, static_names)
                 ),
             ),
             obstacle_count=len(names),
@@ -306,9 +307,9 @@ def main() -> None:
             f"  {cell} -> {row['destination']}: cabinet parts={row['cabinet_parts']} "
             f"at mirror clearance={mirror['clearance_m']:.3f} limited by {mirror['limited_by']}"
         )
-        for landing in row["floor_plate"]["lands_on"]:
+        for landing in row["cable"]["lands_on"]:
             best = max(
-                (option for option in landing["options"] if option.get("pedestal_supported")),
+                (option for option in landing["options"] if option.get("pedestal_within_remainder")),
                 key=lambda option: option["remaining_length_m"],
                 default=None,
             )
@@ -320,7 +321,7 @@ def main() -> None:
                     f"pedestal margin {best['pedestal_margin_m']:.3f} m"
                 )
             )
-            print(f"    plate lands on {landing['obstacle']} over {landing['overlap_y_m']:.3f} m: {summary}")
+            print(f"    cable meets {landing['obstacle']} over {landing['overlap_y_m']:.3f} m: {summary}")
         for label in ("touch", "margin"):
             move = row[f"smallest_move_{label}"]
             spans = row[f"free_intervals_{label}"]

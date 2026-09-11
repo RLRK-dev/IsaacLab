@@ -26,7 +26,7 @@ Members whose box is taller than a cell are listed, because one stray vertex str
 until it overlaps in Z with everything and leaves XY deciding alone. Members skipped for
 being hall-sized are listed too, so nothing leaves the measurement silently.
 
-An overlap here is not automatically fatal. The cells straddle the conveyor by design, so an
+A candidate here is not automatically fatal. The cells straddle the conveyor by design, so an
 obstacle that is line hardware is expected. An obstacle owned by OP020 or OP040 is not.
 
 Run: ``blender --background --python scripts/probe_op030_v07c_mirror_clearance.py``
@@ -62,10 +62,12 @@ SUPPLY_PREFIXES = {"A": ("OP030A_feeder",), "B": ("OP030B_wire_supply",), "C": (
 # Supply that sits on the pallet and belongs to A alone. Reported, not moved: whether each
 # cell needs its own is a question about the process, not about geometry.
 PALLET_SUPPLY = ("OP030_supply_kit", "OP030_supply_fixed", "source_0587")
-# Two boxes clash when they overlap by more than this on every axis. Boxes that merely
-# touch, or stand a few millimetres apart, are not reported: the question here is whether
-# the destination is occupied, not whether the gap is comfortable.
-OVERLAP_M = 0.050
+# A pair becomes a candidate when the gap between the boxes is smaller than this, overlap
+# included. The first version required a 50 mm overlap on every axis instead, which made the
+# threshold a filter: shallow overlaps and near misses were dropped before anything looked at
+# the shapes, so a real contact under 50 mm of box overlap could not be found. The band is
+# generous on purpose -- boxes are only a bound, and the triangle stage decides.
+CANDIDATE_BAND_M = 0.050
 # Anything this wide is the floor or the hall, and is not an obstacle to a cell.
 HALL_FOOTPRINT_M = 8.0
 WORST_LISTED = 15
@@ -151,12 +153,14 @@ def obstacles(exclude: set[str]) -> tuple[list[str], np.ndarray, np.ndarray]:
 
 
 def clashes(low: np.ndarray, high: np.ndarray, lows: np.ndarray, highs: np.ndarray) -> tuple[np.ndarray, np.ndarray]:
-    """Return the obstacle indices this box overlaps, and by how much [m]."""
-    inner_low = np.maximum(lows, low)
-    inner_high = np.minimum(highs, high)
-    depth = inner_high - inner_low
-    hit = np.flatnonzero(np.all(depth > OVERLAP_M, axis=1))
-    return hit, depth[hit].min(axis=1)
+    """Return the obstacles within the band, and the signed gap to each [m].
+
+    The gap is negative when the boxes overlap, and its size is then the overlap on the
+    axis that overlaps least -- the distance one of them would have to move to separate.
+    """
+    separation = np.maximum(lows - high, low - highs).max(axis=1)
+    hit = np.flatnonzero(separation < CANDIDATE_BAND_M)
+    return hit, separation[hit]
 
 
 def envelope(boxes: list[tuple[np.ndarray, np.ndarray]]) -> dict:
@@ -167,14 +171,25 @@ def envelope(boxes: list[tuple[np.ndarray, np.ndarray]]) -> dict:
 
 
 def group_clashes(rows: list[dict]) -> list[dict]:
-    """Collapse per-object clashes into one row per obstacle owner."""
+    """Collapse per-object candidates into one row per obstacle owner."""
     owners: dict[str, dict] = {}
     for row in rows:
         owner = owners.setdefault(
-            row["obstacle_owner"], dict(owner=row["obstacle_owner"], obstacle_count=0, deepest_m=0.0, moving=set())
+            row["obstacle_owner"],
+            dict(
+                owner=row["obstacle_owner"],
+                obstacle_count=0,
+                overlapping_count=0,
+                deepest_m=0.0,
+                closest_gap_m=None,
+                moving=set(),
+            ),
         )
         owner["obstacle_count"] += 1
+        owner["overlapping_count"] += int(row["overlapping"])
         owner["deepest_m"] = max(owner["deepest_m"], row["depth_m"])
+        if owner["closest_gap_m"] is None or row["gap_m"] < owner["closest_gap_m"]:
+            owner["closest_gap_m"] = row["gap_m"]
         owner["moving"].add(row["moving"])
     for owner in owners.values():
         owner["moving_count"] = len(owner.pop("moving"))
@@ -219,18 +234,20 @@ def main() -> None:
             source_boxes.append(box)
             mirrored = mirror_box(*box, station_y)
             mirrored_boxes.append(mirrored)
-            hit, depth = clashes(mirrored[0], mirrored[1], lows, highs)
-            for index, value in zip(hit, depth):
+            hit, gaps = clashes(mirrored[0], mirrored[1], lows, highs)
+            for index, value in zip(hit, gaps):
                 obstacle = bpy.data.objects[obstacle_names[index]]
                 rows.append(
                     dict(
                         moving=name,
                         obstacle=obstacle.name,
                         obstacle_owner=top_ancestor(obstacle),
-                        depth_m=float(value),
+                        gap_m=float(value),
+                        depth_m=float(max(0.0, -value)),
+                        overlapping=bool(value < 0.0),
                     )
                 )
-        worst = sorted(rows, key=lambda row: -row["depth_m"])[:WORST_LISTED]
+        worst = sorted(rows, key=lambda row: row["gap_m"])[:WORST_LISTED]
         cells[cell] = dict(
             destination=destination,
             station_y_m=station_y,
@@ -242,8 +259,9 @@ def main() -> None:
             tall_members=sorted(tall, key=lambda row: -row["z_extent_m"])[:WORST_LISTED],
             source_envelope=envelope(source_boxes) if source_boxes else None,
             mirrored_envelope=envelope(mirrored_boxes) if mirrored_boxes else None,
-            clash_count=len(rows),
-            clashing_moving_members=len({row["moving"] for row in rows}),
+            candidate_count=len(rows),
+            overlapping_count=sum(row["overlapping"] for row in rows),
+            clashing_moving_members=len({row["moving"] for row in rows if row["overlapping"]}),
             by_owner=group_clashes(rows),
             worst=worst,
         )
@@ -261,7 +279,7 @@ def main() -> None:
                 source=str(SOURCE.relative_to(ROOT)),
                 source_sha256=SOURCE_SHA,
                 read_from=read_from,
-                overlap_m=OVERLAP_M,
+                candidate_band_m=CANDIDATE_BAND_M,
                 hall_footprint_m=HALL_FOOTPRINT_M,
                 moving_set_rule="work 1 selection plus the cell's own supply by prefix; line hardware stays",
                 cells=cells,
@@ -283,12 +301,14 @@ def main() -> None:
         print(
             f"  {cell} -> {row['destination']}: moving={moving['names']} "
             f"(selection {moving['selection_count']} + supply added {moving['supply_added_count']}) "
-            f"clashes={row['clash_count']} members_hit={row['clashing_moving_members']}"
+            f"candidates={row['candidate_count']} overlapping={row['overlapping_count']} "
+            f"members_hit={row['clashing_moving_members']}"
         )
         for owner in row["by_owner"][:5]:
             print(
-                f"    {owner['owner']}: {owner['obstacle_count']} obstacles, "
-                f"deepest {owner['deepest_m']:.3f} m, hits {owner['moving_count']} moving"
+                f"    {owner['owner']}: {owner['obstacle_count']} obstacles "
+                f"({owner['overlapping_count']} overlapping), deepest {owner['deepest_m']:.3f} m, "
+                f"closest gap {owner['closest_gap_m']:.3f} m, hits {owner['moving_count']} moving"
             )
     print(f"report: {REPORT.relative_to(ROOT)}")
 
