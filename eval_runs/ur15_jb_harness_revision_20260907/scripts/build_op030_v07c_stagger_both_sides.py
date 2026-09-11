@@ -18,6 +18,12 @@ so the mirror is applied once, as the pose of the new cell's parent empty, and e
 follows. Mesh data stays shared with the original, as adjudicated, which is also how work 2's
 repair reaches the copies.
 
+Placement is verified against M(y0) applied to each source's world matrix, but not to the
+last bit: Blender holds those matrices in single precision, where one step at these
+coordinates is 2.4e-7 m. The tolerance is 1e-5 m, twenty times the rounding actually measured
+and four orders below anything that matters, and the run also reports whether the worst error
+stayed inside rounding at all, so a real placement error cannot hide behind a loose bound.
+
 Two things this does not do. The cable from cabinet to pedestal crosses the neighbouring
 station's cable at S1R and S3R, over 0.405 m and 1.206 m along Y; rerouting belongs with work
 4 and is left visible rather than papered over. And the naming is ``duplicate_set``'s own ``OP030_S1R__<source>``,
@@ -56,7 +62,14 @@ MANIFEST = ROOT / "audit/op030_v07c_stagger_both_sides.json"
 # The name each new cell carries. duplicate_set appends "__" to this, which is the convention
 # every existing copy follows; the single-underscore form is still awaiting adjudication.
 CELL_PREFIXES = {"A": "OP030_S1R", "B": "OP030_S2L", "C": "OP030_S3R"}
-TOLERANCE = 1e-9
+# Blender keeps object matrices in single precision. One step at these coordinates is about
+# 2.4e-7 m, and 4.8e-7 m out past 4 m, so the placement cannot be exact and the first version
+# of this check asked for 1e-9 m and could never pass. The measured spread was 1.0e-7 to
+# 5.1e-7 m, which is that rounding and nothing else. This is twenty times the spread and still
+# ten micrometres: a mirror applied wrongly would be out by metres, not by this.
+PLACEMENT_TOLERANCE_M = 1e-5
+# Above this the error is no longer rounding and the run says so rather than passing quietly.
+ROUNDING_CEILING_M = 1e-6
 
 
 def mirror_matrix(station_y: float) -> Matrix:
@@ -96,6 +109,8 @@ def verify(copies: dict[str, bpy.types.Object], matrix: Matrix, before: dict) ->
         copy_count=len(copies),
         worst_placement_error_m=worst_error,
         worst_placed=worst_name,
+        within_single_precision_rounding=bool(worst_error <= ROUNDING_CEILING_M),
+        single_precision_step_m=float(np.spacing(np.float32(4.0))),
         determinant=float(np.linalg.det(np.asarray(matrix)[:3, :3])),
     )
 
@@ -141,7 +156,10 @@ def main() -> None:
     for name in original_names:
         assert before[name] == after[name], f"{name} changed; the sources must not move"
     for cell in cells.values():
-        assert cell["placement"]["worst_placement_error_m"] < TOLERANCE, cell["cell_root"]
+        placement = cell["placement"]
+        assert placement["worst_placement_error_m"] < PLACEMENT_TOLERANCE_M, (
+            f"{cell['cell_root']}: worst placement error {placement['worst_placement_error_m']:.2e} m"
+        )
         assert cell["duplicated"] == cell["requested"] - len(cell["not_in_scene"]), cell["cell_root"]
 
     binding = dict(
@@ -158,7 +176,9 @@ def main() -> None:
         added_count=len(added),
         known_unresolved=[
             "the cabinet-to-pedestal cable crosses the neighbour's at S1R (0.405 m) and S3R (1.206 m)",
-            "arm to arm at S3R measured 0.019 m at frame 1, an upper bound, with both robots moving",
+            "arm to arm at S3R measured 0.0059 m at frame 1, an upper bound, with both robots moving",
+            "C's two M6 feeder legs rest on OP040's pedestal end face at S3R, with no clearance",
+            "the cable also crosses OP020_direct_mating_station_foot1.33_-2.23 at S1R",
             "air drops are bay service only; each cell still needs its own set (work 4)",
         ],
     )
@@ -182,10 +202,11 @@ def main() -> None:
     )
     assert digest(SOURCE) == SOURCE_SHA, "The repaired candidate must be untouched"
     for cell, row in cells.items():
+        rounding = "" if row["placement"]["within_single_precision_rounding"] else "  ABOVE ROUNDING"
         print(
             f"  {cell} -> {row['destination']}: duplicated {row['duplicated']} of {row['requested']} "
             f"(selection {row['selection_count']} + supply {row['supply_added_count']}) "
-            f"worst placement error {row['placement']['worst_placement_error_m']:.2e} m"
+            f"worst placement error {row['placement']['worst_placement_error_m']:.2e} m{rounding}"
         )
     print(f"objects {len(original_names)} -> {len(after)} (+{len(added)})")
     print(f"V07C_STAGGER_BOTH_SIDES_SAVED {digest(OUTPUT)}")

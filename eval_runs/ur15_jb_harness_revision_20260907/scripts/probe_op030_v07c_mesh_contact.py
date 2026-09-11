@@ -70,6 +70,9 @@ from probe_op030_v07c_mirror_clearance import (  # noqa: E402
 REPORT = ROOT / "audit/op030_v07c_mesh_contact.json"
 # Pairs further apart than this are not worth listing once they are known not to touch.
 REPORTED_GAP_M = 1.000
+# Surfaces this close are coincident, not merely near: no triangle crosses, and there is no
+# clearance either. Two of C's feeder legs sit on OP040's pedestal end face at 2.5e-7 m.
+TOUCHING_M = 1e-5
 
 
 def mirrored_geometry(obj: bpy.types.Object, station_y: float) -> tuple[np.ndarray, np.ndarray]:
@@ -90,7 +93,7 @@ def tree_of(vertices: np.ndarray, faces: np.ndarray) -> BVHTree | None:
     )
 
 
-def nearest_gap(tree: BVHTree, vertices: np.ndarray) -> float | None:
+def one_way_gap(tree: BVHTree, vertices: np.ndarray) -> float | None:
     """Return the shortest distance from these vertices to that surface [m]."""
     best = None
     for vertex in vertices.tolist():
@@ -98,6 +101,22 @@ def nearest_gap(tree: BVHTree, vertices: np.ndarray) -> float | None:
         if distance is not None and (best is None or distance < best):
             best = float(distance)
     return best
+
+
+def nearest_gap(
+    tree_a: BVHTree, vertices_a: np.ndarray, tree_b: BVHTree, vertices_b: np.ndarray
+) -> tuple[float | None, float | None, float | None]:
+    """Return the gap measured from each side, and the smaller of the two [m].
+
+    Measuring one way only understates how close two shapes are, because the nearest point on
+    a surface is rarely one of its vertices. At S3R the two arms read 0.0186 m from one side
+    and 0.0059 m from the other; only the second is the honest bound. Both are reported so
+    that the difference between them stays visible.
+    """
+    forward = one_way_gap(tree_b, vertices_a)
+    backward = one_way_gap(tree_a, vertices_b)
+    both = [value for value in (forward, backward) if value is not None]
+    return forward, backward, (min(both) if both else None)
 
 
 def candidates(cell: str, covered: set[str]) -> tuple[list[dict], dict]:
@@ -151,7 +170,9 @@ def resolve(rows: list[dict], station_y: float) -> list[dict]:
             resolved.append(dict(row, contact=None, note="one side has no triangles"))
             continue
         overlap = moving_tree.overlap(obstacle_tree)
-        gap = None if overlap else nearest_gap(obstacle_tree, vertices)
+        forward = backward = gap = None
+        if not overlap:
+            forward, backward, gap = nearest_gap(moving_tree, vertices, obstacle_tree, obstacle_vertices)
         moving_low, moving_high = np.asarray(row["moving_box_m"][0]), np.asarray(row["moving_box_m"][1])
         obstacle_low, obstacle_high = np.asarray(row["obstacle_box_m"][0]), np.asarray(row["obstacle_box_m"][1])
         inside = bool(np.all(moving_low >= obstacle_low) and np.all(moving_high <= obstacle_high)) or bool(
@@ -164,6 +185,9 @@ def resolve(rows: list[dict], station_y: float) -> list[dict]:
                 contact=bool(overlap),
                 triangle_pairs=len(overlap),
                 nearest_m=gap,
+                nearest_from_moving_m=forward,
+                nearest_from_obstacle_m=backward,
+                touching=bool(gap is not None and gap <= TOUCHING_M),
                 one_box_inside_the_other=inside,
             )
         )
@@ -176,10 +200,19 @@ def summarize(resolved: list[dict]) -> list[dict]:
     for row in resolved:
         owner = owners.setdefault(
             row.get("owner", "unknown"),
-            dict(owner=row.get("owner", "unknown"), pairs=0, contacts=0, contained=0, triangle_pairs=0, nearest_m=None),
+            dict(
+                owner=row.get("owner", "unknown"),
+                pairs=0,
+                contacts=0,
+                touching=0,
+                contained=0,
+                triangle_pairs=0,
+                nearest_m=None,
+            ),
         )
         owner["pairs"] += 1
         owner["contacts"] += int(bool(row.get("contact")))
+        owner["touching"] += int(bool(row.get("touching")))
         owner["contained"] += int(bool(row.get("one_box_inside_the_other")))
         owner["triangle_pairs"] += row.get("triangle_pairs", 0)
         gap = row.get("nearest_m")
@@ -222,6 +255,8 @@ def main() -> None:
             candidate_pairs=len(rows),
             contact_pairs=len(touching),
             clear_pairs=len(resolved) - len(touching),
+            touching_pairs=sum(1 for row in resolved if row.get("touching")),
+            touching=[row for row in resolved if row.get("touching")],
             contained_pairs=sum(1 for row in resolved if row.get("one_box_inside_the_other")),
             contained=[row for row in resolved if row.get("one_box_inside_the_other") and not row.get("contact")],
             by_owner=summarize(resolved),
@@ -239,7 +274,8 @@ def main() -> None:
                 source_sha256=SOURCE_SHA,
                 read_from=read_from,
                 method="box stage recomputed, then BVH triangle overlap on evaluated meshes",
-                nearest_distance_note="vertex to surface, an upper bound on the true gap",
+                nearest_distance_note="the smaller of the two vertex-to-surface measurements, an upper bound",
+                touching_m=TOUCHING_M,
                 reported_gap_m=REPORTED_GAP_M,
                 cells=cells,
                 scene_world_transforms_unchanged=unchanged,
@@ -256,12 +292,14 @@ def main() -> None:
     for cell, row in cells.items():
         print(
             f"  {cell} -> {row['destination']}: candidates={row['candidate_pairs']} "
-            f"contact={row['contact_pairs']} clear={row['clear_pairs']} contained={row['contained_pairs']}"
+            f"contact={row['contact_pairs']} touching={row['touching_pairs']} "
+            f"clear={row['clear_pairs']} contained={row['contained_pairs']}"
         )
         for owner in row["by_owner"]:
             gap = "-" if owner["nearest_m"] is None else f"{owner['nearest_m']:.3f}"
             print(
                 f"    {owner['owner']}: pairs={owner['pairs']} contacts={owner['contacts']} "
+                f"touching={owner['touching']} "
                 f"triangles={owner['triangle_pairs']} nearest={gap}"
             )
     print(f"report: {REPORT.relative_to(ROOT)}")
