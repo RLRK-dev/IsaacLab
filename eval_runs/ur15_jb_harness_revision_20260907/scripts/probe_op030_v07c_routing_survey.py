@@ -131,8 +131,8 @@ CURVATURE_CALIBRATION = {
         "bend occupies, before and after the sampling fix, so no radius is reported"
     ),
 }
-# The implied diameter runs about a tenth low against a tube of known section, because the
-# centre line wanders inside the true axis. Reported as approximate, not as a dimension.
+# The implied diameter reads high against a tube of known section, because the centre line
+# wanders off the true axis and carries the far surface with it. Approximate, not a dimension.
 DIAMETER_CALIBRATION = {
     "true_m": 0.056,
     "measured_m": 0.060,
@@ -152,6 +152,11 @@ CO_RUN_LIMITS_M = (0.010, 0.030, 0.056)
 # rather than the cable: at 3 mm one pair had a single point of seventy-four inside, while the
 # mesh says the two run 0.7 to 3.3 mm apart for 0.25 m. Limits below this are flagged.
 CENTRE_LINE_NOISE_M = 0.010
+# How far a measured gap between two centre lines can be wrong, taken from the same calibration
+# rather than chosen: a line wandering r off its true axis makes the section read 2r wide, so
+# the 0.004 m excess above puts each line about 0.002 m off, and a gap between two of them
+# about 0.004 m out. A boundary whose gaps sit this close to a limit is not a boundary.
+CENTRE_LINE_GAP_UNCERTAINTY_M = DIAMETER_CALIBRATION["measured_m"] - DIAMETER_CALIBRATION["true_m"]
 HALL_FOOTPRINT_M = 8.0
 
 
@@ -394,15 +399,27 @@ def closest_approach(first: np.ndarray, second: np.ndarray) -> dict | None:
 def co_run(first: np.ndarray, second: np.ndarray, limits: tuple[float, ...]) -> list[dict]:
     """Return how much of the first run stays within each distance of the second [m].
 
-    Two runs that meet at 53 micrometres are not crossing at a point. Measured in slabs the
-    axes here stay inside a diameter of each other for about 0.75 m and inside 3 mm for about
-    0.35 m, which is why the reported point of closest approach moved by 0.35 m when the
-    measurement changed and the gap barely did. What work 4 has to separate is a length.
+    Two runs that meet at 53 micrometres are not crossing at a point. The axes here stay inside
+    a diameter of each other for about 0.75 m, which is why the reported point of closest
+    approach moved by 0.35 m when the measurement changed and the gap barely did. What work 4
+    has to separate is a length.
 
     The spans are given one by one rather than as a first and last. A run can come close,
     part, and close again, and reporting only the outer bounds turned two approaches of 0.34 m
-    into a range of 0.79 m. Each span counts a step when either of its ends is inside it, so
-    the extent reads up to one step long at each end: a true 0.400 m at 3 mm came back 0.415 m.
+    into a range of 0.79 m.
+
+    The extent is a pair of bounds, not a number. A span of one point witnesses no length at
+    all, yet padding it by a step at each end credits it with two. One pair read 0.3395 m
+    across four spans of which three were single points: the points witness 0.0396 m and the
+    rest is padding. Lower is the span ends as measured, upper pads each end by the step it
+    could have crossed before the next sample.
+
+    A boundary only means something if the gap there is further from the limit than the gap
+    itself is uncertain. The same pair broke into four spans at 10 mm while the mesh says the
+    two run 0.7 to 9.8 mm apart for 0.325 m without ever parting: the gaps sit on the limit, so
+    the samples cross it in and out. Boundaries that close are counted, and a shape built on
+    them is marked unresolved. The extent bounds still hold when the shape does not: the same
+    pair's bounds, 0.0396 to 0.3395 m, contain the 0.325 m measured from the mesh.
     """
     if len(first) < 2 or len(second) < 2:
         return []
@@ -423,14 +440,36 @@ def co_run(first: np.ndarray, second: np.ndarray, limits: tuple[float, ...]) -> 
         if start is not None:
             spans.append((start, len(inside) - 1))
         steps = np.diff(along)
+        margins = np.abs(gaps - limit)
+        boundaries = []
+        for a, b in spans:
+            if a > 0:
+                boundaries.append((a - 1, a))
+            if b + 1 < len(gaps):
+                boundaries.append((b, b + 1))
+        on_the_limit = [pair for pair in boundaries if min(margins[i] for i in pair) < CENTRE_LINE_GAP_UNCERTAINTY_M]
         out.append(
             dict(
                 within_m=limit,
                 below_centre_line_noise=bool(limit < CENTRE_LINE_NOISE_M),
                 points_inside=int(inside.sum()),
                 span_count=len(spans),
-                extent_m=float(sum(steps[max(0, a - 1) : min(len(steps), b + 1)].sum() for a, b in spans)),
-                spans=[dict(from_m=float(along[a]), to_m=float(along[b]), points=b - a + 1) for a, b in spans],
+                zero_width_spans=sum(1 for a, b in spans if a == b),
+                extent_lower_m=float(sum(along[b] - along[a] for a, b in spans)),
+                extent_upper_m=float(sum(steps[max(0, a - 1) : min(len(steps), b + 1)].sum() for a, b in spans)),
+                boundaries_on_the_limit=len(on_the_limit),
+                span_shape_resolved=not on_the_limit,
+                touches_run_end=bool(spans and (spans[0][0] == 0 or spans[-1][1] == len(gaps) - 1)),
+                spans=[
+                    dict(
+                        from_m=float(along[a]),
+                        to_m=float(along[b]),
+                        width_m=float(along[b] - along[a]),
+                        points=b - a + 1,
+                        parted_before_m=float(along[a] - along[spans[index - 1][1]]) if index else None,
+                    )
+                    for index, (a, b) in enumerate(spans)
+                ],
                 closest_m=float(gaps.min()),
             )
         )
@@ -537,12 +576,16 @@ def main() -> None:
                     crossing_measured="segment to segment, so the gap does not depend on the step",
                     co_run_limits_m=list(CO_RUN_LIMITS_M),
                     centre_line_noise_m=CENTRE_LINE_NOISE_M,
+                    centre_line_gap_uncertainty_m=CENTRE_LINE_GAP_UNCERTAINTY_M,
+                    co_run_extent="a pair of bounds: lower is what the points witness, upper pads a step per end",
+                    co_run_shape="unresolved where a boundary gap sits within the wander of the limit",
                 ),
                 what_this_does_not_give=[
                     "the cable's allowed bend radius, which belongs to the real cable",
                     "the bend radius the model already uses: measured and found not measurable",
                     "clearance at the terminations, which is contact by design and is trimmed away",
                     f"a co-run tighter than {CENTRE_LINE_NOISE_M} m, which is inside the centre line's own wander",
+                    "where a co-run starts and stops, when its boundary gaps sit on the limit: see span_shape_resolved",
                     "support pitch and fixing points",
                     "required separation from other services",
                     "the pipe inside the air hardware's boxes",
