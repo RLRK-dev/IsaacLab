@@ -18,6 +18,14 @@ so the mirror is applied once, as the pose of the new cell's parent empty, and e
 follows. Mesh data stays shared with the original, as adjudicated, which is also how work 2's
 repair reaches the copies.
 
+A copy whose source parent is not itself copied needs care. ``duplicate_set`` hands it the
+source's world matrix as its basis, which holds until an action writes ``location`` back --
+values authored against the old parent -- and then the copy jumps. B's wire supply drawer and
+its fifty children moved up to 1.100 m that way, and only on reload, because the build had
+never evaluated a frame. Such copies are re-expressed with the old parent's world carried in
+the parent inverse, so the basis stays exactly the source's and the same action means the same
+thing, and placement is verified across the scene's frame range rather than at one frame.
+
 Placement is verified against M(y0) applied to each source's world matrix, but not to the
 last bit: Blender holds those matrices in single precision, where one step at these
 coordinates is 2.4e-7 m. The tolerance is 1e-5 m, twenty times the rounding actually measured
@@ -97,15 +105,91 @@ def ordered(names: set[str]) -> list[bpy.types.Object]:
     return sorted(objects, key=lambda obj: (rank(obj), obj.name))
 
 
-def verify(copies: dict[str, bpy.types.Object], matrix: Matrix, before: dict) -> dict:
-    """Check every copy sits exactly where M(y0) puts its source [m]."""
+def rebase_outside_roots(copies: dict[str, bpy.types.Object]) -> list[dict]:
+    """Re-express copies whose source parent was not copied, so animation stays right.
+
+    ``duplicate_set`` gives such a copy ``matrix_basis = source.matrix_world`` and an identity
+    parent inverse. That is correct while nothing touches the basis, and wrong the moment an
+    action does: the action writes ``location`` values authored against the old parent, and the
+    copy jumps. B's wire supply drawer and its fifty children moved up to 1.100 m that way, and
+    only on reload, because the build had not evaluated a frame.
+
+    Carrying the old parent's world in the parent inverse instead leaves the basis exactly as
+    the source's, so the same action means the same thing. The world pose is unchanged:
+    cell_root @ (old_parent_world @ source_inverse) @ source_basis is M(y0) @ source_world.
+    """
+    rebased = []
+    for source_name, obj in copies.items():
+        source = bpy.data.objects[source_name]
+        if source.parent is None or source.parent.name in copies:
+            continue
+        obj.matrix_parent_inverse = source.parent.matrix_world @ source.matrix_parent_inverse
+        obj.matrix_basis = source.matrix_basis.copy()
+        rebased.append(
+            dict(
+                copy=obj.name,
+                source=source_name,
+                source_parent=source.parent.name,
+                animated=bool(source.animation_data and source.animation_data.action),
+            )
+        )
+    return sorted(rebased, key=lambda row: row["copy"])
+
+
+def placement_error(copies: dict[str, bpy.types.Object], matrix: Matrix, world: dict) -> tuple[str | None, float]:
+    """Return the copy furthest from where M(y0) puts its source, and by how much [m]."""
     worst_name, worst_error = None, 0.0
     for source_name, obj in copies.items():
-        expected = np.asarray(matrix @ Matrix(before[source_name]["world"]))
+        expected = np.asarray(matrix @ Matrix(world[source_name]))
         error = float(np.abs(np.asarray(obj.matrix_world) - expected).max())
         if error > worst_error:
             worst_name, worst_error = obj.name, error
+    return worst_name, worst_error
+
+
+def checked_frames(copies: dict[str, bpy.types.Object]) -> list[int]:
+    """Return the frames to test: the ends and middle of whatever is actually animated.
+
+    Not the scene range. ``op030_split_layout`` pins frame_start and frame_end to 1, so asking
+    the scene would test one frame and miss exactly what this check exists to catch. The
+    actions carry the real range.
+    """
+    scene = bpy.context.scene
+    low, high = float(scene.frame_start), float(scene.frame_end)
+    for source_name in copies:
+        animation = bpy.data.objects[source_name].animation_data
+        action = animation.action if animation else None
+        if action is None:
+            continue
+        start, end = action.frame_range
+        low, high = min(low, float(start)), max(high, float(end))
+    first, last = int(round(low)), int(round(high))
+    return sorted({first, (first + last) // 2, last})
+
+
+def verify(copies: dict[str, bpy.types.Object], matrix: Matrix) -> dict:
+    """Check every copy sits where M(y0) puts its source, at several frames [m].
+
+    Checking only the frame the build ran on is what let the drawer through. An action does
+    not speak until a frame is evaluated.
+    """
+    scene = bpy.context.scene
+    frames = checked_frames(copies)
+    first = frames[0]
+    per_frame, worst_name, worst_error = [], None, 0.0
+    for frame in frames:
+        scene.frame_set(frame)
+        bpy.context.view_layer.update()
+        world = {name: np.asarray(bpy.data.objects[name].matrix_world).tolist() for name in copies}
+        name, error = placement_error(copies, matrix, world)
+        per_frame.append(dict(frame=frame, worst_placed=name, worst_placement_error_m=error))
+        if error > worst_error:
+            worst_name, worst_error = name, error
+    scene.frame_set(first)
+    bpy.context.view_layer.update()
     return dict(
+        frames_checked=frames,
+        per_frame=per_frame,
         copy_count=len(copies),
         worst_placement_error_m=worst_error,
         worst_placed=worst_name,
@@ -135,6 +219,7 @@ def main() -> None:
         bpy.context.scene.collection.objects.link(root)
         root.matrix_world = matrix
         copies = duplicate_set(objects, CELL_PREFIXES[cell], root)
+        rebased = rebase_outside_roots(copies)
         bpy.context.view_layer.update()
         cells[cell] = dict(
             destination=destination,
@@ -147,10 +232,17 @@ def main() -> None:
             requested=len(moving["names"]),
             duplicated=len(copies),
             not_in_scene=sorted(set(moving["names"]) - {obj.name for obj in objects}),
-            placement=verify(copies, matrix, before),
+            rebased_roots=len(rebased),
+            rebased_animated=sum(row["animated"] for row in rebased),
+            rebased=rebased,
+            placement=verify(copies, matrix),
             names=sorted(obj.name for obj in copies.values()),
         )
 
+    # verify() walks the frame range, so come back to where the first snapshot was taken
+    # before comparing: an animated source reads differently at a different frame.
+    bpy.context.scene.frame_set(1)
+    bpy.context.view_layer.update()
     after = snapshot()
     added = sorted(set(after) - original_names)
     for name in original_names:
@@ -206,7 +298,9 @@ def main() -> None:
         print(
             f"  {cell} -> {row['destination']}: duplicated {row['duplicated']} of {row['requested']} "
             f"(selection {row['selection_count']} + supply {row['supply_added_count']}) "
-            f"worst placement error {row['placement']['worst_placement_error_m']:.2e} m{rounding}"
+            f"worst placement error {row['placement']['worst_placement_error_m']:.2e} m{rounding} "
+            f"over frames {row['placement']['frames_checked']}, rebased {row['rebased_roots']} roots "
+            f"({row['rebased_animated']} animated)"
         )
     print(f"objects {len(original_names)} -> {len(after)} (+{len(added)})")
     print(f"V07C_STAGGER_BOTH_SIDES_SAVED {digest(OUTPUT)}")
