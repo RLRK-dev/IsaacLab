@@ -21,6 +21,11 @@ Nearest distance is measured from one shape's vertices to the other shape's surf
 an upper bound on the true surface-to-surface gap. It is reported to rank pairs, not to
 certify a clearance.
 
+Each pair also carries its box overlap on all three axes, not just the smallest. The single
+depth the box stage reports cannot say what a fix would cost: 0.193 m that turns out to be a
+part's full height means the two sit at the same level and the overlap in plan is larger,
+while 0.193 m along Y is the distance something has to move.
+
 Run: ``blender --background --python scripts/probe_op030_v07c_mesh_contact.py``
 
 Read-only. The scene is never saved and world transforms are compared before and after.
@@ -100,10 +105,21 @@ def candidates(cell: str, covered: set[str]) -> tuple[list[dict], dict]:
             continue
         mirrored = mirror_box(*box, station_y)
         hit, depth = clashes(mirrored[0], mirrored[1], lows, highs)
-        rows.extend(
-            dict(moving=name, obstacle=obstacle_names[index], box_depth_m=float(value))
-            for index, value in zip(hit, depth)
-        )
+        for index, value in zip(hit, depth):
+            obstacle_low, obstacle_high = lows[index], highs[index]
+            overlap = np.minimum(mirrored[1], obstacle_high) - np.maximum(mirrored[0], obstacle_low)
+            rows.append(
+                dict(
+                    moving=name,
+                    obstacle=obstacle_names[index],
+                    box_depth_m=float(value),
+                    # The depth above is the smallest of these three. Which axis it comes from
+                    # decides what a fix costs: a shallow Z is a height, a shallow Y is a shift.
+                    box_overlap_xyz_m=overlap.tolist(),
+                    moving_box_m=[mirrored[0].tolist(), mirrored[1].tolist()],
+                    obstacle_box_m=[obstacle_low.tolist(), obstacle_high.tolist()],
+                )
+            )
     return rows, dict(destination=destination, station_y_m=station_y, moving_count=len(names))
 
 
