@@ -47266,7 +47266,7 @@ ledger commit bf1436ab6d
 prohibited.md lines: 41
 17:- **CLAUDE.md の変更はrs指示時のみ。自律的な更新禁止**
 18:- **指示された方針・手法を独自判断で変更しない。問題�
-19:- **⭐substrate 非依存の不変前提（RS71 §0#3/#5、PhysX も Newton 
+19:- **⭐substrate 非依存の不変前提（RS71 §0#3/#5、PhysX も Newton
 20:- **〔以下 4 点の *具体 API 名*（`DifferentialIKController` / `write
 22:- **`write_joint_position_to_sim` 全面禁止**（arm j0-j6 も finger j7/j8
 23:- **`write_joint_state_to_sim` — 制御ループ中は禁止（物理破壊
@@ -47285,3 +47285,11 @@ labels non-comment: 19
 
 - p6「要るもの: なし」⇒ 返信不要。残る measurement = ③(c) の他卓 dry-run（他卓が working の瞬間）と ③(d)（実 traffic の HELD → `resend --id`）。
 - 本節時点の Rs1 待ちは §1450 の (i)–(vi) のまま。
+
+## §1452 — ⛔ **再開（09-13 08:07）の再接地で実測: herdr が 0.7.1 → **0.9.0**（`/home/rlrk/.local/bin/herdr` mtime 2026-09-10 00:38）に変わり、凍結中の `hub_send.py`（`5b60b1556d`・sha256 `a0a09914…`）が依存する 3 つの interface が変わった。tool は全て fail-closed で拒否 = **hub は現在 tool で送信できない**（by-hand は退役済）**（当卓 2026-09-13 08:11:23 JST 実測）
+
+- 変化 3 点（`herdr agent list` / `herdr pane list` / `herdr agent read` / `herdr --help` / `herdr --skill` を当卓が実行して読んだ）: (1) `agent list` の record に `name` が無い（keys = agent, agent_session, agent_status, cwd, focused, foreground_cwd, pane_id, revision, state_change_seq, tab_id, terminal_id, terminal_title, …）。役割 label `w2:pN ROLE` は **`herdr pane list` の `label`** に在る（16 pane 全て健在・p18 = `w2:p18 T-ROOT-OPS-SUPERVISOR`）。(2) **`herdr agent send` は無い** — agent 側は `prompt <target> <text>`（= text ＋ Enter を 1 手順で submit・bracketed-paste 尊重・`--wait/--until/--timeout`）。文字を置くだけの旧 `agent send` に当たるのは **`herdr pane send-text <pane> <text>`**（`pane send-keys` は存続）。(3) `agent read … --format ansi` は **JSON 封筒でなく生の ANSI text を stdout に出す**（67 行・composer 行 `❯`+U+00A0 は index 63 に健在・`truncated` field は無い）。
+- tool の現挙動（READONLY dry-run・当卓実測）: `send --to PLAN-KEEPER` → `refused(unresolved): PLAN-KEEPER -> []`（label 不在と読む）／`--to_pane w2:p6` → `refused(unlabelled_pane)`。label を読めたとしても `read_view()` が JSON 解析に失敗して `HELD(read_failed)` になる（decide の最初の枝・fail-closed）。keypress 0・送信 0。
+- 新 pane: `w2:p19`（codex・無 label）・`w2:p1A`（claude・working・無 label）・`w2:p1B`（codex・working・無 label）・`w2:p1C`（claude・無 label = memory の OP030-DESIGN 別 track）。役割割当は Rs1 の行為 — 当卓は触らない。`w2:p11 ARM-CONTROL-DESIGN` が working（③(c) の他卓 dry-run の機会だが、上記 (3) で `HELD(read_failed)` が先に立ち測定にならない）。
+- 凍結との関係: 解凍条件（実 traffic で fail-closed でない失敗）には**当たらない**（全て拒否 = fail-closed）。ただし tool が一切送れない ⇒ **環境変化への適応 = 新 [TASK]**（node の子 or 本 node 下の追加 step・自前 gate）として Rs1 の語を待つ。当卓の提案 = **A**: 変更 3 箇所のみ（label を `pane list` から／`agent send` → `pane send-text`＋従来の gate＋`send-keys`／`read_view` を生 ANSI 用に・`truncated` は行数で代替）・L2（外部 CLI 契約 = API 境界・≤ 60 行・1 file）・事前 5 体 debate 1 cycle（bundle = 本節＋差分）→ build → unit/dry-run 出力を bank → 最初の実 message で `send-text` の折りたたみ挙動を実測（新規 CLI 引数なし・新 file なし）。**B**: herdr を 0.7.1 に戻す（Rs1 の環境操作・他卓全てに影響・非推奨）。
+- 付随: Rs1 が本日 07:01/07:22 に CLAUDE.md を剪定（`2995cad44e`・`ca1a40cf00`・v26.09.13）— tree 全体の hook 実行で CONTROLS の末尾空白 27 行が削られていたので内容不変のまま commit（`701b352e35`）。preflight P11 WARN「D1 snapshot stale」= p6 の面（当卓は触らない）。未 push = 22。
