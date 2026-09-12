@@ -1,0 +1,59 @@
+{
+  "revision": "v01",
+  "units": "m",
+  "status": "static_contact_shape_comparison_not_selected_hardware",
+  "target": {
+    "reference_part": "Klauke 6R6",
+    "adopted_ampere_part": null,
+    "geometry_state": "uncrimped reference CAD; no measured crimp or heatshrink geometry",
+    "json_sha256": "b190844a0e814349ada37674f2d78d16c7c0ed4edff15846cddad303f460d283",
+    "step_sha256": "721503e3485c0b72cb1ec2d8b2fd9011ff36442e2a027b9043b364d49fb43a52",
+    "seat_z_m": -0.014,
+    "hole_center_to_barrel_end_m": 0.037,
+    "raw_barrel_axis_above_seat_m": 0.008,
+    "wire_radius_m": 0.007,
+    "wire_visible_length_m": 0.050,
+    "wire_basis": "14 mm legacy comparison only; no Ampere wire selection or electrical compatibility assertion",
+    "sleeve_outer_radius_m": 0.0076,
+    "sleeve_y_range_m": [0.020, 0.044],
+    "sleeve_basis": "illustrative annular sleeve over uncrimped CAD, not actual heatshrink or crimp geometry"
+  },
+  "mechanism": {
+    "pad_back_y_m": -0.018901750564575195,
+    "pad_center_z_m": 0.031014530181884766,
+    "back_plane_x_m": 0.016,
+    "root_y_m": 0.026,
+    "release_extra_half_opening_m": 0.008,
+    "clearance_comparison_lift_m": 0.025,
+    "carrier_dimensions_m": [0.002, 0.020, 0.024],
+    "mounting_basis": "existing pad back plane only; screw pattern and strength unresolved"
+  },
+  "insert": {
+    "edge_y_range_m": [0.004, 0.012],
+    "edge_z_above_seat_range_m": [0.0007, 0.0031],
+    "edge_nominal_clearance_m": 0.0001,
+    "edge_profile_samples": 33,
+    "edge_profile_basis": "maximum absolute CAD side extent over the chosen Y band at each Z slice; 0.1 mm display gap, not a tolerance or acceptance limit",
+    "rear_guide_y_range_m": [0.048, 0.056],
+    "rear_guide_radius_m": 0.0078,
+    "rear_guide_half_angle_deg": 50,
+    "guide_role": "clearance guide, coupled to the terminal fingers; no independent wire clamp or force control"
+  },
+  "illustrative_surroundings": {
+    "coupon_radius_m": 0.016,
+    "coupon_hole_radius_m": 0.0032,
+    "coupon_thickness_m": 0.003,
+    "tool_radius_m": 0.006,
+    "tool_z_above_seat_range_m": [0.0038, 0.0538],
+    "basis": "comparison geometry only; not the actual busbar, fastener, tool or fixture"
+  },
+  "unresolved": [
+    "Ampere terminal and wire part numbers and manufacturing dimensions",
+    "post-crimp outline, sleeve end and permitted gripping surfaces",
+    "vertical retention, roll and axial slip under cable bending load",
+    "fingertip material, friction, compliance, grip force and mounting screws",
+    "retention between hand release and fastening at the next station",
+    "continuous collision, arm motion, camera clearance and S-bend formation"
+  ],
+  "physical_acceptance_verdict": null
+}

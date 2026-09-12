@@ -1,0 +1,17 @@
+{
+  "observed_at": "2026-09-13T08:45:30.624788+09:00",
+  "reference_cad_role": "stored Klauke_6R6 shape sample, not an identified Ampere part",
+  "stored_cad_sha256": "721503e3485c0b72cb1ec2d8b2fd9011ff36442e2a027b9043b364d49fb43a52",
+  "stored_tessellation_sha256": "b190844a0e814349ada37674f2d78d16c7c0ed4edff15846cddad303f460d283",
+  "cad_overall_length_m": 0.047,
+  "cad_hole_center_to_barrel_end_m": 0.037,
+  "current_table_field_l_mm": 37,
+  "dimension_interval_correspondence": "not resolved; no manufacturing-dimension conformity claim",
+  "current_step_download_verified": false,
+  "sources": [
+    "https://www.klauke.com/gb/en/tubular-cable-lugs-cu-standard-type-4957",
+    "https://help.ampereev.com/hc/en-us/articles/31292470232087-High-Voltage-Junction-Box-HVJB-5-400",
+    "https://assets.robotiq.com/website-assets/support_documents/document/online/2F-85_2F-140_TM_InstructionManual_HTML5_20190503.zip/2F-85_2F-140_TM_InstructionManual_HTML5/Content/6.%20Specifications.htm"
+  ],
+  "physical_acceptance_verdict": null
+}

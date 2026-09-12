@@ -1,0 +1,312 @@
+{
+  "scope": "auxiliary static geometry; no physical acceptance verdict",
+  "source_sha256": {
+    "/home/rlrk/IsaacLab/eval_runs/ur15_jb_harness_revision_20260907/inputs/op030_reference/Klauke_6R6.json": "b190844a0e814349ada37674f2d78d16c7c0ed4edff15846cddad303f460d283",
+    "/home/rlrk/IsaacLab-op040/eval_runs/ur15_jb_harness_revision_20260907/scripts/build_hand_fingertip_concepts_v01.py": "532b03f68bfdf49c46ae3f33155b8757a8e93549773390a85a27e7b52066bf5c",
+    "/home/rlrk/IsaacLab-op040/eval_runs/ur15_jb_harness_revision_20260907/scripts/build_hand_terminal_concepts_v01.py": "d75a99f1f4951f9d915bc53173dd5f7f0057080a7f0704a98b9a1a499b929b19",
+    "/home/rlrk/IsaacLab-op040/eval_runs/ur15_jb_harness_revision_20260907/scripts/hand_terminal_viewer_v01.html": "26aa5b92f1385912fb19ba1b565932983b53a2621baf28c4ffa79be2854c9604",
+    "/tmp/THREAD_\u6307\u51483D\u78ba\u8a8d_v01_20260913/inputs/robotiq_2f_85_gripper_visualization/meshes/visual/robotiq_arg2f_85_base_link.dae": "d03d6e7395b0aa11ae7954b2f04a0a650448547d5d4f367238098ccd848b3eb5",
+    "/tmp/THREAD_\u6307\u51483D\u78ba\u8a8d_v01_20260913/inputs/robotiq_2f_85_gripper_visualization/meshes/visual/robotiq_arg2f_85_inner_finger.dae": "3172e8fe000fda75b9b29b48cd8cad4011d184a6df23eb2c3adb6c1f5a4eae93",
+    "/tmp/THREAD_\u6307\u51483D\u78ba\u8a8d_v01_20260913/inputs/robotiq_2f_85_gripper_visualization/meshes/visual/robotiq_arg2f_85_inner_knuckle.dae": "19b12510eec739a1a4655ff633ce3f02ad3c2eda2cb8f451df900ddfa76c8f14",
+    "/tmp/THREAD_\u6307\u51483D\u78ba\u8a8d_v01_20260913/inputs/robotiq_2f_85_gripper_visualization/meshes/visual/robotiq_arg2f_85_outer_finger.dae": "32d842e51e0ddd25b3354af212131befa191c183cf4cdb61f82ecbe5c5276323",
+    "/tmp/THREAD_\u6307\u51483D\u78ba\u8a8d_v01_20260913/inputs/robotiq_2f_85_gripper_visualization/meshes/visual/robotiq_arg2f_85_outer_knuckle.dae": "f1cc5198c9f3b06979af07d2944034b32acbb6130df5396dc2c7253cb656f587",
+    "/tmp/THREAD_\u6307\u51483D\u78ba\u8a8d_v01_20260913/inputs/robotiq_2f_85_gripper_visualization/meshes/visual/robotiq_gripper_coupling.stl": "4281e83002a25c20dc07c68b8d77da30a13e9a8401f157f6848ed8287d7cce44",
+    "/tmp/THREAD_\u6307\u51483D\u78ba\u8a8d_v01_20260913/inputs/ur15-dual-arm-cell.urdf": "7f6828df8e27cf88b4190f581284abaf313524aa1bdfa791cfed40669003e0a1",
+    "eval_runs/ur15_jb_harness_revision_20260907/data/hand_terminal_concepts_v01.json": "89553b10b6e97787e75536f2037b5cda3a06d4f2c569c2a037db47eed066964f"
+  },
+  "inputs_unchanged": true,
+  "reference_lug_vertices": 6733,
+  "reference_lug_faces": 7754,
+  "lug_source_faces_unchanged": true,
+  "lug_axes": "X=raw_Z; Y=raw_X+37 mm; Z=raw_Y+8 mm+seat_Z; proper rigid rotation and SI conversion",
+  "lug_bounds_m": [
+    [
+      -0.009999990979374165,
+      -0.01,
+      -0.014
+    ],
+    [
+      0.009999943633898545,
+      0.037,
+      0.0009999999999999992
+    ]
+  ],
+  "reused_hardware_meshes_per_hand": 10,
+  "edge_profile_x_z_m": [
+    [
+      0.00994013817395729,
+      -0.013300000000000001
+    ],
+    [
+      0.009960283138669675,
+      -0.013225
+    ],
+    [
+      0.009977972958645259,
+      -0.01315
+    ],
+    [
+      0.009994646171756771,
+      -0.013075000000000002
+    ],
+    [
+      0.010010976081653744,
+      -0.013000000000000001
+    ],
+    [
+      0.010024648555875404,
+      -0.012925
+    ],
+    [
+      0.010037838638416438,
+      -0.01285
+    ],
+    [
+      0.010050068481732326,
+      -0.012775000000000002
+    ],
+    [
+      0.010060041171597886,
+      -0.012700000000000001
+    ],
+    [
+      0.010069383266578706,
+      -0.012625
+    ],
+    [
+      0.010077786141866657,
+      -0.01255
+    ],
+    [
+      0.010084107691705748,
+      -0.012475
+    ],
+    [
+      0.01008964179736056,
+      -0.012400000000000001
+    ],
+    [
+      0.010094380758421624,
+      -0.012325000000000001
+    ],
+    [
+      0.010097081870148433,
+      -0.01225
+    ],
+    [
+      0.01009870240771398,
+      -0.012175
+    ],
+    [
+      0.010099807786572247,
+      -0.0121
+    ],
+    [
+      0.01009905419991502,
+      -0.012025000000000001
+    ],
+    [
+      0.010096768915389229,
+      -0.01195
+    ],
+    [
+      0.0100941185856569,
+      -0.011875
+    ],
+    [
+      0.010089930033109444,
+      -0.0118
+    ],
+    [
+      0.010083992799953591,
+      -0.011725000000000001
+    ],
+    [
+      0.010077607707104213,
+      -0.01165
+    ],
+    [
+      0.010069723405777223,
+      -0.011575
+    ],
+    [
+      0.010060129415538886,
+      -0.0115
+    ],
+    [
+      0.010050124885249161,
+      -0.011425000000000001
+    ],
+    [
+      0.010038256139292137,
+      -0.01135
+    ],
+    [
+      0.010024838662289476,
+      -0.011275
+    ],
+    [
+      0.01001090866009531,
+      -0.0112
+    ],
+    [
+      0.009995349473283408,
+      -0.011125
+    ],
+    [
+      0.009978039600487555,
+      -0.01105
+    ],
+    [
+      0.009959981058019261,
+      -0.010975
+    ],
+    [
+      0.009940515609723243,
+      -0.0109
+    ]
+  ],
+  "static_poses": {
+    "EDGE": {
+      "near": {
+        "right_carrier_vertex_mean_m": [
+          0.014430232122714728,
+          0.018383720930232557,
+          -0.00429302307392918
+        ],
+        "all_insert_vertices_min_z_minus_coupon_top_m": 0.0007000001818847721,
+        "tool_radius_projected_lower_bound_m": 0.006369316315243191,
+        "tool_bound_object": "left_left_carrier"
+      },
+      "early": {
+        "right_carrier_vertex_mean_m": [
+          0.014833624172880838,
+          0.018383720930232557,
+          -0.0042611275490741915
+        ],
+        "all_insert_vertices_min_z_minus_coupon_top_m": 0.000731895706739762,
+        "tool_radius_projected_lower_bound_m": 0.006761039178590902,
+        "tool_bound_object": "left_left_carrier"
+      },
+      "open": {
+        "right_carrier_vertex_mean_m": [
+          0.022430232122714732,
+          0.018383720930232557,
+          -0.0031149872397585455
+        ],
+        "all_insert_vertices_min_z_minus_coupon_top_m": 0.0018780360160554083,
+        "tool_radius_projected_lower_bound_m": 0.01238102550791889,
+        "tool_bound_object": "left_right_edge_contour"
+      },
+      "clear": {
+        "right_carrier_vertex_mean_m": [
+          0.022430232122714732,
+          0.018383720930232557,
+          0.021885012760241466
+        ],
+        "all_insert_vertices_min_z_minus_coupon_top_m": 0.0268780360160554,
+        "tool_radius_projected_lower_bound_m": 0.012380657543084745,
+        "tool_bound_object": "left_right_edge_contour"
+      }
+    },
+    "GUIDE": {
+      "near": {
+        "right_carrier_vertex_mean_m": [
+          0.01437066623124185,
+          0.02239333333333334,
+          -0.004225333151448569
+        ],
+        "all_insert_vertices_min_z_minus_coupon_top_m": 0.0007000001818847721,
+        "tool_radius_projected_lower_bound_m": 0.006369316315243191,
+        "tool_bound_object": "left_left_carrier"
+      },
+      "early": {
+        "right_carrier_vertex_mean_m": [
+          0.014774058281407987,
+          0.02239333333333334,
+          -0.004193437626593568
+        ],
+        "all_insert_vertices_min_z_minus_coupon_top_m": 0.000731895706739762,
+        "tool_radius_projected_lower_bound_m": 0.006761039178590902,
+        "tool_bound_object": "left_left_carrier"
+      },
+      "open": {
+        "right_carrier_vertex_mean_m": [
+          0.02237066623124179,
+          0.02239333333333334,
+          -0.0030472973172779253
+        ],
+        "all_insert_vertices_min_z_minus_coupon_top_m": 0.0018780360160554083,
+        "tool_radius_projected_lower_bound_m": 0.01238102550791889,
+        "tool_bound_object": "left_right_edge_contour"
+      },
+      "clear": {
+        "right_carrier_vertex_mean_m": [
+          0.02237066623124179,
+          0.02239333333333334,
+          0.021952702682722064
+        ],
+        "all_insert_vertices_min_z_minus_coupon_top_m": 0.0268780360160554,
+        "tool_radius_projected_lower_bound_m": 0.012380657543084745,
+        "tool_bound_object": "left_right_edge_contour"
+      }
+    }
+  },
+  "measurement_basis": {
+    "coupon": "minimum of ALL insert vertices relative to coupon top; not a full scene collision test",
+    "tool": "XY projection of triangles overlapping tool Z band; conservative bound, not exact 3D distance",
+    "poses": "four discrete fixed-object comparisons; no swept volume, release dynamics or time law",
+    "carrier": "mean of carrier mesh vertices, not a center of mass; use differences between poses",
+    "blue_carrier": "axis-aligned box union, boundary planes rounded to 1 pm to remove arithmetic noise"
+  },
+  "guide_nominal_radial_gap_m": 0.0007999999999999995,
+  "exports": [
+    {
+      "file": "hand_terminal_EDGE_v01.glb",
+      "sha256": "573cddac3d156eeddbe01b85f8348c6f53f87ac0b47791ebe6941145078b47c0",
+      "mesh_count": 18,
+      "readback_mesh_count": 18,
+      "bounds_m": [
+        [
+          -0.06426016898839715,
+          -0.016,
+          -0.017
+        ],
+        [
+          0.06426016483147669,
+          0.087,
+          0.1498769757245636
+        ]
+      ],
+      "readback_bounds_max_difference_m": 2.503395074571202e-09
+    },
+    {
+      "file": "hand_terminal_GUIDE_v01.glb",
+      "sha256": "d146c619a2e685c2e0b467f1d086b45172a63e98cdf82249599970a76937bea0",
+      "mesh_count": 20,
+      "readback_mesh_count": 20,
+      "bounds_m": [
+        [
+          -0.06426016898839715,
+          -0.016,
+          -0.017
+        ],
+        [
+          0.06426016483147669,
+          0.087,
+          0.1498769757245636
+        ]
+      ],
+      "readback_bounds_max_difference_m": 2.503395074571202e-09
+    }
+  ],
+  "not_evaluated": [
+    "Ampere terminal and wire part numbers and manufacturing dimensions",
+    "post-crimp outline, sleeve end and permitted gripping surfaces",
+    "vertical retention, roll and axial slip under cable bending load",
+    "fingertip material, friction, compliance, grip force and mounting screws",
+    "retention between hand release and fastening at the next station",
+    "continuous collision, arm motion, camera clearance and S-bend formation"
+  ],
+  "physical_acceptance_verdict": null
+}

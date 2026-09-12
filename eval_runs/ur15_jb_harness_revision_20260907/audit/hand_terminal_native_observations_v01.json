@@ -1,0 +1,35 @@
+{
+  "native": "hand_terminal_concepts_v01.blend",
+  "sha256": "17ff1a79cf33178025bc0086343fbefa3fa59c13a31a48d00e33e2bfba5ee6a6",
+  "native_readback_identical": true,
+  "static_scene_names": [
+    "EDGE_clear",
+    "EDGE_early",
+    "EDGE_near",
+    "EDGE_open",
+    "GUIDE_clear",
+    "GUIDE_early",
+    "GUIDE_near",
+    "GUIDE_open"
+  ],
+  "mesh_objects_per_scene": {
+    "EDGE_clear": 18,
+    "EDGE_early": 18,
+    "EDGE_near": 18,
+    "EDGE_open": 18,
+    "GUIDE_clear": 20,
+    "GUIDE_early": 20,
+    "GUIDE_near": 20,
+    "GUIDE_open": 20
+  },
+  "previews": [
+    "GUIDE_near_context_v01.png",
+    "GUIDE_near_v01.png",
+    "GUIDE_open_v01.png",
+    "EDGE_near_v01.png"
+  ],
+  "preview_visibility": "detail PNGs hide reused hardware; context PNG and all native scenes include it",
+  "tool_access_guide": "viewer only, excluded from native and GLB",
+  "video_created": false,
+  "physical_acceptance_verdict": null
+}
