@@ -1,0 +1,12 @@
+{
+  "observed_at": "2026-09-11T20:23:04.344138+09:00",
+  "input_sha256": "1e4457b0227435e91baac2239f208fc1ac8e785486be7665945076971a405b08",
+  "actor_count": 18,
+  "mesh_count": 201,
+  "vertices": 174832,
+  "triangles": 293168,
+  "all_triangle_indices_in_local_mesh": true,
+  "offsets_match_arrays": true,
+  "passed": true,
+  "scope": "NPZ serialization and local triangle indexing only; no transfer or physical-validity verdict"
+}

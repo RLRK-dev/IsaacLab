@@ -1,0 +1,91 @@
+[
+  {
+    "file": "ampere_hvjb_5_400_v1_1.pdf",
+    "url": "https://ampereev.com/wp-content/uploads/2022/05/HVJB-5-400-Datasheet-V1.1.pdf",
+    "download_url": "https://ampereev.com/wp-content/uploads/2022/05/HVJB-5-400-Datasheet-V1.1.pdf",
+    "content_type": "application/pdf",
+    "bytes": 553747,
+    "sha256": "643648bcea77b4d7c37c65d073664f746f68689952da2d5ce932e3d10bd5a9e1",
+    "downloaded_at": "2026-09-12T20:34:45.330543+09:00"
+  },
+  {
+    "file": "electricgt_egt_hvjb300.pdf",
+    "url": "https://electricgt.com/wp-content/uploads/2020/08/EGT-HVJB-Spec-Sheet.pdf",
+    "download_url": "https://electricgt.com/wp-content/uploads/2020/08/EGT-HVJB-Spec-Sheet.pdf",
+    "content_type": "application/pdf",
+    "bytes": 451239,
+    "sha256": "c67a467b33bb900afff49cb884441fdad7a738bb6580debbe97129b9fb6afb2b",
+    "downloaded_at": "2026-09-12T20:34:47.745968+09:00"
+  },
+  {
+    "file": "tesla_hvjb_2nd_generation.html",
+    "url": "https://service.tesla.com/docs/ModelS/ServiceManual/en-us/GUID-B1DB13B1-87EA-4F3F-BF98-40C205757570.html",
+    "download_url": "https://service.tesla.com/docs/ModelS/ServiceManual/en-us/GUID-B1DB13B1-87EA-4F3F-BF98-40C205757570.html",
+    "content_type": "text/html; charset=utf-8",
+    "bytes": 276163,
+    "sha256": "0c52c955c20866e54e061d150313795bb29cd3eae263dcad94178c8899a9a2f0",
+    "downloaded_at": "2026-09-12T20:34:49.326206+09:00"
+  },
+  {
+    "file": "tesla_2014_2_rhd_circuit.pdf",
+    "url": "https://service.tesla.com/docs/ModelS/CircuitDiagram/2014.2_ModelS_RHD_Release.pdf",
+    "download_url": "https://service.tesla.com/docs/ModelS/CircuitDiagram/2014.2_ModelS_RHD_Release.pdf",
+    "content_type": "application/pdf",
+    "bytes": 4894462,
+    "sha256": "b20ab36378417dc0b27bbf6dd2ec9e3d675fe3aa79493e18be1c84f4c9c4cb79",
+    "downloaded_at": "2026-09-12T20:34:55.908159+09:00"
+  },
+  {
+    "file": "proterra_hvjb_emi_filter_retrofit.pdf",
+    "url": "https://static.nhtsa.gov/odi/tsbs/2020/MC-10179592-0001.pdf",
+    "download_url": "https://static.nhtsa.gov/odi/tsbs/2020/MC-10179592-0001.pdf",
+    "content_type": "application/pdf",
+    "bytes": 3991934,
+    "sha256": "99c67a556188b41ebcde5a69349833a29984478cb93cfba8cf7582d9cb16ed05",
+    "downloaded_at": "2026-09-12T20:35:00.023201+09:00"
+  },
+  {
+    "file": "ampere_hvjb_5_400_current_v1_1.pdf",
+    "url": "https://help.ampereev.com/hc/en-us/article_attachments/31292430639639",
+    "download_url": "https://help.ampereev.com/hc/en-us/article_attachments/31292430639639",
+    "content_type": "application/pdf",
+    "bytes": 553747,
+    "sha256": "643648bcea77b4d7c37c65d073664f746f68689952da2d5ce932e3d10bd5a9e1",
+    "downloaded_at": "2026-09-12T21:17:27.000358+09:00"
+  },
+  {
+    "file": "ampere_product_photo_1.jpg",
+    "url": "https://ampereev.com/wp-content/uploads/2022/05/DSC02860-1.jpg",
+    "download_url": "https://ampereev.com/wp-content/uploads/2022/05/DSC02860-1.jpg",
+    "content_type": "image/jpeg",
+    "bytes": 167012,
+    "sha256": "5724681b4bef4399f0799751a62577e48ef9b7fd3d6ed5b56d85fd95924937ad",
+    "downloaded_at": "2026-09-12T21:17:28.535760+09:00"
+  },
+  {
+    "file": "ampere_product_photo_2.jpg",
+    "url": "https://ampereev.com/wp-content/uploads/2022/05/DSC02864.jpg",
+    "download_url": "https://ampereev.com/wp-content/uploads/2022/05/DSC02864.jpg",
+    "content_type": "image/jpeg",
+    "bytes": 228146,
+    "sha256": "5ae831226050fb2430894f3a0462d87c1ffa8991fad453bb8945b2c983233b2e",
+    "downloaded_at": "2026-09-12T21:17:29.063048+09:00"
+  },
+  {
+    "file": "ampere_product_photo_3.jpg",
+    "url": "https://ampereev.com/wp-content/uploads/2022/05/DSC02878.jpg",
+    "download_url": "https://ampereev.com/wp-content/uploads/2022/05/DSC02878.jpg",
+    "content_type": "image/jpeg",
+    "bytes": 235262,
+    "sha256": "b654a278aec9b1a5c2e45b08f30cedd3b08b4f10003dd74a6c39579aa8278f70",
+    "downloaded_at": "2026-09-12T21:17:29.714046+09:00"
+  },
+  {
+    "file": "tesla_hvjb_2nd_terminal_figure.png",
+    "url": "https://service.tesla.com/docs/ModelS/ServiceManual/en-us/GUID-04B64150-FD8E-4CFF-B7D6-2979446EC8CE-online-en-US.png",
+    "bytes": 153052,
+    "sha256": "3d347bf5a0ea9fbb86734a35e5bed366b49eeb367a136e6c278e759ffd89bf02",
+    "observed_at": "2026-09-12T21:42:17.620583+09:00",
+    "kind": "Terminal numbering photograph linked by the official second-generation HVJB procedure"
+  }
+]

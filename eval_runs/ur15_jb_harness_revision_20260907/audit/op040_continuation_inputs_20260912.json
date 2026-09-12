@@ -1,0 +1,137 @@
+{
+  "observed_at": "2026-09-12T21:01:03.838040+09:00",
+  "source_root": "/home/rlrk/IsaacLab/eval_runs/ur15_jb_harness_revision_20260907",
+  "worktree_root": "/home/rlrk/IsaacLab-op040/eval_runs/ur15_jb_harness_revision_20260907",
+  "git_base": "ca7311af355e037bd8951dcfc0231ce3c23b3934",
+  "inputs": [
+    {
+      "path": "/home/rlrk/IsaacLab/eval_runs/ur15_jb_harness_revision_20260907/UR15_JB_OP030_split_v06.blend",
+      "sha256": "e65bef607c1d29671fc982d14d72d4c2694420edd284378cb2f1445f18f354ed",
+      "bytes": 175441196
+    },
+    {
+      "path": "/home/rlrk/IsaacLab/eval_runs/ur15_jb_harness_revision_20260907/data/op030_split_b_stagger_motion_v06.npz",
+      "sha256": "41b353e220db025f432b06f384e9a256262fd9f76fa30b31da7353c4b5b4854d",
+      "bytes": 15020778
+    },
+    {
+      "path": "/home/rlrk/IsaacLab/eval_runs/ur15_jb_harness_revision_20260907/data/op030_split_animation_v06.npz",
+      "sha256": "660d47df3dac122337e4ff82c3c4ce92c8e15ef3edf68dbc9dd9b24ed943f296",
+      "bytes": 51239568
+    },
+    {
+      "path": "/home/rlrk/IsaacLab/eval_runs/ur15_jb_harness_revision_20260907/data/op030_split_animation_v06.json",
+      "sha256": "0327cf57bfb91b6437ba2ab9fec43f4ac1a04e0a1c4a6633c8b833dcbd63e897",
+      "bytes": 46531
+    },
+    {
+      "path": "/home/rlrk/IsaacLab/eval_runs/ur15_jb_harness_revision_20260907/data/op040_incoming_product_v01.npz",
+      "sha256": "1e4457b0227435e91baac2239f208fc1ac8e785486be7665945076971a405b08",
+      "bytes": 1822203
+    }
+  ],
+  "input_links": {
+    "inputs/op030_v06_confirmed/UR15_JB_OP030_split_v06.blend": "/home/rlrk/IsaacLab/eval_runs/ur15_jb_harness_revision_20260907/UR15_JB_OP030_split_v06.blend",
+    "inputs/op030_v06_confirmed/op030_split_b_stagger_motion_v06.npz": "/home/rlrk/IsaacLab/eval_runs/ur15_jb_harness_revision_20260907/data/op030_split_b_stagger_motion_v06.npz",
+    "inputs/op030_v06_confirmed/op030_split_animation_v06.npz": "/home/rlrk/IsaacLab/eval_runs/ur15_jb_harness_revision_20260907/data/op030_split_animation_v06.npz",
+    "inputs/op030_v06_confirmed/op030_split_animation_v06.json": "/home/rlrk/IsaacLab/eval_runs/ur15_jb_harness_revision_20260907/data/op030_split_animation_v06.json"
+  },
+  "copied_files": [
+    "AGENTS.md",
+    "OP040_工程・部品確認書_v01.md",
+    "analysis/op040_incoming_scope_v01.md",
+    "analysis/op040_stagger_motion_reuse.md",
+    "data/op040_incoming_product_v01.npz",
+    "audit/op040_incoming_product_v01.json",
+    "audit/op040_incoming_readback_v01.json",
+    "scripts/export_op040_incoming_v01.py"
+  ],
+  "snapshot": {
+    "actor_count": 18,
+    "mesh_count": 201,
+    "vertex_count": 174832,
+    "triangle_count": 293168
+  },
+  "product_mesh_bounds": {
+    "JB_OP020_UID001_B01_B02_B03": {
+      "min_m": [
+        -0.27250000834465027,
+        -0.3824999928474426,
+        -0.054999999701976776
+      ],
+      "max_m": [
+        0.27250000834465027,
+        0.3824999928474426,
+        0.054999999701976776
+      ],
+      "size_m": [
+        0.5450000166893005,
+        0.7649999856948853,
+        0.10999999940395355
+      ],
+      "scope": "Product-coordinate axis-aligned bounds of explicitly named meshes"
+    },
+    "JB_OP020_UID001_J2": {
+      "min_m": [
+        -0.25299998722039163,
+        0.25799986626952887,
+        -0.014499977696686983
+      ],
+      "max_m": [
+        -0.2270000033785952,
+        0.3420000383630395,
+        0.03850002633407712
+      ],
+      "size_m": [
+        0.025999983841796442,
+        0.08400017209351063,
+        0.0530000040307641
+      ],
+      "scope": "Product-coordinate axis-aligned bounds of explicitly named meshes"
+    },
+    "JB_OP020_UID001_J3": {
+      "min_m": [
+        0.2270000033785952,
+        -0.3420000383630395,
+        -0.014499977696686983
+      ],
+      "max_m": [
+        0.25299998722039163,
+        -0.25799986626952887,
+        0.03850002633407712
+      ],
+      "size_m": [
+        0.025999983841796442,
+        0.08400017209351063,
+        0.0530000040307641
+      ],
+      "scope": "Product-coordinate axis-aligned bounds of explicitly named meshes"
+    },
+    "JB_OP020_UID001_J4": {
+      "min_m": [
+        0.2270000033785952,
+        0.25799986626952887,
+        -0.014499977696686983
+      ],
+      "max_m": [
+        0.25299998722039163,
+        0.3420000383630395,
+        0.03850002633407712
+      ],
+      "size_m": [
+        0.025999983841796442,
+        0.08400017209351063,
+        0.0530000040307641
+      ],
+      "scope": "Product-coordinate axis-aligned bounds of explicitly named meshes"
+    }
+  },
+  "source_inputs_unchanged": true,
+  "new_native_saved": false,
+  "render_started": false,
+  "new_video_created": false,
+  "reference_product_selected": false,
+  "new_product_bom_defined": false,
+  "formal_physical_validity_verdict": null,
+  "scope": "Verified existing OP030 v06 and OP040 snapshot files; staged copies and input symlinks only. Bounds from the recorded NPZ, not a new Blender scene readback. No route, IK, contact, force, or manufacturing acceptance decision."
+}

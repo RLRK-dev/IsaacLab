@@ -1,0 +1,5 @@
+# Keep downloaded publisher originals locally; commit their source manifest.
+*.pdf
+*.html
+*.jpg
+*.png
