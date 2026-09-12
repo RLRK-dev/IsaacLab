@@ -49,6 +49,7 @@ ROOT = Path(__file__).resolve().parent.parent
 
 DEFINITION = ROOT / "scripts/op030_definition.py"
 GEOMETRY = ROOT / "scripts/op030_geometry.py"
+LAYOUT = ROOT / "scripts/op030_split_layout.py"
 SEQUENCE = ROOT / "scripts/op030_support_motion_v04.py"
 MOTION = ROOT / "scripts/op030_motion.py"
 ARMS = ROOT / "audit/op030_v07c_dual_arm_configuration.json"
@@ -62,10 +63,21 @@ CONSTANTS = {
     "terminal_x": (DEFINITION, r"TERMINAL_X = \((-?[\d.]+), (-?[\d.]+)\)"),
     "terminal_y": (DEFINITION, r"TERMINAL_Y = (-?[\d.]+)"),
     "terminal_z": (DEFINITION, r"TERMINAL_Z = (-?[\d.]+)"),
-    "nest": (GEOMETRY, r"location = np\.array\(\[(-?[\d.]+), (-?[\d.]+) \+ \(number - 1\) \* ([\d.]+), ([\d.]+)\]\)"),
-    "kit_plate": (
-        GEOMETRY,
-        r'box\("OP030_supply_kit_plate", \(([\d.]+), ([\d.]+), ([\d.]+)\), \((-?[\d.]+), (-?[\d.]+),',
+    # The live supply. supply_kit() builds two nests, then support_grid() deletes them and puts a
+    # 5-by-4 pallet in their place, so the pallet slots are where the parts actually stand.
+    "nests_are_deleted": (LAYOUT, r'if child\.name\.startswith\(\("(OP030_supply_T)", "OP030_supply_H"\)\):'),
+    "slot_position": (
+        LAYOUT,
+        r"position = \[(-?[\d.]+) \+ row \* ([\d.]+), (-?[\d.]+) \+ column \* ([\d.]+), ([\d.]+)\]",
+    ),
+    "slot_wrap": (LAYOUT, r"row, column = divmod\(index, (\d+)\)"),
+    "which_slots_hold_the_two_parts": (
+        LAYOUT,
+        r"identities = \{(\d+): \(1, source_parts\[1\]\), (\d+): \(2, source_parts\[2\]\)\}",
+    ),
+    "pallet_deck": (
+        LAYOUT,
+        r'box\(pallet\.name \+ "_deck", \(([\d.]+), ([\d.]+), ([\d.]+)\), \((-?[\d.]+), (-?[\d.]+),',
     ),
     "withdrawal": (SEQUENCE, r'supplied\["OP030_supply_kit"\] = pose\(location=\(([\d.]+), 0, 0\)\)'),
     "turn_seconds": (MOTION, r"self\.phase\(label, ([\d.]+), turn=angle\)"),
@@ -75,6 +87,15 @@ BANK_FACTOR = 0.955
 # Two turns per support, two supports per A cycle.
 TURNS_PER_CYCLE = 4
 A_BANK_S = 238.8
+
+
+def _numeric(text: str) -> bool:
+    """Return whether a captured group is a number rather than a name."""
+    try:
+        float(text)
+    except (TypeError, ValueError):
+        return False
+    return True
 
 
 def read_constants() -> tuple[dict, list[str]]:
@@ -89,7 +110,7 @@ def read_constants() -> tuple[dict, list[str]]:
         values[name] = dict(
             source=str(path.relative_to(ROOT)),
             line=text[: match.start()].count("\n") + 1,
-            numbers=[float(group) for group in match.groups()],
+            numbers=[float(group) for group in match.groups() if _numeric(group)],
             text=match.group(0),
         )
     return values, missing
@@ -114,8 +135,23 @@ def main() -> int:
     terminal_x = values["terminal_x"]["numbers"]
     terminal_y = values["terminal_y"]["numbers"][0]
     terminal_z = values["terminal_z"]["numbers"][0]
-    nest_x, nest_y0, nest_pitch, nest_z = values["nest"]["numbers"]
-    plate_dy, plate_cy = values["kit_plate"]["numbers"][1], values["kit_plate"]["numbers"][4]
+    slot_x0, slot_dx, slot_y0, slot_dy, slot_z = values["slot_position"]["numbers"]
+    columns = int(values["slot_wrap"]["numbers"][0])
+    slots = [int(number) for number in values["which_slots_hold_the_two_parts"]["numbers"]]
+    plate_dy, plate_cy = values["pallet_deck"]["numbers"][1], values["pallet_deck"]["numbers"][4]
+
+    def slot_point(index: int) -> tuple:
+        """Return where pallet slot `index` stands a part, before the kit is drawn out [m]."""
+        row, column = divmod(index, columns)
+        return (slot_x0 + row * slot_dx, slot_y0 + column * slot_dy, slot_z)
+
+    def slot_at(point: tuple) -> int | None:
+        """Return the slot standing at a point, or None when none does."""
+        return next(
+            (i for i in range(columns * 4) if all(abs(a - b) < 1e-9 for a, b in zip(slot_point(i), point))),
+            None,
+        )
+
     withdrawal = values["withdrawal"]["numbers"][0]
     turn_s = values["turn_seconds"]["numbers"][0]
 
@@ -124,9 +160,15 @@ def main() -> int:
     seats = {
         f"T{index + 1:02d}": (-terminal_x[index], centre_y - terminal_y, product_z + terminal_z) for index in range(2)
     }
-    # The nests as built, and where the kit presents them once it is drawn out.
-    nests = {f"T{number:02d}": (nest_x + withdrawal, nest_y0 + (number - 1) * nest_pitch, nest_z) for number in (1, 2)}
+    # Where the pallet stands the two parts, and where the kit presents them once drawn out.
+    held = {f"T{index + 1:02d}": slots[index] for index in range(2)}
+    nests = {
+        name: (slot_point(slot)[0] + withdrawal, slot_point(slot)[1], slot_point(slot)[2])
+        for name, slot in held.items()
+    }
     mirrored = {name: (x, 2.0 * centre_y - y, z) for name, (x, y, z) in nests.items()}
+    # A mirrored position may itself be a slot, in which case nothing has to be built or moved.
+    mirrored_slot = {name: slot_at((x - withdrawal, y, z)) for name, (x, y, z) in mirrored.items()}
 
     arms = json.loads(ARMS.read_text())["mounting"]["A"]["mounts"]
     shoulders = {side: (row["x_m"], row["y_m"], row["z_m"]) for side, row in arms.items()}
@@ -138,11 +180,11 @@ def main() -> int:
     for name in ("T01", "T02"):
         rows.append(
             dict(
-                target=f"{name} nest, kit drawn out",
+                target=f"{name} on the pallet, kit drawn out",
                 point=list(nests[name]),
                 from_picking_arm_standing_still_m=distance(shoulders[picking], nests[name]),
                 from_picking_arm_after_the_turn_m=distance(turned[picking], nests[name]),
-                from_picking_arm_if_the_nest_were_mirrored_m=distance(shoulders[picking], mirrored[name]),
+                from_picking_arm_if_mirrored_m=distance(shoulders[picking], mirrored[name]),
             )
         )
     for name in ("T01", "T02"):
@@ -152,12 +194,12 @@ def main() -> int:
                 point=list(seats[name]),
                 from_picking_arm_standing_still_m=distance(shoulders[picking], seats[name]),
                 from_picking_arm_after_the_turn_m=None,
-                from_picking_arm_if_the_nest_were_mirrored_m=None,
+                from_picking_arm_if_mirrored_m=None,
             )
         )
 
     furthest_seat = max(row["from_picking_arm_standing_still_m"] for row in rows if "seat" in row["target"])
-    furthest_nest = max(row["from_picking_arm_standing_still_m"] for row in rows if "nest" in row["target"])
+    furthest_nest = max(row["from_picking_arm_standing_still_m"] for row in rows if "pallet" in row["target"])
 
     plate_low_y, plate_high_y = plate_cy - plate_dy / 2.0, plate_cy + plate_dy / 2.0
     nests_on_the_tool_arms_side = all(y < centre_y for _, y, _ in nests.values())
@@ -188,8 +230,18 @@ def main() -> int:
                 distance(turned["right"], shoulders["left"]) < 1e-3
                 and distance(turned["left"], shoulders["right"]) < 1e-3
             ),
-            nests_as_built={name: [nest_x, y - 0.0, z] for name, (_, y, z) in nests.items()},
-            nests_when_presented={name: list(point) for name, point in nests.items()},
+            pallet=dict(
+                columns=columns,
+                slot_pitch_m=[slot_dx, slot_dy],
+                slots_holding_the_two_parts=held,
+                y_of_each_slot_on_that_row={
+                    index: slot_point(index)[1]
+                    for index in range(slots[0] - slots[0] % columns, slots[0] - slots[0] % columns + columns)
+                },
+                supply_kit_nests_are_deleted_by_support_grid=True,
+            ),
+            parts_on_the_pallet={name: list(slot_point(slot)) for name, slot in held.items()},
+            parts_when_presented={name: list(point) for name, point in nests.items()},
             seats={name: list(point) for name, point in seats.items()},
         ),
         distances=rows,
@@ -200,7 +252,7 @@ def main() -> int:
             margin_m=furthest_seat - furthest_nest,
         ),
         why_the_turn_then=dict(
-            nests_sit_on_the_tool_arms_side=nests_on_the_tool_arms_side,
+            parts_sit_on_the_tool_arms_side=nests_on_the_tool_arms_side,
             picking_arm_is=picking,
             tool_arm_is=tooled,
             reading=(
@@ -215,18 +267,21 @@ def main() -> int:
             ),
         ),
         mirroring_the_nests=dict(
-            kit_plate_y_span_m=[plate_low_y, plate_high_y],
+            pallet_deck_y_span_m=[plate_low_y, plate_high_y],
             plate_already_reaches_the_picking_arms_side=plate_high_y > centre_y,
-            mirrored_nests={name: list(point) for name, point in mirrored.items()},
+            mirrored_positions={name: list(point) for name, point in mirrored.items()},
+            mirror_lands_on_slot=mirrored_slot,
+            nothing_has_to_be_built_or_moved=all(index is not None for index in mirrored_slot.values()),
             move_in_y_m={name: abs(mirrored[name][1] - nests[name][1]) for name in nests},
             distance_matches_what_the_turn_buys=all(
                 abs(distance(shoulders[picking], mirrored[name]) - distance(turned[picking], nests[name])) < 5e-3
                 for name in nests
             ),
             note=(
-                "The plate is 0.80 m of Y centred on the cell centre, so both mirrored positions are on"
-                " it. This is the position half of the change only: the guides, the nests' own"
-                " orientation and the withdrawal direction are not examined here."
+                "The pallet is symmetric about the cell centre, so each mirrored position is itself a"
+                " slot on the same row. The change is which two of the twenty slots carry the product"
+                " parts -- nothing is built or moved. This is the position half only: the parts'"
+                " orientation in the slot, the guides and the withdrawal direction are not examined."
             ),
         ),
         what_the_turn_costs=dict(
@@ -245,10 +300,12 @@ def main() -> int:
             " two shoulders so the picking arm stands over nests that sit on the tool arm's side."
             " Standing still means reaching across the other arm, and whether that fouls is question f,"
             " which nothing has measured. The cheapest way to make the question go away is not a robot"
-            " change: the supply plate already spans both sides of the centre line, and mirroring the"
-            f" two nests across it ({moves})"
-            " puts them at the same distance from the un-turned picking arm that the turn currently"
-            f" buys. The turn is worth {turn_s * TURNS_PER_CYCLE * BANK_FACTOR:.1f} s of A's {A_BANK_S} s bank."
+            " change and not even a pallet change: the pallet is symmetric about the cell centre, so"
+            f" the mirror of each occupied slot is itself a slot. Standing the two product parts in"
+            f" slots {mirrored_slot['T01']} and {mirrored_slot['T02']} instead of"
+            f" {held['T01']} and {held['T02']} ({moves}) puts them at the same distance from the"
+            " un-turned picking arm that the turn currently buys, with nothing built and nothing moved."
+            f" The turn is worth {turn_s * TURNS_PER_CYCLE * BANK_FACTOR:.1f} s of A's {A_BANK_S} s bank."
         ),
         formal_physical_validity_verdict=None,
     )
@@ -269,8 +326,8 @@ def main() -> int:
         for row in rows:
             still = row["from_picking_arm_standing_still_m"]
             after = row["from_picking_arm_after_the_turn_m"]
-            mirror = row["from_picking_arm_if_the_nest_were_mirrored_m"]
-            extra = f"   turned {after:.3f}   nest mirrored {mirror:.3f}" if after else ""
+            mirror = row["from_picking_arm_if_mirrored_m"]
+            extra = f"   turned {after:.3f}   if mirrored {mirror:.3f}" if after else ""
             print(f"  {row['target']:28s} standing still {still:.3f} m{extra}")
         print()
         print(
@@ -279,9 +336,9 @@ def main() -> int:
         )
         print(f"nests sit on the tool arm's side of the centre line: {nests_on_the_tool_arms_side}")
         print(
-            f"mirroring them moves T01 by {abs(mirrored['T01'][1] - nests['T01'][1]):.2f} m and"
-            f" T02 by {abs(mirrored['T02'][1] - nests['T02'][1]):.2f} m, on a plate that spans"
-            f" {plate_low_y:.2f}..{plate_high_y:.2f} in Y"
+            f"the parts stand in slots {held['T01']} and {held['T02']}; their mirrors are slots"
+            f" {mirrored_slot['T01']} and {mirrored_slot['T02']} on the same row ({moves}),"
+            f" on a deck spanning {plate_low_y:.2f}..{plate_high_y:.2f} in Y"
         )
         print(
             f"the turn costs {turn_s * TURNS_PER_CYCLE * BANK_FACTOR:.1f} s of A's {A_BANK_S} s bank"

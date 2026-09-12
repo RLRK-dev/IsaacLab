@@ -1,5 +1,5 @@
 {
-  "observed_at": "2026-09-12T11:17:25.285081+00:00",
+  "observed_at": "2026-09-12T11:26:29.529496+00:00",
   "scope": "Whether A's supports could be fetched without the yoke turn, from committed constants",
   "read_from": {
     "constants": {
@@ -46,28 +46,52 @@
         ],
         "text": "TERMINAL_Z = 0.013"
       },
-      "nest": {
-        "source": "scripts/op030_geometry.py",
-        "line": 576,
+      "nests_are_deleted": {
+        "source": "scripts/op030_split_layout.py",
+        "line": 283,
+        "numbers": [],
+        "text": "if child.name.startswith((\"OP030_supply_T\", \"OP030_supply_H\")):"
+      },
+      "slot_position": {
+        "source": "scripts/op030_split_layout.py",
+        "line": 313,
         "numbers": [
-          -2.08,
-          -1.95,
-          0.11,
+          -2.2,
+          0.12,
+          -1.94,
+          0.12,
           1.0
         ],
-        "text": "location = np.array([-2.08, -1.95 + (number - 1) * 0.11, 1.00])"
+        "text": "position = [-2.20 + row * 0.120, -1.94 + column * 0.120, 1.0]"
       },
-      "kit_plate": {
-        "source": "scripts/op030_geometry.py",
-        "line": 574,
+      "slot_wrap": {
+        "source": "scripts/op030_split_layout.py",
+        "line": 311,
         "numbers": [
-          0.46,
-          0.8,
-          0.01,
+          5.0
+        ],
+        "text": "row, column = divmod(index, 5)"
+      },
+      "which_slots_hold_the_two_parts": {
+        "source": "scripts/op030_split_layout.py",
+        "line": 298,
+        "numbers": [
+          5.0,
+          6.0
+        ],
+        "text": "identities = {5: (1, source_parts[1]), 6: (2, source_parts[2])}"
+      },
+      "pallet_deck": {
+        "source": "scripts/op030_split_layout.py",
+        "line": 289,
+        "numbers": [
+          0.5,
+          0.65,
+          0.008,
           -2.02,
           -1.7
         ],
-        "text": "box(\"OP030_supply_kit_plate\", (0.46, 0.80, 0.010), (-2.02, -1.70,"
+        "text": "box(pallet.name + \"_deck\", (0.500, 0.650, 0.008), (-2.02, -1.70,"
       },
       "withdrawal": {
         "source": "scripts/op030_support_motion_v04.py",
@@ -125,27 +149,46 @@
       ]
     },
     "a_half_turn_swaps_the_two_shoulders": true,
-    "nests_as_built": {
+    "pallet": {
+      "columns": 5,
+      "slot_pitch_m": [
+        0.12,
+        0.12
+      ],
+      "slots_holding_the_two_parts": {
+        "T01": 5,
+        "T02": 6
+      },
+      "y_of_each_slot_on_that_row": {
+        "5": -1.94,
+        "6": -1.8199999999999998,
+        "7": -1.7,
+        "8": -1.58,
+        "9": -1.46
+      },
+      "supply_kit_nests_are_deleted_by_support_grid": true
+    },
+    "parts_on_the_pallet": {
       "T01": [
         -2.08,
-        -1.95,
+        -1.94,
         1.0
       ],
       "T02": [
         -2.08,
-        -1.8399999999999999,
+        -1.8199999999999998,
         1.0
       ]
     },
-    "nests_when_presented": {
+    "parts_when_presented": {
       "T01": [
         -1.74,
-        -1.95,
+        -1.94,
         1.0
       ],
       "T02": [
         -1.74,
-        -1.8399999999999999,
+        -1.8199999999999998,
         1.0
       ]
     },
@@ -164,26 +207,26 @@
   },
   "distances": [
     {
-      "target": "T01 nest, kit drawn out",
+      "target": "T01 on the pallet, kit drawn out",
       "point": [
         -1.74,
-        -1.95,
+        -1.94,
         1.0
       ],
-      "from_picking_arm_standing_still_m": 1.1104900522622734,
-      "from_picking_arm_after_the_turn_m": 1.0002218239076994,
-      "from_picking_arm_if_the_nest_were_mirrored_m": 1.0002300732339615
+      "from_picking_arm_standing_still_m": 1.106179730892783,
+      "from_picking_arm_after_the_turn_m": 1.00009912316564,
+      "from_picking_arm_if_mirrored_m": 1.000107373503992
     },
     {
-      "target": "T02 nest, kit drawn out",
+      "target": "T02 on the pallet, kit drawn out",
       "point": [
         -1.74,
-        -1.8399999999999999,
+        -1.8199999999999998,
         1.0
       ],
-      "from_picking_arm_standing_still_m": 1.0672806592849229,
-      "from_picking_arm_after_the_turn_m": 1.004362408451776,
-      "from_picking_arm_if_the_nest_were_mirrored_m": 1.0043706237696437
+      "from_picking_arm_standing_still_m": 1.060461638821879,
+      "from_picking_arm_after_the_turn_m": 1.0064059646991002,
+      "from_picking_arm_if_mirrored_m": 1.0064141633355015
     },
     {
       "target": "T01 seat, on the product",
@@ -194,7 +237,7 @@
       ],
       "from_picking_arm_standing_still_m": 1.2440276870313336,
       "from_picking_arm_after_the_turn_m": null,
-      "from_picking_arm_if_the_nest_were_mirrored_m": null
+      "from_picking_arm_if_mirrored_m": null
     },
     {
       "target": "T02 seat, on the product",
@@ -205,46 +248,51 @@
       ],
       "from_picking_arm_standing_still_m": 0.9857017953778296,
       "from_picking_arm_after_the_turn_m": null,
-      "from_picking_arm_if_the_nest_were_mirrored_m": null
+      "from_picking_arm_if_mirrored_m": null
     }
   ],
   "reach": {
     "furthest_seat_the_picking_arm_already_covers_m": 1.2440276870313336,
-    "furthest_nest_standing_still_m": 1.1104900522622734,
+    "furthest_nest_standing_still_m": 1.106179730892783,
     "the_nest_is_inside_the_reach_already_used": true,
-    "margin_m": 0.13353763476906022
+    "margin_m": 0.1378479561385506
   },
   "why_the_turn_then": {
-    "nests_sit_on_the_tool_arms_side": true,
+    "parts_sit_on_the_tool_arms_side": true,
     "picking_arm_is": "right",
     "tool_arm_is": "left",
     "reading": "The turn is not buying distance. It swaps which arm stands where: the nests are on the tool arm's side of the centre line, and the picking arm is on the other. Standing still, the picking arm has to reach across the tool arm. Turning puts the picking arm over the nests and moves the tool arm clear.",
     "what_would_settle_it": "question f -- whether the two arms actually foul each other. Nothing has measured it, and the probes cannot, so 'reach across' cannot yet be priced."
   },
   "mirroring_the_nests": {
-    "kit_plate_y_span_m": [
-      -2.1,
-      -1.2999999999999998
+    "pallet_deck_y_span_m": [
+      -2.025,
+      -1.375
     ],
     "plate_already_reaches_the_picking_arms_side": true,
-    "mirrored_nests": {
+    "mirrored_positions": {
       "T01": [
         -1.74,
-        -1.45,
+        -1.46,
         1.0
       ],
       "T02": [
         -1.74,
-        -1.56,
+        -1.58,
         1.0
       ]
     },
+    "mirror_lands_on_slot": {
+      "T01": 9,
+      "T02": 8
+    },
+    "nothing_has_to_be_built_or_moved": true,
     "move_in_y_m": {
-      "T01": 0.5,
-      "T02": 0.2799999999999998
+      "T01": 0.48,
+      "T02": 0.23999999999999977
     },
     "distance_matches_what_the_turn_buys": true,
-    "note": "The plate is 0.80 m of Y centred on the cell centre, so both mirrored positions are on it. This is the position half of the change only: the guides, the nests' own orientation and the withdrawal direction are not examined here."
+    "note": "The pallet is symmetric about the cell centre, so each mirrored position is itself a slot on the same row. The change is which two of the twenty slots carry the product parts -- nothing is built or moved. This is the position half only: the parts' orientation in the slot, the guides and the withdrawal direction are not examined."
   },
   "what_the_turn_costs": {
     "seconds_each": 6.0,
@@ -254,6 +302,6 @@
     "share_of_a_bank": 0.09597989949748742,
     "a_bank_s": 238.8
   },
-  "answer": "Yes on distance, unsettled on interference. The picking arm already reaches 1.244 m to seat the far terminal, and the furthest nest is 1.110 m away standing still -- inside the reach it uses anyway, by 0.134 m. The turn buys position, not distance: it swaps the two shoulders so the picking arm stands over nests that sit on the tool arm's side. Standing still means reaching across the other arm, and whether that fouls is question f, which nothing has measured. The cheapest way to make the question go away is not a robot change: the supply plate already spans both sides of the centre line, and mirroring the two nests across it (T01 by 0.50 m, T02 by 0.28 m) puts them at the same distance from the un-turned picking arm that the turn currently buys. The turn is worth 22.9 s of A's 238.8 s bank.",
+  "answer": "Yes on distance, unsettled on interference. The picking arm already reaches 1.244 m to seat the far terminal, and the furthest nest is 1.106 m away standing still -- inside the reach it uses anyway, by 0.138 m. The turn buys position, not distance: it swaps the two shoulders so the picking arm stands over nests that sit on the tool arm's side. Standing still means reaching across the other arm, and whether that fouls is question f, which nothing has measured. The cheapest way to make the question go away is not a robot change and not even a pallet change: the pallet is symmetric about the cell centre, so the mirror of each occupied slot is itself a slot. Standing the two product parts in slots 9 and 8 instead of 5 and 6 (T01 by 0.48 m, T02 by 0.24 m) puts them at the same distance from the un-turned picking arm that the turn currently buys, with nothing built and nothing moved. The turn is worth 22.9 s of A's 238.8 s bank.",
   "formal_physical_validity_verdict": null
 }
