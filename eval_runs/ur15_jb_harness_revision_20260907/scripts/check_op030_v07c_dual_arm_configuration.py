@@ -73,6 +73,36 @@ COLUMN_HEAD_MIN_Z_M = 1.400
 SOURCE_ID = re.compile(r"(source_\d+)")
 # The figure §5.2 and §5.3 attribute to the present configuration.
 DISPUTED_M = 0.0059
+# The committed motion source, which is where the arms' division of labour is actually written.
+# Each anchor is an exact line that must still be there; the check fails loudly if one moves.
+MOTION_ANCHORS = {
+    "scripts/op030_split_support_motion.py": {
+        "the M4 spindle is permanent, not fetched": (
+            '"""ST A support placement with a permanent left-arm M4 spindle [m, rad, s]."""'
+        ),
+        "arm 0 carries the M4 driver": 'self.driver_names = {0: "OP030A_driver_M4"}',
+        "arm 1 grasps the support out of the kit": "seq.grasp(1, name, relative, 0.052,",
+        "the support is lifted off the grid": "objects={name: offset(seq.objects[name], (0, 0, 0.40))})",
+        "the torso turns to the supply side": 'seq.turn(-np.pi, f"T{number:02d}／供給側へ旋回")',
+        "the torso turns back holding the support": 'seq.turn(np.pi, f"T{number:02d}／保持して組付側へ旋回")',
+        "the driver has a park pose, not a stocker cell": "def driver_home(self, arm):",
+    },
+    "scripts/op030_motion.py": {
+        "a turn moves both hands, not one": "self.hands = [transform @ hand for hand in self.hands]",
+        "the yaw is a single shared scalar": "self.yaw += turn",
+        "the turn is about the cell centre": "center = np.array([CX, CY, 0])",
+        "a turn lasts six seconds": "self.phase(label, 6.0, turn=angle)",
+    },
+}
+# Every station's motion source, so "only A turns" is a swept result rather than an assertion.
+STATION_SOURCES = {
+    "A": "scripts/op030_split_support_motion.py",
+    "A (v04, the takt source)": "scripts/op030_support_motion_v04.py",
+    "B": "scripts/op030_split_wire_motion.py",
+    "C": "scripts/op030_split_fastening_motion.py",
+}
+# Where the fastening round trip is authored. It turns nothing, so that wait is a real wait.
+FASTENER_SOURCE = "scripts/op030_fastener_operations_v04.py"
 
 
 def load(path: Path) -> dict:
@@ -263,6 +293,75 @@ def trace_disputed(contact: dict, objects: dict) -> dict:
     )
 
 
+def read_the_motion_source() -> dict:
+    """Return what the committed motion source says about the two arms' division of labour.
+
+    §5 reasons about the arms from the documents. The sequence is committed, so it can be read
+    instead. Anchors are exact lines: if one is gone the check fails rather than reporting a
+    stale conclusion.
+    """
+    anchors: dict = {}
+    missing = []
+    for source, wanted in MOTION_ANCHORS.items():
+        path = ROOT / source
+        text = path.read_text() if path.exists() else ""
+        lines = text.splitlines()
+        found = {}
+        for meaning, needle in wanted.items():
+            hits = [number for number, line in enumerate(lines, 1) if needle in line]
+            found[meaning] = dict(needle=needle, lines=hits)
+            if not hits:
+                missing.append(f"{source}: {meaning}")
+        anchors[source] = found
+
+    turning = {}
+    for station, source in STATION_SOURCES.items():
+        path = ROOT / source
+        lines = path.read_text().splitlines() if path.exists() else []
+        calls = [
+            dict(line=number, text=line.strip())
+            for number, line in enumerate(lines, 1)
+            if ".turn(" in line and "def turn" not in line
+        ]
+        turning[station] = dict(source=source, turn_calls=len(calls), calls=calls)
+
+    fastener = ROOT / FASTENER_SOURCE
+    fastener_lines = fastener.read_text().splitlines() if fastener.exists() else []
+    fastener_turns = [number for number, line in enumerate(fastener_lines, 1) if ".turn(" in line]
+
+    turners = [station for station, row in turning.items() if row["turn_calls"]]
+    return dict(
+        anchors=anchors,
+        anchors_missing=missing,
+        turning=turning,
+        stations_that_turn=turners,
+        fastening_round_trip_turns=len(fastener_turns),
+        reading=dict(
+            the_M4_spindle_is_permanent=True,
+            the_right_arm_also_transports=(
+                "arm 1 grasps the support out of the withdrawn kit, lifts it 0.40 m, and is still"
+                " holding it through the 180 degree turn back to the assembly side. It transports and"
+                " then holds; it does not only hold."
+            ),
+            the_turn_is_shared=(
+                "phase() applies one turn_frame to both entries of self.hands and advances a single"
+                " self.yaw, about the cell centre. A turn is the yoke moving, not an arm moving, so the"
+                " M4 driver rides to the supply side and back on every support."
+            ),
+            what_that_costs=(
+                "§2.6 books the 11.5 s of turning as the holding arm waiting for the fastening arm. It"
+                " is neither arm waiting for the other: both are being carried. Feeder integration"
+                " cannot recover it. The 31.7 s feeder round trip is a real wait and can be."
+            ),
+            only_A_turns=(
+                "B and C never call turn, so the shared yaw is A's parts-supply mechanism alone."
+                if turners and all(station.startswith("A") for station in turners)
+                else "not established"
+            ),
+        ),
+    )
+
+
 def main() -> int:
     quiet = "--quiet" in sys.argv
 
@@ -281,6 +380,10 @@ def main() -> int:
         failures.append("the 5.9 mm figure was not found in the contact report")
 
     swept = sweep_for_arm_pairs(objects)
+
+    source = read_the_motion_source()
+    for line in source["anchors_missing"]:
+        failures.append(f"the motion source moved: {line}")
 
     mounting: dict[str, dict] = {}
     for cell, entries in cells.items():
@@ -362,10 +465,13 @@ def main() -> int:
         ],
         disputed_figure=disputed,
         arm_against_arm_in_committed_artifacts=swept,
+        division_of_labour_from_the_motion_source=source,
         mounting=mounting,
         answer=dict(
             the_5_9_mm_measures_the_present_configuration=disputed["measures_one_arm_against_the_other"],
             self_interference_measurements_that_exist=swept["left_against_right_pairs"],
+            the_two_arms_share_a_yaw_axis=True,
+            stations_that_use_it=source["stations_that_turn"],
             configuration=(
                 "one column per cell, both arms on it, shoulders"
                 f" {pitches['A'] * 1000:.1f} mm apart at Z {mounting['A']['shared_column']['base_height_m']:.4f},"
@@ -399,6 +505,9 @@ def main() -> int:
             f"left-against-right pairs in {swept['files_scanned']} committed JSON files:"
             f" {swept['left_against_right_pairs']} (of {swept['tagged_pairs_seen']} tagged pairs)"
         )
+        print(f"stations whose motion turns the shared yoke: {', '.join(source['stations_that_turn'])}")
+        print(f"  the fastening round trip turns nothing ({source['fastening_round_trip_turns']} turn calls),")
+        print("  so its 31.7 s is a real wait; the 11.5 s of turning is the yoke carrying both arms")
         print()
         for cell, row in mounting.items():
             shared = row.get("shared_column")
