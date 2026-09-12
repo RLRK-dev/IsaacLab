@@ -48,6 +48,27 @@ STATIONS = [f"OP{number:03d}" for number in range(10, 110, 10)]
 # What a station's own equipment says about the kind of work it does.
 TELLS = ("stocker", "operator_panel", "assembly_cell", "station_hardware")
 
+# The stations whose two-arm requirement can actually be read off an authored sequence, rather
+# than inferred from the fact that two arms are installed. OP010 has no authoring script here,
+# and OP040 onward the checkpoint calls roughly modelled only.
+VERIFIED = {
+    "OP020": {
+        "source": "scripts/op020_jb_motion.py",
+        "anchors": {
+            "the right arm grips the tray handle": "tool_for(tray, HANDLE, orientation,",
+            "it closes at t=3 and opens at t=66": "gap = 0.080 - 0.040 * weight(t, 2, 3) + 0.040 * weight(t, 66, 67)",
+            "the left arm does the work": "def left_target(t):",
+            "the yoke turns out and back": "yaw = -math.pi * weight(t, 5, 13) + math.pi * weight(t, 54, 62)",
+            "the cycle is 68 s": "FPS, DURATION = 30, 68.0",
+        },
+        "needs_two": True,
+        "why": "右腕がトレイの取っ手を掴んだまま、左腕が作業する。OP030-A と同じ形",
+        "hold_from_s": 3.0,
+        "hold_to_s": 66.0,
+        "cycle_s": 68.0,
+    },
+}
+
 # The axis: how many points a job needs held or acted on at the same moment.
 LADDER = [
     dict(
@@ -105,6 +126,26 @@ def main() -> int:
     concurrency = load(COUNTS)["minimum_simultaneous_arms"]
 
     failures: list[str] = []
+    verified = {}
+    for station, spec in VERIFIED.items():
+        path = ROOT / spec["source"]
+        lines = path.read_text().splitlines() if path.exists() else []
+        hits = {}
+        for meaning, needle in spec["anchors"].items():
+            found = [number for number, line in enumerate(lines, 1) if needle in line]
+            hits[meaning] = found
+            if not found:
+                failures.append(f"{spec['source']}: {meaning}")
+        held = spec["hold_to_s"] - spec["hold_from_s"]
+        verified[station] = dict(
+            source=spec["source"],
+            needs_two=spec["needs_two"],
+            why=spec["why"],
+            one_arm_holds_for_s=held,
+            share_of_the_cycle=held / spec["cycle_s"],
+            anchors=hits,
+        )
+
     rows = []
     for index, station in enumerate(STATIONS, start=1):
         suffix = f"_{index:02d}"
@@ -148,6 +189,15 @@ def main() -> int:
                 not row["has_stocker"] and not row["has_operator_panel"] for row in rows if row["arm_count"] == 1
             ),
         ),
+        verified_from_an_authored_sequence=dict(
+            stations=verified,
+            note=(
+                "Two arms being installed is not the same as two being required. These are the"
+                " stations outside OP030 whose own sequence says one arm holds while the other"
+                " works. OP010 has no authoring script committed, and OP040 onward the checkpoint"
+                " calls roughly modelled only, so neither is verified either way."
+            ),
+        ),
         op030_substations=dict(
             minimum_simultaneous_arms=concurrency,
             A="片手で供給から運び、そのまま押さえる。もう片手が締結 — 人の両手仕事",
@@ -166,7 +216,10 @@ def main() -> int:
             " picking a part up and fitting it costs, and one arm is what looking at it costs."
             " Three and four are not on the line at all: they are not a person's shape, and the"
             " case for them has to be made from what they parallelise rather than from what a"
-            " person does."
+            " person does. Where a sequence can be read, two-handed is the rule and not the"
+            " exception: OP020 holds a tray by its handle with one arm for 63 of its 68 seconds"
+            " while the other works, which is OP030-A's pattern. Of the four sub-stations whose"
+            " own sequence is committed, three need two arms and only C does not."
         ),
         checks_failed=failures,
         formal_physical_validity_verdict=None,
@@ -183,6 +236,15 @@ def main() -> int:
             )
         print()
         print(f"  双腕 {len(two_armed)} 工程 / 単腕 {len(one_armed)} 工程 / 3 本以上 {len(more)} 工程")
+        print()
+        print("シーケンスから確認できた工程:")
+        for station, row in verified.items():
+            print(
+                f"  {station}  2 本必要 = {row['needs_two']}  "
+                f"片腕の保持 {row['one_arm_holds_for_s']:.0f} s（{row['share_of_the_cycle']:.0%}）  {row['why']}"
+            )
+        print("  OP030-A 要 / OP030-B 要 / OP030-C 不要")
+        print("  OP010・OP040〜OP080 は authored なシーケンスが無く未検証")
         print()
         print("同時に確定させる点の数 → 腕数:")
         for step in LADDER:

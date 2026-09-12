@@ -1,5 +1,5 @@
 {
-  "observed_at": "2026-09-12T12:18:10.787004+00:00",
+  "observed_at": "2026-09-12T16:21:12.627258+00:00",
   "scope": "Which kind of process each arm count suits, read off the line before proposing anything",
   "read_from": {
     "audit/op030_v06_equipment_ids.json": {
@@ -143,6 +143,35 @@
     "nothing_on_the_line_has_more_than_two": true,
     "the_single_armed_pair_takes_no_parts": true
   },
+  "verified_from_an_authored_sequence": {
+    "stations": {
+      "OP020": {
+        "source": "scripts/op020_jb_motion.py",
+        "needs_two": true,
+        "why": "右腕がトレイの取っ手を掴んだまま、左腕が作業する。OP030-A と同じ形",
+        "one_arm_holds_for_s": 63.0,
+        "share_of_the_cycle": 0.9264705882352942,
+        "anchors": {
+          "the right arm grips the tray handle": [
+            376
+          ],
+          "it closes at t=3 and opens at t=66": [
+            375
+          ],
+          "the left arm does the work": [
+            212
+          ],
+          "the yoke turns out and back": [
+            382
+          ],
+          "the cycle is 68 s": [
+            26
+          ]
+        }
+      }
+    },
+    "note": "Two arms being installed is not the same as two being required. These are the stations outside OP030 whose own sequence says one arm holds while the other works. OP010 has no authoring script committed, and OP040 onward the checkpoint calls roughly modelled only, so neither is verified either way."
+  },
   "op030_substations": {
     "minimum_simultaneous_arms": {
       "A": 2,
@@ -196,7 +225,7 @@
       "on_the_line": false
     }
   ],
-  "finding": "The line answers it as built: 8 stations with two arms, 2 with one, none with more. The single-armed pair is also the pair that takes no parts and has no operator panel -- inspection. So two arms is what picking a part up and fitting it costs, and one arm is what looking at it costs. Three and four are not on the line at all: they are not a person's shape, and the case for them has to be made from what they parallelise rather than from what a person does.",
+  "finding": "The line answers it as built: 8 stations with two arms, 2 with one, none with more. The single-armed pair is also the pair that takes no parts and has no operator panel -- inspection. So two arms is what picking a part up and fitting it costs, and one arm is what looking at it costs. Three and four are not on the line at all: they are not a person's shape, and the case for them has to be made from what they parallelise rather than from what a person does. Where a sequence can be read, two-handed is the rule and not the exception: OP020 holds a tray by its handle with one arm for 63 of its 68 seconds while the other works, which is OP030-A's pattern. Of the four sub-stations whose own sequence is committed, three need two arms and only C does not.",
   "checks_failed": [],
   "formal_physical_validity_verdict": null
 }
