@@ -1,28 +1,12 @@
-# CLAUDE.md (Global + IsaacLab project rules)
+# CLAUDE.md — THREAD project rules (IsaacLab fork) v26.09.13
 
-This file defines:
-
-- **Global personal defaults** (output roles, modes, scope boundaries, status updates), and
-- **IsaacLab-wide project rules** (Newton / PhysX / verification harness / CC Debate patterns).
-
-Project- or phase-specific rules SHOULD go into project-local CLAUDE.md files or skills.
-
-## Global rules summary (詳細: `~/.claude/CLAUDE.md`)
-
-Personal defaults と汎用ワークフロー (Modes / Scope boundaries / Output style / Mode switch / Gate FAIL strategy / 階層ゲート運用 L 判定 / Splitting patterns) は global CLAUDE.md (`~/.claude/CLAUDE.md`、auto-load) で定義。本ファイルは THREAD project 固有ルールに集中。
-
-- **Modes**: Default (balanced) / High-accuracy (strict) / Exploration (breadth)
-- **Output style**: User-facing (Japanese) + Internal (English)
-- **Mode switch**: 切替時は明示宣言 (User-facing)
-- **Scope boundaries**: 別問題は別 session 推奨
-- **Gate FAIL**: fix root cause first (受容 / 緩和 / skip は infeasibility 証拠後)
-- **L 判定 (階層ゲート運用)**: L0-L3 汎用枠組みは global 参照、project 拡張は §0 階層ゲート運用 (本ファイル後述)
+本ファイルは **THREAD project の運用ルール**を定義する。
+personal 既定と汎用 workflow (Modes / Output style / Scope boundaries / Gate FAIL / L 判定の汎用枠組み / Splitting patterns) は `~/.claude/CLAUDE.md`（同ディレクトリの `l-gate.md` `operational-know-how.md` を import）が定義し、**毎セッション自動ロードされる**ので本ファイルでは繰り返さない。⚠ compaction 後は自動ロードに頼らず §運用1 の 3 本を再読込すること。
+phase 固有の詳細は skill / vault へ置く。
 
 ---
 
 @AGENTS.md
-
-# CLAUDE.md v26.07.12
 
 ## ⛔ 三原則（常時意識）
 
@@ -61,24 +45,18 @@ Personal defaults と汎用ワークフロー (Modes / Scope boundaries / Output
 
 ## DiffIK制御方式 — PhysX環境の具体 API 形（不変前提「IK 制御のみ・kinematic トリック禁止・制御方式変更は Rs 承認」は全 substrate 共通・§0#3/#5）（他の制御方式への変更はrs承認必須）
 
-**制御API制約（違反はrs承認なしに不可）:**
-- **IK: DifferentialIKController のみ使用。JT IK（自前実装）は廃止済み**
-- **`write_joint_position_to_sim` 全面禁止**（arm j0-j6 も finger j7/j8 も）
-- **`write_joint_state_to_sim` — 制御ループ中は禁止（物理破壊防止）。例外: オフラインreplay（replay_for_video.py等、制御ループ外の事後可視化）は許可。reset直後の初期化（episode開始時1回）は「関節状態の seed に限り」許可（body 状態の直接書込は不可 — body は `eval_fk`/`mj_forward` で関節から従属させる）。⛔腕を姿勢へ書き込むことは不可 — 腕の開始姿勢は PD の実移動で到達する。ケーブルの reset 再 seed は対象外・現行のまま。〔根拠 = p5 banked charter `charter_v231.md:351`/`:352`/`:360`/`:361`（reset-init 例外 = 失効・cable は対象外）＋ `probe/pd1-arm-pd` で実装済（arm reset 書込 0・サーボ目標のみ）。Rs 承認 2026-07-26〕**
-- **finger制御: `set_joint_velocity_target` のみ許可**（open/close両方。符号で方向指定）
-- **arm制御: `set_joint_position_target` + `write_data_to_sim` のみ許可**
-- **制御方式の変更はrs承認なしに行わない**
-- **到達性・収束性の問題はtask_config.pyのパラメータ調整で解決。kinematic attachment、kinematic trick（物理無視のテレポート・強制配置等）禁止**
+**制御API制約（違反はrs承認なしに不可）— 同内容 = `.claude/rules/prohibited.md`「⛔ 禁止事項」の制御 API 7 項（現 `:21-27`。同 file も毎セッション自動ロード。⚠ 行番号は編集で動くので内容語で引くこと）:** DifferentialIKController のみ（JT IK 廃止）/ `write_joint_position_to_sim` 全面禁止 / `write_joint_state_to_sim` は制御ループ中禁止 / finger = `set_joint_velocity_target` のみ / arm = `set_joint_position_target` + `write_data_to_sim` のみ / 制御方式の変更は rs 承認 / 到達性・収束性は `task_config.py` 調整で解決し kinematic trick 禁止。
+- ⚠ **次の 2 つの但し書きは、自動ロードされる面では本ファイルにしか無い（prohibited.md に無い＝実測）** — `write_joint_state_to_sim` の reset 直後 seed について **（reset-init 例外 = 失効・cable は対象外）**、`probe/pd1-arm-pd` の実装状態について **（arm reset 書込 0・サーボ目標のみ）**。根拠 = p5 banked charter `charter_v231.md:351`/`:352`/`:360`/`:361`、Rs 承認 2026-07-26
+- 🔺 **未解決の不整合（§運用10 で Rs へ）:** 本文が reset 直後の関節 seed を「許可」と書き、同じ行の括弧が「その例外は失効」と書く。係争は `00-DESIGN-STATUS-LEDGER.md:60`（arm-control remediation task (d)）に生きている。**CC は解消しない**
 - 〔上記のうち *具体 API 名*（`DifferentialIKController`/`write_joint_*`/`set_joint_*`）は PhysX 実装形。**不変前提「IK 制御のみ・kinematic トリック（物理無視の強制配置＝アーム関節角の直接書き込み等）禁止・制御方式変更は Rs 承認」は全 substrate 共通（§0#3/#5、`validate.sh` Layer 8 が機械検証）**。**kinematic の認可例外は clip-retention pin の 1 件のみ** ＝ **clip 側がケーブルを保持する機構**（⚠ gripper の把持ではない。工程表の「クランプ」「ケーブル固定」は `RL-Routing-Design.md:1312` のとおり **gripper の把持動作**を指す語なので、本例外の読みに流用しない）。⛔**不許可（不変）= 腕関節角の直接書込 / 指の kinematic close / `update_kinematic_bodies`（FK→physics の body 複写）/ weld・cable-finger attachment。** 根拠 = RS71 §0#5（本節は 07-19 以降も本例外を保持していた）＋ Rs 裁定 2026-07-21 逐語「ただし、クリップのケーブル固定だけは kinematic を使用する」が 07-19 の「完全削除」directive を上書き（custody = `STEP43_C69_EVIDENCE_READBACK_OPSSUP_20260721.md:23`。⚠**Rs 発話は 01:3x と 02:0x の 2 回あり、両 receipt の全体は `RS_PIN_UTTERANCE_CUSTODY_RSTECHLEAD_20260721.md` @ c73 `23c320850e`（branch `probe/pd1-arm-pd`）**）。Newton の対応 API・制御制約は `thread-vault/06-Knowledge/LL-Newton.md` 参照〕
 
-- robot cfg: FRANKA_PANDA_HIGH_PD_CFG ベース（disable_gravity=True（HIGH_PD_CFG準拠）、hand actuatorのみ速度制御に上書き）
+- 以下は PhysX 実機設定（prohibited.md に無い・本ファイル固有）。robot cfg: FRANKA_PANDA_HIGH_PD_CFG ベース（disable_gravity=True（HIGH_PD_CFG準拠）、hand actuatorのみ速度制御に上書き）
 - approach: `command_type="position"`、descend/push: `command_type="pose"`
 - physics dt: 1/120 (0.00833s)、solver: position=16 / velocity=0 (TGS)
 - 根拠: `thread-vault/06-Knowledge/LL-SimPerformance`
 
 ## Newton VBD（2026-03-19 開始、rs承認済み）
 - **状態:** env6-VBD track（AC/AR/IC/Clamp/Unclamp の全 skill env）は **DISCARDED → mujoco 基盤（コ字形グリッパ）**（Rs 2026-06-26）。Grip（`newton_grip_env.py`）は env7-mujoco **ACTIVE**。成否 SSOT = `thread-vault/07-Design/00-DESIGN-STATUS-LEDGER.md` §FAILED。歴史詳細 = archive `02-Workflow/CLAUDE-md-pruned-archive-2026-07-12.md`
-- **環境:** Newton VBD solver。⚠ 旧記載の `env_isaaclab6` venv は **on-disk に存在しない**（2026-08-03 実測・preflight P9 WARN）— 本 track は DISCARDED 済（上行）。PhysX環境とは完全に分離
 - **⚠ Option-E（mujoco-substrate S-series: S1-S8）の venv は `env_isaaclab7`。版 = 実測 2026-08-03 08:53 JST: Newton 1.4.0 / mujoco 3.10.0 / mujoco-warp 3.10.0.3 / warp 1.15.0。** ⭐**この 4 つは `newton 1.4.0` が自分の依存として宣言する範囲**（`newton-1.4.0.dist-info/METADATA:76-77` = `mujoco~=3.10.0` / `mujoco-warp~=3.10.0,>=3.10.0.2`）。⛔**mujoco/mujoco-warp を 3.11.0 へ上げるとこの範囲を外れ、`SolverMuJoCo` が構築のたびに版不一致を警告する。newton 1.4.0 が upstream 最新ゆえ3.11 を支える newton は存在しない**（08-03 に一度上げて Rs 裁定で戻した。実測・経緯 = `eval_runs/troot_optE_dapg_wholeroute_scope_20260701/P4_ENV7_UPGRADE_20260803/`）。 経緯と全 246 package の freeze = 同 dir と `P5_ENV7_UPGRADE_20260727/`。現況は `/home/rlrk/env_isaaclab7/bin/python -m pip list | grep -E 'newton|mujoco|warp'`（4 package 全部が出る。3 package だけ見る書き方は `mujoco-warp` を落とす）。 ⚠ **`/home/rlrk/env_isaaclab7_latest` は別物**（名前に反して更新先ではない）— Option-E は `env_isaaclab7` を使う。Option-E の smoke/test/build は `/home/rlrk/env_isaaclab7/bin/python` で実行する
 - **RL進捗:** `thread-vault/07-Design/00-DESIGN-STATUS-LEDGER.md`（成否 SSOT）+ 地図 `docs/logical_decomposition.html`（現在 frame）
 - **RL設計:** `thread-vault/07-Design/RL-Routing-Design.md`
@@ -87,7 +65,7 @@ Personal defaults と汎用ワークフロー (Modes / Scope boundaries / Output
 - **検証インフラ:** Video Gate（enforce_video_gate.sh）+ 独立検証（verify_raw_evidence.py）+ Code C独立動画判定（INIT_CODE_C.md）
 - 詳細: `thread-vault/06-Knowledge/LL-Newton.md`
 
-## 📊 階層ゲート運用 (L判定) — THREAD project 拡張
+## 📊 §0 階層ゲート運用 (L判定) — THREAD project 拡張
 
 L 判定の汎用枠組みは global CLAUDE.md (`~/.claude/CLAUDE.md` の「階層ゲート運用 (L判定) — 汎用枠組み」セクション) を参照。
 本セクションは THREAD project 固有の L3 自動昇格キーワード + 直交ゲートを定義する。framework 導入履歴 (Day 1-5) は archive `02-Workflow/CLAUDE-md-pruned-archive-2026-07-12.md`。
@@ -101,7 +79,7 @@ L 判定の汎用枠組みは global CLAUDE.md (`~/.claude/CLAUDE.md` の「階�
 - `thread_isaac_lab/configs/task_config.py` (SSOT、全数値パラメータ)
 - `CLAUDE.md` / `.claude/rules/prohibited.md` (本ルールファイル)
 - `.claude/skills/*/SKILL.md` の **workflow / protocol 部分** (コメント・typo・docs は除外、L0-L1 扱い)
-- `~/.claude/hooks/*` の **logic 部分** (`auto_handoff.sh`、`statusline.sh`、`context_watchdog.sh`、`ctx_thresholds.sh`)
+- `~/.claude/hooks/*` の **logic 部分** (`auto_handoff.sh`、`context_watchdog.sh`、`lib/ctx_thresholds.sh`) + `~/.claude/statusline.sh`
 - `thread-vault/04-Specs/SOMA.md` (目標定義)
 - `thread-vault/07-Design/RL-Routing-*.md` (RL 設計)
 - `thread-vault/00-Project-Management/operational-rule-LTM-1.md` (NEST 仕様書、改訂は L3 cascade per NEST §9)
@@ -127,42 +105,38 @@ global「直交ゲート」セクションを参照。本 project では:
 
 THREAD project の全 task は logic tree 上の node として管理し、各 node を CC session に 1:1 binding する。本 architecture を NEST と呼ぶ (2026-04-27 命名、Rs 採択)。
 
-**仕様書 (SSOT):** `thread-vault/00-Project-Management/operational-rule-LTM-1.md` (LTM-1 v1.1)
+**仕様書 (SSOT):** `thread-vault/00-Project-Management/operational-rule-LTM-1.md`（実測 LTM-1 **v1.2**）
 **Root node (tree):** T-PRODUCTION-LINE（生産ライン工程①〜⑧）/ **THREAD subtree root:** T-ROOT「5-clip cable routing を vision-based で成功させる — 目標は 100% へ定性的に再定義済（Rs 2026-06-23・SSOT = SOMA:16）」〔宣言修正 = Rs 逐語「直して」2026-08-08・裁定 custody = `eval_runs/troot_optE_dapg_wholeroute_scope_20260701/P4_DELEGATED_DECISIONS_ITEMS7_9_DOD_20260808.md` §7〕
 **運用開始:** 2026-04-27、新 task は完全準拠、既存 active は次 milestone から段階適用 (NEST §6.1 / §6.2)
 
-**主要 rule (詳細は仕様書参照):**
-- node = goal + means + status + dependencies (precedent / blocker のみ) + parent_node + children_nodes + session_history (§2.1、必須要素 8 個)
-- session = CC instance、1 node に 1:1 binding (§5.1)
-- node ID format: `T-{seq}-{sub}-...` (depth 可変、tree path 反映、§1)
-- node 起動承認 (NEST §3.1 #4) = §運用2 [DEFINE] rs 承認で兼ねる (子 node 作成承認は §3.1 別 gate 維持)
-- handoff 二系統 (独立): vault sidecar `.sha256` hash file = node progress artifact (§4.2、長期 provenance) / `/handoff` skill = CC context state save (memory `handoff_cc_*.md`)。CC Debate launch 前の `/handoff` は **原則必須ではない**、CC1 状況判断
-- cascade: 親 COMPLETE は全子完了 (COMPLETE / ARCHIVED / DISCARDED) が hard precondition (§3.3 #6 + §3.5、auto-absorb 禁止)。自分が parent か leaf かは state.md `children_nodes` field で判定
-- DISCARDED → IN_PROGRESS 遷移禁止、復活は新 node_id + provenance reference (§3.7)
-- 並行干渉防止 3-tier: per-session signal file (Tier 1) / parent-mediated queue (Tier 2) / flock(2) (Tier 3) (§5.2)
-- 本 rule 改訂は CLAUDE.md 変更扱い、L3 cascade per §0 + §運用15 Layer 2 (§9)
+**仕様書 (LTM-1) が SSOT、本ファイルでは繰り返さない:** node 定義 8 要素 = node ID / goal / means / status / parent_node / children_nodes / dependencies / session_history (§2.1) ・ cascade = 親 COMPLETE は全子が COMPLETE / ARCHIVED / DISCARDED であることが hard precondition、auto-absorb 禁止 (§3.3 #6 + §3.5) ・ DISCARDED→IN_PROGRESS 禁止、復活は新 node_id + provenance reference (§3.7) ・ 並行干渉防止 3-tier (§5.2) ・ 自分が parent か leaf かは state.md `children_nodes` で判定 (§2.3) ・ 抵触時優先順位 CLAUDE.md > NEST 仕様書 > task DEFINE (§0) ・ 本 rule 改訂 = L3 cascade (§9)。node ID は tree 構造を反映した永続識別子（⚠ §1 は例 `T-08-1-3` を示すのみで書式テンプレートを持たない）
 
-**既存 rule との precedence:**
-- 抵触時優先順位: CLAUDE.md > NEST 仕様書 > task DEFINE (NEST §0、userMemories は priority chain 別扱い)
-- 階層ゲート運用 (L 判定): NEST と直交軸 (L=変更リスク、NEST=task lifecycle)
-- parent/child session 概念は NEST node 階層に内包 (詳細 = NEST 仕様書 §3.2 / §3.3 / §4 / §5.1)
+**本ファイル側が持つ bridge rule（仕様書に無い / CLAUDE.md 側の接続）:**
+- session = CC instance、1 node に 1:1 binding（⚠ LTM-1 §5.1 は「同一 node の異なる session は同時並行禁止」までで、「1:1 binding」の語を持たない）
+- handoff **二系統**（独立）: vault sidecar `.sha256` = node progress artifact（長期 provenance、LTM-1 §4.2）/ `/handoff` skill = CC context state save（memory `handoff_cc_*.md`）。⚠ **この二系統の対比は LTM-1 に無い**（§4.2 は sidecar 側のみ規定）
+- node 起動承認 (NEST §3.1 #4) = §運用2 [DEFINE] rs 承認で兼ねる（子 node 作成承認は §3.1 別 gate 維持）
+- CC Debate launch 前の `/handoff` は **原則必須ではない**、CC1 状況判断
+- 階層ゲート運用 (L 判定) は NEST と直交軸 (L=変更リスク、NEST=task lifecycle)
+- parent/child session 概念は NEST node 階層に内包（LTM-1 §3.2 / §3.3 / §4 / §5.1）
+- userMemories は上記 precedence chain の別扱い
 
 ## 運用ルール
 
 ### セッション管理 (§1, 1b, 11, 13, 31)
 
 1. **Conversation compacted時: 以下を順に実行し再読み込みせよ**
+   - `cat ~/.claude/CLAUDE.md`（global 既定 — 本ファイルは global を繰り返さないので、compact 後はこれを明示的に読む）
    - `cat ~/IsaacLab/CLAUDE.md`
    - `cat ~/IsaacLab/.claude/rules/prohibited.md`
 1b. **セッション開始時のpreflight check必須:** `bash ~/IsaacLab/harness/scripts/preflight_check.sh` を実行。FAILがあれば作業開始禁止 — rsに報告して解決を待つ。WARNはタスク報告に含める
 11. **タスク完了時の/clear必須:** タスクのstatus→done移行（Proof of Work確認済み）後、次タスク着手前に必ず`/clear`を実行する。CLAUDE.md が自動再読み込みされ前タスクの context 汚染を防ぐ。同一タスク内の連続作業中は不要
 13. **context 制御:** raw ctx 70% で auto `/compact` 自動発火（SSOT: `~/.claude/hooks/lib/ctx_thresholds.sh` SOFT=70/HARD=92）。`/handoff` は状況判断で manual 実行（long task / CC Debate 前 / ctx70% 接近時に state 保全推奨、lossless）。**manual `/compact` は禁止**（情報損失が handoff の保険を上回る）。CC Debate 前 `/handoff` は原則必須ではない（CC1 判断）
 31. **memory ディレクトリの書き込み規則（Rs 裁定 2026-08-05）:** 対象 = `~/.claude/projects/-home-rlrk-IsaacLab/memory/`（全 pane 共有・⛔ **git 管理外＝削除が見えない**）。
-    - **topic file（`feedback-*` / `reference-*` / `project-*` / per-pane `handoff_cc_*`）= 解放。** 単独所有・追記型・容量上限なしゆえ通常どおり書いてよい
-    - **`MEMORY.md`（索引）= 成長条件つき。** hard limit = **24,986 chars**（= 24.4K×1024 = 24,985.6 の切り上げ。⚠ K は **×1024**、`LEDGER:18155` の決着値と同一。これを越えると索引が読めない）。**90%（≈22,487 chars）を超えたら coordinated 圧縮を起票**する。⛔ **単独で圧縮しない**（他 pane の行の要約を含むため。file 冒頭の同旨記載が SSOT）。⚠ 90% 未満なら hook が「17.1K まで圧縮せよ」と言っても**従わない**（17,510 は hook の目標であって要件ではない）
+    - **topic file（`feedback-*` / `reference-*` / `project-*` / per-pane `handoff_cc_*`）= 解放**（単独所有・追記型・容量上限なし）
+    - **`MEMORY.md`（索引）**: hard limit = **24,986 chars**（= 24.4K×1024 = 24,985.6 の切り上げ。⚠ K は **×1024**。`P18_CLAMP_COURT_EVIDENCE_LEDGER_20260727.md` @ commit `6db8eed757` の `:18155` の決着値と同一。⚠ 同 file は追記で伸びるので commit 無しの行番号は腐る）。越えると索引が読めない。**90％（≈22,487 chars）超で coordinated 圧縮を起票**する。⛔ **単独で圧縮しない**（他 pane の行の要約を含む）。⚠ 90％ 未満なら hook が「17.1K まで圧縮せよ」と言っても**従わない**（17,510 は hook の目標であって要件ではない）
     - **`handoff.md` = SHARED last-writer。** 自分の節のみ Edit で狙い撃ち。⛔ **全書き換え禁止**（他 pane の節を消す）
-    - **判断軸は水準でなく成長**（実測 **+1,860 chars / 13.9 日 ≈ +134/日** = 07-21 17:24 18,549 → 08-04 14:51 20,409。⚠ 区間を書くこと — 日数の丸めで ±1 動く）。過去 96.1% まで達し圧縮で戻した実績あり ⇒ 全面停止でなく閾値運用
-    - ⛔ **2026-08-04 15:52 からの全面凍結は本裁定で解除**（旧根拠 = `eval_runs/troot_optE_dapg_wholeroute_scope_20260701/P18_CLAMP_COURT_EVIDENCE_LEDGER_20260727.md` **@ commit `6db8eed757`** の `:19706` §700(e) / `:19782` §703(b) — ⚠ **commit を添えるのが本体**。同 file は追記で伸び続けるので、commit 無しの行番号は上への挿入で静かに外れる。§番号も台帳側で振り直せる**指し手**であって物ではない。⇒ ⭐ **行番号は「どの物の中の位置か」を連れて初めて恒久になる**）。⭐ **規則をここに置く理由 = 凍結は台帳にしか無く、新 session から見えず、守れなかった**（見えない規則は予防でなく確定した違反になる）
+    - **判断軸は水準でなく成長**（実測 **+1,860 chars / 13.9 日 ≈ +134/日** = 07-21 17:24 18,549 → 08-04 14:51 20,409。⚠ 区間を書くこと — 日数の丸めで ±1 動く）⇒ 全面停止でなく閾値運用
+    - ⭐ **規則をここに置く理由 = 凍結は台帳にしか無く、新 session から見えず、守れなかった**（見えない規則は予防でなく確定した違反になる）。2026-08-04 全面凍結の解除経緯と「行番号は "どの物の中の位置か" を連れて初めて恒久になる」の全文 = `eval_runs/claude_md_prune_20260913/PRUNED_ARCHIVE_20260913.md` §B4
 
 ### タスク着手前 (§2, 4, 7, 8, 24)
 
@@ -238,30 +212,17 @@ THREAD project の全 task は logic tree 上の node として管理し、各 n
 
 CCは対策案や推奨を出す前に、該当スキルをロードし、プロトコルの出力（テーブル・断面図・チェックリスト等）を応答内に生成すること。出力なしに提案するのは不遵守。「ロードした」「確認した」だけの言及も不遵守。
 
-| タスク分類 | スキル | いつ使う |
-|-----------|--------|---------|
-| **設計** | | |
-| 位置・形状パラメータ変更 | `/geometric-design` | GRASP_Z, APPROACH_Z, クリップ配置等 |
-| 力・剛性パラメータ変更 | `/force-design` | PD gains, 接触剛性, 摩擦係数等 |
-| EE軌道設計・IK変更 | `/diffik-trajectory` | `_ik_move_both`, Phase軌道, step size |
-| 報酬・env・成功条件設計 | `/reward-design` | reward関数, auto-close threshold, success条件 |
-| **事前検証** | | |
-| 設計の失敗モード検証 | `/pre-check` | train起動前, env変更前, GPU時間を消費する変更前 |
-| **診断** | | |
-| NaN・segfault・物理爆発 | `/physics-diagnosis` | cable explosion, force spike |
-| テスト結果の判定 | `/gate-evaluation` | PASS/FAIL verdict, Goal Evidence |
-| テスト結果の検証 | `/verify-run` | 動画→ログ→照合の三段検証 |
-| **Newton環境** | | |
-| URDFロボットのセットアップ | `/newton-urdf-setup` | Joint drive mode, solver選択, gravcomp |
-| Cable構築・パラメータ設計 | `/newton-cable-design` | add_rod, bend/stretch, 接触, Dahl摩擦 |
-| Newton IK設計 | `/newton-ik-design` | IKSolver, Custom Objective, Multi-EE |
-| Robot+Cable統合 | `/newton-dual-solver` | Featherstone+VBD, ContactSensor, ArticulationView |
-| 環境の段階的検証 | `/newton-validation` | Phase順序, N-dependency |
-| **運用** | | |
-| 実験実行 | `/experiment-run` | run_id, RUN_METRICS, headless 動画事後生成 |
-| シミュレーション実行 | `/isaac-sim-execution` | GPU, zombie process, cable無しテスト高速化 |
-| 技術調査 | `/web-research` | 新技術導入前の事前調査 |
-| セッション引き継ぎ | `/handoff` | コンテキスト残量少ない時 |
+skill の一覧と説明は harness が毎セッション自動注入する（on-disk 33 のうち 28）。よって本ファイルは対応表を持たない — 設計 = `/geometric-design`（位置・形状）`/force-design`（力・剛性・摩擦）`/diffik-trajectory`（EE 軌道・IK）`/reward-design`（報酬・env・成功条件）/ 事前検証 = `/pre-check` / 診断 = `/physics-diagnosis`（NaN・爆発）`/gate-evaluation`（verdict）`/verify-run`（動画→ログ→照合）/ 運用 = `/experiment-run` `/isaac-sim-execution` `/web-research` `/handoff`。旧対応表の全文 = `eval_runs/claude_md_prune_20260913/PRUNED_ARCHIVE_20260913.md` §B5。
+
+**⚠ Newton 系 5 skill は `disable-model-invocation: true` ゆえ自動注入されない（＝下表が唯一の trigger 面）:**
+
+| スキル | いつ使う |
+|--------|---------|
+| `/newton-urdf-setup` | URDFロボットのセットアップ。Joint drive mode, solver選択, gravcomp |
+| `/newton-cable-design` | Cable構築・パラメータ設計。add_rod, bend/stretch, 接触, Dahl摩擦 |
+| `/newton-ik-design` | Newton IK設計。IKSolver, Custom Objective, Multi-EE |
+| `/newton-dual-solver` | Robot+Cable統合。Featherstone+VBD, ContactSensor, ArticulationView |
+| `/newton-validation` | 環境の段階的検証。Phase順序, N-dependency |
 
 **強制ゲート（スキップ不可）:**
 - `/geometric-design` → 位置・形状パラメータ変更時。6ステップ出力（実測・制約・断面図・トレード表・感度分析・因果連鎖）を生成しないと実装に進めない
@@ -330,12 +291,9 @@ Pre-task prior-art/no-repeat guard (V7/V10) + current-state freshness guard (V9)
 
 To prevent cross-pane stalls and regressions, messages routed through OPS-SUP must follow this protocol:
 
-- Check each message for ambiguity in role/authority, scope, status, version/SHA, evidence basis, timestamps, and supersession.
-- If ambiguity or contradiction is detected, return the message to its source pane with the unclear text, missing evidence, required fixes, and resubmission condition. Do not silently normalize it.
 - Record routing states explicitly: `AMBIGUITY DETECTED` → `RETURNED` → `RESUBMISSION RECEIVED` → `VERIFIED`.
 - After forwarding, confirm that the destination pane received the message. A send without destination readback is incomplete.
 - Distinguish verbatim relay, interpreted scope confirmation, and independent verification. Do not represent an OPS-SUP interpretation as an Rs ruling.
-- Before forwarding, compare pane role, node, SSOT, owner, gate, and authority scope. Conflicts between `T-ROOT-RS-TECH-LEAD`, `T-ROOT-RS-TECH-LEAD2`, and `pX:SKILL-DESIGN` must be surfaced and held for the proper authority.
 - Preserve exact commit/blob/SHA and measured timestamps; never fill truncated or missing values by inference.
 - Attach or preserve a stable message ID so duplicate delivery, replay, correction, and supersession can be distinguished. A correction must identify the message or artifact it supersedes.
 - Distinguish a delivery ACK from content acceptance, concurrence, evidence verification, and authority approval. Receipt alone must never flip a gate or status.
@@ -348,3 +306,6 @@ To prevent cross-pane stalls and regressions, messages routed through OPS-SUP mu
 - Route all SKILL decomposition, granularity, unit, and composition decisions to `pX:SKILL-DESIGN`. Other panes may provide materials or compatibility evidence but must not silently decide those questions.
 - While a message is in `AMBIGUITY DETECTED` or `RETURNED`, keep dependent implementation, experiment, run, landing, push, status flip, and gate flip fail-closed unless an authorized independent path is explicitly documented.
 - Complete the routing loop in both directions: confirm destination readback after forwarding, then return the destination's disposition or remaining conditions to the source pane. A one-way relay is incomplete.
+
+OPS-SUP 役の session は起動時に、上記に加えて routing 手順の残り（ambiguity 検査軸 / 差し戻しの作法 / 転送前の role・node・SSOT・owner・gate 突合）を `eval_runs/claude_md_prune_20260913/PRUNED_ARCHIVE_20260913.md` §B2 で**読むこと**。
+⚠ 本節の原文は commit `06705484cb` が「custody, not authorship」として bank したもの。上記 15 項は**英語原文のまま**保持し、CC は文言を書き換えていない（移したのは OPS-SUP 内部の triage 手順 3 項のみ）。節の実質的な改訂は owner（OPS-SUP）と Rs の領分。
