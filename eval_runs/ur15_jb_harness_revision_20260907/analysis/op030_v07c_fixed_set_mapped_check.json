@@ -1,0 +1,41 @@
+{
+  "observed_at": "2026-09-12T00:09:14.935181+00:00",
+  "what": "each cell's duplication set against the fixed set carried into that cell's namespace",
+  "inputs": {
+    "analysis/op030_v06_relocation_selection.json": "2026-09-11T21:13:23.803494+00:00",
+    "analysis/op030_v07c_cell_selection.json": "2026-09-12T03:22:05.411241+09:00"
+  },
+  "bank_prefixes": [
+    "OP030B__",
+    "OP030B_"
+  ],
+  "fixed_names_carrying_neither_prefix": [],
+  "cells": {
+    "A": {
+      "prefix": "(none)",
+      "selection_count": 201,
+      "fixed_count": 76,
+      "mapped_differs_from_naive": true,
+      "overlap_naive": 0,
+      "overlap_mapped": 0,
+      "overlapping_names": [],
+      "selected_names_containing_a_fixed_name": []
+    },
+    "C": {
+      "prefix": "OP030C__",
+      "selection_count": 180,
+      "fixed_count": 76,
+      "mapped_differs_from_naive": true,
+      "overlap_naive": 0,
+      "overlap_mapped": 0,
+      "overlapping_names": [],
+      "selected_names_containing_a_fixed_name": []
+    }
+  },
+  "what_this_does_not_give": [
+    "that no duplicated object occupies a fixed object's space: this compares names, not geometry",
+    "anything about the scene; it reads committed files only",
+    "a check on any prefix spelling this script does not know: the loose comparison is a guard, not a proof"
+  ],
+  "formal_physical_validity_verdict": null
+}
