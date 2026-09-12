@@ -1,33 +1,35 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 946 662" width="946" role="img" aria-label="OP030-A の平面図。供給パレットの 20 スロットのうち製品 2 個がセル中心より工具腕側のスロット 5・6 に置かれているため、拾う腕を連れてくるのにヨークを 180° 旋回している。鏡映位置のスロット 9・8 に置けば旋回は要らない。" style="max-width:100%;height:auto">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 946 662" width="946" height="662" color="#16181d" font-family="IPAGothic, Noto Sans JP, Hiragino Sans, sans-serif" role="img" aria-label="OP030-A の平面図。供給パレットの 20 スロットのうち製品 2 個がセル中心より工具腕側のスロット 5・6 に置かれているため、拾う腕を連れてくるのにヨークを 180° 旋回している。鏡映位置のスロット 9・8 に置けば旋回は要らない。">
 <defs><marker id="tip" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#4f7fd9"/></marker></defs>
+<rect width="946" height="662" fill="#ffffff"/>
 <text x="60" y="26" font-size="15" font-weight="600">① 現状 — 部品はスロット 5・6（工具腕の側）。だから旋回する</text>
-<rect x="95.2" y="67.0" width="134.4" height="182.0" fill="none" stroke="currentColor" stroke-width="1" opacity="0.45" rx="3"/>
-<rect x="105.0" y="218.2" width="14" height="14" rx="2" fill="none" stroke="currentColor" stroke-width="1" opacity="0.35"/>
-<rect x="105.0" y="184.6" width="14" height="14" rx="2" fill="none" stroke="currentColor" stroke-width="1" opacity="0.35"/>
-<rect x="105.0" y="151.0" width="14" height="14" rx="2" fill="none" stroke="currentColor" stroke-width="1" opacity="0.35"/>
-<rect x="105.0" y="117.4" width="14" height="14" rx="2" fill="none" stroke="currentColor" stroke-width="1" opacity="0.35"/>
-<rect x="105.0" y="83.8" width="14" height="14" rx="2" fill="none" stroke="currentColor" stroke-width="1" opacity="0.35"/>
-<rect x="138.6" y="218.2" width="14" height="14" rx="2" fill="#d94f4f" stroke="currentColor" stroke-width="1" opacity="1.0"/>
-<text x="145.6" y="213.2" font-size="11" text-anchor="middle" fill="#d94f4f" font-weight="600">T01・スロット5</text>
-<rect x="138.6" y="184.6" width="14" height="14" rx="2" fill="#d94f4f" stroke="currentColor" stroke-width="1" opacity="1.0"/>
-<text x="145.6" y="179.6" font-size="11" text-anchor="middle" fill="#d94f4f" font-weight="600">T02・スロット6</text>
-<rect x="138.6" y="151.0" width="14" height="14" rx="2" fill="none" stroke="currentColor" stroke-width="1" opacity="0.35"/>
-<rect x="138.6" y="117.4" width="14" height="14" rx="2" fill="none" stroke="currentColor" stroke-width="1" opacity="0.35"/>
-<rect x="138.6" y="83.8" width="14" height="14" rx="2" fill="none" stroke="currentColor" stroke-width="1" opacity="0.35"/>
-<rect x="172.2" y="218.2" width="14" height="14" rx="2" fill="none" stroke="currentColor" stroke-width="1" opacity="0.35"/>
-<rect x="172.2" y="184.6" width="14" height="14" rx="2" fill="none" stroke="currentColor" stroke-width="1" opacity="0.35"/>
-<rect x="172.2" y="151.0" width="14" height="14" rx="2" fill="none" stroke="currentColor" stroke-width="1" opacity="0.35"/>
-<rect x="172.2" y="117.4" width="14" height="14" rx="2" fill="none" stroke="currentColor" stroke-width="1" opacity="0.35"/>
-<rect x="172.2" y="83.8" width="14" height="14" rx="2" fill="none" stroke="currentColor" stroke-width="1" opacity="0.35"/>
-<rect x="205.8" y="218.2" width="14" height="14" rx="2" fill="none" stroke="currentColor" stroke-width="1" opacity="0.35"/>
-<rect x="205.8" y="184.6" width="14" height="14" rx="2" fill="none" stroke="currentColor" stroke-width="1" opacity="0.35"/>
-<rect x="205.8" y="151.0" width="14" height="14" rx="2" fill="none" stroke="currentColor" stroke-width="1" opacity="0.35"/>
-<rect x="205.8" y="117.4" width="14" height="14" rx="2" fill="none" stroke="currentColor" stroke-width="1" opacity="0.35"/>
-<rect x="205.8" y="83.8" width="14" height="14" rx="2" fill="none" stroke="currentColor" stroke-width="1" opacity="0.35"/>
+<rect x="95.2" y="67.0" width="134.4" height="182.0" fill="none" stroke="#16181d" stroke-width="1" opacity="0.45" rx="3"/>
+<rect x="105.0" y="218.2" width="14" height="14" rx="2" fill="none" stroke="#16181d" stroke-width="1" opacity="0.35"/>
+<rect x="105.0" y="184.6" width="14" height="14" rx="2" fill="none" stroke="#16181d" stroke-width="1" opacity="0.35"/>
+<rect x="105.0" y="151.0" width="14" height="14" rx="2" fill="none" stroke="#16181d" stroke-width="1" opacity="0.35"/>
+<rect x="105.0" y="117.4" width="14" height="14" rx="2" fill="none" stroke="#16181d" stroke-width="1" opacity="0.35"/>
+<rect x="105.0" y="83.8" width="14" height="14" rx="2" fill="none" stroke="#16181d" stroke-width="1" opacity="0.35"/>
+<rect x="138.6" y="218.2" width="14" height="14" rx="2" fill="#c0392b" stroke="#16181d" stroke-width="1" opacity="1.0"/>
+<text x="145.6" y="213.2" font-size="11" text-anchor="middle" fill="#c0392b" font-weight="600">T01・スロット5</text>
+<rect x="138.6" y="184.6" width="14" height="14" rx="2" fill="#c0392b" stroke="#16181d" stroke-width="1" opacity="1.0"/>
+<text x="145.6" y="179.6" font-size="11" text-anchor="middle" fill="#c0392b" font-weight="600">T02・スロット6</text>
+<rect x="138.6" y="151.0" width="14" height="14" rx="2" fill="none" stroke="#16181d" stroke-width="1" opacity="0.35"/>
+<rect x="138.6" y="117.4" width="14" height="14" rx="2" fill="none" stroke="#16181d" stroke-width="1" opacity="0.35"/>
+<rect x="138.6" y="83.8" width="14" height="14" rx="2" fill="none" stroke="#16181d" stroke-width="1" opacity="0.35"/>
+<rect x="172.2" y="218.2" width="14" height="14" rx="2" fill="none" stroke="#16181d" stroke-width="1" opacity="0.35"/>
+<rect x="172.2" y="184.6" width="14" height="14" rx="2" fill="none" stroke="#16181d" stroke-width="1" opacity="0.35"/>
+<rect x="172.2" y="151.0" width="14" height="14" rx="2" fill="none" stroke="#16181d" stroke-width="1" opacity="0.35"/>
+<rect x="172.2" y="117.4" width="14" height="14" rx="2" fill="none" stroke="#16181d" stroke-width="1" opacity="0.35"/>
+<rect x="172.2" y="83.8" width="14" height="14" rx="2" fill="none" stroke="#16181d" stroke-width="1" opacity="0.35"/>
+<rect x="205.8" y="218.2" width="14" height="14" rx="2" fill="none" stroke="#16181d" stroke-width="1" opacity="0.35"/>
+<rect x="205.8" y="184.6" width="14" height="14" rx="2" fill="none" stroke="#16181d" stroke-width="1" opacity="0.35"/>
+<rect x="205.8" y="151.0" width="14" height="14" rx="2" fill="none" stroke="#16181d" stroke-width="1" opacity="0.35"/>
+<rect x="205.8" y="117.4" width="14" height="14" rx="2" fill="none" stroke="#16181d" stroke-width="1" opacity="0.35"/>
+<rect x="205.8" y="83.8" width="14" height="14" rx="2" fill="none" stroke="#16181d" stroke-width="1" opacity="0.35"/>
 <text x="162.4" y="264.0" font-size="11" text-anchor="middle" opacity="0.7">供給パレット 20 スロット・120 mm ピッチ</text>
-<line x1="56" y1="158.0" x2="866" y2="158.0" stroke="currentColor" stroke-width="1" stroke-dasharray="7 5" opacity="0.55"/>
-<text x="872" y="162.0" font-size="11" opacity="0.75">セル中心 Y=-1.70</text>
-<rect x="427.1" y="69.6" width="118.9" height="176.8" fill="none" stroke="currentColor" stroke-width="1" opacity="0.4" rx="3"/>
+<line x1="56" y1="158.0" x2="866" y2="158.0" stroke="#16181d" stroke-width="1" stroke-dasharray="7 5" opacity="0.55"/>
+<text x="52" y="152.0" font-size="11" text-anchor="end" opacity="0.8">セル中心</text>
+<text x="52" y="166.0" font-size="11" text-anchor="end" opacity="0.8">Y=-1.70</text>
+<rect x="427.1" y="69.6" width="118.9" height="176.8" fill="none" stroke="#16181d" stroke-width="1" opacity="0.4" rx="3"/>
 <text x="476.0" y="261.4" font-size="11" text-anchor="middle" opacity="0.7">支柱（1 セル 1 本）</text>
 <path d="M 476.0,92.8 C 384.0,92.8 384.0,223.2 476.0,223.2" fill="none" stroke="#4f7fd9" stroke-width="1.6" marker-end="url(#tip)"/>
 <circle cx="476.0" cy="92.8" r="5" fill="none" stroke="#4f7fd9" stroke-width="1.4" stroke-dasharray="3 3"/>
@@ -35,70 +37,71 @@
 <circle cx="476.0" cy="223.2" r="5" fill="none" stroke="#4f7fd9" stroke-width="1.4" stroke-dasharray="3 3"/>
 <text x="380.0" y="150.0" font-size="12" text-anchor="end" fill="#4f7fd9" font-weight="600">ヨーク旋回 180°</text>
 <text x="380.0" y="167.0" font-size="11" text-anchor="end" fill="#4f7fd9">2 本とも動く・6.0 s ×2</text>
-<circle cx="476.0" cy="158.0" r="3.5" fill="currentColor"/>
-<circle cx="476.0" cy="223.2" r="7" fill="none" stroke="currentColor" stroke-width="2"/>
+<circle cx="476.0" cy="158.0" r="3.5" fill="#16181d"/>
+<circle cx="476.0" cy="223.2" r="7" fill="none" stroke="#16181d" stroke-width="2"/>
 <text x="489.0" y="227.2" font-size="12">拾う腕</text>
-<circle cx="476.0" cy="92.8" r="7" fill="none" stroke="currentColor" stroke-width="2"/>
+<circle cx="476.0" cy="92.8" r="7" fill="none" stroke="#16181d" stroke-width="2"/>
 <text x="489.0" y="96.8" font-size="12">工具腕（M4）</text>
-<line x1="476.0" y1="223.2" x2="240.8" y2="225.2" stroke="#d94f4f" stroke-width="1.5" stroke-dasharray="5 4"/>
-<circle cx="240.8" cy="225.2" r="5" fill="none" stroke="#d94f4f" stroke-width="1.6"/>
-<text x="358.4" y="215.2" font-size="12" text-anchor="middle" fill="#d94f4f" font-weight="600">1.000 m</text>
-<line x1="476.0" y1="223.2" x2="240.8" y2="191.6" stroke="#d94f4f" stroke-width="1.5" stroke-dasharray="5 4"/>
-<circle cx="240.8" cy="191.6" r="5" fill="none" stroke="#d94f4f" stroke-width="1.6"/>
+<line x1="476.0" y1="223.2" x2="240.8" y2="225.2" stroke="#c0392b" stroke-width="1.5" stroke-dasharray="5 4"/>
+<circle cx="240.8" cy="225.2" r="5" fill="none" stroke="#c0392b" stroke-width="1.6"/>
+<text x="358.4" y="215.2" font-size="12" text-anchor="middle" fill="#c0392b" font-weight="600">1.000 m</text>
+<line x1="476.0" y1="223.2" x2="240.8" y2="191.6" stroke="#c0392b" stroke-width="1.5" stroke-dasharray="5 4"/>
+<circle cx="240.8" cy="191.6" r="5" fill="none" stroke="#c0392b" stroke-width="1.6"/>
 <text x="207.2" y="279.0" font-size="11" text-anchor="middle" opacity="0.7">↑ 引出し +0.34 m 後の位置</text>
-<circle cx="772.8" cy="117.4" r="4" fill="currentColor" opacity="0.7"/>
-<circle cx="683.2" cy="117.4" r="4" fill="currentColor" opacity="0.7"/>
-<line x1="476.0" y1="92.8" x2="772.8" y2="117.4" stroke="currentColor" stroke-width="1.2" opacity="0.5"/>
+<circle cx="772.8" cy="117.4" r="4" fill="#16181d" opacity="0.7"/>
+<circle cx="683.2" cy="117.4" r="4" fill="#16181d" opacity="0.7"/>
+<line x1="476.0" y1="92.8" x2="772.8" y2="117.4" stroke="#16181d" stroke-width="1.2" opacity="0.5"/>
 <text x="782.8" y="111.4" font-size="12" font-weight="600">遠い座 1.244 m</text>
 <text x="782.8" y="128.4" font-size="11" opacity="0.75">すでに使っている距離</text>
-<line x1="728.0" y1="40" x2="728.0" y2="290.0" stroke="currentColor" stroke-width="1" stroke-dasharray="3 4" opacity="0.35"/>
+<line x1="728.0" y1="40" x2="728.0" y2="290.0" stroke="#16181d" stroke-width="1" stroke-dasharray="3 4" opacity="0.35"/>
 <text x="728.0" y="304.0" font-size="11" text-anchor="middle" opacity="0.7">製品 X=0</text>
 <text x="60" y="370" font-size="15" font-weight="600">② 案 — 部品を鏡映スロット 9・8（拾う腕の側）へ。旋回しない</text>
-<rect x="95.2" y="411.0" width="134.4" height="182.0" fill="none" stroke="currentColor" stroke-width="1" opacity="0.45" rx="3"/>
-<rect x="105.0" y="562.2" width="14" height="14" rx="2" fill="none" stroke="currentColor" stroke-width="1" opacity="0.35"/>
-<rect x="105.0" y="528.6" width="14" height="14" rx="2" fill="none" stroke="currentColor" stroke-width="1" opacity="0.35"/>
-<rect x="105.0" y="495.0" width="14" height="14" rx="2" fill="none" stroke="currentColor" stroke-width="1" opacity="0.35"/>
-<rect x="105.0" y="461.4" width="14" height="14" rx="2" fill="none" stroke="currentColor" stroke-width="1" opacity="0.35"/>
-<rect x="105.0" y="427.8" width="14" height="14" rx="2" fill="none" stroke="currentColor" stroke-width="1" opacity="0.35"/>
-<rect x="138.6" y="562.2" width="14" height="14" rx="2" fill="none" stroke="currentColor" stroke-width="1" opacity="0.35"/>
-<rect x="138.6" y="528.6" width="14" height="14" rx="2" fill="none" stroke="currentColor" stroke-width="1" opacity="0.35"/>
-<rect x="138.6" y="495.0" width="14" height="14" rx="2" fill="none" stroke="currentColor" stroke-width="1" opacity="0.35"/>
-<rect x="138.6" y="461.4" width="14" height="14" rx="2" fill="#d94f4f" stroke="currentColor" stroke-width="1" opacity="1.0"/>
-<text x="145.6" y="456.4" font-size="11" text-anchor="middle" fill="#d94f4f" font-weight="600">T02・スロット8</text>
-<rect x="138.6" y="427.8" width="14" height="14" rx="2" fill="#d94f4f" stroke="currentColor" stroke-width="1" opacity="1.0"/>
-<text x="145.6" y="422.8" font-size="11" text-anchor="middle" fill="#d94f4f" font-weight="600">T01・スロット9</text>
-<rect x="172.2" y="562.2" width="14" height="14" rx="2" fill="none" stroke="currentColor" stroke-width="1" opacity="0.35"/>
-<rect x="172.2" y="528.6" width="14" height="14" rx="2" fill="none" stroke="currentColor" stroke-width="1" opacity="0.35"/>
-<rect x="172.2" y="495.0" width="14" height="14" rx="2" fill="none" stroke="currentColor" stroke-width="1" opacity="0.35"/>
-<rect x="172.2" y="461.4" width="14" height="14" rx="2" fill="none" stroke="currentColor" stroke-width="1" opacity="0.35"/>
-<rect x="172.2" y="427.8" width="14" height="14" rx="2" fill="none" stroke="currentColor" stroke-width="1" opacity="0.35"/>
-<rect x="205.8" y="562.2" width="14" height="14" rx="2" fill="none" stroke="currentColor" stroke-width="1" opacity="0.35"/>
-<rect x="205.8" y="528.6" width="14" height="14" rx="2" fill="none" stroke="currentColor" stroke-width="1" opacity="0.35"/>
-<rect x="205.8" y="495.0" width="14" height="14" rx="2" fill="none" stroke="currentColor" stroke-width="1" opacity="0.35"/>
-<rect x="205.8" y="461.4" width="14" height="14" rx="2" fill="none" stroke="currentColor" stroke-width="1" opacity="0.35"/>
-<rect x="205.8" y="427.8" width="14" height="14" rx="2" fill="none" stroke="currentColor" stroke-width="1" opacity="0.35"/>
+<rect x="95.2" y="411.0" width="134.4" height="182.0" fill="none" stroke="#16181d" stroke-width="1" opacity="0.45" rx="3"/>
+<rect x="105.0" y="562.2" width="14" height="14" rx="2" fill="none" stroke="#16181d" stroke-width="1" opacity="0.35"/>
+<rect x="105.0" y="528.6" width="14" height="14" rx="2" fill="none" stroke="#16181d" stroke-width="1" opacity="0.35"/>
+<rect x="105.0" y="495.0" width="14" height="14" rx="2" fill="none" stroke="#16181d" stroke-width="1" opacity="0.35"/>
+<rect x="105.0" y="461.4" width="14" height="14" rx="2" fill="none" stroke="#16181d" stroke-width="1" opacity="0.35"/>
+<rect x="105.0" y="427.8" width="14" height="14" rx="2" fill="none" stroke="#16181d" stroke-width="1" opacity="0.35"/>
+<rect x="138.6" y="562.2" width="14" height="14" rx="2" fill="none" stroke="#16181d" stroke-width="1" opacity="0.35"/>
+<rect x="138.6" y="528.6" width="14" height="14" rx="2" fill="none" stroke="#16181d" stroke-width="1" opacity="0.35"/>
+<rect x="138.6" y="495.0" width="14" height="14" rx="2" fill="none" stroke="#16181d" stroke-width="1" opacity="0.35"/>
+<rect x="138.6" y="461.4" width="14" height="14" rx="2" fill="#c0392b" stroke="#16181d" stroke-width="1" opacity="1.0"/>
+<text x="145.6" y="456.4" font-size="11" text-anchor="middle" fill="#c0392b" font-weight="600">T02・スロット8</text>
+<rect x="138.6" y="427.8" width="14" height="14" rx="2" fill="#c0392b" stroke="#16181d" stroke-width="1" opacity="1.0"/>
+<text x="145.6" y="422.8" font-size="11" text-anchor="middle" fill="#c0392b" font-weight="600">T01・スロット9</text>
+<rect x="172.2" y="562.2" width="14" height="14" rx="2" fill="none" stroke="#16181d" stroke-width="1" opacity="0.35"/>
+<rect x="172.2" y="528.6" width="14" height="14" rx="2" fill="none" stroke="#16181d" stroke-width="1" opacity="0.35"/>
+<rect x="172.2" y="495.0" width="14" height="14" rx="2" fill="none" stroke="#16181d" stroke-width="1" opacity="0.35"/>
+<rect x="172.2" y="461.4" width="14" height="14" rx="2" fill="none" stroke="#16181d" stroke-width="1" opacity="0.35"/>
+<rect x="172.2" y="427.8" width="14" height="14" rx="2" fill="none" stroke="#16181d" stroke-width="1" opacity="0.35"/>
+<rect x="205.8" y="562.2" width="14" height="14" rx="2" fill="none" stroke="#16181d" stroke-width="1" opacity="0.35"/>
+<rect x="205.8" y="528.6" width="14" height="14" rx="2" fill="none" stroke="#16181d" stroke-width="1" opacity="0.35"/>
+<rect x="205.8" y="495.0" width="14" height="14" rx="2" fill="none" stroke="#16181d" stroke-width="1" opacity="0.35"/>
+<rect x="205.8" y="461.4" width="14" height="14" rx="2" fill="none" stroke="#16181d" stroke-width="1" opacity="0.35"/>
+<rect x="205.8" y="427.8" width="14" height="14" rx="2" fill="none" stroke="#16181d" stroke-width="1" opacity="0.35"/>
 <text x="162.4" y="608.0" font-size="11" text-anchor="middle" opacity="0.7">供給パレット 20 スロット・120 mm ピッチ</text>
-<line x1="56" y1="502.0" x2="866" y2="502.0" stroke="currentColor" stroke-width="1" stroke-dasharray="7 5" opacity="0.55"/>
-<text x="872" y="506.0" font-size="11" opacity="0.75">セル中心 Y=-1.70</text>
-<rect x="427.1" y="413.6" width="118.9" height="176.8" fill="none" stroke="currentColor" stroke-width="1" opacity="0.4" rx="3"/>
+<line x1="56" y1="502.0" x2="866" y2="502.0" stroke="#16181d" stroke-width="1" stroke-dasharray="7 5" opacity="0.55"/>
+<text x="52" y="496.0" font-size="11" text-anchor="end" opacity="0.8">セル中心</text>
+<text x="52" y="510.0" font-size="11" text-anchor="end" opacity="0.8">Y=-1.70</text>
+<rect x="427.1" y="413.6" width="118.9" height="176.8" fill="none" stroke="#16181d" stroke-width="1" opacity="0.4" rx="3"/>
 <text x="476.0" y="605.4" font-size="11" text-anchor="middle" opacity="0.7">支柱（1 セル 1 本）</text>
-<circle cx="476.0" cy="502.0" r="3.5" fill="currentColor"/>
-<circle cx="476.0" cy="436.8" r="7" fill="none" stroke="currentColor" stroke-width="2"/>
+<circle cx="476.0" cy="502.0" r="3.5" fill="#16181d"/>
+<circle cx="476.0" cy="436.8" r="7" fill="none" stroke="#16181d" stroke-width="2"/>
 <text x="489.0" y="440.8" font-size="12">拾う腕</text>
-<circle cx="476.0" cy="567.2" r="7" fill="none" stroke="currentColor" stroke-width="2"/>
+<circle cx="476.0" cy="567.2" r="7" fill="none" stroke="#16181d" stroke-width="2"/>
 <text x="489.0" y="571.2" font-size="12">工具腕（M4）</text>
-<line x1="476.0" y1="436.8" x2="240.8" y2="434.8" stroke="#d94f4f" stroke-width="1.5" stroke-dasharray="5 4"/>
-<circle cx="240.8" cy="434.8" r="5" fill="none" stroke="#d94f4f" stroke-width="1.6"/>
-<text x="358.4" y="424.8" font-size="12" text-anchor="middle" fill="#d94f4f" font-weight="600">1.000 m</text>
-<line x1="476.0" y1="436.8" x2="240.8" y2="468.4" stroke="#d94f4f" stroke-width="1.5" stroke-dasharray="5 4"/>
-<circle cx="240.8" cy="468.4" r="5" fill="none" stroke="#d94f4f" stroke-width="1.6"/>
+<line x1="476.0" y1="436.8" x2="240.8" y2="434.8" stroke="#c0392b" stroke-width="1.5" stroke-dasharray="5 4"/>
+<circle cx="240.8" cy="434.8" r="5" fill="none" stroke="#c0392b" stroke-width="1.6"/>
+<text x="358.4" y="424.8" font-size="12" text-anchor="middle" fill="#c0392b" font-weight="600">1.000 m</text>
+<line x1="476.0" y1="436.8" x2="240.8" y2="468.4" stroke="#c0392b" stroke-width="1.5" stroke-dasharray="5 4"/>
+<circle cx="240.8" cy="468.4" r="5" fill="none" stroke="#c0392b" stroke-width="1.6"/>
 <text x="207.2" y="623.0" font-size="11" text-anchor="middle" opacity="0.7">↑ 引出し +0.34 m 後の位置</text>
-<circle cx="772.8" cy="461.4" r="4" fill="currentColor" opacity="0.7"/>
-<circle cx="683.2" cy="461.4" r="4" fill="currentColor" opacity="0.7"/>
-<line x1="476.0" y1="436.8" x2="772.8" y2="461.4" stroke="currentColor" stroke-width="1.2" opacity="0.5"/>
+<circle cx="772.8" cy="461.4" r="4" fill="#16181d" opacity="0.7"/>
+<circle cx="683.2" cy="461.4" r="4" fill="#16181d" opacity="0.7"/>
+<line x1="476.0" y1="436.8" x2="772.8" y2="461.4" stroke="#16181d" stroke-width="1.2" opacity="0.5"/>
 <text x="782.8" y="455.4" font-size="12" font-weight="600">遠い座 1.244 m</text>
 <text x="782.8" y="472.4" font-size="11" opacity="0.75">すでに使っている距離</text>
-<line x1="728.0" y1="384" x2="728.0" y2="634.0" stroke="currentColor" stroke-width="1" stroke-dasharray="3 4" opacity="0.35"/>
+<line x1="728.0" y1="384" x2="728.0" y2="634.0" stroke="#16181d" stroke-width="1" stroke-dasharray="3 4" opacity="0.35"/>
 <text x="728.0" y="648.0" font-size="11" text-anchor="middle" opacity="0.7">製品 X=0</text>
 <text x="60" y="336" font-size="11" opacity="0.75">旋回 6.0s ×4 = A バンク 238.8s の9.6%</text>
 </svg>

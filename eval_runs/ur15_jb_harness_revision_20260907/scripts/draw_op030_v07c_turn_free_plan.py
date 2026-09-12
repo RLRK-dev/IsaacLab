@@ -34,8 +34,10 @@ WIDE, HIGH = 2.70, 0.85
 PANEL_W = LEFT + int(WIDE * SCALE) + RIGHT
 PANEL_H = TOP + int(HIGH * SCALE) + BOTTOM
 GAP = 26
-# One hue for the parts and the reach to them, one for the turn. Both read on either ground.
-PART = "#d94f4f"
+# An engineering drawing on a white ground: explicit ink rather than currentColor, which a
+# standalone renderer has nothing to resolve against.
+INK = "#16181d"
+PART = "#c0392b"
 TURN = "#4f7fd9"
 
 
@@ -65,7 +67,7 @@ def panel(top: float, title: str, occupied: dict, turning: bool, data: dict, col
     deck_x0, deck_x1 = sx(slot_x0 - 0.06), sx(slot_x0 + 3 * slot_dx + 0.06)
     out.append(
         f'<rect x="{deck_x0:.1f}" y="{sy(deck_high, top):.1f}" width="{deck_x1 - deck_x0:.1f}"'
-        f' height="{(deck_high - deck_low) * SCALE:.1f}" fill="none" stroke="currentColor"'
+        f' height="{(deck_high - deck_low) * SCALE:.1f}" fill="none" stroke="{INK}"'
         ' stroke-width="1" opacity="0.45" rx="3"/>'
     )
     for index in range(20):
@@ -75,7 +77,7 @@ def panel(top: float, title: str, occupied: dict, turning: bool, data: dict, col
         fill = PART if held else "none"
         out.append(
             f'<rect x="{sx(x) - 7:.1f}" y="{sy(y, top) - 7:.1f}" width="14" height="14" rx="2"'
-            f' fill="{fill}" stroke="currentColor" stroke-width="1"'
+            f' fill="{fill}" stroke="{INK}" stroke-width="1"'
             f' opacity="{1.0 if held else 0.35}"/>'
         )
         if held:
@@ -91,12 +93,16 @@ def panel(top: float, title: str, occupied: dict, turning: bool, data: dict, col
     # The centre line every claim in the section is about.
     out.append(
         f'<line x1="{LEFT - 14}" y1="{sy(centre_y, top):.1f}" x2="{PANEL_W - RIGHT + 40}"'
-        f' y2="{sy(centre_y, top):.1f}" stroke="currentColor" stroke-width="1"'
+        f' y2="{sy(centre_y, top):.1f}" stroke="{INK}" stroke-width="1"'
         ' stroke-dasharray="7 5" opacity="0.55"/>'
     )
     out.append(
-        f'<text x="{PANEL_W - RIGHT + 46}" y="{sy(centre_y, top) + 4:.1f}" font-size="11"'
-        f' opacity="0.75">セル中心 Y={centre_y:.2f}</text>'
+        f'<text x="{LEFT - 18}" y="{sy(centre_y, top) - 6:.1f}" font-size="11" text-anchor="end"'
+        f' opacity="0.8">セル中心</text>'
+    )
+    out.append(
+        f'<text x="{LEFT - 18}" y="{sy(centre_y, top) + 8:.1f}" font-size="11" text-anchor="end"'
+        f' opacity="0.8">Y={centre_y:.2f}</text>'
     )
 
     # The column, and the two shoulders standing on it.
@@ -104,7 +110,7 @@ def panel(top: float, title: str, occupied: dict, turning: bool, data: dict, col
         f'<rect x="{sx(column["low_m"][0]):.1f}" y="{sy(column["high_m"][1], top):.1f}"'
         f' width="{(column["high_m"][0] - column["low_m"][0]) * SCALE:.1f}"'
         f' height="{(column["high_m"][1] - column["low_m"][1]) * SCALE:.1f}" fill="none"'
-        ' stroke="currentColor" stroke-width="1" opacity="0.4" rx="3"/>'
+        f' stroke="{INK}" stroke-width="1" opacity="0.4" rx="3"/>'
     )
     out.append(
         f'<text x="{sx(centre_x):.1f}" y="{sy(column["low_m"][1], top) + 15:.1f}" font-size="11"'
@@ -133,11 +139,11 @@ def panel(top: float, title: str, occupied: dict, turning: bool, data: dict, col
             f'<text x="{sx(centre_x) - 96:.1f}" y="{sy(centre_y, top) + 9:.1f}" font-size="11"'
             f' text-anchor="end" fill="{TURN}">2 本とも動く・6.0 s ×2</text>'
         )
-    out.append(f'<circle cx="{sx(centre_x):.1f}" cy="{sy(centre_y, top):.1f}" r="3.5" fill="currentColor"/>')
+    out.append(f'<circle cx="{sx(centre_x):.1f}" cy="{sy(centre_y, top):.1f}" r="3.5" fill="{INK}"/>')
     for label, point in (("拾う腕", picking), ("工具腕（M4）", tooled)):
         out.append(
             f'<circle cx="{sx(point[0]):.1f}" cy="{sy(point[1], top):.1f}" r="7" fill="none"'
-            ' stroke="currentColor" stroke-width="2"/>'
+            f' stroke="{INK}" stroke-width="2"/>'
         )
         out.append(f'<text x="{sx(point[0]) + 13:.1f}" y="{sy(point[1], top) + 4:.1f}" font-size="12">{label}</text>')
 
@@ -169,14 +175,12 @@ def panel(top: float, title: str, occupied: dict, turning: bool, data: dict, col
     # it has turned back by then -- so this is always measured from the un-turned shoulder.
     seating = shoulders["right"]
     for name, seat in geometry["seats"].items():
-        out.append(
-            f'<circle cx="{sx(seat[0]):.1f}" cy="{sy(seat[1], top):.1f}" r="4" fill="currentColor" opacity="0.7"/>'
-        )
+        out.append(f'<circle cx="{sx(seat[0]):.1f}" cy="{sy(seat[1], top):.1f}" r="4" fill="{INK}" opacity="0.7"/>')
     far = max(geometry["seats"].values(), key=lambda seat: seat[0])
     far_reach = ((seating[0] - far[0]) ** 2 + (seating[1] - far[1]) ** 2 + (seating[2] - far[2]) ** 2) ** 0.5
     out.append(
         f'<line x1="{sx(seating[0]):.1f}" y1="{sy(seating[1], top):.1f}" x2="{sx(far[0]):.1f}"'
-        f' y2="{sy(far[1], top):.1f}" stroke="currentColor" stroke-width="1.2" opacity="0.5"/>'
+        f' y2="{sy(far[1], top):.1f}" stroke="{INK}" stroke-width="1.2" opacity="0.5"/>'
     )
     out.append(
         f'<text x="{sx(far[0]) + 10:.1f}" y="{sy(far[1], top) - 6:.1f}" font-size="12"'
@@ -188,7 +192,7 @@ def panel(top: float, title: str, occupied: dict, turning: bool, data: dict, col
     )
     out.append(
         f'<line x1="{sx(0.0):.1f}" y1="{top + TOP - 6}" x2="{sx(0.0):.1f}" y2="{top + TOP + HIGH * SCALE + 6:.1f}"'
-        ' stroke="currentColor" stroke-width="1" stroke-dasharray="3 4" opacity="0.35"/>'
+        f' stroke="{INK}" stroke-width="1" stroke-dasharray="3 4" opacity="0.35"/>'
     )
     out.append(
         f'<text x="{sx(0.0):.1f}" y="{top + TOP + HIGH * SCALE + 20:.1f}" font-size="11"'
@@ -206,14 +210,17 @@ def main() -> int:
 
     height = PANEL_H * 2 + GAP
     parts = [
-        f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {PANEL_W} {height}" width="{PANEL_W}"'
+        f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {PANEL_W} {height}"'
+        f' width="{PANEL_W}" height="{height}"'
+        ' color="#16181d" font-family="IPAGothic, Noto Sans JP, Hiragino Sans, sans-serif"'
         f' role="img" aria-label="OP030-A の平面図。供給パレットの 20 スロットのうち製品 2 個が'
         "セル中心より工具腕側のスロット 5・6 に置かれているため、拾う腕を連れてくるのに"
         'ヨークを 180° 旋回している。鏡映位置のスロット 9・8 に置けば旋回は要らない。"'
-        ' style="max-width:100%;height:auto">',
+        ">",
         '<defs><marker id="tip" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6"'
         f' orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="{TURN}"/></marker></defs>',
     ]
+    parts.append(f'<rect width="{PANEL_W}" height="{height}" fill="#ffffff"/>')
     parts += panel(0, "① 現状 — 部品はスロット 5・6（工具腕の側）。だから旋回する", held, True, data, column)
     parts += panel(
         PANEL_H + GAP,

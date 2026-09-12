@@ -1,0 +1,99 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 670" width="960" height="670" font-family="IPAGothic, Noto Sans JP, Hiragino Sans, sans-serif" role="img" aria-label="腕数 1・2・3・4 の比較。作業点は支持部 2 個が 320 mm、1 個あたりボルト 2 本が 68 mm。">
+<rect width="960" height="670" fill="#ffffff"/>
+<text x="24" y="30" font-size="17" font-weight="700" fill="#16181d">腕数の比較 — 作業点は固定：支持部 2 個 320 mm、1 個あたりボルト 2 本 68 mm</text>
+<text x="24" y="52" font-size="12" fill="#7a7f87">同時に要る腕：A 2・B 2・C 1（各工程のシーケンスから）／現行の肩ピッチ 465 mm</text>
+<rect x="20" y="70" width="440" height="280" fill="none" stroke="#7a7f87" stroke-width="1" rx="6" opacity="0.5"/>
+<text x="36" y="98" font-size="15" font-weight="700" fill="#16181d">① 単腕</text>
+<text x="36" y="120" font-size="12" fill="#16181d">A：不可。押さえながら締結できない</text>
+<text x="36" y="137" font-size="12" fill="#16181d">B：不可。ケーブル両端を同時に持てない</text>
+<text x="36" y="154" font-size="12" fill="#16181d">C：可。M6→M14 を持ち替え/2 連工具</text>
+<rect x="129.0" y="247" width="52" height="26" rx="3" fill="none" stroke="#16181d" stroke-width="1.2"/>
+<text x="155.0" y="290" font-size="11" text-anchor="middle" fill="#7a7f87">T02</text>
+<circle cx="144.0" cy="260" r="3.5" fill="#16181d"/>
+<circle cx="166.0" cy="260" r="3.5" fill="#16181d"/>
+<rect x="279.0" y="247" width="52" height="26" rx="3" fill="none" stroke="#16181d" stroke-width="1.2"/>
+<text x="305.0" y="290" font-size="11" text-anchor="middle" fill="#7a7f87">T01</text>
+<circle cx="294.0" cy="260" r="3.5" fill="#16181d"/>
+<circle cx="316.0" cy="260" r="3.5" fill="#16181d"/>
+<line x1="155.0" y1="304" x2="305.0" y2="304" stroke="#7a7f87" stroke-width="1"/>
+<text x="230.0" y="318" font-size="11" text-anchor="middle" fill="#7a7f87">320 mm</text>
+<circle cx="230.0" cy="188" r="9" fill="none" stroke="#16181d" stroke-width="2.2"/>
+<text x="230.0" y="173" font-size="11" text-anchor="middle" fill="#16181d">両用</text>
+<line x1="230.0" y1="198" x2="230.0" y2="244" stroke="#16181d" stroke-width="1.2" stroke-dasharray="4 4" opacity="0.8"/>
+<text x="36" y="336" font-size="11.5" fill="#7a7f87">A・B は治具か機構の追加が要る（制約 2 に抵触）。C のみ成立</text>
+<rect x="480" y="70" width="440" height="280" fill="none" stroke="#7a7f87" stroke-width="1" rx="6" opacity="0.5"/>
+<text x="496" y="98" font-size="15" font-weight="700" fill="#16181d">② 双腕（現行）</text>
+<text x="496" y="120" font-size="12" fill="#16181d">A：押さえ 1・締結 1</text>
+<text x="496" y="137" font-size="12" fill="#16181d">B：両端を 1 本ずつ</text>
+<text x="496" y="154" font-size="12" fill="#16181d">C：M6 と M14、直列</text>
+<rect x="589.0" y="247" width="52" height="26" rx="3" fill="none" stroke="#16181d" stroke-width="1.2"/>
+<text x="615.0" y="290" font-size="11" text-anchor="middle" fill="#7a7f87">T02</text>
+<circle cx="604.0" cy="260" r="3.5" fill="#16181d"/>
+<circle cx="626.0" cy="260" r="3.5" fill="#16181d"/>
+<rect x="739.0" y="247" width="52" height="26" rx="3" fill="none" stroke="#16181d" stroke-width="1.2"/>
+<text x="765.0" y="290" font-size="11" text-anchor="middle" fill="#7a7f87">T01</text>
+<circle cx="754.0" cy="260" r="3.5" fill="#16181d"/>
+<circle cx="776.0" cy="260" r="3.5" fill="#16181d"/>
+<line x1="615.0" y1="304" x2="765.0" y2="304" stroke="#7a7f87" stroke-width="1"/>
+<text x="690.0" y="318" font-size="11" text-anchor="middle" fill="#7a7f87">320 mm</text>
+<circle cx="765.0" cy="188" r="9" fill="none" stroke="#c0392b" stroke-width="2.2"/>
+<text x="765.0" y="173" font-size="11" text-anchor="middle" fill="#c0392b">押さえ</text>
+<line x1="765.0" y1="198" x2="765.0" y2="244" stroke="#c0392b" stroke-width="1.2" stroke-dasharray="4 4" opacity="0.8"/>
+<circle cx="796.5" cy="188" r="9" fill="none" stroke="#1f6f8b" stroke-width="2.2"/>
+<text x="796.5" y="173" font-size="11" text-anchor="middle" fill="#1f6f8b">締結</text>
+<line x1="796.5" y1="198" x2="796.5" y2="244" stroke="#1f6f8b" stroke-width="1.2" stroke-dasharray="4 4" opacity="0.8"/>
+<text x="496" y="336" font-size="11.5" fill="#7a7f87">A・B が要求する最小構成。1 個ずつ順に（T02→T01）</text>
+<rect x="20" y="370" width="440" height="280" fill="none" stroke="#7a7f87" stroke-width="1" rx="6" opacity="0.5"/>
+<text x="36" y="398" font-size="15" font-weight="700" fill="#16181d">③ 3 腕</text>
+<text x="36" y="420" font-size="12" fill="#16181d">A：押さえ 1・締結 2 → ボルト 2 本を同時</text>
+<text x="36" y="437" font-size="12" fill="#16181d">B：2 本で足り、1 本は他工程へ</text>
+<text x="36" y="454" font-size="12" fill="#16181d">C：端子 2 本を同時にできる</text>
+<rect x="129.0" y="547" width="52" height="26" rx="3" fill="none" stroke="#16181d" stroke-width="1.2"/>
+<text x="155.0" y="590" font-size="11" text-anchor="middle" fill="#7a7f87">T02</text>
+<circle cx="144.0" cy="560" r="3.5" fill="#16181d"/>
+<circle cx="166.0" cy="560" r="3.5" fill="#16181d"/>
+<rect x="279.0" y="547" width="52" height="26" rx="3" fill="none" stroke="#16181d" stroke-width="1.2"/>
+<text x="305.0" y="590" font-size="11" text-anchor="middle" fill="#7a7f87">T01</text>
+<circle cx="294.0" cy="560" r="3.5" fill="#16181d"/>
+<circle cx="316.0" cy="560" r="3.5" fill="#16181d"/>
+<line x1="155.0" y1="604" x2="305.0" y2="604" stroke="#7a7f87" stroke-width="1"/>
+<text x="230.0" y="618" font-size="11" text-anchor="middle" fill="#7a7f87">320 mm</text>
+<circle cx="288.5" cy="488" r="9" fill="none" stroke="#1f6f8b" stroke-width="2.2"/>
+<text x="288.5" y="473" font-size="11" text-anchor="middle" fill="#1f6f8b">締結</text>
+<line x1="288.5" y1="498" x2="288.5" y2="544" stroke="#1f6f8b" stroke-width="1.2" stroke-dasharray="4 4" opacity="0.8"/>
+<circle cx="326.0" cy="488" r="9" fill="none" stroke="#c0392b" stroke-width="2.2"/>
+<text x="326.0" y="473" font-size="11" text-anchor="middle" fill="#c0392b">押さえ</text>
+<line x1="326.0" y1="498" x2="326.0" y2="544" stroke="#c0392b" stroke-width="1.2" stroke-dasharray="4 4" opacity="0.8"/>
+<circle cx="354.5" cy="488" r="9" fill="none" stroke="#1f6f8b" stroke-width="2.2"/>
+<text x="354.5" y="473" font-size="11" text-anchor="middle" fill="#1f6f8b">締結</text>
+<line x1="354.5" y1="498" x2="354.5" y2="544" stroke="#1f6f8b" stroke-width="1.2" stroke-dasharray="4 4" opacity="0.8"/>
+<text x="36" y="636" font-size="11.5" fill="#7a7f87">締結 2 本が同じ支持部の 68 mm に寄る。自己干渉は未計測</text>
+<rect x="480" y="370" width="440" height="280" fill="none" stroke="#7a7f87" stroke-width="1" rx="6" opacity="0.5"/>
+<text x="496" y="398" font-size="15" font-weight="700" fill="#16181d">④ 4 腕</text>
+<text x="496" y="420" font-size="12" fill="#16181d">A：（押さえ＋締結）×2 → 支持部 2 個を同時</text>
+<text x="496" y="437" font-size="12" fill="#16181d">B：2 本使用、2 本は待機</text>
+<text x="496" y="454" font-size="12" fill="#16181d">C：M6/M14 × 2 端子を同時</text>
+<rect x="589.0" y="547" width="52" height="26" rx="3" fill="none" stroke="#16181d" stroke-width="1.2"/>
+<text x="615.0" y="590" font-size="11" text-anchor="middle" fill="#7a7f87">T02</text>
+<circle cx="604.0" cy="560" r="3.5" fill="#16181d"/>
+<circle cx="626.0" cy="560" r="3.5" fill="#16181d"/>
+<rect x="739.0" y="547" width="52" height="26" rx="3" fill="none" stroke="#16181d" stroke-width="1.2"/>
+<text x="765.0" y="590" font-size="11" text-anchor="middle" fill="#7a7f87">T01</text>
+<circle cx="754.0" cy="560" r="3.5" fill="#16181d"/>
+<circle cx="776.0" cy="560" r="3.5" fill="#16181d"/>
+<line x1="615.0" y1="604" x2="765.0" y2="604" stroke="#7a7f87" stroke-width="1"/>
+<text x="690.0" y="618" font-size="11" text-anchor="middle" fill="#7a7f87">320 mm</text>
+<circle cx="594.0" cy="488" r="9" fill="none" stroke="#c0392b" stroke-width="2.2"/>
+<text x="594.0" y="473" font-size="11" text-anchor="middle" fill="#c0392b">押さえ</text>
+<line x1="594.0" y1="498" x2="594.0" y2="544" stroke="#c0392b" stroke-width="1.2" stroke-dasharray="4 4" opacity="0.8"/>
+<circle cx="625.5" cy="488" r="9" fill="none" stroke="#1f6f8b" stroke-width="2.2"/>
+<text x="625.5" y="473" font-size="11" text-anchor="middle" fill="#1f6f8b">締結</text>
+<line x1="625.5" y1="498" x2="625.5" y2="544" stroke="#1f6f8b" stroke-width="1.2" stroke-dasharray="4 4" opacity="0.8"/>
+<circle cx="765.0" cy="488" r="9" fill="none" stroke="#c0392b" stroke-width="2.2"/>
+<text x="765.0" y="473" font-size="11" text-anchor="middle" fill="#c0392b">押さえ</text>
+<line x1="765.0" y1="498" x2="765.0" y2="544" stroke="#c0392b" stroke-width="1.2" stroke-dasharray="4 4" opacity="0.8"/>
+<circle cx="796.5" cy="488" r="9" fill="none" stroke="#1f6f8b" stroke-width="2.2"/>
+<text x="796.5" y="473" font-size="11" text-anchor="middle" fill="#1f6f8b">締結</text>
+<line x1="796.5" y1="498" x2="796.5" y2="544" stroke="#1f6f8b" stroke-width="1.2" stroke-dasharray="4 4" opacity="0.8"/>
+<text x="496" y="636" font-size="11.5" fill="#7a7f87">A の律速が半分になりうる唯一の案。肩 4 本は 465 mm の支柱に載らない</text>
+</svg>
