@@ -1,0 +1,190 @@
+{
+  "observed_at": "2026-09-12T16:26:24.432106+00:00",
+  "scope": "Every station's arm count on stated evidence, with OP040 onward no longer blank",
+  "read_from": {
+    "inputs/.../render_ur15_line.py": {
+      "path": "inputs/v02_source/inputs/v01_source/op010_base/original/render_ur15_line.py",
+      "lines": 6260
+    },
+    "audit/op030_v07c_arms_by_process.json": {
+      "observed_at": "2026-09-12T16:21:12.627258+00:00"
+    }
+  },
+  "tiers": {
+    "A": "実装。設備タグが何本積んでいるか",
+    "B": "設計意図。元生成器が何本のつもりか、そしてその理由",
+    "C": "シーケンス。実際に何をいつ保持するか。authored なものがある工程だけ"
+  },
+  "what_this_does_not_give": [
+    "tier B は映像の生成器である。その inventory 註が「設計根拠ではない」と明記している",
+    "tier B は分割前の粒度で書かれている。分割すると答えが変わりうる（OP030-C が実例）",
+    "the generator's frame-level carried flag is not used: it would make OP020 and OP030 one-handed, which tier C contradicts for both",
+    "no takt, no reach, no interference"
+  ],
+  "the_generator_states_it": {
+    "single_arm_docstring": "Test and inspection carry one head over the work, so one arm does it.\n\nThe other eight stations need two hands: they lift a part between them or\nwork opposite ends of the same product at once. Measuring and looking do\nnot, so those cells get a single UR15 on one arm of the yoke.",
+    "inspection_stations": [
+      "electrical_test",
+      "vision_inspect"
+    ],
+    "fetches_component": "CELL_OPERATIONS[cell_index] not in INSPECTION_STATIONS",
+    "note": "8 工程が両手を要る理由が、生成器自身の言葉で書かれている"
+  },
+  "stations": [
+    {
+      "station": "OP010",
+      "operation": "housing_load",
+      "style": "place",
+      "tier_a_installed_arms": 2,
+      "tier_b_intended_arms": 2,
+      "tier_b_fetches_a_component": true,
+      "tier_b_turns_away_to_collect": true,
+      "tier_a_and_b_agree": true,
+      "tier_c_sequenced": null,
+      "tier_c_needs_two": null
+    },
+    {
+      "station": "OP020",
+      "operation": "connector_insert",
+      "style": "insert",
+      "tier_a_installed_arms": 2,
+      "tier_b_intended_arms": 2,
+      "tier_b_fetches_a_component": true,
+      "tier_b_turns_away_to_collect": true,
+      "tier_a_and_b_agree": true,
+      "tier_c_sequenced": {
+        "OP020": {
+          "needs_two": true,
+          "why": "右腕がトレイの取っ手を 63/68 s 保持、左腕が作業"
+        }
+      },
+      "tier_c_needs_two": {
+        "OP020": true
+      }
+    },
+    {
+      "station": "OP030",
+      "operation": "main_route",
+      "style": "sweep",
+      "tier_a_installed_arms": 2,
+      "tier_b_intended_arms": 2,
+      "tier_b_fetches_a_component": true,
+      "tier_b_turns_away_to_collect": true,
+      "tier_a_and_b_agree": true,
+      "tier_c_sequenced": {
+        "OP030-A": {
+          "needs_two": true,
+          "why": "押さえたまま締結"
+        },
+        "OP030-B": {
+          "needs_two": true,
+          "why": "同一ケーブルの両端を保持し、旋回しながら曲げる"
+        },
+        "OP030-C": {
+          "needs_two": false,
+          "why": "M6 と M14 を別腕に載せ、端子は直列"
+        }
+      },
+      "tier_c_needs_two": {
+        "OP030-A": true,
+        "OP030-B": true,
+        "OP030-C": false
+      }
+    },
+    {
+      "station": "OP040",
+      "operation": "branch_route",
+      "style": "sweep",
+      "tier_a_installed_arms": 2,
+      "tier_b_intended_arms": 2,
+      "tier_b_fetches_a_component": true,
+      "tier_b_turns_away_to_collect": true,
+      "tier_a_and_b_agree": true,
+      "tier_c_sequenced": null,
+      "tier_c_needs_two": null
+    },
+    {
+      "station": "OP050",
+      "operation": "clip_seat",
+      "style": "press",
+      "tier_a_installed_arms": 2,
+      "tier_b_intended_arms": 2,
+      "tier_b_fetches_a_component": true,
+      "tier_b_turns_away_to_collect": true,
+      "tier_a_and_b_agree": true,
+      "tier_c_sequenced": null,
+      "tier_c_needs_two": null
+    },
+    {
+      "station": "OP060",
+      "operation": "strain_relief",
+      "style": "place",
+      "tier_a_installed_arms": 2,
+      "tier_b_intended_arms": 2,
+      "tier_b_fetches_a_component": true,
+      "tier_b_turns_away_to_collect": true,
+      "tier_a_and_b_agree": true,
+      "tier_c_sequenced": null,
+      "tier_c_needs_two": null
+    },
+    {
+      "station": "OP070",
+      "operation": "cover_place",
+      "style": "place",
+      "tier_a_installed_arms": 2,
+      "tier_b_intended_arms": 2,
+      "tier_b_fetches_a_component": true,
+      "tier_b_turns_away_to_collect": true,
+      "tier_a_and_b_agree": true,
+      "tier_c_sequenced": null,
+      "tier_c_needs_two": null
+    },
+    {
+      "station": "OP080",
+      "operation": "latch_press",
+      "style": "press",
+      "tier_a_installed_arms": 2,
+      "tier_b_intended_arms": 2,
+      "tier_b_fetches_a_component": true,
+      "tier_b_turns_away_to_collect": true,
+      "tier_a_and_b_agree": true,
+      "tier_c_sequenced": null,
+      "tier_c_needs_two": null
+    },
+    {
+      "station": "OP090",
+      "operation": "electrical_test",
+      "style": "probe",
+      "tier_a_installed_arms": 1,
+      "tier_b_intended_arms": 1,
+      "tier_b_fetches_a_component": false,
+      "tier_b_turns_away_to_collect": false,
+      "tier_a_and_b_agree": true,
+      "tier_c_sequenced": null,
+      "tier_c_needs_two": null
+    },
+    {
+      "station": "OP100",
+      "operation": "vision_inspect",
+      "style": "scan",
+      "tier_a_installed_arms": 1,
+      "tier_b_intended_arms": 1,
+      "tier_b_fetches_a_component": false,
+      "tier_b_turns_away_to_collect": false,
+      "tier_a_and_b_agree": true,
+      "tier_c_sequenced": null,
+      "tier_c_needs_two": null
+    }
+  ],
+  "every_station_now_has_evidence": true,
+  "calibration": {
+    "tier_b_agrees_with_tier_c_on_the_count": true,
+    "but_tier_b_is_written_before_the_split": true,
+    "sub_stations_that_stopped_needing_two_after_the_split": [
+      "OP030-C"
+    ],
+    "what_that_means_for_op040": "OP040 as one station is two-handed on tier B, and its old animation held one end piece in each hand with the cable stretched between them, which is OP030-B's pattern. But OP030 was also one two-handed station on tier B and became three sub-stations, one of which does not need two arms. So OP040's answer is settled only for OP040 undivided; splitting it reopens the question, and only an authored sequence closes it."
+  },
+  "checks_failed": [],
+  "formal_physical_validity_verdict": null
+}
