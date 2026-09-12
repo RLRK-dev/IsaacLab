@@ -1,0 +1,39 @@
+{
+  "observed_at": "2026-09-12T22:34:03.819303+00:00",
+  "scope": "public-source correspondence and proposed hand interfaces, no physical verdict",
+  "source_photos": [
+    {
+      "photo": "overview",
+      "file": "/home/rlrk/IsaacLab-op040/eval_runs/ur15_jb_harness_revision_20260907/references/op040_real_products_20260912/ampere_product_photo_1.jpg",
+      "url": "https://ampereev.com/wp-content/uploads/2022/05/DSC02860-1.jpg",
+      "sha256": "5724681b4bef4399f0799751a62577e48ef9b7fd3d6ed5b56d85fd95924937ad"
+    },
+    {
+      "photo": "detail",
+      "file": "/home/rlrk/IsaacLab-op040/eval_runs/ur15_jb_harness_revision_20260907/references/op040_real_products_20260912/ampere_product_photo_2.jpg",
+      "url": "https://ampereev.com/wp-content/uploads/2022/05/DSC02864.jpg",
+      "sha256": "5ae831226050fb2430894f3a0462d87c1ffa8991fad453bb8945b2c983233b2e"
+    }
+  ],
+  "current_public_pdf": {
+    "path": "/tmp/ampere_hvjb_current_20260913.pdf",
+    "sha256": "643648bcea77b4d7c37c65d073664f746f68689952da2d5ce932e3d10bd5a9e1",
+    "matches_recorded_pdf": true
+  },
+  "data_sha256": "32c09e74252ed9b1691488adc61a5f90ace22905b538f2d0b57d49f713e0e6c5",
+  "template_sha256": "cb79553f5db00e2bdf5878fd57fffdcccee60235d2e6562f6905d526fea3d338",
+  "page_sha256": "3ebbbaedfec8d137e045d51d593305d663da2062f0e8ad0727b02e8e5c1b77d2",
+  "target_ids": [
+    "A01",
+    "A02",
+    "A03",
+    "A04",
+    "B01",
+    "B02",
+    "B03"
+  ],
+  "image_regions_inside_source_bounds": true,
+  "manufacturer_part_numbers_filled": [],
+  "physical_acceptance_verdict": null,
+  "model_or_video_created": false
+}

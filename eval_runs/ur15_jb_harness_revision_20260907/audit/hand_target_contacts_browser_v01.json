@@ -1,0 +1,81 @@
+{
+  "ok": true,
+  "cases": [
+    {
+      "id": "A01",
+      "photo": "overview",
+      "regions": 1,
+      "unknown": 4,
+      "name": "主接触器の本体",
+      "image_embedded": true,
+      "panel_has_candidate": true
+    },
+    {
+      "id": "A02",
+      "photo": "overview",
+      "regions": 2,
+      "unknown": 4,
+      "name": "角形リレー群",
+      "image_embedded": true,
+      "panel_has_candidate": true
+    },
+    {
+      "id": "A03",
+      "photo": "detail",
+      "regions": 1,
+      "unknown": 4,
+      "name": "板状の剛体バスバー",
+      "image_embedded": true,
+      "panel_has_candidate": true
+    },
+    {
+      "id": "A04",
+      "photo": "overview",
+      "regions": 1,
+      "unknown": 4,
+      "name": "ヒューズ類",
+      "image_embedded": true,
+      "panel_has_candidate": true
+    },
+    {
+      "id": "B01",
+      "photo": "overview",
+      "regions": 1,
+      "unknown": 5,
+      "name": "柔軟な内部配線の被覆部",
+      "image_embedded": true,
+      "panel_has_candidate": true
+    },
+    {
+      "id": "B02",
+      "photo": "detail",
+      "regions": 1,
+      "unknown": 4,
+      "name": "丸端子付き配線の端末",
+      "image_embedded": true,
+      "panel_has_candidate": true
+    },
+    {
+      "id": "B03",
+      "photo": "detail",
+      "regions": 2,
+      "unknown": 4,
+      "name": "小型の差込接続部",
+      "image_embedded": true,
+      "panel_has_candidate": true
+    }
+  ],
+  "scope": "Seven synchronous UI selection events; photograph dimensions are checked separately; not contact/physical validation",
+  "source_page_sha256": "3ebbbaedfec8d137e045d51d593305d663da2062f0e8ad0727b02e8e5c1b77d2",
+  "source_image_sizes_checked_separately": {
+    "overview": [
+      1620,
+      1080
+    ],
+    "detail": [
+      1620,
+      1080
+    ]
+  },
+  "physical_acceptance_verdict": null
+}
