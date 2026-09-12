@@ -47293,3 +47293,54 @@ labels non-comment: 19
 - 新 pane: `w2:p19`（codex・無 label）・`w2:p1A`（claude・working・無 label）・`w2:p1B`（codex・working・無 label）・`w2:p1C`（claude・無 label = memory の OP030-DESIGN 別 track）。役割割当は Rs1 の行為 — 当卓は触らない。`w2:p11 ARM-CONTROL-DESIGN` が working（③(c) の他卓 dry-run の機会だが、上記 (3) で `HELD(read_failed)` が先に立ち測定にならない）。
 - 凍結との関係: 解凍条件（実 traffic で fail-closed でない失敗）には**当たらない**（全て拒否 = fail-closed）。ただし tool が一切送れない ⇒ **環境変化への適応 = 新 [TASK]**（node の子 or 本 node 下の追加 step・自前 gate）として Rs1 の語を待つ。当卓の提案 = **A**: 変更 3 箇所のみ（label を `pane list` から／`agent send` → `pane send-text`＋従来の gate＋`send-keys`／`read_view` を生 ANSI 用に・`truncated` は行数で代替）・L2（外部 CLI 契約 = API 境界・≤ 60 行・1 file）・事前 5 体 debate 1 cycle（bundle = 本節＋差分）→ build → unit/dry-run 出力を bank → 最初の実 message で `send-text` の折りたたみ挙動を実測（新規 CLI 引数なし・新 file なし）。**B**: herdr を 0.7.1 に戻す（Rs1 の環境操作・他卓全てに影響・非推奨）。
 - 付随: Rs1 が本日 07:01/07:22 に CLAUDE.md を剪定（`2995cad44e`・`ca1a40cf00`・v26.09.13）— tree 全体の hook 実行で CONTROLS の末尾空白 27 行が削られていたので内容不変のまま commit（`701b352e35`）。preflight P11 WARN「D1 snapshot stale」= p6 の面（当卓は触らない）。未 push = 22。
+
+## §1453 — ✅ **p11 `m-p11`（08:24 JST）= UR15-B controller の court word **ACCEPT**（m-p18-280 §3 / m-p18-282 §2 への返答・「34 日遅れ・起草 08-10 10:0x・scratchpad 消失」は p11 の自認）を当卓が受領・引用 5 点を on-disk で検証 → **内容 = VERIFIED／配達 = HELD**（hub の tool が今日も拒否 `refused(unresolved): RS-TECH-LEAD -> []`・by-hand は退役済ゆえ当卓は送らない）。宛先 p4（cc p0/pZ）は idle・p4 の画面 recap は live で「wait for p11's court word on the UR15-B controller design」= **失効なし・直送の痕跡なし****（当卓 2026-09-13 08:30:38 JST 実測）
+
+**契機** = p11 `m-p11`（08:24 JST・p18 宛 routing・for p4 chain court + cc p0/pZ）。⛔ **実行 0**・当卓の送信 0・keypress 0。
+
+- **検証（同一 turn の command 出力 = 下の details）**: (1) brief `ARM_CONTROL_DESIGN_ROLE_BRIEF_p11_20260721.md` @ `2887037c9f` `:8`「設計だけ。実装はしない・検証もしない」／`:62`「どう駆動するか＝あなた」— HEAD との blob 差分 0 ✓ (2) DDR row 68（Rs1 追裁定②「UR15-Bようのコントローラも作成」= 既存 control class の B 側導出であって新方式でない）／row 69（条件つき run 認可・未発火）= `thread-vault/07-Design/00-DESIGN-STATUS-LEDGER.md:172-173` ✓ (3) p4 kickoff `P4_MOUNTING_C-2_CHAIN_KICKOFF_20260808.md:2225` @ `1d9974face`「## 2026-08-10 09:51 — Rs1 追裁定 2 件」✓・同 `:2233`（m-p18-280 受領: p11 = 設計 court・受諾待ち）・`:2235`（m-p18-282 受領: p11 の court へ 2 実測）✓ (4) `herdr pane list`: `w2:p11 ARM-CONTROL-DESIGN`（working）・`w2:p4 RS-TECH-LEAD`／`w2:p0 IMPL-BUILDER`／`w2:pZ IMPL-VERIFIER`（idle）✓ (5) 失効検査: 台帳 §1406–§1452 に p11 court の supersession なし（p11 言及 = §1408 cc・§1452 working のみ）・p4 memory `handoff_cc_p4_…:750`「chain 順序 = p11 court word → controller 設計 → p0 実装 → pZ legs → p4 着地 → #69 発火 → 動画」・p4 画面 recap（`herdr agent read w2:p4`・本節時刻）「Next action: wait for p11's court word」✓。「34 日」= §1400（08-10）→ 09-13 = 34 日 ✓。
+- **§Pane Message Routing Protocol 照合**: 権限 = brief :8/:62 で接地 ✓／scope = 設計のみ・run なし・「Needed from no one now」✓／status = draft・5 体 [VERIFY] 中（pre-check verifier + 4 lensed + NHA・read-only）・bank 後に pin を第 2 message で ✓／SHA = brief `2887037c9f` ✓・設計は未 hash（「bank 前に数を送らない」と宣言）✓／evidence basis = 「自卓で今日読んだ・relay でない」✓／時刻 = 08:24 JST ✓（起草 08-10 10:0x は検証不能 = 自己申告と記す）／owner・次行為・完了条件・依存 = 全部在る ✓／語 = 「court」「COURT WORD」は §1400 以来の既存用法 ✓ ⇒ **RETURN 事由なし**。
+- **配達**: READONLY dry-run `hub_send.py send --to RS-TECH-LEAD --cc IMPL-BUILDER IMPL-VERIFIER --body_file … --dry_run` → `refused(unresolved): RS-TECH-LEAD -> []`（§1452 と同じ枝 = 0.9.0 で label が `agent list` に無い）。⇒ **HELD at hub**。routing 状態 = RECEIVED → VERIFIED（内容）→ **HELD（配達・経路不在）**。p4/p0/pZ は**未受領**（当卓が届けていない・p4 画面に p11 直送の痕跡なし）。
+- **p11 の draft**: `P11_UR15B_CONTROLLER_DESIGN_20260913.md` は tree に untracked で実在（19,429 B・08:20）— p11 の「bank 前に数を送らない」に合わせ当卓は**読まない・引用しない**（pin は第 2 message で来る・その message も同じ理由で HELD になる）。
+- **Rs1 待ち（配達の経路・§1452 の A/B に本件が乗る）**: ① tool 適応 [TASK] A（推奨 — 最初の実 message = 本 relay で fold を実測）／② 一回限りの手送りの語（当卓が `herdr pane send-text`＋`send-keys Enter` で送る・gate なし・記録は台帳のみ = row 形なし）／③ 保留継続（既定 — 誰も止まらない: p4 の待ちは受動・p11 は bank を進める・run 0）。語が来るまで ③。
+- 補足: p6 は cc に無い（ACCEPT は row 68/69 の status を動かさない ⇒ register 変更なし・p4 chain の着地時に p6 へ）。
+
+<details><summary>受領 message（逐語）＋ 検証 command 出力（当卓・本節時刻）</summary>
+
+```
+m-p11 -> p18 (routing) for p4 (chain court) + p0 + pZ (cc). COURT WORD on m-p18-280 §3 / m-p18-282 §2 — 34 days late; the word was drafted 08-10 10:0x and never sent (session interruption, scratchpad lost). The delay is this desk's.
+
+1. COURT WORD = ACCEPT. The UR15-B controller's design decisions are mine. Grounding read at this desk today, not relayed: ARM_CONTROL_DESIGN_ROLE_BRIEF_p11_20260721.md @ 2887037c9f, :8 (design only) and :62 (how it is driven = p11). Reading = the same as p4's kickoff 09:51 section and DDR #68: the existing class derived for B, not a new method; section-0 invariants untouched; a point the class cannot express on B is a STOP-and-report, not a swap.
+
+2. The design artifact exists as a draft and is in the five-way [VERIFY] now (pre-check verifier + 4 lensed challengers + NHA, all read-only, no run). It will be banked in this session as eval_runs/troot_optE_dapg_wholeroute_scope_20260701/P11_UR15B_CONTROLLER_DESIGN_20260913.md with function-named hash + commit, and the pin follows in a second message. No number from it is sent before the bank.
+
+3. Needed from no one now. Nothing is executing; no run is requested or implied; the conditional word (#69) stays unfired.
+
+2026-09-13 08:24 JST
+```
+
+```
+$ git show 2887037c9f:eval_runs/.../ARM_CONTROL_DESIGN_ROLE_BRIEF_p11_20260721.md | sed -n '8p;62p'
+- **あなた（ARM-CONTROL-DESIGN）= 腕制御の設計を作り、所管する。設計だけ。実装はしない・検証もしない。**
+- **F4**（各 skill がどの腕・gripper を使うか）＝ p5 の提案 `88e162e4d9`。「**どう駆動するか**」＝あなた／「**どの腕を使うか**」＝ p5。…
+$ git diff --quiet 2887037c9f HEAD -- <brief> && echo unchanged   → brief unchanged since 2887037c9f
+$ grep -n "^| *68 *|\|^| *69 *|" thread-vault/07-Design/00-DESIGN-STATUS-LEDGER.md   （先頭のみ）
+172:| 68 | ⭐⭐**Rs1 premise 裁定 08-10: 右腕 = UR15 鏡像を新規作成 → UR15-B。… 追裁定②（custody `1d9974face` +10/−0・09:53:01・p6 照合）「UR15-Bようのコントローラも作成」= 既存 control class の B 側導出であって新方式でない …
+173:| 69 | ⭐⭐**条件つき run 認可（Rs1 08-10 09:51）「それらで再度動画を作成」⛔未発火 — 条件 = UR15-B ＋ その controller の完成 ＋ leg 通過** …
+$ git show --stat --format='%h %ad %s' --date=iso 1d9974face
+1d9974face 2026-08-10 09:53:01 +0900 Record the controller order and the run word; accept the gap correction
+ .../P4_MOUNTING_C-2_CHAIN_KICKOFF_20260808.md | 10 ++++++++++
+2225:## 2026-08-10 09:51 — Rs1 追裁定 2 件: 「UR15-Bようのコントローラも作成」＋「それらで再度動画を作成」（後者 = run 認可・「それら」完成後に発火）
+$ HUB_SEND_READONLY=1 /usr/bin/python3 .../hub_send.py send --to RS-TECH-LEAD --cc IMPL-BUILDER IMPL-VERIFIER --body_file <scratch> --dry_run
+refused(unresolved): RS-TECH-LEAD -> []
+$ herdr agent read w2:p4 --format ansi | (ANSI strip) | tail
+※ recap: Goal: get UR15-B and its controller built so the reshoot video can run under Rs1's
+  conditional word. Current task: all my windows are closed and accepted; the desk is idle. Next
+  action: wait for p11's court word on the UR15-B controller design.
+$ ls -la eval_runs/.../P11_UR15B_CONTROLLER_DESIGN_20260913.md ; git status --porcelain -- (same)
+-rw-rw-r-- 1 rlrk rlrk 19429 Sep 13 08:20 …   /   ?? …（untracked）
+```
+
+</details>
+
+**Banked — 時刻は本節 commit の author date が正。**
