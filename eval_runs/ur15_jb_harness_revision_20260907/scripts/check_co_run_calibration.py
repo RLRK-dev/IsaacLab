@@ -1,3 +1,8 @@
+# Copyright (c) 2022-2026, The Isaac Lab Project Developers (https://github.com/isaac-sim/IsaacLab/blob/main/CONTRIBUTORS.md).
+# All rights reserved.
+#
+# SPDX-License-Identifier: BSD-3-Clause
+
 """Calibrate co_run against lines whose co-run length and shape are known by construction.
 
 Runs without Blender. The probe imports bpy at module scope, so bpy and the two build modules

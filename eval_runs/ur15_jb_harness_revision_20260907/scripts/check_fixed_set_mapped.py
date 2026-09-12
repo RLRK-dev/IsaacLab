@@ -1,3 +1,8 @@
+# Copyright (c) 2022-2026, The Isaac Lab Project Developers (https://github.com/isaac-sim/IsaacLab/blob/main/CONTRIBUTORS.md).
+# All rights reserved.
+#
+# SPDX-License-Identifier: BSD-3-Clause
+
 """Check each cell's duplication set against the fixed set, in the cell's own namespace.
 
 Every one of v06's 76 fixed names carries B's prefix. Comparing them to cell A's unprefixed
