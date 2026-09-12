@@ -1,0 +1,234 @@
+<!doctype html>
+<!-- Copyright (c) 2022-2026, The Isaac Lab Project Developers (https://github.com/isaac-sim/IsaacLab/blob/main/CONTRIBUTORS.md).
+All rights reserved. SPDX-License-Identifier: BSD-3-Clause -->
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>THREAD｜工程別ハンド・配置比較 v0.1</title>
+  <style>
+    :root { color-scheme: light; --ink:#142b41; --muted:#576c7e; --blue:#1376b6; --pale:#eaf4fb; --line:#d7e3ec; --orange:#d86d22; --bg:#f4f7fa; }
+    * { box-sizing:border-box; }
+    body { margin:0; background:var(--bg); color:var(--ink); font:15px/1.7 system-ui,-apple-system,"Noto Sans JP",sans-serif; }
+    main { max-width:1280px; margin:auto; padding:38px 30px 50px; }
+    h1,h2,h3,p { margin:0; }
+    h1 { font-size:clamp(24px,3vw,36px); line-height:1.45; letter-spacing:.02em; margin:14px 0 12px; }
+    h2 { font-size:22px; line-height:1.5; }
+    h3 { font-size:18px; line-height:1.45; }
+    a { color:var(--blue); text-underline-offset:3px; }
+    .eyebrow { font-weight:750; color:var(--blue); letter-spacing:.09em; font-size:12px; }
+    .meta { display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:8px; }
+    .badge { display:inline-block; border:1px solid #b9d7e9; background:var(--pale); border-radius:5px; padding:3px 10px; color:#155680; font-size:12px; font-weight:650; }
+    .intro { max-width:900px; color:var(--muted); }
+    .notice { margin-top:20px; background:white; border-left:4px solid var(--orange); padding:14px 18px; border-radius:0 6px 6px 0; }
+    .notice strong { font-weight:750; }
+    .note { color:var(--muted); font-size:13px; }
+    section { margin-top:34px; }
+    .section-head { display:flex; align-items:baseline; justify-content:space-between; gap:20px; margin-bottom:16px; }
+    .controls { background:white; border:1px solid var(--line); border-radius:10px; padding:20px; display:grid; grid-template-columns:1fr 1fr 1.05fr; gap:26px; }
+    label,legend { font-weight:650; font-size:14px; }
+    .control-title { display:flex; justify-content:space-between; gap:8px; margin-bottom:7px; }
+    output { color:var(--blue); font-variant-numeric:tabular-nums; font-weight:750; }
+    input[type=range] { accent-color:var(--blue); width:100%; margin:8px 0; cursor:pointer; }
+    input[type=radio],input[type=checkbox] { accent-color:var(--blue); }
+    fieldset { margin:0; border:0; padding:0; min-width:0; }
+    .choices { display:flex; flex-wrap:wrap; gap:10px; margin-top:10px; }
+    .choice { display:flex; align-items:center; gap:5px; background:var(--bg); padding:6px 9px; border-radius:5px; font-size:13px; cursor:pointer; }
+    .state { margin:10px 0 17px; color:var(--muted); font-size:13px; min-height:22px; }
+    .comparison { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:16px; }
+    .card { background:white; border:1px solid var(--line); border-radius:10px; overflow:hidden; }
+    .card-head { padding:18px 18px 0; }
+    .card-head .label { color:var(--blue); font-size:12px; font-weight:700; margin-bottom:4px; }
+    .diagram { width:100%; height:auto; display:block; background:linear-gradient(180deg,#fff,#f8fbfd); }
+    .card-body { padding:15px 18px 18px; border-top:1px solid var(--line); }
+    .card-body p+p { margin-top:8px; }
+    .inline-tag { font-size:12px; padding:3px 7px; background:var(--pale); color:#215675; border-radius:4px; margin-right:4px; display:inline-block; }
+    .release { margin-top:12px; display:flex; gap:8px; align-items:flex-start; font-size:13px; font-weight:500; cursor:pointer; }
+    .release input { margin-top:5px; }
+    .legend { display:flex; flex-wrap:wrap; gap:18px; font-size:13px; margin:15px 0; color:var(--muted); }
+    .swatch { display:inline-block; width:15px; height:7px; margin-right:6px; border-radius:2px; vertical-align:middle; }
+    .geometry-note { background:#eaf2f7; border-radius:6px; padding:12px 16px; font-size:13px; }
+    .shapes { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:16px; }
+    .shape { padding:18px; }
+    .shape h3 { font-size:17px; }
+    .shape svg { display:block; width:100%; height:155px; margin:10px 0; }
+    .shape p { font-size:13px; }
+    .shape .use { color:var(--blue); font-weight:700; margin-bottom:7px; }
+    .shape .decision { margin-top:11px; border-top:1px solid var(--line); padding-top:10px; color:var(--muted); }
+    .steps { display:grid; grid-template-columns:repeat(4,1fr); margin-top:16px; gap:12px; }
+    .step { border-top:3px solid #a9cfe5; padding:14px 12px; background:white; font-size:13px; }
+    .step b { color:var(--blue); display:block; margin-bottom:5px; }
+    .bottom { display:grid; grid-template-columns:1.1fr 1fr; gap:22px; padding:22px; background:white; border:1px solid var(--line); border-radius:10px; }
+    .bottom p { margin-top:9px; }
+    .bottom ul { padding-left:1.3em; margin:9px 0 0; }
+    footer { margin-top:26px; color:var(--muted); font-size:12px; }
+    svg text { font-family:system-ui,-apple-system,"Noto Sans JP",sans-serif; fill:#405d72; }
+    svg .datum { stroke:var(--blue); stroke-width:5; fill:none; }
+    svg .push { stroke:var(--orange); stroke-width:4; fill:none; }
+    svg .escape { stroke:#8194a2; stroke-width:2; stroke-dasharray:5 4; fill:none; marker-end:url(#escape-tip); }
+    svg .part { fill:#e4ebef; stroke:#8397a6; stroke-width:2; }
+    svg .jaw { fill:#e4f1f9; stroke:#4784ad; stroke-width:2; }
+    @media(max-width:1000px) { .shapes { grid-template-columns:repeat(2,1fr); } .controls { gap:16px; } }
+    @media(max-width:730px) { main { padding:24px 16px; } .controls,.comparison,.bottom { grid-template-columns:1fr; } .section-head { display:block; } .section-head .note { margin-top:6px; } .steps { grid-template-columns:repeat(2,1fr); } .diagram { max-height:320px; } }
+    @media(max-width:450px) { .shapes { grid-template-columns:1fr; } }
+    @media print { body { background:white; } main { padding:12px; max-width:none; } .card,.controls,.shape,.bottom { break-inside:avoid; } .comparison { grid-template-columns:repeat(3,1fr); } .shapes { grid-template-columns:repeat(2,1fr); } .steps { grid-template-columns:repeat(4,1fr); } .controls { grid-template-columns:repeat(3,1fr); } .release { display:none; } }
+  </style>
+</head>
+<body>
+  <svg width="0" height="0" aria-hidden="true" style="position:absolute"><defs>
+    <marker id="escape-tip" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0 0 7 3.5 0 7" fill="none" stroke="#8194a2"/></marker>
+    <marker id="push-tip" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0 0 6 3 0 6Z" fill="#d86d22"/></marker>
+  </defs></svg>
+  <main>
+    <header>
+      <div class="meta"><span class="eyebrow">THREAD / HAND CONCEPT REVIEW 01</span><span class="badge">配置模式図・機構案　2026-09-13</span></div>
+      <h1>指先と配置を決めてから、アーム動作へ。</h1>
+      <p class="intro">工程ごとに「どの面を持つか」「どの方向へ力を伝えるか」「どこへ開いて抜くか」を比較します。2本指を基準に、3本指・4本指で増える役割を確認するためのページです。</p>
+      <p class="intro" style="margin-top:12px"><strong>今回の第一候補：Aは2本指の専用輪郭、Bは各腕に2本指の丸底溝、Cは常設締付工具。</strong>3本指・4本指は追加する役割が必要な場合に比較します。最終採用・製作寸法は未確定です。</p>
+      <div class="notice"><strong>形状比較は把持・S字形成の実証ではありません。</strong><br><span class="note">線材の変形・圧力・滑り・重力・接触は計算していません。ハンドの採用、アーム軌道、動画の再生成はこの画面では行いません。</span></div>
+    </header>
+
+    <section aria-labelledby="layout-title">
+      <div class="section-head"><h2 id="layout-title">1　指の配置を比較する</h2><p class="note">上面図：ケーブル長手方向がY、開閉方向がX</p></div>
+      <div class="controls">
+        <div>
+          <div class="control-title"><label for="aperture">平面パッドの名目開口</label><output for="aperture" id="aperture-value">30 mm</output></div>
+          <input id="aperture" type="range" min="0" max="85" step="1" value="30" aria-describedby="aperture-help">
+          <p class="note" id="aperture-help">0〜85 mm。各図を対称に開閉して配置を比較。実際の接触面位置は指先形状に依存します。</p>
+        </div>
+        <div>
+          <div class="control-title"><label for="spacing">G3・G4の長手方向の配置間隔</label><output for="spacing" id="spacing-value">30 mm</output></div>
+          <input id="spacing" type="range" min="20" max="40" step="1" value="30" aria-describedby="spacing-help">
+          <p class="note" id="spacing-help">初期案30 mm、別の取付構成として20〜40 mmを比較。<strong>運転中に伸縮する軸ではありません。</strong></p>
+        </div>
+        <fieldset><legend>比較するケーブルの外径</legend>
+          <div class="choices"><label class="choice"><input type="radio" name="diameter" value="12" checked>12 mm／資料の初期範囲上限</label><label class="choice"><input type="radio" name="diameter" value="14">14 mm／旧OP030</label></div>
+          <p class="note" style="margin-top:8px">旧OP030の14 mmは比較用。Ampere新版の採用線径ではありません。12 mmも新版への採用値ではありません。</p>
+        </fieldset>
+      </div>
+      <p class="state" id="state" role="status" aria-live="polite"></p>
+      <div class="comparison">
+        <article class="card"><div class="card-head"><p class="label">BASELINE</p><h3>2F　対向2本指</h3></div>
+          <svg class="diagram" id="diagram-2" viewBox="0 0 400 300" role="img" aria-label="2本指が同じ長手位置から対向する配置図"></svg>
+          <div class="card-body"><p><span class="inline-tag">1つの把持域</span><span class="inline-tag">既存2Fは連動開閉</span></p><p class="note">剛体部品の輪郭把持、または丸底溝でのケーブル保持を基準に比較します。図は接触位置の模式図で、Robotiq本体・適応リンクの再現ではありません。</p></div>
+        </article>
+        <article class="card"><div class="card-head"><p class="label">THREAD-G3-85 / CANDIDATE</p><h3>G3　1対2配置</h3></div>
+          <svg class="diagram" id="diagram-3" viewBox="0 0 400 300" role="img" aria-label="左中央1本と右長手方向2本の3本指配置図"></svg>
+          <div class="card-body"><p><span class="inline-tag">X独立駆動 ×3</span><span class="inline-tag">末節はY軸まわり受動傾き</span></p><p class="note">左1点と右2点。剛体コネクターの基準面への押さえ方を比較する案です。120°の芯出し配置ではありません。</p></div>
+        </article>
+        <article class="card"><div class="card-head"><p class="label">THREAD-G4-85 / CANDIDATE</p><h3>G4　2対2配置</h3></div>
+          <svg class="diagram" id="diagram-4" viewBox="0 0 400 300" role="img" aria-label="長手方向に離れた対向2組の4本指配置図"></svg>
+          <div class="card-body"><p><span class="inline-tag">X独立駆動 ×4</span><span class="inline-tag">末節はY軸まわり受動傾き</span></p><p class="note">離れた対向2組で局所の向きと支持を比較する案です。離れた中間部を持つ第三の腕とは異なります。</p><label class="release"><input type="checkbox" id="release">上側の1組だけ開く概念を表示<br>残る組の保持能力は未評価</label></div>
+        </article>
+      </div>
+      <div class="legend"><span><i class="swatch" style="background:#1376b6"></i>名目接触面／基準面候補</span><span><i class="swatch" style="background:#ee9c53"></i>比較用ケーブル</span><span><i class="swatch" style="background:#8194a2"></i>開放・退避方向</span></div>
+      <p class="geometry-note">G3は左指Y＝0、右2指Y＝±間隔/2。G4は左右ともY＝±間隔/2。比較のため全図で長手幅12 mmの接触域を表示しています。2Fの標準パッド寸法ではありません。図では受動末節角を0として表示しています。開口をケーブル径へ合わせても、把持成立や被覆の許容圧を判定した意味にはなりません。</p>
+    </section>
+
+    <section aria-labelledby="shape-title">
+      <div class="section-head"><h2 id="shape-title">2　指先に役割を分ける</h2><p class="note">以下は形状と退避の概念図。上段の寸法表示とは連動しません。</p></div>
+      <div class="legend"><span><i class="swatch" style="background:#1376b6"></i>位置・向きを決める面</span><span><i class="swatch" style="background:#d86d22"></i>荷重を受ける面・力を伝える方向</span><span><i class="swatch" style="background:#8194a2"></i>開放・退避の候補方向</span></div>
+      <div class="shapes">
+        <article class="card shape"><h3>2F　専用輪郭＋受け面</h3>
+          <svg viewBox="0 0 250 160" role="img" aria-label="剛体部品の側面を青い基準面で保持し、橙の肩受けから力を伝え、左右に開いて抜く指先概念図">
+            <rect class="part" x="90" y="35" width="70" height="78" rx="8"/><path class="jaw" d="M55 29H85V113H109V129H55Z M195 29H165V113H141V129H195Z"/>
+            <path class="datum" d="M85 40V106 M165 40V106"/><path class="push" d="M89 113H109 M141 113H161 M125 146V123" marker-end="url(#push-tip)"/>
+            <path class="escape" d="M64 72H27 M186 72H223"/><text x="125" y="21" text-anchor="middle" font-size="11">部品の肩・側面を使い分ける</text>
+          </svg><p class="use">剛体部品の位置決め・押込み</p><p>輪郭で向きを決め、肩・端面の受けで力を伝える。挿入後も側方へ開ける逃げを設けます。</p><p class="decision">確定するもの：部品基準面、肩位置、締付工具の進入口、爪の抜け道。</p>
+        </article>
+        <article class="card shape"><h3>2F　丸底溝＋交換パッド</h3>
+          <svg viewBox="0 0 250 160" role="img" aria-label="ケーブル断面を左右の丸底溝で支え、左右へ開く指先概念図">
+            <circle cx="125" cy="79" r="24" fill="#f2b16f" stroke="#cd7a35" stroke-width="2"/>
+            <path class="jaw" d="M57 42H97L110 57Q89 79 110 101L97 116H57Z M193 42H153L140 57Q161 79 140 101L153 116H193Z"/>
+            <path class="datum" d="M109 57Q89 79 109 101 M141 57Q161 79 141 101"/><path class="escape" d="M69 79H30 M181 79H220"/>
+            <text x="125" y="24" text-anchor="middle" font-size="11">断面模式図</text><text x="125" y="145" text-anchor="middle" font-size="11">溝径・支持長は対象線材から決める</text>
+          </svg><p class="use">ケーブル保持の第一比較候補</p><p>丸底で外周を支え、交換パッドで接触を調整。端子の圧着部や被覆端へ鋭い縁を当てない形にします。</p><p class="decision">確定するもの：線材外径、把持できる区間、溝径・長さ、許容圧と滑り。</p>
+        </article>
+        <article class="card shape"><h3>G3　輪郭による3点支持</h3>
+          <svg viewBox="0 0 250 160" role="img" aria-label="剛体コネクターの右2点を基準とし左1点で押さえ、各指を側方へ開く概念図">
+            <path class="part" d="M96 36H150V54H163V108H150V125H96Z"/>
+            <rect class="jaw" x="55" y="65" width="36" height="30" rx="3"/><rect class="jaw" x="168" y="41" width="30" height="26" rx="3"/><rect class="jaw" x="168" y="99" width="30" height="26" rx="3"/>
+            <path class="datum" d="M168 44V64 M168 102V122"/><path class="push" d="M91 69V91 M58 81H86" marker-end="url(#push-tip)"/>
+            <path class="escape" d="M67 106H33 M191 29H223 M191 137H223"/><text x="125" y="19" text-anchor="middle" font-size="11">基準2点＋押さえ1点の比較例</text>
+          </svg><p class="use">2Fで向き・開放が両立しない場合</p><p>基準を作る指と押さえる指を分担。3点をすべて剛に位置決めせず、ばらつきの逃げを確認します。</p><p class="decision">確定するもの：安定した接触面、押さえ方向、受動追従とロック操作の干渉。</p>
+        </article>
+        <article class="card shape"><h3>G4　保持組を分ける</h3>
+          <svg viewBox="0 0 250 160" role="img" aria-label="ケーブルの長手方向2か所を対向2組で支え、上側の1組を開く概念図">
+            <rect x="117" y="23" width="16" height="119" rx="7" fill="#f2b16f" stroke="#cd7a35" stroke-width="2"/>
+            <rect class="jaw" x="49" y="39" width="34" height="26" rx="3"/><rect class="jaw" x="167" y="39" width="34" height="26" rx="3"/>
+            <rect class="jaw" x="81" y="101" width="34" height="26" rx="3"/><rect class="jaw" x="135" y="101" width="34" height="26" rx="3"/>
+            <path class="datum" d="M115 102V126 M135 102V126"/><path class="escape" d="M77 51H37 M173 51H213"/>
+            <text x="20" y="87" font-size="11">一組を開く</text><text x="176" y="114" font-size="11">他組で</text><text x="176" y="130" font-size="11">支持候補</text>
+          </svg><p class="use">局所の向き保持・支持と開放の分担</p><p>2組に別の役割が必要なときに比較。片組開放中も残る組で支えられるかは、別途確認が必要です。</p><p class="decision">確定するもの：2組分の把持長さ、残る組への荷重、指を開く順番。</p>
+        </article>
+      </div>
+    </section>
+
+    <section aria-labelledby="order-title"><h2 id="order-title">3　工程別の決定順</h2>
+      <div class="steps"><div class="step"><b>01　部品・把持面</b>新版の部品ID、供給姿勢、触れてよい面を対応付ける。</div><div class="step"><b>02　指先・配置・駆動</b>2Fを基準に、3F・4Fで必要な役割が増えるかを比較する。</div><div class="step"><b>03　開放・退避</b>着座後に開き、工具・カメラ・周囲を避けて抜ける形にする。</div><div class="step"><b>04　腕数・動作</b>手先の仕様を定めてから単腕・双腕・必要なら3腕と軌道を検討する。</div></div>
+    </section>
+    <section class="bottom" aria-label="今回の位置づけと資料">
+      <div><h3>OP030-BのS字について</h3><p>旧H03-1はU字状、H03-2はS字状です。旧動画は指定した中心線から手先位置を作っています。両端を持った実物が同じS字になるという証拠ではありません。</p><p class="note">Ampereの公開構成には金属バスバーと柔軟な配線の両方があります。旧S字を実物の必須配線にそのまま対応させません。4本指による局所支持と全体の形状安定性を分け、撤去済みの押さえ機構も自動では復活させません。</p></div>
+      <div><h3>仕様案と入力資料</h3><ul><li><a href="../工程別ハンド仕様案_v01.md">工程別ハンド仕様案 v0.1</a></li><li><a href="hand_contact_span_v01.md">旧Bへの局所配置：接触域と回転軸の確認</a></li><li><a href="hand_selection_inputs_20260913.md">受領資料の比較・確認事項</a></li><li><a href="../references/hand_spec_20260913/THREAD_3F_4F_Gripper_Spec_v0.2_JA.md">THREAD G3/G4 仕様 v0.2</a></li></ul><p class="note">85 mmの開口、30 mmの初期配置間隔、20〜40 mmの別構成は受領仕様案によります。能力の実測値・採用機種の確定値ではありません。3ST並行・腕の本数・指の本数を別々に整理します。</p></div>
+    </section>
+    <footer>THREAD　工程別ハンド比較 v0.1｜配置・接触形状の検討用。実機用製作図、把持力・締結品質・物理妥当性の判定ではありません。</footer>
+  </main>
+  <script>
+    "use strict";
+    const aperture = document.getElementById("aperture");
+    const spacing = document.getElementById("spacing");
+    const release = document.getElementById("release");
+    const scale = 2.4;
+    const center = {x:200, y:151};
+
+    function finger(side, yMm, widthMm, label, opened) {
+      const xContact = center.x + side * widthMm * scale / 2;
+      const yContact = center.y - yMm * scale;
+      const xBody = side < 0 ? xContact - 34 : xContact;
+      const lineX = xContact;
+      const labelX = xBody + 17;
+      return `<g><rect x="${xBody}" y="${yContact-14.4}" width="34" height="28.8" rx="3" fill="${opened ? "#f1f4f6" : "#deeff9"}" stroke="${opened ? "#9aabb7" : "#6094b5"}" stroke-width="1.5"/>
+        <line x1="${lineX}" y1="${yContact-12.4}" x2="${lineX}" y2="${yContact+12.4}" stroke="${opened ? "#9aabb7" : "#1376b6"}" stroke-width="4"/>
+        <text x="${labelX}" y="${yContact-20}" text-anchor="middle" font-size="12">${label}</text></g>`;
+    }
+
+    function draw(count, opening, distance, diameter, onePairOpen) {
+      const half = distance / 2;
+      const extent = diameter * scale;
+      const fingers = count === 2 ? [[-1,0,"L"],[1,0,"R"]] : count === 3 ? [[-1,0,"L0"],[1,half,"R+"],[1,-half,"R−"]] : [[-1,half,"L+"],[1,half,"R+"],[-1,-half,"L−"],[1,-half,"R−"]];
+      const markerId = `direction-${count}`;
+      let result = `<defs><marker id="${markerId}" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0 0 6 3 0 6Z" fill="#8194a2"/></marker></defs>
+        <path d="M200 38V253 M31 151H368" stroke="#d5e1ea" stroke-dasharray="4 5"/>
+        <rect x="${center.x-extent/2}" y="44" width="${extent}" height="207" rx="${extent/2}" fill="#eead70" stroke="#d48b49" stroke-width="1.5"/>
+        <line x1="200" y1="44" x2="200" y2="251" stroke="#fff" stroke-opacity=".55" stroke-dasharray="4 5"/>
+        <path d="M37 57V26 M37 57H69" stroke="#8194a2" fill="none" marker-end="url(#${markerId})"/>
+        <path d="M37 57V26" stroke="#8194a2" marker-end="url(#${markerId})"/><text x="43" y="29" font-size="11">+Y</text><text x="69" y="72" font-size="11">+X</text>
+        <text x="200" y="27" text-anchor="middle" font-size="12">ケーブル軸</text>`;
+      for (const [side,y,label] of fingers) {
+        const opened = count === 4 && onePairOpen && y > 0;
+        result += finger(side,y,opened ? 85 : opening,label,opened);
+      }
+      if (count > 2) {
+        const yTop = center.y-half*scale, yBottom = center.y+half*scale;
+        result += `<path d="M345 ${yTop}H355 M350 ${yTop}V${yBottom} M345 ${yBottom}H355" stroke="#7897ac" fill="none"/><rect x="333" y="${center.y-11}" width="42" height="22" rx="3" fill="white"/><text x="354" y="${center.y+4}" text-anchor="middle" font-size="11">${distance} mm</text>`;
+      }
+      result += `<text x="200" y="278" text-anchor="middle" font-size="12">${count === 2 ? "長手位置は共通" : `配置間隔 ${distance} mm・取付構成の比較`}</text>`;
+      if (count === 4 && onePairOpen) result += `<text x="200" y="65" text-anchor="middle" font-size="11">上組：名目全開 85 mm</text>`;
+      document.getElementById(`diagram-${count}`).innerHTML = result;
+    }
+
+    function update() {
+      const opening = Number(aperture.value), distance = Number(spacing.value);
+      const diameter = Number(document.querySelector('input[name="diameter"]:checked').value);
+      document.getElementById("aperture-value").textContent = `${opening} mm`;
+      document.getElementById("spacing-value").textContent = `${distance} mm`;
+      document.getElementById("state").textContent = opening < diameter
+        ? `名目開口 ${opening} mm は比較径 ${diameter} mm 未満です。図の重なりを表示していますが、接触・圧縮・保持は計算していません。`
+        : `名目開口 ${opening} mm ／比較径 ${diameter} mm。数値が一致しても接触・保持の成立は判定していません。`;
+      for (const count of [2,3,4]) draw(count,opening,distance,diameter,release.checked);
+    }
+    for (const input of document.querySelectorAll("input")) input.addEventListener("input",update);
+    update();
+  </script>
+</body>
+</html>
