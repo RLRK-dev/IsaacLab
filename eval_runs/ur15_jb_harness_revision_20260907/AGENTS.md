@@ -20,3 +20,27 @@ lists, and requested searching the internet because no such files were available
 and its missing details. The Ampere product is a reference candidate, not an
 adopted replacement for the v06 product. Keep unpublished dimensions and part
 numbers unknown until their basis and the scope of the product change are set.
+
+## User decisions received on 2026-09-13
+
+- The user subsequently approved matching the Ampere public circuit and major
+  components, including a new upstream product revision. Preserve v06. The
+  September 12 candidate status above is historical; unpublished manufacturing
+  dimensions and complete part numbers are still unknown.
+- Divide work among three stations operating on separate workpieces in parallel.
+  This does not require three arms at each station.
+- Video/model motion production was paused. The currently authorized work is
+  selecting hands and documenting their process roles before arm trajectories.
+- Prefer a single arm where it completes the task. Retain OP030-A/B as the user's
+  dual-arm candidates. Consider three arms only where their distinct roles are
+  necessary; permission to consider them is not a selected three-arm mechanism.
+- Consider two-, three-, and four-finger hands. Set the finger count, arrangement,
+  drive configuration, fingertip geometry and grasp interfaces before designing
+  complete arm motion. The supplied G3/G4 documents are design inputs, not
+  verified product capabilities or automatically adopted acceptance criteria.
+- The v06 B wire animation prescribes the full centerline and derives hand
+  targets from it. Its length and geometry checks do not demonstrate physical
+  S-bending using endpoint grasps. Do not present them as such.
+- See `analysis/hand_selection_inputs_20260913.md` for source comparison,
+  candidate roles and unresolved hand-selection inputs. Do not reinstate deleted
+  cable hold-down mechanisms as an automatic response to the S-bend question.

@@ -1,0 +1,22 @@
+{
+  "observed_at": "2026-09-13T02:41:30.667927+09:00",
+  "inputs": [
+    {
+      "source": "/home/rlrk/Downloads/THREAD_3F_4F_Gripper_Spec_v0.1_JA.md",
+      "snapshot": "THREAD_3F_4F_Gripper_Spec_v0.1_JA.md",
+      "sha256": "409d6df289f9253764ee726ffb3b5dbd6b3c53a729183c0c1b8c780c61240af6",
+      "bytes": 28917,
+      "status": "user_supplied_design_proposal_not_tested"
+    },
+    {
+      "source": "/home/rlrk/Downloads/THREAD_3F_4F_Gripper_Spec_v0.2_JA.md",
+      "snapshot": "THREAD_3F_4F_Gripper_Spec_v0.2_JA.md",
+      "sha256": "f75f22bd1e826f7682b3392403dab9a2954bd1a26d84e195efd0aa0125abcbe9",
+      "bytes": 50807,
+      "status": "user_supplied_design_proposal_not_tested"
+    }
+  ],
+  "basis": "Local source files and byte/hash readback; no simulation.",
+  "model_or_video_changed": false,
+  "chrome_temporary_path_found": false
+}
