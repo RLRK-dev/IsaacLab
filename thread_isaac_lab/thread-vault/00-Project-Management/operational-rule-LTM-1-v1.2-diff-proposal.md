@@ -4,6 +4,7 @@
 
 - 状態: WITHDRAWN / 非昇格 (2026-05-31、Rs directive C — Neumann trial CLOSED、v1.2 へ昇格せず。価値ある原則は informal retain、正式 codification は別途 Rs+L3。根拠: `KN-Method-Neumann-on-NEST.md` レビュー記録 2026-05-31)
 - ⚠ label collision note (2026-07-02): 「LTM-1 v1.2」の版番号は **2026-07-02 landed の GEN-region 注記 (Rs D3)** が使用済み。本 WITHDRAWN 案は別内容の旧 v1.2 案であり、復活させる場合は **v1.3+ を採番**すること。
+- ⚠ label collision note (2026-09-13): 「LTM-1 v1.3」の版番号も **2026-09-13 landed の §1 node ID 書式・一意性の定義 (Rs 選択)** が使用済み。本案を復活させる場合は **v1.4+ を採番**すること。
 - 作成: 2026-05-05
 - 対象 SSOT: `thread-vault/00-Project-Management/operational-rule-LTM-1.md` (`LTM-1 v1.1`)
 - 根拠ノート: `thread-vault/06-Knowledge/KN-Method-Neumann-on-NEST.md`

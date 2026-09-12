@@ -1,11 +1,11 @@
-# NEST architecture 仕様書 (LTM-1 v1.2)
+# NEST architecture 仕様書 (LTM-1 v1.3)
 
 **Architecture name**: **NEST** — **N**ode-bound **E**xecution **S**ession **T**ree (2026-04-27 命名)
 
 ---
 
 **document type**: 運用 rule 仕様書 (NEST architecture の権威ソース)
-**version**: LTM-1 v1.2 (semver: PATCH bump; v1.2 = manifest §2 GEN-region 注記 §5.2, 2026-07-02, Rs 承認 D3)
+**version**: LTM-1 v1.3 (semver: PATCH bump; v1.3 = §1 node ID の書式・一意性を定義 (末尾 v1.3 注記), 2026-09-13, Rs 選択; v1.2 = manifest §2 GEN-region 注記 §5.2, 2026-07-02, Rs 承認 D3)
 **scope**: THREAD project 全 task (本 rule 採用以降の新 task は完全準拠、既存 active task は次 milestone から段階適用)
 **issued**: 2026-04-27
 **author**: Claude (rs 承認確定論点 1-7 ベースで起草、5-CC Pre-Debate 経由で v1→v1.1 patch、2026-04-27 NEST 命名統合)
@@ -62,7 +62,7 @@
 | **child node** | 下位 node、親 node の手段の一つ |
 | **leaf node** | 子を持たない node、具体的 action を実行 |
 | **session** | CC 1 instance による作業期間、1 conversation で完結 |
-| **node ID** | node の永続識別子、tree 構造を反映 (例: `T-08-1-3`) |
+| **node ID** | node の永続識別子、tree 構造を反映 (例: `T-08-1-3`)。**書式 = 文字列全体が `^T-[A-Za-z0-9]+(-[A-Za-z0-9]+)*$` に一致すること**（ASCII 英数字の語を `-` 1 個でつなぐ）。`thread-vault/_archive/` 配下を含めて一意。例 `T-08-1-3` の数字の並びは書式テンプレートではない（v1.3。機械検査の現状と経緯 = 末尾「v1.3 注記」） |
 | **session ID** | node に対する session 連番 (例: `T-08-1-3#s2`) |
 | **handoff** | session 間で node 作業を引き継ぐ protocol |
 | **goal** | node の目標 (1 文記述可能、検証可能条件付き) |
@@ -635,3 +635,24 @@ T-ROOT (5-clip vision 95%)
 - v1.1 deploy 前に CLAUDE.md への cross-ref 追加 (L3 cascade) を併せて実施するか
 
 確認後、本 v1.1 を vault `00-Project-Management/operational-rule-LTM-1.md` に deploy + project-tree-manifest.md (root_goal 確定版) を作成可能。
+
+---
+
+## v1.3 注記 (2026-09-13) — node ID の書式と一意性
+
+（既存の行番号を動かさないため末尾に置く。直前の「End of LTM-1 v1.1 patch.」と「rs review 要請」は v1.1 起草時の記録で、本注記とは関係しない。）
+
+**経緯:** v1.2 までの §1 は node ID の書式を定めていなかった。一方、CLAUDE.md の NEST 節と `scripts/build_nest_snapshot.py` のコメントは §1 を出典として `T-{seq}-{sub}-...` を書き、CLAUDE.md §運用2 [TASK] は同じ書式を出典なしで書き、`nest-adoption-runbook.md` Step 2 は §1 を参照しつつ `T-{seq}` / `T-{parent_seq}-{sub_seq}` / `T-{ROLE}-{seq}` を定めていた。Rs は 2026-09-13 に CC が示した選択肢から、書式を §1 に定義すること、その書式を下記の正規表現にすること、§1 の「tree 構造を反映」を変えないこと、`_archive/` 配下を含めた一意性を §1 に書くことを選んだ（問いと選択肢の逐語 = `eval_runs/nest_nodeid_format_v13_20260913/DECISION_20260913.md`）。本版は §1 の node ID 行に書式と一意性を追記した。同じ行の既存の文言「node の永続識別子、tree 構造を反映 (例: `T-08-1-3`)」と §2.1 #1 は変えていない。
+
+**実測（2026-09-13、作業ツリーを読んだ時点。対象 = `thread-vault/*/state.md` と `thread-vault/_archive/**/state.md` の `node_id` 254 件。manifest §2 用の走査 `build_nest_snapshot.py:290` と同じ範囲）:**
+- §1 の書式 `^T-[A-Za-z0-9]+(-[A-Za-z0-9]+)*$` に一致: 254 件（重複 0）
+- 数字だけの形 `^T-[0-9]+(-[0-9]+)*$`: 0 件
+- `parent_node` の値 252 件、および `build_nest_snapshot.py` が現在残す dependencies の値 532 件・children_nodes の値 233 件: すべて §1 の書式に一致
+- 親を持つ 252 件のうち、ID が「親 ID + `-`」で始まるもの: 145 件。これは接頭辞が一致する件数であって、「tree 構造を反映」への適合を判定したものではない
+
+**機械検査の現状（2026-09-13 時点。§1 の書式をそのまま検査する道具は無い）:**
+- `scripts/build_nest_snapshot.py` の `_NODE_ID_RE`（`^T-[\w-]+$`、§1 より緩い）は、dependencies / children_nodes に書かれた値だけを濾し、合わない値を警告なしで落とす。node 自身の `node_id` と `parent_node` は検査しない
+- `scripts/validations/check_planning_consistency.sh`（`scripts/validate.sh:127` の Layer 7、check C2）は `T-[A-Za-z0-9_.-]+` で参照を抽出する。バッククォートで囲んだ参照なら、§1 に一致する ID は全体がそのまま抽出される
+- 一意性: `build_nest_snapshot.py` の manifest §2 用の走査（`:290`。`--emit-manifest-section` と `--check-manifest-section` が使い、後者は Layer 7 check C3 = `check_planning_consistency.sh:130` から呼ばれる）は、重複した `node_id` を HARD として記録する（`:307`）。通常の snapshot 生成（`:448`）は `_archive/` を読まず、重複には警告を出して上書きする（`:461`）
+
+**既存 node への影響:** §1 の書式について改名が必要な node は無い（254 件すべて適合）。「tree 構造を反映」への適合は本版では判定していない。

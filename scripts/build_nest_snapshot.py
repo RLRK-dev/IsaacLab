@@ -211,7 +211,7 @@ def adapt(fm: dict) -> dict:
         # Defense: regex fallback may leave children as string like "[]" if comment-strip ordering bug
         children_raw = [] if children_raw.strip() in ("", "[]") else [children_raw.strip()]
 
-    # Strict node-ID filter (LTM-1 §1: T-{seq}-{sub}-... format). Drops:
+    # Node-ID filter for dependency/children values; looser than the LTM-1 §1 (v1.3) node_id format. Drops:
     # - regex fallback dict-as-list-item collapses ('shared_with: T-Foo (...)')
     # - non-conformant state.md deps (descriptive strings like 'T-Skill-GC-EvalGap COMPLETE'
     #   or 'T-Skill-IC F1 WarmStart done (...)' which create spurious blockers in viewer)

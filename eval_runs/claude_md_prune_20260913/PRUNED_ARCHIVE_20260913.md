@@ -127,7 +127,7 @@ skill の一覧と説明は harness が毎セッション自動注入する（`.
 
 ## Rs への所見（既存の問題・本 prune では変更していない）
 
-- NEST: `§運用2 [TASK]` は node_id 書式 `T-{seq}-{sub}-...` を指定するが、LTM-1 §1 は例 `T-08-1-3` のみで書式テンプレートを持たない。「1:1 binding (§5.1)」の §5.1（`:408`）は「同時並行は禁止」までで `1:1` の語を持たない。「handoff 二系統 (§4.2)」の §4.2 は sidecar 側のみを規定する
+- NEST: `§運用2 [TASK]` は node_id 書式 `T-{seq}-{sub}-...` を指定するが、LTM-1 §1 は例 `T-08-1-3` のみで書式テンプレートを持たない。（→ この 1 点は 2026-09-13 に LTM-1 v1.3 で対処。同じ項の §5.1・§4.2 の 2 点は未対処）「1:1 binding (§5.1)」の §5.1（`:408`）は「同時並行は禁止」までで `1:1` の語を持たない。「handoff 二系統 (§4.2)」の §4.2 は sidecar 側のみを規定する
 - `§0` の語が本ファイル内で複数の意味を持つ（本節見出し / RS71 §0 の不変前提 / LTM-1 §0）
 - `.claude/rules/prohibited.md` と `.claude/skills/` は gitignore されており、git worktree・clone には存在しない
 - `MEMORY.md` は 22,770 chars（wc -m, 本 session 実測）= hard limit 24,986 の 91.1%。§運用31 の 90% 起票閾値を超過（起票済 ticket = memory `project-memory-index-coordinated-compaction-ticket-2026-09-12`）

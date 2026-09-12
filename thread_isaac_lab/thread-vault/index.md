@@ -11,7 +11,7 @@ Read this FIRST on session start. See [[VaultProtocol]] for conventions.
 
 - [[project-tree-manifest]] — NEST tree view（§2 = `build_nest_snapshot.py` 生成の薄い view; 全 body は `project-tree-manifest-archive-2026H1.md`）
 - [[project-tree-manifest-archive-2026H1]] — manifest 歴史 body の byte 保全 archive（2026-07-02 統合 M1）
-- [[operational-rule-LTM-1]] — NEST 仕様書 (SSOT, LTM-1 v1.2)
+- [[operational-rule-LTM-1]] — NEST 仕様書 (SSOT, LTM-1 v1.3)
 - [[operational-rule-LTM-1-v1.2-diff-proposal]] — WITHDRAWN (2026-05-31 Neumann 案; ⚠ 本「v1.2」は landed v1.2 注記と別物 — label collision note 参照)
 - [[nest-adoption-runbook]] — NEST 段階採用 runbook
 - [[assumption-register]] — 仮定台帳
