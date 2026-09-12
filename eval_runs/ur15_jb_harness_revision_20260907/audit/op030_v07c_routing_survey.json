@@ -1,5 +1,5 @@
 {
- "observed_at": "2026-09-12T08:41:58.391761+09:00",
+ "observed_at": "2026-09-12T09:22:39.459679+09:00",
  "source": "analysis/op030_v07c_stagger_both_sides.blend",
  "source_sha256": "4e7c5b0d8b00b904c618dac757cf4c97c88de620898e7c7dcca0c3b0eb46ea51",
  "method": {
@@ -47,7 +47,7 @@
   ],
   "centre_line_noise_m": 0.01,
   "centre_line_gap_uncertainty_m": 0.003999999999999997,
-  "co_run_extent": "a pair of bounds: lower is what the points witness, upper pads a step per end",
+  "co_run_extent": "upper is a bound; sampled is what the samples span and is not a lower bound",
   "co_run_shape": "unresolved where a boundary gap sits within the wander of the limit"
  },
  "what_this_does_not_give": [
@@ -56,6 +56,7 @@
   "clearance at the terminations, which is contact by design and is trimmed away",
   "a co-run tighter than 0.01 m, which is inside the centre line's own wander",
   "where a co-run starts and stops, when its boundary gaps sit on the limit: see span_shape_resolved",
+  "a lower bound on a co-run: a dip out of the limit narrower than the step is invisible",
   "support pitch and fixing points",
   "required separation from other services",
   "the pipe inside the air hardware's boxes"
@@ -1018,7 +1019,7 @@
      "points_inside": 5,
      "span_count": 4,
      "zero_width_spans": 3,
-     "extent_lower_m": 0.03964341343245836,
+     "extent_sampled_m": 0.03964341343245836,
      "extent_upper_m": 0.33953324342318614,
      "boundaries_on_the_limit": 6,
      "span_shape_resolved": false,
@@ -1029,28 +1030,36 @@
        "to_m": 1.938180860428544,
        "width_m": 0.0,
        "points": 1,
-       "parted_before_m": null
+       "parted_before_m": null,
+       "margin_before_m": 0.0018729123367060008,
+       "margin_after_m": 0.0018729123367060008
       },
       {
        "from_m": 2.419445854967908,
        "to_m": 2.419445854967908,
        "width_m": 0.0,
        "points": 1,
-       "parted_before_m": 0.4812649945393641
+       "parted_before_m": 0.4812649945393641,
+       "margin_before_m": 0.0065069685143221735,
+       "margin_after_m": 0.0023937043354838334
       },
       {
        "from_m": 2.5669666906371424,
        "to_m": 2.606610104069601,
        "width_m": 0.03964341343245836,
        "points": 2,
-       "parted_before_m": 0.14752083566923435
+       "parted_before_m": 0.14752083566923435,
+       "margin_before_m": 0.0004266420245644352,
+       "margin_after_m": 0.0005843009321983769
       },
       {
        "from_m": 2.726253743020023,
        "to_m": 2.726253743020023,
        "width_m": 0.0,
        "points": 1,
-       "parted_before_m": 0.11964363895042229
+       "parted_before_m": 0.11964363895042229,
+       "margin_before_m": 0.003470727667624041,
+       "margin_after_m": 0.006319192417117689
       }
      ],
      "closest_m": 0.00033135399484541145
@@ -1061,7 +1070,7 @@
      "points_inside": 11,
      "span_count": 2,
      "zero_width_spans": 1,
-     "extent_lower_m": 0.3448671142583848,
+     "extent_sampled_m": 0.3448671142583848,
      "extent_upper_m": 0.4911420949749179,
      "boundaries_on_the_limit": 3,
      "span_shape_resolved": false,
@@ -1072,14 +1081,18 @@
        "to_m": 1.938180860428544,
        "width_m": 0.0,
        "points": 1,
-       "parted_before_m": null
+       "parted_before_m": null,
+       "margin_before_m": 0.01644060298882028,
+       "margin_after_m": 0.00038903921015154275
       },
       {
        "from_m": 2.419445854967908,
        "to_m": 2.764312969226293,
        "width_m": 0.3448671142583848,
        "points": 10,
-       "parted_before_m": 0.4812649945393641
+       "parted_before_m": 0.4812649945393641,
+       "margin_before_m": 0.00041134775757312864,
+       "margin_after_m": 0.0002940220434362109
       }
      ],
      "closest_m": 0.00033135399484541145
@@ -1090,7 +1103,7 @@
      "points_inside": 14,
      "span_count": 2,
      "zero_width_spans": 0,
-     "extent_lower_m": 0.45465753940008846,
+     "extent_sampled_m": 0.45465753940008846,
      "extent_upper_m": 0.6018988593199202,
      "boundaries_on_the_limit": 0,
      "span_shape_resolved": true,
@@ -1101,14 +1114,18 @@
        "to_m": 1.9770886315396157,
        "width_m": 0.07727325271882379,
        "points": 3,
-       "parted_before_m": null
+       "parted_before_m": null,
+       "margin_before_m": 0.009559397011179721,
+       "margin_after_m": 0.01240213584529972
       },
       {
        "from_m": 2.386928682545028,
        "to_m": 2.764312969226293,
        "width_m": 0.37738428668126467,
        "points": 11,
-       "parted_before_m": 0.40984005100541254
+       "parted_before_m": 0.40984005100541254,
+       "margin_before_m": 0.006080618026801585,
+       "margin_after_m": 0.004370758715811683
       }
      ],
      "closest_m": 0.00033135399484541145
@@ -1137,7 +1154,7 @@
      "points_inside": 13,
      "span_count": 1,
      "zero_width_spans": 0,
-     "extent_lower_m": 0.4787838348533082,
+     "extent_sampled_m": 0.4787838348533082,
      "extent_upper_m": 0.5589351367170835,
      "boundaries_on_the_limit": 2,
      "span_shape_resolved": false,
@@ -1148,7 +1165,9 @@
        "to_m": 1.0196201458742422,
        "width_m": 0.4787838348533082,
        "points": 13,
-       "parted_before_m": null
+       "parted_before_m": null,
+       "margin_before_m": 0.002467474645527442,
+       "margin_after_m": 0.0011270451297301608
       }
      ],
      "closest_m": 0.0009225161343814332
@@ -1159,7 +1178,7 @@
      "points_inside": 17,
      "span_count": 1,
      "zero_width_spans": 0,
-     "extent_lower_m": 0.6390279292244534,
+     "extent_sampled_m": 0.6390279292244534,
      "extent_upper_m": 0.7192048604856884,
      "boundaries_on_the_limit": 2,
      "span_shape_resolved": false,
@@ -1170,7 +1189,9 @@
        "to_m": 1.0999273111531034,
        "width_m": 0.6390279292244534,
        "points": 17,
-       "parted_before_m": null
+       "parted_before_m": null,
+       "margin_before_m": 0.0017220623488776073,
+       "margin_after_m": 0.001017454939672896
       }
      ],
      "closest_m": 0.0009225161343814332
@@ -1181,7 +1202,7 @@
      "points_inside": 19,
      "span_count": 1,
      "zero_width_spans": 0,
-     "extent_lower_m": 0.7192048604856884,
+     "extent_sampled_m": 0.7192048604856884,
      "extent_upper_m": 0.7990736780777571,
      "boundaries_on_the_limit": 2,
      "span_shape_resolved": false,
@@ -1192,7 +1213,9 @@
        "to_m": 1.140297850625277,
        "width_m": 0.7192048604856884,
        "points": 19,
-       "parted_before_m": null
+       "parted_before_m": null,
+       "margin_before_m": 0.0028852798930384116,
+       "margin_after_m": 0.0038961969404792338
       }
      ],
      "closest_m": 0.0009225161343814332
