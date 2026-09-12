@@ -1,0 +1,100 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1120 660" width="1120" height="660" font-family="IPAGothic, Noto Sans JP, Hiragino Sans, sans-serif" role="img" aria-label="ラインは 8 工程が双腕、検査 2 工程が単腕、3 本以上は無い。同時に確定させる点の数が腕数を決める。">
+<rect width="1120" height="660" fill="#ffffff"/>
+<text x="30" y="36" font-size="18" font-weight="700" fill="#16181d">腕数と工程 — 人手に代わる、という前提で</text>
+<text x="30" y="58" font-size="12.5" fill="#7a7f87">決めているのは「その工程で同時に確定させないといけない点の数」。人は 2 本しか持たない</text>
+<text x="30" y="96" font-size="14" font-weight="700" fill="#16181d">ラインの実装（既に答えが出ている）</text>
+<rect x="30" y="102" width="88" height="72" rx="6" fill="none" stroke="#1f6f8b" stroke-width="1" opacity="0.75"/>
+<text x="74" y="120" font-size="12" text-anchor="middle" font-weight="400" fill="#1f6f8b">OP010</text>
+<circle cx="67.5" cy="140" r="5" fill="none" stroke="#1f6f8b" stroke-width="2"/>
+<circle cx="80.5" cy="140" r="5" fill="none" stroke="#1f6f8b" stroke-width="2"/>
+<text x="74" y="166" font-size="10.5" text-anchor="middle" fill="#7a7f87">部品を取る</text>
+<rect x="134" y="102" width="88" height="72" rx="6" fill="none" stroke="#1f6f8b" stroke-width="1" opacity="0.75"/>
+<text x="178" y="120" font-size="12" text-anchor="middle" font-weight="400" fill="#1f6f8b">OP020</text>
+<circle cx="171.5" cy="140" r="5" fill="none" stroke="#1f6f8b" stroke-width="2"/>
+<circle cx="184.5" cy="140" r="5" fill="none" stroke="#1f6f8b" stroke-width="2"/>
+<text x="178" y="166" font-size="10.5" text-anchor="middle" fill="#7a7f87">取らない</text>
+<rect x="238" y="102" width="88" height="72" rx="6" fill="none" stroke="#c0392b" stroke-width="2" opacity="0.75"/>
+<text x="282" y="120" font-size="12" text-anchor="middle" font-weight="700" fill="#c0392b">OP030</text>
+<circle cx="275.5" cy="140" r="5" fill="none" stroke="#c0392b" stroke-width="2"/>
+<circle cx="288.5" cy="140" r="5" fill="none" stroke="#c0392b" stroke-width="2"/>
+<text x="282" y="166" font-size="10.5" text-anchor="middle" fill="#7a7f87">部品を取る</text>
+<rect x="342" y="102" width="88" height="72" rx="6" fill="none" stroke="#1f6f8b" stroke-width="1" opacity="0.75"/>
+<text x="386" y="120" font-size="12" text-anchor="middle" font-weight="400" fill="#1f6f8b">OP040</text>
+<circle cx="379.5" cy="140" r="5" fill="none" stroke="#1f6f8b" stroke-width="2"/>
+<circle cx="392.5" cy="140" r="5" fill="none" stroke="#1f6f8b" stroke-width="2"/>
+<text x="386" y="166" font-size="10.5" text-anchor="middle" fill="#7a7f87">部品を取る</text>
+<rect x="446" y="102" width="88" height="72" rx="6" fill="none" stroke="#1f6f8b" stroke-width="1" opacity="0.75"/>
+<text x="490" y="120" font-size="12" text-anchor="middle" font-weight="400" fill="#1f6f8b">OP050</text>
+<circle cx="483.5" cy="140" r="5" fill="none" stroke="#1f6f8b" stroke-width="2"/>
+<circle cx="496.5" cy="140" r="5" fill="none" stroke="#1f6f8b" stroke-width="2"/>
+<text x="490" y="166" font-size="10.5" text-anchor="middle" fill="#7a7f87">部品を取る</text>
+<rect x="550" y="102" width="88" height="72" rx="6" fill="none" stroke="#1f6f8b" stroke-width="1" opacity="0.75"/>
+<text x="594" y="120" font-size="12" text-anchor="middle" font-weight="400" fill="#1f6f8b">OP060</text>
+<circle cx="587.5" cy="140" r="5" fill="none" stroke="#1f6f8b" stroke-width="2"/>
+<circle cx="600.5" cy="140" r="5" fill="none" stroke="#1f6f8b" stroke-width="2"/>
+<text x="594" y="166" font-size="10.5" text-anchor="middle" fill="#7a7f87">部品を取る</text>
+<rect x="654" y="102" width="88" height="72" rx="6" fill="none" stroke="#1f6f8b" stroke-width="1" opacity="0.75"/>
+<text x="698" y="120" font-size="12" text-anchor="middle" font-weight="400" fill="#1f6f8b">OP070</text>
+<circle cx="691.5" cy="140" r="5" fill="none" stroke="#1f6f8b" stroke-width="2"/>
+<circle cx="704.5" cy="140" r="5" fill="none" stroke="#1f6f8b" stroke-width="2"/>
+<text x="698" y="166" font-size="10.5" text-anchor="middle" fill="#7a7f87">部品を取る</text>
+<rect x="758" y="102" width="88" height="72" rx="6" fill="none" stroke="#1f6f8b" stroke-width="1" opacity="0.75"/>
+<text x="802" y="120" font-size="12" text-anchor="middle" font-weight="400" fill="#1f6f8b">OP080</text>
+<circle cx="795.5" cy="140" r="5" fill="none" stroke="#1f6f8b" stroke-width="2"/>
+<circle cx="808.5" cy="140" r="5" fill="none" stroke="#1f6f8b" stroke-width="2"/>
+<text x="802" y="166" font-size="10.5" text-anchor="middle" fill="#7a7f87">部品を取る</text>
+<rect x="862" y="102" width="88" height="72" rx="6" fill="none" stroke="#1f6f8b" stroke-width="1" opacity="0.75"/>
+<text x="906" y="120" font-size="12" text-anchor="middle" font-weight="400" fill="#1f6f8b">OP090</text>
+<circle cx="906.0" cy="140" r="5" fill="none" stroke="#1f6f8b" stroke-width="2"/>
+<text x="906" y="166" font-size="10.5" text-anchor="middle" fill="#7a7f87">取らない</text>
+<rect x="966" y="102" width="88" height="72" rx="6" fill="none" stroke="#1f6f8b" stroke-width="1" opacity="0.75"/>
+<text x="1010" y="120" font-size="12" text-anchor="middle" font-weight="400" fill="#1f6f8b">OP100</text>
+<circle cx="1010.0" cy="140" r="5" fill="none" stroke="#1f6f8b" stroke-width="2"/>
+<text x="1010" y="166" font-size="10.5" text-anchor="middle" fill="#7a7f87">取らない</text>
+<text x="30" y="202" font-size="12" fill="#16181d">→ <tspan font-weight='700'>双腕 8 工程・単腕 2 工程・3 本以上は 0</tspan>。単腕の 2 工程はストッカも操作盤も無い＝検査</text>
+<text x="30" y="244" font-size="14" font-weight="700" fill="#16181d">同時に確定させる点 → 腕数</text>
+<text x="40" y="274" font-size="11.5" font-weight="700" fill="#7a7f87">工程の性格</text>
+<text x="336" y="274" font-size="11.5" font-weight="700" fill="#7a7f87">腕</text>
+<text x="404" y="274" font-size="11.5" font-weight="700" fill="#7a7f87">人との対応</text>
+<text x="640" y="274" font-size="11.5" font-weight="700" fill="#7a7f87">適する工程</text>
+<line x1="30" y1="282" x2="1090" y2="282" stroke="#7a7f87" stroke-width="1"/>
+<text x="40" y="308" font-size="12.5" fill="#16181d">0 — 部品を持たない</text>
+<circle cx="348.0" cy="304" r="5" fill="none" stroke="#1f6f8b" stroke-width="2"/>
+<text x="404" y="308" font-size="12" fill="#1f6f8b">片手、あるいは手を使わない</text>
+<text x="640" y="308" font-size="12" fill="#16181d">検査・計測。部品を取らず、嵌めず、締めない</text>
+<text x="640" y="325" font-size="11" fill="#7a7f87">OP090・OP100（ストッカも操作盤も無い）</text>
+<line x1="30" y1="335" x2="1090" y2="335" stroke="#7a7f87" stroke-width="0.6" opacity="0.4"/>
+<text x="40" y="362" font-size="12.5" fill="#16181d">1 を押さえて 1 に作用</text>
+<circle cx="341.5" cy="358" r="5" fill="none" stroke="#1f6f8b" stroke-width="2"/>
+<circle cx="354.5" cy="358" r="5" fill="none" stroke="#1f6f8b" stroke-width="2"/>
+<text x="404" y="362" font-size="12" fill="#1f6f8b">両手。人の標準的な組立動作</text>
+<text x="640" y="362" font-size="12" fill="#16181d">部品を保持しないと定まらず、別の工具で作用する工程</text>
+<text x="640" y="379" font-size="11" fill="#7a7f87">OP030-A（押さえ＋M4 締結）ほかライン 8 工程</text>
+<line x1="30" y1="389" x2="1090" y2="389" stroke="#7a7f87" stroke-width="0.6" opacity="0.4"/>
+<text x="40" y="416" font-size="12.5" fill="#16181d">2 を独立に動かす</text>
+<circle cx="341.5" cy="412" r="5" fill="none" stroke="#1f6f8b" stroke-width="2"/>
+<circle cx="354.5" cy="412" r="5" fill="none" stroke="#1f6f8b" stroke-width="2"/>
+<text x="404" y="416" font-size="12" fill="#1f6f8b">両手。柔軟物を扱うときの人の動作</text>
+<text x="640" y="416" font-size="12" fill="#16181d">柔軟物の 2 点を同時に。片方だけでは形が決まらない</text>
+<text x="640" y="433" font-size="11" fill="#7a7f87">OP030-B（ケーブル両端を持ち、旋回しながら曲げる）</text>
+<line x1="30" y1="443" x2="1090" y2="443" stroke="#7a7f87" stroke-width="0.6" opacity="0.4"/>
+<text x="40" y="470" font-size="12.5" fill="#16181d">1 を押さえて 2 に同時作用</text>
+<circle cx="335.0" cy="466" r="5" fill="none" stroke="#b9770e" stroke-width="2"/>
+<circle cx="348.0" cy="466" r="5" fill="none" stroke="#b9770e" stroke-width="2"/>
+<circle cx="361.0" cy="466" r="5" fill="none" stroke="#b9770e" stroke-width="2"/>
+<text x="404" y="470" font-size="12" fill="#b9770e">人にはできない</text>
+<text x="640" y="470" font-size="12" fill="#16181d">同時締結など、順番に作用すると結果が変わる工程</text>
+<text x="640" y="487" font-size="11" fill="#7a7f87">ライン上に無い</text>
+<line x1="30" y1="497" x2="1090" y2="497" stroke="#7a7f87" stroke-width="0.6" opacity="0.4"/>
+<text x="40" y="524" font-size="12.5" fill="#16181d">独立した両手仕事 × 2</text>
+<circle cx="328.5" cy="520" r="5" fill="none" stroke="#b9770e" stroke-width="2"/>
+<circle cx="341.5" cy="520" r="5" fill="none" stroke="#b9770e" stroke-width="2"/>
+<circle cx="354.5" cy="520" r="5" fill="none" stroke="#b9770e" stroke-width="2"/>
+<circle cx="367.5" cy="520" r="5" fill="none" stroke="#b9770e" stroke-width="2"/>
+<text x="404" y="524" font-size="12" fill="#b9770e">人 2 人分</text>
+<text x="640" y="524" font-size="12" fill="#16181d">1 工程に独立な作業点が 2 つある、または工程内で先行準備を回す</text>
+<text x="640" y="541" font-size="11" fill="#7a7f87">ライン上に無い（OP030-A の支持部 2 個がこの形）</text>
+<line x1="30" y1="551" x2="1090" y2="551" stroke="#7a7f87" stroke-width="0.6" opacity="0.4"/>
+<text x="30" y="584" font-size="12.5" fill="#c0392b" font-weight="700">OP030 の内訳：A は押さえ＋締結、B はケーブル両端 — どちらも人の両手仕事。</text>
+<text x="30" y="604" font-size="12.5" fill="#c0392b">C だけは違う — 2 本目は「もう一方の手」ではなく「工具を持ち替えないための手」。だから分けても失うものが最も少ない</text>
+</svg>

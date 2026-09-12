@@ -1,0 +1,508 @@
+{
+  "observed_at": "2026-09-12T12:15:42.336073+00:00",
+  "scope": "Where one, two, three and four arms could stand, against the work they must reach",
+  "read_from": {
+    "audit/op030_v06_equipment_ids.json": {
+      "observed_at": "2026-09-12T09:57:14.423143+09:00"
+    },
+    "audit/op030_v07c_dual_arm_configuration.json": {
+      "observed_at": "2026-09-12T11:51:15.947100+00:00"
+    },
+    "audit/op030_v07c_turn_free_transport.json": {
+      "observed_at": "2026-09-12T11:26:29.529496+00:00"
+    },
+    "audit/op030_v07c_arm_count_and_mounting.json": {
+      "observed_at": "2026-09-12T11:55:43.011126+00:00"
+    }
+  },
+  "what_this_does_not_give": [
+    "reachability: no orientation, no joint limits, no swept path",
+    "self-interference between the arms, which is question f and unmeasured",
+    "anything structural: no load, stiffness or deflection is in the model",
+    "a takt: the counts document says what each arrangement would parallelise, not by how much"
+  ],
+  "the_measurements_that_decide": {
+    "shoulder_base_size_m": [
+      0.20400006914138646,
+      0.17949553800693474,
+      0.1794955334209254
+    ],
+    "shoulders_cannot_be_closer_than_m": 0.17949553800693474,
+    "proven_pitch_m": 0.46545588970184326,
+    "proven_pitch_is_the_only_one_demonstrated": true,
+    "shoulder_height_m": 1.5427279472351074,
+    "column_span_along_the_line_m": 0.6313147764614335,
+    "station_pitch_m": 2.3,
+    "reach_already_used_m": 1.2440276870313336,
+    "two_supports_apart_m": 0.32,
+    "the_supports_are_apart_across_the_conveyor": true,
+    "seats": {
+      "T01": [
+        0.16,
+        -1.555,
+        0.8975
+      ],
+      "T02": [
+        -0.16,
+        -1.555,
+        0.8975
+      ]
+    },
+    "minimum_simultaneous_arms": {
+      "A": 2,
+      "B": 2,
+      "C": 1
+    }
+  },
+  "shoulder_line_by_count": {
+    "1": 0.17949553800693474,
+    "2": 0.644951427708778,
+    "3": 1.1104073174106213,
+    "4": 1.5758632071124645
+  },
+  "layouts": [
+    {
+      "key": "1-A",
+      "count": 1,
+      "name": "現行支柱に 1 本（同側）",
+      "rows_of_shoulders": 1,
+      "sides_used": [
+        -0.8999950885772705
+      ],
+      "shoulder_line_needed_m": {
+        "-0.8999950885772705": 0.17949553800693474
+      },
+      "widest_shoulder_line_m": 0.17949553800693474,
+      "fits_the_present_column": true,
+      "fits_within_the_station_pitch": true,
+      "over_the_column_by_m": 0.0,
+      "arms": [
+        {
+          "shoulder_xyz_m": [
+            -0.8999950885772705,
+            -1.699999988079071,
+            1.5427279472351074
+          ],
+          "works_on": "T02",
+          "distance_m": 0.992439837750704,
+          "inside_the_reach_already_used": true
+        }
+      ],
+      "furthest_reach_m": 0.992439837750704,
+      "every_arm_inside_the_reach_already_used": true,
+      "note": "A は押さえながら締結できず、B は両端を持てない。C のみ成立"
+    },
+    {
+      "key": "1-B",
+      "count": 1,
+      "name": "単腕 1 台に 2 連工具（利用者の制約 3）",
+      "rows_of_shoulders": 1,
+      "sides_used": [
+        -0.8999950885772705
+      ],
+      "shoulder_line_needed_m": {
+        "-0.8999950885772705": 0.17949553800693474
+      },
+      "widest_shoulder_line_m": 0.17949553800693474,
+      "fits_the_present_column": true,
+      "fits_within_the_station_pitch": true,
+      "over_the_column_by_m": 0.0,
+      "arms": [
+        {
+          "shoulder_xyz_m": [
+            -0.8999950885772705,
+            -1.699999988079071,
+            1.5427279472351074
+          ],
+          "works_on": "T02",
+          "distance_m": 0.992439837750704,
+          "inside_the_reach_already_used": true
+        }
+      ],
+      "furthest_reach_m": 0.992439837750704,
+      "every_arm_inside_the_reach_already_used": true,
+      "note": "C 向けの案として利用者が挙げたもの。A・B には効かない"
+    },
+    {
+      "key": "2-A",
+      "count": 2,
+      "name": "共有支柱・同側・旋回軸を共有（現行）",
+      "rows_of_shoulders": 1,
+      "sides_used": [
+        -0.8999950885772705
+      ],
+      "shoulder_line_needed_m": {
+        "-0.8999950885772705": 0.644951427708778
+      },
+      "widest_shoulder_line_m": 0.644951427708778,
+      "fits_the_present_column": false,
+      "fits_within_the_station_pitch": true,
+      "over_the_column_by_m": 0.013636651247344478,
+      "arms": [
+        {
+          "shoulder_xyz_m": [
+            -0.8999950885772705,
+            -1.9327279329299927,
+            1.5427279472351074
+          ],
+          "works_on": "T02",
+          "distance_m": 1.051945923670641,
+          "inside_the_reach_already_used": true
+        },
+        {
+          "shoulder_xyz_m": [
+            -0.8999950885772705,
+            -1.4672720432281494,
+            1.5427279472351074
+          ],
+          "works_on": "T02",
+          "distance_m": 0.9857017953778296,
+          "inside_the_reach_already_used": true
+        }
+      ],
+      "furthest_reach_m": 1.051945923670641,
+      "every_arm_inside_the_reach_already_used": true,
+      "note": "A・B が要求する最小構成。1 個ずつ順に。B の旋回中の曲げが成立する唯一の形"
+    },
+    {
+      "key": "2-C",
+      "count": 2,
+      "name": "対向（コンベヤ両側に 1 本ずつ）",
+      "rows_of_shoulders": 1,
+      "sides_used": [
+        -0.8999950885772705,
+        0.8999950885772705
+      ],
+      "shoulder_line_needed_m": {
+        "-0.8999950885772705": 0.17949553800693474,
+        "0.8999950885772705": 0.17949553800693474
+      },
+      "widest_shoulder_line_m": 0.17949553800693474,
+      "fits_the_present_column": true,
+      "fits_within_the_station_pitch": true,
+      "over_the_column_by_m": 0.0,
+      "arms": [
+        {
+          "shoulder_xyz_m": [
+            -0.8999950885772705,
+            -1.699999988079071,
+            1.5427279472351074
+          ],
+          "works_on": "T02",
+          "distance_m": 0.992439837750704,
+          "inside_the_reach_already_used": true
+        },
+        {
+          "shoulder_xyz_m": [
+            0.8999950885772705,
+            -1.699999988079071,
+            1.5427279472351074
+          ],
+          "works_on": "T01",
+          "distance_m": 0.992439837750704,
+          "inside_the_reach_already_used": true
+        }
+      ],
+      "furthest_reach_m": 0.992439837750704,
+      "every_arm_inside_the_reach_already_used": true,
+      "note": "旋回軸を共有できない。A の背面供給と B の旋回中の曲げが崩れる"
+    },
+    {
+      "key": "3-A",
+      "count": 3,
+      "name": "共有支柱に 3 本を一列",
+      "rows_of_shoulders": 1,
+      "sides_used": [
+        -0.8999950885772705
+      ],
+      "shoulder_line_needed_m": {
+        "-0.8999950885772705": 1.1104073174106213
+      },
+      "widest_shoulder_line_m": 1.1104073174106213,
+      "fits_the_present_column": false,
+      "fits_within_the_station_pitch": true,
+      "over_the_column_by_m": 0.47909254094918774,
+      "arms": [
+        {
+          "shoulder_xyz_m": [
+            -0.8999950885772705,
+            -2.1654558777809143,
+            1.5427279472351074
+          ],
+          "works_on": "T02",
+          "distance_m": 1.1561004341011984,
+          "inside_the_reach_already_used": true
+        },
+        {
+          "shoulder_xyz_m": [
+            -0.8999950885772705,
+            -1.699999988079071,
+            1.5427279472351074
+          ],
+          "works_on": "T02",
+          "distance_m": 0.992439837750704,
+          "inside_the_reach_already_used": true
+        },
+        {
+          "shoulder_xyz_m": [
+            -0.8999950885772705,
+            -1.2345440983772278,
+            1.5427279472351074
+          ],
+          "works_on": "T02",
+          "distance_m": 1.0327651329787315,
+          "inside_the_reach_already_used": true
+        }
+      ],
+      "furthest_reach_m": 1.1561004341011984,
+      "every_arm_inside_the_reach_already_used": true,
+      "note": "締結 2 本が同じ支持部の 68 mm に寄る。肩線が支柱を超える"
+    },
+    {
+      "key": "3-B",
+      "count": 3,
+      "name": "同側に 2 本＋対向に 1 本",
+      "rows_of_shoulders": 1,
+      "sides_used": [
+        -0.8999950885772705,
+        0.8999950885772705
+      ],
+      "shoulder_line_needed_m": {
+        "-0.8999950885772705": 0.644951427708778,
+        "0.8999950885772705": 0.17949553800693474
+      },
+      "widest_shoulder_line_m": 0.644951427708778,
+      "fits_the_present_column": false,
+      "fits_within_the_station_pitch": true,
+      "over_the_column_by_m": 0.013636651247344478,
+      "arms": [
+        {
+          "shoulder_xyz_m": [
+            -0.8999950885772705,
+            -1.9327279329299927,
+            1.5427279472351074
+          ],
+          "works_on": "T02",
+          "distance_m": 1.051945923670641,
+          "inside_the_reach_already_used": true
+        },
+        {
+          "shoulder_xyz_m": [
+            -0.8999950885772705,
+            -1.4672720432281494,
+            1.5427279472351074
+          ],
+          "works_on": "T02",
+          "distance_m": 0.9857017953778296,
+          "inside_the_reach_already_used": true
+        },
+        {
+          "shoulder_xyz_m": [
+            0.8999950885772705,
+            -1.699999988079071,
+            1.5427279472351074
+          ],
+          "works_on": "T01",
+          "distance_m": 0.992439837750704,
+          "inside_the_reach_already_used": true
+        }
+      ],
+      "furthest_reach_m": 1.051945923670641,
+      "every_arm_inside_the_reach_already_used": true,
+      "note": "現行の対を残したまま遠い支持部を対向側から取る"
+    },
+    {
+      "key": "4-A",
+      "count": 4,
+      "name": "共有支柱に 4 本を一列",
+      "rows_of_shoulders": 1,
+      "sides_used": [
+        -0.8999950885772705
+      ],
+      "shoulder_line_needed_m": {
+        "-0.8999950885772705": 1.5758632071124645
+      },
+      "widest_shoulder_line_m": 1.5758632071124645,
+      "fits_the_present_column": false,
+      "fits_within_the_station_pitch": true,
+      "over_the_column_by_m": 0.944548430651031,
+      "arms": [
+        {
+          "shoulder_xyz_m": [
+            -0.8999950885772705,
+            -2.398183822631836,
+            1.5427279472351074
+          ],
+          "works_on": "T02",
+          "distance_m": 1.294167992866362,
+          "inside_the_reach_already_used": false
+        },
+        {
+          "shoulder_xyz_m": [
+            -0.8999950885772705,
+            -1.9327279329299927,
+            1.5427279472351074
+          ],
+          "works_on": "T02",
+          "distance_m": 1.051945923670641,
+          "inside_the_reach_already_used": true
+        },
+        {
+          "shoulder_xyz_m": [
+            -0.8999950885772705,
+            -1.4672720432281494,
+            1.5427279472351074
+          ],
+          "works_on": "T01",
+          "distance_m": 1.2440276870313336,
+          "inside_the_reach_already_used": true
+        },
+        {
+          "shoulder_xyz_m": [
+            -0.8999950885772705,
+            -1.0018161535263062,
+            1.5427279472351074
+          ],
+          "works_on": "T01",
+          "distance_m": 1.3586467751776388,
+          "inside_the_reach_already_used": false
+        }
+      ],
+      "furthest_reach_m": 1.3586467751776388,
+      "every_arm_inside_the_reach_already_used": false,
+      "note": "肩線が最も長くなる。遠い支持部まで 2 本が伸びる"
+    },
+    {
+      "key": "4-B",
+      "count": 4,
+      "name": "対向 2 対（各側に押さえ＋締結）",
+      "rows_of_shoulders": 1,
+      "sides_used": [
+        -0.8999950885772705,
+        0.8999950885772705
+      ],
+      "shoulder_line_needed_m": {
+        "-0.8999950885772705": 0.644951427708778,
+        "0.8999950885772705": 0.644951427708778
+      },
+      "widest_shoulder_line_m": 0.644951427708778,
+      "fits_the_present_column": false,
+      "fits_within_the_station_pitch": true,
+      "over_the_column_by_m": 0.013636651247344478,
+      "arms": [
+        {
+          "shoulder_xyz_m": [
+            -0.8999950885772705,
+            -1.9327279329299927,
+            1.5427279472351074
+          ],
+          "works_on": "T02",
+          "distance_m": 1.051945923670641,
+          "inside_the_reach_already_used": true
+        },
+        {
+          "shoulder_xyz_m": [
+            -0.8999950885772705,
+            -1.4672720432281494,
+            1.5427279472351074
+          ],
+          "works_on": "T02",
+          "distance_m": 0.9857017953778296,
+          "inside_the_reach_already_used": true
+        },
+        {
+          "shoulder_xyz_m": [
+            0.8999950885772705,
+            -1.9327279329299927,
+            1.5427279472351074
+          ],
+          "works_on": "T01",
+          "distance_m": 1.051945923670641,
+          "inside_the_reach_already_used": true
+        },
+        {
+          "shoulder_xyz_m": [
+            0.8999950885772705,
+            -1.4672720432281494,
+            1.5427279472351074
+          ],
+          "works_on": "T01",
+          "distance_m": 0.9857017953778296,
+          "inside_the_reach_already_used": true
+        }
+      ],
+      "furthest_reach_m": 1.051945923670641,
+      "every_arm_inside_the_reach_already_used": true,
+      "note": "支持部が X ±0.16 に分かれているので、各対は自分の側の 1 個だけを見る"
+    },
+    {
+      "key": "4-C",
+      "count": 4,
+      "name": "同側に 2 対（上下 2 段）",
+      "rows_of_shoulders": 2,
+      "sides_used": [
+        -0.8999950885772705
+      ],
+      "shoulder_line_needed_m": {
+        "-0.8999950885772705": 0.644951427708778
+      },
+      "widest_shoulder_line_m": 0.644951427708778,
+      "fits_the_present_column": false,
+      "fits_within_the_station_pitch": true,
+      "over_the_column_by_m": 0.013636651247344478,
+      "arms": [
+        {
+          "shoulder_xyz_m": [
+            -0.8999950885772705,
+            -1.9327279329299927,
+            1.5427279472351074
+          ],
+          "works_on": "T02",
+          "distance_m": 1.051945923670641,
+          "inside_the_reach_already_used": true
+        },
+        {
+          "shoulder_xyz_m": [
+            -0.8999950885772705,
+            -1.4672720432281494,
+            1.5427279472351074
+          ],
+          "works_on": "T02",
+          "distance_m": 0.9857017953778296,
+          "inside_the_reach_already_used": true
+        },
+        {
+          "shoulder_xyz_m": [
+            -0.8999950885772705,
+            -1.9327279329299927,
+            1.5427279472351074
+          ],
+          "works_on": "T01",
+          "distance_m": 1.297145744709025,
+          "inside_the_reach_already_used": false
+        },
+        {
+          "shoulder_xyz_m": [
+            -0.8999950885772705,
+            -1.4672720432281494,
+            1.5427279472351074
+          ],
+          "works_on": "T01",
+          "distance_m": 1.2440276870313336,
+          "inside_the_reach_already_used": true
+        }
+      ],
+      "furthest_reach_m": 1.297145744709025,
+      "every_arm_inside_the_reach_already_used": false,
+      "note": "肩線は 2 段に分ける。段間の高さは本書では決めない"
+    }
+  ],
+  "buildable_without_a_bigger_base": [
+    "1-A",
+    "1-B",
+    "2-C"
+  ],
+  "finding": "In a line, the base grows by one pitch per arm: two fit the column, three and four do not. The way out is that A's two supports are apart across the conveyor rather than along it, so a second pair standing on the far side reaches the far support at the same distance the present pair reaches the near one. Four arms as two opposed pairs need no extra shoulder line, and each pair keeps a column of its own -- which is what B's two-ended hold and A's turn to the rear supply both depend on. What it costs is a second cell footprint on the far side, which is the same floor the case ② question is about.",
+  "checks_failed": [],
+  "formal_physical_validity_verdict": null
+}
