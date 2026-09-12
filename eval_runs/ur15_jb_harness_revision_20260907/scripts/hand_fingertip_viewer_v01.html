@@ -1,0 +1,139 @@
+<!doctype html>
+<!-- Copyright (c) 2022-2026, The Isaac Lab Project Developers (https://github.com/isaac-sim/IsaacLab/blob/main/CONTRIBUTORS.md).
+All rights reserved. SPDX-License-Identifier: BSD-3-Clause -->
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>THREAD｜指先3D比較 v0.1</title>
+  <style>
+    *{box-sizing:border-box}body{margin:0;background:#f3f6f8;color:#183247;font:15px/1.7 system-ui,"Noto Sans JP",sans-serif}main{max-width:1280px;margin:auto;padding:28px 24px 45px}h1{font-size:30px;margin:4px 0 12px;line-height:1.4}h2{font-size:18px;margin:0 0 9px}p{margin:8px 0}.eyebrow{color:#197ba9;font-size:12px;font-weight:750;letter-spacing:.12em}.intro{color:#50677a;max-width:1050px}.layout{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:18px;margin-top:23px}.view,.panel,.note{background:white;border:1px solid #d4e1e9;border-radius:9px}.view{overflow:hidden}.toolbar{padding:12px 16px;border-bottom:1px solid #dbe5ec;display:flex;gap:8px;flex-wrap:wrap;align-items:center}button,select{font:inherit;border:1px solid #bfd0dd;border-radius:5px;background:white;padding:7px 11px;color:#24516c;cursor:pointer}button:hover{background:#e9f3f9}button.selected{background:#176d9d;color:white;border-color:#176d9d}canvas{display:block;width:100%;height:610px;touch-action:none;cursor:grab;background:linear-gradient(#f9fcfe,#e7eef3)}canvas:active{cursor:grabbing}.caption{padding:10px 16px;background:#f8fbfd;color:#596f80;font-size:12px}.panel{padding:19px;height:max-content}.panel label{display:block;font-size:13px;margin:15px 0}.metric{padding:10px 0;border-top:1px solid #e0e8ee}.metric b{color:#14749f}.small{font-size:13px;color:#587082}.badge{font-size:12px;border-radius:4px;background:#e6f2fa;color:#1a6693;padding:4px 8px}.key{display:flex;gap:14px;flex-wrap:wrap;font-size:12px;margin:12px 0}.dot{display:inline-block;width:11px;height:11px;margin-right:5px;border-radius:2px}.note{padding:18px 22px;margin-top:18px}.note strong{color:#9d5a24}a{color:#176f9f}.links{display:flex;gap:16px;flex-wrap:wrap;margin-top:16px}code{font-size:12px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}@media(max-width:850px){.layout{grid-template-columns:1fr}.grid{grid-template-columns:1fr}canvas{height:470px}main{padding:22px 16px}h1{font-size:25px}}
+  </style>
+</head>
+<body>
+<main>
+  <div class="eyebrow">THREAD / FINGERTIP GEOMETRY REVIEW 01</div>
+  <h1>先端を回して、把持面と抜け道を確認する。</h1>
+  <p class="intro">Aの輪郭保持とBの丸底溝を、既存2F-85の本体・リンクと合わせた形状検討版です。Aの下受け付きも比較用に残しました。対象物は寸法を明示したサンプルで、Ampere内部部品の確定CADではありません。</p>
+  <div class="layout">
+    <div class="view">
+      <div class="toolbar">
+        <select id="kind" aria-label="指先候補"><option value="A">A｜輪郭のみ（第一候補）</option><option value="A_LIP">A｜下受け付き（比較用）</option><option value="B">B｜丸底溝</option></select>
+        <button data-state="near" class="selected">近接</button><button data-state="early">開き始め</button><button data-state="open">開放</button><button data-state="clear">離隔</button>
+        <span class="small">静的な4姿勢</span>
+      </div>
+      <div style="position:relative"><canvas id="view" aria-label="ドラッグで回転、ホイールで拡大縮小できる3D指先形状"></canvas><div id="view-label" class="small" style="position:absolute;top:12px;left:18px;pointer-events:none"></div><div style="position:absolute;bottom:22px;left:20px;pointer-events:none;font-size:12px;color:#526b80">20 mm<div id="scale-bar" style="border-top:2px solid #6d8292;margin-top:5px"></div></div></div>
+      <p id="view-error" class="caption" hidden>この環境では3D描画を開始できません。<a href="B_near_v01.png">Bの静止画</a>、<a href="A_near_v01.png">Aの静止画</a>、またはGLBで形状を確認できます。</p>
+      <div class="toolbar"><button data-camera="oblique">斜め</button><button data-camera="front">正面</button><button data-camera="top">上面</button><button id="detail">指先を拡大</button><button id="reset">全体へ戻す</button></div>
+      <div class="caption">ドラッグで回転 ／ ホイールで拡大縮小。開放は既存モデルの連動関節から計算。離隔は開放後にハンド全体を25 mmずらした比較姿勢です。連続動作・腕軌道ではありません。</div>
+    </div>
+    <aside class="panel">
+      <span class="badge">形状検討用・寸法は仮設定</span>
+      <h2 id="name" style="margin-top:12px"></h2><p id="role" class="small"></p>
+      <div class="metric" id="dimensions"></div>
+      <div class="metric"><b>確認する箇所</b><p id="check" class="small"></p></div>
+      <label><input type="checkbox" id="hardware" checked> 本体・連動リンクを表示</label>
+      <label><input type="checkbox" id="target" checked> 把持対象サンプルを表示</label>
+      <label><input type="checkbox" id="guide" checked> 仮の工具通過域を表示（A）</label>
+      <p class="small" id="pose"></p>
+      <div class="key"><span><i class="dot" style="background:#5f6b76"></i>既存機構</span><span><i class="dot" style="background:#3b8ec0"></i>交換部</span><span><i class="dot" style="background:#2a4b5b"></i>接触形状</span><span><i class="dot" style="background:#eea646"></i>Aの受け面</span></div>
+      <p class="small">「近接」は名目の形状合わせです。押付力・滑り・被覆圧縮は計算していません。取付ねじ・材料・許容荷重も未確定です。</p>
+    </aside>
+  </div>
+  <div class="note grid">
+    <div><h2>今回のモデルで分かること</h2><p class="small">接触形状の違い、指先の占有範囲、仮の工具域との位置関係、開放時の形状を確認できます。既存の固定末節を切り削らず、交換部を別メッシュにしています。</p><p class="small">仮設定値は <a href="hand_fingertip_concepts_v01.json">パラメーター表</a>、観測と未評価範囲は <a href="hand_fingertip_geometry_observations_v01.json">観測JSON</a> に記録しています。</p></div>
+    <div><h2>実物への適用は別に確認する</h2><p class="small">Aの円筒・取付部と工具域は説明用サンプルです。Bの直径14 mmは旧H03からの比較値で、Ampereの採用線径ではありません。S字形成・握力・締結品質・実物への適合は、この形状比較では確定しません。</p><p class="small">最終指先と取付位置を決めた後に、オンハンドカメラの視野・干渉とアーム動作へ進みます。</p></div>
+  </div>
+  <div class="links"><a href="hand_A_2F_fingertips_v01.glb">Aの3Dモデル（GLB）</a><a href="hand_B_2F_fingertips_v01.glb">Bの3Dモデル（GLB）</a><a href="hand_A_LIP_2F_fingertips_v01.glb">Aの下受け比較（GLB）</a><a href="hand_fingertip_concepts_v01.blend">Blenderモデル</a><a href="指先3D確認記録_v01.md">確認記録</a><a href="https://assets.robotiq.com/website-assets/support_documents/document/online/2F-85_2F-140_TM_InstructionManual_HTML5_20190503.zip/2F-85_2F-140_TM_InstructionManual_HTML5/Content/6.%20Specifications.htm">Robotiq公式の交換指先仕様</a></div>
+</main>
+<script id="model-data" type="application/json">__MESH_PAYLOAD__</script>
+<script>
+"use strict";
+const payload=JSON.parse(document.getElementById("model-data").textContent);
+const canvas=document.getElementById("view");
+const gl=canvas.getContext("webgl",{alpha:true,antialias:true,preserveDrawingBuffer:true});
+if(!gl){document.getElementById("view-error").hidden=false;throw new Error("WebGL is unavailable; use the linked static PNG or GLB.");}
+let kind="A",state="near",yaw=-.63,pitch=.55,zoom=1,focus=[0,0,.063],drag=null,pending=false;
+const unit=v=>{const n=Math.hypot(...v);return v.map(x=>x/(n||1));};
+const cross=(a,b)=>[a[1]*b[2]-a[2]*b[1],a[2]*b[0]-a[0]*b[2],a[0]*b[1]-a[1]*b[0]];
+const sub=(a,b)=>a.map((x,i)=>x-b[i]);const dot=(a,b)=>a.reduce((s,x,i)=>s+x*b[i],0);
+const light=unit([-.5,-.7,1]);
+function compile(type,source){const shader=gl.createShader(type);gl.shaderSource(shader,source);gl.compileShader(shader);if(!gl.getShaderParameter(shader,gl.COMPILE_STATUS))throw new Error(gl.getShaderInfoLog(shader));return shader;}
+const program=gl.createProgram();
+gl.attachShader(program,compile(gl.VERTEX_SHADER,"attribute vec3 a_position;attribute vec4 a_color;varying vec4 v_color;void main(){gl_Position=vec4(a_position,1.0);v_color=a_color;}"));
+gl.attachShader(program,compile(gl.FRAGMENT_SHADER,"precision mediump float;varying vec4 v_color;void main(){gl_FragColor=v_color;}"));
+gl.linkProgram(program);if(!gl.getProgramParameter(program,gl.LINK_STATUS))throw new Error(gl.getProgramInfoLog(program));
+gl.useProgram(program);
+const vertexBuffer=gl.createBuffer(),positionLocation=gl.getAttribLocation(program,"a_position"),colorLocation=gl.getAttribLocation(program,"a_color");
+gl.bindBuffer(gl.ARRAY_BUFFER,vertexBuffer);gl.enableVertexAttribArray(positionLocation);gl.enableVertexAttribArray(colorLocation);
+gl.vertexAttribPointer(positionLocation,3,gl.FLOAT,false,28,0);gl.vertexAttribPointer(colorLocation,4,gl.FLOAT,false,28,12);
+gl.enable(gl.DEPTH_TEST);gl.depthFunc(gl.LEQUAL);gl.frontFace(gl.CCW);gl.cullFace(gl.BACK);
+let geometryKey=null,geometry=null;
+function worldGeometry(candidate,transforms,key){
+  if(key===geometryKey)return geometry;
+  const opaque=[],guides=[];
+  for(const [name,obj] of Object.entries(candidate.objects)){
+    if(["hardware","target","guide"].includes(obj.category)&&!document.getElementById(obj.category).checked)continue;
+    const m=transforms[name],world=obj.vertices.map(v=>m.slice(0,3).map(row=>row[0]*v[0]+row[1]*v[1]+row[2]*v[2]+row[3]));
+    const destination=obj.category==="guide"?guides:opaque;
+    for(const f of obj.faces){
+      const n=unit(cross(sub(world[f[1]],world[f[0]]),sub(world[f[2]],world[f[0]]))),shade=.48+.52*Math.max(0,dot(n,light));
+      const color=obj.color.map((c,i)=>c/255*(i===3?1:shade));
+      for(const index of f)destination.push(...world[index],...color);
+    }
+  }
+  geometryKey=key;geometry={opaque:new Float32Array(opaque),guides:new Float32Array(guides)};return geometry;
+}
+function paint(vertices,right,up,forward,scale,width,height){
+  const projected=new Float32Array(vertices);
+  for(let i=0;i<projected.length;i+=7){
+    const x=vertices[i]-focus[0],y=vertices[i+1]-focus[1],z=vertices[i+2]-focus[2];
+    projected[i]=(x*right[0]+y*right[1]+z*right[2])*2*scale/width;
+    projected[i+1]=(x*up[0]+y*up[1]+z*up[2])*2*scale/height;
+    projected[i+2]=-(x*forward[0]+y*forward[1]+z*forward[2]);
+  }
+  gl.bufferData(gl.ARRAY_BUFFER,projected,gl.DYNAMIC_DRAW);gl.drawArrays(gl.TRIANGLES,0,projected.length/7);
+}
+function draw(){
+  pending=false;
+  const width=canvas.clientWidth,height=canvas.clientHeight,dpr=Math.min(devicePixelRatio||1,1.5);
+  const pixelWidth=Math.round(width*dpr),pixelHeight=Math.round(height*dpr);
+  if(canvas.width!==pixelWidth||canvas.height!==pixelHeight){canvas.width=pixelWidth;canvas.height=pixelHeight;}
+  gl.viewport(0,0,canvas.width,canvas.height);gl.clearColor(0,0,0,0);gl.depthMask(true);gl.clear(gl.COLOR_BUFFER_BIT|gl.DEPTH_BUFFER_BIT);
+  const right=[Math.cos(yaw),Math.sin(yaw),0],up=[-Math.sin(yaw)*Math.sin(pitch),Math.cos(yaw)*Math.sin(pitch),Math.cos(pitch)],forward=cross(right,up);
+  const scale=Math.min(width/.23,height/.23)*zoom;
+  const candidate=payload.candidates[kind],transforms=candidate.states[state].transforms;
+  const key=[kind,state,...["hardware","target","guide"].map(id=>document.getElementById(id).checked)].join("/");
+  const shapes=worldGeometry(candidate,transforms,key);
+  gl.disable(gl.BLEND);gl.enable(gl.CULL_FACE);paint(shapes.opaque,right,up,forward,scale,width,height);
+  gl.depthMask(false);gl.enable(gl.BLEND);gl.blendFunc(gl.SRC_ALPHA,gl.ONE_MINUS_SRC_ALPHA);
+  gl.cullFace(gl.FRONT);paint(shapes.guides,right,up,forward,scale,width,height);
+  gl.cullFace(gl.BACK);paint(shapes.guides,right,up,forward,scale,width,height);gl.depthMask(true);
+  document.getElementById("view-label").textContent=`${kind} / ${state} — 静的形状`;
+  document.getElementById("scale-bar").style.width=`${.02*scale}px`;
+  document.getElementById("pose").textContent=`開閉関節の角度：${(candidate.states[state].joint_q_rad*180/Math.PI).toFixed(2)}°。指の独立駆動を追加したモデルではありません。`;
+  window.reviewRendered={kind,state,faces:(shapes.opaque.length+shapes.guides.length)/21,width,height,renderer:"WebGL depth buffer",gl_error:gl.getError()};
+}
+function schedule(){if(!pending){pending=true;requestAnimationFrame(draw);}}
+function update(){
+  const a=kind!=="B",lip=kind==="A_LIP";
+  document.getElementById("name").textContent=a?(lip?"A｜下受け付きの比較形状":"A｜輪郭接触のみ"):"B｜短い丸底溝";
+  document.getElementById("role").textContent=a?(lip?"既存開閉では指先が上へ動くため、下受けは部品下面への入り込みに注意が必要です。「開き始め」でその形状関係を比較できます。":"下へ差し込む突起を付けず、側面の輪郭で保持する第一候補。工具域と開放空間を比較します。保持力と回転の拘束は未評価です。 "):"被覆を長手方向の短い区間で支える交換指先。溝の両端と、線から離れて指を抜く方向を比較します。";
+  document.getElementById("dimensions").innerHTML=a?`<b>仮設定の寸法</b><p class='small'>サンプル：直径50 × 高さ26 mm<br>輪郭半径：25.4 mm<br>接触部：幅16 × 高さ12 mm<br>${lip?"下受けの張出し：1.5 mm":"下受け：なし"}</p>`:"<b>仮設定の寸法</b><p class='small'>比較ケーブル：直径14 mm<br>溝半径：7.2 mm<br>長手方向の接触長：12 mm<br>実際の接触幅・圧力は未計算</p>";
+  document.getElementById("check").textContent=a?"工具域とハンド本体の関係、取付部と爪の関係。実物の非接点部に使える輪郭・回転止めがあるかを確認します。":"溝の縁、把持区間の長さ、被覆端・圧着部・曲がり始めとの距離。今回は直線サンプルのみ。";
+  document.querySelectorAll("[data-state]").forEach(b=>b.classList.toggle("selected",b.dataset.state===state));schedule();
+}
+document.getElementById("kind").addEventListener("change",e=>{kind=e.target.value;update();});
+document.querySelectorAll("[data-state]").forEach(b=>b.addEventListener("click",()=>{state=b.dataset.state;update();}));
+document.querySelectorAll("[data-camera]").forEach(b=>b.addEventListener("click",()=>{[yaw,pitch]=({oblique:[-.63,.55],front:[0,0],top:[0,Math.PI/2]})[b.dataset.camera];schedule();}));
+document.getElementById("detail").addEventListener("click",()=>{focus=[0,0,0];zoom=2.2;schedule();});
+document.getElementById("reset").addEventListener("click",()=>{focus=[0,0,.063];zoom=1;yaw=-.63;pitch=.55;schedule();});
+for(const id of ["hardware","target","guide"])document.getElementById(id).addEventListener("change",schedule);
+canvas.addEventListener("pointerdown",e=>{drag=[e.clientX,e.clientY];canvas.setPointerCapture(e.pointerId);});
+canvas.addEventListener("pointermove",e=>{if(!drag)return;yaw+=(e.clientX-drag[0])*.008;pitch=Math.max(-1.5,Math.min(1.57,pitch+(e.clientY-drag[1])*.008));drag=[e.clientX,e.clientY];schedule();});
+canvas.addEventListener("pointerup",()=>{drag=null;});canvas.addEventListener("pointercancel",()=>{drag=null;});
+canvas.addEventListener("wheel",e=>{e.preventDefault();zoom=Math.max(.6,Math.min(4,zoom*Math.exp(-e.deltaY*.001)));schedule();},{passive:false});
+new ResizeObserver(schedule).observe(canvas);update();
+</script>
+</body>
+</html>

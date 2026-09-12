@@ -1,0 +1,128 @@
+{
+  "ok": true,
+  "static_cases": [
+    {
+      "kind": "A",
+      "state": "near",
+      "faces": 52844,
+      "width": 912,
+      "height": 610,
+      "renderer": "WebGL depth buffer",
+      "gl_error": 0
+    },
+    {
+      "kind": "A",
+      "state": "early",
+      "faces": 52844,
+      "width": 912,
+      "height": 610,
+      "renderer": "WebGL depth buffer",
+      "gl_error": 0
+    },
+    {
+      "kind": "A",
+      "state": "open",
+      "faces": 52844,
+      "width": 912,
+      "height": 610,
+      "renderer": "WebGL depth buffer",
+      "gl_error": 0
+    },
+    {
+      "kind": "A",
+      "state": "clear",
+      "faces": 52844,
+      "width": 912,
+      "height": 610,
+      "renderer": "WebGL depth buffer",
+      "gl_error": 0
+    },
+    {
+      "kind": "A_LIP",
+      "state": "near",
+      "faces": 53364,
+      "width": 912,
+      "height": 610,
+      "renderer": "WebGL depth buffer",
+      "gl_error": 0
+    },
+    {
+      "kind": "A_LIP",
+      "state": "early",
+      "faces": 53364,
+      "width": 912,
+      "height": 610,
+      "renderer": "WebGL depth buffer",
+      "gl_error": 0
+    },
+    {
+      "kind": "A_LIP",
+      "state": "open",
+      "faces": 53364,
+      "width": 912,
+      "height": 610,
+      "renderer": "WebGL depth buffer",
+      "gl_error": 0
+    },
+    {
+      "kind": "A_LIP",
+      "state": "clear",
+      "faces": 53364,
+      "width": 912,
+      "height": 610,
+      "renderer": "WebGL depth buffer",
+      "gl_error": 0
+    },
+    {
+      "kind": "B",
+      "state": "near",
+      "faces": 52436,
+      "width": 912,
+      "height": 610,
+      "renderer": "WebGL depth buffer",
+      "gl_error": 0
+    },
+    {
+      "kind": "B",
+      "state": "early",
+      "faces": 52436,
+      "width": 912,
+      "height": 610,
+      "renderer": "WebGL depth buffer",
+      "gl_error": 0
+    },
+    {
+      "kind": "B",
+      "state": "open",
+      "faces": 52436,
+      "width": 912,
+      "height": 610,
+      "renderer": "WebGL depth buffer",
+      "gl_error": 0
+    },
+    {
+      "kind": "B",
+      "state": "clear",
+      "faces": 52436,
+      "width": 912,
+      "height": 610,
+      "renderer": "WebGL depth buffer",
+      "gl_error": 0
+    }
+  ],
+  "headless_flush": "explicit draw after event settling",
+  "view_presets": 3,
+  "wheel": true,
+  "final": {
+    "kind": "B",
+    "state": "near",
+    "faces": 928,
+    "width": 912,
+    "height": 610,
+    "renderer": "WebGL depth buffer",
+    "gl_error": 0
+  },
+  "source_page_sha256": "6b75887f0c301316d3eff4ca19805f972d1b4b215b4c366b09f75dc084e5ae3b",
+  "captured_at": "2026-09-13T07:02:28.530648+09:00",
+  "scope": "UI/static rendering only; no physical acceptance verdict"
+}

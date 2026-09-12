@@ -1,0 +1,42 @@
+{
+  "native": "hand_fingertip_concepts_v01.blend",
+  "sha256": "ced71946c0fd2aa5b74446c59032131cc32cb4d237474418ff0c42d80447cee2",
+  "native_readback_identical": true,
+  "static_scene_names": [
+    "A_LIP_clear",
+    "A_LIP_early",
+    "A_LIP_near",
+    "A_LIP_open",
+    "A_clear",
+    "A_early",
+    "A_near",
+    "A_open",
+    "B_clear",
+    "B_early",
+    "B_near",
+    "B_open"
+  ],
+  "mesh_objects_per_scene": {
+    "A_clear": 17,
+    "A_early": 17,
+    "A_LIP_clear": 19,
+    "A_LIP_early": 19,
+    "A_LIP_near": 19,
+    "A_LIP_open": 19,
+    "A_near": 17,
+    "A_open": 17,
+    "B_clear": 15,
+    "B_early": 15,
+    "B_near": 15,
+    "B_open": 15
+  },
+  "previews": [
+    "A_near_v01.png",
+    "A_open_v01.png",
+    "B_near_v01.png",
+    "B_open_v01.png"
+  ],
+  "tool_envelopes": "viewer-only guide meshes, excluded from native and GLB",
+  "video_created": false,
+  "physical_acceptance_verdict": null
+}

@@ -1,0 +1,211 @@
+{
+  "kind": "auxiliary_static_geometry_observation",
+  "source_sha256": {
+    "/home/rlrk/IsaacLab/eval_runs/ur15_jb_harness_revision_20260907/inputs/v02_source/inputs/v01_source/inputs/UR15_monocular_camera_v01/source/ur15-dual-arm-cell/ur15-dual-arm-cell.urdf": "7f6828df8e27cf88b4190f581284abaf313524aa1bdfa791cfed40669003e0a1",
+    "/home/rlrk/IsaacLab/eval_runs/ur15_jb_harness_revision_20260907/inputs/v02_source/inputs/v01_source/op010_base/assets/robotiq_2f_85_gripper_visualization/meshes/visual/robotiq_arg2f_85_base_link.dae": "d03d6e7395b0aa11ae7954b2f04a0a650448547d5d4f367238098ccd848b3eb5",
+    "/home/rlrk/IsaacLab/eval_runs/ur15_jb_harness_revision_20260907/inputs/v02_source/inputs/v01_source/op010_base/assets/robotiq_2f_85_gripper_visualization/meshes/visual/robotiq_arg2f_85_inner_finger.dae": "3172e8fe000fda75b9b29b48cd8cad4011d184a6df23eb2c3adb6c1f5a4eae93",
+    "/home/rlrk/IsaacLab/eval_runs/ur15_jb_harness_revision_20260907/inputs/v02_source/inputs/v01_source/op010_base/assets/robotiq_2f_85_gripper_visualization/meshes/visual/robotiq_arg2f_85_inner_knuckle.dae": "19b12510eec739a1a4655ff633ce3f02ad3c2eda2cb8f451df900ddfa76c8f14",
+    "/home/rlrk/IsaacLab/eval_runs/ur15_jb_harness_revision_20260907/inputs/v02_source/inputs/v01_source/op010_base/assets/robotiq_2f_85_gripper_visualization/meshes/visual/robotiq_arg2f_85_outer_finger.dae": "32d842e51e0ddd25b3354af212131befa191c183cf4cdb61f82ecbe5c5276323",
+    "/home/rlrk/IsaacLab/eval_runs/ur15_jb_harness_revision_20260907/inputs/v02_source/inputs/v01_source/op010_base/assets/robotiq_2f_85_gripper_visualization/meshes/visual/robotiq_arg2f_85_outer_knuckle.dae": "f1cc5198c9f3b06979af07d2944034b32acbb6130df5396dc2c7253cb656f587",
+    "/home/rlrk/IsaacLab/eval_runs/ur15_jb_harness_revision_20260907/inputs/v02_source/inputs/v01_source/op010_base/assets/robotiq_2f_85_gripper_visualization/meshes/visual/robotiq_gripper_coupling.stl": "4281e83002a25c20dc07c68b8d77da30a13e9a8401f157f6848ed8287d7cce44",
+    "/tmp/hand_fingertip_stage_20260913/data/hand_fingertip_concepts_v01.json": "43f73f4293be825cae76003e73fc4b18a980e69d536f853bae4565eddfab98fd"
+  },
+  "input_bytes_unchanged": true,
+  "reused_hardware_meshes_per_hand": 10,
+  "exports": [
+    {
+      "file": "hand_A_2F_fingertips_v01.glb",
+      "sha256": "9dc178a1e18257db13a0459dbc222165524fe20c93d6663e5165d266a8bd42bb",
+      "mesh_count": 17,
+      "readback_mesh_count": 17,
+      "bounds_m": [
+        [
+          -0.06768825594194956,
+          -0.0485,
+          -0.01749999981811523
+        ],
+        [
+          0.06768825178502931,
+          0.0485,
+          0.1459189301004388
+        ]
+      ],
+      "readback_bounds_max_difference_m": 1.430511473166085e-09
+    },
+    {
+      "file": "hand_B_2F_fingertips_v01.glb",
+      "sha256": "03980f5483039d6625a44b5f103c041895aafe62edae1e6c33d5edf4e73cd158",
+      "mesh_count": 15,
+      "readback_mesh_count": 15,
+      "bounds_m": [
+        [
+          -0.06370193791503034,
+          -0.05,
+          -0.01749999981811525
+        ],
+        [
+          0.06370193375810984,
+          0.05,
+          0.1499927548470361
+        ]
+      ],
+      "readback_bounds_max_difference_m": 7.450580569168253e-10
+    },
+    {
+      "file": "hand_A_LIP_2F_fingertips_v01.glb",
+      "sha256": "27fb100965f2be93a0a2e3108e40f22a077e3b23a1e9ffe1dc690c69d238df80",
+      "mesh_count": 19,
+      "readback_mesh_count": 19,
+      "bounds_m": [
+        [
+          -0.06768825594194956,
+          -0.0485,
+          -0.01749999981811523
+        ],
+        [
+          0.06768825178502931,
+          0.0485,
+          0.1459189301004388
+        ]
+      ],
+      "readback_bounds_max_difference_m": 1.430511473166085e-09
+    }
+  ],
+  "joint_q_rad": {
+    "A": {
+      "near": 0.33636079196671165,
+      "early": 0.3285362270407173,
+      "open": 0.1798694934468238,
+      "clear": 0.1798694934468238
+    },
+    "B": {
+      "near": 0.6782126300601776,
+      "early": 0.6711608457552563,
+      "open": 0.5371769439617493,
+      "clear": 0.5371769439617493
+    },
+    "A_LIP": {
+      "near": 0.33636079196671165,
+      "early": 0.3285362270407173,
+      "open": 0.1798694934468238,
+      "clear": 0.1798694934468238
+    }
+  },
+  "static_opening_observations": {
+    "A": {
+      "near": {
+        "carrier_center_world_m": [
+          0.03199999956457521,
+          0.0,
+          1.8188477113323387e-10
+        ]
+      },
+      "early": {
+        "carrier_center_world_m": [
+          0.03241404834516056,
+          0.0,
+          0.0001682892395853744
+        ]
+      },
+      "open": {
+        "carrier_center_world_m": [
+          0.039999999564575194,
+          0.0,
+          0.003967431859074937
+        ]
+      },
+      "clear": {
+        "carrier_center_world_m": [
+          0.039999999564575194,
+          0.0,
+          0.02896743185907493
+        ]
+      }
+    },
+    "B": {
+      "near": {
+        "carrier_center_world_m": [
+          0.012999999564575183,
+          0.0,
+          1.8188475725544606e-10
+        ]
+      },
+      "early": {
+        "carrier_center_world_m": [
+          0.013402414140800258,
+          0.0,
+          1.76428169341436e-05
+        ]
+      },
+      "open": {
+        "carrier_center_world_m": [
+          0.020999999564575208,
+          0.0,
+          0.0008900926537310366
+        ]
+      },
+      "clear": {
+        "carrier_center_world_m": [
+          0.020999999564575208,
+          0.0,
+          0.02589009265373103
+        ]
+      }
+    },
+    "A_LIP": {
+      "near": {
+        "carrier_center_world_m": [
+          0.03199999956457521,
+          0.0,
+          1.8188477113323387e-10
+        ],
+        "lip_upper_vertices_inside_sample_radius": 33,
+        "upper_z_minus_sample_bottom_range_m": [
+          1.8188477286795734e-10,
+          1.8188477286795734e-10
+        ]
+      },
+      "early": {
+        "carrier_center_world_m": [
+          0.03241404834516056,
+          0.0,
+          0.0001682892395853744
+        ],
+        "lip_upper_vertices_inside_sample_radius": 33,
+        "upper_z_minus_sample_bottom_range_m": [
+          0.00016828923958537613,
+          0.00016828923958537613
+        ]
+      },
+      "open": {
+        "carrier_center_world_m": [
+          0.039999999564575194,
+          0.0,
+          0.003967431859074937
+        ],
+        "lip_upper_vertices_inside_sample_radius": 0,
+        "upper_z_minus_sample_bottom_range_m": null
+      },
+      "clear": {
+        "carrier_center_world_m": [
+          0.039999999564575194,
+          0.0,
+          0.02896743185907493
+        ],
+        "lip_upper_vertices_inside_sample_radius": 0,
+        "upper_z_minus_sample_bottom_range_m": null
+      }
+    }
+  },
+  "not_evaluated": [
+    "grasp_force",
+    "cable_compression",
+    "S_shape_formation",
+    "continuous_collision",
+    "actual_part_fit",
+    "mounting_screws",
+    "arm_motion",
+    "on_hand_camera_clearance"
+  ],
+  "physical_acceptance_verdict": null
+}
