@@ -47344,3 +47344,84 @@ $ ls -la eval_runs/.../P11_UR15B_CONTROLLER_DESIGN_20260913.md ; git status --po
 </details>
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1454 — ✅ **Rs1 (the human) の語「Aで進めて、p11の件は手送りで届けて」（custody = p18 transcript `:41666`・`promptSource=suggestion_accepted`・`isCompactSummary` 無・origin human・2026-09-13 08:31:34 JST）→ m-p18-326（§1453 の relay）を**手送りで 3 卓へ配達・全 3 卓の transcript に record で確定**（p4 `:1879` 08:37:26.116 JST／p0 `:11301` 08:37:28.866／pZ `:7389` 08:37:31.607・全て `type=user`・`promptSource=typed`・head 一致・len 2043）＋ ⭐ **0.9.0 `pane send-text` の実測 3 点（task A の入力）: (i) newline 入りの text は composer に複数行で置かれ**送信されない**（2 行 probe・自卓 transcript 行数不変 41709）(ii) 10 行 body は `[Pasted text #1 +9 lines]` に折り畳まれる = **K+1 == n_lines は 0.9.0 でも成立**（3 卓とも #1 +9）(iii) `send-keys backspace`×N で composer を 1 字ずつ消せる（probe の後始末に使用・live 卓には未使用）**（当卓 2026-09-13 08:39:21 JST 実測）
+
+**契機** = Rs1 の語（08:31:34 JST・`:41666`）。⛔ **実行 0**（sim/run なし）。**送信 3・Enter 3（各卓 1 回）**。
+
+- **手送りの型（tool の gate を手で再現）**: pre = status idle ∧ composer 空（`agent read --source visible --format text` の最終 `❯` 行）→ `herdr pane send-text <pane> "$(cat body)"` → post read = head 行 or `+(n−1) lines` marker・status 再読 idle → `herdr pane send-keys <pane> Enter` 1 回 → 宛先 transcript を 0.5 s × 12 で poll し `m-p18-326` を含む新 record の行番号・ts・promptSource を印字 → status 再読（3 卓とも working へ）。gate 不成立なら Enter を押さない — 3 卓とも PASS。
+- **id と記録**: `bodies/m-p18-326.txt`（= 送った bytes そのもの・head＋本文＋送信時刻・10 行 2,063 B・sha256 `a856d7776deb9969fed1aab9ded96aebae65f9f5ee2245a32905a205d11ff782`）を当卓が手で作成し `.floor` 325→326（tool の `alloc_id` は floor+1 かつ O_EXCL ⇒ 次の tool 割当 = 327・衝突なし）。⛔ **`sent_records.jsonl` に row は無い**（手送りの row 形は未建 = §1450 の提案 4 件の 1 つ・Rs1 の語待ち）⇒ `verify --id m-p18-326` は UNKNOWN(no-record) を返す・**本節が record**。
+- **Enter→record の遅れ**（当卓の `send-keys` 起動時刻 → record ts・CLI 起動込み）: p4 439 ms／p0 478 ms／pZ 481 ms（0.7.1 の 18/23/40 ms は keypress rc 後の測りで方法が違う・比較しない）。
+- **task A（tool 適応）= Rs1 の語で開始**（§1452 提案 A・新 [TASK]・L2・pre-debate 1 cycle）。本節の (i)(ii) が `_after_send` gate の前提を 0.9.0 で再確認した形。
+- 補足: probe 2 本は自卓 `w2:p18` の composer で実施（Rs1 の入力欄と同一 ⇒ 実施前に空を確認・後始末で空に戻した・自卓 transcript に submit 0）。
+
+<details><summary>probe log ＋ hand-send log（当卓・逐語）</summary>
+
+```
+T0 08:35:14.925 composer before:
+  |❯
+  |─────────────────────────────────────────────────────────────────────────────────────────────────────────
+  |  [Fable 5.1] Ctx:██░░░░░░░░20% Ses:█████░░░░░53% 2h34m Wk:█░░░░░░░░░8% Sun08:00
+  |  ⏵⏵ auto mode on (shift+tab to cycle)
+--- probe 1: single line ---
+after send-text:
+  |❯ p18 probe A1 send-text
+  |─────────────────────────────────────────────────────────────────────────────────────────────────────────
+  |  [Fable 5.1] Ctx:██░░░░░░░░20% Ses:█████░░░░░53% 2h34m Wk:█░░░░░░░░░8% Sun08:00
+  |  ⏵⏵ auto mode on (shift+tab to cycle)
+--- clear attempt: backspace x23 ---
+after backspaces:
+  |❯
+  |─────────────────────────────────────────────────────────────────────────────────────────────────────────
+  |  [Fable 5.1] Ctx:██░░░░░░░░20% Ses:█████░░░░░53% 2h34m Wk:█░░░░░░░░░8% Sun08:00
+  |  ⏵⏵ auto mode on (shift+tab to cycle)
+--- probe 2: two lines (newline inside) --- own transcript lines before: 41709
+after send-text:
+  |❯ p18 probe A2 line1
+  |  p18 probe A2 line2
+  |─────────────────────────────────────────────────────────────────────────────────────────────────────────
+  |  [Fable 5.1] Ctx:██░░░░░░░░20% Ses:██████░░░░55% 2h34m Wk:█░░░░░░░░░8% Sun08:00
+own transcript lines after: 41709; submitted-line check:
+1
+--- clear probe 2: backspace x40 ---
+after:
+  |❯
+  |─────────────────────────────────────────────────────────────────────────────────────────────────────────
+  |  [Fable 5.1] Ctx:██░░░░░░░░20% Ses:██████░░░░55% 2h33m Wk:█░░░░░░░░░8% Sun08:00
+----- hand send -----
+body: 10 lines 2063 bytes sha256=a856d7776deb9969 sent_at=2026-09-13 08:37:24 JST
+===== w2:p4 =====
+pre: status=idle composer=[❯] transcript_lines=1878
+post send-text composer:
+  |❯ [Pasted text #1 +9 lines]
+  |───────────────────────────────────────
+  |  [Fable 5.1] Ctx:██░░░░░░░░15% Ses:-- Wk:--
+gate: PASS (head line or +9 marker)
+Enter pressed once at 08:37:25.677
+DELIVERED: line 1879 type= user promptSource= typed ts= 2026-09-12T23:37:26.116Z len= 2043 head_ok= True
+after: status=working composer=[❯]
+===== w2:p0 =====
+pre: status=idle composer=[❯] transcript_lines=11298
+post send-text composer:
+  |❯ [Pasted text #1 +9 lines]
+  |───────────────────────────────────────
+  |  [Fable 5.1] Ctx:████░░░░░░38% Ses:-- Wk:--
+gate: PASS (head line or +9 marker)
+Enter pressed once at 08:37:28.388
+DELIVERED: line 11301 type= user promptSource= typed ts= 2026-09-12T23:37:28.866Z len= 2043 head_ok= True
+after: status=working composer=[❯]
+===== w2:pZ =====
+pre: status=idle composer=[❯] transcript_lines=7386
+post send-text composer:
+  |❯ [Pasted text #1 +9 lines]
+  |───────────────────────────────────────
+  |  [Fable 5.1] Ctx:██░░░░░░░░22% Ses:-- Wk:--
+gate: PASS (head line or +9 marker)
+Enter pressed once at 08:37:31.126
+DELIVERED: line 7389 type= user promptSource= typed ts= 2026-09-12T23:37:31.607Z len= 2043 head_ok= True
+after: status=working composer=[❯]
+```
+
+</details>
+
+**Banked — 時刻は本節 commit の author date が正。**
