@@ -1,0 +1,164 @@
+{
+ "requested_at": "2026-09-12T09:21:47+09:00",
+ "what": "work 4's routing survey, re-run after the rename, with the change predicted before it runs",
+ "why_this_record_exists": "the prediction is this seat's main quality habit and it lived only in conversation, so a missed prediction left no trace; it is now an artifact like every other claim",
+ "channel": {
+  "kind": "direct session message",
+  "to": "isaaclab-70",
+  "executor_session": "cdee2083-a65b-4560-8d7d-6a5313ffeae8",
+  "identified_by": [
+   "its transcript carries 368 references to the v07c routing probe",
+   "its last update 09:00:33 matches commit 9cf3b080e1",
+   "the user's screenshot shows that pane finishing at 09:00"
+  ],
+  "note": "the handover said there is no direct channel; that was the predecessor's constraint in the cloud. Delivery was accepted at 09:2x and a reply arrived, so the channel is settled: it works. Section 4.1 of the seat handover has been rewritten and correction 33 added."
+ },
+ "state_when_requested": {
+  "head": "044c97fbf2",
+  "worktree": "/home/rlrk/IsaacLab-v07",
+  "probe_blob": "fe25c5e37e6d324d0d04c325919981bc906e1e14",
+  "calibration_blob": "a153082383ff35470f7efeea208c0573bbe79fed",
+  "previous_report_sha256": "357799acf4a3f46ab11eadbfc99b274cb2c9130887ef423f89f717b024f1f43b",
+  "previous_report_observed_at": "2026-09-12T08:41:58.391761+09:00"
+ },
+ "checked_here_first": {
+  "check_co_run_calibration.py": "10 of 10 cases hold, exit 0, run in this seat without Blender",
+  "why": "the figure was not transcribed from the handover; it was produced here"
+ },
+ "prediction": {
+  "basis": "the change is a rename and two added fields; no calculation was touched",
+  "should_change": [
+   "extent_lower_m becomes extent_sampled_m, name only",
+   "each span gains margin_before_m and margin_after_m",
+   "method gains the co_run_extent and co_run_shape wording"
+  ],
+  "must_not_change": [
+   "every extent value",
+   "span_count",
+   "span_shape_resolved",
+   "boundaries_on_the_limit",
+   "closest_m",
+   "cables",
+   "crossings"
+  ],
+  "if_it_misses": "the predecessor's claim that no calculation changed is wrong; record the difference as it is and do not reconcile it"
+ },
+ "what_decides_the_result": {
+  "question": "do the instrument's new margins reproduce what the executor measured by hand",
+  "hand_measured_mm": {
+   "S3R_10mm": [
+    0.5,
+    1.9
+   ],
+   "S3R_30mm": [
+    1.6,
+    1.2
+   ],
+   "S3R_56mm": [
+    2.1,
+    7.1
+   ],
+   "S1R_10mm_outer": [
+    0.7,
+    2.1
+   ]
+  },
+  "if_they_agree": "the instrument reproduces the hand measurement",
+  "if_they_disagree": "which one is right is undecided; report it undecided",
+  "answer": {
+   "verdict": "the instrument does not reproduce the hand measurement, except in one column of three",
+   "instrument_vs_mesh_mm": {
+    "S3R_30mm": {
+     "instrument": [
+      1.72,
+      1.02
+     ],
+     "mesh": [
+      1.6,
+      1.2
+     ],
+     "agrees": true
+    },
+    "S3R_10mm": {
+     "instrument": [
+      2.47,
+      1.13
+     ],
+     "mesh": [
+      0.5,
+      1.9
+     ],
+     "agrees": false
+    },
+    "S3R_56mm": {
+     "instrument": [
+      2.89,
+      3.9
+     ],
+     "mesh": [
+      2.1,
+      7.1
+     ],
+     "agrees": false
+    },
+    "S1R_10mm_span_2.4194": {
+     "instrument": [
+      6.51,
+      2.39
+     ],
+     "mesh": [
+      0.7,
+      0.7
+     ],
+     "agrees": false
+    },
+    "S1R_10mm_span_2.5670_2.6066": {
+     "instrument": [
+      0.43,
+      0.58
+     ],
+     "mesh": [
+      7.8,
+      6.9
+     ],
+     "agrees": false
+    }
+   },
+   "undecided": "which one is right. Recorded as section 11.5-f; not reconciled.",
+   "consequence": "span_shape_resolved is unchanged in all six columns, so work 4 still addresses a length and not a shape. What moves is correction 25's example, whose 2.1 / 7.1 the instrument reads as 2.89 / 3.90, both inside the 4 mm uncertainty (correction 36).",
+   "executor_retracted": "its own earlier 'S1R 10 mm outer 0.7 / 2.1 mm'. The 2.1 came from printing both arc-length signs while the sign was undetermined, and was the mirror-side reading. Corrected to 0.7 / 0.7."
+  }
+ },
+ "secondary_ask": "name the three objects in work 3's added_count 1077 that placement.copy_count 1074 does not cover (section 11.5-a). This seat reads them as the three cell roots, but the only ground for that is their names, so it stays a guess until confirmed.",
+ "reply": {
+  "at": "2026-09-12T09:25+09:00",
+  "head_confirmed": "044c97fbf2",
+  "calibration": "10 of 10, exit 0, independently on the executor's side",
+  "archived_previous": {
+   "path": "/tmp/claude-1000/-home-rlrk-IsaacLab/cdee2083-a65b-4560-8d7d-6a5313ffeae8/scratchpad/op030_v07c_routing_survey_0841.json",
+   "sha256": "357799acf4a3f46ab11eadbfc99b274cb2c9130887ef423f89f717b024f1f43b",
+   "kept": true
+  },
+  "leaf_diff": "866 -> 889 leaves, 860 shared; 6 removed, 29 added, 5 changed; nothing unexpected"
+ },
+ "unexpected_changes": 0,
+ "landed_report_sha256": "142a9981a35b08c1cc1331bf68d00ff688103c3684e3fcaa97c16351743bbbff",
+ "formal_physical_validity_verdict": null,
+ "prediction_outcome": {
+  "numbers": "held. All six extent_sampled_m are bit-identical to the old extent_lower_m, and extent_upper_m, span_count, span_shape_resolved, boundaries_on_the_limit, closest_m, cables and crossings are unchanged. Verified in this seat by reading both JSONs, not from the executor's report.",
+  "missed": "method was predicted to change in two fields, co_run_extent and co_run_shape. Only co_run_extent changed. An unpredicted line was added to what_this_does_not_give instead. Documentation fields, not numbers, but the same failure: this seat did not know the full reach of its own edit.",
+  "verdict": "the predecessor's claim that no calculation changed is upheld; this seat's prediction of which prose fields would move is not."
+ },
+ "secondary_ask_answer": {
+  "names": [
+   "OP030_S1R_root",
+   "OP030_S2L_root",
+   "OP030_S3R_root"
+  ],
+  "how": "the executor opened both blends, took the name difference and subtracted the manifest's 1074, rather than reading it off the build script",
+  "what_they_are": "empty objects with no mesh data and no parent, 99 / 104 / 113 direct children, whose world matrices are M(y0) itself (y translation -3.4 / +1.2 / +5.8)",
+  "so": "the three are not unchecked geometry; they are the transform that the 300 / 420 / 354 placement-checked children already verify",
+  "this_seat_had_guessed": "the three cell roots, on the strength of their names alone. The guess was right and was still a guess until this measurement."
+ },
+ "closed_at": "2026-09-12T09:33:34.405672+09:00"
+}

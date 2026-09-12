@@ -1,41 +1,78 @@
 {
-  "observed_at": "2026-09-12T00:09:14.935181+00:00",
-  "what": "each cell's duplication set against the fixed set carried into that cell's namespace",
+  "observed_at": "2026-09-12T09:34:29.914328+09:00",
+  "what": "each cell's whole duplication set against the fixed set carried into that cell's namespace",
   "inputs": {
     "analysis/op030_v06_relocation_selection.json": "2026-09-11T21:13:23.803494+00:00",
-    "analysis/op030_v07c_cell_selection.json": "2026-09-12T03:22:05.411241+09:00"
+    "analysis/op030_v07c_cell_selection.json": "2026-09-12T03:22:05.411241+09:00",
+    "audit/op030_v07c_cell_completeness.json": "2026-09-12T03:43:55.670794+09:00",
+    "audit/op030_v07c_stagger_both_sides.json": "2026-09-12T06:32:42.388333+09:00"
   },
   "bank_prefixes": [
     "OP030B__",
     "OP030B_"
   ],
   "fixed_names_carrying_neither_prefix": [],
+  "set_under_test": "work 1's mapping, plus the closure's tools, plus the supply added by prefix; B is v06's moved set",
+  "every_cell_checks_its_whole_duplicated_set": true,
   "cells": {
     "A": {
       "prefix": "(none)",
-      "selection_count": 201,
+      "mapped_selection_count": 201,
+      "closure_tools_count": 27,
+      "own_supply_count": 72,
+      "supply_prefixes": [
+        "OP030A_feeder"
+      ],
+      "checked_count": 300,
+      "build_duplicated_count": 300,
+      "checks_the_whole_duplicated_set": true,
       "fixed_count": 76,
       "mapped_differs_from_naive": true,
       "overlap_naive": 0,
       "overlap_mapped": 0,
       "overlapping_names": [],
-      "selected_names_containing_a_fixed_name": []
+      "names_containing_a_fixed_name": []
+    },
+    "B": {
+      "prefix": "OP030B__",
+      "mapped_selection_count": 420,
+      "closure_tools_count": 0,
+      "own_supply_count": 0,
+      "supply_prefixes": [],
+      "checked_count": 420,
+      "build_duplicated_count": 420,
+      "checks_the_whole_duplicated_set": true,
+      "fixed_count": 76,
+      "mapped_differs_from_naive": true,
+      "overlap_naive": 0,
+      "overlap_mapped": 0,
+      "overlapping_names": [],
+      "names_containing_a_fixed_name": []
     },
     "C": {
       "prefix": "OP030C__",
-      "selection_count": 180,
+      "mapped_selection_count": 180,
+      "closure_tools_count": 54,
+      "own_supply_count": 120,
+      "supply_prefixes": [
+        "OP030C_feeder"
+      ],
+      "checked_count": 354,
+      "build_duplicated_count": 354,
+      "checks_the_whole_duplicated_set": true,
       "fixed_count": 76,
       "mapped_differs_from_naive": true,
       "overlap_naive": 0,
       "overlap_mapped": 0,
       "overlapping_names": [],
-      "selected_names_containing_a_fixed_name": []
+      "names_containing_a_fixed_name": []
     }
   },
   "what_this_does_not_give": [
     "that no duplicated object occupies a fixed object's space: this compares names, not geometry",
     "anything about the scene; it reads committed files only",
-    "a check on any prefix spelling this script does not know: the loose comparison is a guard, not a proof"
+    "a check on any prefix spelling this script does not know: the loose comparison is a guard, not a proof",
+    "anything about B beyond the naive form, which for B is the right form: its namespace is the bank's"
   ],
   "formal_physical_validity_verdict": null
 }
