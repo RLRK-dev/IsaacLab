@@ -1,0 +1,716 @@
+{
+  "observed_at": "2026-09-12T03:48:33.672467+00:00",
+  "scope": "Re-derivation of HANDOFF_v07_ライン構成見直し §2.3, and the answer to its §6 question b, from committed artifacts only",
+  "read_from": {
+    "audit/op030_v07c_mesh_contact.json": {
+      "observed_at": "2026-09-12T06:04:51.084852+09:00"
+    },
+    "audit/op030_v06_equipment_ids.json": {
+      "observed_at": "2026-09-12T09:57:14.423143+09:00"
+    },
+    "analysis/op030_v07c_cell_selection.json": {
+      "observed_at": "2026-09-12T03:22:05.411241+09:00"
+    },
+    "audit/op030_v07c_mirror_clearance.json": {
+      "observed_at": "2026-09-12T05:50:57.385716+09:00"
+    },
+    "analysis/op030_v06_relocation_selection.json": {
+      "observed_at": "2026-09-11T21:13:23.803494+00:00"
+    }
+  },
+  "method": {
+    "counting": "distinct (cell, moving, obstacle) triples from each cell's contacts and touching lists",
+    "classification": "equipment_id from the v06 layout inventory",
+    "counterfactual": "a pair is removed when its moving member leaves the duplication set",
+    "creation_test": "an excluded member stops moving and becomes an obstacle; it can only be paired with the cell's copy if their boxes come within the candidate band",
+    "band_m": 0.05,
+    "pessimism": "the mirrored envelope still contains the excluded members' own mirrored boxes, so the measured gap is a lower bound on the gap after they are dropped"
+  },
+  "what_this_does_not_give": [
+    "a rerun of probe_op030_v07c_mesh_contact.py; Blender and the .blend are not in the repository",
+    "any statement about pairs the box stage already formed and the triangle stage already answered",
+    "a physical-validity verdict, a takt, or a floor-area decision"
+  ],
+  "counting": {
+    "distinct_pairs": 5,
+    "raw_contact_true": 3,
+    "raw_touching_true": 4,
+    "raw_total": 7,
+    "listed_twice": [
+      {
+        "flag": "touching",
+        "path": "/cells/C/closest_clear[0]"
+      },
+      {
+        "flag": "touching",
+        "path": "/cells/C/closest_clear[1]"
+      }
+    ],
+    "reported_contact_pairs": 3,
+    "reported_touching_pairs": 2,
+    "note": "The per-cell contact_pairs and touching_pairs sum to the distinct population. A raw sweep for the two flags reaches seven because closest_clear repeats C's two touching rows, which are already in cells/C/touching."
+  },
+  "contact_population": [
+    {
+      "cell": "A",
+      "kind": "contacts",
+      "moving": "source_0693_m0120_p04",
+      "moving_tag": "station_hardware_03",
+      "obstacle": "source_0681_m0108_p04",
+      "obstacle_tag": "station_hardware_02",
+      "triangle_pairs": 328,
+      "box_depth_m": 0.1928924972526147,
+      "box_overlap_xyz_m": [
+        0.5375513434410095,
+        0.4050991177558898,
+        0.1928924972526147
+      ]
+    },
+    {
+      "cell": "A",
+      "kind": "contacts",
+      "moving": "source_0693_m0120_p04",
+      "moving_tag": "station_hardware_03",
+      "obstacle": "OP020_direct_mating_station_foot1.33_-2.23",
+      "obstacle_tag": "(not in the inventory)",
+      "triangle_pairs": 36,
+      "box_depth_m": 0.017892492782266345,
+      "box_overlap_xyz_m": [
+        0.10000000149011612,
+        0.10000000149011612,
+        0.017892492782266345
+      ]
+    },
+    {
+      "cell": "C",
+      "kind": "contacts",
+      "moving": "OP030C__source_0693_m0120_p04",
+      "moving_tag": "station_hardware_03",
+      "obstacle": "source_0705_m0132_p04",
+      "obstacle_tag": "station_hardware_04",
+      "triangle_pairs": 207,
+      "box_depth_m": 0.1928924972526147,
+      "box_overlap_xyz_m": [
+        0.5375513434410095,
+        1.206000256538391,
+        0.1928924972526147
+      ]
+    },
+    {
+      "cell": "C",
+      "kind": "touching",
+      "moving": "OP030C_feeder_M6_foot_-0.070",
+      "moving_tag": "(not in the inventory)",
+      "obstacle": "source_0588_m0055_p00",
+      "obstacle_tag": "assembly_cell_04",
+      "triangle_pairs": 0,
+      "box_depth_m": 0.0,
+      "box_overlap_xyz_m": [
+        0.11999999731779099,
+        -2.726912500250478e-07,
+        0.014000000432133675
+      ]
+    },
+    {
+      "cell": "C",
+      "kind": "touching",
+      "moving": "OP030C_feeder_M6_foot_-0.270",
+      "moving_tag": "(not in the inventory)",
+      "obstacle": "source_0588_m0055_p00",
+      "obstacle_tag": "assembly_cell_04",
+      "triangle_pairs": 0,
+      "box_depth_m": 0.0,
+      "box_overlap_xyz_m": [
+        0.11999999731779099,
+        -2.726912500250478e-07,
+        0.014000000432133675
+      ]
+    }
+  ],
+  "cells_are_independent": {
+    "pairwise_shared_counts": {
+      "A&B": 0,
+      "A&C": 0,
+      "B&C": 0
+    },
+    "shared_names": {},
+    "moving_sets_are_disjoint": true,
+    "why_it_matters": "an excluded member of one cell was already an obstacle to the other two, so this changes one cell's answer at a time and never reaches across cells"
+  },
+  "excluded_from_duplication": {
+    "A": {
+      "member_count": 17,
+      "members": [
+        "source_0688",
+        "source_0688_m0115_p00",
+        "source_0688_m0115_p01",
+        "source_0688_m0115_p02",
+        "source_0689",
+        "source_0689_m0116_p00",
+        "source_0690",
+        "source_0690_m0117_p00",
+        "source_0693",
+        "source_0693_m0120_p00",
+        "source_0693_m0120_p01",
+        "source_0693_m0120_p02",
+        "source_0693_m0120_p03",
+        "source_0693_m0120_p04",
+        "source_0694",
+        "source_0694_m0121_p00",
+        "source_0694_m0121_p01"
+      ],
+      "with_geometry": 12,
+      "without_geometry": 5,
+      "tags": [
+        "station_hardware_03"
+      ],
+      "orphaned_by_removal": [],
+      "subtree_is_closed": true
+    },
+    "B": {
+      "member_count": 17,
+      "members": [
+        "OP030B__source_0688",
+        "OP030B__source_0688_m0115_p00",
+        "OP030B__source_0688_m0115_p01",
+        "OP030B__source_0688_m0115_p02",
+        "OP030B__source_0689",
+        "OP030B__source_0689_m0116_p00",
+        "OP030B__source_0690",
+        "OP030B__source_0690_m0117_p00",
+        "OP030B__source_0693",
+        "OP030B__source_0693_m0120_p00",
+        "OP030B__source_0693_m0120_p01",
+        "OP030B__source_0693_m0120_p02",
+        "OP030B__source_0693_m0120_p03",
+        "OP030B__source_0693_m0120_p04",
+        "OP030B__source_0694",
+        "OP030B__source_0694_m0121_p00",
+        "OP030B__source_0694_m0121_p01"
+      ],
+      "with_geometry": 12,
+      "without_geometry": 5,
+      "tags": [
+        "station_hardware_03"
+      ],
+      "orphaned_by_removal": [],
+      "subtree_is_closed": true
+    },
+    "C": {
+      "member_count": 17,
+      "members": [
+        "OP030C__source_0688",
+        "OP030C__source_0688_m0115_p00",
+        "OP030C__source_0688_m0115_p01",
+        "OP030C__source_0688_m0115_p02",
+        "OP030C__source_0689",
+        "OP030C__source_0689_m0116_p00",
+        "OP030C__source_0690",
+        "OP030C__source_0690_m0117_p00",
+        "OP030C__source_0693",
+        "OP030C__source_0693_m0120_p00",
+        "OP030C__source_0693_m0120_p01",
+        "OP030C__source_0693_m0120_p02",
+        "OP030C__source_0693_m0120_p03",
+        "OP030C__source_0693_m0120_p04",
+        "OP030C__source_0694",
+        "OP030C__source_0694_m0121_p00",
+        "OP030C__source_0694_m0121_p01"
+      ],
+      "with_geometry": 12,
+      "without_geometry": 5,
+      "tags": [
+        "station_hardware_03"
+      ],
+      "orphaned_by_removal": [],
+      "subtree_is_closed": true
+    }
+  },
+  "removed_pairs": [
+    {
+      "cell": "A",
+      "kind": "contacts",
+      "moving": "source_0693_m0120_p04",
+      "moving_tag": "station_hardware_03",
+      "obstacle": "source_0681_m0108_p04",
+      "obstacle_tag": "station_hardware_02",
+      "triangle_pairs": 328,
+      "box_depth_m": 0.1928924972526147,
+      "box_overlap_xyz_m": [
+        0.5375513434410095,
+        0.4050991177558898,
+        0.1928924972526147
+      ],
+      "moving_is_excluded": true
+    },
+    {
+      "cell": "A",
+      "kind": "contacts",
+      "moving": "source_0693_m0120_p04",
+      "moving_tag": "station_hardware_03",
+      "obstacle": "OP020_direct_mating_station_foot1.33_-2.23",
+      "obstacle_tag": "(not in the inventory)",
+      "triangle_pairs": 36,
+      "box_depth_m": 0.017892492782266345,
+      "box_overlap_xyz_m": [
+        0.10000000149011612,
+        0.10000000149011612,
+        0.017892492782266345
+      ],
+      "moving_is_excluded": true
+    },
+    {
+      "cell": "C",
+      "kind": "contacts",
+      "moving": "OP030C__source_0693_m0120_p04",
+      "moving_tag": "station_hardware_03",
+      "obstacle": "source_0705_m0132_p04",
+      "obstacle_tag": "station_hardware_04",
+      "triangle_pairs": 207,
+      "box_depth_m": 0.1928924972526147,
+      "box_overlap_xyz_m": [
+        0.5375513434410095,
+        1.206000256538391,
+        0.1928924972526147
+      ],
+      "moving_is_excluded": true
+    }
+  ],
+  "surviving_pairs": [
+    {
+      "cell": "C",
+      "kind": "touching",
+      "moving": "OP030C_feeder_M6_foot_-0.070",
+      "moving_tag": "(not in the inventory)",
+      "obstacle": "source_0588_m0055_p00",
+      "obstacle_tag": "assembly_cell_04",
+      "triangle_pairs": 0,
+      "box_depth_m": 0.0,
+      "box_overlap_xyz_m": [
+        0.11999999731779099,
+        -2.726912500250478e-07,
+        0.014000000432133675
+      ],
+      "moving_is_excluded": false
+    },
+    {
+      "cell": "C",
+      "kind": "touching",
+      "moving": "OP030C_feeder_M6_foot_-0.270",
+      "moving_tag": "(not in the inventory)",
+      "obstacle": "source_0588_m0055_p00",
+      "obstacle_tag": "assembly_cell_04",
+      "triangle_pairs": 0,
+      "box_depth_m": 0.0,
+      "box_overlap_xyz_m": [
+        0.11999999731779099,
+        -2.726912500250478e-07,
+        0.014000000432133675
+      ],
+      "moving_is_excluded": false
+    }
+  ],
+  "newly_possible": [],
+  "separation_to_mirrored_copy": [
+    {
+      "cell": "C",
+      "obstacle": "OP030C__source_0693_m0120_p04",
+      "tag": "station_hardware_03",
+      "stays_at_x_m": [
+        -1.409999966621399,
+        -0.8724486231803894
+      ],
+      "mirrored_envelope_x_m": [
+        0.3926102226953665,
+        2.309999905526638
+      ],
+      "gap_to_mirrored_envelope_m": 1.265058845875756,
+      "deciding_axis": "x",
+      "within_candidate_band": false
+    },
+    {
+      "cell": "A",
+      "obstacle": "source_0693_m0120_p04",
+      "tag": "station_hardware_03",
+      "stays_at_x_m": [
+        -1.409999966621399,
+        -0.8724486231803894
+      ],
+      "mirrored_envelope_x_m": [
+        0.4243646487895444,
+        2.309999905526638
+      ],
+      "gap_to_mirrored_envelope_m": 1.296813271969934,
+      "deciding_axis": "x",
+      "within_candidate_band": false
+    },
+    {
+      "cell": "C",
+      "obstacle": "OP030C__source_0693_m0120_p01",
+      "tag": "station_hardware_03",
+      "stays_at_x_m": [
+        -1.8359999656677246,
+        -1.3990000486373901
+      ],
+      "mirrored_envelope_x_m": [
+        0.3926102226953665,
+        2.309999905526638
+      ],
+      "gap_to_mirrored_envelope_m": 1.7916102713327566,
+      "deciding_axis": "x",
+      "within_candidate_band": false
+    },
+    {
+      "cell": "C",
+      "obstacle": "OP030C__source_0693_m0120_p00",
+      "tag": "station_hardware_03",
+      "stays_at_x_m": [
+        -1.8300000429153442,
+        -1.409999966621399
+      ],
+      "mirrored_envelope_x_m": [
+        0.3926102226953665,
+        2.309999905526638
+      ],
+      "gap_to_mirrored_envelope_m": 1.8026101893167654,
+      "deciding_axis": "x",
+      "within_candidate_band": false
+    },
+    {
+      "cell": "A",
+      "obstacle": "source_0693_m0120_p01",
+      "tag": "station_hardware_03",
+      "stays_at_x_m": [
+        -1.8359999656677246,
+        -1.3990000486373901
+      ],
+      "mirrored_envelope_x_m": [
+        0.4243646487895444,
+        2.309999905526638
+      ],
+      "gap_to_mirrored_envelope_m": 1.8233646974269346,
+      "deciding_axis": "x",
+      "within_candidate_band": false
+    },
+    {
+      "cell": "A",
+      "obstacle": "source_0693_m0120_p00",
+      "tag": "station_hardware_03",
+      "stays_at_x_m": [
+        -1.8300000429153442,
+        -1.409999966621399
+      ],
+      "mirrored_envelope_x_m": [
+        0.4243646487895444,
+        2.309999905526638
+      ],
+      "gap_to_mirrored_envelope_m": 1.8343646154109434,
+      "deciding_axis": "x",
+      "within_candidate_band": false
+    },
+    {
+      "cell": "C",
+      "obstacle": "OP030C__source_0693_m0120_p03",
+      "tag": "station_hardware_03",
+      "stays_at_x_m": [
+        -1.843000054359436,
+        -1.8289999961853027
+      ],
+      "mirrored_envelope_x_m": [
+        0.3926102226953665,
+        2.309999905526638
+      ],
+      "gap_to_mirrored_envelope_m": 2.2216102188806692,
+      "deciding_axis": "x",
+      "within_candidate_band": false
+    },
+    {
+      "cell": "C",
+      "obstacle": "OP030C__source_0693_m0120_p02",
+      "tag": "station_hardware_03",
+      "stays_at_x_m": [
+        -1.8650000095367432,
+        -1.8350000381469727
+      ],
+      "mirrored_envelope_x_m": [
+        0.3926102226953665,
+        2.309999905526638
+      ],
+      "gap_to_mirrored_envelope_m": 2.227610260842339,
+      "deciding_axis": "x",
+      "within_candidate_band": false
+    },
+    {
+      "cell": "A",
+      "obstacle": "source_0693_m0120_p03",
+      "tag": "station_hardware_03",
+      "stays_at_x_m": [
+        -1.843000054359436,
+        -1.8289999961853027
+      ],
+      "mirrored_envelope_x_m": [
+        0.4243646487895444,
+        2.309999905526638
+      ],
+      "gap_to_mirrored_envelope_m": 2.2533646449748472,
+      "deciding_axis": "x",
+      "within_candidate_band": false
+    },
+    {
+      "cell": "A",
+      "obstacle": "source_0693_m0120_p02",
+      "tag": "station_hardware_03",
+      "stays_at_x_m": [
+        -1.8650000095367432,
+        -1.8350000381469727
+      ],
+      "mirrored_envelope_x_m": [
+        0.4243646487895444,
+        2.309999905526638
+      ],
+      "gap_to_mirrored_envelope_m": 2.259364686936517,
+      "deciding_axis": "x",
+      "within_candidate_band": false
+    },
+    {
+      "cell": "C",
+      "obstacle": "OP030C__source_0694_m0121_p01",
+      "tag": "station_hardware_03",
+      "stays_at_x_m": [
+        -1.9450000524520874,
+        -1.9329999685287476
+      ],
+      "mirrored_envelope_x_m": [
+        0.3926102226953665,
+        2.309999905526638
+      ],
+      "gap_to_mirrored_envelope_m": 2.325610191224114,
+      "deciding_axis": "x",
+      "within_candidate_band": false
+    },
+    {
+      "cell": "C",
+      "obstacle": "OP030C__source_0694_m0121_p00",
+      "tag": "station_hardware_03",
+      "stays_at_x_m": [
+        -2.2249999046325684,
+        -1.9450000524520874
+      ],
+      "mirrored_envelope_x_m": [
+        0.3926102226953665,
+        2.309999905526638
+      ],
+      "gap_to_mirrored_envelope_m": 2.337610275147454,
+      "deciding_axis": "x",
+      "within_candidate_band": false
+    },
+    {
+      "cell": "A",
+      "obstacle": "source_0694_m0121_p01",
+      "tag": "station_hardware_03",
+      "stays_at_x_m": [
+        -1.9450000524520874,
+        -1.9329999685287476
+      ],
+      "mirrored_envelope_x_m": [
+        0.4243646487895444,
+        2.309999905526638
+      ],
+      "gap_to_mirrored_envelope_m": 2.357364617318292,
+      "deciding_axis": "x",
+      "within_candidate_band": false
+    },
+    {
+      "cell": "A",
+      "obstacle": "source_0694_m0121_p00",
+      "tag": "station_hardware_03",
+      "stays_at_x_m": [
+        -2.2249999046325684,
+        -1.9450000524520874
+      ],
+      "mirrored_envelope_x_m": [
+        0.4243646487895444,
+        2.309999905526638
+      ],
+      "gap_to_mirrored_envelope_m": 2.369364701241632,
+      "deciding_axis": "x",
+      "within_candidate_band": false
+    },
+    {
+      "cell": "C",
+      "obstacle": "OP030C__source_0688_m0115_p01",
+      "tag": "station_hardware_03",
+      "stays_at_x_m": [
+        -2.2950000762939453,
+        -2.194999933242798
+      ],
+      "mirrored_envelope_x_m": [
+        0.3926102226953665,
+        2.309999905526638
+      ],
+      "gap_to_mirrored_envelope_m": 2.5876101559381643,
+      "deciding_axis": "x",
+      "within_candidate_band": false
+    },
+    {
+      "cell": "C",
+      "obstacle": "OP030C__source_0689_m0116_p00",
+      "tag": "station_hardware_03",
+      "stays_at_x_m": [
+        -2.2919998839497566,
+        -2.1979998871684074
+      ],
+      "mirrored_envelope_x_m": [
+        0.3926102226953665,
+        2.309999905526638
+      ],
+      "gap_to_mirrored_envelope_m": 2.590610109863774,
+      "deciding_axis": "x",
+      "within_candidate_band": false
+    },
+    {
+      "cell": "C",
+      "obstacle": "OP030C__source_0690_m0117_p00",
+      "tag": "station_hardware_03",
+      "stays_at_x_m": [
+        -2.2919998839497566,
+        -2.1979998871684074
+      ],
+      "mirrored_envelope_x_m": [
+        0.3926102226953665,
+        2.309999905526638
+      ],
+      "gap_to_mirrored_envelope_m": 2.590610109863774,
+      "deciding_axis": "x",
+      "within_candidate_band": false
+    },
+    {
+      "cell": "C",
+      "obstacle": "OP030C__source_0688_m0115_p02",
+      "tag": "station_hardware_03",
+      "stays_at_x_m": [
+        -2.2899999618530273,
+        -2.200000047683716
+      ],
+      "mirrored_envelope_x_m": [
+        0.3926102226953665,
+        2.309999905526638
+      ],
+      "gap_to_mirrored_envelope_m": 2.5926102703790823,
+      "deciding_axis": "x",
+      "within_candidate_band": false
+    },
+    {
+      "cell": "C",
+      "obstacle": "OP030C__source_0688_m0115_p00",
+      "tag": "station_hardware_03",
+      "stays_at_x_m": [
+        -2.2639999389648438,
+        -2.2260000705718994
+      ],
+      "mirrored_envelope_x_m": [
+        0.3926102226953665,
+        2.309999905526638
+      ],
+      "gap_to_mirrored_envelope_m": 2.618610293267266,
+      "deciding_axis": "x",
+      "within_candidate_band": false
+    },
+    {
+      "cell": "A",
+      "obstacle": "source_0688_m0115_p01",
+      "tag": "station_hardware_03",
+      "stays_at_x_m": [
+        -2.2950000762939453,
+        -2.194999933242798
+      ],
+      "mirrored_envelope_x_m": [
+        0.4243646487895444,
+        2.309999905526638
+      ],
+      "gap_to_mirrored_envelope_m": 2.6193645820323423,
+      "deciding_axis": "x",
+      "within_candidate_band": false
+    },
+    {
+      "cell": "A",
+      "obstacle": "source_0689_m0116_p00",
+      "tag": "station_hardware_03",
+      "stays_at_x_m": [
+        -2.2919998839497566,
+        -2.1979998871684074
+      ],
+      "mirrored_envelope_x_m": [
+        0.4243646487895444,
+        2.309999905526638
+      ],
+      "gap_to_mirrored_envelope_m": 2.622364535957952,
+      "deciding_axis": "x",
+      "within_candidate_band": false
+    },
+    {
+      "cell": "A",
+      "obstacle": "source_0690_m0117_p00",
+      "tag": "station_hardware_03",
+      "stays_at_x_m": [
+        -2.2919998839497566,
+        -2.1979998871684074
+      ],
+      "mirrored_envelope_x_m": [
+        0.4243646487895444,
+        2.309999905526638
+      ],
+      "gap_to_mirrored_envelope_m": 2.622364535957952,
+      "deciding_axis": "x",
+      "within_candidate_band": false
+    },
+    {
+      "cell": "A",
+      "obstacle": "source_0688_m0115_p02",
+      "tag": "station_hardware_03",
+      "stays_at_x_m": [
+        -2.2899999618530273,
+        -2.200000047683716
+      ],
+      "mirrored_envelope_x_m": [
+        0.4243646487895444,
+        2.309999905526638
+      ],
+      "gap_to_mirrored_envelope_m": 2.6243646964732603,
+      "deciding_axis": "x",
+      "within_candidate_band": false
+    },
+    {
+      "cell": "A",
+      "obstacle": "source_0688_m0115_p00",
+      "tag": "station_hardware_03",
+      "stays_at_x_m": [
+        -2.2639999389648438,
+        -2.2260000705718994
+      ],
+      "mirrored_envelope_x_m": [
+        0.4243646487895444,
+        2.309999905526638
+      ],
+      "gap_to_mirrored_envelope_m": 2.650364719361444,
+      "deciding_axis": "x",
+      "within_candidate_band": false
+    }
+  ],
+  "answer": {
+    "question": "b: does the interference go away if station_hardware leaves the duplication set",
+    "removed_pair_count": 3,
+    "surviving_pair_count": 2,
+    "newly_possible_pair_count": 0,
+    "every_triangle_contact_removed": true,
+    "surviving_pairs_are_only": [
+      [
+        "(not in the inventory)",
+        "assembly_cell_04"
+      ]
+    ],
+    "verdict": "Every triangle-level contact goes. All three have an excluded member as the moving side, so the copy that produced them is not made. Nothing new can appear: each cell's copy lands on the far side of the conveyor, at worst 1.2651 m from the nearest member left standing, against a 0.050 m band. What remains is the two coincident surfaces where C's feeder legs rest on OP040's pedestal, which have nothing to do with the panel."
+  },
+  "checks_failed": [],
+  "formal_physical_validity_verdict": null
+}
