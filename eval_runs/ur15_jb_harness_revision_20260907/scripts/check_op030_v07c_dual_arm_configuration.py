@@ -102,6 +102,15 @@ MOTION_ANCHORS = {
             'seq.release(1, f"T{number:02d}／支持面へ移管", gap=0.060)'
         ),
     },
+    # B's irreducible pair, in one line: each arm holds one end of the same cable.
+    "scripts/op030_split_wire_motion.py": {
+        "both arms hold the two ends of one cable": 'self.state["holds"] = {0: (uid, "T"), 1: (uid, "J1")}',
+        "B turns to the supply": '"OP030B／次の直線ケーブル供給へ旋回", 5.0, turn=-np.pi',
+        "B turns back holding both ends": '／両端保持で組付側へ旋回", 6.0, turn=np.pi',
+    },
+    "scripts/op030_split_b_stagger_v06.py": {
+        "v06 bends the cable during that turn": '"両端保持で組付側へ旋回", "両端保持で旋回しながら曲げる"',
+    },
     "scripts/op030_motion.py": {
         "a turn moves both hands, not one": "self.hands = [transform @ hand for hand in self.hands]",
         "the turn angle is a single shared scalar": "self.yaw += turn",
@@ -109,13 +118,21 @@ MOTION_ANCHORS = {
         "a turn lasts six seconds": "self.phase(label, 6.0, turn=angle)",
     },
 }
-# Every station's motion source, so "only A turns" is a swept result rather than an assertion.
+# Every station's motion source, swept for turns. The first version looked for ".turn(" alone
+# and reported that only A turns. B turns too: it passes turn= straight to phase() instead of
+# going through the Sequence.turn helper, so that pattern missed it.
 STATION_SOURCES = {
     "A (v04, the takt source)": "scripts/op030_support_motion_v04.py",
     "A (superseded base)": "scripts/op030_split_support_motion.py",
-    "B": "scripts/op030_split_wire_motion.py",
-    "C": "scripts/op030_split_fastening_motion.py",
+    "B (authored)": "scripts/op030_split_wire_motion.py",
+    "B (v06 wrapper)": "scripts/op030_split_b_stagger_v06.py",
+    "C (v04)": "scripts/op030_split_c_v04.py",
+    "C (v05)": "scripts/op030_split_c_v05.py",
+    "C (fastening ops)": "scripts/op030_split_fastening_motion.py",
+    "pre-split, one cell did both": "scripts/op030_motion.py",
 }
+# Both ways a turn is asked for. Missing the second is what produced the wrong sweep.
+TURN_CALLS = (".turn(", "turn=np.pi", "turn=-np.pi")
 # Where the fastening round trip is authored. It turns nothing, so that wait is a real wait.
 FASTENER_SOURCE = "scripts/op030_fastener_operations_v04.py"
 
@@ -336,13 +353,13 @@ def read_the_motion_source() -> dict:
         calls = [
             dict(line=number, text=line.strip())
             for number, line in enumerate(lines, 1)
-            if ".turn(" in line and "def turn" not in line
+            if any(pattern in line for pattern in TURN_CALLS) and "def turn" not in line
         ]
         turning[station] = dict(source=source, turn_calls=len(calls), calls=calls)
 
     fastener = ROOT / FASTENER_SOURCE
     fastener_lines = fastener.read_text().splitlines() if fastener.exists() else []
-    fastener_turns = [number for number, line in enumerate(fastener_lines, 1) if ".turn(" in line]
+    fastener_turns = [number for number, line in enumerate(fastener_lines, 1) if any(p in line for p in TURN_CALLS)]
 
     turners = [station for station, row in turning.items() if row["turn_calls"]]
     return dict(
@@ -378,10 +395,16 @@ def read_the_motion_source() -> dict:
                 " fastening instead of holding through it. Reading the base for A's division of labour"
                 " gives the superseded answer."
             ),
-            only_A_turns=(
-                "B and C never call turn, so the shared yaw is A's parts-supply mechanism alone."
-                if turners and all(station.startswith("A") for station in turners)
-                else "not established"
+            which_stations_turn=(
+                "A and B both turn. B's is the stronger case: its two arms hold one cable by its two"
+                " ends and v06 renames the turning phase to 両端保持で旋回しながら曲げる, so for B the"
+                " turn is part of forming the bend rather than only carrying. C's sequence is a"
+                " recorded bank and no authored turn appears in its sources, which is weaker than"
+                " saying C never turns."
+            ),
+            corrected=(
+                "An earlier run of this check reported that only A turns. It searched for '.turn('"
+                " and B passes turn= to phase() directly, so B was missed."
             ),
         ),
     )
