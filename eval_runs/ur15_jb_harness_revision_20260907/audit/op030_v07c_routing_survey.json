@@ -1,5 +1,5 @@
 {
- "observed_at": "2026-09-12T08:21:42.018647+09:00",
+ "observed_at": "2026-09-12T08:41:58.391761+09:00",
  "source": "analysis/op030_v07c_stagger_both_sides.blend",
  "source_sha256": "4e7c5b0d8b00b904c618dac757cf4c97c88de620898e7c7dcca0c3b0eb46ea51",
  "method": {
@@ -45,13 +45,17 @@
    0.03,
    0.056
   ],
-  "centre_line_noise_m": 0.01
+  "centre_line_noise_m": 0.01,
+  "centre_line_gap_uncertainty_m": 0.003999999999999997,
+  "co_run_extent": "a pair of bounds: lower is what the points witness, upper pads a step per end",
+  "co_run_shape": "unresolved where a boundary gap sits within the wander of the limit"
  },
  "what_this_does_not_give": [
   "the cable's allowed bend radius, which belongs to the real cable",
   "the bend radius the model already uses: measured and found not measurable",
   "clearance at the terminations, which is contact by design and is trimmed away",
   "a co-run tighter than 0.01 m, which is inside the centre line's own wander",
+  "where a co-run starts and stops, when its boundary gaps sit on the limit: see span_shape_resolved",
   "support pitch and fixing points",
   "required separation from other services",
   "the pipe inside the air hardware's boxes"
@@ -1013,27 +1017,40 @@
      "below_centre_line_noise": false,
      "points_inside": 5,
      "span_count": 4,
-     "extent_m": 0.33953324342318614,
+     "zero_width_spans": 3,
+     "extent_lower_m": 0.03964341343245836,
+     "extent_upper_m": 0.33953324342318614,
+     "boundaries_on_the_limit": 6,
+     "span_shape_resolved": false,
+     "touches_run_end": false,
      "spans": [
       {
        "from_m": 1.938180860428544,
        "to_m": 1.938180860428544,
-       "points": 1
+       "width_m": 0.0,
+       "points": 1,
+       "parted_before_m": null
       },
       {
        "from_m": 2.419445854967908,
        "to_m": 2.419445854967908,
-       "points": 1
+       "width_m": 0.0,
+       "points": 1,
+       "parted_before_m": 0.4812649945393641
       },
       {
        "from_m": 2.5669666906371424,
        "to_m": 2.606610104069601,
-       "points": 2
+       "width_m": 0.03964341343245836,
+       "points": 2,
+       "parted_before_m": 0.14752083566923435
       },
       {
        "from_m": 2.726253743020023,
        "to_m": 2.726253743020023,
-       "points": 1
+       "width_m": 0.0,
+       "points": 1,
+       "parted_before_m": 0.11964363895042229
       }
      ],
      "closest_m": 0.00033135399484541145
@@ -1043,17 +1060,26 @@
      "below_centre_line_noise": false,
      "points_inside": 11,
      "span_count": 2,
-     "extent_m": 0.4911420949749179,
+     "zero_width_spans": 1,
+     "extent_lower_m": 0.3448671142583848,
+     "extent_upper_m": 0.4911420949749179,
+     "boundaries_on_the_limit": 3,
+     "span_shape_resolved": false,
+     "touches_run_end": false,
      "spans": [
       {
        "from_m": 1.938180860428544,
        "to_m": 1.938180860428544,
-       "points": 1
+       "width_m": 0.0,
+       "points": 1,
+       "parted_before_m": null
       },
       {
        "from_m": 2.419445854967908,
        "to_m": 2.764312969226293,
-       "points": 10
+       "width_m": 0.3448671142583848,
+       "points": 10,
+       "parted_before_m": 0.4812649945393641
       }
      ],
      "closest_m": 0.00033135399484541145
@@ -1063,17 +1089,26 @@
      "below_centre_line_noise": false,
      "points_inside": 14,
      "span_count": 2,
-     "extent_m": 0.6018988593199202,
+     "zero_width_spans": 0,
+     "extent_lower_m": 0.45465753940008846,
+     "extent_upper_m": 0.6018988593199202,
+     "boundaries_on_the_limit": 0,
+     "span_shape_resolved": true,
+     "touches_run_end": false,
      "spans": [
       {
        "from_m": 1.8998153788207919,
        "to_m": 1.9770886315396157,
-       "points": 3
+       "width_m": 0.07727325271882379,
+       "points": 3,
+       "parted_before_m": null
       },
       {
        "from_m": 2.386928682545028,
        "to_m": 2.764312969226293,
-       "points": 11
+       "width_m": 0.37738428668126467,
+       "points": 11,
+       "parted_before_m": 0.40984005100541254
       }
      ],
      "closest_m": 0.00033135399484541145
@@ -1101,12 +1136,19 @@
      "below_centre_line_noise": false,
      "points_inside": 13,
      "span_count": 1,
-     "extent_m": 0.5589351367170835,
+     "zero_width_spans": 0,
+     "extent_lower_m": 0.4787838348533082,
+     "extent_upper_m": 0.5589351367170835,
+     "boundaries_on_the_limit": 2,
+     "span_shape_resolved": false,
+     "touches_run_end": false,
      "spans": [
       {
        "from_m": 0.540836311020934,
        "to_m": 1.0196201458742422,
-       "points": 13
+       "width_m": 0.4787838348533082,
+       "points": 13,
+       "parted_before_m": null
       }
      ],
      "closest_m": 0.0009225161343814332
@@ -1116,12 +1158,19 @@
      "below_centre_line_noise": false,
      "points_inside": 17,
      "span_count": 1,
-     "extent_m": 0.7192048604856884,
+     "zero_width_spans": 0,
+     "extent_lower_m": 0.6390279292244534,
+     "extent_upper_m": 0.7192048604856884,
+     "boundaries_on_the_limit": 2,
+     "span_shape_resolved": false,
+     "touches_run_end": false,
      "spans": [
       {
        "from_m": 0.46089938192864993,
        "to_m": 1.0999273111531034,
-       "points": 17
+       "width_m": 0.6390279292244534,
+       "points": 17,
+       "parted_before_m": null
       }
      ],
      "closest_m": 0.0009225161343814332
@@ -1131,12 +1180,19 @@
      "below_centre_line_noise": false,
      "points_inside": 19,
      "span_count": 1,
-     "extent_m": 0.7990736780777571,
+     "zero_width_spans": 0,
+     "extent_lower_m": 0.7192048604856884,
+     "extent_upper_m": 0.7990736780777571,
+     "boundaries_on_the_limit": 2,
+     "span_shape_resolved": false,
+     "touches_run_end": false,
      "spans": [
       {
        "from_m": 0.4210929901395886,
        "to_m": 1.140297850625277,
-       "points": 19
+       "width_m": 0.7192048604856884,
+       "points": 19,
+       "parted_before_m": null
       }
      ],
      "closest_m": 0.0009225161343814332
