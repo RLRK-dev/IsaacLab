@@ -146,6 +146,36 @@ def invisible_dip_is_not_a_lower_bound() -> bool:
     return ok
 
 
+def point_to_point_overstates_a_coarse_crossing() -> bool:
+    """Pin the figure the handover uses to justify measuring gaps between segments.
+
+    Section 4 says that on a coarse polyline, sample to sample returns a gap an order of
+    magnitude too large where segment to segment returns the true one. That number lived only
+    in prose: the test that produced it was in no committed script, so the claim could not be
+    re-run. It is a property of the probe rather than of the scene, so it belongs here.
+
+    Two lines crossing at right angles, stepped coarsely, offset in z. The closest approach
+    falls midway between samples on both, which is where the nearest sample is far and the
+    nearest point on the segment is not.
+    """
+    step, true_gap = 0.33, 0.020
+    first = np.array([[index * step - 0.825, 0.0, 0.0] for index in range(6)])
+    second = np.array([[0.0, index * step - 0.825, true_gap] for index in range(6)])
+    by_sample = min(float(np.linalg.norm(a - b)) for a in first for b in second)
+    by_segment = min(
+        probe.segment_gap(first[i], first[i + 1], second[j], second[j + 1])[0]
+        for i in range(len(first) - 1)
+        for j in range(len(second) - 1)
+    )
+    ok = by_segment < true_gap + 1e-9 and by_sample > 10 * by_segment
+    print(f"{'ok  ' if ok else 'FAIL'} point to point overstates a crossing the segments resolve")
+    print(
+        f"       step {step:.2f} m, true gap {true_gap:.4f} m:"
+        f" sample to sample {by_sample:.4f} m, segment to segment {by_segment:.4f} m"
+    )
+    return ok
+
+
 def main() -> int:
     print(f"step {STEP} m, limit {LIMIT} m, gap uncertainty {probe.CENTRE_LINE_GAP_UNCERTAINTY_M:.4f} m\n")
     results = [
@@ -200,6 +230,7 @@ def main() -> int:
     ]
     results.append(one_firm_end_and_one_soft())
     results.append(invisible_dip_is_not_a_lower_bound())
+    results.append(point_to_point_overstates_a_coarse_crossing())
     failed = results.count(False)
     print(f"\n{len(results) - failed} of {len(results)} cases hold")
     return 1 if failed else 0
