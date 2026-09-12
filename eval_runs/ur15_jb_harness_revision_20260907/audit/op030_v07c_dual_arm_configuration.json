@@ -1,0 +1,318 @@
+{
+  "observed_at": "2026-09-12T04:06:57.296830+00:00",
+  "scope": "Re-derivation of HANDOFF_v07_ライン構成見直し §5 from committed artifacts only",
+  "read_from": {
+    "audit/op030_v06_equipment_ids.json": {
+      "observed_at": "2026-09-12T09:57:14.423143+09:00"
+    },
+    "analysis/op030_v07c_cell_selection.json": {
+      "observed_at": "2026-09-12T03:22:05.411241+09:00"
+    },
+    "analysis/op030_v06_relocation_selection.json": {
+      "observed_at": "2026-09-11T21:13:23.803494+00:00"
+    },
+    "audit/op030_v07c_mirror_clearance.json": {
+      "observed_at": "2026-09-12T05:50:57.385716+09:00"
+    },
+    "audit/op030_v07c_mesh_contact.json": {
+      "observed_at": "2026-09-12T06:04:51.084852+09:00"
+    }
+  },
+  "what_this_does_not_give": [
+    "any swept-volume or whole-motion result; the inventory is one saved pose",
+    "the relative accuracy B's two-ended hold needs, which is a property of the real cable",
+    "a takt, a cycle time, or a physical-validity verdict"
+  ],
+  "disputed_figure": {
+    "matches": [
+      {
+        "moving": "OP030C__source_1054_m0309_p00",
+        "moving_tag": "robot_OP030_left",
+        "obstacle": "source_1136_m0304_p00",
+        "obstacle_tag": "robot_OP040_left",
+        "nearest_m": 0.0058752442710101604,
+        "nearest_from_moving_m": 0.018594585359096527,
+        "nearest_from_obstacle_m": 0.0058752442710101604
+      }
+    ],
+    "measures_one_arm_against_the_other": false,
+    "moving_side_is_a_mirrored_copy": true,
+    "finding": "§5.2 and §5.3 put this against the present configuration. It is OP030's left arm in the mirrored S3R copy against OP040's left arm: a different station's robot, and a copy that case ② would build rather than anything standing today."
+  },
+  "arm_against_arm_in_committed_artifacts": {
+    "files_scanned": 49,
+    "tagged_pairs_seen": 38,
+    "left_against_right_pairs": 0,
+    "pairs": [],
+    "why_zero": "obstacles(exclude) returns every object that is not moving, and a cell's moving set holds both arms, so the box stage never forms the pair. The probe also mirrors only the moving side: it asks what a copy would be built into, not what a cell does to itself."
+  },
+  "mounting": {
+    "A": {
+      "station_y_m": -1.7,
+      "column": {
+        "count": 1,
+        "chosen": {
+          "source": "source_0578",
+          "part_count": 9,
+          "low_m": [
+            -1.074499975663426,
+            -2.0156574359144326,
+            0.3700000047683716
+          ],
+          "high_m": [
+            -0.6497469390749675,
+            -1.384342659452999,
+            1.6256574392318726
+          ],
+          "centre_x_m": -0.8621234573691967,
+          "centre_y_m": -1.7000000476837158,
+          "centred_on_station": true
+        },
+        "others": [
+          "source_0578"
+        ]
+      },
+      "mounts": {
+        "left": {
+          "chain_starts_at": "source_1046",
+          "links": [
+            "source_1046",
+            "source_1046_m0301_p00"
+          ],
+          "x_m": -0.8999950885772705,
+          "y_m": -1.9327279329299927,
+          "z_m": 1.5427279472351074,
+          "inside_column_footprint": true
+        },
+        "right": {
+          "chain_starts_at": "source_1086",
+          "links": [
+            "source_1086",
+            "source_1086_m0301_p00"
+          ],
+          "x_m": -0.8999950885772705,
+          "y_m": -1.4672720432281494,
+          "z_m": 1.5427279472351074,
+          "inside_column_footprint": true
+        }
+      },
+      "shared_column": {
+        "both_on_one_column": true,
+        "base_pitch_m": 0.46545588970184326,
+        "same_height": true,
+        "base_height_m": 1.5427279472351074,
+        "midpoint_xy_m": [
+          -0.8999950885772705,
+          -1.699999988079071
+        ],
+        "midpoint_is_the_station_centre": true,
+        "shoulder_line_yaw_deg": 0.0,
+        "reach_back_to_centre_m": 0.23272794485092163
+      },
+      "saved_pose_envelope": {
+        "robot_OP030_left": {
+          "low_m": [
+            -1.0019951231484363,
+            -2.700610446163139,
+            1.4074076935033988
+          ],
+          "high_m": [
+            -0.3009121705035613,
+            -1.8478751225359367,
+            2.021473071813552
+          ],
+          "member_count": 26
+        },
+        "robot_OP030_right": {
+          "low_m": [
+            -1.0019951231484363,
+            -1.5521248536212604,
+            1.3444918224560747
+          ],
+          "high_m": [
+            -0.4244918951736807,
+            -0.6993906957371462,
+            2.0214715181727567
+          ],
+          "member_count": 47
+        }
+      },
+      "saved_pose_gap": {
+        "gap_m": 0.29575026891467626,
+        "deciding_axis": "y",
+        "boxes_overlap": false,
+        "this_is_one_pose_not_a_sweep": true
+      }
+    },
+    "C": {
+      "station_y_m": 2.9,
+      "column": {
+        "count": 1,
+        "chosen": {
+          "source": "source_0578",
+          "part_count": 9,
+          "low_m": [
+            -1.074499975663426,
+            2.5843424687181358,
+            0.3700000047683716
+          ],
+          "high_m": [
+            -0.6497469390749675,
+            3.2156572451795693,
+            1.6256574392318726
+          ],
+          "centre_x_m": -0.8621234573691967,
+          "centre_y_m": 2.8999998569488525,
+          "centred_on_station": true
+        },
+        "others": [
+          "source_0578"
+        ]
+      },
+      "mounts": {
+        "left": {
+          "chain_starts_at": "source_1046",
+          "links": [
+            "OP030C__source_1046",
+            "OP030C__source_1046_m0301_p00"
+          ],
+          "x_m": -0.8203977346420288,
+          "y_m": 2.6813089847564697,
+          "z_m": 1.5427279472351074,
+          "inside_column_footprint": true
+        },
+        "right": {
+          "chain_starts_at": "source_1086",
+          "links": [
+            "OP030C__source_1086",
+            "OP030C__source_1086_m0301_p00"
+          ],
+          "x_m": -0.97959303855896,
+          "y_m": 3.118694305419922,
+          "z_m": 1.5427279472351074,
+          "inside_column_footprint": true
+        }
+      },
+      "shared_column": {
+        "both_on_one_column": true,
+        "base_pitch_m": 0.46545575892997065,
+        "same_height": true,
+        "base_height_m": 1.5427279472351074,
+        "midpoint_xy_m": [
+          -0.8999953866004944,
+          2.900001645088196
+        ],
+        "midpoint_is_the_station_centre": true,
+        "shoulder_line_yaw_deg": 20.00000766798139,
+        "reach_back_to_centre_m": 0.23272787946498533
+      },
+      "saved_pose_envelope": {
+        "robot_OP030_left": {
+          "low_m": [
+            -1.0019951231484363,
+            1.8993894584694293,
+            1.4578751379144075
+          ],
+          "high_m": [
+            -0.3981973895089295,
+            2.7521249013059212,
+            2.021473071813552
+          ],
+          "member_count": 26
+        },
+        "robot_OP030_right": {
+          "low_m": [
+            -1.0019951231484363,
+            3.047875051011308,
+            1.2385017823763693
+          ],
+          "high_m": [
+            -0.4407831356939531,
+            3.900609268500067,
+            2.0214715181727567
+          ],
+          "member_count": 26
+        }
+      },
+      "saved_pose_gap": {
+        "gap_m": 0.2957501497053867,
+        "deciding_axis": "y",
+        "boxes_overlap": false,
+        "this_is_one_pose_not_a_sweep": true
+      }
+    },
+    "B": {
+      "station_y_m": 0.6,
+      "column": {
+        "count": 1,
+        "chosen": {
+          "source": "source_0578",
+          "part_count": 9,
+          "low_m": [
+            -1.074499975663426,
+            0.2843425164018516,
+            0.3700000047683716
+          ],
+          "high_m": [
+            -0.6497469390749675,
+            0.9156572928632851,
+            1.6256574392318726
+          ],
+          "centre_x_m": -0.8621234573691967,
+          "centre_y_m": 0.5999999046325684,
+          "centred_on_station": true
+        },
+        "others": [
+          "source_0578"
+        ]
+      },
+      "mounts": {
+        "left": null,
+        "right": null
+      },
+      "saved_pose_envelope": {
+        "robot_OP030_left": {
+          "low_m": [
+            -1.0019951231484363,
+            -0.40061049384685476,
+            1.344491822456045
+          ],
+          "high_m": [
+            -0.4244918951722754,
+            0.4521248297803476,
+            2.021473071813552
+          ],
+          "member_count": 47
+        },
+        "robot_OP030_right": {
+          "low_m": [
+            -1.0019951231484363,
+            0.7478750986950239,
+            1.3444918224560747
+          ],
+          "high_m": [
+            -0.4244918951736807,
+            1.6006093161837827,
+            2.0214715181727567
+          ],
+          "member_count": 47
+        }
+      },
+      "saved_pose_gap": {
+        "gap_m": 0.29575026891467626,
+        "deciding_axis": "y",
+        "boxes_overlap": false,
+        "this_is_one_pose_not_a_sweep": true
+      },
+      "not_established": "op030_v06_relocation_selection.json commits B's object names but not their placements, so B's shoulders cannot be located from a checkout"
+    }
+  },
+  "answer": {
+    "the_5_9_mm_measures_the_present_configuration": false,
+    "self_interference_measurements_that_exist": 0,
+    "configuration": "one column per cell, both arms on it, shoulders 465.5 mm apart at Z 1.5427, each reaching 232.7 mm back toward the station centre to work",
+    "verdict": "§5.2's description of the configuration holds -- the two arms do share one column. Its evidence does not. The 5.9 mm belongs to a different pair entirely, and the present configuration's self-interference has never been measured. It also cannot be, with the probes as written, because they only ever test a mirrored copy against what is not moving. §5.3's current row therefore has no measured entry in its self-interference column, and the table's one number should come out."
+  },
+  "checks_failed": [],
+  "formal_physical_validity_verdict": null
+}
