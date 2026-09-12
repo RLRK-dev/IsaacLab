@@ -66,7 +66,6 @@
     }
   ],
   "scope": "Seven synchronous UI selection events; photograph dimensions are checked separately; not contact/physical validation",
-  "source_page_sha256": "3ebbbaedfec8d137e045d51d593305d663da2062f0e8ad0727b02e8e5c1b77d2",
   "source_image_sizes_checked_separately": {
     "overview": [
       1620,
@@ -77,5 +76,6 @@
       1080
     ]
   },
+  "source_page_sha256": "fb388211748a4bba5ac35e332c21187a974201d274445807e5fb61bb0d87a734",
   "physical_acceptance_verdict": null
 }

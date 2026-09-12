@@ -1,5 +1,5 @@
 {
-  "observed_at": "2026-09-12T22:34:03.819303+00:00",
+  "observed_at": "2026-09-12T22:48:29.837195+00:00",
   "scope": "public-source correspondence and proposed hand interfaces, no physical verdict",
   "source_photos": [
     {
@@ -21,8 +21,8 @@
     "matches_recorded_pdf": true
   },
   "data_sha256": "32c09e74252ed9b1691488adc61a5f90ace22905b538f2d0b57d49f713e0e6c5",
-  "template_sha256": "cb79553f5db00e2bdf5878fd57fffdcccee60235d2e6562f6905d526fea3d338",
-  "page_sha256": "3ebbbaedfec8d137e045d51d593305d663da2062f0e8ad0727b02e8e5c1b77d2",
+  "template_sha256": "67a6278380af59df4d16e6cf2fcf889c112a0102b6091f7d90d21e1e4465e14a",
+  "page_sha256": "fb388211748a4bba5ac35e332c21187a974201d274445807e5fb61bb0d87a734",
   "target_ids": [
     "A01",
     "A02",
