@@ -1,0 +1,186 @@
+{
+ "observed_at": "2026-09-12T09:45:11.011997+09:00",
+ "scope": "Cable run length taken from the mesh, to be compared with the survey's march",
+ "source": "analysis/op030_v07c_stagger_both_sides.blend",
+ "source_sha256": "4e7c5b0d8b00b904c618dac757cf4c97c88de620898e7c7dcca0c3b0eb46ea51",
+ "survey": "audit/op030_v07c_routing_survey.json",
+ "survey_sha256": "142a9981a35b08c1cc1331bf68d00ff688103c3684e3fcaa97c16351743bbbff",
+ "survey_observed_at": "2026-09-12T09:22:39.459679+09:00",
+ "method": {
+  "pappus": "volume = section area x path length and outer area = section perimeter x path length, both exact for a swept section, solved together with two flat caps",
+  "ring_centres": "the centroid of each ring of vertices lies on the axis; the polyline through them",
+  "ring_grouping": "vertices taken 16 at a time in index order, then tested: each group flat to 0.0001 m and round to 0.01 m, or the grouping is reported as not found",
+  "section_sides": 16
+ },
+ "what_this_does_not_give": [
+  "which length the cable would have if it were laid straight",
+  "the section of the real cable, this being the model's",
+  "a bend radius: the ring spacing is 60 mm and says nothing finer",
+  "any judgement of whether the run is physically sound"
+ ],
+ "cables": {
+  "source_0693_m0120_p04": {
+   "closed": true,
+   "boundary_edges": 0,
+   "vertex_count": 754,
+   "triangle_count": 1504,
+   "area_m2": 0.49452754385584474,
+   "volume_m3": 0.006721654494322477,
+   "section_sides": 16,
+   "section_circumradius_m": 0.027988166643739508,
+   "section_across_corners_m": 0.055976333287479016,
+   "section_across_flats_m": 0.05490076373930479,
+   "length_from_area_and_volume_m": 2.8028356672643344,
+   "rings": {
+    "found": true,
+    "ring_count": 47,
+    "vertices_per_ring": 16,
+    "worst_flatness_m": 1.3252453990903086e-07,
+    "worst_roundness_m": 2.0796493164706997e-07,
+    "mean_radius_m": 0.027999999848328478,
+    "spacing_m": {
+     "min": 0.009406441733380053,
+     "mean": 0.060930144593154614,
+     "max": 1.1242537796497345
+    },
+    "length_m": 2.8027866512851123
+   },
+   "length_from_ring_centres_m": 2.8027866512851123,
+   "survey_run_length_m": 2.8007975248011125,
+   "survey_centre_line_points": 74,
+   "survey_minus_pappus_fraction": -0.00072717158805502,
+   "survey_minus_rings_fraction": -0.0007096960031145461
+  },
+  "OP030_S1R__source_0693_m0120_p04": {
+   "closed": true,
+   "boundary_edges": 0,
+   "vertex_count": 754,
+   "triangle_count": 1504,
+   "area_m2": 0.4945275438558475,
+   "volume_m3": 0.00672165449432276,
+   "section_sides": 16,
+   "section_circumradius_m": 0.02798816664374055,
+   "section_across_corners_m": 0.0559763332874811,
+   "section_across_flats_m": 0.05490076373930683,
+   "length_from_area_and_volume_m": 2.8028356672642443,
+   "rings": {
+    "found": true,
+    "ring_count": 47,
+    "vertices_per_ring": 16,
+    "worst_flatness_m": 1.3252453974379845e-07,
+    "worst_roundness_m": 2.0796493152216988e-07,
+    "mean_radius_m": 0.027999999848328547,
+    "spacing_m": {
+     "min": 0.009406441733380075,
+     "mean": 0.06093014459315483,
+     "max": 1.124253779649739
+    },
+    "length_m": 2.802786651285122
+   },
+   "length_from_ring_centres_m": 2.802786651285122,
+   "survey_run_length_m": 2.8007975248011223,
+   "survey_centre_line_points": 74,
+   "survey_minus_pappus_fraction": -0.0007271715880193819,
+   "survey_minus_rings_fraction": -0.0007096960031145461
+  },
+  "OP030_S3R__OP030C__source_0693_m0120_p04": {
+   "closed": true,
+   "boundary_edges": 0,
+   "vertex_count": 754,
+   "triangle_count": 1504,
+   "area_m2": 0.4945275438558475,
+   "volume_m3": 0.006721654494322225,
+   "section_sides": 16,
+   "section_circumradius_m": 0.02798816664373828,
+   "section_across_corners_m": 0.05597633328747656,
+   "section_across_flats_m": 0.05490076373930238,
+   "length_from_area_and_volume_m": 2.802835667264475,
+   "rings": {
+    "found": true,
+    "ring_count": 47,
+    "vertices_per_ring": 16,
+    "worst_flatness_m": 1.325245396336435e-07,
+    "worst_roundness_m": 2.0796493183788956e-07,
+    "mean_radius_m": 0.027999999848328547,
+    "spacing_m": {
+     "min": 0.009406441733380075,
+     "mean": 0.060930144593154816,
+     "max": 1.1242537796497398
+    },
+    "length_m": 2.8027866512851216
+   },
+   "length_from_ring_centres_m": 2.8027866512851216,
+   "survey_run_length_m": 2.800797524801121,
+   "survey_centre_line_points": 74,
+   "survey_minus_pappus_fraction": -0.0007271715881022045,
+   "survey_minus_rings_fraction": -0.0007096960031147681
+  },
+  "source_0681_m0108_p04": {
+   "closed": true,
+   "boundary_edges": 0,
+   "vertex_count": 754,
+   "triangle_count": 1504,
+   "area_m2": 0.49452754365173635,
+   "volume_m3": 0.006721652468298613,
+   "section_sides": 16,
+   "section_circumradius_m": 0.02798815805097145,
+   "section_across_corners_m": 0.0559763161019429,
+   "section_across_flats_m": 0.05490074688398393,
+   "length_from_area_and_volume_m": 2.8028365434624622,
+   "rings": {
+    "found": true,
+    "ring_count": 47,
+    "vertices_per_ring": 16,
+    "worst_flatness_m": 1.6713006979448067e-07,
+    "worst_roundness_m": 3.2094729193049565e-07,
+    "mean_radius_m": 0.027999997597378926,
+    "spacing_m": {
+     "min": 0.00940643291168891,
+     "mean": 0.06093014656898766,
+     "max": 1.124253734946251
+    },
+    "length_m": 2.8027867421734323
+   },
+   "length_from_ring_centres_m": 2.8027867421734323,
+   "survey_run_length_m": 2.7946707184994906,
+   "survey_centre_line_points": 74,
+   "survey_minus_pappus_fraction": -0.0029134146199207844,
+   "survey_minus_rings_fraction": -0.0028956978966041547
+  },
+  "source_0705_m0132_p04": {
+   "closed": true,
+   "boundary_edges": 0,
+   "vertex_count": 754,
+   "triangle_count": 1504,
+   "area_m2": 0.49452754755525835,
+   "volume_m3": 0.0067216526809362525,
+   "section_sides": 16,
+   "section_circumradius_m": 0.027988158726514993,
+   "section_across_corners_m": 0.055976317453029986,
+   "section_across_flats_m": 0.054900748209110256,
+   "length_from_area_and_volume_m": 2.8028364968266275,
+   "rings": {
+    "found": true,
+    "ring_count": 47,
+    "vertices_per_ring": 16,
+    "worst_flatness_m": 7.235543157159408e-08,
+    "worst_roundness_m": 1.0663755712486678e-07,
+    "mean_radius_m": 0.027999999096227517,
+    "spacing_m": {
+     "min": 0.009406442315371414,
+     "mean": 0.06093014410463432,
+     "max": 1.124253749847412
+    },
+    "length_m": 2.8027866288131786
+   },
+   "length_from_ring_centres_m": 2.8027866288131786,
+   "survey_run_length_m": 2.794670660158064,
+   "survey_centre_line_points": 74,
+   "survey_minus_pappus_fraction": -0.0029134188447341725,
+   "survey_minus_rings_fraction": -0.002895678383677436
+  }
+ },
+ "scene_world_transforms_unchanged": true,
+ "saved_scene": false,
+ "formal_physical_validity_verdict": null
+}

@@ -1,0 +1,393 @@
+{
+ "observed_at": "2026-09-12T09:47:53.784826+09:00",
+ "scope": "The survey's crossings measured again from the meshes, without its centre line",
+ "source": "analysis/op030_v07c_stagger_both_sides.blend",
+ "source_sha256": "4e7c5b0d8b00b904c618dac757cf4c97c88de620898e7c7dcca0c3b0eb46ea51",
+ "survey": "audit/op030_v07c_routing_survey.json",
+ "survey_sha256": "142a9981a35b08c1cc1331bf68d00ff688103c3684e3fcaa97c16351743bbbff",
+ "survey_observed_at": "2026-09-12T09:22:39.459679+09:00",
+ "method": {
+  "surface_spacing_m": 0.004,
+  "surface_seed": 0,
+  "windows_m": [
+   0.06,
+   0.1,
+   0.15
+  ],
+  "axis": "the principal direction of the surface points inside the window",
+  "gap": "the distance between the two fitted straight axes",
+  "why_three_windows": "the fit is straight and the cable is not, so the spread is the answer's width",
+  "minimum_points": 100,
+  "seeds": [
+   0,
+   1,
+   2,
+   3,
+   4
+  ]
+ },
+ "what_this_does_not_give": [
+  "where along either run the closest approach falls: the axis fitted here is straight",
+  "how far the two runs stay together, which the survey's co_run measures",
+  "a surface to surface distance: at these gaps the two tubes overlap",
+  "this distance to three figures: it moves with the draw, so the range is the answer",
+  "any judgement of whether the crossing is acceptable"
+ ],
+ "crossings": [
+  {
+   "runs": [
+    "OP030_S1R__source_0693_m0120_p04",
+    "source_0681_m0108_p04"
+   ],
+   "at_m": [
+    0.9009660818331241,
+    -2.2849873236483402,
+    0.16164707561042216
+   ],
+   "survey_gap_m": 5.288329367403435e-05,
+   "survey_along_first_m": 2.568370311630682,
+   "survey_along_second_m": 2.5842772181964637,
+   "axis_gap_range_m": [
+    8.432949763820157e-05,
+    0.0005103335491181517
+   ],
+   "angle_range_deg": [
+    0.4779534150512589,
+    3.574274757417027
+   ],
+   "windows": [
+    {
+     "window_m": 0.06,
+     "measured": true,
+     "axis_gap_m": 0.0005103335491181517,
+     "angle_between_axes_deg": 3.574274757417027,
+     "centre_separation_m": 0.0005339303413555736,
+     "points": {
+      "OP030_S1R__source_0693_m0120_p04": 1194,
+      "source_0681_m0108_p04": 1136
+     },
+     "axes": {
+      "OP030_S1R__source_0693_m0120_p04": {
+       "through_m": [
+        0.900419779424377,
+        -2.2850768922862823,
+        0.16027880292954144
+       ],
+       "direction": [
+        -0.02772433568939325,
+        0.99912598228774,
+        0.031283106114013824
+       ]
+      },
+      "source_0681_m0108_p04": {
+       "through_m": [
+        0.900300070285006,
+        -2.285184133347868,
+        0.15976963627108753
+       ],
+       "direction": [
+        0.028841612997321252,
+        0.9995714558249095,
+        0.005006601620268992
+       ]
+      }
+     }
+    },
+    {
+     "window_m": 0.1,
+     "measured": true,
+     "axis_gap_m": 0.00036297575104075056,
+     "angle_between_axes_deg": 0.4779534150512589,
+     "centre_separation_m": 0.0004815411083929152,
+     "points": {
+      "OP030_S1R__source_0693_m0120_p04": 2102,
+      "source_0681_m0108_p04": 2131
+     },
+     "axes": {
+      "OP030_S1R__source_0693_m0120_p04": {
+       "through_m": [
+        0.8996720358828585,
+        -2.2858449584291454,
+        0.16031952140950154
+       ],
+       "direction": [
+        0.008622453062816055,
+        -0.9999065665825889,
+        0.01060713949178888
+       ]
+      },
+      "source_0681_m0108_p04": {
+       "through_m": [
+        0.9000176988201897,
+        -2.2861108005117567,
+        0.16011524962990215
+       ],
+       "direction": [
+        0.007758307233611167,
+        -0.9999672348128039,
+        0.0023104046623321456
+       ]
+      }
+     }
+    },
+    {
+     "window_m": 0.15,
+     "measured": true,
+     "axis_gap_m": 8.432949763820157e-05,
+     "angle_between_axes_deg": 0.5561112391806405,
+     "centre_separation_m": 0.0032382235659036227,
+     "points": {
+      "OP030_S1R__source_0693_m0120_p04": 3274,
+      "source_0681_m0108_p04": 3236
+     },
+     "axes": {
+      "OP030_S1R__source_0693_m0120_p04": {
+       "through_m": [
+        0.8999207065956332,
+        -2.2876896029536686,
+        0.15936373499977813
+       ],
+       "direction": [
+        -0.0006673248006522743,
+        0.9999432324723833,
+        0.0106342141360668
+       ]
+      },
+      "source_0681_m0108_p04": {
+       "through_m": [
+        0.8999621152883279,
+        -2.284515799531292,
+        0.16000509996534307
+       ],
+       "direction": [
+        0.0026944790644772483,
+        -0.9999957172536135,
+        -0.0011424784472095495
+       ]
+      }
+     }
+    }
+   ],
+   "over_seeds": {
+    "seeds": [
+     0,
+     1,
+     2,
+     3,
+     4
+    ],
+    "axis_gap_by_seed_m": {
+     "0": [
+      0.0005103335491181517,
+      0.00036297575104075056,
+      8.432949763820157e-05
+     ],
+     "1": [
+      0.0009716982551142528,
+      8.879437641034863e-08,
+      0.00034479850161606395
+     ],
+     "2": [
+      0.0008175760290046986,
+      4.90695393650064e-05,
+      0.00047320943120320947
+     ],
+     "3": [
+      0.000543649482549251,
+      0.0004441483822766983,
+      9.975769733950449e-05
+     ],
+     "4": [
+      0.00018600263460503592,
+      0.0005459225194099093,
+      1.0414460642713561e-05
+     ]
+    },
+    "axis_gap_range_m": [
+     8.879437641034863e-08,
+     0.0009716982551142528
+    ],
+    "note": "one method, five draws and three windows; the digits belong to the draw"
+   }
+  },
+  {
+   "runs": [
+    "OP030_S3R__OP030C__source_0693_m0120_p04",
+    "source_0705_m0132_p04"
+   ],
+   "at_m": [
+    1.2797064869654005,
+    3.302579484996842,
+    0.029088842110061255
+   ],
+   "survey_gap_m": 0.00026367766777159543,
+   "survey_along_first_m": 0.950227638602902,
+   "survey_along_second_m": 0.603644195221678,
+   "axis_gap_range_m": [
+    4.5296434251393045e-05,
+    0.0012034449535576273
+   ],
+   "angle_range_deg": [
+    4.155885020379123,
+    5.411591082015643
+   ],
+   "windows": [
+    {
+     "window_m": 0.06,
+     "measured": true,
+     "axis_gap_m": 4.5296434251393045e-05,
+     "angle_between_axes_deg": 5.411591082015643,
+     "centre_separation_m": 0.0019278451154597627,
+     "points": {
+      "OP030_S3R__OP030C__source_0693_m0120_p04": 1151,
+      "source_0705_m0132_p04": 1184
+     },
+     "axes": {
+      "OP030_S3R__OP030C__source_0693_m0120_p04": {
+       "through_m": [
+        1.2801510225791197,
+        3.3018783057854173,
+        0.027873642655255916
+       ],
+       "direction": [
+        -0.006297353120185689,
+        -0.999259147781679,
+        -0.03796707676806964
+       ]
+      },
+      "source_0705_m0132_p04": {
+       "through_m": [
+        1.279556671852101,
+        3.3028289997442486,
+        0.02944192674914198
+       ],
+       "direction": [
+        -0.04311875064143664,
+        -0.997869541173557,
+        0.04896072039090666
+       ]
+      }
+     }
+    },
+    {
+     "window_m": 0.1,
+     "measured": true,
+     "axis_gap_m": 0.0007145505839323192,
+     "angle_between_axes_deg": 4.155885020379123,
+     "centre_separation_m": 0.0036137655153358423,
+     "points": {
+      "OP030_S3R__OP030C__source_0693_m0120_p04": 2121,
+      "source_0705_m0132_p04": 2126
+     },
+     "axes": {
+      "OP030_S3R__OP030C__source_0693_m0120_p04": {
+       "through_m": [
+        1.2800603342359578,
+        3.301267526802153,
+        0.02803256160929699
+       ],
+       "direction": [
+        0.01399663637272152,
+        0.9998044475773383,
+        0.013969995519803114
+       ]
+      },
+      "source_0705_m0132_p04": {
+       "through_m": [
+        1.2784594297103313,
+        3.3027414861144124,
+        0.030917669899372693
+       ],
+       "direction": [
+        -0.03512656376776897,
+        -0.9978476201913414,
+        0.055373742842120155
+       ]
+      }
+     }
+    },
+    {
+     "window_m": 0.15,
+     "measured": true,
+     "axis_gap_m": 0.0012034449535576273,
+     "angle_between_axes_deg": 5.382788462196481,
+     "centre_separation_m": 0.006018584125849817,
+     "points": {
+      "OP030_S3R__OP030C__source_0693_m0120_p04": 3197,
+      "source_0705_m0132_p04": 3275
+     },
+     "axes": {
+      "OP030_S3R__OP030C__source_0693_m0120_p04": {
+       "through_m": [
+        1.280316797245682,
+        3.3023853831982017,
+        0.02812826771474655
+       ],
+       "direction": [
+        -0.008456001870087859,
+        -0.9998948590754501,
+        -0.011779933228131492
+       ]
+      },
+      "source_0705_m0132_p04": {
+       "through_m": [
+        1.2770179459492659,
+        3.3026250743543266,
+        0.03315653611984796
+       ],
+       "direction": [
+        0.04318970018415584,
+        0.9962178824164848,
+        -0.07539615740618145
+       ]
+      }
+     }
+    }
+   ],
+   "over_seeds": {
+    "seeds": [
+     0,
+     1,
+     2,
+     3,
+     4
+    ],
+    "axis_gap_by_seed_m": {
+     "0": [
+      4.5296434251393045e-05,
+      0.0007145505839323192,
+      0.0012034449535576273
+     ],
+     "1": [
+      0.0005582504484107272,
+      0.0004990416558222992,
+      0.0008925147821444036
+     ],
+     "2": [
+      0.0011712724826628965,
+      0.00045728409308347536,
+      0.00016087221353607841
+     ],
+     "3": [
+      0.0007443226485719408,
+      0.0006698185916329886,
+      0.00025820565547304353
+     ],
+     "4": [
+      0.0014321899507867726,
+      0.0005803003164173103,
+      0.00018368820163903999
+     ]
+    },
+    "axis_gap_range_m": [
+     4.5296434251393045e-05,
+     0.0014321899507867726
+    ],
+    "note": "one method, five draws and three windows; the digits belong to the draw"
+   }
+  }
+ ],
+ "scene_world_transforms_unchanged": true,
+ "saved_scene": false,
+ "formal_physical_validity_verdict": null
+}
