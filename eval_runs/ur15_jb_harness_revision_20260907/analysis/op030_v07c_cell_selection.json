@@ -1,0 +1,5009 @@
+{
+ "observed_at": "2026-09-12T03:22:05.411241+09:00",
+ "source": "UR15_JB_OP030_split_v06.blend",
+ "source_sha256": "e65bef607c1d29671fc982d14d72d4c2694420edd284378cb2f1445f18f354ed",
+ "supersedes": [
+  "analysis/op030_v07c_layout_inventory.json",
+  "analysis/op030_v07c_duplicate_selection.json"
+ ],
+ "selection_source": {
+  "manifest": "audit/op030_stagger_static_v06.json",
+  "manifest_sha256": "bc82917686f8292bf081bdefa2922dbc6851733552eea390c1b725c2cd8b9f8f",
+  "moved_listed": 420,
+  "root_count": 104,
+  "moved_count": 420,
+  "fixed_count": 76,
+  "matches_v06_counts": true,
+  "moved_disjoint_from_fixed": true,
+  "present_in_native": 420,
+  "absent_from_native": [],
+  "counts_by_kind": {
+   "cell_copy": 222,
+   "b_only_hardware": 194,
+   "bay_service": 4
+  },
+  "b_only_hardware": [
+   "OP030B_H03_1_UID001",
+   "OP030B_H03_1_UID001_J1",
+   "OP030B_H03_1_UID001_J1_6R6",
+   "OP030B_H03_1_UID001_J1_conductor_in_barrel",
+   "OP030B_H03_1_UID001_J1_heatshrink",
+   "OP030B_H03_1_UID001_T",
+   "OP030B_H03_1_UID001_T_6R14",
+   "OP030B_H03_1_UID001_T_conductor_in_barrel",
+   "OP030B_H03_1_UID001_T_heatshrink",
+   "OP030B_H03_1_UID001_insulation",
+   "OP030B_H03_1_UID002",
+   "OP030B_H03_1_UID002_J1",
+   "OP030B_H03_1_UID002_J1_6R6",
+   "OP030B_H03_1_UID002_J1_conductor_in_barrel",
+   "OP030B_H03_1_UID002_J1_heatshrink",
+   "OP030B_H03_1_UID002_T",
+   "OP030B_H03_1_UID002_T_6R14",
+   "OP030B_H03_1_UID002_T_conductor_in_barrel",
+   "OP030B_H03_1_UID002_T_heatshrink",
+   "OP030B_H03_1_UID002_insulation",
+   "OP030B_H03_1_UID003",
+   "OP030B_H03_1_UID003_J1",
+   "OP030B_H03_1_UID003_J1_6R6",
+   "OP030B_H03_1_UID003_J1_conductor_in_barrel",
+   "OP030B_H03_1_UID003_J1_heatshrink",
+   "OP030B_H03_1_UID003_T",
+   "OP030B_H03_1_UID003_T_6R14",
+   "OP030B_H03_1_UID003_T_conductor_in_barrel",
+   "OP030B_H03_1_UID003_T_heatshrink",
+   "OP030B_H03_1_UID003_insulation",
+   "OP030B_H03_1_UID004",
+   "OP030B_H03_1_UID004_J1",
+   "OP030B_H03_1_UID004_J1_6R6",
+   "OP030B_H03_1_UID004_J1_conductor_in_barrel",
+   "OP030B_H03_1_UID004_J1_heatshrink",
+   "OP030B_H03_1_UID004_T",
+   "OP030B_H03_1_UID004_T_6R14",
+   "OP030B_H03_1_UID004_T_conductor_in_barrel",
+   "OP030B_H03_1_UID004_T_heatshrink",
+   "OP030B_H03_1_UID004_insulation",
+   "OP030B_H03_1_UID005",
+   "OP030B_H03_1_UID005_J1",
+   "OP030B_H03_1_UID005_J1_6R6",
+   "OP030B_H03_1_UID005_J1_conductor_in_barrel",
+   "OP030B_H03_1_UID005_J1_heatshrink",
+   "OP030B_H03_1_UID005_T",
+   "OP030B_H03_1_UID005_T_6R14",
+   "OP030B_H03_1_UID005_T_conductor_in_barrel",
+   "OP030B_H03_1_UID005_T_heatshrink",
+   "OP030B_H03_1_UID005_insulation",
+   "OP030B_H03_2_UID001",
+   "OP030B_H03_2_UID001_J1",
+   "OP030B_H03_2_UID001_J1_6R6",
+   "OP030B_H03_2_UID001_J1_conductor_in_barrel",
+   "OP030B_H03_2_UID001_J1_heatshrink",
+   "OP030B_H03_2_UID001_T",
+   "OP030B_H03_2_UID001_T_6R14",
+   "OP030B_H03_2_UID001_T_conductor_in_barrel",
+   "OP030B_H03_2_UID001_T_heatshrink",
+   "OP030B_H03_2_UID001_insulation",
+   "OP030B_H03_2_UID002",
+   "OP030B_H03_2_UID002_J1",
+   "OP030B_H03_2_UID002_J1_6R6",
+   "OP030B_H03_2_UID002_J1_conductor_in_barrel",
+   "OP030B_H03_2_UID002_J1_heatshrink",
+   "OP030B_H03_2_UID002_T",
+   "OP030B_H03_2_UID002_T_6R14",
+   "OP030B_H03_2_UID002_T_conductor_in_barrel",
+   "OP030B_H03_2_UID002_T_heatshrink",
+   "OP030B_H03_2_UID002_insulation",
+   "OP030B_H03_2_UID003",
+   "OP030B_H03_2_UID003_J1",
+   "OP030B_H03_2_UID003_J1_6R6",
+   "OP030B_H03_2_UID003_J1_conductor_in_barrel",
+   "OP030B_H03_2_UID003_J1_heatshrink",
+   "OP030B_H03_2_UID003_T",
+   "OP030B_H03_2_UID003_T_6R14",
+   "OP030B_H03_2_UID003_T_conductor_in_barrel",
+   "OP030B_H03_2_UID003_T_heatshrink",
+   "OP030B_H03_2_UID003_insulation",
+   "OP030B_H03_2_UID004",
+   "OP030B_H03_2_UID004_J1",
+   "OP030B_H03_2_UID004_J1_6R6",
+   "OP030B_H03_2_UID004_J1_conductor_in_barrel",
+   "OP030B_H03_2_UID004_J1_heatshrink",
+   "OP030B_H03_2_UID004_T",
+   "OP030B_H03_2_UID004_T_6R14",
+   "OP030B_H03_2_UID004_T_conductor_in_barrel",
+   "OP030B_H03_2_UID004_T_heatshrink",
+   "OP030B_H03_2_UID004_insulation",
+   "OP030B_H03_2_UID005",
+   "OP030B_H03_2_UID005_J1",
+   "OP030B_H03_2_UID005_J1_6R6",
+   "OP030B_H03_2_UID005_J1_conductor_in_barrel",
+   "OP030B_H03_2_UID005_J1_heatshrink",
+   "OP030B_H03_2_UID005_T",
+   "OP030B_H03_2_UID005_T_6R14",
+   "OP030B_H03_2_UID005_T_conductor_in_barrel",
+   "OP030B_H03_2_UID005_T_heatshrink",
+   "OP030B_H03_2_UID005_insulation",
+   "OP030B_air_service_support_v04_cross_x",
+   "OP030B_air_service_support_v04_cross_y",
+   "OP030B_air_service_support_v04_vertical",
+   "OP030B_wire_supply__OP030_supply_actuator_barrel",
+   "OP030B_wire_supply__OP030_supply_actuator_kit_clevis",
+   "OP030B_wire_supply__OP030_supply_actuator_mount_foot-1.975",
+   "OP030B_wire_supply__OP030_supply_actuator_mount_foot-2.2",
+   "OP030B_wire_supply__OP030_supply_actuator_mount_ring-1.975",
+   "OP030B_wire_supply__OP030_supply_actuator_mount_ring-2.2",
+   "OP030B_wire_supply__OP030_supply_actuator_piston",
+   "OP030B_wire_supply__OP030_supply_actuator_rear_cap",
+   "OP030B_wire_supply__OP030_supply_actuator_rod",
+   "OP030B_wire_supply__OP030_supply_actuator_rod_cap",
+   "OP030B_wire_supply__OP030_supply_actuator_supply_hose",
+   "OP030B_wire_supply__OP030_supply_base_crossmember_-1.27",
+   "OP030B_wire_supply__OP030_supply_base_crossmember_-2.13",
+   "OP030B_wire_supply__OP030_supply_base_plate",
+   "OP030B_wire_supply__OP030_supply_guide_bearing_strip_-1.325",
+   "OP030B_wire_supply__OP030_supply_guide_bearing_strip_-2.075",
+   "OP030B_wire_supply__OP030_supply_guide_floor_-1.325",
+   "OP030B_wire_supply__OP030_supply_guide_floor_-2.075",
+   "OP030B_wire_supply__OP030_supply_guide_lip_-1.325_-1",
+   "OP030B_wire_supply__OP030_supply_guide_lip_-1.325_1",
+   "OP030B_wire_supply__OP030_supply_guide_lip_-2.075_-1",
+   "OP030B_wire_supply__OP030_supply_guide_lip_-2.075_1",
+   "OP030B_wire_supply__OP030_supply_guide_side_-1.325_-1",
+   "OP030B_wire_supply__OP030_supply_guide_side_-1.325_1",
+   "OP030B_wire_supply__OP030_supply_guide_side_-2.075_-1",
+   "OP030B_wire_supply__OP030_supply_guide_side_-2.075_1",
+   "OP030B_wire_supply__OP030_supply_kit_plate",
+   "OP030B_wire_supply__OP030_supply_moving_bar_-1.325",
+   "OP030B_wire_supply__OP030_supply_moving_bar_-2.075",
+   "OP030B_wire_supply__OP030_supply_moving_neck_-1.325",
+   "OP030B_wire_supply__OP030_supply_moving_neck_-2.075",
+   "OP030B_wire_supply__OP030_supply_riser_-1.98_-1.325",
+   "OP030B_wire_supply__OP030_supply_riser_-1.98_-2.075",
+   "OP030B_wire_supply__OP030_supply_riser_-2.2_-1.325",
+   "OP030B_wire_supply__OP030_supply_riser_-2.2_-2.075",
+   "OP030B_wire_supply_drawer",
+   "OP030B_wire_supply_fixed",
+   "OP030B_wire_supply_foot_-1.94_-1.28",
+   "OP030B_wire_supply_foot_-1.94_-2.12",
+   "OP030B_wire_supply_foot_-2.22_-1.28",
+   "OP030B_wire_supply_foot_-2.22_-2.12",
+   "OP030B_wire_supply_leg_-1.94_-1.28",
+   "OP030B_wire_supply_leg_-1.94_-2.12",
+   "OP030B_wire_supply_leg_-2.22_-1.28",
+   "OP030B_wire_supply_leg_-2.22_-2.12",
+   "OP030B_wire_supply_lower_cross_rail_-1.28",
+   "OP030B_wire_supply_lower_cross_rail_-2.12",
+   "OP030B_wire_supply_lower_long_rail_-1.94",
+   "OP030B_wire_supply_lower_long_rail_-2.22",
+   "OP030B_wire_supply_pallet10",
+   "OP030B_wire_supply_pallet10_deck",
+   "OP030B_wire_supply_row00_saddle0",
+   "OP030B_wire_supply_row00_saddle0_post",
+   "OP030B_wire_supply_row00_saddle1",
+   "OP030B_wire_supply_row00_saddle1_post",
+   "OP030B_wire_supply_row01_saddle0",
+   "OP030B_wire_supply_row01_saddle0_post",
+   "OP030B_wire_supply_row01_saddle1",
+   "OP030B_wire_supply_row01_saddle1_post",
+   "OP030B_wire_supply_row02_saddle0",
+   "OP030B_wire_supply_row02_saddle0_post",
+   "OP030B_wire_supply_row02_saddle1",
+   "OP030B_wire_supply_row02_saddle1_post",
+   "OP030B_wire_supply_row03_saddle0",
+   "OP030B_wire_supply_row03_saddle0_post",
+   "OP030B_wire_supply_row03_saddle1",
+   "OP030B_wire_supply_row03_saddle1_post",
+   "OP030B_wire_supply_row04_saddle0",
+   "OP030B_wire_supply_row04_saddle0_post",
+   "OP030B_wire_supply_row04_saddle1",
+   "OP030B_wire_supply_row04_saddle1_post",
+   "OP030B_wire_supply_row05_saddle0",
+   "OP030B_wire_supply_row05_saddle0_post",
+   "OP030B_wire_supply_row05_saddle1",
+   "OP030B_wire_supply_row05_saddle1_post",
+   "OP030B_wire_supply_row06_saddle0",
+   "OP030B_wire_supply_row06_saddle0_post",
+   "OP030B_wire_supply_row06_saddle1",
+   "OP030B_wire_supply_row06_saddle1_post",
+   "OP030B_wire_supply_row07_saddle0",
+   "OP030B_wire_supply_row07_saddle0_post",
+   "OP030B_wire_supply_row07_saddle1",
+   "OP030B_wire_supply_row07_saddle1_post",
+   "OP030B_wire_supply_row08_saddle0",
+   "OP030B_wire_supply_row08_saddle0_post",
+   "OP030B_wire_supply_row08_saddle1",
+   "OP030B_wire_supply_row08_saddle1_post",
+   "OP030B_wire_supply_row09_saddle0",
+   "OP030B_wire_supply_row09_saddle0_post",
+   "OP030B_wire_supply_row09_saddle1",
+   "OP030B_wire_supply_row09_saddle1_post"
+  ],
+  "bay_service": [
+   "Split_bay_1__source_0783_m0210_p00",
+   "Split_bay_1__source_0783_m0210_p01",
+   "Split_bay_1__source_0783_m0210_p02",
+   "Split_bay_1__source_0783_m0210_p03"
+  ],
+  "structure": {
+   "count": 420,
+   "root_count": 104,
+   "root_names": [
+    "OP030B_H03_1_UID001",
+    "OP030B_H03_1_UID002",
+    "OP030B_H03_1_UID003",
+    "OP030B_H03_1_UID004",
+    "OP030B_H03_1_UID005",
+    "OP030B_H03_2_UID001",
+    "OP030B_H03_2_UID002",
+    "OP030B_H03_2_UID003",
+    "OP030B_H03_2_UID004",
+    "OP030B_H03_2_UID005",
+    "OP030B__OP030_air_service_connections",
+    "OP030B__source_0576",
+    "OP030B__source_0577",
+    "OP030B__source_0578",
+    "OP030B__source_0688",
+    "OP030B__source_0689",
+    "OP030B__source_0690",
+    "OP030B__source_0693",
+    "OP030B__source_0694",
+    "OP030B__source_1046",
+    "OP030B__source_1047",
+    "OP030B__source_1048",
+    "OP030B__source_1049",
+    "OP030B__source_1050",
+    "OP030B__source_1051",
+    "OP030B__source_1052",
+    "OP030B__source_1053",
+    "OP030B__source_1054",
+    "OP030B__source_1055",
+    "OP030B__source_1056",
+    "OP030B__source_1057",
+    "OP030B__source_1058",
+    "OP030B__source_1059",
+    "OP030B__source_1060",
+    "OP030B__source_1061",
+    "OP030B__source_1062",
+    "OP030B__source_1063",
+    "OP030B__source_1064",
+    "OP030B__source_1065",
+    "OP030B__source_1066",
+    "OP030B__source_1067",
+    "OP030B__source_1068",
+    "OP030B__source_1069",
+    "OP030B__source_1070",
+    "OP030B__source_1071",
+    "OP030B__source_1072",
+    "OP030B__source_1073",
+    "OP030B__source_1074",
+    "OP030B__source_1075",
+    "OP030B__source_1076",
+    "OP030B__source_1077",
+    "OP030B__source_1078",
+    "OP030B__source_1079",
+    "OP030B__source_1080",
+    "OP030B__source_1081",
+    "OP030B__source_1082",
+    "OP030B__source_1083",
+    "OP030B__source_1086",
+    "OP030B__source_1087",
+    "OP030B__source_1088",
+    "OP030B__source_1089",
+    "OP030B__source_1090",
+    "OP030B__source_1091",
+    "OP030B__source_1092",
+    "OP030B__source_1093",
+    "OP030B__source_1094",
+    "OP030B__source_1095",
+    "OP030B__source_1096",
+    "OP030B__source_1097",
+    "OP030B__source_1098",
+    "OP030B__source_1099",
+    "OP030B__source_1100",
+    "OP030B__source_1101",
+    "OP030B__source_1102",
+    "OP030B__source_1103",
+    "OP030B__source_1104",
+    "OP030B__source_1105",
+    "OP030B__source_1106",
+    "OP030B__source_1107",
+    "OP030B__source_1108",
+    "OP030B__source_1109",
+    "OP030B__source_1110",
+    "OP030B__source_1111",
+    "OP030B__source_1112",
+    "OP030B__source_1113",
+    "OP030B__source_1114",
+    "OP030B__source_1115",
+    "OP030B__source_1116",
+    "OP030B__source_1117",
+    "OP030B__source_1118",
+    "OP030B__source_1119",
+    "OP030B__source_1120",
+    "OP030B__source_1121",
+    "OP030B__source_1122",
+    "OP030B__source_1123",
+    "OP030B_air_service_support_v04_cross_x",
+    "OP030B_air_service_support_v04_cross_y",
+    "OP030B_air_service_support_v04_vertical",
+    "OP030B_wire_supply_drawer",
+    "OP030B_wire_supply_fixed",
+    "Split_bay_1__source_0783_m0210_p00",
+    "Split_bay_1__source_0783_m0210_p01",
+    "Split_bay_1__source_0783_m0210_p02",
+    "Split_bay_1__source_0783_m0210_p03"
+   ],
+   "closure_matches_selection": true,
+   "closure_brings_extra": [],
+   "selection_not_reached": []
+  }
+ },
+ "hierarchy_drift": {
+  "group": "OP030B_robot_supply_stagger_root",
+  "group_present": true,
+  "group_member_count": 125,
+  "selection_also_in_group": 125,
+  "selection_not_in_group": [
+   "OP030B_H03_1_UID001",
+   "OP030B_H03_1_UID001_J1",
+   "OP030B_H03_1_UID001_J1_6R6",
+   "OP030B_H03_1_UID001_J1_conductor_in_barrel",
+   "OP030B_H03_1_UID001_J1_heatshrink",
+   "OP030B_H03_1_UID001_T",
+   "OP030B_H03_1_UID001_T_6R14",
+   "OP030B_H03_1_UID001_T_conductor_in_barrel",
+   "OP030B_H03_1_UID001_T_heatshrink",
+   "OP030B_H03_1_UID001_insulation",
+   "OP030B_H03_1_UID002",
+   "OP030B_H03_1_UID002_J1",
+   "OP030B_H03_1_UID002_J1_6R6",
+   "OP030B_H03_1_UID002_J1_conductor_in_barrel",
+   "OP030B_H03_1_UID002_J1_heatshrink",
+   "OP030B_H03_1_UID002_T",
+   "OP030B_H03_1_UID002_T_6R14",
+   "OP030B_H03_1_UID002_T_conductor_in_barrel",
+   "OP030B_H03_1_UID002_T_heatshrink",
+   "OP030B_H03_1_UID002_insulation",
+   "OP030B_H03_1_UID003",
+   "OP030B_H03_1_UID003_J1",
+   "OP030B_H03_1_UID003_J1_6R6",
+   "OP030B_H03_1_UID003_J1_conductor_in_barrel",
+   "OP030B_H03_1_UID003_J1_heatshrink",
+   "OP030B_H03_1_UID003_T",
+   "OP030B_H03_1_UID003_T_6R14",
+   "OP030B_H03_1_UID003_T_conductor_in_barrel",
+   "OP030B_H03_1_UID003_T_heatshrink",
+   "OP030B_H03_1_UID003_insulation",
+   "OP030B_H03_1_UID004",
+   "OP030B_H03_1_UID004_J1",
+   "OP030B_H03_1_UID004_J1_6R6",
+   "OP030B_H03_1_UID004_J1_conductor_in_barrel",
+   "OP030B_H03_1_UID004_J1_heatshrink",
+   "OP030B_H03_1_UID004_T",
+   "OP030B_H03_1_UID004_T_6R14",
+   "OP030B_H03_1_UID004_T_conductor_in_barrel",
+   "OP030B_H03_1_UID004_T_heatshrink",
+   "OP030B_H03_1_UID004_insulation",
+   "OP030B_H03_1_UID005",
+   "OP030B_H03_1_UID005_J1",
+   "OP030B_H03_1_UID005_J1_6R6",
+   "OP030B_H03_1_UID005_J1_conductor_in_barrel",
+   "OP030B_H03_1_UID005_J1_heatshrink",
+   "OP030B_H03_1_UID005_T",
+   "OP030B_H03_1_UID005_T_6R14",
+   "OP030B_H03_1_UID005_T_conductor_in_barrel",
+   "OP030B_H03_1_UID005_T_heatshrink",
+   "OP030B_H03_1_UID005_insulation",
+   "OP030B_H03_2_UID001",
+   "OP030B_H03_2_UID001_J1",
+   "OP030B_H03_2_UID001_J1_6R6",
+   "OP030B_H03_2_UID001_J1_conductor_in_barrel",
+   "OP030B_H03_2_UID001_J1_heatshrink",
+   "OP030B_H03_2_UID001_T",
+   "OP030B_H03_2_UID001_T_6R14",
+   "OP030B_H03_2_UID001_T_conductor_in_barrel",
+   "OP030B_H03_2_UID001_T_heatshrink",
+   "OP030B_H03_2_UID001_insulation",
+   "OP030B_H03_2_UID002",
+   "OP030B_H03_2_UID002_J1",
+   "OP030B_H03_2_UID002_J1_6R6",
+   "OP030B_H03_2_UID002_J1_conductor_in_barrel",
+   "OP030B_H03_2_UID002_J1_heatshrink",
+   "OP030B_H03_2_UID002_T",
+   "OP030B_H03_2_UID002_T_6R14",
+   "OP030B_H03_2_UID002_T_conductor_in_barrel",
+   "OP030B_H03_2_UID002_T_heatshrink",
+   "OP030B_H03_2_UID002_insulation",
+   "OP030B_H03_2_UID003",
+   "OP030B_H03_2_UID003_J1",
+   "OP030B_H03_2_UID003_J1_6R6",
+   "OP030B_H03_2_UID003_J1_conductor_in_barrel",
+   "OP030B_H03_2_UID003_J1_heatshrink",
+   "OP030B_H03_2_UID003_T",
+   "OP030B_H03_2_UID003_T_6R14",
+   "OP030B_H03_2_UID003_T_conductor_in_barrel",
+   "OP030B_H03_2_UID003_T_heatshrink",
+   "OP030B_H03_2_UID003_insulation",
+   "OP030B_H03_2_UID004",
+   "OP030B_H03_2_UID004_J1",
+   "OP030B_H03_2_UID004_J1_6R6",
+   "OP030B_H03_2_UID004_J1_conductor_in_barrel",
+   "OP030B_H03_2_UID004_J1_heatshrink",
+   "OP030B_H03_2_UID004_T",
+   "OP030B_H03_2_UID004_T_6R14",
+   "OP030B_H03_2_UID004_T_conductor_in_barrel",
+   "OP030B_H03_2_UID004_T_heatshrink",
+   "OP030B_H03_2_UID004_insulation",
+   "OP030B_H03_2_UID005",
+   "OP030B_H03_2_UID005_J1",
+   "OP030B_H03_2_UID005_J1_6R6",
+   "OP030B_H03_2_UID005_J1_conductor_in_barrel",
+   "OP030B_H03_2_UID005_J1_heatshrink",
+   "OP030B_H03_2_UID005_T",
+   "OP030B_H03_2_UID005_T_6R14",
+   "OP030B_H03_2_UID005_T_conductor_in_barrel",
+   "OP030B_H03_2_UID005_T_heatshrink",
+   "OP030B_H03_2_UID005_insulation",
+   "OP030B__Eye_OP030_left",
+   "OP030B__Eye_OP030_right",
+   "OP030B__OP030_precision_left_0",
+   "OP030B__OP030_precision_left_0_mount",
+   "OP030B__OP030_precision_left_0_stem",
+   "OP030B__OP030_precision_left_0_tip",
+   "OP030B__OP030_precision_left_1",
+   "OP030B__OP030_precision_left_1_mount",
+   "OP030B__OP030_precision_left_1_stem",
+   "OP030B__OP030_precision_left_1_tip",
+   "OP030B__OP030_precision_right_0",
+   "OP030B__OP030_precision_right_0_mount",
+   "OP030B__OP030_precision_right_0_stem",
+   "OP030B__OP030_precision_right_0_tip",
+   "OP030B__OP030_precision_right_1",
+   "OP030B__OP030_precision_right_1_mount",
+   "OP030B__OP030_precision_right_1_stem",
+   "OP030B__OP030_precision_right_1_tip",
+   "OP030B__onhand_OP030_left_housing",
+   "OP030B__onhand_OP030_left_lens_barrel",
+   "OP030B__onhand_OP030_left_lens_glass",
+   "OP030B__onhand_OP030_left_mount",
+   "OP030B__onhand_OP030_left_mount_tab",
+   "OP030B__onhand_OP030_left_support_arm",
+   "OP030B__onhand_OP030_right_housing",
+   "OP030B__onhand_OP030_right_lens_barrel",
+   "OP030B__onhand_OP030_right_lens_glass",
+   "OP030B__onhand_OP030_right_mount",
+   "OP030B__onhand_OP030_right_mount_tab",
+   "OP030B__onhand_OP030_right_support_arm",
+   "OP030B__source_0577",
+   "OP030B__source_0577_m0051_p00",
+   "OP030B__source_0577_m0051_p01",
+   "OP030B__source_0577_m0051_p02",
+   "OP030B__source_0577_m0051_p03",
+   "OP030B__source_0577_m0051_p04",
+   "OP030B__source_0577_m0051_p05",
+   "OP030B__source_0578",
+   "OP030B__source_0578_m0052_p00",
+   "OP030B__source_0578_m0052_p01",
+   "OP030B__source_0578_m0052_p02",
+   "OP030B__source_0578_m0052_p03",
+   "OP030B__source_0578_m0052_p04",
+   "OP030B__source_0578_m0052_p05",
+   "OP030B__source_0578_m0052_p06",
+   "OP030B__source_0578_m0052_p07",
+   "OP030B__source_0578_m0052_p08",
+   "OP030B__source_1046",
+   "OP030B__source_1046_m0301_p00",
+   "OP030B__source_1047",
+   "OP030B__source_1047_m0302_p00",
+   "OP030B__source_1048",
+   "OP030B__source_1048_m0303_p00",
+   "OP030B__source_1049",
+   "OP030B__source_1049_m0304_p00",
+   "OP030B__source_1050",
+   "OP030B__source_1050_m0305_p00",
+   "OP030B__source_1051",
+   "OP030B__source_1051_m0306_p00",
+   "OP030B__source_1052",
+   "OP030B__source_1052_m0307_p00",
+   "OP030B__source_1053",
+   "OP030B__source_1053_m0308_p00",
+   "OP030B__source_1054",
+   "OP030B__source_1054_m0309_p00",
+   "OP030B__source_1055",
+   "OP030B__source_1055_m0310_p00",
+   "OP030B__source_1056",
+   "OP030B__source_1056_m0311_p00",
+   "OP030B__source_1057",
+   "OP030B__source_1057_m0312_p00",
+   "OP030B__source_1058",
+   "OP030B__source_1058_m0313_p00",
+   "OP030B__source_1059",
+   "OP030B__source_1059_m0314_p00",
+   "OP030B__source_1060",
+   "OP030B__source_1060_m0315_p00",
+   "OP030B__source_1061",
+   "OP030B__source_1061_m0316_p00",
+   "OP030B__source_1062",
+   "OP030B__source_1062_m0317_p00",
+   "OP030B__source_1063",
+   "OP030B__source_1063_m0318_p00",
+   "OP030B__source_1064",
+   "OP030B__source_1064_m0319_p00",
+   "OP030B__source_1065",
+   "OP030B__source_1065_m0320_p00",
+   "OP030B__source_1066",
+   "OP030B__source_1066_m0321_p00",
+   "OP030B__source_1067",
+   "OP030B__source_1067_m0322_p00",
+   "OP030B__source_1068",
+   "OP030B__source_1068_m0323_p00",
+   "OP030B__source_1069",
+   "OP030B__source_1069_m0324_p00",
+   "OP030B__source_1070",
+   "OP030B__source_1070_m0325_p00",
+   "OP030B__source_1071",
+   "OP030B__source_1071_m0326_p00",
+   "OP030B__source_1072",
+   "OP030B__source_1072_m0327_p00",
+   "OP030B__source_1073",
+   "OP030B__source_1073_m0328_p00",
+   "OP030B__source_1074",
+   "OP030B__source_1074_m0329_p00",
+   "OP030B__source_1075",
+   "OP030B__source_1075_m0330_p00",
+   "OP030B__source_1076",
+   "OP030B__source_1076_m0331_p00",
+   "OP030B__source_1077",
+   "OP030B__source_1077_m0332_p00",
+   "OP030B__source_1078",
+   "OP030B__source_1079",
+   "OP030B__source_1079_m0329_p00",
+   "OP030B__source_1080",
+   "OP030B__source_1080_m0330_p00",
+   "OP030B__source_1081",
+   "OP030B__source_1081_m0331_p00",
+   "OP030B__source_1082",
+   "OP030B__source_1082_m0332_p00",
+   "OP030B__source_1083",
+   "OP030B__source_1086",
+   "OP030B__source_1086_m0301_p00",
+   "OP030B__source_1087",
+   "OP030B__source_1087_m0302_p00",
+   "OP030B__source_1088",
+   "OP030B__source_1088_m0303_p00",
+   "OP030B__source_1089",
+   "OP030B__source_1089_m0304_p00",
+   "OP030B__source_1090",
+   "OP030B__source_1090_m0305_p00",
+   "OP030B__source_1091",
+   "OP030B__source_1091_m0306_p00",
+   "OP030B__source_1092",
+   "OP030B__source_1092_m0307_p00",
+   "OP030B__source_1093",
+   "OP030B__source_1093_m0308_p00",
+   "OP030B__source_1094",
+   "OP030B__source_1094_m0309_p00",
+   "OP030B__source_1095",
+   "OP030B__source_1095_m0310_p00",
+   "OP030B__source_1096",
+   "OP030B__source_1096_m0311_p00",
+   "OP030B__source_1097",
+   "OP030B__source_1097_m0312_p00",
+   "OP030B__source_1098",
+   "OP030B__source_1098_m0313_p00",
+   "OP030B__source_1099",
+   "OP030B__source_1099_m0314_p00",
+   "OP030B__source_1100",
+   "OP030B__source_1100_m0315_p00",
+   "OP030B__source_1101",
+   "OP030B__source_1101_m0316_p00",
+   "OP030B__source_1102",
+   "OP030B__source_1102_m0317_p00",
+   "OP030B__source_1103",
+   "OP030B__source_1103_m0318_p00",
+   "OP030B__source_1104",
+   "OP030B__source_1104_m0319_p00",
+   "OP030B__source_1105",
+   "OP030B__source_1105_m0320_p00",
+   "OP030B__source_1106",
+   "OP030B__source_1106_m0321_p00",
+   "OP030B__source_1107",
+   "OP030B__source_1107_m0322_p00",
+   "OP030B__source_1108",
+   "OP030B__source_1108_m0323_p00",
+   "OP030B__source_1109",
+   "OP030B__source_1109_m0324_p00",
+   "OP030B__source_1110",
+   "OP030B__source_1110_m0325_p00",
+   "OP030B__source_1111",
+   "OP030B__source_1111_m0326_p00",
+   "OP030B__source_1112",
+   "OP030B__source_1112_m0327_p00",
+   "OP030B__source_1113",
+   "OP030B__source_1113_m0328_p00",
+   "OP030B__source_1114",
+   "OP030B__source_1114_m0329_p00",
+   "OP030B__source_1115",
+   "OP030B__source_1115_m0330_p00",
+   "OP030B__source_1116",
+   "OP030B__source_1116_m0331_p00",
+   "OP030B__source_1117",
+   "OP030B__source_1117_m0332_p00",
+   "OP030B__source_1118",
+   "OP030B__source_1119",
+   "OP030B__source_1119_m0329_p00",
+   "OP030B__source_1120",
+   "OP030B__source_1120_m0330_p00",
+   "OP030B__source_1121",
+   "OP030B__source_1121_m0331_p00",
+   "OP030B__source_1122",
+   "OP030B__source_1122_m0332_p00",
+   "OP030B__source_1123"
+  ],
+  "group_not_in_selection": [],
+  "note": "v06 parented its roots onto this group in the static candidate. The delivered native is several steps later, so a difference here records hierarchy drift, not an error in the selection."
+ },
+ "targets": {
+  "A": {
+   "prefix": "(unprefixed original)",
+   "matched_count": 201,
+   "missing_count": 21,
+   "missing": [
+    {
+     "template": "OP030B__OP030_precision_left_0_mount",
+     "expected": "OP030_precision_left_0_mount"
+    },
+    {
+     "template": "OP030B__OP030_precision_left_0_stem",
+     "expected": "OP030_precision_left_0_stem"
+    },
+    {
+     "template": "OP030B__OP030_precision_left_0_tip",
+     "expected": "OP030_precision_left_0_tip"
+    },
+    {
+     "template": "OP030B__OP030_precision_left_1_mount",
+     "expected": "OP030_precision_left_1_mount"
+    },
+    {
+     "template": "OP030B__OP030_precision_left_1_stem",
+     "expected": "OP030_precision_left_1_stem"
+    },
+    {
+     "template": "OP030B__OP030_precision_left_1_tip",
+     "expected": "OP030_precision_left_1_tip"
+    },
+    {
+     "template": "OP030B__source_1067_m0322_p00",
+     "expected": "source_1067_m0322_p00"
+    },
+    {
+     "template": "OP030B__source_1068_m0323_p00",
+     "expected": "source_1068_m0323_p00"
+    },
+    {
+     "template": "OP030B__source_1069_m0324_p00",
+     "expected": "source_1069_m0324_p00"
+    },
+    {
+     "template": "OP030B__source_1070_m0325_p00",
+     "expected": "source_1070_m0325_p00"
+    },
+    {
+     "template": "OP030B__source_1071_m0326_p00",
+     "expected": "source_1071_m0326_p00"
+    },
+    {
+     "template": "OP030B__source_1072_m0327_p00",
+     "expected": "source_1072_m0327_p00"
+    },
+    {
+     "template": "OP030B__source_1073_m0328_p00",
+     "expected": "source_1073_m0328_p00"
+    },
+    {
+     "template": "OP030B__source_1074_m0329_p00",
+     "expected": "source_1074_m0329_p00"
+    },
+    {
+     "template": "OP030B__source_1075_m0330_p00",
+     "expected": "source_1075_m0330_p00"
+    },
+    {
+     "template": "OP030B__source_1076_m0331_p00",
+     "expected": "source_1076_m0331_p00"
+    },
+    {
+     "template": "OP030B__source_1077_m0332_p00",
+     "expected": "source_1077_m0332_p00"
+    },
+    {
+     "template": "OP030B__source_1079_m0329_p00",
+     "expected": "source_1079_m0329_p00"
+    },
+    {
+     "template": "OP030B__source_1080_m0330_p00",
+     "expected": "source_1080_m0330_p00"
+    },
+    {
+     "template": "OP030B__source_1081_m0331_p00",
+     "expected": "source_1081_m0331_p00"
+    },
+    {
+     "template": "OP030B__source_1082_m0332_p00",
+     "expected": "source_1082_m0332_p00"
+    }
+   ],
+   "structure": {
+    "count": 201,
+    "root_count": 85,
+    "root_names": [
+     "OP030_air_service_connections",
+     "source_0576",
+     "source_0577",
+     "source_0578",
+     "source_0688",
+     "source_0689",
+     "source_0690",
+     "source_0693",
+     "source_0694",
+     "source_1046",
+     "source_1047",
+     "source_1048",
+     "source_1049",
+     "source_1050",
+     "source_1051",
+     "source_1052",
+     "source_1053",
+     "source_1054",
+     "source_1055",
+     "source_1056",
+     "source_1057",
+     "source_1058",
+     "source_1059",
+     "source_1060",
+     "source_1061",
+     "source_1062",
+     "source_1063",
+     "source_1064",
+     "source_1065",
+     "source_1066",
+     "source_1067",
+     "source_1068",
+     "source_1069",
+     "source_1070",
+     "source_1071",
+     "source_1072",
+     "source_1073",
+     "source_1074",
+     "source_1075",
+     "source_1076",
+     "source_1077",
+     "source_1078",
+     "source_1079",
+     "source_1080",
+     "source_1081",
+     "source_1082",
+     "source_1083",
+     "source_1086",
+     "source_1087",
+     "source_1088",
+     "source_1089",
+     "source_1090",
+     "source_1091",
+     "source_1092",
+     "source_1093",
+     "source_1094",
+     "source_1095",
+     "source_1096",
+     "source_1097",
+     "source_1098",
+     "source_1099",
+     "source_1100",
+     "source_1101",
+     "source_1102",
+     "source_1103",
+     "source_1104",
+     "source_1105",
+     "source_1106",
+     "source_1107",
+     "source_1108",
+     "source_1109",
+     "source_1110",
+     "source_1111",
+     "source_1112",
+     "source_1113",
+     "source_1114",
+     "source_1115",
+     "source_1116",
+     "source_1117",
+     "source_1118",
+     "source_1119",
+     "source_1120",
+     "source_1121",
+     "source_1122",
+     "source_1123"
+    ],
+    "closure_matches_selection": false,
+    "closure_brings_extra": [
+     "OP030A_driver_M4",
+     "OP030A_driver_M4_adapter_bolt_0_head_base",
+     "OP030A_driver_M4_adapter_bolt_0_head_socket",
+     "OP030A_driver_M4_adapter_bolt_0_shank",
+     "OP030A_driver_M4_adapter_bolt_1_head_base",
+     "OP030A_driver_M4_adapter_bolt_1_head_socket",
+     "OP030A_driver_M4_adapter_bolt_1_shank",
+     "OP030A_driver_M4_adapter_bolt_2_head_base",
+     "OP030A_driver_M4_adapter_bolt_2_head_socket",
+     "OP030A_driver_M4_adapter_bolt_2_shank",
+     "OP030A_driver_M4_adapter_bolt_3_head_base",
+     "OP030A_driver_M4_adapter_bolt_3_head_socket",
+     "OP030A_driver_M4_adapter_bolt_3_shank",
+     "OP030A_driver_M4_camera_bridge_arm",
+     "OP030A_driver_M4_camera_bridge_base",
+     "OP030A_driver_M4_camera_bridge_pad",
+     "OP030A_driver_M4_drive_service_box",
+     "OP030A_driver_M4_local_service_gland",
+     "OP030A_driver_M4_motor_coupler",
+     "OP030A_driver_M4_tool",
+     "OP030A_driver_M4_tool_drive",
+     "OP030A_driver_M4_tool_nose",
+     "OP030A_driver_M4_tool_shaft",
+     "OP030A_driver_M4_tool_socket",
+     "OP030A_driver_M4_tool_spindle",
+     "OP030A_driver_M4_vacuum_retention_tip",
+     "OP030A_driver_M4_wrist_adapter"
+    ],
+    "selection_not_reached": []
+   },
+   "closure_covered_count": 228,
+   "disjoint_from_fixed": true,
+   "overlap_with_fixed": [],
+   "selection": [
+    {
+     "name": "Eye_OP030_left",
+     "type": "CAMERA",
+     "parent": "onhand_OP030_left_mount",
+     "world_translation_m": [
+      -0.64000004529953,
+      -2.4200000762939453,
+      1.4100000858306885
+     ]
+    },
+    {
+     "name": "Eye_OP030_right",
+     "type": "CAMERA",
+     "parent": "onhand_OP030_right_mount",
+     "world_translation_m": [
+      -0.5633317232131958,
+      -1.3600000143051147,
+      1.3999978303909302
+     ]
+    },
+    {
+     "name": "OP030_air_service_connections",
+     "type": "EMPTY",
+     "parent": "OP030A_cell",
+     "world_translation_m": [
+      0.0,
+      0.0,
+      0.0
+     ]
+    },
+    {
+     "name": "OP030_air_service_connections_header_branch",
+     "type": "CURVE",
+     "parent": "OP030_air_service_connections",
+     "world_translation_m": [
+      0.0,
+      0.0,
+      0.0
+     ]
+    },
+    {
+     "name": "OP030_air_service_connections_stocker_mount",
+     "type": "MESH",
+     "parent": "OP030_air_service_connections",
+     "world_translation_m": [
+      -2.2874999046325684,
+      -2.0999999046325684,
+      0.9800000190734863
+     ]
+    },
+    {
+     "name": "OP030_precision_left_0",
+     "type": "EMPTY",
+     "parent": "source_1078",
+     "world_translation_m": [
+      -0.550000011920929,
+      -2.373819351196289,
+      1.4696760177612305
+     ]
+    },
+    {
+     "name": "OP030_precision_left_1",
+     "type": "EMPTY",
+     "parent": "source_1083",
+     "world_translation_m": [
+      -0.550000011920929,
+      -2.4661808013916016,
+      1.4696760177612305
+     ]
+    },
+    {
+     "name": "OP030_precision_right_0",
+     "type": "EMPTY",
+     "parent": "source_1118",
+     "world_translation_m": [
+      -0.4653533101081848,
+      -1.4014999866485596,
+      1.3921324014663696
+     ]
+    },
+    {
+     "name": "OP030_precision_right_0_mount",
+     "type": "MESH",
+     "parent": "OP030_precision_right_0",
+     "world_translation_m": [
+      -0.48297855257987976,
+      -1.4014999866485596,
+      1.4131373167037964
+     ]
+    },
+    {
+     "name": "OP030_precision_right_0_stem",
+     "type": "MESH",
+     "parent": "OP030_precision_right_0",
+     "world_translation_m": [
+      -0.4563542902469635,
+      -1.4014999866485596,
+      1.3814077377319336
+     ]
+    },
+    {
+     "name": "OP030_precision_right_0_tip",
+     "type": "MESH",
+     "parent": "OP030_precision_right_0",
+     "world_translation_m": [
+      -0.429999977350235,
+      -1.4014999866485596,
+      1.3499999046325684
+     ]
+    },
+    {
+     "name": "OP030_precision_right_1",
+     "type": "EMPTY",
+     "parent": "source_1123",
+     "world_translation_m": [
+      -0.4653533101081848,
+      -1.31850004196167,
+      1.3921324014663696
+     ]
+    },
+    {
+     "name": "OP030_precision_right_1_mount",
+     "type": "MESH",
+     "parent": "OP030_precision_right_1",
+     "world_translation_m": [
+      -0.48297855257987976,
+      -1.31850004196167,
+      1.4131373167037964
+     ]
+    },
+    {
+     "name": "OP030_precision_right_1_stem",
+     "type": "MESH",
+     "parent": "OP030_precision_right_1",
+     "world_translation_m": [
+      -0.4563542902469635,
+      -1.31850004196167,
+      1.3814077377319336
+     ]
+    },
+    {
+     "name": "OP030_precision_right_1_tip",
+     "type": "MESH",
+     "parent": "OP030_precision_right_1",
+     "world_translation_m": [
+      -0.429999977350235,
+      -1.31850004196167,
+      1.3499999046325684
+     ]
+    },
+    {
+     "name": "onhand_OP030_left_housing",
+     "type": "MESH",
+     "parent": "onhand_OP030_left_mount",
+     "world_translation_m": [
+      -0.7226430177688599,
+      -2.4200000762939453,
+      1.3620924949645996
+     ]
+    },
+    {
+     "name": "onhand_OP030_left_lens_barrel",
+     "type": "MESH",
+     "parent": "onhand_OP030_left_mount",
+     "world_translation_m": [
+      -0.7226430177688599,
+      -2.4200000762939453,
+      1.3620924949645996
+     ]
+    },
+    {
+     "name": "onhand_OP030_left_lens_glass",
+     "type": "MESH",
+     "parent": "onhand_OP030_left_mount",
+     "world_translation_m": [
+      -0.7226430177688599,
+      -2.4200000762939453,
+      1.3620924949645996
+     ]
+    },
+    {
+     "name": "onhand_OP030_left_mount",
+     "type": "EMPTY",
+     "parent": "source_1067",
+     "world_translation_m": [
+      -0.7226430177688599,
+      -2.4200000762939453,
+      1.3620924949645996
+     ]
+    },
+    {
+     "name": "onhand_OP030_left_mount_tab",
+     "type": "MESH",
+     "parent": "onhand_OP030_left_mount",
+     "world_translation_m": [
+      -0.7226430177688599,
+      -2.4200000762939453,
+      1.3620924949645996
+     ]
+    },
+    {
+     "name": "onhand_OP030_left_support_arm",
+     "type": "MESH",
+     "parent": "onhand_OP030_left_mount",
+     "world_translation_m": [
+      -0.7226430177688599,
+      -2.4200000762939453,
+      1.3620924949645996
+     ]
+    },
+    {
+     "name": "onhand_OP030_right_housing",
+     "type": "MESH",
+     "parent": "onhand_OP030_right_mount",
+     "world_translation_m": [
+      -0.5514898300170898,
+      -1.3600000143051147,
+      1.4947859048843384
+     ]
+    },
+    {
+     "name": "onhand_OP030_right_lens_barrel",
+     "type": "MESH",
+     "parent": "onhand_OP030_right_mount",
+     "world_translation_m": [
+      -0.5514898300170898,
+      -1.3600000143051147,
+      1.4947859048843384
+     ]
+    },
+    {
+     "name": "onhand_OP030_right_lens_glass",
+     "type": "MESH",
+     "parent": "onhand_OP030_right_mount",
+     "world_translation_m": [
+      -0.5514898300170898,
+      -1.3600000143051147,
+      1.4947859048843384
+     ]
+    },
+    {
+     "name": "onhand_OP030_right_mount",
+     "type": "EMPTY",
+     "parent": "source_1107",
+     "world_translation_m": [
+      -0.5514898300170898,
+      -1.3600000143051147,
+      1.4947859048843384
+     ]
+    },
+    {
+     "name": "onhand_OP030_right_mount_tab",
+     "type": "MESH",
+     "parent": "onhand_OP030_right_mount",
+     "world_translation_m": [
+      -0.5514898300170898,
+      -1.3600000143051147,
+      1.4947859048843384
+     ]
+    },
+    {
+     "name": "onhand_OP030_right_support_arm",
+     "type": "MESH",
+     "parent": "onhand_OP030_right_mount",
+     "world_translation_m": [
+      -0.5514898300170898,
+      -1.3600000143051147,
+      1.4947859048843384
+     ]
+    },
+    {
+     "name": "source_0576",
+     "type": "EMPTY",
+     "parent": "OP030A_cell",
+     "world_translation_m": [
+      -0.8999999761581421,
+      -1.7000000476837158,
+      0.0
+     ]
+    },
+    {
+     "name": "source_0576_m0050_p00",
+     "type": "MESH",
+     "parent": "source_0576",
+     "world_translation_m": [
+      -0.8999999761581421,
+      -1.7000000476837158,
+      0.0
+     ]
+    },
+    {
+     "name": "source_0576_m0050_p01",
+     "type": "MESH",
+     "parent": "source_0576",
+     "world_translation_m": [
+      -0.8999999761581421,
+      -1.7000000476837158,
+      0.0
+     ]
+    },
+    {
+     "name": "source_0576_m0050_p02",
+     "type": "MESH",
+     "parent": "source_0576",
+     "world_translation_m": [
+      -0.8999999761581421,
+      -1.7000000476837158,
+      0.0
+     ]
+    },
+    {
+     "name": "source_0576_m0050_p03",
+     "type": "MESH",
+     "parent": "source_0576",
+     "world_translation_m": [
+      -0.8999999761581421,
+      -1.7000000476837158,
+      0.0
+     ]
+    },
+    {
+     "name": "source_0576_m0050_p04",
+     "type": "MESH",
+     "parent": "source_0576",
+     "world_translation_m": [
+      -0.8999999761581421,
+      -1.7000000476837158,
+      0.0
+     ]
+    },
+    {
+     "name": "source_0576_m0050_p05",
+     "type": "MESH",
+     "parent": "source_0576",
+     "world_translation_m": [
+      -0.8999999761581421,
+      -1.7000000476837158,
+      0.0
+     ]
+    },
+    {
+     "name": "source_0577",
+     "type": "EMPTY",
+     "parent": null,
+     "world_translation_m": [
+      -0.8999999761581421,
+      -1.7000000476837158,
+      0.0
+     ]
+    },
+    {
+     "name": "source_0577_m0051_p00",
+     "type": "MESH",
+     "parent": "source_0577",
+     "world_translation_m": [
+      -0.8999999761581421,
+      -1.7000000476837158,
+      0.0
+     ]
+    },
+    {
+     "name": "source_0577_m0051_p01",
+     "type": "MESH",
+     "parent": "source_0577",
+     "world_translation_m": [
+      -0.8999999761581421,
+      -1.7000000476837158,
+      0.0
+     ]
+    },
+    {
+     "name": "source_0577_m0051_p02",
+     "type": "MESH",
+     "parent": "source_0577",
+     "world_translation_m": [
+      -0.8999999761581421,
+      -1.7000000476837158,
+      0.0
+     ]
+    },
+    {
+     "name": "source_0577_m0051_p03",
+     "type": "MESH",
+     "parent": "source_0577",
+     "world_translation_m": [
+      -0.8999999761581421,
+      -1.7000000476837158,
+      0.0
+     ]
+    },
+    {
+     "name": "source_0577_m0051_p04",
+     "type": "MESH",
+     "parent": "source_0577",
+     "world_translation_m": [
+      -0.8999999761581421,
+      -1.7000000476837158,
+      0.0
+     ]
+    },
+    {
+     "name": "source_0577_m0051_p05",
+     "type": "MESH",
+     "parent": "source_0577",
+     "world_translation_m": [
+      -0.8999999761581421,
+      -1.7000000476837158,
+      0.0
+     ]
+    },
+    {
+     "name": "source_0578",
+     "type": "EMPTY",
+     "parent": null,
+     "world_translation_m": [
+      -0.8999999761581421,
+      -1.7000000476837158,
+      0.0
+     ]
+    },
+    {
+     "name": "source_0578_m0052_p00",
+     "type": "MESH",
+     "parent": "source_0578",
+     "world_translation_m": [
+      -0.8999999761581421,
+      -1.7000000476837158,
+      0.0
+     ]
+    },
+    {
+     "name": "source_0578_m0052_p01",
+     "type": "MESH",
+     "parent": "source_0578",
+     "world_translation_m": [
+      -0.8999999761581421,
+      -1.7000000476837158,
+      0.0
+     ]
+    },
+    {
+     "name": "source_0578_m0052_p02",
+     "type": "MESH",
+     "parent": "source_0578",
+     "world_translation_m": [
+      -0.8999999761581421,
+      -1.7000000476837158,
+      0.0
+     ]
+    },
+    {
+     "name": "source_0578_m0052_p03",
+     "type": "MESH",
+     "parent": "source_0578",
+     "world_translation_m": [
+      -0.8999999761581421,
+      -1.7000000476837158,
+      0.0
+     ]
+    },
+    {
+     "name": "source_0578_m0052_p04",
+     "type": "MESH",
+     "parent": "source_0578",
+     "world_translation_m": [
+      -0.8999999761581421,
+      -1.7000000476837158,
+      0.0
+     ]
+    },
+    {
+     "name": "source_0578_m0052_p05",
+     "type": "MESH",
+     "parent": "source_0578",
+     "world_translation_m": [
+      -0.8999999761581421,
+      -1.7000000476837158,
+      0.0
+     ]
+    },
+    {
+     "name": "source_0578_m0052_p06",
+     "type": "MESH",
+     "parent": "source_0578",
+     "world_translation_m": [
+      -0.8999999761581421,
+      -1.7000000476837158,
+      0.0
+     ]
+    },
+    {
+     "name": "source_0578_m0052_p07",
+     "type": "MESH",
+     "parent": "source_0578",
+     "world_translation_m": [
+      -0.8999999761581421,
+      -1.7000000476837158,
+      0.0
+     ]
+    },
+    {
+     "name": "source_0578_m0052_p08",
+     "type": "MESH",
+     "parent": "source_0578",
+     "world_translation_m": [
+      -0.8999999761581421,
+      -1.7000000476837158,
+      0.0
+     ]
+    },
+    {
+     "name": "source_0688",
+     "type": "EMPTY",
+     "parent": "OP030A_cell",
+     "world_translation_m": [
+      0.0,
+      0.0,
+      0.0
+     ]
+    },
+    {
+     "name": "source_0688_m0115_p00",
+     "type": "MESH",
+     "parent": "source_0688",
+     "world_translation_m": [
+      0.0,
+      0.0,
+      0.0
+     ]
+    },
+    {
+     "name": "source_0688_m0115_p01",
+     "type": "MESH",
+     "parent": "source_0688",
+     "world_translation_m": [
+      0.0,
+      0.0,
+      0.0
+     ]
+    },
+    {
+     "name": "source_0688_m0115_p02",
+     "type": "MESH",
+     "parent": "source_0688",
+     "world_translation_m": [
+      0.0,
+      0.0,
+      0.0
+     ]
+    },
+    {
+     "name": "source_0689",
+     "type": "EMPTY",
+     "parent": "OP030A_cell",
+     "world_translation_m": [
+      -2.244999885559082,
+      -1.2699999809265137,
+      1.8849999904632568
+     ]
+    },
+    {
+     "name": "source_0689_m0116_p00",
+     "type": "MESH",
+     "parent": "source_0689",
+     "world_translation_m": [
+      -2.244999885559082,
+      -1.2699999809265137,
+      1.8849999904632568
+     ]
+    },
+    {
+     "name": "source_0690",
+     "type": "EMPTY",
+     "parent": "OP030A_cell",
+     "world_translation_m": [
+      -2.244999885559082,
+      -1.2699999809265137,
+      -8.0600004196167
+     ]
+    },
+    {
+     "name": "source_0690_m0117_p00",
+     "type": "MESH",
+     "parent": "source_0690",
+     "world_translation_m": [
+      -2.244999885559082,
+      -1.2699999809265137,
+      -8.0600004196167
+     ]
+    },
+    {
+     "name": "source_0693",
+     "type": "EMPTY",
+     "parent": "OP030A_cell",
+     "world_translation_m": [
+      0.0,
+      0.0,
+      0.0
+     ]
+    },
+    {
+     "name": "source_0693_m0120_p00",
+     "type": "MESH",
+     "parent": "source_0693",
+     "world_translation_m": [
+      0.0,
+      0.0,
+      0.0
+     ]
+    },
+    {
+     "name": "source_0693_m0120_p01",
+     "type": "MESH",
+     "parent": "source_0693",
+     "world_translation_m": [
+      0.0,
+      0.0,
+      0.0
+     ]
+    },
+    {
+     "name": "source_0693_m0120_p02",
+     "type": "MESH",
+     "parent": "source_0693",
+     "world_translation_m": [
+      0.0,
+      0.0,
+      0.0
+     ]
+    },
+    {
+     "name": "source_0693_m0120_p03",
+     "type": "MESH",
+     "parent": "source_0693",
+     "world_translation_m": [
+      0.0,
+      0.0,
+      0.0
+     ]
+    },
+    {
+     "name": "source_0693_m0120_p04",
+     "type": "MESH",
+     "parent": "source_0693",
+     "world_translation_m": [
+      0.0,
+      0.0,
+      0.0
+     ]
+    },
+    {
+     "name": "source_0694",
+     "type": "EMPTY",
+     "parent": "OP030A_cell",
+     "world_translation_m": [
+      0.0,
+      0.0,
+      0.0
+     ]
+    },
+    {
+     "name": "source_0694_m0121_p00",
+     "type": "MESH",
+     "parent": "source_0694",
+     "world_translation_m": [
+      0.0,
+      0.0,
+      0.0
+     ]
+    },
+    {
+     "name": "source_0694_m0121_p01",
+     "type": "MESH",
+     "parent": "source_0694",
+     "world_translation_m": [
+      0.0,
+      0.0,
+      0.0
+     ]
+    },
+    {
+     "name": "source_1046",
+     "type": "EMPTY",
+     "parent": null,
+     "world_translation_m": [
+      -0.8999950885772705,
+      -1.9327279329299927,
+      1.5427279472351074
+     ]
+    },
+    {
+     "name": "source_1046_m0301_p00",
+     "type": "MESH",
+     "parent": "source_1046",
+     "world_translation_m": [
+      -0.8999950885772705,
+      -1.9327279329299927,
+      1.5427279472351074
+     ]
+    },
+    {
+     "name": "source_1047",
+     "type": "EMPTY",
+     "parent": null,
+     "world_translation_m": [
+      -0.8999950885772705,
+      -1.9327279329299927,
+      1.5427279472351074
+     ]
+    },
+    {
+     "name": "source_1047_m0302_p00",
+     "type": "MESH",
+     "parent": "source_1047",
+     "world_translation_m": [
+      -0.8999950885772705,
+      -1.9327279329299927,
+      1.5427279472351074
+     ]
+    },
+    {
+     "name": "source_1048",
+     "type": "EMPTY",
+     "parent": null,
+     "world_translation_m": [
+      -0.8999950885772705,
+      -1.9327279329299927,
+      1.5427279472351074
+     ]
+    },
+    {
+     "name": "source_1048_m0303_p00",
+     "type": "MESH",
+     "parent": "source_1048",
+     "world_translation_m": [
+      -0.8999950885772705,
+      -1.9327279329299927,
+      1.5427279472351074
+     ]
+    },
+    {
+     "name": "source_1049",
+     "type": "EMPTY",
+     "parent": null,
+     "world_translation_m": [
+      -0.892636239528656,
+      -1.9305570125579834,
+      1.5473510026931763
+     ]
+    },
+    {
+     "name": "source_1049_m0304_p00",
+     "type": "MESH",
+     "parent": "source_1049",
+     "world_translation_m": [
+      -0.892636239528656,
+      -1.9305570125579834,
+      1.5473510026931763
+     ]
+    },
+    {
+     "name": "source_1050",
+     "type": "EMPTY",
+     "parent": null,
+     "world_translation_m": [
+      -0.892636239528656,
+      -1.9305570125579834,
+      1.5473510026931763
+     ]
+    },
+    {
+     "name": "source_1050_m0305_p00",
+     "type": "MESH",
+     "parent": "source_1050",
+     "world_translation_m": [
+      -0.892636239528656,
+      -1.9305570125579834,
+      1.5473510026931763
+     ]
+    },
+    {
+     "name": "source_1051",
+     "type": "EMPTY",
+     "parent": null,
+     "world_translation_m": [
+      -0.7397742867469788,
+      -1.9459983110427856,
+      1.709091305732727
+     ]
+    },
+    {
+     "name": "source_1051_m0306_p00",
+     "type": "MESH",
+     "parent": "source_1051",
+     "world_translation_m": [
+      -0.7397742867469788,
+      -1.9459983110427856,
+      1.709091305732727
+     ]
+    },
+    {
+     "name": "source_1052",
+     "type": "EMPTY",
+     "parent": null,
+     "world_translation_m": [
+      -0.6819539666175842,
+      -2.4655544757843018,
+      2.2294087409973145
+     ]
+    },
+    {
+     "name": "source_1052_m0307_p00",
+     "type": "MESH",
+     "parent": "source_1052",
+     "world_translation_m": [
+      -0.6819539666175842,
+      -2.4655544757843018,
+      2.2294087409973145
+     ]
+    },
+    {
+     "name": "source_1053",
+     "type": "EMPTY",
+     "parent": null,
+     "world_translation_m": [
+      -0.8086251020431519,
+      -2.03267765045166,
+      1.7269591093063354
+     ]
+    },
+    {
+     "name": "source_1053_m0308_p00",
+     "type": "MESH",
+     "parent": "source_1053",
+     "world_translation_m": [
+      -0.8086251020431519,
+      -2.03267765045166,
+      1.7269591093063354
+     ]
+    },
+    {
+     "name": "source_1054",
+     "type": "EMPTY",
+     "parent": null,
+     "world_translation_m": [
+      -0.8086251020431519,
+      -2.03267765045166,
+      1.7269591093063354
+     ]
+    },
+    {
+     "name": "source_1054_m0309_p00",
+     "type": "MESH",
+     "parent": "source_1054",
+     "world_translation_m": [
+      -0.8086251020431519,
+      -2.03267765045166,
+      1.7269591093063354
+     ]
+    },
+    {
+     "name": "source_1055",
+     "type": "EMPTY",
+     "parent": null,
+     "world_translation_m": [
+      -0.8086251020431519,
+      -2.03267765045166,
+      1.7269591093063354
+     ]
+    },
+    {
+     "name": "source_1055_m0310_p00",
+     "type": "MESH",
+     "parent": "source_1055",
+     "world_translation_m": [
+      -0.8086251020431519,
+      -2.03267765045166,
+      1.7269591093063354
+     ]
+    },
+    {
+     "name": "source_1056",
+     "type": "EMPTY",
+     "parent": null,
+     "world_translation_m": [
+      -0.8548929691314697,
+      -2.5140604972839355,
+      2.204514265060425
+     ]
+    },
+    {
+     "name": "source_1056_m0311_p00",
+     "type": "MESH",
+     "parent": "source_1056",
+     "world_translation_m": [
+      -0.8548929691314697,
+      -2.5140604972839355,
+      2.204514265060425
+     ]
+    },
+    {
+     "name": "source_1057",
+     "type": "EMPTY",
+     "parent": null,
+     "world_translation_m": [
+      -0.6589034199714661,
+      -2.6097066402435303,
+      1.7001594305038452
+     ]
+    },
+    {
+     "name": "source_1057_m0312_p00",
+     "type": "MESH",
+     "parent": "source_1057",
+     "world_translation_m": [
+      -0.6589034199714661,
+      -2.6097066402435303,
+      1.7001594305038452
+     ]
+    },
+    {
+     "name": "source_1058",
+     "type": "EMPTY",
+     "parent": null,
+     "world_translation_m": [
+      -0.7727202773094177,
+      -2.4964308738708496,
+      2.1775991916656494
+     ]
+    },
+    {
+     "name": "source_1058_m0313_p00",
+     "type": "MESH",
+     "parent": "source_1058",
+     "world_translation_m": [
+      -0.7727202773094177,
+      -2.4964308738708496,
+      2.1775991916656494
+     ]
+    },
+    {
+     "name": "source_1059",
+     "type": "EMPTY",
+     "parent": null,
+     "world_translation_m": [
+      -0.7727202773094177,
+      -2.4964308738708496,
+      2.1775991916656494
+     ]
+    },
+    {
+     "name": "source_1059_m0314_p00",
+     "type": "MESH",
+     "parent": "source_1059",
+     "world_translation_m": [
+      -0.7727202773094177,
+      -2.4964308738708496,
+      2.1775991916656494
+     ]
+    },
+    {
+     "name": "source_1060",
+     "type": "EMPTY",
+     "parent": null,
+     "world_translation_m": [
+      -0.7727202773094177,
+      -2.4964308738708496,
+      2.1775991916656494
+     ]
+    },
+    {
+     "name": "source_1060_m0315_p00",
+     "type": "MESH",
+     "parent": "source_1060",
+     "world_translation_m": [
+      -0.7727202773094177,
+      -2.4964308738708496,
+      2.1775991916656494
+     ]
+    },
+    {
+     "name": "source_1061",
+     "type": "EMPTY",
+     "parent": null,
+     "world_translation_m": [
+      -0.5231554508209229,
+      -2.4782631397247314,
+      1.743387222290039
+     ]
+    },
+    {
+     "name": "source_1061_m0316_p00",
+     "type": "MESH",
+     "parent": "source_1061",
+     "world_translation_m": [
+      -0.5231554508209229,
+      -2.4782631397247314,
+      1.743387222290039
+     ]
+    },
+    {
+     "name": "source_1062",
+     "type": "EMPTY",
+     "parent": null,
+     "world_translation_m": [
+      -0.5231554508209229,
+      -2.4782631397247314,
+      1.743387222290039
+     ]
+    },
+    {
+     "name": "source_1062_m0317_p00",
+     "type": "MESH",
+     "parent": "source_1062",
+     "world_translation_m": [
+      -0.5231554508209229,
+      -2.4782631397247314,
+      1.743387222290039
+     ]
+    },
+    {
+     "name": "source_1063",
+     "type": "EMPTY",
+     "parent": null,
+     "world_translation_m": [
+      -0.4997279942035675,
+      -2.596203327178955,
+      1.7316031455993652
+     ]
+    },
+    {
+     "name": "source_1063_m0318_p00",
+     "type": "MESH",
+     "parent": "source_1063",
+     "world_translation_m": [
+      -0.4997279942035675,
+      -2.596203327178955,
+      1.7316031455993652
+     ]
+    },
+    {
+     "name": "source_1064",
+     "type": "EMPTY",
+     "parent": null,
+     "world_translation_m": [
+      -0.5500640869140625,
+      -2.419861078262329,
+      1.6761263608932495
+     ]
+    },
+    {
+     "name": "source_1064_m0319_p00",
+     "type": "MESH",
+     "parent": "source_1064",
+     "world_translation_m": [
+      -0.5500640869140625,
+      -2.419861078262329,
+      1.6761263608932495
+     ]
+    },
+    {
+     "name": "source_1065",
+     "type": "EMPTY",
+     "parent": null,
+     "world_translation_m": [
+      -0.5500640869140625,
+      -2.419861078262329,
+      1.6761263608932495
+     ]
+    },
+    {
+     "name": "source_1065_m0320_p00",
+     "type": "MESH",
+     "parent": "source_1065",
+     "world_translation_m": [
+      -0.5500640869140625,
+      -2.419861078262329,
+      1.6761263608932495
+     ]
+    },
+    {
+     "name": "source_1066",
+     "type": "EMPTY",
+     "parent": null,
+     "world_translation_m": [
+      -0.5499999523162842,
+      -2.4200000762939453,
+      1.6760482788085938
+     ]
+    },
+    {
+     "name": "source_1066_m0321_p00",
+     "type": "MESH",
+     "parent": "source_1066",
+     "world_translation_m": [
+      -0.5499999523162842,
+      -2.4200000762939453,
+      1.6760482788085938
+     ]
+    },
+    {
+     "name": "source_1067",
+     "type": "EMPTY",
+     "parent": null,
+     "world_translation_m": [
+      -0.550000011920929,
+      -2.4200000762939453,
+      1.600000023841858
+     ]
+    },
+    {
+     "name": "source_1068",
+     "type": "EMPTY",
+     "parent": null,
+     "world_translation_m": [
+      -0.550000011920929,
+      -2.4200000762939453,
+      1.600000023841858
+     ]
+    },
+    {
+     "name": "source_1069",
+     "type": "EMPTY",
+     "parent": null,
+     "world_translation_m": [
+      -0.550000011920929,
+      -2.4200000762939453,
+      1.600000023841858
+     ]
+    },
+    {
+     "name": "source_1070",
+     "type": "EMPTY",
+     "parent": null,
+     "world_translation_m": [
+      -0.550000011920929,
+      -2.4200000762939453,
+      1.600000023841858
+     ]
+    },
+    {
+     "name": "source_1071",
+     "type": "EMPTY",
+     "parent": null,
+     "world_translation_m": [
+      -0.550000011920929,
+      -2.4200000762939453,
+      1.600000023841858
+     ]
+    },
+    {
+     "name": "source_1072",
+     "type": "EMPTY",
+     "parent": null,
+     "world_translation_m": [
+      -0.550000011920929,
+      -2.4200000762939453,
+      1.600000023841858
+     ]
+    },
+    {
+     "name": "source_1073",
+     "type": "EMPTY",
+     "parent": null,
+     "world_translation_m": [
+      -0.550000011920929,
+      -2.4200000762939453,
+      1.600000023841858
+     ]
+    },
+    {
+     "name": "source_1074",
+     "type": "EMPTY",
+     "parent": null,
+     "world_translation_m": [
+      -0.550000011920929,
+      -2.3893988132476807,
+      1.5450960397720337
+     ]
+    },
+    {
+     "name": "source_1075",
+     "type": "EMPTY",
+     "parent": null,
+     "world_translation_m": [
+      -0.550000011920929,
+      -2.3578989505767822,
+      1.5491960048675537
+     ]
+    },
+    {
+     "name": "source_1076",
+     "type": "EMPTY",
+     "parent": null,
+     "world_translation_m": [
+      -0.550000011920929,
+      -2.4072999954223633,
+      1.5385799407958984
+     ]
+    },
+    {
+     "name": "source_1077",
+     "type": "EMPTY",
+     "parent": null,
+     "world_translation_m": [
+      -0.550000011920929,
+      -2.3517990112304688,
+      1.5020960569381714
+     ]
+    },
+    {
+     "name": "source_1078",
+     "type": "EMPTY",
+     "parent": null,
+     "world_translation_m": [
+      -0.550000011920929,
+      -2.373819351196289,
+      1.4696760177612305
+     ]
+    },
+    {
+     "name": "source_1079",
+     "type": "EMPTY",
+     "parent": null,
+     "world_translation_m": [
+      -0.550000011920929,
+      -2.450601100921631,
+      1.5450960397720337
+     ]
+    },
+    {
+     "name": "source_1080",
+     "type": "EMPTY",
+     "parent": null,
+     "world_translation_m": [
+      -0.550000011920929,
+      -2.4821012020111084,
+      1.5491960048675537
+     ]
+    },
+    {
+     "name": "source_1081",
+     "type": "EMPTY",
+     "parent": null,
+     "world_translation_m": [
+      -0.550000011920929,
+      -2.4326999187469482,
+      1.5385799407958984
+     ]
+    },
+    {
+     "name": "source_1082",
+     "type": "EMPTY",
+     "parent": null,
+     "world_translation_m": [
+      -0.550000011920929,
+      -2.488201141357422,
+      1.5020960569381714
+     ]
+    },
+    {
+     "name": "source_1083",
+     "type": "EMPTY",
+     "parent": null,
+     "world_translation_m": [
+      -0.550000011920929,
+      -2.4661808013916016,
+      1.4696760177612305
+     ]
+    },
+    {
+     "name": "source_1086",
+     "type": "EMPTY",
+     "parent": null,
+     "world_translation_m": [
+      -0.8999950885772705,
+      -1.4672720432281494,
+      1.5427279472351074
+     ]
+    },
+    {
+     "name": "source_1086_m0301_p00",
+     "type": "MESH",
+     "parent": "source_1086",
+     "world_translation_m": [
+      -0.8999950885772705,
+      -1.4672720432281494,
+      1.5427279472351074
+     ]
+    },
+    {
+     "name": "source_1087",
+     "type": "EMPTY",
+     "parent": null,
+     "world_translation_m": [
+      -0.8999950885772705,
+      -1.4672720432281494,
+      1.5427279472351074
+     ]
+    },
+    {
+     "name": "source_1087_m0302_p00",
+     "type": "MESH",
+     "parent": "source_1087",
+     "world_translation_m": [
+      -0.8999950885772705,
+      -1.4672720432281494,
+      1.5427279472351074
+     ]
+    },
+    {
+     "name": "source_1088",
+     "type": "EMPTY",
+     "parent": null,
+     "world_translation_m": [
+      -0.8999950885772705,
+      -1.4672720432281494,
+      1.5427279472351074
+     ]
+    },
+    {
+     "name": "source_1088_m0303_p00",
+     "type": "MESH",
+     "parent": "source_1088",
+     "world_translation_m": [
+      -0.8999950885772705,
+      -1.4672720432281494,
+      1.5427279472351074
+     ]
+    },
+    {
+     "name": "source_1089",
+     "type": "EMPTY",
+     "parent": null,
+     "world_translation_m": [
+      -0.8930670619010925,
+      -1.4698694944381714,
+      1.547777533531189
+     ]
+    },
+    {
+     "name": "source_1089_m0304_p00",
+     "type": "MESH",
+     "parent": "source_1089",
+     "world_translation_m": [
+      -0.8930670619010925,
+      -1.4698694944381714,
+      1.547777533531189
+     ]
+    },
+    {
+     "name": "source_1090",
+     "type": "EMPTY",
+     "parent": null,
+     "world_translation_m": [
+      -0.8930670619010925,
+      -1.4698694944381714,
+      1.547777533531189
+     ]
+    },
+    {
+     "name": "source_1090_m0305_p00",
+     "type": "MESH",
+     "parent": "source_1090",
+     "world_translation_m": [
+      -0.8930670619010925,
+      -1.4698694944381714,
+      1.547777533531189
+     ]
+    },
+    {
+     "name": "source_1091",
+     "type": "EMPTY",
+     "parent": null,
+     "world_translation_m": [
+      -0.772623598575592,
+      -1.475605845451355,
+      1.7480273246765137
+     ]
+    },
+    {
+     "name": "source_1091_m0306_p00",
+     "type": "MESH",
+     "parent": "source_1091",
+     "world_translation_m": [
+      -0.772623598575592,
+      -1.475605845451355,
+      1.7480273246765137
+     ]
+    },
+    {
+     "name": "source_1092",
+     "type": "EMPTY",
+     "parent": null,
+     "world_translation_m": [
+      -0.4835784435272217,
+      -0.8362302184104919,
+      1.9753237962722778
+     ]
+    },
+    {
+     "name": "source_1092_m0307_p00",
+     "type": "MESH",
+     "parent": "source_1092",
+     "world_translation_m": [
+      -0.4835784435272217,
+      -0.8362302184104919,
+      1.9753237962722778
+     ]
+    },
+    {
+     "name": "source_1093",
+     "type": "EMPTY",
+     "parent": null,
+     "world_translation_m": [
+      -0.8138598203659058,
+      -1.3725560903549194,
+      1.7321113348007202
+     ]
+    },
+    {
+     "name": "source_1093_m0308_p00",
+     "type": "MESH",
+     "parent": "source_1093",
+     "world_translation_m": [
+      -0.8138598203659058,
+      -1.3725560903549194,
+      1.7321113348007202
+     ]
+    },
+    {
+     "name": "source_1094",
+     "type": "EMPTY",
+     "parent": null,
+     "world_translation_m": [
+      -0.8138598203659058,
+      -1.3725560903549194,
+      1.7321113348007202
+     ]
+    },
+    {
+     "name": "source_1094_m0309_p00",
+     "type": "MESH",
+     "parent": "source_1094",
+     "world_translation_m": [
+      -0.8138598203659058,
+      -1.3725560903549194,
+      1.7321113348007202
+     ]
+    },
+    {
+     "name": "source_1095",
+     "type": "EMPTY",
+     "parent": null,
+     "world_translation_m": [
+      -0.8138598203659058,
+      -1.3725560903549194,
+      1.7321113348007202
+     ]
+    },
+    {
+     "name": "source_1095_m0310_p00",
+     "type": "MESH",
+     "parent": "source_1095",
+     "world_translation_m": [
+      -0.8138598203659058,
+      -1.3725560903549194,
+      1.7321113348007202
+     ]
+    },
+    {
+     "name": "source_1096",
+     "type": "EMPTY",
+     "parent": null,
+     "world_translation_m": [
+      -0.6180658936500549,
+      -0.7265263199806213,
+      1.9306080341339111
+     ]
+    },
+    {
+     "name": "source_1096_m0311_p00",
+     "type": "MESH",
+     "parent": "source_1096",
+     "world_translation_m": [
+      -0.6180658936500549,
+      -0.7265263199806213,
+      1.9306080341339111
+     ]
+    },
+    {
+     "name": "source_1097",
+     "type": "EMPTY",
+     "parent": null,
+     "world_translation_m": [
+      -0.7368544340133667,
+      -1.1345908641815186,
+      1.5823168754577637
+     ]
+    },
+    {
+     "name": "source_1097_m0312_p00",
+     "type": "MESH",
+     "parent": "source_1097",
+     "world_translation_m": [
+      -0.7368544340133667,
+      -1.1345908641815186,
+      1.5823168754577637
+     ]
+    },
+    {
+     "name": "source_1098",
+     "type": "EMPTY",
+     "parent": null,
+     "world_translation_m": [
+      -0.5737578868865967,
+      -0.8025765419006348,
+      1.9242236614227295
+     ]
+    },
+    {
+     "name": "source_1098_m0313_p00",
+     "type": "MESH",
+     "parent": "source_1098",
+     "world_translation_m": [
+      -0.5737578868865967,
+      -0.8025765419006348,
+      1.9242236614227295
+     ]
+    },
+    {
+     "name": "source_1099",
+     "type": "EMPTY",
+     "parent": null,
+     "world_translation_m": [
+      -0.5737578868865967,
+      -0.8025765419006348,
+      1.9242236614227295
+     ]
+    },
+    {
+     "name": "source_1099_m0314_p00",
+     "type": "MESH",
+     "parent": "source_1099",
+     "world_translation_m": [
+      -0.5737578868865967,
+      -0.8025765419006348,
+      1.9242236614227295
+     ]
+    },
+    {
+     "name": "source_1100",
+     "type": "EMPTY",
+     "parent": null,
+     "world_translation_m": [
+      -0.5737578868865967,
+      -0.8025765419006348,
+      1.9242236614227295
+     ]
+    },
+    {
+     "name": "source_1100_m0315_p00",
+     "type": "MESH",
+     "parent": "source_1100",
+     "world_translation_m": [
+      -0.5737578868865967,
+      -0.8025765419006348,
+      1.9242236614227295
+     ]
+    },
+    {
+     "name": "source_1101",
+     "type": "EMPTY",
+     "parent": null,
+     "world_translation_m": [
+      -0.6219913959503174,
+      -1.302428960800171,
+      1.622831106185913
+     ]
+    },
+    {
+     "name": "source_1101_m0316_p00",
+     "type": "MESH",
+     "parent": "source_1101",
+     "world_translation_m": [
+      -0.6219913959503174,
+      -1.302428960800171,
+      1.622831106185913
+     ]
+    },
+    {
+     "name": "source_1102",
+     "type": "EMPTY",
+     "parent": null,
+     "world_translation_m": [
+      -0.6219913959503174,
+      -1.302428960800171,
+      1.622831106185913
+     ]
+    },
+    {
+     "name": "source_1102_m0317_p00",
+     "type": "MESH",
+     "parent": "source_1102",
+     "world_translation_m": [
+      -0.6219913959503174,
+      -1.302428960800171,
+      1.622831106185913
+     ]
+    },
+    {
+     "name": "source_1103",
+     "type": "EMPTY",
+     "parent": null,
+     "world_translation_m": [
+      -0.6064949035644531,
+      -1.1842738389968872,
+      1.6427509784698486
+     ]
+    },
+    {
+     "name": "source_1103_m0318_p00",
+     "type": "MESH",
+     "parent": "source_1103",
+     "world_translation_m": [
+      -0.6064949035644531,
+      -1.1842738389968872,
+      1.6427509784698486
+     ]
+    },
+    {
+     "name": "source_1104",
+     "type": "EMPTY",
+     "parent": null,
+     "world_translation_m": [
+      -0.6004745960235596,
+      -1.3601371049880981,
+      1.5530587434768677
+     ]
+    },
+    {
+     "name": "source_1104_m0319_p00",
+     "type": "MESH",
+     "parent": "source_1104",
+     "world_translation_m": [
+      -0.6004745960235596,
+      -1.3601371049880981,
+      1.5530587434768677
+     ]
+    },
+    {
+     "name": "source_1105",
+     "type": "EMPTY",
+     "parent": null,
+     "world_translation_m": [
+      -0.6004745960235596,
+      -1.3601371049880981,
+      1.5530587434768677
+     ]
+    },
+    {
+     "name": "source_1105_m0320_p00",
+     "type": "MESH",
+     "parent": "source_1105",
+     "world_translation_m": [
+      -0.6004745960235596,
+      -1.3601371049880981,
+      1.5530587434768677
+     ]
+    },
+    {
+     "name": "source_1106",
+     "type": "EMPTY",
+     "parent": null,
+     "world_translation_m": [
+      -0.6003727316856384,
+      -1.3600000143051147,
+      1.5530422925949097
+     ]
+    },
+    {
+     "name": "source_1106_m0321_p00",
+     "type": "MESH",
+     "parent": "source_1106",
+     "world_translation_m": [
+      -0.6003727316856384,
+      -1.3600000143051147,
+      1.5530422925949097
+     ]
+    },
+    {
+     "name": "source_1107",
+     "type": "EMPTY",
+     "parent": null,
+     "world_translation_m": [
+      -0.5514898300170898,
+      -1.3600000143051147,
+      1.4947859048843384
+     ]
+    },
+    {
+     "name": "source_1107_m0322_p00",
+     "type": "MESH",
+     "parent": "source_1107",
+     "world_translation_m": [
+      -0.5514898300170898,
+      -1.3600000143051147,
+      1.4947859048843384
+     ]
+    },
+    {
+     "name": "source_1108",
+     "type": "EMPTY",
+     "parent": null,
+     "world_translation_m": [
+      -0.5514898300170898,
+      -1.3600000143051147,
+      1.4947859048843384
+     ]
+    },
+    {
+     "name": "source_1108_m0323_p00",
+     "type": "MESH",
+     "parent": "source_1108",
+     "world_translation_m": [
+      -0.5514898300170898,
+      -1.3600000143051147,
+      1.4947859048843384
+     ]
+    },
+    {
+     "name": "source_1109",
+     "type": "EMPTY",
+     "parent": null,
+     "world_translation_m": [
+      -0.5514898300170898,
+      -1.3600000143051147,
+      1.4947859048843384
+     ]
+    },
+    {
+     "name": "source_1109_m0324_p00",
+     "type": "MESH",
+     "parent": "source_1109",
+     "world_translation_m": [
+      -0.5514898300170898,
+      -1.3600000143051147,
+      1.4947859048843384
+     ]
+    },
+    {
+     "name": "source_1110",
+     "type": "EMPTY",
+     "parent": null,
+     "world_translation_m": [
+      -0.5514898300170898,
+      -1.3600000143051147,
+      1.4947859048843384
+     ]
+    },
+    {
+     "name": "source_1110_m0325_p00",
+     "type": "MESH",
+     "parent": "source_1110",
+     "world_translation_m": [
+      -0.5514898300170898,
+      -1.3600000143051147,
+      1.4947859048843384
+     ]
+    },
+    {
+     "name": "source_1111",
+     "type": "EMPTY",
+     "parent": null,
+     "world_translation_m": [
+      -0.5514898300170898,
+      -1.3600000143051147,
+      1.4947859048843384
+     ]
+    },
+    {
+     "name": "source_1111_m0326_p00",
+     "type": "MESH",
+     "parent": "source_1111",
+     "world_translation_m": [
+      -0.5514898300170898,
+      -1.3600000143051147,
+      1.4947859048843384
+     ]
+    },
+    {
+     "name": "source_1112",
+     "type": "EMPTY",
+     "parent": null,
+     "world_translation_m": [
+      -0.5514898300170898,
+      -1.3600000143051147,
+      1.4947859048843384
+     ]
+    },
+    {
+     "name": "source_1112_m0327_p00",
+     "type": "MESH",
+     "parent": "source_1112",
+     "world_translation_m": [
+      -0.5514898300170898,
+      -1.3600000143051147,
+      1.4947859048843384
+     ]
+    },
+    {
+     "name": "source_1113",
+     "type": "EMPTY",
+     "parent": null,
+     "world_translation_m": [
+      -0.5514898300170898,
+      -1.3600000143051147,
+      1.4947859048843384
+     ]
+    },
+    {
+     "name": "source_1113_m0328_p00",
+     "type": "MESH",
+     "parent": "source_1113",
+     "world_translation_m": [
+      -0.5514898300170898,
+      -1.3600000143051147,
+      1.4947859048843384
+     ]
+    },
+    {
+     "name": "source_1114",
+     "type": "EMPTY",
+     "parent": null,
+     "world_translation_m": [
+      -0.5161982178688049,
+      -1.3906011581420898,
+      1.4527270793914795
+     ]
+    },
+    {
+     "name": "source_1114_m0329_p00",
+     "type": "MESH",
+     "parent": "source_1114",
+     "world_translation_m": [
+      -0.5161982178688049,
+      -1.3906011581420898,
+      1.4527270793914795
+     ]
+    },
+    {
+     "name": "source_1115",
+     "type": "EMPTY",
+     "parent": null,
+     "world_translation_m": [
+      -0.5167114734649658,
+      -1.4223567247390747,
+      1.4533387422561646
+     ]
+    },
+    {
+     "name": "source_1115_m0330_p00",
+     "type": "MESH",
+     "parent": "source_1115",
+     "world_translation_m": [
+      -0.5167114734649658,
+      -1.4223567247390747,
+      1.4533387422561646
+     ]
+    },
+    {
+     "name": "source_1116",
+     "type": "EMPTY",
+     "parent": null,
+     "world_translation_m": [
+      -0.512009859085083,
+      -1.3726999759674072,
+      1.4477355480194092
+     ]
+    },
+    {
+     "name": "source_1116_m0331_p00",
+     "type": "MESH",
+     "parent": "source_1116",
+     "world_translation_m": [
+      -0.512009859085083,
+      -1.3726999759674072,
+      1.4477355480194092
+     ]
+    },
+    {
+     "name": "source_1117",
+     "type": "EMPTY",
+     "parent": null,
+     "world_translation_m": [
+      -0.4861924946308136,
+      -1.4235203266143799,
+      1.4169676303863525
+     ]
+    },
+    {
+     "name": "source_1117_m0332_p00",
+     "type": "MESH",
+     "parent": "source_1117",
+     "world_translation_m": [
+      -0.4861924946308136,
+      -1.4235203266143799,
+      1.4169676303863525
+     ]
+    },
+    {
+     "name": "source_1118",
+     "type": "EMPTY",
+     "parent": null,
+     "world_translation_m": [
+      -0.4653533101081848,
+      -1.4014999866485596,
+      1.3921324014663696
+     ]
+    },
+    {
+     "name": "source_1119",
+     "type": "EMPTY",
+     "parent": null,
+     "world_translation_m": [
+      -0.5161982178688049,
+      -1.3293988704681396,
+      1.4527270793914795
+     ]
+    },
+    {
+     "name": "source_1119_m0329_p00",
+     "type": "MESH",
+     "parent": "source_1119",
+     "world_translation_m": [
+      -0.5161982178688049,
+      -1.3293988704681396,
+      1.4527270793914795
+     ]
+    },
+    {
+     "name": "source_1120",
+     "type": "EMPTY",
+     "parent": null,
+     "world_translation_m": [
+      -0.5167114734649658,
+      -1.2976431846618652,
+      1.4533387422561646
+     ]
+    },
+    {
+     "name": "source_1120_m0330_p00",
+     "type": "MESH",
+     "parent": "source_1120",
+     "world_translation_m": [
+      -0.5167114734649658,
+      -1.2976431846618652,
+      1.4533387422561646
+     ]
+    },
+    {
+     "name": "source_1121",
+     "type": "EMPTY",
+     "parent": null,
+     "world_translation_m": [
+      -0.512009859085083,
+      -1.3473000526428223,
+      1.4477355480194092
+     ]
+    },
+    {
+     "name": "source_1121_m0331_p00",
+     "type": "MESH",
+     "parent": "source_1121",
+     "world_translation_m": [
+      -0.512009859085083,
+      -1.3473000526428223,
+      1.4477355480194092
+     ]
+    },
+    {
+     "name": "source_1122",
+     "type": "EMPTY",
+     "parent": null,
+     "world_translation_m": [
+      -0.4861924946308136,
+      -1.2964797019958496,
+      1.4169676303863525
+     ]
+    },
+    {
+     "name": "source_1122_m0332_p00",
+     "type": "MESH",
+     "parent": "source_1122",
+     "world_translation_m": [
+      -0.4861924946308136,
+      -1.2964797019958496,
+      1.4169676303863525
+     ]
+    },
+    {
+     "name": "source_1123",
+     "type": "EMPTY",
+     "parent": null,
+     "world_translation_m": [
+      -0.4653533101081848,
+      -1.31850004196167,
+      1.3921324014663696
+     ]
+    }
+   ]
+  },
+  "C": {
+   "prefix": "OP030C__",
+   "matched_count": 180,
+   "missing_count": 42,
+   "missing": [
+    {
+     "template": "OP030B__OP030_precision_left_0_mount",
+     "expected": "OP030C__OP030_precision_left_0_mount"
+    },
+    {
+     "template": "OP030B__OP030_precision_left_0_stem",
+     "expected": "OP030C__OP030_precision_left_0_stem"
+    },
+    {
+     "template": "OP030B__OP030_precision_left_0_tip",
+     "expected": "OP030C__OP030_precision_left_0_tip"
+    },
+    {
+     "template": "OP030B__OP030_precision_left_1_mount",
+     "expected": "OP030C__OP030_precision_left_1_mount"
+    },
+    {
+     "template": "OP030B__OP030_precision_left_1_stem",
+     "expected": "OP030C__OP030_precision_left_1_stem"
+    },
+    {
+     "template": "OP030B__OP030_precision_left_1_tip",
+     "expected": "OP030C__OP030_precision_left_1_tip"
+    },
+    {
+     "template": "OP030B__OP030_precision_right_0_mount",
+     "expected": "OP030C__OP030_precision_right_0_mount"
+    },
+    {
+     "template": "OP030B__OP030_precision_right_0_stem",
+     "expected": "OP030C__OP030_precision_right_0_stem"
+    },
+    {
+     "template": "OP030B__OP030_precision_right_0_tip",
+     "expected": "OP030C__OP030_precision_right_0_tip"
+    },
+    {
+     "template": "OP030B__OP030_precision_right_1_mount",
+     "expected": "OP030C__OP030_precision_right_1_mount"
+    },
+    {
+     "template": "OP030B__OP030_precision_right_1_stem",
+     "expected": "OP030C__OP030_precision_right_1_stem"
+    },
+    {
+     "template": "OP030B__OP030_precision_right_1_tip",
+     "expected": "OP030C__OP030_precision_right_1_tip"
+    },
+    {
+     "template": "OP030B__source_1067_m0322_p00",
+     "expected": "OP030C__source_1067_m0322_p00"
+    },
+    {
+     "template": "OP030B__source_1068_m0323_p00",
+     "expected": "OP030C__source_1068_m0323_p00"
+    },
+    {
+     "template": "OP030B__source_1069_m0324_p00",
+     "expected": "OP030C__source_1069_m0324_p00"
+    },
+    {
+     "template": "OP030B__source_1070_m0325_p00",
+     "expected": "OP030C__source_1070_m0325_p00"
+    },
+    {
+     "template": "OP030B__source_1071_m0326_p00",
+     "expected": "OP030C__source_1071_m0326_p00"
+    },
+    {
+     "template": "OP030B__source_1072_m0327_p00",
+     "expected": "OP030C__source_1072_m0327_p00"
+    },
+    {
+     "template": "OP030B__source_1073_m0328_p00",
+     "expected": "OP030C__source_1073_m0328_p00"
+    },
+    {
+     "template": "OP030B__source_1074_m0329_p00",
+     "expected": "OP030C__source_1074_m0329_p00"
+    },
+    {
+     "template": "OP030B__source_1075_m0330_p00",
+     "expected": "OP030C__source_1075_m0330_p00"
+    },
+    {
+     "template": "OP030B__source_1076_m0331_p00",
+     "expected": "OP030C__source_1076_m0331_p00"
+    },
+    {
+     "template": "OP030B__source_1077_m0332_p00",
+     "expected": "OP030C__source_1077_m0332_p00"
+    },
+    {
+     "template": "OP030B__source_1079_m0329_p00",
+     "expected": "OP030C__source_1079_m0329_p00"
+    },
+    {
+     "template": "OP030B__source_1080_m0330_p00",
+     "expected": "OP030C__source_1080_m0330_p00"
+    },
+    {
+     "template": "OP030B__source_1081_m0331_p00",
+     "expected": "OP030C__source_1081_m0331_p00"
+    },
+    {
+     "template": "OP030B__source_1082_m0332_p00",
+     "expected": "OP030C__source_1082_m0332_p00"
+    },
+    {
+     "template": "OP030B__source_1107_m0322_p00",
+     "expected": "OP030C__source_1107_m0322_p00"
+    },
+    {
+     "template": "OP030B__source_1108_m0323_p00",
+     "expected": "OP030C__source_1108_m0323_p00"
+    },
+    {
+     "template": "OP030B__source_1109_m0324_p00",
+     "expected": "OP030C__source_1109_m0324_p00"
+    },
+    {
+     "template": "OP030B__source_1110_m0325_p00",
+     "expected": "OP030C__source_1110_m0325_p00"
+    },
+    {
+     "template": "OP030B__source_1111_m0326_p00",
+     "expected": "OP030C__source_1111_m0326_p00"
+    },
+    {
+     "template": "OP030B__source_1112_m0327_p00",
+     "expected": "OP030C__source_1112_m0327_p00"
+    },
+    {
+     "template": "OP030B__source_1113_m0328_p00",
+     "expected": "OP030C__source_1113_m0328_p00"
+    },
+    {
+     "template": "OP030B__source_1114_m0329_p00",
+     "expected": "OP030C__source_1114_m0329_p00"
+    },
+    {
+     "template": "OP030B__source_1115_m0330_p00",
+     "expected": "OP030C__source_1115_m0330_p00"
+    },
+    {
+     "template": "OP030B__source_1116_m0331_p00",
+     "expected": "OP030C__source_1116_m0331_p00"
+    },
+    {
+     "template": "OP030B__source_1117_m0332_p00",
+     "expected": "OP030C__source_1117_m0332_p00"
+    },
+    {
+     "template": "OP030B__source_1119_m0329_p00",
+     "expected": "OP030C__source_1119_m0329_p00"
+    },
+    {
+     "template": "OP030B__source_1120_m0330_p00",
+     "expected": "OP030C__source_1120_m0330_p00"
+    },
+    {
+     "template": "OP030B__source_1121_m0331_p00",
+     "expected": "OP030C__source_1121_m0331_p00"
+    },
+    {
+     "template": "OP030B__source_1122_m0332_p00",
+     "expected": "OP030C__source_1122_m0332_p00"
+    }
+   ],
+   "structure": {
+    "count": 180,
+    "root_count": 85,
+    "root_names": [
+     "OP030C__OP030_air_service_connections",
+     "OP030C__source_0576",
+     "OP030C__source_0577",
+     "OP030C__source_0578",
+     "OP030C__source_0688",
+     "OP030C__source_0689",
+     "OP030C__source_0690",
+     "OP030C__source_0693",
+     "OP030C__source_0694",
+     "OP030C__source_1046",
+     "OP030C__source_1047",
+     "OP030C__source_1048",
+     "OP030C__source_1049",
+     "OP030C__source_1050",
+     "OP030C__source_1051",
+     "OP030C__source_1052",
+     "OP030C__source_1053",
+     "OP030C__source_1054",
+     "OP030C__source_1055",
+     "OP030C__source_1056",
+     "OP030C__source_1057",
+     "OP030C__source_1058",
+     "OP030C__source_1059",
+     "OP030C__source_1060",
+     "OP030C__source_1061",
+     "OP030C__source_1062",
+     "OP030C__source_1063",
+     "OP030C__source_1064",
+     "OP030C__source_1065",
+     "OP030C__source_1066",
+     "OP030C__source_1067",
+     "OP030C__source_1068",
+     "OP030C__source_1069",
+     "OP030C__source_1070",
+     "OP030C__source_1071",
+     "OP030C__source_1072",
+     "OP030C__source_1073",
+     "OP030C__source_1074",
+     "OP030C__source_1075",
+     "OP030C__source_1076",
+     "OP030C__source_1077",
+     "OP030C__source_1078",
+     "OP030C__source_1079",
+     "OP030C__source_1080",
+     "OP030C__source_1081",
+     "OP030C__source_1082",
+     "OP030C__source_1083",
+     "OP030C__source_1086",
+     "OP030C__source_1087",
+     "OP030C__source_1088",
+     "OP030C__source_1089",
+     "OP030C__source_1090",
+     "OP030C__source_1091",
+     "OP030C__source_1092",
+     "OP030C__source_1093",
+     "OP030C__source_1094",
+     "OP030C__source_1095",
+     "OP030C__source_1096",
+     "OP030C__source_1097",
+     "OP030C__source_1098",
+     "OP030C__source_1099",
+     "OP030C__source_1100",
+     "OP030C__source_1101",
+     "OP030C__source_1102",
+     "OP030C__source_1103",
+     "OP030C__source_1104",
+     "OP030C__source_1105",
+     "OP030C__source_1106",
+     "OP030C__source_1107",
+     "OP030C__source_1108",
+     "OP030C__source_1109",
+     "OP030C__source_1110",
+     "OP030C__source_1111",
+     "OP030C__source_1112",
+     "OP030C__source_1113",
+     "OP030C__source_1114",
+     "OP030C__source_1115",
+     "OP030C__source_1116",
+     "OP030C__source_1117",
+     "OP030C__source_1118",
+     "OP030C__source_1119",
+     "OP030C__source_1120",
+     "OP030C__source_1121",
+     "OP030C__source_1122",
+     "OP030C__source_1123"
+    ],
+    "closure_matches_selection": false,
+    "closure_brings_extra": [
+     "OP030C_driver_M14",
+     "OP030C_driver_M14_adapter_bolt_0_head_base",
+     "OP030C_driver_M14_adapter_bolt_0_head_socket",
+     "OP030C_driver_M14_adapter_bolt_0_shank",
+     "OP030C_driver_M14_adapter_bolt_1_head_base",
+     "OP030C_driver_M14_adapter_bolt_1_head_socket",
+     "OP030C_driver_M14_adapter_bolt_1_shank",
+     "OP030C_driver_M14_adapter_bolt_2_head_base",
+     "OP030C_driver_M14_adapter_bolt_2_head_socket",
+     "OP030C_driver_M14_adapter_bolt_2_shank",
+     "OP030C_driver_M14_adapter_bolt_3_head_base",
+     "OP030C_driver_M14_adapter_bolt_3_head_socket",
+     "OP030C_driver_M14_adapter_bolt_3_shank",
+     "OP030C_driver_M14_camera_bridge_arm",
+     "OP030C_driver_M14_camera_bridge_base",
+     "OP030C_driver_M14_camera_bridge_pad",
+     "OP030C_driver_M14_drive_service_box",
+     "OP030C_driver_M14_local_service_gland",
+     "OP030C_driver_M14_motor_coupler",
+     "OP030C_driver_M14_tool",
+     "OP030C_driver_M14_tool_drive",
+     "OP030C_driver_M14_tool_nose",
+     "OP030C_driver_M14_tool_shaft",
+     "OP030C_driver_M14_tool_socket",
+     "OP030C_driver_M14_tool_spindle",
+     "OP030C_driver_M14_vacuum_retention_tip",
+     "OP030C_driver_M14_wrist_adapter",
+     "OP030C_driver_M6",
+     "OP030C_driver_M6_adapter_bolt_0_head_base",
+     "OP030C_driver_M6_adapter_bolt_0_head_socket",
+     "OP030C_driver_M6_adapter_bolt_0_shank",
+     "OP030C_driver_M6_adapter_bolt_1_head_base",
+     "OP030C_driver_M6_adapter_bolt_1_head_socket",
+     "OP030C_driver_M6_adapter_bolt_1_shank",
+     "OP030C_driver_M6_adapter_bolt_2_head_base",
+     "OP030C_driver_M6_adapter_bolt_2_head_socket",
+     "OP030C_driver_M6_adapter_bolt_2_shank",
+     "OP030C_driver_M6_adapter_bolt_3_head_base",
+     "OP030C_driver_M6_adapter_bolt_3_head_socket",
+     "OP030C_driver_M6_adapter_bolt_3_shank",
+     "OP030C_driver_M6_camera_bridge_arm",
+     "OP030C_driver_M6_camera_bridge_base",
+     "OP030C_driver_M6_camera_bridge_pad",
+     "OP030C_driver_M6_drive_service_box",
+     "OP030C_driver_M6_local_service_gland",
+     "OP030C_driver_M6_motor_coupler",
+     "OP030C_driver_M6_tool",
+     "OP030C_driver_M6_tool_drive",
+     "OP030C_driver_M6_tool_nose",
+     "OP030C_driver_M6_tool_shaft",
+     "OP030C_driver_M6_tool_socket",
+     "OP030C_driver_M6_tool_spindle",
+     "OP030C_driver_M6_vacuum_retention_tip",
+     "OP030C_driver_M6_wrist_adapter"
+    ],
+    "selection_not_reached": []
+   },
+   "closure_covered_count": 234,
+   "disjoint_from_fixed": true,
+   "overlap_with_fixed": [],
+   "selection": [
+    {
+     "name": "OP030C__Eye_OP030_left",
+     "type": "CAMERA",
+     "parent": "OP030C__onhand_OP030_left_mount",
+     "world_translation_m": [
+      -0.46000000834465027,
+      2.1500000953674316,
+      1.3118999004364014
+     ]
+    },
+    {
+     "name": "OP030C__Eye_OP030_right",
+     "type": "CAMERA",
+     "parent": "OP030C__onhand_OP030_right_mount",
+     "world_translation_m": [
+      -0.45999982953071594,
+      3.6500003337860107,
+      1.182800054550171
+     ]
+    },
+    {
+     "name": "OP030C__OP030_air_service_connections",
+     "type": "EMPTY",
+     "parent": "OP030C_cell",
+     "world_translation_m": [
+      0.0,
+      4.599999904632568,
+      0.0
+     ]
+    },
+    {
+     "name": "OP030C__OP030_air_service_connections_header_branch",
+     "type": "CURVE",
+     "parent": "OP030C__OP030_air_service_connections",
+     "world_translation_m": [
+      0.0,
+      4.599999904632568,
+      0.0
+     ]
+    },
+    {
+     "name": "OP030C__OP030_air_service_connections_stocker_mount",
+     "type": "MESH",
+     "parent": "OP030C__OP030_air_service_connections",
+     "world_translation_m": [
+      -2.2874999046325684,
+      2.5,
+      0.9800000190734863
+     ]
+    },
+    {
+     "name": "OP030C__OP030_precision_left_0",
+     "type": "EMPTY",
+     "parent": "OP030C__source_1078",
+     "world_translation_m": [
+      -0.550000011920929,
+      2.1038191318511963,
+      1.2415759563446045
+     ]
+    },
+    {
+     "name": "OP030C__OP030_precision_left_1",
+     "type": "EMPTY",
+     "parent": "OP030C__source_1083",
+     "world_translation_m": [
+      -0.550000011920929,
+      2.196180820465088,
+      1.2415759563446045
+     ]
+    },
+    {
+     "name": "OP030C__OP030_precision_right_0",
+     "type": "EMPTY",
+     "parent": "OP030C__source_1118",
+     "world_translation_m": [
+      -0.550000011920929,
+      3.696180820465088,
+      1.242475986480713
+     ]
+    },
+    {
+     "name": "OP030C__OP030_precision_right_1",
+     "type": "EMPTY",
+     "parent": "OP030C__source_1123",
+     "world_translation_m": [
+      -0.550000011920929,
+      3.6038191318511963,
+      1.242475986480713
+     ]
+    },
+    {
+     "name": "OP030C__onhand_OP030_left_housing",
+     "type": "MESH",
+     "parent": "OP030C__onhand_OP030_left_mount",
+     "world_translation_m": [
+      -0.3663489818572998,
+      2.1500000953674316,
+      1.2930723428726196
+     ]
+    },
+    {
+     "name": "OP030C__onhand_OP030_left_lens_barrel",
+     "type": "MESH",
+     "parent": "OP030C__onhand_OP030_left_mount",
+     "world_translation_m": [
+      -0.3663489818572998,
+      2.1500000953674316,
+      1.2930723428726196
+     ]
+    },
+    {
+     "name": "OP030C__onhand_OP030_left_lens_glass",
+     "type": "MESH",
+     "parent": "OP030C__onhand_OP030_left_mount",
+     "world_translation_m": [
+      -0.3663489818572998,
+      2.1500000953674316,
+      1.2930723428726196
+     ]
+    },
+    {
+     "name": "OP030C__onhand_OP030_left_mount",
+     "type": "EMPTY",
+     "parent": "OP030C__source_1067",
+     "world_translation_m": [
+      -0.3663489818572998,
+      2.1500000953674316,
+      1.2930723428726196
+     ]
+    },
+    {
+     "name": "OP030C__onhand_OP030_left_mount_tab",
+     "type": "MESH",
+     "parent": "OP030C__onhand_OP030_left_mount",
+     "world_translation_m": [
+      -0.3663489818572998,
+      2.1500000953674316,
+      1.2930723428726196
+     ]
+    },
+    {
+     "name": "OP030C__onhand_OP030_left_support_arm",
+     "type": "MESH",
+     "parent": "OP030C__onhand_OP030_left_mount",
+     "world_translation_m": [
+      -0.3663489818572998,
+      2.1500000953674316,
+      1.2930723428726196
+     ]
+    },
+    {
+     "name": "OP030C__onhand_OP030_right_housing",
+     "type": "MESH",
+     "parent": "OP030C__onhand_OP030_right_mount",
+     "world_translation_m": [
+      -0.3773568272590637,
+      3.6500003337860107,
+      1.134892463684082
+     ]
+    },
+    {
+     "name": "OP030C__onhand_OP030_right_lens_barrel",
+     "type": "MESH",
+     "parent": "OP030C__onhand_OP030_right_mount",
+     "world_translation_m": [
+      -0.3773568272590637,
+      3.6500003337860107,
+      1.134892463684082
+     ]
+    },
+    {
+     "name": "OP030C__onhand_OP030_right_lens_glass",
+     "type": "MESH",
+     "parent": "OP030C__onhand_OP030_right_mount",
+     "world_translation_m": [
+      -0.3773568272590637,
+      3.6500003337860107,
+      1.134892463684082
+     ]
+    },
+    {
+     "name": "OP030C__onhand_OP030_right_mount",
+     "type": "EMPTY",
+     "parent": "OP030C__source_1107",
+     "world_translation_m": [
+      -0.3773568272590637,
+      3.6500003337860107,
+      1.134892463684082
+     ]
+    },
+    {
+     "name": "OP030C__onhand_OP030_right_mount_tab",
+     "type": "MESH",
+     "parent": "OP030C__onhand_OP030_right_mount",
+     "world_translation_m": [
+      -0.3773568272590637,
+      3.6500003337860107,
+      1.134892463684082
+     ]
+    },
+    {
+     "name": "OP030C__onhand_OP030_right_support_arm",
+     "type": "MESH",
+     "parent": "OP030C__onhand_OP030_right_mount",
+     "world_translation_m": [
+      -0.3773568272590637,
+      3.6500003337860107,
+      1.134892463684082
+     ]
+    },
+    {
+     "name": "OP030C__source_0576",
+     "type": "EMPTY",
+     "parent": "OP030C_cell",
+     "world_translation_m": [
+      -0.8999999761581421,
+      2.8999998569488525,
+      0.0
+     ]
+    },
+    {
+     "name": "OP030C__source_0576_m0050_p00",
+     "type": "MESH",
+     "parent": "OP030C__source_0576",
+     "world_translation_m": [
+      -0.8999999761581421,
+      2.8999998569488525,
+      0.0
+     ]
+    },
+    {
+     "name": "OP030C__source_0576_m0050_p01",
+     "type": "MESH",
+     "parent": "OP030C__source_0576",
+     "world_translation_m": [
+      -0.8999999761581421,
+      2.8999998569488525,
+      0.0
+     ]
+    },
+    {
+     "name": "OP030C__source_0576_m0050_p02",
+     "type": "MESH",
+     "parent": "OP030C__source_0576",
+     "world_translation_m": [
+      -0.8999999761581421,
+      2.8999998569488525,
+      0.0
+     ]
+    },
+    {
+     "name": "OP030C__source_0576_m0050_p03",
+     "type": "MESH",
+     "parent": "OP030C__source_0576",
+     "world_translation_m": [
+      -0.8999999761581421,
+      2.8999998569488525,
+      0.0
+     ]
+    },
+    {
+     "name": "OP030C__source_0576_m0050_p04",
+     "type": "MESH",
+     "parent": "OP030C__source_0576",
+     "world_translation_m": [
+      -0.8999999761581421,
+      2.8999998569488525,
+      0.0
+     ]
+    },
+    {
+     "name": "OP030C__source_0576_m0050_p05",
+     "type": "MESH",
+     "parent": "OP030C__source_0576",
+     "world_translation_m": [
+      -0.8999999761581421,
+      2.8999998569488525,
+      0.0
+     ]
+    },
+    {
+     "name": "OP030C__source_0577",
+     "type": "EMPTY",
+     "parent": null,
+     "world_translation_m": [
+      -0.8999999761581421,
+      2.9000000953674316,
+      0.0
+     ]
+    },
+    {
+     "name": "OP030C__source_0577_m0051_p00",
+     "type": "MESH",
+     "parent": "OP030C__source_0577",
+     "world_translation_m": [
+      -0.8999999761581421,
+      2.9000000953674316,
+      0.0
+     ]
+    },
+    {
+     "name": "OP030C__source_0577_m0051_p01",
+     "type": "MESH",
+     "parent": "OP030C__source_0577",
+     "world_translation_m": [
+      -0.8999999761581421,
+      2.9000000953674316,
+      0.0
+     ]
+    },
+    {
+     "name": "OP030C__source_0577_m0051_p02",
+     "type": "MESH",
+     "parent": "OP030C__source_0577",
+     "world_translation_m": [
+      -0.8999999761581421,
+      2.9000000953674316,
+      0.0
+     ]
+    },
+    {
+     "name": "OP030C__source_0577_m0051_p03",
+     "type": "MESH",
+     "parent": "OP030C__source_0577",
+     "world_translation_m": [
+      -0.8999999761581421,
+      2.9000000953674316,
+      0.0
+     ]
+    },
+    {
+     "name": "OP030C__source_0577_m0051_p04",
+     "type": "MESH",
+     "parent": "OP030C__source_0577",
+     "world_translation_m": [
+      -0.8999999761581421,
+      2.9000000953674316,
+      0.0
+     ]
+    },
+    {
+     "name": "OP030C__source_0577_m0051_p05",
+     "type": "MESH",
+     "parent": "OP030C__source_0577",
+     "world_translation_m": [
+      -0.8999999761581421,
+      2.9000000953674316,
+      0.0
+     ]
+    },
+    {
+     "name": "OP030C__source_0578",
+     "type": "EMPTY",
+     "parent": null,
+     "world_translation_m": [
+      -0.8999999761581421,
+      2.9000000953674316,
+      0.0
+     ]
+    },
+    {
+     "name": "OP030C__source_0578_m0052_p00",
+     "type": "MESH",
+     "parent": "OP030C__source_0578",
+     "world_translation_m": [
+      -0.8999999761581421,
+      2.9000000953674316,
+      0.0
+     ]
+    },
+    {
+     "name": "OP030C__source_0578_m0052_p01",
+     "type": "MESH",
+     "parent": "OP030C__source_0578",
+     "world_translation_m": [
+      -0.8999999761581421,
+      2.9000000953674316,
+      0.0
+     ]
+    },
+    {
+     "name": "OP030C__source_0578_m0052_p02",
+     "type": "MESH",
+     "parent": "OP030C__source_0578",
+     "world_translation_m": [
+      -0.8999999761581421,
+      2.9000000953674316,
+      0.0
+     ]
+    },
+    {
+     "name": "OP030C__source_0578_m0052_p03",
+     "type": "MESH",
+     "parent": "OP030C__source_0578",
+     "world_translation_m": [
+      -0.8999999761581421,
+      2.9000000953674316,
+      0.0
+     ]
+    },
+    {
+     "name": "OP030C__source_0578_m0052_p04",
+     "type": "MESH",
+     "parent": "OP030C__source_0578",
+     "world_translation_m": [
+      -0.8999999761581421,
+      2.9000000953674316,
+      0.0
+     ]
+    },
+    {
+     "name": "OP030C__source_0578_m0052_p05",
+     "type": "MESH",
+     "parent": "OP030C__source_0578",
+     "world_translation_m": [
+      -0.8999999761581421,
+      2.9000000953674316,
+      0.0
+     ]
+    },
+    {
+     "name": "OP030C__source_0578_m0052_p06",
+     "type": "MESH",
+     "parent": "OP030C__source_0578",
+     "world_translation_m": [
+      -0.8999999761581421,
+      2.9000000953674316,
+      0.0
+     ]
+    },
+    {
+     "name": "OP030C__source_0578_m0052_p07",
+     "type": "MESH",
+     "parent": "OP030C__source_0578",
+     "world_translation_m": [
+      -0.8999999761581421,
+      2.9000000953674316,
+      0.0
+     ]
+    },
+    {
+     "name": "OP030C__source_0578_m0052_p08",
+     "type": "MESH",
+     "parent": "OP030C__source_0578",
+     "world_translation_m": [
+      -0.8999999761581421,
+      2.9000000953674316,
+      0.0
+     ]
+    },
+    {
+     "name": "OP030C__source_0688",
+     "type": "EMPTY",
+     "parent": "OP030C_cell",
+     "world_translation_m": [
+      0.0,
+      4.599999904632568,
+      0.0
+     ]
+    },
+    {
+     "name": "OP030C__source_0688_m0115_p00",
+     "type": "MESH",
+     "parent": "OP030C__source_0688",
+     "world_translation_m": [
+      0.0,
+      4.599999904632568,
+      0.0
+     ]
+    },
+    {
+     "name": "OP030C__source_0688_m0115_p01",
+     "type": "MESH",
+     "parent": "OP030C__source_0688",
+     "world_translation_m": [
+      0.0,
+      4.599999904632568,
+      0.0
+     ]
+    },
+    {
+     "name": "OP030C__source_0688_m0115_p02",
+     "type": "MESH",
+     "parent": "OP030C__source_0688",
+     "world_translation_m": [
+      0.0,
+      4.599999904632568,
+      0.0
+     ]
+    },
+    {
+     "name": "OP030C__source_0689",
+     "type": "EMPTY",
+     "parent": "OP030C_cell",
+     "world_translation_m": [
+      -2.244999885559082,
+      3.3299999237060547,
+      1.8849999904632568
+     ]
+    },
+    {
+     "name": "OP030C__source_0689_m0116_p00",
+     "type": "MESH",
+     "parent": "OP030C__source_0689",
+     "world_translation_m": [
+      -2.244999885559082,
+      3.3299999237060547,
+      1.8849999904632568
+     ]
+    },
+    {
+     "name": "OP030C__source_0690",
+     "type": "EMPTY",
+     "parent": "OP030C_cell",
+     "world_translation_m": [
+      -2.244999885559082,
+      3.3299999237060547,
+      -8.0600004196167
+     ]
+    },
+    {
+     "name": "OP030C__source_0690_m0117_p00",
+     "type": "MESH",
+     "parent": "OP030C__source_0690",
+     "world_translation_m": [
+      -2.244999885559082,
+      3.3299999237060547,
+      -8.0600004196167
+     ]
+    },
+    {
+     "name": "OP030C__source_0693",
+     "type": "EMPTY",
+     "parent": "OP030C_cell",
+     "world_translation_m": [
+      0.0,
+      4.599999904632568,
+      0.0
+     ]
+    },
+    {
+     "name": "OP030C__source_0693_m0120_p00",
+     "type": "MESH",
+     "parent": "OP030C__source_0693",
+     "world_translation_m": [
+      0.0,
+      4.599999904632568,
+      0.0
+     ]
+    },
+    {
+     "name": "OP030C__source_0693_m0120_p01",
+     "type": "MESH",
+     "parent": "OP030C__source_0693",
+     "world_translation_m": [
+      0.0,
+      4.599999904632568,
+      0.0
+     ]
+    },
+    {
+     "name": "OP030C__source_0693_m0120_p02",
+     "type": "MESH",
+     "parent": "OP030C__source_0693",
+     "world_translation_m": [
+      0.0,
+      4.599999904632568,
+      0.0
+     ]
+    },
+    {
+     "name": "OP030C__source_0693_m0120_p03",
+     "type": "MESH",
+     "parent": "OP030C__source_0693",
+     "world_translation_m": [
+      0.0,
+      4.599999904632568,
+      0.0
+     ]
+    },
+    {
+     "name": "OP030C__source_0693_m0120_p04",
+     "type": "MESH",
+     "parent": "OP030C__source_0693",
+     "world_translation_m": [
+      0.0,
+      4.599999904632568,
+      0.0
+     ]
+    },
+    {
+     "name": "OP030C__source_0694",
+     "type": "EMPTY",
+     "parent": "OP030C_cell",
+     "world_translation_m": [
+      0.0,
+      4.599999904632568,
+      0.0
+     ]
+    },
+    {
+     "name": "OP030C__source_0694_m0121_p00",
+     "type": "MESH",
+     "parent": "OP030C__source_0694",
+     "world_translation_m": [
+      0.0,
+      4.599999904632568,
+      0.0
+     ]
+    },
+    {
+     "name": "OP030C__source_0694_m0121_p01",
+     "type": "MESH",
+     "parent": "OP030C__source_0694",
+     "world_translation_m": [
+      0.0,
+      4.599999904632568,
+      0.0
+     ]
+    },
+    {
+     "name": "OP030C__source_1046",
+     "type": "EMPTY",
+     "parent": null,
+     "world_translation_m": [
+      -0.8203977346420288,
+      2.6813089847564697,
+      1.5427279472351074
+     ]
+    },
+    {
+     "name": "OP030C__source_1046_m0301_p00",
+     "type": "MESH",
+     "parent": "OP030C__source_1046",
+     "world_translation_m": [
+      -0.8203977346420288,
+      2.6813089847564697,
+      1.5427279472351074
+     ]
+    },
+    {
+     "name": "OP030C__source_1047",
+     "type": "EMPTY",
+     "parent": null,
+     "world_translation_m": [
+      -0.8203977346420288,
+      2.6813089847564697,
+      1.5427279472351074
+     ]
+    },
+    {
+     "name": "OP030C__source_1047_m0302_p00",
+     "type": "MESH",
+     "parent": "OP030C__source_1047",
+     "world_translation_m": [
+      -0.8203977346420288,
+      2.6813089847564697,
+      1.5427279472351074
+     ]
+    },
+    {
+     "name": "OP030C__source_1048",
+     "type": "EMPTY",
+     "parent": null,
+     "world_translation_m": [
+      -0.8203977346420288,
+      2.6813089847564697,
+      1.5427279472351074
+     ]
+    },
+    {
+     "name": "OP030C__source_1048_m0303_p00",
+     "type": "MESH",
+     "parent": "OP030C__source_1048",
+     "world_translation_m": [
+      -0.8203977346420288,
+      2.6813089847564697,
+      1.5427279472351074
+     ]
+    },
+    {
+     "name": "OP030C__source_1049",
+     "type": "EMPTY",
+     "parent": null,
+     "world_translation_m": [
+      -0.825681746006012,
+      2.6744143962860107,
+      1.540508508682251
+     ]
+    },
+    {
+     "name": "OP030C__source_1049_m0304_p00",
+     "type": "MESH",
+     "parent": "OP030C__source_1049",
+     "world_translation_m": [
+      -0.825681746006012,
+      2.6744143962860107,
+      1.540508508682251
+     ]
+    },
+    {
+     "name": "OP030C__source_1050",
+     "type": "EMPTY",
+     "parent": null,
+     "world_translation_m": [
+      -0.825681746006012,
+      2.6744143962860107,
+      1.540508508682251
+     ]
+    },
+    {
+     "name": "OP030C__source_1050_m0305_p00",
+     "type": "MESH",
+     "parent": "OP030C__source_1050",
+     "world_translation_m": [
+      -0.825681746006012,
+      2.6744143962860107,
+      1.540508508682251
+     ]
+    },
+    {
+     "name": "OP030C__source_1051",
+     "type": "EMPTY",
+     "parent": null,
+     "world_translation_m": [
+      -0.9302651882171631,
+      2.476515769958496,
+      1.5722817182540894
+     ]
+    },
+    {
+     "name": "OP030C__source_1051_m0306_p00",
+     "type": "MESH",
+     "parent": "OP030C__source_1051",
+     "world_translation_m": [
+      -0.9302651882171631,
+      2.476515769958496,
+      1.5722817182540894
+     ]
+    },
+    {
+     "name": "OP030C__source_1052",
+     "type": "EMPTY",
+     "parent": null,
+     "world_translation_m": [
+      -0.6314417123794556,
+      1.8976649045944214,
+      1.9181839227676392
+     ]
+    },
+    {
+     "name": "OP030C__source_1052_m0307_p00",
+     "type": "MESH",
+     "parent": "OP030C__source_1052",
+     "world_translation_m": [
+      -0.6314417123794556,
+      1.8976649045944214,
+      1.9181839227676392
+     ]
+    },
+    {
+     "name": "OP030C__source_1053",
+     "type": "EMPTY",
+     "parent": null,
+     "world_translation_m": [
+      -0.8424404859542847,
+      2.4765279293060303,
+      1.6419941186904907
+     ]
+    },
+    {
+     "name": "OP030C__source_1053_m0308_p00",
+     "type": "MESH",
+     "parent": "OP030C__source_1053",
+     "world_translation_m": [
+      -0.8424404859542847,
+      2.4765279293060303,
+      1.6419941186904907
+     ]
+    },
+    {
+     "name": "OP030C__source_1054",
+     "type": "EMPTY",
+     "parent": null,
+     "world_translation_m": [
+      -0.8424404859542847,
+      2.4765279293060303,
+      1.6419941186904907
+     ]
+    },
+    {
+     "name": "OP030C__source_1054_m0309_p00",
+     "type": "MESH",
+     "parent": "OP030C__source_1054",
+     "world_translation_m": [
+      -0.8424404859542847,
+      2.4765279293060303,
+      1.6419941186904907
+     ]
+    },
+    {
+     "name": "OP030C__source_1055",
+     "type": "EMPTY",
+     "parent": null,
+     "world_translation_m": [
+      -0.8424404859542847,
+      2.4765279293060303,
+      1.6419941186904907
+     ]
+    },
+    {
+     "name": "OP030C__source_1055_m0310_p00",
+     "type": "MESH",
+     "parent": "OP030C__source_1055",
+     "world_translation_m": [
+      -0.8424404859542847,
+      2.4765279293060303,
+      1.6419941186904907
+     ]
+    },
+    {
+     "name": "OP030C__source_1056",
+     "type": "EMPTY",
+     "parent": null,
+     "world_translation_m": [
+      -0.5204054117202759,
+      1.987441062927246,
+      2.026923418045044
+     ]
+    },
+    {
+     "name": "OP030C__source_1056_m0311_p00",
+     "type": "MESH",
+     "parent": "OP030C__source_1056",
+     "world_translation_m": [
+      -0.5204054117202759,
+      1.987441062927246,
+      2.026923418045044
+     ]
+    },
+    {
+     "name": "OP030C__source_1057",
+     "type": "EMPTY",
+     "parent": null,
+     "world_translation_m": [
+      -0.5263504385948181,
+      2.346569776535034,
+      1.6110807657241821
+     ]
+    },
+    {
+     "name": "OP030C__source_1057_m0312_p00",
+     "type": "MESH",
+     "parent": "OP030C__source_1057",
+     "world_translation_m": [
+      -0.5263504385948181,
+      2.346569776535034,
+      1.6110807657241821
+     ]
+    },
+    {
+     "name": "OP030C__source_1058",
+     "type": "EMPTY",
+     "parent": null,
+     "world_translation_m": [
+      -0.5681149959564209,
+      1.9791723489761353,
+      1.9531465768814087
+     ]
+    },
+    {
+     "name": "OP030C__source_1058_m0313_p00",
+     "type": "MESH",
+     "parent": "OP030C__source_1058",
+     "world_translation_m": [
+      -0.5681149959564209,
+      1.9791723489761353,
+      1.9531465768814087
+     ]
+    },
+    {
+     "name": "OP030C__source_1059",
+     "type": "EMPTY",
+     "parent": null,
+     "world_translation_m": [
+      -0.5681149959564209,
+      1.9791723489761353,
+      1.9531465768814087
+     ]
+    },
+    {
+     "name": "OP030C__source_1059_m0314_p00",
+     "type": "MESH",
+     "parent": "OP030C__source_1059",
+     "world_translation_m": [
+      -0.5681149959564209,
+      1.9791723489761353,
+      1.9531465768814087
+     ]
+    },
+    {
+     "name": "OP030C__source_1060",
+     "type": "EMPTY",
+     "parent": null,
+     "world_translation_m": [
+      -0.5681149959564209,
+      1.9791723489761353,
+      1.9531465768814087
+     ]
+    },
+    {
+     "name": "OP030C__source_1060_m0315_p00",
+     "type": "MESH",
+     "parent": "OP030C__source_1060",
+     "world_translation_m": [
+      -0.5681149959564209,
+      1.9791723489761353,
+      1.9531465768814087
+     ]
+    },
+    {
+     "name": "OP030C__source_1061",
+     "type": "EMPTY",
+     "parent": null,
+     "world_translation_m": [
+      -0.5955063104629517,
+      2.1952149868011475,
+      1.515312910079956
+     ]
+    },
+    {
+     "name": "OP030C__source_1061_m0316_p00",
+     "type": "MESH",
+     "parent": "OP030C__source_1061",
+     "world_translation_m": [
+      -0.5955063104629517,
+      2.1952149868011475,
+      1.515312910079956
+     ]
+    },
+    {
+     "name": "OP030C__source_1062",
+     "type": "EMPTY",
+     "parent": null,
+     "world_translation_m": [
+      -0.5955063104629517,
+      2.1952149868011475,
+      1.515312910079956
+     ]
+    },
+    {
+     "name": "OP030C__source_1062_m0317_p00",
+     "type": "MESH",
+     "parent": "OP030C__source_1062",
+     "world_translation_m": [
+      -0.5955063104629517,
+      2.1952149868011475,
+      1.515312910079956
+     ]
+    },
+    {
+     "name": "OP030C__source_1063",
+     "type": "EMPTY",
+     "parent": null,
+     "world_translation_m": [
+      -0.6587077975273132,
+      2.2974905967712402,
+      1.5272654294967651
+     ]
+    },
+    {
+     "name": "OP030C__source_1063_m0318_p00",
+     "type": "MESH",
+     "parent": "OP030C__source_1063",
+     "world_translation_m": [
+      -0.6587077975273132,
+      2.2974905967712402,
+      1.5272654294967651
+     ]
+    },
+    {
+     "name": "OP030C__source_1064",
+     "type": "EMPTY",
+     "parent": null,
+     "world_translation_m": [
+      -0.549891471862793,
+      2.1498923301696777,
+      1.4480262994766235
+     ]
+    },
+    {
+     "name": "OP030C__source_1064_m0319_p00",
+     "type": "MESH",
+     "parent": "OP030C__source_1064",
+     "world_translation_m": [
+      -0.549891471862793,
+      2.1498923301696777,
+      1.4480262994766235
+     ]
+    },
+    {
+     "name": "OP030C__source_1065",
+     "type": "EMPTY",
+     "parent": null,
+     "world_translation_m": [
+      -0.549891471862793,
+      2.1498923301696777,
+      1.4480262994766235
+     ]
+    },
+    {
+     "name": "OP030C__source_1065_m0320_p00",
+     "type": "MESH",
+     "parent": "OP030C__source_1065",
+     "world_translation_m": [
+      -0.549891471862793,
+      2.1498923301696777,
+      1.4480262994766235
+     ]
+    },
+    {
+     "name": "OP030C__source_1066",
+     "type": "EMPTY",
+     "parent": null,
+     "world_translation_m": [
+      -0.550000011920929,
+      2.1500000953674316,
+      1.4479483366012573
+     ]
+    },
+    {
+     "name": "OP030C__source_1066_m0321_p00",
+     "type": "MESH",
+     "parent": "OP030C__source_1066",
+     "world_translation_m": [
+      -0.550000011920929,
+      2.1500000953674316,
+      1.4479483366012573
+     ]
+    },
+    {
+     "name": "OP030C__source_1067",
+     "type": "EMPTY",
+     "parent": null,
+     "world_translation_m": [
+      -0.550000011920929,
+      2.1500000953674316,
+      1.371899962425232
+     ]
+    },
+    {
+     "name": "OP030C__source_1068",
+     "type": "EMPTY",
+     "parent": null,
+     "world_translation_m": [
+      -0.550000011920929,
+      2.1500000953674316,
+      1.371899962425232
+     ]
+    },
+    {
+     "name": "OP030C__source_1069",
+     "type": "EMPTY",
+     "parent": null,
+     "world_translation_m": [
+      -0.550000011920929,
+      2.1500000953674316,
+      1.371899962425232
+     ]
+    },
+    {
+     "name": "OP030C__source_1070",
+     "type": "EMPTY",
+     "parent": null,
+     "world_translation_m": [
+      -0.550000011920929,
+      2.1500000953674316,
+      1.371899962425232
+     ]
+    },
+    {
+     "name": "OP030C__source_1071",
+     "type": "EMPTY",
+     "parent": null,
+     "world_translation_m": [
+      -0.550000011920929,
+      2.1500000953674316,
+      1.371899962425232
+     ]
+    },
+    {
+     "name": "OP030C__source_1072",
+     "type": "EMPTY",
+     "parent": null,
+     "world_translation_m": [
+      -0.550000011920929,
+      2.1500000953674316,
+      1.371899962425232
+     ]
+    },
+    {
+     "name": "OP030C__source_1073",
+     "type": "EMPTY",
+     "parent": null,
+     "world_translation_m": [
+      -0.550000011920929,
+      2.1500000953674316,
+      1.371899962425232
+     ]
+    },
+    {
+     "name": "OP030C__source_1074",
+     "type": "EMPTY",
+     "parent": null,
+     "world_translation_m": [
+      -0.550000011920929,
+      2.119398832321167,
+      1.3169959783554077
+     ]
+    },
+    {
+     "name": "OP030C__source_1075",
+     "type": "EMPTY",
+     "parent": null,
+     "world_translation_m": [
+      -0.550000011920929,
+      2.0878989696502686,
+      1.3210959434509277
+     ]
+    },
+    {
+     "name": "OP030C__source_1076",
+     "type": "EMPTY",
+     "parent": null,
+     "world_translation_m": [
+      -0.550000011920929,
+      2.1373000144958496,
+      1.310479998588562
+     ]
+    },
+    {
+     "name": "OP030C__source_1077",
+     "type": "EMPTY",
+     "parent": null,
+     "world_translation_m": [
+      -0.550000011920929,
+      2.081798791885376,
+      1.2739959955215454
+     ]
+    },
+    {
+     "name": "OP030C__source_1078",
+     "type": "EMPTY",
+     "parent": null,
+     "world_translation_m": [
+      -0.550000011920929,
+      2.1038191318511963,
+      1.2415759563446045
+     ]
+    },
+    {
+     "name": "OP030C__source_1079",
+     "type": "EMPTY",
+     "parent": null,
+     "world_translation_m": [
+      -0.550000011920929,
+      2.180601119995117,
+      1.3169959783554077
+     ]
+    },
+    {
+     "name": "OP030C__source_1080",
+     "type": "EMPTY",
+     "parent": null,
+     "world_translation_m": [
+      -0.550000011920929,
+      2.2121009826660156,
+      1.3210959434509277
+     ]
+    },
+    {
+     "name": "OP030C__source_1081",
+     "type": "EMPTY",
+     "parent": null,
+     "world_translation_m": [
+      -0.550000011920929,
+      2.1626999378204346,
+      1.310479998588562
+     ]
+    },
+    {
+     "name": "OP030C__source_1082",
+     "type": "EMPTY",
+     "parent": null,
+     "world_translation_m": [
+      -0.550000011920929,
+      2.218201160430908,
+      1.2739959955215454
+     ]
+    },
+    {
+     "name": "OP030C__source_1083",
+     "type": "EMPTY",
+     "parent": null,
+     "world_translation_m": [
+      -0.550000011920929,
+      2.196180820465088,
+      1.2415759563446045
+     ]
+    },
+    {
+     "name": "OP030C__source_1086",
+     "type": "EMPTY",
+     "parent": null,
+     "world_translation_m": [
+      -0.97959303855896,
+      3.118694305419922,
+      1.5427279472351074
+     ]
+    },
+    {
+     "name": "OP030C__source_1086_m0301_p00",
+     "type": "MESH",
+     "parent": "OP030C__source_1086",
+     "world_translation_m": [
+      -0.97959303855896,
+      3.118694305419922,
+      1.5427279472351074
+     ]
+    },
+    {
+     "name": "OP030C__source_1087",
+     "type": "EMPTY",
+     "parent": null,
+     "world_translation_m": [
+      -0.97959303855896,
+      3.118694305419922,
+      1.5427279472351074
+     ]
+    },
+    {
+     "name": "OP030C__source_1087_m0302_p00",
+     "type": "MESH",
+     "parent": "OP030C__source_1087",
+     "world_translation_m": [
+      -0.97959303855896,
+      3.118694305419922,
+      1.5427279472351074
+     ]
+    },
+    {
+     "name": "OP030C__source_1088",
+     "type": "EMPTY",
+     "parent": null,
+     "world_translation_m": [
+      -0.97959303855896,
+      3.118694305419922,
+      1.5427279472351074
+     ]
+    },
+    {
+     "name": "OP030C__source_1088_m0303_p00",
+     "type": "MESH",
+     "parent": "OP030C__source_1088",
+     "world_translation_m": [
+      -0.97959303855896,
+      3.118694305419922,
+      1.5427279472351074
+     ]
+    },
+    {
+     "name": "OP030C__source_1089",
+     "type": "EMPTY",
+     "parent": null,
+     "world_translation_m": [
+      -0.972987711429596,
+      3.1174137592315674,
+      1.548642635345459
+     ]
+    },
+    {
+     "name": "OP030C__source_1089_m0304_p00",
+     "type": "MESH",
+     "parent": "OP030C__source_1089",
+     "world_translation_m": [
+      -0.972987711429596,
+      3.1174137592315674,
+      1.548642635345459
+     ]
+    },
+    {
+     "name": "OP030C__source_1090",
+     "type": "EMPTY",
+     "parent": null,
+     "world_translation_m": [
+      -0.972987711429596,
+      3.1174137592315674,
+      1.548642635345459
+     ]
+    },
+    {
+     "name": "OP030C__source_1090_m0305_p00",
+     "type": "MESH",
+     "parent": "OP030C__source_1090",
+     "world_translation_m": [
+      -0.972987711429596,
+      3.1174137592315674,
+      1.548642635345459
+     ]
+    },
+    {
+     "name": "OP030C__source_1091",
+     "type": "EMPTY",
+     "parent": null,
+     "world_translation_m": [
+      -0.8886155486106873,
+      3.127821683883667,
+      1.7736215591430664
+     ]
+    },
+    {
+     "name": "OP030C__source_1091_m0306_p00",
+     "type": "MESH",
+     "parent": "OP030C__source_1091",
+     "world_translation_m": [
+      -0.8886155486106873,
+      3.127821683883667,
+      1.7736215591430664
+     ]
+    },
+    {
+     "name": "OP030C__source_1092",
+     "type": "EMPTY",
+     "parent": null,
+     "world_translation_m": [
+      -0.6989908814430237,
+      3.8208963871002197,
+      1.9400608539581299
+     ]
+    },
+    {
+     "name": "OP030C__source_1092_m0307_p00",
+     "type": "MESH",
+     "parent": "OP030C__source_1092",
+     "world_translation_m": [
+      -0.6989908814430237,
+      3.8208963871002197,
+      1.9400608539581299
+     ]
+    },
+    {
+     "name": "OP030C__source_1093",
+     "type": "EMPTY",
+     "parent": null,
+     "world_translation_m": [
+      -0.9408237338066101,
+      3.2221522331237793,
+      1.7428150177001953
+     ]
+    },
+    {
+     "name": "OP030C__source_1093_m0308_p00",
+     "type": "MESH",
+     "parent": "OP030C__source_1093",
+     "world_translation_m": [
+      -0.9408237338066101,
+      3.2221522331237793,
+      1.7428150177001953
+     ]
+    },
+    {
+     "name": "OP030C__source_1094",
+     "type": "EMPTY",
+     "parent": null,
+     "world_translation_m": [
+      -0.9408237338066101,
+      3.2221522331237793,
+      1.7428150177001953
+     ]
+    },
+    {
+     "name": "OP030C__source_1094_m0309_p00",
+     "type": "MESH",
+     "parent": "OP030C__source_1094",
+     "world_translation_m": [
+      -0.9408237338066101,
+      3.2221522331237793,
+      1.7428150177001953
+     ]
+    },
+    {
+     "name": "OP030C__source_1095",
+     "type": "EMPTY",
+     "parent": null,
+     "world_translation_m": [
+      -0.9408237338066101,
+      3.2221522331237793,
+      1.7428150177001953
+     ]
+    },
+    {
+     "name": "OP030C__source_1095_m0310_p00",
+     "type": "MESH",
+     "parent": "OP030C__source_1095",
+     "world_translation_m": [
+      -0.9408237338066101,
+      3.2221522331237793,
+      1.7428150177001953
+     ]
+    },
+    {
+     "name": "OP030C__source_1096",
+     "type": "EMPTY",
+     "parent": null,
+     "world_translation_m": [
+      -0.8583599925041199,
+      3.8892970085144043,
+      1.8896663188934326
+     ]
+    },
+    {
+     "name": "OP030C__source_1096_m0311_p00",
+     "type": "MESH",
+     "parent": "OP030C__source_1096",
+     "world_translation_m": [
+      -0.8583599925041199,
+      3.8892970085144043,
+      1.8896663188934326
+     ]
+    },
+    {
+     "name": "OP030C__source_1097",
+     "type": "EMPTY",
+     "parent": null,
+     "world_translation_m": [
+      -0.7485386729240417,
+      3.5893237590789795,
+      1.4425764083862305
+     ]
+    },
+    {
+     "name": "OP030C__source_1097_m0312_p00",
+     "type": "MESH",
+     "parent": "OP030C__source_1097",
+     "world_translation_m": [
+      -0.7485386729240417,
+      3.5893237590789795,
+      1.4425764083862305
+     ]
+    },
+    {
+     "name": "OP030C__source_1098",
+     "type": "EMPTY",
+     "parent": null,
+     "world_translation_m": [
+      -0.7883407473564148,
+      3.836526393890381,
+      1.8796586990356445
+     ]
+    },
+    {
+     "name": "OP030C__source_1098_m0313_p00",
+     "type": "MESH",
+     "parent": "OP030C__source_1098",
+     "world_translation_m": [
+      -0.7883407473564148,
+      3.836526393890381,
+      1.8796586990356445
+     ]
+    },
+    {
+     "name": "OP030C__source_1099",
+     "type": "EMPTY",
+     "parent": null,
+     "world_translation_m": [
+      -0.7883407473564148,
+      3.836526393890381,
+      1.8796586990356445
+     ]
+    },
+    {
+     "name": "OP030C__source_1099_m0314_p00",
+     "type": "MESH",
+     "parent": "OP030C__source_1099",
+     "world_translation_m": [
+      -0.7883407473564148,
+      3.836526393890381,
+      1.8796586990356445
+     ]
+    },
+    {
+     "name": "OP030C__source_1100",
+     "type": "EMPTY",
+     "parent": null,
+     "world_translation_m": [
+      -0.7883407473564148,
+      3.836526393890381,
+      1.8796586990356445
+     ]
+    },
+    {
+     "name": "OP030C__source_1100_m0315_p00",
+     "type": "MESH",
+     "parent": "OP030C__source_1100",
+     "world_translation_m": [
+      -0.7883407473564148,
+      3.836526393890381,
+      1.8796586990356445
+     ]
+    },
+    {
+     "name": "OP030C__source_1101",
+     "type": "EMPTY",
+     "parent": null,
+     "world_translation_m": [
+      -0.5709942579269409,
+      3.5893826484680176,
+      1.5161824226379395
+     ]
+    },
+    {
+     "name": "OP030C__source_1101_m0316_p00",
+     "type": "MESH",
+     "parent": "OP030C__source_1101",
+     "world_translation_m": [
+      -0.5709942579269409,
+      3.5893826484680176,
+      1.5161824226379395
+     ]
+    },
+    {
+     "name": "OP030C__source_1102",
+     "type": "EMPTY",
+     "parent": null,
+     "world_translation_m": [
+      -0.5709942579269409,
+      3.5893826484680176,
+      1.5161824226379395
+     ]
+    },
+    {
+     "name": "OP030C__source_1102_m0317_p00",
+     "type": "MESH",
+     "parent": "OP030C__source_1102",
+     "world_translation_m": [
+      -0.5709942579269409,
+      3.5893826484680176,
+      1.5161824226379395
+     ]
+    },
+    {
+     "name": "OP030C__source_1103",
+     "type": "EMPTY",
+     "parent": null,
+     "world_translation_m": [
+      -0.6335906982421875,
+      3.4873299598693848,
+      1.49991774559021
+     ]
+    },
+    {
+     "name": "OP030C__source_1103_m0318_p00",
+     "type": "MESH",
+     "parent": "OP030C__source_1103",
+     "world_translation_m": [
+      -0.6335906982421875,
+      3.4873299598693848,
+      1.49991774559021
+     ]
+    },
+    {
+     "name": "OP030C__source_1104",
+     "type": "EMPTY",
+     "parent": null,
+     "world_translation_m": [
+      -0.5499500036239624,
+      3.650144577026367,
+      1.448926329612732
+     ]
+    },
+    {
+     "name": "OP030C__source_1104_m0319_p00",
+     "type": "MESH",
+     "parent": "OP030C__source_1104",
+     "world_translation_m": [
+      -0.5499500036239624,
+      3.650144577026367,
+      1.448926329612732
+     ]
+    },
+    {
+     "name": "OP030C__source_1105",
+     "type": "EMPTY",
+     "parent": null,
+     "world_translation_m": [
+      -0.5499500036239624,
+      3.650144577026367,
+      1.448926329612732
+     ]
+    },
+    {
+     "name": "OP030C__source_1105_m0320_p00",
+     "type": "MESH",
+     "parent": "OP030C__source_1105",
+     "world_translation_m": [
+      -0.5499500036239624,
+      3.650144577026367,
+      1.448926329612732
+     ]
+    },
+    {
+     "name": "OP030C__source_1106",
+     "type": "EMPTY",
+     "parent": null,
+     "world_translation_m": [
+      -0.550000011920929,
+      3.6500000953674316,
+      1.4488482475280762
+     ]
+    },
+    {
+     "name": "OP030C__source_1106_m0321_p00",
+     "type": "MESH",
+     "parent": "OP030C__source_1106",
+     "world_translation_m": [
+      -0.550000011920929,
+      3.6500000953674316,
+      1.4488482475280762
+     ]
+    },
+    {
+     "name": "OP030C__source_1107",
+     "type": "EMPTY",
+     "parent": null,
+     "world_translation_m": [
+      -0.550000011920929,
+      3.6500000953674316,
+      1.3727999925613403
+     ]
+    },
+    {
+     "name": "OP030C__source_1108",
+     "type": "EMPTY",
+     "parent": null,
+     "world_translation_m": [
+      -0.550000011920929,
+      3.6500000953674316,
+      1.3727999925613403
+     ]
+    },
+    {
+     "name": "OP030C__source_1109",
+     "type": "EMPTY",
+     "parent": null,
+     "world_translation_m": [
+      -0.550000011920929,
+      3.6500000953674316,
+      1.3727999925613403
+     ]
+    },
+    {
+     "name": "OP030C__source_1110",
+     "type": "EMPTY",
+     "parent": null,
+     "world_translation_m": [
+      -0.550000011920929,
+      3.6500000953674316,
+      1.3727999925613403
+     ]
+    },
+    {
+     "name": "OP030C__source_1111",
+     "type": "EMPTY",
+     "parent": null,
+     "world_translation_m": [
+      -0.550000011920929,
+      3.6500000953674316,
+      1.3727999925613403
+     ]
+    },
+    {
+     "name": "OP030C__source_1112",
+     "type": "EMPTY",
+     "parent": null,
+     "world_translation_m": [
+      -0.550000011920929,
+      3.6500000953674316,
+      1.3727999925613403
+     ]
+    },
+    {
+     "name": "OP030C__source_1113",
+     "type": "EMPTY",
+     "parent": null,
+     "world_translation_m": [
+      -0.550000011920929,
+      3.6500000953674316,
+      1.3727999925613403
+     ]
+    },
+    {
+     "name": "OP030C__source_1114",
+     "type": "EMPTY",
+     "parent": null,
+     "world_translation_m": [
+      -0.550000011920929,
+      3.680601119995117,
+      1.3178960084915161
+     ]
+    },
+    {
+     "name": "OP030C__source_1115",
+     "type": "EMPTY",
+     "parent": null,
+     "world_translation_m": [
+      -0.550000011920929,
+      3.7121009826660156,
+      1.3219959735870361
+     ]
+    },
+    {
+     "name": "OP030C__source_1116",
+     "type": "EMPTY",
+     "parent": null,
+     "world_translation_m": [
+      -0.550000011920929,
+      3.6626999378204346,
+      1.3113800287246704
+     ]
+    },
+    {
+     "name": "OP030C__source_1117",
+     "type": "EMPTY",
+     "parent": null,
+     "world_translation_m": [
+      -0.550000011920929,
+      3.718201160430908,
+      1.2748960256576538
+     ]
+    },
+    {
+     "name": "OP030C__source_1118",
+     "type": "EMPTY",
+     "parent": null,
+     "world_translation_m": [
+      -0.550000011920929,
+      3.696180820465088,
+      1.242475986480713
+     ]
+    },
+    {
+     "name": "OP030C__source_1119",
+     "type": "EMPTY",
+     "parent": null,
+     "world_translation_m": [
+      -0.550000011920929,
+      3.619398832321167,
+      1.3178960084915161
+     ]
+    },
+    {
+     "name": "OP030C__source_1120",
+     "type": "EMPTY",
+     "parent": null,
+     "world_translation_m": [
+      -0.550000011920929,
+      3.5878989696502686,
+      1.3219959735870361
+     ]
+    },
+    {
+     "name": "OP030C__source_1121",
+     "type": "EMPTY",
+     "parent": null,
+     "world_translation_m": [
+      -0.550000011920929,
+      3.6373000144958496,
+      1.3113800287246704
+     ]
+    },
+    {
+     "name": "OP030C__source_1122",
+     "type": "EMPTY",
+     "parent": null,
+     "world_translation_m": [
+      -0.550000011920929,
+      3.581798791885376,
+      1.2748960256576538
+     ]
+    },
+    {
+     "name": "OP030C__source_1123",
+     "type": "EMPTY",
+     "parent": null,
+     "world_translation_m": [
+      -0.550000011920929,
+      3.6038191318511963,
+      1.242475986480713
+     ]
+    }
+   ]
+  }
+ },
+ "scene_world_transforms_unchanged": true,
+ "saved_scene": false,
+ "scope": "Read-only mapping of the v06 recorded B selection onto A and C",
+ "formal_physical_validity_verdict": null
+}

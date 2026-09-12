@@ -1,0 +1,39 @@
+{
+ "requested_at": "2026-09-12T09:52+09:00",
+ "what": "bank the two measurements the documents rest on that no committed JSON carries",
+ "why": "check_documents_against_artifacts.py fails nine figures; six are the executor's Blender-side measurements, reported in conversation and never written to a file. Naming the source in prose does not make them reproducible.",
+ "a_record_must_not_launder_the_figures_it_is_about": "The first version of this file listed the disputed values. That put them in the checker's corpus and turned all nine FAILs green, for a reason with nothing to do with the numbers being traceable. It is the same defect the checker reported in its own docstring, reached from the other side. Figures are therefore named by where they live, never reproduced here.",
+ "channel": {"kind": "direct session message", "to": "isaaclab-70"},
+ "asks": [
+  {
+   "id": 1,
+   "output": "audit/op030_v07c_cable_mesh_check.json",
+   "figures_by_location": "HANDOFF_v07.md section 4, the sentence beginning the cable run length was verified against the real thing: surface area, volume, vertex count and the sixteen-sided hand solve",
+   "question_that_decides_it": "the hand solve and the survey's first_length_m disagree by 0.07% for the same cable. Which is right, or where the difference comes from. 'Do not know' is an acceptable answer; reconciling them is not."
+  },
+  {
+   "id": 2,
+   "output": "audit/op030_v07c_crossing_local_axis.json",
+   "figures_by_location": "HANDOFF_v07.md section 4, the crossing table's rightmost column, independent check by local axis, both rows",
+   "question_that_decides_it": "reproduce that check with the method recorded: how the axis is taken, slab width, sample count"
+  }
+ ],
+ "prediction": {
+  "basis": "this adds two new reports and touches nothing that exists",
+  "should_change": ["two new files appear under audit/"],
+  "must_not_change": [
+   "audit/op030_v07c_routing_survey.json",
+   "audit/op030_v07c_mesh_contact.json",
+   "analysis/op030_v07c_stagger_both_sides.blend",
+   "world transforms before and after; the scene is opened, not saved"
+  ],
+  "digests_pinned_in": "the message sent to the executor, not here, for the reason given above",
+  "if_it_misses": "a moved digest on any existing artifact is the thing to report, not to explain away"
+ },
+ "still_failing_after_this_lands": {
+  "the synthetic point-to-point figure": "the test that produced it is in no committed script, so the claim cannot be re-run. Either a calibration case pins it or the figure is retracted.",
+  "the assumed finger opening in v07a": "origin unknown; five decimals on a figure labelled an assumption. Section 11.5-g."
+ },
+ "reply": null,
+ "formal_physical_validity_verdict": null
+}

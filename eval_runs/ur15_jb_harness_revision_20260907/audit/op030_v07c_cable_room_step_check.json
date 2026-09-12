@@ -1,0 +1,2357 @@
+{
+ "observed_at": "2026-09-12T10:36:23.985661+09:00",
+ "scope": "Whether the room sweep's step could have stepped over a neighbour",
+ "source": "analysis/op030_v07c_stagger_both_sides.blend",
+ "source_sha256": "4e7c5b0d8b00b904c618dac757cf4c97c88de620898e7c7dcca0c3b0eb46ea51",
+ "read_from": {
+  "sweep": "audit/op030_v07c_cable_room_sweep.json",
+  "sweep_sha256": "8e955effe691bdc54c99757273cbbcd23cafb7f7190499b54f7b26ef4e9dd8f0"
+ },
+ "method": {
+  "coarse_step_m": 0.005,
+  "fine_step_m": 0.001,
+  "swept_to_m": 0.5,
+  "what_decides_it": "the band of travel over which a neighbour is in contact, not its thickness: a part is stepped over only when that band is shorter than the step",
+  "thickness_note": "thickness is reported because it was asked for; it bounds nothing on its own, since the cable is 56 mm across and adds its own width to every meeting"
+ },
+ "what_this_does_not_give": [
+  "anything about directions the sweep did not take",
+  "contact beyond 0.5 m of travel",
+  "a guarantee for a step finer than 1 mm, which was not tried",
+  "any judgement of whether the room found is enough"
+ ],
+ "shortest_meeting_m": 0.003000000000000002,
+ "as_published": {
+  "policy": "without_the_air_main_or_what_holds_it",
+  "why": "the figures the design side carries come from this view, so the step is checked in it",
+  "same_part_everywhere": false,
+  "same_distance_everywhere": true,
+  "shortest_whole_meeting_m": 0.039000000000000035
+ },
+ "shorter_than_the_coarse_step": true,
+ "every_first_contact_agrees": true,
+ "cables": {
+  "OP030_S1R__source_0693_m0120_p04": {
+   "neighbours": 111,
+   "thinnest_neighbour_m": {
+    "+X": 0.009999999776482582,
+    "-X": 0.009999999776482582,
+    "+Z": 0.0
+   },
+   "neighbours_thinner_than_the_step": {
+    "+X": [],
+    "-X": [],
+    "+Z": [
+     "OP020_transfer_slide_bearing_-2.23",
+     "OP020_transfer_slide_bearing_-2.48",
+     "OP020_transfer_slide_floor_-2.23",
+     "OP020_transfer_slide_floor_-2.48",
+     "source_0001_m0001_p00"
+    ]
+   },
+   "directions": {
+    "+X": {
+     "met": {
+      "OP020_direct_mating_station_column1.33_-2.23": {
+       "first_met_at_m": 0.021,
+       "bands": [
+        {
+         "from_m": 0.021,
+         "to_m": 0.15,
+         "length_m": 0.13,
+         "cut_short_by_the_reach": false
+        },
+        {
+         "from_m": 0.383,
+         "to_m": 0.47700000000000004,
+         "length_m": 0.09500000000000003,
+         "cut_short_by_the_reach": false
+        }
+       ],
+       "shortest_band_m": 0.09500000000000003,
+       "could_be_stepped_over": false
+      },
+      "OP020_direct_mating_station_column1.33_-2.48": {
+       "first_met_at_m": 0.371,
+       "bands": [
+        {
+         "from_m": 0.371,
+         "to_m": 0.47500000000000003,
+         "length_m": 0.10500000000000004,
+         "cut_short_by_the_reach": false
+        }
+       ],
+       "shortest_band_m": 0.10500000000000004,
+       "could_be_stepped_over": false
+      },
+      "OP020_direct_mating_station_foot1.33_-2.48": {
+       "first_met_at_m": 0.289,
+       "bands": [
+        {
+         "from_m": 0.289,
+         "to_m": 0.483,
+         "length_m": 0.195,
+         "cut_short_by_the_reach": false
+        }
+       ],
+       "shortest_band_m": 0.195,
+       "could_be_stepped_over": false
+      },
+      "OP030_S1R__source_0693_m0120_p01": {
+       "first_met_at_m": 0.418,
+       "bands": [
+        {
+         "from_m": 0.418,
+         "to_m": 0.5,
+         "length_m": 0.08300000000000002,
+         "cut_short_by_the_reach": true
+        }
+       ],
+       "shortest_band_m": 0.08300000000000002,
+       "could_be_stepped_over": false
+      },
+      "OP030_S1R__source_0693_m0120_p03": {
+       "first_met_at_m": 0.42,
+       "bands": [
+        {
+         "from_m": 0.42,
+         "to_m": 0.5,
+         "length_m": 0.08100000000000002,
+         "cut_short_by_the_reach": true
+        }
+       ],
+       "shortest_band_m": 0.08100000000000002,
+       "could_be_stepped_over": false
+      }
+     },
+     "shortest_band_m": 0.08100000000000002,
+     "any_could_be_stepped_over": false,
+     "first_met_at_1mm": {
+      "name": "OP020_direct_mating_station_column1.33_-2.23",
+      "at_m": 0.021
+     },
+     "first_met_at_5mm": {
+      "name": "OP020_direct_mating_station_column1.33_-2.23",
+      "at_m": 0.025
+     },
+     "agrees_within_one_coarse_step": true,
+     "by_policy": {
+      "everything_it_meets": {
+       "neighbours_kept": 5,
+       "neighbours_met": 5,
+       "first_met_at_1mm": {
+        "name": "OP020_direct_mating_station_column1.33_-2.23",
+        "at_m": 0.021,
+        "clear_to_m": 0.02
+       },
+       "first_met_at_5mm": {
+        "name": "OP020_direct_mating_station_column1.33_-2.23",
+        "at_m": 0.025,
+        "clear_to_m": 0.02
+       },
+       "same_distance_within_one_coarse_step": true,
+       "same_part": true,
+       "shortest_whole_meeting_m": 0.09500000000000003,
+       "meetings_cut_short_by_the_reach": 2,
+       "shortest_cut_short_meeting_m": 0.08100000000000002,
+       "any_shorter_than_the_coarse_step": false
+      },
+      "without_the_air_main": {
+       "neighbours_kept": 5,
+       "neighbours_met": 5,
+       "first_met_at_1mm": {
+        "name": "OP020_direct_mating_station_column1.33_-2.23",
+        "at_m": 0.021,
+        "clear_to_m": 0.02
+       },
+       "first_met_at_5mm": {
+        "name": "OP020_direct_mating_station_column1.33_-2.23",
+        "at_m": 0.025,
+        "clear_to_m": 0.02
+       },
+       "same_distance_within_one_coarse_step": true,
+       "same_part": true,
+       "shortest_whole_meeting_m": 0.09500000000000003,
+       "meetings_cut_short_by_the_reach": 2,
+       "shortest_cut_short_meeting_m": 0.08100000000000002,
+       "any_shorter_than_the_coarse_step": false
+      },
+      "without_the_air_main_or_what_holds_it": {
+       "neighbours_kept": 3,
+       "neighbours_met": 5,
+       "first_met_at_1mm": {
+        "name": "OP020_direct_mating_station_column1.33_-2.23",
+        "at_m": 0.021,
+        "clear_to_m": 0.02
+       },
+       "first_met_at_5mm": {
+        "name": "OP020_direct_mating_station_column1.33_-2.23",
+        "at_m": 0.025,
+        "clear_to_m": 0.02
+       },
+       "same_distance_within_one_coarse_step": true,
+       "same_part": true,
+       "shortest_whole_meeting_m": 0.09500000000000003,
+       "meetings_cut_short_by_the_reach": 0,
+       "shortest_cut_short_meeting_m": null,
+       "any_shorter_than_the_coarse_step": false
+      }
+     }
+    },
+    "-X": {
+     "met": {
+      "OP020_direct_mating_station_column0.65_-2.23": {
+       "first_met_at_m": 0.203,
+       "bands": [
+        {
+         "from_m": 0.203,
+         "to_m": 0.297,
+         "length_m": 0.09499999999999997,
+         "cut_short_by_the_reach": false
+        }
+       ],
+       "shortest_band_m": 0.09499999999999997,
+       "could_be_stepped_over": false
+      },
+      "OP020_direct_mating_station_column0.65_-2.48": {
+       "first_met_at_m": 0.20500000000000002,
+       "bands": [
+        {
+         "from_m": 0.20500000000000002,
+         "to_m": 0.309,
+         "length_m": 0.10499999999999998,
+         "cut_short_by_the_reach": false
+        }
+       ],
+       "shortest_band_m": 0.10499999999999998,
+       "could_be_stepped_over": false
+      },
+      "OP020_direct_mating_station_foot0.65_-2.23": {
+       "first_met_at_m": 0.467,
+       "bands": [
+        {
+         "from_m": 0.467,
+         "to_m": 0.5,
+         "length_m": 0.033999999999999975,
+         "cut_short_by_the_reach": true
+        }
+       ],
+       "shortest_band_m": 0.033999999999999975,
+       "could_be_stepped_over": false
+      },
+      "OP020_direct_mating_station_foot0.65_-2.48": {
+       "first_met_at_m": 0.197,
+       "bands": [
+        {
+         "from_m": 0.197,
+         "to_m": 0.391,
+         "length_m": 0.195,
+         "cut_short_by_the_reach": false
+        }
+       ],
+       "shortest_band_m": 0.195,
+       "could_be_stepped_over": false
+      },
+      "OP030_S1R__OP030A_feeder_M4_stand_-0.093": {
+       "first_met_at_m": 0.363,
+       "bands": [
+        {
+         "from_m": 0.363,
+         "to_m": 0.491,
+         "length_m": 0.129,
+         "cut_short_by_the_reach": false
+        }
+       ],
+       "shortest_band_m": 0.129,
+       "could_be_stepped_over": false
+      },
+      "OP030_S1R__OP030A_feeder_M4_stand_-0.293": {
+       "first_met_at_m": 0.163,
+       "bands": [
+        {
+         "from_m": 0.163,
+         "to_m": 0.291,
+         "length_m": 0.12899999999999998,
+         "cut_short_by_the_reach": false
+        }
+       ],
+       "shortest_band_m": 0.12899999999999998,
+       "could_be_stepped_over": false
+      },
+      "OP030_S1R__source_0576_m0050_p00": {
+       "first_met_at_m": 0.074,
+       "bands": [
+        {
+         "from_m": 0.074,
+         "to_m": 0.5,
+         "length_m": 0.427,
+         "cut_short_by_the_reach": true
+        }
+       ],
+       "shortest_band_m": 0.427,
+       "could_be_stepped_over": false
+      },
+      "OP030_S1R__source_0576_m0050_p01": {
+       "first_met_at_m": 0.106,
+       "bands": [
+        {
+         "from_m": 0.106,
+         "to_m": 0.5,
+         "length_m": 0.395,
+         "cut_short_by_the_reach": true
+        }
+       ],
+       "shortest_band_m": 0.395,
+       "could_be_stepped_over": false
+      },
+      "OP030_S1R__source_0576_m0050_p03": {
+       "first_met_at_m": 0.091,
+       "bands": [
+        {
+         "from_m": 0.091,
+         "to_m": 0.128,
+         "length_m": 0.038000000000000006,
+         "cut_short_by_the_reach": false
+        },
+        {
+         "from_m": 0.14100000000000001,
+         "to_m": 0.18,
+         "length_m": 0.03999999999999998,
+         "cut_short_by_the_reach": false
+        }
+       ],
+       "shortest_band_m": 0.038000000000000006,
+       "could_be_stepped_over": false
+      },
+      "OP030_S1R__source_0576_m0050_p04": {
+       "first_met_at_m": 0.28400000000000003,
+       "bands": [
+        {
+         "from_m": 0.28400000000000003,
+         "to_m": 0.47500000000000003,
+         "length_m": 0.192,
+         "cut_short_by_the_reach": false
+        }
+       ],
+       "shortest_band_m": 0.192,
+       "could_be_stepped_over": false
+      },
+      "source_0019_m0019_p00": {
+       "first_met_at_m": 0.421,
+       "bands": [
+        {
+         "from_m": 0.421,
+         "to_m": 0.5,
+         "length_m": 0.08000000000000002,
+         "cut_short_by_the_reach": true
+        }
+       ],
+       "shortest_band_m": 0.08000000000000002,
+       "could_be_stepped_over": false
+      },
+      "source_0019_m0019_p01": {
+       "first_met_at_m": 0.41000000000000003,
+       "bands": [
+        {
+         "from_m": 0.41000000000000003,
+         "to_m": 0.5,
+         "length_m": 0.09099999999999997,
+         "cut_short_by_the_reach": true
+        }
+       ],
+       "shortest_band_m": 0.09099999999999997,
+       "could_be_stepped_over": false
+      },
+      "source_0780_m0207_p01": {
+       "first_met_at_m": 0.218,
+       "bands": [
+        {
+         "from_m": 0.218,
+         "to_m": 0.402,
+         "length_m": 0.18500000000000003,
+         "cut_short_by_the_reach": false
+        }
+       ],
+       "shortest_band_m": 0.18500000000000003,
+       "could_be_stepped_over": false
+      }
+     },
+     "shortest_band_m": 0.033999999999999975,
+     "any_could_be_stepped_over": false,
+     "first_met_at_1mm": {
+      "name": "OP030_S1R__source_0576_m0050_p00",
+      "at_m": 0.074
+     },
+     "first_met_at_5mm": {
+      "name": "OP030_S1R__source_0576_m0050_p00",
+      "at_m": 0.075
+     },
+     "agrees_within_one_coarse_step": true,
+     "by_policy": {
+      "everything_it_meets": {
+       "neighbours_kept": 13,
+       "neighbours_met": 13,
+       "first_met_at_1mm": {
+        "name": "OP030_S1R__source_0576_m0050_p00",
+        "at_m": 0.074,
+        "clear_to_m": 0.073
+       },
+       "first_met_at_5mm": {
+        "name": "OP030_S1R__source_0576_m0050_p00",
+        "at_m": 0.075,
+        "clear_to_m": 0.07
+       },
+       "same_distance_within_one_coarse_step": true,
+       "same_part": true,
+       "shortest_whole_meeting_m": 0.038000000000000006,
+       "meetings_cut_short_by_the_reach": 5,
+       "shortest_cut_short_meeting_m": 0.033999999999999975,
+       "any_shorter_than_the_coarse_step": false
+      },
+      "without_the_air_main": {
+       "neighbours_kept": 12,
+       "neighbours_met": 13,
+       "first_met_at_1mm": {
+        "name": "OP030_S1R__source_0576_m0050_p00",
+        "at_m": 0.074,
+        "clear_to_m": 0.073
+       },
+       "first_met_at_5mm": {
+        "name": "OP030_S1R__source_0576_m0050_p00",
+        "at_m": 0.075,
+        "clear_to_m": 0.07
+       },
+       "same_distance_within_one_coarse_step": true,
+       "same_part": true,
+       "shortest_whole_meeting_m": 0.038000000000000006,
+       "meetings_cut_short_by_the_reach": 5,
+       "shortest_cut_short_meeting_m": 0.033999999999999975,
+       "any_shorter_than_the_coarse_step": false
+      },
+      "without_the_air_main_or_what_holds_it": {
+       "neighbours_kept": 9,
+       "neighbours_met": 13,
+       "first_met_at_1mm": {
+        "name": "OP030_S1R__OP030A_feeder_M4_stand_-0.293",
+        "at_m": 0.163,
+        "clear_to_m": 0.162
+       },
+       "first_met_at_5mm": {
+        "name": "OP030_S1R__OP030A_feeder_M4_stand_-0.293",
+        "at_m": 0.165,
+        "clear_to_m": 0.16
+       },
+       "same_distance_within_one_coarse_step": true,
+       "same_part": true,
+       "shortest_whole_meeting_m": 0.09499999999999997,
+       "meetings_cut_short_by_the_reach": 3,
+       "shortest_cut_short_meeting_m": 0.033999999999999975,
+       "any_shorter_than_the_coarse_step": false
+      }
+     }
+    },
+    "+Z": {
+     "met": {
+      "OP020_transfer_slide_actuator_barrel": {
+       "first_met_at_m": 0.419,
+       "bands": [
+        {
+         "from_m": 0.419,
+         "to_m": 0.5,
+         "length_m": 0.08200000000000002,
+         "cut_short_by_the_reach": true
+        }
+       ],
+       "shortest_band_m": 0.08200000000000002,
+       "could_be_stepped_over": false
+      },
+      "OP020_transfer_slide_actuator_piston": {
+       "first_met_at_m": 0.424,
+       "bands": [
+        {
+         "from_m": 0.424,
+         "to_m": 0.462,
+         "length_m": 0.039000000000000035,
+         "cut_short_by_the_reach": false
+        },
+        {
+         "from_m": 0.467,
+         "to_m": 0.5,
+         "length_m": 0.033999999999999975,
+         "cut_short_by_the_reach": true
+        }
+       ],
+       "shortest_band_m": 0.033999999999999975,
+       "could_be_stepped_over": false
+      },
+      "OP020_transfer_slide_actuator_rear_cap": {
+       "first_met_at_m": 0.41600000000000004,
+       "bands": [
+        {
+         "from_m": 0.41600000000000004,
+         "to_m": 0.5,
+         "length_m": 0.08499999999999996,
+         "cut_short_by_the_reach": true
+        }
+       ],
+       "shortest_band_m": 0.08499999999999996,
+       "could_be_stepped_over": false
+      },
+      "OP020_transfer_slide_actuator_rod": {
+       "first_met_at_m": 0.434,
+       "bands": [
+        {
+         "from_m": 0.434,
+         "to_m": 0.497,
+         "length_m": 0.064,
+         "cut_short_by_the_reach": false
+        }
+       ],
+       "shortest_band_m": 0.064,
+       "could_be_stepped_over": false
+      },
+      "OP020_transfer_slide_floor_-2.23": {
+       "first_met_at_m": 0.498,
+       "bands": [
+        {
+         "from_m": 0.498,
+         "to_m": 0.5,
+         "length_m": 0.003000000000000002,
+         "cut_short_by_the_reach": true
+        }
+       ],
+       "shortest_band_m": 0.003000000000000002,
+       "could_be_stepped_over": true
+      },
+      "OP030_S1R__source_0693_m0120_p01": {
+       "first_met_at_m": 0.068,
+       "bands": [
+        {
+         "from_m": 0.068,
+         "to_m": 0.342,
+         "length_m": 0.275,
+         "cut_short_by_the_reach": false
+        },
+        {
+         "from_m": 0.401,
+         "to_m": 0.499,
+         "length_m": 0.09899999999999998,
+         "cut_short_by_the_reach": false
+        }
+       ],
+       "shortest_band_m": 0.09899999999999998,
+       "could_be_stepped_over": false
+      }
+     },
+     "shortest_band_m": 0.003000000000000002,
+     "any_could_be_stepped_over": true,
+     "first_met_at_1mm": {
+      "name": "OP030_S1R__source_0693_m0120_p01",
+      "at_m": 0.068
+     },
+     "first_met_at_5mm": {
+      "name": "OP030_S1R__source_0693_m0120_p01",
+      "at_m": 0.07
+     },
+     "agrees_within_one_coarse_step": true,
+     "by_policy": {
+      "everything_it_meets": {
+       "neighbours_kept": 6,
+       "neighbours_met": 6,
+       "first_met_at_1mm": {
+        "name": "OP030_S1R__source_0693_m0120_p01",
+        "at_m": 0.068,
+        "clear_to_m": 0.067
+       },
+       "first_met_at_5mm": {
+        "name": "OP030_S1R__source_0693_m0120_p01",
+        "at_m": 0.07,
+        "clear_to_m": 0.065
+       },
+       "same_distance_within_one_coarse_step": true,
+       "same_part": true,
+       "shortest_whole_meeting_m": 0.039000000000000035,
+       "meetings_cut_short_by_the_reach": 4,
+       "shortest_cut_short_meeting_m": 0.003000000000000002,
+       "any_shorter_than_the_coarse_step": false
+      },
+      "without_the_air_main": {
+       "neighbours_kept": 6,
+       "neighbours_met": 6,
+       "first_met_at_1mm": {
+        "name": "OP030_S1R__source_0693_m0120_p01",
+        "at_m": 0.068,
+        "clear_to_m": 0.067
+       },
+       "first_met_at_5mm": {
+        "name": "OP030_S1R__source_0693_m0120_p01",
+        "at_m": 0.07,
+        "clear_to_m": 0.065
+       },
+       "same_distance_within_one_coarse_step": true,
+       "same_part": true,
+       "shortest_whole_meeting_m": 0.039000000000000035,
+       "meetings_cut_short_by_the_reach": 4,
+       "shortest_cut_short_meeting_m": 0.003000000000000002,
+       "any_shorter_than_the_coarse_step": false
+      },
+      "without_the_air_main_or_what_holds_it": {
+       "neighbours_kept": 5,
+       "neighbours_met": 6,
+       "first_met_at_1mm": {
+        "name": "OP020_transfer_slide_actuator_rear_cap",
+        "at_m": 0.41600000000000004,
+        "clear_to_m": 0.41500000000000004
+       },
+       "first_met_at_5mm": {
+        "name": "OP020_transfer_slide_actuator_barrel",
+        "at_m": 0.42,
+        "clear_to_m": 0.41500000000000004
+       },
+       "same_distance_within_one_coarse_step": true,
+       "same_part": false,
+       "shortest_whole_meeting_m": 0.039000000000000035,
+       "meetings_cut_short_by_the_reach": 4,
+       "shortest_cut_short_meeting_m": 0.003000000000000002,
+       "any_shorter_than_the_coarse_step": false
+      }
+     }
+    }
+   }
+  },
+  "source_0681_m0108_p04": {
+   "neighbours": 115,
+   "thinnest_neighbour_m": {
+    "+X": 0.009999999776482582,
+    "-X": 0.009999999776482582,
+    "+Z": 0.0
+   },
+   "neighbours_thinner_than_the_step": {
+    "+X": [],
+    "-X": [],
+    "+Z": [
+     "OP020_transfer_slide_bearing_-2.23",
+     "OP020_transfer_slide_bearing_-2.48",
+     "OP020_transfer_slide_floor_-2.23",
+     "OP020_transfer_slide_floor_-2.48",
+     "source_0001_m0001_p00"
+    ]
+   },
+   "directions": {
+    "+X": {
+     "met": {
+      "OP020_cap_recovery_pocket_foot": {
+       "first_met_at_m": 0.06,
+       "bands": [
+        {
+         "from_m": 0.06,
+         "to_m": 0.281,
+         "length_m": 0.22200000000000003,
+         "cut_short_by_the_reach": false
+        }
+       ],
+       "shortest_band_m": 0.22200000000000003,
+       "could_be_stepped_over": false
+      },
+      "OP020_cap_recovery_pocket_post": {
+       "first_met_at_m": 0.11800000000000001,
+       "bands": [
+        {
+         "from_m": 0.11800000000000001,
+         "to_m": 0.24,
+         "length_m": 0.12299999999999998,
+         "cut_short_by_the_reach": false
+        }
+       ],
+       "shortest_band_m": 0.12299999999999998,
+       "could_be_stepped_over": false
+      },
+      "OP020_direct_mating_station_column1.33_-2.23": {
+       "first_met_at_m": 0.084,
+       "bands": [
+        {
+         "from_m": 0.084,
+         "to_m": 0.299,
+         "length_m": 0.21599999999999997,
+         "cut_short_by_the_reach": false
+        },
+        {
+         "from_m": 0.383,
+         "to_m": 0.47700000000000004,
+         "length_m": 0.09500000000000003,
+         "cut_short_by_the_reach": false
+        }
+       ],
+       "shortest_band_m": 0.09500000000000003,
+       "could_be_stepped_over": false
+      },
+      "OP020_direct_mating_station_column1.33_-2.48": {
+       "first_met_at_m": 0.003,
+       "bands": [
+        {
+         "from_m": 0.003,
+         "to_m": 0.097,
+         "length_m": 0.095,
+         "cut_short_by_the_reach": false
+        },
+        {
+         "from_m": 0.383,
+         "to_m": 0.47700000000000004,
+         "length_m": 0.09500000000000003,
+         "cut_short_by_the_reach": false
+        }
+       ],
+       "shortest_band_m": 0.095,
+       "could_be_stepped_over": false
+      },
+      "OP020_direct_mating_station_foot1.33_-2.23": {
+       "first_met_at_m": 0.029,
+       "bands": [
+        {
+         "from_m": 0.029,
+         "to_m": 0.381,
+         "length_m": 0.353,
+         "cut_short_by_the_reach": false
+        }
+       ],
+       "shortest_band_m": 0.353,
+       "could_be_stepped_over": false
+      },
+      "OP020_direct_preparation_nest_bench_foot1.59_-2.57": {
+       "first_met_at_m": 0.267,
+       "bands": [
+        {
+         "from_m": 0.267,
+         "to_m": 0.352,
+         "length_m": 0.08599999999999997,
+         "cut_short_by_the_reach": false
+        }
+       ],
+       "shortest_band_m": 0.08599999999999997,
+       "could_be_stepped_over": false
+      },
+      "OP020_direct_preparation_nest_bench_foot1.59_-3.43": {
+       "first_met_at_m": 0.267,
+       "bands": [
+        {
+         "from_m": 0.267,
+         "to_m": 0.352,
+         "length_m": 0.08599999999999997,
+         "cut_short_by_the_reach": false
+        }
+       ],
+       "shortest_band_m": 0.08599999999999997,
+       "could_be_stepped_over": false
+      },
+      "OP020_direct_preparation_nest_bench_leg1.59_-2.57": {
+       "first_met_at_m": 0.273,
+       "bands": [
+        {
+         "from_m": 0.273,
+         "to_m": 0.34700000000000003,
+         "length_m": 0.07500000000000001,
+         "cut_short_by_the_reach": false
+        }
+       ],
+       "shortest_band_m": 0.07500000000000001,
+       "could_be_stepped_over": false
+      },
+      "OP020_direct_preparation_nest_bench_leg1.59_-3.43": {
+       "first_met_at_m": 0.273,
+       "bands": [
+        {
+         "from_m": 0.273,
+         "to_m": 0.34700000000000003,
+         "length_m": 0.07500000000000001,
+         "cut_short_by_the_reach": false
+        }
+       ],
+       "shortest_band_m": 0.07500000000000001,
+       "could_be_stepped_over": false
+      },
+      "source_0681_m0108_p01": {
+       "first_met_at_m": 0.418,
+       "bands": [
+        {
+         "from_m": 0.418,
+         "to_m": 0.5,
+         "length_m": 0.08300000000000002,
+         "cut_short_by_the_reach": true
+        }
+       ],
+       "shortest_band_m": 0.08300000000000002,
+       "could_be_stepped_over": false
+      },
+      "source_0681_m0108_p03": {
+       "first_met_at_m": 0.42,
+       "bands": [
+        {
+         "from_m": 0.42,
+         "to_m": 0.5,
+         "length_m": 0.08100000000000002,
+         "cut_short_by_the_reach": true
+        }
+       ],
+       "shortest_band_m": 0.08100000000000002,
+       "could_be_stepped_over": false
+      }
+     },
+     "shortest_band_m": 0.07500000000000001,
+     "any_could_be_stepped_over": false,
+     "first_met_at_1mm": {
+      "name": "OP020_direct_mating_station_column1.33_-2.48",
+      "at_m": 0.003
+     },
+     "first_met_at_5mm": {
+      "name": "OP020_direct_mating_station_column1.33_-2.48",
+      "at_m": 0.005
+     },
+     "agrees_within_one_coarse_step": true,
+     "by_policy": {
+      "everything_it_meets": {
+       "neighbours_kept": 11,
+       "neighbours_met": 11,
+       "first_met_at_1mm": {
+        "name": "OP020_direct_mating_station_column1.33_-2.48",
+        "at_m": 0.003,
+        "clear_to_m": 0.002
+       },
+       "first_met_at_5mm": {
+        "name": "OP020_direct_mating_station_column1.33_-2.48",
+        "at_m": 0.005,
+        "clear_to_m": 0.0
+       },
+       "same_distance_within_one_coarse_step": true,
+       "same_part": true,
+       "shortest_whole_meeting_m": 0.07500000000000001,
+       "meetings_cut_short_by_the_reach": 2,
+       "shortest_cut_short_meeting_m": 0.08100000000000002,
+       "any_shorter_than_the_coarse_step": false
+      },
+      "without_the_air_main": {
+       "neighbours_kept": 11,
+       "neighbours_met": 11,
+       "first_met_at_1mm": {
+        "name": "OP020_direct_mating_station_column1.33_-2.48",
+        "at_m": 0.003,
+        "clear_to_m": 0.002
+       },
+       "first_met_at_5mm": {
+        "name": "OP020_direct_mating_station_column1.33_-2.48",
+        "at_m": 0.005,
+        "clear_to_m": 0.0
+       },
+       "same_distance_within_one_coarse_step": true,
+       "same_part": true,
+       "shortest_whole_meeting_m": 0.07500000000000001,
+       "meetings_cut_short_by_the_reach": 2,
+       "shortest_cut_short_meeting_m": 0.08100000000000002,
+       "any_shorter_than_the_coarse_step": false
+      },
+      "without_the_air_main_or_what_holds_it": {
+       "neighbours_kept": 9,
+       "neighbours_met": 11,
+       "first_met_at_1mm": {
+        "name": "OP020_direct_mating_station_column1.33_-2.48",
+        "at_m": 0.003,
+        "clear_to_m": 0.002
+       },
+       "first_met_at_5mm": {
+        "name": "OP020_direct_mating_station_column1.33_-2.48",
+        "at_m": 0.005,
+        "clear_to_m": 0.0
+       },
+       "same_distance_within_one_coarse_step": true,
+       "same_part": true,
+       "shortest_whole_meeting_m": 0.07500000000000001,
+       "meetings_cut_short_by_the_reach": 0,
+       "shortest_cut_short_meeting_m": null,
+       "any_shorter_than_the_coarse_step": false
+      }
+     }
+    },
+    "-X": {
+     "met": {
+      "OP020_direct_mating_station_column0.65_-2.23": {
+       "first_met_at_m": 0.203,
+       "bands": [
+        {
+         "from_m": 0.203,
+         "to_m": 0.297,
+         "length_m": 0.09499999999999997,
+         "cut_short_by_the_reach": false
+        },
+        {
+         "from_m": 0.381,
+         "to_m": 0.5,
+         "length_m": 0.12,
+         "cut_short_by_the_reach": true
+        }
+       ],
+       "shortest_band_m": 0.09499999999999997,
+       "could_be_stepped_over": false
+      },
+      "OP020_direct_mating_station_column0.65_-2.48": {
+       "first_met_at_m": 0.203,
+       "bands": [
+        {
+         "from_m": 0.203,
+         "to_m": 0.297,
+         "length_m": 0.09499999999999997,
+         "cut_short_by_the_reach": false
+        }
+       ],
+       "shortest_band_m": 0.09499999999999997,
+       "could_be_stepped_over": false
+      },
+      "OP020_direct_mating_station_foot0.65_-2.23": {
+       "first_met_at_m": 0.299,
+       "bands": [
+        {
+         "from_m": 0.299,
+         "to_m": 0.5,
+         "length_m": 0.202,
+         "cut_short_by_the_reach": true
+        }
+       ],
+       "shortest_band_m": 0.202,
+       "could_be_stepped_over": false
+      },
+      "source_0019_m0019_p00": {
+       "first_met_at_m": 0.421,
+       "bands": [
+        {
+         "from_m": 0.421,
+         "to_m": 0.5,
+         "length_m": 0.08000000000000002,
+         "cut_short_by_the_reach": true
+        }
+       ],
+       "shortest_band_m": 0.08000000000000002,
+       "could_be_stepped_over": false
+      },
+      "source_0019_m0019_p01": {
+       "first_met_at_m": 0.41000000000000003,
+       "bands": [
+        {
+         "from_m": 0.41000000000000003,
+         "to_m": 0.5,
+         "length_m": 0.09099999999999997,
+         "cut_short_by_the_reach": true
+        }
+       ],
+       "shortest_band_m": 0.09099999999999997,
+       "could_be_stepped_over": false
+      },
+      "source_0564_m0045_p00": {
+       "first_met_at_m": 0.074,
+       "bands": [
+        {
+         "from_m": 0.074,
+         "to_m": 0.5,
+         "length_m": 0.427,
+         "cut_short_by_the_reach": true
+        }
+       ],
+       "shortest_band_m": 0.427,
+       "could_be_stepped_over": false
+      },
+      "source_0564_m0045_p01": {
+       "first_met_at_m": 0.106,
+       "bands": [
+        {
+         "from_m": 0.106,
+         "to_m": 0.5,
+         "length_m": 0.395,
+         "cut_short_by_the_reach": true
+        }
+       ],
+       "shortest_band_m": 0.395,
+       "could_be_stepped_over": false
+      },
+      "source_0564_m0045_p03": {
+       "first_met_at_m": 0.091,
+       "bands": [
+        {
+         "from_m": 0.091,
+         "to_m": 0.128,
+         "length_m": 0.038000000000000006,
+         "cut_short_by_the_reach": false
+        },
+        {
+         "from_m": 0.14100000000000001,
+         "to_m": 0.18,
+         "length_m": 0.03999999999999998,
+         "cut_short_by_the_reach": false
+        }
+       ],
+       "shortest_band_m": 0.038000000000000006,
+       "could_be_stepped_over": false
+      },
+      "source_0564_m0045_p04": {
+       "first_met_at_m": 0.28400000000000003,
+       "bands": [
+        {
+         "from_m": 0.28400000000000003,
+         "to_m": 0.47500000000000003,
+         "length_m": 0.192,
+         "cut_short_by_the_reach": false
+        }
+       ],
+       "shortest_band_m": 0.192,
+       "could_be_stepped_over": false
+      },
+      "source_0780_m0207_p01": {
+       "first_met_at_m": 0.218,
+       "bands": [
+        {
+         "from_m": 0.218,
+         "to_m": 0.402,
+         "length_m": 0.18500000000000003,
+         "cut_short_by_the_reach": false
+        }
+       ],
+       "shortest_band_m": 0.18500000000000003,
+       "could_be_stepped_over": false
+      }
+     },
+     "shortest_band_m": 0.038000000000000006,
+     "any_could_be_stepped_over": false,
+     "first_met_at_1mm": {
+      "name": "source_0564_m0045_p00",
+      "at_m": 0.074
+     },
+     "first_met_at_5mm": {
+      "name": "source_0564_m0045_p00",
+      "at_m": 0.075
+     },
+     "agrees_within_one_coarse_step": true,
+     "by_policy": {
+      "everything_it_meets": {
+       "neighbours_kept": 10,
+       "neighbours_met": 10,
+       "first_met_at_1mm": {
+        "name": "source_0564_m0045_p00",
+        "at_m": 0.074,
+        "clear_to_m": 0.073
+       },
+       "first_met_at_5mm": {
+        "name": "source_0564_m0045_p00",
+        "at_m": 0.075,
+        "clear_to_m": 0.07
+       },
+       "same_distance_within_one_coarse_step": true,
+       "same_part": true,
+       "shortest_whole_meeting_m": 0.038000000000000006,
+       "meetings_cut_short_by_the_reach": 6,
+       "shortest_cut_short_meeting_m": 0.08000000000000002,
+       "any_shorter_than_the_coarse_step": false
+      },
+      "without_the_air_main": {
+       "neighbours_kept": 9,
+       "neighbours_met": 10,
+       "first_met_at_1mm": {
+        "name": "source_0564_m0045_p00",
+        "at_m": 0.074,
+        "clear_to_m": 0.073
+       },
+       "first_met_at_5mm": {
+        "name": "source_0564_m0045_p00",
+        "at_m": 0.075,
+        "clear_to_m": 0.07
+       },
+       "same_distance_within_one_coarse_step": true,
+       "same_part": true,
+       "shortest_whole_meeting_m": 0.038000000000000006,
+       "meetings_cut_short_by_the_reach": 6,
+       "shortest_cut_short_meeting_m": 0.08000000000000002,
+       "any_shorter_than_the_coarse_step": false
+      },
+      "without_the_air_main_or_what_holds_it": {
+       "neighbours_kept": 6,
+       "neighbours_met": 10,
+       "first_met_at_1mm": {
+        "name": "OP020_direct_mating_station_column0.65_-2.23",
+        "at_m": 0.203,
+        "clear_to_m": 0.202
+       },
+       "first_met_at_5mm": {
+        "name": "OP020_direct_mating_station_column0.65_-2.23",
+        "at_m": 0.20500000000000002,
+        "clear_to_m": 0.2
+       },
+       "same_distance_within_one_coarse_step": true,
+       "same_part": true,
+       "shortest_whole_meeting_m": 0.09499999999999997,
+       "meetings_cut_short_by_the_reach": 4,
+       "shortest_cut_short_meeting_m": 0.08000000000000002,
+       "any_shorter_than_the_coarse_step": false
+      }
+     }
+    },
+    "+Z": {
+     "met": {
+      "OP020_direct_preparation_nest_B_support_mount": {
+       "first_met_at_m": 0.397,
+       "bands": [
+        {
+         "from_m": 0.397,
+         "to_m": 0.464,
+         "length_m": 0.068,
+         "cut_short_by_the_reach": false
+        }
+       ],
+       "shortest_band_m": 0.068,
+       "could_be_stepped_over": false
+      },
+      "OP020_direct_preparation_nest_B_support_post": {
+       "first_met_at_m": 0.417,
+       "bands": [
+        {
+         "from_m": 0.417,
+         "to_m": 0.5,
+         "length_m": 0.08400000000000002,
+         "cut_short_by_the_reach": true
+        }
+       ],
+       "shortest_band_m": 0.08400000000000002,
+       "could_be_stepped_over": false
+      },
+      "OP020_direct_preparation_nest_bench_top": {
+       "first_met_at_m": 0.385,
+       "bands": [
+        {
+         "from_m": 0.385,
+         "to_m": 0.452,
+         "length_m": 0.068,
+         "cut_short_by_the_reach": false
+        }
+       ],
+       "shortest_band_m": 0.068,
+       "could_be_stepped_over": false
+      },
+      "OP020_transfer_slide_actuator_barrel": {
+       "first_met_at_m": 0.419,
+       "bands": [
+        {
+         "from_m": 0.419,
+         "to_m": 0.5,
+         "length_m": 0.08200000000000002,
+         "cut_short_by_the_reach": true
+        }
+       ],
+       "shortest_band_m": 0.08200000000000002,
+       "could_be_stepped_over": false
+      },
+      "OP020_transfer_slide_actuator_piston": {
+       "first_met_at_m": 0.424,
+       "bands": [
+        {
+         "from_m": 0.424,
+         "to_m": 0.462,
+         "length_m": 0.039000000000000035,
+         "cut_short_by_the_reach": false
+        },
+        {
+         "from_m": 0.467,
+         "to_m": 0.5,
+         "length_m": 0.033999999999999975,
+         "cut_short_by_the_reach": true
+        }
+       ],
+       "shortest_band_m": 0.033999999999999975,
+       "could_be_stepped_over": false
+      },
+      "OP020_transfer_slide_actuator_rear_cap": {
+       "first_met_at_m": 0.41600000000000004,
+       "bands": [
+        {
+         "from_m": 0.41600000000000004,
+         "to_m": 0.5,
+         "length_m": 0.08499999999999996,
+         "cut_short_by_the_reach": true
+        }
+       ],
+       "shortest_band_m": 0.08499999999999996,
+       "could_be_stepped_over": false
+      },
+      "OP020_transfer_slide_actuator_rod": {
+       "first_met_at_m": 0.434,
+       "bands": [
+        {
+         "from_m": 0.434,
+         "to_m": 0.497,
+         "length_m": 0.064,
+         "cut_short_by_the_reach": false
+        }
+       ],
+       "shortest_band_m": 0.064,
+       "could_be_stepped_over": false
+      },
+      "OP020_transfer_slide_floor_-2.23": {
+       "first_met_at_m": 0.498,
+       "bands": [
+        {
+         "from_m": 0.498,
+         "to_m": 0.5,
+         "length_m": 0.003000000000000002,
+         "cut_short_by_the_reach": true
+        }
+       ],
+       "shortest_band_m": 0.003000000000000002,
+       "could_be_stepped_over": true
+      },
+      "OP020_transfer_slide_floor_-2.48": {
+       "first_met_at_m": 0.498,
+       "bands": [
+        {
+         "from_m": 0.498,
+         "to_m": 0.5,
+         "length_m": 0.003000000000000002,
+         "cut_short_by_the_reach": true
+        }
+       ],
+       "shortest_band_m": 0.003000000000000002,
+       "could_be_stepped_over": true
+      },
+      "source_0681_m0108_p01": {
+       "first_met_at_m": 0.068,
+       "bands": [
+        {
+         "from_m": 0.068,
+         "to_m": 0.342,
+         "length_m": 0.275,
+         "cut_short_by_the_reach": false
+        },
+        {
+         "from_m": 0.401,
+         "to_m": 0.499,
+         "length_m": 0.09899999999999998,
+         "cut_short_by_the_reach": false
+        }
+       ],
+       "shortest_band_m": 0.09899999999999998,
+       "could_be_stepped_over": false
+      }
+     },
+     "shortest_band_m": 0.003000000000000002,
+     "any_could_be_stepped_over": true,
+     "first_met_at_1mm": {
+      "name": "source_0681_m0108_p01",
+      "at_m": 0.068
+     },
+     "first_met_at_5mm": {
+      "name": "source_0681_m0108_p01",
+      "at_m": 0.07
+     },
+     "agrees_within_one_coarse_step": true,
+     "by_policy": {
+      "everything_it_meets": {
+       "neighbours_kept": 10,
+       "neighbours_met": 10,
+       "first_met_at_1mm": {
+        "name": "source_0681_m0108_p01",
+        "at_m": 0.068,
+        "clear_to_m": 0.067
+       },
+       "first_met_at_5mm": {
+        "name": "source_0681_m0108_p01",
+        "at_m": 0.07,
+        "clear_to_m": 0.065
+       },
+       "same_distance_within_one_coarse_step": true,
+       "same_part": true,
+       "shortest_whole_meeting_m": 0.039000000000000035,
+       "meetings_cut_short_by_the_reach": 6,
+       "shortest_cut_short_meeting_m": 0.003000000000000002,
+       "any_shorter_than_the_coarse_step": false
+      },
+      "without_the_air_main": {
+       "neighbours_kept": 10,
+       "neighbours_met": 10,
+       "first_met_at_1mm": {
+        "name": "source_0681_m0108_p01",
+        "at_m": 0.068,
+        "clear_to_m": 0.067
+       },
+       "first_met_at_5mm": {
+        "name": "source_0681_m0108_p01",
+        "at_m": 0.07,
+        "clear_to_m": 0.065
+       },
+       "same_distance_within_one_coarse_step": true,
+       "same_part": true,
+       "shortest_whole_meeting_m": 0.039000000000000035,
+       "meetings_cut_short_by_the_reach": 6,
+       "shortest_cut_short_meeting_m": 0.003000000000000002,
+       "any_shorter_than_the_coarse_step": false
+      },
+      "without_the_air_main_or_what_holds_it": {
+       "neighbours_kept": 9,
+       "neighbours_met": 10,
+       "first_met_at_1mm": {
+        "name": "OP020_direct_preparation_nest_bench_top",
+        "at_m": 0.385,
+        "clear_to_m": 0.384
+       },
+       "first_met_at_5mm": {
+        "name": "OP020_direct_preparation_nest_bench_top",
+        "at_m": 0.385,
+        "clear_to_m": 0.38
+       },
+       "same_distance_within_one_coarse_step": true,
+       "same_part": true,
+       "shortest_whole_meeting_m": 0.039000000000000035,
+       "meetings_cut_short_by_the_reach": 6,
+       "shortest_cut_short_meeting_m": 0.003000000000000002,
+       "any_shorter_than_the_coarse_step": false
+      }
+     }
+    }
+   }
+  },
+  "OP030_S3R__OP030C__source_0693_m0120_p04": {
+   "neighbours": 92,
+   "thinnest_neighbour_m": {
+    "+X": 0.01399993896484375,
+    "-X": 0.01399993896484375,
+    "+Z": 0.0
+   },
+   "neighbours_thinner_than_the_step": {
+    "+X": [],
+    "-X": [],
+    "+Z": [
+     "source_0001_m0001_p00"
+    ]
+   },
+   "directions": {
+    "+X": {
+     "met": {
+      "OP030_S3R__OP030C__source_0693_m0120_p01": {
+       "first_met_at_m": 0.418,
+       "bands": [
+        {
+         "from_m": 0.418,
+         "to_m": 0.5,
+         "length_m": 0.08300000000000002,
+         "cut_short_by_the_reach": true
+        }
+       ],
+       "shortest_band_m": 0.08300000000000002,
+       "could_be_stepped_over": false
+      },
+      "OP030_S3R__OP030C__source_0693_m0120_p03": {
+       "first_met_at_m": 0.42,
+       "bands": [
+        {
+         "from_m": 0.42,
+         "to_m": 0.5,
+         "length_m": 0.08100000000000002,
+         "cut_short_by_the_reach": true
+        }
+       ],
+       "shortest_band_m": 0.08100000000000002,
+       "could_be_stepped_over": false
+      },
+      "source_0599_m0059_p01": {
+       "first_met_at_m": 0.495,
+       "bands": [
+        {
+         "from_m": 0.495,
+         "to_m": 0.5,
+         "length_m": 0.0060000000000000045,
+         "cut_short_by_the_reach": true
+        }
+       ],
+       "shortest_band_m": 0.0060000000000000045,
+       "could_be_stepped_over": false
+      },
+      "source_0705_m0132_p00": {
+       "first_met_at_m": 0.10300000000000001,
+       "bands": [
+        {
+         "from_m": 0.10300000000000001,
+         "to_m": 0.5,
+         "length_m": 0.398,
+         "cut_short_by_the_reach": true
+        }
+       ],
+       "shortest_band_m": 0.398,
+       "could_be_stepped_over": false
+      },
+      "source_0705_m0132_p01": {
+       "first_met_at_m": 0.10300000000000001,
+       "bands": [
+        {
+         "from_m": 0.10300000000000001,
+         "to_m": 0.5,
+         "length_m": 0.398,
+         "cut_short_by_the_reach": true
+        }
+       ],
+       "shortest_band_m": 0.398,
+       "could_be_stepped_over": false
+      }
+     },
+     "shortest_band_m": 0.0060000000000000045,
+     "any_could_be_stepped_over": false,
+     "first_met_at_1mm": {
+      "name": "source_0705_m0132_p00",
+      "at_m": 0.10300000000000001
+     },
+     "first_met_at_5mm": {
+      "name": "source_0705_m0132_p00",
+      "at_m": 0.105
+     },
+     "agrees_within_one_coarse_step": true,
+     "by_policy": {
+      "everything_it_meets": {
+       "neighbours_kept": 5,
+       "neighbours_met": 5,
+       "first_met_at_1mm": {
+        "name": "source_0705_m0132_p00",
+        "at_m": 0.10300000000000001,
+        "clear_to_m": 0.10200000000000001
+       },
+       "first_met_at_5mm": {
+        "name": "source_0705_m0132_p00",
+        "at_m": 0.105,
+        "clear_to_m": 0.1
+       },
+       "same_distance_within_one_coarse_step": true,
+       "same_part": true,
+       "shortest_whole_meeting_m": null,
+       "meetings_cut_short_by_the_reach": 5,
+       "shortest_cut_short_meeting_m": 0.0060000000000000045,
+       "any_shorter_than_the_coarse_step": false
+      },
+      "without_the_air_main": {
+       "neighbours_kept": 5,
+       "neighbours_met": 5,
+       "first_met_at_1mm": {
+        "name": "source_0705_m0132_p00",
+        "at_m": 0.10300000000000001,
+        "clear_to_m": 0.10200000000000001
+       },
+       "first_met_at_5mm": {
+        "name": "source_0705_m0132_p00",
+        "at_m": 0.105,
+        "clear_to_m": 0.1
+       },
+       "same_distance_within_one_coarse_step": true,
+       "same_part": true,
+       "shortest_whole_meeting_m": null,
+       "meetings_cut_short_by_the_reach": 5,
+       "shortest_cut_short_meeting_m": 0.0060000000000000045,
+       "any_shorter_than_the_coarse_step": false
+      },
+      "without_the_air_main_or_what_holds_it": {
+       "neighbours_kept": 3,
+       "neighbours_met": 5,
+       "first_met_at_1mm": {
+        "name": "source_0705_m0132_p00",
+        "at_m": 0.10300000000000001,
+        "clear_to_m": 0.10200000000000001
+       },
+       "first_met_at_5mm": {
+        "name": "source_0705_m0132_p00",
+        "at_m": 0.105,
+        "clear_to_m": 0.1
+       },
+       "same_distance_within_one_coarse_step": true,
+       "same_part": true,
+       "shortest_whole_meeting_m": null,
+       "meetings_cut_short_by_the_reach": 3,
+       "shortest_cut_short_meeting_m": 0.0060000000000000045,
+       "any_shorter_than_the_coarse_step": false
+      }
+     }
+    },
+    "-X": {
+     "met": {
+      "OP030_S3R__OP030C__source_0576_m0050_p00": {
+       "first_met_at_m": 0.074,
+       "bands": [
+        {
+         "from_m": 0.074,
+         "to_m": 0.5,
+         "length_m": 0.427,
+         "cut_short_by_the_reach": true
+        }
+       ],
+       "shortest_band_m": 0.427,
+       "could_be_stepped_over": false
+      },
+      "OP030_S3R__OP030C__source_0576_m0050_p01": {
+       "first_met_at_m": 0.106,
+       "bands": [
+        {
+         "from_m": 0.106,
+         "to_m": 0.5,
+         "length_m": 0.395,
+         "cut_short_by_the_reach": true
+        }
+       ],
+       "shortest_band_m": 0.395,
+       "could_be_stepped_over": false
+      },
+      "OP030_S3R__OP030C__source_0576_m0050_p03": {
+       "first_met_at_m": 0.091,
+       "bands": [
+        {
+         "from_m": 0.091,
+         "to_m": 0.128,
+         "length_m": 0.038000000000000006,
+         "cut_short_by_the_reach": false
+        },
+        {
+         "from_m": 0.14100000000000001,
+         "to_m": 0.18,
+         "length_m": 0.03999999999999998,
+         "cut_short_by_the_reach": false
+        }
+       ],
+       "shortest_band_m": 0.038000000000000006,
+       "could_be_stepped_over": false
+      },
+      "OP030_S3R__OP030C__source_0576_m0050_p04": {
+       "first_met_at_m": 0.28400000000000003,
+       "bands": [
+        {
+         "from_m": 0.28400000000000003,
+         "to_m": 0.47500000000000003,
+         "length_m": 0.192,
+         "cut_short_by_the_reach": false
+        }
+       ],
+       "shortest_band_m": 0.192,
+       "could_be_stepped_over": false
+      },
+      "OP030_S3R__OP030C_feeder_M14_stand_-0.151": {
+       "first_met_at_m": 0.152,
+       "bands": [
+        {
+         "from_m": 0.152,
+         "to_m": 0.41000000000000003,
+         "length_m": 0.259,
+         "cut_short_by_the_reach": false
+        }
+       ],
+       "shortest_band_m": 0.259,
+       "could_be_stepped_over": false
+      },
+      "OP030_S3R__OP030C_feeder_M14_stand_-0.351": {
+       "first_met_at_m": 0.022,
+       "bands": [
+        {
+         "from_m": 0.022,
+         "to_m": 0.28,
+         "length_m": 0.259,
+         "cut_short_by_the_reach": false
+        }
+       ],
+       "shortest_band_m": 0.259,
+       "could_be_stepped_over": false
+      },
+      "OP030_S3R__OP030C_feeder_M6_stand_-0.270": {
+       "first_met_at_m": 0.40700000000000003,
+       "bands": [
+        {
+         "from_m": 0.40700000000000003,
+         "to_m": 0.5,
+         "length_m": 0.09399999999999997,
+         "cut_short_by_the_reach": true
+        }
+       ],
+       "shortest_band_m": 0.09399999999999997,
+       "could_be_stepped_over": false
+      },
+      "Split_bay_2__source_0019_m0019_p00": {
+       "first_met_at_m": 0.421,
+       "bands": [
+        {
+         "from_m": 0.421,
+         "to_m": 0.5,
+         "length_m": 0.08000000000000002,
+         "cut_short_by_the_reach": true
+        }
+       ],
+       "shortest_band_m": 0.08000000000000002,
+       "could_be_stepped_over": false
+      },
+      "Split_bay_2__source_0019_m0019_p01": {
+       "first_met_at_m": 0.41000000000000003,
+       "bands": [
+        {
+         "from_m": 0.41000000000000003,
+         "to_m": 0.5,
+         "length_m": 0.09099999999999997,
+         "cut_short_by_the_reach": true
+        }
+       ],
+       "shortest_band_m": 0.09099999999999997,
+       "could_be_stepped_over": false
+      },
+      "source_0588_m0055_p00": {
+       "first_met_at_m": 0.074,
+       "bands": [
+        {
+         "from_m": 0.074,
+         "to_m": 0.5,
+         "length_m": 0.427,
+         "cut_short_by_the_reach": true
+        }
+       ],
+       "shortest_band_m": 0.427,
+       "could_be_stepped_over": false
+      },
+      "source_0588_m0055_p01": {
+       "first_met_at_m": 0.082,
+       "bands": [
+        {
+         "from_m": 0.082,
+         "to_m": 0.5,
+         "length_m": 0.419,
+         "cut_short_by_the_reach": true
+        }
+       ],
+       "shortest_band_m": 0.419,
+       "could_be_stepped_over": false
+      },
+      "source_0588_m0055_p02": {
+       "first_met_at_m": 0.078,
+       "bands": [
+        {
+         "from_m": 0.078,
+         "to_m": 0.5,
+         "length_m": 0.423,
+         "cut_short_by_the_reach": true
+        }
+       ],
+       "shortest_band_m": 0.423,
+       "could_be_stepped_over": false
+      },
+      "source_0588_m0055_p03": {
+       "first_met_at_m": 0.08,
+       "bands": [
+        {
+         "from_m": 0.08,
+         "to_m": 0.163,
+         "length_m": 0.084,
+         "cut_short_by_the_reach": false
+        }
+       ],
+       "shortest_band_m": 0.084,
+       "could_be_stepped_over": false
+      },
+      "source_0589_m0056_p00": {
+       "first_met_at_m": 0.17200000000000001,
+       "bands": [
+        {
+         "from_m": 0.17200000000000001,
+         "to_m": 0.5,
+         "length_m": 0.32899999999999996,
+         "cut_short_by_the_reach": true
+        }
+       ],
+       "shortest_band_m": 0.32899999999999996,
+       "could_be_stepped_over": false
+      },
+      "source_0780_m0207_p01": {
+       "first_met_at_m": 0.218,
+       "bands": [
+        {
+         "from_m": 0.218,
+         "to_m": 0.402,
+         "length_m": 0.18500000000000003,
+         "cut_short_by_the_reach": false
+        }
+       ],
+       "shortest_band_m": 0.18500000000000003,
+       "could_be_stepped_over": false
+      }
+     },
+     "shortest_band_m": 0.038000000000000006,
+     "any_could_be_stepped_over": false,
+     "first_met_at_1mm": {
+      "name": "OP030_S3R__OP030C_feeder_M14_stand_-0.351",
+      "at_m": 0.022
+     },
+     "first_met_at_5mm": {
+      "name": "OP030_S3R__OP030C_feeder_M14_stand_-0.351",
+      "at_m": 0.025
+     },
+     "agrees_within_one_coarse_step": true,
+     "by_policy": {
+      "everything_it_meets": {
+       "neighbours_kept": 15,
+       "neighbours_met": 15,
+       "first_met_at_1mm": {
+        "name": "OP030_S3R__OP030C_feeder_M14_stand_-0.351",
+        "at_m": 0.022,
+        "clear_to_m": 0.020999999999999998
+       },
+       "first_met_at_5mm": {
+        "name": "OP030_S3R__OP030C_feeder_M14_stand_-0.351",
+        "at_m": 0.025,
+        "clear_to_m": 0.02
+       },
+       "same_distance_within_one_coarse_step": true,
+       "same_part": true,
+       "shortest_whole_meeting_m": 0.038000000000000006,
+       "meetings_cut_short_by_the_reach": 9,
+       "shortest_cut_short_meeting_m": 0.08000000000000002,
+       "any_shorter_than_the_coarse_step": false
+      },
+      "without_the_air_main": {
+       "neighbours_kept": 14,
+       "neighbours_met": 15,
+       "first_met_at_1mm": {
+        "name": "OP030_S3R__OP030C_feeder_M14_stand_-0.351",
+        "at_m": 0.022,
+        "clear_to_m": 0.020999999999999998
+       },
+       "first_met_at_5mm": {
+        "name": "OP030_S3R__OP030C_feeder_M14_stand_-0.351",
+        "at_m": 0.025,
+        "clear_to_m": 0.02
+       },
+       "same_distance_within_one_coarse_step": true,
+       "same_part": true,
+       "shortest_whole_meeting_m": 0.038000000000000006,
+       "meetings_cut_short_by_the_reach": 9,
+       "shortest_cut_short_meeting_m": 0.08000000000000002,
+       "any_shorter_than_the_coarse_step": false
+      },
+      "without_the_air_main_or_what_holds_it": {
+       "neighbours_kept": 11,
+       "neighbours_met": 15,
+       "first_met_at_1mm": {
+        "name": "OP030_S3R__OP030C_feeder_M14_stand_-0.351",
+        "at_m": 0.022,
+        "clear_to_m": 0.020999999999999998
+       },
+       "first_met_at_5mm": {
+        "name": "OP030_S3R__OP030C_feeder_M14_stand_-0.351",
+        "at_m": 0.025,
+        "clear_to_m": 0.02
+       },
+       "same_distance_within_one_coarse_step": true,
+       "same_part": true,
+       "shortest_whole_meeting_m": 0.084,
+       "meetings_cut_short_by_the_reach": 7,
+       "shortest_cut_short_meeting_m": 0.08000000000000002,
+       "any_shorter_than_the_coarse_step": false
+      }
+     }
+    },
+    "+Z": {
+     "met": {
+      "OP030_S3R__OP030C__source_0693_m0120_p01": {
+       "first_met_at_m": 0.068,
+       "bands": [
+        {
+         "from_m": 0.068,
+         "to_m": 0.342,
+         "length_m": 0.275,
+         "cut_short_by_the_reach": false
+        },
+        {
+         "from_m": 0.401,
+         "to_m": 0.499,
+         "length_m": 0.09899999999999998,
+         "cut_short_by_the_reach": false
+        }
+       ],
+       "shortest_band_m": 0.09899999999999998,
+       "could_be_stepped_over": false
+      },
+      "OP030_S3R__OP030C_feeder_M14_base": {
+       "first_met_at_m": 0.481,
+       "bands": [
+        {
+         "from_m": 0.481,
+         "to_m": 0.5,
+         "length_m": 0.020000000000000018,
+         "cut_short_by_the_reach": true
+        }
+       ],
+       "shortest_band_m": 0.020000000000000018,
+       "could_be_stepped_over": false
+      },
+      "OP030_S3R__OP030C_feeder_M14_drive_enclosure": {
+       "first_met_at_m": 0.496,
+       "bands": [
+        {
+         "from_m": 0.496,
+         "to_m": 0.5,
+         "length_m": 0.005000000000000004,
+         "cut_short_by_the_reach": true
+        }
+       ],
+       "shortest_band_m": 0.005000000000000004,
+       "could_be_stepped_over": false
+      }
+     },
+     "shortest_band_m": 0.005000000000000004,
+     "any_could_be_stepped_over": false,
+     "first_met_at_1mm": {
+      "name": "OP030_S3R__OP030C__source_0693_m0120_p01",
+      "at_m": 0.068
+     },
+     "first_met_at_5mm": {
+      "name": "OP030_S3R__OP030C__source_0693_m0120_p01",
+      "at_m": 0.07
+     },
+     "agrees_within_one_coarse_step": true,
+     "by_policy": {
+      "everything_it_meets": {
+       "neighbours_kept": 3,
+       "neighbours_met": 3,
+       "first_met_at_1mm": {
+        "name": "OP030_S3R__OP030C__source_0693_m0120_p01",
+        "at_m": 0.068,
+        "clear_to_m": 0.067
+       },
+       "first_met_at_5mm": {
+        "name": "OP030_S3R__OP030C__source_0693_m0120_p01",
+        "at_m": 0.07,
+        "clear_to_m": 0.065
+       },
+       "same_distance_within_one_coarse_step": true,
+       "same_part": true,
+       "shortest_whole_meeting_m": 0.09899999999999998,
+       "meetings_cut_short_by_the_reach": 2,
+       "shortest_cut_short_meeting_m": 0.005000000000000004,
+       "any_shorter_than_the_coarse_step": false
+      },
+      "without_the_air_main": {
+       "neighbours_kept": 3,
+       "neighbours_met": 3,
+       "first_met_at_1mm": {
+        "name": "OP030_S3R__OP030C__source_0693_m0120_p01",
+        "at_m": 0.068,
+        "clear_to_m": 0.067
+       },
+       "first_met_at_5mm": {
+        "name": "OP030_S3R__OP030C__source_0693_m0120_p01",
+        "at_m": 0.07,
+        "clear_to_m": 0.065
+       },
+       "same_distance_within_one_coarse_step": true,
+       "same_part": true,
+       "shortest_whole_meeting_m": 0.09899999999999998,
+       "meetings_cut_short_by_the_reach": 2,
+       "shortest_cut_short_meeting_m": 0.005000000000000004,
+       "any_shorter_than_the_coarse_step": false
+      },
+      "without_the_air_main_or_what_holds_it": {
+       "neighbours_kept": 2,
+       "neighbours_met": 3,
+       "first_met_at_1mm": {
+        "name": "OP030_S3R__OP030C_feeder_M14_base",
+        "at_m": 0.481,
+        "clear_to_m": 0.48
+       },
+       "first_met_at_5mm": {
+        "name": "OP030_S3R__OP030C_feeder_M14_base",
+        "at_m": 0.485,
+        "clear_to_m": 0.48
+       },
+       "same_distance_within_one_coarse_step": true,
+       "same_part": true,
+       "shortest_whole_meeting_m": null,
+       "meetings_cut_short_by_the_reach": 2,
+       "shortest_cut_short_meeting_m": 0.005000000000000004,
+       "any_shorter_than_the_coarse_step": false
+      }
+     }
+    }
+   }
+  },
+  "source_0705_m0132_p04": {
+   "neighbours": 84,
+   "thinnest_neighbour_m": {
+    "+X": 0.01399993896484375,
+    "-X": 0.01399993896484375,
+    "+Z": 0.0
+   },
+   "neighbours_thinner_than_the_step": {
+    "+X": [],
+    "-X": [],
+    "+Z": [
+     "source_0001_m0001_p00"
+    ]
+   },
+   "directions": {
+    "+X": {
+     "met": {
+      "OP030_S3R__OP030C__source_0693_m0120_p00": {
+       "first_met_at_m": 0.10300000000000001,
+       "bands": [
+        {
+         "from_m": 0.10300000000000001,
+         "to_m": 0.5,
+         "length_m": 0.398,
+         "cut_short_by_the_reach": true
+        }
+       ],
+       "shortest_band_m": 0.398,
+       "could_be_stepped_over": false
+      },
+      "OP030_S3R__OP030C__source_0693_m0120_p01": {
+       "first_met_at_m": 0.10300000000000001,
+       "bands": [
+        {
+         "from_m": 0.10300000000000001,
+         "to_m": 0.5,
+         "length_m": 0.398,
+         "cut_short_by_the_reach": true
+        }
+       ],
+       "shortest_band_m": 0.398,
+       "could_be_stepped_over": false
+      },
+      "source_0705_m0132_p01": {
+       "first_met_at_m": 0.418,
+       "bands": [
+        {
+         "from_m": 0.418,
+         "to_m": 0.5,
+         "length_m": 0.08300000000000002,
+         "cut_short_by_the_reach": true
+        }
+       ],
+       "shortest_band_m": 0.08300000000000002,
+       "could_be_stepped_over": false
+      },
+      "source_0705_m0132_p03": {
+       "first_met_at_m": 0.42,
+       "bands": [
+        {
+         "from_m": 0.42,
+         "to_m": 0.5,
+         "length_m": 0.08100000000000002,
+         "cut_short_by_the_reach": true
+        }
+       ],
+       "shortest_band_m": 0.08100000000000002,
+       "could_be_stepped_over": false
+      }
+     },
+     "shortest_band_m": 0.08100000000000002,
+     "any_could_be_stepped_over": false,
+     "first_met_at_1mm": {
+      "name": "OP030_S3R__OP030C__source_0693_m0120_p00",
+      "at_m": 0.10300000000000001
+     },
+     "first_met_at_5mm": {
+      "name": "OP030_S3R__OP030C__source_0693_m0120_p00",
+      "at_m": 0.105
+     },
+     "agrees_within_one_coarse_step": true,
+     "by_policy": {
+      "everything_it_meets": {
+       "neighbours_kept": 4,
+       "neighbours_met": 4,
+       "first_met_at_1mm": {
+        "name": "OP030_S3R__OP030C__source_0693_m0120_p00",
+        "at_m": 0.10300000000000001,
+        "clear_to_m": 0.10200000000000001
+       },
+       "first_met_at_5mm": {
+        "name": "OP030_S3R__OP030C__source_0693_m0120_p00",
+        "at_m": 0.105,
+        "clear_to_m": 0.1
+       },
+       "same_distance_within_one_coarse_step": true,
+       "same_part": true,
+       "shortest_whole_meeting_m": null,
+       "meetings_cut_short_by_the_reach": 4,
+       "shortest_cut_short_meeting_m": 0.08100000000000002,
+       "any_shorter_than_the_coarse_step": false
+      },
+      "without_the_air_main": {
+       "neighbours_kept": 4,
+       "neighbours_met": 4,
+       "first_met_at_1mm": {
+        "name": "OP030_S3R__OP030C__source_0693_m0120_p00",
+        "at_m": 0.10300000000000001,
+        "clear_to_m": 0.10200000000000001
+       },
+       "first_met_at_5mm": {
+        "name": "OP030_S3R__OP030C__source_0693_m0120_p00",
+        "at_m": 0.105,
+        "clear_to_m": 0.1
+       },
+       "same_distance_within_one_coarse_step": true,
+       "same_part": true,
+       "shortest_whole_meeting_m": null,
+       "meetings_cut_short_by_the_reach": 4,
+       "shortest_cut_short_meeting_m": 0.08100000000000002,
+       "any_shorter_than_the_coarse_step": false
+      },
+      "without_the_air_main_or_what_holds_it": {
+       "neighbours_kept": 2,
+       "neighbours_met": 4,
+       "first_met_at_1mm": {
+        "name": "OP030_S3R__OP030C__source_0693_m0120_p00",
+        "at_m": 0.10300000000000001,
+        "clear_to_m": 0.10200000000000001
+       },
+       "first_met_at_5mm": {
+        "name": "OP030_S3R__OP030C__source_0693_m0120_p00",
+        "at_m": 0.105,
+        "clear_to_m": 0.1
+       },
+       "same_distance_within_one_coarse_step": true,
+       "same_part": true,
+       "shortest_whole_meeting_m": null,
+       "meetings_cut_short_by_the_reach": 2,
+       "shortest_cut_short_meeting_m": 0.398,
+       "any_shorter_than_the_coarse_step": false
+      }
+     }
+    },
+    "-X": {
+     "met": {
+      "OP030_S3R__OP030C__source_0576_m0050_p00": {
+       "first_met_at_m": 0.074,
+       "bands": [
+        {
+         "from_m": 0.074,
+         "to_m": 0.5,
+         "length_m": 0.427,
+         "cut_short_by_the_reach": true
+        }
+       ],
+       "shortest_band_m": 0.427,
+       "could_be_stepped_over": false
+      },
+      "OP030_S3R__OP030C__source_0576_m0050_p01": {
+       "first_met_at_m": 0.082,
+       "bands": [
+        {
+         "from_m": 0.082,
+         "to_m": 0.5,
+         "length_m": 0.419,
+         "cut_short_by_the_reach": true
+        }
+       ],
+       "shortest_band_m": 0.419,
+       "could_be_stepped_over": false
+      },
+      "OP030_S3R__OP030C__source_0576_m0050_p02": {
+       "first_met_at_m": 0.078,
+       "bands": [
+        {
+         "from_m": 0.078,
+         "to_m": 0.5,
+         "length_m": 0.423,
+         "cut_short_by_the_reach": true
+        }
+       ],
+       "shortest_band_m": 0.423,
+       "could_be_stepped_over": false
+      },
+      "OP030_S3R__OP030C__source_0576_m0050_p03": {
+       "first_met_at_m": 0.08,
+       "bands": [
+        {
+         "from_m": 0.08,
+         "to_m": 0.163,
+         "length_m": 0.084,
+         "cut_short_by_the_reach": false
+        }
+       ],
+       "shortest_band_m": 0.084,
+       "could_be_stepped_over": false
+      },
+      "OP030_S3R__OP030C__source_0577_m0051_p00": {
+       "first_met_at_m": 0.17300000000000001,
+       "bands": [
+        {
+         "from_m": 0.17300000000000001,
+         "to_m": 0.5,
+         "length_m": 0.32799999999999996,
+         "cut_short_by_the_reach": true
+        }
+       ],
+       "shortest_band_m": 0.32799999999999996,
+       "could_be_stepped_over": false
+      },
+      "OP030_S3R__OP030C_feeder_M6_stand_-0.270": {
+       "first_met_at_m": 0.41300000000000003,
+       "bands": [
+        {
+         "from_m": 0.41300000000000003,
+         "to_m": 0.5,
+         "length_m": 0.08799999999999997,
+         "cut_short_by_the_reach": true
+        }
+       ],
+       "shortest_band_m": 0.08799999999999997,
+       "could_be_stepped_over": false
+      },
+      "source_0588_m0055_p00": {
+       "first_met_at_m": 0.074,
+       "bands": [
+        {
+         "from_m": 0.074,
+         "to_m": 0.5,
+         "length_m": 0.427,
+         "cut_short_by_the_reach": true
+        }
+       ],
+       "shortest_band_m": 0.427,
+       "could_be_stepped_over": false
+      },
+      "source_0588_m0055_p01": {
+       "first_met_at_m": 0.106,
+       "bands": [
+        {
+         "from_m": 0.106,
+         "to_m": 0.5,
+         "length_m": 0.395,
+         "cut_short_by_the_reach": true
+        }
+       ],
+       "shortest_band_m": 0.395,
+       "could_be_stepped_over": false
+      },
+      "source_0588_m0055_p03": {
+       "first_met_at_m": 0.091,
+       "bands": [
+        {
+         "from_m": 0.091,
+         "to_m": 0.128,
+         "length_m": 0.038000000000000006,
+         "cut_short_by_the_reach": false
+        },
+        {
+         "from_m": 0.14100000000000001,
+         "to_m": 0.18,
+         "length_m": 0.03999999999999998,
+         "cut_short_by_the_reach": false
+        }
+       ],
+       "shortest_band_m": 0.038000000000000006,
+       "could_be_stepped_over": false
+      },
+      "source_0588_m0055_p04": {
+       "first_met_at_m": 0.28400000000000003,
+       "bands": [
+        {
+         "from_m": 0.28400000000000003,
+         "to_m": 0.47500000000000003,
+         "length_m": 0.192,
+         "cut_short_by_the_reach": false
+        }
+       ],
+       "shortest_band_m": 0.192,
+       "could_be_stepped_over": false
+      },
+      "source_0780_m0207_p01": {
+       "first_met_at_m": 0.218,
+       "bands": [
+        {
+         "from_m": 0.218,
+         "to_m": 0.402,
+         "length_m": 0.18500000000000003,
+         "cut_short_by_the_reach": false
+        }
+       ],
+       "shortest_band_m": 0.18500000000000003,
+       "could_be_stepped_over": false
+      }
+     },
+     "shortest_band_m": 0.038000000000000006,
+     "any_could_be_stepped_over": false,
+     "first_met_at_1mm": {
+      "name": "OP030_S3R__OP030C__source_0576_m0050_p00",
+      "at_m": 0.074
+     },
+     "first_met_at_5mm": {
+      "name": "OP030_S3R__OP030C__source_0576_m0050_p00",
+      "at_m": 0.075
+     },
+     "agrees_within_one_coarse_step": true,
+     "by_policy": {
+      "everything_it_meets": {
+       "neighbours_kept": 11,
+       "neighbours_met": 11,
+       "first_met_at_1mm": {
+        "name": "OP030_S3R__OP030C__source_0576_m0050_p00",
+        "at_m": 0.074,
+        "clear_to_m": 0.073
+       },
+       "first_met_at_5mm": {
+        "name": "OP030_S3R__OP030C__source_0576_m0050_p00",
+        "at_m": 0.075,
+        "clear_to_m": 0.07
+       },
+       "same_distance_within_one_coarse_step": true,
+       "same_part": true,
+       "shortest_whole_meeting_m": 0.038000000000000006,
+       "meetings_cut_short_by_the_reach": 7,
+       "shortest_cut_short_meeting_m": 0.08799999999999997,
+       "any_shorter_than_the_coarse_step": false
+      },
+      "without_the_air_main": {
+       "neighbours_kept": 10,
+       "neighbours_met": 11,
+       "first_met_at_1mm": {
+        "name": "OP030_S3R__OP030C__source_0576_m0050_p00",
+        "at_m": 0.074,
+        "clear_to_m": 0.073
+       },
+       "first_met_at_5mm": {
+        "name": "OP030_S3R__OP030C__source_0576_m0050_p00",
+        "at_m": 0.075,
+        "clear_to_m": 0.07
+       },
+       "same_distance_within_one_coarse_step": true,
+       "same_part": true,
+       "shortest_whole_meeting_m": 0.038000000000000006,
+       "meetings_cut_short_by_the_reach": 7,
+       "shortest_cut_short_meeting_m": 0.08799999999999997,
+       "any_shorter_than_the_coarse_step": false
+      },
+      "without_the_air_main_or_what_holds_it": {
+       "neighbours_kept": 7,
+       "neighbours_met": 11,
+       "first_met_at_1mm": {
+        "name": "OP030_S3R__OP030C__source_0576_m0050_p00",
+        "at_m": 0.074,
+        "clear_to_m": 0.073
+       },
+       "first_met_at_5mm": {
+        "name": "OP030_S3R__OP030C__source_0576_m0050_p00",
+        "at_m": 0.075,
+        "clear_to_m": 0.07
+       },
+       "same_distance_within_one_coarse_step": true,
+       "same_part": true,
+       "shortest_whole_meeting_m": 0.084,
+       "meetings_cut_short_by_the_reach": 5,
+       "shortest_cut_short_meeting_m": 0.08799999999999997,
+       "any_shorter_than_the_coarse_step": false
+      }
+     }
+    },
+    "+Z": {
+     "met": {
+      "OP030_S3R__OP030C__source_0577_m0051_p04": {
+       "first_met_at_m": 0.11900000000000001,
+       "bands": [
+        {
+         "from_m": 0.11900000000000001,
+         "to_m": 0.40700000000000003,
+         "length_m": 0.28900000000000003,
+         "cut_short_by_the_reach": false
+        }
+       ],
+       "shortest_band_m": 0.28900000000000003,
+       "could_be_stepped_over": false
+      },
+      "source_0705_m0132_p01": {
+       "first_met_at_m": 0.068,
+       "bands": [
+        {
+         "from_m": 0.068,
+         "to_m": 0.342,
+         "length_m": 0.275,
+         "cut_short_by_the_reach": false
+        },
+        {
+         "from_m": 0.401,
+         "to_m": 0.499,
+         "length_m": 0.09899999999999998,
+         "cut_short_by_the_reach": false
+        }
+       ],
+       "shortest_band_m": 0.09899999999999998,
+       "could_be_stepped_over": false
+      }
+     },
+     "shortest_band_m": 0.09899999999999998,
+     "any_could_be_stepped_over": false,
+     "first_met_at_1mm": {
+      "name": "source_0705_m0132_p01",
+      "at_m": 0.068
+     },
+     "first_met_at_5mm": {
+      "name": "source_0705_m0132_p01",
+      "at_m": 0.07
+     },
+     "agrees_within_one_coarse_step": true,
+     "by_policy": {
+      "everything_it_meets": {
+       "neighbours_kept": 2,
+       "neighbours_met": 2,
+       "first_met_at_1mm": {
+        "name": "source_0705_m0132_p01",
+        "at_m": 0.068,
+        "clear_to_m": 0.067
+       },
+       "first_met_at_5mm": {
+        "name": "source_0705_m0132_p01",
+        "at_m": 0.07,
+        "clear_to_m": 0.065
+       },
+       "same_distance_within_one_coarse_step": true,
+       "same_part": true,
+       "shortest_whole_meeting_m": 0.09899999999999998,
+       "meetings_cut_short_by_the_reach": 0,
+       "shortest_cut_short_meeting_m": null,
+       "any_shorter_than_the_coarse_step": false
+      },
+      "without_the_air_main": {
+       "neighbours_kept": 2,
+       "neighbours_met": 2,
+       "first_met_at_1mm": {
+        "name": "source_0705_m0132_p01",
+        "at_m": 0.068,
+        "clear_to_m": 0.067
+       },
+       "first_met_at_5mm": {
+        "name": "source_0705_m0132_p01",
+        "at_m": 0.07,
+        "clear_to_m": 0.065
+       },
+       "same_distance_within_one_coarse_step": true,
+       "same_part": true,
+       "shortest_whole_meeting_m": 0.09899999999999998,
+       "meetings_cut_short_by_the_reach": 0,
+       "shortest_cut_short_meeting_m": null,
+       "any_shorter_than_the_coarse_step": false
+      },
+      "without_the_air_main_or_what_holds_it": {
+       "neighbours_kept": 1,
+       "neighbours_met": 2,
+       "first_met_at_1mm": {
+        "name": "OP030_S3R__OP030C__source_0577_m0051_p04",
+        "at_m": 0.11900000000000001,
+        "clear_to_m": 0.11800000000000001
+       },
+       "first_met_at_5mm": {
+        "name": "OP030_S3R__OP030C__source_0577_m0051_p04",
+        "at_m": 0.12,
+        "clear_to_m": 0.115
+       },
+       "same_distance_within_one_coarse_step": true,
+       "same_part": true,
+       "shortest_whole_meeting_m": 0.28900000000000003,
+       "meetings_cut_short_by_the_reach": 0,
+       "shortest_cut_short_meeting_m": null,
+       "any_shorter_than_the_coarse_step": false
+      }
+     }
+    }
+   }
+  }
+ },
+ "scene_world_transforms_unchanged": true,
+ "saved_scene": false,
+ "formal_physical_validity_verdict": null
+}
