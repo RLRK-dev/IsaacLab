@@ -59,7 +59,11 @@ def tree_of(vertices: np.ndarray, faces: np.ndarray) -> BVHTree:
 
 
 def bands(distances: list[float], step: float) -> list[dict]:
-    """Return the runs of consecutive distances as bands of travel [m]."""
+    """Return the runs of consecutive distances as bands of travel [m].
+
+    A band that runs to the end of the sweep is marked: the cable is still in contact there, so
+    its real length is not known, only that this much of it lies inside the reach.
+    """
     out = []
     for distance in sorted(distances):
         if out and distance - out[-1]["to_m"] <= step * 1.5:
@@ -68,6 +72,7 @@ def bands(distances: list[float], step: float) -> list[dict]:
             out.append(dict(from_m=distance, to_m=distance))
     for band in out:
         band["length_m"] = band["to_m"] - band["from_m"] + step
+        band["cut_short_by_the_reach"] = bool(abs(band["to_m"] - REACH_M) < step / 2)
     return out
 
 
@@ -100,6 +105,11 @@ def main() -> None:
                 high=high,
                 tree=tree_of(other_vertices, other_faces),
                 already_touching=row["already_touching"],
+                air_main=row["air_main"],
+                holds_the_cable=bool(
+                    other.endswith(("_p00", "_p01", "_p03", "_p05"))
+                    and other.rsplit("_p", 1)[0] in set(recorded["attached_groups"])
+                ),
                 thickness=(high - low).tolist(),
             )
 
@@ -145,6 +155,52 @@ def main() -> None:
             shortest = min((row["shortest_band_m"] for row in rows.values()), default=None)
             if shortest is not None and (shortest_overall is None or shortest < shortest_overall):
                 shortest_overall = shortest
+            # The sweep publishes three views of the same travel, and the coarse step has to be
+            # checked in the view that is used, not only in the widest one: setting a neighbour
+            # aside moves the first contact somewhere else entirely.
+            policies = {}
+            for policy, keep in (
+                ("everything_it_meets", lambda other: True),
+                ("without_the_air_main", lambda other: not neighbours[other]["air_main"]),
+                (
+                    "without_the_air_main_or_what_holds_it",
+                    lambda other: not neighbours[other]["air_main"] and not neighbours[other]["holds_the_cable"],
+                ),
+            ):
+                kept = {other: row for other, row in rows.items() if keep(other)}
+                coarse = recorded["sweeps"][label][policy]
+                fine = min(kept.items(), key=lambda row: row[1]["first_met_at_m"]) if kept else None
+                every = [band for row in kept.values() for band in row["bands"]]
+                whole = [band["length_m"] for band in every if not band["cut_short_by_the_reach"]]
+                short = [band["length_m"] for band in every if band["cut_short_by_the_reach"]]
+                policies[policy] = dict(
+                    neighbours_kept=len(kept),
+                    neighbours_met=len(rows),
+                    first_met_at_1mm=dict(
+                        name=None if fine is None else fine[0],
+                        at_m=None if fine is None else fine[1]["first_met_at_m"],
+                        clear_to_m=REACH_M if fine is None else fine[1]["first_met_at_m"] - FINE_STEP_M,
+                    ),
+                    first_met_at_5mm=dict(
+                        name=coarse["first_met"],
+                        at_m=coarse["first_met_at_m"],
+                        clear_to_m=coarse["clear_to_at_least_m"],
+                    ),
+                    same_distance_within_one_coarse_step=bool(
+                        (fine is None and coarse["first_met_at_m"] is None)
+                        or (
+                            fine is not None
+                            and coarse["first_met_at_m"] is not None
+                            and abs(coarse["first_met_at_m"] - fine[1]["first_met_at_m"]) <= COARSE_STEP_M + 1e-9
+                        )
+                    ),
+                    same_part=bool(fine is not None and coarse["first_met"] == fine[0]),
+                    shortest_whole_meeting_m=min(whole, default=None),
+                    meetings_cut_short_by_the_reach=len(short),
+                    shortest_cut_short_meeting_m=min(short, default=None),
+                    any_shorter_than_the_coarse_step=bool(min(whole, default=REACH_M) < COARSE_STEP_M),
+                )
+
             coarse = recorded["sweeps"][label]["everything_it_meets"]
             fine_first = min((row["first_met_at_m"] for row in rows.values()), default=None)
             fine_name = min(rows.items(), key=lambda row: row[1]["first_met_at_m"])[0] if rows else None
@@ -154,20 +210,15 @@ def main() -> None:
                 any_could_be_stepped_over=any(row["could_be_stepped_over"] for row in rows.values()),
                 first_met_at_1mm=dict(name=fine_name, at_m=fine_first),
                 first_met_at_5mm=dict(name=coarse["first_met"], at_m=coarse["first_met_at_m"]),
-                agrees_within_one_coarse_step=bool(
-                    fine_first is None
-                    and coarse["first_met_at_m"] is None
-                    or (
-                        fine_first is not None
-                        and coarse["first_met_at_m"] is not None
-                        and abs(coarse["first_met_at_m"] - fine_first) <= COARSE_STEP_M + 1e-9
-                    )
-                ),
+                agrees_within_one_coarse_step=policies["everything_it_meets"]["same_distance_within_one_coarse_step"],
+                by_policy=policies,
             )
+            used = policies["without_the_air_main_or_what_holds_it"]
             print(
-                f"    {label}: shortest meeting {shortest if shortest is None else round(shortest, 3)} m,"
-                f" first at 1 mm {fine_name} @ {fine_first}, at 5 mm {coarse['first_met']}"
-                f" @ {coarse['first_met_at_m']}"
+                f"    {label}: shortest meeting {shortest if shortest is None else round(shortest, 3)} m."
+                f" As published: 1 mm {used['first_met_at_1mm']['name']} @ {used['first_met_at_1mm']['at_m']},"
+                f" 5 mm {used['first_met_at_5mm']['name']} @ {used['first_met_at_5mm']['at_m']},"
+                f" same part {used['same_part']}, shortest whole {used['shortest_whole_meeting_m']}"
             )
 
         cables[name] = dict(
@@ -208,6 +259,32 @@ def main() -> None:
                     "any judgement of whether the room found is enough",
                 ],
                 shortest_meeting_m=shortest_overall,
+                as_published=dict(
+                    policy="without_the_air_main_or_what_holds_it",
+                    why="the figures the design side carries come from this view, so the step is checked in it",
+                    same_part_everywhere=all(
+                        row["by_policy"]["without_the_air_main_or_what_holds_it"]["same_part"]
+                        for cable in cables.values()
+                        for row in cable["directions"].values()
+                    ),
+                    same_distance_everywhere=all(
+                        row["by_policy"]["without_the_air_main_or_what_holds_it"][
+                            "same_distance_within_one_coarse_step"
+                        ]
+                        for cable in cables.values()
+                        for row in cable["directions"].values()
+                    ),
+                    shortest_whole_meeting_m=min(
+                        (
+                            row["by_policy"]["without_the_air_main_or_what_holds_it"]["shortest_whole_meeting_m"]
+                            for cable in cables.values()
+                            for row in cable["directions"].values()
+                            if row["by_policy"]["without_the_air_main_or_what_holds_it"]["shortest_whole_meeting_m"]
+                            is not None
+                        ),
+                        default=None,
+                    ),
+                ),
                 shorter_than_the_coarse_step=bool(shortest_overall is not None and shortest_overall < COARSE_STEP_M),
                 every_first_contact_agrees=all(
                     row["agrees_within_one_coarse_step"]
