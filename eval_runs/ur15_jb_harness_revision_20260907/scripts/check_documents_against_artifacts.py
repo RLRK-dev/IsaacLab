@@ -19,6 +19,7 @@ with the artifacts, not whether the artifacts are right. A clean run means the n
 traceable, not that they are true.
 
     python3 scripts/check_documents_against_artifacts.py [--quiet]
+    python3 scripts/check_documents_against_artifacts.py --sources   # where each figure traces to
 """
 
 from __future__ import annotations
@@ -89,9 +90,15 @@ def numbers_in(value: object, into: set[str]) -> None:
         into.add(value)
 
 
-def committed() -> tuple[set[str], set[str], set[str]]:
-    """Return the numbers, keys and digests that appear anywhere in the committed JSON."""
-    texts: set[str] = set()
+def committed() -> tuple[dict[str, set[str]], set[str], set[str]]:
+    """Return, for every value in the committed JSON, which files it appears in.
+
+    Per file rather than pooled, because "this figure exists somewhere in forty-five files" is
+    a much weaker statement than it sounds. A wrong 0.0507 passed the pooled form: some
+    unrelated committed value is 0.050738110193109476. Knowing WHICH file holds the match is
+    what lets a reader see whether it is the file the document is citing.
+    """
+    found: dict[str, set[str]] = {}
     keys: set[str] = set()
     for path in DATA:
         try:
@@ -100,10 +107,12 @@ def committed() -> tuple[set[str], set[str], set[str]]:
             continue
         collected: set[str] = set()
         numbers_in(loaded, collected)
-        texts |= collected
+        name = path.relative_to(HERE).as_posix()
+        for item in collected:
+            found.setdefault(item, set()).add(name)
         keys |= {item for item in collected if FIELD.fullmatch(f"`{item}`")}
-    digests = {item[:8] for item in texts if re.fullmatch(r"[0-9a-f]{64}", item)}
-    return texts, keys, digests
+    digests = {item[:8] for item in found if re.fullmatch(r"[0-9a-f]{64}", item)}
+    return found, keys, digests
 
 
 def rounds_to(text: str, quoted: str) -> bool:
@@ -117,16 +126,45 @@ def rounds_to(text: str, quoted: str) -> bool:
     return quoted in (f"{value:.{places}f}", f"{abs(value):.{places}f}")
 
 
+def show_sources(in_scope: list[Path], by_value: dict[str, set[str]]) -> int:
+    """Print, for each measured figure in each document, which committed files hold it.
+
+    Passing the check only says a figure exists somewhere. A wrong 0.0507 passed, because an
+    unrelated committed value is 0.050738110193109476, and short figures collide by chance.
+    This says WHERE, so a figure can be confirmed against the file the document is citing
+    rather than against the corpus as a whole.
+    """
+    for document in in_scope:
+        figures = sorted(set(MEASURED.findall(document.read_text())))
+        if not figures:
+            continue
+        print(f"\n{document.relative_to(HERE).as_posix()}")
+        for figure in figures:
+            if not float(figure):  # "0.0000" traces to everything and means nothing
+                continue
+            sources = sorted({f for text, files in by_value.items() if rounds_to(text, figure) for f in files})
+            if not sources:
+                print(f"  {figure:>12}  -- in no committed JSON")
+            elif len(sources) == 1:
+                print(f"  {figure:>12}  {sources[0]}")
+            else:
+                print(f"  {figure:>12}  {len(sources)} files, source not pinned: {', '.join(sources)}")
+    return 0
+
+
 def main() -> int:
     quiet = "--quiet" in sys.argv
     in_scope = documents("--all" in sys.argv)
     report = Report()
-    texts, keys, digests = committed()
+    by_value, keys, digests = committed()
     # Not this file. Its own docstring quotes the defects it exists to catch, so counting it
     # as a script would let every one of them through as "recorded in a script".
     script_text = "\n".join(
         path.read_text() for path in sorted(HERE.glob("scripts/*.py")) if path.name != Path(__file__).name
     )
+
+    if "--sources" in sys.argv:
+        return show_sources(in_scope, by_value)
 
     for document in in_scope:
         body = document.read_text()
@@ -150,7 +188,14 @@ def main() -> int:
         # Row 26: a measured figure has to exist in some committed JSON.
         corrections = {row for row in body.splitlines() if TABLE_ROW.match(row)}
         for figure in set(MEASURED.findall(body)):
-            if any(rounds_to(text, figure) for text in texts):
+            sources = {f for text, files in by_value.items() if rounds_to(text, figure) for f in files}
+            if len(sources) == 1:
+                continue
+            if sources:
+                # Present in more than one file. Warning on this fires around fifty times --
+                # the banked equipment table alone holds five thousand parts, so almost any
+                # four-decimal figure collides with something in it -- and a rule that noisy
+                # gets ignored. It is reported on demand by --sources instead.
                 continue
             # Only if EVERY occurrence is inside a correction row. The first form of this
             # read "for rows containing the figure, the figure is in the row", which is true

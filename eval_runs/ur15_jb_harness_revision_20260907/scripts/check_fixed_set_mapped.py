@@ -110,6 +110,11 @@ def compare(names: set[str], fixed: list[str], prefix: str) -> dict:
     )
 
 
+def _without_timestamp(report: dict) -> dict:
+    """The report minus the field that changes on every run."""
+    return {key: value for key, value in report.items() if key != "observed_at"}
+
+
 def main() -> int:
     v06 = json.loads(V06.read_text())
     cells = json.loads(CELLS.read_text())
@@ -163,7 +168,15 @@ def main() -> int:
         ],
         formal_physical_validity_verdict=None,
     )
-    REPORT.write_text(json.dumps(report, indent=2, ensure_ascii=False) + "\n")
+    # Only when the finding itself changed. Stamping a fresh observed_at on every run means
+    # running the check dirties the tree, which blocked a merge and puts a spurious diff in
+    # front of whoever runs it next. A check should be free to run.
+    written = json.dumps(report, indent=2, ensure_ascii=False) + "\n"
+    if REPORT.exists() and _without_timestamp(json.loads(REPORT.read_text())) == _without_timestamp(report):
+        print(f"unchanged: {REPORT.relative_to(HERE)}")
+    else:
+        REPORT.write_text(written)
+        print(f"report: {REPORT.relative_to(HERE)}")
 
     for cell, result in results.items():
         print(
@@ -175,7 +188,6 @@ def main() -> int:
         )
     print(f"{len(unprefixed)} of {len(fixed)} fixed names carry neither bank prefix: {unprefixed}")
     print(f"every cell checks its whole duplicated set: {covers_the_build}")
-    print(f"report: {REPORT.relative_to(HERE)}")
     return 0 if covers_the_build else 1
 
 
