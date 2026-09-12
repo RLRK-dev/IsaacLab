@@ -1,5 +1,5 @@
 {
-  "observed_at": "2026-09-12T10:54:22.665838+00:00",
+  "observed_at": "2026-09-12T11:10:40.007221+00:00",
   "scope": "Re-derivation of HANDOFF_v07_ライン構成見直し §5 from committed artifacts only",
   "read_from": {
     "audit/op030_v06_equipment_ids.json": {
@@ -48,47 +48,97 @@
   },
   "division_of_labour_from_the_motion_source": {
     "anchors": {
-      "scripts/op030_split_support_motion.py": {
-        "the M4 spindle is permanent, not fetched": {
-          "needle": "\"\"\"ST A support placement with a permanent left-arm M4 spindle [m, rad, s].\"\"\"",
+      "scripts/op030_support_motion_v04.py": {
+        "the takt source authors its own sequence": {
+          "needle": "def support_sequence_v04() -> SupportSequenceV04:",
           "lines": [
-            5
+            64
           ]
         },
-        "arm 0 carries the M4 driver": {
-          "needle": "self.driver_names = {0: \"OP030A_driver_M4\"}",
+        "the yoke turns to the supply side": {
+          "needle": "seq.turn(-np.pi, f\"T{number:02d}／供給側へ旋回\")",
           "lines": [
-            32
+            76
+          ]
+        },
+        "the yoke turns back with the support held": {
+          "needle": "seq.turn(np.pi, f\"T{number:02d}／保持して組付側へ旋回\")",
+          "lines": [
+            85
           ]
         },
         "arm 1 grasps the support out of the kit": {
-          "needle": "seq.grasp(1, name, relative, 0.052,",
+          "needle": "seq.grasp(1, name, relative, seq.support_grasp_gap_m,",
           "lines": [
-            78
+            82
           ]
         },
         "the support is lifted off the grid": {
           "needle": "objects={name: offset(seq.objects[name], (0, 0, 0.40))})",
           "lines": [
-            79
+            84
           ]
         },
-        "the torso turns to the supply side": {
-          "needle": "seq.turn(-np.pi, f\"T{number:02d}／供給側へ旋回\")",
+        "the first M4 is fetched while the support is placed": {
+          "needle": "／設置と並行してM4を受取る",
           "lines": [
-            75
+            87
           ]
         },
-        "the torso turns back holding the support": {
-          "needle": "seq.turn(np.pi, f\"T{number:02d}／保持して組付側へ旋回\")",
+        "placing runs as a track beside that fetch": {
+          "needle": "seq.parallel_placements.append(track)",
           "lines": [
-            80
+            100
           ]
         },
-        "the driver has a park pose, not a stocker cell": {
+        "the placing motion is seven seconds long": {
+          "needle": "seat_stop_s=receipt.receive_start_s + 7,",
+          "lines": [
+            92
+          ]
+        },
+        "the second M4 is fetched while the right arm holds": {
+          "needle": "／右保持中に2本目を補充",
+          "lines": [
+            116
+          ]
+        },
+        "both bolts are driven with the right still holding": {
+          "needle": "／右保持のままM4",
+          "lines": [
+            119
+          ]
+        },
+        "the support is let go only after both are driven": {
+          "needle": "／2本締結・左工具退避後に支持を解放",
+          "lines": [
+            123
+          ]
+        }
+      },
+      "scripts/op030_split_support_motion.py": {
+        "the M4 tool is permanent, not fetched": {
+          "needle": "\"\"\"ST A support placement with a permanent left-arm M4 spindle [m, rad, s].\"\"\"",
+          "lines": [
+            5
+          ]
+        },
+        "arm 0 carries the M4 tool": {
+          "needle": "self.driver_names = {0: \"OP030A_driver_M4\"}",
+          "lines": [
+            32
+          ]
+        },
+        "the tool has a park pose, not a stocker cell": {
           "needle": "def driver_home(self, arm):",
           "lines": [
             38
+          ]
+        },
+        "its own sequence is the superseded one: it lets go first": {
+          "needle": "seq.release(1, f\"T{number:02d}／支持面へ移管\", gap=0.060)",
+          "lines": [
+            84
           ]
         }
       },
@@ -99,7 +149,7 @@
             179
           ]
         },
-        "the yaw is a single shared scalar": {
+        "the turn angle is a single shared scalar": {
           "needle": "self.yaw += turn",
           "lines": [
             180
@@ -121,20 +171,6 @@
     },
     "anchors_missing": [],
     "turning": {
-      "A": {
-        "source": "scripts/op030_split_support_motion.py",
-        "turn_calls": 2,
-        "calls": [
-          {
-            "line": 75,
-            "text": "seq.turn(-np.pi, f\"T{number:02d}／供給側へ旋回\")"
-          },
-          {
-            "line": 80,
-            "text": "seq.turn(np.pi, f\"T{number:02d}／保持して組付側へ旋回\")"
-          }
-        ]
-      },
       "A (v04, the takt source)": {
         "source": "scripts/op030_support_motion_v04.py",
         "turn_calls": 2,
@@ -145,6 +181,20 @@
           },
           {
             "line": 85,
+            "text": "seq.turn(np.pi, f\"T{number:02d}／保持して組付側へ旋回\")"
+          }
+        ]
+      },
+      "A (superseded base)": {
+        "source": "scripts/op030_split_support_motion.py",
+        "turn_calls": 2,
+        "calls": [
+          {
+            "line": 75,
+            "text": "seq.turn(-np.pi, f\"T{number:02d}／供給側へ旋回\")"
+          },
+          {
+            "line": 80,
             "text": "seq.turn(np.pi, f\"T{number:02d}／保持して組付側へ旋回\")"
           }
         ]
@@ -161,15 +211,16 @@
       }
     },
     "stations_that_turn": [
-      "A",
-      "A (v04, the takt source)"
+      "A (v04, the takt source)",
+      "A (superseded base)"
     ],
     "fastening_round_trip_turns": 0,
     "reading": {
       "the_M4_spindle_is_permanent": true,
       "the_right_arm_also_transports": "arm 1 grasps the support out of the withdrawn kit, lifts it 0.40 m, and is still holding it through the 180 degree turn back to the assembly side. It transports and then holds; it does not only hold.",
       "the_turn_is_shared": "phase() applies one turn_frame to both entries of self.hands and advances a single self.yaw, about the cell centre. A turn is the yoke moving, not an arm moving, so the M4 driver rides to the supply side and back on every support.",
-      "what_that_costs": "§2.6 books the 11.5 s of turning as the holding arm waiting for the fastening arm. It is neither arm waiting for the other: both are being carried. Feeder integration cannot recover it. The 31.7 s feeder round trip is a real wait and can be.",
+      "what_that_costs": "§2.6 books 43.2 s as the holding arm doing nothing but hold: 31.7 s of feeder round trips plus 11.5 s of turning. Neither part reads that way in the takt source. The turning is the yoke carrying both arms, so it is not one arm waiting for the other and feeder integration cannot recover it. Of the two round trips per support, only the second is a wait -- the first is labelled 設置と並行して and runs beside the placing track, whose motion is seven seconds inside a 16.6 s fetch. So the holding arm is placing for part of the first fetch, not waiting through it.",
+      "which_file_the_takt_came_from": "OP030_v07_刷新仕様案 §2 names op030_support_motion_v04.py. Its sequence differs from the base class in op030_split_support_motion.py, which releases the support before fastening instead of holding through it. Reading the base for A's division of labour gives the superseded answer.",
       "only_A_turns": "B and C never call turn, so the shared yaw is A's parts-supply mechanism alone."
     }
   },
@@ -439,8 +490,8 @@
     "self_interference_measurements_that_exist": 0,
     "the_two_arms_share_a_yaw_axis": true,
     "stations_that_use_it": [
-      "A",
-      "A (v04, the takt source)"
+      "A (v04, the takt source)",
+      "A (superseded base)"
     ],
     "configuration": "one column per cell, both arms on it, shoulders 465.5 mm apart at Z 1.5427, each reaching 232.7 mm back toward the station centre to work",
     "verdict": "§5.2's description of the configuration holds -- the two arms do share one column. Its evidence does not. The 5.9 mm belongs to a different pair entirely, and the present configuration's self-interference has never been measured. It also cannot be, with the probes as written, because they only ever test a mirrored copy against what is not moving. §5.3's current row therefore has no measured entry in its self-interference column, and the table's one number should come out."

@@ -76,28 +76,43 @@ DISPUTED_M = 0.0059
 # The committed motion source, which is where the arms' division of labour is actually written.
 # Each anchor is an exact line that must still be there; the check fails loudly if one moves.
 MOTION_ANCHORS = {
+    # The takt source. OP030_v07_刷新仕様案 §2 names this file, and its sequence is not the base
+    # class's: the base releases the support before fastening, this one holds through it.
+    "scripts/op030_support_motion_v04.py": {
+        "the takt source authors its own sequence": "def support_sequence_v04() -> SupportSequenceV04:",
+        "the yoke turns to the supply side": 'seq.turn(-np.pi, f"T{number:02d}／供給側へ旋回")',
+        "the yoke turns back with the support held": 'seq.turn(np.pi, f"T{number:02d}／保持して組付側へ旋回")',
+        "arm 1 grasps the support out of the kit": "seq.grasp(1, name, relative, seq.support_grasp_gap_m,",
+        "the support is lifted off the grid": "objects={name: offset(seq.objects[name], (0, 0, 0.40))})",
+        "the first M4 is fetched while the support is placed": "／設置と並行してM4を受取る",
+        "placing runs as a track beside that fetch": "seq.parallel_placements.append(track)",
+        "the placing motion is seven seconds long": "seat_stop_s=receipt.receive_start_s + 7,",
+        "the second M4 is fetched while the right arm holds": "／右保持中に2本目を補充",
+        "both bolts are driven with the right still holding": "／右保持のままM4",
+        "the support is let go only after both are driven": "／2本締結・左工具退避後に支持を解放",
+    },
+    # The base class, for what it defines rather than what it sequences.
     "scripts/op030_split_support_motion.py": {
-        "the M4 spindle is permanent, not fetched": (
+        "the M4 tool is permanent, not fetched": (
             '"""ST A support placement with a permanent left-arm M4 spindle [m, rad, s]."""'
         ),
-        "arm 0 carries the M4 driver": 'self.driver_names = {0: "OP030A_driver_M4"}',
-        "arm 1 grasps the support out of the kit": "seq.grasp(1, name, relative, 0.052,",
-        "the support is lifted off the grid": "objects={name: offset(seq.objects[name], (0, 0, 0.40))})",
-        "the torso turns to the supply side": 'seq.turn(-np.pi, f"T{number:02d}／供給側へ旋回")',
-        "the torso turns back holding the support": 'seq.turn(np.pi, f"T{number:02d}／保持して組付側へ旋回")',
-        "the driver has a park pose, not a stocker cell": "def driver_home(self, arm):",
+        "arm 0 carries the M4 tool": 'self.driver_names = {0: "OP030A_driver_M4"}',
+        "the tool has a park pose, not a stocker cell": "def driver_home(self, arm):",
+        "its own sequence is the superseded one: it lets go first": (
+            'seq.release(1, f"T{number:02d}／支持面へ移管", gap=0.060)'
+        ),
     },
     "scripts/op030_motion.py": {
         "a turn moves both hands, not one": "self.hands = [transform @ hand for hand in self.hands]",
-        "the yaw is a single shared scalar": "self.yaw += turn",
+        "the turn angle is a single shared scalar": "self.yaw += turn",
         "the turn is about the cell centre": "center = np.array([CX, CY, 0])",
         "a turn lasts six seconds": "self.phase(label, 6.0, turn=angle)",
     },
 }
 # Every station's motion source, so "only A turns" is a swept result rather than an assertion.
 STATION_SOURCES = {
-    "A": "scripts/op030_split_support_motion.py",
     "A (v04, the takt source)": "scripts/op030_support_motion_v04.py",
+    "A (superseded base)": "scripts/op030_split_support_motion.py",
     "B": "scripts/op030_split_wire_motion.py",
     "C": "scripts/op030_split_fastening_motion.py",
 }
@@ -349,9 +364,19 @@ def read_the_motion_source() -> dict:
                 " M4 driver rides to the supply side and back on every support."
             ),
             what_that_costs=(
-                "§2.6 books the 11.5 s of turning as the holding arm waiting for the fastening arm. It"
-                " is neither arm waiting for the other: both are being carried. Feeder integration"
-                " cannot recover it. The 31.7 s feeder round trip is a real wait and can be."
+                "§2.6 books 43.2 s as the holding arm doing nothing but hold: 31.7 s of feeder round"
+                " trips plus 11.5 s of turning. Neither part reads that way in the takt source. The"
+                " turning is the yoke carrying both arms, so it is not one arm waiting for the other"
+                " and feeder integration cannot recover it. Of the two round trips per support, only"
+                " the second is a wait -- the first is labelled 設置と並行して and runs beside the"
+                " placing track, whose motion is seven seconds inside a 16.6 s fetch. So the holding"
+                " arm is placing for part of the first fetch, not waiting through it."
+            ),
+            which_file_the_takt_came_from=(
+                "OP030_v07_刷新仕様案 §2 names op030_support_motion_v04.py. Its sequence differs from"
+                " the base class in op030_split_support_motion.py, which releases the support before"
+                " fastening instead of holding through it. Reading the base for A's division of labour"
+                " gives the superseded answer."
             ),
             only_A_turns=(
                 "B and C never call turn, so the shared yaw is A's parts-supply mechanism alone."
@@ -506,8 +531,9 @@ def main() -> int:
             f" {swept['left_against_right_pairs']} (of {swept['tagged_pairs_seen']} tagged pairs)"
         )
         print(f"stations whose motion turns the shared yoke: {', '.join(source['stations_that_turn'])}")
-        print(f"  the fastening round trip turns nothing ({source['fastening_round_trip_turns']} turn calls),")
-        print("  so its 31.7 s is a real wait; the 11.5 s of turning is the yoke carrying both arms")
+        print(f"  the fastening round trip turns nothing ({source['fastening_round_trip_turns']} turn calls)")
+        print("  of the two fetches per support, only the second waits on the hold; the first runs")
+        print("  beside the placing track, and the 11.5 s of turning is the yoke carrying both arms")
         print()
         for cell, row in mounting.items():
             shared = row.get("shared_column")
