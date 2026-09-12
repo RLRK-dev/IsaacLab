@@ -1,0 +1,259 @@
+{
+  "observed_at": "2026-09-12T11:17:25.285081+00:00",
+  "scope": "Whether A's supports could be fetched without the yoke turn, from committed constants",
+  "read_from": {
+    "constants": {
+      "cell_and_datum": {
+        "source": "scripts/op030_definition.py",
+        "line": 12,
+        "numbers": [
+          -0.9,
+          -1.7,
+          0.5345
+        ],
+        "text": "CX, CY, JB_Z = -0.9, -1.7, 0.5345"
+      },
+      "lift": {
+        "source": "scripts/op030_definition.py",
+        "line": 13,
+        "numbers": [
+          0.35
+        ],
+        "text": "LIFT = 0.350"
+      },
+      "terminal_x": {
+        "source": "scripts/op030_definition.py",
+        "line": 20,
+        "numbers": [
+          -0.16,
+          0.16
+        ],
+        "text": "TERMINAL_X = (-0.16, 0.16)"
+      },
+      "terminal_y": {
+        "source": "scripts/op030_definition.py",
+        "line": 21,
+        "numbers": [
+          -0.145
+        ],
+        "text": "TERMINAL_Y = -0.145"
+      },
+      "terminal_z": {
+        "source": "scripts/op030_definition.py",
+        "line": 22,
+        "numbers": [
+          0.013
+        ],
+        "text": "TERMINAL_Z = 0.013"
+      },
+      "nest": {
+        "source": "scripts/op030_geometry.py",
+        "line": 576,
+        "numbers": [
+          -2.08,
+          -1.95,
+          0.11,
+          1.0
+        ],
+        "text": "location = np.array([-2.08, -1.95 + (number - 1) * 0.11, 1.00])"
+      },
+      "kit_plate": {
+        "source": "scripts/op030_geometry.py",
+        "line": 574,
+        "numbers": [
+          0.46,
+          0.8,
+          0.01,
+          -2.02,
+          -1.7
+        ],
+        "text": "box(\"OP030_supply_kit_plate\", (0.46, 0.80, 0.010), (-2.02, -1.70,"
+      },
+      "withdrawal": {
+        "source": "scripts/op030_support_motion_v04.py",
+        "line": 71,
+        "numbers": [
+          0.34
+        ],
+        "text": "supplied[\"OP030_supply_kit\"] = pose(location=(0.34, 0, 0))"
+      },
+      "turn_seconds": {
+        "source": "scripts/op030_motion.py",
+        "line": 218,
+        "numbers": [
+          6.0
+        ],
+        "text": "self.phase(label, 6.0, turn=angle)"
+      }
+    },
+    "shoulders": "audit/op030_v07c_dual_arm_configuration.json"
+  },
+  "what_this_does_not_give": [
+    "a reachability proof: no orientation, no joint limits, no swept path",
+    "whether the arms would foul each other standing still, which is question f and unmeasured",
+    "any change to the kit's guides, its withdrawal, or how the parts are presented"
+  ],
+  "geometry": {
+    "cell_centre_xy_m": [
+      -0.9,
+      -1.7
+    ],
+    "turn_is_about_the_cell_centre": true,
+    "cell_centre_is_the_shoulder_midpoint": true,
+    "shoulders": {
+      "left": [
+        -0.8999950885772705,
+        -1.9327279329299927,
+        1.5427279472351074
+      ],
+      "right": [
+        -0.8999950885772705,
+        -1.4672720432281494,
+        1.5427279472351074
+      ]
+    },
+    "shoulders_after_a_half_turn": {
+      "left": [
+        -0.9000049114227295,
+        -1.4672720670700072,
+        1.5427279472351074
+      ],
+      "right": [
+        -0.9000049114227295,
+        -1.9327279567718505,
+        1.5427279472351074
+      ]
+    },
+    "a_half_turn_swaps_the_two_shoulders": true,
+    "nests_as_built": {
+      "T01": [
+        -2.08,
+        -1.95,
+        1.0
+      ],
+      "T02": [
+        -2.08,
+        -1.8399999999999999,
+        1.0
+      ]
+    },
+    "nests_when_presented": {
+      "T01": [
+        -1.74,
+        -1.95,
+        1.0
+      ],
+      "T02": [
+        -1.74,
+        -1.8399999999999999,
+        1.0
+      ]
+    },
+    "seats": {
+      "T01": [
+        0.16,
+        -1.555,
+        0.8975
+      ],
+      "T02": [
+        -0.16,
+        -1.555,
+        0.8975
+      ]
+    }
+  },
+  "distances": [
+    {
+      "target": "T01 nest, kit drawn out",
+      "point": [
+        -1.74,
+        -1.95,
+        1.0
+      ],
+      "from_picking_arm_standing_still_m": 1.1104900522622734,
+      "from_picking_arm_after_the_turn_m": 1.0002218239076994,
+      "from_picking_arm_if_the_nest_were_mirrored_m": 1.0002300732339615
+    },
+    {
+      "target": "T02 nest, kit drawn out",
+      "point": [
+        -1.74,
+        -1.8399999999999999,
+        1.0
+      ],
+      "from_picking_arm_standing_still_m": 1.0672806592849229,
+      "from_picking_arm_after_the_turn_m": 1.004362408451776,
+      "from_picking_arm_if_the_nest_were_mirrored_m": 1.0043706237696437
+    },
+    {
+      "target": "T01 seat, on the product",
+      "point": [
+        0.16,
+        -1.555,
+        0.8975
+      ],
+      "from_picking_arm_standing_still_m": 1.2440276870313336,
+      "from_picking_arm_after_the_turn_m": null,
+      "from_picking_arm_if_the_nest_were_mirrored_m": null
+    },
+    {
+      "target": "T02 seat, on the product",
+      "point": [
+        -0.16,
+        -1.555,
+        0.8975
+      ],
+      "from_picking_arm_standing_still_m": 0.9857017953778296,
+      "from_picking_arm_after_the_turn_m": null,
+      "from_picking_arm_if_the_nest_were_mirrored_m": null
+    }
+  ],
+  "reach": {
+    "furthest_seat_the_picking_arm_already_covers_m": 1.2440276870313336,
+    "furthest_nest_standing_still_m": 1.1104900522622734,
+    "the_nest_is_inside_the_reach_already_used": true,
+    "margin_m": 0.13353763476906022
+  },
+  "why_the_turn_then": {
+    "nests_sit_on_the_tool_arms_side": true,
+    "picking_arm_is": "right",
+    "tool_arm_is": "left",
+    "reading": "The turn is not buying distance. It swaps which arm stands where: the nests are on the tool arm's side of the centre line, and the picking arm is on the other. Standing still, the picking arm has to reach across the tool arm. Turning puts the picking arm over the nests and moves the tool arm clear.",
+    "what_would_settle_it": "question f -- whether the two arms actually foul each other. Nothing has measured it, and the probes cannot, so 'reach across' cannot yet be priced."
+  },
+  "mirroring_the_nests": {
+    "kit_plate_y_span_m": [
+      -2.1,
+      -1.2999999999999998
+    ],
+    "plate_already_reaches_the_picking_arms_side": true,
+    "mirrored_nests": {
+      "T01": [
+        -1.74,
+        -1.45,
+        1.0
+      ],
+      "T02": [
+        -1.74,
+        -1.56,
+        1.0
+      ]
+    },
+    "move_in_y_m": {
+      "T01": 0.5,
+      "T02": 0.2799999999999998
+    },
+    "distance_matches_what_the_turn_buys": true,
+    "note": "The plate is 0.80 m of Y centred on the cell centre, so both mirrored positions are on it. This is the position half of the change only: the guides, the nests' own orientation and the withdrawal direction are not examined here."
+  },
+  "what_the_turn_costs": {
+    "seconds_each": 6.0,
+    "turns_per_cycle": 4,
+    "authored_seconds_per_cycle": 24.0,
+    "bank_seconds_per_cycle": 22.919999999999998,
+    "share_of_a_bank": 0.09597989949748742,
+    "a_bank_s": 238.8
+  },
+  "answer": "Yes on distance, unsettled on interference. The picking arm already reaches 1.244 m to seat the far terminal, and the furthest nest is 1.110 m away standing still -- inside the reach it uses anyway, by 0.134 m. The turn buys position, not distance: it swaps the two shoulders so the picking arm stands over nests that sit on the tool arm's side. Standing still means reaching across the other arm, and whether that fouls is question f, which nothing has measured. The cheapest way to make the question go away is not a robot change: the supply plate already spans both sides of the centre line, and mirroring the two nests across it (T01 by 0.50 m, T02 by 0.28 m) puts them at the same distance from the un-turned picking arm that the turn currently buys. The turn is worth 22.9 s of A's 238.8 s bank.",
+  "formal_physical_validity_verdict": null
+}
