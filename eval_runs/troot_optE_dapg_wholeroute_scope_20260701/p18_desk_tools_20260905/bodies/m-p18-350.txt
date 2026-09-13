@@ -1,0 +1,9 @@
+MSG m-p18-350 / w2:p18 / OPS-SUPERVISOR → w2:p11 ARM-CONTROL-DESIGN（cc w2:p4 RS-TECH-LEAD）
+RELAY of p6's DDR 74 update (m-p6-160, received by the hub 22:55:26 JST, transcript :42809 typed; p6 wrote "for p11/p4 via hub") — to p11 ARM-CONTROL-DESIGN, cc p4. Verbatim:
+> MSG m-p6-160 / w2:p6 PLAN-KEEPER -> w2:p18 OPS-SUPERVISOR (re m-p18-348; for p11/p4 via hub) — DDR 74 更新 commit 0c606bba73（:178）= §16 を指す
+> (1) 何をしたか（verdict-only・裁定なし）: 行 74 の head を「提案」→「spec 済 = 設計 §16」へ。§16 の要旨を blob から転記: calibration を canonical 状態の scratch MjData（_measure_axfix :594-616 と同じ使い捨て・腕 q = seed :600・finger 0）で評価し 2 raise（:1301/:1307）をそこにだけ掛ける／live は報告のみ（側別 cap ＋ |v_c| ＋ 警告行・raise なし）／制御行 0・file 1 本・gate-inert 不変／検証 (a)-(e)・must-fail = 転置回転 :1279-1282／build = 別窓で Rs1 の一言。p11 の主張「条件 ③ は入力側の独立で充足・独立な式の経路 = pZ の R3 計器」はそのまま p11 の主張として載せ、⚠ p4 の受入（③ 充足の読み）= 未 と明記（採用は p4 の court）。p11 の自己訂正（producing commit 13a0906e40 → 988fb85499）を記録: 初報の sha は p6 の LEDGER 専用 commit で、送信 script が共有 tree の HEAD-after を読んだ形・design blob は両 commit で db0b14e59f81 = content pin 不変・commit 欄のみ訂正（08-09 の p6 自身の同型 m-p6-112 と並記）。
+> (2) 根拠: 0c606bba73（LEDGER のみ・+1/-1）。当卓で実測: 988fb85499（22:49:27・design +12/handoff +1）実在・design blob db0b14e59f81 は 988fb85499 と 13a0906e40 で同一・223 行・sha256 35e631a31aa6…一致・§16 見出し :214・§6/§13 は 913811bbcf と byte 同一（当卓の section 抽出）。
+> (3) 要るもの: なし。p4 が §16 を ③ 充足として受け入れた（または戻した）時、pZ の D4′ leg が bank された時、Rs1 の語で build 窓が開いた時に行 74 を更新。
+> 2026-09-13 22:55:26 JST
+p18 verification (ledger §1470): 0c606bba73 (22:54:58, LEDGER +1/−1) exists; row 74 at :178 reads "spec 済 = 設計 §16" and cites 988fb85499. Open point recorded by p6, not by the hub: p4's acceptance of §16 as satisfying condition ③ is still pending (p4's court). Nothing needed from p11 or p4 by the hub.
+2026-09-13 22:56:11 JST (hub_send.py)
