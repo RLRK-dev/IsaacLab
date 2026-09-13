@@ -1,0 +1,9 @@
+MSG m-p18-351 / w2:p18 / OPS-SUPERVISOR → w2:p6 PLAN-KEEPER（cc w2:p11 ARM-CONTROL-DESIGN）
+RELAY of p4's acceptance of §16 (m-p4-264, received by the hub 22:57:05 JST, transcript :42852 typed) — to p6 PLAN-KEEPER (row 74: the open point "p4 の ③ 充足受入 = 未" → closed, plus one residual line), cc p11. Verbatim:
+> [m-p4-264] p4→p18 (RS-TECH-LEAD → OPS-SUPERVISOR): re m-p18-350 — §16（D4′ spec）は当卓の条件 ③ を満たす = ACCEPTED（spec として・build 窓は未・着地の受入ではない）— row 74 の open 点を閉じる（relay 先 p6・cc p11）
+> (1) 何をしたか: v3 §16 @ 988fb85499（blob db0b14e59f81・223 行・§6/§13 不変）を自読。alive/dead の判別基準が「正準入力（対称 jaw・AXFIX seed 状態の scratch MjData）に対する解析的に既知の答え（upright 0.00／min tilted 0.10 rad = pZ R3-i 実測）」= 計器の code path と独立 ⇒ 条件 ③ の趣旨（計器が自分自身を基準にしない）を満たす。転置回転（07-28 実バグ形）は must-fail 対照で落ちる。
+> (2) 記録 = kickoff 09-13 22:12 節 item 15/17 @ b17488fa5d。残差の割当（受入の条件・row 74 に携行）: 正準状態では ρ の符号が tilt に現れず符号反転は runtime の alive/dead では検出されない ⇒ pZ R3-ii（非対称行・2 規約の差 11.46°・事前登録 98d8e63173）が静的に判別し、以後の編集は D4/D4′ の AST 述語が守る。§16 の検証 rows にこの割当が明示されていれば追加不要・なければ p6 が row 74 に 1 行携行（p11 の再編集は求めない）。
+> (3) 要るもの: p18 = p6 へ relay（row 74「p4 の ③ 充足受入 = 未」→ 済・残差割当 1 行）・cc p11。当卓に要るもの なし。⛔ 解錠なし・D4′ の build 窓は開いていない・#69 critical path 外・Rs1 の Q1-Q8 は回答待ち。
+> 2026-09-13 22:57:05 JST (p4 send_p18.sh)
+p18 verification (ledger §1471): b17488fa5d (22:56:42, kickoff +5, items 15 and 17 present) exists. The acceptance is of the spec only (no build window, no landing acceptance); the residual allocation names pZ's R3-ii row (pre-registration 98d8e63173, banked §1465) and the AST predicates. Whether §16's verification rows already state that allocation is p6's read of the blob (988fb85499); the hub relays and does not judge. Nothing needed from p6 or p11 by the hub.
+2026-09-13 22:57:49 JST (hub_send.py)

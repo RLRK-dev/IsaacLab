@@ -47823,3 +47823,17 @@ ALT-1 (downgrade) — not chosen (the human's word). ALT-2 (`agent prompt`) — 
 ```
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1471 — ✅ **p4 `m-p4-264`（22:57:05・当卓 transcript `:42852` type=user・typed）= **§16（D4′ spec）は条件 ③ を満たす = ACCEPTED（spec として・build 窓は未・着地の受入ではない）**・記録 kickoff 22:12 節 item 15/17 @ `b17488fa5d`（22:56:42・+5・当卓実在確認）・残差割当 = 正準状態では ρ の符号が tilt に現れない ⇒ pZ R3-ii（`98d8e63173`）が静的判別・以後の編集は AST 述語 → **m-p18-351 → p6 `:26304`・p11 `:1811` = DELIVERED**（row 74 の open 点「p4 の ③ 充足受入 = 未」→ 済は p6 の act）（当卓 2026-09-13 22:58:21 JST 実測）
+
+**契機** = p4 の message。⛔ **実行 0**。**送信 2（1 id）・Enter 2**。hub 未処理 0。
+
+- **D4′ の残り**: pZ の D4′ leg（事前登録）・Rs1 の語による build 窓・#69 critical path 外。D4 = p0 候補・未着地（Rs1 の窓 = p4 Q8）。
+- **rows（`sent_records.jsonl` 61–62 行目・逐語）**:
+
+```
+{"id": "m-p18-351", "body_sha256": "53061cf350c635185adc17b71d8aff6a573647a583915f1dd348545f80bbbac1", "head": "MSG m-p18-351 / w2:p18 / OPS-SUPERVISOR → w2:p6 PLAN-KEEPER（cc w2:p11 ARM-CONTROL-DESIGN）", "to": "PLAN-KEEPER", "to_requested": "PLAN-KEEPER", "cc": ["ARM-CONTROL-DESIGN"], "to_pane": "", "resolved_by": "label", "hub_session_id": "1c3d805c-2a9a-4b6d-bba2-ae7d479862e7", "child_session": "1", "herdr_version": "herdr 0.9.0", "control": false, "queued_on_topic": false, "row_type": "send", "pane": "w2:p6", "role": "PLAN-KEEPER", "session_id": "2dbed74a-e29c-45a7-ad8a-5c5af235885b", "transcript_path": "/home/rlrk/.claude/projects/-home-rlrk-IsaacLab/2dbed74a-e29c-45a7-ad8a-5c5af235885b.jsonl", "pre_send_offset": 93210069, "via": "Enter", "state": "DELIVERED", "status": "done", "sent_at": "2026-09-13T22:57:49.472+09:00", "composer_before_kind": "empty", "composer_before_sha256": "", "send_rc": 0, "landed_as": "[Pasted text #8 +8 lines]", "status_at_keypress": "done", "keypress_rc": 0, "enter_at": "2026-09-13T22:57:49.754+09:00", "evidence": "user@93210069+0", "fused_with": [], "head_found": true, "delivered_at": "2026-09-13T13:57:49.775Z", "line": 26304, "first_seen_at": "2026-09-13T22:57:50.309+09:00"}
+{"id": "m-p18-351", "body_sha256": "53061cf350c635185adc17b71d8aff6a573647a583915f1dd348545f80bbbac1", "head": "MSG m-p18-351 / w2:p18 / OPS-SUPERVISOR → w2:p6 PLAN-KEEPER（cc w2:p11 ARM-CONTROL-DESIGN）", "to": "PLAN-KEEPER", "to_requested": "PLAN-KEEPER", "cc": ["ARM-CONTROL-DESIGN"], "to_pane": "", "resolved_by": "label", "hub_session_id": "1c3d805c-2a9a-4b6d-bba2-ae7d479862e7", "child_session": "1", "herdr_version": "herdr 0.9.0", "control": false, "queued_on_topic": false, "row_type": "send", "pane": "w2:p11", "role": "ARM-CONTROL-DESIGN", "session_id": "18c853c1-1751-403a-a1cf-f0248a97dc2e", "transcript_path": "/home/rlrk/.claude/projects/-home-rlrk-IsaacLab/18c853c1-1751-403a-a1cf-f0248a97dc2e.jsonl", "pre_send_offset": 6432039, "via": "Enter", "state": "DELIVERED", "status": "done", "sent_at": "2026-09-13T22:57:50.310+09:00", "composer_before_kind": "empty", "composer_before_sha256": "", "send_rc": 0, "landed_as": "[Pasted text #10 +8 lines]", "status_at_keypress": "done", "keypress_rc": 0, "enter_at": "2026-09-13T22:57:50.594+09:00", "evidence": "user@6432564+0", "fused_with": [], "head_found": true, "delivered_at": "2026-09-13T13:57:50.612Z", "line": 1811, "first_seen_at": "2026-09-13T22:57:51.101+09:00"}
+```
+
+**Banked — 時刻は本節 commit の author date が正。**
