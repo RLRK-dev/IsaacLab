@@ -62,6 +62,8 @@ UMBRELLA_GOALS = {
 }
 
 FRONTMATTER_RE = re.compile(r"^---\s*\n(.*?)\n---\s*\n", re.DOTALL)
+# Node ID format defined in LTM-1 §1 (v1.3); use with fullmatch.
+LTM1_NODE_ID_RE = re.compile(r"T-[A-Za-z0-9]+(?:-[A-Za-z0-9]+)*")
 PENDING_TO_IN_PROGRESS = {"PENDING"}  # NEST has 'PENDING' but viewer enum lacks it; map to IN_PROGRESS
 
 
@@ -99,6 +101,8 @@ def _as_list(value) -> list:
 
 # Top-level keys whose value is a list (or a mapping of lists). On the fallback path their blocks are read as YAML.
 _LIST_KEYS = {"children_nodes", "dependencies"}
+# Node ID keys. On the fallback path they are read as YAML the same way, so quotes, ~ and comments read as in YAML.
+_ID_KEYS = {"node_id", "parent_node"}
 
 
 def _load_yaml_block(text: str) -> object:
@@ -113,10 +117,11 @@ def _parse_frontmatter_regex(body: str) -> dict:
     """Line-based fallback parser: top-level scalars + top-level arrays + 1-level nested arrays.
 
     Handles state.md frontmatter when YAML parse fails (typically due to embedded ': ' in values).
-    A list key (children_nodes, dependencies) is read differently: its block, from the key line up to the next line
-    that looks like a top-level ``key:``, is loaded with yaml.safe_load on its own, and if that gives a mapping that
-    holds the key, the value is used as is. The block then reads as YAML reads it alone; an anchor defined outside
-    the block or a flow list continued at column 0 can still read differently from the whole file.
+    A list key (children_nodes, dependencies) or an ID key (node_id, parent_node) is read differently: its block,
+    from the key line up to the next line that looks like a top-level ``key:``, is loaded with yaml.safe_load on its
+    own, and if that gives a mapping that holds the key, the value is used as is. The block then reads as YAML reads
+    it alone; an anchor defined outside the block or a flow list continued at column 0 can still read differently
+    from the whole file.
     Every other block uses the line reading, where nested structures beyond 1 level are skipped.
     Returns partial dict.
     """
@@ -130,7 +135,7 @@ def _parse_frontmatter_regex(body: str) -> dict:
             i += 1
             continue
         key, val = m.group(1), m.group(2).strip()
-        if key in _LIST_KEYS:
+        if key in _LIST_KEYS or key in _ID_KEYS:
             # The block runs until the next top-level key line.
             j = i + 1
             while j < len(lines) and not re.match(r"^[a-zA-Z_][\w_-]*:", lines[j]):
@@ -329,13 +334,27 @@ def _load_skiplist() -> set:
     return out
 
 
+# Reasons for a node_id / parent_node outside the LTM-1 §1 format (HARD on every node, as Rs1 (the human) decided).
+_NODE_ID_FORMAT_REASON = (
+    "does not match the LTM-1 §1 node ID format. LTM-1 §1 makes the node ID permanent, so the session responsible for"
+    " this node stops with BLOCKED_FOR_USER and tells Rs1 (the human), who chooses a rename or a revision of LTM-1 §1;"
+    " there is no exception list. Do not rename the node, blank node_id, change status, move the folder or add the"
+    " file to nest_skiplist.txt."
+)
+_PARENT_NODE_FORMAT_REASON = (
+    "does not match the LTM-1 §1 node ID format. Copy the parent node's node_id into parent_node exactly; if that"
+    " node_id is itself outside the format, stop and tell Rs1 (the human). Do not blank parent_node."
+)
+
+
 def collect_state_nodes():
     """Scan */state.md + _archive/**/state.md for the manifest §2 view (strict SSOT).
 
     Returns (rows, manual_review):
       rows: [{id, status, parent, archived}] sorted by id; status verbatim (comment-stripped, no coercion).
       manual_review: [(severity, relpath, reason)]; SOFT = regex-fallback / non-canonical status,
-      HARD = no node_id (skipped) / duplicate node_id.
+      HARD = no node_id (skipped) / duplicate node_id / node_id or parent_node outside the LTM-1 §1 format, checked
+      on the value as written (row kept).
     """
     rows, manual, seen = [], [], {}
     skip = _load_skiplist()
@@ -364,6 +383,12 @@ def collect_state_nodes():
             manual.append(("SOFT", rel, f"non-canonical status '{status}' (kept verbatim)"))
         p = fm.get("parent_node")
         parent = str(p).strip() if p not in (None, "", "null") else "—"
+        for field, value, reason in (
+            ("node_id", str(fm.get("node_id")), _NODE_ID_FORMAT_REASON),
+            ("parent_node", str(p), _PARENT_NODE_FORMAT_REASON),
+        ):
+            if (field == "node_id" or parent != "—") and not LTM1_NODE_ID_RE.fullmatch(value):
+                manual.append(("HARD", rel, f"{field} {value!r} {reason}"))
         rows.append({"id": nid, "status": status or "(missing)", "parent": parent, "archived": archived})
     rows.sort(key=lambda r: r["id"])
     return rows, manual
@@ -433,7 +458,8 @@ def emit_manifest_section() -> int:
     """Regenerate manifest §2 GEN region (TERSE id|status|parent) from state.md. Strict SSOT emit.
 
     Exit: 0 clean / 2 soft review items (regex-fallback or non-canonical status; emit usable) /
-    1 hard error (unregistered no-node_id skip / duplicate id / GEN markers missing).
+    1 hard error (unregistered no-node_id skip / duplicate id / node_id or parent_node outside the LTM-1 §1 format /
+    GEN markers missing). With a HARD data issue the region is still written before returning 1.
     """
     lockpath = MANIFEST.parent / ".manifest_gen.lock"
     with open(lockpath, "w") as lock:
@@ -452,9 +478,9 @@ def check_manifest_section() -> int:
     """C3 helper: compare the current manifest §2 GEN region to the generator recompute. No write.
 
     Exit: 0 = in sync (SOFT review items allowed) / 1 = drift, GEN markers missing, or HARD data
-    issue (unregistered no-node_id file / duplicate node_id). HARD grading mirrors emit so the
-    automatic V9→layer-7 path cannot stay green while emit would refuse (M6 CC3-1 fix): checker
-    and emitter previously skipped identically, silently dropping e.g. a duplicated node's row.
+    issue (unregistered no-node_id file / duplicate node_id / node_id or parent_node outside the LTM-1 §1 format).
+    HARD grading mirrors emit so the automatic V9→layer-7 path cannot stay green while emit would refuse (M6 CC3-1
+    fix): checker and emitter previously skipped identically, silently dropping e.g. a duplicated node's row.
     """
     region, rows, manual = _build_manifest_region()
     hard = [m for m in manual if m[0] == "HARD"]
