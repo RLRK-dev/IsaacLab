@@ -1,0 +1,84 @@
+{
+  "revision": "v01",
+  "reference_product": "Ampere EV HVJB-5-400",
+  "status": "proposed_connection_group_allocation_not_manufacturing_process_or_hardware_acceptance",
+  "scope_ja": "内部組付けを担う3STの再配分案。公開回路の接続群を整理したもので、完全な製造BOM・物理配線図ではない。",
+  "user_direction": {
+    "continuous_finger_retention_through_fastening": true,
+    "upper_retainer": "withdrawn",
+    "parallel_stations_for_separate_workpieces": 3,
+    "hand_definition_before_arm_motion": true,
+    "preserve_simultaneous_different_size_fastening_requirement": true
+  },
+  "sources": {
+    "pdf": "references/op040_real_products_20260912/ampere_hvjb_5_400_current_v1_1.pdf",
+    "pdf_url": "https://help.ampereev.com/hc/en-us/article_attachments/31292430639639",
+    "pdf_sha256": "643648bcea77b4d7c37c65d073664f746f68689952da2d5ce932e3d10bd5a9e1",
+    "support_url": "https://help.ampereev.com/hc/en-us/articles/31292470232087-High-Voltage-Junction-Box-HVJB-5-400",
+    "photo": "references/op040_real_products_20260912/ampere_product_photo_1.jpg",
+    "photo_sha256": "5724681b4bef4399f0799751a62577e48ef9b7fd3d6ed5b56d85fd95924937ad",
+    "prior_workflow": "data/hand_held_fastening_v01.json"
+  },
+  "station_candidates": [
+    {
+      "id": "A",
+      "label_ja": "部品本体の設置・機械固定",
+      "role_ja": "接触器、リレー、抵抗、ヒューズ保持部、接続口などの本体を設置して機械固定する候補。実際の入荷単位と固定方法は未確定。",
+      "holding_ja": "部品を専用輪郭のフィンガで保持し、別腕の直付け工具で固定する比較を基準にする。",
+      "arms_ja": "保持1腕＋工具1腕を基準。単純な差込みなど別保持が不要な作業は単腕の対象として分ける。",
+      "hands_ja": "2F専用輪郭を基準に部品別に先端を分ける。3点位置決めが必要な剛体だけ3Fを比較する。工具腕はフィンガを外す。",
+      "outgoing_ja": "担当した部品本体の固定を終えてから搬送する案。後工程で配線を重ねる電気接続のねじを、機械固定と混同しない。",
+      "not_included_ja": "バスバーや端末を未固定で載せたまま渡す作業は置かない。電気接続と共締めになる部材は、その接続を終えるSTへまとめる。"
+    },
+    {
+      "id": "B",
+      "label_ja": "主回路・プリチャージ・放電の接続",
+      "role_ja": "EC01〜EC03の導体と端末を供給し、設置・フィンガ保持・締結を同じ作業位置で行う候補。",
+      "holding_ja": "柔軟配線の両端保持には2腕を比較の基準とする。板状バスバーをケーブルの曲げ工程へ含めない。",
+      "arms_ja": "保持2腕＋ST取付け締付軸2系統の比較。工具の位置決め機構と、どの締結点を同時に扱うかは未選定。",
+      "hands_ja": "端末側縁を扱う2Fを基準。剛体バスバーは縁用の別先端、被覆は対応径の丸底溝を比較する。",
+      "outgoing_ja": "B担当の接続を締結してから指を開き、両腕を同時に上昇させて搬送する案。C担当の未着手配線はCで供給する。",
+      "not_included_ja": "仮締めトルクを発明して搬送可能とする手順や、旧H03のS字・旧M6/M14を実物へ転用する指定は置かない。"
+    },
+    {
+      "id": "C",
+      "label_ja": "補機5系統・低圧制御・HVILの接続",
+      "role_ja": "EC04〜EC13を接続方法ごとに設置し、保持した位置で締結または差込みを完了する候補。検査だけのSTには置き換えない。",
+      "holding_ja": "ねじ接続と差込接続を分ける。接続先が固定され、一端を操作すれば完結する作業では単腕を比較する。",
+      "arms_ja": "単腕で完結する接続を抽出する段階。両端の同時保持が必要なら双腕候補として残す。C全体の腕数は未確定。",
+      "hands_ja": "丸端子用2F、小型差込端末用ポケットを使い分ける。独立保持・部分開放が必要な手に限り3F/4Fを比較する。",
+      "outgoing_ja": "C担当の接続完了後に手を離す案。未接続の自由端を残した状態が完成品と見える表現はしない。後続の蓋・試験等は別途対応付ける。",
+      "not_included_ja": "Cを単腕と確定したり、大小同時締結を単軸逐次へ変更したりしない。両保持点と工具2系統を同時に使う接続は別に照合する。"
+    }
+  ],
+  "connection_groups": [
+    {"id": "EC01", "station_candidate": "B", "name_ja": "主電力経路", "public_basis_ja": "主2口・主ヒューズ・主接触器を含む回路。主端子AがHV+、BがHV−と記載。", "pages": [1, 2, 3], "lv_pins": [], "assembly_ja": "バスバーと端末の接続単位を分け、同じ締結点の部材をそろえて保持・締結する。", "unknown_ja": "各導体の分割、ねじ点、重なり、絶縁支持と接続口内部の構造。", "physical_cable_count": null, "fastener_count": null},
+    {"id": "EC02", "station_candidate": "B", "name_ja": "プリチャージの電力側", "public_basis_ja": "プリチャージリレーと抵抗を含む枝路。制御線はEC10で区別。", "pages": [1, 2], "lv_pins": [], "assembly_ja": "主回路への接続を含めて一つの接続群として仮に割り付ける。", "unknown_ja": "リレー・抵抗の端末方式、共締め、供給サブアセンブリ。", "physical_cable_count": null, "fastener_count": null},
+    {"id": "EC03", "station_candidate": "B", "name_ja": "放電の電力側", "public_basis_ja": "放電リレーと抵抗を含む枝路。制御線はEC11で区別。", "pages": [1, 2], "lv_pins": [], "assembly_ja": "主回路への接続と部品間接続を、保持した位置で完了する候補。", "unknown_ja": "端末方式、枝路の物理配線・共締めと入荷単位。", "physical_cable_count": null, "fastener_count": null},
+    {"id": "EC04", "station_candidate": "C", "name_ja": "補機：Heater 1", "public_basis_ja": "20Aヒューズを含む補機系統。補機端子は1がHV+、2がHV−。", "pages": [1, 2, 3], "lv_pins": [], "assembly_ja": "対象系統の正負両側の接続方法を確認して、設置から締結・差込みまで扱う。", "unknown_ja": "内部線本数・端末品番・共締め・入荷単位。", "physical_cable_count": null, "fastener_count": null},
+    {"id": "EC05", "station_candidate": "C", "name_ja": "補機：AC", "public_basis_ja": "30Aヒューズを含む補機系統。", "pages": [1, 2, 3], "lv_pins": [], "assembly_ja": "正負の接続を一群として管理。図の2本の線を供給ケーブル2本と確定しない。", "unknown_ja": "内部線本数・端末品番・共締め・入荷単位。", "physical_cable_count": null, "fastener_count": null},
+    {"id": "EC06", "station_candidate": "C", "name_ja": "補機：Heater 2", "public_basis_ja": "20Aヒューズを含む補機系統。", "pages": [1, 2, 3], "lv_pins": [], "assembly_ja": "担当する端末を保持したまま接続を完了する。", "unknown_ja": "内部線本数・端末品番・共締め・入荷単位。", "physical_cable_count": null, "fastener_count": null},
+    {"id": "EC07", "station_candidate": "C", "name_ja": "補機：Charger", "public_basis_ja": "30Aヒューズを含む補機系統。", "pages": [1, 2, 3], "lv_pins": [], "assembly_ja": "担当する端末を保持したまま接続を完了する。", "unknown_ja": "内部線本数・端末品番・共締め・入荷単位。", "physical_cable_count": null, "fastener_count": null},
+    {"id": "EC08", "station_candidate": "C", "name_ja": "補機：DC-DC", "public_basis_ja": "10Aヒューズを含む補機系統。", "pages": [1, 2, 3], "lv_pins": [], "assembly_ja": "担当する端末を保持したまま接続を完了する。", "unknown_ja": "内部線本数・端末品番・共締め・入荷単位。", "physical_cable_count": null, "fastener_count": null},
+    {"id": "EC09", "station_candidate": "C", "name_ja": "低圧：接触器駆動", "public_basis_ja": "LVの2番はContactor 12V、8番はContactor Ground。", "pages": [4], "lv_pins": [2, 8], "assembly_ja": "接触器側とLV側の端末方式を区別して接続する。", "unknown_ja": "LVの圧着・端子挿入を前工程で済ませるか、内部ハーネス構成。", "physical_cable_count": null, "fastener_count": null},
+    {"id": "EC10", "station_candidate": "C", "name_ja": "低圧：プリチャージリレー駆動", "public_basis_ja": "LVの3番はリレー12V、9番はリレーGround。", "pages": [4], "lv_pins": [3, 9], "assembly_ja": "EC02の電力側とは異なる接続作業として管理する。", "unknown_ja": "差込端末・ロック方式、電力側と共通の入荷ハーネスか。", "physical_cable_count": null, "fastener_count": null},
+    {"id": "EC11", "station_candidate": "C", "name_ja": "低圧：放電リレー駆動", "public_basis_ja": "LVの4番はリレー12V、10番はリレーGround。", "pages": [4], "lv_pins": [4, 10], "assembly_ja": "EC03の電力側とは異なる接続作業として管理する。", "unknown_ja": "差込端末・ロック方式、電力側と共通の入荷ハーネスか。", "physical_cable_count": null, "fastener_count": null},
+    {"id": "EC12", "station_candidate": "C", "name_ja": "低圧：接触器フィードバック", "public_basis_ja": "LVの1番と7番がContactor Feedbackと記載。", "pages": [4], "lv_pins": [1, 7], "assembly_ja": "機能が同名の2ピンとして対応付ける。1番と7番を短絡する配線指示ではない。", "unknown_ja": "接触器側の端末・内部経路・型式。", "physical_cable_count": null, "fastener_count": null},
+    {"id": "EC13", "station_candidate": "C", "name_ja": "HVIL", "public_basis_ja": "LVの5番がHVIL In、11番がHVIL Out。公式記事は各接続口へのHVIL内蔵を記載。", "pages": [4], "lv_pins": [5, 11], "assembly_ja": "HV電力線と区別して扱う。内部の接続順序を写真だけから発明しない。", "unknown_ja": "内部の接続順・端末構造・LVを含む入荷ハーネスの単位。", "physical_cable_count": null, "fastener_count": null}
+  ],
+  "lv_reserved_pins": [6, 12],
+  "allocation_boundaries_ja": [
+    "ECは今回の説明用接続群ID。群数はケーブル本数、締結点数、タクトを表さない。",
+    "同じねじで固定されるバスバー・端子・座金の組合せを、未固定のまま別STへ分けない。共締めの実体が判明したら群をまとめ直す。",
+    "主回路と補機が回路図上で同じ電位でも、同じボルトで共締めされるとは限らない。物理的な接続点の照合が別途必要。",
+    "一体ハーネスを複数STにまたがって接続する場合の未接続端の保持は未解決。入荷単位の確認により群の割付を変更する。",
+    "筐体搬入、切断・圧着等の準備、蓋、電気・気密等の試験、完成品搬出を省略した意味ではない。前後工程または入荷済み範囲を別途対応付ける。",
+    "工程の同時稼働は別ワークを扱う意味。公開資料には所要時間・工場のST割付が無く、均等負荷やタクト短縮値は計算しない。"
+  ],
+  "joint_stack_membership": null,
+  "all_floating_ends_eliminated_verified": false,
+  "station_arm_counts_selected": false,
+  "arm_motion_created": false,
+  "video_created": false,
+  "physical_acceptance_verdict": null
+}

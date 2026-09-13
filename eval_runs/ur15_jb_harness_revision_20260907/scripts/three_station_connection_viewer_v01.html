@@ -1,0 +1,104 @@
+<!doctype html>
+<!-- Copyright (c) 2022-2026, The Isaac Lab Project Developers. SPDX-License-Identifier: BSD-3-Clause -->
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>3STの接続群分担案 | THREAD</title>
+  <style>
+    :root{color-scheme:light;--ink:#17364a;--muted:#536b7b;--blue:#256a91;--line:#d6e1e8}
+    *{box-sizing:border-box}body{margin:0;background:#f3f6f8;color:var(--ink);font:16px/1.8 system-ui,"Noto Sans CJK JP",sans-serif}
+    main{max-width:1180px;padding:30px 24px 50px;margin:auto}h1{font-size:30px;line-height:1.5;margin:8px 0 12px}h2{font-size:22px;margin:0 0 12px}h3{font-size:18px;margin:0 0 8px}p{margin:8px 0 14px}
+    a{color:#1e6188;overflow-wrap:anywhere}section{padding:24px;background:white;border:1px solid var(--line);border-radius:10px;margin-top:24px}.note,.eyebrow,footer{font-size:14px;color:var(--muted)}
+    .direction{background:#e5f0f5;border-left:4px solid var(--blue);padding:14px 18px}.direction p{margin:0}
+    #stations{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}button{font:inherit;cursor:pointer;color:var(--ink);background:#f7fafc;border:1px solid #b2c9d7;border-radius:7px;padding:16px;text-align:left}button:focus-visible{outline:3px solid #d58b36;outline-offset:3px}
+    button[aria-pressed="true"]{background:var(--blue);color:white}#stations strong{display:block;font-size:20px}#stations span{display:block}.workpiece{font-size:13px;margin-top:10px;opacity:.9}
+    #station-detail{margin-top:20px;border-top:1px solid var(--line);padding-top:20px}.details{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:18px}.detail-card{border:1px solid var(--line);border-radius:7px;padding:16px}.detail-card p{margin:0}
+    .outgoing{background:#edf5ef;padding:16px;border-radius:7px;margin-top:16px}.outgoing p{margin:0}.joint-note{border-left:4px solid #bb8633;background:#fff7e8;padding:13px 17px;margin-top:14px}
+    #groups{display:grid;gap:12px;margin-top:18px}.group{border:1px solid var(--line);border-radius:7px;padding:16px}.group-title{display:flex;gap:12px;align-items:baseline;flex-wrap:wrap}.tag{font-size:13px;color:var(--blue);font-weight:700}.group p:last-child{margin-bottom:0}
+    .references{display:grid;grid-template-columns:1fr 1.2fr;gap:20px;align-items:start}.references img{display:block;width:100%;height:auto;border:1px solid var(--line);border-radius:6px}.references figure{margin:0}.references figcaption{font-size:13px;color:var(--muted);margin-top:8px}.links{display:flex;flex-wrap:wrap;gap:12px;margin-top:16px}ul{padding-left:24px}li{margin:8px 0}footer{margin-top:24px}
+    @media(max-width:760px){main{padding:20px 13px}h1{font-size:25px}section{padding:16px}#stations{grid-template-columns:1fr}#stations button{padding:12px}.workpiece{margin-top:3px}.details,.references{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+<main>
+  <header>
+    <div class="eyebrow">THREAD / Ampere EV HVJB-5-400 公開資料との対応 / v0.1 / 2026-09-13</div>
+    <h1>担当する配線を、そのSTで接続まで終える</h1>
+    <p>上押さえを使わず、フィンガで保持したまま締結する方向に合わせた、内部組付け3STの分担案です。</p>
+    <div class="direction"><p><strong>Aは部品本体の固定、Bは主回路側、Cは補機・制御側。</strong><br>BとCがそれぞれ担当配線を供給し、設置から接続完了まで行います。</p></div>
+    <p class="note">公開回路をもとにした候補割付です。実物の共締め・一体ハーネスの単位によりB/Cの境界を調整します。</p>
+  </header>
+  <section>
+    <h2>3STは、別々のワークを並行して処理する</h2>
+    <p class="note">STを選ぶと、担当接続とハンドの役割を表示します。ワーク番号は同時稼働の説明例で、処理時間や送り間隔を示しません。</p>
+    <div id="stations"></div>
+    <div id="station-detail" aria-live="polite">
+      <h3 id="station-title"></h3><p id="station-role"></p>
+      <div class="details">
+        <div class="detail-card"><h3>保持する役割</h3><p id="holding"></p></div>
+        <div class="detail-card"><h3>腕と工具の候補</h3><p id="arms"></p></div>
+        <div class="detail-card"><h3>指構成・先端の比較</h3><p id="hands"></p></div>
+        <div class="detail-card"><h3>担当を分ける際の注意</h3><p id="not-included"></p></div>
+      </div>
+      <div class="outgoing"><h3>次へ渡す前の動作案</h3><p id="outgoing"></p></div>
+      <div class="joint-note">大小を同時に締結する要求と、締結後の保持用両腕の同時上昇を引き継ぎます。締付軸2系統の位置・型式や、各STの最終腕数は未選定です。</div>
+      <p id="group-note" class="note"></p><div id="groups"></div>
+    </div>
+  </section>
+  <section>
+    <h2>実物との対応を確認した公開資料</h2>
+    <div class="references">
+      <figure><a href="references/op040_real_products_20260912/ampere_product_photo_1.jpg"><img src="references/op040_real_products_20260912/ampere_product_photo_1.jpg" alt="Ampere EVが公開しているHVJB-5-400の製品写真"></a><figcaption>メーカーの製品写真。今回のST割付やハンドを描いた画像ではありません。</figcaption></figure>
+      <figure><a href="images/ampere_reference-2.png"><img src="images/ampere_reference-2.png" alt="公式データシート2ページの外形図と電気回路図"></a><figcaption>公式PDF 2ページ：外形・回路図。クリックで拡大。回路上の同電位点が同じ物理ボルトとは限りません。</figcaption></figure>
+    </div>
+    <div class="links"><a href="images/ampere_reference-3.png">3ページ：HV端子図</a><a href="images/ampere_reference-4.png">4ページ：LV 12極の端子図</a><a href="references/op040_real_products_20260912/ampere_hvjb_5_400_current_v1_1.pdf">保存した公式PDF全文</a></div>
+    <p class="note">LVの6・12番はReserved。EC01〜EC13は今回の説明用IDで、ケーブル本数や締結点数ではありません。</p>
+    <p class="note"><a href="https://help.ampereev.com/hc/en-us/articles/31292470232087-High-Voltage-Junction-Box-HVJB-5-400">公式サポート記事</a> ／ <a href="https://help.ampereev.com/hc/en-us/article_attachments/31292430639639">公式PDF配布元</a> ／ <a href="https://ampereev.com/wp-content/uploads/2022/05/DSC02860-1.jpg">製品写真の出典</a></p>
+  </section>
+  <section>
+    <h2>工程の境界に残る確認事項</h2><ul id="boundaries"></ul>
+    <p>同じねじで固定される部材は、同じSTでそろえて締結します。どの部材が共締めされるか未公開のため、この割付で未接続端の搬送をすべて解消できたとは未確認です。</p>
+  </section>
+  <footer>
+    <p><a href="3ST接続群分担_v01.md">分担案の全文</a> ／ <a href="data/three_station_connection_groups_v01.json">接続群と根拠の一覧</a> ／ <a href="audit/three_station_connection_build_v01.json">生成記録</a></p>
+    <p>本資料はハンドの役割を整理する比較資料です。指先の実物適合・保持力・締結品質やアーム軌道を実証したものではありません。</p>
+  </footer>
+</main>
+<script>
+const data=__REVIEW_DATA__;
+const byId=id=>document.getElementById(id);
+function paragraph(value,className=''){
+  const node=document.createElement('p');node.textContent=value;node.className=className;return node;
+}
+function selectStation(id){
+  const station=data.station_candidates.find(item=>item.id===id);
+  document.querySelectorAll('#stations button').forEach(button=>button.setAttribute('aria-pressed',String(button.dataset.station===id)));
+  byId('station-title').textContent=`ST ${id}｜${station.label_ja}`;
+  for(const [element,key] of [['station-role','role_ja'],['holding','holding_ja'],['arms','arms_ja'],['hands','hands_ja'],['outgoing','outgoing_ja'],['not-included','not_included_ja']])byId(element).textContent=station[key];
+  const groups=data.connection_groups.filter(group=>group.station_candidate===id);
+  byId('groups').replaceChildren();
+  byId('group-note').textContent=id==='A'?'Aは部品本体の機械固定を担当する候補です。電気接続の群数から部品の個数を導出していません。':`${groups.length}つの説明用接続群。群数は作業量・配線本数・ねじ点数を表しません。`;
+  for(const group of groups){
+    const card=document.createElement('article');card.className='group';card.dataset.group=group.id;
+    const heading=document.createElement('div');heading.className='group-title';
+    const tag=document.createElement('span');tag.className='tag';tag.textContent=group.id;
+    const title=document.createElement('h3');title.textContent=group.name_ja;heading.append(tag,title);
+    const pages=group.pages.join('・');
+    card.append(heading,paragraph(`公開資料：${group.public_basis_ja}［PDF ${pages}ページ］`),paragraph(`作業案：${group.assembly_ja}`),paragraph(`未確認：${group.unknown_ja}`,'note'));
+    byId('groups').append(card);
+  }
+  window.reviewState={station:id,groups:groups.map(group=>group.id)};
+}
+data.station_candidates.forEach((station,index)=>{
+  const button=document.createElement('button');button.type='button';button.dataset.station=station.id;
+  const title=document.createElement('strong');title.textContent=`ST ${station.id}`;
+  const role=document.createElement('span');role.textContent=station.label_ja;
+  const workpiece=document.createElement('span');workpiece.className='workpiece';workpiece.textContent=`同時点の例：ワーク ${3-index}`;
+  button.append(title,role,workpiece);button.onclick=()=>selectStation(station.id);byId('stations').append(button);
+});
+data.allocation_boundaries_ja.forEach(value=>{const item=document.createElement('li');item.textContent=value;byId('boundaries').append(item);});
+selectStation('A');
+</script>
+</body>
+</html>

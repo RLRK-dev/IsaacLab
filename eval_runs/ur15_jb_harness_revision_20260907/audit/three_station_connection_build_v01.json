@@ -1,0 +1,56 @@
+{
+  "observed_at": "2026-09-13T12:32:14.622000+09:00",
+  "input_sha256": {
+    "data/three_station_connection_groups_v01.json": "c6a74d692190d334a55dea2682da1abac3ec15ad693f5d948341cbff4caeda65",
+    "scripts/three_station_connection_viewer_v01.html": "512d084bf099ee1cda1f97f3601e5a43c89680ac9a969f7fe14e79891d484f06",
+    "analysis/three_station_connection_groups_v01.md": "ba5c592ce18b30db001a1cdedf0c7466206ece63ea6583d359fbaf1b2f3f7834",
+    "scripts/build_three_station_connection_review_v01.py": "6155f51256450e58cda1d92e290cb46b71a63ffd7054bb81a35d7cc0898b6eb1",
+    "scripts/build_hand_function_review_v01.py": "137066f2436d9fd59d60218a522ea45e2a253678822395704b7649d584b1d240",
+    "references/op040_real_products_20260912/ampere_hvjb_5_400_current_v1_1.pdf": "643648bcea77b4d7c37c65d073664f746f68689952da2d5ce932e3d10bd5a9e1",
+    "references/op040_real_products_20260912/ampere_product_photo_1.jpg": "5724681b4bef4399f0799751a62577e48ef9b7fd3d6ed5b56d85fd95924937ad",
+    "data/hand_held_fastening_v01.json": "39eff583dabab2b3bd24033aa1ec1fdd93cfee5bbb5aaccfd337a80a2de3801d"
+  },
+  "inputs_unchanged": true,
+  "page_sha256": "37bd069dd081943cfb03e0a0ce9b3dfe658fceb8edbe3e1ce60cc900957ed236",
+  "reference_image_sha256": {
+    "images/ampere_reference-2.png": "fff6ee7a09f9acf5e3644c957fbbc2057fd7b44b3a46d13b293c8b70cc2a83ec",
+    "images/ampere_reference-3.png": "4d1bbd4c8f772a1a4d18ccaefff7ad05fb85a0d74b2c6783a8c9396980994645",
+    "images/ampere_reference-4.png": "0384d035b9f06690744ea0dad50bc52d916f486e4101f876e968236a76db1e84"
+  },
+  "pdf_render_stdout": "",
+  "pdf_render_stderr": "",
+  "document_checks": {
+    "station_candidates": [
+      "A",
+      "B",
+      "C"
+    ],
+    "explanation_group_counts": {
+      "B": 3,
+      "C": 10
+    },
+    "lv_function_pins": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      7,
+      8,
+      9,
+      10,
+      11
+    ],
+    "lv_reserved_pins": [
+      6,
+      12
+    ],
+    "physical_cable_and_fastener_counts_unknown": true,
+    "scope": "document transcription and identifier checks only"
+  },
+  "station_allocation_is_proposed": true,
+  "scene_loaded": false,
+  "arm_motion_created": false,
+  "video_created": false,
+  "physical_acceptance_verdict": null
+}

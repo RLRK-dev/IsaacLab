@@ -1,0 +1,197 @@
+{
+  "observed_at": "2026-09-13T12:34:19.092300+09:00",
+  "page_sha256": "37bd069dd081943cfb03e0a0ce9b3dfe658fceb8edbe3e1ce60cc900957ed236",
+  "scope": "Browser allocation-tab events, images and layout; not physical or electrical validation",
+  "reports": {
+    "desktop": {
+      "rows": [
+        {
+          "requested": "A",
+          "state": {
+            "station": "A",
+            "groups": []
+          },
+          "selectedCount": 1,
+          "title": "ST A｜部品本体の設置・機械固定",
+          "role": "接触器、リレー、抵抗、ヒューズ保持部、接続口などの本体を設置して機械固定する候補。実際の入荷単位と固定方法は未確定。",
+          "arms": "保持1腕＋工具1腕を基準。単純な差込みなど別保持が不要な作業は単腕の対象として分ける。",
+          "outgoing": "担当した部品本体の固定を終えてから搬送する案。後工程で配線を重ねる電気接続のねじを、機械固定と混同しない。",
+          "groupIds": []
+        },
+        {
+          "requested": "B",
+          "state": {
+            "station": "B",
+            "groups": [
+              "EC01",
+              "EC02",
+              "EC03"
+            ]
+          },
+          "selectedCount": 1,
+          "title": "ST B｜主回路・プリチャージ・放電の接続",
+          "role": "EC01〜EC03の導体と端末を供給し、設置・フィンガ保持・締結を同じ作業位置で行う候補。",
+          "arms": "保持2腕＋ST取付け締付軸2系統の比較。工具の位置決め機構と、どの締結点を同時に扱うかは未選定。",
+          "outgoing": "B担当の接続を締結してから指を開き、両腕を同時に上昇させて搬送する案。C担当の未着手配線はCで供給する。",
+          "groupIds": [
+            "EC01",
+            "EC02",
+            "EC03"
+          ]
+        },
+        {
+          "requested": "C",
+          "state": {
+            "station": "C",
+            "groups": [
+              "EC04",
+              "EC05",
+              "EC06",
+              "EC07",
+              "EC08",
+              "EC09",
+              "EC10",
+              "EC11",
+              "EC12",
+              "EC13"
+            ]
+          },
+          "selectedCount": 1,
+          "title": "ST C｜補機5系統・低圧制御・HVILの接続",
+          "role": "EC04〜EC13を接続方法ごとに設置し、保持した位置で締結または差込みを完了する候補。検査だけのSTには置き換えない。",
+          "arms": "単腕で完結する接続を抽出する段階。両端の同時保持が必要なら双腕候補として残す。C全体の腕数は未確定。",
+          "outgoing": "C担当の接続完了後に手を離す案。未接続の自由端を残した状態が完成品と見える表現はしない。後続の蓋・試験等は別途対応付ける。",
+          "groupIds": [
+            "EC04",
+            "EC05",
+            "EC06",
+            "EC07",
+            "EC08",
+            "EC09",
+            "EC10",
+            "EC11",
+            "EC12",
+            "EC13"
+          ]
+        }
+      ],
+      "viewport": 1440,
+      "scrollWidth": 1425,
+      "images": [
+        {
+          "source": "references/op040_real_products_20260912/ampere_product_photo_1.jpg",
+          "width": 1620,
+          "height": 1080
+        },
+        {
+          "source": "images/ampere_reference-2.png",
+          "width": 1700,
+          "height": 2200
+        }
+      ],
+      "boundaries": 6
+    },
+    "mobile": {
+      "rows": [
+        {
+          "requested": "A",
+          "state": {
+            "station": "A",
+            "groups": []
+          },
+          "selectedCount": 1,
+          "title": "ST A｜部品本体の設置・機械固定",
+          "role": "接触器、リレー、抵抗、ヒューズ保持部、接続口などの本体を設置して機械固定する候補。実際の入荷単位と固定方法は未確定。",
+          "arms": "保持1腕＋工具1腕を基準。単純な差込みなど別保持が不要な作業は単腕の対象として分ける。",
+          "outgoing": "担当した部品本体の固定を終えてから搬送する案。後工程で配線を重ねる電気接続のねじを、機械固定と混同しない。",
+          "groupIds": []
+        },
+        {
+          "requested": "B",
+          "state": {
+            "station": "B",
+            "groups": [
+              "EC01",
+              "EC02",
+              "EC03"
+            ]
+          },
+          "selectedCount": 1,
+          "title": "ST B｜主回路・プリチャージ・放電の接続",
+          "role": "EC01〜EC03の導体と端末を供給し、設置・フィンガ保持・締結を同じ作業位置で行う候補。",
+          "arms": "保持2腕＋ST取付け締付軸2系統の比較。工具の位置決め機構と、どの締結点を同時に扱うかは未選定。",
+          "outgoing": "B担当の接続を締結してから指を開き、両腕を同時に上昇させて搬送する案。C担当の未着手配線はCで供給する。",
+          "groupIds": [
+            "EC01",
+            "EC02",
+            "EC03"
+          ]
+        },
+        {
+          "requested": "C",
+          "state": {
+            "station": "C",
+            "groups": [
+              "EC04",
+              "EC05",
+              "EC06",
+              "EC07",
+              "EC08",
+              "EC09",
+              "EC10",
+              "EC11",
+              "EC12",
+              "EC13"
+            ]
+          },
+          "selectedCount": 1,
+          "title": "ST C｜補機5系統・低圧制御・HVILの接続",
+          "role": "EC04〜EC13を接続方法ごとに設置し、保持した位置で締結または差込みを完了する候補。検査だけのSTには置き換えない。",
+          "arms": "単腕で完結する接続を抽出する段階。両端の同時保持が必要なら双腕候補として残す。C全体の腕数は未確定。",
+          "outgoing": "C担当の接続完了後に手を離す案。未接続の自由端を残した状態が完成品と見える表現はしない。後続の蓋・試験等は別途対応付ける。",
+          "groupIds": [
+            "EC04",
+            "EC05",
+            "EC06",
+            "EC07",
+            "EC08",
+            "EC09",
+            "EC10",
+            "EC11",
+            "EC12",
+            "EC13"
+          ]
+        }
+      ],
+      "viewport": 500,
+      "scrollWidth": 485,
+      "images": [
+        {
+          "source": "references/op040_real_products_20260912/ampere_product_photo_1.jpg",
+          "width": 1620,
+          "height": 1080
+        },
+        {
+          "source": "images/ampere_reference-2.png",
+          "width": 1700,
+          "height": 2200
+        }
+      ],
+      "boundaries": 6
+    }
+  },
+  "local_html_paths_exist": [
+    "3ST接続群分担_v01.md",
+    "audit/three_station_connection_build_v01.json",
+    "data/three_station_connection_groups_v01.json",
+    "images/ampere_reference-2.png",
+    "images/ampere_reference-3.png",
+    "images/ampere_reference-4.png",
+    "references/op040_real_products_20260912/ampere_hvjb_5_400_current_v1_1.pdf",
+    "references/op040_real_products_20260912/ampere_product_photo_1.jpg"
+  ],
+  "fresh_pdf_matches_saved_pdf": true,
+  "fresh_pdf_url": "https://help.ampereev.com/hc/en-us/article_attachments/31292430639639",
+  "fresh_pdf_sha256": "643648bcea77b4d7c37c65d073664f746f68689952da2d5ce932e3d10bd5a9e1",
+  "physical_acceptance_verdict": null
+}

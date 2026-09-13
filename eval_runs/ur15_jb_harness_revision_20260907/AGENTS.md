@@ -60,3 +60,9 @@ numbers unknown until their basis and the scope of the product change are set.
 - `data/hand_held_fastening_v01.json` and the corresponding analysis document
   record the new direction. Existing hand-function v01 and fixture v01 describe
   the earlier handoff proposals. Arm trajectory and video production stay paused.
+- The subsequent user `ok` authorized the next comparison step.
+  `analysis/three_station_connection_groups_v01.md` proposes A for mechanical
+  mounting, B for main/precharge/discharge power connections, and C for auxiliary
+  and control connections. This is not a selected factory process or arm count.
+  Actual common fastener stacks and incoming one-piece harnesses may change the
+  B/C boundary; electrical common nodes do not establish physical shared bolts.
