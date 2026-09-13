@@ -1,0 +1,16 @@
+{
+  "recorded_at": "2026-09-13T23:34:03.230184+09:00",
+  "official": {
+    "url": "https://assets.robotiq.com/website-assets/support_archives/document_en/2F-85_2F-140_Instruction_Manual_PDF_20181130.pdf",
+    "cached_pdf_sha256": "4a059283f11b12d458b084aab3e0c9238ac2cd61b42cd630551d4fc10a6d4ad3",
+    "scope": "Custom tips on the permanent holder; standard fingertip force ratings do not establish custom-tip performance. Retain the source-matched 2018 mounting pattern."
+  },
+  "source_mesh": {
+    "file": "inputs/hand_mount_interface_meshes_v02.json",
+    "sha256": "5243e62fca4f585a017015ccec2c56a015541fb1160edf758c6cb0ed51f2fb1a"
+  },
+  "reused_geometry": "v02 D30 + 10 mm; source cable profile; original distal-link transforms",
+  "custom_reason": "Standard fingertips do not provide separated terminal/root contact with the requested body setback",
+  "input_mesh_has_unresolved_mount_surface_contacts": true,
+  "physical_acceptance_verdict": null
+}

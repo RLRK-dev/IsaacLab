@@ -1,0 +1,197 @@
+{
+  "native_sha256": "cccae3f97474c7b25a6ca466fe1a035b6b371d176d4156f9027794df5200e5e4",
+  "source_mesh_payload_sha256": "cd057bf97a032f14ac331b2efa650f449d488837dfaabcbfb0b897b6b5668d56",
+  "native_readback_identical": true,
+  "readback_fields": [
+    "world matrices",
+    "vertex SHA",
+    "face SHA",
+    "mesh counts",
+    "visibility"
+  ],
+  "mesh_counts": {
+    "D40_clear": 22,
+    "D40_early": 22,
+    "D40_near": 22,
+    "D40_open": 22
+  },
+  "surface_observations": {
+    "D40_clear": {
+      "hand_vs_reference_context": {
+        "object_pairs_considered": 72,
+        "surface_overlap_pairs": []
+      },
+      "carrier_vs_hardware_including_mounts": {
+        "object_pairs_considered": 20,
+        "surface_overlap_pairs": [
+          {
+            "first": "left_left_carrier",
+            "second": "hardware_left_left_inner_finger_0",
+            "triangle_pairs": 295
+          },
+          {
+            "first": "left_right_carrier",
+            "second": "hardware_left_right_inner_finger_0",
+            "triangle_pairs": 328
+          }
+        ]
+      },
+      "left_vs_right_inserts": {
+        "object_pairs_considered": 16,
+        "surface_overlap_pairs": []
+      },
+      "root_parts_vs_mounts": {
+        "object_pairs_considered": 48,
+        "surface_overlap_pairs": [
+          {
+            "root": "D40_clear__left_left_root_cable_backing",
+            "mount": "D40_clear__left_left_carrier",
+            "triangle_surface_pairs": 261
+          },
+          {
+            "root": "D40_clear__left_right_root_cable_backing",
+            "mount": "D40_clear__left_right_carrier",
+            "triangle_surface_pairs": 261
+          }
+        ]
+      }
+    },
+    "D40_early": {
+      "hand_vs_reference_context": {
+        "object_pairs_considered": 72,
+        "surface_overlap_pairs": []
+      },
+      "carrier_vs_hardware_including_mounts": {
+        "object_pairs_considered": 20,
+        "surface_overlap_pairs": [
+          {
+            "first": "left_left_carrier",
+            "second": "hardware_left_left_inner_finger_0",
+            "triangle_pairs": 315
+          },
+          {
+            "first": "left_right_carrier",
+            "second": "hardware_left_right_inner_finger_0",
+            "triangle_pairs": 316
+          }
+        ]
+      },
+      "left_vs_right_inserts": {
+        "object_pairs_considered": 16,
+        "surface_overlap_pairs": []
+      },
+      "root_parts_vs_mounts": {
+        "object_pairs_considered": 48,
+        "surface_overlap_pairs": [
+          {
+            "root": "D40_early__left_left_root_cable_backing",
+            "mount": "D40_early__left_left_carrier",
+            "triangle_surface_pairs": 261
+          },
+          {
+            "root": "D40_early__left_right_root_cable_backing",
+            "mount": "D40_early__left_right_carrier",
+            "triangle_surface_pairs": 261
+          }
+        ]
+      }
+    },
+    "D40_near": {
+      "hand_vs_reference_context": {
+        "object_pairs_considered": 72,
+        "surface_overlap_pairs": [
+          {
+            "first": "left_left_root_cable_pad",
+            "second": "comparison_wire",
+            "triangle_pairs": 131
+          },
+          {
+            "first": "left_right_root_cable_pad",
+            "second": "comparison_wire",
+            "triangle_pairs": 132
+          }
+        ]
+      },
+      "carrier_vs_hardware_including_mounts": {
+        "object_pairs_considered": 20,
+        "surface_overlap_pairs": [
+          {
+            "first": "left_left_carrier",
+            "second": "hardware_left_left_inner_finger_0",
+            "triangle_pairs": 311
+          },
+          {
+            "first": "left_right_carrier",
+            "second": "hardware_left_right_inner_finger_0",
+            "triangle_pairs": 315
+          }
+        ]
+      },
+      "left_vs_right_inserts": {
+        "object_pairs_considered": 16,
+        "surface_overlap_pairs": []
+      },
+      "root_parts_vs_mounts": {
+        "object_pairs_considered": 48,
+        "surface_overlap_pairs": [
+          {
+            "root": "D40_near__left_left_root_cable_backing",
+            "mount": "D40_near__left_left_carrier",
+            "triangle_surface_pairs": 261
+          },
+          {
+            "root": "D40_near__left_right_root_cable_backing",
+            "mount": "D40_near__left_right_carrier",
+            "triangle_surface_pairs": 261
+          }
+        ]
+      }
+    },
+    "D40_open": {
+      "hand_vs_reference_context": {
+        "object_pairs_considered": 72,
+        "surface_overlap_pairs": []
+      },
+      "carrier_vs_hardware_including_mounts": {
+        "object_pairs_considered": 20,
+        "surface_overlap_pairs": [
+          {
+            "first": "left_left_carrier",
+            "second": "hardware_left_left_inner_finger_0",
+            "triangle_pairs": 310
+          },
+          {
+            "first": "left_right_carrier",
+            "second": "hardware_left_right_inner_finger_0",
+            "triangle_pairs": 314
+          }
+        ]
+      },
+      "left_vs_right_inserts": {
+        "object_pairs_considered": 16,
+        "surface_overlap_pairs": []
+      },
+      "root_parts_vs_mounts": {
+        "object_pairs_considered": 48,
+        "surface_overlap_pairs": [
+          {
+            "root": "D40_open__left_left_root_cable_backing",
+            "mount": "D40_open__left_left_carrier",
+            "triangle_surface_pairs": 261
+          },
+          {
+            "root": "D40_open__left_right_root_cable_backing",
+            "mount": "D40_open__left_right_carrier",
+            "triangle_surface_pairs": 261
+          }
+        ]
+      }
+    }
+  },
+  "method": "Blender BVHTree triangle surfaces, epsilon=0; AABB rejection; mounting and pad pairs included",
+  "limitations": "Surface contact is recorded, not classified as solid penetration or physical failure",
+  "inherited_mount_topology": "Source v02 includes zero-area tessellation faces and mount surface overlaps",
+  "comparison_cylinders": "Shown in HTML only; absent from native and GLB",
+  "continuous_motion_checked": false,
+  "physical_acceptance_verdict": null
+}

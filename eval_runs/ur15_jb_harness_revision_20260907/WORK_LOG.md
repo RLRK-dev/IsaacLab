@@ -234,3 +234,37 @@ native8シーンの行列・頂点/面SHA・個数・表示フラグ読戻し一
 取付部対元部品160組は16組の表面交差をそのまま記録（同じ8姿勢のv01も16組）。接触/体積侵入を分類していない。
 近接姿勢の上部帯φ40比較差は30 mm案−1.5 mm、60 mm案+28.5 mm、下部φ12比較差6.369 mm。
 正式な物理判定は行わない。報告・モデル・入力・コードを新規Downloadsパックにまとめる。
+
+## 2026-09-13 — D40 initial setback and root cable clamp
+
+The user chose 40 mm as the initial body setback and requested clamping the
+cable at the mounting area. New v03 files derive D40 from saved v02 D30 by a
+further 10 mm translation of original hardware and extension of the carrier.
+Terminal-side contacts, reference objects and four original joint states are
+preserved. Paired root pads and backings share the original distal-link
+transforms. They contact the comparison jacket at Y=61-71 mm; 10 mm pad length,
+90-degree side grooves and the reference 14 mm wire remain comparison values.
+
+Source SHA 5243e62f... is unchanged. Contact world preservation error is at most
+1.388e-17 m. Four native scenes of 22 meshes have identical matrix, vertex/face
+SHA, counts and visibility on readback; GLB bounds differ by 1.49e-9 m.
+Each root pad uses 99 facet-derived sample points. In the near pose their
+maximum unsigned distance to the saved wire surface is 1.125e-17 m. Four
+saved poses show crown separations 14 / 14.8068 / 30 / 30 mm; these are not a
+continuous trajectory or a pressure/force verification.
+
+Upper-band horizontal radius to original hardware is 28.5 mm, with 8.5 mm
+radial difference against the illustrative diameter-40 cylinder. Lower-band
+difference against diameter 12 is 6.369316 mm. Root additions do not establish
+whole-tool clearance. Surface observations retain nominal pad/wire contact,
+carrier/hardware contacts and root backing/carrier contacts. Original carrier
+degenerate faces remain 3 left / 2 right; new root meshes have none.
+
+Desktop/mobile each exercised 22 UI operations, with nonempty WebGL, no GL
+errors, matching displayed measurements, existing local references and no
+horizontal overflow. Root close-up was visually inspected as an auxiliary
+observation. No generation execution failed; initial lint formatting only
+changed line wrapping. Shared-actuator load distribution, pad compliance,
+attachment and screw access remain unresolved. No arm motion or video was
+created. The full static model and reproduction inputs are delivered separately
+from v02 under Downloads/THREAD_40mm後退と根元クランプ_v03_20260913.

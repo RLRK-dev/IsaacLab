@@ -1,0 +1,841 @@
+{
+  "recorded_at": "2026-09-13T23:24:32.897189+09:00",
+  "settings": {
+    "schema_version": 3,
+    "source_mesh_sha256": "5243e62fca4f585a017015ccec2c56a015541fb1160edf758c6cb0ed51f2fb1a",
+    "source_candidate": "D30",
+    "source_setback_m": 0.03,
+    "initial_setback_m": 0.04,
+    "setbacks_m": {
+      "D40": 0.04
+    },
+    "default_candidate": "D40",
+    "offset_direction_world": [
+      0,
+      1,
+      0
+    ],
+    "carrier_front_y_m": 0.012,
+    "carrier_rear_y_m": 0.016,
+    "carrier_rear_vertex_selection_y_m": 0.014,
+    "tool_lower_z_above_seat_m": [
+      0.0038,
+      0.0538
+    ],
+    "tool_upper_z_above_seat_m": [
+      0.0538,
+      0.1888769757245636
+    ],
+    "root_clamp": {
+      "contact_length_m": 0.01,
+      "groove_half_angle_deg": 45,
+      "pad_back_plane_abs_x_m": 0.009,
+      "backing_outer_abs_x_m": 0.012,
+      "profile_source": "Existing comparison_wire polygonal cross section; no invented compression",
+      "pad_color_rgba": [
+        30,
+        145,
+        137,
+        255
+      ],
+      "drive": "The same original distal link as the front terminal contact, with no additional actuator",
+      "pad_material": null,
+      "pad_hardness": null,
+      "pad_attachment": null,
+      "grip_force_n": null,
+      "permitted_jacket_compression_m": null
+    },
+    "official_reference": {
+      "url": "https://assets.robotiq.com/website-assets/support_archives/document_en/2F-85_2F-140_Instruction_Manual_PDF_20181130.pdf",
+      "cached_pdf_sha256": "4a059283f11b12d458b084aab3e0c9238ac2cd61b42cd630551d4fc10a6d4ad3",
+      "scope": "Custom tips on the permanent holder; standard fingertip force ratings do not establish custom-tip performance. Retain the source-matched 2018 mounting pattern."
+    },
+    "user_decision": "40 mm is the initial body setback. Add cable clamping at the mounting area.",
+    "actual_cable_part_number": null,
+    "actual_tool_dimensions_m": null,
+    "physical_acceptance_verdict": null
+  },
+  "source_sha256": "5243e62fca4f585a017015ccec2c56a015541fb1160edf758c6cb0ed51f2fb1a",
+  "source_file_unchanged": true,
+  "config_sha256": "72300cdff2cdf934f7056f97bab9a22f60e2698fafc172be6bc1da8ed5572794",
+  "candidates": {
+    "D40": {
+      "setback_m": 0.04,
+      "delta_from_source_m": 0.010000000000000002,
+      "preservation": {
+        "hardware_world_translation_max_error_m": 2.0816681711721685e-17,
+        "edge_contact_world_preservation_max_error_m": 1.3877787807814457e-17,
+        "carrier_mount_translation_max_error_m": 3.469446951953614e-17,
+        "original_hardware_vertices_faces_colors_unchanged": true,
+        "targets_and_saved_joint_angles_unchanged": true,
+        "carrier_faces_preserved": true,
+        "carriers": [
+          {
+            "object": "left_left_carrier",
+            "world_bounds_near_m": [
+              [
+                -0.0160000008471926,
+                0.0029999982371084477,
+                -0.013500110626220696
+              ],
+              [
+                -0.011998616654719515,
+                0.07299999494202886,
+                0.01750006771087647
+              ]
+            ],
+            "closed_surface": true,
+            "volume_m3": 3.0589840327984073e-06
+          },
+          {
+            "object": "left_right_carrier",
+            "world_bounds_near_m": [
+              [
+                0.011998619079589844,
+                0.0030000000000000027,
+                -0.013500110626220696
+              ],
+              [
+                0.016,
+                0.07300000000000001,
+                0.01750006771087647
+              ]
+            ],
+            "closed_surface": true,
+            "volume_m3": 3.0589842166515244e-06
+          }
+        ]
+      },
+      "tool_surface_observations": {
+        "near": {
+          "lower": {
+            "all": {
+              "radius_to_surface_m": 0.012369316472010783,
+              "object": "left_left_carrier",
+              "witness_m": [
+                -0.011999999286253095,
+                0.003000001185780185,
+                -0.007999999999999993
+              ],
+              "source_face_index": 51768
+            },
+            "hardware": {
+              "radius_to_surface_m": 0.05429460399216849,
+              "object": "hardware_left_right_inner_knuckle_0",
+              "witness_m": [
+                0.01384391644970447,
+                0.052500000000000005,
+                0.02457771211325384
+              ],
+              "source_face_index": 47943
+            },
+            "insert": {
+              "radius_to_surface_m": 0.012369316472010783,
+              "object": "left_left_carrier",
+              "witness_m": [
+                -0.011999999286253095,
+                0.003000001185780185,
+                -0.007999999999999993
+              ],
+              "source_face_index": 260
+            }
+          },
+          "upper": {
+            "all": {
+              "radius_to_surface_m": 0.028500000000000004,
+              "object": "hardware_left_gripper_base_0",
+              "witness_m": [
+                0.0,
+                0.028500000000000004,
+                0.1359769747245636
+              ],
+              "source_face_index": 1258
+            },
+            "hardware": {
+              "radius_to_surface_m": 0.028500000000000004,
+              "object": "hardware_left_gripper_base_0",
+              "witness_m": [
+                0.0,
+                0.028500000000000004,
+                0.1359769747245636
+              ],
+              "source_face_index": 1258
+            },
+            "insert": {
+              "radius_to_surface_m": null,
+              "object": null,
+              "witness_m": null,
+              "source_face_index": null
+            }
+          },
+          "whole": {
+            "all": {
+              "radius_to_surface_m": 0.012369316472010783,
+              "object": "left_left_carrier",
+              "witness_m": [
+                -0.011999999286253095,
+                0.003000001185780185,
+                -0.007999999999999993
+              ],
+              "source_face_index": 51768
+            },
+            "hardware": {
+              "radius_to_surface_m": 0.028500000000000004,
+              "object": "hardware_left_gripper_base_0",
+              "witness_m": [
+                0.0,
+                0.028500000000000004,
+                0.1359769747245636
+              ],
+              "source_face_index": 1258
+            },
+            "insert": {
+              "radius_to_surface_m": 0.012369316472010783,
+              "object": "left_left_carrier",
+              "witness_m": [
+                -0.011999999286253095,
+                0.003000001185780185,
+                -0.007999999999999993
+              ],
+              "source_face_index": 260
+            }
+          }
+        },
+        "early": {
+          "lower": {
+            "all": {
+              "radius_to_surface_m": 0.012761039322777609,
+              "object": "left_left_carrier",
+              "witness_m": [
+                -0.012403391336419194,
+                0.003000001325519322,
+                -0.007968104475145003
+              ],
+              "source_face_index": 51768
+            },
+            "hardware": {
+              "radius_to_surface_m": 0.05439873227580146,
+              "object": "hardware_left_right_inner_knuckle_0",
+              "witness_m": [
+                0.01424682677701682,
+                0.052500000000000005,
+                0.024587242995179212
+              ],
+              "source_face_index": 47943
+            },
+            "insert": {
+              "radius_to_surface_m": 0.012761039322777609,
+              "object": "left_left_carrier",
+              "witness_m": [
+                -0.012403391336419194,
+                0.003000001325519322,
+                -0.007968104475145003
+              ],
+              "source_face_index": 260
+            }
+          },
+          "upper": {
+            "all": {
+              "radius_to_surface_m": 0.028500000000000004,
+              "object": "hardware_left_gripper_base_0",
+              "witness_m": [
+                0.0,
+                0.028500000000000004,
+                0.1359769747245636
+              ],
+              "source_face_index": 1258
+            },
+            "hardware": {
+              "radius_to_surface_m": 0.028500000000000004,
+              "object": "hardware_left_gripper_base_0",
+              "witness_m": [
+                0.0,
+                0.028500000000000004,
+                0.1359769747245636
+              ],
+              "source_face_index": 1258
+            },
+            "insert": {
+              "radius_to_surface_m": null,
+              "object": null,
+              "witness_m": null,
+              "source_face_index": null
+            }
+          },
+          "whole": {
+            "all": {
+              "radius_to_surface_m": 0.012761039322777609,
+              "object": "left_left_carrier",
+              "witness_m": [
+                -0.012403391336419194,
+                0.003000001325519322,
+                -0.007968104475145003
+              ],
+              "source_face_index": 51768
+            },
+            "hardware": {
+              "radius_to_surface_m": 0.028500000000000004,
+              "object": "hardware_left_gripper_base_0",
+              "witness_m": [
+                0.0,
+                0.028500000000000004,
+                0.1359769747245636
+              ],
+              "source_face_index": 1258
+            },
+            "insert": {
+              "radius_to_surface_m": 0.012761039322777609,
+              "object": "left_left_carrier",
+              "witness_m": [
+                -0.012403391336419194,
+                0.003000001325519322,
+                -0.007968104475145003
+              ],
+              "source_face_index": 260
+            }
+          }
+        },
+        "open": {
+          "lower": {
+            "all": {
+              "radius_to_surface_m": 0.01838102550791889,
+              "object": "left_right_edge_contour",
+              "witness_m": [
+                0.017940515564575196,
+                0.0040000000000000036,
+                -0.009721963983944593
+              ],
+              "source_face_index": 52809
+            },
+            "hardware": {
+              "radius_to_surface_m": 0.05592443948918252,
+              "object": "hardware_left_right_inner_knuckle_0",
+              "witness_m": [
+                0.015250044976617133,
+                0.05380500962169221,
+                0.0398
+              ],
+              "source_face_index": 48438
+            },
+            "insert": {
+              "radius_to_surface_m": 0.01838102550791889,
+              "object": "left_right_edge_contour",
+              "witness_m": [
+                0.017940515564575196,
+                0.0040000000000000036,
+                -0.009721963983944593
+              ],
+              "source_face_index": 1301
+            }
+          },
+          "upper": {
+            "all": {
+              "radius_to_surface_m": 0.028500000000000004,
+              "object": "hardware_left_gripper_base_0",
+              "witness_m": [
+                0.0,
+                0.028500000000000004,
+                0.1359769747245636
+              ],
+              "source_face_index": 1258
+            },
+            "hardware": {
+              "radius_to_surface_m": 0.028500000000000004,
+              "object": "hardware_left_gripper_base_0",
+              "witness_m": [
+                0.0,
+                0.028500000000000004,
+                0.1359769747245636
+              ],
+              "source_face_index": 1258
+            },
+            "insert": {
+              "radius_to_surface_m": null,
+              "object": null,
+              "witness_m": null,
+              "source_face_index": null
+            }
+          },
+          "whole": {
+            "all": {
+              "radius_to_surface_m": 0.01838102550791889,
+              "object": "left_right_edge_contour",
+              "witness_m": [
+                0.017940515564575196,
+                0.0040000000000000036,
+                -0.009721963983944593
+              ],
+              "source_face_index": 52809
+            },
+            "hardware": {
+              "radius_to_surface_m": 0.028500000000000004,
+              "object": "hardware_left_gripper_base_0",
+              "witness_m": [
+                0.0,
+                0.028500000000000004,
+                0.1359769747245636
+              ],
+              "source_face_index": 1258
+            },
+            "insert": {
+              "radius_to_surface_m": 0.01838102550791889,
+              "object": "left_right_edge_contour",
+              "witness_m": [
+                0.017940515564575196,
+                0.0040000000000000036,
+                -0.009721963983944593
+              ],
+              "source_face_index": 1301
+            }
+          }
+        },
+        "clear": {
+          "lower": {
+            "all": {
+              "radius_to_surface_m": 0.018380657543084745,
+              "object": "left_right_edge_contour",
+              "witness_m": [
+                0.017940138564575193,
+                0.0040000000000000036,
+                0.012878036016055402
+              ],
+              "source_face_index": 52684
+            },
+            "hardware": {
+              "radius_to_surface_m": 0.06369406279633959,
+              "object": "hardware_left_left_inner_finger_0",
+              "witness_m": [
+                -0.023998622989447025,
+                0.05899999771283415,
+                0.0126779250160554
+              ],
+              "source_face_index": 43236
+            },
+            "insert": {
+              "radius_to_surface_m": 0.018380657543084745,
+              "object": "left_right_edge_contour",
+              "witness_m": [
+                0.017940138564575193,
+                0.0040000000000000036,
+                0.012878036016055402
+              ],
+              "source_face_index": 1176
+            }
+          },
+          "upper": {
+            "all": {
+              "radius_to_surface_m": 0.028500000000000004,
+              "object": "hardware_left_gripper_base_0",
+              "witness_m": [
+                0.0,
+                0.028500000000000004,
+                0.1609769747245636
+              ],
+              "source_face_index": 1258
+            },
+            "hardware": {
+              "radius_to_surface_m": 0.028500000000000004,
+              "object": "hardware_left_gripper_base_0",
+              "witness_m": [
+                0.0,
+                0.028500000000000004,
+                0.1609769747245636
+              ],
+              "source_face_index": 1258
+            },
+            "insert": {
+              "radius_to_surface_m": 0.06229761381305647,
+              "object": "left_left_carrier",
+              "witness_m": [
+                -0.019999828002826438,
+                0.058999996327610764,
+                0.0398
+              ],
+              "source_face_index": 928
+            }
+          },
+          "whole": {
+            "all": {
+              "radius_to_surface_m": 0.018380657543084745,
+              "object": "left_right_edge_contour",
+              "witness_m": [
+                0.017940138564575193,
+                0.0040000000000000036,
+                0.012878036016055402
+              ],
+              "source_face_index": 52684
+            },
+            "hardware": {
+              "radius_to_surface_m": 0.028500000000000004,
+              "object": "hardware_left_gripper_base_0",
+              "witness_m": [
+                0.0,
+                0.028500000000000004,
+                0.1609769747245636
+              ],
+              "source_face_index": 1258
+            },
+            "insert": {
+              "radius_to_surface_m": 0.018380657543084745,
+              "object": "left_right_edge_contour",
+              "witness_m": [
+                0.017940138564575193,
+                0.0040000000000000036,
+                0.012878036016055402
+              ],
+              "source_face_index": 1176
+            }
+          }
+        }
+      },
+      "root_parts": [
+        {
+          "carrier": "left_left_carrier",
+          "pad": "left_left_root_cable_pad",
+          "backing": "left_left_root_cable_backing",
+          "sign_x": -1.0,
+          "profile_points_near_xz_m": [
+            [
+              -0.004949747,
+              -0.010949747
+            ],
+            [
+              -0.005411073,
+              -0.010440753
+            ],
+            [
+              -0.005820287,
+              -0.009888992
+            ],
+            [
+              -0.006173449,
+              -0.009299777
+            ],
+            [
+              -0.006467157,
+              -0.008678784
+            ],
+            [
+              -0.006698582,
+              -0.008031993
+            ],
+            [
+              -0.006865497,
+              -0.007365632
+            ],
+            [
+              -0.006966293,
+              -0.00668612
+            ],
+            [
+              -0.007,
+              -0.006
+            ],
+            [
+              -0.006966293,
+              -0.00531388
+            ],
+            [
+              -0.006865497,
+              -0.004634368
+            ],
+            [
+              -0.006698582,
+              -0.003968007
+            ],
+            [
+              -0.006467157,
+              -0.003321216
+            ],
+            [
+              -0.006173449,
+              -0.002700223
+            ],
+            [
+              -0.005820287,
+              -0.002111008
+            ],
+            [
+              -0.005411073,
+              -0.001559247
+            ],
+            [
+              -0.004949747,
+              -0.001050253
+            ]
+          ],
+          "reference_wire_radius_m": 0.007000000241521782,
+          "contact_y_range_m": [
+            0.061000000000000006,
+            0.07100000000000001
+          ],
+          "crown_near_m": [
+            -0.007000000241521782,
+            0.066,
+            -0.006
+          ],
+          "crown_pad_thickness_m": 0.0019999997584782174,
+          "new_meshes_closed_with_nonzero_faces": true
+        },
+        {
+          "carrier": "left_right_carrier",
+          "pad": "left_right_root_cable_pad",
+          "backing": "left_right_root_cable_backing",
+          "sign_x": 1.0,
+          "profile_points_near_xz_m": [
+            [
+              0.004949747,
+              -0.010949747
+            ],
+            [
+              0.005411073,
+              -0.010440753
+            ],
+            [
+              0.005820287,
+              -0.009888992
+            ],
+            [
+              0.006173449,
+              -0.009299777
+            ],
+            [
+              0.006467157,
+              -0.008678784
+            ],
+            [
+              0.006698582,
+              -0.008031993
+            ],
+            [
+              0.006865497,
+              -0.007365632
+            ],
+            [
+              0.006966293,
+              -0.00668612
+            ],
+            [
+              0.007,
+              -0.006
+            ],
+            [
+              0.006966293,
+              -0.00531388
+            ],
+            [
+              0.006865497,
+              -0.004634368
+            ],
+            [
+              0.006698582,
+              -0.003968007
+            ],
+            [
+              0.006467157,
+              -0.003321216
+            ],
+            [
+              0.006173449,
+              -0.002700223
+            ],
+            [
+              0.005820287,
+              -0.002111008
+            ],
+            [
+              0.005411073,
+              -0.001559247
+            ],
+            [
+              0.004949747,
+              -0.001050253
+            ]
+          ],
+          "reference_wire_radius_m": 0.007000000241521782,
+          "contact_y_range_m": [
+            0.061000000000000006,
+            0.07100000000000001
+          ],
+          "crown_near_m": [
+            0.007000000241521782,
+            0.066,
+            -0.006
+          ],
+          "crown_pad_thickness_m": 0.0019999997584782174,
+          "new_meshes_closed_with_nonzero_faces": true
+        }
+      ],
+      "root_surface_samples": {
+        "near": {
+          "pads": [
+            {
+              "pad": "left_left_root_cable_pad",
+              "sample_count": 99,
+              "unsigned_sample_to_wire_surface_min_m": 0.0,
+              "unsigned_sample_to_wire_surface_max_m": 1.1242293031246444e-17,
+              "crown_world_m": [
+                -0.0070000002415217775,
+                0.066,
+                -0.005999999999999998
+              ]
+            },
+            {
+              "pad": "left_right_root_cable_pad",
+              "sample_count": 99,
+              "unsigned_sample_to_wire_surface_min_m": 0.0,
+              "unsigned_sample_to_wire_surface_max_m": 7.611068361834778e-18,
+              "crown_world_m": [
+                0.007000000241521781,
+                0.066,
+                -0.005999999999999998
+              ]
+            }
+          ],
+          "crown_to_crown_distance_m": 0.014000000483043559
+        },
+        "early": {
+          "pads": [
+            {
+              "pad": "left_left_root_cable_pad",
+              "sample_count": 99,
+              "unsigned_sample_to_wire_surface_min_m": 0.0002774738365817928,
+              "unsigned_sample_to_wire_surface_max_m": 0.0004046510479944204,
+              "crown_world_m": [
+                -0.007403392291687877,
+                0.06600000013973914,
+                -0.0059681044751450085
+              ]
+            },
+            {
+              "pad": "left_right_root_cable_pad",
+              "sample_count": 99,
+              "unsigned_sample_to_wire_surface_min_m": 0.0002774738365818026,
+              "unsigned_sample_to_wire_surface_max_m": 0.00040465104799443076,
+              "crown_world_m": [
+                0.007403392291687891,
+                0.066,
+                -0.0059681044751450085
+              ]
+            }
+          ],
+          "crown_to_crown_distance_m": 0.01480678458337577
+        },
+        "open": {
+          "pads": [
+            {
+              "pad": "left_left_root_cable_pad",
+              "sample_count": 99,
+              "unsigned_sample_to_wire_surface_min_m": 0.006488735096591286,
+              "unsigned_sample_to_wire_surface_max_m": 0.008086270365661926,
+              "crown_world_m": [
+                -0.015000000241521292,
+                0.06600000277128167,
+                -0.004821964165829362
+              ]
+            },
+            {
+              "pad": "left_right_root_cable_pad",
+              "sample_count": 99,
+              "unsigned_sample_to_wire_surface_min_m": 0.0064887350965917604,
+              "unsigned_sample_to_wire_surface_max_m": 0.00808627036566241,
+              "crown_world_m": [
+                0.015000000241521781,
+                0.066,
+                -0.004821964165829362
+              ]
+            }
+          ],
+          "crown_to_crown_distance_m": 0.0300000004830432
+        },
+        "clear": {
+          "pads": [
+            {
+              "pad": "left_left_root_cable_pad",
+              "sample_count": 99,
+              "unsigned_sample_to_wire_surface_min_m": 0.01787404298364389,
+              "unsigned_sample_to_wire_surface_max_m": 0.02671402529534482,
+              "crown_world_m": [
+                -0.015000000241521292,
+                0.06600000277128167,
+                0.020178035834170632
+              ]
+            },
+            {
+              "pad": "left_right_root_cable_pad",
+              "sample_count": 99,
+              "unsigned_sample_to_wire_surface_min_m": 0.01787404298364414,
+              "unsigned_sample_to_wire_surface_max_m": 0.026714025295345008,
+              "crown_world_m": [
+                0.015000000241521781,
+                0.066,
+                0.020178035834170632
+              ]
+            }
+          ],
+          "crown_to_crown_distance_m": 0.0300000004830432
+        }
+      },
+      "insert_topology": {
+        "left_left_edge_contour": {
+          "closed_edge_topology": true,
+          "zero_area_faces": 0
+        },
+        "left_left_carrier": {
+          "closed_edge_topology": true,
+          "zero_area_faces": 0
+        },
+        "left_right_edge_contour": {
+          "closed_edge_topology": true,
+          "zero_area_faces": 0
+        },
+        "left_right_carrier": {
+          "closed_edge_topology": true,
+          "zero_area_faces": 2
+        },
+        "left_left_root_cable_pad": {
+          "closed_edge_topology": true,
+          "zero_area_faces": 0
+        },
+        "left_left_root_cable_backing": {
+          "closed_edge_topology": true,
+          "zero_area_faces": 0
+        },
+        "left_right_root_cable_pad": {
+          "closed_edge_topology": true,
+          "zero_area_faces": 0
+        },
+        "left_right_root_cable_backing": {
+          "closed_edge_topology": true,
+          "zero_area_faces": 0
+        }
+      },
+      "glb": {
+        "file": "hand_root_clamp_D40_v03.glb",
+        "sha256": "1d60e7e5f71508345f2807f115377a38e30d00463d782268fd510e68891fe9b3",
+        "mesh_count": 22,
+        "readback_mesh_count": 22,
+        "bounds_m": [
+          [
+            -0.06426016898839715,
+            -0.016,
+            -0.017
+          ],
+          [
+            0.06426016483147669,
+            0.10350000000000001,
+            0.1498769757245636
+          ]
+        ],
+        "readback_bounds_max_difference_m": 1.4901161138336505e-09
+      }
+    }
+  },
+  "root_contact_method": "Unsigned distance from source-derived facet samples to the saved wire mesh",
+  "pose_method": "All new root parts share the original carrier transforms in four saved poses",
+  "same_actuator_dual_contact_force_distribution_confirmed": false,
+  "terminal_contact_display_gap_m": 0.0001,
+  "numerical_tolerances_are_acceptance_criteria": false,
+  "continuous_motion_checked": false,
+  "physical_acceptance_verdict": null
+}

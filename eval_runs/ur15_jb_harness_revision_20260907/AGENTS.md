@@ -100,3 +100,22 @@ numbers unknown until their basis and the scope of the product change are set.
   edge topology is observed, but zero-area tessellation faces and mounting
   surface contacts remain explicitly recorded; this is not manufacturing CAD
   or a physical acceptance verdict. Arm motion and video remain paused.
+
+## Initial setback and root clamp decision on 2026-09-13
+
+- The user selected 40 mm as the initial body setback and requested cable
+  clamping at the mounting area as well as the existing terminal-side contact.
+  The earlier 30/60 mm alternatives remain historical comparisons.
+- `data/hand_root_clamp_v03.json` and `analysis/hand_root_clamp_v03.md` describe
+  the new D40 sample: front terminal contours retained, paired root jacket
+  pads at Y=61-71 mm, attached to the same original distal links. No separate
+  actuator or upper retainer is added. The 10 mm contact length, reference
+  14 mm wire and pad dimensions are comparison geometry, not identified Ampere
+  parts or manufacturing specifications.
+- Nominal pad surfaces match the saved wire facets. This does not establish
+  pressure distribution or stable holding at both contact locations with one
+  actuator. Pad material, compliance, attachment and screw access remain open;
+  preserve the existing front contour's 0.1 mm display gap in observations.
+- Four static poses, native readback, browser checks and surface-pair records
+  are auxiliary observations. Original mounting contacts and degenerate faces
+  remain recorded. Finger selection precedes arm motion and video production.

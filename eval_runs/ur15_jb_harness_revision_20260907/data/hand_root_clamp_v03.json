@@ -1,0 +1,38 @@
+{
+  "schema_version": 3,
+  "source_mesh_sha256": "5243e62fca4f585a017015ccec2c56a015541fb1160edf758c6cb0ed51f2fb1a",
+  "source_candidate": "D30",
+  "source_setback_m": 0.030,
+  "initial_setback_m": 0.040,
+  "setbacks_m": {"D40": 0.040},
+  "default_candidate": "D40",
+  "offset_direction_world": [0, 1, 0],
+  "carrier_front_y_m": 0.012,
+  "carrier_rear_y_m": 0.016,
+  "carrier_rear_vertex_selection_y_m": 0.014,
+  "tool_lower_z_above_seat_m": [0.0038, 0.0538],
+  "tool_upper_z_above_seat_m": [0.0538, 0.1888769757245636],
+  "root_clamp": {
+    "contact_length_m": 0.010,
+    "groove_half_angle_deg": 45,
+    "pad_back_plane_abs_x_m": 0.009,
+    "backing_outer_abs_x_m": 0.012,
+    "profile_source": "Existing comparison_wire polygonal cross section; no invented compression",
+    "pad_color_rgba": [30, 145, 137, 255],
+    "drive": "The same original distal link as the front terminal contact, with no additional actuator",
+    "pad_material": null,
+    "pad_hardness": null,
+    "pad_attachment": null,
+    "grip_force_n": null,
+    "permitted_jacket_compression_m": null
+  },
+  "official_reference": {
+    "url": "https://assets.robotiq.com/website-assets/support_archives/document_en/2F-85_2F-140_Instruction_Manual_PDF_20181130.pdf",
+    "cached_pdf_sha256": "4a059283f11b12d458b084aab3e0c9238ac2cd61b42cd630551d4fc10a6d4ad3",
+    "scope": "Custom tips on the permanent holder; standard fingertip force ratings do not establish custom-tip performance. Retain the source-matched 2018 mounting pattern."
+  },
+  "user_decision": "40 mm is the initial body setback. Add cable clamping at the mounting area.",
+  "actual_cable_part_number": null,
+  "actual_tool_dimensions_m": null,
+  "physical_acceptance_verdict": null
+}
