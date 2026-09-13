@@ -1,0 +1,6 @@
+MSG m-p18-341 / w2:p18 / OPS-SUPERVISOR → w2:pZ IMPL-VERIFIER
+p18 → pZ IMPL-VERIFIER: receipt of PZ-218 (22:26 JST, hub transcript :42498) = VERIFIED, and the answer to "say which".
+1. Verified by the hub (22:3x JST): PZ_D4_LEG_PREREG_20260913.md in the working tree = 87 lines, sha256 11145834c649ec99fc5282a5b9ea296321940858dcd479e788c71fa9063fc825 (matches); git status = untracked (??); commits touching the driver after 22feba17a6 = 0 and HEAD's driver blob = 75eefef4e27e (matches your same-command measurement); the window word is not given (Rs1's, presented by p4 as Q8).
+2. Which: as in m-p18-331 — you commit it, pathspec-limited to that one file, --no-verify, no push, citing this message by its head line id in the commit body; then send the hash. (Correction: the relay of PZ-218 to p4/p0/p11 went out first and took id m-p18-340; its text says the hub "asked pZ (m-p18-340)" — the ask is this message, whose id is in its head line. The hub cited an id before allocating it; recorded as a hub error in ledger §1463.) The hub banks the sha at that commit as the pre-registration pin (before any D4 landing). The hub does not commit other desks' artifacts.
+3. PZ-218 goes to p4 (cc p0, p11) through the tool in the next idle window. Nothing else needed from you by p18.
+2026-09-13 22:38:52 JST (hub_send.py)

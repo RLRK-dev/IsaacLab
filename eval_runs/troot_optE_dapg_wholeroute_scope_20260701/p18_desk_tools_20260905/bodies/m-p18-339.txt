@@ -1,0 +1,9 @@
+MSG m-p18-339 / w2:p18 / OPS-SUPERVISOR → w2:p0 IMPL-BUILDER（cc w2:pZ IMPL-VERIFIER）
+RELAY of p4's disposition to p0 (m-p4-262, received by the hub 22:24:45 JST, transcript :42497) — to p0 IMPL-BUILDER, cc pZ (R3 covers the side branches). Verbatim:
+> [m-p4-262] p4→p18 (RS-TECH-LEAD → OPS-SUPERVISOR): re m-p18-335 — p0 への disposition（relay 依頼）: v3 処置は不変 = 候補を再構築しない・候補の形は §6/§13(b) と整合（当卓自読・受入ではない）・D4 窓の一言は Rs1 へ Q8 として提示済
+> (1) 何をしたか: p0 §8.50 @ 1fe7c84bfc（sha256 c4cb6cf6… 再現）の候補 diff を自読。attitude_tilt_deg(t, yaw, roll) が側 t の slot_centre/pinch/TOOLB/AXFIX を読む（§6-1）／vertical_cap_deg(side=None) が各側 (SIDES[t]·yaw, SIDES[t]·roll)・両 calibration raise を側ごと・入力側選択 abs(r)≥1e-9・min over sides（§6-2）・side="L"/"R" は第 3 関数なしで側別 cap を print に出す p0 の実装選択（§13(b) 許容 {2 FunctionDef, 1 Expr} の内側）／print は既存 prefix 不変＋末尾 (L … / R …)・新語に nan|inf|error|fail|warn 無し（§6-3）／§7 identity print 除外 = 正（Rs1 Q2 待ち）。数値は判定しない（pZ R3）。
+> (2) 記録: kickoff 09-13 22:12 節 item 8 @ 8b86f3b6fc。disposition: ①当卓の v3 処置（m-p4-261 = 第 3 cycle なしで消費・柵 3）は p0 にも不変 ⇒ v3 §6 は変わらない ⇒ 候補は再構築しない ②候補の形は整合、ただし受入ではない — 受入 = (i) Rs1 の窓の一言 (ii) clean worktree での着地＋述語＋対照 3 本が着地記録に (iii) pZ R3 通過（side="L"/"R" 分岐の text 対 text を含む）の後 ③Rs1 の Q2（A/B）が着地前に返れば同 hunk に 1 行を畳む（許容 = 2 def＋2 Expr）・返らなければ D4 のみ着地し記録行は後の小窓 ④acceptance :214 は p0 も逆と読む・修正はその一言で（DDR 項目 via p6・変更なし）。
+> (3) 要るもの: p18 = 本 disposition を p0 へ relay（cc pZ: R3 は side 分岐も対象）。D4 窓の一言 = Rs1（当卓が Q8 として提示済・回答は当卓 → p18）。⛔ 解錠なし・run 0・候補は scratchpad worktree のまま。
+> 2026-09-13 22:24:45 JST (p4 send_p18.sh)
+p18 verification (ledger §1462 @ cf0a00a011): 8b86f3b6fc (22:24:21, kickoff +6) exists and its 22:12 section carries item 8 as cited. The D4 window word is Rs1's (p4's Q8); the hub relays the answer when p4 returns it. pZ's D4 leg is pre-registered (PZ-218, 22:26) and goes to p4/p0/p11 in the next round. Nothing needed from p0 by the hub.
+2026-09-13 22:31:48 JST (hub_send.py)
