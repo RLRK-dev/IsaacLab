@@ -119,3 +119,21 @@ numbers unknown until their basis and the scope of the product change are set.
 - Four static poses, native readback, browser checks and surface-pair records
   are auxiliary observations. Original mounting contacts and degenerate faces
   remain recorded. Finger selection precedes arm motion and video production.
+
+## Pad conditions comparison on 2026-09-14
+
+- The user authorized the next pad-compliance/holding-condition study after
+  confirming D40. `analysis/hand_pad_conditions_v01.md` compares P1 (terminal
+  positioning contour and compliant root pad) before P2 (a guided passive root
+  mechanism if pad compression is insufficient). Neither is manufacturing
+  approval, and P2 has not been fitted into the current 3 mm backing space.
+- The UI's closure, contact lead and stiffness ratio are a one-dimensional
+  teaching example. Its normalized reactions are not N, four contact-force
+  targets, friction capacities or gripper force commands. Actual values and
+  acceptance requirements remain null in `data/hand_pad_conditions_v01.json`.
+- Robotiq's public 60A silicone and the supplied G3/G4 draft's A30-50/3 mm are
+  references, not selected D40 pad properties. Use measured compression,
+  friction, pressure, time response and actual part limits before selecting
+  force settings. Do not infer local pad forces from motor current or wrist
+  resultant alone. Check the source-generation grasp-mode/equilibrium-line
+  behavior; four saved poses do not establish its loaded behavior.

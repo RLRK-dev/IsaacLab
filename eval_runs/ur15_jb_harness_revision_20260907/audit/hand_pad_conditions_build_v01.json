@@ -1,0 +1,21 @@
+{
+  "observed_at": "2026-09-14T05:48:47.775526+09:00",
+  "scope": "comparison document, illustrative normalized reaction sharing and unfilled input register",
+  "input_sha256": {
+    "data/hand_pad_conditions_v01.json": "027db560e9ea77fbfda020ec31cdbce33cc47129d23b2734c21baddde4d5cd89",
+    "scripts/hand_pad_conditions_viewer_v01.html": "c3f869416cbbd65e87fe3048c0627f33d9b2470407948bc04e27b010b206da62",
+    "analysis/hand_pad_conditions_v01.md": "a7dd98a320b85f81c82a4363a7b3b215b80072ffc01920e6eab6c08d3d4cefe4",
+    "audit/hand_root_clamp_observations_v03.json": "680aab23678a883bcbf6ab178fb52a63651c7cde27da07429637ac9337239e7c",
+    "scripts/build_hand_pad_conditions_v01.py": "056a1bfd9dcff617392849cafa7bb0cb9c072f42ac883bceeb010ec9506321e4",
+    "scripts/build_hand_function_review_v01.py": "137066f2436d9fd59d60218a522ea45e2a253678822395704b7649d584b1d240",
+    "data/hand_root_clamp_v03.json": "72300cdff2cdf934f7056f97bab9a22f60e2698fafc172be6bc1da8ed5572794"
+  },
+  "inputs_unchanged": true,
+  "page_sha256": "7d7ea7393cc8136412effb85989501cc4efc48c4d6d01acb6a64eaa0d301db97",
+  "unfilled_inputs": 16,
+  "force_targets_unset": true,
+  "material_unselected": true,
+  "scene_loaded": false,
+  "arm_motion_created": false,
+  "physical_acceptance_verdict": null
+}

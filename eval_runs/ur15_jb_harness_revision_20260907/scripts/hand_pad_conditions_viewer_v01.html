@@ -1,0 +1,101 @@
+<!doctype html>
+<!-- Copyright (c) 2022-2026, The Isaac Lab Project Developers (https://github.com/isaac-sim/IsaacLab/blob/main/CONTRIBUTORS.md).
+All rights reserved. SPDX-License-Identifier: BSD-3-Clause -->
+<html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>THREAD｜二か所保持のパッドと力条件</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#edf3f6;color:#17354a;font:15px/1.8 system-ui,"Noto Sans JP",sans-serif}main{max-width:1240px;margin:auto;padding:30px 24px 50px}h1{font-size:31px;line-height:1.5;margin:8px 0 14px}h2{font-size:20px;margin:0 0 14px}h3{font-size:16px;margin:10px 0}p{margin:8px 0}.eyebrow{font-size:12px;letter-spacing:.13em;font-weight:750;color:#167293}.intro{max-width:1080px;color:#446276}.grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}.interactive{display:grid;grid-template-columns:minmax(0,1fr) 335px;gap:22px;margin-top:20px}.card{background:#fff;border:1px solid #cfdee6;border-radius:9px;padding:22px;margin-top:20px;min-width:0}.interactive .card{margin:0}.tag{display:inline-block;border-radius:4px;padding:3px 9px;background:#e7f3f5;font-size:12px;color:#147c81}.caution{background:#fff2df;color:#8d541c}.small{font-size:13px;color:#5c7586}.number{font-size:28px;font-weight:730;line-height:1.4}.blue{color:#277fab}.teal{color:#17877e}label{display:block;margin:14px 0 3px;font-weight:600}input[type=range]{display:block;width:100%;margin:12px 0 0;accent-color:#227fac}button{padding:7px 11px;font:inherit;border:1px solid #b5cbd8;color:#266180;background:white;border-radius:5px;cursor:pointer}.buttons{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0}.metric{border-top:1px solid #dbe6ec;padding:12px 0}.split{display:grid;grid-template-columns:1fr 1fr;gap:15px}.bar{display:flex;height:14px;background:#e8eef2;border-radius:4px;overflow:hidden;margin-top:9px}.bar i{display:block;transition:width .1s}.rule{border-left:3px solid #d9a259;padding-left:12px}.scroll{overflow:auto}table{width:100%;border-collapse:collapse;font-size:13px}th,td{text-align:left;vertical-align:top;padding:10px;border-bottom:1px solid #dbe5eb;min-width:65px}th{background:#f1f6f9}a{color:#176c99}svg{width:100%;display:block;height:auto}.links{display:flex;flex-wrap:wrap;gap:18px;margin-top:16px}code{font-size:12px;overflow-wrap:anywhere}.status{padding:8px 12px;background:#f0f6f9;border-radius:5px;font-size:14px;min-height:42px}.sources p{overflow-wrap:anywhere}li{margin:6px 0}@media(max-width:830px){.interactive,.grid{grid-template-columns:1fr}main{padding:22px 14px}h1{font-size:25px}.card{padding:18px}}
+</style></head><body><main>
+<div class="eyebrow">THREAD / TWO CONTACT LOCATIONS / PAD CONDITIONS 01</div>
+<h1>端子は位置を決める。根元は寸法差に追従する。</h1>
+<p class="intro">40 mm後退と先端・根元の二か所保持を基準に、<b>根元の交換式パッドで接触のずれを吸収する案</b>から比較します。2本指・一つの開閉駆動を維持します。</p>
+<div class="grid"><section class="card"><span class="tag">先に比較する案 P1</span><h2>端子側の輪郭＋根元の弾性パッド</h2>
+<p>端子側は位置と向きを決める役割。根元は被覆を丸底パッドで包み、先端との接触開始のずれに追従させます。</p>
+<p class="small">40 mmは本体後退の初期値。根元の10 mm接触長さ・約2 mm中央厚さ・φ14線は現在の参考形状です。</p></section>
+<section class="card"><span class="tag caution">不足する場合の比較案 P2</span><h2>根元に受動的な追従機構</h2>
+<p>パッドの許容圧縮だけで足りない場合に、開閉方向へ案内される受動パッドを比較します。</p>
+<p class="small">現在の支持部幅は3 mmです。案内・復元・移動止めが収まるとは未確認で、3Dモデルには追加していません。</p></section></div>
+<section class="card"><span class="tag caution">実測値ではなく、一次モデルの説明</span><h2 style="margin-top:12px">同じ閉じ量でも、先に当たる側へ反力が集まる</h2>
+<p>片側の指の先端と根元を、二つの線形ばねで表した図です。閉じ量、接触開始のずれ、剛性比を変えて、反力の配分を見ることができます。実ハンドの力制御やリンクの動きは計算していません。</p>
+<div class="interactive"><div class="card" style="background:#f8fbfd;border:0">
+<svg id="contact-diagram" viewBox="0 0 680 310" role="img" aria-label="一つの指で先端と根元の接触部を閉じる一次モデル">
+<text x="20" y="28" font-size="16" fill="#17354a">一つの指を取り出した模式図</text>
+<rect id="carrier" x="80" y="67" width="32" height="201" rx="3" fill="#738895"/>
+<rect x="400" y="76" width="48" height="71" rx="3" fill="#b9c7d1"/><rect x="400" y="187" width="48" height="71" rx="3" fill="#ed8b40"/>
+<path id="spring-t" fill="none" stroke="#277fab" stroke-width="4"/><path id="spring-r" fill="none" stroke="#17877e" stroke-width="4"/>
+<rect id="pad-t" width="24" height="53" y="85" rx="3" fill="#277fab"/><rect id="pad-r" width="24" height="53" y="196" rx="3" fill="#17877e"/>
+<text x="468" y="104" font-size="15" fill="#277fab">先端：端子側</text><text id="contact-t" x="468" y="128" font-size="13" fill="#597283"></text>
+<text x="468" y="215" font-size="15" fill="#17877e">根元：被覆側</text><text id="contact-r" x="468" y="239" font-size="13" fill="#597283"></text>
+<path d="M63 52H136m-9-7 9 7-9 7" stroke="#587488" fill="none" stroke-width="2"/><text x="160" y="56" font-size="13" fill="#587488">共通の閉じ量 c →</text>
+<text x="20" y="295" font-size="12" fill="#587488">模式図の変位は拡大表示。実物の寸法・許容ストロークではありません。</text>
+</svg>
+<div id="status" class="status" aria-live="polite"></div>
+<div class="split" style="margin-top:17px"><div><div class="small">先端側の相対反力</div><div class="number blue" id="force-t"></div><div class="small" id="share-t"></div></div><div><div class="small">根元側の相対反力</div><div class="number teal" id="force-r"></div><div class="small" id="share-r"></div></div></div>
+<div class="bar" aria-label="相対反力の配分"><i id="bar-t" style="background:#277fab"></i><i id="bar-r" style="background:#17877e"></i></div>
+<p class="small">力の表示は <code>Fx / (k先端 × 1 mm)</code>。Nへの換算はしていません。値が正でも、保持・すべり・回転の成立を示すものではありません。</p>
+<svg id="force-plot" viewBox="0 0 680 250" role="img" aria-label="閉じ量に対する先端と根元の相対反力のグラフ">
+<path d="M65 18V205H650" fill="none" stroke="#8299a8"/>
+<text x="65" y="240" font-size="12" fill="#587488">−0.3</text><text x="620" y="240" font-size="12" fill="#587488">0.6 mm</text>
+<text x="270" y="240" font-size="12" fill="#587488">片側の共通閉じ量 c</text>
+<text x="14" y="28" font-size="12" fill="#587488">2.0</text><text x="34" y="207" font-size="12" fill="#587488">0</text>
+<path id="curve-t" stroke="#277fab" stroke-width="3" fill="none"/><path id="curve-r" stroke="#17877e" stroke-width="3" fill="none"/>
+<path id="cursor" stroke="#7992a0" stroke-dasharray="5 4" fill="none"/>
+</svg></div><aside class="card">
+<label for="closure">閉じ量 c：<span id="closure-value"></span> mm</label><input id="closure" type="range" min="-0.3" max="0.6" step="0.01" value="0">
+<p class="small">c=0は端子側の接触開始。負は接触前、正はそれ以降の変位です。</p>
+<label for="lead">根元が早く当たる量 e：<span id="lead-value"></span> mm</label><input id="lead" type="range" min="-0.3" max="0.3" step="0.01" value="0.1">
+<p class="small">正は根元が先、負は端子側が先に当たる例です。</p>
+<label for="ratio">根元／先端の剛性比：<span id="ratio-value"></span></label><input id="ratio" type="range" min="0.1" max="2" step="0.1" value="0.5">
+<p class="small">同じ圧縮量に対するX方向反力の比。Shore硬さの比ではありません。</p>
+<div class="buttons"><button id="early">根元が先</button><button id="same">同時に接触</button><button id="late">根元が後</button><button id="reset">初期表示</button></div>
+<p class="small rule">初期表示e=0.1 mmはv03の表示用隙間を用いた説明例です。実物の公差や設定値ではありません。剛性比・スライダー範囲も説明用です。</p>
+</aside></div></section>
+<section class="card"><h2>硬さの番号と、実形状の反力を分ける</h2><div class="grid"><div><p>Robotiq公開資料のシリコーンは<b>Shore A60</b>が参考です。ユーザー提供G3/G4案の<b>A30〜50・厚さ3 mm</b>は別案の仮設定です。</p><p>今回の採用硬さは未確定です。実際の丸底形状・厚さ・支持方法で、圧縮量と反力、摩擦、保持中の力低下を確認します。</p></div><div><p>公式にはシリコーン厚みを増して位置ずれへ追従させる例があります。材料選びには、硬さだけでなく応力–ひずみデータも必要になります。</p><p class="small">根拠は下記R1・R2・R5。今回の参考線へ適用できる力・圧縮量を示すものではありません。</p></div></div></section>
+<section class="card"><h2>把持力を何Nにするかを決めるための入力</h2><p>実物の入力は現在<b id="input-count"></b>項目が未入力です。図の相対値を実ハンドの力指令へ流用しません。</p>
+<div class="scroll"><table><thead><tr><th>区分</th><th>必要な入力</th><th>単位</th><th>確認元</th><th>値</th></tr></thead><tbody id="input-rows"></tbody></table></div>
+<p class="small rule">同じ単一駆動でも4接触部の力は均等とは限りません。手首の合力・モーター電流・物体検出だけで、先端と根元の両方が保持できているとは確認できません。</p></section>
+<section class="card"><h2>接触位置だけでなく、負荷が通る経路を確認する</h2><div class="grid"><div><h3>ねじ締結の反力</h3><p>工具の設定トルクが全量ハンドへ掛かるとは仮定しません。工具・ねじ・端子・ケース・パレット支持の関係から、ハンドに伝わる反力を分けます。</p><p>摩擦だけの力の合計に加えて、すべり・回転・取付けの荷重も扱います。必要な余裕と許容値はRs・製品側の要求から決めます。</p></div><div><h3>2Fの把持モード</h3><p>2Fは形状と接触位置によって、平行把持と包み込み把持が変わる適応機構です。専用先端でもequilibrium lineの条件が残ります。</p><p class="small">根拠はR3・R4。元4姿勢の形状保存だけでは負荷時の把持モードは確定しません。取付図は前回照合した2018世代を維持します。</p></div></div></section>
+<section class="card"><h2>次の確認順序</h2><ol><li>圧着後端子と採用電線の把持面・寸法範囲を確認する。</li><li>実形状パッドの圧縮・摩擦・圧力分布・保持時間中の変化を測る。</li><li>当該ハンドの開度・指令値・4接触部の力・把持モードを対応させる。</li><li>工程荷重と許容すべり等に合わせて、設定候補を絞る。</li></ol>
+<p class="small">今回の成果物は比較と入力整理です。3D形状・アーム軌道・動画を変更せず、正式な物理妥当性判定は所定の独立レビュー経路で行います。</p>
+<div class="links"><a href="パッド追従と保持力条件_v01.md">確認書</a><a href="data/hand_pad_conditions_v01.json">設定・未入力項目 JSON</a><button id="export">現在の説明図の値を保存</button></div></section>
+<section class="card sources"><h2>参照元</h2><div id="source-list"></div></section>
+</main><script type="application/json" id="review-data">__REVIEW_DATA__</script><script>
+"use strict";
+const config=JSON.parse(document.getElementById("review-data").textContent);
+const $=id=>document.getElementById(id);
+function reactions(c,e,r){const t=Math.max(c,0),root=Math.max(c+e,0)*r;return {terminal:t,root,total:t+root};}
+function contactLabel(delta){return delta<-.0000001?"接触前":delta>.0000001?"圧縮側（一次モデル）":"接触開始・反力0";}
+function spring(x1,x2,y){const start=x1+16,end=x2-12,span=end-start;let d=`M${x1} ${y}H${start}`;for(let i=1;i<=8;i++)d+=`L${start+span*i/9} ${y+(i%2?9:-9)}`;return d+`L${end} ${y}H${x2}`;}
+function values(){return {c:Number($("closure").value),e:Number($("lead").value),r:Number($("ratio").value)};}
+function update(){
+ const {c,e,r}=values(),force=reactions(c,e,r),ct=contactLabel(c),cr=contactLabel(c+e);
+ $("closure-value").textContent=c.toFixed(2);$("lead-value").textContent=e.toFixed(2);$("ratio-value").textContent=r.toFixed(1);
+ $("force-t").textContent=force.terminal.toFixed(3);$("force-r").textContent=force.root.toFixed(3);
+ const share=force.total>0?force.terminal/force.total:null;
+ $("share-t").textContent=share===null?"配分なし":`先端 ${(share*100).toFixed(1)} %`;
+ $("share-r").textContent=share===null?"配分なし":`根元 ${((1-share)*100).toFixed(1)} %`;
+ $("bar-t").style.width=`${share===null?0:share*100}%`;$("bar-r").style.width=`${share===null?0:(1-share)*100}%`;
+ $("contact-t").textContent=ct;$("contact-r").textContent=cr;
+ const carrier=95+c*75,pt=376+Math.min(c,0)*140,pr=376+Math.min(c+e,0)*140;
+ $("carrier").setAttribute("x",carrier);$("pad-t").setAttribute("x",pt);$("pad-r").setAttribute("x",pr);
+ $("spring-t").setAttribute("d",spring(carrier+32,pt,112));$("spring-r").setAttribute("d",spring(carrier+32,pr,222));
+ let state=force.terminal>0&&force.root>0?"両方に反力（一次モデル）":force.terminal>0?"先端側だけに反力":force.root>0?"根元側だけに反力":"両方とも反力0";
+ $("status").textContent=state+"。実物の保持成立を判定した表示ではありません。";
+ const px=x=>65+(x+.3)/.9*585,py=f=>205-f/2*185,points={terminal:[],root:[]};
+ for(let i=0;i<=90;i++){const x=-.3+i*.01,f=reactions(x,e,r);for(const key of Object.keys(points))points[key].push(`${i?'L':'M'}${px(x).toFixed(2)} ${py(f[key]).toFixed(2)}`);}
+ $("curve-t").setAttribute("d",points.terminal.join(" "));$("curve-r").setAttribute("d",points.root.join(" "));
+ $("cursor").setAttribute("d",`M${px(c)} 18V205`);
+ window.padReview={...values(),...force,share_terminal:share,actual_force_command:config.actual_force_command,unresolved:config.required_inputs.filter(x=>x.value===null).length};
+}
+function setValues(c,e,r){$("closure").value=c;$("lead").value=e;$("ratio").value=r;update();}
+for(const id of ["closure","lead","ratio"])$(id).addEventListener("input",update);
+$("early").addEventListener("click",()=>setValues(0,.1,.5));$("same").addEventListener("click",()=>setValues(.2,0,1));
+$("late").addEventListener("click",()=>setValues(.05,-.1,.5));
+$("reset").addEventListener("click",()=>setValues(config.illustration.closure_mm,config.illustration.root_contact_lead_mm,config.illustration.root_to_terminal_stiffness_ratio));
+for(const row of config.required_inputs){const tr=document.createElement("tr");for(const value of [row.group,row.label,row.unit,row.basis,row.value===null?"未入力":String(row.value)]){const td=document.createElement("td");td.textContent=value;tr.append(td);}$("input-rows").append(tr);}
+$("input-count").textContent=config.required_inputs.filter(x=>x.value===null).length;
+for(const source of config.sources){const p=document.createElement("p"),title=document.createElement(source.url?"a":"span");title.textContent=source.id+"｜"+source.title;if(source.url)title.href=source.url;p.append(title,document.createTextNode(" — "+source.scope));$("source-list").append(p);}
+function exportData(){const {c,e,r}=values();return {schema:"illustrative_pad_reactions_v01",purpose:config.illustration.purpose,illustrative_values:{closure_mm:c,root_contact_lead_mm:e,root_to_terminal_stiffness_ratio:r},normalized_reactions:reactions(c,e,r),actual_force_command:null,actual_contact_force_targets_n:config.actual_contact_force_targets_n,physical_acceptance_verdict:null};}
+$("export").addEventListener("click",()=>{const url=URL.createObjectURL(new Blob([JSON.stringify(exportData(),null,2)],{type:"application/json"}));const a=document.createElement("a");a.href=url;a.download="パッド力配分_説明用.json";a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);});
+$("reset").click();
+</script></body></html>

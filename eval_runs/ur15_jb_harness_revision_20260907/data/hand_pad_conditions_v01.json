@@ -1,0 +1,88 @@
+{
+  "revision": "v01",
+  "status": "comparison_and_measurement_inputs_not_selected_force_settings",
+  "source_audit": "audit/hand_root_clamp_observations_v03.json",
+  "source_audit_sha256": "680aab23678a883bcbf6ab178fb52a63651c7cde27da07429637ac9337239e7c",
+  "baseline": {
+    "initial_body_setback_m": 0.040,
+    "terminal_y_range_m": [0.004, 0.012],
+    "root_y_range_m": [0.061, 0.071],
+    "root_reference_diameter_m": 0.014,
+    "root_crown_pad_thickness_m": 0.002,
+    "root_nominal_backing_width_m": 0.003,
+    "terminal_display_gap_m": 0.0001,
+    "active_drive_count": 1,
+    "original_finger_count": 2
+  },
+  "comparison_order": [
+    {
+      "id": "P1",
+      "title": "端子側を基準に、根元の交換式パッドで追従",
+      "terminal_role": "位置と向きを決める輪郭。接触層を含む実物の寸法と剛性を確認",
+      "root_role": "被覆を包む丸底の弾性パッド。接触長さと現在の配置を出発点に圧縮特性を確認",
+      "reason": "既存の2本指・単一駆動・40 mm後退を基準に比較できる",
+      "limitation": "接触順序、圧縮量、応力緩和と力配分は未測定",
+      "selected_manufacturing_design": false
+    },
+    {
+      "id": "P2",
+      "title": "不足する追従を根元の受動機構で補う比較",
+      "terminal_role": "P1の位置決め役割を維持",
+      "root_role": "開閉方向に案内されるパッドと復元要素を比較する",
+      "reason": "P1の許容圧縮だけで寸法差を吸収できない場合の候補",
+      "limitation": "現在の支持部幅3 mmに案内・復元・止め機構を収められるとは確認していない",
+      "selected_manufacturing_design": false
+    }
+  ],
+  "material_references": {
+    "robotiq_published_silicone_shore_a": 60,
+    "user_g3_g4_trial_shore_a_range": [30, 50],
+    "user_g3_g4_trial_pad_thickness_m": 0.003,
+    "transferred_to_d40": false,
+    "selected_material": null,
+    "selected_hardness": null,
+    "measured_compression_curve": null
+  },
+  "required_inputs": [
+    {"id": "terminal_geometry", "group": "対象", "label": "圧着後の端子輪郭・把持可能面・公差", "unit": "m", "value": null, "basis": "実物図面・現物測定"},
+    {"id": "cable_diameter", "group": "対象", "label": "被覆外径・真円度・径公差", "unit": "m", "value": null, "basis": "採用電線の図面・現物測定"},
+    {"id": "jacket", "group": "対象", "label": "被覆材・厚さ・把持可能区間", "unit": "material / m", "value": null, "basis": "採用電線メーカー"},
+    {"id": "compression_limit", "group": "対象", "label": "許容圧縮・押付力・圧力の条件", "unit": "m / N / Pa", "value": null, "basis": "部品メーカー・Rsが定める条件"},
+    {"id": "environment", "group": "対象", "label": "温度・汚れ・油の使用条件", "unit": "K / condition", "value": null, "basis": "実際の工程条件"},
+    {"id": "pad_response", "group": "パッド", "label": "実形状の圧縮量と反力・繰返し後の変化", "unit": "m / N", "value": null, "basis": "パッド単体と組合せの測定"},
+    {"id": "relaxation", "group": "パッド", "label": "保持時間中の力低下・戻り", "unit": "s / N / m", "value": null, "basis": "工程時間に対応する測定"},
+    {"id": "friction", "group": "パッド", "label": "端子面・被覆面それぞれの摩擦", "unit": "dimensionless", "value": null, "basis": "実材の表面状態別測定"},
+    {"id": "contact_pressure", "group": "パッド", "label": "4接触部の圧力・有効接触面積", "unit": "Pa / m^2", "value": null, "basis": "接触分布の測定"},
+    {"id": "wrench", "group": "工程", "label": "搬送・曲げ・位置合わせ時の外力とモーメント", "unit": "N / N*m", "value": null, "basis": "実ワーク・工程条件"},
+    {"id": "tightening_reaction", "group": "工程", "label": "ねじ締結時に端子とハンドへ伝わる反力経路", "unit": "N / N*m", "value": null, "basis": "実締結部・工具・ケース支持の組合せ"},
+    {"id": "retention_requirements", "group": "工程", "label": "許容すべり・回転・位置誤差と保持期間", "unit": "m / rad / s", "value": null, "basis": "Rs・製品側の要求"},
+    {"id": "drive_calibration", "group": "機構", "label": "指令値・開度・接触位置と4接触部の力の対応", "unit": "command / rad / m / N", "value": null, "basis": "当該ハンドの実測・公式機構条件"},
+    {"id": "grasp_mode", "group": "機構", "label": "負荷時の把持モードとequilibrium lineの関係", "unit": "mode / rad / m", "value": null, "basis": "当該世代の機構・取付けの照合"},
+    {"id": "mount_limits", "group": "機構", "label": "延長部・取付けの荷重と変位の条件", "unit": "N / N*m / m", "value": null, "basis": "実材・取付け設計・公式限界"},
+    {"id": "margin", "group": "要求", "label": "評価に用いる余裕と受入条件", "unit": "requirement", "value": null, "basis": "Rs・所定の独立レビュー経路"}
+  ],
+  "actual_force_command": null,
+  "actual_contact_force_targets_n": {"terminal_left": null, "terminal_right": null, "root_left": null, "root_right": null},
+  "illustration": {
+    "purpose": "One-sided, one-dimensional linear reaction sharing; teaching example only",
+    "closure_mm": 0.0,
+    "root_contact_lead_mm": 0.1,
+    "root_to_terminal_stiffness_ratio": 0.5,
+    "closure_range_mm": [-0.3, 0.6],
+    "lead_range_mm": [-0.3, 0.3],
+    "ratio_range": [0.1, 2.0],
+    "actual_values_or_limits": false,
+    "force_normalization": "F_x / (k_terminal * 1 mm); no N conversion",
+    "excluded": ["cable deformation", "friction", "moment equilibrium", "gripper linkage", "force control", "nonlinear pads", "pressure distribution", "dynamic motion"]
+  },
+  "sources": [
+    {"id": "R1", "title": "Robotiq：指先の材料", "url": "https://blog.robotiq.com/knowledge/what-material-are-robotiq-grippers-and-fingertips-made-of", "scope": "公開シリコーン60A。D40の採用硬さではない", "updated": "2026-08-14", "checked": "2026-09-14"},
+    {"id": "R2", "title": "Robotiq：カスタム指先の設計例", "url": "https://blog.robotiq.com/how-to-design-custom-fingertips-for-your-application", "scope": "シリコーン厚みと追従・摩擦の設計例", "checked": "2026-09-14"},
+    {"id": "R3", "title": "Robotiq：2F機構と把持モード", "url": "https://assets.robotiq.com/website-assets/support_documents/document/online/2F-85_2F-140_TM_InstructionManual_HTML5_20190503.zip/2F-85_2F-140_TM_InstructionManual_HTML5/Content/1.%20General_Presentation.htm", "scope": "単一駆動・把持モード・間接検出の一般説明。取付図の世代差は別途維持", "checked": "2026-09-14"},
+    {"id": "R4", "title": "Robotiq：2018年版説明書", "url": "https://assets.robotiq.com/website-assets/support_archives/document_en/2F-85_2F-140_Instruction_Manual_PDF_20181130.pdf", "scope": "p131の専用指先制約・equilibrium line条件。保持力/摩擦/モーメントの前提", "sha256": "4a059283f11b12d458b084aab3e0c9238ac2cd61b42cd630551d4fc10a6d4ad3", "checked": "2026-09-14"},
+    {"id": "R5", "title": "Rogers：応力–ひずみデータによる材料選定", "url": "https://www.rogerscorp.com/elastomeric-material-solutions/bisco-silicones", "scope": "CFD Curve Toolの評価方法。材料型式や摩擦値の選定ではない", "checked": "2026-09-14"},
+    {"id": "U1", "title": "ユーザー提供G3/G4仕様v0.2", "url": null, "sha256": "f75f22bd1e826f7682b3392403dab9a2954bd1a26d84e195efd0aa0125abcbe9", "scope": "A30〜50/3 mmは別のG3/G4案の仮設定。D40へ自動採用しない"}
+  ],
+  "physical_acceptance_verdict": null,
+  "arm_motion_authorized_by_this_document": false
+}

@@ -268,3 +268,32 @@ changed line wrapping. Shared-actuator load distribution, pad compliance,
 attachment and screw access remain unresolved. No arm motion or video was
 created. The full static model and reproduction inputs are delivered separately
 from v02 under Downloads/THREAD_40mm後退と根元クランプ_v03_20260913.
+
+## 2026-09-14 — Pad compliance and holding-condition comparison
+
+The user authorized the next study after confirming the D40 two-contact
+shape. Prepared a document, data register and offline interactive diagram.
+P1 compares terminal positioning with an elastic root pad; P2 is a conditional
+passive-mechanism alternative, with no assumed fit in the 3 mm backing space.
+The actual material, hardness, contact-force targets and drive command remain
+unset. Sixteen required inputs distinguish actual part limits, compression,
+friction, time response, local contact loads and process reaction paths.
+
+Local reuse search found existing source-derived 2F geometry and separate RL
+physics records. No RL friction/force values or geometry constraints were
+transferred. Verified official Robotiq material/custom-tip references,
+2018 manual SHA and grasp-mode constraints, and Rogers' CFD method reference.
+The G3/G4 source was found in the earlier delivery's saved references after the
+old Downloads top-level path was absent. Its A30-50/3 mm draft values and the
+manufacturer's public 60A reference were not adopted for D40.
+
+The diagram uses two one-dimensional linear springs on one side of a hand.
+Forces are normalized by terminal stiffness times 1 mm, with no N conversion.
+Its default contact lead uses the 0.1 mm display gap solely for explanation.
+Nine cases on each desktop/mobile browser covered contact order, zero force,
+UI limits, stiffness changes and reset. Displayed reactions, finite SVG paths,
+exported data construction, null actual targets and local links matched the
+recorded checks; no horizontal overflow. OS save-dialog behavior was not tested.
+Source audit SHA 680aab23... and all packaging inputs were preserved. No scene,
+force-control implementation, arm trajectory or video was changed. Formal
+physical acceptance remains outside this auxiliary study.
