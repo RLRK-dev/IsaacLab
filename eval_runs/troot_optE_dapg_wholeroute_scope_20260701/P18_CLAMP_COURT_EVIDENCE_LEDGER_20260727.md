@@ -47837,3 +47837,17 @@ ALT-1 (downgrade) — not chosen (the human's word). ALT-2 (`agent prompt`) — 
 ```
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1472 — ✅ **p6 `m-p6-161`（22:59:36・当卓 transcript `:42894` type=user・typed）= DDR 74（`54174053ac` 22:59:09・LEDGER +1/−1・row `:178`）: p4 受入 = ✅ ACCEPTED（spec として・`b17488fa5d` cite）・残差割当 1 行を携行（§16 の rows (a)-(e) には無いと blob で確認・p11 の再編集は求めない）・「符号」の 2 object（計器の回転行列の崩れ／ρ の規約符号）を書き分け（p6 の読み・判定でない）→ **m-p18-352 → p4 `:2314`・p11 `:1830` = DELIVERED**（当卓 2026-09-13 23:01:07 JST 実測）
+
+**契機** = p6 の message。⛔ **実行 0**。**送信 2（1 id）・Enter 2**。hub 未処理 0。
+
+- **D4′ の状態**: spec 受入済（p4）・DDR 74 携行済（p6）・残り = pZ の D4′ leg 事前登録（(a)-(e) ＋ R3-ii）・Rs1 の語で build 窓。
+- **rows（`sent_records.jsonl` 63–64 行目・逐語）**:
+
+```
+{"id": "m-p18-352", "body_sha256": "cc3e0e2d5581998d0cb10ce0021afe29e2808705ad980d1772524046e2df76bb", "head": "MSG m-p18-352 / w2:p18 / OPS-SUPERVISOR → w2:p4 RS-TECH-LEAD（cc w2:p11 ARM-CONTROL-DESIGN）", "to": "RS-TECH-LEAD", "to_requested": "RS-TECH-LEAD", "cc": ["ARM-CONTROL-DESIGN"], "to_pane": "", "resolved_by": "label", "hub_session_id": "1c3d805c-2a9a-4b6d-bba2-ae7d479862e7", "child_session": "1", "herdr_version": "herdr 0.9.0", "control": false, "queued_on_topic": false, "row_type": "send", "pane": "w2:p4", "role": "RS-TECH-LEAD", "session_id": "ad899cc6-2451-4364-ba3c-910b67075aa4", "transcript_path": "/home/rlrk/.claude/projects/-home-rlrk-IsaacLab/ad899cc6-2451-4364-ba3c-910b67075aa4.jsonl", "pre_send_offset": 8081561, "via": "Enter", "state": "DELIVERED", "status": "done", "sent_at": "2026-09-13T23:00:26.006+09:00", "composer_before_kind": "empty", "composer_before_sha256": "", "send_rc": 0, "landed_as": "[Pasted text #14 +8 lines]", "status_at_keypress": "done", "keypress_rc": 0, "enter_at": "2026-09-13T23:00:26.289+09:00", "evidence": "user@8085814+0", "fused_with": [], "head_found": true, "delivered_at": "2026-09-13T14:00:26.309Z", "line": 2314, "first_seen_at": "2026-09-13T23:00:26.798+09:00"}
+{"id": "m-p18-352", "body_sha256": "cc3e0e2d5581998d0cb10ce0021afe29e2808705ad980d1772524046e2df76bb", "head": "MSG m-p18-352 / w2:p18 / OPS-SUPERVISOR → w2:p4 RS-TECH-LEAD（cc w2:p11 ARM-CONTROL-DESIGN）", "to": "RS-TECH-LEAD", "to_requested": "RS-TECH-LEAD", "cc": ["ARM-CONTROL-DESIGN"], "to_pane": "", "resolved_by": "label", "hub_session_id": "1c3d805c-2a9a-4b6d-bba2-ae7d479862e7", "child_session": "1", "herdr_version": "herdr 0.9.0", "control": false, "queued_on_topic": false, "row_type": "send", "pane": "w2:p11", "role": "ARM-CONTROL-DESIGN", "session_id": "18c853c1-1751-403a-a1cf-f0248a97dc2e", "transcript_path": "/home/rlrk/.claude/projects/-home-rlrk-IsaacLab/18c853c1-1751-403a-a1cf-f0248a97dc2e.jsonl", "pre_send_offset": 6460495, "via": "Enter", "state": "DELIVERED", "status": "done", "sent_at": "2026-09-13T23:00:26.804+09:00", "composer_before_kind": "empty", "composer_before_sha256": "", "send_rc": 0, "landed_as": "[Pasted text #11 +8 lines]", "status_at_keypress": "done", "keypress_rc": 0, "enter_at": "2026-09-13T23:00:27.085+09:00", "evidence": "user@6461020+0", "fused_with": [], "head_found": true, "delivered_at": "2026-09-13T14:00:27.106Z", "line": 1830, "first_seen_at": "2026-09-13T23:00:27.592+09:00"}
+```
+
+**Banked — 時刻は本節 commit の author date が正。**

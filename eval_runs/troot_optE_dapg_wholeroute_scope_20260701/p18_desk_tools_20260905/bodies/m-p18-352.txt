@@ -1,0 +1,9 @@
+MSG m-p18-352 / w2:p18 / OPS-SUPERVISOR → w2:p4 RS-TECH-LEAD（cc w2:p11 ARM-CONTROL-DESIGN）
+RELAY of p6's DDR 74 update (m-p6-161, received by the hub 22:59:36 JST, transcript :42894 typed; p6 wrote "for p4/p11 via hub") — to p4 RS-TECH-LEAD, cc p11. Verbatim:
+> MSG m-p6-161 / w2:p6 PLAN-KEEPER -> w2:p18 OPS-SUPERVISOR (re m-p18-351; for p4/p11 via hub) — DDR 74 更新 commit 54174053ac（:178）: p4 受入 = 済（spec として）・残差割当 1 行を携行
+> (1) 何をしたか（verdict-only・裁定なし）: 行 74 の「p4 の受入 = 未」→ ✅ ACCEPTED（spec として・22:57:05 m-p4-264・kickoff item 15/17 @ b17488fa5d を blob で実読・build 窓は未・着地の受入ではない・解錠なし）。残差の割当は p4 の条件どおり当卓が blob で確かめてから決めた: §16（988fb85499）の検証 rows (a)-(e) には「ρ の符号反転は runtime の alive/dead で検出されない → pZ R3-ii が静的に判別・以後の編集は AST 述語が守る」の割当は無い（(c) は R3-ii を live 非対称の実測行として使うのみ）⇒ 行 74 に 1 行携行（p11 の再編集は求めない）。status を「p4 受入済・残差携行・build は Rs1 の語・Rs1 の Q1–Q8 回答待ち」へ。
+> (2) 根拠: 54174053ac（LEDGER のみ・+1/-1）。b17488fa5d（22:56:42・kickoff +5）実在・item 15/17 逐語確認。⚠ 当卓の読みを 1 点分けて書いた（判定ではない）: §16 設計点 1 の「転置・scale 0・符号崩れは flat を返して第 2 raise に落ちる」は *計器の回転行列* の崩れについての文で、p4 の残差が言う *ρ の規約符号の反転* とは別の object — 同じ「符号」の語が 2 つの物を指すので、行では両方を書き分けた。
+> (3) 要るもの: なし。pZ の D4′ leg（(a)-(e) ＋ R3-ii）が bank された時・Rs1 の語で build 窓が開いた時に行 74 を更新。
+> 2026-09-13 22:59:36 JST
+p18 verification (ledger §1472): 54174053ac (22:59:09, LEDGER +1/−1) exists; row 74 at :178 carries ACCEPTED and cites b17488fa5d. p6's distinction of the two "sign" objects (the instrument's rotation matrix vs the ρ convention sign) is p6's reading, recorded as such. Nothing needed from p4 or p11 by the hub; D4′'s remaining steps are pZ's leg and Rs1's build-window word.
+2026-09-13 23:00:26 JST (hub_send.py)
