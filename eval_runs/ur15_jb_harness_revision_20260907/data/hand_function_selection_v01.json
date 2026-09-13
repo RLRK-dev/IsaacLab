@@ -1,0 +1,162 @@
+{
+  "revision": "v01",
+  "scope": "OP030-B hand functions before arm trajectory design",
+  "status": "comparison_baseline_and_conditional_candidates_not_hardware_acceptance",
+  "evidence_date": "2026-09-13",
+  "baseline": {
+    "arms": 2,
+    "hands": ["2F", "2F"],
+    "reason_ja": "両端を持つ役割を各腕へ分担する。現時点の必須操作には、同じ手の端子側と被覆側を別々に開閉する要求がない。",
+    "not_established": ["S-bend formation", "grip force and slip", "actual terminal fit", "retention after both hands open"]
+  },
+  "hand_definitions": {
+    "2F": {
+      "fingers": 2,
+      "closing_actuators": 1,
+      "basis": "Robotiq 2F-85 linked mechanism with custom fingertips under comparison",
+      "guide_role": "passive clearance guide fixed to the same two fingers; not an independently commanded clamp"
+    },
+    "G3": {
+      "fingers": 3,
+      "closing_actuators": 3,
+      "arrangement": "1 opposed to 2",
+      "basis": "user-supplied THREAD-G3-85 design proposal v0.2",
+      "role_ja": "剛体コネクター等の3点位置決めの比較候補。独立した対向保持組を2組持つ構成ではない。"
+    },
+    "G4": {
+      "fingers": 4,
+      "closing_actuators": 4,
+      "arrangement": "two opposed pairs",
+      "basis": "user-supplied THREAD-G4-85 design proposal v0.2",
+      "initial_pair_spacing_m": 0.030,
+      "alternative_mount_spacing_range_m": [0.020, 0.040],
+      "spacing_changes_during_operation": false,
+      "active_longitudinal_feed_axis": false,
+      "role_ja": "端子と被覆の独立した開閉・接触指令が工程上必要となった場合に比較する。片組だけでの保持能力は別途未検証。"
+    }
+  },
+  "process_steps": [
+    {
+      "id": "B1",
+      "label_ja": "供給パレットへ同時接近",
+      "requirement_basis": "user_requested",
+      "hand_function_ja": "左右の腕が同じケーブルの両端へ接近する。",
+      "independent_terminal_wire_opening_required": false,
+      "note_ja": "左右の手はそれぞれ独立した開閉指令を持つ。各手が1駆動であることと、両腕が1駆動であることは異なる。"
+    },
+    {
+      "id": "B2",
+      "label_ja": "両端を同時に把持",
+      "requirement_basis": "user_requested",
+      "hand_function_ja": "各手の端末用輪郭で対象の位置・向きを扱う。被覆把持は丸底溝と区別する。",
+      "independent_terminal_wire_opening_required": false,
+      "note_ja": "端子側の許容接触面、滑り・回転・保持力は未確定。前回のGUIDEは被覆を別に締め付けない。"
+    },
+    {
+      "id": "B3",
+      "label_ja": "搬送・経路へ合わせる",
+      "requirement_basis": "user_requested_function_feasibility_unresolved",
+      "hand_function_ja": "両端の姿勢と線の状態を扱う。必要なら追加の局所保持機能を比較する。",
+      "independent_terminal_wire_opening_required": null,
+      "note_ja": "旧中心線アニメーションは把持力によるS字形成の証拠ではない。G4でも長手送り軸はなく、本数だけでS字形成を保証できない。"
+    },
+    {
+      "id": "B4",
+      "label_ja": "端子位置を合わせる",
+      "requirement_basis": "user_requested_function_product_details_unresolved",
+      "hand_function_ja": "穴・接続面・線出口の向きを合わせる。",
+      "independent_terminal_wire_opening_required": null,
+      "note_ja": "端子を保持したまま被覆側だけ開く必要が生じればG4の比較理由になる。現段階でその操作は必須として指定されていない。"
+    },
+    {
+      "id": "B5",
+      "label_ja": "開放・両腕同時上昇",
+      "requirement_basis": "user_requested_with_unresolved_handoff",
+      "hand_function_ja": "設置後、指を開いて両腕を同時に上昇させる。",
+      "independent_terminal_wire_opening_required": false,
+      "note_ja": "両手を開いた後の端子・配線を何が保持するかは未定。残った手による保持は、この段階の解決にはならない。"
+    },
+    {
+      "id": "BC",
+      "label_ja": "コンベア搬送 → C締結",
+      "requirement_basis": "user_requested_three_station_process",
+      "hand_function_ja": "Bの手が離れたワークをCへ引き渡す。",
+      "independent_terminal_wire_opening_required": false,
+      "note_ja": "2F・G3・G4の全指が離れればハンドによる保持は残らない。製品側の支持・固定と搬送中の拘束は別の未確定事項。"
+    }
+  ],
+  "comparison_scenarios": [
+    {
+      "id": "hold",
+      "label_ja": "端子を保持する指令",
+      "mandatory_now": true,
+      "pair_commands": ["close", "close"],
+      "two_finger_command": "close",
+      "two_finger_note_ja": "2本指の輪郭を閉じる。後方GUIDEは同じ指に固定されたすき間案内で、被覆への押付力を別に指令しない。",
+      "g4_note_ja": "前後2組へ閉方向を指令する模式図。端子側・被覆側の接触形状、力配分と保持能力は未検証。"
+    },
+    {
+      "id": "wire_open",
+      "label_ja": "端子保持・被覆側だけ開く",
+      "mandatory_now": false,
+      "pair_commands": ["close", "open"],
+      "two_finger_command": null,
+      "two_finger_note_ja": "同じ指に付いた後方の案内部だけを開く指令はない。端子側と後方部は連動する。",
+      "g4_note_ja": "後方組だけの開指令を表せる設計案。前方組だけで滑り・回転を抑えられるかは別途確認が必要。"
+    },
+    {
+      "id": "terminal_open",
+      "label_ja": "被覆保持・端子側だけ開く",
+      "mandatory_now": false,
+      "pair_commands": ["open", "close"],
+      "two_finger_command": null,
+      "two_finger_note_ja": "端子側だけを開き、後方を独立して閉じ続ける指令はない。GUIDEには独立した把持機能もない。",
+      "g4_note_ja": "前方組だけの開指令を表せる設計案。被覆側1組だけで端子の位置・向きを保持できるとは未確認。"
+    },
+    {
+      "id": "all_open",
+      "label_ja": "全指開放・Cへ引渡し",
+      "mandatory_now": true,
+      "pair_commands": ["open", "open"],
+      "two_finger_command": "open",
+      "two_finger_note_ja": "端子側も案内部も離れる。全指開放後にハンドが保持するという説明にはしない。",
+      "g4_note_ja": "2組とも離れる。4本指でも、全開放後のB→Cの保持方法は別途必要。"
+    }
+  ],
+  "conditional_upgrade": {
+    "trigger_ja": "同じ手内で端子側と被覆側に別々の開閉・接触指令が必要と具体化されたとき。",
+    "scope_ja": "その役割が必要な手だけをG4との比較対象にする。両腕一律に増やさない。",
+    "not_a_trigger_by_itself": ["S-shaped line shown in animation", "two-handed simultaneous approach", "retention after all fingers open"],
+    "pair_only_retention_verified": false
+  },
+  "station_roles_preserved": {
+    "A": "部品保持の2F専用輪郭と、別腕の直付け締結工具を比較の基準にする。工具腕にフィンガを残さない。",
+    "B": "双腕の各2Fを機能比較の基準とする。B端末は側縁輪郭、被覆だけを扱う場合は短い丸底溝。GUIDE追加は独立クランプではない。",
+    "C": "直付け締結工具を使う既存の大小同時締結要求を維持する。単腕逐次締結へ黙って変更しない。"
+  },
+  "handoff": {
+    "source_of_retention_after_both_hands_open": null,
+    "fastening_quality_verdict": null,
+    "restore_deleted_clamps": false,
+    "add_tacking_at_B": false,
+    "drawing_gates_not_acceptance_limits_ja": [
+      "指を開く時点で端子と配線を支える部材・接触面を特定する。",
+      "コンベア移動中に位置・向きが保たれる仕組みを特定する。",
+      "Cの締結工具が入る空間と、保持部の干渉・開放方法を図面上で対応付ける。"
+    ]
+  },
+  "sources": {
+    "user_spec_path": "references/hand_spec_20260913/THREAD_3F_4F_Gripper_Spec_v0.2_JA.md",
+    "user_spec_sha256": "f75f22bd1e826f7682b3392403dab9a2954bd1a26d84e195efd0aa0125abcbe9",
+    "user_spec_sections": ["3", "4.1", "4.2", "7.1", "7.2"],
+    "terminal_config_path": "data/hand_terminal_concepts_v01.json",
+    "terminal_review_path": "analysis/hand_terminal_3d_review_v01.md",
+    "historical_motion_path": "scripts/op030_split_wire_motion.py",
+    "historical_motion_use": "read-only support labels and optional clip branch; not a claim about current v06 active configuration or actual support",
+    "robotiq_url": "https://assets.robotiq.com/website-assets/support_documents/document/online/2F-85_2F-140_TM_InstructionManual_HTML5_20190503.zip/2F-85_2F-140_TM_InstructionManual_HTML5/Content/1.%20General_Presentation.htm",
+    "robotiq_claim_ja": "2F-85/140は単一アクチュエータで両指を開閉する。把持形態は接触位置にも依存する。"
+  },
+  "arm_trajectory_created": false,
+  "video_created": false,
+  "physical_acceptance_verdict": null
+}

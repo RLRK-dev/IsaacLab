@@ -1,0 +1,177 @@
+<!doctype html>
+<!-- Copyright (c) 2022-2026, The Isaac Lab Project Developers. SPDX-License-Identifier: BSD-3-Clause -->
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>B工程｜指構成とCへの引渡し</title>
+  <style>
+    :root{color-scheme:light;--ink:#182b3c;--muted:#50657a;--line:#dce4ea;--blue:#236c97;--orange:#ce742c}
+    *{box-sizing:border-box}body{margin:0;background:#f3f6f8;color:var(--ink);font:16px/1.75 system-ui,"Noto Sans CJK JP",sans-serif}
+    main{max-width:1240px;margin:auto;padding:36px 24px 52px}h1{font-size:30px;line-height:1.5;margin:8px 0 12px}h2{font-size:22px;margin:0 0 16px}h3{font-size:19px;margin:0 0 6px}p{margin:8px 0 14px}
+    a{color:var(--blue);text-underline-offset:3px}section{margin-top:24px;padding:24px;border:1px solid var(--line);border-radius:12px;background:white}
+    .eyebrow{font-size:13px;letter-spacing:.06em;color:var(--muted)}.lead{max-width:980px;font-size:18px}.note{color:var(--muted);font-size:14px}.small{font-size:13px}
+    .row{display:flex;gap:12px;flex-wrap:wrap;align-items:center}.cols{display:grid;grid-template-columns:1fr 1fr;gap:20px}.card{border:1px solid var(--line);border-radius:9px;padding:18px}
+    .callout{border-left:4px solid var(--orange);background:#fff6ed;padding:14px 18px;margin-top:18px}.callout p:last-child{margin-bottom:0}
+    button,select{font:inherit;color:var(--ink);background:white;border:1px solid #bccbd6;border-radius:7px;padding:9px 13px}button{cursor:pointer}button:hover{background:#eef5fa}button[aria-pressed="true"]{color:white;background:var(--blue);border-color:var(--blue)}button:focus-visible,select:focus-visible{outline:3px solid #d58532;outline-offset:3px}
+    #steps{display:grid;grid-template-columns:repeat(6,1fr);gap:8px}#steps button{text-align:left;font-size:14px}#step-detail{padding:16px;background:#f5f8fa;border-radius:7px;margin-top:14px;min-height:150px}
+    #scenarios{margin-bottom:16px}.diagram{width:100%;height:310px;display:block;background:#fbfcfd;border-radius:7px}.diagram text{font:12px system-ui,"Noto Sans CJK JP",sans-serif;fill:#344f64}.explanation{min-height:86px;margin-top:12px}.badge{display:inline-block;color:var(--muted);font-size:13px;padding:2px 9px;border-radius:5px;background:#eef2f5}
+    #totals{font-size:21px;font-weight:650}#handoff{display:none}.metric{font-size:26px;font-weight:700;color:var(--blue)}table{width:100%;border-collapse:collapse;font-size:14px}th,td{text-align:left;border-bottom:1px solid var(--line);padding:10px 7px;vertical-align:top}ul{padding-left:22px}footer{font-size:13px;color:var(--muted);margin-top:24px}
+    @media(max-width:850px){.cols{grid-template-columns:1fr}#steps{grid-template-columns:repeat(3,1fr)}main{padding:22px 14px}h1{font-size:25px}section{padding:18px}.explanation{min-height:0}}
+    @media print{body{background:white}main{max-width:none;padding:0}button,select{border:1px solid #666}.card,section{break-inside:avoid}.diagram{height:245px}}
+  </style>
+</head>
+<body>
+<main>
+  <header>
+    <div class="eyebrow">THREAD / OP030-B / HAND FUNCTIONS v0.1 / 2026-09-13</div>
+    <h1>両端を持つB工程は、各腕2本指を比較の基準に</h1>
+    <p class="lead">端子側と被覆側を<strong>別々に開閉する役割が必要な手</strong>を、4本指との比較対象にします。指先の形状と工程の役割を先に絞る資料です。</p>
+    <p class="note">2FによるS字形成や保持力の成立を確認した意味ではありません。実部品への適合・接触力・引渡しは未確定です。</p>
+  </header>
+
+  <section aria-labelledby="process-title">
+    <h2 id="process-title">工程のどこで、別々の開閉が必要になるか</h2>
+    <div id="steps"></div>
+    <div id="step-detail" aria-live="polite"></div>
+  </section>
+
+  <section aria-labelledby="compare-title">
+    <h2 id="compare-title">一つの手に出せる指令を比較</h2>
+    <p class="note">ボタンで要求する操作を切り替えます。図は指令の違いを表す模式図です。寸法、実リンクの軌跡、接触力、物体の動きを計算していません。</p>
+    <div id="scenarios" class="row"></div>
+    <div class="cols">
+      <article class="card">
+        <h3>2F ＋ 端末用指先</h3>
+        <div class="badge">2本指 / 開閉1駆動 / 後方案内は連動</div>
+        <svg id="two-svg" class="diagram" viewBox="0 0 380 290" role="img" aria-label="2本指の連動した端末輪郭と被覆案内"></svg>
+        <p id="two-note" class="explanation" aria-live="polite"></p>
+      </article>
+      <article class="card">
+        <h3>G4案：端子組 ＋ 被覆組</h3>
+        <div class="badge">4本指 / 開閉4駆動 / 前後の組を別々に指令</div>
+        <svg id="four-svg" class="diagram" viewBox="0 0 380 290" role="img" aria-label="4本指設計案の前後2組の指令"></svg>
+        <p id="four-note" class="explanation" aria-live="polite"></p>
+      </article>
+    </div>
+    <div id="scenario-status" class="note"></div>
+    <div id="handoff" class="callout" aria-live="polite">
+      <strong>B → C：全指が離れた後の保持方法は未定</strong>
+      <p>手を増やしても、すべての指を開けばハンドによる保持は残りません。端子と配線を支える部材、コンベア搬送中の拘束、C工具の進入空間を別に決める必要があります。</p>
+      <p class="small">図中の対象は位置説明のため残しています。開放後の位置維持を示すものではありません。</p>
+    </div>
+  </section>
+
+  <section aria-labelledby="allocation-title">
+    <h2 id="allocation-title">追加の役割が必要な手だけを比較する</h2>
+    <div class="row">
+      <label for="allocation">Bの両腕の構成</label>
+      <select id="allocation">
+        <option value="2F,2F">2F ＋ 2F：比較の基準</option>
+        <option value="2F,G4">2F ＋ G4：片側に独立した役割</option>
+        <option value="G4,G4">G4 ＋ G4：両側に独立した役割</option>
+      </select>
+      <output id="totals" aria-live="polite"></output>
+    </div>
+    <p class="note">開閉用アクチュエータの数だけを数えています。左右の手にはそれぞれ指令を出せます。2F＋G4の左右割当は未指定です。</p>
+    <div class="cols">
+      <div class="card"><h3>3本指を使う理由</h3><p>1対2の3点で、剛体コネクターなどを位置決めしたい場合の候補です。独立した対向保持組が2組ある配置ではありません。ケーブルには3点曲げが生じる可能性もあり、4本指の代わりと一括には扱いません。</p></div>
+      <div class="card"><h3>4本指にも長手送り軸はない</h3><p>受領G4案は各指のX方向の開閉と受動的な傾きです。前後の保持組間隔は運転中固定。片組を開くことと、線をY方向へ能動的に送り込むことは異なります。</p></div>
+    </div>
+  </section>
+
+  <section aria-labelledby="spacing-title">
+    <h2 id="spacing-title">指先の位置も、そのまま移植はできない</h2>
+    <div class="cols">
+      <div><p>前回の端末用指先：端子側と後方案内の中心差</p><div class="metric" id="example-spacing"></div><p class="note">比較用サンプルの設定からの算術。Ampere実部品に必要な間隔を測ったものではありません。</p></div>
+      <div><p>受領G4案：初期の保持組間隔</p><div class="metric" id="g4-spacing"></div><p class="note">別取付は20〜40 mmの比較案。実証済みの機械限界ではありません。G4採用時は対象と接触面から再配置します。</p></div>
+    </div>
+  </section>
+
+  <section aria-labelledby="carry-title">
+    <h2 id="carry-title">A・Cへの引継ぎ</h2>
+    <table><thead><tr><th>工程</th><th>維持する割当・要求</th></tr></thead><tbody id="roles"></tbody></table>
+    <p>今回の基準案に加え、採用部品の接触面と、Bの全指開放からC締結までの保持方法を図面に対応付けてから、アーム軌道の検討へ進めます。</p>
+    <p class="note">撤去済みの青い押さえの復活、Bでの仮締め追加、Cの同時締結の削除はこの資料に含めていません。</p>
+  </section>
+
+  <section aria-labelledby="sources-title">
+    <h2 id="sources-title">資料と根拠</h2>
+    <ul>
+      <li><a href="B工程_指構成整理_v01.md">今回の機能対応票</a> ／ <a href="data/hand_function_selection_v01.json">対応データ</a></li>
+      <li><a href="references/hand_spec_20260913/THREAD_3F_4F_Gripper_Spec_v0.2_JA.md">受領G3/G4仕様案 v0.2</a>：§3・4.1–4.2・7.1–7.2</li>
+      <li><a href="analysis/hand_terminal_3d_review_v01.md">前回の静的3D比較記録</a> ／ <a href="data/hand_terminal_concepts_v01.json">その接触位置の設定</a></li>
+      <li><a id="robotiq-link">Robotiq公式：単一アクチュエータによる両指の開閉</a>（外部サイト）</li>
+      <li><a href="audit/hand_function_observations_v01.json">入力SHA・配置間隔と構成数の算術</a></li>
+    </ul>
+  </section>
+  <footer>実部品の適合、把持力、所定S字の形成、締結品質を判定した資料ではありません。正式な物理妥当性判定はVaultProtocol V12の独立レビュー経路によります。</footer>
+</main>
+<script id="review-data" type="application/json">__REVIEW_DATA__</script>
+<script>
+"use strict";
+const {config, facts} = JSON.parse(document.getElementById("review-data").textContent);
+let selectedStep = "B1", selectedScenario = "hold";
+const byId = id => document.getElementById(id);
+function commandText(command){return command === "close" ? "閉方向の指令" : command === "open" ? "開方向の指令" : "独立した指令なし";}
+function targetSvg(released){
+  return `<g opacity="${released ? .36 : 1}"><rect x="184" y="124" width="12" height="130" rx="6" fill="#e68b41"/><path d="M174 89 Q165 61 190 53 Q215 61 206 89 L203 132 L177 132Z" fill="#b8c6ce" stroke="#617d8e"/><circle cx="190" cy="72" r="9" fill="#fbfcfd" stroke="#617d8e"/></g><text x="266" y="80">端子側</text><text x="266" y="202">被覆側</text>`;
+}
+function diagram(two, scenario){
+  const neutral = two && scenario.two_finger_command === null;
+  const commands = two ? [scenario.two_finger_command, scenario.two_finger_command] : scenario.pair_commands;
+  const released = scenario.id === "all_open";
+  let svg = targetSvg(released);
+  if(two){
+    const shift = commands[0] === "open" ? 30 : 0;
+    const color = neutral ? "#b6c4ce" : "#579ec3";
+    for(const side of [-1,1]){
+      const transform = `translate(${side*shift} 0)${side === 1 ? " translate(380 0) scale(-1 1)" : ""}`;
+      svg += `<g transform="${transform}"><rect x="134" y="91" width="14" height="127" rx="3" fill="${color}"/><rect x="148" y="91" width="26" height="22" fill="${color}"/><path d="M148 185H179V193Q173 200 179 207V215H148Z" fill="#ddb16f" stroke="#bc924f"/></g>`;
+    }
+    svg += `<text x="28" y="156">同じ指に固定</text><text x="190" y="276" text-anchor="middle">${neutral ? "この操作を別々に指令できない" : commandText(commands[0])}</text>`;
+  }else{
+    for(let pair=0;pair<2;pair++){
+      const y = pair === 0 ? 91 : 185, x = pair === 0 ? 147 : 157, width = pair === 0 ? 27 : 27;
+      const shift = commands[pair] === "open" ? 30 : 0;
+      for(const side of [-1,1]){
+        const transform = `translate(${side*shift} 0)${side === 1 ? " translate(380 0) scale(-1 1)" : ""}`;
+        svg += `<g transform="${transform}"><rect x="${x}" y="${y}" width="${width}" height="24" rx="3" fill="${pair === 0 ? "#579ec3" : "#ddb16f"}" stroke="#7796a9"/></g>`;
+      }
+      svg += `<text x="16" y="${y+10}">${pair === 0 ? "端子組" : "被覆組"}</text><text x="16" y="${y+27}">${commandText(commands[pair])}</text>`;
+    }
+    svg += '<text x="190" y="276" text-anchor="middle">指令可能な構成の説明・保持成立は未検証</text>';
+  }
+  return svg;
+}
+function updateStep(id){
+  selectedStep=id;
+  const step=config.process_steps.find(item=>item.id===id);
+  byId("step-detail").innerHTML=`<strong>${step.id}｜${step.label_ja}</strong><p>${step.hand_function_ja}</p><div class="note">${step.note_ja}</div>`;
+  document.querySelectorAll("[data-step]").forEach(button=>button.setAttribute("aria-pressed",String(button.dataset.step===id)));
+}
+function updateScenario(id){
+  selectedScenario=id;
+  const scenario=config.comparison_scenarios.find(item=>item.id===id);
+  byId("two-svg").innerHTML=diagram(true,scenario);byId("four-svg").innerHTML=diagram(false,scenario);
+  byId("two-note").textContent=scenario.two_finger_note_ja;byId("four-note").textContent=scenario.g4_note_ja;
+  byId("scenario-status").textContent=scenario.mandatory_now ? "工程に含まれる機能。ただし接触・保持の成立は別途未検証です。" : "独立開閉を使う比較例。現時点で必須として指定された操作ではありません。";
+  byId("handoff").style.display=id==="all_open" ? "block" : "none";
+  document.querySelectorAll("[data-scenario]").forEach(button=>button.setAttribute("aria-pressed",String(button.dataset.scenario===id)));
+}
+function updateAllocation(){
+  const hands=byId("allocation").value.split(","), totals=hands.map(hand=>config.hand_definitions[hand]);
+  const fingers=totals.reduce((sum,hand)=>sum+hand.fingers,0), drives=totals.reduce((sum,hand)=>sum+hand.closing_actuators,0);
+  byId("totals").textContent=`2腕 / ${fingers}本指 / 開閉${drives}駆動`;
+}
+for(const step of config.process_steps){const button=document.createElement("button");button.dataset.step=step.id;button.textContent=`${step.id} ${step.label_ja}`;button.onclick=()=>updateStep(step.id);byId("steps").append(button);}
+for(const scenario of config.comparison_scenarios){const button=document.createElement("button");button.dataset.scenario=scenario.id;button.textContent=scenario.label_ja;button.onclick=()=>updateScenario(scenario.id);byId("scenarios").append(button);}
+for(const [station,role] of Object.entries(config.station_roles_preserved)){const row=document.createElement("tr");row.innerHTML=`<th>${station}</th><td>${role}</td>`;byId("roles").append(row);}
+byId("example-spacing").textContent=`${(facts.terminal_example_center_spacing_m*1000).toFixed(0)} mm（52 − 8）`;
+byId("g4-spacing").textContent=`${(facts.g4_initial_spacing_m*1000).toFixed(0)} mm`;
+byId("robotiq-link").href=config.sources.robotiq_url;
+byId("allocation").addEventListener("change",updateAllocation);
+updateStep(selectedStep);updateScenario(selectedScenario);updateAllocation();
+</script>
+</body>
+</html>

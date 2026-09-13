@@ -1,0 +1,58 @@
+{
+  "observed_at": "2026-09-13T09:35:33.338666+09:00",
+  "observations": {
+    "basis": "read-only configuration arithmetic; not measured hardware or physical acceptance",
+    "edge_interval_center_y_m": 0.008,
+    "guide_interval_center_y_m": 0.052000000000000005,
+    "terminal_example_center_spacing_m": 0.044000000000000004,
+    "g4_initial_spacing_m": 0.03,
+    "g4_comparison_mount_range_m": [
+      0.02,
+      0.04
+    ],
+    "example_centers_within_initial_comparison_mount_range": false,
+    "mount_range_is_verified_hardware_limit": false,
+    "allocations": [
+      {
+        "hands": [
+          "2F",
+          "2F"
+        ],
+        "arms": 2,
+        "fingers": 4,
+        "closing_actuators": 2
+      },
+      {
+        "hands": [
+          "2F",
+          "G4"
+        ],
+        "arms": 2,
+        "fingers": 6,
+        "closing_actuators": 5
+      },
+      {
+        "hands": [
+          "G4",
+          "G4"
+        ],
+        "arms": 2,
+        "fingers": 8,
+        "closing_actuators": 8
+      }
+    ],
+    "physical_acceptance_verdict": null
+  },
+  "input_sha256": {
+    "data/hand_function_selection_v01.json": "adb1fc4ccc4bf2c115355223907e59014f5f502ba79dfbe09456b75818f0f456",
+    "scripts/hand_function_viewer_v01.html": "40793739a125ae510d592710ea0052f510e7c7a38a43f94bff93366a7a56a196",
+    "references/hand_spec_20260913/THREAD_3F_4F_Gripper_Spec_v0.2_JA.md": "f75f22bd1e826f7682b3392403dab9a2954bd1a26d84e195efd0aa0125abcbe9",
+    "data/hand_terminal_concepts_v01.json": "89553b10b6e97787e75536f2037b5cda3a06d4f2c569c2a037db47eed066964f",
+    "analysis/hand_terminal_3d_review_v01.md": "678e3becd1e305bbbf65eeef1feeb85f72cce3763cb47080c78132562a146f89",
+    "scripts/op030_split_wire_motion.py": "5855528266c3b90fe47e2760c6378355db7aeadac4d05b8bb8097634f15146db",
+    "scripts/build_hand_function_review_v01.py": "137066f2436d9fd59d60218a522ea45e2a253678822395704b7649d584b1d240"
+  },
+  "browser_observations": "recorded separately after generation",
+  "scene_loaded": false,
+  "physical_acceptance_verdict": null
+}
