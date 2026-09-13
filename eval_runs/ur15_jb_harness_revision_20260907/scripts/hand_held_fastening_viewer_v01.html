@@ -1,0 +1,99 @@
+<!doctype html>
+<!-- Copyright (c) 2022-2026, The Isaac Lab Project Developers. SPDX-License-Identifier: BSD-3-Clause -->
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>フィンガで保持したまま締結する工程案</title>
+  <style>
+    :root{color-scheme:light;--ink:#183247;--muted:#506579;--line:#d6e2eb;--blue:#246c96}
+    *{box-sizing:border-box}body{margin:0;background:#f3f6f8;color:var(--ink);font:16px/1.8 system-ui,"Noto Sans CJK JP",sans-serif}
+    main{max-width:1160px;margin:auto;padding:30px 24px 45px}h1{font-size:30px;line-height:1.5;margin:6px 0 12px}h2{font-size:21px;margin:0 0 12px}h3{font-size:18px;margin:0}
+    p{margin:8px 0 14px}a{color:var(--blue)}.eyebrow,.note{color:var(--muted);font-size:14px}section{background:white;border:1px solid var(--line);border-radius:10px;padding:22px;margin:22px 0}
+    .change{border-left:5px solid #b56b25;background:#fff4e8;padding:14px 18px}.change p{margin:0}
+    #steps{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}button{font:inherit;color:var(--ink);padding:10px;background:white;border:1px solid #b5c9d7;border-radius:6px;cursor:pointer;text-align:left}
+    button[aria-pressed="true"]{background:var(--blue);color:white}button:focus-visible{outline:3px solid #d58b36;outline-offset:3px}
+    #step-detail{min-height:112px;background:#f5f8fa;margin:16px 0;padding:15px;border-radius:6px}.roles{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+    .role{border:1px solid var(--line);border-top:4px solid var(--blue);border-radius:6px;padding:16px}.role.tool{border-top-color:#b57930}.state{font-size:18px;font-weight:650;margin:12px 0 0}
+    .work{margin:20px auto 0;max-width:700px;border:2px solid #6d879b;border-radius:7px;padding:16px;text-align:center;background:#edf3f6}.work strong{display:block;font-size:18px}
+    .arrow{text-align:center;color:var(--muted);margin:8px}.transfer{text-align:center;padding:10px;border:1px dashed #a6b9c7;border-radius:6px}
+    table{border-collapse:collapse;width:100%;font-size:14px}th,td{padding:11px 8px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}ul{padding-left:22px}footer{font-size:13px;color:var(--muted)}
+    @media(max-width:760px){main{padding:20px 13px}h1{font-size:25px}section{padding:16px}#steps{grid-template-columns:repeat(2,1fr)}.roles{grid-template-columns:repeat(2,1fr)}table{font-size:12px}th,td{padding:8px 4px}}
+  </style>
+</head>
+<body>
+<main>
+  <header>
+    <div class="eyebrow">THREAD / 保持と締結の役割 / v0.1 / 2026-09-13</div>
+    <h1>フィンガで保持したまま、同じ位置で締結する</h1>
+    <p>両端を保持する2腕と、STへ取り付ける締付ユニット2系統を組み合わせる比較案です。</p>
+    <div class="change"><p><strong>上押さえ案は取り下げました。</strong> パレット用治具v01は以前の比較記録です。今回の図では、保持を続けて締結し、締結後に指を開く流れへ変更しています。</p></div>
+  </header>
+  <section>
+    <h2>同じワークを、同じ作業位置で扱う</h2>
+    <p class="note">ボタンで役割を切り替えます。実際の配線・機械配置やアーム軌道を描いた図ではありません。</p>
+    <div id="steps"></div>
+    <div id="step-detail" aria-live="polite"></div>
+    <div class="roles">
+      <div class="role"><h3>保持用の左腕</h3><div>端末用フィンガ</div><p id="left-state" class="state"></p></div>
+      <div class="role"><h3>保持用の右腕</h3><div>端末用フィンガ</div><p id="right-state" class="state"></p></div>
+      <div class="role tool"><h3>締付ユニット1</h3><div>ST取付け・型式未定</div><p id="tool-one-state" class="state"></p></div>
+      <div class="role tool"><h3>締付ユニット2</h3><div>ST取付け・型式未定</div><p id="tool-two-state" class="state"></p></div>
+    </div>
+    <div class="arrow">↓ 同じ作業位置へ保持と締結を分担 ↓</div>
+    <div class="work"><strong>対象端末と、その接続先</strong>指先で端末の姿勢を保ち、ねじ穴と工具の通路を空ける。</div>
+    <div class="arrow">↓</div><div id="transfer" class="transfer"></div>
+    <p class="note">各操作の時間・完了条件の数値は未設定です。工具退避と両腕上昇をどこまで重ねるかは、保持期間と干渉を確認してから決めます。</p>
+  </section>
+  <section>
+    <h2>腕数と締付軸を分けて考える</h2>
+    <table><thead><tr><th>条件</th><th>保持腕</th><th>工具腕</th><th>ST締付軸</th><th>扱い</th></tr></thead><tbody id="alternatives"></tbody></table>
+    <p class="note">2系統の工具で大小同時締結を比較します。ねじの位置・姿勢と工具の寸法が未確定なので、工具2台だけで全接続点へ届くとは確認していません。</p>
+  </section>
+  <section>
+    <h2>3STの分担は見直しが必要</h2>
+    <p><strong>Bで手を離して搬送し、Cで再び押さえても、搬送中の保持問題は残ります。</strong> 設置と、その端末を保持したままの締結を、同じ作業位置にまとめる案です。</p>
+    <p id="station-note"></p>
+    <p>ケーブルの遠い部分だけを押して端子の回転まで止められるとは未確認です。端子の許容把持面、指先の輪郭、ねじ穴の逃げ、締結時の荷重分担を対応付けます。</p>
+  </section>
+  <section>
+    <h2>次に対応付ける内容</h2><ul id="unknowns"></ul>
+    <p class="note">今回は工程の検討資料です。工具・指先の実物適合、把持力、締結品質や正式な物理妥当性の判定は含みません。</p>
+  </section>
+  <footer>
+    <p><a href="フィンガ保持締結_工程案_v01.md">工程案の記録</a> ／ <a href="data/hand_held_fastening_v01.json">役割と未確定事項</a> ／ <a href="audit/hand_held_fastening_build_v01.json">生成記録</a></p>
+    <p>設備取付け・自動供給方式の参考：<a href="https://www.deprag.com/en/automation/screwdriving-units/deprag-feed-module.html">DEPRAG DFM</a> ／ <a href="https://www.deprag.com/en/automation/screwdriving-units.html">単軸・複数軸の締付ユニット</a>。今回の製品選定・保持能力を示す資料ではありません。</p>
+  </footer>
+</main>
+<script>
+const data=__REVIEW_DATA__;
+const byId=id=>document.getElementById(id);
+function selectStep(index){
+  const step=data.steps[index];
+  document.querySelectorAll('#steps button').forEach((button,i)=>button.setAttribute('aria-pressed',String(i===index)));
+  byId('step-detail').replaceChildren();
+  const heading=document.createElement('h3');heading.textContent=step.label_ja;
+  const text=document.createElement('p');text.textContent=step.detail_ja;
+  byId('step-detail').append(heading,text);
+  for(const id of ['left-state','right-state'])byId(id).textContent=step.hand_ja;
+  for(const id of ['tool-one-state','tool-two-state'])byId(id).textContent=step.tool_ja;
+  byId('transfer').textContent=step.handoff_ja;
+  window.reviewState={index,id:step.id,hand:step.hand_ja,tool:step.tool_ja,transfer:step.handoff_ja};
+}
+data.steps.forEach((step,index)=>{
+  const button=document.createElement('button');button.type='button';button.dataset.step=step.id;
+  button.textContent=`${index+1}. ${step.label_ja}`;button.onclick=()=>selectStep(index);byId('steps').append(button);
+});
+data.alternatives.forEach(row=>{
+  const tr=document.createElement('tr');
+  for(const value of [row.case_ja,row.holding_arms,row.tool_arms,row.station_axes,row.note_ja]){
+    const cell=document.createElement('td');cell.textContent=value;tr.append(cell);
+  }
+  byId('alternatives').append(tr);
+});
+data.unresolved_ja.forEach(value=>{const li=document.createElement('li');li.textContent=value;byId('unknowns').append(li);});
+byId('station-note').textContent=data.station_split.unresolved_ja;
+selectStep(0);
+</script>
+</body>
+</html>

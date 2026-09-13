@@ -44,3 +44,19 @@ numbers unknown until their basis and the scope of the product change are set.
 - See `analysis/hand_selection_inputs_20260913.md` for source comparison,
   candidate roles and unresolved hand-selection inputs. Do not reinstate deleted
   cable hold-down mechanisms as an automatic response to the S-bend question.
+
+## Subsequent handoff decision on 2026-09-13
+
+- The user withdrew the pallet upper-retainer proposal and requested fastening
+  while the fingers continue holding the cable/terminal. The v01 retainer pack
+  is historical comparison evidence, not a hardware selection.
+- Compare continuous hand retention and fastening at the same work position.
+  Do not describe release at B followed by transport and regrasp at C as solving
+  the unsupported interval. Do not invent a transport-capable temporary torque.
+- Two holding arms plus station-mounted fastening units are a comparison
+  candidate; no extra robot or selected fastening hardware is authorized by
+  that candidate label. Keep the existing simultaneous different-size fastening
+  requirement visible. Three-station task redistribution remains unresolved.
+- `data/hand_held_fastening_v01.json` and the corresponding analysis document
+  record the new direction. Existing hand-function v01 and fixture v01 describe
+  the earlier handoff proposals. Arm trajectory and video production stay paused.

@@ -1,0 +1,57 @@
+{
+  "revision": "v01",
+  "recorded_date": "2026-09-13",
+  "status": "user_selected_hand_retention_direction_hardware_and_station_split_not_selected",
+  "user_direction": {
+    "upper_retainer": "withdrawn",
+    "hold_with_fingers_during_fastening": true,
+    "retain_three_station_parallel_target": true,
+    "arm_motion_and_video_paused": true
+  },
+  "comparison_candidate": {
+    "holding_arms": 2,
+    "hand_baseline": ["2F with terminal contour", "2F with terminal contour"],
+    "station_mounted_fastening_axes": 2,
+    "extra_robot_arms_selected": 0,
+    "same_work_position": true,
+    "fastening_axis_positions_and_orientation": null,
+    "spindle_part_numbers": null,
+    "grip_force_N": null,
+    "fastening_torque_Nm": null,
+    "temporary_fastening_for_transport": "not introduced",
+    "note_ja": "双腕で両端を保持し、同じ作業位置のST取付け工具2系統で締結する比較案。追加機器の採用済み仕様ではない。"
+  },
+  "steps": [
+    {"id": "place", "label_ja": "設置・工具準備", "hand_ja": "担当端末を保持", "tool_ja": "退避・供給準備", "handoff_ja": "搬送前", "detail_ja": "両手で端末の位置・向きを合わせ、保持を継続する。工具の供給準備は搬入前、または設置動作と並行して行う案。"},
+    {"id": "tighten", "label_ja": "保持しながら締結", "hand_ja": "担当端末を保持", "tool_ja": "締結中", "handoff_ja": "搬送前", "detail_ja": "穴と工具進入域を空けた指先で端末を保持する。大小を同時に締める要求に合わせ、各工具の条件を独立させる。実際の工具配置と荷重分担は未確定。"},
+    {"id": "complete", "label_ja": "締結完了・工具退避", "hand_ja": "担当端末を保持", "tool_ja": "完了確認・退避", "handoff_ja": "搬送前", "detail_ja": "締結結果を確認して工具を退避させる案。完了判定のトルク・角度・深さ等の値は実際の接続仕様へ対応させる必要があり、今回設定しない。"},
+    {"id": "release", "label_ja": "指開放・同時上昇", "hand_ja": "指を開放", "tool_ja": "退避", "handoff_ja": "搬送前", "detail_ja": "締結された状態から指を開き、保持用の両腕を同時に上昇させる。工具退避との動作の重ね方は干渉照合後に決める。"},
+    {"id": "transfer", "label_ja": "次工程へ搬送", "hand_ja": "退避", "tool_ja": "次の供給準備", "handoff_ja": "締結後に搬送", "detail_ja": "製品側の締結を終えてから搬送する案。次工程で手が再把持するまで未締結状態を放置する説明にはしない。搬送時の保持性能は未検証。"}
+  ],
+  "alternatives": [
+    {"case_ja": "一端の保持だけで成立する作業", "holding_arms": 1, "tool_arms": 1, "station_axes": 0, "note_ja": "Aの保持手＋直付け工具腕の役割を再利用できる候補。Bで両端保持が不要になったことは未確認。"},
+    {"case_ja": "両端保持＋同時締結", "holding_arms": 2, "tool_arms": 0, "station_axes": 2, "note_ja": "今回の比較対象。ST側工具の進入位置、必要な位置決め軸と設置域は未確定。"},
+    {"case_ja": "両端保持＋第三腕の単一工具", "holding_arms": 2, "tool_arms": 1, "station_axes": 0, "note_ja": "一つの締付軸での順次締結となる候補で、大小同時締結要求を満たす案としては扱わない。採用していない。"}
+  ],
+  "station_split": {
+    "previous": "B places and releases; C fastens after conveyor transfer",
+    "proposed_change": "placement, continuous finger retention and fastening of that terminal share one work position",
+    "three_station_target": 3,
+    "revised_station_allocation": null,
+    "unresolved_ja": "BとCの従来分担をそのまま残せない。3STへの再配分は、接続点ごとの工程を洗い出してから決める。Cを検査工程へ変更したり削除したりしていない。"
+  },
+  "unresolved_ja": [
+    "実端子・圧着後形状・被覆のうち、保持に使える面と必要な指先形状",
+    "締結時に端子が回らないための荷重分担、許容把持力、被覆損傷",
+    "隣配線・筐体・指先・手先カメラ・締付ユニット全体の同時占有域",
+    "ボルト／ナットの種類、供給方式、工具型式と接続仕様",
+    "必要な締付点と工具の位置決め方式、大小同時締結の組合せ",
+    "3STの作業再配分とタクト。締結を追加したBの負荷は未評価",
+    "実際のS字形成、連続動作、締結後の搬送と正式な物理妥当性"
+  ],
+  "source_urls": [
+    "https://www.deprag.com/en/automation/screwdriving-units/deprag-feed-module.html",
+    "https://www.deprag.com/en/automation/screwdriving-units.html"
+  ],
+  "physical_acceptance_verdict": null
+}

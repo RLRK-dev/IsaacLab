@@ -1,0 +1,35 @@
+{
+  "observed_at": "2026-09-13T11:54:33.302005+09:00",
+  "scope": "documentation and role diagram only",
+  "input_sha256": {
+    "data/hand_held_fastening_v01.json": "39eff583dabab2b3bd24033aa1ec1fdd93cfee5bbb5aaccfd337a80a2de3801d",
+    "scripts/hand_held_fastening_viewer_v01.html": "3e4797111f2c7a7848b62d5f9edb13741ba9fd1ef058bfe9e5f6e9c0a048438c",
+    "analysis/hand_held_fastening_v01.md": "3bc40a25bc1c13e36989d7d344e612029f400435970eb4c61d51dc6ab73e47d3",
+    "scripts/build_hand_held_fastening_review_v01.py": "ebfeb54f98bf5f81a572dd554f881b58e241347e7cdc6d350772f4bb9a87b602",
+    "scripts/build_hand_function_review_v01.py": "137066f2436d9fd59d60218a522ea45e2a253678822395704b7649d584b1d240",
+    "analysis/hand_terminal_3d_review_v01.md": "678e3becd1e305bbbf65eeef1feeb85f72cce3763cb47080c78132562a146f89",
+    "data/hand_terminal_concepts_v01.json": "89553b10b6e97787e75536f2037b5cda3a06d4f2c569c2a037db47eed066964f"
+  },
+  "inputs_unchanged": true,
+  "page_sha256": "47f2501ba977c8effeec171c354986db4dae902ed26f913d7656ff912d77957c",
+  "diagram_steps": 5,
+  "candidate_counts": {
+    "holding_arms": 2,
+    "hand_baseline": [
+      "2F with terminal contour",
+      "2F with terminal contour"
+    ],
+    "station_mounted_fastening_axes": 2,
+    "extra_robot_arms_selected": 0,
+    "same_work_position": true,
+    "fastening_axis_positions_and_orientation": null,
+    "spindle_part_numbers": null,
+    "grip_force_N": null,
+    "fastening_torque_Nm": null,
+    "temporary_fastening_for_transport": "not introduced",
+    "note_ja": "双腕で両端を保持し、同じ作業位置のST取付け工具2系統で締結する比較案。追加機器の採用済み仕様ではない。"
+  },
+  "station_redistribution_selected": false,
+  "scene_loaded": false,
+  "physical_acceptance_verdict": null
+}

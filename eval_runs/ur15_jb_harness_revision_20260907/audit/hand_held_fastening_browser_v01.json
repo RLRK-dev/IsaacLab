@@ -1,0 +1,188 @@
+{
+  "observed_at": "2026-09-13T11:54:34.295740+09:00",
+  "page_sha256": "47f2501ba977c8effeec171c354986db4dae902ed26f913d7656ff912d77957c",
+  "scope": "Browser role-diagram events and layout only; not robot control or physical simulation",
+  "reports": {
+    "desktop": {
+      "rows": [
+        {
+          "requested": "place",
+          "state": {
+            "index": 0,
+            "id": "place",
+            "hand": "担当端末を保持",
+            "tool": "退避・供給準備",
+            "transfer": "搬送前"
+          },
+          "selectedCount": 1,
+          "left": "担当端末を保持",
+          "right": "担当端末を保持",
+          "toolOne": "退避・供給準備",
+          "toolTwo": "退避・供給準備",
+          "transfer": "搬送前"
+        },
+        {
+          "requested": "tighten",
+          "state": {
+            "index": 1,
+            "id": "tighten",
+            "hand": "担当端末を保持",
+            "tool": "締結中",
+            "transfer": "搬送前"
+          },
+          "selectedCount": 1,
+          "left": "担当端末を保持",
+          "right": "担当端末を保持",
+          "toolOne": "締結中",
+          "toolTwo": "締結中",
+          "transfer": "搬送前"
+        },
+        {
+          "requested": "complete",
+          "state": {
+            "index": 2,
+            "id": "complete",
+            "hand": "担当端末を保持",
+            "tool": "完了確認・退避",
+            "transfer": "搬送前"
+          },
+          "selectedCount": 1,
+          "left": "担当端末を保持",
+          "right": "担当端末を保持",
+          "toolOne": "完了確認・退避",
+          "toolTwo": "完了確認・退避",
+          "transfer": "搬送前"
+        },
+        {
+          "requested": "release",
+          "state": {
+            "index": 3,
+            "id": "release",
+            "hand": "指を開放",
+            "tool": "退避",
+            "transfer": "搬送前"
+          },
+          "selectedCount": 1,
+          "left": "指を開放",
+          "right": "指を開放",
+          "toolOne": "退避",
+          "toolTwo": "退避",
+          "transfer": "搬送前"
+        },
+        {
+          "requested": "transfer",
+          "state": {
+            "index": 4,
+            "id": "transfer",
+            "hand": "退避",
+            "tool": "次の供給準備",
+            "transfer": "締結後に搬送"
+          },
+          "selectedCount": 1,
+          "left": "退避",
+          "right": "退避",
+          "toolOne": "次の供給準備",
+          "toolTwo": "次の供給準備",
+          "transfer": "締結後に搬送"
+        }
+      ],
+      "alternatives": 3,
+      "unknowns": 7,
+      "viewport": 1440,
+      "scrollWidth": 1425,
+      "withdrawal": "上押さえ案は取り下げました。 パレット用治具v01は以前の比較記録です。今回の図では、保持を続けて締結し、締結後に指を開く流れへ変更しています。",
+      "stationNote": "BとCの従来分担をそのまま残せない。3STへの再配分は、接続点ごとの工程を洗い出してから決める。Cを検査工程へ変更したり削除したりしていない。"
+    },
+    "mobile": {
+      "rows": [
+        {
+          "requested": "place",
+          "state": {
+            "index": 0,
+            "id": "place",
+            "hand": "担当端末を保持",
+            "tool": "退避・供給準備",
+            "transfer": "搬送前"
+          },
+          "selectedCount": 1,
+          "left": "担当端末を保持",
+          "right": "担当端末を保持",
+          "toolOne": "退避・供給準備",
+          "toolTwo": "退避・供給準備",
+          "transfer": "搬送前"
+        },
+        {
+          "requested": "tighten",
+          "state": {
+            "index": 1,
+            "id": "tighten",
+            "hand": "担当端末を保持",
+            "tool": "締結中",
+            "transfer": "搬送前"
+          },
+          "selectedCount": 1,
+          "left": "担当端末を保持",
+          "right": "担当端末を保持",
+          "toolOne": "締結中",
+          "toolTwo": "締結中",
+          "transfer": "搬送前"
+        },
+        {
+          "requested": "complete",
+          "state": {
+            "index": 2,
+            "id": "complete",
+            "hand": "担当端末を保持",
+            "tool": "完了確認・退避",
+            "transfer": "搬送前"
+          },
+          "selectedCount": 1,
+          "left": "担当端末を保持",
+          "right": "担当端末を保持",
+          "toolOne": "完了確認・退避",
+          "toolTwo": "完了確認・退避",
+          "transfer": "搬送前"
+        },
+        {
+          "requested": "release",
+          "state": {
+            "index": 3,
+            "id": "release",
+            "hand": "指を開放",
+            "tool": "退避",
+            "transfer": "搬送前"
+          },
+          "selectedCount": 1,
+          "left": "指を開放",
+          "right": "指を開放",
+          "toolOne": "退避",
+          "toolTwo": "退避",
+          "transfer": "搬送前"
+        },
+        {
+          "requested": "transfer",
+          "state": {
+            "index": 4,
+            "id": "transfer",
+            "hand": "退避",
+            "tool": "次の供給準備",
+            "transfer": "締結後に搬送"
+          },
+          "selectedCount": 1,
+          "left": "退避",
+          "right": "退避",
+          "toolOne": "次の供給準備",
+          "toolTwo": "次の供給準備",
+          "transfer": "締結後に搬送"
+        }
+      ],
+      "alternatives": 3,
+      "unknowns": 7,
+      "viewport": 500,
+      "scrollWidth": 485,
+      "withdrawal": "上押さえ案は取り下げました。 パレット用治具v01は以前の比較記録です。今回の図では、保持を続けて締結し、締結後に指を開く流れへ変更しています。",
+      "stationNote": "BとCの従来分担をそのまま残せない。3STへの再配分は、接続点ごとの工程を洗い出してから決める。Cを検査工程へ変更したり削除したりしていない。"
+    }
+  },
+  "physical_acceptance_verdict": null
+}
