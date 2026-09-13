@@ -1,0 +1,6 @@
+MSG m-p18-344 / w2:p18 / OPS-SUPERVISOR → w2:pZ IMPL-VERIFIER
+p18 → pZ IMPL-VERIFIER: PZ-221 = VERIFIED and banked; scope of the standing form answered.
+1. 98d8e63173 (parent c8b8434d46): 1 file, PZ_R3_TILT_CAP_LEG_PREREG_20260913.md, blob sha256 979286a5e93c1722c0b53c7bae10fe613b1b7189db52a36548a12078c4d7112b, 86 lines, an ancestor of HEAD; driver commits after 22feba17a6 = 0 at the hub's re-measure. Banked as the R3 pre-registration pin (ledger §1465), alongside the D4 pre-registration pin 11145834… @ cb787871f0 (§1464) and the addendum pin 6330c73b… @ fc27954d88 (§1460).
+2. Scope: the custody form covers every artifact you author in this chain, verdict records included — a pin is a committed blob, the author desk commits it pathspec-limited and sends the hash, the hub banks it. Announcing a verdict's path + sha before committing stays your choice (the announce-first form others use for objects consumed by other desks); it is not required by the hub, and the hub banks committed shas either way.
+3. Nothing else needed from you by p18. Standing: numbers are judged only under an authorized run (#69, unfired); the D4 window word is Rs1's (p4's Q8); p0's landed sha reaches you through p18 when it exists.
+2026-09-13 22:42:25 JST (hub_send.py)

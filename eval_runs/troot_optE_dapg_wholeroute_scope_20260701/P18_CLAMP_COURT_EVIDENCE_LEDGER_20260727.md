@@ -47737,3 +47737,12 @@ ALT-1 (downgrade) — not chosen (the human's word). ALT-2 (`agent prompt`) — 
 ```
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1465 — ✅ **R3 leg の事前登録を pin として bank: `PZ_R3_TILT_CAP_LEG_PREREG_20260913.md` sha256 `979286a5e93c1722c0b53c7bae10fe613b1b7189db52a36548a12078c4d7112b`（86 行）@ **`98d8e63173`**（親 `c8b8434d46`・1 file・HEAD 祖先・driver に触れる commit は `22feba17a6` 以後 0）**（PZ-221・当卓 blob 自算一致）＋ pZ の問い「standing 形は verdict artifact も覆うか」→ **覆う（作者卓の artifact 全て = pin は committed blob・作者が pathspec commit・hub が bank）・announce-first は任意** と回答 （m-p18-344 → pZ）（当卓 2026-09-13 22:42:26 JST 実測）
+
+**契機** = pZ `PZ-221`（22:41）。⛔ **実行 0**。
+
+- 本 chain の pZ の pin 3 本: addendum `6330c73b…`@`fc27954d88`（§1460）／D4 prereg `11145834…`@`cb787871f0`（§1464）／R3 prereg `979286a5…`@`98d8e63173`（本節）。全て object（D4 着地）に先行。
+- **row（逐語）**: `{"id": "m-p18-344", "body_sha256": "743b450ec05e2a0170744657e61834b6802a9e3138458c98e35fdb6323f46538", "head": "MSG m-p18-344 / w2:p18 / OPS-SUPERVISOR → w2:pZ IMPL-VERIFIER", "to": "IMPL-VERIFIER", "to_requested": "IMPL-VERIFIER", "cc": [], "to_pane": "", "resolved_by": "label", "hub_session_id": "1c3d805c-2a9a-4b6d-bba2-ae7d479862e7", "child_session": "1", "herdr_version": "herdr 0.9.0", "control": false, "queued_on_topic": false, "row_type": "send", "pane": "w2:pZ", "role": "IMPL-VERIFIER", "session_id": "f0babc66-64fb-405d-bbd6-6f765758dd7b", "transcript_path": "/home/rlrk/.claude/projects/-home-rlrk-IsaacLab/f0babc66-64fb-405d-bbd6-6f765758dd7b.jsonl", "pre_send_offset": 18734414, "via": "Enter", "state": "DELIVERED", "status": "done", "sent_at": "2026-09-13T22:42:25.020+09:00", "composer_before_kind": "empty", "composer_before_sha256": "", "send_rc": 0, "landed_as": "[Pasted text #9 +5 lines]", "status_at_keypress": "done", "keypress_rc": 0, "enter_at": "2026-09-13T22:42:25.301+09:00", "evidence": "user@18752325+0", "fused_with": [], "head_found": true, "delivered_at": "2026-09-13T13:42:25.310Z", "line": 7769, "first_seen_at": "2026-09-13T22:42:25.816+09:00"}`
+
+**Banked — 時刻は本節 commit の author date が正。**
