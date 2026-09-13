@@ -47851,3 +47851,13 @@ ALT-1 (downgrade) — not chosen (the human's word). ALT-2 (`agent prompt`) — 
 ```
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1473 — ✅ **push 完了: `rlrk/optE-s2-substrate-swap` を fork へ `513b48947d..888ec5c898`（34 commit・fast-forward）— 再 fetch と `ls-remote` の両方で fork tip = HEAD = `888ec5c898bc8ed63afa5f0a0cea3b0343a36122`・未 push 0**（当卓 2026-09-13 23:07:33 JST 実測）
+
+**契機** = Rs1（人間）の語「push」×2: 1 回目 = 当卓 transcript `:42936`（type=user・typed・origin human・23:02:51 JST）→ harness の auto mode 分類器が `git push`（sandbox 解除）を「Out-of-Place Publication」として拒否・当卓は回避せず Rs1 へ報告（23:04）／2 回目 = `:42991`（typed・23:06:29 JST・session 再開と model 切替の後）→ 実行・許可。⛔ **実行 0**（sim/run なし）。
+
+- **push した範囲**: 当卓の §1453–§1472 と task A（`44e0f9a2d1`・凍結 sha256 `b4944c19…`）、ほか同 branch 上の他卓 commit（p4・p6・p11・pZ・p0）を含む 34 commit。push 前に behind 0・hub dir clean を確認。
+- **出力（逐語）**: `To https://github.com/RLRK-dev/IsaacLab.git` / `513b48947d..888ec5c898  rlrk/optE-s2-substrate-swap -> rlrk/optE-s2-substrate-swap`（rc 0）／fetch rc 0／`HEAD = fork = ls-remote = 888ec5c898bc8ed63afa5f0a0cea3b0343a36122`。
+- 本節の commit 自体は push 後の 1 commit（未 push 1）。
+
+**Banked — 時刻は本節 commit の author date が正。**
