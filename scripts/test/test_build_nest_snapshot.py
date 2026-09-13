@@ -207,7 +207,7 @@ def test_manifest_scan_fails_ids_outside_ltm1_format_on_every_node(tmp_path, mon
 
 
 def test_manifest_scan_format_reasons_say_how_to_fix(tmp_path, monkeypatch):
-    """Reasons name who acts and what not to do; whitespace-only and parent_node issues get their own fixes."""
+    """Reasons name who acts and what not to do; whitespace, line-break and parent_node issues get their own fixes."""
     _, manual = _scan(
         tmp_path / "vault",
         monkeypatch,
@@ -216,22 +216,39 @@ def test_manifest_scan_format_reasons_say_how_to_fix(tmp_path, monkeypatch):
             "T-bad_id": "node_id: T-bad_id\nstatus: PENDING\n",
             "T-Child": "node_id: T-Child\nstatus: IN_PROGRESS\nparent_node: T-Good (see notes)\n",
             "T-Space": 'node_id: " T-Space"\nstatus: IN_PROGRESS\n',
+            "T-Block": "node_id: |\n  T-Block\nstatus: IN_PROGRESS\n",
+            "T-BlockChild": "node_id: T-BlockChild\nparent_node: |\n  T-Good\nstatus: IN_PROGRESS\n",
         },
     )
     reasons = {path: reason for severity, path, reason in manual if severity == "HARD"}
-    assert set(reasons) == {"T-bad_id/state.md", "T-Child/state.md", "T-Space/state.md"}
+    assert set(reasons) == {
+        "T-bad_id/state.md",
+        "T-Child/state.md",
+        "T-Space/state.md",
+        "T-Block/state.md",
+        "T-BlockChild/state.md",
+    }
     node_reason = reasons["T-bad_id/state.md"]
     assert node_reason.startswith("node_id 'T-bad_id' does not match the LTM-1 §1 node ID format.")
     for clause in (
         "LTM-1 §1 makes the node ID permanent",
         "the session responsible for this node, or the session that edited this state.md or ran emit when no session"
-        " is bound (PENDING, COMPLETE, ARCHIVED), stops with BLOCKED_FOR_USER and tells Rs1 (the human)",
+        " is bound (for example a PENDING node before its session starts, a HOLD, COMPLETE, ARCHIVED or DISCARDED"
+        " node, or one under _archive/ whose session has ended), stops and tells Rs1 (the human)",
         "who chooses a rename or a revision of LTM-1 §1; there is no exception list.",
-        "To clear this item, do not rename the node, remove or blank node_id, change status, move or rename the folder"
-        " or state.md, or add the file to nest_skiplist.txt; normal status changes and the discard move are not"
+        "To clear this item, do not rename the node, remove or blank node_id, change status, move the folder, move or"
+        " rename state.md, or add the file to nest_skiplist.txt; normal status changes and the discard move are not"
         " forbidden.",
     ):
         assert clause in node_reason
+    assert "rename the folder" not in node_reason
+    assert "BLOCKED_FOR_USER" not in node_reason
+    line_break = (
+        "has a line break around an ID that is otherwise in the LTM-1 §1 node ID format (a | or > block can keep one)."
+        " Write the ID on the same line as the key, with no line breaks or blank lines; that is not a rename."
+    )
+    assert reasons["T-Block/state.md"] == "node_id 'T-Block\\n' " + line_break
+    assert reasons["T-BlockChild/state.md"] == "parent_node 'T-Good\\n' " + line_break
     parent_reason = reasons["T-Child/state.md"]
     assert parent_reason.startswith("parent_node 'T-Good (see notes)' does not match the LTM-1 §1 node ID format.")
     for clause in (
@@ -317,6 +334,155 @@ def test_manifest_scan_checks_ids_as_written(tmp_path, monkeypatch):
         ("T-C/state.md", "node_id"),
         ("T-D/state.md", "node_id"),
     ]
+
+
+@pytest.mark.parametrize("path", ["yaml", "regex"])
+@pytest.mark.parametrize(
+    ("front", "field", "kind"),
+    [
+        ('node_id: "T-Q "\n', "node_id", "whitespace"),
+        ('node_id: " T-Q"\n', "node_id", "whitespace"),
+        ('node_id: "T-Q\\t"\n', "node_id", "whitespace"),
+        ("node_id: T-Q\u3000\n", "node_id", "whitespace"),
+        ('node_id: "T-Q\u00a0"\n', "node_id", "whitespace"),
+        ('node_id: "T-Q\\r"\n', "node_id", "whitespace"),
+        ('node_id: "T-Q\\u2003"\n', "node_id", "whitespace"),
+        ('node_id: "T-Q\\u2028"\n', "node_id", "whitespace"),
+        ('node_id: "T-Q\\x85"\n', "node_id", "whitespace"),
+        ("node_id: |\n  T-Q\nstatus: X\n", "node_id", "line-break"),
+        ("node_id: >\n  T-Q\nstatus: X\n", "node_id", "line-break"),
+        ("node_id: |\n\n  T-Q\nstatus: X\n", "node_id", "line-break"),
+        ("node_id: |\n  T-Q \nstatus: X\n", "node_id", "line-break"),
+        ("node_id: |+\n  T-Q\n\nstatus: X\n", "node_id", "line-break"),
+        ('node_id: "T-Q\\n"\n', "node_id", "line-break"),
+        ('node_id: "\\nT-Q"\n', "node_id", "line-break"),
+        ('node_id: "T-Q\\r\\n"\n', "node_id", "line-break"),
+        ("node_id: |\n  T-bad_x\nstatus: X\n", "node_id", "format"),
+        ('node_id: "T-Q R"\n', "node_id", "format"),
+        ('node_id: " T-bad_x"\n', "node_id", "format"),
+        ("node_id: T-\uff31\n", "node_id", "format"),
+        ("node_id: t-Q\n", "node_id", "format"),
+        ("node_id: 2026-09-14\n", "node_id", "format"),
+        ('node_id: "T-Q\\u200b"\n', "node_id", "format"),
+        ('node_id: "\\ufeffT-Q"\n', "node_id", "format"),
+        ("node_id: T-Q\nparent_node: |\n  T-P\nstatus: X\n", "parent_node", "line-break"),
+        ("node_id: T-Q\nparent_node: |\n\n  T-P\nstatus: X\n", "parent_node", "line-break"),
+        ("node_id: T-Q\nparent_node: |\n  T-P \nstatus: X\n", "parent_node", "line-break"),
+        ("node_id: T-Q\nparent_node: |1\n   T-P\nstatus: X\n", "parent_node", "line-break"),
+        ("node_id: T-Q\nparent_node: |+\n  T-P\n\nstatus: X\n", "parent_node", "line-break"),
+        ('node_id: T-Q\nparent_node: "\\nT-P"\n', "parent_node", "line-break"),
+        ('node_id: T-Q\nparent_node: "T-P\\t\\n"\n', "parent_node", "line-break"),
+        ('node_id: T-Q\nparent_node: "T-P\\u3000\\n"\n', "parent_node", "line-break"),
+        ("node_id: T-Q\nparent_node: |\n  T-P (moved)\nstatus: X\n", "parent_node", "parent"),
+        ('node_id: T-Q\nparent_node: "T-P "\n', "parent_node", "parent"),
+        ("node_id: T-Q\nparent_node: 'None'\n", "parent_node", "parent"),
+        ("node_id: T-Q\nparent_node: ' '\n", "parent_node", "parent"),
+        ("node_id: T-Q\nparent_node: 'NULL'\n", "parent_node", "parent"),
+        ("node_id: T-Q\nparent_node: 'Null'\n", "parent_node", "parent"),
+        ("node_id: T-Q\nparent_node: '~'\n", "parent_node", "parent"),
+        ("node_id: T-Q\nparent_node: false\n", "parent_node", "parent"),
+        ("node_id: T-Q\nparent_node: {a: b}\n", "parent_node", "parent"),
+        ("node_id: T-Q\nparent_node: {}\n", "parent_node", "parent"),
+        ("node_id: T-Q\nparent_node: []\n", "parent_node", "parent"),
+        ("node_id: T-Q\nparent_node: 1.5\n", "parent_node", "parent"),
+        ("node_id: T-Q\nparent_node: 0.0\n", "parent_node", "parent"),
+    ],
+    ids=[
+        "trailing-space",
+        "leading-space",
+        "tab",
+        "ideographic-space",
+        "no-break-space",
+        "carriage-return",
+        "em-space",
+        "line-separator",
+        "next-line",
+        "literal-block-id",
+        "folded-block-id",
+        "block-id-after-blank-line",
+        "block-id-with-trailing-space",
+        "keep-block-id-with-blank-line",
+        "quoted-trailing-line-break",
+        "quoted-leading-line-break",
+        "quoted-crlf",
+        "literal-block-bad-id",
+        "inner-space",
+        "leading-space-bad-id",
+        "fullwidth-letter",
+        "lowercase-prefix",
+        "date-id",
+        "zero-width-space",
+        "byte-order-mark",
+        "literal-block-parent",
+        "block-parent-after-blank-line",
+        "block-parent-with-trailing-space",
+        "indented-block-parent",
+        "keep-block-parent-with-blank-line",
+        "quoted-leading-line-break-parent",
+        "tab-and-line-break-parent",
+        "ideographic-space-and-line-break-parent",
+        "literal-block-bad-parent",
+        "padded-parent",
+        "parent-None-string",
+        "parent-space-only",
+        "parent-NULL-string",
+        "parent-Null-string",
+        "parent-tilde-string",
+        "parent-false",
+        "parent-mapping",
+        "parent-empty-mapping",
+        "parent-empty-list",
+        "parent-float",
+        "parent-zero-float",
+    ],
+)
+def test_manifest_scan_reason_matches_the_defect(tmp_path, monkeypatch, front, field, kind, path):
+    """Each out-of-format value gets the reason for its defect, on both parse paths."""
+    expected = {
+        "whitespace": bns._NODE_ID_WHITESPACE_REASON,
+        "line-break": bns._ID_LINE_BREAK_REASON,
+        "format": bns._NODE_ID_FORMAT_REASON,
+        "parent": bns._PARENT_NODE_FORMAT_REASON,
+    }[kind]
+    text = front if path == "yaml" else BREAKS_YAML + front
+    _parse(text, path)
+    _, manual = _scan(tmp_path / "vault", monkeypatch, {"T-Q": text})
+    hard = [reason for severity, _, reason in manual if severity == "HARD"]
+    assert len(hard) == 1
+    assert hard[0].startswith(field + " ")
+    assert hard[0].endswith(" " + expected)
+
+
+@pytest.mark.parametrize(
+    "value",
+    [
+        "null",
+        "~",
+        "''",
+        "'null'",
+        "Null",
+        "'Null'",
+        "'NULL'",
+        "'None'",
+        "' '",
+        "\u2014",
+        "0",
+        "0.0",
+        "false",
+        "[]",
+        "{}",
+        "T-P",
+    ],
+)
+def test_manifest_scan_skips_the_parent_check_exactly_when_adapt_reads_no_parent(tmp_path, monkeypatch, value):
+    """The parent check is skipped exactly where adapt() reads no parent; there the row shows an em dash."""
+    front = f"node_id: T-Q\nparent_node: {value}\n"
+    fm = _parse(front, "yaml")
+    no_parent = bns.adapt(fm)["parent"] is None
+    rows, manual = _scan(tmp_path / "vault", monkeypatch, {"T-Q": front})
+    in_format = bns.LTM1_NODE_ID_RE.fullmatch(str(fm["parent_node"])) is not None
+    assert [field for _, field in _hard(manual)] == ([] if no_parent or in_format else ["parent_node"])
+    assert rows[0]["parent"] == ("—" if no_parent else str(fm["parent_node"]).strip())
 
 
 def test_manifest_scan_checks_non_string_ids(tmp_path, monkeypatch):

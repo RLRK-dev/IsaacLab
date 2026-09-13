@@ -340,13 +340,18 @@ _NODE_ID_WHITESPACE_REASON = (
     "has whitespace around an ID that is otherwise in the LTM-1 §1 node ID format. Remove the whitespace; that is not"
     " a rename."
 )
+_ID_LINE_BREAK_REASON = (
+    "has a line break around an ID that is otherwise in the LTM-1 §1 node ID format (a | or > block can keep one)."
+    " Write the ID on the same line as the key, with no line breaks or blank lines; that is not a rename."
+)
 _NODE_ID_FORMAT_REASON = (
     "does not match the LTM-1 §1 node ID format. LTM-1 §1 makes the node ID permanent: the session responsible for"
-    " this node, or the session that edited this state.md or ran emit when no session is bound (PENDING, COMPLETE,"
-    " ARCHIVED), stops with BLOCKED_FOR_USER and tells Rs1 (the human), who chooses a rename or a revision of LTM-1"
-    " §1; there is no exception list. To clear this item, do not rename the node, remove or blank node_id, change"
-    " status, move or rename the folder or state.md, or add the file to nest_skiplist.txt; normal status changes and"
-    " the discard move are not forbidden."
+    " this node, or the session that edited this state.md or ran emit when no session is bound (for example a PENDING"
+    " node before its session starts, a HOLD, COMPLETE, ARCHIVED or DISCARDED node, or one under _archive/ whose"
+    " session has ended), stops and tells Rs1 (the human), who chooses a rename or a revision of LTM-1 §1; there is no"
+    " exception list. To clear this item, do not rename the node, remove or blank node_id, change status, move the"
+    " folder, move or rename state.md, or add the file to nest_skiplist.txt; normal status changes and the discard move"
+    " are not forbidden."
 )
 _PARENT_NODE_FORMAT_REASON = (
     "does not match the LTM-1 §1 node ID format. Copy the parent node's node_id into parent_node exactly; a node"
@@ -393,12 +398,19 @@ def collect_state_nodes():
         parent = str(p).strip() if p not in (None, "", "null") else "—"
         raw_id = str(fm.get("node_id"))
         if not LTM1_NODE_ID_RE.fullmatch(raw_id):
-            only_ws = LTM1_NODE_ID_RE.fullmatch(raw_id.strip())
-            reason = _NODE_ID_WHITESPACE_REASON if only_ws else _NODE_ID_FORMAT_REASON
+            if not LTM1_NODE_ID_RE.fullmatch(raw_id.strip()):
+                reason = _NODE_ID_FORMAT_REASON
+            elif "\n" in raw_id:
+                reason = _ID_LINE_BREAK_REASON
+            else:
+                reason = _NODE_ID_WHITESPACE_REASON
             manual.append(("HARD", rel, f"node_id {raw_id!r} {reason}"))
         # Only the values adapt() reads as no parent are skipped; a written "—" is a value.
-        if p not in (None, "", "null") and not LTM1_NODE_ID_RE.fullmatch(str(p)):
-            manual.append(("HARD", rel, f"parent_node {str(p)!r} {_PARENT_NODE_FORMAT_REASON}"))
+        raw_parent = str(p)
+        if p not in (None, "", "null") and not LTM1_NODE_ID_RE.fullmatch(raw_parent):
+            line_break = "\n" in raw_parent and LTM1_NODE_ID_RE.fullmatch(raw_parent.strip())
+            reason = _ID_LINE_BREAK_REASON if line_break else _PARENT_NODE_FORMAT_REASON
+            manual.append(("HARD", rel, f"parent_node {raw_parent!r} {reason}"))
         rows.append({"id": nid, "status": status or "(missing)", "parent": parent, "archived": archived})
     rows.sort(key=lambda r: r["id"])
     return rows, manual
