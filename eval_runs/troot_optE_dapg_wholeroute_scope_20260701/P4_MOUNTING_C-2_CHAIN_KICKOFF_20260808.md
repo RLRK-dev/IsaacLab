@@ -2372,3 +2372,4 @@ flow 正直記録: fix は leg より先に lane に着地（pZ 命名「receipt
    - 根拠 = item 15 の読み: alive/dead の判別基準が「正準入力（対称 jaw・AXFIX seed 状態の scratch）に対する解析的に既知の答え（upright 0.00／min tilted 0.10 rad）」= 計器の code path と独立 ⇒ 条件 ③ の趣旨（計器が自分自身を基準にしない）を満たす。転置回転（07-28 の実バグ形）は must-fail 対照で落ちる。
    - **残差の割当（受入の条件・row 74 に携行）**: 正準状態では ρ の符号が tilt に現れないため符号反転は runtime の alive/dead では検出されない ⇒ **pZ R3-ii（非対称行・2 規約の差 11.46°）が静的に判別**（既に事前登録 `98d8e63173`）し、以後の編集は D4/D4′ の AST 述語が守る。§16 の検証 rows にこの割当が明示されていれば追加不要・なければ p6 が row 74 に 1 行携行（p11 の再編集は求めない）。
    - ⛔ 解錠なし・D4′ の build 窓は開いていない・#69 critical path 外。送信 = 下の記録。
+   - **送信記録（22:57:15）**: 上記 word を **m-p4-264** として p18 へ（relay 先 p6・cc p11）。prompt rc=0・p18 transcript に record。本文 = scratchpad `p4_dispatch/m-p4-264.txt`（内容は本 item 17 が正）。
