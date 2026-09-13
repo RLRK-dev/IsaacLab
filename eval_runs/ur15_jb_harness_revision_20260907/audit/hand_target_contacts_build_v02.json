@@ -1,0 +1,84 @@
+{
+  "observed_at": "2026-09-13T13:31:02.505260+09:00",
+  "input_sha256": {
+    "data/hand_target_contacts_v02.json": "16a6fa6c83df906b143b4f4cafcaa7260fa8f4d9bc4a79e92d80328e9aab6a9e",
+    "data/hand_target_contacts_v01.json": "32c09e74252ed9b1691488adc61a5f90ace22905b538f2d0b57d49f713e0e6c5",
+    "scripts/hand_target_contacts_viewer_v02.html": "8560a43fbd160d599479e865ba6a32e05fc32209972317e1ef578eb3c232d994",
+    "analysis/hand_target_contacts_v02.md": "78aa965861e9fab0a34504ba18d8d027f339d037a2065cfef375287e23fa0523",
+    "data/three_station_connection_groups_v01.json": "c6a74d692190d334a55dea2682da1abac3ec15ad693f5d948341cbff4caeda65",
+    "references/hand_spec_20260913/THREAD_3F_4F_Gripper_Spec_v0.2_JA.md": "f75f22bd1e826f7682b3392403dab9a2954bd1a26d84e195efd0aa0125abcbe9",
+    "references/op040_real_products_20260912/ampere_hvjb_5_400_current_v1_1.pdf": "643648bcea77b4d7c37c65d073664f746f68689952da2d5ce932e3d10bd5a9e1",
+    "data/hand_held_fastening_v01.json": "39eff583dabab2b3bd24033aa1ec1fdd93cfee5bbb5aaccfd337a80a2de3801d",
+    "analysis/three_station_connection_groups_v01.md": "ba5c592ce18b30db001a1cdedf0c7466206ece63ea6583d359fbaf1b2f3f7834",
+    "scripts/build_hand_target_contacts_v02.py": "7754179ae987295a1e4bb3f4689d638d657c76877e308a9e3d7cd57195e76f56",
+    "scripts/build_hand_function_review_v01.py": "137066f2436d9fd59d60218a522ea45e2a253678822395704b7649d584b1d240",
+    "references/op040_real_products_20260912/ampere_product_photo_1.jpg": "5724681b4bef4399f0799751a62577e48ef9b7fd3d6ed5b56d85fd95924937ad",
+    "references/op040_real_products_20260912/ampere_product_photo_2.jpg": "5ae831226050fb2430894f3a0462d87c1ffa8991fad453bb8945b2c983233b2e"
+  },
+  "inputs_unchanged": true,
+  "page_sha256": "d839c5cb89d3fb665749bc2c1d800b08e68e25025a0a64abe88b4635ec1b9e2c",
+  "document_observations": {
+    "target_ids": [
+      "F01",
+      "F02",
+      "F03",
+      "F04",
+      "F05",
+      "F06",
+      "F07",
+      "F08",
+      "F09",
+      "F10"
+    ],
+    "prior_target_ids_preserved": [
+      "A01",
+      "A02",
+      "A03",
+      "A04",
+      "B01",
+      "B02",
+      "B03"
+    ],
+    "photo_rectangles_unchanged_for_prior_targets": true,
+    "unlocated_target_ids": [
+      "F08",
+      "F09",
+      "F10"
+    ],
+    "station_candidate_targets": {
+      "A": [
+        "F01",
+        "F02",
+        "F08",
+        "F09",
+        "F10"
+      ],
+      "B": [
+        "F03",
+        "F04",
+        "F05",
+        "F06",
+        "F07"
+      ],
+      "C": [
+        "F03",
+        "F04",
+        "F05",
+        "F06",
+        "F07"
+      ]
+    },
+    "operation_case_ids": [
+      "body_fastening",
+      "both_end_fastening",
+      "one_end_fastening",
+      "one_end_insertion",
+      "rigid_conductor_fastening",
+      "wire_support"
+    ],
+    "unpublished_part_dimensions_and_force_remain_null": true,
+    "scope": "document references and pixel bounds only"
+  },
+  "arm_motion_created": false,
+  "physical_acceptance_verdict": null
+}

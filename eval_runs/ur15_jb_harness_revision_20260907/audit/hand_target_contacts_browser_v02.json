@@ -1,0 +1,1188 @@
+{
+  "observed_at": "2026-09-13T13:31:04.102770+09:00",
+  "page_sha256": "d839c5cb89d3fb665749bc2c1d800b08e68e25025a0a64abe88b4635ec1b9e2c",
+  "scope": "Browser filtering, target selection and reference-image decoding only",
+  "reports": {
+    "desktop": {
+      "rows": [
+        {
+          "filter": "all",
+          "requested": "F01",
+          "state": {
+            "id": "F01",
+            "stationFilter": "all",
+            "photo": "overview",
+            "regions": 1,
+            "cases": [
+              "body_fastening"
+            ]
+          },
+          "selectedTargets": 1,
+          "selectedFilters": 1,
+          "release": "本体の機械固定が完了するまで保持を継続してから開く。下受けを入れて先に手を離す手順へ戻さない。",
+          "fingerCount": "第一候補：2本指／開閉1軸",
+          "rectangleCount": 1,
+          "caption": "青枠は前回と同じ部材位置の例です。STへの割付と保持期間を今回更新しました。",
+          "caseIds": [
+            "body_fastening"
+          ]
+        },
+        {
+          "filter": "all",
+          "requested": "F02",
+          "state": {
+            "id": "F02",
+            "stationFilter": "all",
+            "photo": "overview",
+            "regions": 2,
+            "cases": [
+              "body_fastening"
+            ]
+          },
+          "selectedTargets": 1,
+          "selectedFilters": 1,
+          "release": "本体の固定方法に対応する保持を続ける。端末を差し込む工程で本体を再び持つ必要があるかは固定状態で決める。",
+          "fingerCount": "第一候補：2本指／開閉1軸",
+          "rectangleCount": 2,
+          "caption": "青枠は前回と同じ部材位置の例です。STへの割付と保持期間を今回更新しました。",
+          "caseIds": [
+            "body_fastening"
+          ]
+        },
+        {
+          "filter": "all",
+          "requested": "F03",
+          "state": {
+            "id": "F03",
+            "stationFilter": "all",
+            "photo": "detail",
+            "regions": 1,
+            "cases": [
+              "rigid_conductor_fastening"
+            ]
+          },
+          "selectedTargets": 1,
+          "selectedFilters": 1,
+          "release": "その接続点に重なる導体・端子をそろえ、締結を終えるまで必要な保持を続ける。剛体の保持腕数は長さ・荷重・姿勢で別途照合する。",
+          "fingerCount": "第一候補：2本指／開閉1軸",
+          "rectangleCount": 1,
+          "caption": "青枠は前回と同じ部材位置の例です。STへの割付と保持期間を今回更新しました。",
+          "caseIds": [
+            "rigid_conductor_fastening"
+          ]
+        },
+        {
+          "filter": "all",
+          "requested": "F04",
+          "state": {
+            "id": "F04",
+            "stationFilter": "all",
+            "photo": "overview",
+            "regions": 1,
+            "cases": [
+              "one_end_insertion",
+              "rigid_conductor_fastening"
+            ]
+          },
+          "selectedTargets": 1,
+          "selectedFilters": 1,
+          "release": "クリップ式なら保持部への装着、ボルト式なら担当接続点の締結を終えてから離す。形式とホルダーの入荷単位は未確定。",
+          "fingerCount": "第一候補：2本指／開閉1軸",
+          "rectangleCount": 1,
+          "caption": "青枠は前回と同じ部材位置の例です。STへの割付と保持期間を今回更新しました。",
+          "caseIds": [
+            "one_end_insertion",
+            "rigid_conductor_fastening"
+          ]
+        },
+        {
+          "filter": "all",
+          "requested": "F05",
+          "state": {
+            "id": "F05",
+            "stationFilter": "all",
+            "photo": "overview",
+            "regions": 1,
+            "cases": [
+              "wire_support"
+            ]
+          },
+          "selectedTargets": 1,
+          "selectedFilters": 1,
+          "release": "被覆だけを保持しても端子の回転が止まるとは未確認。F06の端末保持を続けたまま接続する。持ち替えが必要な場合の支持は別途未解決。",
+          "fingerCount": "第一候補：2本指／開閉1軸",
+          "rectangleCount": 1,
+          "caption": "青枠は前回と同じ部材位置の例です。STへの割付と保持期間を今回更新しました。",
+          "caseIds": [
+            "wire_support"
+          ]
+        },
+        {
+          "filter": "all",
+          "requested": "F06",
+          "state": {
+            "id": "F06",
+            "stationFilter": "all",
+            "photo": "detail",
+            "regions": 1,
+            "cases": [
+              "both_end_fastening",
+              "one_end_fastening"
+            ]
+          },
+          "selectedTargets": 1,
+          "selectedFilters": 1,
+          "release": "同じ作業位置で端末を保持したまま締結する。工具が手を妨げない退避状態となってから指を開き、両端保持作業では両腕を同時に上昇する。",
+          "fingerCount": "第一候補：2本指／開閉1軸",
+          "rectangleCount": 1,
+          "caption": "青枠は前回と同じ部材位置の例です。STへの割付と保持期間を今回更新しました。",
+          "caseIds": [
+            "both_end_fastening",
+            "one_end_fastening"
+          ]
+        },
+        {
+          "filter": "all",
+          "requested": "F07",
+          "state": {
+            "id": "F07",
+            "stationFilter": "all",
+            "photo": "detail",
+            "regions": 2,
+            "cases": [
+              "one_end_insertion"
+            ]
+          },
+          "selectedTargets": 1,
+          "selectedFilters": 1,
+          "release": "対象端末の接続完了を確認するまで保持を続け、その後ロック・配線を避けて開放する。完了信号や数値条件は端末型式確定後に対応付ける。",
+          "fingerCount": "第一候補：2本指／開閉1軸",
+          "rectangleCount": 2,
+          "caption": "青枠は前回と同じ部材位置の例です。STへの割付と保持期間を今回更新しました。",
+          "caseIds": [
+            "one_end_insertion"
+          ]
+        },
+        {
+          "filter": "all",
+          "requested": "F08",
+          "state": {
+            "id": "F08",
+            "stationFilter": "all",
+            "photo": "overview",
+            "regions": 0,
+            "cases": [
+              "body_fastening"
+            ]
+          },
+          "selectedTargets": 1,
+          "selectedFilters": 1,
+          "release": "担当する機械固定を完了してから指を開く。単体設置が必要か未確定のため動作は作っていない。",
+          "fingerCount": "第一候補：2本指／開閉1軸",
+          "rectangleCount": 0,
+          "caption": "この対象の写真上の位置は未特定です。誤った部材を指さないよう枠を表示していません。",
+          "caseIds": [
+            "body_fastening"
+          ]
+        },
+        {
+          "filter": "all",
+          "requested": "F09",
+          "state": {
+            "id": "F09",
+            "stationFilter": "all",
+            "photo": "overview",
+            "regions": 0,
+            "cases": [
+              "body_fastening"
+            ]
+          },
+          "selectedTargets": 1,
+          "selectedFilters": 1,
+          "release": "担当する機械固定を完了してから指を開く。単体設置が必要か未確定のため動作は作っていない。",
+          "fingerCount": "第一候補：2本指／開閉1軸",
+          "rectangleCount": 0,
+          "caption": "この対象の写真上の位置は未特定です。誤った部材を指さないよう枠を表示していません。",
+          "caseIds": [
+            "body_fastening"
+          ]
+        },
+        {
+          "filter": "all",
+          "requested": "F10",
+          "state": {
+            "id": "F10",
+            "stationFilter": "all",
+            "photo": "overview",
+            "regions": 0,
+            "cases": [
+              "body_fastening"
+            ]
+          },
+          "selectedTargets": 1,
+          "selectedFilters": 1,
+          "release": "担当する機械固定を完了してから指を開く。単体設置が必要か未確定のため動作は作っていない。",
+          "fingerCount": "第一候補：2本指／開閉1軸",
+          "rectangleCount": 0,
+          "caption": "この対象の写真上の位置は未特定です。誤った部材を指さないよう枠を表示していません。",
+          "caseIds": [
+            "body_fastening"
+          ]
+        },
+        {
+          "filter": "A",
+          "requested": "F01",
+          "state": {
+            "id": "F01",
+            "stationFilter": "A",
+            "photo": "overview",
+            "regions": 1,
+            "cases": [
+              "body_fastening"
+            ]
+          },
+          "selectedTargets": 1,
+          "selectedFilters": 1,
+          "release": "本体の機械固定が完了するまで保持を継続してから開く。下受けを入れて先に手を離す手順へ戻さない。",
+          "fingerCount": "第一候補：2本指／開閉1軸",
+          "rectangleCount": 1,
+          "caption": "青枠は前回と同じ部材位置の例です。STへの割付と保持期間を今回更新しました。",
+          "caseIds": [
+            "body_fastening"
+          ]
+        },
+        {
+          "filter": "A",
+          "requested": "F02",
+          "state": {
+            "id": "F02",
+            "stationFilter": "A",
+            "photo": "overview",
+            "regions": 2,
+            "cases": [
+              "body_fastening"
+            ]
+          },
+          "selectedTargets": 1,
+          "selectedFilters": 1,
+          "release": "本体の固定方法に対応する保持を続ける。端末を差し込む工程で本体を再び持つ必要があるかは固定状態で決める。",
+          "fingerCount": "第一候補：2本指／開閉1軸",
+          "rectangleCount": 2,
+          "caption": "青枠は前回と同じ部材位置の例です。STへの割付と保持期間を今回更新しました。",
+          "caseIds": [
+            "body_fastening"
+          ]
+        },
+        {
+          "filter": "A",
+          "requested": "F08",
+          "state": {
+            "id": "F08",
+            "stationFilter": "A",
+            "photo": "overview",
+            "regions": 0,
+            "cases": [
+              "body_fastening"
+            ]
+          },
+          "selectedTargets": 1,
+          "selectedFilters": 1,
+          "release": "担当する機械固定を完了してから指を開く。単体設置が必要か未確定のため動作は作っていない。",
+          "fingerCount": "第一候補：2本指／開閉1軸",
+          "rectangleCount": 0,
+          "caption": "この対象の写真上の位置は未特定です。誤った部材を指さないよう枠を表示していません。",
+          "caseIds": [
+            "body_fastening"
+          ]
+        },
+        {
+          "filter": "A",
+          "requested": "F09",
+          "state": {
+            "id": "F09",
+            "stationFilter": "A",
+            "photo": "overview",
+            "regions": 0,
+            "cases": [
+              "body_fastening"
+            ]
+          },
+          "selectedTargets": 1,
+          "selectedFilters": 1,
+          "release": "担当する機械固定を完了してから指を開く。単体設置が必要か未確定のため動作は作っていない。",
+          "fingerCount": "第一候補：2本指／開閉1軸",
+          "rectangleCount": 0,
+          "caption": "この対象の写真上の位置は未特定です。誤った部材を指さないよう枠を表示していません。",
+          "caseIds": [
+            "body_fastening"
+          ]
+        },
+        {
+          "filter": "A",
+          "requested": "F10",
+          "state": {
+            "id": "F10",
+            "stationFilter": "A",
+            "photo": "overview",
+            "regions": 0,
+            "cases": [
+              "body_fastening"
+            ]
+          },
+          "selectedTargets": 1,
+          "selectedFilters": 1,
+          "release": "担当する機械固定を完了してから指を開く。単体設置が必要か未確定のため動作は作っていない。",
+          "fingerCount": "第一候補：2本指／開閉1軸",
+          "rectangleCount": 0,
+          "caption": "この対象の写真上の位置は未特定です。誤った部材を指さないよう枠を表示していません。",
+          "caseIds": [
+            "body_fastening"
+          ]
+        },
+        {
+          "filter": "B",
+          "requested": "F03",
+          "state": {
+            "id": "F03",
+            "stationFilter": "B",
+            "photo": "detail",
+            "regions": 1,
+            "cases": [
+              "rigid_conductor_fastening"
+            ]
+          },
+          "selectedTargets": 1,
+          "selectedFilters": 1,
+          "release": "その接続点に重なる導体・端子をそろえ、締結を終えるまで必要な保持を続ける。剛体の保持腕数は長さ・荷重・姿勢で別途照合する。",
+          "fingerCount": "第一候補：2本指／開閉1軸",
+          "rectangleCount": 1,
+          "caption": "青枠は前回と同じ部材位置の例です。STへの割付と保持期間を今回更新しました。",
+          "caseIds": [
+            "rigid_conductor_fastening"
+          ]
+        },
+        {
+          "filter": "B",
+          "requested": "F04",
+          "state": {
+            "id": "F04",
+            "stationFilter": "B",
+            "photo": "overview",
+            "regions": 1,
+            "cases": [
+              "one_end_insertion",
+              "rigid_conductor_fastening"
+            ]
+          },
+          "selectedTargets": 1,
+          "selectedFilters": 1,
+          "release": "クリップ式なら保持部への装着、ボルト式なら担当接続点の締結を終えてから離す。形式とホルダーの入荷単位は未確定。",
+          "fingerCount": "第一候補：2本指／開閉1軸",
+          "rectangleCount": 1,
+          "caption": "青枠は前回と同じ部材位置の例です。STへの割付と保持期間を今回更新しました。",
+          "caseIds": [
+            "one_end_insertion",
+            "rigid_conductor_fastening"
+          ]
+        },
+        {
+          "filter": "B",
+          "requested": "F05",
+          "state": {
+            "id": "F05",
+            "stationFilter": "B",
+            "photo": "overview",
+            "regions": 1,
+            "cases": [
+              "wire_support"
+            ]
+          },
+          "selectedTargets": 1,
+          "selectedFilters": 1,
+          "release": "被覆だけを保持しても端子の回転が止まるとは未確認。F06の端末保持を続けたまま接続する。持ち替えが必要な場合の支持は別途未解決。",
+          "fingerCount": "第一候補：2本指／開閉1軸",
+          "rectangleCount": 1,
+          "caption": "青枠は前回と同じ部材位置の例です。STへの割付と保持期間を今回更新しました。",
+          "caseIds": [
+            "wire_support"
+          ]
+        },
+        {
+          "filter": "B",
+          "requested": "F06",
+          "state": {
+            "id": "F06",
+            "stationFilter": "B",
+            "photo": "detail",
+            "regions": 1,
+            "cases": [
+              "both_end_fastening",
+              "one_end_fastening"
+            ]
+          },
+          "selectedTargets": 1,
+          "selectedFilters": 1,
+          "release": "同じ作業位置で端末を保持したまま締結する。工具が手を妨げない退避状態となってから指を開き、両端保持作業では両腕を同時に上昇する。",
+          "fingerCount": "第一候補：2本指／開閉1軸",
+          "rectangleCount": 1,
+          "caption": "青枠は前回と同じ部材位置の例です。STへの割付と保持期間を今回更新しました。",
+          "caseIds": [
+            "both_end_fastening",
+            "one_end_fastening"
+          ]
+        },
+        {
+          "filter": "B",
+          "requested": "F07",
+          "state": {
+            "id": "F07",
+            "stationFilter": "B",
+            "photo": "detail",
+            "regions": 2,
+            "cases": [
+              "one_end_insertion"
+            ]
+          },
+          "selectedTargets": 1,
+          "selectedFilters": 1,
+          "release": "対象端末の接続完了を確認するまで保持を続け、その後ロック・配線を避けて開放する。完了信号や数値条件は端末型式確定後に対応付ける。",
+          "fingerCount": "第一候補：2本指／開閉1軸",
+          "rectangleCount": 2,
+          "caption": "青枠は前回と同じ部材位置の例です。STへの割付と保持期間を今回更新しました。",
+          "caseIds": [
+            "one_end_insertion"
+          ]
+        },
+        {
+          "filter": "C",
+          "requested": "F03",
+          "state": {
+            "id": "F03",
+            "stationFilter": "C",
+            "photo": "detail",
+            "regions": 1,
+            "cases": [
+              "rigid_conductor_fastening"
+            ]
+          },
+          "selectedTargets": 1,
+          "selectedFilters": 1,
+          "release": "その接続点に重なる導体・端子をそろえ、締結を終えるまで必要な保持を続ける。剛体の保持腕数は長さ・荷重・姿勢で別途照合する。",
+          "fingerCount": "第一候補：2本指／開閉1軸",
+          "rectangleCount": 1,
+          "caption": "青枠は前回と同じ部材位置の例です。STへの割付と保持期間を今回更新しました。",
+          "caseIds": [
+            "rigid_conductor_fastening"
+          ]
+        },
+        {
+          "filter": "C",
+          "requested": "F04",
+          "state": {
+            "id": "F04",
+            "stationFilter": "C",
+            "photo": "overview",
+            "regions": 1,
+            "cases": [
+              "one_end_insertion",
+              "rigid_conductor_fastening"
+            ]
+          },
+          "selectedTargets": 1,
+          "selectedFilters": 1,
+          "release": "クリップ式なら保持部への装着、ボルト式なら担当接続点の締結を終えてから離す。形式とホルダーの入荷単位は未確定。",
+          "fingerCount": "第一候補：2本指／開閉1軸",
+          "rectangleCount": 1,
+          "caption": "青枠は前回と同じ部材位置の例です。STへの割付と保持期間を今回更新しました。",
+          "caseIds": [
+            "one_end_insertion",
+            "rigid_conductor_fastening"
+          ]
+        },
+        {
+          "filter": "C",
+          "requested": "F05",
+          "state": {
+            "id": "F05",
+            "stationFilter": "C",
+            "photo": "overview",
+            "regions": 1,
+            "cases": [
+              "wire_support"
+            ]
+          },
+          "selectedTargets": 1,
+          "selectedFilters": 1,
+          "release": "被覆だけを保持しても端子の回転が止まるとは未確認。F06の端末保持を続けたまま接続する。持ち替えが必要な場合の支持は別途未解決。",
+          "fingerCount": "第一候補：2本指／開閉1軸",
+          "rectangleCount": 1,
+          "caption": "青枠は前回と同じ部材位置の例です。STへの割付と保持期間を今回更新しました。",
+          "caseIds": [
+            "wire_support"
+          ]
+        },
+        {
+          "filter": "C",
+          "requested": "F06",
+          "state": {
+            "id": "F06",
+            "stationFilter": "C",
+            "photo": "detail",
+            "regions": 1,
+            "cases": [
+              "both_end_fastening",
+              "one_end_fastening"
+            ]
+          },
+          "selectedTargets": 1,
+          "selectedFilters": 1,
+          "release": "同じ作業位置で端末を保持したまま締結する。工具が手を妨げない退避状態となってから指を開き、両端保持作業では両腕を同時に上昇する。",
+          "fingerCount": "第一候補：2本指／開閉1軸",
+          "rectangleCount": 1,
+          "caption": "青枠は前回と同じ部材位置の例です。STへの割付と保持期間を今回更新しました。",
+          "caseIds": [
+            "both_end_fastening",
+            "one_end_fastening"
+          ]
+        },
+        {
+          "filter": "C",
+          "requested": "F07",
+          "state": {
+            "id": "F07",
+            "stationFilter": "C",
+            "photo": "detail",
+            "regions": 2,
+            "cases": [
+              "one_end_insertion"
+            ]
+          },
+          "selectedTargets": 1,
+          "selectedFilters": 1,
+          "release": "対象端末の接続完了を確認するまで保持を続け、その後ロック・配線を避けて開放する。完了信号や数値条件は端末型式確定後に対応付ける。",
+          "fingerCount": "第一候補：2本指／開閉1軸",
+          "rectangleCount": 2,
+          "caption": "青枠は前回と同じ部材位置の例です。STへの割付と保持期間を今回更新しました。",
+          "caseIds": [
+            "one_end_insertion"
+          ]
+        }
+      ],
+      "images": [
+        {
+          "name": "overview",
+          "width": 1620,
+          "height": 1080
+        },
+        {
+          "name": "detail",
+          "width": 1620,
+          "height": 1080
+        }
+      ],
+      "viewport": 1440,
+      "scrollWidth": 1425,
+      "handOptions": [
+        "2F",
+        "G3",
+        "G4"
+      ],
+      "openItems": 5
+    },
+    "mobile": {
+      "rows": [
+        {
+          "filter": "all",
+          "requested": "F01",
+          "state": {
+            "id": "F01",
+            "stationFilter": "all",
+            "photo": "overview",
+            "regions": 1,
+            "cases": [
+              "body_fastening"
+            ]
+          },
+          "selectedTargets": 1,
+          "selectedFilters": 1,
+          "release": "本体の機械固定が完了するまで保持を継続してから開く。下受けを入れて先に手を離す手順へ戻さない。",
+          "fingerCount": "第一候補：2本指／開閉1軸",
+          "rectangleCount": 1,
+          "caption": "青枠は前回と同じ部材位置の例です。STへの割付と保持期間を今回更新しました。",
+          "caseIds": [
+            "body_fastening"
+          ]
+        },
+        {
+          "filter": "all",
+          "requested": "F02",
+          "state": {
+            "id": "F02",
+            "stationFilter": "all",
+            "photo": "overview",
+            "regions": 2,
+            "cases": [
+              "body_fastening"
+            ]
+          },
+          "selectedTargets": 1,
+          "selectedFilters": 1,
+          "release": "本体の固定方法に対応する保持を続ける。端末を差し込む工程で本体を再び持つ必要があるかは固定状態で決める。",
+          "fingerCount": "第一候補：2本指／開閉1軸",
+          "rectangleCount": 2,
+          "caption": "青枠は前回と同じ部材位置の例です。STへの割付と保持期間を今回更新しました。",
+          "caseIds": [
+            "body_fastening"
+          ]
+        },
+        {
+          "filter": "all",
+          "requested": "F03",
+          "state": {
+            "id": "F03",
+            "stationFilter": "all",
+            "photo": "detail",
+            "regions": 1,
+            "cases": [
+              "rigid_conductor_fastening"
+            ]
+          },
+          "selectedTargets": 1,
+          "selectedFilters": 1,
+          "release": "その接続点に重なる導体・端子をそろえ、締結を終えるまで必要な保持を続ける。剛体の保持腕数は長さ・荷重・姿勢で別途照合する。",
+          "fingerCount": "第一候補：2本指／開閉1軸",
+          "rectangleCount": 1,
+          "caption": "青枠は前回と同じ部材位置の例です。STへの割付と保持期間を今回更新しました。",
+          "caseIds": [
+            "rigid_conductor_fastening"
+          ]
+        },
+        {
+          "filter": "all",
+          "requested": "F04",
+          "state": {
+            "id": "F04",
+            "stationFilter": "all",
+            "photo": "overview",
+            "regions": 1,
+            "cases": [
+              "one_end_insertion",
+              "rigid_conductor_fastening"
+            ]
+          },
+          "selectedTargets": 1,
+          "selectedFilters": 1,
+          "release": "クリップ式なら保持部への装着、ボルト式なら担当接続点の締結を終えてから離す。形式とホルダーの入荷単位は未確定。",
+          "fingerCount": "第一候補：2本指／開閉1軸",
+          "rectangleCount": 1,
+          "caption": "青枠は前回と同じ部材位置の例です。STへの割付と保持期間を今回更新しました。",
+          "caseIds": [
+            "one_end_insertion",
+            "rigid_conductor_fastening"
+          ]
+        },
+        {
+          "filter": "all",
+          "requested": "F05",
+          "state": {
+            "id": "F05",
+            "stationFilter": "all",
+            "photo": "overview",
+            "regions": 1,
+            "cases": [
+              "wire_support"
+            ]
+          },
+          "selectedTargets": 1,
+          "selectedFilters": 1,
+          "release": "被覆だけを保持しても端子の回転が止まるとは未確認。F06の端末保持を続けたまま接続する。持ち替えが必要な場合の支持は別途未解決。",
+          "fingerCount": "第一候補：2本指／開閉1軸",
+          "rectangleCount": 1,
+          "caption": "青枠は前回と同じ部材位置の例です。STへの割付と保持期間を今回更新しました。",
+          "caseIds": [
+            "wire_support"
+          ]
+        },
+        {
+          "filter": "all",
+          "requested": "F06",
+          "state": {
+            "id": "F06",
+            "stationFilter": "all",
+            "photo": "detail",
+            "regions": 1,
+            "cases": [
+              "both_end_fastening",
+              "one_end_fastening"
+            ]
+          },
+          "selectedTargets": 1,
+          "selectedFilters": 1,
+          "release": "同じ作業位置で端末を保持したまま締結する。工具が手を妨げない退避状態となってから指を開き、両端保持作業では両腕を同時に上昇する。",
+          "fingerCount": "第一候補：2本指／開閉1軸",
+          "rectangleCount": 1,
+          "caption": "青枠は前回と同じ部材位置の例です。STへの割付と保持期間を今回更新しました。",
+          "caseIds": [
+            "both_end_fastening",
+            "one_end_fastening"
+          ]
+        },
+        {
+          "filter": "all",
+          "requested": "F07",
+          "state": {
+            "id": "F07",
+            "stationFilter": "all",
+            "photo": "detail",
+            "regions": 2,
+            "cases": [
+              "one_end_insertion"
+            ]
+          },
+          "selectedTargets": 1,
+          "selectedFilters": 1,
+          "release": "対象端末の接続完了を確認するまで保持を続け、その後ロック・配線を避けて開放する。完了信号や数値条件は端末型式確定後に対応付ける。",
+          "fingerCount": "第一候補：2本指／開閉1軸",
+          "rectangleCount": 2,
+          "caption": "青枠は前回と同じ部材位置の例です。STへの割付と保持期間を今回更新しました。",
+          "caseIds": [
+            "one_end_insertion"
+          ]
+        },
+        {
+          "filter": "all",
+          "requested": "F08",
+          "state": {
+            "id": "F08",
+            "stationFilter": "all",
+            "photo": "overview",
+            "regions": 0,
+            "cases": [
+              "body_fastening"
+            ]
+          },
+          "selectedTargets": 1,
+          "selectedFilters": 1,
+          "release": "担当する機械固定を完了してから指を開く。単体設置が必要か未確定のため動作は作っていない。",
+          "fingerCount": "第一候補：2本指／開閉1軸",
+          "rectangleCount": 0,
+          "caption": "この対象の写真上の位置は未特定です。誤った部材を指さないよう枠を表示していません。",
+          "caseIds": [
+            "body_fastening"
+          ]
+        },
+        {
+          "filter": "all",
+          "requested": "F09",
+          "state": {
+            "id": "F09",
+            "stationFilter": "all",
+            "photo": "overview",
+            "regions": 0,
+            "cases": [
+              "body_fastening"
+            ]
+          },
+          "selectedTargets": 1,
+          "selectedFilters": 1,
+          "release": "担当する機械固定を完了してから指を開く。単体設置が必要か未確定のため動作は作っていない。",
+          "fingerCount": "第一候補：2本指／開閉1軸",
+          "rectangleCount": 0,
+          "caption": "この対象の写真上の位置は未特定です。誤った部材を指さないよう枠を表示していません。",
+          "caseIds": [
+            "body_fastening"
+          ]
+        },
+        {
+          "filter": "all",
+          "requested": "F10",
+          "state": {
+            "id": "F10",
+            "stationFilter": "all",
+            "photo": "overview",
+            "regions": 0,
+            "cases": [
+              "body_fastening"
+            ]
+          },
+          "selectedTargets": 1,
+          "selectedFilters": 1,
+          "release": "担当する機械固定を完了してから指を開く。単体設置が必要か未確定のため動作は作っていない。",
+          "fingerCount": "第一候補：2本指／開閉1軸",
+          "rectangleCount": 0,
+          "caption": "この対象の写真上の位置は未特定です。誤った部材を指さないよう枠を表示していません。",
+          "caseIds": [
+            "body_fastening"
+          ]
+        },
+        {
+          "filter": "A",
+          "requested": "F01",
+          "state": {
+            "id": "F01",
+            "stationFilter": "A",
+            "photo": "overview",
+            "regions": 1,
+            "cases": [
+              "body_fastening"
+            ]
+          },
+          "selectedTargets": 1,
+          "selectedFilters": 1,
+          "release": "本体の機械固定が完了するまで保持を継続してから開く。下受けを入れて先に手を離す手順へ戻さない。",
+          "fingerCount": "第一候補：2本指／開閉1軸",
+          "rectangleCount": 1,
+          "caption": "青枠は前回と同じ部材位置の例です。STへの割付と保持期間を今回更新しました。",
+          "caseIds": [
+            "body_fastening"
+          ]
+        },
+        {
+          "filter": "A",
+          "requested": "F02",
+          "state": {
+            "id": "F02",
+            "stationFilter": "A",
+            "photo": "overview",
+            "regions": 2,
+            "cases": [
+              "body_fastening"
+            ]
+          },
+          "selectedTargets": 1,
+          "selectedFilters": 1,
+          "release": "本体の固定方法に対応する保持を続ける。端末を差し込む工程で本体を再び持つ必要があるかは固定状態で決める。",
+          "fingerCount": "第一候補：2本指／開閉1軸",
+          "rectangleCount": 2,
+          "caption": "青枠は前回と同じ部材位置の例です。STへの割付と保持期間を今回更新しました。",
+          "caseIds": [
+            "body_fastening"
+          ]
+        },
+        {
+          "filter": "A",
+          "requested": "F08",
+          "state": {
+            "id": "F08",
+            "stationFilter": "A",
+            "photo": "overview",
+            "regions": 0,
+            "cases": [
+              "body_fastening"
+            ]
+          },
+          "selectedTargets": 1,
+          "selectedFilters": 1,
+          "release": "担当する機械固定を完了してから指を開く。単体設置が必要か未確定のため動作は作っていない。",
+          "fingerCount": "第一候補：2本指／開閉1軸",
+          "rectangleCount": 0,
+          "caption": "この対象の写真上の位置は未特定です。誤った部材を指さないよう枠を表示していません。",
+          "caseIds": [
+            "body_fastening"
+          ]
+        },
+        {
+          "filter": "A",
+          "requested": "F09",
+          "state": {
+            "id": "F09",
+            "stationFilter": "A",
+            "photo": "overview",
+            "regions": 0,
+            "cases": [
+              "body_fastening"
+            ]
+          },
+          "selectedTargets": 1,
+          "selectedFilters": 1,
+          "release": "担当する機械固定を完了してから指を開く。単体設置が必要か未確定のため動作は作っていない。",
+          "fingerCount": "第一候補：2本指／開閉1軸",
+          "rectangleCount": 0,
+          "caption": "この対象の写真上の位置は未特定です。誤った部材を指さないよう枠を表示していません。",
+          "caseIds": [
+            "body_fastening"
+          ]
+        },
+        {
+          "filter": "A",
+          "requested": "F10",
+          "state": {
+            "id": "F10",
+            "stationFilter": "A",
+            "photo": "overview",
+            "regions": 0,
+            "cases": [
+              "body_fastening"
+            ]
+          },
+          "selectedTargets": 1,
+          "selectedFilters": 1,
+          "release": "担当する機械固定を完了してから指を開く。単体設置が必要か未確定のため動作は作っていない。",
+          "fingerCount": "第一候補：2本指／開閉1軸",
+          "rectangleCount": 0,
+          "caption": "この対象の写真上の位置は未特定です。誤った部材を指さないよう枠を表示していません。",
+          "caseIds": [
+            "body_fastening"
+          ]
+        },
+        {
+          "filter": "B",
+          "requested": "F03",
+          "state": {
+            "id": "F03",
+            "stationFilter": "B",
+            "photo": "detail",
+            "regions": 1,
+            "cases": [
+              "rigid_conductor_fastening"
+            ]
+          },
+          "selectedTargets": 1,
+          "selectedFilters": 1,
+          "release": "その接続点に重なる導体・端子をそろえ、締結を終えるまで必要な保持を続ける。剛体の保持腕数は長さ・荷重・姿勢で別途照合する。",
+          "fingerCount": "第一候補：2本指／開閉1軸",
+          "rectangleCount": 1,
+          "caption": "青枠は前回と同じ部材位置の例です。STへの割付と保持期間を今回更新しました。",
+          "caseIds": [
+            "rigid_conductor_fastening"
+          ]
+        },
+        {
+          "filter": "B",
+          "requested": "F04",
+          "state": {
+            "id": "F04",
+            "stationFilter": "B",
+            "photo": "overview",
+            "regions": 1,
+            "cases": [
+              "one_end_insertion",
+              "rigid_conductor_fastening"
+            ]
+          },
+          "selectedTargets": 1,
+          "selectedFilters": 1,
+          "release": "クリップ式なら保持部への装着、ボルト式なら担当接続点の締結を終えてから離す。形式とホルダーの入荷単位は未確定。",
+          "fingerCount": "第一候補：2本指／開閉1軸",
+          "rectangleCount": 1,
+          "caption": "青枠は前回と同じ部材位置の例です。STへの割付と保持期間を今回更新しました。",
+          "caseIds": [
+            "one_end_insertion",
+            "rigid_conductor_fastening"
+          ]
+        },
+        {
+          "filter": "B",
+          "requested": "F05",
+          "state": {
+            "id": "F05",
+            "stationFilter": "B",
+            "photo": "overview",
+            "regions": 1,
+            "cases": [
+              "wire_support"
+            ]
+          },
+          "selectedTargets": 1,
+          "selectedFilters": 1,
+          "release": "被覆だけを保持しても端子の回転が止まるとは未確認。F06の端末保持を続けたまま接続する。持ち替えが必要な場合の支持は別途未解決。",
+          "fingerCount": "第一候補：2本指／開閉1軸",
+          "rectangleCount": 1,
+          "caption": "青枠は前回と同じ部材位置の例です。STへの割付と保持期間を今回更新しました。",
+          "caseIds": [
+            "wire_support"
+          ]
+        },
+        {
+          "filter": "B",
+          "requested": "F06",
+          "state": {
+            "id": "F06",
+            "stationFilter": "B",
+            "photo": "detail",
+            "regions": 1,
+            "cases": [
+              "both_end_fastening",
+              "one_end_fastening"
+            ]
+          },
+          "selectedTargets": 1,
+          "selectedFilters": 1,
+          "release": "同じ作業位置で端末を保持したまま締結する。工具が手を妨げない退避状態となってから指を開き、両端保持作業では両腕を同時に上昇する。",
+          "fingerCount": "第一候補：2本指／開閉1軸",
+          "rectangleCount": 1,
+          "caption": "青枠は前回と同じ部材位置の例です。STへの割付と保持期間を今回更新しました。",
+          "caseIds": [
+            "both_end_fastening",
+            "one_end_fastening"
+          ]
+        },
+        {
+          "filter": "B",
+          "requested": "F07",
+          "state": {
+            "id": "F07",
+            "stationFilter": "B",
+            "photo": "detail",
+            "regions": 2,
+            "cases": [
+              "one_end_insertion"
+            ]
+          },
+          "selectedTargets": 1,
+          "selectedFilters": 1,
+          "release": "対象端末の接続完了を確認するまで保持を続け、その後ロック・配線を避けて開放する。完了信号や数値条件は端末型式確定後に対応付ける。",
+          "fingerCount": "第一候補：2本指／開閉1軸",
+          "rectangleCount": 2,
+          "caption": "青枠は前回と同じ部材位置の例です。STへの割付と保持期間を今回更新しました。",
+          "caseIds": [
+            "one_end_insertion"
+          ]
+        },
+        {
+          "filter": "C",
+          "requested": "F03",
+          "state": {
+            "id": "F03",
+            "stationFilter": "C",
+            "photo": "detail",
+            "regions": 1,
+            "cases": [
+              "rigid_conductor_fastening"
+            ]
+          },
+          "selectedTargets": 1,
+          "selectedFilters": 1,
+          "release": "その接続点に重なる導体・端子をそろえ、締結を終えるまで必要な保持を続ける。剛体の保持腕数は長さ・荷重・姿勢で別途照合する。",
+          "fingerCount": "第一候補：2本指／開閉1軸",
+          "rectangleCount": 1,
+          "caption": "青枠は前回と同じ部材位置の例です。STへの割付と保持期間を今回更新しました。",
+          "caseIds": [
+            "rigid_conductor_fastening"
+          ]
+        },
+        {
+          "filter": "C",
+          "requested": "F04",
+          "state": {
+            "id": "F04",
+            "stationFilter": "C",
+            "photo": "overview",
+            "regions": 1,
+            "cases": [
+              "one_end_insertion",
+              "rigid_conductor_fastening"
+            ]
+          },
+          "selectedTargets": 1,
+          "selectedFilters": 1,
+          "release": "クリップ式なら保持部への装着、ボルト式なら担当接続点の締結を終えてから離す。形式とホルダーの入荷単位は未確定。",
+          "fingerCount": "第一候補：2本指／開閉1軸",
+          "rectangleCount": 1,
+          "caption": "青枠は前回と同じ部材位置の例です。STへの割付と保持期間を今回更新しました。",
+          "caseIds": [
+            "one_end_insertion",
+            "rigid_conductor_fastening"
+          ]
+        },
+        {
+          "filter": "C",
+          "requested": "F05",
+          "state": {
+            "id": "F05",
+            "stationFilter": "C",
+            "photo": "overview",
+            "regions": 1,
+            "cases": [
+              "wire_support"
+            ]
+          },
+          "selectedTargets": 1,
+          "selectedFilters": 1,
+          "release": "被覆だけを保持しても端子の回転が止まるとは未確認。F06の端末保持を続けたまま接続する。持ち替えが必要な場合の支持は別途未解決。",
+          "fingerCount": "第一候補：2本指／開閉1軸",
+          "rectangleCount": 1,
+          "caption": "青枠は前回と同じ部材位置の例です。STへの割付と保持期間を今回更新しました。",
+          "caseIds": [
+            "wire_support"
+          ]
+        },
+        {
+          "filter": "C",
+          "requested": "F06",
+          "state": {
+            "id": "F06",
+            "stationFilter": "C",
+            "photo": "detail",
+            "regions": 1,
+            "cases": [
+              "both_end_fastening",
+              "one_end_fastening"
+            ]
+          },
+          "selectedTargets": 1,
+          "selectedFilters": 1,
+          "release": "同じ作業位置で端末を保持したまま締結する。工具が手を妨げない退避状態となってから指を開き、両端保持作業では両腕を同時に上昇する。",
+          "fingerCount": "第一候補：2本指／開閉1軸",
+          "rectangleCount": 1,
+          "caption": "青枠は前回と同じ部材位置の例です。STへの割付と保持期間を今回更新しました。",
+          "caseIds": [
+            "both_end_fastening",
+            "one_end_fastening"
+          ]
+        },
+        {
+          "filter": "C",
+          "requested": "F07",
+          "state": {
+            "id": "F07",
+            "stationFilter": "C",
+            "photo": "detail",
+            "regions": 2,
+            "cases": [
+              "one_end_insertion"
+            ]
+          },
+          "selectedTargets": 1,
+          "selectedFilters": 1,
+          "release": "対象端末の接続完了を確認するまで保持を続け、その後ロック・配線を避けて開放する。完了信号や数値条件は端末型式確定後に対応付ける。",
+          "fingerCount": "第一候補：2本指／開閉1軸",
+          "rectangleCount": 2,
+          "caption": "青枠は前回と同じ部材位置の例です。STへの割付と保持期間を今回更新しました。",
+          "caseIds": [
+            "one_end_insertion"
+          ]
+        }
+      ],
+      "images": [
+        {
+          "name": "overview",
+          "width": 1620,
+          "height": 1080
+        },
+        {
+          "name": "detail",
+          "width": 1620,
+          "height": 1080
+        }
+      ],
+      "viewport": 500,
+      "scrollWidth": 485,
+      "handOptions": [
+        "2F",
+        "G3",
+        "G4"
+      ],
+      "openItems": 5
+    }
+  },
+  "local_html_paths_exist": [
+    "analysis/three_station_connection_groups_v01.md",
+    "audit/hand_target_contacts_build_v02.json",
+    "data/hand_target_contacts_v02.json",
+    "references/hand_spec_20260913/THREAD_3F_4F_Gripper_Spec_v0.2_JA.md",
+    "references/op040_real_products_20260912/ampere_hvjb_5_400_current_v1_1.pdf",
+    "ハンド役割・把持対象対応_v02.md"
+  ],
+  "physical_acceptance_verdict": null
+}

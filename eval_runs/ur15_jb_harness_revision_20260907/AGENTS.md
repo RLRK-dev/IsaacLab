@@ -66,3 +66,10 @@ numbers unknown until their basis and the scope of the product change are set.
   and control connections. This is not a selected factory process or arm count.
   Actual common fastener stacks and incoming one-piece harnesses may change the
   B/C boundary; electrical common nodes do not establish physical shared bolts.
+- `data/hand_target_contacts_v02.json` updates target-family station labels and
+  holding periods for that proposal. Use F01-F10 for the current correspondence;
+  the v01 A/B-prefixed IDs and placement-at-B/fastening-at-C notes are historical.
+  Busbars and fuse bodies are assigned to their connection stage as candidates;
+  separately supplied support bodies may be mounted at A. Two fingers remain
+  the baseline comparison. Contact dimensions, force and installed hand counts
+  are unselected, including the three targets without photo-location annotations.

@@ -1,0 +1,577 @@
+{
+  "revision": "v02",
+  "reference_product": "Ampere EV HVJB-5-400",
+  "status": "proposed_hand_roles_for_same_station_held_fastening_before_arm_motion",
+  "reviewed_static_model_commit": "1cab5b0c8b92948fe319241937fcc176a7024115",
+  "user_message": "ok",
+  "review_scope": "Continue hand definition using the three-station proposal; no new dimensional or physical acceptance.",
+  "image_coordinates": "pixel rectangles on the original 1620 x 1080 photographs; identify component examples, not approved contact areas",
+  "photos": {
+    "overview": {
+      "file": "ampere_product_photo_1.jpg",
+      "url": "https://ampereev.com/wp-content/uploads/2022/05/DSC02860-1.jpg",
+      "sha256": "5724681b4bef4399f0799751a62577e48ef9b7fd3d6ed5b56d85fd95924937ad",
+      "size_px": [
+        1620,
+        1080
+      ]
+    },
+    "detail": {
+      "file": "ampere_product_photo_2.jpg",
+      "url": "https://ampereev.com/wp-content/uploads/2022/05/DSC02864.jpg",
+      "sha256": "5ae831226050fb2430894f3a0462d87c1ffa8991fad453bb8945b2c983233b2e",
+      "size_px": [
+        1620,
+        1080
+      ]
+    }
+  },
+  "sources": {
+    "support": "https://help.ampereev.com/hc/en-us/articles/31292470232087-High-Voltage-Junction-Box-HVJB-5-400",
+    "datasheet": "https://help.ampereev.com/hc/en-us/article_attachments/31292430639639",
+    "datasheet_sha256": "643648bcea77b4d7c37c65d073664f746f68689952da2d5ce932e3d10bd5a9e1",
+    "robotiq_fingertips": "https://assets.robotiq.com/website-assets/support_documents/document/online/2F-85_2F-140_TM_InstructionManual_HTML5_20190503.zip/2F-85_2F-140_TM_InstructionManual_HTML5/Content/6.%20Specifications.htm",
+    "received_g3_g4": "references/hand_spec_20260913/THREAD_3F_4F_Gripper_Spec_v0.2_JA.md"
+  },
+  "targets": [
+    {
+      "id": "F01",
+      "name": "主接触器の本体",
+      "stage_role": "A：担当する接続群・取付方法に対応して割付",
+      "photo": "overview",
+      "regions_px": [
+        [
+          720,
+          514,
+          266,
+          257
+        ]
+      ],
+      "observed": "GIGAVAC表示の丸い本体、その左右の電力端子、周辺の取付部と細線が見える。詳細型式は未同定。",
+      "candidate": "2本指の側面輪郭。前回Aの下受けなしを出発点に、非接点部の形状へ対応させる。",
+      "positioning": "本体側面で中心を寄せる。軸回りの向きは、使用できる非接点の平面・段差との対応を別途決める。",
+      "keep_clear": "電力端子、コイル線の引出し部、取付ねじと締付工具の通路。",
+      "release": "本体の機械固定が完了するまで保持を継続してから開く。下受けを入れて先に手を離す手順へ戻さない。",
+      "unknown": [
+        "詳細型式と側面の実寸法",
+        "把持可能な材質・許容荷重",
+        "回転の基準面",
+        "底面の支持と取付ねじ位置"
+      ],
+      "part_number": null,
+      "manufacturing_dimensions_m": null,
+      "finger_count_candidate": 2,
+      "prior_sample": "前回Aの下受けなし輪郭を再利用する比較。φ50 mmは実物寸法ではない。",
+      "legacy_id": "A01",
+      "station_candidates": [
+        "A"
+      ],
+      "tip_family": "本体側面の専用輪郭",
+      "operation_case_examples": [
+        "body_fastening"
+      ],
+      "closing_axes_candidate": 1,
+      "contact_dimensions_selected": false,
+      "required_force_n": null,
+      "cad_reuse": "下受けなしのA形状サンプル"
+    },
+    {
+      "id": "F02",
+      "name": "角形リレー群",
+      "stage_role": "A：担当する接続群・取付方法に対応して割付",
+      "photo": "overview",
+      "regions_px": [
+        [
+          430,
+          278,
+          172,
+          150
+        ],
+        [
+          414,
+          496,
+          173,
+          177
+        ]
+      ],
+      "observed": "小型の角形部材と上側の差込接続部が見える。資料のプリチャージ／放電リレーとの機能別位置対応は未確定。",
+      "candidate": "2本指の平面パッドまたは角形ポケット。F01の円弧を共用せず、交換する先端を分ける。",
+      "positioning": "使えるケース側面と端面を基準にする案。薄い端子や配線で向きを決めない。",
+      "keep_clear": "上側の端子、コネクターのロック・差込方向、取付点。",
+      "release": "本体の固定方法に対応する保持を続ける。端末を差し込む工程で本体を再び持つ必要があるかは固定状態で決める。",
+      "unknown": [
+        "各部品の型式と固定方法",
+        "ケースの把持可能面",
+        "外形・公差・許容圧力",
+        "写真中の機能別位置対応"
+      ],
+      "part_number": null,
+      "manufacturing_dimensions_m": null,
+      "finger_count_candidate": 2,
+      "prior_sample": "主接触器の円弧を角形リレーへ共用しない。",
+      "legacy_id": "A02",
+      "station_candidates": [
+        "A"
+      ],
+      "tip_family": "角形の平面・ポケット",
+      "operation_case_examples": [
+        "body_fastening"
+      ],
+      "closing_axes_candidate": 1,
+      "contact_dimensions_selected": false,
+      "required_force_n": null,
+      "cad_reuse": null
+    },
+    {
+      "id": "F03",
+      "name": "板状の剛体バスバー",
+      "stage_role": "B / C：担当する接続群・取付方法に対応して割付",
+      "photo": "detail",
+      "regions_px": [
+        [
+          1080,
+          92,
+          260,
+          847
+        ]
+      ],
+      "observed": "穴・締結点を持つ板状導体が見える。公式仕様はニッケルめっき銅バスバーを記載。加工寸法は未公開。",
+      "candidate": "2本指の薄い輪郭・縁保持。接続面を空けられる外縁を検討する。",
+      "positioning": "長辺と端部を使う姿勢決めの候補。接触面へ押付ける製作指定はまだない。",
+      "keep_clear": "電気接触面、締結穴、端子の重なり、工具の進入域。",
+      "release": "その接続点に重なる導体・端子をそろえ、締結を終えるまで必要な保持を続ける。剛体の保持腕数は長さ・荷重・姿勢で別途照合する。",
+      "unknown": [
+        "厚さ・輪郭・穴位置",
+        "表面の把持可否と許容圧力",
+        "入荷単位",
+        "端子との共締め順序"
+      ],
+      "part_number": null,
+      "manufacturing_dimensions_m": null,
+      "finger_count_candidate": 2,
+      "prior_sample": "旧A03というIDはA固定を意味しない。未固定のバスバーをAから渡す案から変更した。",
+      "legacy_id": "A03",
+      "station_candidates": [
+        "B",
+        "C"
+      ],
+      "tip_family": "薄い外縁用輪郭",
+      "operation_case_examples": [
+        "rigid_conductor_fastening"
+      ],
+      "closing_axes_candidate": 1,
+      "contact_dimensions_selected": false,
+      "required_force_n": null,
+      "cad_reuse": null
+    },
+    {
+      "id": "F04",
+      "name": "ヒューズ類",
+      "stage_role": "B / C：担当する接続群・取付方法に対応して割付",
+      "photo": "overview",
+      "regions_px": [
+        [
+          616,
+          260,
+          514,
+          111
+        ]
+      ],
+      "observed": "写真上部に筒状のヒューズの例が見える。仕様は主1個・補機5個。枠は全数・全形式を示していない。",
+      "candidate": "絶縁胴を使える場合の2本指輪郭。形式ごとの交換先端を検討する。",
+      "positioning": "端部と胴の形状を区別する。電気接点やクリップ受けを握る案にはしない。",
+      "keep_clear": "金属接点、ホルダー、締結・差込方向。",
+      "release": "クリップ式なら保持部への装着、ボルト式なら担当接続点の締結を終えてから離す。形式とホルダーの入荷単位は未確定。",
+      "unknown": [
+        "主・補機それぞれの型式",
+        "ホルダーを含む入荷単位",
+        "許容押付力",
+        "胴の外径・全長と取付方法"
+      ],
+      "part_number": null,
+      "manufacturing_dimensions_m": null,
+      "finger_count_candidate": 2,
+      "prior_sample": "ヒューズ本体を、先に機械固定するヒューズ保持部F10と区別した。挿入方式は全形式に確定していない。",
+      "legacy_id": "A04",
+      "station_candidates": [
+        "B",
+        "C"
+      ],
+      "tip_family": "ヒューズ胴の形式別輪郭",
+      "operation_case_examples": [
+        "one_end_insertion",
+        "rigid_conductor_fastening"
+      ],
+      "closing_axes_candidate": 1,
+      "contact_dimensions_selected": false,
+      "required_force_n": null,
+      "cad_reuse": null
+    },
+    {
+      "id": "F05",
+      "name": "柔軟な内部配線の被覆部",
+      "stage_role": "B / C：担当する接続群・取付方法に対応して割付",
+      "photo": "overview",
+      "regions_px": [
+        [
+          638,
+          744,
+          431,
+          88
+        ]
+      ],
+      "observed": "オレンジ被覆の曲がった配線が見える。写真の色だけでHV・低圧制御・HVILを対応付けない。",
+      "candidate": "各腕2本指の短い丸底溝。旧φ14 mmから、選んだ実物線径に合わせて決め直す。",
+      "positioning": "被覆を支える役割。これだけで丸端子の穴・面の向きを決めたことにはしない。",
+      "keep_clear": "圧着部、熱収縮部の境界、曲がり始め、端末作業に必要な長さ。",
+      "release": "被覆だけを保持しても端子の回転が止まるとは未確認。F06の端末保持を続けたまま接続する。持ち替えが必要な場合の支持は別途未解決。",
+      "unknown": [
+        "線材の型式・外径",
+        "被覆の許容変形と摩擦",
+        "曲げ・ねじれ特性",
+        "端末間の切断長と経路",
+        "開放後の形状"
+      ],
+      "part_number": null,
+      "manufacturing_dimensions_m": null,
+      "finger_count_candidate": 2,
+      "prior_sample": "φ14 mm・溝R7.2 mm等は旧比較値。S字形成、被覆許容圧、実物線径は未確定。",
+      "legacy_id": "B01",
+      "station_candidates": [
+        "B",
+        "C"
+      ],
+      "tip_family": "短い丸底溝・交換パッド",
+      "operation_case_examples": [
+        "wire_support"
+      ],
+      "closing_axes_candidate": 1,
+      "contact_dimensions_selected": false,
+      "required_force_n": null,
+      "cad_reuse": "被覆用B形状サンプル"
+    },
+    {
+      "id": "F06",
+      "name": "丸端子付き配線の端末",
+      "stage_role": "B / C：担当する接続群・取付方法に対応して割付",
+      "photo": "detail",
+      "regions_px": [
+        [
+          1081,
+          547,
+          223,
+          377
+        ]
+      ],
+      "observed": "熱収縮部と、板状導体へねじで締結した端末が見える。接触面や圧着内部は写真では確認できない。",
+      "candidate": "2本指の端末外周用輪郭＋穴と接触面を空ける逃げを比較する。F05の被覆支持とは役割が異なる。",
+      "positioning": "端子の穴中心・面・ケーブル出口の向きを扱う。締結中も許容された外縁を保持し、穴と上下の接続面を空ける案。側縁保持の実効性は未検証。",
+      "keep_clear": "端子の接触面、穴、締付工具の通路。圧着部を強く挟む指定も置かない。",
+      "release": "同じ作業位置で端末を保持したまま締結する。工具が手を妨げない退避状態となってから指を開き、両端保持作業では両腕を同時に上昇する。",
+      "unknown": [
+        "圧着・熱収縮後の端子型式と外形",
+        "把持を許容する側縁の幅・面",
+        "端子の回転を抑える力・パッド・接触位置",
+        "ねじ・座金・ソケットと開放時の形状関係"
+      ],
+      "part_number": null,
+      "manufacturing_dimensions_m": null,
+      "finger_count_candidate": 2,
+      "prior_sample": "EDGEの端末側縁用形状を第一候補。GUIDEは連動したすき間案内で、被覆側を独立に締める指ではない。実物端子への適合は未確認。",
+      "legacy_id": "B02",
+      "station_candidates": [
+        "B",
+        "C"
+      ],
+      "tip_family": "端末の側縁用輪郭",
+      "operation_case_examples": [
+        "both_end_fastening",
+        "one_end_fastening"
+      ],
+      "closing_axes_candidate": 1,
+      "contact_dimensions_selected": false,
+      "required_force_n": null,
+      "cad_reuse": "EDGE / GUIDE形状サンプル"
+    },
+    {
+      "id": "F07",
+      "name": "小型の差込接続部",
+      "stage_role": "B / C：担当する接続群・取付方法に対応して割付",
+      "photo": "detail",
+      "regions_px": [
+        [
+          80,
+          162,
+          468,
+          330
+        ],
+        [
+          763,
+          166,
+          287,
+          354
+        ]
+      ],
+      "observed": "角形部材の上側に複数の差込接続部が見える。ロック方式と詳細型式は未同定。",
+      "candidate": "樹脂外形・端面に対応する2本指ポケットを比較。3点位置決めが必要なら1対2の3本指も比較に残す。",
+      "positioning": "挿入する剛体端末の向きを決め、端面のどこで挿入力を受けるかを確認する。",
+      "keep_clear": "金属接触部、ロックの動作部、配線の引出しと逃げ。",
+      "release": "対象端末の接続完了を確認するまで保持を続け、その後ロック・配線を避けて開放する。完了信号や数値条件は端末型式確定後に対応付ける。",
+      "unknown": [
+        "端末の型式・外形・ロック方式",
+        "挿入力を受けられる面",
+        "接続時の支持条件",
+        "実物での取外し・開放空間"
+      ],
+      "part_number": null,
+      "manufacturing_dimensions_m": null,
+      "finger_count_candidate": 2,
+      "prior_sample": "後端受けはフィンガ側の力を伝える面。撤回したパレットの上押さえではない。丸底溝を端末の位置決め形状へ転用しない。",
+      "legacy_id": "B03",
+      "station_candidates": [
+        "B",
+        "C"
+      ],
+      "tip_family": "外形ポケット・後端受け",
+      "operation_case_examples": [
+        "one_end_insertion"
+      ],
+      "closing_axes_candidate": 1,
+      "contact_dimensions_selected": false,
+      "required_force_n": null,
+      "cad_reuse": null
+    },
+    {
+      "id": "F08",
+      "legacy_id": null,
+      "name": "プリチャージ・放電抵抗の本体",
+      "stage_role": "A：単体入荷して機械固定する場合の候補",
+      "station_candidates": [
+        "A"
+      ],
+      "photo": "overview",
+      "regions_px": [],
+      "observed": "公式記事はシャーシ取付け抵抗を記載。写真の特定部分と型式の対応は未完了。",
+      "candidate": "許容される本体側面が分かってから、2本指の外形ポケットを比較する。",
+      "positioning": "使用できる基準面と押さえる面の対応は、部品の入荷形態と実物形状から決める。",
+      "keep_clear": "抵抗の接続端末、取付部、熱的な接触面。",
+      "release": "担当する機械固定を完了してから指を開く。単体設置が必要か未確定のため動作は作っていない。",
+      "unknown": [
+        "入荷時の部品単位と固定方法",
+        "詳細型式・外形・把持許容面",
+        "固定のために保持を要する時間・工具アクセス"
+      ],
+      "part_number": null,
+      "manufacturing_dimensions_m": null,
+      "finger_count_candidate": 2,
+      "closing_axes_candidate": 1,
+      "contact_dimensions_selected": false,
+      "required_force_n": null,
+      "cad_reuse": null,
+      "tip_family": "抵抗本体の外形ポケット",
+      "operation_case_examples": [
+        "body_fastening"
+      ],
+      "prior_sample": "写真上の位置を特定していないため枠は表示しない。この区分は増設部品・追加作業の確定ではない。"
+    },
+    {
+      "id": "F09",
+      "legacy_id": null,
+      "name": "外部接続口のハウジング",
+      "stage_role": "A：単体入荷して機械固定する場合の候補",
+      "station_candidates": [
+        "A"
+      ],
+      "photo": "overview",
+      "regions_px": [],
+      "observed": "公式PDFには主・補機・LV接続口がある。ハウジング単体の入荷・固定方法は未確定。",
+      "candidate": "独立部品として取り付ける場合、把持可能な外形への2本指ポケットを比較する。",
+      "positioning": "使用できる基準面と押さえる面の対応は、部品の入荷形態と実物形状から決める。",
+      "keep_clear": "接点、ロック、シール面と固定点。",
+      "release": "担当する機械固定を完了してから指を開く。単体設置が必要か未確定のため動作は作っていない。",
+      "unknown": [
+        "入荷時の部品単位と固定方法",
+        "詳細型式・外形・把持許容面",
+        "固定のために保持を要する時間・工具アクセス"
+      ],
+      "part_number": null,
+      "manufacturing_dimensions_m": null,
+      "finger_count_candidate": 2,
+      "closing_axes_candidate": 1,
+      "contact_dimensions_selected": false,
+      "required_force_n": null,
+      "cad_reuse": null,
+      "tip_family": "ハウジングの外形ポケット",
+      "operation_case_examples": [
+        "body_fastening"
+      ],
+      "prior_sample": "写真上の位置を特定していないため枠は表示しない。この区分は増設部品・追加作業の確定ではない。"
+    },
+    {
+      "id": "F10",
+      "legacy_id": null,
+      "name": "ヒューズ保持部・支持部",
+      "stage_role": "A：単体入荷して機械固定する場合の候補",
+      "station_candidates": [
+        "A"
+      ],
+      "photo": "overview",
+      "regions_px": [],
+      "observed": "ヒューズ本体F04と区別する管理欄。独立部品の個数と、入荷時に組込み済みかは未確定。",
+      "candidate": "単体入荷して機械固定する場合だけ、保持部の非接点側面用2本指輪郭を比較する。",
+      "positioning": "使用できる基準面と押さえる面の対応は、部品の入荷形態と実物形状から決める。",
+      "keep_clear": "ヒューズの接点、ばね接触部と取付ねじ。",
+      "release": "担当する機械固定を完了してから指を開く。単体設置が必要か未確定のため動作は作っていない。",
+      "unknown": [
+        "入荷時の部品単位と固定方法",
+        "詳細型式・外形・把持許容面",
+        "固定のために保持を要する時間・工具アクセス"
+      ],
+      "part_number": null,
+      "manufacturing_dimensions_m": null,
+      "finger_count_candidate": 2,
+      "closing_axes_candidate": 1,
+      "contact_dimensions_selected": false,
+      "required_force_n": null,
+      "cad_reuse": null,
+      "tip_family": "保持部の非接点側面輪郭",
+      "operation_case_examples": [
+        "body_fastening"
+      ],
+      "prior_sample": "写真上の位置を特定していないため枠は表示しない。この区分は増設部品・追加作業の確定ではない。"
+    }
+  ],
+  "arm_and_finger_boundary": "F01-F10 are target families, not ten installed hands. Two-, three- and four-finger definitions concern one hand; separate wrist poses still require separate arms.",
+  "physical_acceptance_verdict": null,
+  "supersedes_scope": "v01 station labels, release timing and handoff notes. Original photo coordinates remain examples only.",
+  "allocation_source": "data/three_station_connection_groups_v01.json",
+  "allocation_source_sha256": "c6a74d692190d334a55dea2682da1abac3ec15ad693f5d948341cbff4caeda65",
+  "user_constraints": {
+    "upper_retainer": "withdrawn",
+    "hold_through_fastening": true,
+    "keep_simultaneous_different_size_fastening": true,
+    "both_holding_arms_rise_together_after_release": true,
+    "arm_motion_created": false,
+    "station_hardware_selected": false
+  },
+  "hand_options": [
+    {
+      "id": "2F",
+      "name": "対向2本指",
+      "fingers": 2,
+      "active_closing_axes": 1,
+      "description": "既存2F-85の連動開閉を比較基準にし、対象ごとに接触輪郭を分ける。左右の手は別々の開閉指令。",
+      "when": "一つの対象を保持したまま接続を終えられる仕事の第一候補。",
+      "limitation": "標準パッドの力・精度を専用指先へ転用しない。両指は独立駆動ではない。"
+    },
+    {
+      "id": "G3",
+      "name": "3本指・1対2",
+      "fingers": 3,
+      "active_closing_axes": 3,
+      "description": "受領仕様の中央1点と離れた2点。指ごとにX開閉、末節に受動傾き。120°配置ではない。",
+      "when": "剛体部品の姿勢決めに独立した第三の接触が必要と分かった場合。",
+      "limitation": "円筒の芯出しだけで軸回りの向きは決まらない。新規ハンド案であり、既存2Fへの指追加ではない。"
+    },
+    {
+      "id": "G4",
+      "name": "4本指・2対2",
+      "fingers": 4,
+      "active_closing_axes": 4,
+      "description": "受領仕様の対向2組を別々に開閉する案。組間隔は動作中固定。",
+      "when": "端子を保持したまま被覆側だけ開くなど、局所の保持組を独立に扱う必要がある場合。",
+      "limitation": "残る組だけの保持は未検証。長手方向へ能動送りする軸や、離れた両端を扱う別の腕にはならない。"
+    }
+  ],
+  "operation_cases": [
+    {
+      "id": "rigid_conductor_fastening",
+      "label": "剛体導体を保持しながら接続",
+      "stations": [
+        "B",
+        "C"
+      ],
+      "holding_arms_candidate": null,
+      "tool_arms_candidate": 0,
+      "station_fastening_axes_candidate": null,
+      "requires_both_wire_ends": false,
+      "condition": "バスバーやボルト式ヒューズの長さ・姿勢と共締め部材により保持腕と工具の数を決める。柔軟配線の両端曲げへ読み替えない。"
+    },
+    {
+      "id": "wire_support",
+      "label": "柔軟配線の搬送・被覆支持",
+      "stations": [
+        "B",
+        "C"
+      ],
+      "holding_arms_candidate": 2,
+      "tool_arms_candidate": 0,
+      "station_fastening_axes_candidate": 0,
+      "requires_both_wire_ends": true,
+      "condition": "両端を支持して運ぶ場合の候補。締結時の端子側縁保持とは別の役割で、持ち替えが必要ならその間の支持は未解決。"
+    },
+    {
+      "id": "body_fastening",
+      "label": "部品を保持しながら本体をねじ固定",
+      "stations": [
+        "A"
+      ],
+      "holding_arms_candidate": 1,
+      "tool_arms_candidate": 1,
+      "station_fastening_axes_candidate": 0,
+      "requires_both_wire_ends": false,
+      "condition": "Aの双腕候補。部品本体を保持する手と、フィンガを外して直付けした締付工具腕に分担する。"
+    },
+    {
+      "id": "both_end_fastening",
+      "label": "配線の両端を保持しながら締結",
+      "stations": [
+        "B",
+        "C"
+      ],
+      "holding_arms_candidate": 2,
+      "tool_arms_candidate": 0,
+      "station_fastening_axes_candidate": 2,
+      "requires_both_wire_ends": true,
+      "condition": "Bの比較基準。Cでも両端の独立保持が必要な接続では同じ比較。工具2系統の配置・到達は未選定。"
+    },
+    {
+      "id": "one_end_fastening",
+      "label": "一端だけを保持してねじ接続",
+      "stations": [
+        "B",
+        "C"
+      ],
+      "holding_arms_candidate": 1,
+      "tool_arms_candidate": 0,
+      "station_fastening_axes_candidate": 1,
+      "requires_both_wire_ends": false,
+      "condition": "相手が固定済みで、残りの配線・未接続端に別保持が不要な場合だけ単腕候補。この局所作業の分類で大小同時締結要求を変更しない。"
+    },
+    {
+      "id": "one_end_insertion",
+      "label": "固定済みの相手へ一端を差し込む",
+      "stations": [
+        "B",
+        "C"
+      ],
+      "holding_arms_candidate": 1,
+      "tool_arms_candidate": 0,
+      "station_fastening_axes_candidate": 0,
+      "requires_both_wire_ends": false,
+      "condition": "相手の固定、残りの配線の保持、挿入力を受ける面と退避方向を確認できる場合だけ単腕候補。小さい部品だから単腕と決めない。"
+    }
+  ],
+  "station_notes": {
+    "A": "本体・支持部の機械固定を担当する候補。保持用2F＋常設工具腕を基準にする。部材が入荷時に固定済みなら、その設置作業は別途省く。",
+    "B": "主回路側の担当導体を供給し、両端保持2F＋2FとST取付け工具2系統を比較。設置した位置で締結を終える。",
+    "C": "補機・制御側の接続を完了する候補。一端操作だけで完結する仕事を単腕として抽出し、両端保持が必要なら双腕を残す。C全体の腕数は未選定。"
+  },
+  "open_items": [
+    "端子の許容把持面、圧着・熱収縮後形状、ソケット・座金寸法が必要。写真の枠を製作寸法や接触可能領域へ変換していない。",
+    "被覆を握る位置から端末を握る位置へ持ち替える場合は、支持が消える期間を別途扱う。上押さえの再導入や無支持の瞬間移動で埋めない。",
+    "先端ごとの共用可否、交換方法・交換場所、ハンドや工具の台数は未確定。対象区分数を設備台数に読み替えない。",
+    "共締め部材や一体ハーネスがB/Cをまたぐ場合、担当接続群と把持作業を同じSTへまとめ直す。",
+    "型式が分からない挿入端末をすべてボルト接続としない。締結・差込・係合の完了条件は実部品に対応付け、数値を追加しない。"
+  ]
+}
