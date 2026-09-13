@@ -1,0 +1,22 @@
+{
+  "recorded_at": "2026-09-14T07:11:03.536732+09:00",
+  "source_mesh_sha256": "cd057bf97a032f14ac331b2efa650f449d488837dfaabcbfb0b897b6b5668d56",
+  "page_sha256": "0c3daba1b43c1c295e0b6c71fd3299dc65fddd2318daf26ad88e1bc4b59e985c",
+  "source_scripts": {
+    "build_hand_pad_service_v01.py": "a316a83afc9ac7a6b9848a634be57b38c0994697ef86a12cfabb149375eb30a2",
+    "save_hand_pad_service_v01.py": "089f45a4bdf2d09942803f130b4b27caa1c924ce851f0309b3b2cb866741a8d4",
+    "hand_pad_service_viewer_v01.html": "25267319256805323491037e7e95ec499f78692b5097d15a42cce110ed2db920",
+    "build_hand_body_setback_v01.py": "36f780dd3c7253e162803d3d36b690d5d240ae7c2f41c717e44a05936f371fbe",
+    "build_hand_mount_interface_v02.py": "2cb7300084510d8975a3b97f114be8de83db0ad0a56bfcdcc9365d0d29c94abb",
+    "probe_hand_tool_access_v01.py": "55456e6d55f84931bcc3f502e77372414a6efa2578e27970d5620f176c53417c",
+    "build_hand_fingertip_concepts_v01.py": "532b03f68bfdf49c46ae3f33155b8757a8e93549773390a85a27e7b52066bf5c",
+    "render_hand_fingertip_concepts_v01.py": "d2b93084db702202daf7a94209d3140657c3db1ac1d5e06462daa0618b4067d1",
+    "save_hand_body_setback_v01.py": "a2b1dd1b227c30e0f7e6da312b310163f684f5c0c9e186c6260319a30cee22aa",
+    "save_hand_root_clamp_v03.py": "c6910e96e978cf76f48ad1f15e93bf967aa83d1ad66add374c3a04b2266d71b7"
+  },
+  "first_native_attempt_failed_before_save": true,
+  "retry_delta": "Translate derived world vertices; never reassign scene matrices during sampling",
+  "thresholds_changed": false,
+  "original_d40_geometry_changed": false,
+  "physical_acceptance_verdict": null
+}

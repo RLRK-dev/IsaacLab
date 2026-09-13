@@ -137,3 +137,28 @@ numbers unknown until their basis and the scope of the product change are set.
   force settings. Do not infer local pad forces from motor current or wrist
   resultant alone. Check the source-generation grasp-mode/equilibrium-line
   behavior; four saved poses do not establish its loaded behavior.
+
+## Pad service comparison on 2026-09-14
+
+- The subsequent user `ok` continued hand selection. The D40 service comparison
+  in `analysis/hand_pad_service_v01.md` uses unchanged geometry and proposes
+  replacing one complete custom fingertip through the original two screws.
+  It does not select a separate root cartridge, adhesive, material or force.
+- The retained holder takes its screws from the outer side (2018 manual p25).
+  The root pads are absent from the measured outer 50 mm axial band in all four
+  saved poses. Do not require removing them first solely because they overlap
+  the inner-side screw projection. The 2 mm hex envelope and 50 mm shaft band
+  do not establish access for a complete selected tool or screw extraction.
+- Detached service translations sampled every 0.5 mm retain carrier/holder
+  surface crossings in 10 of 25 samples per side. The local observation places
+  the nonzero-offset crossing candidates near the mounting upper edge. Do not
+  treat the last 12 mm illustration or zero later samples as a collision-free
+  continuous removal path. Screw heads and the indexing pin are absent.
+- During these observations, translate derived vertices instead of reassigning
+  Blender scene matrices: the first attempt failed exact restoration because
+  reassigning a matrix changes its floating-point decomposition. Keep the
+  original mesh data and four poses intact, and retain the failed-run log.
+- Root pad-to-support joining, support integration, mounting-edge relief,
+  custom screw engagement and the needed pin travel remain design inputs.
+  Physical acceptance, arm trajectories and video production remain outside
+  this isolated service study.

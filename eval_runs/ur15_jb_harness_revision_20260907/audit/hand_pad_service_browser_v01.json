@@ -1,0 +1,3036 @@
+{
+  "recorded_at": "2026-09-14T07:11:12.379744+09:00",
+  "page_sha256": "0c3daba1b43c1c295e0b6c71fd3299dc65fddd2318daf26ad88e1bc4b59e985c",
+  "scope": "UI modes, source observation correspondence, finite vertices and WebGL pixels",
+  "reports": {
+    "desktop": {
+      "rows": [
+        {
+          "mode": "service",
+          "state": "open",
+          "side": "left_left",
+          "hole": "screw_upper",
+          "offset_mm": 0,
+          "meshes": 18,
+          "faces": 54244,
+          "gl_error": 0,
+          "workpiece_visible": false,
+          "width": 977,
+          "height": 610,
+          "label": "service/left_left/0",
+          "filled_pixels": 142844,
+          "pixel_hash": "ee53a73d",
+          "outer_radius": "1.498",
+          "outer_difference": "0.343",
+          "inner_radius": "0.000",
+          "offset_label": "0.0",
+          "state_disabled": true,
+          "offset_disabled": false,
+          "target_disabled": true,
+          "visible_mode_buttons": 1,
+          "first_moving_vertices": [
+            [
+              -0.01794013818559806,
+              0.004000002614112284,
+              -0.012121963983944592
+            ],
+            [
+              -0.019999999286252606,
+              0.0030000039570618475,
+              -0.006821964165829357
+            ],
+            [
+              -0.012949746999999508,
+              0.06100000277128167,
+              -0.00977171116582936
+            ],
+            [
+              -0.019999999999999504,
+              0.06100000277128167,
+              -0.00977171116582936
+            ]
+          ],
+          "vertices_finite": true
+        },
+        {
+          "mode": "service",
+          "state": "open",
+          "side": "left_left",
+          "hole": "screw_upper",
+          "offset_mm": 6,
+          "meshes": 18,
+          "faces": 54244,
+          "gl_error": 0,
+          "workpiece_visible": false,
+          "width": 977,
+          "height": 610,
+          "label": "service/left_left/6",
+          "filled_pixels": 145239,
+          "pixel_hash": "c017014",
+          "outer_radius": "1.498",
+          "outer_difference": "0.343",
+          "inner_radius": "0.000",
+          "offset_label": "6.0",
+          "state_disabled": true,
+          "offset_disabled": false,
+          "target_disabled": true,
+          "visible_mode_buttons": 1,
+          "first_moving_vertices": [
+            [
+              -0.011940138191532893,
+              0.0040000004700285795,
+              -0.012121697125560788
+            ],
+            [
+              -0.01399999929218744,
+              0.0030000018129781427,
+              -0.006821697307445553
+            ],
+            [
+              -0.006949747005934342,
+              0.061000000627197966,
+              -0.009771444307445556
+            ],
+            [
+              -0.014000000005934338,
+              0.061000000627197966,
+              -0.009771444307445556
+            ]
+          ],
+          "vertices_finite": true
+        },
+        {
+          "mode": "service",
+          "state": "open",
+          "side": "left_left",
+          "hole": "screw_upper",
+          "offset_mm": 12,
+          "meshes": 18,
+          "faces": 54244,
+          "gl_error": 0,
+          "workpiece_visible": false,
+          "width": 977,
+          "height": 610,
+          "label": "service/left_left/12",
+          "filled_pixels": 146693,
+          "pixel_hash": "61114066",
+          "outer_radius": "1.498",
+          "outer_difference": "0.343",
+          "inner_radius": "0.000",
+          "offset_label": "12.0",
+          "state_disabled": true,
+          "offset_disabled": false,
+          "target_disabled": true,
+          "visible_mode_buttons": 1,
+          "first_moving_vertices": [
+            [
+              -0.0059401381974677255,
+              0.003999998325944875,
+              -0.012121430267176984
+            ],
+            [
+              -0.007999999298122272,
+              0.0029999996688944383,
+              -0.0068214304490617494
+            ],
+            [
+              -0.0009497470118691748,
+              0.06099999848311426,
+              -0.009771177449061752
+            ],
+            [
+              -0.00800000001186917,
+              0.06099999848311426,
+              -0.009771177449061752
+            ]
+          ],
+          "vertices_finite": true
+        },
+        {
+          "mode": "service",
+          "state": "open",
+          "side": "left_right",
+          "hole": "screw_upper",
+          "offset_mm": 0,
+          "meshes": 18,
+          "faces": 54244,
+          "gl_error": 0,
+          "workpiece_visible": false,
+          "width": 977,
+          "height": 610,
+          "label": "service/left_right/0",
+          "filled_pixels": 142831,
+          "pixel_hash": "3b6814c6",
+          "outer_radius": "1.498",
+          "outer_difference": "0.343",
+          "inner_radius": "0.000",
+          "offset_label": "0.0",
+          "state_disabled": true,
+          "offset_disabled": false,
+          "target_disabled": true,
+          "visible_mode_buttons": 1,
+          "first_moving_vertices": [
+            [
+              0.017940138564575193,
+              0.0040000000000000036,
+              -0.012121963983944592
+            ],
+            [
+              0.019999999999999997,
+              0.0030000000000000027,
+              -0.006821964165829357
+            ],
+            [
+              0.012949747000000001,
+              0.061000000000000006,
+              -0.00977171116582936
+            ],
+            [
+              0.016999999999999998,
+              0.061000000000000006,
+              -0.00977171116582936
+            ]
+          ],
+          "vertices_finite": true
+        },
+        {
+          "mode": "service",
+          "state": "open",
+          "side": "left_right",
+          "hole": "screw_upper",
+          "offset_mm": 6,
+          "meshes": 18,
+          "faces": 54244,
+          "gl_error": 0,
+          "workpiece_visible": false,
+          "width": 977,
+          "height": 610,
+          "label": "service/left_right/6",
+          "filled_pixels": 145960,
+          "pixel_hash": "46835b86",
+          "outer_radius": "1.498",
+          "outer_difference": "0.343",
+          "inner_radius": "0.000",
+          "offset_label": "6.0",
+          "state_disabled": true,
+          "offset_disabled": false,
+          "target_disabled": true,
+          "visible_mode_buttons": 1,
+          "first_moving_vertices": [
+            [
+              0.011940138570509644,
+              0.00400000006562247,
+              -0.012121697125560788
+            ],
+            [
+              0.014000000005934448,
+              0.0030000000656224698,
+              -0.006821697307445553
+            ],
+            [
+              0.006949747005934452,
+              0.06100000006562247,
+              -0.009771444307445556
+            ],
+            [
+              0.011000000005934448,
+              0.06100000006562247,
+              -0.009771444307445556
+            ]
+          ],
+          "vertices_finite": true
+        },
+        {
+          "mode": "service",
+          "state": "open",
+          "side": "left_right",
+          "hole": "screw_upper",
+          "offset_mm": 12,
+          "meshes": 18,
+          "faces": 54244,
+          "gl_error": 0,
+          "workpiece_visible": false,
+          "width": 977,
+          "height": 610,
+          "label": "service/left_right/12",
+          "filled_pixels": 147649,
+          "pixel_hash": "2316cce6",
+          "outer_radius": "1.498",
+          "outer_difference": "0.343",
+          "inner_radius": "0.000",
+          "offset_label": "12.0",
+          "state_disabled": true,
+          "offset_disabled": false,
+          "target_disabled": true,
+          "visible_mode_buttons": 1,
+          "first_moving_vertices": [
+            [
+              0.005940138576444095,
+              0.004000000131244938,
+              -0.012121430267176984
+            ],
+            [
+              0.008000000011868898,
+              0.003000000131244937,
+              -0.0068214304490617494
+            ],
+            [
+              0.0009497470118689025,
+              0.06100000013124494,
+              -0.009771177449061752
+            ],
+            [
+              0.005000000011868899,
+              0.06100000013124494,
+              -0.009771177449061752
+            ]
+          ],
+          "vertices_finite": true
+        },
+        {
+          "mode": "holding",
+          "state": "near",
+          "side": "left_left",
+          "hole": "screw_lower",
+          "offset_mm": 12,
+          "meshes": 22,
+          "faces": 63790,
+          "gl_error": 0,
+          "workpiece_visible": true,
+          "width": 977,
+          "height": 610,
+          "label": "holding/near/left_left/screw_lower",
+          "filled_pixels": 159353,
+          "pixel_hash": "29fec048",
+          "outer_radius": "1.498",
+          "outer_difference": "0.343",
+          "inner_radius": "12.050",
+          "offset_label": "12.0",
+          "state_disabled": false,
+          "offset_disabled": true,
+          "target_disabled": false,
+          "visible_mode_buttons": 1,
+          "first_moving_vertices": [
+            [
+              -0.009940138185598548,
+              0.003999999842830622,
+              -0.013299999818115228
+            ],
+            [
+              -0.011999999286253095,
+              0.003000001185780185,
+              -0.007999999999999993
+            ],
+            [
+              -0.004949747000000001,
+              0.061000000000000006,
+              -0.010949746999999996
+            ],
+            [
+              -0.011999999999999997,
+              0.061000000000000006,
+              -0.010949746999999996
+            ]
+          ],
+          "vertices_finite": true
+        },
+        {
+          "mode": "holding",
+          "state": "near",
+          "side": "left_left",
+          "hole": "screw_upper",
+          "offset_mm": 12,
+          "meshes": 22,
+          "faces": 63790,
+          "gl_error": 0,
+          "workpiece_visible": true,
+          "width": 977,
+          "height": 610,
+          "label": "holding/near/left_left/screw_upper",
+          "filled_pixels": 159365,
+          "pixel_hash": "ccbb0a9e",
+          "outer_radius": "1.498",
+          "outer_difference": "0.343",
+          "inner_radius": "0.000",
+          "offset_label": "12.0",
+          "state_disabled": false,
+          "offset_disabled": true,
+          "target_disabled": false,
+          "visible_mode_buttons": 1,
+          "first_moving_vertices": [
+            [
+              -0.009940138185598548,
+              0.003999999842830622,
+              -0.013299999818115228
+            ],
+            [
+              -0.011999999286253095,
+              0.003000001185780185,
+              -0.007999999999999993
+            ],
+            [
+              -0.004949747000000001,
+              0.061000000000000006,
+              -0.010949746999999996
+            ],
+            [
+              -0.011999999999999997,
+              0.061000000000000006,
+              -0.010949746999999996
+            ]
+          ],
+          "vertices_finite": true
+        },
+        {
+          "mode": "holding",
+          "state": "near",
+          "side": "left_right",
+          "hole": "screw_lower",
+          "offset_mm": 12,
+          "meshes": 22,
+          "faces": 63790,
+          "gl_error": 0,
+          "workpiece_visible": true,
+          "width": 977,
+          "height": 610,
+          "label": "holding/near/left_right/screw_lower",
+          "filled_pixels": 159349,
+          "pixel_hash": "10d8b1a7",
+          "outer_radius": "1.498",
+          "outer_difference": "0.343",
+          "inner_radius": "12.050",
+          "offset_label": "12.0",
+          "state_disabled": false,
+          "offset_disabled": true,
+          "target_disabled": false,
+          "visible_mode_buttons": 1,
+          "first_moving_vertices": [
+            [
+              0.009940138564575193,
+              0.0040000000000000036,
+              -0.013299999818115228
+            ],
+            [
+              0.012,
+              0.0030000000000000027,
+              -0.007999999999999993
+            ],
+            [
+              0.004949747000000001,
+              0.061000000000000006,
+              -0.010949746999999996
+            ],
+            [
+              0.008999999999999998,
+              0.061000000000000006,
+              -0.010949746999999996
+            ]
+          ],
+          "vertices_finite": true
+        },
+        {
+          "mode": "holding",
+          "state": "near",
+          "side": "left_right",
+          "hole": "screw_upper",
+          "offset_mm": 12,
+          "meshes": 22,
+          "faces": 63790,
+          "gl_error": 0,
+          "workpiece_visible": true,
+          "width": 977,
+          "height": 610,
+          "label": "holding/near/left_right/screw_upper",
+          "filled_pixels": 159353,
+          "pixel_hash": "568bb22d",
+          "outer_radius": "1.498",
+          "outer_difference": "0.343",
+          "inner_radius": "0.000",
+          "offset_label": "12.0",
+          "state_disabled": false,
+          "offset_disabled": true,
+          "target_disabled": false,
+          "visible_mode_buttons": 1,
+          "first_moving_vertices": [
+            [
+              0.009940138564575193,
+              0.0040000000000000036,
+              -0.013299999818115228
+            ],
+            [
+              0.012,
+              0.0030000000000000027,
+              -0.007999999999999993
+            ],
+            [
+              0.004949747000000001,
+              0.061000000000000006,
+              -0.010949746999999996
+            ],
+            [
+              0.008999999999999998,
+              0.061000000000000006,
+              -0.010949746999999996
+            ]
+          ],
+          "vertices_finite": true
+        },
+        {
+          "mode": "holding",
+          "state": "early",
+          "side": "left_left",
+          "hole": "screw_lower",
+          "offset_mm": 12,
+          "meshes": 22,
+          "faces": 63790,
+          "gl_error": 0,
+          "workpiece_visible": true,
+          "width": 977,
+          "height": 610,
+          "label": "holding/early/left_left/screw_lower",
+          "filled_pixels": 160242,
+          "pixel_hash": "eb6221cd",
+          "outer_radius": "1.498",
+          "outer_difference": "0.343",
+          "inner_radius": "12.050",
+          "offset_label": "12.0",
+          "state_disabled": false,
+          "offset_disabled": true,
+          "target_disabled": false,
+          "visible_mode_buttons": 1,
+          "first_moving_vertices": [
+            [
+              -0.010343530235764651,
+              0.003999999982569759,
+              -0.013268104293260238
+            ],
+            [
+              -0.012403391336419194,
+              0.003000001325519322,
+              -0.007968104475145003
+            ],
+            [
+              -0.0053531390501661,
+              0.06100000013973914,
+              -0.010917851475145006
+            ],
+            [
+              -0.012403392050166096,
+              0.06100000013973914,
+              -0.010917851475145006
+            ]
+          ],
+          "vertices_finite": true
+        },
+        {
+          "mode": "holding",
+          "state": "early",
+          "side": "left_left",
+          "hole": "screw_upper",
+          "offset_mm": 12,
+          "meshes": 22,
+          "faces": 63790,
+          "gl_error": 0,
+          "workpiece_visible": true,
+          "width": 977,
+          "height": 610,
+          "label": "holding/early/left_left/screw_upper",
+          "filled_pixels": 160263,
+          "pixel_hash": "a288b449",
+          "outer_radius": "1.498",
+          "outer_difference": "0.343",
+          "inner_radius": "0.000",
+          "offset_label": "12.0",
+          "state_disabled": false,
+          "offset_disabled": true,
+          "target_disabled": false,
+          "visible_mode_buttons": 1,
+          "first_moving_vertices": [
+            [
+              -0.010343530235764651,
+              0.003999999982569759,
+              -0.013268104293260238
+            ],
+            [
+              -0.012403391336419194,
+              0.003000001325519322,
+              -0.007968104475145003
+            ],
+            [
+              -0.0053531390501661,
+              0.06100000013973914,
+              -0.010917851475145006
+            ],
+            [
+              -0.012403392050166096,
+              0.06100000013973914,
+              -0.010917851475145006
+            ]
+          ],
+          "vertices_finite": true
+        },
+        {
+          "mode": "holding",
+          "state": "early",
+          "side": "left_right",
+          "hole": "screw_lower",
+          "offset_mm": 12,
+          "meshes": 22,
+          "faces": 63790,
+          "gl_error": 0,
+          "workpiece_visible": true,
+          "width": 977,
+          "height": 610,
+          "label": "holding/early/left_right/screw_lower",
+          "filled_pixels": 160244,
+          "pixel_hash": "c4fa7d00",
+          "outer_radius": "1.498",
+          "outer_difference": "0.343",
+          "inner_radius": "12.050",
+          "offset_label": "12.0",
+          "state_disabled": false,
+          "offset_disabled": true,
+          "target_disabled": false,
+          "visible_mode_buttons": 1,
+          "first_moving_vertices": [
+            [
+              0.010343530614741303,
+              0.0040000000000000036,
+              -0.013268104293260238
+            ],
+            [
+              0.012403392050166114,
+              0.0030000000000000027,
+              -0.007968104475145003
+            ],
+            [
+              0.005353139050166111,
+              0.061000000000000006,
+              -0.010917851475145006
+            ],
+            [
+              0.009403392050166107,
+              0.061000000000000006,
+              -0.010917851475145006
+            ]
+          ],
+          "vertices_finite": true
+        },
+        {
+          "mode": "holding",
+          "state": "early",
+          "side": "left_right",
+          "hole": "screw_upper",
+          "offset_mm": 12,
+          "meshes": 22,
+          "faces": 63790,
+          "gl_error": 0,
+          "workpiece_visible": true,
+          "width": 977,
+          "height": 610,
+          "label": "holding/early/left_right/screw_upper",
+          "filled_pixels": 160245,
+          "pixel_hash": "1f419b7a",
+          "outer_radius": "1.498",
+          "outer_difference": "0.343",
+          "inner_radius": "0.000",
+          "offset_label": "12.0",
+          "state_disabled": false,
+          "offset_disabled": true,
+          "target_disabled": false,
+          "visible_mode_buttons": 1,
+          "first_moving_vertices": [
+            [
+              0.010343530614741303,
+              0.0040000000000000036,
+              -0.013268104293260238
+            ],
+            [
+              0.012403392050166114,
+              0.0030000000000000027,
+              -0.007968104475145003
+            ],
+            [
+              0.005353139050166111,
+              0.061000000000000006,
+              -0.010917851475145006
+            ],
+            [
+              0.009403392050166107,
+              0.061000000000000006,
+              -0.010917851475145006
+            ]
+          ],
+          "vertices_finite": true
+        },
+        {
+          "mode": "holding",
+          "state": "open",
+          "side": "left_left",
+          "hole": "screw_lower",
+          "offset_mm": 12,
+          "meshes": 22,
+          "faces": 63790,
+          "gl_error": 0,
+          "workpiece_visible": true,
+          "width": 977,
+          "height": 610,
+          "label": "holding/open/left_left/screw_lower",
+          "filled_pixels": 167365,
+          "pixel_hash": "b36e6f7e",
+          "outer_radius": "1.498",
+          "outer_difference": "0.343",
+          "inner_radius": "12.050",
+          "offset_label": "12.0",
+          "state_disabled": false,
+          "offset_disabled": true,
+          "target_disabled": false,
+          "visible_mode_buttons": 1,
+          "first_moving_vertices": [
+            [
+              -0.01794013818559806,
+              0.004000002614112284,
+              -0.012121963983944592
+            ],
+            [
+              -0.019999999286252606,
+              0.0030000039570618475,
+              -0.006821964165829357
+            ],
+            [
+              -0.012949746999999508,
+              0.06100000277128167,
+              -0.00977171116582936
+            ],
+            [
+              -0.019999999999999504,
+              0.06100000277128167,
+              -0.00977171116582936
+            ]
+          ],
+          "vertices_finite": true
+        },
+        {
+          "mode": "holding",
+          "state": "open",
+          "side": "left_left",
+          "hole": "screw_upper",
+          "offset_mm": 12,
+          "meshes": 22,
+          "faces": 63790,
+          "gl_error": 0,
+          "workpiece_visible": true,
+          "width": 977,
+          "height": 610,
+          "label": "holding/open/left_left/screw_upper",
+          "filled_pixels": 167381,
+          "pixel_hash": "d805237d",
+          "outer_radius": "1.498",
+          "outer_difference": "0.343",
+          "inner_radius": "0.000",
+          "offset_label": "12.0",
+          "state_disabled": false,
+          "offset_disabled": true,
+          "target_disabled": false,
+          "visible_mode_buttons": 1,
+          "first_moving_vertices": [
+            [
+              -0.01794013818559806,
+              0.004000002614112284,
+              -0.012121963983944592
+            ],
+            [
+              -0.019999999286252606,
+              0.0030000039570618475,
+              -0.006821964165829357
+            ],
+            [
+              -0.012949746999999508,
+              0.06100000277128167,
+              -0.00977171116582936
+            ],
+            [
+              -0.019999999999999504,
+              0.06100000277128167,
+              -0.00977171116582936
+            ]
+          ],
+          "vertices_finite": true
+        },
+        {
+          "mode": "holding",
+          "state": "open",
+          "side": "left_right",
+          "hole": "screw_lower",
+          "offset_mm": 12,
+          "meshes": 22,
+          "faces": 63790,
+          "gl_error": 0,
+          "workpiece_visible": true,
+          "width": 977,
+          "height": 610,
+          "label": "holding/open/left_right/screw_lower",
+          "filled_pixels": 167362,
+          "pixel_hash": "35830992",
+          "outer_radius": "1.498",
+          "outer_difference": "0.343",
+          "inner_radius": "12.050",
+          "offset_label": "12.0",
+          "state_disabled": false,
+          "offset_disabled": true,
+          "target_disabled": false,
+          "visible_mode_buttons": 1,
+          "first_moving_vertices": [
+            [
+              0.017940138564575193,
+              0.0040000000000000036,
+              -0.012121963983944592
+            ],
+            [
+              0.019999999999999997,
+              0.0030000000000000027,
+              -0.006821964165829357
+            ],
+            [
+              0.012949747000000001,
+              0.061000000000000006,
+              -0.00977171116582936
+            ],
+            [
+              0.016999999999999998,
+              0.061000000000000006,
+              -0.00977171116582936
+            ]
+          ],
+          "vertices_finite": true
+        },
+        {
+          "mode": "holding",
+          "state": "open",
+          "side": "left_right",
+          "hole": "screw_upper",
+          "offset_mm": 12,
+          "meshes": 22,
+          "faces": 63790,
+          "gl_error": 0,
+          "workpiece_visible": true,
+          "width": 977,
+          "height": 610,
+          "label": "holding/open/left_right/screw_upper",
+          "filled_pixels": 167368,
+          "pixel_hash": "b9f46fea",
+          "outer_radius": "1.498",
+          "outer_difference": "0.343",
+          "inner_radius": "0.000",
+          "offset_label": "12.0",
+          "state_disabled": false,
+          "offset_disabled": true,
+          "target_disabled": false,
+          "visible_mode_buttons": 1,
+          "first_moving_vertices": [
+            [
+              0.017940138564575193,
+              0.0040000000000000036,
+              -0.012121963983944592
+            ],
+            [
+              0.019999999999999997,
+              0.0030000000000000027,
+              -0.006821964165829357
+            ],
+            [
+              0.012949747000000001,
+              0.061000000000000006,
+              -0.00977171116582936
+            ],
+            [
+              0.016999999999999998,
+              0.061000000000000006,
+              -0.00977171116582936
+            ]
+          ],
+          "vertices_finite": true
+        },
+        {
+          "mode": "holding",
+          "state": "clear",
+          "side": "left_left",
+          "hole": "screw_lower",
+          "offset_mm": 12,
+          "meshes": 22,
+          "faces": 63790,
+          "gl_error": 0,
+          "workpiece_visible": true,
+          "width": 977,
+          "height": 610,
+          "label": "holding/clear/left_left/screw_lower",
+          "filled_pixels": 118228,
+          "pixel_hash": "453c0461",
+          "outer_radius": "1.498",
+          "outer_difference": "0.343",
+          "inner_radius": "12.050",
+          "offset_label": "12.0",
+          "state_disabled": false,
+          "offset_disabled": true,
+          "target_disabled": false,
+          "visible_mode_buttons": 1,
+          "first_moving_vertices": [
+            [
+              -0.01794013818559806,
+              0.004000002614112284,
+              0.012878036016055402
+            ],
+            [
+              -0.019999999286252606,
+              0.0030000039570618475,
+              0.018178035834170637
+            ],
+            [
+              -0.012949746999999508,
+              0.06100000277128167,
+              0.015228288834170635
+            ],
+            [
+              -0.019999999999999504,
+              0.06100000277128167,
+              0.015228288834170635
+            ]
+          ],
+          "vertices_finite": true
+        },
+        {
+          "mode": "holding",
+          "state": "clear",
+          "side": "left_left",
+          "hole": "screw_upper",
+          "offset_mm": 12,
+          "meshes": 22,
+          "faces": 63790,
+          "gl_error": 0,
+          "workpiece_visible": true,
+          "width": 977,
+          "height": 610,
+          "label": "holding/clear/left_left/screw_upper",
+          "filled_pixels": 118244,
+          "pixel_hash": "f182f580",
+          "outer_radius": "1.498",
+          "outer_difference": "0.343",
+          "inner_radius": "0.000",
+          "offset_label": "12.0",
+          "state_disabled": false,
+          "offset_disabled": true,
+          "target_disabled": false,
+          "visible_mode_buttons": 1,
+          "first_moving_vertices": [
+            [
+              -0.01794013818559806,
+              0.004000002614112284,
+              0.012878036016055402
+            ],
+            [
+              -0.019999999286252606,
+              0.0030000039570618475,
+              0.018178035834170637
+            ],
+            [
+              -0.012949746999999508,
+              0.06100000277128167,
+              0.015228288834170635
+            ],
+            [
+              -0.019999999999999504,
+              0.06100000277128167,
+              0.015228288834170635
+            ]
+          ],
+          "vertices_finite": true
+        },
+        {
+          "mode": "holding",
+          "state": "clear",
+          "side": "left_right",
+          "hole": "screw_lower",
+          "offset_mm": 12,
+          "meshes": 22,
+          "faces": 63790,
+          "gl_error": 0,
+          "workpiece_visible": true,
+          "width": 977,
+          "height": 610,
+          "label": "holding/clear/left_right/screw_lower",
+          "filled_pixels": 118228,
+          "pixel_hash": "3d3420d8",
+          "outer_radius": "1.498",
+          "outer_difference": "0.343",
+          "inner_radius": "12.050",
+          "offset_label": "12.0",
+          "state_disabled": false,
+          "offset_disabled": true,
+          "target_disabled": false,
+          "visible_mode_buttons": 1,
+          "first_moving_vertices": [
+            [
+              0.017940138564575193,
+              0.0040000000000000036,
+              0.012878036016055402
+            ],
+            [
+              0.019999999999999997,
+              0.0030000000000000027,
+              0.018178035834170637
+            ],
+            [
+              0.012949747000000001,
+              0.061000000000000006,
+              0.015228288834170635
+            ],
+            [
+              0.016999999999999998,
+              0.061000000000000006,
+              0.015228288834170635
+            ]
+          ],
+          "vertices_finite": true
+        },
+        {
+          "mode": "holding",
+          "state": "clear",
+          "side": "left_right",
+          "hole": "screw_upper",
+          "offset_mm": 12,
+          "meshes": 22,
+          "faces": 63790,
+          "gl_error": 0,
+          "workpiece_visible": true,
+          "width": 977,
+          "height": 610,
+          "label": "holding/clear/left_right/screw_upper",
+          "filled_pixels": 118232,
+          "pixel_hash": "b46e85a9",
+          "outer_radius": "1.498",
+          "outer_difference": "0.343",
+          "inner_radius": "0.000",
+          "offset_label": "12.0",
+          "state_disabled": false,
+          "offset_disabled": true,
+          "target_disabled": false,
+          "visible_mode_buttons": 1,
+          "first_moving_vertices": [
+            [
+              0.017940138564575193,
+              0.0040000000000000036,
+              0.012878036016055402
+            ],
+            [
+              0.019999999999999997,
+              0.0030000000000000027,
+              0.018178035834170637
+            ],
+            [
+              0.012949747000000001,
+              0.061000000000000006,
+              0.015228288834170635
+            ],
+            [
+              0.016999999999999998,
+              0.061000000000000006,
+              0.015228288834170635
+            ]
+          ],
+          "vertices_finite": true
+        },
+        {
+          "mode": "service",
+          "state": "open",
+          "side": "left_right",
+          "hole": "screw_upper",
+          "offset_mm": 0,
+          "meshes": 8,
+          "faces": 2736,
+          "gl_error": 0,
+          "workpiece_visible": false,
+          "width": 977,
+          "height": 610,
+          "label": "toggle/hardware",
+          "filled_pixels": 27620,
+          "pixel_hash": "cd306324",
+          "outer_radius": "1.498",
+          "outer_difference": "0.343",
+          "inner_radius": "0.000",
+          "offset_label": "0.0",
+          "state_disabled": true,
+          "offset_disabled": false,
+          "target_disabled": true,
+          "visible_mode_buttons": 1,
+          "first_moving_vertices": [
+            [
+              0.017940138564575193,
+              0.0040000000000000036,
+              -0.012121963983944592
+            ],
+            [
+              0.019999999999999997,
+              0.0030000000000000027,
+              -0.006821964165829357
+            ],
+            [
+              0.012949747000000001,
+              0.061000000000000006,
+              -0.00977171116582936
+            ],
+            [
+              0.016999999999999998,
+              0.061000000000000006,
+              -0.00977171116582936
+            ]
+          ],
+          "vertices_finite": true
+        },
+        {
+          "mode": "service",
+          "state": "open",
+          "side": "left_right",
+          "hole": "screw_upper",
+          "offset_mm": 0,
+          "meshes": 18,
+          "faces": 54244,
+          "gl_error": 0,
+          "workpiece_visible": false,
+          "width": 977,
+          "height": 610,
+          "label": "toggle/target",
+          "filled_pixels": 142831,
+          "pixel_hash": "3b6814c6",
+          "outer_radius": "1.498",
+          "outer_difference": "0.343",
+          "inner_radius": "0.000",
+          "offset_label": "0.0",
+          "state_disabled": true,
+          "offset_disabled": false,
+          "target_disabled": true,
+          "visible_mode_buttons": 1,
+          "first_moving_vertices": [
+            [
+              0.017940138564575193,
+              0.0040000000000000036,
+              -0.012121963983944592
+            ],
+            [
+              0.019999999999999997,
+              0.0030000000000000027,
+              -0.006821964165829357
+            ],
+            [
+              0.012949747000000001,
+              0.061000000000000006,
+              -0.00977171116582936
+            ],
+            [
+              0.016999999999999998,
+              0.061000000000000006,
+              -0.00977171116582936
+            ]
+          ],
+          "vertices_finite": true
+        },
+        {
+          "mode": "service",
+          "state": "open",
+          "side": "left_right",
+          "hole": "screw_upper",
+          "offset_mm": 0,
+          "meshes": 18,
+          "faces": 54148,
+          "gl_error": 0,
+          "workpiece_visible": false,
+          "width": 977,
+          "height": 610,
+          "label": "toggle/outside",
+          "filled_pixels": 141196,
+          "pixel_hash": "34094d37",
+          "outer_radius": "1.498",
+          "outer_difference": "0.343",
+          "inner_radius": "0.000",
+          "offset_label": "0.0",
+          "state_disabled": true,
+          "offset_disabled": false,
+          "target_disabled": true,
+          "visible_mode_buttons": 1,
+          "first_moving_vertices": [
+            [
+              0.017940138564575193,
+              0.0040000000000000036,
+              -0.012121963983944592
+            ],
+            [
+              0.019999999999999997,
+              0.0030000000000000027,
+              -0.006821964165829357
+            ],
+            [
+              0.012949747000000001,
+              0.061000000000000006,
+              -0.00977171116582936
+            ],
+            [
+              0.016999999999999998,
+              0.061000000000000006,
+              -0.00977171116582936
+            ]
+          ],
+          "vertices_finite": true
+        },
+        {
+          "mode": "service",
+          "state": "open",
+          "side": "left_right",
+          "hole": "screw_upper",
+          "offset_mm": 0,
+          "meshes": 18,
+          "faces": 54340,
+          "gl_error": 0,
+          "workpiece_visible": false,
+          "width": 977,
+          "height": 610,
+          "label": "toggle/inside",
+          "filled_pixels": 143747,
+          "pixel_hash": "5d662359",
+          "outer_radius": "1.498",
+          "outer_difference": "0.343",
+          "inner_radius": "0.000",
+          "offset_label": "0.0",
+          "state_disabled": true,
+          "offset_disabled": false,
+          "target_disabled": true,
+          "visible_mode_buttons": 1,
+          "first_moving_vertices": [
+            [
+              0.017940138564575193,
+              0.0040000000000000036,
+              -0.012121963983944592
+            ],
+            [
+              0.019999999999999997,
+              0.0030000000000000027,
+              -0.006821964165829357
+            ],
+            [
+              0.012949747000000001,
+              0.061000000000000006,
+              -0.00977171116582936
+            ],
+            [
+              0.016999999999999998,
+              0.061000000000000006,
+              -0.00977171116582936
+            ]
+          ],
+          "vertices_finite": true
+        },
+        {
+          "mode": "service",
+          "state": "open",
+          "side": "left_right",
+          "hole": "screw_upper",
+          "offset_mm": 0,
+          "meshes": 18,
+          "faces": 54244,
+          "gl_error": 0,
+          "workpiece_visible": false,
+          "width": 977,
+          "height": 610,
+          "label": "camera/front",
+          "filled_pixels": 104772,
+          "pixel_hash": "54f255f5",
+          "outer_radius": "1.498",
+          "outer_difference": "0.343",
+          "inner_radius": "0.000",
+          "offset_label": "0.0",
+          "state_disabled": true,
+          "offset_disabled": false,
+          "target_disabled": true,
+          "visible_mode_buttons": 1,
+          "first_moving_vertices": [
+            [
+              0.017940138564575193,
+              0.0040000000000000036,
+              -0.012121963983944592
+            ],
+            [
+              0.019999999999999997,
+              0.0030000000000000027,
+              -0.006821964165829357
+            ],
+            [
+              0.012949747000000001,
+              0.061000000000000006,
+              -0.00977171116582936
+            ],
+            [
+              0.016999999999999998,
+              0.061000000000000006,
+              -0.00977171116582936
+            ]
+          ],
+          "vertices_finite": true
+        },
+        {
+          "mode": "service",
+          "state": "open",
+          "side": "left_right",
+          "hole": "screw_upper",
+          "offset_mm": 0,
+          "meshes": 18,
+          "faces": 54244,
+          "gl_error": 0,
+          "workpiece_visible": false,
+          "width": 977,
+          "height": 610,
+          "label": "camera/top",
+          "filled_pixels": 119204,
+          "pixel_hash": "7ad51501",
+          "outer_radius": "1.498",
+          "outer_difference": "0.343",
+          "inner_radius": "0.000",
+          "offset_label": "0.0",
+          "state_disabled": true,
+          "offset_disabled": false,
+          "target_disabled": true,
+          "visible_mode_buttons": 1,
+          "first_moving_vertices": [
+            [
+              0.017940138564575193,
+              0.0040000000000000036,
+              -0.012121963983944592
+            ],
+            [
+              0.019999999999999997,
+              0.0030000000000000027,
+              -0.006821964165829357
+            ],
+            [
+              0.012949747000000001,
+              0.061000000000000006,
+              -0.00977171116582936
+            ],
+            [
+              0.016999999999999998,
+              0.061000000000000006,
+              -0.00977171116582936
+            ]
+          ],
+          "vertices_finite": true
+        },
+        {
+          "mode": "service",
+          "state": "open",
+          "side": "left_right",
+          "hole": "screw_upper",
+          "offset_mm": 0,
+          "meshes": 18,
+          "faces": 54244,
+          "gl_error": 0,
+          "workpiece_visible": false,
+          "width": 977,
+          "height": 610,
+          "label": "camera/oblique",
+          "filled_pixels": 142831,
+          "pixel_hash": "3b6814c6",
+          "outer_radius": "1.498",
+          "outer_difference": "0.343",
+          "inner_radius": "0.000",
+          "offset_label": "0.0",
+          "state_disabled": true,
+          "offset_disabled": false,
+          "target_disabled": true,
+          "visible_mode_buttons": 1,
+          "first_moving_vertices": [
+            [
+              0.017940138564575193,
+              0.0040000000000000036,
+              -0.012121963983944592
+            ],
+            [
+              0.019999999999999997,
+              0.0030000000000000027,
+              -0.006821964165829357
+            ],
+            [
+              0.012949747000000001,
+              0.061000000000000006,
+              -0.00977171116582936
+            ],
+            [
+              0.016999999999999998,
+              0.061000000000000006,
+              -0.00977171116582936
+            ]
+          ],
+          "vertices_finite": true
+        },
+        {
+          "mode": "service",
+          "state": "open",
+          "side": "left_right",
+          "hole": "screw_upper",
+          "offset_mm": 0,
+          "meshes": 18,
+          "faces": 54244,
+          "gl_error": 0,
+          "workpiece_visible": false,
+          "width": 977,
+          "height": 610,
+          "label": "mount",
+          "filled_pixels": 222655,
+          "pixel_hash": "693cbf9f",
+          "outer_radius": "1.498",
+          "outer_difference": "0.343",
+          "inner_radius": "0.000",
+          "offset_label": "0.0",
+          "state_disabled": true,
+          "offset_disabled": false,
+          "target_disabled": true,
+          "visible_mode_buttons": 1,
+          "first_moving_vertices": [
+            [
+              0.017940138564575193,
+              0.0040000000000000036,
+              -0.012121963983944592
+            ],
+            [
+              0.019999999999999997,
+              0.0030000000000000027,
+              -0.006821964165829357
+            ],
+            [
+              0.012949747000000001,
+              0.061000000000000006,
+              -0.00977171116582936
+            ],
+            [
+              0.016999999999999998,
+              0.061000000000000006,
+              -0.00977171116582936
+            ]
+          ],
+          "vertices_finite": true
+        },
+        {
+          "mode": "service",
+          "state": "open",
+          "side": "left_right",
+          "hole": "screw_upper",
+          "offset_mm": 0,
+          "meshes": 18,
+          "faces": 54244,
+          "gl_error": 0,
+          "workpiece_visible": false,
+          "width": 977,
+          "height": 610,
+          "label": "whole",
+          "filled_pixels": 81986,
+          "pixel_hash": "5a46dd20",
+          "outer_radius": "1.498",
+          "outer_difference": "0.343",
+          "inner_radius": "0.000",
+          "offset_label": "0.0",
+          "state_disabled": true,
+          "offset_disabled": false,
+          "target_disabled": true,
+          "visible_mode_buttons": 1,
+          "first_moving_vertices": [
+            [
+              0.017940138564575193,
+              0.0040000000000000036,
+              -0.012121963983944592
+            ],
+            [
+              0.019999999999999997,
+              0.0030000000000000027,
+              -0.006821964165829357
+            ],
+            [
+              0.012949747000000001,
+              0.061000000000000006,
+              -0.00977171116582936
+            ],
+            [
+              0.016999999999999998,
+              0.061000000000000006,
+              -0.00977171116582936
+            ]
+          ],
+          "vertices_finite": true
+        },
+        {
+          "mode": "service",
+          "state": "open",
+          "side": "left_right",
+          "hole": "screw_upper",
+          "offset_mm": 0,
+          "meshes": 18,
+          "faces": 54244,
+          "gl_error": 0,
+          "workpiece_visible": false,
+          "width": 977,
+          "height": 610,
+          "label": "reset",
+          "filled_pixels": 142831,
+          "pixel_hash": "3b6814c6",
+          "outer_radius": "1.498",
+          "outer_difference": "0.343",
+          "inner_radius": "0.000",
+          "offset_label": "0.0",
+          "state_disabled": true,
+          "offset_disabled": false,
+          "target_disabled": true,
+          "visible_mode_buttons": 1,
+          "first_moving_vertices": [
+            [
+              0.017940138564575193,
+              0.0040000000000000036,
+              -0.012121963983944592
+            ],
+            [
+              0.019999999999999997,
+              0.0030000000000000027,
+              -0.006821964165829357
+            ],
+            [
+              0.012949747000000001,
+              0.061000000000000006,
+              -0.00977171116582936
+            ],
+            [
+              0.016999999999999998,
+              0.061000000000000006,
+              -0.00977171116582936
+            ]
+          ],
+          "vertices_finite": true
+        }
+      ],
+      "failure": null,
+      "viewport": 1440,
+      "scroll_width": 1425
+    },
+    "mobile": {
+      "rows": [
+        {
+          "mode": "service",
+          "state": "open",
+          "side": "left_left",
+          "hole": "screw_upper",
+          "offset_mm": 0,
+          "meshes": 18,
+          "faces": 54244,
+          "gl_error": 0,
+          "workpiece_visible": false,
+          "width": 455,
+          "height": 460,
+          "label": "service/left_left/0",
+          "filled_pixels": 80471,
+          "pixel_hash": "1618ea63",
+          "outer_radius": "1.498",
+          "outer_difference": "0.343",
+          "inner_radius": "0.000",
+          "offset_label": "0.0",
+          "state_disabled": true,
+          "offset_disabled": false,
+          "target_disabled": true,
+          "visible_mode_buttons": 1,
+          "first_moving_vertices": [
+            [
+              -0.01794013818559806,
+              0.004000002614112284,
+              -0.012121963983944592
+            ],
+            [
+              -0.019999999286252606,
+              0.0030000039570618475,
+              -0.006821964165829357
+            ],
+            [
+              -0.012949746999999508,
+              0.06100000277128167,
+              -0.00977171116582936
+            ],
+            [
+              -0.019999999999999504,
+              0.06100000277128167,
+              -0.00977171116582936
+            ]
+          ],
+          "vertices_finite": true
+        },
+        {
+          "mode": "service",
+          "state": "open",
+          "side": "left_left",
+          "hole": "screw_upper",
+          "offset_mm": 6,
+          "meshes": 18,
+          "faces": 54244,
+          "gl_error": 0,
+          "workpiece_visible": false,
+          "width": 455,
+          "height": 460,
+          "label": "service/left_left/6",
+          "filled_pixels": 81834,
+          "pixel_hash": "451cc15",
+          "outer_radius": "1.498",
+          "outer_difference": "0.343",
+          "inner_radius": "0.000",
+          "offset_label": "6.0",
+          "state_disabled": true,
+          "offset_disabled": false,
+          "target_disabled": true,
+          "visible_mode_buttons": 1,
+          "first_moving_vertices": [
+            [
+              -0.011940138191532893,
+              0.0040000004700285795,
+              -0.012121697125560788
+            ],
+            [
+              -0.01399999929218744,
+              0.0030000018129781427,
+              -0.006821697307445553
+            ],
+            [
+              -0.006949747005934342,
+              0.061000000627197966,
+              -0.009771444307445556
+            ],
+            [
+              -0.014000000005934338,
+              0.061000000627197966,
+              -0.009771444307445556
+            ]
+          ],
+          "vertices_finite": true
+        },
+        {
+          "mode": "service",
+          "state": "open",
+          "side": "left_left",
+          "hole": "screw_upper",
+          "offset_mm": 12,
+          "meshes": 18,
+          "faces": 54244,
+          "gl_error": 0,
+          "workpiece_visible": false,
+          "width": 455,
+          "height": 460,
+          "label": "service/left_left/12",
+          "filled_pixels": 82619,
+          "pixel_hash": "fa9ed751",
+          "outer_radius": "1.498",
+          "outer_difference": "0.343",
+          "inner_radius": "0.000",
+          "offset_label": "12.0",
+          "state_disabled": true,
+          "offset_disabled": false,
+          "target_disabled": true,
+          "visible_mode_buttons": 1,
+          "first_moving_vertices": [
+            [
+              -0.0059401381974677255,
+              0.003999998325944875,
+              -0.012121430267176984
+            ],
+            [
+              -0.007999999298122272,
+              0.0029999996688944383,
+              -0.0068214304490617494
+            ],
+            [
+              -0.0009497470118691748,
+              0.06099999848311426,
+              -0.009771177449061752
+            ],
+            [
+              -0.00800000001186917,
+              0.06099999848311426,
+              -0.009771177449061752
+            ]
+          ],
+          "vertices_finite": true
+        },
+        {
+          "mode": "service",
+          "state": "open",
+          "side": "left_right",
+          "hole": "screw_upper",
+          "offset_mm": 0,
+          "meshes": 18,
+          "faces": 54244,
+          "gl_error": 0,
+          "workpiece_visible": false,
+          "width": 455,
+          "height": 460,
+          "label": "service/left_right/0",
+          "filled_pixels": 80463,
+          "pixel_hash": "916d7031",
+          "outer_radius": "1.498",
+          "outer_difference": "0.343",
+          "inner_radius": "0.000",
+          "offset_label": "0.0",
+          "state_disabled": true,
+          "offset_disabled": false,
+          "target_disabled": true,
+          "visible_mode_buttons": 1,
+          "first_moving_vertices": [
+            [
+              0.017940138564575193,
+              0.0040000000000000036,
+              -0.012121963983944592
+            ],
+            [
+              0.019999999999999997,
+              0.0030000000000000027,
+              -0.006821964165829357
+            ],
+            [
+              0.012949747000000001,
+              0.061000000000000006,
+              -0.00977171116582936
+            ],
+            [
+              0.016999999999999998,
+              0.061000000000000006,
+              -0.00977171116582936
+            ]
+          ],
+          "vertices_finite": true
+        },
+        {
+          "mode": "service",
+          "state": "open",
+          "side": "left_right",
+          "hole": "screw_upper",
+          "offset_mm": 6,
+          "meshes": 18,
+          "faces": 54244,
+          "gl_error": 0,
+          "workpiece_visible": false,
+          "width": 455,
+          "height": 460,
+          "label": "service/left_right/6",
+          "filled_pixels": 82245,
+          "pixel_hash": "d595729d",
+          "outer_radius": "1.498",
+          "outer_difference": "0.343",
+          "inner_radius": "0.000",
+          "offset_label": "6.0",
+          "state_disabled": true,
+          "offset_disabled": false,
+          "target_disabled": true,
+          "visible_mode_buttons": 1,
+          "first_moving_vertices": [
+            [
+              0.011940138570509644,
+              0.00400000006562247,
+              -0.012121697125560788
+            ],
+            [
+              0.014000000005934448,
+              0.0030000000656224698,
+              -0.006821697307445553
+            ],
+            [
+              0.006949747005934452,
+              0.06100000006562247,
+              -0.009771444307445556
+            ],
+            [
+              0.011000000005934448,
+              0.06100000006562247,
+              -0.009771444307445556
+            ]
+          ],
+          "vertices_finite": true
+        },
+        {
+          "mode": "service",
+          "state": "open",
+          "side": "left_right",
+          "hole": "screw_upper",
+          "offset_mm": 12,
+          "meshes": 18,
+          "faces": 54244,
+          "gl_error": 0,
+          "workpiece_visible": false,
+          "width": 455,
+          "height": 460,
+          "label": "service/left_right/12",
+          "filled_pixels": 83239,
+          "pixel_hash": "f1297bec",
+          "outer_radius": "1.498",
+          "outer_difference": "0.343",
+          "inner_radius": "0.000",
+          "offset_label": "12.0",
+          "state_disabled": true,
+          "offset_disabled": false,
+          "target_disabled": true,
+          "visible_mode_buttons": 1,
+          "first_moving_vertices": [
+            [
+              0.005940138576444095,
+              0.004000000131244938,
+              -0.012121430267176984
+            ],
+            [
+              0.008000000011868898,
+              0.003000000131244937,
+              -0.0068214304490617494
+            ],
+            [
+              0.0009497470118689025,
+              0.06100000013124494,
+              -0.009771177449061752
+            ],
+            [
+              0.005000000011868899,
+              0.06100000013124494,
+              -0.009771177449061752
+            ]
+          ],
+          "vertices_finite": true
+        },
+        {
+          "mode": "holding",
+          "state": "near",
+          "side": "left_left",
+          "hole": "screw_lower",
+          "offset_mm": 12,
+          "meshes": 22,
+          "faces": 63790,
+          "gl_error": 0,
+          "workpiece_visible": true,
+          "width": 455,
+          "height": 460,
+          "label": "holding/near/left_left/screw_lower",
+          "filled_pixels": 89655,
+          "pixel_hash": "99cc1b2c",
+          "outer_radius": "1.498",
+          "outer_difference": "0.343",
+          "inner_radius": "12.050",
+          "offset_label": "12.0",
+          "state_disabled": false,
+          "offset_disabled": true,
+          "target_disabled": false,
+          "visible_mode_buttons": 1,
+          "first_moving_vertices": [
+            [
+              -0.009940138185598548,
+              0.003999999842830622,
+              -0.013299999818115228
+            ],
+            [
+              -0.011999999286253095,
+              0.003000001185780185,
+              -0.007999999999999993
+            ],
+            [
+              -0.004949747000000001,
+              0.061000000000000006,
+              -0.010949746999999996
+            ],
+            [
+              -0.011999999999999997,
+              0.061000000000000006,
+              -0.010949746999999996
+            ]
+          ],
+          "vertices_finite": true
+        },
+        {
+          "mode": "holding",
+          "state": "near",
+          "side": "left_left",
+          "hole": "screw_upper",
+          "offset_mm": 12,
+          "meshes": 22,
+          "faces": 63790,
+          "gl_error": 0,
+          "workpiece_visible": true,
+          "width": 455,
+          "height": 460,
+          "label": "holding/near/left_left/screw_upper",
+          "filled_pixels": 89656,
+          "pixel_hash": "43eeda96",
+          "outer_radius": "1.498",
+          "outer_difference": "0.343",
+          "inner_radius": "0.000",
+          "offset_label": "12.0",
+          "state_disabled": false,
+          "offset_disabled": true,
+          "target_disabled": false,
+          "visible_mode_buttons": 1,
+          "first_moving_vertices": [
+            [
+              -0.009940138185598548,
+              0.003999999842830622,
+              -0.013299999818115228
+            ],
+            [
+              -0.011999999286253095,
+              0.003000001185780185,
+              -0.007999999999999993
+            ],
+            [
+              -0.004949747000000001,
+              0.061000000000000006,
+              -0.010949746999999996
+            ],
+            [
+              -0.011999999999999997,
+              0.061000000000000006,
+              -0.010949746999999996
+            ]
+          ],
+          "vertices_finite": true
+        },
+        {
+          "mode": "holding",
+          "state": "near",
+          "side": "left_right",
+          "hole": "screw_lower",
+          "offset_mm": 12,
+          "meshes": 22,
+          "faces": 63790,
+          "gl_error": 0,
+          "workpiece_visible": true,
+          "width": 455,
+          "height": 460,
+          "label": "holding/near/left_right/screw_lower",
+          "filled_pixels": 89646,
+          "pixel_hash": "23353d79",
+          "outer_radius": "1.498",
+          "outer_difference": "0.343",
+          "inner_radius": "12.050",
+          "offset_label": "12.0",
+          "state_disabled": false,
+          "offset_disabled": true,
+          "target_disabled": false,
+          "visible_mode_buttons": 1,
+          "first_moving_vertices": [
+            [
+              0.009940138564575193,
+              0.0040000000000000036,
+              -0.013299999818115228
+            ],
+            [
+              0.012,
+              0.0030000000000000027,
+              -0.007999999999999993
+            ],
+            [
+              0.004949747000000001,
+              0.061000000000000006,
+              -0.010949746999999996
+            ],
+            [
+              0.008999999999999998,
+              0.061000000000000006,
+              -0.010949746999999996
+            ]
+          ],
+          "vertices_finite": true
+        },
+        {
+          "mode": "holding",
+          "state": "near",
+          "side": "left_right",
+          "hole": "screw_upper",
+          "offset_mm": 12,
+          "meshes": 22,
+          "faces": 63790,
+          "gl_error": 0,
+          "workpiece_visible": true,
+          "width": 455,
+          "height": 460,
+          "label": "holding/near/left_right/screw_upper",
+          "filled_pixels": 89650,
+          "pixel_hash": "902f22b8",
+          "outer_radius": "1.498",
+          "outer_difference": "0.343",
+          "inner_radius": "0.000",
+          "offset_label": "12.0",
+          "state_disabled": false,
+          "offset_disabled": true,
+          "target_disabled": false,
+          "visible_mode_buttons": 1,
+          "first_moving_vertices": [
+            [
+              0.009940138564575193,
+              0.0040000000000000036,
+              -0.013299999818115228
+            ],
+            [
+              0.012,
+              0.0030000000000000027,
+              -0.007999999999999993
+            ],
+            [
+              0.004949747000000001,
+              0.061000000000000006,
+              -0.010949746999999996
+            ],
+            [
+              0.008999999999999998,
+              0.061000000000000006,
+              -0.010949746999999996
+            ]
+          ],
+          "vertices_finite": true
+        },
+        {
+          "mode": "holding",
+          "state": "early",
+          "side": "left_left",
+          "hole": "screw_lower",
+          "offset_mm": 12,
+          "meshes": 22,
+          "faces": 63790,
+          "gl_error": 0,
+          "workpiece_visible": true,
+          "width": 455,
+          "height": 460,
+          "label": "holding/early/left_left/screw_lower",
+          "filled_pixels": 90117,
+          "pixel_hash": "cca6da3e",
+          "outer_radius": "1.498",
+          "outer_difference": "0.343",
+          "inner_radius": "12.050",
+          "offset_label": "12.0",
+          "state_disabled": false,
+          "offset_disabled": true,
+          "target_disabled": false,
+          "visible_mode_buttons": 1,
+          "first_moving_vertices": [
+            [
+              -0.010343530235764651,
+              0.003999999982569759,
+              -0.013268104293260238
+            ],
+            [
+              -0.012403391336419194,
+              0.003000001325519322,
+              -0.007968104475145003
+            ],
+            [
+              -0.0053531390501661,
+              0.06100000013973914,
+              -0.010917851475145006
+            ],
+            [
+              -0.012403392050166096,
+              0.06100000013973914,
+              -0.010917851475145006
+            ]
+          ],
+          "vertices_finite": true
+        },
+        {
+          "mode": "holding",
+          "state": "early",
+          "side": "left_left",
+          "hole": "screw_upper",
+          "offset_mm": 12,
+          "meshes": 22,
+          "faces": 63790,
+          "gl_error": 0,
+          "workpiece_visible": true,
+          "width": 455,
+          "height": 460,
+          "label": "holding/early/left_left/screw_upper",
+          "filled_pixels": 90127,
+          "pixel_hash": "f242df65",
+          "outer_radius": "1.498",
+          "outer_difference": "0.343",
+          "inner_radius": "0.000",
+          "offset_label": "12.0",
+          "state_disabled": false,
+          "offset_disabled": true,
+          "target_disabled": false,
+          "visible_mode_buttons": 1,
+          "first_moving_vertices": [
+            [
+              -0.010343530235764651,
+              0.003999999982569759,
+              -0.013268104293260238
+            ],
+            [
+              -0.012403391336419194,
+              0.003000001325519322,
+              -0.007968104475145003
+            ],
+            [
+              -0.0053531390501661,
+              0.06100000013973914,
+              -0.010917851475145006
+            ],
+            [
+              -0.012403392050166096,
+              0.06100000013973914,
+              -0.010917851475145006
+            ]
+          ],
+          "vertices_finite": true
+        },
+        {
+          "mode": "holding",
+          "state": "early",
+          "side": "left_right",
+          "hole": "screw_lower",
+          "offset_mm": 12,
+          "meshes": 22,
+          "faces": 63790,
+          "gl_error": 0,
+          "workpiece_visible": true,
+          "width": 455,
+          "height": 460,
+          "label": "holding/early/left_right/screw_lower",
+          "filled_pixels": 90125,
+          "pixel_hash": "83a06d4b",
+          "outer_radius": "1.498",
+          "outer_difference": "0.343",
+          "inner_radius": "12.050",
+          "offset_label": "12.0",
+          "state_disabled": false,
+          "offset_disabled": true,
+          "target_disabled": false,
+          "visible_mode_buttons": 1,
+          "first_moving_vertices": [
+            [
+              0.010343530614741303,
+              0.0040000000000000036,
+              -0.013268104293260238
+            ],
+            [
+              0.012403392050166114,
+              0.0030000000000000027,
+              -0.007968104475145003
+            ],
+            [
+              0.005353139050166111,
+              0.061000000000000006,
+              -0.010917851475145006
+            ],
+            [
+              0.009403392050166107,
+              0.061000000000000006,
+              -0.010917851475145006
+            ]
+          ],
+          "vertices_finite": true
+        },
+        {
+          "mode": "holding",
+          "state": "early",
+          "side": "left_right",
+          "hole": "screw_upper",
+          "offset_mm": 12,
+          "meshes": 22,
+          "faces": 63790,
+          "gl_error": 0,
+          "workpiece_visible": true,
+          "width": 455,
+          "height": 460,
+          "label": "holding/early/left_right/screw_upper",
+          "filled_pixels": 90124,
+          "pixel_hash": "a0d6ce0a",
+          "outer_radius": "1.498",
+          "outer_difference": "0.343",
+          "inner_radius": "0.000",
+          "offset_label": "12.0",
+          "state_disabled": false,
+          "offset_disabled": true,
+          "target_disabled": false,
+          "visible_mode_buttons": 1,
+          "first_moving_vertices": [
+            [
+              0.010343530614741303,
+              0.0040000000000000036,
+              -0.013268104293260238
+            ],
+            [
+              0.012403392050166114,
+              0.0030000000000000027,
+              -0.007968104475145003
+            ],
+            [
+              0.005353139050166111,
+              0.061000000000000006,
+              -0.010917851475145006
+            ],
+            [
+              0.009403392050166107,
+              0.061000000000000006,
+              -0.010917851475145006
+            ]
+          ],
+          "vertices_finite": true
+        },
+        {
+          "mode": "holding",
+          "state": "open",
+          "side": "left_left",
+          "hole": "screw_lower",
+          "offset_mm": 12,
+          "meshes": 22,
+          "faces": 63790,
+          "gl_error": 0,
+          "workpiece_visible": true,
+          "width": 455,
+          "height": 460,
+          "label": "holding/open/left_left/screw_lower",
+          "filled_pixels": 94158,
+          "pixel_hash": "e44deb6c",
+          "outer_radius": "1.498",
+          "outer_difference": "0.343",
+          "inner_radius": "12.050",
+          "offset_label": "12.0",
+          "state_disabled": false,
+          "offset_disabled": true,
+          "target_disabled": false,
+          "visible_mode_buttons": 1,
+          "first_moving_vertices": [
+            [
+              -0.01794013818559806,
+              0.004000002614112284,
+              -0.012121963983944592
+            ],
+            [
+              -0.019999999286252606,
+              0.0030000039570618475,
+              -0.006821964165829357
+            ],
+            [
+              -0.012949746999999508,
+              0.06100000277128167,
+              -0.00977171116582936
+            ],
+            [
+              -0.019999999999999504,
+              0.06100000277128167,
+              -0.00977171116582936
+            ]
+          ],
+          "vertices_finite": true
+        },
+        {
+          "mode": "holding",
+          "state": "open",
+          "side": "left_left",
+          "hole": "screw_upper",
+          "offset_mm": 12,
+          "meshes": 22,
+          "faces": 63790,
+          "gl_error": 0,
+          "workpiece_visible": true,
+          "width": 455,
+          "height": 460,
+          "label": "holding/open/left_left/screw_upper",
+          "filled_pixels": 94173,
+          "pixel_hash": "820ad602",
+          "outer_radius": "1.498",
+          "outer_difference": "0.343",
+          "inner_radius": "0.000",
+          "offset_label": "12.0",
+          "state_disabled": false,
+          "offset_disabled": true,
+          "target_disabled": false,
+          "visible_mode_buttons": 1,
+          "first_moving_vertices": [
+            [
+              -0.01794013818559806,
+              0.004000002614112284,
+              -0.012121963983944592
+            ],
+            [
+              -0.019999999286252606,
+              0.0030000039570618475,
+              -0.006821964165829357
+            ],
+            [
+              -0.012949746999999508,
+              0.06100000277128167,
+              -0.00977171116582936
+            ],
+            [
+              -0.019999999999999504,
+              0.06100000277128167,
+              -0.00977171116582936
+            ]
+          ],
+          "vertices_finite": true
+        },
+        {
+          "mode": "holding",
+          "state": "open",
+          "side": "left_right",
+          "hole": "screw_lower",
+          "offset_mm": 12,
+          "meshes": 22,
+          "faces": 63790,
+          "gl_error": 0,
+          "workpiece_visible": true,
+          "width": 455,
+          "height": 460,
+          "label": "holding/open/left_right/screw_lower",
+          "filled_pixels": 94164,
+          "pixel_hash": "f0eb385d",
+          "outer_radius": "1.498",
+          "outer_difference": "0.343",
+          "inner_radius": "12.050",
+          "offset_label": "12.0",
+          "state_disabled": false,
+          "offset_disabled": true,
+          "target_disabled": false,
+          "visible_mode_buttons": 1,
+          "first_moving_vertices": [
+            [
+              0.017940138564575193,
+              0.0040000000000000036,
+              -0.012121963983944592
+            ],
+            [
+              0.019999999999999997,
+              0.0030000000000000027,
+              -0.006821964165829357
+            ],
+            [
+              0.012949747000000001,
+              0.061000000000000006,
+              -0.00977171116582936
+            ],
+            [
+              0.016999999999999998,
+              0.061000000000000006,
+              -0.00977171116582936
+            ]
+          ],
+          "vertices_finite": true
+        },
+        {
+          "mode": "holding",
+          "state": "open",
+          "side": "left_right",
+          "hole": "screw_upper",
+          "offset_mm": 12,
+          "meshes": 22,
+          "faces": 63790,
+          "gl_error": 0,
+          "workpiece_visible": true,
+          "width": 455,
+          "height": 460,
+          "label": "holding/open/left_right/screw_upper",
+          "filled_pixels": 94165,
+          "pixel_hash": "777298b4",
+          "outer_radius": "1.498",
+          "outer_difference": "0.343",
+          "inner_radius": "0.000",
+          "offset_label": "12.0",
+          "state_disabled": false,
+          "offset_disabled": true,
+          "target_disabled": false,
+          "visible_mode_buttons": 1,
+          "first_moving_vertices": [
+            [
+              0.017940138564575193,
+              0.0040000000000000036,
+              -0.012121963983944592
+            ],
+            [
+              0.019999999999999997,
+              0.0030000000000000027,
+              -0.006821964165829357
+            ],
+            [
+              0.012949747000000001,
+              0.061000000000000006,
+              -0.00977171116582936
+            ],
+            [
+              0.016999999999999998,
+              0.061000000000000006,
+              -0.00977171116582936
+            ]
+          ],
+          "vertices_finite": true
+        },
+        {
+          "mode": "holding",
+          "state": "clear",
+          "side": "left_left",
+          "hole": "screw_lower",
+          "offset_mm": 12,
+          "meshes": 22,
+          "faces": 63790,
+          "gl_error": 0,
+          "workpiece_visible": true,
+          "width": 455,
+          "height": 460,
+          "label": "holding/clear/left_left/screw_lower",
+          "filled_pixels": 66877,
+          "pixel_hash": "c9c595aa",
+          "outer_radius": "1.498",
+          "outer_difference": "0.343",
+          "inner_radius": "12.050",
+          "offset_label": "12.0",
+          "state_disabled": false,
+          "offset_disabled": true,
+          "target_disabled": false,
+          "visible_mode_buttons": 1,
+          "first_moving_vertices": [
+            [
+              -0.01794013818559806,
+              0.004000002614112284,
+              0.012878036016055402
+            ],
+            [
+              -0.019999999286252606,
+              0.0030000039570618475,
+              0.018178035834170637
+            ],
+            [
+              -0.012949746999999508,
+              0.06100000277128167,
+              0.015228288834170635
+            ],
+            [
+              -0.019999999999999504,
+              0.06100000277128167,
+              0.015228288834170635
+            ]
+          ],
+          "vertices_finite": true
+        },
+        {
+          "mode": "holding",
+          "state": "clear",
+          "side": "left_left",
+          "hole": "screw_upper",
+          "offset_mm": 12,
+          "meshes": 22,
+          "faces": 63790,
+          "gl_error": 0,
+          "workpiece_visible": true,
+          "width": 455,
+          "height": 460,
+          "label": "holding/clear/left_left/screw_upper",
+          "filled_pixels": 66887,
+          "pixel_hash": "f0503606",
+          "outer_radius": "1.498",
+          "outer_difference": "0.343",
+          "inner_radius": "0.000",
+          "offset_label": "12.0",
+          "state_disabled": false,
+          "offset_disabled": true,
+          "target_disabled": false,
+          "visible_mode_buttons": 1,
+          "first_moving_vertices": [
+            [
+              -0.01794013818559806,
+              0.004000002614112284,
+              0.012878036016055402
+            ],
+            [
+              -0.019999999286252606,
+              0.0030000039570618475,
+              0.018178035834170637
+            ],
+            [
+              -0.012949746999999508,
+              0.06100000277128167,
+              0.015228288834170635
+            ],
+            [
+              -0.019999999999999504,
+              0.06100000277128167,
+              0.015228288834170635
+            ]
+          ],
+          "vertices_finite": true
+        },
+        {
+          "mode": "holding",
+          "state": "clear",
+          "side": "left_right",
+          "hole": "screw_lower",
+          "offset_mm": 12,
+          "meshes": 22,
+          "faces": 63790,
+          "gl_error": 0,
+          "workpiece_visible": true,
+          "width": 455,
+          "height": 460,
+          "label": "holding/clear/left_right/screw_lower",
+          "filled_pixels": 66885,
+          "pixel_hash": "86b16618",
+          "outer_radius": "1.498",
+          "outer_difference": "0.343",
+          "inner_radius": "12.050",
+          "offset_label": "12.0",
+          "state_disabled": false,
+          "offset_disabled": true,
+          "target_disabled": false,
+          "visible_mode_buttons": 1,
+          "first_moving_vertices": [
+            [
+              0.017940138564575193,
+              0.0040000000000000036,
+              0.012878036016055402
+            ],
+            [
+              0.019999999999999997,
+              0.0030000000000000027,
+              0.018178035834170637
+            ],
+            [
+              0.012949747000000001,
+              0.061000000000000006,
+              0.015228288834170635
+            ],
+            [
+              0.016999999999999998,
+              0.061000000000000006,
+              0.015228288834170635
+            ]
+          ],
+          "vertices_finite": true
+        },
+        {
+          "mode": "holding",
+          "state": "clear",
+          "side": "left_right",
+          "hole": "screw_upper",
+          "offset_mm": 12,
+          "meshes": 22,
+          "faces": 63790,
+          "gl_error": 0,
+          "workpiece_visible": true,
+          "width": 455,
+          "height": 460,
+          "label": "holding/clear/left_right/screw_upper",
+          "filled_pixels": 66885,
+          "pixel_hash": "84a5c270",
+          "outer_radius": "1.498",
+          "outer_difference": "0.343",
+          "inner_radius": "0.000",
+          "offset_label": "12.0",
+          "state_disabled": false,
+          "offset_disabled": true,
+          "target_disabled": false,
+          "visible_mode_buttons": 1,
+          "first_moving_vertices": [
+            [
+              0.017940138564575193,
+              0.0040000000000000036,
+              0.012878036016055402
+            ],
+            [
+              0.019999999999999997,
+              0.0030000000000000027,
+              0.018178035834170637
+            ],
+            [
+              0.012949747000000001,
+              0.061000000000000006,
+              0.015228288834170635
+            ],
+            [
+              0.016999999999999998,
+              0.061000000000000006,
+              0.015228288834170635
+            ]
+          ],
+          "vertices_finite": true
+        },
+        {
+          "mode": "service",
+          "state": "open",
+          "side": "left_right",
+          "hole": "screw_upper",
+          "offset_mm": 0,
+          "meshes": 8,
+          "faces": 2736,
+          "gl_error": 0,
+          "workpiece_visible": false,
+          "width": 455,
+          "height": 460,
+          "label": "toggle/hardware",
+          "filled_pixels": 15421,
+          "pixel_hash": "77f9a607",
+          "outer_radius": "1.498",
+          "outer_difference": "0.343",
+          "inner_radius": "0.000",
+          "offset_label": "0.0",
+          "state_disabled": true,
+          "offset_disabled": false,
+          "target_disabled": true,
+          "visible_mode_buttons": 1,
+          "first_moving_vertices": [
+            [
+              0.017940138564575193,
+              0.0040000000000000036,
+              -0.012121963983944592
+            ],
+            [
+              0.019999999999999997,
+              0.0030000000000000027,
+              -0.006821964165829357
+            ],
+            [
+              0.012949747000000001,
+              0.061000000000000006,
+              -0.00977171116582936
+            ],
+            [
+              0.016999999999999998,
+              0.061000000000000006,
+              -0.00977171116582936
+            ]
+          ],
+          "vertices_finite": true
+        },
+        {
+          "mode": "service",
+          "state": "open",
+          "side": "left_right",
+          "hole": "screw_upper",
+          "offset_mm": 0,
+          "meshes": 18,
+          "faces": 54244,
+          "gl_error": 0,
+          "workpiece_visible": false,
+          "width": 455,
+          "height": 460,
+          "label": "toggle/target",
+          "filled_pixels": 80463,
+          "pixel_hash": "916d7031",
+          "outer_radius": "1.498",
+          "outer_difference": "0.343",
+          "inner_radius": "0.000",
+          "offset_label": "0.0",
+          "state_disabled": true,
+          "offset_disabled": false,
+          "target_disabled": true,
+          "visible_mode_buttons": 1,
+          "first_moving_vertices": [
+            [
+              0.017940138564575193,
+              0.0040000000000000036,
+              -0.012121963983944592
+            ],
+            [
+              0.019999999999999997,
+              0.0030000000000000027,
+              -0.006821964165829357
+            ],
+            [
+              0.012949747000000001,
+              0.061000000000000006,
+              -0.00977171116582936
+            ],
+            [
+              0.016999999999999998,
+              0.061000000000000006,
+              -0.00977171116582936
+            ]
+          ],
+          "vertices_finite": true
+        },
+        {
+          "mode": "service",
+          "state": "open",
+          "side": "left_right",
+          "hole": "screw_upper",
+          "offset_mm": 0,
+          "meshes": 18,
+          "faces": 54148,
+          "gl_error": 0,
+          "workpiece_visible": false,
+          "width": 455,
+          "height": 460,
+          "label": "toggle/outside",
+          "filled_pixels": 79534,
+          "pixel_hash": "2d38cb2e",
+          "outer_radius": "1.498",
+          "outer_difference": "0.343",
+          "inner_radius": "0.000",
+          "offset_label": "0.0",
+          "state_disabled": true,
+          "offset_disabled": false,
+          "target_disabled": true,
+          "visible_mode_buttons": 1,
+          "first_moving_vertices": [
+            [
+              0.017940138564575193,
+              0.0040000000000000036,
+              -0.012121963983944592
+            ],
+            [
+              0.019999999999999997,
+              0.0030000000000000027,
+              -0.006821964165829357
+            ],
+            [
+              0.012949747000000001,
+              0.061000000000000006,
+              -0.00977171116582936
+            ],
+            [
+              0.016999999999999998,
+              0.061000000000000006,
+              -0.00977171116582936
+            ]
+          ],
+          "vertices_finite": true
+        },
+        {
+          "mode": "service",
+          "state": "open",
+          "side": "left_right",
+          "hole": "screw_upper",
+          "offset_mm": 0,
+          "meshes": 18,
+          "faces": 54340,
+          "gl_error": 0,
+          "workpiece_visible": false,
+          "width": 455,
+          "height": 460,
+          "label": "toggle/inside",
+          "filled_pixels": 80984,
+          "pixel_hash": "889d4e6e",
+          "outer_radius": "1.498",
+          "outer_difference": "0.343",
+          "inner_radius": "0.000",
+          "offset_label": "0.0",
+          "state_disabled": true,
+          "offset_disabled": false,
+          "target_disabled": true,
+          "visible_mode_buttons": 1,
+          "first_moving_vertices": [
+            [
+              0.017940138564575193,
+              0.0040000000000000036,
+              -0.012121963983944592
+            ],
+            [
+              0.019999999999999997,
+              0.0030000000000000027,
+              -0.006821964165829357
+            ],
+            [
+              0.012949747000000001,
+              0.061000000000000006,
+              -0.00977171116582936
+            ],
+            [
+              0.016999999999999998,
+              0.061000000000000006,
+              -0.00977171116582936
+            ]
+          ],
+          "vertices_finite": true
+        },
+        {
+          "mode": "service",
+          "state": "open",
+          "side": "left_right",
+          "hole": "screw_upper",
+          "offset_mm": 0,
+          "meshes": 18,
+          "faces": 54244,
+          "gl_error": 0,
+          "workpiece_visible": false,
+          "width": 455,
+          "height": 460,
+          "label": "camera/front",
+          "filled_pixels": 59416,
+          "pixel_hash": "5d330927",
+          "outer_radius": "1.498",
+          "outer_difference": "0.343",
+          "inner_radius": "0.000",
+          "offset_label": "0.0",
+          "state_disabled": true,
+          "offset_disabled": false,
+          "target_disabled": true,
+          "visible_mode_buttons": 1,
+          "first_moving_vertices": [
+            [
+              0.017940138564575193,
+              0.0040000000000000036,
+              -0.012121963983944592
+            ],
+            [
+              0.019999999999999997,
+              0.0030000000000000027,
+              -0.006821964165829357
+            ],
+            [
+              0.012949747000000001,
+              0.061000000000000006,
+              -0.00977171116582936
+            ],
+            [
+              0.016999999999999998,
+              0.061000000000000006,
+              -0.00977171116582936
+            ]
+          ],
+          "vertices_finite": true
+        },
+        {
+          "mode": "service",
+          "state": "open",
+          "side": "left_right",
+          "hole": "screw_upper",
+          "offset_mm": 0,
+          "meshes": 18,
+          "faces": 54244,
+          "gl_error": 0,
+          "workpiece_visible": false,
+          "width": 455,
+          "height": 460,
+          "label": "camera/top",
+          "filled_pixels": 66477,
+          "pixel_hash": "125339dc",
+          "outer_radius": "1.498",
+          "outer_difference": "0.343",
+          "inner_radius": "0.000",
+          "offset_label": "0.0",
+          "state_disabled": true,
+          "offset_disabled": false,
+          "target_disabled": true,
+          "visible_mode_buttons": 1,
+          "first_moving_vertices": [
+            [
+              0.017940138564575193,
+              0.0040000000000000036,
+              -0.012121963983944592
+            ],
+            [
+              0.019999999999999997,
+              0.0030000000000000027,
+              -0.006821964165829357
+            ],
+            [
+              0.012949747000000001,
+              0.061000000000000006,
+              -0.00977171116582936
+            ],
+            [
+              0.016999999999999998,
+              0.061000000000000006,
+              -0.00977171116582936
+            ]
+          ],
+          "vertices_finite": true
+        },
+        {
+          "mode": "service",
+          "state": "open",
+          "side": "left_right",
+          "hole": "screw_upper",
+          "offset_mm": 0,
+          "meshes": 18,
+          "faces": 54244,
+          "gl_error": 0,
+          "workpiece_visible": false,
+          "width": 455,
+          "height": 460,
+          "label": "camera/oblique",
+          "filled_pixels": 80463,
+          "pixel_hash": "916d7031",
+          "outer_radius": "1.498",
+          "outer_difference": "0.343",
+          "inner_radius": "0.000",
+          "offset_label": "0.0",
+          "state_disabled": true,
+          "offset_disabled": false,
+          "target_disabled": true,
+          "visible_mode_buttons": 1,
+          "first_moving_vertices": [
+            [
+              0.017940138564575193,
+              0.0040000000000000036,
+              -0.012121963983944592
+            ],
+            [
+              0.019999999999999997,
+              0.0030000000000000027,
+              -0.006821964165829357
+            ],
+            [
+              0.012949747000000001,
+              0.061000000000000006,
+              -0.00977171116582936
+            ],
+            [
+              0.016999999999999998,
+              0.061000000000000006,
+              -0.00977171116582936
+            ]
+          ],
+          "vertices_finite": true
+        },
+        {
+          "mode": "service",
+          "state": "open",
+          "side": "left_right",
+          "hole": "screw_upper",
+          "offset_mm": 0,
+          "meshes": 18,
+          "faces": 54244,
+          "gl_error": 0,
+          "workpiece_visible": false,
+          "width": 455,
+          "height": 460,
+          "label": "mount",
+          "filled_pixels": 105131,
+          "pixel_hash": "c490541c",
+          "outer_radius": "1.498",
+          "outer_difference": "0.343",
+          "inner_radius": "0.000",
+          "offset_label": "0.0",
+          "state_disabled": true,
+          "offset_disabled": false,
+          "target_disabled": true,
+          "visible_mode_buttons": 1,
+          "first_moving_vertices": [
+            [
+              0.017940138564575193,
+              0.0040000000000000036,
+              -0.012121963983944592
+            ],
+            [
+              0.019999999999999997,
+              0.0030000000000000027,
+              -0.006821964165829357
+            ],
+            [
+              0.012949747000000001,
+              0.061000000000000006,
+              -0.00977171116582936
+            ],
+            [
+              0.016999999999999998,
+              0.061000000000000006,
+              -0.00977171116582936
+            ]
+          ],
+          "vertices_finite": true
+        },
+        {
+          "mode": "service",
+          "state": "open",
+          "side": "left_right",
+          "hole": "screw_upper",
+          "offset_mm": 0,
+          "meshes": 18,
+          "faces": 54244,
+          "gl_error": 0,
+          "workpiece_visible": false,
+          "width": 455,
+          "height": 460,
+          "label": "whole",
+          "filled_pixels": 45813,
+          "pixel_hash": "25afe762",
+          "outer_radius": "1.498",
+          "outer_difference": "0.343",
+          "inner_radius": "0.000",
+          "offset_label": "0.0",
+          "state_disabled": true,
+          "offset_disabled": false,
+          "target_disabled": true,
+          "visible_mode_buttons": 1,
+          "first_moving_vertices": [
+            [
+              0.017940138564575193,
+              0.0040000000000000036,
+              -0.012121963983944592
+            ],
+            [
+              0.019999999999999997,
+              0.0030000000000000027,
+              -0.006821964165829357
+            ],
+            [
+              0.012949747000000001,
+              0.061000000000000006,
+              -0.00977171116582936
+            ],
+            [
+              0.016999999999999998,
+              0.061000000000000006,
+              -0.00977171116582936
+            ]
+          ],
+          "vertices_finite": true
+        },
+        {
+          "mode": "service",
+          "state": "open",
+          "side": "left_right",
+          "hole": "screw_upper",
+          "offset_mm": 0,
+          "meshes": 18,
+          "faces": 54244,
+          "gl_error": 0,
+          "workpiece_visible": false,
+          "width": 455,
+          "height": 460,
+          "label": "reset",
+          "filled_pixels": 80463,
+          "pixel_hash": "916d7031",
+          "outer_radius": "1.498",
+          "outer_difference": "0.343",
+          "inner_radius": "0.000",
+          "offset_label": "0.0",
+          "state_disabled": true,
+          "offset_disabled": false,
+          "target_disabled": true,
+          "visible_mode_buttons": 1,
+          "first_moving_vertices": [
+            [
+              0.017940138564575193,
+              0.0040000000000000036,
+              -0.012121963983944592
+            ],
+            [
+              0.019999999999999997,
+              0.0030000000000000027,
+              -0.006821964165829357
+            ],
+            [
+              0.012949747000000001,
+              0.061000000000000006,
+              -0.00977171116582936
+            ],
+            [
+              0.016999999999999998,
+              0.061000000000000006,
+              -0.00977171116582936
+            ]
+          ],
+          "vertices_finite": true
+        }
+      ],
+      "failure": null,
+      "viewport": 500,
+      "scroll_width": 485
+    }
+  },
+  "local_paths_exist": [
+    "hand_pad_service_v01.blend",
+    "根元パッドの交換と取付_v01.md",
+    "hand_pad_service_observations_v01.json",
+    "hand_pad_service_native_v01.json"
+  ],
+  "physical_acceptance_verdict": null
+}

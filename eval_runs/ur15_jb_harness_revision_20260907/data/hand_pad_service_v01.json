@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "source_mesh_sha256": "cd057bf97a032f14ac331b2efa650f449d488837dfaabcbfb0b897b6b5668d56",
+  "source_candidate": "D40",
+  "mount_settings_sha256": "9602827719a5dc4ea4e2f948f5ebf95778531f99860b13f8b7f09becd31dd7dd",
+  "setback_m": 0.040,
+  "tool_axial_bands_from_mount_face_m": {"outside": [-0.050, 0.0], "inside": [0.004, 0.054]},
+  "tool_comparison": {
+    "hex_across_flats_m": 0.002,
+    "basis": "2018 manual p150 specifies a 2 mm hex key for standard fingertip replacement",
+    "length_is_illustrative": true,
+    "complete_tool_selected": false,
+    "screw_heads_and_index_pin_modelled": false
+  },
+  "service": {
+    "base_state": "open",
+    "one_side_at_a_time": true,
+    "remove_reference_workpiece": true,
+    "offsets_m": [0.0, 0.0005, 0.001, 0.0015, 0.002, 0.0025, 0.003, 0.0035, 0.004, 0.0045, 0.005, 0.0055, 0.006, 0.0065, 0.007, 0.0075, 0.008, 0.0085, 0.009, 0.0095, 0.01, 0.0105, 0.011, 0.0115, 0.012],
+    "offsets_are_diagnostic_not_required_pin_travel": true,
+    "replacement_unit_first_comparison": "Carrier, terminal contour, root backing and root pad on one finger",
+    "pad_to_support_joint": null,
+    "custom_screw_length_m": null,
+    "thread_engagement_m": null,
+    "index_pin_length_m": null,
+    "selected_pad_material": null
+  },
+  "official_reference": {
+    "url": "https://assets.robotiq.com/website-assets/support_archives/document_en/2F-85_2F-140_Instruction_Manual_PDF_20181130.pdf",
+    "sha256": "4a059283f11b12d458b084aab3e0c9238ac2cd61b42cd630551d4fc10a6d4ad3",
+    "pages": [25, 131, 150],
+    "scope": "Source-matched holder and standard fingertip replacement; not a certification of the custom extension"
+  },
+  "grip_force_n": null,
+  "arm_motion_created": false,
+  "physical_acceptance_verdict": null
+}

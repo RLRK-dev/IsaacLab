@@ -297,3 +297,12 @@ recorded checks; no horizontal overflow. OS save-dialog behavior was not tested.
 Source audit SHA 680aab23... and all packaging inputs were preserved. No scene,
 force-control implementation, arm trajectory or video was changed. Formal
 physical acceptance remains outside this auxiliary study.
+
+## 2026-09-14 — D40根元パッドの交換と取付アクセス v01
+
+- ユーザーの続行okを受け、元のD40を使い、片側の延長指先一式を元の2ねじで交換する構成を先に比較。元の22メッシュと4保存姿勢を維持し、指先一式の分解図2つを新規nativeへ追加。根元単体カセット、接合材、ねじ長さ、力を選定していない。
+- Robotiq2018年版p25/131/150と同一保存PDFのSHAを照合。外側ねじ軸50 mm帯に根元部は全16軸で現れず、内側で穴位置に重なることだけを理由にパッド先外しを要求しない。2 mm六角外接半径との差は約0.343491 mmだが、公差・全工具クリアランス・受入値に採用しない。
+- 片側の4部品を開放姿勢で内側へ0〜12 mm、0.5 mm間隔で移す保守分解の計算用標本。各25標本×56組、計2,800組。各側10標本で同じ側のキャリア/元末節の面交差が残る。位置調査は取付上端付近を示す。既存の面交差を除外せず、連続的に取り外せるとは判定しない。
+- 初回Blenderはscene行列を再代入して復元する経路でassert停止、保存前にexit 1。no-opの行列再代入でも最大成分差1.1920928244535389e-7を再現。修正はworld頂点の計算用コピーにだけ変位を与え、sceneを一切動かさない方式。閾値・形状は不変、全標本を再計算。失敗ログを保持。
+- 最終native6シーン各22メッシュでworld行列、頂点/面SHA、個数、表示フラグの保存読戻し一致。PC/mobile各32操作で表示と元計測値・分解方向・非表示ワーク・有限座標・リンクを確認、画面を目視点検。Ruff check/format通過。全pre-commitはこの後stage前後で実行し、配布記録に結果を残す。
+- 確認書、3Dページ、native、全計測/生成ログと再生成コードを新規Downloadsへ配布する。元のv06、D40入力、腕軌道、動画、物理RLは未変更。正式物理判定は行わない。

@@ -1,0 +1,112 @@
+<!doctype html>
+<!-- Copyright (c) 2022-2026, The Isaac Lab Project Developers (https://github.com/isaac-sim/IsaacLab/blob/main/CONTRIBUTORS.md).
+All rights reserved. SPDX-License-Identifier: BSD-3-Clause -->
+<html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>THREAD｜根元パッドの交換と取付 v01</title><style>
+*{box-sizing:border-box}body{margin:0;background:#edf3f7;color:#193a4f;font:15px/1.8 system-ui,"Noto Sans JP",sans-serif}main{max-width:1380px;margin:auto;padding:28px 24px 50px}h1{font-size:30px;line-height:1.5;margin:7px 0 12px}h2{font-size:19px;margin:0 0 10px}h3{font-size:16px;margin:16px 0 6px}p{margin:9px 0}a{color:#176c98}.eyebrow{font-size:12px;color:#227da4;letter-spacing:.13em;font-weight:750}.intro{max-width:1100px;color:#4a6577}.layout{display:grid;grid-template-columns:minmax(0,1fr) 335px;gap:18px;margin-top:23px}.view,.panel,.note{border:1px solid #cadbe5;border-radius:9px;background:white;min-width:0}.view{overflow:hidden}.toolbar{display:flex;flex-wrap:wrap;gap:8px;padding:12px 15px;border-bottom:1px solid #dce6ed}button,select{font:inherit;padding:6px 10px;background:white;color:#245b76;border:1px solid #bfd2df;border-radius:5px;max-width:100%;cursor:pointer}button.selected{background:#196c97;color:white}canvas{display:block;width:100%;height:610px;touch-action:none;cursor:grab;background:linear-gradient(#f9fcfe,#e6eef3)}.caption,.small{font-size:12px;color:#5a7487}.caption{padding:10px 16px;background:#f7fafc}.panel{padding:18px}.panel label{display:block;margin:10px 0}.panel input[type=range]{width:100%}.number{font-size:27px;font-weight:700;color:#17759a;line-height:1.5}.metric{border-top:1px solid #e0e8ee;padding:9px 0}.badge{display:inline-block;font-size:12px;background:#e6f3f6;padding:3px 8px;color:#176f7c;border-radius:4px}.note{padding:21px;margin-top:18px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:25px}.links,.legend{display:flex;flex-wrap:wrap;gap:15px;margin:14px 0}.legend{font-size:12px}.dot{display:inline-block;width:11px;height:11px;margin-right:5px;border-radius:2px}.table-wrap{overflow-x:auto}table{border-collapse:collapse;width:100%;font-size:13px}th,td{text-align:left;padding:10px 12px;border-bottom:1px solid #dce7ef}th{background:#f4f8fb;white-space:nowrap}.scope{border-left:3px solid #dba955;padding-left:12px}.sequence{display:flex;gap:12px;flex-wrap:wrap}.step{flex:1;min-width:180px;background:#f2f7fa;border-radius:6px;padding:15px}.step b{display:block;color:#1a6f97}.code{font:12px/1.7 monospace;overflow-wrap:anywhere}button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid #efae49;outline-offset:2px}@media(max-width:850px){.layout,.grid{grid-template-columns:1fr}main{padding:22px 14px}h1{font-size:24px}canvas{height:460px}.panel{padding:16px}}
+</style></head><body><main>
+<div class="eyebrow">THREAD / D40 PAD SERVICE / COMPARISON 01</div>
+<h1>根元の保持を残し、指先一式を交換する案。</h1>
+<p class="intro">元の2本ねじを使い、青い延長部・端子側輪郭・根元支持部・パッドを片側ずつ取り外す構成を先に比較します。<b>40 mm後退と接触形状は維持</b>。下の分解表示は、取付ねじと位置決めピンを外した状態を想定した図です。</p>
+<div class="layout"><div class="view"><div class="toolbar">
+<button data-mode="service" class="selected">交換する位置</button><button data-mode="holding">元の保持形状</button>
+<select id="state" aria-label="保存姿勢"><option value="near">近接</option><option value="early">開き始め</option><option value="open" selected>開放</option><option value="clear">離隔</option></select>
+</div><div style="position:relative"><canvas id="view" aria-label="取付ねじの外側アクセスと延長指先の片側分解表示"></canvas><div id="view-label" class="small" style="position:absolute;top:12px;left:17px;pointer-events:none"></div>
+<div style="position:absolute;bottom:18px;left:17px;font-size:12px;color:#5a7487;pointer-events:none">10 mm<div id="scale-bar" style="border-top:2px solid #6e8898;margin-top:4px"></div></div></div>
+<div class="toolbar"><button data-camera="oblique">斜め</button><button data-camera="front">正面</button><button data-camera="top">上面</button><button id="mount">根元を拡大</button><button id="whole">全体</button><button id="reset">リセット</button></div>
+<p id="view-error" class="caption" hidden>3D表示を開始できません。確認記録とBlenderファイルを参照してください。</p>
+<div class="caption">ドラッグで回転・ホイールで拡大。交換表示ではワークを取り除き、元の開放姿勢で片側の指先だけを動かします。実機の取外し経路やピン抜き量を決定した図ではありません。</div>
+</div><aside class="panel"><span class="badge">最初に比較する交換単位：指先一式</span>
+<label>取り外す側 <select id="side"><option value="left_right" selected>＋X側</option><option value="left_left">−X側</option></select></label>
+<label>分解図の移動量 <b id="offset-value">0.0</b> mm<input id="offset" type="range" min="0" max="12" step="0.5" value="0" aria-label="分解図の移動量"></label>
+<p class="small">0〜12 mmは隙間を観察する表示範囲です。位置決めピンの必要抜き量ではありません。</p><p id="sample-status" class="small scope"></p>
+<label>表示するねじ軸 <select id="hole"><option value="screw_upper">根元パッドの高さのねじ</option><option value="screw_lower">上側のねじ</option></select></label>
+<label><input type="checkbox" id="outside" checked> 外側からの軸を表示</label><label><input type="checkbox" id="inside"> 内側方向との比較を表示</label>
+<label><input type="checkbox" id="hardware" checked> 黒い本体・元のリンク</label><label><input type="checkbox" id="target"> 参考ワーク（保持形状のみ）</label>
+<div class="metric"><div class="small">外側帯：軸からハンド表面まで</div><span class="number" id="outer-radius"></span> mm</div>
+<div class="metric"><div class="small">外側帯：2 mm六角軸の外接半径との差</div><span class="number" id="outer-difference"></span> mm</div>
+<div class="metric"><div class="small">内側帯：軸から根元部の表面まで</div><span class="number" id="inner-radius"></span> mm</div>
+<p class="small">取付済みの元形状の測定値。分解スライダーや表示切替では変わりません。50 mm帯は比較用で、工具の柄、ねじ頭、ピンは含めていません。</p><div id="pose" class="code"></div>
+</aside></div>
+<div class="legend"><span><i class="dot" style="background:#3b8ec0"></i>青：延長部と根元支持部</span><span><i class="dot" style="background:#1e9189"></i>青緑：被覆用パッド</span><span><i class="dot" style="background:#21aac8"></i>水色：外側からの工具軸</span><span><i class="dot" style="background:#d89332"></i>橙：内側方向の比較軸</span></div>
+<section class="note"><h2>ねじを締める方向と、パッドのある側を分ける</h2><div class="grid"><div>
+<svg viewBox="0 0 580 300" style="width:100%;height:auto" role="img" aria-label="外側からねじを入れ、内側で被覆を保持する関係図">
+<rect x="70" y="50" width="110" height="205" rx="8" fill="#435364"/><rect x="180" y="50" width="43" height="205" fill="#3b8ec0"/>
+<path d="M223 149H269V230H223Z" fill="#3b8ec0"/><path d="M269 149H304Q335 190 304 230H269Z" fill="#1e9189"/>
+<circle cx="380" cy="190" r="79" fill="#ef7c2b"/>
+<path d="M32 190H185" stroke="#21aac8" stroke-width="6"/><path d="M173 182L185 190L173 198" stroke="#21aac8" fill="none" stroke-width="4"/>
+<path d="M120 182H180V198H120Z" fill="#e0e7eb"/>
+<text x="100" y="29" text-anchor="middle" font-size="15">黒い元末節</text><text x="248" y="29" text-anchor="middle" font-size="15">青い取付部</text>
+<text x="380" y="195" text-anchor="middle" font-size="17" fill="white">ケーブル被覆</text><text x="107" y="278" text-anchor="middle" font-size="14" fill="#147c98">外側の工具アクセス</text><text x="368" y="278" text-anchor="middle" font-size="14">内側に根元パッド</text>
+</svg><p class="small">関係を示す模式図。ねじ・穴・柄の寸法を確定した断面図ではありません。</p></div><div>
+<p><b>元のねじは、末節の外側から挿入する構造です。</b>根元パッドが内側の穴位置に重なっていることだけでは、外側の工具アクセスが塞がるとはいえません。</p>
+<p>4保存姿勢・左右2本ずつのねじ軸を測りました。外側帯では根元4部品の面が帯内に現れません。内側帯では、根元パッドの高さのねじ軸が根元部の面と交わります。</p>
+<p>したがって、元の取付ねじへ触るためにパッドを必ず先に外す、という順序は課しません。比較するのは<b>外側から元ねじを外して片側の指先一式を交換する構成</b>です。</p>
+<p class="small">Robotiqの2018年版取付面と標準交換手順を参照しました。特注指先のねじ長さ、ねじ山のかかり量、パッドの接合方法は未決定です。</p></div></div></section>
+<section class="note"><h2>二つの交換方法を比較</h2><div class="table-wrap"><table><thead><tr><th>交換単位</th><th>今回の位置づけ</th><th>残る設計</th></tr></thead><tbody>
+<tr><td>片側の延長指先一式</td><td>まず比較。元の2ねじ＋位置決めを使い、パッドの付いた指先を丸ごと交換</td><td>パッド接合、青い支持部の一体化、ねじかかり量、交換後の位置再現性</td></tr>
+<tr><td>根元パッドだけ／小型カセット</td><td>交換頻度・部品費の理由がある場合に比較。着脱機構は今回追加しない</td><td>脱落防止、工具アクセス、位置基準。厚さ3 mmの支持部に自動的に収まるとはしない</td></tr>
+</tbody></table></div><p>一式交換でも、実物では各部が荷重を伝えられる接合が必要です。現在の表示上の接触・重なりを、接着や締結の完了とみなしません。材料・接着剤・追加ねじは選定していません。</p></section>
+<section class="note"><h2>分解の標本で残った取付部の課題</h2><p>片側ごとに25位置、各56組の表面を比較しました。−X側は0〜4.5 mmの10標本、＋X側は0〜4.0 mmと5.0 mmの10標本で、<b>青いキャリアと同じ側の黒い末節</b>の面交差が検出されています。</p><p>位置を調べると、1〜4 mmの標本では取付部の上端付近でした。組立時の接触に加え、取外し方向と端部の逃げを詰める必要があります。5.5〜12 mmの標本で検出がないことを、連続的に通り抜けられる根拠にはしません。</p><p class="small">元の取付面の表面交差やゼロ面積面は残しています。検出は三角形表面の交差で、符号付き侵入深さや固体の包含を測った結果ではありません。分解表示から、ねじ・ピンを含めた実機の交換成立を認定しません。</p></section>
+<section class="note"><h2>交換の組立順序案</h2><div class="sequence"><div class="step"><b>1｜ワークを外す</b>保守状態で元の開放位置へ。実作業の電源遮断等はメーカー手順に従う。</div><div class="step"><b>2｜外側の2ねじを外す</b>片側ずつ、元の穴位置に沿って作業する。</div><div class="step"><b>3｜指先一式を取り外す</b>位置決めピンとのかみ合いを解く。取付端部の逃げと実際の抜き量は次の設計項目。</div><div class="step"><b>4｜交換後に位置を確認</b>締結・接合の詳細を決め、前方と根元の接触開始位置を再確認する。</div></div></section>
+<section class="note"><h2>元の開閉姿勢で根元パッドはどう離れるか</h2><div class="table-wrap"><table><thead><tr><th>保存姿勢</th><th>パッド中央同士</th><th>φ14参考径との差</th></tr></thead><tbody><tr><td>近接</td><td>14.000 mm</td><td>0.000 mm</td></tr><tr><td>開き始め</td><td>14.807 mm</td><td>0.807 mm</td></tr><tr><td>開放</td><td>30.000 mm</td><td>16.000 mm</td></tr><tr><td>離隔（開放から上方25 mm）</td><td>30.000 mm</td><td>16.000 mm</td></tr></tbody></table></div>
+<p class="small">前回v03の保存点の計測。全表面の最小隙間ではありません。今回は開放姿勢での指先の保守分解を0.5 mm間隔で観察します。負荷下の連続開閉、ケーブルの変形・粘着、アームの退避軌道は扱いません。</p></section>
+<section class="note"><h2>確認用ファイル</h2><div class="links"><a href="hand_pad_service_v01.blend">保持4姿勢と分解2図のBlender</a><a href="根元パッドの交換と取付_v01.md">確認記録</a><a href="hand_pad_service_observations_v01.json">工具軸の計測JSON</a><a href="hand_pad_service_native_v01.json">分解の標本と保存読戻し</a><a href="https://assets.robotiq.com/website-assets/support_archives/document_en/2F-85_2F-140_Instruction_Manual_PDF_20181130.pdf#page=150">Robotiq標準指先の交換手順</a></div>
+<p class="scope small">形状を変えずに交換の単位とアクセスを比較する資料です。Klauke 6R6圧着前形状とφ14線は参考物。実Ampere部品、材質、硬さ、把持力、締結と剛性は未確定です。静的形状の補助観測であり、物理成立の判定ではありません。腕軌道・動画の制作は停止中です。</p></section>
+</main><script type="application/json" id="model-data">__MESH_PAYLOAD__</script><script type="application/json" id="observation-data">__OBSERVATION_PAYLOAD__</script><script type="application/json" id="native-data">__NATIVE_PAYLOAD__</script>
+<script>
+"use strict";
+const payload=JSON.parse(document.getElementById("model-data").textContent), observations=JSON.parse(document.getElementById("observation-data").textContent);
+const nativeReport=JSON.parse(document.getElementById("native-data").textContent);
+const candidate=payload.candidates.D40,canvas=document.getElementById("view"),$=id=>document.getElementById(id);
+const gl=canvas.getContext("webgl",{alpha:true,antialias:true,preserveDrawingBuffer:true});
+if(!gl){$("view-error").hidden=false;throw new Error("WebGL unavailable");}
+let mode="service",yaw=-.55,pitch=.48,zoom=1.65,focus=[0,.058,.012],drag=null,pending=false;
+const sub=(a,b)=>a.map((x,i)=>x-b[i]),dot=(a,b)=>a.reduce((s,x,i)=>s+x*b[i],0),cross=(a,b)=>[a[1]*b[2]-a[2]*b[1],a[2]*b[0]-a[0]*b[2],a[0]*b[1]-a[1]*b[0]];
+const unit=v=>{const n=Math.hypot(...v);return v.map(x=>x/(n||1));},light=unit([-.5,-.7,1]);
+function compile(type,source){const shader=gl.createShader(type);gl.shaderSource(shader,source);gl.compileShader(shader);if(!gl.getShaderParameter(shader,gl.COMPILE_STATUS))throw new Error(gl.getShaderInfoLog(shader));return shader;}
+const program=gl.createProgram();
+gl.attachShader(program,compile(gl.VERTEX_SHADER,"attribute vec3 a_position;attribute vec4 a_color;varying vec4 v_color;void main(){gl_Position=vec4(a_position,1.0);v_color=a_color;}"));
+gl.attachShader(program,compile(gl.FRAGMENT_SHADER,"precision mediump float;varying vec4 v_color;void main(){gl_FragColor=v_color;}"));
+gl.linkProgram(program);if(!gl.getProgramParameter(program,gl.LINK_STATUS))throw new Error(gl.getProgramInfoLog(program));gl.useProgram(program);
+const vertexBuffer=gl.createBuffer(),positionLocation=gl.getAttribLocation(program,"a_position"),colorLocation=gl.getAttribLocation(program,"a_color");
+gl.bindBuffer(gl.ARRAY_BUFFER,vertexBuffer);gl.enableVertexAttribArray(positionLocation);gl.enableVertexAttribArray(colorLocation);gl.vertexAttribPointer(positionLocation,3,gl.FLOAT,false,28,0);gl.vertexAttribPointer(colorLocation,4,gl.FLOAT,false,28,12);gl.enable(gl.DEPTH_TEST);gl.depthFunc(gl.LEQUAL);gl.frontFace(gl.CCW);gl.cullFace(gl.BACK);
+function stateName(){return mode==="service"?"open":$("state").value;}
+function axisRow(){return observations.tool_axes[stateName()][$("side").value][$("hole").value];}
+function transformed(name,obj){const m=candidate.states[stateName()].transforms[name],service=observations.service_definitions[$("side").value];
+ const d=mode==="service"&&service.moving_objects.includes(name)?Number($("offset").value)/1000:0;
+ return obj.vertices.map(v=>m.slice(0,3).map((r,i)=>r[0]*v[0]+r[1]*v[1]+r[2]*v[2]+r[3]+d*service.direction_world[i]));}
+function appendFaces(result,vertices,faces,color){for(const f of faces){const n=unit(cross(sub(vertices[f[1]],vertices[f[0]]),sub(vertices[f[2]],vertices[f[0]]))),shade=.48+.52*Math.max(0,dot(n,light));
+ for(const i of f)result.push(...vertices[i],...color.map((c,j)=>c*(j===3?1:shade)));}}
+function cylinder(start,end,radius,color,result){const axis=unit(sub(end,start)),u=unit(cross(axis,Math.abs(axis[2])<.9?[0,0,1]:[0,1,0])),v=cross(axis,u),vertices=[];
+ for(const p of [start,end])for(let i=0;i<24;i++){const a=2*Math.PI*i/24;vertices.push(p.map((x,j)=>x+radius*(u[j]*Math.cos(a)+v[j]*Math.sin(a))));}
+ const faces=[];for(let i=0;i<24;i++){const j=(i+1)%24;faces.push([i,j,j+24],[i,j+24,i+24],[0,j,i],[24,i+24,j+24]);}appendFaces(result,vertices,faces,color);}
+let geometryKey=null,geometry=null;
+function shapes(){const key=[mode,stateName(),$("side").value,$("offset").value,$("hole").value,...["hardware","target","outside","inside"].map(id=>$(id).checked)].join("/");if(key===geometryKey)return geometry;
+ const solid=[],guides=[];let meshes=0;
+ for(const [name,obj] of Object.entries(candidate.objects)){if(obj.category==="guide")continue;if(obj.category==="hardware"&&!$("hardware").checked)continue;
+  if(obj.category==="target"&&(mode==="service"||!$("target").checked))continue;appendFaces(solid,transformed(name,obj),obj.faces,obj.color.map(c=>c/255));meshes++;}
+ const row=axisRow();for(const direction of ["outside","inside"]){if(!$(direction).checked)continue;
+  const points=row.bands[direction].limits_from_mount_face_m.map(t=>row.origin_world_m.map((x,i)=>x+t*row.outward_normal_world[i]));
+  cylinder(points[0],points[1],observations.hex_circumscribed_radius_m,direction==="outside"?[.10,.71,.85,.78]:[.90,.57,.17,.64],guides);}
+ geometryKey=key;geometry={solid:new Float32Array(solid),guides:new Float32Array(guides),meshes};return geometry;}
+function paint(vertices,right,up,forward,scale,width,height){const p=new Float32Array(vertices);for(let i=0;i<p.length;i+=7){const x=vertices[i]-focus[0],y=vertices[i+1]-focus[1],z=vertices[i+2]-focus[2];p[i]=(x*right[0]+y*right[1]+z*right[2])*2*scale/width;p[i+1]=(x*up[0]+y*up[1]+z*up[2])*2*scale/height;p[i+2]=-(x*forward[0]+y*forward[1]+z*forward[2]);}gl.bufferData(gl.ARRAY_BUFFER,p,gl.DYNAMIC_DRAW);gl.drawArrays(gl.TRIANGLES,0,p.length/7);}
+function draw(){pending=false;const width=canvas.clientWidth,height=canvas.clientHeight,dpr=Math.min(devicePixelRatio||1,1.5),pw=Math.round(width*dpr),ph=Math.round(height*dpr);if(canvas.width!==pw||canvas.height!==ph){canvas.width=pw;canvas.height=ph;}
+ gl.viewport(0,0,pw,ph);gl.clearColor(0,0,0,0);gl.depthMask(true);gl.clear(gl.COLOR_BUFFER_BIT|gl.DEPTH_BUFFER_BIT);
+ const right=[Math.cos(yaw),Math.sin(yaw),0],up=[-Math.sin(yaw)*Math.sin(pitch),Math.cos(yaw)*Math.sin(pitch),Math.cos(pitch)],forward=cross(right,up),scale=Math.min(width/.23,height/.23)*zoom,g=shapes();
+ gl.disable(gl.BLEND);gl.enable(gl.CULL_FACE);paint(g.solid,right,up,forward,scale,width,height);gl.depthMask(false);gl.enable(gl.BLEND);gl.blendFunc(gl.SRC_ALPHA,gl.ONE_MINUS_SRC_ALPHA);gl.cullFace(gl.FRONT);paint(g.guides,right,up,forward,scale,width,height);gl.cullFace(gl.BACK);paint(g.guides,right,up,forward,scale,width,height);gl.depthMask(true);
+ $("view-label").textContent=mode==="service"?`開放姿勢／片側の分解図 ${$("offset").value} mm／ワークなし`:`D40 / ${stateName()} — 元の静止配置`;
+ $("scale-bar").style.width=`${.01*scale}px`;$("pose").textContent=`元の関節角 ${(candidate.states[stateName()].joint_q_rad*180/Math.PI).toFixed(2)}°`;
+ window.reviewRendered={mode,state:stateName(),side:$("side").value,hole:$("hole").value,offset_mm:Number($("offset").value),meshes:g.meshes,faces:(g.solid.length+g.guides.length)/21,gl_error:gl.getError(),workpiece_visible:mode==="holding"&&$("target").checked,width,height};}
+function schedule(){if(!pending){pending=true;requestAnimationFrame(draw);}}
+function mm(value){return value===null?"帯内なし":(value*1000).toFixed(3);}
+function update(){const row=axisRow();$("outer-radius").textContent=mm(row.bands.outside.groups.all_hand.radius_to_surface_m);$("outer-difference").textContent=mm(row.bands.outside.radius_minus_hex_envelope_m);$("inner-radius").textContent=mm(row.bands.inside.groups.root_parts.radius_to_surface_m);$("offset-value").textContent=Number($("offset").value).toFixed(1);$("offset").disabled=mode!=="service";$("state").disabled=mode==="service";$("target").disabled=mode==="service";document.querySelectorAll("[data-mode]").forEach(b=>b.classList.toggle("selected",b.dataset.mode===mode));
+ const samples=nativeReport.one_side_service_extraction_samples[$("side").value].samples,sample=samples[Math.round(Number($("offset").value)*2)],count=sample.surface_overlap_pairs.length;
+ $("sample-status").textContent=mode==="service"?`この分解標本：${sample.object_pairs_considered}組中、面交差の検出${count}組。${count?"青いキャリアと同じ側の黒い末節。":"連続経路全体の判定ではありません。"}`:"保持形状は元の4姿勢。負荷時の連続開閉は未確認です。";schedule();}
+document.querySelectorAll("[data-mode]").forEach(b=>b.addEventListener("click",()=>{mode=b.dataset.mode;update();}));
+for(const id of ["state","side","hole","hardware","target","outside","inside"])$(id).addEventListener("change",update);$("offset").addEventListener("input",update);
+document.querySelectorAll("[data-camera]").forEach(b=>b.addEventListener("click",()=>{[yaw,pitch]=({oblique:[-.55,.48],front:[0,0],top:[0,Math.PI/2]})[b.dataset.camera];schedule();}));
+$("mount").addEventListener("click",()=>{focus=[0,.066,.005];zoom=2.8;schedule();});$("whole").addEventListener("click",()=>{focus=[0,.05,.062];zoom=.95;schedule();});
+$("reset").addEventListener("click",()=>{mode="service";$("state").value="open";$("side").value="left_right";$("offset").value=0;$("hole").value="screw_upper";$("hardware").checked=true;$("target").checked=false;$("outside").checked=true;$("inside").checked=false;yaw=-.55;pitch=.48;zoom=1.65;focus=[0,.058,.012];update();});
+canvas.addEventListener("pointerdown",e=>{drag=[e.clientX,e.clientY];canvas.setPointerCapture(e.pointerId);});canvas.addEventListener("pointermove",e=>{if(!drag)return;yaw+=(e.clientX-drag[0])*.008;pitch=Math.max(-1.5,Math.min(1.57,pitch+(e.clientY-drag[1])*.008));drag=[e.clientX,e.clientY];schedule();});canvas.addEventListener("pointerup",()=>{drag=null;});canvas.addEventListener("pointercancel",()=>{drag=null;});canvas.addEventListener("wheel",e=>{e.preventDefault();zoom=Math.max(.6,Math.min(4,zoom*Math.exp(-e.deltaY*.001)));schedule();},{passive:false});new ResizeObserver(schedule).observe(canvas);update();
+</script></body></html>
