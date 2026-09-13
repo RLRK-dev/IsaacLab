@@ -1,0 +1,31 @@
+{
+  "recorded_at": "2026-09-14T08:29:05.120864+09:00",
+  "scope": "Same source and finite sample method, with four upper carrier corners per side changed only",
+  "source_mesh_sha256": "cd057bf97a032f14ac331b2efa650f449d488837dfaabcbfb0b897b6b5668d56",
+  "source_archive_unchanged": true,
+  "reused_modules": [
+    "build_hand_body_setback_v01.py",
+    "build_hand_fingertip_concepts_v01.py",
+    "build_hand_mount_interface_v02.py",
+    "build_hand_terminal_concepts_v01.py",
+    "probe_hand_tool_access_v01.py",
+    "render_hand_fingertip_concepts_v01.py",
+    "save_hand_body_setback_v01.py",
+    "save_hand_pad_service_v01.py",
+    "save_hand_root_clamp_v03.py"
+  ],
+  "prior_service_reference": "references/hand_pad_service_native_v01.json",
+  "baseline_service_samples_exactly_equal": true,
+  "baseline_static_pairs_equal_after_candidate_scene_prefix_normalization": true,
+  "other_static_pair_groups_equal_after_same_name_normalization": true,
+  "comparison_check_adjustment": "First full static-dict equality asserted on D40 vs R000 scene names only; normalized candidate prefixes, without changing measurements or rerunning Blender.",
+  "official_mount_basis": {
+    "url": "https://assets.robotiq.com/website-assets/support_archives/document_en/2F-85_2F-140_Instruction_Manual_PDF_20181130.pdf",
+    "verified_local_sha256": "4a059283f11b12d458b084aab3e0c9238ac2cd61b42cd630551d4fc10a6d4ad3",
+    "page": 131,
+    "version_scope": "2018 face matching retained holder; comparison relief is custom, unselected"
+  },
+  "arm_motion_created": false,
+  "video_created": false,
+  "physical_acceptance_verdict": null
+}

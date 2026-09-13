@@ -306,3 +306,34 @@ physical acceptance remains outside this auxiliary study.
 - 初回Blenderはscene行列を再代入して復元する経路でassert停止、保存前にexit 1。no-opの行列再代入でも最大成分差1.1920928244535389e-7を再現。修正はworld頂点の計算用コピーにだけ変位を与え、sceneを一切動かさない方式。閾値・形状は不変、全標本を再計算。失敗ログを保持。
 - 最終native6シーン各22メッシュでworld行列、頂点/面SHA、個数、表示フラグの保存読戻し一致。PC/mobile各32操作で表示と元計測値・分解方向・非表示ワーク・有限座標・リンクを確認、画面を目視点検。Ruff check/format通過。全pre-commitはこの後stage前後で実行し、配布記録に結果を残す。
 - 確認書、3Dページ、native、全計測/生成ログと再生成コードを新規Downloadsへ配布する。元のv06、D40入力、腕軌道、動画、物理RLは未変更。正式物理判定は行わない。
+# 2026-09-14 — D40 mounting upper-edge relief comparison
+
+Continued after the user's `ok` on the pad-service comparison. The local source
+measurement identifies four corners at the blue plate's upper boundary. Compared
+0 / 0.25 / 0.5 mm reliefs by shifting only those four corners per side; retained
+the 40 mm setback, source hardware, hole rims, contacts, topology and saved poses.
+The two new reliefs are comparison values and remain unselected.
+
+Reused the mount measurement, GLB exporter, scene builder and finite service
+observer. Each side has 25 samples from 0 to 12 mm by 0.5 mm, with 56 object pairs
+per sample. Baseline positive-offset hits: 9/24 per side; both reliefs: 0/24.
+Zero-offset carrier/holder contacts are retained in all records. All baseline
+positive-offset hit faces are adjacent to the upper corners. This localizes
+surface candidates; it is not a penetration-depth or continuous-path verdict.
+
+The baseline extraction reproduces the previous service audit exactly. The first
+postprocessing equality assertion on static pairs found only the renamed scene
+prefix D40 versus R000 in the root/mount group. Normalizing that prefix preserves
+all measurement values and produces equality; no geometry or sampling changed.
+Other static pair groups are unchanged across reliefs after the same name mapping.
+All three GLBs reload with 22 meshes, and the baseline GLB SHA matches D40. The
+12-scene native reloads identically for matrices, vertices/faces, counts and
+visibility. The HTML compares the two reliefs with the baseline and preserves
+the zero-offset observations. No arm trajectory, video, material, grip-force
+selection or authoritative physical verdict was created.
+
+PC/mobile each exercised 39 operations, including variant/pose changes and
+one-side service offsets. Source dimension correspondence, finite vertices,
+WebGL pixels, local links and layout width were checked. Rebuilding from the
+copied delivery scripts in a fresh directory reproduced all three GLB hashes,
+the payload and measurements; only timestamps and native binary SHA differed.

@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "source_mesh_sha256": "cd057bf97a032f14ac331b2efa650f449d488837dfaabcbfb0b897b6b5668d56",
+  "mount_settings_sha256": "9602827719a5dc4ea4e2f948f5ebf95778531f99860b13f8b7f09becd31dd7dd",
+  "source_candidate": "D40",
+  "setback_m": 0.040,
+  "reliefs_m": {"R000": 0.0, "R025": 0.00025, "R050": 0.0005},
+  "modified_feature": "Four corners of the blue plate's upper edge, moved along the fitted mounting face v axis",
+  "source_upper_edge_v_m": -0.0145,
+  "source_feature_identity_tolerance_m": 0.00000001,
+  "dimension_status": "Comparison values only; neither a manufacturing selection nor an acceptance threshold",
+  "preserve": ["original hardware", "hole-rim vertices", "all faces", "all other vertices", "colors", "four saved poses", "terminal and root contact meshes"],
+  "service_source": "hand_pad_service_v01.json",
+  "sample_method": "Reuse previous 0-12 mm by 0.5 mm sample offsets, including zero; translate derived world vertices only",
+  "selected_relief_m": null,
+  "manufacturing_tolerance_m": null,
+  "material": null,
+  "physical_acceptance_verdict": null,
+  "arm_motion_created": false,
+  "video_created": false
+}

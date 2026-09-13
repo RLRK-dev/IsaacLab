@@ -1,0 +1,17 @@
+{
+  "recorded_at": "2026-09-14T08:33:30.696384+09:00",
+  "scope": "Rebuild in a fresh output directory using the scripts and inputs copied to the delivery package",
+  "payload_identical": true,
+  "all_three_glb_sha_identical": true,
+  "observations_equal_except_timestamp": true,
+  "native_records_equal_except_timestamp_and_blend_binary_sha": true,
+  "original_native_readback_identical": true,
+  "reproduction_native_readback_identical": true,
+  "script_dependencies_copied": true,
+  "html_payload_markers_all_replaced": true,
+  "required_user_readme_copied": true,
+  "native_binary_sha_equality_required": false,
+  "arm_motion_created": false,
+  "video_created": false,
+  "physical_acceptance_verdict": null
+}

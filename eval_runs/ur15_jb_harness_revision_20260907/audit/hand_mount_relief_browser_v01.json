@@ -1,0 +1,3930 @@
+{
+  "recorded_at": "2026-09-14T08:25:52.460828+09:00",
+  "page_sha256": "55c8ca383d740f8b13793f42708a9f182ac28d7421b605ba76e347ec8489fc5d",
+  "scope": "UI comparison, dimensions, finite vertices, WebGL pixels and file links",
+  "reports": {
+    "desktop": {
+      "rows": [
+        {
+          "variant": "R000",
+          "mode": "service",
+          "state": "open",
+          "side": "left_left",
+          "offset_mm": 0,
+          "meshes": 18,
+          "faces": 54148,
+          "gl_error": 0,
+          "workpiece_visible": false,
+          "width": 1032,
+          "height": 560,
+          "label": "service/R000/left_left/0",
+          "filled_pixels": 123525,
+          "pixel_hash": "7c9f2c95",
+          "relief": "0.00",
+          "plate_height": "31.00",
+          "edge_distance": "5.00",
+          "offset_label": "0.0",
+          "state_disabled": true,
+          "offset_disabled": false,
+          "target_disabled": true,
+          "selected_mode_buttons": 1,
+          "first_moving_vertices": [
+            [
+              -0.01794013818559806,
+              0.004000002614112284,
+              -0.012121963983944592
+            ],
+            [
+              -0.019999999286252606,
+              0.0030000039570618475,
+              -0.006821964165829357
+            ],
+            [
+              -0.012949746999999508,
+              0.06100000277128167,
+              -0.00977171116582936
+            ],
+            [
+              -0.019999999999999504,
+              0.06100000277128167,
+              -0.00977171116582936
+            ]
+          ],
+          "vertices_finite": true,
+          "svg_plate_top": 53,
+          "svg_relief_height": 0,
+          "sample_status": "この分解標本：56組中、面交差の検出1組。0 mmの取付状態を含む観測です。"
+        },
+        {
+          "variant": "R000",
+          "mode": "service",
+          "state": "open",
+          "side": "left_left",
+          "offset_mm": 6,
+          "meshes": 18,
+          "faces": 54148,
+          "gl_error": 0,
+          "workpiece_visible": false,
+          "width": 1032,
+          "height": 560,
+          "label": "service/R000/left_left/6",
+          "filled_pixels": 125677,
+          "pixel_hash": "cae68433",
+          "relief": "0.00",
+          "plate_height": "31.00",
+          "edge_distance": "5.00",
+          "offset_label": "6.0",
+          "state_disabled": true,
+          "offset_disabled": false,
+          "target_disabled": true,
+          "selected_mode_buttons": 1,
+          "first_moving_vertices": [
+            [
+              -0.011940138191532893,
+              0.0040000004700285795,
+              -0.012121697125560788
+            ],
+            [
+              -0.01399999929218744,
+              0.0030000018129781427,
+              -0.006821697307445553
+            ],
+            [
+              -0.006949747005934342,
+              0.061000000627197966,
+              -0.009771444307445556
+            ],
+            [
+              -0.014000000005934338,
+              0.061000000627197966,
+              -0.009771444307445556
+            ]
+          ],
+          "vertices_finite": true,
+          "svg_plate_top": 53,
+          "svg_relief_height": 0,
+          "sample_status": "この分解標本：56組中、面交差の検出0組。連続経路全体の判定ではありません。"
+        },
+        {
+          "variant": "R000",
+          "mode": "service",
+          "state": "open",
+          "side": "left_left",
+          "offset_mm": 12,
+          "meshes": 18,
+          "faces": 54148,
+          "gl_error": 0,
+          "workpiece_visible": false,
+          "width": 1032,
+          "height": 560,
+          "label": "service/R000/left_left/12",
+          "filled_pixels": 126972,
+          "pixel_hash": "e0ac3f44",
+          "relief": "0.00",
+          "plate_height": "31.00",
+          "edge_distance": "5.00",
+          "offset_label": "12.0",
+          "state_disabled": true,
+          "offset_disabled": false,
+          "target_disabled": true,
+          "selected_mode_buttons": 1,
+          "first_moving_vertices": [
+            [
+              -0.0059401381974677255,
+              0.003999998325944875,
+              -0.012121430267176984
+            ],
+            [
+              -0.007999999298122272,
+              0.0029999996688944383,
+              -0.0068214304490617494
+            ],
+            [
+              -0.0009497470118691748,
+              0.06099999848311426,
+              -0.009771177449061752
+            ],
+            [
+              -0.00800000001186917,
+              0.06099999848311426,
+              -0.009771177449061752
+            ]
+          ],
+          "vertices_finite": true,
+          "svg_plate_top": 53,
+          "svg_relief_height": 0,
+          "sample_status": "この分解標本：56組中、面交差の検出0組。連続経路全体の判定ではありません。"
+        },
+        {
+          "variant": "R000",
+          "mode": "service",
+          "state": "open",
+          "side": "left_right",
+          "offset_mm": 0,
+          "meshes": 18,
+          "faces": 54148,
+          "gl_error": 0,
+          "workpiece_visible": false,
+          "width": 1032,
+          "height": 560,
+          "label": "service/R000/left_right/0",
+          "filled_pixels": 123525,
+          "pixel_hash": "7c9f2c95",
+          "relief": "0.00",
+          "plate_height": "31.00",
+          "edge_distance": "5.00",
+          "offset_label": "0.0",
+          "state_disabled": true,
+          "offset_disabled": false,
+          "target_disabled": true,
+          "selected_mode_buttons": 1,
+          "first_moving_vertices": [
+            [
+              0.017940138564575193,
+              0.0040000000000000036,
+              -0.012121963983944592
+            ],
+            [
+              0.019999999999999997,
+              0.0030000000000000027,
+              -0.006821964165829357
+            ],
+            [
+              0.012949747000000001,
+              0.061000000000000006,
+              -0.00977171116582936
+            ],
+            [
+              0.016999999999999998,
+              0.061000000000000006,
+              -0.00977171116582936
+            ]
+          ],
+          "vertices_finite": true,
+          "svg_plate_top": 53,
+          "svg_relief_height": 0,
+          "sample_status": "この分解標本：56組中、面交差の検出1組。0 mmの取付状態を含む観測です。"
+        },
+        {
+          "variant": "R000",
+          "mode": "service",
+          "state": "open",
+          "side": "left_right",
+          "offset_mm": 6,
+          "meshes": 18,
+          "faces": 54148,
+          "gl_error": 0,
+          "workpiece_visible": false,
+          "width": 1032,
+          "height": 560,
+          "label": "service/R000/left_right/6",
+          "filled_pixels": 126337,
+          "pixel_hash": "bcbc22db",
+          "relief": "0.00",
+          "plate_height": "31.00",
+          "edge_distance": "5.00",
+          "offset_label": "6.0",
+          "state_disabled": true,
+          "offset_disabled": false,
+          "target_disabled": true,
+          "selected_mode_buttons": 1,
+          "first_moving_vertices": [
+            [
+              0.011940138570509644,
+              0.00400000006562247,
+              -0.012121697125560788
+            ],
+            [
+              0.014000000005934448,
+              0.0030000000656224698,
+              -0.006821697307445553
+            ],
+            [
+              0.006949747005934452,
+              0.06100000006562247,
+              -0.009771444307445556
+            ],
+            [
+              0.011000000005934448,
+              0.06100000006562247,
+              -0.009771444307445556
+            ]
+          ],
+          "vertices_finite": true,
+          "svg_plate_top": 53,
+          "svg_relief_height": 0,
+          "sample_status": "この分解標本：56組中、面交差の検出0組。連続経路全体の判定ではありません。"
+        },
+        {
+          "variant": "R000",
+          "mode": "service",
+          "state": "open",
+          "side": "left_right",
+          "offset_mm": 12,
+          "meshes": 18,
+          "faces": 54148,
+          "gl_error": 0,
+          "workpiece_visible": false,
+          "width": 1032,
+          "height": 560,
+          "label": "service/R000/left_right/12",
+          "filled_pixels": 127915,
+          "pixel_hash": "ee3b169c",
+          "relief": "0.00",
+          "plate_height": "31.00",
+          "edge_distance": "5.00",
+          "offset_label": "12.0",
+          "state_disabled": true,
+          "offset_disabled": false,
+          "target_disabled": true,
+          "selected_mode_buttons": 1,
+          "first_moving_vertices": [
+            [
+              0.005940138576444095,
+              0.004000000131244938,
+              -0.012121430267176984
+            ],
+            [
+              0.008000000011868898,
+              0.003000000131244937,
+              -0.0068214304490617494
+            ],
+            [
+              0.0009497470118689025,
+              0.06100000013124494,
+              -0.009771177449061752
+            ],
+            [
+              0.005000000011868899,
+              0.06100000013124494,
+              -0.009771177449061752
+            ]
+          ],
+          "vertices_finite": true,
+          "svg_plate_top": 53,
+          "svg_relief_height": 0,
+          "sample_status": "この分解標本：56組中、面交差の検出0組。連続経路全体の判定ではありません。"
+        },
+        {
+          "variant": "R025",
+          "mode": "service",
+          "state": "open",
+          "side": "left_left",
+          "offset_mm": 0,
+          "meshes": 18,
+          "faces": 54148,
+          "gl_error": 0,
+          "workpiece_visible": false,
+          "width": 1032,
+          "height": 560,
+          "label": "service/R025/left_left/0",
+          "filled_pixels": 123525,
+          "pixel_hash": "c4e6e1c5",
+          "relief": "0.25",
+          "plate_height": "30.75",
+          "edge_distance": "4.75",
+          "offset_label": "0.0",
+          "state_disabled": true,
+          "offset_disabled": false,
+          "target_disabled": true,
+          "selected_mode_buttons": 1,
+          "first_moving_vertices": [
+            [
+              -0.01794013818559806,
+              0.004000002614112284,
+              -0.012121963983944592
+            ],
+            [
+              -0.019999999286252606,
+              0.0030000039570618475,
+              -0.006821964165829357
+            ],
+            [
+              -0.012949746999999508,
+              0.06100000277128167,
+              -0.00977171116582936
+            ],
+            [
+              -0.019999999999999504,
+              0.06100000277128167,
+              -0.00977171116582936
+            ]
+          ],
+          "vertices_finite": true,
+          "svg_plate_top": 55.75,
+          "svg_relief_height": 2.75,
+          "sample_status": "この分解標本：56組中、面交差の検出1組。0 mmの取付状態を含む観測です。"
+        },
+        {
+          "variant": "R025",
+          "mode": "service",
+          "state": "open",
+          "side": "left_left",
+          "offset_mm": 6,
+          "meshes": 18,
+          "faces": 54148,
+          "gl_error": 0,
+          "workpiece_visible": false,
+          "width": 1032,
+          "height": 560,
+          "label": "service/R025/left_left/6",
+          "filled_pixels": 125671,
+          "pixel_hash": "6a3a86bc",
+          "relief": "0.25",
+          "plate_height": "30.75",
+          "edge_distance": "4.75",
+          "offset_label": "6.0",
+          "state_disabled": true,
+          "offset_disabled": false,
+          "target_disabled": true,
+          "selected_mode_buttons": 1,
+          "first_moving_vertices": [
+            [
+              -0.011940138191532893,
+              0.0040000004700285795,
+              -0.012121697125560788
+            ],
+            [
+              -0.01399999929218744,
+              0.0030000018129781427,
+              -0.006821697307445553
+            ],
+            [
+              -0.006949747005934342,
+              0.061000000627197966,
+              -0.009771444307445556
+            ],
+            [
+              -0.014000000005934338,
+              0.061000000627197966,
+              -0.009771444307445556
+            ]
+          ],
+          "vertices_finite": true,
+          "svg_plate_top": 55.75,
+          "svg_relief_height": 2.75,
+          "sample_status": "この分解標本：56組中、面交差の検出0組。連続経路全体の判定ではありません。"
+        },
+        {
+          "variant": "R025",
+          "mode": "service",
+          "state": "open",
+          "side": "left_left",
+          "offset_mm": 12,
+          "meshes": 18,
+          "faces": 54148,
+          "gl_error": 0,
+          "workpiece_visible": false,
+          "width": 1032,
+          "height": 560,
+          "label": "service/R025/left_left/12",
+          "filled_pixels": 126954,
+          "pixel_hash": "e1725c07",
+          "relief": "0.25",
+          "plate_height": "30.75",
+          "edge_distance": "4.75",
+          "offset_label": "12.0",
+          "state_disabled": true,
+          "offset_disabled": false,
+          "target_disabled": true,
+          "selected_mode_buttons": 1,
+          "first_moving_vertices": [
+            [
+              -0.0059401381974677255,
+              0.003999998325944875,
+              -0.012121430267176984
+            ],
+            [
+              -0.007999999298122272,
+              0.0029999996688944383,
+              -0.0068214304490617494
+            ],
+            [
+              -0.0009497470118691748,
+              0.06099999848311426,
+              -0.009771177449061752
+            ],
+            [
+              -0.00800000001186917,
+              0.06099999848311426,
+              -0.009771177449061752
+            ]
+          ],
+          "vertices_finite": true,
+          "svg_plate_top": 55.75,
+          "svg_relief_height": 2.75,
+          "sample_status": "この分解標本：56組中、面交差の検出0組。連続経路全体の判定ではありません。"
+        },
+        {
+          "variant": "R025",
+          "mode": "service",
+          "state": "open",
+          "side": "left_right",
+          "offset_mm": 0,
+          "meshes": 18,
+          "faces": 54148,
+          "gl_error": 0,
+          "workpiece_visible": false,
+          "width": 1032,
+          "height": 560,
+          "label": "service/R025/left_right/0",
+          "filled_pixels": 123525,
+          "pixel_hash": "c4e6e1c5",
+          "relief": "0.25",
+          "plate_height": "30.75",
+          "edge_distance": "4.75",
+          "offset_label": "0.0",
+          "state_disabled": true,
+          "offset_disabled": false,
+          "target_disabled": true,
+          "selected_mode_buttons": 1,
+          "first_moving_vertices": [
+            [
+              0.017940138564575193,
+              0.0040000000000000036,
+              -0.012121963983944592
+            ],
+            [
+              0.019999999999999997,
+              0.0030000000000000027,
+              -0.006821964165829357
+            ],
+            [
+              0.012949747000000001,
+              0.061000000000000006,
+              -0.00977171116582936
+            ],
+            [
+              0.016999999999999998,
+              0.061000000000000006,
+              -0.00977171116582936
+            ]
+          ],
+          "vertices_finite": true,
+          "svg_plate_top": 55.75,
+          "svg_relief_height": 2.75,
+          "sample_status": "この分解標本：56組中、面交差の検出1組。0 mmの取付状態を含む観測です。"
+        },
+        {
+          "variant": "R025",
+          "mode": "service",
+          "state": "open",
+          "side": "left_right",
+          "offset_mm": 6,
+          "meshes": 18,
+          "faces": 54148,
+          "gl_error": 0,
+          "workpiece_visible": false,
+          "width": 1032,
+          "height": 560,
+          "label": "service/R025/left_right/6",
+          "filled_pixels": 126304,
+          "pixel_hash": "d0e883f8",
+          "relief": "0.25",
+          "plate_height": "30.75",
+          "edge_distance": "4.75",
+          "offset_label": "6.0",
+          "state_disabled": true,
+          "offset_disabled": false,
+          "target_disabled": true,
+          "selected_mode_buttons": 1,
+          "first_moving_vertices": [
+            [
+              0.011940138570509644,
+              0.00400000006562247,
+              -0.012121697125560788
+            ],
+            [
+              0.014000000005934448,
+              0.0030000000656224698,
+              -0.006821697307445553
+            ],
+            [
+              0.006949747005934452,
+              0.06100000006562247,
+              -0.009771444307445556
+            ],
+            [
+              0.011000000005934448,
+              0.06100000006562247,
+              -0.009771444307445556
+            ]
+          ],
+          "vertices_finite": true,
+          "svg_plate_top": 55.75,
+          "svg_relief_height": 2.75,
+          "sample_status": "この分解標本：56組中、面交差の検出0組。連続経路全体の判定ではありません。"
+        },
+        {
+          "variant": "R025",
+          "mode": "service",
+          "state": "open",
+          "side": "left_right",
+          "offset_mm": 12,
+          "meshes": 18,
+          "faces": 54148,
+          "gl_error": 0,
+          "workpiece_visible": false,
+          "width": 1032,
+          "height": 560,
+          "label": "service/R025/left_right/12",
+          "filled_pixels": 127873,
+          "pixel_hash": "5762cf87",
+          "relief": "0.25",
+          "plate_height": "30.75",
+          "edge_distance": "4.75",
+          "offset_label": "12.0",
+          "state_disabled": true,
+          "offset_disabled": false,
+          "target_disabled": true,
+          "selected_mode_buttons": 1,
+          "first_moving_vertices": [
+            [
+              0.005940138576444095,
+              0.004000000131244938,
+              -0.012121430267176984
+            ],
+            [
+              0.008000000011868898,
+              0.003000000131244937,
+              -0.0068214304490617494
+            ],
+            [
+              0.0009497470118689025,
+              0.06100000013124494,
+              -0.009771177449061752
+            ],
+            [
+              0.005000000011868899,
+              0.06100000013124494,
+              -0.009771177449061752
+            ]
+          ],
+          "vertices_finite": true,
+          "svg_plate_top": 55.75,
+          "svg_relief_height": 2.75,
+          "sample_status": "この分解標本：56組中、面交差の検出0組。連続経路全体の判定ではありません。"
+        },
+        {
+          "variant": "R050",
+          "mode": "service",
+          "state": "open",
+          "side": "left_left",
+          "offset_mm": 0,
+          "meshes": 18,
+          "faces": 54148,
+          "gl_error": 0,
+          "workpiece_visible": false,
+          "width": 1032,
+          "height": 560,
+          "label": "service/R050/left_left/0",
+          "filled_pixels": 123525,
+          "pixel_hash": "476802ef",
+          "relief": "0.50",
+          "plate_height": "30.50",
+          "edge_distance": "4.50",
+          "offset_label": "0.0",
+          "state_disabled": true,
+          "offset_disabled": false,
+          "target_disabled": true,
+          "selected_mode_buttons": 1,
+          "first_moving_vertices": [
+            [
+              -0.01794013818559806,
+              0.004000002614112284,
+              -0.012121963983944592
+            ],
+            [
+              -0.019999999286252606,
+              0.0030000039570618475,
+              -0.006821964165829357
+            ],
+            [
+              -0.012949746999999508,
+              0.06100000277128167,
+              -0.00977171116582936
+            ],
+            [
+              -0.019999999999999504,
+              0.06100000277128167,
+              -0.00977171116582936
+            ]
+          ],
+          "vertices_finite": true,
+          "svg_plate_top": 58.5,
+          "svg_relief_height": 5.5,
+          "sample_status": "この分解標本：56組中、面交差の検出1組。0 mmの取付状態を含む観測です。"
+        },
+        {
+          "variant": "R050",
+          "mode": "service",
+          "state": "open",
+          "side": "left_left",
+          "offset_mm": 6,
+          "meshes": 18,
+          "faces": 54148,
+          "gl_error": 0,
+          "workpiece_visible": false,
+          "width": 1032,
+          "height": 560,
+          "label": "service/R050/left_left/6",
+          "filled_pixels": 125666,
+          "pixel_hash": "3b340caf",
+          "relief": "0.50",
+          "plate_height": "30.50",
+          "edge_distance": "4.50",
+          "offset_label": "6.0",
+          "state_disabled": true,
+          "offset_disabled": false,
+          "target_disabled": true,
+          "selected_mode_buttons": 1,
+          "first_moving_vertices": [
+            [
+              -0.011940138191532893,
+              0.0040000004700285795,
+              -0.012121697125560788
+            ],
+            [
+              -0.01399999929218744,
+              0.0030000018129781427,
+              -0.006821697307445553
+            ],
+            [
+              -0.006949747005934342,
+              0.061000000627197966,
+              -0.009771444307445556
+            ],
+            [
+              -0.014000000005934338,
+              0.061000000627197966,
+              -0.009771444307445556
+            ]
+          ],
+          "vertices_finite": true,
+          "svg_plate_top": 58.5,
+          "svg_relief_height": 5.5,
+          "sample_status": "この分解標本：56組中、面交差の検出0組。連続経路全体の判定ではありません。"
+        },
+        {
+          "variant": "R050",
+          "mode": "service",
+          "state": "open",
+          "side": "left_left",
+          "offset_mm": 12,
+          "meshes": 18,
+          "faces": 54148,
+          "gl_error": 0,
+          "workpiece_visible": false,
+          "width": 1032,
+          "height": 560,
+          "label": "service/R050/left_left/12",
+          "filled_pixels": 126931,
+          "pixel_hash": "8c714b07",
+          "relief": "0.50",
+          "plate_height": "30.50",
+          "edge_distance": "4.50",
+          "offset_label": "12.0",
+          "state_disabled": true,
+          "offset_disabled": false,
+          "target_disabled": true,
+          "selected_mode_buttons": 1,
+          "first_moving_vertices": [
+            [
+              -0.0059401381974677255,
+              0.003999998325944875,
+              -0.012121430267176984
+            ],
+            [
+              -0.007999999298122272,
+              0.0029999996688944383,
+              -0.0068214304490617494
+            ],
+            [
+              -0.0009497470118691748,
+              0.06099999848311426,
+              -0.009771177449061752
+            ],
+            [
+              -0.00800000001186917,
+              0.06099999848311426,
+              -0.009771177449061752
+            ]
+          ],
+          "vertices_finite": true,
+          "svg_plate_top": 58.5,
+          "svg_relief_height": 5.5,
+          "sample_status": "この分解標本：56組中、面交差の検出0組。連続経路全体の判定ではありません。"
+        },
+        {
+          "variant": "R050",
+          "mode": "service",
+          "state": "open",
+          "side": "left_right",
+          "offset_mm": 0,
+          "meshes": 18,
+          "faces": 54148,
+          "gl_error": 0,
+          "workpiece_visible": false,
+          "width": 1032,
+          "height": 560,
+          "label": "service/R050/left_right/0",
+          "filled_pixels": 123525,
+          "pixel_hash": "476802ef",
+          "relief": "0.50",
+          "plate_height": "30.50",
+          "edge_distance": "4.50",
+          "offset_label": "0.0",
+          "state_disabled": true,
+          "offset_disabled": false,
+          "target_disabled": true,
+          "selected_mode_buttons": 1,
+          "first_moving_vertices": [
+            [
+              0.017940138564575193,
+              0.0040000000000000036,
+              -0.012121963983944592
+            ],
+            [
+              0.019999999999999997,
+              0.0030000000000000027,
+              -0.006821964165829357
+            ],
+            [
+              0.012949747000000001,
+              0.061000000000000006,
+              -0.00977171116582936
+            ],
+            [
+              0.016999999999999998,
+              0.061000000000000006,
+              -0.00977171116582936
+            ]
+          ],
+          "vertices_finite": true,
+          "svg_plate_top": 58.5,
+          "svg_relief_height": 5.5,
+          "sample_status": "この分解標本：56組中、面交差の検出1組。0 mmの取付状態を含む観測です。"
+        },
+        {
+          "variant": "R050",
+          "mode": "service",
+          "state": "open",
+          "side": "left_right",
+          "offset_mm": 6,
+          "meshes": 18,
+          "faces": 54148,
+          "gl_error": 0,
+          "workpiece_visible": false,
+          "width": 1032,
+          "height": 560,
+          "label": "service/R050/left_right/6",
+          "filled_pixels": 126272,
+          "pixel_hash": "18a8d3b7",
+          "relief": "0.50",
+          "plate_height": "30.50",
+          "edge_distance": "4.50",
+          "offset_label": "6.0",
+          "state_disabled": true,
+          "offset_disabled": false,
+          "target_disabled": true,
+          "selected_mode_buttons": 1,
+          "first_moving_vertices": [
+            [
+              0.011940138570509644,
+              0.00400000006562247,
+              -0.012121697125560788
+            ],
+            [
+              0.014000000005934448,
+              0.0030000000656224698,
+              -0.006821697307445553
+            ],
+            [
+              0.006949747005934452,
+              0.06100000006562247,
+              -0.009771444307445556
+            ],
+            [
+              0.011000000005934448,
+              0.06100000006562247,
+              -0.009771444307445556
+            ]
+          ],
+          "vertices_finite": true,
+          "svg_plate_top": 58.5,
+          "svg_relief_height": 5.5,
+          "sample_status": "この分解標本：56組中、面交差の検出0組。連続経路全体の判定ではありません。"
+        },
+        {
+          "variant": "R050",
+          "mode": "service",
+          "state": "open",
+          "side": "left_right",
+          "offset_mm": 12,
+          "meshes": 18,
+          "faces": 54148,
+          "gl_error": 0,
+          "workpiece_visible": false,
+          "width": 1032,
+          "height": 560,
+          "label": "service/R050/left_right/12",
+          "filled_pixels": 127836,
+          "pixel_hash": "81116a97",
+          "relief": "0.50",
+          "plate_height": "30.50",
+          "edge_distance": "4.50",
+          "offset_label": "12.0",
+          "state_disabled": true,
+          "offset_disabled": false,
+          "target_disabled": true,
+          "selected_mode_buttons": 1,
+          "first_moving_vertices": [
+            [
+              0.005940138576444095,
+              0.004000000131244938,
+              -0.012121430267176984
+            ],
+            [
+              0.008000000011868898,
+              0.003000000131244937,
+              -0.0068214304490617494
+            ],
+            [
+              0.0009497470118689025,
+              0.06100000013124494,
+              -0.009771177449061752
+            ],
+            [
+              0.005000000011868899,
+              0.06100000013124494,
+              -0.009771177449061752
+            ]
+          ],
+          "vertices_finite": true,
+          "svg_plate_top": 58.5,
+          "svg_relief_height": 5.5,
+          "sample_status": "この分解標本：56組中、面交差の検出0組。連続経路全体の判定ではありません。"
+        },
+        {
+          "variant": "R000",
+          "mode": "holding",
+          "state": "near",
+          "side": "left_right",
+          "offset_mm": 12,
+          "meshes": 22,
+          "faces": 63694,
+          "gl_error": 0,
+          "workpiece_visible": true,
+          "width": 1032,
+          "height": 560,
+          "label": "holding/R000/near",
+          "filled_pixels": 138419,
+          "pixel_hash": "68eae824",
+          "relief": "0.00",
+          "plate_height": "31.00",
+          "edge_distance": "5.00",
+          "offset_label": "12.0",
+          "state_disabled": false,
+          "offset_disabled": true,
+          "target_disabled": false,
+          "selected_mode_buttons": 1,
+          "first_moving_vertices": [
+            [
+              0.009940138564575193,
+              0.0040000000000000036,
+              -0.013299999818115228
+            ],
+            [
+              0.012,
+              0.0030000000000000027,
+              -0.007999999999999993
+            ],
+            [
+              0.004949747000000001,
+              0.061000000000000006,
+              -0.010949746999999996
+            ],
+            [
+              0.008999999999999998,
+              0.061000000000000006,
+              -0.010949746999999996
+            ]
+          ],
+          "vertices_finite": true,
+          "svg_plate_top": 53,
+          "svg_relief_height": 0,
+          "sample_status": "元の4保存姿勢。接触面と姿勢は変更していません。"
+        },
+        {
+          "variant": "R000",
+          "mode": "holding",
+          "state": "early",
+          "side": "left_right",
+          "offset_mm": 12,
+          "meshes": 22,
+          "faces": 63694,
+          "gl_error": 0,
+          "workpiece_visible": true,
+          "width": 1032,
+          "height": 560,
+          "label": "holding/R000/early",
+          "filled_pixels": 139045,
+          "pixel_hash": "c7c345d4",
+          "relief": "0.00",
+          "plate_height": "31.00",
+          "edge_distance": "5.00",
+          "offset_label": "12.0",
+          "state_disabled": false,
+          "offset_disabled": true,
+          "target_disabled": false,
+          "selected_mode_buttons": 1,
+          "first_moving_vertices": [
+            [
+              0.010343530614741303,
+              0.0040000000000000036,
+              -0.013268104293260238
+            ],
+            [
+              0.012403392050166114,
+              0.0030000000000000027,
+              -0.007968104475145003
+            ],
+            [
+              0.005353139050166111,
+              0.061000000000000006,
+              -0.010917851475145006
+            ],
+            [
+              0.009403392050166107,
+              0.061000000000000006,
+              -0.010917851475145006
+            ]
+          ],
+          "vertices_finite": true,
+          "svg_plate_top": 53,
+          "svg_relief_height": 0,
+          "sample_status": "元の4保存姿勢。接触面と姿勢は変更していません。"
+        },
+        {
+          "variant": "R000",
+          "mode": "holding",
+          "state": "open",
+          "side": "left_right",
+          "offset_mm": 12,
+          "meshes": 22,
+          "faces": 63694,
+          "gl_error": 0,
+          "workpiece_visible": true,
+          "width": 1032,
+          "height": 560,
+          "label": "holding/R000/open",
+          "filled_pixels": 145478,
+          "pixel_hash": "c069c202",
+          "relief": "0.00",
+          "plate_height": "31.00",
+          "edge_distance": "5.00",
+          "offset_label": "12.0",
+          "state_disabled": false,
+          "offset_disabled": true,
+          "target_disabled": false,
+          "selected_mode_buttons": 1,
+          "first_moving_vertices": [
+            [
+              0.017940138564575193,
+              0.0040000000000000036,
+              -0.012121963983944592
+            ],
+            [
+              0.019999999999999997,
+              0.0030000000000000027,
+              -0.006821964165829357
+            ],
+            [
+              0.012949747000000001,
+              0.061000000000000006,
+              -0.00977171116582936
+            ],
+            [
+              0.016999999999999998,
+              0.061000000000000006,
+              -0.00977171116582936
+            ]
+          ],
+          "vertices_finite": true,
+          "svg_plate_top": 53,
+          "svg_relief_height": 0,
+          "sample_status": "元の4保存姿勢。接触面と姿勢は変更していません。"
+        },
+        {
+          "variant": "R000",
+          "mode": "holding",
+          "state": "clear",
+          "side": "left_right",
+          "offset_mm": 12,
+          "meshes": 22,
+          "faces": 63694,
+          "gl_error": 0,
+          "workpiece_visible": true,
+          "width": 1032,
+          "height": 560,
+          "label": "holding/R000/clear",
+          "filled_pixels": 101222,
+          "pixel_hash": "f30f4d7c",
+          "relief": "0.00",
+          "plate_height": "31.00",
+          "edge_distance": "5.00",
+          "offset_label": "12.0",
+          "state_disabled": false,
+          "offset_disabled": true,
+          "target_disabled": false,
+          "selected_mode_buttons": 1,
+          "first_moving_vertices": [
+            [
+              0.017940138564575193,
+              0.0040000000000000036,
+              0.012878036016055402
+            ],
+            [
+              0.019999999999999997,
+              0.0030000000000000027,
+              0.018178035834170637
+            ],
+            [
+              0.012949747000000001,
+              0.061000000000000006,
+              0.015228288834170635
+            ],
+            [
+              0.016999999999999998,
+              0.061000000000000006,
+              0.015228288834170635
+            ]
+          ],
+          "vertices_finite": true,
+          "svg_plate_top": 53,
+          "svg_relief_height": 0,
+          "sample_status": "元の4保存姿勢。接触面と姿勢は変更していません。"
+        },
+        {
+          "variant": "R025",
+          "mode": "holding",
+          "state": "near",
+          "side": "left_right",
+          "offset_mm": 12,
+          "meshes": 22,
+          "faces": 63694,
+          "gl_error": 0,
+          "workpiece_visible": true,
+          "width": 1032,
+          "height": 560,
+          "label": "holding/R025/near",
+          "filled_pixels": 138419,
+          "pixel_hash": "87ffbe9b",
+          "relief": "0.25",
+          "plate_height": "30.75",
+          "edge_distance": "4.75",
+          "offset_label": "12.0",
+          "state_disabled": false,
+          "offset_disabled": true,
+          "target_disabled": false,
+          "selected_mode_buttons": 1,
+          "first_moving_vertices": [
+            [
+              0.009940138564575193,
+              0.0040000000000000036,
+              -0.013299999818115228
+            ],
+            [
+              0.012,
+              0.0030000000000000027,
+              -0.007999999999999993
+            ],
+            [
+              0.004949747000000001,
+              0.061000000000000006,
+              -0.010949746999999996
+            ],
+            [
+              0.008999999999999998,
+              0.061000000000000006,
+              -0.010949746999999996
+            ]
+          ],
+          "vertices_finite": true,
+          "svg_plate_top": 55.75,
+          "svg_relief_height": 2.75,
+          "sample_status": "元の4保存姿勢。接触面と姿勢は変更していません。"
+        },
+        {
+          "variant": "R025",
+          "mode": "holding",
+          "state": "early",
+          "side": "left_right",
+          "offset_mm": 12,
+          "meshes": 22,
+          "faces": 63694,
+          "gl_error": 0,
+          "workpiece_visible": true,
+          "width": 1032,
+          "height": 560,
+          "label": "holding/R025/early",
+          "filled_pixels": 139045,
+          "pixel_hash": "e59a9dfc",
+          "relief": "0.25",
+          "plate_height": "30.75",
+          "edge_distance": "4.75",
+          "offset_label": "12.0",
+          "state_disabled": false,
+          "offset_disabled": true,
+          "target_disabled": false,
+          "selected_mode_buttons": 1,
+          "first_moving_vertices": [
+            [
+              0.010343530614741303,
+              0.0040000000000000036,
+              -0.013268104293260238
+            ],
+            [
+              0.012403392050166114,
+              0.0030000000000000027,
+              -0.007968104475145003
+            ],
+            [
+              0.005353139050166111,
+              0.061000000000000006,
+              -0.010917851475145006
+            ],
+            [
+              0.009403392050166107,
+              0.061000000000000006,
+              -0.010917851475145006
+            ]
+          ],
+          "vertices_finite": true,
+          "svg_plate_top": 55.75,
+          "svg_relief_height": 2.75,
+          "sample_status": "元の4保存姿勢。接触面と姿勢は変更していません。"
+        },
+        {
+          "variant": "R025",
+          "mode": "holding",
+          "state": "open",
+          "side": "left_right",
+          "offset_mm": 12,
+          "meshes": 22,
+          "faces": 63694,
+          "gl_error": 0,
+          "workpiece_visible": true,
+          "width": 1032,
+          "height": 560,
+          "label": "holding/R025/open",
+          "filled_pixels": 145478,
+          "pixel_hash": "d479ab52",
+          "relief": "0.25",
+          "plate_height": "30.75",
+          "edge_distance": "4.75",
+          "offset_label": "12.0",
+          "state_disabled": false,
+          "offset_disabled": true,
+          "target_disabled": false,
+          "selected_mode_buttons": 1,
+          "first_moving_vertices": [
+            [
+              0.017940138564575193,
+              0.0040000000000000036,
+              -0.012121963983944592
+            ],
+            [
+              0.019999999999999997,
+              0.0030000000000000027,
+              -0.006821964165829357
+            ],
+            [
+              0.012949747000000001,
+              0.061000000000000006,
+              -0.00977171116582936
+            ],
+            [
+              0.016999999999999998,
+              0.061000000000000006,
+              -0.00977171116582936
+            ]
+          ],
+          "vertices_finite": true,
+          "svg_plate_top": 55.75,
+          "svg_relief_height": 2.75,
+          "sample_status": "元の4保存姿勢。接触面と姿勢は変更していません。"
+        },
+        {
+          "variant": "R025",
+          "mode": "holding",
+          "state": "clear",
+          "side": "left_right",
+          "offset_mm": 12,
+          "meshes": 22,
+          "faces": 63694,
+          "gl_error": 0,
+          "workpiece_visible": true,
+          "width": 1032,
+          "height": 560,
+          "label": "holding/R025/clear",
+          "filled_pixels": 101222,
+          "pixel_hash": "f27c52ae",
+          "relief": "0.25",
+          "plate_height": "30.75",
+          "edge_distance": "4.75",
+          "offset_label": "12.0",
+          "state_disabled": false,
+          "offset_disabled": true,
+          "target_disabled": false,
+          "selected_mode_buttons": 1,
+          "first_moving_vertices": [
+            [
+              0.017940138564575193,
+              0.0040000000000000036,
+              0.012878036016055402
+            ],
+            [
+              0.019999999999999997,
+              0.0030000000000000027,
+              0.018178035834170637
+            ],
+            [
+              0.012949747000000001,
+              0.061000000000000006,
+              0.015228288834170635
+            ],
+            [
+              0.016999999999999998,
+              0.061000000000000006,
+              0.015228288834170635
+            ]
+          ],
+          "vertices_finite": true,
+          "svg_plate_top": 55.75,
+          "svg_relief_height": 2.75,
+          "sample_status": "元の4保存姿勢。接触面と姿勢は変更していません。"
+        },
+        {
+          "variant": "R050",
+          "mode": "holding",
+          "state": "near",
+          "side": "left_right",
+          "offset_mm": 12,
+          "meshes": 22,
+          "faces": 63694,
+          "gl_error": 0,
+          "workpiece_visible": true,
+          "width": 1032,
+          "height": 560,
+          "label": "holding/R050/near",
+          "filled_pixels": 138419,
+          "pixel_hash": "995e3ce7",
+          "relief": "0.50",
+          "plate_height": "30.50",
+          "edge_distance": "4.50",
+          "offset_label": "12.0",
+          "state_disabled": false,
+          "offset_disabled": true,
+          "target_disabled": false,
+          "selected_mode_buttons": 1,
+          "first_moving_vertices": [
+            [
+              0.009940138564575193,
+              0.0040000000000000036,
+              -0.013299999818115228
+            ],
+            [
+              0.012,
+              0.0030000000000000027,
+              -0.007999999999999993
+            ],
+            [
+              0.004949747000000001,
+              0.061000000000000006,
+              -0.010949746999999996
+            ],
+            [
+              0.008999999999999998,
+              0.061000000000000006,
+              -0.010949746999999996
+            ]
+          ],
+          "vertices_finite": true,
+          "svg_plate_top": 58.5,
+          "svg_relief_height": 5.5,
+          "sample_status": "元の4保存姿勢。接触面と姿勢は変更していません。"
+        },
+        {
+          "variant": "R050",
+          "mode": "holding",
+          "state": "early",
+          "side": "left_right",
+          "offset_mm": 12,
+          "meshes": 22,
+          "faces": 63694,
+          "gl_error": 0,
+          "workpiece_visible": true,
+          "width": 1032,
+          "height": 560,
+          "label": "holding/R050/early",
+          "filled_pixels": 139045,
+          "pixel_hash": "2494bb2d",
+          "relief": "0.50",
+          "plate_height": "30.50",
+          "edge_distance": "4.50",
+          "offset_label": "12.0",
+          "state_disabled": false,
+          "offset_disabled": true,
+          "target_disabled": false,
+          "selected_mode_buttons": 1,
+          "first_moving_vertices": [
+            [
+              0.010343530614741303,
+              0.0040000000000000036,
+              -0.013268104293260238
+            ],
+            [
+              0.012403392050166114,
+              0.0030000000000000027,
+              -0.007968104475145003
+            ],
+            [
+              0.005353139050166111,
+              0.061000000000000006,
+              -0.010917851475145006
+            ],
+            [
+              0.009403392050166107,
+              0.061000000000000006,
+              -0.010917851475145006
+            ]
+          ],
+          "vertices_finite": true,
+          "svg_plate_top": 58.5,
+          "svg_relief_height": 5.5,
+          "sample_status": "元の4保存姿勢。接触面と姿勢は変更していません。"
+        },
+        {
+          "variant": "R050",
+          "mode": "holding",
+          "state": "open",
+          "side": "left_right",
+          "offset_mm": 12,
+          "meshes": 22,
+          "faces": 63694,
+          "gl_error": 0,
+          "workpiece_visible": true,
+          "width": 1032,
+          "height": 560,
+          "label": "holding/R050/open",
+          "filled_pixels": 145478,
+          "pixel_hash": "7d2f6740",
+          "relief": "0.50",
+          "plate_height": "30.50",
+          "edge_distance": "4.50",
+          "offset_label": "12.0",
+          "state_disabled": false,
+          "offset_disabled": true,
+          "target_disabled": false,
+          "selected_mode_buttons": 1,
+          "first_moving_vertices": [
+            [
+              0.017940138564575193,
+              0.0040000000000000036,
+              -0.012121963983944592
+            ],
+            [
+              0.019999999999999997,
+              0.0030000000000000027,
+              -0.006821964165829357
+            ],
+            [
+              0.012949747000000001,
+              0.061000000000000006,
+              -0.00977171116582936
+            ],
+            [
+              0.016999999999999998,
+              0.061000000000000006,
+              -0.00977171116582936
+            ]
+          ],
+          "vertices_finite": true,
+          "svg_plate_top": 58.5,
+          "svg_relief_height": 5.5,
+          "sample_status": "元の4保存姿勢。接触面と姿勢は変更していません。"
+        },
+        {
+          "variant": "R050",
+          "mode": "holding",
+          "state": "clear",
+          "side": "left_right",
+          "offset_mm": 12,
+          "meshes": 22,
+          "faces": 63694,
+          "gl_error": 0,
+          "workpiece_visible": true,
+          "width": 1032,
+          "height": 560,
+          "label": "holding/R050/clear",
+          "filled_pixels": 101222,
+          "pixel_hash": "43f1e446",
+          "relief": "0.50",
+          "plate_height": "30.50",
+          "edge_distance": "4.50",
+          "offset_label": "12.0",
+          "state_disabled": false,
+          "offset_disabled": true,
+          "target_disabled": false,
+          "selected_mode_buttons": 1,
+          "first_moving_vertices": [
+            [
+              0.017940138564575193,
+              0.0040000000000000036,
+              0.012878036016055402
+            ],
+            [
+              0.019999999999999997,
+              0.0030000000000000027,
+              0.018178035834170637
+            ],
+            [
+              0.012949747000000001,
+              0.061000000000000006,
+              0.015228288834170635
+            ],
+            [
+              0.016999999999999998,
+              0.061000000000000006,
+              0.015228288834170635
+            ]
+          ],
+          "vertices_finite": true,
+          "svg_plate_top": 58.5,
+          "svg_relief_height": 5.5,
+          "sample_status": "元の4保存姿勢。接触面と姿勢は変更していません。"
+        },
+        {
+          "variant": "R050",
+          "mode": "service",
+          "state": "open",
+          "side": "left_right",
+          "offset_mm": 0,
+          "meshes": 8,
+          "faces": 2640,
+          "gl_error": 0,
+          "workpiece_visible": false,
+          "width": 1032,
+          "height": 560,
+          "label": "toggle/hardware",
+          "filled_pixels": 22746,
+          "pixel_hash": "7dc0b442",
+          "relief": "0.50",
+          "plate_height": "30.50",
+          "edge_distance": "4.50",
+          "offset_label": "0.0",
+          "state_disabled": true,
+          "offset_disabled": false,
+          "target_disabled": true,
+          "selected_mode_buttons": 1,
+          "first_moving_vertices": [
+            [
+              0.017940138564575193,
+              0.0040000000000000036,
+              -0.012121963983944592
+            ],
+            [
+              0.019999999999999997,
+              0.0030000000000000027,
+              -0.006821964165829357
+            ],
+            [
+              0.012949747000000001,
+              0.061000000000000006,
+              -0.00977171116582936
+            ],
+            [
+              0.016999999999999998,
+              0.061000000000000006,
+              -0.00977171116582936
+            ]
+          ],
+          "vertices_finite": true,
+          "svg_plate_top": 58.5,
+          "svg_relief_height": 5.5,
+          "sample_status": "この分解標本：56組中、面交差の検出1組。0 mmの取付状態を含む観測です。"
+        },
+        {
+          "variant": "R050",
+          "mode": "service",
+          "state": "open",
+          "side": "left_right",
+          "offset_mm": 0,
+          "meshes": 18,
+          "faces": 54148,
+          "gl_error": 0,
+          "workpiece_visible": false,
+          "width": 1032,
+          "height": 560,
+          "label": "toggle/target",
+          "filled_pixels": 123525,
+          "pixel_hash": "476802ef",
+          "relief": "0.50",
+          "plate_height": "30.50",
+          "edge_distance": "4.50",
+          "offset_label": "0.0",
+          "state_disabled": true,
+          "offset_disabled": false,
+          "target_disabled": true,
+          "selected_mode_buttons": 1,
+          "first_moving_vertices": [
+            [
+              0.017940138564575193,
+              0.0040000000000000036,
+              -0.012121963983944592
+            ],
+            [
+              0.019999999999999997,
+              0.0030000000000000027,
+              -0.006821964165829357
+            ],
+            [
+              0.012949747000000001,
+              0.061000000000000006,
+              -0.00977171116582936
+            ],
+            [
+              0.016999999999999998,
+              0.061000000000000006,
+              -0.00977171116582936
+            ]
+          ],
+          "vertices_finite": true,
+          "svg_plate_top": 58.5,
+          "svg_relief_height": 5.5,
+          "sample_status": "この分解標本：56組中、面交差の検出1組。0 mmの取付状態を含む観測です。"
+        },
+        {
+          "variant": "R050",
+          "mode": "service",
+          "state": "open",
+          "side": "left_right",
+          "offset_mm": 0,
+          "meshes": 10,
+          "faces": 45804,
+          "gl_error": 0,
+          "workpiece_visible": false,
+          "width": 1032,
+          "height": 560,
+          "label": "toggle/opposite",
+          "filled_pixels": 75037,
+          "pixel_hash": "6afc784d",
+          "relief": "0.50",
+          "plate_height": "30.50",
+          "edge_distance": "4.50",
+          "offset_label": "0.0",
+          "state_disabled": true,
+          "offset_disabled": false,
+          "target_disabled": true,
+          "selected_mode_buttons": 1,
+          "first_moving_vertices": [
+            [
+              0.017940138564575193,
+              0.0040000000000000036,
+              -0.012121963983944592
+            ],
+            [
+              0.019999999999999997,
+              0.0030000000000000027,
+              -0.006821964165829357
+            ],
+            [
+              0.012949747000000001,
+              0.061000000000000006,
+              -0.00977171116582936
+            ],
+            [
+              0.016999999999999998,
+              0.061000000000000006,
+              -0.00977171116582936
+            ]
+          ],
+          "vertices_finite": true,
+          "svg_plate_top": 58.5,
+          "svg_relief_height": 5.5,
+          "sample_status": "この分解標本：56組中、面交差の検出1組。0 mmの取付状態を含む観測です。"
+        },
+        {
+          "variant": "R050",
+          "mode": "service",
+          "state": "open",
+          "side": "left_right",
+          "offset_mm": 0,
+          "meshes": 18,
+          "faces": 54148,
+          "gl_error": 0,
+          "workpiece_visible": false,
+          "width": 1032,
+          "height": 560,
+          "label": "camera/front",
+          "filled_pixels": 87487,
+          "pixel_hash": "30f80aad",
+          "relief": "0.50",
+          "plate_height": "30.50",
+          "edge_distance": "4.50",
+          "offset_label": "0.0",
+          "state_disabled": true,
+          "offset_disabled": false,
+          "target_disabled": true,
+          "selected_mode_buttons": 1,
+          "first_moving_vertices": [
+            [
+              0.017940138564575193,
+              0.0040000000000000036,
+              -0.012121963983944592
+            ],
+            [
+              0.019999999999999997,
+              0.0030000000000000027,
+              -0.006821964165829357
+            ],
+            [
+              0.012949747000000001,
+              0.061000000000000006,
+              -0.00977171116582936
+            ],
+            [
+              0.016999999999999998,
+              0.061000000000000006,
+              -0.00977171116582936
+            ]
+          ],
+          "vertices_finite": true,
+          "svg_plate_top": 58.5,
+          "svg_relief_height": 5.5,
+          "sample_status": "この分解標本：56組中、面交差の検出1組。0 mmの取付状態を含む観測です。"
+        },
+        {
+          "variant": "R050",
+          "mode": "service",
+          "state": "open",
+          "side": "left_right",
+          "offset_mm": 0,
+          "meshes": 18,
+          "faces": 54148,
+          "gl_error": 0,
+          "workpiece_visible": false,
+          "width": 1032,
+          "height": 560,
+          "label": "camera/side",
+          "filled_pixels": 45880,
+          "pixel_hash": "e93d2b5d",
+          "relief": "0.50",
+          "plate_height": "30.50",
+          "edge_distance": "4.50",
+          "offset_label": "0.0",
+          "state_disabled": true,
+          "offset_disabled": false,
+          "target_disabled": true,
+          "selected_mode_buttons": 1,
+          "first_moving_vertices": [
+            [
+              0.017940138564575193,
+              0.0040000000000000036,
+              -0.012121963983944592
+            ],
+            [
+              0.019999999999999997,
+              0.0030000000000000027,
+              -0.006821964165829357
+            ],
+            [
+              0.012949747000000001,
+              0.061000000000000006,
+              -0.00977171116582936
+            ],
+            [
+              0.016999999999999998,
+              0.061000000000000006,
+              -0.00977171116582936
+            ]
+          ],
+          "vertices_finite": true,
+          "svg_plate_top": 58.5,
+          "svg_relief_height": 5.5,
+          "sample_status": "この分解標本：56組中、面交差の検出1組。0 mmの取付状態を含む観測です。"
+        },
+        {
+          "variant": "R050",
+          "mode": "service",
+          "state": "open",
+          "side": "left_right",
+          "offset_mm": 0,
+          "meshes": 18,
+          "faces": 54148,
+          "gl_error": 0,
+          "workpiece_visible": false,
+          "width": 1032,
+          "height": 560,
+          "label": "camera/oblique",
+          "filled_pixels": 123525,
+          "pixel_hash": "476802ef",
+          "relief": "0.50",
+          "plate_height": "30.50",
+          "edge_distance": "4.50",
+          "offset_label": "0.0",
+          "state_disabled": true,
+          "offset_disabled": false,
+          "target_disabled": true,
+          "selected_mode_buttons": 1,
+          "first_moving_vertices": [
+            [
+              0.017940138564575193,
+              0.0040000000000000036,
+              -0.012121963983944592
+            ],
+            [
+              0.019999999999999997,
+              0.0030000000000000027,
+              -0.006821964165829357
+            ],
+            [
+              0.012949747000000001,
+              0.061000000000000006,
+              -0.00977171116582936
+            ],
+            [
+              0.016999999999999998,
+              0.061000000000000006,
+              -0.00977171116582936
+            ]
+          ],
+          "vertices_finite": true,
+          "svg_plate_top": 58.5,
+          "svg_relief_height": 5.5,
+          "sample_status": "この分解標本：56組中、面交差の検出1組。0 mmの取付状態を含む観測です。"
+        },
+        {
+          "variant": "R050",
+          "mode": "service",
+          "state": "open",
+          "side": "left_right",
+          "offset_mm": 0,
+          "meshes": 10,
+          "faces": 45804,
+          "gl_error": 0,
+          "workpiece_visible": false,
+          "width": 1032,
+          "height": 560,
+          "label": "edge",
+          "filled_pixels": 191769,
+          "pixel_hash": "cde0d611",
+          "relief": "0.50",
+          "plate_height": "30.50",
+          "edge_distance": "4.50",
+          "offset_label": "0.0",
+          "state_disabled": true,
+          "offset_disabled": false,
+          "target_disabled": true,
+          "selected_mode_buttons": 1,
+          "first_moving_vertices": [
+            [
+              0.017940138564575193,
+              0.0040000000000000036,
+              -0.012121963983944592
+            ],
+            [
+              0.019999999999999997,
+              0.0030000000000000027,
+              -0.006821964165829357
+            ],
+            [
+              0.012949747000000001,
+              0.061000000000000006,
+              -0.00977171116582936
+            ],
+            [
+              0.016999999999999998,
+              0.061000000000000006,
+              -0.00977171116582936
+            ]
+          ],
+          "vertices_finite": true,
+          "svg_plate_top": 58.5,
+          "svg_relief_height": 5.5,
+          "sample_status": "この分解標本：56組中、面交差の検出1組。0 mmの取付状態を含む観測です。"
+        },
+        {
+          "variant": "R050",
+          "mode": "service",
+          "state": "open",
+          "side": "left_right",
+          "offset_mm": 0,
+          "meshes": 18,
+          "faces": 54148,
+          "gl_error": 0,
+          "workpiece_visible": false,
+          "width": 1032,
+          "height": 560,
+          "label": "whole",
+          "filled_pixels": 119732,
+          "pixel_hash": "9827375e",
+          "relief": "0.50",
+          "plate_height": "30.50",
+          "edge_distance": "4.50",
+          "offset_label": "0.0",
+          "state_disabled": true,
+          "offset_disabled": false,
+          "target_disabled": true,
+          "selected_mode_buttons": 1,
+          "first_moving_vertices": [
+            [
+              0.017940138564575193,
+              0.0040000000000000036,
+              -0.012121963983944592
+            ],
+            [
+              0.019999999999999997,
+              0.0030000000000000027,
+              -0.006821964165829357
+            ],
+            [
+              0.012949747000000001,
+              0.061000000000000006,
+              -0.00977171116582936
+            ],
+            [
+              0.016999999999999998,
+              0.061000000000000006,
+              -0.00977171116582936
+            ]
+          ],
+          "vertices_finite": true,
+          "svg_plate_top": 58.5,
+          "svg_relief_height": 5.5,
+          "sample_status": "この分解標本：56組中、面交差の検出1組。0 mmの取付状態を含む観測です。"
+        },
+        {
+          "variant": "R050",
+          "mode": "service",
+          "state": "open",
+          "side": "left_right",
+          "offset_mm": 0,
+          "meshes": 18,
+          "faces": 54148,
+          "gl_error": 0,
+          "workpiece_visible": false,
+          "width": 1032,
+          "height": 560,
+          "label": "reset",
+          "filled_pixels": 123525,
+          "pixel_hash": "476802ef",
+          "relief": "0.50",
+          "plate_height": "30.50",
+          "edge_distance": "4.50",
+          "offset_label": "0.0",
+          "state_disabled": true,
+          "offset_disabled": false,
+          "target_disabled": true,
+          "selected_mode_buttons": 1,
+          "first_moving_vertices": [
+            [
+              0.017940138564575193,
+              0.0040000000000000036,
+              -0.012121963983944592
+            ],
+            [
+              0.019999999999999997,
+              0.0030000000000000027,
+              -0.006821964165829357
+            ],
+            [
+              0.012949747000000001,
+              0.061000000000000006,
+              -0.00977171116582936
+            ],
+            [
+              0.016999999999999998,
+              0.061000000000000006,
+              -0.00977171116582936
+            ]
+          ],
+          "vertices_finite": true,
+          "svg_plate_top": 58.5,
+          "svg_relief_height": 5.5,
+          "sample_status": "この分解標本：56組中、面交差の検出1組。0 mmの取付状態を含む観測です。"
+        }
+      ],
+      "failure": null,
+      "viewport": 1440,
+      "scroll_width": 1425
+    },
+    "mobile": {
+      "rows": [
+        {
+          "variant": "R000",
+          "mode": "service",
+          "state": "open",
+          "side": "left_left",
+          "offset_mm": 0,
+          "meshes": 18,
+          "faces": 54148,
+          "gl_error": 0,
+          "workpiece_visible": false,
+          "width": 455,
+          "height": 450,
+          "label": "service/R000/left_left/0",
+          "filled_pixels": 79909,
+          "pixel_hash": "e45a2b8b",
+          "relief": "0.00",
+          "plate_height": "31.00",
+          "edge_distance": "5.00",
+          "offset_label": "0.0",
+          "state_disabled": true,
+          "offset_disabled": false,
+          "target_disabled": true,
+          "selected_mode_buttons": 1,
+          "first_moving_vertices": [
+            [
+              -0.01794013818559806,
+              0.004000002614112284,
+              -0.012121963983944592
+            ],
+            [
+              -0.019999999286252606,
+              0.0030000039570618475,
+              -0.006821964165829357
+            ],
+            [
+              -0.012949746999999508,
+              0.06100000277128167,
+              -0.00977171116582936
+            ],
+            [
+              -0.019999999999999504,
+              0.06100000277128167,
+              -0.00977171116582936
+            ]
+          ],
+          "vertices_finite": true,
+          "svg_plate_top": 53,
+          "svg_relief_height": 0,
+          "sample_status": "この分解標本：56組中、面交差の検出1組。0 mmの取付状態を含む観測です。"
+        },
+        {
+          "variant": "R000",
+          "mode": "service",
+          "state": "open",
+          "side": "left_left",
+          "offset_mm": 6,
+          "meshes": 18,
+          "faces": 54148,
+          "gl_error": 0,
+          "workpiece_visible": false,
+          "width": 455,
+          "height": 450,
+          "label": "service/R000/left_left/6",
+          "filled_pixels": 81325,
+          "pixel_hash": "3726cb47",
+          "relief": "0.00",
+          "plate_height": "31.00",
+          "edge_distance": "5.00",
+          "offset_label": "6.0",
+          "state_disabled": true,
+          "offset_disabled": false,
+          "target_disabled": true,
+          "selected_mode_buttons": 1,
+          "first_moving_vertices": [
+            [
+              -0.011940138191532893,
+              0.0040000004700285795,
+              -0.012121697125560788
+            ],
+            [
+              -0.01399999929218744,
+              0.0030000018129781427,
+              -0.006821697307445553
+            ],
+            [
+              -0.006949747005934342,
+              0.061000000627197966,
+              -0.009771444307445556
+            ],
+            [
+              -0.014000000005934338,
+              0.061000000627197966,
+              -0.009771444307445556
+            ]
+          ],
+          "vertices_finite": true,
+          "svg_plate_top": 53,
+          "svg_relief_height": 0,
+          "sample_status": "この分解標本：56組中、面交差の検出0組。連続経路全体の判定ではありません。"
+        },
+        {
+          "variant": "R000",
+          "mode": "service",
+          "state": "open",
+          "side": "left_left",
+          "offset_mm": 12,
+          "meshes": 18,
+          "faces": 54148,
+          "gl_error": 0,
+          "workpiece_visible": false,
+          "width": 455,
+          "height": 450,
+          "label": "service/R000/left_left/12",
+          "filled_pixels": 82150,
+          "pixel_hash": "42119582",
+          "relief": "0.00",
+          "plate_height": "31.00",
+          "edge_distance": "5.00",
+          "offset_label": "12.0",
+          "state_disabled": true,
+          "offset_disabled": false,
+          "target_disabled": true,
+          "selected_mode_buttons": 1,
+          "first_moving_vertices": [
+            [
+              -0.0059401381974677255,
+              0.003999998325944875,
+              -0.012121430267176984
+            ],
+            [
+              -0.007999999298122272,
+              0.0029999996688944383,
+              -0.0068214304490617494
+            ],
+            [
+              -0.0009497470118691748,
+              0.06099999848311426,
+              -0.009771177449061752
+            ],
+            [
+              -0.00800000001186917,
+              0.06099999848311426,
+              -0.009771177449061752
+            ]
+          ],
+          "vertices_finite": true,
+          "svg_plate_top": 53,
+          "svg_relief_height": 0,
+          "sample_status": "この分解標本：56組中、面交差の検出0組。連続経路全体の判定ではありません。"
+        },
+        {
+          "variant": "R000",
+          "mode": "service",
+          "state": "open",
+          "side": "left_right",
+          "offset_mm": 0,
+          "meshes": 18,
+          "faces": 54148,
+          "gl_error": 0,
+          "workpiece_visible": false,
+          "width": 455,
+          "height": 450,
+          "label": "service/R000/left_right/0",
+          "filled_pixels": 79909,
+          "pixel_hash": "e45a2b8b",
+          "relief": "0.00",
+          "plate_height": "31.00",
+          "edge_distance": "5.00",
+          "offset_label": "0.0",
+          "state_disabled": true,
+          "offset_disabled": false,
+          "target_disabled": true,
+          "selected_mode_buttons": 1,
+          "first_moving_vertices": [
+            [
+              0.017940138564575193,
+              0.0040000000000000036,
+              -0.012121963983944592
+            ],
+            [
+              0.019999999999999997,
+              0.0030000000000000027,
+              -0.006821964165829357
+            ],
+            [
+              0.012949747000000001,
+              0.061000000000000006,
+              -0.00977171116582936
+            ],
+            [
+              0.016999999999999998,
+              0.061000000000000006,
+              -0.00977171116582936
+            ]
+          ],
+          "vertices_finite": true,
+          "svg_plate_top": 53,
+          "svg_relief_height": 0,
+          "sample_status": "この分解標本：56組中、面交差の検出1組。0 mmの取付状態を含む観測です。"
+        },
+        {
+          "variant": "R000",
+          "mode": "service",
+          "state": "open",
+          "side": "left_right",
+          "offset_mm": 6,
+          "meshes": 18,
+          "faces": 54148,
+          "gl_error": 0,
+          "workpiece_visible": false,
+          "width": 455,
+          "height": 450,
+          "label": "service/R000/left_right/6",
+          "filled_pixels": 81730,
+          "pixel_hash": "a9399e5c",
+          "relief": "0.00",
+          "plate_height": "31.00",
+          "edge_distance": "5.00",
+          "offset_label": "6.0",
+          "state_disabled": true,
+          "offset_disabled": false,
+          "target_disabled": true,
+          "selected_mode_buttons": 1,
+          "first_moving_vertices": [
+            [
+              0.011940138570509644,
+              0.00400000006562247,
+              -0.012121697125560788
+            ],
+            [
+              0.014000000005934448,
+              0.0030000000656224698,
+              -0.006821697307445553
+            ],
+            [
+              0.006949747005934452,
+              0.06100000006562247,
+              -0.009771444307445556
+            ],
+            [
+              0.011000000005934448,
+              0.06100000006562247,
+              -0.009771444307445556
+            ]
+          ],
+          "vertices_finite": true,
+          "svg_plate_top": 53,
+          "svg_relief_height": 0,
+          "sample_status": "この分解標本：56組中、面交差の検出0組。連続経路全体の判定ではありません。"
+        },
+        {
+          "variant": "R000",
+          "mode": "service",
+          "state": "open",
+          "side": "left_right",
+          "offset_mm": 12,
+          "meshes": 18,
+          "faces": 54148,
+          "gl_error": 0,
+          "workpiece_visible": false,
+          "width": 455,
+          "height": 450,
+          "label": "service/R000/left_right/12",
+          "filled_pixels": 82745,
+          "pixel_hash": "5e4d6740",
+          "relief": "0.00",
+          "plate_height": "31.00",
+          "edge_distance": "5.00",
+          "offset_label": "12.0",
+          "state_disabled": true,
+          "offset_disabled": false,
+          "target_disabled": true,
+          "selected_mode_buttons": 1,
+          "first_moving_vertices": [
+            [
+              0.005940138576444095,
+              0.004000000131244938,
+              -0.012121430267176984
+            ],
+            [
+              0.008000000011868898,
+              0.003000000131244937,
+              -0.0068214304490617494
+            ],
+            [
+              0.0009497470118689025,
+              0.06100000013124494,
+              -0.009771177449061752
+            ],
+            [
+              0.005000000011868899,
+              0.06100000013124494,
+              -0.009771177449061752
+            ]
+          ],
+          "vertices_finite": true,
+          "svg_plate_top": 53,
+          "svg_relief_height": 0,
+          "sample_status": "この分解標本：56組中、面交差の検出0組。連続経路全体の判定ではありません。"
+        },
+        {
+          "variant": "R025",
+          "mode": "service",
+          "state": "open",
+          "side": "left_left",
+          "offset_mm": 0,
+          "meshes": 18,
+          "faces": 54148,
+          "gl_error": 0,
+          "workpiece_visible": false,
+          "width": 455,
+          "height": 450,
+          "label": "service/R025/left_left/0",
+          "filled_pixels": 79909,
+          "pixel_hash": "c0c5aa5a",
+          "relief": "0.25",
+          "plate_height": "30.75",
+          "edge_distance": "4.75",
+          "offset_label": "0.0",
+          "state_disabled": true,
+          "offset_disabled": false,
+          "target_disabled": true,
+          "selected_mode_buttons": 1,
+          "first_moving_vertices": [
+            [
+              -0.01794013818559806,
+              0.004000002614112284,
+              -0.012121963983944592
+            ],
+            [
+              -0.019999999286252606,
+              0.0030000039570618475,
+              -0.006821964165829357
+            ],
+            [
+              -0.012949746999999508,
+              0.06100000277128167,
+              -0.00977171116582936
+            ],
+            [
+              -0.019999999999999504,
+              0.06100000277128167,
+              -0.00977171116582936
+            ]
+          ],
+          "vertices_finite": true,
+          "svg_plate_top": 55.75,
+          "svg_relief_height": 2.75,
+          "sample_status": "この分解標本：56組中、面交差の検出1組。0 mmの取付状態を含む観測です。"
+        },
+        {
+          "variant": "R025",
+          "mode": "service",
+          "state": "open",
+          "side": "left_left",
+          "offset_mm": 6,
+          "meshes": 18,
+          "faces": 54148,
+          "gl_error": 0,
+          "workpiece_visible": false,
+          "width": 455,
+          "height": 450,
+          "label": "service/R025/left_left/6",
+          "filled_pixels": 81321,
+          "pixel_hash": "ee730c7b",
+          "relief": "0.25",
+          "plate_height": "30.75",
+          "edge_distance": "4.75",
+          "offset_label": "6.0",
+          "state_disabled": true,
+          "offset_disabled": false,
+          "target_disabled": true,
+          "selected_mode_buttons": 1,
+          "first_moving_vertices": [
+            [
+              -0.011940138191532893,
+              0.0040000004700285795,
+              -0.012121697125560788
+            ],
+            [
+              -0.01399999929218744,
+              0.0030000018129781427,
+              -0.006821697307445553
+            ],
+            [
+              -0.006949747005934342,
+              0.061000000627197966,
+              -0.009771444307445556
+            ],
+            [
+              -0.014000000005934338,
+              0.061000000627197966,
+              -0.009771444307445556
+            ]
+          ],
+          "vertices_finite": true,
+          "svg_plate_top": 55.75,
+          "svg_relief_height": 2.75,
+          "sample_status": "この分解標本：56組中、面交差の検出0組。連続経路全体の判定ではありません。"
+        },
+        {
+          "variant": "R025",
+          "mode": "service",
+          "state": "open",
+          "side": "left_left",
+          "offset_mm": 12,
+          "meshes": 18,
+          "faces": 54148,
+          "gl_error": 0,
+          "workpiece_visible": false,
+          "width": 455,
+          "height": 450,
+          "label": "service/R025/left_left/12",
+          "filled_pixels": 82138,
+          "pixel_hash": "1455e9b9",
+          "relief": "0.25",
+          "plate_height": "30.75",
+          "edge_distance": "4.75",
+          "offset_label": "12.0",
+          "state_disabled": true,
+          "offset_disabled": false,
+          "target_disabled": true,
+          "selected_mode_buttons": 1,
+          "first_moving_vertices": [
+            [
+              -0.0059401381974677255,
+              0.003999998325944875,
+              -0.012121430267176984
+            ],
+            [
+              -0.007999999298122272,
+              0.0029999996688944383,
+              -0.0068214304490617494
+            ],
+            [
+              -0.0009497470118691748,
+              0.06099999848311426,
+              -0.009771177449061752
+            ],
+            [
+              -0.00800000001186917,
+              0.06099999848311426,
+              -0.009771177449061752
+            ]
+          ],
+          "vertices_finite": true,
+          "svg_plate_top": 55.75,
+          "svg_relief_height": 2.75,
+          "sample_status": "この分解標本：56組中、面交差の検出0組。連続経路全体の判定ではありません。"
+        },
+        {
+          "variant": "R025",
+          "mode": "service",
+          "state": "open",
+          "side": "left_right",
+          "offset_mm": 0,
+          "meshes": 18,
+          "faces": 54148,
+          "gl_error": 0,
+          "workpiece_visible": false,
+          "width": 455,
+          "height": 450,
+          "label": "service/R025/left_right/0",
+          "filled_pixels": 79909,
+          "pixel_hash": "c0c5aa5a",
+          "relief": "0.25",
+          "plate_height": "30.75",
+          "edge_distance": "4.75",
+          "offset_label": "0.0",
+          "state_disabled": true,
+          "offset_disabled": false,
+          "target_disabled": true,
+          "selected_mode_buttons": 1,
+          "first_moving_vertices": [
+            [
+              0.017940138564575193,
+              0.0040000000000000036,
+              -0.012121963983944592
+            ],
+            [
+              0.019999999999999997,
+              0.0030000000000000027,
+              -0.006821964165829357
+            ],
+            [
+              0.012949747000000001,
+              0.061000000000000006,
+              -0.00977171116582936
+            ],
+            [
+              0.016999999999999998,
+              0.061000000000000006,
+              -0.00977171116582936
+            ]
+          ],
+          "vertices_finite": true,
+          "svg_plate_top": 55.75,
+          "svg_relief_height": 2.75,
+          "sample_status": "この分解標本：56組中、面交差の検出1組。0 mmの取付状態を含む観測です。"
+        },
+        {
+          "variant": "R025",
+          "mode": "service",
+          "state": "open",
+          "side": "left_right",
+          "offset_mm": 6,
+          "meshes": 18,
+          "faces": 54148,
+          "gl_error": 0,
+          "workpiece_visible": false,
+          "width": 455,
+          "height": 450,
+          "label": "service/R025/left_right/6",
+          "filled_pixels": 81709,
+          "pixel_hash": "d74d99c2",
+          "relief": "0.25",
+          "plate_height": "30.75",
+          "edge_distance": "4.75",
+          "offset_label": "6.0",
+          "state_disabled": true,
+          "offset_disabled": false,
+          "target_disabled": true,
+          "selected_mode_buttons": 1,
+          "first_moving_vertices": [
+            [
+              0.011940138570509644,
+              0.00400000006562247,
+              -0.012121697125560788
+            ],
+            [
+              0.014000000005934448,
+              0.0030000000656224698,
+              -0.006821697307445553
+            ],
+            [
+              0.006949747005934452,
+              0.06100000006562247,
+              -0.009771444307445556
+            ],
+            [
+              0.011000000005934448,
+              0.06100000006562247,
+              -0.009771444307445556
+            ]
+          ],
+          "vertices_finite": true,
+          "svg_plate_top": 55.75,
+          "svg_relief_height": 2.75,
+          "sample_status": "この分解標本：56組中、面交差の検出0組。連続経路全体の判定ではありません。"
+        },
+        {
+          "variant": "R025",
+          "mode": "service",
+          "state": "open",
+          "side": "left_right",
+          "offset_mm": 12,
+          "meshes": 18,
+          "faces": 54148,
+          "gl_error": 0,
+          "workpiece_visible": false,
+          "width": 455,
+          "height": 450,
+          "label": "service/R025/left_right/12",
+          "filled_pixels": 82717,
+          "pixel_hash": "7dd5adff",
+          "relief": "0.25",
+          "plate_height": "30.75",
+          "edge_distance": "4.75",
+          "offset_label": "12.0",
+          "state_disabled": true,
+          "offset_disabled": false,
+          "target_disabled": true,
+          "selected_mode_buttons": 1,
+          "first_moving_vertices": [
+            [
+              0.005940138576444095,
+              0.004000000131244938,
+              -0.012121430267176984
+            ],
+            [
+              0.008000000011868898,
+              0.003000000131244937,
+              -0.0068214304490617494
+            ],
+            [
+              0.0009497470118689025,
+              0.06100000013124494,
+              -0.009771177449061752
+            ],
+            [
+              0.005000000011868899,
+              0.06100000013124494,
+              -0.009771177449061752
+            ]
+          ],
+          "vertices_finite": true,
+          "svg_plate_top": 55.75,
+          "svg_relief_height": 2.75,
+          "sample_status": "この分解標本：56組中、面交差の検出0組。連続経路全体の判定ではありません。"
+        },
+        {
+          "variant": "R050",
+          "mode": "service",
+          "state": "open",
+          "side": "left_left",
+          "offset_mm": 0,
+          "meshes": 18,
+          "faces": 54148,
+          "gl_error": 0,
+          "workpiece_visible": false,
+          "width": 455,
+          "height": 450,
+          "label": "service/R050/left_left/0",
+          "filled_pixels": 79909,
+          "pixel_hash": "fee5cfc7",
+          "relief": "0.50",
+          "plate_height": "30.50",
+          "edge_distance": "4.50",
+          "offset_label": "0.0",
+          "state_disabled": true,
+          "offset_disabled": false,
+          "target_disabled": true,
+          "selected_mode_buttons": 1,
+          "first_moving_vertices": [
+            [
+              -0.01794013818559806,
+              0.004000002614112284,
+              -0.012121963983944592
+            ],
+            [
+              -0.019999999286252606,
+              0.0030000039570618475,
+              -0.006821964165829357
+            ],
+            [
+              -0.012949746999999508,
+              0.06100000277128167,
+              -0.00977171116582936
+            ],
+            [
+              -0.019999999999999504,
+              0.06100000277128167,
+              -0.00977171116582936
+            ]
+          ],
+          "vertices_finite": true,
+          "svg_plate_top": 58.5,
+          "svg_relief_height": 5.5,
+          "sample_status": "この分解標本：56組中、面交差の検出1組。0 mmの取付状態を含む観測です。"
+        },
+        {
+          "variant": "R050",
+          "mode": "service",
+          "state": "open",
+          "side": "left_left",
+          "offset_mm": 6,
+          "meshes": 18,
+          "faces": 54148,
+          "gl_error": 0,
+          "workpiece_visible": false,
+          "width": 455,
+          "height": 450,
+          "label": "service/R050/left_left/6",
+          "filled_pixels": 81318,
+          "pixel_hash": "aef56c64",
+          "relief": "0.50",
+          "plate_height": "30.50",
+          "edge_distance": "4.50",
+          "offset_label": "6.0",
+          "state_disabled": true,
+          "offset_disabled": false,
+          "target_disabled": true,
+          "selected_mode_buttons": 1,
+          "first_moving_vertices": [
+            [
+              -0.011940138191532893,
+              0.0040000004700285795,
+              -0.012121697125560788
+            ],
+            [
+              -0.01399999929218744,
+              0.0030000018129781427,
+              -0.006821697307445553
+            ],
+            [
+              -0.006949747005934342,
+              0.061000000627197966,
+              -0.009771444307445556
+            ],
+            [
+              -0.014000000005934338,
+              0.061000000627197966,
+              -0.009771444307445556
+            ]
+          ],
+          "vertices_finite": true,
+          "svg_plate_top": 58.5,
+          "svg_relief_height": 5.5,
+          "sample_status": "この分解標本：56組中、面交差の検出0組。連続経路全体の判定ではありません。"
+        },
+        {
+          "variant": "R050",
+          "mode": "service",
+          "state": "open",
+          "side": "left_left",
+          "offset_mm": 12,
+          "meshes": 18,
+          "faces": 54148,
+          "gl_error": 0,
+          "workpiece_visible": false,
+          "width": 455,
+          "height": 450,
+          "label": "service/R050/left_left/12",
+          "filled_pixels": 82124,
+          "pixel_hash": "4a0f0ac4",
+          "relief": "0.50",
+          "plate_height": "30.50",
+          "edge_distance": "4.50",
+          "offset_label": "12.0",
+          "state_disabled": true,
+          "offset_disabled": false,
+          "target_disabled": true,
+          "selected_mode_buttons": 1,
+          "first_moving_vertices": [
+            [
+              -0.0059401381974677255,
+              0.003999998325944875,
+              -0.012121430267176984
+            ],
+            [
+              -0.007999999298122272,
+              0.0029999996688944383,
+              -0.0068214304490617494
+            ],
+            [
+              -0.0009497470118691748,
+              0.06099999848311426,
+              -0.009771177449061752
+            ],
+            [
+              -0.00800000001186917,
+              0.06099999848311426,
+              -0.009771177449061752
+            ]
+          ],
+          "vertices_finite": true,
+          "svg_plate_top": 58.5,
+          "svg_relief_height": 5.5,
+          "sample_status": "この分解標本：56組中、面交差の検出0組。連続経路全体の判定ではありません。"
+        },
+        {
+          "variant": "R050",
+          "mode": "service",
+          "state": "open",
+          "side": "left_right",
+          "offset_mm": 0,
+          "meshes": 18,
+          "faces": 54148,
+          "gl_error": 0,
+          "workpiece_visible": false,
+          "width": 455,
+          "height": 450,
+          "label": "service/R050/left_right/0",
+          "filled_pixels": 79909,
+          "pixel_hash": "fee5cfc7",
+          "relief": "0.50",
+          "plate_height": "30.50",
+          "edge_distance": "4.50",
+          "offset_label": "0.0",
+          "state_disabled": true,
+          "offset_disabled": false,
+          "target_disabled": true,
+          "selected_mode_buttons": 1,
+          "first_moving_vertices": [
+            [
+              0.017940138564575193,
+              0.0040000000000000036,
+              -0.012121963983944592
+            ],
+            [
+              0.019999999999999997,
+              0.0030000000000000027,
+              -0.006821964165829357
+            ],
+            [
+              0.012949747000000001,
+              0.061000000000000006,
+              -0.00977171116582936
+            ],
+            [
+              0.016999999999999998,
+              0.061000000000000006,
+              -0.00977171116582936
+            ]
+          ],
+          "vertices_finite": true,
+          "svg_plate_top": 58.5,
+          "svg_relief_height": 5.5,
+          "sample_status": "この分解標本：56組中、面交差の検出1組。0 mmの取付状態を含む観測です。"
+        },
+        {
+          "variant": "R050",
+          "mode": "service",
+          "state": "open",
+          "side": "left_right",
+          "offset_mm": 6,
+          "meshes": 18,
+          "faces": 54148,
+          "gl_error": 0,
+          "workpiece_visible": false,
+          "width": 455,
+          "height": 450,
+          "label": "service/R050/left_right/6",
+          "filled_pixels": 81687,
+          "pixel_hash": "ea2363da",
+          "relief": "0.50",
+          "plate_height": "30.50",
+          "edge_distance": "4.50",
+          "offset_label": "6.0",
+          "state_disabled": true,
+          "offset_disabled": false,
+          "target_disabled": true,
+          "selected_mode_buttons": 1,
+          "first_moving_vertices": [
+            [
+              0.011940138570509644,
+              0.00400000006562247,
+              -0.012121697125560788
+            ],
+            [
+              0.014000000005934448,
+              0.0030000000656224698,
+              -0.006821697307445553
+            ],
+            [
+              0.006949747005934452,
+              0.06100000006562247,
+              -0.009771444307445556
+            ],
+            [
+              0.011000000005934448,
+              0.06100000006562247,
+              -0.009771444307445556
+            ]
+          ],
+          "vertices_finite": true,
+          "svg_plate_top": 58.5,
+          "svg_relief_height": 5.5,
+          "sample_status": "この分解標本：56組中、面交差の検出0組。連続経路全体の判定ではありません。"
+        },
+        {
+          "variant": "R050",
+          "mode": "service",
+          "state": "open",
+          "side": "left_right",
+          "offset_mm": 12,
+          "meshes": 18,
+          "faces": 54148,
+          "gl_error": 0,
+          "workpiece_visible": false,
+          "width": 455,
+          "height": 450,
+          "label": "service/R050/left_right/12",
+          "filled_pixels": 82688,
+          "pixel_hash": "6ddb51f7",
+          "relief": "0.50",
+          "plate_height": "30.50",
+          "edge_distance": "4.50",
+          "offset_label": "12.0",
+          "state_disabled": true,
+          "offset_disabled": false,
+          "target_disabled": true,
+          "selected_mode_buttons": 1,
+          "first_moving_vertices": [
+            [
+              0.005940138576444095,
+              0.004000000131244938,
+              -0.012121430267176984
+            ],
+            [
+              0.008000000011868898,
+              0.003000000131244937,
+              -0.0068214304490617494
+            ],
+            [
+              0.0009497470118689025,
+              0.06100000013124494,
+              -0.009771177449061752
+            ],
+            [
+              0.005000000011868899,
+              0.06100000013124494,
+              -0.009771177449061752
+            ]
+          ],
+          "vertices_finite": true,
+          "svg_plate_top": 58.5,
+          "svg_relief_height": 5.5,
+          "sample_status": "この分解標本：56組中、面交差の検出0組。連続経路全体の判定ではありません。"
+        },
+        {
+          "variant": "R000",
+          "mode": "holding",
+          "state": "near",
+          "side": "left_right",
+          "offset_mm": 12,
+          "meshes": 22,
+          "faces": 63694,
+          "gl_error": 0,
+          "workpiece_visible": true,
+          "width": 455,
+          "height": 450,
+          "label": "holding/R000/near",
+          "filled_pixels": 89489,
+          "pixel_hash": "8f6fa56f",
+          "relief": "0.00",
+          "plate_height": "31.00",
+          "edge_distance": "5.00",
+          "offset_label": "12.0",
+          "state_disabled": false,
+          "offset_disabled": true,
+          "target_disabled": false,
+          "selected_mode_buttons": 1,
+          "first_moving_vertices": [
+            [
+              0.009940138564575193,
+              0.0040000000000000036,
+              -0.013299999818115228
+            ],
+            [
+              0.012,
+              0.0030000000000000027,
+              -0.007999999999999993
+            ],
+            [
+              0.004949747000000001,
+              0.061000000000000006,
+              -0.010949746999999996
+            ],
+            [
+              0.008999999999999998,
+              0.061000000000000006,
+              -0.010949746999999996
+            ]
+          ],
+          "vertices_finite": true,
+          "svg_plate_top": 53,
+          "svg_relief_height": 0,
+          "sample_status": "元の4保存姿勢。接触面と姿勢は変更していません。"
+        },
+        {
+          "variant": "R000",
+          "mode": "holding",
+          "state": "early",
+          "side": "left_right",
+          "offset_mm": 12,
+          "meshes": 22,
+          "faces": 63694,
+          "gl_error": 0,
+          "workpiece_visible": true,
+          "width": 455,
+          "height": 450,
+          "label": "holding/R000/early",
+          "filled_pixels": 89945,
+          "pixel_hash": "5e79e051",
+          "relief": "0.00",
+          "plate_height": "31.00",
+          "edge_distance": "5.00",
+          "offset_label": "12.0",
+          "state_disabled": false,
+          "offset_disabled": true,
+          "target_disabled": false,
+          "selected_mode_buttons": 1,
+          "first_moving_vertices": [
+            [
+              0.010343530614741303,
+              0.0040000000000000036,
+              -0.013268104293260238
+            ],
+            [
+              0.012403392050166114,
+              0.0030000000000000027,
+              -0.007968104475145003
+            ],
+            [
+              0.005353139050166111,
+              0.061000000000000006,
+              -0.010917851475145006
+            ],
+            [
+              0.009403392050166107,
+              0.061000000000000006,
+              -0.010917851475145006
+            ]
+          ],
+          "vertices_finite": true,
+          "svg_plate_top": 53,
+          "svg_relief_height": 0,
+          "sample_status": "元の4保存姿勢。接触面と姿勢は変更していません。"
+        },
+        {
+          "variant": "R000",
+          "mode": "holding",
+          "state": "open",
+          "side": "left_right",
+          "offset_mm": 12,
+          "meshes": 22,
+          "faces": 63694,
+          "gl_error": 0,
+          "workpiece_visible": true,
+          "width": 455,
+          "height": 450,
+          "label": "holding/R000/open",
+          "filled_pixels": 94145,
+          "pixel_hash": "f7c2277f",
+          "relief": "0.00",
+          "plate_height": "31.00",
+          "edge_distance": "5.00",
+          "offset_label": "12.0",
+          "state_disabled": false,
+          "offset_disabled": true,
+          "target_disabled": false,
+          "selected_mode_buttons": 1,
+          "first_moving_vertices": [
+            [
+              0.017940138564575193,
+              0.0040000000000000036,
+              -0.012121963983944592
+            ],
+            [
+              0.019999999999999997,
+              0.0030000000000000027,
+              -0.006821964165829357
+            ],
+            [
+              0.012949747000000001,
+              0.061000000000000006,
+              -0.00977171116582936
+            ],
+            [
+              0.016999999999999998,
+              0.061000000000000006,
+              -0.00977171116582936
+            ]
+          ],
+          "vertices_finite": true,
+          "svg_plate_top": 53,
+          "svg_relief_height": 0,
+          "sample_status": "元の4保存姿勢。接触面と姿勢は変更していません。"
+        },
+        {
+          "variant": "R000",
+          "mode": "holding",
+          "state": "clear",
+          "side": "left_right",
+          "offset_mm": 12,
+          "meshes": 22,
+          "faces": 63694,
+          "gl_error": 0,
+          "workpiece_visible": true,
+          "width": 455,
+          "height": 450,
+          "label": "holding/R000/clear",
+          "filled_pixels": 65527,
+          "pixel_hash": "aab36e6a",
+          "relief": "0.00",
+          "plate_height": "31.00",
+          "edge_distance": "5.00",
+          "offset_label": "12.0",
+          "state_disabled": false,
+          "offset_disabled": true,
+          "target_disabled": false,
+          "selected_mode_buttons": 1,
+          "first_moving_vertices": [
+            [
+              0.017940138564575193,
+              0.0040000000000000036,
+              0.012878036016055402
+            ],
+            [
+              0.019999999999999997,
+              0.0030000000000000027,
+              0.018178035834170637
+            ],
+            [
+              0.012949747000000001,
+              0.061000000000000006,
+              0.015228288834170635
+            ],
+            [
+              0.016999999999999998,
+              0.061000000000000006,
+              0.015228288834170635
+            ]
+          ],
+          "vertices_finite": true,
+          "svg_plate_top": 53,
+          "svg_relief_height": 0,
+          "sample_status": "元の4保存姿勢。接触面と姿勢は変更していません。"
+        },
+        {
+          "variant": "R025",
+          "mode": "holding",
+          "state": "near",
+          "side": "left_right",
+          "offset_mm": 12,
+          "meshes": 22,
+          "faces": 63694,
+          "gl_error": 0,
+          "workpiece_visible": true,
+          "width": 455,
+          "height": 450,
+          "label": "holding/R025/near",
+          "filled_pixels": 89489,
+          "pixel_hash": "99c9e08",
+          "relief": "0.25",
+          "plate_height": "30.75",
+          "edge_distance": "4.75",
+          "offset_label": "12.0",
+          "state_disabled": false,
+          "offset_disabled": true,
+          "target_disabled": false,
+          "selected_mode_buttons": 1,
+          "first_moving_vertices": [
+            [
+              0.009940138564575193,
+              0.0040000000000000036,
+              -0.013299999818115228
+            ],
+            [
+              0.012,
+              0.0030000000000000027,
+              -0.007999999999999993
+            ],
+            [
+              0.004949747000000001,
+              0.061000000000000006,
+              -0.010949746999999996
+            ],
+            [
+              0.008999999999999998,
+              0.061000000000000006,
+              -0.010949746999999996
+            ]
+          ],
+          "vertices_finite": true,
+          "svg_plate_top": 55.75,
+          "svg_relief_height": 2.75,
+          "sample_status": "元の4保存姿勢。接触面と姿勢は変更していません。"
+        },
+        {
+          "variant": "R025",
+          "mode": "holding",
+          "state": "early",
+          "side": "left_right",
+          "offset_mm": 12,
+          "meshes": 22,
+          "faces": 63694,
+          "gl_error": 0,
+          "workpiece_visible": true,
+          "width": 455,
+          "height": 450,
+          "label": "holding/R025/early",
+          "filled_pixels": 89945,
+          "pixel_hash": "c4d35b4a",
+          "relief": "0.25",
+          "plate_height": "30.75",
+          "edge_distance": "4.75",
+          "offset_label": "12.0",
+          "state_disabled": false,
+          "offset_disabled": true,
+          "target_disabled": false,
+          "selected_mode_buttons": 1,
+          "first_moving_vertices": [
+            [
+              0.010343530614741303,
+              0.0040000000000000036,
+              -0.013268104293260238
+            ],
+            [
+              0.012403392050166114,
+              0.0030000000000000027,
+              -0.007968104475145003
+            ],
+            [
+              0.005353139050166111,
+              0.061000000000000006,
+              -0.010917851475145006
+            ],
+            [
+              0.009403392050166107,
+              0.061000000000000006,
+              -0.010917851475145006
+            ]
+          ],
+          "vertices_finite": true,
+          "svg_plate_top": 55.75,
+          "svg_relief_height": 2.75,
+          "sample_status": "元の4保存姿勢。接触面と姿勢は変更していません。"
+        },
+        {
+          "variant": "R025",
+          "mode": "holding",
+          "state": "open",
+          "side": "left_right",
+          "offset_mm": 12,
+          "meshes": 22,
+          "faces": 63694,
+          "gl_error": 0,
+          "workpiece_visible": true,
+          "width": 455,
+          "height": 450,
+          "label": "holding/R025/open",
+          "filled_pixels": 94145,
+          "pixel_hash": "a669ea66",
+          "relief": "0.25",
+          "plate_height": "30.75",
+          "edge_distance": "4.75",
+          "offset_label": "12.0",
+          "state_disabled": false,
+          "offset_disabled": true,
+          "target_disabled": false,
+          "selected_mode_buttons": 1,
+          "first_moving_vertices": [
+            [
+              0.017940138564575193,
+              0.0040000000000000036,
+              -0.012121963983944592
+            ],
+            [
+              0.019999999999999997,
+              0.0030000000000000027,
+              -0.006821964165829357
+            ],
+            [
+              0.012949747000000001,
+              0.061000000000000006,
+              -0.00977171116582936
+            ],
+            [
+              0.016999999999999998,
+              0.061000000000000006,
+              -0.00977171116582936
+            ]
+          ],
+          "vertices_finite": true,
+          "svg_plate_top": 55.75,
+          "svg_relief_height": 2.75,
+          "sample_status": "元の4保存姿勢。接触面と姿勢は変更していません。"
+        },
+        {
+          "variant": "R025",
+          "mode": "holding",
+          "state": "clear",
+          "side": "left_right",
+          "offset_mm": 12,
+          "meshes": 22,
+          "faces": 63694,
+          "gl_error": 0,
+          "workpiece_visible": true,
+          "width": 455,
+          "height": 450,
+          "label": "holding/R025/clear",
+          "filled_pixels": 65527,
+          "pixel_hash": "513e170e",
+          "relief": "0.25",
+          "plate_height": "30.75",
+          "edge_distance": "4.75",
+          "offset_label": "12.0",
+          "state_disabled": false,
+          "offset_disabled": true,
+          "target_disabled": false,
+          "selected_mode_buttons": 1,
+          "first_moving_vertices": [
+            [
+              0.017940138564575193,
+              0.0040000000000000036,
+              0.012878036016055402
+            ],
+            [
+              0.019999999999999997,
+              0.0030000000000000027,
+              0.018178035834170637
+            ],
+            [
+              0.012949747000000001,
+              0.061000000000000006,
+              0.015228288834170635
+            ],
+            [
+              0.016999999999999998,
+              0.061000000000000006,
+              0.015228288834170635
+            ]
+          ],
+          "vertices_finite": true,
+          "svg_plate_top": 55.75,
+          "svg_relief_height": 2.75,
+          "sample_status": "元の4保存姿勢。接触面と姿勢は変更していません。"
+        },
+        {
+          "variant": "R050",
+          "mode": "holding",
+          "state": "near",
+          "side": "left_right",
+          "offset_mm": 12,
+          "meshes": 22,
+          "faces": 63694,
+          "gl_error": 0,
+          "workpiece_visible": true,
+          "width": 455,
+          "height": 450,
+          "label": "holding/R050/near",
+          "filled_pixels": 89489,
+          "pixel_hash": "3872022a",
+          "relief": "0.50",
+          "plate_height": "30.50",
+          "edge_distance": "4.50",
+          "offset_label": "12.0",
+          "state_disabled": false,
+          "offset_disabled": true,
+          "target_disabled": false,
+          "selected_mode_buttons": 1,
+          "first_moving_vertices": [
+            [
+              0.009940138564575193,
+              0.0040000000000000036,
+              -0.013299999818115228
+            ],
+            [
+              0.012,
+              0.0030000000000000027,
+              -0.007999999999999993
+            ],
+            [
+              0.004949747000000001,
+              0.061000000000000006,
+              -0.010949746999999996
+            ],
+            [
+              0.008999999999999998,
+              0.061000000000000006,
+              -0.010949746999999996
+            ]
+          ],
+          "vertices_finite": true,
+          "svg_plate_top": 58.5,
+          "svg_relief_height": 5.5,
+          "sample_status": "元の4保存姿勢。接触面と姿勢は変更していません。"
+        },
+        {
+          "variant": "R050",
+          "mode": "holding",
+          "state": "early",
+          "side": "left_right",
+          "offset_mm": 12,
+          "meshes": 22,
+          "faces": 63694,
+          "gl_error": 0,
+          "workpiece_visible": true,
+          "width": 455,
+          "height": 450,
+          "label": "holding/R050/early",
+          "filled_pixels": 89945,
+          "pixel_hash": "34fd55b4",
+          "relief": "0.50",
+          "plate_height": "30.50",
+          "edge_distance": "4.50",
+          "offset_label": "12.0",
+          "state_disabled": false,
+          "offset_disabled": true,
+          "target_disabled": false,
+          "selected_mode_buttons": 1,
+          "first_moving_vertices": [
+            [
+              0.010343530614741303,
+              0.0040000000000000036,
+              -0.013268104293260238
+            ],
+            [
+              0.012403392050166114,
+              0.0030000000000000027,
+              -0.007968104475145003
+            ],
+            [
+              0.005353139050166111,
+              0.061000000000000006,
+              -0.010917851475145006
+            ],
+            [
+              0.009403392050166107,
+              0.061000000000000006,
+              -0.010917851475145006
+            ]
+          ],
+          "vertices_finite": true,
+          "svg_plate_top": 58.5,
+          "svg_relief_height": 5.5,
+          "sample_status": "元の4保存姿勢。接触面と姿勢は変更していません。"
+        },
+        {
+          "variant": "R050",
+          "mode": "holding",
+          "state": "open",
+          "side": "left_right",
+          "offset_mm": 12,
+          "meshes": 22,
+          "faces": 63694,
+          "gl_error": 0,
+          "workpiece_visible": true,
+          "width": 455,
+          "height": 450,
+          "label": "holding/R050/open",
+          "filled_pixels": 94145,
+          "pixel_hash": "2e6f495b",
+          "relief": "0.50",
+          "plate_height": "30.50",
+          "edge_distance": "4.50",
+          "offset_label": "12.0",
+          "state_disabled": false,
+          "offset_disabled": true,
+          "target_disabled": false,
+          "selected_mode_buttons": 1,
+          "first_moving_vertices": [
+            [
+              0.017940138564575193,
+              0.0040000000000000036,
+              -0.012121963983944592
+            ],
+            [
+              0.019999999999999997,
+              0.0030000000000000027,
+              -0.006821964165829357
+            ],
+            [
+              0.012949747000000001,
+              0.061000000000000006,
+              -0.00977171116582936
+            ],
+            [
+              0.016999999999999998,
+              0.061000000000000006,
+              -0.00977171116582936
+            ]
+          ],
+          "vertices_finite": true,
+          "svg_plate_top": 58.5,
+          "svg_relief_height": 5.5,
+          "sample_status": "元の4保存姿勢。接触面と姿勢は変更していません。"
+        },
+        {
+          "variant": "R050",
+          "mode": "holding",
+          "state": "clear",
+          "side": "left_right",
+          "offset_mm": 12,
+          "meshes": 22,
+          "faces": 63694,
+          "gl_error": 0,
+          "workpiece_visible": true,
+          "width": 455,
+          "height": 450,
+          "label": "holding/R050/clear",
+          "filled_pixels": 65527,
+          "pixel_hash": "4af2b32",
+          "relief": "0.50",
+          "plate_height": "30.50",
+          "edge_distance": "4.50",
+          "offset_label": "12.0",
+          "state_disabled": false,
+          "offset_disabled": true,
+          "target_disabled": false,
+          "selected_mode_buttons": 1,
+          "first_moving_vertices": [
+            [
+              0.017940138564575193,
+              0.0040000000000000036,
+              0.012878036016055402
+            ],
+            [
+              0.019999999999999997,
+              0.0030000000000000027,
+              0.018178035834170637
+            ],
+            [
+              0.012949747000000001,
+              0.061000000000000006,
+              0.015228288834170635
+            ],
+            [
+              0.016999999999999998,
+              0.061000000000000006,
+              0.015228288834170635
+            ]
+          ],
+          "vertices_finite": true,
+          "svg_plate_top": 58.5,
+          "svg_relief_height": 5.5,
+          "sample_status": "元の4保存姿勢。接触面と姿勢は変更していません。"
+        },
+        {
+          "variant": "R050",
+          "mode": "service",
+          "state": "open",
+          "side": "left_right",
+          "offset_mm": 0,
+          "meshes": 8,
+          "faces": 2640,
+          "gl_error": 0,
+          "workpiece_visible": false,
+          "width": 455,
+          "height": 450,
+          "label": "toggle/hardware",
+          "filled_pixels": 14789,
+          "pixel_hash": "4860679c",
+          "relief": "0.50",
+          "plate_height": "30.50",
+          "edge_distance": "4.50",
+          "offset_label": "0.0",
+          "state_disabled": true,
+          "offset_disabled": false,
+          "target_disabled": true,
+          "selected_mode_buttons": 1,
+          "first_moving_vertices": [
+            [
+              0.017940138564575193,
+              0.0040000000000000036,
+              -0.012121963983944592
+            ],
+            [
+              0.019999999999999997,
+              0.0030000000000000027,
+              -0.006821964165829357
+            ],
+            [
+              0.012949747000000001,
+              0.061000000000000006,
+              -0.00977171116582936
+            ],
+            [
+              0.016999999999999998,
+              0.061000000000000006,
+              -0.00977171116582936
+            ]
+          ],
+          "vertices_finite": true,
+          "svg_plate_top": 58.5,
+          "svg_relief_height": 5.5,
+          "sample_status": "この分解標本：56組中、面交差の検出1組。0 mmの取付状態を含む観測です。"
+        },
+        {
+          "variant": "R050",
+          "mode": "service",
+          "state": "open",
+          "side": "left_right",
+          "offset_mm": 0,
+          "meshes": 18,
+          "faces": 54148,
+          "gl_error": 0,
+          "workpiece_visible": false,
+          "width": 455,
+          "height": 450,
+          "label": "toggle/target",
+          "filled_pixels": 79909,
+          "pixel_hash": "fee5cfc7",
+          "relief": "0.50",
+          "plate_height": "30.50",
+          "edge_distance": "4.50",
+          "offset_label": "0.0",
+          "state_disabled": true,
+          "offset_disabled": false,
+          "target_disabled": true,
+          "selected_mode_buttons": 1,
+          "first_moving_vertices": [
+            [
+              0.017940138564575193,
+              0.0040000000000000036,
+              -0.012121963983944592
+            ],
+            [
+              0.019999999999999997,
+              0.0030000000000000027,
+              -0.006821964165829357
+            ],
+            [
+              0.012949747000000001,
+              0.061000000000000006,
+              -0.00977171116582936
+            ],
+            [
+              0.016999999999999998,
+              0.061000000000000006,
+              -0.00977171116582936
+            ]
+          ],
+          "vertices_finite": true,
+          "svg_plate_top": 58.5,
+          "svg_relief_height": 5.5,
+          "sample_status": "この分解標本：56組中、面交差の検出1組。0 mmの取付状態を含む観測です。"
+        },
+        {
+          "variant": "R050",
+          "mode": "service",
+          "state": "open",
+          "side": "left_right",
+          "offset_mm": 0,
+          "meshes": 10,
+          "faces": 45804,
+          "gl_error": 0,
+          "workpiece_visible": false,
+          "width": 455,
+          "height": 450,
+          "label": "toggle/opposite",
+          "filled_pixels": 48576,
+          "pixel_hash": "694b5ac0",
+          "relief": "0.50",
+          "plate_height": "30.50",
+          "edge_distance": "4.50",
+          "offset_label": "0.0",
+          "state_disabled": true,
+          "offset_disabled": false,
+          "target_disabled": true,
+          "selected_mode_buttons": 1,
+          "first_moving_vertices": [
+            [
+              0.017940138564575193,
+              0.0040000000000000036,
+              -0.012121963983944592
+            ],
+            [
+              0.019999999999999997,
+              0.0030000000000000027,
+              -0.006821964165829357
+            ],
+            [
+              0.012949747000000001,
+              0.061000000000000006,
+              -0.00977171116582936
+            ],
+            [
+              0.016999999999999998,
+              0.061000000000000006,
+              -0.00977171116582936
+            ]
+          ],
+          "vertices_finite": true,
+          "svg_plate_top": 58.5,
+          "svg_relief_height": 5.5,
+          "sample_status": "この分解標本：56組中、面交差の検出1組。0 mmの取付状態を含む観測です。"
+        },
+        {
+          "variant": "R050",
+          "mode": "service",
+          "state": "open",
+          "side": "left_right",
+          "offset_mm": 0,
+          "meshes": 18,
+          "faces": 54148,
+          "gl_error": 0,
+          "workpiece_visible": false,
+          "width": 455,
+          "height": 450,
+          "label": "camera/front",
+          "filled_pixels": 56513,
+          "pixel_hash": "823ac882",
+          "relief": "0.50",
+          "plate_height": "30.50",
+          "edge_distance": "4.50",
+          "offset_label": "0.0",
+          "state_disabled": true,
+          "offset_disabled": false,
+          "target_disabled": true,
+          "selected_mode_buttons": 1,
+          "first_moving_vertices": [
+            [
+              0.017940138564575193,
+              0.0040000000000000036,
+              -0.012121963983944592
+            ],
+            [
+              0.019999999999999997,
+              0.0030000000000000027,
+              -0.006821964165829357
+            ],
+            [
+              0.012949747000000001,
+              0.061000000000000006,
+              -0.00977171116582936
+            ],
+            [
+              0.016999999999999998,
+              0.061000000000000006,
+              -0.00977171116582936
+            ]
+          ],
+          "vertices_finite": true,
+          "svg_plate_top": 58.5,
+          "svg_relief_height": 5.5,
+          "sample_status": "この分解標本：56組中、面交差の検出1組。0 mmの取付状態を含む観測です。"
+        },
+        {
+          "variant": "R050",
+          "mode": "service",
+          "state": "open",
+          "side": "left_right",
+          "offset_mm": 0,
+          "meshes": 18,
+          "faces": 54148,
+          "gl_error": 0,
+          "workpiece_visible": false,
+          "width": 455,
+          "height": 450,
+          "label": "camera/side",
+          "filled_pixels": 29878,
+          "pixel_hash": "dbc03c6d",
+          "relief": "0.50",
+          "plate_height": "30.50",
+          "edge_distance": "4.50",
+          "offset_label": "0.0",
+          "state_disabled": true,
+          "offset_disabled": false,
+          "target_disabled": true,
+          "selected_mode_buttons": 1,
+          "first_moving_vertices": [
+            [
+              0.017940138564575193,
+              0.0040000000000000036,
+              -0.012121963983944592
+            ],
+            [
+              0.019999999999999997,
+              0.0030000000000000027,
+              -0.006821964165829357
+            ],
+            [
+              0.012949747000000001,
+              0.061000000000000006,
+              -0.00977171116582936
+            ],
+            [
+              0.016999999999999998,
+              0.061000000000000006,
+              -0.00977171116582936
+            ]
+          ],
+          "vertices_finite": true,
+          "svg_plate_top": 58.5,
+          "svg_relief_height": 5.5,
+          "sample_status": "この分解標本：56組中、面交差の検出1組。0 mmの取付状態を含む観測です。"
+        },
+        {
+          "variant": "R050",
+          "mode": "service",
+          "state": "open",
+          "side": "left_right",
+          "offset_mm": 0,
+          "meshes": 18,
+          "faces": 54148,
+          "gl_error": 0,
+          "workpiece_visible": false,
+          "width": 455,
+          "height": 450,
+          "label": "camera/oblique",
+          "filled_pixels": 79909,
+          "pixel_hash": "fee5cfc7",
+          "relief": "0.50",
+          "plate_height": "30.50",
+          "edge_distance": "4.50",
+          "offset_label": "0.0",
+          "state_disabled": true,
+          "offset_disabled": false,
+          "target_disabled": true,
+          "selected_mode_buttons": 1,
+          "first_moving_vertices": [
+            [
+              0.017940138564575193,
+              0.0040000000000000036,
+              -0.012121963983944592
+            ],
+            [
+              0.019999999999999997,
+              0.0030000000000000027,
+              -0.006821964165829357
+            ],
+            [
+              0.012949747000000001,
+              0.061000000000000006,
+              -0.00977171116582936
+            ],
+            [
+              0.016999999999999998,
+              0.061000000000000006,
+              -0.00977171116582936
+            ]
+          ],
+          "vertices_finite": true,
+          "svg_plate_top": 58.5,
+          "svg_relief_height": 5.5,
+          "sample_status": "この分解標本：56組中、面交差の検出1組。0 mmの取付状態を含む観測です。"
+        },
+        {
+          "variant": "R050",
+          "mode": "service",
+          "state": "open",
+          "side": "left_right",
+          "offset_mm": 0,
+          "meshes": 10,
+          "faces": 45804,
+          "gl_error": 0,
+          "workpiece_visible": false,
+          "width": 455,
+          "height": 450,
+          "label": "edge",
+          "filled_pixels": 112663,
+          "pixel_hash": "87310a24",
+          "relief": "0.50",
+          "plate_height": "30.50",
+          "edge_distance": "4.50",
+          "offset_label": "0.0",
+          "state_disabled": true,
+          "offset_disabled": false,
+          "target_disabled": true,
+          "selected_mode_buttons": 1,
+          "first_moving_vertices": [
+            [
+              0.017940138564575193,
+              0.0040000000000000036,
+              -0.012121963983944592
+            ],
+            [
+              0.019999999999999997,
+              0.0030000000000000027,
+              -0.006821964165829357
+            ],
+            [
+              0.012949747000000001,
+              0.061000000000000006,
+              -0.00977171116582936
+            ],
+            [
+              0.016999999999999998,
+              0.061000000000000006,
+              -0.00977171116582936
+            ]
+          ],
+          "vertices_finite": true,
+          "svg_plate_top": 58.5,
+          "svg_relief_height": 5.5,
+          "sample_status": "この分解標本：56組中、面交差の検出1組。0 mmの取付状態を含む観測です。"
+        },
+        {
+          "variant": "R050",
+          "mode": "service",
+          "state": "open",
+          "side": "left_right",
+          "offset_mm": 0,
+          "meshes": 18,
+          "faces": 54148,
+          "gl_error": 0,
+          "workpiece_visible": false,
+          "width": 455,
+          "height": 450,
+          "label": "whole",
+          "filled_pixels": 77521,
+          "pixel_hash": "a727ede2",
+          "relief": "0.50",
+          "plate_height": "30.50",
+          "edge_distance": "4.50",
+          "offset_label": "0.0",
+          "state_disabled": true,
+          "offset_disabled": false,
+          "target_disabled": true,
+          "selected_mode_buttons": 1,
+          "first_moving_vertices": [
+            [
+              0.017940138564575193,
+              0.0040000000000000036,
+              -0.012121963983944592
+            ],
+            [
+              0.019999999999999997,
+              0.0030000000000000027,
+              -0.006821964165829357
+            ],
+            [
+              0.012949747000000001,
+              0.061000000000000006,
+              -0.00977171116582936
+            ],
+            [
+              0.016999999999999998,
+              0.061000000000000006,
+              -0.00977171116582936
+            ]
+          ],
+          "vertices_finite": true,
+          "svg_plate_top": 58.5,
+          "svg_relief_height": 5.5,
+          "sample_status": "この分解標本：56組中、面交差の検出1組。0 mmの取付状態を含む観測です。"
+        },
+        {
+          "variant": "R050",
+          "mode": "service",
+          "state": "open",
+          "side": "left_right",
+          "offset_mm": 0,
+          "meshes": 18,
+          "faces": 54148,
+          "gl_error": 0,
+          "workpiece_visible": false,
+          "width": 455,
+          "height": 450,
+          "label": "reset",
+          "filled_pixels": 79909,
+          "pixel_hash": "fee5cfc7",
+          "relief": "0.50",
+          "plate_height": "30.50",
+          "edge_distance": "4.50",
+          "offset_label": "0.0",
+          "state_disabled": true,
+          "offset_disabled": false,
+          "target_disabled": true,
+          "selected_mode_buttons": 1,
+          "first_moving_vertices": [
+            [
+              0.017940138564575193,
+              0.0040000000000000036,
+              -0.012121963983944592
+            ],
+            [
+              0.019999999999999997,
+              0.0030000000000000027,
+              -0.006821964165829357
+            ],
+            [
+              0.012949747000000001,
+              0.061000000000000006,
+              -0.00977171116582936
+            ],
+            [
+              0.016999999999999998,
+              0.061000000000000006,
+              -0.00977171116582936
+            ]
+          ],
+          "vertices_finite": true,
+          "svg_plate_top": 58.5,
+          "svg_relief_height": 5.5,
+          "sample_status": "この分解標本：56組中、面交差の検出1組。0 mmの取付状態を含む観測です。"
+        }
+      ],
+      "failure": null,
+      "viewport": 500,
+      "scroll_width": 485
+    }
+  },
+  "local_paths_exist": [
+    "hand_mount_relief_v01.blend",
+    "hand_mount_relief_R025_v01.glb",
+    "hand_mount_relief_R050_v01.glb",
+    "取付上端の逃げ比較_v01.md",
+    "hand_mount_relief_observations_v01.json",
+    "hand_mount_relief_native_v01.json"
+  ],
+  "physical_acceptance_verdict": null
+}

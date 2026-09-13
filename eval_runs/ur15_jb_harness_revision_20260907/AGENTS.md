@@ -162,3 +162,21 @@ numbers unknown until their basis and the scope of the product change are set.
   custom screw engagement and the needed pin travel remain design inputs.
   Physical acceptance, arm trajectories and video production remain outside
   this isolated service study.
+
+## Mounting upper-edge comparison on 2026-09-14
+
+- The following user `ok` authorized the local relief comparison recorded in
+  `analysis/hand_mount_relief_v01.md`. Only four upper plate corners per side
+  move, by 0.25 or 0.5 mm along the source mounting face. D40's original
+  hardware, hole rims, terminal/root contacts and four poses stay unchanged.
+  Neither relief value is selected for manufacture or an acceptance threshold.
+- Repeating the same service samples gives surface pairs in nine of 24 positive
+  offsets per side for the baseline and zero for both relief candidates. The
+  zero-offset mounting surface pairs remain included in the full record.
+  Do not infer continuous extraction, pin/screw access or loaded clearance from
+  these samples. Original degenerate tessellation faces remain unmodified.
+- Service sampling continues using derived world vertices without reassigning
+  scene matrices. When comparing historical static reports, normalize only the
+  candidate prefix in scene-qualified object names; keep measurements intact.
+  Root support joining, material/compliance, screw engagement and actual
+  manufacturing tolerances remain unresolved. Arm/video production stays paused.
