@@ -97,16 +97,28 @@ def _as_list(value) -> list:
     return [value]
 
 
-# Top-level keys whose value is a list (or a mapping of lists). Flow sequences and comment lines are
-# parsed only under these keys; every other key (node_id, status, parent_node, ...) keeps the plain behavior.
+# Top-level keys whose value is a list (or a mapping of lists). On the fallback path their blocks are read as YAML.
 _LIST_KEYS = {"children_nodes", "dependencies"}
+
+
+def _load_yaml_block(text: str) -> object:
+    """Load one frontmatter block with yaml.safe_load; return None if it is not valid YAML on its own."""
+    try:
+        return yaml.safe_load(text)
+    except Exception:  # safe_load also raises ValueError/KeyError/RecursionError on odd tags and nesting
+        return None
 
 
 def _parse_frontmatter_regex(body: str) -> dict:
     """Line-based fallback parser: top-level scalars + top-level arrays + 1-level nested arrays.
 
     Handles state.md frontmatter when YAML parse fails (typically due to embedded ': ' in values).
-    Returns partial dict; nested structures beyond 1 level are skipped.
+    A list key (children_nodes, dependencies) is read differently: its block, from the key line up to the next line
+    that looks like a top-level ``key:``, is loaded with yaml.safe_load on its own, and if that gives a mapping that
+    holds the key, the value is used as is. The block then reads as YAML reads it alone; an anchor defined outside
+    the block or a flow list continued at column 0 can still read differently from the whole file.
+    Every other block uses the line reading, where nested structures beyond 1 level are skipped.
+    Returns partial dict.
     """
     fm: dict = {}
     lines = body.split("\n")
@@ -118,11 +130,20 @@ def _parse_frontmatter_regex(body: str) -> dict:
             i += 1
             continue
         key, val = m.group(1), m.group(2).strip()
+        if key in _LIST_KEYS:
+            # The block runs until the next top-level key line.
+            j = i + 1
+            while j < len(lines) and not re.match(r"^[a-zA-Z_][\w_-]*:", lines[j]):
+                j += 1
+            loaded = _load_yaml_block("\n".join(lines[i:j]))
+            if isinstance(loaded, dict) and key in loaded:
+                fm[key] = loaded[key]
+                i = j
+                continue
         # Strip inline comment for scalar detection (do NOT strip for "" check since empty implies block)
         val_clean = _strip_inline_comment(val) if val else val
-        list_key = key in _LIST_KEYS
-        if val == "" or (list_key and val.startswith("#")):
-            # Block (the value is empty, or only a comment on a list key): check next lines for list or nested mapping
+        if val == "":
+            # Block: check next lines for list or nested mapping
             j = i + 1
             items: list = []
             nested: dict = {}
@@ -133,29 +154,21 @@ def _parse_frontmatter_regex(body: str) -> dict:
                     if item:
                         items.append(item)
                     j += 1
-                elif lj.strip() == "" or (list_key and lj.strip().startswith("#")):
+                elif lj.strip() == "":
                     j += 1
                 elif re.match(r"^  [a-zA-Z_][\w_-]*:", lj):
                     nm = re.match(r"^  ([a-zA-Z_][\w_-]*):\s*(.*)$", lj)
                     if nm:
                         nkey = nm.group(1)
                         nval = nm.group(2).strip()
-                        if list_key:
-                            nflow = _parse_flow_sequence(_strip_inline_comment(nval))
-                        else:
-                            nflow = [] if nval == "[]" else None
-                        if nflow is not None:
-                            nested[nkey] = nflow
+                        if nval == "[]":
+                            nested[nkey] = []
                             j += 1
-                        elif nval == "" or (list_key and nval.startswith("#")):
+                        elif nval == "":
                             # Nested list under nested key
                             k = j + 1
                             n_items: list = []
-                            while k < len(lines) and (
-                                lines[k].startswith("    - ")
-                                or lines[k].strip() == ""
-                                or (list_key and lines[k].strip().startswith("#"))
-                            ):
+                            while k < len(lines) and (lines[k].startswith("    - ") or lines[k].strip() == ""):
                                 if lines[k].startswith("    - "):
                                     item = _strip_inline_comment(lines[k][6:])
                                     if item:
@@ -179,9 +192,6 @@ def _parse_frontmatter_regex(body: str) -> dict:
             i = j
         elif val_clean == "[]":
             fm[key] = []
-            i += 1
-        elif list_key and (flow := _parse_flow_sequence(val_clean)) is not None:
-            fm[key] = flow
             i += 1
         elif val_clean == "null":
             fm[key] = None
@@ -254,7 +264,7 @@ def adapt(fm: dict) -> dict:
     children_raw = _as_list(fm.get("children_nodes"))
 
     # Node-ID filter for dependency/children values; looser than the LTM-1 §1 (v1.3) node_id format. Drops:
-    # - regex fallback dict-as-list-item collapses ('shared_with: T-Foo (...)')
+    # - list items that are mappings ('shared_with: T-Foo (...)'), read as a dict or collapsed to a string
     # - non-conformant state.md deps (descriptive strings like 'T-Skill-GC-EvalGap COMPLETE'
     #   or 'T-Skill-IC F1 WarmStart done (...)' which create spurious blockers in viewer)
     _NODE_ID_RE = re.compile(r"^T-[\w-]+$")
