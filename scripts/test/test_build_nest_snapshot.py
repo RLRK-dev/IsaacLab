@@ -164,6 +164,8 @@ def _hard(manual: list) -> list[tuple[str, str]]:
         ("T-\uff11", False),
         ("T-\u00e9", False),
         ("T-A\n", False),
+        ("T-A#s2", False),
+        ("T-A/B", False),
     ],
 )
 def test_ltm1_node_id_format(node_id, valid):
@@ -171,6 +173,7 @@ def test_ltm1_node_id_format(node_id, valid):
     assert bool(bns.LTM1_NODE_ID_RE.fullmatch(node_id)) is valid
 
 
+@pytest.mark.parametrize("path", ["yaml", "regex"])
 @pytest.mark.parametrize("folder", ["", "_archive/"])
 @pytest.mark.parametrize(
     "status",
@@ -186,16 +189,17 @@ def test_ltm1_node_id_format(node_id, valid):
         None,
     ],
 )
-def test_manifest_scan_fails_ids_outside_ltm1_format_on_every_node(tmp_path, monkeypatch, status, folder):
-    """A node_id or parent_node outside the LTM-1 §1 format is HARD whatever the status or folder; the row is kept."""
+def test_manifest_scan_fails_ids_outside_ltm1_format_on_every_node(tmp_path, monkeypatch, status, folder, path):
+    """A node_id or parent_node outside the LTM-1 §1 format is HARD whatever the status, folder or parse path."""
     status_line = "" if status is None else f"status: {status}\n"
+    front = "node_id: T-bad_id\n" + status_line + "parent_node: T-Good (see notes)\n"
+    if path == "regex":
+        front = BREAKS_YAML + front
+    _parse(front, path)
     rows, manual = _scan(
         tmp_path / "vault",
         monkeypatch,
-        {
-            "T-Good": "node_id: T-Good\nstatus: IN_PROGRESS\n",
-            folder + "T-bad_id": "node_id: T-bad_id\n" + status_line + "parent_node: T-Good (see notes)\n",
-        },
+        {"T-Good": "node_id: T-Good\nstatus: IN_PROGRESS\n", folder + "T-bad_id": front},
     )
     assert [r["id"] for r in rows] == ["T-Good", "T-bad_id"]
     bad = folder + "T-bad_id/state.md"
@@ -203,36 +207,46 @@ def test_manifest_scan_fails_ids_outside_ltm1_format_on_every_node(tmp_path, mon
 
 
 def test_manifest_scan_format_reasons_say_how_to_fix(tmp_path, monkeypatch):
-    """A node_id issue goes to Rs1 (the human); a parent_node issue is fixed by copying the parent's node_id."""
+    """Reasons name who acts and what not to do; whitespace-only and parent_node issues get their own fixes."""
     _, manual = _scan(
         tmp_path / "vault",
         monkeypatch,
         {
             "T-Good": "node_id: T-Good\nstatus: IN_PROGRESS\n",
-            "T-bad_id": "node_id: T-bad_id\nstatus: IN_PROGRESS\n",
+            "T-bad_id": "node_id: T-bad_id\nstatus: PENDING\n",
             "T-Child": "node_id: T-Child\nstatus: IN_PROGRESS\nparent_node: T-Good (see notes)\n",
+            "T-Space": 'node_id: " T-Space"\nstatus: IN_PROGRESS\n',
         },
     )
     reasons = {path: reason for severity, path, reason in manual if severity == "HARD"}
-    assert set(reasons) == {"T-bad_id/state.md", "T-Child/state.md"}
+    assert set(reasons) == {"T-bad_id/state.md", "T-Child/state.md", "T-Space/state.md"}
     node_reason = reasons["T-bad_id/state.md"]
     assert node_reason.startswith("node_id 'T-bad_id' does not match the LTM-1 §1 node ID format.")
     for clause in (
-        "stops with BLOCKED_FOR_USER and tells Rs1 (the human)",
-        "chooses a rename or a revision of LTM-1 §1",
-        "there is no exception list",
-        "Do not rename the node, blank node_id, change status, move the folder or add the file to nest_skiplist.txt.",
+        "LTM-1 §1 makes the node ID permanent",
+        "the session responsible for this node, or the session that edited this state.md or ran emit when no session"
+        " is bound (PENDING, COMPLETE, ARCHIVED), stops with BLOCKED_FOR_USER and tells Rs1 (the human)",
+        "who chooses a rename or a revision of LTM-1 §1; there is no exception list.",
+        "To clear this item, do not rename the node, remove or blank node_id, change status, move or rename the folder"
+        " or state.md, or add the file to nest_skiplist.txt; normal status changes and the discard move are not"
+        " forbidden.",
     ):
         assert clause in node_reason
     parent_reason = reasons["T-Child/state.md"]
     assert parent_reason.startswith("parent_node 'T-Good (see notes)' does not match the LTM-1 §1 node ID format.")
     for clause in (
-        "Copy the parent node's node_id into parent_node exactly",
-        "stop and tell Rs1 (the human)",
-        "Do not blank parent_node.",
+        "Copy the parent node's node_id into parent_node exactly;",
+        "a node with no parent writes parent_node: null (LTM-1 §2.1).",
+        "If the parent's node_id is itself outside the format, stop and tell Rs1 (the human).",
+        "Do not blank the parent_node of a node that has a parent.",
     ):
         assert clause in parent_reason
     assert "rename" not in parent_reason
+    space_reason = reasons["T-Space/state.md"]
+    assert space_reason == (
+        "node_id ' T-Space' has whitespace around an ID that is otherwise in the LTM-1 §1 node ID format."
+        " Remove the whitespace; that is not a rename."
+    )
 
 
 @pytest.mark.parametrize(
@@ -246,8 +260,33 @@ def test_manifest_scan_format_reasons_say_how_to_fix(tmp_path, monkeypatch):
         ("node_id: >-\n  T-Q\nparent_node: 'T-P'\n", ("T-Q", "T-P"), []),
         ("node_id: T-bad_x\n", ("T-bad_x", "—"), ["node_id"]),
         ("node_id: T-Q\nparent_node: T-P\n  (moved from T-O)\n", ("T-Q", "T-P (moved from T-O)"), ["parent_node"]),
+        ("node_id: |\n  T-Q\nparent_node: T-P\n", ("T-Q", "T-P"), ["node_id"]),
+        ("node_id: >\n  T-Q\nparent_node: T-P\n", ("T-Q", "T-P"), ["node_id"]),
+        ("node_id: T-Q\nparent_node: |\n  T-P\nstatus: X\n", ("T-Q", "T-P"), ["parent_node"]),
+        ("node_id: T-Q\nparent_node: |\n  T-P\n", ("T-Q", "T-P"), []),
+        ("node_id: T-Q\nparent_node: —\n", ("T-Q", "—"), ["parent_node"]),
+        ("node_id: T-Q\nparent_node: ' — '\n", ("T-Q", "—"), ["parent_node"]),
+        ("node_id: T-Q\nparent_node: 'null'\n", ("T-Q", "—"), []),
+        ('node_id: " T-Q"\n', ("T-Q", "—"), ["node_id"]),
     ],
-    ids=["quoted-id", "comments", "Null", "NULL", "empty-quotes", "folded-id", "bad-id", "continuation-line"],
+    ids=[
+        "quoted-id",
+        "comments",
+        "Null",
+        "NULL",
+        "empty-quotes",
+        "folded-id",
+        "bad-id",
+        "continuation-line",
+        "literal-block-id-then-key",
+        "folded-block-id-then-key",
+        "literal-block-parent-then-key",
+        "literal-block-parent-last",
+        "em-dash-parent",
+        "padded-em-dash-parent",
+        "quoted-null-parent",
+        "leading-space-id",
+    ],
 )
 def test_manifest_scan_reads_id_lines_as_yaml_on_fallback(tmp_path, monkeypatch, front, row, hard):
     """On the fallback path node_id and parent_node read as on the YAML path, so only a real format issue is HARD."""
@@ -259,17 +298,40 @@ def test_manifest_scan_reads_id_lines_as_yaml_on_fallback(tmp_path, monkeypatch,
 
 
 def test_manifest_scan_checks_ids_as_written(tmp_path, monkeypatch):
-    """LTM-1 §1 applies to the whole value, so a quoted space, an ideographic space or a no-break space is HARD."""
+    """LTM-1 §1 applies to the value as written: spaces, a fullwidth letter or a lowercase prefix are HARD."""
     rows, manual = _scan(
         tmp_path / "vault",
         monkeypatch,
         {
             "T-A": 'node_id: "T-A "\nstatus: IN_PROGRESS\n',
             "T-B": "node_id: T-B\u3000\nstatus: IN_PROGRESS\nparent_node: T-A\u00a0\n",
+            "T-C": "node_id: T-\uff23\nstatus: IN_PROGRESS\n",
+            "T-D": "node_id: t-D\nstatus: IN_PROGRESS\n",
         },
     )
-    assert [(r["id"], r["parent"]) for r in rows] == [("T-A", "—"), ("T-B", "T-A")]
-    assert _hard(manual) == [("T-A/state.md", "node_id"), ("T-B/state.md", "node_id"), ("T-B/state.md", "parent_node")]
+    assert [(r["id"], r["parent"]) for r in rows] == [("T-A", "—"), ("T-B", "T-A"), ("T-\uff23", "—"), ("t-D", "—")]
+    assert _hard(manual) == [
+        ("T-A/state.md", "node_id"),
+        ("T-B/state.md", "node_id"),
+        ("T-B/state.md", "parent_node"),
+        ("T-C/state.md", "node_id"),
+        ("T-D/state.md", "node_id"),
+    ]
+
+
+def test_manifest_scan_checks_non_string_ids(tmp_path, monkeypatch):
+    """IDs that YAML loads as numbers, booleans or lists are checked as their string form and are HARD."""
+    rows, manual = _scan(
+        tmp_path / "vault",
+        monkeypatch,
+        {
+            "T-N": "node_id: 2026\nstatus: IN_PROGRESS\nparent_node: [T-P]\n",
+            "T-Y": "node_id: yes\nstatus: IN_PROGRESS\nparent_node: 0\n",
+        },
+    )
+    assert [r["id"] for r in rows] == ["2026", "True"]
+    reasons = sorted(reason.split(" does not match")[0] for severity, _, reason in manual if severity == "HARD")
+    assert reasons == ["node_id '2026'", "node_id 'True'", "parent_node \"['T-P']\"", "parent_node '0'"]
 
 
 def test_manifest_check_fails_on_id_format_until_fixed(tmp_path, monkeypatch, capsys):
@@ -281,11 +343,14 @@ def test_manifest_check_fails_on_id_format_until_fixed(tmp_path, monkeypatch, ca
     monkeypatch.setattr(bns, "REPO", tmp_path)
     monkeypatch.setattr(bns, "VAULT_ROOT", vault)
     monkeypatch.setattr(bns, "MANIFEST", manifest)
+    capsys.readouterr()
     assert bns.emit_manifest_section() == 1
     assert "`T-b.2`" in manifest.read_text(encoding="utf-8")
-    capsys.readouterr()
+    assert bns._NODE_ID_FORMAT_REASON in capsys.readouterr().err
     assert bns.check_manifest_section() == 1
-    assert "C3-DATA" in capsys.readouterr().err
+    err = capsys.readouterr().err
+    assert "C3-DATA" in err
+    assert bns._NODE_ID_FORMAT_REASON in err
     _write_vault(vault, {"T-B": "node_id: T-B-2\nstatus: COMPLETE\n"})
     assert bns.emit_manifest_section() == 0
     assert bns.check_manifest_section() == 0
