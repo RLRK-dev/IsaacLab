@@ -1,0 +1,467 @@
+<?xml version="1.0"?>
+<!-- One dual-arm assembly cell: a column carrying an angled Y yoke with two
+     UR15 arms and Robotiq 2F-85 grippers. Written by
+     tools/export_dual_arm_cell.py; lengths in m, angles in rad. -->
+<robot name="ur15_dual_arm_cell">
+  <link name="cell_base">
+    <visual>
+      <origin xyz="0 0 0.950000" rpy="0 0 0"/>
+      <geometry><cylinder radius="0.1020" length="1.1600"/></geometry>
+    </visual>
+  </link>
+
+  <link name="stereo_head"/>
+  <joint name="stereo_head_mount" type="fixed">
+    <parent link="cell_base"/>
+    <child link="stereo_head"/>
+    <origin xyz="0.000000 -0.175000 1.485000" rpy="2.356194 -0.000000 0.000000"/>
+  </joint>
+  <link name="left_base">
+    <visual>
+      <origin xyz="0.000000 0.000000 0.000000" rpy="0.000000 -0.000000 3.141593"/>
+      <geometry><mesh filename="meshes/base.dae"/></geometry>
+    </visual>
+  </link>
+  <joint name="left_yoke_mount" type="fixed">
+    <parent link="cell_base"/>
+    <child link="left_base"/>
+    <origin xyz="-0.220000 0.000000 1.530000" rpy="-0.000000 0.785398 3.141593"/>
+  </joint>
+  <link name="left_shoulder">
+    <visual>
+      <origin xyz="0.000000 0.000000 0.000000" rpy="0.000000 -0.000000 3.141593"/>
+      <geometry><mesh filename="meshes/shoulder.dae"/></geometry>
+    </visual>
+  </link>
+  <joint name="left_shoulder_joint" type="revolute">
+    <parent link="left_base"/>
+    <child link="left_shoulder"/>
+    <origin xyz="0.000000 0.000000 0.218600" rpy="0.000000 0.000000 0.000000"/>
+    <axis xyz="0 0 1"/>
+    <limit lower="-6.283185" upper="6.283185" effort="330" velocity="3.14"/>
+  </joint>
+  <link name="left_upper_arm">
+    <visual>
+      <origin xyz="0.000000 0.000000 0.100000" rpy="1.570796 -0.000000 -1.570796"/>
+      <geometry><mesh filename="meshes/upperarm.dae"/></geometry>
+    </visual>
+  </link>
+  <joint name="left_upper_arm_joint" type="revolute">
+    <parent link="left_shoulder"/>
+    <child link="left_upper_arm"/>
+    <origin xyz="0.000000 0.000000 0.000000" rpy="1.570796 0.000000 0.000000"/>
+    <axis xyz="0 0 1"/>
+    <limit lower="-6.283185" upper="6.283185" effort="330" velocity="3.14"/>
+  </joint>
+  <link name="left_forearm">
+    <visual>
+      <origin xyz="0.000000 0.000000 0.125000" rpy="1.570796 -0.000000 -1.570796"/>
+      <geometry><mesh filename="meshes/forearm.dae"/></geometry>
+    </visual>
+  </link>
+  <joint name="left_forearm_joint" type="revolute">
+    <parent link="left_upper_arm"/>
+    <child link="left_forearm"/>
+    <origin xyz="-0.647500 0.000000 0.000000" rpy="0.000000 0.000000 0.000000"/>
+    <axis xyz="0 0 1"/>
+    <limit lower="-6.283185" upper="6.283185" effort="330" velocity="3.14"/>
+  </joint>
+  <link name="left_wrist_1">
+    <visual>
+      <origin xyz="0.000000 0.000000 -0.050200" rpy="1.570796 -0.000000 0.000000"/>
+      <geometry><mesh filename="meshes/wrist1.dae"/></geometry>
+    </visual>
+  </link>
+  <joint name="left_wrist_1_joint" type="revolute">
+    <parent link="left_forearm"/>
+    <child link="left_wrist_1"/>
+    <origin xyz="-0.516400 0.000000 0.182400" rpy="0.000000 0.000000 0.000000"/>
+    <axis xyz="0 0 1"/>
+    <limit lower="-6.283185" upper="6.283185" effort="330" velocity="3.14"/>
+  </joint>
+  <link name="left_wrist_2">
+    <visual>
+      <origin xyz="0.000000 0.000000 -0.064000" rpy="0.000000 -0.000000 0.000000"/>
+      <geometry><mesh filename="meshes/wrist2.dae"/></geometry>
+    </visual>
+  </link>
+  <joint name="left_wrist_2_joint" type="revolute">
+    <parent link="left_wrist_1"/>
+    <child link="left_wrist_2"/>
+    <origin xyz="0.000000 -0.136100 0.000000" rpy="1.570796 0.000000 0.000000"/>
+    <axis xyz="0 0 1"/>
+    <limit lower="-6.283185" upper="6.283185" effort="330" velocity="3.14"/>
+  </joint>
+  <link name="left_wrist_3">
+    <visual>
+      <origin xyz="0.000000 0.000000 -0.071500" rpy="1.570796 -0.000000 0.000000"/>
+      <geometry><mesh filename="meshes/wrist3.dae"/></geometry>
+    </visual>
+  </link>
+  <joint name="left_wrist_3_joint" type="revolute">
+    <parent link="left_wrist_2"/>
+    <child link="left_wrist_3"/>
+    <origin xyz="0.000000 0.143400 0.000000" rpy="1.570796 3.141593 3.141593"/>
+    <axis xyz="0 0 1"/>
+    <limit lower="-6.283185" upper="6.283185" effort="330" velocity="3.14"/>
+  </joint>
+  <link name="left_flange"/>
+  <joint name="left_flange_fixed" type="fixed">
+    <parent link="left_wrist_3"/>
+    <child link="left_flange"/>
+    <origin xyz="0 0 0" rpy="0 -1.570796 -1.570796"/>
+  </joint>
+
+  <link name="left_tool0"/>
+  <joint name="left_tool0_fixed" type="fixed">
+    <parent link="left_flange"/>
+    <child link="left_tool0"/>
+    <origin xyz="0 0 0" rpy="1.570796 0 1.570796"/>
+  </joint>
+
+  <link name="left_grip_point"/>
+  <joint name="left_grip_point_fixed" type="fixed">
+    <parent link="left_tool0"/>
+    <child link="left_grip_point"/>
+    <origin xyz="0 0 0.1900" rpy="0 0 0"/>
+  </joint>
+
+  <link name="left_gripper_base">
+    <visual><geometry><mesh filename="meshes/robotiq_gripper_coupling.stl"/></geometry></visual>
+    <visual><geometry><mesh filename="meshes/robotiq_arg2f_85_base_link.dae"/></geometry></visual>
+  </link>
+  <joint name="left_gripper_mount" type="fixed">
+    <parent link="left_tool0"/>
+    <child link="left_gripper_base"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+  </joint>
+  <link name="left_left_outer_knuckle">
+    <visual><geometry><mesh filename="meshes/robotiq_arg2f_85_outer_knuckle.dae"/></geometry></visual>
+  </link>
+  <joint name="left_left_finger_joint" type="revolute">
+    <parent link="left_gripper_base"/>
+    <child link="left_left_outer_knuckle"/>
+    <origin xyz="0 -0.0306011 0.054904" rpy="0 0 3.141593"/>
+    <axis xyz="1 0 0"/>
+    <limit lower="0.0" upper="0.8" effort="60" velocity="2.0"/>
+  </joint>
+
+  <link name="left_left_outer_finger">
+    <visual><geometry><mesh filename="meshes/robotiq_arg2f_85_outer_finger.dae"/></geometry></visual>
+  </link>
+  <joint name="left_left_outer_finger_fixed" type="fixed">
+    <parent link="left_left_outer_knuckle"/>
+    <child link="left_left_outer_finger"/>
+    <origin xyz="0 0.0315 -0.0041" rpy="0 0 0"/>
+  </joint>
+
+  <link name="left_left_inner_knuckle">
+    <visual><geometry><mesh filename="meshes/robotiq_arg2f_85_inner_knuckle.dae"/></geometry></visual>
+  </link>
+  <joint name="left_left_inner_knuckle_joint" type="revolute">
+    <parent link="left_gripper_base"/>
+    <child link="left_left_inner_knuckle"/>
+    <origin xyz="0 -0.0127000 0.06142" rpy="0 0 3.141593"/>
+    <axis xyz="1 0 0"/>
+    <limit lower="0.0" upper="0.8" effort="60" velocity="2.0"/>
+    <mimic joint="left_left_finger_joint" multiplier="1.0" offset="0.0"/>
+  </joint>
+
+  <link name="left_left_inner_finger">
+    <visual><geometry><mesh filename="meshes/robotiq_arg2f_85_inner_finger.dae"/></geometry></visual>
+  </link>
+  <joint name="left_left_inner_finger_joint" type="revolute">
+    <parent link="left_left_outer_finger"/>
+    <child link="left_left_inner_finger"/>
+    <origin xyz="0 0.0061 0.0471" rpy="0 0 0"/>
+    <axis xyz="1 0 0"/>
+    <limit lower="-0.8" upper="0.0" effort="60" velocity="2.0"/>
+    <mimic joint="left_left_finger_joint" multiplier="-1.0" offset="0.0"/>
+  </joint>
+
+  <link name="left_left_pad">
+    <visual><geometry><box size="0.022 0.00635 0.0375"/></geometry></visual>
+  </link>
+  <joint name="left_left_pad_fixed" type="fixed">
+    <parent link="left_left_inner_finger"/>
+    <child link="left_left_pad"/>
+    <origin xyz="0 -0.0220203 0.03242" rpy="0 0 0"/>
+  </joint>
+  <link name="left_right_outer_knuckle">
+    <visual><geometry><mesh filename="meshes/robotiq_arg2f_85_outer_knuckle.dae"/></geometry></visual>
+  </link>
+  <joint name="left_right_finger_joint" type="revolute">
+    <parent link="left_gripper_base"/>
+    <child link="left_right_outer_knuckle"/>
+    <origin xyz="0 0.0306011 0.054904" rpy="0 0 0.000000"/>
+    <axis xyz="1 0 0"/>
+    <limit lower="0.0" upper="0.8" effort="60" velocity="2.0"/>
+    <mimic joint="left_left_finger_joint" multiplier="1.0" offset="0.0"/>
+  </joint>
+
+  <link name="left_right_outer_finger">
+    <visual><geometry><mesh filename="meshes/robotiq_arg2f_85_outer_finger.dae"/></geometry></visual>
+  </link>
+  <joint name="left_right_outer_finger_fixed" type="fixed">
+    <parent link="left_right_outer_knuckle"/>
+    <child link="left_right_outer_finger"/>
+    <origin xyz="0 0.0315 -0.0041" rpy="0 0 0"/>
+  </joint>
+
+  <link name="left_right_inner_knuckle">
+    <visual><geometry><mesh filename="meshes/robotiq_arg2f_85_inner_knuckle.dae"/></geometry></visual>
+  </link>
+  <joint name="left_right_inner_knuckle_joint" type="revolute">
+    <parent link="left_gripper_base"/>
+    <child link="left_right_inner_knuckle"/>
+    <origin xyz="0 0.0127000 0.06142" rpy="0 0 0.000000"/>
+    <axis xyz="1 0 0"/>
+    <limit lower="0.0" upper="0.8" effort="60" velocity="2.0"/>
+    <mimic joint="left_right_finger_joint" multiplier="1.0" offset="0.0"/>
+  </joint>
+
+  <link name="left_right_inner_finger">
+    <visual><geometry><mesh filename="meshes/robotiq_arg2f_85_inner_finger.dae"/></geometry></visual>
+  </link>
+  <joint name="left_right_inner_finger_joint" type="revolute">
+    <parent link="left_right_outer_finger"/>
+    <child link="left_right_inner_finger"/>
+    <origin xyz="0 0.0061 0.0471" rpy="0 0 0"/>
+    <axis xyz="1 0 0"/>
+    <limit lower="-0.8" upper="0.0" effort="60" velocity="2.0"/>
+    <mimic joint="left_right_finger_joint" multiplier="-1.0" offset="0.0"/>
+  </joint>
+
+  <link name="left_right_pad">
+    <visual><geometry><box size="0.022 0.00635 0.0375"/></geometry></visual>
+  </link>
+  <joint name="left_right_pad_fixed" type="fixed">
+    <parent link="left_right_inner_finger"/>
+    <child link="left_right_pad"/>
+    <origin xyz="0 -0.0220203 0.03242" rpy="0 0 0"/>
+  </joint>
+  <link name="right_base">
+    <visual>
+      <origin xyz="0.000000 0.000000 0.000000" rpy="0.000000 -0.000000 3.141593"/>
+      <geometry><mesh filename="meshes/base.dae"/></geometry>
+    </visual>
+  </link>
+  <joint name="right_yoke_mount" type="fixed">
+    <parent link="cell_base"/>
+    <child link="right_base"/>
+    <origin xyz="0.220000 0.000000 1.530000" rpy="0.000000 -0.785398 3.141593"/>
+  </joint>
+  <link name="right_shoulder">
+    <visual>
+      <origin xyz="0.000000 0.000000 0.000000" rpy="0.000000 -0.000000 3.141593"/>
+      <geometry><mesh filename="meshes/shoulder.dae"/></geometry>
+    </visual>
+  </link>
+  <joint name="right_shoulder_joint" type="revolute">
+    <parent link="right_base"/>
+    <child link="right_shoulder"/>
+    <origin xyz="0.000000 0.000000 0.218600" rpy="0.000000 0.000000 0.000000"/>
+    <axis xyz="0 0 1"/>
+    <limit lower="-6.283185" upper="6.283185" effort="330" velocity="3.14"/>
+  </joint>
+  <link name="right_upper_arm">
+    <visual>
+      <origin xyz="0.000000 0.000000 0.100000" rpy="1.570796 -0.000000 -1.570796"/>
+      <geometry><mesh filename="meshes/upperarm.dae"/></geometry>
+    </visual>
+  </link>
+  <joint name="right_upper_arm_joint" type="revolute">
+    <parent link="right_shoulder"/>
+    <child link="right_upper_arm"/>
+    <origin xyz="0.000000 0.000000 0.000000" rpy="1.570796 0.000000 0.000000"/>
+    <axis xyz="0 0 1"/>
+    <limit lower="-6.283185" upper="6.283185" effort="330" velocity="3.14"/>
+  </joint>
+  <link name="right_forearm">
+    <visual>
+      <origin xyz="0.000000 0.000000 0.125000" rpy="1.570796 -0.000000 -1.570796"/>
+      <geometry><mesh filename="meshes/forearm.dae"/></geometry>
+    </visual>
+  </link>
+  <joint name="right_forearm_joint" type="revolute">
+    <parent link="right_upper_arm"/>
+    <child link="right_forearm"/>
+    <origin xyz="-0.647500 0.000000 0.000000" rpy="0.000000 0.000000 0.000000"/>
+    <axis xyz="0 0 1"/>
+    <limit lower="-6.283185" upper="6.283185" effort="330" velocity="3.14"/>
+  </joint>
+  <link name="right_wrist_1">
+    <visual>
+      <origin xyz="0.000000 0.000000 -0.050200" rpy="1.570796 -0.000000 0.000000"/>
+      <geometry><mesh filename="meshes/wrist1.dae"/></geometry>
+    </visual>
+  </link>
+  <joint name="right_wrist_1_joint" type="revolute">
+    <parent link="right_forearm"/>
+    <child link="right_wrist_1"/>
+    <origin xyz="-0.516400 0.000000 0.182400" rpy="0.000000 0.000000 0.000000"/>
+    <axis xyz="0 0 1"/>
+    <limit lower="-6.283185" upper="6.283185" effort="330" velocity="3.14"/>
+  </joint>
+  <link name="right_wrist_2">
+    <visual>
+      <origin xyz="0.000000 0.000000 -0.064000" rpy="0.000000 -0.000000 0.000000"/>
+      <geometry><mesh filename="meshes/wrist2.dae"/></geometry>
+    </visual>
+  </link>
+  <joint name="right_wrist_2_joint" type="revolute">
+    <parent link="right_wrist_1"/>
+    <child link="right_wrist_2"/>
+    <origin xyz="0.000000 -0.136100 0.000000" rpy="1.570796 0.000000 0.000000"/>
+    <axis xyz="0 0 1"/>
+    <limit lower="-6.283185" upper="6.283185" effort="330" velocity="3.14"/>
+  </joint>
+  <link name="right_wrist_3">
+    <visual>
+      <origin xyz="0.000000 0.000000 -0.071500" rpy="1.570796 -0.000000 0.000000"/>
+      <geometry><mesh filename="meshes/wrist3.dae"/></geometry>
+    </visual>
+  </link>
+  <joint name="right_wrist_3_joint" type="revolute">
+    <parent link="right_wrist_2"/>
+    <child link="right_wrist_3"/>
+    <origin xyz="0.000000 0.143400 0.000000" rpy="1.570796 3.141593 3.141593"/>
+    <axis xyz="0 0 1"/>
+    <limit lower="-6.283185" upper="6.283185" effort="330" velocity="3.14"/>
+  </joint>
+  <link name="right_flange"/>
+  <joint name="right_flange_fixed" type="fixed">
+    <parent link="right_wrist_3"/>
+    <child link="right_flange"/>
+    <origin xyz="0 0 0" rpy="0 -1.570796 -1.570796"/>
+  </joint>
+
+  <link name="right_tool0"/>
+  <joint name="right_tool0_fixed" type="fixed">
+    <parent link="right_flange"/>
+    <child link="right_tool0"/>
+    <origin xyz="0 0 0" rpy="1.570796 0 1.570796"/>
+  </joint>
+
+  <link name="right_grip_point"/>
+  <joint name="right_grip_point_fixed" type="fixed">
+    <parent link="right_tool0"/>
+    <child link="right_grip_point"/>
+    <origin xyz="0 0 0.1900" rpy="0 0 0"/>
+  </joint>
+
+  <link name="right_gripper_base">
+    <visual><geometry><mesh filename="meshes/robotiq_gripper_coupling.stl"/></geometry></visual>
+    <visual><geometry><mesh filename="meshes/robotiq_arg2f_85_base_link.dae"/></geometry></visual>
+  </link>
+  <joint name="right_gripper_mount" type="fixed">
+    <parent link="right_tool0"/>
+    <child link="right_gripper_base"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+  </joint>
+  <link name="right_left_outer_knuckle">
+    <visual><geometry><mesh filename="meshes/robotiq_arg2f_85_outer_knuckle.dae"/></geometry></visual>
+  </link>
+  <joint name="right_left_finger_joint" type="revolute">
+    <parent link="right_gripper_base"/>
+    <child link="right_left_outer_knuckle"/>
+    <origin xyz="0 -0.0306011 0.054904" rpy="0 0 3.141593"/>
+    <axis xyz="1 0 0"/>
+    <limit lower="0.0" upper="0.8" effort="60" velocity="2.0"/>
+  </joint>
+
+  <link name="right_left_outer_finger">
+    <visual><geometry><mesh filename="meshes/robotiq_arg2f_85_outer_finger.dae"/></geometry></visual>
+  </link>
+  <joint name="right_left_outer_finger_fixed" type="fixed">
+    <parent link="right_left_outer_knuckle"/>
+    <child link="right_left_outer_finger"/>
+    <origin xyz="0 0.0315 -0.0041" rpy="0 0 0"/>
+  </joint>
+
+  <link name="right_left_inner_knuckle">
+    <visual><geometry><mesh filename="meshes/robotiq_arg2f_85_inner_knuckle.dae"/></geometry></visual>
+  </link>
+  <joint name="right_left_inner_knuckle_joint" type="revolute">
+    <parent link="right_gripper_base"/>
+    <child link="right_left_inner_knuckle"/>
+    <origin xyz="0 -0.0127000 0.06142" rpy="0 0 3.141593"/>
+    <axis xyz="1 0 0"/>
+    <limit lower="0.0" upper="0.8" effort="60" velocity="2.0"/>
+    <mimic joint="right_left_finger_joint" multiplier="1.0" offset="0.0"/>
+  </joint>
+
+  <link name="right_left_inner_finger">
+    <visual><geometry><mesh filename="meshes/robotiq_arg2f_85_inner_finger.dae"/></geometry></visual>
+  </link>
+  <joint name="right_left_inner_finger_joint" type="revolute">
+    <parent link="right_left_outer_finger"/>
+    <child link="right_left_inner_finger"/>
+    <origin xyz="0 0.0061 0.0471" rpy="0 0 0"/>
+    <axis xyz="1 0 0"/>
+    <limit lower="-0.8" upper="0.0" effort="60" velocity="2.0"/>
+    <mimic joint="right_left_finger_joint" multiplier="-1.0" offset="0.0"/>
+  </joint>
+
+  <link name="right_left_pad">
+    <visual><geometry><box size="0.022 0.00635 0.0375"/></geometry></visual>
+  </link>
+  <joint name="right_left_pad_fixed" type="fixed">
+    <parent link="right_left_inner_finger"/>
+    <child link="right_left_pad"/>
+    <origin xyz="0 -0.0220203 0.03242" rpy="0 0 0"/>
+  </joint>
+  <link name="right_right_outer_knuckle">
+    <visual><geometry><mesh filename="meshes/robotiq_arg2f_85_outer_knuckle.dae"/></geometry></visual>
+  </link>
+  <joint name="right_right_finger_joint" type="revolute">
+    <parent link="right_gripper_base"/>
+    <child link="right_right_outer_knuckle"/>
+    <origin xyz="0 0.0306011 0.054904" rpy="0 0 0.000000"/>
+    <axis xyz="1 0 0"/>
+    <limit lower="0.0" upper="0.8" effort="60" velocity="2.0"/>
+    <mimic joint="right_left_finger_joint" multiplier="1.0" offset="0.0"/>
+  </joint>
+
+  <link name="right_right_outer_finger">
+    <visual><geometry><mesh filename="meshes/robotiq_arg2f_85_outer_finger.dae"/></geometry></visual>
+  </link>
+  <joint name="right_right_outer_finger_fixed" type="fixed">
+    <parent link="right_right_outer_knuckle"/>
+    <child link="right_right_outer_finger"/>
+    <origin xyz="0 0.0315 -0.0041" rpy="0 0 0"/>
+  </joint>
+
+  <link name="right_right_inner_knuckle">
+    <visual><geometry><mesh filename="meshes/robotiq_arg2f_85_inner_knuckle.dae"/></geometry></visual>
+  </link>
+  <joint name="right_right_inner_knuckle_joint" type="revolute">
+    <parent link="right_gripper_base"/>
+    <child link="right_right_inner_knuckle"/>
+    <origin xyz="0 0.0127000 0.06142" rpy="0 0 0.000000"/>
+    <axis xyz="1 0 0"/>
+    <limit lower="0.0" upper="0.8" effort="60" velocity="2.0"/>
+    <mimic joint="right_right_finger_joint" multiplier="1.0" offset="0.0"/>
+  </joint>
+
+  <link name="right_right_inner_finger">
+    <visual><geometry><mesh filename="meshes/robotiq_arg2f_85_inner_finger.dae"/></geometry></visual>
+  </link>
+  <joint name="right_right_inner_finger_joint" type="revolute">
+    <parent link="right_right_outer_finger"/>
+    <child link="right_right_inner_finger"/>
+    <origin xyz="0 0.0061 0.0471" rpy="0 0 0"/>
+    <axis xyz="1 0 0"/>
+    <limit lower="-0.8" upper="0.0" effort="60" velocity="2.0"/>
+    <mimic joint="right_right_finger_joint" multiplier="-1.0" offset="0.0"/>
+  </joint>
+
+  <link name="right_right_pad">
+    <visual><geometry><box size="0.022 0.00635 0.0375"/></geometry></visual>
+  </link>
+  <joint name="right_right_pad_fixed" type="fixed">
+    <parent link="right_right_inner_finger"/>
+    <child link="right_right_pad"/>
+    <origin xyz="0 -0.0220203 0.03242" rpy="0 0 0"/>
+  </joint>
+</robot>
