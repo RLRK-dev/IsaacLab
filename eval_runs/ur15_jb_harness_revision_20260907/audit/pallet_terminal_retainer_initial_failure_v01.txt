@@ -1,0 +1,13 @@
+Blender 4.5.13 LTS (hash daeeeca98fb0 built 2026-08-25 01:31:19)
+Read blend: "/tmp/THREAD_端末保持治具_v01_20260913/pallet_terminal_retainer_v01.blend"
+Traceback (most recent call last):
+  File "/home/rlrk/IsaacLab-op040/eval_runs/ur15_jb_harness_revision_20260907/scripts/render_pallet_terminal_retainer_v01.py", line 161, in <module>
+    main()
+  File "/home/rlrk/IsaacLab-op040/eval_runs/ur15_jb_harness_revision_20260907/scripts/render_pallet_terminal_retainer_v01.py", line 122, in main
+    raise AssertionError("Static retainer native changed on readback")
+AssertionError: Static retainer native changed on readback
+Info: Saved as "pallet_terminal_retainer_v01.blend"
+
+Error: script failed, file: 'eval_runs/ur15_jb_harness_revision_20260907/scripts/render_pallet_terminal_retainer_v01.py', exiting.
+
+Blender quit

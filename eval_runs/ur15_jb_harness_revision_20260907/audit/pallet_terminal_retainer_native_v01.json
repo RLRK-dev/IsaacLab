@@ -1,0 +1,139 @@
+{
+  "native_sha256": "f05887dfad66d6a07bba273c5cdfa3b9923b60fd7eaec16fed1fddc108ef2d7c",
+  "native_readback_identical": true,
+  "readback_fields": [
+    "world matrices",
+    "vertex SHA",
+    "face SHA",
+    "mesh counts",
+    "visibility"
+  ],
+  "snapshot_evaluation": "temporarily enable all meshes in viewports, evaluate, then restore original flags",
+  "mesh_counts": {
+    "CAP_c_access": 27,
+    "CAP_clamp": 27,
+    "CAP_near": 27,
+    "CAP_release": 27,
+    "CAP_unlatch": 27,
+    "REST_c_access": 22,
+    "REST_clamp": 22,
+    "REST_near": 22,
+    "REST_release": 22,
+    "REST_unlatch": 22
+  },
+  "surface_observations": {
+    "CAP_c_access": {
+      "fixture_vs_hand": {
+        "object_pairs_considered": 0,
+        "surface_overlap_pairs": []
+      },
+      "saddle_vs_reference_terminal": {
+        "object_pairs_considered": 4,
+        "surface_overlap_pairs": []
+      }
+    },
+    "CAP_clamp": {
+      "fixture_vs_hand": {
+        "object_pairs_considered": 126,
+        "surface_overlap_pairs": []
+      },
+      "saddle_vs_reference_terminal": {
+        "object_pairs_considered": 4,
+        "surface_overlap_pairs": []
+      }
+    },
+    "CAP_near": {
+      "fixture_vs_hand": {
+        "object_pairs_considered": 126,
+        "surface_overlap_pairs": []
+      },
+      "saddle_vs_reference_terminal": {
+        "object_pairs_considered": 4,
+        "surface_overlap_pairs": []
+      }
+    },
+    "CAP_release": {
+      "fixture_vs_hand": {
+        "object_pairs_considered": 126,
+        "surface_overlap_pairs": []
+      },
+      "saddle_vs_reference_terminal": {
+        "object_pairs_considered": 4,
+        "surface_overlap_pairs": []
+      }
+    },
+    "CAP_unlatch": {
+      "fixture_vs_hand": {
+        "object_pairs_considered": 0,
+        "surface_overlap_pairs": []
+      },
+      "saddle_vs_reference_terminal": {
+        "object_pairs_considered": 4,
+        "surface_overlap_pairs": []
+      }
+    },
+    "REST_c_access": {
+      "fixture_vs_hand": {
+        "object_pairs_considered": 0,
+        "surface_overlap_pairs": []
+      },
+      "saddle_vs_reference_terminal": {
+        "object_pairs_considered": 2,
+        "surface_overlap_pairs": []
+      }
+    },
+    "REST_clamp": {
+      "fixture_vs_hand": {
+        "object_pairs_considered": 56,
+        "surface_overlap_pairs": []
+      },
+      "saddle_vs_reference_terminal": {
+        "object_pairs_considered": 2,
+        "surface_overlap_pairs": []
+      }
+    },
+    "REST_near": {
+      "fixture_vs_hand": {
+        "object_pairs_considered": 56,
+        "surface_overlap_pairs": []
+      },
+      "saddle_vs_reference_terminal": {
+        "object_pairs_considered": 2,
+        "surface_overlap_pairs": []
+      }
+    },
+    "REST_release": {
+      "fixture_vs_hand": {
+        "object_pairs_considered": 56,
+        "surface_overlap_pairs": []
+      },
+      "saddle_vs_reference_terminal": {
+        "object_pairs_considered": 2,
+        "surface_overlap_pairs": []
+      }
+    },
+    "REST_unlatch": {
+      "fixture_vs_hand": {
+        "object_pairs_considered": 0,
+        "surface_overlap_pairs": []
+      },
+      "saddle_vs_reference_terminal": {
+        "object_pairs_considered": 2,
+        "surface_overlap_pairs": []
+      }
+    }
+  },
+  "method": "Blender BVHTree triangle surfaces, epsilon=0; axis-aligned bounds reject disjoint pairs",
+  "scope": "only visible hand vs fixture, and saddles vs reference lug/sleeve; five discrete poses per candidate",
+  "limitations": "surface overlap is not signed clearance, solid containment, continuous motion or physical validity",
+  "all_other_pairs": "not evaluated; support interfaces and hinge joints are not included",
+  "physical_acceptance_verdict": null,
+  "previews": [
+    "CAP_clamp_context_v01.png",
+    "CAP_clamp_detail_v01.png",
+    "CAP_c_access_detail_v01.png",
+    "CAP_unlatch_detail_v01.png"
+  ],
+  "preview_note": "Detail PNG hides original hand hardware; fingers remain unless the state hides the hand.",
+  "video_created": false
+}

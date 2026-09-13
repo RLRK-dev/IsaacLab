@@ -1,0 +1,115 @@
+<!doctype html>
+<!-- Copyright (c) 2022-2026, The Isaac Lab Project Developers (https://github.com/isaac-sim/IsaacLab/blob/main/CONTRIBUTORS.md).
+All rights reserved. SPDX-License-Identifier: BSD-3-Clause -->
+<html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>THREAD｜パレット用・端末保持治具の比較</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#f2f6f8;color:#183247;font:15px/1.75 system-ui,"Noto Sans CJK JP",sans-serif}main{max-width:1320px;padding:28px 24px 44px;margin:auto}h1{font-size:28px;line-height:1.5;margin:8px 0 14px}h2{font-size:19px;margin:0 0 12px}p{margin:8px 0 14px}.eyebrow{color:#37728e;font-size:12px;letter-spacing:.08em}.intro{max-width:1100px;color:#496276}.layout{display:grid;grid-template-columns:minmax(0,1fr) 310px;gap:20px;margin-top:22px}.view,.panel,.note{background:white;border:1px solid #d6e1e8;border-radius:10px}.view{overflow:hidden}.panel{height:max-content;padding:20px}.toolbar{padding:12px;display:flex;gap:7px;align-items:center;flex-wrap:wrap;border-bottom:1px solid #dbe4ea}button,select{font:inherit;border:1px solid #b5c9d7;border-radius:5px;padding:7px 10px;background:white;color:#25556e}button{cursor:pointer}button:hover{background:#edf6fa}.selected{background:#216e96;color:white;border-color:#216e96}button:focus-visible,select:focus-visible{outline:3px solid #d29741;outline-offset:2px}canvas{display:block;width:100%;height:600px;touch-action:none;background:linear-gradient(#fbfdfe,#e8eff4);cursor:grab}.caption{padding:12px 16px;color:#526c7d;font-size:12px}.small{font-size:13px;color:#536c7d}.badge{font-size:12px;color:#24688b;background:#eaf3f8;padding:4px 8px;border-radius:4px}.panel label{display:block;margin:12px 0}.key{display:flex;flex-wrap:wrap;gap:14px;font-size:12px;margin:15px 0}.dot{width:10px;height:10px;display:inline-block;margin-right:5px}.note{padding:22px;margin-top:20px}.warning{border-left:4px solid #d99231;background:#fff8ee;padding:12px 16px}.links{display:flex;gap:16px;flex-wrap:wrap;margin-top:18px}a{color:#176f99}table{width:100%;border-collapse:collapse;font-size:14px}th,td{padding:9px;border-bottom:1px solid #dce6ec;vertical-align:top;text-align:left}.grid{display:grid;grid-template-columns:1fr 1fr;gap:24px}@media(max-width:900px){.layout,.grid{grid-template-columns:1fr}main{padding:20px 14px}canvas{height:460px}h1{font-size:24px}}
+</style></head><body><main>
+<div class="eyebrow">THREAD / B → C / PALLET TERMINAL RETAINER v0.1</div>
+<h1>端子を設置した後は、パレット側で保持する案</h1>
+<p class="intro">端末1箇所の「下受けのみ」と「開閉する上押さえ付き」を比較します。手が保持している間に治具へ渡し、Cで締結してから開放する役割です。<strong>Klauke名の保存CADと仮の被覆形状による配置比較で、Ampere実部品への適合・製作仕様は未確定です。</strong></p>
+<div class="layout"><div class="view"><div class="toolbar">
+<select id="kind" aria-label="比較する治具"><option value="CAP">上押さえ付き</option><option value="REST">下受けのみ</option></select>
+<button data-state="near">B：治具開</button><button data-state="clamp" class="selected">B：治具閉</button><button data-state="release">B：指開放</button><button data-state="c_access">C：工具通路</button><button data-state="unlatch">締結後：治具開</button>
+</div><div style="position:relative"><canvas id="view" aria-label="回転・拡大できる端末と治具の静的3D比較"></canvas><div id="view-error" hidden class="warning">WebGLを利用できません。同梱のPNGまたはGLBで確認してください。</div><div style="position:absolute;bottom:14px;left:16px;font-size:12px;color:#38586d"><span id="view-label"></span><div id="scale-bar" style="height:5px;border:1px solid #547789;margin-top:8px"></div>20 mm</div></div>
+<div class="toolbar"><button data-camera="oblique">斜め</button><button data-camera="front">正面</button><button data-camera="top">上面</button><button id="detail">接触部へ</button><button id="reset">全体へ</button></div>
+<div class="caption">ドラッグで回転・ホイールで拡大。静的な5姿勢を切り替えます。アーム軌道・連続的な干渉・物体の動的な保持を計算する表示ではありません。<p id="pose"></p></div></div>
+<aside class="panel"><span class="badge">比較案 / 採用前</span><h2 id="name" style="margin-top:14px"></h2><p id="role"></p><p class="small" id="stage"></p>
+<div class="key"><span><i class="dot" style="background:#3b8ec0"></i>指先</span><span><i class="dot" style="background:#45695d"></i>治具の受け</span><span><i class="dot" style="background:#eea646"></i>押さえ梁</span></div>
+<label><input id="hardware" type="checkbox" checked>ハンド本体</label><label><input id="target" type="checkbox" checked>端子・配線・仮接続面</label><label><input id="fixture" type="checkbox" checked>治具</label><label><input id="guide" type="checkbox" checked>工具通路・ロック配置枠</label>
+<p class="small">ロック配置枠は透過表示です。内部リンク、駆動器、配管、検出器は未選定。閉じた見た目だけで搬送中の保持を保証しません。</p></aside></div>
+<div class="note warning"><strong>開放後も端子の位置は画面上で固定しています。</strong><p>押付力・滑り・被覆の変形・端子回転・締結反力は未検証です。保持が成立する条件と確認方法を決めてから、Bの手を開く工程へつなげます。電気接続面を締め付ける案ではありません。</p></div>
+<div class="note grid"><div><h2>手と治具の役割を分ける</h2><p>指先は前方の端子側縁を扱い、治具は後方の端末外周を上下で受ける案です。端子穴の真上を空けます。後方のどこを、どれだけの力で押してよいかは実部品に合わせた確認が残ります。</p><p>今回は端末用EDGE指先を使用。後方案内付きGUIDEや4本指との組合せは照合していません。</p></div><div><h2>パレットに残るもの</h2><p>下受けと開閉押さえはパレットと一緒にCへ移動し、完成品取出し後はパレットと一緒に戻す案です。移動中は機械的に保持し、STで開閉する構成を比較します。</p><p class="small">二段循環の帰路・両端昇降部、製品筐体内への支持経路、全工具の占有域は未照合。ここにある台板は端末の局所比較用です。</p></div></div>
+<div class="note"><h2>比較用の寸法</h2><table><tr><th>項目</th><th>今回の値</th><th>意味</th></tr><tr><td>局所の台板</td><td>80 × 120 × 6 mm</td><td>パレット全体の寸法ではありません。</td></tr><tr><td>受けの長手位置</td><td>穴中心から24〜32 mm</td><td>仮の圧着筒・被覆付近。許容把持面の指定ではありません。</td></tr><tr><td>受けの曲面半径</td><td>7.8 mm</td><td>仮の被覆半径7.6 mmに対し、表示用の名目差0.2 mm。</td></tr><tr><td>押さえの比較開き角</td><td>110°</td><td>ヒンジ軸まわりの静的位置。駆動・ロックのリンクは未実装。</td></tr></table></div>
+<div class="links"><a href="terminal_retainer_CAP_v01.glb">上押さえ付き GLB</a><a href="terminal_retainer_REST_v01.glb">下受けのみ GLB</a><a href="pallet_terminal_retainer_v01.blend">Blenderモデル</a><a href="端末保持治具_比較記録_v01.md">比較記録</a><a href="pallet_terminal_retainer_v01.json">比較設定</a><a href="pallet_terminal_retainer_geometry_v01.json">幾何観測</a></div>
+<div class="note"><h2>参照元</h2><p class="small"><a href="https://help.ampereev.com/hc/en-us/articles/31292470232087-High-Voltage-Junction-Box-HVJB-5-400">Ampere公式の公開構成</a> ／ <a href="https://www.carrlane.com/engineering-resources/fixture-design-principles/locating-clamping-principles/ctl">Carr Lane：位置決めとクランプの原則</a> ／ <a href="https://www.carrlane.com/product/toggle-clamps/horizontal-handle-toggle-clamps">Carr Lane：オーバーセンターの機構原理</a>。これらの市販クランプを今回の寸法・押付力へ転用したモデルではありません。</p></div>
+</main><script id="model-data" type="application/json">__MESH_PAYLOAD__</script><script>
+"use strict";
+const payload=JSON.parse(document.getElementById("model-data").textContent);
+const canvas=document.getElementById("view");
+const gl=canvas.getContext("webgl",{alpha:true,antialias:true,preserveDrawingBuffer:true});
+if(!gl){document.getElementById("view-error").hidden=false;throw new Error("WebGL unavailable");}
+let kind="CAP",state="clamp",yaw=-.63,pitch=.7,zoom=1.4,focus=[0,.045,.012],drag=null,pending=false;
+const unit=v=>{const n=Math.hypot(...v);return v.map(x=>x/(n||1));};
+const cross=(a,b)=>[a[1]*b[2]-a[2]*b[1],a[2]*b[0]-a[0]*b[2],a[0]*b[1]-a[1]*b[0]];
+const sub=(a,b)=>a.map((x,i)=>x-b[i]);const dot=(a,b)=>a.reduce((s,x,i)=>s+x*b[i],0);
+const light=unit([-.5,-.7,1]);
+function compile(type,source){const shader=gl.createShader(type);gl.shaderSource(shader,source);gl.compileShader(shader);if(!gl.getShaderParameter(shader,gl.COMPILE_STATUS))throw new Error(gl.getShaderInfoLog(shader));return shader;}
+const program=gl.createProgram();
+gl.attachShader(program,compile(gl.VERTEX_SHADER,"attribute vec3 a_position;attribute vec4 a_color;varying vec4 v_color;void main(){gl_Position=vec4(a_position,1.0);v_color=a_color;}"));
+gl.attachShader(program,compile(gl.FRAGMENT_SHADER,"precision mediump float;varying vec4 v_color;void main(){gl_FragColor=v_color;}"));
+gl.linkProgram(program);if(!gl.getProgramParameter(program,gl.LINK_STATUS))throw new Error(gl.getProgramInfoLog(program));
+gl.useProgram(program);
+const vertexBuffer=gl.createBuffer(),positionLocation=gl.getAttribLocation(program,"a_position"),colorLocation=gl.getAttribLocation(program,"a_color");
+gl.bindBuffer(gl.ARRAY_BUFFER,vertexBuffer);gl.enableVertexAttribArray(positionLocation);gl.enableVertexAttribArray(colorLocation);
+gl.vertexAttribPointer(positionLocation,3,gl.FLOAT,false,28,0);gl.vertexAttribPointer(colorLocation,4,gl.FLOAT,false,28,12);
+gl.enable(gl.DEPTH_TEST);gl.depthFunc(gl.LEQUAL);gl.frontFace(gl.CCW);gl.cullFace(gl.BACK);
+let geometryKey=null,geometry=null;
+function worldGeometry(candidate,transforms,key){
+  if(key===geometryKey)return geometry;
+  const opaque=[],guides=[];
+  for(const [name,obj] of Object.entries(candidate.objects)){
+    if(candidate.states[state].hidden_objects.includes(name))continue;
+    if(["hardware","target","guide","fixture"].includes(obj.category)&&!document.getElementById(obj.category).checked)continue;
+    const m=transforms[name],world=obj.vertices.map(v=>m.slice(0,3).map(row=>row[0]*v[0]+row[1]*v[1]+row[2]*v[2]+row[3]));
+    const destination=obj.category==="guide"?guides:opaque;
+    for(const f of obj.faces){
+      const n=unit(cross(sub(world[f[1]],world[f[0]]),sub(world[f[2]],world[f[0]]))),shade=.48+.52*Math.max(0,dot(n,light));
+      const color=obj.color.map((c,i)=>c/255*(i===3?1:shade));
+      for(const index of f)destination.push(...world[index],...color);
+    }
+  }
+  geometryKey=key;geometry={opaque:new Float32Array(opaque),guides:new Float32Array(guides)};return geometry;
+}
+function paint(vertices,right,up,forward,scale,width,height){
+  const projected=new Float32Array(vertices);
+  for(let i=0;i<projected.length;i+=7){
+    const x=vertices[i]-focus[0],y=vertices[i+1]-focus[1],z=vertices[i+2]-focus[2];
+    projected[i]=(x*right[0]+y*right[1]+z*right[2])*2*scale/width;
+    projected[i+1]=(x*up[0]+y*up[1]+z*up[2])*2*scale/height;
+    projected[i+2]=-(x*forward[0]+y*forward[1]+z*forward[2]);
+  }
+  gl.bufferData(gl.ARRAY_BUFFER,projected,gl.DYNAMIC_DRAW);gl.drawArrays(gl.TRIANGLES,0,projected.length/7);
+}
+function draw(){
+  pending=false;
+  const width=canvas.clientWidth,height=canvas.clientHeight,dpr=Math.min(devicePixelRatio||1,1.5);
+  const pixelWidth=Math.round(width*dpr),pixelHeight=Math.round(height*dpr);
+  if(canvas.width!==pixelWidth||canvas.height!==pixelHeight){canvas.width=pixelWidth;canvas.height=pixelHeight;}
+  gl.viewport(0,0,canvas.width,canvas.height);gl.clearColor(0,0,0,0);gl.depthMask(true);gl.clear(gl.COLOR_BUFFER_BIT|gl.DEPTH_BUFFER_BIT);
+  const right=[Math.cos(yaw),Math.sin(yaw),0],up=[-Math.sin(yaw)*Math.sin(pitch),Math.cos(yaw)*Math.sin(pitch),Math.cos(pitch)],forward=cross(right,up);
+  const scale=Math.min(width/.23,height/.23)*zoom;
+  const candidate=payload.candidates[kind],transforms=candidate.states[state].transforms;
+  const key=[kind,state,...["hardware","target","guide","fixture"].map(id=>document.getElementById(id).checked)].join("/");
+  const shapes=worldGeometry(candidate,transforms,key);
+  gl.disable(gl.BLEND);gl.enable(gl.CULL_FACE);paint(shapes.opaque,right,up,forward,scale,width,height);
+  gl.depthMask(false);gl.enable(gl.BLEND);gl.blendFunc(gl.SRC_ALPHA,gl.ONE_MINUS_SRC_ALPHA);
+  gl.cullFace(gl.FRONT);paint(shapes.guides,right,up,forward,scale,width,height);
+  gl.cullFace(gl.BACK);paint(shapes.guides,right,up,forward,scale,width,height);gl.depthMask(true);
+  document.getElementById("view-label").textContent=`${kind} / ${state} — 静的形状`;
+  document.getElementById("scale-bar").style.width=`${.02*scale}px`;
+  document.getElementById("pose").textContent=payload.config.states[state].hide_hand ? "Cの工具通路の説明のため、Bのハンドを非表示にしています。B→Cの搬送とCの実工具は未実装です。" : "元の2Fと端末用EDGE指先を使用。対象は画面上で固定しており、把持・治具の保持力を計算していません。";
+  window.reviewRendered={kind,state,faces:(shapes.opaque.length+shapes.guides.length)/21,width,height,renderer:"WebGL depth buffer",gl_error:gl.getError()};
+}
+function schedule(){if(!pending){pending=true;requestAnimationFrame(draw);}}
+
+function update(){
+  const cap=kind==="CAP";
+  document.getElementById("name").textContent=cap?"上下で受ける比較案":"下受けのみの比較案";
+  document.getElementById("role").textContent=cap?"端末外周を下受けと上押さえの間へ置き、指を離す前に治具へ受け渡す配置を比較します。":"下から受ける形です。上へ戻るのを止める押さえ部材はありません。摩擦による保持の成立も未検証です。";
+  document.getElementById("stage").textContent=payload.config.states[state].label_ja+(cap?"。押さえの位置比較で、保持力とロックは未確定です。":"。この案には開閉する上押さえを設けていません。");
+  document.querySelectorAll("[data-state]").forEach(b=>b.classList.toggle("selected",b.dataset.state===state));schedule();
+}
+document.getElementById("kind").addEventListener("change",e=>{kind=e.target.value;update();});
+document.querySelectorAll("[data-state]").forEach(b=>b.addEventListener("click",()=>{state=b.dataset.state;update();}));
+document.querySelectorAll("[data-camera]").forEach(b=>b.addEventListener("click",()=>{[yaw,pitch]=({oblique:[-.63,.7],front:[0,0],top:[0,Math.PI/2]})[b.dataset.camera];schedule();}));
+document.getElementById("detail").addEventListener("click",()=>{focus=[0,.028,-.006];zoom=2.8;schedule();});
+document.getElementById("reset").addEventListener("click",()=>{focus=[0,.045,.035];zoom=1;yaw=-.63;pitch=.7;schedule();});
+for(const id of ["hardware","target","guide","fixture"])document.getElementById(id).addEventListener("change",schedule);
+canvas.addEventListener("pointerdown",e=>{drag=[e.clientX,e.clientY];canvas.setPointerCapture(e.pointerId);});
+canvas.addEventListener("pointermove",e=>{if(!drag)return;yaw+=(e.clientX-drag[0])*.008;pitch=Math.max(-1.5,Math.min(1.57,pitch+(e.clientY-drag[1])*.008));drag=[e.clientX,e.clientY];schedule();});
+canvas.addEventListener("pointerup",()=>{drag=null;});canvas.addEventListener("pointercancel",()=>{drag=null;});
+canvas.addEventListener("wheel",e=>{e.preventDefault();zoom=Math.max(.6,Math.min(4,zoom*Math.exp(-e.deltaY*.001)));schedule();},{passive:false});
+new ResizeObserver(schedule).observe(canvas);update();
+</script></body></html>

@@ -1,0 +1,71 @@
+{
+  "revision": "v01",
+  "units": "m and rad",
+  "status": "user_authorized_static_fixture_comparison_not_selected_hardware",
+  "input_payload_sha256": "22e4d62739debfe3c20d59d8223ea6fa6703d50ebd425d54bb9def403eaf60a9",
+  "reused_hand": "EDGE from the prior terminal fingertip comparison; GUIDE is not checked in this fixture study",
+  "target_basis": "unchanged stored Klauke_6R6 reference CAD plus illustrative sleeve and wire; not identified Ampere hardware",
+  "fixture": {
+    "base_dimensions_m": [0.080, 0.120, 0.006],
+    "base_center_m": [0.0, 0.040, -0.034],
+    "coupon_support_dimensions_m": [0.020, 0.024, 0.014],
+    "coupon_support_center_m": [0.0, 0.0, -0.024],
+    "saddle_y_range_m": [0.024, 0.032],
+    "saddle_width_m": 0.020,
+    "saddle_radius_m": 0.0078,
+    "lower_back_z_m": -0.024,
+    "upper_back_z_m": 0.008,
+    "saddle_support_dimensions_m": [0.020, 0.008, 0.007],
+    "saddle_support_center_m": [0.0, 0.028, -0.0275],
+    "beam_dimensions_m": [0.008, 0.060, 0.006],
+    "beam_center_m": [0.0, 0.054, 0.011],
+    "hinge_center_m": [0.0, 0.080, 0.011],
+    "hinge_radius_m": 0.003,
+    "hinge_length_m": 0.034,
+    "hinge_post_dimensions_m": [0.006, 0.012, 0.047],
+    "hinge_post_centers_m": [[-0.014, 0.080, -0.0075], [0.014, 0.080, -0.0075]],
+    "open_angle_rad": -1.9198621771937625,
+    "lock_reserved_dimensions_m": [0.018, 0.024, 0.020],
+    "lock_reserved_center_m": [0.029, 0.080, 0.024]
+  },
+  "geometry_basis": "all fixture dimensions are occupancy-comparison settings, not fabrication dimensions or acceptance limits",
+  "intended_contact": "terminal barrel/sleeve outside the electrical mating pad; permitted pressure and real post-crimp shape unknown",
+  "nominal_surface_clearance_basis": "fixture radius minus illustrative sleeve radius; display clearance, not achieved gripping force",
+  "locking_mechanism": {
+    "selection": null,
+    "shown_geometry": "reserved volume only; hinge and swinging beam are position-comparison geometry",
+    "principle_to_compare": "mechanical retention during transport, opened/closed at station; no trailing supply line in the concept",
+    "verified_force_N": null,
+    "verified_power_off_retention": null
+  },
+  "states": {
+    "near": {"label_ja": "B：手保持・治具開", "source_hand_state": "near", "cap_open": true, "hide_hand": false},
+    "clamp": {"label_ja": "B：手保持・治具閉", "source_hand_state": "near", "cap_open": false, "hide_hand": false},
+    "release": {"label_ja": "B：指を開放", "source_hand_state": "open", "cap_open": false, "hide_hand": false},
+    "c_access": {"label_ja": "C：工具の通路", "source_hand_state": "clear", "cap_open": false, "hide_hand": true},
+    "unlatch": {"label_ja": "締結後：治具開", "source_hand_state": "clear", "cap_open": true, "hide_hand": true}
+  },
+  "process_roles_ja": [
+    "Bの両手で端末を設置し、手が保持している間にパレット側の治具へ引き渡す案。治具の保持成立確認方法は未選定。",
+    "治具が保持する条件を確認してから両指を開き、両腕を同時に上昇させる。今回の静的図には腕軌道を含めない。",
+    "パレットと治具を一緒にCへ運ぶ。製品の締結穴の上方を空ける。",
+    "Cで締結を完了してから上押さえを開く案。工具とクランプの荷重の分担は未確定。",
+    "完成品取出し前にすべての保持部が開いた状態を設ける。下段へ戻るパレット上に治具も残る。帰路の高さ・幅は未照合。"
+  ],
+  "unresolved": [
+    "actual Ampere terminal, crimp and sleeve geometry and allowed contact surfaces",
+    "pressure, friction, sleeve creep, axial slip and terminal rotation",
+    "locking linkage or purchased clamp, actuator, detection, release and maintenance",
+    "fastening torque reaction and axial loads",
+    "full enclosure, pallet, connector, camera and arm clearances",
+    "pallet return conveyor and end lift envelopes",
+    "full flexible-wire shape, both-end loading and dynamic transport",
+    "continuous sweep, volume containment and physical acceptance"
+  ],
+  "sources": [
+    {"url": "https://help.ampereev.com/hc/en-us/articles/31292470232087-High-Voltage-Junction-Box-HVJB-5-400", "role": "adopted public product construction; assembly fixtures not published here"},
+    {"url": "https://www.carrlane.com/engineering-resources/fixture-design-principles/locating-clamping-principles/ctl", "role": "separate locating/support from clamping; direct clamping into support; avoid redundant location"},
+    {"url": "https://www.carrlane.com/product/toggle-clamps/horizontal-handle-toggle-clamps", "role": "over-center locking principle only; no selected product dimensions or holding rating"}
+  ],
+  "physical_acceptance_verdict": null
+}

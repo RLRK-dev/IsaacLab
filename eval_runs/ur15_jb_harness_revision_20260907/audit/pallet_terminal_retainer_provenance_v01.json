@@ -1,0 +1,71 @@
+{
+  "recorded_at": "2026-09-13T11:00:48.507926+09:00",
+  "scope": "one-terminal static rest/cap comparison; not production hardware adoption",
+  "authorization_basis": "User explicitly allowed comparing a small pallet retaining fixture.",
+  "primary_sources_read": [
+    {
+      "url": "https://help.ampereev.com/hc/en-us/articles/31292470232087-High-Voltage-Junction-Box-HVJB-5-400",
+      "use": "Public product construction only; no published process fixture specification."
+    },
+    {
+      "url": "https://www.carrlane.com/engineering-resources/fixture-design-principles/locating-clamping-principles/ctl",
+      "use": "General support/location/clamping principles only; no ratings adopted."
+    },
+    {
+      "url": "https://www.carrlane.com/product/toggle-clamps/horizontal-handle-toggle-clamps",
+      "use": "Mechanical locking principle; the comparison does not implement an over-center linkage."
+    }
+  ],
+  "source_payload_sha256": "22e4d62739debfe3c20d59d8223ea6fa6703d50ebd425d54bb9def403eaf60a9",
+  "packaged_source_sha256": {
+    "scripts/build_hand_fingertip_concepts_v01.py": "532b03f68bfdf49c46ae3f33155b8757a8e93549773390a85a27e7b52066bf5c",
+    "scripts/build_hand_terminal_concepts_v01.py": "d75a99f1f4951f9d915bc53173dd5f7f0057080a7f0704a98b9a1a499b929b19",
+    "scripts/build_pallet_terminal_retainer_v01.py": "0b96b8d2e2b804996f27b643029b1340b7323e26fce9aa724a585026e190d226",
+    "scripts/pallet_terminal_retainer_viewer_v01.html": "998e687c3bdcd03af876accd53ea2f868015f5e2d11722d4dde3f45315150c39",
+    "scripts/render_hand_fingertip_concepts_v01.py": "d2b93084db702202daf7a94209d3140657c3db1ac1d5e06462daa0618b4067d1",
+    "scripts/render_pallet_terminal_retainer_v01.py": "79fdbfb2944e1a0fbb9b96fec4de2e8cf5c6096b1fe859634d22fa34f2b96e00"
+  },
+  "native_sha256": "f05887dfad66d6a07bba273c5cdfa3b9923b60fd7eaec16fed1fddc108ef2d7c",
+  "fixes": [
+    {
+      "symptom": "Initial native readback raised an assertion for 56 hidden-hand world matrices.",
+      "delta": "Temporarily enable viewport evaluation during snapshot, update all layers, then restore flags.",
+      "exclusions_or_tolerances_changed": false,
+      "expected_matrices_assigned": false,
+      "final_readback_identical": true,
+      "evidence": [
+        "audit/initial_blender_failure.log",
+        "audit/initial_readback_difference.json",
+        "audit/final_blender.log"
+      ]
+    },
+    {
+      "symptom": "Vertex-only interval query found no vertices at Y 24-32 mm.",
+      "delta": "Read triangles intersecting Y=28 mm; 776 segment endpoints, max radius 7 mm about reference axis.",
+      "source_geometry_changed": false,
+      "basis": "Read-only auxiliary command output recorded in WORK_LOG and the review document."
+    },
+    {
+      "symptom": "Open-cap detail PNG cropped the end of the raised cap.",
+      "delta": "Only the unlatch PNG camera focus and orthographic span changed after native save.",
+      "geometry_or_angles_changed": false,
+      "native_sha256_unchanged": true,
+      "renderer_includes_final_png_framing": true,
+      "evidence": [
+        "audit/open_preview_reframe.log"
+      ]
+    },
+    {
+      "symptom": "Codespell flagged an abbreviated local variable name in the AABB rejection check.",
+      "delta": "Rename lower/upper bound variables only; adjust the prose describing that rename.",
+      "geometry_or_calculations_changed": false,
+      "native_or_measurements_regenerated": false,
+      "evidence": [
+        "audit/precommit_after_stage.log",
+        "audit/precommit_fixed_before_stage.log"
+      ]
+    }
+  ],
+  "formal_physical_acceptance_verdict": null,
+  "arm_motion_or_video_created": false
+}

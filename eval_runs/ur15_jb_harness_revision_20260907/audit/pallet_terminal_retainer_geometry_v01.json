@@ -1,0 +1,983 @@
+{
+  "scope": "static occupancy and input preservation observations only",
+  "inputs_unchanged": true,
+  "source_sha256": {
+    "eval_runs/ur15_jb_harness_revision_20260907/data/pallet_terminal_retainer_v01.json": "4d44ef04339f8db4a08dfafaf9b5befedfa8c0617f886ef7aee451eb3346db6c",
+    "/tmp/THREAD_B\u7aef\u672b\u6307\u5148_v01_20260913_final/hand_terminal_meshes_v01.json": "22e4d62739debfe3c20d59d8223ea6fa6703d50ebd425d54bb9def403eaf60a9",
+    "/home/rlrk/IsaacLab-op040/eval_runs/ur15_jb_harness_revision_20260907/scripts/build_pallet_terminal_retainer_v01.py": "0b96b8d2e2b804996f27b643029b1340b7323e26fce9aa724a585026e190d226",
+    "/home/rlrk/IsaacLab-op040/eval_runs/ur15_jb_harness_revision_20260907/scripts/build_hand_fingertip_concepts_v01.py": "532b03f68bfdf49c46ae3f33155b8757a8e93549773390a85a27e7b52066bf5c",
+    "/home/rlrk/IsaacLab-op040/eval_runs/ur15_jb_harness_revision_20260907/scripts/build_hand_terminal_concepts_v01.py": "d75a99f1f4951f9d915bc53173dd5f7f0057080a7f0704a98b9a1a499b929b19",
+    "/home/rlrk/IsaacLab-op040/eval_runs/ur15_jb_harness_revision_20260907/scripts/pallet_terminal_retainer_viewer_v01.html": "998e687c3bdcd03af876accd53ea2f868015f5e2d11722d4dde3f45315150c39"
+  },
+  "reused_hand": "EDGE; original vertices/faces and recorded hand transforms copied unchanged",
+  "target_geometry_copied_unchanged": true,
+  "saddle_nominal_radial_gap_m": 0.00019999999999999966,
+  "static_poses": {
+    "REST": {
+      "near": {
+        "fixture_bounds_m": {
+          "local_base": [
+            [
+              -0.04,
+              -0.02,
+              -0.037
+            ],
+            [
+              0.04,
+              0.1,
+              -0.031
+            ]
+          ],
+          "coupon_support": [
+            [
+              -0.01,
+              -0.012,
+              -0.031
+            ],
+            [
+              0.01,
+              0.012,
+              -0.017
+            ]
+          ],
+          "lower_saddle": [
+            [
+              -0.01,
+              0.024,
+              -0.024
+            ],
+            [
+              0.01,
+              0.032,
+              -0.006
+            ]
+          ],
+          "saddle_support": [
+            [
+              -0.01,
+              0.024,
+              -0.031
+            ],
+            [
+              0.01,
+              0.032,
+              -0.024
+            ]
+          ]
+        },
+        "tool_radius_projected_lower_bound_m": 0.01886463351831271,
+        "limiting_fixture": "lower_saddle",
+        "hidden_hand_meshes": []
+      },
+      "clamp": {
+        "fixture_bounds_m": {
+          "local_base": [
+            [
+              -0.04,
+              -0.02,
+              -0.037
+            ],
+            [
+              0.04,
+              0.1,
+              -0.031
+            ]
+          ],
+          "coupon_support": [
+            [
+              -0.01,
+              -0.012,
+              -0.031
+            ],
+            [
+              0.01,
+              0.012,
+              -0.017
+            ]
+          ],
+          "lower_saddle": [
+            [
+              -0.01,
+              0.024,
+              -0.024
+            ],
+            [
+              0.01,
+              0.032,
+              -0.006
+            ]
+          ],
+          "saddle_support": [
+            [
+              -0.01,
+              0.024,
+              -0.031
+            ],
+            [
+              0.01,
+              0.032,
+              -0.024
+            ]
+          ]
+        },
+        "tool_radius_projected_lower_bound_m": 0.01886463351831271,
+        "limiting_fixture": "lower_saddle",
+        "hidden_hand_meshes": []
+      },
+      "release": {
+        "fixture_bounds_m": {
+          "local_base": [
+            [
+              -0.04,
+              -0.02,
+              -0.037
+            ],
+            [
+              0.04,
+              0.1,
+              -0.031
+            ]
+          ],
+          "coupon_support": [
+            [
+              -0.01,
+              -0.012,
+              -0.031
+            ],
+            [
+              0.01,
+              0.012,
+              -0.017
+            ]
+          ],
+          "lower_saddle": [
+            [
+              -0.01,
+              0.024,
+              -0.024
+            ],
+            [
+              0.01,
+              0.032,
+              -0.006
+            ]
+          ],
+          "saddle_support": [
+            [
+              -0.01,
+              0.024,
+              -0.031
+            ],
+            [
+              0.01,
+              0.032,
+              -0.024
+            ]
+          ]
+        },
+        "tool_radius_projected_lower_bound_m": 0.01886463351831271,
+        "limiting_fixture": "lower_saddle",
+        "hidden_hand_meshes": []
+      },
+      "c_access": {
+        "fixture_bounds_m": {
+          "local_base": [
+            [
+              -0.04,
+              -0.02,
+              -0.037
+            ],
+            [
+              0.04,
+              0.1,
+              -0.031
+            ]
+          ],
+          "coupon_support": [
+            [
+              -0.01,
+              -0.012,
+              -0.031
+            ],
+            [
+              0.01,
+              0.012,
+              -0.017
+            ]
+          ],
+          "lower_saddle": [
+            [
+              -0.01,
+              0.024,
+              -0.024
+            ],
+            [
+              0.01,
+              0.032,
+              -0.006
+            ]
+          ],
+          "saddle_support": [
+            [
+              -0.01,
+              0.024,
+              -0.031
+            ],
+            [
+              0.01,
+              0.032,
+              -0.024
+            ]
+          ]
+        },
+        "tool_radius_projected_lower_bound_m": 0.01886463351831271,
+        "limiting_fixture": "lower_saddle",
+        "hidden_hand_meshes": [
+          "hardware_left_gripper_base_0",
+          "hardware_left_gripper_base_1",
+          "hardware_left_left_outer_knuckle_0",
+          "hardware_left_left_outer_finger_0",
+          "hardware_left_left_inner_knuckle_0",
+          "hardware_left_left_inner_finger_0",
+          "hardware_left_right_outer_knuckle_0",
+          "hardware_left_right_outer_finger_0",
+          "hardware_left_right_inner_knuckle_0",
+          "hardware_left_right_inner_finger_0",
+          "left_left_edge_contour",
+          "left_left_carrier",
+          "left_right_edge_contour",
+          "left_right_carrier"
+        ]
+      },
+      "unlatch": {
+        "fixture_bounds_m": {
+          "local_base": [
+            [
+              -0.04,
+              -0.02,
+              -0.037
+            ],
+            [
+              0.04,
+              0.1,
+              -0.031
+            ]
+          ],
+          "coupon_support": [
+            [
+              -0.01,
+              -0.012,
+              -0.031
+            ],
+            [
+              0.01,
+              0.012,
+              -0.017
+            ]
+          ],
+          "lower_saddle": [
+            [
+              -0.01,
+              0.024,
+              -0.024
+            ],
+            [
+              0.01,
+              0.032,
+              -0.006
+            ]
+          ],
+          "saddle_support": [
+            [
+              -0.01,
+              0.024,
+              -0.031
+            ],
+            [
+              0.01,
+              0.032,
+              -0.024
+            ]
+          ]
+        },
+        "tool_radius_projected_lower_bound_m": 0.01886463351831271,
+        "limiting_fixture": "lower_saddle",
+        "hidden_hand_meshes": [
+          "hardware_left_gripper_base_0",
+          "hardware_left_gripper_base_1",
+          "hardware_left_left_outer_knuckle_0",
+          "hardware_left_left_outer_finger_0",
+          "hardware_left_left_inner_knuckle_0",
+          "hardware_left_left_inner_finger_0",
+          "hardware_left_right_outer_knuckle_0",
+          "hardware_left_right_outer_finger_0",
+          "hardware_left_right_inner_knuckle_0",
+          "hardware_left_right_inner_finger_0",
+          "left_left_edge_contour",
+          "left_left_carrier",
+          "left_right_edge_contour",
+          "left_right_carrier"
+        ]
+      }
+    },
+    "CAP": {
+      "near": {
+        "fixture_bounds_m": {
+          "local_base": [
+            [
+              -0.04,
+              -0.02,
+              -0.037
+            ],
+            [
+              0.04,
+              0.1,
+              -0.031
+            ]
+          ],
+          "coupon_support": [
+            [
+              -0.01,
+              -0.012,
+              -0.031
+            ],
+            [
+              0.01,
+              0.012,
+              -0.017
+            ]
+          ],
+          "lower_saddle": [
+            [
+              -0.01,
+              0.024,
+              -0.024
+            ],
+            [
+              0.01,
+              0.032,
+              -0.006
+            ]
+          ],
+          "saddle_support": [
+            [
+              -0.01,
+              0.024,
+              -0.031
+            ],
+            [
+              0.01,
+              0.032,
+              -0.024
+            ]
+          ],
+          "hinge_post_0": [
+            [
+              -0.017,
+              0.074,
+              -0.031
+            ],
+            [
+              -0.011,
+              0.086,
+              0.016
+            ]
+          ],
+          "hinge_post_1": [
+            [
+              0.011,
+              0.074,
+              -0.031
+            ],
+            [
+              0.017,
+              0.086,
+              0.016
+            ]
+          ],
+          "hinge_pin": [
+            [
+              -0.017,
+              0.077,
+              0.008
+            ],
+            [
+              0.017,
+              0.083,
+              0.014
+            ]
+          ],
+          "upper_saddle": [
+            [
+              -0.01,
+              0.08044219232627166,
+              0.05713130622770061
+            ],
+            [
+              0.01,
+              0.09633405016387972,
+              0.06943712920054723
+            ]
+          ],
+          "swing_beam": [
+            [
+              -0.004,
+              0.0758128415643396,
+              0.0062151690868793436
+            ],
+            [
+              0.004,
+              0.10197220588859518,
+              0.06464884719398788
+            ]
+          ]
+        },
+        "tool_radius_projected_lower_bound_m": 0.01886463351831271,
+        "limiting_fixture": "lower_saddle",
+        "hidden_hand_meshes": []
+      },
+      "clamp": {
+        "fixture_bounds_m": {
+          "local_base": [
+            [
+              -0.04,
+              -0.02,
+              -0.037
+            ],
+            [
+              0.04,
+              0.1,
+              -0.031
+            ]
+          ],
+          "coupon_support": [
+            [
+              -0.01,
+              -0.012,
+              -0.031
+            ],
+            [
+              0.01,
+              0.012,
+              -0.017
+            ]
+          ],
+          "lower_saddle": [
+            [
+              -0.01,
+              0.024,
+              -0.024
+            ],
+            [
+              0.01,
+              0.032,
+              -0.006
+            ]
+          ],
+          "saddle_support": [
+            [
+              -0.01,
+              0.024,
+              -0.031
+            ],
+            [
+              0.01,
+              0.032,
+              -0.024
+            ]
+          ],
+          "hinge_post_0": [
+            [
+              -0.017,
+              0.074,
+              -0.031
+            ],
+            [
+              -0.011,
+              0.086,
+              0.016
+            ]
+          ],
+          "hinge_post_1": [
+            [
+              0.011,
+              0.074,
+              -0.031
+            ],
+            [
+              0.017,
+              0.086,
+              0.016
+            ]
+          ],
+          "hinge_pin": [
+            [
+              -0.017,
+              0.077,
+              0.008
+            ],
+            [
+              0.017,
+              0.083,
+              0.014
+            ]
+          ],
+          "upper_saddle": [
+            [
+              -0.01,
+              0.024,
+              -0.006
+            ],
+            [
+              0.01,
+              0.032,
+              0.008
+            ]
+          ],
+          "swing_beam": [
+            [
+              -0.004,
+              0.024,
+              0.008
+            ],
+            [
+              0.004,
+              0.084,
+              0.014
+            ]
+          ]
+        },
+        "tool_radius_projected_lower_bound_m": 0.018000000000000002,
+        "limiting_fixture": "swing_beam",
+        "hidden_hand_meshes": []
+      },
+      "release": {
+        "fixture_bounds_m": {
+          "local_base": [
+            [
+              -0.04,
+              -0.02,
+              -0.037
+            ],
+            [
+              0.04,
+              0.1,
+              -0.031
+            ]
+          ],
+          "coupon_support": [
+            [
+              -0.01,
+              -0.012,
+              -0.031
+            ],
+            [
+              0.01,
+              0.012,
+              -0.017
+            ]
+          ],
+          "lower_saddle": [
+            [
+              -0.01,
+              0.024,
+              -0.024
+            ],
+            [
+              0.01,
+              0.032,
+              -0.006
+            ]
+          ],
+          "saddle_support": [
+            [
+              -0.01,
+              0.024,
+              -0.031
+            ],
+            [
+              0.01,
+              0.032,
+              -0.024
+            ]
+          ],
+          "hinge_post_0": [
+            [
+              -0.017,
+              0.074,
+              -0.031
+            ],
+            [
+              -0.011,
+              0.086,
+              0.016
+            ]
+          ],
+          "hinge_post_1": [
+            [
+              0.011,
+              0.074,
+              -0.031
+            ],
+            [
+              0.017,
+              0.086,
+              0.016
+            ]
+          ],
+          "hinge_pin": [
+            [
+              -0.017,
+              0.077,
+              0.008
+            ],
+            [
+              0.017,
+              0.083,
+              0.014
+            ]
+          ],
+          "upper_saddle": [
+            [
+              -0.01,
+              0.024,
+              -0.006
+            ],
+            [
+              0.01,
+              0.032,
+              0.008
+            ]
+          ],
+          "swing_beam": [
+            [
+              -0.004,
+              0.024,
+              0.008
+            ],
+            [
+              0.004,
+              0.084,
+              0.014
+            ]
+          ]
+        },
+        "tool_radius_projected_lower_bound_m": 0.018000000000000002,
+        "limiting_fixture": "swing_beam",
+        "hidden_hand_meshes": []
+      },
+      "c_access": {
+        "fixture_bounds_m": {
+          "local_base": [
+            [
+              -0.04,
+              -0.02,
+              -0.037
+            ],
+            [
+              0.04,
+              0.1,
+              -0.031
+            ]
+          ],
+          "coupon_support": [
+            [
+              -0.01,
+              -0.012,
+              -0.031
+            ],
+            [
+              0.01,
+              0.012,
+              -0.017
+            ]
+          ],
+          "lower_saddle": [
+            [
+              -0.01,
+              0.024,
+              -0.024
+            ],
+            [
+              0.01,
+              0.032,
+              -0.006
+            ]
+          ],
+          "saddle_support": [
+            [
+              -0.01,
+              0.024,
+              -0.031
+            ],
+            [
+              0.01,
+              0.032,
+              -0.024
+            ]
+          ],
+          "hinge_post_0": [
+            [
+              -0.017,
+              0.074,
+              -0.031
+            ],
+            [
+              -0.011,
+              0.086,
+              0.016
+            ]
+          ],
+          "hinge_post_1": [
+            [
+              0.011,
+              0.074,
+              -0.031
+            ],
+            [
+              0.017,
+              0.086,
+              0.016
+            ]
+          ],
+          "hinge_pin": [
+            [
+              -0.017,
+              0.077,
+              0.008
+            ],
+            [
+              0.017,
+              0.083,
+              0.014
+            ]
+          ],
+          "upper_saddle": [
+            [
+              -0.01,
+              0.024,
+              -0.006
+            ],
+            [
+              0.01,
+              0.032,
+              0.008
+            ]
+          ],
+          "swing_beam": [
+            [
+              -0.004,
+              0.024,
+              0.008
+            ],
+            [
+              0.004,
+              0.084,
+              0.014
+            ]
+          ]
+        },
+        "tool_radius_projected_lower_bound_m": 0.018000000000000002,
+        "limiting_fixture": "swing_beam",
+        "hidden_hand_meshes": [
+          "hardware_left_gripper_base_0",
+          "hardware_left_gripper_base_1",
+          "hardware_left_left_outer_knuckle_0",
+          "hardware_left_left_outer_finger_0",
+          "hardware_left_left_inner_knuckle_0",
+          "hardware_left_left_inner_finger_0",
+          "hardware_left_right_outer_knuckle_0",
+          "hardware_left_right_outer_finger_0",
+          "hardware_left_right_inner_knuckle_0",
+          "hardware_left_right_inner_finger_0",
+          "left_left_edge_contour",
+          "left_left_carrier",
+          "left_right_edge_contour",
+          "left_right_carrier"
+        ]
+      },
+      "unlatch": {
+        "fixture_bounds_m": {
+          "local_base": [
+            [
+              -0.04,
+              -0.02,
+              -0.037
+            ],
+            [
+              0.04,
+              0.1,
+              -0.031
+            ]
+          ],
+          "coupon_support": [
+            [
+              -0.01,
+              -0.012,
+              -0.031
+            ],
+            [
+              0.01,
+              0.012,
+              -0.017
+            ]
+          ],
+          "lower_saddle": [
+            [
+              -0.01,
+              0.024,
+              -0.024
+            ],
+            [
+              0.01,
+              0.032,
+              -0.006
+            ]
+          ],
+          "saddle_support": [
+            [
+              -0.01,
+              0.024,
+              -0.031
+            ],
+            [
+              0.01,
+              0.032,
+              -0.024
+            ]
+          ],
+          "hinge_post_0": [
+            [
+              -0.017,
+              0.074,
+              -0.031
+            ],
+            [
+              -0.011,
+              0.086,
+              0.016
+            ]
+          ],
+          "hinge_post_1": [
+            [
+              0.011,
+              0.074,
+              -0.031
+            ],
+            [
+              0.017,
+              0.086,
+              0.016
+            ]
+          ],
+          "hinge_pin": [
+            [
+              -0.017,
+              0.077,
+              0.008
+            ],
+            [
+              0.017,
+              0.083,
+              0.014
+            ]
+          ],
+          "upper_saddle": [
+            [
+              -0.01,
+              0.08044219232627166,
+              0.05713130622770061
+            ],
+            [
+              0.01,
+              0.09633405016387972,
+              0.06943712920054723
+            ]
+          ],
+          "swing_beam": [
+            [
+              -0.004,
+              0.0758128415643396,
+              0.0062151690868793436
+            ],
+            [
+              0.004,
+              0.10197220588859518,
+              0.06464884719398788
+            ]
+          ]
+        },
+        "tool_radius_projected_lower_bound_m": 0.01886463351831271,
+        "limiting_fixture": "lower_saddle",
+        "hidden_hand_meshes": [
+          "hardware_left_gripper_base_0",
+          "hardware_left_gripper_base_1",
+          "hardware_left_left_outer_knuckle_0",
+          "hardware_left_left_outer_finger_0",
+          "hardware_left_left_inner_knuckle_0",
+          "hardware_left_left_inner_finger_0",
+          "hardware_left_right_outer_knuckle_0",
+          "hardware_left_right_outer_finger_0",
+          "hardware_left_right_inner_knuckle_0",
+          "hardware_left_right_inner_finger_0",
+          "left_left_edge_contour",
+          "left_left_carrier",
+          "left_right_edge_contour",
+          "left_right_carrier"
+        ]
+      }
+    }
+  },
+  "measurement_basis": "triangle XY projection within tool Z band is a conservative bound, not exact clearance",
+  "exports": [
+    {
+      "file": "terminal_retainer_REST_v01.glb",
+      "sha256": "76ea516e8896875508257d9e8776e674f69d11147707956df8f92213f1f2dd15",
+      "mesh_count": 22,
+      "readback_mesh_count": 22,
+      "bounds_m": [
+        [
+          -0.06426016898839715,
+          -0.02,
+          -0.037
+        ],
+        [
+          0.06426016483147669,
+          0.1,
+          0.1498769757245636
+        ]
+      ],
+      "readback_bounds_max_difference_m": 1.4901161138336505e-09
+    },
+    {
+      "file": "terminal_retainer_CAP_v01.glb",
+      "sha256": "3fc3e68f0028ddbb28e147aff051f758d6962fc3b642e544ed3cf5fd52d77d21",
+      "mesh_count": 27,
+      "readback_mesh_count": 27,
+      "bounds_m": [
+        [
+          -0.06426016898839715,
+          -0.02,
+          -0.037
+        ],
+        [
+          0.06426016483147669,
+          0.1,
+          0.1498769757245636
+        ]
+      ],
+      "readback_bounds_max_difference_m": 1.4901161138336505e-09
+    }
+  ],
+  "not_evaluated": [
+    "actual Ampere terminal, crimp and sleeve geometry and allowed contact surfaces",
+    "pressure, friction, sleeve creep, axial slip and terminal rotation",
+    "locking linkage or purchased clamp, actuator, detection, release and maintenance",
+    "fastening torque reaction and axial loads",
+    "full enclosure, pallet, connector, camera and arm clearances",
+    "pallet return conveyor and end lift envelopes",
+    "full flexible-wire shape, both-end loading and dynamic transport",
+    "continuous sweep, volume containment and physical acceptance"
+  ],
+  "physical_acceptance_verdict": null
+}
