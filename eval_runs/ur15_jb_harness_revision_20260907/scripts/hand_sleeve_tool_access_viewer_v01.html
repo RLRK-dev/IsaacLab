@@ -1,0 +1,105 @@
+<!doctype html>
+<!-- Copyright (c) 2022-2026, The Isaac Lab Project Developers. SPDX-License-Identifier: BSD-3-Clause -->
+<html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>THREAD｜黒被覆保持中の工具空間 v01</title><style>
+*{box-sizing:border-box}body{margin:0;background:#eff4f7;color:#173447;font:15px/1.8 system-ui,-apple-system,"Noto Sans CJK JP",sans-serif}main{max-width:1450px;margin:auto;padding:26px 24px 50px}h1{font-size:29px;margin:8px 0 12px;line-height:1.5}h2{font-size:19px;margin:0 0 12px}p{margin:8px 0}.eyebrow{color:#207896;font-size:12px;letter-spacing:.14em;font-weight:700}.intro{max-width:1120px;color:#4b6475}.layout{display:grid;grid-template-columns:minmax(0,1fr) 325px;gap:18px;margin-top:22px}.view,.panel,.note{border:1px solid #cadce7;border-radius:8px;background:#fff;min-width:0}.view{overflow:hidden}.panel,.note{padding:20px}.note{margin-top:18px}.toolbar{display:flex;flex-wrap:wrap;gap:8px;padding:12px 15px;border-bottom:1px solid #dce7ef}button,select{font:inherit;padding:6px 10px;background:white;border:1px solid #bfd1de;border-radius:5px;color:#225776;cursor:pointer;max-width:100%}button.selected{background:#1b759a;color:white}canvas{display:block;width:100%;height:560px;background:linear-gradient(#f9fcfe,#e5edf3);touch-action:none;cursor:grab}.caption,.small{font-size:12px;color:#5c7283}.caption{padding:10px 16px;background:#f6fafc}.panel label{display:block;margin:12px 0}.panel input[type=range]{width:100%}.metric{border-top:1px solid #dce6ef;margin-top:12px;padding-top:10px}.number{font-size:26px;color:#176f94;font-weight:700}.badge{background:#e6f3f6;padding:4px 7px;color:#226e7c;font-size:12px;border-radius:4px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:24px}table{border-collapse:collapse;width:100%;font-size:13px}td,th{padding:10px 12px;border-bottom:1px solid #dbe5ec;text-align:left}th{background:#f3f8fb}.table-wrap{overflow-x:auto}.scope{border-left:3px solid #d9a349;padding-left:12px}.links{display:flex;flex-wrap:wrap;gap:16px;margin:12px 0}a{color:#176f99}svg{width:100%;height:auto;display:block}.legend{display:flex;gap:16px;flex-wrap:wrap;font-size:12px;margin-top:12px}.dot{width:10px;height:10px;display:inline-block;border-radius:2px;margin-right:5px}button:focus-visible,select:focus-visible,input:focus-visible{outline:3px solid #eeae48;outline-offset:2px}@media(max-width:850px){main{padding:20px 14px}.layout,.grid{grid-template-columns:1fr}h1{font-size:24px}canvas{height:450px}.panel{padding:16px}}
+ svg text{font:12px system-ui,sans-serif;fill:#456273}.code{overflow-wrap:anywhere;font-size:12px}canvas{height:620px}@media(max-width:850px){canvas{height:480px}}</style></head><body><main>
+<div class="eyebrow">THREAD / SLEEVE GRASP × TOOL SPACE / OBSERVATION 01</div><h1>黒被覆を保持したまま、工具の占有域を重ねる。</h1>
+<p class="intro">承認された把持位置の比較モデルを固定し、公開ソケット寸法と、未選定の工具上部の占有域を重ねました。ソケットの表示は最大外径の円筒です。<b>実工具やボルトの選定、締結動作の再現ではありません。</b></p>
+<div class="layout"><div class="view"><div class="toolbar"><select id="kind" aria-label="手先の形状"><option value="H025">上端逃げ0.25 mm</option><option value="H050" selected>上端逃げ0.5 mm</option></select><select id="state" aria-label="保存姿勢"><option value="near">近接・保持形状</option><option value="early">開き始め・参考</option><option value="open">開放・参考</option><option value="clear">離隔・参考</option></select></div>
+<div style="position:relative"><canvas id="view" aria-label="黒被覆を保持する手先と工具の比較円筒"></canvas><div id="view-label" class="small" style="position:absolute;top:12px;left:16px;background:#ffffffc9;padding:2px 5px;pointer-events:none"></div><div class="small" style="position:absolute;left:16px;bottom:16px;pointer-events:none">20 mm<div id="scale-bar" style="border-top:2px solid #708899;margin-top:4px"></div></div></div>
+<div class="toolbar"><button id="detail">先端を拡大</button><button id="reset">全体に戻す</button><button data-camera="oblique">斜め</button><button data-camera="front">正面</button><button data-camera="top">上から</button></div><p id="view-error" class="caption" hidden>3Dを表示できません。数値表と記録を参照してください。</p><div class="caption">ドラッグで回転・ホイールで拡大。赤い点は選択した高さ帯の最接近点です。手先は元の静止姿勢を維持し、工具の円筒だけを配置比較しています。</div></div>
+<aside class="panel"><span class="badge">実工具の採用・工程動作は未確定</span><label>公開ソケットの寸法例<select id="socket"><option value="B3-10">KTC B3-10：最大外径17 mm・長さ22 mm</option><option value="B3-17">KTC B3-17：最大外径24 mm・長さ27 mm</option></select></label><label>見る部分<select id="band"><option value="socket">ソケットの外径包絡</option><option value="shaft">細軸の比較域（φ12）</option><option value="body">上部の比較域（型式未選定）</option></select></label>
+<label>上部の比較直径 <b id="diameter-value">40</b> mm<input id="diameter" type="range" min="20" max="80" step="5" value="40" aria-label="上部比較円筒の直径"></label>
+<label>工具域の上方オフセット<select id="offset"><option value="0.0">0 mm：基準配置</option><option value="0.025">25 mm上</option><option value="0.05">50 mm上</option><option value="sweep">0〜50 mmの移動範囲の和集合</option></select></label>
+<div class="small">接続面から <b id="range"></b></div><div class="metric"><div class="small">締付軸から手先表面まで</div><span id="radius" class="number"></span> mm</div><div class="metric"><div class="small">上の距離 − 選択部分の比較半径</div><span id="difference" class="number"></span> mm</div><p id="closest" class="code"></p><p class="scope small">負の値は比較円筒の半径内に手先表面があることを示します。実工具・保持力・締付品質の合否ではありません。</p>
+<label><input id="hardware" type="checkbox" checked> 元のハンド本体・リンク</label><label><input id="target" type="checkbox" checked> 端子・被覆・ケーブルの参考形状</label><label><input id="guide" type="checkbox" checked> 工具の比較円筒</label><p class="small">表示を消しても測定対象は手先全体のままです。</p></aside></div>
+<div class="legend"><span><i class="dot" style="background:#da9a30"></i>黄：ソケット最大外径</span><span><i class="dot" style="background:#8297ad"></i>灰青：細軸の比較域</span><span><i class="dot" style="background:#9965b3"></i>紫：上部の比較域</span></div>
+<section class="note grid"><div><h2>高さ別の表面距離</h2><svg id="profile" viewBox="0 0 620 294" role="img" aria-label="高さ2 mm区間ごとの端子軸から手先表面までの距離"></svg><p class="small">青線は高さ2 mmの区間全体での最小値、破線は選択部分の半径です。空の区間には手先表面がありません。</p></div><div><h2>短いソケットと、上のユニットは別に確認</h2><p>ソケットの最大外径と全長はKTC公開表を参照しました。図は外形を包む円筒で、六角穴・段付き外形やボルト保持機構を復元していません。</p><p>細軸φ12 mm、上部φ40／φ60 mm、基準高さ、0〜50 mmの上下量は比較用です。上部の高さは元のハンド観測帯から引き継いでおり、実製品の全長ではありません。</p><p class="small">工具前端の基準は接続面から3.8 mm。実ボルトの頭高さやソケットの掛かりを確定した位置ではありません。「和集合」は円筒の通る範囲を幾何的に示すだけで、実際の進入・締付・抜去動作の成立を表していません。</p></div></section>
+<section class="note"><h2>近接姿勢：0〜50 mmの比較移動範囲</h2><div class="table-wrap"><table><thead><tr><th>対象</th><th>円筒の直径</th><th>軸から手先まで</th><th>比較半径との差</th></tr></thead><tbody id="summary"></tbody></table></div><p class="small">表はH050。H025を含む4保存姿勢はJSONへ記録しています。表面距離は工具との3次元最短隙間ではありません。工具がワークへ適合することも判定していません。</p></section>
+<section class="note"><h2>次に実物へ対応させる部分</h2><p>ボルト／ナットとソケット、供給・保持ノーズ、締付ユニット外形、接続点・相手部品、ハンドカメラと周辺設備を合わせて確認する必要があります。黒被覆の滑り・回転・つぶれと締付反力は、今回の幾何観測には含みません。</p><p>両手の保持中にST側の工具2系統で締結する方針と、大小同時締結の要求は維持しています。この単独ハンドのページで、工具2系統の配置や実際の同時動作を確定したものではありません。</p><div class="links"><a href="工具空間の確認記録_v01.md">確認記録</a><a href="hand_sleeve_tool_access_v01.json">全観測JSON</a><a href="data/hand_sleeve_tool_access_v01.json">比較条件</a><a href="https://ktc.jp/catalog/index-category/category-list/b3-055__24-4">KTC公式寸法表</a><a href="https://www.deprag.com/en/automation/screwdriving-units/deprag-feed-module.html">ST取付け・自動供給の参照</a></div></section>
+</main><script id="model-data" type="application/json">__MESH_PAYLOAD__</script><script id="observation-data" type="application/json">__OBSERVATION_PAYLOAD__</script><script>
+"use strict";
+const $=id=>document.getElementById(id),payload=JSON.parse($("model-data").textContent),report=JSON.parse($("observation-data").textContent),observed=report.observation.states,seat=payload.config.target.seat_z_m,canvas=$("view");
+const gl=canvas.getContext("webgl",{alpha:true,antialias:true,preserveDrawingBuffer:true});if(!gl){$("view-error").hidden=false;throw new Error("WebGL unavailable");}
+let kind="H050",state="near",yaw=-.63,pitch=.45,zoom=.9,focus=[0,.035,.075],drag=null,pending=false;
+function selectedRows(){return observed[kind][state].tools[$("socket").value][$("offset").value];}
+function selectedBand(){return selectedRows()[$("band").value];}
+function selectedDiameter(){return $("band").value==="body"?Number($("diameter").value):selectedBand().comparison_diameter_m*1000;}
+const unit=v=>{const n=Math.hypot(...v);return v.map(x=>x/(n||1));};
+const cross=(a,b)=>[a[1]*b[2]-a[2]*b[1],a[2]*b[0]-a[0]*b[2],a[0]*b[1]-a[1]*b[0]];
+const sub=(a,b)=>a.map((x,i)=>x-b[i]);const dot=(a,b)=>a.reduce((s,x,i)=>s+x*b[i],0);
+const light=unit([-.5,-.7,1]);
+function compile(type,source){const shader=gl.createShader(type);gl.shaderSource(shader,source);gl.compileShader(shader);if(!gl.getShaderParameter(shader,gl.COMPILE_STATUS))throw new Error(gl.getShaderInfoLog(shader));return shader;}
+const program=gl.createProgram();
+gl.attachShader(program,compile(gl.VERTEX_SHADER,"attribute vec3 a_position;attribute vec4 a_color;varying vec4 v_color;void main(){gl_Position=vec4(a_position,1.0);v_color=a_color;}"));
+gl.attachShader(program,compile(gl.FRAGMENT_SHADER,"precision mediump float;varying vec4 v_color;void main(){gl_FragColor=v_color;}"));
+gl.linkProgram(program);if(!gl.getProgramParameter(program,gl.LINK_STATUS))throw new Error(gl.getProgramInfoLog(program));
+gl.useProgram(program);
+const vertexBuffer=gl.createBuffer(),positionLocation=gl.getAttribLocation(program,"a_position"),colorLocation=gl.getAttribLocation(program,"a_color");
+gl.bindBuffer(gl.ARRAY_BUFFER,vertexBuffer);gl.enableVertexAttribArray(positionLocation);gl.enableVertexAttribArray(colorLocation);
+gl.vertexAttribPointer(positionLocation,3,gl.FLOAT,false,28,0);gl.vertexAttribPointer(colorLocation,4,gl.FLOAT,false,28,12);
+gl.enable(gl.DEPTH_TEST);gl.depthFunc(gl.LEQUAL);gl.frontFace(gl.CCW);gl.cullFace(gl.BACK);
+
+let geometryKey=null,geometry=null;
+function worldGeometry(candidate,transforms,key){
+ if(key===geometryKey)return geometry;const opaque=[],guides=[];let meshes=0;
+ const append=(world,obj,color,destination)=>{for(const f of obj.faces){const n=unit(cross(sub(world[f[1]],world[f[0]]),sub(world[f[2]],world[f[0]]))),shade=.48+.52*Math.max(0,dot(n,light)),c=color.map((v,i)=>v/255*(i===3?1:shade));for(const index of f)destination.push(...world[index],...c);}};
+ for(const [name,obj] of Object.entries(candidate.objects)){
+  if(["hardware","target","guide"].includes(obj.category)&&!$(obj.category).checked)continue;
+  const m=transforms[name],world=obj.vertices.map(v=>m.slice(0,3).map(r=>r[0]*v[0]+r[1]*v[1]+r[2]*v[2]+r[3]));
+  if(obj.category!=="guide"){append(world,obj,obj.color,opaque);meshes++;continue;}
+  const original=payload.config.illustrative_surroundings.tool_z_above_seat_range_m;
+  for(const [part,row] of Object.entries(selectedRows())){const d=part==="body"?Number($("diameter").value)/1000:row.comparison_diameter_m,b=row.z_above_seat_range_m;
+   const points=world.map(v=>[v[0]*d/.012,v[1]*d/.012,seat+b[0]+(v[2]-seat-original[0])/(original[1]-original[0])*(b[1]-b[0])]);
+   const color={socket:[218,154,48,90],shaft:[130,151,173,70],body:[153,101,179,70]}[part].slice();if(part===$("band").value)color[3]=130;append(points,obj,color,guides);
+  }
+ }
+ const point=selectedBand().witness_m;if(point){const r=.0015,verts=[[r,0,0],[-r,0,0],[0,r,0],[0,-r,0],[0,0,r],[0,0,-r]].map(v=>v.map((n,i)=>n+point[i]));for(const face of [[0,2,4],[2,1,4],[1,3,4],[3,0,4],[2,0,5],[1,2,5],[3,1,5],[0,3,5]])for(const i of face)opaque.push(...verts[i],.93,.24,.08,1);}
+ geometryKey=key;geometry={opaque:new Float32Array(opaque),guides:new Float32Array(guides),meshes};return geometry;
+}
+function paint(vertices,right,up,forward,scale,width,height){
+  const projected=new Float32Array(vertices);
+  for(let i=0;i<projected.length;i+=7){
+    const x=vertices[i]-focus[0],y=vertices[i+1]-focus[1],z=vertices[i+2]-focus[2];
+    projected[i]=(x*right[0]+y*right[1]+z*right[2])*2*scale/width;
+    projected[i+1]=(x*up[0]+y*up[1]+z*up[2])*2*scale/height;
+    projected[i+2]=-(x*forward[0]+y*forward[1]+z*forward[2]);
+  }
+  gl.bufferData(gl.ARRAY_BUFFER,projected,gl.DYNAMIC_DRAW);gl.drawArrays(gl.TRIANGLES,0,projected.length/7);
+}
+
+function draw(){pending=false;const width=canvas.clientWidth,height=canvas.clientHeight,dpr=Math.min(devicePixelRatio||1,1.5);canvas.width=Math.round(width*dpr);canvas.height=Math.round(height*dpr);gl.viewport(0,0,canvas.width,canvas.height);gl.clearColor(0,0,0,0);gl.depthMask(true);gl.clear(gl.COLOR_BUFFER_BIT|gl.DEPTH_BUFFER_BIT);
+ const right=[Math.cos(yaw),Math.sin(yaw),0],up=[-Math.sin(yaw)*Math.sin(pitch),Math.cos(yaw)*Math.sin(pitch),Math.cos(pitch)],forward=cross(right,up),scale=Math.min(width/.23,height/.23)*zoom;
+ const key=[kind,state,$("socket").value,$("band").value,$("offset").value,$("diameter").value,...["hardware","target","guide"].map(id=>$(id).checked)].join("/"),g=worldGeometry(payload.candidates[kind],payload.candidates[kind].states[state].transforms,key);
+ gl.disable(gl.BLEND);gl.enable(gl.CULL_FACE);paint(g.opaque,right,up,forward,scale,width,height);gl.depthMask(false);gl.enable(gl.BLEND);gl.blendFunc(gl.SRC_ALPHA,gl.ONE_MINUS_SRC_ALPHA);gl.cullFace(gl.FRONT);paint(g.guides,right,up,forward,scale,width,height);gl.cullFace(gl.BACK);paint(g.guides,right,up,forward,scale,width,height);gl.depthMask(true);
+ $("view-label").textContent=`${kind} / ${state} / ${$("socket").value} / ${$("offset").value==="sweep"?"移動範囲の和集合":Number($("offset").value)*1000+" mm上"}`;$("scale-bar").style.width=`${.02*scale}px`;
+ window.reviewRendered={kind,state,socket:$("socket").value,offset:$("offset").value,band:$("band").value,diameter_mm:selectedDiameter(),body_diameter_mm:Number($("diameter").value),meshes:g.meshes,guide_faces:g.guides.length/21,width,height,gl_error:gl.getError(),finite_vertices:Array.from(g.opaque).every(Number.isFinite)&&Array.from(g.guides).every(Number.isFinite)};
+}
+function schedule(){if(!pending){pending=true;requestAnimationFrame(draw);}}
+function plot(){
+  const rows=observed[kind][state].profile,high=report.observation.profile_height_range_above_seat_m[1]*1000;
+  const svg=document.getElementById("profile");
+  const left=55,right=585,top=18,bottom=235;
+  const maxRadius=Math.max(20,Math.ceil(Math.max(...rows.filter(r=>r.radius_to_surface_m!==null).map(r=>r.radius_to_surface_m*1000))/10)*10);
+  const x=v=>left+v/high*(right-left),y=v=>bottom-Math.min(v,maxRadius)/maxRadius*(bottom-top);
+  let markup=`<rect x="${left}" y="${top}" width="${right-left}" height="${bottom-top}" fill="#f5f9fc"/>`;
+  for(let r=0;r<=maxRadius;r+=10){markup+=`<path d="M${left} ${y(r)}H${right}" stroke="#cfdde6"/><text x="${left-9}" y="${y(r)+4}" text-anchor="end">${r}</text>`;}
+  for(let h=0;h<high;h+=40){markup+=`<text x="${x(h)}" y="258" text-anchor="middle">${h}</text>`;}
+  const band=selectedBand().z_above_seat_range_m;
+  markup+=`<rect x="${x(band[0]*1000)}" y="${top}" width="${x(Math.min(high,band[1]*1000))-x(Math.min(high,band[0]*1000))}" height="${bottom-top}" fill="#eca434" opacity=".1"/>`;
+  for(const row of rows){if(row.radius_to_surface_m===null)continue;
+    const bounds=row.z_above_seat_range_m,r=row.radius_to_surface_m*1000;
+    markup+=`<path d="M${x(bounds[0]*1000)} ${y(r)}H${x(bounds[1]*1000)}" stroke="#176e9d" stroke-width="3"><title>${(bounds[0]*1000).toFixed(0)}〜${(bounds[1]*1000).toFixed(0)} mm: ${r.toFixed(3)} mm / ${row.object}</title></path>`;
+  }
+  markup+=`<path d="M${left} ${y(selectedDiameter()/2)}H${right}" stroke="#bd6727" stroke-dasharray="7 4" stroke-width="2"/>`;
+  markup+='<text x="320" y="282" text-anchor="middle">接続面からの高さ [mm]</text><text x="18" y="140" text-anchor="middle" transform="rotate(-90 18 140)">軸から表面まで [mm]</text>';
+  svg.innerHTML=markup;
+}
+
+function update(){kind=$("kind").value;state=$("state").value;const row=selectedBand(),r=row.radius_to_surface_m;$("diameter-value").textContent=$("diameter").value;$("range").textContent=row.z_above_seat_range_m.map(v=>(v*1000).toFixed(1)).join("〜")+" mm";$("radius").textContent=r===null?"—":(r*1000).toFixed(3);$("difference").textContent=r===null?"—":(r*1000-selectedDiameter()/2).toFixed(3);$("closest").textContent=row.object||"この高さ帯に手先表面なし";plot();schedule();}
+const ref=observed.H050.near.tools;
+$("summary").innerHTML=[...["B3-10","B3-17"].map(name=>[name+" 最大外径",ref[name].sweep.socket.comparison_diameter_m,ref[name].sweep.socket.radius_to_surface_m]),...[.04,.06].map(d=>["上部の比較域",d,ref["B3-10"].sweep.body.radius_to_surface_m])].map(([name,d,r])=>`<tr><td>${name}</td><td>${d*1000} mm</td><td>${(r*1000).toFixed(3)} mm</td><td>${(r*1000-d*500).toFixed(3)} mm</td></tr>`).join("");
+for(const id of ["kind","state","socket","band","offset"])$(id).addEventListener("change",update);$("diameter").addEventListener("input",update);for(const id of ["hardware","target","guide"])$(id).addEventListener("change",schedule);
+document.querySelectorAll("[data-camera]").forEach(b=>b.addEventListener("click",()=>{[yaw,pitch]=({oblique:[-.63,.45],front:[0,0],top:[0,Math.PI/2]})[b.dataset.camera];schedule();}));$("detail").addEventListener("click",()=>{focus=[0,.025,.007];zoom=2.6;schedule();});$("reset").addEventListener("click",()=>{focus=[0,.035,.075];zoom=.9;yaw=-.63;pitch=.45;schedule();});
+canvas.addEventListener("pointerdown",e=>{drag=[e.clientX,e.clientY];canvas.setPointerCapture(e.pointerId);});canvas.addEventListener("pointermove",e=>{if(!drag)return;yaw+=(e.clientX-drag[0])*.008;pitch=Math.max(-1.5,Math.min(1.57,pitch+(e.clientY-drag[1])*.008));drag=[e.clientX,e.clientY];schedule();});canvas.addEventListener("pointerup",()=>drag=null);canvas.addEventListener("pointercancel",()=>drag=null);canvas.addEventListener("wheel",e=>{e.preventDefault();zoom=Math.max(.6,Math.min(6,zoom*Math.exp(-e.deltaY*.001)));schedule();},{passive:false});new ResizeObserver(schedule).observe(canvas);update();
+</script></body></html>

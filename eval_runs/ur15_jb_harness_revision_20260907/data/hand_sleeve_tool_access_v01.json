@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "source_sha256": "f9b3c097ea93cb7bf8ea08b17474ec293f8cd2204b6eae20362fcdcc2809c732",
+  "axis_xy_m": [0.0, 0.0],
+  "profile_bin_height_m": 0.002,
+  "comparison_diameters_m": [0.017, 0.024, 0.040, 0.060],
+  "socket_examples": {
+    "B3-10": {"nominal_size_m": 0.010, "d1_m": 0.0145, "d2_m": 0.017, "length_m": 0.022},
+    "B3-17": {"nominal_size_m": 0.017, "d1_m": 0.024, "d2_m": 0.022, "length_m": 0.027}
+  },
+  "socket_source_url": "https://ktc.jp/catalog/index-category/category-list/b3-055__24-4",
+  "socket_source_checked_date": "2026-09-14",
+  "socket_model_method": "Cylindrical maximum-diameter outer envelope; not full hollow socket CAD or an adopted tool",
+  "comparison_tip_height_above_seat_m": 0.0038,
+  "comparison_shaft_diameter_m": 0.012,
+  "comparison_body_base_above_seat_m": 0.0538,
+  "comparison_body_top_above_seat_m": 0.1888769757245636,
+  "comparison_body_diameters_m": [0.040, 0.060],
+  "comparison_vertical_offsets_m": [0.0, 0.025, 0.050],
+  "dimensions_other_than_socket_catalogue_values": "Inherited display bands and sensitivity comparisons, not selected equipment or motion parameters",
+  "station_unit_reference_url": "https://www.deprag.com/en/automation/screwdriving-units/deprag-feed-module.html",
+  "adopted_socket_part_number": null,
+  "adopted_spindle_part_number": null,
+  "actual_fastener_specification": null,
+  "actual_motion_and_feed_stroke": null,
+  "physical_acceptance_verdict": null
+}

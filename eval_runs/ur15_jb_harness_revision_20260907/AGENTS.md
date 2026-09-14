@@ -226,3 +226,21 @@ numbers unknown until their basis and the scope of the product change are set.
 - The 22.6469 mm tool-band observation is the distance from the terminal axis
   to the projected hand surface, not a selected tool's clearance. Keep the
   two upper-edge reliefs unselected and arm/video production paused.
+
+## Sleeve-grasp tool-space comparison on 2026-09-14
+
+- The next user `ok` continued with the unchanged H025/H050 hand geometry.
+  `analysis/hand_sleeve_tool_access_v01.md` compares KTC B3-10/B3-17 catalogue
+  dimensions as maximum-diameter socket envelopes. These examples do not
+  select a socket, motor tool, fastener size or DEPRAG module.
+- The phi12 shaft, phi40/60 body, prior height bands and 0/25/50 mm vertical
+  offsets are sensitivity comparisons, not actual equipment dimensions or
+  approved strokes. The exact union of translated coaxial cylinder bands is
+  an auxiliary surface observation with the saved hand pose held fixed.
+  Do not call it a real fastening cycle or solid/continuous-motion acceptance.
+- Near-pose socket-band radius is 22.646854 mm. The upper comparison band's
+  radius is 28.5 mm, giving +8.5/-1.5 mm differences for phi40/60. These are
+  projected radial differences, not 3D penetration depths or acceptance margins.
+  Actual spindle/nose, cameras, the other hand/tool and the workpiece remain
+  outside this measurement. Keep the hand-holding and two station tools as a
+  comparison direction, and continue to pause arm trajectories and video.

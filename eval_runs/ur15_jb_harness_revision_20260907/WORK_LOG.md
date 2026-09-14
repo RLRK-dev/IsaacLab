@@ -418,3 +418,33 @@ were verified. Screenshots were inspected, and the detail image was reframed
 to include the full terminal hole beside the new sleeve contact. Reproduction
 and final release observations are recorded separately in the package audit.
 No upper retainer, arm trajectory, video or physical acceptance was created.
+
+## 2026-09-14 — Tool envelopes beside the black-sleeve grasp
+
+Continued the user's `ok` with a tool-space comparison on the fixed H025/H050
+payload. Checked the existing held-fastening direction, prior tool-access
+implementation and current official KTC/DEPRAG references. No tool or actual
+fastener was selected. Catalogue B3-10/B3-17 examples supply only their maximum
+external diameter and length; shaft/body/stroke values remain illustrative.
+
+Reused the five analytic cases, Z-slab triangle clipping and radial surface
+distance observer. Added socket/shaft/body bands at three translated positions
+and the exact band union for the 0-50 mm translation comparison. This observes
+the comparison envelope against each fixed saved hand pose; it neither creates
+a real tool cycle nor checks solid occupancy, gripping or fastening quality.
+Source SHA and the complete before/after payload remain identical.
+
+For the near pose, socket envelope differences are +14.146854 mm (phi17) and
++10.646854 mm (phi24). Upper-body examples give +8.5 mm (phi40) and -1.5 mm
+(phi60), with the nearest upper surface on the gripper base. Both reliefs give
+the same near observations. Negative differences are not penetration depths.
+Actual spindle, fastener retention nose, workpiece, camera, other hand/tool,
+arm and fixture geometry remain outside this measurement.
+
+Desktop and mobile each exercised 43 UI operations: both hand variants, four
+poses, socket examples, three parts, offsets/union, body diameters, visibility,
+cameras and framing. JSON-to-display values, finite coordinates, WebGL pixels,
+local links and layout widths were verified; screenshots were inspected.
+The native/GLB hand files were not resaved. Reproduction and release metadata
+are stored with the separate tool-space package. No arm motion/video or
+authoritative physical-validity result was created.
