@@ -1,0 +1,18 @@
+{
+  "source_sha256": "f9b3c097ea93cb7bf8ea08b17474ec293f8cd2204b6eae20362fcdcc2809c732",
+  "recipe_sha256": "32bcd7a60a70778195bd0dac799e872ae5c2e4965fca182a9c82feb048ad4c62",
+  "candidates": {"T025": "H025", "T050": "H050"},
+  "clockwise_angle_deg": 15.0,
+  "rotation_axis_world": [1.0, 0.0, 0.0],
+  "signed_rotation_deg": -15.0,
+  "view_convention": "Looking from +X; screen right +Y and up +Z. Hardware top moves away from tool toward +Y.",
+  "pivot": "Mean of the two measured mounting-frame origins in the source near pose",
+  "near_front_and_root_pad_world_geometry": "preserved",
+  "clear_reference_world_z_displacement_m": 0.025,
+  "numerical_world_comparison_tolerance_m": 1e-10,
+  "numerical_surface_comparison_tolerance_m": 1e-7,
+  "selected_relief_m": null,
+  "arm_motion_created": false,
+  "video_created": false,
+  "physical_acceptance_verdict": null
+}

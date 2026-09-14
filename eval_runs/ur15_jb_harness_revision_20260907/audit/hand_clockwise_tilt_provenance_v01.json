@@ -1,0 +1,19 @@
+{
+  "recorded_at": "2026-09-14T13:55:13.347334+09:00",
+  "source_sha256": "f9b3c097ea93cb7bf8ea08b17474ec293f8cd2204b6eae20362fcdcc2809c732",
+  "recipe_sha256": "32bcd7a60a70778195bd0dac799e872ae5c2e4965fca182a9c82feb048ad4c62",
+  "baseline_candidates_all_data_unchanged": true,
+  "placements": 448,
+  "script_sha256": {
+    "build_hand_clockwise_tilt_v01.py": "f891c62a45143381776002ecad1a39f048904ccde77596bd926540dcd742a125",
+    "save_hand_clockwise_tilt_v01.py": "45466a88b8de4d9a9e17a887e23e2a7729a02c8aba6987a3c34565ed7a4d106d",
+    "hand_clockwise_tilt_viewer_v01.html": "df5495a1557ba6e69fcc591c5b4f6795f29bd4a2125e2afd3a441b5c6d760eb4",
+    "build_hand_fingertip_concepts_v01.py": "532b03f68bfdf49c46ae3f33155b8757a8e93549773390a85a27e7b52066bf5c",
+    "build_hand_body_setback_v01.py": "36f780dd3c7253e162803d3d36b690d5d240ae7c2f41c717e44a05936f371fbe",
+    "probe_hand_tool_access_v01.py": "55456e6d55f84931bcc3f502e77372414a6efa2578e27970d5620f176c53417c",
+    "probe_hand_fastening_reference_v01.py": "6f6422278244b50d63850facc8d762070014a08aca66d5341d906f5d22944cb4",
+    "render_hand_fingertip_concepts_v01.py": "d2b93084db702202daf7a94209d3140657c3db1ac1d5e06462daa0618b4067d1",
+    "save_hand_body_setback_v01.py": "a2b1dd1b227c30e0f7e6da312b310163f684f5c0c9e186c6260319a30cee22aa"
+  },
+  "physical_acceptance_verdict": null
+}

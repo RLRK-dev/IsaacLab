@@ -260,3 +260,24 @@ numbers unknown until their basis and the scope of the product change are set.
   radial difference in the near hand pose. At 3.8 mm it is +4.646854 mm.
   Neither is the clearance of a complete tool. Preserve source hand geometry,
   hold-at-sleeve intent, 40 mm setback and paused arm/video work.
+
+## Clockwise mechanism tilt on 2026-09-14
+
+- The user explicitly requested about 15 degrees clockwise in the +X side
+  view. `analysis/hand_clockwise_tilt_v01.md` records T025/T050, rotating the
+  original black hardware and mounting plates around the mean mounting origin.
+  Screen right is +Y and up is +Z; the signed world X rotation is -15 degrees.
+- Near-pose front sleeve and root cable pad world geometry stays fixed. Rebuild
+  the four simple carrier solids, keeping rail and pad seats in place, then
+  union and bore once. Do not rotate the contact pads away from the black
+  sleeve, restore metal-terminal clamping or re-Boolean the old detailed body.
+- Original hardware meshes, colors and internal saved states stay intact;
+  world poses change. Preserve clear as 25 mm world-Z above the rotated open
+  sample. These four samples are not a continuous arm or loaded finger motion.
+- The public phi36 component at the 53.8 mm lower comparison height changes
+  its projected radial difference from +10.5 to +40.015 mm. At 3.8 mm it stays
+  +4.647 mm, because the near contact location is preserved. Do not describe
+  the upper result as the clearance of the complete tool or its fastening tip.
+- Both relief values remain comparisons. Native readback and discrete surface
+  observations are auxiliary; sleeve stability, mounting strength and the
+  complete feed-nose outline remain unresolved. Keep arm/video work paused.

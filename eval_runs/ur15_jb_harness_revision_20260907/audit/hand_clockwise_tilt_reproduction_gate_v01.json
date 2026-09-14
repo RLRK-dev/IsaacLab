@@ -1,0 +1,24 @@
+{
+  "recorded_at": "2026-09-14T14:03:15.304748+09:00",
+  "keywords": [
+    "フィンガ",
+    "傾斜",
+    "15度",
+    "同梱"
+  ],
+  "summary": "findings=11 blockers=9 lessons=0",
+  "guard_log_sha256": "dbceb60c4d62a536ac72af913f0edae72be2b64a544e26337570e651a0ce4fdc",
+  "blocker_locations": [
+    "eval_runs/troot_optE_dapg_wholeroute_scope_20260701/MEMORY_OFFSITE_COPIES_20260807/CURRENT_handoff_cc_p6_plankeeper_2026-07-07.md:116",
+    "eval_runs/troot_optE_dapg_wholeroute_scope_20260701/P6_RESTORED_FILE_OFFSITE_COPY_20260807/handoff_cc_p6_plankeeper_2026-07-07.md:115",
+    "thread_isaac_lab/thread-vault/07-Design/00-DESIGN-STATUS-LEDGER.md:67",
+    "thread_isaac_lab/thread-vault/07-Design/00-DESIGN-STATUS-LEDGER.md:68",
+    "thread_isaac_lab/thread-vault/T-ROOT-optE-route-dapg-C1C2-P2-routeexec/state.md:50",
+    "thread_isaac_lab/thread-vault/T-ROOT-optE-route-dapg-C1C2-P2-routeexec/state.md:51",
+    "thread_isaac_lab/thread-vault/T-ROOT-optE-route-dapg-C1C2-P2-routeexec/state.md:52"
+  ],
+  "directive": "User requested clockwise 15 degrees in the supplied side image; same authorized static hand task",
+  "concrete_delta": "Rebuild the isolated new H025/H050-derived 15-degree package from its copied sources, with the existing fixed contacts and thresholds, to verify package completeness. No July slot/contact physics rerun, BC/RL action/reward change, training promotion, or shared-tree source inclusion.",
+  "scope_disposition": "Two archived handoff copies repeat historical HOLD/cross-scope banking records. Ledger 67 is historical absolute-target action/CP-C; ledger 68 points to the same July supported-slot study. Keep those stop/review conditions intact. Only this own worktree fingertip code, observations and documentation are staged.",
+  "physical_acceptance_verdict": null
+}

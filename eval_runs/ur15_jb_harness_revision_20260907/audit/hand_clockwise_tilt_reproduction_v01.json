@@ -1,0 +1,19 @@
+{
+  "recorded_at": "2026-09-14T14:06:33.991596+09:00",
+  "reproduction_times": [
+    "2026-09-14T13:41:16.718678+09:00",
+    "2026-09-14T14:03:50.508896+09:00"
+  ],
+  "byte_identical_files": [
+    "hand_clockwise_tilt_meshes_v01.json",
+    "tilt_boolean_inputs_v01.json",
+    "tilt_boolean_meshes_v01.json",
+    "hand_clockwise_tilt_T025_v01.glb",
+    "hand_clockwise_tilt_T050_v01.glb"
+  ],
+  "all_observations_equal_except_timestamp": true,
+  "page_equal_except_timestamp": true,
+  "browser_matches_final_page": true,
+  "copied_scripts_match_worktree": true,
+  "physical_acceptance_verdict": null
+}
