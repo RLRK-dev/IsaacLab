@@ -1,0 +1,78 @@
+{
+  "observed_at": "2026-09-14T18:25:03.090433+09:00",
+  "basis": "Local JSON/Markdown cross-reference checks, AST read of historical station labels, pinned input SHA checks",
+  "profile_count": 8,
+  "target_count": 13,
+  "station_reference_count": 13,
+  "all_ten_existing_target_ids_mapped": true,
+  "metal_terminal_clamping_restored": false,
+  "cable_default_matches": true,
+  "five_pinned_inputs_match": true,
+  "unknown_forces_materials_manufacturing_values_preserved": true,
+  "claim_limit": "Document/config consistency only; no geometry, grasp or physical test was run",
+  "prior_art": {
+    "log_path": "/tmp/hand_provisional_selection_prior_art_20260914.log",
+    "sha256": "5bd8b59afc0fe738369d81b1116471269660e82bc1d7196ce1b43256071f652e",
+    "findings": 11,
+    "blockers": 7,
+    "lessons": 2,
+    "exit_code": 2,
+    "delta_logged_before_edit": "Vault log decision 2026-09-14 18:16; hand document selection only, no T-ROOT runner/authority/frozen state changes"
+  },
+  "source_refs": [
+    {
+      "path": "data/hand_target_contacts_v02.json",
+      "sha256": "16a6fa6c83df906b143b4f4cafcaa7260fa8f4d9bc4a79e92d80328e9aab6a9e"
+    },
+    {
+      "path": "data/hand_working_default_v01.json",
+      "sha256": "1cf2a19f24f753eb44b4e96fd7e73ee8bdfe5b97367a77bf8cfa0cf30a4d107c"
+    },
+    {
+      "path": "data/three_station_connection_groups_v01.json",
+      "sha256": "c6a74d692190d334a55dea2682da1abac3ec15ad693f5d948341cbff4caeda65"
+    },
+    {
+      "path": "inputs/v02_source/inputs/v01_source/op010_base/original/render_ur15_line.py",
+      "sha256": "bab4737819cf90b7f59cd25e171a62b0f2a6fa9091df9ee7f61a9c7e27036ce7"
+    }
+  ],
+  "pinned_inputs": [
+    {
+      "kind": "mesh",
+      "path": "/home/rlrk/Downloads/THREAD_フィンガ15度傾斜_v01_20260914/hand_clockwise_tilt_meshes_v01.json",
+      "sha256": "93d914c9eed05fc5b61e686b6cecca4420f6e4fd2b46c2d1eb8bf56fb900d95c"
+    },
+    {
+      "kind": "observations",
+      "path": "/home/rlrk/Downloads/THREAD_フィンガ15度傾斜_v01_20260914/hand_clockwise_tilt_observations_v01.json",
+      "sha256": "a8e2f40a4a4062bb3f75b34537dbda75fec4a020f25f710841bcb743e22f0dc3"
+    },
+    {
+      "kind": "native_observations",
+      "path": "/home/rlrk/Downloads/THREAD_フィンガ15度傾斜_v01_20260914/hand_clockwise_tilt_native_v01.json",
+      "sha256": "be8b95f8e03af27dae85bb398cd10d4b5ad133c64ce400c0286070799c6b2b42"
+    },
+    {
+      "kind": "native",
+      "path": "/home/rlrk/Downloads/THREAD_フィンガ15度傾斜_v01_20260914/hand_clockwise_tilt_v01.blend",
+      "sha256": "a3bf9eeba0e1c16ed515d1dad99dbd31bc6b2dfa0dd869e41455d7d20b545d1c"
+    },
+    {
+      "kind": "glb",
+      "path": "/home/rlrk/Downloads/THREAD_フィンガ15度傾斜_v01_20260914/hand_clockwise_tilt_T050_v01.glb",
+      "sha256": "e6443f4bd0765903097aaed12ba7d96aec44c751c9a05471e1e3cf9b0dd04603"
+    }
+  ],
+  "outputs": [
+    {
+      "path": "data/hand_provisional_spec_v01.json",
+      "sha256": "0ed18d28e261b73ae1fd3beb1686ad4c2b55071974d9b8708e358b79efa8b799"
+    },
+    {
+      "path": "analysis/hand_provisional_spec_v01.md",
+      "sha256": "ed8aa4915ad94900cbf0423bab5ee68c9baceded1642e9f1d622abf405af56d4"
+    }
+  ],
+  "script_path": "/tmp/verify_hand_provisional_spec_20260914.py"
+}

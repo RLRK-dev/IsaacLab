@@ -305,3 +305,28 @@ numbers unknown until their basis and the scope of the product change are set.
   Do not present catalogue dimensions as a full open/closed nose envelope or
   claim authenticated CAD access. Keep the existing two-tool/continuous-hold
   comparison and the separate simultaneous-tightening requirement.
+
+## Provisional hand architecture on 2026-09-14
+
+- The user requested choosing stable-clamping configurations quickly and
+  adjusting fingertip details later. Use `data/hand_provisional_spec_v01.json`
+  and `analysis/hand_provisional_spec_v01.md` for the current role selection.
+  These are executor-selected provisional configurations under that directive,
+  not a record of measured stability or accepted manufacturing parameters.
+- Opposed two-finger hands with target-specific replaceable tips are the
+  working baseline. H01-H08 cover all F01-F10 families plus body, cover and
+  external connector roles. Multiple pads on one finger do not create
+  independently actuated G3/G4 fingers. No G3/G4 role is selected at this stage.
+- H04 retains T050, 15 degrees, 40 mm and black-sleeve/root contact. This
+  supersedes the F06 metal-edge contact in historical target v02. Two round
+  contact bands do not geometrically prevent axial slip or axial rotation;
+  sleeve-to-terminal motion and fastening loads remain unverified.
+- Reuse the existing 2F mechanism where opening and force are appropriate.
+  Wide body/cover transport needs a suitably sized hand; do not imply the
+  2F-85 grasps the entire enclosure width. Do not apply its nominal force
+  range or old 14 mm cable shape to every small wire.
+- Detailed dimensions/material optimization may follow this provisional
+  selection. Use it for static placement without treating it as completed arm
+  trajectories or physical acceptance. Keep the known trapped-underlip issue,
+  continuous hand retention, two-tool comparison and synchronous requirements.
+  Old OP050/060/080 components are not adopted merely to populate this table.

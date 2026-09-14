@@ -1,0 +1,397 @@
+{
+  "schema_version": 1,
+  "date": "2026-09-14",
+  "status": "executor_selected_provisional_hand_architecture",
+  "user_direction_ja": "フィンガ仕様の調整はあとでも行うので、クランプ対象が安定してクランプできる仕様を早く決めたい",
+  "scope_ja": "用途別の指本数・接触面・保持構成を仮決め。部品寸法・機種・保持力の製作指定と、全ST設備採用は別。",
+  "decisions": {
+    "baseline_finger_count": 2,
+    "baseline_closing_drives": 1,
+    "reuse": "Retained 2F-85 mechanism where target stroke/force/moment fit; separate wide transport hand for H06/H07 as needed",
+    "count_note_ja": "一枚の指に二つの接触区間があっても2本指。四接触を独立4本指G4と呼ばない。",
+    "drive_note_ja": "既存2Fは連動リンク。交換指先も開放時の上下移動を持つため、理想的な水平直動へ置換しない。",
+    "pad_construction_ja": "形状を決める剛性キャリア＋交換式の弾性接触パッド。材種・硬さ・厚さは対象別に後調整。",
+    "three_finger_use_ja": "今回は割当なし。許容把持面上で第三の接触を独立操作する役割が必要になった場合に再検討。",
+    "four_finger_use_ja": "今回は割当なし。前後二組を独立開放する役割が必要になった場合に再検討。",
+    "tool_holding_ja": "締付工具は常設。フィンガで工具をつかまない。",
+    "hand_model_created": false,
+    "arm_motion_created": false,
+    "video_created": false,
+    "physical_stability_verified": false
+  },
+  "profiles": [
+    {
+      "id": "H01",
+      "name_ja": "円形本体用",
+      "finger_count": 2,
+      "closing_drives": 1,
+      "contact_ja": "下受けなしの側面輪郭。側面の平面または取付耳の外縁に当てる回り止め。",
+      "stability_intent_ja": "円筒面で中心を寄せ、非円形の基準面で軸回りの向きを決める。",
+      "keep_clear_ja": "電気端子・配線出口・固定穴・本体下面。",
+      "release_ja": "側方へ開く。既存2Fの開放時上昇も含めて、着座面に爪を潜らせない。",
+      "unresolved_ja": "実部品の荷重を受けられる非円形面、外形、必要保持力。使える面がなければ回り止めを成立済みにしない。"
+    },
+    {
+      "id": "H02",
+      "name_ja": "角形本体・支持部用",
+      "finger_count": 2,
+      "closing_drives": 1,
+      "contact_ja": "浅い角形ポケット。片側の基準面と長手端当て、対向側の交換パッド。",
+      "stability_intent_ja": "側面と端部の形状で横ずれ・向きを決め、対向面から押さえる。",
+      "keep_clear_ja": "端末・ロック・ばね・固定穴・工具通路・着座面。",
+      "release_ja": "側方へ開放。着座部の下へ入り込む下受けは使わない。",
+      "unresolved_ja": "対象ごとの許容接触面、ポケット寸法、パッド厚・硬さ、必要保持力。"
+    },
+    {
+      "id": "H03",
+      "name_ja": "剛体バスバー用",
+      "finger_count": 2,
+      "closing_drives": 1,
+      "contact_ja": "非接続部の長辺を受ける浅い輪郭と端当て。",
+      "stability_intent_ja": "板の長辺と端部を使って面内位置・回転を抑える。",
+      "keep_clear_ja": "電気接続面・締結穴・座金・ソケット通路。",
+      "release_ja": "保持した位置で締結後、板から側方へ開く。薄板下へ爪を残さない。",
+      "unresolved_ja": "実際の電気接続範囲、つかめる外縁、板厚、公差、締結中の保持荷重。"
+    },
+    {
+      "id": "H04",
+      "name_ja": "ケーブル・丸端子付き配線用",
+      "finger_count": 2,
+      "closing_drives": 1,
+      "contact_ja": "T050。端子側の黒被覆と根元被覆を、同じ対向2本指の二つの丸底接触区間で保持。",
+      "stability_intent_ja": "端末側と根元を離して支える。被覆の軸方向滑りと軸回り回転の保持性能は別途確認する。",
+      "keep_clear_ja": "金属端子・締結穴・電気接触面・工具通路。",
+      "release_ja": "接続完了まで同じ手で保持。工具が退避した後で開放し、両端保持では両腕同時に上昇。",
+      "unresolved_ja": "被覆と圧着端子の相対滑り・回転、線径、摩擦・許容圧、曲げ反力、工具ノーズ一式。二つの丸い溝だけで軸回り回転を幾何拘束できるとはしない。",
+      "working_default_ref": "data/hand_working_default_v01.json",
+      "candidate": "T050",
+      "clockwise_angle_deg": 15,
+      "setback_before_rotation_m": 0.04,
+      "independent_front_root_opening": false,
+      "metal_terminal_clamping": false
+    },
+    {
+      "id": "H05",
+      "name_ja": "差込端末・外部コネクター用",
+      "finger_count": 2,
+      "closing_drives": 1,
+      "contact_ja": "剛体ハウジングの専用外形ポケットと、許容された後端・肩の受け面。",
+      "stability_intent_ja": "外形で向きを決め、挿入力を受け面で伝える。配線の摩擦把持を挿入力の経路にしない。",
+      "keep_clear_ja": "接点・シール・ロック可動部・ケーブル出口。",
+      "release_ja": "接続完了後にロックを避けて開く。別のロック操作が必要ならその役割を分ける。",
+      "unresolved_ja": "荷重を受ける剛体面、型式、挿入力、許容横ずれ、開放域。写真に見える樹脂面すべてが許容把持面とはしない。"
+    },
+    {
+      "id": "H06",
+      "name_ja": "筐体・完成品搬送用",
+      "finger_count": 2,
+      "closing_drives": 1,
+      "contact_ja": "幅広対向爪。各爪の離れた二か所に交換パッドと側面輪郭の受けを配置。",
+      "stability_intent_ja": "離れた接触域で荷重を分け、筐体の実在する側面段差・輪郭で姿勢を決める。",
+      "keep_clear_ja": "シール溝・コネクター・ハーネス・パレットとの着座域。",
+      "release_ja": "受け先へ荷重を移してから側方へ開く。下受けを着座面に挟まない。",
+      "unresolved_ja": "幅、質量、重心、実在する把持可能面と荷重。2F-85で筐体全幅をつかめるとは仮定しない。",
+      "gripper_body_policy": "Separate wide-stroke two-jaw transport hand; exact model and stroke unselected",
+      "contact_patch_count": 4
+    },
+    {
+      "id": "H07",
+      "name_ja": "カバー搬送・設置用",
+      "finger_count": 2,
+      "closing_drives": 1,
+      "contact_ja": "対向する薄い側縁用ポケットと端当て。長辺に離れた接触域を配置。",
+      "stability_intent_ja": "板を一点でつままず、外周形状で向きと傾きを支える。",
+      "keep_clear_ja": "シール面・固定穴・着座面・隣接配線。",
+      "release_ja": "着座後に外側へ開放。カバー下面に爪を挟まない。",
+      "unresolved_ja": "実カバーの縁形状と幅、許容把持面。旧動画の把持突起をAmpere実物へ無断追加しない。"
+    },
+    {
+      "id": "H08",
+      "name_ja": "ヒューズ本体用",
+      "finger_count": 2,
+      "closing_drives": 1,
+      "contact_ja": "本体形式に対応する交換式の浅い輪郭。円筒は胴の丸底受け、角形は外形ポケット。",
+      "stability_intent_ja": "胴形状を保持し、向きが必要なら実在する非接点の基準面へ当てる。",
+      "keep_clear_ja": "導電端・接続面・接触ばね・締結穴。",
+      "release_ja": "実際の装着方式に従い、保持部への装着または締結完了後に開放。",
+      "unresolved_ja": "ボルト式／クリップ式などの型式、取付方向、把持可能な胴の有無、入荷状態。"
+    }
+  ],
+  "assignments": [
+    {
+      "target_id": "F01",
+      "name_ja": "主接触器本体",
+      "profile_id": "H01",
+      "station_refs": [
+        "A"
+      ],
+      "condition_ja": "単体入荷して機械固定する場合"
+    },
+    {
+      "target_id": "F02",
+      "name_ja": "角形リレー",
+      "profile_id": "H02",
+      "station_refs": [
+        "A"
+      ],
+      "condition_ja": "単体入荷して機械固定する場合"
+    },
+    {
+      "target_id": "F03",
+      "name_ja": "剛体バスバー",
+      "profile_id": "H03",
+      "station_refs": [
+        "B",
+        "C"
+      ],
+      "condition_ja": "接続部材と同じ工程で保持しながら締結"
+    },
+    {
+      "target_id": "F04",
+      "name_ja": "ヒューズ本体",
+      "profile_id": "H08",
+      "station_refs": [
+        "B",
+        "C"
+      ],
+      "condition_ja": "実形式と接続群に従う"
+    },
+    {
+      "target_id": "F05",
+      "name_ja": "柔軟配線の被覆",
+      "profile_id": "H04",
+      "station_refs": [
+        "B",
+        "C"
+      ],
+      "condition_ja": "根元被覆の支持を含む。細線へ14 mmの比較形状を流用しない"
+    },
+    {
+      "target_id": "F06",
+      "name_ja": "丸端子付き配線",
+      "profile_id": "H04",
+      "station_refs": [
+        "B",
+        "C"
+      ],
+      "condition_ja": "金属側縁保持を廃止し端子側の黒被覆を保持"
+    },
+    {
+      "target_id": "F07",
+      "name_ja": "小型差込端末",
+      "profile_id": "H05",
+      "station_refs": [
+        "B",
+        "C"
+      ],
+      "condition_ja": "実在する剛体面とロック方式に対応"
+    },
+    {
+      "target_id": "F08",
+      "name_ja": "プリチャージ・放電抵抗本体",
+      "profile_id": "H02",
+      "station_refs": [
+        "A"
+      ],
+      "condition_ja": "単体取付が必要で、荷重を受けられる面が判明した場合"
+    },
+    {
+      "target_id": "F09",
+      "name_ja": "外部接続口ハウジング",
+      "profile_id": "H02",
+      "station_refs": [
+        "A"
+      ],
+      "condition_ja": "単体の機械固定が必要な場合。嵌合操作はP03/H05"
+    },
+    {
+      "target_id": "F10",
+      "name_ja": "ヒューズ保持部・支持部",
+      "profile_id": "H02",
+      "station_refs": [
+        "A"
+      ],
+      "condition_ja": "単体の機械固定が必要な場合"
+    },
+    {
+      "target_id": "P01",
+      "name_ja": "筐体・完成品",
+      "profile_id": "H06",
+      "station_refs": [
+        "OP010",
+        "OUTFEED"
+      ],
+      "condition_ja": "既存工程との対応用。正規幅・質量は別途入力"
+    },
+    {
+      "target_id": "P02",
+      "name_ja": "カバー",
+      "profile_id": "H07",
+      "station_refs": [
+        "OP070"
+      ],
+      "condition_ja": "旧番号との対応用。実製品のカバー形状へ合わせる"
+    },
+    {
+      "target_id": "P03",
+      "name_ja": "外部コネクター",
+      "profile_id": "H05",
+      "station_refs": [
+        "OP020"
+      ],
+      "condition_ja": "外部ハーネスをラインで嵌合する場合"
+    }
+  ],
+  "station_coverage": [
+    {
+      "station_ref": "OP010",
+      "role_ja": "筐体供給",
+      "profile_ids": [
+        "H06"
+      ],
+      "note_ja": "搬送手の方式を仮決め。型式・腕数は別項目"
+    },
+    {
+      "station_ref": "OP020",
+      "role_ja": "外部コネクター準備・嵌合",
+      "profile_ids": [
+        "H05",
+        "H04"
+      ],
+      "note_ja": "ハウジングをつかみ、必要な線材支持を分ける。空トレーは最新v11の設備返却"
+    },
+    {
+      "station_ref": "OP030-A",
+      "role_ja": "本体・支持部の機械固定",
+      "profile_ids": [
+        "H01",
+        "H02"
+      ],
+      "note_ja": "保持手＋フィンガを外した常設工具腕を継承"
+    },
+    {
+      "station_ref": "OP030-B",
+      "role_ja": "主回路側の接続",
+      "profile_ids": [
+        "H03",
+        "H04",
+        "H05",
+        "H08"
+      ],
+      "note_ja": "担当部品を同じ位置で保持・接続。両端保持＋ST側2工具の比較方向を継承"
+    },
+    {
+      "station_ref": "OP030-C",
+      "role_ja": "補機・制御側の接続",
+      "profile_ids": [
+        "H03",
+        "H04",
+        "H05",
+        "H08"
+      ],
+      "note_ja": "一端操作だけの仕事と両端保持を区別。C全体の腕数を確定した表ではない"
+    },
+    {
+      "station_ref": "OP040",
+      "role_ja": "旧分岐配索の位置",
+      "profile_ids": [
+        "H04",
+        "H05"
+      ],
+      "note_ja": "追加のD04/6本配線/STは採用しない。新接続群との工程対応で必要な把持だけを割付"
+    },
+    {
+      "station_ref": "OP050",
+      "role_ja": "旧クリップ取付",
+      "profile_ids": [],
+      "note_ja": "旧部品の実物採用なし。手先を新設しない。実部品が決まればH02/H08の許容面に対応"
+    },
+    {
+      "station_ref": "OP060",
+      "role_ja": "旧ケーブル押さえ",
+      "profile_ids": [],
+      "note_ja": "撤去済みの上押さえ・青い保持機構を復活させない"
+    },
+    {
+      "station_ref": "OP070",
+      "role_ja": "カバー設置",
+      "profile_ids": [
+        "H07"
+      ],
+      "note_ja": "実物のカバー仕様に合わせる用途。番号は旧ライン対応"
+    },
+    {
+      "station_ref": "OP080",
+      "role_ja": "旧ラッチ取付",
+      "profile_ids": [],
+      "note_ja": "旧ラッチの実物採用なし。蓋固定がねじなら常設工具を割付"
+    },
+    {
+      "station_ref": "OP090",
+      "role_ja": "電気検査",
+      "profile_ids": [],
+      "note_ja": "検査ヘッド／治具を扱う工程として、把持用フィンガを追加しない"
+    },
+    {
+      "station_ref": "OP100",
+      "role_ja": "外観検査",
+      "profile_ids": [],
+      "note_ja": "カメラ／検査ヘッドを使い、把持用フィンガを追加しない"
+    },
+    {
+      "station_ref": "OUTFEED",
+      "role_ja": "完成品払出し",
+      "profile_ids": [
+        "H06"
+      ],
+      "note_ja": "筐体の把持面を再利用し、ケーブルを持って製品を吊らない"
+    }
+  ],
+  "source_refs": {
+    "target_map": "data/hand_target_contacts_v02.json",
+    "cable_default": "data/hand_working_default_v01.json",
+    "current_station_proposal": "data/three_station_connection_groups_v01.json",
+    "legacy_line": "inputs/v02_source/inputs/v01_source/op010_base/original/render_ur15_line.py"
+  },
+  "supersedes_ja": "手先の用途別第一候補は本表を入口にする。v02のF06側縁クランプ／旧C締結専用割当は継承しない。旧資料は履歴として保存。",
+  "later_adjustments": [
+    "部品型式と実外形、線径に対応する接触寸法",
+    "許容面と許容荷重",
+    "パッド材種・硬さ・厚さと摩擦",
+    "把持力と駆動機構の適合",
+    "工具・供給台・相手部品・カメラとの開放空間",
+    "TCP・質量・重心・慣性"
+  ],
+  "unknown_values": {
+    "part_specific_force_n": null,
+    "pad_material": null,
+    "pad_hardness": null,
+    "part_specific_contact_dimensions_m": null,
+    "part_allowable_loads": null,
+    "manufacturing_approval": null,
+    "physical_acceptance_verdict": null
+  },
+  "holding_observation_plan_ja": [
+    "把持幅と物体検出により空把持／閉じ切りを区別する。内蔵検出だけで滑り・回転を検知できたとはしない。",
+    "低速での取得・停止・姿勢変更・組付け中保持・開放について、対象の滑り、回転、被覆ずれ、抜け、傷を観測する。回数・数値合否はここで発明しない。",
+    "ケーブルは被覆と端子の相対向きを別々に観測する。把持点が二つでも曲げ形状や締結反力の成立証拠にはしない。"
+  ],
+  "progression_ja": "細部寸法・材質の最適化を待たず、本表を静的配置検討の入力に使う。確定した連続アーム動作や安定把持実証済みの動画へ自動移行しない。",
+  "official_sources": [
+    {
+      "id": "robotiq_2018",
+      "url": "https://assets.robotiq.com/website-assets/support_archives/document_en/2F-85_2F-140_Instruction_Manual_PDF_20181130.pdf",
+      "use_ja": "保持している2F-85参照機構の版と連動開閉。既存取付部の2018対応を維持。"
+    },
+    {
+      "id": "robotiq_2019",
+      "url": "https://assets.robotiq.com/website-assets/support_documents/document/online/2F-85_2F-140_TM_InstructionManual_HTML5_20190503.zip/2F-85_2F-140_TM_InstructionManual_HTML5/Content/6.%20Specifications.htm",
+      "use_ja": "§6.1.2交換指先、§6.2保持荷重・モーメントの別扱い。2019取付穴を旧機構へ流用しない。"
+    },
+    {
+      "id": "ampere",
+      "url": "https://help.ampereev.com/hc/en-us/articles/31292470232087-High-Voltage-Junction-Box-HVJB-5-400",
+      "use_ja": "公開主要構成への対象対応。メーカー指定の把持方法ではない。"
+    }
+  ]
+}
