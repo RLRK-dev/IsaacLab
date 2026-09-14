@@ -206,3 +206,23 @@ numbers unknown until their basis and the scope of the product change are set.
   surface pairs in either candidate; zero-offset mount contacts remain recorded.
   Do not compare triangle counts across changed topology as penetration depth.
   Keep arm/video production paused until the hand configuration is resolved.
+
+## Terminal-side black-sleeve grasp on 2026-09-14
+
+- The user explicitly replaced metal-terminal-edge clamping with gripping the
+  terminal-facing black covering. `analysis/hand_sleeve_clamp_v01.md` and
+  H025/H050 implement that change. Do not restore the old metal-edge pads as
+  the active contact surface. Retain the 40 mm setback, root cable pads,
+  source hardware and four saved poses.
+- The Y22-30 mm front band, 2 mm edge inset and 2 mm central pad thickness are
+  initial comparison geometry, not accepted manufacturing conditions. The
+  source black sleeve is illustrative, not measured heatshrink on an adopted
+  Ampere part. Sleeve slip/roll and transmission of terminal torque remain
+  unresolved; static surface matching does not establish secure holding.
+- Reuse source outer facets and the common-frame primitive union with one set
+  of bores. Separate the source annulus at its largest radial gap; equality to
+  its maximum radius drops facets rounded at serialization. Blender helper
+  imports require the script directory on sys.path. Retain both failure logs.
+- The 22.6469 mm tool-band observation is the distance from the terminal axis
+  to the projected hand surface, not a selected tool's clearance. Keep the
+  two upper-edge reliefs unselected and arm/video production paused.

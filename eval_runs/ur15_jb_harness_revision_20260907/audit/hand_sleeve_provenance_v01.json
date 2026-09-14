@@ -1,0 +1,45 @@
+{
+  "recorded_at": "2026-09-14T10:48:09.210639+09:00",
+  "user_directive": "端子をクランプするのではなく黒い被覆の部分の端子側をクランプさせたい",
+  "scope": "Move front contact from metal edges to terminal-side black sleeve; retain D40 and root pads",
+  "source_sha256": "c94f58f0ab61e621c38980e913d330aceedd7a31128130d099714cd97dc47111",
+  "recipe_sha256": "554c61ca57d76f23358d945f2e2be8f102a5e62d412452d0c668bef818d4e567",
+  "reused_modules": [
+    "build_hand_body_setback_v01.py",
+    "build_hand_fingertip_concepts_v01.py",
+    "build_hand_mount_interface_v02.py",
+    "build_hand_pad_service_v01.py",
+    "build_hand_root_clamp_v03.py",
+    "build_hand_support_integration_v01.py",
+    "build_hand_terminal_concepts_v01.py",
+    "probe_hand_tool_access_v01.py",
+    "render_hand_fingertip_concepts_v01.py",
+    "save_hand_body_setback_v01.py"
+  ],
+  "custom_reason": "Existing metal-edge contact does not implement requested sleeve-side grasp; reuse source ring, profile extrusion and one-pass common-frame body union",
+  "initial_comparison_values": {
+    "front_contact_y_range_m": [
+      0.022,
+      0.03
+    ],
+    "edge_inset_m": 0.002,
+    "crown_pad_thickness_m": 0.002
+  },
+  "failed_runs_preserved": [
+    "audit/failed_profile.log",
+    "audit/failed_import"
+  ],
+  "profile_correction": "Extract inner/outer rings using the largest observed radial gap, keeping all source coordinates; old equality filter dropped rounded outer facets",
+  "import_correction": "Add the script directory to Blender module search path; no geometry or numerical threshold change",
+  "manufacturing_acceptance_created": false,
+  "sleeve_is_illustrative_not_actual_heatshrink": true,
+  "original_hardware_root_contacts_targets_and_poses_identical": true,
+  "front_contact_and_blue_carriers_changed": true,
+  "official_mount_reference_inherited": {
+    "manual_date": "20181130",
+    "pdf_sha256": "4a059283f11b12d458b084aab3e0c9238ac2cd61b42cd630551d4fc10a6d4ad3"
+  },
+  "physical_acceptance_verdict": null,
+  "arm_motion_created": false,
+  "video_created": false
+}

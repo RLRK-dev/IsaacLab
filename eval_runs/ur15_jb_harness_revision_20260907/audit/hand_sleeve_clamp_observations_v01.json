@@ -1,0 +1,1719 @@
+{
+  "recorded_at": "2026-09-14T10:35:53.175701+09:00",
+  "settings": {
+    "schema_version": 1,
+    "source_sha256": "c94f58f0ab61e621c38980e913d330aceedd7a31128130d099714cd97dc47111",
+    "recipe_sha256": "554c61ca57d76f23358d945f2e2be8f102a5e62d412452d0c668bef818d4e567",
+    "candidates": {
+      "H025": "J025",
+      "H050": "J050"
+    },
+    "user_decision": "Move the front grasp from metal terminal edges to the terminal-facing end of the black covering",
+    "source_sleeve_object": "illustrative_sleeve",
+    "front_contact_y_range_m": [
+      0.022,
+      0.03
+    ],
+    "groove_half_angle_deg": 45,
+    "front_pad_back_abs_x_m": 0.0096,
+    "front_support_n_max_m": 0.0064,
+    "rail_u_left_m": [
+      -0.006,
+      0.045
+    ],
+    "pad_color_rgba": [
+      30,
+      145,
+      137,
+      255
+    ],
+    "preserved_setback_m": 0.04,
+    "placement_values_are_manufacturing_requirements": false,
+    "actual_sleeve_part_number": null,
+    "allowed_cover_compression_m": null,
+    "pad_material": null,
+    "pad_joint": null,
+    "grip_force_n": null,
+    "selected_relief_m": null,
+    "physical_acceptance_verdict": null
+  },
+  "source_sha256": "c94f58f0ab61e621c38980e913d330aceedd7a31128130d099714cd97dc47111",
+  "candidates": {
+    "H025": {
+      "contacts": [
+        {
+          "pad": "left_left_sleeve_pad",
+          "side": "left_left",
+          "carrier": "left_left_carrier",
+          "profile_points_near_xz_m": [
+            [
+              -0.005374012,
+              -0.011374012
+            ],
+            [
+              -0.005713983,
+              -0.011011028
+            ],
+            [
+              -0.006029485,
+              -0.010626587
+            ],
+            [
+              -0.006319169,
+              -0.010222334
+            ],
+            [
+              -0.006581793,
+              -0.0098
+            ],
+            [
+              -0.006816233,
+              -0.009361394
+            ],
+            [
+              -0.007021484,
+              -0.008908394
+            ],
+            [
+              -0.007196669,
+              -0.00844294
+            ],
+            [
+              -0.007341036,
+              -0.007967025
+            ],
+            [
+              -0.007453968,
+              -0.007482686
+            ],
+            [
+              -0.007534981,
+              -0.006991999
+            ],
+            [
+              -0.007583728,
+              -0.006497064
+            ],
+            [
+              -0.0076,
+              -0.006
+            ],
+            [
+              -0.007583728,
+              -0.005502936
+            ],
+            [
+              -0.007534981,
+              -0.005008001
+            ],
+            [
+              -0.007453968,
+              -0.004517314
+            ],
+            [
+              -0.007341036,
+              -0.004032975
+            ],
+            [
+              -0.007196669,
+              -0.00355706
+            ],
+            [
+              -0.007021484,
+              -0.003091606
+            ],
+            [
+              -0.006816233,
+              -0.002638606
+            ],
+            [
+              -0.006581793,
+              -0.0022
+            ],
+            [
+              -0.006319169,
+              -0.001777666
+            ],
+            [
+              -0.006029485,
+              -0.001373413
+            ],
+            [
+              -0.005713983,
+              -0.000988972
+            ],
+            [
+              -0.005374012,
+              -0.000625988
+            ]
+          ],
+          "reference_radius_m": 0.0076,
+          "contact_y_range_m": [
+            0.022,
+            0.03
+          ],
+          "seat_corners_world_m": [
+            [
+              -0.0096,
+              0.022,
+              -0.011374012
+            ],
+            [
+              -0.0096,
+              0.022,
+              -0.000625988
+            ],
+            [
+              -0.0096,
+              0.03,
+              -0.011374012
+            ],
+            [
+              -0.0096,
+              0.03,
+              -0.000625988
+            ]
+          ],
+          "crown_near_m": [
+            -0.0076,
+            0.026,
+            -0.006
+          ],
+          "crown_pad_thickness_m": 0.001999999999999999
+        },
+        {
+          "pad": "left_right_sleeve_pad",
+          "side": "left_right",
+          "carrier": "left_right_carrier",
+          "profile_points_near_xz_m": [
+            [
+              0.005374012,
+              -0.011374012
+            ],
+            [
+              0.005713983,
+              -0.011011028
+            ],
+            [
+              0.006029485,
+              -0.010626587
+            ],
+            [
+              0.006319169,
+              -0.010222334
+            ],
+            [
+              0.006581793,
+              -0.0098
+            ],
+            [
+              0.006816233,
+              -0.009361394
+            ],
+            [
+              0.007021484,
+              -0.008908394
+            ],
+            [
+              0.007196669,
+              -0.00844294
+            ],
+            [
+              0.007341036,
+              -0.007967025
+            ],
+            [
+              0.007453968,
+              -0.007482686
+            ],
+            [
+              0.007534981,
+              -0.006991999
+            ],
+            [
+              0.007583728,
+              -0.006497064
+            ],
+            [
+              0.0076,
+              -0.006
+            ],
+            [
+              0.007583728,
+              -0.005502936
+            ],
+            [
+              0.007534981,
+              -0.005008001
+            ],
+            [
+              0.007453968,
+              -0.004517314
+            ],
+            [
+              0.007341036,
+              -0.004032975
+            ],
+            [
+              0.007196669,
+              -0.00355706
+            ],
+            [
+              0.007021484,
+              -0.003091606
+            ],
+            [
+              0.006816233,
+              -0.002638606
+            ],
+            [
+              0.006581793,
+              -0.0022
+            ],
+            [
+              0.006319169,
+              -0.001777666
+            ],
+            [
+              0.006029485,
+              -0.001373413
+            ],
+            [
+              0.005713983,
+              -0.000988972
+            ],
+            [
+              0.005374012,
+              -0.000625988
+            ]
+          ],
+          "reference_radius_m": 0.0076,
+          "contact_y_range_m": [
+            0.022,
+            0.03
+          ],
+          "seat_corners_world_m": [
+            [
+              0.0096,
+              0.022,
+              -0.011374012
+            ],
+            [
+              0.0096,
+              0.022,
+              -0.000625988
+            ],
+            [
+              0.0096,
+              0.03,
+              -0.011374012
+            ],
+            [
+              0.0096,
+              0.03,
+              -0.000625988
+            ]
+          ],
+          "crown_near_m": [
+            0.0076,
+            0.026,
+            -0.006
+          ],
+          "crown_pad_thickness_m": 0.001999999999999999
+        }
+      ],
+      "contact_observations": {
+        "near": {
+          "pads": [
+            {
+              "pad": "left_left_sleeve_pad",
+              "sample_count": 147,
+              "unsigned_surface_min_m": 0.0,
+              "unsigned_surface_max_m": 8.188600426433445e-18,
+              "crown_world_m": [
+                -0.007599999999999996,
+                0.025999999999999995,
+                -0.005999999999999998
+              ]
+            },
+            {
+              "pad": "left_right_sleeve_pad",
+              "sample_count": 147,
+              "unsigned_surface_min_m": 0.0,
+              "unsigned_surface_max_m": 4.351167857633658e-18,
+              "crown_world_m": [
+                0.007599999999999999,
+                0.025999999999999995,
+                -0.005999999999999998
+              ]
+            }
+          ],
+          "crown_to_crown_distance_m": 0.015199999999999995
+        },
+        "early": {
+          "pads": [
+            {
+              "pad": "left_left_sleeve_pad",
+              "sample_count": 147,
+              "unsigned_surface_min_m": 0.0002726180996427149,
+              "unsigned_surface_max_m": 0.00040465104799442003,
+              "crown_world_m": [
+                -0.008003392050166099,
+                0.026000000139739132,
+                -0.0059681044751450085
+              ]
+            },
+            {
+              "pad": "left_right_sleeve_pad",
+              "sample_count": 147,
+              "unsigned_surface_min_m": 0.0002726180996427256,
+              "unsigned_surface_max_m": 0.00040465104799443065,
+              "crown_world_m": [
+                0.008003392050166109,
+                0.025999999999999995,
+                -0.0059681044751450085
+              ]
+            }
+          ],
+          "crown_to_crown_distance_m": 0.016006784100332207
+        },
+        "open": {
+          "pads": [
+            {
+              "pad": "left_left_sleeve_pad",
+              "sample_count": 147,
+              "unsigned_surface_min_m": 0.006420228274682621,
+              "unsigned_surface_max_m": 0.008086270365661927,
+              "crown_world_m": [
+                -0.01559999999999951,
+                0.026000002771281658,
+                -0.004821964165829362
+              ]
+            },
+            {
+              "pad": "left_right_sleeve_pad",
+              "sample_count": 147,
+              "unsigned_surface_min_m": 0.006420228274683096,
+              "unsigned_surface_max_m": 0.008086270365662411,
+              "crown_world_m": [
+                0.0156,
+                0.025999999999999995,
+                -0.004821964165829362
+              ]
+            }
+          ],
+          "crown_to_crown_distance_m": 0.031199999999999634
+        },
+        "clear": {
+          "pads": [
+            {
+              "pad": "left_left_sleeve_pad",
+              "sample_count": 147,
+              "unsigned_surface_min_m": 0.017133716169665913,
+              "unsigned_surface_max_m": 0.0266697904405759,
+              "crown_world_m": [
+                -0.01559999999999951,
+                0.026000002771281658,
+                0.020178035834170632
+              ]
+            },
+            {
+              "pad": "left_right_sleeve_pad",
+              "sample_count": 147,
+              "unsigned_surface_min_m": 0.017133716169666177,
+              "unsigned_surface_max_m": 0.026669790440576095,
+              "crown_world_m": [
+                0.0156,
+                0.025999999999999995,
+                0.020178035834170632
+              ]
+            }
+          ],
+          "crown_to_crown_distance_m": 0.031199999999999634
+        }
+      },
+      "body_topology": {
+        "left_left_carrier": {
+          "vertices": 554,
+          "faces": 1112,
+          "closed": true,
+          "components": 1,
+          "zero_area_faces": 0,
+          "front_pad_seat_sample_max_difference_m": 5.280879630666009e-10
+        },
+        "left_right_carrier": {
+          "vertices": 554,
+          "faces": 1112,
+          "closed": true,
+          "components": 1,
+          "zero_area_faces": 0,
+          "front_pad_seat_sample_max_difference_m": 3.2906560109833716e-10
+        }
+      },
+      "near_tool_band_comparison": {
+        "old": {
+          "radius_to_surface_m": 0.010714772321026677,
+          "object": "left_left_edge_contour",
+          "witness_m": [
+            -0.009940138185598548,
+            0.003999999842830622,
+            -0.013299999818115228
+          ],
+          "source_face_index": 51508
+        },
+        "new": {
+          "radius_to_surface_m": 0.022646854196027837,
+          "object": "left_left_sleeve_pad",
+          "witness_m": [
+            -0.0053740119999999975,
+            0.021999999999999992,
+            -0.011374012000000003
+          ],
+          "source_face_index": 53996
+        }
+      },
+      "tool_surface_observations": {
+        "near": {
+          "lower": {
+            "all": {
+              "radius_to_surface_m": 0.022646854196027837,
+              "object": "left_left_sleeve_pad",
+              "witness_m": [
+                -0.0053740119999999975,
+                0.021999999999999992,
+                -0.0006259880000000009
+              ],
+              "source_face_index": 54089
+            },
+            "hardware": {
+              "radius_to_surface_m": 0.05429460399216849,
+              "object": "hardware_left_right_inner_knuckle_0",
+              "witness_m": [
+                0.01384391644970447,
+                0.052500000000000005,
+                0.02457771211325384
+              ],
+              "source_face_index": 47943
+            },
+            "insert": {
+              "radius_to_surface_m": 0.022646854196027837,
+              "object": "left_left_sleeve_pad",
+              "witness_m": [
+                -0.0053740119999999975,
+                0.021999999999999992,
+                -0.0006259880000000009
+              ],
+              "source_face_index": 2581
+            }
+          },
+          "upper": {
+            "all": {
+              "radius_to_surface_m": 0.028500000000000004,
+              "object": "hardware_left_gripper_base_0",
+              "witness_m": [
+                0.0,
+                0.028500000000000004,
+                0.1359769747245636
+              ],
+              "source_face_index": 1258
+            },
+            "hardware": {
+              "radius_to_surface_m": 0.028500000000000004,
+              "object": "hardware_left_gripper_base_0",
+              "witness_m": [
+                0.0,
+                0.028500000000000004,
+                0.1359769747245636
+              ],
+              "source_face_index": 1258
+            },
+            "insert": {
+              "radius_to_surface_m": null,
+              "object": null,
+              "witness_m": null,
+              "source_face_index": null
+            }
+          },
+          "whole": {
+            "all": {
+              "radius_to_surface_m": 0.022646854196027837,
+              "object": "left_left_sleeve_pad",
+              "witness_m": [
+                -0.0053740119999999975,
+                0.021999999999999992,
+                -0.0006259880000000009
+              ],
+              "source_face_index": 54089
+            },
+            "hardware": {
+              "radius_to_surface_m": 0.028500000000000004,
+              "object": "hardware_left_gripper_base_0",
+              "witness_m": [
+                0.0,
+                0.028500000000000004,
+                0.1359769747245636
+              ],
+              "source_face_index": 1258
+            },
+            "insert": {
+              "radius_to_surface_m": 0.022646854196027837,
+              "object": "left_left_sleeve_pad",
+              "witness_m": [
+                -0.0053740119999999975,
+                0.021999999999999992,
+                -0.0006259880000000009
+              ],
+              "source_face_index": 2581
+            }
+          }
+        },
+        "early": {
+          "lower": {
+            "all": {
+              "radius_to_surface_m": 0.022745953432619082,
+              "object": "left_right_sleeve_pad",
+              "witness_m": [
+                0.005777404050166111,
+                0.022,
+                -0.0005940924751450111
+              ],
+              "source_face_index": 54285
+            },
+            "hardware": {
+              "radius_to_surface_m": 0.05439873227580146,
+              "object": "hardware_left_right_inner_knuckle_0",
+              "witness_m": [
+                0.01424682677701682,
+                0.052500000000000005,
+                0.024587242995179212
+              ],
+              "source_face_index": 47943
+            },
+            "insert": {
+              "radius_to_surface_m": 0.022745953432619082,
+              "object": "left_right_sleeve_pad",
+              "witness_m": [
+                0.005777404050166111,
+                0.022,
+                -0.0005940924751450111
+              ],
+              "source_face_index": 2777
+            }
+          },
+          "upper": {
+            "all": {
+              "radius_to_surface_m": 0.028500000000000004,
+              "object": "hardware_left_gripper_base_0",
+              "witness_m": [
+                0.0,
+                0.028500000000000004,
+                0.1359769747245636
+              ],
+              "source_face_index": 1258
+            },
+            "hardware": {
+              "radius_to_surface_m": 0.028500000000000004,
+              "object": "hardware_left_gripper_base_0",
+              "witness_m": [
+                0.0,
+                0.028500000000000004,
+                0.1359769747245636
+              ],
+              "source_face_index": 1258
+            },
+            "insert": {
+              "radius_to_surface_m": null,
+              "object": null,
+              "witness_m": null,
+              "source_face_index": null
+            }
+          },
+          "whole": {
+            "all": {
+              "radius_to_surface_m": 0.022745953432619082,
+              "object": "left_right_sleeve_pad",
+              "witness_m": [
+                0.005777404050166111,
+                0.022,
+                -0.0005940924751450111
+              ],
+              "source_face_index": 54285
+            },
+            "hardware": {
+              "radius_to_surface_m": 0.028500000000000004,
+              "object": "hardware_left_gripper_base_0",
+              "witness_m": [
+                0.0,
+                0.028500000000000004,
+                0.1359769747245636
+              ],
+              "source_face_index": 1258
+            },
+            "insert": {
+              "radius_to_surface_m": 0.022745953432619082,
+              "object": "left_right_sleeve_pad",
+              "witness_m": [
+                0.005777404050166111,
+                0.022,
+                -0.0005940924751450111
+              ],
+              "source_face_index": 2777
+            }
+          }
+        },
+        "open": {
+          "lower": {
+            "all": {
+              "radius_to_surface_m": 0.025746149167907496,
+              "object": "left_right_sleeve_pad",
+              "witness_m": [
+                0.013374012000000001,
+                0.022,
+                -0.010195976165829367
+              ],
+              "source_face_index": 54192
+            },
+            "hardware": {
+              "radius_to_surface_m": 0.05592443948918252,
+              "object": "hardware_left_right_inner_knuckle_0",
+              "witness_m": [
+                0.015250044976617133,
+                0.05380500962169221,
+                0.0398
+              ],
+              "source_face_index": 48438
+            },
+            "insert": {
+              "radius_to_surface_m": 0.025746149167907496,
+              "object": "left_right_sleeve_pad",
+              "witness_m": [
+                0.013374012000000001,
+                0.022,
+                -0.010195976165829367
+              ],
+              "source_face_index": 2684
+            }
+          },
+          "upper": {
+            "all": {
+              "radius_to_surface_m": 0.028500000000000004,
+              "object": "hardware_left_gripper_base_0",
+              "witness_m": [
+                0.0,
+                0.028500000000000004,
+                0.1359769747245636
+              ],
+              "source_face_index": 1258
+            },
+            "hardware": {
+              "radius_to_surface_m": 0.028500000000000004,
+              "object": "hardware_left_gripper_base_0",
+              "witness_m": [
+                0.0,
+                0.028500000000000004,
+                0.1359769747245636
+              ],
+              "source_face_index": 1258
+            },
+            "insert": {
+              "radius_to_surface_m": null,
+              "object": null,
+              "witness_m": null,
+              "source_face_index": null
+            }
+          },
+          "whole": {
+            "all": {
+              "radius_to_surface_m": 0.025746149167907496,
+              "object": "left_right_sleeve_pad",
+              "witness_m": [
+                0.013374012000000001,
+                0.022,
+                -0.010195976165829367
+              ],
+              "source_face_index": 54192
+            },
+            "hardware": {
+              "radius_to_surface_m": 0.028500000000000004,
+              "object": "hardware_left_gripper_base_0",
+              "witness_m": [
+                0.0,
+                0.028500000000000004,
+                0.1359769747245636
+              ],
+              "source_face_index": 1258
+            },
+            "insert": {
+              "radius_to_surface_m": 0.025746149167907496,
+              "object": "left_right_sleeve_pad",
+              "witness_m": [
+                0.013374012000000001,
+                0.022,
+                -0.010195976165829367
+              ],
+              "source_face_index": 2684
+            }
+          }
+        },
+        "clear": {
+          "lower": {
+            "all": {
+              "radius_to_surface_m": 0.025746149167907496,
+              "object": "left_right_sleeve_pad",
+              "witness_m": [
+                0.013374012000000001,
+                0.022,
+                0.014804023834170628
+              ],
+              "source_face_index": 54192
+            },
+            "hardware": {
+              "radius_to_surface_m": 0.06369406279633959,
+              "object": "hardware_left_left_inner_finger_0",
+              "witness_m": [
+                -0.023998622989447025,
+                0.05899999771283415,
+                0.0126779250160554
+              ],
+              "source_face_index": 43236
+            },
+            "insert": {
+              "radius_to_surface_m": 0.025746149167907496,
+              "object": "left_right_sleeve_pad",
+              "witness_m": [
+                0.013374012000000001,
+                0.022,
+                0.014804023834170628
+              ],
+              "source_face_index": 2684
+            }
+          },
+          "upper": {
+            "all": {
+              "radius_to_surface_m": 0.028500000000000004,
+              "object": "hardware_left_gripper_base_0",
+              "witness_m": [
+                0.0,
+                0.028500000000000004,
+                0.1609769747245636
+              ],
+              "source_face_index": 1258
+            },
+            "hardware": {
+              "radius_to_surface_m": 0.028500000000000004,
+              "object": "hardware_left_gripper_base_0",
+              "witness_m": [
+                0.0,
+                0.028500000000000004,
+                0.1609769747245636
+              ],
+              "source_face_index": 1258
+            },
+            "insert": {
+              "radius_to_surface_m": 0.06229761393547331,
+              "object": "left_left_carrier",
+              "witness_m": [
+                -0.019999828121299232,
+                0.05899999641670978,
+                0.0398
+              ],
+              "source_face_index": 177
+            }
+          },
+          "whole": {
+            "all": {
+              "radius_to_surface_m": 0.025746149167907496,
+              "object": "left_right_sleeve_pad",
+              "witness_m": [
+                0.013374012000000001,
+                0.022,
+                0.014804023834170628
+              ],
+              "source_face_index": 54192
+            },
+            "hardware": {
+              "radius_to_surface_m": 0.028500000000000004,
+              "object": "hardware_left_gripper_base_0",
+              "witness_m": [
+                0.0,
+                0.028500000000000004,
+                0.1609769747245636
+              ],
+              "source_face_index": 1258
+            },
+            "insert": {
+              "radius_to_surface_m": 0.025746149167907496,
+              "object": "left_right_sleeve_pad",
+              "witness_m": [
+                0.013374012000000001,
+                0.022,
+                0.014804023834170628
+              ],
+              "source_face_index": 2684
+            }
+          }
+        }
+      },
+      "glb": {
+        "file": "hand_sleeve_H025_v01.glb",
+        "sha256": "ef5914331ef1d00b8c6aba74e175ec9f581f7d27359f8edf04845e9bfb1cfed1",
+        "mesh_count": 20,
+        "readback_mesh_count": 20,
+        "bounds_m": [
+          [
+            -0.06426016898839715,
+            -0.016,
+            -0.017
+          ],
+          [
+            0.06426016483147669,
+            0.10350000000000001,
+            0.1498769757245636
+          ]
+        ],
+        "readback_bounds_max_difference_m": 1.4901161138336505e-09
+      }
+    },
+    "H050": {
+      "contacts": [
+        {
+          "pad": "left_left_sleeve_pad",
+          "side": "left_left",
+          "carrier": "left_left_carrier",
+          "profile_points_near_xz_m": [
+            [
+              -0.005374012,
+              -0.011374012
+            ],
+            [
+              -0.005713983,
+              -0.011011028
+            ],
+            [
+              -0.006029485,
+              -0.010626587
+            ],
+            [
+              -0.006319169,
+              -0.010222334
+            ],
+            [
+              -0.006581793,
+              -0.0098
+            ],
+            [
+              -0.006816233,
+              -0.009361394
+            ],
+            [
+              -0.007021484,
+              -0.008908394
+            ],
+            [
+              -0.007196669,
+              -0.00844294
+            ],
+            [
+              -0.007341036,
+              -0.007967025
+            ],
+            [
+              -0.007453968,
+              -0.007482686
+            ],
+            [
+              -0.007534981,
+              -0.006991999
+            ],
+            [
+              -0.007583728,
+              -0.006497064
+            ],
+            [
+              -0.0076,
+              -0.006
+            ],
+            [
+              -0.007583728,
+              -0.005502936
+            ],
+            [
+              -0.007534981,
+              -0.005008001
+            ],
+            [
+              -0.007453968,
+              -0.004517314
+            ],
+            [
+              -0.007341036,
+              -0.004032975
+            ],
+            [
+              -0.007196669,
+              -0.00355706
+            ],
+            [
+              -0.007021484,
+              -0.003091606
+            ],
+            [
+              -0.006816233,
+              -0.002638606
+            ],
+            [
+              -0.006581793,
+              -0.0022
+            ],
+            [
+              -0.006319169,
+              -0.001777666
+            ],
+            [
+              -0.006029485,
+              -0.001373413
+            ],
+            [
+              -0.005713983,
+              -0.000988972
+            ],
+            [
+              -0.005374012,
+              -0.000625988
+            ]
+          ],
+          "reference_radius_m": 0.0076,
+          "contact_y_range_m": [
+            0.022,
+            0.03
+          ],
+          "seat_corners_world_m": [
+            [
+              -0.0096,
+              0.022,
+              -0.011374012
+            ],
+            [
+              -0.0096,
+              0.022,
+              -0.000625988
+            ],
+            [
+              -0.0096,
+              0.03,
+              -0.011374012
+            ],
+            [
+              -0.0096,
+              0.03,
+              -0.000625988
+            ]
+          ],
+          "crown_near_m": [
+            -0.0076,
+            0.026,
+            -0.006
+          ],
+          "crown_pad_thickness_m": 0.001999999999999999
+        },
+        {
+          "pad": "left_right_sleeve_pad",
+          "side": "left_right",
+          "carrier": "left_right_carrier",
+          "profile_points_near_xz_m": [
+            [
+              0.005374012,
+              -0.011374012
+            ],
+            [
+              0.005713983,
+              -0.011011028
+            ],
+            [
+              0.006029485,
+              -0.010626587
+            ],
+            [
+              0.006319169,
+              -0.010222334
+            ],
+            [
+              0.006581793,
+              -0.0098
+            ],
+            [
+              0.006816233,
+              -0.009361394
+            ],
+            [
+              0.007021484,
+              -0.008908394
+            ],
+            [
+              0.007196669,
+              -0.00844294
+            ],
+            [
+              0.007341036,
+              -0.007967025
+            ],
+            [
+              0.007453968,
+              -0.007482686
+            ],
+            [
+              0.007534981,
+              -0.006991999
+            ],
+            [
+              0.007583728,
+              -0.006497064
+            ],
+            [
+              0.0076,
+              -0.006
+            ],
+            [
+              0.007583728,
+              -0.005502936
+            ],
+            [
+              0.007534981,
+              -0.005008001
+            ],
+            [
+              0.007453968,
+              -0.004517314
+            ],
+            [
+              0.007341036,
+              -0.004032975
+            ],
+            [
+              0.007196669,
+              -0.00355706
+            ],
+            [
+              0.007021484,
+              -0.003091606
+            ],
+            [
+              0.006816233,
+              -0.002638606
+            ],
+            [
+              0.006581793,
+              -0.0022
+            ],
+            [
+              0.006319169,
+              -0.001777666
+            ],
+            [
+              0.006029485,
+              -0.001373413
+            ],
+            [
+              0.005713983,
+              -0.000988972
+            ],
+            [
+              0.005374012,
+              -0.000625988
+            ]
+          ],
+          "reference_radius_m": 0.0076,
+          "contact_y_range_m": [
+            0.022,
+            0.03
+          ],
+          "seat_corners_world_m": [
+            [
+              0.0096,
+              0.022,
+              -0.011374012
+            ],
+            [
+              0.0096,
+              0.022,
+              -0.000625988
+            ],
+            [
+              0.0096,
+              0.03,
+              -0.011374012
+            ],
+            [
+              0.0096,
+              0.03,
+              -0.000625988
+            ]
+          ],
+          "crown_near_m": [
+            0.0076,
+            0.026,
+            -0.006
+          ],
+          "crown_pad_thickness_m": 0.001999999999999999
+        }
+      ],
+      "contact_observations": {
+        "near": {
+          "pads": [
+            {
+              "pad": "left_left_sleeve_pad",
+              "sample_count": 147,
+              "unsigned_surface_min_m": 0.0,
+              "unsigned_surface_max_m": 8.188600426433445e-18,
+              "crown_world_m": [
+                -0.007599999999999996,
+                0.025999999999999995,
+                -0.005999999999999998
+              ]
+            },
+            {
+              "pad": "left_right_sleeve_pad",
+              "sample_count": 147,
+              "unsigned_surface_min_m": 0.0,
+              "unsigned_surface_max_m": 4.351167857633658e-18,
+              "crown_world_m": [
+                0.007599999999999999,
+                0.025999999999999995,
+                -0.005999999999999998
+              ]
+            }
+          ],
+          "crown_to_crown_distance_m": 0.015199999999999995
+        },
+        "early": {
+          "pads": [
+            {
+              "pad": "left_left_sleeve_pad",
+              "sample_count": 147,
+              "unsigned_surface_min_m": 0.0002726180996427149,
+              "unsigned_surface_max_m": 0.00040465104799442003,
+              "crown_world_m": [
+                -0.008003392050166099,
+                0.026000000139739132,
+                -0.0059681044751450085
+              ]
+            },
+            {
+              "pad": "left_right_sleeve_pad",
+              "sample_count": 147,
+              "unsigned_surface_min_m": 0.0002726180996427256,
+              "unsigned_surface_max_m": 0.00040465104799443065,
+              "crown_world_m": [
+                0.008003392050166109,
+                0.025999999999999995,
+                -0.0059681044751450085
+              ]
+            }
+          ],
+          "crown_to_crown_distance_m": 0.016006784100332207
+        },
+        "open": {
+          "pads": [
+            {
+              "pad": "left_left_sleeve_pad",
+              "sample_count": 147,
+              "unsigned_surface_min_m": 0.006420228274682621,
+              "unsigned_surface_max_m": 0.008086270365661927,
+              "crown_world_m": [
+                -0.01559999999999951,
+                0.026000002771281658,
+                -0.004821964165829362
+              ]
+            },
+            {
+              "pad": "left_right_sleeve_pad",
+              "sample_count": 147,
+              "unsigned_surface_min_m": 0.006420228274683096,
+              "unsigned_surface_max_m": 0.008086270365662411,
+              "crown_world_m": [
+                0.0156,
+                0.025999999999999995,
+                -0.004821964165829362
+              ]
+            }
+          ],
+          "crown_to_crown_distance_m": 0.031199999999999634
+        },
+        "clear": {
+          "pads": [
+            {
+              "pad": "left_left_sleeve_pad",
+              "sample_count": 147,
+              "unsigned_surface_min_m": 0.017133716169665913,
+              "unsigned_surface_max_m": 0.0266697904405759,
+              "crown_world_m": [
+                -0.01559999999999951,
+                0.026000002771281658,
+                0.020178035834170632
+              ]
+            },
+            {
+              "pad": "left_right_sleeve_pad",
+              "sample_count": 147,
+              "unsigned_surface_min_m": 0.017133716169666177,
+              "unsigned_surface_max_m": 0.026669790440576095,
+              "crown_world_m": [
+                0.0156,
+                0.025999999999999995,
+                0.020178035834170632
+              ]
+            }
+          ],
+          "crown_to_crown_distance_m": 0.031199999999999634
+        }
+      },
+      "body_topology": {
+        "left_left_carrier": {
+          "vertices": 554,
+          "faces": 1112,
+          "closed": true,
+          "components": 1,
+          "zero_area_faces": 0,
+          "front_pad_seat_sample_max_difference_m": 5.280879630666009e-10
+        },
+        "left_right_carrier": {
+          "vertices": 554,
+          "faces": 1112,
+          "closed": true,
+          "components": 1,
+          "zero_area_faces": 0,
+          "front_pad_seat_sample_max_difference_m": 3.2906560109833716e-10
+        }
+      },
+      "near_tool_band_comparison": {
+        "old": {
+          "radius_to_surface_m": 0.010714772321026677,
+          "object": "left_left_edge_contour",
+          "witness_m": [
+            -0.009940138185598548,
+            0.003999999842830622,
+            -0.013299999818115228
+          ],
+          "source_face_index": 51508
+        },
+        "new": {
+          "radius_to_surface_m": 0.022646854196027837,
+          "object": "left_left_sleeve_pad",
+          "witness_m": [
+            -0.0053740119999999975,
+            0.021999999999999992,
+            -0.011374012000000003
+          ],
+          "source_face_index": 53996
+        }
+      },
+      "tool_surface_observations": {
+        "near": {
+          "lower": {
+            "all": {
+              "radius_to_surface_m": 0.022646854196027837,
+              "object": "left_left_sleeve_pad",
+              "witness_m": [
+                -0.0053740119999999975,
+                0.021999999999999992,
+                -0.0006259880000000009
+              ],
+              "source_face_index": 54089
+            },
+            "hardware": {
+              "radius_to_surface_m": 0.05429460399216849,
+              "object": "hardware_left_right_inner_knuckle_0",
+              "witness_m": [
+                0.01384391644970447,
+                0.052500000000000005,
+                0.02457771211325384
+              ],
+              "source_face_index": 47943
+            },
+            "insert": {
+              "radius_to_surface_m": 0.022646854196027837,
+              "object": "left_left_sleeve_pad",
+              "witness_m": [
+                -0.0053740119999999975,
+                0.021999999999999992,
+                -0.0006259880000000009
+              ],
+              "source_face_index": 2581
+            }
+          },
+          "upper": {
+            "all": {
+              "radius_to_surface_m": 0.028500000000000004,
+              "object": "hardware_left_gripper_base_0",
+              "witness_m": [
+                0.0,
+                0.028500000000000004,
+                0.1359769747245636
+              ],
+              "source_face_index": 1258
+            },
+            "hardware": {
+              "radius_to_surface_m": 0.028500000000000004,
+              "object": "hardware_left_gripper_base_0",
+              "witness_m": [
+                0.0,
+                0.028500000000000004,
+                0.1359769747245636
+              ],
+              "source_face_index": 1258
+            },
+            "insert": {
+              "radius_to_surface_m": null,
+              "object": null,
+              "witness_m": null,
+              "source_face_index": null
+            }
+          },
+          "whole": {
+            "all": {
+              "radius_to_surface_m": 0.022646854196027837,
+              "object": "left_left_sleeve_pad",
+              "witness_m": [
+                -0.0053740119999999975,
+                0.021999999999999992,
+                -0.0006259880000000009
+              ],
+              "source_face_index": 54089
+            },
+            "hardware": {
+              "radius_to_surface_m": 0.028500000000000004,
+              "object": "hardware_left_gripper_base_0",
+              "witness_m": [
+                0.0,
+                0.028500000000000004,
+                0.1359769747245636
+              ],
+              "source_face_index": 1258
+            },
+            "insert": {
+              "radius_to_surface_m": 0.022646854196027837,
+              "object": "left_left_sleeve_pad",
+              "witness_m": [
+                -0.0053740119999999975,
+                0.021999999999999992,
+                -0.0006259880000000009
+              ],
+              "source_face_index": 2581
+            }
+          }
+        },
+        "early": {
+          "lower": {
+            "all": {
+              "radius_to_surface_m": 0.022745953432619082,
+              "object": "left_right_sleeve_pad",
+              "witness_m": [
+                0.005777404050166111,
+                0.022,
+                -0.0005940924751450111
+              ],
+              "source_face_index": 54285
+            },
+            "hardware": {
+              "radius_to_surface_m": 0.05439873227580146,
+              "object": "hardware_left_right_inner_knuckle_0",
+              "witness_m": [
+                0.01424682677701682,
+                0.052500000000000005,
+                0.024587242995179212
+              ],
+              "source_face_index": 47943
+            },
+            "insert": {
+              "radius_to_surface_m": 0.022745953432619082,
+              "object": "left_right_sleeve_pad",
+              "witness_m": [
+                0.005777404050166111,
+                0.022,
+                -0.0005940924751450111
+              ],
+              "source_face_index": 2777
+            }
+          },
+          "upper": {
+            "all": {
+              "radius_to_surface_m": 0.028500000000000004,
+              "object": "hardware_left_gripper_base_0",
+              "witness_m": [
+                0.0,
+                0.028500000000000004,
+                0.1359769747245636
+              ],
+              "source_face_index": 1258
+            },
+            "hardware": {
+              "radius_to_surface_m": 0.028500000000000004,
+              "object": "hardware_left_gripper_base_0",
+              "witness_m": [
+                0.0,
+                0.028500000000000004,
+                0.1359769747245636
+              ],
+              "source_face_index": 1258
+            },
+            "insert": {
+              "radius_to_surface_m": null,
+              "object": null,
+              "witness_m": null,
+              "source_face_index": null
+            }
+          },
+          "whole": {
+            "all": {
+              "radius_to_surface_m": 0.022745953432619082,
+              "object": "left_right_sleeve_pad",
+              "witness_m": [
+                0.005777404050166111,
+                0.022,
+                -0.0005940924751450111
+              ],
+              "source_face_index": 54285
+            },
+            "hardware": {
+              "radius_to_surface_m": 0.028500000000000004,
+              "object": "hardware_left_gripper_base_0",
+              "witness_m": [
+                0.0,
+                0.028500000000000004,
+                0.1359769747245636
+              ],
+              "source_face_index": 1258
+            },
+            "insert": {
+              "radius_to_surface_m": 0.022745953432619082,
+              "object": "left_right_sleeve_pad",
+              "witness_m": [
+                0.005777404050166111,
+                0.022,
+                -0.0005940924751450111
+              ],
+              "source_face_index": 2777
+            }
+          }
+        },
+        "open": {
+          "lower": {
+            "all": {
+              "radius_to_surface_m": 0.025746149167907496,
+              "object": "left_right_sleeve_pad",
+              "witness_m": [
+                0.013374012000000001,
+                0.022,
+                -0.010195976165829367
+              ],
+              "source_face_index": 54192
+            },
+            "hardware": {
+              "radius_to_surface_m": 0.05592443948918252,
+              "object": "hardware_left_right_inner_knuckle_0",
+              "witness_m": [
+                0.015250044976617133,
+                0.05380500962169221,
+                0.0398
+              ],
+              "source_face_index": 48438
+            },
+            "insert": {
+              "radius_to_surface_m": 0.025746149167907496,
+              "object": "left_right_sleeve_pad",
+              "witness_m": [
+                0.013374012000000001,
+                0.022,
+                -0.010195976165829367
+              ],
+              "source_face_index": 2684
+            }
+          },
+          "upper": {
+            "all": {
+              "radius_to_surface_m": 0.028500000000000004,
+              "object": "hardware_left_gripper_base_0",
+              "witness_m": [
+                0.0,
+                0.028500000000000004,
+                0.1359769747245636
+              ],
+              "source_face_index": 1258
+            },
+            "hardware": {
+              "radius_to_surface_m": 0.028500000000000004,
+              "object": "hardware_left_gripper_base_0",
+              "witness_m": [
+                0.0,
+                0.028500000000000004,
+                0.1359769747245636
+              ],
+              "source_face_index": 1258
+            },
+            "insert": {
+              "radius_to_surface_m": null,
+              "object": null,
+              "witness_m": null,
+              "source_face_index": null
+            }
+          },
+          "whole": {
+            "all": {
+              "radius_to_surface_m": 0.025746149167907496,
+              "object": "left_right_sleeve_pad",
+              "witness_m": [
+                0.013374012000000001,
+                0.022,
+                -0.010195976165829367
+              ],
+              "source_face_index": 54192
+            },
+            "hardware": {
+              "radius_to_surface_m": 0.028500000000000004,
+              "object": "hardware_left_gripper_base_0",
+              "witness_m": [
+                0.0,
+                0.028500000000000004,
+                0.1359769747245636
+              ],
+              "source_face_index": 1258
+            },
+            "insert": {
+              "radius_to_surface_m": 0.025746149167907496,
+              "object": "left_right_sleeve_pad",
+              "witness_m": [
+                0.013374012000000001,
+                0.022,
+                -0.010195976165829367
+              ],
+              "source_face_index": 2684
+            }
+          }
+        },
+        "clear": {
+          "lower": {
+            "all": {
+              "radius_to_surface_m": 0.025746149167907496,
+              "object": "left_right_sleeve_pad",
+              "witness_m": [
+                0.013374012000000001,
+                0.022,
+                0.014804023834170628
+              ],
+              "source_face_index": 54192
+            },
+            "hardware": {
+              "radius_to_surface_m": 0.06369406279633959,
+              "object": "hardware_left_left_inner_finger_0",
+              "witness_m": [
+                -0.023998622989447025,
+                0.05899999771283415,
+                0.0126779250160554
+              ],
+              "source_face_index": 43236
+            },
+            "insert": {
+              "radius_to_surface_m": 0.025746149167907496,
+              "object": "left_right_sleeve_pad",
+              "witness_m": [
+                0.013374012000000001,
+                0.022,
+                0.014804023834170628
+              ],
+              "source_face_index": 2684
+            }
+          },
+          "upper": {
+            "all": {
+              "radius_to_surface_m": 0.028500000000000004,
+              "object": "hardware_left_gripper_base_0",
+              "witness_m": [
+                0.0,
+                0.028500000000000004,
+                0.1609769747245636
+              ],
+              "source_face_index": 1258
+            },
+            "hardware": {
+              "radius_to_surface_m": 0.028500000000000004,
+              "object": "hardware_left_gripper_base_0",
+              "witness_m": [
+                0.0,
+                0.028500000000000004,
+                0.1609769747245636
+              ],
+              "source_face_index": 1258
+            },
+            "insert": {
+              "radius_to_surface_m": 0.06229761393547331,
+              "object": "left_left_carrier",
+              "witness_m": [
+                -0.019999828121299232,
+                0.05899999641670978,
+                0.0398
+              ],
+              "source_face_index": 177
+            }
+          },
+          "whole": {
+            "all": {
+              "radius_to_surface_m": 0.025746149167907496,
+              "object": "left_right_sleeve_pad",
+              "witness_m": [
+                0.013374012000000001,
+                0.022,
+                0.014804023834170628
+              ],
+              "source_face_index": 54192
+            },
+            "hardware": {
+              "radius_to_surface_m": 0.028500000000000004,
+              "object": "hardware_left_gripper_base_0",
+              "witness_m": [
+                0.0,
+                0.028500000000000004,
+                0.1609769747245636
+              ],
+              "source_face_index": 1258
+            },
+            "insert": {
+              "radius_to_surface_m": 0.025746149167907496,
+              "object": "left_right_sleeve_pad",
+              "witness_m": [
+                0.013374012000000001,
+                0.022,
+                0.014804023834170628
+              ],
+              "source_face_index": 2684
+            }
+          }
+        }
+      },
+      "glb": {
+        "file": "hand_sleeve_H050_v01.glb",
+        "sha256": "f68aa1ccfd0497e8a28918dbb259466204b6bf08abf1bf63a3ab4694cc54eb60",
+        "mesh_count": 20,
+        "readback_mesh_count": 20,
+        "bounds_m": [
+          [
+            -0.06426016898839715,
+            -0.016,
+            -0.017
+          ],
+          [
+            0.06426016483147669,
+            0.10350000000000001,
+            0.1498769757245636
+          ]
+        ],
+        "readback_bounds_max_difference_m": 1.4901161138336505e-09
+      }
+    }
+  },
+  "hardware_root_pads_targets_and_poses_preserved": true,
+  "metal_edge_contacts_removed": true,
+  "material_force_sleeve_slip_and_terminal_location_validated": false,
+  "physical_acceptance_verdict": null,
+  "arm_motion_created": false,
+  "video_created": false
+}

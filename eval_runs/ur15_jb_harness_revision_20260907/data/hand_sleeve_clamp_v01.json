@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "source_sha256": "c94f58f0ab61e621c38980e913d330aceedd7a31128130d099714cd97dc47111",
+  "recipe_sha256": "554c61ca57d76f23358d945f2e2be8f102a5e62d412452d0c668bef818d4e567",
+  "candidates": {"H025": "J025", "H050": "J050"},
+  "user_decision": "Move the front grasp from metal terminal edges to the terminal-facing end of the black covering",
+  "source_sleeve_object": "illustrative_sleeve",
+  "front_contact_y_range_m": [0.022, 0.030],
+  "groove_half_angle_deg": 45,
+  "front_pad_back_abs_x_m": 0.0096,
+  "front_support_n_max_m": 0.0064,
+  "rail_u_left_m": [-0.006, 0.045],
+  "pad_color_rgba": [30, 145, 137, 255],
+  "preserved_setback_m": 0.040,
+  "placement_values_are_manufacturing_requirements": false,
+  "actual_sleeve_part_number": null,
+  "allowed_cover_compression_m": null,
+  "pad_material": null,
+  "pad_joint": null,
+  "grip_force_n": null,
+  "selected_relief_m": null,
+  "physical_acceptance_verdict": null
+}

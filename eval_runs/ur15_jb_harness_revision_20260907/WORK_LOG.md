@@ -377,3 +377,44 @@ and observations matched. Native records matched except for timestamps and
 binary blend SHA; each native separately passed exact readback. The copied
 previous-delivery source hash remained unchanged. Final checks and delivery
 are recorded with the package's commit and file manifest.
+
+## 2026-09-14 — Terminal-side black-sleeve grasp
+
+Implemented the user's explicit replacement of metal-terminal-edge clamping
+with gripping the terminal-facing portion of the black covering. H025/H050
+remove both metal-edge pads and replace them with curved pads at Y22-30 mm.
+The blue front support and rail are shortened accordingly. The 40 mm setback,
+root cable pads, source hardware/targets and four poses remain identical.
+The contact band and pad thickness are comparison values, not manufacturing
+acceptance. The black sleeve is still illustrative reference geometry.
+
+The first profile assertion caught a radius-equality filter dropping rounded
+outer-ring points. The corrected extraction separates the annulus at its
+largest radial gap and keeps all 96 source outer points before choosing each
+25-point side arc. A second attempt stopped because Blender could not import
+the reused support helper. Adding the script directory to its search path
+fixed that setup issue without changing geometry or measurement thresholds.
+Both failures and their concrete deltas are retained with the package.
+
+The final carriers have 554 vertices and 1,112 triangles each, one closed
+component and no strict zero-area faces. Each front pad has 147 surface samples;
+near-pose source matching differs by at most 8.19e-18 m. Pad-seat nine-point
+differences are at most 5.28e-10 m. These are auxiliary mesh observations.
+The seat-to-53.8 mm band gives a 22.6469 mm minimum terminal-axis radial
+projection, compared with the previous metal-edge pad's 10.7148 mm.
+This is not clearance for an adopted tool or a torque-reaction verdict.
+
+Eight static native scenes with twenty meshes each reload identically for
+world matrices, vertex/face SHA, counts and visibility. Source matrices are
+never reassigned during surface observations. Front-pad/black-sleeve and
+root-pad/cable surface pairs appear in the near pose; the other three poses
+give zero pairs in the 16-by-4 hand/reference group. Full records retain all
+mount-surface groups and do not classify physical validity.
+
+The standalone HTML exercises eighteen operations per desktop/mobile viewport:
+both candidates, four poses, display toggles, cameras, detail/full framing and
+reset. Numeric correspondence, finite vertices, WebGL pixels and local links
+were verified. Screenshots were inspected, and the detail image was reframed
+to include the full terminal hole beside the new sleeve contact. Reproduction
+and final release observations are recorded separately in the package audit.
+No upper retainer, arm trajectory, video or physical acceptance was created.
