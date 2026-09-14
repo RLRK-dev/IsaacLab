@@ -1,0 +1,102 @@
+{
+  "schema_version": 1,
+  "source_sha256": "f9b3c097ea93cb7bf8ea08b17474ec293f8cd2204b6eae20362fcdcc2809c732",
+  "axis_xy_m": [0.0, 0.0],
+  "profile_bin_height_m": 0.002,
+  "comparison_diameters_m": [0.016, 0.019, 0.036],
+  "comparison_part_lower_heights_above_seat_m": [0.0038, 0.0288, 0.0538, 0.0788, 0.1038, 0.1538, 0.2038],
+  "height_basis": "Independent static placements from the prior 3.8/53.8 mm comparison datums; not insertion depth, assembled stack length or feed strokes",
+  "references": {
+    "MINIMAT-ED-314": {
+      "label_ja": "MINIMAT-ED：φ36 × 全長314 mm",
+      "part_examples": ["330E36-0012 / 450000A", "330E36-0018 / 450000B", "330E36-0032 / 450000E", "330E36-0048 / 450000C"],
+      "diameter_m": 0.036,
+      "length_m": 0.314,
+      "source_id": "D3195",
+      "source_page": 4,
+      "interface_note_ja": "受け側はF6.3。E6.3の差込み工具を使用する仕様。取付け・突出量は別途必要。",
+      "model_scope_ja": "カタログの径と全長による円筒比較。ばね軸・口元の段差、上端接続や付属品の詳細外形は含まない。"
+    },
+    "MINIMAT-ED-356": {
+      "label_ja": "MINIMAT-ED：φ36 × 全長356 mm",
+      "part_examples": ["330E36-0075 / 450000F", "330E36-0110 / 450000G", "330E36-0140 / 450000H", "330E36-0180 / 450000I"],
+      "diameter_m": 0.036,
+      "length_m": 0.356,
+      "source_id": "D3195",
+      "source_page": 4,
+      "interface_note_ja": "受け側はF6.3。E6.3の差込み工具を使用する仕様。取付け・突出量は別途必要。",
+      "model_scope_ja": "カタログの径と全長による円筒比較。ばね軸・口元の段差、上端接続や付属品の詳細外形は含まない。"
+    },
+    "804133": {
+      "label_ja": "磁石付きソケット804133：二面幅10・外径16・全長50 mm",
+      "part_examples": ["804133"],
+      "diameter_m": 0.016,
+      "length_m": 0.050,
+      "across_flats_m": 0.010,
+      "source_id": "D3320",
+      "source_page": 16,
+      "interface_note_ja": "差込み側E6.3、全長50 mm。二面幅10 mmはねじ呼び径ではない。保持対象の磁性は未指定。",
+      "model_scope_ja": "外径Dで全長を包む円筒比較。中空部・磁石・軸の段差や差込み深さを復元していない。"
+    },
+    "804134": {
+      "label_ja": "磁石付きソケット804134：二面幅13・外径19・全長50 mm",
+      "part_examples": ["804134"],
+      "diameter_m": 0.019,
+      "length_m": 0.050,
+      "across_flats_m": 0.013,
+      "source_id": "D3320",
+      "source_page": 16,
+      "interface_note_ja": "差込み側E6.3、全長50 mm。二面幅13 mmはねじ呼び径ではない。保持対象の磁性は未指定。",
+      "model_scope_ja": "外径Dで全長を包む円筒比較。中空部・磁石・軸の段差や差込み深さを復元していない。"
+    }
+  },
+  "sources": {
+    "D3195": {
+      "title": "DEPRAG MINIMAT-ED D3195E 01.2024",
+      "url": "https://www.deprag.com/fileadmin/bilder_content/emedia/broschueren_pics/emedia_schraubtechnik/D3195/D3195en.pdf",
+      "download_url": "https://www.depragusa.com/files/catalogs/D3195en.pdf",
+      "sha256": "99461920393fccfc4c7948dd5eea970193c5b174ae19d02226462d4e6c363927",
+      "inspected_pages": [4],
+      "checked_date": "2026-09-14"
+    },
+    "D3320": {
+      "title": "DEPRAG Inserting tools D3320",
+      "url": "https://www.deprag.com/fileadmin/bilder_content/emedia/broschueren_pics/emedia_Automation/D3320/D3320en.pdf",
+      "sha256": "5b1f3ccd5548b56ea772715ce4f9daaab3c9129644dde6ebaccafb45dc5ed7df",
+      "inspected_pages": [16],
+      "checked_date": "2026-09-14"
+    },
+    "D3837": {
+      "title": "DEPRAG Feed Module D3837",
+      "url": "https://www.deprag.com/fileadmin/bilder_content/emedia/broschueren_pics/emedia_Automation/D3837/D3837en.pdf",
+      "sha256": "ded33cab2ed8b454b1e9b962c8fb574c470476d849ed4e277cf082aa815c737f",
+      "inspected_pages": [5, 6, 7],
+      "checked_date": "2026-09-14",
+      "nosepiece_length_options_m": [0.040, 0.080],
+      "vacuum_free_stroke_options_m": [0.050, 0.100],
+      "additional_z_feed_stroke_options_m": [0.025, 0.080],
+      "screw_head_max_diameter_m": 0.014,
+      "screw_max_designation": "M8",
+      "nut_max_designation": "M6",
+      "full_outer_geometry_derived": false,
+      "missing_ja": "確認した図では、供給口・分割ノーズの幅、開放外形、軸に対する本体各部の寸法が未記載。長さの選択肢から図の縮尺を推定しない。"
+    },
+    "D0067": {
+      "title": "DEPRAG Tool Changer D0067",
+      "url": "https://www.deprag.com/fileadmin/bilder_content/emedia/broschueren_pics/emedia_Automation/D0067/D0067en.pdf",
+      "sha256": "f37b181f99dd9db692683d811907d1a03aa1ec4e33bbccb0a6af9eedeb3ee038",
+      "inspected_pages": [3, 4, 5],
+      "checked_date": "2026-09-14",
+      "nut_max_designation": "M8",
+      "tool_length_max_m": 0.150,
+      "purpose_ja": "供給器側の受取位置から工具で取得する方式の参照。工具交換機構自体の採用ではなく、2工具を1工具へ減らす提案でもない。",
+      "scope_ja": "DFMと別の製品構成。ナットM8の記載をDFMの能力へ転用しない。付属工具・主軸の組合せ外形は今回モデル化しない。"
+    }
+  },
+  "selected_tool_part_number": null,
+  "actual_fastener_and_material": null,
+  "assembled_insertion_depth_m": null,
+  "feed_nose_geometry": null,
+  "fastening_torque_nm": null,
+  "physical_acceptance_verdict": null
+}

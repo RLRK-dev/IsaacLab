@@ -1,0 +1,14 @@
+{
+  "recorded_at": "2026-09-14T12:48:38.478967+09:00",
+  "source_sha256": "f9b3c097ea93cb7bf8ea08b17474ec293f8cd2204b6eae20362fcdcc2809c732",
+  "source_copy_sha256": "f9b3c097ea93cb7bf8ea08b17474ec293f8cd2204b6eae20362fcdcc2809c732",
+  "placements": 224,
+  "near_candidates_same_projected_radii": true,
+  "script_sha256": {
+    "hand_fastening_reference_viewer_v01.html": "08c5af7510dcc10405dff950b2efae4deb70deb92355503da72627379c25339e",
+    "probe_hand_fastening_reference_v01.py": "6f6422278244b50d63850facc8d762070014a08aca66d5341d906f5d22944cb4",
+    "probe_hand_tool_access_v01.py": "55456e6d55f84931bcc3f502e77372414a6efa2578e27970d5620f176c53417c"
+  },
+  "published_documents_redistributed": false,
+  "physical_acceptance_verdict": null
+}

@@ -1,0 +1,13 @@
+{
+  "recorded_at": "2026-09-14T12:50:41.084100+09:00",
+  "original_and_reproduced_at": [
+    "2026-09-14T12:32:36.883638+09:00",
+    "2026-09-14T12:48:52.538798+09:00"
+  ],
+  "all_fields_equal_except_timestamp": true,
+  "page_equal_except_embedded_timestamp": true,
+  "browser_matches_current_page": true,
+  "downloaded_public_pdf_hashes_match_record": true,
+  "scope": "Reproduction and provenance only",
+  "physical_acceptance_verdict": null
+}

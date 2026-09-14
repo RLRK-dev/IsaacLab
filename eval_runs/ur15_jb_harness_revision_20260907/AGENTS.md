@@ -244,3 +244,19 @@ numbers unknown until their basis and the scope of the product change are set.
   Actual spindle/nose, cameras, the other hand/tool and the workpiece remain
   outside this measurement. Keep the hand-holding and two station tools as a
   comparison direction, and continue to pause arm trajectories and video.
+
+## Published fastening-component dimensions on 2026-09-14
+
+- The next continuation compares individual public DEPRAG dimensions in
+  `analysis/hand_fastening_reference_v01.md`: MINIMAT-ED phi36 with lengths
+  314/356 mm and magnetic shaft sockets 804133/804134, not adopted equipment.
+  E6.3/F6.3 correspondence does not specify insertion depth or an assembled
+  stack. Keep the seven lower heights explicit comparison parameters.
+- DFM pages 5-7 supply nose length/stroke options but not the required closed
+  and open nose/feed-port outlines. Do not scale those illustrations using
+  one of the alternative lengths. Tool Changer's M8 nut record is for another
+  configuration and must not replace DFM's M6 nut limit. No changer is adopted.
+- The phi36 comparison at a 53.8 mm lower height has a +10.5 mm projected
+  radial difference in the near hand pose. At 3.8 mm it is +4.646854 mm.
+  Neither is the clearance of a complete tool. Preserve source hand geometry,
+  hold-at-sleeve intent, 40 mm setback and paused arm/video work.
