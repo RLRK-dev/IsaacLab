@@ -1,0 +1,148 @@
+{
+  "units": "m",
+  "formal_physical_validity_verdict": null,
+  "versions": {
+    "v01": {
+      "native_sha256": "d8440b96b930c827602521d83d15c1e1508c0a4c073246d2620f00258c03ac39",
+      "read_only": true,
+      "samples": [
+        {
+          "frame": 625,
+          "signed_plane_gap_y_m": 0.0429999977350235,
+          "rod_cylinder_axial_overlap_m": 0.017000019550323486
+        },
+        {
+          "frame": 628,
+          "signed_plane_gap_y_m": 0.0429999977350235,
+          "rod_cylinder_axial_overlap_m": 0.01669853925704956
+        },
+        {
+          "frame": 631,
+          "signed_plane_gap_y_m": 0.042999982833862305,
+          "rod_cylinder_axial_overlap_m": 0.015367299318313599
+        },
+        {
+          "frame": 634,
+          "signed_plane_gap_y_m": 0.042999982833862305,
+          "rod_cylinder_axial_overlap_m": 0.012138664722442627
+        },
+        {
+          "frame": 637,
+          "signed_plane_gap_y_m": 0.0429999977350235,
+          "rod_cylinder_axial_overlap_m": 0.007345676422119141
+        },
+        {
+          "frame": 640,
+          "signed_plane_gap_y_m": 0.042999982833862305,
+          "rod_cylinder_axial_overlap_m": 0.0010124444961547852
+        },
+        {
+          "frame": 643,
+          "signed_plane_gap_y_m": 0.042999982833862305,
+          "rod_cylinder_axial_overlap_m": -0.0059999823570251465
+        },
+        {
+          "frame": 646,
+          "signed_plane_gap_y_m": 0.04299996793270111,
+          "rod_cylinder_axial_overlap_m": -0.013012439012527466
+        },
+        {
+          "frame": 649,
+          "signed_plane_gap_y_m": 0.042999982833862305,
+          "rod_cylinder_axial_overlap_m": -0.01934567093849182
+        },
+        {
+          "frame": 652,
+          "signed_plane_gap_y_m": 0.0429999977350235,
+          "rod_cylinder_axial_overlap_m": -0.024138659238815308
+        },
+        {
+          "frame": 655,
+          "signed_plane_gap_y_m": 0.042999982833862305,
+          "rod_cylinder_axial_overlap_m": -0.02736726403236389
+        },
+        {
+          "frame": 658,
+          "signed_plane_gap_y_m": 0.042999982833862305,
+          "rod_cylinder_axial_overlap_m": -0.028698503971099854
+        },
+        {
+          "frame": 661,
+          "signed_plane_gap_y_m": 0.042999982833862305,
+          "rod_cylinder_axial_overlap_m": -0.02899998426437378
+        }
+      ]
+    },
+    "v02": {
+      "native_sha256": "313f3a30301afbdb4d7bc16a8b028fb0ebf62b9d953b6450efe81c13c34e7471",
+      "read_only": true,
+      "samples": [
+        {
+          "frame": 625,
+          "signed_plane_gap_y_m": 1.4901161193847656e-08,
+          "rod_cylinder_axial_overlap_m": 0.06000000238418579
+        },
+        {
+          "frame": 628,
+          "signed_plane_gap_y_m": 1.4901161193847656e-08,
+          "rod_cylinder_axial_overlap_m": 0.059698522090911865
+        },
+        {
+          "frame": 631,
+          "signed_plane_gap_y_m": 0.0,
+          "rod_cylinder_axial_overlap_m": 0.0583672821521759
+        },
+        {
+          "frame": 634,
+          "signed_plane_gap_y_m": 0.0,
+          "rod_cylinder_axial_overlap_m": 0.05513864755630493
+        },
+        {
+          "frame": 637,
+          "signed_plane_gap_y_m": -1.4901161193847656e-08,
+          "rod_cylinder_axial_overlap_m": 0.05034568905830383
+        },
+        {
+          "frame": 640,
+          "signed_plane_gap_y_m": 0.0,
+          "rod_cylinder_axial_overlap_m": 0.04401242733001709
+        },
+        {
+          "frame": 643,
+          "signed_plane_gap_y_m": 0.0,
+          "rod_cylinder_axial_overlap_m": 0.03700000047683716
+        },
+        {
+          "frame": 646,
+          "signed_plane_gap_y_m": -1.4901161193847656e-08,
+          "rod_cylinder_axial_overlap_m": 0.02998754382133484
+        },
+        {
+          "frame": 649,
+          "signed_plane_gap_y_m": 0.0,
+          "rod_cylinder_axial_overlap_m": 0.023654311895370483
+        },
+        {
+          "frame": 652,
+          "signed_plane_gap_y_m": 0.0,
+          "rod_cylinder_axial_overlap_m": 0.018861353397369385
+        },
+        {
+          "frame": 655,
+          "signed_plane_gap_y_m": 0.0,
+          "rod_cylinder_axial_overlap_m": 0.015632718801498413
+        },
+        {
+          "frame": 658,
+          "signed_plane_gap_y_m": 0.0,
+          "rod_cylinder_axial_overlap_m": 0.014301478862762451
+        },
+        {
+          "frame": 661,
+          "signed_plane_gap_y_m": 0.0,
+          "rod_cylinder_axial_overlap_m": 0.013999998569488525
+        }
+      ]
+    }
+  }
+}

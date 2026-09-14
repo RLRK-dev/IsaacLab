@@ -1,0 +1,168 @@
+{
+  "native": "UR15_JB_initial_hands_v01.blend",
+  "native_sha256": "d8440b96b930c827602521d83d15c1e1508c0a4c073246d2620f00258c03ac39",
+  "motion": "hand_line_review_v01/motion.npz",
+  "motion_sha256": "6db0b358ba06be327f303d217cf5e566b16630b77404912de5a82e3318f53ca1",
+  "frame_end": 2040,
+  "scope_caption": "EVジャンクションボックス｜指先・動作の初期確認（内部は仮寸法）",
+  "phase_prefix": "",
+  "ranges": [
+    {
+      "first_frame": 1,
+      "last_frame": 201,
+      "camera": "xyz_stock"
+    },
+    {
+      "first_frame": 202,
+      "last_frame": 360,
+      "camera": "xyz_place"
+    },
+    {
+      "first_frame": 361,
+      "last_frame": 564,
+      "camera": "op020_supply"
+    },
+    {
+      "first_frame": 565,
+      "last_frame": 780,
+      "camera": "op020_insert"
+    },
+    {
+      "first_frame": 781,
+      "last_frame": 960,
+      "camera": "a_cell"
+    },
+    {
+      "first_frame": 961,
+      "last_frame": 1113,
+      "camera": "a_fastening"
+    },
+    {
+      "first_frame": 1114,
+      "last_frame": 1200,
+      "camera": "a_cell"
+    },
+    {
+      "first_frame": 1201,
+      "last_frame": 1320,
+      "camera": "b_stock"
+    },
+    {
+      "first_frame": 1321,
+      "last_frame": 1416,
+      "camera": "b_cell"
+    },
+    {
+      "first_frame": 1417,
+      "last_frame": 1491,
+      "camera": "b_fastening"
+    },
+    {
+      "first_frame": 1492,
+      "last_frame": 1548,
+      "camera": "b_fastening_other"
+    },
+    {
+      "first_frame": 1549,
+      "last_frame": 1620,
+      "camera": "b_cell"
+    },
+    {
+      "first_frame": 1621,
+      "last_frame": 1800,
+      "camera": "c_cell"
+    },
+    {
+      "first_frame": 1801,
+      "last_frame": 1920,
+      "camera": "c_insert"
+    },
+    {
+      "first_frame": 1921,
+      "last_frame": 2040,
+      "camera": "c_cell"
+    }
+  ],
+  "phases": [
+    {
+      "start_s": 0,
+      "stop_s": 2.4,
+      "label": "OP010｜XYZ直交・20個ストッカ｜筐体を把持"
+    },
+    {
+      "start_s": 2.4,
+      "stop_s": 6.7,
+      "label": "OP010｜姿勢を保ったまま持上げ・XY移載"
+    },
+    {
+      "start_s": 6.7,
+      "stop_s": 9.6,
+      "label": "OP010｜コンベア上のパレットへ設置・開放"
+    },
+    {
+      "start_s": 9.6,
+      "stop_s": 12,
+      "label": "OP010｜ハンド退避｜パレットの昇降なし"
+    },
+    {
+      "start_s": 12,
+      "stop_s": 18.8,
+      "label": "OP020｜単腕で剛体コネクターを取り出し・位置合わせ"
+    },
+    {
+      "start_s": 18.8,
+      "stop_s": 22.2,
+      "label": "OP020｜探り動作の軌道例 → 設備側の押込み軸"
+    },
+    {
+      "start_s": 22.2,
+      "stop_s": 26,
+      "label": "OP020｜押込み後に開放・上昇"
+    },
+    {
+      "start_s": 26,
+      "stop_s": 31.8,
+      "label": "OP030-A｜部品設置とボルト準備を並行"
+    },
+    {
+      "start_s": 31.8,
+      "stop_s": 36.6,
+      "label": "OP030-A｜片腕で保持を続け、工具腕で締結"
+    },
+    {
+      "start_s": 36.6,
+      "stop_s": 40,
+      "label": "OP030-A｜開放後、両腕を同時に上昇"
+    },
+    {
+      "start_s": 40,
+      "stop_s": 43.8,
+      "label": "OP030-B｜10本の並列ストックから両端を同時把持"
+    },
+    {
+      "start_s": 43.8,
+      "stop_s": 47.2,
+      "label": "OP030-B｜両端搬送・曲線配置の幾何モデル"
+    },
+    {
+      "start_s": 47.2,
+      "stop_s": 51,
+      "label": "OP030-B｜黒被覆・根元を保持｜設備側2工具で同時締結"
+    },
+    {
+      "start_s": 51,
+      "stop_s": 54,
+      "label": "OP030-B｜工具退避 → 同時開放 → 両腕同時上昇"
+    },
+    {
+      "start_s": 54,
+      "stop_s": 62.8,
+      "label": "OP030-C｜単腕で扱える制御コネクターの代表動作"
+    },
+    {
+      "start_s": 62.8,
+      "stop_s": 68,
+      "label": "OP030-C｜嵌合・開放・退避｜他の接続群は別途検討"
+    }
+  ]
+}

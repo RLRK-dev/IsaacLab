@@ -1,0 +1,130 @@
+{
+  "revision": "initial_hands_v01",
+  "scope": "Representative handling cycles for finger review, not a full production or electrical assembly validation",
+  "fps": 30,
+  "frame_end": 2040,
+  "conveyor_top_m": 0.789,
+  "return_conveyor_top_m": 0.3,
+  "pallet_size_m": [
+    0.4,
+    0.29,
+    0.032
+  ],
+  "housing_public_envelope_m": [
+    0.2921,
+    0.16,
+    0.09229
+  ],
+  "housing_drawing_sha256": "643648bcea77b4d7c37c65d073664f746f68689952da2d5ce932e3d10bd5a9e1",
+  "housing_body_width_initial_m": 0.26,
+  "housing_wall_initial_m": 0.003,
+  "op010": {
+    "mechanism": "XYZ Cartesian, no articulated arm",
+    "stock_rows": 4,
+    "stock_columns": 5,
+    "stock_capacity": 20,
+    "stock_pitch_m": [
+      0.335,
+      0.22
+    ],
+    "stock_center_m": [
+      -0.18,
+      -0.99,
+      0.825
+    ],
+    "hand": "H06, two opposed prismatic jaws with four contact patches",
+    "stock_orientation_fixed": true
+  },
+  "stations": {
+    "OP010": {
+      "x_m": 0.0,
+      "articulated_arms": 0,
+      "cartesian_axes": 3
+    },
+    "OP020": {
+      "x_m": 2.4,
+      "side": 1,
+      "articulated_arms": 1,
+      "representative_job": "One rigid external port connector, supported feed and axial insertion; full connector sequence not shown"
+    },
+    "OP030_A": {
+      "x_m": 4.8,
+      "side": -1,
+      "articulated_arms": 2,
+      "representative_job": "Round component placement while the other arm prepares a bolt, hold through fastening"
+    },
+    "OP030_B": {
+      "x_m": 7.2,
+      "side": 1,
+      "articulated_arms": 2,
+      "fixed_fastening_spindles": 2,
+      "representative_job": "Two endpoint grips with T050 and two equipment-mounted tools, simultaneous release/lift"
+    },
+    "OP030_C": {
+      "x_m": 9.6,
+      "side": -1,
+      "articulated_arms": 1,
+      "representative_job": "One supported control connector; other connection groups and total cell arm count are unresolved"
+    }
+  },
+  "op030_view_replay": "A/B/C views repeat the same parallel representative cycle on three distinct workpieces, not three consecutive production cycles",
+  "unpublished_geometry": "All internal placement, fasteners, connector envelopes, strokes, stock pitches and motion durations are initial review parameters",
+  "cable_shape": "Prescribed geometric centerline for visual review; no physical S-bend, bend-radius or loaded-grip claim",
+  "t050_reference": "Unchanged T050 meshes, uncrimped Klauke reference lug and legacy 14 mm sample wire; not selected Ampere part numbers",
+  "H01_initial_changes": {
+    "mechanism_lift_m": 0.05,
+    "contact_lift_m": 0.01,
+    "mechanism_y_tilt_deg": 15
+  },
+  "H05_initial_changes": {
+    "mechanism_lift_m": 0.035,
+    "extra_opening_per_side_m": 0.003
+  },
+  "B_robot_center_x_m": 7.2,
+  "B_provisional_flange_mounts": {
+    "B_left": {
+      "extension_m": 0.04,
+      "gripper_to_robot_yaw_deg": 90
+    },
+    "B_right": {
+      "extension_m": 0.12,
+      "gripper_to_robot_yaw_deg": 270
+    }
+  },
+  "initial_joint_seeds_rad": {
+    "A_hold": [
+      -1.2432033448356157,
+      -2.475823727419027,
+      -2.3149148516477442,
+      -2.5548024142587407,
+      -2.5321545991993557,
+      2.1677509335048164
+    ],
+    "A_tool": [
+      -0.6623794584887266,
+      -1.8440163662260325,
+      -2.4706839921165704,
+      -1.0653971105457618,
+      1.1209057055464138,
+      1.066809862601807
+    ],
+    "B_left": [
+      2.1465050463330906,
+      -2.467421937108769,
+      -2.1679359057933567,
+      -0.8330907257725011,
+      0.7576865120036764,
+      -0.6564008725034478
+    ],
+    "B_right": [
+      1.3289765956618198,
+      3.341724244093885,
+      -1.383067774087814,
+      2.360555270459818,
+      -2.5696062092678114,
+      1.1125290659534075
+    ]
+  },
+  "B_equipment_axes": "Each of two spindles has outboard X parking and Z feed; provisional supporting geometry",
+  "physical_acceptance_verdict": null
+}

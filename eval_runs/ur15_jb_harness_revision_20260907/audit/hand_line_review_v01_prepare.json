@@ -1,0 +1,217 @@
+{
+  "observed_at": "2026-09-15T02:08:50.215389+09:00",
+  "input_sha256": {
+    "/home/rlrk/src/ur15-line-render/assets/Universal_Robots_ROS2_Description/meshes/ur15/visual/base.dae": "c9d71006313dd957a92162bc78ca8ee1b841b189fb85771d83a115d16677e482",
+    "/home/rlrk/src/ur15-line-render/assets/Universal_Robots_ROS2_Description/meshes/ur15/visual/UR15_DIFF_8bit_2K.jpg": "24f6f9408be1dc1dd60df0fce90ae85d1e5e7a19aa9da603cd6251be8ef2af46",
+    "/home/rlrk/src/ur15-line-render/assets/Universal_Robots_ROS2_Description/meshes/ur15/visual/shoulder.dae": "9327c9065dc4fbb8fb5082330bef558fee6598b03424bea4399ea8ada75f04e1",
+    "/home/rlrk/src/ur15-line-render/assets/Universal_Robots_ROS2_Description/meshes/ur15/visual/upperarm.dae": "a794cc25ce3ecbaeb34ae6cd03b55bab4fd9990d2f7104986ebd6640d044b9d0",
+    "/home/rlrk/src/ur15-line-render/assets/Universal_Robots_ROS2_Description/meshes/ur15/visual/forearm.dae": "9b264db399a026a6876a4780ec3e55866c82f51b382d139080fd65105dd462ce",
+    "/home/rlrk/src/ur15-line-render/assets/Universal_Robots_ROS2_Description/meshes/ur15/visual/wrist1.dae": "350055a89b091529493f1e9bef660ac38cc9e234ce78b7f91401221c49a98b61",
+    "/home/rlrk/src/ur15-line-render/assets/Universal_Robots_ROS2_Description/meshes/ur15/visual/wrist2.dae": "07ecccfe96b1e0d065c5e2ded3fde4de0fa57d18203c9b6873feab71c5182fbc",
+    "/home/rlrk/src/ur15-line-render/assets/Universal_Robots_ROS2_Description/meshes/ur15/visual/wrist3.dae": "a6a0181aed8602ee423ac1ab8d47fa566b0d2afab12b0e350fc017ee2fff6b25",
+    "/home/rlrk/src/ur15-line-render/assets/robotiq/robotiq_2f_85_gripper_visualization/meshes/visual/robotiq_arg2f_85_base_link.dae": "d03d6e7395b0aa11ae7954b2f04a0a650448547d5d4f367238098ccd848b3eb5",
+    "/home/rlrk/src/ur15-line-render/assets/robotiq/robotiq_2f_85_gripper_visualization/meshes/visual/robotiq_gripper_coupling.stl": "4281e83002a25c20dc07c68b8d77da30a13e9a8401f157f6848ed8287d7cce44",
+    "/home/rlrk/src/ur15-line-render/assets/robotiq/robotiq_2f_85_gripper_visualization/meshes/visual/robotiq_arg2f_85_outer_finger.dae": "32d842e51e0ddd25b3354af212131befa191c183cf4cdb61f82ecbe5c5276323",
+    "/home/rlrk/src/ur15-line-render/assets/robotiq/robotiq_2f_85_gripper_visualization/meshes/visual/robotiq_arg2f_85_inner_finger.dae": "3172e8fe000fda75b9b29b48cd8cad4011d184a6df23eb2c3adb6c1f5a4eae93",
+    "/home/rlrk/src/ur15-line-render/assets/robotiq/robotiq_2f_85_gripper_visualization/meshes/visual/robotiq_arg2f_85_inner_knuckle.dae": "19b12510eec739a1a4655ff633ce3f02ad3c2eda2cb8f451df900ddfa76c8f14",
+    "/home/rlrk/src/ur15-line-render/assets/robotiq/robotiq_2f_85_gripper_visualization/meshes/visual/robotiq_arg2f_85_outer_knuckle.dae": "f1cc5198c9f3b06979af07d2944034b32acbb6130df5396dc2c7253cb656f587",
+    "/home/rlrk/IsaacLab/eval_runs/ur15_jb_harness_revision_20260907/inputs/v02_source/inputs/v01_source/inputs/UR15_monocular_camera_v01/source/ur15-dual-arm-cell/ur15-dual-arm-cell.urdf": "7f6828df8e27cf88b4190f581284abaf313524aa1bdfa791cfed40669003e0a1",
+    "/home/rlrk/IsaacLab-op040/eval_runs/ur15_jb_harness_revision_20260907/inputs/v02_source/inputs/v01_source/op010_base/original/render_ur15_line.py": "bab4737819cf90b7f59cd25e171a62b0f2a6fa9091df9ee7f61a9c7e27036ce7"
+  },
+  "implementation_sha256": {
+    "scripts/prepare_hand_line_review_v01.py": "8337afd2e7abf630a46e8421fc0be7667feb098a7607c8c13a7a364e6e79c8e4",
+    "scripts/hand_line_review_motion.py": "de2286a5cdd2422daed5ad0e544c3d31bee119ddce53ff472f94898d9961ff39",
+    "data/hand_line_review_v01.json": "b381f7336d518522475d250ae83ed6358f627ec474f02d9cb0d8bfaf9d2cb634"
+  },
+  "source_use": "UR15 forward kinematics, inverse kinematics and official visual meshes only; no old video or old assembly timing",
+  "hand_default": {
+    "observed_at": "2026-09-15T02:06:56.617207+09:00",
+    "config_sha256": "1cf2a19f24f753eb44b4e96fd7e73ee8bdfe5b97367a77bf8cfa0cf30a4d107c",
+    "candidate": "T050",
+    "default_state": "near",
+    "signed_world_x_rotation_deg": -14.999999999999998,
+    "mesh_count_excluding_guide": 20,
+    "states": [
+      "near",
+      "early",
+      "open",
+      "clear"
+    ],
+    "input_paths": {
+      "mesh": "/home/rlrk/Downloads/THREAD_フィンガ15度傾斜_v01_20260914/hand_clockwise_tilt_meshes_v01.json",
+      "observations": "/home/rlrk/Downloads/THREAD_フィンガ15度傾斜_v01_20260914/hand_clockwise_tilt_observations_v01.json",
+      "native_observations": "/home/rlrk/Downloads/THREAD_フィンガ15度傾斜_v01_20260914/hand_clockwise_tilt_native_v01.json",
+      "native": "/home/rlrk/Downloads/THREAD_フィンガ15度傾斜_v01_20260914/hand_clockwise_tilt_v01.blend",
+      "glb": "/home/rlrk/Downloads/THREAD_フィンガ15度傾斜_v01_20260914/hand_clockwise_tilt_T050_v01.glb"
+    },
+    "input_sha256": {
+      "mesh": "93d914c9eed05fc5b61e686b6cecca4420f6e4fd2b46c2d1eb8bf56fb900d95c",
+      "observations": "a8e2f40a4a4062bb3f75b34537dbda75fec4a020f25f710841bcb743e22f0dc3",
+      "native_observations": "be8b95f8e03af27dae85bb398cd10d4b5ad133c64ce400c0286070799c6b2b42",
+      "native": "a3bf9eeba0e1c16ed515d1dad99dbd31bc6b2dfa0dd869e41455d7d20b545d1c",
+      "glb": "e6443f4bd0765903097aaed12ba7d96aec44c751c9a05471e1e3cf9b0dd04603"
+    },
+    "source_candidate_objects_and_all_transforms_preserved": true,
+    "geometry_rebuilt": false,
+    "physical_acceptance_verdict": null
+  },
+  "hand_state_reconstruction": {
+    "H01": 2.220446049250313e-16,
+    "H04": 2.220446049250313e-16,
+    "H05": 1.1102230246251565e-16
+  },
+  "flange_observations": {
+    "OP020": {
+      "flange_position_max_error_m": 7.509825774533808e-10,
+      "sampled_joint_step_max_rad_including_edit_cuts": 0.05835826991701687,
+      "sampled_joint_step_max_rad_excluding_edit_cuts": 0.05835826991701687,
+      "joint_min_rad": [
+        1.3939636785873644,
+        -2.336650285378843,
+        -2.1896931538088715,
+        -1.3127655878542308,
+        1.5707963267948433,
+        1.3939636785873635
+      ],
+      "joint_max_rad": [
+        1.8466006330288156,
+        -1.481579164263098,
+        -1.1468589470470425,
+        -0.9097913066938896,
+        1.570796326794932,
+        1.8466006330288165
+      ]
+    },
+    "C": {
+      "flange_position_max_error_m": 1.418289568683046e-09,
+      "sampled_joint_step_max_rad_including_edit_cuts": 0.703984013425003,
+      "sampled_joint_step_max_rad_excluding_edit_cuts": 0.05168540455297954,
+      "joint_min_rad": [
+        -1.406633952798658,
+        -2.1505166935912143,
+        -2.173016725226987,
+        -1.3068317188112457,
+        1.5707963267948521,
+        -1.406633952798657
+      ],
+      "joint_max_rad": [
+        -0.7026499393623804,
+        -1.4767152769928384,
+        -1.4178820670092525,
+        -0.9336637361641222,
+        1.5707963267949934,
+        -0.7026499393624839
+      ]
+    },
+    "A_hold": {
+      "flange_position_max_error_m": 1.374665287944321e-09,
+      "sampled_joint_step_max_rad_including_edit_cuts": 1.4420486040094507,
+      "sampled_joint_step_max_rad_excluding_edit_cuts": 0.1124189445412096,
+      "joint_min_rad": [
+        -1.5696805006432824,
+        -3.3195322747412597,
+        -2.327346727189972,
+        -3.7716726237429987,
+        -2.617992799732105,
+        1.5730279763196044
+      ],
+      "joint_max_rad": [
+        -0.9704512528965203,
+        -2.475823727419027,
+        -0.7830075726334411,
+        -2.1249988108401685,
+        -2.3668382028646704,
+        2.510814602942421
+      ]
+    },
+    "A_tool": {
+      "flange_position_max_error_m": 1.0666324874426034e-09,
+      "sampled_joint_step_max_rad_including_edit_cuts": 0.9369572709049954,
+      "sampled_joint_step_max_rad_excluding_edit_cuts": 0.2106457569735385,
+      "joint_min_rad": [
+        -1.0465203544118133,
+        -2.8592188816510764,
+        -2.6040259951966847,
+        -1.10465042592742,
+        0.9120412846162314,
+        0.6854851839816507
+      ],
+      "joint_max_rad": [
+        -0.6623794584887266,
+        -1.8440163662260325,
+        -1.5038813310990786,
+        -0.6419134816322987,
+        1.1209057055464138,
+        1.066809862601807
+      ]
+    },
+    "B_left": {
+      "flange_position_max_error_m": 8.85002531664116e-10,
+      "sampled_joint_step_max_rad_including_edit_cuts": 2.0232664593393768,
+      "sampled_joint_step_max_rad_excluding_edit_cuts": 0.12463376646456137,
+      "joint_min_rad": [
+        1.8358020832265307,
+        -3.0899264141387506,
+        -2.176144717853714,
+        -0.6676586254332428,
+        0.6399693849573724,
+        -3.0301514308988384
+      ],
+      "joint_max_rad": [
+        2.0986003420968284,
+        -2.5698189690098436,
+        -1.7982416447805933,
+        0.2792029666969609,
+        0.7569148972255029,
+        -0.7303106878727523
+      ]
+    },
+    "B_right": {
+      "flange_position_max_error_m": 2.8375973682732446e-09,
+      "sampled_joint_step_max_rad_including_edit_cuts": 1.4266761339550564,
+      "sampled_joint_step_max_rad_excluding_edit_cuts": 0.07222909537104982,
+      "joint_min_rad": [
+        1.3158253719844595,
+        2.893570675132114,
+        -1.3706490892274572,
+        1.7828512097887206,
+        -2.609789940475352,
+        -0.27849731208425954
+      ],
+      "joint_max_rad": [
+        1.7014156182737903,
+        3.32414629341206,
+        -0.32459552498585476,
+        2.6786424560025184,
+        -2.3154850233617403,
+        1.3772008483737723
+      ]
+    }
+  },
+  "coarse_branch_observations": {
+    "A_hold/A_tool": {
+      "coarse_capsule_gap_m": -0.0057596075168618935,
+      "frame": 1475,
+      "not_mesh_or_physical_verdict": true
+    },
+    "B_left/B_right": {
+      "coarse_capsule_gap_m": -0.016203998454609264,
+      "frame": 1315,
+      "not_mesh_or_physical_verdict": true
+    }
+  },
+  "pair_search": {
+    "basis": "Saved-native branch surface comparison; all output paths are solved again",
+    "OP020": {
+      "complete_candidates": 3,
+      "minimum_elbow_or_wrist_origin_z_m": 1.1980738918641454
+    },
+    "C": {
+      "complete_candidates": 6,
+      "minimum_elbow_or_wrist_origin_z_m": 1.219502661375718
+    }
+  },
+  "motion_sha256": "6db0b358ba06be327f303d217cf5e566b16630b77404912de5a82e3318f53ca1",
+  "mesh_sha256": "0d9a9ef9db2df371e68b62a8c7183ca6471c30a5f9a3cbaaa5b24695e334a009",
+  "formal_physical_validity_verdict": null
+}

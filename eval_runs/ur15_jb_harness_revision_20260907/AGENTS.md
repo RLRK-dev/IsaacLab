@@ -352,3 +352,24 @@ numbers unknown until their basis and the scope of the product change are set.
 - The separate T050 page preserves all real meshes and four saved transforms,
   hiding the old guide cylinder. It adds no full tool envelope or interpolated
   arm motion. This step does not update line native files or produce a video.
+
+## Video restart and OP010 selection on 2026-09-14
+
+- The user explicitly resumed video production to adjust fingers while watching
+  motion. This supersedes the earlier video/arm-motion pause for the new review.
+  Include revised OP010, OP020 and the three OP030 station roles.
+- OP010 needs stock capacity for 20 housings. After first requesting a single
+  articulated arm, the user explicitly selected XYZ Cartesian handling instead.
+  Use a three-axis Cartesian robot and the provisional H06 opposed two-finger
+  hand; the initial two-axis and single-articulated-arm alternatives are historical.
+- The adopted public product drawing gives 292.10 x 160.00 x 92.29 mm including
+  mounting flanges, with connector projections additional. These are different
+  from the old v06 housing envelope. The measured input PDF SHA remains
+  643648bcea77b4d7c37c65d073664f746f68689952da2d5ce932e3d10bd5a9e1.
+- Keep unpublished internal dimensions and machine parameters identified as
+  initial review geometry. Do not claim that endpoint-driven cable deformation,
+  loaded grasp stability, manufacturing fit or real takt has been established.
+  Preserve the current hold-through-fastening and two-tool comparison.
+- Continue producing only the process review MP4 directly from process PNGs.
+  New line files must have new names; the pinned v06 and T050 source files stay
+  unchanged. Geometric observations and native readback remain auxiliary.

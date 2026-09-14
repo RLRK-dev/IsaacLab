@@ -1,0 +1,37 @@
+{
+  "observed_at": "2026-09-15T03:10:49.008996+09:00",
+  "delivery_folder": "/home/rlrk/Downloads/THREAD_OP010_OP030_初期ハンド動画_v02_20260915",
+  "manifest_sha256": "3f3524a1090704fae08e8b4fc7aad0a5d1c02a9d23bcf9b6aa10a28fc2e21323",
+  "files_verified": [
+    "UR15_JB_OP010_OP030_split_process_hands_v02_review.mp4",
+    "UR15_JB_initial_hands_v02.blend",
+    "README.md",
+    "audit/hand_line_review_v01_prepare.json",
+    "audit/hand_line_review_v01_build.json",
+    "audit/hand_line_review_v01_surface_probe.json",
+    "audit/hand_line_review_v01_pusher_correction.json",
+    "audit/UR15_JB_OP010_OP030_split_process_hands_v02_review_video.json",
+    "audit/hand_line_final_v02_render.log",
+    "previews/hand_line_final_v02/manifest.json",
+    "data/hand_line_review_v01_presentation.json",
+    "data/hand_line_review_v01.json",
+    "data/hand_line_review_v01/motion.npz",
+    "data/hand_line_review_v01/meshes.json.gz",
+    "source/package_hand_line_review_v01.py",
+    "source/build_hand_line_review_v01.py",
+    "source/probe_hand_line_review_v01.py",
+    "source/prepare_hand_line_review_v01.py",
+    "source/hand_line_review_motion.py",
+    "source/hand_line_review_geometry.py"
+  ],
+  "mp4_count": 1,
+  "video_sha256": "92fa622c8cf739ed4c4790d5cb68b4d42ac02e9f85e929c2fd8365f5e089449e",
+  "native_sha256": "313f3a30301afbdb4d7bc16a8b028fb0ebf62b9d953b6450efe81c13c34e7471",
+  "op010_motion_axes": [
+    "X",
+    "Y",
+    "Z"
+  ],
+  "op010_stock_capacity": 20,
+  "formal_physical_validity_verdict": null
+}

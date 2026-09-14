@@ -1,0 +1,251 @@
+{
+  "native_sha256": "313f3a30301afbdb4d7bc16a8b028fb0ebf62b9d953b6450efe81c13c34e7471",
+  "native_read_only": true,
+  "sampled_frames": [
+    1,
+    15,
+    29,
+    43,
+    57,
+    71,
+    85,
+    99,
+    113,
+    127,
+    141,
+    155,
+    169,
+    183,
+    197,
+    211,
+    225,
+    239,
+    253,
+    267,
+    281,
+    295,
+    309,
+    323,
+    337,
+    351,
+    361,
+    375,
+    389,
+    403,
+    417,
+    431,
+    445,
+    459,
+    473,
+    487,
+    501,
+    515,
+    529,
+    543,
+    557,
+    571,
+    585,
+    599,
+    613,
+    627,
+    641,
+    655,
+    669,
+    683,
+    697,
+    711,
+    725,
+    739,
+    753,
+    767,
+    781,
+    795,
+    809,
+    823,
+    829,
+    837,
+    851,
+    865,
+    879,
+    893,
+    901,
+    907,
+    921,
+    935,
+    949,
+    963,
+    973,
+    977,
+    991,
+    1005,
+    1015,
+    1019,
+    1033,
+    1047,
+    1061,
+    1075,
+    1089,
+    1101,
+    1103,
+    1111,
+    1117,
+    1131,
+    1135,
+    1145,
+    1155,
+    1159,
+    1173,
+    1185,
+    1187
+  ],
+  "method": "Evaluated mesh/curve triangle surface BVH overlap; no containment or continuous-path verdict",
+  "surface_intersections": {
+    "A_hold/A_tool": [],
+    "B_left/B_right": [],
+    "OP010_hand/OP010_stock_and_table": [],
+    "A_hold_distal/A_column": [],
+    "A_tool_distal/A_column": [],
+    "B_left_distal/B_column": [],
+    "B_right_distal/B_column": [],
+    "A_hold/A_work_fixture": [],
+    "B_left/B_work_fixture": [],
+    "B_right/B_work_fixture": [],
+    "B_left/B_tools_and_stock": [],
+    "B_right/B_tools_and_stock": [],
+    "C/C_work_fixture": [],
+    "OP020/OP020_work_fixture": [],
+    "OP020/OP020_pusher": []
+  },
+  "pallet_origin_heights_m": {
+    "1": {
+      "OP010_work_pallet": 0.7889999747276306,
+      "OP020_work_pallet": 0.7889999747276306,
+      "A_work_pallet": 0.7889999747276306,
+      "B_work_pallet": 0.7889999747276306,
+      "C_work_pallet": 0.7889999747276306
+    },
+    "251": {
+      "OP010_work_pallet": 0.7889999747276306,
+      "OP020_work_pallet": 0.7889999747276306,
+      "A_work_pallet": 0.7889999747276306,
+      "B_work_pallet": 0.7889999747276306,
+      "C_work_pallet": 0.7889999747276306
+    },
+    "631": {
+      "OP010_work_pallet": 0.7889999747276306,
+      "OP020_work_pallet": 0.7889999747276306,
+      "A_work_pallet": 0.7889999747276306,
+      "B_work_pallet": 0.7889999747276306,
+      "C_work_pallet": 0.7889999747276306
+    },
+    "991": {
+      "OP010_work_pallet": 0.7889999747276306,
+      "OP020_work_pallet": 0.7889999747276306,
+      "A_work_pallet": 0.7889999747276306,
+      "B_work_pallet": 0.7889999747276306,
+      "C_work_pallet": 0.7889999747276306
+    },
+    "1471": {
+      "OP010_work_pallet": 0.7889999747276306,
+      "OP020_work_pallet": 0.7889999747276306,
+      "A_work_pallet": 0.7889999747276306,
+      "B_work_pallet": 0.7889999747276306,
+      "C_work_pallet": 0.7889999747276306
+    },
+    "1881": {
+      "OP010_work_pallet": 0.7889999747276306,
+      "OP020_work_pallet": 0.7889999747276306,
+      "A_work_pallet": 0.7889999747276306,
+      "B_work_pallet": 0.7889999747276306,
+      "C_work_pallet": 0.7889999747276306
+    },
+    "2039": {
+      "OP010_work_pallet": 0.7889999747276306,
+      "OP020_work_pallet": 0.7889999747276306,
+      "A_work_pallet": 0.7889999747276306,
+      "B_work_pallet": 0.7889999747276306,
+      "C_work_pallet": 0.7889999747276306
+    }
+  },
+  "op020_pusher_contact_during_feed": [
+    {
+      "frame": 625,
+      "connector_rear_y_m": -0.15799999237060547,
+      "pusher_front_y_m": -0.15800000727176666,
+      "signed_gap_y_m": 1.4901161193847656e-08
+    },
+    {
+      "frame": 628,
+      "connector_rear_y_m": -0.15769851207733154,
+      "pusher_front_y_m": -0.15769852697849274,
+      "signed_gap_y_m": 1.4901161193847656e-08
+    },
+    {
+      "frame": 631,
+      "connector_rear_y_m": -0.15636728703975677,
+      "pusher_front_y_m": -0.15636728703975677,
+      "signed_gap_y_m": 0.0
+    },
+    {
+      "frame": 634,
+      "connector_rear_y_m": -0.1531386524438858,
+      "pusher_front_y_m": -0.1531386524438858,
+      "signed_gap_y_m": 0.0
+    },
+    {
+      "frame": 637,
+      "connector_rear_y_m": -0.1483456790447235,
+      "pusher_front_y_m": -0.14834566414356232,
+      "signed_gap_y_m": -1.4901161193847656e-08
+    },
+    {
+      "frame": 640,
+      "connector_rear_y_m": -0.14201243221759796,
+      "pusher_front_y_m": -0.14201243221759796,
+      "signed_gap_y_m": 0.0
+    },
+    {
+      "frame": 643,
+      "connector_rear_y_m": -0.13500000536441803,
+      "pusher_front_y_m": -0.13500000536441803,
+      "signed_gap_y_m": 0.0
+    },
+    {
+      "frame": 646,
+      "connector_rear_y_m": -0.1279875636100769,
+      "pusher_front_y_m": -0.1279875487089157,
+      "signed_gap_y_m": -1.4901161193847656e-08
+    },
+    {
+      "frame": 649,
+      "connector_rear_y_m": -0.12165431678295135,
+      "pusher_front_y_m": -0.12165431678295135,
+      "signed_gap_y_m": 0.0
+    },
+    {
+      "frame": 652,
+      "connector_rear_y_m": -0.11686134338378906,
+      "pusher_front_y_m": -0.11686134338378906,
+      "signed_gap_y_m": 0.0
+    },
+    {
+      "frame": 655,
+      "connector_rear_y_m": -0.11363272368907928,
+      "pusher_front_y_m": -0.11363272368907928,
+      "signed_gap_y_m": 0.0
+    },
+    {
+      "frame": 658,
+      "connector_rear_y_m": -0.11230148375034332,
+      "pusher_front_y_m": -0.11230148375034332,
+      "signed_gap_y_m": 0.0
+    },
+    {
+      "frame": 661,
+      "connector_rear_y_m": -0.1120000034570694,
+      "pusher_front_y_m": -0.1120000034570694,
+      "signed_gap_y_m": 0.0
+    }
+  ],
+  "physical_acceptance_verdict": null
+}
