@@ -1,0 +1,2161 @@
+{
+  "revision": "v01",
+  "observed_at": "2026-09-15T06:51:16.267479+09:00",
+  "status": "partial_photo_correspondence_before_motion",
+  "photo_basis": "overview",
+  "photos": {
+    "overview": {
+      "file": "references/op040_real_products_20260912/ampere_product_photo_1.jpg",
+      "url": "https://ampereev.com/wp-content/uploads/2022/05/DSC02860-1.jpg",
+      "sha256": "5724681b4bef4399f0799751a62577e48ef9b7fd3d6ed5b56d85fd95924937ad",
+      "size_px": [
+        1620,
+        1080
+      ]
+    },
+    "detail": {
+      "file": "references/op040_real_products_20260912/ampere_product_photo_2.jpg",
+      "url": "https://ampereev.com/wp-content/uploads/2022/05/DSC02864.jpg",
+      "sha256": "5ae831226050fb2430894f3a0462d87c1ffa8991fad453bb8945b2c983233b2e",
+      "size_px": [
+        1620,
+        1080
+      ]
+    },
+    "side": {
+      "file": "references/op040_real_products_20260912/ampere_product_photo_3.jpg",
+      "url": "https://ampereev.com/wp-content/uploads/2022/05/DSC02878.jpg",
+      "sha256": "b654a278aec9b1a5c2e45b08f30cedd3b08b4f10003dd74a6c39579aa8278f70",
+      "size_px": [
+        1620,
+        1080
+      ]
+    }
+  },
+  "parts": [
+    {
+      "id": "P01",
+      "name_ja": "黒い筐体・四隅の蓋ねじボス",
+      "profile": "case",
+      "rect_px": [
+        211,
+        201,
+        1160,
+        708
+      ],
+      "note_ja": "筐体外形は公開図。内部加工・ボス詳細は未公開。",
+      "model_id": "REF_P01",
+      "photo": "overview",
+      "manufacturing_dimensions_m": null,
+      "part_number": null,
+      "physical_bom_quantity": null
+    },
+    {
+      "id": "P02",
+      "name_ja": "GIGAVAC表示の主接触器",
+      "profile": "contactor",
+      "rect_px": [
+        621,
+        509,
+        466,
+        266
+      ],
+      "note_ja": "製品機能と写真は対応。GX14は候補に留め、末尾仕様は未同定。",
+      "model_id": "REF_P02",
+      "photo": "overview",
+      "manufacturing_dimensions_m": null,
+      "part_number": null,
+      "physical_bom_quantity": null
+    },
+    {
+      "id": "P03",
+      "name_ja": "写真上側の角形リレー本体",
+      "profile": "relay",
+      "rect_px": [
+        453,
+        291,
+        142,
+        142
+      ],
+      "note_ja": "プリチャージ／放電のどちらかは未対応。",
+      "model_id": "REF_P03",
+      "photo": "overview",
+      "manufacturing_dimensions_m": null,
+      "part_number": null,
+      "physical_bom_quantity": null
+    },
+    {
+      "id": "P04",
+      "name_ja": "写真下側の角形リレー本体",
+      "profile": "relay",
+      "rect_px": [
+        432,
+        494,
+        160,
+        171
+      ],
+      "note_ja": "プリチャージ／放電のどちらかは未対応。",
+      "model_id": "REF_P04",
+      "photo": "overview",
+      "manufacturing_dimensions_m": null,
+      "part_number": null,
+      "physical_bom_quantity": null
+    },
+    {
+      "id": "P05",
+      "name_ja": "上部左の筒状ヒューズ",
+      "profile": "fuse",
+      "rect_px": [
+        621,
+        269,
+        184,
+        84
+      ],
+      "note_ja": "胴と両端が見える。補機系統・電流値への割当は未確定。",
+      "model_id": "REF_P05",
+      "photo": "overview",
+      "manufacturing_dimensions_m": null,
+      "part_number": null,
+      "physical_bom_quantity": null
+    },
+    {
+      "id": "P06",
+      "name_ja": "上部右の筒状ヒューズ",
+      "profile": "fuse",
+      "rect_px": [
+        897,
+        267,
+        183,
+        79
+      ],
+      "note_ja": "胴と両端が見える。補機系統・電流値への割当は未確定。",
+      "model_id": "REF_P06",
+      "photo": "overview",
+      "manufacturing_dimensions_m": null,
+      "part_number": null,
+      "physical_bom_quantity": null
+    },
+    {
+      "id": "P07",
+      "name_ja": "後方の細長い灰色部材",
+      "profile": "rear_rail",
+      "rect_px": [
+        556,
+        216,
+        585,
+        55
+      ],
+      "note_ja": "見える外形を記録。抵抗・保持部との機能対応は未確定。",
+      "model_id": "REF_P07",
+      "photo": "overview",
+      "manufacturing_dimensions_m": null,
+      "part_number": null,
+      "physical_bom_quantity": null
+    },
+    {
+      "id": "P08",
+      "name_ja": "中央の黒い幅広部材",
+      "profile": "central_cover",
+      "rect_px": [
+        718,
+        343,
+        250,
+        193
+      ],
+      "note_ja": "見える外形を記録。カバーか絶縁部か、下側の部品は未確定。",
+      "model_id": "REF_P08",
+      "photo": "overview",
+      "manufacturing_dimensions_m": null,
+      "part_number": null,
+      "physical_bom_quantity": null
+    },
+    {
+      "id": "P09",
+      "name_ja": "左主端子から内側へ延びる板状導体",
+      "profile": "bus_left_upper",
+      "rect_px": [
+        348,
+        414,
+        374,
+        105
+      ],
+      "note_ja": "中央で隠れる。右側導体との一体性は未確定。",
+      "model_id": "REF_P09",
+      "photo": "overview",
+      "manufacturing_dimensions_m": null,
+      "part_number": null,
+      "physical_bom_quantity": null
+    },
+    {
+      "id": "P10",
+      "name_ja": "右主端子から内側へ延びる板状導体",
+      "profile": "bus_right_upper",
+      "rect_px": [
+        963,
+        383,
+        242,
+        151
+      ],
+      "note_ja": "中央で隠れる。左側導体との一体性は未確定。",
+      "model_id": "REF_P10",
+      "photo": "overview",
+      "manufacturing_dimensions_m": null,
+      "part_number": null,
+      "physical_bom_quantity": null
+    },
+    {
+      "id": "P11",
+      "name_ja": "左下主端子付近の板状導体",
+      "profile": "bus_left_lower",
+      "rect_px": [
+        345,
+        576,
+        97,
+        160
+      ],
+      "note_ja": "下側の接続部と重なる。製造部品としての分割は未確定。",
+      "model_id": "REF_P11",
+      "photo": "overview",
+      "manufacturing_dimensions_m": null,
+      "part_number": null,
+      "physical_bom_quantity": null
+    },
+    {
+      "id": "P12",
+      "name_ja": "接触器右端子と右下主端子間の板状導体",
+      "profile": "bus_right_lower",
+      "rect_px": [
+        1002,
+        564,
+        214,
+        104
+      ],
+      "note_ja": "板と2か所の締結点が見える。座金・端子の積層は未確定。",
+      "model_id": "REF_P12",
+      "photo": "overview",
+      "manufacturing_dimensions_m": null,
+      "part_number": null,
+      "physical_bom_quantity": null
+    },
+    {
+      "id": "P13",
+      "name_ja": "前方の複数ねじ付き板状導体",
+      "profile": "bus_front",
+      "rect_px": [
+        354,
+        697,
+        326,
+        63
+      ],
+      "note_ja": "丸端子が重なる。導体の裏側と他部材との境界は未確定。",
+      "model_id": "REF_P13",
+      "photo": "overview",
+      "manufacturing_dimensions_m": null,
+      "part_number": null,
+      "physical_bom_quantity": null
+    },
+    {
+      "id": "P14",
+      "name_ja": "左側の主2極ハウジング",
+      "profile": "main_left",
+      "rect_px": [
+        137,
+        418,
+        218,
+        269
+      ],
+      "note_ja": "Amphenol表示の公開図と外観に対応。詳細型式・寸法は未確定。",
+      "model_id": "REF_P14",
+      "photo": "overview",
+      "manufacturing_dimensions_m": null,
+      "part_number": null,
+      "physical_bom_quantity": null
+    },
+    {
+      "id": "P15",
+      "name_ja": "右側の主2極ハウジング",
+      "profile": "main_right",
+      "rect_px": [
+        1237,
+        413,
+        187,
+        273
+      ],
+      "note_ja": "Amphenol表示の公開図と外観に対応。詳細型式・寸法は未確定。",
+      "model_id": "REF_P15",
+      "photo": "overview",
+      "manufacturing_dimensions_m": null,
+      "part_number": null,
+      "physical_bom_quantity": null
+    },
+    {
+      "id": "P16",
+      "name_ja": "前面3口外部ヘッダー",
+      "profile": "header_three",
+      "rect_px": [
+        322,
+        855,
+        485,
+        158
+      ],
+      "note_ja": "2103340-1公式CAD。キーA/D/Eを公開図へ照合。",
+      "model_id": "REF_P16",
+      "photo": "overview",
+      "manufacturing_dimensions_m": null,
+      "part_number": "2103340-1",
+      "physical_bom_quantity": null
+    },
+    {
+      "id": "P17",
+      "name_ja": "前面2口外部ヘッダー",
+      "profile": "header_two",
+      "rect_px": [
+        920,
+        852,
+        314,
+        161
+      ],
+      "note_ja": "2103346-2公式CAD。キーD/Fを公開図へ照合。",
+      "model_id": "REF_P17",
+      "photo": "overview",
+      "manufacturing_dimensions_m": null,
+      "part_number": "2103346-2",
+      "physical_bom_quantity": null
+    },
+    {
+      "id": "P18",
+      "name_ja": "奥側の黒い低圧12極ハウジング",
+      "profile": "lv_header",
+      "rect_px": [
+        377,
+        123,
+        94,
+        89
+      ],
+      "note_ja": "公開図は12極。メーカー・キー・品番は未確定。",
+      "model_id": "REF_P18",
+      "photo": "overview",
+      "manufacturing_dimensions_m": null,
+      "part_number": null,
+      "physical_bom_quantity": null
+    },
+    {
+      "id": "I01",
+      "name_ja": "補機口1の内側ハウジング（キーA）",
+      "profile": "inner_header",
+      "rect_px": [
+        380,
+        789,
+        81,
+        72
+      ],
+      "part_number": "2103245-1",
+      "bay": 0,
+      "note_ja": "外部ハウジングと別部品。公式CADを使用。圧着端子・シールの全構成は未確定。",
+      "model_id": "REF_I01",
+      "photo": "overview",
+      "manufacturing_dimensions_m": null,
+      "physical_bom_quantity": null
+    },
+    {
+      "id": "I02",
+      "name_ja": "補機口2の内側ハウジング（キーD）",
+      "profile": "inner_header",
+      "rect_px": [
+        535,
+        789,
+        81,
+        72
+      ],
+      "part_number": "2103245-4",
+      "bay": 1,
+      "note_ja": "外部ハウジングと別部品。公式CADを使用。圧着端子・シールの全構成は未確定。",
+      "model_id": "REF_I02",
+      "photo": "overview",
+      "manufacturing_dimensions_m": null,
+      "physical_bom_quantity": null
+    },
+    {
+      "id": "I03",
+      "name_ja": "補機口3の内側ハウジング（キーE）",
+      "profile": "inner_header",
+      "rect_px": [
+        680,
+        789,
+        81,
+        72
+      ],
+      "part_number": "2103245-5",
+      "bay": 2,
+      "note_ja": "外部ハウジングと別部品。公式CADを使用。圧着端子・シールの全構成は未確定。",
+      "model_id": "REF_I03",
+      "photo": "overview",
+      "manufacturing_dimensions_m": null,
+      "physical_bom_quantity": null
+    },
+    {
+      "id": "I04",
+      "name_ja": "補機口4の内側ハウジング（キーD）",
+      "profile": "inner_header",
+      "rect_px": [
+        973,
+        789,
+        81,
+        72
+      ],
+      "part_number": "2103245-4",
+      "bay": 3,
+      "note_ja": "外部ハウジングと別部品。公式CADを使用。圧着端子・シールの全構成は未確定。",
+      "model_id": "REF_I04",
+      "photo": "overview",
+      "manufacturing_dimensions_m": null,
+      "physical_bom_quantity": null
+    },
+    {
+      "id": "I05",
+      "name_ja": "補機口5の内側ハウジング（キーF）",
+      "profile": "inner_header",
+      "rect_px": [
+        1115,
+        789,
+        81,
+        72
+      ],
+      "part_number": "2103245-6",
+      "bay": 4,
+      "note_ja": "外部ハウジングと別部品。公式CADを使用。圧着端子・シールの全構成は未確定。",
+      "model_id": "REF_I05",
+      "photo": "overview",
+      "manufacturing_dimensions_m": null,
+      "physical_bom_quantity": null
+    },
+    {
+      "id": "T31",
+      "name_ja": "P03上面の差込端末外装1",
+      "profile": "relay_terminal",
+      "rect_px": [
+        470,
+        291,
+        53,
+        44
+      ],
+      "relay": "P03",
+      "render_color": "translucent",
+      "note_ja": "外装を各1個ずつ記録。金属端子・絶縁外装の品番、極性、係合条件は未確定。",
+      "model_id": "REF_T31",
+      "photo": "overview",
+      "manufacturing_dimensions_m": null,
+      "part_number": null,
+      "physical_bom_quantity": null
+    },
+    {
+      "id": "T32",
+      "name_ja": "P03上面の差込端末外装2",
+      "profile": "relay_terminal",
+      "rect_px": [
+        510,
+        369,
+        44,
+        44
+      ],
+      "relay": "P03",
+      "render_color": "translucent",
+      "note_ja": "外装を各1個ずつ記録。金属端子・絶縁外装の品番、極性、係合条件は未確定。",
+      "model_id": "REF_T32",
+      "photo": "overview",
+      "manufacturing_dimensions_m": null,
+      "part_number": null,
+      "physical_bom_quantity": null
+    },
+    {
+      "id": "T33",
+      "name_ja": "P03上面の差込端末外装3",
+      "profile": "relay_terminal",
+      "rect_px": [
+        537,
+        321,
+        46,
+        58
+      ],
+      "relay": "P03",
+      "render_color": "ivory",
+      "note_ja": "外装を各1個ずつ記録。金属端子・絶縁外装の品番、極性、係合条件は未確定。",
+      "model_id": "REF_T33",
+      "photo": "overview",
+      "manufacturing_dimensions_m": null,
+      "part_number": null,
+      "physical_bom_quantity": null
+    },
+    {
+      "id": "T34",
+      "name_ja": "P03上面の差込端末外装4",
+      "profile": "relay_terminal",
+      "rect_px": [
+        487,
+        318,
+        40,
+        59
+      ],
+      "relay": "P03",
+      "render_color": "ivory",
+      "note_ja": "外装を各1個ずつ記録。金属端子・絶縁外装の品番、極性、係合条件は未確定。",
+      "model_id": "REF_T34",
+      "photo": "overview",
+      "manufacturing_dimensions_m": null,
+      "part_number": null,
+      "physical_bom_quantity": null
+    },
+    {
+      "id": "T41",
+      "name_ja": "P04上面の差込端末外装1",
+      "profile": "relay_terminal",
+      "rect_px": [
+        443,
+        538,
+        44,
+        69
+      ],
+      "relay": "P04",
+      "render_color": "translucent",
+      "note_ja": "外装を各1個ずつ記録。金属端子・絶縁外装の品番、極性、係合条件は未確定。",
+      "model_id": "REF_T41",
+      "photo": "overview",
+      "manufacturing_dimensions_m": null,
+      "part_number": null,
+      "physical_bom_quantity": null
+    },
+    {
+      "id": "T42",
+      "name_ja": "P04上面の差込端末外装2",
+      "profile": "relay_terminal",
+      "rect_px": [
+        545,
+        523,
+        43,
+        70
+      ],
+      "relay": "P04",
+      "render_color": "translucent",
+      "note_ja": "外装を各1個ずつ記録。金属端子・絶縁外装の品番、極性、係合条件は未確定。",
+      "model_id": "REF_T42",
+      "photo": "overview",
+      "manufacturing_dimensions_m": null,
+      "part_number": null,
+      "physical_bom_quantity": null
+    },
+    {
+      "id": "T43",
+      "name_ja": "P04上面の差込端末外装3",
+      "profile": "relay_terminal",
+      "rect_px": [
+        476,
+        508,
+        63,
+        48
+      ],
+      "relay": "P04",
+      "render_color": "ivory",
+      "note_ja": "外装を各1個ずつ記録。金属端子・絶縁外装の品番、極性、係合条件は未確定。",
+      "model_id": "REF_T43",
+      "photo": "overview",
+      "manufacturing_dimensions_m": null,
+      "part_number": null,
+      "physical_bom_quantity": null
+    },
+    {
+      "id": "T44",
+      "name_ja": "P04上面の差込端末外装4",
+      "profile": "relay_terminal",
+      "rect_px": [
+        486,
+        604,
+        61,
+        41
+      ],
+      "relay": "P04",
+      "render_color": "ivory",
+      "note_ja": "外装を各1個ずつ記録。金属端子・絶縁外装の品番、極性、係合条件は未確定。",
+      "model_id": "REF_T44",
+      "photo": "overview",
+      "manufacturing_dimensions_m": null,
+      "part_number": null,
+      "physical_bom_quantity": null
+    }
+  ],
+  "visible_wire_segments": [
+    {
+      "id": "W01",
+      "name_ja": "上側左・太い橙線",
+      "photo": "overview",
+      "polyline_px": [
+        [
+          344,
+          344
+        ],
+        [
+          348,
+          292
+        ],
+        [
+          371,
+          265
+        ],
+        [
+          405,
+          269
+        ],
+        [
+          459,
+          281
+        ],
+        [
+          526,
+          282
+        ],
+        [
+          557,
+          278
+        ]
+      ],
+      "display_diameter_m": 0.0048,
+      "display_color": "orange",
+      "nearby_features": [
+        null,
+        "J14"
+      ],
+      "model_id": "REF_W01",
+      "physical_endpoints": [
+        null,
+        null
+      ],
+      "electrical_group": null,
+      "occluded_continuation_resolved": false,
+      "note_ja": "可視区間の手動トレース。近傍部品への電気接続を確定せず、隠れた続きは描かない。"
+    },
+    {
+      "id": "W02",
+      "name_ja": "上側左・細い橙線",
+      "photo": "overview",
+      "polyline_px": [
+        [
+          337,
+          407
+        ],
+        [
+          339,
+          352
+        ],
+        [
+          355,
+          311
+        ],
+        [
+          389,
+          295
+        ],
+        [
+          451,
+          290
+        ],
+        [
+          506,
+          288
+        ]
+      ],
+      "display_diameter_m": 0.0025,
+      "display_color": "orange",
+      "nearby_features": [
+        null,
+        null
+      ],
+      "model_id": "REF_W02",
+      "physical_endpoints": [
+        null,
+        null
+      ],
+      "electrical_group": null,
+      "occluded_continuation_resolved": false,
+      "note_ja": "可視区間の手動トレース。近傍部品への電気接続を確定せず、隠れた続きは描かない。"
+    },
+    {
+      "id": "W03",
+      "name_ja": "上側右の橙線",
+      "photo": "overview",
+      "polyline_px": [
+        [
+          1125,
+          268
+        ],
+        [
+          1169,
+          253
+        ],
+        [
+          1210,
+          231
+        ],
+        [
+          1222,
+          235
+        ],
+        [
+          1232,
+          277
+        ],
+        [
+          1238,
+          375
+        ]
+      ],
+      "display_diameter_m": 0.0048,
+      "display_color": "orange",
+      "nearby_features": [
+        "J17",
+        null
+      ],
+      "model_id": "REF_W03",
+      "physical_endpoints": [
+        null,
+        null
+      ],
+      "electrical_group": null,
+      "occluded_continuation_resolved": false,
+      "note_ja": "可視区間の手動トレース。近傍部品への電気接続を確定せず、隠れた続きは描かない。"
+    },
+    {
+      "id": "W04",
+      "name_ja": "前方の長い橙線・上側",
+      "photo": "overview",
+      "polyline_px": [
+        [
+          643,
+          739
+        ],
+        [
+          690,
+          759
+        ],
+        [
+          768,
+          790
+        ],
+        [
+          856,
+          795
+        ],
+        [
+          974,
+          789
+        ],
+        [
+          1081,
+          756
+        ],
+        [
+          1207,
+          722
+        ],
+        [
+          1260,
+          715
+        ]
+      ],
+      "display_diameter_m": 0.0032,
+      "display_color": "orange",
+      "nearby_features": [
+        "J13",
+        null
+      ],
+      "model_id": "REF_W04",
+      "physical_endpoints": [
+        null,
+        null
+      ],
+      "electrical_group": null,
+      "occluded_continuation_resolved": false,
+      "note_ja": "可視区間の手動トレース。近傍部品への電気接続を確定せず、隠れた続きは描かない。"
+    },
+    {
+      "id": "W05",
+      "name_ja": "前方の長い橙線・下側",
+      "photo": "overview",
+      "polyline_px": [
+        [
+          579,
+          739
+        ],
+        [
+          652,
+          780
+        ],
+        [
+          727,
+          812
+        ],
+        [
+          794,
+          820
+        ],
+        [
+          893,
+          807
+        ],
+        [
+          988,
+          788
+        ],
+        [
+          1093,
+          770
+        ]
+      ],
+      "display_diameter_m": 0.0032,
+      "display_color": "orange",
+      "nearby_features": [
+        "J12",
+        null
+      ],
+      "model_id": "REF_W05",
+      "physical_endpoints": [
+        null,
+        null
+      ],
+      "electrical_group": null,
+      "occluded_continuation_resolved": false,
+      "note_ja": "可視区間の手動トレース。近傍部品への電気接続を確定せず、隠れた続きは描かない。"
+    },
+    {
+      "id": "W06",
+      "name_ja": "左下の折返し橙線",
+      "photo": "overview",
+      "polyline_px": [
+        [
+          366,
+          690
+        ],
+        [
+          334,
+          672
+        ],
+        [
+          303,
+          679
+        ],
+        [
+          292,
+          704
+        ],
+        [
+          317,
+          727
+        ],
+        [
+          374,
+          744
+        ]
+      ],
+      "display_diameter_m": 0.0032,
+      "display_color": "orange",
+      "nearby_features": [
+        null,
+        "J09"
+      ],
+      "model_id": "REF_W06",
+      "physical_endpoints": [
+        null,
+        null
+      ],
+      "electrical_group": null,
+      "occluded_continuation_resolved": false,
+      "note_ja": "可視区間の手動トレース。近傍部品への電気接続を確定せず、隠れた続きは描かない。"
+    },
+    {
+      "id": "W07",
+      "name_ja": "左下の内側橙線",
+      "photo": "overview",
+      "polyline_px": [
+        [
+          354,
+          659
+        ],
+        [
+          315,
+          659
+        ],
+        [
+          293,
+          680
+        ],
+        [
+          304,
+          695
+        ],
+        [
+          346,
+          708
+        ],
+        [
+          397,
+          739
+        ]
+      ],
+      "display_diameter_m": 0.0025,
+      "display_color": "orange",
+      "nearby_features": [
+        null,
+        null
+      ],
+      "model_id": "REF_W07",
+      "physical_endpoints": [
+        null,
+        null
+      ],
+      "electrical_group": null,
+      "occluded_continuation_resolved": false,
+      "note_ja": "可視区間の手動トレース。近傍部品への電気接続を確定せず、隠れた続きは描かない。"
+    },
+    {
+      "id": "W08",
+      "name_ja": "下側リレー左の橙線",
+      "photo": "overview",
+      "polyline_px": [
+        [
+          457,
+          575
+        ],
+        [
+          456,
+          544
+        ],
+        [
+          457,
+          506
+        ],
+        [
+          466,
+          499
+        ],
+        [
+          479,
+          499
+        ]
+      ],
+      "display_diameter_m": 0.0018,
+      "display_color": "orange",
+      "nearby_features": [
+        "T41",
+        null
+      ],
+      "model_id": "REF_W08",
+      "physical_endpoints": [
+        null,
+        null
+      ],
+      "electrical_group": null,
+      "occluded_continuation_resolved": false,
+      "note_ja": "可視区間の手動トレース。近傍部品への電気接続を確定せず、隠れた続きは描かない。"
+    },
+    {
+      "id": "W09",
+      "name_ja": "下側リレー横断の橙線",
+      "photo": "overview",
+      "polyline_px": [
+        [
+          470,
+          518
+        ],
+        [
+          494,
+          530
+        ],
+        [
+          527,
+          549
+        ],
+        [
+          553,
+          574
+        ]
+      ],
+      "display_diameter_m": 0.0018,
+      "display_color": "orange",
+      "nearby_features": [
+        null,
+        "T42"
+      ],
+      "model_id": "REF_W09",
+      "physical_endpoints": [
+        null,
+        null
+      ],
+      "electrical_group": null,
+      "occluded_continuation_resolved": false,
+      "note_ja": "可視区間の手動トレース。近傍部品への電気接続を確定せず、隠れた続きは描かない。"
+    },
+    {
+      "id": "W10",
+      "name_ja": "下側リレー右側から延びる橙線",
+      "photo": "overview",
+      "polyline_px": [
+        [
+          551,
+          606
+        ],
+        [
+          577,
+          594
+        ],
+        [
+          605,
+          588
+        ],
+        [
+          622,
+          592
+        ]
+      ],
+      "display_diameter_m": 0.0025,
+      "display_color": "orange",
+      "nearby_features": [
+        "T44",
+        null
+      ],
+      "model_id": "REF_W10",
+      "physical_endpoints": [
+        null,
+        null
+      ],
+      "electrical_group": null,
+      "occluded_continuation_resolved": false,
+      "note_ja": "可視区間の手動トレース。近傍部品への電気接続を確定せず、隠れた続きは描かない。"
+    },
+    {
+      "id": "W11",
+      "name_ja": "中央束の桃色線",
+      "photo": "overview",
+      "polyline_px": [
+        [
+          564,
+          515
+        ],
+        [
+          637,
+          516
+        ],
+        [
+          706,
+          494
+        ],
+        [
+          755,
+          491
+        ],
+        [
+          801,
+          506
+        ],
+        [
+          863,
+          529
+        ]
+      ],
+      "display_diameter_m": 0.0017,
+      "display_color": "pink",
+      "nearby_features": [
+        null,
+        null
+      ],
+      "model_id": "REF_W11",
+      "physical_endpoints": [
+        null,
+        null
+      ],
+      "electrical_group": null,
+      "occluded_continuation_resolved": false,
+      "note_ja": "可視区間の手動トレース。近傍部品への電気接続を確定せず、隠れた続きは描かない。"
+    },
+    {
+      "id": "W12",
+      "name_ja": "中央束の青色線",
+      "photo": "overview",
+      "polyline_px": [
+        [
+          576,
+          520
+        ],
+        [
+          642,
+          521
+        ],
+        [
+          711,
+          502
+        ],
+        [
+          757,
+          505
+        ],
+        [
+          811,
+          526
+        ],
+        [
+          869,
+          538
+        ]
+      ],
+      "display_diameter_m": 0.0017,
+      "display_color": "blue",
+      "nearby_features": [
+        null,
+        null
+      ],
+      "model_id": "REF_W12",
+      "physical_endpoints": [
+        null,
+        null
+      ],
+      "electrical_group": null,
+      "occluded_continuation_resolved": false,
+      "note_ja": "可視区間の手動トレース。近傍部品への電気接続を確定せず、隠れた続きは描かない。"
+    },
+    {
+      "id": "W13",
+      "name_ja": "中央束の白色線",
+      "photo": "overview",
+      "polyline_px": [
+        [
+          676,
+          517
+        ],
+        [
+          719,
+          537
+        ],
+        [
+          757,
+          537
+        ],
+        [
+          803,
+          538
+        ]
+      ],
+      "display_diameter_m": 0.0016,
+      "display_color": "ivory",
+      "nearby_features": [
+        null,
+        null
+      ],
+      "model_id": "REF_W13",
+      "physical_endpoints": [
+        null,
+        null
+      ],
+      "electrical_group": null,
+      "occluded_continuation_resolved": false,
+      "note_ja": "可視区間の手動トレース。近傍部品への電気接続を確定せず、隠れた続きは描かない。"
+    },
+    {
+      "id": "W14",
+      "name_ja": "中央束の黒色線",
+      "photo": "overview",
+      "polyline_px": [
+        [
+          332,
+          437
+        ],
+        [
+          382,
+          467
+        ],
+        [
+          445,
+          490
+        ],
+        [
+          555,
+          491
+        ],
+        [
+          642,
+          511
+        ],
+        [
+          713,
+          528
+        ],
+        [
+          787,
+          526
+        ]
+      ],
+      "display_diameter_m": 0.002,
+      "display_color": "black",
+      "nearby_features": [
+        null,
+        null
+      ],
+      "model_id": "REF_W14",
+      "physical_endpoints": [
+        null,
+        null
+      ],
+      "electrical_group": null,
+      "occluded_continuation_resolved": false,
+      "note_ja": "可視区間の手動トレース。近傍部品への電気接続を確定せず、隠れた続きは描かない。"
+    },
+    {
+      "id": "WI11",
+      "name_ja": "補機口1内側の線出口1",
+      "photo": "overview",
+      "polyline_px": [
+        [
+          407,
+          834
+        ],
+        [
+          407,
+          815
+        ],
+        [
+          409,
+          797
+        ]
+      ],
+      "display_diameter_m": 0.003,
+      "display_color": "orange",
+      "nearby_features": [
+        "I01",
+        null
+      ],
+      "model_id": "REF_WI11",
+      "physical_endpoints": [
+        null,
+        null
+      ],
+      "electrical_group": null,
+      "occluded_continuation_resolved": false,
+      "note_ja": "見える2本の出口。裏面視点の左右から1番/2番の極性を推定せず、端子品番も未選定。"
+    },
+    {
+      "id": "WI12",
+      "name_ja": "補機口1内側の線出口2",
+      "photo": "overview",
+      "polyline_px": [
+        [
+          428,
+          834
+        ],
+        [
+          428,
+          815
+        ],
+        [
+          430,
+          797
+        ]
+      ],
+      "display_diameter_m": 0.003,
+      "display_color": "orange",
+      "nearby_features": [
+        "I01",
+        null
+      ],
+      "model_id": "REF_WI12",
+      "physical_endpoints": [
+        null,
+        null
+      ],
+      "electrical_group": null,
+      "occluded_continuation_resolved": false,
+      "note_ja": "見える2本の出口。裏面視点の左右から1番/2番の極性を推定せず、端子品番も未選定。"
+    },
+    {
+      "id": "WI21",
+      "name_ja": "補機口2内側の線出口1",
+      "photo": "overview",
+      "polyline_px": [
+        [
+          561,
+          834
+        ],
+        [
+          561,
+          815
+        ],
+        [
+          563,
+          797
+        ]
+      ],
+      "display_diameter_m": 0.003,
+      "display_color": "orange",
+      "nearby_features": [
+        "I02",
+        null
+      ],
+      "model_id": "REF_WI21",
+      "physical_endpoints": [
+        null,
+        null
+      ],
+      "electrical_group": null,
+      "occluded_continuation_resolved": false,
+      "note_ja": "見える2本の出口。裏面視点の左右から1番/2番の極性を推定せず、端子品番も未選定。"
+    },
+    {
+      "id": "WI22",
+      "name_ja": "補機口2内側の線出口2",
+      "photo": "overview",
+      "polyline_px": [
+        [
+          582,
+          834
+        ],
+        [
+          582,
+          815
+        ],
+        [
+          584,
+          797
+        ]
+      ],
+      "display_diameter_m": 0.003,
+      "display_color": "orange",
+      "nearby_features": [
+        "I02",
+        null
+      ],
+      "model_id": "REF_WI22",
+      "physical_endpoints": [
+        null,
+        null
+      ],
+      "electrical_group": null,
+      "occluded_continuation_resolved": false,
+      "note_ja": "見える2本の出口。裏面視点の左右から1番/2番の極性を推定せず、端子品番も未選定。"
+    },
+    {
+      "id": "WI31",
+      "name_ja": "補機口3内側の線出口1",
+      "photo": "overview",
+      "polyline_px": [
+        [
+          705,
+          834
+        ],
+        [
+          705,
+          815
+        ],
+        [
+          707,
+          797
+        ]
+      ],
+      "display_diameter_m": 0.003,
+      "display_color": "orange",
+      "nearby_features": [
+        "I03",
+        null
+      ],
+      "model_id": "REF_WI31",
+      "physical_endpoints": [
+        null,
+        null
+      ],
+      "electrical_group": null,
+      "occluded_continuation_resolved": false,
+      "note_ja": "見える2本の出口。裏面視点の左右から1番/2番の極性を推定せず、端子品番も未選定。"
+    },
+    {
+      "id": "WI32",
+      "name_ja": "補機口3内側の線出口2",
+      "photo": "overview",
+      "polyline_px": [
+        [
+          726,
+          834
+        ],
+        [
+          726,
+          815
+        ],
+        [
+          728,
+          797
+        ]
+      ],
+      "display_diameter_m": 0.003,
+      "display_color": "orange",
+      "nearby_features": [
+        "I03",
+        null
+      ],
+      "model_id": "REF_WI32",
+      "physical_endpoints": [
+        null,
+        null
+      ],
+      "electrical_group": null,
+      "occluded_continuation_resolved": false,
+      "note_ja": "見える2本の出口。裏面視点の左右から1番/2番の極性を推定せず、端子品番も未選定。"
+    },
+    {
+      "id": "WI41",
+      "name_ja": "補機口4内側の線出口1",
+      "photo": "overview",
+      "polyline_px": [
+        [
+          1001,
+          834
+        ],
+        [
+          1001,
+          815
+        ],
+        [
+          1003,
+          797
+        ]
+      ],
+      "display_diameter_m": 0.003,
+      "display_color": "orange",
+      "nearby_features": [
+        "I04",
+        null
+      ],
+      "model_id": "REF_WI41",
+      "physical_endpoints": [
+        null,
+        null
+      ],
+      "electrical_group": null,
+      "occluded_continuation_resolved": false,
+      "note_ja": "見える2本の出口。裏面視点の左右から1番/2番の極性を推定せず、端子品番も未選定。"
+    },
+    {
+      "id": "WI42",
+      "name_ja": "補機口4内側の線出口2",
+      "photo": "overview",
+      "polyline_px": [
+        [
+          1022,
+          834
+        ],
+        [
+          1022,
+          815
+        ],
+        [
+          1024,
+          797
+        ]
+      ],
+      "display_diameter_m": 0.003,
+      "display_color": "orange",
+      "nearby_features": [
+        "I04",
+        null
+      ],
+      "model_id": "REF_WI42",
+      "physical_endpoints": [
+        null,
+        null
+      ],
+      "electrical_group": null,
+      "occluded_continuation_resolved": false,
+      "note_ja": "見える2本の出口。裏面視点の左右から1番/2番の極性を推定せず、端子品番も未選定。"
+    },
+    {
+      "id": "WI51",
+      "name_ja": "補機口5内側の線出口1",
+      "photo": "overview",
+      "polyline_px": [
+        [
+          1144,
+          834
+        ],
+        [
+          1144,
+          815
+        ],
+        [
+          1146,
+          797
+        ]
+      ],
+      "display_diameter_m": 0.003,
+      "display_color": "orange",
+      "nearby_features": [
+        "I05",
+        null
+      ],
+      "model_id": "REF_WI51",
+      "physical_endpoints": [
+        null,
+        null
+      ],
+      "electrical_group": null,
+      "occluded_continuation_resolved": false,
+      "note_ja": "見える2本の出口。裏面視点の左右から1番/2番の極性を推定せず、端子品番も未選定。"
+    },
+    {
+      "id": "WI52",
+      "name_ja": "補機口5内側の線出口2",
+      "photo": "overview",
+      "polyline_px": [
+        [
+          1165,
+          834
+        ],
+        [
+          1165,
+          815
+        ],
+        [
+          1167,
+          797
+        ]
+      ],
+      "display_diameter_m": 0.003,
+      "display_color": "orange",
+      "nearby_features": [
+        "I05",
+        null
+      ],
+      "model_id": "REF_WI52",
+      "physical_endpoints": [
+        null,
+        null
+      ],
+      "electrical_group": null,
+      "occluded_continuation_resolved": false,
+      "note_ja": "見える2本の出口。裏面視点の左右から1番/2番の極性を推定せず、端子品番も未選定。"
+    }
+  ],
+  "visible_fastener_features": [
+    {
+      "id": "J01",
+      "feature_parent": "P02",
+      "center_px": [
+        678,
+        649
+      ],
+      "photo": "overview",
+      "model_id": "REF_J01",
+      "description_ja": "写真に見えるねじ頭／ナット位置。ねじ径・長さ・裏側・共締め構成は未確定。",
+      "fastener_specification": null,
+      "joint_stack": null
+    },
+    {
+      "id": "J02",
+      "feature_parent": "P02",
+      "center_px": [
+        1027,
+        644
+      ],
+      "photo": "overview",
+      "model_id": "REF_J02",
+      "description_ja": "写真に見えるねじ頭／ナット位置。ねじ径・長さ・裏側・共締め構成は未確定。",
+      "fastener_specification": null,
+      "joint_stack": null
+    },
+    {
+      "id": "J03",
+      "feature_parent": "P02",
+      "center_px": [
+        751,
+        559
+      ],
+      "photo": "overview",
+      "model_id": "REF_J03",
+      "description_ja": "写真に見えるねじ頭／ナット位置。ねじ径・長さ・裏側・共締め構成は未確定。",
+      "fastener_specification": null,
+      "joint_stack": null
+    },
+    {
+      "id": "J04",
+      "feature_parent": "P02",
+      "center_px": [
+        944,
+        744
+      ],
+      "photo": "overview",
+      "model_id": "REF_J04",
+      "description_ja": "写真に見えるねじ頭／ナット位置。ねじ径・長さ・裏側・共締め構成は未確定。",
+      "fastener_specification": null,
+      "joint_stack": null
+    },
+    {
+      "id": "J05",
+      "feature_parent": "P09",
+      "center_px": [
+        394,
+        489
+      ],
+      "photo": "overview",
+      "model_id": "REF_J05",
+      "description_ja": "写真に見えるねじ頭／ナット位置。ねじ径・長さ・裏側・共締め構成は未確定。",
+      "fastener_specification": null,
+      "joint_stack": null
+    },
+    {
+      "id": "J06",
+      "feature_parent": "P10",
+      "center_px": [
+        1170,
+        490
+      ],
+      "photo": "overview",
+      "model_id": "REF_J06",
+      "description_ja": "写真に見えるねじ頭／ナット位置。ねじ径・長さ・裏側・共締め構成は未確定。",
+      "fastener_specification": null,
+      "joint_stack": null
+    },
+    {
+      "id": "J07",
+      "feature_parent": "P11",
+      "center_px": [
+        389,
+        608
+      ],
+      "photo": "overview",
+      "model_id": "REF_J07",
+      "description_ja": "写真に見えるねじ頭／ナット位置。ねじ径・長さ・裏側・共締め構成は未確定。",
+      "fastener_specification": null,
+      "joint_stack": null
+    },
+    {
+      "id": "J08",
+      "feature_parent": "P12",
+      "center_px": [
+        1162,
+        605
+      ],
+      "photo": "overview",
+      "model_id": "REF_J08",
+      "description_ja": "写真に見えるねじ頭／ナット位置。ねじ径・長さ・裏側・共締め構成は未確定。",
+      "fastener_specification": null,
+      "joint_stack": null
+    },
+    {
+      "id": "J09",
+      "feature_parent": "P13",
+      "center_px": [
+        377,
+        738
+      ],
+      "photo": "overview",
+      "model_id": "REF_J09",
+      "description_ja": "写真に見えるねじ頭／ナット位置。ねじ径・長さ・裏側・共締め構成は未確定。",
+      "fastener_specification": null,
+      "joint_stack": null
+    },
+    {
+      "id": "J10",
+      "feature_parent": "P13",
+      "center_px": [
+        434,
+        734
+      ],
+      "photo": "overview",
+      "model_id": "REF_J10",
+      "description_ja": "写真に見えるねじ頭／ナット位置。ねじ径・長さ・裏側・共締め構成は未確定。",
+      "fastener_specification": null,
+      "joint_stack": null
+    },
+    {
+      "id": "J11",
+      "feature_parent": "P13",
+      "center_px": [
+        509,
+        730
+      ],
+      "photo": "overview",
+      "model_id": "REF_J11",
+      "description_ja": "写真に見えるねじ頭／ナット位置。ねじ径・長さ・裏側・共締め構成は未確定。",
+      "fastener_specification": null,
+      "joint_stack": null
+    },
+    {
+      "id": "J12",
+      "feature_parent": "P13",
+      "center_px": [
+        575,
+        735
+      ],
+      "photo": "overview",
+      "model_id": "REF_J12",
+      "description_ja": "写真に見えるねじ頭／ナット位置。ねじ径・長さ・裏側・共締め構成は未確定。",
+      "fastener_specification": null,
+      "joint_stack": null
+    },
+    {
+      "id": "J13",
+      "feature_parent": "P13",
+      "center_px": [
+        635,
+        735
+      ],
+      "photo": "overview",
+      "model_id": "REF_J13",
+      "description_ja": "写真に見えるねじ頭／ナット位置。ねじ径・長さ・裏側・共締め構成は未確定。",
+      "fastener_specification": null,
+      "joint_stack": null
+    },
+    {
+      "id": "J14",
+      "feature_parent": "P05",
+      "center_px": [
+        583,
+        276
+      ],
+      "photo": "overview",
+      "model_id": "REF_J14",
+      "description_ja": "写真に見えるねじ頭／ナット位置。ねじ径・長さ・裏側・共締め構成は未確定。",
+      "fastener_specification": null,
+      "joint_stack": null
+    },
+    {
+      "id": "J15",
+      "feature_parent": "P05",
+      "center_px": [
+        813,
+        277
+      ],
+      "photo": "overview",
+      "model_id": "REF_J15",
+      "description_ja": "写真に見えるねじ頭／ナット位置。ねじ径・長さ・裏側・共締め構成は未確定。",
+      "fastener_specification": null,
+      "joint_stack": null
+    },
+    {
+      "id": "J16",
+      "feature_parent": "P06",
+      "center_px": [
+        871,
+        278
+      ],
+      "photo": "overview",
+      "model_id": "REF_J16",
+      "description_ja": "写真に見えるねじ頭／ナット位置。ねじ径・長さ・裏側・共締め構成は未確定。",
+      "fastener_specification": null,
+      "joint_stack": null
+    },
+    {
+      "id": "J17",
+      "feature_parent": "P06",
+      "center_px": [
+        1091,
+        278
+      ],
+      "photo": "overview",
+      "model_id": "REF_J17",
+      "description_ja": "写真に見えるねじ頭／ナット位置。ねじ径・長さ・裏側・共締め構成は未確定。",
+      "fastener_specification": null,
+      "joint_stack": null
+    }
+  ],
+  "required_functions": [
+    {
+      "id": "REQ_K",
+      "name_ja": "主接触器",
+      "quantity": 1,
+      "matched_photo_ids": [
+        "P02"
+      ],
+      "note_ja": "写真の本体へ対応。電力端子・制御・補助接点を別に管理。",
+      "basis": "Ampere V1.1 pages 1-2",
+      "not_located_is_not_omitted": true
+    },
+    {
+      "id": "REQ_PC_RLY",
+      "name_ja": "プリチャージリレー",
+      "quantity": 1,
+      "matched_photo_ids": [],
+      "note_ja": "写真のP03/P04のどちらかは未特定。",
+      "basis": "Ampere V1.1 pages 1-2",
+      "not_located_is_not_omitted": true
+    },
+    {
+      "id": "REQ_D_RLY",
+      "name_ja": "放電リレー",
+      "quantity": 1,
+      "matched_photo_ids": [],
+      "note_ja": "写真のP03/P04のどちらかは未特定。",
+      "basis": "Ampere V1.1 pages 1-2",
+      "not_located_is_not_omitted": true
+    },
+    {
+      "id": "REQ_PC_RES",
+      "name_ja": "プリチャージ抵抗",
+      "quantity": 1,
+      "matched_photo_ids": [],
+      "note_ja": "存在は公式記載。写真位置・端末方式は未特定。",
+      "basis": "Ampere V1.1 pages 1-2",
+      "not_located_is_not_omitted": true
+    },
+    {
+      "id": "REQ_D_RES",
+      "name_ja": "放電抵抗",
+      "quantity": 1,
+      "matched_photo_ids": [],
+      "note_ja": "存在は公式記載。写真位置・端末方式は未特定。",
+      "basis": "Ampere V1.1 pages 1-2",
+      "not_located_is_not_omitted": true
+    },
+    {
+      "id": "REQ_MAIN_FUSE",
+      "name_ja": "主400 Aヒューズ",
+      "quantity": 1,
+      "matched_photo_ids": [],
+      "note_ja": "存在は公式記載。写真中の本体位置・固定形式は未特定。",
+      "basis": "Ampere V1.1 pages 1-2",
+      "not_located_is_not_omitted": true
+    },
+    {
+      "id": "REQ_AF1",
+      "name_ja": "補機Heater 1・20 Aヒューズ",
+      "quantity": 1,
+      "matched_photo_ids": [],
+      "note_ja": "P05/P06を含むが、5個の所在と系統別対応は未完了。",
+      "basis": "Ampere V1.1 pages 1-2",
+      "not_located_is_not_omitted": true
+    },
+    {
+      "id": "REQ_AF2",
+      "name_ja": "補機AC・30 Aヒューズ",
+      "quantity": 1,
+      "matched_photo_ids": [],
+      "note_ja": "P05/P06を含むが、5個の所在と系統別対応は未完了。",
+      "basis": "Ampere V1.1 pages 1-2",
+      "not_located_is_not_omitted": true
+    },
+    {
+      "id": "REQ_AF3",
+      "name_ja": "補機Heater 2・20 Aヒューズ",
+      "quantity": 1,
+      "matched_photo_ids": [],
+      "note_ja": "P05/P06を含むが、5個の所在と系統別対応は未完了。",
+      "basis": "Ampere V1.1 pages 1-2",
+      "not_located_is_not_omitted": true
+    },
+    {
+      "id": "REQ_AF4",
+      "name_ja": "補機Charger・30 Aヒューズ",
+      "quantity": 1,
+      "matched_photo_ids": [],
+      "note_ja": "P05/P06を含むが、5個の所在と系統別対応は未完了。",
+      "basis": "Ampere V1.1 pages 1-2",
+      "not_located_is_not_omitted": true
+    },
+    {
+      "id": "REQ_AF5",
+      "name_ja": "補機DC-DC・10 Aヒューズ",
+      "quantity": 1,
+      "matched_photo_ids": [],
+      "note_ja": "P05/P06を含むが、5個の所在と系統別対応は未完了。",
+      "basis": "Ampere V1.1 pages 1-2",
+      "not_located_is_not_omitted": true
+    },
+    {
+      "id": "REQ_MAIN_PORTS",
+      "name_ja": "主2極接続口",
+      "quantity": 2,
+      "matched_photo_ids": [
+        "P14",
+        "P15"
+      ],
+      "basis": "Ampere V1.1 pages 2-3"
+    },
+    {
+      "id": "REQ_AUX_PORTS",
+      "name_ja": "補機2極接続口",
+      "quantity": 5,
+      "matched_photo_ids": [
+        "P16",
+        "P17"
+      ],
+      "basis": "3+2 functional bays, not five outer housings"
+    },
+    {
+      "id": "REQ_INNER",
+      "name_ja": "補機内側ハウジング",
+      "quantity": 5,
+      "matched_photo_ids": [
+        "I01",
+        "I02",
+        "I03",
+        "I04",
+        "I05"
+      ],
+      "basis": "Photo and TE 408-32095 / 2103245"
+    },
+    {
+      "id": "REQ_LV",
+      "name_ja": "低圧12極接続口",
+      "quantity": 1,
+      "matched_photo_ids": [
+        "P18"
+      ],
+      "basis": "Ampere V1.1 pages 2,4"
+    }
+  ],
+  "electrical_groups": [
+    {
+      "id": "EC01",
+      "name_ja": "主電力経路",
+      "basis_ja": "主2口・主ヒューズ・主接触器を含む回路。主端子AがHV+、BがHV−と記載。",
+      "datasheet_pages": [
+        1,
+        2,
+        3
+      ],
+      "lv_pins": [],
+      "physical_wires": null,
+      "fastener_count": null,
+      "photo_to_physical_net_complete": false
+    },
+    {
+      "id": "EC02",
+      "name_ja": "プリチャージの電力側",
+      "basis_ja": "プリチャージリレーと抵抗を含む枝路。制御線はEC10で区別。",
+      "datasheet_pages": [
+        1,
+        2
+      ],
+      "lv_pins": [],
+      "physical_wires": null,
+      "fastener_count": null,
+      "photo_to_physical_net_complete": false
+    },
+    {
+      "id": "EC03",
+      "name_ja": "放電の電力側",
+      "basis_ja": "放電リレーと抵抗を含む枝路。制御線はEC11で区別。",
+      "datasheet_pages": [
+        1,
+        2
+      ],
+      "lv_pins": [],
+      "physical_wires": null,
+      "fastener_count": null,
+      "photo_to_physical_net_complete": false
+    },
+    {
+      "id": "EC04",
+      "name_ja": "補機：Heater 1",
+      "basis_ja": "20Aヒューズを含む補機系統。補機端子は1がHV+、2がHV−。",
+      "datasheet_pages": [
+        1,
+        2,
+        3
+      ],
+      "lv_pins": [],
+      "physical_wires": null,
+      "fastener_count": null,
+      "photo_to_physical_net_complete": false
+    },
+    {
+      "id": "EC05",
+      "name_ja": "補機：AC",
+      "basis_ja": "30Aヒューズを含む補機系統。",
+      "datasheet_pages": [
+        1,
+        2,
+        3
+      ],
+      "lv_pins": [],
+      "physical_wires": null,
+      "fastener_count": null,
+      "photo_to_physical_net_complete": false
+    },
+    {
+      "id": "EC06",
+      "name_ja": "補機：Heater 2",
+      "basis_ja": "20Aヒューズを含む補機系統。",
+      "datasheet_pages": [
+        1,
+        2,
+        3
+      ],
+      "lv_pins": [],
+      "physical_wires": null,
+      "fastener_count": null,
+      "photo_to_physical_net_complete": false
+    },
+    {
+      "id": "EC07",
+      "name_ja": "補機：Charger",
+      "basis_ja": "30Aヒューズを含む補機系統。",
+      "datasheet_pages": [
+        1,
+        2,
+        3
+      ],
+      "lv_pins": [],
+      "physical_wires": null,
+      "fastener_count": null,
+      "photo_to_physical_net_complete": false
+    },
+    {
+      "id": "EC08",
+      "name_ja": "補機：DC-DC",
+      "basis_ja": "10Aヒューズを含む補機系統。",
+      "datasheet_pages": [
+        1,
+        2,
+        3
+      ],
+      "lv_pins": [],
+      "physical_wires": null,
+      "fastener_count": null,
+      "photo_to_physical_net_complete": false
+    },
+    {
+      "id": "EC09",
+      "name_ja": "低圧：接触器駆動",
+      "basis_ja": "LVの2番はContactor 12V、8番はContactor Ground。",
+      "datasheet_pages": [
+        4
+      ],
+      "lv_pins": [
+        2,
+        8
+      ],
+      "physical_wires": null,
+      "fastener_count": null,
+      "photo_to_physical_net_complete": false
+    },
+    {
+      "id": "EC10",
+      "name_ja": "低圧：プリチャージリレー駆動",
+      "basis_ja": "LVの3番はリレー12V、9番はリレーGround。",
+      "datasheet_pages": [
+        4
+      ],
+      "lv_pins": [
+        3,
+        9
+      ],
+      "physical_wires": null,
+      "fastener_count": null,
+      "photo_to_physical_net_complete": false
+    },
+    {
+      "id": "EC11",
+      "name_ja": "低圧：放電リレー駆動",
+      "basis_ja": "LVの4番はリレー12V、10番はリレーGround。",
+      "datasheet_pages": [
+        4
+      ],
+      "lv_pins": [
+        4,
+        10
+      ],
+      "physical_wires": null,
+      "fastener_count": null,
+      "photo_to_physical_net_complete": false
+    },
+    {
+      "id": "EC12",
+      "name_ja": "低圧：接触器フィードバック",
+      "basis_ja": "LVの1番と7番がContactor Feedbackと記載。",
+      "datasheet_pages": [
+        4
+      ],
+      "lv_pins": [
+        1,
+        7
+      ],
+      "physical_wires": null,
+      "fastener_count": null,
+      "photo_to_physical_net_complete": false
+    },
+    {
+      "id": "EC13",
+      "name_ja": "HVIL",
+      "basis_ja": "LVの5番がHVIL In、11番がHVIL Out。公式記事は各接続口へのHVIL内蔵を記載。",
+      "datasheet_pages": [
+        4
+      ],
+      "lv_pins": [
+        5,
+        11
+      ],
+      "physical_wires": null,
+      "fastener_count": null,
+      "photo_to_physical_net_complete": false
+    }
+  ],
+  "lv_pin_map": {
+    "1": "Contactor Feedback",
+    "2": "Contactor 12V",
+    "3": "Pre-Charge Relay 12V",
+    "4": "Discharge Relay 12V",
+    "5": "HVIL In",
+    "6": "Reserved",
+    "7": "Contactor Feedback",
+    "8": "Contactor Ground",
+    "9": "Pre-Charge Relay Ground",
+    "10": "Discharge Relay Ground",
+    "11": "HVIL Out",
+    "12": "Reserved"
+  },
+  "display_coordinate_mapping": {
+    "origin_px": [
+      790,
+      535
+    ],
+    "px_per_m": 4200,
+    "axes": "photo right +X; photo up +Y; Z is estimated separately",
+    "kind": "display_registration_only_not_photogrammetric_measurement"
+  },
+  "unresolved": [
+    "主ヒューズ本体の場所・型式・固定方式。",
+    "補機ヒューズ5個の全所在と各口への割当。見えるP05/P06の2個だけで済ませない。",
+    "2個の抵抗の所在・端末・支持と、P07/P08の機能。",
+    "上/下リレーのプリチャージ・放電対応と、各端末の実経路。",
+    "主接触器・主2極ハウジング・LV12極ハウジングの正確な型式。",
+    "金属導体の隠れた連続性・部品分割・ねじの共締め積層。",
+    "各線の両端、圧着端子、シール、HVILの内部接続順。",
+    "部品の高さ・厚さ・加工寸法・入荷サブアセンブリと支持状態。"
+  ],
+  "coverage_checklist": [
+    "筐体・蓋・シール・ボス",
+    "主接触器と電力/コイル/補助端末",
+    "プリチャージと放電のリレー/抵抗",
+    "主1+補機5ヒューズと保持部",
+    "剛体バスバー・絶縁支持・カバー",
+    "主2極×2・補機2極×5・LV12極",
+    "内側ハウジング・金属端子・シール",
+    "配線・丸端子・差込端末・熱収縮",
+    "ねじ・ナット・座金・共締め",
+    "完成品の蓋と表示"
+  ],
+  "motion_created": false,
+  "all_physical_connections_resolved": false,
+  "all_visible_features_traced": false,
+  "remaining_visual_coverage": [
+    "左奥・右奥の束と前方で交差する細線は、一本ごとの追跡が未完了。",
+    "端子の金属部、熱収縮チューブ、支持部、座金を個別部品として分離する照合が未完了。",
+    "配線の手動トレースは照合用下書き。写真の境界・隠れ位置を再確認する必要がある。"
+  ],
+  "documented_header_mounting": {
+    "P16": {
+      "hole_count": 8,
+      "thread": "M4",
+      "fastener_part_number": null
+    },
+    "P17": {
+      "hole_count": 6,
+      "thread": "M4",
+      "fastener_part_number": null
+    },
+    "basis": "TE customer drawings; separate from visible interior fastener features"
+  },
+  "physical_acceptance_verdict": null
+}

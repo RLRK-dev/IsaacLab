@@ -1,0 +1,106 @@
+{
+  "converter": "cascadio",
+  "version": "0.1.1",
+  "linear_deflection_mm": 0.02,
+  "angular_deflection_rad": 0.2,
+  "output": "data/hvjb_photo_cad_v01.json.gz",
+  "output_sha256": "1ac417baa3ff67ae8bc3ed5c32ac91cfb778a2effbd1e1a19d24900066c38f32",
+  "source_drawings": {
+    "te_2103245_drawing.pdf": "23aff5f20acb75d87a63bf3a1aa0c076a8ab43b30c83914cfc8e5c9b41788ffa"
+  },
+  "sources": [
+    {
+      "part_number": "2103245-1",
+      "key": "A",
+      "product_url": "https://www.te.com/en/product-2103245-1.html",
+      "step_file": "references/hvjb_photo_inventory_20260915/c-2103245-1-a-3d.stp",
+      "step_sha256": "11ef47b2b65a479576f2e134e5e6def040762256dcfafea92aac39ad933585d8",
+      "archive_sha256": "9551f721bbee7cf9dde9fc1ea95c158050baad7dd85e5ffd0c578ff20da67d10",
+      "glb_sha256": "344328f3bb12716543a0de972d9778db9e6a91c91e7095966bbcc0d43d4878f4",
+      "bounds_m": [
+        [
+          -0.01119999960064888,
+          -0.006300000008195639,
+          -0.04259999841451645
+        ],
+        [
+          0.01119999960064888,
+          0.006300000008195639,
+          1.7104836429576552e-16
+        ]
+      ],
+      "triangles": 19604,
+      "ignored_non_surface_annotations": []
+    },
+    {
+      "part_number": "2103245-4",
+      "key": "D",
+      "product_url": "https://www.te.com/en/product-2103245-4.html",
+      "step_file": "references/hvjb_photo_inventory_20260915/c-2103245-4-a-3d.stp",
+      "step_sha256": "4d237160b671507f4b044c341d5b1cc1dce797f2180d693c3f6063768793d0d7",
+      "archive_sha256": "c5140d148d1be89f468bb97f8d73b2312da2241e4ca271e54017eb38669c383f",
+      "glb_sha256": "8de31ddc9d4fc174bd42b495a77bbf1af3c4e566bd5d3fb9e172a9bf6f99ee0c",
+      "bounds_m": [
+        [
+          -0.01119999960064888,
+          -0.006300000008195639,
+          -0.04259999841451645
+        ],
+        [
+          0.01119999960064888,
+          0.006300000008195639,
+          1.7104836429576552e-16
+        ]
+      ],
+      "triangles": 19604,
+      "ignored_non_surface_annotations": []
+    },
+    {
+      "part_number": "2103245-5",
+      "key": "E",
+      "product_url": "https://www.te.com/en/product-2103245-5.html",
+      "step_file": "references/hvjb_photo_inventory_20260915/c-2103245-5-a-3d.stp",
+      "step_sha256": "3fe746bfbcd318836c93d1022546379b49978623620e5d31c2abc0307cbe55cd",
+      "archive_sha256": "c74461f5dc0ad535239599d7965a2e97bb20d5053b114660998dc3c5bb301292",
+      "glb_sha256": "68db2e060a0adc436e24b82e305b755a16bb4d9dae9118f5d559bb64be85076d",
+      "bounds_m": [
+        [
+          -0.01119999960064888,
+          -0.006300000008195639,
+          -0.04259999841451645
+        ],
+        [
+          0.01119999960064888,
+          0.006300000008195639,
+          1.7104836429576552e-16
+        ]
+      ],
+      "triangles": 19572,
+      "ignored_non_surface_annotations": []
+    },
+    {
+      "part_number": "2103245-6",
+      "key": "F",
+      "product_url": "https://www.te.com/en/product-2103245-6.html",
+      "step_file": "references/hvjb_photo_inventory_20260915/c-2103245-6-a-3d.stp",
+      "step_sha256": "0c73a73362356d5208bb3a2abd6659e8cf55f471c4ce5b36976af12b12f50dfe",
+      "archive_sha256": "ee7d6e50d29909b7f7e879ab38f3ccd61183359082be4f12430807becbf0c770",
+      "glb_sha256": "3725de21160b691e92ff33ae131d9e6f714cbcfd6bdd7ce1972f143ed57dccaf",
+      "bounds_m": [
+        [
+          -0.01119999960064888,
+          -0.006300000008195639,
+          -0.04259999841451645
+        ],
+        [
+          0.01119999960064888,
+          0.006300000008195639,
+          1.7104836429576552e-16
+        ]
+      ],
+      "triangles": 19572,
+      "ignored_non_surface_annotations": []
+    }
+  ],
+  "note": "Unscaled SI surfaces. Installed datum and contact/terminal selections require separate correspondence."
+}

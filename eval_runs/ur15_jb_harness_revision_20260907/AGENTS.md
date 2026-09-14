@@ -393,3 +393,23 @@ numbers unknown until their basis and the scope of the product change are set.
   control connector is still a representative model, not a matched actual part.
 - Preserve v02 and v06 native files. Continue rendering one process-review movie
   directly from PNGs. Model and sampled geometric checks are not physical acceptance.
+
+## Photo-to-product reconstruction on 2026-09-15
+
+- The user rejected treating v03's provisional interior as a faithful Ampere
+  reproduction. First map the supplied interior photograph's parts and connections
+  individually to model IDs, correct the product, and only then develop motions.
+- Use DSC02860-1.jpg as the assembled-product visual reference, together with
+  the two other official photographs and the public V1.1 circuit/pinout. Record
+  visible features separately from electrical functions and purchasing parts.
+- Do not retain the arbitrary orange control block, sample S cable, two sample
+  terminal stands, or generic fuse/relay placements as matched actual components.
+- Keep unlocated but documented parts and occluded connections in the inventory.
+  A functional circuit edge is not a physical wire, and a visible wire segment
+  is not proof of both endpoints. Do not infer a complete manufacturing BOM,
+  fuse-to-photo assignment, HVIL order, or hidden joints from colors alone.
+- Static photo reconstruction may record estimated display dimensions and
+  unresolved identities. Such estimates must not silently become hand targets,
+  selected part numbers, complete electrical assembly, or accepted motions.
+- Keep v03 and earlier files intact. Do not make a new process movie until the
+  relevant product interfaces and operations have been reconciled.

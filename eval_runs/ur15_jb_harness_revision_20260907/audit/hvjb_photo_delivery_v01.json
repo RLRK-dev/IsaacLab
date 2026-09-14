@@ -1,0 +1,249 @@
+{
+  "created_at": "2026-09-15T07:15:09.219622+09:00",
+  "directory": "/home/rlrk/Downloads/THREAD_HVJB_写真部品照合_v01_20260915",
+  "files": [
+    {
+      "file": "UR15_JB_photo_correspondence_v01_p02.blend",
+      "source": "/home/rlrk/IsaacLab-op040/eval_runs/ur15_jb_harness_revision_20260907/UR15_JB_photo_correspondence_v01_p02.blend",
+      "sha256": "f8c8b9fe3e8503cb2cdc21b4dc1dd0b3d7e547b7bbf0573a415be569f77cad8c",
+      "bytes": 19611344
+    },
+    {
+      "file": "data/hvjb_photo_correspondence_v01.json",
+      "source": "/home/rlrk/IsaacLab-op040/eval_runs/ur15_jb_harness_revision_20260907/data/hvjb_photo_correspondence_v01.json",
+      "sha256": "f11765ce6b142d49701bab3108b383176c638dfd933d83f57d0c3ed0f76bb27b",
+      "bytes": 53832
+    },
+    {
+      "file": "data/hvjb_photo_model_v01_p02.json.gz",
+      "source": "/home/rlrk/IsaacLab-op040/eval_runs/ur15_jb_harness_revision_20260907/data/hvjb_photo_model_v01_p02.json.gz",
+      "sha256": "92cc39287cc79bc5a359e1e24191f68532a08f58551c2766ac07e089293ed189",
+      "bytes": 8392451
+    },
+    {
+      "file": "data/hvjb_photo_cad_v01.json.gz",
+      "source": "/home/rlrk/IsaacLab-op040/eval_runs/ur15_jb_harness_revision_20260907/data/hvjb_photo_cad_v01.json.gz",
+      "sha256": "1ac417baa3ff67ae8bc3ed5c32ac91cfb778a2effbd1e1a19d24900066c38f32",
+      "bytes": 900968
+    },
+    {
+      "file": "data/header_review_v03/meshes.json.gz",
+      "source": "/home/rlrk/IsaacLab-op040/eval_runs/ur15_jb_harness_revision_20260907/data/header_review_v03/meshes.json.gz",
+      "sha256": "8c0bbe8c60f0a78f8dcba56d76ed825d13d3f88dd67e9fd8cdeb932e88fa4130",
+      "bytes": 3279517
+    },
+    {
+      "file": "analysis/hvjb_photo_correspondence_v01.md",
+      "source": "/home/rlrk/IsaacLab-op040/eval_runs/ur15_jb_harness_revision_20260907/analysis/hvjb_photo_correspondence_v01.md",
+      "sha256": "e87e64142278afccd81c4e0f8c6f98063182df2e506264eec221c64d3deb4af2",
+      "bytes": 9864
+    },
+    {
+      "file": "audit/hvjb_photo_catalog_v01.json",
+      "source": "/home/rlrk/IsaacLab-op040/eval_runs/ur15_jb_harness_revision_20260907/audit/hvjb_photo_catalog_v01.json",
+      "sha256": "cce8f16e59c4b314d71b98d932b956b5e0d50526b75885a505d9670690df37eb",
+      "bytes": 515
+    },
+    {
+      "file": "audit/hvjb_photo_cad_v01.json",
+      "source": "/home/rlrk/IsaacLab-op040/eval_runs/ur15_jb_harness_revision_20260907/audit/hvjb_photo_cad_v01.json",
+      "sha256": "32db25a494599d12969bf6bbd839b1e1acbdb1985b97355971509c46165519a7",
+      "bytes": 3787
+    },
+    {
+      "file": "audit/hvjb_photo_model_v01_p02.json",
+      "source": "/home/rlrk/IsaacLab-op040/eval_runs/ur15_jb_harness_revision_20260907/audit/hvjb_photo_model_v01_p02.json",
+      "sha256": "97a47c45f5027cca2cbbcd5b0c76e3c9a20d903d97958358892823f99220ef50",
+      "bytes": 1929
+    },
+    {
+      "file": "scripts/build_hvjb_photo_catalog_v01.py",
+      "source": "/home/rlrk/IsaacLab-op040/eval_runs/ur15_jb_harness_revision_20260907/scripts/build_hvjb_photo_catalog_v01.py",
+      "sha256": "fe7166bf06b66fed127ad1d41d903bb46d5fda7755cf5de14d9589f35afa47ba",
+      "bytes": 26081
+    },
+    {
+      "file": "scripts/build_hvjb_photo_model_v01.py",
+      "source": "/home/rlrk/IsaacLab-op040/eval_runs/ur15_jb_harness_revision_20260907/scripts/build_hvjb_photo_model_v01.py",
+      "sha256": "08ac15a771b2c5bf5c2a54ff1046ee97072e4ecf27d51df33e1941996847d870",
+      "bytes": 18461
+    },
+    {
+      "file": "scripts/prepare_hvjb_photo_cad_v01.py",
+      "source": "/home/rlrk/IsaacLab-op040/eval_runs/ur15_jb_harness_revision_20260907/scripts/prepare_hvjb_photo_cad_v01.py",
+      "sha256": "d2aa08464b8666ca34c46201355817174cae3f974bf502caeb4dc612edf2fdfb",
+      "bytes": 3794
+    },
+    {
+      "file": "scripts/hvjb_photo_review_v01.html",
+      "source": "/home/rlrk/IsaacLab-op040/eval_runs/ur15_jb_harness_revision_20260907/scripts/hvjb_photo_review_v01.html",
+      "sha256": "fa2a68b9e49226d2abc643eedf6670f86c243c964f203b3a2885d5f7fc156886",
+      "bytes": 17099
+    },
+    {
+      "file": "references/op040_real_products_20260912/ampere_hvjb_5_400_current_v1_1.pdf",
+      "source": "/home/rlrk/IsaacLab-op040/eval_runs/ur15_jb_harness_revision_20260907/references/op040_real_products_20260912/ampere_hvjb_5_400_current_v1_1.pdf",
+      "sha256": "643648bcea77b4d7c37c65d073664f746f68689952da2d5ce932e3d10bd5a9e1",
+      "bytes": 553747
+    },
+    {
+      "file": "references/connector_correction_20260915/te_408_32095_instruction.pdf",
+      "source": "/home/rlrk/IsaacLab-op040/eval_runs/ur15_jb_harness_revision_20260907/references/connector_correction_20260915/te_408_32095_instruction.pdf",
+      "sha256": "cd13cd856b679e2683f7672f079bd4c99ff87ac2e361d3da73700e12c12fa63d",
+      "bytes": 762503
+    },
+    {
+      "file": "references/connector_correction_20260915/te_2103340_drawing.pdf",
+      "source": "/home/rlrk/IsaacLab-op040/eval_runs/ur15_jb_harness_revision_20260907/references/connector_correction_20260915/te_2103340_drawing.pdf",
+      "sha256": "be59744129dc5134d2a3363e25af93294e662cde4254ec28411b80bd01673dc6",
+      "bytes": 1088384
+    },
+    {
+      "file": "references/connector_correction_20260915/te_2103346_drawing.pdf",
+      "source": "/home/rlrk/IsaacLab-op040/eval_runs/ur15_jb_harness_revision_20260907/references/connector_correction_20260915/te_2103346_drawing.pdf",
+      "sha256": "fbdeb1d56aba02ae85ed2464b3acd68ce6444cd47179f33225d7f0ba1b580e28",
+      "bytes": 896394
+    },
+    {
+      "file": "references/hvjb_photo_inventory_20260915/te_2103245_drawing.pdf",
+      "source": "/home/rlrk/IsaacLab-op040/eval_runs/ur15_jb_harness_revision_20260907/references/hvjb_photo_inventory_20260915/te_2103245_drawing.pdf",
+      "sha256": "23aff5f20acb75d87a63bf3a1aa0c076a8ab43b30c83914cfc8e5c9b41788ffa",
+      "bytes": 157699
+    },
+    {
+      "file": "references/op040_real_products_20260912/ampere_product_photo_1.jpg",
+      "source": "/home/rlrk/IsaacLab-op040/eval_runs/ur15_jb_harness_revision_20260907/references/op040_real_products_20260912/ampere_product_photo_1.jpg",
+      "sha256": "5724681b4bef4399f0799751a62577e48ef9b7fd3d6ed5b56d85fd95924937ad",
+      "bytes": 167012
+    },
+    {
+      "file": "references/op040_real_products_20260912/ampere_product_photo_2.jpg",
+      "source": "/home/rlrk/IsaacLab-op040/eval_runs/ur15_jb_harness_revision_20260907/references/op040_real_products_20260912/ampere_product_photo_2.jpg",
+      "sha256": "5ae831226050fb2430894f3a0462d87c1ffa8991fad453bb8945b2c983233b2e",
+      "bytes": 228146
+    },
+    {
+      "file": "references/op040_real_products_20260912/ampere_product_photo_3.jpg",
+      "source": "/home/rlrk/IsaacLab-op040/eval_runs/ur15_jb_harness_revision_20260907/references/op040_real_products_20260912/ampere_product_photo_3.jpg",
+      "sha256": "b654a278aec9b1a5c2e45b08f30cedd3b08b4f10003dd74a6c39579aa8278f70",
+      "bytes": 235262
+    },
+    {
+      "file": "references/hvjb_photo_inventory_20260915/te_2103245_1_step.zip",
+      "source": "/home/rlrk/IsaacLab-op040/eval_runs/ur15_jb_harness_revision_20260907/references/hvjb_photo_inventory_20260915/te_2103245_1_step.zip",
+      "sha256": "9551f721bbee7cf9dde9fc1ea95c158050baad7dd85e5ffd0c578ff20da67d10",
+      "bytes": 104639
+    },
+    {
+      "file": "references/hvjb_photo_inventory_20260915/te_2103245_4_step.zip",
+      "source": "/home/rlrk/IsaacLab-op040/eval_runs/ur15_jb_harness_revision_20260907/references/hvjb_photo_inventory_20260915/te_2103245_4_step.zip",
+      "sha256": "c5140d148d1be89f468bb97f8d73b2312da2241e4ca271e54017eb38669c383f",
+      "bytes": 104451
+    },
+    {
+      "file": "references/hvjb_photo_inventory_20260915/te_2103245_5_step.zip",
+      "source": "/home/rlrk/IsaacLab-op040/eval_runs/ur15_jb_harness_revision_20260907/references/hvjb_photo_inventory_20260915/te_2103245_5_step.zip",
+      "sha256": "c74461f5dc0ad535239599d7965a2e97bb20d5053b114660998dc3c5bb301292",
+      "bytes": 102471
+    },
+    {
+      "file": "references/hvjb_photo_inventory_20260915/te_2103245_6_step.zip",
+      "source": "/home/rlrk/IsaacLab-op040/eval_runs/ur15_jb_harness_revision_20260907/references/hvjb_photo_inventory_20260915/te_2103245_6_step.zip",
+      "sha256": "ee7d6e50d29909b7f7e879ab38f3ccd61183359082be4f12430807becbf0c770",
+      "bytes": 102305
+    },
+    {
+      "file": "references/connector_correction_20260915/te_2103340_1_step.zip",
+      "source": "/home/rlrk/IsaacLab-op040/eval_runs/ur15_jb_harness_revision_20260907/references/connector_correction_20260915/te_2103340_1_step.zip",
+      "sha256": "bf4815eb58f0bca5c71f0e654c13216cbe5abe1a2b2afcc6d9ee26c17fff6b9a",
+      "bytes": 263827
+    },
+    {
+      "file": "references/connector_correction_20260915/te_2103346_2_step.zip",
+      "source": "/home/rlrk/IsaacLab-op040/eval_runs/ur15_jb_harness_revision_20260907/references/connector_correction_20260915/te_2103346_2_step.zip",
+      "sha256": "78b8288664ef9e5db129a307547402afe365bd8f91618142a3e10900627aa07c",
+      "bytes": 323791
+    },
+    {
+      "file": "previews/top.png",
+      "source": "/home/rlrk/IsaacLab-op040/eval_runs/ur15_jb_harness_revision_20260907/previews/hvjb_photo_v01_p02/top.png",
+      "sha256": "113dabb1177b0a7e6dd312d116660988ae0f7575b6da54950e5f866a4a5e9c41",
+      "bytes": 1152083
+    },
+    {
+      "file": "previews/oblique.png",
+      "source": "/home/rlrk/IsaacLab-op040/eval_runs/ur15_jb_harness_revision_20260907/previews/hvjb_photo_v01_p02/oblique.png",
+      "sha256": "deb5dbd71561bec4c9773b9db68a02fa2c170f252716b3b975774511be9d9363",
+      "bytes": 1172842
+    },
+    {
+      "file": "audit/initial_build_error.log",
+      "source": "/tmp/hvjb_photo_model_v01_p01.log",
+      "sha256": "ab75ba3a00e4237a6a0894cf264b3834e58dce7267ec35568e504a402fb983d6",
+      "bytes": 764
+    },
+    {
+      "file": "audit/static_model_build.log",
+      "source": "/tmp/hvjb_photo_model_v01_p02.log",
+      "sha256": "bb007dbc1476dcf685af1a8b35ea7ef6b39557c03614715eadf583ee8aa8ccc0",
+      "bytes": 62842
+    },
+    {
+      "file": "review.html",
+      "sha256": "5a92af40527481c3f70bc3dcc14371dcfb17f2e67fe99d10826fb97d9f691ad8",
+      "bytes": 22476428
+    },
+    {
+      "file": "README.txt",
+      "sha256": "14819e844754426a891cf31ae6dc8ac2725436c8ea452e885acb9590bd098066"
+    },
+    {
+      "file": "scripts/package_hvjb_photo_review_v01.py",
+      "source": "/home/rlrk/IsaacLab-op040/eval_runs/ur15_jb_harness_revision_20260907/scripts/package_hvjb_photo_review_v01.py",
+      "sha256": "7c72d7c326bc681dbaded061ebfdd89bcada5fd8e97fb21bb3dd886785812658",
+      "bytes": 6502
+    },
+    {
+      "file": "scripts/check_hvjb_photo_review_v01.mjs",
+      "source": "/home/rlrk/IsaacLab-op040/eval_runs/ur15_jb_harness_revision_20260907/scripts/check_hvjb_photo_review_v01.mjs",
+      "sha256": "474e7ebd522b6acae8ab93001b96a4b124dc2a99c21b839a33b5b36a773e20b8",
+      "bytes": 7020
+    },
+    {
+      "file": "audit/browser_review.json",
+      "sha256": "ab905f5d7ff3efbb09ffefa8ba79fbab06f4bddc1b739552eb3eabe844c22106",
+      "bytes": 7977
+    },
+    {
+      "file": "audit/browser_review.png",
+      "sha256": "ad692912e712d7b040ebec2a64c6cea5b46516b91a0d37a9e1fcabbd3e3309a1",
+      "bytes": 555293
+    },
+    {
+      "file": "audit/browser_success.log",
+      "source": "/tmp/hvjb_photo_browser_v01_final.log",
+      "sha256": "5c7f00351b8ea9dd8b1a1d359a8d1b7f7a95967cc4884b520e9089aa4b826abb",
+      "bytes": 493
+    },
+    {
+      "file": "audit/precommit.log",
+      "source": "/tmp/hvjb_photo_precommit_staged.log",
+      "sha256": "b3ea979df3f60a2f09300724c2d8a68f0e42905162409661e52b73e763af9476",
+      "bytes": 1841
+    },
+    {
+      "file": "analysis/execution_notes.md",
+      "sha256": "16651b9450b0d8cab32dce9d2f443d51cac8a19e6dd0531b3abae509d9e32b24"
+    }
+  ],
+  "motion_created": false,
+  "complete_product_reconstruction": false,
+  "copy_hashes_equal": true,
+  "viewer_vertex_rounding_m": 1e-06,
+  "finalized_at": "2026-09-15T07:43:55.019319+09:00",
+  "browser_check": {
+    "feature_selection_count": 72,
+    "javascript_errors": 0,
+    "missing_links": 0
+  }
+}

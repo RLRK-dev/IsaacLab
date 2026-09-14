@@ -1,0 +1,22 @@
+{
+  "data_sha256": "f11765ce6b142d49701bab3108b383176c638dfd933d83f57d0c3ed0f76bb27b",
+  "part_feature_count": 31,
+  "visible_wire_segment_count": 24,
+  "visible_fastener_feature_count": 17,
+  "electrical_group_count": 13,
+  "unlocated_required_items": [
+    "REQ_PC_RLY",
+    "REQ_D_RLY",
+    "REQ_PC_RES",
+    "REQ_D_RES",
+    "REQ_MAIN_FUSE",
+    "REQ_AF1",
+    "REQ_AF2",
+    "REQ_AF3",
+    "REQ_AF4",
+    "REQ_AF5"
+  ],
+  "all_ids_unique": true,
+  "dangling_feature_references": [],
+  "formal_verdict": null
+}
