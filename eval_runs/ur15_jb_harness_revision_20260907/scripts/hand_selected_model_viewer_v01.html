@@ -1,0 +1,59 @@
+<!doctype html>
+<!-- Copyright (c) 2022-2026, The Isaac Lab Project Developers. SPDX-License-Identifier: BSD-3-Clause -->
+<html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>THREAD｜ケーブル保持の保存3Dモデル</title><style>
+*{box-sizing:border-box}body{margin:0;background:#f2f6f9;color:#244457;font:15px/1.75 system-ui,"Noto Sans CJK JP",sans-serif}main{max-width:1300px;margin:auto;padding:24px}h1{font-size:26px;margin:8px 0}p{margin:8px 0}a{color:#216f98}.small{font-size:12px;color:#5e7787}.view{margin-top:20px;background:white;border:1px solid #c5d9e6;border-radius:8px;overflow:hidden}.toolbar{display:flex;gap:10px;flex-wrap:wrap;padding:12px;border-bottom:1px solid #d7e4eb}button,select{font:inherit;background:white;border:1px solid #bdd2df;border-radius:5px;padding:6px 10px;cursor:pointer;color:#28566f}button:focus-visible,select:focus-visible,input:focus-visible{outline:3px solid #ce912c;outline-offset:2px}canvas{display:block;width:100%;height:640px;touch-action:none;cursor:grab;background:linear-gradient(#fbfdfe,#e5edf4)}.caption{padding:13px 17px;font-size:13px}.links{display:flex;gap:18px;flex-wrap:wrap;margin-top:14px}[hidden]{display:none!important}@media(max-width:700px){main{padding:18px 12px}h1{font-size:23px}canvas{height:480px}}
+</style></head><body><main>
+<a href="工程別_把持位置と工具方向_v01.html">← 工程別の確認ページ</a>
+<h1>15°傾斜・40 mm後退のケーブル保持手先</h1>
+<p>決定済みのT050を、元のメッシュ・保存姿勢のまま表示しています。ドラッグで回転、ホイールで拡大できます。</p>
+<p class="small">端子側の黒被覆と根元被覆を同じ2本指で保持する作業モデルです。参考端子・被覆形状を含み、採用実物への寸法適合・安定保持は未確認です。</p>
+<div class="view"><div class="toolbar"><label>保存状態 <select id="state"><option value="near">保持形状</option><option value="early">開き始め</option><option value="open">開放</option><option value="clear">離隔</option></select></label>
+<button type="button" data-camera="side">側面</button><button type="button" data-camera="front">正面</button><button type="button" data-camera="top">上面</button><button type="button" data-camera="oblique">斜め</button><button type="button" id="fit">全体を表示</button></div>
+<div class="toolbar"><label><input id="hardware" type="checkbox" checked> 黒い機構</label><label><input id="target" type="checkbox" checked> 参考部品</label><span class="small">青いキャリア・接触パッドは常時表示</span></div>
+<div style="position:relative"><canvas id="view" aria-label="T050の保存3Dモデル"></canvas><div style="position:absolute;left:18px;bottom:18px;pointer-events:none" class="small">20 mm<div id="scale" style="border-top:2px solid #677f91"></div></div></div>
+<div class="caption" id="state-note"></div></div>
+<p id="view-error" hidden>このブラウザーではWebGLを利用できません。GLBを3Dビューアーで開いてください。</p>
+<div class="links"><a href="hand_clockwise_tilt_T050_v01.glb">保存GLB</a><a href="data/hand_default_meshes_v01.json">保存メッシュと4状態</a><a href="audit/hand_placement_build_v01.json">入力・保存照合</a></div>
+<p class="small">状態間を補間した連続動作は作っていません。工具形状・干渉判定はこのビューに追加していません。幾何表示は物理妥当性の判定ではありません。</p>
+</main><script type="application/json" id="model-data">__MESH_PAYLOAD__</script><script>
+"use strict";
+const $=id=>document.getElementById(id),payload=JSON.parse($("model-data").textContent),candidate=payload.candidates.T050,canvas=$("view");
+const gl=canvas.getContext("webgl",{alpha:true,antialias:true,preserveDrawingBuffer:true});
+if(!gl){$("view-error").hidden=false;throw new Error("WebGL unavailable");}
+const unit=v=>{const n=Math.hypot(...v);return v.map(x=>x/(n||1));},cross=(a,b)=>[a[1]*b[2]-a[2]*b[1],a[2]*b[0]-a[0]*b[2],a[0]*b[1]-a[1]*b[0]],sub=(a,b)=>a.map((x,i)=>x-b[i]),dot=(a,b)=>a.reduce((s,x,i)=>s+x*b[i],0),light=unit([-.5,-.7,1]);
+function compile(type,source){const s=gl.createShader(type);gl.shaderSource(s,source);gl.compileShader(s);if(!gl.getShaderParameter(s,gl.COMPILE_STATUS))throw new Error(gl.getShaderInfoLog(s));return s;}
+const program=gl.createProgram();gl.attachShader(program,compile(gl.VERTEX_SHADER,"attribute vec3 a_position;attribute vec4 a_color;varying vec4 v_color;void main(){gl_Position=vec4(a_position,1.0);v_color=a_color;}"));gl.attachShader(program,compile(gl.FRAGMENT_SHADER,"precision mediump float;varying vec4 v_color;void main(){gl_FragColor=v_color;}"));gl.linkProgram(program);if(!gl.getProgramParameter(program,gl.LINK_STATUS))throw new Error(gl.getProgramInfoLog(program));gl.useProgram(program);
+const buffer=gl.createBuffer(),position=gl.getAttribLocation(program,"a_position"),color=gl.getAttribLocation(program,"a_color");gl.bindBuffer(gl.ARRAY_BUFFER,buffer);gl.enableVertexAttribArray(position);gl.enableVertexAttribArray(color);gl.vertexAttribPointer(position,3,gl.FLOAT,false,28,0);gl.vertexAttribPointer(color,4,gl.FLOAT,false,28,12);gl.enable(gl.DEPTH_TEST);gl.depthFunc(gl.LEQUAL);gl.enable(gl.CULL_FACE);gl.cullFace(gl.BACK);
+let state="near",yaw=Math.PI/2,pitch=0,zoom=1,drag=null,pending=false,geometryKey=null,geometry=null;
+function worldGeometry(){
+ const key=[state,$("hardware").checked,$("target").checked].join("/");
+ if(key===geometryKey)return geometry;
+ const vertices=[],bounds=[[Infinity,Infinity,Infinity],[-Infinity,-Infinity,-Infinity]];let meshes=0;
+ for(const [name,obj] of Object.entries(candidate.objects)){
+  if(obj.category==="guide")continue;if(["hardware","target"].includes(obj.category)&&!$(obj.category).checked)continue;
+  const m=candidate.states[state].transforms[name],world=obj.vertices.map(v=>m.slice(0,3).map(r=>r[0]*v[0]+r[1]*v[1]+r[2]*v[2]+r[3]));
+  for(const v of world)for(let i=0;i<3;i++){bounds[0][i]=Math.min(bounds[0][i],v[i]);bounds[1][i]=Math.max(bounds[1][i],v[i]);}
+  for(const f of obj.faces){const n=unit(cross(sub(world[f[1]],world[f[0]]),sub(world[f[2]],world[f[0]]))),shade=.48+.52*Math.max(0,dot(n,light)),c=obj.color.map((v,i)=>v/255*(i===3?1:shade));for(const index of f)vertices.push(...world[index],...c);}
+  meshes++;
+ }
+ geometryKey=key;geometry={vertices:new Float32Array(vertices),bounds,meshes};return geometry;
+}
+function draw(){
+ pending=false;state=$("state").value;const width=canvas.clientWidth,height=canvas.clientHeight,dpr=Math.min(devicePixelRatio||1,1.5);
+ canvas.width=Math.round(width*dpr);canvas.height=Math.round(height*dpr);gl.viewport(0,0,canvas.width,canvas.height);gl.clearColor(0,0,0,0);gl.clear(gl.COLOR_BUFFER_BIT|gl.DEPTH_BUFFER_BIT);
+ const g=worldGeometry(),focus=g.bounds[0].map((v,i)=>(v+g.bounds[1][i])/2),right=[Math.cos(yaw),Math.sin(yaw),0],up=[-Math.sin(yaw)*Math.sin(pitch),Math.cos(yaw)*Math.sin(pitch),Math.cos(pitch)],forward=cross(right,up);
+ const corners=[];for(const x of [0,1])for(const y of [0,1])for(const z of [0,1])corners.push([g.bounds[x][0],g.bounds[y][1],g.bounds[z][2]]);
+ const extent=axis=>Math.max(...corners.map(v=>dot(sub(v,focus),axis)))-Math.min(...corners.map(v=>dot(sub(v,focus),axis)));
+ const scale=.84*Math.min(width/Math.max(.001,extent(right)),height/Math.max(.001,extent(up)))*zoom,projected=new Float32Array(g.vertices);
+ for(let i=0;i<projected.length;i+=7){const v=sub([g.vertices[i],g.vertices[i+1],g.vertices[i+2]],focus);projected[i]=dot(v,right)*2*scale/width;projected[i+1]=dot(v,up)*2*scale/height;projected[i+2]=-dot(v,forward);}
+ gl.bufferData(gl.ARRAY_BUFFER,projected,gl.DYNAMIC_DRAW);gl.drawArrays(gl.TRIANGLES,0,projected.length/7);
+ $("scale").style.width=.02*scale+"px";$("state-note").textContent="T050 / "+state+"｜保存状態の表示・20実体メッシュ（表示切替前）";
+ window.handRendered={candidate:"T050",state,meshes:g.meshes,triangles:projected.length/21,gl_error:gl.getError(),finite_vertices:Array.from(projected).every(Number.isFinite),scale_px_per_m:scale,width,height};
+}
+function schedule(){if(!pending){pending=true;requestAnimationFrame(draw);}}
+for(const id of ["state","hardware","target"])$(id).addEventListener("change",()=>{zoom=1;schedule();});
+for(const b of document.querySelectorAll("[data-camera]"))b.onclick=()=>{[yaw,pitch]={side:[Math.PI/2,0],front:[0,0],top:[0,Math.PI/2],oblique:[.9,.6]}[b.dataset.camera];zoom=1;schedule();};
+$("fit").onclick=()=>{zoom=1;schedule();};
+canvas.addEventListener("pointerdown",e=>{drag=[e.clientX,e.clientY];canvas.setPointerCapture(e.pointerId);});canvas.addEventListener("pointermove",e=>{if(!drag)return;yaw+=(e.clientX-drag[0])*.008;pitch=Math.max(-1.5,Math.min(1.57,pitch+(e.clientY-drag[1])*.008));drag=[e.clientX,e.clientY];schedule();});canvas.addEventListener("pointerup",()=>drag=null);canvas.addEventListener("pointercancel",()=>drag=null);canvas.addEventListener("wheel",e=>{e.preventDefault();zoom=Math.max(.3,Math.min(5,zoom*Math.exp(-e.deltaY*.001)));schedule();},{passive:false});new ResizeObserver(schedule).observe(canvas);schedule();
+</script></body></html>

@@ -1,0 +1,107 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 660 420" role="img" aria-labelledby="scheme-title">
+<!-- Copyright (c) 2022-2026, The Isaac Lab Project Developers. SPDX-License-Identifier: BSD-3-Clause -->
+<title id="scheme-title">把持位置と工具方向の模式図</title>
+<defs>
+<marker id="open-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10Z" fill="#128575"/></marker>
+<marker id="tool-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#c58220"/></marker>
+<style>
+.body{fill:#dce2e5;stroke:#738592;stroke-width:2}.finger{fill:#428eae;stroke:#276480;stroke-width:2}.pad{fill:#194e64}.stop{fill:#2f667c}.tool{fill:none;stroke:#c58220;stroke-width:3;stroke-dasharray:7 5}.open{fill:none;stroke:#128575;stroke-width:3;marker-end:url(#open-arrow)}.leader{fill:none;stroke:#8698a1;stroke-width:1.5}.label{font:15px system-ui,sans-serif;fill:#284858}.small-label{font:12px system-ui,sans-serif;fill:#647984}.bore{fill:#f8fbfd;stroke:#859aa8;stroke-width:2}.cable{fill:none;stroke:#e68b38;stroke-width:20;stroke-linecap:round}
+</style>
+</defs>
+<rect width="660" height="420" fill="#f8fbfd"/>
+<text x="24" y="30" class="small-label">位置関係の模式図・縮尺なし</text>
+<g data-profile="H01">
+<circle class="body" cx="330" cy="220" r="82"/>
+<rect class="body" x="306" y="113" width="48" height="35" rx="4"/>
+<rect class="body" x="306" y="292" width="48" height="35" rx="4"/>
+<circle class="bore" cx="330" cy="127" r="8"/>
+<path class="finger" d="M175 171H254Q222 220 254 269H175Z"/>
+<path class="finger" d="M485 171H406Q438 220 406 269H485Z"/>
+<path class="pad" d="M247 178Q225 220 247 262L257 258Q239 220 257 182Z"/>
+<path class="pad" d="M413 178Q435 220 413 262L403 258Q421 220 403 182Z"/>
+<path class="stop" d="M234 177V126H306V137H252V177Z"/>
+<path class="leader" d="M298 131L238 104H108"/><text x="65" y="92" class="label">非円形面への回り止め</text>
+<g class="tool-layer"><circle class="tool" cx="330" cy="127" r="24"/><path class="tool" d="M330 61V98" marker-end="url(#tool-arrow)"/><text x="366" y="76" class="label">固定穴の上を空ける</text></g>
+<g class="open-layer"><path class="open" d="M170 220H107"/><path class="open" d="M490 220H553"/></g>
+<text x="222" y="373" class="label">側面保持・部品下面に爪を入れない</text>
+</g>
+<g data-profile="H02">
+<rect class="body" x="250" y="146" width="160" height="145" rx="9"/>
+<path class="finger" d="M172 161H250V278H172Z"/>
+<path class="finger" d="M488 161H410V278H488Z"/>
+<rect class="pad" x="239" y="171" width="11" height="43"/><rect class="pad" x="239" y="235" width="11" height="43"/>
+<rect class="pad" x="410" y="184" width="11" height="72"/>
+<path class="stop" d="M230 171V134H283V146H250V171Z"/>
+<g class="tool-layer"><circle class="tool" cx="380" cy="176" r="23"/><path class="tool" d="M380 76V146" marker-end="url(#tool-arrow)"/><text x="417" y="94" class="label">工具の通り道</text></g>
+<path class="leader" d="M270 135L230 91H101"/><text x="74" y="77" class="label">端当てで長手位置を決める</text>
+<g class="open-layer"><path class="open" d="M170 223H105"/><path class="open" d="M490 223H555"/></g>
+<text x="232" y="351" class="label">基準受け ＋ 対向パッド</text>
+</g>
+<g data-profile="H03">
+<rect class="body" x="167" y="186" width="326" height="67" rx="10"/>
+<circle class="bore" cx="193" cy="219" r="13"/><circle class="bore" cx="467" cy="219" r="13"/>
+<path class="finger" d="M272 129H389V186H272Z"/><path class="finger" d="M272 253H389V310H272Z"/>
+<rect class="pad" x="279" y="177" width="104" height="9"/><rect class="pad" x="279" y="253" width="104" height="9"/>
+<path class="stop" d="M272 178H258V199H267V186H286Z"/>
+<g class="tool-layer"><circle class="tool" cx="193" cy="219" r="35"/><circle class="tool" cx="467" cy="219" r="35"/><text x="177" y="106" class="label">締結穴と接続面を空ける</text></g>
+<g class="open-layer"><path class="open" d="M330 126V80"/><path class="open" d="M330 315V360"/></g>
+<text x="188" y="393" class="label">薄い外縁を保持・端当てで回転を抑える</text>
+</g>
+<g data-profile="H04">
+<path class="cable" d="M255 223H542"/>
+<path class="body" d="M157 207Q138 222 157 239H213V230H237V214H213V207Z"/>
+<circle class="bore" cx="176" cy="223" r="11"/>
+<rect x="209" y="209" width="67" height="28" rx="4" fill="#343b41"/>
+<path class="finger" d="M222 143H444V160H256V209H231V177H222Z"/>
+<path class="finger" d="M222 303H444V286H256V237H231V269H222Z"/>
+<rect class="finger" x="410" y="160" width="25" height="53"/><rect class="finger" x="410" y="233" width="25" height="53"/>
+<rect class="pad" x="231" y="203" width="25" height="6"/><rect class="pad" x="231" y="237" width="25" height="6"/>
+<rect class="pad" x="410" y="207" width="25" height="6"/><rect class="pad" x="410" y="233" width="25" height="6"/>
+<path class="leader" d="M243 205L286 102"/><text x="190" y="85" class="label">端子側の黒被覆</text>
+<path class="leader" d="M423 205L491 128"/><text x="458" y="111" class="label">根元被覆</text>
+<g class="tool-layer"><circle class="tool" cx="176" cy="223" r="31"/><path class="tool" d="M124 141L160 194" marker-end="url(#tool-arrow)"/><text x="30" y="123" class="label">金属端子・穴を空ける</text></g>
+<g class="open-layer"><path class="open" d="M335 139V97"/><path class="open" d="M335 306V348"/></g>
+<text x="143" y="383" class="label">同じ2本指で二つの区間を保持・前後は連動</text>
+</g>
+<g data-profile="H05">
+<path class="cable" d="M122 226H264"/>
+<rect class="body" x="260" y="178" width="150" height="97" rx="10"/><rect class="body" x="410" y="187" width="42" height="79" rx="5"/>
+<rect class="body" x="382" y="163" width="32" height="15" rx="3"/>
+<path class="finger" d="M234 133H363V178H269V194H255V164H234Z"/>
+<path class="finger" d="M234 320H363V275H269V259H255V289H234Z"/>
+<rect class="pad" x="278" y="170" width="77" height="8"/><rect class="pad" x="278" y="275" width="77" height="8"/>
+<path class="leader" d="M257 191L207 101H90"/><text x="55" y="85" class="label">剛体の肩・後端を受ける</text>
+<g class="tool-layer"><path class="tool" d="M460 226H565" marker-end="url(#tool-arrow)"/><text x="469" y="203" class="label">挿入方向</text><path class="tool" d="M384 160H416V183H384Z"/><text x="390" y="103" class="label">ロック部を空ける</text></g>
+<g class="open-layer"><path class="open" d="M322 129V90"/><path class="open" d="M322 324V363"/></g>
+</g>
+<g data-profile="H06">
+<rect class="body" x="209" y="130" width="242" height="182" rx="14"/><rect x="232" y="151" width="196" height="140" rx="10" fill="#eef2f4" stroke="#adbcc5" stroke-width="2"/>
+<rect class="finger" x="155" y="141" width="46" height="160" rx="4"/><rect class="finger" x="459" y="141" width="46" height="160" rx="4"/>
+<rect class="pad" x="201" y="155" width="8" height="37"/><rect class="pad" x="201" y="250" width="8" height="37"/>
+<rect class="pad" x="451" y="155" width="8" height="37"/><rect class="pad" x="451" y="250" width="8" height="37"/>
+<path class="leader" d="M198 153L171 92H66"/><text x="50" y="77" class="label">離した二つの接触域</text>
+<g class="tool-layer"><rect class="tool" x="229" y="148" width="202" height="146" rx="10"/><text x="396" y="88" class="label">シール・接続口を避ける</text></g>
+<g class="open-layer"><path class="open" d="M149 223H87"/><path class="open" d="M511 223H573"/></g>
+<text x="122" y="364" class="label">幅に合う搬送ハンド・2爪／4接触域</text>
+</g>
+<g data-profile="H07">
+<rect class="body" x="171" y="166" width="318" height="105" rx="7"/><rect x="192" y="183" width="276" height="71" rx="5" fill="#edf1f3" stroke="#b3c0c7"/>
+<path class="finger" d="M203 121H457V154H435V166H414V154H246V166H225V154H203Z"/>
+<path class="finger" d="M203 316H457V283H435V271H414V283H246V271H225V283H203Z"/>
+<rect class="pad" x="225" y="160" width="21" height="6"/><rect class="pad" x="414" y="160" width="21" height="6"/>
+<rect class="pad" x="225" y="271" width="21" height="6"/><rect class="pad" x="414" y="271" width="21" height="6"/>
+<g class="tool-layer"><circle class="tool" cx="185" cy="179" r="14"/><circle class="tool" cx="475" cy="258" r="14"/><text x="84" y="87" class="label">シール面と固定穴を空ける</text></g>
+<g class="open-layer"><path class="open" d="M330 116V68"/><path class="open" d="M330 321V364"/></g>
+<text x="131" y="398" class="label">外周側縁で保持・下面へ爪を差し込まない</text>
+</g>
+<g data-profile="H08">
+<rect x="168" y="203" width="62" height="36" rx="6" fill="#b9b2a4" stroke="#7c827e" stroke-width="2"/>
+<rect x="430" y="203" width="62" height="36" rx="6" fill="#b9b2a4" stroke="#7c827e" stroke-width="2"/>
+<rect class="body" x="220" y="174" width="220" height="94" rx="34"/>
+<path class="finger" d="M280 119H380V174H280Z"/><path class="finger" d="M280 268H380V323H280Z"/>
+<rect class="pad" x="286" y="167" width="88" height="7"/><rect class="pad" x="286" y="268" width="88" height="7"/>
+<g class="tool-layer"><rect class="tool" x="158" y="194" width="66" height="54" rx="6"/><rect class="tool" x="436" y="194" width="66" height="54" rx="6"/><text x="151" y="89" class="label">導電端・接続面はつかまない</text></g>
+<g class="open-layer"><path class="open" d="M330 116V72"/><path class="open" d="M330 327V366"/></g>
+<text x="112" y="398" class="label">円筒形式の模式例・実形式に合わせて輪郭を交換</text>
+</g>
+</svg>

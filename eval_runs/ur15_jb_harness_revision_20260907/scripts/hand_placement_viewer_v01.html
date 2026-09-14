@@ -1,0 +1,77 @@
+<!doctype html>
+<!-- Copyright (c) 2022-2026, The Isaac Lab Project Developers. SPDX-License-Identifier: BSD-3-Clause -->
+<html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>THREAD｜工程別の把持位置と工具方向</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#f2f5f7;color:#213e50;font:15px/1.75 system-ui,"Noto Sans CJK JP",sans-serif}main{max-width:1400px;margin:auto;padding:28px 24px 50px}h1{font-size:29px;line-height:1.4;margin:8px 0 15px}h2{font-size:20px;margin:0 0 8px}h3{font-size:15px;margin:0 0 4px}p{margin:7px 0}.eyebrow{font-size:12px;letter-spacing:.1em;color:#287997}.intro{max-width:1060px}.small{font-size:12px;color:#607788}.filters{display:flex;align-items:center;gap:16px;flex-wrap:wrap;margin-top:22px}.filters label{font-weight:650}select,button{font:inherit;border:1px solid #b9cdda;border-radius:5px;padding:8px 11px;background:white;color:#234b65;cursor:pointer;max-width:100%}button[aria-pressed=true]{background:#246f95;color:white;border-color:#246f95}button:focus-visible,select:focus-visible,input:focus-visible{outline:3px solid #d99730;outline-offset:3px}.targets{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0 20px}.targets button{font-size:13px}.layout{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:18px}.panel{background:white;border:1px solid #cbdce6;border-radius:8px;overflow:hidden;min-width:0}.head{padding:17px 20px;border-bottom:1px solid #dbe5eb}.diagram svg{display:block;width:100%;height:auto}.diagram [data-profile]{display:none}.options{display:flex;gap:18px;flex-wrap:wrap;padding:10px 18px;border-bottom:1px solid #dbe5eb;font-size:13px}.legend{display:flex;gap:14px;flex-wrap:wrap;padding:12px 18px;font-size:12px;color:#5a7384}.dot{display:inline-block;width:10px;height:10px;margin-right:5px;border-radius:2px}.photo svg{width:100%;height:auto;display:block}.caption{padding:10px 17px;font-size:12px;color:#566f81;background:#f7fafc}.fields{display:grid;grid-template-columns:1fr 1fr;gap:14px;padding:20px}.field{border-top:1px solid #dce7ed;padding-top:10px}.field p{font-size:13px}.detail{padding:18px 20px}.badge{display:inline-block;background:#e5f1f7;color:#236d91;font-size:12px;padding:3px 8px;border-radius:4px}.action-link{display:inline-block;margin-top:12px;background:#246f95;color:white;text-decoration:none;border-radius:5px;padding:8px 14px}.lower{margin-top:20px;padding:20px}.table-wrap{overflow:auto}table{border-collapse:collapse;width:100%;font-size:13px}td,th{padding:10px 13px;border-bottom:1px solid #dce5eb;text-align:left;vertical-align:top}th{background:#f2f7fa}a{color:#246d94;overflow-wrap:anywhere}.links{display:flex;gap:18px;flex-wrap:wrap;margin-top:18px}footer{margin-top:22px;font-size:12px;color:#5d7686}#empty{padding:28px;background:#fff;border:1px solid #cadde8;border-radius:8px}#cable-link[hidden],[hidden]{display:none!important}@media(max-width:900px){.layout{grid-template-columns:1fr}.fields{grid-template-columns:1fr 1fr}}@media(max-width:540px){main{padding:21px 12px}h1{font-size:24px}.fields{grid-template-columns:1fr}.head,.detail{padding:15px}.targets{gap:6px}.targets button{padding:7px 9px}.lower{padding:14px}.filters select{width:100%}}
+</style></head><body><main>
+<header><div class="eyebrow">THREAD / GRASP POSITION REVIEW / v0.1 / 2026-09-14</div>
+<h1>部品をどこでつかみ、工具をどこから入れるか</h1>
+<p class="intro">仮決定した2本指の構成を、13の把持対象に割り付けました。工程と部品を選んで、接触面・空ける場所・開放方向を確認できます。</p>
+<p class="small">模式図は縮尺なし。実部品の形状・穴位置や許容把持面を測定した図ではありません。ケーブル用の保存3Dモデルは別ページで回転表示できます。</p></header>
+<div class="filters"><label for="station">工程を選択</label><select id="station"></select><span class="badge" id="target-count"></span></div>
+<p class="small" id="station-note"></p><nav class="targets" id="targets" aria-label="把持対象"></nav>
+<div id="empty" hidden><h2>この参照工程には把持用フィンガを追加していません</h2><p id="empty-note"></p></div>
+<div class="layout" id="selection">
+<section class="panel">
+<div class="head"><h2 id="part-name"></h2><p><span class="badge" id="hand-name"></span></p><p class="small" id="assignment"></p></div>
+<div class="options"><label><input type="checkbox" id="tool" checked> 空ける場所・工具方向</label><label><input type="checkbox" id="opening"> 指を開く方向</label></div>
+<div class="diagram" id="diagram">__SCHEMATIC_SVG__</div>
+<div class="legend"><span><i class="dot" style="background:#dce2e5"></i>対象</span><span><i class="dot" style="background:#428eae"></i>指先キャリア</span><span><i class="dot" style="background:#194e64"></i>接触・受け</span><span><i class="dot" style="background:#c58220"></i>空ける場所</span><span><i class="dot" style="background:#128575"></i>開放方向</span></div>
+<div class="detail"><p class="small">上から見た位置関係の模式例です。開放の矢印は方向のみを示し、既存リンクの上下移動や連続軌道は表示していません。</p>
+<a class="action-link" id="cable-link" href="ケーブル保持3D_v01.html" hidden>15°・40 mmの保存モデルを3Dで開く</a></div>
+</section>
+<section class="panel photo">
+<div class="head"><h2>実物資料との対応</h2><p class="small" id="photo-note"></p></div>
+<svg id="photo-svg" viewBox="0 0 1620 1080" role="img" aria-labelledby="photo-title"><title id="photo-title">Ampere公開写真の部材位置</title><image id="photo" width="1620" height="1080"/><g id="regions"></g></svg>
+<div class="caption" id="region-note"></div>
+<div class="caption"><a id="photo-source" target="_blank" rel="noopener">公開写真の出典</a>。枠は部材の位置例で、把持許容面の指定ではありません。</div>
+<div class="detail"><h3>保持について残る確認</h3><p id="unresolved"></p><p class="small">滑り・回転・被覆ずれ、締結中の保持性能はこの図では判定していません。</p></div>
+</section>
+<section class="panel" style="grid-column:1/-1"><div class="fields">
+<div class="field"><h3>つかむ面・指先</h3><p id="contact"></p></div>
+<div class="field"><h3>位置と向きを保つ役割</h3><p id="stability"></p></div>
+<div class="field"><h3>触れずに空ける場所</h3><p id="keep-clear"></p></div>
+<div class="field"><h3>保持を続ける期間・開放</h3><p id="release"></p></div>
+</div></section></div>
+<section class="panel lower"><h2>工程と手先の対応</h2><p class="small">工程番号は旧ラインとの照合用です。旧クリップ・押さえ・ラッチの採用や、ST増設を表しません。</p><div class="table-wrap"><table><thead><tr><th>工程</th><th>手先</th><th>役割・条件</th></tr></thead><tbody id="coverage"></tbody></table></div></section>
+<footer><p>8種類は指先形状の分類で、ハンドの台数ではありません。3本指・4本指は、独立した保持・部分開放が必要な対象で再検討します。締付工具は常設し、フィンガで工具をつかみません。</p>
+<div class="links"><a href="フィンガ仮仕様_v01.md">仮仕様書</a><a href="把持位置確認_v01.md">今回の確認範囲</a><a href="data/hand_provisional_spec_v01.json">対象別設定</a><a href="audit/hand_placement_build_v01.json">生成・照合記録</a></div>
+<p>物理妥当性の正式判定はVaultProtocol V12の独立レビュー経路によります。本資料は静的な役割・配置の確認用です。</p></footer>
+</main><script id="review-data" type="application/json">__REVIEW_DATA__</script><script>
+"use strict";
+const data=JSON.parse(document.getElementById("review-data").textContent),$=id=>document.getElementById(id),ns="http://www.w3.org/2000/svg";
+const profiles=Object.fromEntries(data.spec.profiles.map(p=>[p.id,p]));
+let chosen=null;
+const txt=(tag,value)=>{const e=document.createElement(tag);e.textContent=value;return e;};
+function overlays(){for(const e of document.querySelectorAll(".tool-layer"))e.style.display=$("tool").checked?"":"none";for(const e of document.querySelectorAll(".open-layer"))e.style.display=$("opening").checked?"":"none";}
+function selectTarget(id){
+ const a=data.spec.assignments.find(p=>p.target_id===id),p=profiles[a.profile_id],source=data.target_photos[id];
+ chosen=id;$("part-name").textContent=id+"｜"+a.name_ja;$("hand-name").textContent=p.id+" "+p.name_ja+"｜2本指・開閉1駆動";$("assignment").textContent=a.condition_ja;
+ for(const [key,field] of [["contact","contact_ja"],["stability","stability_intent_ja"],["keep-clear","keep_clear_ja"],["release","release_ja"],["unresolved","unresolved_ja"]])$(key).textContent=p[field];
+ for(const e of document.querySelectorAll("#diagram [data-profile]"))e.style.display=e.dataset.profile===p.id?"inline":"none";
+ $("scheme-title").textContent=a.name_ja+"：把持と工具方向の模式図";
+ $("cable-link").hidden=p.id!=="H04";
+ $("photo").setAttribute("href",data.photos[source.photo].data_uri);$("photo-source").href=data.photos[source.photo].url;
+ $("photo-title").textContent=a.name_ja+"の公開参照写真";$("photo-note").textContent=source.note_ja;
+ $("regions").replaceChildren();
+ for(const box of source.regions_px){const e=document.createElementNS(ns,"rect");["x","y","width","height"].forEach((key,i)=>e.setAttribute(key,box[i]));e.setAttribute("fill","#248dc018");e.setAttribute("stroke","#18a5df");e.setAttribute("stroke-width","6");$("regions").append(e);}
+ $("region-note").textContent=source.regions_px.length?"前段の部材位置枠をそのまま表示しています。":"この対象の写真上の位置は未特定です。枠を付けず、製品全体の参照写真を表示しています。";
+ for(const b of document.querySelectorAll("#targets button"))b.setAttribute("aria-pressed",String(b.dataset.target===id));
+ overlays();window.placementSelected={id,profile:p.id,station:$("station").value,regions:source.regions_px.length,cable3d:p.id==="H04",diagram_scale:"none"};
+}
+function selectStation(){
+ const station=$("station").value,ids=station==="all"?data.spec.assignments.map(a=>a.target_id):data.station_targets[station];
+ const record=data.spec.station_coverage.find(r=>r.station_ref===station);
+ const note=data.empty_station_note_overrides[station]||(record?record.note_ja:"全13対象。部品の入荷状態によって、単体取付の有無は変わります。");
+ $("station-note").textContent=note;
+ $("target-count").textContent=ids.length+"対象";$("targets").replaceChildren();
+ for(const id of ids){const a=data.spec.assignments.find(p=>p.target_id===id),b=txt("button",id+" "+a.name_ja);b.type="button";b.dataset.target=id;b.onclick=()=>selectTarget(id);$("targets").append(b);}
+ $("empty").hidden=ids.length>0;$("selection").hidden=ids.length===0;
+ if(ids.length)selectTarget(ids.includes(chosen)?chosen:ids[0]);else{$("empty-note").textContent=note;window.placementSelected={id:null,station,empty:true};}
+}
+$("station").append(new Option("すべての把持対象","all"));
+for(const r of data.spec.station_coverage){$("station").append(new Option(r.station_ref+"｜"+r.role_ja,r.station_ref));const tr=document.createElement("tr");tr.append(txt("td",r.station_ref+" "+r.role_ja),txt("td",r.profile_ids.join(" / ")||"追加なし"),txt("td",r.note_ja));$("coverage").append(tr);}
+$("station").addEventListener("change",selectStation);$("tool").addEventListener("change",overlays);$("opening").addEventListener("change",overlays);
+selectStation();
+</script></body></html>

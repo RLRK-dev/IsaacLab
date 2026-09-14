@@ -330,3 +330,25 @@ numbers unknown until their basis and the scope of the product change are set.
   trajectories or physical acceptance. Keep the known trapped-underlip issue,
   continuous hand retention, two-tool comparison and synchronous requirements.
   Old OP050/060/080 components are not adopted merely to populate this table.
+
+## Static hand review and cell allocation on 2026-09-14
+
+- After accepting the provisional hand architecture, the user requested cell
+  configuration with single, dual or three arms as appropriate, explicitly
+  allowing one-axis and two-axis robots. Do not default every cell to dual arms.
+  Use `analysis/cell_robot_allocation_v01.md` as the next comparison input.
+- Count independent holding roles, articulated arms, positioning axes and
+  fastening spindles separately. XY positioning plus a tool Z feed is not a
+  two-axis-only system. A third arm with one spindle does not provide the
+  existing two-spindle simultaneous fastening requirement.
+- Keep A mechanical assembly, B power connections and C auxiliary/control
+  connections as the current three-station comparison. B/C complete their
+  assigned joints while held; do not revert to unfastened B-to-C transfer.
+  Initial cell candidates are not selected machines or physical acceptance.
+- `hand_placement_review_v01` provides thirteen target views with eight
+  scale-free schematics, unchanged public-photo regions and the saved T050
+  model. Unlocated parts have no photo rectangle. Drawn contacts, holes and
+  tool directions are not actual manufacturing dimensions or collision checks.
+- The separate T050 page preserves all real meshes and four saved transforms,
+  hiding the old guide cylinder. It adds no full tool envelope or interpolated
+  arm motion. This step does not update line native files or produce a video.
