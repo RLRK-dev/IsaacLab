@@ -1,0 +1,14 @@
+[
+  {
+    "primitive": "box",
+    "vertices": 8,
+    "polygons": 6,
+    "max_nearest_vertex_distance_m": 0.0
+  },
+  {
+    "primitive": "cylinder",
+    "vertices": 96,
+    "polygons": 50,
+    "max_nearest_vertex_distance_m": 0.0
+  }
+]

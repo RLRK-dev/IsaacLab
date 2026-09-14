@@ -1,0 +1,144 @@
+{
+  "delivery": "/home/rlrk/Downloads/THREAD_OP010_OP030_ヘッダー修正_v03_20260915",
+  "files": [
+    {
+      "file": "UR15_JB_OP010_OP030_split_process_headers_v03_review.mp4",
+      "sha256": "5ec0e18d7072494f7c7bf7a9e2c3222b45a826912e69ed1ca3e3e50caacc23bf",
+      "bytes": 10724686
+    },
+    {
+      "file": "UR15_JB_initial_hands_v03_p03.blend",
+      "sha256": "2b828f98402cc95033ed62a380cdea0fb04f95bb31cae0d525b98357cd870614",
+      "bytes": 17912962
+    },
+    {
+      "file": "README.md",
+      "sha256": "8be21c1ec7e00193835b5e28b951d5bab4a1a6b9ad1fd5b1a7a01a97dc006454",
+      "bytes": 9138
+    },
+    {
+      "file": "header_installed.png",
+      "sha256": "cc08556fa5e60d48b00267bffadf46057de1faeaff59a7075bf3900726928433",
+      "bytes": 1003443
+    },
+    {
+      "file": "scripts/probe_header_review_v03.py",
+      "sha256": "b05b78b609d89a836e8be97f71aa88e48ddb9a19e06083f1e4b9c977bb7de347",
+      "bytes": 7174
+    },
+    {
+      "file": "scripts/build_header_review_v03.py",
+      "sha256": "216f596e8662b6f8a46a73fb8e3e6527972c241af6453bdb8102b98d82a1b01d",
+      "bytes": 19671
+    },
+    {
+      "file": "scripts/package_header_review_v03.py",
+      "sha256": "25e4bf7d55573aa90855bfddfa04ec9593b388a44caaed8b12fe86533fff8f6b",
+      "bytes": 5554
+    },
+    {
+      "file": "scripts/prepare_header_review_v03.py",
+      "sha256": "6743845f7fd3f67de4c3b939ec0d8145882e51838bc952e3d993b716d3045ae6",
+      "bytes": 14814
+    },
+    {
+      "file": "scripts/header_review_primitives.py",
+      "sha256": "092c8c2c75ae1b513300214ef1666891b55a2a9510d92282506e673dae5e9c7b",
+      "bytes": 1785
+    },
+    {
+      "file": "audit/header_review_v03_primitive_reuse.json",
+      "sha256": "7e93ff1ba5ba1b71426c2eb6d77b89e5e68927036b49abd12a2c361be2633753",
+      "bytes": 234
+    },
+    {
+      "file": "audit/header_review_v03_prepare.json",
+      "sha256": "a898d97a94a4ea2b9b1e1935f779738d7ab9743012ff2929b1449e268ddf3b1d",
+      "bytes": 6165
+    },
+    {
+      "file": "audit/header_review_v03_reference_files.json",
+      "sha256": "e186a3c053ae1460b37fd9cebb69eb5fc7ee232a78bf31f4c8dd5cad84aa900c",
+      "bytes": 1804
+    },
+    {
+      "file": "audit/header_review_v03_p03_build.json",
+      "sha256": "1f8066ef76c6778bca18ccd90e5a3d7738314164f0002a0fe5dbbd1651c80ec8",
+      "bytes": 1349
+    },
+    {
+      "file": "audit/header_review_v03_p03_probe.json",
+      "sha256": "e11920ee22dcbfbdb5ef2fffa683571c79b7519df82b9cd89f695cde95089d38",
+      "bytes": 20287
+    },
+    {
+      "file": "audit/UR15_JB_OP010_OP030_split_process_headers_v03_review_video.json",
+      "sha256": "144f064e4ec787ead20f983dedc2b76d4e8af2976e22e1cd82912f300e5bf6ad",
+      "bytes": 228036
+    },
+    {
+      "file": "audit/header_review_final_v03_render.log",
+      "sha256": "2d5e50b09893579d28e159c545dcd75aa468224cf8712662d5adb782e99c3873",
+      "bytes": 720781
+    },
+    {
+      "file": "data/header_review_v03/motion.npz",
+      "sha256": "b84b0f77a20cf2dd61c512514f4183c70bd3486e44b5c47dbcc8146b1be1b1e9",
+      "bytes": 385427
+    },
+    {
+      "file": "data/header_review_v03/meshes.json.gz",
+      "sha256": "8c0bbe8c60f0a78f8dcba56d76ed825d13d3f88dd67e9fd8cdeb932e88fa4130",
+      "bytes": 3279517
+    },
+    {
+      "file": "data/header_review_v03_p03_presentation.json",
+      "sha256": "ab1dcc85e41d85ec6a3060adb5d1b1f13a81e598b9cb99ee2d36d01042ba283d",
+      "bytes": 5216
+    },
+    {
+      "file": "previews/header_review_final_v03/manifest.json",
+      "sha256": "461fce1e374e3d2b7b52ff0f035ab00fac123e61b80690fb0690cd0b32efa875",
+      "bytes": 355309
+    },
+    {
+      "file": "references/connector_correction_20260915/te_408_32095_instruction.pdf",
+      "sha256": "cd13cd856b679e2683f7672f079bd4c99ff87ac2e361d3da73700e12c12fa63d",
+      "bytes": 762503
+    },
+    {
+      "file": "references/connector_correction_20260915/te_2103340_drawing.pdf",
+      "sha256": "be59744129dc5134d2a3363e25af93294e662cde4254ec28411b80bd01673dc6",
+      "bytes": 1088384
+    },
+    {
+      "file": "references/connector_correction_20260915/te_2103346_drawing.pdf",
+      "sha256": "fbdeb1d56aba02ae85ed2464b3acd68ce6444cd47179f33225d7f0ba1b580e28",
+      "bytes": 896394
+    },
+    {
+      "file": "references/connector_correction_20260915/te_2103340_1_step.zip",
+      "sha256": "bf4815eb58f0bca5c71f0e654c13216cbe5abe1a2b2afcc6d9ee26c17fff6b9a",
+      "bytes": 263827
+    },
+    {
+      "file": "references/connector_correction_20260915/te_2103346_2_step.zip",
+      "sha256": "78b8288664ef9e5db129a307547402afe365bd8f91618142a3e10900627aa07c",
+      "bytes": 323791
+    },
+    {
+      "file": "references/connector_correction_20260915/ampere_external.jpg",
+      "sha256": "29f551a4b836bbfddb8833cca0f4dcacf64e43e2bd4aab86910fdc28955bcd82",
+      "bytes": 42135
+    },
+    {
+      "file": "review.html",
+      "sha256": "3221b24d12919f40a35348dcfb75235e8c911b41fe55af20f477e264b23227c9",
+      "bytes": 3043
+    }
+  ],
+  "mp4_count": 1,
+  "native_sha256": "2b828f98402cc95033ed62a380cdea0fb04f95bb31cae0d525b98357cd870614",
+  "video_sha256": "5ec0e18d7072494f7c7bf7a9e2c3222b45a826912e69ed1ca3e3e50caacc23bf",
+  "physical_validity_verdict": null
+}

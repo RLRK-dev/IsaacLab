@@ -373,3 +373,23 @@ numbers unknown until their basis and the scope of the product change are set.
 - Continue producing only the process review MP4 directly from process PNGs.
   New line files must have new names; the pinned v06 and T050 source files stay
   unchanged. Geometric observations and native readback remain auxiliary.
+
+## OP020 connector correction on 2026-09-15
+
+- The user rejected the box-shaped connector surrogate and explicitly selected
+  installation and screw fastening of the enclosure-side outer headers for OP020.
+  Do not keep the previous push-cylinder/plug-mating operation for this step.
+- Match the Ampere public A/D/E + D/F key layout using TE's public 2103340-1 and
+  2103346-2 outer-header STEP geometry. Their flange fastener counts are eight
+  and six M4 screws. Inner contact housings and external cable plugs are separate
+  parts and operations; an empty outer header is not a completed electrical port.
+- Use one holding arm and a station-mounted XYZ screwdriving unit as the initial
+  motion-review implementation. Keep holding through all fasteners. The dedicated
+  flange-side tips are shared between the two sizes with different jaw commands.
+- Record the 60 mm outward hardware shift and initial tip/carrier details as H05
+  review geometry. They do not replace the cable T050 40 mm/15-degree selection.
+- The main HV two-pole metal flange and white caps are a photo-based outline;
+  their exact Amphenol part number and dimensions remain unresolved. OP030-C's
+  control connector is still a representative model, not a matched actual part.
+- Preserve v02 and v06 native files. Continue rendering one process-review movie
+  directly from PNGs. Model and sampled geometric checks are not physical acceptance.

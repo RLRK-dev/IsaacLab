@@ -1,0 +1,34 @@
+[Script Info]
+ScriptType: v4.00+
+PlayResX: 1280
+PlayResY: 720
+WrapStyle: 0
+
+[V4+ Styles]
+Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
+Style: Main,Noto Sans CJK JP,22,&H00FFFFFF,&H00FFFFFF,&H901C2D36,&H901C2D36,0,0,0,0,100,100,0,0,3,6,0,2,22,22,18,1
+Style: Scope,Noto Sans CJK JP,17,&H00FFFFFF,&H00FFFFFF,&H901C2D36,&H901C2D36,0,0,0,0,100,100,0,0,3,4,0,8,12,12,12,1
+
+[Events]
+Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
+Dialogue: 0,0:00:00.00,0:01:34.00,Scope,,0,0,0,,EVジャンクションボックス｜OP020ヘッダー修正・初期動作確認
+Dialogue: 0,0:00:00.00,0:00:02.40,Main,,0,0,0,,OP010｜XYZ直交・20個ストッカ｜筐体を把持
+Dialogue: 0,0:00:02.40,0:00:06.70,Main,,0,0,0,,OP010｜姿勢を保ったまま持上げ・XY移載
+Dialogue: 0,0:00:06.70,0:00:09.60,Main,,0,0,0,,OP010｜コンベア上のパレットへ設置・開放
+Dialogue: 0,0:00:09.60,0:00:12.00,Main,,0,0,0,,OP010｜ハンド退避｜パレットの昇降なし
+Dialogue: 0,0:00:12.00,0:00:18.20,Main,,0,0,0,,OP020｜3口ヘッダーを単腕で取り出し・筐体へ着座
+Dialogue: 0,0:00:18.20,0:00:26.80,Main,,0,0,0,,OP020｜保持を継続し、設備側の工具でM4ねじ8本を固定
+Dialogue: 0,0:00:26.80,0:00:30.00,Main,,0,0,0,,OP020｜8本の固定後に開放・次のヘッダーへ
+Dialogue: 0,0:00:30.00,0:00:36.80,Main,,0,0,0,,OP020｜2口ヘッダーを取り出し・筐体へ着座
+Dialogue: 0,0:00:36.80,0:00:43.50,Main,,0,0,0,,OP020｜保持を継続し、M4ねじ6本を固定
+Dialogue: 0,0:00:43.50,0:00:46.00,Main,,0,0,0,,OP020｜固定後に開放・工具とハンドを退避
+Dialogue: 0,0:00:46.00,0:00:52.00,Main,,0,0,0,,OP020｜筐体側外部ヘッダーの取付完了｜内部ハウジングは別工程
+Dialogue: 0,0:00:52.00,0:00:57.80,Main,,0,0,0,,OP030-A｜部品設置とボルト準備を並行
+Dialogue: 0,0:00:57.80,0:01:02.60,Main,,0,0,0,,OP030-A｜片腕で保持を続け、工具腕で締結
+Dialogue: 0,0:01:02.60,0:01:06.00,Main,,0,0,0,,OP030-A｜開放後、両腕を同時に上昇
+Dialogue: 0,0:01:06.00,0:01:09.80,Main,,0,0,0,,OP030-B｜10本の並列ストックから両端を同時把持
+Dialogue: 0,0:01:09.80,0:01:13.20,Main,,0,0,0,,OP030-B｜両端搬送・曲線配置の幾何モデル
+Dialogue: 0,0:01:13.20,0:01:17.00,Main,,0,0,0,,OP030-B｜黒被覆・根元を保持｜設備側2工具で同時締結
+Dialogue: 0,0:01:17.00,0:01:20.00,Main,,0,0,0,,OP030-B｜工具退避 → 同時開放 → 両腕同時上昇
+Dialogue: 0,0:01:20.00,0:01:28.80,Main,,0,0,0,,OP030-C｜単腕で扱える制御コネクターの代表動作
+Dialogue: 0,0:01:28.80,0:01:34.00,Main,,0,0,0,,OP030-C｜嵌合・開放・退避｜他の接続群は別途検討

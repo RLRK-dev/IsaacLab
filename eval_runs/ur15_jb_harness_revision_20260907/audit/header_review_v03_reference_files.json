@@ -1,0 +1,60 @@
+{
+  "files": [
+    {
+      "file": "ampere_external.jpg",
+      "sha256": "29f551a4b836bbfddb8833cca0f4dcacf64e43e2bd4aab86910fdc28955bcd82",
+      "bytes": 42135
+    },
+    {
+      "file": "amphenol_powerlok_catalogue.pdf",
+      "sha256": "b1227dcb8220f5a7aaa6985e14a392a4b8098363570b29117bbe81f2e2cdb4ca",
+      "bytes": 22890344
+    },
+    {
+      "file": "c-2103340-1-a-3d.stp",
+      "sha256": "bd4a435a2344b9ebd0c315cbca15581ced3532db9369942377210b24561dc85b",
+      "bytes": 1511608
+    },
+    {
+      "file": "c-2103346-2-a1-3d.stp",
+      "sha256": "374d829ff0f7367b615c0b14b263a1e0986e638610e7f0c4a83a1ade6e8cce37",
+      "bytes": 1738930
+    },
+    {
+      "file": "te_2103340_1.glb",
+      "sha256": "3947168707928a0bd808b400390c166f6add61ea95669bab2a200257df56d254",
+      "bytes": 2901100
+    },
+    {
+      "file": "te_2103340_1_step.zip",
+      "sha256": "bf4815eb58f0bca5c71f0e654c13216cbe5abe1a2b2afcc6d9ee26c17fff6b9a",
+      "bytes": 263827
+    },
+    {
+      "file": "te_2103340_drawing.pdf",
+      "sha256": "be59744129dc5134d2a3363e25af93294e662cde4254ec28411b80bd01673dc6",
+      "bytes": 1088384
+    },
+    {
+      "file": "te_2103346_2.glb",
+      "sha256": "9cf5e41d9b1b1ca07862779fdc8b1ce692f4d1b9cce9b732933ea1c9c12a68bb",
+      "bytes": 2140280
+    },
+    {
+      "file": "te_2103346_2_step.zip",
+      "sha256": "78b8288664ef9e5db129a307547402afe365bd8f91618142a3e10900627aa07c",
+      "bytes": 323791
+    },
+    {
+      "file": "te_2103346_drawing.pdf",
+      "sha256": "fbdeb1d56aba02ae85ed2464b3acd68ce6444cd47179f33225d7f0ba1b580e28",
+      "bytes": 896394
+    },
+    {
+      "file": "te_408_32095_instruction.pdf",
+      "sha256": "cd13cd856b679e2683f7672f079bd4c99ff87ac2e361d3da73700e12c12fa63d",
+      "bytes": 762503
+    }
+  ],
+  "retrieval_date": "2026-09-15"
+}

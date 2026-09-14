@@ -1,0 +1,223 @@
+{
+  "native": "UR15_JB_initial_hands_v03_p01.blend",
+  "native_sha256": "5ca18ed484c39a9ede78c7e42b44c597b5781eeb4626ac26100348493d8ca19f",
+  "motion": "header_review_v03/motion.npz",
+  "motion_sha256": "530c64e3e1c628fa99190a5e6a0c77f8049f7bfb142baf2266754d78373020dc",
+  "frame_end": 2820,
+  "scope_caption": "EVジャンクションボックス｜OP020ヘッダー修正・初期動作確認",
+  "phase_prefix": "",
+  "ranges": [
+    {
+      "first_frame": 1,
+      "last_frame": 201,
+      "camera": "xyz_stock"
+    },
+    {
+      "first_frame": 202,
+      "last_frame": 360,
+      "camera": "xyz_place"
+    },
+    {
+      "first_frame": 361,
+      "last_frame": 510,
+      "camera": "header_supply"
+    },
+    {
+      "first_frame": 511,
+      "last_frame": 564,
+      "camera": "header_cell"
+    },
+    {
+      "first_frame": 565,
+      "last_frame": 804,
+      "camera": "header_three_fastening"
+    },
+    {
+      "first_frame": 805,
+      "last_frame": 900,
+      "camera": "header_cell"
+    },
+    {
+      "first_frame": 901,
+      "last_frame": 1044,
+      "camera": "header_supply"
+    },
+    {
+      "first_frame": 1045,
+      "last_frame": 1125,
+      "camera": "header_cell"
+    },
+    {
+      "first_frame": 1126,
+      "last_frame": 1305,
+      "camera": "header_two_fastening"
+    },
+    {
+      "first_frame": 1306,
+      "last_frame": 1380,
+      "camera": "header_cell"
+    },
+    {
+      "first_frame": 1381,
+      "last_frame": 1560,
+      "camera": "header_result"
+    },
+    {
+      "first_frame": 1561,
+      "last_frame": 1740,
+      "camera": "a_cell"
+    },
+    {
+      "first_frame": 1741,
+      "last_frame": 1893,
+      "camera": "a_fastening"
+    },
+    {
+      "first_frame": 1894,
+      "last_frame": 1980,
+      "camera": "a_cell"
+    },
+    {
+      "first_frame": 1981,
+      "last_frame": 2100,
+      "camera": "b_stock"
+    },
+    {
+      "first_frame": 2101,
+      "last_frame": 2196,
+      "camera": "b_cell"
+    },
+    {
+      "first_frame": 2197,
+      "last_frame": 2271,
+      "camera": "b_fastening"
+    },
+    {
+      "first_frame": 2272,
+      "last_frame": 2328,
+      "camera": "b_fastening_other"
+    },
+    {
+      "first_frame": 2329,
+      "last_frame": 2400,
+      "camera": "b_cell"
+    },
+    {
+      "first_frame": 2401,
+      "last_frame": 2580,
+      "camera": "c_cell"
+    },
+    {
+      "first_frame": 2581,
+      "last_frame": 2700,
+      "camera": "c_insert"
+    },
+    {
+      "first_frame": 2701,
+      "last_frame": 2820,
+      "camera": "c_cell"
+    }
+  ],
+  "phases": [
+    {
+      "start_s": 0,
+      "stop_s": 2.4,
+      "label": "OP010｜XYZ直交・20個ストッカ｜筐体を把持"
+    },
+    {
+      "start_s": 2.4,
+      "stop_s": 6.7,
+      "label": "OP010｜姿勢を保ったまま持上げ・XY移載"
+    },
+    {
+      "start_s": 6.7,
+      "stop_s": 9.6,
+      "label": "OP010｜コンベア上のパレットへ設置・開放"
+    },
+    {
+      "start_s": 9.6,
+      "stop_s": 12,
+      "label": "OP010｜ハンド退避｜パレットの昇降なし"
+    },
+    {
+      "start_s": 12,
+      "stop_s": 18.2,
+      "label": "OP020｜3口ヘッダーを単腕で取り出し・筐体へ着座"
+    },
+    {
+      "start_s": 18.2,
+      "stop_s": 26.8,
+      "label": "OP020｜保持を継続し、設備側の工具でM4ねじ8本を固定"
+    },
+    {
+      "start_s": 26.8,
+      "stop_s": 30,
+      "label": "OP020｜8本の固定後に開放・次のヘッダーへ"
+    },
+    {
+      "start_s": 30,
+      "stop_s": 36.8,
+      "label": "OP020｜2口ヘッダーを取り出し・筐体へ着座"
+    },
+    {
+      "start_s": 36.8,
+      "stop_s": 43.5,
+      "label": "OP020｜保持を継続し、M4ねじ6本を固定"
+    },
+    {
+      "start_s": 43.5,
+      "stop_s": 46,
+      "label": "OP020｜固定後に開放・工具とハンドを退避"
+    },
+    {
+      "start_s": 46,
+      "stop_s": 52,
+      "label": "OP020｜筐体側外部ヘッダーの取付完了｜内部ハウジングは別工程"
+    },
+    {
+      "start_s": 52,
+      "stop_s": 57.8,
+      "label": "OP030-A｜部品設置とボルト準備を並行"
+    },
+    {
+      "start_s": 57.8,
+      "stop_s": 62.6,
+      "label": "OP030-A｜片腕で保持を続け、工具腕で締結"
+    },
+    {
+      "start_s": 62.6,
+      "stop_s": 66,
+      "label": "OP030-A｜開放後、両腕を同時に上昇"
+    },
+    {
+      "start_s": 66,
+      "stop_s": 69.8,
+      "label": "OP030-B｜10本の並列ストックから両端を同時把持"
+    },
+    {
+      "start_s": 69.8,
+      "stop_s": 73.2,
+      "label": "OP030-B｜両端搬送・曲線配置の幾何モデル"
+    },
+    {
+      "start_s": 73.2,
+      "stop_s": 77,
+      "label": "OP030-B｜黒被覆・根元を保持｜設備側2工具で同時締結"
+    },
+    {
+      "start_s": 77,
+      "stop_s": 80,
+      "label": "OP030-B｜工具退避 → 同時開放 → 両腕同時上昇"
+    },
+    {
+      "start_s": 80,
+      "stop_s": 88.8,
+      "label": "OP030-C｜単腕で扱える制御コネクターの代表動作"
+    },
+    {
+      "start_s": 88.8,
+      "stop_s": 94,
+      "label": "OP030-C｜嵌合・開放・退避｜他の接続群は別途検討"
+    }
+  ]
+}

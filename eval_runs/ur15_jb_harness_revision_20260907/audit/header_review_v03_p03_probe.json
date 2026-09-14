@@ -1,0 +1,782 @@
+{
+  "native": "UR15_JB_initial_hands_v03_p03.blend",
+  "native_sha256": "2b828f98402cc95033ed62a380cdea0fb04f95bb31cae0d525b98357cd870614",
+  "sampled_frames": [
+    361,
+    379,
+    397,
+    415,
+    415,
+    433,
+    451,
+    469,
+    487,
+    505,
+    523,
+    541,
+    547,
+    559,
+    574,
+    577,
+    595,
+    604,
+    613,
+    631,
+    634,
+    649,
+    664,
+    667,
+    685,
+    694,
+    703,
+    721,
+    724,
+    739,
+    754,
+    757,
+    775,
+    784,
+    793,
+    805,
+    811,
+    825,
+    829,
+    847,
+    859,
+    865,
+    883,
+    901,
+    919,
+    937,
+    955,
+    955,
+    973,
+    991,
+    1009,
+    1027,
+    1045,
+    1063,
+    1081,
+    1099,
+    1105,
+    1117,
+    1135,
+    1135,
+    1153,
+    1165,
+    1171,
+    1189,
+    1195,
+    1207,
+    1225,
+    1225,
+    1243,
+    1255,
+    1261,
+    1279,
+    1285,
+    1297,
+    1306,
+    1315,
+    1325,
+    1333,
+    1351,
+    1360,
+    1369
+  ],
+  "group_counts": {
+    "arm": 39,
+    "arm_without_contact_pads": 37,
+    "distal_arm": 34,
+    "headers": 4,
+    "driver": 4,
+    "fixture": 176,
+    "column": 9,
+    "driver_support": 26
+  },
+  "surface_intersections": {
+    "arm/driver": [],
+    "arm_without_contact_pads/headers": [],
+    "arm/fixture": [],
+    "distal_arm/column": [],
+    "arm/driver_support": [],
+    "driver/headers": []
+  },
+  "fastening_alignment": [
+    {
+      "frame": 574,
+      "screw": 1,
+      "header": 0,
+      "header_plane_y_m": -0.07999999821186066,
+      "header_world_position_m": [
+        2.3480000495910645,
+        -0.07999999821186066,
+        0.8790000081062317
+      ],
+      "pads": [
+        {
+          "name": "OP020__hand__left_left_header_pad",
+          "side_contact_x_error_m": -2.7318314013702327e-08,
+          "bounds_in_header_datum_m": [
+            [
+              -0.05860002735097538,
+              -0.005499999416783252,
+              -0.0049999981383659076
+            ],
+            [
+              -0.05660002731831401,
+              -0.0005000000150804651,
+              0.004999999179425216
+            ]
+          ]
+        },
+        {
+          "name": "OP020__hand__left_right_header_pad",
+          "side_contact_x_error_m": 1.6997562350684614e-08,
+          "bounds_in_header_datum_m": [
+            [
+              0.05660001699756235,
+              -0.005499997494999381,
+              -0.005000020857581305
+            ],
+            [
+              0.058600017959114736,
+              -0.0004999939480258703,
+              0.004999979440441435
+            ]
+          ]
+        }
+      ],
+      "driver_reference_to_bolt_head_reference_m": 0.0,
+      "bit_end_forward_of_driver_reference_m": 0.003
+    },
+    {
+      "frame": 604,
+      "screw": 2,
+      "header": 0,
+      "header_plane_y_m": -0.07999999821186066,
+      "header_world_position_m": [
+        2.3480000495910645,
+        -0.07999999821186066,
+        0.8790000081062317
+      ],
+      "pads": [
+        {
+          "name": "OP020__hand__left_left_header_pad",
+          "side_contact_x_error_m": -2.7318314013702327e-08,
+          "bounds_in_header_datum_m": [
+            [
+              -0.05860002735097538,
+              -0.005499999416783252,
+              -0.0049999981383659076
+            ],
+            [
+              -0.05660002731831401,
+              -0.0005000000150804651,
+              0.004999999179425216
+            ]
+          ]
+        },
+        {
+          "name": "OP020__hand__left_right_header_pad",
+          "side_contact_x_error_m": 1.6997562350684614e-08,
+          "bounds_in_header_datum_m": [
+            [
+              0.05660001699756235,
+              -0.005499997494999381,
+              -0.005000020857581305
+            ],
+            [
+              0.058600017959114736,
+              -0.0004999939480258703,
+              0.004999979440441435
+            ]
+          ]
+        }
+      ],
+      "driver_reference_to_bolt_head_reference_m": 0.0,
+      "bit_end_forward_of_driver_reference_m": 0.003
+    },
+    {
+      "frame": 634,
+      "screw": 3,
+      "header": 0,
+      "header_plane_y_m": -0.07999999821186066,
+      "header_world_position_m": [
+        2.3480000495910645,
+        -0.07999999821186066,
+        0.8790000081062317
+      ],
+      "pads": [
+        {
+          "name": "OP020__hand__left_left_header_pad",
+          "side_contact_x_error_m": -2.7318314013702327e-08,
+          "bounds_in_header_datum_m": [
+            [
+              -0.05860002735097538,
+              -0.005499999416783252,
+              -0.0049999981383659076
+            ],
+            [
+              -0.05660002731831401,
+              -0.0005000000150804651,
+              0.004999999179425216
+            ]
+          ]
+        },
+        {
+          "name": "OP020__hand__left_right_header_pad",
+          "side_contact_x_error_m": 1.6997562350684614e-08,
+          "bounds_in_header_datum_m": [
+            [
+              0.05660001699756235,
+              -0.005499997494999381,
+              -0.005000020857581305
+            ],
+            [
+              0.058600017959114736,
+              -0.0004999939480258703,
+              0.004999979440441435
+            ]
+          ]
+        }
+      ],
+      "driver_reference_to_bolt_head_reference_m": 0.0,
+      "bit_end_forward_of_driver_reference_m": 0.003
+    },
+    {
+      "frame": 664,
+      "screw": 4,
+      "header": 0,
+      "header_plane_y_m": -0.07999999821186066,
+      "header_world_position_m": [
+        2.3480000495910645,
+        -0.07999999821186066,
+        0.8790000081062317
+      ],
+      "pads": [
+        {
+          "name": "OP020__hand__left_left_header_pad",
+          "side_contact_x_error_m": -2.7318314013702327e-08,
+          "bounds_in_header_datum_m": [
+            [
+              -0.05860002735097538,
+              -0.005499999416783252,
+              -0.0049999981383659076
+            ],
+            [
+              -0.05660002731831401,
+              -0.0005000000150804651,
+              0.004999999179425216
+            ]
+          ]
+        },
+        {
+          "name": "OP020__hand__left_right_header_pad",
+          "side_contact_x_error_m": 1.6997562350684614e-08,
+          "bounds_in_header_datum_m": [
+            [
+              0.05660001699756235,
+              -0.005499997494999381,
+              -0.005000020857581305
+            ],
+            [
+              0.058600017959114736,
+              -0.0004999939480258703,
+              0.004999979440441435
+            ]
+          ]
+        }
+      ],
+      "driver_reference_to_bolt_head_reference_m": 0.0,
+      "bit_end_forward_of_driver_reference_m": 0.003
+    },
+    {
+      "frame": 694,
+      "screw": 5,
+      "header": 0,
+      "header_plane_y_m": -0.07999999821186066,
+      "header_world_position_m": [
+        2.3480000495910645,
+        -0.07999999821186066,
+        0.8790000081062317
+      ],
+      "pads": [
+        {
+          "name": "OP020__hand__left_left_header_pad",
+          "side_contact_x_error_m": -2.7318314013702327e-08,
+          "bounds_in_header_datum_m": [
+            [
+              -0.05860002735097538,
+              -0.005499999416783252,
+              -0.0049999981383659076
+            ],
+            [
+              -0.05660002731831401,
+              -0.0005000000150804651,
+              0.004999999179425216
+            ]
+          ]
+        },
+        {
+          "name": "OP020__hand__left_right_header_pad",
+          "side_contact_x_error_m": 1.6997562350684614e-08,
+          "bounds_in_header_datum_m": [
+            [
+              0.05660001699756235,
+              -0.005499997494999381,
+              -0.005000020857581305
+            ],
+            [
+              0.058600017959114736,
+              -0.0004999939480258703,
+              0.004999979440441435
+            ]
+          ]
+        }
+      ],
+      "driver_reference_to_bolt_head_reference_m": 0.0,
+      "bit_end_forward_of_driver_reference_m": 0.003
+    },
+    {
+      "frame": 724,
+      "screw": 6,
+      "header": 0,
+      "header_plane_y_m": -0.07999999821186066,
+      "header_world_position_m": [
+        2.3480000495910645,
+        -0.07999999821186066,
+        0.8790000081062317
+      ],
+      "pads": [
+        {
+          "name": "OP020__hand__left_left_header_pad",
+          "side_contact_x_error_m": -2.7318314013702327e-08,
+          "bounds_in_header_datum_m": [
+            [
+              -0.05860002735097538,
+              -0.005499999416783252,
+              -0.0049999981383659076
+            ],
+            [
+              -0.05660002731831401,
+              -0.0005000000150804651,
+              0.004999999179425216
+            ]
+          ]
+        },
+        {
+          "name": "OP020__hand__left_right_header_pad",
+          "side_contact_x_error_m": 1.6997562350684614e-08,
+          "bounds_in_header_datum_m": [
+            [
+              0.05660001699756235,
+              -0.005499997494999381,
+              -0.005000020857581305
+            ],
+            [
+              0.058600017959114736,
+              -0.0004999939480258703,
+              0.004999979440441435
+            ]
+          ]
+        }
+      ],
+      "driver_reference_to_bolt_head_reference_m": 0.0,
+      "bit_end_forward_of_driver_reference_m": 0.003
+    },
+    {
+      "frame": 754,
+      "screw": 7,
+      "header": 0,
+      "header_plane_y_m": -0.07999999821186066,
+      "header_world_position_m": [
+        2.3480000495910645,
+        -0.07999999821186066,
+        0.8790000081062317
+      ],
+      "pads": [
+        {
+          "name": "OP020__hand__left_left_header_pad",
+          "side_contact_x_error_m": -2.7318314013702327e-08,
+          "bounds_in_header_datum_m": [
+            [
+              -0.05860002735097538,
+              -0.005499999416783252,
+              -0.0049999981383659076
+            ],
+            [
+              -0.05660002731831401,
+              -0.0005000000150804651,
+              0.004999999179425216
+            ]
+          ]
+        },
+        {
+          "name": "OP020__hand__left_right_header_pad",
+          "side_contact_x_error_m": 1.6997562350684614e-08,
+          "bounds_in_header_datum_m": [
+            [
+              0.05660001699756235,
+              -0.005499997494999381,
+              -0.005000020857581305
+            ],
+            [
+              0.058600017959114736,
+              -0.0004999939480258703,
+              0.004999979440441435
+            ]
+          ]
+        }
+      ],
+      "driver_reference_to_bolt_head_reference_m": 0.0,
+      "bit_end_forward_of_driver_reference_m": 0.003
+    },
+    {
+      "frame": 784,
+      "screw": 8,
+      "header": 0,
+      "header_plane_y_m": -0.07999999821186066,
+      "header_world_position_m": [
+        2.3480000495910645,
+        -0.07999999821186066,
+        0.8790000081062317
+      ],
+      "pads": [
+        {
+          "name": "OP020__hand__left_left_header_pad",
+          "side_contact_x_error_m": -2.7318314013702327e-08,
+          "bounds_in_header_datum_m": [
+            [
+              -0.05860002735097538,
+              -0.005499999416783252,
+              -0.0049999981383659076
+            ],
+            [
+              -0.05660002731831401,
+              -0.0005000000150804651,
+              0.004999999179425216
+            ]
+          ]
+        },
+        {
+          "name": "OP020__hand__left_right_header_pad",
+          "side_contact_x_error_m": 1.6997562350684614e-08,
+          "bounds_in_header_datum_m": [
+            [
+              0.05660001699756235,
+              -0.005499997494999381,
+              -0.005000020857581305
+            ],
+            [
+              0.058600017959114736,
+              -0.0004999939480258703,
+              0.004999979440441435
+            ]
+          ]
+        }
+      ],
+      "driver_reference_to_bolt_head_reference_m": 0.0,
+      "bit_end_forward_of_driver_reference_m": 0.003
+    },
+    {
+      "frame": 1135,
+      "screw": 9,
+      "header": 1,
+      "header_plane_y_m": -0.07999999821186066,
+      "header_world_position_m": [
+        2.4719998836517334,
+        -0.07999999821186066,
+        0.8790000081062317
+      ],
+      "pads": [
+        {
+          "name": "OP020__hand__left_left_header_pad",
+          "side_contact_x_error_m": 1.0314433247088362e-07,
+          "bounds_in_header_datum_m": [
+            [
+              -0.041649896888328895,
+              -0.005500014317944446,
+              -0.0049999981383659076
+            ],
+            [
+              -0.03964989685566753,
+              -0.000500014916241659,
+              0.004999999179425216
+            ]
+          ]
+        },
+        {
+          "name": "OP020__hand__left_right_header_pad",
+          "side_contact_x_error_m": 1.2495349496766117e-07,
+          "bounds_in_header_datum_m": [
+            [
+              0.039650124953494965,
+              -0.005499997494999381,
+              -0.005000020857581305
+            ],
+            [
+              0.041650125915047354,
+              -0.0004999939480258703,
+              0.004999979440441435
+            ]
+          ]
+        }
+      ],
+      "driver_reference_to_bolt_head_reference_m": 0.0,
+      "bit_end_forward_of_driver_reference_m": 0.003
+    },
+    {
+      "frame": 1165,
+      "screw": 10,
+      "header": 1,
+      "header_plane_y_m": -0.07999999821186066,
+      "header_world_position_m": [
+        2.4719998836517334,
+        -0.07999999821186066,
+        0.8790000081062317
+      ],
+      "pads": [
+        {
+          "name": "OP020__hand__left_left_header_pad",
+          "side_contact_x_error_m": 1.0314433247088362e-07,
+          "bounds_in_header_datum_m": [
+            [
+              -0.041649896888328895,
+              -0.005500014317944446,
+              -0.0049999981383659076
+            ],
+            [
+              -0.03964989685566753,
+              -0.000500014916241659,
+              0.004999999179425216
+            ]
+          ]
+        },
+        {
+          "name": "OP020__hand__left_right_header_pad",
+          "side_contact_x_error_m": 1.2495349496766117e-07,
+          "bounds_in_header_datum_m": [
+            [
+              0.039650124953494965,
+              -0.005499997494999381,
+              -0.005000020857581305
+            ],
+            [
+              0.041650125915047354,
+              -0.0004999939480258703,
+              0.004999979440441435
+            ]
+          ]
+        }
+      ],
+      "driver_reference_to_bolt_head_reference_m": 0.0,
+      "bit_end_forward_of_driver_reference_m": 0.003
+    },
+    {
+      "frame": 1195,
+      "screw": 11,
+      "header": 1,
+      "header_plane_y_m": -0.07999999821186066,
+      "header_world_position_m": [
+        2.4719998836517334,
+        -0.07999999821186066,
+        0.8790000081062317
+      ],
+      "pads": [
+        {
+          "name": "OP020__hand__left_left_header_pad",
+          "side_contact_x_error_m": 1.0314433247088362e-07,
+          "bounds_in_header_datum_m": [
+            [
+              -0.041649896888328895,
+              -0.005500014317944446,
+              -0.0049999981383659076
+            ],
+            [
+              -0.03964989685566753,
+              -0.000500014916241659,
+              0.004999999179425216
+            ]
+          ]
+        },
+        {
+          "name": "OP020__hand__left_right_header_pad",
+          "side_contact_x_error_m": 1.2495349496766117e-07,
+          "bounds_in_header_datum_m": [
+            [
+              0.039650124953494965,
+              -0.005499997494999381,
+              -0.005000020857581305
+            ],
+            [
+              0.041650125915047354,
+              -0.0004999939480258703,
+              0.004999979440441435
+            ]
+          ]
+        }
+      ],
+      "driver_reference_to_bolt_head_reference_m": 0.0,
+      "bit_end_forward_of_driver_reference_m": 0.003
+    },
+    {
+      "frame": 1225,
+      "screw": 12,
+      "header": 1,
+      "header_plane_y_m": -0.07999999821186066,
+      "header_world_position_m": [
+        2.4719998836517334,
+        -0.07999999821186066,
+        0.8790000081062317
+      ],
+      "pads": [
+        {
+          "name": "OP020__hand__left_left_header_pad",
+          "side_contact_x_error_m": 1.0314433247088362e-07,
+          "bounds_in_header_datum_m": [
+            [
+              -0.041649896888328895,
+              -0.005500014317944446,
+              -0.0049999981383659076
+            ],
+            [
+              -0.03964989685566753,
+              -0.000500014916241659,
+              0.004999999179425216
+            ]
+          ]
+        },
+        {
+          "name": "OP020__hand__left_right_header_pad",
+          "side_contact_x_error_m": 1.2495349496766117e-07,
+          "bounds_in_header_datum_m": [
+            [
+              0.039650124953494965,
+              -0.005499997494999381,
+              -0.005000020857581305
+            ],
+            [
+              0.041650125915047354,
+              -0.0004999939480258703,
+              0.004999979440441435
+            ]
+          ]
+        }
+      ],
+      "driver_reference_to_bolt_head_reference_m": 0.0,
+      "bit_end_forward_of_driver_reference_m": 0.003
+    },
+    {
+      "frame": 1255,
+      "screw": 13,
+      "header": 1,
+      "header_plane_y_m": -0.07999999821186066,
+      "header_world_position_m": [
+        2.4719998836517334,
+        -0.07999999821186066,
+        0.8790000081062317
+      ],
+      "pads": [
+        {
+          "name": "OP020__hand__left_left_header_pad",
+          "side_contact_x_error_m": 1.0314433247088362e-07,
+          "bounds_in_header_datum_m": [
+            [
+              -0.041649896888328895,
+              -0.005500014317944446,
+              -0.0049999981383659076
+            ],
+            [
+              -0.03964989685566753,
+              -0.000500014916241659,
+              0.004999999179425216
+            ]
+          ]
+        },
+        {
+          "name": "OP020__hand__left_right_header_pad",
+          "side_contact_x_error_m": 1.2495349496766117e-07,
+          "bounds_in_header_datum_m": [
+            [
+              0.039650124953494965,
+              -0.005499997494999381,
+              -0.005000020857581305
+            ],
+            [
+              0.041650125915047354,
+              -0.0004999939480258703,
+              0.004999979440441435
+            ]
+          ]
+        }
+      ],
+      "driver_reference_to_bolt_head_reference_m": 0.0,
+      "bit_end_forward_of_driver_reference_m": 0.003
+    },
+    {
+      "frame": 1285,
+      "screw": 14,
+      "header": 1,
+      "header_plane_y_m": -0.07999999821186066,
+      "header_world_position_m": [
+        2.4719998836517334,
+        -0.07999999821186066,
+        0.8790000081062317
+      ],
+      "pads": [
+        {
+          "name": "OP020__hand__left_left_header_pad",
+          "side_contact_x_error_m": 1.0314433247088362e-07,
+          "bounds_in_header_datum_m": [
+            [
+              -0.041649896888328895,
+              -0.005500014317944446,
+              -0.0049999981383659076
+            ],
+            [
+              -0.03964989685566753,
+              -0.000500014916241659,
+              0.004999999179425216
+            ]
+          ]
+        },
+        {
+          "name": "OP020__hand__left_right_header_pad",
+          "side_contact_x_error_m": 1.2495349496766117e-07,
+          "bounds_in_header_datum_m": [
+            [
+              0.039650124953494965,
+              -0.005499997494999381,
+              -0.005000020857581305
+            ],
+            [
+              0.041650125915047354,
+              -0.0004999939480258703,
+              0.004999979440441435
+            ]
+          ]
+        }
+      ],
+      "driver_reference_to_bolt_head_reference_m": 0.0,
+      "bit_end_forward_of_driver_reference_m": 0.003
+    }
+  ],
+  "retimed_other_arms_max_matrix_difference": 0.0,
+  "comparison_old_frames": [
+    1,
+    181,
+    781,
+    973,
+    1111,
+    1201,
+    1417,
+    1549,
+    1801,
+    2039
+  ],
+  "physical_validity_verdict": null,
+  "limits": "Sampled surface intersections only; intended pad/header contacts are separately measured. No containment or continuous/load verdict.",
+  "alignment_definition": "Driver root datum versus screw-head front datum; the modeled bit end is 3 mm forward of this datum.",
+  "label_correction": "Renamed ambiguous tool_tip_to_bolt_origin_m without changing the recorded measurement."
+}
