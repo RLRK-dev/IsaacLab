@@ -1,0 +1,43 @@
+{
+  "recorded_at": "2026-09-14T09:43:28.983820+09:00",
+  "scope": "D40 blue root support integration; unchanged original hardware/contact meshes and four poses",
+  "source_sha256": "21557cf3a3a39dc5b992c8d3897a3ab89f21cc57d35ca3124e56a5763d79cab5",
+  "reused_modules": [
+    "build_hand_body_setback_v01.py",
+    "build_hand_fingertip_concepts_v01.py",
+    "build_hand_mount_interface_v02.py",
+    "build_hand_pad_service_v01.py",
+    "build_hand_terminal_concepts_v01.py",
+    "probe_hand_tool_access_v01.py",
+    "render_hand_fingertip_concepts_v01.py",
+    "save_hand_body_setback_v01.py",
+    "save_hand_mount_relief_v01.py",
+    "save_hand_pad_service_v01.py",
+    "save_hand_root_clamp_v03.py"
+  ],
+  "custom_implementation_reason": "Old tessellated Boolean failed; rebuild nominal primitives in measured frame with the existing box-boundary union, bore once, retain source pad-seat plane",
+  "failed_runs_preserved": [
+    "audit/failed_boolean",
+    "audit/failed_preservation"
+  ],
+  "measurement_correction": "Use mm-scaled copies for trimesh distance; record full old rim change separately from radial correspondence at canonical 0/2/4 mm depths",
+  "numerical_comparison_tolerance_changed": false,
+  "manufacturing_acceptance_created": false,
+  "original_bodies_fully_vertex_identical": false,
+  "source_hardware_contacts_and_remaining_poses_identical": true,
+  "official_reference": {
+    "url": "https://assets.robotiq.com/website-assets/support_archives/document_en/2F-85_2F-140_Instruction_Manual_PDF_20181130.pdf",
+    "local_pdf_sha256": "4a059283f11b12d458b084aab3e0c9238ac2cd61b42cd630551d4fc10a6d4ad3",
+    "pages": [
+      25,
+      131,
+      150
+    ],
+    "version_scope": "2018 mounting face matches retained 2016 model; 2019 TM center M5 differs"
+  },
+  "custom_tip_reference": "https://blog.robotiq.com/how-to-design-custom-fingertips-for-your-application",
+  "pad_joint_selected": false,
+  "physical_acceptance_verdict": null,
+  "arm_motion_created": false,
+  "video_created": false
+}

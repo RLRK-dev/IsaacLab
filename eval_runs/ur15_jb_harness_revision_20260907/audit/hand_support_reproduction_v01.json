@@ -1,0 +1,17 @@
+{
+  "recorded_at": "2026-09-14T09:46:15.108402+09:00",
+  "scope": "Build in a fresh directory using only copied package scripts, data and fixed input",
+  "payload_identical": true,
+  "both_glb_sha_identical": true,
+  "observations_equal_except_timestamp": true,
+  "native_records_equal_except_timestamp_and_blend_binary_sha": true,
+  "original_native_readback_identical": true,
+  "reproduction_native_readback_identical": true,
+  "html_payload_markers_all_replaced": true,
+  "script_dependencies_copied": true,
+  "source_delivery_input_sha_unchanged": true,
+  "native_binary_sha_equality_required": false,
+  "arm_motion_created": false,
+  "video_created": false,
+  "physical_acceptance_verdict": null
+}

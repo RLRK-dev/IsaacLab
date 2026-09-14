@@ -1,0 +1,2610 @@
+{
+  "recorded_at": "2026-09-14T09:37:52.834370+09:00",
+  "page_sha256": "e3dc3674cd230240afdc666c9d64d0b11ef84be2239052b7fc5e940c4b52c1a4",
+  "scope": "UI variants, poses, dimensions, finite vertices, WebGL pixels and file links",
+  "reports": {
+    "desktop": {
+      "rows": [
+        {
+          "variant": "J025",
+          "mode": "service",
+          "state": "open",
+          "side": "left_left",
+          "offset_mm": 0,
+          "meshes": 16,
+          "faces": 54548,
+          "gl_error": 0,
+          "workpiece_visible": false,
+          "width": 1032,
+          "height": 560,
+          "label": "service/J025/left_left/0",
+          "filled_pixels": 108950,
+          "pixel_hash": "c21f2004",
+          "bore_depth": "4.000",
+          "wall_thickness": "2.999",
+          "components": "1",
+          "offset_label": "0.0",
+          "state_disabled": true,
+          "offset_disabled": false,
+          "target_disabled": true,
+          "selected_mode_buttons": 1,
+          "first_moving_vertices": [
+            [
+              -0.01794013818559806,
+              0.004000002614112284,
+              -0.012121963983944592
+            ],
+            [
+              -0.023999984479431545,
+              0.07299999784615392,
+              0.018427925099260417
+            ],
+            [
+              -0.012949746999999508,
+              0.06100000277128167,
+              -0.00977171116582936
+            ]
+          ],
+          "vertices_finite": true,
+          "sample_status": "この標本：39組中、面交差の検出1組。連続経路の判定ではありません。"
+        },
+        {
+          "variant": "J025",
+          "mode": "service",
+          "state": "open",
+          "side": "left_left",
+          "offset_mm": 6,
+          "meshes": 16,
+          "faces": 54548,
+          "gl_error": 0,
+          "workpiece_visible": false,
+          "width": 1032,
+          "height": 560,
+          "label": "service/J025/left_left/6",
+          "filled_pixels": 110951,
+          "pixel_hash": "7e74261",
+          "bore_depth": "4.000",
+          "wall_thickness": "2.999",
+          "components": "1",
+          "offset_label": "6.0",
+          "state_disabled": true,
+          "offset_disabled": false,
+          "target_disabled": true,
+          "selected_mode_buttons": 1,
+          "first_moving_vertices": [
+            [
+              -0.011940138191532893,
+              0.0040000004700285795,
+              -0.012121697125560788
+            ],
+            [
+              -0.01799998448536638,
+              0.07299999570207022,
+              0.01842819195764422
+            ],
+            [
+              -0.006949747005934342,
+              0.061000000627197966,
+              -0.009771444307445556
+            ]
+          ],
+          "vertices_finite": true,
+          "sample_status": "この標本：39組中、面交差の検出0組。連続経路の判定ではありません。"
+        },
+        {
+          "variant": "J025",
+          "mode": "service",
+          "state": "open",
+          "side": "left_left",
+          "offset_mm": 12,
+          "meshes": 16,
+          "faces": 54548,
+          "gl_error": 0,
+          "workpiece_visible": false,
+          "width": 1032,
+          "height": 560,
+          "label": "service/J025/left_left/12",
+          "filled_pixels": 112142,
+          "pixel_hash": "337b7cd8",
+          "bore_depth": "4.000",
+          "wall_thickness": "2.999",
+          "components": "1",
+          "offset_label": "12.0",
+          "state_disabled": true,
+          "offset_disabled": false,
+          "target_disabled": true,
+          "selected_mode_buttons": 1,
+          "first_moving_vertices": [
+            [
+              -0.0059401381974677255,
+              0.003999998325944875,
+              -0.012121430267176984
+            ],
+            [
+              -0.011999984491301212,
+              0.07299999355798652,
+              0.018428458816028025
+            ],
+            [
+              -0.0009497470118691748,
+              0.06099999848311426,
+              -0.009771177449061752
+            ]
+          ],
+          "vertices_finite": true,
+          "sample_status": "この標本：39組中、面交差の検出0組。連続経路の判定ではありません。"
+        },
+        {
+          "variant": "J025",
+          "mode": "service",
+          "state": "open",
+          "side": "left_right",
+          "offset_mm": 0,
+          "meshes": 16,
+          "faces": 54548,
+          "gl_error": 0,
+          "workpiece_visible": false,
+          "width": 1032,
+          "height": 560,
+          "label": "service/J025/left_right/0",
+          "filled_pixels": 108950,
+          "pixel_hash": "c21f2004",
+          "bore_depth": "4.000",
+          "wall_thickness": "2.999",
+          "components": "1",
+          "offset_label": "0.0",
+          "state_disabled": true,
+          "offset_disabled": false,
+          "target_disabled": true,
+          "selected_mode_buttons": 1,
+          "first_moving_vertices": [
+            [
+              0.017940138564575193,
+              0.0040000000000000036,
+              -0.012121963983944592
+            ],
+            [
+              0.02399913012117825,
+              0.002999999867152714,
+              -0.0008220748816726506
+            ],
+            [
+              0.012949747000000001,
+              0.061000000000000006,
+              -0.00977171116582936
+            ]
+          ],
+          "vertices_finite": true,
+          "sample_status": "この標本：39組中、面交差の検出1組。連続経路の判定ではありません。"
+        },
+        {
+          "variant": "J025",
+          "mode": "service",
+          "state": "open",
+          "side": "left_right",
+          "offset_mm": 6,
+          "meshes": 16,
+          "faces": 54548,
+          "gl_error": 0,
+          "workpiece_visible": false,
+          "width": 1032,
+          "height": 560,
+          "label": "service/J025/left_right/6",
+          "filled_pixels": 111582,
+          "pixel_hash": "8c080d97",
+          "bore_depth": "4.000",
+          "wall_thickness": "2.999",
+          "components": "1",
+          "offset_label": "6.0",
+          "state_disabled": true,
+          "offset_disabled": false,
+          "target_disabled": true,
+          "selected_mode_buttons": 1,
+          "first_moving_vertices": [
+            [
+              0.011940138570509644,
+              0.00400000006562247,
+              -0.012121697125560788
+            ],
+            [
+              0.017999130127112697,
+              0.002999999932775181,
+              -0.0008218080232888466
+            ],
+            [
+              0.006949747005934452,
+              0.06100000006562247,
+              -0.009771444307445556
+            ]
+          ],
+          "vertices_finite": true,
+          "sample_status": "この標本：39組中、面交差の検出0組。連続経路の判定ではありません。"
+        },
+        {
+          "variant": "J025",
+          "mode": "service",
+          "state": "open",
+          "side": "left_right",
+          "offset_mm": 12,
+          "meshes": 16,
+          "faces": 54548,
+          "gl_error": 0,
+          "workpiece_visible": false,
+          "width": 1032,
+          "height": 560,
+          "label": "service/J025/left_right/12",
+          "filled_pixels": 113103,
+          "pixel_hash": "27b29aa1",
+          "bore_depth": "4.000",
+          "wall_thickness": "2.999",
+          "components": "1",
+          "offset_label": "12.0",
+          "state_disabled": true,
+          "offset_disabled": false,
+          "target_disabled": true,
+          "selected_mode_buttons": 1,
+          "first_moving_vertices": [
+            [
+              0.005940138576444095,
+              0.004000000131244938,
+              -0.012121430267176984
+            ],
+            [
+              0.01199913013304715,
+              0.002999999998397648,
+              -0.0008215411649050426
+            ],
+            [
+              0.0009497470118689025,
+              0.06100000013124494,
+              -0.009771177449061752
+            ]
+          ],
+          "vertices_finite": true,
+          "sample_status": "この標本：39組中、面交差の検出0組。連続経路の判定ではありません。"
+        },
+        {
+          "variant": "J050",
+          "mode": "service",
+          "state": "open",
+          "side": "left_left",
+          "offset_mm": 0,
+          "meshes": 16,
+          "faces": 54548,
+          "gl_error": 0,
+          "workpiece_visible": false,
+          "width": 1032,
+          "height": 560,
+          "label": "service/J050/left_left/0",
+          "filled_pixels": 108950,
+          "pixel_hash": "1c21c004",
+          "bore_depth": "4.000",
+          "wall_thickness": "2.999",
+          "components": "1",
+          "offset_label": "0.0",
+          "state_disabled": true,
+          "offset_disabled": false,
+          "target_disabled": true,
+          "selected_mode_buttons": 1,
+          "first_moving_vertices": [
+            [
+              -0.01794013818559806,
+              0.004000002614112284,
+              -0.012121963983944592
+            ],
+            [
+              -0.02399997336033222,
+              0.07299999784615006,
+              0.018177925099507684
+            ],
+            [
+              -0.012949746999999508,
+              0.06100000277128167,
+              -0.00977171116582936
+            ]
+          ],
+          "vertices_finite": true,
+          "sample_status": "この標本：39組中、面交差の検出1組。連続経路の判定ではありません。"
+        },
+        {
+          "variant": "J050",
+          "mode": "service",
+          "state": "open",
+          "side": "left_left",
+          "offset_mm": 6,
+          "meshes": 16,
+          "faces": 54548,
+          "gl_error": 0,
+          "workpiece_visible": false,
+          "width": 1032,
+          "height": 560,
+          "label": "service/J050/left_left/6",
+          "filled_pixels": 110947,
+          "pixel_hash": "ca30ecab",
+          "bore_depth": "4.000",
+          "wall_thickness": "2.999",
+          "components": "1",
+          "offset_label": "6.0",
+          "state_disabled": true,
+          "offset_disabled": false,
+          "target_disabled": true,
+          "selected_mode_buttons": 1,
+          "first_moving_vertices": [
+            [
+              -0.011940138191532893,
+              0.0040000004700285795,
+              -0.012121697125560788
+            ],
+            [
+              -0.017999973366267054,
+              0.07299999570206636,
+              0.018178191957891488
+            ],
+            [
+              -0.006949747005934342,
+              0.061000000627197966,
+              -0.009771444307445556
+            ]
+          ],
+          "vertices_finite": true,
+          "sample_status": "この標本：39組中、面交差の検出0組。連続経路の判定ではありません。"
+        },
+        {
+          "variant": "J050",
+          "mode": "service",
+          "state": "open",
+          "side": "left_left",
+          "offset_mm": 12,
+          "meshes": 16,
+          "faces": 54548,
+          "gl_error": 0,
+          "workpiece_visible": false,
+          "width": 1032,
+          "height": 560,
+          "label": "service/J050/left_left/12",
+          "filled_pixels": 112124,
+          "pixel_hash": "1da85238",
+          "bore_depth": "4.000",
+          "wall_thickness": "2.999",
+          "components": "1",
+          "offset_label": "12.0",
+          "state_disabled": true,
+          "offset_disabled": false,
+          "target_disabled": true,
+          "selected_mode_buttons": 1,
+          "first_moving_vertices": [
+            [
+              -0.0059401381974677255,
+              0.003999998325944875,
+              -0.012121430267176984
+            ],
+            [
+              -0.011999973372201886,
+              0.07299999355798266,
+              0.018178458816275292
+            ],
+            [
+              -0.0009497470118691748,
+              0.06099999848311426,
+              -0.009771177449061752
+            ]
+          ],
+          "vertices_finite": true,
+          "sample_status": "この標本：39組中、面交差の検出0組。連続経路の判定ではありません。"
+        },
+        {
+          "variant": "J050",
+          "mode": "service",
+          "state": "open",
+          "side": "left_right",
+          "offset_mm": 0,
+          "meshes": 16,
+          "faces": 54548,
+          "gl_error": 0,
+          "workpiece_visible": false,
+          "width": 1032,
+          "height": 560,
+          "label": "service/J050/left_right/0",
+          "filled_pixels": 108950,
+          "pixel_hash": "1c21c004",
+          "bore_depth": "4.000",
+          "wall_thickness": "2.999",
+          "components": "1",
+          "offset_label": "0.0",
+          "state_disabled": true,
+          "offset_disabled": false,
+          "target_disabled": true,
+          "selected_mode_buttons": 1,
+          "first_moving_vertices": [
+            [
+              0.017940138564575193,
+              0.0040000000000000036,
+              -0.012121963983944592
+            ],
+            [
+              0.02399913012117825,
+              0.002999999867152714,
+              -0.0008220748816726506
+            ],
+            [
+              0.012949747000000001,
+              0.061000000000000006,
+              -0.00977171116582936
+            ]
+          ],
+          "vertices_finite": true,
+          "sample_status": "この標本：39組中、面交差の検出1組。連続経路の判定ではありません。"
+        },
+        {
+          "variant": "J050",
+          "mode": "service",
+          "state": "open",
+          "side": "left_right",
+          "offset_mm": 6,
+          "meshes": 16,
+          "faces": 54548,
+          "gl_error": 0,
+          "workpiece_visible": false,
+          "width": 1032,
+          "height": 560,
+          "label": "service/J050/left_right/6",
+          "filled_pixels": 111555,
+          "pixel_hash": "76bba123",
+          "bore_depth": "4.000",
+          "wall_thickness": "2.999",
+          "components": "1",
+          "offset_label": "6.0",
+          "state_disabled": true,
+          "offset_disabled": false,
+          "target_disabled": true,
+          "selected_mode_buttons": 1,
+          "first_moving_vertices": [
+            [
+              0.011940138570509644,
+              0.00400000006562247,
+              -0.012121697125560788
+            ],
+            [
+              0.017999130127112697,
+              0.002999999932775181,
+              -0.0008218080232888466
+            ],
+            [
+              0.006949747005934452,
+              0.06100000006562247,
+              -0.009771444307445556
+            ]
+          ],
+          "vertices_finite": true,
+          "sample_status": "この標本：39組中、面交差の検出0組。連続経路の判定ではありません。"
+        },
+        {
+          "variant": "J050",
+          "mode": "service",
+          "state": "open",
+          "side": "left_right",
+          "offset_mm": 12,
+          "meshes": 16,
+          "faces": 54548,
+          "gl_error": 0,
+          "workpiece_visible": false,
+          "width": 1032,
+          "height": 560,
+          "label": "service/J050/left_right/12",
+          "filled_pixels": 113069,
+          "pixel_hash": "84b95782",
+          "bore_depth": "4.000",
+          "wall_thickness": "2.999",
+          "components": "1",
+          "offset_label": "12.0",
+          "state_disabled": true,
+          "offset_disabled": false,
+          "target_disabled": true,
+          "selected_mode_buttons": 1,
+          "first_moving_vertices": [
+            [
+              0.005940138576444095,
+              0.004000000131244938,
+              -0.012121430267176984
+            ],
+            [
+              0.01199913013304715,
+              0.002999999998397648,
+              -0.0008215411649050426
+            ],
+            [
+              0.0009497470118689025,
+              0.06100000013124494,
+              -0.009771177449061752
+            ]
+          ],
+          "vertices_finite": true,
+          "sample_status": "この標本：39組中、面交差の検出0組。連続経路の判定ではありません。"
+        },
+        {
+          "variant": "J025",
+          "mode": "holding",
+          "state": "near",
+          "side": "left_right",
+          "offset_mm": 12,
+          "meshes": 20,
+          "faces": 64094,
+          "gl_error": 0,
+          "workpiece_visible": true,
+          "width": 1032,
+          "height": 560,
+          "label": "holding/J025/near",
+          "filled_pixels": 123092,
+          "pixel_hash": "3654f6a3",
+          "bore_depth": "4.000",
+          "wall_thickness": "2.999",
+          "components": "1",
+          "offset_label": "12.0",
+          "state_disabled": false,
+          "offset_disabled": true,
+          "target_disabled": false,
+          "selected_mode_buttons": 1,
+          "first_moving_vertices": [
+            [
+              0.009940138564575193,
+              0.0040000000000000036,
+              -0.013299999818115228
+            ],
+            [
+              0.015999130121178252,
+              0.002999999867152714,
+              -0.002000110715843287
+            ],
+            [
+              0.004949747000000001,
+              0.061000000000000006,
+              -0.010949746999999996
+            ]
+          ],
+          "vertices_finite": true,
+          "sample_status": "元の4保存姿勢を使用。端子輪郭と根元パッドの座標は維持しています。"
+        },
+        {
+          "variant": "J025",
+          "mode": "holding",
+          "state": "early",
+          "side": "left_right",
+          "offset_mm": 12,
+          "meshes": 20,
+          "faces": 64094,
+          "gl_error": 0,
+          "workpiece_visible": true,
+          "width": 1032,
+          "height": 560,
+          "label": "holding/J025/early",
+          "filled_pixels": 123588,
+          "pixel_hash": "d0bbede0",
+          "bore_depth": "4.000",
+          "wall_thickness": "2.999",
+          "components": "1",
+          "offset_label": "12.0",
+          "state_disabled": false,
+          "offset_disabled": true,
+          "target_disabled": false,
+          "selected_mode_buttons": 1,
+          "first_moving_vertices": [
+            [
+              0.010343530614741303,
+              0.0040000000000000036,
+              -0.013268104293260238
+            ],
+            [
+              0.016402522171344365,
+              0.002999999867152714,
+              -0.001968215190988297
+            ],
+            [
+              0.005353139050166111,
+              0.061000000000000006,
+              -0.010917851475145006
+            ]
+          ],
+          "vertices_finite": true,
+          "sample_status": "元の4保存姿勢を使用。端子輪郭と根元パッドの座標は維持しています。"
+        },
+        {
+          "variant": "J025",
+          "mode": "holding",
+          "state": "open",
+          "side": "left_right",
+          "offset_mm": 12,
+          "meshes": 20,
+          "faces": 64094,
+          "gl_error": 0,
+          "workpiece_visible": true,
+          "width": 1032,
+          "height": 560,
+          "label": "holding/J025/open",
+          "filled_pixels": 129635,
+          "pixel_hash": "5c74ca3",
+          "bore_depth": "4.000",
+          "wall_thickness": "2.999",
+          "components": "1",
+          "offset_label": "12.0",
+          "state_disabled": false,
+          "offset_disabled": true,
+          "target_disabled": false,
+          "selected_mode_buttons": 1,
+          "first_moving_vertices": [
+            [
+              0.017940138564575193,
+              0.0040000000000000036,
+              -0.012121963983944592
+            ],
+            [
+              0.02399913012117825,
+              0.002999999867152714,
+              -0.0008220748816726506
+            ],
+            [
+              0.012949747000000001,
+              0.061000000000000006,
+              -0.00977171116582936
+            ]
+          ],
+          "vertices_finite": true,
+          "sample_status": "元の4保存姿勢を使用。端子輪郭と根元パッドの座標は維持しています。"
+        },
+        {
+          "variant": "J025",
+          "mode": "holding",
+          "state": "clear",
+          "side": "left_right",
+          "offset_mm": 12,
+          "meshes": 20,
+          "faces": 64094,
+          "gl_error": 0,
+          "workpiece_visible": true,
+          "width": 1032,
+          "height": 560,
+          "label": "holding/J025/clear",
+          "filled_pixels": 87263,
+          "pixel_hash": "d73f28db",
+          "bore_depth": "4.000",
+          "wall_thickness": "2.999",
+          "components": "1",
+          "offset_label": "12.0",
+          "state_disabled": false,
+          "offset_disabled": true,
+          "target_disabled": false,
+          "selected_mode_buttons": 1,
+          "first_moving_vertices": [
+            [
+              0.017940138564575193,
+              0.0040000000000000036,
+              0.012878036016055402
+            ],
+            [
+              0.02399913012117825,
+              0.002999999867152714,
+              0.024177925118327344
+            ],
+            [
+              0.012949747000000001,
+              0.061000000000000006,
+              0.015228288834170635
+            ]
+          ],
+          "vertices_finite": true,
+          "sample_status": "元の4保存姿勢を使用。端子輪郭と根元パッドの座標は維持しています。"
+        },
+        {
+          "variant": "J050",
+          "mode": "holding",
+          "state": "near",
+          "side": "left_right",
+          "offset_mm": 12,
+          "meshes": 20,
+          "faces": 64094,
+          "gl_error": 0,
+          "workpiece_visible": true,
+          "width": 1032,
+          "height": 560,
+          "label": "holding/J050/near",
+          "filled_pixels": 123092,
+          "pixel_hash": "c5f95854",
+          "bore_depth": "4.000",
+          "wall_thickness": "2.999",
+          "components": "1",
+          "offset_label": "12.0",
+          "state_disabled": false,
+          "offset_disabled": true,
+          "target_disabled": false,
+          "selected_mode_buttons": 1,
+          "first_moving_vertices": [
+            [
+              0.009940138564575193,
+              0.0040000000000000036,
+              -0.013299999818115228
+            ],
+            [
+              0.015999130121178252,
+              0.002999999867152714,
+              -0.002000110715843287
+            ],
+            [
+              0.004949747000000001,
+              0.061000000000000006,
+              -0.010949746999999996
+            ]
+          ],
+          "vertices_finite": true,
+          "sample_status": "元の4保存姿勢を使用。端子輪郭と根元パッドの座標は維持しています。"
+        },
+        {
+          "variant": "J050",
+          "mode": "holding",
+          "state": "early",
+          "side": "left_right",
+          "offset_mm": 12,
+          "meshes": 20,
+          "faces": 64094,
+          "gl_error": 0,
+          "workpiece_visible": true,
+          "width": 1032,
+          "height": 560,
+          "label": "holding/J050/early",
+          "filled_pixels": 123588,
+          "pixel_hash": "b9a44035",
+          "bore_depth": "4.000",
+          "wall_thickness": "2.999",
+          "components": "1",
+          "offset_label": "12.0",
+          "state_disabled": false,
+          "offset_disabled": true,
+          "target_disabled": false,
+          "selected_mode_buttons": 1,
+          "first_moving_vertices": [
+            [
+              0.010343530614741303,
+              0.0040000000000000036,
+              -0.013268104293260238
+            ],
+            [
+              0.016402522171344365,
+              0.002999999867152714,
+              -0.001968215190988297
+            ],
+            [
+              0.005353139050166111,
+              0.061000000000000006,
+              -0.010917851475145006
+            ]
+          ],
+          "vertices_finite": true,
+          "sample_status": "元の4保存姿勢を使用。端子輪郭と根元パッドの座標は維持しています。"
+        },
+        {
+          "variant": "J050",
+          "mode": "holding",
+          "state": "open",
+          "side": "left_right",
+          "offset_mm": 12,
+          "meshes": 20,
+          "faces": 64094,
+          "gl_error": 0,
+          "workpiece_visible": true,
+          "width": 1032,
+          "height": 560,
+          "label": "holding/J050/open",
+          "filled_pixels": 129635,
+          "pixel_hash": "15318b8f",
+          "bore_depth": "4.000",
+          "wall_thickness": "2.999",
+          "components": "1",
+          "offset_label": "12.0",
+          "state_disabled": false,
+          "offset_disabled": true,
+          "target_disabled": false,
+          "selected_mode_buttons": 1,
+          "first_moving_vertices": [
+            [
+              0.017940138564575193,
+              0.0040000000000000036,
+              -0.012121963983944592
+            ],
+            [
+              0.02399913012117825,
+              0.002999999867152714,
+              -0.0008220748816726506
+            ],
+            [
+              0.012949747000000001,
+              0.061000000000000006,
+              -0.00977171116582936
+            ]
+          ],
+          "vertices_finite": true,
+          "sample_status": "元の4保存姿勢を使用。端子輪郭と根元パッドの座標は維持しています。"
+        },
+        {
+          "variant": "J050",
+          "mode": "holding",
+          "state": "clear",
+          "side": "left_right",
+          "offset_mm": 12,
+          "meshes": 20,
+          "faces": 64094,
+          "gl_error": 0,
+          "workpiece_visible": true,
+          "width": 1032,
+          "height": 560,
+          "label": "holding/J050/clear",
+          "filled_pixels": 87263,
+          "pixel_hash": "79abfa67",
+          "bore_depth": "4.000",
+          "wall_thickness": "2.999",
+          "components": "1",
+          "offset_label": "12.0",
+          "state_disabled": false,
+          "offset_disabled": true,
+          "target_disabled": false,
+          "selected_mode_buttons": 1,
+          "first_moving_vertices": [
+            [
+              0.017940138564575193,
+              0.0040000000000000036,
+              0.012878036016055402
+            ],
+            [
+              0.02399913012117825,
+              0.002999999867152714,
+              0.024177925118327344
+            ],
+            [
+              0.012949747000000001,
+              0.061000000000000006,
+              0.015228288834170635
+            ]
+          ],
+          "vertices_finite": true,
+          "sample_status": "元の4保存姿勢を使用。端子輪郭と根元パッドの座標は維持しています。"
+        },
+        {
+          "variant": "J050",
+          "mode": "holding",
+          "state": "near",
+          "side": "left_right",
+          "offset_mm": 0,
+          "meshes": 10,
+          "faces": 12586,
+          "gl_error": 0,
+          "workpiece_visible": true,
+          "width": 1032,
+          "height": 560,
+          "label": "toggle/hardware",
+          "filled_pixels": 36648,
+          "pixel_hash": "127d5698",
+          "bore_depth": "4.000",
+          "wall_thickness": "2.999",
+          "components": "1",
+          "offset_label": "0.0",
+          "state_disabled": false,
+          "offset_disabled": true,
+          "target_disabled": false,
+          "selected_mode_buttons": 1,
+          "first_moving_vertices": [
+            [
+              0.009940138564575193,
+              0.0040000000000000036,
+              -0.013299999818115228
+            ],
+            [
+              0.015999130121178252,
+              0.002999999867152714,
+              -0.002000110715843287
+            ],
+            [
+              0.004949747000000001,
+              0.061000000000000006,
+              -0.010949746999999996
+            ]
+          ],
+          "vertices_finite": true,
+          "sample_status": "元の4保存姿勢を使用。端子輪郭と根元パッドの座標は維持しています。"
+        },
+        {
+          "variant": "J050",
+          "mode": "holding",
+          "state": "near",
+          "side": "left_right",
+          "offset_mm": 0,
+          "meshes": 16,
+          "faces": 54548,
+          "gl_error": 0,
+          "workpiece_visible": false,
+          "width": 1032,
+          "height": 560,
+          "label": "toggle/target",
+          "filled_pixels": 108006,
+          "pixel_hash": "71736965",
+          "bore_depth": "4.000",
+          "wall_thickness": "2.999",
+          "components": "1",
+          "offset_label": "0.0",
+          "state_disabled": false,
+          "offset_disabled": true,
+          "target_disabled": false,
+          "selected_mode_buttons": 1,
+          "first_moving_vertices": [
+            [
+              0.009940138564575193,
+              0.0040000000000000036,
+              -0.013299999818115228
+            ],
+            [
+              0.015999130121178252,
+              0.002999999867152714,
+              -0.002000110715843287
+            ],
+            [
+              0.004949747000000001,
+              0.061000000000000006,
+              -0.010949746999999996
+            ]
+          ],
+          "vertices_finite": true,
+          "sample_status": "元の4保存姿勢を使用。端子輪郭と根元パッドの座標は維持しています。"
+        },
+        {
+          "variant": "J050",
+          "mode": "holding",
+          "state": "near",
+          "side": "left_right",
+          "offset_mm": 0,
+          "meshes": 13,
+          "faces": 55550,
+          "gl_error": 0,
+          "workpiece_visible": true,
+          "width": 1032,
+          "height": 560,
+          "label": "toggle/opposite",
+          "filled_pixels": 84563,
+          "pixel_hash": "571e8878",
+          "bore_depth": "4.000",
+          "wall_thickness": "2.999",
+          "components": "1",
+          "offset_label": "0.0",
+          "state_disabled": false,
+          "offset_disabled": true,
+          "target_disabled": false,
+          "selected_mode_buttons": 1,
+          "first_moving_vertices": [
+            [
+              0.009940138564575193,
+              0.0040000000000000036,
+              -0.013299999818115228
+            ],
+            [
+              0.015999130121178252,
+              0.002999999867152714,
+              -0.002000110715843287
+            ],
+            [
+              0.004949747000000001,
+              0.061000000000000006,
+              -0.010949746999999996
+            ]
+          ],
+          "vertices_finite": true,
+          "sample_status": "元の4保存姿勢を使用。端子輪郭と根元パッドの座標は維持しています。"
+        },
+        {
+          "variant": "J050",
+          "mode": "holding",
+          "state": "near",
+          "side": "left_right",
+          "offset_mm": 0,
+          "meshes": 18,
+          "faces": 63830,
+          "gl_error": 0,
+          "workpiece_visible": true,
+          "width": 1032,
+          "height": 560,
+          "label": "toggle/pads",
+          "filled_pixels": 123001,
+          "pixel_hash": "605c07b1",
+          "bore_depth": "4.000",
+          "wall_thickness": "2.999",
+          "components": "1",
+          "offset_label": "0.0",
+          "state_disabled": false,
+          "offset_disabled": true,
+          "target_disabled": false,
+          "selected_mode_buttons": 1,
+          "first_moving_vertices": [
+            [
+              0.009940138564575193,
+              0.0040000000000000036,
+              -0.013299999818115228
+            ],
+            [
+              0.015999130121178252,
+              0.002999999867152714,
+              -0.002000110715843287
+            ],
+            [
+              0.004949747000000001,
+              0.061000000000000006,
+              -0.010949746999999996
+            ]
+          ],
+          "vertices_finite": true,
+          "sample_status": "元の4保存姿勢を使用。端子輪郭と根元パッドの座標は維持しています。"
+        },
+        {
+          "variant": "J050",
+          "mode": "holding",
+          "state": "near",
+          "side": "left_right",
+          "offset_mm": 0,
+          "meshes": 20,
+          "faces": 64094,
+          "gl_error": 0,
+          "workpiece_visible": true,
+          "width": 1032,
+          "height": 560,
+          "label": "camera/front",
+          "filled_pixels": 79590,
+          "pixel_hash": "ec9327fe",
+          "bore_depth": "4.000",
+          "wall_thickness": "2.999",
+          "components": "1",
+          "offset_label": "0.0",
+          "state_disabled": false,
+          "offset_disabled": true,
+          "target_disabled": false,
+          "selected_mode_buttons": 1,
+          "first_moving_vertices": [
+            [
+              0.009940138564575193,
+              0.0040000000000000036,
+              -0.013299999818115228
+            ],
+            [
+              0.015999130121178252,
+              0.002999999867152714,
+              -0.002000110715843287
+            ],
+            [
+              0.004949747000000001,
+              0.061000000000000006,
+              -0.010949746999999996
+            ]
+          ],
+          "vertices_finite": true,
+          "sample_status": "元の4保存姿勢を使用。端子輪郭と根元パッドの座標は維持しています。"
+        },
+        {
+          "variant": "J050",
+          "mode": "holding",
+          "state": "near",
+          "side": "left_right",
+          "offset_mm": 0,
+          "meshes": 20,
+          "faces": 64094,
+          "gl_error": 0,
+          "workpiece_visible": true,
+          "width": 1032,
+          "height": 560,
+          "label": "camera/side",
+          "filled_pixels": 52649,
+          "pixel_hash": "9a2840fb",
+          "bore_depth": "4.000",
+          "wall_thickness": "2.999",
+          "components": "1",
+          "offset_label": "0.0",
+          "state_disabled": false,
+          "offset_disabled": true,
+          "target_disabled": false,
+          "selected_mode_buttons": 1,
+          "first_moving_vertices": [
+            [
+              0.009940138564575193,
+              0.0040000000000000036,
+              -0.013299999818115228
+            ],
+            [
+              0.015999130121178252,
+              0.002999999867152714,
+              -0.002000110715843287
+            ],
+            [
+              0.004949747000000001,
+              0.061000000000000006,
+              -0.010949746999999996
+            ]
+          ],
+          "vertices_finite": true,
+          "sample_status": "元の4保存姿勢を使用。端子輪郭と根元パッドの座標は維持しています。"
+        },
+        {
+          "variant": "J050",
+          "mode": "holding",
+          "state": "near",
+          "side": "left_right",
+          "offset_mm": 0,
+          "meshes": 20,
+          "faces": 64094,
+          "gl_error": 0,
+          "workpiece_visible": true,
+          "width": 1032,
+          "height": 560,
+          "label": "camera/oblique",
+          "filled_pixels": 123092,
+          "pixel_hash": "c5f95854",
+          "bore_depth": "4.000",
+          "wall_thickness": "2.999",
+          "components": "1",
+          "offset_label": "0.0",
+          "state_disabled": false,
+          "offset_disabled": true,
+          "target_disabled": false,
+          "selected_mode_buttons": 1,
+          "first_moving_vertices": [
+            [
+              0.009940138564575193,
+              0.0040000000000000036,
+              -0.013299999818115228
+            ],
+            [
+              0.015999130121178252,
+              0.002999999867152714,
+              -0.002000110715843287
+            ],
+            [
+              0.004949747000000001,
+              0.061000000000000006,
+              -0.010949746999999996
+            ]
+          ],
+          "vertices_finite": true,
+          "sample_status": "元の4保存姿勢を使用。端子輪郭と根元パッドの座標は維持しています。"
+        },
+        {
+          "variant": "J050",
+          "mode": "holding",
+          "state": "near",
+          "side": "left_right",
+          "offset_mm": 0,
+          "meshes": 13,
+          "faces": 55550,
+          "gl_error": 0,
+          "workpiece_visible": true,
+          "width": 1032,
+          "height": 560,
+          "label": "edge",
+          "filled_pixels": 186232,
+          "pixel_hash": "730c3b1",
+          "bore_depth": "4.000",
+          "wall_thickness": "2.999",
+          "components": "1",
+          "offset_label": "0.0",
+          "state_disabled": false,
+          "offset_disabled": true,
+          "target_disabled": false,
+          "selected_mode_buttons": 1,
+          "first_moving_vertices": [
+            [
+              0.009940138564575193,
+              0.0040000000000000036,
+              -0.013299999818115228
+            ],
+            [
+              0.015999130121178252,
+              0.002999999867152714,
+              -0.002000110715843287
+            ],
+            [
+              0.004949747000000001,
+              0.061000000000000006,
+              -0.010949746999999996
+            ]
+          ],
+          "vertices_finite": true,
+          "sample_status": "元の4保存姿勢を使用。端子輪郭と根元パッドの座標は維持しています。"
+        },
+        {
+          "variant": "J050",
+          "mode": "holding",
+          "state": "near",
+          "side": "left_right",
+          "offset_mm": 0,
+          "meshes": 20,
+          "faces": 64094,
+          "gl_error": 0,
+          "workpiece_visible": true,
+          "width": 1032,
+          "height": 560,
+          "label": "whole",
+          "filled_pixels": 118700,
+          "pixel_hash": "630d803",
+          "bore_depth": "4.000",
+          "wall_thickness": "2.999",
+          "components": "1",
+          "offset_label": "0.0",
+          "state_disabled": false,
+          "offset_disabled": true,
+          "target_disabled": false,
+          "selected_mode_buttons": 1,
+          "first_moving_vertices": [
+            [
+              0.009940138564575193,
+              0.0040000000000000036,
+              -0.013299999818115228
+            ],
+            [
+              0.015999130121178252,
+              0.002999999867152714,
+              -0.002000110715843287
+            ],
+            [
+              0.004949747000000001,
+              0.061000000000000006,
+              -0.010949746999999996
+            ]
+          ],
+          "vertices_finite": true,
+          "sample_status": "元の4保存姿勢を使用。端子輪郭と根元パッドの座標は維持しています。"
+        },
+        {
+          "variant": "J050",
+          "mode": "holding",
+          "state": "near",
+          "side": "left_right",
+          "offset_mm": 0,
+          "meshes": 20,
+          "faces": 64094,
+          "gl_error": 0,
+          "workpiece_visible": true,
+          "width": 1032,
+          "height": 560,
+          "label": "reset",
+          "filled_pixels": 123092,
+          "pixel_hash": "c5f95854",
+          "bore_depth": "4.000",
+          "wall_thickness": "2.999",
+          "components": "1",
+          "offset_label": "0.0",
+          "state_disabled": false,
+          "offset_disabled": true,
+          "target_disabled": false,
+          "selected_mode_buttons": 1,
+          "first_moving_vertices": [
+            [
+              0.009940138564575193,
+              0.0040000000000000036,
+              -0.013299999818115228
+            ],
+            [
+              0.015999130121178252,
+              0.002999999867152714,
+              -0.002000110715843287
+            ],
+            [
+              0.004949747000000001,
+              0.061000000000000006,
+              -0.010949746999999996
+            ]
+          ],
+          "vertices_finite": true,
+          "sample_status": "元の4保存姿勢を使用。端子輪郭と根元パッドの座標は維持しています。"
+        }
+      ],
+      "failure": null,
+      "viewport": 1440,
+      "scroll_width": 1425
+    },
+    "mobile": {
+      "rows": [
+        {
+          "variant": "J025",
+          "mode": "service",
+          "state": "open",
+          "side": "left_left",
+          "offset_mm": 0,
+          "meshes": 16,
+          "faces": 54548,
+          "gl_error": 0,
+          "workpiece_visible": false,
+          "width": 455,
+          "height": 450,
+          "label": "service/J025/left_left/0",
+          "filled_pixels": 70542,
+          "pixel_hash": "5f0cf376",
+          "bore_depth": "4.000",
+          "wall_thickness": "2.999",
+          "components": "1",
+          "offset_label": "0.0",
+          "state_disabled": true,
+          "offset_disabled": false,
+          "target_disabled": true,
+          "selected_mode_buttons": 1,
+          "first_moving_vertices": [
+            [
+              -0.01794013818559806,
+              0.004000002614112284,
+              -0.012121963983944592
+            ],
+            [
+              -0.023999984479431545,
+              0.07299999784615392,
+              0.018427925099260417
+            ],
+            [
+              -0.012949746999999508,
+              0.06100000277128167,
+              -0.00977171116582936
+            ]
+          ],
+          "vertices_finite": true,
+          "sample_status": "この標本：39組中、面交差の検出1組。連続経路の判定ではありません。"
+        },
+        {
+          "variant": "J025",
+          "mode": "service",
+          "state": "open",
+          "side": "left_left",
+          "offset_mm": 6,
+          "meshes": 16,
+          "faces": 54548,
+          "gl_error": 0,
+          "workpiece_visible": false,
+          "width": 455,
+          "height": 450,
+          "label": "service/J025/left_left/6",
+          "filled_pixels": 71866,
+          "pixel_hash": "104e14f",
+          "bore_depth": "4.000",
+          "wall_thickness": "2.999",
+          "components": "1",
+          "offset_label": "6.0",
+          "state_disabled": true,
+          "offset_disabled": false,
+          "target_disabled": true,
+          "selected_mode_buttons": 1,
+          "first_moving_vertices": [
+            [
+              -0.011940138191532893,
+              0.0040000004700285795,
+              -0.012121697125560788
+            ],
+            [
+              -0.01799998448536638,
+              0.07299999570207022,
+              0.01842819195764422
+            ],
+            [
+              -0.006949747005934342,
+              0.061000000627197966,
+              -0.009771444307445556
+            ]
+          ],
+          "vertices_finite": true,
+          "sample_status": "この標本：39組中、面交差の検出0組。連続経路の判定ではありません。"
+        },
+        {
+          "variant": "J025",
+          "mode": "service",
+          "state": "open",
+          "side": "left_left",
+          "offset_mm": 12,
+          "meshes": 16,
+          "faces": 54548,
+          "gl_error": 0,
+          "workpiece_visible": false,
+          "width": 455,
+          "height": 450,
+          "label": "service/J025/left_left/12",
+          "filled_pixels": 72608,
+          "pixel_hash": "d32deb90",
+          "bore_depth": "4.000",
+          "wall_thickness": "2.999",
+          "components": "1",
+          "offset_label": "12.0",
+          "state_disabled": true,
+          "offset_disabled": false,
+          "target_disabled": true,
+          "selected_mode_buttons": 1,
+          "first_moving_vertices": [
+            [
+              -0.0059401381974677255,
+              0.003999998325944875,
+              -0.012121430267176984
+            ],
+            [
+              -0.011999984491301212,
+              0.07299999355798652,
+              0.018428458816028025
+            ],
+            [
+              -0.0009497470118691748,
+              0.06099999848311426,
+              -0.009771177449061752
+            ]
+          ],
+          "vertices_finite": true,
+          "sample_status": "この標本：39組中、面交差の検出0組。連続経路の判定ではありません。"
+        },
+        {
+          "variant": "J025",
+          "mode": "service",
+          "state": "open",
+          "side": "left_right",
+          "offset_mm": 0,
+          "meshes": 16,
+          "faces": 54548,
+          "gl_error": 0,
+          "workpiece_visible": false,
+          "width": 455,
+          "height": 450,
+          "label": "service/J025/left_right/0",
+          "filled_pixels": 70542,
+          "pixel_hash": "5f0cf376",
+          "bore_depth": "4.000",
+          "wall_thickness": "2.999",
+          "components": "1",
+          "offset_label": "0.0",
+          "state_disabled": true,
+          "offset_disabled": false,
+          "target_disabled": true,
+          "selected_mode_buttons": 1,
+          "first_moving_vertices": [
+            [
+              0.017940138564575193,
+              0.0040000000000000036,
+              -0.012121963983944592
+            ],
+            [
+              0.02399913012117825,
+              0.002999999867152714,
+              -0.0008220748816726506
+            ],
+            [
+              0.012949747000000001,
+              0.061000000000000006,
+              -0.00977171116582936
+            ]
+          ],
+          "vertices_finite": true,
+          "sample_status": "この標本：39組中、面交差の検出1組。連続経路の判定ではありません。"
+        },
+        {
+          "variant": "J025",
+          "mode": "service",
+          "state": "open",
+          "side": "left_right",
+          "offset_mm": 6,
+          "meshes": 16,
+          "faces": 54548,
+          "gl_error": 0,
+          "workpiece_visible": false,
+          "width": 455,
+          "height": 450,
+          "label": "service/J025/left_right/6",
+          "filled_pixels": 72240,
+          "pixel_hash": "456a4db0",
+          "bore_depth": "4.000",
+          "wall_thickness": "2.999",
+          "components": "1",
+          "offset_label": "6.0",
+          "state_disabled": true,
+          "offset_disabled": false,
+          "target_disabled": true,
+          "selected_mode_buttons": 1,
+          "first_moving_vertices": [
+            [
+              0.011940138570509644,
+              0.00400000006562247,
+              -0.012121697125560788
+            ],
+            [
+              0.017999130127112697,
+              0.002999999932775181,
+              -0.0008218080232888466
+            ],
+            [
+              0.006949747005934452,
+              0.06100000006562247,
+              -0.009771444307445556
+            ]
+          ],
+          "vertices_finite": true,
+          "sample_status": "この標本：39組中、面交差の検出0組。連続経路の判定ではありません。"
+        },
+        {
+          "variant": "J025",
+          "mode": "service",
+          "state": "open",
+          "side": "left_right",
+          "offset_mm": 12,
+          "meshes": 16,
+          "faces": 54548,
+          "gl_error": 0,
+          "workpiece_visible": false,
+          "width": 455,
+          "height": 450,
+          "label": "service/J025/left_right/12",
+          "filled_pixels": 73183,
+          "pixel_hash": "adb203ce",
+          "bore_depth": "4.000",
+          "wall_thickness": "2.999",
+          "components": "1",
+          "offset_label": "12.0",
+          "state_disabled": true,
+          "offset_disabled": false,
+          "target_disabled": true,
+          "selected_mode_buttons": 1,
+          "first_moving_vertices": [
+            [
+              0.005940138576444095,
+              0.004000000131244938,
+              -0.012121430267176984
+            ],
+            [
+              0.01199913013304715,
+              0.002999999998397648,
+              -0.0008215411649050426
+            ],
+            [
+              0.0009497470118689025,
+              0.06100000013124494,
+              -0.009771177449061752
+            ]
+          ],
+          "vertices_finite": true,
+          "sample_status": "この標本：39組中、面交差の検出0組。連続経路の判定ではありません。"
+        },
+        {
+          "variant": "J050",
+          "mode": "service",
+          "state": "open",
+          "side": "left_left",
+          "offset_mm": 0,
+          "meshes": 16,
+          "faces": 54548,
+          "gl_error": 0,
+          "workpiece_visible": false,
+          "width": 455,
+          "height": 450,
+          "label": "service/J050/left_left/0",
+          "filled_pixels": 70542,
+          "pixel_hash": "628d4d34",
+          "bore_depth": "4.000",
+          "wall_thickness": "2.999",
+          "components": "1",
+          "offset_label": "0.0",
+          "state_disabled": true,
+          "offset_disabled": false,
+          "target_disabled": true,
+          "selected_mode_buttons": 1,
+          "first_moving_vertices": [
+            [
+              -0.01794013818559806,
+              0.004000002614112284,
+              -0.012121963983944592
+            ],
+            [
+              -0.02399997336033222,
+              0.07299999784615006,
+              0.018177925099507684
+            ],
+            [
+              -0.012949746999999508,
+              0.06100000277128167,
+              -0.00977171116582936
+            ]
+          ],
+          "vertices_finite": true,
+          "sample_status": "この標本：39組中、面交差の検出1組。連続経路の判定ではありません。"
+        },
+        {
+          "variant": "J050",
+          "mode": "service",
+          "state": "open",
+          "side": "left_left",
+          "offset_mm": 6,
+          "meshes": 16,
+          "faces": 54548,
+          "gl_error": 0,
+          "workpiece_visible": false,
+          "width": 455,
+          "height": 450,
+          "label": "service/J050/left_left/6",
+          "filled_pixels": 71862,
+          "pixel_hash": "a375e87",
+          "bore_depth": "4.000",
+          "wall_thickness": "2.999",
+          "components": "1",
+          "offset_label": "6.0",
+          "state_disabled": true,
+          "offset_disabled": false,
+          "target_disabled": true,
+          "selected_mode_buttons": 1,
+          "first_moving_vertices": [
+            [
+              -0.011940138191532893,
+              0.0040000004700285795,
+              -0.012121697125560788
+            ],
+            [
+              -0.017999973366267054,
+              0.07299999570206636,
+              0.018178191957891488
+            ],
+            [
+              -0.006949747005934342,
+              0.061000000627197966,
+              -0.009771444307445556
+            ]
+          ],
+          "vertices_finite": true,
+          "sample_status": "この標本：39組中、面交差の検出0組。連続経路の判定ではありません。"
+        },
+        {
+          "variant": "J050",
+          "mode": "service",
+          "state": "open",
+          "side": "left_left",
+          "offset_mm": 12,
+          "meshes": 16,
+          "faces": 54548,
+          "gl_error": 0,
+          "workpiece_visible": false,
+          "width": 455,
+          "height": 450,
+          "label": "service/J050/left_left/12",
+          "filled_pixels": 72595,
+          "pixel_hash": "c08c2354",
+          "bore_depth": "4.000",
+          "wall_thickness": "2.999",
+          "components": "1",
+          "offset_label": "12.0",
+          "state_disabled": true,
+          "offset_disabled": false,
+          "target_disabled": true,
+          "selected_mode_buttons": 1,
+          "first_moving_vertices": [
+            [
+              -0.0059401381974677255,
+              0.003999998325944875,
+              -0.012121430267176984
+            ],
+            [
+              -0.011999973372201886,
+              0.07299999355798266,
+              0.018178458816275292
+            ],
+            [
+              -0.0009497470118691748,
+              0.06099999848311426,
+              -0.009771177449061752
+            ]
+          ],
+          "vertices_finite": true,
+          "sample_status": "この標本：39組中、面交差の検出0組。連続経路の判定ではありません。"
+        },
+        {
+          "variant": "J050",
+          "mode": "service",
+          "state": "open",
+          "side": "left_right",
+          "offset_mm": 0,
+          "meshes": 16,
+          "faces": 54548,
+          "gl_error": 0,
+          "workpiece_visible": false,
+          "width": 455,
+          "height": 450,
+          "label": "service/J050/left_right/0",
+          "filled_pixels": 70542,
+          "pixel_hash": "628d4d34",
+          "bore_depth": "4.000",
+          "wall_thickness": "2.999",
+          "components": "1",
+          "offset_label": "0.0",
+          "state_disabled": true,
+          "offset_disabled": false,
+          "target_disabled": true,
+          "selected_mode_buttons": 1,
+          "first_moving_vertices": [
+            [
+              0.017940138564575193,
+              0.0040000000000000036,
+              -0.012121963983944592
+            ],
+            [
+              0.02399913012117825,
+              0.002999999867152714,
+              -0.0008220748816726506
+            ],
+            [
+              0.012949747000000001,
+              0.061000000000000006,
+              -0.00977171116582936
+            ]
+          ],
+          "vertices_finite": true,
+          "sample_status": "この標本：39組中、面交差の検出1組。連続経路の判定ではありません。"
+        },
+        {
+          "variant": "J050",
+          "mode": "service",
+          "state": "open",
+          "side": "left_right",
+          "offset_mm": 6,
+          "meshes": 16,
+          "faces": 54548,
+          "gl_error": 0,
+          "workpiece_visible": false,
+          "width": 455,
+          "height": 450,
+          "label": "service/J050/left_right/6",
+          "filled_pixels": 72219,
+          "pixel_hash": "464327a8",
+          "bore_depth": "4.000",
+          "wall_thickness": "2.999",
+          "components": "1",
+          "offset_label": "6.0",
+          "state_disabled": true,
+          "offset_disabled": false,
+          "target_disabled": true,
+          "selected_mode_buttons": 1,
+          "first_moving_vertices": [
+            [
+              0.011940138570509644,
+              0.00400000006562247,
+              -0.012121697125560788
+            ],
+            [
+              0.017999130127112697,
+              0.002999999932775181,
+              -0.0008218080232888466
+            ],
+            [
+              0.006949747005934452,
+              0.06100000006562247,
+              -0.009771444307445556
+            ]
+          ],
+          "vertices_finite": true,
+          "sample_status": "この標本：39組中、面交差の検出0組。連続経路の判定ではありません。"
+        },
+        {
+          "variant": "J050",
+          "mode": "service",
+          "state": "open",
+          "side": "left_right",
+          "offset_mm": 12,
+          "meshes": 16,
+          "faces": 54548,
+          "gl_error": 0,
+          "workpiece_visible": false,
+          "width": 455,
+          "height": 450,
+          "label": "service/J050/left_right/12",
+          "filled_pixels": 73157,
+          "pixel_hash": "446d34ab",
+          "bore_depth": "4.000",
+          "wall_thickness": "2.999",
+          "components": "1",
+          "offset_label": "12.0",
+          "state_disabled": true,
+          "offset_disabled": false,
+          "target_disabled": true,
+          "selected_mode_buttons": 1,
+          "first_moving_vertices": [
+            [
+              0.005940138576444095,
+              0.004000000131244938,
+              -0.012121430267176984
+            ],
+            [
+              0.01199913013304715,
+              0.002999999998397648,
+              -0.0008215411649050426
+            ],
+            [
+              0.0009497470118689025,
+              0.06100000013124494,
+              -0.009771177449061752
+            ]
+          ],
+          "vertices_finite": true,
+          "sample_status": "この標本：39組中、面交差の検出0組。連続経路の判定ではありません。"
+        },
+        {
+          "variant": "J025",
+          "mode": "holding",
+          "state": "near",
+          "side": "left_right",
+          "offset_mm": 12,
+          "meshes": 20,
+          "faces": 64094,
+          "gl_error": 0,
+          "workpiece_visible": true,
+          "width": 455,
+          "height": 450,
+          "label": "holding/J025/near",
+          "filled_pixels": 79597,
+          "pixel_hash": "bef86172",
+          "bore_depth": "4.000",
+          "wall_thickness": "2.999",
+          "components": "1",
+          "offset_label": "12.0",
+          "state_disabled": false,
+          "offset_disabled": true,
+          "target_disabled": false,
+          "selected_mode_buttons": 1,
+          "first_moving_vertices": [
+            [
+              0.009940138564575193,
+              0.0040000000000000036,
+              -0.013299999818115228
+            ],
+            [
+              0.015999130121178252,
+              0.002999999867152714,
+              -0.002000110715843287
+            ],
+            [
+              0.004949747000000001,
+              0.061000000000000006,
+              -0.010949746999999996
+            ]
+          ],
+          "vertices_finite": true,
+          "sample_status": "元の4保存姿勢を使用。端子輪郭と根元パッドの座標は維持しています。"
+        },
+        {
+          "variant": "J025",
+          "mode": "holding",
+          "state": "early",
+          "side": "left_right",
+          "offset_mm": 12,
+          "meshes": 20,
+          "faces": 64094,
+          "gl_error": 0,
+          "workpiece_visible": true,
+          "width": 455,
+          "height": 450,
+          "label": "holding/J025/early",
+          "filled_pixels": 80017,
+          "pixel_hash": "2ffbc7ff",
+          "bore_depth": "4.000",
+          "wall_thickness": "2.999",
+          "components": "1",
+          "offset_label": "12.0",
+          "state_disabled": false,
+          "offset_disabled": true,
+          "target_disabled": false,
+          "selected_mode_buttons": 1,
+          "first_moving_vertices": [
+            [
+              0.010343530614741303,
+              0.0040000000000000036,
+              -0.013268104293260238
+            ],
+            [
+              0.016402522171344365,
+              0.002999999867152714,
+              -0.001968215190988297
+            ],
+            [
+              0.005353139050166111,
+              0.061000000000000006,
+              -0.010917851475145006
+            ]
+          ],
+          "vertices_finite": true,
+          "sample_status": "元の4保存姿勢を使用。端子輪郭と根元パッドの座標は維持しています。"
+        },
+        {
+          "variant": "J025",
+          "mode": "holding",
+          "state": "open",
+          "side": "left_right",
+          "offset_mm": 12,
+          "meshes": 20,
+          "faces": 64094,
+          "gl_error": 0,
+          "workpiece_visible": true,
+          "width": 455,
+          "height": 450,
+          "label": "holding/J025/open",
+          "filled_pixels": 83948,
+          "pixel_hash": "f1787af2",
+          "bore_depth": "4.000",
+          "wall_thickness": "2.999",
+          "components": "1",
+          "offset_label": "12.0",
+          "state_disabled": false,
+          "offset_disabled": true,
+          "target_disabled": false,
+          "selected_mode_buttons": 1,
+          "first_moving_vertices": [
+            [
+              0.017940138564575193,
+              0.0040000000000000036,
+              -0.012121963983944592
+            ],
+            [
+              0.02399913012117825,
+              0.002999999867152714,
+              -0.0008220748816726506
+            ],
+            [
+              0.012949747000000001,
+              0.061000000000000006,
+              -0.00977171116582936
+            ]
+          ],
+          "vertices_finite": true,
+          "sample_status": "元の4保存姿勢を使用。端子輪郭と根元パッドの座標は維持しています。"
+        },
+        {
+          "variant": "J025",
+          "mode": "holding",
+          "state": "clear",
+          "side": "left_right",
+          "offset_mm": 12,
+          "meshes": 20,
+          "faces": 64094,
+          "gl_error": 0,
+          "workpiece_visible": true,
+          "width": 455,
+          "height": 450,
+          "label": "holding/J025/clear",
+          "filled_pixels": 56514,
+          "pixel_hash": "b65c640f",
+          "bore_depth": "4.000",
+          "wall_thickness": "2.999",
+          "components": "1",
+          "offset_label": "12.0",
+          "state_disabled": false,
+          "offset_disabled": true,
+          "target_disabled": false,
+          "selected_mode_buttons": 1,
+          "first_moving_vertices": [
+            [
+              0.017940138564575193,
+              0.0040000000000000036,
+              0.012878036016055402
+            ],
+            [
+              0.02399913012117825,
+              0.002999999867152714,
+              0.024177925118327344
+            ],
+            [
+              0.012949747000000001,
+              0.061000000000000006,
+              0.015228288834170635
+            ]
+          ],
+          "vertices_finite": true,
+          "sample_status": "元の4保存姿勢を使用。端子輪郭と根元パッドの座標は維持しています。"
+        },
+        {
+          "variant": "J050",
+          "mode": "holding",
+          "state": "near",
+          "side": "left_right",
+          "offset_mm": 12,
+          "meshes": 20,
+          "faces": 64094,
+          "gl_error": 0,
+          "workpiece_visible": true,
+          "width": 455,
+          "height": 450,
+          "label": "holding/J050/near",
+          "filled_pixels": 79597,
+          "pixel_hash": "f7932621",
+          "bore_depth": "4.000",
+          "wall_thickness": "2.999",
+          "components": "1",
+          "offset_label": "12.0",
+          "state_disabled": false,
+          "offset_disabled": true,
+          "target_disabled": false,
+          "selected_mode_buttons": 1,
+          "first_moving_vertices": [
+            [
+              0.009940138564575193,
+              0.0040000000000000036,
+              -0.013299999818115228
+            ],
+            [
+              0.015999130121178252,
+              0.002999999867152714,
+              -0.002000110715843287
+            ],
+            [
+              0.004949747000000001,
+              0.061000000000000006,
+              -0.010949746999999996
+            ]
+          ],
+          "vertices_finite": true,
+          "sample_status": "元の4保存姿勢を使用。端子輪郭と根元パッドの座標は維持しています。"
+        },
+        {
+          "variant": "J050",
+          "mode": "holding",
+          "state": "early",
+          "side": "left_right",
+          "offset_mm": 12,
+          "meshes": 20,
+          "faces": 64094,
+          "gl_error": 0,
+          "workpiece_visible": true,
+          "width": 455,
+          "height": 450,
+          "label": "holding/J050/early",
+          "filled_pixels": 80017,
+          "pixel_hash": "d16f61f3",
+          "bore_depth": "4.000",
+          "wall_thickness": "2.999",
+          "components": "1",
+          "offset_label": "12.0",
+          "state_disabled": false,
+          "offset_disabled": true,
+          "target_disabled": false,
+          "selected_mode_buttons": 1,
+          "first_moving_vertices": [
+            [
+              0.010343530614741303,
+              0.0040000000000000036,
+              -0.013268104293260238
+            ],
+            [
+              0.016402522171344365,
+              0.002999999867152714,
+              -0.001968215190988297
+            ],
+            [
+              0.005353139050166111,
+              0.061000000000000006,
+              -0.010917851475145006
+            ]
+          ],
+          "vertices_finite": true,
+          "sample_status": "元の4保存姿勢を使用。端子輪郭と根元パッドの座標は維持しています。"
+        },
+        {
+          "variant": "J050",
+          "mode": "holding",
+          "state": "open",
+          "side": "left_right",
+          "offset_mm": 12,
+          "meshes": 20,
+          "faces": 64094,
+          "gl_error": 0,
+          "workpiece_visible": true,
+          "width": 455,
+          "height": 450,
+          "label": "holding/J050/open",
+          "filled_pixels": 83948,
+          "pixel_hash": "318f19a8",
+          "bore_depth": "4.000",
+          "wall_thickness": "2.999",
+          "components": "1",
+          "offset_label": "12.0",
+          "state_disabled": false,
+          "offset_disabled": true,
+          "target_disabled": false,
+          "selected_mode_buttons": 1,
+          "first_moving_vertices": [
+            [
+              0.017940138564575193,
+              0.0040000000000000036,
+              -0.012121963983944592
+            ],
+            [
+              0.02399913012117825,
+              0.002999999867152714,
+              -0.0008220748816726506
+            ],
+            [
+              0.012949747000000001,
+              0.061000000000000006,
+              -0.00977171116582936
+            ]
+          ],
+          "vertices_finite": true,
+          "sample_status": "元の4保存姿勢を使用。端子輪郭と根元パッドの座標は維持しています。"
+        },
+        {
+          "variant": "J050",
+          "mode": "holding",
+          "state": "clear",
+          "side": "left_right",
+          "offset_mm": 12,
+          "meshes": 20,
+          "faces": 64094,
+          "gl_error": 0,
+          "workpiece_visible": true,
+          "width": 455,
+          "height": 450,
+          "label": "holding/J050/clear",
+          "filled_pixels": 56514,
+          "pixel_hash": "6233450c",
+          "bore_depth": "4.000",
+          "wall_thickness": "2.999",
+          "components": "1",
+          "offset_label": "12.0",
+          "state_disabled": false,
+          "offset_disabled": true,
+          "target_disabled": false,
+          "selected_mode_buttons": 1,
+          "first_moving_vertices": [
+            [
+              0.017940138564575193,
+              0.0040000000000000036,
+              0.012878036016055402
+            ],
+            [
+              0.02399913012117825,
+              0.002999999867152714,
+              0.024177925118327344
+            ],
+            [
+              0.012949747000000001,
+              0.061000000000000006,
+              0.015228288834170635
+            ]
+          ],
+          "vertices_finite": true,
+          "sample_status": "元の4保存姿勢を使用。端子輪郭と根元パッドの座標は維持しています。"
+        },
+        {
+          "variant": "J050",
+          "mode": "holding",
+          "state": "near",
+          "side": "left_right",
+          "offset_mm": 0,
+          "meshes": 10,
+          "faces": 12586,
+          "gl_error": 0,
+          "workpiece_visible": true,
+          "width": 455,
+          "height": 450,
+          "label": "toggle/hardware",
+          "filled_pixels": 23664,
+          "pixel_hash": "ea80049e",
+          "bore_depth": "4.000",
+          "wall_thickness": "2.999",
+          "components": "1",
+          "offset_label": "0.0",
+          "state_disabled": false,
+          "offset_disabled": true,
+          "target_disabled": false,
+          "selected_mode_buttons": 1,
+          "first_moving_vertices": [
+            [
+              0.009940138564575193,
+              0.0040000000000000036,
+              -0.013299999818115228
+            ],
+            [
+              0.015999130121178252,
+              0.002999999867152714,
+              -0.002000110715843287
+            ],
+            [
+              0.004949747000000001,
+              0.061000000000000006,
+              -0.010949746999999996
+            ]
+          ],
+          "vertices_finite": true,
+          "sample_status": "元の4保存姿勢を使用。端子輪郭と根元パッドの座標は維持しています。"
+        },
+        {
+          "variant": "J050",
+          "mode": "holding",
+          "state": "near",
+          "side": "left_right",
+          "offset_mm": 0,
+          "meshes": 16,
+          "faces": 54548,
+          "gl_error": 0,
+          "workpiece_visible": false,
+          "width": 455,
+          "height": 450,
+          "label": "toggle/target",
+          "filled_pixels": 69871,
+          "pixel_hash": "d96f3638",
+          "bore_depth": "4.000",
+          "wall_thickness": "2.999",
+          "components": "1",
+          "offset_label": "0.0",
+          "state_disabled": false,
+          "offset_disabled": true,
+          "target_disabled": false,
+          "selected_mode_buttons": 1,
+          "first_moving_vertices": [
+            [
+              0.009940138564575193,
+              0.0040000000000000036,
+              -0.013299999818115228
+            ],
+            [
+              0.015999130121178252,
+              0.002999999867152714,
+              -0.002000110715843287
+            ],
+            [
+              0.004949747000000001,
+              0.061000000000000006,
+              -0.010949746999999996
+            ]
+          ],
+          "vertices_finite": true,
+          "sample_status": "元の4保存姿勢を使用。端子輪郭と根元パッドの座標は維持しています。"
+        },
+        {
+          "variant": "J050",
+          "mode": "holding",
+          "state": "near",
+          "side": "left_right",
+          "offset_mm": 0,
+          "meshes": 13,
+          "faces": 55550,
+          "gl_error": 0,
+          "workpiece_visible": true,
+          "width": 455,
+          "height": 450,
+          "label": "toggle/opposite",
+          "filled_pixels": 54664,
+          "pixel_hash": "7094ab96",
+          "bore_depth": "4.000",
+          "wall_thickness": "2.999",
+          "components": "1",
+          "offset_label": "0.0",
+          "state_disabled": false,
+          "offset_disabled": true,
+          "target_disabled": false,
+          "selected_mode_buttons": 1,
+          "first_moving_vertices": [
+            [
+              0.009940138564575193,
+              0.0040000000000000036,
+              -0.013299999818115228
+            ],
+            [
+              0.015999130121178252,
+              0.002999999867152714,
+              -0.002000110715843287
+            ],
+            [
+              0.004949747000000001,
+              0.061000000000000006,
+              -0.010949746999999996
+            ]
+          ],
+          "vertices_finite": true,
+          "sample_status": "元の4保存姿勢を使用。端子輪郭と根元パッドの座標は維持しています。"
+        },
+        {
+          "variant": "J050",
+          "mode": "holding",
+          "state": "near",
+          "side": "left_right",
+          "offset_mm": 0,
+          "meshes": 18,
+          "faces": 63830,
+          "gl_error": 0,
+          "workpiece_visible": true,
+          "width": 455,
+          "height": 450,
+          "label": "toggle/pads",
+          "filled_pixels": 79539,
+          "pixel_hash": "1db30101",
+          "bore_depth": "4.000",
+          "wall_thickness": "2.999",
+          "components": "1",
+          "offset_label": "0.0",
+          "state_disabled": false,
+          "offset_disabled": true,
+          "target_disabled": false,
+          "selected_mode_buttons": 1,
+          "first_moving_vertices": [
+            [
+              0.009940138564575193,
+              0.0040000000000000036,
+              -0.013299999818115228
+            ],
+            [
+              0.015999130121178252,
+              0.002999999867152714,
+              -0.002000110715843287
+            ],
+            [
+              0.004949747000000001,
+              0.061000000000000006,
+              -0.010949746999999996
+            ]
+          ],
+          "vertices_finite": true,
+          "sample_status": "元の4保存姿勢を使用。端子輪郭と根元パッドの座標は維持しています。"
+        },
+        {
+          "variant": "J050",
+          "mode": "holding",
+          "state": "near",
+          "side": "left_right",
+          "offset_mm": 0,
+          "meshes": 20,
+          "faces": 64094,
+          "gl_error": 0,
+          "workpiece_visible": true,
+          "width": 455,
+          "height": 450,
+          "label": "camera/front",
+          "filled_pixels": 51391,
+          "pixel_hash": "fedc1b5f",
+          "bore_depth": "4.000",
+          "wall_thickness": "2.999",
+          "components": "1",
+          "offset_label": "0.0",
+          "state_disabled": false,
+          "offset_disabled": true,
+          "target_disabled": false,
+          "selected_mode_buttons": 1,
+          "first_moving_vertices": [
+            [
+              0.009940138564575193,
+              0.0040000000000000036,
+              -0.013299999818115228
+            ],
+            [
+              0.015999130121178252,
+              0.002999999867152714,
+              -0.002000110715843287
+            ],
+            [
+              0.004949747000000001,
+              0.061000000000000006,
+              -0.010949746999999996
+            ]
+          ],
+          "vertices_finite": true,
+          "sample_status": "元の4保存姿勢を使用。端子輪郭と根元パッドの座標は維持しています。"
+        },
+        {
+          "variant": "J050",
+          "mode": "holding",
+          "state": "near",
+          "side": "left_right",
+          "offset_mm": 0,
+          "meshes": 20,
+          "faces": 64094,
+          "gl_error": 0,
+          "workpiece_visible": true,
+          "width": 455,
+          "height": 450,
+          "label": "camera/side",
+          "filled_pixels": 33818,
+          "pixel_hash": "ad2d6258",
+          "bore_depth": "4.000",
+          "wall_thickness": "2.999",
+          "components": "1",
+          "offset_label": "0.0",
+          "state_disabled": false,
+          "offset_disabled": true,
+          "target_disabled": false,
+          "selected_mode_buttons": 1,
+          "first_moving_vertices": [
+            [
+              0.009940138564575193,
+              0.0040000000000000036,
+              -0.013299999818115228
+            ],
+            [
+              0.015999130121178252,
+              0.002999999867152714,
+              -0.002000110715843287
+            ],
+            [
+              0.004949747000000001,
+              0.061000000000000006,
+              -0.010949746999999996
+            ]
+          ],
+          "vertices_finite": true,
+          "sample_status": "元の4保存姿勢を使用。端子輪郭と根元パッドの座標は維持しています。"
+        },
+        {
+          "variant": "J050",
+          "mode": "holding",
+          "state": "near",
+          "side": "left_right",
+          "offset_mm": 0,
+          "meshes": 20,
+          "faces": 64094,
+          "gl_error": 0,
+          "workpiece_visible": true,
+          "width": 455,
+          "height": 450,
+          "label": "camera/oblique",
+          "filled_pixels": 79597,
+          "pixel_hash": "f7932621",
+          "bore_depth": "4.000",
+          "wall_thickness": "2.999",
+          "components": "1",
+          "offset_label": "0.0",
+          "state_disabled": false,
+          "offset_disabled": true,
+          "target_disabled": false,
+          "selected_mode_buttons": 1,
+          "first_moving_vertices": [
+            [
+              0.009940138564575193,
+              0.0040000000000000036,
+              -0.013299999818115228
+            ],
+            [
+              0.015999130121178252,
+              0.002999999867152714,
+              -0.002000110715843287
+            ],
+            [
+              0.004949747000000001,
+              0.061000000000000006,
+              -0.010949746999999996
+            ]
+          ],
+          "vertices_finite": true,
+          "sample_status": "元の4保存姿勢を使用。端子輪郭と根元パッドの座標は維持しています。"
+        },
+        {
+          "variant": "J050",
+          "mode": "holding",
+          "state": "near",
+          "side": "left_right",
+          "offset_mm": 0,
+          "meshes": 13,
+          "faces": 55550,
+          "gl_error": 0,
+          "workpiece_visible": true,
+          "width": 455,
+          "height": 450,
+          "label": "edge",
+          "filled_pixels": 116715,
+          "pixel_hash": "a39013bb",
+          "bore_depth": "4.000",
+          "wall_thickness": "2.999",
+          "components": "1",
+          "offset_label": "0.0",
+          "state_disabled": false,
+          "offset_disabled": true,
+          "target_disabled": false,
+          "selected_mode_buttons": 1,
+          "first_moving_vertices": [
+            [
+              0.009940138564575193,
+              0.0040000000000000036,
+              -0.013299999818115228
+            ],
+            [
+              0.015999130121178252,
+              0.002999999867152714,
+              -0.002000110715843287
+            ],
+            [
+              0.004949747000000001,
+              0.061000000000000006,
+              -0.010949746999999996
+            ]
+          ],
+          "vertices_finite": true,
+          "sample_status": "元の4保存姿勢を使用。端子輪郭と根元パッドの座標は維持しています。"
+        },
+        {
+          "variant": "J050",
+          "mode": "holding",
+          "state": "near",
+          "side": "left_right",
+          "offset_mm": 0,
+          "meshes": 20,
+          "faces": 64094,
+          "gl_error": 0,
+          "workpiece_visible": true,
+          "width": 455,
+          "height": 450,
+          "label": "whole",
+          "filled_pixels": 76782,
+          "pixel_hash": "13042736",
+          "bore_depth": "4.000",
+          "wall_thickness": "2.999",
+          "components": "1",
+          "offset_label": "0.0",
+          "state_disabled": false,
+          "offset_disabled": true,
+          "target_disabled": false,
+          "selected_mode_buttons": 1,
+          "first_moving_vertices": [
+            [
+              0.009940138564575193,
+              0.0040000000000000036,
+              -0.013299999818115228
+            ],
+            [
+              0.015999130121178252,
+              0.002999999867152714,
+              -0.002000110715843287
+            ],
+            [
+              0.004949747000000001,
+              0.061000000000000006,
+              -0.010949746999999996
+            ]
+          ],
+          "vertices_finite": true,
+          "sample_status": "元の4保存姿勢を使用。端子輪郭と根元パッドの座標は維持しています。"
+        },
+        {
+          "variant": "J050",
+          "mode": "holding",
+          "state": "near",
+          "side": "left_right",
+          "offset_mm": 0,
+          "meshes": 20,
+          "faces": 64094,
+          "gl_error": 0,
+          "workpiece_visible": true,
+          "width": 455,
+          "height": 450,
+          "label": "reset",
+          "filled_pixels": 79597,
+          "pixel_hash": "f7932621",
+          "bore_depth": "4.000",
+          "wall_thickness": "2.999",
+          "components": "1",
+          "offset_label": "0.0",
+          "state_disabled": false,
+          "offset_disabled": true,
+          "target_disabled": false,
+          "selected_mode_buttons": 1,
+          "first_moving_vertices": [
+            [
+              0.009940138564575193,
+              0.0040000000000000036,
+              -0.013299999818115228
+            ],
+            [
+              0.015999130121178252,
+              0.002999999867152714,
+              -0.002000110715843287
+            ],
+            [
+              0.004949747000000001,
+              0.061000000000000006,
+              -0.010949746999999996
+            ]
+          ],
+          "vertices_finite": true,
+          "sample_status": "元の4保存姿勢を使用。端子輪郭と根元パッドの座標は維持しています。"
+        }
+      ],
+      "failure": null,
+      "viewport": 500,
+      "scroll_width": 485
+    }
+  },
+  "local_paths_exist": [
+    "hand_support_integration_v01.blend",
+    "hand_support_J025_v01.glb",
+    "hand_support_J050_v01.glb",
+    "根元支持部の一体化_v01.md",
+    "hand_support_integration_observations_v01.json",
+    "hand_support_integration_native_v01.json"
+  ],
+  "physical_acceptance_verdict": null
+}

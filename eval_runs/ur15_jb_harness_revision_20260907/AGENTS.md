@@ -180,3 +180,29 @@ numbers unknown until their basis and the scope of the product change are set.
   candidate prefix in scene-qualified object names; keep measurements intact.
   Root support joining, material/compliance, screw engagement and actual
   manufacturing tolerances remain unresolved. Arm/video production stays paused.
+
+## Integral root-support comparison on 2026-09-14
+
+- The user continued after the relief comparison. The new J025/J050 candidates
+  in `analysis/hand_support_integration_v01.md` combine each blue root support
+  with its carrier while retaining D40's hardware, terminal/root pad meshes,
+  colors and four saved poses. Both relief values remain comparison values.
+- Rebuild the previous nominal primitives in the measured mounting frame and
+  bore once. Re-Booleaning the old tessellated carrier failed closed-topology
+  assertions; retain that failed output instead of promoting it. The final
+  blue bodies each have one closed component and no strict zero-area faces.
+  This is an auxiliary mesh observation, not manufacturing or force approval.
+- Nominal reconstruction changes blue external samples by up to 1.3725 microns.
+  Record actual 3D rim changes separately from u/v identity at the new 0/2/4 mm
+  bore sections. Do not claim all carrier vertices remain unchanged. Evaluate
+  trimesh distances on mm-scaled copies to avoid its fixed dot-product epsilon
+  obscuring pad-seat edge detail; return SI values and keep tolerances unchanged.
+- The root-covered hole retains a nominal 4 mm bore space, followed by about
+  3 mm of support to the unchanged pad-seat plane. Smooth model holes do not
+  specify thread engagement or a custom screw length. The pad remains separate;
+  material, joining and grip force are still unselected.
+- Service sampling moves three parts against thirteen fixed parts, 39 pairs
+  per offset, using derived vertices only. Positive-offset samples have no
+  surface pairs in either candidate; zero-offset mount contacts remain recorded.
+  Do not compare triangle counts across changed topology as penetration depth.
+  Keep arm/video production paused until the hand configuration is resolved.

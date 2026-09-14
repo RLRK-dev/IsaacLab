@@ -337,3 +337,43 @@ one-side service offsets. Source dimension correspondence, finite vertices,
 WebGL pixels, local links and layout width were checked. Rebuilding from the
 copied delivery scripts in a fresh directory reproduced all three GLB hashes,
 the payload and measurements; only timestamps and native binary SHA differed.
+
+## 2026-09-14 — D40 integral root-support comparison
+
+Continued the user's `ok すすんで` after the relief comparison. Built J025/J050
+with the blue root support and carrier as one body per side. Retained the
+40 mm setback, hardware, terminal/root pad vertices/faces/colors and four poses.
+The two upper-edge relief values and actual pad joining remain unselected.
+
+The first Boolean on the existing carrier produced nonclosed components and
+36/30 zero-area faces; it stopped before native output. Reusing the nominal
+box-union primitives in the common mount frame, followed by one set of bores,
+produced one closed component per side with 562 vertices and 1,128 triangles.
+The second stop exposed an incorrect whole-rim-identity assertion: canonical
+blue geometry removes an old 1.069 micron axial protrusion. Record that actual
+change and measure u/v correspondence at explicit 0/2/4 mm bore sections.
+External finite source samples differ by at most 1.3725 microns; contact meshes
+are unchanged. A separate 0.133 micron pad-seat distance was a metre-scale
+fixed-epsilon artifact in trimesh. Calculating on mm-scaled copies restores
+the near-zero seat observation without changing geometry or epsilon.
+
+The root-covered hole has a nominal 4 mm space and about 2.999 mm support to
+the original pad-seat plane. Screw engagement, material, joining, force and
+manufacturing limits are not inferred. The final native reloads eight scenes
+with twenty meshes each identically, including all matrices and mesh hashes.
+Service observations use 3 x 13 object pairs per sample, 3,900 total. Both sides
+of both candidates have zero positive-offset surface pairs; zero-offset mount
+contacts remain included. Topology-dependent triangle counts are not depths.
+
+The desktop/mobile HTML checks each covered 30 operations: candidates, four
+poses, both service directions, display toggles, cameras and reset. Numeric
+correspondence, finite coordinates, WebGL pixels and local links matched;
+screenshots were inspected. These are auxiliary geometry/UI observations.
+No arm trajectory, video or authoritative physical-validity verdict was made.
+
+Rebuilt the comparison in a fresh output directory using the copied package's
+thirteen modules and pinned input/settings. Both GLB hashes, the mesh payload
+and observations matched. Native records matched except for timestamps and
+binary blend SHA; each native separately passed exact readback. The copied
+previous-delivery source hash remained unchanged. Final checks and delivery
+are recorded with the package's commit and file manifest.

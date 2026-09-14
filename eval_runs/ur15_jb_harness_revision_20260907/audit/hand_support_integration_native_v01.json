@@ -1,0 +1,917 @@
+{
+  "recorded_at": "2026-09-14T09:32:09.296957+09:00",
+  "source_sha256": "c94f58f0ab61e621c38980e913d330aceedd7a31128130d099714cd97dc47111",
+  "native_sha256": "9aaa76ee881dfa09aca5400a719f7013711a994bce33dbfc6bdfcd9ade91bb93",
+  "native_readback_identical": true,
+  "readback_fields": [
+    "world matrices",
+    "vertex SHA",
+    "face SHA",
+    "counts",
+    "visibility"
+  ],
+  "mesh_counts": {
+    "J025_clear": 20,
+    "J025_early": 20,
+    "J025_near": 20,
+    "J025_open": 20,
+    "J050_clear": 20,
+    "J050_early": 20,
+    "J050_near": 20,
+    "J050_open": 20
+  },
+  "static_surface_pairs": {
+    "J025": {
+      "near": {
+        "hand_vs_reference_context": {
+          "object_pairs_considered": 64,
+          "surface_overlap_pairs": [
+            {
+              "first": "left_left_root_cable_pad",
+              "second": "comparison_wire",
+              "triangle_pairs": 131
+            },
+            {
+              "first": "left_right_root_cable_pad",
+              "second": "comparison_wire",
+              "triangle_pairs": 132
+            }
+          ]
+        },
+        "carrier_vs_hardware_including_mounts": {
+          "object_pairs_considered": 20,
+          "surface_overlap_pairs": [
+            {
+              "first": "left_left_carrier",
+              "second": "hardware_left_left_inner_finger_0",
+              "triangle_pairs": 62
+            },
+            {
+              "first": "left_right_carrier",
+              "second": "hardware_left_right_inner_finger_0",
+              "triangle_pairs": 67
+            }
+          ]
+        },
+        "left_vs_right_inserts": {
+          "object_pairs_considered": 9,
+          "surface_overlap_pairs": []
+        }
+      },
+      "early": {
+        "hand_vs_reference_context": {
+          "object_pairs_considered": 64,
+          "surface_overlap_pairs": []
+        },
+        "carrier_vs_hardware_including_mounts": {
+          "object_pairs_considered": 20,
+          "surface_overlap_pairs": [
+            {
+              "first": "left_left_carrier",
+              "second": "hardware_left_left_inner_finger_0",
+              "triangle_pairs": 62
+            },
+            {
+              "first": "left_right_carrier",
+              "second": "hardware_left_right_inner_finger_0",
+              "triangle_pairs": 66
+            }
+          ]
+        },
+        "left_vs_right_inserts": {
+          "object_pairs_considered": 9,
+          "surface_overlap_pairs": []
+        }
+      },
+      "open": {
+        "hand_vs_reference_context": {
+          "object_pairs_considered": 64,
+          "surface_overlap_pairs": []
+        },
+        "carrier_vs_hardware_including_mounts": {
+          "object_pairs_considered": 20,
+          "surface_overlap_pairs": [
+            {
+              "first": "left_left_carrier",
+              "second": "hardware_left_left_inner_finger_0",
+              "triangle_pairs": 62
+            },
+            {
+              "first": "left_right_carrier",
+              "second": "hardware_left_right_inner_finger_0",
+              "triangle_pairs": 65
+            }
+          ]
+        },
+        "left_vs_right_inserts": {
+          "object_pairs_considered": 9,
+          "surface_overlap_pairs": []
+        }
+      },
+      "clear": {
+        "hand_vs_reference_context": {
+          "object_pairs_considered": 64,
+          "surface_overlap_pairs": []
+        },
+        "carrier_vs_hardware_including_mounts": {
+          "object_pairs_considered": 20,
+          "surface_overlap_pairs": [
+            {
+              "first": "left_left_carrier",
+              "second": "hardware_left_left_inner_finger_0",
+              "triangle_pairs": 63
+            },
+            {
+              "first": "left_right_carrier",
+              "second": "hardware_left_right_inner_finger_0",
+              "triangle_pairs": 66
+            }
+          ]
+        },
+        "left_vs_right_inserts": {
+          "object_pairs_considered": 9,
+          "surface_overlap_pairs": []
+        }
+      }
+    },
+    "J050": {
+      "near": {
+        "hand_vs_reference_context": {
+          "object_pairs_considered": 64,
+          "surface_overlap_pairs": [
+            {
+              "first": "left_left_root_cable_pad",
+              "second": "comparison_wire",
+              "triangle_pairs": 131
+            },
+            {
+              "first": "left_right_root_cable_pad",
+              "second": "comparison_wire",
+              "triangle_pairs": 132
+            }
+          ]
+        },
+        "carrier_vs_hardware_including_mounts": {
+          "object_pairs_considered": 20,
+          "surface_overlap_pairs": [
+            {
+              "first": "left_left_carrier",
+              "second": "hardware_left_left_inner_finger_0",
+              "triangle_pairs": 62
+            },
+            {
+              "first": "left_right_carrier",
+              "second": "hardware_left_right_inner_finger_0",
+              "triangle_pairs": 67
+            }
+          ]
+        },
+        "left_vs_right_inserts": {
+          "object_pairs_considered": 9,
+          "surface_overlap_pairs": []
+        }
+      },
+      "early": {
+        "hand_vs_reference_context": {
+          "object_pairs_considered": 64,
+          "surface_overlap_pairs": []
+        },
+        "carrier_vs_hardware_including_mounts": {
+          "object_pairs_considered": 20,
+          "surface_overlap_pairs": [
+            {
+              "first": "left_left_carrier",
+              "second": "hardware_left_left_inner_finger_0",
+              "triangle_pairs": 63
+            },
+            {
+              "first": "left_right_carrier",
+              "second": "hardware_left_right_inner_finger_0",
+              "triangle_pairs": 64
+            }
+          ]
+        },
+        "left_vs_right_inserts": {
+          "object_pairs_considered": 9,
+          "surface_overlap_pairs": []
+        }
+      },
+      "open": {
+        "hand_vs_reference_context": {
+          "object_pairs_considered": 64,
+          "surface_overlap_pairs": []
+        },
+        "carrier_vs_hardware_including_mounts": {
+          "object_pairs_considered": 20,
+          "surface_overlap_pairs": [
+            {
+              "first": "left_left_carrier",
+              "second": "hardware_left_left_inner_finger_0",
+              "triangle_pairs": 62
+            },
+            {
+              "first": "left_right_carrier",
+              "second": "hardware_left_right_inner_finger_0",
+              "triangle_pairs": 65
+            }
+          ]
+        },
+        "left_vs_right_inserts": {
+          "object_pairs_considered": 9,
+          "surface_overlap_pairs": []
+        }
+      },
+      "clear": {
+        "hand_vs_reference_context": {
+          "object_pairs_considered": 64,
+          "surface_overlap_pairs": []
+        },
+        "carrier_vs_hardware_including_mounts": {
+          "object_pairs_considered": 20,
+          "surface_overlap_pairs": [
+            {
+              "first": "left_left_carrier",
+              "second": "hardware_left_left_inner_finger_0",
+              "triangle_pairs": 61
+            },
+            {
+              "first": "left_right_carrier",
+              "second": "hardware_left_right_inner_finger_0",
+              "triangle_pairs": 68
+            }
+          ]
+        },
+        "left_vs_right_inserts": {
+          "object_pairs_considered": 9,
+          "surface_overlap_pairs": []
+        }
+      }
+    }
+  },
+  "one_side_service_extraction_samples": {
+    "J025": {
+      "left_left": {
+        "moving_objects": [
+          "left_left_edge_contour",
+          "left_left_carrier",
+          "left_left_root_cable_pad"
+        ],
+        "samples": [
+          {
+            "offset_m": 0.0,
+            "object_pairs_considered": 39,
+            "surface_overlap_pairs": [
+              {
+                "moving": "left_left_carrier",
+                "fixed": "hardware_left_left_inner_finger_0",
+                "triangle_surface_pairs": 62
+              }
+            ]
+          },
+          {
+            "offset_m": 0.0005,
+            "object_pairs_considered": 39,
+            "surface_overlap_pairs": []
+          },
+          {
+            "offset_m": 0.001,
+            "object_pairs_considered": 39,
+            "surface_overlap_pairs": []
+          },
+          {
+            "offset_m": 0.0015,
+            "object_pairs_considered": 39,
+            "surface_overlap_pairs": []
+          },
+          {
+            "offset_m": 0.002,
+            "object_pairs_considered": 39,
+            "surface_overlap_pairs": []
+          },
+          {
+            "offset_m": 0.0025,
+            "object_pairs_considered": 39,
+            "surface_overlap_pairs": []
+          },
+          {
+            "offset_m": 0.003,
+            "object_pairs_considered": 39,
+            "surface_overlap_pairs": []
+          },
+          {
+            "offset_m": 0.0035,
+            "object_pairs_considered": 39,
+            "surface_overlap_pairs": []
+          },
+          {
+            "offset_m": 0.004,
+            "object_pairs_considered": 39,
+            "surface_overlap_pairs": []
+          },
+          {
+            "offset_m": 0.0045,
+            "object_pairs_considered": 39,
+            "surface_overlap_pairs": []
+          },
+          {
+            "offset_m": 0.005,
+            "object_pairs_considered": 39,
+            "surface_overlap_pairs": []
+          },
+          {
+            "offset_m": 0.0055,
+            "object_pairs_considered": 39,
+            "surface_overlap_pairs": []
+          },
+          {
+            "offset_m": 0.006,
+            "object_pairs_considered": 39,
+            "surface_overlap_pairs": []
+          },
+          {
+            "offset_m": 0.0065,
+            "object_pairs_considered": 39,
+            "surface_overlap_pairs": []
+          },
+          {
+            "offset_m": 0.007,
+            "object_pairs_considered": 39,
+            "surface_overlap_pairs": []
+          },
+          {
+            "offset_m": 0.0075,
+            "object_pairs_considered": 39,
+            "surface_overlap_pairs": []
+          },
+          {
+            "offset_m": 0.008,
+            "object_pairs_considered": 39,
+            "surface_overlap_pairs": []
+          },
+          {
+            "offset_m": 0.0085,
+            "object_pairs_considered": 39,
+            "surface_overlap_pairs": []
+          },
+          {
+            "offset_m": 0.009,
+            "object_pairs_considered": 39,
+            "surface_overlap_pairs": []
+          },
+          {
+            "offset_m": 0.0095,
+            "object_pairs_considered": 39,
+            "surface_overlap_pairs": []
+          },
+          {
+            "offset_m": 0.01,
+            "object_pairs_considered": 39,
+            "surface_overlap_pairs": []
+          },
+          {
+            "offset_m": 0.0105,
+            "object_pairs_considered": 39,
+            "surface_overlap_pairs": []
+          },
+          {
+            "offset_m": 0.011,
+            "object_pairs_considered": 39,
+            "surface_overlap_pairs": []
+          },
+          {
+            "offset_m": 0.0115,
+            "object_pairs_considered": 39,
+            "surface_overlap_pairs": []
+          },
+          {
+            "offset_m": 0.012,
+            "object_pairs_considered": 39,
+            "surface_overlap_pairs": []
+          }
+        ]
+      },
+      "left_right": {
+        "moving_objects": [
+          "left_right_edge_contour",
+          "left_right_carrier",
+          "left_right_root_cable_pad"
+        ],
+        "samples": [
+          {
+            "offset_m": 0.0,
+            "object_pairs_considered": 39,
+            "surface_overlap_pairs": [
+              {
+                "moving": "left_right_carrier",
+                "fixed": "hardware_left_right_inner_finger_0",
+                "triangle_surface_pairs": 65
+              }
+            ]
+          },
+          {
+            "offset_m": 0.0005,
+            "object_pairs_considered": 39,
+            "surface_overlap_pairs": []
+          },
+          {
+            "offset_m": 0.001,
+            "object_pairs_considered": 39,
+            "surface_overlap_pairs": []
+          },
+          {
+            "offset_m": 0.0015,
+            "object_pairs_considered": 39,
+            "surface_overlap_pairs": []
+          },
+          {
+            "offset_m": 0.002,
+            "object_pairs_considered": 39,
+            "surface_overlap_pairs": []
+          },
+          {
+            "offset_m": 0.0025,
+            "object_pairs_considered": 39,
+            "surface_overlap_pairs": []
+          },
+          {
+            "offset_m": 0.003,
+            "object_pairs_considered": 39,
+            "surface_overlap_pairs": []
+          },
+          {
+            "offset_m": 0.0035,
+            "object_pairs_considered": 39,
+            "surface_overlap_pairs": []
+          },
+          {
+            "offset_m": 0.004,
+            "object_pairs_considered": 39,
+            "surface_overlap_pairs": []
+          },
+          {
+            "offset_m": 0.0045,
+            "object_pairs_considered": 39,
+            "surface_overlap_pairs": []
+          },
+          {
+            "offset_m": 0.005,
+            "object_pairs_considered": 39,
+            "surface_overlap_pairs": []
+          },
+          {
+            "offset_m": 0.0055,
+            "object_pairs_considered": 39,
+            "surface_overlap_pairs": []
+          },
+          {
+            "offset_m": 0.006,
+            "object_pairs_considered": 39,
+            "surface_overlap_pairs": []
+          },
+          {
+            "offset_m": 0.0065,
+            "object_pairs_considered": 39,
+            "surface_overlap_pairs": []
+          },
+          {
+            "offset_m": 0.007,
+            "object_pairs_considered": 39,
+            "surface_overlap_pairs": []
+          },
+          {
+            "offset_m": 0.0075,
+            "object_pairs_considered": 39,
+            "surface_overlap_pairs": []
+          },
+          {
+            "offset_m": 0.008,
+            "object_pairs_considered": 39,
+            "surface_overlap_pairs": []
+          },
+          {
+            "offset_m": 0.0085,
+            "object_pairs_considered": 39,
+            "surface_overlap_pairs": []
+          },
+          {
+            "offset_m": 0.009,
+            "object_pairs_considered": 39,
+            "surface_overlap_pairs": []
+          },
+          {
+            "offset_m": 0.0095,
+            "object_pairs_considered": 39,
+            "surface_overlap_pairs": []
+          },
+          {
+            "offset_m": 0.01,
+            "object_pairs_considered": 39,
+            "surface_overlap_pairs": []
+          },
+          {
+            "offset_m": 0.0105,
+            "object_pairs_considered": 39,
+            "surface_overlap_pairs": []
+          },
+          {
+            "offset_m": 0.011,
+            "object_pairs_considered": 39,
+            "surface_overlap_pairs": []
+          },
+          {
+            "offset_m": 0.0115,
+            "object_pairs_considered": 39,
+            "surface_overlap_pairs": []
+          },
+          {
+            "offset_m": 0.012,
+            "object_pairs_considered": 39,
+            "surface_overlap_pairs": []
+          }
+        ]
+      }
+    },
+    "J050": {
+      "left_left": {
+        "moving_objects": [
+          "left_left_edge_contour",
+          "left_left_carrier",
+          "left_left_root_cable_pad"
+        ],
+        "samples": [
+          {
+            "offset_m": 0.0,
+            "object_pairs_considered": 39,
+            "surface_overlap_pairs": [
+              {
+                "moving": "left_left_carrier",
+                "fixed": "hardware_left_left_inner_finger_0",
+                "triangle_surface_pairs": 62
+              }
+            ]
+          },
+          {
+            "offset_m": 0.0005,
+            "object_pairs_considered": 39,
+            "surface_overlap_pairs": []
+          },
+          {
+            "offset_m": 0.001,
+            "object_pairs_considered": 39,
+            "surface_overlap_pairs": []
+          },
+          {
+            "offset_m": 0.0015,
+            "object_pairs_considered": 39,
+            "surface_overlap_pairs": []
+          },
+          {
+            "offset_m": 0.002,
+            "object_pairs_considered": 39,
+            "surface_overlap_pairs": []
+          },
+          {
+            "offset_m": 0.0025,
+            "object_pairs_considered": 39,
+            "surface_overlap_pairs": []
+          },
+          {
+            "offset_m": 0.003,
+            "object_pairs_considered": 39,
+            "surface_overlap_pairs": []
+          },
+          {
+            "offset_m": 0.0035,
+            "object_pairs_considered": 39,
+            "surface_overlap_pairs": []
+          },
+          {
+            "offset_m": 0.004,
+            "object_pairs_considered": 39,
+            "surface_overlap_pairs": []
+          },
+          {
+            "offset_m": 0.0045,
+            "object_pairs_considered": 39,
+            "surface_overlap_pairs": []
+          },
+          {
+            "offset_m": 0.005,
+            "object_pairs_considered": 39,
+            "surface_overlap_pairs": []
+          },
+          {
+            "offset_m": 0.0055,
+            "object_pairs_considered": 39,
+            "surface_overlap_pairs": []
+          },
+          {
+            "offset_m": 0.006,
+            "object_pairs_considered": 39,
+            "surface_overlap_pairs": []
+          },
+          {
+            "offset_m": 0.0065,
+            "object_pairs_considered": 39,
+            "surface_overlap_pairs": []
+          },
+          {
+            "offset_m": 0.007,
+            "object_pairs_considered": 39,
+            "surface_overlap_pairs": []
+          },
+          {
+            "offset_m": 0.0075,
+            "object_pairs_considered": 39,
+            "surface_overlap_pairs": []
+          },
+          {
+            "offset_m": 0.008,
+            "object_pairs_considered": 39,
+            "surface_overlap_pairs": []
+          },
+          {
+            "offset_m": 0.0085,
+            "object_pairs_considered": 39,
+            "surface_overlap_pairs": []
+          },
+          {
+            "offset_m": 0.009,
+            "object_pairs_considered": 39,
+            "surface_overlap_pairs": []
+          },
+          {
+            "offset_m": 0.0095,
+            "object_pairs_considered": 39,
+            "surface_overlap_pairs": []
+          },
+          {
+            "offset_m": 0.01,
+            "object_pairs_considered": 39,
+            "surface_overlap_pairs": []
+          },
+          {
+            "offset_m": 0.0105,
+            "object_pairs_considered": 39,
+            "surface_overlap_pairs": []
+          },
+          {
+            "offset_m": 0.011,
+            "object_pairs_considered": 39,
+            "surface_overlap_pairs": []
+          },
+          {
+            "offset_m": 0.0115,
+            "object_pairs_considered": 39,
+            "surface_overlap_pairs": []
+          },
+          {
+            "offset_m": 0.012,
+            "object_pairs_considered": 39,
+            "surface_overlap_pairs": []
+          }
+        ]
+      },
+      "left_right": {
+        "moving_objects": [
+          "left_right_edge_contour",
+          "left_right_carrier",
+          "left_right_root_cable_pad"
+        ],
+        "samples": [
+          {
+            "offset_m": 0.0,
+            "object_pairs_considered": 39,
+            "surface_overlap_pairs": [
+              {
+                "moving": "left_right_carrier",
+                "fixed": "hardware_left_right_inner_finger_0",
+                "triangle_surface_pairs": 65
+              }
+            ]
+          },
+          {
+            "offset_m": 0.0005,
+            "object_pairs_considered": 39,
+            "surface_overlap_pairs": []
+          },
+          {
+            "offset_m": 0.001,
+            "object_pairs_considered": 39,
+            "surface_overlap_pairs": []
+          },
+          {
+            "offset_m": 0.0015,
+            "object_pairs_considered": 39,
+            "surface_overlap_pairs": []
+          },
+          {
+            "offset_m": 0.002,
+            "object_pairs_considered": 39,
+            "surface_overlap_pairs": []
+          },
+          {
+            "offset_m": 0.0025,
+            "object_pairs_considered": 39,
+            "surface_overlap_pairs": []
+          },
+          {
+            "offset_m": 0.003,
+            "object_pairs_considered": 39,
+            "surface_overlap_pairs": []
+          },
+          {
+            "offset_m": 0.0035,
+            "object_pairs_considered": 39,
+            "surface_overlap_pairs": []
+          },
+          {
+            "offset_m": 0.004,
+            "object_pairs_considered": 39,
+            "surface_overlap_pairs": []
+          },
+          {
+            "offset_m": 0.0045,
+            "object_pairs_considered": 39,
+            "surface_overlap_pairs": []
+          },
+          {
+            "offset_m": 0.005,
+            "object_pairs_considered": 39,
+            "surface_overlap_pairs": []
+          },
+          {
+            "offset_m": 0.0055,
+            "object_pairs_considered": 39,
+            "surface_overlap_pairs": []
+          },
+          {
+            "offset_m": 0.006,
+            "object_pairs_considered": 39,
+            "surface_overlap_pairs": []
+          },
+          {
+            "offset_m": 0.0065,
+            "object_pairs_considered": 39,
+            "surface_overlap_pairs": []
+          },
+          {
+            "offset_m": 0.007,
+            "object_pairs_considered": 39,
+            "surface_overlap_pairs": []
+          },
+          {
+            "offset_m": 0.0075,
+            "object_pairs_considered": 39,
+            "surface_overlap_pairs": []
+          },
+          {
+            "offset_m": 0.008,
+            "object_pairs_considered": 39,
+            "surface_overlap_pairs": []
+          },
+          {
+            "offset_m": 0.0085,
+            "object_pairs_considered": 39,
+            "surface_overlap_pairs": []
+          },
+          {
+            "offset_m": 0.009,
+            "object_pairs_considered": 39,
+            "surface_overlap_pairs": []
+          },
+          {
+            "offset_m": 0.0095,
+            "object_pairs_considered": 39,
+            "surface_overlap_pairs": []
+          },
+          {
+            "offset_m": 0.01,
+            "object_pairs_considered": 39,
+            "surface_overlap_pairs": []
+          },
+          {
+            "offset_m": 0.0105,
+            "object_pairs_considered": 39,
+            "surface_overlap_pairs": []
+          },
+          {
+            "offset_m": 0.011,
+            "object_pairs_considered": 39,
+            "surface_overlap_pairs": []
+          },
+          {
+            "offset_m": 0.0115,
+            "object_pairs_considered": 39,
+            "surface_overlap_pairs": []
+          },
+          {
+            "offset_m": 0.012,
+            "object_pairs_considered": 39,
+            "surface_overlap_pairs": []
+          }
+        ]
+      }
+    }
+  },
+  "sample_summary": {
+    "J025": {
+      "left_left": {
+        "all_samples": 25,
+        "all_samples_with_surface_pairs": 1,
+        "positive_offset_samples": 24,
+        "positive_offset_samples_with_surface_pairs": 0,
+        "zero_offset_pairs": [
+          {
+            "moving": "left_left_carrier",
+            "fixed": "hardware_left_left_inner_finger_0",
+            "triangle_surface_pairs": 62
+          }
+        ],
+        "positive_offsets_with_surface_pairs_m": []
+      },
+      "left_right": {
+        "all_samples": 25,
+        "all_samples_with_surface_pairs": 1,
+        "positive_offset_samples": 24,
+        "positive_offset_samples_with_surface_pairs": 0,
+        "zero_offset_pairs": [
+          {
+            "moving": "left_right_carrier",
+            "fixed": "hardware_left_right_inner_finger_0",
+            "triangle_surface_pairs": 65
+          }
+        ],
+        "positive_offsets_with_surface_pairs_m": []
+      }
+    },
+    "J050": {
+      "left_left": {
+        "all_samples": 25,
+        "all_samples_with_surface_pairs": 1,
+        "positive_offset_samples": 24,
+        "positive_offset_samples_with_surface_pairs": 0,
+        "zero_offset_pairs": [
+          {
+            "moving": "left_left_carrier",
+            "fixed": "hardware_left_left_inner_finger_0",
+            "triangle_surface_pairs": 62
+          }
+        ],
+        "positive_offsets_with_surface_pairs_m": []
+      },
+      "left_right": {
+        "all_samples": 25,
+        "all_samples_with_surface_pairs": 1,
+        "positive_offset_samples": 24,
+        "positive_offset_samples_with_surface_pairs": 0,
+        "zero_offset_pairs": [
+          {
+            "moving": "left_right_carrier",
+            "fixed": "hardware_left_right_inner_finger_0",
+            "triangle_surface_pairs": 65
+          }
+        ],
+        "positive_offsets_with_surface_pairs_m": []
+      }
+    }
+  },
+  "source_matrices_never_modified_during_sampling": true,
+  "method": "Reused Blender BVHTree epsilon=0 triangle surface overlaps with AABB rejection",
+  "offsets_m": [
+    0.0,
+    0.0005,
+    0.001,
+    0.0015,
+    0.002,
+    0.0025,
+    0.003,
+    0.0035,
+    0.004,
+    0.0045,
+    0.005,
+    0.0055,
+    0.006,
+    0.0065,
+    0.007,
+    0.0075,
+    0.008,
+    0.0085,
+    0.009,
+    0.0095,
+    0.01,
+    0.0105,
+    0.011,
+    0.0115,
+    0.012
+  ],
+  "service_reference_workpiece_excluded": true,
+  "service_pair_count_per_sample": "Three moving parts x thirteen fixed parts = 39",
+  "screws_and_index_pin_present": false,
+  "limits": "Finite samples, no continuous path, solid containment, loaded mechanism or manufacturing verdict",
+  "selected_relief_m": null,
+  "pad_joint_selected": false,
+  "video_created": false,
+  "arm_motion_created": false,
+  "physical_acceptance_verdict": null
+}
