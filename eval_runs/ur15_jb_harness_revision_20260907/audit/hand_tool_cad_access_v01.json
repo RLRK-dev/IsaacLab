@@ -1,0 +1,35 @@
+{
+  "observed_at": "2026-09-14T15:37:36.733629+09:00",
+  "local_existing_full_nose_cad_found": false,
+  "official_cad_entry_url": "https://www.deprag.com/en/emediacenter/pdf-screwdriving-technology/technical-information.html",
+  "linked_portal_url": "https://my.deprag.com/products/category/electricScrewdriver/",
+  "observation_method": "Anonymous Chrome headless rendered page, visible text extracted with HTMLParser excluding scripts/styles",
+  "browser_arguments": [
+    "--headless=new",
+    "--no-sandbox",
+    "--disable-dev-shm-usage",
+    "--enable-unsafe-swiftshader",
+    "--virtual-time-budget=10000",
+    "--dump-dom"
+  ],
+  "visible_text_observed": [
+    "myDEPRAG Login",
+    "Email",
+    "Password",
+    "Login",
+    "Register"
+  ],
+  "dom_sha256": "47fad99d49a81d0e63faee6f5e3fe9f2b7037551a7262a3f9924a41f783df89a",
+  "authenticated_access_attempted": false,
+  "cad_obtained": false,
+  "account_created": false,
+  "external_message_sent": false,
+  "entry_does_not_prove_requested_nose_cad_exists": true,
+  "public_options_sources": [
+    "https://www.deprag.com/en/automation/screwdriving-units/deprag-feed-module.html",
+    "https://www.deprag.com/en/automation/screwdriving-units/e-sfm.html",
+    "https://www.deprag.com/fileadmin/bilder_content/emedia/broschueren_pics/emedia_Automation/D0062/D0062en.pdf"
+  ],
+  "scope": "Source availability and comparison inputs only",
+  "physical_acceptance_verdict": null
+}

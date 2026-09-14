@@ -281,3 +281,27 @@ numbers unknown until their basis and the scope of the product change are set.
 - Both relief values remain comparisons. Native readback and discrete surface
   observations are auxiliary; sleeve stability, mounting strength and the
   complete feed-nose outline remain unresolved. Keep arm/video work paused.
+
+## User-selected working default on 2026-09-14
+
+- The user then explicitly selected the 15-degree version as the default.
+  For new sleeve/root holding-hand work, use
+  `data/hand_working_default_v01.json` and
+  `scripts/prepare_hand_working_default_v01.py`. The active working model is
+  T050 in the near state, with four source states retained. This supersedes
+  the default choice in old comparison-only configs (D30, D60, H025/H050).
+- The selector verifies pinned mesh/native/GLB/observation identities and
+  extracts T050 without remeshing or changing any object or saved transform.
+  The active geometry keeps 40 mm setback, terminal-side black-sleeve grasp,
+  root jacket support and clockwise 15 degrees in the supplied side view.
+  T050's 0.5 mm relief is the working sample value, not manufacturing approval.
+- Apply this default to the current cable-holding hand, not automatically to
+  other target families or every station. Finger count for unrelated work,
+  force/material, full fastening equipment and arm paths are not selected by
+  this directive. The user selected a working default, not physical acceptance.
+- The next tooling input is recorded in
+  `analysis/hand_default_tooling_next_v01.md`. The official CAD route leads to
+  myDEPRAG; the unauthenticated browser showed a login page on 2026-09-14.
+  Do not present catalogue dimensions as a full open/closed nose envelope or
+  claim authenticated CAD access. Keep the existing two-tool/continuous-hold
+  comparison and the separate simultaneous-tightening requirement.

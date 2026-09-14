@@ -1,0 +1,33 @@
+{
+  "observed_at": "2026-09-14T15:30:29.659205+09:00",
+  "config_sha256": "1cf2a19f24f753eb44b4e96fd7e73ee8bdfe5b97367a77bf8cfa0cf30a4d107c",
+  "candidate": "T050",
+  "default_state": "near",
+  "signed_world_x_rotation_deg": -14.999999999999998,
+  "mesh_count_excluding_guide": 20,
+  "states": [
+    "near",
+    "early",
+    "open",
+    "clear"
+  ],
+  "input_paths": {
+    "mesh": "/home/rlrk/Downloads/THREAD_フィンガ15度傾斜_v01_20260914/hand_clockwise_tilt_meshes_v01.json",
+    "observations": "/home/rlrk/Downloads/THREAD_フィンガ15度傾斜_v01_20260914/hand_clockwise_tilt_observations_v01.json",
+    "native_observations": "/home/rlrk/Downloads/THREAD_フィンガ15度傾斜_v01_20260914/hand_clockwise_tilt_native_v01.json",
+    "native": "/home/rlrk/Downloads/THREAD_フィンガ15度傾斜_v01_20260914/hand_clockwise_tilt_v01.blend",
+    "glb": "/home/rlrk/Downloads/THREAD_フィンガ15度傾斜_v01_20260914/hand_clockwise_tilt_T050_v01.glb"
+  },
+  "input_sha256": {
+    "mesh": "93d914c9eed05fc5b61e686b6cecca4420f6e4fd2b46c2d1eb8bf56fb900d95c",
+    "observations": "a8e2f40a4a4062bb3f75b34537dbda75fec4a020f25f710841bcb743e22f0dc3",
+    "native_observations": "be8b95f8e03af27dae85bb398cd10d4b5ad133c64ce400c0286070799c6b2b42",
+    "native": "a3bf9eeba0e1c16ed515d1dad99dbd31bc6b2dfa0dd869e41455d7d20b545d1c",
+    "glb": "e6443f4bd0765903097aaed12ba7d96aec44c751c9a05471e1e3cf9b0dd04603"
+  },
+  "source_candidate_objects_and_all_transforms_preserved": true,
+  "geometry_rebuilt": false,
+  "physical_acceptance_verdict": null,
+  "output_sha256": "0bc47bc4f17f2e547091386aab37521039265bb6a2cf1a20367b8f45960cedf6",
+  "serialized_candidate_readback_identical": true
+}

@@ -1,0 +1,49 @@
+{
+  "recorded_date": "2026-09-14",
+  "working_default_config": "hand_working_default_v01.json",
+  "working_candidate": "T050",
+  "scope": "Inputs for subsequent tooling geometry; no invented part dimensions or acceptance limits",
+  "reference_frame": {
+    "units": "m",
+    "tool_axis_xy_m": [0.0, 0.0],
+    "terminal_seat_z_m": -0.014,
+    "tool_reference_axis_world": [0.0, 0.0, 1.0],
+    "note": "Existing isolated comparison frame; not a surveyed station origin"
+  },
+  "tool_functions_to_keep_separate": ["fastener supply", "fastener retention", "axial feed", "rotation", "mounting and reaction support"],
+  "observed_public_options": ["rigid mouthpiece", "active opening nosepiece jaws", "tiltable or swivel mouthpiece", "pick-and-place or vacuum positioning"],
+  "selected_feed_option": null,
+  "tool_geometry_to_observe": [
+    {"state": "receive", "required_geometry": ["feed outlet", "retained fastener", "feed hose"], "available": false},
+    {"state": "approach", "required_geometry": ["closed nose", "front sleeve or socket", "tool body"], "available": false},
+    {"state": "fasten", "required_geometry": ["open nose", "tool protrusion", "mount and cables"], "available": false},
+    {"state": "withdraw", "required_geometry": ["nose closing geometry", "sleeve retraction", "attached hoses"], "available": false}
+  ],
+  "assembly_inputs": {
+    "tool_assembly_cad": null,
+    "closed_and_open_nose_cad": null,
+    "mount_to_axis_transform": null,
+    "bit_or_socket_insertion_depth_m": null,
+    "actual_fastener_geometry": null,
+    "actual_fastener_stack_height_m": null,
+    "hose_and_connector_geometry": null,
+    "required_clearance_m": null
+  },
+  "existing_workflow_constraints": {
+    "retain_with_fingers_until_fastening_finishes": true,
+    "upper_retainer_adopted": false,
+    "single_tool_sequential_substitution_for_simultaneous_fastening": false,
+    "candidate_holding_arms": 2,
+    "candidate_station_fastening_tools": 2,
+    "new_arm_trajectory": false
+  },
+  "public_sources": {
+    "cad_entry": "https://www.deprag.com/en/emediacenter/pdf-screwdriving-technology/technical-information.html",
+    "cad_portal": "https://my.deprag.com/products/category/electricScrewdriver/",
+    "dfm": "https://www.deprag.com/en/automation/screwdriving-units/deprag-feed-module.html",
+    "e_sfm": "https://www.deprag.com/en/automation/screwdriving-units/e-sfm.html",
+    "e_sfm_catalogue": "https://www.deprag.com/fileadmin/bilder_content/emedia/broschueren_pics/emedia_Automation/D0062/D0062en.pdf"
+  },
+  "cad_access_observation": "Unauthenticated Chrome rendered myDEPRAG Login with Email, Password, Login and Register; no CAD retrieved",
+  "physical_acceptance_verdict": null
+}
