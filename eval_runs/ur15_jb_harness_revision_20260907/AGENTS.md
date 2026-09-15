@@ -468,3 +468,15 @@ numbers unknown until their basis and the scope of the product change are set.
   The 168-second frame shows inner housings outside the case before outer-header
   installation; inner locking versus flange-fastening suborder is unresolved.
   Neither the plate joint nor a new ST/arm allocation is selected in this step.
+
+## Plate-joint evidence boundary on 2026-09-16
+
+- `analysis/hvjb_join_followup_v01.md` records the 87.0/87.2-second video cut:
+  separate plates appear together after the cut, but the joining operation is
+  unobserved. The sampling interval is not assembly time or a cycle estimate.
+- The additional 2022 official photo DSC02861-1.jpg has two unresolved visible
+  attachment features near P07. Keep them as observations, not identified case
+  screws, new BOM quantities, or the target of the obscured tool at 158 seconds.
+  Plate joints, case fastening points and automated grasp surfaces remain open.
+- The p03 static native, prior catalog and process v02 are preserved. The new
+  join review is source evidence, not another model or process-video revision.

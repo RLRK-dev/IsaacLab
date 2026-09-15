@@ -1,0 +1,142 @@
+{
+  "revision": "hvjb_join_observations_v01",
+  "scope_ja": "下板とヒューズ板の合流、および筐体への固定に関する追加の補助観察。新たな機構仕様や製造手順の選定ではない。",
+  "findings_ja": [
+    "87.0秒では下板とヒューズ板が別置き。87.2秒では画面が切り替わり、ヒューズ板が奥の下板側に見える。",
+    "この編集境界から板同士の接合動作は追えない。0.2秒は抽出時点の差であり、作業時間ではない。",
+    "2022年の追加公式写真に、ヒューズ板下方のすりわり付き金色頭部と、中央下方のねじ山状の露出部が見える。裏側の固定相手は確認できない。",
+    "146秒の同時搭載と158秒の箱内工具接近は、従来の観察を維持。板の剛結、固定点数、工具対象ねじは未確定。"
+  ],
+  "transition_boundary": {
+    "sample_before_s": 87.0,
+    "sample_after_s": 87.2,
+    "exact_cut_time_s": null,
+    "elapsed_physical_assembly_time_s": null,
+    "basis_ja": "目視による補助観察。カメラ画角、手の位置、前景の板・線材、奥の板の状態が不連続。正確な編集フレーム番号は測定していない。"
+  },
+  "observations": [
+    {
+      "id": "O87_BEFORE",
+      "evidence": "transition:87.0",
+      "label_ja": "1:27.0 切替前",
+      "observation_ja": "手前のマットにヒューズ板側、奥に接触器や金色抵抗を載せた下板側が別々に見える。",
+      "limit_ja": "板の裏面・接合部は見えていない。",
+      "markers": [
+        {"label": "1", "xy_px": [826, 608], "text_ja": "手前のヒューズ板側"},
+        {"label": "2", "xy_px": [859, 240], "text_ja": "奥の下板側"}
+      ]
+    },
+    {
+      "id": "O87_AFTER",
+      "evidence": "transition:87.2",
+      "label_ja": "1:27.2 切替後",
+      "observation_ja": "ヒューズ群が奥の下板側に見え、手前のマットには先ほどの板と配線がない。画角と作業者の姿勢も変わっている。",
+      "limit_ja": "同じ場所に見えることは、板同士を機械的に固定済みという証拠ではない。隠れた作業内容・所要時間は不明。",
+      "markers": [
+        {"label": "1", "xy_px": [496, 115], "text_ja": "奥に見えるヒューズ群"},
+        {"label": "2", "xy_px": [655, 377], "text_ja": "手前のマット"}
+      ]
+    },
+    {
+      "id": "O133",
+      "evidence": "sequence:133",
+      "label_ja": "2:13 筐体準備",
+      "observation_ja": "作業者が筐体の包装を外す場面で、下板側とヒューズ群は奥の台上に見える。",
+      "limit_ja": "ここでも板同士の裏面や固定作業は見えていない。",
+      "markers": []
+    },
+    {
+      "id": "O146",
+      "evidence": "plate:146",
+      "label_ja": "2:26 同時搭載",
+      "observation_ja": "下板側とヒューズ板側を一緒に筐体へ運ぶ場面。前回の同時搭載の観察を参照する。",
+      "limit_ja": "保持できていることから剛結方法、把持面、必要な腕数を決定しない。",
+      "markers": []
+    },
+    {
+      "id": "O158",
+      "evidence": "plate:158",
+      "label_ja": "2:38 箱内の工具",
+      "observation_ja": "搭載後にドライバーを箱内へ入れる。前回の工具接近の観察を参照する。",
+      "limit_ja": "工具先端の対象が隠れており、筐体固定ねじの位置・本数・仕様を特定できない。",
+      "markers": []
+    },
+    {
+      "id": "P22_DETAIL",
+      "evidence": "photo:detail",
+      "label_ja": "2022年 追加写真",
+      "observation_ja": "ヒューズ板の下方に、すりわり付きの金色頭部と中央のねじ山状の露出部が見える。上方のヒューズ端子にある六角穴付き頭部とは表示位置が異なる。",
+      "limit_ja": "指示点は画像上の案内用。寸法・ねじ規格・材質・固定相手・積層・2025年品との同一性は未確定。",
+      "markers": [
+        {"label": "1", "xy_px": [1808, 758], "text_ja": "右下のすりわり付き金色頭部"},
+        {"label": "2", "xy_px": [1167, 808], "text_ja": "中央下方のねじ山状の露出部"}
+      ]
+    }
+  ],
+  "unmapped_attachment_features": [
+    {
+      "observation_id": "V22_PANEL_LOWER_RIGHT_HEAD",
+      "evidence": "photo:detail",
+      "xy_px": [1808, 758],
+      "description_ja": "ヒューズ板右下に見えるすりわり付き金色頭部",
+      "nearby_catalog_id": "P07",
+      "confirmed_catalog_id": null,
+      "native_object": null,
+      "thread_specification": null,
+      "material": null,
+      "joint_stack": null,
+      "fastens_to": null,
+      "manufacturing_dimensions_m": null
+    },
+    {
+      "observation_id": "V22_PANEL_LOWER_CENTER_THREAD",
+      "evidence": "photo:detail",
+      "xy_px": [1167, 808],
+      "description_ja": "ヒューズ板中央下方に見えるねじ山状の露出部",
+      "nearby_catalog_id": "P07",
+      "confirmed_catalog_id": null,
+      "native_object": null,
+      "thread_specification": null,
+      "material": null,
+      "joint_stack": null,
+      "fastens_to": null,
+      "manufacturing_dimensions_m": null
+    }
+  ],
+  "process_constraints": [
+    {
+      "operation_id": "O30",
+      "record_ja": "下板側とヒューズ板側を合流させてから同時搭載する対応は維持。87.0〜87.2秒の切替から、合流の機械動作・固定点を生成しない。",
+      "selected_joint": null,
+      "selected_robot_count": null,
+      "cycle_time_s": null
+    },
+    {
+      "operation_id": "O42",
+      "record_ja": "箱内の工具接近は残す。追加写真の見える金具を、遮蔽されたドライバーの対象へ割り当てない。",
+      "selected_joint": null,
+      "selected_robot_count": null,
+      "cycle_time_s": null
+    }
+  ],
+  "source_checks": [
+    {
+      "url": "https://www.youtube.com/watch?v=Sm_D-vmNYqc",
+      "result_ja": "保存済み公式映像をSHA照合し、16場面と87.0〜88.2秒の7場面を追加抽出。自動字幕は場面探索にのみ使用。"
+    },
+    {
+      "url": "https://ampereev.com/new-high-voltage-junction-box-taking-orders-now/",
+      "result_ja": "公式ギャラリーから未登録のDSC02861-1写真を取得。www付きURLのタイムアウト後、非wwwの公開原本を取得した。"
+    },
+    {
+      "url": "https://help.ampereev.com/hc/en-us/articles/31292470232087-High-Voltage-Junction-Box-HVJB-5-400",
+      "result_ja": "公開ページと既存データシートに、今回必要な板間接合の製造寸法は見当たらない。Full Documentation / CAD はログイン案内であり未取得。"
+    }
+  ],
+  "coverage_note_ja": "既存の92写真特徴・17必須機能区分・13接続群・LV12極を保持。今回の2観察箇所を2個の新規部品や94部品というBOM数へ換算しない。",
+  "preserved_ja": "OP010のXYZ＋20個収納、OP020の筐体側ヘッダー設置・ねじ固定、上押さえを復活させない指定、T050の40 mm後退・15度、工程PNGからreview.mp4一種類のみという方針を継承。3セル・腕数は未選定。",
+  "remaining_ja": "板間の接合断面・締結相手と、下板から筐体への固定点・支持面が未特定。実物忠実な接合モデルとその締結動作には、この情報が必要。確認済み範囲の原画像と未対応箇所を残す。",
+  "geometry_created": false,
+  "movie_created": false,
+  "physical_acceptance_verdict": null
+}

@@ -1,0 +1,218 @@
+{
+  "observed_at": "2026-09-16T07:30:33.400833+09:00",
+  "source": {
+    "title": "ASSEMBLY! EV High Voltage Junction Box",
+    "url": "https://www.youtube.com/watch?v=Sm_D-vmNYqc",
+    "channel": "Ampere EV",
+    "upload_date": "20250607",
+    "file": "references/hvjb_assembly_followup_20260915/assembly_20250607.mp4",
+    "sha256": "b7fcb74eaeec06e517d5726994a38a6b0812e05198d8b771b7ff771e68a0e1eb",
+    "metadata_sha256": "69e2f968a38253ec5608439116c2ef8cc04669cbd03b7275f8feab63fbc9f111",
+    "size_px": [
+      1920,
+      1080
+    ],
+    "duration_s": 274.140533,
+    "frame_rate": "30000/1001",
+    "automatic_caption_role": "navigation aid only; not a verified transcription or part-number source"
+  },
+  "source_sha256_before": "b7fcb74eaeec06e517d5726994a38a6b0812e05198d8b771b7ff771e68a0e1eb",
+  "source_sha256_after": "b7fcb74eaeec06e517d5726994a38a6b0812e05198d8b771b7ff771e68a0e1eb",
+  "frames": [
+    {
+      "requested_seek_s": 62,
+      "timestamp_basis": "ffmpeg accurate seek; first display frame at/after the requested time",
+      "file": "references/hvjb_join_sequence_20260916/assembly_062s.png",
+      "sha256": "e3cfe3c47a8bd51c84131b0c5db00b814882921a013068c99d782d37d6b76d8b",
+      "size_px": [
+        1920,
+        1080
+      ],
+      "url": "https://www.youtube.com/watch?v=Sm_D-vmNYqc&t=62s",
+      "pixel_transform": "none; full decoded frame without cropping or generated edits"
+    },
+    {
+      "requested_seek_s": 64,
+      "timestamp_basis": "ffmpeg accurate seek; first display frame at/after the requested time",
+      "file": "references/hvjb_join_sequence_20260916/assembly_064s.png",
+      "sha256": "b49433c4a9854497c68d9375d3cec5134e97f766e59bd0fdd908e18443743fe5",
+      "size_px": [
+        1920,
+        1080
+      ],
+      "url": "https://www.youtube.com/watch?v=Sm_D-vmNYqc&t=64s",
+      "pixel_transform": "none; full decoded frame without cropping or generated edits"
+    },
+    {
+      "requested_seek_s": 66,
+      "timestamp_basis": "ffmpeg accurate seek; first display frame at/after the requested time",
+      "file": "references/hvjb_join_sequence_20260916/assembly_066s.png",
+      "sha256": "ca990fd2463fbd93890036ff68c6e20a3504648814b2e9f038d0d280799b20fc",
+      "size_px": [
+        1920,
+        1080
+      ],
+      "url": "https://www.youtube.com/watch?v=Sm_D-vmNYqc&t=66s",
+      "pixel_transform": "none; full decoded frame without cropping or generated edits"
+    },
+    {
+      "requested_seek_s": 68,
+      "timestamp_basis": "ffmpeg accurate seek; first display frame at/after the requested time",
+      "file": "references/hvjb_join_sequence_20260916/assembly_068s.png",
+      "sha256": "239938c44bd2004a69740b400b0507b1899fd6c4758ad254cd4d29eb79897c7b",
+      "size_px": [
+        1920,
+        1080
+      ],
+      "url": "https://www.youtube.com/watch?v=Sm_D-vmNYqc&t=68s",
+      "pixel_transform": "none; full decoded frame without cropping or generated edits"
+    },
+    {
+      "requested_seek_s": 72,
+      "timestamp_basis": "ffmpeg accurate seek; first display frame at/after the requested time",
+      "file": "references/hvjb_join_sequence_20260916/assembly_072s.png",
+      "sha256": "3e4a795d6c5e227227f27a3faced57308a16d929ef1cde0ef3e1e67e97eaf7a6",
+      "size_px": [
+        1920,
+        1080
+      ],
+      "url": "https://www.youtube.com/watch?v=Sm_D-vmNYqc&t=72s",
+      "pixel_transform": "none; full decoded frame without cropping or generated edits"
+    },
+    {
+      "requested_seek_s": 82,
+      "timestamp_basis": "ffmpeg accurate seek; first display frame at/after the requested time",
+      "file": "references/hvjb_join_sequence_20260916/assembly_082s.png",
+      "sha256": "c3c0d2e2ce46c6ebee47a5f3e963a4e5a18f1621bedece93303bc1c149a8c488",
+      "size_px": [
+        1920,
+        1080
+      ],
+      "url": "https://www.youtube.com/watch?v=Sm_D-vmNYqc&t=82s",
+      "pixel_transform": "none; full decoded frame without cropping or generated edits"
+    },
+    {
+      "requested_seek_s": 84,
+      "timestamp_basis": "ffmpeg accurate seek; first display frame at/after the requested time",
+      "file": "references/hvjb_join_sequence_20260916/assembly_084s.png",
+      "sha256": "0c332a5e42e214d629303262207ea68df2e6968015296a5cf14504782021d056",
+      "size_px": [
+        1920,
+        1080
+      ],
+      "url": "https://www.youtube.com/watch?v=Sm_D-vmNYqc&t=84s",
+      "pixel_transform": "none; full decoded frame without cropping or generated edits"
+    },
+    {
+      "requested_seek_s": 86,
+      "timestamp_basis": "ffmpeg accurate seek; first display frame at/after the requested time",
+      "file": "references/hvjb_join_sequence_20260916/assembly_086s.png",
+      "sha256": "59ae7e05b4c1838d04ae6002b4778271b5780f6280a8a8e3761e79195b3523ed",
+      "size_px": [
+        1920,
+        1080
+      ],
+      "url": "https://www.youtube.com/watch?v=Sm_D-vmNYqc&t=86s",
+      "pixel_transform": "none; full decoded frame without cropping or generated edits"
+    },
+    {
+      "requested_seek_s": 88,
+      "timestamp_basis": "ffmpeg accurate seek; first display frame at/after the requested time",
+      "file": "references/hvjb_join_sequence_20260916/assembly_088s.png",
+      "sha256": "a7485d67cdc6be6fa6607f06b331a6e6666a7728e3153cbab1c3b448d537eaad",
+      "size_px": [
+        1920,
+        1080
+      ],
+      "url": "https://www.youtube.com/watch?v=Sm_D-vmNYqc&t=88s",
+      "pixel_transform": "none; full decoded frame without cropping or generated edits"
+    },
+    {
+      "requested_seek_s": 90,
+      "timestamp_basis": "ffmpeg accurate seek; first display frame at/after the requested time",
+      "file": "references/hvjb_join_sequence_20260916/assembly_090s.png",
+      "sha256": "61b9ead2369a783c7dfe50e547859376df0cffae497c23d9990a279ce3b2bfdf",
+      "size_px": [
+        1920,
+        1080
+      ],
+      "url": "https://www.youtube.com/watch?v=Sm_D-vmNYqc&t=90s",
+      "pixel_transform": "none; full decoded frame without cropping or generated edits"
+    },
+    {
+      "requested_seek_s": 96,
+      "timestamp_basis": "ffmpeg accurate seek; first display frame at/after the requested time",
+      "file": "references/hvjb_join_sequence_20260916/assembly_096s.png",
+      "sha256": "e2778e7b2f523929fa150f2759d31d562f187a5f56c2e82228decfcc6b287a63",
+      "size_px": [
+        1920,
+        1080
+      ],
+      "url": "https://www.youtube.com/watch?v=Sm_D-vmNYqc&t=96s",
+      "pixel_transform": "none; full decoded frame without cropping or generated edits"
+    },
+    {
+      "requested_seek_s": 110,
+      "timestamp_basis": "ffmpeg accurate seek; first display frame at/after the requested time",
+      "file": "references/hvjb_join_sequence_20260916/assembly_110s.png",
+      "sha256": "2589e0883a5af0d0de06b2517acf7b780b760534e6795696abb0c838af412a84",
+      "size_px": [
+        1920,
+        1080
+      ],
+      "url": "https://www.youtube.com/watch?v=Sm_D-vmNYqc&t=110s",
+      "pixel_transform": "none; full decoded frame without cropping or generated edits"
+    },
+    {
+      "requested_seek_s": 120,
+      "timestamp_basis": "ffmpeg accurate seek; first display frame at/after the requested time",
+      "file": "references/hvjb_join_sequence_20260916/assembly_120s.png",
+      "sha256": "3cf10e3c1d14f993dc252764e327980ed3b917b548635c235ea82336d5a7d89a",
+      "size_px": [
+        1920,
+        1080
+      ],
+      "url": "https://www.youtube.com/watch?v=Sm_D-vmNYqc&t=120s",
+      "pixel_transform": "none; full decoded frame without cropping or generated edits"
+    },
+    {
+      "requested_seek_s": 128,
+      "timestamp_basis": "ffmpeg accurate seek; first display frame at/after the requested time",
+      "file": "references/hvjb_join_sequence_20260916/assembly_128s.png",
+      "sha256": "5b91a25c67e8209d1336c582cc73779a0423b53e0a559d1773eb6a468685b8f7",
+      "size_px": [
+        1920,
+        1080
+      ],
+      "url": "https://www.youtube.com/watch?v=Sm_D-vmNYqc&t=128s",
+      "pixel_transform": "none; full decoded frame without cropping or generated edits"
+    },
+    {
+      "requested_seek_s": 131,
+      "timestamp_basis": "ffmpeg accurate seek; first display frame at/after the requested time",
+      "file": "references/hvjb_join_sequence_20260916/assembly_131s.png",
+      "sha256": "0bc9c83ca2a5bfbb2f85a0f3780da6194d6216552704183f8219993f7a3b4e35",
+      "size_px": [
+        1920,
+        1080
+      ],
+      "url": "https://www.youtube.com/watch?v=Sm_D-vmNYqc&t=131s",
+      "pixel_transform": "none; full decoded frame without cropping or generated edits"
+    },
+    {
+      "requested_seek_s": 133,
+      "timestamp_basis": "ffmpeg accurate seek; first display frame at/after the requested time",
+      "file": "references/hvjb_join_sequence_20260916/assembly_133s.png",
+      "sha256": "3103e8d7a67d2a65bfcdb2a9ed734b4d7516c8c032b584e52e7184a8ade7c4c0",
+      "size_px": [
+        1920,
+        1080
+      ],
+      "url": "https://www.youtube.com/watch?v=Sm_D-vmNYqc&t=133s",
+      "pixel_transform": "none; full decoded frame without cropping or generated edits"
+    }
+  ],
+  "observations_recorded": false,
+  "physical_acceptance_verdict": null,
+  "movie_created": false
+}

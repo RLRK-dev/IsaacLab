@@ -1,0 +1,245 @@
+{
+  "observed_at": "2026-09-16T08:14:45.551331+09:00",
+  "directory": "/home/rlrk/Downloads/THREAD_HVJB_板間接合の確認_v01_20260916",
+  "source_sha256_before": {
+    "data/hvjb_photo_correspondence_v03_p01.json": "6c5b7cb9bab859a33c8f5d5cd5429ce9f06fb0951b8a8fa4ae2a31ad99052ca0",
+    "data/hvjb_preassembly_process_v02.json": "643f75e175518552d290816b402291496e9bb7f21db97385d81180acc9cfe83d",
+    "data/hvjb_join_evidence_v01.json": "f3b521551d166341bfbd5f6891fd0e6bf3cf3699bb4677adc1a4a35e717d885a",
+    "data/hvjb_join_transition_v01.json": "934c2d887a6733e405c6714eecbc9c1cbce468890237af632ce3e2104b087794",
+    "data/hvjb_plate_evidence_v01.json": "2802f20de9ae1265da26830b6abb2995017b0bf71f311cfeabf4425ffd6945ce",
+    "UR15_JB_photo_correspondence_v03_p03.blend": "5205d3aa2c2b99f7df6f538d17b3d3ca36ba8208c546858ee8ec8a5a3564a282",
+    "references/hvjb_assembly_followup_20260915/assembly_20250607.mp4": "b7fcb74eaeec06e517d5726994a38a6b0812e05198d8b771b7ff771e68a0e1eb",
+    "references/hvjb_join_sequence_20260916/assembly_062s.png": "e3cfe3c47a8bd51c84131b0c5db00b814882921a013068c99d782d37d6b76d8b",
+    "references/hvjb_join_sequence_20260916/assembly_064s.png": "b49433c4a9854497c68d9375d3cec5134e97f766e59bd0fdd908e18443743fe5",
+    "references/hvjb_join_sequence_20260916/assembly_066s.png": "ca990fd2463fbd93890036ff68c6e20a3504648814b2e9f038d0d280799b20fc",
+    "references/hvjb_join_sequence_20260916/assembly_068s.png": "239938c44bd2004a69740b400b0507b1899fd6c4758ad254cd4d29eb79897c7b",
+    "references/hvjb_join_sequence_20260916/assembly_072s.png": "3e4a795d6c5e227227f27a3faced57308a16d929ef1cde0ef3e1e67e97eaf7a6",
+    "references/hvjb_join_sequence_20260916/assembly_082s.png": "c3c0d2e2ce46c6ebee47a5f3e963a4e5a18f1621bedece93303bc1c149a8c488",
+    "references/hvjb_join_sequence_20260916/assembly_084s.png": "0c332a5e42e214d629303262207ea68df2e6968015296a5cf14504782021d056",
+    "references/hvjb_join_sequence_20260916/assembly_086s.png": "59ae7e05b4c1838d04ae6002b4778271b5780f6280a8a8e3761e79195b3523ed",
+    "references/hvjb_join_sequence_20260916/assembly_088s.png": "a7485d67cdc6be6fa6607f06b331a6e6666a7728e3153cbab1c3b448d537eaad",
+    "references/hvjb_join_sequence_20260916/assembly_090s.png": "61b9ead2369a783c7dfe50e547859376df0cffae497c23d9990a279ce3b2bfdf",
+    "references/hvjb_join_sequence_20260916/assembly_096s.png": "e2778e7b2f523929fa150f2759d31d562f187a5f56c2e82228decfcc6b287a63",
+    "references/hvjb_join_sequence_20260916/assembly_110s.png": "2589e0883a5af0d0de06b2517acf7b780b760534e6795696abb0c838af412a84",
+    "references/hvjb_join_sequence_20260916/assembly_120s.png": "3cf10e3c1d14f993dc252764e327980ed3b917b548635c235ea82336d5a7d89a",
+    "references/hvjb_join_sequence_20260916/assembly_128s.png": "5b91a25c67e8209d1336c582cc73779a0423b53e0a559d1773eb6a468685b8f7",
+    "references/hvjb_join_sequence_20260916/assembly_131s.png": "0bc9c83ca2a5bfbb2f85a0f3780da6194d6216552704183f8219993f7a3b4e35",
+    "references/hvjb_join_sequence_20260916/assembly_133s.png": "3103e8d7a67d2a65bfcdb2a9ed734b4d7516c8c032b584e52e7184a8ade7c4c0",
+    "references/hvjb_join_transition_20260916/assembly_087000ms.png": "a2c6c464a45d0bdddef6d404271816ce0269960e5ba367dc310c7274ac64e126",
+    "references/hvjb_join_transition_20260916/assembly_087200ms.png": "2a1290204360e10cc0e22aaf9c2ed7005beac6a7e2c433dd66dbec413a17c4a5",
+    "references/hvjb_join_transition_20260916/assembly_087400ms.png": "1f9303569ccc1d4f9b7a0c38d5ddcdd895ff1160c98f83e6206c0f0934dbc2af",
+    "references/hvjb_join_transition_20260916/assembly_087600ms.png": "1dd1f0dbf010f1bc98f833b4a55a72376cf1178ad4c07c6fed6e0d5805ac2d66",
+    "references/hvjb_join_transition_20260916/assembly_087800ms.png": "f46d915a02a3a5a122652d90518baf82271282bf8354148a60336b317abdf07d",
+    "references/hvjb_join_transition_20260916/assembly_088000ms.png": "a7485d67cdc6be6fa6607f06b331a6e6666a7728e3153cbab1c3b448d537eaad",
+    "references/hvjb_join_transition_20260916/assembly_088200ms.png": "a45eb7dee59d54d8197e99a7ce645f5722ce63026aecf0b45fcd56329ffdd34e",
+    "references/hvjb_plate_sequence_20260916/assembly_146s.png": "fbe7b04dfc8a6881648df420afa5a48c8300d21cb0f9f0756edb83f500077d20",
+    "references/hvjb_plate_sequence_20260916/assembly_158s.png": "de7005b51ff49690e82548e8f878efb130d1eccd494a1ac81611e4879853524e",
+    "references/hvjb_join_transition_20260916/DSC02861-1.jpg": "99574f981ae301adf41a9ce9d4840eb15aa66dc7b477a10afe6b55a2accd2106"
+  },
+  "source_sha256_after": {
+    "data/hvjb_photo_correspondence_v03_p01.json": "6c5b7cb9bab859a33c8f5d5cd5429ce9f06fb0951b8a8fa4ae2a31ad99052ca0",
+    "data/hvjb_preassembly_process_v02.json": "643f75e175518552d290816b402291496e9bb7f21db97385d81180acc9cfe83d",
+    "data/hvjb_join_evidence_v01.json": "f3b521551d166341bfbd5f6891fd0e6bf3cf3699bb4677adc1a4a35e717d885a",
+    "data/hvjb_join_transition_v01.json": "934c2d887a6733e405c6714eecbc9c1cbce468890237af632ce3e2104b087794",
+    "data/hvjb_plate_evidence_v01.json": "2802f20de9ae1265da26830b6abb2995017b0bf71f311cfeabf4425ffd6945ce",
+    "UR15_JB_photo_correspondence_v03_p03.blend": "5205d3aa2c2b99f7df6f538d17b3d3ca36ba8208c546858ee8ec8a5a3564a282",
+    "references/hvjb_assembly_followup_20260915/assembly_20250607.mp4": "b7fcb74eaeec06e517d5726994a38a6b0812e05198d8b771b7ff771e68a0e1eb",
+    "references/hvjb_join_sequence_20260916/assembly_062s.png": "e3cfe3c47a8bd51c84131b0c5db00b814882921a013068c99d782d37d6b76d8b",
+    "references/hvjb_join_sequence_20260916/assembly_064s.png": "b49433c4a9854497c68d9375d3cec5134e97f766e59bd0fdd908e18443743fe5",
+    "references/hvjb_join_sequence_20260916/assembly_066s.png": "ca990fd2463fbd93890036ff68c6e20a3504648814b2e9f038d0d280799b20fc",
+    "references/hvjb_join_sequence_20260916/assembly_068s.png": "239938c44bd2004a69740b400b0507b1899fd6c4758ad254cd4d29eb79897c7b",
+    "references/hvjb_join_sequence_20260916/assembly_072s.png": "3e4a795d6c5e227227f27a3faced57308a16d929ef1cde0ef3e1e67e97eaf7a6",
+    "references/hvjb_join_sequence_20260916/assembly_082s.png": "c3c0d2e2ce46c6ebee47a5f3e963a4e5a18f1621bedece93303bc1c149a8c488",
+    "references/hvjb_join_sequence_20260916/assembly_084s.png": "0c332a5e42e214d629303262207ea68df2e6968015296a5cf14504782021d056",
+    "references/hvjb_join_sequence_20260916/assembly_086s.png": "59ae7e05b4c1838d04ae6002b4778271b5780f6280a8a8e3761e79195b3523ed",
+    "references/hvjb_join_sequence_20260916/assembly_088s.png": "a7485d67cdc6be6fa6607f06b331a6e6666a7728e3153cbab1c3b448d537eaad",
+    "references/hvjb_join_sequence_20260916/assembly_090s.png": "61b9ead2369a783c7dfe50e547859376df0cffae497c23d9990a279ce3b2bfdf",
+    "references/hvjb_join_sequence_20260916/assembly_096s.png": "e2778e7b2f523929fa150f2759d31d562f187a5f56c2e82228decfcc6b287a63",
+    "references/hvjb_join_sequence_20260916/assembly_110s.png": "2589e0883a5af0d0de06b2517acf7b780b760534e6795696abb0c838af412a84",
+    "references/hvjb_join_sequence_20260916/assembly_120s.png": "3cf10e3c1d14f993dc252764e327980ed3b917b548635c235ea82336d5a7d89a",
+    "references/hvjb_join_sequence_20260916/assembly_128s.png": "5b91a25c67e8209d1336c582cc73779a0423b53e0a559d1773eb6a468685b8f7",
+    "references/hvjb_join_sequence_20260916/assembly_131s.png": "0bc9c83ca2a5bfbb2f85a0f3780da6194d6216552704183f8219993f7a3b4e35",
+    "references/hvjb_join_sequence_20260916/assembly_133s.png": "3103e8d7a67d2a65bfcdb2a9ed734b4d7516c8c032b584e52e7184a8ade7c4c0",
+    "references/hvjb_join_transition_20260916/assembly_087000ms.png": "a2c6c464a45d0bdddef6d404271816ce0269960e5ba367dc310c7274ac64e126",
+    "references/hvjb_join_transition_20260916/assembly_087200ms.png": "2a1290204360e10cc0e22aaf9c2ed7005beac6a7e2c433dd66dbec413a17c4a5",
+    "references/hvjb_join_transition_20260916/assembly_087400ms.png": "1f9303569ccc1d4f9b7a0c38d5ddcdd895ff1160c98f83e6206c0f0934dbc2af",
+    "references/hvjb_join_transition_20260916/assembly_087600ms.png": "1dd1f0dbf010f1bc98f833b4a55a72376cf1178ad4c07c6fed6e0d5805ac2d66",
+    "references/hvjb_join_transition_20260916/assembly_087800ms.png": "f46d915a02a3a5a122652d90518baf82271282bf8354148a60336b317abdf07d",
+    "references/hvjb_join_transition_20260916/assembly_088000ms.png": "a7485d67cdc6be6fa6607f06b331a6e6666a7728e3153cbab1c3b448d537eaad",
+    "references/hvjb_join_transition_20260916/assembly_088200ms.png": "a45eb7dee59d54d8197e99a7ce645f5722ce63026aecf0b45fcd56329ffdd34e",
+    "references/hvjb_plate_sequence_20260916/assembly_146s.png": "fbe7b04dfc8a6881648df420afa5a48c8300d21cb0f9f0756edb83f500077d20",
+    "references/hvjb_plate_sequence_20260916/assembly_158s.png": "de7005b51ff49690e82548e8f878efb130d1eccd494a1ac81611e4879853524e",
+    "references/hvjb_join_transition_20260916/DSC02861-1.jpg": "99574f981ae301adf41a9ce9d4840eb15aa66dc7b477a10afe6b55a2accd2106"
+  },
+  "copied": [
+    {
+      "source": "references/hvjb_join_sequence_20260916/assembly_062s.png",
+      "file": "evidence/assembly_062s.png",
+      "sha256": "e3cfe3c47a8bd51c84131b0c5db00b814882921a013068c99d782d37d6b76d8b"
+    },
+    {
+      "source": "references/hvjb_join_sequence_20260916/assembly_064s.png",
+      "file": "evidence/assembly_064s.png",
+      "sha256": "b49433c4a9854497c68d9375d3cec5134e97f766e59bd0fdd908e18443743fe5"
+    },
+    {
+      "source": "references/hvjb_join_sequence_20260916/assembly_066s.png",
+      "file": "evidence/assembly_066s.png",
+      "sha256": "ca990fd2463fbd93890036ff68c6e20a3504648814b2e9f038d0d280799b20fc"
+    },
+    {
+      "source": "references/hvjb_join_sequence_20260916/assembly_068s.png",
+      "file": "evidence/assembly_068s.png",
+      "sha256": "239938c44bd2004a69740b400b0507b1899fd6c4758ad254cd4d29eb79897c7b"
+    },
+    {
+      "source": "references/hvjb_join_sequence_20260916/assembly_072s.png",
+      "file": "evidence/assembly_072s.png",
+      "sha256": "3e4a795d6c5e227227f27a3faced57308a16d929ef1cde0ef3e1e67e97eaf7a6"
+    },
+    {
+      "source": "references/hvjb_join_sequence_20260916/assembly_082s.png",
+      "file": "evidence/assembly_082s.png",
+      "sha256": "c3c0d2e2ce46c6ebee47a5f3e963a4e5a18f1621bedece93303bc1c149a8c488"
+    },
+    {
+      "source": "references/hvjb_join_sequence_20260916/assembly_084s.png",
+      "file": "evidence/assembly_084s.png",
+      "sha256": "0c332a5e42e214d629303262207ea68df2e6968015296a5cf14504782021d056"
+    },
+    {
+      "source": "references/hvjb_join_sequence_20260916/assembly_086s.png",
+      "file": "evidence/assembly_086s.png",
+      "sha256": "59ae7e05b4c1838d04ae6002b4778271b5780f6280a8a8e3761e79195b3523ed"
+    },
+    {
+      "source": "references/hvjb_join_sequence_20260916/assembly_088s.png",
+      "file": "evidence/assembly_088s.png",
+      "sha256": "a7485d67cdc6be6fa6607f06b331a6e6666a7728e3153cbab1c3b448d537eaad"
+    },
+    {
+      "source": "references/hvjb_join_sequence_20260916/assembly_090s.png",
+      "file": "evidence/assembly_090s.png",
+      "sha256": "61b9ead2369a783c7dfe50e547859376df0cffae497c23d9990a279ce3b2bfdf"
+    },
+    {
+      "source": "references/hvjb_join_sequence_20260916/assembly_096s.png",
+      "file": "evidence/assembly_096s.png",
+      "sha256": "e2778e7b2f523929fa150f2759d31d562f187a5f56c2e82228decfcc6b287a63"
+    },
+    {
+      "source": "references/hvjb_join_sequence_20260916/assembly_110s.png",
+      "file": "evidence/assembly_110s.png",
+      "sha256": "2589e0883a5af0d0de06b2517acf7b780b760534e6795696abb0c838af412a84"
+    },
+    {
+      "source": "references/hvjb_join_sequence_20260916/assembly_120s.png",
+      "file": "evidence/assembly_120s.png",
+      "sha256": "3cf10e3c1d14f993dc252764e327980ed3b917b548635c235ea82336d5a7d89a"
+    },
+    {
+      "source": "references/hvjb_join_sequence_20260916/assembly_128s.png",
+      "file": "evidence/assembly_128s.png",
+      "sha256": "5b91a25c67e8209d1336c582cc73779a0423b53e0a559d1773eb6a468685b8f7"
+    },
+    {
+      "source": "references/hvjb_join_sequence_20260916/assembly_131s.png",
+      "file": "evidence/assembly_131s.png",
+      "sha256": "0bc9c83ca2a5bfbb2f85a0f3780da6194d6216552704183f8219993f7a3b4e35"
+    },
+    {
+      "source": "references/hvjb_join_sequence_20260916/assembly_133s.png",
+      "file": "evidence/assembly_133s.png",
+      "sha256": "3103e8d7a67d2a65bfcdb2a9ed734b4d7516c8c032b584e52e7184a8ade7c4c0"
+    },
+    {
+      "source": "references/hvjb_join_transition_20260916/assembly_087000ms.png",
+      "file": "evidence/assembly_087000ms.png",
+      "sha256": "a2c6c464a45d0bdddef6d404271816ce0269960e5ba367dc310c7274ac64e126"
+    },
+    {
+      "source": "references/hvjb_join_transition_20260916/assembly_087200ms.png",
+      "file": "evidence/assembly_087200ms.png",
+      "sha256": "2a1290204360e10cc0e22aaf9c2ed7005beac6a7e2c433dd66dbec413a17c4a5"
+    },
+    {
+      "source": "references/hvjb_join_transition_20260916/assembly_087400ms.png",
+      "file": "evidence/assembly_087400ms.png",
+      "sha256": "1f9303569ccc1d4f9b7a0c38d5ddcdd895ff1160c98f83e6206c0f0934dbc2af"
+    },
+    {
+      "source": "references/hvjb_join_transition_20260916/assembly_087600ms.png",
+      "file": "evidence/assembly_087600ms.png",
+      "sha256": "1dd1f0dbf010f1bc98f833b4a55a72376cf1178ad4c07c6fed6e0d5805ac2d66"
+    },
+    {
+      "source": "references/hvjb_join_transition_20260916/assembly_087800ms.png",
+      "file": "evidence/assembly_087800ms.png",
+      "sha256": "f46d915a02a3a5a122652d90518baf82271282bf8354148a60336b317abdf07d"
+    },
+    {
+      "source": "references/hvjb_join_transition_20260916/assembly_088000ms.png",
+      "file": "evidence/assembly_088000ms.png",
+      "sha256": "a7485d67cdc6be6fa6607f06b331a6e6666a7728e3153cbab1c3b448d537eaad"
+    },
+    {
+      "source": "references/hvjb_join_transition_20260916/assembly_088200ms.png",
+      "file": "evidence/assembly_088200ms.png",
+      "sha256": "a45eb7dee59d54d8197e99a7ce645f5722ce63026aecf0b45fcd56329ffdd34e"
+    },
+    {
+      "source": "references/hvjb_plate_sequence_20260916/assembly_146s.png",
+      "file": "evidence/assembly_146s.png",
+      "sha256": "fbe7b04dfc8a6881648df420afa5a48c8300d21cb0f9f0756edb83f500077d20"
+    },
+    {
+      "source": "references/hvjb_plate_sequence_20260916/assembly_158s.png",
+      "file": "evidence/assembly_158s.png",
+      "sha256": "de7005b51ff49690e82548e8f878efb130d1eccd494a1ac81611e4879853524e"
+    },
+    {
+      "source": "references/hvjb_join_transition_20260916/DSC02861-1.jpg",
+      "file": "evidence/DSC02861-1.jpg",
+      "sha256": "99574f981ae301adf41a9ce9d4840eb15aa66dc7b477a10afe6b55a2accd2106"
+    },
+    {
+      "source": "data/hvjb_join_observations_v01.json",
+      "file": "observation_inputs.json",
+      "sha256": "be95baf9b64d456ca668b91ed944ec00bdf5ac90b167a0d953c9a135b1dc1490"
+    },
+    {
+      "source": "data/hvjb_join_evidence_v01.json",
+      "file": "sequence_evidence.json",
+      "sha256": "f3b521551d166341bfbd5f6891fd0e6bf3cf3699bb4677adc1a4a35e717d885a"
+    },
+    {
+      "source": "data/hvjb_join_transition_v01.json",
+      "file": "transition_evidence.json",
+      "sha256": "934c2d887a6733e405c6714eecbc9c1cbce468890237af632ce3e2104b087794"
+    },
+    {
+      "source": "analysis/hvjb_join_followup_v01.md",
+      "file": "notes.md",
+      "sha256": "936869fe37eae9119673a6cdaed902bb874053fedd926563b2763bd15e88a03e"
+    }
+  ],
+  "generated_page_sha256": "50d991845a923a2ad756150b20feb7af43e20d2025e55ab758996c7bb5a380d4",
+  "observations_json_sha256": "54138a1806d767fdfeff03596141aad237e069dbff5894f96ab41ca0a8a0d015",
+  "preserved_catalog_counts": {
+    "parts": 42,
+    "visible_fastener_features": 23,
+    "visible_wire_segments": 27,
+    "required_functions": 17,
+    "electrical_groups": 13,
+    "lv_pins": 12
+  },
+  "prior_catalog_fields_equal": true,
+  "review_observations": 6,
+  "new_video_frames": 23,
+  "reused_video_frames": 2,
+  "new_product_photos": 1,
+  "unmapped_attachment_observations": 2,
+  "model_written": false,
+  "movie_created": false,
+  "physical_acceptance_verdict": null
+}

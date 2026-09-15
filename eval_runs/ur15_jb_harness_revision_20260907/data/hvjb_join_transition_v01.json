@@ -1,0 +1,114 @@
+{
+  "observed_at": "2026-09-16T07:52:21.536839+09:00",
+  "source": {
+    "title": "ASSEMBLY! EV High Voltage Junction Box",
+    "url": "https://www.youtube.com/watch?v=Sm_D-vmNYqc",
+    "channel": "Ampere EV",
+    "upload_date": "20250607",
+    "file": "references/hvjb_assembly_followup_20260915/assembly_20250607.mp4",
+    "sha256": "b7fcb74eaeec06e517d5726994a38a6b0812e05198d8b771b7ff771e68a0e1eb",
+    "metadata_sha256": "69e2f968a38253ec5608439116c2ef8cc04669cbd03b7275f8feab63fbc9f111",
+    "size_px": [
+      1920,
+      1080
+    ],
+    "duration_s": 274.140533,
+    "frame_rate": "30000/1001",
+    "automatic_caption_role": "navigation aid only; not a verified transcription or part-number source"
+  },
+  "source_sha256_before": "b7fcb74eaeec06e517d5726994a38a6b0812e05198d8b771b7ff771e68a0e1eb",
+  "source_sha256_after": "b7fcb74eaeec06e517d5726994a38a6b0812e05198d8b771b7ff771e68a0e1eb",
+  "frames": [
+    {
+      "requested_seek_s": 87.0,
+      "timestamp_basis": "ffmpeg accurate seek; first display frame at/after the requested time",
+      "file": "references/hvjb_join_transition_20260916/assembly_087000ms.png",
+      "sha256": "a2c6c464a45d0bdddef6d404271816ce0269960e5ba367dc310c7274ac64e126",
+      "size_px": [
+        1920,
+        1080
+      ],
+      "pixel_transform": "none; full decoded frame"
+    },
+    {
+      "requested_seek_s": 87.2,
+      "timestamp_basis": "ffmpeg accurate seek; first display frame at/after the requested time",
+      "file": "references/hvjb_join_transition_20260916/assembly_087200ms.png",
+      "sha256": "2a1290204360e10cc0e22aaf9c2ed7005beac6a7e2c433dd66dbec413a17c4a5",
+      "size_px": [
+        1920,
+        1080
+      ],
+      "pixel_transform": "none; full decoded frame"
+    },
+    {
+      "requested_seek_s": 87.4,
+      "timestamp_basis": "ffmpeg accurate seek; first display frame at/after the requested time",
+      "file": "references/hvjb_join_transition_20260916/assembly_087400ms.png",
+      "sha256": "1f9303569ccc1d4f9b7a0c38d5ddcdd895ff1160c98f83e6206c0f0934dbc2af",
+      "size_px": [
+        1920,
+        1080
+      ],
+      "pixel_transform": "none; full decoded frame"
+    },
+    {
+      "requested_seek_s": 87.6,
+      "timestamp_basis": "ffmpeg accurate seek; first display frame at/after the requested time",
+      "file": "references/hvjb_join_transition_20260916/assembly_087600ms.png",
+      "sha256": "1dd1f0dbf010f1bc98f833b4a55a72376cf1178ad4c07c6fed6e0d5805ac2d66",
+      "size_px": [
+        1920,
+        1080
+      ],
+      "pixel_transform": "none; full decoded frame"
+    },
+    {
+      "requested_seek_s": 87.8,
+      "timestamp_basis": "ffmpeg accurate seek; first display frame at/after the requested time",
+      "file": "references/hvjb_join_transition_20260916/assembly_087800ms.png",
+      "sha256": "f46d915a02a3a5a122652d90518baf82271282bf8354148a60336b317abdf07d",
+      "size_px": [
+        1920,
+        1080
+      ],
+      "pixel_transform": "none; full decoded frame"
+    },
+    {
+      "requested_seek_s": 88.0,
+      "timestamp_basis": "ffmpeg accurate seek; first display frame at/after the requested time",
+      "file": "references/hvjb_join_transition_20260916/assembly_088000ms.png",
+      "sha256": "a7485d67cdc6be6fa6607f06b331a6e6666a7728e3153cbab1c3b448d537eaad",
+      "size_px": [
+        1920,
+        1080
+      ],
+      "pixel_transform": "none; full decoded frame"
+    },
+    {
+      "requested_seek_s": 88.2,
+      "timestamp_basis": "ffmpeg accurate seek; first display frame at/after the requested time",
+      "file": "references/hvjb_join_transition_20260916/assembly_088200ms.png",
+      "sha256": "a45eb7dee59d54d8197e99a7ce645f5722ce63026aecf0b45fcd56329ffdd34e",
+      "size_px": [
+        1920,
+        1080
+      ],
+      "pixel_transform": "none; full decoded frame"
+    }
+  ],
+  "photo": {
+    "url": "https://ampereev.com/wp-content/uploads/2022/05/DSC02861-1.jpg",
+    "gallery_page": "https://ampereev.com/new-high-voltage-junction-box-taking-orders-now/",
+    "file": "references/hvjb_join_transition_20260916/DSC02861-1.jpg",
+    "sha256": "99574f981ae301adf41a9ce9d4840eb15aa66dc7b477a10afe6b55a2accd2106",
+    "size_px": [
+      2048,
+      1365
+    ],
+    "pixel_transform": "none; downloaded file copied byte for byte"
+  },
+  "observations_recorded": false,
+  "physical_acceptance_verdict": null,
+  "movie_created": false
+}

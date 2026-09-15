@@ -1,0 +1,78 @@
+{
+  "observed_at": "2026-09-15T23:14:46.788Z",
+  "directory": "/home/rlrk/Downloads/THREAD_HVJB_板間接合の確認_v01_20260916",
+  "page_sha256": "50d991845a923a2ad756150b20feb7af43e20d2025e55ab758996c7bb5a380d4",
+  "observations": [
+    {
+      "index": 0,
+      "width": 1920,
+      "height": 1080,
+      "url": "https://www.youtube.com/watch?v=Sm_D-vmNYqc&t=87s",
+      "viewBox": "0 0 1920 1080",
+      "markers": 2,
+      "legend": 2
+    },
+    {
+      "index": 1,
+      "width": 1920,
+      "height": 1080,
+      "url": "https://www.youtube.com/watch?v=Sm_D-vmNYqc&t=87s",
+      "viewBox": "0 0 1920 1080",
+      "markers": 2,
+      "legend": 2
+    },
+    {
+      "index": 2,
+      "width": 1920,
+      "height": 1080,
+      "url": "https://www.youtube.com/watch?v=Sm_D-vmNYqc&t=133s",
+      "viewBox": "0 0 1920 1080",
+      "markers": 0,
+      "legend": 0
+    },
+    {
+      "index": 3,
+      "width": 1920,
+      "height": 1080,
+      "url": "https://www.youtube.com/watch?v=Sm_D-vmNYqc&t=146s",
+      "viewBox": "0 0 1920 1080",
+      "markers": 0,
+      "legend": 0
+    },
+    {
+      "index": 4,
+      "width": 1920,
+      "height": 1080,
+      "url": "https://www.youtube.com/watch?v=Sm_D-vmNYqc&t=158s",
+      "viewBox": "0 0 1920 1080",
+      "markers": 0,
+      "legend": 0
+    },
+    {
+      "index": 5,
+      "width": 2048,
+      "height": 1365,
+      "url": "https://ampereev.com/wp-content/uploads/2022/05/DSC02861-1.jpg",
+      "viewBox": "0 0 2048 1365",
+      "markers": 2,
+      "legend": 2
+    }
+  ],
+  "toggle": {
+    "hidden": true,
+    "shown": true
+  },
+  "counts": {
+    "archive": 24,
+    "attachments": 2,
+    "process": 2
+  },
+  "mobile": {
+    "width": 480,
+    "documentWidth": 465,
+    "brokenImages": 0
+  },
+  "missing_links": [],
+  "javascript_errors": [],
+  "scope": "Offline page behavior, pixels, source links and local file existence; no physical acceptance"
+}
