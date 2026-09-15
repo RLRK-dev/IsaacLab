@@ -1,0 +1,75 @@
+{
+  "revision": "hvjb_header_interface_v01",
+  "scope_ja": "TE公称開口の静止モデル修正と、端末引出し・ヘッダー組付けの資料照合。実機工程の採用ではない。",
+  "sources": [
+    {
+      "id": "TE3",
+      "title": "TE 2103340 Rev A2, sheet 1/2",
+      "file": "references/connector_correction_20260915/te_2103340_drawing.pdf",
+      "sha256": "be59744129dc5134d2a3363e25af93294e662cde4254ec28411b80bd01673dc6",
+      "url": "https://www.te.com/en/product-2103340-1.html",
+      "page": 1
+    },
+    {
+      "id": "TE2",
+      "title": "TE 2103346 Rev A3, sheet 1/2",
+      "file": "references/connector_correction_20260915/te_2103346_drawing.pdf",
+      "sha256": "fbdeb1d56aba02ae85ed2464b3acd68ce6444cd47179f33225d7f0ba1b580e28",
+      "url": "https://www.te.com/en/product-2103346-2.html",
+      "page": 1
+    },
+    {
+      "id": "TEI",
+      "title": "TE 2103245 Rev A1, sheet 1/1",
+      "file": "references/hvjb_photo_inventory_20260915/te_2103245_drawing.pdf",
+      "sha256": "23aff5f20acb75d87a63bf3a1aa0c076a8ab43b30c83914cfc8e5c9b41788ffa",
+      "url": "https://www.te.com/en/product-2103245-1.html",
+      "page": 1
+    },
+    {
+      "id": "TEA",
+      "title": "TE 408-32095 Rev B (06NOV2013), §3.1 / §3.2.A",
+      "file": "references/connector_correction_20260915/te_408_32095_instruction.pdf",
+      "sha256": "cd13cd856b679e2683f7672f079bd4c99ff87ac2e361d3da73700e12c12fa63d",
+      "url": "https://www.te.com/commerce/DocumentDelivery/DDEController?Action=srchrtrv&DocFormat=pdf&DocLang=English&DocNm=408-32095&DocType=Specification+Or+Standard&PartCntxt=2103340-1",
+      "page": 2
+    }
+  ],
+  "aperture_height_m": 0.0135,
+  "aperture_corner_radius_m": 0.0044,
+  "drawing_width_height_radius_tolerance_m": 0.0001,
+  "tolerance_note_ja": "図示の±0.10 mmを記録したもの。幾何比較は公称値だけで行い、全公差の最悪組合せや製造適合を判定しない。位置度・表面・ねじ等は原図参照。",
+  "apertures": [
+    {"id": "I01", "header": "P16", "bay": 1, "key": "A", "part_number": "2103245-1", "center_x_m": -0.0859, "width_m": 0.023, "drawing": "TE3"},
+    {"id": "I02", "header": "P16", "bay": 2, "key": "D", "part_number": "2103245-4", "center_x_m": -0.052, "width_m": 0.0228, "drawing": "TE3"},
+    {"id": "I03", "header": "P16", "bay": 3, "key": "E", "part_number": "2103245-5", "center_x_m": -0.0181, "width_m": 0.023, "drawing": "TE3"},
+    {"id": "I04", "header": "P17", "bay": 1, "key": "D", "part_number": "2103245-4", "center_x_m": 0.05505, "width_m": 0.0228, "drawing": "TE2"},
+    {"id": "I05", "header": "P17", "bay": 2, "key": "F", "part_number": "2103245-6", "center_x_m": 0.08895, "width_m": 0.023, "drawing": "TE2"}
+  ],
+  "location_basis_ja": "bayの相対間隔はTE。2個のヘッダー間隔と筐体上のZ/Yは旧静止モデルの表示位置を継承し、Ampereの加工図寸法とはしない。",
+  "observations": [
+    {"time_s": 26, "title_ja": "下板側の外組み", "observation_ja": "下板上の接触器・リレー・抵抗と配線が見える。ヒューズ板は別に置かれている。", "limit_ja": "下板の全輪郭、厚さ、取付穴と把持面は特定できない。"},
+    {"time_s": 60, "title_ja": "ヒューズ板側の作業", "observation_ja": "白い板とヒューズ類、中央の黒い部材を含む一式を手で扱っている。", "limit_ja": "2022年写真の部品IDや隠れた締結構造を、この姿勢だけで確定しない。"},
+    {"time_s": 139, "title_ja": "空の筐体を準備", "observation_ja": "作業台奥で下板側とヒューズ板が一緒になった状態が見える。手前では筐体の包装を外している。", "limit_ja": "板同士を固定する場面と固定方法は未確認。"},
+    {"time_s": 168, "title_ja": "内側ハウジングを壁の外へ", "observation_ja": "5口分の内側ハウジングが側面開口の外に出ており、外側ヘッダーはまだ取り付いていない。", "limit_ja": "通過時の姿勢、保持位置、線への力、同時に必要な腕数は未確定。"},
+    {"time_s": 176, "title_ja": "外側ヘッダーを取り上げる", "observation_ja": "2口側の外側ヘッダーを持っている。内側ハウジングは壁の外に出ている。", "limit_ja": "内側ハウジング挿入とフランジ締結の細かな前後関係は、この時刻では分からない。"},
+    {"time_s": 184, "title_ja": "3口側の裏面", "observation_ja": "外側ヘッダーの裏側を示す姿勢。シールと金属部が見える。", "limit_ja": "動きによるぼけがあり、接触・保持の寸法測定には使わない。"},
+    {"time_s": 188, "title_ja": "側面へヘッダーを合わせる", "observation_ja": "3口側ヘッダーが筐体側面付近にあり、隣に内側ハウジングが見える。", "limit_ja": "手で隠れる範囲があり、内側ロックの成立や全締結完了は判断しない。"},
+    {"time_s": 192, "title_ja": "フランジ側で工具を使う", "observation_ja": "外側ヘッダーが筐体側面に並び、フランジ付近で工具を使用している。", "limit_ja": "各ねじの締付完了、順番、トルクとHVIL状態は動画から測定していない。"}
+  ],
+  "manufacturer_steps": [
+    {"id": "T1", "title_ja": "端末を準備", "detail_ja": "適合する電線・コンタクト・圧着工具を選び、電線端を準備する。MCP/MQSの型式候補は記録済みだが、採用型式と線仕様は未確定。", "basis": "408-32095 §3.1"},
+    {"id": "T2", "title_ja": "外側ヘッダーを着座", "detail_ja": "シールの存在を確認。位置決めポストを筐体の穴へ合わせ、フランジを筐体へ着座させる。", "basis": "408-32095 §3.1, §3.2.A.1"},
+    {"id": "T3", "title_ja": "外側ヘッダーをねじ固定", "detail_ja": "3口側8本、2口側6本のM4。TE記載トルク2.0–2.5 N·m、頭径8.7 mm以下。実ねじ品番・ねじ込み長さ・工具は未選定。", "basis": "2103340 / 2103346 sheet 1; 408-32095 §3.2.A.2"},
+    {"id": "T4", "title_ja": "コンタクトを内側ハウジングへ挿入", "detail_ja": "キャビティ番号とキーを照合し、コンタクトを挿入する。各電線を軽く引いて着座を確認する。数値の引張試験条件は発明しない。", "basis": "408-32095 §3.2.A.3"},
+    {"id": "T5", "title_ja": "内側ハウジングを外側へ挿入", "detail_ja": "キーを合わせ、内側ハウジングを外側ヘッダーへ挿入する。TE手順では音または触感によるクリックを確認する。", "basis": "408-32095 §3.2.A.4"},
+    {"id": "T6", "title_ja": "外部ケーブルプラグの嵌合を別扱い", "detail_ja": "外部プラグの嵌合・ラッチ操作は別工程。OP020の筐体側ヘッダー設置・ねじ固定に置き換えない。", "basis": "408-32095 §3.5; user OP020 selection"}
+  ],
+  "order_note_ja": "TE文書の記載順とAmpereの観察時系列は別に管理。Ampereでは内側ハウジングが筐体外へ出た後に外側ヘッダーが現れる。内側ロックと全フランジ締結の細かな順序は未確定で、TE記載順どおりだったとは断定しない。",
+  "unresolved_ja": [
+    "下板とヒューズ板の機械的な固定方法、筐体内の固定位置。P01の底面を脱着板として動かさない。",
+    "実電線・コンタクト・ストレインリリーフを含む通過姿勢と保持位置。ハウジング単体の投影余白をフィンガの作業空間としない。",
+    "2025年作業映像と2022年の指定写真が同じ製造版かどうか。板・抵抗位置を無条件に転記しない。",
+    "OP020と外組みA/B・筐体統合Cの順序整理。工程内容は維持し、ST番号・腕数・実機タクトはまだ選定しない。"
+  ]
+}

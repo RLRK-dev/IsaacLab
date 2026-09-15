@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>HVJB 開口とヘッダー工程の照合</title><style>
+*{box-sizing:border-box}body{margin:0;color:#243741;background:#f3f6f7;font:16px/1.65 system-ui,sans-serif}main{max-width:1240px;margin:auto;padding:26px 24px 60px}h1{font-size:29px;margin:0 0 8px}h2{font-size:21px;margin-top:0}h3{font-size:17px}a{color:#086887;overflow-wrap:anywhere}section{padding:22px;margin-top:22px;border:1px solid #d5e0e5;border-radius:10px;background:white}.sub{color:#526975;font-size:14px}.lead{font-size:18px}.grid{display:grid;grid-template-columns:1.2fr 1fr;gap:24px}.notice{padding:12px 16px;background:#e6f0f3;border-left:4px solid #3387a1}button,select{font:inherit;padding:7px 12px;border:1px solid #a9bbc5;border-radius:6px;background:white;color:#234552;cursor:pointer}button[aria-pressed="true"]{background:#176c87;color:white}.toolbar{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0}img{display:block;width:100%;height:auto;border-radius:6px;background:#e9f0f5}#evidence-image{max-height:575px;object-fit:contain;background:#20292e}svg{width:100%;max-height:360px;background:#f4f8fa;border:1px solid #d4e0e7;border-radius:6px}table{border-collapse:collapse;width:100%;font-size:14px}th,td{border-bottom:1px solid #dce5e9;padding:9px;text-align:left;vertical-align:top}th{background:#edf3f5}.table-scroll{overflow-x:auto}.changed{font-weight:700;color:#a04e29}.list{padding-left:22px}.list li{margin:8px 0}#evidence-title{margin:10px 0 5px}#archive{display:flex;flex-wrap:wrap;gap:12px}footer{font-size:13px;color:#5d717c;margin-top:28px}p{margin:8px 0 13px}#projection-result{font-variant-numeric:tabular-nums}.keys{display:flex;gap:16px;flex-wrap:wrap;font-size:13px}.keys i{display:inline-block;width:14px;height:10px;margin-right:5px}label{display:inline-flex;align-items:center;gap:8px}@media(max-width:850px){.grid{grid-template-columns:1fr}main{padding:18px 12px 40px}section{padding:16px}h1{font-size:24px}}
+</style></head><body><main>
+<h1>HVJB 開口とヘッダー工程の照合</h1>
+<p class="lead">筐体の開口3か所をTE公式図面の幅へ修正しました。内側端末の引出しと、外側ヘッダーの組付けを追っています。</p>
+<p class="sub">2026-09-16 · 静止モデル v03 p03 · 工程設計に向けた資料照合</p>
+<section><h2>修正した開口</h2><div class="grid"><div>
+<p>旧モデルは5口とも幅22.8 mm。3口側の両端と2口側の2番口を23.0 mmにしました。高さ13.5 mm・角R4.4 mmは継承しています。</p>
+<div class="table-scroll"><table><thead><tr><th>ヘッダー／口</th><th>キー</th><th>旧幅</th><th>新幅</th><th>原図</th></tr></thead><tbody id="apertures"></tbody></table></div>
+<p class="sub">単位mm。図面の幅・高さ・Rの公差は±0.10 mm。表は公称寸法です。ヘッダー同士の間隔と筐体上の位置は表示用推定を継承し、Ampere加工図への適合は主張していません。</p>
+</div><div><a href="model.png" target="_blank"><img src="model.png" alt="開口幅を修正した静止HVJBモデル"></a><p class="sub">登録92特徴を保持。開口壁以外の形状と全特徴の位置は元モデルと同一です。</p><p><a id="native" href="#">新しいBlenderモデル</a> ／ <a href="model_audit.json">保存読戻し・比較記録</a> ／ <a href="photo_catalog.json">全部品・接続台帳</a></p></div></div></section>
+<section><h2>内側ハウジング単体の投影</h2><div class="grid"><div>
+<div class="toolbar"><label>対象 <select id="bay"></select></label><label><input type="checkbox" id="old-outline" checked>旧開口を重ねる</label></div>
+<svg id="projection" viewBox="-13 -9 26 18" role="img" aria-label="公称開口と内側ハウジングの投影図">
+<rect id="opening" fill="#c1e0e9" stroke="#207c99" stroke-width=".06"></rect>
+<rect id="old-opening" fill="none" stroke="#bd6a44" stroke-width=".06" stroke-dasharray=".22 .15"></rect>
+<path id="housing" fill="#3f505b" stroke="#20313c" stroke-width=".03"></path>
+<path d="M-12.4 0H12.4M0 -8V8" fill="none" stroke="#77919d" stroke-width=".025" stroke-dasharray=".15 .15"></path>
+</svg><div class="keys"><span><i style="background:#c1e0e9"></i>新しい公称開口</span><span><i style="background:#bd6a44"></i>旧開口の破線</span><span><i style="background:#3f505b"></i>裸ハウジングの投影外形</span></div>
+</div><div><h3 id="projection-title"></h3><p id="projection-result"></p>
+<p>公式CAD全体を軸方向に投影し、公称の丸角開口までの距離を計算しています。中心一致・傾きゼロ・寸法公差なしの条件です。</p>
+<p>CAD全長は約42.6 mm。図面の参考寸法32.4 mmは肩から先の寸法であり、全長に置き換えていません。</p>
+<p class="notice">この余白にフィンガが入るとは言えません。電線・圧着部・保持具・実際の通過姿勢を含む搬送は、別途対応を詰める必要があります。</p>
+<p class="sub">CAD変換の線形偏差設定0.02 mm。表示は投影の凸包、距離は元の全頂点から解析的な公称開口へ計算。公差解析・把持安定性・実機通過の判定ではありません。</p></div></div></section>
+<section><h2>公式作業映像で確認した状態</h2><p>2025年の作業映像です。対象の2022年製品写真とは別の観察台帳で管理しています。</p><div class="toolbar" id="frames"></div>
+<img id="evidence-image" alt="選択した時刻のAmpere公式作業映像、無加工の全フレーム">
+<h3 id="evidence-title"></h3><p id="observation"></p><p class="sub" id="evidence-limit"></p><p><a id="source-link" target="_blank">公式映像の同時刻</a> ／ <a id="raw-image" target="_blank">元フレームを開く</a></p>
+<details><summary>今回収録した19枚すべて</summary><div id="archive"></div></details></section>
+<section><h2>TE文書に記載された処理</h2><p class="notice" id="order-note"></p>
+<div class="table-scroll"><table><thead><tr><th>処理</th><th>内容と残る対応</th><th>出典</th></tr></thead><tbody id="steps"></tbody></table></div>
+<p class="sub">OP020で指定された「筐体側ヘッダーの設置・ねじ固定」を維持します。外組みA/Bと筐体統合Cへの工程配分、ST番号、腕数は、この表では選定していません。</p></section>
+<section><h2>組立動作へ進める前に残る対応</h2><ul id="unresolved" class="list"></ul><p>下板とヒューズ板が一緒に扱われることは見えますが、板同士を固定する箇所はまだ見えていません。旧モデルの筐体底を脱着板として動かすことはしません。</p></section>
+<section><h2>参照資料と記録</h2><ul id="documents" class="list"></ul><p><a href="interface_review.json">今回の照合JSON</a> ／ <a href="evidence_index.json">フレーム時刻・SHA</a> ／ <a href="notes.md">変更と検査の記録</a> ／ <a href="audit.json">納品記録</a></p></section>
+<footer>モデルと保存読戻しは補助的な観測です。部品全型式、隠れた配線、実把持・締結品質の照合は未完了です。正式な物理妥当性判定はVaultProtocol V12の独立経路によります。</footer>
+</main><script type="application/json" id="payload">__PAYLOAD__</script><script>
+"use strict";
+const data=JSON.parse(document.getElementById('payload').textContent),$=id=>document.getElementById(id);
+const el=(tag,text)=>{const node=document.createElement(tag);if(text!==undefined)node.textContent=text;return node;};
+const docs=Object.fromEntries(data.sources.map(row=>[row.id,row]));
+const mm=x=>(x*1000).toFixed(1);
+data.apertures.forEach((row,index)=>{
+  const tr=el('tr'), changed=Math.abs(row.width_m-.0228)>1e-8;
+  for(const text of [`${row.header==='P16'?'3':'2'}口側 / ${row.bay}`,row.key,'22.8',mm(row.width_m)])tr.append(el('td',text));
+  if(changed)tr.children[3].className='changed';
+  const td=el('td'),a=el('a',row.drawing);a.href=docs[row.drawing].local_pdf+'#page=1';a.target='_blank';td.append(a);tr.append(td);$('apertures').append(tr);
+  const option=el('option',`${row.id} · ${row.key} · ${row.header==='P16'?'3':'2'}口側 ${row.bay}`);option.value=index;$('bay').append(option);
+});
+function projection(){
+  const row=data.apertures[Number($('bay').value)],height=data.aperture_height_m*1000,radius=data.aperture_corner_radius_m*1000;
+  for(const [id,width] of [['opening',row.width_m*1000],['old-opening',22.8]]){
+    const rect=$(id);Object.entries({x:-width/2,y:-height/2,width,height,rx:radius,ry:radius}).forEach(([k,v])=>rect.setAttribute(k,v));
+  }
+  $('old-opening').style.display=$('old-outline').checked?'':'none';
+  $('housing').setAttribute('d',row.projection_hull_m.map((p,i)=>(i?'L':'M')+(p[0]*1000)+','+(-p[1]*1000)).join(' ')+'Z');
+  $('projection-title').textContent=`${row.id} / TE ${row.part_number}（キー${row.key}）`;
+  $('projection-result').textContent=`公称開口 ${mm(row.width_m)} × ${height.toFixed(1)} mm。裸ハウジングの投影幅 ${mm(row.projection.mesh_extents_m[0])} × ${mm(row.projection.mesh_extents_m[1])} mm。最小投影余白 ${(row.projection.minimum_nominal_projected_inward_distance_m*1000).toFixed(3)} mm。`;
+  window.headerProjectionId=row.id;
+}
+$('bay').addEventListener('change',projection);$('old-outline').addEventListener('change',projection);projection();
+function evidence(index){const row=data.observations[index];$('evidence-image').src=row.image;$('evidence-title').textContent=`${row.time_s}秒：${row.title_ja}`;$('observation').textContent=row.observation_ja;$('evidence-limit').textContent=row.limit_ja;$('source-link').href=row.source_url;$('raw-image').href=row.image;document.querySelectorAll('[data-frame]').forEach(b=>b.setAttribute('aria-pressed',String(Number(b.dataset.frame)===index)));window.headerEvidenceIndex=index;}
+data.observations.forEach((row,index)=>{const b=el('button',row.time_s+'秒');b.type='button';b.dataset.frame=index;b.addEventListener('click',()=>evidence(index));$('frames').append(b);});evidence(3);
+data.source_evidence.frames.forEach(row=>{const a=el('a',row.requested_seek_s+'秒');a.href='evidence/'+row.file.split('/').pop();a.target='_blank';$('archive').append(a);});
+data.manufacturer_steps.forEach(row=>{const tr=el('tr');[row.title_ja,row.detail_ja,row.basis].forEach(text=>tr.append(el('td',text)));$('steps').append(tr);});
+$('order-note').textContent=data.order_note_ja;data.unresolved_ja.forEach(text=>$('unresolved').append(el('li',text)));
+data.sources.forEach(row=>{const li=el('li'),local=el('a',row.title),web=el('a','公式ページ');local.href=row.local_pdf+'#page='+row.page;local.target='_blank';web.href=row.url;web.target='_blank';li.append(local,' ／ ',web);$('documents').append(li);});
+$('native').href=data.model_audit.native;window.headerReviewReady=true;
+</script></body></html>

@@ -1,0 +1,302 @@
+{
+  "observed_at": "2026-09-16T06:48:57.825499+09:00",
+  "native": "UR15_JB_photo_correspondence_v03_p03.blend",
+  "native_sha256": "5205d3aa2c2b99f7df6f538d17b3d3ca36ba8208c546858ee8ec8a5a3564a282",
+  "mesh": "data/hvjb_photo_model_v03_p03.json.gz",
+  "mesh_sha256": "6687b12ec1b3db24babf75f8fef1b6f6bc123c288b713824b9763d9214553ba6",
+  "input_sha256": "ebc87a9b4c338c219ea51a1b81c7ee1802486947a96f5caabf33da6662aae565",
+  "source_sha256_before": {
+    "UR15_JB_photo_correspondence_v03_p02.blend": "3da72f4c042936da0e168b71977fe09dbb1c2057eb5d0da30b215522a8ef004d",
+    "data/hvjb_photo_correspondence_v03_p01.json": "6c5b7cb9bab859a33c8f5d5cd5429ce9f06fb0951b8a8fa4ae2a31ad99052ca0",
+    "data/hvjb_photo_cad_v01.json.gz": "1ac417baa3ff67ae8bc3ed5c32ac91cfb778a2effbd1e1a19d24900066c38f32",
+    "data/hvjb_photo_model_v03_p02.json.gz": "02659a3f27496514a8d0707fdf0057de29f36990990ced49bcf9d06fa50c2214",
+    "scripts/build_header_review_v03.py": "216f596e8662b6f8a46a73fb8e3e6527972c241af6453bdb8102b98d82a1b01d",
+    "references/connector_correction_20260915/te_2103340_drawing.pdf": "be59744129dc5134d2a3363e25af93294e662cde4254ec28411b80bd01673dc6",
+    "references/connector_correction_20260915/te_2103346_drawing.pdf": "fbdeb1d56aba02ae85ed2464b3acd68ce6444cd47179f33225d7f0ba1b580e28",
+    "references/hvjb_photo_inventory_20260915/te_2103245_drawing.pdf": "23aff5f20acb75d87a63bf3a1aa0c076a8ab43b30c83914cfc8e5c9b41788ffa",
+    "references/connector_correction_20260915/te_408_32095_instruction.pdf": "cd13cd856b679e2683f7672f079bd4c99ff87ac2e361d3da73700e12c12fa63d"
+  },
+  "source_sha256_after": {
+    "UR15_JB_photo_correspondence_v03_p02.blend": "3da72f4c042936da0e168b71977fe09dbb1c2057eb5d0da30b215522a8ef004d",
+    "data/hvjb_photo_correspondence_v03_p01.json": "6c5b7cb9bab859a33c8f5d5cd5429ce9f06fb0951b8a8fa4ae2a31ad99052ca0",
+    "data/hvjb_photo_cad_v01.json.gz": "1ac417baa3ff67ae8bc3ed5c32ac91cfb778a2effbd1e1a19d24900066c38f32",
+    "data/hvjb_photo_model_v03_p02.json.gz": "02659a3f27496514a8d0707fdf0057de29f36990990ced49bcf9d06fa50c2214",
+    "scripts/build_header_review_v03.py": "216f596e8662b6f8a46a73fb8e3e6527972c241af6453bdb8102b98d82a1b01d",
+    "references/connector_correction_20260915/te_2103340_drawing.pdf": "be59744129dc5134d2a3363e25af93294e662cde4254ec28411b80bd01673dc6",
+    "references/connector_correction_20260915/te_2103346_drawing.pdf": "fbdeb1d56aba02ae85ed2464b3acd68ce6444cd47179f33225d7f0ba1b580e28",
+    "references/hvjb_photo_inventory_20260915/te_2103245_drawing.pdf": "23aff5f20acb75d87a63bf3a1aa0c076a8ab43b30c83914cfc8e5c9b41788ffa",
+    "references/connector_correction_20260915/te_408_32095_instruction.pdf": "cd13cd856b679e2683f7672f079bd4c99ff87ac2e361d3da73700e12c12fa63d"
+  },
+  "before_openings": [
+    {
+      "left_m": -0.09730000048875809,
+      "right_m": -0.07449999451637268,
+      "width_m": 0.022800005972385406
+    },
+    {
+      "left_m": -0.06340000033378601,
+      "right_m": -0.0406000018119812,
+      "width_m": 0.02279999852180481
+    },
+    {
+      "left_m": -0.029500000178813934,
+      "right_m": -0.0066999997943639755,
+      "width_m": 0.02280000038444996
+    },
+    {
+      "left_m": 0.04365000128746033,
+      "right_m": 0.06644999980926514,
+      "width_m": 0.02279999852180481
+    },
+    {
+      "left_m": 0.0775499939918518,
+      "right_m": 0.10034999996423721,
+      "width_m": 0.022800005972385406
+    }
+  ],
+  "after_openings": [
+    {
+      "left_m": -0.09740000218153,
+      "right_m": -0.07439999282360077,
+      "width_m": 0.02300000935792923
+    },
+    {
+      "left_m": -0.06340000033378601,
+      "right_m": -0.0406000018119812,
+      "width_m": 0.02279999852180481
+    },
+    {
+      "left_m": -0.029600001871585846,
+      "right_m": -0.006599999964237213,
+      "width_m": 0.023000001907348633
+    },
+    {
+      "left_m": 0.04365000128746033,
+      "right_m": 0.06644999980926514,
+      "width_m": 0.02279999852180481
+    },
+    {
+      "left_m": 0.07745000720024109,
+      "right_m": 0.10045000165700912,
+      "width_m": 0.022999994456768036
+    }
+  ],
+  "drawing_widths_m": [
+    0.023,
+    0.0228,
+    0.023,
+    0.0228,
+    0.023
+  ],
+  "before_nominal_width_matches": [
+    false,
+    true,
+    false,
+    true,
+    false
+  ],
+  "after_nominal_width_matches": [
+    true,
+    true,
+    true,
+    true,
+    true
+  ],
+  "numeric_comparison_epsilon_m": 1e-07,
+  "numeric_epsilon_role": "serialized float comparison, not a manufacturing acceptance tolerance",
+  "feature_count": 92,
+  "unaffected_feature_meshes_exact": 91,
+  "non_wall_case_meshes_exact": 28,
+  "feature_world_matrices_exact": true,
+  "saved_world_meshes_exact": true,
+  "animation_actions": 0,
+  "nominal_bare_housing_projection": [
+    {
+      "id": "I01",
+      "header": "P16",
+      "bay": 1,
+      "key": "A",
+      "part_number": "2103245-1",
+      "center_x_m": -0.0859,
+      "width_m": 0.023,
+      "drawing": "TE3",
+      "mesh_bounds_m": [
+        [
+          -0.01119999960064888,
+          -0.006300000008195639,
+          -0.04259999841451645
+        ],
+        [
+          0.01119999960064888,
+          0.006300000008195639,
+          1.7104836429576552e-16
+        ]
+      ],
+      "mesh_extents_m": [
+        0.02239999920129776,
+        0.012600000016391277,
+        0.04259999841451662
+      ],
+      "vertex_count": 13936,
+      "triangle_count": 19604,
+      "projection_axis": "source CAD +Z / -Z, centered XY, no rotation or scaling",
+      "minimum_nominal_projected_inward_distance_m": 0.0003000003993511198,
+      "nearest_source_vertex_m": [
+        -0.01119999960064888,
+        -0.0007999999797903001,
+        -0.025049999356269836
+      ],
+      "scope": "bare nominal tessellated housing only; excludes wires, gripper, tolerances and actual travel"
+    },
+    {
+      "id": "I02",
+      "header": "P16",
+      "bay": 2,
+      "key": "D",
+      "part_number": "2103245-4",
+      "center_x_m": -0.052,
+      "width_m": 0.0228,
+      "drawing": "TE3",
+      "mesh_bounds_m": [
+        [
+          -0.01119999960064888,
+          -0.006300000008195639,
+          -0.04259999841451645
+        ],
+        [
+          0.01119999960064888,
+          0.006300000008195639,
+          1.7104836429576552e-16
+        ]
+      ],
+      "mesh_extents_m": [
+        0.02239999920129776,
+        0.012600000016391277,
+        0.04259999841451662
+      ],
+      "vertex_count": 13936,
+      "triangle_count": 19604,
+      "projection_axis": "source CAD +Z / -Z, centered XY, no rotation or scaling",
+      "minimum_nominal_projected_inward_distance_m": 0.0002000003993511204,
+      "nearest_source_vertex_m": [
+        0.01119999960064888,
+        -0.0006000000284984708,
+        -0.03240000084042549
+      ],
+      "scope": "bare nominal tessellated housing only; excludes wires, gripper, tolerances and actual travel"
+    },
+    {
+      "id": "I03",
+      "header": "P16",
+      "bay": 3,
+      "key": "E",
+      "part_number": "2103245-5",
+      "center_x_m": -0.0181,
+      "width_m": 0.023,
+      "drawing": "TE3",
+      "mesh_bounds_m": [
+        [
+          -0.01119999960064888,
+          -0.006300000008195639,
+          -0.04259999841451645
+        ],
+        [
+          0.01119999960064888,
+          0.006300000008195639,
+          1.7104836429576552e-16
+        ]
+      ],
+      "mesh_extents_m": [
+        0.02239999920129776,
+        0.012600000016391277,
+        0.04259999841451662
+      ],
+      "vertex_count": 13888,
+      "triangle_count": 19572,
+      "projection_axis": "source CAD +Z / -Z, centered XY, no rotation or scaling",
+      "minimum_nominal_projected_inward_distance_m": 0.0003000003993511198,
+      "nearest_source_vertex_m": [
+        0.01119999960064888,
+        0.0006000000284984708,
+        -0.02525000087916851
+      ],
+      "scope": "bare nominal tessellated housing only; excludes wires, gripper, tolerances and actual travel"
+    },
+    {
+      "id": "I04",
+      "header": "P17",
+      "bay": 1,
+      "key": "D",
+      "part_number": "2103245-4",
+      "center_x_m": 0.05505,
+      "width_m": 0.0228,
+      "drawing": "TE2",
+      "mesh_bounds_m": [
+        [
+          -0.01119999960064888,
+          -0.006300000008195639,
+          -0.04259999841451645
+        ],
+        [
+          0.01119999960064888,
+          0.006300000008195639,
+          1.7104836429576552e-16
+        ]
+      ],
+      "mesh_extents_m": [
+        0.02239999920129776,
+        0.012600000016391277,
+        0.04259999841451662
+      ],
+      "vertex_count": 13936,
+      "triangle_count": 19604,
+      "projection_axis": "source CAD +Z / -Z, centered XY, no rotation or scaling",
+      "minimum_nominal_projected_inward_distance_m": 0.0002000003993511204,
+      "nearest_source_vertex_m": [
+        0.01119999960064888,
+        -0.0006000000284984708,
+        -0.03240000084042549
+      ],
+      "scope": "bare nominal tessellated housing only; excludes wires, gripper, tolerances and actual travel"
+    },
+    {
+      "id": "I05",
+      "header": "P17",
+      "bay": 2,
+      "key": "F",
+      "part_number": "2103245-6",
+      "center_x_m": 0.08895,
+      "width_m": 0.023,
+      "drawing": "TE2",
+      "mesh_bounds_m": [
+        [
+          -0.01119999960064888,
+          -0.006300000008195639,
+          -0.04259999841451645
+        ],
+        [
+          0.01119999960064888,
+          0.006300000008195639,
+          1.7104836429576552e-16
+        ]
+      ],
+      "mesh_extents_m": [
+        0.02239999920129776,
+        0.012600000016391277,
+        0.04259999841451662
+      ],
+      "vertex_count": 13888,
+      "triangle_count": 19572,
+      "projection_axis": "source CAD +Z / -Z, centered XY, no rotation or scaling",
+      "minimum_nominal_projected_inward_distance_m": 0.0003000003993511198,
+      "nearest_source_vertex_m": [
+        -0.01119999960064888,
+        -0.0006000000284984708,
+        -0.02525000087916851
+      ],
+      "scope": "bare nominal tessellated housing only; excludes wires, gripper, tolerances and actual travel"
+    }
+  ],
+  "formal_physical_verdict": null,
+  "plate_joint_or_grasp_created": false
+}

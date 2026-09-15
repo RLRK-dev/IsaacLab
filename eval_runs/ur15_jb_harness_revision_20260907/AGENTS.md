@@ -452,3 +452,19 @@ numbers unknown until their basis and the scope of the product change are set.
 - The tool enters the case after insertion, but its work point is obscured.
   Do not invent carrier screws or their torque from this view. Free lead groups
   are not wire counts or robot-arm counts; retain the unresolved handoff roles.
+
+## Header aperture correction on 2026-09-16
+
+- `analysis/hvjb_header_interface_v01.md` corrects the old all-22.8 mm wall
+  openings. TE 2103340 A2 specifies 23.0/22.8/23.0 mm for the three bays;
+  2103346 A3 specifies 22.8/23.0 mm for the two bays. The new static native
+  `UR15_JB_photo_correspondence_v03_p03.blend` changes those three widths only.
+  Preserve p02, the 92-feature catalog, and the unresolved physical connections.
+- The bare inner-housing CAD projects to about 22.4 x 12.6 mm, with full length
+  42.6 mm; the drawing's reference 32.4 mm is not its full length. Nominal
+  projected distances of 0.2/0.3 mm exclude wires, fingers, tolerances and actual
+  passage. They do not establish a grasp envelope, clearance or physical fit.
+- TE's installation sequence and Ampere's video state sequence remain separate.
+  The 168-second frame shows inner housings outside the case before outer-header
+  installation; inner locking versus flange-fastening suborder is unresolved.
+  Neither the plate joint nor a new ST/arm allocation is selected in this step.
