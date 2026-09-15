@@ -1,0 +1,659 @@
+{
+  "checked_at": "2026-09-15T01:56:24.790Z",
+  "initial": {
+    "selected": "",
+    "source_view": "overview",
+    "uncovered": false,
+    "model_features": 89,
+    "shown_features": 89,
+    "triangles": 449828,
+    "finite": true,
+    "gl_error": 0,
+    "motion_created": false
+  },
+  "selected": [
+    {
+      "id": "P01",
+      "shown_features": 1,
+      "photo_mark_count": 1
+    },
+    {
+      "id": "P02",
+      "shown_features": 1,
+      "photo_mark_count": 1
+    },
+    {
+      "id": "P03",
+      "shown_features": 1,
+      "photo_mark_count": 1
+    },
+    {
+      "id": "P04",
+      "shown_features": 1,
+      "photo_mark_count": 1
+    },
+    {
+      "id": "P05",
+      "shown_features": 1,
+      "photo_mark_count": 1
+    },
+    {
+      "id": "P06",
+      "shown_features": 1,
+      "photo_mark_count": 1
+    },
+    {
+      "id": "P07",
+      "shown_features": 1,
+      "photo_mark_count": 1
+    },
+    {
+      "id": "P08",
+      "shown_features": 1,
+      "photo_mark_count": 1
+    },
+    {
+      "id": "P09",
+      "shown_features": 1,
+      "photo_mark_count": 1
+    },
+    {
+      "id": "P10",
+      "shown_features": 1,
+      "photo_mark_count": 1
+    },
+    {
+      "id": "P11",
+      "shown_features": 1,
+      "photo_mark_count": 1
+    },
+    {
+      "id": "P12",
+      "shown_features": 1,
+      "photo_mark_count": 1
+    },
+    {
+      "id": "P13",
+      "shown_features": 1,
+      "photo_mark_count": 1
+    },
+    {
+      "id": "P14",
+      "shown_features": 1,
+      "photo_mark_count": 1
+    },
+    {
+      "id": "P15",
+      "shown_features": 1,
+      "photo_mark_count": 1
+    },
+    {
+      "id": "P16",
+      "shown_features": 1,
+      "photo_mark_count": 1
+    },
+    {
+      "id": "P17",
+      "shown_features": 1,
+      "photo_mark_count": 1
+    },
+    {
+      "id": "P18",
+      "shown_features": 1,
+      "photo_mark_count": 1
+    },
+    {
+      "id": "I01",
+      "shown_features": 1,
+      "photo_mark_count": 1
+    },
+    {
+      "id": "I02",
+      "shown_features": 1,
+      "photo_mark_count": 1
+    },
+    {
+      "id": "I03",
+      "shown_features": 1,
+      "photo_mark_count": 1
+    },
+    {
+      "id": "I04",
+      "shown_features": 1,
+      "photo_mark_count": 1
+    },
+    {
+      "id": "I05",
+      "shown_features": 1,
+      "photo_mark_count": 1
+    },
+    {
+      "id": "T31",
+      "shown_features": 1,
+      "photo_mark_count": 1
+    },
+    {
+      "id": "T32",
+      "shown_features": 1,
+      "photo_mark_count": 1
+    },
+    {
+      "id": "T33",
+      "shown_features": 1,
+      "photo_mark_count": 1
+    },
+    {
+      "id": "T34",
+      "shown_features": 1,
+      "photo_mark_count": 1
+    },
+    {
+      "id": "T41",
+      "shown_features": 1,
+      "photo_mark_count": 1
+    },
+    {
+      "id": "T42",
+      "shown_features": 1,
+      "photo_mark_count": 1
+    },
+    {
+      "id": "T43",
+      "shown_features": 1,
+      "photo_mark_count": 1
+    },
+    {
+      "id": "T44",
+      "shown_features": 1,
+      "photo_mark_count": 1
+    },
+    {
+      "id": "P19",
+      "shown_features": 1,
+      "photo_mark_count": 1
+    },
+    {
+      "id": "P20",
+      "shown_features": 1,
+      "photo_mark_count": 1
+    },
+    {
+      "id": "P21",
+      "shown_features": 1,
+      "photo_mark_count": 1
+    },
+    {
+      "id": "P22",
+      "shown_features": 1,
+      "photo_mark_count": 1
+    },
+    {
+      "id": "L01",
+      "shown_features": 1,
+      "photo_mark_count": 1
+    },
+    {
+      "id": "L02",
+      "shown_features": 1,
+      "photo_mark_count": 1
+    },
+    {
+      "id": "L03",
+      "shown_features": 1,
+      "photo_mark_count": 1
+    },
+    {
+      "id": "L04",
+      "shown_features": 1,
+      "photo_mark_count": 1
+    },
+    {
+      "id": "L05",
+      "shown_features": 1,
+      "photo_mark_count": 1
+    },
+    {
+      "id": "L06",
+      "shown_features": 1,
+      "photo_mark_count": 1
+    },
+    {
+      "id": "L07",
+      "shown_features": 1,
+      "photo_mark_count": 1
+    },
+    {
+      "id": "J01",
+      "shown_features": 1,
+      "photo_mark_count": 1
+    },
+    {
+      "id": "J02",
+      "shown_features": 1,
+      "photo_mark_count": 1
+    },
+    {
+      "id": "J03",
+      "shown_features": 1,
+      "photo_mark_count": 1
+    },
+    {
+      "id": "J04",
+      "shown_features": 1,
+      "photo_mark_count": 1
+    },
+    {
+      "id": "J05",
+      "shown_features": 1,
+      "photo_mark_count": 1
+    },
+    {
+      "id": "J06",
+      "shown_features": 1,
+      "photo_mark_count": 1
+    },
+    {
+      "id": "J07",
+      "shown_features": 1,
+      "photo_mark_count": 1
+    },
+    {
+      "id": "J08",
+      "shown_features": 1,
+      "photo_mark_count": 1
+    },
+    {
+      "id": "J09",
+      "shown_features": 1,
+      "photo_mark_count": 1
+    },
+    {
+      "id": "J10",
+      "shown_features": 1,
+      "photo_mark_count": 1
+    },
+    {
+      "id": "J11",
+      "shown_features": 1,
+      "photo_mark_count": 1
+    },
+    {
+      "id": "J12",
+      "shown_features": 1,
+      "photo_mark_count": 1
+    },
+    {
+      "id": "J13",
+      "shown_features": 1,
+      "photo_mark_count": 1
+    },
+    {
+      "id": "J14",
+      "shown_features": 1,
+      "photo_mark_count": 1
+    },
+    {
+      "id": "J15",
+      "shown_features": 1,
+      "photo_mark_count": 1
+    },
+    {
+      "id": "J16",
+      "shown_features": 1,
+      "photo_mark_count": 1
+    },
+    {
+      "id": "J17",
+      "shown_features": 1,
+      "photo_mark_count": 1
+    },
+    {
+      "id": "J18",
+      "shown_features": 1,
+      "photo_mark_count": 1
+    },
+    {
+      "id": "J19",
+      "shown_features": 1,
+      "photo_mark_count": 1
+    },
+    {
+      "id": "J20",
+      "shown_features": 1,
+      "photo_mark_count": 1
+    },
+    {
+      "id": "J21",
+      "shown_features": 1,
+      "photo_mark_count": 1
+    },
+    {
+      "id": "J22",
+      "shown_features": 1,
+      "photo_mark_count": 1
+    },
+    {
+      "id": "J23",
+      "shown_features": 1,
+      "photo_mark_count": 1
+    },
+    {
+      "id": "W01",
+      "shown_features": 1,
+      "photo_mark_count": 1
+    },
+    {
+      "id": "W02",
+      "shown_features": 1,
+      "photo_mark_count": 1
+    },
+    {
+      "id": "W03",
+      "shown_features": 1,
+      "photo_mark_count": 1
+    },
+    {
+      "id": "W04",
+      "shown_features": 1,
+      "photo_mark_count": 1
+    },
+    {
+      "id": "W05",
+      "shown_features": 1,
+      "photo_mark_count": 1
+    },
+    {
+      "id": "W06",
+      "shown_features": 1,
+      "photo_mark_count": 1
+    },
+    {
+      "id": "W07",
+      "shown_features": 1,
+      "photo_mark_count": 1
+    },
+    {
+      "id": "W08",
+      "shown_features": 1,
+      "photo_mark_count": 1
+    },
+    {
+      "id": "W09",
+      "shown_features": 1,
+      "photo_mark_count": 1
+    },
+    {
+      "id": "W10",
+      "shown_features": 1,
+      "photo_mark_count": 1
+    },
+    {
+      "id": "W11",
+      "shown_features": 1,
+      "photo_mark_count": 1
+    },
+    {
+      "id": "W12",
+      "shown_features": 1,
+      "photo_mark_count": 1
+    },
+    {
+      "id": "W13",
+      "shown_features": 1,
+      "photo_mark_count": 1
+    },
+    {
+      "id": "W14",
+      "shown_features": 1,
+      "photo_mark_count": 1
+    },
+    {
+      "id": "WI11",
+      "shown_features": 1,
+      "photo_mark_count": 1
+    },
+    {
+      "id": "WI12",
+      "shown_features": 1,
+      "photo_mark_count": 1
+    },
+    {
+      "id": "WI21",
+      "shown_features": 1,
+      "photo_mark_count": 1
+    },
+    {
+      "id": "WI22",
+      "shown_features": 1,
+      "photo_mark_count": 1
+    },
+    {
+      "id": "WI31",
+      "shown_features": 1,
+      "photo_mark_count": 1
+    },
+    {
+      "id": "WI32",
+      "shown_features": 1,
+      "photo_mark_count": 1
+    },
+    {
+      "id": "WI41",
+      "shown_features": 1,
+      "photo_mark_count": 1
+    },
+    {
+      "id": "WI42",
+      "shown_features": 1,
+      "photo_mark_count": 1
+    },
+    {
+      "id": "WI51",
+      "shown_features": 1,
+      "photo_mark_count": 1
+    },
+    {
+      "id": "WI52",
+      "shown_features": 1,
+      "photo_mark_count": 1
+    }
+  ],
+  "content": {
+    "requirements": 17,
+    "connection_groups": 13,
+    "lv_pins": 12,
+    "broken_images": 0,
+    "links": [
+      "references/op040_real_products_20260912/ampere_product_photo_2.jpg",
+      "references/op040_real_products_20260912/ampere_product_photo_3.jpg",
+      "UR15_JB_photo_correspondence_v02_p02.blend",
+      "previews/top.png",
+      "previews/oblique.png",
+      "previews/uncovered.png",
+      "data/hvjb_photo_correspondence_v02_p02.json",
+      "analysis/hvjb_photo_correspondence_v02.md",
+      "audit/hvjb_photo_model_v02_p02.json",
+      "data/hvjb_video_evidence_v02.json",
+      "https://www.youtube.com/watch?v=Sm_D-vmNYqc",
+      "https://www.youtube.com/watch?v=oXPIRNZ4xcs",
+      "https://help.ampereev.com/hc/en-us/articles/31292470232087-High-Voltage-Junction-Box-HVJB-5-400",
+      "references/op040_real_products_20260912/ampere_hvjb_5_400_current_v1_1.pdf",
+      "references/connector_correction_20260915/te_408_32095_instruction.pdf",
+      "references/hvjb_photo_inventory_20260915/te_2103245_drawing.pdf"
+    ],
+    "gl": {
+      "selected": "",
+      "source_view": "overview",
+      "uncovered": false,
+      "model_features": 89,
+      "shown_features": 89,
+      "triangles": 449828,
+      "finite": true,
+      "gl_error": 0,
+      "motion_created": false
+    }
+  },
+  "mobile": {
+    "scroll": 465,
+    "client": 465,
+    "gl": {
+      "selected": "",
+      "source_view": "fuse_detail",
+      "uncovered": false,
+      "model_features": 89,
+      "shown_features": 89,
+      "triangles": 449828,
+      "finite": true,
+      "gl_error": 0,
+      "motion_created": false
+    }
+  },
+  "sourceImages": [
+    {
+      "id": "overview",
+      "size": [
+        1620,
+        1080
+      ],
+      "expected": [
+        1620,
+        1080
+      ]
+    },
+    {
+      "id": "detail",
+      "size": [
+        1620,
+        1080
+      ],
+      "expected": [
+        1620,
+        1080
+      ]
+    },
+    {
+      "id": "side",
+      "size": [
+        1620,
+        1080
+      ],
+      "expected": [
+        1620,
+        1080
+      ]
+    },
+    {
+      "id": "fuse_detail",
+      "size": [
+        1920,
+        1080
+      ],
+      "expected": [
+        1920,
+        1080
+      ]
+    },
+    {
+      "id": "main_pointer",
+      "size": [
+        1920,
+        1080
+      ],
+      "expected": [
+        1920,
+        1080
+      ]
+    },
+    {
+      "id": "main_sample",
+      "size": [
+        1920,
+        1080
+      ],
+      "expected": [
+        1920,
+        1080
+      ]
+    },
+    {
+      "id": "subassembly",
+      "size": [
+        1920,
+        1080
+      ],
+      "expected": [
+        1920,
+        1080
+      ]
+    },
+    {
+      "id": "panel_wiring",
+      "size": [
+        1920,
+        1080
+      ],
+      "expected": [
+        1920,
+        1080
+      ]
+    },
+    {
+      "id": "insert_plate",
+      "size": [
+        1920,
+        1080
+      ],
+      "expected": [
+        1920,
+        1080
+      ]
+    },
+    {
+      "id": "crimp",
+      "size": [
+        1920,
+        1080
+      ],
+      "expected": [
+        1920,
+        1080
+      ]
+    },
+    {
+      "id": "busbars",
+      "size": [
+        1920,
+        1080
+      ],
+      "expected": [
+        1920,
+        1080
+      ]
+    }
+  ],
+  "uncovered": {
+    "selected": "",
+    "source_view": "overview",
+    "uncovered": true,
+    "model_features": 89,
+    "shown_features": 87,
+    "triangles": 449828,
+    "finite": true,
+    "gl_error": 0,
+    "motion_created": false
+  },
+  "sourceSelection": {
+    "selected": "P19",
+    "source_view": "fuse_detail",
+    "uncovered": true,
+    "model_features": 89,
+    "shown_features": 87,
+    "triangles": 449828,
+    "finite": true,
+    "gl_error": 0,
+    "motion_created": false
+  },
+  "missing_links": [],
+  "javascript_errors": [],
+  "scope": "UI display and interaction only; no physical acceptance"
+}

@@ -1,0 +1,27 @@
+{
+  "native": "UR15_JB_photo_correspondence_v02_p02.blend",
+  "native_sha256": "eaad0da7f4eea1098a420985e50989d1a3fe149596532cf5c4d8d1b701f5ba93",
+  "catalog_sha256": "b01d86d748abdfb224a4d57c39280a61585a47a7f244cf4c35fb838e634578f4",
+  "mesh_sha256": "971ab7332a454cf4c64a3c6d8e72fc4f07be984a2157b9750613993c36a82047",
+  "feature_count": 89,
+  "id_bijection": true,
+  "saved_world_meshes_exactly_equal": true,
+  "feature_roots_unit_scale": true,
+  "animation_actions": 0,
+  "preserved_inputs": {
+    "UR15_JB_photo_correspondence_v01_p02.blend": "f8c8b9fe3e8503cb2cdc21b4dc1dd0b3d7e547b7bbf0573a415be569f77cad8c",
+    "UR15_JB_initial_hands_v03_p03.blend": "2b828f98402cc95033ed62a380cdea0fb04f95bb31cae0d525b98357cd870614"
+  },
+  "aux_fuse_ids": [
+    "P05",
+    "P06",
+    "P19",
+    "P20",
+    "P21"
+  ],
+  "main_fuse_id": "P22",
+  "main_fuse_cover_id": "P08",
+  "full_photo_or_bom_coverage": false,
+  "physical_net_correspondence_complete": false,
+  "formal_physical_verdict": null
+}

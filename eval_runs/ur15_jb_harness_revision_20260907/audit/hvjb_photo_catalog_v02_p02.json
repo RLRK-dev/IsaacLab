@@ -1,0 +1,16 @@
+{
+  "catalog_sha256": "b01d86d748abdfb224a4d57c39280a61585a47a7f244cf4c35fb838e634578f4",
+  "previous_unchanged": true,
+  "feature_count": 89,
+  "part_features": 42,
+  "fastener_features": 23,
+  "wire_segments": 24,
+  "aux_fuse_count": 5,
+  "aux_fuse_to_port_assignment_complete": false,
+  "required_functions": 17,
+  "electrical_groups": 13,
+  "lv_positions": 12,
+  "all_physical_connections_resolved": false,
+  "motion_created": false,
+  "formal_verdict": null
+}

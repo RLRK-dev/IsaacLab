@@ -1,0 +1,246 @@
+{
+  "created_at": "2026-09-15T10:58:46.433377+09:00",
+  "directory": "/home/rlrk/Downloads/THREAD_HVJB_写真部品照合_v02_20260915",
+  "files": [
+    {
+      "file": "README.txt",
+      "sha256": "7b9ffa647c65addaeecfa553785a24c14b697fb971230dfd26c2387d59fb21fa",
+      "bytes": 1237
+    },
+    {
+      "file": "UR15_JB_photo_correspondence_v02_p02.blend",
+      "sha256": "eaad0da7f4eea1098a420985e50989d1a3fe149596532cf5c4d8d1b701f5ba93",
+      "bytes": 20859096
+    },
+    {
+      "file": "analysis/hvjb_photo_correspondence_v02.md",
+      "sha256": "57c422e2c9fcaa70c88890f79a939ec465670dda1ca5ba9747dc72acd524a4d9",
+      "bytes": 12920
+    },
+    {
+      "file": "analysis/hvjb_photo_execution_v02.md",
+      "sha256": "8cbc2a66bbad25da71e4582550a500b478bd8ac2e86a758da1f1167a19b32ec6",
+      "bytes": 5129
+    },
+    {
+      "file": "audit/browser_fuse_evidence.png",
+      "sha256": "2f2b704a531588418377d7e484ad89465a65da40d812af325eeef7a90c9d2eaa",
+      "bytes": 628587
+    },
+    {
+      "file": "audit/browser_review.json",
+      "sha256": "1e0c1aca1408b5651bcd098a39427bbf1022dcbfba4e79469cf57acdd6f2f278",
+      "bytes": 11928
+    },
+    {
+      "file": "audit/browser_review.png",
+      "sha256": "b5ead27140a77eb20d9c8867845f7c0a0f3c35f05b131dfc099435d03b1583d2",
+      "bytes": 578331
+    },
+    {
+      "file": "audit/hvjb_photo_browser_v02.json",
+      "sha256": "1e0c1aca1408b5651bcd098a39427bbf1022dcbfba4e79469cf57acdd6f2f278",
+      "bytes": 11928
+    },
+    {
+      "file": "audit/hvjb_photo_catalog_v02_p02.json",
+      "sha256": "dd338f4e1ab115ff2b9533ff89e610f81c4be2d4dcb920aa397d28eb71bc1fa2",
+      "bytes": 465
+    },
+    {
+      "file": "audit/hvjb_photo_catalog_v02_p02.log",
+      "sha256": "116c34be3820f0909949cb49cfcfab661c69fc6980259595065d257d69f6bbef",
+      "bytes": 656
+    },
+    {
+      "file": "audit/hvjb_photo_model_v02_p02.json",
+      "sha256": "11bb36bbc9ef95fd1193df43b179b2c80f5078a141013786e7f3e4c2df01a039",
+      "bytes": 989
+    },
+    {
+      "file": "audit/hvjb_photo_model_v02_p02.log",
+      "sha256": "12120dcde74a9f4abc8d34e4b9aee9bc09aa9995f2c16bf1bb3be6a1e5bcfcc1",
+      "bytes": 121805
+    },
+    {
+      "file": "audit/hvjb_video_evidence_v02.log",
+      "sha256": "deaf601270b92b990b6e9d143ab5412edb605d269a803ab78e03c5417c21adca",
+      "bytes": 291
+    },
+    {
+      "file": "data/header_review_v03/meshes.json.gz",
+      "sha256": "8c0bbe8c60f0a78f8dcba56d76ed825d13d3f88dd67e9fd8cdeb932e88fa4130",
+      "bytes": 3279517
+    },
+    {
+      "file": "data/hvjb_photo_cad_v01.json.gz",
+      "sha256": "1ac417baa3ff67ae8bc3ed5c32ac91cfb778a2effbd1e1a19d24900066c38f32",
+      "bytes": 900968
+    },
+    {
+      "file": "data/hvjb_photo_correspondence_v01.json",
+      "sha256": "f11765ce6b142d49701bab3108b383176c638dfd933d83f57d0c3ed0f76bb27b",
+      "bytes": 53832
+    },
+    {
+      "file": "data/hvjb_photo_correspondence_v02_p02.json",
+      "sha256": "b01d86d748abdfb224a4d57c39280a61585a47a7f244cf4c35fb838e634578f4",
+      "bytes": 102811
+    },
+    {
+      "file": "data/hvjb_photo_model_v02_p02.json.gz",
+      "sha256": "971ab7332a454cf4c64a3c6d8e72fc4f07be984a2157b9750613993c36a82047",
+      "bytes": 8783151
+    },
+    {
+      "file": "data/hvjb_video_evidence_v02.json",
+      "sha256": "a199df6888bef22ce53de4686d9d5fe120ecab26d53888e1000b62f3b779ef7f",
+      "bytes": 6413
+    },
+    {
+      "file": "previews/oblique.png",
+      "sha256": "b10e7af55a77b60c8119a8a5b82d1ba5ff34c1af632fcd70840b4067922c4d74",
+      "bytes": 1201734
+    },
+    {
+      "file": "previews/top.png",
+      "sha256": "23a0523ca57321bb0534d5368930eb950a5240c2841876f68210942c82d7b10e",
+      "bytes": 1166201
+    },
+    {
+      "file": "previews/uncovered.png",
+      "sha256": "548670d72dba29953cdaab63916507eda894e4af8f12b1488e138a0b578735db",
+      "bytes": 1032550
+    },
+    {
+      "file": "references/connector_correction_20260915/te_2103340_drawing.pdf",
+      "sha256": "be59744129dc5134d2a3363e25af93294e662cde4254ec28411b80bd01673dc6",
+      "bytes": 1088384
+    },
+    {
+      "file": "references/connector_correction_20260915/te_2103346_drawing.pdf",
+      "sha256": "fbdeb1d56aba02ae85ed2464b3acd68ce6444cd47179f33225d7f0ba1b580e28",
+      "bytes": 896394
+    },
+    {
+      "file": "references/connector_correction_20260915/te_408_32095_instruction.pdf",
+      "sha256": "cd13cd856b679e2683f7672f079bd4c99ff87ac2e361d3da73700e12c12fa63d",
+      "bytes": 762503
+    },
+    {
+      "file": "references/hvjb_assembly_followup_20260915/busbars.png",
+      "sha256": "e1da438a6be112804da056e47242ad0fde31020eff240be2f66dcbaf81835c51",
+      "bytes": 1940286
+    },
+    {
+      "file": "references/hvjb_assembly_followup_20260915/crimp.png",
+      "sha256": "f6fce41ea84004b571b30bd1a6c4cef05b23cbf15bdb28cb8b70ffc3b9f9f8c1",
+      "bytes": 1930601
+    },
+    {
+      "file": "references/hvjb_assembly_followup_20260915/fuse_detail.png",
+      "sha256": "1b822cd4a08c8de69d5c47e0771d955b5571d4d3f76fa0f8515e8c033e834edb",
+      "bytes": 1694794
+    },
+    {
+      "file": "references/hvjb_assembly_followup_20260915/insert_plate.png",
+      "sha256": "17f3bd544afcd121f87e36edb026d41d4172557487f54b705a3ae672573f6dec",
+      "bytes": 2011115
+    },
+    {
+      "file": "references/hvjb_assembly_followup_20260915/main_pointer.png",
+      "sha256": "184be1b27d8b8d34aaa3861d9ddbabb031700181c76a111d3dfa398389c8b533",
+      "bytes": 1308296
+    },
+    {
+      "file": "references/hvjb_assembly_followup_20260915/main_sample.png",
+      "sha256": "cc72a8e0689ca51fbe03ce3e3061bb56a20331140ff5c123832a06e43a3721b0",
+      "bytes": 2611498
+    },
+    {
+      "file": "references/hvjb_assembly_followup_20260915/panel_wiring.png",
+      "sha256": "9a4089947e62ef79eda7c0c4da34933a603aae9f9dcdd467922ff668066bcc50",
+      "bytes": 1741474
+    },
+    {
+      "file": "references/hvjb_assembly_followup_20260915/subassembly.png",
+      "sha256": "ae36aa75719958753f4436dfbae171b1c5e969f7d931fab39e227122585bcddc",
+      "bytes": 2360078
+    },
+    {
+      "file": "references/hvjb_photo_inventory_20260915/te_2103245_drawing.pdf",
+      "sha256": "23aff5f20acb75d87a63bf3a1aa0c076a8ab43b30c83914cfc8e5c9b41788ffa",
+      "bytes": 157699
+    },
+    {
+      "file": "references/op040_real_products_20260912/ampere_hvjb_5_400_current_v1_1.pdf",
+      "sha256": "643648bcea77b4d7c37c65d073664f746f68689952da2d5ce932e3d10bd5a9e1",
+      "bytes": 553747
+    },
+    {
+      "file": "references/op040_real_products_20260912/ampere_product_photo_1.jpg",
+      "sha256": "5724681b4bef4399f0799751a62577e48ef9b7fd3d6ed5b56d85fd95924937ad",
+      "bytes": 167012
+    },
+    {
+      "file": "references/op040_real_products_20260912/ampere_product_photo_2.jpg",
+      "sha256": "5ae831226050fb2430894f3a0462d87c1ffa8991fad453bb8945b2c983233b2e",
+      "bytes": 228146
+    },
+    {
+      "file": "references/op040_real_products_20260912/ampere_product_photo_3.jpg",
+      "sha256": "b654a278aec9b1a5c2e45b08f30cedd3b08b4f10003dd74a6c39579aa8278f70",
+      "bytes": 235262
+    },
+    {
+      "file": "review.html",
+      "sha256": "1d674ee60b43f4de3a8b0beb80fa548424e1d35456beaf2fdc86cbf3f7f5e297",
+      "bytes": 23806629
+    },
+    {
+      "file": "scripts/build_hvjb_photo_catalog_v01.py",
+      "sha256": "fe7166bf06b66fed127ad1d41d903bb46d5fda7755cf5de14d9589f35afa47ba",
+      "bytes": 26081
+    },
+    {
+      "file": "scripts/build_hvjb_photo_catalog_v02.py",
+      "sha256": "b3da6859bb0d180950ef023d0c1aa73d377d8489f8a3dced97ebbcc32c90ff9a",
+      "bytes": 17356
+    },
+    {
+      "file": "scripts/build_hvjb_photo_model_v01.py",
+      "sha256": "08ac15a771b2c5bf5c2a54ff1046ee97072e4ecf27d51df33e1941996847d870",
+      "bytes": 18461
+    },
+    {
+      "file": "scripts/build_hvjb_photo_model_v02.py",
+      "sha256": "06bed97d88c326780175eab72065ab955a3ca45b407f277e10ef391986006c05",
+      "bytes": 15044
+    },
+    {
+      "file": "scripts/check_hvjb_photo_review_v02.mjs",
+      "sha256": "55517027a2aa0a28a4a87072391fde2bed7d3872fdb0fda2bc7f7026d435d06b",
+      "bytes": 8729
+    },
+    {
+      "file": "scripts/collect_hvjb_video_evidence_v02.py",
+      "sha256": "1fa46e114a688acb030b703a64d64636e3c91b82d63ac1e8a4d6c14c1ac623db",
+      "bytes": 4651
+    },
+    {
+      "file": "scripts/hvjb_photo_review_v02.html",
+      "sha256": "7af8f6c766feae54d3e30eafaffa275898a8f0c0d6c8c3379c318552a181dc88",
+      "bytes": 20228
+    },
+    {
+      "file": "scripts/package_hvjb_photo_review_v02.py",
+      "sha256": "010d131586d7e04106fe5290c72ea553d632d170f954cb81297e3fe023bfd68f",
+      "bytes": 7175
+    }
+  ],
+  "motion_created": false,
+  "complete_product_reconstruction": false,
+  "movie_files": [],
+  "viewer_vertex_rounding_m": 1e-06,
+  "copy_hashes_equal": true
+}

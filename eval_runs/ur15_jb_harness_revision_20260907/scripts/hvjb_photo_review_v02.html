@@ -1,0 +1,108 @@
+<!doctype html>
+<!-- Copyright (c) 2022-2026, The Isaac Lab Project Developers. SPDX-License-Identifier: BSD-3-Clause -->
+<html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Ampere HVJB｜写真と内部モデルの照合</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#f2f4f5;color:#26383f;font:15px/1.7 system-ui,"Noto Sans CJK JP",sans-serif}main{max-width:1680px;margin:auto;padding:28px}h1{font-size:26px;margin:0 0 8px}h2{font-size:20px;margin:0 0 10px}h3{font-size:16px;margin:0 0 8px}p{margin:8px 0}a{color:#17618a}.muted{color:#586d76;font-size:13px}.notice{border-left:4px solid #b97920;background:#fff6e7;padding:12px 16px;margin:18px 0}.toolbar{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin:12px 0}button,select{font:inherit;color:inherit;background:white;border:1px solid #b5c3ca;padding:7px 11px;border-radius:5px;cursor:pointer}button:focus-visible,select:focus-visible,input:focus-visible{outline:3px solid #177cac;outline-offset:2px}select{max-width:100%}.pair{display:grid;grid-template-columns:1fr 1fr;gap:14px}.panel{border:1px solid #cbd4d9;border-radius:8px;background:white;padding:14px;min-width:0}.stage{width:100%;aspect-ratio:3/2;background:#fafbfc;border:1px solid #e1e6e8;position:relative}svg,canvas{width:100%;height:100%;display:block}canvas{touch-action:none;cursor:grab;background:linear-gradient(#edf1f3,#fafbfc)}.pick{fill:transparent;stroke:transparent;stroke-width:4;cursor:pointer}.pick:hover{stroke:#3386b9;fill:#3386b91b}.pick.selected{stroke:#da970f;fill:#da970f22;stroke-width:5}.wirepick{fill:none;stroke:transparent;stroke-width:14;pointer-events:stroke;cursor:pointer}.wirepick:hover{stroke:#3386b966}.wirepick.selected{stroke:#dc980fbb;stroke-width:7}.detail{margin:14px 0;min-height:100px;border-left:4px solid #2579a6;background:#eaf3f8;padding:14px 18px}.links{display:flex;gap:18px;flex-wrap:wrap}.grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:20px}table{width:100%;border-collapse:collapse;font-size:13px}th,td{border-bottom:1px solid #dce3e7;text-align:left;padding:8px;vertical-align:top}th{background:#eef3f5}td button{padding:1px 6px;font-size:12px}.pending{color:#976117}details{margin-top:16px}summary{cursor:pointer;font-weight:600}ul{padding-left:22px}.small{font-size:12px}.pill{display:inline-block;padding:2px 9px;border-radius:12px;background:#e2ebef;font-size:12px}#gl-error{color:#a23030}footer{border-top:1px solid #cdd7dc;margin-top:24px;padding-top:14px;font-size:12px;color:#5b717b}@media(max-width:950px){main{padding:18px 12px}.pair,.grid{grid-template-columns:1fr}h1{font-size:23px}.stage{min-height:340px}}
+.feature-label{white-space:nowrap;display:flex;align-items:center;gap:8px;flex:1 1 350px;min-width:0}.feature-label select{min-width:0;width:100%}td,a,.detail{overflow-wrap:anywhere}
+</style></head><body><main>
+<h1>Ampere HVJB — 写真と内部モデルの照合</h1>
+<p>指定写真にIDを付け、静止モデルの同じ箇所へ対応させています。写真の枠や一覧を選ぶと、両側が連動します。</p>
+<div class="notice"><strong>内部構成の照合途中です。工程動作はまだ作成していません。</strong><br>
+補機ヒューズ5個と中央被覆内の主ヒューズを追加照合しました。抵抗の旧写真での位置、配線の両端、端子の積層は未確定です。
+部品の省略を許可した完成モデルではありません。</div>
+<div class="toolbar"><label class="feature-label">対象 <select id="feature"></select></label><button id="all" type="button">全体</button><span class="pill" id="count"></span></div>
+<div class="pair">
+<section class="panel"><h2>照合元の写真・映像</h2><label>参照 <select id="source-view"></select></label><div class="stage"><svg id="photo" viewBox="0 0 1620 1080" aria-label="指定写真と識別枠"><image href="references/ampere_product_photo_1.jpg" width="1620" height="1080"></image><g id="marks"></g></svg></div>
+<p class="muted" id="source-caption"></p>
+<div class="links"><a href="references/ampere_product_photo_2.jpg" target="_blank">接続部の詳細写真</a><a href="references/ampere_product_photo_3.jpg" target="_blank">別角度の写真</a></div></section>
+<section class="panel"><h2>修正した静止モデル</h2><div class="stage"><canvas id="model" aria-label="写真の識別IDに対応する3Dモデル"></canvas></div>
+<div class="toolbar"><button type="button" data-camera="top">上面</button><button type="button" data-camera="oblique">斜め</button><button type="button" data-camera="front">正面</button><label><input id="isolate" type="checkbox">選択対象だけ表示</label><label><input id="uncover" type="checkbox">筐体と中央被覆を非表示</label></div>
+<p class="muted">ドラッグで回転、ホイールで拡大。黄色が選択対象。「選択対象だけ表示」で単体を確認できます。TE形状は公式CAD、それ以外の内部形状・高さ・太さは写真からの表示用推定です。</p>
+<p id="gl-error" hidden>3D表示を開始できませんでした。下の静止画像またはBlenderファイルを開いてください。</p></section></div>
+<div class="detail"><strong id="selected-title">全体を表示</strong><p id="selected-note">写真の全ての線と隠れた部品の対応は未完了です。下の未対応一覧を含めて確認してください。</p><p class="muted" id="selected-basis"></p></div>
+<div class="links"><a href="UR15_JB_photo_correspondence_v02_p02.blend">編集用Blender</a><a href="previews/top.png">静止画像・上面</a><a href="previews/oblique.png">静止画像・斜め</a><a href="previews/uncovered.png">静止画像・被覆を非表示</a><a href="data/hvjb_photo_correspondence_v02_p02.json">部品・接続台帳JSON</a><a href="analysis/hvjb_photo_correspondence_v02.md">対応表</a><a href="audit/hvjb_photo_model_v02_p02.json">保存読戻し記録</a></div>
+<div class="grid"><section class="panel"><h2>公開構成にある必須項目</h2><p class="muted">補機5個の所在は確認できました。各接続口への配線割当は未確定です。「未特定」の必須部品を不要として扱いません。</p><table><thead><tr><th>項目</th><th>数</th><th>写真・モデルへの対応</th></tr></thead><tbody id="requirements"></tbody></table></section>
+<section class="panel"><h2>残っている照合</h2><ul id="unresolved"></ul><h3>可視部分の未完了項目</h3><ul id="visual-gaps"></ul><p>配線の色や近さから接続を決めず、見えない先は未接続の表示にしています。未対応箇所を確定してから工程・把持対象・工具方向を決めます。</p></section></div>
+<details open><summary>映像・資料から追加した確認事項</summary><ul id="updates"></ul><p>2025年の実作業映像と2022年の指定写真が同一製造版であるとは確定していません。抵抗位置や線長を転記していません。</p><div class="links"><a href="data/hvjb_video_evidence_v02.json">映像の出典・時刻・SHA</a><a href="https://www.youtube.com/watch?v=Sm_D-vmNYqc">公式組立映像</a><a href="https://www.youtube.com/watch?v=oXPIRNZ4xcs">公式解説映像</a></div><h3>工程から落とさない処理</h3><ul id="dependencies"></ul></details>
+<details><summary>公開回路の全接続群と低圧ピン</summary><p>13群は実配線の本数ではありません。電気的な接続と、実物の線・端子・ねじへの対応を分けて管理します。</p>
+<div class="grid"><table><thead><tr><th>ID</th><th>接続群</th><th>物理経路</th></tr></thead><tbody id="connections"></tbody></table><table><thead><tr><th>LVピン</th><th>公開図の名称</th></tr></thead><tbody id="pins"></tbody></table></div></details>
+<details><summary>識別対象の一覧</summary><table><thead><tr><th>ID</th><th>対象</th><th>対応・未確認点</th></tr></thead><tbody id="features"></tbody></table></details>
+<details><summary>今回変更した内容と残した条件</summary><ul>
+<li>補機ヒューズ5個（左3段・右2段）、中央被覆と主ヒューズを別IDへ対応。</li>
+<li>内側ハウジング5個を追加。キーはA/D/E/D/F。外側の3口/2口と別部品として記録。</li>
+<li>従来の仮S字ケーブル、2本の仮端子台、オレンジ制御ブロックの仮嵌合は新モデルに転用しない。</li>
+<li>内部ねじ頭の識別点と外部ヘッダーM4（8本＋6本）を区別。未公開のねじ品番・共締めを確定扱いにしない。</li>
+<li>圧着、端子挿入、内側ハウジング挿入、シール、導通/HVIL、蓋の工程は照合項目から落とさない。</li>
+<li>既存v03以下の動画・nativeを保全。新しい動作時間・実機成立の判定は行っていない。</li>
+</ul></details>
+<footer>参照：<a href="https://help.ampereev.com/hc/en-us/articles/31292470232087-High-Voltage-Junction-Box-HVJB-5-400">Ampere公式資料</a> / <a href="references/ampere_hvjb_5_400_current_v1_1.pdf">公開V1.1</a> / <a href="references/te_408_32095_instruction.pdf">TE 408-32095</a> / <a href="references/te_2103245_drawing.pdf">TE内側ハウジング図</a>。
+写真IDの対応と保存読戻しは補助的な観測です。寸法公差・保持力・締結品質・実機成立は未判定で、正式な判定はV12の独立経路によります。</footer>
+</main>
+<script id="payload" type="application/json">__PAYLOAD__</script>
+<script>
+"use strict";
+const $=id=>document.getElementById(id),data=JSON.parse($("payload").textContent),catalog=data.catalog,model=data.geometry;
+const rows=[...catalog.parts,...catalog.visible_fastener_features,...catalog.visible_wire_segments],byId=Object.fromEntries(rows.map(r=>[r.id,r]));
+const el=(tag,text)=>{const n=document.createElement(tag);if(text!==undefined)n.textContent=text;return n;},label=r=>r.name_ja||r.description_ja;
+let photoView="overview";
+let selected="",yaw=0,pitch=Math.PI/2,zoom=1,drag=null,pending=false;
+$("feature").append(new Option("全体", ""));
+for(const [title,items] of [["部品・外装",catalog.parts],["見える締結点",catalog.visible_fastener_features],["可視配線区間",catalog.visible_wire_segments]]){
+ const group=el("optgroup");group.label=title;for(const r of items)group.append(new Option(r.id+" · "+label(r),r.id));$("feature").append(group);
+}
+function choose(id){selected=id;if(["P19","P20","P21","P22"].includes(id)&&!$("isolate").checked){$("uncover").checked=true;yaw=.62;pitch=.88;}const sourceRow=byId[id];if(sourceRow&&!sourceRow.observations[photoView])photoView=sourceRow.photo;renderPhoto(photoView);$("feature").value=id;for(const mark of $("marks").children)mark.classList.toggle("selected",mark.dataset.id===id);
+ const r=byId[id];$("selected-title").textContent=r?r.id+" · "+label(r):"全体を表示";
+ $("selected-note").textContent=r?(r.note_ja||r.description_ja):"写真の全ての線と隠れた部品の対応は未完了です。下の未対応一覧を含めて確認してください。";
+ $("selected-basis").textContent=r?"モデルID: "+r.model_id+" ／ "+(r.part_number?"形状品番: "+r.part_number:"実物の型式・寸法は未確定"):"";schedule();}
+function pickButton(id){const b=el("button",id);b.type="button";b.onclick=()=>{choose(id);$("feature").scrollIntoView({block:"center",behavior:"smooth"});};return b;}
+const sourceNames={overview:"指定写真・上面",detail:"公式写真・端末詳細",side:"公式写真・側面"};
+for(const [id,r] of Object.entries(catalog.photos))$("source-view").append(new Option(sourceNames[id]||r.label_ja,id));
+function renderPhoto(view){photoView=view;$("source-view").value=view;const src=catalog.photos[view],size=src.size_px;
+ $("photo").setAttribute("viewBox",`0 0 ${size[0]} ${size[1]}`);const picture=$("photo").querySelector("image");picture.setAttribute("href",src.file);picture.setAttribute("width",size[0]);picture.setAttribute("height",size[1]);
+ $("source-caption").textContent=(sourceNames[view]||src.label_ja)+(src.requested_seek_s!==undefined?`（公開映像 ${src.requested_seek_s}秒）`:"")+"。枠は手動照合用、製造寸法の測定ではありません。";
+ $("marks").replaceChildren();
+ for(const r of rows){const obs=r.observations[view];if(!obs)continue;let mark;
+  if(obs.rect_px){mark=document.createElementNS("http://www.w3.org/2000/svg","rect");for(const [k,v] of ["x","y","width","height"].map((k,i)=>[k,obs.rect_px[i]]))mark.setAttribute(k,v);}
+  else if(obs.center_px){mark=document.createElementNS("http://www.w3.org/2000/svg","circle");mark.setAttribute("cx",obs.center_px[0]);mark.setAttribute("cy",obs.center_px[1]);mark.setAttribute("r",20);}
+  else{mark=document.createElementNS("http://www.w3.org/2000/svg","polyline");mark.setAttribute("points",obs.polyline_px.map(p=>p.join(",")).join(" "));}
+  mark.classList.add(obs.polyline_px?"wirepick":"pick");mark.classList.toggle("selected",r.id===selected);mark.dataset.id=r.id;mark.onclick=()=>choose(r.id);const title=document.createElementNS("http://www.w3.org/2000/svg","title");title.textContent=r.id+" · "+label(r);mark.append(title);$("marks").append(mark);
+ }
+}
+$("source-view").onchange=()=>{renderPhoto($("source-view").value);schedule();};renderPhoto("overview");
+for(const r of rows){const tr=el("tr"),id=el("td");id.append(pickButton(r.id));tr.append(id,el("td",label(r)),el("td",r.note_ja||r.description_ja));$("features").append(tr);}
+for(const text of ["補機5個はP05/P06/P19/P20/P21。段配置は確認済み、各口への配線は未完了。","P08は被覆、P22は主ヒューズ本体。公式解説の指定位置と単体例に対応し、寸法は表示用推定。","接触器の縦リブ、バスバー立上り、丸ねじ頭と六角ナット、端末被覆7領域を修正。","TE内側ハウジング5口には電力10コンタクトとHVIL10コンタクトが必要。品番・経路は未確定。"]){$("updates").append(el("li",text));}
+for(const r of catalog.assembly_dependencies)$("dependencies").append(el("li",r.id+" · "+r.name_ja+"。未確定: "+r.missing_ja));
+for(const r of catalog.required_functions){const tr=el("tr"),matched=el("td");if(r.matched_photo_ids.length){for(const id of r.matched_photo_ids)matched.append(pickButton(id),document.createTextNode(" "));}else{matched.textContent=r.location_candidates?"物理5個は確認済み・系統割当は未確定":"未特定";matched.className="pending";}tr.append(el("td",r.name_ja),el("td",r.quantity),matched);$("requirements").append(tr);}
+for(const text of catalog.unresolved)$("unresolved").append(el("li",text));for(const text of catalog.remaining_visual_coverage)$("visual-gaps").append(el("li",text));
+for(const r of catalog.electrical_groups){const tr=el("tr");tr.append(el("td",r.id),el("td",r.name_ja),el("td","未完了"));$("connections").append(tr);}
+for(const [pin,name] of Object.entries(catalog.lv_pin_map)){const tr=el("tr");tr.append(el("td",pin),el("td",name));$("pins").append(tr);}
+$("count").textContent=catalog.parts.length+" 部品等の識別対象 · 全BOM数ではありません";
+const canvas=$("model"),gl=canvas.getContext("webgl",{antialias:true,alpha:true,preserveDrawingBuffer:true});
+if(!gl){$("gl-error").hidden=false;throw new Error("WebGL unavailable");}
+const unit=v=>{const n=Math.hypot(...v)||1;return v.map(x=>x/n);},cross=(a,b)=>[a[1]*b[2]-a[2]*b[1],a[2]*b[0]-a[0]*b[2],a[0]*b[1]-a[1]*b[0]],sub=(a,b)=>a.map((x,i)=>x-b[i]),dot=(a,b)=>a.reduce((s,x,i)=>s+x*b[i],0);
+function shader(type,source){const s=gl.createShader(type);gl.shaderSource(s,source);gl.compileShader(s);if(!gl.getShaderParameter(s,gl.COMPILE_STATUS))throw new Error(gl.getShaderInfoLog(s));return s;}
+const program=gl.createProgram();gl.attachShader(program,shader(gl.VERTEX_SHADER,"attribute vec3 p;attribute vec3 c;uniform vec3 right;uniform vec3 up;uniform vec3 forward;uniform vec3 focus;uniform vec2 scale;varying vec3 color;void main(){vec3 v=p-focus;gl_Position=vec4(dot(v,right)*scale.x,dot(v,up)*scale.y,-dot(v,forward),1.);color=c;}"));
+gl.attachShader(program,shader(gl.FRAGMENT_SHADER,"precision mediump float;varying vec3 color;uniform float highlight;void main(){gl_FragColor=vec4(mix(color,vec3(1.,.65,.12),highlight),1.);}"));gl.linkProgram(program);if(!gl.getProgramParameter(program,gl.LINK_STATUS))throw new Error(gl.getProgramInfoLog(program));gl.useProgram(program);
+const uniform=Object.fromEntries(["right","up","forward","focus","scale","highlight"].map(k=>[k,gl.getUniformLocation(program,k)])),p=gl.getAttribLocation(program,"p"),c=gl.getAttribLocation(program,"c"),light=unit([-.3,-.5,1]);
+gl.enableVertexAttribArray(p);gl.enableVertexAttribArray(c);gl.enable(gl.DEPTH_TEST);gl.depthFunc(gl.LEQUAL);
+const buffers=[],bounds=[[Infinity,Infinity,Infinity],[-Infinity,-Infinity,-Infinity]];let triangles=0,finite=true;
+for(const [id,row] of Object.entries(model)){const vertices=[];
+ for(const obj of row.meshes){for(const v of obj.vertices){finite=finite&&v.every(Number.isFinite);for(let k=0;k<3;k++){bounds[0][k]=Math.min(bounds[0][k],v[k]);bounds[1][k]=Math.max(bounds[1][k],v[k]);}}
+  for(const f of obj.faces){const n=unit(cross(sub(obj.vertices[f[1]],obj.vertices[f[0]]),sub(obj.vertices[f[2]],obj.vertices[f[0]]))),shade=.48+.52*Math.abs(dot(n,light)),rgb=obj.color.slice(0,3).map(x=>Math.pow(Math.max(0,x),1/2.2)*shade);for(const j of f)vertices.push(...obj.vertices[j],...rgb);triangles++;}
+ }
+ const buffer=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,buffer);gl.bufferData(gl.ARRAY_BUFFER,new Float32Array(vertices),gl.STATIC_DRAW);buffers.push({id,buffer,count:vertices.length/6});
+}
+const focus=bounds[0].map((x,i)=>(x+bounds[1][i])/2),extent=Math.max(...bounds[0].map((x,i)=>bounds[1][i]-x));
+function draw(){pending=false;const w=canvas.clientWidth,h=canvas.clientHeight,dpr=Math.min(devicePixelRatio||1,1.5);canvas.width=Math.round(w*dpr);canvas.height=Math.round(h*dpr);gl.viewport(0,0,canvas.width,canvas.height);gl.clearColor(0,0,0,0);gl.clear(gl.COLOR_BUFFER_BIT|gl.DEPTH_BUFFER_BIT);
+ const right=[Math.cos(yaw),Math.sin(yaw),0],up=[-Math.sin(yaw)*Math.sin(pitch),Math.cos(yaw)*Math.sin(pitch),Math.cos(pitch)],forward=cross(right,up),scale=.86*Math.min(w/extent,h/(extent*.72))*zoom;
+ for(const [key,value] of Object.entries({right,up,forward,focus}))gl.uniform3fv(uniform[key],value);gl.uniform2f(uniform.scale,2*scale/w,2*scale/h);
+ let shown=0;for(const row of buffers){if($("uncover").checked&&!$("isolate").checked&&["P01","P08"].includes(row.id))continue;if($("isolate").checked&&selected&&row.id!==selected)continue;gl.bindBuffer(gl.ARRAY_BUFFER,row.buffer);gl.vertexAttribPointer(p,3,gl.FLOAT,false,24,0);gl.vertexAttribPointer(c,3,gl.FLOAT,false,24,12);gl.uniform1f(uniform.highlight,row.id===selected?.6:0);gl.drawArrays(gl.TRIANGLES,0,row.count);shown++;}
+ window.photoReviewRendered={selected,source_view:photoView,uncovered:$("uncover").checked,model_features:buffers.length,shown_features:shown,triangles,finite,gl_error:gl.getError(),motion_created:false};
+}
+function schedule(){if(!pending){pending=true;requestAnimationFrame(draw);}}
+$("feature").onchange=()=>choose($("feature").value);$("all").onclick=()=>{choose("");zoom=1;$("isolate").checked=false;$("uncover").checked=false;schedule();};$("isolate").onchange=schedule;$("uncover").onchange=schedule;
+for(const b of document.querySelectorAll("[data-camera]"))b.onclick=()=>{[yaw,pitch]={top:[0,Math.PI/2],oblique:[.62,.88],front:[0,0]}[b.dataset.camera];zoom=1;schedule();};
+canvas.onpointerdown=e=>{drag=[e.clientX,e.clientY];canvas.setPointerCapture(e.pointerId);};canvas.onpointermove=e=>{if(!drag)return;yaw+=(e.clientX-drag[0])*.007;pitch=Math.max(-1.5,Math.min(Math.PI/2,pitch+(e.clientY-drag[1])*.007));drag=[e.clientX,e.clientY];schedule();};canvas.onpointerup=()=>drag=null;canvas.onpointercancel=()=>drag=null;
+canvas.addEventListener("wheel",e=>{e.preventDefault();zoom=Math.max(.4,Math.min(5,zoom*Math.exp(-e.deltaY*.001)));schedule();},{passive:false});new ResizeObserver(schedule).observe(canvas);schedule();
+</script></body></html>

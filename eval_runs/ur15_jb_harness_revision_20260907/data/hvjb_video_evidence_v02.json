@@ -1,0 +1,147 @@
+{
+  "observed_at": "2026-09-15T10:21:30.158825+09:00",
+  "sources": {
+    "assembly_20250607": {
+      "title": "ASSEMBLY! EV High Voltage Junction Box",
+      "url": "https://www.youtube.com/watch?v=Sm_D-vmNYqc",
+      "channel": "Ampere EV",
+      "upload_date": "20250607",
+      "file": "references/hvjb_assembly_followup_20260915/assembly_20250607.mp4",
+      "sha256": "b7fcb74eaeec06e517d5726994a38a6b0812e05198d8b771b7ff771e68a0e1eb",
+      "metadata_sha256": "69e2f968a38253ec5608439116c2ef8cc04669cbd03b7275f8feab63fbc9f111",
+      "size_px": [
+        1920,
+        1080
+      ],
+      "duration_s": 274.140533,
+      "frame_rate": "30000/1001",
+      "automatic_caption_role": "navigation aid only; not a verified transcription or part-number source"
+    },
+    "explanation_20240201": {
+      "title": "EV Enlightenment - JUNCTION BOX EXPLAINED",
+      "url": "https://www.youtube.com/watch?v=oXPIRNZ4xcs",
+      "channel": "Ampere EV",
+      "upload_date": "20240201",
+      "file": "references/hvjb_assembly_followup_20260915/explanation_20240201.mp4",
+      "sha256": "72e7a53fcc88d56767464f82816d89946ba3234e881f87db762f69ef564dbc97",
+      "metadata_sha256": "0a41fc8066b9c790054240be23879a9770996e478eb0ab0bc3ab6de95b12d0cf",
+      "size_px": [
+        1920,
+        1080
+      ],
+      "duration_s": 183.399883,
+      "frame_rate": "60000/1001",
+      "automatic_caption_role": "navigation aid only; not a verified transcription or part-number source"
+    }
+  },
+  "frames": {
+    "fuse_detail": {
+      "file": "references/hvjb_assembly_followup_20260915/fuse_detail.png",
+      "sha256": "1b822cd4a08c8de69d5c47e0771d955b5571d4d3f76fa0f8515e8c033e834edb",
+      "source": "assembly_20250607",
+      "requested_seek_s": 35,
+      "timestamp_basis": "ffmpeg accurate seek; first decoded display frame at/after requested time",
+      "size_px": [
+        1920,
+        1080
+      ],
+      "label_ja": "挿入写真：後方の補機ヒューズ5個",
+      "pixel_transform": "none; decoded full frame, no crop or generative edit"
+    },
+    "main_pointer": {
+      "file": "references/hvjb_assembly_followup_20260915/main_pointer.png",
+      "sha256": "184be1b27d8b8d34aaa3861d9ddbabb031700181c76a111d3dfa398389c8b533",
+      "source": "explanation_20240201",
+      "requested_seek_s": 68,
+      "timestamp_basis": "ffmpeg accurate seek; first decoded display frame at/after requested time",
+      "size_px": [
+        1920,
+        1080
+      ],
+      "label_ja": "指定写真上の主ヒューズ付近を指す公式解説",
+      "pixel_transform": "none; decoded full frame, no crop or generative edit"
+    },
+    "main_sample": {
+      "file": "references/hvjb_assembly_followup_20260915/main_sample.png",
+      "sha256": "cc72a8e0689ca51fbe03ce3e3061bb56a20331140ff5c123832a06e43a3721b0",
+      "source": "explanation_20240201",
+      "requested_seek_s": 72,
+      "timestamp_basis": "ffmpeg accurate seek; first decoded display frame at/after requested time",
+      "size_px": [
+        1920,
+        1080
+      ],
+      "label_ja": "主ヒューズ説明時の円筒胴・両端平板端子",
+      "pixel_transform": "none; decoded full frame, no crop or generative edit"
+    },
+    "subassembly": {
+      "file": "references/hvjb_assembly_followup_20260915/subassembly.png",
+      "sha256": "ae36aa75719958753f4436dfbae171b1c5e969f7d931fab39e227122585bcddc",
+      "source": "assembly_20250607",
+      "requested_seek_s": 24,
+      "timestamp_basis": "ffmpeg accurate seek; first decoded display frame at/after requested time",
+      "size_px": [
+        1920,
+        1080
+      ],
+      "label_ja": "2025年の組立例：抵抗と接触器の下板",
+      "pixel_transform": "none; decoded full frame, no crop or generative edit"
+    },
+    "panel_wiring": {
+      "file": "references/hvjb_assembly_followup_20260915/panel_wiring.png",
+      "sha256": "9a4089947e62ef79eda7c0c4da34933a603aae9f9dcdd467922ff668066bcc50",
+      "source": "assembly_20250607",
+      "requested_seek_s": 50,
+      "timestamp_basis": "ffmpeg accurate seek; first decoded display frame at/after requested time",
+      "size_px": [
+        1920,
+        1080
+      ],
+      "label_ja": "2025年の組立例：箱外でヒューズ板へ配線",
+      "pixel_transform": "none; decoded full frame, no crop or generative edit"
+    },
+    "insert_plate": {
+      "file": "references/hvjb_assembly_followup_20260915/insert_plate.png",
+      "sha256": "17f3bd544afcd121f87e36edb026d41d4172557487f54b705a3ae672573f6dec",
+      "source": "assembly_20250607",
+      "requested_seek_s": 145,
+      "timestamp_basis": "ffmpeg accurate seek; first decoded display frame at/after requested time",
+      "size_px": [
+        1920,
+        1080
+      ],
+      "label_ja": "2025年の組立例：内部サブアセンブリを箱へ挿入",
+      "pixel_transform": "none; decoded full frame, no crop or generative edit"
+    },
+    "crimp": {
+      "file": "references/hvjb_assembly_followup_20260915/crimp.png",
+      "sha256": "f6fce41ea84004b571b30bd1a6c4cef05b23cbf15bdb28cb8b70ffc3b9f9f8c1",
+      "source": "assembly_20250607",
+      "requested_seek_s": 103,
+      "timestamp_basis": "ffmpeg accurate seek; first decoded display frame at/after requested time",
+      "size_px": [
+        1920,
+        1080
+      ],
+      "label_ja": "2025年の組立例：配線端末の準備",
+      "pixel_transform": "none; decoded full frame, no crop or generative edit"
+    },
+    "busbars": {
+      "file": "references/hvjb_assembly_followup_20260915/busbars.png",
+      "sha256": "e1da438a6be112804da056e47242ad0fde31020eff240be2f66dcbaf81835c51",
+      "source": "assembly_20250607",
+      "requested_seek_s": 237,
+      "timestamp_basis": "ffmpeg accurate seek; first decoded display frame at/after requested time",
+      "size_px": [
+        1920,
+        1080
+      ],
+      "label_ja": "2025年の組立例：別体バスバーを後から取り付け",
+      "pixel_transform": "none; decoded full frame, no crop or generative edit"
+    }
+  },
+  "revision_boundary_ja": "挿入写真は指定写真の接触器・中央被覆・バスバー・補機板と外観を照合。2025年の実作業映像は同一製造版との確認がなく、抵抗配置・配線経路を旧写真へ転記しない。",
+  "source_video_delivery": false,
+  "new_process_movie_created": false,
+  "formal_physical_verdict": null
+}
