@@ -1,0 +1,155 @@
+{
+  "revision": "v02",
+  "date": "2026-09-16",
+  "title_ja": "HVJB：下板・ヒューズ板の同時搭載と未接続端の引出し",
+  "base_input": "data/hvjb_preassembly_inputs_v01.json",
+  "evidence_index": "data/hvjb_plate_evidence_v01.json",
+  "change_summary_ja": [
+    "2:26では下板側とヒューズ板側が一緒に筐体へ運ばれる。2025年映像の工程対応は、箱外で合流してから同時に搭載する順へ絞る。板同士の固定方法・固定完了は未確認。",
+    "2:34では内側ハウジングの自由端が上縁側にあり、2:50では側面開口を通って外にある。外側ヘッダーの取付前に端末を開口へ通す作業を追加する。",
+    "筐体底面P01とは別に、映像の下板をV25_BASE_PLATEとして登録する。これは2025年の観察台帳であり、2022年写真の追加部品・確定寸法・把持面を意味しない。"
+  ],
+  "workflow_ja": "筐体供給・線材準備 → A：下板側外組み ／ B：ヒューズ板側外組み → C：箱外で合流・同時搭載 → 箱内工具作業・未接続端の開口引出し → ヘッダー・バスバー・残りの接続 → 蓋・検査・払出し",
+  "observations": [
+    {
+      "frame": "plate_024",
+      "time_ja": "0:24 · 下板と別置きのヒューズ板",
+      "observation_ja": "接触器・リレー・金色の抵抗等が載る金属の下板が筐体外にある。ヒューズ板は右奥に別置き。下板の手前の縁、切欠き、穴の一部が見える。",
+      "limit_ja": "手や部品に隠れる輪郭、板厚、穴径、裏面支持は読めない。印は画像上の対象位置で、加工輪郭・把持点ではない。",
+      "markers": [
+        {"label": "1", "xy_px": [1314, 679], "text_ja": "下板の見えている縁。筐体底面ではない。", "entity": "V25_BASE_PLATE"},
+        {"label": "2", "xy_px": [1742, 305], "text_ja": "右奥に別置きされたヒューズ板。", "entity": "V25_FUSE_PANEL"}
+      ]
+    },
+    {
+      "frame": "plate_050",
+      "time_ja": "0:50 · ヒューズ板側の外組み",
+      "observation_ja": "筐体外でヒューズ板側の配線端末を扱っている。",
+      "limit_ja": "下板との機械結合、線ごとの遠端と共締め積層はこの場面から確定しない。",
+      "markers": []
+    },
+    {
+      "frame": "crimp",
+      "time_ja": "1:43 · 端末加工",
+      "observation_ja": "線材端末の加工・圧着準備が別作業として示される。",
+      "limit_ja": "加工条件、全端子品番、線長は未確定。準備を完成部品の供給に含めるかも未選定。",
+      "markers": []
+    },
+    {
+      "frame": "plate_142",
+      "time_ja": "2:22 · 筐体と外側ヘッダー",
+      "observation_ja": "内部ユニット搭載前の筐体と、台上の外側ヘッダーが見える。",
+      "limit_ja": "隠れた固定部や部品の全数は確定しない。",
+      "markers": []
+    },
+    {
+      "frame": "plate_146",
+      "time_ja": "2:26 · 二つの板側を一緒に搭載",
+      "observation_ja": "白いヒューズ板と接触器・リレー等の下板側が一緒に持たれ、筐体へ入る。外側ヘッダーは台上にある。",
+      "limit_ja": "板同士の固定作業・固定具は映っていない。同時搬送の観察を剛結・締結完了の判定にしない。手に隠れた下板の全形状も不明。",
+      "markers": [
+        {"label": "1", "xy_px": [840, 300], "text_ja": "ユニットと一緒に運ばれるヒューズ板。", "entity": "V25_FUSE_PANEL"},
+        {"label": "2", "xy_px": [985, 453], "text_ja": "同じ搬送中の下板側部品。板の縁・把持位置は遮蔽。", "entity": "V25_BASE_PLATE"},
+        {"label": "3", "xy_px": [683, 655], "text_ja": "受け側の筐体。可搬下板とは別の物。", "entity": "V25_CASE"},
+        {"label": "4", "xy_px": [536, 470], "text_ja": "別置きの外側ヘッダー。", "entity": "V25_OUTER_HEADERS"}
+      ]
+    },
+    {
+      "frame": "plate_154",
+      "time_ja": "2:34 · 搭載後も自由端が残る",
+      "observation_ja": "両板側の部品が筐体内にある。内側ハウジングと丸端子付きの未接続端が筐体の外へ出ている。外側ヘッダーは別置き。",
+      "limit_ja": "下板の全固定完了、端末の全数・所属・支持方法は確定しない。",
+      "markers": [
+        {"label": "1", "xy_px": [1100, 610], "text_ja": "上縁から外へ出る内側ハウジング付き自由端。", "entity": "V25_INNER_ENDS"},
+        {"label": "2", "xy_px": [847, 642], "text_ja": "未接続の丸端子。", "entity": "V25_RING_ENDS"},
+        {"label": "3", "xy_px": [546, 455], "text_ja": "外側ヘッダーは台上に残る。", "entity": "V25_OUTER_HEADERS"}
+      ]
+    },
+    {
+      "frame": "plate_158",
+      "time_ja": "2:38 · 搭載後の箱内工具作業",
+      "observation_ja": "上からドライバーを筐体内へ入れて作業する。未接続の内側ハウジングと丸端子が残り、外側ヘッダーは別置き。",
+      "limit_ja": "工具先端と固定点が隠れる。下板ねじの位置・数・積層・締付条件を割り当てない。見えるハウジング数を必要な腕数へ読み替えない。",
+      "markers": [
+        {"label": "1", "xy_px": [881, 218], "text_ja": "ドライバー軸。作業点は部品・配線で遮蔽。", "entity": null},
+        {"label": "2", "xy_px": [616, 462], "text_ja": "複数の内側ハウジング自由端。", "entity": "V25_INNER_ENDS"},
+        {"label": "3", "xy_px": [946, 411], "text_ja": "丸端子付き自由端。", "entity": "V25_RING_ENDS"}
+      ]
+    },
+    {
+      "frame": "plate_162",
+      "time_ja": "2:42 · 人の手が離れる場面",
+      "observation_ja": "搭載済みユニットからの線や端末が筐体周辺に残る。人の手が一時的に離れている。",
+      "limit_ja": "縁や他の線への仮置きをロボットの保持仕様として採用しない。自動受渡し時の支持役・案内役は未確定。",
+      "markers": []
+    },
+    {
+      "frame": "plate_170",
+      "time_ja": "2:50 · 開口から端末を引き出した状態",
+      "observation_ja": "内側ハウジング付きの線が筐体側面の開口を通って外へ出ている。外側ヘッダーはまだ台上。上縁から出ていた2:34とは配置が変わる。",
+      "limit_ja": "開口へ通す指の接触面・線ごとの順序・引張力は未確認。数字の手書き表示を写真のI01〜I05や電気ネットへ割り当てない。",
+      "markers": [
+        {"label": "1", "xy_px": [723, 449], "text_ja": "筐体側面の開口を通る内側端末。", "entity": "V25_INNER_ENDS"},
+        {"label": "2", "xy_px": [928, 550], "text_ja": "もう一方の開口側にも自由端が残る。", "entity": "V25_INNER_ENDS"},
+        {"label": "3", "xy_px": [1788, 462], "text_ja": "外側ヘッダーは別置き。開口引出しが先。", "entity": "V25_OUTER_HEADERS"}
+      ]
+    },
+    {
+      "frame": "busbars",
+      "time_ja": "3:57 · 接続口の後にバスバー",
+      "observation_ja": "筐体側接続口の取付後、バスバーを組む作業へ進む。",
+      "limit_ja": "2022年完成写真と2025年映像で、全導体の製造部品境界・積層が同一とは未確認。",
+      "markers": []
+    }
+  ],
+  "cell_updates": [
+    {"id": "C", "work_ja": "A/B側ユニットを箱外で合流させ、二つの板側を一緒に筐体へ搭載する。搭載後の工具作業、内側端末の開口引出し、外側ヘッダー、バスバーと残りの接続・締結を行う比較。", "open_ja": "箱外での板同士の固定方法・固定具、自由端の支持と開口通過、必要な保持役、箱内の固定点・最終共締め・LV/HVIL。"}
+  ],
+  "operation_updates": [
+    {"id": "O30", "stage_ja": "箱外で合流・受渡し", "basis_ja": "24秒は別置き、146秒は同時に搬送。機械結合の作業は未確認", "details_ja": "比較案ではCの箱外でA/B側を合流させる。2025年の同時搭載を反映するが、板同士の固定動作・固定具・完成状態は未設定。支持と自由端案内の受渡しを省略しない。", "seconds": 146},
+    {"id": "O40", "stage_ja": "両板側を一緒に筐体搭載", "basis_ja": "公式映像144〜154秒", "details_ja": "独立した下板側とヒューズ板側を同時に搬送して筐体へ入れる。筐体底面P01を可搬下板として動かさない。搭載だけで機械固定完了と扱わない。", "seconds": 146}
+  ],
+  "operation_insertions": [
+    {"after": "O40", "operation": {"id": "O42", "stage_ja": "搭載後の箱内工具作業", "cell": "C", "basis_ja": "公式映像156〜166秒の工具軸。作業点は遮蔽", "details_ja": "箱内への工具接近を残す。対象のねじ位置・数・固定部材・締付条件は未確定。下板の固定動作を架空のねじで埋めない。", "seconds": 158}},
+    {"after": "O42", "operation": {"id": "O45", "stage_ja": "未接続端を側面開口へ通す", "cell": "C", "basis_ja": "154秒は上縁側、170秒は側面開口を通過した状態", "details_ja": "外側ヘッダーの前に内側ハウジング付き自由端を開口へ案内する。筐体支持、ハウジングの姿勢保持、配線案内を対応させる。個別の通過順序・把持面・保持具は未設定。", "seconds": 170}}
+  ],
+  "interface_updates": [
+    {"id": "U01", "facts_ja": "2025年の下板をV25_BASE_PLATEとして筐体とは別に登録。24秒に金属板の縁・切欠き等が部分的に見える。既存P01はケースの底面・側壁。", "next_ja": "全輪郭・板厚・裏面支持・穴・把持面を対応する。2022年写真の部品IDへの同一版対応はnullのまま。観察台帳を寸法確定メッシュにしない。"},
+    {"id": "U03", "facts_ja": "146秒には下板側とヒューズ板側が一緒に筐体へ入る。2025年の搭載順は絞れたが、板同士をどう固定したかは未確認。", "next_ja": "箱外合流→同時搭載を工程対応へ反映。板同士の固定具・固定点・組付け順は残す。同時搬送を剛結・締結完了の証拠にはしない。"},
+    {"id": "U04", "facts_ja": "154/158秒の内側ハウジング・丸端子に加え、170秒では内側ハウジングが側面開口から外に出ている。自由端の受渡しだけでなく開口通過が必要。", "next_ja": "ユニット支持・端末保持・配線案内を別の役割として対応。線ごとの所属、全自由端数、必要な同時保持数は未確定。手作業の縁への仮置き、上押さえ、青い外部保持具は採用しない。"}
+  ],
+  "observed_entities": [
+    {"id": "V25_BASE_PLATE", "kind": "part", "name_ja": "2025年映像の可搬下板", "candidate_photo_ids": [], "confirmed_photo_id": null, "observation_ja": "24秒で金属板の表面・縁・切欠き等が部分的に見え、146秒で部品を載せた側が筐体へ運ばれる。", "unresolved_ja": "輪郭の隠れた部分、板厚、材質規格、穴径と配置、裏面支持、ヒューズ板との固定、許容把持面。", "evidence_frames": ["plate_024", "plate_146"], "geometry_dimensions_m": null, "mounting_points_m": null, "grasp_surfaces": null, "source_model_object": null},
+    {"id": "V25_FUSE_PANEL", "kind": "part", "name_ja": "2025年映像のヒューズ板", "candidate_photo_ids": ["P07"], "confirmed_photo_id": null, "observation_ja": "24秒で別置き、50秒で外組み、146秒で下板側と同時に搬送、154秒で筐体内。", "unresolved_ja": "2022年との同一版対応、下板との接合、全固定点。", "evidence_frames": ["plate_024", "plate_050", "plate_146", "plate_154"], "geometry_dimensions_m": null, "mounting_points_m": null, "grasp_surfaces": null, "source_model_object": null},
+    {"id": "V25_CASE", "kind": "part", "name_ja": "2025年映像の筐体", "candidate_photo_ids": ["P01"], "confirmed_photo_id": null, "observation_ja": "142/146秒で搬送ユニットとは別。170秒で内側端末が側面開口を通る。", "unresolved_ja": "内部下板との固定、内寸、底面の支持構造、2022年との寸法同一性。", "evidence_frames": ["plate_142", "plate_146", "plate_170"], "geometry_dimensions_m": null, "mounting_points_m": null, "grasp_surfaces": null, "source_model_object": null},
+    {"id": "V25_INNER_ENDS", "kind": "observed_group", "name_ja": "未接続の内側ハウジング群", "candidate_photo_ids": ["I01", "I02", "I03", "I04", "I05"], "confirmed_photo_id": null, "observation_ja": "154/158秒で自由端、170秒で側面開口を通って外へ出る。", "unresolved_ja": "一対一のI番号、線の両端、全自由端の追跡、同時保持数、開口通過の個別順序。", "evidence_frames": ["plate_154", "plate_158", "plate_170"], "physical_quantity_selected": null, "source_model_object": null},
+    {"id": "V25_RING_ENDS", "kind": "observed_group", "name_ja": "未接続の丸端子群", "candidate_photo_ids": ["L01", "L02", "L03", "L04", "L05", "L06", "L07"], "confirmed_photo_id": null, "observation_ja": "搭載中と搭載後に丸端子の自由端が残る。", "unresolved_ja": "写真L番号への対応、接続先、加工済み線材数、共締め積層。", "evidence_frames": ["plate_146", "plate_154", "plate_158", "plate_170"], "physical_quantity_selected": null, "source_model_object": null},
+    {"id": "V25_OUTER_HEADERS", "kind": "observed_group", "name_ja": "別置きの筐体側外側ヘッダー", "candidate_photo_ids": ["P16", "P17"], "confirmed_photo_id": null, "observation_ja": "ユニット搭載中と170秒の引出し後も台上。内側ハウジングと区別する。", "unresolved_ja": "2025年映像と2022年写真の品番同一性。既存TE図面の記録は維持。", "evidence_frames": ["plate_146", "plate_154", "plate_170"], "physical_quantity_selected": null, "source_model_object": null}
+  ],
+  "assembly_relations": [
+    {"id": "R01", "from": "V25_BASE_PLATE", "to": "V25_CASE", "relation": "separate_parts_before_insertion", "basis_ja": "24/146秒の補助観察", "mechanical_joint": null},
+    {"id": "R02", "from": "V25_BASE_PLATE", "to": "V25_FUSE_PANEL", "relation": "co_carried_at_case_insertion", "basis_ja": "146秒。別々の箱内搭載はこの映像に対応しない", "mechanical_joint": null},
+    {"id": "R03", "from": "V25_INNER_ENDS", "to": "V25_CASE", "relation": "routed_through_side_openings_before_outer_headers", "basis_ja": "154秒と170秒の状態差。個々の通過動作は未追跡", "mechanical_joint": null},
+    {"id": "R04", "from": "V25_RING_ENDS", "to": "V25_BASE_PLATE", "relation": "free_leads_present_during_and_after_insertion", "basis_ja": "146/154/158秒。全線が下板所属という意味ではない", "mechanical_joint": null}
+  ],
+  "handoff_roles": [
+    {"id": "HIF01", "stage_ja": "A/Bから箱外合流", "unit_support_ja": "下板側・ヒューズ板側をそれぞれ支持して受け渡す役割。", "end_guidance_ja": "各側から出る未接続端の所属と受渡しを対応。", "tool_ja": "板同士の結合方式・工具は未確認。", "open_ja": "結合形状・把持面・荷重・引継ぎ位置。", "simultaneous_robot_roles_selected": null},
+    {"id": "HIF02", "stage_ja": "同時搭載 O40", "unit_support_ja": "合流後のユニットを支持して筐体へ移す役割。", "end_guidance_ja": "自由端を筐体縁・部品との間に挟まないよう案内する役割。", "tool_ja": "搭載と本締め完了を区別。", "open_ja": "ユニットと端末を一つの手先で扱えるか、独立した案内役が必要かは未選定。", "simultaneous_robot_roles_selected": null},
+    {"id": "HIF03", "stage_ja": "搭載後の工具接近 O42", "unit_support_ja": "搭載後の支持・固定状態を先に対応。", "end_guidance_ja": "工具経路から自由端を分けて支持する役割。", "tool_ja": "箱内の作業点が見えず、ねじ・工具姿勢は未割当。", "open_ja": "縁に線を掛けて人が手を離す場面を自動保持としない。", "simultaneous_robot_roles_selected": null},
+    {"id": "HIF04", "stage_ja": "開口引出し O45", "unit_support_ja": "筐体と内部ユニットの支持。", "end_guidance_ja": "内側ハウジングの姿勢保持と線の案内。金属コンタクトに力を加える把持を追加しない。", "tool_ja": "外側ヘッダー施工前の独立作業。", "open_ja": "開口の有効寸法、ハウジング外形、必要な向き、個別通過順序、受渡し先。", "simultaneous_robot_roles_selected": null}
+  ],
+  "process_precedence": [
+    {"from": "O10", "to": "O30", "basis": "cell_comparison"},
+    {"from": "O20", "to": "O30", "basis": "cell_comparison"},
+    {"from": "O30", "to": "O40", "basis": "2025_co_carried_observation; joint_creation_unobserved"},
+    {"from": "O00", "to": "O40", "basis": "case_required_at_insertion"},
+    {"from": "O40", "to": "O42", "basis": "2025_observed_sequence"},
+    {"from": "O42", "to": "O45", "basis": "2025_observed_states; not_mandatory_universal_order"},
+    {"from": "O45", "to": "O50", "basis": "2025_inner_ends_out_before_outer_headers"},
+    {"from": "O50", "to": "O60", "basis": "2025_observed_sequence"}
+  ],
+  "annotation_scope_ja": "数字の印は無加工画像に重ねる表示用の案内。画像座標を記録しただけで、実寸・加工輪郭・把持点ではない。元画像は別リンクでそのまま開ける。",
+  "geometry_status_ja": "V25は2025年映像の観察台帳。既存2022年写真の92特徴とは別で、確認済みの実物BOMへ加算しない。下板の加工輪郭・支持・穴・把持面を推定したメッシュは作っていない。",
+  "physical_acceptance_verdict": null,
+  "motion_created": false
+}

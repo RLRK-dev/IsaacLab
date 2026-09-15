@@ -1,0 +1,144 @@
+{
+  "observed_at": "2026-09-15T18:02:37.450Z",
+  "directory": "/home/rlrk/Downloads/THREAD_HVJB_外組み工程_v02_20260916",
+  "page_sha256": "6288a3d98e013cf766c6729999dc6561f33eeeaeead99ad73775ffb8e092617b",
+  "initial": {
+    "features": 92,
+    "operations": 12,
+    "requirements": 17,
+    "groups": 13,
+    "cells": 3,
+    "entities": 6,
+    "handoffs": 4,
+    "archiveFrames": 18
+  },
+  "evidence": [
+    {
+      "index": 0,
+      "width": 1920,
+      "height": 1080,
+      "url": "https://www.youtube.com/watch?v=Sm_D-vmNYqc&t=24s",
+      "markers": 2,
+      "legend": 2,
+      "rawImage": "evidence/assembly_024s.png"
+    },
+    {
+      "index": 1,
+      "width": 1920,
+      "height": 1080,
+      "url": "https://www.youtube.com/watch?v=Sm_D-vmNYqc&t=50s",
+      "markers": 0,
+      "legend": 0,
+      "rawImage": "evidence/assembly_050s.png"
+    },
+    {
+      "index": 2,
+      "width": 1920,
+      "height": 1080,
+      "url": "https://www.youtube.com/watch?v=Sm_D-vmNYqc&t=103s",
+      "markers": 0,
+      "legend": 0,
+      "rawImage": "evidence/crimp.png"
+    },
+    {
+      "index": 3,
+      "width": 1920,
+      "height": 1080,
+      "url": "https://www.youtube.com/watch?v=Sm_D-vmNYqc&t=142s",
+      "markers": 0,
+      "legend": 0,
+      "rawImage": "evidence/assembly_142s.png"
+    },
+    {
+      "index": 4,
+      "width": 1920,
+      "height": 1080,
+      "url": "https://www.youtube.com/watch?v=Sm_D-vmNYqc&t=146s",
+      "markers": 4,
+      "legend": 4,
+      "rawImage": "evidence/assembly_146s.png"
+    },
+    {
+      "index": 5,
+      "width": 1920,
+      "height": 1080,
+      "url": "https://www.youtube.com/watch?v=Sm_D-vmNYqc&t=154s",
+      "markers": 3,
+      "legend": 3,
+      "rawImage": "evidence/assembly_154s.png"
+    },
+    {
+      "index": 6,
+      "width": 1920,
+      "height": 1080,
+      "url": "https://www.youtube.com/watch?v=Sm_D-vmNYqc&t=158s",
+      "markers": 3,
+      "legend": 3,
+      "rawImage": "evidence/assembly_158s.png"
+    },
+    {
+      "index": 7,
+      "width": 1920,
+      "height": 1080,
+      "url": "https://www.youtube.com/watch?v=Sm_D-vmNYqc&t=162s",
+      "markers": 0,
+      "legend": 0,
+      "rawImage": "evidence/assembly_162s.png"
+    },
+    {
+      "index": 8,
+      "width": 1920,
+      "height": 1080,
+      "url": "https://www.youtube.com/watch?v=Sm_D-vmNYqc&t=170s",
+      "markers": 3,
+      "legend": 3,
+      "rawImage": "evidence/assembly_170s.png"
+    },
+    {
+      "index": 9,
+      "width": 1920,
+      "height": 1080,
+      "url": "https://www.youtube.com/watch?v=Sm_D-vmNYqc&t=237s",
+      "markers": 0,
+      "legend": 0,
+      "rawImage": "evidence/busbars.png"
+    }
+  ],
+  "toggle": {
+    "hidden": true,
+    "visible": true
+  },
+  "filters": [
+    {
+      "cell": "A",
+      "count": 73
+    },
+    {
+      "cell": "B",
+      "count": 70
+    },
+    {
+      "cell": "C",
+      "count": 83
+    },
+    {
+      "cell": "PREP",
+      "count": 47
+    },
+    {
+      "cell": "SUPPLY",
+      "count": 1
+    }
+  ],
+  "search": [
+    "P02"
+  ],
+  "mobile": {
+    "width": 480,
+    "documentWidth": 465,
+    "brokenImages": 0
+  },
+  "missing_links": [],
+  "javascript_errors": [],
+  "scope": "Offline UI and source-link checks only; no physical acceptance"
+}

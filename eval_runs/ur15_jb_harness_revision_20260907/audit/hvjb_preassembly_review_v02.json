@@ -1,0 +1,199 @@
+{
+  "observed_at": "2026-09-16T02:59:36.682526+09:00",
+  "directory": "/home/rlrk/Downloads/THREAD_HVJB_外組み工程_v02_20260916",
+  "registered_feature_counts": {
+    "parts": 42,
+    "visible_fastener_features": 23,
+    "visible_wire_segments": 27
+  },
+  "feature_reference_rows": 92,
+  "all_preserved_catalog_fields_equal": true,
+  "observed_entity_rows_separate_from_photo_bom": 6,
+  "review_observations": 10,
+  "extracted_plate_frames": 18,
+  "operation_rows": 12,
+  "process_graph_acyclic": true,
+  "source_hashes_before": {
+    "data/hvjb_photo_correspondence_v03_p01.json": "6c5b7cb9bab859a33c8f5d5cd5429ce9f06fb0951b8a8fa4ae2a31ad99052ca0",
+    "UR15_JB_photo_correspondence_v03_p02.blend": "3da72f4c042936da0e168b71977fe09dbb1c2057eb5d0da30b215522a8ef004d",
+    "references/hvjb_assembly_followup_20260915/assembly_20250607.mp4": "b7fcb74eaeec06e517d5726994a38a6b0812e05198d8b771b7ff771e68a0e1eb",
+    "references/hvjb_plate_sequence_20260916/assembly_024s.png": "ae36aa75719958753f4436dfbae171b1c5e969f7d931fab39e227122585bcddc",
+    "references/hvjb_plate_sequence_20260916/assembly_050s.png": "9a4089947e62ef79eda7c0c4da34933a603aae9f9dcdd467922ff668066bcc50",
+    "references/hvjb_plate_sequence_20260916/assembly_134s.png": "e49b8a0077c47367b63be0910bfed94ab26df9807dc854a22b54b6057720b992",
+    "references/hvjb_plate_sequence_20260916/assembly_142s.png": "fd050089f785cdb60a3061c3c64dc8c66423b2352e7400b572bd2125d971068b",
+    "references/hvjb_plate_sequence_20260916/assembly_144s.png": "f26e97aa72b41330f90a906b8e0df4419600854b2044d5c7575075ae2f7554de",
+    "references/hvjb_plate_sequence_20260916/assembly_145s.png": "17f3bd544afcd121f87e36edb026d41d4172557487f54b705a3ae672573f6dec",
+    "references/hvjb_plate_sequence_20260916/assembly_146s.png": "fbe7b04dfc8a6881648df420afa5a48c8300d21cb0f9f0756edb83f500077d20",
+    "references/hvjb_plate_sequence_20260916/assembly_148s.png": "e1efc222ebf3850635ed2ca306803144fddcfb9d474cebcc37858418981cff78",
+    "references/hvjb_plate_sequence_20260916/assembly_150s.png": "d1fb21b23636ce951a350e404f826c9164848c8c30865dadcf8ecc3f62926aad",
+    "references/hvjb_plate_sequence_20260916/assembly_152s.png": "7c44e551752572c2a7e4a09ddc10b91d4a696c614471488cefb7f5eff5c5e1a9",
+    "references/hvjb_plate_sequence_20260916/assembly_154s.png": "551cf3cc812b82a52ca096f0c684ac3a8edb5c3b50fbff3740626f583ac72280",
+    "references/hvjb_plate_sequence_20260916/assembly_156s.png": "39a038ea35e29d9ab6220fc1ee30dda69b8569bf6627c93d61422ffb9cabbde2",
+    "references/hvjb_plate_sequence_20260916/assembly_158s.png": "de7005b51ff49690e82548e8f878efb130d1eccd494a1ac81611e4879853524e",
+    "references/hvjb_plate_sequence_20260916/assembly_160s.png": "6f238e5d21430fd1cbe2059c3bbaed66c52533b25d8349fe48f22e5959a232cb",
+    "references/hvjb_plate_sequence_20260916/assembly_162s.png": "6f687a1aa389f1bedeb78f2afedaf652a0c2c305111879c581f5823fae440b23",
+    "references/hvjb_plate_sequence_20260916/assembly_164s.png": "fe7fa0d95e31268c9e63da9f29d7c05ae2c59357c8c39c286dc79a851cb0cb72",
+    "references/hvjb_plate_sequence_20260916/assembly_166s.png": "afdae1627dcfb63a75002e1af1cb619b0b9ed5d4b824a99ecb7d838c86a454d3",
+    "references/hvjb_plate_sequence_20260916/assembly_170s.png": "1c85aad5aaa057dbd8e2ddc9ef615346c40b61db802283ce1cea78887a6d642e",
+    "references/hvjb_assembly_followup_20260915/crimp.png": "f6fce41ea84004b571b30bd1a6c4cef05b23cbf15bdb28cb8b70ffc3b9f9f8c1",
+    "references/hvjb_assembly_followup_20260915/busbars.png": "e1da438a6be112804da056e47242ad0fde31020eff240be2f66dcbaf81835c51"
+  },
+  "source_hashes_after": {
+    "data/hvjb_photo_correspondence_v03_p01.json": "6c5b7cb9bab859a33c8f5d5cd5429ce9f06fb0951b8a8fa4ae2a31ad99052ca0",
+    "UR15_JB_photo_correspondence_v03_p02.blend": "3da72f4c042936da0e168b71977fe09dbb1c2057eb5d0da30b215522a8ef004d",
+    "references/hvjb_assembly_followup_20260915/assembly_20250607.mp4": "b7fcb74eaeec06e517d5726994a38a6b0812e05198d8b771b7ff771e68a0e1eb",
+    "references/hvjb_plate_sequence_20260916/assembly_024s.png": "ae36aa75719958753f4436dfbae171b1c5e969f7d931fab39e227122585bcddc",
+    "references/hvjb_plate_sequence_20260916/assembly_050s.png": "9a4089947e62ef79eda7c0c4da34933a603aae9f9dcdd467922ff668066bcc50",
+    "references/hvjb_plate_sequence_20260916/assembly_134s.png": "e49b8a0077c47367b63be0910bfed94ab26df9807dc854a22b54b6057720b992",
+    "references/hvjb_plate_sequence_20260916/assembly_142s.png": "fd050089f785cdb60a3061c3c64dc8c66423b2352e7400b572bd2125d971068b",
+    "references/hvjb_plate_sequence_20260916/assembly_144s.png": "f26e97aa72b41330f90a906b8e0df4419600854b2044d5c7575075ae2f7554de",
+    "references/hvjb_plate_sequence_20260916/assembly_145s.png": "17f3bd544afcd121f87e36edb026d41d4172557487f54b705a3ae672573f6dec",
+    "references/hvjb_plate_sequence_20260916/assembly_146s.png": "fbe7b04dfc8a6881648df420afa5a48c8300d21cb0f9f0756edb83f500077d20",
+    "references/hvjb_plate_sequence_20260916/assembly_148s.png": "e1efc222ebf3850635ed2ca306803144fddcfb9d474cebcc37858418981cff78",
+    "references/hvjb_plate_sequence_20260916/assembly_150s.png": "d1fb21b23636ce951a350e404f826c9164848c8c30865dadcf8ecc3f62926aad",
+    "references/hvjb_plate_sequence_20260916/assembly_152s.png": "7c44e551752572c2a7e4a09ddc10b91d4a696c614471488cefb7f5eff5c5e1a9",
+    "references/hvjb_plate_sequence_20260916/assembly_154s.png": "551cf3cc812b82a52ca096f0c684ac3a8edb5c3b50fbff3740626f583ac72280",
+    "references/hvjb_plate_sequence_20260916/assembly_156s.png": "39a038ea35e29d9ab6220fc1ee30dda69b8569bf6627c93d61422ffb9cabbde2",
+    "references/hvjb_plate_sequence_20260916/assembly_158s.png": "de7005b51ff49690e82548e8f878efb130d1eccd494a1ac81611e4879853524e",
+    "references/hvjb_plate_sequence_20260916/assembly_160s.png": "6f238e5d21430fd1cbe2059c3bbaed66c52533b25d8349fe48f22e5959a232cb",
+    "references/hvjb_plate_sequence_20260916/assembly_162s.png": "6f687a1aa389f1bedeb78f2afedaf652a0c2c305111879c581f5823fae440b23",
+    "references/hvjb_plate_sequence_20260916/assembly_164s.png": "fe7fa0d95e31268c9e63da9f29d7c05ae2c59357c8c39c286dc79a851cb0cb72",
+    "references/hvjb_plate_sequence_20260916/assembly_166s.png": "afdae1627dcfb63a75002e1af1cb619b0b9ed5d4b824a99ecb7d838c86a454d3",
+    "references/hvjb_plate_sequence_20260916/assembly_170s.png": "1c85aad5aaa057dbd8e2ddc9ef615346c40b61db802283ce1cea78887a6d642e",
+    "references/hvjb_assembly_followup_20260915/crimp.png": "f6fce41ea84004b571b30bd1a6c4cef05b23cbf15bdb28cb8b70ffc3b9f9f8c1",
+    "references/hvjb_assembly_followup_20260915/busbars.png": "e1da438a6be112804da056e47242ad0fde31020eff240be2f66dcbaf81835c51"
+  },
+  "copied_inputs": [
+    {
+      "source": "data/hvjb_preassembly_delta_v02.json",
+      "file": "revision_inputs.json",
+      "sha256": "8efb136bd30fabe88a8c1cd75b9105d13623afe7c1e53a6e75bc71ade3bc06bc"
+    },
+    {
+      "source": "data/hvjb_preassembly_process_v02.json",
+      "file": "process_correspondence.json",
+      "sha256": "643f75e175518552d290816b402291496e9bb7f21db97385d81180acc9cfe83d"
+    },
+    {
+      "source": "data/hvjb_plate_evidence_v01.json",
+      "file": "plate_evidence.json",
+      "sha256": "2802f20de9ae1265da26830b6abb2995017b0bf71f311cfeabf4425ffd6945ce"
+    },
+    {
+      "source": "analysis/hvjb_preassembly_process_v02.md",
+      "file": "process_notes.md",
+      "sha256": "bd399db7af497fff46fe0d6ed107c7a12e1ac7db10c99b3c4fbc38d169ce63f9"
+    },
+    {
+      "source": "references/op040_real_products_20260912/ampere_product_photo_1.jpg",
+      "file": "evidence/target_photo_2022.jpg",
+      "sha256": "5724681b4bef4399f0799751a62577e48ef9b7fd3d6ed5b56d85fd95924937ad"
+    },
+    {
+      "source": "references/hvjb_plate_sequence_20260916/assembly_024s.png",
+      "file": "evidence/assembly_024s.png",
+      "sha256": "ae36aa75719958753f4436dfbae171b1c5e969f7d931fab39e227122585bcddc"
+    },
+    {
+      "source": "references/hvjb_plate_sequence_20260916/assembly_050s.png",
+      "file": "evidence/assembly_050s.png",
+      "sha256": "9a4089947e62ef79eda7c0c4da34933a603aae9f9dcdd467922ff668066bcc50"
+    },
+    {
+      "source": "references/hvjb_plate_sequence_20260916/assembly_134s.png",
+      "file": "evidence/assembly_134s.png",
+      "sha256": "e49b8a0077c47367b63be0910bfed94ab26df9807dc854a22b54b6057720b992"
+    },
+    {
+      "source": "references/hvjb_plate_sequence_20260916/assembly_142s.png",
+      "file": "evidence/assembly_142s.png",
+      "sha256": "fd050089f785cdb60a3061c3c64dc8c66423b2352e7400b572bd2125d971068b"
+    },
+    {
+      "source": "references/hvjb_plate_sequence_20260916/assembly_144s.png",
+      "file": "evidence/assembly_144s.png",
+      "sha256": "f26e97aa72b41330f90a906b8e0df4419600854b2044d5c7575075ae2f7554de"
+    },
+    {
+      "source": "references/hvjb_plate_sequence_20260916/assembly_145s.png",
+      "file": "evidence/assembly_145s.png",
+      "sha256": "17f3bd544afcd121f87e36edb026d41d4172557487f54b705a3ae672573f6dec"
+    },
+    {
+      "source": "references/hvjb_plate_sequence_20260916/assembly_146s.png",
+      "file": "evidence/assembly_146s.png",
+      "sha256": "fbe7b04dfc8a6881648df420afa5a48c8300d21cb0f9f0756edb83f500077d20"
+    },
+    {
+      "source": "references/hvjb_plate_sequence_20260916/assembly_148s.png",
+      "file": "evidence/assembly_148s.png",
+      "sha256": "e1efc222ebf3850635ed2ca306803144fddcfb9d474cebcc37858418981cff78"
+    },
+    {
+      "source": "references/hvjb_plate_sequence_20260916/assembly_150s.png",
+      "file": "evidence/assembly_150s.png",
+      "sha256": "d1fb21b23636ce951a350e404f826c9164848c8c30865dadcf8ecc3f62926aad"
+    },
+    {
+      "source": "references/hvjb_plate_sequence_20260916/assembly_152s.png",
+      "file": "evidence/assembly_152s.png",
+      "sha256": "7c44e551752572c2a7e4a09ddc10b91d4a696c614471488cefb7f5eff5c5e1a9"
+    },
+    {
+      "source": "references/hvjb_plate_sequence_20260916/assembly_154s.png",
+      "file": "evidence/assembly_154s.png",
+      "sha256": "551cf3cc812b82a52ca096f0c684ac3a8edb5c3b50fbff3740626f583ac72280"
+    },
+    {
+      "source": "references/hvjb_plate_sequence_20260916/assembly_156s.png",
+      "file": "evidence/assembly_156s.png",
+      "sha256": "39a038ea35e29d9ab6220fc1ee30dda69b8569bf6627c93d61422ffb9cabbde2"
+    },
+    {
+      "source": "references/hvjb_plate_sequence_20260916/assembly_158s.png",
+      "file": "evidence/assembly_158s.png",
+      "sha256": "de7005b51ff49690e82548e8f878efb130d1eccd494a1ac81611e4879853524e"
+    },
+    {
+      "source": "references/hvjb_plate_sequence_20260916/assembly_160s.png",
+      "file": "evidence/assembly_160s.png",
+      "sha256": "6f238e5d21430fd1cbe2059c3bbaed66c52533b25d8349fe48f22e5959a232cb"
+    },
+    {
+      "source": "references/hvjb_plate_sequence_20260916/assembly_162s.png",
+      "file": "evidence/assembly_162s.png",
+      "sha256": "6f687a1aa389f1bedeb78f2afedaf652a0c2c305111879c581f5823fae440b23"
+    },
+    {
+      "source": "references/hvjb_plate_sequence_20260916/assembly_164s.png",
+      "file": "evidence/assembly_164s.png",
+      "sha256": "fe7fa0d95e31268c9e63da9f29d7c05ae2c59357c8c39c286dc79a851cb0cb72"
+    },
+    {
+      "source": "references/hvjb_plate_sequence_20260916/assembly_166s.png",
+      "file": "evidence/assembly_166s.png",
+      "sha256": "afdae1627dcfb63a75002e1af1cb619b0b9ed5d4b824a99ecb7d838c86a454d3"
+    },
+    {
+      "source": "references/hvjb_plate_sequence_20260916/assembly_170s.png",
+      "file": "evidence/assembly_170s.png",
+      "sha256": "1c85aad5aaa057dbd8e2ddc9ef615346c40b61db802283ce1cea78887a6d642e"
+    },
+    {
+      "source": "references/hvjb_assembly_followup_20260915/crimp.png",
+      "file": "evidence/crimp.png",
+      "sha256": "f6fce41ea84004b571b30bd1a6c4cef05b23cbf15bdb28cb8b70ffc3b9f9f8c1"
+    },
+    {
+      "source": "references/hvjb_assembly_followup_20260915/busbars.png",
+      "file": "evidence/busbars.png",
+      "sha256": "e1da438a6be112804da056e47242ad0fde31020eff240be2f66dcbaf81835c51"
+    }
+  ],
+  "generated_page_sha256": "6288a3d98e013cf766c6729999dc6561f33eeeaeead99ad73775ffb8e092617b",
+  "process_json_sha256": "643f75e175518552d290816b402291496e9bb7f21db97385d81180acc9cfe83d",
+  "source_model_written": false,
+  "geometry_created": false,
+  "movie_created": false,
+  "physical_acceptance_verdict": null
+}

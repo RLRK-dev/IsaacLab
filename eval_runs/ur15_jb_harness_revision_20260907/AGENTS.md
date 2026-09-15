@@ -436,3 +436,19 @@ numbers unknown until their basis and the scope of the product change are set.
   features do not constitute a complete BOM or 92 assembly operations. The 2025
   build and the target 2022 photographs remain separate manufacturing revisions
   unless their equivalence is established. Preserve the existing native files.
+
+## Plate and free-end sequence follow-up on 2026-09-16
+
+- Use `analysis/hvjb_preassembly_process_v02.md` for the updated observations.
+  The 146-second source frame shows the baseplate side and fuse panel being
+  carried together into the case. The mechanical joint itself is unobserved;
+  do not turn co-carrying into a rigidity or fastening-completion claim.
+- The inner housings are above the edge at 154 seconds and outside through the
+  side openings at 170 seconds, while the outer headers remain on the bench.
+  Keep this routing step before outer-header installation in the comparison.
+- `V25_BASE_PLATE` is separate from P01 in the video observation ledger. V25
+  entities are not additions to the target 2022 photo BOM. No confirmed mapping,
+  dimensions, manufacturing contour, fastening points or grasp surfaces exist.
+- The tool enters the case after insertion, but its work point is obscured.
+  Do not invent carrier screws or their torque from this view. Free lead groups
+  are not wire counts or robot-arm counts; retain the unresolved handoff roles.
