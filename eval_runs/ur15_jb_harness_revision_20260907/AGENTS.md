@@ -413,3 +413,26 @@ numbers unknown until their basis and the scope of the product change are set.
   selected part numbers, complete electrical assembly, or accepted motions.
 - Keep v03 and earlier files intact. Do not make a new process movie until the
   relevant product interfaces and operations have been reconciled.
+
+## External preassembly correction on 2026-09-16
+
+- The user confirmed the correction that Ampere's official 2025 assembly video
+  shows substantial external preassembly followed by enclosure installation and
+  further connector/busbar work. Use `analysis/hvjb_preassembly_process_v01.md`
+  and its correspondence JSON to distinguish these phases before motion.
+- External baseplate assembly A, fuse-panel assembly B and enclosure integration C
+  are a new comparison, not an adopted three-cell layout or robot count. Their
+  flow converges; do not treat it as the old mechanical/power/auxiliary serial split.
+- Keep OP010 XYZ plus 20 housings and OP020 header installation/screw fastening.
+  In the comparison, header work occurs after internal-unit installation at C.
+  A separate OP020 would need sequence reconciliation; do not install it twice.
+- The current photo model's P01 case floor is not a separately identified carrier
+  plate. Do not animate that floor as a removable assembly plate. Reconcile the
+  actual plate, supports, grasp surfaces and its joint with the fuse panel first.
+- Visible free leads during manual unit insertion do not define automatic handoff.
+  Keep unit support and free-end guidance explicit, without reinstating the upper
+  retainer, abandoning hand retention, or declaring a single arm sufficient.
+- Retain all required functions and unknown endpoints. The 92 registered photo
+  features do not constitute a complete BOM or 92 assembly operations. The 2025
+  build and the target 2022 photographs remain separate manufacturing revisions
+  unless their equivalence is established. Preserve the existing native files.

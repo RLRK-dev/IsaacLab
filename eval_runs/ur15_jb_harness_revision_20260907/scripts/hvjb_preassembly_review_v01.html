@@ -1,0 +1,71 @@
+<!doctype html>
+<!-- Copyright (c) 2022-2026, The Isaac Lab Project Developers. SPDX-License-Identifier: BSD-3-Clause -->
+<html lang="ja">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HVJB 外組み工程の照合</title>
+<style>
+:root{color-scheme:light;font-family:system-ui,sans-serif;color:#243443;background:#f2f5f7;line-height:1.7}
+*{box-sizing:border-box}body{margin:0}main{max-width:1260px;margin:auto;padding:28px 22px 64px}
+h1{font-size:28px;line-height:1.45;margin:4px 0 14px}h2{font-size:21px;margin:0 0 14px}h3{font-size:18px;margin:0 0 8px}
+p{margin:8px 0 15px}a{color:#075b91;text-underline-offset:3px}header{margin-bottom:28px}.eyebrow{color:#506678;font-size:13px}
+section{background:#fff;padding:24px;border:1px solid #dce4ea;border-radius:12px;margin:20px 0}
+.cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}.card{padding:19px;background:#f6f9fb;border-top:4px solid #2b7797;border-radius:6px}
+.card p{font-size:14px}.tag{display:inline-block;background:#e7f1f7;color:#154e69;border-radius:4px;padding:2px 9px;font-size:13px;margin-bottom:8px}
+.flow{padding:16px;background:#edf4f7;border-left:4px solid #2b7797}.muted{color:#536676;font-size:14px}.note{border-left:4px solid #c18e3b;padding:10px 16px;background:#fff9ed}
+.evidence{display:grid;grid-template-columns:minmax(0,1.55fr) minmax(0,1fr);gap:20px;margin-top:20px;align-items:start}
+.evidence img{display:block;width:100%;height:auto;border-radius:6px}.evidence figure{margin:0}.evidence figcaption{font-size:13px;color:#536676}
+.scroll{overflow:auto}table{border-collapse:collapse;width:100%;font-size:14px}th,td{text-align:left;vertical-align:top;border-bottom:1px solid #dce4ea;padding:10px}
+th{background:#edf3f7;white-space:nowrap}td:first-child{white-space:nowrap}button,select,input{font:inherit;padding:8px 12px;border:1px solid #aabac6;border-radius:5px;background:white;max-width:100%}
+.toolbar{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-bottom:16px}button{cursor:pointer}button[aria-pressed=true]{background:#155a7b;color:white;border-color:#155a7b}
+details{margin-top:16px}summary{cursor:pointer;color:#155a7b;font-weight:600}.small{font-size:13px}.links{display:flex;gap:20px;flex-wrap:wrap}
+@media(max-width:760px){main{padding:18px 12px}section{padding:18px 14px}.cards,.evidence{grid-template-columns:1fr}h1{font-size:23px}}
+</style>
+<main>
+<header><div class="eyebrow">AMPERE HVJB · 工程照合 v01 · 2026-09-16</div>
+<h1>外で先に組み、筐体へ入れてから接続を仕上げる</h1>
+<p>公式映像の組立順序を、3セルの比較案と既存部品IDへ対応させました。</p>
+<div class="links"><a href="process_notes.md">工程整理の全文</a><a href="process_correspondence.json">対応JSON</a><a href="audit.json">入力・参照の照合記録</a></div>
+</header>
+<section><h2>3セルの分担を比較する</h2><p class="flow" id="workflow"></p><div class="cards" id="cells"></div><p id="parallel"></p>
+<p class="note">A・B・Cは比較用の呼称です。正式なST番号・腕数・機種は未変更です。OP010のXYZ＋20個収納を維持し、OP020のヘッダー取付作業は、この案では搭載後のCへまとめます。</p></section>
+<section><h2>公式映像で確認できる作業場所</h2><div class="toolbar" id="evidence-buttons"></div>
+<div class="evidence"><figure><a id="full-image" href="#"><img id="evidence-image" alt=""></a><figcaption id="caption"></figcaption></figure><div><h3 id="evidence-title"></h3><p id="observation"></p><p class="muted" id="observation-limit"></p><a id="source-link" href="#" target="_blank" rel="noopener">公式映像の該当時点へ</a></div></div>
+<p class="muted" id="revision-boundary"></p></section>
+<section><h2>準備から最終接続まで</h2><div class="scroll"><table><thead><tr><th>作業</th><th>担当候補</th><th>残す内容</th><th>根拠</th></tr></thead><tbody id="operations"></tbody></table></div></section>
+<section><h2>次のモデル修正で先に確認すること</h2><div id="open-interfaces"></div></section>
+<section><h2>既存モデルとの対応</h2><p id="coverage"></p>
+<div class="toolbar"><label>担当候補 <select id="cell-filter"><option value="">すべて</option><option>A</option><option>B</option><option>C</option><option>PREP</option><option>SUPPLY</option></select></label><label>部品・ID <input id="search" type="search" placeholder="P02、ヒューズ、配線…"></label><span id="visible-count" aria-live="polite"></span></div>
+<p class="muted">複数セルに出るものは、分業を確定した部品ではなく所属を照合中の対象です。可視配線を独立した搬送物として切り分けません。</p>
+<div class="scroll"><table><thead><tr><th>ID</th><th>登録した特徴</th><th>担当候補</th><th>対応と未確定</th></tr></thead><tbody id="features"></tbody></table></div>
+<details><summary>必須機能・電気接続群・低圧端子を確認</summary><p>元台帳の欄を継承しています。電気回路から物理線や共締め箇所を発明していません。</p><div class="scroll"><table><thead><tr><th>必須機能ID</th><th>内容</th><th>元資料の数量</th><th>照合状況</th></tr></thead><tbody id="requirements"></tbody></table></div><div class="scroll"><table><thead><tr><th>接続群</th><th>内容</th><th>実線・締結点</th></tr></thead><tbody id="connections"></tbody></table></div><pre id="pins"></pre></details>
+</section>
+<section><h2>継承する指定</h2><ul id="constraints"></ul><p class="muted">今回は工程対応と未確定事項の整理です。静止モデルの形状、アーム動作、動画は変更していません。</p></section>
+<footer class="muted">元の完成写真：<a href="evidence/target_photo_2022.jpg">Ampere EV 2022年の指定写真</a>。映像フレームは保存済み原本から抽出したものです。</footer>
+</main>
+<script>
+const data=__PAYLOAD__;
+const $=id=>document.getElementById(id);
+const esc=value=>String(value??'未確定').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const row=values=>'<tr>'+values.map(v=>'<td>'+esc(v)+'</td>').join('')+'</tr>';
+$('workflow').textContent=data.workflow_ja;
+$('parallel').textContent=data.parallelism_ja;
+$('revision-boundary').textContent=data.revision_boundary_ja;
+$('cells').innerHTML=data.cells.map(c=>`<article class="card"><span class="tag">${esc(c.id)} · ${esc(c.location_ja)}</span><h3>${esc(c.name_ja)}</h3><p>${esc(c.work_ja)}</p><p><strong>腕・工具</strong><br>${esc(c.robot_ja)}</p><p>${esc(c.tool_ja)}</p><p class="muted">${esc(c.hands_ja)}</p></article>`).join('');
+$('operations').innerHTML=data.operations.map(o=>row([o.id+' '+o.stage_ja,o.cell,o.details_ja,o.basis_ja])).join('');
+$('open-interfaces').innerHTML=data.open_interfaces.map(o=>`<details open><summary>${esc(o.id)} · ${esc(o.name_ja)}</summary><p>${esc(o.facts_ja)}</p><p>${esc(o.next_ja)}</p></details>`).join('');
+const source=data.preserved_catalog_fields;
+$('coverage').textContent=`既存の${data.feature_correspondence.length}特徴を対応欄へ継承。${source.required_functions.length}必須機能区分、${source.electrical_groups.length}接続群、LV${Object.keys(source.lv_pin_map).length}極も保持しています。全BOM・工程設計の完了率ではありません。`;
+$('requirements').innerHTML=source.required_functions.map(r=>row([r.id,r.name_ja,r.quantity,r.note_ja||r.basis])).join('');
+$('connections').innerHTML=source.electrical_groups.map(r=>row([r.id,r.name_ja,'実線の両端・全締結点は未確定'])).join('');
+$('pins').textContent=JSON.stringify(source.lv_pin_map,null,2);
+$('pins').style.whiteSpace='pre-wrap';
+$('constraints').innerHTML=data.preserved_constraints_ja.map(c=>'<li>'+esc(c)+'</li>').join('');
+function showEvidence(index){const item=data.observations[index];$('evidence-image').src=item.local_image;$('evidence-image').alt=item.observation_ja;$('full-image').href=item.local_image;$('caption').textContent='公式組立映像 '+item.time_ja+' · 画像を押すと元の大きさで表示';$('evidence-title').textContent=item.time_ja;$('observation').textContent=item.observation_ja;$('observation-limit').textContent=item.limit_ja;$('source-link').href=item.source_url;document.querySelectorAll('[data-evidence]').forEach(b=>b.setAttribute('aria-pressed',String(Number(b.dataset.evidence)===index)));window.processEvidenceIndex=index;}
+$('evidence-buttons').innerHTML=data.observations.map((o,i)=>`<button type="button" data-evidence="${i}" aria-pressed="false">${esc(o.time_ja)}</button>`).join('');
+document.querySelectorAll('[data-evidence]').forEach(b=>b.addEventListener('click',()=>showEvidence(Number(b.dataset.evidence))));
+function filterFeatures(){const cell=$('cell-filter').value,query=$('search').value.trim().toLowerCase();const items=data.feature_correspondence.filter(r=>(!cell||r.candidate_cells.includes(cell))&&(!query||[r.id,r.name_ja,r.group_name_ja,r.unresolved_ja].join(' ').toLowerCase().includes(query)));$('features').innerHTML=items.map(r=>row([r.id,r.name_ja,r.candidate_cells.join(' / '),r.basis_ja+'。'+r.unresolved_ja])).join('');$('visible-count').textContent=items.length+'件';window.processVisibleIds=items.map(r=>r.id);}
+$('cell-filter').addEventListener('change',filterFeatures);$('search').addEventListener('input',filterFeatures);
+showEvidence(0);filterFeatures();window.processReviewReady=true;
+</script>
+</html>

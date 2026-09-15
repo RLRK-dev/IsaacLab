@@ -1,0 +1,76 @@
+{
+  "observed_at": "2026-09-15T17:15:11.577Z",
+  "directory": "/home/rlrk/Downloads/THREAD_HVJB_外組み工程_v01_20260916",
+  "initial": {
+    "features": 92,
+    "operations": 10,
+    "requirements": 17,
+    "groups": 13,
+    "cells": 3
+  },
+  "evidence": [
+    {
+      "index": 0,
+      "width": 1920,
+      "height": 1080,
+      "url": "https://www.youtube.com/watch?v=Sm_D-vmNYqc&t=24s"
+    },
+    {
+      "index": 1,
+      "width": 1920,
+      "height": 1080,
+      "url": "https://www.youtube.com/watch?v=Sm_D-vmNYqc&t=50s"
+    },
+    {
+      "index": 2,
+      "width": 1920,
+      "height": 1080,
+      "url": "https://www.youtube.com/watch?v=Sm_D-vmNYqc&t=103s"
+    },
+    {
+      "index": 3,
+      "width": 1920,
+      "height": 1080,
+      "url": "https://www.youtube.com/watch?v=Sm_D-vmNYqc&t=145s"
+    },
+    {
+      "index": 4,
+      "width": 1920,
+      "height": 1080,
+      "url": "https://www.youtube.com/watch?v=Sm_D-vmNYqc&t=237s"
+    }
+  ],
+  "filters": [
+    {
+      "cell": "A",
+      "count": 73
+    },
+    {
+      "cell": "B",
+      "count": 70
+    },
+    {
+      "cell": "C",
+      "count": 83
+    },
+    {
+      "cell": "PREP",
+      "count": 47
+    },
+    {
+      "cell": "SUPPLY",
+      "count": 1
+    }
+  ],
+  "search": [
+    "P02"
+  ],
+  "mobile": {
+    "width": 480,
+    "documentWidth": 465,
+    "brokenImages": 0
+  },
+  "missing_links": [],
+  "javascript_errors": [],
+  "scope": "Offline UI and source-link checks only; no physical acceptance"
+}
