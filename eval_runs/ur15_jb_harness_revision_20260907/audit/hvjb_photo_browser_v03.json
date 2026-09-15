@@ -1,0 +1,1962 @@
+{
+  "checked_at": "2026-09-15T11:48:16.547Z",
+  "initial": {
+    "selected": "",
+    "source_view": "overview",
+    "uncovered": false,
+    "model_features": 92,
+    "shown_features": 92,
+    "shown_ids": [
+      "P01",
+      "P02",
+      "P03",
+      "P04",
+      "P05",
+      "P06",
+      "P07",
+      "P08",
+      "P09",
+      "P10",
+      "P11",
+      "P12",
+      "P13",
+      "P14",
+      "P15",
+      "P16",
+      "P17",
+      "P18",
+      "I01",
+      "I02",
+      "I03",
+      "I04",
+      "I05",
+      "T31",
+      "T32",
+      "T33",
+      "T34",
+      "T41",
+      "T42",
+      "T43",
+      "T44",
+      "P19",
+      "P20",
+      "P21",
+      "P22",
+      "L01",
+      "L02",
+      "L03",
+      "L04",
+      "L05",
+      "L06",
+      "L07",
+      "J01",
+      "J02",
+      "J03",
+      "J04",
+      "J05",
+      "J06",
+      "J07",
+      "J08",
+      "J09",
+      "J10",
+      "J11",
+      "J12",
+      "J13",
+      "J14",
+      "J15",
+      "J16",
+      "J17",
+      "J18",
+      "J19",
+      "J20",
+      "J21",
+      "J22",
+      "J23",
+      "W01",
+      "W02",
+      "W03",
+      "W04",
+      "W05",
+      "W06",
+      "W07",
+      "W08",
+      "W09",
+      "W10",
+      "W11",
+      "W12",
+      "W13",
+      "W14",
+      "WI11",
+      "WI12",
+      "WI21",
+      "WI22",
+      "WI41",
+      "WI42",
+      "WI51",
+      "WI52",
+      "W15",
+      "W16",
+      "W17",
+      "W18",
+      "W19"
+    ],
+    "comparison": [],
+    "related": false,
+    "triangles": 463032,
+    "finite": true,
+    "gl_error": 0,
+    "motion_created": false
+  },
+  "selected": [
+    {
+      "id": "P01",
+      "shown_features": 1,
+      "photo_mark_count": 1
+    },
+    {
+      "id": "P02",
+      "shown_features": 1,
+      "photo_mark_count": 1
+    },
+    {
+      "id": "P03",
+      "shown_features": 1,
+      "photo_mark_count": 1
+    },
+    {
+      "id": "P04",
+      "shown_features": 1,
+      "photo_mark_count": 1
+    },
+    {
+      "id": "P05",
+      "shown_features": 1,
+      "photo_mark_count": 1
+    },
+    {
+      "id": "P06",
+      "shown_features": 1,
+      "photo_mark_count": 1
+    },
+    {
+      "id": "P07",
+      "shown_features": 1,
+      "photo_mark_count": 1
+    },
+    {
+      "id": "P08",
+      "shown_features": 1,
+      "photo_mark_count": 1
+    },
+    {
+      "id": "P09",
+      "shown_features": 1,
+      "photo_mark_count": 1
+    },
+    {
+      "id": "P10",
+      "shown_features": 1,
+      "photo_mark_count": 1
+    },
+    {
+      "id": "P11",
+      "shown_features": 1,
+      "photo_mark_count": 1
+    },
+    {
+      "id": "P12",
+      "shown_features": 1,
+      "photo_mark_count": 1
+    },
+    {
+      "id": "P13",
+      "shown_features": 1,
+      "photo_mark_count": 1
+    },
+    {
+      "id": "P14",
+      "shown_features": 1,
+      "photo_mark_count": 1
+    },
+    {
+      "id": "P15",
+      "shown_features": 1,
+      "photo_mark_count": 1
+    },
+    {
+      "id": "P16",
+      "shown_features": 1,
+      "photo_mark_count": 1
+    },
+    {
+      "id": "P17",
+      "shown_features": 1,
+      "photo_mark_count": 1
+    },
+    {
+      "id": "P18",
+      "shown_features": 1,
+      "photo_mark_count": 1
+    },
+    {
+      "id": "I01",
+      "shown_features": 1,
+      "photo_mark_count": 1
+    },
+    {
+      "id": "I02",
+      "shown_features": 1,
+      "photo_mark_count": 1
+    },
+    {
+      "id": "I03",
+      "shown_features": 1,
+      "photo_mark_count": 1
+    },
+    {
+      "id": "I04",
+      "shown_features": 1,
+      "photo_mark_count": 1
+    },
+    {
+      "id": "I05",
+      "shown_features": 1,
+      "photo_mark_count": 1
+    },
+    {
+      "id": "T31",
+      "shown_features": 1,
+      "photo_mark_count": 1
+    },
+    {
+      "id": "T32",
+      "shown_features": 1,
+      "photo_mark_count": 1
+    },
+    {
+      "id": "T33",
+      "shown_features": 1,
+      "photo_mark_count": 1
+    },
+    {
+      "id": "T34",
+      "shown_features": 1,
+      "photo_mark_count": 1
+    },
+    {
+      "id": "T41",
+      "shown_features": 1,
+      "photo_mark_count": 1
+    },
+    {
+      "id": "T42",
+      "shown_features": 1,
+      "photo_mark_count": 1
+    },
+    {
+      "id": "T43",
+      "shown_features": 1,
+      "photo_mark_count": 1
+    },
+    {
+      "id": "T44",
+      "shown_features": 1,
+      "photo_mark_count": 1
+    },
+    {
+      "id": "P19",
+      "shown_features": 1,
+      "photo_mark_count": 1
+    },
+    {
+      "id": "P20",
+      "shown_features": 1,
+      "photo_mark_count": 1
+    },
+    {
+      "id": "P21",
+      "shown_features": 1,
+      "photo_mark_count": 1
+    },
+    {
+      "id": "P22",
+      "shown_features": 1,
+      "photo_mark_count": 1
+    },
+    {
+      "id": "L01",
+      "shown_features": 1,
+      "photo_mark_count": 1
+    },
+    {
+      "id": "L02",
+      "shown_features": 1,
+      "photo_mark_count": 1
+    },
+    {
+      "id": "L03",
+      "shown_features": 1,
+      "photo_mark_count": 1
+    },
+    {
+      "id": "L04",
+      "shown_features": 1,
+      "photo_mark_count": 1
+    },
+    {
+      "id": "L05",
+      "shown_features": 1,
+      "photo_mark_count": 1
+    },
+    {
+      "id": "L06",
+      "shown_features": 1,
+      "photo_mark_count": 1
+    },
+    {
+      "id": "L07",
+      "shown_features": 1,
+      "photo_mark_count": 1
+    },
+    {
+      "id": "J01",
+      "shown_features": 1,
+      "photo_mark_count": 1
+    },
+    {
+      "id": "J02",
+      "shown_features": 1,
+      "photo_mark_count": 1
+    },
+    {
+      "id": "J03",
+      "shown_features": 1,
+      "photo_mark_count": 1
+    },
+    {
+      "id": "J04",
+      "shown_features": 1,
+      "photo_mark_count": 1
+    },
+    {
+      "id": "J05",
+      "shown_features": 1,
+      "photo_mark_count": 1
+    },
+    {
+      "id": "J06",
+      "shown_features": 1,
+      "photo_mark_count": 1
+    },
+    {
+      "id": "J07",
+      "shown_features": 1,
+      "photo_mark_count": 1
+    },
+    {
+      "id": "J08",
+      "shown_features": 1,
+      "photo_mark_count": 1
+    },
+    {
+      "id": "J09",
+      "shown_features": 1,
+      "photo_mark_count": 1
+    },
+    {
+      "id": "J10",
+      "shown_features": 1,
+      "photo_mark_count": 1
+    },
+    {
+      "id": "J11",
+      "shown_features": 1,
+      "photo_mark_count": 1
+    },
+    {
+      "id": "J12",
+      "shown_features": 1,
+      "photo_mark_count": 1
+    },
+    {
+      "id": "J13",
+      "shown_features": 1,
+      "photo_mark_count": 1
+    },
+    {
+      "id": "J14",
+      "shown_features": 1,
+      "photo_mark_count": 1
+    },
+    {
+      "id": "J15",
+      "shown_features": 1,
+      "photo_mark_count": 1
+    },
+    {
+      "id": "J16",
+      "shown_features": 1,
+      "photo_mark_count": 1
+    },
+    {
+      "id": "J17",
+      "shown_features": 1,
+      "photo_mark_count": 1
+    },
+    {
+      "id": "J18",
+      "shown_features": 1,
+      "photo_mark_count": 1
+    },
+    {
+      "id": "J19",
+      "shown_features": 1,
+      "photo_mark_count": 1
+    },
+    {
+      "id": "J20",
+      "shown_features": 1,
+      "photo_mark_count": 1
+    },
+    {
+      "id": "J21",
+      "shown_features": 1,
+      "photo_mark_count": 1
+    },
+    {
+      "id": "J22",
+      "shown_features": 1,
+      "photo_mark_count": 1
+    },
+    {
+      "id": "J23",
+      "shown_features": 1,
+      "photo_mark_count": 1
+    },
+    {
+      "id": "W01",
+      "shown_features": 1,
+      "photo_mark_count": 1
+    },
+    {
+      "id": "W02",
+      "shown_features": 1,
+      "photo_mark_count": 1
+    },
+    {
+      "id": "W03",
+      "shown_features": 1,
+      "photo_mark_count": 1
+    },
+    {
+      "id": "W04",
+      "shown_features": 1,
+      "photo_mark_count": 1
+    },
+    {
+      "id": "W05",
+      "shown_features": 1,
+      "photo_mark_count": 1
+    },
+    {
+      "id": "W06",
+      "shown_features": 1,
+      "photo_mark_count": 1
+    },
+    {
+      "id": "W07",
+      "shown_features": 1,
+      "photo_mark_count": 1
+    },
+    {
+      "id": "W08",
+      "shown_features": 1,
+      "photo_mark_count": 1
+    },
+    {
+      "id": "W09",
+      "shown_features": 1,
+      "photo_mark_count": 1
+    },
+    {
+      "id": "W10",
+      "shown_features": 1,
+      "photo_mark_count": 1
+    },
+    {
+      "id": "W11",
+      "shown_features": 1,
+      "photo_mark_count": 1
+    },
+    {
+      "id": "W12",
+      "shown_features": 1,
+      "photo_mark_count": 1
+    },
+    {
+      "id": "W13",
+      "shown_features": 1,
+      "photo_mark_count": 1
+    },
+    {
+      "id": "W14",
+      "shown_features": 1,
+      "photo_mark_count": 1
+    },
+    {
+      "id": "WI11",
+      "shown_features": 1,
+      "photo_mark_count": 1
+    },
+    {
+      "id": "WI12",
+      "shown_features": 1,
+      "photo_mark_count": 1
+    },
+    {
+      "id": "WI21",
+      "shown_features": 1,
+      "photo_mark_count": 1
+    },
+    {
+      "id": "WI22",
+      "shown_features": 1,
+      "photo_mark_count": 1
+    },
+    {
+      "id": "WI41",
+      "shown_features": 1,
+      "photo_mark_count": 1
+    },
+    {
+      "id": "WI42",
+      "shown_features": 1,
+      "photo_mark_count": 1
+    },
+    {
+      "id": "WI51",
+      "shown_features": 1,
+      "photo_mark_count": 1
+    },
+    {
+      "id": "WI52",
+      "shown_features": 1,
+      "photo_mark_count": 1
+    },
+    {
+      "id": "W15",
+      "shown_features": 1,
+      "photo_mark_count": 1
+    },
+    {
+      "id": "W16",
+      "shown_features": 1,
+      "photo_mark_count": 1
+    },
+    {
+      "id": "W17",
+      "shown_features": 1,
+      "photo_mark_count": 1
+    },
+    {
+      "id": "W18",
+      "shown_features": 1,
+      "photo_mark_count": 1
+    },
+    {
+      "id": "W19",
+      "shown_features": 1,
+      "photo_mark_count": 1
+    }
+  ],
+  "content": {
+    "requirements": 17,
+    "connection_groups": 13,
+    "lv_pins": 12,
+    "broken_images": 0,
+    "links": [
+      "references/op040_real_products_20260912/ampere_product_photo_2.jpg",
+      "references/op040_real_products_20260912/ampere_product_photo_3.jpg",
+      "UR15_JB_photo_correspondence_v03_p02.blend",
+      "previews/top.png",
+      "previews/oblique.png",
+      "previews/uncovered.png",
+      "data/hvjb_photo_correspondence_v03_p01.json",
+      "analysis/hvjb_photo_correspondence_v03.md",
+      "audit/hvjb_photo_model_v03_p02.json",
+      "data/hvjb_wire_observations_v03.json",
+      "analysis/hvjb_photo_execution_v03.md",
+      "data/hvjb_video_evidence_v02.json",
+      "https://www.youtube.com/watch?v=Sm_D-vmNYqc",
+      "https://www.youtube.com/watch?v=oXPIRNZ4xcs",
+      "https://help.ampereev.com/hc/en-us/articles/31292470232087-High-Voltage-Junction-Box-HVJB-5-400",
+      "references/op040_real_products_20260912/ampere_hvjb_5_400_current_v1_1.pdf",
+      "references/connector_correction_20260915/te_408_32095_instruction.pdf",
+      "references/hvjb_photo_inventory_20260915/te_2103245_drawing.pdf"
+    ],
+    "gl": {
+      "selected": "",
+      "source_view": "overview",
+      "uncovered": false,
+      "model_features": 92,
+      "shown_features": 92,
+      "shown_ids": [
+        "P01",
+        "P02",
+        "P03",
+        "P04",
+        "P05",
+        "P06",
+        "P07",
+        "P08",
+        "P09",
+        "P10",
+        "P11",
+        "P12",
+        "P13",
+        "P14",
+        "P15",
+        "P16",
+        "P17",
+        "P18",
+        "I01",
+        "I02",
+        "I03",
+        "I04",
+        "I05",
+        "T31",
+        "T32",
+        "T33",
+        "T34",
+        "T41",
+        "T42",
+        "T43",
+        "T44",
+        "P19",
+        "P20",
+        "P21",
+        "P22",
+        "L01",
+        "L02",
+        "L03",
+        "L04",
+        "L05",
+        "L06",
+        "L07",
+        "J01",
+        "J02",
+        "J03",
+        "J04",
+        "J05",
+        "J06",
+        "J07",
+        "J08",
+        "J09",
+        "J10",
+        "J11",
+        "J12",
+        "J13",
+        "J14",
+        "J15",
+        "J16",
+        "J17",
+        "J18",
+        "J19",
+        "J20",
+        "J21",
+        "J22",
+        "J23",
+        "W01",
+        "W02",
+        "W03",
+        "W04",
+        "W05",
+        "W06",
+        "W07",
+        "W08",
+        "W09",
+        "W10",
+        "W11",
+        "W12",
+        "W13",
+        "W14",
+        "WI11",
+        "WI12",
+        "WI21",
+        "WI22",
+        "WI41",
+        "WI42",
+        "WI51",
+        "WI52",
+        "W15",
+        "W16",
+        "W17",
+        "W18",
+        "W19"
+      ],
+      "comparison": [],
+      "related": false,
+      "triangles": 463032,
+      "finite": true,
+      "gl_error": 0,
+      "motion_created": false
+    }
+  },
+  "mobile": {
+    "scroll": 465,
+    "client": 465,
+    "gl": {
+      "selected": "",
+      "source_view": "detail",
+      "uncovered": false,
+      "model_features": 92,
+      "shown_features": 92,
+      "shown_ids": [
+        "P01",
+        "P02",
+        "P03",
+        "P04",
+        "P05",
+        "P06",
+        "P07",
+        "P08",
+        "P09",
+        "P10",
+        "P11",
+        "P12",
+        "P13",
+        "P14",
+        "P15",
+        "P16",
+        "P17",
+        "P18",
+        "I01",
+        "I02",
+        "I03",
+        "I04",
+        "I05",
+        "T31",
+        "T32",
+        "T33",
+        "T34",
+        "T41",
+        "T42",
+        "T43",
+        "T44",
+        "P19",
+        "P20",
+        "P21",
+        "P22",
+        "L01",
+        "L02",
+        "L03",
+        "L04",
+        "L05",
+        "L06",
+        "L07",
+        "J01",
+        "J02",
+        "J03",
+        "J04",
+        "J05",
+        "J06",
+        "J07",
+        "J08",
+        "J09",
+        "J10",
+        "J11",
+        "J12",
+        "J13",
+        "J14",
+        "J15",
+        "J16",
+        "J17",
+        "J18",
+        "J19",
+        "J20",
+        "J21",
+        "J22",
+        "J23",
+        "W01",
+        "W02",
+        "W03",
+        "W04",
+        "W05",
+        "W06",
+        "W07",
+        "W08",
+        "W09",
+        "W10",
+        "W11",
+        "W12",
+        "W13",
+        "W14",
+        "WI11",
+        "WI12",
+        "WI21",
+        "WI22",
+        "WI41",
+        "WI42",
+        "WI51",
+        "WI52",
+        "W15",
+        "W16",
+        "W17",
+        "W18",
+        "W19"
+      ],
+      "comparison": [],
+      "related": false,
+      "triangles": 463032,
+      "finite": true,
+      "gl_error": 0,
+      "motion_created": false
+    }
+  },
+  "sourceImages": [
+    {
+      "id": "overview",
+      "size": [
+        1620,
+        1080
+      ],
+      "expected": [
+        1620,
+        1080
+      ]
+    },
+    {
+      "id": "detail",
+      "size": [
+        1620,
+        1080
+      ],
+      "expected": [
+        1620,
+        1080
+      ]
+    },
+    {
+      "id": "side",
+      "size": [
+        1620,
+        1080
+      ],
+      "expected": [
+        1620,
+        1080
+      ]
+    },
+    {
+      "id": "fuse_detail",
+      "size": [
+        1920,
+        1080
+      ],
+      "expected": [
+        1920,
+        1080
+      ]
+    },
+    {
+      "id": "main_pointer",
+      "size": [
+        1920,
+        1080
+      ],
+      "expected": [
+        1920,
+        1080
+      ]
+    },
+    {
+      "id": "main_sample",
+      "size": [
+        1920,
+        1080
+      ],
+      "expected": [
+        1920,
+        1080
+      ]
+    },
+    {
+      "id": "subassembly",
+      "size": [
+        1920,
+        1080
+      ],
+      "expected": [
+        1920,
+        1080
+      ]
+    },
+    {
+      "id": "panel_wiring",
+      "size": [
+        1920,
+        1080
+      ],
+      "expected": [
+        1920,
+        1080
+      ]
+    },
+    {
+      "id": "insert_plate",
+      "size": [
+        1920,
+        1080
+      ],
+      "expected": [
+        1920,
+        1080
+      ]
+    },
+    {
+      "id": "crimp",
+      "size": [
+        1920,
+        1080
+      ],
+      "expected": [
+        1920,
+        1080
+      ]
+    },
+    {
+      "id": "busbars",
+      "size": [
+        1920,
+        1080
+      ],
+      "expected": [
+        1920,
+        1080
+      ]
+    }
+  ],
+  "uncovered": {
+    "selected": "",
+    "source_view": "overview",
+    "uncovered": true,
+    "model_features": 92,
+    "shown_features": 90,
+    "shown_ids": [
+      "P02",
+      "P03",
+      "P04",
+      "P05",
+      "P06",
+      "P07",
+      "P09",
+      "P10",
+      "P11",
+      "P12",
+      "P13",
+      "P14",
+      "P15",
+      "P16",
+      "P17",
+      "P18",
+      "I01",
+      "I02",
+      "I03",
+      "I04",
+      "I05",
+      "T31",
+      "T32",
+      "T33",
+      "T34",
+      "T41",
+      "T42",
+      "T43",
+      "T44",
+      "P19",
+      "P20",
+      "P21",
+      "P22",
+      "L01",
+      "L02",
+      "L03",
+      "L04",
+      "L05",
+      "L06",
+      "L07",
+      "J01",
+      "J02",
+      "J03",
+      "J04",
+      "J05",
+      "J06",
+      "J07",
+      "J08",
+      "J09",
+      "J10",
+      "J11",
+      "J12",
+      "J13",
+      "J14",
+      "J15",
+      "J16",
+      "J17",
+      "J18",
+      "J19",
+      "J20",
+      "J21",
+      "J22",
+      "J23",
+      "W01",
+      "W02",
+      "W03",
+      "W04",
+      "W05",
+      "W06",
+      "W07",
+      "W08",
+      "W09",
+      "W10",
+      "W11",
+      "W12",
+      "W13",
+      "W14",
+      "WI11",
+      "WI12",
+      "WI21",
+      "WI22",
+      "WI41",
+      "WI42",
+      "WI51",
+      "WI52",
+      "W15",
+      "W16",
+      "W17",
+      "W18",
+      "W19"
+    ],
+    "comparison": [],
+    "related": false,
+    "triangles": 463032,
+    "finite": true,
+    "gl_error": 0,
+    "motion_created": false
+  },
+  "sourceSelection": {
+    "selected": "P19",
+    "source_view": "fuse_detail",
+    "uncovered": true,
+    "model_features": 92,
+    "shown_features": 90,
+    "shown_ids": [
+      "P02",
+      "P03",
+      "P04",
+      "P05",
+      "P06",
+      "P07",
+      "P09",
+      "P10",
+      "P11",
+      "P12",
+      "P13",
+      "P14",
+      "P15",
+      "P16",
+      "P17",
+      "P18",
+      "I01",
+      "I02",
+      "I03",
+      "I04",
+      "I05",
+      "T31",
+      "T32",
+      "T33",
+      "T34",
+      "T41",
+      "T42",
+      "T43",
+      "T44",
+      "P19",
+      "P20",
+      "P21",
+      "P22",
+      "L01",
+      "L02",
+      "L03",
+      "L04",
+      "L05",
+      "L06",
+      "L07",
+      "J01",
+      "J02",
+      "J03",
+      "J04",
+      "J05",
+      "J06",
+      "J07",
+      "J08",
+      "J09",
+      "J10",
+      "J11",
+      "J12",
+      "J13",
+      "J14",
+      "J15",
+      "J16",
+      "J17",
+      "J18",
+      "J19",
+      "J20",
+      "J21",
+      "J22",
+      "J23",
+      "W01",
+      "W02",
+      "W03",
+      "W04",
+      "W05",
+      "W06",
+      "W07",
+      "W08",
+      "W09",
+      "W10",
+      "W11",
+      "W12",
+      "W13",
+      "W14",
+      "WI11",
+      "WI12",
+      "WI21",
+      "WI22",
+      "WI41",
+      "WI42",
+      "WI51",
+      "WI52",
+      "W15",
+      "W16",
+      "W17",
+      "W18",
+      "W19"
+    ],
+    "comparison": [],
+    "related": false,
+    "triangles": 463032,
+    "finite": true,
+    "gl_error": 0,
+    "motion_created": false
+  },
+  "wireChecks": [
+    {
+      "id": "W01",
+      "render": {
+        "selected": "W01",
+        "source_view": "overview",
+        "uncovered": false,
+        "model_features": 92,
+        "shown_features": 2,
+        "shown_ids": [
+          "L06",
+          "W01"
+        ],
+        "comparison": [],
+        "related": true,
+        "triangles": 463032,
+        "finite": true,
+        "gl_error": 0,
+        "motion_created": false
+      },
+      "markers": 2,
+      "notes": 3,
+      "viewBox": "299 220 270 169",
+      "expected": [
+        "L06",
+        "W01"
+      ]
+    },
+    {
+      "id": "W02",
+      "render": {
+        "selected": "W02",
+        "source_view": "overview",
+        "uncovered": false,
+        "model_features": 92,
+        "shown_features": 1,
+        "shown_ids": [
+          "W02"
+        ],
+        "comparison": [],
+        "related": true,
+        "triangles": 463032,
+        "finite": true,
+        "gl_error": 0,
+        "motion_created": false
+      },
+      "markers": 2,
+      "notes": 3,
+      "viewBox": "292 243 259 209",
+      "expected": [
+        "W02"
+      ]
+    },
+    {
+      "id": "W03",
+      "render": {
+        "selected": "W03",
+        "source_view": "overview",
+        "uncovered": false,
+        "model_features": 92,
+        "shown_features": 2,
+        "shown_ids": [
+          "L07",
+          "W03"
+        ],
+        "comparison": [],
+        "related": true,
+        "triangles": 463032,
+        "finite": true,
+        "gl_error": 0,
+        "motion_created": false
+      },
+      "markers": 2,
+      "notes": 3,
+      "viewBox": "1110 182 173 238",
+      "expected": [
+        "L07",
+        "W03"
+      ]
+    },
+    {
+      "id": "W04",
+      "render": {
+        "selected": "W04",
+        "source_view": "overview",
+        "uncovered": false,
+        "model_features": 92,
+        "shown_features": 2,
+        "shown_ids": [
+          "L05",
+          "W04"
+        ],
+        "comparison": [],
+        "related": true,
+        "triangles": 463032,
+        "finite": true,
+        "gl_error": 0,
+        "motion_created": false
+      },
+      "markers": 2,
+      "notes": 3,
+      "viewBox": "657 693 484 153",
+      "expected": [
+        "L05",
+        "W04"
+      ]
+    },
+    {
+      "id": "W05",
+      "render": {
+        "selected": "W05",
+        "source_view": "overview",
+        "uncovered": false,
+        "model_features": 92,
+        "shown_features": 2,
+        "shown_ids": [
+          "L04",
+          "W05"
+        ],
+        "comparison": [],
+        "related": true,
+        "triangles": 463032,
+        "finite": true,
+        "gl_error": 0,
+        "motion_created": false
+      },
+      "markers": 2,
+      "notes": 3,
+      "viewBox": "598 733 388 132",
+      "expected": [
+        "L04",
+        "W05"
+      ]
+    },
+    {
+      "id": "W06",
+      "render": {
+        "selected": "W06",
+        "source_view": "overview",
+        "uncovered": false,
+        "model_features": 92,
+        "shown_features": 1,
+        "shown_ids": [
+          "W06"
+        ],
+        "comparison": [],
+        "related": true,
+        "triangles": 463032,
+        "finite": true,
+        "gl_error": 0,
+        "motion_created": false
+      },
+      "markers": 2,
+      "notes": 3,
+      "viewBox": "247 627 172 162",
+      "expected": [
+        "W06"
+      ]
+    },
+    {
+      "id": "W07",
+      "render": {
+        "selected": "W07",
+        "source_view": "overview",
+        "uncovered": false,
+        "model_features": 92,
+        "shown_features": 1,
+        "shown_ids": [
+          "W07"
+        ],
+        "comparison": [],
+        "related": true,
+        "triangles": 463032,
+        "finite": true,
+        "gl_error": 0,
+        "motion_created": false
+      },
+      "markers": 2,
+      "notes": 3,
+      "viewBox": "248 614 194 170",
+      "expected": [
+        "W07"
+      ]
+    },
+    {
+      "id": "W08",
+      "render": {
+        "selected": "W08",
+        "source_view": "overview",
+        "uncovered": false,
+        "model_features": 92,
+        "shown_features": 2,
+        "shown_ids": [
+          "T41",
+          "W08"
+        ],
+        "comparison": [],
+        "related": true,
+        "triangles": 463032,
+        "finite": true,
+        "gl_error": 0,
+        "motion_created": false
+      },
+      "markers": 2,
+      "notes": 3,
+      "viewBox": "391.5 451 160 174",
+      "expected": [
+        "T41",
+        "W08"
+      ]
+    },
+    {
+      "id": "W09",
+      "render": {
+        "selected": "W09",
+        "source_view": "overview",
+        "uncovered": false,
+        "model_features": 92,
+        "shown_features": 2,
+        "shown_ids": [
+          "T42",
+          "W09"
+        ],
+        "comparison": [],
+        "related": true,
+        "triangles": 463032,
+        "finite": true,
+        "gl_error": 0,
+        "motion_created": false
+      },
+      "markers": 2,
+      "notes": 3,
+      "viewBox": "426.5 451 160 174",
+      "expected": [
+        "T42",
+        "W09"
+      ]
+    },
+    {
+      "id": "W10",
+      "render": {
+        "selected": "W10",
+        "source_view": "overview",
+        "uncovered": false,
+        "model_features": 92,
+        "shown_features": 2,
+        "shown_ids": [
+          "T44",
+          "W10"
+        ],
+        "comparison": [],
+        "related": true,
+        "triangles": 463032,
+        "finite": true,
+        "gl_error": 0,
+        "motion_created": false
+      },
+      "markers": 2,
+      "notes": 3,
+      "viewBox": "498 545 166 121",
+      "expected": [
+        "T44",
+        "W10"
+      ]
+    },
+    {
+      "id": "W11",
+      "render": {
+        "selected": "W11",
+        "source_view": "overview",
+        "uncovered": false,
+        "model_features": 92,
+        "shown_features": 1,
+        "shown_ids": [
+          "W11"
+        ],
+        "comparison": [],
+        "related": true,
+        "triangles": 463032,
+        "finite": true,
+        "gl_error": 0,
+        "motion_created": false
+      },
+      "markers": 2,
+      "notes": 3,
+      "viewBox": "519 446 389 128",
+      "expected": [
+        "W11"
+      ]
+    },
+    {
+      "id": "W12",
+      "render": {
+        "selected": "W12",
+        "source_view": "overview",
+        "uncovered": false,
+        "model_features": 92,
+        "shown_features": 1,
+        "shown_ids": [
+          "W12"
+        ],
+        "comparison": [],
+        "related": true,
+        "triangles": 463032,
+        "finite": true,
+        "gl_error": 0,
+        "motion_created": false
+      },
+      "markers": 2,
+      "notes": 3,
+      "viewBox": "531 457 383 126",
+      "expected": [
+        "W12"
+      ]
+    },
+    {
+      "id": "W13",
+      "render": {
+        "selected": "W13",
+        "source_view": "overview",
+        "uncovered": false,
+        "model_features": 92,
+        "shown_features": 1,
+        "shown_ids": [
+          "W13"
+        ],
+        "comparison": [],
+        "related": true,
+        "triangles": 463032,
+        "finite": true,
+        "gl_error": 0,
+        "motion_created": false
+      },
+      "markers": 2,
+      "notes": 3,
+      "viewBox": "631 472 217 111",
+      "expected": [
+        "W13"
+      ]
+    },
+    {
+      "id": "W14",
+      "render": {
+        "selected": "W14",
+        "source_view": "overview",
+        "uncovered": false,
+        "model_features": 92,
+        "shown_features": 1,
+        "shown_ids": [
+          "W14"
+        ],
+        "comparison": [],
+        "related": true,
+        "triangles": 463032,
+        "finite": true,
+        "gl_error": 0,
+        "motion_created": false
+      },
+      "markers": 2,
+      "notes": 3,
+      "viewBox": "287 392 545 181",
+      "expected": [
+        "W14"
+      ]
+    },
+    {
+      "id": "WI11",
+      "render": {
+        "selected": "WI11",
+        "source_view": "overview",
+        "uncovered": false,
+        "model_features": 92,
+        "shown_features": 2,
+        "shown_ids": [
+          "I01",
+          "WI11"
+        ],
+        "comparison": [],
+        "related": true,
+        "triangles": 463032,
+        "finite": true,
+        "gl_error": 0,
+        "motion_created": false
+      },
+      "markers": 2,
+      "notes": 3,
+      "viewBox": "320 721 160 123",
+      "expected": [
+        "I01",
+        "WI11"
+      ]
+    },
+    {
+      "id": "WI12",
+      "render": {
+        "selected": "WI12",
+        "source_view": "overview",
+        "uncovered": false,
+        "model_features": 92,
+        "shown_features": 2,
+        "shown_ids": [
+          "I01",
+          "WI12"
+        ],
+        "comparison": [],
+        "related": true,
+        "triangles": 463032,
+        "finite": true,
+        "gl_error": 0,
+        "motion_created": false
+      },
+      "markers": 2,
+      "notes": 3,
+      "viewBox": "351.5 724 160 120",
+      "expected": [
+        "I01",
+        "WI12"
+      ]
+    },
+    {
+      "id": "WI21",
+      "render": {
+        "selected": "WI21",
+        "source_view": "overview",
+        "uncovered": false,
+        "model_features": 92,
+        "shown_features": 2,
+        "shown_ids": [
+          "I02",
+          "WI21"
+        ],
+        "comparison": [],
+        "related": true,
+        "triangles": 463032,
+        "finite": true,
+        "gl_error": 0,
+        "motion_created": false
+      },
+      "markers": 2,
+      "notes": 3,
+      "viewBox": "476 734 160 110",
+      "expected": [
+        "I02",
+        "WI21"
+      ]
+    },
+    {
+      "id": "WI22",
+      "render": {
+        "selected": "WI22",
+        "source_view": "overview",
+        "uncovered": false,
+        "model_features": 92,
+        "shown_features": 2,
+        "shown_ids": [
+          "I02",
+          "WI22"
+        ],
+        "comparison": [],
+        "related": true,
+        "triangles": 463032,
+        "finite": true,
+        "gl_error": 0,
+        "motion_created": false
+      },
+      "markers": 2,
+      "notes": 3,
+      "viewBox": "516.5 721 160 123",
+      "expected": [
+        "I02",
+        "WI22"
+      ]
+    },
+    {
+      "id": "WI41",
+      "render": {
+        "selected": "WI41",
+        "source_view": "overview",
+        "uncovered": false,
+        "model_features": 92,
+        "shown_features": 2,
+        "shown_ids": [
+          "I04",
+          "WI41"
+        ],
+        "comparison": [],
+        "related": true,
+        "triangles": 463032,
+        "finite": true,
+        "gl_error": 0,
+        "motion_created": false
+      },
+      "markers": 2,
+      "notes": 3,
+      "viewBox": "888 738 160 110",
+      "expected": [
+        "I04",
+        "WI41"
+      ]
+    },
+    {
+      "id": "WI42",
+      "render": {
+        "selected": "WI42",
+        "source_view": "overview",
+        "uncovered": false,
+        "model_features": 92,
+        "shown_features": 2,
+        "shown_ids": [
+          "I04",
+          "WI42"
+        ],
+        "comparison": [],
+        "related": true,
+        "triangles": 463032,
+        "finite": true,
+        "gl_error": 0,
+        "motion_created": false
+      },
+      "markers": 2,
+      "notes": 3,
+      "viewBox": "922 725 160 120",
+      "expected": [
+        "I04",
+        "WI42"
+      ]
+    },
+    {
+      "id": "WI51",
+      "render": {
+        "selected": "WI51",
+        "source_view": "overview",
+        "uncovered": false,
+        "model_features": 92,
+        "shown_features": 2,
+        "shown_ids": [
+          "I05",
+          "WI51"
+        ],
+        "comparison": [],
+        "related": true,
+        "triangles": 463032,
+        "finite": true,
+        "gl_error": 0,
+        "motion_created": false
+      },
+      "markers": 2,
+      "notes": 3,
+      "viewBox": "1026 718 160 128",
+      "expected": [
+        "I05",
+        "WI51"
+      ]
+    },
+    {
+      "id": "WI52",
+      "render": {
+        "selected": "WI52",
+        "source_view": "overview",
+        "uncovered": false,
+        "model_features": 92,
+        "shown_features": 2,
+        "shown_ids": [
+          "I05",
+          "WI52"
+        ],
+        "comparison": [],
+        "related": true,
+        "triangles": 463032,
+        "finite": true,
+        "gl_error": 0,
+        "motion_created": false
+      },
+      "markers": 2,
+      "notes": 3,
+      "viewBox": "1062.5 717 160 129",
+      "expected": [
+        "I05",
+        "WI52"
+      ]
+    },
+    {
+      "id": "W15",
+      "render": {
+        "selected": "W15",
+        "source_view": "overview",
+        "uncovered": false,
+        "model_features": 92,
+        "shown_features": 2,
+        "shown_ids": [
+          "T31",
+          "W15"
+        ],
+        "comparison": [],
+        "related": true,
+        "triangles": 463032,
+        "finite": true,
+        "gl_error": 0,
+        "motion_created": false
+      },
+      "markers": 2,
+      "notes": 3,
+      "viewBox": "393.5 261 160 194",
+      "expected": [
+        "T31",
+        "W15"
+      ]
+    },
+    {
+      "id": "W16",
+      "render": {
+        "selected": "W16",
+        "source_view": "overview",
+        "uncovered": false,
+        "model_features": 92,
+        "shown_features": 2,
+        "shown_ids": [
+          "T32",
+          "W16"
+        ],
+        "comparison": [],
+        "related": true,
+        "triangles": 463032,
+        "finite": true,
+        "gl_error": 0,
+        "motion_created": false
+      },
+      "markers": 2,
+      "notes": 3,
+      "viewBox": "391 334 170 127",
+      "expected": [
+        "T32",
+        "W16"
+      ]
+    },
+    {
+      "id": "W17",
+      "render": {
+        "selected": "W17",
+        "source_view": "overview",
+        "uncovered": false,
+        "model_features": 92,
+        "shown_features": 2,
+        "shown_ids": [
+          "T33",
+          "W17"
+        ],
+        "comparison": [],
+        "related": true,
+        "triangles": 463032,
+        "finite": true,
+        "gl_error": 0,
+        "motion_created": false
+      },
+      "markers": 2,
+      "notes": 3,
+      "viewBox": "479 338 160 124",
+      "expected": [
+        "T33",
+        "W17"
+      ]
+    },
+    {
+      "id": "W18",
+      "render": {
+        "selected": "W18",
+        "source_view": "overview",
+        "uncovered": false,
+        "model_features": 92,
+        "shown_features": 2,
+        "shown_ids": [
+          "T34",
+          "W18"
+        ],
+        "comparison": [],
+        "related": true,
+        "triangles": 463032,
+        "finite": true,
+        "gl_error": 0,
+        "motion_created": false
+      },
+      "markers": 2,
+      "notes": 3,
+      "viewBox": "396.5 244 160 120",
+      "expected": [
+        "T34",
+        "W18"
+      ]
+    },
+    {
+      "id": "W19",
+      "render": {
+        "selected": "W19",
+        "source_view": "overview",
+        "uncovered": false,
+        "model_features": 92,
+        "shown_features": 2,
+        "shown_ids": [
+          "T43",
+          "W19"
+        ],
+        "comparison": [],
+        "related": true,
+        "triangles": 463032,
+        "finite": true,
+        "gl_error": 0,
+        "motion_created": false
+      },
+      "markers": 2,
+      "notes": 3,
+      "viewBox": "359 479.5 160 110",
+      "expected": [
+        "T43",
+        "W19"
+      ]
+    }
+  ],
+  "traces": {
+    "rows": 27,
+    "retiredAbsent": true,
+    "expectedRegion": "occluded_expected_region"
+  },
+  "candidateChecks": [
+    {
+      "id": "CC01",
+      "render": {
+        "selected": "W04",
+        "source_view": "overview",
+        "uncovered": false,
+        "model_features": 92,
+        "shown_features": 4,
+        "shown_ids": [
+          "I05",
+          "L05",
+          "W04",
+          "WI52"
+        ],
+        "comparison": [
+          "W04",
+          "WI52"
+        ],
+        "related": true,
+        "triangles": 463032,
+        "finite": true,
+        "gl_error": 0,
+        "motion_created": false
+      },
+      "markers": 4,
+      "photoMarks": 2,
+      "expected": [
+        "I05",
+        "L05",
+        "W04",
+        "WI52"
+      ]
+    },
+    {
+      "id": "CC02",
+      "render": {
+        "selected": "W05",
+        "source_view": "overview",
+        "uncovered": false,
+        "model_features": 92,
+        "shown_features": 4,
+        "shown_ids": [
+          "I04",
+          "L04",
+          "W05",
+          "WI42"
+        ],
+        "comparison": [
+          "W05",
+          "WI42"
+        ],
+        "related": true,
+        "triangles": 463032,
+        "finite": true,
+        "gl_error": 0,
+        "motion_created": false
+      },
+      "markers": 4,
+      "photoMarks": 2,
+      "expected": [
+        "I04",
+        "L04",
+        "W05",
+        "WI42"
+      ]
+    }
+  ],
+  "detailTrace": {
+    "render": {
+      "selected": "W15",
+      "source_view": "detail",
+      "uncovered": false,
+      "model_features": 92,
+      "shown_features": 2,
+      "shown_ids": [
+        "T31",
+        "W15"
+      ],
+      "comparison": [],
+      "related": true,
+      "triangles": 463032,
+      "finite": true,
+      "gl_error": 0,
+      "motion_created": false
+    },
+    "markers": 2
+  },
+  "missing_links": [],
+  "javascript_errors": [],
+  "scope": "UI display and interaction only; no physical acceptance"
+}

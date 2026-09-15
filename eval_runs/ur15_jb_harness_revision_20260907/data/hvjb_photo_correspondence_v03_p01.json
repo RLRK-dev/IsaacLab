@@ -1,0 +1,5466 @@
+{
+  "revision": "v03",
+  "observed_at": "2026-09-15T20:08:02.836598+09:00",
+  "status": "partial_photo_correspondence_before_motion",
+  "photo_basis": "overview",
+  "photos": {
+    "overview": {
+      "file": "references/op040_real_products_20260912/ampere_product_photo_1.jpg",
+      "url": "https://ampereev.com/wp-content/uploads/2022/05/DSC02860-1.jpg",
+      "sha256": "5724681b4bef4399f0799751a62577e48ef9b7fd3d6ed5b56d85fd95924937ad",
+      "size_px": [
+        1620,
+        1080
+      ]
+    },
+    "detail": {
+      "file": "references/op040_real_products_20260912/ampere_product_photo_2.jpg",
+      "url": "https://ampereev.com/wp-content/uploads/2022/05/DSC02864.jpg",
+      "sha256": "5ae831226050fb2430894f3a0462d87c1ffa8991fad453bb8945b2c983233b2e",
+      "size_px": [
+        1620,
+        1080
+      ]
+    },
+    "side": {
+      "file": "references/op040_real_products_20260912/ampere_product_photo_3.jpg",
+      "url": "https://ampereev.com/wp-content/uploads/2022/05/DSC02878.jpg",
+      "sha256": "b654a278aec9b1a5c2e45b08f30cedd3b08b4f10003dd74a6c39579aa8278f70",
+      "size_px": [
+        1620,
+        1080
+      ]
+    },
+    "fuse_detail": {
+      "file": "references/hvjb_assembly_followup_20260915/fuse_detail.png",
+      "sha256": "1b822cd4a08c8de69d5c47e0771d955b5571d4d3f76fa0f8515e8c033e834edb",
+      "source": "assembly_20250607",
+      "requested_seek_s": 35,
+      "timestamp_basis": "ffmpeg accurate seek; first decoded display frame at/after requested time",
+      "size_px": [
+        1920,
+        1080
+      ],
+      "label_ja": "挿入写真：後方の補機ヒューズ5個",
+      "pixel_transform": "none; decoded full frame, no crop or generative edit",
+      "url": "https://www.youtube.com/watch?v=Sm_D-vmNYqc"
+    },
+    "main_pointer": {
+      "file": "references/hvjb_assembly_followup_20260915/main_pointer.png",
+      "sha256": "184be1b27d8b8d34aaa3861d9ddbabb031700181c76a111d3dfa398389c8b533",
+      "source": "explanation_20240201",
+      "requested_seek_s": 68,
+      "timestamp_basis": "ffmpeg accurate seek; first decoded display frame at/after requested time",
+      "size_px": [
+        1920,
+        1080
+      ],
+      "label_ja": "指定写真上の主ヒューズ付近を指す公式解説",
+      "pixel_transform": "none; decoded full frame, no crop or generative edit",
+      "url": "https://www.youtube.com/watch?v=oXPIRNZ4xcs"
+    },
+    "main_sample": {
+      "file": "references/hvjb_assembly_followup_20260915/main_sample.png",
+      "sha256": "cc72a8e0689ca51fbe03ce3e3061bb56a20331140ff5c123832a06e43a3721b0",
+      "source": "explanation_20240201",
+      "requested_seek_s": 72,
+      "timestamp_basis": "ffmpeg accurate seek; first decoded display frame at/after requested time",
+      "size_px": [
+        1920,
+        1080
+      ],
+      "label_ja": "主ヒューズ説明時の円筒胴・両端平板端子",
+      "pixel_transform": "none; decoded full frame, no crop or generative edit",
+      "url": "https://www.youtube.com/watch?v=oXPIRNZ4xcs"
+    },
+    "subassembly": {
+      "file": "references/hvjb_assembly_followup_20260915/subassembly.png",
+      "sha256": "ae36aa75719958753f4436dfbae171b1c5e969f7d931fab39e227122585bcddc",
+      "source": "assembly_20250607",
+      "requested_seek_s": 24,
+      "timestamp_basis": "ffmpeg accurate seek; first decoded display frame at/after requested time",
+      "size_px": [
+        1920,
+        1080
+      ],
+      "label_ja": "2025年の組立例：抵抗と接触器の下板",
+      "pixel_transform": "none; decoded full frame, no crop or generative edit",
+      "url": "https://www.youtube.com/watch?v=Sm_D-vmNYqc"
+    },
+    "panel_wiring": {
+      "file": "references/hvjb_assembly_followup_20260915/panel_wiring.png",
+      "sha256": "9a4089947e62ef79eda7c0c4da34933a603aae9f9dcdd467922ff668066bcc50",
+      "source": "assembly_20250607",
+      "requested_seek_s": 50,
+      "timestamp_basis": "ffmpeg accurate seek; first decoded display frame at/after requested time",
+      "size_px": [
+        1920,
+        1080
+      ],
+      "label_ja": "2025年の組立例：箱外でヒューズ板へ配線",
+      "pixel_transform": "none; decoded full frame, no crop or generative edit",
+      "url": "https://www.youtube.com/watch?v=Sm_D-vmNYqc"
+    },
+    "insert_plate": {
+      "file": "references/hvjb_assembly_followup_20260915/insert_plate.png",
+      "sha256": "17f3bd544afcd121f87e36edb026d41d4172557487f54b705a3ae672573f6dec",
+      "source": "assembly_20250607",
+      "requested_seek_s": 145,
+      "timestamp_basis": "ffmpeg accurate seek; first decoded display frame at/after requested time",
+      "size_px": [
+        1920,
+        1080
+      ],
+      "label_ja": "2025年の組立例：内部サブアセンブリを箱へ挿入",
+      "pixel_transform": "none; decoded full frame, no crop or generative edit",
+      "url": "https://www.youtube.com/watch?v=Sm_D-vmNYqc"
+    },
+    "crimp": {
+      "file": "references/hvjb_assembly_followup_20260915/crimp.png",
+      "sha256": "f6fce41ea84004b571b30bd1a6c4cef05b23cbf15bdb28cb8b70ffc3b9f9f8c1",
+      "source": "assembly_20250607",
+      "requested_seek_s": 103,
+      "timestamp_basis": "ffmpeg accurate seek; first decoded display frame at/after requested time",
+      "size_px": [
+        1920,
+        1080
+      ],
+      "label_ja": "2025年の組立例：配線端末の準備",
+      "pixel_transform": "none; decoded full frame, no crop or generative edit",
+      "url": "https://www.youtube.com/watch?v=Sm_D-vmNYqc"
+    },
+    "busbars": {
+      "file": "references/hvjb_assembly_followup_20260915/busbars.png",
+      "sha256": "e1da438a6be112804da056e47242ad0fde31020eff240be2f66dcbaf81835c51",
+      "source": "assembly_20250607",
+      "requested_seek_s": 237,
+      "timestamp_basis": "ffmpeg accurate seek; first decoded display frame at/after requested time",
+      "size_px": [
+        1920,
+        1080
+      ],
+      "label_ja": "2025年の組立例：別体バスバーを後から取り付け",
+      "pixel_transform": "none; decoded full frame, no crop or generative edit",
+      "url": "https://www.youtube.com/watch?v=Sm_D-vmNYqc"
+    }
+  },
+  "parts": [
+    {
+      "id": "P01",
+      "name_ja": "黒い筐体・四隅の蓋ねじボス",
+      "profile": "case",
+      "rect_px": [
+        211,
+        201,
+        1160,
+        708
+      ],
+      "note_ja": "筐体外形は公開図。内部加工・ボス詳細は未公開。",
+      "model_id": "REF_P01",
+      "photo": "overview",
+      "manufacturing_dimensions_m": null,
+      "part_number": null,
+      "physical_bom_quantity": null,
+      "observations": {
+        "overview": {
+          "rect_px": [
+            211,
+            201,
+            1160,
+            708
+          ]
+        }
+      }
+    },
+    {
+      "id": "P02",
+      "name_ja": "GIGAVAC表示の主接触器",
+      "profile": "contactor",
+      "rect_px": [
+        621,
+        509,
+        466,
+        266
+      ],
+      "note_ja": "製品機能と写真は対応。GX14は候補に留め、末尾仕様は未同定。",
+      "model_id": "REF_P02",
+      "photo": "overview",
+      "manufacturing_dimensions_m": null,
+      "part_number": null,
+      "physical_bom_quantity": null,
+      "observations": {
+        "overview": {
+          "rect_px": [
+            621,
+            509,
+            466,
+            266
+          ]
+        }
+      }
+    },
+    {
+      "id": "P03",
+      "name_ja": "写真上側の角形リレー本体",
+      "profile": "relay",
+      "rect_px": [
+        453,
+        291,
+        142,
+        142
+      ],
+      "note_ja": "プリチャージ／放電のどちらかは未対応。",
+      "model_id": "REF_P03",
+      "photo": "overview",
+      "manufacturing_dimensions_m": null,
+      "part_number": null,
+      "physical_bom_quantity": null,
+      "observations": {
+        "overview": {
+          "rect_px": [
+            453,
+            291,
+            142,
+            142
+          ]
+        }
+      }
+    },
+    {
+      "id": "P04",
+      "name_ja": "写真下側の角形リレー本体",
+      "profile": "relay",
+      "rect_px": [
+        432,
+        494,
+        160,
+        171
+      ],
+      "note_ja": "プリチャージ／放電のどちらかは未対応。",
+      "model_id": "REF_P04",
+      "photo": "overview",
+      "manufacturing_dimensions_m": null,
+      "part_number": null,
+      "physical_bom_quantity": null,
+      "observations": {
+        "overview": {
+          "rect_px": [
+            432,
+            494,
+            160,
+            171
+          ]
+        }
+      }
+    },
+    {
+      "id": "P05",
+      "name_ja": "上部左の筒状ヒューズ",
+      "profile": "fuse",
+      "rect_px": [
+        621,
+        269,
+        184,
+        84
+      ],
+      "note_ja": "公式映像35秒の挿入写真で本体・両端キャップを識別。表示文字: Littelfuse / HEV。注文品番・各接続口への実配線は未確定。P05の電流値を帯色から補完しない。",
+      "model_id": "REF_P05",
+      "photo": "overview",
+      "manufacturing_dimensions_m": null,
+      "part_number": null,
+      "physical_bom_quantity": null,
+      "observations": {
+        "overview": {
+          "rect_px": [
+            621,
+            269,
+            184,
+            84
+          ]
+        },
+        "fuse_detail": {
+          "rect_px": [
+            550,
+            453,
+            365,
+            124
+          ]
+        }
+      },
+      "display_fuse_column": 0,
+      "display_fuse_level": 0,
+      "observed_marking": "Littelfuse / HEV",
+      "observed_current_a": null,
+      "electrical_branch": null
+    },
+    {
+      "id": "P06",
+      "name_ja": "上部右の筒状ヒューズ",
+      "profile": "fuse",
+      "rect_px": [
+        897,
+        267,
+        183,
+        79
+      ],
+      "note_ja": "公式映像35秒の挿入写真で本体・両端キャップを識別。表示文字: Littelfuse / HEV 30A。注文品番・各接続口への実配線は未確定。P05の電流値を帯色から補完しない。",
+      "model_id": "REF_P06",
+      "photo": "overview",
+      "manufacturing_dimensions_m": null,
+      "part_number": null,
+      "physical_bom_quantity": null,
+      "observations": {
+        "overview": {
+          "rect_px": [
+            897,
+            267,
+            183,
+            79
+          ]
+        },
+        "fuse_detail": {
+          "rect_px": [
+            1150,
+            405,
+            380,
+            126
+          ]
+        }
+      },
+      "display_fuse_column": 1,
+      "display_fuse_level": 0,
+      "observed_marking": "Littelfuse / HEV 30A",
+      "observed_current_a": 30,
+      "electrical_branch": null
+    },
+    {
+      "id": "P07",
+      "name_ja": "後方の補機ヒューズ取付板・上端",
+      "profile": "fuse_panel",
+      "rect_px": [
+        556,
+        216,
+        585,
+        55
+      ],
+      "note_ja": "動画内の拡大写真で左3段・右2段を確認。板の全輪郭・材質・厚さ・支持方法は未確定。",
+      "model_id": "REF_P07",
+      "photo": "overview",
+      "manufacturing_dimensions_m": null,
+      "part_number": null,
+      "physical_bom_quantity": null,
+      "observations": {
+        "overview": {
+          "rect_px": [
+            556,
+            216,
+            585,
+            55
+          ]
+        }
+      }
+    },
+    {
+      "id": "P08",
+      "name_ja": "主ヒューズ上の黒い被覆",
+      "profile": "central_cover",
+      "rect_px": [
+        718,
+        343,
+        250,
+        193
+      ],
+      "note_ja": "公式解説の指示位置と円筒ヒューズに対応する被覆。材質・断面寸法・固定方法は未確定。",
+      "model_id": "REF_P08",
+      "photo": "overview",
+      "manufacturing_dimensions_m": null,
+      "part_number": null,
+      "physical_bom_quantity": null,
+      "observations": {
+        "overview": {
+          "rect_px": [
+            718,
+            343,
+            250,
+            193
+          ]
+        }
+      }
+    },
+    {
+      "id": "P09",
+      "name_ja": "左主端子から内側へ延びる板状導体",
+      "profile": "bus_left_upper",
+      "rect_px": [
+        348,
+        414,
+        374,
+        105
+      ],
+      "note_ja": "詳細写真にある端子側の受け面と縦板を表示。v01の平板直方体を修正。隠れた曲げ・部品境界は未確定。",
+      "model_id": "REF_P09",
+      "photo": "overview",
+      "manufacturing_dimensions_m": null,
+      "part_number": null,
+      "physical_bom_quantity": null,
+      "observations": {
+        "overview": {
+          "rect_px": [
+            348,
+            414,
+            374,
+            105
+          ]
+        }
+      }
+    },
+    {
+      "id": "P10",
+      "name_ja": "右主端子から内側へ延びる板状導体",
+      "profile": "bus_right_upper",
+      "rect_px": [
+        963,
+        383,
+        242,
+        151
+      ],
+      "note_ja": "詳細写真にある端子側の受け面と縦板を表示。v01の平板直方体を修正。隠れた曲げ・部品境界は未確定。",
+      "model_id": "REF_P10",
+      "photo": "overview",
+      "manufacturing_dimensions_m": null,
+      "part_number": null,
+      "physical_bom_quantity": null,
+      "observations": {
+        "overview": {
+          "rect_px": [
+            963,
+            383,
+            242,
+            151
+          ]
+        }
+      }
+    },
+    {
+      "id": "P11",
+      "name_ja": "左下主端子付近の板状導体",
+      "profile": "bus_left_lower",
+      "rect_px": [
+        345,
+        576,
+        97,
+        160
+      ],
+      "note_ja": "下側の接続部と重なる。製造部品としての分割は未確定。",
+      "model_id": "REF_P11",
+      "photo": "overview",
+      "manufacturing_dimensions_m": null,
+      "part_number": null,
+      "physical_bom_quantity": null,
+      "observations": {
+        "overview": {
+          "rect_px": [
+            345,
+            576,
+            97,
+            160
+          ]
+        }
+      }
+    },
+    {
+      "id": "P12",
+      "name_ja": "接触器右端子と右下主端子間の板状導体",
+      "profile": "bus_right_lower",
+      "rect_px": [
+        1002,
+        564,
+        214,
+        104
+      ],
+      "note_ja": "板と2か所の締結点が見える。座金・端子の積層は未確定。",
+      "model_id": "REF_P12",
+      "photo": "overview",
+      "manufacturing_dimensions_m": null,
+      "part_number": null,
+      "physical_bom_quantity": null,
+      "observations": {
+        "overview": {
+          "rect_px": [
+            1002,
+            564,
+            214,
+            104
+          ]
+        }
+      }
+    },
+    {
+      "id": "P13",
+      "name_ja": "前方の複数ねじ付き板状導体",
+      "profile": "bus_front",
+      "rect_px": [
+        354,
+        697,
+        326,
+        63
+      ],
+      "note_ja": "丸端子が重なる。導体の裏側と他部材との境界は未確定。",
+      "model_id": "REF_P13",
+      "photo": "overview",
+      "manufacturing_dimensions_m": null,
+      "part_number": null,
+      "physical_bom_quantity": null,
+      "observations": {
+        "overview": {
+          "rect_px": [
+            354,
+            697,
+            326,
+            63
+          ]
+        }
+      }
+    },
+    {
+      "id": "P14",
+      "name_ja": "左側の主2極ハウジング",
+      "profile": "main_left",
+      "rect_px": [
+        137,
+        418,
+        218,
+        269
+      ],
+      "note_ja": "Amphenol表示の公開図と外観に対応。詳細型式・寸法は未確定。",
+      "model_id": "REF_P14",
+      "photo": "overview",
+      "manufacturing_dimensions_m": null,
+      "part_number": null,
+      "physical_bom_quantity": null,
+      "observations": {
+        "overview": {
+          "rect_px": [
+            137,
+            418,
+            218,
+            269
+          ]
+        }
+      }
+    },
+    {
+      "id": "P15",
+      "name_ja": "右側の主2極ハウジング",
+      "profile": "main_right",
+      "rect_px": [
+        1237,
+        413,
+        187,
+        273
+      ],
+      "note_ja": "Amphenol表示の公開図と外観に対応。詳細型式・寸法は未確定。",
+      "model_id": "REF_P15",
+      "photo": "overview",
+      "manufacturing_dimensions_m": null,
+      "part_number": null,
+      "physical_bom_quantity": null,
+      "observations": {
+        "overview": {
+          "rect_px": [
+            1237,
+            413,
+            187,
+            273
+          ]
+        }
+      }
+    },
+    {
+      "id": "P16",
+      "name_ja": "前面3口外部ヘッダー",
+      "profile": "header_three",
+      "rect_px": [
+        322,
+        855,
+        485,
+        158
+      ],
+      "note_ja": "2103340-1公式CAD。キーA/D/Eを公開図へ照合。",
+      "model_id": "REF_P16",
+      "photo": "overview",
+      "manufacturing_dimensions_m": null,
+      "part_number": "2103340-1",
+      "physical_bom_quantity": null,
+      "observations": {
+        "overview": {
+          "rect_px": [
+            322,
+            855,
+            485,
+            158
+          ]
+        }
+      }
+    },
+    {
+      "id": "P17",
+      "name_ja": "前面2口外部ヘッダー",
+      "profile": "header_two",
+      "rect_px": [
+        920,
+        852,
+        314,
+        161
+      ],
+      "note_ja": "2103346-2公式CAD。キーD/Fを公開図へ照合。",
+      "model_id": "REF_P17",
+      "photo": "overview",
+      "manufacturing_dimensions_m": null,
+      "part_number": "2103346-2",
+      "physical_bom_quantity": null,
+      "observations": {
+        "overview": {
+          "rect_px": [
+            920,
+            852,
+            314,
+            161
+          ]
+        }
+      }
+    },
+    {
+      "id": "P18",
+      "name_ja": "奥側の黒い低圧12極ハウジング",
+      "profile": "lv_header",
+      "rect_px": [
+        377,
+        123,
+        94,
+        89
+      ],
+      "note_ja": "公開図は12極。メーカー・キー・品番は未確定。",
+      "model_id": "REF_P18",
+      "photo": "overview",
+      "manufacturing_dimensions_m": null,
+      "part_number": null,
+      "physical_bom_quantity": null,
+      "observations": {
+        "overview": {
+          "rect_px": [
+            377,
+            123,
+            94,
+            89
+          ]
+        }
+      }
+    },
+    {
+      "id": "I01",
+      "name_ja": "補機口1の内側ハウジング（キーA）",
+      "profile": "inner_header",
+      "rect_px": [
+        380,
+        789,
+        81,
+        72
+      ],
+      "part_number": "2103245-1",
+      "bay": 0,
+      "note_ja": "外部ハウジングと別部品。公式CADを使用。圧着端子・シールの全構成は未確定。",
+      "model_id": "REF_I01",
+      "photo": "overview",
+      "manufacturing_dimensions_m": null,
+      "physical_bom_quantity": null,
+      "observations": {
+        "overview": {
+          "rect_px": [
+            380,
+            789,
+            81,
+            72
+          ]
+        }
+      }
+    },
+    {
+      "id": "I02",
+      "name_ja": "補機口2の内側ハウジング（キーD）",
+      "profile": "inner_header",
+      "rect_px": [
+        535,
+        789,
+        81,
+        72
+      ],
+      "part_number": "2103245-4",
+      "bay": 1,
+      "note_ja": "外部ハウジングと別部品。公式CADを使用。圧着端子・シールの全構成は未確定。",
+      "model_id": "REF_I02",
+      "photo": "overview",
+      "manufacturing_dimensions_m": null,
+      "physical_bom_quantity": null,
+      "observations": {
+        "overview": {
+          "rect_px": [
+            535,
+            789,
+            81,
+            72
+          ]
+        }
+      }
+    },
+    {
+      "id": "I03",
+      "name_ja": "補機口3の内側ハウジング（キーE）",
+      "profile": "inner_header",
+      "rect_px": [
+        680,
+        789,
+        81,
+        72
+      ],
+      "part_number": "2103245-5",
+      "bay": 2,
+      "note_ja": "キーEの必要部品を公式CADで配置。指定写真では当該入口が隠れ、破線は推定所在。前版の一律生成線WI31/WI32を可視一覧から退役。接点・線・端子の必要数は維持。",
+      "model_id": "REF_I03",
+      "photo": "overview",
+      "manufacturing_dimensions_m": null,
+      "physical_bom_quantity": null,
+      "observations": {
+        "overview": {
+          "rect_px": [
+            680,
+            789,
+            81,
+            72
+          ],
+          "visibility": "occluded_expected_region"
+        }
+      },
+      "photo_visibility": "occluded; expected region only, not traced outer contour"
+    },
+    {
+      "id": "I04",
+      "name_ja": "補機口4の内側ハウジング（キーD）",
+      "profile": "inner_header",
+      "rect_px": [
+        973,
+        789,
+        81,
+        72
+      ],
+      "part_number": "2103245-4",
+      "bay": 3,
+      "note_ja": "外部ハウジングと別部品。公式CADを使用。圧着端子・シールの全構成は未確定。",
+      "model_id": "REF_I04",
+      "photo": "overview",
+      "manufacturing_dimensions_m": null,
+      "physical_bom_quantity": null,
+      "observations": {
+        "overview": {
+          "rect_px": [
+            973,
+            789,
+            81,
+            72
+          ]
+        }
+      }
+    },
+    {
+      "id": "I05",
+      "name_ja": "補機口5の内側ハウジング（キーF）",
+      "profile": "inner_header",
+      "rect_px": [
+        1115,
+        789,
+        81,
+        72
+      ],
+      "part_number": "2103245-6",
+      "bay": 4,
+      "note_ja": "外部ハウジングと別部品。公式CADを使用。圧着端子・シールの全構成は未確定。",
+      "model_id": "REF_I05",
+      "photo": "overview",
+      "manufacturing_dimensions_m": null,
+      "physical_bom_quantity": null,
+      "observations": {
+        "overview": {
+          "rect_px": [
+            1115,
+            789,
+            81,
+            72
+          ]
+        }
+      }
+    },
+    {
+      "id": "T31",
+      "name_ja": "P03上面の差込端末外装1",
+      "profile": "relay_terminal",
+      "rect_px": [
+        485,
+        291,
+        52,
+        33
+      ],
+      "relay": "P03",
+      "render_color": "translucent",
+      "note_ja": "原本に合わせて外装位置・線の入口を訂正。開口を持つ外装を表示する。外装の識別は金属コンタクト・リレー極番号・PC/放電の機能対応を確定しない。",
+      "model_id": "REF_T31",
+      "photo": "overview",
+      "manufacturing_dimensions_m": null,
+      "part_number": null,
+      "physical_bom_quantity": null,
+      "observations": {
+        "overview": {
+          "rect_px": [
+            485,
+            291,
+            52,
+            33
+          ]
+        },
+        "detail": {
+          "rect_px": [
+            79,
+            175,
+            89,
+            189
+          ]
+        }
+      },
+      "display_entry_px": [
+        508,
+        306
+      ],
+      "display_opening": "top"
+    },
+    {
+      "id": "T32",
+      "name_ja": "P03上面の差込端末外装2",
+      "profile": "relay_terminal",
+      "rect_px": [
+        491,
+        379,
+        47,
+        31
+      ],
+      "relay": "P03",
+      "render_color": "translucent",
+      "note_ja": "原本に合わせて外装位置・線の入口を訂正。開口を持つ外装を表示する。外装の識別は金属コンタクト・リレー極番号・PC/放電の機能対応を確定しない。",
+      "model_id": "REF_T32",
+      "photo": "overview",
+      "manufacturing_dimensions_m": null,
+      "part_number": null,
+      "physical_bom_quantity": null,
+      "observations": {
+        "overview": {
+          "rect_px": [
+            491,
+            379,
+            47,
+            31
+          ]
+        },
+        "detail": {
+          "rect_px": [
+            320,
+            169,
+            87,
+            204
+          ]
+        }
+      },
+      "display_entry_px": [
+        516,
+        392
+      ],
+      "display_opening": "top"
+    },
+    {
+      "id": "T33",
+      "name_ja": "P03上面の差込端末外装3",
+      "profile": "relay_terminal",
+      "rect_px": [
+        538,
+        325,
+        40,
+        61
+      ],
+      "relay": "P03",
+      "render_color": "ivory",
+      "note_ja": "原本に合わせて外装位置・線の入口を訂正。開口を持つ外装を表示する。外装の識別は金属コンタクト・リレー極番号・PC/放電の機能対応を確定しない。",
+      "model_id": "REF_T33",
+      "photo": "overview",
+      "manufacturing_dimensions_m": null,
+      "part_number": null,
+      "physical_bom_quantity": null,
+      "observations": {
+        "overview": {
+          "rect_px": [
+            538,
+            325,
+            40,
+            61
+          ]
+        },
+        "detail": {
+          "rect_px": [
+            180,
+            130,
+            179,
+            125
+          ]
+        }
+      },
+      "display_entry_px": [
+        558,
+        383
+      ],
+      "display_opening": "south"
+    },
+    {
+      "id": "T34",
+      "name_ja": "P03上面の差込端末外装4",
+      "profile": "relay_terminal",
+      "rect_px": [
+        457,
+        317,
+        41,
+        61
+      ],
+      "relay": "P03",
+      "render_color": "ivory",
+      "note_ja": "原本に合わせて外装位置・線の入口を訂正。開口を持つ外装を表示する。外装の識別は金属コンタクト・リレー極番号・PC/放電の機能対応を確定しない。",
+      "model_id": "REF_T34",
+      "photo": "overview",
+      "manufacturing_dimensions_m": null,
+      "part_number": null,
+      "physical_bom_quantity": null,
+      "observations": {
+        "overview": {
+          "rect_px": [
+            457,
+            317,
+            41,
+            61
+          ]
+        },
+        "detail": {
+          "rect_px": [
+            130,
+            314,
+            190,
+            176
+          ]
+        }
+      },
+      "display_entry_px": [
+        475,
+        319
+      ],
+      "display_opening": "north"
+    },
+    {
+      "id": "T41",
+      "name_ja": "P04上面の差込端末外装1",
+      "profile": "relay_terminal",
+      "rect_px": [
+        438,
+        556,
+        45,
+        47
+      ],
+      "relay": "P04",
+      "render_color": "translucent",
+      "note_ja": "原本に合わせて外装位置・線の入口を訂正。開口を持つ外装を表示する。外装の識別は金属コンタクト・リレー極番号・PC/放電の機能対応を確定しない。",
+      "model_id": "REF_T41",
+      "photo": "overview",
+      "manufacturing_dimensions_m": null,
+      "part_number": null,
+      "physical_bom_quantity": null,
+      "observations": {
+        "overview": {
+          "rect_px": [
+            438,
+            556,
+            45,
+            47
+          ]
+        },
+        "detail": {
+          "rect_px": [
+            816,
+            324,
+            112,
+            215
+          ]
+        }
+      },
+      "display_entry_px": [
+        455,
+        580
+      ],
+      "display_opening": "top"
+    },
+    {
+      "id": "T42",
+      "name_ja": "P04上面の差込端末外装2",
+      "profile": "relay_terminal",
+      "rect_px": [
+        525,
+        560,
+        43,
+        44
+      ],
+      "relay": "P04",
+      "render_color": "translucent",
+      "note_ja": "原本に合わせて外装位置・線の入口を訂正。開口を持つ外装を表示する。外装の識別は金属コンタクト・リレー極番号・PC/放電の機能対応を確定しない。",
+      "model_id": "REF_T42",
+      "photo": "overview",
+      "manufacturing_dimensions_m": null,
+      "part_number": null,
+      "physical_bom_quantity": null,
+      "observations": {
+        "overview": {
+          "rect_px": [
+            525,
+            560,
+            43,
+            44
+          ]
+        },
+        "detail": {
+          "rect_px": [
+            824,
+            160,
+            118,
+            194
+          ]
+        }
+      },
+      "display_entry_px": [
+        536,
+        580
+      ],
+      "display_opening": "top"
+    },
+    {
+      "id": "T43",
+      "name_ja": "P04上面の差込端末外装3",
+      "profile": "relay_terminal",
+      "rect_px": [
+        470,
+        513,
+        65,
+        40
+      ],
+      "relay": "P04",
+      "render_color": "ivory",
+      "note_ja": "原本に合わせて外装位置・線の入口を訂正。開口を持つ外装を表示する。外装の識別は金属コンタクト・リレー極番号・PC/放電の機能対応を確定しない。",
+      "model_id": "REF_T43",
+      "photo": "overview",
+      "manufacturing_dimensions_m": null,
+      "part_number": null,
+      "physical_bom_quantity": null,
+      "observations": {
+        "overview": {
+          "rect_px": [
+            470,
+            513,
+            65,
+            40
+          ]
+        },
+        "detail": {
+          "rect_px": [
+            695,
+            253,
+            108,
+            168
+          ]
+        }
+      },
+      "display_entry_px": [
+        472,
+        536
+      ],
+      "display_opening": "west"
+    },
+    {
+      "id": "T44",
+      "name_ja": "P04上面の差込端末外装4",
+      "profile": "relay_terminal",
+      "rect_px": [
+        479,
+        602,
+        69,
+        41
+      ],
+      "relay": "P04",
+      "render_color": "ivory",
+      "note_ja": "原本に合わせて外装位置・線の入口を訂正。開口を持つ外装を表示する。外装の識別は金属コンタクト・リレー極番号・PC/放電の機能対応を確定しない。",
+      "model_id": "REF_T44",
+      "photo": "overview",
+      "manufacturing_dimensions_m": null,
+      "part_number": null,
+      "physical_bom_quantity": null,
+      "observations": {
+        "overview": {
+          "rect_px": [
+            479,
+            602,
+            69,
+            41
+          ]
+        },
+        "detail": {
+          "rect_px": [
+            927,
+            238,
+            102,
+            185
+          ]
+        }
+      },
+      "display_entry_px": [
+        543,
+        621
+      ],
+      "display_opening": "east"
+    },
+    {
+      "id": "P19",
+      "model_id": "REF_P19",
+      "name_ja": "補機ヒューズ・左側の2段目",
+      "profile": "fuse",
+      "photo": "fuse_detail",
+      "rect_px": [
+        555,
+        565,
+        360,
+        110
+      ],
+      "note_ja": "公式映像35秒の挿入写真で本体・両端キャップを識別。表示文字: SCHURTER / 20A（系列文字は判読保留）。注文品番・各接続口への実配線は未確定。P05の電流値を帯色から補完しない。",
+      "part_number": null,
+      "physical_bom_quantity": null,
+      "manufacturing_dimensions_m": null,
+      "observations": {
+        "fuse_detail": {
+          "rect_px": [
+            555,
+            565,
+            360,
+            110
+          ]
+        }
+      },
+      "display_fuse_column": 0,
+      "display_fuse_level": 1,
+      "observed_marking": "SCHURTER / 20A（系列文字は判読保留）",
+      "observed_current_a": 20,
+      "electrical_branch": null
+    },
+    {
+      "id": "P20",
+      "model_id": "REF_P20",
+      "name_ja": "補機ヒューズ・右側の2段目",
+      "profile": "fuse",
+      "photo": "fuse_detail",
+      "rect_px": [
+        1155,
+        520,
+        340,
+        117
+      ],
+      "note_ja": "公式映像35秒の挿入写真で本体・両端キャップを識別。表示文字: SCHURTER / 20A（系列文字は判読保留）。注文品番・各接続口への実配線は未確定。P05の電流値を帯色から補完しない。",
+      "part_number": null,
+      "physical_bom_quantity": null,
+      "manufacturing_dimensions_m": null,
+      "observations": {
+        "fuse_detail": {
+          "rect_px": [
+            1155,
+            520,
+            340,
+            117
+          ]
+        }
+      },
+      "display_fuse_column": 1,
+      "display_fuse_level": 1,
+      "observed_marking": "SCHURTER / 20A（系列文字は判読保留）",
+      "observed_current_a": 20,
+      "electrical_branch": null
+    },
+    {
+      "id": "P21",
+      "model_id": "REF_P21",
+      "name_ja": "補機ヒューズ・左側の3段目",
+      "profile": "fuse",
+      "photo": "fuse_detail",
+      "rect_px": [
+        560,
+        674,
+        350,
+        108
+      ],
+      "note_ja": "公式映像35秒の挿入写真で本体・両端キャップを識別。表示文字: Littelfuse / HEV 10A。注文品番・各接続口への実配線は未確定。P05の電流値を帯色から補完しない。",
+      "part_number": null,
+      "physical_bom_quantity": null,
+      "manufacturing_dimensions_m": null,
+      "observations": {
+        "fuse_detail": {
+          "rect_px": [
+            560,
+            674,
+            350,
+            108
+          ]
+        }
+      },
+      "display_fuse_column": 0,
+      "display_fuse_level": 2,
+      "observed_marking": "Littelfuse / HEV 10A",
+      "observed_current_a": 10,
+      "electrical_branch": null
+    },
+    {
+      "id": "P22",
+      "model_id": "REF_P22",
+      "name_ja": "中央被覆内の主ヒューズ本体",
+      "profile": "main_fuse",
+      "photo": "overview",
+      "rect_px": [
+        690,
+        351,
+        313,
+        165
+      ],
+      "note_ja": "2024年公式解説68秒の指示位置と72秒の単体例から対応。胴・平板端子は表示推定、注文品番は未特定。",
+      "part_number": null,
+      "physical_bom_quantity": null,
+      "manufacturing_dimensions_m": null,
+      "observations": {
+        "overview": {
+          "rect_px": [
+            690,
+            351,
+            313,
+            165
+          ]
+        },
+        "main_pointer": {
+          "rect_px": [
+            825,
+            364,
+            403,
+            156
+          ]
+        },
+        "main_sample": {
+          "rect_px": [
+            802,
+            599,
+            155,
+            74
+          ]
+        }
+      },
+      "identity_basis": "manufacturer explanation and pointer; exact sample-to-installed order code unresolved"
+    },
+    {
+      "id": "L01",
+      "model_id": "REF_L01",
+      "name_ja": "J09近傍の丸端子・黒い端末被覆",
+      "profile": "lug_sleeve",
+      "photo": "overview",
+      "rect_px": [
+        303,
+        678,
+        86,
+        72
+      ],
+      "note_ja": "金属環と被覆の可視外形を追加。線の遠端・端子品番・被覆材質・共締めの全積層は未確定。",
+      "part_number": null,
+      "physical_bom_quantity": null,
+      "manufacturing_dimensions_m": null,
+      "joint": "J09",
+      "sleeve_direction_px": [
+        315,
+        690
+      ],
+      "observations": {
+        "overview": {
+          "rect_px": [
+            303,
+            678,
+            86,
+            72
+          ]
+        }
+      }
+    },
+    {
+      "id": "L02",
+      "model_id": "REF_L02",
+      "name_ja": "J10近傍の丸端子・黒い端末被覆",
+      "profile": "lug_sleeve",
+      "photo": "overview",
+      "rect_px": [
+        379,
+        681,
+        67,
+        65
+      ],
+      "note_ja": "金属環と被覆の可視外形を追加。線の遠端・端子品番・被覆材質・共締めの全積層は未確定。",
+      "part_number": null,
+      "physical_bom_quantity": null,
+      "manufacturing_dimensions_m": null,
+      "joint": "J10",
+      "sleeve_direction_px": [
+        391,
+        693
+      ],
+      "observations": {
+        "overview": {
+          "rect_px": [
+            379,
+            681,
+            67,
+            65
+          ]
+        }
+      }
+    },
+    {
+      "id": "L03",
+      "model_id": "REF_L03",
+      "name_ja": "J11近傍の丸端子・黒い端末被覆",
+      "profile": "lug_sleeve",
+      "photo": "overview",
+      "rect_px": [
+        437,
+        689,
+        84,
+        53
+      ],
+      "note_ja": "金属環と被覆の可視外形を追加。線の遠端・端子品番・被覆材質・共締めの全積層は未確定。",
+      "part_number": null,
+      "physical_bom_quantity": null,
+      "manufacturing_dimensions_m": null,
+      "joint": "J11",
+      "sleeve_direction_px": [
+        449,
+        701
+      ],
+      "observations": {
+        "overview": {
+          "rect_px": [
+            437,
+            689,
+            84,
+            53
+          ]
+        }
+      }
+    },
+    {
+      "id": "L04",
+      "model_id": "REF_L04",
+      "name_ja": "J12近傍の丸端子・黒い端末被覆",
+      "profile": "lug_sleeve",
+      "photo": "overview",
+      "rect_px": [
+        563,
+        723,
+        88,
+        69
+      ],
+      "note_ja": "金属環と被覆の可視外形を追加。線の遠端・端子品番・被覆材質・共締めの全積層は未確定。",
+      "part_number": null,
+      "physical_bom_quantity": null,
+      "manufacturing_dimensions_m": null,
+      "joint": "J12",
+      "sleeve_direction_px": [
+        639,
+        780
+      ],
+      "observations": {
+        "overview": {
+          "rect_px": [
+            563,
+            723,
+            88,
+            69
+          ]
+        }
+      }
+    },
+    {
+      "id": "L05",
+      "model_id": "REF_L05",
+      "name_ja": "J13近傍の丸端子・黒い端末被覆",
+      "profile": "lug_sleeve",
+      "photo": "overview",
+      "rect_px": [
+        623,
+        723,
+        91,
+        66
+      ],
+      "note_ja": "金属環と被覆の可視外形を追加。線の遠端・端子品番・被覆材質・共締めの全積層は未確定。",
+      "part_number": null,
+      "physical_bom_quantity": null,
+      "manufacturing_dimensions_m": null,
+      "joint": "J13",
+      "sleeve_direction_px": [
+        702,
+        777
+      ],
+      "observations": {
+        "overview": {
+          "rect_px": [
+            623,
+            723,
+            91,
+            66
+          ]
+        }
+      }
+    },
+    {
+      "id": "L06",
+      "model_id": "REF_L06",
+      "name_ja": "J14近傍の丸端子・黒い端末被覆",
+      "profile": "lug_sleeve",
+      "photo": "overview",
+      "rect_px": [
+        512,
+        264,
+        83,
+        30
+      ],
+      "note_ja": "金属環と被覆の可視外形を追加。線の遠端・端子品番・被覆材質・共締めの全積層は未確定。",
+      "part_number": null,
+      "physical_bom_quantity": null,
+      "manufacturing_dimensions_m": null,
+      "joint": "J14",
+      "sleeve_direction_px": [
+        524,
+        282
+      ],
+      "observations": {
+        "overview": {
+          "rect_px": [
+            512,
+            264,
+            83,
+            30
+          ]
+        }
+      }
+    },
+    {
+      "id": "L07",
+      "model_id": "REF_L07",
+      "name_ja": "J17近傍の丸端子・黒い端末被覆",
+      "profile": "lug_sleeve",
+      "photo": "overview",
+      "rect_px": [
+        1079,
+        240,
+        88,
+        50
+      ],
+      "note_ja": "金属環と被覆の可視外形を追加。線の遠端・端子品番・被覆材質・共締めの全積層は未確定。",
+      "part_number": null,
+      "physical_bom_quantity": null,
+      "manufacturing_dimensions_m": null,
+      "joint": "J17",
+      "sleeve_direction_px": [
+        1155,
+        252
+      ],
+      "observations": {
+        "overview": {
+          "rect_px": [
+            1079,
+            240,
+            88,
+            50
+          ]
+        }
+      }
+    }
+  ],
+  "visible_wire_segments": [
+    {
+      "id": "W01",
+      "name_ja": "上側左・太い橙線",
+      "photo": "overview",
+      "polyline_px": [
+        [
+          344,
+          344
+        ],
+        [
+          348,
+          292
+        ],
+        [
+          371,
+          265
+        ],
+        [
+          405,
+          269
+        ],
+        [
+          459,
+          281
+        ],
+        [
+          497,
+          282
+        ],
+        [
+          524,
+          282
+        ]
+      ],
+      "display_diameter_m": 0.0048,
+      "display_color": "orange",
+      "nearby_features": [
+        null,
+        "J14"
+      ],
+      "model_id": "REF_W01",
+      "physical_endpoints": [
+        null,
+        null
+      ],
+      "electrical_group": null,
+      "occluded_continuation_resolved": false,
+      "note_ja": "v03で原本の可視区間を再照合。入口の外装対応と電気端子の対応を分離。隠れた先・端子品番・極番号は未確定。",
+      "observations": {
+        "overview": {
+          "polyline_px": [
+            [
+              344,
+              344
+            ],
+            [
+              348,
+              292
+            ],
+            [
+              371,
+              265
+            ],
+            [
+              405,
+              269
+            ],
+            [
+              459,
+              281
+            ],
+            [
+              497,
+              282
+            ],
+            [
+              524,
+              282
+            ]
+          ]
+        }
+      },
+      "observed_trace_ends": [
+        {
+          "feature_id": null,
+          "evidence": "trace_stops; no visible terminal assigned",
+          "label_ja": "追跡終了・先は未確認",
+          "point_px": [
+            344,
+            344
+          ],
+          "metal_terminal_id": null,
+          "cavity_number": null,
+          "electrical_node": null
+        },
+        {
+          "feature_id": "L06",
+          "evidence": "visible_exterior_entry; hidden metal contact unresolved",
+          "label_ja": "見える入口・端末外装: L06",
+          "point_px": [
+            524,
+            282
+          ],
+          "metal_terminal_id": null,
+          "cavity_number": null,
+          "electrical_node": null,
+          "bind_display_geometry": true
+        }
+      ],
+      "trace_review_state": "rechecked_visible_fragment"
+    },
+    {
+      "id": "W02",
+      "name_ja": "上側左・細い橙線",
+      "photo": "overview",
+      "polyline_px": [
+        [
+          337,
+          407
+        ],
+        [
+          339,
+          352
+        ],
+        [
+          355,
+          311
+        ],
+        [
+          389,
+          295
+        ],
+        [
+          451,
+          290
+        ],
+        [
+          506,
+          288
+        ]
+      ],
+      "display_diameter_m": 0.0025,
+      "display_color": "orange",
+      "nearby_features": [
+        null,
+        null
+      ],
+      "model_id": "REF_W02",
+      "physical_endpoints": [
+        null,
+        null
+      ],
+      "electrical_group": null,
+      "occluded_continuation_resolved": false,
+      "note_ja": "前版の区間を保持。今回の端末照合は未実施。入口の外装対応と電気端子の対応を分離。隠れた先・端子品番・極番号は未確定。",
+      "observations": {
+        "overview": {
+          "polyline_px": [
+            [
+              337,
+              407
+            ],
+            [
+              339,
+              352
+            ],
+            [
+              355,
+              311
+            ],
+            [
+              389,
+              295
+            ],
+            [
+              451,
+              290
+            ],
+            [
+              506,
+              288
+            ]
+          ]
+        }
+      },
+      "observed_trace_ends": [
+        {
+          "feature_id": null,
+          "evidence": "trace_stops; no visible terminal assigned",
+          "label_ja": "追跡終了・先は未確認",
+          "point_px": [
+            337,
+            407
+          ],
+          "metal_terminal_id": null,
+          "cavity_number": null,
+          "electrical_node": null
+        },
+        {
+          "feature_id": null,
+          "evidence": "trace_stops; no visible terminal assigned",
+          "label_ja": "追跡終了・先は未確認",
+          "point_px": [
+            506,
+            288
+          ],
+          "metal_terminal_id": null,
+          "cavity_number": null,
+          "electrical_node": null
+        }
+      ],
+      "trace_review_state": "inherited_fragment_not_rechecked"
+    },
+    {
+      "id": "W03",
+      "name_ja": "上側右の橙線",
+      "photo": "overview",
+      "polyline_px": [
+        [
+          1155,
+          252
+        ],
+        [
+          1185,
+          241
+        ],
+        [
+          1210,
+          227
+        ],
+        [
+          1222,
+          231
+        ],
+        [
+          1232,
+          277
+        ],
+        [
+          1238,
+          375
+        ]
+      ],
+      "display_diameter_m": 0.0048,
+      "display_color": "orange",
+      "nearby_features": [
+        "J17",
+        null
+      ],
+      "model_id": "REF_W03",
+      "physical_endpoints": [
+        null,
+        null
+      ],
+      "electrical_group": null,
+      "occluded_continuation_resolved": false,
+      "note_ja": "v03で原本の可視区間を再照合。入口の外装対応と電気端子の対応を分離。隠れた先・端子品番・極番号は未確定。",
+      "observations": {
+        "overview": {
+          "polyline_px": [
+            [
+              1155,
+              252
+            ],
+            [
+              1185,
+              241
+            ],
+            [
+              1210,
+              227
+            ],
+            [
+              1222,
+              231
+            ],
+            [
+              1232,
+              277
+            ],
+            [
+              1238,
+              375
+            ]
+          ]
+        }
+      },
+      "observed_trace_ends": [
+        {
+          "feature_id": "L07",
+          "evidence": "visible_exterior_entry; hidden metal contact unresolved",
+          "label_ja": "見える入口・端末外装: L07",
+          "point_px": [
+            1155,
+            252
+          ],
+          "metal_terminal_id": null,
+          "cavity_number": null,
+          "electrical_node": null,
+          "bind_display_geometry": true
+        },
+        {
+          "feature_id": null,
+          "evidence": "trace_stops; no visible terminal assigned",
+          "label_ja": "追跡終了・先は未確認",
+          "point_px": [
+            1238,
+            375
+          ],
+          "metal_terminal_id": null,
+          "cavity_number": null,
+          "electrical_node": null
+        }
+      ],
+      "trace_review_state": "rechecked_visible_fragment"
+    },
+    {
+      "id": "W04",
+      "name_ja": "前方J13側・長い橙線の可視区間",
+      "photo": "overview",
+      "polyline_px": [
+        [
+          702,
+          777
+        ],
+        [
+          746,
+          798
+        ],
+        [
+          800,
+          801
+        ],
+        [
+          856,
+          792
+        ],
+        [
+          931,
+          766
+        ],
+        [
+          1010,
+          747
+        ],
+        [
+          1068,
+          738
+        ],
+        [
+          1096,
+          738
+        ]
+      ],
+      "display_diameter_m": 0.0032,
+      "display_color": "orange",
+      "nearby_features": [
+        "J13",
+        null
+      ],
+      "model_id": "REF_W04",
+      "physical_endpoints": [
+        null,
+        null
+      ],
+      "electrical_group": null,
+      "occluded_continuation_resolved": false,
+      "note_ja": "v03で原本の可視区間を再照合。入口の外装対応と電気端子の対応を分離。隠れた先・端子品番・極番号は未確定。",
+      "observations": {
+        "overview": {
+          "polyline_px": [
+            [
+              702,
+              777
+            ],
+            [
+              746,
+              798
+            ],
+            [
+              800,
+              801
+            ],
+            [
+              856,
+              792
+            ],
+            [
+              931,
+              766
+            ],
+            [
+              1010,
+              747
+            ],
+            [
+              1068,
+              738
+            ],
+            [
+              1096,
+              738
+            ]
+          ]
+        }
+      },
+      "observed_trace_ends": [
+        {
+          "feature_id": "L05",
+          "evidence": "visible_exterior_entry; hidden metal contact unresolved",
+          "label_ja": "見える入口・端末外装: L05",
+          "point_px": [
+            702,
+            777
+          ],
+          "metal_terminal_id": null,
+          "cavity_number": null,
+          "electrical_node": null,
+          "bind_display_geometry": true
+        },
+        {
+          "feature_id": null,
+          "evidence": "trace_stops; no visible terminal assigned",
+          "label_ja": "追跡終了・先は未確認",
+          "point_px": [
+            1096,
+            738
+          ],
+          "metal_terminal_id": null,
+          "cavity_number": null,
+          "electrical_node": null
+        }
+      ],
+      "trace_review_state": "rechecked_visible_fragment"
+    },
+    {
+      "id": "W05",
+      "name_ja": "前方J12側・長い橙線の可視区間",
+      "photo": "overview",
+      "polyline_px": [
+        [
+          643,
+          780
+        ],
+        [
+          682,
+          798
+        ],
+        [
+          728,
+          816
+        ],
+        [
+          794,
+          820
+        ],
+        [
+          856,
+          819
+        ],
+        [
+          905,
+          801
+        ],
+        [
+          941,
+          778
+        ]
+      ],
+      "display_diameter_m": 0.0032,
+      "display_color": "orange",
+      "nearby_features": [
+        "J12",
+        null
+      ],
+      "model_id": "REF_W05",
+      "physical_endpoints": [
+        null,
+        null
+      ],
+      "electrical_group": null,
+      "occluded_continuation_resolved": false,
+      "note_ja": "v03で原本の可視区間を再照合。入口の外装対応と電気端子の対応を分離。隠れた先・端子品番・極番号は未確定。",
+      "observations": {
+        "overview": {
+          "polyline_px": [
+            [
+              643,
+              780
+            ],
+            [
+              682,
+              798
+            ],
+            [
+              728,
+              816
+            ],
+            [
+              794,
+              820
+            ],
+            [
+              856,
+              819
+            ],
+            [
+              905,
+              801
+            ],
+            [
+              941,
+              778
+            ]
+          ]
+        }
+      },
+      "observed_trace_ends": [
+        {
+          "feature_id": "L04",
+          "evidence": "visible_exterior_entry; hidden metal contact unresolved",
+          "label_ja": "見える入口・端末外装: L04",
+          "point_px": [
+            643,
+            780
+          ],
+          "metal_terminal_id": null,
+          "cavity_number": null,
+          "electrical_node": null,
+          "bind_display_geometry": true
+        },
+        {
+          "feature_id": null,
+          "evidence": "trace_stops; no visible terminal assigned",
+          "label_ja": "追跡終了・先は未確認",
+          "point_px": [
+            941,
+            778
+          ],
+          "metal_terminal_id": null,
+          "cavity_number": null,
+          "electrical_node": null
+        }
+      ],
+      "trace_review_state": "rechecked_visible_fragment"
+    },
+    {
+      "id": "W06",
+      "name_ja": "左下の折返し橙線",
+      "photo": "overview",
+      "polyline_px": [
+        [
+          366,
+          690
+        ],
+        [
+          334,
+          672
+        ],
+        [
+          303,
+          679
+        ],
+        [
+          292,
+          704
+        ],
+        [
+          317,
+          727
+        ],
+        [
+          374,
+          744
+        ]
+      ],
+      "display_diameter_m": 0.0032,
+      "display_color": "orange",
+      "nearby_features": [
+        null,
+        "J09"
+      ],
+      "model_id": "REF_W06",
+      "physical_endpoints": [
+        null,
+        null
+      ],
+      "electrical_group": null,
+      "occluded_continuation_resolved": false,
+      "note_ja": "前版の区間を保持。今回の端末照合は未実施。入口の外装対応と電気端子の対応を分離。隠れた先・端子品番・極番号は未確定。",
+      "observations": {
+        "overview": {
+          "polyline_px": [
+            [
+              366,
+              690
+            ],
+            [
+              334,
+              672
+            ],
+            [
+              303,
+              679
+            ],
+            [
+              292,
+              704
+            ],
+            [
+              317,
+              727
+            ],
+            [
+              374,
+              744
+            ]
+          ]
+        }
+      },
+      "observed_trace_ends": [
+        {
+          "feature_id": null,
+          "evidence": "trace_stops; no visible terminal assigned",
+          "label_ja": "追跡終了・先は未確認",
+          "point_px": [
+            366,
+            690
+          ],
+          "metal_terminal_id": null,
+          "cavity_number": null,
+          "electrical_node": null
+        },
+        {
+          "feature_id": null,
+          "evidence": "trace_stops; no visible terminal assigned",
+          "label_ja": "追跡終了・先は未確認",
+          "point_px": [
+            374,
+            744
+          ],
+          "metal_terminal_id": null,
+          "cavity_number": null,
+          "electrical_node": null
+        }
+      ],
+      "trace_review_state": "inherited_fragment_not_rechecked"
+    },
+    {
+      "id": "W07",
+      "name_ja": "左下の内側橙線",
+      "photo": "overview",
+      "polyline_px": [
+        [
+          354,
+          659
+        ],
+        [
+          315,
+          659
+        ],
+        [
+          293,
+          680
+        ],
+        [
+          304,
+          695
+        ],
+        [
+          346,
+          708
+        ],
+        [
+          397,
+          739
+        ]
+      ],
+      "display_diameter_m": 0.0025,
+      "display_color": "orange",
+      "nearby_features": [
+        null,
+        null
+      ],
+      "model_id": "REF_W07",
+      "physical_endpoints": [
+        null,
+        null
+      ],
+      "electrical_group": null,
+      "occluded_continuation_resolved": false,
+      "note_ja": "前版の区間を保持。今回の端末照合は未実施。入口の外装対応と電気端子の対応を分離。隠れた先・端子品番・極番号は未確定。",
+      "observations": {
+        "overview": {
+          "polyline_px": [
+            [
+              354,
+              659
+            ],
+            [
+              315,
+              659
+            ],
+            [
+              293,
+              680
+            ],
+            [
+              304,
+              695
+            ],
+            [
+              346,
+              708
+            ],
+            [
+              397,
+              739
+            ]
+          ]
+        }
+      },
+      "observed_trace_ends": [
+        {
+          "feature_id": null,
+          "evidence": "trace_stops; no visible terminal assigned",
+          "label_ja": "追跡終了・先は未確認",
+          "point_px": [
+            354,
+            659
+          ],
+          "metal_terminal_id": null,
+          "cavity_number": null,
+          "electrical_node": null
+        },
+        {
+          "feature_id": null,
+          "evidence": "trace_stops; no visible terminal assigned",
+          "label_ja": "追跡終了・先は未確認",
+          "point_px": [
+            397,
+            739
+          ],
+          "metal_terminal_id": null,
+          "cavity_number": null,
+          "electrical_node": null
+        }
+      ],
+      "trace_review_state": "inherited_fragment_not_rechecked"
+    },
+    {
+      "id": "W08",
+      "name_ja": "下側リレー左の橙線",
+      "photo": "overview",
+      "polyline_px": [
+        [
+          455,
+          580
+        ],
+        [
+          457,
+          550
+        ],
+        [
+          453,
+          523
+        ],
+        [
+          452,
+          505
+        ],
+        [
+          456,
+          499
+        ],
+        [
+          466,
+          503
+        ],
+        [
+          480,
+          502
+        ],
+        [
+          491,
+          496
+        ]
+      ],
+      "display_diameter_m": 0.0018,
+      "display_color": "orange",
+      "nearby_features": [
+        "T41",
+        null
+      ],
+      "model_id": "REF_W08",
+      "physical_endpoints": [
+        null,
+        null
+      ],
+      "electrical_group": null,
+      "occluded_continuation_resolved": false,
+      "note_ja": "v03で原本の可視区間を再照合。入口の外装対応と電気端子の対応を分離。隠れた先・端子品番・極番号は未確定。",
+      "observations": {
+        "overview": {
+          "polyline_px": [
+            [
+              455,
+              580
+            ],
+            [
+              457,
+              550
+            ],
+            [
+              453,
+              523
+            ],
+            [
+              452,
+              505
+            ],
+            [
+              456,
+              499
+            ],
+            [
+              466,
+              503
+            ],
+            [
+              480,
+              502
+            ],
+            [
+              491,
+              496
+            ]
+          ]
+        },
+        "detail": {
+          "polyline_px": [
+            [
+              874,
+              377
+            ],
+            [
+              870,
+              349
+            ],
+            [
+              850,
+              326
+            ],
+            [
+              819,
+              319
+            ],
+            [
+              784,
+              325
+            ],
+            [
+              734,
+              350
+            ],
+            [
+              694,
+              380
+            ],
+            [
+              657,
+              428
+            ],
+            [
+              630,
+              490
+            ],
+            [
+              600,
+              548
+            ]
+          ]
+        }
+      },
+      "observed_trace_ends": [
+        {
+          "feature_id": "T41",
+          "evidence": "visible_exterior_entry; hidden metal contact unresolved",
+          "label_ja": "見える入口・端末外装: T41",
+          "point_px": [
+            455,
+            580
+          ],
+          "metal_terminal_id": null,
+          "cavity_number": null,
+          "electrical_node": null,
+          "bind_display_geometry": true
+        },
+        {
+          "feature_id": null,
+          "evidence": "trace_stops; no visible terminal assigned",
+          "label_ja": "追跡終了・先は未確認",
+          "point_px": [
+            491,
+            496
+          ],
+          "metal_terminal_id": null,
+          "cavity_number": null,
+          "electrical_node": null
+        }
+      ],
+      "trace_review_state": "rechecked_visible_fragment"
+    },
+    {
+      "id": "W09",
+      "name_ja": "下側リレー横断の橙線",
+      "photo": "overview",
+      "polyline_px": [
+        [
+          489,
+          496
+        ],
+        [
+          477,
+          508
+        ],
+        [
+          478,
+          520
+        ],
+        [
+          486,
+          534
+        ],
+        [
+          507,
+          555
+        ],
+        [
+          536,
+          580
+        ]
+      ],
+      "display_diameter_m": 0.0018,
+      "display_color": "orange",
+      "nearby_features": [
+        null,
+        "T42"
+      ],
+      "model_id": "REF_W09",
+      "physical_endpoints": [
+        null,
+        null
+      ],
+      "electrical_group": null,
+      "occluded_continuation_resolved": false,
+      "note_ja": "v03で原本の可視区間を再照合。入口の外装対応と電気端子の対応を分離。隠れた先・端子品番・極番号は未確定。",
+      "observations": {
+        "overview": {
+          "polyline_px": [
+            [
+              489,
+              496
+            ],
+            [
+              477,
+              508
+            ],
+            [
+              478,
+              520
+            ],
+            [
+              486,
+              534
+            ],
+            [
+              507,
+              555
+            ],
+            [
+              536,
+              580
+            ]
+          ]
+        },
+        "detail": {
+          "polyline_px": [
+            [
+              604,
+              547
+            ],
+            [
+              646,
+              466
+            ],
+            [
+              684,
+              389
+            ],
+            [
+              729,
+              326
+            ],
+            [
+              765,
+              288
+            ],
+            [
+              804,
+              249
+            ],
+            [
+              846,
+              218
+            ],
+            [
+              878,
+              208
+            ]
+          ]
+        }
+      },
+      "observed_trace_ends": [
+        {
+          "feature_id": null,
+          "evidence": "trace_stops; no visible terminal assigned",
+          "label_ja": "追跡終了・先は未確認",
+          "point_px": [
+            489,
+            496
+          ],
+          "metal_terminal_id": null,
+          "cavity_number": null,
+          "electrical_node": null
+        },
+        {
+          "feature_id": "T42",
+          "evidence": "visible_exterior_entry; hidden metal contact unresolved",
+          "label_ja": "見える入口・端末外装: T42",
+          "point_px": [
+            536,
+            580
+          ],
+          "metal_terminal_id": null,
+          "cavity_number": null,
+          "electrical_node": null,
+          "bind_display_geometry": true
+        }
+      ],
+      "trace_review_state": "rechecked_visible_fragment"
+    },
+    {
+      "id": "W10",
+      "name_ja": "下側リレー右側から延びる橙線",
+      "photo": "overview",
+      "polyline_px": [
+        [
+          543,
+          621
+        ],
+        [
+          565,
+          607
+        ],
+        [
+          593,
+          594
+        ],
+        [
+          619,
+          590
+        ]
+      ],
+      "display_diameter_m": 0.0025,
+      "display_color": "orange",
+      "nearby_features": [
+        "T44",
+        null
+      ],
+      "model_id": "REF_W10",
+      "physical_endpoints": [
+        null,
+        null
+      ],
+      "electrical_group": null,
+      "occluded_continuation_resolved": false,
+      "note_ja": "v03で原本の可視区間を再照合。入口の外装対応と電気端子の対応を分離。隠れた先・端子品番・極番号は未確定。",
+      "observations": {
+        "overview": {
+          "polyline_px": [
+            [
+              543,
+              621
+            ],
+            [
+              565,
+              607
+            ],
+            [
+              593,
+              594
+            ],
+            [
+              619,
+              590
+            ]
+          ]
+        }
+      },
+      "observed_trace_ends": [
+        {
+          "feature_id": "T44",
+          "evidence": "visible_exterior_entry; hidden metal contact unresolved",
+          "label_ja": "見える入口・端末外装: T44",
+          "point_px": [
+            543,
+            621
+          ],
+          "metal_terminal_id": null,
+          "cavity_number": null,
+          "electrical_node": null,
+          "bind_display_geometry": true
+        },
+        {
+          "feature_id": null,
+          "evidence": "trace_stops; no visible terminal assigned",
+          "label_ja": "追跡終了・先は未確認",
+          "point_px": [
+            619,
+            590
+          ],
+          "metal_terminal_id": null,
+          "cavity_number": null,
+          "electrical_node": null
+        }
+      ],
+      "trace_review_state": "rechecked_visible_fragment"
+    },
+    {
+      "id": "W11",
+      "name_ja": "中央束の桃色線",
+      "photo": "overview",
+      "polyline_px": [
+        [
+          564,
+          515
+        ],
+        [
+          637,
+          516
+        ],
+        [
+          706,
+          494
+        ],
+        [
+          755,
+          491
+        ],
+        [
+          801,
+          506
+        ],
+        [
+          863,
+          529
+        ]
+      ],
+      "display_diameter_m": 0.0017,
+      "display_color": "pink",
+      "nearby_features": [
+        null,
+        null
+      ],
+      "model_id": "REF_W11",
+      "physical_endpoints": [
+        null,
+        null
+      ],
+      "electrical_group": null,
+      "occluded_continuation_resolved": false,
+      "note_ja": "前版の区間を保持。今回の端末照合は未実施。入口の外装対応と電気端子の対応を分離。隠れた先・端子品番・極番号は未確定。",
+      "observations": {
+        "overview": {
+          "polyline_px": [
+            [
+              564,
+              515
+            ],
+            [
+              637,
+              516
+            ],
+            [
+              706,
+              494
+            ],
+            [
+              755,
+              491
+            ],
+            [
+              801,
+              506
+            ],
+            [
+              863,
+              529
+            ]
+          ]
+        }
+      },
+      "observed_trace_ends": [
+        {
+          "feature_id": null,
+          "evidence": "trace_stops; no visible terminal assigned",
+          "label_ja": "追跡終了・先は未確認",
+          "point_px": [
+            564,
+            515
+          ],
+          "metal_terminal_id": null,
+          "cavity_number": null,
+          "electrical_node": null
+        },
+        {
+          "feature_id": null,
+          "evidence": "trace_stops; no visible terminal assigned",
+          "label_ja": "追跡終了・先は未確認",
+          "point_px": [
+            863,
+            529
+          ],
+          "metal_terminal_id": null,
+          "cavity_number": null,
+          "electrical_node": null
+        }
+      ],
+      "trace_review_state": "inherited_fragment_not_rechecked"
+    },
+    {
+      "id": "W12",
+      "name_ja": "中央束の青色線",
+      "photo": "overview",
+      "polyline_px": [
+        [
+          576,
+          520
+        ],
+        [
+          642,
+          521
+        ],
+        [
+          711,
+          502
+        ],
+        [
+          757,
+          505
+        ],
+        [
+          811,
+          526
+        ],
+        [
+          869,
+          538
+        ]
+      ],
+      "display_diameter_m": 0.0017,
+      "display_color": "blue",
+      "nearby_features": [
+        null,
+        null
+      ],
+      "model_id": "REF_W12",
+      "physical_endpoints": [
+        null,
+        null
+      ],
+      "electrical_group": null,
+      "occluded_continuation_resolved": false,
+      "note_ja": "前版の区間を保持。今回の端末照合は未実施。入口の外装対応と電気端子の対応を分離。隠れた先・端子品番・極番号は未確定。",
+      "observations": {
+        "overview": {
+          "polyline_px": [
+            [
+              576,
+              520
+            ],
+            [
+              642,
+              521
+            ],
+            [
+              711,
+              502
+            ],
+            [
+              757,
+              505
+            ],
+            [
+              811,
+              526
+            ],
+            [
+              869,
+              538
+            ]
+          ]
+        }
+      },
+      "observed_trace_ends": [
+        {
+          "feature_id": null,
+          "evidence": "trace_stops; no visible terminal assigned",
+          "label_ja": "追跡終了・先は未確認",
+          "point_px": [
+            576,
+            520
+          ],
+          "metal_terminal_id": null,
+          "cavity_number": null,
+          "electrical_node": null
+        },
+        {
+          "feature_id": null,
+          "evidence": "trace_stops; no visible terminal assigned",
+          "label_ja": "追跡終了・先は未確認",
+          "point_px": [
+            869,
+            538
+          ],
+          "metal_terminal_id": null,
+          "cavity_number": null,
+          "electrical_node": null
+        }
+      ],
+      "trace_review_state": "inherited_fragment_not_rechecked"
+    },
+    {
+      "id": "W13",
+      "name_ja": "中央束の白色線",
+      "photo": "overview",
+      "polyline_px": [
+        [
+          676,
+          517
+        ],
+        [
+          719,
+          537
+        ],
+        [
+          757,
+          537
+        ],
+        [
+          803,
+          538
+        ]
+      ],
+      "display_diameter_m": 0.0016,
+      "display_color": "ivory",
+      "nearby_features": [
+        null,
+        null
+      ],
+      "model_id": "REF_W13",
+      "physical_endpoints": [
+        null,
+        null
+      ],
+      "electrical_group": null,
+      "occluded_continuation_resolved": false,
+      "note_ja": "前版の区間を保持。今回の端末照合は未実施。入口の外装対応と電気端子の対応を分離。隠れた先・端子品番・極番号は未確定。",
+      "observations": {
+        "overview": {
+          "polyline_px": [
+            [
+              676,
+              517
+            ],
+            [
+              719,
+              537
+            ],
+            [
+              757,
+              537
+            ],
+            [
+              803,
+              538
+            ]
+          ]
+        }
+      },
+      "observed_trace_ends": [
+        {
+          "feature_id": null,
+          "evidence": "trace_stops; no visible terminal assigned",
+          "label_ja": "追跡終了・先は未確認",
+          "point_px": [
+            676,
+            517
+          ],
+          "metal_terminal_id": null,
+          "cavity_number": null,
+          "electrical_node": null
+        },
+        {
+          "feature_id": null,
+          "evidence": "trace_stops; no visible terminal assigned",
+          "label_ja": "追跡終了・先は未確認",
+          "point_px": [
+            803,
+            538
+          ],
+          "metal_terminal_id": null,
+          "cavity_number": null,
+          "electrical_node": null
+        }
+      ],
+      "trace_review_state": "inherited_fragment_not_rechecked"
+    },
+    {
+      "id": "W14",
+      "name_ja": "中央束の黒色線",
+      "photo": "overview",
+      "polyline_px": [
+        [
+          332,
+          437
+        ],
+        [
+          382,
+          467
+        ],
+        [
+          445,
+          490
+        ],
+        [
+          555,
+          491
+        ],
+        [
+          642,
+          511
+        ],
+        [
+          713,
+          528
+        ],
+        [
+          787,
+          526
+        ]
+      ],
+      "display_diameter_m": 0.002,
+      "display_color": "black",
+      "nearby_features": [
+        null,
+        null
+      ],
+      "model_id": "REF_W14",
+      "physical_endpoints": [
+        null,
+        null
+      ],
+      "electrical_group": null,
+      "occluded_continuation_resolved": false,
+      "note_ja": "前版の区間を保持。今回の端末照合は未実施。入口の外装対応と電気端子の対応を分離。隠れた先・端子品番・極番号は未確定。",
+      "observations": {
+        "overview": {
+          "polyline_px": [
+            [
+              332,
+              437
+            ],
+            [
+              382,
+              467
+            ],
+            [
+              445,
+              490
+            ],
+            [
+              555,
+              491
+            ],
+            [
+              642,
+              511
+            ],
+            [
+              713,
+              528
+            ],
+            [
+              787,
+              526
+            ]
+          ]
+        }
+      },
+      "observed_trace_ends": [
+        {
+          "feature_id": null,
+          "evidence": "trace_stops; no visible terminal assigned",
+          "label_ja": "追跡終了・先は未確認",
+          "point_px": [
+            332,
+            437
+          ],
+          "metal_terminal_id": null,
+          "cavity_number": null,
+          "electrical_node": null
+        },
+        {
+          "feature_id": null,
+          "evidence": "trace_stops; no visible terminal assigned",
+          "label_ja": "追跡終了・先は未確認",
+          "point_px": [
+            787,
+            526
+          ],
+          "metal_terminal_id": null,
+          "cavity_number": null,
+          "electrical_node": null
+        }
+      ],
+      "trace_review_state": "inherited_fragment_not_rechecked"
+    },
+    {
+      "id": "WI11",
+      "name_ja": "補機口1内側の線出口1",
+      "photo": "overview",
+      "polyline_px": [
+        [
+          405,
+          799
+        ],
+        [
+          403,
+          782
+        ],
+        [
+          395,
+          766
+        ]
+      ],
+      "display_diameter_m": 0.003,
+      "display_color": "orange",
+      "nearby_features": [
+        "I01",
+        null
+      ],
+      "model_id": "REF_WI11",
+      "physical_endpoints": [
+        null,
+        null
+      ],
+      "electrical_group": null,
+      "occluded_continuation_resolved": false,
+      "note_ja": "v03で原本の可視区間を再照合。入口の外装対応と電気端子の対応を分離。隠れた先・端子品番・極番号は未確定。",
+      "observations": {
+        "overview": {
+          "polyline_px": [
+            [
+              405,
+              799
+            ],
+            [
+              403,
+              782
+            ],
+            [
+              395,
+              766
+            ]
+          ]
+        }
+      },
+      "observed_trace_ends": [
+        {
+          "feature_id": "I01",
+          "evidence": "visible_exterior_entry; hidden metal contact unresolved",
+          "label_ja": "見える入口・端末外装: I01",
+          "point_px": [
+            405,
+            799
+          ],
+          "metal_terminal_id": null,
+          "cavity_number": null,
+          "electrical_node": null,
+          "bind_display_geometry": false
+        },
+        {
+          "feature_id": null,
+          "evidence": "trace_stops; no visible terminal assigned",
+          "label_ja": "追跡終了・先は未確認",
+          "point_px": [
+            395,
+            766
+          ],
+          "metal_terminal_id": null,
+          "cavity_number": null,
+          "electrical_node": null
+        }
+      ],
+      "trace_review_state": "rechecked_visible_fragment"
+    },
+    {
+      "id": "WI12",
+      "name_ja": "補機口1内側の線出口2",
+      "photo": "overview",
+      "polyline_px": [
+        [
+          439,
+          799
+        ],
+        [
+          436,
+          784
+        ],
+        [
+          424,
+          769
+        ]
+      ],
+      "display_diameter_m": 0.003,
+      "display_color": "orange",
+      "nearby_features": [
+        "I01",
+        null
+      ],
+      "model_id": "REF_WI12",
+      "physical_endpoints": [
+        null,
+        null
+      ],
+      "electrical_group": null,
+      "occluded_continuation_resolved": false,
+      "note_ja": "v03で原本の可視区間を再照合。入口の外装対応と電気端子の対応を分離。隠れた先・端子品番・極番号は未確定。",
+      "observations": {
+        "overview": {
+          "polyline_px": [
+            [
+              439,
+              799
+            ],
+            [
+              436,
+              784
+            ],
+            [
+              424,
+              769
+            ]
+          ]
+        }
+      },
+      "observed_trace_ends": [
+        {
+          "feature_id": "I01",
+          "evidence": "visible_exterior_entry; hidden metal contact unresolved",
+          "label_ja": "見える入口・端末外装: I01",
+          "point_px": [
+            439,
+            799
+          ],
+          "metal_terminal_id": null,
+          "cavity_number": null,
+          "electrical_node": null,
+          "bind_display_geometry": false
+        },
+        {
+          "feature_id": null,
+          "evidence": "trace_stops; no visible terminal assigned",
+          "label_ja": "追跡終了・先は未確認",
+          "point_px": [
+            424,
+            769
+          ],
+          "metal_terminal_id": null,
+          "cavity_number": null,
+          "electrical_node": null
+        }
+      ],
+      "trace_review_state": "rechecked_visible_fragment"
+    },
+    {
+      "id": "WI21",
+      "name_ja": "補機口2内側の線出口1",
+      "photo": "overview",
+      "polyline_px": [
+        [
+          559,
+          799
+        ],
+        [
+          557,
+          788
+        ],
+        [
+          553,
+          779
+        ]
+      ],
+      "display_diameter_m": 0.003,
+      "display_color": "orange",
+      "nearby_features": [
+        "I02",
+        null
+      ],
+      "model_id": "REF_WI21",
+      "physical_endpoints": [
+        null,
+        null
+      ],
+      "electrical_group": null,
+      "occluded_continuation_resolved": false,
+      "note_ja": "v03で原本の可視区間を再照合。入口の外装対応と電気端子の対応を分離。隠れた先・端子品番・極番号は未確定。",
+      "observations": {
+        "overview": {
+          "polyline_px": [
+            [
+              559,
+              799
+            ],
+            [
+              557,
+              788
+            ],
+            [
+              553,
+              779
+            ]
+          ]
+        }
+      },
+      "observed_trace_ends": [
+        {
+          "feature_id": "I02",
+          "evidence": "visible_exterior_entry; hidden metal contact unresolved",
+          "label_ja": "見える入口・端末外装: I02",
+          "point_px": [
+            559,
+            799
+          ],
+          "metal_terminal_id": null,
+          "cavity_number": null,
+          "electrical_node": null,
+          "bind_display_geometry": false
+        },
+        {
+          "feature_id": null,
+          "evidence": "trace_stops; no visible terminal assigned",
+          "label_ja": "追跡終了・先は未確認",
+          "point_px": [
+            553,
+            779
+          ],
+          "metal_terminal_id": null,
+          "cavity_number": null,
+          "electrical_node": null
+        }
+      ],
+      "trace_review_state": "rechecked_visible_fragment"
+    },
+    {
+      "id": "WI22",
+      "name_ja": "補機口2内側の線出口2",
+      "photo": "overview",
+      "polyline_px": [
+        [
+          603,
+          799
+        ],
+        [
+          600,
+          782
+        ],
+        [
+          590,
+          766
+        ]
+      ],
+      "display_diameter_m": 0.003,
+      "display_color": "orange",
+      "nearby_features": [
+        "I02",
+        null
+      ],
+      "model_id": "REF_WI22",
+      "physical_endpoints": [
+        null,
+        null
+      ],
+      "electrical_group": null,
+      "occluded_continuation_resolved": false,
+      "note_ja": "v03で原本の可視区間を再照合。入口の外装対応と電気端子の対応を分離。隠れた先・端子品番・極番号は未確定。",
+      "observations": {
+        "overview": {
+          "polyline_px": [
+            [
+              603,
+              799
+            ],
+            [
+              600,
+              782
+            ],
+            [
+              590,
+              766
+            ]
+          ]
+        }
+      },
+      "observed_trace_ends": [
+        {
+          "feature_id": "I02",
+          "evidence": "visible_exterior_entry; hidden metal contact unresolved",
+          "label_ja": "見える入口・端末外装: I02",
+          "point_px": [
+            603,
+            799
+          ],
+          "metal_terminal_id": null,
+          "cavity_number": null,
+          "electrical_node": null,
+          "bind_display_geometry": false
+        },
+        {
+          "feature_id": null,
+          "evidence": "trace_stops; no visible terminal assigned",
+          "label_ja": "追跡終了・先は未確認",
+          "point_px": [
+            590,
+            766
+          ],
+          "metal_terminal_id": null,
+          "cavity_number": null,
+          "electrical_node": null
+        }
+      ],
+      "trace_review_state": "rechecked_visible_fragment"
+    },
+    {
+      "id": "WI41",
+      "name_ja": "補機口4内側の線出口1",
+      "photo": "overview",
+      "polyline_px": [
+        [
+          974,
+          800
+        ],
+        [
+          968,
+          789
+        ],
+        [
+          962,
+          786
+        ]
+      ],
+      "display_diameter_m": 0.003,
+      "display_color": "orange",
+      "nearby_features": [
+        "I04",
+        null
+      ],
+      "model_id": "REF_WI41",
+      "physical_endpoints": [
+        null,
+        null
+      ],
+      "electrical_group": null,
+      "occluded_continuation_resolved": false,
+      "note_ja": "v03で原本の可視区間を再照合。入口の外装対応と電気端子の対応を分離。隠れた先・端子品番・極番号は未確定。",
+      "observations": {
+        "overview": {
+          "polyline_px": [
+            [
+              974,
+              800
+            ],
+            [
+              968,
+              789
+            ],
+            [
+              962,
+              786
+            ]
+          ]
+        }
+      },
+      "observed_trace_ends": [
+        {
+          "feature_id": "I04",
+          "evidence": "visible_exterior_entry; hidden metal contact unresolved",
+          "label_ja": "見える入口・端末外装: I04",
+          "point_px": [
+            974,
+            800
+          ],
+          "metal_terminal_id": null,
+          "cavity_number": null,
+          "electrical_node": null,
+          "bind_display_geometry": false
+        },
+        {
+          "feature_id": null,
+          "evidence": "trace_stops; no visible terminal assigned",
+          "label_ja": "追跡終了・先は未確認",
+          "point_px": [
+            962,
+            786
+          ],
+          "metal_terminal_id": null,
+          "cavity_number": null,
+          "electrical_node": null
+        }
+      ],
+      "trace_review_state": "rechecked_visible_fragment"
+    },
+    {
+      "id": "WI42",
+      "name_ja": "補機口4内側の線出口2",
+      "photo": "overview",
+      "polyline_px": [
+        [
+          1010,
+          800
+        ],
+        [
+          1005,
+          782
+        ],
+        [
+          994,
+          770
+        ]
+      ],
+      "display_diameter_m": 0.003,
+      "display_color": "orange",
+      "nearby_features": [
+        "I04",
+        null
+      ],
+      "model_id": "REF_WI42",
+      "physical_endpoints": [
+        null,
+        null
+      ],
+      "electrical_group": null,
+      "occluded_continuation_resolved": false,
+      "note_ja": "v03で原本の可視区間を再照合。入口の外装対応と電気端子の対応を分離。隠れた先・端子品番・極番号は未確定。",
+      "observations": {
+        "overview": {
+          "polyline_px": [
+            [
+              1010,
+              800
+            ],
+            [
+              1005,
+              782
+            ],
+            [
+              994,
+              770
+            ]
+          ]
+        }
+      },
+      "observed_trace_ends": [
+        {
+          "feature_id": "I04",
+          "evidence": "visible_exterior_entry; hidden metal contact unresolved",
+          "label_ja": "見える入口・端末外装: I04",
+          "point_px": [
+            1010,
+            800
+          ],
+          "metal_terminal_id": null,
+          "cavity_number": null,
+          "electrical_node": null,
+          "bind_display_geometry": false
+        },
+        {
+          "feature_id": null,
+          "evidence": "trace_stops; no visible terminal assigned",
+          "label_ja": "追跡終了・先は未確認",
+          "point_px": [
+            994,
+            770
+          ],
+          "metal_terminal_id": null,
+          "cavity_number": null,
+          "electrical_node": null
+        }
+      ],
+      "trace_review_state": "rechecked_visible_fragment"
+    },
+    {
+      "id": "WI51",
+      "name_ja": "補機口5内側の線出口1",
+      "photo": "overview",
+      "polyline_px": [
+        [
+          1105,
+          801
+        ],
+        [
+          1104,
+          781
+        ],
+        [
+          1108,
+          763
+        ]
+      ],
+      "display_diameter_m": 0.003,
+      "display_color": "orange",
+      "nearby_features": [
+        "I05",
+        null
+      ],
+      "model_id": "REF_WI51",
+      "physical_endpoints": [
+        null,
+        null
+      ],
+      "electrical_group": null,
+      "occluded_continuation_resolved": false,
+      "note_ja": "v03で原本の可視区間を再照合。入口の外装対応と電気端子の対応を分離。隠れた先・端子品番・極番号は未確定。",
+      "observations": {
+        "overview": {
+          "polyline_px": [
+            [
+              1105,
+              801
+            ],
+            [
+              1104,
+              781
+            ],
+            [
+              1108,
+              763
+            ]
+          ]
+        }
+      },
+      "observed_trace_ends": [
+        {
+          "feature_id": "I05",
+          "evidence": "visible_exterior_entry; hidden metal contact unresolved",
+          "label_ja": "見える入口・端末外装: I05",
+          "point_px": [
+            1105,
+            801
+          ],
+          "metal_terminal_id": null,
+          "cavity_number": null,
+          "electrical_node": null,
+          "bind_display_geometry": false
+        },
+        {
+          "feature_id": null,
+          "evidence": "trace_stops; no visible terminal assigned",
+          "label_ja": "追跡終了・先は未確認",
+          "point_px": [
+            1108,
+            763
+          ],
+          "metal_terminal_id": null,
+          "cavity_number": null,
+          "electrical_node": null
+        }
+      ],
+      "trace_review_state": "rechecked_visible_fragment"
+    },
+    {
+      "id": "WI52",
+      "name_ja": "補機口5内側の線出口2",
+      "photo": "overview",
+      "polyline_px": [
+        [
+          1150,
+          801
+        ],
+        [
+          1144,
+          779
+        ],
+        [
+          1135,
+          762
+        ]
+      ],
+      "display_diameter_m": 0.003,
+      "display_color": "orange",
+      "nearby_features": [
+        "I05",
+        null
+      ],
+      "model_id": "REF_WI52",
+      "physical_endpoints": [
+        null,
+        null
+      ],
+      "electrical_group": null,
+      "occluded_continuation_resolved": false,
+      "note_ja": "v03で原本の可視区間を再照合。入口の外装対応と電気端子の対応を分離。隠れた先・端子品番・極番号は未確定。",
+      "observations": {
+        "overview": {
+          "polyline_px": [
+            [
+              1150,
+              801
+            ],
+            [
+              1144,
+              779
+            ],
+            [
+              1135,
+              762
+            ]
+          ]
+        }
+      },
+      "observed_trace_ends": [
+        {
+          "feature_id": "I05",
+          "evidence": "visible_exterior_entry; hidden metal contact unresolved",
+          "label_ja": "見える入口・端末外装: I05",
+          "point_px": [
+            1150,
+            801
+          ],
+          "metal_terminal_id": null,
+          "cavity_number": null,
+          "electrical_node": null,
+          "bind_display_geometry": false
+        },
+        {
+          "feature_id": null,
+          "evidence": "trace_stops; no visible terminal assigned",
+          "label_ja": "追跡終了・先は未確認",
+          "point_px": [
+            1135,
+            762
+          ],
+          "metal_terminal_id": null,
+          "cavity_number": null,
+          "electrical_node": null
+        }
+      ],
+      "trace_review_state": "rechecked_visible_fragment"
+    },
+    {
+      "id": "W15",
+      "model_id": "REF_W15",
+      "photo": "overview",
+      "display_diameter_m": 0.0018,
+      "display_color": "orange",
+      "name_ja": "上側リレー・上の半透明端末から下る橙線",
+      "physical_endpoints": [
+        null,
+        null
+      ],
+      "electrical_group": null,
+      "nearby_features": [
+        null,
+        null
+      ],
+      "occluded_continuation_resolved": false,
+      "polyline_px": [
+        [
+          508,
+          306
+        ],
+        [
+          498,
+          308
+        ],
+        [
+          481,
+          326
+        ],
+        [
+          467,
+          347
+        ],
+        [
+          452,
+          376
+        ],
+        [
+          442,
+          399
+        ],
+        [
+          439,
+          410
+        ]
+      ],
+      "observations": {
+        "overview": {
+          "polyline_px": [
+            [
+              508,
+              306
+            ],
+            [
+              498,
+              308
+            ],
+            [
+              481,
+              326
+            ],
+            [
+              467,
+              347
+            ],
+            [
+              452,
+              376
+            ],
+            [
+              442,
+              399
+            ],
+            [
+              439,
+              410
+            ]
+          ]
+        },
+        "detail": {
+          "polyline_px": [
+            [
+              124,
+              232
+            ],
+            [
+              154,
+              242
+            ],
+            [
+              203,
+              276
+            ],
+            [
+              279,
+              342
+            ],
+            [
+              331,
+              400
+            ],
+            [
+              375,
+              481
+            ],
+            [
+              404,
+              547
+            ]
+          ]
+        }
+      },
+      "observed_trace_ends": [
+        {
+          "feature_id": "T31",
+          "evidence": "visible_exterior_entry; hidden metal contact unresolved",
+          "label_ja": "見える入口・端末外装: T31",
+          "point_px": [
+            508,
+            306
+          ],
+          "metal_terminal_id": null,
+          "cavity_number": null,
+          "electrical_node": null,
+          "bind_display_geometry": true
+        },
+        {
+          "feature_id": null,
+          "evidence": "trace_stops; no visible terminal assigned",
+          "label_ja": "追跡終了・先は未確認",
+          "point_px": [
+            439,
+            410
+          ],
+          "metal_terminal_id": null,
+          "cavity_number": null,
+          "electrical_node": null
+        }
+      ],
+      "trace_review_state": "rechecked_visible_fragment",
+      "note_ja": "v03で原本の可視区間を再照合。入口の外装対応と電気端子の対応を分離。隠れた先・端子品番・極番号は未確定。"
+    },
+    {
+      "id": "W16",
+      "model_id": "REF_W16",
+      "photo": "overview",
+      "display_diameter_m": 0.0018,
+      "display_color": "orange",
+      "name_ja": "上側リレー・下の半透明端末から曲がる橙線",
+      "physical_endpoints": [
+        null,
+        null
+      ],
+      "electrical_group": null,
+      "nearby_features": [
+        null,
+        null
+      ],
+      "occluded_continuation_resolved": false,
+      "polyline_px": [
+        [
+          516,
+          392
+        ],
+        [
+          512,
+          384
+        ],
+        [
+          501,
+          379
+        ],
+        [
+          485,
+          379
+        ],
+        [
+          468,
+          385
+        ],
+        [
+          454,
+          397
+        ],
+        [
+          443,
+          408
+        ],
+        [
+          436,
+          416
+        ]
+      ],
+      "observations": {
+        "overview": {
+          "polyline_px": [
+            [
+              516,
+              392
+            ],
+            [
+              512,
+              384
+            ],
+            [
+              501,
+              379
+            ],
+            [
+              485,
+              379
+            ],
+            [
+              468,
+              385
+            ],
+            [
+              454,
+              397
+            ],
+            [
+              443,
+              408
+            ],
+            [
+              436,
+              416
+            ]
+          ]
+        },
+        "detail": {
+          "polyline_px": [
+            [
+              367,
+              230
+            ],
+            [
+              353,
+              207
+            ],
+            [
+              339,
+              199
+            ],
+            [
+              332,
+              209
+            ],
+            [
+              337,
+              254
+            ],
+            [
+              373,
+              375
+            ],
+            [
+              405,
+              478
+            ],
+            [
+              425,
+              542
+            ]
+          ]
+        }
+      },
+      "observed_trace_ends": [
+        {
+          "feature_id": "T32",
+          "evidence": "visible_exterior_entry; hidden metal contact unresolved",
+          "label_ja": "見える入口・端末外装: T32",
+          "point_px": [
+            516,
+            392
+          ],
+          "metal_terminal_id": null,
+          "cavity_number": null,
+          "electrical_node": null,
+          "bind_display_geometry": true
+        },
+        {
+          "feature_id": null,
+          "evidence": "trace_stops; no visible terminal assigned",
+          "label_ja": "追跡終了・先は未確認",
+          "point_px": [
+            436,
+            416
+          ],
+          "metal_terminal_id": null,
+          "cavity_number": null,
+          "electrical_node": null
+        }
+      ],
+      "trace_review_state": "rechecked_visible_fragment",
+      "note_ja": "v03で原本の可視区間を再照合。入口の外装対応と電気端子の対応を分離。隠れた先・端子品番・極番号は未確定。"
+    },
+    {
+      "id": "W17",
+      "model_id": "REF_W17",
+      "photo": "overview",
+      "display_diameter_m": 0.0025,
+      "display_color": "orange",
+      "name_ja": "上側リレー・右白色端末から下る短い橙線",
+      "physical_endpoints": [
+        null,
+        null
+      ],
+      "electrical_group": null,
+      "nearby_features": [
+        null,
+        null
+      ],
+      "occluded_continuation_resolved": false,
+      "polyline_px": [
+        [
+          558,
+          383
+        ],
+        [
+          558,
+          399
+        ],
+        [
+          560,
+          417
+        ]
+      ],
+      "observations": {
+        "overview": {
+          "polyline_px": [
+            [
+              558,
+              383
+            ],
+            [
+              558,
+              399
+            ],
+            [
+              560,
+              417
+            ]
+          ]
+        }
+      },
+      "observed_trace_ends": [
+        {
+          "feature_id": "T33",
+          "evidence": "visible_exterior_entry; hidden metal contact unresolved",
+          "label_ja": "見える入口・端末外装: T33",
+          "point_px": [
+            558,
+            383
+          ],
+          "metal_terminal_id": null,
+          "cavity_number": null,
+          "electrical_node": null,
+          "bind_display_geometry": true
+        },
+        {
+          "feature_id": null,
+          "evidence": "trace_stops; no visible terminal assigned",
+          "label_ja": "追跡終了・先は未確認",
+          "point_px": [
+            560,
+            417
+          ],
+          "metal_terminal_id": null,
+          "cavity_number": null,
+          "electrical_node": null
+        }
+      ],
+      "trace_review_state": "rechecked_visible_fragment",
+      "note_ja": "v03で原本の可視区間を再照合。入口の外装対応と電気端子の対応を分離。隠れた先・端子品番・極番号は未確定。"
+    },
+    {
+      "id": "W18",
+      "model_id": "REF_W18",
+      "photo": "overview",
+      "display_diameter_m": 0.0025,
+      "display_color": "orange",
+      "name_ja": "上側リレー・左白色端末の入口付近の橙線",
+      "physical_endpoints": [
+        null,
+        null
+      ],
+      "electrical_group": null,
+      "nearby_features": [
+        null,
+        null
+      ],
+      "occluded_continuation_resolved": false,
+      "polyline_px": [
+        [
+          475,
+          319
+        ],
+        [
+          476,
+          305
+        ],
+        [
+          478,
+          289
+        ]
+      ],
+      "observations": {
+        "overview": {
+          "polyline_px": [
+            [
+              475,
+              319
+            ],
+            [
+              476,
+              305
+            ],
+            [
+              478,
+              289
+            ]
+          ]
+        }
+      },
+      "observed_trace_ends": [
+        {
+          "feature_id": "T34",
+          "evidence": "visible_exterior_entry; hidden metal contact unresolved",
+          "label_ja": "見える入口・端末外装: T34",
+          "point_px": [
+            475,
+            319
+          ],
+          "metal_terminal_id": null,
+          "cavity_number": null,
+          "electrical_node": null,
+          "bind_display_geometry": true
+        },
+        {
+          "feature_id": null,
+          "evidence": "trace_stops; no visible terminal assigned",
+          "label_ja": "追跡終了・先は未確認",
+          "point_px": [
+            478,
+            289
+          ],
+          "metal_terminal_id": null,
+          "cavity_number": null,
+          "electrical_node": null
+        }
+      ],
+      "trace_review_state": "rechecked_visible_fragment",
+      "note_ja": "v03で原本の可視区間を再照合。入口の外装対応と電気端子の対応を分離。隠れた先・端子品番・極番号は未確定。"
+    },
+    {
+      "id": "W19",
+      "model_id": "REF_W19",
+      "photo": "overview",
+      "display_diameter_m": 0.0025,
+      "display_color": "orange",
+      "name_ja": "下側リレー・上白色端末から左へ延びる橙線",
+      "physical_endpoints": [
+        null,
+        null
+      ],
+      "electrical_group": null,
+      "nearby_features": [
+        null,
+        null
+      ],
+      "occluded_continuation_resolved": false,
+      "polyline_px": [
+        [
+          472,
+          536
+        ],
+        [
+          448,
+          536
+        ],
+        [
+          422,
+          533
+        ],
+        [
+          406,
+          534
+        ]
+      ],
+      "observations": {
+        "overview": {
+          "polyline_px": [
+            [
+              472,
+              536
+            ],
+            [
+              448,
+              536
+            ],
+            [
+              422,
+              533
+            ],
+            [
+              406,
+              534
+            ]
+          ]
+        },
+        "detail": {
+          "polyline_px": [
+            [
+              746,
+              389
+            ],
+            [
+              740,
+              457
+            ],
+            [
+              723,
+              552
+            ],
+            [
+              706,
+              648
+            ],
+            [
+              690,
+              703
+            ]
+          ]
+        }
+      },
+      "observed_trace_ends": [
+        {
+          "feature_id": "T43",
+          "evidence": "visible_exterior_entry; hidden metal contact unresolved",
+          "label_ja": "見える入口・端末外装: T43",
+          "point_px": [
+            472,
+            536
+          ],
+          "metal_terminal_id": null,
+          "cavity_number": null,
+          "electrical_node": null,
+          "bind_display_geometry": true
+        },
+        {
+          "feature_id": null,
+          "evidence": "trace_stops; no visible terminal assigned",
+          "label_ja": "追跡終了・先は未確認",
+          "point_px": [
+            406,
+            534
+          ],
+          "metal_terminal_id": null,
+          "cavity_number": null,
+          "electrical_node": null
+        }
+      ],
+      "trace_review_state": "rechecked_visible_fragment",
+      "note_ja": "v03で原本の可視区間を再照合。入口の外装対応と電気端子の対応を分離。隠れた先・端子品番・極番号は未確定。"
+    }
+  ],
+  "visible_fastener_features": [
+    {
+      "id": "J01",
+      "feature_parent": "P02",
+      "center_px": [
+        678,
+        649
+      ],
+      "photo": "overview",
+      "model_id": "REF_J01",
+      "description_ja": "可視外形: スタッドと六角ナット。規格・寸法・裏側・共締めは未確定。ヒューズ板上の締結軸を板面の法線へ修正。",
+      "fastener_specification": null,
+      "joint_stack": null,
+      "observations": {
+        "overview": {
+          "center_px": [
+            678,
+            649
+          ]
+        }
+      },
+      "display_head_form": "hex_nut_on_stud"
+    },
+    {
+      "id": "J02",
+      "feature_parent": "P02",
+      "center_px": [
+        1027,
+        644
+      ],
+      "photo": "overview",
+      "model_id": "REF_J02",
+      "description_ja": "可視外形: スタッドと六角ナット。規格・寸法・裏側・共締めは未確定。ヒューズ板上の締結軸を板面の法線へ修正。",
+      "fastener_specification": null,
+      "joint_stack": null,
+      "observations": {
+        "overview": {
+          "center_px": [
+            1027,
+            644
+          ]
+        }
+      },
+      "display_head_form": "hex_nut_on_stud"
+    },
+    {
+      "id": "J03",
+      "feature_parent": "P02",
+      "center_px": [
+        751,
+        559
+      ],
+      "photo": "overview",
+      "model_id": "REF_J03",
+      "description_ja": "可視外形: 丸い頭部と六角穴。規格・寸法・裏側・共締めは未確定。ヒューズ板上の締結軸を板面の法線へ修正。",
+      "fastener_specification": null,
+      "joint_stack": null,
+      "observations": {
+        "overview": {
+          "center_px": [
+            751,
+            559
+          ]
+        }
+      },
+      "display_head_form": "round_socket_head"
+    },
+    {
+      "id": "J04",
+      "feature_parent": "P02",
+      "center_px": [
+        944,
+        744
+      ],
+      "photo": "overview",
+      "model_id": "REF_J04",
+      "description_ja": "可視外形: 丸い頭部と六角穴。規格・寸法・裏側・共締めは未確定。ヒューズ板上の締結軸を板面の法線へ修正。",
+      "fastener_specification": null,
+      "joint_stack": null,
+      "observations": {
+        "overview": {
+          "center_px": [
+            944,
+            744
+          ]
+        }
+      },
+      "display_head_form": "round_socket_head"
+    },
+    {
+      "id": "J05",
+      "feature_parent": "P09",
+      "center_px": [
+        394,
+        489
+      ],
+      "photo": "overview",
+      "model_id": "REF_J05",
+      "description_ja": "可視外形: 丸い頭部と六角穴。規格・寸法・裏側・共締めは未確定。ヒューズ板上の締結軸を板面の法線へ修正。",
+      "fastener_specification": null,
+      "joint_stack": null,
+      "observations": {
+        "overview": {
+          "center_px": [
+            394,
+            489
+          ]
+        }
+      },
+      "display_head_form": "round_socket_head"
+    },
+    {
+      "id": "J06",
+      "feature_parent": "P10",
+      "center_px": [
+        1170,
+        490
+      ],
+      "photo": "overview",
+      "model_id": "REF_J06",
+      "description_ja": "可視外形: 丸い頭部と六角穴。規格・寸法・裏側・共締めは未確定。ヒューズ板上の締結軸を板面の法線へ修正。",
+      "fastener_specification": null,
+      "joint_stack": null,
+      "observations": {
+        "overview": {
+          "center_px": [
+            1170,
+            490
+          ]
+        }
+      },
+      "display_head_form": "round_socket_head"
+    },
+    {
+      "id": "J07",
+      "feature_parent": "P11",
+      "center_px": [
+        389,
+        608
+      ],
+      "photo": "overview",
+      "model_id": "REF_J07",
+      "description_ja": "可視外形: 丸い頭部と六角穴。規格・寸法・裏側・共締めは未確定。ヒューズ板上の締結軸を板面の法線へ修正。",
+      "fastener_specification": null,
+      "joint_stack": null,
+      "observations": {
+        "overview": {
+          "center_px": [
+            389,
+            608
+          ]
+        }
+      },
+      "display_head_form": "round_socket_head"
+    },
+    {
+      "id": "J08",
+      "feature_parent": "P12",
+      "center_px": [
+        1162,
+        605
+      ],
+      "photo": "overview",
+      "model_id": "REF_J08",
+      "description_ja": "可視外形: 丸い頭部と六角穴。規格・寸法・裏側・共締めは未確定。ヒューズ板上の締結軸を板面の法線へ修正。",
+      "fastener_specification": null,
+      "joint_stack": null,
+      "observations": {
+        "overview": {
+          "center_px": [
+            1162,
+            605
+          ]
+        }
+      },
+      "display_head_form": "round_socket_head"
+    },
+    {
+      "id": "J09",
+      "feature_parent": "P13",
+      "center_px": [
+        377,
+        738
+      ],
+      "photo": "overview",
+      "model_id": "REF_J09",
+      "description_ja": "可視外形: 丸い頭部と六角穴。規格・寸法・裏側・共締めは未確定。ヒューズ板上の締結軸を板面の法線へ修正。",
+      "fastener_specification": null,
+      "joint_stack": null,
+      "observations": {
+        "overview": {
+          "center_px": [
+            377,
+            738
+          ]
+        }
+      },
+      "display_head_form": "round_socket_head"
+    },
+    {
+      "id": "J10",
+      "feature_parent": "P13",
+      "center_px": [
+        434,
+        734
+      ],
+      "photo": "overview",
+      "model_id": "REF_J10",
+      "description_ja": "可視外形: 丸い頭部と六角穴。規格・寸法・裏側・共締めは未確定。ヒューズ板上の締結軸を板面の法線へ修正。",
+      "fastener_specification": null,
+      "joint_stack": null,
+      "observations": {
+        "overview": {
+          "center_px": [
+            434,
+            734
+          ]
+        }
+      },
+      "display_head_form": "round_socket_head"
+    },
+    {
+      "id": "J11",
+      "feature_parent": "P13",
+      "center_px": [
+        509,
+        730
+      ],
+      "photo": "overview",
+      "model_id": "REF_J11",
+      "description_ja": "可視外形: 丸い頭部と六角穴。規格・寸法・裏側・共締めは未確定。ヒューズ板上の締結軸を板面の法線へ修正。",
+      "fastener_specification": null,
+      "joint_stack": null,
+      "observations": {
+        "overview": {
+          "center_px": [
+            509,
+            730
+          ]
+        }
+      },
+      "display_head_form": "round_socket_head"
+    },
+    {
+      "id": "J12",
+      "feature_parent": "P13",
+      "center_px": [
+        575,
+        735
+      ],
+      "photo": "overview",
+      "model_id": "REF_J12",
+      "description_ja": "可視外形: 丸い頭部と六角穴。規格・寸法・裏側・共締めは未確定。ヒューズ板上の締結軸を板面の法線へ修正。",
+      "fastener_specification": null,
+      "joint_stack": null,
+      "observations": {
+        "overview": {
+          "center_px": [
+            575,
+            735
+          ]
+        }
+      },
+      "display_head_form": "round_socket_head"
+    },
+    {
+      "id": "J13",
+      "feature_parent": "P13",
+      "center_px": [
+        635,
+        735
+      ],
+      "photo": "overview",
+      "model_id": "REF_J13",
+      "description_ja": "可視外形: 丸い頭部と六角穴。規格・寸法・裏側・共締めは未確定。ヒューズ板上の締結軸を板面の法線へ修正。",
+      "fastener_specification": null,
+      "joint_stack": null,
+      "observations": {
+        "overview": {
+          "center_px": [
+            635,
+            735
+          ]
+        }
+      },
+      "display_head_form": "round_socket_head"
+    },
+    {
+      "id": "J14",
+      "feature_parent": "P05",
+      "center_px": [
+        583,
+        276
+      ],
+      "photo": "overview",
+      "model_id": "REF_J14",
+      "description_ja": "可視外形: 丸い頭部と六角穴。規格・寸法・裏側・共締めは未確定。ヒューズ板上の締結軸を板面の法線へ修正。",
+      "fastener_specification": null,
+      "joint_stack": null,
+      "observations": {
+        "overview": {
+          "center_px": [
+            583,
+            276
+          ]
+        },
+        "fuse_detail": {
+          "center_px": [
+            481,
+            499
+          ]
+        }
+      },
+      "fuse_side": -1,
+      "display_head_form": "round_socket_head"
+    },
+    {
+      "id": "J15",
+      "feature_parent": "P05",
+      "center_px": [
+        813,
+        277
+      ],
+      "photo": "overview",
+      "model_id": "REF_J15",
+      "description_ja": "可視外形: 丸い頭部と六角穴。規格・寸法・裏側・共締めは未確定。ヒューズ板上の締結軸を板面の法線へ修正。",
+      "fastener_specification": null,
+      "joint_stack": null,
+      "observations": {
+        "overview": {
+          "center_px": [
+            813,
+            277
+          ]
+        },
+        "fuse_detail": {
+          "center_px": [
+            982,
+            473
+          ]
+        }
+      },
+      "fuse_side": 1,
+      "display_head_form": "round_socket_head"
+    },
+    {
+      "id": "J16",
+      "feature_parent": "P06",
+      "center_px": [
+        871,
+        278
+      ],
+      "photo": "overview",
+      "model_id": "REF_J16",
+      "description_ja": "可視外形: 丸い頭部と六角穴。規格・寸法・裏側・共締めは未確定。ヒューズ板上の締結軸を板面の法線へ修正。",
+      "fastener_specification": null,
+      "joint_stack": null,
+      "observations": {
+        "overview": {
+          "center_px": [
+            871,
+            278
+          ]
+        },
+        "fuse_detail": {
+          "center_px": [
+            1090,
+            452
+          ]
+        }
+      },
+      "fuse_side": -1,
+      "display_head_form": "round_socket_head"
+    },
+    {
+      "id": "J17",
+      "feature_parent": "P06",
+      "center_px": [
+        1091,
+        278
+      ],
+      "photo": "overview",
+      "model_id": "REF_J17",
+      "description_ja": "可視外形: 丸い頭部と六角穴。規格・寸法・裏側・共締めは未確定。ヒューズ板上の締結軸を板面の法線へ修正。",
+      "fastener_specification": null,
+      "joint_stack": null,
+      "observations": {
+        "overview": {
+          "center_px": [
+            1091,
+            278
+          ]
+        },
+        "fuse_detail": {
+          "center_px": [
+            1549,
+            418
+          ]
+        }
+      },
+      "fuse_side": 1,
+      "display_head_form": "round_socket_head"
+    },
+    {
+      "id": "J18",
+      "model_id": "REF_J18",
+      "feature_parent": "P19",
+      "photo": "fuse_detail",
+      "center_px": [
+        481,
+        592
+      ],
+      "fastener_specification": null,
+      "joint_stack": null,
+      "observations": {
+        "fuse_detail": {
+          "center_px": [
+            481,
+            592
+          ]
+        }
+      },
+      "fuse_side": -1,
+      "display_head_form": "round_socket_head",
+      "description_ja": "可視外形: 丸い頭部と六角穴。規格・寸法・裏側・共締めは未確定。ヒューズ板上の締結軸を板面の法線へ修正。"
+    },
+    {
+      "id": "J19",
+      "model_id": "REF_J19",
+      "feature_parent": "P19",
+      "photo": "fuse_detail",
+      "center_px": [
+        982,
+        576
+      ],
+      "fastener_specification": null,
+      "joint_stack": null,
+      "observations": {
+        "fuse_detail": {
+          "center_px": [
+            982,
+            576
+          ]
+        }
+      },
+      "fuse_side": 1,
+      "display_head_form": "round_socket_head",
+      "description_ja": "可視外形: 丸い頭部と六角穴。規格・寸法・裏側・共締めは未確定。ヒューズ板上の締結軸を板面の法線へ修正。"
+    },
+    {
+      "id": "J20",
+      "model_id": "REF_J20",
+      "feature_parent": "P20",
+      "photo": "fuse_detail",
+      "center_px": [
+        1090,
+        555
+      ],
+      "fastener_specification": null,
+      "joint_stack": null,
+      "observations": {
+        "fuse_detail": {
+          "center_px": [
+            1090,
+            555
+          ]
+        }
+      },
+      "fuse_side": -1,
+      "display_head_form": "round_socket_head",
+      "description_ja": "可視外形: 丸い頭部と六角穴。規格・寸法・裏側・共締めは未確定。ヒューズ板上の締結軸を板面の法線へ修正。"
+    },
+    {
+      "id": "J21",
+      "model_id": "REF_J21",
+      "feature_parent": "P20",
+      "photo": "fuse_detail",
+      "center_px": [
+        1549,
+        515
+      ],
+      "fastener_specification": null,
+      "joint_stack": null,
+      "observations": {
+        "fuse_detail": {
+          "center_px": [
+            1549,
+            515
+          ]
+        }
+      },
+      "fuse_side": 1,
+      "display_head_form": "round_socket_head",
+      "description_ja": "可視外形: 丸い頭部と六角穴。規格・寸法・裏側・共締めは未確定。ヒューズ板上の締結軸を板面の法線へ修正。"
+    },
+    {
+      "id": "J22",
+      "model_id": "REF_J22",
+      "feature_parent": "P21",
+      "photo": "fuse_detail",
+      "center_px": [
+        481,
+        690
+      ],
+      "fastener_specification": null,
+      "joint_stack": null,
+      "observations": {
+        "fuse_detail": {
+          "center_px": [
+            481,
+            690
+          ]
+        }
+      },
+      "fuse_side": -1,
+      "display_head_form": "round_socket_head",
+      "description_ja": "可視外形: 丸い頭部と六角穴。規格・寸法・裏側・共締めは未確定。ヒューズ板上の締結軸を板面の法線へ修正。"
+    },
+    {
+      "id": "J23",
+      "model_id": "REF_J23",
+      "feature_parent": "P21",
+      "photo": "fuse_detail",
+      "center_px": [
+        982,
+        685
+      ],
+      "fastener_specification": null,
+      "joint_stack": null,
+      "observations": {
+        "fuse_detail": {
+          "center_px": [
+            982,
+            685
+          ]
+        }
+      },
+      "fuse_side": 1,
+      "display_head_form": "round_socket_head",
+      "description_ja": "可視外形: 丸い頭部と六角穴。規格・寸法・裏側・共締めは未確定。ヒューズ板上の締結軸を板面の法線へ修正。"
+    }
+  ],
+  "required_functions": [
+    {
+      "id": "REQ_K",
+      "name_ja": "主接触器",
+      "quantity": 1,
+      "matched_photo_ids": [
+        "P02"
+      ],
+      "note_ja": "写真の本体へ対応。電力端子・制御・補助接点を別に管理。",
+      "basis": "Ampere V1.1 pages 1-2",
+      "not_located_is_not_omitted": true
+    },
+    {
+      "id": "REQ_PC_RLY",
+      "name_ja": "プリチャージリレー",
+      "quantity": 1,
+      "matched_photo_ids": [],
+      "note_ja": "写真のP03/P04のどちらかは未特定。",
+      "basis": "Ampere V1.1 pages 1-2",
+      "not_located_is_not_omitted": true
+    },
+    {
+      "id": "REQ_D_RLY",
+      "name_ja": "放電リレー",
+      "quantity": 1,
+      "matched_photo_ids": [],
+      "note_ja": "写真のP03/P04のどちらかは未特定。",
+      "basis": "Ampere V1.1 pages 1-2",
+      "not_located_is_not_omitted": true
+    },
+    {
+      "id": "REQ_PC_RES",
+      "name_ja": "プリチャージ抵抗",
+      "quantity": 1,
+      "matched_photo_ids": [],
+      "note_ja": "2025年組立品で2個の所在が見える。指定2022年写真への同一版・位置対応は未確定。",
+      "basis": "Ampere V1.1 pages 1-2",
+      "not_located_is_not_omitted": true
+    },
+    {
+      "id": "REQ_D_RES",
+      "name_ja": "放電抵抗",
+      "quantity": 1,
+      "matched_photo_ids": [],
+      "note_ja": "2025年組立品で2個の所在が見える。指定2022年写真への同一版・位置対応は未確定。",
+      "basis": "Ampere V1.1 pages 1-2",
+      "not_located_is_not_omitted": true
+    },
+    {
+      "id": "REQ_MAIN_FUSE",
+      "name_ja": "主400 Aヒューズ",
+      "quantity": 1,
+      "matched_photo_ids": [
+        "P22"
+      ],
+      "note_ja": "中央被覆内へ位置対応。単体例の胴・端子形状を表示推定。注文品番・固定積層は未確定。",
+      "basis": "Ampere V1.1 pages 1-2",
+      "not_located_is_not_omitted": true
+    },
+    {
+      "id": "REQ_AF1",
+      "name_ja": "補機Heater 1・20 Aヒューズ",
+      "quantity": 1,
+      "matched_photo_ids": [],
+      "note_ja": "物理5個はP05/P06/P19/P20/P21で確認。各補機口までの線を追い切れておらず、系統割当は未確定。",
+      "basis": "Ampere V1.1 pages 1-2",
+      "not_located_is_not_omitted": true,
+      "location_candidates": [
+        "P05",
+        "P06",
+        "P19",
+        "P20",
+        "P21"
+      ]
+    },
+    {
+      "id": "REQ_AF2",
+      "name_ja": "補機AC・30 Aヒューズ",
+      "quantity": 1,
+      "matched_photo_ids": [],
+      "note_ja": "物理5個はP05/P06/P19/P20/P21で確認。各補機口までの線を追い切れておらず、系統割当は未確定。",
+      "basis": "Ampere V1.1 pages 1-2",
+      "not_located_is_not_omitted": true,
+      "location_candidates": [
+        "P05",
+        "P06",
+        "P19",
+        "P20",
+        "P21"
+      ]
+    },
+    {
+      "id": "REQ_AF3",
+      "name_ja": "補機Heater 2・20 Aヒューズ",
+      "quantity": 1,
+      "matched_photo_ids": [],
+      "note_ja": "物理5個はP05/P06/P19/P20/P21で確認。各補機口までの線を追い切れておらず、系統割当は未確定。",
+      "basis": "Ampere V1.1 pages 1-2",
+      "not_located_is_not_omitted": true,
+      "location_candidates": [
+        "P05",
+        "P06",
+        "P19",
+        "P20",
+        "P21"
+      ]
+    },
+    {
+      "id": "REQ_AF4",
+      "name_ja": "補機Charger・30 Aヒューズ",
+      "quantity": 1,
+      "matched_photo_ids": [],
+      "note_ja": "物理5個はP05/P06/P19/P20/P21で確認。各補機口までの線を追い切れておらず、系統割当は未確定。",
+      "basis": "Ampere V1.1 pages 1-2",
+      "not_located_is_not_omitted": true,
+      "location_candidates": [
+        "P05",
+        "P06",
+        "P19",
+        "P20",
+        "P21"
+      ]
+    },
+    {
+      "id": "REQ_AF5",
+      "name_ja": "補機DC-DC・10 Aヒューズ",
+      "quantity": 1,
+      "matched_photo_ids": [],
+      "note_ja": "物理5個はP05/P06/P19/P20/P21で確認。各補機口までの線を追い切れておらず、系統割当は未確定。",
+      "basis": "Ampere V1.1 pages 1-2",
+      "not_located_is_not_omitted": true,
+      "location_candidates": [
+        "P05",
+        "P06",
+        "P19",
+        "P20",
+        "P21"
+      ]
+    },
+    {
+      "id": "REQ_MAIN_PORTS",
+      "name_ja": "主2極接続口",
+      "quantity": 2,
+      "matched_photo_ids": [
+        "P14",
+        "P15"
+      ],
+      "basis": "Ampere V1.1 pages 2-3"
+    },
+    {
+      "id": "REQ_AUX_PORTS",
+      "name_ja": "補機2極接続口",
+      "quantity": 5,
+      "matched_photo_ids": [
+        "P16",
+        "P17"
+      ],
+      "basis": "3+2 functional bays, not five outer housings"
+    },
+    {
+      "id": "REQ_INNER",
+      "name_ja": "補機内側ハウジング",
+      "quantity": 5,
+      "matched_photo_ids": [
+        "I01",
+        "I02",
+        "I03",
+        "I04",
+        "I05"
+      ],
+      "basis": "Photo and TE 408-32095 / 2103245"
+    },
+    {
+      "id": "REQ_LV",
+      "name_ja": "低圧12極接続口",
+      "quantity": 1,
+      "matched_photo_ids": [
+        "P18"
+      ],
+      "basis": "Ampere V1.1 pages 2,4"
+    },
+    {
+      "id": "REQ_AUX_POWER_CONTACTS",
+      "name_ja": "補機内側の電力コンタクト",
+      "quantity": 10,
+      "matched_photo_ids": [],
+      "note_ja": "各口2個。MCP 2.8、線径/嵌合先に対応する注文品番は未選定。",
+      "basis": "TE 408-32095 Rev B, Figures 1/3 and assembly sections",
+      "not_located_is_not_omitted": true
+    },
+    {
+      "id": "REQ_AUX_HVIL_CONTACTS",
+      "name_ja": "補機内側のHVILコンタクト",
+      "quantity": 10,
+      "matched_photo_ids": [],
+      "note_ja": "各口2個。MQS、回路順序・注文品番は未確定。",
+      "basis": "TE 408-32095 Rev B, Figures 1/3 and assembly sections",
+      "not_located_is_not_omitted": true
+    }
+  ],
+  "electrical_groups": [
+    {
+      "id": "EC01",
+      "name_ja": "主電力経路",
+      "basis_ja": "主2口・主ヒューズ・主接触器を含む回路。主端子AがHV+、BがHV−と記載。",
+      "datasheet_pages": [
+        1,
+        2,
+        3
+      ],
+      "lv_pins": [],
+      "physical_wires": null,
+      "fastener_count": null,
+      "photo_to_physical_net_complete": false
+    },
+    {
+      "id": "EC02",
+      "name_ja": "プリチャージの電力側",
+      "basis_ja": "プリチャージリレーと抵抗を含む枝路。制御線はEC10で区別。",
+      "datasheet_pages": [
+        1,
+        2
+      ],
+      "lv_pins": [],
+      "physical_wires": null,
+      "fastener_count": null,
+      "photo_to_physical_net_complete": false
+    },
+    {
+      "id": "EC03",
+      "name_ja": "放電の電力側",
+      "basis_ja": "放電リレーと抵抗を含む枝路。制御線はEC11で区別。",
+      "datasheet_pages": [
+        1,
+        2
+      ],
+      "lv_pins": [],
+      "physical_wires": null,
+      "fastener_count": null,
+      "photo_to_physical_net_complete": false
+    },
+    {
+      "id": "EC04",
+      "name_ja": "補機：Heater 1",
+      "basis_ja": "20Aヒューズを含む補機系統。補機端子は1がHV+、2がHV−。",
+      "datasheet_pages": [
+        1,
+        2,
+        3
+      ],
+      "lv_pins": [],
+      "physical_wires": null,
+      "fastener_count": null,
+      "photo_to_physical_net_complete": false
+    },
+    {
+      "id": "EC05",
+      "name_ja": "補機：AC",
+      "basis_ja": "30Aヒューズを含む補機系統。",
+      "datasheet_pages": [
+        1,
+        2,
+        3
+      ],
+      "lv_pins": [],
+      "physical_wires": null,
+      "fastener_count": null,
+      "photo_to_physical_net_complete": false
+    },
+    {
+      "id": "EC06",
+      "name_ja": "補機：Heater 2",
+      "basis_ja": "20Aヒューズを含む補機系統。",
+      "datasheet_pages": [
+        1,
+        2,
+        3
+      ],
+      "lv_pins": [],
+      "physical_wires": null,
+      "fastener_count": null,
+      "photo_to_physical_net_complete": false
+    },
+    {
+      "id": "EC07",
+      "name_ja": "補機：Charger",
+      "basis_ja": "30Aヒューズを含む補機系統。",
+      "datasheet_pages": [
+        1,
+        2,
+        3
+      ],
+      "lv_pins": [],
+      "physical_wires": null,
+      "fastener_count": null,
+      "photo_to_physical_net_complete": false
+    },
+    {
+      "id": "EC08",
+      "name_ja": "補機：DC-DC",
+      "basis_ja": "10Aヒューズを含む補機系統。",
+      "datasheet_pages": [
+        1,
+        2,
+        3
+      ],
+      "lv_pins": [],
+      "physical_wires": null,
+      "fastener_count": null,
+      "photo_to_physical_net_complete": false
+    },
+    {
+      "id": "EC09",
+      "name_ja": "低圧：接触器駆動",
+      "basis_ja": "LVの2番はContactor 12V、8番はContactor Ground。",
+      "datasheet_pages": [
+        4
+      ],
+      "lv_pins": [
+        2,
+        8
+      ],
+      "physical_wires": null,
+      "fastener_count": null,
+      "photo_to_physical_net_complete": false
+    },
+    {
+      "id": "EC10",
+      "name_ja": "低圧：プリチャージリレー駆動",
+      "basis_ja": "LVの3番はリレー12V、9番はリレーGround。",
+      "datasheet_pages": [
+        4
+      ],
+      "lv_pins": [
+        3,
+        9
+      ],
+      "physical_wires": null,
+      "fastener_count": null,
+      "photo_to_physical_net_complete": false
+    },
+    {
+      "id": "EC11",
+      "name_ja": "低圧：放電リレー駆動",
+      "basis_ja": "LVの4番はリレー12V、10番はリレーGround。",
+      "datasheet_pages": [
+        4
+      ],
+      "lv_pins": [
+        4,
+        10
+      ],
+      "physical_wires": null,
+      "fastener_count": null,
+      "photo_to_physical_net_complete": false
+    },
+    {
+      "id": "EC12",
+      "name_ja": "低圧：接触器フィードバック",
+      "basis_ja": "LVの1番と7番がContactor Feedbackと記載。",
+      "datasheet_pages": [
+        4
+      ],
+      "lv_pins": [
+        1,
+        7
+      ],
+      "physical_wires": null,
+      "fastener_count": null,
+      "photo_to_physical_net_complete": false
+    },
+    {
+      "id": "EC13",
+      "name_ja": "HVIL",
+      "basis_ja": "LVの5番がHVIL In、11番がHVIL Out。公式記事は各接続口へのHVIL内蔵を記載。",
+      "datasheet_pages": [
+        4
+      ],
+      "lv_pins": [
+        5,
+        11
+      ],
+      "physical_wires": null,
+      "fastener_count": null,
+      "photo_to_physical_net_complete": false
+    }
+  ],
+  "lv_pin_map": {
+    "1": "Contactor Feedback",
+    "2": "Contactor 12V",
+    "3": "Pre-Charge Relay 12V",
+    "4": "Discharge Relay 12V",
+    "5": "HVIL In",
+    "6": "Reserved",
+    "7": "Contactor Feedback",
+    "8": "Contactor Ground",
+    "9": "Pre-Charge Relay Ground",
+    "10": "Discharge Relay Ground",
+    "11": "HVIL Out",
+    "12": "Reserved"
+  },
+  "display_coordinate_mapping": {
+    "origin_px": [
+      790,
+      535
+    ],
+    "px_per_m": 4200,
+    "axes": "photo right +X; photo up +Y; Z is estimated separately",
+    "kind": "display_registration_only_not_photogrammetric_measurement"
+  },
+  "unresolved": [
+    "主ヒューズの注文品番・詳細寸法・取付部材・共締め積層。位置は中央被覆内へ対応済み。",
+    "補機ヒューズ5個から5口への一対一配線。物理所在の確認は系統割当の完了ではない。",
+    "2022年写真における抵抗2個の位置・支持・接続。2025年実作業品との同一版確認。",
+    "P03/P04のプリチャージ・放電への対応と各端末の行き先。",
+    "主接触器・主2極ハウジング・LV12極ハウジングの正確な型式。",
+    "全可視/隠れ配線の両端、主/補機/LV/HVIL端子・シール、全口を通るHVIL順序。",
+    "導体の隠れた連続性・部品分割・支持と締結積層。",
+    "製造寸法・公差・線長・被覆と部品の支持状態。蓋・シールの詳細。"
+  ],
+  "coverage_checklist": [
+    "筐体・蓋・シール・ボス",
+    "主接触器と電力/コイル/補助端末",
+    "プリチャージと放電のリレー/抵抗",
+    "主1+補機5ヒューズと保持部",
+    "剛体バスバー・絶縁支持・カバー",
+    "主2極×2・補機2極×5・LV12極",
+    "内側ハウジング・金属端子・シール",
+    "配線・丸端子・差込端末・熱収縮",
+    "ねじ・ナット・座金・共締め",
+    "完成品の蓋と表示"
+  ],
+  "motion_created": false,
+  "all_physical_connections_resolved": false,
+  "all_visible_features_traced": false,
+  "remaining_visual_coverage": [
+    "線入口20か所は外装までの対応。内部金属端子・極番号・遠端の確定とは別。",
+    "WI31/WI32を可視一覧から退役。I03の破線は資料上必要な部品の推定所在。",
+    "継承した7区間は今回の端末照合未実施。交差束・隠れた続き・全端末は追跡未完了。"
+  ],
+  "documented_header_mounting": {
+    "P16": {
+      "hole_count": 8,
+      "thread": "M4",
+      "fastener_part_number": null
+    },
+    "P17": {
+      "hole_count": 6,
+      "thread": "M4",
+      "fastener_part_number": null
+    },
+    "basis": "TE customer drawings; separate from visible interior fastener features"
+  },
+  "physical_acceptance_verdict": null,
+  "previous_catalog_sha256": "b01d86d748abdfb224a4d57c39280a61585a47a7f244cf4c35fb838e634578f4",
+  "video_evidence": {
+    "observed_at": "2026-09-15T10:21:30.158825+09:00",
+    "sources": {
+      "assembly_20250607": {
+        "title": "ASSEMBLY! EV High Voltage Junction Box",
+        "url": "https://www.youtube.com/watch?v=Sm_D-vmNYqc",
+        "channel": "Ampere EV",
+        "upload_date": "20250607",
+        "file": "references/hvjb_assembly_followup_20260915/assembly_20250607.mp4",
+        "sha256": "b7fcb74eaeec06e517d5726994a38a6b0812e05198d8b771b7ff771e68a0e1eb",
+        "metadata_sha256": "69e2f968a38253ec5608439116c2ef8cc04669cbd03b7275f8feab63fbc9f111",
+        "size_px": [
+          1920,
+          1080
+        ],
+        "duration_s": 274.140533,
+        "frame_rate": "30000/1001",
+        "automatic_caption_role": "navigation aid only; not a verified transcription or part-number source"
+      },
+      "explanation_20240201": {
+        "title": "EV Enlightenment - JUNCTION BOX EXPLAINED",
+        "url": "https://www.youtube.com/watch?v=oXPIRNZ4xcs",
+        "channel": "Ampere EV",
+        "upload_date": "20240201",
+        "file": "references/hvjb_assembly_followup_20260915/explanation_20240201.mp4",
+        "sha256": "72e7a53fcc88d56767464f82816d89946ba3234e881f87db762f69ef564dbc97",
+        "metadata_sha256": "0a41fc8066b9c790054240be23879a9770996e478eb0ab0bc3ab6de95b12d0cf",
+        "size_px": [
+          1920,
+          1080
+        ],
+        "duration_s": 183.399883,
+        "frame_rate": "60000/1001",
+        "automatic_caption_role": "navigation aid only; not a verified transcription or part-number source"
+      }
+    },
+    "frames": {
+      "fuse_detail": {
+        "file": "references/hvjb_assembly_followup_20260915/fuse_detail.png",
+        "sha256": "1b822cd4a08c8de69d5c47e0771d955b5571d4d3f76fa0f8515e8c033e834edb",
+        "source": "assembly_20250607",
+        "requested_seek_s": 35,
+        "timestamp_basis": "ffmpeg accurate seek; first decoded display frame at/after requested time",
+        "size_px": [
+          1920,
+          1080
+        ],
+        "label_ja": "挿入写真：後方の補機ヒューズ5個",
+        "pixel_transform": "none; decoded full frame, no crop or generative edit"
+      },
+      "main_pointer": {
+        "file": "references/hvjb_assembly_followup_20260915/main_pointer.png",
+        "sha256": "184be1b27d8b8d34aaa3861d9ddbabb031700181c76a111d3dfa398389c8b533",
+        "source": "explanation_20240201",
+        "requested_seek_s": 68,
+        "timestamp_basis": "ffmpeg accurate seek; first decoded display frame at/after requested time",
+        "size_px": [
+          1920,
+          1080
+        ],
+        "label_ja": "指定写真上の主ヒューズ付近を指す公式解説",
+        "pixel_transform": "none; decoded full frame, no crop or generative edit"
+      },
+      "main_sample": {
+        "file": "references/hvjb_assembly_followup_20260915/main_sample.png",
+        "sha256": "cc72a8e0689ca51fbe03ce3e3061bb56a20331140ff5c123832a06e43a3721b0",
+        "source": "explanation_20240201",
+        "requested_seek_s": 72,
+        "timestamp_basis": "ffmpeg accurate seek; first decoded display frame at/after requested time",
+        "size_px": [
+          1920,
+          1080
+        ],
+        "label_ja": "主ヒューズ説明時の円筒胴・両端平板端子",
+        "pixel_transform": "none; decoded full frame, no crop or generative edit"
+      },
+      "subassembly": {
+        "file": "references/hvjb_assembly_followup_20260915/subassembly.png",
+        "sha256": "ae36aa75719958753f4436dfbae171b1c5e969f7d931fab39e227122585bcddc",
+        "source": "assembly_20250607",
+        "requested_seek_s": 24,
+        "timestamp_basis": "ffmpeg accurate seek; first decoded display frame at/after requested time",
+        "size_px": [
+          1920,
+          1080
+        ],
+        "label_ja": "2025年の組立例：抵抗と接触器の下板",
+        "pixel_transform": "none; decoded full frame, no crop or generative edit"
+      },
+      "panel_wiring": {
+        "file": "references/hvjb_assembly_followup_20260915/panel_wiring.png",
+        "sha256": "9a4089947e62ef79eda7c0c4da34933a603aae9f9dcdd467922ff668066bcc50",
+        "source": "assembly_20250607",
+        "requested_seek_s": 50,
+        "timestamp_basis": "ffmpeg accurate seek; first decoded display frame at/after requested time",
+        "size_px": [
+          1920,
+          1080
+        ],
+        "label_ja": "2025年の組立例：箱外でヒューズ板へ配線",
+        "pixel_transform": "none; decoded full frame, no crop or generative edit"
+      },
+      "insert_plate": {
+        "file": "references/hvjb_assembly_followup_20260915/insert_plate.png",
+        "sha256": "17f3bd544afcd121f87e36edb026d41d4172557487f54b705a3ae672573f6dec",
+        "source": "assembly_20250607",
+        "requested_seek_s": 145,
+        "timestamp_basis": "ffmpeg accurate seek; first decoded display frame at/after requested time",
+        "size_px": [
+          1920,
+          1080
+        ],
+        "label_ja": "2025年の組立例：内部サブアセンブリを箱へ挿入",
+        "pixel_transform": "none; decoded full frame, no crop or generative edit"
+      },
+      "crimp": {
+        "file": "references/hvjb_assembly_followup_20260915/crimp.png",
+        "sha256": "f6fce41ea84004b571b30bd1a6c4cef05b23cbf15bdb28cb8b70ffc3b9f9f8c1",
+        "source": "assembly_20250607",
+        "requested_seek_s": 103,
+        "timestamp_basis": "ffmpeg accurate seek; first decoded display frame at/after requested time",
+        "size_px": [
+          1920,
+          1080
+        ],
+        "label_ja": "2025年の組立例：配線端末の準備",
+        "pixel_transform": "none; decoded full frame, no crop or generative edit"
+      },
+      "busbars": {
+        "file": "references/hvjb_assembly_followup_20260915/busbars.png",
+        "sha256": "e1da438a6be112804da056e47242ad0fde31020eff240be2f66dcbaf81835c51",
+        "source": "assembly_20250607",
+        "requested_seek_s": 237,
+        "timestamp_basis": "ffmpeg accurate seek; first decoded display frame at/after requested time",
+        "size_px": [
+          1920,
+          1080
+        ],
+        "label_ja": "2025年の組立例：別体バスバーを後から取り付け",
+        "pixel_transform": "none; decoded full frame, no crop or generative edit"
+      }
+    },
+    "revision_boundary_ja": "挿入写真は指定写真の接触器・中央被覆・バスバー・補機板と外観を照合。2025年の実作業映像は同一製造版との確認がなく、抵抗配置・配線経路を旧写真へ転記しない。",
+    "source_video_delivery": false,
+    "new_process_movie_created": false,
+    "formal_physical_verdict": null
+  },
+  "assembly_dependencies": [
+    {
+      "id": "AD01",
+      "name_ja": "切断・被覆除去・適合端子の圧着",
+      "basis": "TE 408-32095 / 2025 video 87-129 s",
+      "complete": false,
+      "missing_ja": "線種・長さ・端子注文品番・加工条件"
+    },
+    {
+      "id": "AD02",
+      "name_ja": "内側ハウジングへ電力2端子＋HVIL2端子を挿入・保持確認",
+      "basis": "TE 408-32095",
+      "complete": false,
+      "missing_ja": "端子の現物CAD、全線の端末対応"
+    },
+    {
+      "id": "AD03",
+      "name_ja": "キーを合わせて内側ハウジングを外側へ挿入",
+      "basis": "TE 408-32095",
+      "complete": false,
+      "missing_ja": "ラッチ着座・抜去と工具進入の確認"
+    },
+    {
+      "id": "AD04",
+      "name_ja": "ヒューズ板で5系統を配線・締結してから箱内へ設置する組立例",
+      "basis": "2025 video 28-87, 142-153 s",
+      "complete": false,
+      "missing_ja": "採用版の板寸法・配線先・把持対象・締結仕様。自動化工程順としては未確定"
+    },
+    {
+      "id": "AD05",
+      "name_ja": "主/補機/LV/HVIL接続、導通・検査、蓋とシール",
+      "basis": "Ampere V1.1 / 2025 video",
+      "complete": false,
+      "missing_ja": "実配線図・共締め・検査仕様・蓋の部品構成"
+    }
+  ],
+  "physical_aux_fuses": {
+    "observed_count": 5,
+    "photo_ids": [
+      "P05",
+      "P06",
+      "P19",
+      "P20",
+      "P21"
+    ],
+    "port_assignment_complete": false
+  },
+  "wire_observations_sha256": "f2273fc1c1120460de04fe03d40a9a1b0b8778a20410c608946e85dc6de37d9f",
+  "retired_visible_wire_segments": [
+    {
+      "id": "WI31",
+      "reason_ja": "5口へ一律生成した短線。指定写真の当該口で可視根拠を確認できない。"
+    },
+    {
+      "id": "WI32",
+      "reason_ja": "5口へ一律生成した短線。指定写真の当該口で可視根拠を確認できない。"
+    }
+  ],
+  "candidate_continuations": [
+    {
+      "id": "CC01",
+      "segments": [
+        "W04",
+        "WI52"
+      ],
+      "reason_ja": "橙線は右側へ弧を描くが、重なりを含む続きと金属端末は未確認。形の近さだけで結線しない。",
+      "adopted": false
+    },
+    {
+      "id": "CC02",
+      "segments": [
+        "W05",
+        "WI42"
+      ],
+      "reason_ja": "下側の折返しと口4側短線が近い。交差付近の同一線確認・端子の極番号は未確定。",
+      "adopted": false
+    }
+  ]
+}

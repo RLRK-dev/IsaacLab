@@ -1,0 +1,102 @@
+{
+  "scope": "saved display wire versus estimated sleeve surfaces; excludes all other geometry and containment",
+  "epsilon_m": 0.0,
+  "reused_api": "save_hand_body_setback_v01.py: BVHTree.FromPolygons and overlap",
+  "revisions": [
+    {
+      "revision": "p01",
+      "geometry_sha256": "9249a1ee9e49cfc21f113df8fe7a28bef4cedd3f3de06b78e118e0ec3155904e",
+      "pairs": [
+        {
+          "wire": "W08",
+          "sleeve": "T41",
+          "overlapping_triangle_pairs": 60
+        },
+        {
+          "wire": "W09",
+          "sleeve": "T42",
+          "overlapping_triangle_pairs": 0
+        },
+        {
+          "wire": "W10",
+          "sleeve": "T44",
+          "overlapping_triangle_pairs": 0
+        },
+        {
+          "wire": "W15",
+          "sleeve": "T31",
+          "overlapping_triangle_pairs": 142
+        },
+        {
+          "wire": "W16",
+          "sleeve": "T32",
+          "overlapping_triangle_pairs": 238
+        },
+        {
+          "wire": "W17",
+          "sleeve": "T33",
+          "overlapping_triangle_pairs": 0
+        },
+        {
+          "wire": "W18",
+          "sleeve": "T34",
+          "overlapping_triangle_pairs": 0
+        },
+        {
+          "wire": "W19",
+          "sleeve": "T43",
+          "overlapping_triangle_pairs": 0
+        }
+      ]
+    },
+    {
+      "revision": "p02",
+      "geometry_sha256": "02659a3f27496514a8d0707fdf0057de29f36990990ced49bcf9d06fa50c2214",
+      "pairs": [
+        {
+          "wire": "W08",
+          "sleeve": "T41",
+          "overlapping_triangle_pairs": 0
+        },
+        {
+          "wire": "W09",
+          "sleeve": "T42",
+          "overlapping_triangle_pairs": 0
+        },
+        {
+          "wire": "W10",
+          "sleeve": "T44",
+          "overlapping_triangle_pairs": 0
+        },
+        {
+          "wire": "W15",
+          "sleeve": "T31",
+          "overlapping_triangle_pairs": 0
+        },
+        {
+          "wire": "W16",
+          "sleeve": "T32",
+          "overlapping_triangle_pairs": 0
+        },
+        {
+          "wire": "W17",
+          "sleeve": "T33",
+          "overlapping_triangle_pairs": 0
+        },
+        {
+          "wire": "W18",
+          "sleeve": "T34",
+          "overlapping_triangle_pairs": 0
+        },
+        {
+          "wire": "W19",
+          "sleeve": "T43",
+          "overlapping_triangle_pairs": 0
+        }
+      ]
+    }
+  ],
+  "formal_physical_verdict": null,
+  "real_grasp_or_fastening_evaluated": false,
+  "source_geometry_changed": false
+}

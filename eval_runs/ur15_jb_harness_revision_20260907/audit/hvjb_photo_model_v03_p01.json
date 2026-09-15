@@ -1,0 +1,167 @@
+{
+  "native": "UR15_JB_photo_correspondence_v03_p01.blend",
+  "native_sha256": "a3b3787535e82ca918fc44bef28f5fe3212fb4137969766b9f4fd41c4560b98c",
+  "catalog_sha256": "6c5b7cb9bab859a33c8f5d5cd5429ce9f06fb0951b8a8fa4ae2a31ad99052ca0",
+  "mesh_sha256": "9249a1ee9e49cfc21f113df8fe7a28bef4cedd3f3de06b78e118e0ec3155904e",
+  "feature_count": 92,
+  "id_bijection": true,
+  "saved_world_meshes_exactly_equal": true,
+  "feature_roots_unit_scale": true,
+  "animation_actions": 0,
+  "preserved_inputs": {
+    "UR15_JB_photo_correspondence_v01_p02.blend": "f8c8b9fe3e8503cb2cdc21b4dc1dd0b3d7e547b7bbf0573a415be569f77cad8c",
+    "UR15_JB_initial_hands_v03_p03.blend": "2b828f98402cc95033ed62a380cdea0fb04f95bb31cae0d525b98357cd870614",
+    "UR15_JB_photo_correspondence_v02_p02.blend": "eaad0da7f4eea1098a420985e50989d1a3fe149596532cf5c4d8d1b701f5ba93"
+  },
+  "display_entry_bindings": [
+    {
+      "wire_id": "W01",
+      "end": 1,
+      "feature_id": "L06",
+      "anchor_m": [
+        -0.06333331763744354,
+        0.05950000137090683,
+        0.06300000101327896
+      ],
+      "display_centerline_to_estimated_entry_distance_m": 0.0,
+      "readback_display_endpoint_distance_m": 0.0
+    },
+    {
+      "wire_id": "W03",
+      "end": 0,
+      "feature_id": "L07",
+      "anchor_m": [
+        0.08690479397773743,
+        0.05950000137090683,
+        0.06300000101327896
+      ],
+      "display_centerline_to_estimated_entry_distance_m": 0.0,
+      "readback_display_endpoint_distance_m": 0.0
+    },
+    {
+      "wire_id": "W04",
+      "end": 0,
+      "feature_id": "L05",
+      "anchor_m": [
+        -0.020952381193637848,
+        -0.05761905014514923,
+        0.028999999165534973
+      ],
+      "display_centerline_to_estimated_entry_distance_m": 0.0,
+      "readback_display_endpoint_distance_m": 0.0
+    },
+    {
+      "wire_id": "W05",
+      "end": 0,
+      "feature_id": "L04",
+      "anchor_m": [
+        -0.035952381789684296,
+        -0.05833333730697632,
+        0.028999999165534973
+      ],
+      "display_centerline_to_estimated_entry_distance_m": 0.0,
+      "readback_display_endpoint_distance_m": 0.0
+    },
+    {
+      "wire_id": "W08",
+      "end": 0,
+      "feature_id": "T41",
+      "anchor_m": [
+        -0.07976190745830536,
+        -0.010714286006987095,
+        0.056999996304512024
+      ],
+      "display_centerline_to_estimated_entry_distance_m": 0.0,
+      "readback_display_endpoint_distance_m": 0.0
+    },
+    {
+      "wire_id": "W09",
+      "end": 1,
+      "feature_id": "T42",
+      "anchor_m": [
+        -0.060476191341876984,
+        -0.010714286006987095,
+        0.056999996304512024
+      ],
+      "display_centerline_to_estimated_entry_distance_m": 0.0,
+      "readback_display_endpoint_distance_m": 0.0
+    },
+    {
+      "wire_id": "W10",
+      "end": 0,
+      "feature_id": "T44",
+      "anchor_m": [
+        -0.057619042694568634,
+        -0.020476190373301506,
+        0.05249999836087227
+      ],
+      "display_centerline_to_estimated_entry_distance_m": 0.0,
+      "readback_display_endpoint_distance_m": 0.0
+    },
+    {
+      "wire_id": "W15",
+      "end": 0,
+      "feature_id": "T31",
+      "anchor_m": [
+        -0.06714285910129547,
+        0.054523810744285583,
+        0.056999996304512024
+      ],
+      "display_centerline_to_estimated_entry_distance_m": 0.0,
+      "readback_display_endpoint_distance_m": 0.0
+    },
+    {
+      "wire_id": "W16",
+      "end": 0,
+      "feature_id": "T32",
+      "anchor_m": [
+        -0.0652380958199501,
+        0.03404761850833893,
+        0.056999996304512024
+      ],
+      "display_centerline_to_estimated_entry_distance_m": 0.0,
+      "readback_display_endpoint_distance_m": 0.0
+    },
+    {
+      "wire_id": "W17",
+      "end": 0,
+      "feature_id": "T33",
+      "anchor_m": [
+        -0.05523809418082237,
+        0.035476189106702805,
+        0.05249999836087227
+      ],
+      "display_centerline_to_estimated_entry_distance_m": 0.0,
+      "readback_display_endpoint_distance_m": 0.0
+    },
+    {
+      "wire_id": "W18",
+      "end": 0,
+      "feature_id": "T34",
+      "anchor_m": [
+        -0.07500000298023224,
+        0.05190476402640343,
+        0.05249999836087227
+      ],
+      "display_centerline_to_estimated_entry_distance_m": 0.0,
+      "readback_display_endpoint_distance_m": 0.0
+    },
+    {
+      "wire_id": "W19",
+      "end": 0,
+      "feature_id": "T43",
+      "anchor_m": [
+        -0.07619047909975052,
+        -0.0002380952355451882,
+        0.05249999836087227
+      ],
+      "display_centerline_to_estimated_entry_distance_m": 0.0,
+      "readback_display_endpoint_distance_m": 0.0
+    }
+  ],
+  "binding_scope": "display centerline versus estimated sleeve entrance; not metal contact or physical validity",
+  "retired_ids_absent": true,
+  "full_photo_or_bom_coverage": false,
+  "physical_net_correspondence_complete": false,
+  "formal_physical_verdict": null
+}
