@@ -47861,3 +47861,33 @@ ALT-1 (downgrade) — not chosen (the human's word). ALT-2 (`agent prompt`) — 
 - 本節の commit 自体は push 後の 1 commit（未 push 1）。
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1474 — ✅ **受領 3 通の検証（p1A の記録依頼・p4 m-p4-265 / m-p4-266 = Rs1（人間）の Q1–Q8 回答）— custody・pin・逐語 全一致 → relay へ**（当卓 2026-09-16 17:38–17:50 JST 実測）
+
+**状況** = 09-14 05:27–06:10 JST に届いた 3 通は session 上限で未処理のまま残っていた（当卓 transcript `:43053` / `:43074` / `:43085`・全て `type=user`・`promptSource=typed`・origin human = herdr 送信）。09-14 08:13（`5762f891b8`・p1A）以後 09-16 17:30 まで本 branch の commit 0・当卓への着信 0（transcript 走査 `:43136` 以降 = 空）。Rs1（人間）の語「再開」（`:43118`・09-16 17:35:31 JST）で処理。⛔ 実行 0（sim/run なし）。
+
+1. **[MSG-p1A-LEDGER70-71-35-20260914-001]**（`:43053`・05:27:40 JST 着・送信元 pane `w2:p1A` = agent claude・session `a16c6095-d6fd-45d8-a31a-27ed80a9ae62`・**label 空**）— 依頼 = p6 が DDR #70/#71/#35 に Rs1 の裁定を記録・完了条件 = 更新 commit の完全 SHA を p18 経由で返信・期限/順序制約なし。
+   - **custody**（当卓が transcript `a16c6095-….jsonl` の 6 行を実読）: 6 行とも AskUserQuestion の記録 = 問い（`type=assistant` tool_use・**選択肢の文は p1A が起草**）＋答え（`type=user`・`promptSource=None`・`isCompactSummary` なし・tool_result「Your questions have been answered: …」）。**人間の行為 = p1A が書いた選択肢の選択**（typed の発話ではない — relay に明記）。`:2127` `2026-09-13T14:34:25Z`（23:34:25 JST）#71 →「例外にする」／`:3594` `19:03:17Z`（09-14 04:03:17 JST）#35 →「この一連の変更に限り認める（推奨）」・de7033f865 →「訂正 commit を足す（推奨）」・#70 →「p18 の卓だけ」／`:4418` `20:23:36Z`（05:23:36 JST）→「直す commit を足してから push（推奨）」・#70 確認 →「この卓は付けない、他卓は今のまま」（`:4411` の問いは p4/p6/p11 が本 branch で trailer を付けている事実を再提示）。⇒ **#70 の最終形 = `:4418`**（後・より具体）: p1A 卓は付けない・他卓は現状のまま。**当卓の運用（裁定 A・§1432）は不変**。
+   - **commit 5 件** = 全て実在・author = git user・HEAD の祖先・fork 上: `bfe51e3f44`（09-13 22:26:11）／`513b48947d`（22:26:47）／`3b3a444b83`（09-14 00:30:36）／`de7033f865`（02:26:19）／`a3be545e43`（04:30:36）。push 時刻 = fork ref の reflog（`513b48947d` 22:27:09・`3b3a444b83` 00:31:33）= p1A の記載と一致。p1A の言う「これから作る訂正 commit 1 件」= 当卓の観測では **`5762f891b8`**（08:13:19「Refine NEST ID check reasons, tests and records」・本文が Rs1 の回答 `:4418`/`:4899`/`:5681`/`:5981` を引用・09:25:17 push）— 当卓の観測であって p1A の主張ではない。6 件とも trailer 無し。
+   - **validator**: `scripts/audit_thread_vault_current_state.py`・`scripts/check_cable_model_mislabel.sh` = 両方 untracked（`git status` `??`・mtime 05-22／06-14）。`scripts/validations/check_vault_current_state.sh:6`・`scripts/validations/check_cable_model.sh:18` が依存（当卓 grep）。DDR row 48（`:146`）に `check_cable_model_mislabel.sh` の名あり（p1A の記載どおり）。「clean worktree で 2 FAIL」「Layer 8 13 WARN」= p1A の as-run 主張・当卓は再現していない。
+   - **行 @ HEAD `5762f891b8`**（file clean）: #35 `:139`・#70 `:174`（CLOSED 09-05）・#71 `:175`。
+   - ⚠ **役割ラベル不在 = Rs1 の行為**（当卓は付けない）。**tool は unlabelled pane を refuse**（`refused(unlabelled_pane)`・`hub_send.py:242`）⇒ p6 の SHA を p1A へ返す leg は Rs1 の label 付与 or 手送りの語まで不可 → Rs1 へ報告（本 turn）。
+2. **m-p4-265**（`:43074`・06:09:29 JST 着）= Rs1 の controller 系回答 Q1–Q4・Q8＋補足 a/b・逐語＋p4 の処置・relay 先 p11/p0/pZ/p6。**m-p4-266**（`:43085`・06:09:38 JST 着）= ケーブル前提 Q5–Q7（= p11 の Q1–Q3）・relay 先 p6（row 48 予約欄）/p11。
+   - **custody**（当卓が p4 transcript `ad899cc6-2451-4364-ba3c-910b67075aa4.jsonl` `:2361` を実読）: `type=user`・`promptSource=typed`・origin human・`isCompactSummary` なし・`2026-09-13T21:00:22.814Z`（09-14 06:00:22 JST）・**3,841 字・sha256 `a8480900a9fe5a7637539600977e625dc219101fa891b21bcc9d4b80cfdf8d69`**（当卓再計算 = p4 の記載と一致）。kickoff「2026-09-14 06:06」節 @ `236410dd84`（author date 06:06:00・p4 は「06:05 節」と呼ぶ = 同じ節）の fenced block = custody 本文と **51 行同一**（rstrip 比較）。
+   - **Rs1 帰属の逐語 18 節**（Q1–Q8 の回答＋理由 16・補足 a/b 2）を当卓が表の 2 列を分けて照合 → **全一致**（p4 の「18 節すべて一致」を独立に再現・照合 script = scratchpad `verify_p4_answers.py`）。「収束のみ」×2 = p4 の語（Rs1 の語でない）。
+   - **pin**: `42848e4f4c`（item 6 Q3 実施記録 +1）・`e6172b2e3b`（`p4_ur15_sim_20260727/reference/` 23 file）・`MANIFEST_ur15-dual-arm-cell.sha256` sha256 `3e7c1ce62cb78ae0da49b0ce2f5f3e5d9afa0adbfed49b0a1f6f39dec862d89f`（blob @ `e6172b2e3b` == 作業 file）・`45f25d830a`（item 7 送信記録 +1）・設計 v3 現 `8f70edad4e`（tree clean・`:1`「未検証」・`:90` 対象・`:96` 効果の正直）・kickoff `:1416`（cap の閉止事象）・D4 leg `cb787871f0`／R3 `98d8e63173` = §1464/§1465 bank 済・row 48 `:146` に「【Rs1 の答え Q1–Q3 = 未着・空欄を予約 2026-09-13 22:22:34】」。4 コピー照合は当卓未実施（pZ の独立照合 = p4 の依頼）。
+   - (2) の読みは p4 自身が inference 札。当卓は裁定しない（Rs1 の決定 = (1) の逐語のみ）。
+3. **relay の形** = 逐語（`> ` 引用・transcript から機械で切出し）＋当卓の検証 block・宛先の要件は p4／p1A の (3) を逐語のまま → §1475。
+
+**Banked — 時刻は本節 commit の author date が正。**
+
+## §1475 — ✅ **relay 3 通: m-p18-353（m-p4-265 → p11 cc p0/pZ/p6）= 4 卓 DELIVERED／m-p18-354（m-p4-266 → p6 cc p11）・m-p18-355（p1A の依頼 → p6）= 送信前 hold（HELD(working)・id 割当・本文保存）→ 空き窓で `send --id` 完了予定**（当卓 2026-09-16 17:47–17:49 JST 実測）
+
+- **m-p18-353**（本文 = 逐語 m-p4-265 ＋ 当卓の検証 block・relay body 4,094 字 sha256 `c7d96a960e15a3b4…`〔scratchpad `relay_p4_265.txt`〕・composed（head＋body＋footer）sha256 `973abbb8cd7c5ca1ec7b4d76a34d89212c98b92d3a93d7e618024f391aad8b67` = `bodies/m-p18-353.txt`）: 事前 dry-run（17:47:21・4 卓 idle・composer empty・`dry_run(would_send)`）→ 実送信 `via: Enter`・4 卓とも **DELIVERED**（宛先 transcript の `type=user` record・tool の readback）: p11 `sent_at 17:47:30.963` → `delivered_at 08:47:31.053Z`（= 17:47:31 JST）／p0 17:47:31.538 → 31.856／pZ 17:47:32.350 → 32.679／p6 17:47:33.167 → 33.479。`verify --id m-p18-353` rc 0（出力なし = 不一致なし・§1475 冒頭の source 確認どおり）。
+- **m-p18-354**（本文 = 逐語 m-p4-266 ＋ 検証 block・2,427 字・composed sha256 `9e4a96b096f74b99…`）: p6/p11 が 353 の処理で working ⇒ tool が **送信前 hold**（row_type=held・`HELD(working);HELD(working)`・17:48:49.254・rc 2・本文は `bodies/m-p18-354.txt` に保存）。
+- **m-p18-355**（本文 = 逐語 p1A 依頼 ＋ 検証 block・4,689 字・composed sha256 `3c1ee523d4083c39…`）: 同じく p6 working ⇒ hold（17:48:49.327・rc 2・`bodies/m-p18-355.txt`）。
+- 完了の形 = 両卓 idle を待って `send --id m-p18-354` / `send --id m-p18-355`（保存 bytes をそのまま送る・§1469 と同型）→ 次節で bank。⛔ blind re-send なし・Escape なし・宛先が working の間は待つ。
+- 宛先の要件（逐語のまま携行・当卓は裁定しない）: p0 = D4 着地／pZ = D4 leg＋R3＋reference 照合／p11 = B 行 spec＋R0「収束のみ」／p6 = state.md pointer 節＋DDR 68（以上 m-p4-265 (3)）／p6 = row 48 予約欄に Q5–Q7・p11 = cycle 2 開始（m-p4-266 (3)・354 待ち）／p6 = #70/#71/#35 記録・完全 SHA を p18 へ（p1A・355 待ち）。
+- **Rs1（人間）へ報告する事項（本 turn）**: ① `w2:p1A` の役割ラベル不在 ⇒ tool は refuse（`hub_send.py:242`）・p6 の SHA を p1A へ返す leg は label 付与 or 手送りの語が要る（当卓は label を付けない）② 09-14 08:13 以後 09-16 17:30 まで本 branch は全卓静止（commit 0・当卓への着信 0）③ MEMORY.md 23,068 字（92.3%・09-12 起票の coordinated 圧縮は未実施・当卓は触らない）④ 本節までの commit は未 push（push は Rs1 の語）。
+
+**Banked — 時刻は本節 commit の author date が正。**

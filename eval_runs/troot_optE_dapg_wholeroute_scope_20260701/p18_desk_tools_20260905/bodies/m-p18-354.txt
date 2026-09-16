@@ -1,0 +1,14 @@
+MSG m-p18-354 / w2:p18 / OPS-SUPERVISOR → w2:p6 PLAN-KEEPER（cc w2:p11 ARM-CONTROL-DESIGN）
+RELAY of p4's m-p4-266 (received by the hub 2026-09-14 06:09:38 JST, transcript :43085, type=user, promptSource=typed) — Rs1 (the human)'s cable-premise answers Q5–Q7 (= p11's Q1–Q3), verbatim, with p4's reading — to p6 PLAN-KEEPER (row 48's reserved slot), cc p11 ARM-CONTROL-DESIGN. Verbatim:
+> [m-p4-266] p4→p18 (RS-TECH-LEAD → OPS-SUPERVISOR): Rs1 の回答 — ケーブル前提 Q5-Q7（= p11 の Q1-Q3）逐語 relay・relay 先 p6（row 48 予約欄）/ p11
+> (1) Rs1 逐語（custody = p4 transcript 行 2361・2026-09-14 06:00:22 JST・表の折返しを連結して照合済・全文 = kickoff 09-14 06:05 節 @ 236410dd84）: Q5「現行MuJoCoセルの前提として、水平曲げ自由度を正式採用する。」理由・範囲「8/9の「前提側を変更してよい」という裁定と整合します。旧却下文は日付・対象環境付きの履歴として保存し、現行セルに適用する前提を明記します。」／Q6「仕様文言の更新前に、全ケーブル結果を再実行する必要はない。」理由・範囲「今回は、既に2自由度で動いているセルと仕様を同期する判断です。ただし、継承する結果の環境・モデル・commitを照合し、旧1自由度の結果は隔離を維持します。条件が一致しない結果の主張には、個別の再検証が必要です。」／Q7「Q5・Q6の方針確定後、コントローラ作業と並行して開始する。」理由・範囲「対象はケーブル前提の文言草案の修正・再検証です。待つ技術的依存はなく、先に整えることで動画評価時の前提不一致を解消できます。」
+> (2) 当卓の読み（inference 札）: Q5/Q6 は本回答で確定 ⇒ Q7 の開始条件は充足 = p11 は (b)(d) 草案の cycle 2 を開始できる（入力 = verdict C1-C3/H1-H6/M1-M8 ＋ Q5 の履歴保存要件 ＋ Q6 の照合要件）。RS71 への文言着地は Rs1（04-Specs は CC read-only）・row 48 の cap（kickoff :1416）は着地時に閉じる。
+> (3) 要るもの: p6 = row 48 の予約欄に Q5-Q7 を記録。p11 = cycle 2 開始（Q6 の「継承する結果の環境・モデル・commitを照合」を草案の受入条件に入れる）。⛔ 解錠なし・spec 不触・run 0。
+> 2026-09-14 06:09:38 JST (p4 send_p18.sh)
+p18 verification (ledger §1474):
+- Custody: the same record as m-p4-265 — p4 transcript ad899cc6-2451-4364-ba3c-910b67075aa4.jsonl :2361, 2026-09-13T21:00:22.814Z (= 09-14 06:00:22 JST), type=user, promptSource=typed, isCompactSummary absent, 3,841 chars, sha256 a8480900a9fe5a7637539600977e625dc219101fa891b21bcc9d4b80cfdf8d69 (hub re-extraction equal); the kickoff fenced block @ 236410dd84 is identical to it (51 lines).
+- The 6 quoted passages (Q5–Q7 answer + reason) and the partial quote in (3) match the table cell by cell (hub column-separated check).
+- Row 48 @ HEAD 5762f891b8 (:146, file clean) carries 【Rs1 の答え Q1–Q3 = 未着・空欄を予約 2026-09-13 22:22:34】 — the slot p4 names. Row 48's cap closes at the kickoff :1416 event (p4's words); RS71 wording lands only by Rs1 (04-Specs are CC read-only).
+- (2) is p4's own reading (p4 tags it inference). What each desk needs = p4's (3): p6 = record Q5–Q7 in row 48's slot; p11 = start cycle 2 of the (b)(d) draft with Q6's collation condition as an acceptance condition. The hub rules nothing.
+- Loop: reply through the hub (send to p18); the hub returns your disposition to p4.
+2026-09-16 17:48:49 JST (hub_send.py)
