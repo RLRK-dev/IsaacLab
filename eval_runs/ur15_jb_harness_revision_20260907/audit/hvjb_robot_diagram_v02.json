@@ -1,0 +1,36 @@
+{
+  "observed_at": "2026-09-16T16:22:51.583725+09:00",
+  "directory": "/home/rlrk/Downloads/THREAD_HVJB_ロボット分担図_v02_20260916",
+  "input_sha256_before": {
+    "data/hvjb_robot_sharing_v01.json": "7888693db9b5cd0314b7acecb6c0fa09ab7c207e43c2391fbfbf642833b99b90",
+    "scripts/hvjb_robot_diagram_v02.html": "1c3b8d70b4883e35371073de9717250c9d082a641763dd34d1d96047b4e063a6"
+  },
+  "input_sha256_after": {
+    "data/hvjb_robot_sharing_v01.json": "7888693db9b5cd0314b7acecb6c0fa09ab7c207e43c2391fbfbf642833b99b90",
+    "scripts/hvjb_robot_diagram_v02.html": "1c3b8d70b4883e35371073de9717250c9d082a641763dd34d1d96047b4e063a6"
+  },
+  "page_sha256": "8883bd4bd1283c928fc5c9ccfdc8304c0c1d11dc6ef7e8e505d7dec84353119c",
+  "copied_detail_sha256": {
+    "review.html": "d5dd3c9a09f8cc3882065a3a79ab94d903c8a31e6c2a3a452755d4ad216b7494",
+    "review_data.json": "7888693db9b5cd0314b7acecb6c0fa09ab7c207e43c2391fbfbf642833b99b90",
+    "notes.md": "e63550e1679b6587f97f9b03403b3f724a3aa101e06770b8b7b71d6797761e58",
+    "同時担当の比較.csv": "0730d139b372ae06e9956611666e451e14d3be7830a25d66b45773db9b1de2a0",
+    "兼務の確認入力.csv": "d37da0bd5de3cb51d4d75b7d73e6b000e262d4e62599f8fba100338684174fd2",
+    "audit.json": "adb0dca019580f1d307dfe8a2fc61c957864aef04dbcfabb837dbb5a3116b072",
+    "workcards/review.html": "bbedddb2c8df10cc09fbf58c8d0a579c63f54b2a53b83f3962aa2fdc52316386",
+    "workcards/review_data.json": "4da5b53687b05cd2cd1d294cf57121abde6ee9d04b19ed0a37ef2fb2a4d79df9",
+    "workcards/allocation.json": "2e8516405684475d04fcf57938e7771c0283a5ab23cf482aa6fba4b718889dd9",
+    "workcards/catalog.json": "6c5b7cb9bab859a33c8f5d5cd5429ce9f06fb0951b8a8fa4ae2a31ad99052ca0",
+    "workcards/process_v03.json": "5e9d7078d4e7ff9772f8561788b29a34b28165e3118559385dcc78faf28b64e7",
+    "workcards/notes.md": "1646a8c0e69425e5679b917f3eb0659f9d2e7d50e041b9a19e2af4ab1bf8cba9",
+    "workcards/audit.json": "bbb5e81e820df34c3dd1fc3f96032c514746621673fa3c1ed640ee9fbf40220f",
+    "workcards/仕事と保持区間.csv": "ef3ebbaa3fe0b75568f073bf3957495999ce5ae885aeabe5b319f71ecc9f74fe",
+    "workcards/対象の照合先.csv": "8685218a288917c4ed2a75413bb973b36332b6e7725b9bf348c51433dd7551a3"
+  },
+  "illustrated_plans": [
+    "S4",
+    "S5_AB"
+  ],
+  "source_plans_preserved": 5,
+  "scope": "Role diagram only. Dashed connections are assignments, not arm trajectories or reachability."
+}

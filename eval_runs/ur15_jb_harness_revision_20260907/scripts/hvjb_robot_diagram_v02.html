@@ -1,0 +1,152 @@
+<!doctype html>
+<!-- Copyright (c) 2022-2026, The Isaac Lab Project Developers (https://github.com/isaac-sim/IsaacLab/blob/main/CONTRIBUTORS.md).
+All rights reserved. SPDX-License-Identifier: BSD-3-Clause -->
+<html lang="ja">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>HVJB｜3STとロボットの分担図</title>
+<style>
+:root{--ink:#193249;--muted:#577082;--main:#2875b8;--assist:#c6740a;--dedicated:#168278;--red:#b83838;--line:#d9e2e8}
+*{box-sizing:border-box}body{margin:0;background:#edf2f5;color:var(--ink);font:16px/1.65 "Noto Sans CJK JP","Yu Gothic",sans-serif}
+main{max-width:1440px;margin:auto;padding:28px 32px 40px}h1{font-size:30px;line-height:1.5;margin:4px 0 8px}h2{font-size:21px;margin:0}
+p{margin:8px 0}.eyebrow{font-size:13px;font-weight:700;letter-spacing:.12em;color:var(--muted)}.intro{margin:0 0 15px;color:var(--muted)}
+.process{background:white;border:1px solid var(--line);border-radius:14px;padding:10px 18px;margin-bottom:18px}.process svg{display:block;width:100%;height:auto}
+.controls{display:flex;align-items:center;flex-wrap:wrap;gap:12px;margin:14px 0}.controls strong{margin-right:4px}.controls label{background:white;border:1px solid #b8c8d4;border-radius:8px;padding:7px 15px;cursor:pointer;font-weight:700}.controls label:has(input:checked){border-color:var(--assist);background:#fff2dd}.controls input{accent-color:var(--assist);width:17px;height:17px;vertical-align:middle;margin:0 7px 2px 0}
+button{font:inherit;border:1px solid #b8c8d4;background:white;border-radius:8px;padding:7px 12px;cursor:pointer}button:hover{background:#e5edf3}button:focus-visible,a:focus-visible{outline:3px solid var(--main);outline-offset:3px}
+.legend{display:flex;flex-wrap:wrap;gap:18px;font-size:14px;margin:12px 0}.legend span{display:flex;align-items:center;gap:7px}.dot{width:13px;height:13px;border-radius:50%;display:inline-block}.dash{width:27px;border-top:3px dashed var(--assist)}
+.comparisons{display:grid;grid-template-columns:1fr 1fr;gap:18px}.plan{background:white;border:1px solid var(--line);border-radius:14px;overflow:hidden}.plan header{padding:16px 20px 10px;display:flex;align-items:center;justify-content:space-between;gap:12px}.plan h2 span{font-size:14px;font-weight:400;display:block;color:var(--muted)}.count{font-size:30px;font-weight:800;white-space:nowrap}.count small{font-size:15px;font-weight:500}.diagram{display:block;width:100%;height:auto}.result{margin:0 15px 15px;border-radius:8px;padding:12px 14px;background:#e9f4f1;min-height:88px;font-size:16px}.result.conflict{background:#fff0e5}.result strong{display:block;font-size:19px}.result small{font-size:14px}
+.note{font-size:14px;color:var(--muted)}.explain{background:white;border:1px solid var(--line);border-radius:14px;padding:18px 22px;margin-top:18px}.example{display:grid;grid-template-columns:1fr 1fr;gap:22px}.steps{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:10px 0}.step{background:#eaf2f9;border:1px solid #b8cde0;border-radius:7px;padding:9px 12px}.step.hold{background:#fff0da;border-color:#e3bf85}.links{display:flex;gap:20px;flex-wrap:wrap;margin-top:15px}a{color:#1d648f}details{margin-top:15px}summary{cursor:pointer;font-weight:700}.equipment{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:12px}.equipment div{border-left:3px solid #aabcc8;padding-left:10px}
+@media(max-width:950px){main{padding:18px 14px}.comparisons,.example{grid-template-columns:1fr}.equipment{grid-template-columns:1fr}h1{font-size:24px}.process{overflow-x:auto}.process svg{min-width:820px}.count{font-size:27px}}
+@media print{body{background:white}main{padding:8px;max-width:none}.comparisons{grid-template-columns:1fr 1fr;gap:8px}.controls,.links,details{display:none}.plan{break-inside:avoid}.process svg{min-width:0}h1{font-size:24px}.result{font-size:12px}.result strong{font-size:15px}}
+</style>
+<main>
+<div id="overview">
+<div class="eyebrow">HVJB · 3STの仕事分担 · 比較図 v02</div>
+<h1>主担当は3腕。補助を1腕で共用するか、2腕に分けるか。</h1>
+<p class="intro">AとBで別々のユニットを組み、Cでまとめて筐体へ搭載します。下図は担当関係を示す概念図です。</p>
+<section class="process" aria-label="AとBからCへ合流する工程">
+<svg viewBox="0 0 1280 155" role="img" aria-labelledby="flowTitle flowDesc" xmlns="http://www.w3.org/2000/svg">
+<title id="flowTitle">Aの下板ユニットとBのヒューズ板ユニットがCに合流</title>
+<desc id="flowDesc">AとBは筐体の外で組み立てる。Cで2ユニットをまとめ、別供給の筐体に搭載して接続を続ける。3STは別ワークを並行して処理する構想。</desc>
+<defs><marker id="flowArrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10Z" fill="#577082"/></marker></defs>
+<g font-family="Noto Sans CJK JP, sans-serif" fill="#193249">
+<rect x="6" y="9" width="350" height="58" rx="10" fill="#edf4fb"/>
+<text x="24" y="35" font-size="19" font-weight="700">A　下板ユニットを組む</text><text x="61" y="56" font-size="14">筐体の外で部品・配線を組付け</text>
+<rect x="6" y="86" width="350" height="58" rx="10" fill="#edf4fb"/>
+<text x="24" y="112" font-size="19" font-weight="700">B　ヒューズ板ユニットを組む</text><text x="61" y="133" font-size="14">筐体の外で部品・配線を組付け</text>
+<path d="M364 38H414Q441 38 441 76M364 115H414Q441 115 441 76" fill="none" stroke="#577082" stroke-width="3"/>
+<path d="M441 76H482" stroke="#577082" stroke-width="3" marker-end="url(#flowArrow)"/>
+<rect x="490" y="9" width="490" height="135" rx="10" fill="#eaf2f0"/>
+<text x="508" y="36" font-size="19" font-weight="700">C　2ユニットをまとめ、筐体へ搭載</text>
+<text x="511" y="68" font-size="16">位置合わせ → 保持・ねじ固定 → 一体で搭載</text>
+<text x="511" y="97" font-size="15">搭載後も、配線・ヘッダー固定・蓋・検査が続く</text>
+<text x="511" y="125" font-size="13" fill="#577082">A・Bが次のワークを組む間、Cは前のワークを処理する構想</text>
+<rect x="1045" y="44" width="227" height="74" rx="9" fill="#f3f5f7" stroke="#c4d0d9"/>
+<text x="1059" y="73" font-size="17" font-weight="700">OP010　空筐体を供給</text><text x="1059" y="101" font-size="15">XYZ直交 ＋ 20個ストック</text>
+<path d="M1037 79H989" stroke="#577082" stroke-width="3" marker-end="url(#flowArrow)"/>
+</g></svg>
+</section>
+<div class="controls" role="group" aria-label="補助を同時に必要とするST">
+<strong>同時に補助が必要なST：</strong>
+<label><input id="assist-A" type="checkbox" checked>A</label>
+<label><input id="assist-B" type="checkbox">B</label>
+<label><input id="assist-C" type="checkbox" checked>C</label>
+<button type="button" id="example-ac">例：AとC</button><button type="button" id="example-ab">例：AとB</button>
+</div>
+<div class="legend"><span><i class="dot" style="background:var(--main)"></i>各STの主担当</span><span><i class="dot" style="background:var(--assist)"></i>共用の補助</span><span><i class="dot" style="background:var(--dedicated)"></i>C専用の補助</span><span><i class="dash"></i>補助の担当先（動作軌道ではない）</span></div>
+<div class="comparisons">
+<article class="plan" data-plan="S4"><header><h2>補助1腕を3STで共用<span>A・B・Cに、同じ補助腕を順番に回す</span></h2><div class="count">4<small>腕案</small></div></header><div id="diagram-S4"></div><div class="result" id="result-S4" aria-live="polite"></div></article>
+<article class="plan" data-plan="S5_AB"><header><h2>Cの補助を独立させる<span>A・Bの共用補助 ＋ C専用の補助</span></h2><div class="count">5<small>腕案</small></div></header><div id="diagram-S5_AB"></div><div class="result" id="result-S5_AB" aria-live="polite"></div></article>
+</div>
+<p class="note">4・5は上の組立役に割り当てる「腕」の数です。機種・機台数・実際の配置は未確定です。図は寸法・到達範囲を表していません。</p>
+</div>
+<section class="explain">
+<h2>共用できるのは、持っている物を引き継いでから</h2>
+<div class="example">
+<div><p><strong>共用補助がCのケーブルを案内中なら</strong></p><div class="steps"><span class="step hold">Cを保持・案内</span><b>→</b><span class="step">支持を引継ぎ、手を離す</span><b>→</b><span class="step">退避・移動・手先交換</span><b>→</b><span class="step">Aの補助へ</span></div></div>
+<div><p>Cでは「筐体に入った」だけで補助腕を空きにはできません。自由端の案内と支持の引継ぎが済むまで、その腕を使います。</p><p>5腕案では、その間も別の共用補助をAまたはBへ割り当てられます。<strong>AとBの両方が同時に補助を求めれば、順番待ちは残ります。</strong></p></div>
+</div>
+<details><summary>図にまとめた仕事と、別に数える設備</summary>
+<p>主担当3腕がそれぞれ作業中で、必要な独立補助役を各1腕へ対応させる比較です。補助1役を実際に1腕で担えるか、工程の所要時間、到達・干渉は未確定です。図の「順番待ち」は担当の重複を表し、待ち時間の測定ではありません。</p>
+<div class="equipment"><div>筐体供給：XYZ＋20個収納<br>パレットの2段循環・回収・補給</div><div>据置締付工具・位置決め軸<br>ボルトフィーダ・支持治具・手先交換</div><div>線材準備・検査・払出し<br>各作業の受渡しと待ち位置</div></div>
+<p>保持中の締結、該当する大小ボルトの同時締結、20仕事の対応は元資料に残しています。図の部品アイコンは機能の記号で、実物形状・部品点数を表すものではありません。</p>
+</details>
+<div class="links"><a href="overview.png">比較図を画像で開く</a><a href="overview.svg">図だけをSVGで開く</a><a href="details/review.html">5つの分担案・20仕事の詳細</a><a href="review_data.json">元の比較データ</a></div>
+</section>
+</main>
+<script>
+const data=__PAYLOAD__;
+const COLORS={main:'#2875b8',assist:'#c6740a',dedicated:'#168278',ink:'#193249',muted:'#577082',red:'#b83838'};
+const CELLS=['A','B','C'];
+const FOCUS=['S4','S5_AB'];
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const text=(x,y,value,size=16,fill=COLORS.ink,weight=400)=>`<text x="${x}" y="${y}" text-anchor="middle" font-size="${size}" fill="${fill}" font-weight="${weight}">${esc(value)}</text>`;
+function arm(unit,x,y,color,label,scale=1){
+  return `<g class="arm-icon" data-unit="${unit}" aria-label="${esc(label)}" transform="translate(${x} ${y}) scale(${scale})">
+  <path d="M-21 4H21L15-9H-15Z" fill="${color}"/><path d="M0-12L-14-58L28-84L60-48V-29" stroke="${color}" stroke-width="13" fill="none" stroke-linejoin="round"/>
+  ${[[0,-12],[-14,-58],[28,-84],[60,-48]].map(([cx,cy])=>`<circle cx="${cx}" cy="${cy}" r="9" fill="white" stroke="${color}" stroke-width="5"/>`).join('')}
+  <path d="M48-28H72M50-28V-13H55M70-28V-13H65" fill="none" stroke="${color}" stroke-width="5" stroke-linejoin="round"/></g>`;
+}
+function workpiece(cell,x,y){
+  const plate=`<rect x="-36" y="-7" width="72" height="14" rx="3" fill="#617280"/>`;
+  const body=cell==='A'?`${plate}<circle cx="-9" cy="-13" r="14" fill="#344954"/><rect x="13" y="-25" width="17" height="23" rx="2" fill="#889aa5"/><path d="M-27-20Q-38-32-29-34H30" stroke="#e08726" stroke-width="5" fill="none"/>`:
+    cell==='B'?`${plate}<rect x="-33" y="-28" width="66" height="13" rx="5" fill="#a2b1ba"/><path d="M-25-28V-15M-2-28V-15M10-28V-15M27-28V-15" stroke="white" stroke-width="7"/>`:
+    `<path d="M-38-26H38V10H-38Z" fill="#d3dfe7" stroke="#617280" stroke-width="3"/><path d="M-29-20H29V2H-29Z" fill="#8799a5"/><circle cx="-8" cy="-10" r="9" fill="#344954"/><path d="M9-24H29" stroke="#e08726" stroke-width="5"/>`;
+  return `<g transform="translate(${x} ${y})" class="workpiece" data-cell="${cell}">${body}<path d="M-44 18H44M-32 18V38M32 18V38" stroke="#9badb8" stroke-width="6" fill="none"/></g>`;
+}
+function station(cell,index,active){
+  const x=15+index*213,center=x+95;
+  const title={A:'下板側の外組み',B:'ヒューズ板の外組み',C:'合流・筐体組込み'}[cell];
+  return `<g class="station" data-cell="${cell}"><rect x="${x}" y="20" width="190" height="226" rx="12" fill="#f3f7fa" stroke="#d7e2e9"/>
+  ${text(center,48,`${cell}  ${title}`,16,COLORS.ink,700)}
+  ${arm('ARM_'+cell,x+43,176,COLORS.main,'主担当 '+cell,.88)}${workpiece(cell,x+131,185)}
+  ${text(center,232,`主担当 ${cell} · 1腕`,15,COLORS.main,700)}
+  <rect x="${x+14}" y="259" width="162" height="30" rx="15" fill="${active?'#fff0db':'#f0f2f4'}"/>
+  ${text(center,280,active?'補助が必要':'補助の要求なし',14,active?COLORS.assist:COLORS.muted,active?700:400)}</g>`;
+}
+function diagram(plan,active){
+  const scene=plan.scenarios.find(s=>s.id===(active.join('')||'NONE'));
+  const groups=plan.assist_groups;
+  const positions=groups.length===1?[320]:[214,531];
+  const routes=groups.map((group,i)=>{
+    const color=i===0?COLORS.assist:COLORS.dedicated;
+    return group.map(role=>{const cell=role.slice(-1),index=CELLS.indexOf(cell),needed=active.includes(cell);
+      return `<path class="assist-route" data-role="${role}" data-unit="${plan.role_to_unit[role]}" data-active="${needed}" d="M${positions[i]} 368V324H${110+213*index}V296" fill="none" stroke="${color}" stroke-width="${needed?4:2}" stroke-dasharray="7 6" opacity="${needed?1:.28}"/>`;
+    }).join('');
+  }).join('');
+  const helpers=groups.map((group,i)=>{
+    const x=positions[i],color=i===0?COLORS.assist:COLORS.dedicated,unit=plan.role_to_unit[group[0]];
+    const requests=group.filter(role=>active.includes(role.slice(-1))).map(role=>role.slice(-1));
+    const conflicted=Boolean(scene.duplicate_assignments[unit]);
+    const label=i===0?'共用の補助':'C専用の補助';
+    return `<g class="helper${conflicted?' conflict':''}" data-unit="${unit}">
+    ${arm(unit,x-19,429,color,label,.68)}${text(x,453,`${label} · 1腕`,16,color,700)}
+    ${text(x,476,group.map(r=>r.slice(-1)).join('・')+'を担当',14,COLORS.muted)}
+    <rect x="${x-83}" y="338" width="166" height="30" rx="7" fill="${conflicted?'#fff0e5':'white'}" stroke="${conflicted?'#d69056':'#d9e2e8'}"/>
+    ${text(x,359,requests.length?(conflicted?requests.join('と')+'の要求が重なる':requests[0]+'の補助へ割当'):'要求なし',14,conflicted?COLORS.red:color,700)}</g>`;
+  }).join('');
+  return `<svg class="diagram" id="svg-${plan.id}" data-arm-count="${plan.arm_slots}" viewBox="0 0 646 494" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title-${plan.id} desc-${plan.id}" style="font-family:Noto Sans CJK JP,Yu Gothic,sans-serif">
+  <title id="title-${plan.id}">${plan.arm_slots}腕案の役割図</title><desc id="desc-${plan.id}">${esc(plan.note_ja)}。補助が必要なST：${active.join('、')||'なし'}。破線は担当関係。</desc>
+  ${routes}${CELLS.map((c,i)=>station(c,i,active.includes(c))).join('')}${helpers}</svg>`;
+}
+function result(plan,active){
+  const scene=plan.scenarios.find(s=>s.id===(active.join('')||'NONE'));
+  const conflicts=Object.values(scene.duplicate_assignments).flat().map(r=>r.slice(-1));
+  const el=document.getElementById('result-'+plan.id);
+  el.classList.toggle('conflict',conflicts.length>0);
+  if(conflicts.length){el.innerHTML=`<strong>${conflicts.join('・')}の補助は同時にできない</strong><small>同じ補助腕への要求が重なるため、把持を始める前に順番を調整します。</small>`;}
+  else if(active.length){el.innerHTML=`<strong>${active.join('・')}への補助の割当は重ならない</strong><small>${plan.id==='S5_AB'&&active.includes('C')?'Cの補助を、A・Bの共用補助から分離。':'この場面で、補助腕への要求の重複はありません。'}実動作の成立は別に確認します。</small>`;}
+  else{el.innerHTML='<strong>この場面では補助の要求なし</strong><small>主担当3腕が、それぞれのSTの仕事を受け持ちます。</small>';}
+}
+function render(){
+  const active=CELLS.filter(c=>document.getElementById('assist-'+c).checked);
+  for(const id of FOCUS){const plan=data.plans.find(p=>p.id===id);document.getElementById('diagram-'+id).innerHTML=diagram(plan,active);result(plan,active);}
+  window.diagramScene=active.join('')||'NONE';
+}
+function example(cells){for(const c of CELLS)document.getElementById('assist-'+c).checked=cells.includes(c);render();}
+for(const c of CELLS)document.getElementById('assist-'+c).addEventListener('change',render);
+document.getElementById('example-ac').addEventListener('click',()=>example(['A','C']));
+document.getElementById('example-ab').addEventListener('click',()=>example(['A','B']));
+render();window.diagramReady=true;
+</script>
+</html>

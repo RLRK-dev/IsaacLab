@@ -1,0 +1,591 @@
+{
+  "observed_at": "2026-09-16T07:22:52.568Z",
+  "directory": "/home/rlrk/Downloads/THREAD_HVJB_ロボット分担図_v02_20260916",
+  "page_sha256": "8883bd4bd1283c928fc5c9ccfdc8304c0c1d11dc6ef7e8e505d7dec84353119c",
+  "cases": [
+    {
+      "plan": "S4",
+      "scene": "NONE",
+      "units": [
+        "ARM_A",
+        "ARM_B",
+        "ARM_C",
+        "ASSIST_1"
+      ],
+      "cells": [
+        "A",
+        "B",
+        "C"
+      ],
+      "routes": [
+        {
+          "role": "X-A",
+          "unit": "ASSIST_1",
+          "active": false
+        },
+        {
+          "role": "X-B",
+          "unit": "ASSIST_1",
+          "active": false
+        },
+        {
+          "role": "X-C",
+          "unit": "ASSIST_1",
+          "active": false
+        }
+      ],
+      "conflicts": [],
+      "result": "この場面では補助の要求なし主担当3腕が、それぞれのSTの仕事を受け持ちます。"
+    },
+    {
+      "plan": "S5_AB",
+      "scene": "NONE",
+      "units": [
+        "ARM_A",
+        "ARM_B",
+        "ARM_C",
+        "ASSIST_1",
+        "ASSIST_2"
+      ],
+      "cells": [
+        "A",
+        "B",
+        "C"
+      ],
+      "routes": [
+        {
+          "role": "X-A",
+          "unit": "ASSIST_1",
+          "active": false
+        },
+        {
+          "role": "X-B",
+          "unit": "ASSIST_1",
+          "active": false
+        },
+        {
+          "role": "X-C",
+          "unit": "ASSIST_2",
+          "active": false
+        }
+      ],
+      "conflicts": [],
+      "result": "この場面では補助の要求なし主担当3腕が、それぞれのSTの仕事を受け持ちます。"
+    },
+    {
+      "plan": "S4",
+      "scene": "A",
+      "units": [
+        "ARM_A",
+        "ARM_B",
+        "ARM_C",
+        "ASSIST_1"
+      ],
+      "cells": [
+        "A",
+        "B",
+        "C"
+      ],
+      "routes": [
+        {
+          "role": "X-A",
+          "unit": "ASSIST_1",
+          "active": true
+        },
+        {
+          "role": "X-B",
+          "unit": "ASSIST_1",
+          "active": false
+        },
+        {
+          "role": "X-C",
+          "unit": "ASSIST_1",
+          "active": false
+        }
+      ],
+      "conflicts": [],
+      "result": "Aへの補助の割当は重ならないこの場面で、補助腕への要求の重複はありません。実動作の成立は別に確認します。"
+    },
+    {
+      "plan": "S5_AB",
+      "scene": "A",
+      "units": [
+        "ARM_A",
+        "ARM_B",
+        "ARM_C",
+        "ASSIST_1",
+        "ASSIST_2"
+      ],
+      "cells": [
+        "A",
+        "B",
+        "C"
+      ],
+      "routes": [
+        {
+          "role": "X-A",
+          "unit": "ASSIST_1",
+          "active": true
+        },
+        {
+          "role": "X-B",
+          "unit": "ASSIST_1",
+          "active": false
+        },
+        {
+          "role": "X-C",
+          "unit": "ASSIST_2",
+          "active": false
+        }
+      ],
+      "conflicts": [],
+      "result": "Aへの補助の割当は重ならないこの場面で、補助腕への要求の重複はありません。実動作の成立は別に確認します。"
+    },
+    {
+      "plan": "S4",
+      "scene": "B",
+      "units": [
+        "ARM_A",
+        "ARM_B",
+        "ARM_C",
+        "ASSIST_1"
+      ],
+      "cells": [
+        "A",
+        "B",
+        "C"
+      ],
+      "routes": [
+        {
+          "role": "X-A",
+          "unit": "ASSIST_1",
+          "active": false
+        },
+        {
+          "role": "X-B",
+          "unit": "ASSIST_1",
+          "active": true
+        },
+        {
+          "role": "X-C",
+          "unit": "ASSIST_1",
+          "active": false
+        }
+      ],
+      "conflicts": [],
+      "result": "Bへの補助の割当は重ならないこの場面で、補助腕への要求の重複はありません。実動作の成立は別に確認します。"
+    },
+    {
+      "plan": "S5_AB",
+      "scene": "B",
+      "units": [
+        "ARM_A",
+        "ARM_B",
+        "ARM_C",
+        "ASSIST_1",
+        "ASSIST_2"
+      ],
+      "cells": [
+        "A",
+        "B",
+        "C"
+      ],
+      "routes": [
+        {
+          "role": "X-A",
+          "unit": "ASSIST_1",
+          "active": false
+        },
+        {
+          "role": "X-B",
+          "unit": "ASSIST_1",
+          "active": true
+        },
+        {
+          "role": "X-C",
+          "unit": "ASSIST_2",
+          "active": false
+        }
+      ],
+      "conflicts": [],
+      "result": "Bへの補助の割当は重ならないこの場面で、補助腕への要求の重複はありません。実動作の成立は別に確認します。"
+    },
+    {
+      "plan": "S4",
+      "scene": "C",
+      "units": [
+        "ARM_A",
+        "ARM_B",
+        "ARM_C",
+        "ASSIST_1"
+      ],
+      "cells": [
+        "A",
+        "B",
+        "C"
+      ],
+      "routes": [
+        {
+          "role": "X-A",
+          "unit": "ASSIST_1",
+          "active": false
+        },
+        {
+          "role": "X-B",
+          "unit": "ASSIST_1",
+          "active": false
+        },
+        {
+          "role": "X-C",
+          "unit": "ASSIST_1",
+          "active": true
+        }
+      ],
+      "conflicts": [],
+      "result": "Cへの補助の割当は重ならないこの場面で、補助腕への要求の重複はありません。実動作の成立は別に確認します。"
+    },
+    {
+      "plan": "S5_AB",
+      "scene": "C",
+      "units": [
+        "ARM_A",
+        "ARM_B",
+        "ARM_C",
+        "ASSIST_1",
+        "ASSIST_2"
+      ],
+      "cells": [
+        "A",
+        "B",
+        "C"
+      ],
+      "routes": [
+        {
+          "role": "X-A",
+          "unit": "ASSIST_1",
+          "active": false
+        },
+        {
+          "role": "X-B",
+          "unit": "ASSIST_1",
+          "active": false
+        },
+        {
+          "role": "X-C",
+          "unit": "ASSIST_2",
+          "active": true
+        }
+      ],
+      "conflicts": [],
+      "result": "Cへの補助の割当は重ならないCの補助を、A・Bの共用補助から分離。実動作の成立は別に確認します。"
+    },
+    {
+      "plan": "S4",
+      "scene": "AB",
+      "units": [
+        "ARM_A",
+        "ARM_B",
+        "ARM_C",
+        "ASSIST_1"
+      ],
+      "cells": [
+        "A",
+        "B",
+        "C"
+      ],
+      "routes": [
+        {
+          "role": "X-A",
+          "unit": "ASSIST_1",
+          "active": true
+        },
+        {
+          "role": "X-B",
+          "unit": "ASSIST_1",
+          "active": true
+        },
+        {
+          "role": "X-C",
+          "unit": "ASSIST_1",
+          "active": false
+        }
+      ],
+      "conflicts": [
+        "ASSIST_1"
+      ],
+      "result": "A・Bの補助は同時にできない同じ補助腕への要求が重なるため、把持を始める前に順番を調整します。"
+    },
+    {
+      "plan": "S5_AB",
+      "scene": "AB",
+      "units": [
+        "ARM_A",
+        "ARM_B",
+        "ARM_C",
+        "ASSIST_1",
+        "ASSIST_2"
+      ],
+      "cells": [
+        "A",
+        "B",
+        "C"
+      ],
+      "routes": [
+        {
+          "role": "X-A",
+          "unit": "ASSIST_1",
+          "active": true
+        },
+        {
+          "role": "X-B",
+          "unit": "ASSIST_1",
+          "active": true
+        },
+        {
+          "role": "X-C",
+          "unit": "ASSIST_2",
+          "active": false
+        }
+      ],
+      "conflicts": [
+        "ASSIST_1"
+      ],
+      "result": "A・Bの補助は同時にできない同じ補助腕への要求が重なるため、把持を始める前に順番を調整します。"
+    },
+    {
+      "plan": "S4",
+      "scene": "AC",
+      "units": [
+        "ARM_A",
+        "ARM_B",
+        "ARM_C",
+        "ASSIST_1"
+      ],
+      "cells": [
+        "A",
+        "B",
+        "C"
+      ],
+      "routes": [
+        {
+          "role": "X-A",
+          "unit": "ASSIST_1",
+          "active": true
+        },
+        {
+          "role": "X-B",
+          "unit": "ASSIST_1",
+          "active": false
+        },
+        {
+          "role": "X-C",
+          "unit": "ASSIST_1",
+          "active": true
+        }
+      ],
+      "conflicts": [
+        "ASSIST_1"
+      ],
+      "result": "A・Cの補助は同時にできない同じ補助腕への要求が重なるため、把持を始める前に順番を調整します。"
+    },
+    {
+      "plan": "S5_AB",
+      "scene": "AC",
+      "units": [
+        "ARM_A",
+        "ARM_B",
+        "ARM_C",
+        "ASSIST_1",
+        "ASSIST_2"
+      ],
+      "cells": [
+        "A",
+        "B",
+        "C"
+      ],
+      "routes": [
+        {
+          "role": "X-A",
+          "unit": "ASSIST_1",
+          "active": true
+        },
+        {
+          "role": "X-B",
+          "unit": "ASSIST_1",
+          "active": false
+        },
+        {
+          "role": "X-C",
+          "unit": "ASSIST_2",
+          "active": true
+        }
+      ],
+      "conflicts": [],
+      "result": "A・Cへの補助の割当は重ならないCの補助を、A・Bの共用補助から分離。実動作の成立は別に確認します。"
+    },
+    {
+      "plan": "S4",
+      "scene": "BC",
+      "units": [
+        "ARM_A",
+        "ARM_B",
+        "ARM_C",
+        "ASSIST_1"
+      ],
+      "cells": [
+        "A",
+        "B",
+        "C"
+      ],
+      "routes": [
+        {
+          "role": "X-A",
+          "unit": "ASSIST_1",
+          "active": false
+        },
+        {
+          "role": "X-B",
+          "unit": "ASSIST_1",
+          "active": true
+        },
+        {
+          "role": "X-C",
+          "unit": "ASSIST_1",
+          "active": true
+        }
+      ],
+      "conflicts": [
+        "ASSIST_1"
+      ],
+      "result": "B・Cの補助は同時にできない同じ補助腕への要求が重なるため、把持を始める前に順番を調整します。"
+    },
+    {
+      "plan": "S5_AB",
+      "scene": "BC",
+      "units": [
+        "ARM_A",
+        "ARM_B",
+        "ARM_C",
+        "ASSIST_1",
+        "ASSIST_2"
+      ],
+      "cells": [
+        "A",
+        "B",
+        "C"
+      ],
+      "routes": [
+        {
+          "role": "X-A",
+          "unit": "ASSIST_1",
+          "active": false
+        },
+        {
+          "role": "X-B",
+          "unit": "ASSIST_1",
+          "active": true
+        },
+        {
+          "role": "X-C",
+          "unit": "ASSIST_2",
+          "active": true
+        }
+      ],
+      "conflicts": [],
+      "result": "B・Cへの補助の割当は重ならないCの補助を、A・Bの共用補助から分離。実動作の成立は別に確認します。"
+    },
+    {
+      "plan": "S4",
+      "scene": "ABC",
+      "units": [
+        "ARM_A",
+        "ARM_B",
+        "ARM_C",
+        "ASSIST_1"
+      ],
+      "cells": [
+        "A",
+        "B",
+        "C"
+      ],
+      "routes": [
+        {
+          "role": "X-A",
+          "unit": "ASSIST_1",
+          "active": true
+        },
+        {
+          "role": "X-B",
+          "unit": "ASSIST_1",
+          "active": true
+        },
+        {
+          "role": "X-C",
+          "unit": "ASSIST_1",
+          "active": true
+        }
+      ],
+      "conflicts": [
+        "ASSIST_1"
+      ],
+      "result": "A・B・Cの補助は同時にできない同じ補助腕への要求が重なるため、把持を始める前に順番を調整します。"
+    },
+    {
+      "plan": "S5_AB",
+      "scene": "ABC",
+      "units": [
+        "ARM_A",
+        "ARM_B",
+        "ARM_C",
+        "ASSIST_1",
+        "ASSIST_2"
+      ],
+      "cells": [
+        "A",
+        "B",
+        "C"
+      ],
+      "routes": [
+        {
+          "role": "X-A",
+          "unit": "ASSIST_1",
+          "active": true
+        },
+        {
+          "role": "X-B",
+          "unit": "ASSIST_1",
+          "active": true
+        },
+        {
+          "role": "X-C",
+          "unit": "ASSIST_2",
+          "active": true
+        }
+      ],
+      "conflicts": [
+        "ASSIST_1"
+      ],
+      "result": "A・Bの補助は同時にできない同じ補助腕への要求が重なるため、把持を始める前に順番を調整します。"
+    }
+  ],
+  "mobile": {
+    "width": 480,
+    "documentWidth": 465,
+    "scene": "AC",
+    "arms": 9
+  },
+  "local_links": [
+    "overview.png",
+    "overview.svg",
+    "details/review.html",
+    "review_data.json"
+  ],
+  "exports_sha256": {
+    "overview.svg": "850c0fe1d346477b8b87dc477d36cc06c136104371709e593eb082c30c73f5db",
+    "overview.png": "af7b23806cc3c07648cbc86cbac35cf080e327c62e6aa345b4937ddc40e4bfc2",
+    "browser_desktop.png": "a8de989f9bc4d3db3acc6917b14e07b3333455382b341952f8c5af14599b18cd",
+    "browser_mobile.png": "ad7b1802638fd24ec1bd1bd4c210ad56aca9844fc0ac519e3a85f049ae2cbc60"
+  },
+  "javascript_errors": [],
+  "scope": "Diagram-to-source role correspondence only; no physical/scheduling verdict"
+}
