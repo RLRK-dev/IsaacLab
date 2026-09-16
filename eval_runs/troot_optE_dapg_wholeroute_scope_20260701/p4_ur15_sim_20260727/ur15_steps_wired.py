@@ -1260,8 +1260,12 @@ def _wrap(q):
     return q
 
 
-def attitude_tilt_deg(yaw, roll):
-    """How far off straight down a jaw commanded to (yaw, roll) would point [deg].
+def attitude_tilt_deg(t, yaw, roll):
+    """How far off straight down side t's jaw, commanded to (yaw, roll), would point [deg].
+
+    D4 (P11_UR15B_CONTROLLER_DESIGN_20260913.md section 6): the reading is taken for the side asked
+    for -- its own pinch->mouth vector, tool body and AXFIX -- where it used to read the LEFT hand
+    for every attitude on both arms.
 
     p11 -137: the cap has to be derived in the quantity the CHECK measures, not in the parameter
     the menu is written in.  The menu is (yaw, roll) pairs, and whether a given yaw also tips the
@@ -1273,57 +1277,71 @@ def attitude_tilt_deg(yaw, roll):
     directly.  The pinch-to-mouth vector is read once in the tool's own frame from the model as it
     stands, which is where it is constant.
     """
-    v = slot_centre("L") - pinch("L")
-    v_tool = np.array(d.xmat[TOOLB["L"]]).reshape(3, 3).T @ v
+    v = slot_centre(t) - pinch(t)
+    v_tool = np.array(d.xmat[TOOLB[t]]).reshape(3, 3).T @ v
     v_tool = v_tool / max(1e-12, float(np.linalg.norm(v_tool)))
     # ⛔ NOT transposed.  The IK drives the tool until (RD @ AXFIX) @ Rt.T is the identity, so at
     # the pose this attitude asks for, Rt IS RD @ AXFIX -- and a vector in the tool frame reaches
     # world by that matrix, not by its inverse.  With the transpose the cap printed 0.00 degrees
     # for every attitude in the menu, which is what sent me back to this line.
-    world = (_rdes(yaw, roll) @ AXFIX["L"]) @ v_tool
+    world = (_rdes(yaw, roll) @ AXFIX[t]) @ v_tool
     world = world / max(1e-12, float(np.linalg.norm(world)))
     return math.degrees(math.acos(min(1.0, max(-1.0, float(-world[2])))))
 
 
-def vertical_cap_deg():
-    """The smallest non-zero tilt the attitude menu can produce, in degrees."""
-    tilts = [attitude_tilt_deg(y, r) for y, r in _spec.GRASP_ATTITUDES]
-    # ⛔ TWO checks, and the second is the one that matters -- p11 -144 caught that the first alone
-    # passes the exact bug it was written for.  With the rotation inverted every attitude came out
-    # flat, so the upright one came out flat too and the zero check was satisfied: a dead
-    # instrument reproduces its zero perfectly.  A calibration needs both ends.
-    #
-    # Same shape as the pin's two readings, which is where this belongs: engagement is the zero,
-    # a step later is the span.  Here the zero is the upright entry and the span is every entry
-    # that asks for a tilt.  Neither says tilt must EQUAL roll -- the two differ by a couple of
-    # degrees and should -- only that a non-zero input produces a non-zero output.
-    upright = [attitude_tilt_deg(y, r) for y, r in _spec.GRASP_ATTITUDES if abs(r) < 1e-9]
-    if upright and max(upright) > TILT_CAL_DEG:
-        raise RuntimeError(
-            f"the attitude with zero roll comes out {max(upright):.2f} deg off vertical, so this "
-            f"is not turning attitudes into the tilt the check reads -- the cap it would produce "
-            f"would be a number about the arithmetic, not about the cell")
-    tilted = [attitude_tilt_deg(y, r) for y, r in _spec.GRASP_ATTITUDES if abs(r) >= 1e-9]
-    if tilted and min(tilted) < TILT_CAL_DEG:
-        raise RuntimeError(
-            f"an attitude that asks for a tilt comes back {min(tilted):.2f} deg off vertical, "
-            f"which is flat.  A construction that turns every attitude into the same answer is "
-            f"not measuring attitude at all -- an inverted rotation, a scale of zero and a "
-            f"collapsed sign all look like this, and the zero check cannot tell them apart "
-            f"because they all reproduce the zero")
-    # ⛔ The cap is min(tilted), NOT min over everything that came back non-zero.  Those are two
-    # different sets and I had defined them two different ways inside one function: the
-    # calibration selected by the INPUT (the attitude asked for a roll) and the cap selected by
-    # the OUTPUT (the tilt came back above 1e-6).  The upright entries leak through the second
-    # one on numerical noise -- a few thousandths of a degree -- so the cap came out 0.00 while
-    # the calibration, looking at the other set, saw nothing wrong and stayed quiet.
-    #
-    # Which is the same failure as measuring the convenient quantity instead of the deciding one,
-    # one level down: the cap is about attitudes that ASK for a tilt, so it selects on the ask.
-    if not tilted:
-        raise RuntimeError("no menu attitude asks for a tilt, so the vertical check has nothing "
-                           "it could fail to distinguish and the cap is undefined")
-    return min(tilted)
+def vertical_cap_deg(side=None):
+    """The smallest non-zero tilt the attitude menu can produce, in degrees.
+
+    D4: evaluated per side under the attitude that side actually receives, (SIDES[t]*yaw,
+    SIDES[t]*roll) -- the sign the solver applies to every menu entry -- with both calibration
+    checks run for each side.  `side=None` returns the min over both sides, which is the aggregate
+    the shared VERTICAL_TOL_DEG needs (the gate reads each side against it); `side="L"` / `"R"`
+    returns that side's own cap.  The two calibration raises below fired on 2026-08-02
+    (order_test_logs/order_L.txt:96, order_R.txt:96) for a cause the record does not carry; with
+    the per-side evaluation the same raise can now come from the right hand's reading as well --
+    an abort here is the instrument reading the live jaw, not a verdict on the controller.
+    """
+    caps = {}
+    for t in (list(SIDES) if side is None else [side]):
+        sgn = SIDES[t]
+        tilt_deg = lambda y, r: attitude_tilt_deg(t, sgn * y, sgn * r)  # noqa: E731
+        # ⛔ TWO checks, and the second is the one that matters -- p11 -144 caught that the first alone
+        # passes the exact bug it was written for.  With the rotation inverted every attitude came out
+        # flat, so the upright one came out flat too and the zero check was satisfied: a dead
+        # instrument reproduces its zero perfectly.  A calibration needs both ends.
+        #
+        # Same shape as the pin's two readings, which is where this belongs: engagement is the zero,
+        # a step later is the span.  Here the zero is the upright entry and the span is every entry
+        # that asks for a tilt.  Neither says tilt must EQUAL roll -- the two differ by a couple of
+        # degrees and should -- only that a non-zero input produces a non-zero output.
+        upright = [tilt_deg(y, r) for y, r in _spec.GRASP_ATTITUDES if abs(r) < 1e-9]
+        if upright and max(upright) > TILT_CAL_DEG:
+            raise RuntimeError(
+                f"{t}: the attitude with zero roll comes out {max(upright):.2f} deg off vertical, so this "
+                f"is not turning attitudes into the tilt the check reads -- the cap it would produce "
+                f"would be a number about the arithmetic, not about the cell")
+        tilted = [tilt_deg(y, r) for y, r in _spec.GRASP_ATTITUDES if abs(r) >= 1e-9]
+        if tilted and min(tilted) < TILT_CAL_DEG:
+            raise RuntimeError(
+                f"{t}: an attitude that asks for a tilt comes back {min(tilted):.2f} deg off vertical, "
+                f"which is flat.  A construction that turns every attitude into the same answer is "
+                f"not measuring attitude at all -- an inverted rotation, a scale of zero and a "
+                f"collapsed sign all look like this, and the zero check cannot tell them apart "
+                f"because they all reproduce the zero")
+        # ⛔ The cap is min(tilted), NOT min over everything that came back non-zero.  Those are two
+        # different sets and I had defined them two different ways inside one function: the
+        # calibration selected by the INPUT (the attitude asked for a roll) and the cap selected by
+        # the OUTPUT (the tilt came back above 1e-6).  The upright entries leak through the second
+        # one on numerical noise -- a few thousandths of a degree -- so the cap came out 0.00 while
+        # the calibration, looking at the other set, saw nothing wrong and stayed quiet.
+        #
+        # Which is the same failure as measuring the convenient quantity instead of the deciding one,
+        # one level down: the cap is about attitudes that ASK for a tilt, so it selects on the ask.
+        if not tilted:
+            raise RuntimeError("no menu attitude asks for a tilt, so the vertical check has nothing "
+                               "it could fail to distinguish and the cap is undefined")
+        caps[t] = min(tilted)
+    return min(caps.values())
 
 
 def _rdes(yaw, roll=0.0):
@@ -2987,7 +3005,9 @@ def live_write(img):
 print(f"[steps] vertical check: allowance {VERTICAL_TOL_DEG:4.2f} deg, "
       f"cap {vertical_cap_deg():4.2f} deg (the smallest non-zero tilt the attitude menu can make, "
       f"measured as pinch->mouth against world -z, not as a roll); the allowance is an interim "
-      f"until a run reports the worst residual an upright command actually leaves")
+      f"until a run reports the worst residual an upright command actually leaves"
+      f" (L {vertical_cap_deg('L'):4.2f} / R {vertical_cap_deg('R'):4.2f}, each side under the "
+      f"attitude it receives)")
 
 _shared = arm_sets_disjoint()
 print(f"[steps] arm geom sets: L={len(ARMG['L'])} R={len(ARMG['R'])}, "
