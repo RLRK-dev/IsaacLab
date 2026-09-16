@@ -1,0 +1,43 @@
+{
+  "observed_at": "2026-09-16T11:23:46.143191+09:00",
+  "directory": "/home/rlrk/Downloads/THREAD_HVJB_仕事と保持区間_v01_20260916",
+  "input_sha256_before": {
+    "data/hvjb_preassembly_process_v03.json": "5e9d7078d4e7ff9772f8561788b29a34b28165e3118559385dcc78faf28b64e7",
+    "data/hvjb_unitization_roles_v01.json": "7282ac79494d7704c7a88b48627b1d8cc72db0a883395d864ab1142454a3e802",
+    "data/hand_provisional_spec_v01.json": "0ed18d28e261b73ae1fd3beb1686ad4c2b55071974d9b8708e358b79efa8b799",
+    "data/hvjb_photo_correspondence_v03_p01.json": "6c5b7cb9bab859a33c8f5d5cd5429ce9f06fb0951b8a8fa4ae2a31ad99052ca0",
+    "UR15_JB_photo_correspondence_v03_p03.blend": "5205d3aa2c2b99f7df6f538d17b3d3ca36ba8208c546858ee8ec8a5a3564a282",
+    "data/hvjb_robot_allocation_v01.json": "2e8516405684475d04fcf57938e7771c0283a5ab23cf482aa6fba4b718889dd9",
+    "data/hvjb_task_occupancy_inputs_v01.json": "859d19b417baa64214886b6eabf6974ac7dabaf5194a9fb0e19b33cd26e83c27",
+    "scripts/hvjb_task_occupancy_review_v01.html": "3f4b9f1ff08d1e5e2a70bc87fc9a05c5f7e70693923e0211ad64de0549f4924d",
+    "analysis/hvjb_task_occupancy_v01.md": "1646a8c0e69425e5679b917f3eb0659f9d2e7d50e041b9a19e2af4ab1bf8cba9"
+  },
+  "input_sha256_after": {
+    "data/hvjb_preassembly_process_v03.json": "5e9d7078d4e7ff9772f8561788b29a34b28165e3118559385dcc78faf28b64e7",
+    "data/hvjb_unitization_roles_v01.json": "7282ac79494d7704c7a88b48627b1d8cc72db0a883395d864ab1142454a3e802",
+    "data/hand_provisional_spec_v01.json": "0ed18d28e261b73ae1fd3beb1686ad4c2b55071974d9b8708e358b79efa8b799",
+    "data/hvjb_photo_correspondence_v03_p01.json": "6c5b7cb9bab859a33c8f5d5cd5429ce9f06fb0951b8a8fa4ae2a31ad99052ca0",
+    "UR15_JB_photo_correspondence_v03_p03.blend": "5205d3aa2c2b99f7df6f538d17b3d3ca36ba8208c546858ee8ec8a5a3564a282",
+    "data/hvjb_robot_allocation_v01.json": "2e8516405684475d04fcf57938e7771c0283a5ab23cf482aa6fba4b718889dd9",
+    "data/hvjb_task_occupancy_inputs_v01.json": "859d19b417baa64214886b6eabf6974ac7dabaf5194a9fb0e19b33cd26e83c27",
+    "scripts/hvjb_task_occupancy_review_v01.html": "3f4b9f1ff08d1e5e2a70bc87fc9a05c5f7e70693923e0211ad64de0549f4924d",
+    "analysis/hvjb_task_occupancy_v01.md": "1646a8c0e69425e5679b917f3eb0659f9d2e7d50e041b9a19e2af4ab1bf8cba9"
+  },
+  "report_sha256": "4da5b53687b05cd2cd1d294cf57121abde6ee9d04b19ed0a37ef2fb2a4d79df9",
+  "csv_sha256": {
+    "仕事と保持区間.csv": "ef3ebbaa3fe0b75568f073bf3957495999ce5ae885aeabe5b319f71ecc9f74fe",
+    "対象の照合先.csv": "8685218a288917c4ed2a75413bb973b36332b6e7725b9bf348c51433dd7551a3"
+  },
+  "page_sha256": "bbedddb2c8df10cc09fbf58c8d0a579c63f54b2a53b83f3962aa2fdc52316386",
+  "task_count": 20,
+  "source_feature_count": 92,
+  "required_function_count": 17,
+  "electrical_group_count": 13,
+  "header_documented_holes": {
+    "P16": 8,
+    "P17": 6
+  },
+  "source_reference_checks": "passed; not completeness of a manufacturing BOM or schedule",
+  "motion_created": false,
+  "physical_acceptance_verdict": null
+}

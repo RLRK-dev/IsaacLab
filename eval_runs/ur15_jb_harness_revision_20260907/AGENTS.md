@@ -530,3 +530,19 @@ numbers unknown until their basis and the scope of the product change are set.
   supported buffers, inspection, replenishment and recovery separately. Source
   video timestamps are not durations. Minimum robot count, cadence and physical
   feasibility remain unmeasured; role-reference checks do not establish them.
+
+## Task occupancy comparison on 2026-09-16
+
+- `analysis/hvjb_task_occupancy_v01.md` and its workcards expand the 20 assigned
+  jobs into target-review destinations and holding intervals. The 92 feature
+  rows are traceability, not a full BOM or selected assembly operations. A
+  fastener's photo parent does not determine its joint stack or fixing function.
+- Keep the two documented header hole groups (P16 eight, P17 six M4 holes)
+  separate from the 23 interior fastener features. Compare continuous holding
+  for each header and sequential reuse of R-C/T-C; fastening order, duration,
+  complete tool outlines and conditions remain unset.
+- Inner-housing retention and outer-header pickup cannot occupy the same
+  single hand at once. Keep the independent support/handoff role unresolved
+  until its geometry and sequence are specified. X-C does not become available
+  just because insertion or opening passage ended. Workcard completion phrases
+  are planning boundaries, not sensor thresholds or release authorization.

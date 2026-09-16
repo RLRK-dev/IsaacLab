@@ -1,0 +1,5428 @@
+{
+  "revision": "hvjb_task_occupancy_v01",
+  "observed_at": "2026-09-16T11:23:46.143191+09:00",
+  "scope_ja": "20仕事の対象照合先、保持の継続区間、兼務を検討する区切り。実時間・動作軌道・検出条件は未設定。",
+  "rules_ja": [
+    "対象の照合先は設計上の候補で、実部品1個ごとの作業採用・実接続・把持面の決定ではない。",
+    "Jのfeature_parentは写真上の対応で、機械固定・電気接続・共締め積層を決定しない。",
+    "線の観察された入口外装を再表示しても、遠端・電気接続・線材本数は確定しない。",
+    "作業の4欄は順序の説明。幅・列数・公式映像の参照時刻を時間へ換算しない。",
+    "保持を終える区切りは工程上の想定で、センサ・検出しきい値・受入条件の指定ではない。",
+    "R-Cが内側ハウジングを保持し続ける場合、その同じ手では外側ヘッダーを取得できない。独立した保持役または支持の引継ぎが必要。",
+    "固定工具の部材保持代用、未締結端末の無支持搬送、廃止した上押さえの復活を前提としない。"
+  ],
+  "resources": [
+    {
+      "id": "G-010",
+      "name_ja": "OP010のXYZ直交",
+      "category": "cartesian_robot",
+      "status": "user_selected_type",
+      "role_ja": "20個ストッカから空筐体を供給",
+      "physical_count_selected": null
+    },
+    {
+      "id": "R-A",
+      "name_ja": "下板側の主担当",
+      "category": "articulated_primary_slot",
+      "status": "candidate",
+      "role_ja": "本体部品の取出し・設置・保持、単独で完結する接続、下板側の受渡し",
+      "physical_count_selected": null
+    },
+    {
+      "id": "R-B",
+      "name_ja": "ヒューズ板側の主担当",
+      "category": "articulated_primary_slot",
+      "status": "candidate",
+      "role_ja": "板側の部品・端末の設置、配線の取得・保持、接続、板の受渡し",
+      "physical_count_selected": null
+    },
+    {
+      "id": "R-C",
+      "name_ja": "合流・組込み側の主担当",
+      "category": "articulated_primary_slot",
+      "status": "candidate",
+      "role_ja": "板合わせ、一体搬送、端末案内、ヘッダー・バスバー設置を順次担当",
+      "physical_count_selected": null
+    },
+    {
+      "id": "X-A",
+      "name_ja": "Aの追加独立保持役",
+      "category": "unallocated_assist_role",
+      "status": "conditional",
+      "role_ja": "Aで両端・別部品を同時に独立保持する仕事がある場合",
+      "physical_count_selected": null
+    },
+    {
+      "id": "X-B",
+      "name_ja": "Bの追加独立保持役",
+      "category": "unallocated_assist_role",
+      "status": "conditional",
+      "role_ja": "Bで両端を同時に保持する対象接続",
+      "physical_count_selected": null
+    },
+    {
+      "id": "X-C",
+      "name_ja": "Cの追加独立保持・案内役",
+      "category": "unallocated_assist_role",
+      "status": "conditional",
+      "role_ja": "一体搬送中の自由端案内、開口引出し時の案内、両端保持の接続",
+      "physical_count_selected": null
+    },
+    {
+      "id": "T-A",
+      "name_ja": "Aの据置工具群",
+      "category": "station_tool_pool",
+      "status": "candidate",
+      "role_ja": "保持中の機械固定・電気接続。主軸数と位置決め軸は接続別に数える",
+      "physical_count_selected": null
+    },
+    {
+      "id": "T-B",
+      "name_ja": "Bの据置工具群",
+      "category": "station_tool_pool",
+      "status": "candidate",
+      "role_ja": "保持中の締結。大小同時対象には独立2主軸が必要",
+      "physical_count_selected": null
+    },
+    {
+      "id": "T-C",
+      "name_ja": "Cの据置工具群",
+      "category": "station_tool_pool",
+      "status": "candidate",
+      "role_ja": "板間固定・筐体内固定・ヘッダー・残接続。方向と同時性で主軸・位置決めを分ける",
+      "physical_count_selected": null
+    },
+    {
+      "id": "F-A",
+      "name_ja": "下板側の支持・位置決め",
+      "category": "fixture",
+      "status": "candidate",
+      "role_ja": "下板を支持して部品設置・接続・持ち替えを受ける",
+      "physical_count_selected": null
+    },
+    {
+      "id": "F-B",
+      "name_ja": "ヒューズ板側の支持・位置決め",
+      "category": "fixture",
+      "status": "candidate",
+      "role_ja": "板の姿勢を決める。未締結線の保持を置き換える前提にはしない",
+      "physical_count_selected": null
+    },
+    {
+      "id": "F-C",
+      "name_ja": "合流治具・筐体側の受け",
+      "category": "fixture",
+      "status": "candidate",
+      "role_ja": "合流中、持ち替え中、搭載後の支持を受け渡す。各受け面は未確定",
+      "physical_count_selected": null
+    },
+    {
+      "id": "E-PREP",
+      "name_ja": "線材・端末の準備設備",
+      "category": "preparation_equipment",
+      "status": "scope_unresolved",
+      "role_ja": "切断・被覆除去・圧着・ハウジングへの端子挿入。入荷済み範囲は未確定",
+      "physical_count_selected": null
+    },
+    {
+      "id": "E-TEST",
+      "name_ja": "検査設備・接続軸",
+      "category": "test_equipment",
+      "status": "candidate",
+      "role_ja": "必要検査と記録。項目・条件・合否値・内外観の視点は未確定",
+      "physical_count_selected": null
+    },
+    {
+      "id": "G-OUT",
+      "name_ja": "払出し用の直交移載",
+      "category": "cartesian_candidate",
+      "status": "candidate",
+      "role_ja": "完成品を筐体の許容保持面で搬送。必要軸数は搬送先配置による",
+      "physical_count_selected": null
+    },
+    {
+      "id": "E-RETURN",
+      "name_ja": "循環・補給・回収設備",
+      "category": "logistics_equipment",
+      "status": "candidate",
+      "role_ja": "パレット二段循環、端部昇降、ボルト供給、空容器回収を別に割り当てる",
+      "physical_count_selected": null
+    }
+  ],
+  "hands": [
+    {
+      "id": "H01",
+      "name_ja": "円形本体用",
+      "finger_count": 2,
+      "closing_drives": 1,
+      "contact_ja": "下受けなしの側面輪郭。側面の平面または取付耳の外縁に当てる回り止め。",
+      "stability_intent_ja": "円筒面で中心を寄せ、非円形の基準面で軸回りの向きを決める。",
+      "keep_clear_ja": "電気端子・配線出口・固定穴・本体下面。",
+      "release_ja": "側方へ開く。既存2Fの開放時上昇も含めて、着座面に爪を潜らせない。",
+      "unresolved_ja": "実部品の荷重を受けられる非円形面、外形、必要保持力。使える面がなければ回り止めを成立済みにしない。"
+    },
+    {
+      "id": "H02",
+      "name_ja": "角形本体・支持部用",
+      "finger_count": 2,
+      "closing_drives": 1,
+      "contact_ja": "浅い角形ポケット。片側の基準面と長手端当て、対向側の交換パッド。",
+      "stability_intent_ja": "側面と端部の形状で横ずれ・向きを決め、対向面から押さえる。",
+      "keep_clear_ja": "端末・ロック・ばね・固定穴・工具通路・着座面。",
+      "release_ja": "側方へ開放。着座部の下へ入り込む下受けは使わない。",
+      "unresolved_ja": "対象ごとの許容接触面、ポケット寸法、パッド厚・硬さ、必要保持力。"
+    },
+    {
+      "id": "H03",
+      "name_ja": "剛体バスバー用",
+      "finger_count": 2,
+      "closing_drives": 1,
+      "contact_ja": "非接続部の長辺を受ける浅い輪郭と端当て。",
+      "stability_intent_ja": "板の長辺と端部を使って面内位置・回転を抑える。",
+      "keep_clear_ja": "電気接続面・締結穴・座金・ソケット通路。",
+      "release_ja": "保持した位置で締結後、板から側方へ開く。薄板下へ爪を残さない。",
+      "unresolved_ja": "実際の電気接続範囲、つかめる外縁、板厚、公差、締結中の保持荷重。"
+    },
+    {
+      "id": "H04",
+      "name_ja": "ケーブル・丸端子付き配線用",
+      "finger_count": 2,
+      "closing_drives": 1,
+      "contact_ja": "T050。端子側の黒被覆と根元被覆を、同じ対向2本指の二つの丸底接触区間で保持。",
+      "stability_intent_ja": "端末側と根元を離して支える。被覆の軸方向滑りと軸回り回転の保持性能は別途確認する。",
+      "keep_clear_ja": "金属端子・締結穴・電気接触面・工具通路。",
+      "release_ja": "接続完了まで同じ手で保持。工具が退避した後で開放し、両端保持では両腕同時に上昇。",
+      "unresolved_ja": "被覆と圧着端子の相対滑り・回転、線径、摩擦・許容圧、曲げ反力、工具ノーズ一式。二つの丸い溝だけで軸回り回転を幾何拘束できるとはしない。",
+      "working_default_ref": "data/hand_working_default_v01.json",
+      "candidate": "T050",
+      "clockwise_angle_deg": 15,
+      "setback_before_rotation_m": 0.04,
+      "independent_front_root_opening": false,
+      "metal_terminal_clamping": false
+    },
+    {
+      "id": "H05",
+      "name_ja": "差込端末・外部コネクター用",
+      "finger_count": 2,
+      "closing_drives": 1,
+      "contact_ja": "剛体ハウジングの専用外形ポケットと、許容された後端・肩の受け面。",
+      "stability_intent_ja": "外形で向きを決め、挿入力を受け面で伝える。配線の摩擦把持を挿入力の経路にしない。",
+      "keep_clear_ja": "接点・シール・ロック可動部・ケーブル出口。",
+      "release_ja": "接続完了後にロックを避けて開く。別のロック操作が必要ならその役割を分ける。",
+      "unresolved_ja": "荷重を受ける剛体面、型式、挿入力、許容横ずれ、開放域。写真に見える樹脂面すべてが許容把持面とはしない。"
+    },
+    {
+      "id": "H06",
+      "name_ja": "筐体・完成品搬送用",
+      "finger_count": 2,
+      "closing_drives": 1,
+      "contact_ja": "幅広対向爪。各爪の離れた二か所に交換パッドと側面輪郭の受けを配置。",
+      "stability_intent_ja": "離れた接触域で荷重を分け、筐体の実在する側面段差・輪郭で姿勢を決める。",
+      "keep_clear_ja": "シール溝・コネクター・ハーネス・パレットとの着座域。",
+      "release_ja": "受け先へ荷重を移してから側方へ開く。下受けを着座面に挟まない。",
+      "unresolved_ja": "幅、質量、重心、実在する把持可能面と荷重。2F-85で筐体全幅をつかめるとは仮定しない。",
+      "gripper_body_policy": "Separate wide-stroke two-jaw transport hand; exact model and stroke unselected",
+      "contact_patch_count": 4
+    },
+    {
+      "id": "H07",
+      "name_ja": "カバー搬送・設置用",
+      "finger_count": 2,
+      "closing_drives": 1,
+      "contact_ja": "対向する薄い側縁用ポケットと端当て。長辺に離れた接触域を配置。",
+      "stability_intent_ja": "板を一点でつままず、外周形状で向きと傾きを支える。",
+      "keep_clear_ja": "シール面・固定穴・着座面・隣接配線。",
+      "release_ja": "着座後に外側へ開放。カバー下面に爪を挟まない。",
+      "unresolved_ja": "実カバーの縁形状と幅、許容把持面。旧動画の把持突起をAmpere実物へ無断追加しない。"
+    },
+    {
+      "id": "H08",
+      "name_ja": "ヒューズ本体用",
+      "finger_count": 2,
+      "closing_drives": 1,
+      "contact_ja": "本体形式に対応する交換式の浅い輪郭。円筒は胴の丸底受け、角形は外形ポケット。",
+      "stability_intent_ja": "胴形状を保持し、向きが必要なら実在する非接点の基準面へ当てる。",
+      "keep_clear_ja": "導電端・接続面・接触ばね・締結穴。",
+      "release_ja": "実際の装着方式に従い、保持部への装着または締結完了後に開放。",
+      "unresolved_ja": "ボルト式／クリップ式などの型式、取付方向、把持可能な胴の有無、入荷状態。"
+    }
+  ],
+  "cards": [
+    {
+      "id": "D00",
+      "hands": [
+        "H06"
+      ],
+      "entities": [],
+      "additional_target_ja": "20個ストッカ、受け位置",
+      "start_ja": "空筐体をストッカから取得する",
+      "keep_ja": "XYZが筐体を保持して受け位置へ搬送する",
+      "end_ja": "受け側へ支持を引き継ぎ、指を開いて退避する",
+      "reuse_ja": "筐体が受けに残った後、次の供給または払出しの兼務を比較",
+      "missing_ja": "許容把持面・重心・受け位置・供給と払出しの距離",
+      "task": {
+        "id": "D00",
+        "operation": "O00",
+        "cell": "SUPPLY",
+        "work_ja": "空筐体の取得・搬送・位置決め",
+        "primary": [
+          "G-010"
+        ],
+        "other": [
+          "F-C"
+        ],
+        "conditional": [],
+        "sharing_ja": "OP010のXYZ＋20個を維持。完成品払出しとの共用は位置・時間・空容器動線を確認後。"
+      }
+    },
+    {
+      "id": "D01",
+      "hands": [],
+      "entities": [],
+      "additional_target_ja": "電力10コンタクト、HVIL10コンタクト、他の未特定端末",
+      "start_ja": "加工対象の線材と端末をそろえる",
+      "keep_ja": "切断・被覆除去・圧着・端子挿入の各設備が担当する",
+      "end_ja": "加工後の線と端末を、次の支持・案内へ引き継ぐ",
+      "reuse_ja": "設備ごとの占有を別計上。入荷済み範囲が決まるまでゼロ設備扱いにしない",
+      "missing_ja": "入荷単位・全線の両端・線長・品番・加工条件・加工設備",
+      "task": {
+        "id": "D01",
+        "operation": "O01",
+        "cell": "PREP",
+        "work_ja": "線材加工・圧着・端子挿入",
+        "primary": [
+          "E-PREP"
+        ],
+        "other": [],
+        "conditional": [],
+        "sharing_ja": "入荷済みか内製かを明記するまで台数をゼロにしない。A/B/Cの部品組付けとは別の仕事として残す。"
+      }
+    },
+    {
+      "id": "D10",
+      "hands": [
+        "H01",
+        "H02"
+      ],
+      "entities": [
+        "V25_BASE_PLATE"
+      ],
+      "additional_target_ja": "下板上の取付箇所、機能未対応の抵抗2個",
+      "start_ja": "本体部品を取得して下板へ位置合わせする",
+      "keep_ja": "R-Aが部品を保持中にT-Aがねじを締める。ボルト準備は設置と並行",
+      "end_ja": "対象の締結終了と工具退避後に保持を解き、指を退避する",
+      "reuse_ja": "次の本体部品の取得・保持、配線、受渡しをR-Aが順次兼務",
+      "missing_ja": "下板の固定点、機械固定と電力端子の区別、抵抗の写真対応",
+      "task": {
+        "id": "D10",
+        "operation": "O10",
+        "cell": "A",
+        "work_ja": "本体部品の取出し・配置・保持中のねじ固定",
+        "primary": [
+          "R-A"
+        ],
+        "other": [
+          "F-A",
+          "T-A"
+        ],
+        "conditional": [],
+        "sharing_ja": "保持腕が部品を置いている間に工具側がボルトを準備。工具専用の多関節腕を据置工具へ置換する案を優先比較。"
+      }
+    },
+    {
+      "id": "D11",
+      "hands": [
+        "H04",
+        "H05"
+      ],
+      "entities": [
+        "V25_BASE_PLATE"
+      ],
+      "additional_target_ja": "下板側で完結する実接続。ECとの物理対応は未確定",
+      "start_ja": "対象の線または端末を取得する。両端対象は同時に取得",
+      "keep_ja": "R-Aと必要時X-Aが保持を継続し、工具または差込みで接続を完了させる",
+      "end_ja": "担当接続を終え工具が退避した後に解除。両腕対象は同時退避",
+      "reuse_ja": "未接続の別自由端が残る場合は引継ぎまで担当を確保する",
+      "missing_ja": "線の両端・所属・共締め部材・同時に締める大小の点組",
+      "task": {
+        "id": "D11",
+        "operation": "O10",
+        "cell": "A",
+        "work_ja": "下板側で完結する配線の取得・保持・接続",
+        "primary": [
+          "R-A"
+        ],
+        "other": [
+          "F-A",
+          "T-A"
+        ],
+        "conditional": [
+          "X-A"
+        ],
+        "sharing_ja": "1端を固定相手に接続する仕事と、両端独立保持する仕事を接続別に分ける。後者を片手作業へ省略しない。"
+      }
+    },
+    {
+      "id": "D12",
+      "hands": [],
+      "entities": [
+        "V25_BASE_PLATE",
+        "V25_INNER_ENDS",
+        "V25_RING_ENDS"
+      ],
+      "additional_target_ja": "下板側ユニット全体と受け側治具",
+      "start_ja": "下板側ユニットの搬送保持を開始する",
+      "keep_ja": "R-Aが本体を搬送し、必要な自由端の案内役を継続する",
+      "end_ja": "F-Cと次の案内役へ本体・自由端をそれぞれ引き継いで退避する",
+      "reuse_ja": "本体を置いた時点だけでは自由端案内役を他セルへ割り当てない",
+      "missing_ja": "運搬用手先・許容把持面・自由端数・製品照合・支持付き待ち位置",
+      "task": {
+        "id": "D12",
+        "operation": "O10",
+        "cell": "A",
+        "work_ja": "下板側ユニットと自由端の受渡し",
+        "primary": [
+          "R-A"
+        ],
+        "other": [
+          "F-A",
+          "F-C"
+        ],
+        "conditional": [
+          "X-A"
+        ],
+        "sharing_ja": "本体組付けと同じ主担当の順次兼務候補。線の所属・案内先、相手側支持を引き継ぐまでの占有を数える。"
+      }
+    },
+    {
+      "id": "D20",
+      "hands": [
+        "H02",
+        "H08"
+      ],
+      "entities": [
+        "V25_FUSE_PANEL"
+      ],
+      "additional_target_ja": "ヒューズ板と部品の機械固定。主ヒューズの所属は未決定",
+      "start_ja": "ヒューズ等を取得し板側へ合わせる",
+      "keep_ja": "R-Bが対象を保持し、T-Bが必要な固定を担当する",
+      "end_ja": "担当固定と工具退避を終えてから指を開き退避する",
+      "reuse_ja": "次のヒューズ・配線・板の受渡しを同じ主担当で順次行う候補",
+      "missing_ja": "機械固定と電気共締めの区別、主ヒューズの所属、板の許容保持面",
+      "task": {
+        "id": "D20",
+        "operation": "O20",
+        "cell": "B",
+        "work_ja": "ヒューズ板側の部品配置・保持・固定",
+        "primary": [
+          "R-B"
+        ],
+        "other": [
+          "F-B",
+          "T-B"
+        ],
+        "conditional": [],
+        "sharing_ja": "1部品ずつの保持・組付けを主担当にまとめる。工具の準備と送りは別設備へ分担。"
+      }
+    },
+    {
+      "id": "D21",
+      "hands": [
+        "H04",
+        "H05"
+      ],
+      "entities": [
+        "V25_FUSE_PANEL"
+      ],
+      "additional_target_ja": "補機ヒューズ5系統と実線の対応",
+      "start_ja": "担当線を取得する。両端保持が必要な対象は同時クランプ",
+      "keep_ja": "R-Bと必要時X-Bが保持を継続し、T-Bが該当接続を締結する",
+      "end_ja": "担当接続と工具退避を終え、両腕対象は同時に解除・退避する",
+      "reuse_ja": "他系統へ続く未接続端は案内を引き継ぐ。未締結のまま離してCへ運ばない",
+      "missing_ja": "物理5ヒューズと系統の割当、線の両端、積層、両端保持が必要な対象",
+      "task": {
+        "id": "D21",
+        "operation": "O20",
+        "cell": "B",
+        "work_ja": "板側配線の取得・両端保持・接続",
+        "primary": [
+          "R-B"
+        ],
+        "other": [
+          "F-B",
+          "T-B"
+        ],
+        "conditional": [
+          "X-B"
+        ],
+        "sharing_ja": "両端独立保持が必要な対象だけ追加役を使用。保持中に締結を終え、未締結線のままCへ渡さない。"
+      }
+    },
+    {
+      "id": "D22",
+      "hands": [],
+      "entities": [
+        "V25_FUSE_PANEL",
+        "V25_INNER_ENDS",
+        "V25_RING_ENDS"
+      ],
+      "additional_target_ja": "板側ユニット全体と合流側の支持",
+      "start_ja": "組み立てた板側の搬送保持を開始する",
+      "keep_ja": "R-Bが板を運び、必要な自由端案内を続ける",
+      "end_ja": "合流側の支持・板保持・自由端案内へ引き継いで退避する",
+      "reuse_ja": "A側との製品対応が取れた受けに渡せる場合、次ワークを準備する候補",
+      "missing_ja": "板搬送手先・自由端の支持と引継ぎ・待ち位置",
+      "task": {
+        "id": "D22",
+        "operation": "O20",
+        "cell": "B",
+        "work_ja": "ヒューズ板側と自由端の受渡し",
+        "primary": [
+          "R-B"
+        ],
+        "other": [
+          "F-B",
+          "F-C"
+        ],
+        "conditional": [
+          "X-B"
+        ],
+        "sharing_ja": "組付け主担当が順次兼務。A側ユニットとの製品対応・受け側支持・自由端案内を含める。"
+      }
+    },
+    {
+      "id": "D30",
+      "hands": [],
+      "entities": [
+        "V25_BASE_PLATE",
+        "V25_FUSE_PANEL"
+      ],
+      "additional_target_ja": "採用済み板間ねじ固定。実固定点は未観察",
+      "start_ja": "下板をF-Cに支持させ、R-Cでヒューズ板を合わせる",
+      "keep_ja": "R-Cが板間の相対姿勢を保持し、T-Cが板間固定を担当する",
+      "end_ja": "板保持を継続したまま工具を退避し、D31の治具上持ち替えへ進む",
+      "reuse_ja": "この時点でR-Cを空き扱いにしない。同じR-Cの搬送把持への切替を比較",
+      "missing_ja": "板間の支持形状・ねじ点・荷重経路・板保持面",
+      "task": {
+        "id": "D30",
+        "operation": "O30",
+        "cell": "C",
+        "work_ja": "下板支持・板合わせ・保持中の板間固定",
+        "primary": [
+          "R-C"
+        ],
+        "other": [
+          "F-C",
+          "T-C"
+        ],
+        "conditional": [],
+        "sharing_ja": "UZ01〜UZ03。下板は据置治具、ヒューズ板は主担当、締付は据置工具という比較。"
+      }
+    },
+    {
+      "id": "D31",
+      "hands": [],
+      "entities": [
+        "V25_BASE_PLATE",
+        "V25_FUSE_PANEL",
+        "V25_INNER_ENDS",
+        "V25_RING_ENDS"
+      ],
+      "additional_target_ja": "治具上の一体ユニット、未接続端",
+      "start_ja": "板保持を続けて工具の退避を待つ",
+      "keep_ja": "F-Cが支持を続ける間にR-Cを搬送把持へ切り替え、必要なX-Cで自由端を案内する",
+      "end_ja": "搬送保持を開始し、D40へ本体・自由端の担当を継続する",
+      "reuse_ja": "板保持と一体搬送をR-Cが順次兼務。X-Cは工程番号が変わっても解放しない",
+      "missing_ja": "接合部の荷重受容・搬送把持面・手先交換・自由端案内方法",
+      "task": {
+        "id": "D31",
+        "operation": "O30",
+        "cell": "C",
+        "work_ja": "工具退避・治具上の持ち替え・自由端の退避",
+        "primary": [
+          "R-C"
+        ],
+        "other": [
+          "F-C"
+        ],
+        "conditional": [
+          "X-C"
+        ],
+        "sharing_ja": "Q4〜Q6。板間接合が荷重を受ける前提で、治具上の支持を残して搬送用把持へ切替。手先交換は時間と設備に計上。"
+      }
+    },
+    {
+      "id": "D40",
+      "hands": [],
+      "entities": [
+        "V25_BASE_PLATE",
+        "V25_FUSE_PANEL",
+        "V25_CASE",
+        "V25_INNER_ENDS",
+        "V25_RING_ENDS"
+      ],
+      "additional_target_ja": "一体ユニットと筐体内受け",
+      "start_ja": "R-Cの搬送把持と自由端案内を継続する",
+      "keep_ja": "一体ユニットを筐体へ運ぶ間、必要時X-Cは線・端末を別に案内する",
+      "end_ja": "筐体側の受けへ本体の支持を移し、搬送指を抜く。自由端案内は継続対象",
+      "reuse_ja": "R-Cは受け側支持を確認する工程の後に別仕事へ。X-Cは自動的に空きにしない",
+      "missing_ja": "受け面・把持解除と指の抜け・内寸・全自由端の経路",
+      "task": {
+        "id": "D40",
+        "operation": "O40",
+        "cell": "C",
+        "work_ja": "一体ユニット搬送・筐体搭載・支持引継ぎ",
+        "primary": [
+          "R-C"
+        ],
+        "other": [
+          "F-C"
+        ],
+        "conditional": [
+          "X-C"
+        ],
+        "sharing_ja": "主担当はユニット、追加役は独立して必要な自由端案内。同時の二役を一つの単一ハンドへ割り当てない。"
+      }
+    },
+    {
+      "id": "D42",
+      "hands": [],
+      "entities": [
+        "V25_CASE",
+        "V25_INNER_ENDS",
+        "V25_RING_ENDS"
+      ],
+      "additional_target_ja": "箱内への工具接近。ねじ・相手部材は映像で遮蔽",
+      "start_ja": "搭載後の支持と必要な自由端案内を続ける",
+      "keep_ja": "対象が特定されるまでは工具作業の保持・案内役を未割当のまま残す",
+      "end_ja": "工具が退避し、自由端の担当をD45以降へ引き継ぐ",
+      "reuse_ja": "対象不明をゼロ作業・ゼロ占有に置き換えない",
+      "missing_ja": "工具作業点・部材・点数・保持相手・所要時間",
+      "task": {
+        "id": "D42",
+        "operation": "O42",
+        "cell": "C",
+        "work_ja": "搭載後の箱内工具接近と、対象・自由端の保持",
+        "primary": [
+          "R-C"
+        ],
+        "other": [
+          "F-C",
+          "T-C"
+        ],
+        "conditional": [
+          "X-C"
+        ],
+        "sharing_ja": "工具対象は未特定。前工程の保持が不要になったと仮定して補助役を別セルへ送らない。"
+      }
+    },
+    {
+      "id": "D45",
+      "hands": [
+        "H05"
+      ],
+      "entities": [
+        "V25_CASE",
+        "V25_INNER_ENDS"
+      ],
+      "additional_target_ja": "内側ハウジング5個の開口通過。2025映像と各I番号の対応は未確認",
+      "start_ja": "R-Cが対象ハウジングを持ち、必要時X-Cが配線を案内する",
+      "keep_ja": "側面開口へハウジングを合わせる間、線と他の自由端を引き続き管理する",
+      "end_ja": "次のヘッダー・ロック作業へ端末支持を引き継ぐ。単に外へ出ただけで放置しない",
+      "reuse_ja": "内側ハウジングを一方の手で保持したまま外側ヘッダーを取るなら別の役が必要",
+      "missing_ja": "線付きの通過空間・把持面・各端末順序・外側での一時支持・ロック順",
+      "task": {
+        "id": "D45",
+        "operation": "O45",
+        "cell": "C",
+        "work_ja": "内側ハウジングの姿勢合わせ・開口引出し・線の案内",
+        "primary": [
+          "R-C"
+        ],
+        "other": [
+          "F-C"
+        ],
+        "conditional": [
+          "X-C"
+        ],
+        "sharing_ja": "ハウジングと線に独立した操作が必要なら二役を残す。案内完了・保持の引継ぎまで補助役を占有。"
+      }
+    },
+    {
+      "id": "D50",
+      "hands": [
+        "H05"
+      ],
+      "entities": [
+        "V25_OUTER_HEADERS",
+        "V25_INNER_ENDS"
+      ],
+      "additional_target_ja": "P16は8点、P17は6点のM4フランジ固定。主2極・LV口は別の未確定仕事",
+      "start_ja": "外側ヘッダーを一つ取得し筐体へ合わせる",
+      "keep_ja": "R-Cがそのヘッダーを保持したままT-Cが対象穴群を締結。内側端末保持が続くならX-Cも占有",
+      "end_ja": "対象ヘッダーの締結終了・工具退避後に保持を解き指を退避する",
+      "reuse_ja": "P16とP17は同じ保持腕・工具の順次兼務候補。片方の保持中に同じ腕で他方を取りに行かない",
+      "missing_ja": "締付順・条件・工具全外形・内側ロックとフランジ固定の順・主2極/LV固定",
+      "task": {
+        "id": "D50",
+        "operation": "O50",
+        "cell": "C",
+        "work_ja": "外側ヘッダー・主接続口の配置、保持、ねじ固定・内側端末対応",
+        "primary": [
+          "R-C"
+        ],
+        "other": [
+          "F-C",
+          "T-C"
+        ],
+        "conditional": [
+          "X-C"
+        ],
+        "sharing_ja": "OP020作業をこの位置で1回行う。主担当のH05保持＋工具群。内側ロックとフランジ固定の詳細順、主2極/LV口の固定は要照合。"
+      }
+    },
+    {
+      "id": "D60",
+      "hands": [
+        "H03",
+        "H04",
+        "H08"
+      ],
+      "entities": [
+        "V25_RING_ENDS"
+      ],
+      "additional_target_ja": "電気的な共通点と物理的な共締めを区別する",
+      "start_ja": "対象接続に重なる部材一式をそろえる",
+      "keep_ja": "R-Cと必要時X-Cが対象を保持中にT-Cで締結する。大小同時対象には2主軸",
+      "end_ja": "担当接続を終え工具退避後に解除。両腕対象は同時退避",
+      "reuse_ja": "剛体1点保持と次の部材取得は同じ主担当の順次兼務候補",
+      "missing_ja": "部品境界・共締め積層・接続点・大小の組・未接続端の引継ぎ",
+      "task": {
+        "id": "D60",
+        "operation": "O60",
+        "cell": "C",
+        "work_ja": "バスバー・丸端子・共締め部材をそろえて保持中に締結",
+        "primary": [
+          "R-C"
+        ],
+        "other": [
+          "F-C",
+          "T-C"
+        ],
+        "conditional": [
+          "X-C"
+        ],
+        "sharing_ja": "剛体1点保持は主担当が兼務。両端や別部材の独立保持・大小同時締結は該当接続に残す。"
+      }
+    },
+    {
+      "id": "D61",
+      "hands": [
+        "H05"
+      ],
+      "entities": [],
+      "additional_target_ja": "LV12極のうち6/12はReserved。HVIL内部順と不可視端末を残す",
+      "start_ja": "対象の端末・挿入先を対応する",
+      "keep_ja": "R-Cが端末、必要時X-Cが別の線・部材を保持して接続する",
+      "end_ja": "対象の挿入・ロック作業後、他の自由端の担当を引き継いで退避する",
+      "reuse_ja": "R-Cの順次端末作業を比較。電気群数から線数・動作回数は出さない",
+      "missing_ja": "実配線の両端・極・端子品番・挿入順・HVILの全経路",
+      "task": {
+        "id": "D61",
+        "operation": "O60",
+        "cell": "C",
+        "work_ja": "残るLV/HVIL・不可視端末の接続",
+        "primary": [
+          "R-C"
+        ],
+        "other": [
+          "F-C"
+        ],
+        "conditional": [
+          "X-C",
+          "T-C"
+        ],
+        "sharing_ja": "電気ネットを物理線や1回の作業数に変換しない。各端末・挿入・ロックと支持を特定して割付を増補。"
+      }
+    },
+    {
+      "id": "D70",
+      "hands": [
+        "H07"
+      ],
+      "entities": [],
+      "additional_target_ja": "蓋・シール。写真の内部92特徴とは別に残る作業",
+      "start_ja": "組立・検査との順序を決めたうえで蓋・シールを取得する",
+      "keep_ja": "配置と必要な保持・締結を担当する",
+      "end_ja": "担当した蓋・シール作業後に工具・指を退避する",
+      "reuse_ja": "C主担当の次ワークと重ならない場合に兼務。検査前後の順序は未選定",
+      "missing_ja": "蓋・シール構成・保持面・工具点・検査との順序・所要時間",
+      "task": {
+        "id": "D70",
+        "operation": "O70",
+        "cell": "AFTER",
+        "work_ja": "シール・蓋の供給と配置・保持・固定",
+        "primary": [
+          "R-C"
+        ],
+        "other": [
+          "F-C",
+          "T-C"
+        ],
+        "conditional": [],
+        "sharing_ja": "C主担当への順次兼務を比較。Cの次ワークと競合すれば直交移載等へ分担する。蓋・シール・検査の詳細順は未選定。"
+      }
+    },
+    {
+      "id": "D71",
+      "hands": [],
+      "entities": [],
+      "additional_target_ja": "検査治具・接続・対象ワーク",
+      "start_ja": "必要検査の対象を設備へ引き継ぐ",
+      "keep_ja": "検査設備が占有。姿勢保持を腕が担当するなら腕も占有として記録する",
+      "end_ja": "検査接続を外し、次工程へ引き継ぐ",
+      "reuse_ja": "固定設備が支持できる場合の主担当兼務を比較。検査待ち時間を省かない",
+      "missing_ja": "検査項目・条件・合否値・受入経路・支持と接続設備",
+      "task": {
+        "id": "D71",
+        "operation": "O70",
+        "cell": "AFTER",
+        "work_ja": "必要検査・検査接続・結果記録",
+        "primary": [
+          "E-TEST"
+        ],
+        "other": [],
+        "conditional": [
+          "R-C"
+        ],
+        "sharing_ja": "固定設備＋必要な接近軸を比較。姿勢変更が必要なときだけ主担当の空きと競合を調べる。検査条件を新設しない。"
+      }
+    },
+    {
+      "id": "D80",
+      "hands": [
+        "H06"
+      ],
+      "entities": [],
+      "additional_target_ja": "完成品の許容把持面と払出し先",
+      "start_ja": "払出し対象を取得する",
+      "keep_ja": "直交移載または共有主担当が完成品を保持して搬送する",
+      "end_ja": "払出し先へ支持を引き継ぎ、指を退避する",
+      "reuse_ja": "G-OUT、R-C、G-010の比較は距離と占有が分かってから",
+      "missing_ja": "完成品の重心・持てる面・搬送先・兼務時の往復時間",
+      "task": {
+        "id": "D80",
+        "operation": "O80",
+        "cell": "AFTER",
+        "work_ja": "完成品の払出し",
+        "primary": [
+          "G-OUT"
+        ],
+        "other": [],
+        "conditional": [
+          "R-C"
+        ],
+        "sharing_ja": "単純移載は直交軸を候補にする。R-CまたはG-010共用との台数・待ち・往復動作の比較を残す。"
+      }
+    },
+    {
+      "id": "D81",
+      "hands": [],
+      "entities": [],
+      "additional_target_ja": "空パレット、空トレー、補給品、フィーダ",
+      "start_ja": "回収・補給・循環対象を引き受ける",
+      "keep_ja": "設備搬送と、残る手扱い・必要な両手トレー搬送を区別する",
+      "end_ja": "回収位置・供給設備へ支持と管理を引き継ぐ",
+      "reuse_ja": "補給・回収の兼務で主組立の保持を中断しない。二段循環を別計上",
+      "missing_ja": "回収容器・補給単位・実施間隔・搬送設備とロボットの境界",
+      "task": {
+        "id": "D81",
+        "operation": "O80",
+        "cell": "AFTER",
+        "work_ja": "空パレット循環・空容器回収・補給",
+        "primary": [
+          "E-RETURN"
+        ],
+        "other": [],
+        "conditional": [
+          "R-A",
+          "R-B",
+          "R-C"
+        ],
+        "sharing_ja": "設備搬送へ分担できる範囲を対応。ロボットが扱う回収・補充が残るならその占有を別途計上し、ゼロ時間にしない。"
+      }
+    }
+  ],
+  "targets": [
+    {
+      "id": "P01",
+      "name_ja": "黒い筐体・四隅の蓋ねじボス",
+      "group": "FG_CASE",
+      "group_name_ja": "筐体",
+      "candidate_cells": [
+        "SUPPLY",
+        "C"
+      ],
+      "basis_ja": "既存写真対応とOP010指定",
+      "unresolved_ja": "筐体底面と独立した下板の支持関係。",
+      "physical_operation_selected": null,
+      "collection": "parts",
+      "review_task_ids": [
+        "D00",
+        "D40",
+        "D42",
+        "D45",
+        "D50",
+        "D70",
+        "D80"
+      ],
+      "selected_task_id": null,
+      "feature_parent": null,
+      "observed_trace_ends": [],
+      "physical_endpoints": null,
+      "electrical_group": null,
+      "joint_stack": null,
+      "fastener_specification": null,
+      "model_id": "REF_P01"
+    },
+    {
+      "id": "P02",
+      "name_ja": "GIGAVAC表示の主接触器",
+      "group": "FG_BASE",
+      "group_name_ja": "下板側本体",
+      "candidate_cells": [
+        "A"
+      ],
+      "basis_ja": "2025年映像の同種部品を下板へ先組みする対応候補",
+      "unresolved_ja": "製造版・固定点・上下リレーの機能割当。",
+      "physical_operation_selected": null,
+      "collection": "parts",
+      "review_task_ids": [
+        "D10",
+        "D11",
+        "D12"
+      ],
+      "selected_task_id": null,
+      "feature_parent": null,
+      "observed_trace_ends": [],
+      "physical_endpoints": null,
+      "electrical_group": null,
+      "joint_stack": null,
+      "fastener_specification": null,
+      "model_id": "REF_P02"
+    },
+    {
+      "id": "P03",
+      "name_ja": "写真上側の角形リレー本体",
+      "group": "FG_BASE",
+      "group_name_ja": "下板側本体",
+      "candidate_cells": [
+        "A"
+      ],
+      "basis_ja": "2025年映像の同種部品を下板へ先組みする対応候補",
+      "unresolved_ja": "製造版・固定点・上下リレーの機能割当。",
+      "physical_operation_selected": null,
+      "collection": "parts",
+      "review_task_ids": [
+        "D10",
+        "D11",
+        "D12"
+      ],
+      "selected_task_id": null,
+      "feature_parent": null,
+      "observed_trace_ends": [],
+      "physical_endpoints": null,
+      "electrical_group": null,
+      "joint_stack": null,
+      "fastener_specification": null,
+      "model_id": "REF_P03"
+    },
+    {
+      "id": "P04",
+      "name_ja": "写真下側の角形リレー本体",
+      "group": "FG_BASE",
+      "group_name_ja": "下板側本体",
+      "candidate_cells": [
+        "A"
+      ],
+      "basis_ja": "2025年映像の同種部品を下板へ先組みする対応候補",
+      "unresolved_ja": "製造版・固定点・上下リレーの機能割当。",
+      "physical_operation_selected": null,
+      "collection": "parts",
+      "review_task_ids": [
+        "D10",
+        "D11",
+        "D12"
+      ],
+      "selected_task_id": null,
+      "feature_parent": null,
+      "observed_trace_ends": [],
+      "physical_endpoints": null,
+      "electrical_group": null,
+      "joint_stack": null,
+      "fastener_specification": null,
+      "model_id": "REF_P04"
+    },
+    {
+      "id": "P05",
+      "name_ja": "上部左の筒状ヒューズ",
+      "group": "FG_FUSE",
+      "group_name_ja": "補機ヒューズ板側",
+      "candidate_cells": [
+        "B"
+      ],
+      "basis_ja": "既存写真の物理5個と公式外組み場面の対応候補",
+      "unresolved_ja": "各ヒューズと口の対応、板と下板の結合。",
+      "physical_operation_selected": null,
+      "collection": "parts",
+      "review_task_ids": [
+        "D20",
+        "D21",
+        "D22"
+      ],
+      "selected_task_id": null,
+      "feature_parent": null,
+      "observed_trace_ends": [],
+      "physical_endpoints": null,
+      "electrical_group": null,
+      "joint_stack": null,
+      "fastener_specification": null,
+      "model_id": "REF_P05"
+    },
+    {
+      "id": "P06",
+      "name_ja": "上部右の筒状ヒューズ",
+      "group": "FG_FUSE",
+      "group_name_ja": "補機ヒューズ板側",
+      "candidate_cells": [
+        "B"
+      ],
+      "basis_ja": "既存写真の物理5個と公式外組み場面の対応候補",
+      "unresolved_ja": "各ヒューズと口の対応、板と下板の結合。",
+      "physical_operation_selected": null,
+      "collection": "parts",
+      "review_task_ids": [
+        "D20",
+        "D21",
+        "D22"
+      ],
+      "selected_task_id": null,
+      "feature_parent": null,
+      "observed_trace_ends": [],
+      "physical_endpoints": null,
+      "electrical_group": null,
+      "joint_stack": null,
+      "fastener_specification": null,
+      "model_id": "REF_P06"
+    },
+    {
+      "id": "P07",
+      "name_ja": "後方の補機ヒューズ取付板・上端",
+      "group": "FG_FUSE",
+      "group_name_ja": "補機ヒューズ板側",
+      "candidate_cells": [
+        "B"
+      ],
+      "basis_ja": "既存写真の物理5個と公式外組み場面の対応候補",
+      "unresolved_ja": "各ヒューズと口の対応、板と下板の結合。",
+      "physical_operation_selected": null,
+      "collection": "parts",
+      "review_task_ids": [
+        "D20",
+        "D21",
+        "D22"
+      ],
+      "selected_task_id": null,
+      "feature_parent": null,
+      "observed_trace_ends": [],
+      "physical_endpoints": null,
+      "electrical_group": null,
+      "joint_stack": null,
+      "fastener_specification": null,
+      "model_id": "REF_P07"
+    },
+    {
+      "id": "P08",
+      "name_ja": "主ヒューズ上の黒い被覆",
+      "group": "FG_MAINFUSE",
+      "group_name_ja": "主ヒューズと被覆",
+      "candidate_cells": [
+        "B",
+        "C"
+      ],
+      "basis_ja": "完成写真の位置対応。工程の所属は未確定",
+      "unresolved_ja": "ヒューズ板側との支持関係、取付順、導体の共締め。",
+      "physical_operation_selected": null,
+      "collection": "parts",
+      "review_task_ids": [
+        "D20",
+        "D21",
+        "D60"
+      ],
+      "selected_task_id": null,
+      "feature_parent": null,
+      "observed_trace_ends": [],
+      "physical_endpoints": null,
+      "electrical_group": null,
+      "joint_stack": null,
+      "fastener_specification": null,
+      "model_id": "REF_P08"
+    },
+    {
+      "id": "P09",
+      "name_ja": "左主端子から内側へ延びる板状導体",
+      "group": "FG_BUS",
+      "group_name_ja": "剛体導体",
+      "candidate_cells": [
+        "C"
+      ],
+      "basis_ja": "公式映像の後付けバスバーと完成写真の対応候補",
+      "unresolved_ja": "製造部品境界・同一版対応・端子と座金の積層。",
+      "physical_operation_selected": null,
+      "collection": "parts",
+      "review_task_ids": [
+        "D60"
+      ],
+      "selected_task_id": null,
+      "feature_parent": null,
+      "observed_trace_ends": [],
+      "physical_endpoints": null,
+      "electrical_group": null,
+      "joint_stack": null,
+      "fastener_specification": null,
+      "model_id": "REF_P09"
+    },
+    {
+      "id": "P10",
+      "name_ja": "右主端子から内側へ延びる板状導体",
+      "group": "FG_BUS",
+      "group_name_ja": "剛体導体",
+      "candidate_cells": [
+        "C"
+      ],
+      "basis_ja": "公式映像の後付けバスバーと完成写真の対応候補",
+      "unresolved_ja": "製造部品境界・同一版対応・端子と座金の積層。",
+      "physical_operation_selected": null,
+      "collection": "parts",
+      "review_task_ids": [
+        "D60"
+      ],
+      "selected_task_id": null,
+      "feature_parent": null,
+      "observed_trace_ends": [],
+      "physical_endpoints": null,
+      "electrical_group": null,
+      "joint_stack": null,
+      "fastener_specification": null,
+      "model_id": "REF_P10"
+    },
+    {
+      "id": "P11",
+      "name_ja": "左下主端子付近の板状導体",
+      "group": "FG_BUS",
+      "group_name_ja": "剛体導体",
+      "candidate_cells": [
+        "C"
+      ],
+      "basis_ja": "公式映像の後付けバスバーと完成写真の対応候補",
+      "unresolved_ja": "製造部品境界・同一版対応・端子と座金の積層。",
+      "physical_operation_selected": null,
+      "collection": "parts",
+      "review_task_ids": [
+        "D60"
+      ],
+      "selected_task_id": null,
+      "feature_parent": null,
+      "observed_trace_ends": [],
+      "physical_endpoints": null,
+      "electrical_group": null,
+      "joint_stack": null,
+      "fastener_specification": null,
+      "model_id": "REF_P11"
+    },
+    {
+      "id": "P12",
+      "name_ja": "接触器右端子と右下主端子間の板状導体",
+      "group": "FG_BUS",
+      "group_name_ja": "剛体導体",
+      "candidate_cells": [
+        "C"
+      ],
+      "basis_ja": "公式映像の後付けバスバーと完成写真の対応候補",
+      "unresolved_ja": "製造部品境界・同一版対応・端子と座金の積層。",
+      "physical_operation_selected": null,
+      "collection": "parts",
+      "review_task_ids": [
+        "D60"
+      ],
+      "selected_task_id": null,
+      "feature_parent": null,
+      "observed_trace_ends": [],
+      "physical_endpoints": null,
+      "electrical_group": null,
+      "joint_stack": null,
+      "fastener_specification": null,
+      "model_id": "REF_P12"
+    },
+    {
+      "id": "P13",
+      "name_ja": "前方の複数ねじ付き板状導体",
+      "group": "FG_BUS",
+      "group_name_ja": "剛体導体",
+      "candidate_cells": [
+        "C"
+      ],
+      "basis_ja": "公式映像の後付けバスバーと完成写真の対応候補",
+      "unresolved_ja": "製造部品境界・同一版対応・端子と座金の積層。",
+      "physical_operation_selected": null,
+      "collection": "parts",
+      "review_task_ids": [
+        "D60"
+      ],
+      "selected_task_id": null,
+      "feature_parent": null,
+      "observed_trace_ends": [],
+      "physical_endpoints": null,
+      "electrical_group": null,
+      "joint_stack": null,
+      "fastener_specification": null,
+      "model_id": "REF_P13"
+    },
+    {
+      "id": "P14",
+      "name_ja": "左側の主2極ハウジング",
+      "group": "FG_PORT",
+      "group_name_ja": "筐体側の接続口",
+      "candidate_cells": [
+        "C"
+      ],
+      "basis_ja": "公式映像では内部ユニット搭載後に取付",
+      "unresolved_ja": "主2極口とLV口の全型式・端末・固定方法。",
+      "physical_operation_selected": null,
+      "collection": "parts",
+      "review_task_ids": [
+        "D50",
+        "D60",
+        "D61"
+      ],
+      "selected_task_id": null,
+      "feature_parent": null,
+      "observed_trace_ends": [],
+      "physical_endpoints": null,
+      "electrical_group": null,
+      "joint_stack": null,
+      "fastener_specification": null,
+      "model_id": "REF_P14"
+    },
+    {
+      "id": "P15",
+      "name_ja": "右側の主2極ハウジング",
+      "group": "FG_PORT",
+      "group_name_ja": "筐体側の接続口",
+      "candidate_cells": [
+        "C"
+      ],
+      "basis_ja": "公式映像では内部ユニット搭載後に取付",
+      "unresolved_ja": "主2極口とLV口の全型式・端末・固定方法。",
+      "physical_operation_selected": null,
+      "collection": "parts",
+      "review_task_ids": [
+        "D50",
+        "D60",
+        "D61"
+      ],
+      "selected_task_id": null,
+      "feature_parent": null,
+      "observed_trace_ends": [],
+      "physical_endpoints": null,
+      "electrical_group": null,
+      "joint_stack": null,
+      "fastener_specification": null,
+      "model_id": "REF_P15"
+    },
+    {
+      "id": "P16",
+      "name_ja": "前面3口外部ヘッダー",
+      "group": "FG_PORT",
+      "group_name_ja": "筐体側の接続口",
+      "candidate_cells": [
+        "C"
+      ],
+      "basis_ja": "公式映像では内部ユニット搭載後に取付",
+      "unresolved_ja": "主2極口とLV口の全型式・端末・固定方法。",
+      "physical_operation_selected": null,
+      "collection": "parts",
+      "review_task_ids": [
+        "D50",
+        "D60",
+        "D61"
+      ],
+      "selected_task_id": null,
+      "feature_parent": null,
+      "observed_trace_ends": [],
+      "physical_endpoints": null,
+      "electrical_group": null,
+      "joint_stack": null,
+      "fastener_specification": null,
+      "model_id": "REF_P16"
+    },
+    {
+      "id": "P17",
+      "name_ja": "前面2口外部ヘッダー",
+      "group": "FG_PORT",
+      "group_name_ja": "筐体側の接続口",
+      "candidate_cells": [
+        "C"
+      ],
+      "basis_ja": "公式映像では内部ユニット搭載後に取付",
+      "unresolved_ja": "主2極口とLV口の全型式・端末・固定方法。",
+      "physical_operation_selected": null,
+      "collection": "parts",
+      "review_task_ids": [
+        "D50",
+        "D60",
+        "D61"
+      ],
+      "selected_task_id": null,
+      "feature_parent": null,
+      "observed_trace_ends": [],
+      "physical_endpoints": null,
+      "electrical_group": null,
+      "joint_stack": null,
+      "fastener_specification": null,
+      "model_id": "REF_P17"
+    },
+    {
+      "id": "P18",
+      "name_ja": "奥側の黒い低圧12極ハウジング",
+      "group": "FG_PORT",
+      "group_name_ja": "筐体側の接続口",
+      "candidate_cells": [
+        "C"
+      ],
+      "basis_ja": "公式映像では内部ユニット搭載後に取付",
+      "unresolved_ja": "主2極口とLV口の全型式・端末・固定方法。",
+      "physical_operation_selected": null,
+      "collection": "parts",
+      "review_task_ids": [
+        "D50",
+        "D60",
+        "D61"
+      ],
+      "selected_task_id": null,
+      "feature_parent": null,
+      "observed_trace_ends": [],
+      "physical_endpoints": null,
+      "electrical_group": null,
+      "joint_stack": null,
+      "fastener_specification": null,
+      "model_id": "REF_P18"
+    },
+    {
+      "id": "I01",
+      "name_ja": "補機口1の内側ハウジング（キーA）",
+      "group": "FG_INNER",
+      "group_name_ja": "補機内側ハウジング",
+      "candidate_cells": [
+        "PREP",
+        "A",
+        "B",
+        "C"
+      ],
+      "basis_ja": "TEの端末挿入→内側ハウジング→外側への挿入という作業区分",
+      "unresolved_ja": "線束がA/Bのどちらに属するか、極番号、圧着端子、HVIL順序。",
+      "physical_operation_selected": null,
+      "collection": "parts",
+      "review_task_ids": [
+        "D01",
+        "D11",
+        "D21",
+        "D31",
+        "D40",
+        "D42",
+        "D45",
+        "D50",
+        "D61"
+      ],
+      "selected_task_id": null,
+      "feature_parent": null,
+      "observed_trace_ends": [],
+      "physical_endpoints": null,
+      "electrical_group": null,
+      "joint_stack": null,
+      "fastener_specification": null,
+      "model_id": "REF_I01"
+    },
+    {
+      "id": "I02",
+      "name_ja": "補機口2の内側ハウジング（キーD）",
+      "group": "FG_INNER",
+      "group_name_ja": "補機内側ハウジング",
+      "candidate_cells": [
+        "PREP",
+        "A",
+        "B",
+        "C"
+      ],
+      "basis_ja": "TEの端末挿入→内側ハウジング→外側への挿入という作業区分",
+      "unresolved_ja": "線束がA/Bのどちらに属するか、極番号、圧着端子、HVIL順序。",
+      "physical_operation_selected": null,
+      "collection": "parts",
+      "review_task_ids": [
+        "D01",
+        "D11",
+        "D21",
+        "D31",
+        "D40",
+        "D42",
+        "D45",
+        "D50",
+        "D61"
+      ],
+      "selected_task_id": null,
+      "feature_parent": null,
+      "observed_trace_ends": [],
+      "physical_endpoints": null,
+      "electrical_group": null,
+      "joint_stack": null,
+      "fastener_specification": null,
+      "model_id": "REF_I02"
+    },
+    {
+      "id": "I03",
+      "name_ja": "補機口3の内側ハウジング（キーE）",
+      "group": "FG_INNER",
+      "group_name_ja": "補機内側ハウジング",
+      "candidate_cells": [
+        "PREP",
+        "A",
+        "B",
+        "C"
+      ],
+      "basis_ja": "TEの端末挿入→内側ハウジング→外側への挿入という作業区分",
+      "unresolved_ja": "線束がA/Bのどちらに属するか、極番号、圧着端子、HVIL順序。",
+      "physical_operation_selected": null,
+      "collection": "parts",
+      "review_task_ids": [
+        "D01",
+        "D11",
+        "D21",
+        "D31",
+        "D40",
+        "D42",
+        "D45",
+        "D50",
+        "D61"
+      ],
+      "selected_task_id": null,
+      "feature_parent": null,
+      "observed_trace_ends": [],
+      "physical_endpoints": null,
+      "electrical_group": null,
+      "joint_stack": null,
+      "fastener_specification": null,
+      "model_id": "REF_I03"
+    },
+    {
+      "id": "I04",
+      "name_ja": "補機口4の内側ハウジング（キーD）",
+      "group": "FG_INNER",
+      "group_name_ja": "補機内側ハウジング",
+      "candidate_cells": [
+        "PREP",
+        "A",
+        "B",
+        "C"
+      ],
+      "basis_ja": "TEの端末挿入→内側ハウジング→外側への挿入という作業区分",
+      "unresolved_ja": "線束がA/Bのどちらに属するか、極番号、圧着端子、HVIL順序。",
+      "physical_operation_selected": null,
+      "collection": "parts",
+      "review_task_ids": [
+        "D01",
+        "D11",
+        "D21",
+        "D31",
+        "D40",
+        "D42",
+        "D45",
+        "D50",
+        "D61"
+      ],
+      "selected_task_id": null,
+      "feature_parent": null,
+      "observed_trace_ends": [],
+      "physical_endpoints": null,
+      "electrical_group": null,
+      "joint_stack": null,
+      "fastener_specification": null,
+      "model_id": "REF_I04"
+    },
+    {
+      "id": "I05",
+      "name_ja": "補機口5の内側ハウジング（キーF）",
+      "group": "FG_INNER",
+      "group_name_ja": "補機内側ハウジング",
+      "candidate_cells": [
+        "PREP",
+        "A",
+        "B",
+        "C"
+      ],
+      "basis_ja": "TEの端末挿入→内側ハウジング→外側への挿入という作業区分",
+      "unresolved_ja": "線束がA/Bのどちらに属するか、極番号、圧着端子、HVIL順序。",
+      "physical_operation_selected": null,
+      "collection": "parts",
+      "review_task_ids": [
+        "D01",
+        "D11",
+        "D21",
+        "D31",
+        "D40",
+        "D42",
+        "D45",
+        "D50",
+        "D61"
+      ],
+      "selected_task_id": null,
+      "feature_parent": null,
+      "observed_trace_ends": [],
+      "physical_endpoints": null,
+      "electrical_group": null,
+      "joint_stack": null,
+      "fastener_specification": null,
+      "model_id": "REF_I05"
+    },
+    {
+      "id": "T31",
+      "name_ja": "P03上面の差込端末外装1",
+      "group": "FG_RELAY_END",
+      "group_name_ja": "リレーの端末外装",
+      "candidate_cells": [
+        "PREP",
+        "A",
+        "C"
+      ],
+      "basis_ja": "既存の写真入口観察。電気ネットとは別",
+      "unresolved_ja": "実端子・極・遠端と、下板外へ出る線の接続順。",
+      "physical_operation_selected": null,
+      "collection": "parts",
+      "review_task_ids": [
+        "D01",
+        "D11",
+        "D61"
+      ],
+      "selected_task_id": null,
+      "feature_parent": null,
+      "observed_trace_ends": [],
+      "physical_endpoints": null,
+      "electrical_group": null,
+      "joint_stack": null,
+      "fastener_specification": null,
+      "model_id": "REF_T31"
+    },
+    {
+      "id": "T32",
+      "name_ja": "P03上面の差込端末外装2",
+      "group": "FG_RELAY_END",
+      "group_name_ja": "リレーの端末外装",
+      "candidate_cells": [
+        "PREP",
+        "A",
+        "C"
+      ],
+      "basis_ja": "既存の写真入口観察。電気ネットとは別",
+      "unresolved_ja": "実端子・極・遠端と、下板外へ出る線の接続順。",
+      "physical_operation_selected": null,
+      "collection": "parts",
+      "review_task_ids": [
+        "D01",
+        "D11",
+        "D61"
+      ],
+      "selected_task_id": null,
+      "feature_parent": null,
+      "observed_trace_ends": [],
+      "physical_endpoints": null,
+      "electrical_group": null,
+      "joint_stack": null,
+      "fastener_specification": null,
+      "model_id": "REF_T32"
+    },
+    {
+      "id": "T33",
+      "name_ja": "P03上面の差込端末外装3",
+      "group": "FG_RELAY_END",
+      "group_name_ja": "リレーの端末外装",
+      "candidate_cells": [
+        "PREP",
+        "A",
+        "C"
+      ],
+      "basis_ja": "既存の写真入口観察。電気ネットとは別",
+      "unresolved_ja": "実端子・極・遠端と、下板外へ出る線の接続順。",
+      "physical_operation_selected": null,
+      "collection": "parts",
+      "review_task_ids": [
+        "D01",
+        "D11",
+        "D61"
+      ],
+      "selected_task_id": null,
+      "feature_parent": null,
+      "observed_trace_ends": [],
+      "physical_endpoints": null,
+      "electrical_group": null,
+      "joint_stack": null,
+      "fastener_specification": null,
+      "model_id": "REF_T33"
+    },
+    {
+      "id": "T34",
+      "name_ja": "P03上面の差込端末外装4",
+      "group": "FG_RELAY_END",
+      "group_name_ja": "リレーの端末外装",
+      "candidate_cells": [
+        "PREP",
+        "A",
+        "C"
+      ],
+      "basis_ja": "既存の写真入口観察。電気ネットとは別",
+      "unresolved_ja": "実端子・極・遠端と、下板外へ出る線の接続順。",
+      "physical_operation_selected": null,
+      "collection": "parts",
+      "review_task_ids": [
+        "D01",
+        "D11",
+        "D61"
+      ],
+      "selected_task_id": null,
+      "feature_parent": null,
+      "observed_trace_ends": [],
+      "physical_endpoints": null,
+      "electrical_group": null,
+      "joint_stack": null,
+      "fastener_specification": null,
+      "model_id": "REF_T34"
+    },
+    {
+      "id": "T41",
+      "name_ja": "P04上面の差込端末外装1",
+      "group": "FG_RELAY_END",
+      "group_name_ja": "リレーの端末外装",
+      "candidate_cells": [
+        "PREP",
+        "A",
+        "C"
+      ],
+      "basis_ja": "既存の写真入口観察。電気ネットとは別",
+      "unresolved_ja": "実端子・極・遠端と、下板外へ出る線の接続順。",
+      "physical_operation_selected": null,
+      "collection": "parts",
+      "review_task_ids": [
+        "D01",
+        "D11",
+        "D61"
+      ],
+      "selected_task_id": null,
+      "feature_parent": null,
+      "observed_trace_ends": [],
+      "physical_endpoints": null,
+      "electrical_group": null,
+      "joint_stack": null,
+      "fastener_specification": null,
+      "model_id": "REF_T41"
+    },
+    {
+      "id": "T42",
+      "name_ja": "P04上面の差込端末外装2",
+      "group": "FG_RELAY_END",
+      "group_name_ja": "リレーの端末外装",
+      "candidate_cells": [
+        "PREP",
+        "A",
+        "C"
+      ],
+      "basis_ja": "既存の写真入口観察。電気ネットとは別",
+      "unresolved_ja": "実端子・極・遠端と、下板外へ出る線の接続順。",
+      "physical_operation_selected": null,
+      "collection": "parts",
+      "review_task_ids": [
+        "D01",
+        "D11",
+        "D61"
+      ],
+      "selected_task_id": null,
+      "feature_parent": null,
+      "observed_trace_ends": [],
+      "physical_endpoints": null,
+      "electrical_group": null,
+      "joint_stack": null,
+      "fastener_specification": null,
+      "model_id": "REF_T42"
+    },
+    {
+      "id": "T43",
+      "name_ja": "P04上面の差込端末外装3",
+      "group": "FG_RELAY_END",
+      "group_name_ja": "リレーの端末外装",
+      "candidate_cells": [
+        "PREP",
+        "A",
+        "C"
+      ],
+      "basis_ja": "既存の写真入口観察。電気ネットとは別",
+      "unresolved_ja": "実端子・極・遠端と、下板外へ出る線の接続順。",
+      "physical_operation_selected": null,
+      "collection": "parts",
+      "review_task_ids": [
+        "D01",
+        "D11",
+        "D61"
+      ],
+      "selected_task_id": null,
+      "feature_parent": null,
+      "observed_trace_ends": [],
+      "physical_endpoints": null,
+      "electrical_group": null,
+      "joint_stack": null,
+      "fastener_specification": null,
+      "model_id": "REF_T43"
+    },
+    {
+      "id": "T44",
+      "name_ja": "P04上面の差込端末外装4",
+      "group": "FG_RELAY_END",
+      "group_name_ja": "リレーの端末外装",
+      "candidate_cells": [
+        "PREP",
+        "A",
+        "C"
+      ],
+      "basis_ja": "既存の写真入口観察。電気ネットとは別",
+      "unresolved_ja": "実端子・極・遠端と、下板外へ出る線の接続順。",
+      "physical_operation_selected": null,
+      "collection": "parts",
+      "review_task_ids": [
+        "D01",
+        "D11",
+        "D61"
+      ],
+      "selected_task_id": null,
+      "feature_parent": null,
+      "observed_trace_ends": [],
+      "physical_endpoints": null,
+      "electrical_group": null,
+      "joint_stack": null,
+      "fastener_specification": null,
+      "model_id": "REF_T44"
+    },
+    {
+      "id": "P19",
+      "name_ja": "補機ヒューズ・左側の2段目",
+      "group": "FG_FUSE",
+      "group_name_ja": "補機ヒューズ板側",
+      "candidate_cells": [
+        "B"
+      ],
+      "basis_ja": "既存写真の物理5個と公式外組み場面の対応候補",
+      "unresolved_ja": "各ヒューズと口の対応、板と下板の結合。",
+      "physical_operation_selected": null,
+      "collection": "parts",
+      "review_task_ids": [
+        "D20",
+        "D21",
+        "D22"
+      ],
+      "selected_task_id": null,
+      "feature_parent": null,
+      "observed_trace_ends": [],
+      "physical_endpoints": null,
+      "electrical_group": null,
+      "joint_stack": null,
+      "fastener_specification": null,
+      "model_id": "REF_P19"
+    },
+    {
+      "id": "P20",
+      "name_ja": "補機ヒューズ・右側の2段目",
+      "group": "FG_FUSE",
+      "group_name_ja": "補機ヒューズ板側",
+      "candidate_cells": [
+        "B"
+      ],
+      "basis_ja": "既存写真の物理5個と公式外組み場面の対応候補",
+      "unresolved_ja": "各ヒューズと口の対応、板と下板の結合。",
+      "physical_operation_selected": null,
+      "collection": "parts",
+      "review_task_ids": [
+        "D20",
+        "D21",
+        "D22"
+      ],
+      "selected_task_id": null,
+      "feature_parent": null,
+      "observed_trace_ends": [],
+      "physical_endpoints": null,
+      "electrical_group": null,
+      "joint_stack": null,
+      "fastener_specification": null,
+      "model_id": "REF_P20"
+    },
+    {
+      "id": "P21",
+      "name_ja": "補機ヒューズ・左側の3段目",
+      "group": "FG_FUSE",
+      "group_name_ja": "補機ヒューズ板側",
+      "candidate_cells": [
+        "B"
+      ],
+      "basis_ja": "既存写真の物理5個と公式外組み場面の対応候補",
+      "unresolved_ja": "各ヒューズと口の対応、板と下板の結合。",
+      "physical_operation_selected": null,
+      "collection": "parts",
+      "review_task_ids": [
+        "D20",
+        "D21",
+        "D22"
+      ],
+      "selected_task_id": null,
+      "feature_parent": null,
+      "observed_trace_ends": [],
+      "physical_endpoints": null,
+      "electrical_group": null,
+      "joint_stack": null,
+      "fastener_specification": null,
+      "model_id": "REF_P21"
+    },
+    {
+      "id": "P22",
+      "name_ja": "中央被覆内の主ヒューズ本体",
+      "group": "FG_MAINFUSE",
+      "group_name_ja": "主ヒューズと被覆",
+      "candidate_cells": [
+        "B",
+        "C"
+      ],
+      "basis_ja": "完成写真の位置対応。工程の所属は未確定",
+      "unresolved_ja": "ヒューズ板側との支持関係、取付順、導体の共締め。",
+      "physical_operation_selected": null,
+      "collection": "parts",
+      "review_task_ids": [
+        "D20",
+        "D21",
+        "D60"
+      ],
+      "selected_task_id": null,
+      "feature_parent": null,
+      "observed_trace_ends": [],
+      "physical_endpoints": null,
+      "electrical_group": null,
+      "joint_stack": null,
+      "fastener_specification": null,
+      "model_id": "REF_P22"
+    },
+    {
+      "id": "L01",
+      "name_ja": "J09近傍の丸端子・黒い端末被覆",
+      "group": "FG_LUG",
+      "group_name_ja": "丸端子・黒被覆の可視領域",
+      "candidate_cells": [
+        "PREP",
+        "A",
+        "B",
+        "C"
+      ],
+      "basis_ja": "既存の写真領域。部品単位・加工済み線材数ではない",
+      "unresolved_ja": "共締め積層、実線の両端、未接続端を運ぶときの保持。",
+      "physical_operation_selected": null,
+      "collection": "parts",
+      "review_task_ids": [
+        "D01",
+        "D11",
+        "D21",
+        "D31",
+        "D40",
+        "D42",
+        "D60"
+      ],
+      "selected_task_id": null,
+      "feature_parent": null,
+      "observed_trace_ends": [],
+      "physical_endpoints": null,
+      "electrical_group": null,
+      "joint_stack": null,
+      "fastener_specification": null,
+      "model_id": "REF_L01"
+    },
+    {
+      "id": "L02",
+      "name_ja": "J10近傍の丸端子・黒い端末被覆",
+      "group": "FG_LUG",
+      "group_name_ja": "丸端子・黒被覆の可視領域",
+      "candidate_cells": [
+        "PREP",
+        "A",
+        "B",
+        "C"
+      ],
+      "basis_ja": "既存の写真領域。部品単位・加工済み線材数ではない",
+      "unresolved_ja": "共締め積層、実線の両端、未接続端を運ぶときの保持。",
+      "physical_operation_selected": null,
+      "collection": "parts",
+      "review_task_ids": [
+        "D01",
+        "D11",
+        "D21",
+        "D31",
+        "D40",
+        "D42",
+        "D60"
+      ],
+      "selected_task_id": null,
+      "feature_parent": null,
+      "observed_trace_ends": [],
+      "physical_endpoints": null,
+      "electrical_group": null,
+      "joint_stack": null,
+      "fastener_specification": null,
+      "model_id": "REF_L02"
+    },
+    {
+      "id": "L03",
+      "name_ja": "J11近傍の丸端子・黒い端末被覆",
+      "group": "FG_LUG",
+      "group_name_ja": "丸端子・黒被覆の可視領域",
+      "candidate_cells": [
+        "PREP",
+        "A",
+        "B",
+        "C"
+      ],
+      "basis_ja": "既存の写真領域。部品単位・加工済み線材数ではない",
+      "unresolved_ja": "共締め積層、実線の両端、未接続端を運ぶときの保持。",
+      "physical_operation_selected": null,
+      "collection": "parts",
+      "review_task_ids": [
+        "D01",
+        "D11",
+        "D21",
+        "D31",
+        "D40",
+        "D42",
+        "D60"
+      ],
+      "selected_task_id": null,
+      "feature_parent": null,
+      "observed_trace_ends": [],
+      "physical_endpoints": null,
+      "electrical_group": null,
+      "joint_stack": null,
+      "fastener_specification": null,
+      "model_id": "REF_L03"
+    },
+    {
+      "id": "L04",
+      "name_ja": "J12近傍の丸端子・黒い端末被覆",
+      "group": "FG_LUG",
+      "group_name_ja": "丸端子・黒被覆の可視領域",
+      "candidate_cells": [
+        "PREP",
+        "A",
+        "B",
+        "C"
+      ],
+      "basis_ja": "既存の写真領域。部品単位・加工済み線材数ではない",
+      "unresolved_ja": "共締め積層、実線の両端、未接続端を運ぶときの保持。",
+      "physical_operation_selected": null,
+      "collection": "parts",
+      "review_task_ids": [
+        "D01",
+        "D11",
+        "D21",
+        "D31",
+        "D40",
+        "D42",
+        "D60"
+      ],
+      "selected_task_id": null,
+      "feature_parent": null,
+      "observed_trace_ends": [],
+      "physical_endpoints": null,
+      "electrical_group": null,
+      "joint_stack": null,
+      "fastener_specification": null,
+      "model_id": "REF_L04"
+    },
+    {
+      "id": "L05",
+      "name_ja": "J13近傍の丸端子・黒い端末被覆",
+      "group": "FG_LUG",
+      "group_name_ja": "丸端子・黒被覆の可視領域",
+      "candidate_cells": [
+        "PREP",
+        "A",
+        "B",
+        "C"
+      ],
+      "basis_ja": "既存の写真領域。部品単位・加工済み線材数ではない",
+      "unresolved_ja": "共締め積層、実線の両端、未接続端を運ぶときの保持。",
+      "physical_operation_selected": null,
+      "collection": "parts",
+      "review_task_ids": [
+        "D01",
+        "D11",
+        "D21",
+        "D31",
+        "D40",
+        "D42",
+        "D60"
+      ],
+      "selected_task_id": null,
+      "feature_parent": null,
+      "observed_trace_ends": [],
+      "physical_endpoints": null,
+      "electrical_group": null,
+      "joint_stack": null,
+      "fastener_specification": null,
+      "model_id": "REF_L05"
+    },
+    {
+      "id": "L06",
+      "name_ja": "J14近傍の丸端子・黒い端末被覆",
+      "group": "FG_LUG",
+      "group_name_ja": "丸端子・黒被覆の可視領域",
+      "candidate_cells": [
+        "PREP",
+        "A",
+        "B",
+        "C"
+      ],
+      "basis_ja": "既存の写真領域。部品単位・加工済み線材数ではない",
+      "unresolved_ja": "共締め積層、実線の両端、未接続端を運ぶときの保持。",
+      "physical_operation_selected": null,
+      "collection": "parts",
+      "review_task_ids": [
+        "D01",
+        "D11",
+        "D21",
+        "D31",
+        "D40",
+        "D42",
+        "D60"
+      ],
+      "selected_task_id": null,
+      "feature_parent": null,
+      "observed_trace_ends": [],
+      "physical_endpoints": null,
+      "electrical_group": null,
+      "joint_stack": null,
+      "fastener_specification": null,
+      "model_id": "REF_L06"
+    },
+    {
+      "id": "L07",
+      "name_ja": "J17近傍の丸端子・黒い端末被覆",
+      "group": "FG_LUG",
+      "group_name_ja": "丸端子・黒被覆の可視領域",
+      "candidate_cells": [
+        "PREP",
+        "A",
+        "B",
+        "C"
+      ],
+      "basis_ja": "既存の写真領域。部品単位・加工済み線材数ではない",
+      "unresolved_ja": "共締め積層、実線の両端、未接続端を運ぶときの保持。",
+      "physical_operation_selected": null,
+      "collection": "parts",
+      "review_task_ids": [
+        "D01",
+        "D11",
+        "D21",
+        "D31",
+        "D40",
+        "D42",
+        "D60"
+      ],
+      "selected_task_id": null,
+      "feature_parent": null,
+      "observed_trace_ends": [],
+      "physical_endpoints": null,
+      "electrical_group": null,
+      "joint_stack": null,
+      "fastener_specification": null,
+      "model_id": "REF_L07"
+    },
+    {
+      "id": "J01",
+      "name_ja": "可視締結特徴 J01",
+      "group": "FG_FASTENER",
+      "group_name_ja": "可視締結特徴",
+      "candidate_cells": [
+        "A",
+        "B",
+        "C"
+      ],
+      "basis_ja": "写真で登録済みのねじ頭等。工程は未割当",
+      "unresolved_ja": "全ねじ数・固定用と電気接続用の区別・全積層・締付条件。",
+      "physical_operation_selected": null,
+      "collection": "visible_fastener_features",
+      "review_task_ids": [
+        "D10",
+        "D11",
+        "D60"
+      ],
+      "selected_task_id": null,
+      "feature_parent": "P02",
+      "observed_trace_ends": [],
+      "physical_endpoints": null,
+      "electrical_group": null,
+      "joint_stack": null,
+      "fastener_specification": null,
+      "model_id": "REF_J01"
+    },
+    {
+      "id": "J02",
+      "name_ja": "可視締結特徴 J02",
+      "group": "FG_FASTENER",
+      "group_name_ja": "可視締結特徴",
+      "candidate_cells": [
+        "A",
+        "B",
+        "C"
+      ],
+      "basis_ja": "写真で登録済みのねじ頭等。工程は未割当",
+      "unresolved_ja": "全ねじ数・固定用と電気接続用の区別・全積層・締付条件。",
+      "physical_operation_selected": null,
+      "collection": "visible_fastener_features",
+      "review_task_ids": [
+        "D10",
+        "D11",
+        "D60"
+      ],
+      "selected_task_id": null,
+      "feature_parent": "P02",
+      "observed_trace_ends": [],
+      "physical_endpoints": null,
+      "electrical_group": null,
+      "joint_stack": null,
+      "fastener_specification": null,
+      "model_id": "REF_J02"
+    },
+    {
+      "id": "J03",
+      "name_ja": "可視締結特徴 J03",
+      "group": "FG_FASTENER",
+      "group_name_ja": "可視締結特徴",
+      "candidate_cells": [
+        "A",
+        "B",
+        "C"
+      ],
+      "basis_ja": "写真で登録済みのねじ頭等。工程は未割当",
+      "unresolved_ja": "全ねじ数・固定用と電気接続用の区別・全積層・締付条件。",
+      "physical_operation_selected": null,
+      "collection": "visible_fastener_features",
+      "review_task_ids": [
+        "D10",
+        "D11",
+        "D60"
+      ],
+      "selected_task_id": null,
+      "feature_parent": "P02",
+      "observed_trace_ends": [],
+      "physical_endpoints": null,
+      "electrical_group": null,
+      "joint_stack": null,
+      "fastener_specification": null,
+      "model_id": "REF_J03"
+    },
+    {
+      "id": "J04",
+      "name_ja": "可視締結特徴 J04",
+      "group": "FG_FASTENER",
+      "group_name_ja": "可視締結特徴",
+      "candidate_cells": [
+        "A",
+        "B",
+        "C"
+      ],
+      "basis_ja": "写真で登録済みのねじ頭等。工程は未割当",
+      "unresolved_ja": "全ねじ数・固定用と電気接続用の区別・全積層・締付条件。",
+      "physical_operation_selected": null,
+      "collection": "visible_fastener_features",
+      "review_task_ids": [
+        "D10",
+        "D11",
+        "D60"
+      ],
+      "selected_task_id": null,
+      "feature_parent": "P02",
+      "observed_trace_ends": [],
+      "physical_endpoints": null,
+      "electrical_group": null,
+      "joint_stack": null,
+      "fastener_specification": null,
+      "model_id": "REF_J04"
+    },
+    {
+      "id": "J05",
+      "name_ja": "可視締結特徴 J05",
+      "group": "FG_FASTENER",
+      "group_name_ja": "可視締結特徴",
+      "candidate_cells": [
+        "A",
+        "B",
+        "C"
+      ],
+      "basis_ja": "写真で登録済みのねじ頭等。工程は未割当",
+      "unresolved_ja": "全ねじ数・固定用と電気接続用の区別・全積層・締付条件。",
+      "physical_operation_selected": null,
+      "collection": "visible_fastener_features",
+      "review_task_ids": [
+        "D60"
+      ],
+      "selected_task_id": null,
+      "feature_parent": "P09",
+      "observed_trace_ends": [],
+      "physical_endpoints": null,
+      "electrical_group": null,
+      "joint_stack": null,
+      "fastener_specification": null,
+      "model_id": "REF_J05"
+    },
+    {
+      "id": "J06",
+      "name_ja": "可視締結特徴 J06",
+      "group": "FG_FASTENER",
+      "group_name_ja": "可視締結特徴",
+      "candidate_cells": [
+        "A",
+        "B",
+        "C"
+      ],
+      "basis_ja": "写真で登録済みのねじ頭等。工程は未割当",
+      "unresolved_ja": "全ねじ数・固定用と電気接続用の区別・全積層・締付条件。",
+      "physical_operation_selected": null,
+      "collection": "visible_fastener_features",
+      "review_task_ids": [
+        "D60"
+      ],
+      "selected_task_id": null,
+      "feature_parent": "P10",
+      "observed_trace_ends": [],
+      "physical_endpoints": null,
+      "electrical_group": null,
+      "joint_stack": null,
+      "fastener_specification": null,
+      "model_id": "REF_J06"
+    },
+    {
+      "id": "J07",
+      "name_ja": "可視締結特徴 J07",
+      "group": "FG_FASTENER",
+      "group_name_ja": "可視締結特徴",
+      "candidate_cells": [
+        "A",
+        "B",
+        "C"
+      ],
+      "basis_ja": "写真で登録済みのねじ頭等。工程は未割当",
+      "unresolved_ja": "全ねじ数・固定用と電気接続用の区別・全積層・締付条件。",
+      "physical_operation_selected": null,
+      "collection": "visible_fastener_features",
+      "review_task_ids": [
+        "D60"
+      ],
+      "selected_task_id": null,
+      "feature_parent": "P11",
+      "observed_trace_ends": [],
+      "physical_endpoints": null,
+      "electrical_group": null,
+      "joint_stack": null,
+      "fastener_specification": null,
+      "model_id": "REF_J07"
+    },
+    {
+      "id": "J08",
+      "name_ja": "可視締結特徴 J08",
+      "group": "FG_FASTENER",
+      "group_name_ja": "可視締結特徴",
+      "candidate_cells": [
+        "A",
+        "B",
+        "C"
+      ],
+      "basis_ja": "写真で登録済みのねじ頭等。工程は未割当",
+      "unresolved_ja": "全ねじ数・固定用と電気接続用の区別・全積層・締付条件。",
+      "physical_operation_selected": null,
+      "collection": "visible_fastener_features",
+      "review_task_ids": [
+        "D60"
+      ],
+      "selected_task_id": null,
+      "feature_parent": "P12",
+      "observed_trace_ends": [],
+      "physical_endpoints": null,
+      "electrical_group": null,
+      "joint_stack": null,
+      "fastener_specification": null,
+      "model_id": "REF_J08"
+    },
+    {
+      "id": "J09",
+      "name_ja": "可視締結特徴 J09",
+      "group": "FG_FASTENER",
+      "group_name_ja": "可視締結特徴",
+      "candidate_cells": [
+        "A",
+        "B",
+        "C"
+      ],
+      "basis_ja": "写真で登録済みのねじ頭等。工程は未割当",
+      "unresolved_ja": "全ねじ数・固定用と電気接続用の区別・全積層・締付条件。",
+      "physical_operation_selected": null,
+      "collection": "visible_fastener_features",
+      "review_task_ids": [
+        "D60"
+      ],
+      "selected_task_id": null,
+      "feature_parent": "P13",
+      "observed_trace_ends": [],
+      "physical_endpoints": null,
+      "electrical_group": null,
+      "joint_stack": null,
+      "fastener_specification": null,
+      "model_id": "REF_J09"
+    },
+    {
+      "id": "J10",
+      "name_ja": "可視締結特徴 J10",
+      "group": "FG_FASTENER",
+      "group_name_ja": "可視締結特徴",
+      "candidate_cells": [
+        "A",
+        "B",
+        "C"
+      ],
+      "basis_ja": "写真で登録済みのねじ頭等。工程は未割当",
+      "unresolved_ja": "全ねじ数・固定用と電気接続用の区別・全積層・締付条件。",
+      "physical_operation_selected": null,
+      "collection": "visible_fastener_features",
+      "review_task_ids": [
+        "D60"
+      ],
+      "selected_task_id": null,
+      "feature_parent": "P13",
+      "observed_trace_ends": [],
+      "physical_endpoints": null,
+      "electrical_group": null,
+      "joint_stack": null,
+      "fastener_specification": null,
+      "model_id": "REF_J10"
+    },
+    {
+      "id": "J11",
+      "name_ja": "可視締結特徴 J11",
+      "group": "FG_FASTENER",
+      "group_name_ja": "可視締結特徴",
+      "candidate_cells": [
+        "A",
+        "B",
+        "C"
+      ],
+      "basis_ja": "写真で登録済みのねじ頭等。工程は未割当",
+      "unresolved_ja": "全ねじ数・固定用と電気接続用の区別・全積層・締付条件。",
+      "physical_operation_selected": null,
+      "collection": "visible_fastener_features",
+      "review_task_ids": [
+        "D60"
+      ],
+      "selected_task_id": null,
+      "feature_parent": "P13",
+      "observed_trace_ends": [],
+      "physical_endpoints": null,
+      "electrical_group": null,
+      "joint_stack": null,
+      "fastener_specification": null,
+      "model_id": "REF_J11"
+    },
+    {
+      "id": "J12",
+      "name_ja": "可視締結特徴 J12",
+      "group": "FG_FASTENER",
+      "group_name_ja": "可視締結特徴",
+      "candidate_cells": [
+        "A",
+        "B",
+        "C"
+      ],
+      "basis_ja": "写真で登録済みのねじ頭等。工程は未割当",
+      "unresolved_ja": "全ねじ数・固定用と電気接続用の区別・全積層・締付条件。",
+      "physical_operation_selected": null,
+      "collection": "visible_fastener_features",
+      "review_task_ids": [
+        "D60"
+      ],
+      "selected_task_id": null,
+      "feature_parent": "P13",
+      "observed_trace_ends": [],
+      "physical_endpoints": null,
+      "electrical_group": null,
+      "joint_stack": null,
+      "fastener_specification": null,
+      "model_id": "REF_J12"
+    },
+    {
+      "id": "J13",
+      "name_ja": "可視締結特徴 J13",
+      "group": "FG_FASTENER",
+      "group_name_ja": "可視締結特徴",
+      "candidate_cells": [
+        "A",
+        "B",
+        "C"
+      ],
+      "basis_ja": "写真で登録済みのねじ頭等。工程は未割当",
+      "unresolved_ja": "全ねじ数・固定用と電気接続用の区別・全積層・締付条件。",
+      "physical_operation_selected": null,
+      "collection": "visible_fastener_features",
+      "review_task_ids": [
+        "D60"
+      ],
+      "selected_task_id": null,
+      "feature_parent": "P13",
+      "observed_trace_ends": [],
+      "physical_endpoints": null,
+      "electrical_group": null,
+      "joint_stack": null,
+      "fastener_specification": null,
+      "model_id": "REF_J13"
+    },
+    {
+      "id": "J14",
+      "name_ja": "可視締結特徴 J14",
+      "group": "FG_FASTENER",
+      "group_name_ja": "可視締結特徴",
+      "candidate_cells": [
+        "A",
+        "B",
+        "C"
+      ],
+      "basis_ja": "写真で登録済みのねじ頭等。工程は未割当",
+      "unresolved_ja": "全ねじ数・固定用と電気接続用の区別・全積層・締付条件。",
+      "physical_operation_selected": null,
+      "collection": "visible_fastener_features",
+      "review_task_ids": [
+        "D20",
+        "D21",
+        "D60"
+      ],
+      "selected_task_id": null,
+      "feature_parent": "P05",
+      "observed_trace_ends": [],
+      "physical_endpoints": null,
+      "electrical_group": null,
+      "joint_stack": null,
+      "fastener_specification": null,
+      "model_id": "REF_J14"
+    },
+    {
+      "id": "J15",
+      "name_ja": "可視締結特徴 J15",
+      "group": "FG_FASTENER",
+      "group_name_ja": "可視締結特徴",
+      "candidate_cells": [
+        "A",
+        "B",
+        "C"
+      ],
+      "basis_ja": "写真で登録済みのねじ頭等。工程は未割当",
+      "unresolved_ja": "全ねじ数・固定用と電気接続用の区別・全積層・締付条件。",
+      "physical_operation_selected": null,
+      "collection": "visible_fastener_features",
+      "review_task_ids": [
+        "D20",
+        "D21",
+        "D60"
+      ],
+      "selected_task_id": null,
+      "feature_parent": "P05",
+      "observed_trace_ends": [],
+      "physical_endpoints": null,
+      "electrical_group": null,
+      "joint_stack": null,
+      "fastener_specification": null,
+      "model_id": "REF_J15"
+    },
+    {
+      "id": "J16",
+      "name_ja": "可視締結特徴 J16",
+      "group": "FG_FASTENER",
+      "group_name_ja": "可視締結特徴",
+      "candidate_cells": [
+        "A",
+        "B",
+        "C"
+      ],
+      "basis_ja": "写真で登録済みのねじ頭等。工程は未割当",
+      "unresolved_ja": "全ねじ数・固定用と電気接続用の区別・全積層・締付条件。",
+      "physical_operation_selected": null,
+      "collection": "visible_fastener_features",
+      "review_task_ids": [
+        "D20",
+        "D21",
+        "D60"
+      ],
+      "selected_task_id": null,
+      "feature_parent": "P06",
+      "observed_trace_ends": [],
+      "physical_endpoints": null,
+      "electrical_group": null,
+      "joint_stack": null,
+      "fastener_specification": null,
+      "model_id": "REF_J16"
+    },
+    {
+      "id": "J17",
+      "name_ja": "可視締結特徴 J17",
+      "group": "FG_FASTENER",
+      "group_name_ja": "可視締結特徴",
+      "candidate_cells": [
+        "A",
+        "B",
+        "C"
+      ],
+      "basis_ja": "写真で登録済みのねじ頭等。工程は未割当",
+      "unresolved_ja": "全ねじ数・固定用と電気接続用の区別・全積層・締付条件。",
+      "physical_operation_selected": null,
+      "collection": "visible_fastener_features",
+      "review_task_ids": [
+        "D20",
+        "D21",
+        "D60"
+      ],
+      "selected_task_id": null,
+      "feature_parent": "P06",
+      "observed_trace_ends": [],
+      "physical_endpoints": null,
+      "electrical_group": null,
+      "joint_stack": null,
+      "fastener_specification": null,
+      "model_id": "REF_J17"
+    },
+    {
+      "id": "J18",
+      "name_ja": "可視締結特徴 J18",
+      "group": "FG_FASTENER",
+      "group_name_ja": "可視締結特徴",
+      "candidate_cells": [
+        "A",
+        "B",
+        "C"
+      ],
+      "basis_ja": "写真で登録済みのねじ頭等。工程は未割当",
+      "unresolved_ja": "全ねじ数・固定用と電気接続用の区別・全積層・締付条件。",
+      "physical_operation_selected": null,
+      "collection": "visible_fastener_features",
+      "review_task_ids": [
+        "D20",
+        "D21",
+        "D60"
+      ],
+      "selected_task_id": null,
+      "feature_parent": "P19",
+      "observed_trace_ends": [],
+      "physical_endpoints": null,
+      "electrical_group": null,
+      "joint_stack": null,
+      "fastener_specification": null,
+      "model_id": "REF_J18"
+    },
+    {
+      "id": "J19",
+      "name_ja": "可視締結特徴 J19",
+      "group": "FG_FASTENER",
+      "group_name_ja": "可視締結特徴",
+      "candidate_cells": [
+        "A",
+        "B",
+        "C"
+      ],
+      "basis_ja": "写真で登録済みのねじ頭等。工程は未割当",
+      "unresolved_ja": "全ねじ数・固定用と電気接続用の区別・全積層・締付条件。",
+      "physical_operation_selected": null,
+      "collection": "visible_fastener_features",
+      "review_task_ids": [
+        "D20",
+        "D21",
+        "D60"
+      ],
+      "selected_task_id": null,
+      "feature_parent": "P19",
+      "observed_trace_ends": [],
+      "physical_endpoints": null,
+      "electrical_group": null,
+      "joint_stack": null,
+      "fastener_specification": null,
+      "model_id": "REF_J19"
+    },
+    {
+      "id": "J20",
+      "name_ja": "可視締結特徴 J20",
+      "group": "FG_FASTENER",
+      "group_name_ja": "可視締結特徴",
+      "candidate_cells": [
+        "A",
+        "B",
+        "C"
+      ],
+      "basis_ja": "写真で登録済みのねじ頭等。工程は未割当",
+      "unresolved_ja": "全ねじ数・固定用と電気接続用の区別・全積層・締付条件。",
+      "physical_operation_selected": null,
+      "collection": "visible_fastener_features",
+      "review_task_ids": [
+        "D20",
+        "D21",
+        "D60"
+      ],
+      "selected_task_id": null,
+      "feature_parent": "P20",
+      "observed_trace_ends": [],
+      "physical_endpoints": null,
+      "electrical_group": null,
+      "joint_stack": null,
+      "fastener_specification": null,
+      "model_id": "REF_J20"
+    },
+    {
+      "id": "J21",
+      "name_ja": "可視締結特徴 J21",
+      "group": "FG_FASTENER",
+      "group_name_ja": "可視締結特徴",
+      "candidate_cells": [
+        "A",
+        "B",
+        "C"
+      ],
+      "basis_ja": "写真で登録済みのねじ頭等。工程は未割当",
+      "unresolved_ja": "全ねじ数・固定用と電気接続用の区別・全積層・締付条件。",
+      "physical_operation_selected": null,
+      "collection": "visible_fastener_features",
+      "review_task_ids": [
+        "D20",
+        "D21",
+        "D60"
+      ],
+      "selected_task_id": null,
+      "feature_parent": "P20",
+      "observed_trace_ends": [],
+      "physical_endpoints": null,
+      "electrical_group": null,
+      "joint_stack": null,
+      "fastener_specification": null,
+      "model_id": "REF_J21"
+    },
+    {
+      "id": "J22",
+      "name_ja": "可視締結特徴 J22",
+      "group": "FG_FASTENER",
+      "group_name_ja": "可視締結特徴",
+      "candidate_cells": [
+        "A",
+        "B",
+        "C"
+      ],
+      "basis_ja": "写真で登録済みのねじ頭等。工程は未割当",
+      "unresolved_ja": "全ねじ数・固定用と電気接続用の区別・全積層・締付条件。",
+      "physical_operation_selected": null,
+      "collection": "visible_fastener_features",
+      "review_task_ids": [
+        "D20",
+        "D21",
+        "D60"
+      ],
+      "selected_task_id": null,
+      "feature_parent": "P21",
+      "observed_trace_ends": [],
+      "physical_endpoints": null,
+      "electrical_group": null,
+      "joint_stack": null,
+      "fastener_specification": null,
+      "model_id": "REF_J22"
+    },
+    {
+      "id": "J23",
+      "name_ja": "可視締結特徴 J23",
+      "group": "FG_FASTENER",
+      "group_name_ja": "可視締結特徴",
+      "candidate_cells": [
+        "A",
+        "B",
+        "C"
+      ],
+      "basis_ja": "写真で登録済みのねじ頭等。工程は未割当",
+      "unresolved_ja": "全ねじ数・固定用と電気接続用の区別・全積層・締付条件。",
+      "physical_operation_selected": null,
+      "collection": "visible_fastener_features",
+      "review_task_ids": [
+        "D20",
+        "D21",
+        "D60"
+      ],
+      "selected_task_id": null,
+      "feature_parent": "P21",
+      "observed_trace_ends": [],
+      "physical_endpoints": null,
+      "electrical_group": null,
+      "joint_stack": null,
+      "fastener_specification": null,
+      "model_id": "REF_J23"
+    },
+    {
+      "id": "W01",
+      "name_ja": "上側左・太い橙線",
+      "group": "FG_WIRE",
+      "group_name_ja": "可視配線区間",
+      "candidate_cells": [
+        "PREP",
+        "A",
+        "B",
+        "C"
+      ],
+      "basis_ja": "可視区間と入口の照合のみ。セル候補を絞る前の追跡対象",
+      "unresolved_ja": "27区間を27本の線や独立した搬送物としない。実線の両端と所属ユニットは未確定。",
+      "physical_operation_selected": null,
+      "collection": "visible_wire_segments",
+      "review_task_ids": [
+        "D01",
+        "D11",
+        "D12",
+        "D21",
+        "D22",
+        "D31",
+        "D40",
+        "D42",
+        "D45",
+        "D60",
+        "D61"
+      ],
+      "selected_task_id": null,
+      "feature_parent": null,
+      "observed_trace_ends": [
+        {
+          "feature_id": null,
+          "evidence": "trace_stops; no visible terminal assigned",
+          "label_ja": "追跡終了・先は未確認",
+          "point_px": [
+            344,
+            344
+          ],
+          "metal_terminal_id": null,
+          "cavity_number": null,
+          "electrical_node": null
+        },
+        {
+          "feature_id": "L06",
+          "evidence": "visible_exterior_entry; hidden metal contact unresolved",
+          "label_ja": "見える入口・端末外装: L06",
+          "point_px": [
+            524,
+            282
+          ],
+          "metal_terminal_id": null,
+          "cavity_number": null,
+          "electrical_node": null,
+          "bind_display_geometry": true
+        }
+      ],
+      "physical_endpoints": [
+        null,
+        null
+      ],
+      "electrical_group": null,
+      "joint_stack": null,
+      "fastener_specification": null,
+      "model_id": "REF_W01"
+    },
+    {
+      "id": "W02",
+      "name_ja": "上側左・細い橙線",
+      "group": "FG_WIRE",
+      "group_name_ja": "可視配線区間",
+      "candidate_cells": [
+        "PREP",
+        "A",
+        "B",
+        "C"
+      ],
+      "basis_ja": "可視区間と入口の照合のみ。セル候補を絞る前の追跡対象",
+      "unresolved_ja": "27区間を27本の線や独立した搬送物としない。実線の両端と所属ユニットは未確定。",
+      "physical_operation_selected": null,
+      "collection": "visible_wire_segments",
+      "review_task_ids": [
+        "D01",
+        "D11",
+        "D12",
+        "D21",
+        "D22",
+        "D31",
+        "D40",
+        "D42",
+        "D45",
+        "D60",
+        "D61"
+      ],
+      "selected_task_id": null,
+      "feature_parent": null,
+      "observed_trace_ends": [
+        {
+          "feature_id": null,
+          "evidence": "trace_stops; no visible terminal assigned",
+          "label_ja": "追跡終了・先は未確認",
+          "point_px": [
+            337,
+            407
+          ],
+          "metal_terminal_id": null,
+          "cavity_number": null,
+          "electrical_node": null
+        },
+        {
+          "feature_id": null,
+          "evidence": "trace_stops; no visible terminal assigned",
+          "label_ja": "追跡終了・先は未確認",
+          "point_px": [
+            506,
+            288
+          ],
+          "metal_terminal_id": null,
+          "cavity_number": null,
+          "electrical_node": null
+        }
+      ],
+      "physical_endpoints": [
+        null,
+        null
+      ],
+      "electrical_group": null,
+      "joint_stack": null,
+      "fastener_specification": null,
+      "model_id": "REF_W02"
+    },
+    {
+      "id": "W03",
+      "name_ja": "上側右の橙線",
+      "group": "FG_WIRE",
+      "group_name_ja": "可視配線区間",
+      "candidate_cells": [
+        "PREP",
+        "A",
+        "B",
+        "C"
+      ],
+      "basis_ja": "可視区間と入口の照合のみ。セル候補を絞る前の追跡対象",
+      "unresolved_ja": "27区間を27本の線や独立した搬送物としない。実線の両端と所属ユニットは未確定。",
+      "physical_operation_selected": null,
+      "collection": "visible_wire_segments",
+      "review_task_ids": [
+        "D01",
+        "D11",
+        "D12",
+        "D21",
+        "D22",
+        "D31",
+        "D40",
+        "D42",
+        "D45",
+        "D60",
+        "D61"
+      ],
+      "selected_task_id": null,
+      "feature_parent": null,
+      "observed_trace_ends": [
+        {
+          "feature_id": "L07",
+          "evidence": "visible_exterior_entry; hidden metal contact unresolved",
+          "label_ja": "見える入口・端末外装: L07",
+          "point_px": [
+            1155,
+            252
+          ],
+          "metal_terminal_id": null,
+          "cavity_number": null,
+          "electrical_node": null,
+          "bind_display_geometry": true
+        },
+        {
+          "feature_id": null,
+          "evidence": "trace_stops; no visible terminal assigned",
+          "label_ja": "追跡終了・先は未確認",
+          "point_px": [
+            1238,
+            375
+          ],
+          "metal_terminal_id": null,
+          "cavity_number": null,
+          "electrical_node": null
+        }
+      ],
+      "physical_endpoints": [
+        null,
+        null
+      ],
+      "electrical_group": null,
+      "joint_stack": null,
+      "fastener_specification": null,
+      "model_id": "REF_W03"
+    },
+    {
+      "id": "W04",
+      "name_ja": "前方J13側・長い橙線の可視区間",
+      "group": "FG_WIRE",
+      "group_name_ja": "可視配線区間",
+      "candidate_cells": [
+        "PREP",
+        "A",
+        "B",
+        "C"
+      ],
+      "basis_ja": "可視区間と入口の照合のみ。セル候補を絞る前の追跡対象",
+      "unresolved_ja": "27区間を27本の線や独立した搬送物としない。実線の両端と所属ユニットは未確定。",
+      "physical_operation_selected": null,
+      "collection": "visible_wire_segments",
+      "review_task_ids": [
+        "D01",
+        "D11",
+        "D12",
+        "D21",
+        "D22",
+        "D31",
+        "D40",
+        "D42",
+        "D45",
+        "D60",
+        "D61"
+      ],
+      "selected_task_id": null,
+      "feature_parent": null,
+      "observed_trace_ends": [
+        {
+          "feature_id": "L05",
+          "evidence": "visible_exterior_entry; hidden metal contact unresolved",
+          "label_ja": "見える入口・端末外装: L05",
+          "point_px": [
+            702,
+            777
+          ],
+          "metal_terminal_id": null,
+          "cavity_number": null,
+          "electrical_node": null,
+          "bind_display_geometry": true
+        },
+        {
+          "feature_id": null,
+          "evidence": "trace_stops; no visible terminal assigned",
+          "label_ja": "追跡終了・先は未確認",
+          "point_px": [
+            1096,
+            738
+          ],
+          "metal_terminal_id": null,
+          "cavity_number": null,
+          "electrical_node": null
+        }
+      ],
+      "physical_endpoints": [
+        null,
+        null
+      ],
+      "electrical_group": null,
+      "joint_stack": null,
+      "fastener_specification": null,
+      "model_id": "REF_W04"
+    },
+    {
+      "id": "W05",
+      "name_ja": "前方J12側・長い橙線の可視区間",
+      "group": "FG_WIRE",
+      "group_name_ja": "可視配線区間",
+      "candidate_cells": [
+        "PREP",
+        "A",
+        "B",
+        "C"
+      ],
+      "basis_ja": "可視区間と入口の照合のみ。セル候補を絞る前の追跡対象",
+      "unresolved_ja": "27区間を27本の線や独立した搬送物としない。実線の両端と所属ユニットは未確定。",
+      "physical_operation_selected": null,
+      "collection": "visible_wire_segments",
+      "review_task_ids": [
+        "D01",
+        "D11",
+        "D12",
+        "D21",
+        "D22",
+        "D31",
+        "D40",
+        "D42",
+        "D45",
+        "D60",
+        "D61"
+      ],
+      "selected_task_id": null,
+      "feature_parent": null,
+      "observed_trace_ends": [
+        {
+          "feature_id": "L04",
+          "evidence": "visible_exterior_entry; hidden metal contact unresolved",
+          "label_ja": "見える入口・端末外装: L04",
+          "point_px": [
+            643,
+            780
+          ],
+          "metal_terminal_id": null,
+          "cavity_number": null,
+          "electrical_node": null,
+          "bind_display_geometry": true
+        },
+        {
+          "feature_id": null,
+          "evidence": "trace_stops; no visible terminal assigned",
+          "label_ja": "追跡終了・先は未確認",
+          "point_px": [
+            941,
+            778
+          ],
+          "metal_terminal_id": null,
+          "cavity_number": null,
+          "electrical_node": null
+        }
+      ],
+      "physical_endpoints": [
+        null,
+        null
+      ],
+      "electrical_group": null,
+      "joint_stack": null,
+      "fastener_specification": null,
+      "model_id": "REF_W05"
+    },
+    {
+      "id": "W06",
+      "name_ja": "左下の折返し橙線",
+      "group": "FG_WIRE",
+      "group_name_ja": "可視配線区間",
+      "candidate_cells": [
+        "PREP",
+        "A",
+        "B",
+        "C"
+      ],
+      "basis_ja": "可視区間と入口の照合のみ。セル候補を絞る前の追跡対象",
+      "unresolved_ja": "27区間を27本の線や独立した搬送物としない。実線の両端と所属ユニットは未確定。",
+      "physical_operation_selected": null,
+      "collection": "visible_wire_segments",
+      "review_task_ids": [
+        "D01",
+        "D11",
+        "D12",
+        "D21",
+        "D22",
+        "D31",
+        "D40",
+        "D42",
+        "D45",
+        "D60",
+        "D61"
+      ],
+      "selected_task_id": null,
+      "feature_parent": null,
+      "observed_trace_ends": [
+        {
+          "feature_id": null,
+          "evidence": "trace_stops; no visible terminal assigned",
+          "label_ja": "追跡終了・先は未確認",
+          "point_px": [
+            366,
+            690
+          ],
+          "metal_terminal_id": null,
+          "cavity_number": null,
+          "electrical_node": null
+        },
+        {
+          "feature_id": null,
+          "evidence": "trace_stops; no visible terminal assigned",
+          "label_ja": "追跡終了・先は未確認",
+          "point_px": [
+            374,
+            744
+          ],
+          "metal_terminal_id": null,
+          "cavity_number": null,
+          "electrical_node": null
+        }
+      ],
+      "physical_endpoints": [
+        null,
+        null
+      ],
+      "electrical_group": null,
+      "joint_stack": null,
+      "fastener_specification": null,
+      "model_id": "REF_W06"
+    },
+    {
+      "id": "W07",
+      "name_ja": "左下の内側橙線",
+      "group": "FG_WIRE",
+      "group_name_ja": "可視配線区間",
+      "candidate_cells": [
+        "PREP",
+        "A",
+        "B",
+        "C"
+      ],
+      "basis_ja": "可視区間と入口の照合のみ。セル候補を絞る前の追跡対象",
+      "unresolved_ja": "27区間を27本の線や独立した搬送物としない。実線の両端と所属ユニットは未確定。",
+      "physical_operation_selected": null,
+      "collection": "visible_wire_segments",
+      "review_task_ids": [
+        "D01",
+        "D11",
+        "D12",
+        "D21",
+        "D22",
+        "D31",
+        "D40",
+        "D42",
+        "D45",
+        "D60",
+        "D61"
+      ],
+      "selected_task_id": null,
+      "feature_parent": null,
+      "observed_trace_ends": [
+        {
+          "feature_id": null,
+          "evidence": "trace_stops; no visible terminal assigned",
+          "label_ja": "追跡終了・先は未確認",
+          "point_px": [
+            354,
+            659
+          ],
+          "metal_terminal_id": null,
+          "cavity_number": null,
+          "electrical_node": null
+        },
+        {
+          "feature_id": null,
+          "evidence": "trace_stops; no visible terminal assigned",
+          "label_ja": "追跡終了・先は未確認",
+          "point_px": [
+            397,
+            739
+          ],
+          "metal_terminal_id": null,
+          "cavity_number": null,
+          "electrical_node": null
+        }
+      ],
+      "physical_endpoints": [
+        null,
+        null
+      ],
+      "electrical_group": null,
+      "joint_stack": null,
+      "fastener_specification": null,
+      "model_id": "REF_W07"
+    },
+    {
+      "id": "W08",
+      "name_ja": "下側リレー左の橙線",
+      "group": "FG_WIRE",
+      "group_name_ja": "可視配線区間",
+      "candidate_cells": [
+        "PREP",
+        "A",
+        "B",
+        "C"
+      ],
+      "basis_ja": "可視区間と入口の照合のみ。セル候補を絞る前の追跡対象",
+      "unresolved_ja": "27区間を27本の線や独立した搬送物としない。実線の両端と所属ユニットは未確定。",
+      "physical_operation_selected": null,
+      "collection": "visible_wire_segments",
+      "review_task_ids": [
+        "D01",
+        "D11",
+        "D12",
+        "D21",
+        "D22",
+        "D31",
+        "D40",
+        "D42",
+        "D45",
+        "D60",
+        "D61"
+      ],
+      "selected_task_id": null,
+      "feature_parent": null,
+      "observed_trace_ends": [
+        {
+          "feature_id": "T41",
+          "evidence": "visible_exterior_entry; hidden metal contact unresolved",
+          "label_ja": "見える入口・端末外装: T41",
+          "point_px": [
+            455,
+            580
+          ],
+          "metal_terminal_id": null,
+          "cavity_number": null,
+          "electrical_node": null,
+          "bind_display_geometry": true
+        },
+        {
+          "feature_id": null,
+          "evidence": "trace_stops; no visible terminal assigned",
+          "label_ja": "追跡終了・先は未確認",
+          "point_px": [
+            491,
+            496
+          ],
+          "metal_terminal_id": null,
+          "cavity_number": null,
+          "electrical_node": null
+        }
+      ],
+      "physical_endpoints": [
+        null,
+        null
+      ],
+      "electrical_group": null,
+      "joint_stack": null,
+      "fastener_specification": null,
+      "model_id": "REF_W08"
+    },
+    {
+      "id": "W09",
+      "name_ja": "下側リレー横断の橙線",
+      "group": "FG_WIRE",
+      "group_name_ja": "可視配線区間",
+      "candidate_cells": [
+        "PREP",
+        "A",
+        "B",
+        "C"
+      ],
+      "basis_ja": "可視区間と入口の照合のみ。セル候補を絞る前の追跡対象",
+      "unresolved_ja": "27区間を27本の線や独立した搬送物としない。実線の両端と所属ユニットは未確定。",
+      "physical_operation_selected": null,
+      "collection": "visible_wire_segments",
+      "review_task_ids": [
+        "D01",
+        "D11",
+        "D12",
+        "D21",
+        "D22",
+        "D31",
+        "D40",
+        "D42",
+        "D45",
+        "D60",
+        "D61"
+      ],
+      "selected_task_id": null,
+      "feature_parent": null,
+      "observed_trace_ends": [
+        {
+          "feature_id": null,
+          "evidence": "trace_stops; no visible terminal assigned",
+          "label_ja": "追跡終了・先は未確認",
+          "point_px": [
+            489,
+            496
+          ],
+          "metal_terminal_id": null,
+          "cavity_number": null,
+          "electrical_node": null
+        },
+        {
+          "feature_id": "T42",
+          "evidence": "visible_exterior_entry; hidden metal contact unresolved",
+          "label_ja": "見える入口・端末外装: T42",
+          "point_px": [
+            536,
+            580
+          ],
+          "metal_terminal_id": null,
+          "cavity_number": null,
+          "electrical_node": null,
+          "bind_display_geometry": true
+        }
+      ],
+      "physical_endpoints": [
+        null,
+        null
+      ],
+      "electrical_group": null,
+      "joint_stack": null,
+      "fastener_specification": null,
+      "model_id": "REF_W09"
+    },
+    {
+      "id": "W10",
+      "name_ja": "下側リレー右側から延びる橙線",
+      "group": "FG_WIRE",
+      "group_name_ja": "可視配線区間",
+      "candidate_cells": [
+        "PREP",
+        "A",
+        "B",
+        "C"
+      ],
+      "basis_ja": "可視区間と入口の照合のみ。セル候補を絞る前の追跡対象",
+      "unresolved_ja": "27区間を27本の線や独立した搬送物としない。実線の両端と所属ユニットは未確定。",
+      "physical_operation_selected": null,
+      "collection": "visible_wire_segments",
+      "review_task_ids": [
+        "D01",
+        "D11",
+        "D12",
+        "D21",
+        "D22",
+        "D31",
+        "D40",
+        "D42",
+        "D45",
+        "D60",
+        "D61"
+      ],
+      "selected_task_id": null,
+      "feature_parent": null,
+      "observed_trace_ends": [
+        {
+          "feature_id": "T44",
+          "evidence": "visible_exterior_entry; hidden metal contact unresolved",
+          "label_ja": "見える入口・端末外装: T44",
+          "point_px": [
+            543,
+            621
+          ],
+          "metal_terminal_id": null,
+          "cavity_number": null,
+          "electrical_node": null,
+          "bind_display_geometry": true
+        },
+        {
+          "feature_id": null,
+          "evidence": "trace_stops; no visible terminal assigned",
+          "label_ja": "追跡終了・先は未確認",
+          "point_px": [
+            619,
+            590
+          ],
+          "metal_terminal_id": null,
+          "cavity_number": null,
+          "electrical_node": null
+        }
+      ],
+      "physical_endpoints": [
+        null,
+        null
+      ],
+      "electrical_group": null,
+      "joint_stack": null,
+      "fastener_specification": null,
+      "model_id": "REF_W10"
+    },
+    {
+      "id": "W11",
+      "name_ja": "中央束の桃色線",
+      "group": "FG_WIRE",
+      "group_name_ja": "可視配線区間",
+      "candidate_cells": [
+        "PREP",
+        "A",
+        "B",
+        "C"
+      ],
+      "basis_ja": "可視区間と入口の照合のみ。セル候補を絞る前の追跡対象",
+      "unresolved_ja": "27区間を27本の線や独立した搬送物としない。実線の両端と所属ユニットは未確定。",
+      "physical_operation_selected": null,
+      "collection": "visible_wire_segments",
+      "review_task_ids": [
+        "D01",
+        "D11",
+        "D12",
+        "D21",
+        "D22",
+        "D31",
+        "D40",
+        "D42",
+        "D45",
+        "D60",
+        "D61"
+      ],
+      "selected_task_id": null,
+      "feature_parent": null,
+      "observed_trace_ends": [
+        {
+          "feature_id": null,
+          "evidence": "trace_stops; no visible terminal assigned",
+          "label_ja": "追跡終了・先は未確認",
+          "point_px": [
+            564,
+            515
+          ],
+          "metal_terminal_id": null,
+          "cavity_number": null,
+          "electrical_node": null
+        },
+        {
+          "feature_id": null,
+          "evidence": "trace_stops; no visible terminal assigned",
+          "label_ja": "追跡終了・先は未確認",
+          "point_px": [
+            863,
+            529
+          ],
+          "metal_terminal_id": null,
+          "cavity_number": null,
+          "electrical_node": null
+        }
+      ],
+      "physical_endpoints": [
+        null,
+        null
+      ],
+      "electrical_group": null,
+      "joint_stack": null,
+      "fastener_specification": null,
+      "model_id": "REF_W11"
+    },
+    {
+      "id": "W12",
+      "name_ja": "中央束の青色線",
+      "group": "FG_WIRE",
+      "group_name_ja": "可視配線区間",
+      "candidate_cells": [
+        "PREP",
+        "A",
+        "B",
+        "C"
+      ],
+      "basis_ja": "可視区間と入口の照合のみ。セル候補を絞る前の追跡対象",
+      "unresolved_ja": "27区間を27本の線や独立した搬送物としない。実線の両端と所属ユニットは未確定。",
+      "physical_operation_selected": null,
+      "collection": "visible_wire_segments",
+      "review_task_ids": [
+        "D01",
+        "D11",
+        "D12",
+        "D21",
+        "D22",
+        "D31",
+        "D40",
+        "D42",
+        "D45",
+        "D60",
+        "D61"
+      ],
+      "selected_task_id": null,
+      "feature_parent": null,
+      "observed_trace_ends": [
+        {
+          "feature_id": null,
+          "evidence": "trace_stops; no visible terminal assigned",
+          "label_ja": "追跡終了・先は未確認",
+          "point_px": [
+            576,
+            520
+          ],
+          "metal_terminal_id": null,
+          "cavity_number": null,
+          "electrical_node": null
+        },
+        {
+          "feature_id": null,
+          "evidence": "trace_stops; no visible terminal assigned",
+          "label_ja": "追跡終了・先は未確認",
+          "point_px": [
+            869,
+            538
+          ],
+          "metal_terminal_id": null,
+          "cavity_number": null,
+          "electrical_node": null
+        }
+      ],
+      "physical_endpoints": [
+        null,
+        null
+      ],
+      "electrical_group": null,
+      "joint_stack": null,
+      "fastener_specification": null,
+      "model_id": "REF_W12"
+    },
+    {
+      "id": "W13",
+      "name_ja": "中央束の白色線",
+      "group": "FG_WIRE",
+      "group_name_ja": "可視配線区間",
+      "candidate_cells": [
+        "PREP",
+        "A",
+        "B",
+        "C"
+      ],
+      "basis_ja": "可視区間と入口の照合のみ。セル候補を絞る前の追跡対象",
+      "unresolved_ja": "27区間を27本の線や独立した搬送物としない。実線の両端と所属ユニットは未確定。",
+      "physical_operation_selected": null,
+      "collection": "visible_wire_segments",
+      "review_task_ids": [
+        "D01",
+        "D11",
+        "D12",
+        "D21",
+        "D22",
+        "D31",
+        "D40",
+        "D42",
+        "D45",
+        "D60",
+        "D61"
+      ],
+      "selected_task_id": null,
+      "feature_parent": null,
+      "observed_trace_ends": [
+        {
+          "feature_id": null,
+          "evidence": "trace_stops; no visible terminal assigned",
+          "label_ja": "追跡終了・先は未確認",
+          "point_px": [
+            676,
+            517
+          ],
+          "metal_terminal_id": null,
+          "cavity_number": null,
+          "electrical_node": null
+        },
+        {
+          "feature_id": null,
+          "evidence": "trace_stops; no visible terminal assigned",
+          "label_ja": "追跡終了・先は未確認",
+          "point_px": [
+            803,
+            538
+          ],
+          "metal_terminal_id": null,
+          "cavity_number": null,
+          "electrical_node": null
+        }
+      ],
+      "physical_endpoints": [
+        null,
+        null
+      ],
+      "electrical_group": null,
+      "joint_stack": null,
+      "fastener_specification": null,
+      "model_id": "REF_W13"
+    },
+    {
+      "id": "W14",
+      "name_ja": "中央束の黒色線",
+      "group": "FG_WIRE",
+      "group_name_ja": "可視配線区間",
+      "candidate_cells": [
+        "PREP",
+        "A",
+        "B",
+        "C"
+      ],
+      "basis_ja": "可視区間と入口の照合のみ。セル候補を絞る前の追跡対象",
+      "unresolved_ja": "27区間を27本の線や独立した搬送物としない。実線の両端と所属ユニットは未確定。",
+      "physical_operation_selected": null,
+      "collection": "visible_wire_segments",
+      "review_task_ids": [
+        "D01",
+        "D11",
+        "D12",
+        "D21",
+        "D22",
+        "D31",
+        "D40",
+        "D42",
+        "D45",
+        "D60",
+        "D61"
+      ],
+      "selected_task_id": null,
+      "feature_parent": null,
+      "observed_trace_ends": [
+        {
+          "feature_id": null,
+          "evidence": "trace_stops; no visible terminal assigned",
+          "label_ja": "追跡終了・先は未確認",
+          "point_px": [
+            332,
+            437
+          ],
+          "metal_terminal_id": null,
+          "cavity_number": null,
+          "electrical_node": null
+        },
+        {
+          "feature_id": null,
+          "evidence": "trace_stops; no visible terminal assigned",
+          "label_ja": "追跡終了・先は未確認",
+          "point_px": [
+            787,
+            526
+          ],
+          "metal_terminal_id": null,
+          "cavity_number": null,
+          "electrical_node": null
+        }
+      ],
+      "physical_endpoints": [
+        null,
+        null
+      ],
+      "electrical_group": null,
+      "joint_stack": null,
+      "fastener_specification": null,
+      "model_id": "REF_W14"
+    },
+    {
+      "id": "WI11",
+      "name_ja": "補機口1内側の線出口1",
+      "group": "FG_WIRE",
+      "group_name_ja": "可視配線区間",
+      "candidate_cells": [
+        "PREP",
+        "A",
+        "B",
+        "C"
+      ],
+      "basis_ja": "可視区間と入口の照合のみ。セル候補を絞る前の追跡対象",
+      "unresolved_ja": "27区間を27本の線や独立した搬送物としない。実線の両端と所属ユニットは未確定。",
+      "physical_operation_selected": null,
+      "collection": "visible_wire_segments",
+      "review_task_ids": [
+        "D01",
+        "D11",
+        "D12",
+        "D21",
+        "D22",
+        "D31",
+        "D40",
+        "D42",
+        "D45",
+        "D60",
+        "D61"
+      ],
+      "selected_task_id": null,
+      "feature_parent": null,
+      "observed_trace_ends": [
+        {
+          "feature_id": "I01",
+          "evidence": "visible_exterior_entry; hidden metal contact unresolved",
+          "label_ja": "見える入口・端末外装: I01",
+          "point_px": [
+            405,
+            799
+          ],
+          "metal_terminal_id": null,
+          "cavity_number": null,
+          "electrical_node": null,
+          "bind_display_geometry": false
+        },
+        {
+          "feature_id": null,
+          "evidence": "trace_stops; no visible terminal assigned",
+          "label_ja": "追跡終了・先は未確認",
+          "point_px": [
+            395,
+            766
+          ],
+          "metal_terminal_id": null,
+          "cavity_number": null,
+          "electrical_node": null
+        }
+      ],
+      "physical_endpoints": [
+        null,
+        null
+      ],
+      "electrical_group": null,
+      "joint_stack": null,
+      "fastener_specification": null,
+      "model_id": "REF_WI11"
+    },
+    {
+      "id": "WI12",
+      "name_ja": "補機口1内側の線出口2",
+      "group": "FG_WIRE",
+      "group_name_ja": "可視配線区間",
+      "candidate_cells": [
+        "PREP",
+        "A",
+        "B",
+        "C"
+      ],
+      "basis_ja": "可視区間と入口の照合のみ。セル候補を絞る前の追跡対象",
+      "unresolved_ja": "27区間を27本の線や独立した搬送物としない。実線の両端と所属ユニットは未確定。",
+      "physical_operation_selected": null,
+      "collection": "visible_wire_segments",
+      "review_task_ids": [
+        "D01",
+        "D11",
+        "D12",
+        "D21",
+        "D22",
+        "D31",
+        "D40",
+        "D42",
+        "D45",
+        "D60",
+        "D61"
+      ],
+      "selected_task_id": null,
+      "feature_parent": null,
+      "observed_trace_ends": [
+        {
+          "feature_id": "I01",
+          "evidence": "visible_exterior_entry; hidden metal contact unresolved",
+          "label_ja": "見える入口・端末外装: I01",
+          "point_px": [
+            439,
+            799
+          ],
+          "metal_terminal_id": null,
+          "cavity_number": null,
+          "electrical_node": null,
+          "bind_display_geometry": false
+        },
+        {
+          "feature_id": null,
+          "evidence": "trace_stops; no visible terminal assigned",
+          "label_ja": "追跡終了・先は未確認",
+          "point_px": [
+            424,
+            769
+          ],
+          "metal_terminal_id": null,
+          "cavity_number": null,
+          "electrical_node": null
+        }
+      ],
+      "physical_endpoints": [
+        null,
+        null
+      ],
+      "electrical_group": null,
+      "joint_stack": null,
+      "fastener_specification": null,
+      "model_id": "REF_WI12"
+    },
+    {
+      "id": "WI21",
+      "name_ja": "補機口2内側の線出口1",
+      "group": "FG_WIRE",
+      "group_name_ja": "可視配線区間",
+      "candidate_cells": [
+        "PREP",
+        "A",
+        "B",
+        "C"
+      ],
+      "basis_ja": "可視区間と入口の照合のみ。セル候補を絞る前の追跡対象",
+      "unresolved_ja": "27区間を27本の線や独立した搬送物としない。実線の両端と所属ユニットは未確定。",
+      "physical_operation_selected": null,
+      "collection": "visible_wire_segments",
+      "review_task_ids": [
+        "D01",
+        "D11",
+        "D12",
+        "D21",
+        "D22",
+        "D31",
+        "D40",
+        "D42",
+        "D45",
+        "D60",
+        "D61"
+      ],
+      "selected_task_id": null,
+      "feature_parent": null,
+      "observed_trace_ends": [
+        {
+          "feature_id": "I02",
+          "evidence": "visible_exterior_entry; hidden metal contact unresolved",
+          "label_ja": "見える入口・端末外装: I02",
+          "point_px": [
+            559,
+            799
+          ],
+          "metal_terminal_id": null,
+          "cavity_number": null,
+          "electrical_node": null,
+          "bind_display_geometry": false
+        },
+        {
+          "feature_id": null,
+          "evidence": "trace_stops; no visible terminal assigned",
+          "label_ja": "追跡終了・先は未確認",
+          "point_px": [
+            553,
+            779
+          ],
+          "metal_terminal_id": null,
+          "cavity_number": null,
+          "electrical_node": null
+        }
+      ],
+      "physical_endpoints": [
+        null,
+        null
+      ],
+      "electrical_group": null,
+      "joint_stack": null,
+      "fastener_specification": null,
+      "model_id": "REF_WI21"
+    },
+    {
+      "id": "WI22",
+      "name_ja": "補機口2内側の線出口2",
+      "group": "FG_WIRE",
+      "group_name_ja": "可視配線区間",
+      "candidate_cells": [
+        "PREP",
+        "A",
+        "B",
+        "C"
+      ],
+      "basis_ja": "可視区間と入口の照合のみ。セル候補を絞る前の追跡対象",
+      "unresolved_ja": "27区間を27本の線や独立した搬送物としない。実線の両端と所属ユニットは未確定。",
+      "physical_operation_selected": null,
+      "collection": "visible_wire_segments",
+      "review_task_ids": [
+        "D01",
+        "D11",
+        "D12",
+        "D21",
+        "D22",
+        "D31",
+        "D40",
+        "D42",
+        "D45",
+        "D60",
+        "D61"
+      ],
+      "selected_task_id": null,
+      "feature_parent": null,
+      "observed_trace_ends": [
+        {
+          "feature_id": "I02",
+          "evidence": "visible_exterior_entry; hidden metal contact unresolved",
+          "label_ja": "見える入口・端末外装: I02",
+          "point_px": [
+            603,
+            799
+          ],
+          "metal_terminal_id": null,
+          "cavity_number": null,
+          "electrical_node": null,
+          "bind_display_geometry": false
+        },
+        {
+          "feature_id": null,
+          "evidence": "trace_stops; no visible terminal assigned",
+          "label_ja": "追跡終了・先は未確認",
+          "point_px": [
+            590,
+            766
+          ],
+          "metal_terminal_id": null,
+          "cavity_number": null,
+          "electrical_node": null
+        }
+      ],
+      "physical_endpoints": [
+        null,
+        null
+      ],
+      "electrical_group": null,
+      "joint_stack": null,
+      "fastener_specification": null,
+      "model_id": "REF_WI22"
+    },
+    {
+      "id": "WI41",
+      "name_ja": "補機口4内側の線出口1",
+      "group": "FG_WIRE",
+      "group_name_ja": "可視配線区間",
+      "candidate_cells": [
+        "PREP",
+        "A",
+        "B",
+        "C"
+      ],
+      "basis_ja": "可視区間と入口の照合のみ。セル候補を絞る前の追跡対象",
+      "unresolved_ja": "27区間を27本の線や独立した搬送物としない。実線の両端と所属ユニットは未確定。",
+      "physical_operation_selected": null,
+      "collection": "visible_wire_segments",
+      "review_task_ids": [
+        "D01",
+        "D11",
+        "D12",
+        "D21",
+        "D22",
+        "D31",
+        "D40",
+        "D42",
+        "D45",
+        "D60",
+        "D61"
+      ],
+      "selected_task_id": null,
+      "feature_parent": null,
+      "observed_trace_ends": [
+        {
+          "feature_id": "I04",
+          "evidence": "visible_exterior_entry; hidden metal contact unresolved",
+          "label_ja": "見える入口・端末外装: I04",
+          "point_px": [
+            974,
+            800
+          ],
+          "metal_terminal_id": null,
+          "cavity_number": null,
+          "electrical_node": null,
+          "bind_display_geometry": false
+        },
+        {
+          "feature_id": null,
+          "evidence": "trace_stops; no visible terminal assigned",
+          "label_ja": "追跡終了・先は未確認",
+          "point_px": [
+            962,
+            786
+          ],
+          "metal_terminal_id": null,
+          "cavity_number": null,
+          "electrical_node": null
+        }
+      ],
+      "physical_endpoints": [
+        null,
+        null
+      ],
+      "electrical_group": null,
+      "joint_stack": null,
+      "fastener_specification": null,
+      "model_id": "REF_WI41"
+    },
+    {
+      "id": "WI42",
+      "name_ja": "補機口4内側の線出口2",
+      "group": "FG_WIRE",
+      "group_name_ja": "可視配線区間",
+      "candidate_cells": [
+        "PREP",
+        "A",
+        "B",
+        "C"
+      ],
+      "basis_ja": "可視区間と入口の照合のみ。セル候補を絞る前の追跡対象",
+      "unresolved_ja": "27区間を27本の線や独立した搬送物としない。実線の両端と所属ユニットは未確定。",
+      "physical_operation_selected": null,
+      "collection": "visible_wire_segments",
+      "review_task_ids": [
+        "D01",
+        "D11",
+        "D12",
+        "D21",
+        "D22",
+        "D31",
+        "D40",
+        "D42",
+        "D45",
+        "D60",
+        "D61"
+      ],
+      "selected_task_id": null,
+      "feature_parent": null,
+      "observed_trace_ends": [
+        {
+          "feature_id": "I04",
+          "evidence": "visible_exterior_entry; hidden metal contact unresolved",
+          "label_ja": "見える入口・端末外装: I04",
+          "point_px": [
+            1010,
+            800
+          ],
+          "metal_terminal_id": null,
+          "cavity_number": null,
+          "electrical_node": null,
+          "bind_display_geometry": false
+        },
+        {
+          "feature_id": null,
+          "evidence": "trace_stops; no visible terminal assigned",
+          "label_ja": "追跡終了・先は未確認",
+          "point_px": [
+            994,
+            770
+          ],
+          "metal_terminal_id": null,
+          "cavity_number": null,
+          "electrical_node": null
+        }
+      ],
+      "physical_endpoints": [
+        null,
+        null
+      ],
+      "electrical_group": null,
+      "joint_stack": null,
+      "fastener_specification": null,
+      "model_id": "REF_WI42"
+    },
+    {
+      "id": "WI51",
+      "name_ja": "補機口5内側の線出口1",
+      "group": "FG_WIRE",
+      "group_name_ja": "可視配線区間",
+      "candidate_cells": [
+        "PREP",
+        "A",
+        "B",
+        "C"
+      ],
+      "basis_ja": "可視区間と入口の照合のみ。セル候補を絞る前の追跡対象",
+      "unresolved_ja": "27区間を27本の線や独立した搬送物としない。実線の両端と所属ユニットは未確定。",
+      "physical_operation_selected": null,
+      "collection": "visible_wire_segments",
+      "review_task_ids": [
+        "D01",
+        "D11",
+        "D12",
+        "D21",
+        "D22",
+        "D31",
+        "D40",
+        "D42",
+        "D45",
+        "D60",
+        "D61"
+      ],
+      "selected_task_id": null,
+      "feature_parent": null,
+      "observed_trace_ends": [
+        {
+          "feature_id": "I05",
+          "evidence": "visible_exterior_entry; hidden metal contact unresolved",
+          "label_ja": "見える入口・端末外装: I05",
+          "point_px": [
+            1105,
+            801
+          ],
+          "metal_terminal_id": null,
+          "cavity_number": null,
+          "electrical_node": null,
+          "bind_display_geometry": false
+        },
+        {
+          "feature_id": null,
+          "evidence": "trace_stops; no visible terminal assigned",
+          "label_ja": "追跡終了・先は未確認",
+          "point_px": [
+            1108,
+            763
+          ],
+          "metal_terminal_id": null,
+          "cavity_number": null,
+          "electrical_node": null
+        }
+      ],
+      "physical_endpoints": [
+        null,
+        null
+      ],
+      "electrical_group": null,
+      "joint_stack": null,
+      "fastener_specification": null,
+      "model_id": "REF_WI51"
+    },
+    {
+      "id": "WI52",
+      "name_ja": "補機口5内側の線出口2",
+      "group": "FG_WIRE",
+      "group_name_ja": "可視配線区間",
+      "candidate_cells": [
+        "PREP",
+        "A",
+        "B",
+        "C"
+      ],
+      "basis_ja": "可視区間と入口の照合のみ。セル候補を絞る前の追跡対象",
+      "unresolved_ja": "27区間を27本の線や独立した搬送物としない。実線の両端と所属ユニットは未確定。",
+      "physical_operation_selected": null,
+      "collection": "visible_wire_segments",
+      "review_task_ids": [
+        "D01",
+        "D11",
+        "D12",
+        "D21",
+        "D22",
+        "D31",
+        "D40",
+        "D42",
+        "D45",
+        "D60",
+        "D61"
+      ],
+      "selected_task_id": null,
+      "feature_parent": null,
+      "observed_trace_ends": [
+        {
+          "feature_id": "I05",
+          "evidence": "visible_exterior_entry; hidden metal contact unresolved",
+          "label_ja": "見える入口・端末外装: I05",
+          "point_px": [
+            1150,
+            801
+          ],
+          "metal_terminal_id": null,
+          "cavity_number": null,
+          "electrical_node": null,
+          "bind_display_geometry": false
+        },
+        {
+          "feature_id": null,
+          "evidence": "trace_stops; no visible terminal assigned",
+          "label_ja": "追跡終了・先は未確認",
+          "point_px": [
+            1135,
+            762
+          ],
+          "metal_terminal_id": null,
+          "cavity_number": null,
+          "electrical_node": null
+        }
+      ],
+      "physical_endpoints": [
+        null,
+        null
+      ],
+      "electrical_group": null,
+      "joint_stack": null,
+      "fastener_specification": null,
+      "model_id": "REF_WI52"
+    },
+    {
+      "id": "W15",
+      "name_ja": "上側リレー・上の半透明端末から下る橙線",
+      "group": "FG_WIRE",
+      "group_name_ja": "可視配線区間",
+      "candidate_cells": [
+        "PREP",
+        "A",
+        "B",
+        "C"
+      ],
+      "basis_ja": "可視区間と入口の照合のみ。セル候補を絞る前の追跡対象",
+      "unresolved_ja": "27区間を27本の線や独立した搬送物としない。実線の両端と所属ユニットは未確定。",
+      "physical_operation_selected": null,
+      "collection": "visible_wire_segments",
+      "review_task_ids": [
+        "D01",
+        "D11",
+        "D12",
+        "D21",
+        "D22",
+        "D31",
+        "D40",
+        "D42",
+        "D45",
+        "D60",
+        "D61"
+      ],
+      "selected_task_id": null,
+      "feature_parent": null,
+      "observed_trace_ends": [
+        {
+          "feature_id": "T31",
+          "evidence": "visible_exterior_entry; hidden metal contact unresolved",
+          "label_ja": "見える入口・端末外装: T31",
+          "point_px": [
+            508,
+            306
+          ],
+          "metal_terminal_id": null,
+          "cavity_number": null,
+          "electrical_node": null,
+          "bind_display_geometry": true
+        },
+        {
+          "feature_id": null,
+          "evidence": "trace_stops; no visible terminal assigned",
+          "label_ja": "追跡終了・先は未確認",
+          "point_px": [
+            439,
+            410
+          ],
+          "metal_terminal_id": null,
+          "cavity_number": null,
+          "electrical_node": null
+        }
+      ],
+      "physical_endpoints": [
+        null,
+        null
+      ],
+      "electrical_group": null,
+      "joint_stack": null,
+      "fastener_specification": null,
+      "model_id": "REF_W15"
+    },
+    {
+      "id": "W16",
+      "name_ja": "上側リレー・下の半透明端末から曲がる橙線",
+      "group": "FG_WIRE",
+      "group_name_ja": "可視配線区間",
+      "candidate_cells": [
+        "PREP",
+        "A",
+        "B",
+        "C"
+      ],
+      "basis_ja": "可視区間と入口の照合のみ。セル候補を絞る前の追跡対象",
+      "unresolved_ja": "27区間を27本の線や独立した搬送物としない。実線の両端と所属ユニットは未確定。",
+      "physical_operation_selected": null,
+      "collection": "visible_wire_segments",
+      "review_task_ids": [
+        "D01",
+        "D11",
+        "D12",
+        "D21",
+        "D22",
+        "D31",
+        "D40",
+        "D42",
+        "D45",
+        "D60",
+        "D61"
+      ],
+      "selected_task_id": null,
+      "feature_parent": null,
+      "observed_trace_ends": [
+        {
+          "feature_id": "T32",
+          "evidence": "visible_exterior_entry; hidden metal contact unresolved",
+          "label_ja": "見える入口・端末外装: T32",
+          "point_px": [
+            516,
+            392
+          ],
+          "metal_terminal_id": null,
+          "cavity_number": null,
+          "electrical_node": null,
+          "bind_display_geometry": true
+        },
+        {
+          "feature_id": null,
+          "evidence": "trace_stops; no visible terminal assigned",
+          "label_ja": "追跡終了・先は未確認",
+          "point_px": [
+            436,
+            416
+          ],
+          "metal_terminal_id": null,
+          "cavity_number": null,
+          "electrical_node": null
+        }
+      ],
+      "physical_endpoints": [
+        null,
+        null
+      ],
+      "electrical_group": null,
+      "joint_stack": null,
+      "fastener_specification": null,
+      "model_id": "REF_W16"
+    },
+    {
+      "id": "W17",
+      "name_ja": "上側リレー・右白色端末から下る短い橙線",
+      "group": "FG_WIRE",
+      "group_name_ja": "可視配線区間",
+      "candidate_cells": [
+        "PREP",
+        "A",
+        "B",
+        "C"
+      ],
+      "basis_ja": "可視区間と入口の照合のみ。セル候補を絞る前の追跡対象",
+      "unresolved_ja": "27区間を27本の線や独立した搬送物としない。実線の両端と所属ユニットは未確定。",
+      "physical_operation_selected": null,
+      "collection": "visible_wire_segments",
+      "review_task_ids": [
+        "D01",
+        "D11",
+        "D12",
+        "D21",
+        "D22",
+        "D31",
+        "D40",
+        "D42",
+        "D45",
+        "D60",
+        "D61"
+      ],
+      "selected_task_id": null,
+      "feature_parent": null,
+      "observed_trace_ends": [
+        {
+          "feature_id": "T33",
+          "evidence": "visible_exterior_entry; hidden metal contact unresolved",
+          "label_ja": "見える入口・端末外装: T33",
+          "point_px": [
+            558,
+            383
+          ],
+          "metal_terminal_id": null,
+          "cavity_number": null,
+          "electrical_node": null,
+          "bind_display_geometry": true
+        },
+        {
+          "feature_id": null,
+          "evidence": "trace_stops; no visible terminal assigned",
+          "label_ja": "追跡終了・先は未確認",
+          "point_px": [
+            560,
+            417
+          ],
+          "metal_terminal_id": null,
+          "cavity_number": null,
+          "electrical_node": null
+        }
+      ],
+      "physical_endpoints": [
+        null,
+        null
+      ],
+      "electrical_group": null,
+      "joint_stack": null,
+      "fastener_specification": null,
+      "model_id": "REF_W17"
+    },
+    {
+      "id": "W18",
+      "name_ja": "上側リレー・左白色端末の入口付近の橙線",
+      "group": "FG_WIRE",
+      "group_name_ja": "可視配線区間",
+      "candidate_cells": [
+        "PREP",
+        "A",
+        "B",
+        "C"
+      ],
+      "basis_ja": "可視区間と入口の照合のみ。セル候補を絞る前の追跡対象",
+      "unresolved_ja": "27区間を27本の線や独立した搬送物としない。実線の両端と所属ユニットは未確定。",
+      "physical_operation_selected": null,
+      "collection": "visible_wire_segments",
+      "review_task_ids": [
+        "D01",
+        "D11",
+        "D12",
+        "D21",
+        "D22",
+        "D31",
+        "D40",
+        "D42",
+        "D45",
+        "D60",
+        "D61"
+      ],
+      "selected_task_id": null,
+      "feature_parent": null,
+      "observed_trace_ends": [
+        {
+          "feature_id": "T34",
+          "evidence": "visible_exterior_entry; hidden metal contact unresolved",
+          "label_ja": "見える入口・端末外装: T34",
+          "point_px": [
+            475,
+            319
+          ],
+          "metal_terminal_id": null,
+          "cavity_number": null,
+          "electrical_node": null,
+          "bind_display_geometry": true
+        },
+        {
+          "feature_id": null,
+          "evidence": "trace_stops; no visible terminal assigned",
+          "label_ja": "追跡終了・先は未確認",
+          "point_px": [
+            478,
+            289
+          ],
+          "metal_terminal_id": null,
+          "cavity_number": null,
+          "electrical_node": null
+        }
+      ],
+      "physical_endpoints": [
+        null,
+        null
+      ],
+      "electrical_group": null,
+      "joint_stack": null,
+      "fastener_specification": null,
+      "model_id": "REF_W18"
+    },
+    {
+      "id": "W19",
+      "name_ja": "下側リレー・上白色端末から左へ延びる橙線",
+      "group": "FG_WIRE",
+      "group_name_ja": "可視配線区間",
+      "candidate_cells": [
+        "PREP",
+        "A",
+        "B",
+        "C"
+      ],
+      "basis_ja": "可視区間と入口の照合のみ。セル候補を絞る前の追跡対象",
+      "unresolved_ja": "27区間を27本の線や独立した搬送物としない。実線の両端と所属ユニットは未確定。",
+      "physical_operation_selected": null,
+      "collection": "visible_wire_segments",
+      "review_task_ids": [
+        "D01",
+        "D11",
+        "D12",
+        "D21",
+        "D22",
+        "D31",
+        "D40",
+        "D42",
+        "D45",
+        "D60",
+        "D61"
+      ],
+      "selected_task_id": null,
+      "feature_parent": null,
+      "observed_trace_ends": [
+        {
+          "feature_id": "T43",
+          "evidence": "visible_exterior_entry; hidden metal contact unresolved",
+          "label_ja": "見える入口・端末外装: T43",
+          "point_px": [
+            472,
+            536
+          ],
+          "metal_terminal_id": null,
+          "cavity_number": null,
+          "electrical_node": null,
+          "bind_display_geometry": true
+        },
+        {
+          "feature_id": null,
+          "evidence": "trace_stops; no visible terminal assigned",
+          "label_ja": "追跡終了・先は未確認",
+          "point_px": [
+            406,
+            534
+          ],
+          "metal_terminal_id": null,
+          "cavity_number": null,
+          "electrical_node": null
+        }
+      ],
+      "physical_endpoints": [
+        null,
+        null
+      ],
+      "electrical_group": null,
+      "joint_stack": null,
+      "fastener_specification": null,
+      "model_id": "REF_W19"
+    }
+  ],
+  "observed_entities": [
+    {
+      "id": "V25_BASE_PLATE",
+      "kind": "part",
+      "name_ja": "2025年映像の可搬下板",
+      "candidate_photo_ids": [],
+      "confirmed_photo_id": null,
+      "observation_ja": "24秒で金属板の表面・縁・切欠き等が部分的に見え、146秒で部品を載せた側が筐体へ運ばれる。",
+      "unresolved_ja": "輪郭の隠れた部分、板厚、材質規格、穴径と配置、裏面支持、ヒューズ板との固定、許容把持面。",
+      "evidence_frames": [
+        "plate_024",
+        "plate_146"
+      ],
+      "geometry_dimensions_m": null,
+      "mounting_points_m": null,
+      "grasp_surfaces": null,
+      "source_model_object": null
+    },
+    {
+      "id": "V25_FUSE_PANEL",
+      "kind": "part",
+      "name_ja": "2025年映像のヒューズ板",
+      "candidate_photo_ids": [
+        "P07"
+      ],
+      "confirmed_photo_id": null,
+      "observation_ja": "24秒で別置き、50秒で外組み、146秒で下板側と同時に搬送、154秒で筐体内。",
+      "unresolved_ja": "2022年との同一版対応、下板との接合、全固定点。",
+      "evidence_frames": [
+        "plate_024",
+        "plate_050",
+        "plate_146",
+        "plate_154"
+      ],
+      "geometry_dimensions_m": null,
+      "mounting_points_m": null,
+      "grasp_surfaces": null,
+      "source_model_object": null
+    },
+    {
+      "id": "V25_CASE",
+      "kind": "part",
+      "name_ja": "2025年映像の筐体",
+      "candidate_photo_ids": [
+        "P01"
+      ],
+      "confirmed_photo_id": null,
+      "observation_ja": "142/146秒で搬送ユニットとは別。170秒で内側端末が側面開口を通る。",
+      "unresolved_ja": "内部下板との固定、内寸、底面の支持構造、2022年との寸法同一性。",
+      "evidence_frames": [
+        "plate_142",
+        "plate_146",
+        "plate_170"
+      ],
+      "geometry_dimensions_m": null,
+      "mounting_points_m": null,
+      "grasp_surfaces": null,
+      "source_model_object": null
+    },
+    {
+      "id": "V25_INNER_ENDS",
+      "kind": "observed_group",
+      "name_ja": "未接続の内側ハウジング群",
+      "candidate_photo_ids": [
+        "I01",
+        "I02",
+        "I03",
+        "I04",
+        "I05"
+      ],
+      "confirmed_photo_id": null,
+      "observation_ja": "154/158秒で自由端、170秒で側面開口を通って外へ出る。",
+      "unresolved_ja": "一対一のI番号、線の両端、全自由端の追跡、同時保持数、開口通過の個別順序。",
+      "evidence_frames": [
+        "plate_154",
+        "plate_158",
+        "plate_170"
+      ],
+      "physical_quantity_selected": null,
+      "source_model_object": null
+    },
+    {
+      "id": "V25_RING_ENDS",
+      "kind": "observed_group",
+      "name_ja": "未接続の丸端子群",
+      "candidate_photo_ids": [
+        "L01",
+        "L02",
+        "L03",
+        "L04",
+        "L05",
+        "L06",
+        "L07"
+      ],
+      "confirmed_photo_id": null,
+      "observation_ja": "搭載中と搭載後に丸端子の自由端が残る。",
+      "unresolved_ja": "写真L番号への対応、接続先、加工済み線材数、共締め積層。",
+      "evidence_frames": [
+        "plate_146",
+        "plate_154",
+        "plate_158",
+        "plate_170"
+      ],
+      "physical_quantity_selected": null,
+      "source_model_object": null
+    },
+    {
+      "id": "V25_OUTER_HEADERS",
+      "kind": "observed_group",
+      "name_ja": "別置きの筐体側外側ヘッダー",
+      "candidate_photo_ids": [
+        "P16",
+        "P17"
+      ],
+      "confirmed_photo_id": null,
+      "observation_ja": "ユニット搭載中と170秒の引出し後も台上。内側ハウジングと区別する。",
+      "unresolved_ja": "2025年映像と2022年写真の品番同一性。既存TE図面の記録は維持。",
+      "evidence_frames": [
+        "plate_146",
+        "plate_154",
+        "plate_170"
+      ],
+      "physical_quantity_selected": null,
+      "source_model_object": null
+    }
+  ],
+  "header_jobs": [
+    {
+      "feature_id": "P16",
+      "task_id": "D50",
+      "mounting": {
+        "hole_count": 8,
+        "thread": "M4",
+        "fastener_part_number": null
+      },
+      "holding_role": "R-C",
+      "tool_role": "T-C",
+      "hand_candidate": "H05",
+      "hole_order": null,
+      "fastening_conditions": null,
+      "duration_s": null,
+      "note_ja": "一つのヘッダーを締結・工具退避まで保持する比較。穴数は動作時間や工具台数ではない。"
+    },
+    {
+      "feature_id": "P17",
+      "task_id": "D50",
+      "mounting": {
+        "hole_count": 6,
+        "thread": "M4",
+        "fastener_part_number": null
+      },
+      "holding_role": "R-C",
+      "tool_role": "T-C",
+      "hand_candidate": "H05",
+      "hole_order": null,
+      "fastening_conditions": null,
+      "duration_s": null,
+      "note_ja": "一つのヘッダーを締結・工具退避まで保持する比較。穴数は動作時間や工具台数ではない。"
+    }
+  ],
+  "cross_task_reservations": [
+    {
+      "id": "HOLD_PANEL_TO_CARRY",
+      "resource": "R-C",
+      "tasks": [
+        "D30",
+        "D31",
+        "D40"
+      ],
+      "note_ja": "板保持→工具退避→治具上持ち替え→一体搬送。治具に支持させる持ち替え中も、手先交換を含む仕事をR-Cに予約する。",
+      "condition_ja": "採用済み板間固定が荷重を受け、治具と搬送手に支持を引き継げることが前提。支持成立は未検証。"
+    },
+    {
+      "id": "GUIDE_THROUGH_INSERTION",
+      "resource": "X-C",
+      "tasks": [
+        "D31",
+        "D40",
+        "D42",
+        "D45",
+        "D50"
+      ],
+      "note_ja": "独立案内が必要な自由端は、搭載後・開口通過後も次の支持へ引き継ぐまで案内担当を予約する。",
+      "condition_ja": "全区間に同じ腕が必須という確定ではない。自由端ごとの支持方法と引継ぎが決まるまでは途中を空き時間として数えない。"
+    }
+  ],
+  "simultaneous_groups": [
+    {
+      "id": "SG-A-FIX",
+      "tasks": [
+        "D10"
+      ],
+      "distinct_resources": [
+        "R-A",
+        "T-A"
+      ],
+      "condition_ja": "部品を保持した状態で締結する区間",
+      "minimum_spindles": null
+    },
+    {
+      "id": "SG-B-FIX",
+      "tasks": [
+        "D20"
+      ],
+      "distinct_resources": [
+        "R-B",
+        "T-B"
+      ],
+      "condition_ja": "部品を保持した状態で締結する区間",
+      "minimum_spindles": null
+    },
+    {
+      "id": "SG-A-ENDS",
+      "tasks": [
+        "D11"
+      ],
+      "distinct_resources": [
+        "R-A",
+        "X-A"
+      ],
+      "condition_ja": "Aで両端独立保持が必要な対象接続",
+      "minimum_spindles": null
+    },
+    {
+      "id": "SG-B-ENDS",
+      "tasks": [
+        "D21"
+      ],
+      "distinct_resources": [
+        "R-B",
+        "X-B"
+      ],
+      "condition_ja": "Bで両端独立保持が必要な対象接続",
+      "minimum_spindles": null
+    },
+    {
+      "id": "SG-C-JOIN",
+      "tasks": [
+        "D30"
+      ],
+      "distinct_resources": [
+        "R-C",
+        "T-C"
+      ],
+      "condition_ja": "ヒューズ板を保持しながら板間ねじを締める区間",
+      "minimum_spindles": null
+    },
+    {
+      "id": "SG-C-CARRY",
+      "tasks": [
+        "D40"
+      ],
+      "distinct_resources": [
+        "R-C",
+        "X-C"
+      ],
+      "condition_ja": "一体ユニットと自由端を独立操作する区間",
+      "minimum_spindles": null
+    },
+    {
+      "id": "SG-C-ROUTE",
+      "tasks": [
+        "D45"
+      ],
+      "distinct_resources": [
+        "R-C",
+        "X-C"
+      ],
+      "condition_ja": "ハウジングと線を同時に独立操作する区間",
+      "minimum_spindles": null
+    },
+    {
+      "id": "SG-C-HEADER",
+      "tasks": [
+        "D50"
+      ],
+      "distinct_resources": [
+        "R-C",
+        "T-C"
+      ],
+      "condition_ja": "ヘッダーを保持しながらフランジをねじ固定する区間",
+      "minimum_spindles": null
+    },
+    {
+      "id": "SG-C-ENDS",
+      "tasks": [
+        "D60"
+      ],
+      "distinct_resources": [
+        "R-C",
+        "X-C"
+      ],
+      "condition_ja": "Cで両端・別部材の独立保持が必要な接続",
+      "minimum_spindles": null
+    },
+    {
+      "id": "SG-TWIN-TOOLS",
+      "tasks": [
+        "D11",
+        "D21",
+        "D60"
+      ],
+      "distinct_resources": [],
+      "condition_ja": "大小同時締結の要求を適用する各接続。別セルの3作業を同時実行する指定ではない",
+      "minimum_spindles": 2
+    }
+  ],
+  "sharing_candidates": [
+    {
+      "id": "M1",
+      "priority": 1,
+      "work_ja": "工具役を多関節腕から分離",
+      "resources": [
+        "T-A",
+        "T-B",
+        "T-C"
+      ],
+      "proposal_ja": "据置工具＋必要な直交／回転位置決めへ分担。保持腕に工具を持ち替えさせるために部品を途中開放しない。",
+      "requires_ja": "ねじ軸・工具一式の外形・送り方向・同時締結の点組",
+      "effect_ja": "工具専用腕の削減候補。工具主軸・位置決め軸の設備数は残る。"
+    },
+    {
+      "id": "M2",
+      "priority": 2,
+      "work_ja": "同じセル内の順次作業を兼務",
+      "resources": [
+        "R-A",
+        "R-B",
+        "R-C"
+      ],
+      "proposal_ja": "取出し・設置・保持・受渡しを各主担当へまとめる。Cは板保持→治具上持ち替え→一体搬送→ヘッダー→剛体導体の順次兼務を比較。",
+      "requires_ja": "保持を引き継げる面、手先共用または交換、指の開放、各作業の所要時間",
+      "effect_ja": "工程名ごとの専用ロボット追加を抑える。"
+    },
+    {
+      "id": "M3",
+      "priority": 3,
+      "work_ja": "蓋・払出しを既存主担当へ寄せる",
+      "resources": [
+        "R-C",
+        "G-OUT",
+        "G-010"
+      ],
+      "proposal_ja": "Cの手が空く時間と到達範囲を使う案を、独立した直交移載と比較。",
+      "requires_ja": "Cの次ワーク開始、検査待ち、工具交換、搬送距離、入出側の流れ",
+      "effect_ja": "追加搬送ロボットの削減候補。Cを律速にしないかを比較する。"
+    },
+    {
+      "id": "M4",
+      "priority": 4,
+      "work_ja": "必要な補助保持役をセル間で共用",
+      "resources": [
+        "X-A",
+        "X-B",
+        "X-C"
+      ],
+      "proposal_ja": "同時に占有されない役だけ同じ補助ロボットへ割り当てる。到達しない場合の走行軸も設備として数える。",
+      "requires_ja": "把持開始から最終引継ぎまでの占有区間、セル間移動、手先交換、他腕との干渉、3ST並行処理との両立",
+      "effect_ja": "補助腕の共用候補。現時点では1台へ集約できると判定しない。"
+    },
+    {
+      "id": "M5",
+      "priority": 5,
+      "work_ja": "主担当そのものの共用を再比較",
+      "resources": [
+        "R-A",
+        "R-B",
+        "R-C"
+      ],
+      "proposal_ja": "各セルの工具自動動作・待ち時間が測れた後、セルをまたぐ順次兼務が可能か比較する。",
+      "requires_ja": "保持中の拘束、完成済みユニットの支持付き待ち位置、到達と移動、供給量・周期の実データ",
+      "effect_ja": "初期の主担当3枠を最終台数として固定しない。3STの並行処理が崩れる案は別条件として明記。"
+    }
+  ],
+  "required_functions": [
+    {
+      "id": "REQ_K",
+      "name_ja": "主接触器",
+      "quantity": 1,
+      "matched_photo_ids": [
+        "P02"
+      ],
+      "note_ja": "写真の本体へ対応。電力端子・制御・補助接点を別に管理。",
+      "basis": "Ampere V1.1 pages 1-2",
+      "not_located_is_not_omitted": true
+    },
+    {
+      "id": "REQ_PC_RLY",
+      "name_ja": "プリチャージリレー",
+      "quantity": 1,
+      "matched_photo_ids": [],
+      "note_ja": "写真のP03/P04のどちらかは未特定。",
+      "basis": "Ampere V1.1 pages 1-2",
+      "not_located_is_not_omitted": true
+    },
+    {
+      "id": "REQ_D_RLY",
+      "name_ja": "放電リレー",
+      "quantity": 1,
+      "matched_photo_ids": [],
+      "note_ja": "写真のP03/P04のどちらかは未特定。",
+      "basis": "Ampere V1.1 pages 1-2",
+      "not_located_is_not_omitted": true
+    },
+    {
+      "id": "REQ_PC_RES",
+      "name_ja": "プリチャージ抵抗",
+      "quantity": 1,
+      "matched_photo_ids": [],
+      "note_ja": "2025年組立品で2個の所在が見える。指定2022年写真への同一版・位置対応は未確定。",
+      "basis": "Ampere V1.1 pages 1-2",
+      "not_located_is_not_omitted": true
+    },
+    {
+      "id": "REQ_D_RES",
+      "name_ja": "放電抵抗",
+      "quantity": 1,
+      "matched_photo_ids": [],
+      "note_ja": "2025年組立品で2個の所在が見える。指定2022年写真への同一版・位置対応は未確定。",
+      "basis": "Ampere V1.1 pages 1-2",
+      "not_located_is_not_omitted": true
+    },
+    {
+      "id": "REQ_MAIN_FUSE",
+      "name_ja": "主400 Aヒューズ",
+      "quantity": 1,
+      "matched_photo_ids": [
+        "P22"
+      ],
+      "note_ja": "中央被覆内へ位置対応。単体例の胴・端子形状を表示推定。注文品番・固定積層は未確定。",
+      "basis": "Ampere V1.1 pages 1-2",
+      "not_located_is_not_omitted": true
+    },
+    {
+      "id": "REQ_AF1",
+      "name_ja": "補機Heater 1・20 Aヒューズ",
+      "quantity": 1,
+      "matched_photo_ids": [],
+      "note_ja": "物理5個はP05/P06/P19/P20/P21で確認。各補機口までの線を追い切れておらず、系統割当は未確定。",
+      "basis": "Ampere V1.1 pages 1-2",
+      "not_located_is_not_omitted": true,
+      "location_candidates": [
+        "P05",
+        "P06",
+        "P19",
+        "P20",
+        "P21"
+      ]
+    },
+    {
+      "id": "REQ_AF2",
+      "name_ja": "補機AC・30 Aヒューズ",
+      "quantity": 1,
+      "matched_photo_ids": [],
+      "note_ja": "物理5個はP05/P06/P19/P20/P21で確認。各補機口までの線を追い切れておらず、系統割当は未確定。",
+      "basis": "Ampere V1.1 pages 1-2",
+      "not_located_is_not_omitted": true,
+      "location_candidates": [
+        "P05",
+        "P06",
+        "P19",
+        "P20",
+        "P21"
+      ]
+    },
+    {
+      "id": "REQ_AF3",
+      "name_ja": "補機Heater 2・20 Aヒューズ",
+      "quantity": 1,
+      "matched_photo_ids": [],
+      "note_ja": "物理5個はP05/P06/P19/P20/P21で確認。各補機口までの線を追い切れておらず、系統割当は未確定。",
+      "basis": "Ampere V1.1 pages 1-2",
+      "not_located_is_not_omitted": true,
+      "location_candidates": [
+        "P05",
+        "P06",
+        "P19",
+        "P20",
+        "P21"
+      ]
+    },
+    {
+      "id": "REQ_AF4",
+      "name_ja": "補機Charger・30 Aヒューズ",
+      "quantity": 1,
+      "matched_photo_ids": [],
+      "note_ja": "物理5個はP05/P06/P19/P20/P21で確認。各補機口までの線を追い切れておらず、系統割当は未確定。",
+      "basis": "Ampere V1.1 pages 1-2",
+      "not_located_is_not_omitted": true,
+      "location_candidates": [
+        "P05",
+        "P06",
+        "P19",
+        "P20",
+        "P21"
+      ]
+    },
+    {
+      "id": "REQ_AF5",
+      "name_ja": "補機DC-DC・10 Aヒューズ",
+      "quantity": 1,
+      "matched_photo_ids": [],
+      "note_ja": "物理5個はP05/P06/P19/P20/P21で確認。各補機口までの線を追い切れておらず、系統割当は未確定。",
+      "basis": "Ampere V1.1 pages 1-2",
+      "not_located_is_not_omitted": true,
+      "location_candidates": [
+        "P05",
+        "P06",
+        "P19",
+        "P20",
+        "P21"
+      ]
+    },
+    {
+      "id": "REQ_MAIN_PORTS",
+      "name_ja": "主2極接続口",
+      "quantity": 2,
+      "matched_photo_ids": [
+        "P14",
+        "P15"
+      ],
+      "basis": "Ampere V1.1 pages 2-3"
+    },
+    {
+      "id": "REQ_AUX_PORTS",
+      "name_ja": "補機2極接続口",
+      "quantity": 5,
+      "matched_photo_ids": [
+        "P16",
+        "P17"
+      ],
+      "basis": "3+2 functional bays, not five outer housings"
+    },
+    {
+      "id": "REQ_INNER",
+      "name_ja": "補機内側ハウジング",
+      "quantity": 5,
+      "matched_photo_ids": [
+        "I01",
+        "I02",
+        "I03",
+        "I04",
+        "I05"
+      ],
+      "basis": "Photo and TE 408-32095 / 2103245"
+    },
+    {
+      "id": "REQ_LV",
+      "name_ja": "低圧12極接続口",
+      "quantity": 1,
+      "matched_photo_ids": [
+        "P18"
+      ],
+      "basis": "Ampere V1.1 pages 2,4"
+    },
+    {
+      "id": "REQ_AUX_POWER_CONTACTS",
+      "name_ja": "補機内側の電力コンタクト",
+      "quantity": 10,
+      "matched_photo_ids": [],
+      "note_ja": "各口2個。MCP 2.8、線径/嵌合先に対応する注文品番は未選定。",
+      "basis": "TE 408-32095 Rev B, Figures 1/3 and assembly sections",
+      "not_located_is_not_omitted": true
+    },
+    {
+      "id": "REQ_AUX_HVIL_CONTACTS",
+      "name_ja": "補機内側のHVILコンタクト",
+      "quantity": 10,
+      "matched_photo_ids": [],
+      "note_ja": "各口2個。MQS、回路順序・注文品番は未確定。",
+      "basis": "TE 408-32095 Rev B, Figures 1/3 and assembly sections",
+      "not_located_is_not_omitted": true
+    }
+  ],
+  "electrical_groups": [
+    {
+      "id": "EC01",
+      "name_ja": "主電力経路",
+      "basis_ja": "主2口・主ヒューズ・主接触器を含む回路。主端子AがHV+、BがHV−と記載。",
+      "datasheet_pages": [
+        1,
+        2,
+        3
+      ],
+      "lv_pins": [],
+      "physical_wires": null,
+      "fastener_count": null,
+      "photo_to_physical_net_complete": false
+    },
+    {
+      "id": "EC02",
+      "name_ja": "プリチャージの電力側",
+      "basis_ja": "プリチャージリレーと抵抗を含む枝路。制御線はEC10で区別。",
+      "datasheet_pages": [
+        1,
+        2
+      ],
+      "lv_pins": [],
+      "physical_wires": null,
+      "fastener_count": null,
+      "photo_to_physical_net_complete": false
+    },
+    {
+      "id": "EC03",
+      "name_ja": "放電の電力側",
+      "basis_ja": "放電リレーと抵抗を含む枝路。制御線はEC11で区別。",
+      "datasheet_pages": [
+        1,
+        2
+      ],
+      "lv_pins": [],
+      "physical_wires": null,
+      "fastener_count": null,
+      "photo_to_physical_net_complete": false
+    },
+    {
+      "id": "EC04",
+      "name_ja": "補機：Heater 1",
+      "basis_ja": "20Aヒューズを含む補機系統。補機端子は1がHV+、2がHV−。",
+      "datasheet_pages": [
+        1,
+        2,
+        3
+      ],
+      "lv_pins": [],
+      "physical_wires": null,
+      "fastener_count": null,
+      "photo_to_physical_net_complete": false
+    },
+    {
+      "id": "EC05",
+      "name_ja": "補機：AC",
+      "basis_ja": "30Aヒューズを含む補機系統。",
+      "datasheet_pages": [
+        1,
+        2,
+        3
+      ],
+      "lv_pins": [],
+      "physical_wires": null,
+      "fastener_count": null,
+      "photo_to_physical_net_complete": false
+    },
+    {
+      "id": "EC06",
+      "name_ja": "補機：Heater 2",
+      "basis_ja": "20Aヒューズを含む補機系統。",
+      "datasheet_pages": [
+        1,
+        2,
+        3
+      ],
+      "lv_pins": [],
+      "physical_wires": null,
+      "fastener_count": null,
+      "photo_to_physical_net_complete": false
+    },
+    {
+      "id": "EC07",
+      "name_ja": "補機：Charger",
+      "basis_ja": "30Aヒューズを含む補機系統。",
+      "datasheet_pages": [
+        1,
+        2,
+        3
+      ],
+      "lv_pins": [],
+      "physical_wires": null,
+      "fastener_count": null,
+      "photo_to_physical_net_complete": false
+    },
+    {
+      "id": "EC08",
+      "name_ja": "補機：DC-DC",
+      "basis_ja": "10Aヒューズを含む補機系統。",
+      "datasheet_pages": [
+        1,
+        2,
+        3
+      ],
+      "lv_pins": [],
+      "physical_wires": null,
+      "fastener_count": null,
+      "photo_to_physical_net_complete": false
+    },
+    {
+      "id": "EC09",
+      "name_ja": "低圧：接触器駆動",
+      "basis_ja": "LVの2番はContactor 12V、8番はContactor Ground。",
+      "datasheet_pages": [
+        4
+      ],
+      "lv_pins": [
+        2,
+        8
+      ],
+      "physical_wires": null,
+      "fastener_count": null,
+      "photo_to_physical_net_complete": false
+    },
+    {
+      "id": "EC10",
+      "name_ja": "低圧：プリチャージリレー駆動",
+      "basis_ja": "LVの3番はリレー12V、9番はリレーGround。",
+      "datasheet_pages": [
+        4
+      ],
+      "lv_pins": [
+        3,
+        9
+      ],
+      "physical_wires": null,
+      "fastener_count": null,
+      "photo_to_physical_net_complete": false
+    },
+    {
+      "id": "EC11",
+      "name_ja": "低圧：放電リレー駆動",
+      "basis_ja": "LVの4番はリレー12V、10番はリレーGround。",
+      "datasheet_pages": [
+        4
+      ],
+      "lv_pins": [
+        4,
+        10
+      ],
+      "physical_wires": null,
+      "fastener_count": null,
+      "photo_to_physical_net_complete": false
+    },
+    {
+      "id": "EC12",
+      "name_ja": "低圧：接触器フィードバック",
+      "basis_ja": "LVの1番と7番がContactor Feedbackと記載。",
+      "datasheet_pages": [
+        4
+      ],
+      "lv_pins": [
+        1,
+        7
+      ],
+      "physical_wires": null,
+      "fastener_count": null,
+      "photo_to_physical_net_complete": false
+    },
+    {
+      "id": "EC13",
+      "name_ja": "HVIL",
+      "basis_ja": "LVの5番がHVIL In、11番がHVIL Out。公式記事は各接続口へのHVIL内蔵を記載。",
+      "datasheet_pages": [
+        4
+      ],
+      "lv_pins": [
+        5,
+        11
+      ],
+      "physical_wires": null,
+      "fastener_count": null,
+      "photo_to_physical_net_complete": false
+    }
+  ],
+  "lv_pin_map": {
+    "1": "Contactor Feedback",
+    "2": "Contactor 12V",
+    "3": "Pre-Charge Relay 12V",
+    "4": "Discharge Relay 12V",
+    "5": "HVIL In",
+    "6": "Reserved",
+    "7": "Contactor Feedback",
+    "8": "Contactor Ground",
+    "9": "Pre-Charge Relay Ground",
+    "10": "Discharge Relay Ground",
+    "11": "HVIL Out",
+    "12": "Reserved"
+  },
+  "assembly_dependencies": [
+    {
+      "id": "AD01",
+      "name_ja": "切断・被覆除去・適合端子の圧着",
+      "basis": "TE 408-32095 / 2025 video 87-129 s",
+      "complete": false,
+      "missing_ja": "線種・長さ・端子注文品番・加工条件"
+    },
+    {
+      "id": "AD02",
+      "name_ja": "内側ハウジングへ電力2端子＋HVIL2端子を挿入・保持確認",
+      "basis": "TE 408-32095",
+      "complete": false,
+      "missing_ja": "端子の現物CAD、全線の端末対応"
+    },
+    {
+      "id": "AD03",
+      "name_ja": "キーを合わせて内側ハウジングを外側へ挿入",
+      "basis": "TE 408-32095",
+      "complete": false,
+      "missing_ja": "ラッチ着座・抜去と工具進入の確認"
+    },
+    {
+      "id": "AD04",
+      "name_ja": "ヒューズ板で5系統を配線・締結してから箱内へ設置する組立例",
+      "basis": "2025 video 28-87, 142-153 s",
+      "complete": false,
+      "missing_ja": "採用版の板寸法・配線先・把持対象・締結仕様。自動化工程順としては未確定"
+    },
+    {
+      "id": "AD05",
+      "name_ja": "主/補機/LV/HVIL接続、導通・検査、蓋とシール",
+      "basis": "Ampere V1.1 / 2025 video",
+      "complete": false,
+      "missing_ja": "実配線図・共締め・検査仕様・蓋の部品構成"
+    }
+  ],
+  "process_precedence": [
+    {
+      "from": "O10",
+      "to": "O30",
+      "basis": "cell_comparison"
+    },
+    {
+      "from": "O20",
+      "to": "O30",
+      "basis": "cell_comparison"
+    },
+    {
+      "from": "O30",
+      "to": "O40",
+      "basis": "user_adopted_procedure_20260916; actual_factory_joint_unobserved"
+    },
+    {
+      "from": "O00",
+      "to": "O40",
+      "basis": "case_required_at_insertion"
+    },
+    {
+      "from": "O40",
+      "to": "O42",
+      "basis": "2025_observed_sequence"
+    },
+    {
+      "from": "O42",
+      "to": "O45",
+      "basis": "2025_observed_states; not_mandatory_universal_order"
+    },
+    {
+      "from": "O45",
+      "to": "O50",
+      "basis": "2025_inner_ends_out_before_outer_headers"
+    },
+    {
+      "from": "O50",
+      "to": "O60",
+      "basis": "2025_observed_sequence"
+    }
+  ],
+  "allocation_checks": {
+    "source_operation_ids": [
+      "O00",
+      "O01",
+      "O10",
+      "O20",
+      "O30",
+      "O40",
+      "O42",
+      "O45",
+      "O50",
+      "O60",
+      "O70",
+      "O80"
+    ],
+    "covered_operation_ids": [
+      "O00",
+      "O01",
+      "O10",
+      "O20",
+      "O30",
+      "O40",
+      "O42",
+      "O45",
+      "O50",
+      "O60",
+      "O70",
+      "O80"
+    ],
+    "task_count": 20,
+    "simultaneous_group_count": 10,
+    "reference_integrity": true,
+    "same_single_actuator_exclusions_during_overlap": [
+      {
+        "roles": [
+          "R-A",
+          "T-A"
+        ],
+        "condition_ja": "部品を保持した状態で締結する区間"
+      },
+      {
+        "roles": [
+          "R-B",
+          "T-B"
+        ],
+        "condition_ja": "部品を保持した状態で締結する区間"
+      },
+      {
+        "roles": [
+          "R-A",
+          "X-A"
+        ],
+        "condition_ja": "Aで両端独立保持が必要な対象接続"
+      },
+      {
+        "roles": [
+          "R-B",
+          "X-B"
+        ],
+        "condition_ja": "Bで両端独立保持が必要な対象接続"
+      },
+      {
+        "roles": [
+          "R-C",
+          "T-C"
+        ],
+        "condition_ja": "ヒューズ板を保持しながら板間ねじを締める区間"
+      },
+      {
+        "roles": [
+          "R-C",
+          "X-C"
+        ],
+        "condition_ja": "一体ユニットと自由端を独立操作する区間"
+      },
+      {
+        "roles": [
+          "R-C",
+          "X-C"
+        ],
+        "condition_ja": "ハウジングと線を同時に独立操作する区間"
+      },
+      {
+        "roles": [
+          "R-C",
+          "T-C"
+        ],
+        "condition_ja": "ヘッダーを保持しながらフランジをねじ固定する区間"
+      },
+      {
+        "roles": [
+          "R-C",
+          "X-C"
+        ],
+        "condition_ja": "Cで両端・別部材の独立保持が必要な接続"
+      }
+    ],
+    "unitization_panel_and_carry_role_overlap_states": [],
+    "overlap_scope": "Only the prior 9 diagram states; not measured timing or physical handover",
+    "primary_candidate_slots": [
+      "R-A",
+      "R-B",
+      "R-C"
+    ],
+    "unallocated_assist_roles": [
+      "X-A",
+      "X-B",
+      "X-C"
+    ],
+    "installed_robot_count": null,
+    "minimum_robot_count": null,
+    "source_video_timestamps_used_as_durations": false
+  },
+  "task_durations_s": null,
+  "minimum_robot_count": null,
+  "physical_acceptance_verdict": null
+}
