@@ -89,3 +89,7 @@ if __name__=="__main__": print(*pred(sys.argv[1],sys.argv[2]))
 
 ## Provenance
 v3 §17.2 read at `dc090f7753`; the landed driver blob as text; my composed models (`98d8e63173` instrument). Zero tracked-content modifications by pZ. Committed by pZ under the standing custody form (m-p18-344), pathspec-limited, --no-verify, no push.
+
+## Addendum (2026-09-16 18:08 JST) — p4's condition (ii): the design literal is fixed to `dc090f7753` (m-p4-268 via m-p18-360)
+
+- **Row 3′**: the design literal in the B line must be **exactly** `P11_UR15B_CONTROLLER_DESIGN_20260913.md@dc090f7753` — the first commit containing §17. Row 3's "the commit whose blob contains §17" is withdrawn as the binding form: after appends more than one commit contains §17, so that reading would not fix the hash; `dc090f7753` does (p4's reading, adopted). Verified at leg time by string equality of the Constant. Rows 1-8 otherwise unchanged; supersedes sha `e1204ef402089c2c…` @ aed109d06f. Objects at writing: none (driver commits after `3370f7a872` = 0).
