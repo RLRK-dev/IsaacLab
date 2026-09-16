@@ -3317,3 +3317,127 @@ def main(base, cand):
 if __name__ == "__main__":
     sys.exit(main(sys.argv[1], sys.argv[2]))
 ```
+
+## 8.54 Window R0 LANDED: `d038e2536f` (+778/−0, one NEW file `p4_ur15_sim_20260727/r0_convergence_harness.py`) — the static convergence harness; p0 = build + py_compile only, run 0; execution and judgement are pZ's, acceptance p4's
+
+Written 2026-09-16 18:39:59 JST (date-THEN-write). Authority: Rs1 Q1 (m-p18-353, verbatim 「認可する。p0が作り、pZが独立に検証・実行する。」 with the scope 「物理ステップを進めず、実行副作用のあるdriverをimportしない静的検査に限定します。収束確認と、衝突・把持・動的追従の成立は区別します。」). Window definition = p4 m-p4-271 (relayed m-p18-366): 「窓 R0 = 新 file 1 本（名前 = p0・p4_ur15_sim_20260727/ 内）・driver 不 import・solve_ik＋依存を d2bc133e1320 の text から copy・composed model = build_side() @ b7a5e39ecf・pZ prereg rows 1-11＋1′・実行は pZ（p0 は py_compile まで・run しない）」. Spec = v3 §10 row R0 / §11 STOP / §17.1 @ `dc090f7753`; pre-registration = pZ rows 1-11 + 1′ @ `642a9162f0`. Supplement a (Rs1): an instrument stop (calibration raise) is reported apart from controller non-convergence — the harness carries a stop-cause tag for that. Supplement b: this landing is 着手, not 完成受入.
+
+### 1. What landed
+
+| item | value |
+|---|---|
+| path | `eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p4_ur15_sim_20260727/r0_convergence_harness.py` (NEW; name chosen by p0 per the window definition) |
+| commit | `d038e2536f` (parent `dd7cfd18b4` = branch tip at landing; `git show --stat`: 1 file, +778/−0) |
+| blob | `1d6b538400` (`git rev-parse HEAD:<path>`) |
+| sha256 | `28115a3d523a1061bb4906ffe46c34169a7214b18fbf617a4f338abfb4adf67d` (778 lines) |
+| py_compile | `/home/rlrk/env_isaaclab7/bin/python -m py_compile` (3.12.3): OK on the scratch copy and on the tree copy; the two are byte-equal (`cmp`) |
+| run / import | **0 and 0** — never executed, never imported by p0 (window definition: pZ executes) |
+| tree after landing | `git status --porcelain -- <path>` empty; `git diff HEAD --quiet -- <path>` true (tree == HEAD for the file) |
+| commit form | main tree, `git add -- <path>` + `git commit --no-verify -q -m … -- <path>` (pathspec-limited). The §8.51 §3 worktree route was not needed: a NEW path has no uncommitted WIP overlay to keep out of the commit, and nothing else was staged by it (the shared index's other entries are untouched by a pathspec commit) |
+
+Composition of the landed file (line numbers of blob `1d6b538400`):
+
+| lines | content |
+|---|---|
+| :1-:41 | SPDX header + module docstring: what it is / what it decides / what it does NOT show (「収束のみ／衝突・把持・動的追従は未証明」) / target provenance |
+| :44-:65 | imports: stdlib (argparse, hashlib, json, math, os, re, sys, time, pathlib), mujoco, numpy, scipy `Rotation`; `ur15_cell_spec` (constants only); `ur15_gripper_mirror_acceptance as _acc` (for `build_side`, `KO_LEFT`, `KO_MIRROR`) |
+| :70-:80 | `mujoco.mj_step` wrapped by a call counter `_MJ_STEP_CALLS`; the summary prints it (**must read 0** — the static-class witness, prereg row 2a) |
+| :83-:92 | the ONE permitted rebinding (prereg row 1): the module globals the copied functions read — `LIM`, `SIDES`, `m`, `d`, `QADR`, `VADR`, `PAD`, `TOOLB`, `AXFIX`, `CLEARANCE_REPORT`, `LAST_CLEAR`, `_DEPTH_AUDIT` (minimal dict with exactly the keys `solve_ik` touches: `cand_evals rej_total rej_flagged sign_checked sign_ghost sign_missed decider{n,mult,any,sole,flagged{…}}`) |
+| :96-:119 | stubs of the scene-dependent helpers: `touching→[]`, `column_gap→(None, None)`, `path_mast_min→(None, None)` — vacuous by construction (the composed model has no mast, cable, table or other arm; `solve_ik` tests `_cg is not None and _cg < ARM_CLEARANCE`, so None = "beyond the search radius"). `arm_pair_min`, `furniture_gap`, `path_arm_min`, `path_furniture_min` RAISE if reached; they sit behind `other is not None` / env `FURNITURE` / env `ARM_PATH`, none of which R0 sets — a silent pass there would be a hidden scope change, so it is loud instead |
+| :122-:645 | **VERBATIM copies** of nine defs from the driver blob `84a372439c59` @ `96e9ece175` (see §2): `pinch` :123, `pinch_jac` :128, `wrist_jac` :140, `sigma_min` :153, `_measure_axfix` :159, `_wrap` :181, `_rdes` :191, `pose_menu` :199, `solve_ik` :223-:640 |
+| :648-:662 | `_bind(t, model, data)`: per side, `QADR/VADR` from `a_<J6>` joints (`jnt_qposadr` / `jnt_dofadr`), `PAD` = [`g_left_pad`, `g_right_pad`] body ids, `TOOLB` = `g_base`, `SIDES = {t: sign}` (narrowed so the copied `_measure_axfix` measures this side only), `AXFIX = _measure_axfix()` (the copied function, on its own throwaway MjData), then `d.qpos[:] = 0; mj_forward` |
+| :664-:690 | `_targets()`: STEP rows 2-18, L and R columns, built with the driver's own formulas (verified against `STEPS` at blob `84a372439c59` :2901-:2920, row by row) — see §3 |
+| :693-:719 | `_solve_rows`: one side over every row with the wired call form; converged := `solve_ik` returned (no `RuntimeError("no IK solution …")`); `n_converged_candidates = len(LAST_CLEAR[t])`; the returned q is re-evaluated (kinematics only) for `pe`; `re` is NOT re-checked (the winning attitude is not returned by `solve_ik`) — stated in the row dict, not hidden |
+| :722-:774 | `main`: builds both composed models (`_acc.build_side("ur15_base.xml", KO_LEFT, −1)` / `("ur15_base_mirrored.xml", KO_MIRROR, +1)`), prints the target table, solves L then R, then the negative control (R column on the L model), writes `R0_CONVERGENCE_REPORT.json` to `--out` (default `_gen/r0_convergence/`), prints the summary with the claim line and the stop-cause tag; exit 0 iff (L∧¬R rows = 0) ∧ ¬(ΣR = 0) ∧ (control differs on ≥ 1 row) |
+
+### 2. Copy fidelity — static, without importing anything (`check_r0_copy.py`, scratch; reproduced below)
+
+Generator: the nine defs were extracted from `git show 96e9ece175:<driver>` by `ast.get_source_segment` (no hand copying) by `make_r0_harness.py` (scratch), which also printed each def's free names — the rebinding set in §1 is the union of those free names minus the stubs, the imports and the spec constants:
+
+```
+pinch: 630-632 free=[PAD, d, np]                         pinch_jac: 635-644 free=[PAD, TOOLB, VADR, d, m, mujoco, np]
+wrist_jac: 1402-1412 free=[PAD, TOOLB, VADR, d, m, mujoco, np]   sigma_min: 1415-1418 free=[np, wrist_jac]
+_measure_axfix: 594-613 free=[PAD, QADR, SIDES, TOOLB, m, mujoco, np]   _wrap: 1264-1271 free=[LIM, math]
+_rdes: 1358-1363 free=[Rotation, math]                    pose_menu: 2041-2062 free=[]
+solve_ik: 2065-2485 free=[ARM_CLEARANCE, ARM_DECIDE_CUTOFF, AXFIX, CLEARANCE_REPORT, LAST_CLEAR, LIM, PAD, QADR, Rotation,
+  SIDES, SIGMA_FLOOR, SIGMA_GOOD, SIGMA_PENALTY, TOOLB, VADR, _DEPTH_AUDIT, _rdes, _wrap, arm_pair_min, column_gap, d,
+  furniture_gap, m, math, mujoco, np, os, path_arm_min, path_furniture_min, path_mast_min, pinch, pose_menu, re, sigma_min, touching]
+```
+(driver line numbers = blob `84a372439c59`.)
+
+Result of the check (run on the landed scratch copy, byte-equal to the tree copy):
+
+```
+copy pinch / pinch_jac / wrist_jac / sigma_min / _measure_axfix / _wrap / _rdes / pose_menu / solve_ik
+     == blob_84a372439c59: True (9/9)     == blob_d2bc133e1320: True (9/9)        [raw ast.dump, NO N1-N3 normalisation]
+harness top-level names also defined in the driver, beyond COPY+STUBS: [AXFIX, CLEARANCE_REPORT, LAST_CLEAR, LIM, PAD, QADR,
+     TOOLB, VADR, _DEPTH_AUDIT, d, m]      collisions outside the documented rebinding: []
+source contains 'ur15_steps_wired': False   source contains 'ur15_steps': False   (pZ row 2b sweep: 0 hits)
+mj_step in the copied defs: False
+RESULT: PASS
+```
+
+So the copied text is identical under the strictest reading (raw AST, no normalisation) to BOTH the pre-registration's base (`d2bc133e1320` @ `3370f7a872`) and the current HEAD blob (`84a372439c59` @ `96e9ece175`) — the B line (§8.53) sits between those two blobs but outside every copied def, which is why both compare equal. `tries=None` in the harness call means `2 * len(POSES)` (the copied `solve_ik` body: `n_try = tries if tries is not None else 2 * len(POSES)`), i.e. the full attitude menu twice; `iters=300`, `seed=1`, `re_max=0.05`, `near=None`, `other=None`, `warm=None`, `wide=False` are the wired defaults at the signature.
+
+#### `check_r0_copy.py`
+```python
+import ast, sys
+from pathlib import Path
+h, b1, b2 = (Path(p) for p in sys.argv[1:4])
+COPY = ["pinch", "pinch_jac", "wrist_jac", "sigma_min", "_measure_axfix", "_wrap", "_rdes", "pose_menu", "solve_ik"]
+STUBS = ["touching", "column_gap", "path_mast_min", "arm_pair_min", "furniture_gap", "path_arm_min", "path_furniture_min"]
+def defs(p):
+    t = ast.parse(p.read_text()); return {n.name: n for n in t.body if isinstance(n, ast.FunctionDef)}
+hd, d1, d2 = defs(h), defs(b1), defs(b2)
+ok = True
+for n in COPY:
+    a, x, y = ast.dump(hd[n]), ast.dump(d1[n]), ast.dump(d2[n])
+    print(f"copy {n:15s} == {b1.name[:18]}: {a == x}   == {b2.name[:18]}: {a == y}")
+    ok &= (a == x and a == y)
+driver_names = set(d1) | {n.id for s in ast.parse(b1.read_text()).body if isinstance(s, ast.Assign) for n in s.targets if isinstance(n, ast.Name)}
+harness_top = set(hd) | {n.id for s in ast.parse(h.read_text()).body if isinstance(s, ast.Assign) for n in s.targets if isinstance(n, ast.Name)}
+collide = sorted((harness_top & driver_names) - set(COPY) - set(STUBS))
+print("harness top-level names also defined in the driver, beyond COPY+STUBS:", collide)
+REBIND = {"m", "d", "QADR", "VADR", "PAD", "TOOLB", "AXFIX", "SIDES", "LIM", "CLEARANCE_REPORT", "LAST_CLEAR", "_DEPTH_AUDIT"}
+print("collisions outside the documented rebinding:", sorted(set(collide) - REBIND))
+src = h.read_text()
+for bad in ("ur15_steps_wired", "ur15_steps"):
+    print(f"source contains {bad!r}: {bad in src}")
+print("mj_step in the copied defs:", any("mj_step" in ast.dump(hd[n]) for n in COPY))
+print("RESULT:", "PASS" if ok and not (set(collide) - REBIND) and "ur15_steps" not in src else "FAIL")
+```
+Invocation: `python check_r0_copy.py <harness> <git show 96e9ece175:driver> <git show 3370f7a872:driver>`. pZ can re-run it against blob `1d6b538400` without importing anything.
+
+### 3. Targets — where every number comes from (the harness carries no literal that is not sourced)
+
+| rows | L target | R target | source |
+|---|---|---|---|
+| 2, 5 | (GL.x, GL.y, Z_RISE_REST) | (GR.x, GR.y, Z_RISE_REST) | `STEPS` :2902/:2905 @ `84a372439c59`; Z_RISE_REST from the spec |
+| 3, 4 | GL | GR | :2903/:2904 |
+| 6, 10 | (LX1, C1.y, Z_RISE_ROUTE) | (RX1, C1.y, Z_RISE_ROUTE) | :2906/:2910; LX1/RX1 = C1.x ∓ GRIP_HALF_SPAN |
+| 7, 8, 9 | (LX1, C1.y, Z_SEAT) | (RX1, C1.y, Z_SEAT) | :2907-:2909; Z_SEAT = seat_z(FLOAT_Z) |
+| 11, 12, 18 | (LX2, C2.y, Z_RISE_ROUTE) | (RX2, C2.y, Z_RISE_ROUTE) | :2911/:2912/:2920 |
+| 13, 14 | (LX2, C2.y, Z_RISE_ROUTE) | (RX_MID, C2.y, Z_RISE_ROUTE) | :2913/:2914; RX_MID = mean(C1.x, C2.x) |
+| 15, 16, 17 | (LX2, C2.y, Z_SEAT) | (RX2, C2.y, Z_SEAT) | :2915-:2917 |
+
+GL/GR are the one thing the driver does not compute from constants: it measures them from the settled cable at run time (the `re-measured after the approach` line). The harness takes them from the C-2 run record `_gen/dod_c2_20260810/run.log` :93 (sha256 `04599b84e34be51e…`): `L=cab26 [0.0986 0.28 0.9488] R=cab32 [0.1886 0.28 0.951]`, rounded by that print to 1e-4 m — two orders below the 2e-3 m convergence bar. The docstring and the summary say "record-sourced" so no reader takes them for spec constants. Rows 6-18 are computed from `ur15_cell_spec` at run time (C1, C2, GRIP_HALF_SPAN, Z_RISE_ROUTE, FLOAT_Z via `seat_z`), so they follow the spec, not a copy of it.
+
+### 4. What is NOT claimed, and what was checked around the file
+
+- **Not run.** No output, no number, no convergence claim exists from p0. The bar (§10 R0: L converges ∧ R does not = 0 rows; ΣR = 0 → §11 STOP) and the negative control (prereg row 8) are computed by the file for pZ; p0 has not seen them evaluated.
+- **Scope of a PASS, if pZ gets one:** convergence of the wired solver's kinematic loop on a composed one-arm model with vacuous clearance stubs. Collision (mast/table/other arm), grasp, dynamic tracking, and the servo are outside the file — the claim line 「収束のみ／衝突・把持・動的追従は未証明」 is printed and written into the JSON. Every candidate is "clear" by construction, so `n_converged_candidates` counts convergence only. `re` of the winning candidate is not re-checked after return (stated in the row).
+- **Wired behaviour kept, not tuned:** `SIGMA_FLOOR = 0.0` from the spec means the copied manipulability rejection removes nothing (as in the driver); the seed is one value for both sides so candidate k draws the same random restart on L and R (prereg row 4 mirror-comparability); no parameter of `solve_ik` was changed.
+- **Existing scripts in the same directory, checked before creating a new file (§運用4 duplicate check):** `kinonly_step_solve.py` (08-10, `99b2d7d672`, 1096 lines) is the closest — a design-side kinematics-only solve of STEP 1-18 at C-2 with its OWN cell assembly (`build_cell`) and its own `rdes` / `measure_axfix` (its docstring :5-:19: "the cell below is this file's own assembly from those constants … not the cell any driver builds"). It does not run the wired `solve_ik`, which is R0's measurand (「既存の制御 class は収束するか」), and the window definition mandates a new file with the wired text copied. `sweep_mounting.py`, `sweep_work_row_y.py`, `probe_home_pose_symmetry.py` are mounting/row sweeps, not a solver harness. None imports the driver either. Overlap with `kinonly_step_solve.py` is informational for pZ (a second, independent instrument on the same rows), not a substitute.
+- **Prior-art guard** (`scripts/check_thread_vault_prior_art.sh --fail-on-blocker --max-findings 1000 R0 convergence harness solve_ik composed`): rc=2, `BLOCKER_CONTEXT_FOUND`, 4 INFO hits — all keyword coincidences: (i) `R0` matched an OP030 v04 evidence table row (a different track, "Aと同時のC事前装填"); (ii) `solve_ik` / `convergence` matched RS71 §IK (`solve_ik_dual` of the PhysX-era `newton_routing_utils.py`) and (iii)-(iv) the Gripper-VGroove GRIP_HALF_SPAN decision ("NOT under-convergence"). None describes a prior attempt at a static convergence sweep of the wired UR15 solver; the directive is new (Rs1 Q1, 09-14). Recorded here per the guard's instruction rather than silently proceeding.
+- **Visual leg:** not applicable — the file produces no motion (nothing steps). Stated loudly per the protocol rather than omitted.
+
+### 5. Delivery note on m-p0-366R (window B)
+
+The hub's `visible` screen carries `m-p6-172 → p18（re m-p18-371 = p0 m-p0-366R …）` — i.e. p18 relayed 366R as m-p18-371 and p6 has already answered it. Delivered. (`--source recent` returned nothing at the time of this readback, so the confirmation is by the relay's own reference, not by the composer line.)
+
+### 6. What is next (not mine to start)
+
+- pZ: execute the harness from the pin (`d038e2536f`, blob `1d6b538400`), judge rows 1-11 + 1′; stop-cause tag per Rs1 supplement a.
+- p4: acceptance of window R0 as a deliverable (着手 ≠ 完成受入, supplement b).
+- Untouched and unlocked: route run ② / DDR #69; D4′ (§16); the acceptance-instrument window (§8.52 — waiting for p4's variant choice and pZ's pre-registration); the 09-07 WIP (DDR 72).
+- ⛔ gate 不変・route run 認可なし・self-start しません。
