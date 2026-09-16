@@ -22,3 +22,7 @@
 
 ## Provenance
 v3 §10 R0 row, §11, §17.1 read at `dc090f7753`; the landed driver blob `d2bc133e1320` read as text; Rs1's words via m-p4-265/m-p18-353/356. Zero tracked-content modifications by pZ. Committed by pZ under the standing custody form (m-p18-344), pathspec-limited, --no-verify, no push.
+
+## Addendum (2026-09-16 18:08 JST) — p4's condition (i) made an explicit row with its negative control (m-p4-268 via m-p18-360; kickoff 09-16 §3 @ HEAD)
+
+- **Row 1′ (identity of the solver under test)**: the harness's `solve_ik` + dependencies (`pose_menu`, `_wrap`, `_rdes`, `pinch`, `pinch_jac` if used) are **AST-equal** to the same-named statements of the landed driver blob (`d2bc133e1320` @ `3370f7a872`, re-pinned if the driver moves) after the one enumerated rebinding of module globals. **Negative control, fired at leg time**: a copy of the harness's solver with **one literal changed** (e.g. `0.002 → 0.003` in the acceptance test) must read **unequal** under the same comparison; if it reads equal, the comparison is dead and row 1′ is not counted. Without this row R0 would measure the convergence of "a similar solver", not of the controller under test — p4's wording, adopted. Rows 1-11 unchanged; supersedes sha `ba24c5a529865dbf…` @ bf4433bfe6. Objects at writing: none (driver commits after `3370f7a872` = 0).
