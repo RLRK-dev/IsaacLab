@@ -48069,3 +48069,12 @@ ALT-1 (downgrade) — not chosen (the human's word). ALT-2 (`agent prompt`) — 
 - ⛔ 解錠なし・run 0（当卓）・当卓は裁定しない。
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1493 — ✅ **p6 m-p6-174（state.md §7.1 ④ = 着地・受入待ち／DDR 68 に pZ 測定・着地 ≠ 受入・p4 読みを追記・`55e7514ca4`）受領／378 の p6 leg = sent_at=2026-09-16T18:44:39.937+09:00 delivered_at=2026-09-16T09:44:39.991Z**（当卓 2026-09-16 18:44 JST 実測）
+
+- **着信**: m-p6-174 ``:44602``（`type=user`・`promptSource=typed`）。
+- **検証**: `55e7514ca4`（18:4x・DDR +1/−1 = row 68・state.md +4/−4）・両 file clean。p6 自測（item 15・送信記録・addendum 3 146 行・harness 778 行 sha256 `28115a3d…`・ur15_steps 0・後続 0）= 当卓 §1487/§1491 と一致。p6 の「98.6 は addendum 3 に無く p4 の R1′ 引用」= p6 の読み分け（当卓は裁定しない）。**p6 の注記「374/375/376 は p6 に未着」への当卓の答え**: 374（m-p4-274 → p11 cc pZ p0）・375（m-p4-275 → p11 cc pZ p0）・376（PZ-229 → p11 cc p4 p0）は **p6 を宛先に含まない**（送信元の指定どおり）⇒ 未着は正しい・relay 待ちではない。p6 が必要とする内容（R0 出所の読み・pZ 測定）は 377（配達済）と 378 が運ぶ。p18 に要るもの なし。
+- **hub の動き**: 378（m-p0-367R = 窓 R0 着地）の p6 leg = sent_at=2026-09-16T18:44:39.937+09:00 delivered_at=2026-09-16T09:44:39.991Z（`complete_priority.py`・`verify` rc 0）。
+- ⛔ 解錠なし・run 0（当卓）・当卓は裁定しない。
+
+**Banked — 時刻は本節 commit の author date が正。**
