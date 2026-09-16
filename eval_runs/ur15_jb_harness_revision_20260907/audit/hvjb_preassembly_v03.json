@@ -1,0 +1,37 @@
+{
+  "recorded_at": "2026-09-16T09:04:55.502125+09:00",
+  "user_decision_sha256": "f28f0693cc48cf288b0c50846f3b23196cf11b02561ce1a8ef55528f8e45f6f6",
+  "output": "data/hvjb_preassembly_process_v03.json",
+  "output_sha256": "5e9d7078d4e7ff9772f8561788b29a34b28165e3118559385dcc78faf28b64e7",
+  "source_hashes_before": {
+    "data/hvjb_preassembly_process_v02.json": "643f75e175518552d290816b402291496e9bb7f21db97385d81180acc9cfe83d",
+    "data/hvjb_photo_correspondence_v03_p01.json": "6c5b7cb9bab859a33c8f5d5cd5429ce9f06fb0951b8a8fa4ae2a31ad99052ca0",
+    "UR15_JB_photo_correspondence_v03_p03.blend": "5205d3aa2c2b99f7df6f538d17b3d3ca36ba8208c546858ee8ec8a5a3564a282"
+  },
+  "source_hashes_after": {
+    "data/hvjb_preassembly_process_v02.json": "643f75e175518552d290816b402291496e9bb7f21db97385d81180acc9cfe83d",
+    "data/hvjb_photo_correspondence_v03_p01.json": "6c5b7cb9bab859a33c8f5d5cd5429ce9f06fb0951b8a8fa4ae2a31ad99052ca0",
+    "UR15_JB_photo_correspondence_v03_p03.blend": "5205d3aa2c2b99f7df6f538d17b3d3ca36ba8208c546858ee8ec8a5a3564a282"
+  },
+  "preserved_fields_exact": [
+    "preserved_catalog_fields",
+    "feature_correspondence",
+    "observations",
+    "observed_entities",
+    "assembly_relations",
+    "source_video_evidence",
+    "source_plate_evidence"
+  ],
+  "adopted_steps": [
+    "UZ01",
+    "UZ02",
+    "UZ03",
+    "UZ04",
+    "UZ05"
+  ],
+  "process_graph_acyclic": true,
+  "geometry_created": false,
+  "motion_created": false,
+  "movie_created": false,
+  "physical_acceptance_verdict": null
+}

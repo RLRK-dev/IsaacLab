@@ -1,0 +1,62 @@
+{
+  "decision_id": "HVJB_UNITIZATION_PROCEDURE_20260916",
+  "user_message_ja": "ok 現時点ではその手順でよい",
+  "status": "provisionally_adopted_by_user",
+  "basis": "user_selected_process_assumption",
+  "basis_note_ja": "直前に示した5段階を現時点の工程として採用。Ampere実物の固定方法を確認したという意味ではない。",
+  "steps": [
+    {
+      "id": "UZ01",
+      "parent_operation": "O30",
+      "name_ja": "下板側ユニットを位置決めする",
+      "details_ja": "下板側の位置と姿勢を定め、次の合わせ作業中も支持する。"
+    },
+    {
+      "id": "UZ02",
+      "parent_operation": "O30",
+      "name_ja": "ヒューズ板側の位置と向きを合わせる",
+      "details_ja": "ヒューズ板側の支持部を下板側の取付部へ合わせる。支持部の具体形状は未設定。"
+    },
+    {
+      "id": "UZ03",
+      "parent_operation": "O30",
+      "name_ja": "姿勢を保持しながらねじ固定する",
+      "details_ja": "両ユニットの相対姿勢を保持した状態で、ヒューズ板側を下板側へねじ固定する。"
+    },
+    {
+      "id": "UZ04",
+      "parent_operation": "O30",
+      "name_ja": "未接続端を搭載経路からよける",
+      "details_ja": "ケーブル・端子・コネクタを、筐体へ入れるときに挟まない方向へ案内する。"
+    },
+    {
+      "id": "UZ05",
+      "parent_operation": "O40",
+      "name_ja": "まとめたユニットを筐体へ搭載する",
+      "details_ja": "下板側とヒューズ板側をまとめて運び、自由端を案内しながら筐体へ入れる。"
+    }
+  ],
+  "planned_attachment": {
+    "method": "screw_fixation",
+    "from_role": "fuse_panel_side_support",
+    "to_role": "baseplate_side_mount",
+    "source_confirmation": "not_observed",
+    "direct_or_intermediate_support": null,
+    "support_geometry": null,
+    "fastener_positions_m": null,
+    "fastener_count": null,
+    "fastener_specification": null,
+    "torque_nm": null,
+    "grasp_surfaces": null
+  },
+  "later_operations_ja": "筐体への固定と残りの接続は搭載後に残す。内側端末の開口引出し、ヘッダー・バスバー・残接続、蓋・検査・払出しを省かない。",
+  "unchanged_scope_ja": [
+    "OP010はXYZ直交＋筐体20個収納。OP020は筐体側ヘッダー設置・ねじ固定。",
+    "正式なST配置・腕数・機種・タクトは今回選定していない。",
+    "筐体底面P01を可搬下板として扱わない。",
+    "上押さえや撤去した外側青い保持具を復活させない。",
+    "T050の40 mm後退・15度、保持対象の指定は継承する。",
+    "新動画を作る際は工程PNGから*_split_process_*_review.mp4一種類のみ。"
+  ],
+  "physical_acceptance_verdict": null
+}

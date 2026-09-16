@@ -480,3 +480,17 @@ numbers unknown until their basis and the scope of the product change are set.
   Plate joints, case fastening points and automated grasp surfaces remain open.
 - The p03 static native, prior catalog and process v02 are preserved. The new
   join review is source evidence, not another model or process-video revision.
+
+## Provisional unitization procedure adopted on 2026-09-16
+
+- The user explicitly accepted the five-step procedure for now: locate the
+  baseplate unit; align the fuse-panel side; retain the relative pose while
+  screw-fastening; guide free ends out of the insertion path; insert the combined
+  unit into the case. Use `analysis/hvjb_unitization_procedure_v01.md` and process
+  v03. Do not revert this procedure to unselected merely because its factory
+  counterpart is unobserved.
+- This selects a working procedure, not the factual Ampere joint geometry.
+  Direct versus bracket/standoff attachment, screw locations/count/specification,
+  torque, grasp surfaces, station layout and robot count remain unresolved.
+  Preserve source observations and prior natives. Case fastening and remaining
+  connections follow insertion; do not treat unitization as a completed product.
