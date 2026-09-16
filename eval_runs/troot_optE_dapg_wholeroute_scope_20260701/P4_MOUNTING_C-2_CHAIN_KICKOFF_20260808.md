@@ -2545,3 +2545,4 @@ flow 正直記録: fix は leg より先に lane に着地（pZ 命名「receipt
    - **targets（当卓 grep）**: harness `:666` `GL = (0.0986, 0.28, 0.9488)`・`GR = (0.1886, 0.28, 0.951)` = **U0 run.log `:93` の settle 後実測値（1e-4 丸め）** — pZ addendum 2 の compile 時 spec-nominal（0.106/0.194, 0.28, 0.954）と **x で ≈7 mm・z で ≈5 mm 違う**（settle offset）。当卓 item 12/13・m-p4-274/275 の読み = 拘束行は spec-nominal（committed text で pin）・U0 実測は報告行 ⇒ **follow-up (b) = rows 2-5 の拘束値を spec-nominal に切替え、U0 値は「settle 後の実例」として同 harness で報告**（p11 の出所行が確定させる）。
    - **word = 窓 R0 は着地・受入 保留**。受入 = p11（§10 R0 文の訂正・出所行・R0-ii 可否）→ p0 follow-up（(a)(b)・R0-ii 採用時 `pose_only=k`）→ pZ leg（rows 1-11・1′・addenda 2-3・停止札）→ 当卓。窓 B（`96e9ece175`）の受入 = pZ の B 行 leg 後（不変）。
    - ⛔ 解錠なし（route run (2)・#69・D4′・WIP）。
+   - **送信記録（18:44:22）**: 上記 word を **m-p4-277** として p18 へ（relay 先 p0/pZ/p11/p6）。prompt rc=0・p18 transcript に record。本文 = scratchpad `p4_dispatch/m-p4-277.txt`（内容は本 item 16 が正）。
