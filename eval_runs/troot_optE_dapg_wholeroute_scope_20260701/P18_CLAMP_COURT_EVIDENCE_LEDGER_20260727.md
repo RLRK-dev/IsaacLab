@@ -47940,3 +47940,14 @@ ALT-1 (downgrade) — not chosen (the human's word). ALT-2 (`agent prompt`) — 
 - ⛔ 解錠なし・run 0・当卓は裁定しない。
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1480 — ✅ **p4 m-p4-270（D4 受入 不変・pZ の prereg 2 本に addendum 各 1 行を求める・p0 に着地前の対照 2 本・`eb9bb9e161`）→ 364（→ pZ cc p0 p11・全 hold）／p6 m-p6-165（DDR 73 = 計器窓 open・`62acfa8f08`）受領／359 の p6 leg・363 の p4 leg 完了**（当卓 2026-09-16 18:13–18:15 JST 実測）
+
+- **着信**: m-p4-270 `:43813`（`type=user`・`promptSource=typed`・`09:13:41.395Z` = 18:13:41 JST）／m-p6-165 `:43829`（`type=attachment`・`09:14:02.119Z`）。
+- **m-p4-270 の検証**: kickoff item 8 @ `eb9bb9e161`（18:13:10・parent `87efa43ef5`・+9/−0: (a) 受入不変の理由 (b) R0 row 1 に負の対照なし (c) B 行 row 3 の literal が漂う定義 (d) p0 着地前の対照 2 本 (e) §17.6 読了）・送信記録 @ `ad47237f0b`。**当卓の cross-reading（裁定なし）**: p4 が求める addendum 2 行は **pZ の PZ-225（18:08:52 着・363 = p4 宛 hold 中で p4 未読）が既に commit 済** — R0 prereg: 「unequal / one literal / must fail」の grep = `bf4433bfe6` で 0 → `642a9162f0` で 1（p4 の grep 0 と一致・addendum が加えた）／B 行 prereg: `dc090f7753` の出現 = `aed109d06f` で 3 → `e41d0a9304` で 5。充足の判定は 363 が p4 に届いた後の p4 の読み。(d) は p0 の窓の事項（自身の `ast_pred.py` に pZ の新対照 2 本を発火 or pZ v3 採用・結果を着地記録に）。
+- **m-p6-165 の検証**: `62acfa8f08`（18:13:42・parent `e86f07caf6`・DDR +2/−2 = rows 68/73・state.md +3/−3）・両 file clean。DDR 73 = 「計器窓 open（Rs1 09-16 18:06:42「推奨」）・fix 未着手・critical path 外」＋窓の定義＋順序・custody は p4 transcript `:2637` を p6 が実読・「推奨 = 開く」は p4 の inference 札のまま・計器 pin（`38678f5946`・blob `0803ea391298`・`:214`・`:49-50`）= p6 自測 = 当卓読み（§1479）と一致。stale 句の訂正（DDR 68 ⛔ list・state.md §7.2/§7.3）= p6 の記載。行 73 の閉止 = p4 の受入語の relay で。p18 に要るもの なし。
+- **hub の動き**: **359 の p6 leg 完了**（p6 `done` を確認 → `send --id m-p18-359 --to PLAN-KEEPER`・18:14:51.551 → `09:14:51.842Z` DELIVERED）。**364** = m-p4-270（3,161 字・relay body sha256 `8a414f65fe4b2084…`・composed = `bodies/m-p18-364.txt`）→ pZ IMPL-VERIFIER cc p0 IMPL-BUILDER・p11 ARM-CONTROL-DESIGN: 3 卓 working ⇒ 全 hold（18:15:0x・rc 2・`verify` rc 0）。**363 の p4 leg 完了**（p4 `done` → 18:15:25.290 → `09:15:25.324Z` DELIVERED・`verify` rc 0）⇒ p4 は PZ-225 の addenda を手にした。
+- **hold 中の leg（18:15）**: 354（p6・p11）／357（p11・p6）／358（p11）／359（p0・p11・pZ）／360（p11）／361（p11・pZ）／363（p0・p11・p6）／364（p0・p11・pZ）。優先（当卓の順・内容で）: p11 = 359 → 360 → 361 → 363 → 364 → 358 → 357 → 354／pZ = 364 → 359 → 361／p0 = 364 → 359 → 363／p6 = 363 → 357 → 354。
+- ⛔ 解錠なし・run 0・当卓は裁定しない。
+
+**Banked — 時刻は本節 commit の author date が正。**
