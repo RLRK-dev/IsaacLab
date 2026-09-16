@@ -1,0 +1,161 @@
+{
+  "observed_at": "2026-09-16T10:57:18.117632+09:00",
+  "directory": "/home/rlrk/Downloads/THREAD_HVJB_ロボット集約案_v01_20260916",
+  "input_sha256_before": {
+    "data/hvjb_preassembly_process_v03.json": "5e9d7078d4e7ff9772f8561788b29a34b28165e3118559385dcc78faf28b64e7",
+    "data/hvjb_unitization_roles_v01.json": "7282ac79494d7704c7a88b48627b1d8cc72db0a883395d864ab1142454a3e802",
+    "data/hand_provisional_spec_v01.json": "0ed18d28e261b73ae1fd3beb1686ad4c2b55071974d9b8708e358b79efa8b799",
+    "data/hvjb_photo_correspondence_v03_p01.json": "6c5b7cb9bab859a33c8f5d5cd5429ce9f06fb0951b8a8fa4ae2a31ad99052ca0",
+    "UR15_JB_photo_correspondence_v03_p03.blend": "5205d3aa2c2b99f7df6f538d17b3d3ca36ba8208c546858ee8ec8a5a3564a282",
+    "data/hvjb_robot_allocation_v01.json": "2e8516405684475d04fcf57938e7771c0283a5ab23cf482aa6fba4b718889dd9",
+    "analysis/cell_robot_allocation_v02.md": "759b40df0bbc30871ae39cdf4b9383668bef4a0394503f51eb46a7ae7813a497"
+  },
+  "input_sha256_after": {
+    "data/hvjb_preassembly_process_v03.json": "5e9d7078d4e7ff9772f8561788b29a34b28165e3118559385dcc78faf28b64e7",
+    "data/hvjb_unitization_roles_v01.json": "7282ac79494d7704c7a88b48627b1d8cc72db0a883395d864ab1142454a3e802",
+    "data/hand_provisional_spec_v01.json": "0ed18d28e261b73ae1fd3beb1686ad4c2b55071974d9b8708e358b79efa8b799",
+    "data/hvjb_photo_correspondence_v03_p01.json": "6c5b7cb9bab859a33c8f5d5cd5429ce9f06fb0951b8a8fa4ae2a31ad99052ca0",
+    "UR15_JB_photo_correspondence_v03_p03.blend": "5205d3aa2c2b99f7df6f538d17b3d3ca36ba8208c546858ee8ec8a5a3564a282",
+    "data/hvjb_robot_allocation_v01.json": "2e8516405684475d04fcf57938e7771c0283a5ab23cf482aa6fba4b718889dd9",
+    "analysis/cell_robot_allocation_v02.md": "759b40df0bbc30871ae39cdf4b9383668bef4a0394503f51eb46a7ae7813a497"
+  },
+  "copied": [
+    {
+      "source": "analysis/cell_robot_allocation_v02.md",
+      "file": "割当案.md",
+      "sha256": "759b40df0bbc30871ae39cdf4b9383668bef4a0394503f51eb46a7ae7813a497"
+    },
+    {
+      "source": "data/hvjb_robot_allocation_v01.json",
+      "file": "allocation.json",
+      "sha256": "2e8516405684475d04fcf57938e7771c0283a5ab23cf482aa6fba4b718889dd9"
+    },
+    {
+      "source": "data/hvjb_preassembly_process_v03.json",
+      "file": "process_v03.json",
+      "sha256": "5e9d7078d4e7ff9772f8561788b29a34b28165e3118559385dcc78faf28b64e7"
+    },
+    {
+      "source": "data/hvjb_unitization_roles_v01.json",
+      "file": "unitization_roles.json",
+      "sha256": "7282ac79494d7704c7a88b48627b1d8cc72db0a883395d864ab1142454a3e802"
+    }
+  ],
+  "task_csv_sha256": "b4f906de7a8b112550c756929c7f70034ad613061291035633d7f2d4f0837dc7",
+  "observations": {
+    "source_operation_ids": [
+      "O00",
+      "O01",
+      "O10",
+      "O20",
+      "O30",
+      "O40",
+      "O42",
+      "O45",
+      "O50",
+      "O60",
+      "O70",
+      "O80"
+    ],
+    "covered_operation_ids": [
+      "O00",
+      "O01",
+      "O10",
+      "O20",
+      "O30",
+      "O40",
+      "O42",
+      "O45",
+      "O50",
+      "O60",
+      "O70",
+      "O80"
+    ],
+    "task_count": 20,
+    "simultaneous_group_count": 10,
+    "reference_integrity": true,
+    "same_single_actuator_exclusions_during_overlap": [
+      {
+        "roles": [
+          "R-A",
+          "T-A"
+        ],
+        "condition_ja": "部品を保持した状態で締結する区間"
+      },
+      {
+        "roles": [
+          "R-B",
+          "T-B"
+        ],
+        "condition_ja": "部品を保持した状態で締結する区間"
+      },
+      {
+        "roles": [
+          "R-A",
+          "X-A"
+        ],
+        "condition_ja": "Aで両端独立保持が必要な対象接続"
+      },
+      {
+        "roles": [
+          "R-B",
+          "X-B"
+        ],
+        "condition_ja": "Bで両端独立保持が必要な対象接続"
+      },
+      {
+        "roles": [
+          "R-C",
+          "T-C"
+        ],
+        "condition_ja": "ヒューズ板を保持しながら板間ねじを締める区間"
+      },
+      {
+        "roles": [
+          "R-C",
+          "X-C"
+        ],
+        "condition_ja": "一体ユニットと自由端を独立操作する区間"
+      },
+      {
+        "roles": [
+          "R-C",
+          "X-C"
+        ],
+        "condition_ja": "ハウジングと線を同時に独立操作する区間"
+      },
+      {
+        "roles": [
+          "R-C",
+          "T-C"
+        ],
+        "condition_ja": "ヘッダーを保持しながらフランジをねじ固定する区間"
+      },
+      {
+        "roles": [
+          "R-C",
+          "X-C"
+        ],
+        "condition_ja": "Cで両端・別部材の独立保持が必要な接続"
+      }
+    ],
+    "unitization_panel_and_carry_role_overlap_states": [],
+    "overlap_scope": "Only the prior 9 diagram states; not measured timing or physical handover",
+    "primary_candidate_slots": [
+      "R-A",
+      "R-B",
+      "R-C"
+    ],
+    "unallocated_assist_roles": [
+      "X-A",
+      "X-B",
+      "X-C"
+    ],
+    "installed_robot_count": null,
+    "minimum_robot_count": null,
+    "source_video_timestamps_used_as_durations": false
+  },
+  "source_catalog_fields_preserved": true,
+  "mechanism_or_motion_changed": false,
+  "physical_acceptance_verdict": null
+}

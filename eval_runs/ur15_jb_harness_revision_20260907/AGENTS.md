@@ -509,3 +509,24 @@ numbers unknown until their basis and the scope of the product change are set.
   Do not add lifting tabs, trap fingers under the baseplate, or use cables or
   contactor bodies as a demonstrated lifting interface. The page is scale-free;
   its role coverage check is bookkeeping, not physical support validation.
+
+## Task allocation and robot consolidation goal on 2026-09-16
+
+- The user explicitly set the goal: decompose work, assign robot roles, then
+  consolidate onto a small number of robots. Use
+  `analysis/cell_robot_allocation_v02.md` and
+  `data/hvjb_robot_allocation_v01.json` for the current allocation comparison.
+  The process v03's old A tool-arm-first wording is historical for allocation;
+  compare the stationary tool/positioning-axis route before adding a tool arm.
+- R-A/B/C are initial primary-role slots, not a selected final count. X-A/B/C
+  reserve conditional independent holding roles, not three purchased robots.
+  Allocate concurrent jobs first, then combine sequential jobs and compare
+  sharing across cells. Do not replace an unresolved role with zero equipment.
+- Holding dwell, tool waits, final handoff, release, travel and hand changes
+  occupy the resource too. Keep the free-end guide reserved until its handoff;
+  do not free it automatically after enclosure insertion. Preserve the three-ST
+  parallel-work intent and conditional two-spindle simultaneous fastening.
+- Count Cartesian robots, external axes, spindles, feeders, changers, fixtures,
+  supported buffers, inspection, replenishment and recovery separately. Source
+  video timestamps are not durations. Minimum robot count, cadence and physical
+  feasibility remain unmeasured; role-reference checks do not establish them.
