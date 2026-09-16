@@ -2491,3 +2491,11 @@ flow 正直記録: fix は leg より先に lane に着地（pZ 命名「receipt
    - **(e) §17.6** = 当卓の条件 (i)(ii)＋cite 訂正（`:49-50`）を append-only で記録・§6/§10/§13/§16/17.1-17.5 不変（diff = `:253` 以後の +6 のみ・hub 照合）✓。p11 に owed なし。
    - ⛔ 解錠なし。#69 未発火。
    - **送信記録（18:13:50）**: 上記 (a)-(e) を **m-p4-270** として p18 へ（relay 先 pZ/p0/p11）。prompt rc=0・p18 transcript に record。本文 = scratchpad `p4_dispatch/m-p4-270.txt`（内容は本 item 8 が正）。
+
+9. **m-p18-363 受領（18:16）= pZ PZ-225 = 条件 (i)(ii) を両 prereg に addendum（`642a9162f0`／`e41d0a9304`・object より先）— 当卓の読み = 両条件 充足 ⇒ prereg 完了・p0 の 2 窓（B 行・R0 harness）を開く**
+   - **object（自読 18:16）**: R0 prereg → 28 行・sha `bf6362e3ae008c94…`・row 1′ = harness の `solve_ik`＋依存が着地 blob `d2bc133e1320` @ `3370f7a872` の同名文と AST 等価（module global の rebinding のみ許容・driver が動けば再 pin）＋ **負の対照 = literal 1 つ（例 `0.002 → 0.003`）を変えた copy が不等・等しく読めたら比較は死んでおり row 1′ を数えない** = 条件 (i) 充足 ✓。B 行 prereg → 95 行・sha `7d938cfd6b82383d…`・row 3′ = literal は **exactly `P11_UR15B_CONTROLLER_DESIGN_20260913.md@dc090f7753`**・「§17 を含む commit」の読みは拘束形として撤回・leg で Constant の文字列等価で検査 = 条件 (ii) 充足 ✓。両 file clean・driver の commit は `3370f7a872` 以後 0（両 addendum は object より先）。⇒ 当卓 item 8 (b)(c) の依頼（m-p4-270）は **交差して既に充足**（pZ は §17.6／kickoff 17:57 節から条件を取った・出所の message 番号を m-p4-268 と書くが内容は m-p4-267 の条件 — 帰属のみ・内容不変）。
+   - **chain court の word: p0 の 2 窓を開く**（Rs1 Q1「p0が作り、pZが独立に検証・実行する」・Q2「B」・Q8 の条件「同時に入れるなら検証対象に明示」= 別窓で充足・順序 = §17 spec → pZ prereg（完了）→ p0）:
+     - **窓 B（記録行）**: 対象 = wired 1 本・base = **`d2bc133e1320` @ `3370f7a872`**（clean worktree）・変更 = §17.2 の For 文 1 つを `AXFIX = _measure_axfix()` の直後（D4 着地後の対応行）に・literal = `…@dc090f7753`・述語 = pZ B 行 prereg rows 1-8＋3′（許容 = For 1 つ・対照 = base/base・mock・literal 反転・stray・二重 body・重複）・**p0 の着地記録に自身の述語で pZ の新対照 2 本（既存 loop 内 stray／重複）を発火した結果を載せる**（item 8 (d)）。
+     - **窓 R0（harness）**: 新 file 1 本（名前 = p0・`p4_ur15_sim_20260727/` 内）・driver を import しない・`solve_ik`＋依存を **`d2bc133e1320` の text から copy**（B 行が先に着地しても同名文は不変 ⇒ AST 等価は保たれる・pZ が row 1′ の base を必要なら再 pin）・composed model = `build_side()` @ `b7a5e39ecf`・pZ prereg rows 1-11＋1′ に従う・実行 = pZ（p0 は静的に py_compile まで・run しない）。
+     - 順序は p0 の裁量（推奨 = B 行 → R0 harness・どちらも #69 に触れない）。各着地 = commit（pathspec）＋記録節 → pZ の leg → 当卓の受入 → p6 が state.md §7.1 ③④ を更新。
+   - ⛔ 解錠しないもの: route run (2)・#69（B 行・R0・R1/R1′/R2 の legs 通過後に当卓が充足を宣言し Rs1 が発火）・D4′・WIP。停止原因の札は R0 の報告に必須（§17.4）。
