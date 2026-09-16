@@ -48001,3 +48001,12 @@ ALT-1 (downgrade) — not chosen (the human's word). ALT-2 (`agent prompt`) — 
 - ⛔ 解錠なし・run 0（当卓）・当卓は裁定しない。
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1485 — ✅ **p6 m-p6-171（p1A -002 による amendment `45a214e877`＋訂正 `1c48e703db`・返却 SHA 3 件 = label 待ち）受領／p4 m-p4-275（pZ addendum 2 の読み: (a)(b)(d) 受入・(c) 数値は収束・pin 対象を dump → committed text・`156403cef0`）→ m-p18-375（→ p11 cc pZ p0）**（当卓 2026-09-16 18:32–18:33 JST 実測）
+
+- **着信**: m-p6-171 `:44340`（`type=user`・`promptSource=typed`・`09:32:08.670Z` = 18:32:08 JST）／m-p4-275 `:44356`（`type=attachment`・`09:32:16.538Z`）。
+- **m-p6-171 の検証**: `45a214e87756c2c0ad0e42eb11ab780b99885bb3`（18:31:01・parent `eeda714d3c`・DDR +3/−3 = rows 35/70/71）／`1c48e703db35e3eaa3d16d9e6ef4fc9444b676c1`（18:31:41・parent `86955592af`・DDR +1/−1 = row 35 の出典句）・DDR clean @ HEAD。#35 の対象 = 選択肢説明文で 5 commit（bfe51e3f44・3b3a444b83・de7033f865・a3be545e43・5762f891b8）・513b48947d は文言に無い・他の code commit に及ばない／出典 = `5762f891b8` commit 文 `:109-110`（Layer 6 = #48 item 6・Layer 4 = audit .py untracked「in no DDR」）＋ `:234-236`「fails twice, in Layers 4 and 6 … 13 Layer 8 warnings」= 当卓も同 3 行を実読・一致／#70 = 2 答の説明文＋副問（p18 code = 09-06「すべて推奨」`:40230`・§1442／本 series = `:2952`／全般 = 無し）／#71 = 説明文の引用＋5762f891b8 = -002 の list 内。訂正の理由（literal「2 FAIL」の grep 誤り）= p6 が行 35 に経緯を残した = p6 の記載。**p1A への返却 = 完全 SHA 3 件（`d0d37eeaa386580d9dae81f6f9f2743bf2abb2aa`・`45a214e87756c2c0ad0e42eb11ab780b99885bb3`・`1c48e703db35e3eaa3d16d9e6ef4fc9444b676c1`）— `w2:p1A` は依然 label 空（18:32 実測・idle）⇒ tool refuse・Rs1 の label or 手送りの語待ち**（当卓が保持）。p18 に要るもの なし。
+- **m-p4-275 の検証**: kickoff item 13 @ `156403cef0`（18:31:46・parent `1c48e703db`・+5/−0）。dump `_gen/_steps_cell_full.xml` = untracked（当卓 `git ls-files` 0 件）・設計 §2 表 `:45` @ `2743fc4549` に「driver が import 毎に書く `:446`・09-05 08:23・sha256 `4158e4e638e9b0fc…`」と不使用の札 = p4 の理由と整合。GL/GR の導出（x = GRASP_CENTRE_X ∓ GRIP_HALF_SPAN・y = REST_Y・z = compile 時 cable 高さ）= p4 の読み・当卓は再計算せず。**m-p18-375** = m-p4-275（relay body sha256 `60f41f3cce7cc913…`）→ p11 ARM-CONTROL-DESIGN cc pZ IMPL-VERIFIER・p0 IMPL-BUILDER: 3 卓 working ⇒ 全 hold（rc 2・`verify` rc 0）。374 と同じ idle 窓で p11 へ（設計の決定 = p11・p4 の語）。
+- ⛔ 解錠なし・run 0（当卓）・当卓は裁定しない。Rs1 へ: p1A label（返却 SHA 3 件）・push。
+
+**Banked — 時刻は本節 commit の author date が正。**
