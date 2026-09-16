@@ -1,0 +1,381 @@
+{
+  "observed_at": "2026-09-16T12:24:42.916Z",
+  "directory": "/home/rlrk/Downloads/THREAD_HVJB_最終接続と保持_v01_20260916",
+  "cases": [
+    {
+      "view": "free236",
+      "zoom": false,
+      "annotated": false,
+      "viewBox": [
+        0,
+        0,
+        1920,
+        1080
+      ]
+    },
+    {
+      "view": "free236",
+      "zoom": false,
+      "annotated": true,
+      "viewBox": [
+        0,
+        0,
+        1920,
+        1080
+      ]
+    },
+    {
+      "view": "free236",
+      "zoom": true,
+      "annotated": false,
+      "viewBox": [
+        330,
+        170,
+        790,
+        610
+      ]
+    },
+    {
+      "view": "free236",
+      "zoom": true,
+      "annotated": true,
+      "viewBox": [
+        330,
+        170,
+        790,
+        610
+      ]
+    },
+    {
+      "view": "bar238",
+      "zoom": false,
+      "annotated": false,
+      "viewBox": [
+        0,
+        0,
+        1920,
+        1080
+      ]
+    },
+    {
+      "view": "bar238",
+      "zoom": false,
+      "annotated": true,
+      "viewBox": [
+        0,
+        0,
+        1920,
+        1080
+      ]
+    },
+    {
+      "view": "bar238",
+      "zoom": true,
+      "annotated": false,
+      "viewBox": [
+        330,
+        200,
+        780,
+        560
+      ]
+    },
+    {
+      "view": "bar238",
+      "zoom": true,
+      "annotated": true,
+      "viewBox": [
+        330,
+        200,
+        780,
+        560
+      ]
+    },
+    {
+      "view": "row242",
+      "zoom": false,
+      "annotated": false,
+      "viewBox": [
+        0,
+        0,
+        1920,
+        1080
+      ]
+    },
+    {
+      "view": "row242",
+      "zoom": false,
+      "annotated": true,
+      "viewBox": [
+        0,
+        0,
+        1920,
+        1080
+      ]
+    },
+    {
+      "view": "row242",
+      "zoom": true,
+      "annotated": false,
+      "viewBox": [
+        595,
+        330,
+        490,
+        440
+      ]
+    },
+    {
+      "view": "row242",
+      "zoom": true,
+      "annotated": true,
+      "viewBox": [
+        595,
+        330,
+        490,
+        440
+      ]
+    },
+    {
+      "view": "main248",
+      "zoom": false,
+      "annotated": false,
+      "viewBox": [
+        0,
+        0,
+        1920,
+        1080
+      ]
+    },
+    {
+      "view": "main248",
+      "zoom": false,
+      "annotated": true,
+      "viewBox": [
+        0,
+        0,
+        1920,
+        1080
+      ]
+    },
+    {
+      "view": "main248",
+      "zoom": true,
+      "annotated": false,
+      "viewBox": [
+        645,
+        355,
+        590,
+        425
+      ]
+    },
+    {
+      "view": "main248",
+      "zoom": true,
+      "annotated": true,
+      "viewBox": [
+        645,
+        355,
+        590,
+        425
+      ]
+    },
+    {
+      "view": "tool256",
+      "zoom": false,
+      "annotated": false,
+      "viewBox": [
+        0,
+        0,
+        1920,
+        1080
+      ]
+    },
+    {
+      "view": "tool256",
+      "zoom": false,
+      "annotated": true,
+      "viewBox": [
+        0,
+        0,
+        1920,
+        1080
+      ]
+    },
+    {
+      "view": "tool256",
+      "zoom": true,
+      "annotated": false,
+      "viewBox": [
+        410,
+        220,
+        800,
+        610
+      ]
+    },
+    {
+      "view": "tool256",
+      "zoom": true,
+      "annotated": true,
+      "viewBox": [
+        410,
+        220,
+        800,
+        610
+      ]
+    },
+    {
+      "view": "lid260",
+      "zoom": false,
+      "annotated": false,
+      "viewBox": [
+        0,
+        0,
+        1920,
+        1080
+      ]
+    },
+    {
+      "view": "lid260",
+      "zoom": false,
+      "annotated": true,
+      "viewBox": [
+        0,
+        0,
+        1920,
+        1080
+      ]
+    },
+    {
+      "view": "lid260",
+      "zoom": true,
+      "annotated": false,
+      "viewBox": [
+        400,
+        190,
+        830,
+        680
+      ]
+    },
+    {
+      "view": "lid260",
+      "zoom": true,
+      "annotated": true,
+      "viewBox": [
+        400,
+        190,
+        830,
+        680
+      ]
+    },
+    {
+      "view": "cut264",
+      "zoom": false,
+      "annotated": false,
+      "viewBox": [
+        0,
+        0,
+        1920,
+        1080
+      ]
+    },
+    {
+      "view": "cut264",
+      "zoom": false,
+      "annotated": true,
+      "viewBox": [
+        0,
+        0,
+        1920,
+        1080
+      ]
+    },
+    {
+      "view": "cut264",
+      "zoom": true,
+      "annotated": false,
+      "viewBox": [
+        0,
+        0,
+        1920,
+        1080
+      ]
+    },
+    {
+      "view": "cut264",
+      "zoom": true,
+      "annotated": true,
+      "viewBox": [
+        0,
+        0,
+        1920,
+        1080
+      ]
+    }
+  ],
+  "roles": [
+    {
+      "id": "ARM_C",
+      "text": "C主腕\n今回の板状導体\n\n位置合わせ・必要な保持\n\n本体支持からの引継ぎが先"
+    },
+    {
+      "id": "ASSIST_2",
+      "text": "C専用補助\n今回の丸端子付き線\n\n被覆側を保持し、端子穴を空ける\n\n現在の保持対象を受け渡してから"
+    },
+    {
+      "id": "ASSIST_1",
+      "text": "A/B共用補助\n残る自由端（必要な場合）\n\n案内を継続する比較\n\nその間、次のA/B補助は待つ"
+    },
+    {
+      "id": "T-C",
+      "text": "据置締付工具\n今回の締結点\n\n接合面が揃った後に締結・退避\n\n主軸・位置決め軸は別設備"
+    }
+  ],
+  "stages": [
+    "prepare",
+    "fasten",
+    "handoff",
+    "reuse"
+  ],
+  "mobile": {
+    "width": 480,
+    "documentWidth": 465,
+    "views": 7
+  },
+  "local_links": [
+    "evidence/assembly_236s.png",
+    "overview.png",
+    "overview.svg",
+    "evidence/assembly_212s.png",
+    "evidence/assembly_220s.png",
+    "evidence/assembly_228s.png",
+    "evidence/assembly_238s.png",
+    "evidence/assembly_240s.png",
+    "evidence/assembly_242s.png",
+    "evidence/assembly_244s.png",
+    "evidence/assembly_246s.png",
+    "evidence/assembly_248s.png",
+    "evidence/assembly_250s.png",
+    "evidence/assembly_252s.png",
+    "evidence/assembly_254s.png",
+    "evidence/assembly_256s.png",
+    "evidence/assembly_258s.png",
+    "evidence/assembly_260s.png",
+    "evidence/assembly_264s.png",
+    "notes.md",
+    "review_data.json",
+    "evidence_index.json",
+    "catalog.json",
+    "all_workcards.json",
+    "selection.json",
+    "hand_families.json"
+  ],
+  "exports_sha256": {
+    "overview.svg": "73408fff2dfad4dcc4e3b027e294c97a388d63d3df28b0d59e1ac0f210d09a3a",
+    "browser_row242.png": "8bd6ee8192cb0954b361e93320404b20f8a7d6f561c9ee0d95ea3a10c173e343",
+    "browser_main248.png": "b34cf9f981ed215cd5550670a68f843c34bc17b1663b3cde8d3117a327e9c87a",
+    "browser_tool256.png": "27134643dc3317d4c5b44903a5e8c357500b7f2ac3ede9dc771fd3a1d5caefb1",
+    "browser_mobile.png": "4c03b1952b96231811ccbbac6fa516ef087b456d85058fbd1ea8dcb565679e99",
+    "overview.png": "a697810b887d77ce1af826438609f0d51b0a274196e550cc983d39d2629dbfda"
+  },
+  "javascript_errors": [],
+  "scope": "UI, image and text correspondence only; no wire-completeness, release or physical acceptance verdict"
+}

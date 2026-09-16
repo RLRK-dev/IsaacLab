@@ -1,0 +1,674 @@
+{
+  "status": "source_observations_and_unselected_holding_comparison",
+  "selected_plan": "S5_AB",
+  "selected_arm_count": 5,
+  "summary_ja": "筐体への組込み・外側ヘッダー取付の後にも、板状導体の追加と筐体内の締結が残る。",
+  "views": [
+    {
+      "id": "free236",
+      "second": 236,
+      "title_ja": "内部に自由な丸端子が残る",
+      "focus_px": [
+        330,
+        170,
+        790,
+        610
+      ],
+      "markers": [],
+      "observation_ja": "筐体内の部品から伸びた丸端子付き線が上方に出ている。机上にはまだ板状の金属部品がある。",
+      "limit_ja": "組込み前のA/Bの各線と、この時点の丸端子の一本対応は未確認。端子群の全数や保持点数は決めない。",
+      "frame": {
+        "requested_seek_s": 236,
+        "timestamp_basis": "ffmpeg accurate seek; first display frame at/after the requested time",
+        "file": "references/hvjb_final_connections_20260916/assembly_236s.png",
+        "sha256": "dd63a326b7e648c0c006afc1d8edcd87a824361edb950b7e1d2276471c09857b",
+        "size_px": [
+          1920,
+          1080
+        ],
+        "url": "https://www.youtube.com/watch?v=Sm_D-vmNYqc&t=236s",
+        "pixel_transform": "none; full decoded frame without cropping or generated edits",
+        "local_image": "evidence/assembly_236s.png"
+      }
+    },
+    {
+      "id": "bar238",
+      "second": 238,
+      "title_ja": "多穴の板状導体を追加する",
+      "focus_px": [
+        330,
+        200,
+        780,
+        560
+      ],
+      "markers": [
+        {
+          "id": "B",
+          "xy_px": [
+            867,
+            343
+          ],
+          "label_ja": "手に持った多穴の板状部品"
+        },
+        {
+          "id": "R",
+          "xy_px": [
+            737,
+            305
+          ],
+          "label_ja": "まだ自由な丸端子の一例"
+        }
+      ],
+      "observation_ja": "複数の穴がある細長い板状部品を、作業者が筐体の上で持っている。筐体内には自由な丸端子が残る。",
+      "limit_ja": "この一枚では板状部品の最終取付先、極性、ねじとの積層は見えない。前後の編集をまたぐ個体追跡は確定しない。",
+      "frame": {
+        "requested_seek_s": 238,
+        "timestamp_basis": "ffmpeg accurate seek; first display frame at/after the requested time",
+        "file": "references/hvjb_final_connections_20260916/assembly_238s.png",
+        "sha256": "c1cd6abe0d0f565093968dfc062c5e7049c71cf69f6023c63a4f953b4983d5f5",
+        "size_px": [
+          1920,
+          1080
+        ],
+        "url": "https://www.youtube.com/watch?v=Sm_D-vmNYqc&t=238s",
+        "pixel_transform": "none; full decoded frame without cropping or generated edits",
+        "local_image": "evidence/assembly_238s.png"
+      }
+    },
+    {
+      "id": "row242",
+      "second": 242,
+      "title_ja": "側壁に沿う端子の列",
+      "focus_px": [
+        595,
+        330,
+        490,
+        440
+      ],
+      "markers": [
+        {
+          "id": "J1",
+          "xy_px": [
+            891,
+            568
+          ],
+          "label_ja": "板状導体上の丸端子・ねじの列"
+        }
+      ],
+      "observation_ja": "オレンジ色ヘッダーが並ぶ側壁の内側に、細長い導体と丸端子・ねじの列が見える。ケーブルが近傍からこの列へ曲がり込んでいる。",
+      "limit_ja": "各線をA/Bの元の端末、2022年写真のID、回路の極性、個別ボルトへ対応させるところまでは追えていない。締付完了も外観では判断しない。",
+      "frame": {
+        "requested_seek_s": 242,
+        "timestamp_basis": "ffmpeg accurate seek; first display frame at/after the requested time",
+        "file": "references/hvjb_final_connections_20260916/assembly_242s.png",
+        "sha256": "973a61b327b9152da37d2af0f5cc67dfab0346e10b3030b3593eba9c78381e82",
+        "size_px": [
+          1920,
+          1080
+        ],
+        "url": "https://www.youtube.com/watch?v=Sm_D-vmNYqc&t=242s",
+        "pixel_transform": "none; full decoded frame without cropping or generated edits",
+        "local_image": "evidence/assembly_242s.png"
+      }
+    },
+    {
+      "id": "main248",
+      "second": 248,
+      "title_ja": "主端子・接触器まわりの導体",
+      "focus_px": [
+        645,
+        355,
+        590,
+        425
+      ],
+      "markers": [
+        {
+          "id": "J2",
+          "xy_px": [
+            852,
+            491
+          ],
+          "label_ja": "接触器脇のスタッドと板状導体"
+        },
+        {
+          "id": "J3",
+          "xy_px": [
+            785,
+            499
+          ],
+          "label_ja": "板状導体上の丸端子付き線"
+        },
+        {
+          "id": "B",
+          "xy_px": [
+            950,
+            452
+          ],
+          "label_ja": "次に持ち込んだ別の板状部品"
+        }
+      ],
+      "observation_ja": "画面左の主端子側から接触器脇へ延びる板状導体が見える。その上に丸端子付き線とねじがあり、作業者は別の穴付き板状部品を持っている。",
+      "limit_ja": "手に持った部品の両接続先と、隠れた締結積層は未確定。J2/J3は画像内の位置の識別で、公式の部品番号や全接続表ではない。",
+      "frame": {
+        "requested_seek_s": 248,
+        "timestamp_basis": "ffmpeg accurate seek; first display frame at/after the requested time",
+        "file": "references/hvjb_final_connections_20260916/assembly_248s.png",
+        "sha256": "94fc8501daae300615d56701f052d7a4cbf67701d50db74d1b46f14fe5f98f0b",
+        "size_px": [
+          1920,
+          1080
+        ],
+        "url": "https://www.youtube.com/watch?v=Sm_D-vmNYqc&t=248s",
+        "pixel_transform": "none; full decoded frame without cropping or generated edits",
+        "local_image": "evidence/assembly_248s.png"
+      }
+    },
+    {
+      "id": "tool256",
+      "second": 256,
+      "title_ja": "筐体内へ工具を入れる",
+      "focus_px": [
+        410,
+        220,
+        800,
+        610
+      ],
+      "markers": [],
+      "observation_ja": "作業者は手工具を筐体内へ入れて作業している。もう一方の手も内部にある。",
+      "limit_ja": "工具先端と対象の接合面は手や筐体で隠れる。対象ボルト、トルク、支持範囲、全接続の締結完了は読み取らない。",
+      "frame": {
+        "requested_seek_s": 256,
+        "timestamp_basis": "ffmpeg accurate seek; first display frame at/after the requested time",
+        "file": "references/hvjb_final_connections_20260916/assembly_256s.png",
+        "sha256": "c595bb861c6b448cf349720fec206ee4909f3f895c4ae92047ae98b93980964b",
+        "size_px": [
+          1920,
+          1080
+        ],
+        "url": "https://www.youtube.com/watch?v=Sm_D-vmNYqc&t=256s",
+        "pixel_transform": "none; full decoded frame without cropping or generated edits",
+        "local_image": "evidence/assembly_256s.png"
+      }
+    },
+    {
+      "id": "lid260",
+      "second": 260,
+      "title_ja": "蓋を載せる場面",
+      "focus_px": [
+        400,
+        190,
+        830,
+        680
+      ],
+      "markers": [],
+      "observation_ja": "作業台上の筐体へ黒い蓋を載せている。",
+      "limit_ja": "蓋の搭載は、隠れた各接続の完成や検査結果を示さない。補助腕の解放時点の根拠にもならない。",
+      "frame": {
+        "requested_seek_s": 260,
+        "timestamp_basis": "ffmpeg accurate seek; first display frame at/after the requested time",
+        "file": "references/hvjb_final_connections_20260916/assembly_260s.png",
+        "sha256": "911a1442e40b452e1b8249300336b67d06039be973db19f1533b0460242d1c86",
+        "size_px": [
+          1920,
+          1080
+        ],
+        "url": "https://www.youtube.com/watch?v=Sm_D-vmNYqc&t=260s",
+        "pixel_transform": "none; full decoded frame without cropping or generated edits",
+        "local_image": "evidence/assembly_260s.png"
+      }
+    },
+    {
+      "id": "cut264",
+      "second": 264,
+      "title_ja": "別の設置場面へ切り替わる",
+      "focus_px": [
+        0,
+        0,
+        1920,
+        1080
+      ],
+      "markers": [],
+      "observation_ja": "作業台上の組立映像から、車両に設置された外観の映像へ切り替わっている。",
+      "limit_ja": "同じ個体の連続した組立記録とは扱わない。ラベルから手前の各配線を逆算して対応させない。",
+      "frame": {
+        "requested_seek_s": 264,
+        "timestamp_basis": "ffmpeg accurate seek; first display frame at/after the requested time",
+        "file": "references/hvjb_final_connections_20260916/assembly_264s.png",
+        "sha256": "a2c8e4ebe653ea02218172d191c6fa2bdcf0f0098ace5e9e72aa24f2fffacccc",
+        "size_px": [
+          1920,
+          1080
+        ],
+        "url": "https://www.youtube.com/watch?v=Sm_D-vmNYqc&t=264s",
+        "pixel_transform": "none; full decoded frame without cropping or generated edits",
+        "local_image": "evidence/assembly_264s.png"
+      }
+    }
+  ],
+  "joint_observations": [
+    {
+      "id": "J1",
+      "view": "row242",
+      "name_ja": "側壁沿いの導体と丸端子の列",
+      "physical_wire_ids": null,
+      "electrical_group_ids": null,
+      "photo_feature_ids": null,
+      "complete_joint_stack": null,
+      "fastener_count": null,
+      "release_condition": null
+    },
+    {
+      "id": "J2",
+      "view": "main248",
+      "name_ja": "接触器脇のスタッドと板状導体",
+      "physical_wire_ids": null,
+      "electrical_group_ids": null,
+      "photo_feature_ids": null,
+      "complete_joint_stack": null,
+      "fastener_count": null,
+      "release_condition": null
+    },
+    {
+      "id": "J3",
+      "view": "main248",
+      "name_ja": "主端子側の板状導体上にある丸端子",
+      "physical_wire_ids": null,
+      "electrical_group_ids": null,
+      "photo_feature_ids": null,
+      "complete_joint_stack": null,
+      "fastener_count": null,
+      "release_condition": null
+    }
+  ],
+  "holding_comparison": {
+    "task": "D60",
+    "status": "unselected_role_comparison_not_controller",
+    "title_ja": "Cの主腕と補助2腕を、締結部と残りの案内に分ける比較",
+    "preconditions_ja": [
+      "本体支持をF-C等へ引き継ぎ、C主腕が板状導体の作業に移れること。本体支持の具体形状は未確定。",
+      "現在保持中の自由端の受渡し先を決めてから、C補助が今回の締結対象を持つこと。",
+      "残りの自由端にも独立案内が必要なら、A/B共用補助の継続担当を比較する。対象群を一つの手で保持できるとはしていない。"
+    ],
+    "roles": [
+      {
+        "id": "ARM_C",
+        "name_ja": "C主腕",
+        "target_ja": "今回の板状導体",
+        "action_ja": "位置合わせ・必要な保持",
+        "caution_ja": "本体支持からの引継ぎが先"
+      },
+      {
+        "id": "ASSIST_2",
+        "name_ja": "C専用補助",
+        "target_ja": "今回の丸端子付き線",
+        "action_ja": "被覆側を保持し、端子穴を空ける",
+        "caution_ja": "現在の保持対象を受け渡してから"
+      },
+      {
+        "id": "ASSIST_1",
+        "name_ja": "A/B共用補助",
+        "target_ja": "残る自由端（必要な場合）",
+        "action_ja": "案内を継続する比較",
+        "caution_ja": "その間、次のA/B補助は待つ"
+      },
+      {
+        "id": "T-C",
+        "name_ja": "据置締付工具",
+        "target_ja": "今回の締結点",
+        "action_ja": "接合面が揃った後に締結・退避",
+        "caution_ja": "主軸・位置決め軸は別設備"
+      }
+    ],
+    "stages": [
+      {
+        "id": "prepare",
+        "name_ja": "位置合わせ",
+        "note_ja": "端子穴と工具の入口を空ける。各部材の支持を先に決める。"
+      },
+      {
+        "id": "fasten",
+        "name_ja": "保持したまま締結",
+        "note_ja": "板状導体と対象線の保持、残る自由端の案内を別に扱う。"
+      },
+      {
+        "id": "handoff",
+        "name_ja": "次の支持へ引継ぎ",
+        "note_ja": "今回の締結・工具退避に加え、保持を解く対象の支持が必要。"
+      },
+      {
+        "id": "reuse",
+        "name_ja": "次の仕事へ",
+        "note_ja": "開放・退避・必要な手先交換と移動の後に、次の把持へ移る。"
+      }
+    ],
+    "unresolved_ja": [
+      "各丸端子の最終接続先と、同一ボルトで締める部材の積層",
+      "どの自由端を同時に持つ必要があるか、各手が実際に持てる範囲",
+      "取り付けた接合部だけで次の作業中の線を支えられるか",
+      "現在の保持から次の保持への受渡し、手先交換時の支持",
+      "締結の順序、締結完了の確認、工具干渉、到達、時間"
+    ],
+    "release_ja": "映像だけでは、共用補助をA/Bへ戻せる時点は確定しない。一つのねじを締めたことや蓋を載せたことだけで、残りの案内も解放しない。"
+  },
+  "complete_wire_inventory": false,
+  "confirmed_video_to_photo_wires": [],
+  "selected_grasp_poses": [],
+  "acceptance_thresholds": null,
+  "physical_acceptance_verdict": null,
+  "scope_ja": "採用S5_AB＝主作業3腕＋A/B共用補助＋C専用補助の5腕を維持。全20仕事と全対応表を同梱し、この図で未追跡の仕事や回路を省略しない。",
+  "revision_boundary_ja": "2025年の公式映像の補助観察。2022年写真・V1.1回路との部材単位の一致は未確定。映像の秒数は場面の位置で、作業時間ではない。",
+  "source": {
+    "title": "ASSEMBLY! EV High Voltage Junction Box",
+    "url": "https://www.youtube.com/watch?v=Sm_D-vmNYqc",
+    "channel": "Ampere EV",
+    "upload_date": "20250607",
+    "file": "references/hvjb_assembly_followup_20260915/assembly_20250607.mp4",
+    "sha256": "b7fcb74eaeec06e517d5726994a38a6b0812e05198d8b771b7ff771e68a0e1eb",
+    "metadata_sha256": "69e2f968a38253ec5608439116c2ef8cc04669cbd03b7275f8feab63fbc9f111",
+    "size_px": [
+      1920,
+      1080
+    ],
+    "duration_s": 274.140533,
+    "frame_rate": "30000/1001",
+    "automatic_caption_role": "navigation aid only; not a verified transcription or part-number source"
+  },
+  "frames": [
+    {
+      "requested_seek_s": 212,
+      "timestamp_basis": "ffmpeg accurate seek; first display frame at/after the requested time",
+      "file": "references/hvjb_final_connections_20260916/assembly_212s.png",
+      "sha256": "847993f7f10c07f1ea938726bafe14320850565cebbbd6519e6773eaaa1c3ac9",
+      "size_px": [
+        1920,
+        1080
+      ],
+      "url": "https://www.youtube.com/watch?v=Sm_D-vmNYqc&t=212s",
+      "pixel_transform": "none; full decoded frame without cropping or generated edits",
+      "local_image": "evidence/assembly_212s.png"
+    },
+    {
+      "requested_seek_s": 220,
+      "timestamp_basis": "ffmpeg accurate seek; first display frame at/after the requested time",
+      "file": "references/hvjb_final_connections_20260916/assembly_220s.png",
+      "sha256": "f39be3e99dec00f05240977c8c9003279028a1b9474fcc906001abca60710294",
+      "size_px": [
+        1920,
+        1080
+      ],
+      "url": "https://www.youtube.com/watch?v=Sm_D-vmNYqc&t=220s",
+      "pixel_transform": "none; full decoded frame without cropping or generated edits",
+      "local_image": "evidence/assembly_220s.png"
+    },
+    {
+      "requested_seek_s": 228,
+      "timestamp_basis": "ffmpeg accurate seek; first display frame at/after the requested time",
+      "file": "references/hvjb_final_connections_20260916/assembly_228s.png",
+      "sha256": "4d2ae5a96665cdf082cff142decc271a8f2b3df0d6e10a510e63eb477d7bc971",
+      "size_px": [
+        1920,
+        1080
+      ],
+      "url": "https://www.youtube.com/watch?v=Sm_D-vmNYqc&t=228s",
+      "pixel_transform": "none; full decoded frame without cropping or generated edits",
+      "local_image": "evidence/assembly_228s.png"
+    },
+    {
+      "requested_seek_s": 236,
+      "timestamp_basis": "ffmpeg accurate seek; first display frame at/after the requested time",
+      "file": "references/hvjb_final_connections_20260916/assembly_236s.png",
+      "sha256": "dd63a326b7e648c0c006afc1d8edcd87a824361edb950b7e1d2276471c09857b",
+      "size_px": [
+        1920,
+        1080
+      ],
+      "url": "https://www.youtube.com/watch?v=Sm_D-vmNYqc&t=236s",
+      "pixel_transform": "none; full decoded frame without cropping or generated edits",
+      "local_image": "evidence/assembly_236s.png"
+    },
+    {
+      "requested_seek_s": 238,
+      "timestamp_basis": "ffmpeg accurate seek; first display frame at/after the requested time",
+      "file": "references/hvjb_final_connections_20260916/assembly_238s.png",
+      "sha256": "c1cd6abe0d0f565093968dfc062c5e7049c71cf69f6023c63a4f953b4983d5f5",
+      "size_px": [
+        1920,
+        1080
+      ],
+      "url": "https://www.youtube.com/watch?v=Sm_D-vmNYqc&t=238s",
+      "pixel_transform": "none; full decoded frame without cropping or generated edits",
+      "local_image": "evidence/assembly_238s.png"
+    },
+    {
+      "requested_seek_s": 240,
+      "timestamp_basis": "ffmpeg accurate seek; first display frame at/after the requested time",
+      "file": "references/hvjb_final_connections_20260916/assembly_240s.png",
+      "sha256": "4749537367a76831024f5d937ac5264a927cb90492adc321f3b43c0432c8e092",
+      "size_px": [
+        1920,
+        1080
+      ],
+      "url": "https://www.youtube.com/watch?v=Sm_D-vmNYqc&t=240s",
+      "pixel_transform": "none; full decoded frame without cropping or generated edits",
+      "local_image": "evidence/assembly_240s.png"
+    },
+    {
+      "requested_seek_s": 242,
+      "timestamp_basis": "ffmpeg accurate seek; first display frame at/after the requested time",
+      "file": "references/hvjb_final_connections_20260916/assembly_242s.png",
+      "sha256": "973a61b327b9152da37d2af0f5cc67dfab0346e10b3030b3593eba9c78381e82",
+      "size_px": [
+        1920,
+        1080
+      ],
+      "url": "https://www.youtube.com/watch?v=Sm_D-vmNYqc&t=242s",
+      "pixel_transform": "none; full decoded frame without cropping or generated edits",
+      "local_image": "evidence/assembly_242s.png"
+    },
+    {
+      "requested_seek_s": 244,
+      "timestamp_basis": "ffmpeg accurate seek; first display frame at/after the requested time",
+      "file": "references/hvjb_final_connections_20260916/assembly_244s.png",
+      "sha256": "7d7daa3275cacd8e3ca7f6dedd8bdd0c54d5966703071e77853648d833e01e07",
+      "size_px": [
+        1920,
+        1080
+      ],
+      "url": "https://www.youtube.com/watch?v=Sm_D-vmNYqc&t=244s",
+      "pixel_transform": "none; full decoded frame without cropping or generated edits",
+      "local_image": "evidence/assembly_244s.png"
+    },
+    {
+      "requested_seek_s": 246,
+      "timestamp_basis": "ffmpeg accurate seek; first display frame at/after the requested time",
+      "file": "references/hvjb_final_connections_20260916/assembly_246s.png",
+      "sha256": "4c83e5bb7cc58102e67a7912573010e6766f29eaa28580a2d8de4f7a6d79cb4e",
+      "size_px": [
+        1920,
+        1080
+      ],
+      "url": "https://www.youtube.com/watch?v=Sm_D-vmNYqc&t=246s",
+      "pixel_transform": "none; full decoded frame without cropping or generated edits",
+      "local_image": "evidence/assembly_246s.png"
+    },
+    {
+      "requested_seek_s": 248,
+      "timestamp_basis": "ffmpeg accurate seek; first display frame at/after the requested time",
+      "file": "references/hvjb_final_connections_20260916/assembly_248s.png",
+      "sha256": "94fc8501daae300615d56701f052d7a4cbf67701d50db74d1b46f14fe5f98f0b",
+      "size_px": [
+        1920,
+        1080
+      ],
+      "url": "https://www.youtube.com/watch?v=Sm_D-vmNYqc&t=248s",
+      "pixel_transform": "none; full decoded frame without cropping or generated edits",
+      "local_image": "evidence/assembly_248s.png"
+    },
+    {
+      "requested_seek_s": 250,
+      "timestamp_basis": "ffmpeg accurate seek; first display frame at/after the requested time",
+      "file": "references/hvjb_final_connections_20260916/assembly_250s.png",
+      "sha256": "51c8d0a5e23183dd342a07a69a76915d8902c7c04dbb76d4a74f7990919a37ad",
+      "size_px": [
+        1920,
+        1080
+      ],
+      "url": "https://www.youtube.com/watch?v=Sm_D-vmNYqc&t=250s",
+      "pixel_transform": "none; full decoded frame without cropping or generated edits",
+      "local_image": "evidence/assembly_250s.png"
+    },
+    {
+      "requested_seek_s": 252,
+      "timestamp_basis": "ffmpeg accurate seek; first display frame at/after the requested time",
+      "file": "references/hvjb_final_connections_20260916/assembly_252s.png",
+      "sha256": "8782482b729001f9b6568b6dff58dcd0069ee38976a1de59bdee71d0902a09f1",
+      "size_px": [
+        1920,
+        1080
+      ],
+      "url": "https://www.youtube.com/watch?v=Sm_D-vmNYqc&t=252s",
+      "pixel_transform": "none; full decoded frame without cropping or generated edits",
+      "local_image": "evidence/assembly_252s.png"
+    },
+    {
+      "requested_seek_s": 254,
+      "timestamp_basis": "ffmpeg accurate seek; first display frame at/after the requested time",
+      "file": "references/hvjb_final_connections_20260916/assembly_254s.png",
+      "sha256": "9ceb196f004c44d263cce2a05eadfd4b637e18ea7d2e24536ad1d019dc48a690",
+      "size_px": [
+        1920,
+        1080
+      ],
+      "url": "https://www.youtube.com/watch?v=Sm_D-vmNYqc&t=254s",
+      "pixel_transform": "none; full decoded frame without cropping or generated edits",
+      "local_image": "evidence/assembly_254s.png"
+    },
+    {
+      "requested_seek_s": 256,
+      "timestamp_basis": "ffmpeg accurate seek; first display frame at/after the requested time",
+      "file": "references/hvjb_final_connections_20260916/assembly_256s.png",
+      "sha256": "c595bb861c6b448cf349720fec206ee4909f3f895c4ae92047ae98b93980964b",
+      "size_px": [
+        1920,
+        1080
+      ],
+      "url": "https://www.youtube.com/watch?v=Sm_D-vmNYqc&t=256s",
+      "pixel_transform": "none; full decoded frame without cropping or generated edits",
+      "local_image": "evidence/assembly_256s.png"
+    },
+    {
+      "requested_seek_s": 258,
+      "timestamp_basis": "ffmpeg accurate seek; first display frame at/after the requested time",
+      "file": "references/hvjb_final_connections_20260916/assembly_258s.png",
+      "sha256": "5e1fe234e7ee0994c15da6acbe0fb744a7962449980630d8219b1eb7867ecb5b",
+      "size_px": [
+        1920,
+        1080
+      ],
+      "url": "https://www.youtube.com/watch?v=Sm_D-vmNYqc&t=258s",
+      "pixel_transform": "none; full decoded frame without cropping or generated edits",
+      "local_image": "evidence/assembly_258s.png"
+    },
+    {
+      "requested_seek_s": 260,
+      "timestamp_basis": "ffmpeg accurate seek; first display frame at/after the requested time",
+      "file": "references/hvjb_final_connections_20260916/assembly_260s.png",
+      "sha256": "911a1442e40b452e1b8249300336b67d06039be973db19f1533b0460242d1c86",
+      "size_px": [
+        1920,
+        1080
+      ],
+      "url": "https://www.youtube.com/watch?v=Sm_D-vmNYqc&t=260s",
+      "pixel_transform": "none; full decoded frame without cropping or generated edits",
+      "local_image": "evidence/assembly_260s.png"
+    },
+    {
+      "requested_seek_s": 264,
+      "timestamp_basis": "ffmpeg accurate seek; first display frame at/after the requested time",
+      "file": "references/hvjb_final_connections_20260916/assembly_264s.png",
+      "sha256": "a2c8e4ebe653ea02218172d191c6fa2bdcf0f0098ace5e9e72aa24f2fffacccc",
+      "size_px": [
+        1920,
+        1080
+      ],
+      "url": "https://www.youtube.com/watch?v=Sm_D-vmNYqc&t=264s",
+      "pixel_transform": "none; full decoded frame without cropping or generated edits",
+      "local_image": "evidence/assembly_264s.png"
+    }
+  ],
+  "selection": {
+    "revision": "hvjb_robot_selection_v01",
+    "decision_date": "2026-09-16",
+    "status": "user_selected_role_allocation",
+    "user_directive_ja": "補助を2腕に分ける",
+    "selected_plan": "S5_AB",
+    "selected_plan_ja": "主担当3腕＋A/B共用補助1腕＋C専用補助1腕",
+    "source_comparison": "data/hvjb_robot_sharing_v01.json",
+    "source_sha256": "7888693db9b5cd0314b7acecb6c0fa09ab7c207e43c2391fbfbf642833b99b90",
+    "selected_primary_arm_count": 3,
+    "selected_assist_arm_count": 2,
+    "selected_assembly_arm_count": 5,
+    "assist_groups": [
+      [
+        "X-A",
+        "X-B"
+      ],
+      [
+        "X-C"
+      ]
+    ],
+    "role_to_unit": {
+      "R-A": "ARM_A",
+      "R-B": "ARM_B",
+      "R-C": "ARM_C",
+      "X-A": "ASSIST_1",
+      "X-B": "ASSIST_1",
+      "X-C": "ASSIST_2"
+    },
+    "count_scope_ja": "A/B/Cの組立役に割り当てる5腕。ロボットの機台数や、OP010 XYZ・締付工具・搬送等を含むライン全体の設備台数ではない。",
+    "operating_constraints_ja": [
+      "AとBが同時に補助を必要とする場合は、把持開始前に作業順序を調整する。保持途中で手を離して別セルへ移らない。",
+      "A/B共用補助は、前の支持引継ぎ・開放・退避と、必要な手先交換・移動を終えてから次の保持を開始する。",
+      "C専用補助は自由端の案内と支持引継ぎを担当し、筐体搭載終了だけで空き扱いにしない。",
+      "既存の20仕事・据置締付工具・支持・供給・検査・回収の役割を保持する。該当する大小同時締結の2主軸条件を継承する。"
+    ],
+    "next_work_ja": "5腕の分担を前提に、A/B共用補助の保持区間・受渡しと、C専用補助の継続担当を具体化する。その上で配置・到達・干渉を確認する。",
+    "selected_robot_models": null,
+    "selected_robot_base_count": null,
+    "selected_layout": null,
+    "minimum_robot_count": null,
+    "measured_cycle_time_s": null,
+    "physical_acceptance_verdict": null
+  },
+  "all_source_task_ids": [
+    "D00",
+    "D01",
+    "D10",
+    "D11",
+    "D12",
+    "D20",
+    "D21",
+    "D22",
+    "D30",
+    "D31",
+    "D40",
+    "D42",
+    "D45",
+    "D50",
+    "D60",
+    "D61",
+    "D70",
+    "D71",
+    "D80",
+    "D81"
+  ],
+  "preserved_counts": {
+    "photo_features": 92,
+    "required_functions": 17,
+    "electrical_groups": 13,
+    "lv_pins": 12,
+    "source_tasks": 20
+  },
+  "revision": "hvjb_final_connection_v01",
+  "observed_at": "2026-09-16T21:23:30.808190+09:00"
+}

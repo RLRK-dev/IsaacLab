@@ -645,3 +645,20 @@ numbers unknown until their basis and the scope of the product change are set.
   Coexisting terminal types do not establish simultaneous independent hand
   counts or that one hand can hold a whole group. H04/H05 are target families;
   allowed contacts, next support and hand-change continuity remain to resolve.
+
+## Late connection observations on 2026-09-16
+
+- `analysis/hvjb_final_connection_v01.md` records the sidewall terminal row at
+  242 seconds and the main-port/contactor conductor and ring-terminal region
+  at 248 seconds. J1/J2/J3 are image-location labels, not official part IDs,
+  complete joints, polarity assignments or a full physical wire inventory.
+- The D60 comparison keeps ARM_C on the rigid conductor, ASSIST_2 on the target
+  wire's covered region and, conditionally, ASSIST_1 on remaining guidance.
+  Resolve their current holds and body support before these new grasps. This
+  is unselected work sharing within S5_AB, not evidence that one hand can hold
+  all free ends, that a support exists, or that the required reach is available.
+- Individual wire-to-bolt correspondence, joint stacks and assistant release
+  instants remain unresolved. A fastened point or lid placement does not end
+  all guidance. The 264-second vehicle shot is a separate scene, not continuous
+  proof of bench completion. Preserve the original twenty tasks and do not
+  convert edited source timestamps into durations or formal physical verdicts.

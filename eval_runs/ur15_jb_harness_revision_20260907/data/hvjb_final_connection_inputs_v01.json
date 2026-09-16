@@ -1,0 +1,122 @@
+{
+  "status": "source_observations_and_unselected_holding_comparison",
+  "selected_plan": "S5_AB",
+  "selected_arm_count": 5,
+  "summary_ja": "筐体への組込み・外側ヘッダー取付の後にも、板状導体の追加と筐体内の締結が残る。",
+  "views": [
+    {
+      "id": "free236",
+      "second": 236,
+      "title_ja": "内部に自由な丸端子が残る",
+      "focus_px": [330, 170, 790, 610],
+      "markers": [],
+      "observation_ja": "筐体内の部品から伸びた丸端子付き線が上方に出ている。机上にはまだ板状の金属部品がある。",
+      "limit_ja": "組込み前のA/Bの各線と、この時点の丸端子の一本対応は未確認。端子群の全数や保持点数は決めない。"
+    },
+    {
+      "id": "bar238",
+      "second": 238,
+      "title_ja": "多穴の板状導体を追加する",
+      "focus_px": [330, 200, 780, 560],
+      "markers": [
+        {"id": "B", "xy_px": [867, 343], "label_ja": "手に持った多穴の板状部品"},
+        {"id": "R", "xy_px": [737, 305], "label_ja": "まだ自由な丸端子の一例"}
+      ],
+      "observation_ja": "複数の穴がある細長い板状部品を、作業者が筐体の上で持っている。筐体内には自由な丸端子が残る。",
+      "limit_ja": "この一枚では板状部品の最終取付先、極性、ねじとの積層は見えない。前後の編集をまたぐ個体追跡は確定しない。"
+    },
+    {
+      "id": "row242",
+      "second": 242,
+      "title_ja": "側壁に沿う端子の列",
+      "focus_px": [595, 330, 490, 440],
+      "markers": [
+        {"id": "J1", "xy_px": [891, 568], "label_ja": "板状導体上の丸端子・ねじの列"}
+      ],
+      "observation_ja": "オレンジ色ヘッダーが並ぶ側壁の内側に、細長い導体と丸端子・ねじの列が見える。ケーブルが近傍からこの列へ曲がり込んでいる。",
+      "limit_ja": "各線をA/Bの元の端末、2022年写真のID、回路の極性、個別ボルトへ対応させるところまでは追えていない。締付完了も外観では判断しない。"
+    },
+    {
+      "id": "main248",
+      "second": 248,
+      "title_ja": "主端子・接触器まわりの導体",
+      "focus_px": [645, 355, 590, 425],
+      "markers": [
+        {"id": "J2", "xy_px": [852, 491], "label_ja": "接触器脇のスタッドと板状導体"},
+        {"id": "J3", "xy_px": [785, 499], "label_ja": "板状導体上の丸端子付き線"},
+        {"id": "B", "xy_px": [950, 452], "label_ja": "次に持ち込んだ別の板状部品"}
+      ],
+      "observation_ja": "画面左の主端子側から接触器脇へ延びる板状導体が見える。その上に丸端子付き線とねじがあり、作業者は別の穴付き板状部品を持っている。",
+      "limit_ja": "手に持った部品の両接続先と、隠れた締結積層は未確定。J2/J3は画像内の位置の識別で、公式の部品番号や全接続表ではない。"
+    },
+    {
+      "id": "tool256",
+      "second": 256,
+      "title_ja": "筐体内へ工具を入れる",
+      "focus_px": [410, 220, 800, 610],
+      "markers": [],
+      "observation_ja": "作業者は手工具を筐体内へ入れて作業している。もう一方の手も内部にある。",
+      "limit_ja": "工具先端と対象の接合面は手や筐体で隠れる。対象ボルト、トルク、支持範囲、全接続の締結完了は読み取らない。"
+    },
+    {
+      "id": "lid260",
+      "second": 260,
+      "title_ja": "蓋を載せる場面",
+      "focus_px": [400, 190, 830, 680],
+      "markers": [],
+      "observation_ja": "作業台上の筐体へ黒い蓋を載せている。",
+      "limit_ja": "蓋の搭載は、隠れた各接続の完成や検査結果を示さない。補助腕の解放時点の根拠にもならない。"
+    },
+    {
+      "id": "cut264",
+      "second": 264,
+      "title_ja": "別の設置場面へ切り替わる",
+      "focus_px": [0, 0, 1920, 1080],
+      "markers": [],
+      "observation_ja": "作業台上の組立映像から、車両に設置された外観の映像へ切り替わっている。",
+      "limit_ja": "同じ個体の連続した組立記録とは扱わない。ラベルから手前の各配線を逆算して対応させない。"
+    }
+  ],
+  "joint_observations": [
+    {"id": "J1", "view": "row242", "name_ja": "側壁沿いの導体と丸端子の列", "physical_wire_ids": null, "electrical_group_ids": null, "photo_feature_ids": null, "complete_joint_stack": null, "fastener_count": null, "release_condition": null},
+    {"id": "J2", "view": "main248", "name_ja": "接触器脇のスタッドと板状導体", "physical_wire_ids": null, "electrical_group_ids": null, "photo_feature_ids": null, "complete_joint_stack": null, "fastener_count": null, "release_condition": null},
+    {"id": "J3", "view": "main248", "name_ja": "主端子側の板状導体上にある丸端子", "physical_wire_ids": null, "electrical_group_ids": null, "photo_feature_ids": null, "complete_joint_stack": null, "fastener_count": null, "release_condition": null}
+  ],
+  "holding_comparison": {
+    "task": "D60",
+    "status": "unselected_role_comparison_not_controller",
+    "title_ja": "Cの主腕と補助2腕を、締結部と残りの案内に分ける比較",
+    "preconditions_ja": [
+      "本体支持をF-C等へ引き継ぎ、C主腕が板状導体の作業に移れること。本体支持の具体形状は未確定。",
+      "現在保持中の自由端の受渡し先を決めてから、C補助が今回の締結対象を持つこと。",
+      "残りの自由端にも独立案内が必要なら、A/B共用補助の継続担当を比較する。対象群を一つの手で保持できるとはしていない。"
+    ],
+    "roles": [
+      {"id": "ARM_C", "name_ja": "C主腕", "target_ja": "今回の板状導体", "action_ja": "位置合わせ・必要な保持", "caution_ja": "本体支持からの引継ぎが先"},
+      {"id": "ASSIST_2", "name_ja": "C専用補助", "target_ja": "今回の丸端子付き線", "action_ja": "被覆側を保持し、端子穴を空ける", "caution_ja": "現在の保持対象を受け渡してから"},
+      {"id": "ASSIST_1", "name_ja": "A/B共用補助", "target_ja": "残る自由端（必要な場合）", "action_ja": "案内を継続する比較", "caution_ja": "その間、次のA/B補助は待つ"},
+      {"id": "T-C", "name_ja": "据置締付工具", "target_ja": "今回の締結点", "action_ja": "接合面が揃った後に締結・退避", "caution_ja": "主軸・位置決め軸は別設備"}
+    ],
+    "stages": [
+      {"id": "prepare", "name_ja": "位置合わせ", "note_ja": "端子穴と工具の入口を空ける。各部材の支持を先に決める。"},
+      {"id": "fasten", "name_ja": "保持したまま締結", "note_ja": "板状導体と対象線の保持、残る自由端の案内を別に扱う。"},
+      {"id": "handoff", "name_ja": "次の支持へ引継ぎ", "note_ja": "今回の締結・工具退避に加え、保持を解く対象の支持が必要。"},
+      {"id": "reuse", "name_ja": "次の仕事へ", "note_ja": "開放・退避・必要な手先交換と移動の後に、次の把持へ移る。"}
+    ],
+    "unresolved_ja": [
+      "各丸端子の最終接続先と、同一ボルトで締める部材の積層",
+      "どの自由端を同時に持つ必要があるか、各手が実際に持てる範囲",
+      "取り付けた接合部だけで次の作業中の線を支えられるか",
+      "現在の保持から次の保持への受渡し、手先交換時の支持",
+      "締結の順序、締結完了の確認、工具干渉、到達、時間"
+    ],
+    "release_ja": "映像だけでは、共用補助をA/Bへ戻せる時点は確定しない。一つのねじを締めたことや蓋を載せたことだけで、残りの案内も解放しない。"
+  },
+  "complete_wire_inventory": false,
+  "confirmed_video_to_photo_wires": [],
+  "selected_grasp_poses": [],
+  "acceptance_thresholds": null,
+  "physical_acceptance_verdict": null,
+  "scope_ja": "採用S5_AB＝主作業3腕＋A/B共用補助＋C専用補助の5腕を維持。全20仕事と全対応表を同梱し、この図で未追跡の仕事や回路を省略しない。",
+  "revision_boundary_ja": "2025年の公式映像の補助観察。2022年写真・V1.1回路との部材単位の一致は未確定。映像の秒数は場面の位置で、作業時間ではない。"
+}
