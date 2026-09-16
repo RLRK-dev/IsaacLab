@@ -26,7 +26,7 @@ session_history:
     started_at: 2026-07-20T20:01:09+09:00
     note: "Rs 承認 (node 作成 + 起動、2026-07-20) により起票。[DEFINE] = 00-Project-Management/node-proposal-T-ROOT-Kinematic-Pin-Complete-Removal-20260719.md @ 14a891d256。既往 c4-c48 は §3 adopted_existing_arc provenance であり本 session の成果ではない。起票時点 = step2 CLOSE / step3 docs-records-only OPEN。"
 created: 2026-07-20T20:01:09+09:00
-last_updated: 2026-09-16T18:10:25+09:00
+last_updated: 2026-09-16T18:13:40+09:00
 spec_version: LTM-1 v1.2
 ---
 
@@ -124,11 +124,11 @@ disposition / status だけ・**census = 35 固定**。
 
 ### 7.2 完了条件（p4 起案 = DDR #69 の「controller の完成」）
 
-②③ が述語つきで着地・⑤ と R3 と ④ が通過・p4 の受入の一言。**着手と完成受入は分ける**（Rs1 補足 b）。完成後も #69 の発火は p4 の充足宣言＋視覚 leg（pB／pC）。⛔ 本節は何も解錠しない（route run (2)・#69・D4′・`:214`・WIP）。
+②③ が述語つきで着地・⑤ と R3 と ④ が通過・p4 の受入の一言。**着手と完成受入は分ける**（Rs1 補足 b）。完成後も #69 の発火は p4 の充足宣言＋視覚 leg（pB／pC）。⛔ 本節は何も解錠しない（route run (2)・#69・D4′・WIP；`:214`/REF_DIR の計器窓は Rs1 Q9「推奨」09-16 18:06 で open = DDR #73 の別窓・run の解錠ではない）。
 
 ### 7.3 範囲外（本 step に含めない）
 
-D4′（DDR #74）・`:214` 修正（DDR #73）・09-07 WIP（DDR #72）・acceptance の `REF_DIR` 書換（pZ 所見 `170cbf54a7`・code 1 行・語が要る）。
+D4′（DDR #74）・`:214` 修正（DDR #73）・09-07 WIP（DDR #72）・acceptance の `REF_DIR` 書換（pZ 所見 `170cbf54a7`・code 1 行・語 = Rs1 Q9「推奨」09-16 18:06 → DDR #73 の計器窓・別窓）。
 
 ### 7.4 報告規則（Rs1 補足 a）
 
