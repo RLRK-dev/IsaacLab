@@ -2515,3 +2515,4 @@ flow 正直記録: fix は leg より先に lane に着地（pZ 命名「receipt
    - **p0 の finding（07-29 再現は 0.22/45 override が要る・cell_spec 既定は `0f6b4a733e` 以後 C-2）**: pZ prereg row 4 は既に `YOKE_SPREAD_OVERRIDE=0.22 TILT_DEG_OVERRIDE=45` で書かれている（当卓 grep 1 hit）⇒ 既に反映済・pZ の再 pin では FULL の許容 path を加えるのみ。
    - **hazard（両卓が独立に述べた）**: `:236` は 07-29 の record を in-place で上書き ⇒ 共有 tree で走らせない・本窓で再生成/commit しない（item 10 と同じ・p0 も同じ宣言）。
    - 順序（不変）: pZ が FULL の許容 path で述語を再 pin（addendum）→ p0 が clean worktree から着地（§8.51 と同じ機構）・着地 blob で述語と 0.22/45 run を再走・報告 → pZ の leg（mock 対照込み）→ 当卓の受入 → DDR 73 close。⛔ 解錠なし。
+   - **送信記録（18:24:47）**: 上記 word を **m-p4-273** として p18 へ（relay 先 p0/pZ/p6）。prompt rc=0・p18 transcript に record。本文 = scratchpad `p4_dispatch/m-p4-273.txt`（内容は本 item 11 が正）。
