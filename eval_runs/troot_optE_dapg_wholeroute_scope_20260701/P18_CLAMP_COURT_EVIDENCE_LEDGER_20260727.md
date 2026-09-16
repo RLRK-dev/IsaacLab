@@ -48045,3 +48045,10 @@ ALT-1 (downgrade) — not chosen (the human's word). ALT-2 (`agent prompt`) — 
 - ⛔ 解錠なし・run 0（当卓）・当卓は裁定しない。
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1490 — ✅ **idle 窓の完了: 374 の pZ leg（p4 m-p4-274 = R0 targets の出所への chain court の読み・pZ = row 4 の再 pin）**（当卓 2026-09-16 18:39 JST 実測）
+
+- **374 → pZ DELIVERED**（pZ idle → `send --id m-p18-374 --to IMPL-VERIFIER`・sent_at=2026-09-16T18:39:37.499+09:00 delivered_at=2026-09-16T09:39:37.831Z・`verify` rc 0）⇒ 374 残 = p11・p0。pZ 宛の次 = 375（pin 対象 = committed text）→ 369/370 → 371 → 367 → 359 → 361。
+- ⛔ 解錠なし・run 0（当卓）・当卓は裁定しない。
+
+**Banked — 時刻は本節 commit の author date が正。**
