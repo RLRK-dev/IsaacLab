@@ -1,0 +1,98 @@
+{
+  "observed_at": "2026-09-16T19:47:20.771927+09:00",
+  "source": {
+    "title": "ASSEMBLY! EV High Voltage Junction Box",
+    "url": "https://www.youtube.com/watch?v=Sm_D-vmNYqc",
+    "channel": "Ampere EV",
+    "upload_date": "20250607",
+    "file": "references/hvjb_assembly_followup_20260915/assembly_20250607.mp4",
+    "sha256": "b7fcb74eaeec06e517d5726994a38a6b0812e05198d8b771b7ff771e68a0e1eb",
+    "metadata_sha256": "69e2f968a38253ec5608439116c2ef8cc04669cbd03b7275f8feab63fbc9f111",
+    "size_px": [
+      1920,
+      1080
+    ],
+    "duration_s": 274.140533,
+    "frame_rate": "30000/1001",
+    "automatic_caption_role": "navigation aid only; not a verified transcription or part-number source"
+  },
+  "source_sha256_before": "b7fcb74eaeec06e517d5726994a38a6b0812e05198d8b771b7ff771e68a0e1eb",
+  "source_sha256_after": "b7fcb74eaeec06e517d5726994a38a6b0812e05198d8b771b7ff771e68a0e1eb",
+  "frames": [
+    {
+      "requested_seek_s": 26,
+      "timestamp_basis": "ffmpeg accurate seek; first display frame at/after the requested time",
+      "file": "references/hvjb_wire_origin_20260916/assembly_026s.png",
+      "sha256": "72dfd6d9f72a0a2221da34a4fb27d07eb74b6bb4b4158fe00aff83eee5902205",
+      "size_px": [
+        1920,
+        1080
+      ],
+      "url": "https://www.youtube.com/watch?v=Sm_D-vmNYqc&t=26s",
+      "pixel_transform": "none; full decoded frame without cropping or generated edits"
+    },
+    {
+      "requested_seek_s": 28,
+      "timestamp_basis": "ffmpeg accurate seek; first display frame at/after the requested time",
+      "file": "references/hvjb_wire_origin_20260916/assembly_028s.png",
+      "sha256": "0a2153daf64aa60ebdf7c2b9c0f272b07a897c1bf710d055e6bc094187401b6a",
+      "size_px": [
+        1920,
+        1080
+      ],
+      "url": "https://www.youtube.com/watch?v=Sm_D-vmNYqc&t=28s",
+      "pixel_transform": "none; full decoded frame without cropping or generated edits"
+    },
+    {
+      "requested_seek_s": 40,
+      "timestamp_basis": "ffmpeg accurate seek; first display frame at/after the requested time",
+      "file": "references/hvjb_wire_origin_20260916/assembly_040s.png",
+      "sha256": "181f69297a672ed5e7a72945d467b2f52f7bf039e194d731c5a92001ec38a19a",
+      "size_px": [
+        1920,
+        1080
+      ],
+      "url": "https://www.youtube.com/watch?v=Sm_D-vmNYqc&t=40s",
+      "pixel_transform": "none; full decoded frame without cropping or generated edits"
+    },
+    {
+      "requested_seek_s": 44,
+      "timestamp_basis": "ffmpeg accurate seek; first display frame at/after the requested time",
+      "file": "references/hvjb_wire_origin_20260916/assembly_044s.png",
+      "sha256": "03ae61825c11cdc916daaba6cfea1fb9e92066b82fefad9f8e1ff071af8a127e",
+      "size_px": [
+        1920,
+        1080
+      ],
+      "url": "https://www.youtube.com/watch?v=Sm_D-vmNYqc&t=44s",
+      "pixel_transform": "none; full decoded frame without cropping or generated edits"
+    },
+    {
+      "requested_seek_s": 54,
+      "timestamp_basis": "ffmpeg accurate seek; first display frame at/after the requested time",
+      "file": "references/hvjb_wire_origin_20260916/assembly_054s.png",
+      "sha256": "70b429f119423506f22793f77feaf5cef8a91625cae86c051117d2999cd38299",
+      "size_px": [
+        1920,
+        1080
+      ],
+      "url": "https://www.youtube.com/watch?v=Sm_D-vmNYqc&t=54s",
+      "pixel_transform": "none; full decoded frame without cropping or generated edits"
+    },
+    {
+      "requested_seek_s": 58,
+      "timestamp_basis": "ffmpeg accurate seek; first display frame at/after the requested time",
+      "file": "references/hvjb_wire_origin_20260916/assembly_058s.png",
+      "sha256": "bf4a3750f45d1a3380472097fe923e97cf7b323b05afac3ee7f49d97faf9f6ad",
+      "size_px": [
+        1920,
+        1080
+      ],
+      "url": "https://www.youtube.com/watch?v=Sm_D-vmNYqc&t=58s",
+      "pixel_transform": "none; full decoded frame without cropping or generated edits"
+    }
+  ],
+  "observations_recorded": false,
+  "physical_acceptance_verdict": null,
+  "movie_created": false
+}

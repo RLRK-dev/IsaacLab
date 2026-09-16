@@ -626,3 +626,22 @@ numbers unknown until their basis and the scope of the product change are set.
   surfaces remain unconfirmed. L01-L07 are photo features, not wire counts.
   Retain T050's sample-specific 40 mm/15-degree baseline without imposing its
   cable dimensions on all wires. No new arm, retainer or rail is selected.
+
+## Pre-merge wire-origin observations on 2026-09-16
+
+- `analysis/hvjb_wire_origin_v01.md` records free ring-ended leads on A's
+  baseplate at 26 seconds and both inner housings and free ring terminals on
+  B's wired fuse-panel side at 87 seconds. Keep both target classes in B's
+  guidance study; B_END is not equivalent to an inner-housing-only target.
+- Four local observation examples are not a complete physical wire inventory.
+  Crossings, hidden roots, final fastener positions and individual correspondence
+  across edits remain unresolved. B87_FRONT uses I/R location markers only;
+  do not restore a connecting trace across its ambiguous crossing.
+- V1.1 pages 2/3 supply electrical topology and pin polarity, not the mapping
+  of individual 2025 video leads to bolts or 2022 photo IDs. Preserve all source
+  catalog functions, circuit groups, LV pins and twenty workcards. Do not assign
+  video handwritten labels to existing I/W/L IDs or omit untraced circuits.
+- Retain selected S5_AB and the conditional B-guidance accompaniment comparison.
+  Coexisting terminal types do not establish simultaneous independent hand
+  counts or that one hand can hold a whole group. H04/H05 are target families;
+  allowed contacts, next support and hand-change continuity remain to resolve.

@@ -1,0 +1,82 @@
+{
+  "purpose_ja": "A/B合流前の自由端の由来を観察し、未追跡の線を残したまま保持役へ対応する。",
+  "selected_plan": "S5_AB",
+  "selected_arm_count": 5,
+  "complete_wire_inventory": false,
+  "confirmed_video_to_photo_wires": [],
+  "selected_grasp_poses": [],
+  "physical_acceptance_verdict": null,
+  "views": [
+    {
+      "id": "a26", "second": 26, "title_ja": "A：下板の自由端", "focus_px": [730, 200, 750, 540],
+      "observation_ja": "下板上の部品まわりから丸端子付きの線が立ち上がる。手前の金色部品の根元付近まで見える線もある。",
+      "limit_ja": "根元の接続積層と、後工程の締結先は未確認。奥の机上にある樹脂ハウジングをAの所属とは数えない。",
+      "markers": [{"id": "A1", "xy_px": [1114, 254], "label_ja": "上方の自由な丸端子"}, {"id": "A2", "xy_px": [1296, 333], "label_ja": "右上の自由な丸端子"}],
+      "trace_ids": ["A26_UP", "A26_RIGHT"]
+    },
+    {
+      "id": "b44", "second": 44, "title_ja": "B：取付前の端末", "focus_px": [460, 300, 950, 440],
+      "observation_ja": "樹脂ハウジングと丸端子を持つ配線が、ヒューズ板の脇に用意されている。3口の外側ヘッダーは机の右側に別置き。",
+      "limit_ja": "手と配線の重なりがあり、全ハウジングの各線を一本ずつ割り当てることはできない。手書き番号を写真IDや機能名に置換しない。",
+      "markers": [{"id": "I", "xy_px": [741, 563], "label_ja": "配線付き内側ハウジング"}, {"id": "R", "xy_px": [1062, 680], "label_ja": "自由な丸端子の例"}],
+      "trace_ids": []
+    },
+    {
+      "id": "b87", "second": 87, "title_ja": "B：合流前の配線", "focus_px": [585, 505, 570, 490],
+      "observation_ja": "Bのヒューズ板に配線が取り付けられ、内側ハウジングと未接続の丸端子が残る。Aの下板は奥に別置き。Bの受渡し対象にはこの2種類の端末が含まれる。",
+      "limit_ja": "交差をまたぐ線の同一性、接続極、最終ボルト位置は未確定。87.0→87.2秒には編集点があり、合流動作は観察できない。",
+      "markers": [{"id": "P", "xy_px": [731, 650], "label_ja": "Bのヒューズ板・端子付近"}, {"id": "I", "xy_px": [916, 890], "label_ja": "手前の内側ハウジング"}, {"id": "R", "xy_px": [665, 945], "label_ja": "手前の自由な丸端子"}],
+      "trace_ids": ["B87_FRONT", "B87_PANEL"]
+    },
+    {
+      "id": "c170", "second": 170, "title_ja": "C：側面へ出した後", "focus_px": [0, 0, 1920, 1080],
+      "observation_ja": "内側ハウジングが筐体の開口から外へ出ている。外側ヘッダーはまだ机上に別置き。",
+      "limit_ja": "この場面の各ハウジングと87秒の各個体との対応は未確定。穴を通したことを保持の終了とは扱わない。",
+      "markers": [], "trace_ids": []
+    },
+    {
+      "id": "c237", "second": 237, "title_ja": "C：バスバー作業前", "focus_px": [325, 155, 780, 700],
+      "observation_ja": "筐体内に丸端子付き自由端が残り、別体の金属バスバーが机上にある。",
+      "limit_ja": "この静止画だけでは各端子の締結先は決まらない。A/B合流前から個体追跡できた線として扱わない。",
+      "markers": [{"id": "R", "xy_px": [668, 263], "label_ja": "筐体内に残る自由端の例"}], "trace_ids": []
+    }
+  ],
+  "traces": [
+    {
+      "id": "A26_UP", "view": "a26", "origin_group": "A", "name_ja": "A・上方の丸端子側",
+      "segments_px": [[[1114, 254], [1097, 281], [1081, 320], [1070, 403], [1058, 493], [1047, 571], [1034, 623], [1041, 651], [1065, 658]]],
+      "visible_ja": "自由端から下板前側の金色部品の黒い根元付近まで。",
+      "unresolved_ja": "黒い根元内の接合、部品の電気的機能、最終接続先。",
+      "physical_from_id": null, "physical_to_id": null, "electrical_group_id": null, "photo_wire_id": null
+    },
+    {
+      "id": "A26_RIGHT", "view": "a26", "origin_group": "A", "name_ja": "A・右上の丸端子側",
+      "segments_px": [[[1296, 333], [1270, 338], [1243, 346], [1216, 360], [1178, 381]]],
+      "visible_ja": "自由端から白い部品の脇まで。",
+      "unresolved_ja": "奥に隠れた根元、同一線の後工程での位置、締結先。",
+      "physical_from_id": null, "physical_to_id": null, "electrical_group_id": null, "photo_wire_id": null
+    },
+    {
+      "id": "B87_FRONT", "view": "b87", "origin_group": "B", "name_ja": "B・手前ハウジング側と丸端子側",
+      "segments_px": [],
+      "visible_ja": "ハウジングと手前丸端子の位置のみを別々に記録。",
+      "unresolved_ja": "途中の交差をまたぐ一本の線としての同定。IとRの間に経路を描画しない。",
+      "physical_from_id": null, "physical_to_id": null, "electrical_group_id": null, "photo_wire_id": null
+    },
+    {
+      "id": "B87_PANEL", "view": "b87", "origin_group": "B", "name_ja": "B・ヒューズ板側の可視区間",
+      "segments_px": [[[654, 680], [643, 704], [637, 724], [638, 744]]],
+      "visible_ja": "ヒューズ板の端子近傍から曲がる配線の一部。",
+      "unresolved_ja": "対応するハウジング・接続極・ヒューズ機能名。線が重なる先は描画しない。",
+      "physical_from_id": null, "physical_to_id": null, "electrical_group_id": null, "photo_wire_id": null
+    }
+  ],
+  "holding_implications": [
+    {"group": "A", "source_ja": "下板側にも自由な丸端子付き線がある。", "role_ja": "A搬送時の案内役を残し、Cへの受渡しまで支援の予約を保持する。", "hand_ja": "H04系：端子側の黒被覆と根元を保持する既存方針。実際の許容接触域は未設定。"},
+    {"group": "B", "source_ja": "ヒューズ板側には樹脂ハウジングと未接続丸端子が共存する。", "role_ja": "Bの案内役を樹脂ハウジング専用と固定しない。各自由端を残したままCへの受渡しを検討する。", "hand_ja": "H05系とH04系の対象がある。同時に何端を持てるか、一括把持できるかは未確認。"},
+    {"group": "C", "source_ja": "開口通過後も後工程の接続対象が残る。", "role_ja": "AをC補助が持つ間にB案内が必要なら、既存の共用補助がBを保持し続ける比較を維持する。", "hand_ja": "手先交換中の保持を空白にしない。次の支持・持替え・端子固定を具体化する。"}
+  ],
+  "circuit_ja": "V1.1の2頁では補機5回路にヒューズ付きHV+側とHV−側が描かれ、3頁では各2極の1がHV+、2がHV−。これだけでは2025年映像の各自由端をどのピン・ボルトへ接続するか確定できない。",
+  "revision_boundary_ja": "2025年の組立映像と2022年の写真・V1.1資料は同一製造版未確認。画面内の観察IDを既存の写真IDへ自動対応しない。",
+  "scope_ja": "4件は可視区間の追跡例であり、線数・端末総数・独立保持数の調査完了ではない。元の92写真特徴、17機能、13回路群、LV12ピン、20仕事を保持する。"
+}

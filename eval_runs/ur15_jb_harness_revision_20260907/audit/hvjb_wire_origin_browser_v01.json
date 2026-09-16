@@ -1,0 +1,274 @@
+{
+  "observed_at": "2026-09-16T11:28:56.221Z",
+  "directory": "/home/rlrk/Downloads/THREAD_HVJB_A_B配線の由来_v01_20260916",
+  "cases": [
+    {
+      "view": "a26",
+      "zoom": false,
+      "annotated": false,
+      "viewBox": [
+        0,
+        0,
+        1920,
+        1080
+      ]
+    },
+    {
+      "view": "a26",
+      "zoom": false,
+      "annotated": true,
+      "viewBox": [
+        0,
+        0,
+        1920,
+        1080
+      ]
+    },
+    {
+      "view": "a26",
+      "zoom": true,
+      "annotated": false,
+      "viewBox": [
+        730,
+        200,
+        750,
+        540
+      ]
+    },
+    {
+      "view": "a26",
+      "zoom": true,
+      "annotated": true,
+      "viewBox": [
+        730,
+        200,
+        750,
+        540
+      ]
+    },
+    {
+      "view": "b44",
+      "zoom": false,
+      "annotated": false,
+      "viewBox": [
+        0,
+        0,
+        1920,
+        1080
+      ]
+    },
+    {
+      "view": "b44",
+      "zoom": false,
+      "annotated": true,
+      "viewBox": [
+        0,
+        0,
+        1920,
+        1080
+      ]
+    },
+    {
+      "view": "b44",
+      "zoom": true,
+      "annotated": false,
+      "viewBox": [
+        460,
+        300,
+        950,
+        440
+      ]
+    },
+    {
+      "view": "b44",
+      "zoom": true,
+      "annotated": true,
+      "viewBox": [
+        460,
+        300,
+        950,
+        440
+      ]
+    },
+    {
+      "view": "b87",
+      "zoom": false,
+      "annotated": false,
+      "viewBox": [
+        0,
+        0,
+        1920,
+        1080
+      ]
+    },
+    {
+      "view": "b87",
+      "zoom": false,
+      "annotated": true,
+      "viewBox": [
+        0,
+        0,
+        1920,
+        1080
+      ]
+    },
+    {
+      "view": "b87",
+      "zoom": true,
+      "annotated": false,
+      "viewBox": [
+        585,
+        505,
+        570,
+        490
+      ]
+    },
+    {
+      "view": "b87",
+      "zoom": true,
+      "annotated": true,
+      "viewBox": [
+        585,
+        505,
+        570,
+        490
+      ]
+    },
+    {
+      "view": "c170",
+      "zoom": false,
+      "annotated": false,
+      "viewBox": [
+        0,
+        0,
+        1920,
+        1080
+      ]
+    },
+    {
+      "view": "c170",
+      "zoom": false,
+      "annotated": true,
+      "viewBox": [
+        0,
+        0,
+        1920,
+        1080
+      ]
+    },
+    {
+      "view": "c170",
+      "zoom": true,
+      "annotated": false,
+      "viewBox": [
+        0,
+        0,
+        1920,
+        1080
+      ]
+    },
+    {
+      "view": "c170",
+      "zoom": true,
+      "annotated": true,
+      "viewBox": [
+        0,
+        0,
+        1920,
+        1080
+      ]
+    },
+    {
+      "view": "c237",
+      "zoom": false,
+      "annotated": false,
+      "viewBox": [
+        0,
+        0,
+        1920,
+        1080
+      ]
+    },
+    {
+      "view": "c237",
+      "zoom": false,
+      "annotated": true,
+      "viewBox": [
+        0,
+        0,
+        1920,
+        1080
+      ]
+    },
+    {
+      "view": "c237",
+      "zoom": true,
+      "annotated": false,
+      "viewBox": [
+        325,
+        155,
+        780,
+        700
+      ]
+    },
+    {
+      "view": "c237",
+      "zoom": true,
+      "annotated": true,
+      "viewBox": [
+        325,
+        155,
+        780,
+        700
+      ]
+    }
+  ],
+  "mobile": {
+    "width": 480,
+    "documentWidth": 465,
+    "views": 5
+  },
+  "pdfSizes": [
+    [
+      1469,
+      1900
+    ],
+    [
+      1469,
+      1900
+    ]
+  ],
+  "local_links": [
+    "evidence/assembly_026s.png",
+    "evidence/datasheet-2.png",
+    "evidence/datasheet-3.png",
+    "source_v1_1.pdf",
+    "evidence/assembly_028s.png",
+    "evidence/assembly_040s.png",
+    "evidence/assembly_044s.png",
+    "evidence/assembly_054s.png",
+    "evidence/assembly_058s.png",
+    "overview.png",
+    "overview.svg",
+    "notes.md",
+    "review_data.json",
+    "catalog.json",
+    "all_workcards.json",
+    "selection.json",
+    "evidence/assembly_087000ms.png",
+    "evidence/assembly_170s.png",
+    "evidence/busbars.png"
+  ],
+  "exports_sha256": {
+    "browser_a26.png": "74564e4263c0a038f6d32f17c29c8966755f8ea9a33c435d9670062326e4e286",
+    "browser_b44.png": "35e689adc859f45cb89f7188138481103ae447360e30c68e5b40e450d62657b1",
+    "browser_b87.png": "3a8bd0c87bc15d67fec7063822e739405653e09c9f6e1e6f13502df0864f001e",
+    "browser_c170.png": "c0979cd445b838cb7f5c1b4a37b2729fddd42f90ec9d18daf523da7256a75200",
+    "browser_c237.png": "d7b169858b78efba7c7b59bf8cafc5d954cb0a8b5683c24850d64cb99813ee82",
+    "browser_mobile.png": "cbb1bea1dd44f23d7fc0077152bb93882d76603efef260abac5d878f3d60f68b",
+    "overview.svg": "3e8fb5f9358c6760dce6e84a7b97aed3f3ccd8ff2e61ddaf7f967c2df60ec5fe",
+    "overview.png": "3d26eb60b693e09c125b6d3416637254912978917fa47cf12d5d1490c2451653"
+  },
+  "javascript_errors": [],
+  "scope": "UI and saved image correspondence only; no complete wire or physical acceptance verdict"
+}
