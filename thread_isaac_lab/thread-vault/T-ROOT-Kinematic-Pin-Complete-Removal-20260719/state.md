@@ -26,7 +26,7 @@ session_history:
     started_at: 2026-07-20T20:01:09+09:00
     note: "Rs 承認 (node 作成 + 起動、2026-07-20) により起票。[DEFINE] = 00-Project-Management/node-proposal-T-ROOT-Kinematic-Pin-Complete-Removal-20260719.md @ 14a891d256。既往 c4-c48 は §3 adopted_existing_arc provenance であり本 session の成果ではない。起票時点 = step2 CLOSE / step3 docs-records-only OPEN。"
 created: 2026-07-20T20:01:09+09:00
-last_updated: 2026-09-16T17:58:18+09:00
+last_updated: 2026-09-16T18:10:25+09:00
 spec_version: LTM-1 v1.2
 ---
 
@@ -112,12 +112,12 @@ disposition / status だけ・**census = 35 固定**。
 
 ### 7.1 成果物と担当（p4 起案・Rs1 要件「成果物・担当」）
 
-| # | 成果物 | 担当 | pointer（p6 09-16 17:58 実測・HEAD `dc090f7753`） |
+| # | 成果物 | 担当 | pointer（p6 09-16 18:10 実測・HEAD `3316e2df4e`・初版 17:58 @ `dc090f7753`） |
 |---|---|---|---|
 | ① | 設計 v3 `eval_runs/troot_optE_dapg_wholeroute_scope_20260701/P11_UR15B_CONTROLLER_DESIGN_20260913.md` | p11 | 最新 `dc090f7753`（§17 追記・253 行）。「未検証」の札は v3 `:1` のまま |
-| ② | D4（姿勢 cap 計器の側別化・wired 2 関数＋print） | 実装 p0／検証 pZ（事前登録 `cb787871f0`・R3 `98d8e63173`） | 着地 `3370f7a872`（09-16 17:48:52・記録 = P0 §8.51 @ `4b328fb025`）。pZ leg・p4 受入 = 未 |
-| ③ | B 記録行（Q2 = B・側別 controller の記録行） | spec p11／実装 p0／検証 pZ | spec = v3 §17.2 @ `dc090f7753`。prereg・実装 = 未（D4 に畳まない・別小窓） |
-| ④ | R0 静的収束検査（Q1） | spec p11（v3 §10＋§17.1）／作成 p0／独立検証・実行 pZ | spec = §17.1（「収束のみ」を名乗る）。pZ prereg → p0 作成 = 未 |
+| ② | D4（姿勢 cap 計器の側別化・wired 2 関数＋print） | 実装 p0／検証 pZ（事前登録 `cb787871f0`・R3 `98d8e63173`） | 着地 `3370f7a872`（09-16 17:48:52・記録 = P0 §8.51 @ `4b328fb025`）・pZ leg 9/9 hold＋R3 静的 hold `ab0ac56f97`（追記 `f6ab51c3ff`）・**p4 受入済 09-16 18:03:56（item 6 @ `bf489e1bb2`・② のみ・controller の完成ではない・R3 数値は #69 の run 内）** |
+| ③ | B 記録行（Q2 = B・側別 controller の記録行） | spec p11／実装 p0／検証 pZ | spec = v3 §17.2 @ `dc090f7753`・pZ prereg `aed109d06f`（訂正 `e41d0a9304`）（09-16 18:04:59・p4 の読み未）。実装 = 未（D4 に畳まない・別小窓） |
+| ④ | R0 静的収束検査（Q1） | spec p11（v3 §10＋§17.1）／作成 p0／独立検証・実行 pZ | spec = §17.1（「収束のみ」を名乗る）・pZ prereg `bf4433bfe6`（訂正 `642a9162f0`）（09-16 18:04:59・p4 の読み未）。p0 作成 = 未 |
 | ⑤ | R1／R1′／R2 静的 legs | pZ | 未（R1 の pin は §17.3 で reference/ へ） |
 | ⑥ | reference 一式（Q3） | 取込 p4／照合 pZ | 取込 `e6172b2e3b`（23 file）・照合 `170cbf54a7`（manifest 20/20・4 source 同一・blob==bytes 23/23） |
 | ⑦ | まとめ・受入 | p4 | 未（着手 ≠ 受入・Rs1 補足 b） |
