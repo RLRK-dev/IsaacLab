@@ -80,3 +80,71 @@
 5. ⚠ **skill Step 8（verification-log への永続化）は未実施** — 本節がその代替ではない。⇒ **未了として明記する**（`scripts/verification_log_build_input.py` 経路の実行は別途）。
 
 ⚠ **等級**: 招集は Rs1 の「すすめて」＋回付（誘発）。⭐ **CRITICAL 3 件はすべて panel が出し、私は再確認しただけ**。⛔ **私が自分で出した所見は 1 つも CRITICAL に届いていない** — この草案について、私の自己検査は panel の代わりにならなかった。
+
+
+---
+
+## 5. cycle 2（対象 = v2 @ `b9f9830b3d`・blob `7e701955e7f8`・107 行・sha256 `8f3a0a574602ab666c73d4cfcd119650ee3f4d20c59d72ea1f5048b339528ebf`）— **DECIDE = FAIL・上限 2 到達 ⇒ REVIEW = Rs1**
+
+**Written** 2026-09-16 18:34:38 JST · CC1 = w2:p11 · 5 体 = CC2 premise/provenance（21 件: CRITICAL 2・HIGH 3・MEDIUM 9・LOW 7）・CC3 rules/SSOT/authority（20 件: 5・6・8・1）・CC4 numerical/physics（18 件: 1・6・6・5）・CC5 side-effects/regression/history（12 件: 2・4・4・2）・CC6 null-hypothesis（H0-1〜H0-8: SURVIVES CRITICAL 3・HIGH 2・MEDIUM 2・LOW 1・REFUTED 3）。**全 lens FAIL**。各 body 全文 = session scratchpad `cable_cycle2/CC{2..6}.md`（sha256 先頭 12 = CC2 `85891aca2517`・CC3 `d95ccf7d9137`・CC4 `17a86ea5d840`・CC5 `4906e6ef1550`・CC6 `bb7ccbc3bea1`）→ Step 8 で verification-log に永続化（§5-F）。run 0・driver import 0（CC4 の 2-body toy = driver 外の MuJoCo `mj_kinematics` のみ・stepping 0・当卓は解析導出の一致で受ける）。⚠ v2 の object `b9f9830b3d` は debate 中 不触。
+
+### 5-A. 統合（同じ欠陥 = 1 行・severity = 最高値・「CC1 が object で再確認」= `git show` / grep を当卓が実行した事実のみ）
+
+| # | 欠陥 | 出所 | 処置 → v3 |
+|---|---|---|---|
+| **U1 CRITICAL** | §1 F4 の `:892/:960/:1088`・8,580 行は **dirty working tree の読み**。blob `24390ebb69` = 8,550 行: `add_cable_rod` `:868`・`add_revolute_cable` `:936`・axis 行 `:1009`・`solver_backend == "mujoco"` `:1064`（CC1 実測） | CC2 F-1・CC4 C4-1・CC6 H0-3b・CC3 F9 | F4 を blob 値へ・誤読を開示 |
+| **U2 CRITICAL** | §1 F9 と paste-ready (ii) の `:1209/:1494/:1496` は v1 の `2fba2dfd67` 番号。blob `22feba17a6`（4,022 行）: `CLEARANCE_REPORT` `:1369`・`arm_pair_min(sc, …)` 呼出 `:2170`・`< ARM_CLEARANCE` 却下 `:2187/:2197`・`def arm_pair_min` `:1937`（CC1 実測）。「再確認 = 同じ行」は虚偽 | CC2 F-2・CC6 H0-3・CC5 | (ii) から行番号を外す（U6）・F9 を実測値へ・虚偽文を撤回 |
+| **U3 CRITICAL** | (iii) は `:69` を要約（39 joints・local-X→world-X・「2nd bend DOF/joint」括弧・BONUS ≤0.173°・Stage-D 参照・evidence path・log.md 引用を落とす）のに「retained verbatim」 | CC5 C2・CC6 H0-2・CC3 F5・CC4 H4-2/M4-5 | (iii) = `:69` 全文を日付・環境見出しの下に逐語ブロック引用（省略 0） |
+| **U4 CRITICAL** | (i) 着地後も `:68`（Model）`:71`（Impl = `add_revolute_cable`・`test:830/1066`）が 1-DOF Newton build を現行として述べ §4 が自己矛盾 | CC5 C1・CC3 F4・CC4 M4-4 | §2 に `:68/:71` 修理案（Rs1 の一語事項） |
+| **U5 CRITICAL** | (iv) が Q6 の「**仕様文言の更新前に**」を落とし恒久規則化・Stage B を名指し（`:69` は Stage B を CONSERVATIVELY COVERED と bank）・「AR quarantine cause」を 1-DOF build の結果と呼ぶ（LEDGER の原因 = 機構・当卓 ownership answer §3 と矛盾） | CC3 F2/F3・CC2 F-3/F-4 | (iv) を Q6 の射程どおりに・結果名を出さない・quarantine cause 句を削除 |
+| **U6 HIGH** | (ii) の fence が paste-ready 本文内（着地で自己否定）・§0#3 非該当を自己認証・選択段を spec 拘束文へ・H5 remedy 未実装なのに「全受入」 | CC3 F7/F11・CC5 M2 | (ii) = 1 文（grasp-drag ＋ §0#5 pin・currency 断定なし）・選択段の記述は §7 ESCALATION へ |
+| **U7 HIGH** | (i) は「表現できる」を測定 0 で述べる: 第 2 hinge が非零になった banked 記録は無い（`cable settled` 行は全て y[+0.280,+0.280]・CC6 repo-wide 0・CC1 の T43 読みと一致） | CC6 H0-1 | (i) に開示文 |
+| **U8 HIGH** | (iv) の照合義務に owner/trigger/受入条件が無い（DDR 行なし） | CC6 H0-4・CC5 M3 | §7 で p6 に DDR 起票依頼 |
+| **U9 HIGH** | [DEFER-RECON] が FOUNDATIONAL 列を照合せず（12 行中 8 行欠落）・#64/#46 欠落・「= 0」は断定 | CC3 F8 | §6 を列から導出（rev 付き・行ごと） |
+| **U10 HIGH** | §5 L1 の 3 pointer は cycle-1 CC5 の誤りの複写（`SOMA.md:640`→`:28`・`PIN_DB:385`→`:61`〔file 203 行〕・`PIN_D:287` ✓）・consumer 集合 3 文書は過少（closed query 10 file ＋ 現状面）・LEDGER `:72` 欠落 | CC5 H2/H3・CC3 F9・CC2 F-12 | §5 = consumer 表 |
+| **U11 HIGH** | content pin「…is fidelity-QUARANTINED」は `**` 無しで grep 0（`is **fidelity-QUARANTINED**` = 1・`spring-follow + kinematic hold` = 2 行 `:63/:146`） | CC5 H4・CC2 F-8・CC6 H0-8 | literal pin ＋ query 印字 |
+| **U12 HIGH** | §3 が `:29`（env 配線 pin の工学的必要性）を再導出待ちにしつつ §7-3「問いは残さない」・carry 未登録 | CC3 F6 | §7 に Rs1 open item ＋ p6 carry 2 件 |
+| **U13 HIGH** | Stage B 環境札に solver 名・commit 無し（実体 `stage_b_vertsag_measure.py:75` `solver_backend="mujoco"`・result JSON head `eac2fbaf75`・CC1 実測） | CC4 H4-1 | (iii) 見出しに札 |
+| **U14 HIGH** | 「horizontal (in-plane)」は RS71 `:69` の同軸の語「horiz out-of-plane」の逆 | CC4 H4-3 | out-of-plane に統一 |
+| **U15 HIGH** | DOF 数不記載・「two hinges per link」= 40 link に対し 39 joint 対（78 hinge）＋ free root 6 = nv 84 | CC4 H4-4・CC6 H0-7b | 数を書く |
+| **U16 HIGH** | M1 限定句が原因（上流の累積 y 回転で z-hinge 軸が world Z から傾く）と大きさ（1 次）を誤る | CC4 H4-5 | 閉形式で書き直す |
+| **U17 HIGH** | `bf0235cfd8` のケーブルは別物（`CABLE_SEG 0.030` = 1,200 mm・`CABLE_R 0.005`・range ±1.2・CC1 実測 `:41-42/:83-84`） | CC4 H4-6 | 「2 hinge 鎖の初出」に限定・現行定数の初出は未測 |
+| **U18 HIGH** | [TASK] node_id 無し・DDR #71（file を作る／共有面を変える task = p6 起票 ＋ Rs1 都度承認）との矛盾を自己 disposition | CC3 F10 | open item（自己 disposition しない） |
+| **U19 HIGH** | (a)(c) は当卓が辞退した court（HANDOFF `:53`）— (i) の DOF 事実と §4 の quarantine 句を書いている | CC3 F1/F2 | (i) の事実 = 測定札・構築判断なし／(c) = `:31` 行番号修理のみ・辞退を開示 |
+| **U20 MEDIUM** | L-TRIAGE keyword 記録が虚偽（`ik` = 3 行 `:32/:39/:70`・`newton` 8・`solver` 1 未走査）・YAML 不完全 | CC3 F12・CC2 F-10 | 全 keyword 走査・evidence/notification/RESULT |
+| **U21 MEDIUM** | 層4 の数（33/15）が再現しない・自己捕捉未開示・row/line 混同・#72 は `358a1d72ad` に無い | CC3 F14・CC2 F-9・CC5 L2 | §5-D の形で書く |
+| **U22 MEDIUM** | #66 disposition が軸違い | CC3 F13 | emitter commit の §0 状態で書く |
+| **U23 MEDIUM** | court: row 48 閉鎖 actor 無し・SOMA 修理を p6 に渡す（04-Specs = Rs1）・routing desk p18 不記載 | CC3 F15 | 書く |
+| **U24 MEDIUM** | paste 本文の「Q5」は spec 内で解決不能・「retained above」は方向逆 | CC3 F16 | custody pointer・「in §4 (iii)」 |
+| **U25 MEDIUM** | Step 8 cycle 1 未 backfill | CC3 F17 | §5-F |
+| **U26 MEDIUM** | §7 FAIL 分岐が skill と違う（REVIEW の宛先 = user = Rs1・第 3 cycle は卓が許可しない） | CC3 F18・CC6 H0-6 | §7 書き直し |
+| **U27 MEDIUM** | [DESIGN-GATE]/[RULE-CHECK] stage2 判定なし | CC3 F19 | §5-E・v3 §6 |
+| **U28 MEDIUM** | (i) は同 dir 6 emitter 中 1 つ・「no joint range」は他 5 と異なる／等方性は 2 次まで／stretch・twist 限定 2 点／stiffness の宣言済 runtime override `CABLE_BEND_STIFFNESS_OVERRIDE`（cell_spec `:196-204` @ `0f6b4a733e`）／XML literal `0.33333`／600 mm = centreline 長 | CC4 M4-1/M4-2/M4-3/L4-1/L4-2・CC2 F-13/F-18 | (i) に限定 |
+| **U29 MEDIUM** | Layer 6 guard を別 script で測った: tracked wrapper `scripts/validations/check_cable_model.sh`（`validate.sh:122`）・delegate `check_cable_model_mislabel.sh` のみ untracked・scan root = `thread_isaac_lab/{configs,envs}` = 現行 cell dir の外 | CC5 M1 | §5 |
+| **U30 MEDIUM/LOW** | F7「1 行目」引用が 1 行目でない（1 行目 = `# UR15 制御側の測定記録 — ⛔ **NON-AUTHORIZED PROVISIONAL SAMPLE**`・制限句 = `:11`）／cab{i} 6 行 = file-wide（`:343-346`＋`:454-455`・span 内 4）／v1 sha 末尾 = `…939ce6f8`／Q7 後半 2 文の無印省略／「supersedes B2」= 無札の推論／`843084ae5e` = file 最終 commit／06-26 pivot custody（LEDGER `:207/:209`・`843084ae5e`）／依頼句 custody `P11_SERVO_START_DESIGN_CONFIRMATION_20260809.md:299` @ `05f1ed692c`／括弧入れ子／L2 の重なり／Newton 1.4.0 path（`/home/rlrk/env_isaaclab7_latest/…/builder.py:4966`）／43-step 下流 `P5_CABLE_PREMISE_DEPENDENCY_OF_43STEP_20260809.md` 未引用／prepared patch `ITEM5_SPEC_LANDING_PREPARED_RS71_PATCH_20260808.patch`（`ac780d3dc1`）は dead | CC2 F-5/6/7/11/14/15/16/17/19/20/21・CC5 M4/L1・CC3 F20・CC4 L4-4/L4-5 | 各所 |
+
+### 5-B. REBUT（CC1 が object で反証・3 件）
+- **CC3 F9 の一部**「`P11_MOUNTING_C-2_IMPL_DESIGN_SPEC_20260808.md` が premise 句を持つ」— closed query `git grep -l -I "1-DOF-per-joint" HEAD -- '*.md'` = 10 file・同 file は含まれない（CC1 実行・HEAD `00a36b340d`）。残り（LEDGER `:72`・10 file）は ACCEPT（U10）。
+- **CC5 H1**「RS71 `:40` = 第 4 の verbatim 依存」— `:40` @ `13a1331fc0`（3,934 字）に `1-DOF`/`planar`/`KINEMATIC`/`DECISION B2` の literal 0（`sag` 7・`horizontal` 1）⇒ 逐語依存ではない。**PARTIAL ACCEPT**: §0-A の sag 記述行として着地時に Rs1 が読む行に載せる（v3 §5）。
+- **CC6 H0-5/H0-6/H0-7** = CC6 自身が REFUTED。残差（39+39 count・再測定を伴わない書き換え）は U15/U1/U2 で処置。
+- **CC4 L4-5**（EI 較正記録 `task_config.py:148` の再現性）= task_config は Rs court・本件の射程外 ⇒ 記録のみ（v3 §5）。
+
+### 5-C. DECIDE = **FAIL**（accepted CRITICAL 5・HIGH 14）⇒ **上限 2 到達 ⇒ REVIEW = Rs1**（skill Step 7 `:440-441`: FAIL = Max 2 cycles・REVIEW = user へ提示）
+- v2 は着地候補にしない。**v3**（同 path・§5-A の処置を全て適用・⚠ **5 体検証を通していない**）を REVIEW packet の本文として Rs1 に出す（経路 = p18 → p4 → Rs1・04-Specs は Rs1 のみ）。
+- Rs1 の選択肢（CC6 NO_ACTION_EVALUATION A/B/C ＋ D）: **A** LEDGER ＋ RS71 §4 に 1 行の supersession flag のみ／**B** (iii)(iv) のみ着地（Q5/Q6 の指定そのもの・(i)(ii) を落とす）／**C** v3 の 4 部を着地（未検証のまま着地しない ⇒ D と組む）／**D** v3 に対する cycle 3 を Rs1 が許可。CC1 の推奨 = **B、または D の後に C**（A は supersession flag 義務を満たすが (iv) の照合規則が spec に載らない・C 単独 = 未検証着地）。
+- 第 3 cycle・v4・build を自発しない。
+
+### 5-D. 層4 prior-art guard（本 turn）
+`scripts/check_thread_vault_prior_art.sh --fail-on-blocker --max-findings 1000 "substrate-upgrade" "world-Z" "cable-fidelity" "horizontal routing"` @ 2026-09-16 18:25:25 JST・HEAD `00a36b340d`・dirty 3,388 entries: **rc=2・findings 43・blockers 19・lessons 14**。blocker 出所 = RS71 `:23/:62/:67`（HEAD 行）・LEDGER **rows** 48/49（`:146/:147`）＋ LEDGER **行** `:72`・kickoff `:2326/:2328`・`HANDOFF_p11_armcontrol.md:91`・**自己捕捉** = v2 `:29/:39/:40/:72` ＋ cycle-1 verdict `:29-31`（語についての記述が語の計数に入る）。全て本件自身の prior art ⇒ 新 directive = Rs1 Q7（09-14）の下で進む（AGENTS.md「explicit new directive」）。v2 の 33/15 は 09-16 18:00 前の tree で測った値（時刻未記録 = U21）。
+
+### 5-E. [DESIGN-GATE] 判定・[RULE-CHECK] stage2（U27）
+- **[DESIGN-GATE] = 非該当**: trigger 文 = `/reward-design`（reward/success/auto-close/env reset/observation の変更）・`/pre-check`（env 変更の **実装** 前）— 本件は code delta 0 の文言。反論（§3 は env に配線された pin の記録上の根拠を扱う）は認めるが pin 自体（`:27/:28`）は不変で env は変わらない ⇒ 非該当。反論は v3 §7 の open item として Rs1 へ。
+- **Tier 0** prohibited.md: cat 済（41 行・本 turn）。照合 `:17` CLAUDE.md 変更 → なし／`:18` 方針変更 → なし（Rs1 Q5 の文言化）／`:19` 不変前提 → 触れない（§3 = 認可不変）／`:27` kinematic trick → なし／`:38` 原文 cat → 済 ⇒ **PASS**。
+- **Tier 1**: 同一エラー 3 回 ✗／禁止 API ✗／patch の patch ✗（v3 = union 適用・cycle 3 は Rs1 事項）／根因不明 ✗／影響範囲 = v3 §5 consumer 表 ✓／編集 file は本 turn cat 済 ✓ ⇒ **PASS**。
+- **Tier 2**: control API 非該当／parameters 非該当（task_config 不触）／files: cat ✓・参照 grep ✓（closed query 10 file）・新 file 作成 0（v3 = 同 path・Step 8 = 既存 tracked log）✓ ⇒ **PASS**。
+- **Tier 3**: vault 参照（LEDGER・RS71・kickoff・SOMA・PIN_DB・PIN_D・Write Permissions）✓／skill = verification-subagent（本 §5）✓／evidence = file:line ✓／[VERIFY] adversarial = 5 体 ✓ ⇒ **PASS**。
+
+### 5-F. Step 8（verification-log 永続化・`harness-vault/verification-log/verification-log.jsonl` = tracked）
+- **cycle 2**: 本 turn に `scripts/verification_log_build_input.py --cycle 2 --num-agents 5 --reviewer CC{2..6}=<body>` → `verification_log_append.py`。結果は本節末尾に追記。
+- **cycle 1**: ⛔ **pipeline 記録不能** — cycle-1（08-09）の 5 body は保存されておらず（tasks / scratchpad / repo を検索 = 0）、converter は `--reviewer` 無しを受けない（`--num-agents 0` = usage error・実測）。残るのは consolidation（本 file §1-§4 @ `0a13b2053a`）のみ。**欠陥として残す**（教訓: hand-back 時に body を file へ保存する — cycle 2 は保存済）。
+- **cycle 2 実施結果（2026-09-16 18:45:15 JST）**: `verification_log_build_input.py --cycle 2 --num-agents 5` → `verification_log_append.py` = rc 0・`harness-vault/verification-log/verification-log.jsonl` の record 35/35（task_id `p11-cable-premise-bd-draft-20260809`・sha256 `ba3856b80b49d97e6a0ddd85d706cb6ff0cc0303c21da7b846a975bed7922176`）。⚠ 同 log は HEAD で 7 record・**27 record が他卓の未 commit（07-12 以降・6 task）** ⇒ 他卓の record を掃き込まないため当卓は log を commit しない（永続化 = append・pin = 上記 sha256）。consolidator は converter の bucket 形式（CONFIRMED 4-5/5・LIKELY 3/5・POSSIBLE 1-2/5）で本 §5 を包んだもの（scratchpad `cable_cycle2/consolidator_cycle2.md`）。
