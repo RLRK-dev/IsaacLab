@@ -2909,3 +2909,67 @@ if __name__ == "__main__":
 - p4: disposition of v3 (consume without cycle 3 / cycle 3) — if cycle 3 changes §6, this candidate is rebuilt, cheaply.
 - The window word for D4 (Rs1 via p18) = the landing above.  ⛔ Until then: the candidate lives only in the scratchpad worktree;
   branch untouched; run 0; route run ② conditional and unmet.
+
+## 8.51 D4 LANDED: `3370f7a872` (+65/−45, one file, from a clean worktree on blob `75eefef4e27e`) — predicate and controls re-run on the landed blob; run 0; acceptance is pZ's and p4's, after verification
+
+*(2026-09-16 17:50 JST.  Rs1 = the human; Rs2 = p4/CC.  Window = Rs1's Q8「D4の着手を認める」relayed as m-p4-265 / m-p18-353 with p4's
+disposition: land the staged candidate unchanged; the Q2 = B record line and D4′ are NOT in this change; pZ runs the D4 leg
+(`cb787871f0`) and R3 (`98d8e63173`) independently; p4's acceptance follows verification (Rs1 supplement b).)*
+
+### 1. What landed
+
+| item | value |
+|---|---|
+| commit | **`3370f7a872`** (2026-09-16 17:48:52 JST), parent `5762f891b8` (the branch tip at landing), one file |
+| file | `p4_ur15_sim_20260727/ur15_steps_wired.py`: base blob `75eefef4e27e` (= `22feba17a6`, driver commits in between = 0) → landed blob **`d2bc133e1320ed3754970a20a3eba10d50d49d2d`** |
+| content sha256 | **`a6a42f06a058c0ed30a53d698984de5e17a520871b2ca4a801488689fed97f72`** (4042 lines) — byte-identical to the §8.50 candidate (`cmp` identical) |
+| numstat | +65 / −45; hunks (base lines) `@@ -1263,2` `@@ -1276,2` `@@ -1283` `@@ -1288,39` `@@ -2990` — all inside the two functions and the print |
+| pins (landed lines) | `def attitude_tilt_deg(t, yaw, roll)` :1263 (`v = slot_centre(t) - pinch(t)` :1280; `(_rdes(yaw, roll) @ AXFIX[t]) @ v_tool` :1287); `def vertical_cap_deg(side=None)` :1292 (`return min(caps.values())` :1344); the print :3005-3010 (prefix unchanged; `(L … / R …, each side under the attitude it receives)` appended) |
+| untouched | `solve_ik` / `pose_menu` / `_rdes` / `aim_*` / `release_ctrl` / servo / `R_DES` / `GRASP_ATTITUDES` / `LIM` / `AXFIX` / `SIDES`; the E1 block (:41-:140, `atexit.register(_write_run_metrics)` :139); control lines 0 |
+| not in this change | the identity record line (Rs1 Q2 = **B**; p4: separate small window, spec by p11 first); D4′ (§16); `:214` (DDR 73); the 09-07 WIP (DDR 72) |
+
+### 2. Verification on the landed blob (static; the driver was not imported or run)
+
+```
+py_compile OK
+=== base vs LANDED blob (must PASS)
+ALLOWED     stmt#141 base:1263 cand:1263 FunctionDef attitude_tilt_deg
+ALLOWED     stmt#142 base:1288 cand:1292 FunctionDef vertical_cap_deg
+ALLOWED     stmt#260 base:2987 cand:3005 Expr print [steps] vertical check
+PASS
+=== control 1 (literal flip 0.05 -> 0.06 in solve_ik, must FAIL)      FAIL
+=== control 3 (landed + stray edit of the identity print, must FAIL)  FAIL
+=== control 4 (N3: one placeholder-free f-string de-f'd, must PASS)   PASS
+```
+
+Instrument = `ast_pred.py` as reproduced in §8.50 §4.2 (unchanged); base = `git show 22feba17a6:…`, candidate = `git show 3370f7a872:…`.
+Control 2 (mock-D4 → PASS) is the landed blob itself.  **Numbers are not verified here** — `cap_L` / `cap_R` / `v_c` are pZ's R3
+(pre-registered with its numbers at `98d8e63173`: symmetric fingers 5.729578° both sides = the record's 5.73; asymmetric 2.864789 /
+14.323945).
+
+### 3. Landing mechanics as they actually went (one correction to §8.50 §5)
+
+- Worktree re-based to the live tip (`git checkout --detach 5762f891b8` inside the worktree keeps the modified file because the
+  driver is identical between `cc42d3ca5c` and the tip), candidate sha re-checked, `git commit --no-verify` on the one path,
+  then `git update-ref refs/heads/rlrk/optE-s2-substrate-swap 3370f7a872 5762f891b8` (compare-and-swap succeeded first try).
+- ⚠ **Correction:** §8.50 said the shared index would be untouched.  Moving the ref leaves the main tree's index entry for the file
+  at the OLD blob, so `git status` read `MM` — an unstaged-by-nobody revert of D4 sitting in the shared index, which a pathless
+  `git commit` by any desk would have landed.  Fixed with `git reset -q HEAD -- <the one path>` (index entry `75eefef4e27e` →
+  `d2bc133e1320`; no other index entry touched; working tree untouched).  Status now ` M` = the 09-07 WIP vs HEAD, as before.
+  Lesson for the next ref move: the pathspec-limited index reset is part of the landing, not an afterthought.
+- Scratch worktree removed after landing (`git worktree remove --force`; `git worktree list` shows none).
+
+### 4. Rs1 supplement a, applied to this change
+
+A stop raised by `vertical_cap_deg` (either calibration raise, now on either side) is **the instrument reading the live jaw**
+— it says the mouth vector at start-up is not upright, or the menu produced no tilt — and is **not a verdict on the controller**.
+D4 widens where that stop can come from (the right hand's reading, per v3 §6 "abort surface widens"); it does not change what the
+stop means.  pZ's R3 finding (an asymmetric jaw makes the upright entry read 8.59° and fires the first raise before any cap prints)
+is the prepared case: its route is D4′ (§16, owner p11, its own window), not a fix by this desk.  Every report from here separates
+"instrument stopped" from "controller did not converge".
+
+### 5. Standing
+
+- Acceptance of D4 = pZ's D4 leg + R3 (independent), then p4's word.  Nothing in this section claims it.
+- Not started: the B record line (waits for p11's spec → pZ prereg → its own window), R0 (Q1: p11 spec → pZ prereg → p0 builds
+  the static harness → pZ runs it; "convergence only"), D4′, `:214`.  Route run ② / #69 unfired.
