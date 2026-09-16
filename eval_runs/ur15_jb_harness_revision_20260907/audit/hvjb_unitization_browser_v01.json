@@ -1,0 +1,171 @@
+{
+  "observed_at": "2026-09-16T01:20:57.898Z",
+  "directory": "/home/rlrk/Downloads/THREAD_HVJB_支持と受渡し_v01_20260916",
+  "page_sha256": "4fee2dc56015bc98e0f0719917ee2bf7f40aec58b15c1e4169046d937a74feb7",
+  "initial": {
+    "stateButtons": 9,
+    "rows": 9,
+    "interfaces": 6
+  },
+  "stateResults": [
+    {
+      "index": 0,
+      "title": "下板を治具に位置決め",
+      "detail": "下板の剛性を持つ面を下から受け、側面の基準で位置を決める。上押さえは使わない。治具の受け面・横方向の保持は具体化が必要。",
+      "release": "入荷側の支持を外す前に治具へ支持を引き継ぐ。接触面・検出方法は未設定。",
+      "active": [
+        "nest"
+      ],
+      "joined": false,
+      "selectedRows": 1,
+      "second": 24
+    },
+    {
+      "index": 1,
+      "title": "ヒューズ板を持って合わせる",
+      "detail": "ヒューズや端子を避けた板の縁を、専用の対向2本指で保持する候補。締結面と工具通路を空ける。ボルト供給の準備はこの間に並行できる構成を比較する。",
+      "release": "供給台の支持からハンドへ引き継いでから移動。合わせただけで指を離さない。",
+      "active": [
+        "panel_hand",
+        "nest"
+      ],
+      "joined": false,
+      "selectedRows": 1,
+      "second": 24
+    },
+    {
+      "index": 2,
+      "title": "保持したままねじ固定",
+      "detail": "板を持つ役と工具役を分ける。工具はSTに取り付け、フィンガで工具をつかまない。ねじ位置・本数・軸方向と締付条件は未確定。",
+      "release": "採用手順の締結完了まではヒューズ板を保持。完了信号・トルク条件は本比較では決めない。",
+      "active": [
+        "panel_hand",
+        "tool",
+        "nest"
+      ],
+      "joined": false,
+      "selectedRows": 1,
+      "second": 24
+    },
+    {
+      "index": 3,
+      "title": "工具を先に退避",
+      "detail": "採用したねじ固定が完了した想定の段階。保持を続けて工具を退避し、指の開放・引抜き経路を空ける。工具だけの断面でなく供給ノーズ一式を対象とする。",
+      "release": "工具退避と板間の支持成立を確認する設計が必要。見えているねじ頭の数だけで判断しない。",
+      "active": [
+        "panel_hand",
+        "nest"
+      ],
+      "joined": true,
+      "selectedRows": 1,
+      "second": 24
+    },
+    {
+      "index": 4,
+      "title": "治具上で搬送把持へ持ち替え",
+      "detail": "下板を治具で支持したまま板保持指を開き、搬送用の手先へ切り替える候補。同じ腕を共用する場合も、指先や開度の共用・工具交換は別途対応する。",
+      "release": "この持ち替えには完成した板間接合が荷重を受ける前提がある。未成立のまま板保持指を離す動作へ進めない。",
+      "active": [
+        "nest"
+      ],
+      "joined": true,
+      "selectedRows": 1,
+      "second": 24
+    },
+    {
+      "index": 5,
+      "title": "搬送把持と自由端案内を準備",
+      "detail": "搬送ハンドが構造部を持ち、自由端を案内する役を準備する。丸端子・ハウジング群を一つの手で全部扱えるとは仮定しない。",
+      "release": "搬送把持と対象ごとの自由端案内を引き継いでから治具を解放する。具体的な把持・支持確認手段は未設定。",
+      "active": [
+        "guide",
+        "nest",
+        "unit_hand"
+      ],
+      "joined": true,
+      "selectedRows": 1,
+      "second": 146
+    },
+    {
+      "index": 6,
+      "title": "一体ユニットを筐体へ搭載",
+      "detail": "ユニットの支持と自由端案内を並行させる。線を吊り手にしない。筐体壁の内側で指を開けるか、部品下面に指が挟まらないかを次の実寸確認に残す。",
+      "release": "筐体へ入っただけで搬送ハンドを開かない。受け側の支持と指の退避経路が必要。",
+      "active": [
+        "guide",
+        "unit_hand"
+      ],
+      "joined": true,
+      "selectedRows": 1,
+      "second": 146
+    },
+    {
+      "index": 7,
+      "title": "筐体側へ支持を引き継ぐ",
+      "detail": "受け側と搬送ハンドが支持を重ねる段階を設ける候補。筐体内の支持面・位置決めは未確定で、P01底面への単純な接触を完了条件にしない。",
+      "release": "受け側への荷重移行後に開放・退避。自由端は次の案内役へ引き継ぐまで保持を続ける。",
+      "active": [
+        "guide",
+        "receiver",
+        "unit_hand"
+      ],
+      "joined": true,
+      "selectedRows": 1,
+      "second": 154
+    },
+    {
+      "index": 8,
+      "title": "指を退避し、搭載後作業へ",
+      "detail": "筐体側で支持でき、搬送指が抜けた想定の段階。筐体固定、端末の側面開口引出し、外側ヘッダー、バスバー・残接続、蓋・検査・払出しへ続く。",
+      "release": "受け渡し先を決めずに自由端の案内を終了しない。上縁への引掛けを自動保持として使わない。",
+      "active": [
+        "guide",
+        "receiver"
+      ],
+      "joined": true,
+      "selectedRows": 1,
+      "second": 154
+    }
+  ],
+  "sources": [
+    {
+      "second": 24,
+      "width": 1920,
+      "height": 1080,
+      "url": "https://www.youtube.com/watch?v=Sm_D-vmNYqc&t=24s",
+      "raw": "evidence/assembly_024s.png",
+      "markers": 2,
+      "viewBox": "0 0 1920 1080"
+    },
+    {
+      "second": 146,
+      "width": 1920,
+      "height": 1080,
+      "url": "https://www.youtube.com/watch?v=Sm_D-vmNYqc&t=146s",
+      "raw": "evidence/assembly_146s.png",
+      "markers": 0,
+      "viewBox": "0 0 1920 1080"
+    },
+    {
+      "second": 154,
+      "width": 1920,
+      "height": 1080,
+      "url": "https://www.youtube.com/watch?v=Sm_D-vmNYqc&t=154s",
+      "raw": "evidence/assembly_154s.png",
+      "markers": 0,
+      "viewBox": "0 0 1920 1080"
+    }
+  ],
+  "toggle": {
+    "hidden": true,
+    "visible": true
+  },
+  "mobile": {
+    "width": 480,
+    "documentWidth": 465,
+    "brokenImages": 0
+  },
+  "missing_links": [],
+  "javascript_errors": [],
+  "scope": "UI and artifact checks only; no contact or physical acceptance"
+}

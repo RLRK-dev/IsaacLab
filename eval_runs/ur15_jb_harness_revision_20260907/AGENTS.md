@@ -494,3 +494,18 @@ numbers unknown until their basis and the scope of the product change are set.
   torque, grasp surfaces, station layout and robot count remain unresolved.
   Preserve source observations and prior natives. Case fastening and remaining
   connections follow insertion; do not treat unitization as a completed product.
+
+## Unitization support-role comparison on 2026-09-16
+
+- `analysis/hvjb_unitization_roles_v01.md` and its data record compare a fixed
+  baseplate nest, panel-holding hand, and station-mounted fastening tool.
+  Nine diagram states refine the five adopted steps; robot counts, contact
+  surfaces, joint geometry and release-detection conditions remain unselected.
+- Regripping is on the nest after fastening and tool withdrawal. This candidate
+  requires the completed panel-to-base joint to carry its load; no transient
+  bolt torque or unverified hand release is authorized by the diagram.
+- Whole-unit transport and free-end guidance remain distinct roles. Check the
+  receiver and finger-opening path before showing release inside the case.
+  Do not add lifting tabs, trap fingers under the baseplate, or use cables or
+  contactor bodies as a demonstrated lifting interface. The page is scale-free;
+  its role coverage check is bookkeeping, not physical support validation.

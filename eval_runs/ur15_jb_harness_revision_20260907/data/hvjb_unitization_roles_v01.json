@@ -1,0 +1,56 @@
+{
+  "revision": "hvjb_unitization_roles_v01",
+  "status": "executor_comparison_under_adopted_procedure",
+  "procedure": "data/hvjb_unitization_decision_v01.json",
+  "scope_ja": "採用済み5段階に、支持・保持・工具・自由端案内の役割を対応した比較。実寸配置、実機の制御条件、機種・腕数の採用ではない。",
+  "approach_ja": "下板を据置治具で支持し、ヒューズ板をフィンガで保持したまま別の工具でねじ固定する。工具退避後、治具上で搬送用把持に引き継ぎ、自由端を案内しながら筐体へ入れる。",
+  "actors": [
+    {"id": "nest", "name_ja": "下板の据置治具", "type": "fixture"},
+    {"id": "panel_hand", "name_ja": "ヒューズ板の保持", "type": "holding_role"},
+    {"id": "tool", "name_ja": "据置の締付工具", "type": "tool_role"},
+    {"id": "unit_hand", "name_ja": "一体ユニットの搬送", "type": "holding_role"},
+    {"id": "guide", "name_ja": "自由端の案内", "type": "guidance_role"},
+    {"id": "receiver", "name_ja": "筐体側の受け", "type": "support_interface"}
+  ],
+  "states": [
+    {"id": "Q1", "step": "UZ01", "title_ja": "下板を治具に位置決め", "active": ["nest"], "base_support": ["nest"], "panel_support": ["upstream_rest"], "joined_assumption": false, "image_second": 24, "detail_ja": "下板の剛性を持つ面を下から受け、側面の基準で位置を決める。上押さえは使わない。治具の受け面・横方向の保持は具体化が必要。", "before_release_ja": "入荷側の支持を外す前に治具へ支持を引き継ぐ。接触面・検出方法は未設定。"},
+    {"id": "Q2", "step": "UZ02", "title_ja": "ヒューズ板を持って合わせる", "active": ["nest", "panel_hand"], "base_support": ["nest"], "panel_support": ["panel_hand"], "joined_assumption": false, "image_second": 24, "detail_ja": "ヒューズや端子を避けた板の縁を、専用の対向2本指で保持する候補。締結面と工具通路を空ける。ボルト供給の準備はこの間に並行できる構成を比較する。", "before_release_ja": "供給台の支持からハンドへ引き継いでから移動。合わせただけで指を離さない。"},
+    {"id": "Q3", "step": "UZ03", "title_ja": "保持したままねじ固定", "active": ["nest", "panel_hand", "tool"], "base_support": ["nest"], "panel_support": ["panel_hand"], "joined_assumption": false, "image_second": 24, "detail_ja": "板を持つ役と工具役を分ける。工具はSTに取り付け、フィンガで工具をつかまない。ねじ位置・本数・軸方向と締付条件は未確定。", "before_release_ja": "採用手順の締結完了まではヒューズ板を保持。完了信号・トルク条件は本比較では決めない。"},
+    {"id": "Q4", "step": "UZ03", "title_ja": "工具を先に退避", "active": ["nest", "panel_hand"], "base_support": ["nest"], "panel_support": ["panel_hand", "joined_base"], "joined_assumption": true, "image_second": 24, "detail_ja": "採用したねじ固定が完了した想定の段階。保持を続けて工具を退避し、指の開放・引抜き経路を空ける。工具だけの断面でなく供給ノーズ一式を対象とする。", "before_release_ja": "工具退避と板間の支持成立を確認する設計が必要。見えているねじ頭の数だけで判断しない。"},
+    {"id": "Q5", "step": "UZ04", "title_ja": "治具上で搬送把持へ持ち替え", "active": ["nest"], "base_support": ["nest"], "panel_support": ["joined_base"], "joined_assumption": true, "image_second": 24, "detail_ja": "下板を治具で支持したまま板保持指を開き、搬送用の手先へ切り替える候補。同じ腕を共用する場合も、指先や開度の共用・工具交換は別途対応する。", "before_release_ja": "この持ち替えには完成した板間接合が荷重を受ける前提がある。未成立のまま板保持指を離す動作へ進めない。"},
+    {"id": "Q6", "step": "UZ04", "title_ja": "搬送把持と自由端案内を準備", "active": ["nest", "unit_hand", "guide"], "base_support": ["nest", "unit_hand"], "panel_support": ["joined_base"], "joined_assumption": true, "image_second": 146, "detail_ja": "搬送ハンドが構造部を持ち、自由端を案内する役を準備する。丸端子・ハウジング群を一つの手で全部扱えるとは仮定しない。", "before_release_ja": "搬送把持と対象ごとの自由端案内を引き継いでから治具を解放する。具体的な把持・支持確認手段は未設定。"},
+    {"id": "Q7", "step": "UZ05", "title_ja": "一体ユニットを筐体へ搭載", "active": ["unit_hand", "guide"], "base_support": ["unit_hand"], "panel_support": ["joined_base"], "joined_assumption": true, "image_second": 146, "detail_ja": "ユニットの支持と自由端案内を並行させる。線を吊り手にしない。筐体壁の内側で指を開けるか、部品下面に指が挟まらないかを次の実寸確認に残す。", "before_release_ja": "筐体へ入っただけで搬送ハンドを開かない。受け側の支持と指の退避経路が必要。"},
+    {"id": "Q8", "step": "UZ05", "title_ja": "筐体側へ支持を引き継ぐ", "active": ["unit_hand", "guide", "receiver"], "base_support": ["unit_hand", "receiver"], "panel_support": ["joined_base"], "joined_assumption": true, "image_second": 154, "detail_ja": "受け側と搬送ハンドが支持を重ねる段階を設ける候補。筐体内の支持面・位置決めは未確定で、P01底面への単純な接触を完了条件にしない。", "before_release_ja": "受け側への荷重移行後に開放・退避。自由端は次の案内役へ引き継ぐまで保持を続ける。"},
+    {"id": "Q9", "step": "UZ05", "title_ja": "指を退避し、搭載後作業へ", "active": ["guide", "receiver"], "base_support": ["receiver"], "panel_support": ["joined_base"], "joined_assumption": true, "image_second": 154, "detail_ja": "筐体側で支持でき、搬送指が抜けた想定の段階。筐体固定、端末の側面開口引出し、外側ヘッダー、バスバー・残接続、蓋・検査・払出しへ続く。", "before_release_ja": "受け渡し先を決めずに自由端の案内を終了しない。上縁への引掛けを自動保持として使わない。"}
+  ],
+  "interfaces": [
+    {"id": "IF01", "name_ja": "下板と据置治具", "candidate_ja": "構造板の下面を受け、側縁を位置決めする。必要な横保持は上押さえと分ける。", "hand_family": null, "next_ja": "下板の実輪郭・裏面の突起・支持可能面・反力方向。筐体底面P01を下板にしない。", "contact_geometry_m": null},
+    {"id": "IF02", "name_ja": "ヒューズ板の保持", "candidate_ja": "露出した板縁に、端当て付きの薄い対向2本指。端子・ヒューズクリップ・固定ねじを避ける。", "hand_family": "H07形状の比較起点（カバー用からの転用は未確定）", "next_ja": "板厚・空き縁・剛性・許容接触面・開放域。写真の上端全体が把持できるとはしない。", "contact_geometry_m": null},
+    {"id": "IF03", "name_ja": "板間固定の工具通路", "candidate_ja": "ハンドが板を保持したまま、別置きの工具が接近する空間を確保する。", "hand_family": null, "next_ja": "実際のねじ軸・本数・締結積層・工具全外形。縦軸1本やXYZで足りるかは軸方向に依存。", "contact_geometry_m": null},
+    {"id": "IF04", "name_ja": "一体ユニットの搬送", "candidate_ja": "荷重を受けられる下板側の構造部を専用2本指で保持する比較。", "hand_family": "H06の対向爪構成を比較起点とする", "next_ja": "質量・重心・板間接合の荷重経路、筐体内での開閉・退避。未確認の吊り耳・穴を勝手に追加しない。", "contact_geometry_m": null},
+    {"id": "IF05", "name_ja": "未接続端の案内", "candidate_ja": "配線被覆と剛体ハウジングを対象に、ユニット支持と別の役で扱う。", "hand_family": "H04／H05を対象別に照合", "next_ja": "各自由端の所属・形状・本数・渡し先・同時保持範囲。T050の比較径を細線へ一律転用しない。", "contact_geometry_m": null},
+    {"id": "IF06", "name_ja": "筐体側の受けと指の開放", "candidate_ja": "受け側で支持を引き継いでから搬送指を開く。", "hand_family": null, "next_ja": "着座面、固定方法、指の開放距離と退避方向。横爪を壁で閉じ込めない。", "contact_geometry_m": null}
+  ],
+  "allocation_ja": [
+    "UZ01〜UZ03：据置治具＋板を扱う1腕＋据置締付工具を比較。治具が下板を保持できる前提で、工具専用の多関節腕を自動で追加しない。",
+    "UZ04〜UZ05：搬送保持と自由端案内を独立した役として比較。腕の台数は自由端の数・到達・手先共用を照合してから決める。",
+    "板保持と一体搬送は時間を分けて同じ腕へ割り当てる候補。治具上の持ち替え・必要な手先交換・所要時間はまだ未確定。",
+    "3腕は、ユニット支持と1つの案内役だけでは同時処理できない独立した仕事が残る場合の比較に留める。",
+    "1軸／2軸／XYZの工具位置決めはねじ軸と配置が確定後に選ぶ。工具Z送りを除外して2軸と数えない。",
+    "既存の大小2工具同時締付の要求は該当接続工程に維持する。板間ねじの本数・サイズは未確認で、今回そこへ2工具を機械的に割り当てない。"
+  ],
+  "selected_robot_count": null,
+  "selected_grasp_surfaces": null,
+  "selected_fastener_positions_m": null,
+  "acceptance_thresholds": null,
+  "physical_acceptance_verdict": null,
+  "evidence_views": [
+    {"second": 24, "description_ja": "下板の露出した縁と、別置きのヒューズ板が見える。番号は部位の案内で、採用した把持位置ではない。", "markers": [{"label": "A", "xy_px": [1380, 638], "text_ja": "下板の露出縁。裏面支持・把持可能範囲は未確定。"}, {"label": "B", "xy_px": [1777, 341], "text_ja": "別置きヒューズ板の側方。板厚と荷重を受ける範囲は未確定。"}]},
+    {"second": 146, "description_ja": "両ユニットを一緒に筐体へ入れる場面。人の手の位置は、ロボットの把持許可面や荷重評価ではない。", "markers": []},
+    {"second": 154, "description_ja": "搭載後も自由端が残る。これを側面開口へ通す工程を後段に残す。", "markers": []}
+  ],
+  "references": [
+    {"title": "Ampere EV公式組立映像（2025年）", "url": "https://www.youtube.com/watch?v=Sm_D-vmNYqc", "use_ja": "部品の別置きと同時搭載の観察。板間の固定方法を確定する出典ではない。"},
+    {"title": "Carr Lane：Locating & Clamping Principles", "url": "https://www.carrlane.com/engineering-resources/fixture-design-principles/locating-clamping-principles", "use_ja": "位置決めと保持の役割分離、支持面に力を向ける一般原則を参照。HVJBの接触面やクランプ荷重はこの出典から決めていない。", "checked_date": "2026-09-16"}
+  ]
+}

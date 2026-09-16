@@ -1,0 +1,172 @@
+{
+  "observed_at": "2026-09-16T10:18:21.947582+09:00",
+  "directory": "/home/rlrk/Downloads/THREAD_HVJB_支持と受渡し_v01_20260916",
+  "source_sha256_before": {
+    "data/hvjb_preassembly_process_v03.json": "5e9d7078d4e7ff9772f8561788b29a34b28165e3118559385dcc78faf28b64e7",
+    "data/hvjb_photo_model_v03_p03.json.gz": "6687b12ec1b3db24babf75f8fef1b6f6bc123c288b713824b9763d9214553ba6",
+    "data/hvjb_unitization_decision_v01.json": "f28f0693cc48cf288b0c50846f3b23196cf11b02561ce1a8ef55528f8e45f6f6",
+    "data/hvjb_photo_correspondence_v03_p01.json": "6c5b7cb9bab859a33c8f5d5cd5429ce9f06fb0951b8a8fa4ae2a31ad99052ca0",
+    "data/hvjb_plate_evidence_v01.json": "2802f20de9ae1265da26830b6abb2995017b0bf71f311cfeabf4425ffd6945ce",
+    "data/hand_provisional_spec_v01.json": "0ed18d28e261b73ae1fd3beb1686ad4c2b55071974d9b8708e358b79efa8b799",
+    "UR15_JB_photo_correspondence_v03_p03.blend": "5205d3aa2c2b99f7df6f538d17b3d3ca36ba8208c546858ee8ec8a5a3564a282",
+    "references/hvjb_assembly_followup_20260915/assembly_20250607.mp4": "b7fcb74eaeec06e517d5726994a38a6b0812e05198d8b771b7ff771e68a0e1eb",
+    "references/hvjb_plate_sequence_20260916/assembly_024s.png": "ae36aa75719958753f4436dfbae171b1c5e969f7d931fab39e227122585bcddc",
+    "references/hvjb_plate_sequence_20260916/assembly_146s.png": "fbe7b04dfc8a6881648df420afa5a48c8300d21cb0f9f0756edb83f500077d20",
+    "references/hvjb_plate_sequence_20260916/assembly_154s.png": "551cf3cc812b82a52ca096f0c684ac3a8edb5c3b50fbff3740626f583ac72280",
+    "data/hvjb_unitization_roles_v01.json": "7282ac79494d7704c7a88b48627b1d8cc72db0a883395d864ab1142454a3e802",
+    "analysis/hvjb_unitization_roles_v01.md": "d20748e12f048a72108d2570315ba97e4cf379693232a32c8a49dd7de6b773d3",
+    "scripts/hvjb_unitization_review_v01.html": "7303c6b9620b27f6ad10c5600ff8f1b47f733f0532c4773cc6d3e50fc8a14549"
+  },
+  "source_sha256_after": {
+    "data/hvjb_preassembly_process_v03.json": "5e9d7078d4e7ff9772f8561788b29a34b28165e3118559385dcc78faf28b64e7",
+    "data/hvjb_photo_model_v03_p03.json.gz": "6687b12ec1b3db24babf75f8fef1b6f6bc123c288b713824b9763d9214553ba6",
+    "data/hvjb_unitization_decision_v01.json": "f28f0693cc48cf288b0c50846f3b23196cf11b02561ce1a8ef55528f8e45f6f6",
+    "data/hvjb_photo_correspondence_v03_p01.json": "6c5b7cb9bab859a33c8f5d5cd5429ce9f06fb0951b8a8fa4ae2a31ad99052ca0",
+    "data/hvjb_plate_evidence_v01.json": "2802f20de9ae1265da26830b6abb2995017b0bf71f311cfeabf4425ffd6945ce",
+    "data/hand_provisional_spec_v01.json": "0ed18d28e261b73ae1fd3beb1686ad4c2b55071974d9b8708e358b79efa8b799",
+    "UR15_JB_photo_correspondence_v03_p03.blend": "5205d3aa2c2b99f7df6f538d17b3d3ca36ba8208c546858ee8ec8a5a3564a282",
+    "references/hvjb_assembly_followup_20260915/assembly_20250607.mp4": "b7fcb74eaeec06e517d5726994a38a6b0812e05198d8b771b7ff771e68a0e1eb",
+    "references/hvjb_plate_sequence_20260916/assembly_024s.png": "ae36aa75719958753f4436dfbae171b1c5e969f7d931fab39e227122585bcddc",
+    "references/hvjb_plate_sequence_20260916/assembly_146s.png": "fbe7b04dfc8a6881648df420afa5a48c8300d21cb0f9f0756edb83f500077d20",
+    "references/hvjb_plate_sequence_20260916/assembly_154s.png": "551cf3cc812b82a52ca096f0c684ac3a8edb5c3b50fbff3740626f583ac72280",
+    "data/hvjb_unitization_roles_v01.json": "7282ac79494d7704c7a88b48627b1d8cc72db0a883395d864ab1142454a3e802",
+    "analysis/hvjb_unitization_roles_v01.md": "d20748e12f048a72108d2570315ba97e4cf379693232a32c8a49dd7de6b773d3",
+    "scripts/hvjb_unitization_review_v01.html": "7303c6b9620b27f6ad10c5600ff8f1b47f733f0532c4773cc6d3e50fc8a14549"
+  },
+  "copied": [
+    {
+      "source": "references/hvjb_plate_sequence_20260916/assembly_024s.png",
+      "file": "evidence/assembly_024s.png",
+      "sha256": "ae36aa75719958753f4436dfbae171b1c5e969f7d931fab39e227122585bcddc"
+    },
+    {
+      "source": "references/hvjb_plate_sequence_20260916/assembly_146s.png",
+      "file": "evidence/assembly_146s.png",
+      "sha256": "fbe7b04dfc8a6881648df420afa5a48c8300d21cb0f9f0756edb83f500077d20"
+    },
+    {
+      "source": "references/hvjb_plate_sequence_20260916/assembly_154s.png",
+      "file": "evidence/assembly_154s.png",
+      "sha256": "551cf3cc812b82a52ca096f0c684ac3a8edb5c3b50fbff3740626f583ac72280"
+    },
+    {
+      "source": "data/hvjb_unitization_roles_v01.json",
+      "file": "role_inputs.json",
+      "sha256": "7282ac79494d7704c7a88b48627b1d8cc72db0a883395d864ab1142454a3e802"
+    },
+    {
+      "source": "data/hvjb_preassembly_process_v03.json",
+      "file": "process_v03.json",
+      "sha256": "5e9d7078d4e7ff9772f8561788b29a34b28165e3118559385dcc78faf28b64e7"
+    },
+    {
+      "source": "data/hvjb_unitization_decision_v01.json",
+      "file": "adopted_procedure.json",
+      "sha256": "f28f0693cc48cf288b0c50846f3b23196cf11b02561ce1a8ef55528f8e45f6f6"
+    },
+    {
+      "source": "data/hand_provisional_spec_v01.json",
+      "file": "hand_families.json",
+      "sha256": "0ed18d28e261b73ae1fd3beb1686ad4c2b55071974d9b8708e358b79efa8b799"
+    },
+    {
+      "source": "analysis/hvjb_unitization_roles_v01.md",
+      "file": "notes.md",
+      "sha256": "d20748e12f048a72108d2570315ba97e4cf379693232a32c8a49dd7de6b773d3"
+    }
+  ],
+  "generated_page_sha256": "4fee2dc56015bc98e0f0719917ee2bf7f40aec58b15c1e4169046d937a74feb7",
+  "review_data_sha256": "a90f49449d9e241bb694623aa5504b5f61847a0e9f717315969dbe65144e124d",
+  "adopted_step_count": 5,
+  "comparison_state_count": 9,
+  "declared_role_references_valid": true,
+  "role_check_scope": "diagram bookkeeping only; support and grip capacity not evaluated",
+  "model_observations": {
+    "basis": "saved display-mesh export, not manufacturing CAD",
+    "export_feature_count": 92,
+    "export_has_v25_base_plate_id": false,
+    "case_mesh_names": [
+      "Photo_case_back",
+      "Photo_case_floor",
+      "Photo_case_mount_flange",
+      "Photo_case_mount_flange.001",
+      "Photo_lid_boss",
+      "Photo_lid_boss.001",
+      "Photo_lid_boss.002",
+      "Photo_lid_boss.003",
+      "Photo_lid_boss_recess",
+      "Photo_lid_boss_recess.001",
+      "Photo_lid_boss_recess.002",
+      "Photo_lid_boss_recess.003",
+      "Photo_lid_boss_rim",
+      "Photo_lid_boss_rim.001",
+      "Photo_lid_boss_rim.002",
+      "Photo_lid_boss_rim.003",
+      "Photo_main_wall_band",
+      "Photo_main_wall_band.001",
+      "Photo_main_wall_band.002",
+      "Photo_main_wall_band.003",
+      "Photo_main_wall_side",
+      "Photo_main_wall_side.001",
+      "Photo_main_wall_side.002",
+      "Photo_main_wall_side.003",
+      "Photo_mount_pilot",
+      "Photo_mount_pilot.001",
+      "Photo_mount_pilot.002",
+      "Photo_mount_pilot.003",
+      "REF_P01_TE_mount_wall_band",
+      "REF_P01_TE_mount_wall_band.001",
+      "REF_P01_TE_mount_wall_pier",
+      "REF_P01_TE_mount_wall_pier.001",
+      "REF_P01_TE_mount_wall_pier.002",
+      "REF_P01_TE_mount_wall_pier.003",
+      "REF_P01_TE_mount_wall_pier.004",
+      "REF_P01_TE_mount_wall_pier.005",
+      "REF_P01_TE_mount_wall_R4_4",
+      "REF_P01_TE_mount_wall_R4_4.001",
+      "REF_P01_TE_mount_wall_R4_4.002",
+      "REF_P01_TE_mount_wall_R4_4.003",
+      "REF_P01_TE_mount_wall_R4_4.004",
+      "REF_P01_TE_mount_wall_R4_4.005",
+      "REF_P01_TE_mount_wall_R4_4.006",
+      "REF_P01_TE_mount_wall_R4_4.007",
+      "REF_P01_TE_mount_wall_R4_4.008",
+      "REF_P01_TE_mount_wall_R4_4.009",
+      "REF_P01_TE_mount_wall_R4_4.010",
+      "REF_P01_TE_mount_wall_R4_4.011",
+      "REF_P01_TE_mount_wall_R4_4.012",
+      "REF_P01_TE_mount_wall_R4_4.013",
+      "REF_P01_TE_mount_wall_R4_4.014",
+      "REF_P01_TE_mount_wall_R4_4.015",
+      "REF_P01_TE_mount_wall_R4_4.016",
+      "REF_P01_TE_mount_wall_R4_4.017",
+      "REF_P01_TE_mount_wall_R4_4.018",
+      "REF_P01_TE_mount_wall_R4_4.019"
+    ],
+    "panel_basis": "photo estimated display envelope; unpublished manufacturing dimensions",
+    "panel_mesh_names": [
+      "REF_P07_backing_outline"
+    ],
+    "panel_display_aabb_min_m": [
+      -0.05849999934434891,
+      0.0650000050663948,
+      0.014500001445412636
+    ],
+    "panel_display_aabb_max_m": [
+      0.08250000327825546,
+      0.0689999982714653,
+      0.0755000039935112
+    ],
+    "panel_display_aabb_size_m": [
+      0.14100000262260437,
+      0.003999993205070496,
+      0.061000002548098564
+    ],
+    "manufacturing_dimensions_m": null
+  },
+  "catalog_preserved_in_process": true,
+  "model_written": false,
+  "motion_created": false,
+  "movie_created": false,
+  "physical_acceptance_verdict": null
+}
