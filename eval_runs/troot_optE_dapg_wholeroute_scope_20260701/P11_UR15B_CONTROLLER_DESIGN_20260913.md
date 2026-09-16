@@ -251,3 +251,9 @@ position servo への線形 ramp（現行・不変）。one-shot 目標なし。
 
 ### 17.5 着手と完成受入の分離（補足 b・Rs1 逐語「修正の着手と、検証後の完成受入を分けることが必要です。」）
 - Q8 = **D4 の着手認可**（p0 の窓が開く）であって完成受入ではない。完成受入 = pZ の D4 leg `cb787871f0`・R3 `98d8e63173` 通過後の p4（柵 ②）。本書の「未検証」印（`:1`）は **完成受入まで残す**。D4′ は今回に含めない（Rs1 Q8）。
+
+### 17.6 p4 の §17 disposition（2026-09-16 18:05:00 JST 受領・kickoff 09-16 17:57 節 @ `02f7e52a90` を当卓が直読・relay m-p4-267）= **ACCEPTED（spec として）＋ 条件 2 ＋ cite 訂正 1**
+- **条件 (i)（17.1 R0 の leg に 1 行）**: R0 の harness の solver は **着地 blob（D4 着地 `3370f7a872`・blob `d2bc133e1320`）の `solve_ik`＋依存（`pinch`・`_rdes`・`pose_menu`・`_wrap`・`_measure_axfix` 相当）と AST 等価**であること（正規化 = §13 (b) の N1-N3）— **負の対照 = literal 1 つ（例 `:2118` の 0.05）を変えた copy は不等**。無ければ R0 は「試験対象の controller」でなく「似た solver」の収束を測る（KINONLY 先例 D-2 の R0 版 = 実行するがその text と同一であることを示す）。pZ の R0 prereg に含める。
+- **条件 (ii)（17.2 B 行の設計 commit literal）**: literal = **`P11_UR15B_CONTROLLER_DESIGN_20260913.md@dc090f7753`**（§17 を初めて含む commit）に固定。以後の append で「§17 を含む commit」は複数になるため、p0 の literal と pZ の検査値をこの hash に pin する（本 17.6 の commit ではない）。
+- **cite 訂正（17.3）**: `ur15_mirror_acceptance.py` の `REF_DIR` 行 = **`:49-50`** @ `38678f5946`（当卓が blob で再読: `:49` `REF_DIR = …Downloads/ur15-dual-arm-cell`・`:50` 続き）。17.3 と v3 §2 の「`:48-49`」は写しの誤り（本行で訂正・§2/17.3 は不触）。
+- 同節の他: D4 着地 = `3370f7a872`（+65/−45・hunk 5・p0 §8.50 候補と byte 同一・受入は pZ の D4 leg `cb787871f0`＋R3 `98d8e63173` の結果後）／pZ の reference 照合 = `170cbf54a7`（manifest 20/20・blob == bytes 23/23）／**Q9（p4 → Rs1）**: `REF_DIR` の repoint（`:49-50`）と `:214` の逆述語（DDR 73・owner p0）を 1 つの計器窓にまとめるか。当卓に owed = 本 17.6 のみ。
