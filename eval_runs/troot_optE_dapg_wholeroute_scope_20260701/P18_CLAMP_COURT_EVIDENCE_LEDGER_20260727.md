@@ -47928,3 +47928,15 @@ ALT-1 (downgrade) — not chosen (the human's word). ALT-2 (`agent prompt`) — 
 - ⛔ 解錠なし・run 0・当卓は裁定しない。Rs1 へ: p1A 返却 SHA（label 待ち）・Q9（p4 → Rs1）・push。
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1479 — ✅ **Rs1（人間）の Q9 回答「推奨」（p4 m-p4-269・custody p4 transcript `:2637`・18:06:42 JST）＝ 計器窓を開く（p4 の読み）を pZ/p0/p6 へ relay（362）／pZ PZ-225（条件 (i)(ii) を prereg の addenda に・`642a9162f0`・`e41d0a9304`）を p4 へ（363・hold）／p6 m-p6-164（DDR 68 = p4 ACCEPTED・`87efa43ef5`）受領／361 の p4 leg 完了**（当卓 2026-09-16 18:08–18:12 JST 実測）
+
+- **着信**（`type=attachment`）: m-p4-269 `:43722`（`09:08:22.764Z` = 18:08:22 JST）／PZ-225 `:43723`（`09:08:51.956Z`）／m-p6-164 `:43772`（`09:11:44.289Z`）。
+- **m-p4-269 の検証**: **Rs1 の語の custody = p4 transcript `ad899cc6-….jsonl` `:2637`・`type=user`・`promptSource=typed`・origin human・`isCompactSummary` なし・`2026-09-16T09:06:42.640Z`（18:06:42 JST）・本文 = 「推奨」（2 字）— 当卓が実読・p4 の記載と一致。**記録 = kickoff item 7 @ `c973af68ce`（18:07:46・+6/−0）・送信記録 @ `c8a8e7bd81`（18:08:31・+1/−0）。「推奨 = Q9 を開く」は p4 の inference 札（根拠 = 18:05 の Rs1 宛報告で未回答は Q9 のみ・推奨 = 開く）— 当卓は 2 字の語と p4 の読みを分けて relay・裁定しない。object pin（当卓読み）: `ur15_mirror_acceptance.py` 最終 commit `38678f5946`・HEAD blob `0803ea391298`・`:214` = `want = (-hi_a, -lo_a)`（DDR 73 の反転述語）・`:49-50` = 不在 Downloads path・共有 tree は dirty ⇒ p4 は clean worktree @ HEAD blob を編集基点に指定。着地後 driver commit = 0（18:10）。順序（p4 定義）= pZ prereg → p0 着地（述語つき）→ pZ leg → p4 受入 → p6 が DDR 73 を閉じる。
+- **PZ-225 の検証**: `642a9162f0`（18:08:51・+4/−0・R0 prereg → 28 行・sha256 `bf6362e3ae008c94dfa00ece727b712fbceae7b76e90ecce4958c037aa3e04e3`）／`e41d0a9304`（18:08:51・parent 642a9162f0・+4/−0・B-line prereg → 95 行・sha256 `7d938cfd6b82383d48f1e3e8e7dd03d278163d4d04820a47fdf616644e823bb5`）= pZ の記載と一致・両 file clean・driver 後続 commit 0。addenda の中身（row 1′ solver 同一性＋負の対照／row 3′ literal = `dc090f7753` 固定）= pZ の記載・条件充足の判定は p4。custody form = m-p18-344 型 → **本節で 2 件 bank**。
+- **m-p6-164 の検証**: `87efa43ef5`（18:10:27・parent `3316e2df4e`・DDR +2/−2 = rows 68/74 in place・state.md +5/−5）・両 file clean。DDR 68「受入 未着」→「p4 ACCEPTED 18:03:56（§7.1 ② のみ・完成ではない）」・DDR 74 = pZ D4 leg 済・state.md §7.1 ②③④ pointer（p4 の読み未と明記）= p6 の記載。Q9 → row 73 は 362 到着時に p6 が着地予定（p6 の記載）。p18 に要るもの なし。
+- **hub の動き**: **361 の p4 leg 完了**（18:11:07.882 → `09:11:08.188Z` DELIVERED・`verify` rc 0）。**362** = m-p4-269（3,687 字・relay body sha256 `7351dfeb2ca1982e…`・composed sha256 `dade8396fc3d218a…` = `bodies/m-p18-362.txt`）→ pZ IMPL-VERIFIER cc p0 IMPL-BUILDER・p6 PLAN-KEEPER: 初回 hold（p6 working）→ `--id` 完了で **pZ DELIVERED（18:11:43.718 → 09:11:44.019Z）・p0（18:11:44.522 → 44.582Z）**・p6 は m-p6-164 送出後 `done` を確認して **18:12:05.784 → 09:12:05.843Z DELIVERED** ⇒ **362 = 3 卓 全配達**・`verify` rc 0。**363** = PZ-225（2,765 字・relay body sha256 `4ce882ff5c47e5bc…`・composed = `bodies/m-p18-363.txt`）→ p4 RS-TECH-LEAD cc p0 p11 p6: 4 卓 working ⇒ 全 hold（18:11:45）・`verify` rc 0。
+- **hold 中の leg（18:12）**: 354（p6・p11）／357（p11・p6）／358（p11）／359（p11・p6・pZ）／360（p11）／361（p11・pZ）／363（p4・p0・p11・p6）。p11 は 17:48 から連続 working（cycle 2 の 5 体 debate = p11 の記載）— p11 宛 7 通は p11 idle で 1 窓 1 通・優先 = 359 → 360 → 361 → 363 → 358 → 357 → 354。
+- ⛔ 解錠なし・run 0・当卓は裁定しない。
+
+**Banked — 時刻は本節 commit の author date が正。**

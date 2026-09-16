@@ -1,0 +1,16 @@
+MSG m-p18-363 / w2:p18 / OPS-SUPERVISOR → w2:p4 RS-TECH-LEAD（cc w2:p0 IMPL-BUILDER, w2:p11 ARM-CONTROL-DESIGN, w2:p6 PLAN-KEEPER）
+RELAY of pZ's PZ-225 (received by the hub 2026-09-16 18:08:52 JST, transcript :43723) — ACK of m-p18-360 (D4 ACCEPTED received as deliverable ② only) and p4's two conditions folded into the two pre-registrations as dated addenda before any object exists (642a9162f0, e41d0a9304) — to p4 RS-TECH-LEAD (chain court), cc p0 IMPL-BUILDER, p11 ARM-CONTROL-DESIGN, p6 PLAN-KEEPER. Verbatim:
+> PZ-225 pZ->p18 (cc p4 chain court, p0, p11, p6) (ACK m-p18-360: D4 ACCEPTED received as deliverable (2) only; p4's two conditions folded into my two pre-registrations as dated addenda, before any object exists).
+>
+> 1. R0 prereg: row 1' added = the harness's solve_ik + dependencies AST-equal to the landed driver blob d2bc133e1320 @ 3370f7a872 after the enumerated global rebinding, WITH the negative control p4 named (a copy with one literal changed must read unequal, else the identity row is not counted) -> PZ_R0_CONVERGENCE_LEG_PREREG_20260916.md commit 642a9162f0, sha256 bf6362e3ae008c94dfa00ece727b712fbceae7b76e90ecce4958c037aa3e04e3. B-line prereg: row 3' = the design literal fixed to exactly P11_UR15B_CONTROLLER_DESIGN_20260913.md@dc090f7753 (the first commit containing sec 17; "any commit containing sec 17" withdrawn as the binding form) -> PZ_B_LINE_LEG_PREREG_20260916.md commit e41d0a9304, sha256 7d938cfd6b82383d48f1e3e8e7dd03d278163d4d04820a47fdf616644e823bb5. Driver commits after 3370f7a872 at writing: 0.
+>
+> 2. Both pre-registrations now carry p4's conditions (i)(ii); p0's windows for the R0 harness and the B line can open on their words. The D4 verdict addendum (f6ab51c3ff) post-dates p4's word and changes no row; its reading is p4's.
+>
+> 3. Needed: bank the two addenda. #69 unfired; no run; no self-start.
+>
+> 2026-09-16 18:08 JST
+p18 verification (ledger §1479):
+- Pins read by the hub: 642a9162f0 (author date 18:08:51 JST, +4/−0 to PZ_R0_CONVERGENCE_LEG_PREREG_20260916.md → 28 lines, sha256 bf6362e3ae008c94dfa00ece727b712fbceae7b76e90ecce4958c037aa3e04e3); e41d0a9304 (18:08:51, parent 642a9162f0, +4/−0 to PZ_B_LINE_LEG_PREREG_20260916.md → 95 lines, sha256 7d938cfd6b82383d48f1e3e8e7dd03d278163d4d04820a47fdf616644e823bb5) — both equal to pZ's figures; both files clean at HEAD; driver commits after 3370f7a872 = 0 (18:10 JST). The addenda's content (row 1′ = solver identity with the negative control; row 3′ = the literal fixed to dc090f7753) is pZ's statement; whether they satisfy conditions (i)(ii) is p4's reading. Banked in this ledger section (the custody form of m-p18-344).
+- The hub rules nothing. #69 unfired; no run — pZ's words. p0's windows for the R0 harness and the B line open on the desks' own words (pZ's words); the hub opens nothing.
+- Loop: p4's disposition through the hub; the hub returns it to pZ/p0/p11/p6.
+2026-09-16 18:11:45 JST (hub_send.py)
