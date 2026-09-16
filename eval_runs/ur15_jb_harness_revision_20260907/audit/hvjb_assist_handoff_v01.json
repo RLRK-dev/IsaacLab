@@ -1,0 +1,36 @@
+{
+  "observed_at": "2026-09-16T17:26:31.520785+09:00",
+  "directory": "/home/rlrk/Downloads/THREAD_HVJB_補助腕の保持と受渡し_v01_20260916",
+  "input_sha256_before": {
+    "data/hvjb_robot_selection_v01.json": "ad1d0fc6ad2f0c9d36f4d9839faf559ce80aa9ffb4965174facef944f1a58db8",
+    "data/hvjb_task_occupancy_v01.json": "4da5b53687b05cd2cd1d294cf57121abde6ee9d04b19ed0a37ef2fb2a4d79df9",
+    "data/hvjb_assist_handoff_inputs_v01.json": "ee28df68b8f4efdcf8aa8486fb0615eb3ea288def48b902980e4471c7d44acd5",
+    "scripts/hvjb_assist_handoff_v01.html": "eb85a2099cda8a5fc604a2e7967d20c1ed82aadbe821f8c67d0262855f213dcb",
+    "analysis/hvjb_assist_handoff_v01.md": "13814efab138f2515db803b55ecdf031e1c87d8ac2dcbf6e2671348ecccd8708"
+  },
+  "input_sha256_after": {
+    "data/hvjb_robot_selection_v01.json": "ad1d0fc6ad2f0c9d36f4d9839faf559ce80aa9ffb4965174facef944f1a58db8",
+    "data/hvjb_task_occupancy_v01.json": "4da5b53687b05cd2cd1d294cf57121abde6ee9d04b19ed0a37ef2fb2a4d79df9",
+    "data/hvjb_assist_handoff_inputs_v01.json": "ee28df68b8f4efdcf8aa8486fb0615eb3ea288def48b902980e4471c7d44acd5",
+    "scripts/hvjb_assist_handoff_v01.html": "eb85a2099cda8a5fc604a2e7967d20c1ed82aadbe821f8c67d0262855f213dcb",
+    "analysis/hvjb_assist_handoff_v01.md": "13814efab138f2515db803b55ecdf031e1c87d8ac2dcbf6e2671348ecccd8708"
+  },
+  "assist_task_counts": {
+    "ASSIST_1": 4,
+    "ASSIST_2": 7
+  },
+  "all_task_count": 20,
+  "role_sequences_are_examples_not_timed_schedules": true,
+  "page_sha256": "6f51f776ebcd24887da6e2637f92b55ac6f71e108201806fbcae626ed39e0a4e",
+  "copied_workcards_sha256": {
+    "review.html": "bbedddb2c8df10cc09fbf58c8d0a579c63f54b2a53b83f3962aa2fdc52316386",
+    "review_data.json": "4da5b53687b05cd2cd1d294cf57121abde6ee9d04b19ed0a37ef2fb2a4d79df9",
+    "allocation.json": "2e8516405684475d04fcf57938e7771c0283a5ab23cf482aa6fba4b718889dd9",
+    "catalog.json": "6c5b7cb9bab859a33c8f5d5cd5429ce9f06fb0951b8a8fa4ae2a31ad99052ca0",
+    "process_v03.json": "5e9d7078d4e7ff9772f8561788b29a34b28165e3118559385dcc78faf28b64e7",
+    "notes.md": "1646a8c0e69425e5679b917f3eb0659f9d2e7d50e041b9a19e2af4ab1bf8cba9",
+    "audit.json": "bbb5e81e820df34c3dd1fc3f96032c514746621673fa3c1ed640ee9fbf40220f",
+    "仕事と保持区間.csv": "ef3ebbaa3fe0b75568f073bf3957495999ce5ae885aeabe5b319f71ecc9f74fe",
+    "対象の照合先.csv": "8685218a288917c4ed2a75413bb973b36332b6e7725b9bf348c51433dd7551a3"
+  }
+}

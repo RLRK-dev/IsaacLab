@@ -1,0 +1,413 @@
+{
+  "observed_at": "2026-09-16T08:27:25.746Z",
+  "directory": "/home/rlrk/Downloads/THREAD_HVJB_補助腕の保持と受渡し_v01_20260916",
+  "page_sha256": "6f51f776ebcd24887da6e2637f92b55ac6f71e108201806fbcae626ed39e0a4e",
+  "cases": [
+    {
+      "state": {
+        "phase": "request",
+        "order": "AB",
+        "owner": null,
+        "busy": false,
+        "cTask": "D40"
+      },
+      "units": [
+        "ARM_A",
+        "ARM_B",
+        "ARM_C",
+        "ASSIST_1",
+        "ASSIST_2"
+      ],
+      "owners": [],
+      "description": "両方から補助要求がある例。対象と受け先の支持を調べてから、どちらを先に扱うかを決める。補助を使わない別仕事は、その作業の条件内で進める。"
+    },
+    {
+      "state": {
+        "phase": "grasp",
+        "order": "AB",
+        "owner": "A",
+        "busy": true,
+        "cTask": "D40"
+      },
+      "units": [
+        "ARM_A",
+        "ARM_B",
+        "ARM_C",
+        "ASSIST_1",
+        "ASSIST_2"
+      ],
+      "owners": [
+        "A"
+      ],
+      "description": "両端独立保持が必要な接続の例。主担当と共用補助が同時にクランプする。後に扱うセルは、補助が必要な把持を始める前で待つ。"
+    },
+    {
+      "state": {
+        "phase": "fasten",
+        "order": "AB",
+        "owner": "A",
+        "busy": true,
+        "cTask": "D40"
+      },
+      "units": [
+        "ARM_A",
+        "ARM_B",
+        "ARM_C",
+        "ASSIST_1",
+        "ASSIST_2"
+      ],
+      "owners": [
+        "A"
+      ],
+      "description": "保持腕を工具へ持ち替えさせず、工具群が接続作業を受け持つ。該当する大小同時締結の2主軸条件を残す。図は締結点数を表さない。"
+    },
+    {
+      "state": {
+        "phase": "handoff_wait",
+        "order": "AB",
+        "owner": "A",
+        "busy": true,
+        "cTask": "D40"
+      },
+      "units": [
+        "ARM_A",
+        "ARM_B",
+        "ARM_C",
+        "ASSIST_1",
+        "ASSIST_2"
+      ],
+      "owners": [
+        "A"
+      ],
+      "description": "未接続の別自由端に案内が必要な場合は、ユニット受渡しまで占有が続く。次の案内役・支持が未確定なら、共用補助を他セルへ割り当てない。本体を置いただけでも解放しない。"
+    },
+    {
+      "state": {
+        "phase": "release",
+        "order": "AB",
+        "owner": "A",
+        "busy": true,
+        "cTask": "D40"
+      },
+      "units": [
+        "ARM_A",
+        "ARM_B",
+        "ARM_C",
+        "ASSIST_1",
+        "ASSIST_2"
+      ],
+      "owners": [
+        "A"
+      ],
+      "description": "接続・工具退避に加え、残る自由端の担当も引き継いだ場合に解除・退避へ進める。接続で両腕保持した対象は、両腕同時の上昇退避を継承する。具体的な受け面・検出条件は未設定。"
+    },
+    {
+      "state": {
+        "phase": "changeover",
+        "order": "AB",
+        "owner": null,
+        "busy": true,
+        "cTask": "D40"
+      },
+      "units": [
+        "ARM_A",
+        "ARM_B",
+        "ARM_C",
+        "ASSIST_1",
+        "ASSIST_2"
+      ],
+      "owners": [],
+      "description": "前の保持と退避が完了してから、必要な手先交換とセル間移動を行う。ここを0秒として扱わない。走行軸や実際の経路は選定していない。"
+    },
+    {
+      "state": {
+        "phase": "next_grasp",
+        "order": "AB",
+        "owner": "B",
+        "busy": true,
+        "cTask": "D40"
+      },
+      "units": [
+        "ARM_A",
+        "ARM_B",
+        "ARM_C",
+        "ASSIST_1",
+        "ASSIST_2"
+      ],
+      "owners": [
+        "B"
+      ],
+      "description": "切替を終えてから次の両端保持を開始する。先のセルへ同じ共用補助を同時には割り当てない。各接続・受渡し単位で必要な保持役を照合する。"
+    },
+    {
+      "state": {
+        "phase": "request",
+        "order": "BA",
+        "owner": null,
+        "busy": false,
+        "cTask": "D40"
+      },
+      "units": [
+        "ARM_A",
+        "ARM_B",
+        "ARM_C",
+        "ASSIST_1",
+        "ASSIST_2"
+      ],
+      "owners": [],
+      "description": "両方から補助要求がある例。対象と受け先の支持を調べてから、どちらを先に扱うかを決める。補助を使わない別仕事は、その作業の条件内で進める。"
+    },
+    {
+      "state": {
+        "phase": "grasp",
+        "order": "BA",
+        "owner": "B",
+        "busy": true,
+        "cTask": "D40"
+      },
+      "units": [
+        "ARM_A",
+        "ARM_B",
+        "ARM_C",
+        "ASSIST_1",
+        "ASSIST_2"
+      ],
+      "owners": [
+        "B"
+      ],
+      "description": "両端独立保持が必要な接続の例。主担当と共用補助が同時にクランプする。後に扱うセルは、補助が必要な把持を始める前で待つ。"
+    },
+    {
+      "state": {
+        "phase": "fasten",
+        "order": "BA",
+        "owner": "B",
+        "busy": true,
+        "cTask": "D40"
+      },
+      "units": [
+        "ARM_A",
+        "ARM_B",
+        "ARM_C",
+        "ASSIST_1",
+        "ASSIST_2"
+      ],
+      "owners": [
+        "B"
+      ],
+      "description": "保持腕を工具へ持ち替えさせず、工具群が接続作業を受け持つ。該当する大小同時締結の2主軸条件を残す。図は締結点数を表さない。"
+    },
+    {
+      "state": {
+        "phase": "handoff_wait",
+        "order": "BA",
+        "owner": "B",
+        "busy": true,
+        "cTask": "D40"
+      },
+      "units": [
+        "ARM_A",
+        "ARM_B",
+        "ARM_C",
+        "ASSIST_1",
+        "ASSIST_2"
+      ],
+      "owners": [
+        "B"
+      ],
+      "description": "未接続の別自由端に案内が必要な場合は、ユニット受渡しまで占有が続く。次の案内役・支持が未確定なら、共用補助を他セルへ割り当てない。本体を置いただけでも解放しない。"
+    },
+    {
+      "state": {
+        "phase": "release",
+        "order": "BA",
+        "owner": "B",
+        "busy": true,
+        "cTask": "D40"
+      },
+      "units": [
+        "ARM_A",
+        "ARM_B",
+        "ARM_C",
+        "ASSIST_1",
+        "ASSIST_2"
+      ],
+      "owners": [
+        "B"
+      ],
+      "description": "接続・工具退避に加え、残る自由端の担当も引き継いだ場合に解除・退避へ進める。接続で両腕保持した対象は、両腕同時の上昇退避を継承する。具体的な受け面・検出条件は未設定。"
+    },
+    {
+      "state": {
+        "phase": "changeover",
+        "order": "BA",
+        "owner": null,
+        "busy": true,
+        "cTask": "D40"
+      },
+      "units": [
+        "ARM_A",
+        "ARM_B",
+        "ARM_C",
+        "ASSIST_1",
+        "ASSIST_2"
+      ],
+      "owners": [],
+      "description": "前の保持と退避が完了してから、必要な手先交換とセル間移動を行う。ここを0秒として扱わない。走行軸や実際の経路は選定していない。"
+    },
+    {
+      "state": {
+        "phase": "next_grasp",
+        "order": "BA",
+        "owner": "A",
+        "busy": true,
+        "cTask": "D40"
+      },
+      "units": [
+        "ARM_A",
+        "ARM_B",
+        "ARM_C",
+        "ASSIST_1",
+        "ASSIST_2"
+      ],
+      "owners": [
+        "A"
+      ],
+      "description": "切替を終えてから次の両端保持を開始する。先のセルへ同じ共用補助を同時には割り当てない。各接続・受渡し単位で必要な保持役を照合する。"
+    }
+  ],
+  "c_cases": [
+    {
+      "state": {
+        "phase": "next_grasp",
+        "order": "BA",
+        "owner": "A",
+        "busy": true,
+        "cTask": "D31"
+      },
+      "start": "開始：板保持を続けて工具の退避を待つ",
+      "keep": "継続：F-Cが支持を続ける間にR-Cを搬送把持へ切り替え、必要なX-Cで自由端を案内する",
+      "end": "区切り：搬送保持を開始し、D40へ本体・自由端の担当を継続する",
+      "reuse": "板保持と一体搬送をR-Cが順次兼務。X-Cは工程番号が変わっても解放しない",
+      "missing": "具体化が必要：接合部の荷重受容・搬送把持面・手先交換・自由端案内方法"
+    },
+    {
+      "state": {
+        "phase": "next_grasp",
+        "order": "BA",
+        "owner": "A",
+        "busy": true,
+        "cTask": "D40"
+      },
+      "start": "開始：R-Cの搬送把持と自由端案内を継続する",
+      "keep": "継続：一体ユニットを筐体へ運ぶ間、必要時X-Cは線・端末を別に案内する",
+      "end": "区切り：筐体側の受けへ本体の支持を移し、搬送指を抜く。自由端案内は継続対象",
+      "reuse": "R-Cは受け側支持を確認する工程の後に別仕事へ。X-Cは自動的に空きにしない",
+      "missing": "具体化が必要：受け面・把持解除と指の抜け・内寸・全自由端の経路"
+    },
+    {
+      "state": {
+        "phase": "next_grasp",
+        "order": "BA",
+        "owner": "A",
+        "busy": true,
+        "cTask": "D42"
+      },
+      "start": "開始：搭載後の支持と必要な自由端案内を続ける",
+      "keep": "継続：対象が特定されるまでは工具作業の保持・案内役を未割当のまま残す",
+      "end": "区切り：工具が退避し、自由端の担当をD45以降へ引き継ぐ",
+      "reuse": "対象不明をゼロ作業・ゼロ占有に置き換えない",
+      "missing": "具体化が必要：工具作業点・部材・点数・保持相手・所要時間"
+    },
+    {
+      "state": {
+        "phase": "next_grasp",
+        "order": "BA",
+        "owner": "A",
+        "busy": true,
+        "cTask": "D45"
+      },
+      "start": "開始：R-Cが対象ハウジングを持ち、必要時X-Cが配線を案内する",
+      "keep": "継続：側面開口へハウジングを合わせる間、線と他の自由端を引き続き管理する",
+      "end": "区切り：次のヘッダー・ロック作業へ端末支持を引き継ぐ。単に外へ出ただけで放置しない",
+      "reuse": "内側ハウジングを一方の手で保持したまま外側ヘッダーを取るなら別の役が必要",
+      "missing": "具体化が必要：線付きの通過空間・把持面・各端末順序・外側での一時支持・ロック順"
+    },
+    {
+      "state": {
+        "phase": "next_grasp",
+        "order": "BA",
+        "owner": "A",
+        "busy": true,
+        "cTask": "D50"
+      },
+      "start": "開始：外側ヘッダーを一つ取得し筐体へ合わせる",
+      "keep": "継続：R-Cがそのヘッダーを保持したままT-Cが対象穴群を締結。内側端末保持が続くならX-Cも占有",
+      "end": "区切り：対象ヘッダーの締結終了・工具退避後に保持を解き指を退避する",
+      "reuse": "P16とP17は同じ保持腕・工具の順次兼務候補。片方の保持中に同じ腕で他方を取りに行かない",
+      "missing": "具体化が必要：締付順・条件・工具全外形・内側ロックとフランジ固定の順・主2極/LV固定"
+    },
+    {
+      "state": {
+        "phase": "next_grasp",
+        "order": "BA",
+        "owner": "A",
+        "busy": true,
+        "cTask": "D60"
+      },
+      "start": "開始：対象接続に重なる部材一式をそろえる",
+      "keep": "継続：R-Cと必要時X-Cが対象を保持中にT-Cで締結する。大小同時対象には2主軸",
+      "end": "区切り：担当接続を終え工具退避後に解除。両腕対象は同時退避",
+      "reuse": "剛体1点保持と次の部材取得は同じ主担当の順次兼務候補",
+      "missing": "具体化が必要：部品境界・共締め積層・接続点・大小の組・未接続端の引継ぎ"
+    },
+    {
+      "state": {
+        "phase": "next_grasp",
+        "order": "BA",
+        "owner": "A",
+        "busy": true,
+        "cTask": "D61"
+      },
+      "start": "開始：対象の端末・挿入先を対応する",
+      "keep": "継続：R-Cが端末、必要時X-Cが別の線・部材を保持して接続する",
+      "end": "区切り：対象の挿入・ロック作業後、他の自由端の担当を引き継いで退避する",
+      "reuse": "R-Cの順次端末作業を比較。電気群数から線数・動作回数は出さない",
+      "missing": "具体化が必要：実配線の両端・極・端子品番・挿入順・HVILの全経路"
+    }
+  ],
+  "assist_task_ids": [
+    "D11",
+    "D12",
+    "D21",
+    "D22",
+    "D31",
+    "D40",
+    "D42",
+    "D45",
+    "D50",
+    "D60",
+    "D61"
+  ],
+  "mobile": {
+    "width": 480,
+    "documentWidth": 465,
+    "units": 5
+  },
+  "local_links": [
+    "overview.png",
+    "notes.md",
+    "補助腕の保持区間.csv",
+    "workcards/review.html",
+    "selection.json",
+    "review_data.json"
+  ],
+  "exports_sha256": {
+    "overview.svg": "74732352a2b1bd4c87e7d6bd6b0b9fe931de3c7ba2eb014a8079299f5da9bf4e",
+    "overview.png": "7ad362d60b066be360677d74f8152c0ae661770171c4f404581550af94a52bb5",
+    "browser_desktop.png": "f34c3f381773f699d7d7953dec92d549678d1f51dac432f33ea2415ee957a2a8",
+    "browser_mobile.png": "94ba2ac1716abf06d622da3ce728c8c3ed621f7a7304ce16bf027412efbab7b1"
+  },
+  "javascript_errors": [],
+  "scope": "UI and source-text correspondence only; not a physical or cycle-time verdict"
+}

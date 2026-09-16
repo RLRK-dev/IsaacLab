@@ -578,3 +578,17 @@ numbers unknown until their basis and the scope of the product change are set.
   requests before grasp starts. C guidance stays occupied through its actual
   handoff, not merely until enclosure insertion. Retain all twenty tasks and
   separately counted supply, tools, fixtures, inspection and return equipment.
+
+## Selected assistants and handoff intervals on 2026-09-16
+
+- `analysis/hvjb_assist_handoff_v01.md` maps the selected assistants to the
+  preserved workcards: shared A/B assistance in D11/D12/D21/D22; dedicated C
+  assistance in D31/D40/D42/D45/D50 and conditionally D60/D61.
+- The A-first/B-first seven-scene diagrams are explanatory order examples, not
+  a selected priority rule, measured schedule or robot controller. Residual
+  free-end guidance can reserve the shared assistant through unit handoff.
+  Release, retreat, hand change and travel all precede the next grasp.
+- Do not assume the C assistant can receive another free end while already
+  holding one. Receiving support and actual end groups remain unresolved,
+  including inner-housing retention during outer-header pickup. The diagrams
+  neither add a support mechanism nor change the selected five-arm allocation.

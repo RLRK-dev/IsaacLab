@@ -1,0 +1,920 @@
+{
+  "revision": "hvjb_assist_handoff_v01",
+  "selected_plan": "S5_AB",
+  "scope_ja": "採用済み5腕の担当継続と切替を、時間未設定の作業場面として説明する。順序ボタンは比較例で、A優先・B優先の運転規則を採用するものではない。",
+  "phases": [
+    {
+      "id": "request",
+      "title_ja": "補助を使う前",
+      "owner": null,
+      "busy": false,
+      "tool": false,
+      "label_ja": "どちらの保持もまだ開始しない",
+      "explanation_ja": "両方から補助要求がある例。対象と受け先の支持を調べてから、どちらを先に扱うかを決める。補助を使わない別仕事は、その作業の条件内で進める。",
+      "source_tasks": [
+        "D11",
+        "D21"
+      ]
+    },
+    {
+      "id": "grasp",
+      "title_ja": "両腕で保持開始",
+      "owner": "first",
+      "busy": true,
+      "tool": false,
+      "label_ja": "主担当と共用補助が、それぞれ保持",
+      "explanation_ja": "両端独立保持が必要な接続の例。主担当と共用補助が同時にクランプする。後に扱うセルは、補助が必要な把持を始める前で待つ。",
+      "source_tasks": [
+        "D11",
+        "D21"
+      ]
+    },
+    {
+      "id": "fasten",
+      "title_ja": "保持中に接続",
+      "owner": "first",
+      "busy": true,
+      "tool": true,
+      "label_ja": "2腕の保持を続け、据置工具で締結",
+      "explanation_ja": "保持腕を工具へ持ち替えさせず、工具群が接続作業を受け持つ。該当する大小同時締結の2主軸条件を残す。図は締結点数を表さない。",
+      "source_tasks": [
+        "D11",
+        "D21"
+      ]
+    },
+    {
+      "id": "handoff_wait",
+      "title_ja": "残る自由端の引継ぎ",
+      "owner": "first",
+      "busy": true,
+      "tool": false,
+      "label_ja": "締結が終わっても、補助はまだ予約中",
+      "explanation_ja": "未接続の別自由端に案内が必要な場合は、ユニット受渡しまで占有が続く。次の案内役・支持が未確定なら、共用補助を他セルへ割り当てない。本体を置いただけでも解放しない。",
+      "source_tasks": [
+        "D11",
+        "D12",
+        "D21",
+        "D22"
+      ]
+    },
+    {
+      "id": "release",
+      "title_ja": "引継ぎ後に解除・退避",
+      "owner": "first",
+      "busy": true,
+      "tool": false,
+      "label_ja": "必要な支持の引継ぎが済んだ場合の例",
+      "explanation_ja": "接続・工具退避に加え、残る自由端の担当も引き継いだ場合に解除・退避へ進める。接続で両腕保持した対象は、両腕同時の上昇退避を継承する。具体的な受け面・検出条件は未設定。",
+      "source_tasks": [
+        "D11",
+        "D12",
+        "D21",
+        "D22"
+      ]
+    },
+    {
+      "id": "changeover",
+      "title_ja": "次のセルへ切替",
+      "owner": null,
+      "busy": true,
+      "tool": false,
+      "label_ja": "手先交換・移動中も共用補助は占有",
+      "explanation_ja": "前の保持と退避が完了してから、必要な手先交換とセル間移動を行う。ここを0秒として扱わない。走行軸や実際の経路は選定していない。",
+      "source_tasks": [
+        "D12",
+        "D22"
+      ]
+    },
+    {
+      "id": "next_grasp",
+      "title_ja": "次のセルで保持",
+      "owner": "second",
+      "busy": true,
+      "tool": false,
+      "label_ja": "次の主担当と共用補助がクランプ",
+      "explanation_ja": "切替を終えてから次の両端保持を開始する。先のセルへ同じ共用補助を同時には割り当てない。各接続・受渡し単位で必要な保持役を照合する。",
+      "source_tasks": [
+        "D11",
+        "D21"
+      ]
+    }
+  ],
+  "c_sequence": [
+    {
+      "task": "D31",
+      "short_ja": "持ち替え・案内開始",
+      "continuity": "reserved_until_handoff"
+    },
+    {
+      "task": "D40",
+      "short_ja": "一体で筐体へ搭載",
+      "continuity": "reserved_until_handoff"
+    },
+    {
+      "task": "D42",
+      "short_ja": "箱内の工具作業",
+      "continuity": "reserved_until_handoff"
+    },
+    {
+      "task": "D45",
+      "short_ja": "端末を開口から出す",
+      "continuity": "reserved_until_handoff"
+    },
+    {
+      "task": "D50",
+      "short_ja": "ヘッダーと支持引継ぎ",
+      "continuity": "reserved_until_handoff"
+    },
+    {
+      "task": "D60",
+      "short_ja": "残る主接続",
+      "continuity": "connection_dependent"
+    },
+    {
+      "task": "D61",
+      "short_ja": "LV・HVIL接続",
+      "continuity": "connection_dependent"
+    }
+  ],
+  "handoff_open_points_ja": [
+    "A/Bから渡す本体と自由端を、それぞれどの手・支持面が受けるか。Cが前ワークを扱う間の待ち支持も未確定。",
+    "C専用補助が一つの端末・線を保持中に、別の自由端を受けられるか。自由端の数と支持方法が未確定のため、自動で受け取れるとはしない。",
+    "D45の内側ハウジング保持からD50の外側ヘッダー取得へ、どちらの手が何を受け持つか。既存の案内を中断せず役を移せる具体的な手順が必要。"
+  ],
+  "measured_duration_s": null,
+  "selected_request_priority": null,
+  "physical_acceptance_verdict": null,
+  "observed_at": "2026-09-16T17:26:31.520785+09:00",
+  "selection": {
+    "revision": "hvjb_robot_selection_v01",
+    "decision_date": "2026-09-16",
+    "status": "user_selected_role_allocation",
+    "user_directive_ja": "補助を2腕に分ける",
+    "selected_plan": "S5_AB",
+    "selected_plan_ja": "主担当3腕＋A/B共用補助1腕＋C専用補助1腕",
+    "source_comparison": "data/hvjb_robot_sharing_v01.json",
+    "source_sha256": "7888693db9b5cd0314b7acecb6c0fa09ab7c207e43c2391fbfbf642833b99b90",
+    "selected_primary_arm_count": 3,
+    "selected_assist_arm_count": 2,
+    "selected_assembly_arm_count": 5,
+    "assist_groups": [
+      [
+        "X-A",
+        "X-B"
+      ],
+      [
+        "X-C"
+      ]
+    ],
+    "role_to_unit": {
+      "R-A": "ARM_A",
+      "R-B": "ARM_B",
+      "R-C": "ARM_C",
+      "X-A": "ASSIST_1",
+      "X-B": "ASSIST_1",
+      "X-C": "ASSIST_2"
+    },
+    "count_scope_ja": "A/B/Cの組立役に割り当てる5腕。ロボットの機台数や、OP010 XYZ・締付工具・搬送等を含むライン全体の設備台数ではない。",
+    "operating_constraints_ja": [
+      "AとBが同時に補助を必要とする場合は、把持開始前に作業順序を調整する。保持途中で手を離して別セルへ移らない。",
+      "A/B共用補助は、前の支持引継ぎ・開放・退避と、必要な手先交換・移動を終えてから次の保持を開始する。",
+      "C専用補助は自由端の案内と支持引継ぎを担当し、筐体搭載終了だけで空き扱いにしない。",
+      "既存の20仕事・据置締付工具・支持・供給・検査・回収の役割を保持する。該当する大小同時締結の2主軸条件を継承する。"
+    ],
+    "next_work_ja": "5腕の分担を前提に、A/B共用補助の保持区間・受渡しと、C専用補助の継続担当を具体化する。その上で配置・到達・干渉を確認する。",
+    "selected_robot_models": null,
+    "selected_robot_base_count": null,
+    "selected_layout": null,
+    "minimum_robot_count": null,
+    "measured_cycle_time_s": null,
+    "physical_acceptance_verdict": null
+  },
+  "assist_groups": [
+    {
+      "unit": "ASSIST_1",
+      "roles": [
+        "X-A",
+        "X-B"
+      ],
+      "cards": [
+        {
+          "id": "D11",
+          "hands": [
+            "H04",
+            "H05"
+          ],
+          "entities": [
+            "V25_BASE_PLATE"
+          ],
+          "additional_target_ja": "下板側で完結する実接続。ECとの物理対応は未確定",
+          "start_ja": "対象の線または端末を取得する。両端対象は同時に取得",
+          "keep_ja": "R-Aと必要時X-Aが保持を継続し、工具または差込みで接続を完了させる",
+          "end_ja": "担当接続を終え工具が退避した後に解除。両腕対象は同時退避",
+          "reuse_ja": "未接続の別自由端が残る場合は引継ぎまで担当を確保する",
+          "missing_ja": "線の両端・所属・共締め部材・同時に締める大小の点組",
+          "task": {
+            "id": "D11",
+            "operation": "O10",
+            "cell": "A",
+            "work_ja": "下板側で完結する配線の取得・保持・接続",
+            "primary": [
+              "R-A"
+            ],
+            "other": [
+              "F-A",
+              "T-A"
+            ],
+            "conditional": [
+              "X-A"
+            ],
+            "sharing_ja": "1端を固定相手に接続する仕事と、両端独立保持する仕事を接続別に分ける。後者を片手作業へ省略しない。"
+          }
+        },
+        {
+          "id": "D12",
+          "hands": [],
+          "entities": [
+            "V25_BASE_PLATE",
+            "V25_INNER_ENDS",
+            "V25_RING_ENDS"
+          ],
+          "additional_target_ja": "下板側ユニット全体と受け側治具",
+          "start_ja": "下板側ユニットの搬送保持を開始する",
+          "keep_ja": "R-Aが本体を搬送し、必要な自由端の案内役を継続する",
+          "end_ja": "F-Cと次の案内役へ本体・自由端をそれぞれ引き継いで退避する",
+          "reuse_ja": "本体を置いた時点だけでは自由端案内役を他セルへ割り当てない",
+          "missing_ja": "運搬用手先・許容把持面・自由端数・製品照合・支持付き待ち位置",
+          "task": {
+            "id": "D12",
+            "operation": "O10",
+            "cell": "A",
+            "work_ja": "下板側ユニットと自由端の受渡し",
+            "primary": [
+              "R-A"
+            ],
+            "other": [
+              "F-A",
+              "F-C"
+            ],
+            "conditional": [
+              "X-A"
+            ],
+            "sharing_ja": "本体組付けと同じ主担当の順次兼務候補。線の所属・案内先、相手側支持を引き継ぐまでの占有を数える。"
+          }
+        },
+        {
+          "id": "D21",
+          "hands": [
+            "H04",
+            "H05"
+          ],
+          "entities": [
+            "V25_FUSE_PANEL"
+          ],
+          "additional_target_ja": "補機ヒューズ5系統と実線の対応",
+          "start_ja": "担当線を取得する。両端保持が必要な対象は同時クランプ",
+          "keep_ja": "R-Bと必要時X-Bが保持を継続し、T-Bが該当接続を締結する",
+          "end_ja": "担当接続と工具退避を終え、両腕対象は同時に解除・退避する",
+          "reuse_ja": "他系統へ続く未接続端は案内を引き継ぐ。未締結のまま離してCへ運ばない",
+          "missing_ja": "物理5ヒューズと系統の割当、線の両端、積層、両端保持が必要な対象",
+          "task": {
+            "id": "D21",
+            "operation": "O20",
+            "cell": "B",
+            "work_ja": "板側配線の取得・両端保持・接続",
+            "primary": [
+              "R-B"
+            ],
+            "other": [
+              "F-B",
+              "T-B"
+            ],
+            "conditional": [
+              "X-B"
+            ],
+            "sharing_ja": "両端独立保持が必要な対象だけ追加役を使用。保持中に締結を終え、未締結線のままCへ渡さない。"
+          }
+        },
+        {
+          "id": "D22",
+          "hands": [],
+          "entities": [
+            "V25_FUSE_PANEL",
+            "V25_INNER_ENDS",
+            "V25_RING_ENDS"
+          ],
+          "additional_target_ja": "板側ユニット全体と合流側の支持",
+          "start_ja": "組み立てた板側の搬送保持を開始する",
+          "keep_ja": "R-Bが板を運び、必要な自由端案内を続ける",
+          "end_ja": "合流側の支持・板保持・自由端案内へ引き継いで退避する",
+          "reuse_ja": "A側との製品対応が取れた受けに渡せる場合、次ワークを準備する候補",
+          "missing_ja": "板搬送手先・自由端の支持と引継ぎ・待ち位置",
+          "task": {
+            "id": "D22",
+            "operation": "O20",
+            "cell": "B",
+            "work_ja": "ヒューズ板側と自由端の受渡し",
+            "primary": [
+              "R-B"
+            ],
+            "other": [
+              "F-B",
+              "F-C"
+            ],
+            "conditional": [
+              "X-B"
+            ],
+            "sharing_ja": "組付け主担当が順次兼務。A側ユニットとの製品対応・受け側支持・自由端案内を含める。"
+          }
+        }
+      ]
+    },
+    {
+      "unit": "ASSIST_2",
+      "roles": [
+        "X-C"
+      ],
+      "cards": [
+        {
+          "id": "D31",
+          "hands": [],
+          "entities": [
+            "V25_BASE_PLATE",
+            "V25_FUSE_PANEL",
+            "V25_INNER_ENDS",
+            "V25_RING_ENDS"
+          ],
+          "additional_target_ja": "治具上の一体ユニット、未接続端",
+          "start_ja": "板保持を続けて工具の退避を待つ",
+          "keep_ja": "F-Cが支持を続ける間にR-Cを搬送把持へ切り替え、必要なX-Cで自由端を案内する",
+          "end_ja": "搬送保持を開始し、D40へ本体・自由端の担当を継続する",
+          "reuse_ja": "板保持と一体搬送をR-Cが順次兼務。X-Cは工程番号が変わっても解放しない",
+          "missing_ja": "接合部の荷重受容・搬送把持面・手先交換・自由端案内方法",
+          "task": {
+            "id": "D31",
+            "operation": "O30",
+            "cell": "C",
+            "work_ja": "工具退避・治具上の持ち替え・自由端の退避",
+            "primary": [
+              "R-C"
+            ],
+            "other": [
+              "F-C"
+            ],
+            "conditional": [
+              "X-C"
+            ],
+            "sharing_ja": "Q4〜Q6。板間接合が荷重を受ける前提で、治具上の支持を残して搬送用把持へ切替。手先交換は時間と設備に計上。"
+          }
+        },
+        {
+          "id": "D40",
+          "hands": [],
+          "entities": [
+            "V25_BASE_PLATE",
+            "V25_FUSE_PANEL",
+            "V25_CASE",
+            "V25_INNER_ENDS",
+            "V25_RING_ENDS"
+          ],
+          "additional_target_ja": "一体ユニットと筐体内受け",
+          "start_ja": "R-Cの搬送把持と自由端案内を継続する",
+          "keep_ja": "一体ユニットを筐体へ運ぶ間、必要時X-Cは線・端末を別に案内する",
+          "end_ja": "筐体側の受けへ本体の支持を移し、搬送指を抜く。自由端案内は継続対象",
+          "reuse_ja": "R-Cは受け側支持を確認する工程の後に別仕事へ。X-Cは自動的に空きにしない",
+          "missing_ja": "受け面・把持解除と指の抜け・内寸・全自由端の経路",
+          "task": {
+            "id": "D40",
+            "operation": "O40",
+            "cell": "C",
+            "work_ja": "一体ユニット搬送・筐体搭載・支持引継ぎ",
+            "primary": [
+              "R-C"
+            ],
+            "other": [
+              "F-C"
+            ],
+            "conditional": [
+              "X-C"
+            ],
+            "sharing_ja": "主担当はユニット、追加役は独立して必要な自由端案内。同時の二役を一つの単一ハンドへ割り当てない。"
+          }
+        },
+        {
+          "id": "D42",
+          "hands": [],
+          "entities": [
+            "V25_CASE",
+            "V25_INNER_ENDS",
+            "V25_RING_ENDS"
+          ],
+          "additional_target_ja": "箱内への工具接近。ねじ・相手部材は映像で遮蔽",
+          "start_ja": "搭載後の支持と必要な自由端案内を続ける",
+          "keep_ja": "対象が特定されるまでは工具作業の保持・案内役を未割当のまま残す",
+          "end_ja": "工具が退避し、自由端の担当をD45以降へ引き継ぐ",
+          "reuse_ja": "対象不明をゼロ作業・ゼロ占有に置き換えない",
+          "missing_ja": "工具作業点・部材・点数・保持相手・所要時間",
+          "task": {
+            "id": "D42",
+            "operation": "O42",
+            "cell": "C",
+            "work_ja": "搭載後の箱内工具接近と、対象・自由端の保持",
+            "primary": [
+              "R-C"
+            ],
+            "other": [
+              "F-C",
+              "T-C"
+            ],
+            "conditional": [
+              "X-C"
+            ],
+            "sharing_ja": "工具対象は未特定。前工程の保持が不要になったと仮定して補助役を別セルへ送らない。"
+          }
+        },
+        {
+          "id": "D45",
+          "hands": [
+            "H05"
+          ],
+          "entities": [
+            "V25_CASE",
+            "V25_INNER_ENDS"
+          ],
+          "additional_target_ja": "内側ハウジング5個の開口通過。2025映像と各I番号の対応は未確認",
+          "start_ja": "R-Cが対象ハウジングを持ち、必要時X-Cが配線を案内する",
+          "keep_ja": "側面開口へハウジングを合わせる間、線と他の自由端を引き続き管理する",
+          "end_ja": "次のヘッダー・ロック作業へ端末支持を引き継ぐ。単に外へ出ただけで放置しない",
+          "reuse_ja": "内側ハウジングを一方の手で保持したまま外側ヘッダーを取るなら別の役が必要",
+          "missing_ja": "線付きの通過空間・把持面・各端末順序・外側での一時支持・ロック順",
+          "task": {
+            "id": "D45",
+            "operation": "O45",
+            "cell": "C",
+            "work_ja": "内側ハウジングの姿勢合わせ・開口引出し・線の案内",
+            "primary": [
+              "R-C"
+            ],
+            "other": [
+              "F-C"
+            ],
+            "conditional": [
+              "X-C"
+            ],
+            "sharing_ja": "ハウジングと線に独立した操作が必要なら二役を残す。案内完了・保持の引継ぎまで補助役を占有。"
+          }
+        },
+        {
+          "id": "D50",
+          "hands": [
+            "H05"
+          ],
+          "entities": [
+            "V25_OUTER_HEADERS",
+            "V25_INNER_ENDS"
+          ],
+          "additional_target_ja": "P16は8点、P17は6点のM4フランジ固定。主2極・LV口は別の未確定仕事",
+          "start_ja": "外側ヘッダーを一つ取得し筐体へ合わせる",
+          "keep_ja": "R-Cがそのヘッダーを保持したままT-Cが対象穴群を締結。内側端末保持が続くならX-Cも占有",
+          "end_ja": "対象ヘッダーの締結終了・工具退避後に保持を解き指を退避する",
+          "reuse_ja": "P16とP17は同じ保持腕・工具の順次兼務候補。片方の保持中に同じ腕で他方を取りに行かない",
+          "missing_ja": "締付順・条件・工具全外形・内側ロックとフランジ固定の順・主2極/LV固定",
+          "task": {
+            "id": "D50",
+            "operation": "O50",
+            "cell": "C",
+            "work_ja": "外側ヘッダー・主接続口の配置、保持、ねじ固定・内側端末対応",
+            "primary": [
+              "R-C"
+            ],
+            "other": [
+              "F-C",
+              "T-C"
+            ],
+            "conditional": [
+              "X-C"
+            ],
+            "sharing_ja": "OP020作業をこの位置で1回行う。主担当のH05保持＋工具群。内側ロックとフランジ固定の詳細順、主2極/LV口の固定は要照合。"
+          }
+        },
+        {
+          "id": "D60",
+          "hands": [
+            "H03",
+            "H04",
+            "H08"
+          ],
+          "entities": [
+            "V25_RING_ENDS"
+          ],
+          "additional_target_ja": "電気的な共通点と物理的な共締めを区別する",
+          "start_ja": "対象接続に重なる部材一式をそろえる",
+          "keep_ja": "R-Cと必要時X-Cが対象を保持中にT-Cで締結する。大小同時対象には2主軸",
+          "end_ja": "担当接続を終え工具退避後に解除。両腕対象は同時退避",
+          "reuse_ja": "剛体1点保持と次の部材取得は同じ主担当の順次兼務候補",
+          "missing_ja": "部品境界・共締め積層・接続点・大小の組・未接続端の引継ぎ",
+          "task": {
+            "id": "D60",
+            "operation": "O60",
+            "cell": "C",
+            "work_ja": "バスバー・丸端子・共締め部材をそろえて保持中に締結",
+            "primary": [
+              "R-C"
+            ],
+            "other": [
+              "F-C",
+              "T-C"
+            ],
+            "conditional": [
+              "X-C"
+            ],
+            "sharing_ja": "剛体1点保持は主担当が兼務。両端や別部材の独立保持・大小同時締結は該当接続に残す。"
+          }
+        },
+        {
+          "id": "D61",
+          "hands": [
+            "H05"
+          ],
+          "entities": [],
+          "additional_target_ja": "LV12極のうち6/12はReserved。HVIL内部順と不可視端末を残す",
+          "start_ja": "対象の端末・挿入先を対応する",
+          "keep_ja": "R-Cが端末、必要時X-Cが別の線・部材を保持して接続する",
+          "end_ja": "対象の挿入・ロック作業後、他の自由端の担当を引き継いで退避する",
+          "reuse_ja": "R-Cの順次端末作業を比較。電気群数から線数・動作回数は出さない",
+          "missing_ja": "実配線の両端・極・端子品番・挿入順・HVILの全経路",
+          "task": {
+            "id": "D61",
+            "operation": "O60",
+            "cell": "C",
+            "work_ja": "残るLV/HVIL・不可視端末の接続",
+            "primary": [
+              "R-C"
+            ],
+            "other": [
+              "F-C"
+            ],
+            "conditional": [
+              "X-C",
+              "T-C"
+            ],
+            "sharing_ja": "電気ネットを物理線や1回の作業数に変換しない。各端末・挿入・ロックと支持を特定して割付を増補。"
+          }
+        }
+      ]
+    }
+  ],
+  "cross_task_reservations": [
+    {
+      "id": "HOLD_PANEL_TO_CARRY",
+      "resource": "R-C",
+      "tasks": [
+        "D30",
+        "D31",
+        "D40"
+      ],
+      "note_ja": "板保持→工具退避→治具上持ち替え→一体搬送。治具に支持させる持ち替え中も、手先交換を含む仕事をR-Cに予約する。",
+      "condition_ja": "採用済み板間固定が荷重を受け、治具と搬送手に支持を引き継げることが前提。支持成立は未検証。",
+      "unit": "ARM_C"
+    },
+    {
+      "id": "GUIDE_THROUGH_INSERTION",
+      "resource": "X-C",
+      "tasks": [
+        "D31",
+        "D40",
+        "D42",
+        "D45",
+        "D50"
+      ],
+      "note_ja": "独立案内が必要な自由端は、搭載後・開口通過後も次の支持へ引き継ぐまで案内担当を予約する。",
+      "condition_ja": "全区間に同じ腕が必須という確定ではない。自由端ごとの支持方法と引継ぎが決まるまでは途中を空き時間として数えない。",
+      "unit": "ASSIST_2"
+    }
+  ],
+  "all_tasks": [
+    {
+      "id": "D00",
+      "operation": "O00",
+      "cell": "SUPPLY",
+      "work_ja": "空筐体の取得・搬送・位置決め",
+      "primary": [
+        "G-010"
+      ],
+      "other": [
+        "F-C"
+      ],
+      "conditional": [],
+      "sharing_ja": "OP010のXYZ＋20個を維持。完成品払出しとの共用は位置・時間・空容器動線を確認後。"
+    },
+    {
+      "id": "D01",
+      "operation": "O01",
+      "cell": "PREP",
+      "work_ja": "線材加工・圧着・端子挿入",
+      "primary": [
+        "E-PREP"
+      ],
+      "other": [],
+      "conditional": [],
+      "sharing_ja": "入荷済みか内製かを明記するまで台数をゼロにしない。A/B/Cの部品組付けとは別の仕事として残す。"
+    },
+    {
+      "id": "D10",
+      "operation": "O10",
+      "cell": "A",
+      "work_ja": "本体部品の取出し・配置・保持中のねじ固定",
+      "primary": [
+        "R-A"
+      ],
+      "other": [
+        "F-A",
+        "T-A"
+      ],
+      "conditional": [],
+      "sharing_ja": "保持腕が部品を置いている間に工具側がボルトを準備。工具専用の多関節腕を据置工具へ置換する案を優先比較。"
+    },
+    {
+      "id": "D11",
+      "operation": "O10",
+      "cell": "A",
+      "work_ja": "下板側で完結する配線の取得・保持・接続",
+      "primary": [
+        "R-A"
+      ],
+      "other": [
+        "F-A",
+        "T-A"
+      ],
+      "conditional": [
+        "X-A"
+      ],
+      "sharing_ja": "1端を固定相手に接続する仕事と、両端独立保持する仕事を接続別に分ける。後者を片手作業へ省略しない。"
+    },
+    {
+      "id": "D12",
+      "operation": "O10",
+      "cell": "A",
+      "work_ja": "下板側ユニットと自由端の受渡し",
+      "primary": [
+        "R-A"
+      ],
+      "other": [
+        "F-A",
+        "F-C"
+      ],
+      "conditional": [
+        "X-A"
+      ],
+      "sharing_ja": "本体組付けと同じ主担当の順次兼務候補。線の所属・案内先、相手側支持を引き継ぐまでの占有を数える。"
+    },
+    {
+      "id": "D20",
+      "operation": "O20",
+      "cell": "B",
+      "work_ja": "ヒューズ板側の部品配置・保持・固定",
+      "primary": [
+        "R-B"
+      ],
+      "other": [
+        "F-B",
+        "T-B"
+      ],
+      "conditional": [],
+      "sharing_ja": "1部品ずつの保持・組付けを主担当にまとめる。工具の準備と送りは別設備へ分担。"
+    },
+    {
+      "id": "D21",
+      "operation": "O20",
+      "cell": "B",
+      "work_ja": "板側配線の取得・両端保持・接続",
+      "primary": [
+        "R-B"
+      ],
+      "other": [
+        "F-B",
+        "T-B"
+      ],
+      "conditional": [
+        "X-B"
+      ],
+      "sharing_ja": "両端独立保持が必要な対象だけ追加役を使用。保持中に締結を終え、未締結線のままCへ渡さない。"
+    },
+    {
+      "id": "D22",
+      "operation": "O20",
+      "cell": "B",
+      "work_ja": "ヒューズ板側と自由端の受渡し",
+      "primary": [
+        "R-B"
+      ],
+      "other": [
+        "F-B",
+        "F-C"
+      ],
+      "conditional": [
+        "X-B"
+      ],
+      "sharing_ja": "組付け主担当が順次兼務。A側ユニットとの製品対応・受け側支持・自由端案内を含める。"
+    },
+    {
+      "id": "D30",
+      "operation": "O30",
+      "cell": "C",
+      "work_ja": "下板支持・板合わせ・保持中の板間固定",
+      "primary": [
+        "R-C"
+      ],
+      "other": [
+        "F-C",
+        "T-C"
+      ],
+      "conditional": [],
+      "sharing_ja": "UZ01〜UZ03。下板は据置治具、ヒューズ板は主担当、締付は据置工具という比較。"
+    },
+    {
+      "id": "D31",
+      "operation": "O30",
+      "cell": "C",
+      "work_ja": "工具退避・治具上の持ち替え・自由端の退避",
+      "primary": [
+        "R-C"
+      ],
+      "other": [
+        "F-C"
+      ],
+      "conditional": [
+        "X-C"
+      ],
+      "sharing_ja": "Q4〜Q6。板間接合が荷重を受ける前提で、治具上の支持を残して搬送用把持へ切替。手先交換は時間と設備に計上。"
+    },
+    {
+      "id": "D40",
+      "operation": "O40",
+      "cell": "C",
+      "work_ja": "一体ユニット搬送・筐体搭載・支持引継ぎ",
+      "primary": [
+        "R-C"
+      ],
+      "other": [
+        "F-C"
+      ],
+      "conditional": [
+        "X-C"
+      ],
+      "sharing_ja": "主担当はユニット、追加役は独立して必要な自由端案内。同時の二役を一つの単一ハンドへ割り当てない。"
+    },
+    {
+      "id": "D42",
+      "operation": "O42",
+      "cell": "C",
+      "work_ja": "搭載後の箱内工具接近と、対象・自由端の保持",
+      "primary": [
+        "R-C"
+      ],
+      "other": [
+        "F-C",
+        "T-C"
+      ],
+      "conditional": [
+        "X-C"
+      ],
+      "sharing_ja": "工具対象は未特定。前工程の保持が不要になったと仮定して補助役を別セルへ送らない。"
+    },
+    {
+      "id": "D45",
+      "operation": "O45",
+      "cell": "C",
+      "work_ja": "内側ハウジングの姿勢合わせ・開口引出し・線の案内",
+      "primary": [
+        "R-C"
+      ],
+      "other": [
+        "F-C"
+      ],
+      "conditional": [
+        "X-C"
+      ],
+      "sharing_ja": "ハウジングと線に独立した操作が必要なら二役を残す。案内完了・保持の引継ぎまで補助役を占有。"
+    },
+    {
+      "id": "D50",
+      "operation": "O50",
+      "cell": "C",
+      "work_ja": "外側ヘッダー・主接続口の配置、保持、ねじ固定・内側端末対応",
+      "primary": [
+        "R-C"
+      ],
+      "other": [
+        "F-C",
+        "T-C"
+      ],
+      "conditional": [
+        "X-C"
+      ],
+      "sharing_ja": "OP020作業をこの位置で1回行う。主担当のH05保持＋工具群。内側ロックとフランジ固定の詳細順、主2極/LV口の固定は要照合。"
+    },
+    {
+      "id": "D60",
+      "operation": "O60",
+      "cell": "C",
+      "work_ja": "バスバー・丸端子・共締め部材をそろえて保持中に締結",
+      "primary": [
+        "R-C"
+      ],
+      "other": [
+        "F-C",
+        "T-C"
+      ],
+      "conditional": [
+        "X-C"
+      ],
+      "sharing_ja": "剛体1点保持は主担当が兼務。両端や別部材の独立保持・大小同時締結は該当接続に残す。"
+    },
+    {
+      "id": "D61",
+      "operation": "O60",
+      "cell": "C",
+      "work_ja": "残るLV/HVIL・不可視端末の接続",
+      "primary": [
+        "R-C"
+      ],
+      "other": [
+        "F-C"
+      ],
+      "conditional": [
+        "X-C",
+        "T-C"
+      ],
+      "sharing_ja": "電気ネットを物理線や1回の作業数に変換しない。各端末・挿入・ロックと支持を特定して割付を増補。"
+    },
+    {
+      "id": "D70",
+      "operation": "O70",
+      "cell": "AFTER",
+      "work_ja": "シール・蓋の供給と配置・保持・固定",
+      "primary": [
+        "R-C"
+      ],
+      "other": [
+        "F-C",
+        "T-C"
+      ],
+      "conditional": [],
+      "sharing_ja": "C主担当への順次兼務を比較。Cの次ワークと競合すれば直交移載等へ分担する。蓋・シール・検査の詳細順は未選定。"
+    },
+    {
+      "id": "D71",
+      "operation": "O70",
+      "cell": "AFTER",
+      "work_ja": "必要検査・検査接続・結果記録",
+      "primary": [
+        "E-TEST"
+      ],
+      "other": [],
+      "conditional": [
+        "R-C"
+      ],
+      "sharing_ja": "固定設備＋必要な接近軸を比較。姿勢変更が必要なときだけ主担当の空きと競合を調べる。検査条件を新設しない。"
+    },
+    {
+      "id": "D80",
+      "operation": "O80",
+      "cell": "AFTER",
+      "work_ja": "完成品の払出し",
+      "primary": [
+        "G-OUT"
+      ],
+      "other": [],
+      "conditional": [
+        "R-C"
+      ],
+      "sharing_ja": "単純移載は直交軸を候補にする。R-CまたはG-010共用との台数・待ち・往復動作の比較を残す。"
+    },
+    {
+      "id": "D81",
+      "operation": "O80",
+      "cell": "AFTER",
+      "work_ja": "空パレット循環・空容器回収・補給",
+      "primary": [
+        "E-RETURN"
+      ],
+      "other": [],
+      "conditional": [
+        "R-A",
+        "R-B",
+        "R-C"
+      ],
+      "sharing_ja": "設備搬送へ分担できる範囲を対応。ロボットが扱う回収・補充が残るならその占有を別途計上し、ゼロ時間にしない。"
+    }
+  ],
+  "source_rules_ja": [
+    "対象の照合先は設計上の候補で、実部品1個ごとの作業採用・実接続・把持面の決定ではない。",
+    "Jのfeature_parentは写真上の対応で、機械固定・電気接続・共締め積層を決定しない。",
+    "線の観察された入口外装を再表示しても、遠端・電気接続・線材本数は確定しない。",
+    "作業の4欄は順序の説明。幅・列数・公式映像の参照時刻を時間へ換算しない。",
+    "保持を終える区切りは工程上の想定で、センサ・検出しきい値・受入条件の指定ではない。",
+    "R-Cが内側ハウジングを保持し続ける場合、その同じ手では外側ヘッダーを取得できない。独立した保持役または支持の引継ぎが必要。",
+    "固定工具の部材保持代用、未締結端末の無支持搬送、廃止した上押さえの復活を前提としない。"
+  ]
+}

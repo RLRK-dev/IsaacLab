@@ -1,0 +1,93 @@
+<!doctype html>
+<!-- Copyright (c) 2022-2026, The Isaac Lab Project Developers (https://github.com/isaac-sim/IsaacLab/blob/main/CONTRIBUTORS.md).
+All rights reserved. SPDX-License-Identifier: BSD-3-Clause -->
+<html lang="ja">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>HVJB｜補助腕の保持と受渡し</title>
+<style>
+:root{color:#193249;background:#edf2f5;font:16px/1.65 "Noto Sans CJK JP","Yu Gothic",sans-serif;--blue:#2875b8;--orange:#c6740a;--green:#168278;--muted:#577082;--line:#d6e0e7}*{box-sizing:border-box}body{margin:0}main{max-width:1440px;margin:auto;padding:24px 28px 48px}h1{font-size:28px;margin:6px 0 10px}h2{font-size:22px;margin:0 0 12px}h3{font-size:18px;margin:0 0 8px}p{margin:8px 0}.small{font-size:14px;color:var(--muted)}.badge{display:inline-block;padding:4px 13px;background:#deeee9;color:#126e60;border-radius:20px;font-size:14px;font-weight:700}.section{padding:22px;background:white;border:1px solid var(--line);border-radius:14px;margin-top:20px}button,select{font:inherit;color:inherit;background:white;border:1px solid #b3c6d3;border-radius:7px;padding:9px 12px;cursor:pointer}button[aria-pressed=true]{color:white;background:var(--orange);border-color:var(--orange)}button:focus-visible,select:focus-visible,a:focus-visible{outline:3px solid var(--blue);outline-offset:2px}.toolbar{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin:10px 0}.steps{display:grid;grid-template-columns:repeat(7,1fr);gap:6px}.steps button{font-size:14px;line-height:1.6;padding:8px 6px;text-align:left}.steps b{display:block;font-size:18px}.layout{display:grid;grid-template-columns:2.5fr 1fr;gap:22px;margin-top:17px}.diagram{display:block;width:100%;height:auto;background:#f6f9fb;border:1px solid var(--line);border-radius:10px}.detail{padding:17px;background:#fff4e4;border-radius:10px}.detail h3{color:#945600}.status{font-weight:700;font-size:20px}.legend{display:flex;flex-wrap:wrap;gap:15px;font-size:14px;margin:8px 0}.legend i{display:inline-block;width:11px;height:11px;border-radius:50%;margin-right:6px}.support-note{padding:12px 16px;border-left:4px solid var(--orange);background:#fff7ea;margin:12px 0}.csteps{display:grid;grid-template-columns:repeat(5,1fr);gap:7px}.csteps button{font-size:14px;text-align:left}.csteps button b{display:block}.csteps button[aria-pressed=true]{background:var(--green);border-color:var(--green)}.hold-line{height:12px;border-radius:8px;background:var(--green);margin:10px 0 4px}.continuity{text-align:center;color:#126d63;font-weight:700}.c-followup{display:flex;gap:8px;flex-wrap:wrap;margin:15px 0}.c-followup button[aria-pressed=true]{background:var(--green);border-color:var(--green)}.cbody{display:grid;grid-template-columns:1fr 1fr;gap:22px}.cbody div{padding:15px;background:#edf7f4;border-radius:9px}.scroll{overflow:auto}table{width:100%;border-collapse:collapse;font-size:14px}td,th{padding:10px;text-align:left;vertical-align:top;border-bottom:1px solid var(--line)}th{background:#f1f5f8}td:nth-child(1){white-space:nowrap}summary{cursor:pointer;font-weight:700}.links{display:flex;flex-wrap:wrap;gap:15px 22px;margin-top:15px}a{color:#1d648f}.todo{padding-left:22px}.todo li{margin:7px 0}
+@media(max-width:950px){main{padding:17px 12px}h1{font-size:23px}.layout,.cbody{grid-template-columns:1fr}.section{padding:17px 12px}.steps{grid-template-columns:repeat(4,1fr)}.csteps{grid-template-columns:repeat(3,1fr)}}@media(max-width:540px){.steps{grid-template-columns:repeat(2,1fr)}.csteps{grid-template-columns:repeat(2,1fr)}}
+</style>
+<main>
+<header><span class="badge">採用済み：主担当3腕 ＋ A/B共用補助1腕 ＋ C専用補助1腕</span><h1>補助腕を次へ渡すのは、保持と引継ぎが終わってから</h1><p>A・B共用の補助は順番に使います。Cの補助は独立させ、搭載後も必要な案内を続けます。</p><p class="small">担当関係と順序の説明図。位置・到達・動作軌道・所要時間を示すものではありません。</p></header>
+<section class="section" id="ab-section">
+<h2>1　A/B共用補助を使う順番</h2>
+<div class="toolbar"><label for="order">表示する例：</label><select id="order"><option value="AB">Aを先に、次にB</option><option value="BA">Bを先に、次にA</option></select><span class="small">比較用の切替です。実際の優先順は未設定。</span></div>
+<div class="steps" id="steps" role="group" aria-label="A/B共用補助の担当切替"></div>
+<div class="layout"><div><div id="scene"></div><div class="legend"><span><i style="background:var(--blue)"></i>主担当</span><span><i style="background:var(--orange)"></i>A/B共用補助</span><span><i style="background:var(--green)"></i>C専用補助</span></div><p class="small">線は担当先。Cの表示は下段で独立して選び、A/Bと同じ時刻とは扱いません。</p></div><div class="detail" aria-live="polite"><h3 id="phase-title"></h3><p id="phase-label" class="status"></p><p id="phase-description"></p><p id="queue-state"></p><p id="phase-source" class="small"></p></div></div>
+<div class="support-note"><strong>受け先が決まらない間は、現在の補助を継続。</strong> A/Bからの本体と自由端は別々に支持を引き継ぎます。Cが前のワークを扱っている場合の待ち位置・支持も確認対象です。</div>
+</section>
+<section class="section" id="c-section">
+<h2>2　C専用補助が引継ぎまで担当する区間</h2>
+<p class="small">下の工程をクリックすると、主担当と専用補助の仕事を確認できます。帯は時間の長さを表していません。</p>
+<div id="c-steps" class="csteps"></div><div class="hold-line"></div><p class="continuity">自由端の次の支持が決まるまで予約を継続</p>
+<p class="small">同じ物を同じ手で全区間持ち続ける指定ではなく、支持の担当を途中で失わないために追う区間です。</p>
+<div class="c-followup"><span>その後も対象に応じて使用：</span><div id="c-later"></div></div>
+<div class="cbody" aria-live="polite"><div><h3 id="c-title"></h3><p id="c-start"></p><p id="c-keep"></p><p id="c-end"></p></div><div><h3>引継ぎ・次の仕事</h3><p id="c-reuse"></p><p id="c-missing" class="small"></p></div></div>
+</section>
+<section class="section"><h2>3　具体的な受け渡しで残る3点</h2><ol class="todo" id="open-points"></ol><p>この対応を決めた上で、5腕の配置・到達・工具との干渉を確認します。</p>
+<details><summary>元作業票との対応：A/B共用4仕事、C専用7仕事</summary><p class="small">補助が必要な対象に適用する仕事。実際の接続数・全製造作業数を表していません。</p><div class="scroll"><table><thead><tr><th>補助・仕事</th><th>対象作業</th><th>保持中</th><th>終了・切替</th></tr></thead><tbody id="task-table"></tbody></table></div></details>
+<nav class="links"><a href="overview.png">保持区間の一覧図</a><a href="notes.md">検討の記録</a><a href="補助腕の保持区間.csv">保持区間CSV</a><a href="workcards/review.html">全20仕事の作業票</a><a href="selection.json">採用済み5腕の分担</a><a href="review_data.json">対応データ</a></nav></section>
+</main>
+<script>
+const data=__PAYLOAD__;
+const $=id=>document.getElementById(id);
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const colors={main:'#2875b8',ab:'#c6740a',c:'#168278',muted:'#577082',ink:'#193249'};
+const text=(x,y,value,size=16,color=colors.ink,weight=400)=>`<text x="${x}" y="${y}" text-anchor="middle" font-size="${size}" fill="${color}" font-weight="${weight}">${esc(value)}</text>`;
+const box=(x,y,w,h,fill,stroke='#d6e0e7')=>`<rect x="${x}" y="${y}" width="${w}" height="${h}" rx="10" fill="${fill}" stroke="${stroke}"/>`;
+function arm(unit,x,y,color,scale=1){
+  return `<g class="arm-icon" data-unit="${unit}" transform="translate(${x} ${y}) scale(${scale})"><path d="M-21 4H21L15-9H-15Z" fill="${color}"/><path d="M0-12L-14-58L28-84L60-48V-29" stroke="${color}" stroke-width="13" fill="none" stroke-linejoin="round"/>${[[0,-12],[-14,-58],[28,-84],[60,-48]].map(([cx,cy])=>`<circle cx="${cx}" cy="${cy}" r="9" fill="white" stroke="${color}" stroke-width="5"/>`).join('')}<path d="M48-28H72M50-28V-13H55M70-28V-13H65" fill="none" stroke="${color}" stroke-width="5" stroke-linejoin="round"/></g>`;
+}
+let phaseIndex=3,cTask='D40';
+function current(){
+  const order=$('order').value,phase=data.phases[phaseIndex];
+  const owner=phase.owner==='first'?order[0]:phase.owner==='second'?order[1]:null;
+  return {phase,order,owner};
+}
+function scene(){
+  const {phase,order,owner}=current();
+  const part=(cell,x)=>`<g transform="translate(${x} 170)"><rect x="-30" y="-3" width="67" height="11" rx="2" fill="#788d9b"/>${cell==='A'?'<circle cx="-8" cy="-15" r="13" fill="#354c59"/><path d="M5-14H32" stroke="#de8622" stroke-width="6"/>':cell==='B'?'<rect x="-25" y="-20" width="55" height="13" rx="5" fill="#aebcc6"/><path d="M-12-21V-6M10-21V-6" stroke="white" stroke-width="7"/>':'<rect x="-34" y="-28" width="72" height="40" fill="#d7e2e9" stroke="#788d9b" stroke-width="3"/><path d="M-18-14Q0-38 25-12" stroke="#de8622" stroke-width="5" fill="none"/>'}<path d="M-38 17H43M-28 17V35M30 17V35" stroke="#9bafbc" stroke-width="5"/></g>`;
+  let nodes='';
+  for(const [index,cell] of ['A','B','C'].entries()){
+    const x=14+index*330,center=x+158;
+    const name={A:'下板側',B:'ヒューズ板側',C:'合流・筐体搭載'}[cell];
+    let label=cell===owner?'共用補助を予約中':cell==='C'?'専用補助を使用':phase.id==='request'?'補助の把持は開始前':cell===order[1]?'補助の把持は開始前':'次仕事は引継ぎ後';
+    if(phase.id==='next_grasp'&&cell===order[0])label='共用補助の担当を終了';
+    nodes+=box(x,16,315,236,'white')+text(center,47,cell+'　'+name,20,colors.ink,700)+arm('ARM_'+cell,x+72,181,colors.main,.95)+part(cell,x+203)+text(center,236,label,17,cell==='C'?colors.c:cell===owner?colors.ab:colors.muted,700);
+    if(phase.tool&&cell===owner)nodes+=box(x+163,75,132,35,'#eef1f4')+text(x+229,98,'据置工具で接続',14)+`<path d="M${x+229} 110V133" stroke="#607686" stroke-width="5"/>`;
+  }
+  const link=owner?`<path class="ab-link" data-owner="${owner}" d="M344 335V279H${owner==='A'?172:502}V258" fill="none" stroke="${colors.ab}" stroke-width="4" stroke-dasharray="8 6"/>`:'';
+  const common=phase.id==='changeover'?'切替中も占有':owner?owner+'の担当を継続':'割当開始前';
+  return `<svg id="role-diagram" class="diagram" viewBox="0 0 1018 440" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="diagram-title diagram-desc" style="font-family:Noto Sans CJK JP,Yu Gothic,sans-serif"><title id="diagram-title">5腕の担当図</title><desc id="diagram-desc">${esc(phase.title_ja)}。担当元の共用補助とC専用補助を区別。線は動作軌道ではない。</desc>${nodes}${link}<path d="M832 335V258" stroke="${colors.c}" stroke-width="4" stroke-dasharray="8 6"/>${arm('ASSIST_1',325,393,colors.ab,.69)}${arm('ASSIST_2',813,393,colors.c,.69)}${box(232,299,224,33,'#fff3e1')}${text(344,322,common,17,colors.ab,700)}${box(709,299,246,33,'#eaf6f1')}${text(832,322,cTask+'：担当を確認',16,colors.c,700)}${text(344,426,'A/B共用補助 · 1腕',19,colors.ab,700)}${text(832,426,'C専用補助 · 1腕',19,colors.c,700)}</svg>`;
+}
+function showPhase(index){
+  phaseIndex=index;const {phase,order,owner}=current();
+  for(const button of document.querySelectorAll('[data-phase]'))button.setAttribute('aria-pressed',button.dataset.phase===phase.id);
+  $('scene').innerHTML=scene();$('phase-title').textContent=(index+1)+'　'+phase.title_ja;
+  $('phase-label').textContent=phase.label_ja;$('phase-description').textContent=phase.explanation_ja;
+  $('queue-state').textContent=owner===order[0]?order[1]+'は、補助が必要な取得・保持を始める前で待つ例です。':phase.id==='changeover'?'担当を終えた直後も、移動と必要な手先交換が残ります。':phase.id==='next_grasp'?order[1]+'の主担当と共用補助の組合せへ切り替わります。':'ここからどちらを先に扱うかを比較します。';
+  $('phase-source').textContent='対応作業：'+phase.source_tasks.join(' / ');
+  window.handoffState={phase:phase.id,order,owner,busy:phase.busy,cTask};
+}
+function showC(id){
+  cTask=id;const card=data.assist_groups[1].cards.find(c=>c.id===id);
+  for(const button of document.querySelectorAll('[data-c-task]'))button.setAttribute('aria-pressed',button.dataset.cTask===id);
+  $('c-title').textContent=id+'｜'+card.task.work_ja;$('c-start').textContent='開始：'+card.start_ja;$('c-keep').textContent='継続：'+card.keep_ja;$('c-end').textContent='区切り：'+card.end_ja;
+  $('c-reuse').textContent=card.reuse_ja;$('c-missing').textContent='具体化が必要：'+card.missing_ja;
+  showPhase(phaseIndex);
+}
+$('steps').innerHTML=data.phases.map((phase,i)=>`<button type="button" data-phase="${phase.id}" aria-pressed="false"><b>${i+1}</b>${esc(phase.title_ja)}</button>`).join('');
+for(const [i,button] of [...document.querySelectorAll('[data-phase]')].entries())button.addEventListener('click',()=>showPhase(i));
+for(const step of data.c_sequence){const target=step.continuity==='reserved_until_handoff'?'c-steps':'c-later';$(target).insertAdjacentHTML('beforeend',`<button type="button" data-c-task="${step.task}" aria-pressed="false"><b>${step.task}</b>${esc(step.short_ja)}</button>`);}
+for(const button of document.querySelectorAll('[data-c-task]'))button.addEventListener('click',()=>showC(button.dataset.cTask));
+$('order').addEventListener('change',()=>showPhase(phaseIndex));
+$('open-points').innerHTML=data.handoff_open_points_ja.map(t=>'<li>'+esc(t)+'</li>').join('');
+$('task-table').innerHTML=data.assist_groups.flatMap((group,i)=>group.cards.map(card=>`<tr data-task="${card.id}"><td>${i===0?'A/B共用':'C専用'}<br>${card.id}</td><td>${esc(card.task.work_ja)}</td><td>${esc(card.keep_ja)}</td><td>${esc(card.end_ja)}<br>${esc(card.reuse_ja)}</td></tr>`)).join('');
+function exportOverview(){
+  const cells=(labels,x,y,w,color)=>labels.map((label,i)=>box(x+i*(w+12),y,w,58,'white')+text(x+i*(w+12)+w/2,y+35,label,18,color,700)+(i<labels.length-1?text(x+i*(w+12)+w+6,y+35,'›',22,color,700):'')).join('');
+  return `<svg xmlns="http://www.w3.org/2000/svg" width="1320" height="810" viewBox="0 0 1320 810" style="font-family:Noto Sans CJK JP,Yu Gothic,sans-serif"><rect width="1320" height="810" fill="#edf2f5"/>${text(660,47,'5腕構成：補助の保持を終えてから次へ渡す',29,colors.ink,700)}${text(660,80,'主担当A・B・C ＋ A/B共用補助 ＋ C専用補助',19,colors.muted)}${box(22,106,1276,290,'#fff3e1','#ecd4ae')}${text(190,143,'A/B共用補助',25,colors.ab,700)}${text(837,143,'例：Aを先に扱う場合。Bを先にする順序も比較する。',17,colors.muted)}${cells(['Aで両腕保持','保持中に接続','自由端を引継ぐ','解除・退避','手先交換・移動','Bで両腕保持'],40,171,196,colors.ab)}${text(660,266,'引継ぎ未完なら、Aの担当を継続 → Bは補助が必要な把持の開始前で待つ',24,'#9d5817',700)}<path d="M530 235V289H107V235" fill="none" stroke="${colors.ab}" stroke-width="3" stroke-dasharray="8 6"/>${text(660,331,'接続後も、別の自由端が残ればユニット受渡しまで担当が延びる',19,colors.ink,700)}${text(660,371,'A：D11 接続 → D12 受渡し　／　B：D21 接続 → D22 受渡し',18,colors.muted)}${box(22,420,1276,314,'#eaf6f1','#beded6')}${text(190,458,'C専用補助',25,colors.c,700)}${cells(['持ち替え・案内','筐体へ搭載','箱内工具作業','端末の開口通過','ヘッダー・引継ぎ'],40,479,238,colors.c)}${text(660,570,'D31 → D40 → D42 → D45 → D50',19,colors.c,700)}<rect x="45" y="588" width="1225" height="12" rx="6" fill="${colors.c}"/>${text(660,632,'必要な自由端を次の支持へ渡すまで、担当を予約',24,colors.c,700)}${text(660,674,'D60 主接続・D61 LV/HVILでも、対象に応じて独立保持を担当する',19,colors.ink)}${text(660,711,'搭載終了・開口通過だけでは空きにしない。受ける手と支持面は具体化が必要。',18,colors.muted)}${text(660,773,'作業順序の説明図。上下段は時刻同期せず、幅は所要時間を表しません。',17,colors.muted)}</svg>`;
+}
+showC('D40');window.handoffReady=true;window.exportHandoffOverview=exportOverview;
+</script>
+</html>
