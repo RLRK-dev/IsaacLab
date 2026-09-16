@@ -222,3 +222,32 @@ position servo への線形 ramp（現行・不変）。one-shot 目標なし。
 - **不変**: `attitude_tilt_deg` の式・`_rdes`・`AXFIX`・`solve_ik`・`pose_menu`・servo・`GRASP_ATTITUDES`・`TILT_CAL_DEG`（cell_spec `:826`）。**制御行 0**。file = wired 1 本。scratch MjData は `_measure_axfix` と同じ使い捨て（live `d` 不触）。
 - **検証（pZ・別 leg・R3 の拡張）**: (a) canonical 状態: upright 0.00・min(tilted) 5.729578 両側（≤ 1e-6°）(b) **負の対照（must-fail）**: 計器の回転を転置した copy（07-28 の実バグ `:1279-1282` の形）は canonical 状態で flat を返し第 2 raise に落ちること (c) live 非対称状態（R3-ii の finger 0.3/0）: raise 0・|v_c| 両側 0.1494・警告行 1・cap_L 2.864789 / cap_R 14.323945（pZ 自前式と ≤ 1e-6°）(d) 制御不変（PZ-218 の instrument）(e) DoD 述語 = §13 (b) と同型・許容集合 = {FunctionDef `vertical_cap_deg`, Expr print ×1-2}（`attitude_tilt_deg` は不触・対照 3 本）。
 - **窓・順序**: D4 着地（§13）→ pZ R3 → #69 とは独立。build = 別窓で Rs1 の一言（p4）・DDR 項目 = p6（owner p11・critical path 外）。#69 が vertical check で abort した場合の **準備済の処置経路**（その時に開く）。
+
+## 17. Rs1 の回答（09-14 06:00）を受けた追記 — R0 の実行範囲・B 行（側別 controller 記録）の仕様・R1 の pin・報告規則（2026-09-16 17:52:00 JST）
+
+**出所** = Rs1（人間）逐語・custody = p4 transcript `:2361`（09-14 06:00:22 JST・`type=user`・typed）・banked = kickoff `P4_MOUNTING_C-2_CHAIN_KICKOFF_20260808.md` 09-14 06:06 節 @ `236410dd84`（当卓が blob で直読・表の 2 列を照合）・relay = m-p4-265 → m-p18-353。**Rs1 の決定は逐語のみ・以下の「読み」は当卓の inference 札**（p4 の処置 = kickoff item 4-7 @ `45f25d830a`）。§6・§10・§13・§16 は不触（D4 leg `cb787871f0`・R3 leg `98d8e63173`・D4′ の束縛先を content で保つ）。
+
+### 17.1 R0 の実行範囲（Q1「認可する。p0が作り、pZが独立に検証・実行する。」）
+- Rs1 逐語の範囲: 「**物理ステップを進めず、実行副作用のあるdriverをimportしない静的検査に限定します。収束確認と、衝突・把持・動的追従の成立は区別します。**」
+- ⇒ §10 R0 行はそのまま・**報告の名乗りを固定**: R0 の結果は「**収束のみ**」（`pe ≤ 0.002 m`・`re ≤ re_max` の充足行数）を名乗り、**衝突回避・把持・動的追従は R0 では示さない**（それらは #69 の run = R4 ＋ pB/pC の視覚 leg）。harness = `mj_kinematics`/`mj_forward` のみ（`mj_step` 0 by construction・陽性対照 = step counter）・driver family の import 0（import/subprocess/exec/runpy 横断・陽性対照）・composed model = `build_side()` @ `b7a5e39ecf`（1 腕・clearance は空虚 = §10 R0 行のとおり）。
+- 順序（p4 item 4）: 本節（spec）→ **pZ の prereg（object より先）** → p0 が harness を作る（新 file = Rs1 認可済「p0が作り」・名前は p0）→ pZ が独立に検証・実行・報告。bar = §10 R0 行（「L が収束し R が収束しない target 行 = 0」・full menu `tries=None`・候補 index ごと同一 seed・収束 0 行 = §11 STOP）。
+- 報告に必ず入れる札: 「収束のみ／衝突・把持・動的追従は未証明」。
+
+### 17.2 B 行 = 側別 controller 記録の仕様（Q2「Bを採用する。」・理由逐語「実際に使用する右腕の軸・添字・符号・設計commitを記録する方が、後から実装と結果を照合できます」）
+- **窓**: D4 とは別の小窓（p4 item 4: D4 に畳まない・順序 = 本 spec → pZ prereg → p0 → pZ leg）。Rs1 Q8 の条件（同時に入れるなら検証対象に明示）は「別窓」で満たす。
+- **置き場所**: wired の **`AXFIX = _measure_axfix()` `:616` @ `22feba17a6`（D4 着地後は D4 commit の対応行）の直後・`def pinch` `:619` の前**の top-level statement 1 つ。⚠ identity print `:567-568` の隣ではない（そこでは AXFIX が未測定）。
+- **形**: `for t in SIDES:` を target・iter とする **For 文 1 つ**・body = **`print(...)` の Expr ちょうど 1 つ**。**L も印字する**（L 併記 = 要: 2 行並ぶことで pB/pC が log から鏡像関係 `AXFIX_R = diag(1,−1,1)·AXFIX_L·A` を読める・pZ R1′ (b) の値と照合できる）。
+- **field（側 t ごと・この順）**: ① `t` ② class literal `existing per-arm 6D DLS + position servo` ③ **軸** = `AXFIX[t]` の 3 行 c / s / a（各 3 数・`%+.6f`）④ **添字** = `QADR[t]`（6 int）・`VADR[t]`（6 int）・`AIDX[t]`（6 int）・`GIDX[t]`（int）・`PAD[t]`（2 int）・`TOOLB[t]`（int）⑤ **符号** = `SIDES[t]`（`%+.1f`）⑥ **設計 commit** = literal `P11_UR15B_CONTROLLER_DESIGN_20260913.md@<本 §17 を含む commit の hash>`（p0 が `git rev-parse` で読んで literal に書く・pZ が literal == 本 §17 commit を検査）。
+- **書式（結果形・1 側 1 行）**: `[steps] controller record {t}: class=existing per-arm 6D DLS + position servo; AXFIX c=[…] s=[…] a=[…]; QADR=[…] VADR=[…] AIDX=[…] GIDX=n PAD=[…] TOOLB=n; sgn=+1.0; design=P11_UR15B_CONTROLLER_DESIGN_20260913.md@<commit>`。prefix `[steps] controller record` は固定（pB の grep 面）。
+- **禁則**: 新しい語に `nan|inf|error|fail|warn` の部分文字列を含めない（`design`・`record`・`existing` は含まない・当卓検査）。数値は format 指定で印字（`nan` は実値のときだけ現れる = それが pB の数える対象）。RUN_METRICS 不変・制御行 0・file = wired 1 本・消費者 0（記録のみ）。
+- **DoD 述語（§13 (b) と同型）**: base = 着地時点の blob（D4 着地後なら D4 commit の blob）・N1-N3・import 名集合 削除不可・**許容差 = {For（target Name `t`・iter Name `SIDES`・body = Expr print 1 つ・先頭 Constant が `[steps] controller record` で始まる）} のみ**・対照 3 本（literal 反転 → FAIL／mock B 行 → PASS／mock ＋ stray print → FAIL）・制御不変 instrument（PZ-218 appendix B: live 書込 0・`d.ctrl` 7・`mj_step` 11・制御列 34 行）不変。
+- **検証（pZ・静的）**: (a) AST: print の FormattedValue が参照する subscript = ちょうど {`AXFIX[t]`, `QADR[t]`, `VADR[t]`, `AIDX[t]`, `GIDX[t]`, `PAD[t]`, `TOOLB[t]`, `SIDES[t]`}・Constant 部分に禁則語 0・design literal == §17 commit (b) 述語 PASS＋対照 3 本 (c) 制御不変。**runtime（#69 の run のみ・pB が読む）**: 2 行の `AXFIX` が pZ の composed model の AXFIX_L/AXFIX_R（seed `:600`・finger 0・tool frame ゆえ mount 非依存）と各 9 数 ≤ 1e-6 で一致・関係式 ≤ 1e-6。添字の int は**記録**（wired の model 固有・照合は後日の実装と結果の突合に使う = Rs1 の理由）。
+
+### 17.3 R1 の pin 更新（Q3「取り込む。」・p4 実施 `e6172b2e3b` 09-14 06:07）
+- reference bundle = `p4_ur15_sim_20260727/reference/ur15-dual-arm-cell/`（23 file・`ur15-dual-arm-cell.json` 1,671 行・manifest `MANIFEST_ur15-dual-arm-cell.sha256` sha256 `3e7c1ce62cb78ae0…`・PROVENANCE 付き・4 copy 間 byte 同一 20/20）。§10 R1 の「JSON sha256 `20ac0935c707757c…`・1 箇所を pin」→ **repo 内 copy を pin**（pZ は自前 loader で読む・acceptance script の `REF_DIR` `:48-49` は不触 = p4）。§10 は不触・本節が上書き。
+
+### 17.4 報告規則（補足 a・Rs1 逐語「計器による停止は、コントローラの不成立と区別して報告すべきです。」）
+- 以後の当卓・pZ・pB/pC の全報告（R0・R3・#69）に **停止原因の札** を必ず入れる: {**計器の calibration 停止**（`:1301/:1307`・§6 効果の正直・D4′ の対象）／**controller の不収束**（R0・§11 STOP）／**その他**}。「表示だけが変わる」は不足（Rs1）— D4 は起動時 abort 面を両側へ広げる（§6 `:96`）。
+
+### 17.5 着手と完成受入の分離（補足 b・Rs1 逐語「修正の着手と、検証後の完成受入を分けることが必要です。」）
+- Q8 = **D4 の着手認可**（p0 の窓が開く）であって完成受入ではない。完成受入 = pZ の D4 leg `cb787871f0`・R3 `98d8e63173` 通過後の p4（柵 ②）。本書の「未検証」印（`:1`）は **完成受入まで残す**。D4′ は今回に含めない（Rs1 Q8）。
