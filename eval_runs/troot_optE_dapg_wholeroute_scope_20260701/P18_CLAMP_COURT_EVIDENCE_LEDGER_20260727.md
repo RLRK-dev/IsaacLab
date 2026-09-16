@@ -48052,3 +48052,13 @@ ALT-1 (downgrade) — not chosen (the human's word). ALT-2 (`agent prompt`) — 
 - ⛔ 解錠なし・run 0（当卓）・当卓は裁定しない。
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1491 — ✅ **p0 m-p0-367R（**窓 R0 着地 `d038e2536f`** = 新 file `r0_convergence_harness.py` +778・記録 §8.54 `675241151c`・受入未主張）→ m-p18-378（→ p4 cc pZ p11 p6・p4 leg = sent_at=2026-09-16T18:42:12.308+09:00 delivered_at=2026-09-16T09:42:12.612Z）／p4 m-p4-276（PZ-229 の読み: R0 は Q1「収束するか」に yes・正しさは静的 legs・§10 は p11 訂正・R0-ii 推奨・harness は着地 ≠ 受入・`996fb68d93`）→ m-p18-377（→ p11 cc pZ p0 p6・p6 leg = sent_at=2026-09-16T18:42:10.889+09:00 delivered_at=2026-09-16T09:42:11.206Z・pZ leg = hold）**（当卓 2026-09-16 18:40–18:42 JST 実測）
+
+- **着信**（`type=attachment`）: m-p0-367R `:44531`（`09:39:59.605Z` = 18:40:00 JST）／m-p4-276 `:44532`（`09:40:05.007Z`）。
+- **m-p0-367R の検証**: `d038e2536f`（18:35:54・parent `dd7cfd18b4`・**新 file** `p4_ur15_sim_20260727/r0_convergence_harness.py` +778/−0・blob `1d6b53840028`・sha256 `28115a3d523a1061bb4906ffe46c34169a7214b18fbf617a4f338abfb4adf67d`・778 行・source に「ur15_steps」0 件・後続 commit 0）／記録 §8.54 `:3321` @ `675241151c`（18:39:59・parent `4e148c1c5b`・+124/−0・file sha256 `36ac475f448d2a6a78698badce9d148f1599f68ec326eb279a83e11db35ffa5a`）= p0 の記載。copy fidelity（raw ast.dump 9/9）・py_compile・run 0/import 0 = p0 の as-run（当卓は再実行せず・pZ の leg が担う）。**時系列（当卓）**: harness 着地 18:35:54 = pZ addendum 3（18:35:23）の 31 秒後・p4 の出所読み（374/375）・pZ の finding（376）・p4 の読み（本節 X）が p0 に届く前（p0 宛 leg は全て hold 中）・p11 の出所行より前。p0 の GL/GR 出所 = 「dod_c2 run.log :93」（p0 の記載）は p4 が p11 に求めた形（spec-nominal を committed text で pin・実測は報告）と異なる ⇒ p4 は follow-up commit を見込む（m-p4-276）。**新 file の根拠 = Rs1 Q1 逐語**（kickoff `:2388` @ `236410dd84`）＋ chain court の窓 R0（m-p4-271）— 当卓は何も認可しない。
+- **m-p4-276 の検証**: kickoff item 15 @ `996fb68d93`（18:39:28・parent `6f8afd55c1`・+7/−0）・送信記録 @ `3fe9eece49`。読み ①②③（R0 の射程 = Q1 逐語どおり／§10 の文は測定で反証 ⇒ p11 が append-only で訂正／R0-ii = p4 推奨・決定 p11）= p4 の語・当卓は裁定しない。p4 は「R0-ii は同 class の追加行・新計器ではない」と Rs1 へ報告済と記載（p4 の行為）。
+- **hub の動き**: **m-p18-377** = m-p4-276（relay body sha256 `2da6cdab0d5e9af8…`）→ p11 ARM-CONTROL-DESIGN cc pZ IMPL-VERIFIER・p0 IMPL-BUILDER・p6 PLAN-KEEPER: 初回 hold → p6 leg = sent_at=2026-09-16T18:42:10.889+09:00 delivered_at=2026-09-16T09:42:11.206Z・pZ leg = hold・p11/p0 hold・`verify` rc 0。**m-p18-378** = m-p0-367R（relay body sha256 `ca9ca37490d59ddc…`）→ p4 RS-TECH-LEAD cc pZ p11 p6: 初回 hold → p4 leg = sent_at=2026-09-16T18:42:12.308+09:00 delivered_at=2026-09-16T09:42:12.612Z・他 hold・`verify` rc 0。
+- ⛔ 解錠なし・run 0（当卓）・当卓は裁定しない。
+
+**Banked — 時刻は本節 commit の author date が正。**
