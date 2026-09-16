@@ -48018,3 +48018,13 @@ ALT-1 (downgrade) — not chosen (the human's word). ALT-2 (`agent prompt`) — 
 - ⛔ 解錠なし・run 0（当卓）・当卓は裁定しない。
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1487 — ✅ **pZ PZ-229（harness 以前に pZ 自前計器で R0 を測定: class は B に収束 17/17 だが欠陥 model 2 種も 17/17 ⇒ 収束だけでは「B が正しい」を言えない・v3 §10 の R0 文と矛盾・p11 への問い・addendum 2 の訂正 30 global・`dd7cfd18b4`）→ m-p18-376（→ p11 cc p4 p0・p4 leg = sent_at=2026-09-16T18:37:07.522+09:00 delivered_at=2026-09-16T09:37:07.826Z）／p6 m-p6-172（DDR 68 = 窓 B 着地・`86fd4d4c6d`）受領**（当卓 2026-09-16 18:35–18:37 JST 実測）
+
+- **着信**: PZ-229 `:44423`（`type=user`・`promptSource=typed`・`09:35:24.173Z` = 18:35:24 JST）／m-p6-172 `:44442`（`type=attachment`・`09:35:37.573Z`）。
+- **PZ-229 の検証**: `dd7cfd18b4`（18:35:23・parent `86fd4d4c6d`・R0 prereg +110 → 146 行・sha256 `7746348239a179527ea0bdb1ebee60b3e622cd2f0d9fa0f0886490ea6bd92836`）= pZ の記載・clean・driver 後続 commit = 1（`96e9ece175`）・R0 harness file は未存在。設計 §10 の R0 行 = 「R0 controller（**B で正しい**の唯一の判別 leg）… 収束のみ」（当卓 @ `2743fc4549` 実読）= pZ が測定と矛盾すると言う文。測定（`pz_r0.py`・閉包 14 関数を着地 blob から AST で取り `build_side()` model に束縛・`mj_step` を wrap して count 0・driver 系 module 不 import・L 17/17・R 17/17・欠陥 2 種も 17/17・候補数 15/14/17・鏡像目標 identity 行 5/17 vs 0/17）= pZ の as-run（当卓は再実行せず）。**run の性格**: pZ は「物理 step なし・driver 不 import・self-start なし」と記載・R0 の実行者は Rs1 Q1「pZが独立に検証・実行する」と chain court の窓 R0（m-p4-271）が pZ を名指す — 当卓は記録のみ・裁定しない。cross-reading: 本 finding は p11 の §17 出所行（374/375 = p11 宛 hold）・§10 の R0 文言・R0 prereg の bar の 3 点に係る。custody form = m-p18-344 型 → **本節で bank**。
+- **m-p6-172 の検証**: `86fd4d4c6d`（18:35:18・parent `5adc68e073`・DDR +1/−1 = row 68・state.md +4/−4）・clean。DDR 68 = 窓 B 着地（p6 が pin を全て自測 = 当卓 §1483 と一致）・受入 = 未・§7.1 ③ = 着地/pZ leg/p4 受入 未・R0 設計点を行 68 と §7.1 ④ に「未回答」で予約 = p6 の記載。p18 に要るもの なし。
+- **hub の動き**: **m-p18-376** = PZ-229（relay body sha256 `029b1f37606d7aae…`・composed = `bodies/m-p18-376.txt`）→ p11 ARM-CONTROL-DESIGN cc p4 RS-TECH-LEAD・p0 IMPL-BUILDER: p11/p0 working ⇒ hold・p4 leg = sent_at=2026-09-16T18:37:07.522+09:00 delivered_at=2026-09-16T09:37:07.826Z・`verify` rc 0。p11 宛 hold = 374 → 375 → m-p18-376（設計の問い 3 通・p11 idle で順に）。
+- ⛔ 解錠なし・run 0（当卓）・当卓は裁定しない。
+
+**Banked — 時刻は本節 commit の author date が正。**
