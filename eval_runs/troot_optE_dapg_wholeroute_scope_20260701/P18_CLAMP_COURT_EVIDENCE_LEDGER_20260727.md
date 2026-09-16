@@ -47967,3 +47967,14 @@ ALT-1 (downgrade) — not chosen (the human's word). ALT-2 (`agent prompt`) — 
 - ⛔ 解錠なし・run 0（当卓）・当卓は裁定しない。
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1482 — ✅ **p4 m-p4-272（計器窓を文言だけ広げる: 3 箇所・logic 0・新 file 0・record file 不触・pZ 再 pin → p0 着地・`543886a251`）→ 369（→ pZ cc p0 p6: p6 DELIVERED・pZ/p0 hold）／p6 m-p6-168（DDR 68・state.md §7.1 ③④ = 窓 open・`ccf71e39d8`）受領／367 の p4 leg 完了**（当卓 2026-09-16 18:21–18:23 JST 実測）
+
+- **着信**（`type=attachment`）: m-p6-168 `:44060`（`09:21:48.422Z` = 18:21:48 JST）／m-p4-272 `:44061`（`09:21:55.642Z`）。
+- **m-p6-168 の検証**: `ccf71e39d8`（18:21:32・parent `543886a251`・DDR +1/−1 = row 68・state.md +4/−4）・両 file clean。DDR 68 = pZ prereg 完了 = 条件 (i)(ii) 充足 → p4 word 18:16 = p0 の 2 窓 open・state.md §7.1 ③④ =「窓 open（p4 09-16 18:16）」・p0 着地 = 未 = p6 の記載。p6 自測（両 prereg 行数/sha・driver 後続 0・`build_side` `:52`）= 当卓 §1479/§1481 と一致。p18 に要るもの なし。
+- **m-p4-272 の検証**: kickoff item 10 @ `543886a251`（18:21:27・parent `3ecd14e5f9`・+7/−0）・送信記録 @ `877b2f11cb`。旧規則を文言で述べる 3 箇所を当卓が HEAD blob（`0803ea391298`・最終 commit `38678f5946`）で実読: `:200` comment「that is exactly [lo, hi] -> [-hi, -lo].」／`:202` 見出し Constant「mirrored [lo,hi] must equal the stock [-hi,-lo]」／`:230-233` HONEST SCOPE Constant「[-hi,-lo] equals [lo,hi] and this leg CANNOT fail on these assets…」= p4 の cite どおり・script の後続 commit 0。**disposition（chain court）= 窓を文言だけ広げる**（許容追加 = 3 箇所の文言のみ・logic 0・record file `UR15_MIRROR_ACCEPTANCE_20260729.txt` は履歴として不触・pZ の leg は scratch archive・`:236` の書き先変更は窓外）。**権限の注記（当卓・裁定なし）**: p4 は「同じ計器・logic 不変・新 file 無し ⇒ Rs1 Q9 の内・当卓の判断で広げ Rs1 へ報告済（異議があれば戻す）」と記載 — 当卓は p4 の行為・読みとして記録・Rs1 の語は「推奨」2 字のまま（§1479）→ **Rs1 へ報告**。時系列: p4 は 367（p0 の MIN/FULL 質問）を未読で本 disposition を書いた（367 は同じ idle 窓で p4 へ配達 = 下）。p4 の 2 文＋文言 3 箇所と p0 の FULL（2 文＋rule を print する string 2 つ）は重なるが同一ではない（p4 は `:200` comment を含め新文言の要件を指定）— 突合は p4 と p0/pZ の語で。
+- **hub の動き**: **367 の p4 leg 完了**（p4 idle → 18:23:12.215 → `09:23:12.514Z` DELIVERED・`verify` rc 0）⇒ 367 残 = pZ・p6。**369** = m-p4-272（4,352 字・relay body sha256 `99616fa8658e9bfa…`・composed = `bodies/m-p18-369.txt`）→ pZ IMPL-VERIFIER cc p0 IMPL-BUILDER・p6 PLAN-KEEPER: 初回 hold（pZ/p0 working）→ p6 idle で **p6 DELIVERED（18:23:27.330 → 09:23:27.636Z）**・pZ/p0 hold・`verify` rc 0。
+- **hold 中の leg（18:23）**: 354（p6・p11）／357（p11・p6）／358（p11）／359（p0・p11・pZ）／360（p11）／361（p11・pZ）／363（p0・p11・p6）／364（p0・p11）／365（p0）／366（p11）／367（pZ・p6）／368（p0・p11・p4）／369（p0・pZ）。優先（内容で）: pZ = 369 → 367 → 359 → 361／p0 = 369 → 365 → 368 → 364 → 363 → 359／p4 = 368／p6 = 367 → 363 → 357 → 354／p11 = 366 → 359 → 360 → 361 → 363 → 364 → 368 → 358 → 357 → 354。
+- ⛔ 解錠なし・run 0（当卓）・当卓は裁定しない。
+
+**Banked — 時刻は本節 commit の author date が正。**
