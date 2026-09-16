@@ -2973,3 +2973,256 @@ is the prepared case: its route is D4′ (§16, owner p11, its own window), not 
 - Acceptance of D4 = pZ's D4 leg + R3 (independent), then p4's word.  Nothing in this section claims it.
 - Not started: the B record line (waits for p11's spec → pZ prereg → its own window), R0 (Q1: p11 spec → pZ prereg → p0 builds
   the static harness → pZ runs it; "convergence only"), D4′, `:214`.  Route run ② / #69 unfired.
+
+## 8.52 ANNOUNCE-FIRST: the acceptance-instrument window (Rs1 Q9「推奨」→ m-p4-269) — two candidates built and run statically; a scope question for the chain court before pZ's pre-registration binds; NOT landed
+
+*(2026-09-16 18:17 JST.  Rs1 = the human; Rs2 = p4/CC.  Object = `p4_ur15_sim_20260727/ur15_mirror_acceptance.py`, HEAD blob
+`0803ea391298` (last commit `38678f5946`, 07-29; the shared-tree copy is the 09-07 WIP — every read and build here is on the
+blob).  Window per p4: two changes only — (a) `:49` REF_DIR → the repo copy, HERE-relative; (b) `:214` `want = (-hi_a, -lo_a)` →
+`(lo_a, hi_a)` (DDR 73).  Order: pZ prereg → p0 lands with a predicate → pZ leg → p4 acceptance → p6 closes DDR 73.)*
+
+### 1. Two candidates, one question
+
+- **min** (the window's letter): exactly the two statements.  The comment block that states the rule (`:197-200`, AST-invisible)
+  is corrected in both variants — a comment is not a statement, and a rule text left saying `[lo, hi] -> [-hi, -lo]` next to a
+  predicate testing `[lo, hi]` would be the 07-29 defect written down a second time.
+- **full** (my recommendation): the two statements **plus the two strings that print the rule** — the leg heading
+  `"=== LEG limit … mirrored [lo,hi] must equal the stock [-hi,-lo] ==="` (`:202`) and the HONEST-SCOPE line (`:230-233`).  Under
+  *min* the printed record would still announce the sign-flip rule while the code tests identity: the leg's own label contradicting
+  its predicate — the kind of record pZ's 08-10 row A2 was misled by (its addendum `fc27954d88`).  Four statements, still one file,
+  no logic beyond the two the window names.
+- **Question to p4 (chain court):** is the label text inside the window (full, 4 statements) or does the window's "2 か所" bind
+  (min, 2 statements)?  pZ's prereg row "変更集合 = 2 stmt のみ" decides which candidate can pass a leg, so the answer is needed
+  before pZ's prereg binds, not after.  Either variant is built and verified below; I land the one the court names.
+
+### 2. Built from the blob, verified statically (mj_kinematics only; the script contains no `mj_step`; the driver is not imported)
+
+- Worktree `git worktree add --detach <scratchpad>/wt_acc HEAD` (clean, 0 lines).  `apply_acc.py` = exact-anchor replacement,
+  refuses on a missing anchor.  `py_compile` OK for both.  Diffs: min 13 lines, full 24 lines (verbatim in §4).
+- **Predicate** = `ast_pred2.py` (§4.3; the D4 tool generalised: the statement diff is recursive, the deepest differing statements
+  are reported with their path, and the allowed set is given as paths).  Differing paths: min = {`Assign REF_DIR`,
+  `FunctionDef main>For>For>Assign want`}; full = those + {`FunctionDef main>Expr out.append('=== LEG limit (static, n')`,
+  `FunctionDef main>If>Expr out.append('  ⚠ HONEST SCOPE: every ')`}.  Legs: base vs base PASS; min/min-allowed **PASS**;
+  full/full-allowed **PASS**; full/min-allowed **FAIL** (the two label statements are seen); full + `PASS_MM` 1.0→1.5 **FAIL**
+  (`Assign PASS_MM` NOT-ALLOWED); full + a stray statement inside the limit loop **FAIL** (`main>For>For statement count 11 vs 12`).
+  Import name set unchanged.  (Aside, recorded once: pZ's two disclosed predicate holes — a stray statement inside an existing
+  module-level `for t in SIDES:` loop, a duplicated allowed def — were run as controls 5/6 against the D4 tool `ast_pred.py` on
+  the landed D4 blob: both FAIL as they must; that tool keys by full `ast.dump` at aligned positions and requires equal counts.)
+- **The instrument itself, run in the worktree (full variant; the run rewrites the worktree's copy of the 07-29 record, restored
+  afterwards — sha `c5229911315f57b5` before and after):**
+
+  | mounting (env) | control | test | formula | negative | limit leg |
+  |---|---|---|---|---|---|
+  | none = cell_spec default = **C-2 0.28/20** | **0/48** (worst 241.08 mm) | 0/48 (534.82) | 0/48 (534.82) | 0/48 (1637.86) | all 6 consistent |
+  | `YOKE_SPREAD_OVERRIDE=0.22 TILT_DEG_OVERRIDE=45` | **48/48** (worst 0.0076 mm at main_route_high) | 48/48 (0.0076) | 48/48 (0.0076) | 0/48 (1357.5480 at connector_insert) | all 6 consistent |
+
+  The second row is **byte-equal to the banked 07-29 rows** `:37/:65/:93/:121`; `reference :` prints the repo copy's path and
+  `mounting :` prints `YOKE_SPREAD=0.22 TILT=45.0000` (the record carries its mounting, `:4`).  The first row is a **finding for
+  pZ's prereg row "07-29 の位置 legs 48/48・負の対照 0/48 が clean worktree で再現"**: the reference publishes positions for the
+  0.22/45 mounting only (DDR 68, pZ F4), and `ur15_cell_spec.py` has defaulted to C-2 since `0f6b4a733e` — the reproduction needs
+  the two overrides, or it reproduces nothing.  Not a defect of the instrument or the assets.
+- ⚠ **Hazard, for whoever runs it in the shared tree:** `:236` writes `HERE / "UR15_MIRROR_ACCEPTANCE_20260729.txt"` — the banked
+  07-29 record, in place.  Running the script in the shared tree overwrites a pinned artifact.  pZ's clean-worktree rule covers
+  pZ; this desk did not run it in the shared tree and will not regenerate or commit that record in this window (the output path is
+  outside the two changes).
+
+### 3. What I do not claim
+
+- The negative control for the new `:214` rule (a mock asset with an asymmetric range: old rule passes, new rule fails — the only
+  thing that discriminates the two rules, since every real range is symmetric) is pZ's prereg row; not run here.
+- No number here grades UR15-B; this is the 07-29 arm-position instrument, unrelated to #69.
+
+### 4. Verbatim objects
+
+#### 4.1 `acc_min.diff` (blob `0803ea391298` → min)
+
+```diff
+--- acc_base_0803ea39.py	2026-09-16 18:14:50.834396103 +0900
++++ acc_min.py	2026-09-16 18:14:50.861569242 +0900
+@@ -46,7 +46,7 @@
+ 
+ from ur15_cell_spec import SHOULDER_HEIGHT, TILT, YOKE_SPREAD  # noqa: E402
+ 
+-REF_DIR = Path("/home/rlrk/Downloads/ur15-dual-arm-cell")
++REF_DIR = HERE / "reference" / "ur15-dual-arm-cell"   # the repo copy (was ~/Downloads, absent since); Rs1 Q3/Q9
+ REF_JSON = REF_DIR / "ur15-dual-arm-cell.json"
+ J6 = ["shoulder_pan_joint", "shoulder_lift_joint", "elbow_joint",
+       "wrist_1_joint", "wrist_2_joint", "wrist_3_joint"]
+@@ -196,8 +196,13 @@
+     # --- the limit leg, which the position legs cannot see -----------------------------------
+     # p5 -163, unconditional: joint LIMITS do not enter FK, so no amount of tool-landing evidence
+     # touches them, and the reference's poses reach |q| = 5.63 rad against a 6.283 rad limit --
+-    # they never come near it, so a wrong limit passes in silence.  Convention #2 says the axis
+-    # and the limit inverted together, atomically; that is exactly [lo, hi] -> [-hi, -lo].
++    # they never come near it, so a wrong limit passes in silence.  ⛔ The rule this leg tested
++    # from 07-29 to 09-16 was [lo, hi] -> [-hi, -lo] -- the SIGN-FLIP convention (q_R = -q_L).  The
++    # mirror build does not use it: it flips the joint AXIS and keeps q (make_ko_mirror.py:16-19;
++    # PZ-216 measured q_R = q_L to 2.2e-15), and under M R(n,q) M = R(-Mn, q) the range that goes
++    # with a flipped axis and the same q is the SAME [lo, hi].  Byte-identical ranges are the
++    # requirement (DDR 73; three desks read it: p11 v3 sec 5 D6, pZ PZ-216, p0 sec 8.50).  The old
++    # rule could not fail on these assets because every stock range is symmetric.
+     out.append("")
+     out.append("=== LEG limit (static, no FK): mirrored [lo,hi] must equal the stock [-hi,-lo] ===")
+     out.append("    ⛔ Position legs are blind here: limits are not in the kinematics, and the")
+@@ -211,7 +216,7 @@
+             ja, jb = a.joint(name), b.joint(name)
+             lo_a, hi_a = float(ja.range[0]), float(ja.range[1])
+             lo_b, hi_b = float(jb.range[0]), float(jb.range[1])
+-            want = (-hi_a, -lo_a)
++            want = (lo_a, hi_a)
+             ok = abs(lo_b - want[0]) < 1e-9 and abs(hi_b - want[1]) < 1e-9
+             ax_a, ax_b = a.jnt_axis[ja.id], b.jnt_axis[jb.id]
+             ax_ok = bool(np.allclose(ax_b, -ax_a))
+```
+
+#### 4.2 `acc_full.diff` (blob `0803ea391298` → full)
+
+```diff
+--- acc_base_0803ea39.py	2026-09-16 18:14:50.834396103 +0900
++++ acc_full.py	2026-09-16 18:14:50.885949784 +0900
+@@ -46,7 +46,7 @@
+ 
+ from ur15_cell_spec import SHOULDER_HEIGHT, TILT, YOKE_SPREAD  # noqa: E402
+ 
+-REF_DIR = Path("/home/rlrk/Downloads/ur15-dual-arm-cell")
++REF_DIR = HERE / "reference" / "ur15-dual-arm-cell"   # the repo copy (was ~/Downloads, absent since); Rs1 Q3/Q9
+ REF_JSON = REF_DIR / "ur15-dual-arm-cell.json"
+ J6 = ["shoulder_pan_joint", "shoulder_lift_joint", "elbow_joint",
+       "wrist_1_joint", "wrist_2_joint", "wrist_3_joint"]
+@@ -196,10 +196,16 @@
+     # --- the limit leg, which the position legs cannot see -----------------------------------
+     # p5 -163, unconditional: joint LIMITS do not enter FK, so no amount of tool-landing evidence
+     # touches them, and the reference's poses reach |q| = 5.63 rad against a 6.283 rad limit --
+-    # they never come near it, so a wrong limit passes in silence.  Convention #2 says the axis
+-    # and the limit inverted together, atomically; that is exactly [lo, hi] -> [-hi, -lo].
++    # they never come near it, so a wrong limit passes in silence.  ⛔ The rule this leg tested
++    # from 07-29 to 09-16 was [lo, hi] -> [-hi, -lo] -- the SIGN-FLIP convention (q_R = -q_L).  The
++    # mirror build does not use it: it flips the joint AXIS and keeps q (make_ko_mirror.py:16-19;
++    # PZ-216 measured q_R = q_L to 2.2e-15), and under M R(n,q) M = R(-Mn, q) the range that goes
++    # with a flipped axis and the same q is the SAME [lo, hi].  Byte-identical ranges are the
++    # requirement (DDR 73; three desks read it: p11 v3 sec 5 D6, pZ PZ-216, p0 sec 8.50).  The old
++    # rule could not fail on these assets because every stock range is symmetric.
+     out.append("")
+-    out.append("=== LEG limit (static, no FK): mirrored [lo,hi] must equal the stock [-hi,-lo] ===")
++    out.append("=== LEG limit (static, no FK): mirrored [lo,hi] must equal the stock [lo,hi] "
++               "(axis flipped, q kept; the 07-29 rule [-hi,-lo] was the sign-flip convention) ===")
+     out.append("    ⛔ Position legs are blind here: limits are not in the kinematics, and the")
+     out.append("    reference's largest |joint| is far inside the range, so a wrong limit is silent.")
+     lim_ok, lim_n = True, 0
+@@ -211,7 +217,7 @@
+             ja, jb = a.joint(name), b.joint(name)
+             lo_a, hi_a = float(ja.range[0]), float(ja.range[1])
+             lo_b, hi_b = float(jb.range[0]), float(jb.range[1])
+-            want = (-hi_a, -lo_a)
++            want = (lo_a, hi_a)
+             ok = abs(lo_b - want[0]) < 1e-9 and abs(hi_b - want[1]) < 1e-9
+             ax_a, ax_b = a.jnt_axis[ja.id], b.jnt_axis[jb.id]
+             ax_ok = bool(np.allclose(ax_b, -ax_a))
+@@ -227,10 +233,10 @@
+     out.append(f"  -- limit: {'all ' + str(lim_n) + ' joints consistent' if lim_ok else 'MISMATCH'}"
+                f" (axis inversion checked alongside, which is the other half of the atomic pair)")
+     if sym_all:
+-        out.append("  ⚠ HONEST SCOPE: every stock range is symmetric about zero, so [-hi,-lo] "
+-                   "equals [lo,hi] and this leg CANNOT fail on these assets.  It is a standing "
+-                   "check for the day a range is not symmetric -- today it confirms the axes are "
+-                   "inverted and records that the limits had nothing asymmetric to preserve.")
++        out.append("  ⚠ HONEST SCOPE: every stock range is symmetric about zero, so [lo,hi] and the "
++                   "sign-flip rule's [-hi,-lo] coincide and this leg CANNOT tell the two rules apart "
++                   "on these assets.  It is a standing check for the day a range is not symmetric -- "
++                   "today it confirms the axes are inverted and the ranges are byte-identical.")
+ 
+     text = "\n".join(out) + "\n"
+     (HERE / "UR15_MIRROR_ACCEPTANCE_20260729.txt").write_text(text)
+```
+
+#### 4.3 `ast_pred2.py`
+
+```python
+"""Generalised DoD predicate (same rules as ast_pred.py: N1 sorted import aliases, N2 merged adjacent
+Constants in a JoinedStr, N3 a JoinedStr without placeholders is a Constant, imports compared as name
+sets with deletion forbidden) but the statement diff is RECURSIVE: bodies of FunctionDef / For / While /
+If / With / Try are compared statement by statement, so the deepest differing statements are reported
+with their path, e.g. "main>for>for>Assign want".  Allowed paths are given on the command line.
+argv: base.py candidate.py [allowed-path ...]   -> prints every differing statement path, PASS/FAIL"""
+import ast, sys
+
+class Norm(ast.NodeTransformer):
+    def visit_Import(self, n):
+        n.names = sorted(n.names, key=lambda a: (a.name, a.asname or "")); return n
+    def visit_ImportFrom(self, n):
+        n.names = sorted(n.names, key=lambda a: (a.name, a.asname or "")); return n
+    def visit_JoinedStr(self, n):
+        self.generic_visit(n); vals = []
+        for v in n.values:
+            if isinstance(v, ast.Constant) and vals and isinstance(vals[-1], ast.Constant):
+                vals[-1] = ast.Constant(value=vals[-1].value + v.value)
+            else:
+                vals.append(v)
+        if all(isinstance(v, ast.Constant) for v in vals):
+            return ast.Constant(value="".join(v.value for v in vals))
+        n.values = vals; return n
+
+def label(s):
+    t = type(s).__name__
+    if isinstance(s, (ast.FunctionDef, ast.AsyncFunctionDef, ast.ClassDef)):
+        return f"{t} {s.name}"
+    if isinstance(s, ast.Assign) and len(s.targets) == 1:
+        tg = s.targets[0]
+        return f"Assign {tg.id if isinstance(tg, ast.Name) else ast.unparse(tg)}"
+    if isinstance(s, ast.Expr) and isinstance(s.value, ast.Call):
+        a0 = s.value.args[0] if s.value.args else None          # the leading string, so two calls of the
+        lead = a0.value if isinstance(a0, ast.Constant) and isinstance(a0.value, str) else (   # same function
+            a0.values[0].value if isinstance(a0, ast.JoinedStr) and a0.values                  # are told apart
+            and isinstance(a0.values[0], ast.Constant) else "")
+        return f"Expr {ast.unparse(s.value.func)}({lead[:24]!r})"
+    return t
+
+BODIES = ("body", "orelse", "finalbody", "handlers")
+
+def diff(bs, cs, path, out):
+    """Recursive statement-list diff.  Unequal lengths at any level -> reported as a structural difference."""
+    if len(bs) != len(cs):
+        out.append((">".join(path) or "<module>", f"statement count {len(bs)} vs {len(cs)}", False)); return
+    for b, c in zip(bs, cs):
+        if ast.dump(b) == ast.dump(c):
+            continue
+        p = path + [label(b)]
+        # descend if both are compound statements of the same type with the same header
+        if type(b) is type(c) and any(hasattr(b, k) for k in BODIES):
+            hb = {k: getattr(b, k) for k in BODIES if hasattr(b, k)}
+            hc = {k: getattr(c, k) for k in BODIES if hasattr(c, k)}
+            # header equality: dump with the bodies emptied
+            def hdr(n):
+                n2 = type(n)(**{f: (list() if f in BODIES else getattr(n, f)) for f in n._fields}); return ast.dump(n2)
+            if hdr(b) == hdr(c):
+                for k in hb:
+                    diff(hb[k], hc[k], p + ([k] if k != "body" else []), out)
+                continue
+        out.append((">".join(p), "differs", None))
+
+def import_names(tree):
+    s = set()
+    for n in ast.walk(tree):
+        if isinstance(n, (ast.Import, ast.ImportFrom)):
+            s |= {(getattr(n, "module", None), a.name, a.asname) for a in n.names}
+    return s
+
+def main(base, cand, allowed):
+    B = Norm().visit(ast.parse(open(base).read())); C = Norm().visit(ast.parse(open(cand).read()))
+    out = []; diff(B.body, C.body, [], out); ok = True
+    miss = import_names(B) - import_names(C)
+    if miss:
+        ok = False; print(f"NOT-ALLOWED import names deleted: {sorted(map(str, miss))}")
+    for p, what, flag in out:
+        a = (flag is None) and (p in allowed)
+        print(f"{'ALLOWED    ' if a else 'NOT-ALLOWED'} {p}  [{what}]"); ok &= a
+    print("PASS" if ok else "FAIL"); return 0 if ok else 1
+
+if __name__ == "__main__":
+    sys.exit(main(sys.argv[1], sys.argv[2], set(sys.argv[3:])))
+```
+
+### 5. Needed
+
+- p4: the variant (min / full).  pZ: the prereg with the mounting overrides and the chosen variant's allowed set (paths above).
+- Then this desk lands from the clean worktree (commit in the worktree, compare-and-swap ref move, pathspec-limited index reset as in §8.51), predicate re-run on the landed blob, and the 0.22/45 run repeated on the landed blob in a scratch worktree with the record restored.  ⛔ nothing landed yet; nothing unlocked.
