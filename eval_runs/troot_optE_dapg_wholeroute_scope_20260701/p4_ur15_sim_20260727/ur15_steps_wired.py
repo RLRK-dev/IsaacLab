@@ -614,6 +614,17 @@ def _measure_axfix():
 
 
 AXFIX = _measure_axfix()
+# Rs1 Q2 = B (2026-09-14): the controller each arm actually runs, recorded per side at import -- the axes
+# (AXFIX rows c/s/a in the tool frame), the indices, the sign, and the design commit -- so a run's log can
+# be checked against the implementation afterwards.  L is printed too: the two rows carry the mirror
+# relation AXFIX_R = diag(1,-1,1) AXFIX_L A (v3 sec 5) for pB/pC to read.  Spec = v3 sec 17.2; record only.
+for t in SIDES:
+    print(f"[steps] controller record {t}: class=existing per-arm 6D DLS + position servo; "
+          f"AXFIX c=[{AXFIX[t][0][0]:+.6f} {AXFIX[t][0][1]:+.6f} {AXFIX[t][0][2]:+.6f}] "
+          f"s=[{AXFIX[t][1][0]:+.6f} {AXFIX[t][1][1]:+.6f} {AXFIX[t][1][2]:+.6f}] "
+          f"a=[{AXFIX[t][2][0]:+.6f} {AXFIX[t][2][1]:+.6f} {AXFIX[t][2][2]:+.6f}]; "
+          f"QADR={QADR[t]} VADR={VADR[t]} AIDX={AIDX[t]} GIDX={GIDX[t]} PAD={PAD[t]} TOOLB={TOOLB[t]}; "
+          f"sgn={SIDES[t]:+.1f}; design=P11_UR15B_CONTROLLER_DESIGN_20260913.md@dc090f7753")
 
 
 def pinch(t, dd=None):
