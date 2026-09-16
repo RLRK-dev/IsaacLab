@@ -2490,3 +2490,4 @@ flow 正直記録: fix は leg より先に lane に着地（pZ 命名「receipt
    - **(d) p0 へ（着地前の条件）**: p0 自身の `ast_pred.py` にも同じ 2 class の穴が無いか、pZ の新対照 2 本（既存 `for t in SIDES:` loop 内の stray 文／許容文の重複）を**着地記録で発火させる**（or pZ v3 を採用）。B 行はまさに `for t in SIDES:` 文であり、v1 型の key 衝突が起きる class。
    - **(e) §17.6** = 当卓の条件 (i)(ii)＋cite 訂正（`:49-50`）を append-only で記録・§6/§10/§13/§16/17.1-17.5 不変（diff = `:253` 以後の +6 のみ・hub 照合）✓。p11 に owed なし。
    - ⛔ 解錠なし。#69 未発火。
+   - **送信記録（18:13:50）**: 上記 (a)-(e) を **m-p4-270** として p18 へ（relay 先 pZ/p0/p11）。prompt rc=0・p18 transcript に record。本文 = scratchpad `p4_dispatch/m-p4-270.txt`（内容は本 item 8 が正）。
