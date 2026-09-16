@@ -47992,3 +47992,12 @@ ALT-1 (downgrade) — not chosen (the human's word). ALT-2 (`agent prompt`) — 
 - ⛔ 解錠なし・run 0（当卓）・当卓は裁定しない。Rs1 へ: p1A label（返却 leg）・p4 の窓拡張（異議があれば）・push。
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1484 — ✅ **p4 m-p4-274（窓 B 着地 `96e9ece175` を確認・受入は pZ leg 後／R0 の設計点（STEPS rows 2–5 GL/GR の出所）への chain court の読み → p11 が決定・`7867c40c7e`）→ 374（→ p11 cc pZ p0・全 hold）／372 の p4 leg 完了**（当卓 2026-09-16 18:28–18:31 JST 実測）
+
+- **着信**: m-p4-274 `:44270`（`type=attachment`・`09:28:56.449Z` = 18:28:56 JST）。
+- **m-p4-274 の検証**: kickoff item 12 @ `7867c40c7e`（18:28:27・parent `777294f96c`・+5/−0: 96e9ece175 の object 読み・R0 設計点への読み (b) spec nominal rest 行を拘束＋(a) U0 実測を報告・各卓の要件）。着地 pin（+11/−0・hunk `@-616,0 +617,11`・literal @dc090f7753・後続 driver commit 0）= 当卓 §1483 の読みと一致。pZ R0 prereg row 4 @ `bf4433bfe6` = 「targets | STEPS の L/R 列 … constants resolved from the spec and the driver's own literal definitions」（当卓実読）— p4 は GL/GR を覆わないと読む。**時系列**: pZ PZ-228 の addendum 2（`511a178176`・rows 2–5 = L1 cell dump からの静的値 GL/GR）は 372 として同じ窓で p4 へ配達（18:30:20）— p4 は 372 未読で m-p4-274 を書いた。出所の決定 = p11（p4 の語「推奨・決定は p11」）・当卓は裁定しない。
+- **hub の動き**: **372 の p4 leg 完了**（p4 idle → 18:30:19.999 → `09:30:20.030Z` DELIVERED・`verify` rc 0・368 は次窓）。**374** = m-p4-274（3,508 字・relay body sha256 `c647e66be940ce9e…`・composed = `bodies/m-p18-374.txt`）→ p11 ARM-CONTROL-DESIGN cc pZ IMPL-VERIFIER・p0 IMPL-BUILDER: 3 卓 working ⇒ 全 hold（18:30:4x・rc 2・`verify` rc 0）。**p11 宛の hold は 12 通**（354/357/358/359/360/361/363/364/366/368/371/372/374 のうち p11 leg）— p11 は 17:48 から連続 working（cable-premise cycle 2 の 5 体 debate = p11 の記載）・当卓は中断しない（Escape なし・別件 queue なし）・idle で 1 窓 1 通・優先 = 374（設計の決定）→ 366 → 371 → 359 → 360 → 361 → 363 → 364 → 368 → 372 → 358 → 357 → 354。
+- ⛔ 解錠なし・run 0（当卓）・当卓は裁定しない。
+
+**Banked — 時刻は本節 commit の author date が正。**
