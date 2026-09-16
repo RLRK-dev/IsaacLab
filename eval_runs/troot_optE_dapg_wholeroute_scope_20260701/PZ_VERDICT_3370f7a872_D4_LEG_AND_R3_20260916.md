@@ -1,0 +1,34 @@
+# pZ — verdict on D4 `3370f7a872`: the D4 leg (`cb787871f0`, 9 rows) and the static rows of R3 (`98d8e63173`)
+
+**Author** pZ / IMPL-VERIFIER (`w2:pZ`) · **Written** 2026-09-16 17:58 JST on m-p18-356. Naming per m-p18-256: **Rs1 = the human; Rs2 = p4/CC**.
+**Object**: `3370f7a872` (2026-09-16 17:48:52 JST, parent `5762f891b8`, **1 file, +65/−45**), driver blob `d2bc133e1320`, content sha256 **`a6a42f06a058c0ed30a53d698984de5e17a520871b2ca4a801488689fed97f72`** (4,042 lines). Judged against the driver's previous blob **`75eefef4e27e`** @ `22feba17a6` (0 driver commits between — the base my rows were pinned to). ⛔ Static only: the driver was never imported; `py_compile` is the only execution. Rs1 supplement b: **this is verification of a landing, not acceptance** — acceptance is p4's word after this. §17.4 stop-cause tag: **none** (no run, no stop occurred).
+
+## D4 leg (rows of `cb787871f0`)
+
+| # | row | verdict | measured |
+|---|---|---|---|
+| 1 | scope | **holds** (one precision note) | five zero-context hunks `-1263,2 / -1276,2 / -1283 / -1288,39 / -2990`, every one inside the three base statements as the AST spans them: `attitude_tilt_deg` **:1263-1285**, `vertical_cap_deg` **:1288-1326**, the print **:2987-2990**; the four regions outside (above :1263, between the functions, between the cap and the print, below the print) **byte-identical** delta-aligned. ⚠ My prereg typed the print as ":2985-2988" — the statement's AST span is :2987-2990 (the hunk at :2990 is its last line); the row's intent (the statement) is what was judged |
+| 2 | DoD (b) predicate — my own | **PASS** | `pz_d4_pred.py` (banked in the prereg): changed set = **exactly** {`Expr print:[steps] vertical check`, `FunctionDef attitude_tilt_deg`, `FunctionDef vertical_cap_deg`}, outside the allowed set = ∅; the same instrument fired FAIL on the literal flip and the stray-print controls before the object existed |
+| 3 | control invariance — mechanical | **holds** | `pz_ctrl2.py`: live-state writes **0 → 0**; `d.ctrl` writes **7 → 7**; `mj_step` sites **11 → 11**; 34-line ordered control sequence sha256 **`a1cf9bf78a568ab6`** on both |
+| 4 | gate-inert | **holds** | consumers of `vertical_cap_deg` in the landed blob: the print only (`:3006` no-arg, `:3009` `'L'`/`'R'`); `attitude_tilt_deg` called only inside the cap (`:1307` lambda); no new reader anywhere; gates/seat/`VERTICAL_TOL_DEG` gate lie in the byte-identical regions |
+| 5 | structure == v3 §6, read from the landed AST | **holds** | `attitude_tilt_deg(t, yaw, roll)`: `v = slot_centre(t) − pinch(t)`, `xmat[TOOLB[t]]ᵀ`, `(_rdes(yaw, roll) @ AXFIX[t]) @ v_tool`, `acos(−z)`. `vertical_cap_deg(side=None)`: `for t in (list(SIDES) if side is None else [side])`, `sgn = SIDES[t]` (the imported name — **no literal side sign in any added line**), `attitude_tilt_deg(t, sgn·y, sgn·r)`, upright raise and min-tilted raise **per side** (messages prefixed by `t`), input-side selection `abs(r) ≥ 1e-9`, `caps[t] = min(tilted)`, `return min(caps.values())` (:1344) |
+| 6 | print contract | **holds** | prefix `[steps] vertical check: allowance {VERTICAL_TOL_DEG:4.2f} deg, cap {…:4.2f} deg …` kept byte-for-byte; appended tail ` (L {cap_L:4.2f} / R {cap_R:4.2f}, each side under the attitude it receives)`; forbidden substrings in the **new** tail: none. Of the 18 string literals on added lines, one contains "fail" — `"it could fail to distinguish and the cap is undefined"` — which is the base's own raise text (base `:1325`) re-indented, not a new word. RUN_METRICS writer untouched (row 1) |
+| 7 | numbers | → R3 below | |
+| 8 | no run | **holds** | `py_compile` OK; driver not imported; no `P4_*` env |
+| 9 | pins | **holds** | parent blob `75eefef4e27e` → landed `d2bc133e1320` / `a6a42f06…72`; p0's §8.51 @ `4b328fb025` read **after** the measurement — its figures (+65/−45, the five hunks, `:1263`/`:1292`/`:1344`/`:3005-3010`, PASS + the three controls) agree with mine; not used as evidence |
+
+## R3 (rows of `98d8e63173`) — the static part
+
+| row | verdict | measured |
+|---|---|---|
+| R3-iv side branches, text vs text | **holds** | `side="L"`/`"R"` → the loop runs one side and `min` over a one-entry dict = that side's `cap_t`; `None` → `min_t cap_t`; the per-side path applies `(SIDES[t]·yaw, SIDES[t]·roll)` and both raises per side; `attitude_tilt_deg(t, …)` reads `slot_centre(t)`, `pinch(t)`, `TOOLB[t]`, `AXFIX[t]`. Operation for operation this is the function my instrument `pz_r3.py` evaluates (`tilt = acos((v_c·sin ρ − v_a·cos ρ)/|v|)`, ρ = `SIDES[t]·r`), so the pre-computed expectations apply to this code |
+| R3-iii calibration per side (AST) | **holds structurally** | both raises are inside the per-side loop, on per-side lists; prediction from the prereg: symmetric jaw → no raise (0.00 / 5.730 both sides); the asymmetric row (`right_spring_link_joint` 0.3 / left 0) → the **upright raise fires on both sides** (8.59° > 0.5°) before any cap prints |
+| R3-v mount-independence | **holds structurally** | the landed function reads only tool-frame quantities and `_rdes`; nothing from the mount |
+| R3-i / R3-ii numbers | **expectations stand; printed values unmeasured** | symmetric states: `cap_L = cap_R = min = 5.729578°` (= 0.10 rad, the record's 5.73); asymmetric: `cap_L 2.864789 / cap_R 14.323945`, `v_c = −0.1494` both sides. The landed print's values exist only under an authorized run (#69) — not measured here, not implied |
+| R3-vi / R3-vii | as pre-registered | the asymmetric state is the discriminating row (11.46° between the conventions); no run |
+
+## Verdict
+**All nine D4 rows hold; the static R3 rows hold; the numeric R3 rows keep their pre-computed expectations and await a run.** The one deviation is mine (row 1's typed line range vs the statement's AST span) and does not change the judgment. Landed ≠ accepted (Rs1 supplement b): acceptance = p4.
+
+## Provenance
+`git show`/`diff -U0`/`rev-parse`/`cat-file`; the two banked instruments `pz_d4_pred.py` and `pz_ctrl2.py` (appendices of `cb787871f0`), `pz_r3.py` (appendix of `98d8e63173`); AST spans by `ast.parse`; `py_compile`. Zero tracked-content modifications by pZ. Committed by pZ under the standing custody form (m-p18-344), pathspec-limited, --no-verify, no push.
