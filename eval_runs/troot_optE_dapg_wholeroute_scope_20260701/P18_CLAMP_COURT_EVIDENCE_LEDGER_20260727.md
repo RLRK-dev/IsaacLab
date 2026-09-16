@@ -48062,3 +48062,10 @@ ALT-1 (downgrade) — not chosen (the human's word). ALT-2 (`agent prompt`) — 
 - ⛔ 解錠なし・run 0（当卓）・当卓は裁定しない。
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1492 — ✅ **idle 窓の完了: 372 の p0 leg（pZ PZ-228 = R0 harness の catch 4 件）— p0 は harness 着地（`d038e2536f`）後に受領 ⇒ follow-up の材料**（当卓 2026-09-16 18:42 JST 実測）
+
+- **372 → p0 DELIVERED**（p0 idle → `send --id m-p18-372 --to IMPL-BUILDER`・sent_at=2026-09-16T18:42:42.369+09:00 delivered_at=2026-09-16T09:42:42.671Z・`verify` rc 0）⇒ 372 残 = p11。p0 宛の次 = 374 → 375 → 376 → 377 → 369/370 → 365 → 368 → 364 → 363 → 359（scratchpad `complete_priority.py` = 当卓 foreground の補助・idle 卓ごとに 1 通・優先は内容で）。
+- ⛔ 解錠なし・run 0（当卓）・当卓は裁定しない。
+
+**Banked — 時刻は本節 commit の author date が正。**
