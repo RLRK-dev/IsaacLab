@@ -609,3 +609,20 @@ numbers unknown until their basis and the scope of the product change are set.
   and an empty B-guide assignment are bookkeeping examples, not physical
   contact, load, deformation, falling or cycle-time results. Do not add another
   arm, upper retainer, cable fixture or selected rail from these diagrams.
+
+## Receiving target and hand-family correspondence on 2026-09-16
+
+- `analysis/hvjb_receiving_interfaces_v01.md` links four target classes to
+  existing source-image markers, saved mesh metadata and H04/H05/H06/H07.
+  H06 for baseplate transport and H07 for panel holding remain family-level
+  comparisons. No contact surfaces, grasp poses, new meshes or motion are set.
+- Preserve the distinction between A_END/B_END role placeholders and the
+  observed inner-housing/ring-terminal groups. They do not map one-to-one;
+  individual A/B origins, endpoints and simultaneous independent holds remain
+  unresolved. Image markers locate targets, not permissible grasp points.
+- P01 remains the case, not a movable baseplate. P07's approximately
+  141 x 4 x 61 mm is a display-mesh envelope. I01-I05 use official STEP, but
+  their correspondence to individual 2025 video terminals and allowed grasp
+  surfaces remain unconfirmed. L01-L07 are photo features, not wire counts.
+  Retain T050's sample-specific 40 mm/15-degree baseline without imposing its
+  cable dimensions on all wires. No new arm, retainer or rail is selected.

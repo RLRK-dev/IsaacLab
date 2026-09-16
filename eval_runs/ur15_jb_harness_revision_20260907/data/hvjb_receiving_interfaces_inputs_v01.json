@@ -1,0 +1,72 @@
+{
+  "revision": "hvjb_receiving_interfaces_inputs_v01",
+  "title_ja": "Cへの受渡し：実物の対象と手先を対応する",
+  "targets": [
+    {
+      "id": "BASE",
+      "name_ja": "A 下板ユニット",
+      "entity": "V25_BASE_PLATE",
+      "profile": "H06",
+      "views": [24, 146],
+      "default_view": 24,
+      "role_ja": "A主担当からCの受けF-Cへ本体支持を渡す。",
+      "contact_intent_ja": "H06系の幅広対向爪を比較の起点にする。下板で荷重を受けられる側面・輪郭を特定してから接触域を決める。",
+      "clear_ja": "接触器、抵抗、端子、配線を本体の吊り手にしない。受け面と指の抜け道を空ける。",
+      "next_ja": "独立下板の全輪郭・厚さ・裏面支持・許容把持面を対応する。F-Cの受けと指が同時に触れる場所、開放経路を決める。",
+      "model_note_ja": "V25_BASE_PLATEの独立メッシュはない。P01の筐体底面を流用しない。H06の筐体用寸法をそのまま下板へ移さない。",
+      "selected_contact_surfaces": null,
+      "world_grasp_pose_m_rad": null
+    },
+    {
+      "id": "PANEL",
+      "name_ja": "B ヒューズ板ユニット",
+      "entity": "V25_FUSE_PANEL",
+      "profile": "H07",
+      "views": [24, 146],
+      "default_view": 24,
+      "role_ja": "B主担当からC主担当へ、本体保持を渡す候補。締結中はC主担当が板を保持する。",
+      "contact_intent_ja": "H07系の薄い側縁用2本指を比較する。渡す手と受ける手の接触域を別々に設けられるかを先に確認する。",
+      "clear_ja": "ヒューズ胴、導電部、固定穴、配線、工具通路を避ける。指を着座面の下へ残さない。",
+      "next_ja": "板の全輪郭・取付部と、B/Cの手を同時に近づけられる二つの把持域を対応する。直接手渡しの成立は未確認。",
+      "model_note_ja": "P07は対応候補だが、2025年映像との同一版は未確認。現在の表示外形は約141×4×61 mmで、製造寸法ではない。",
+      "selected_contact_surfaces": null,
+      "world_grasp_pose_m_rad": null
+    },
+    {
+      "id": "INNER",
+      "name_ja": "樹脂ハウジング付き自由端",
+      "entity": "V25_INNER_ENDS",
+      "profile": "H05",
+      "views": [154, 170],
+      "default_view": 154,
+      "role_ja": "ハウジングの姿勢保持と、線を案内する役割を対応する。A/Bのどちらの補助が持つかは端末ごとの所属が決まってから。",
+      "contact_intent_ja": "H05系の専用外形ポケットを比較する。接触可能と確認した剛体面で向きを決め、必要な操作力を受ける面を別に確認する。",
+      "clear_ja": "接点、シール、ロック可動部、ケーブル出口を空ける。筐体開口を通すときは指を含めた外形を扱う。",
+      "next_ja": "映像の各端末とI01〜I05の対応、A/B所属、配線経路、同時保持数、開口通過の個別順序を追う。CADの樹脂面を一律に許容把持面としない。",
+      "model_note_ja": "I01〜I05は公式STEPを用いた対応候補。裸ハウジングの形状はあるが、映像の端末との一対一対応・把持許容面・配線込みの外形は未確定。",
+      "selected_contact_surfaces": null,
+      "world_grasp_pose_m_rad": null,
+      "source_station_assignment": null
+    },
+    {
+      "id": "RING",
+      "name_ja": "丸端子付き自由端",
+      "entity": "V25_RING_ENDS",
+      "profile": "H04",
+      "views": [154, 170],
+      "default_view": 154,
+      "role_ja": "金属端子を避け、端子側の被覆と根元を保持する方針を継承する。A/Bの所属、接続先、受渡し先は線ごとに対応する。",
+      "contact_intent_ja": "H04/T050の2本指・前後2接触区間を起点にする。端子側の黒被覆と根元被覆を対象にし、対象線径に合わせる。",
+      "clear_ja": "金属環、端子穴、電気接続面、締付工具の通路を空ける。被覆を持つことで締結反力を受けられるとは未確認。",
+      "next_ja": "端末ごとの黒被覆長・線径・許容圧と端子との相対ずれを確認し、次の接続先と保持の引継ぎを対応する。",
+      "model_note_ja": "L01〜L07は写真の可視特徴に基づく概略モデル。実線材の全数ではなく、映像の各自由端への確定対応でもない。",
+      "selected_contact_surfaces": null,
+      "world_grasp_pose_m_rad": null,
+      "source_station_assignment": null
+    }
+  ],
+  "scope_ja": "既存の対象位置・指先系統を結ぶ図。画像の印は対象の所在で、把持点・把持許容領域・実寸座標ではない。2022年写真と2025年映像は同一製造版未確認。",
+  "group_mapping_ja": "前図のA_END/B_ENDは独立した案内役を追う仮ラベル。内側ハウジング群／丸端子群へ一対一に割り当てない。どちらにも複数の端末種別があり得るが、現在は所属未確定。",
+  "selected_arm_count": 5,
+  "physical_acceptance_verdict": null
+}

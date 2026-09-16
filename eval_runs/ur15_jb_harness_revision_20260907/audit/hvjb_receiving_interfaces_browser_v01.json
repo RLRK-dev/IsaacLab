@@ -1,0 +1,381 @@
+{
+  "observed_at": "2026-09-16T10:03:09.402Z",
+  "directory": "/home/rlrk/Downloads/THREAD_HVJB_受渡し対象と手先_v01_20260916",
+  "cases": [
+    {
+      "state": {
+        "target": "BASE",
+        "second": 24,
+        "entity": "V25_BASE_PLATE",
+        "profile": "H06",
+        "markers": [
+          {
+            "label": "1",
+            "xy_px": [
+              1314,
+              679
+            ],
+            "text_ja": "下板の見えている縁。筐体底面ではない。",
+            "entity": "V25_BASE_PLATE"
+          }
+        ],
+        "candidates": []
+      },
+      "markers": [
+        {
+          "entity": "V25_BASE_PLATE",
+          "xy": "1314,679"
+        }
+      ],
+      "candidates": [],
+      "source": "evidence/assembly_024s.png",
+      "size": [
+        1920,
+        1080
+      ],
+      "intent": "H06系の幅広対向爪を比較の起点にする。下板で荷重を受けられる側面・輪郭を特定してから接触域を決める。",
+      "clear": "接触器、抵抗、端子、配線を本体の吊り手にしない。受け面と指の抜け道を空ける。",
+      "next": "独立下板の全輪郭・厚さ・裏面支持・許容把持面を対応する。F-Cの受けと指が同時に触れる場所、開放経路を決める。",
+      "profile": "H06系 · 既存仕様から比較"
+    },
+    {
+      "state": {
+        "target": "BASE",
+        "second": 146,
+        "entity": "V25_BASE_PLATE",
+        "profile": "H06",
+        "markers": [
+          {
+            "label": "2",
+            "xy_px": [
+              985,
+              453
+            ],
+            "text_ja": "同じ搬送中の下板側部品。板の縁・把持位置は遮蔽。",
+            "entity": "V25_BASE_PLATE"
+          }
+        ],
+        "candidates": []
+      },
+      "markers": [
+        {
+          "entity": "V25_BASE_PLATE",
+          "xy": "985,453"
+        }
+      ],
+      "candidates": [],
+      "source": "evidence/assembly_146s.png",
+      "size": [
+        1920,
+        1080
+      ],
+      "intent": "H06系の幅広対向爪を比較の起点にする。下板で荷重を受けられる側面・輪郭を特定してから接触域を決める。",
+      "clear": "接触器、抵抗、端子、配線を本体の吊り手にしない。受け面と指の抜け道を空ける。",
+      "next": "独立下板の全輪郭・厚さ・裏面支持・許容把持面を対応する。F-Cの受けと指が同時に触れる場所、開放経路を決める。",
+      "profile": "H06系 · 既存仕様から比較"
+    },
+    {
+      "state": {
+        "target": "PANEL",
+        "second": 24,
+        "entity": "V25_FUSE_PANEL",
+        "profile": "H07",
+        "markers": [
+          {
+            "label": "2",
+            "xy_px": [
+              1742,
+              305
+            ],
+            "text_ja": "右奥に別置きされたヒューズ板。",
+            "entity": "V25_FUSE_PANEL"
+          }
+        ],
+        "candidates": [
+          "P07"
+        ]
+      },
+      "markers": [
+        {
+          "entity": "V25_FUSE_PANEL",
+          "xy": "1742,305"
+        }
+      ],
+      "candidates": [
+        "P07"
+      ],
+      "source": "evidence/assembly_024s.png",
+      "size": [
+        1920,
+        1080
+      ],
+      "intent": "H07系の薄い側縁用2本指を比較する。渡す手と受ける手の接触域を別々に設けられるかを先に確認する。",
+      "clear": "ヒューズ胴、導電部、固定穴、配線、工具通路を避ける。指を着座面の下へ残さない。",
+      "next": "板の全輪郭・取付部と、B/Cの手を同時に近づけられる二つの把持域を対応する。直接手渡しの成立は未確認。",
+      "profile": "H07系 · 既存仕様から比較"
+    },
+    {
+      "state": {
+        "target": "PANEL",
+        "second": 146,
+        "entity": "V25_FUSE_PANEL",
+        "profile": "H07",
+        "markers": [
+          {
+            "label": "1",
+            "xy_px": [
+              840,
+              300
+            ],
+            "text_ja": "ユニットと一緒に運ばれるヒューズ板。",
+            "entity": "V25_FUSE_PANEL"
+          }
+        ],
+        "candidates": [
+          "P07"
+        ]
+      },
+      "markers": [
+        {
+          "entity": "V25_FUSE_PANEL",
+          "xy": "840,300"
+        }
+      ],
+      "candidates": [
+        "P07"
+      ],
+      "source": "evidence/assembly_146s.png",
+      "size": [
+        1920,
+        1080
+      ],
+      "intent": "H07系の薄い側縁用2本指を比較する。渡す手と受ける手の接触域を別々に設けられるかを先に確認する。",
+      "clear": "ヒューズ胴、導電部、固定穴、配線、工具通路を避ける。指を着座面の下へ残さない。",
+      "next": "板の全輪郭・取付部と、B/Cの手を同時に近づけられる二つの把持域を対応する。直接手渡しの成立は未確認。",
+      "profile": "H07系 · 既存仕様から比較"
+    },
+    {
+      "state": {
+        "target": "INNER",
+        "second": 154,
+        "entity": "V25_INNER_ENDS",
+        "profile": "H05",
+        "markers": [
+          {
+            "label": "1",
+            "xy_px": [
+              1100,
+              610
+            ],
+            "text_ja": "上縁から外へ出る内側ハウジング付き自由端。",
+            "entity": "V25_INNER_ENDS"
+          }
+        ],
+        "candidates": [
+          "I01",
+          "I02",
+          "I03",
+          "I04",
+          "I05"
+        ]
+      },
+      "markers": [
+        {
+          "entity": "V25_INNER_ENDS",
+          "xy": "1100,610"
+        }
+      ],
+      "candidates": [
+        "I01",
+        "I02",
+        "I03",
+        "I04",
+        "I05"
+      ],
+      "source": "evidence/assembly_154s.png",
+      "size": [
+        1920,
+        1080
+      ],
+      "intent": "H05系の専用外形ポケットを比較する。接触可能と確認した剛体面で向きを決め、必要な操作力を受ける面を別に確認する。",
+      "clear": "接点、シール、ロック可動部、ケーブル出口を空ける。筐体開口を通すときは指を含めた外形を扱う。",
+      "next": "映像の各端末とI01〜I05の対応、A/B所属、配線経路、同時保持数、開口通過の個別順序を追う。CADの樹脂面を一律に許容把持面としない。",
+      "profile": "H05系 · 対象別に適合"
+    },
+    {
+      "state": {
+        "target": "INNER",
+        "second": 170,
+        "entity": "V25_INNER_ENDS",
+        "profile": "H05",
+        "markers": [
+          {
+            "label": "1",
+            "xy_px": [
+              723,
+              449
+            ],
+            "text_ja": "筐体側面の開口を通る内側端末。",
+            "entity": "V25_INNER_ENDS"
+          },
+          {
+            "label": "2",
+            "xy_px": [
+              928,
+              550
+            ],
+            "text_ja": "もう一方の開口側にも自由端が残る。",
+            "entity": "V25_INNER_ENDS"
+          }
+        ],
+        "candidates": [
+          "I01",
+          "I02",
+          "I03",
+          "I04",
+          "I05"
+        ]
+      },
+      "markers": [
+        {
+          "entity": "V25_INNER_ENDS",
+          "xy": "723,449"
+        },
+        {
+          "entity": "V25_INNER_ENDS",
+          "xy": "928,550"
+        }
+      ],
+      "candidates": [
+        "I01",
+        "I02",
+        "I03",
+        "I04",
+        "I05"
+      ],
+      "source": "evidence/assembly_170s.png",
+      "size": [
+        1920,
+        1080
+      ],
+      "intent": "H05系の専用外形ポケットを比較する。接触可能と確認した剛体面で向きを決め、必要な操作力を受ける面を別に確認する。",
+      "clear": "接点、シール、ロック可動部、ケーブル出口を空ける。筐体開口を通すときは指を含めた外形を扱う。",
+      "next": "映像の各端末とI01〜I05の対応、A/B所属、配線経路、同時保持数、開口通過の個別順序を追う。CADの樹脂面を一律に許容把持面としない。",
+      "profile": "H05系 · 対象別に適合"
+    },
+    {
+      "state": {
+        "target": "RING",
+        "second": 154,
+        "entity": "V25_RING_ENDS",
+        "profile": "H04",
+        "markers": [
+          {
+            "label": "2",
+            "xy_px": [
+              847,
+              642
+            ],
+            "text_ja": "未接続の丸端子。",
+            "entity": "V25_RING_ENDS"
+          }
+        ],
+        "candidates": [
+          "L01",
+          "L02",
+          "L03",
+          "L04",
+          "L05",
+          "L06",
+          "L07"
+        ]
+      },
+      "markers": [
+        {
+          "entity": "V25_RING_ENDS",
+          "xy": "847,642"
+        }
+      ],
+      "candidates": [
+        "L01",
+        "L02",
+        "L03",
+        "L04",
+        "L05",
+        "L06",
+        "L07"
+      ],
+      "source": "evidence/assembly_154s.png",
+      "size": [
+        1920,
+        1080
+      ],
+      "intent": "H04/T050の2本指・前後2接触区間を起点にする。端子側の黒被覆と根元被覆を対象にし、対象線径に合わせる。",
+      "clear": "金属環、端子穴、電気接続面、締付工具の通路を空ける。被覆を持つことで締結反力を受けられるとは未確認。",
+      "next": "端末ごとの黒被覆長・線径・許容圧と端子との相対ずれを確認し、次の接続先と保持の引継ぎを対応する。",
+      "profile": "H04系 · 対象別に適合"
+    },
+    {
+      "state": {
+        "target": "RING",
+        "second": 170,
+        "entity": "V25_RING_ENDS",
+        "profile": "H04",
+        "markers": [],
+        "candidates": [
+          "L01",
+          "L02",
+          "L03",
+          "L04",
+          "L05",
+          "L06",
+          "L07"
+        ]
+      },
+      "markers": [],
+      "candidates": [
+        "L01",
+        "L02",
+        "L03",
+        "L04",
+        "L05",
+        "L06",
+        "L07"
+      ],
+      "source": "evidence/assembly_170s.png",
+      "size": [
+        1920,
+        1080
+      ],
+      "intent": "H04/T050の2本指・前後2接触区間を起点にする。端子側の黒被覆と根元被覆を対象にし、対象線径に合わせる。",
+      "clear": "金属環、端子穴、電気接続面、締付工具の通路を空ける。被覆を持つことで締結反力を受けられるとは未確認。",
+      "next": "端末ごとの黒被覆長・線径・許容圧と端子との相対ずれを確認し、次の接続先と保持の引継ぎを対応する。",
+      "profile": "H04系 · 対象別に適合"
+    }
+  ],
+  "mobile": {
+    "width": 480,
+    "documentWidth": 465,
+    "targets": 4
+  },
+  "local_links": [
+    "overview.png",
+    "overview.svg",
+    "notes.md",
+    "review_data.json",
+    "hand_families.json",
+    "all_workcards.json",
+    "selection.json"
+  ],
+  "exports_sha256": {
+    "overview.svg": "112f76f9cb2383fa454d573113fcaed8c0bee76c23470879503f59b1b3a8b01c",
+    "overview.png": "a43c79c166fc9eb5e52ef162c62e3e3b333e2b358e2f9a96d564af299a2a7cd4",
+    "browser_base.png": "f40ad67a331b634ac83fd79a9e23d0a1b2cc8b6d6aefb44ff2fb99161d2a2e5c",
+    "browser_panel.png": "dce8b6e8074abe1fbd6565f95ce73ceb03b8b932c8d7e2052b4807becfe29797",
+    "browser_inner.png": "856350faaa1d40a3e63841471c09a468eeb83c3cdba661e2eccf200c043946b8",
+    "browser_ring.png": "874c9e3083f68eec09c1213123d55031b908456b4c5023e7b1539d70ae20d978",
+    "browser_mobile.png": "8f72d2b7c0b7aa1a5773505607eb2e84dfc18b3e7c2921b84108bdbbbdbbea36"
+  },
+  "javascript_errors": [],
+  "scope": "UI, saved-source correspondence and display-mesh metadata only; no physical judgment"
+}

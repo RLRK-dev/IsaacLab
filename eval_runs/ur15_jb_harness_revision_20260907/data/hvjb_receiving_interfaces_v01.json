@@ -1,0 +1,836 @@
+{
+  "revision": "hvjb_receiving_interfaces_v01",
+  "title_ja": "Cへの受渡し：実物の対象と手先を対応する",
+  "targets": [
+    {
+      "id": "BASE",
+      "name_ja": "A 下板ユニット",
+      "entity": "V25_BASE_PLATE",
+      "profile": "H06",
+      "views": [
+        24,
+        146
+      ],
+      "default_view": 24,
+      "role_ja": "A主担当からCの受けF-Cへ本体支持を渡す。",
+      "contact_intent_ja": "H06系の幅広対向爪を比較の起点にする。下板で荷重を受けられる側面・輪郭を特定してから接触域を決める。",
+      "clear_ja": "接触器、抵抗、端子、配線を本体の吊り手にしない。受け面と指の抜け道を空ける。",
+      "next_ja": "独立下板の全輪郭・厚さ・裏面支持・許容把持面を対応する。F-Cの受けと指が同時に触れる場所、開放経路を決める。",
+      "model_note_ja": "V25_BASE_PLATEの独立メッシュはない。P01の筐体底面を流用しない。H06の筐体用寸法をそのまま下板へ移さない。",
+      "selected_contact_surfaces": null,
+      "world_grasp_pose_m_rad": null,
+      "entity_record": {
+        "id": "V25_BASE_PLATE",
+        "kind": "part",
+        "name_ja": "2025年映像の可搬下板",
+        "candidate_photo_ids": [],
+        "confirmed_photo_id": null,
+        "observation_ja": "24秒で金属板の表面・縁・切欠き等が部分的に見え、146秒で部品を載せた側が筐体へ運ばれる。",
+        "unresolved_ja": "輪郭の隠れた部分、板厚、材質規格、穴径と配置、裏面支持、ヒューズ板との固定、許容把持面。",
+        "evidence_frames": [
+          "plate_024",
+          "plate_146"
+        ],
+        "geometry_dimensions_m": null,
+        "mounting_points_m": null,
+        "grasp_surfaces": null,
+        "source_model_object": null
+      },
+      "hand_family": {
+        "id": "H06",
+        "name_ja": "筐体・完成品搬送用",
+        "finger_count": 2,
+        "closing_drives": 1,
+        "contact_ja": "幅広対向爪。各爪の離れた二か所に交換パッドと側面輪郭の受けを配置。",
+        "stability_intent_ja": "離れた接触域で荷重を分け、筐体の実在する側面段差・輪郭で姿勢を決める。",
+        "keep_clear_ja": "シール溝・コネクター・ハーネス・パレットとの着座域。",
+        "release_ja": "受け先へ荷重を移してから側方へ開く。下受けを着座面に挟まない。",
+        "unresolved_ja": "幅、質量、重心、実在する把持可能面と荷重。2F-85で筐体全幅をつかめるとは仮定しない。",
+        "gripper_body_policy": "Separate wide-stroke two-jaw transport hand; exact model and stroke unselected",
+        "contact_patch_count": 4
+      },
+      "model_candidates": [],
+      "view_data": [
+        {
+          "second": 24,
+          "source_frame": "plate_024",
+          "markers": [
+            {
+              "label": "1",
+              "xy_px": [
+                1314,
+                679
+              ],
+              "text_ja": "下板の見えている縁。筐体底面ではない。",
+              "entity": "V25_BASE_PLATE"
+            }
+          ],
+          "observation_ja": "接触器・リレー・金色の抵抗等が載る金属の下板が筐体外にある。ヒューズ板は右奥に別置き。下板の手前の縁、切欠き、穴の一部が見える。",
+          "limit_ja": "手や部品に隠れる輪郭、板厚、穴径、裏面支持は読めない。印は画像上の対象位置で、加工輪郭・把持点ではない。"
+        },
+        {
+          "second": 146,
+          "source_frame": "plate_146",
+          "markers": [
+            {
+              "label": "2",
+              "xy_px": [
+                985,
+                453
+              ],
+              "text_ja": "同じ搬送中の下板側部品。板の縁・把持位置は遮蔽。",
+              "entity": "V25_BASE_PLATE"
+            }
+          ],
+          "observation_ja": "白いヒューズ板と接触器・リレー等の下板側が一緒に持たれ、筐体へ入る。外側ヘッダーは台上にある。",
+          "limit_ja": "板同士の固定作業・固定具は映っていない。同時搬送の観察を剛結・締結完了の判定にしない。手に隠れた下板の全形状も不明。"
+        }
+      ]
+    },
+    {
+      "id": "PANEL",
+      "name_ja": "B ヒューズ板ユニット",
+      "entity": "V25_FUSE_PANEL",
+      "profile": "H07",
+      "views": [
+        24,
+        146
+      ],
+      "default_view": 24,
+      "role_ja": "B主担当からC主担当へ、本体保持を渡す候補。締結中はC主担当が板を保持する。",
+      "contact_intent_ja": "H07系の薄い側縁用2本指を比較する。渡す手と受ける手の接触域を別々に設けられるかを先に確認する。",
+      "clear_ja": "ヒューズ胴、導電部、固定穴、配線、工具通路を避ける。指を着座面の下へ残さない。",
+      "next_ja": "板の全輪郭・取付部と、B/Cの手を同時に近づけられる二つの把持域を対応する。直接手渡しの成立は未確認。",
+      "model_note_ja": "P07は対応候補だが、2025年映像との同一版は未確認。現在の表示外形は約141×4×61 mmで、製造寸法ではない。",
+      "selected_contact_surfaces": null,
+      "world_grasp_pose_m_rad": null,
+      "entity_record": {
+        "id": "V25_FUSE_PANEL",
+        "kind": "part",
+        "name_ja": "2025年映像のヒューズ板",
+        "candidate_photo_ids": [
+          "P07"
+        ],
+        "confirmed_photo_id": null,
+        "observation_ja": "24秒で別置き、50秒で外組み、146秒で下板側と同時に搬送、154秒で筐体内。",
+        "unresolved_ja": "2022年との同一版対応、下板との接合、全固定点。",
+        "evidence_frames": [
+          "plate_024",
+          "plate_050",
+          "plate_146",
+          "plate_154"
+        ],
+        "geometry_dimensions_m": null,
+        "mounting_points_m": null,
+        "grasp_surfaces": null,
+        "source_model_object": null
+      },
+      "hand_family": {
+        "id": "H07",
+        "name_ja": "カバー搬送・設置用",
+        "finger_count": 2,
+        "closing_drives": 1,
+        "contact_ja": "対向する薄い側縁用ポケットと端当て。長辺に離れた接触域を配置。",
+        "stability_intent_ja": "板を一点でつままず、外周形状で向きと傾きを支える。",
+        "keep_clear_ja": "シール面・固定穴・着座面・隣接配線。",
+        "release_ja": "着座後に外側へ開放。カバー下面に爪を挟まない。",
+        "unresolved_ja": "実カバーの縁形状と幅、許容把持面。旧動画の把持突起をAmpere実物へ無断追加しない。"
+      },
+      "model_candidates": [
+        {
+          "id": "P07",
+          "basis": "photo estimated display envelope; unpublished manufacturing dimensions",
+          "mesh_names": [
+            "REF_P07_backing_outline"
+          ],
+          "display_aabb_min_m": [
+            -0.05849999934434891,
+            0.0650000050663948,
+            0.014500001445412636
+          ],
+          "display_aabb_max_m": [
+            0.08250000327825546,
+            0.0689999982714653,
+            0.0755000039935112
+          ],
+          "display_aabb_size_m": [
+            0.14100000262260437,
+            0.003999993205070496,
+            0.061000002548098564
+          ],
+          "selected_contact_surfaces": null,
+          "world_grasp_pose_m_rad": null
+        }
+      ],
+      "view_data": [
+        {
+          "second": 24,
+          "source_frame": "plate_024",
+          "markers": [
+            {
+              "label": "2",
+              "xy_px": [
+                1742,
+                305
+              ],
+              "text_ja": "右奥に別置きされたヒューズ板。",
+              "entity": "V25_FUSE_PANEL"
+            }
+          ],
+          "observation_ja": "接触器・リレー・金色の抵抗等が載る金属の下板が筐体外にある。ヒューズ板は右奥に別置き。下板の手前の縁、切欠き、穴の一部が見える。",
+          "limit_ja": "手や部品に隠れる輪郭、板厚、穴径、裏面支持は読めない。印は画像上の対象位置で、加工輪郭・把持点ではない。"
+        },
+        {
+          "second": 146,
+          "source_frame": "plate_146",
+          "markers": [
+            {
+              "label": "1",
+              "xy_px": [
+                840,
+                300
+              ],
+              "text_ja": "ユニットと一緒に運ばれるヒューズ板。",
+              "entity": "V25_FUSE_PANEL"
+            }
+          ],
+          "observation_ja": "白いヒューズ板と接触器・リレー等の下板側が一緒に持たれ、筐体へ入る。外側ヘッダーは台上にある。",
+          "limit_ja": "板同士の固定作業・固定具は映っていない。同時搬送の観察を剛結・締結完了の判定にしない。手に隠れた下板の全形状も不明。"
+        }
+      ]
+    },
+    {
+      "id": "INNER",
+      "name_ja": "樹脂ハウジング付き自由端",
+      "entity": "V25_INNER_ENDS",
+      "profile": "H05",
+      "views": [
+        154,
+        170
+      ],
+      "default_view": 154,
+      "role_ja": "ハウジングの姿勢保持と、線を案内する役割を対応する。A/Bのどちらの補助が持つかは端末ごとの所属が決まってから。",
+      "contact_intent_ja": "H05系の専用外形ポケットを比較する。接触可能と確認した剛体面で向きを決め、必要な操作力を受ける面を別に確認する。",
+      "clear_ja": "接点、シール、ロック可動部、ケーブル出口を空ける。筐体開口を通すときは指を含めた外形を扱う。",
+      "next_ja": "映像の各端末とI01〜I05の対応、A/B所属、配線経路、同時保持数、開口通過の個別順序を追う。CADの樹脂面を一律に許容把持面としない。",
+      "model_note_ja": "I01〜I05は公式STEPを用いた対応候補。裸ハウジングの形状はあるが、映像の端末との一対一対応・把持許容面・配線込みの外形は未確定。",
+      "selected_contact_surfaces": null,
+      "world_grasp_pose_m_rad": null,
+      "source_station_assignment": null,
+      "entity_record": {
+        "id": "V25_INNER_ENDS",
+        "kind": "observed_group",
+        "name_ja": "未接続の内側ハウジング群",
+        "candidate_photo_ids": [
+          "I01",
+          "I02",
+          "I03",
+          "I04",
+          "I05"
+        ],
+        "confirmed_photo_id": null,
+        "observation_ja": "154/158秒で自由端、170秒で側面開口を通って外へ出る。",
+        "unresolved_ja": "一対一のI番号、線の両端、全自由端の追跡、同時保持数、開口通過の個別順序。",
+        "evidence_frames": [
+          "plate_154",
+          "plate_158",
+          "plate_170"
+        ],
+        "physical_quantity_selected": null,
+        "source_model_object": null
+      },
+      "hand_family": {
+        "id": "H05",
+        "name_ja": "差込端末・外部コネクター用",
+        "finger_count": 2,
+        "closing_drives": 1,
+        "contact_ja": "剛体ハウジングの専用外形ポケットと、許容された後端・肩の受け面。",
+        "stability_intent_ja": "外形で向きを決め、挿入力を受け面で伝える。配線の摩擦把持を挿入力の経路にしない。",
+        "keep_clear_ja": "接点・シール・ロック可動部・ケーブル出口。",
+        "release_ja": "接続完了後にロックを避けて開く。別のロック操作が必要ならその役割を分ける。",
+        "unresolved_ja": "荷重を受ける剛体面、型式、挿入力、許容横ずれ、開放域。写真に見える樹脂面すべてが許容把持面とはしない。"
+      },
+      "model_candidates": [
+        {
+          "id": "I01",
+          "basis": "official STEP, no scale; common CAD nose datum and v03 outer wall datum",
+          "mesh_names": [
+            "REF_I01_official_STEP"
+          ],
+          "display_aabb_min_m": [
+            -0.09710000455379486,
+            -0.11110000312328339,
+            0.03970000147819519
+          ],
+          "display_aabb_max_m": [
+            -0.0746999979019165,
+            -0.06850000470876694,
+            0.05230000242590904
+          ],
+          "display_aabb_size_m": [
+            0.022400006651878357,
+            0.04259999841451645,
+            0.012600000947713852
+          ],
+          "selected_contact_surfaces": null,
+          "world_grasp_pose_m_rad": null
+        },
+        {
+          "id": "I02",
+          "basis": "official STEP, no scale; common CAD nose datum and v03 outer wall datum",
+          "mesh_names": [
+            "REF_I02_official_STEP"
+          ],
+          "display_aabb_min_m": [
+            -0.06319999694824219,
+            -0.11110000312328339,
+            0.03970000147819519
+          ],
+          "display_aabb_max_m": [
+            -0.040800001472234726,
+            -0.06850000470876694,
+            0.05230000242590904
+          ],
+          "display_aabb_size_m": [
+            0.02239999547600746,
+            0.04259999841451645,
+            0.012600000947713852
+          ],
+          "selected_contact_surfaces": null,
+          "world_grasp_pose_m_rad": null
+        },
+        {
+          "id": "I03",
+          "basis": "official STEP, no scale; common CAD nose datum and v03 outer wall datum",
+          "mesh_names": [
+            "REF_I03_official_STEP"
+          ],
+          "display_aabb_min_m": [
+            -0.02930000051856041,
+            -0.11110000312328339,
+            0.03970000147819519
+          ],
+          "display_aabb_max_m": [
+            -0.0069000013172626495,
+            -0.06850000470876694,
+            0.05230000242590904
+          ],
+          "display_aabb_size_m": [
+            0.02239999920129776,
+            0.04259999841451645,
+            0.012600000947713852
+          ],
+          "selected_contact_surfaces": null,
+          "world_grasp_pose_m_rad": null
+        },
+        {
+          "id": "I04",
+          "basis": "official STEP, no scale; common CAD nose datum and v03 outer wall datum",
+          "mesh_names": [
+            "REF_I04_official_STEP"
+          ],
+          "display_aabb_min_m": [
+            0.04385000094771385,
+            -0.11110000312328339,
+            0.03970000147819519
+          ],
+          "display_aabb_max_m": [
+            0.06624999642372131,
+            -0.06850000470876694,
+            0.05230000242590904
+          ],
+          "display_aabb_size_m": [
+            0.02239999547600746,
+            0.04259999841451645,
+            0.012600000947713852
+          ],
+          "selected_contact_surfaces": null,
+          "world_grasp_pose_m_rad": null
+        },
+        {
+          "id": "I05",
+          "basis": "official STEP, no scale; common CAD nose datum and v03 outer wall datum",
+          "mesh_names": [
+            "REF_I05_official_STEP"
+          ],
+          "display_aabb_min_m": [
+            0.07774999737739563,
+            -0.11110000312328339,
+            0.03970000147819519
+          ],
+          "display_aabb_max_m": [
+            0.10015000402927399,
+            -0.06850000470876694,
+            0.05230000242590904
+          ],
+          "display_aabb_size_m": [
+            0.022400006651878357,
+            0.04259999841451645,
+            0.012600000947713852
+          ],
+          "selected_contact_surfaces": null,
+          "world_grasp_pose_m_rad": null
+        }
+      ],
+      "view_data": [
+        {
+          "second": 154,
+          "source_frame": "plate_154",
+          "markers": [
+            {
+              "label": "1",
+              "xy_px": [
+                1100,
+                610
+              ],
+              "text_ja": "上縁から外へ出る内側ハウジング付き自由端。",
+              "entity": "V25_INNER_ENDS"
+            }
+          ],
+          "observation_ja": "両板側の部品が筐体内にある。内側ハウジングと丸端子付きの未接続端が筐体の外へ出ている。外側ヘッダーは別置き。",
+          "limit_ja": "下板の全固定完了、端末の全数・所属・支持方法は確定しない。"
+        },
+        {
+          "second": 170,
+          "source_frame": "plate_170",
+          "markers": [
+            {
+              "label": "1",
+              "xy_px": [
+                723,
+                449
+              ],
+              "text_ja": "筐体側面の開口を通る内側端末。",
+              "entity": "V25_INNER_ENDS"
+            },
+            {
+              "label": "2",
+              "xy_px": [
+                928,
+                550
+              ],
+              "text_ja": "もう一方の開口側にも自由端が残る。",
+              "entity": "V25_INNER_ENDS"
+            }
+          ],
+          "observation_ja": "内側ハウジング付きの線が筐体側面の開口を通って外へ出ている。外側ヘッダーはまだ台上。上縁から出ていた2:34とは配置が変わる。",
+          "limit_ja": "開口へ通す指の接触面・線ごとの順序・引張力は未確認。数字の手書き表示を写真のI01〜I05や電気ネットへ割り当てない。"
+        }
+      ]
+    },
+    {
+      "id": "RING",
+      "name_ja": "丸端子付き自由端",
+      "entity": "V25_RING_ENDS",
+      "profile": "H04",
+      "views": [
+        154,
+        170
+      ],
+      "default_view": 154,
+      "role_ja": "金属端子を避け、端子側の被覆と根元を保持する方針を継承する。A/Bの所属、接続先、受渡し先は線ごとに対応する。",
+      "contact_intent_ja": "H04/T050の2本指・前後2接触区間を起点にする。端子側の黒被覆と根元被覆を対象にし、対象線径に合わせる。",
+      "clear_ja": "金属環、端子穴、電気接続面、締付工具の通路を空ける。被覆を持つことで締結反力を受けられるとは未確認。",
+      "next_ja": "端末ごとの黒被覆長・線径・許容圧と端子との相対ずれを確認し、次の接続先と保持の引継ぎを対応する。",
+      "model_note_ja": "L01〜L07は写真の可視特徴に基づく概略モデル。実線材の全数ではなく、映像の各自由端への確定対応でもない。",
+      "selected_contact_surfaces": null,
+      "world_grasp_pose_m_rad": null,
+      "source_station_assignment": null,
+      "entity_record": {
+        "id": "V25_RING_ENDS",
+        "kind": "observed_group",
+        "name_ja": "未接続の丸端子群",
+        "candidate_photo_ids": [
+          "L01",
+          "L02",
+          "L03",
+          "L04",
+          "L05",
+          "L06",
+          "L07"
+        ],
+        "confirmed_photo_id": null,
+        "observation_ja": "搭載中と搭載後に丸端子の自由端が残る。",
+        "unresolved_ja": "写真L番号への対応、接続先、加工済み線材数、共締め積層。",
+        "evidence_frames": [
+          "plate_146",
+          "plate_154",
+          "plate_158",
+          "plate_170"
+        ],
+        "physical_quantity_selected": null,
+        "source_model_object": null
+      },
+      "hand_family": {
+        "id": "H04",
+        "name_ja": "ケーブル・丸端子付き配線用",
+        "finger_count": 2,
+        "closing_drives": 1,
+        "contact_ja": "T050。端子側の黒被覆と根元被覆を、同じ対向2本指の二つの丸底接触区間で保持。",
+        "stability_intent_ja": "端末側と根元を離して支える。被覆の軸方向滑りと軸回り回転の保持性能は別途確認する。",
+        "keep_clear_ja": "金属端子・締結穴・電気接触面・工具通路。",
+        "release_ja": "接続完了まで同じ手で保持。工具が退避した後で開放し、両端保持では両腕同時に上昇。",
+        "unresolved_ja": "被覆と圧着端子の相対滑り・回転、線径、摩擦・許容圧、曲げ反力、工具ノーズ一式。二つの丸い溝だけで軸回り回転を幾何拘束できるとはしない。",
+        "working_default_ref": "data/hand_working_default_v01.json",
+        "candidate": "T050",
+        "clockwise_angle_deg": 15,
+        "setback_before_rotation_m": 0.04,
+        "independent_front_root_opening": false,
+        "metal_terminal_clamping": false
+      },
+      "model_candidates": [
+        {
+          "id": "L01",
+          "basis": "photo estimated display envelope; unpublished manufacturing dimensions",
+          "mesh_names": [
+            "REF_L01_barrel",
+            "REF_L01_sleeve",
+            "REF_L01_visible_ring"
+          ],
+          "display_aabb_min_m": [
+            -0.11480932682752609,
+            -0.05403333157300949,
+            0.026200000196695328
+          ],
+          "display_aabb_max_m": [
+            -0.09263333678245544,
+            -0.0346907339990139,
+            0.03179999813437462
+          ],
+          "display_aabb_size_m": [
+            0.022175990045070648,
+            0.01934259757399559,
+            0.005599997937679291
+          ],
+          "selected_contact_surfaces": null,
+          "world_grasp_pose_m_rad": null
+        },
+        {
+          "id": "L02",
+          "basis": "photo estimated display envelope; unpublished manufacturing dimensions",
+          "mesh_names": [
+            "REF_L02_barrel",
+            "REF_L02_sleeve",
+            "REF_L02_visible_ring"
+          ],
+          "display_aabb_min_m": [
+            -0.09693221002817154,
+            -0.053080953657627106,
+            0.02619999833405018
+          ],
+          "display_aabb_max_m": [
+            -0.07906190305948257,
+            -0.03559258580207825,
+            0.03179999813437462
+          ],
+          "display_aabb_size_m": [
+            0.017870306968688965,
+            0.01748836785554886,
+            0.00559999980032444
+          ],
+          "selected_contact_surfaces": null,
+          "world_grasp_pose_m_rad": null
+        },
+        {
+          "id": "L03",
+          "basis": "photo estimated display envelope; unpublished manufacturing dimensions",
+          "mesh_names": [
+            "REF_L03_barrel",
+            "REF_L03_sleeve",
+            "REF_L03_visible_ring"
+          ],
+          "display_aabb_min_m": [
+            -0.08240894973278046,
+            -0.05212857201695442,
+            0.026200000196695328
+          ],
+          "display_aabb_max_m": [
+            -0.061204761266708374,
+            -0.03700283169746399,
+            0.03179999813437462
+          ],
+          "display_aabb_size_m": [
+            0.021204188466072083,
+            0.015125740319490433,
+            0.005599997937679291
+          ],
+          "selected_contact_surfaces": null,
+          "world_grasp_pose_m_rad": null
+        },
+        {
+          "id": "L04",
+          "basis": "photo estimated display envelope; unpublished manufacturing dimensions",
+          "mesh_names": [
+            "REF_L04_barrel",
+            "REF_L04_sleeve",
+            "REF_L04_visible_ring"
+          ],
+          "display_aabb_min_m": [
+            -0.05689047649502754,
+            -0.06062381714582443,
+            0.026200000196695328
+          ],
+          "display_aabb_max_m": [
+            -0.03434188663959503,
+            -0.0419190488755703,
+            0.03179999813437462
+          ],
+          "display_aabb_size_m": [
+            0.02254858985543251,
+            0.018704768270254135,
+            0.005599997937679291
+          ],
+          "selected_contact_surfaces": null,
+          "world_grasp_pose_m_rad": null
+        },
+        {
+          "id": "L05",
+          "basis": "photo estimated display envelope; unpublished manufacturing dimensions",
+          "mesh_names": [
+            "REF_L05_barrel",
+            "REF_L05_sleeve",
+            "REF_L05_visible_ring"
+          ],
+          "display_aabb_min_m": [
+            -0.04260476306080818,
+            -0.05999145284295082,
+            0.02619999833405018
+          ],
+          "display_aabb_max_m": [
+            -0.01946520246565342,
+            -0.0419190488755703,
+            0.03179999813437462
+          ],
+          "display_aabb_size_m": [
+            0.023139560595154762,
+            0.018072403967380524,
+            0.00559999980032444
+          ],
+          "selected_contact_surfaces": null,
+          "world_grasp_pose_m_rad": null
+        },
+        {
+          "id": "L06",
+          "basis": "photo estimated display envelope; unpublished manufacturing dimensions",
+          "mesh_names": [
+            "REF_L06_barrel",
+            "REF_L06_sleeve",
+            "REF_L06_visible_ring"
+          ],
+          "display_aabb_min_m": [
+            -0.06333331763744354,
+            0.056700002402067184,
+            0.05730000138282776
+          ],
+          "display_aabb_max_m": [
+            -0.043585699051618576,
+            0.062300000339746475,
+            0.06870000064373016
+          ],
+          "display_aabb_size_m": [
+            0.019747618585824966,
+            0.005599997937679291,
+            0.011399999260902405
+          ],
+          "selected_contact_surfaces": null,
+          "world_grasp_pose_m_rad": null
+        },
+        {
+          "id": "L07",
+          "basis": "photo estimated display envelope; unpublished manufacturing dimensions",
+          "mesh_names": [
+            "REF_L07_barrel",
+            "REF_L07_sleeve",
+            "REF_L07_visible_ring"
+          ],
+          "display_aabb_min_m": [
+            0.06596670299768448,
+            0.056700002402067184,
+            0.05730000138282776
+          ],
+          "display_aabb_max_m": [
+            0.08690479397773743,
+            0.062300000339746475,
+            0.06870000064373016
+          ],
+          "display_aabb_size_m": [
+            0.020938090980052948,
+            0.005599997937679291,
+            0.011399999260902405
+          ],
+          "selected_contact_surfaces": null,
+          "world_grasp_pose_m_rad": null
+        }
+      ],
+      "view_data": [
+        {
+          "second": 154,
+          "source_frame": "plate_154",
+          "markers": [
+            {
+              "label": "2",
+              "xy_px": [
+                847,
+                642
+              ],
+              "text_ja": "未接続の丸端子。",
+              "entity": "V25_RING_ENDS"
+            }
+          ],
+          "observation_ja": "両板側の部品が筐体内にある。内側ハウジングと丸端子付きの未接続端が筐体の外へ出ている。外側ヘッダーは別置き。",
+          "limit_ja": "下板の全固定完了、端末の全数・所属・支持方法は確定しない。"
+        },
+        {
+          "second": 170,
+          "source_frame": "plate_170",
+          "markers": [],
+          "observation_ja": "内側ハウジング付きの線が筐体側面の開口を通って外へ出ている。外側ヘッダーはまだ台上。上縁から出ていた2:34とは配置が変わる。",
+          "limit_ja": "開口へ通す指の接触面・線ごとの順序・引張力は未確認。数字の手書き表示を写真のI01〜I05や電気ネットへ割り当てない。"
+        }
+      ]
+    }
+  ],
+  "scope_ja": "既存の対象位置・指先系統を結ぶ図。画像の印は対象の所在で、把持点・把持許容領域・実寸座標ではない。2022年写真と2025年映像は同一製造版未確認。",
+  "group_mapping_ja": "前図のA_END/B_ENDは独立した案内役を追う仮ラベル。内側ハウジング群／丸端子群へ一対一に割り当てない。どちらにも複数の端末種別があり得るが、現在は所属未確定。",
+  "selected_arm_count": 5,
+  "physical_acceptance_verdict": null,
+  "selection": {
+    "revision": "hvjb_robot_selection_v01",
+    "decision_date": "2026-09-16",
+    "status": "user_selected_role_allocation",
+    "user_directive_ja": "補助を2腕に分ける",
+    "selected_plan": "S5_AB",
+    "selected_plan_ja": "主担当3腕＋A/B共用補助1腕＋C専用補助1腕",
+    "source_comparison": "data/hvjb_robot_sharing_v01.json",
+    "source_sha256": "7888693db9b5cd0314b7acecb6c0fa09ab7c207e43c2391fbfbf642833b99b90",
+    "selected_primary_arm_count": 3,
+    "selected_assist_arm_count": 2,
+    "selected_assembly_arm_count": 5,
+    "assist_groups": [
+      [
+        "X-A",
+        "X-B"
+      ],
+      [
+        "X-C"
+      ]
+    ],
+    "role_to_unit": {
+      "R-A": "ARM_A",
+      "R-B": "ARM_B",
+      "R-C": "ARM_C",
+      "X-A": "ASSIST_1",
+      "X-B": "ASSIST_1",
+      "X-C": "ASSIST_2"
+    },
+    "count_scope_ja": "A/B/Cの組立役に割り当てる5腕。ロボットの機台数や、OP010 XYZ・締付工具・搬送等を含むライン全体の設備台数ではない。",
+    "operating_constraints_ja": [
+      "AとBが同時に補助を必要とする場合は、把持開始前に作業順序を調整する。保持途中で手を離して別セルへ移らない。",
+      "A/B共用補助は、前の支持引継ぎ・開放・退避と、必要な手先交換・移動を終えてから次の保持を開始する。",
+      "C専用補助は自由端の案内と支持引継ぎを担当し、筐体搭載終了だけで空き扱いにしない。",
+      "既存の20仕事・据置締付工具・支持・供給・検査・回収の役割を保持する。該当する大小同時締結の2主軸条件を継承する。"
+    ],
+    "next_work_ja": "5腕の分担を前提に、A/B共用補助の保持区間・受渡しと、C専用補助の継続担当を具体化する。その上で配置・到達・干渉を確認する。",
+    "selected_robot_models": null,
+    "selected_robot_base_count": null,
+    "selected_layout": null,
+    "minimum_robot_count": null,
+    "measured_cycle_time_s": null,
+    "physical_acceptance_verdict": null
+  },
+  "all_source_task_ids": [
+    "D00",
+    "D01",
+    "D10",
+    "D11",
+    "D12",
+    "D20",
+    "D21",
+    "D22",
+    "D30",
+    "D31",
+    "D40",
+    "D42",
+    "D45",
+    "D50",
+    "D60",
+    "D61",
+    "D70",
+    "D71",
+    "D80",
+    "D81"
+  ],
+  "source": {
+    "title": "ASSEMBLY! EV High Voltage Junction Box",
+    "url": "https://www.youtube.com/watch?v=Sm_D-vmNYqc",
+    "channel": "Ampere EV",
+    "upload_date": "20250607",
+    "file": "references/hvjb_assembly_followup_20260915/assembly_20250607.mp4",
+    "sha256": "b7fcb74eaeec06e517d5726994a38a6b0812e05198d8b771b7ff771e68a0e1eb",
+    "metadata_sha256": "69e2f968a38253ec5608439116c2ef8cc04669cbd03b7275f8feab63fbc9f111",
+    "size_px": [
+      1920,
+      1080
+    ],
+    "duration_s": 274.140533,
+    "frame_rate": "30000/1001",
+    "automatic_caption_role": "navigation aid only; not a verified transcription or part-number source"
+  },
+  "frames": {
+    "24": {
+      "requested_seek_s": 24,
+      "timestamp_basis": "ffmpeg accurate seek; first display frame at/after the requested time",
+      "file": "references/hvjb_plate_sequence_20260916/assembly_024s.png",
+      "sha256": "ae36aa75719958753f4436dfbae171b1c5e969f7d931fab39e227122585bcddc",
+      "size_px": [
+        1920,
+        1080
+      ],
+      "url": "https://www.youtube.com/watch?v=Sm_D-vmNYqc&t=24s",
+      "pixel_transform": "none; full decoded frame without cropping or generated edits",
+      "local_image": "evidence/assembly_024s.png"
+    },
+    "146": {
+      "requested_seek_s": 146,
+      "timestamp_basis": "ffmpeg accurate seek; first display frame at/after the requested time",
+      "file": "references/hvjb_plate_sequence_20260916/assembly_146s.png",
+      "sha256": "fbe7b04dfc8a6881648df420afa5a48c8300d21cb0f9f0756edb83f500077d20",
+      "size_px": [
+        1920,
+        1080
+      ],
+      "url": "https://www.youtube.com/watch?v=Sm_D-vmNYqc&t=146s",
+      "pixel_transform": "none; full decoded frame without cropping or generated edits",
+      "local_image": "evidence/assembly_146s.png"
+    },
+    "154": {
+      "requested_seek_s": 154,
+      "timestamp_basis": "ffmpeg accurate seek; first display frame at/after the requested time",
+      "file": "references/hvjb_plate_sequence_20260916/assembly_154s.png",
+      "sha256": "551cf3cc812b82a52ca096f0c684ac3a8edb5c3b50fbff3740626f583ac72280",
+      "size_px": [
+        1920,
+        1080
+      ],
+      "url": "https://www.youtube.com/watch?v=Sm_D-vmNYqc&t=154s",
+      "pixel_transform": "none; full decoded frame without cropping or generated edits",
+      "local_image": "evidence/assembly_154s.png"
+    },
+    "170": {
+      "requested_seek_s": 170,
+      "timestamp_basis": "ffmpeg accurate seek; first display frame at/after the requested time",
+      "file": "references/hvjb_plate_sequence_20260916/assembly_170s.png",
+      "sha256": "1c85aad5aaa057dbd8e2ddc9ef615346c40b61db802283ce1cea78887a6d642e",
+      "size_px": [
+        1920,
+        1080
+      ],
+      "url": "https://www.youtube.com/watch?v=Sm_D-vmNYqc&t=170s",
+      "pixel_transform": "none; full decoded frame without cropping or generated edits",
+      "local_image": "evidence/assembly_170s.png"
+    }
+  },
+  "observed_at": "2026-09-16T19:00:48.676752+09:00",
+  "model_feature_count": 92,
+  "export_has_v25_base_plate_id": false
+}

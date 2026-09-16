@@ -1,0 +1,84 @@
+{
+  "observed_at": "2026-09-16T19:00:48.676752+09:00",
+  "directory": "/home/rlrk/Downloads/THREAD_HVJB_受渡し対象と手先_v01_20260916",
+  "input_sha256_before": {
+    "data/hvjb_preassembly_process_v03.json": "5e9d7078d4e7ff9772f8561788b29a34b28165e3118559385dcc78faf28b64e7",
+    "data/hvjb_photo_model_v03_p03.json.gz": "6687b12ec1b3db24babf75f8fef1b6f6bc123c288b713824b9763d9214553ba6",
+    "data/hvjb_unitization_decision_v01.json": "f28f0693cc48cf288b0c50846f3b23196cf11b02561ce1a8ef55528f8e45f6f6",
+    "data/hvjb_photo_correspondence_v03_p01.json": "6c5b7cb9bab859a33c8f5d5cd5429ce9f06fb0951b8a8fa4ae2a31ad99052ca0",
+    "data/hvjb_plate_evidence_v01.json": "2802f20de9ae1265da26830b6abb2995017b0bf71f311cfeabf4425ffd6945ce",
+    "data/hand_provisional_spec_v01.json": "0ed18d28e261b73ae1fd3beb1686ad4c2b55071974d9b8708e358b79efa8b799",
+    "UR15_JB_photo_correspondence_v03_p03.blend": "5205d3aa2c2b99f7df6f538d17b3d3ca36ba8208c546858ee8ec8a5a3564a282",
+    "data/hvjb_robot_selection_v01.json": "ad1d0fc6ad2f0c9d36f4d9839faf559ce80aa9ffb4965174facef944f1a58db8",
+    "data/hvjb_task_occupancy_v01.json": "4da5b53687b05cd2cd1d294cf57121abde6ee9d04b19ed0a37ef2fb2a4d79df9",
+    "references/hvjb_assembly_followup_20260915/assembly_20250607.mp4": "b7fcb74eaeec06e517d5726994a38a6b0812e05198d8b771b7ff771e68a0e1eb",
+    "references/hvjb_plate_sequence_20260916/assembly_024s.png": "ae36aa75719958753f4436dfbae171b1c5e969f7d931fab39e227122585bcddc",
+    "references/hvjb_plate_sequence_20260916/assembly_146s.png": "fbe7b04dfc8a6881648df420afa5a48c8300d21cb0f9f0756edb83f500077d20",
+    "references/hvjb_plate_sequence_20260916/assembly_154s.png": "551cf3cc812b82a52ca096f0c684ac3a8edb5c3b50fbff3740626f583ac72280",
+    "references/hvjb_plate_sequence_20260916/assembly_170s.png": "1c85aad5aaa057dbd8e2ddc9ef615346c40b61db802283ce1cea78887a6d642e",
+    "data/hvjb_receiving_interfaces_inputs_v01.json": "ac9782004dbb4c5dc2bd5d259b8ffd3295c0988fbe7a7315bbbd2419af2fbf1e",
+    "scripts/hvjb_receiving_interfaces_v01.html": "04a9074bd57d681df1b58009885356ed0614ce5906ba7eeabffcbecc2f912c6b",
+    "analysis/hvjb_receiving_interfaces_v01.md": "c9eb174c7280100eac2e138651e11188e0dcf1bcb026791272dc27278d2b0814"
+  },
+  "input_sha256_after": {
+    "data/hvjb_preassembly_process_v03.json": "5e9d7078d4e7ff9772f8561788b29a34b28165e3118559385dcc78faf28b64e7",
+    "data/hvjb_photo_model_v03_p03.json.gz": "6687b12ec1b3db24babf75f8fef1b6f6bc123c288b713824b9763d9214553ba6",
+    "data/hvjb_unitization_decision_v01.json": "f28f0693cc48cf288b0c50846f3b23196cf11b02561ce1a8ef55528f8e45f6f6",
+    "data/hvjb_photo_correspondence_v03_p01.json": "6c5b7cb9bab859a33c8f5d5cd5429ce9f06fb0951b8a8fa4ae2a31ad99052ca0",
+    "data/hvjb_plate_evidence_v01.json": "2802f20de9ae1265da26830b6abb2995017b0bf71f311cfeabf4425ffd6945ce",
+    "data/hand_provisional_spec_v01.json": "0ed18d28e261b73ae1fd3beb1686ad4c2b55071974d9b8708e358b79efa8b799",
+    "UR15_JB_photo_correspondence_v03_p03.blend": "5205d3aa2c2b99f7df6f538d17b3d3ca36ba8208c546858ee8ec8a5a3564a282",
+    "data/hvjb_robot_selection_v01.json": "ad1d0fc6ad2f0c9d36f4d9839faf559ce80aa9ffb4965174facef944f1a58db8",
+    "data/hvjb_task_occupancy_v01.json": "4da5b53687b05cd2cd1d294cf57121abde6ee9d04b19ed0a37ef2fb2a4d79df9",
+    "references/hvjb_assembly_followup_20260915/assembly_20250607.mp4": "b7fcb74eaeec06e517d5726994a38a6b0812e05198d8b771b7ff771e68a0e1eb",
+    "references/hvjb_plate_sequence_20260916/assembly_024s.png": "ae36aa75719958753f4436dfbae171b1c5e969f7d931fab39e227122585bcddc",
+    "references/hvjb_plate_sequence_20260916/assembly_146s.png": "fbe7b04dfc8a6881648df420afa5a48c8300d21cb0f9f0756edb83f500077d20",
+    "references/hvjb_plate_sequence_20260916/assembly_154s.png": "551cf3cc812b82a52ca096f0c684ac3a8edb5c3b50fbff3740626f583ac72280",
+    "references/hvjb_plate_sequence_20260916/assembly_170s.png": "1c85aad5aaa057dbd8e2ddc9ef615346c40b61db802283ce1cea78887a6d642e",
+    "data/hvjb_receiving_interfaces_inputs_v01.json": "ac9782004dbb4c5dc2bd5d259b8ffd3295c0988fbe7a7315bbbd2419af2fbf1e",
+    "scripts/hvjb_receiving_interfaces_v01.html": "04a9074bd57d681df1b58009885356ed0614ce5906ba7eeabffcbecc2f912c6b",
+    "analysis/hvjb_receiving_interfaces_v01.md": "c9eb174c7280100eac2e138651e11188e0dcf1bcb026791272dc27278d2b0814"
+  },
+  "copied_sha256": {
+    "evidence/assembly_024s.png": "ae36aa75719958753f4436dfbae171b1c5e969f7d931fab39e227122585bcddc",
+    "evidence/assembly_146s.png": "fbe7b04dfc8a6881648df420afa5a48c8300d21cb0f9f0756edb83f500077d20",
+    "evidence/assembly_154s.png": "551cf3cc812b82a52ca096f0c684ac3a8edb5c3b50fbff3740626f583ac72280",
+    "evidence/assembly_170s.png": "1c85aad5aaa057dbd8e2ddc9ef615346c40b61db802283ce1cea78887a6d642e",
+    "process_v03.json": "5e9d7078d4e7ff9772f8561788b29a34b28165e3118559385dcc78faf28b64e7",
+    "hand_families.json": "0ed18d28e261b73ae1fd3beb1686ad4c2b55071974d9b8708e358b79efa8b799",
+    "selection.json": "ad1d0fc6ad2f0c9d36f4d9839faf559ce80aa9ffb4965174facef944f1a58db8",
+    "all_workcards.json": "4da5b53687b05cd2cd1d294cf57121abde6ee9d04b19ed0a37ef2fb2a4d79df9",
+    "notes.md": "c9eb174c7280100eac2e138651e11188e0dcf1bcb026791272dc27278d2b0814"
+  },
+  "page_sha256": "5225984f74bcd3a239b7bb7a89191fcfeb0aa418a8ca56a61557ed2ba147d12c",
+  "model_feature_count": 92,
+  "source_task_count": 20,
+  "target_candidate_ids": {
+    "BASE": [],
+    "PANEL": [
+      "P07"
+    ],
+    "INNER": [
+      "I01",
+      "I02",
+      "I03",
+      "I04",
+      "I05"
+    ],
+    "RING": [
+      "L01",
+      "L02",
+      "L03",
+      "L04",
+      "L05",
+      "L06",
+      "L07"
+    ]
+  },
+  "export_has_v25_base_plate_id": false,
+  "confirmed_video_to_photo_ids": [],
+  "selected_grasp_poses": [],
+  "model_written": false,
+  "movie_created": false,
+  "physical_acceptance_verdict": null
+}

@@ -1,0 +1,73 @@
+<!doctype html>
+<!-- Copyright (c) 2022-2026, The Isaac Lab Project Developers (https://github.com/isaac-sim/IsaacLab/blob/main/CONTRIBUTORS.md).
+All rights reserved. SPDX-License-Identifier: BSD-3-Clause -->
+<html lang="ja"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>HVJB｜受渡し対象と手先</title>
+<style>
+:root{font:16px/1.75 "Noto Sans CJK JP","Yu Gothic",sans-serif;color:#193249;background:#edf2f5;--blue:#2875b8;--teal:#168278;--orange:#b16a0d}*{box-sizing:border-box}body{margin:0}main{max-width:1460px;margin:auto;padding:24px 28px 48px}h1{font-size:29px;margin:7px 0}h2{font-size:22px;margin:0 0 10px}h3{font-size:18px;margin:14px 0 6px}p{margin:8px 0}.small{font-size:14px;color:#526b7d}.badge{display:inline-block;padding:4px 13px;border-radius:20px;background:#dcefe9;color:#126e60;font-size:14px;font-weight:700}section{background:white;border:1px solid #d6e0e7;border-radius:14px;padding:20px;margin-top:20px}.tabs{display:grid;grid-template-columns:repeat(4,1fr);gap:9px}button{font:inherit;color:inherit;background:#fff;border:1px solid #b6c8d4;border-radius:8px;padding:10px 13px;cursor:pointer;text-align:left}button[aria-pressed=true]{background:#206b9e;border-color:#206b9e;color:white}button:focus-visible,a:focus-visible{outline:3px solid #c6740a;outline-offset:2px}.tabs b{display:block;font-size:20px}.layout{display:grid;grid-template-columns:1.4fr 1fr;gap:23px;margin-top:20px}.photo{position:relative;aspect-ratio:16/9;background:#e8eef2}.photo img{width:100%;height:100%;object-fit:contain}.photo svg{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}.source-nav{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}.source-nav button{font-size:14px;padding:6px 12px}.contact{background:#f0f7fb;padding:15px;border-radius:10px}.contact svg{display:block;width:100%;height:auto}.caption{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;font-size:14px;margin-top:8px}.marked{padding:9px 12px;border-left:4px solid #cb790a;background:#fff6e6;margin-top:12px}.boundary{padding:13px 16px;border-left:4px solid var(--teal);background:#edf8f4}.grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}.muted{background:#f3f6f8;padding:16px;border-radius:9px}.links{display:flex;flex-wrap:wrap;gap:10px 24px;margin-top:14px}a{color:#1c648b}li{margin:8px 0}.table-wrap{overflow:auto}table{border-collapse:collapse;width:100%;font-size:14px}td,th{text-align:left;vertical-align:top;padding:9px;border-bottom:1px solid #d6e0e7}th{background:#edf3f7}summary{cursor:pointer;font-weight:700}code{font-size:13px;overflow-wrap:anywhere}.model-id{font-weight:700;white-space:nowrap}
+@media(max-width:970px){main{padding:18px 12px}.layout,.grid{grid-template-columns:1fr}section{padding:16px 12px}.tabs{grid-template-columns:repeat(2,1fr)}h1{font-size:24px}}
+</style>
+<main>
+<header><span class="badge">採用5腕 · 実物対象との対応</span><h1>何を持つかで、指先を分ける</h1><p>本体2種と自由端2種を、実物画像・既存モデル・指先の初期仕様に結びます。</p><p class="small">画像の丸印は対象の所在です。把持点を指定する印ではありません。</p></header>
+<section><div class="tabs" id="targets" role="group" aria-label="受渡し対象"></div>
+<div class="layout"><div><div class="source-nav" id="views" role="group" aria-label="原映像の場面"></div><div class="photo"><img id="source-image" alt="Ampere EV公式組立映像の無加工フレーム"><svg id="markers" viewBox="0 0 1920 1080" aria-hidden="true"></svg></div><div class="caption"><span id="source-caption"></span><a id="source-link" target="_blank" rel="noopener">公式映像の該当時点</a></div><div class="marked" id="marker-note"></div><p id="source-limit" class="small"></p><p id="role"></p></div>
+<div><div class="contact"><h2 id="hand-title"></h2><div id="hand-diagram"></div><p class="small">既存手先の接触方針を示す無寸法図。実部品の輪郭・把持位置ではありません。</p></div><h3>接触させる考え方</h3><p id="contact-intent"></p><h3>空けるところ</h3><p id="keep-clear"></p></div></div></section>
+<section class="grid"><div><h2>現在のモデルとの対応</h2><p id="model-note"></p><div class="table-wrap"><table><thead><tr><th>候補ID</th><th>形状の根拠</th></tr></thead><tbody id="model-rows"></tbody></table></div><details><summary>保存メッシュの照合値</summary><p class="small">ワールド座標の表示AABB [m]。把持許容領域や製造寸法ではありません。</p><div id="model-details"></div></details></div><div class="muted"><h2>配置に進む前の具体化</h2><p id="next"></p><p class="small">TCP・実寸の把持座標・把持力・指の開放域は、この図では指定していません。</p><p id="profile-detail" class="small"></p></div></section>
+<section><h2>「A側／B側」と、端末の種類は別</h2><p class="boundary" id="group-note"></p><p>ケーブルを一本ずつ所属と次の接続先へ対応してから、共用補助とC補助へ割り付けます。5腕の役割構成は維持し、腕や保持治具を追加していません。</p><p class="small">原映像：Ampere EV「ASSEMBLY! EV High Voltage Junction Box」（2025年）。現在の写真モデルは2022年の製品写真に対応しており、同一製造版は未確認です。元20仕事・92写真特徴を保持しています。</p><nav class="links"><a href="overview.png">全体対応の画像</a><a href="overview.svg">全体対応のSVG</a><a href="notes.md">検討記録</a><a href="review_data.json">対応データ</a><a href="hand_families.json">既存の手先仕様</a><a href="all_workcards.json">元20仕事</a><a href="selection.json">採用5腕</a></nav></section>
+</main>
+<script>
+const data=__PAYLOAD__;
+const $=id=>document.getElementById(id);
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const colors={BASE:'#2875b8',PANEL:'#168278',INNER:'#b16a0d',RING:'#824c97'};
+const text=(x,y,s,size=18,color='#193249',weight=400)=>`<text x="${x}" y="${y}" font-size="${size}" fill="${color}" font-weight="${weight}" text-anchor="middle">${esc(s)}</text>`;
+function handDiagram(id){
+  let body='';
+  if(id==='BASE'||id==='PANEL'){
+    body=`<rect x="139" y="44" width="282" height="112" rx="7" fill="#cbd5dc" stroke="#8499a7" stroke-dasharray="7 5"/>${id==='BASE'?'<rect x="190" y="64" width="64" height="46" rx="7" fill="#8a9dab"/><rect x="306" y="67" width="56" height="60" rx="5" fill="#8a9dab"/>':'<circle cx="226" cy="100" r="16" fill="#f6f9fb"/><circle cx="334" cy="100" r="16" fill="#f6f9fb"/>'}<path d="M129 42H100V158H129M431 42H460V158H431" fill="none" stroke="#277b9e" stroke-width="12" stroke-dasharray="7 5"/>${text(280,192,id==='BASE'?'荷重を受けられる側面・支持面を特定':'Bの手とCの手：別々の把持域が必要',19)}${text(280,224,'青い爪は系統の図。接触域は未選定。',16,'#526b7d')}`;
+  }else if(id==='INNER'){
+    body=`<rect x="172" y="71" width="210" height="76" rx="8" fill="#e89135" stroke="#a85d16"/><rect x="135" y="80" width="45" height="58" fill="#b7c3cb"/><path d="M382 93H473M382 126H473" stroke="#e89135" stroke-width="10"/><path d="M213 56V38H331V56M213 162V180H331V162" fill="none" stroke="#277b9e" stroke-width="12"/><path d="M124 59H189V159H124Z" fill="none" stroke="#bb4545" stroke-dasharray="7 5" stroke-width="3"/>${text(280,213,'確認した剛体面で姿勢を保持',19)}${text(280,240,'接点・ロック・シール・出口を空ける',16,'#526b7d')}`;
+  }else{
+    body=`<circle cx="116" cy="111" r="35" fill="#b7c3cb"/><circle cx="116" cy="111" r="13" fill="#f0f7fb"/><rect x="136" y="96" width="67" height="30" fill="#b7c3cb"/><rect x="187" y="90" width="86" height="42" rx="4" fill="#2c353b"/><path d="M273 111H485" stroke="#ee8d26" stroke-width="25"/><path d="M215 71V47H428V71M215 151V175H428V151" fill="none" stroke="#277b9e" stroke-width="12"/><rect x="201" y="71" width="30" height="15" fill="#277b9e"/><rect x="408" y="71" width="30" height="22" fill="#277b9e"/><rect x="201" y="136" width="30" height="15" fill="#277b9e"/><rect x="408" y="129" width="30" height="22" fill="#277b9e"/><circle cx="116" cy="111" r="47" fill="none" stroke="#bb4545" stroke-dasharray="7 5" stroke-width="3"/>${text(280,213,'黒被覆と根元を、同じ2本指で保持',19)}${text(280,240,'金属端子・穴・工具通路を空ける',16,'#526b7d')}`;
+  }
+  return `<svg viewBox="0 0 560 263" role="img" aria-label="${esc(id)}の既存手先系統を示す概念図" xmlns="http://www.w3.org/2000/svg">${body}</svg>`;
+}
+let selected='BASE';
+function showView(second){
+  const target=data.targets.find(t=>t.id===selected),view=target.view_data.find(v=>v.second===second),frame=data.frames[second];
+  $('source-image').src=frame.local_image;
+  $('source-caption').textContent=`2025年公式映像 · ${Math.floor(second/60)}:${String(second%60).padStart(2,'0')} · 原画像`;
+  $('source-link').href=frame.url;
+  $('markers').setAttribute('viewBox',`0 0 ${frame.size_px.join(' ')}`);
+  $('markers').innerHTML=view.markers.map(m=>`<g data-entity="${m.entity}" data-xy="${m.xy_px.join(',')}"><circle cx="${m.xy_px[0]}" cy="${m.xy_px[1]}" r="32" stroke="white" stroke-width="5" fill="${colors[selected]}"/>${text(m.xy_px[0],m.xy_px[1]+12,m.label,33,'white',700)}</g>`).join('');
+  $('marker-note').textContent=view.markers.length?view.markers.map(m=>m.label+'：'+m.text_ja).join('　'):'この場面には、この対象の位置を示す既存の印がありません。別の時点の端末を同一物とは対応していません。';
+  $('source-limit').textContent=view.limit_ja;
+  for(const button of document.querySelectorAll('[data-second]'))button.setAttribute('aria-pressed',+button.dataset.second===second);
+  window.interfaceState={target:selected,second,entity:target.entity,profile:target.profile,markers:view.markers,candidates:target.model_candidates.map(c=>c.id)};
+}
+function choose(id){
+  selected=id;const target=data.targets.find(t=>t.id===id);
+  for(const button of document.querySelectorAll('[data-target]'))button.setAttribute('aria-pressed',button.dataset.target===id);
+  $('views').innerHTML=target.views.map(s=>`<button type="button" data-second="${s}" aria-pressed="false">${Math.floor(s/60)}:${String(s%60).padStart(2,'0')}の場面</button>`).join('');
+  for(const button of document.querySelectorAll('[data-second]'))button.onclick=()=>showView(+button.dataset.second);
+  $('hand-title').textContent=target.profile+'系 · '+(id==='BASE'||id==='PANEL'?'既存仕様から比較':'対象別に適合');
+  $('hand-diagram').innerHTML=handDiagram(id);
+  for(const [element,key] of Object.entries({role:'role_ja','contact-intent':'contact_intent_ja','keep-clear':'clear_ja','model-note':'model_note_ja',next:'next_ja'}))$(element).textContent=target[key];
+  $('profile-detail').textContent=id==='RING'?'40 mm後退・時計回り15°はT050の既存側面基準。サンプルの線径を全線材へ転用せず、図は角度や寸法を表しません。':target.hand_family.unresolved_ja;
+  $('model-rows').innerHTML=target.model_candidates.length?target.model_candidates.map(c=>`<tr data-candidate="${c.id}"><td class="model-id">${c.id}</td><td>${c.basis.startsWith('official STEP')?'公式STEPを利用。映像との個別対応・許容接触面は未確認。':'写真からの概略外形。実部品の製作寸法は未公開。'}</td></tr>`).join(''):'<tr><td>なし</td><td>独立した可搬下板のメッシュは未作成。</td></tr>';
+  $('model-details').innerHTML=target.model_candidates.map(c=>`<p><b>${c.id}</b> <code>${c.mesh_names.map(esc).join(', ')}</code><br>表示外形 [m]：<code>${c.display_aabb_size_m.map(v=>v.toFixed(6)).join(' × ')}</code></p>`).join('')||'<p>P01は筐体のモデルです。</p>';
+  showView(target.default_view);
+}
+for(const target of data.targets){$('targets').insertAdjacentHTML('beforeend',`<button type="button" data-target="${target.id}" aria-pressed="false"><b>${target.profile}系</b>${esc(target.name_ja)}</button>`);}
+for(const button of document.querySelectorAll('[data-target]'))button.onclick=()=>choose(button.dataset.target);
+$('group-note').textContent=data.group_mapping_ja;
+window.exportInterfaceOverview=images=>{
+  const source=(second,x,y,w,h,entities)=>{
+    const groups=data.targets.flatMap(t=>t.view_data.filter(v=>v.second===second).flatMap(v=>v.markers.map(m=>({...m,color:colors[t.id]})))).filter(m=>entities.includes(m.entity));
+    return `<g transform="translate(${x} ${y})"><image width="${w}" height="${h}" href="${images[second]}"/>${groups.map(m=>`<circle cx="${m.xy_px[0]*w/1920}" cy="${m.xy_px[1]*h/1080}" r="15" fill="${m.color}" stroke="white" stroke-width="2"/>${text(m.xy_px[0]*w/1920,m.xy_px[1]*h/1080+6,m.label,18,'white',700)}`).join('')}</g>`;
+  };
+  const box=(x,y,color,title,line1,line2)=>`<rect x="${x}" y="${y}" width="647" height="150" rx="10" fill="white" stroke="#cbd8e1"/><rect x="${x}" y="${y}" width="9" height="150" rx="4" fill="${color}"/>${text(x+324,y+37,title,23,color,700)}${text(x+324,y+77,line1,19)}${text(x+324,y+115,line2,17,'#526b7d')}`;
+  return `<svg xmlns="http://www.w3.org/2000/svg" width="1380" height="1030" viewBox="0 0 1380 1030" style="font-family:Noto Sans CJK JP,Yu Gothic,sans-serif"><rect width="1380" height="1030" fill="#edf2f5"/>${text(690,45,'Cへの受渡し：実物の対象と、使う手先を分ける',29,'#193249',700)}${text(690,82,'採用5腕を維持。丸印は対象の所在であり、把持点ではありません。',19,'#526b7d')}${source(24,30,115,647,364,['V25_BASE_PLATE','V25_FUSE_PANEL'])}${source(154,703,115,647,364,['V25_INNER_ENDS','V25_RING_ENDS'])}${text(354,510,'公式映像 0:24 · 下板①／ヒューズ板②',19)}${text(1027,510,'公式映像 2:34 · 樹脂端末①／丸端子②',19)}${box(30,540,colors.BASE,'① 下板本体 → H06系を比較','幅広対向爪：許容側面・支持面を特定','独立下板のモデルなし。P01は筐体。')}${box(30,710,colors.PANEL,'② ヒューズ板 → H07系を比較','薄い側縁用2本指：B/Cで別の把持域','P07は概略外形。手渡し位置は未選定。')}${box(703,540,colors.INNER,'① 樹脂ハウジング → H05系','許容剛体面を保持。接点・ロックを空ける','I01〜I05は候補。映像の個体とは未対応。')}${box(703,710,colors.RING,'② 丸端子付き線 → H04/T050系','金属環を空け、黒被覆と根元を保持','40 mm・15°は既存サンプルの側面基準。')}${text(690,911,'A側／B側の案内役を、端末の種類へ一対一に割り当てない。',22,'#168278',700)}${text(690,950,'線ごとの所属・接続先を追ってから、共用補助とC補助へ対応する。',19)}${text(690,995,'写真モデルと映像は同一製造版未確認。実寸把持座標・到達・物理成立は未確認。',17,'#526b7d')}</svg>`;
+};
+choose('BASE');window.interfacesReady=true;
+</script></html>
