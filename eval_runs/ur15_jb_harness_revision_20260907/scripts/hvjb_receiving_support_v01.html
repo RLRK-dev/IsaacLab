@@ -1,0 +1,80 @@
+<!doctype html>
+<!-- Copyright (c) 2022-2026, The Isaac Lab Project Developers (https://github.com/isaac-sim/IsaacLab/blob/main/CONTRIBUTORS.md).
+All rights reserved. SPDX-License-Identifier: BSD-3-Clause -->
+<html lang="ja"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>HVJB｜Cで本体と自由端を受ける</title>
+<style>
+:root{font:16px/1.7 "Noto Sans CJK JP","Yu Gothic",sans-serif;color:#193249;background:#edf2f5;--blue:#2875b8;--orange:#c6740a;--green:#168278;--muted:#577082;--red:#b83838}*{box-sizing:border-box}body{margin:0}main{max-width:1460px;margin:auto;padding:24px 28px 50px}h1{font-size:29px;margin:7px 0}h2{font-size:22px;margin:0 0 12px}h3{font-size:19px;margin:0 0 7px}p{margin:8px 0}.small{font-size:14px;color:var(--muted)}.badge{display:inline-block;padding:4px 14px;border-radius:20px;background:#dcefe9;color:#126e60;font-weight:700;font-size:14px}section{margin-top:20px;background:white;border:1px solid #d6e0e7;border-radius:14px;padding:20px}.steps{display:grid;grid-template-columns:repeat(6,1fr);gap:7px}.steps button{font-size:14px;padding:10px;text-align:left}.steps b{display:block;font-size:19px}button{font:inherit;color:inherit;background:white;border:1px solid #b6c8d4;border-radius:7px;padding:10px 14px;cursor:pointer}button[aria-pressed=true]{background:#c6740a;border-color:#c6740a;color:white}button:focus-visible,a:focus-visible{outline:3px solid var(--blue);outline-offset:2px}.diagnostics{display:flex;align-items:center;flex-wrap:wrap;gap:10px;margin:14px 0}.diagnostics button{font-size:14px}.diagnostics button[aria-pressed=true]{background:var(--red);border-color:var(--red)}.layout{display:grid;grid-template-columns:2.1fr 1fr;gap:22px;margin-top:18px}.diagram{width:100%;height:auto;display:block;background:#f6f9fb;border:1px solid #d6e0e7;border-radius:10px}.detail{padding:17px;border-radius:10px;background:#fff4e5}.detail.counterexample{background:#ffeded}.key{font-size:20px;font-weight:700}.key.red{color:var(--red)}.callout{padding:14px 17px;border-left:4px solid #c6740a;background:#fff7e8;margin-top:15px}.legend{display:flex;gap:15px;flex-wrap:wrap;font-size:14px;margin-top:10px}.legend i{display:inline-block;width:11px;height:11px;border-radius:50%;margin-right:6px}.links{display:flex;gap:14px 24px;flex-wrap:wrap;margin-top:14px}a{color:#1c648b}.scroll{overflow:auto}table{border-collapse:collapse;width:100%;font-size:14px}th,td{padding:10px;border-bottom:1px solid #d6e0e7;text-align:left;vertical-align:top}th{background:#f0f5f8}.next li{margin:10px 0}summary{font-weight:700;cursor:pointer}.chain{display:flex;flex-wrap:wrap;align-items:center;gap:8px}.chain span{padding:8px 12px;background:#edf6f2;border:1px solid #c5dcd4;border-radius:6px}
+@media(max-width:950px){main{padding:18px 12px}.layout{grid-template-columns:1fr}.steps{grid-template-columns:repeat(3,1fr)}section{padding:17px 12px}h1{font-size:24px}}@media(max-width:540px){.steps{grid-template-columns:repeat(2,1fr)}}
+</style>
+<main>
+<header><span class="badge">5腕の採用構成を継承 · C側の受渡し比較</span><h1>本体と自由端を分けて、Cへ渡す</h1><p>C補助がA側を保持している間、B側は共用補助が持ち続ける案を示します。</p><p class="small">A/B両側に独立案内が必要な場合の比較です。案内対象の数・接触面・実際の配置は未確定です。</p></header>
+<section>
+<div class="steps" id="steps" role="group" aria-label="受渡しの場面"></div>
+<div class="diagnostics"><span class="small">担当を省いた場合の比較：</span><div id="diagnostics"></div></div>
+<div class="layout"><div><div id="diagram"></div><div class="legend"><span><i style="background:var(--blue)"></i>主担当腕</span><span><i style="background:var(--orange)"></i>A/B共用補助</span><span><i style="background:var(--green)"></i>C専用補助</span></div><p class="small">線は支持・保持の担当。幾何形状や軌道ではありません。薄い腕は、この場面の対象を担当しない表示で、別仕事も含めた空き時間の判定ではありません。</p></div><aside class="detail" id="detail" aria-live="polite"><h2 id="state-title"></h2><p id="state-type" class="small"></p><p id="state-result" class="key"></p><p id="state-description"></p><p id="reservation"></p><p id="source-tasks" class="small"></p><div class="scroll"><table><thead><tr><th>対象</th><th>担当</th></tr></thead><tbody id="owners"></tbody></table></div></aside></div>
+<div class="callout"><strong>「付き添い」はC専用の3腕目を増設する意味ではありません。</strong> 採用済みの共用補助が、B側の引継ぎを終えるまで関わる比較案です。その間はA/Bの次の補助把持を待たせる必要があります。</div>
+</section>
+<section><h2>この後、共用補助をA/Bへ戻すには</h2><div class="chain"><span>A側の次支持・案内の引継ぎを特定</span><b>→</b><span>C補助が次の対象を受けられる状態</span><b>→</b><span>B側を受渡し</span><b>→</b><span>共用補助が退避・移動</span></div><p>この後段の受け先は未確定です。C補助が空く時点を仮定して、共用補助を先に解放する動作には進めません。</p><ol class="next" id="interfaces"></ol><details><summary>元の作業票と照合する</summary><div id="source-cards"></div></details><nav class="links"><a href="overview.png">付き添い案の画像</a><a href="overview.svg">図のSVG</a><a href="notes.md">検討の記録</a><a href="selection.json">採用済み5腕</a><a href="review_data.json">対応データ</a><a href="workcards/review.html">元20仕事の作業票</a></nav></section>
+</main>
+<script>
+const data=__PAYLOAD__;
+const $=id=>document.getElementById(id);
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const colors={ARM_A:'#2875b8',ARM_B:'#2875b8',ARM_C:'#2875b8',ASSIST_1:'#c6740a',ASSIST_2:'#168278','F-C':'#758995'};
+const labels={ARM_A:'A主担当',ARM_B:'B主担当',ARM_C:'C主担当',ASSIST_1:'A/B共用補助',ASSIST_2:'C専用補助','F-C':'Cの受け F-C'};
+const positions={ARM_A:86,ARM_B:198,ARM_C:310,ASSIST_1:466,ASSIST_2:596};
+const targets={BASE:144,PANEL:304,A_END:464,B_END:624};
+const names=Object.fromEntries(data.objects.map(o=>[o.id,o.name_ja]));
+const text=(x,y,value,size=17,color='#193249',weight=400)=>`<text x="${x}" y="${y}" text-anchor="middle" font-size="${size}" fill="${color}" font-weight="${weight}">${esc(value)}</text>`;
+const box=(x,y,w,h,fill,stroke='#cbd8e1')=>`<rect x="${x}" y="${y}" width="${w}" height="${h}" rx="10" fill="${fill}" stroke="${stroke}"/>`;
+function arm(unit,x,y,color){
+  return `<g class="arm-icon" data-unit="${unit}" transform="translate(${x} ${y}) scale(.57)"><path d="M-21 4H21L15-9H-15Z" fill="${color}"/><path d="M0-12L-14-58L28-84L60-48V-29" stroke="${color}" stroke-width="13" fill="none" stroke-linejoin="round"/>${[[0,-12],[-14,-58],[28,-84],[60,-48]].map(([cx,cy])=>`<circle cx="${cx}" cy="${cy}" r="9" fill="white" stroke="${color}" stroke-width="5"/>`).join('')}<path d="M48-28H72M50-28V-13H55M70-28V-13H65" fill="none" stroke="${color}" stroke-width="5"/></g>`;
+}
+function diagram(state){
+  const obs=state.observations;let links='',actors='',objects='';
+  for(const [target,owners] of Object.entries(state.owners)){
+    for(const actor of owners){
+      const y=targets[target],conflict=Object.hasOwn(obs.duplicate_independent_arm_roles,actor);
+      const d=actor==='F-C'?`M795 74V${y-46}`:`M333 ${positions[actor]}C435 ${positions[actor]} 462 ${y} 572 ${y}`;
+      links+=`<path class="ownership-link" data-target="${target}" data-actor="${actor}" d="${d}" fill="none" stroke="${conflict?'#b83838':colors[actor]}" stroke-width="${conflict?5:4}"/>`;
+    }
+    const missing=!owners.length,guide=target.endsWith('END');
+    objects+=`<g class="target" data-target="${target}">${box(578,targets[target]-47,396,94,missing?'#ffebeb':'white',missing?'#b83838':'#cbd8e1')}${text(785,targets[target]-11,names[target],23,missing?'#b83838':'#193249',700)}${text(785,targets[target]+24,missing?'受け渡す担当が空欄':guide?'案内対象の記号（本数未確定）':'本体の支持・保持を追う対象',16,missing?'#b83838':'#577082')}</g>`;
+  }
+  for(const [actor,y] of Object.entries(positions)){
+    const holds=obs.assigned_objects[actor]||[],busy=state.busy_nonholding.includes(actor),active=holds.length||busy;
+    const caption=busy?'開放・退避中':holds.length===2?'独立した2役が重複':holds.length?'対象を担当':'この場面の対象外';
+    actors+=`<g class="actor" data-actor="${actor}" opacity="${active?1:.38}">${box(12,y-44,319,91,'white')}${arm(actor,57,y+28,colors[actor])}${text(219,y-7,labels[actor],24,colors[actor],700)}${text(219,y+24,caption,16,holds.length===2?'#b83838':'#577082')}</g>`;
+  }
+  return `<svg id="support-diagram" viewBox="0 0 996 694" class="diagram" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="diagram-title diagram-description" style="font-family:Noto Sans CJK JP,Yu Gothic,sans-serif"><title id="diagram-title">${esc(state.title_ja)}</title><desc id="diagram-description">線は役割対応。${esc(state.detail_ja)}</desc>${links}${actors}${box(646,13,328,61,'#edf2f5')}${text(810,39,'Cの受け F-C',22,'#576e7c',700)}${text(810,63,'支持面・形状は未確定',15,'#577082')}${objects}</svg>`;
+}
+function show(id){
+  const state=data.states.find(s=>s.id===id),obs=state.observations;
+  $('diagram').innerHTML=diagram(state);
+  for(const button of document.querySelectorAll('[data-state]'))button.setAttribute('aria-pressed',button.dataset.state===id);
+  $('state-title').textContent=state.title_ja;$('state-description').textContent=state.detail_ja;
+  $('state-type').textContent=state.type==='diagnostic_counterexample'?'担当を省いた比較例（予定動作ではありません）':state.type==='source_retention_candidate'?'共用補助の付き添い：未採用の比較案':'受渡し手順の候補';
+  $('detail').classList.toggle('counterexample',state.type==='diagnostic_counterexample');
+  $('state-result').classList.toggle('red',state.type==='diagnostic_counterexample');
+  $('state-result').textContent=obs.unassigned_targets.length?'B側の自由端の担当が抜ける':Object.keys(obs.duplicate_independent_arm_roles).length?'同じC補助へ独立した2役が重なる':id==='B_KEEP'?'Cの受渡しに3腕が関わる':`この対象の保持を${obs.holding_arms.length}腕へ対応`;
+  $('reservation').textContent=obs.shared_assistant_reserved?'共用補助はまだ使用中。A/Bの次の補助把持へは割り当てない。':state.type==='diagnostic_counterexample'?'担当の抜け・重複を、共用補助の空き時間へ変換しない。':'この図だけで、共用補助の次仕事への復帰は判定しません。';
+  $('source-tasks').textContent='元の対応作業：'+state.source_tasks.join(' / ');
+  $('owners').innerHTML=Object.entries(state.owners).map(([target,owners])=>`<tr data-target-row="${target}"><td>${esc(names[target])}</td><td>${owners.map(o=>esc(labels[o])).join(' ＋ ')||'未割当'}</td></tr>`).join('');
+  window.receivingState={id,owners:state.owners,observations:obs,busy:state.busy_nonholding};
+}
+for(const [i,state] of data.states.entries()){
+  const target=state.type==='diagnostic_counterexample'?'diagnostics':'steps';
+  $(target).insertAdjacentHTML('beforeend',`<button type="button" data-state="${state.id}" aria-pressed="false">${target==='steps'?'<b>'+(i+1)+'</b>':''}${esc(state.title_ja)}</button>`);
+}
+for(const button of document.querySelectorAll('[data-state]'))button.addEventListener('click',()=>show(button.dataset.state));
+$('interfaces').innerHTML=data.next_interfaces_ja.map(t=>'<li>'+esc(t)+'</li>').join('');
+$('source-cards').innerHTML=data.source_cards.map(c=>`<article><h3>${c.id}｜${esc(c.task.work_ja)}</h3><p>${esc(c.keep_ja)}</p><p>${esc(c.end_ja)}</p><p class="small">${esc(c.missing_ja)}</p></article>`).join('');
+window.exportReceivingOverview=()=>{
+  const state=data.states.find(s=>s.id==='B_KEEP');
+  const svg=diagram(state).replace('id="support-diagram"','x="14" y="100" width="960" height="669"');
+  return `<svg xmlns="http://www.w3.org/2000/svg" width="1380" height="830" viewBox="0 0 1380 830" style="font-family:Noto Sans CJK JP,Yu Gothic,sans-serif"><rect width="1380" height="830" fill="#edf2f5"/>${text(690,43,'Cで本体と自由端を受ける：共用補助が付き添う案',28,'#193249',700)}${text(690,78,'A/B両側に独立案内が必要な場合。5腕のうち3腕がこの受渡しに関与。',19,'#577082')}${svg}${box(1000,121,358,530,'#fff3e1')}${text(1179,167,'既存5腕の役割を継続',23,'#945600',700)}${text(1179,218,'C主担当 → B本体',20,'#2875b8',700)}${text(1179,267,'C補助 → A側の自由端',20,'#168278',700)}${text(1179,316,'共用補助 → B側の自由端',20,'#c6740a',700)}${text(1179,383,'Bの引継ぎが終わるまで',19)}${text(1179,418,'共用補助はC側に付き添う',19)}${text(1179,478,'A/Bの次の補助把持は待機',20,'#945600',700)}${text(1179,543,'到達・把持域・次の受け先は',17,'#577082')}${text(1179,574,'これから具体化する',17,'#577082')}${text(1179,619,'この付き添いは未採用の比較案',16,'#577082')}${text(690,801,'担当関係の図。実ケーブル本数・実配置・軌道・物理成立の判定を表しません。',17,'#577082')}</svg>`;
+};
+show('B_KEEP');window.receivingReady=true;
+</script>
+</html>

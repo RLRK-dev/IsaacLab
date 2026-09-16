@@ -1,0 +1,217 @@
+{
+  "observed_at": "2026-09-16T18:09:16.877168+09:00",
+  "directory": "/home/rlrk/Downloads/THREAD_HVJB_C側の受渡し_v01_20260916",
+  "input_sha256_before": {
+    "data/hvjb_robot_selection_v01.json": "ad1d0fc6ad2f0c9d36f4d9839faf559ce80aa9ffb4965174facef944f1a58db8",
+    "data/hvjb_task_occupancy_v01.json": "4da5b53687b05cd2cd1d294cf57121abde6ee9d04b19ed0a37ef2fb2a4d79df9",
+    "data/hvjb_unitization_roles_v01.json": "7282ac79494d7704c7a88b48627b1d8cc72db0a883395d864ab1142454a3e802",
+    "data/hvjb_receiving_support_inputs_v01.json": "9ff12931379f662c059aca553cd08daebda988a3dee9e960f218218ba17afdaa",
+    "scripts/hvjb_receiving_support_v01.html": "e8da8490e51c095cc4ef20924ed43e35c329f8d08679f4d255b106f55055267b",
+    "analysis/hvjb_receiving_support_v01.md": "16658097a27f6d04e6cbb6830f6bf6af656fa8df9d9f83bb8a370283e50a2130"
+  },
+  "input_sha256_after": {
+    "data/hvjb_robot_selection_v01.json": "ad1d0fc6ad2f0c9d36f4d9839faf559ce80aa9ffb4965174facef944f1a58db8",
+    "data/hvjb_task_occupancy_v01.json": "4da5b53687b05cd2cd1d294cf57121abde6ee9d04b19ed0a37ef2fb2a4d79df9",
+    "data/hvjb_unitization_roles_v01.json": "7282ac79494d7704c7a88b48627b1d8cc72db0a883395d864ab1142454a3e802",
+    "data/hvjb_receiving_support_inputs_v01.json": "9ff12931379f662c059aca553cd08daebda988a3dee9e960f218218ba17afdaa",
+    "scripts/hvjb_receiving_support_v01.html": "e8da8490e51c095cc4ef20924ed43e35c329f8d08679f4d255b106f55055267b",
+    "analysis/hvjb_receiving_support_v01.md": "16658097a27f6d04e6cbb6830f6bf6af656fa8df9d9f83bb8a370283e50a2130"
+  },
+  "states": {
+    "A_SEND": {
+      "assigned_objects": {
+        "ARM_A": [
+          "BASE"
+        ],
+        "ASSIST_1": [
+          "A_END"
+        ]
+      },
+      "unassigned_targets": [],
+      "duplicate_independent_arm_roles": {},
+      "holding_arms": [
+        "ARM_A",
+        "ASSIST_1"
+      ],
+      "shared_assistant_reserved": true
+    },
+    "A_OVERLAP": {
+      "assigned_objects": {
+        "ARM_A": [
+          "BASE"
+        ],
+        "F-C": [
+          "BASE"
+        ],
+        "ASSIST_1": [
+          "A_END"
+        ],
+        "ASSIST_2": [
+          "A_END"
+        ]
+      },
+      "unassigned_targets": [],
+      "duplicate_independent_arm_roles": {},
+      "holding_arms": [
+        "ARM_A",
+        "ASSIST_1",
+        "ASSIST_2"
+      ],
+      "shared_assistant_reserved": true
+    },
+    "A_RETREAT": {
+      "assigned_objects": {
+        "F-C": [
+          "BASE"
+        ],
+        "ASSIST_2": [
+          "A_END"
+        ]
+      },
+      "unassigned_targets": [],
+      "duplicate_independent_arm_roles": {},
+      "holding_arms": [
+        "ASSIST_2"
+      ],
+      "shared_assistant_reserved": true
+    },
+    "B_SEND": {
+      "assigned_objects": {
+        "F-C": [
+          "BASE"
+        ],
+        "ASSIST_2": [
+          "A_END"
+        ],
+        "ARM_B": [
+          "PANEL"
+        ],
+        "ASSIST_1": [
+          "B_END"
+        ]
+      },
+      "unassigned_targets": [],
+      "duplicate_independent_arm_roles": {},
+      "holding_arms": [
+        "ARM_B",
+        "ASSIST_1",
+        "ASSIST_2"
+      ],
+      "shared_assistant_reserved": true
+    },
+    "B_OVERLAP": {
+      "assigned_objects": {
+        "F-C": [
+          "BASE"
+        ],
+        "ASSIST_2": [
+          "A_END"
+        ],
+        "ARM_B": [
+          "PANEL"
+        ],
+        "ARM_C": [
+          "PANEL"
+        ],
+        "ASSIST_1": [
+          "B_END"
+        ]
+      },
+      "unassigned_targets": [],
+      "duplicate_independent_arm_roles": {},
+      "holding_arms": [
+        "ARM_B",
+        "ARM_C",
+        "ASSIST_1",
+        "ASSIST_2"
+      ],
+      "shared_assistant_reserved": true
+    },
+    "B_KEEP": {
+      "assigned_objects": {
+        "F-C": [
+          "BASE"
+        ],
+        "ASSIST_2": [
+          "A_END"
+        ],
+        "ARM_C": [
+          "PANEL"
+        ],
+        "ASSIST_1": [
+          "B_END"
+        ]
+      },
+      "unassigned_targets": [],
+      "duplicate_independent_arm_roles": {},
+      "holding_arms": [
+        "ARM_C",
+        "ASSIST_1",
+        "ASSIST_2"
+      ],
+      "shared_assistant_reserved": true
+    },
+    "B_DOUBLE": {
+      "assigned_objects": {
+        "F-C": [
+          "BASE"
+        ],
+        "ASSIST_2": [
+          "A_END",
+          "B_END"
+        ],
+        "ARM_C": [
+          "PANEL"
+        ]
+      },
+      "unassigned_targets": [],
+      "duplicate_independent_arm_roles": {
+        "ASSIST_2": [
+          "A_END",
+          "B_END"
+        ]
+      },
+      "holding_arms": [
+        "ARM_C",
+        "ASSIST_2"
+      ],
+      "shared_assistant_reserved": false
+    },
+    "B_DROP": {
+      "assigned_objects": {
+        "F-C": [
+          "BASE"
+        ],
+        "ASSIST_2": [
+          "A_END"
+        ],
+        "ARM_C": [
+          "PANEL"
+        ]
+      },
+      "unassigned_targets": [
+        "B_END"
+      ],
+      "duplicate_independent_arm_roles": {},
+      "holding_arms": [
+        "ARM_C",
+        "ASSIST_2"
+      ],
+      "shared_assistant_reserved": false
+    }
+  },
+  "source_task_count": 20,
+  "page_sha256": "a3caf4ea37bc4c98ffd7c289f86d760b80561384a0e30d4a433b3b0c1ceef251",
+  "copied_workcards_sha256": {
+    "review.html": "bbedddb2c8df10cc09fbf58c8d0a579c63f54b2a53b83f3962aa2fdc52316386",
+    "review_data.json": "4da5b53687b05cd2cd1d294cf57121abde6ee9d04b19ed0a37ef2fb2a4d79df9",
+    "allocation.json": "2e8516405684475d04fcf57938e7771c0283a5ab23cf482aa6fba4b718889dd9",
+    "catalog.json": "6c5b7cb9bab859a33c8f5d5cd5429ce9f06fb0951b8a8fa4ae2a31ad99052ca0",
+    "process_v03.json": "5e9d7078d4e7ff9772f8561788b29a34b28165e3118559385dcc78faf28b64e7",
+    "notes.md": "1646a8c0e69425e5679b917f3eb0659f9d2e7d50e041b9a19e2af4ab1bf8cba9",
+    "audit.json": "bbb5e81e820df34c3dd1fc3f96032c514746621673fa3c1ed640ee9fbf40220f",
+    "仕事と保持区間.csv": "ef3ebbaa3fe0b75568f073bf3957495999ce5ae885aeabe5b319f71ecc9f74fe",
+    "対象の照合先.csv": "8685218a288917c4ed2a75413bb973b36332b6e7725b9bf348c51433dd7551a3"
+  },
+  "physical_acceptance_verdict": null
+}

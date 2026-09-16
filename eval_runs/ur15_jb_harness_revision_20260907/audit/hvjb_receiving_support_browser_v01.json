@@ -1,0 +1,627 @@
+{
+  "observed_at": "2026-09-16T09:11:05.393Z",
+  "directory": "/home/rlrk/Downloads/THREAD_HVJB_C側の受渡し_v01_20260916",
+  "page_sha256": "a3caf4ea37bc4c98ffd7c289f86d760b80561384a0e30d4a433b3b0c1ceef251",
+  "cases": [
+    {
+      "state": {
+        "id": "A_SEND",
+        "owners": {
+          "BASE": [
+            "ARM_A"
+          ],
+          "A_END": [
+            "ASSIST_1"
+          ]
+        },
+        "observations": {
+          "assigned_objects": {
+            "ARM_A": [
+              "BASE"
+            ],
+            "ASSIST_1": [
+              "A_END"
+            ]
+          },
+          "unassigned_targets": [],
+          "duplicate_independent_arm_roles": {},
+          "holding_arms": [
+            "ARM_A",
+            "ASSIST_1"
+          ],
+          "shared_assistant_reserved": true
+        },
+        "busy": []
+      },
+      "units": [
+        "ARM_A",
+        "ARM_B",
+        "ARM_C",
+        "ASSIST_1",
+        "ASSIST_2"
+      ],
+      "links": [
+        [
+          "BASE",
+          "ARM_A"
+        ],
+        [
+          "A_END",
+          "ASSIST_1"
+        ]
+      ],
+      "rows": [
+        "BASE",
+        "A_END"
+      ],
+      "description": "A主担当が本体、共用補助が必要な自由端を担当する例。この2つの支持を別々に受け渡す。図示していないB側・他作業の腕が空いているという意味ではない。",
+      "selected": [
+        "A_SEND"
+      ],
+      "result": "この対象の保持を2腕へ対応"
+    },
+    {
+      "state": {
+        "id": "A_OVERLAP",
+        "owners": {
+          "BASE": [
+            "ARM_A",
+            "F-C"
+          ],
+          "A_END": [
+            "ASSIST_1",
+            "ASSIST_2"
+          ]
+        },
+        "observations": {
+          "assigned_objects": {
+            "ARM_A": [
+              "BASE"
+            ],
+            "F-C": [
+              "BASE"
+            ],
+            "ASSIST_1": [
+              "A_END"
+            ],
+            "ASSIST_2": [
+              "A_END"
+            ]
+          },
+          "unassigned_targets": [],
+          "duplicate_independent_arm_roles": {},
+          "holding_arms": [
+            "ARM_A",
+            "ASSIST_1",
+            "ASSIST_2"
+          ],
+          "shared_assistant_reserved": true
+        },
+        "busy": []
+      },
+      "units": [
+        "ARM_A",
+        "ARM_B",
+        "ARM_C",
+        "ASSIST_1",
+        "ASSIST_2"
+      ],
+      "links": [
+        [
+          "BASE",
+          "ARM_A"
+        ],
+        [
+          "BASE",
+          "F-C"
+        ],
+        [
+          "A_END",
+          "ASSIST_1"
+        ],
+        [
+          "A_END",
+          "ASSIST_2"
+        ]
+      ],
+      "rows": [
+        "BASE",
+        "A_END"
+      ],
+      "description": "本体をCの受けへ、自由端をC専用補助へ引き継ぐ候補。渡す側と受ける側の担当が重なる区間を示す。把持面、同時に接近できる指の空間、荷重移行は未確認。",
+      "selected": [
+        "A_OVERLAP"
+      ],
+      "result": "この対象の保持を3腕へ対応"
+    },
+    {
+      "state": {
+        "id": "A_RETREAT",
+        "owners": {
+          "BASE": [
+            "F-C"
+          ],
+          "A_END": [
+            "ASSIST_2"
+          ]
+        },
+        "observations": {
+          "assigned_objects": {
+            "F-C": [
+              "BASE"
+            ],
+            "ASSIST_2": [
+              "A_END"
+            ]
+          },
+          "unassigned_targets": [],
+          "duplicate_independent_arm_roles": {},
+          "holding_arms": [
+            "ASSIST_2"
+          ],
+          "shared_assistant_reserved": true
+        },
+        "busy": [
+          "ARM_A",
+          "ASSIST_1"
+        ]
+      },
+      "units": [
+        "ARM_A",
+        "ARM_B",
+        "ARM_C",
+        "ASSIST_1",
+        "ASSIST_2"
+      ],
+      "links": [
+        [
+          "BASE",
+          "F-C"
+        ],
+        [
+          "A_END",
+          "ASSIST_2"
+        ]
+      ],
+      "rows": [
+        "BASE",
+        "A_END"
+      ],
+      "description": "Cの本体支持と自由端の受取りが成立した場合の段階。A主担当と共用補助は開放・退避中で、まだ次の把持には割り当てない。支持成立を測定した場面ではない。",
+      "selected": [
+        "A_RETREAT"
+      ],
+      "result": "この対象の保持を1腕へ対応"
+    },
+    {
+      "state": {
+        "id": "B_SEND",
+        "owners": {
+          "BASE": [
+            "F-C"
+          ],
+          "A_END": [
+            "ASSIST_2"
+          ],
+          "PANEL": [
+            "ARM_B"
+          ],
+          "B_END": [
+            "ASSIST_1"
+          ]
+        },
+        "observations": {
+          "assigned_objects": {
+            "F-C": [
+              "BASE"
+            ],
+            "ASSIST_2": [
+              "A_END"
+            ],
+            "ARM_B": [
+              "PANEL"
+            ],
+            "ASSIST_1": [
+              "B_END"
+            ]
+          },
+          "unassigned_targets": [],
+          "duplicate_independent_arm_roles": {},
+          "holding_arms": [
+            "ARM_B",
+            "ASSIST_1",
+            "ASSIST_2"
+          ],
+          "shared_assistant_reserved": true
+        },
+        "busy": []
+      },
+      "units": [
+        "ARM_A",
+        "ARM_B",
+        "ARM_C",
+        "ASSIST_1",
+        "ASSIST_2"
+      ],
+      "links": [
+        [
+          "BASE",
+          "F-C"
+        ],
+        [
+          "A_END",
+          "ASSIST_2"
+        ],
+        [
+          "PANEL",
+          "ARM_B"
+        ],
+        [
+          "B_END",
+          "ASSIST_1"
+        ]
+      ],
+      "rows": [
+        "BASE",
+        "A_END",
+        "PANEL",
+        "B_END"
+      ],
+      "description": "共用補助がAの退避・必要な手先交換・移動を終え、Bの案内を開始した例。A側の自由端はC専用補助が引き続き担当している。",
+      "selected": [
+        "B_SEND"
+      ],
+      "result": "この対象の保持を3腕へ対応"
+    },
+    {
+      "state": {
+        "id": "B_OVERLAP",
+        "owners": {
+          "BASE": [
+            "F-C"
+          ],
+          "A_END": [
+            "ASSIST_2"
+          ],
+          "PANEL": [
+            "ARM_B",
+            "ARM_C"
+          ],
+          "B_END": [
+            "ASSIST_1"
+          ]
+        },
+        "observations": {
+          "assigned_objects": {
+            "F-C": [
+              "BASE"
+            ],
+            "ASSIST_2": [
+              "A_END"
+            ],
+            "ARM_B": [
+              "PANEL"
+            ],
+            "ARM_C": [
+              "PANEL"
+            ],
+            "ASSIST_1": [
+              "B_END"
+            ]
+          },
+          "unassigned_targets": [],
+          "duplicate_independent_arm_roles": {},
+          "holding_arms": [
+            "ARM_B",
+            "ARM_C",
+            "ASSIST_1",
+            "ASSIST_2"
+          ],
+          "shared_assistant_reserved": true
+        },
+        "busy": []
+      },
+      "units": [
+        "ARM_A",
+        "ARM_B",
+        "ARM_C",
+        "ASSIST_1",
+        "ASSIST_2"
+      ],
+      "links": [
+        [
+          "BASE",
+          "F-C"
+        ],
+        [
+          "A_END",
+          "ASSIST_2"
+        ],
+        [
+          "PANEL",
+          "ARM_B"
+        ],
+        [
+          "PANEL",
+          "ARM_C"
+        ],
+        [
+          "B_END",
+          "ASSIST_1"
+        ]
+      ],
+      "rows": [
+        "BASE",
+        "A_END",
+        "PANEL",
+        "B_END"
+      ],
+      "description": "B本体をB主担当からC主担当へ直接引き継ぐ候補。板の両側に手を近づけられるかは未確認。B側の自由端はまだ共用補助が担当し、C専用補助へ重ねて割り当てない。",
+      "selected": [
+        "B_OVERLAP"
+      ],
+      "result": "この対象の保持を4腕へ対応"
+    },
+    {
+      "state": {
+        "id": "B_KEEP",
+        "owners": {
+          "BASE": [
+            "F-C"
+          ],
+          "A_END": [
+            "ASSIST_2"
+          ],
+          "PANEL": [
+            "ARM_C"
+          ],
+          "B_END": [
+            "ASSIST_1"
+          ]
+        },
+        "observations": {
+          "assigned_objects": {
+            "F-C": [
+              "BASE"
+            ],
+            "ASSIST_2": [
+              "A_END"
+            ],
+            "ARM_C": [
+              "PANEL"
+            ],
+            "ASSIST_1": [
+              "B_END"
+            ]
+          },
+          "unassigned_targets": [],
+          "duplicate_independent_arm_roles": {},
+          "holding_arms": [
+            "ARM_C",
+            "ASSIST_1",
+            "ASSIST_2"
+          ],
+          "shared_assistant_reserved": true
+        },
+        "busy": []
+      },
+      "units": [
+        "ARM_A",
+        "ARM_B",
+        "ARM_C",
+        "ASSIST_1",
+        "ASSIST_2"
+      ],
+      "links": [
+        [
+          "BASE",
+          "F-C"
+        ],
+        [
+          "A_END",
+          "ASSIST_2"
+        ],
+        [
+          "PANEL",
+          "ARM_C"
+        ],
+        [
+          "B_END",
+          "ASSIST_1"
+        ]
+      ],
+      "rows": [
+        "BASE",
+        "A_END",
+        "PANEL",
+        "B_END"
+      ],
+      "description": "C主担当はB本体、C専用補助はA側の自由端、共用補助はB側の自由端を担当する。C受渡しに3腕が関わる候補だが、既存5腕の範囲内。共用補助はBからの引継ぎ未完として占有が続き、A/Bの次の補助把持を開始できない。",
+      "selected": [
+        "B_KEEP"
+      ],
+      "result": "Cの受渡しに3腕が関わる"
+    },
+    {
+      "state": {
+        "id": "B_DOUBLE",
+        "owners": {
+          "BASE": [
+            "F-C"
+          ],
+          "A_END": [
+            "ASSIST_2"
+          ],
+          "PANEL": [
+            "ARM_C"
+          ],
+          "B_END": [
+            "ASSIST_2"
+          ]
+        },
+        "observations": {
+          "assigned_objects": {
+            "F-C": [
+              "BASE"
+            ],
+            "ASSIST_2": [
+              "A_END",
+              "B_END"
+            ],
+            "ARM_C": [
+              "PANEL"
+            ]
+          },
+          "unassigned_targets": [],
+          "duplicate_independent_arm_roles": {
+            "ASSIST_2": [
+              "A_END",
+              "B_END"
+            ]
+          },
+          "holding_arms": [
+            "ARM_C",
+            "ASSIST_2"
+          ],
+          "shared_assistant_reserved": false
+        },
+        "busy": []
+      },
+      "units": [
+        "ARM_A",
+        "ARM_B",
+        "ARM_C",
+        "ASSIST_1",
+        "ASSIST_2"
+      ],
+      "links": [
+        [
+          "BASE",
+          "F-C"
+        ],
+        [
+          "A_END",
+          "ASSIST_2"
+        ],
+        [
+          "PANEL",
+          "ARM_C"
+        ],
+        [
+          "B_END",
+          "ASSIST_2"
+        ]
+      ],
+      "rows": [
+        "BASE",
+        "A_END",
+        "PANEL",
+        "B_END"
+      ],
+      "description": "A側とB側を独立した2つの保持仕事として同じC補助へ割り当てた例。同じ手で両方を成立させる接触・駆動・手順は未確定で、単なる担当名の置換では受渡し完了にしない。",
+      "selected": [
+        "B_DOUBLE"
+      ],
+      "result": "同じC補助へ独立した2役が重なる"
+    },
+    {
+      "state": {
+        "id": "B_DROP",
+        "owners": {
+          "BASE": [
+            "F-C"
+          ],
+          "A_END": [
+            "ASSIST_2"
+          ],
+          "PANEL": [
+            "ARM_C"
+          ],
+          "B_END": []
+        },
+        "observations": {
+          "assigned_objects": {
+            "F-C": [
+              "BASE"
+            ],
+            "ASSIST_2": [
+              "A_END"
+            ],
+            "ARM_C": [
+              "PANEL"
+            ]
+          },
+          "unassigned_targets": [
+            "B_END"
+          ],
+          "duplicate_independent_arm_roles": {},
+          "holding_arms": [
+            "ARM_C",
+            "ASSIST_2"
+          ],
+          "shared_assistant_reserved": false
+        },
+        "busy": []
+      },
+      "units": [
+        "ARM_A",
+        "ARM_B",
+        "ARM_C",
+        "ASSIST_1",
+        "ASSIST_2"
+      ],
+      "links": [
+        [
+          "BASE",
+          "F-C"
+        ],
+        [
+          "A_END",
+          "ASSIST_2"
+        ],
+        [
+          "PANEL",
+          "ARM_C"
+        ]
+      ],
+      "rows": [
+        "BASE",
+        "A_END",
+        "PANEL",
+        "B_END"
+      ],
+      "description": "次の支持を決めないまま共用補助をB側の自由端から外した比較。B側案内の担当欄が空になる。この抜けを共用補助の空き時間として計上しない。落下や変形を計算した結果ではない。",
+      "selected": [
+        "B_DROP"
+      ],
+      "result": "B側の自由端の担当が抜ける"
+    }
+  ],
+  "source_cards": [
+    "D12",
+    "D22",
+    "D30"
+  ],
+  "source_task_count": 20,
+  "mobile": {
+    "width": 480,
+    "documentWidth": 465,
+    "units": 5
+  },
+  "local_links": [
+    "overview.png",
+    "overview.svg",
+    "notes.md",
+    "selection.json",
+    "review_data.json",
+    "workcards/review.html"
+  ],
+  "exports_sha256": {
+    "overview.svg": "ea182cbbbb3e9acb92e9efb662bf94873e343ce17c1700d922f2a6878f248db1",
+    "overview.png": "dc7364275a740f314f09f64a114b928b5b98dc52e1b57a4f6d881fcb9b8c08ef",
+    "browser_desktop.png": "eaca1f24664d80d2df50aa835a975dfac9ff22785ad928aab0efe3e039b0168a",
+    "browser_mobile.png": "018f70f6c27cd186bf2eb5f902c231dba0697384b5c533a76fb4d441a35e2c2f"
+  },
+  "javascript_errors": [],
+  "scope": "UI and assignment bookkeeping only; not grasp, load, reach or cycle-time validation"
+}

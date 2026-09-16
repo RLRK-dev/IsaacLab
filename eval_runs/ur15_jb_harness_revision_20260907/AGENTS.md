@@ -592,3 +592,20 @@ numbers unknown until their basis and the scope of the product change are set.
   holding one. Receiving support and actual end groups remain unresolved,
   including inner-housing retention during outer-header pickup. The diagrams
   neither add a support mechanism nor change the selected five-arm allocation.
+
+## C receiving-support comparison on 2026-09-16
+
+- `analysis/hvjb_receiving_support_v01.md` separates body support from free-end
+  guidance in D12/D22/D30. Eight diagram states reuse the selected five arms,
+  existing F-C support role and all twenty source workcards. The A-first order
+  and direct B-to-C body handover are examples, not selected motion or geometry.
+- If A and B require separate independent guidance while the C assistant holds
+  A, compare retaining B guidance on the shared A/B assistant. C's primary and
+  both existing assistants then participate in receiving; A/B's next auxiliary
+  grasp waits. This accompaniment remains unselected, and its reach, grasp
+  regions, next support and continuation beyond B receiving remain unresolved.
+- The two end-group labels do not establish cable counts or that one hand can
+  hold an entire group. Duplicate independent assignments to the C assistant
+  and an empty B-guide assignment are bookkeeping examples, not physical
+  contact, load, deformation, falling or cycle-time results. Do not add another
+  arm, upper retainer, cable fixture or selected rail from these diagrams.

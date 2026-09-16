@@ -1,0 +1,619 @@
+{
+  "revision": "hvjb_receiving_support_v01",
+  "selected_plan": "S5_AB",
+  "scope_ja": "AとBの自由端に別々の独立案内が必要な場合の受渡し比較。A側・B側は実ケーブル本数ではなく、ここで追う案内対象を表す。A先行は表示例。5腕の採用は維持し、共用補助のC側付き添いは比較案とする。",
+  "objects": [
+    {
+      "id": "BASE",
+      "name_ja": "A 下板ユニット",
+      "source_entity": "V25_BASE_PLATE",
+      "kind": "body"
+    },
+    {
+      "id": "A_END",
+      "name_ja": "A側の自由端",
+      "source_entity": null,
+      "kind": "guide"
+    },
+    {
+      "id": "PANEL",
+      "name_ja": "B ヒューズ板ユニット",
+      "source_entity": "V25_FUSE_PANEL",
+      "kind": "body"
+    },
+    {
+      "id": "B_END",
+      "name_ja": "B側の自由端",
+      "source_entity": null,
+      "kind": "guide"
+    }
+  ],
+  "states": [
+    {
+      "id": "A_SEND",
+      "title_ja": "Aを運ぶ",
+      "type": "handoff_example",
+      "owners": {
+        "BASE": [
+          "ARM_A"
+        ],
+        "A_END": [
+          "ASSIST_1"
+        ]
+      },
+      "busy_nonholding": [],
+      "source_tasks": [
+        "D12"
+      ],
+      "detail_ja": "A主担当が本体、共用補助が必要な自由端を担当する例。この2つの支持を別々に受け渡す。図示していないB側・他作業の腕が空いているという意味ではない。",
+      "observations": {
+        "assigned_objects": {
+          "ARM_A": [
+            "BASE"
+          ],
+          "ASSIST_1": [
+            "A_END"
+          ]
+        },
+        "unassigned_targets": [],
+        "duplicate_independent_arm_roles": {},
+        "holding_arms": [
+          "ARM_A",
+          "ASSIST_1"
+        ],
+        "shared_assistant_reserved": true
+      }
+    },
+    {
+      "id": "A_OVERLAP",
+      "title_ja": "Aの支持を重ねる",
+      "type": "handoff_example",
+      "owners": {
+        "BASE": [
+          "ARM_A",
+          "F-C"
+        ],
+        "A_END": [
+          "ASSIST_1",
+          "ASSIST_2"
+        ]
+      },
+      "busy_nonholding": [],
+      "source_tasks": [
+        "D12"
+      ],
+      "detail_ja": "本体をCの受けへ、自由端をC専用補助へ引き継ぐ候補。渡す側と受ける側の担当が重なる区間を示す。把持面、同時に接近できる指の空間、荷重移行は未確認。",
+      "observations": {
+        "assigned_objects": {
+          "ARM_A": [
+            "BASE"
+          ],
+          "F-C": [
+            "BASE"
+          ],
+          "ASSIST_1": [
+            "A_END"
+          ],
+          "ASSIST_2": [
+            "A_END"
+          ]
+        },
+        "unassigned_targets": [],
+        "duplicate_independent_arm_roles": {},
+        "holding_arms": [
+          "ARM_A",
+          "ASSIST_1",
+          "ASSIST_2"
+        ],
+        "shared_assistant_reserved": true
+      }
+    },
+    {
+      "id": "A_RETREAT",
+      "title_ja": "Aの手を退避",
+      "type": "handoff_example",
+      "owners": {
+        "BASE": [
+          "F-C"
+        ],
+        "A_END": [
+          "ASSIST_2"
+        ]
+      },
+      "busy_nonholding": [
+        "ARM_A",
+        "ASSIST_1"
+      ],
+      "source_tasks": [
+        "D12"
+      ],
+      "detail_ja": "Cの本体支持と自由端の受取りが成立した場合の段階。A主担当と共用補助は開放・退避中で、まだ次の把持には割り当てない。支持成立を測定した場面ではない。",
+      "observations": {
+        "assigned_objects": {
+          "F-C": [
+            "BASE"
+          ],
+          "ASSIST_2": [
+            "A_END"
+          ]
+        },
+        "unassigned_targets": [],
+        "duplicate_independent_arm_roles": {},
+        "holding_arms": [
+          "ASSIST_2"
+        ],
+        "shared_assistant_reserved": true
+      }
+    },
+    {
+      "id": "B_SEND",
+      "title_ja": "次にBを運ぶ",
+      "type": "handoff_example",
+      "owners": {
+        "BASE": [
+          "F-C"
+        ],
+        "A_END": [
+          "ASSIST_2"
+        ],
+        "PANEL": [
+          "ARM_B"
+        ],
+        "B_END": [
+          "ASSIST_1"
+        ]
+      },
+      "busy_nonholding": [],
+      "source_tasks": [
+        "D12",
+        "D22"
+      ],
+      "detail_ja": "共用補助がAの退避・必要な手先交換・移動を終え、Bの案内を開始した例。A側の自由端はC専用補助が引き続き担当している。",
+      "observations": {
+        "assigned_objects": {
+          "F-C": [
+            "BASE"
+          ],
+          "ASSIST_2": [
+            "A_END"
+          ],
+          "ARM_B": [
+            "PANEL"
+          ],
+          "ASSIST_1": [
+            "B_END"
+          ]
+        },
+        "unassigned_targets": [],
+        "duplicate_independent_arm_roles": {},
+        "holding_arms": [
+          "ARM_B",
+          "ASSIST_1",
+          "ASSIST_2"
+        ],
+        "shared_assistant_reserved": true
+      }
+    },
+    {
+      "id": "B_OVERLAP",
+      "title_ja": "B本体をCへ渡す",
+      "type": "handoff_example",
+      "owners": {
+        "BASE": [
+          "F-C"
+        ],
+        "A_END": [
+          "ASSIST_2"
+        ],
+        "PANEL": [
+          "ARM_B",
+          "ARM_C"
+        ],
+        "B_END": [
+          "ASSIST_1"
+        ]
+      },
+      "busy_nonholding": [],
+      "source_tasks": [
+        "D22",
+        "D30"
+      ],
+      "detail_ja": "B本体をB主担当からC主担当へ直接引き継ぐ候補。板の両側に手を近づけられるかは未確認。B側の自由端はまだ共用補助が担当し、C専用補助へ重ねて割り当てない。",
+      "observations": {
+        "assigned_objects": {
+          "F-C": [
+            "BASE"
+          ],
+          "ASSIST_2": [
+            "A_END"
+          ],
+          "ARM_B": [
+            "PANEL"
+          ],
+          "ARM_C": [
+            "PANEL"
+          ],
+          "ASSIST_1": [
+            "B_END"
+          ]
+        },
+        "unassigned_targets": [],
+        "duplicate_independent_arm_roles": {},
+        "holding_arms": [
+          "ARM_B",
+          "ARM_C",
+          "ASSIST_1",
+          "ASSIST_2"
+        ],
+        "shared_assistant_reserved": true
+      }
+    },
+    {
+      "id": "B_KEEP",
+      "title_ja": "共用補助が付き添う案",
+      "type": "source_retention_candidate",
+      "owners": {
+        "BASE": [
+          "F-C"
+        ],
+        "A_END": [
+          "ASSIST_2"
+        ],
+        "PANEL": [
+          "ARM_C"
+        ],
+        "B_END": [
+          "ASSIST_1"
+        ]
+      },
+      "busy_nonholding": [],
+      "source_tasks": [
+        "D22",
+        "D30"
+      ],
+      "detail_ja": "C主担当はB本体、C専用補助はA側の自由端、共用補助はB側の自由端を担当する。C受渡しに3腕が関わる候補だが、既存5腕の範囲内。共用補助はBからの引継ぎ未完として占有が続き、A/Bの次の補助把持を開始できない。",
+      "observations": {
+        "assigned_objects": {
+          "F-C": [
+            "BASE"
+          ],
+          "ASSIST_2": [
+            "A_END"
+          ],
+          "ARM_C": [
+            "PANEL"
+          ],
+          "ASSIST_1": [
+            "B_END"
+          ]
+        },
+        "unassigned_targets": [],
+        "duplicate_independent_arm_roles": {},
+        "holding_arms": [
+          "ARM_C",
+          "ASSIST_1",
+          "ASSIST_2"
+        ],
+        "shared_assistant_reserved": true
+      }
+    },
+    {
+      "id": "B_DOUBLE",
+      "title_ja": "比較：C補助へ二重割当",
+      "type": "diagnostic_counterexample",
+      "owners": {
+        "BASE": [
+          "F-C"
+        ],
+        "A_END": [
+          "ASSIST_2"
+        ],
+        "PANEL": [
+          "ARM_C"
+        ],
+        "B_END": [
+          "ASSIST_2"
+        ]
+      },
+      "busy_nonholding": [],
+      "source_tasks": [
+        "D22",
+        "D30"
+      ],
+      "detail_ja": "A側とB側を独立した2つの保持仕事として同じC補助へ割り当てた例。同じ手で両方を成立させる接触・駆動・手順は未確定で、単なる担当名の置換では受渡し完了にしない。",
+      "observations": {
+        "assigned_objects": {
+          "F-C": [
+            "BASE"
+          ],
+          "ASSIST_2": [
+            "A_END",
+            "B_END"
+          ],
+          "ARM_C": [
+            "PANEL"
+          ]
+        },
+        "unassigned_targets": [],
+        "duplicate_independent_arm_roles": {
+          "ASSIST_2": [
+            "A_END",
+            "B_END"
+          ]
+        },
+        "holding_arms": [
+          "ARM_C",
+          "ASSIST_2"
+        ],
+        "shared_assistant_reserved": false
+      }
+    },
+    {
+      "id": "B_DROP",
+      "title_ja": "比較：B側を先に開放",
+      "type": "diagnostic_counterexample",
+      "owners": {
+        "BASE": [
+          "F-C"
+        ],
+        "A_END": [
+          "ASSIST_2"
+        ],
+        "PANEL": [
+          "ARM_C"
+        ],
+        "B_END": []
+      },
+      "busy_nonholding": [],
+      "source_tasks": [
+        "D22",
+        "D30"
+      ],
+      "detail_ja": "次の支持を決めないまま共用補助をB側の自由端から外した比較。B側案内の担当欄が空になる。この抜けを共用補助の空き時間として計上しない。落下や変形を計算した結果ではない。",
+      "observations": {
+        "assigned_objects": {
+          "F-C": [
+            "BASE"
+          ],
+          "ASSIST_2": [
+            "A_END"
+          ],
+          "ARM_C": [
+            "PANEL"
+          ]
+        },
+        "unassigned_targets": [
+          "B_END"
+        ],
+        "duplicate_independent_arm_roles": {},
+        "holding_arms": [
+          "ARM_C",
+          "ASSIST_2"
+        ],
+        "shared_assistant_reserved": false
+      }
+    }
+  ],
+  "next_interfaces_ja": [
+    "下板本体：Cの受け面・位置決めとAの指の抜け。P01筐体底面を独立した可搬下板へ流用しない。",
+    "ヒューズ板本体：B主担当とC主担当が同時に接触できる別々の把持域。直接の手渡しが難しい場合の既存支持の使い方は別比較。",
+    "A/B各自由端：所属・同時に独立保持する対象・C側の次の接続または支持先。C補助が空く時点は未確定。",
+    "共用補助の付き添い：C側への到達と他腕・工具との空間。Bの受渡し予約の延長とA/Bの次仕事の待ちを計上する。走行軸は未選定。"
+  ],
+  "source_retention_selected": null,
+  "grasp_positions_m": null,
+  "physical_acceptance_verdict": null,
+  "observed_at": "2026-09-16T18:09:16.877168+09:00",
+  "selection": {
+    "revision": "hvjb_robot_selection_v01",
+    "decision_date": "2026-09-16",
+    "status": "user_selected_role_allocation",
+    "user_directive_ja": "補助を2腕に分ける",
+    "selected_plan": "S5_AB",
+    "selected_plan_ja": "主担当3腕＋A/B共用補助1腕＋C専用補助1腕",
+    "source_comparison": "data/hvjb_robot_sharing_v01.json",
+    "source_sha256": "7888693db9b5cd0314b7acecb6c0fa09ab7c207e43c2391fbfbf642833b99b90",
+    "selected_primary_arm_count": 3,
+    "selected_assist_arm_count": 2,
+    "selected_assembly_arm_count": 5,
+    "assist_groups": [
+      [
+        "X-A",
+        "X-B"
+      ],
+      [
+        "X-C"
+      ]
+    ],
+    "role_to_unit": {
+      "R-A": "ARM_A",
+      "R-B": "ARM_B",
+      "R-C": "ARM_C",
+      "X-A": "ASSIST_1",
+      "X-B": "ASSIST_1",
+      "X-C": "ASSIST_2"
+    },
+    "count_scope_ja": "A/B/Cの組立役に割り当てる5腕。ロボットの機台数や、OP010 XYZ・締付工具・搬送等を含むライン全体の設備台数ではない。",
+    "operating_constraints_ja": [
+      "AとBが同時に補助を必要とする場合は、把持開始前に作業順序を調整する。保持途中で手を離して別セルへ移らない。",
+      "A/B共用補助は、前の支持引継ぎ・開放・退避と、必要な手先交換・移動を終えてから次の保持を開始する。",
+      "C専用補助は自由端の案内と支持引継ぎを担当し、筐体搭載終了だけで空き扱いにしない。",
+      "既存の20仕事・据置締付工具・支持・供給・検査・回収の役割を保持する。該当する大小同時締結の2主軸条件を継承する。"
+    ],
+    "next_work_ja": "5腕の分担を前提に、A/B共用補助の保持区間・受渡しと、C専用補助の継続担当を具体化する。その上で配置・到達・干渉を確認する。",
+    "selected_robot_models": null,
+    "selected_robot_base_count": null,
+    "selected_layout": null,
+    "minimum_robot_count": null,
+    "measured_cycle_time_s": null,
+    "physical_acceptance_verdict": null
+  },
+  "source_cards": [
+    {
+      "id": "D12",
+      "hands": [],
+      "entities": [
+        "V25_BASE_PLATE",
+        "V25_INNER_ENDS",
+        "V25_RING_ENDS"
+      ],
+      "additional_target_ja": "下板側ユニット全体と受け側治具",
+      "start_ja": "下板側ユニットの搬送保持を開始する",
+      "keep_ja": "R-Aが本体を搬送し、必要な自由端の案内役を継続する",
+      "end_ja": "F-Cと次の案内役へ本体・自由端をそれぞれ引き継いで退避する",
+      "reuse_ja": "本体を置いた時点だけでは自由端案内役を他セルへ割り当てない",
+      "missing_ja": "運搬用手先・許容把持面・自由端数・製品照合・支持付き待ち位置",
+      "task": {
+        "id": "D12",
+        "operation": "O10",
+        "cell": "A",
+        "work_ja": "下板側ユニットと自由端の受渡し",
+        "primary": [
+          "R-A"
+        ],
+        "other": [
+          "F-A",
+          "F-C"
+        ],
+        "conditional": [
+          "X-A"
+        ],
+        "sharing_ja": "本体組付けと同じ主担当の順次兼務候補。線の所属・案内先、相手側支持を引き継ぐまでの占有を数える。"
+      }
+    },
+    {
+      "id": "D22",
+      "hands": [],
+      "entities": [
+        "V25_FUSE_PANEL",
+        "V25_INNER_ENDS",
+        "V25_RING_ENDS"
+      ],
+      "additional_target_ja": "板側ユニット全体と合流側の支持",
+      "start_ja": "組み立てた板側の搬送保持を開始する",
+      "keep_ja": "R-Bが板を運び、必要な自由端案内を続ける",
+      "end_ja": "合流側の支持・板保持・自由端案内へ引き継いで退避する",
+      "reuse_ja": "A側との製品対応が取れた受けに渡せる場合、次ワークを準備する候補",
+      "missing_ja": "板搬送手先・自由端の支持と引継ぎ・待ち位置",
+      "task": {
+        "id": "D22",
+        "operation": "O20",
+        "cell": "B",
+        "work_ja": "ヒューズ板側と自由端の受渡し",
+        "primary": [
+          "R-B"
+        ],
+        "other": [
+          "F-B",
+          "F-C"
+        ],
+        "conditional": [
+          "X-B"
+        ],
+        "sharing_ja": "組付け主担当が順次兼務。A側ユニットとの製品対応・受け側支持・自由端案内を含める。"
+      }
+    },
+    {
+      "id": "D30",
+      "hands": [],
+      "entities": [
+        "V25_BASE_PLATE",
+        "V25_FUSE_PANEL"
+      ],
+      "additional_target_ja": "採用済み板間ねじ固定。実固定点は未観察",
+      "start_ja": "下板をF-Cに支持させ、R-Cでヒューズ板を合わせる",
+      "keep_ja": "R-Cが板間の相対姿勢を保持し、T-Cが板間固定を担当する",
+      "end_ja": "板保持を継続したまま工具を退避し、D31の治具上持ち替えへ進む",
+      "reuse_ja": "この時点でR-Cを空き扱いにしない。同じR-Cの搬送把持への切替を比較",
+      "missing_ja": "板間の支持形状・ねじ点・荷重経路・板保持面",
+      "task": {
+        "id": "D30",
+        "operation": "O30",
+        "cell": "C",
+        "work_ja": "下板支持・板合わせ・保持中の板間固定",
+        "primary": [
+          "R-C"
+        ],
+        "other": [
+          "F-C",
+          "T-C"
+        ],
+        "conditional": [],
+        "sharing_ja": "UZ01〜UZ03。下板は据置治具、ヒューズ板は主担当、締付は据置工具という比較。"
+      }
+    }
+  ],
+  "source_interfaces": [
+    {
+      "id": "IF01",
+      "name_ja": "下板と据置治具",
+      "candidate_ja": "構造板の下面を受け、側縁を位置決めする。必要な横保持は上押さえと分ける。",
+      "hand_family": null,
+      "next_ja": "下板の実輪郭・裏面の突起・支持可能面・反力方向。筐体底面P01を下板にしない。",
+      "contact_geometry_m": null
+    },
+    {
+      "id": "IF02",
+      "name_ja": "ヒューズ板の保持",
+      "candidate_ja": "露出した板縁に、端当て付きの薄い対向2本指。端子・ヒューズクリップ・固定ねじを避ける。",
+      "hand_family": "H07形状の比較起点（カバー用からの転用は未確定）",
+      "next_ja": "板厚・空き縁・剛性・許容接触面・開放域。写真の上端全体が把持できるとはしない。",
+      "contact_geometry_m": null
+    },
+    {
+      "id": "IF03",
+      "name_ja": "板間固定の工具通路",
+      "candidate_ja": "ハンドが板を保持したまま、別置きの工具が接近する空間を確保する。",
+      "hand_family": null,
+      "next_ja": "実際のねじ軸・本数・締結積層・工具全外形。縦軸1本やXYZで足りるかは軸方向に依存。",
+      "contact_geometry_m": null
+    },
+    {
+      "id": "IF04",
+      "name_ja": "一体ユニットの搬送",
+      "candidate_ja": "荷重を受けられる下板側の構造部を専用2本指で保持する比較。",
+      "hand_family": "H06の対向爪構成を比較起点とする",
+      "next_ja": "質量・重心・板間接合の荷重経路、筐体内での開閉・退避。未確認の吊り耳・穴を勝手に追加しない。",
+      "contact_geometry_m": null
+    },
+    {
+      "id": "IF05",
+      "name_ja": "未接続端の案内",
+      "candidate_ja": "配線被覆と剛体ハウジングを対象に、ユニット支持と別の役で扱う。",
+      "hand_family": "H04／H05を対象別に照合",
+      "next_ja": "各自由端の所属・形状・本数・渡し先・同時保持範囲。T050の比較径を細線へ一律転用しない。",
+      "contact_geometry_m": null
+    },
+    {
+      "id": "IF06",
+      "name_ja": "筐体側の受けと指の開放",
+      "candidate_ja": "受け側で支持を引き継いでから搬送指を開く。",
+      "hand_family": null,
+      "next_ja": "着座面、固定方法、指の開放距離と退避方向。横爪を壁で閉じ込めない。",
+      "contact_geometry_m": null
+    }
+  ],
+  "all_source_task_ids": [
+    "D00",
+    "D01",
+    "D10",
+    "D11",
+    "D12",
+    "D20",
+    "D21",
+    "D22",
+    "D30",
+    "D31",
+    "D40",
+    "D42",
+    "D45",
+    "D50",
+    "D60",
+    "D61",
+    "D70",
+    "D71",
+    "D80",
+    "D81"
+  ],
+  "observation_scope_ja": "担当表の空欄・独立役の重複。実機把持、荷重支持、到達、周期の判定ではない。"
+}
