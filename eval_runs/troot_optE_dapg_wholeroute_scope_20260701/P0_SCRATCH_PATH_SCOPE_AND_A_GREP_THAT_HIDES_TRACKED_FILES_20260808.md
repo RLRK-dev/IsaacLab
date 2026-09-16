@@ -3226,3 +3226,94 @@ if __name__ == "__main__":
 
 - p4: the variant (min / full).  pZ: the prereg with the mounting overrides and the chosen variant's allowed set (paths above).
 - Then this desk lands from the clean worktree (commit in the worktree, compare-and-swap ref move, pathspec-limited index reset as in §8.51), predicate re-run on the landed blob, and the 0.22/45 run repeated on the landed blob in a scratch worktree with the record restored.  ⛔ nothing landed yet; nothing unlocked.
+
+## 8.53 Window B LANDED: `96e9ece175` (+11/−0) — the per-side controller record line; predicate and seven controls on the landed blob; run 0
+
+*(2026-09-16 18:24 JST.  Rs1 = the human; Rs2 = p4/CC.  Window = the chain court's word m-p4-271 / m-p18-366 applying Rs1's Q2「Bを採用する。」;
+spec = p11 v3 §17.2 @ `dc090f7753` (design literal pinned by §17.6 condition (ii)); pre-registration = pZ `e41d0a9304` rows 1-8 + 3′.)*
+
+| item | value |
+|---|---|
+| commit | **`96e9ece175`** (2026-09-16 18:23:08 JST), parent `329a9c9725` (the tip at landing), one file |
+| base → landed | driver blob `d2bc133e1320` (D4, `3370f7a872`; driver commits in between = 0) → **`84a372439c59`**; content sha256 **`f461984bd7016a4ed66de0d9c3453f9416ca4e7d802e730dffc185da4ddd9b0f`** (4053 lines) |
+| numstat | +11 / −0; one hunk `@@ -616,0 +617,11 @@` |
+| the statement | `for t in SIDES:` :621 with one `print(...)` :622-627, placed after `AXFIX = _measure_axfix()` :616 and before `def pinch` :630 (four comment lines :617-620 carry the reason; comments are not statements) |
+| fields, in §17.2 order | `t`; class literal `existing per-arm 6D DLS + position servo`; `AXFIX[t]` rows c/s/a, nine values `%+.6f`; `QADR[t] VADR[t] AIDX[t] GIDX[t] PAD[t] TOOLB[t]`; `sgn = SIDES[t]` `%+.1f`; `design=P11_UR15B_CONTROLLER_DESIGN_20260913.md@dc090f7753` (exact) |
+| prefix | `[steps] controller record` (fixed; pB's grep face) |
+| untouched | everything else byte-identical (the predicate's positional compare of the other 292 statements); no reader of the line; RUN_METRICS block untouched; control lines 0 |
+
+**Verification on the landed blob (static; the driver was not imported or run):** `py_compile` OK.  AST read of the new
+statement: names subscripted by `t` = exactly {AIDX, AXFIX, GIDX, PAD, QADR, SIDES, TOOLB, VADR}; FormattedValues = AXFIX×9
+with `+.6f`, SIDES with `+.1f`, the six index names and `t` with no format; forbidden substrings (`nan|inf|error|fail|warn`) in
+the statement's constants = none; body statements 1, orelse 0; design literal exact.  Predicate `ast_pred_b.py` (§4 below:
+the candidate must equal the base with exactly one inserted top-level For of that shape, immediately after the `AXFIX`
+assignment; everything else positionally equal; imports by name set):
+
+```
+(a) base vs base                                   FAIL  (no insertion — the predicate cannot pass an unchanged file)
+(b) base vs landed                                 PASS  ALLOWED inserted For at cand:621 after AXFIX = _measure_axfix()
+(c) landed + literal flip 0.05->0.06 in solve_ik   FAIL
+(d) landed + stray edit of the identity print      FAIL
+(e) landed + stray stmt inside an EXISTING for-t-in-SIDES loop (pZ's hole 1)   FAIL
+(f) landed with the B line duplicated (pZ's hole 2)                             FAIL  (statement count 292 -> 294)
+(g) the B line placed before the AXFIX assignment (placement row)               FAIL
+(h) N3: one placeholder-free f-string de-f'd                                    PASS
+```
+
+Landing mechanics as in §8.51 (worktree commit → compare-and-swap ref move → pathspec-limited index reset; index entry now
+`84a372439c59` = HEAD; the shared working copy stays the 09-07 WIP, ` M`); worktree removed.  Not verified here: the runtime
+values of the two rows (pZ row 7, #69 only) and control invariance (pZ row 6, pZ's instrument).  Stop-cause tag: none (static).
+
+#### `ast_pred_b.py`
+
+```python
+"""Window-B DoD predicate (v3 sec 17.2 / pZ rows 1-5 @ e41d0a9304): the candidate must equal the base with EXACTLY ONE
+top-level statement inserted, that statement being For(target Name 't', iter Name 'SIDES', body = [Expr(Call print)] whose
+leading Constant starts with '[steps] controller record'), placed immediately after the top-level `AXFIX = _measure_axfix()`
+assignment.  Normalisations N1/N2/N3 as in ast_pred.py; import name sets, deletion forbidden.  argv: base.py candidate.py"""
+import ast, sys
+sys.path.insert(0, __file__.rsplit("/", 1)[0])
+from ast_pred import Norm, import_names, stmts  # noqa: E402  (the D4 tool's normaliser and helpers, reused)
+
+PREFIX = "[steps] controller record"
+
+def is_b_line(s):
+    if not (isinstance(s, ast.For) and isinstance(s.target, ast.Name) and s.target.id == "t"
+            and isinstance(s.iter, ast.Name) and s.iter.id == "SIDES" and not s.orelse and len(s.body) == 1):
+        return False
+    e = s.body[0]
+    if not (isinstance(e, ast.Expr) and isinstance(e.value, ast.Call) and getattr(e.value.func, "id", "") == "print" and e.value.args):
+        return False
+    a = e.value.args[0]
+    lead = a.value if isinstance(a, ast.Constant) else (a.values[0].value if isinstance(a, ast.JoinedStr) and a.values
+                                                          and isinstance(a.values[0], ast.Constant) else "")
+    return isinstance(lead, str) and lead.startswith(PREFIX)
+
+def is_axfix_assign(s):
+    return (isinstance(s, ast.Assign) and len(s.targets) == 1 and isinstance(s.targets[0], ast.Name)
+            and s.targets[0].id == "AXFIX")
+
+def main(base, cand):
+    B, C = stmts(base), stmts(cand)
+    ok = True
+    miss = import_names(B) - import_names(C)
+    if miss:
+        print(f"NOT-ALLOWED import names deleted: {sorted(map(str, miss))}"); ok = False
+    if len(C) != len(B) + 1:
+        print(f"FAIL statement count: base {len(B)} candidate {len(C)} (exactly one insertion allowed)"); return 1
+    ins = [i for i, (s, _) in enumerate(C) if is_b_line(s)]
+    if len(ins) != 1:
+        print(f"FAIL B-line statements found in candidate: {len(ins)} (exactly one required)"); return 1
+    i = ins[0]
+    if i == 0 or not is_axfix_assign(C[i - 1][0]):
+        print(f"FAIL placement: the B line at cand:{C[i][0].lineno} does not follow the AXFIX assignment"); ok = False
+    rest = C[:i] + C[i + 1:]
+    for k, ((sb, db), (sc, dc)) in enumerate(zip(B, rest)):
+        if db != dc:
+            print(f"NOT-ALLOWED stmt#{k} base:{sb.lineno} cand:{sc.lineno} {type(sb).__name__} differs"); ok = False
+    print(f"{'ALLOWED    ' if ok else '           '} inserted For at cand:{C[i][0].lineno} after `AXFIX = _measure_axfix()`")
+    print("PASS" if ok else "FAIL"); return 0 if ok else 1
+
+if __name__ == "__main__":
+    sys.exit(main(sys.argv[1], sys.argv[2]))
+```
