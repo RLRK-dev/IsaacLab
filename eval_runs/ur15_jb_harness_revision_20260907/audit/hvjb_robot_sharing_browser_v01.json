@@ -1,0 +1,380 @@
+{
+  "observed_at": "2026-09-16T02:49:06.852Z",
+  "directory": "/home/rlrk/Downloads/THREAD_HVJB_ロボット共用比較_v01_20260916",
+  "page_sha256": "d5dd3c9a09f8cc3882065a3a79ab94d903c8a31e6c2a3a452755d4ad216b7494",
+  "initial": {
+    "plans": 5,
+    "rows": 8,
+    "equipment": 11,
+    "selected": "S4",
+    "scene": "AC"
+  },
+  "cases": [
+    {
+      "plan": "S4",
+      "scene": "NONE",
+      "units": 4,
+      "overlap": [],
+      "tasks": 20,
+      "result": "この条件の担当IDに重複なし。所要時間・移動・到達・支持は別に確認します。"
+    },
+    {
+      "plan": "S4",
+      "scene": "A",
+      "units": 4,
+      "overlap": [],
+      "tasks": 20,
+      "result": "この条件の担当IDに重複なし。所要時間・移動・到達・支持は別に確認します。"
+    },
+    {
+      "plan": "S4",
+      "scene": "B",
+      "units": 4,
+      "overlap": [],
+      "tasks": 20,
+      "result": "この条件の担当IDに重複なし。所要時間・移動・到達・支持は別に確認します。"
+    },
+    {
+      "plan": "S4",
+      "scene": "C",
+      "units": 4,
+      "overlap": [],
+      "tasks": 20,
+      "result": "この条件の担当IDに重複なし。所要時間・移動・到達・支持は別に確認します。"
+    },
+    {
+      "plan": "S4",
+      "scene": "AB",
+      "units": 4,
+      "overlap": [
+        "ASSIST_1"
+      ],
+      "tasks": 20,
+      "result": "同時開始を調整する役：ASSIST_1：X-A ＋ X-B"
+    },
+    {
+      "plan": "S4",
+      "scene": "AC",
+      "units": 4,
+      "overlap": [
+        "ASSIST_1"
+      ],
+      "tasks": 20,
+      "result": "同時開始を調整する役：ASSIST_1：X-A ＋ X-C"
+    },
+    {
+      "plan": "S4",
+      "scene": "BC",
+      "units": 4,
+      "overlap": [
+        "ASSIST_1"
+      ],
+      "tasks": 20,
+      "result": "同時開始を調整する役：ASSIST_1：X-B ＋ X-C"
+    },
+    {
+      "plan": "S4",
+      "scene": "ABC",
+      "units": 4,
+      "overlap": [
+        "ASSIST_1"
+      ],
+      "tasks": 20,
+      "result": "同時開始を調整する役：ASSIST_1：X-A ＋ X-B ＋ X-C"
+    },
+    {
+      "plan": "S5_AB",
+      "scene": "NONE",
+      "units": 5,
+      "overlap": [],
+      "tasks": 20,
+      "result": "この条件の担当IDに重複なし。所要時間・移動・到達・支持は別に確認します。"
+    },
+    {
+      "plan": "S5_AB",
+      "scene": "A",
+      "units": 5,
+      "overlap": [],
+      "tasks": 20,
+      "result": "この条件の担当IDに重複なし。所要時間・移動・到達・支持は別に確認します。"
+    },
+    {
+      "plan": "S5_AB",
+      "scene": "B",
+      "units": 5,
+      "overlap": [],
+      "tasks": 20,
+      "result": "この条件の担当IDに重複なし。所要時間・移動・到達・支持は別に確認します。"
+    },
+    {
+      "plan": "S5_AB",
+      "scene": "C",
+      "units": 5,
+      "overlap": [],
+      "tasks": 20,
+      "result": "この条件の担当IDに重複なし。所要時間・移動・到達・支持は別に確認します。"
+    },
+    {
+      "plan": "S5_AB",
+      "scene": "AB",
+      "units": 5,
+      "overlap": [
+        "ASSIST_1"
+      ],
+      "tasks": 20,
+      "result": "同時開始を調整する役：ASSIST_1：X-A ＋ X-B"
+    },
+    {
+      "plan": "S5_AB",
+      "scene": "AC",
+      "units": 5,
+      "overlap": [],
+      "tasks": 20,
+      "result": "この条件の担当IDに重複なし。所要時間・移動・到達・支持は別に確認します。"
+    },
+    {
+      "plan": "S5_AB",
+      "scene": "BC",
+      "units": 5,
+      "overlap": [],
+      "tasks": 20,
+      "result": "この条件の担当IDに重複なし。所要時間・移動・到達・支持は別に確認します。"
+    },
+    {
+      "plan": "S5_AB",
+      "scene": "ABC",
+      "units": 5,
+      "overlap": [
+        "ASSIST_1"
+      ],
+      "tasks": 20,
+      "result": "同時開始を調整する役：ASSIST_1：X-A ＋ X-B"
+    },
+    {
+      "plan": "S5_AC",
+      "scene": "NONE",
+      "units": 5,
+      "overlap": [],
+      "tasks": 20,
+      "result": "この条件の担当IDに重複なし。所要時間・移動・到達・支持は別に確認します。"
+    },
+    {
+      "plan": "S5_AC",
+      "scene": "A",
+      "units": 5,
+      "overlap": [],
+      "tasks": 20,
+      "result": "この条件の担当IDに重複なし。所要時間・移動・到達・支持は別に確認します。"
+    },
+    {
+      "plan": "S5_AC",
+      "scene": "B",
+      "units": 5,
+      "overlap": [],
+      "tasks": 20,
+      "result": "この条件の担当IDに重複なし。所要時間・移動・到達・支持は別に確認します。"
+    },
+    {
+      "plan": "S5_AC",
+      "scene": "C",
+      "units": 5,
+      "overlap": [],
+      "tasks": 20,
+      "result": "この条件の担当IDに重複なし。所要時間・移動・到達・支持は別に確認します。"
+    },
+    {
+      "plan": "S5_AC",
+      "scene": "AB",
+      "units": 5,
+      "overlap": [],
+      "tasks": 20,
+      "result": "この条件の担当IDに重複なし。所要時間・移動・到達・支持は別に確認します。"
+    },
+    {
+      "plan": "S5_AC",
+      "scene": "AC",
+      "units": 5,
+      "overlap": [
+        "ASSIST_1"
+      ],
+      "tasks": 20,
+      "result": "同時開始を調整する役：ASSIST_1：X-A ＋ X-C"
+    },
+    {
+      "plan": "S5_AC",
+      "scene": "BC",
+      "units": 5,
+      "overlap": [],
+      "tasks": 20,
+      "result": "この条件の担当IDに重複なし。所要時間・移動・到達・支持は別に確認します。"
+    },
+    {
+      "plan": "S5_AC",
+      "scene": "ABC",
+      "units": 5,
+      "overlap": [
+        "ASSIST_1"
+      ],
+      "tasks": 20,
+      "result": "同時開始を調整する役：ASSIST_1：X-A ＋ X-C"
+    },
+    {
+      "plan": "S5_BC",
+      "scene": "NONE",
+      "units": 5,
+      "overlap": [],
+      "tasks": 20,
+      "result": "この条件の担当IDに重複なし。所要時間・移動・到達・支持は別に確認します。"
+    },
+    {
+      "plan": "S5_BC",
+      "scene": "A",
+      "units": 5,
+      "overlap": [],
+      "tasks": 20,
+      "result": "この条件の担当IDに重複なし。所要時間・移動・到達・支持は別に確認します。"
+    },
+    {
+      "plan": "S5_BC",
+      "scene": "B",
+      "units": 5,
+      "overlap": [],
+      "tasks": 20,
+      "result": "この条件の担当IDに重複なし。所要時間・移動・到達・支持は別に確認します。"
+    },
+    {
+      "plan": "S5_BC",
+      "scene": "C",
+      "units": 5,
+      "overlap": [],
+      "tasks": 20,
+      "result": "この条件の担当IDに重複なし。所要時間・移動・到達・支持は別に確認します。"
+    },
+    {
+      "plan": "S5_BC",
+      "scene": "AB",
+      "units": 5,
+      "overlap": [],
+      "tasks": 20,
+      "result": "この条件の担当IDに重複なし。所要時間・移動・到達・支持は別に確認します。"
+    },
+    {
+      "plan": "S5_BC",
+      "scene": "AC",
+      "units": 5,
+      "overlap": [],
+      "tasks": 20,
+      "result": "この条件の担当IDに重複なし。所要時間・移動・到達・支持は別に確認します。"
+    },
+    {
+      "plan": "S5_BC",
+      "scene": "BC",
+      "units": 5,
+      "overlap": [
+        "ASSIST_1"
+      ],
+      "tasks": 20,
+      "result": "同時開始を調整する役：ASSIST_1：X-B ＋ X-C"
+    },
+    {
+      "plan": "S5_BC",
+      "scene": "ABC",
+      "units": 5,
+      "overlap": [
+        "ASSIST_1"
+      ],
+      "tasks": 20,
+      "result": "同時開始を調整する役：ASSIST_1：X-B ＋ X-C"
+    },
+    {
+      "plan": "S6",
+      "scene": "NONE",
+      "units": 6,
+      "overlap": [],
+      "tasks": 20,
+      "result": "この条件の担当IDに重複なし。所要時間・移動・到達・支持は別に確認します。"
+    },
+    {
+      "plan": "S6",
+      "scene": "A",
+      "units": 6,
+      "overlap": [],
+      "tasks": 20,
+      "result": "この条件の担当IDに重複なし。所要時間・移動・到達・支持は別に確認します。"
+    },
+    {
+      "plan": "S6",
+      "scene": "B",
+      "units": 6,
+      "overlap": [],
+      "tasks": 20,
+      "result": "この条件の担当IDに重複なし。所要時間・移動・到達・支持は別に確認します。"
+    },
+    {
+      "plan": "S6",
+      "scene": "C",
+      "units": 6,
+      "overlap": [],
+      "tasks": 20,
+      "result": "この条件の担当IDに重複なし。所要時間・移動・到達・支持は別に確認します。"
+    },
+    {
+      "plan": "S6",
+      "scene": "AB",
+      "units": 6,
+      "overlap": [],
+      "tasks": 20,
+      "result": "この条件の担当IDに重複なし。所要時間・移動・到達・支持は別に確認します。"
+    },
+    {
+      "plan": "S6",
+      "scene": "AC",
+      "units": 6,
+      "overlap": [],
+      "tasks": 20,
+      "result": "この条件の担当IDに重複なし。所要時間・移動・到達・支持は別に確認します。"
+    },
+    {
+      "plan": "S6",
+      "scene": "BC",
+      "units": 6,
+      "overlap": [],
+      "tasks": 20,
+      "result": "この条件の担当IDに重複なし。所要時間・移動・到達・支持は別に確認します。"
+    },
+    {
+      "plan": "S6",
+      "scene": "ABC",
+      "units": 6,
+      "overlap": [],
+      "tasks": 20,
+      "result": "この条件の担当IDに重複なし。所要時間・移動・到達・支持は別に確認します。"
+    }
+  ],
+  "local_links": [
+    "同時担当の比較.csv",
+    "兼務の確認入力.csv",
+    "workcards/review.html",
+    "notes.md",
+    "review_data.json",
+    "audit.json"
+  ],
+  "workcard_links": [
+    "仕事と保持区間.csv",
+    "対象の照合先.csv",
+    "notes.md",
+    "review_data.json",
+    "catalog.json",
+    "process_v03.json",
+    "allocation.json",
+    "audit.json"
+  ],
+  "mobile": {
+    "width": 480,
+    "documentWidth": 465,
+    "plan": "S5_AB",
+    "scene": "AC"
+  },
+  "javascript_errors": [],
+  "scope": "Conditional role-ID display and local artifacts only; no physical or scheduling verdict"
+}

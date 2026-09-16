@@ -1,0 +1,70 @@
+{
+  "observed_at": "2026-09-16T11:46:18.690246+09:00",
+  "directory": "/home/rlrk/Downloads/THREAD_HVJB_ロボット共用比較_v01_20260916",
+  "input_sha256_before": {
+    "data/hvjb_preassembly_process_v03.json": "5e9d7078d4e7ff9772f8561788b29a34b28165e3118559385dcc78faf28b64e7",
+    "data/hvjb_unitization_roles_v01.json": "7282ac79494d7704c7a88b48627b1d8cc72db0a883395d864ab1142454a3e802",
+    "data/hand_provisional_spec_v01.json": "0ed18d28e261b73ae1fd3beb1686ad4c2b55071974d9b8708e358b79efa8b799",
+    "data/hvjb_photo_correspondence_v03_p01.json": "6c5b7cb9bab859a33c8f5d5cd5429ce9f06fb0951b8a8fa4ae2a31ad99052ca0",
+    "UR15_JB_photo_correspondence_v03_p03.blend": "5205d3aa2c2b99f7df6f538d17b3d3ca36ba8208c546858ee8ec8a5a3564a282",
+    "data/hvjb_robot_allocation_v01.json": "2e8516405684475d04fcf57938e7771c0283a5ab23cf482aa6fba4b718889dd9",
+    "data/hvjb_task_occupancy_v01.json": "4da5b53687b05cd2cd1d294cf57121abde6ee9d04b19ed0a37ef2fb2a4d79df9",
+    "data/hvjb_robot_sharing_inputs_v01.json": "55671ae33c867b9dac5791b73572e18b8a8f4dc0eb3b8fc16eef3b542947fb7e",
+    "scripts/hvjb_robot_sharing_review_v01.html": "c4447077fd15757afeba1b6118e16f2a41ab68fa38f4a0f4e8cc9f264299e28d",
+    "analysis/hvjb_robot_sharing_v01.md": "e63550e1679b6587f97f9b03403b3f724a3aa101e06770b8b7b71d6797761e58"
+  },
+  "input_sha256_after": {
+    "data/hvjb_preassembly_process_v03.json": "5e9d7078d4e7ff9772f8561788b29a34b28165e3118559385dcc78faf28b64e7",
+    "data/hvjb_unitization_roles_v01.json": "7282ac79494d7704c7a88b48627b1d8cc72db0a883395d864ab1142454a3e802",
+    "data/hand_provisional_spec_v01.json": "0ed18d28e261b73ae1fd3beb1686ad4c2b55071974d9b8708e358b79efa8b799",
+    "data/hvjb_photo_correspondence_v03_p01.json": "6c5b7cb9bab859a33c8f5d5cd5429ce9f06fb0951b8a8fa4ae2a31ad99052ca0",
+    "UR15_JB_photo_correspondence_v03_p03.blend": "5205d3aa2c2b99f7df6f538d17b3d3ca36ba8208c546858ee8ec8a5a3564a282",
+    "data/hvjb_robot_allocation_v01.json": "2e8516405684475d04fcf57938e7771c0283a5ab23cf482aa6fba4b718889dd9",
+    "data/hvjb_task_occupancy_v01.json": "4da5b53687b05cd2cd1d294cf57121abde6ee9d04b19ed0a37ef2fb2a4d79df9",
+    "data/hvjb_robot_sharing_inputs_v01.json": "55671ae33c867b9dac5791b73572e18b8a8f4dc0eb3b8fc16eef3b542947fb7e",
+    "scripts/hvjb_robot_sharing_review_v01.html": "c4447077fd15757afeba1b6118e16f2a41ab68fa38f4a0f4e8cc9f264299e28d",
+    "analysis/hvjb_robot_sharing_v01.md": "e63550e1679b6587f97f9b03403b3f724a3aa101e06770b8b7b71d6797761e58"
+  },
+  "report_sha256": "7888693db9b5cd0314b7acecb6c0fa09ab7c207e43c2391fbfbf642833b99b90",
+  "page_sha256": "d5dd3c9a09f8cc3882065a3a79ab94d903c8a31e6c2a3a452755d4ad216b7494",
+  "copied_workcards_sha256": {
+    "review.html": "bbedddb2c8df10cc09fbf58c8d0a579c63f54b2a53b83f3962aa2fdc52316386",
+    "review_data.json": "4da5b53687b05cd2cd1d294cf57121abde6ee9d04b19ed0a37ef2fb2a4d79df9",
+    "allocation.json": "2e8516405684475d04fcf57938e7771c0283a5ab23cf482aa6fba4b718889dd9",
+    "catalog.json": "6c5b7cb9bab859a33c8f5d5cd5429ce9f06fb0951b8a8fa4ae2a31ad99052ca0",
+    "process_v03.json": "5e9d7078d4e7ff9772f8561788b29a34b28165e3118559385dcc78faf28b64e7",
+    "notes.md": "1646a8c0e69425e5679b917f3eb0659f9d2e7d50e041b9a19e2af4ab1bf8cba9",
+    "audit.json": "bbb5e81e820df34c3dd1fc3f96032c514746621673fa3c1ed640ee9fbf40220f",
+    "仕事と保持区間.csv": "ef3ebbaa3fe0b75568f073bf3957495999ce5ae885aeabe5b319f71ecc9f74fe",
+    "対象の照合先.csv": "8685218a288917c4ed2a75413bb973b36332b6e7725b9bf348c51433dd7551a3"
+  },
+  "csv_sha256": {
+    "同時担当の比較.csv": "0730d139b372ae06e9956611666e451e14d3be7830a25d66b45773db9b1de2a0",
+    "兼務の確認入力.csv": "d37da0bd5de3cb51d4d75b7d73e6b000e262d4e62599f8fba100338684174fd2"
+  },
+  "task_count_per_plan": 20,
+  "scenario_count": 40,
+  "conflict_scenarios": {
+    "S4": [
+      "AB",
+      "AC",
+      "BC",
+      "ABC"
+    ],
+    "S5_AB": [
+      "AB",
+      "ABC"
+    ],
+    "S5_AC": [
+      "AC",
+      "ABC"
+    ],
+    "S5_BC": [
+      "BC",
+      "ABC"
+    ],
+    "S6": []
+  },
+  "all_assist_partitions_included": true,
+  "measured_cycle_or_physical_verdict": null
+}

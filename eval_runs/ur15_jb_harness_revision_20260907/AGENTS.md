@@ -546,3 +546,21 @@ numbers unknown until their basis and the scope of the product change are set.
   until its geometry and sequence are specified. X-C does not become available
   just because insertion or opening passage ended. Workcard completion phrases
   are planning boundaries, not sensor thresholds or release authorization.
+
+## Auxiliary-role sharing comparison on 2026-09-16
+
+- `analysis/hvjb_robot_sharing_v01.md` compares all five partitions of X-A/B/C
+  with three separate primary roles. S4 (one shared assistant) and S5_AB
+  (A/B shared, C separate) are priorities for comparison, not selected machines.
+- Four to six arm slots count this limited role mapping, not robot bases,
+  line-wide equipment or proven minimum arms. One auxiliary role may need more
+  than one real actuator; its physical support scope is still unresolved.
+- The eight auxiliary-demand subsets assume all three primary roles occupied
+  in that illustrative instant. The forty plan/subset pairs check duplicate
+  resource IDs only. They are not observed timing, occurrence probabilities,
+  scheduling feasibility, reach checks or physical acceptance.
+- Keep all twenty tasks and other equipment roles. Resolve holds and handoffs,
+  then include hand changes and cell travel before reassigning a shared arm.
+  Waiting must preserve support before grasp starts; do not interrupt a hold.
+  Leave unmeasured worksheet time fields empty, not zero. No task uses source
+  video timestamps as measured durations.
