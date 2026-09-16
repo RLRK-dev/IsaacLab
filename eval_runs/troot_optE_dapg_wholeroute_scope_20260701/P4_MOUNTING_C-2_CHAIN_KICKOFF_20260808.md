@@ -2473,3 +2473,4 @@ flow 正直記録: fix は leg より先に lane に着地（pZ 命名「receipt
    - **射程（Rs1 補足 b）**: 本受入 = state.md §7.1 の成果物 **② のみ**の充足（D4 が述語つきで着地）。**UR15-B controller の「完成」（§7.2・DDR #69 の条件）ではない** — 残り = ③ B 行（Q2・spec §17.2・prereg → p0 → leg）・④ R0（Q1・spec §17.1・prereg → p0 harness → pZ 実行）・⑤ R1/R1′/R2 の静的 legs・R3 数値（#69 の run 内のみ）。v3 の「未検証」印は完成受入まで残す。停止原因の札: D4 の起動時 calibration 停止は両側に広がった（§6 `:96`）— run で発火したら「計器の calibration 停止」であって controller の不成立ではない（Rs1 補足 a・§17.4）。
    - **p6 `da5ec91567`（自読）**: LEDGER 4 行（48/68/71/74）in place＋ state.md **§7 pointer 節**（7.1 成果物 ①-⑦と担当・7.2 完了条件・7.3 範囲外・7.4 報告規則 = 当卓 09-14 節 4 Q4 の起案どおり・status 不変・snapshot byte 同一）。両 file clean。row 48 に Rs1 Q5-Q7 逐語（p11 への m-p4-266 readback は p18 が閉じる）。
    - ⛔ 解錠なし（route run (2)・#69・D4′・:214/REF_DIR = Q9 待ち・WIP）。
+   - **送信記録（18:04:35）**: 上記 word を **m-p4-268** として p18 へ（relay 先 pZ/p0/p11/p6）。prompt rc=0・p18 transcript に record。本文 = scratchpad `p4_dispatch/m-p4-268.txt`（内容は本 item 6 が正）。
