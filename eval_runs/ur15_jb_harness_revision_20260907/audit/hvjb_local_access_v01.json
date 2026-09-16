@@ -1,0 +1,82 @@
+{
+  "observed_at": "2026-09-17T00:59:15.847265+09:00",
+  "output_directory": "/home/rlrk/Downloads/THREAD_HVJB_Cセル手先比較_v01_20260917",
+  "input_sha256": {
+    "data/hvjb_photo_model_v03_p03.json.gz": "6687b12ec1b3db24babf75f8fef1b6f6bc123c288b713824b9763d9214553ba6",
+    "data/hvjb_photo_correspondence_v03_p01.json": "6c5b7cb9bab859a33c8f5d5cd5429ce9f06fb0951b8a8fa4ae2a31ad99052ca0",
+    "UR15_JB_photo_correspondence_v03_p03.blend": "5205d3aa2c2b99f7df6f538d17b3d3ca36ba8208c546858ee8ec8a5a3564a282",
+    "data/hvjb_robot_selection_v01.json": "ad1d0fc6ad2f0c9d36f4d9839faf559ce80aa9ffb4965174facef944f1a58db8",
+    "data/hvjb_task_occupancy_v01.json": "4da5b53687b05cd2cd1d294cf57121abde6ee9d04b19ed0a37ef2fb2a4d79df9",
+    "references/op040_real_products_20260912/ampere_product_photo_1.jpg": "5724681b4bef4399f0799751a62577e48ef9b7fd3d6ed5b56d85fd95924937ad",
+    "references/hvjb_final_connections_20260916/assembly_242s.png": "973a61b327b9152da37d2af0f5cc67dfab0346e10b3030b3593eba9c78381e82",
+    "references/hvjb_local_access_20260917/ur_description/LICENSE": "143077f9f6a8de5a99f78c2c2472801fb53cf240277ef661642f079b9acdfff8",
+    "references/hvjb_local_access_20260917/ur_description/meshes/ur15/LICENSE.txt": "f173efc8bd4b0ffaec2280b2dd126805ff7dddee8758b3d869132afc1776daa8",
+    "references/hvjb_local_access_20260917/ur_description/urdf/ur_macro.xacro": "2683ddcc2db392116d69ac775e4d6dd1c7b3d420f9eca926bd10cf43a1ce8b35",
+    "references/hvjb_local_access_20260917/ur_description/config/ur15/visual_parameters.yaml": "14dccc1a99cbbddd4460b8560ee793106fd9fa0b8c8f884e662a18f7fb862ad7",
+    "references/hvjb_local_access_20260917/ur_description/config/ur15/default_kinematics.yaml": "5f3d566874194178e7aa153a99b622ca7c19f18866a8379d0ac3ccf4706aed8f",
+    "references/hvjb_local_access_20260917/ur_description/config/ur3e/visual_parameters.yaml": "cc0abaa343555c577a374ccdae6aacfbf17cb9cdb526d57b50c8cc18475b4a86",
+    "references/hvjb_local_access_20260917/ur_description/config/ur3e/default_kinematics.yaml": "c0bfd5cb5bafd9df090a71a914bbeb8812a1a3b07f03fb930d6f8fa38fff9de7",
+    "references/hvjb_local_access_20260917/ur_description/meshes/ur15/visual/wrist3.dae": "a6a0181aed8602ee423ac1ab8d47fa566b0d2afab12b0e350fc017ee2fff6b25",
+    "references/hvjb_local_access_20260917/ur_description/meshes/ur3e/visual/wrist3.dae": "2eec93dd08aa9380763bcb314851558602f015759afb43af9bb249eea0661ed5",
+    "references/hvjb_local_access_20260917/hand_source/hand_clockwise_tilt_meshes_v01.json": "93d914c9eed05fc5b61e686b6cecca4420f6e4fd2b46c2d1eb8bf56fb900d95c",
+    "references/hvjb_local_access_20260917/hand_source/hand_clockwise_tilt_observations_v01.json": "a8e2f40a4a4062bb3f75b34537dbda75fec4a020f25f710841bcb743e22f0dc3",
+    "references/hvjb_local_access_20260917/hand_source/hand_clockwise_tilt_native_v01.json": "be8b95f8e03af27dae85bb398cd10d4b5ad133c64ce400c0286070799c6b2b42",
+    "references/hvjb_local_access_20260917/hand_source/hand_clockwise_tilt_v01.blend": "a3bf9eeba0e1c16ed515d1dad99dbd31bc6b2dfa0dd869e41455d7d20b545d1c",
+    "references/hvjb_local_access_20260917/hand_source/hand_clockwise_tilt_T050_v01.glb": "e6443f4bd0765903097aaed12ba7d96aec44c751c9a05471e1e3cf9b0dd04603",
+    "data/hand_working_default_v01.json": "1cf2a19f24f753eb44b4e96fd7e73ee8bdfe5b97367a77bf8cfa0cf30a4d107c",
+    "scripts/prepare_hand_working_default_v01.py": "301f743ec0d771552a0ca61b525fdc9e4c125062412124f17ee57d9a380209de",
+    "scripts/probe_hand_tool_access_v01.py": "55456e6d55f84931bcc3f502e77372414a6efa2578e27970d5620f176c53417c",
+    "data/hvjb_local_access_v01_inputs.json": "0185b0976575429a9f1c83ce882555324c8eec6413985beb5f8e5298ddc4d644",
+    "scripts/build_hvjb_local_access_v01.py": "a095f2fa0b45c3518567e85e1baf6644711d806e515a0f86c480e61f646469e8",
+    "scripts/hvjb_local_access_v01.html": "cb83eae989d2ef5a2a8eaf24df750b22c6cc28c8435ab520db287d09d20eba0f",
+    "analysis/hvjb_local_access_v01.md": "a80588af28f0b0d4def47111a2771563cb32baf96aa483bc6db871fe72dd4bb2"
+  },
+  "input_files_unchanged": true,
+  "source_hand_geometry_rebuilt": false,
+  "preserved_counts": [
+    92,
+    17,
+    13,
+    12,
+    20
+  ],
+  "geometry_checks": [
+    {
+      "case": "clipped_vertical",
+      "expected": 2.0,
+      "measured": 2.0
+    },
+    {
+      "case": "projected_axis_inside",
+      "expected": 0.0,
+      "measured": 0.0
+    },
+    {
+      "case": "degenerate_xy_line",
+      "expected": 2.0,
+      "measured": 2.0
+    },
+    {
+      "case": "boundary_tangency",
+      "expected": 2.0,
+      "measured": 2.0
+    },
+    {
+      "case": "outside_slab",
+      "expected": null,
+      "measured": null
+    }
+  ],
+  "serialized_measurement_readback_identical": true,
+  "physical_acceptance_verdict": null,
+  "copied_sha256": {
+    "product.jpg": "5724681b4bef4399f0799751a62577e48ef9b7fd3d6ed5b56d85fd95924937ad",
+    "assembly_242s.png": "973a61b327b9152da37d2af0f5cc67dfab0346e10b3030b3593eba9c78381e82",
+    "notes.md": "a80588af28f0b0d4def47111a2771563cb32baf96aa483bc6db871fe72dd4bb2",
+    "selection.json": "ad1d0fc6ad2f0c9d36f4d9839faf559ce80aa9ffb4965174facef944f1a58db8",
+    "all_workcards.json": "4da5b53687b05cd2cd1d294cf57121abde6ee9d04b19ed0a37ef2fb2a4d79df9",
+    "UR_Description_LICENSE.txt": "143077f9f6a8de5a99f78c2c2472801fb53cf240277ef661642f079b9acdfff8",
+    "UR15_mesh_LICENSE.txt": "f173efc8bd4b0ffaec2280b2dd126805ff7dddee8758b3d869132afc1776daa8"
+  },
+  "page_sha256": "e16f78d9e202393cd8f97bac15ef52f51fb5f15df90c2c298b72b9eda2ae085c"
+}

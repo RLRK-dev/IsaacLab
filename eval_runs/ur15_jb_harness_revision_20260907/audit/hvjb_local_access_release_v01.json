@@ -1,0 +1,31 @@
+{
+  "observed_at": "2026-09-17T01:05:06.171234+09:00",
+  "unchanged_measurement_sections_after_ui_fix": [
+    "hand",
+    "wrists",
+    "product_row"
+  ],
+  "input_sha256_still_matches": true,
+  "ui_fix": {
+    "problem": "clear posture exceeded SVG viewport by 27.622 px at its top",
+    "change": "Fit every saved state to the same side-view scale; move caption outside drawing; preserve geometry",
+    "baseline_assertion_failed": true,
+    "baseline_exit_code": 1,
+    "corrected_browser_exit_code": 0,
+    "physical_measurements_changed": false
+  },
+  "browser_states": 4,
+  "browser_joints": 5,
+  "javascript_errors": [],
+  "source_files_sha256": {
+    "scripts/build_hvjb_local_access_v01.py": "a095f2fa0b45c3518567e85e1baf6644711d806e515a0f86c480e61f646469e8",
+    "scripts/check_hvjb_local_access_v01.mjs": "2f71eec9fc50ee98845d0e040ce2096e33c98d0c1bb07aa70e44cad6089f1c98",
+    "scripts/hvjb_local_access_v01.html": "cb83eae989d2ef5a2a8eaf24df750b22c6cc28c8435ab520db287d09d20eba0f"
+  },
+  "logs": {
+    "build.log": "e9adf55d57d2253b53999049683ec354828c37e690fb58782d2c7fb9abe7fca7",
+    "browser.log": "616e8301191897020264ebfb69f97d36c9adb9c69034eb518890175b9f5ebdd2",
+    "ui_before_fix.log": "f57d0a151fb94cf6eb27dc0533ebae495c8eb0fed3562b4accb7ae6bd7b630aa"
+  },
+  "physical_acceptance_verdict": null
+}

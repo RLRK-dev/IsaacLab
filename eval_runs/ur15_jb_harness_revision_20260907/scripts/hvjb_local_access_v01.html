@@ -1,0 +1,131 @@
+<!doctype html>
+<!-- Copyright (c) 2022-2026, The Isaac Lab Project Developers (https://github.com/isaac-sim/IsaacLab/blob/main/CONTRIBUTORS.md).
+All rights reserved. SPDX-License-Identifier: BSD-3-Clause -->
+<html lang="ja">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Cセル：手首とフィンガの大きさ</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#f1f5f8;color:#172b3c;font:16px/1.65 "Noto Sans CJK JP",sans-serif}main{max-width:1400px;margin:auto;padding:30px}h1{font-size:30px;line-height:1.4;margin:8px 0 12px}h2{font-size:23px;margin:0 0 12px}h3{font-size:18px;margin:0 0 8px}p{margin:8px 0 14px}.kicker{letter-spacing:.13em;font-size:12px;color:#3b637e}.lead{font-size:20px}.muted{color:#526777;font-size:14px}.note{background:#fff2d7;border-left:4px solid #c27b16;padding:12px 16px}.good{background:#e8f2fa;border-left:4px solid #1b668d;padding:12px 16px}.panel{background:white;border:1px solid #d6e0e7;border-radius:12px;padding:24px;margin:24px 0}.cols{display:grid;grid-template-columns:1fr 1fr;gap:24px}.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.card{border:1px solid #cfdae4;border-radius:8px;padding:16px}button{font:inherit;color:#21425e;border:1px solid #9cb4c8;border-radius:6px;background:white;cursor:pointer;padding:7px 13px;margin:3px}button[aria-pressed=true]{background:#225978;color:white;border-color:#225978}svg{display:block;max-width:100%;height:auto;width:100%;font-family:"Noto Sans CJK JP",sans-serif}table{border-collapse:collapse;width:100%;font-size:14px}td,th{padding:9px;border-bottom:1px solid #dce5eb;text-align:left}th{background:#eef4f8}.big{font-size:29px;font-weight:700;color:#214f6d}.phases{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:12px 0}.phase{border-top:4px solid #3687ac;background:#f3f8fb;padding:14px}a{color:#126387}code{overflow-wrap:anywhere}details{margin-top:16px}summary{cursor:pointer}footer{margin:28px 0;font-size:12px;color:#607280}.links{display:flex;flex-wrap:wrap;gap:14px}.scroll{overflow:auto}
+@media(max-width:850px){main{padding:14px}h1{font-size:25px}.cols,.cards{grid-template-columns:1fr}.panel{padding:16px}.phases{grid-template-columns:1fr 1fr}.lead{font-size:18px}}
+</style>
+<main>
+<div class="kicker">HVJB · Cセルの局所比較 · 2026-09-17</div>
+<h1>小型アームに替えても、現在のハンドの幅は残る</h1>
+<p class="lead">末端手首は UR15 約90 mm → UR3e 約63 mm。現在のH04は、保持時に約129 mm幅です。</p>
+<p>筐体内の作業では、<b>細い対象に合わせた指先と、開放・退避時の外形を先に詰める</b>方向を優先します。UR3eは比較用で、採用機種を決めたものではありません。</p>
+<div class="good">選択済みの「主3腕＋A/B共用補助1腕＋C専用補助1腕」は維持。5腕をすべてUR15にする前提は置きません。</div>
+
+<section class="panel">
+<h2>1. 同じ縮尺で見る部品の幅</h2>
+<p class="muted">URは公式wrist_3表示メッシュをtool0座標へ変換。H04は保存済みT050のXY投影。個別部品を並べた図で、装着姿勢・アダプタ・全腕の干渉は含みません。</p>
+<svg id="comparison" viewBox="0 0 1320 470" aria-label="同じ縮尺の手首とハンドの外形"></svg>
+<div class="scroll"><table><thead><tr><th>個別部品</th><th>図の横幅</th><th>もう一方の投影幅</th><th>測定範囲</th></tr></thead><tbody id="sizes"></tbody></table></div>
+<p class="muted">線は各メッシュの投影凸包。輪郭の大きさを比べる表示で、穴・凹部・内部構造を表す図ではありません。数値計測には元の頂点または三角形を使っています。</p>
+</section>
+
+<section class="panel">
+<h2>2. 保持・工具進入・開放・退避を分ける</h2>
+<div class="note">これは既存のφ14 mm線用比較サンプルです。Ampereの細線に対する把持姿勢ではありません。40 mm後退・15度傾斜・被覆側クランプを変更していません。</div>
+<div id="state-buttons" style="margin-top:15px"></div>
+<div class="cols">
+<div><p class="muted">側面：+Xから見る。工具軸と元ハンドは同一座標。</p><svg id="hand-side" viewBox="0 0 620 465" aria-label="保存済みハンド姿勢の側面"></svg></div>
+<div>
+<h3 id="state-title"></h3>
+<p id="state-description"></p>
+<div class="big" id="hand-width"></div><p class="muted">ハンド全体の左右幅。全腕や配線は含みません。</p>
+<table><thead><tr><th>参考着座面からの高さ</th><th>工具軸→ハンド表面</th></tr></thead><tbody id="radial"></tbody></table>
+<p class="muted">水平距離の最小値です。工具半径を差し引いた空隙や、工具一式の通過可否ではありません。高さ帯は以前の工具比較の範囲を再利用しています。</p>
+<p class="muted">4つの保存姿勢を切り替えます。姿勢間の軌道・ケーブルの変形・荷重支持は未計算です。</p>
+</div></div>
+<div class="phases">
+<div class="phase"><b>① 保持</b><br>端子の穴を空け、被覆を保持。実物径に合う溝・指間隔が必要。</div>
+<div class="phase"><b>② 工具進入</b><br>保持を続ける。ビット・ソケットだけでなく供給ノーズまで含めて比較。</div>
+<div class="phase"><b>③ 開放</b><br>次の支持を確認してから開く。開放幅は保持幅と別に扱う。</div>
+<div class="phase"><b>④ 退避</b><br>工具・隣の端子・残る自由端を避けて抜く。上昇だけで済むとは未確定。</div>
+</div>
+</section>
+
+<section class="panel">
+<h2>3. 最初の比較場所：側壁沿いの端子列</h2>
+<p>指定された2022年写真のP13／J09〜J13を、既存表示モデルで観察しました。実物の「最も狭い接続箇所」の順位は、まだ確定できません。</p>
+<div class="cols">
+<div><svg id="photo" viewBox="270 590 510 260" aria-label="指定写真の端子列"><image href="product.jpg" width="1620" height="1080"/><g id="markers"></g></svg><p class="muted">元画像をそのまま表示。番号は既存の写真対応ID。</p></div>
+<div><div id="joint-buttons"></div><h3 id="joint-title"></h3><table><thead><tr><th>表示ねじ頭の上面から</th><th>軸からの距離</th><th>近い表示形状</th></tr></thead><tbody id="product-radial"></tbody></table><p class="muted">対象ねじと蓋だけを除外。周囲の線を「固定物／保持して動かす線」に分類していないため、そのまま工具障害物とは扱いません。</p></div>
+</div>
+<div class="note">写真から置いたモデルの寸法・Z高さです。数値は実物の工具空間ではありません。表示モデルの被覆はφ5.6 mmの推定形状、旧H04サンプルの被覆はφ15.2 mm。この差を無視してH04を重ねても、把持成立の確認にはなりません。</div>
+<details><summary>2025年の組立映像との関係</summary><div class="cols"><img src="assembly_242s.png" alt="公式組立映像242秒の原フレーム" style="width:100%"><p>2025年映像の242秒にも側壁沿いの端子列が見えます。前回の観察ラベルJ1と、2022年写真P13の同一性は未確定です。映像だけから寸法や締結積層を補っていません。</p></div></details>
+</section>
+
+<section class="panel">
+<h2>この比較を受けた次の検討</h2>
+<div class="cards">
+<div class="card"><h3>搬送・箱外の組立</h3><p>UR15を引き続き候補にする。必要可搬質量、重心、到達範囲を別途照合。</p></div>
+<div class="card"><h3>筐体内の保持</h3><p>小型アーム＋細身の専用ハンドを優先比較。現在のH04をそのまま移すだけでは外形は減らない。</p></div>
+<div class="card"><h3>締付</h3><p>据置工具＋位置決め軸の比較を継続。工具の全外形が分かるまで、手首を箱外に置けるとは断定しない。</p></div>
+</div>
+<p>不足しているのは、対象の実寸・保持できる被覆範囲、締結積層、工具ノーズと供給部の外形、手首取付部、各作業時点の配線位置です。最終機種や軌道の確定にはこれらが必要です。</p>
+<p class="muted">今回の出力は寸法比較と補助観察。正式な物理妥当性の判定、受入基準、実機タクトを新設していません。元モデルと92写真特徴・17機能・13回路群・LV12ピン・20仕事を保持しています。</p>
+<div class="links"><a href="notes.md">測定方法・制限</a><a href="measurements.json">測定JSON</a><a href="audit.json">入力・保存監査</a><a href="selection.json">選択済みの分担</a><a href="all_workcards.json">全20仕事</a><a href="overview.png">比較図PNG</a></div>
+<details><summary>一次資料</summary><div id="source-links"></div></details>
+</section>
+<footer>© 2023 Universal Robots A/S. Use hereof is subject to Universal Robots A/S’ Terms and Conditions for Use of Graphical Documentation.<br>UR15元メッシュの著作権表示：© 2025 Universal Robots A/S.<br><a href="UR15_mesh_LICENSE.txt">UR15表示資料の利用条件</a> · <a href="UR_Description_LICENSE.txt">UR Descriptionライセンス</a> · 図はソフトウェア上の外形観察で、製造図ではありません。</footer>
+</main>
+<script>
+const D=__PAYLOAD__;
+const NS='http://www.w3.org/2000/svg';
+const mm=x=>(x*1000).toFixed(2);
+const el=(tag,attributes,parent,text)=>{const node=document.createElementNS(NS,tag);for(const[k,v]of Object.entries(attributes))node.setAttribute(k,v);if(text!==undefined)node.textContent=text;if(parent)parent.append(node);return node;};
+const text=(g,x,y,s,size=17,color='#21425e')=>el('text',{x,y,fill:color,'font-size':size},g,s);
+const poly=(g,points,convert,fill,opacity=1)=>el('polygon',{points:points.map(convert).map(p=>p.join(',')).join(' '),fill,'fill-opacity':opacity,stroke:fill,'stroke-width':.7},g);
+const line=(g,x1,y1,x2,y2,color='#63869e',dash='')=>el('line',{x1,y1,x2,y2,stroke:color,'stroke-width':1.5,'stroke-dasharray':dash},g);
+const dim=(g,a,b,y,s)=>{line(g,a,y,b,y);line(g,a,y-5,a,y+5);line(g,b,y-5,b,y+5);text(g,(a+b)/2,y+25,s,18).setAttribute('text-anchor','middle');};
+function drawComparison(){
+const g=document.getElementById('comparison');g.replaceChildren();const scale=2.45;
+const rows=[];
+for(const[i,arm]of ['ur15','ur3e'].entries()){
+ const w=D.wrists[arm],c=220+i*440,b=w.bounds,center=[(b.min_m[0]+b.max_m[0])/2,(b.min_m[1]+b.max_m[1])/2];
+ text(g,c,34,(arm==='ur15'?'UR15':'UR3e')+' · 末端手首',23).setAttribute('text-anchor','middle');
+ poly(g,w.front_xy_m,p=>[c+(p[0]-center[0])*1000*scale,225-(p[1]-center[1])*1000*scale],i?'#527f99':'#49606f',.9);
+ dim(g,c-b.size_m[0]*500*scale,c+b.size_m[0]*500*scale,392,mm(b.size_m[0])+' mm');
+ rows.push([(arm==='ur15'?'UR15':'UR3e')+' wrist_3',b.size_m[0],b.size_m[1],'公式表示メッシュ／tool0 XY']);
+}
+const h=D.hand.near,c=1100,b=h.bounds,center=[(b.min_m[0]+b.max_m[0])/2,(b.min_m[1]+b.max_m[1])/2];
+text(g,c,34,'現在のH04 · 保持時',23).setAttribute('text-anchor','middle');
+for(const o of h.surfaces.filter(o=>o.category!=='target'))poly(g,o.xy_m,p=>[c+(p[0]-center[0])*1000*scale,225-(p[1]-center[1])*1000*scale],`rgb(${o.color.slice(0,3).join(',')})`,.88);
+dim(g,c-b.size_m[0]*500*scale,c+b.size_m[0]*500*scale,392,mm(b.size_m[0])+' mm');
+text(g,18,458,'同一縮尺 · 各部品の中心をそろえて表示（組付け状態ではない）',15);
+rows.push(['H04 / T050 near',b.size_m[0],b.size_m[1],'保存済みハンド＋交換指／world XY']);
+document.getElementById('sizes').innerHTML=rows.map(r=>`<tr><td>${r[0]}</td><td>${mm(r[1])} mm</td><td>${mm(r[2])} mm</td><td>${r[3]}</td></tr>`).join('');
+}
+const descriptions={near:'被覆を保持する保存姿勢。工具はこの保持状態のまま進入する比較です。線は締付軸のみで、工具本体の外形は描いていません。',early:'開き始めの保存姿勢。2点の被覆保持を解くタイミングや、次の支持が成立する条件は別途必要です。',open:'左右の指を開いた保存姿勢。開放時の幅と、隣の端子・壁との関係を調べる必要があります。',clear:'開放姿勢を25 mm上げた既存の比較姿勢です。25 mmを実物の必要退避量と決めたものではありません。'};
+function chooseState(state){
+ const h=D.hand[state],g=document.getElementById('hand-side');g.replaceChildren();
+ const xy=p=>[90+p[0]*2100,418-p[1]*2100];
+ for(const o of [...h.surfaces].sort((a,b)=>(a.category==='target'?-1:0)-(b.category==='target'?-1:0)))poly(g,o.yz_m,xy,`rgb(${o.color.slice(0,3).join(',')})`,o.category==='hardware'?.9:.98);
+ line(g,90,28,90,445,'#a45138','6 5');text(g,18,22,'工具軸のみ',15,'#a45138');
+ const seat=D.hand_target.seat_z_m,y=xy([0,seat])[1];line(g,60,y,250,y,'#718497','3 4');text(g,264,y+5,'参考着座面',14);
+ line(g,24,355,24,306);text(g,7,297,'Z',14);line(g,30,398,72,398);text(g,39,422,'+Y',14);
+ document.getElementById('state-title').textContent=h.label_ja;
+ document.getElementById('state-description').textContent=descriptions[state];
+ document.getElementById('hand-width').textContent='幅 '+mm(h.bounds.size_m[0])+' mm';
+ document.getElementById('radial').innerHTML=h.tool_axis_to_hand.map(r=>`<tr><td>${r.z_above_reference_seat_m.map(mm).join('〜')} mm</td><td>${mm(r.radius_to_surface_m)} mm</td></tr>`).join('');
+ document.querySelectorAll('[data-state]').forEach(b=>b.setAttribute('aria-pressed',b.dataset.state===state));
+ window.localAccessState={...window.localAccessState,hand:state};
+}
+function chooseJoint(id){
+ const row=D.product_row.find(r=>r.id===id),g=document.getElementById('markers');g.replaceChildren();
+ for(const joint of D.product_row){const[x,y]=joint.center_px,c=joint.id===id?'#ffd86b':'#7de1f1';el('circle',{cx:x,cy:y,r:15,fill:'none',stroke:c,'stroke-width':3},g);text(g,x-13,y-25,joint.id,13,c);}
+ document.getElementById('joint-title').textContent=id+'：表示モデルの周辺観察';
+ document.getElementById('product-radial').innerHTML=row.bands.map(r=>`<tr><td>${r.z_above_display_head_top_m.map(mm).join('〜')} mm</td><td>${mm(r.radius_to_surface_m)} mm</td><td>${r.object.split('/')[0]}</td></tr>`).join('');
+ document.querySelectorAll('[data-joint]').forEach(b=>b.setAttribute('aria-pressed',b.dataset.joint===id));
+ window.localAccessState={...window.localAccessState,joint:id};
+}
+for(const [id,h]of Object.entries(D.hand)){const b=document.createElement('button');b.dataset.state=id;b.textContent=h.label_ja;b.onclick=()=>chooseState(id);document.getElementById('state-buttons').append(b);}
+for(const row of D.product_row){const b=document.createElement('button');b.dataset.joint=row.id;b.textContent=row.id;b.onclick=()=>chooseJoint(row.id);document.getElementById('joint-buttons').append(b);}
+const sources=[['Universal Robots 公式モデル（使用commit）',D.sources.ur_repository],['UR15 公式仕様',D.sources.ur15_specs],['UR3e 公式仕様',D.sources.ur3e_specs],['Ampere 元写真',D.sources.photo.url],['Ampere 公式組立映像',D.sources.video_frame.url]];
+for(const [name,href]of sources){const p=document.createElement('p'),a=document.createElement('a');a.href=href;a.textContent=name;p.append(a);document.getElementById('source-links').append(p);}
+drawComparison();chooseState('near');chooseJoint('J09');window.localAccessReady=true;
+window.exportOverview=()=>{const source=document.getElementById('comparison').cloneNode(true);source.setAttribute('xmlns',NS);source.setAttribute('width','1320');source.setAttribute('height','470');source.style.background='white';source.style.fontFamily='"Noto Sans CJK JP",sans-serif';return new XMLSerializer().serializeToString(source);};
+</script>
+</html>
