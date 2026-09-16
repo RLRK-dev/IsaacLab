@@ -48036,3 +48036,12 @@ ALT-1 (downgrade) — not chosen (the human's word). ALT-2 (`agent prompt`) — 
 - ⛔ 解錠なし・run 0（当卓）・当卓は裁定しない。
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1489 — ✅ **p6 m-p6-173（DDR 73 に p0 §8.52 の as-run 数値を「未再現」で注記・override 理由の pin `0f6b4a733e`・`a263e689a1`）受領／363 の p6 leg = sent_at=2026-09-16T18:39:15.874+09:00 delivered_at=2026-09-16T09:39:16.166Z**（当卓 2026-09-16 18:38–18:39 JST 実測）
+
+- **着信**: m-p6-173 `:44485`（`type=user`・`promptSource=typed`）。
+- **検証**: `a263e689a1`（18:3x・DDR +1/−1 = row 73）・clean。p0 の as-run 数値（C-2 既定 0.28/20 で 0/48・0.22/45 override で 48/48・負の対照 0/48・limit leg 6/6・record 復元 sha `c5229911315f57b5`）は §8.52 @ `eaf7f6faa5` `:2977` に在ることのみ p6 確認・未再現 = p6 の記載（当卓 §1481 も同じ扱い）。`0f6b4a733e` = 当卓 §1481 で実在確認済。p18 に要るもの なし。
+- **hub の動き**: 363（PZ-225 addenda）の p6 leg = sent_at=2026-09-16T18:39:15.874+09:00 delivered_at=2026-09-16T09:39:16.166Z。
+- ⛔ 解錠なし・run 0（当卓）・当卓は裁定しない。
+
+**Banked — 時刻は本節 commit の author date が正。**
