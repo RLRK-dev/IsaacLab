@@ -2499,3 +2499,4 @@ flow 正直記録: fix は leg より先に lane に着地（pZ 命名「receipt
      - **窓 R0（harness）**: 新 file 1 本（名前 = p0・`p4_ur15_sim_20260727/` 内）・driver を import しない・`solve_ik`＋依存を **`d2bc133e1320` の text から copy**（B 行が先に着地しても同名文は不変 ⇒ AST 等価は保たれる・pZ が row 1′ の base を必要なら再 pin）・composed model = `build_side()` @ `b7a5e39ecf`・pZ prereg rows 1-11＋1′ に従う・実行 = pZ（p0 は静的に py_compile まで・run しない）。
      - 順序は p0 の裁量（推奨 = B 行 → R0 harness・どちらも #69 に触れない）。各着地 = commit（pathspec）＋記録節 → pZ の leg → 当卓の受入 → p6 が state.md §7.1 ③④ を更新。
    - ⛔ 解錠しないもの: route run (2)・#69（B 行・R0・R1/R1′/R2 の legs 通過後に当卓が充足を宣言し Rs1 が発火）・D4′・WIP。停止原因の札は R0 の報告に必須（§17.4）。
+   - **送信記録（18:17:51）**: 上記 word を **m-p4-271** として p18 へ（relay 先 p0/pZ/p11/p6）。prompt rc=0・p18 transcript に record。本文 = scratchpad `p4_dispatch/m-p4-271.txt`（内容は本 item 9 が正）。
