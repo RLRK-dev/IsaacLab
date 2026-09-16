@@ -564,3 +564,17 @@ numbers unknown until their basis and the scope of the product change are set.
   Waiting must preserve support before grasp starts; do not interrupt a hold.
   Leave unmeasured worksheet time fields empty, not zero. No task uses source
   video timestamps as measured durations.
+
+## Two-assistant allocation selected on 2026-09-16
+
+- After reviewing the diagram, the user explicitly selected two auxiliary arms.
+  Adopt S5_AB: three primary arms, one shared A/B assistant, and one dedicated C
+  assistant. `data/hvjb_robot_selection_v01.json` and its analysis document are
+  the decision record. Do not continue treating this role allocation as unselected.
+- The earlier comparison v01 and diagram v02 remain decision-history artifacts.
+  Their null selection fields predate this decision. Five arms refer to these
+  assembly roles; robot models, physical base count and placement remain open.
+- Preserve A/B holding until support handoff and retreat; arbitrate overlapping
+  requests before grasp starts. C guidance stays occupied through its actual
+  handoff, not merely until enclosure insertion. Retain all twenty tasks and
+  separately counted supply, tools, fixtures, inspection and return equipment.

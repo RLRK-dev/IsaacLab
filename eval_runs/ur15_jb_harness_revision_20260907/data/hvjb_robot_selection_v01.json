@@ -1,0 +1,36 @@
+{
+  "revision": "hvjb_robot_selection_v01",
+  "decision_date": "2026-09-16",
+  "status": "user_selected_role_allocation",
+  "user_directive_ja": "補助を2腕に分ける",
+  "selected_plan": "S5_AB",
+  "selected_plan_ja": "主担当3腕＋A/B共用補助1腕＋C専用補助1腕",
+  "source_comparison": "data/hvjb_robot_sharing_v01.json",
+  "source_sha256": "7888693db9b5cd0314b7acecb6c0fa09ab7c207e43c2391fbfbf642833b99b90",
+  "selected_primary_arm_count": 3,
+  "selected_assist_arm_count": 2,
+  "selected_assembly_arm_count": 5,
+  "assist_groups": [["X-A", "X-B"], ["X-C"]],
+  "role_to_unit": {
+    "R-A": "ARM_A",
+    "R-B": "ARM_B",
+    "R-C": "ARM_C",
+    "X-A": "ASSIST_1",
+    "X-B": "ASSIST_1",
+    "X-C": "ASSIST_2"
+  },
+  "count_scope_ja": "A/B/Cの組立役に割り当てる5腕。ロボットの機台数や、OP010 XYZ・締付工具・搬送等を含むライン全体の設備台数ではない。",
+  "operating_constraints_ja": [
+    "AとBが同時に補助を必要とする場合は、把持開始前に作業順序を調整する。保持途中で手を離して別セルへ移らない。",
+    "A/B共用補助は、前の支持引継ぎ・開放・退避と、必要な手先交換・移動を終えてから次の保持を開始する。",
+    "C専用補助は自由端の案内と支持引継ぎを担当し、筐体搭載終了だけで空き扱いにしない。",
+    "既存の20仕事・据置締付工具・支持・供給・検査・回収の役割を保持する。該当する大小同時締結の2主軸条件を継承する。"
+  ],
+  "next_work_ja": "5腕の分担を前提に、A/B共用補助の保持区間・受渡しと、C専用補助の継続担当を具体化する。その上で配置・到達・干渉を確認する。",
+  "selected_robot_models": null,
+  "selected_robot_base_count": null,
+  "selected_layout": null,
+  "minimum_robot_count": null,
+  "measured_cycle_time_s": null,
+  "physical_acceptance_verdict": null
+}
