@@ -1,0 +1,163 @@
+{
+  "schema_version": 1,
+  "recorded_on": "2026-09-18",
+  "scope_ja": "工具配置比較の前提となる公開締結条件。実物の締結部材・積層・工具の選定ではない。",
+  "evidence_basis_ja": "ローカルの既存対応表、TE原資料の本文と2頁画像、公式サイトで読めたGX14 PDF本文。出典ごとに適用対象を限定する。",
+  "sources": {
+    "TE_INSTRUCTION": {
+      "title": "AMP+ HVA280 Discrete Header Assemblies, 408-32095",
+      "revision": "06 NOV 13 Rev B",
+      "url": "https://www.te.com/commerce/DocumentDelivery/DDEController?Action=srchrtrv&DocFormat=pdf&DocLang=English&DocNm=408-32095&DocType=Specification+Or+Standard&PartCntxt=2103340-1",
+      "local_path": "references/connector_correction_20260915/te_408_32095_instruction.pdf",
+      "local_sha256": "cd13cd856b679e2683f7672f079bd4c99ff87ac2e361d3da73700e12c12fa63d",
+      "section": "3.2.A.2",
+      "pdf_page_one_based": 2,
+      "access_method": "local_pdf_text_and_rendered_page_review"
+    },
+    "TE_3_BAY": {
+      "title": "2103340 customer drawing",
+      "revision": "A2",
+      "url": "https://www.te.com/en/product-2103340-1.html",
+      "local_path": "references/connector_correction_20260915/te_2103340_drawing.pdf",
+      "local_sha256": "be59744129dc5134d2a3363e25af93294e662cde4254ec28411b80bd01673dc6",
+      "access_method": "reuse_of_previously_checked_drawing_and_header_input_record"
+    },
+    "TE_2_BAY": {
+      "title": "2103346 customer drawing",
+      "revision": "A3",
+      "url": "https://www.te.com/en/product-2103346-2.html",
+      "local_path": "references/connector_correction_20260915/te_2103346_drawing.pdf",
+      "local_sha256": "fbdeb1d56aba02ae85ed2464b3acd68ce6444cd47179f33225d7f0ba1b580e28",
+      "access_method": "reuse_of_previously_checked_drawing_and_header_input_record"
+    },
+    "GX14_DATASHEET": {
+      "title": "Sensata GIGAVAC GX14 series datasheet",
+      "revision_as_printed": "Rev A 7/2/18",
+      "url": "https://www.sensata.com/sites/default/files/a/sensata-gigavac-gx14-series-open-contactors-datasheet.pdf?cb=14043931",
+      "discovery_url": "https://www.sensata.com/products/contactors-fuses/gx14-series-350a-12vdc-coil-coil-terminals-gx14bd",
+      "pdf_page_one_based": 3,
+      "access_method": "official_pdf_extracted_web_text",
+      "dimension_page_image_reviewed": false,
+      "local_path": null,
+      "local_sha256": null,
+      "local_download_http_status": 403,
+      "applicability_ja": "GX14系の候補資料。発見元のGX14BDを含め、Ampere実物の型式・末尾仕様は同定していない。"
+    },
+    "AMPERE_PRODUCT": {
+      "title": "High Voltage Junction Box HVJB-5-400",
+      "published_on": "2025-04-09",
+      "url": "https://help.ampereev.com/hc/en-us/articles/31292470232087-High-Voltage-Junction-Box-HVJB-5-400",
+      "access_method": "official_web_page",
+      "scope_ja": "製品の接触器・バス配線等の機能説明。実接触器の型式、締結部材と積層寸法は得られていない。"
+    },
+    "DFM_PRIOR_RECORD": {
+      "title": "DEPRAG Feed Module D3837, previously checked pages 5–7",
+      "url": "https://www.deprag.com/fileadmin/bilder_content/emedia/broschueren_pics/emedia_Automation/D3837/D3837en.pdf",
+      "evidence_record": "data/hand_fastening_reference_v01.json",
+      "prior_record_source_pdf_sha256": "ded33cab2ed8b454b1e9b962c8fb574c470476d849ed4e277cf082aa815c737f",
+      "access_method": "reuse_of_saved_source_record_checked_2026_09_14",
+      "local_pdf_revalidated_this_step": false
+    }
+  },
+  "interfaces": [
+    {
+      "id": "HEADER_TO_ENCLOSURE",
+      "applicability": "public_specification_for_headers_mapped_in_model",
+      "model_targets": [
+        {
+          "part_id": "P16",
+          "header_part_number": "2103340-1",
+          "documented_mounting_fastener_count": 8,
+          "source": "TE_3_BAY"
+        },
+        {
+          "part_id": "P17",
+          "header_part_number": "2103346-2",
+          "documented_mounting_fastener_count": 6,
+          "source": "TE_2_BAY"
+        }
+      ],
+      "published_conditions": {
+        "source": "TE_INSTRUCTION",
+        "thread_designation": "M4",
+        "customer_supplied": true,
+        "head_diameter_max_m": 0.0087,
+        "torque_range_n_m": [2.0, 2.5]
+      },
+      "unresolved_ja": [
+        "実ねじの型式・駆動形状・長さ・材質",
+        "実筐体壁と固定先を含む積層・有効ねじ掛かり・底付きまでの寸法",
+        "採用ビット、係合深さ、締結TCPと必要行程"
+      ],
+      "scope_ja": "筐体側ヘッダーのフランジ固定。外部プラグの嵌合や内部丸端子の固定へ転用しない。"
+    },
+    {
+      "id": "GX14_MAIN_TERMINAL_CONDITIONAL",
+      "applicability": "candidate_family_only_not_identified_ampere_part",
+      "related_model_part_id": "P02",
+      "ampere_actual_part_number": null,
+      "published_conditions": {
+        "source": "GX14_DATASHEET",
+        "bolt_thread_designation": "M10x1.5",
+        "bolt_material": "stainless steel",
+        "nut_thread_designation": "M10x1.5",
+        "nut_type": "flanged nut",
+        "nut_material": "stainless steel",
+        "power_connection_torque_range_n_m": [14.0, 20.0]
+      },
+      "unresolved_ja": [
+        "Ampere実物の接触器型式・末尾仕様と製造版",
+        "実バスバーと丸端子の重なり順・枚数・厚さ",
+        "実ナット形状・工具二面幅・係合深さ・ボルト突出量",
+        "採用ソケット、締結TCPと必要行程"
+      ]
+    },
+    {
+      "id": "GX14_BODY_MOUNT_CONDITIONAL",
+      "applicability": "candidate_family_only_not_identified_ampere_part",
+      "related_model_part_id": "P02",
+      "published_conditions": {
+        "source": "GX14_DATASHEET",
+        "bolt_thread_designation": "M5"
+      },
+      "mounting_torque_n_m": null,
+      "scope_ja": "接触器本体の固定。主電流端子のM10条件・14–20 N·mを本体固定へ適用しない。"
+    },
+    {
+      "id": "INTERNAL_TERMINAL_ROWS_AND_LATE_CONNECTIONS",
+      "applicability": "image_observations_only_joint_stack_unresolved",
+      "photo_part_ids": ["P13"],
+      "photo_feature_ids": ["J09", "J10", "J11", "J12", "J13"],
+      "video_location_labels": ["J1", "J2", "J3"],
+      "prior_observation_record": "analysis/hvjb_final_connection_v01.md",
+      "video_url": "https://www.youtube.com/watch?v=Sm_D-vmNYqc",
+      "actual_fastener_part_number": null,
+      "thread_designation": null,
+      "torque_n_m": null,
+      "joint_stack_m": null,
+      "scope_ja": "2022年写真の特徴と2025年動画の位置ラベルを別に保持する。映像のJ1/J2/J3は部品番号・完全な接合点リストではない。近接や見た目でGX14端子へ対応付けない。"
+    }
+  ],
+  "tool_comparison_note": {
+    "source": "DFM_PRIOR_RECORD",
+    "published_screw_max_designation": "M8",
+    "published_nut_max_designation": "M6",
+    "inference_ja": "このD3837のDFM参照範囲に、条件付きGX14のM10ナットは含まれない。これは記載範囲の照合で、実物の工具選定・物理成立判定ではない。E-SFM、STÖGER SEMや別構成の能力へ一般化しない。"
+  },
+  "source_access_limits": [
+    {
+      "url": "https://www.ampereev.com/wp-content/uploads/2023/05/High-Voltage-Wiring-Guide-V1.3.pdf",
+      "web_open_http_status": 404,
+      "used_as_fastener_basis": false
+    },
+    {
+      "source": "GX14_DATASHEET",
+      "note_ja": "公式PDFのWeb抽出本文は読めたが、ローカル取得はHTTP 403で保存なし。図面画像の視認は行えていない。本文以外の寸法は採用していない。"
+    }
+  ],
+  "selected_fastener_part_numbers": null,
+  "selected_tool_configuration": null,
+  "fastening_tcp_m": null,
+  "bit_stroke_m": null,
+  "physical_acceptance_verdict": null
+}
