@@ -1,0 +1,4 @@
+HEADER_OBSERVED P16 8 4.516326372977317e-09 [0.001500003457069396, 0.001500003457069396]
+HEADER_OBSERVED P17 6 4.834617389045253e-09 [0.001500003457069396, 0.001500003457069396]
+HEADER_FASTENING_COMPLETE /home/rlrk/IsaacLab-op040/eval_runs/ur15_jb_harness_revision_20260907/audit/hvjb_header_fastening_v01.json
+[INFO] Using Python: "/home/rlrk/src/ur15-line-render/venv/bin/python"

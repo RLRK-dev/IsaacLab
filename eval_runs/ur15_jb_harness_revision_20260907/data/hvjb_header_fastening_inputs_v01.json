@@ -1,0 +1,63 @@
+{
+  "recorded_on": "2026-09-18",
+  "scope": "Nominal mounting axes and saved illustrative fasteners; no selected fastener, machining model or physical verdict",
+  "model": "data/hvjb_photo_model_v03_p03.json.gz",
+  "header_meshes": "data/header_review_v03/meshes.json.gz",
+  "existing_generator": "scripts/build_header_review_v03.py",
+  "headers": [
+    {
+      "feature_id": "P16",
+      "part_number": "2103340-1",
+      "drawing": "references/connector_correction_20260915/te_2103340_drawing.pdf",
+      "drawing_sha256": "be59744129dc5134d2a3363e25af93294e662cde4254ec28411b80bd01673dc6",
+      "drawing_revision": "A2",
+      "drawing_sheet": 1,
+      "product_url": "https://www.te.com/en/product-2103340-1.html",
+      "hole_x_m": [-0.05005, -0.01695, 0.01695, 0.05005],
+      "hole_z_m": [-0.01375, 0.01375],
+      "model_translation_m": [-0.052, -0.08, 0.046],
+      "bay_centers_x_m": [-0.0339, 0, 0.0339],
+      "aperture_widths_m": [0.023, 0.0228, 0.023]
+    },
+    {
+      "feature_id": "P17",
+      "part_number": "2103346-2",
+      "drawing": "references/connector_correction_20260915/te_2103346_drawing.pdf",
+      "drawing_sha256": "fbdeb1d56aba02ae85ed2464b3acd68ce6444cd47179f33225d7f0ba1b580e28",
+      "drawing_revision": "A3",
+      "drawing_sheet": 1,
+      "product_url": "https://www.te.com/en/product-2103346-2.html",
+      "hole_x_m": [-0.0331, 0, 0.0331],
+      "hole_z_m": [-0.01375, 0.01375],
+      "model_translation_m": [0.072, -0.08, 0.046],
+      "bay_centers_x_m": [-0.01695, 0.01695],
+      "aperture_widths_m": [0.0228, 0.023],
+      "x_derivation_ja": "ヘッダー中央をX=0とする。左側は-(16.95+16.15)、中央は0、右側は50.05-16.95 mm。"
+    }
+  ],
+  "coordinates_ja": "Xは正面図の右、Zは上、Yは筐体へ向かう向き。各ヘッダーの公称穴パターン中央をX=Z=0とし、公式CADの取付側基準をY=0とする。モデル内配置は既存生成元から継承した表示配置。",
+  "drawing_conditions": {
+    "mount_thread": "M4",
+    "mount_holes_blind": true,
+    "minimum_wall_thickness_m": 0.003,
+    "fastener_or_washer_min_diameter_m": 0.0086,
+    "fastener_head_max_diameter_m": 0.0087,
+    "height_max_outside_head_diameter_m": 0.0008,
+    "height_scope_ja": "径8.7 mmの外側に出る座金・締結部材の突出高さ。ねじ頭全体の高さ上限ではない。",
+    "aperture_height_m": 0.0135,
+    "aperture_radius_m": 0.0044,
+    "positioning_bore_diameter_m": 0.0045,
+    "positioning_bore_min_depth_m": 0.004,
+    "positioning_bore_scope_ja": "位置決め用穴の指示。M4ねじ穴の深さへ転用しない。"
+  },
+  "measurement_settings": {
+    "flat_plane_coordinate_tolerance_m": 1e-9,
+    "plane_group_decimal_places": 9,
+    "barycentric_roundoff_tolerance": 1e-10,
+    "purpose_ja": "保存メッシュの平面・重複ヒットの浮動小数点処理。製造公差・接触の受入基準ではない。"
+  },
+  "selected_fastener": null,
+  "selected_bit": null,
+  "fastening_tcp_m": null,
+  "physical_acceptance_verdict": null
+}

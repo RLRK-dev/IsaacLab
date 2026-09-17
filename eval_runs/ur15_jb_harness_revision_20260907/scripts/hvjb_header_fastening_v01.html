@@ -1,0 +1,119 @@
+<div id="hvjb-header-fastening-v01">
+  <style>
+    #hvjb-header-fastening-v01 .drawing { display:block; width:100%; overflow:visible; }
+    #hvjb-header-fastening-v01 .drawing text { fill:var(--foreground); font-size:12px; }
+    #hvjb-header-fastening-v01 .frame { fill:none; stroke:var(--border); }
+    #hvjb-header-fastening-v01 .aperture { fill:var(--muted); fill-opacity:.3; stroke:var(--border); }
+    #hvjb-header-fastening-v01 .axis-mark { fill:none; stroke:var(--viz-series-1); stroke-width:2; }
+    #hvjb-header-fastening-v01 .active-ring { fill:none; stroke:var(--foreground); stroke-width:1; }
+    #hvjb-header-fastening-v01 .reference { stroke:var(--border); stroke-dasharray:4 3; }
+    #hvjb-header-fastening-v01 .wall { fill:var(--viz-series-2); fill-opacity:.2; }
+    #hvjb-header-fastening-v01 .head { fill:var(--muted); stroke:var(--border); }
+    #hvjb-header-fastening-v01 .shaft { fill:var(--viz-series-1); fill-opacity:.35; }
+    #hvjb-header-fastening-v01 .excess { fill:var(--viz-series-3); fill-opacity:.7; }
+    #hvjb-header-fastening-v01 .section-line { stroke:var(--foreground); stroke-width:1; }
+  </style>
+  <h3>ヘッダー14か所の締結位置</h3>
+  <div class="viz-controls">
+    <label class="form-label">参照するねじ
+      <select class="form-select" data-screw aria-label="参照するねじ"></select>
+    </label>
+  </div>
+  <div class="text-small" data-selected aria-live="polite"></div>
+  <div class="text-small">× ねじ軸　枠：筐体開口の公称形状　番号：位置の参照用</div>
+  <svg class="drawing" data-map="P16" role="img" aria-label="3口ヘッダーの8か所のねじ軸と3つの開口"></svg>
+  <svg class="drawing" data-map="P17" role="img" aria-label="2口ヘッダーの6か所のねじ軸と2つの開口"></svg>
+  <svg class="drawing" data-section role="img" aria-label="現行の仮ねじ、CAD座面、筐体壁の軸方向位置"></svg>
+  <div class="text-small">径方向は模式表示。実ねじ・筐体のねじ穴形状は未確定。</div>
+  <script>
+  (() => {
+    const root = document.getElementById('hvjb-header-fastening-v01');
+    const data = __HEADER_DATA__;
+    const ns = 'http://www.w3.org/2000/svg';
+    const select = root.querySelector('[data-screw]');
+    const rows = data.headers.flatMap(h => h.screws);
+    const fmt = n => Number(n.toFixed(3)).toString();
+    for (const row of rows) {
+      const option = document.createElement('option');
+      option.value = row.id;
+      option.textContent = `${row.header_label} · ${row.number}`;
+      select.append(option);
+    }
+    const el = (svg, tag, attributes, text) => {
+      const node = document.createElementNS(ns, tag);
+      for (const [key,value] of Object.entries(attributes)) node.setAttribute(key, String(value));
+      if (text !== undefined) node.textContent = text;
+      svg.append(node); return node;
+    };
+    const label = (svg,x,y,text,anchor='start') => el(svg,'text', {x,y,'text-anchor':anchor,'data-label':''},text);
+    const nominal = data.headers.flatMap(h => h.screws.map(s=>s.nominal_xz_mm));
+    const xBounds = [Math.min(...nominal.map(p=>p[0]))-6, Math.max(...nominal.map(p=>p[0]))+6];
+    const zBounds = [Math.min(...nominal.map(p=>p[1]))-6, Math.max(...nominal.map(p=>p[1]))+6];
+    function map(header, selected) {
+      const svg = root.querySelector(`[data-map="${header.feature_id}"]`);
+      const width = svg.getBoundingClientRect().width;
+      const left=60, right=20, top=40;
+      const scale=(width-left-right)/(xBounds[1]-xBounds[0]);
+      const innerHeight=(zBounds[1]-zBounds[0])*scale;
+      const height=top+innerHeight+48;
+      const x=v=>left+(v-xBounds[0])*scale, y=v=>top+(zBounds[1]-v)*scale;
+      svg.replaceChildren(); svg.setAttribute('viewBox',`0 0 ${width} ${height}`);
+      svg.style.height=`${height}px`;
+      label(svg,0,17,`${header.label} · ${header.part_number}`);
+      el(svg,'rect',{x:left,y:top,width:width-left-right,height:innerHeight,class:'frame'});
+      for (const tick of header.hole_x_mm) label(svg,x(tick),top+innerHeight+18,fmt(tick),'middle');
+      for (const tick of header.hole_z_mm) label(svg,left-8,y(tick)+4,fmt(tick),'end');
+      label(svg,(left+width-right)/2,height-5,'X [mm]','middle').classList.add('axis-title');
+      label(svg,3,top+innerHeight/2,'Z [mm]').classList.add('axis-title');
+      for (let i=0;i<header.bay_x_mm.length;i++) {
+        const w=header.aperture_widths_mm[i];
+        el(svg,'rect',{x:x(header.bay_x_mm[i]-w/2),y:y(data.aperture_height_mm/2),
+          width:w*scale,height:data.aperture_height_mm*scale,
+          rx:data.aperture_radius_mm*scale,class:'aperture'});
+      }
+      for (const screw of header.screws) {
+        const [sx,sz]=screw.local_xz_mm, px=x(sx), py=y(sz);
+        el(svg,'path',{d:`M${px-4} ${py}H${px+4}M${px} ${py-4}V${py+4}`,
+          class:'axis-mark','data-id':screw.id});
+        label(svg,px+8,py+4,String(screw.number));
+        if (selected.id===screw.id) el(svg,'circle',{cx:px,cy:py,r:9,class:'active-ring'});
+      }
+      svg.dataset.projection=JSON.stringify({width,height,left,top,scale,xBounds,zBounds});
+    }
+    function section(selected) {
+      const svg=root.querySelector('[data-section]'), width=svg.getBoundingClientRect().width;
+      const p=selected.axial_mm, left=44, right=18, height=230;
+      const low=Math.min(p.head_front,p.head_back,p.wall_outer,p.wall_inner,p.tip)-1.5;
+      const high=Math.max(p.head_front,p.head_back,p.wall_outer,p.wall_inner,p.tip)+1.5;
+      const scale=(width-left-right)/(high-low), x=v=>left+(v-low)*scale;
+      svg.replaceChildren(); svg.setAttribute('viewBox',`0 0 ${width} ${height}`); svg.style.height=`${height}px`;
+      label(svg,0,22,`仮ねじ先端：壁内面より +${fmt(selected.protrusion_mm)} mm`);
+      label(svg,0,44,'軸方向の位置（径方向は模式表示）');
+      el(svg,'rect',{x:x(p.wall_outer),y:68,width:(p.wall_inner-p.wall_outer)*scale,height:89,class:'wall'});
+      el(svg,'rect',{x:x(p.head_front),y:87,width:(p.head_back-p.head_front)*scale,height:40,class:'head'});
+      el(svg,'rect',{x:x(p.head_back),y:99,width:(p.tip-p.head_back)*scale,height:16,class:'shaft'});
+      el(svg,'rect',{x:x(p.wall_inner),y:99,width:Math.max(0,p.tip-p.wall_inner)*scale,height:16,class:'excess'});
+      el(svg,'line',{x1:x(p.cad_plane),y1:68,x2:x(p.cad_plane),y2:157,class:'reference'});
+      label(svg,x((p.head_front+p.head_back)/2),83,'頭部','middle');
+      label(svg,x((p.wall_outer+p.wall_inner)/2),63,'壁','middle');
+      for (const value of [p.head_back,p.wall_outer,p.wall_inner,p.tip]) {
+        el(svg,'line',{x1:x(value),y1:158,x2:x(value),y2:164,class:'section-line'});
+        label(svg,x(value),181,fmt(value),'middle');
+      }
+      label(svg,width/2,208,'軸方向 [mm] · 取付面＝0','middle');
+      svg.dataset.section=JSON.stringify({width,height,low,high,scale,axial_mm:p,protrusion_mm:selected.protrusion_mm});
+    }
+    function draw() {
+      const selected=rows.find(s=>s.id===select.value);
+      data.headers.forEach(h=>map(h,selected)); section(selected);
+      root.querySelector('[data-selected]').textContent=
+        `${selected.header_label} ${selected.number} · モデル内 X ${fmt(selected.world_xz_mm[0])} / Z ${fmt(selected.world_xz_mm[1])} mm`;
+      root.dataset.observation=JSON.stringify({id:selected.id,axis_count:rows.length,protrusion_mm:selected.protrusion_mm});
+      root.dataset.ready='true';
+    }
+    select.addEventListener('change',draw);
+    new ResizeObserver(draw).observe(root);
+    draw();
+  })();
+  </script>
+</div>
