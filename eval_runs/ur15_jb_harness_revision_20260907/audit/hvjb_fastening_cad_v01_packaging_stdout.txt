@@ -1,0 +1,2 @@
+FASTENING_CAD_REFERENCE_COMPLETE /home/rlrk/IsaacLab-op040/eval_runs/ur15_jb_harness_revision_20260907/data/hvjb_fastening_cad_v01.json html_bytes 175688
+[INFO] Using Python: "/home/rlrk/src/ur15-line-render/venv/bin/python"

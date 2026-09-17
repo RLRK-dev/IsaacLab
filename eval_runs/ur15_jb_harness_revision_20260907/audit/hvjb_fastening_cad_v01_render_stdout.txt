@@ -1,0 +1,16 @@
+Traceback (most recent call last):
+  File "/home/rlrk/IsaacLab-op040/eval_runs/ur15_jb_harness_revision_20260907/scripts/render_hvjb_fastening_cad_v01.py", line 205, in <module>
+    main()
+  File "/home/rlrk/IsaacLab-op040/eval_runs/ur15_jb_harness_revision_20260907/scripts/render_hvjb_fastening_cad_v01.py", line 170, in main
+    hand_bounds = _add_parts(scene, hands, hand_matrix)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/rlrk/IsaacLab-op040/eval_runs/ur15_jb_harness_revision_20260907/scripts/render_hvjb_fastening_cad_v01.py", line 103, in _add_parts
+    scene.add(pyrender.Mesh.from_trimesh(part, smooth=True), pose=matrix)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/rlrk/src/ur15-line-render/venv/lib/python3.12/site-packages/pyrender/mesh.py", line 209, in from_trimesh
+    color_0, texcoord_0, primitive_material = Mesh._get_trimesh_props(m, smooth=smooth, material=material)
+                                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/rlrk/src/ur15-line-render/venv/lib/python3.12/site-packages/pyrender/mesh.py", line 272, in _get_trimesh_props
+    raise ValueError('Cannot use face colors with a smooth mesh')
+ValueError: Cannot use face colors with a smooth mesh
+[INFO] Using Python: "/home/rlrk/src/ur15-line-render/venv/bin/python"

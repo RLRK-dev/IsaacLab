@@ -1,0 +1,54 @@
+<!-- Copyright (c) 2022-2026, The Isaac Lab Project Developers. SPDX-License-Identifier: BSD-3-Clause -->
+<div id="hvjb-fastening-cad-v01">
+  <h3>締付工具と手先の大きさ</h3>
+  <div class="viz-controls">
+    <label class="form-label">メーカー例示工具
+      <select class="form-select" data-field="model">
+        <option value="SES1601">SES1601 · ねじ</option>
+        <option value="SEM2001">SEM2001 · ナット</option>
+        <option value="SEV2001">SEV2001 · 真空保持付きねじ</option>
+      </select>
+    </label>
+    <label class="form-label">見る範囲
+      <select class="form-select" data-field="view">
+        <option value="whole">全体</option>
+        <option value="front">先端付近（後部は画面外）</option>
+      </select>
+    </label>
+  </div>
+  <div class="text-small" data-layout>上：工具　下：PGE比較手先（旧試料付き）</div>
+  <img class="cad-reference" alt="" data-image>
+  <div class="cad-selected tabular-nums" aria-live="polite" data-detail></div>
+  <div class="text-small text-muted">等縮尺・外形左端合わせ／取付配置は未設定</div>
+  <script type="application/json" data-model>__MODEL_DATA__</script>
+</div>
+<style>
+  #hvjb-fastening-cad-v01 .cad-reference {display:block; width:100%; height:auto; margin-block:8px;}
+  #hvjb-fastening-cad-v01 .cad-selected {margin-block:8px;}
+</style>
+<script>
+(() => {
+  "use strict";
+  const root = document.getElementById("hvjb-fastening-cad-v01");
+  const find = selector => root.querySelector(selector);
+  const data = JSON.parse(find("[data-model]").textContent);
+  const picture = find("[data-image]");
+  function update() {
+    const model = find('[data-field="model"]').value;
+    const view = find('[data-field="view"]').value;
+    const selected = data.models[model];
+    const frame = selected.frames[view];
+    picture.width = frame.pixels[0];
+    picture.height = frame.pixels[1];
+    picture.src = frame.data_url;
+    picture.alt = `${model}のメーカー例示形状とPGE比較手先を上下に同じ縮尺で表示。${view === "whole" ? "全体" : "先端付近。後部は画面外"}。左端合わせであり、実際の締結配置ではない。`;
+    find("[data-detail]").textContent = `${model} · 例示CADの全長 ${selected.longitudinal_span_mm.toFixed(1)} mm`;
+    root.dataset.observation = JSON.stringify({model, view, pixels: frame.pixels,
+      png_sha256: frame.png_sha256, webp_sha256: frame.webp_sha256,
+      longitudinal_span_mm: selected.longitudinal_span_mm, display_x_m: frame.x_m});
+    root.dataset.ready = "true";
+  }
+  root.querySelectorAll("select").forEach(select => select.addEventListener("change", update));
+  update();
+})();
+</script>

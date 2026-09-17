@@ -1,0 +1,2 @@
+FASTENING_CAD_INTEGRITY_OK {"protected_inputs": 9, "source_files": 7, "manufacturer_models": 3, "browser_states": 24, "workcards": 20, "selected_roles": "S5_AB", "html_bytes": 175688}
+[INFO] Using Python: "/home/rlrk/src/ur15-line-render/venv/bin/python"

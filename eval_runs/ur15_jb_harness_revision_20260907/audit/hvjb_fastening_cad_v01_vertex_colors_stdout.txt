@@ -1,0 +1,8 @@
+REFERENCE_FRAME SES1601 whole
+REFERENCE_FRAME SES1601 front
+REFERENCE_FRAME SEM2001 whole
+REFERENCE_FRAME SEM2001 front
+REFERENCE_FRAME SEV2001 whole
+REFERENCE_FRAME SEV2001 front
+FASTENING_CAD_REFERENCE_FRAMES_COMPLETE previews/hvjb_fastening_cad_v01_vertex_colors/render_audit.json
+[INFO] Using Python: "/home/rlrk/src/ur15-line-render/venv/bin/python"

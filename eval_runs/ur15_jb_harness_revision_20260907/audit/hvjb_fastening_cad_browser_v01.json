@@ -1,0 +1,827 @@
+{
+  "observed_at": "2026-09-17T07:57:17.873Z",
+  "preview_sha256": "587a88468bf50c274814c952bff6b71be85c9062ea64168d91aab9d4f7078c07",
+  "record_sha256": "7869a1fc0829fe97eab600cc41a5cf4a9c30982e4c4953bbf42b20f2a579da61",
+  "results": [
+    {
+      "requested_width": 736,
+      "scheme": "light",
+      "model": "SES1601",
+      "view": "whole",
+      "pixels": [
+        1200,
+        500
+      ],
+      "png_sha256": "29fe97c6b0e7b73ddb986499d4bd019d526de648961b7e57f11552004fecddc3",
+      "webp_sha256": "7b5bdf62fdb449266d1ab63b9ce5e43aef4d5a4191f29db98635db7a3722f8b6",
+      "longitudinal_span_mm": 915.8942028880119,
+      "display_x_m": [
+        -0.035,
+        1.205
+      ],
+      "width": 736,
+      "document_width": 736,
+      "image_width": 736,
+      "image_height": 307,
+      "natural_pixels": [
+        1200,
+        500
+      ],
+      "outside": [],
+      "overlap": false,
+      "detail": "SES1601 · 例示CADの全長 915.9 mm",
+      "selected": [
+        "SES1601",
+        "whole"
+      ],
+      "loaded_webp_sha256": "7b5bdf62fdb449266d1ab63b9ce5e43aef4d5a4191f29db98635db7a3722f8b6"
+    },
+    {
+      "requested_width": 736,
+      "scheme": "light",
+      "model": "SES1601",
+      "view": "front",
+      "pixels": [
+        960,
+        800
+      ],
+      "png_sha256": "e40f41d2aca6289fa60b96b92ef49c019344ad8dfca0a6641f3706e041817340",
+      "webp_sha256": "b73d998ddda9869f978cd58d567fa42e45128a3c9d4caf8f505c7c0896ffbb34",
+      "longitudinal_span_mm": 915.8942028880119,
+      "display_x_m": [
+        -0.035,
+        0.525
+      ],
+      "width": 736,
+      "document_width": 736,
+      "image_width": 736,
+      "image_height": 613,
+      "natural_pixels": [
+        960,
+        800
+      ],
+      "outside": [],
+      "overlap": false,
+      "detail": "SES1601 · 例示CADの全長 915.9 mm",
+      "selected": [
+        "SES1601",
+        "front"
+      ],
+      "loaded_webp_sha256": "b73d998ddda9869f978cd58d567fa42e45128a3c9d4caf8f505c7c0896ffbb34"
+    },
+    {
+      "requested_width": 736,
+      "scheme": "light",
+      "model": "SEM2001",
+      "view": "whole",
+      "pixels": [
+        1200,
+        500
+      ],
+      "png_sha256": "ac2c7cade64749cfd3f6720febb5e8c68d51fa7a583189c2ea794a3a23cf6b48",
+      "webp_sha256": "7b8b5398e7cf8fcd39e2bff89ac1693d75af6da29cc1d9cee9835a98d1fb527b",
+      "longitudinal_span_mm": 978.7000417709351,
+      "display_x_m": [
+        -0.035,
+        1.205
+      ],
+      "width": 736,
+      "document_width": 736,
+      "image_width": 736,
+      "image_height": 307,
+      "natural_pixels": [
+        1200,
+        500
+      ],
+      "outside": [],
+      "overlap": false,
+      "detail": "SEM2001 · 例示CADの全長 978.7 mm",
+      "selected": [
+        "SEM2001",
+        "whole"
+      ],
+      "loaded_webp_sha256": "7b8b5398e7cf8fcd39e2bff89ac1693d75af6da29cc1d9cee9835a98d1fb527b"
+    },
+    {
+      "requested_width": 736,
+      "scheme": "light",
+      "model": "SEM2001",
+      "view": "front",
+      "pixels": [
+        960,
+        800
+      ],
+      "png_sha256": "2e9e462135ae5428efb7591673d20133f698be76fd846c3028f3d62f04c18466",
+      "webp_sha256": "bf9dc5732d5430ce85333f212a5fe1dfaf1dcfaa594c818a32810d02b520deff",
+      "longitudinal_span_mm": 978.7000417709351,
+      "display_x_m": [
+        -0.035,
+        0.525
+      ],
+      "width": 736,
+      "document_width": 736,
+      "image_width": 736,
+      "image_height": 613,
+      "natural_pixels": [
+        960,
+        800
+      ],
+      "outside": [],
+      "overlap": false,
+      "detail": "SEM2001 · 例示CADの全長 978.7 mm",
+      "selected": [
+        "SEM2001",
+        "front"
+      ],
+      "loaded_webp_sha256": "bf9dc5732d5430ce85333f212a5fe1dfaf1dcfaa594c818a32810d02b520deff"
+    },
+    {
+      "requested_width": 736,
+      "scheme": "light",
+      "model": "SEV2001",
+      "view": "whole",
+      "pixels": [
+        1200,
+        500
+      ],
+      "png_sha256": "93d442b83eb63f8d427b18d64a8b7fc4198391cdf9487924dba6b6c1972b9d2c",
+      "webp_sha256": "26b128f00151246222c270b8b4baf1ee069e181bb101669ef1f68c8ddc87d406",
+      "longitudinal_span_mm": 1116.4941787719727,
+      "display_x_m": [
+        -0.035,
+        1.205
+      ],
+      "width": 736,
+      "document_width": 736,
+      "image_width": 736,
+      "image_height": 307,
+      "natural_pixels": [
+        1200,
+        500
+      ],
+      "outside": [],
+      "overlap": false,
+      "detail": "SEV2001 · 例示CADの全長 1116.5 mm",
+      "selected": [
+        "SEV2001",
+        "whole"
+      ],
+      "loaded_webp_sha256": "26b128f00151246222c270b8b4baf1ee069e181bb101669ef1f68c8ddc87d406"
+    },
+    {
+      "requested_width": 736,
+      "scheme": "light",
+      "model": "SEV2001",
+      "view": "front",
+      "pixels": [
+        960,
+        800
+      ],
+      "png_sha256": "4a59661eaf7b8a84578021632cb017e17229282ff72b16bdafde7629c783ad1b",
+      "webp_sha256": "9082cb1c590bc00e041ddcb13ca180149c64acb315e30ee0f18d5fa4b6f59682",
+      "longitudinal_span_mm": 1116.4941787719727,
+      "display_x_m": [
+        -0.035,
+        0.525
+      ],
+      "width": 736,
+      "document_width": 736,
+      "image_width": 736,
+      "image_height": 613,
+      "natural_pixels": [
+        960,
+        800
+      ],
+      "outside": [],
+      "overlap": false,
+      "detail": "SEV2001 · 例示CADの全長 1116.5 mm",
+      "selected": [
+        "SEV2001",
+        "front"
+      ],
+      "loaded_webp_sha256": "9082cb1c590bc00e041ddcb13ca180149c64acb315e30ee0f18d5fa4b6f59682"
+    },
+    {
+      "requested_width": 736,
+      "scheme": "dark",
+      "model": "SES1601",
+      "view": "whole",
+      "pixels": [
+        1200,
+        500
+      ],
+      "png_sha256": "29fe97c6b0e7b73ddb986499d4bd019d526de648961b7e57f11552004fecddc3",
+      "webp_sha256": "7b5bdf62fdb449266d1ab63b9ce5e43aef4d5a4191f29db98635db7a3722f8b6",
+      "longitudinal_span_mm": 915.8942028880119,
+      "display_x_m": [
+        -0.035,
+        1.205
+      ],
+      "width": 736,
+      "document_width": 736,
+      "image_width": 736,
+      "image_height": 307,
+      "natural_pixels": [
+        1200,
+        500
+      ],
+      "outside": [],
+      "overlap": false,
+      "detail": "SES1601 · 例示CADの全長 915.9 mm",
+      "selected": [
+        "SES1601",
+        "whole"
+      ],
+      "loaded_webp_sha256": "7b5bdf62fdb449266d1ab63b9ce5e43aef4d5a4191f29db98635db7a3722f8b6"
+    },
+    {
+      "requested_width": 736,
+      "scheme": "dark",
+      "model": "SES1601",
+      "view": "front",
+      "pixels": [
+        960,
+        800
+      ],
+      "png_sha256": "e40f41d2aca6289fa60b96b92ef49c019344ad8dfca0a6641f3706e041817340",
+      "webp_sha256": "b73d998ddda9869f978cd58d567fa42e45128a3c9d4caf8f505c7c0896ffbb34",
+      "longitudinal_span_mm": 915.8942028880119,
+      "display_x_m": [
+        -0.035,
+        0.525
+      ],
+      "width": 736,
+      "document_width": 736,
+      "image_width": 736,
+      "image_height": 613,
+      "natural_pixels": [
+        960,
+        800
+      ],
+      "outside": [],
+      "overlap": false,
+      "detail": "SES1601 · 例示CADの全長 915.9 mm",
+      "selected": [
+        "SES1601",
+        "front"
+      ],
+      "loaded_webp_sha256": "b73d998ddda9869f978cd58d567fa42e45128a3c9d4caf8f505c7c0896ffbb34"
+    },
+    {
+      "requested_width": 736,
+      "scheme": "dark",
+      "model": "SEM2001",
+      "view": "whole",
+      "pixels": [
+        1200,
+        500
+      ],
+      "png_sha256": "ac2c7cade64749cfd3f6720febb5e8c68d51fa7a583189c2ea794a3a23cf6b48",
+      "webp_sha256": "7b8b5398e7cf8fcd39e2bff89ac1693d75af6da29cc1d9cee9835a98d1fb527b",
+      "longitudinal_span_mm": 978.7000417709351,
+      "display_x_m": [
+        -0.035,
+        1.205
+      ],
+      "width": 736,
+      "document_width": 736,
+      "image_width": 736,
+      "image_height": 307,
+      "natural_pixels": [
+        1200,
+        500
+      ],
+      "outside": [],
+      "overlap": false,
+      "detail": "SEM2001 · 例示CADの全長 978.7 mm",
+      "selected": [
+        "SEM2001",
+        "whole"
+      ],
+      "loaded_webp_sha256": "7b8b5398e7cf8fcd39e2bff89ac1693d75af6da29cc1d9cee9835a98d1fb527b"
+    },
+    {
+      "requested_width": 736,
+      "scheme": "dark",
+      "model": "SEM2001",
+      "view": "front",
+      "pixels": [
+        960,
+        800
+      ],
+      "png_sha256": "2e9e462135ae5428efb7591673d20133f698be76fd846c3028f3d62f04c18466",
+      "webp_sha256": "bf9dc5732d5430ce85333f212a5fe1dfaf1dcfaa594c818a32810d02b520deff",
+      "longitudinal_span_mm": 978.7000417709351,
+      "display_x_m": [
+        -0.035,
+        0.525
+      ],
+      "width": 736,
+      "document_width": 736,
+      "image_width": 736,
+      "image_height": 613,
+      "natural_pixels": [
+        960,
+        800
+      ],
+      "outside": [],
+      "overlap": false,
+      "detail": "SEM2001 · 例示CADの全長 978.7 mm",
+      "selected": [
+        "SEM2001",
+        "front"
+      ],
+      "loaded_webp_sha256": "bf9dc5732d5430ce85333f212a5fe1dfaf1dcfaa594c818a32810d02b520deff"
+    },
+    {
+      "requested_width": 736,
+      "scheme": "dark",
+      "model": "SEV2001",
+      "view": "whole",
+      "pixels": [
+        1200,
+        500
+      ],
+      "png_sha256": "93d442b83eb63f8d427b18d64a8b7fc4198391cdf9487924dba6b6c1972b9d2c",
+      "webp_sha256": "26b128f00151246222c270b8b4baf1ee069e181bb101669ef1f68c8ddc87d406",
+      "longitudinal_span_mm": 1116.4941787719727,
+      "display_x_m": [
+        -0.035,
+        1.205
+      ],
+      "width": 736,
+      "document_width": 736,
+      "image_width": 736,
+      "image_height": 307,
+      "natural_pixels": [
+        1200,
+        500
+      ],
+      "outside": [],
+      "overlap": false,
+      "detail": "SEV2001 · 例示CADの全長 1116.5 mm",
+      "selected": [
+        "SEV2001",
+        "whole"
+      ],
+      "loaded_webp_sha256": "26b128f00151246222c270b8b4baf1ee069e181bb101669ef1f68c8ddc87d406"
+    },
+    {
+      "requested_width": 736,
+      "scheme": "dark",
+      "model": "SEV2001",
+      "view": "front",
+      "pixels": [
+        960,
+        800
+      ],
+      "png_sha256": "4a59661eaf7b8a84578021632cb017e17229282ff72b16bdafde7629c783ad1b",
+      "webp_sha256": "9082cb1c590bc00e041ddcb13ca180149c64acb315e30ee0f18d5fa4b6f59682",
+      "longitudinal_span_mm": 1116.4941787719727,
+      "display_x_m": [
+        -0.035,
+        0.525
+      ],
+      "width": 736,
+      "document_width": 736,
+      "image_width": 736,
+      "image_height": 613,
+      "natural_pixels": [
+        960,
+        800
+      ],
+      "outside": [],
+      "overlap": false,
+      "detail": "SEV2001 · 例示CADの全長 1116.5 mm",
+      "selected": [
+        "SEV2001",
+        "front"
+      ],
+      "loaded_webp_sha256": "9082cb1c590bc00e041ddcb13ca180149c64acb315e30ee0f18d5fa4b6f59682"
+    },
+    {
+      "requested_width": 320,
+      "scheme": "light",
+      "model": "SES1601",
+      "view": "whole",
+      "pixels": [
+        1200,
+        500
+      ],
+      "png_sha256": "29fe97c6b0e7b73ddb986499d4bd019d526de648961b7e57f11552004fecddc3",
+      "webp_sha256": "7b5bdf62fdb449266d1ab63b9ce5e43aef4d5a4191f29db98635db7a3722f8b6",
+      "longitudinal_span_mm": 915.8942028880119,
+      "display_x_m": [
+        -0.035,
+        1.205
+      ],
+      "width": 320,
+      "document_width": 320,
+      "image_width": 320,
+      "image_height": 133,
+      "natural_pixels": [
+        1200,
+        500
+      ],
+      "outside": [],
+      "overlap": false,
+      "detail": "SES1601 · 例示CADの全長 915.9 mm",
+      "selected": [
+        "SES1601",
+        "whole"
+      ],
+      "loaded_webp_sha256": "7b5bdf62fdb449266d1ab63b9ce5e43aef4d5a4191f29db98635db7a3722f8b6"
+    },
+    {
+      "requested_width": 320,
+      "scheme": "light",
+      "model": "SES1601",
+      "view": "front",
+      "pixels": [
+        960,
+        800
+      ],
+      "png_sha256": "e40f41d2aca6289fa60b96b92ef49c019344ad8dfca0a6641f3706e041817340",
+      "webp_sha256": "b73d998ddda9869f978cd58d567fa42e45128a3c9d4caf8f505c7c0896ffbb34",
+      "longitudinal_span_mm": 915.8942028880119,
+      "display_x_m": [
+        -0.035,
+        0.525
+      ],
+      "width": 320,
+      "document_width": 320,
+      "image_width": 320,
+      "image_height": 267,
+      "natural_pixels": [
+        960,
+        800
+      ],
+      "outside": [],
+      "overlap": false,
+      "detail": "SES1601 · 例示CADの全長 915.9 mm",
+      "selected": [
+        "SES1601",
+        "front"
+      ],
+      "loaded_webp_sha256": "b73d998ddda9869f978cd58d567fa42e45128a3c9d4caf8f505c7c0896ffbb34"
+    },
+    {
+      "requested_width": 320,
+      "scheme": "light",
+      "model": "SEM2001",
+      "view": "whole",
+      "pixels": [
+        1200,
+        500
+      ],
+      "png_sha256": "ac2c7cade64749cfd3f6720febb5e8c68d51fa7a583189c2ea794a3a23cf6b48",
+      "webp_sha256": "7b8b5398e7cf8fcd39e2bff89ac1693d75af6da29cc1d9cee9835a98d1fb527b",
+      "longitudinal_span_mm": 978.7000417709351,
+      "display_x_m": [
+        -0.035,
+        1.205
+      ],
+      "width": 320,
+      "document_width": 320,
+      "image_width": 320,
+      "image_height": 133,
+      "natural_pixels": [
+        1200,
+        500
+      ],
+      "outside": [],
+      "overlap": false,
+      "detail": "SEM2001 · 例示CADの全長 978.7 mm",
+      "selected": [
+        "SEM2001",
+        "whole"
+      ],
+      "loaded_webp_sha256": "7b8b5398e7cf8fcd39e2bff89ac1693d75af6da29cc1d9cee9835a98d1fb527b"
+    },
+    {
+      "requested_width": 320,
+      "scheme": "light",
+      "model": "SEM2001",
+      "view": "front",
+      "pixels": [
+        960,
+        800
+      ],
+      "png_sha256": "2e9e462135ae5428efb7591673d20133f698be76fd846c3028f3d62f04c18466",
+      "webp_sha256": "bf9dc5732d5430ce85333f212a5fe1dfaf1dcfaa594c818a32810d02b520deff",
+      "longitudinal_span_mm": 978.7000417709351,
+      "display_x_m": [
+        -0.035,
+        0.525
+      ],
+      "width": 320,
+      "document_width": 320,
+      "image_width": 320,
+      "image_height": 267,
+      "natural_pixels": [
+        960,
+        800
+      ],
+      "outside": [],
+      "overlap": false,
+      "detail": "SEM2001 · 例示CADの全長 978.7 mm",
+      "selected": [
+        "SEM2001",
+        "front"
+      ],
+      "loaded_webp_sha256": "bf9dc5732d5430ce85333f212a5fe1dfaf1dcfaa594c818a32810d02b520deff"
+    },
+    {
+      "requested_width": 320,
+      "scheme": "light",
+      "model": "SEV2001",
+      "view": "whole",
+      "pixels": [
+        1200,
+        500
+      ],
+      "png_sha256": "93d442b83eb63f8d427b18d64a8b7fc4198391cdf9487924dba6b6c1972b9d2c",
+      "webp_sha256": "26b128f00151246222c270b8b4baf1ee069e181bb101669ef1f68c8ddc87d406",
+      "longitudinal_span_mm": 1116.4941787719727,
+      "display_x_m": [
+        -0.035,
+        1.205
+      ],
+      "width": 320,
+      "document_width": 320,
+      "image_width": 320,
+      "image_height": 133,
+      "natural_pixels": [
+        1200,
+        500
+      ],
+      "outside": [],
+      "overlap": false,
+      "detail": "SEV2001 · 例示CADの全長 1116.5 mm",
+      "selected": [
+        "SEV2001",
+        "whole"
+      ],
+      "loaded_webp_sha256": "26b128f00151246222c270b8b4baf1ee069e181bb101669ef1f68c8ddc87d406"
+    },
+    {
+      "requested_width": 320,
+      "scheme": "light",
+      "model": "SEV2001",
+      "view": "front",
+      "pixels": [
+        960,
+        800
+      ],
+      "png_sha256": "4a59661eaf7b8a84578021632cb017e17229282ff72b16bdafde7629c783ad1b",
+      "webp_sha256": "9082cb1c590bc00e041ddcb13ca180149c64acb315e30ee0f18d5fa4b6f59682",
+      "longitudinal_span_mm": 1116.4941787719727,
+      "display_x_m": [
+        -0.035,
+        0.525
+      ],
+      "width": 320,
+      "document_width": 320,
+      "image_width": 320,
+      "image_height": 267,
+      "natural_pixels": [
+        960,
+        800
+      ],
+      "outside": [],
+      "overlap": false,
+      "detail": "SEV2001 · 例示CADの全長 1116.5 mm",
+      "selected": [
+        "SEV2001",
+        "front"
+      ],
+      "loaded_webp_sha256": "9082cb1c590bc00e041ddcb13ca180149c64acb315e30ee0f18d5fa4b6f59682"
+    },
+    {
+      "requested_width": 320,
+      "scheme": "dark",
+      "model": "SES1601",
+      "view": "whole",
+      "pixels": [
+        1200,
+        500
+      ],
+      "png_sha256": "29fe97c6b0e7b73ddb986499d4bd019d526de648961b7e57f11552004fecddc3",
+      "webp_sha256": "7b5bdf62fdb449266d1ab63b9ce5e43aef4d5a4191f29db98635db7a3722f8b6",
+      "longitudinal_span_mm": 915.8942028880119,
+      "display_x_m": [
+        -0.035,
+        1.205
+      ],
+      "width": 320,
+      "document_width": 320,
+      "image_width": 320,
+      "image_height": 133,
+      "natural_pixels": [
+        1200,
+        500
+      ],
+      "outside": [],
+      "overlap": false,
+      "detail": "SES1601 · 例示CADの全長 915.9 mm",
+      "selected": [
+        "SES1601",
+        "whole"
+      ],
+      "loaded_webp_sha256": "7b5bdf62fdb449266d1ab63b9ce5e43aef4d5a4191f29db98635db7a3722f8b6"
+    },
+    {
+      "requested_width": 320,
+      "scheme": "dark",
+      "model": "SES1601",
+      "view": "front",
+      "pixels": [
+        960,
+        800
+      ],
+      "png_sha256": "e40f41d2aca6289fa60b96b92ef49c019344ad8dfca0a6641f3706e041817340",
+      "webp_sha256": "b73d998ddda9869f978cd58d567fa42e45128a3c9d4caf8f505c7c0896ffbb34",
+      "longitudinal_span_mm": 915.8942028880119,
+      "display_x_m": [
+        -0.035,
+        0.525
+      ],
+      "width": 320,
+      "document_width": 320,
+      "image_width": 320,
+      "image_height": 267,
+      "natural_pixels": [
+        960,
+        800
+      ],
+      "outside": [],
+      "overlap": false,
+      "detail": "SES1601 · 例示CADの全長 915.9 mm",
+      "selected": [
+        "SES1601",
+        "front"
+      ],
+      "loaded_webp_sha256": "b73d998ddda9869f978cd58d567fa42e45128a3c9d4caf8f505c7c0896ffbb34"
+    },
+    {
+      "requested_width": 320,
+      "scheme": "dark",
+      "model": "SEM2001",
+      "view": "whole",
+      "pixels": [
+        1200,
+        500
+      ],
+      "png_sha256": "ac2c7cade64749cfd3f6720febb5e8c68d51fa7a583189c2ea794a3a23cf6b48",
+      "webp_sha256": "7b8b5398e7cf8fcd39e2bff89ac1693d75af6da29cc1d9cee9835a98d1fb527b",
+      "longitudinal_span_mm": 978.7000417709351,
+      "display_x_m": [
+        -0.035,
+        1.205
+      ],
+      "width": 320,
+      "document_width": 320,
+      "image_width": 320,
+      "image_height": 133,
+      "natural_pixels": [
+        1200,
+        500
+      ],
+      "outside": [],
+      "overlap": false,
+      "detail": "SEM2001 · 例示CADの全長 978.7 mm",
+      "selected": [
+        "SEM2001",
+        "whole"
+      ],
+      "loaded_webp_sha256": "7b8b5398e7cf8fcd39e2bff89ac1693d75af6da29cc1d9cee9835a98d1fb527b"
+    },
+    {
+      "requested_width": 320,
+      "scheme": "dark",
+      "model": "SEM2001",
+      "view": "front",
+      "pixels": [
+        960,
+        800
+      ],
+      "png_sha256": "2e9e462135ae5428efb7591673d20133f698be76fd846c3028f3d62f04c18466",
+      "webp_sha256": "bf9dc5732d5430ce85333f212a5fe1dfaf1dcfaa594c818a32810d02b520deff",
+      "longitudinal_span_mm": 978.7000417709351,
+      "display_x_m": [
+        -0.035,
+        0.525
+      ],
+      "width": 320,
+      "document_width": 320,
+      "image_width": 320,
+      "image_height": 267,
+      "natural_pixels": [
+        960,
+        800
+      ],
+      "outside": [],
+      "overlap": false,
+      "detail": "SEM2001 · 例示CADの全長 978.7 mm",
+      "selected": [
+        "SEM2001",
+        "front"
+      ],
+      "loaded_webp_sha256": "bf9dc5732d5430ce85333f212a5fe1dfaf1dcfaa594c818a32810d02b520deff"
+    },
+    {
+      "requested_width": 320,
+      "scheme": "dark",
+      "model": "SEV2001",
+      "view": "whole",
+      "pixels": [
+        1200,
+        500
+      ],
+      "png_sha256": "93d442b83eb63f8d427b18d64a8b7fc4198391cdf9487924dba6b6c1972b9d2c",
+      "webp_sha256": "26b128f00151246222c270b8b4baf1ee069e181bb101669ef1f68c8ddc87d406",
+      "longitudinal_span_mm": 1116.4941787719727,
+      "display_x_m": [
+        -0.035,
+        1.205
+      ],
+      "width": 320,
+      "document_width": 320,
+      "image_width": 320,
+      "image_height": 133,
+      "natural_pixels": [
+        1200,
+        500
+      ],
+      "outside": [],
+      "overlap": false,
+      "detail": "SEV2001 · 例示CADの全長 1116.5 mm",
+      "selected": [
+        "SEV2001",
+        "whole"
+      ],
+      "loaded_webp_sha256": "26b128f00151246222c270b8b4baf1ee069e181bb101669ef1f68c8ddc87d406"
+    },
+    {
+      "requested_width": 320,
+      "scheme": "dark",
+      "model": "SEV2001",
+      "view": "front",
+      "pixels": [
+        960,
+        800
+      ],
+      "png_sha256": "4a59661eaf7b8a84578021632cb017e17229282ff72b16bdafde7629c783ad1b",
+      "webp_sha256": "9082cb1c590bc00e041ddcb13ca180149c64acb315e30ee0f18d5fa4b6f59682",
+      "longitudinal_span_mm": 1116.4941787719727,
+      "display_x_m": [
+        -0.035,
+        0.525
+      ],
+      "width": 320,
+      "document_width": 320,
+      "image_width": 320,
+      "image_height": 267,
+      "natural_pixels": [
+        960,
+        800
+      ],
+      "outside": [],
+      "overlap": false,
+      "detail": "SEV2001 · 例示CADの全長 1116.5 mm",
+      "selected": [
+        "SEV2001",
+        "front"
+      ],
+      "loaded_webp_sha256": "9082cb1c590bc00e041ddcb13ca180149c64acb315e30ee0f18d5fa4b6f59682"
+    }
+  ],
+  "screenshots": {
+    "736_light_SES1601_whole.png": "355982350ae91a6db0907bc7e07b17c42d99afeb0176a2c68f90efbc99c0fc6d",
+    "736_light_SES1601_front.png": "31bdff60e57c88aa5eca59628a0af545adc2c79d40f5d42a454b6ecb6328b845",
+    "736_light_SEM2001_whole.png": "b028664d1ad233c8b657d0d7dbcd03f3974b790835e0a944a7112234e5fac766",
+    "736_light_SEM2001_front.png": "990f153436c0fa61f9ad57eab29e06b00d7878d47a7320f6964a2dc9796a9253",
+    "736_light_SEV2001_whole.png": "00aba60b2a5b14446b5d0723b7830ed0e225cc9e2a6cc7de854451800ac05cf4",
+    "736_light_SEV2001_front.png": "cd561bbf239004f02b470e6c931d57d8685b2f4a3eea846e07962b3e51d8acff",
+    "736_dark_SES1601_whole.png": "c7e5aebc38c97dcc464e859c1cc189e916b0cf524bf8b6d3f91346fbc174308c",
+    "736_dark_SES1601_front.png": "4fc251e12fc4c4a7e744e5180432d8203d1561e38dcf6c1dba741aba1b5e86f2",
+    "736_dark_SEM2001_whole.png": "2a56dd23716c792f91c8119e56c9c610d8970f877dff8cd25f2ca5d591031501",
+    "736_dark_SEM2001_front.png": "3384191a72caee95eaa88f1bf10645b47759ec92dbcdce0c6b2a52dae994c974",
+    "736_dark_SEV2001_whole.png": "fed48040b77b5e35d3757e592bed9e81119246066054ee880d18060b51fd6bae",
+    "736_dark_SEV2001_front.png": "9192dd2ea72ac5dbfaa41abb81dace5e8cb07f8cf4d5cc9b225712d8b2f6d42e",
+    "320_light_SES1601_whole.png": "8549ad6669d3d6a6ad75db65d1322b16ebcea482cf631506ddeaa016bf2fc22a",
+    "320_light_SES1601_front.png": "f0fad8eae2d3b78f9c087e81b011595c677b290ce38f1bb159c08c0a440a52ac",
+    "320_light_SEM2001_whole.png": "6e7d241348a4e42b23ec954d9f4670e25823a7db806be6f5d6924075fdb41478",
+    "320_light_SEM2001_front.png": "8c7f9d97e7986f46bc9356d22b4318aad2c73201c27c0bce707294f818422a7d",
+    "320_light_SEV2001_whole.png": "bd0966195b66b8bf266e89856539cbdc0f2c0d1b87e1fe0156708f9eb955164d",
+    "320_light_SEV2001_front.png": "96d0eff342221d6b003e0b710664f830f3f0a00f49cf1ef16ac1b5d5bc60ebd1",
+    "320_dark_SES1601_whole.png": "e4c67b5b9fac07aac3af00ec2ddf7efe4c3a7a7ce260302141258cf34e3473a7",
+    "320_dark_SES1601_front.png": "170b6f6a3241af63f438391bf403fb1e2e3103627ed8ddbb6a228dcd8b537818",
+    "320_dark_SEM2001_whole.png": "e28573c32db40de9d3f84a8b7e1b20789e2bcbfc18f1ce76349ba326f0af6856",
+    "320_dark_SEM2001_front.png": "86926538d01e3b7dab5fe7283b0fa48f80bac2d29fa7d73be01d84075fd2126d",
+    "320_dark_SEV2001_whole.png": "1bd8586c2852f1dd208f6aed90e6325b17abcb414dde035cb9ec375c4f75e927",
+    "320_dark_SEV2001_front.png": "cc4e784e742db2b783f9953ae788bcc17a2a982359e5bc0b6f2cca9a8794c285"
+  },
+  "javascript_errors": [],
+  "scope": "Saved reference image identity, selection, aspect ratio, layout and themes; no fit or physical verdict"
+}

@@ -1,0 +1,14 @@
+Traceback (most recent call last):
+  File "/home/rlrk/IsaacLab-op040/eval_runs/ur15_jb_harness_revision_20260907/scripts/prepare_hvjb_fastening_cad_v01.py", line 168, in <module>
+    main()
+  File "/home/rlrk/IsaacLab-op040/eval_runs/ur15_jb_harness_revision_20260907/scripts/prepare_hvjb_fastening_cad_v01.py", line 137, in main
+    meshes[stem], metadata = _convert(stem, output, cascadio)
+                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/rlrk/IsaacLab-op040/eval_runs/ur15_jb_harness_revision_20260907/scripts/prepare_hvjb_fastening_cad_v01.py", line 95, in _convert
+    records, ignored = _scene_records(scene)
+                       ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/rlrk/IsaacLab-op040/eval_runs/ur15_jb_harness_revision_20260907/scripts/prepare_hvjb_fastening_cad_v01.py", line 71, in _scene_records
+    color = np.asarray(source.visual.main_color, dtype=np.uint8).tolist()
+                       ^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'TextureVisuals' object has no attribute 'main_color'
+[INFO] Using Python: "/home/rlrk/src/ur15-line-render/venv/bin/python"
