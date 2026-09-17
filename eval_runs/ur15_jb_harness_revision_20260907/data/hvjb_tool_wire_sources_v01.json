@@ -1,0 +1,321 @@
+{
+  "recorded_at": "2026-09-17T05:41:31.099644+00:00",
+  "scope_ja": "公開資料で確認できた線・工具のインターフェース情報。Ampere実物の線径・黒被覆径・採用工具・把持適合を決めない。",
+  "sources": [
+    {
+      "id": "AMPERE_V11",
+      "title": "Ampere HVJB-5-400 V1.1",
+      "file": "references/op040_real_products_20260912/ampere_hvjb_5_400_v1_1.pdf",
+      "sha256": "643648bcea77b4d7c37c65d073664f746f68689952da2d5ce932e3d10bd5a9e1",
+      "bytes": 553747,
+      "url": "https://help.ampereev.com/hc/en-us/article_attachments/31292430639639",
+      "relevant_pages": [
+        1,
+        2,
+        3,
+        4
+      ]
+    },
+    {
+      "id": "TE_HEADER",
+      "title": "TE 408-32095 Rev B",
+      "file": "references/connector_correction_20260915/te_408_32095_instruction.pdf",
+      "sha256": "cd13cd856b679e2683f7672f079bd4c99ff87ac2e361d3da73700e12c12fa63d",
+      "bytes": 762503,
+      "url": "https://www.te.com/commerce/DocumentDelivery/DDEController?Action=srchrtrv&DocFormat=pdf&DocLang=English&DocNm=408-32095&DocType=Specification+Or+Standard&PartCntxt=2103340-1",
+      "relevant_pages": [
+        1,
+        2
+      ]
+    },
+    {
+      "id": "TE_REDIRECT",
+      "title": "TE 2141598 Rev A2",
+      "file": "references/hvjb_tool_wire_sources_20260917/te_2141598_A2.pdf",
+      "sha256": "302b34e8deefe813ddb603c61dcf49ef44a1bc2cd2d2c1e5c4dc2aa7edbcbf65",
+      "bytes": 93870,
+      "url": "https://www.te.com/commerce/DocumentDelivery/DDEController?Action=srchrtrv&DocFormat=pdf&DocLang=English&DocNm=2141598&DocType=Customer+Drawing&PartCntxt=2-2141598-2",
+      "relevant_pages": [
+        1
+      ]
+    },
+    {
+      "id": "TE_GROUP",
+      "title": "TE 2355029 Rev A",
+      "file": "references/hvjb_tool_wire_sources_20260917/te_2355029_A.pdf",
+      "sha256": "ad8cc8084376b6c3cfab6912be1d56516052bc27f68af6e6f2801c397eac6cd4",
+      "bytes": 133976,
+      "url": "https://www.te.com/commerce/DocumentDelivery/DDEController?Action=srchrtrv&DocFormat=pdf&DocLang=English&DocNm=2355029&DocType=Customer+Drawing&PartCntxt=2-2141598-2",
+      "relevant_pages": [
+        1
+      ]
+    },
+    {
+      "id": "TE_APPLICATION",
+      "title": "TE 114-18051-1 Rev G",
+      "file": "references/hvjb_tool_wire_sources_20260917/te_114_18051_1_G.pdf",
+      "sha256": "8b937b99f62f8e15e12bd376af1e28800f6af6f2bf7fddcd70b5cdd749653d5f",
+      "bytes": 423047,
+      "url": "https://www.te.com/commerce/DocumentDelivery/DDEController?Action=srchrtrv&DocFormat=pdf&DocLang=English&DocNm=114-18051-1&DocType=Specification+Or+Standard&PartCntxt=2-2141598-2",
+      "relevant_pages": [
+        2,
+        3,
+        5,
+        6,
+        9
+      ]
+    },
+    {
+      "id": "DEPRAG_ESFM",
+      "title": "DEPRAG D0062E 09.2026",
+      "file": "references/hvjb_tool_wire_sources_20260917/deprag_esfm_D0062.pdf",
+      "sha256": "5caa398eedc1d7a946e6b4ec501775e59a31ce93e5aae2c203a9df4b20c8a777",
+      "bytes": 4820459,
+      "url": "https://www.deprag.com/fileadmin/bilder_content/emedia/broschueren_pics/emedia_Automation/D0062/D0062en.pdf",
+      "relevant_pages": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ]
+    },
+    {
+      "id": "TE_1598_WEB",
+      "url": "https://www.te.com/en/product-2-2141598-2.html",
+      "retrieval": "Official product page read with web tool on 2026-09-17"
+    },
+    {
+      "id": "TE_1600_WEB",
+      "url": "https://www.te.com/en/product-2-2141600-2.html",
+      "retrieval": "Official product page read with web tool on 2026-09-17"
+    },
+    {
+      "id": "KLAUKE_6R6",
+      "url": "https://www.klauke.com/nl/de/rohrkabelschuhe-cu-normalausfuhrung-4957",
+      "retrieval": "Official R-series table read with web tool on 2026-09-17"
+    },
+    {
+      "id": "DEPRAG_ESFM_WEB",
+      "url": "https://www.deprag.com/en/automation/screwdriving-units/e-sfm.html",
+      "retrieval": "Official product page read with web tool on 2026-09-17"
+    },
+    {
+      "id": "AMPERE_ARTICLE",
+      "url": "https://help.ampereev.com/hc/en-us/articles/31292470232087-High-Voltage-Junction-Box-HVJB-5-400",
+      "retrieval": "Official public product article read with web tool on 2026-09-17"
+    }
+  ],
+  "header_contact_candidates": [
+    {
+      "part_number": "2-2141598-2",
+      "header_instruction_source": "TE_HEADER",
+      "drawing_source": "TE_GROUP",
+      "drawing_design": 2,
+      "conductor_area_range_mm2": [
+        1.0,
+        2.5
+      ],
+      "wire_insulation_diameter_range_mm": [
+        2.4,
+        3.7
+      ],
+      "actual_ampere_usage_confirmed": false
+    },
+    {
+      "part_number": "2-2141600-2",
+      "header_instruction_source": "TE_HEADER",
+      "drawing_source": "TE_GROUP",
+      "drawing_design": 1,
+      "conductor_area_range_mm2": [
+        2.5,
+        4.0
+      ],
+      "wire_insulation_diameter_range_mm": [
+        2.7,
+        3.7
+      ],
+      "actual_ampere_usage_confirmed": false
+    }
+  ],
+  "application_table_observations": [
+    {
+      "source": "TE_APPLICATION",
+      "page": 9,
+      "table": 1,
+      "part_stem": "2141598",
+      "listed_conductor_areas_mm2": [
+        1.5,
+        2.5
+      ],
+      "wire_type": "FLK",
+      "listed_insulation_diameter_range_mm": [
+        2.4,
+        3.7
+      ]
+    },
+    {
+      "source": "TE_APPLICATION",
+      "page": 9,
+      "table": 1,
+      "part_stem": "2141600",
+      "listed_conductor_areas_mm2": [
+        4.0
+      ],
+      "wire_type": "FLR",
+      "listed_insulation_diameter_range_mm": [
+        3.4,
+        3.7
+      ]
+    }
+  ],
+  "drawing_and_application_boundary_ja": "現行製品群図面の寸法対応範囲と、圧着仕様Table1に掲載された線種・断面積の組合せは別。範囲内の任意電線の採用や圧着条件をここでは決めない。",
+  "reference_lug": {
+    "part_number": "Klauke 6R6",
+    "source": "KLAUKE_6R6",
+    "conductor_area_mm2": 50,
+    "nominal_stud": "M6",
+    "barrel_outside_diameter_mm": 14,
+    "is_ampere_part": null,
+    "note_ja": "50 mm2は導体断面積、14 mmは金属管の外径であり、把持する電線被覆径ではない。未圧着参考CADは保持する。"
+  },
+  "grasp_dimension_roles": [
+    {
+      "id": "rear_pad",
+      "target_ja": "電線本来の被覆",
+      "source_compatible_ranges_for_header_candidates_mm": [
+        [
+          2.4,
+          3.7
+        ],
+        [
+          2.7,
+          3.7
+        ]
+      ],
+      "actual_selected_wire_diameter_mm": null,
+      "actual_selected_wire_type": null,
+      "pad_groove_radius_mm": null
+    },
+    {
+      "id": "front_pad",
+      "target_ja": "丸端子側の黒い追加被覆",
+      "actual_finished_diameter_mm": null,
+      "actual_graspable_length_mm": null,
+      "actual_crimp_geometry": null,
+      "pad_groove_radius_mm": null
+    }
+  ],
+  "legacy_comparison": {
+    "wire_diameter_mm": 14.0,
+    "sleeve_diameter_mm": 15.2,
+    "product_display_sleeve_diameter_mm": 5.6,
+    "use_ja": "各々の比較表示として保存。新たな実寸や主回路・補機の採用寸法への昇格はしない。"
+  },
+  "tool_catalogue_observation": {
+    "source": "DEPRAG_ESFM",
+    "edition": "D0062E 09.2026",
+    "technical_table_page": 6,
+    "variants": [
+      {
+        "size": "16",
+        "torque_range_nm": [
+          0.01,
+          2.0
+        ]
+      },
+      {
+        "size": "25 High Performance",
+        "torque_range_nm": [
+          2.0,
+          18.0
+        ]
+      }
+    ],
+    "nosepiece_length_options_mm": [
+      40,
+      80
+    ],
+    "vacuum_free_stroke_options_mm": [
+      50,
+      100
+    ],
+    "linear_stroke_options_mm": [
+      100,
+      150,
+      200,
+      250
+    ],
+    "maximum_fastener_head_diameter_mm": 14,
+    "maximum_fastener_head_diameter_is_tool_outside_diameter": false,
+    "illustrated_motor_mounting": [
+      "axial",
+      "left",
+      "right"
+    ],
+    "dimensioned_complete_tool_outline_retrieved": false,
+    "closed_open_nose_cad_retrieved": false,
+    "mount_to_axis_transform": null,
+    "selected_variant": null,
+    "web_catalogue_naming_ja": "製品ページのG1/G2と、この版の16/25を自動で同じサイズへ対応させない。",
+    "note_ja": "寸法値のあるストローク表と、外形寸法のない構成イラストを区別する。イラストを縮尺合わせして全体CADにしない。"
+  },
+  "next_geometry_inputs": [
+    "対象線の個別対応と採用電線仕様",
+    "丸端子の型式と圧着後・黒被覆後の外径、有効接触長さ",
+    "対象ねじの品番、締結積層、トルクと実際の工具一式",
+    "閉/開ノーズ、供給ホース、取付部を含む工具形状と基準座標"
+  ],
+  "selected_role_plan": "S5_AB",
+  "workcard_ids": [
+    "D00",
+    "D01",
+    "D10",
+    "D11",
+    "D12",
+    "D20",
+    "D21",
+    "D22",
+    "D30",
+    "D31",
+    "D40",
+    "D42",
+    "D45",
+    "D50",
+    "D60",
+    "D61",
+    "D70",
+    "D71",
+    "D80",
+    "D81"
+  ],
+  "selected_new_robot_count": null,
+  "new_arm_motion": false,
+  "new_video": false,
+  "physical_acceptance_verdict": null,
+  "input_sha256_before": {
+    "data/hand_working_default_v01.json": "1cf2a19f24f753eb44b4e96fd7e73ee8bdfe5b97367a77bf8cfa0cf30a4d107c",
+    "data/hvjb_photo_model_v03_p03.json.gz": "6687b12ec1b3db24babf75f8fef1b6f6bc123c288b713824b9763d9214553ba6",
+    "data/hvjb_photo_correspondence_v03_p01.json": "6c5b7cb9bab859a33c8f5d5cd5429ce9f06fb0951b8a8fa4ae2a31ad99052ca0",
+    "UR15_JB_photo_correspondence_v03_p03.blend": "5205d3aa2c2b99f7df6f538d17b3d3ca36ba8208c546858ee8ec8a5a3564a282",
+    "data/hvjb_robot_selection_v01.json": "ad1d0fc6ad2f0c9d36f4d9839faf559ce80aa9ffb4965174facef944f1a58db8",
+    "data/hvjb_task_occupancy_v01.json": "4da5b53687b05cd2cd1d294cf57121abde6ee9d04b19ed0a37ef2fb2a4d79df9",
+    "data/hvjb_pge_finger_v01_meshes.json.gz": "c9171a968fd38b263099b21627a31fe37cab61a5e98b8d494ea3a38abfef4570",
+    "data/hand_tool_interface_inputs_v01.json": "91f6a2fbb150c5ae29b7b921044f47f7ea98694e24026b290023d7676cbee392",
+    "scripts/probe_hand_tool_access_v01.py": "55456e6d55f84931bcc3f502e77372414a6efa2578e27970d5620f176c53417c"
+  },
+  "input_sha256_after": {
+    "data/hand_working_default_v01.json": "1cf2a19f24f753eb44b4e96fd7e73ee8bdfe5b97367a77bf8cfa0cf30a4d107c",
+    "data/hvjb_photo_model_v03_p03.json.gz": "6687b12ec1b3db24babf75f8fef1b6f6bc123c288b713824b9763d9214553ba6",
+    "data/hvjb_photo_correspondence_v03_p01.json": "6c5b7cb9bab859a33c8f5d5cd5429ce9f06fb0951b8a8fa4ae2a31ad99052ca0",
+    "UR15_JB_photo_correspondence_v03_p03.blend": "5205d3aa2c2b99f7df6f538d17b3d3ca36ba8208c546858ee8ec8a5a3564a282",
+    "data/hvjb_robot_selection_v01.json": "ad1d0fc6ad2f0c9d36f4d9839faf559ce80aa9ffb4965174facef944f1a58db8",
+    "data/hvjb_task_occupancy_v01.json": "4da5b53687b05cd2cd1d294cf57121abde6ee9d04b19ed0a37ef2fb2a4d79df9",
+    "data/hvjb_pge_finger_v01_meshes.json.gz": "c9171a968fd38b263099b21627a31fe37cab61a5e98b8d494ea3a38abfef4570",
+    "data/hand_tool_interface_inputs_v01.json": "91f6a2fbb150c5ae29b7b921044f47f7ea98694e24026b290023d7676cbee392",
+    "scripts/probe_hand_tool_access_v01.py": "55456e6d55f84931bcc3f502e77372414a6efa2578e27970d5620f176c53417c"
+  }
+}

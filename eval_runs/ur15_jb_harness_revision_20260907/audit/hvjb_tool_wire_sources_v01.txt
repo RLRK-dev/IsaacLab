@@ -1,0 +1,29 @@
+observed_at: 2026-09-17T05:59:26.334925+00:00
+scope: source records and preservation checks; no physical verdict
+JSON round-trip: PASS
+source AMPERE_V11: PASS 643648bcea77b4d7c37c65d073664f746f68689952da2d5ce932e3d10bd5a9e1
+source TE_HEADER: PASS cd13cd856b679e2683f7672f079bd4c99ff87ac2e361d3da73700e12c12fa63d
+source TE_REDIRECT: PASS 302b34e8deefe813ddb603c61dcf49ef44a1bc2cd2d2c1e5c4dc2aa7edbcbf65
+source TE_GROUP: PASS ad8cc8084376b6c3cfab6912be1d56516052bc27f68af6e6f2801c397eac6cd4
+source TE_APPLICATION: PASS 8b937b99f62f8e15e12bd376af1e28800f6af6f2bf7fddcd70b5cdd749653d5f
+source DEPRAG_ESFM: PASS 5caa398eedc1d7a946e6b4ec501775e59a31ce93e5aae2c203a9df4b20c8a777
+preserved data/hand_working_default_v01.json: PASS 1cf2a19f24f753eb44b4e96fd7e73ee8bdfe5b97367a77bf8cfa0cf30a4d107c
+preserved data/hvjb_photo_model_v03_p03.json.gz: PASS 6687b12ec1b3db24babf75f8fef1b6f6bc123c288b713824b9763d9214553ba6
+preserved data/hvjb_photo_correspondence_v03_p01.json: PASS 6c5b7cb9bab859a33c8f5d5cd5429ce9f06fb0951b8a8fa4ae2a31ad99052ca0
+preserved UR15_JB_photo_correspondence_v03_p03.blend: PASS 5205d3aa2c2b99f7df6f538d17b3d3ca36ba8208c546858ee8ec8a5a3564a282
+preserved data/hvjb_robot_selection_v01.json: PASS ad1d0fc6ad2f0c9d36f4d9839faf559ce80aa9ffb4965174facef944f1a58db8
+preserved data/hvjb_task_occupancy_v01.json: PASS 4da5b53687b05cd2cd1d294cf57121abde6ee9d04b19ed0a37ef2fb2a4d79df9
+preserved data/hvjb_pge_finger_v01_meshes.json.gz: PASS c9171a968fd38b263099b21627a31fe37cab61a5e98b8d494ea3a38abfef4570
+preserved data/hand_tool_interface_inputs_v01.json: PASS 91f6a2fbb150c5ae29b7b921044f47f7ea98694e24026b290023d7676cbee392
+preserved scripts/probe_hand_tool_access_v01.py: PASS 55456e6d55f84931bcc3f502e77372414a6efa2578e27970d5620f176c53417c
+20 source workcards and selected S5_AB: PASS
+actual Ampere wire selection: UNSET
+finished black covering dimensions: UNSET
+complete selected tool geometry: UNSET
+new motion: false; new video: false; physical verdict: null
+prior_art_keywords: Ampere 被覆径 工具外形
+prior_art_output:
+keywords=['Ampere', '被覆径', '工具外形']
+findings=0 blockers=0 lessons=0
+PASS: no related prior-art hits found in configured roots.
+SOURCE_RECORD_CHECKS_COMPLETE
