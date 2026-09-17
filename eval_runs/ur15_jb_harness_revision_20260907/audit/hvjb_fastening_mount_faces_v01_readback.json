@@ -1,0 +1,31 @@
+{
+  "observed_at": "2026-09-17T13:30:36.427440+00:00",
+  "record_sha256": "14820510483ac4b2fdb30b29a33caea01abe42ff7484414c86e7f7f615e70dfd",
+  "protected_files_unchanged": 15,
+  "models": {
+    "SES1601": {
+      "triangles": 128,
+      "closed_boundary_paths": 2,
+      "area_matches_prior_observation": true,
+      "projection_matches_saved_3d_vertices": true,
+      "selected_plane_gap_mm": 8.00000037997961
+    },
+    "SEM2001": {
+      "triangles": 16,
+      "closed_boundary_paths": 2,
+      "area_matches_prior_observation": true,
+      "projection_matches_saved_3d_vertices": true,
+      "selected_plane_gap_mm": 12.000000104308128
+    },
+    "SEV2001": {
+      "triangles": 482,
+      "closed_boundary_paths": 10,
+      "area_matches_prior_observation": true,
+      "projection_matches_saved_3d_vertices": true,
+      "selected_plane_gap_mm": 12.000000104308128
+    }
+  },
+  "inline_bytes": 106776,
+  "record_bytes": 658951,
+  "scope": "Saved geometry, input identity and display serialization; no physical verdict"
+}

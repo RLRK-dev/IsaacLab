@@ -1,0 +1,102 @@
+<div id="hvjb-fastening-mount-faces-v01">
+  <h3>取付側の平面形状</h3>
+  <div class="viz-controls">
+    <label class="form-label">例示CAD
+      <select class="form-select" data-model>
+        <option>SES1601</option>
+        <option>SEM2001</option>
+        <option>SEV2001</option>
+      </select>
+    </label>
+  </div>
+  <div data-drawing>
+    <svg data-overview role="img" aria-label="取付側の平面全体"></svg>
+    <svg data-detail-view role="img" aria-label="中央の隙間の拡大"></svg>
+  </div>
+  <div class="text-small" data-detail aria-live="polite"></div>
+</div>
+<style>
+  #hvjb-fastening-mount-faces-v01 [data-drawing] { margin-top: 12px; }
+  #hvjb-fastening-mount-faces-v01 svg { display: block; width: 100%; overflow: hidden; }
+  #hvjb-fastening-mount-faces-v01 svg text { fill: var(--foreground); font-size: 12px; }
+  #hvjb-fastening-mount-faces-v01 .surface { fill: var(--viz-series-1); fill-opacity: 0.24; }
+  #hvjb-fastening-mount-faces-v01 .boundary { fill: none; stroke: var(--viz-series-1); stroke-width: 1; }
+  #hvjb-fastening-mount-faces-v01 .dimension { stroke: var(--foreground); stroke-width: 1; fill: none; }
+  #hvjb-fastening-mount-faces-v01 .guide { stroke: var(--border); stroke-width: 1; fill: none; }
+</style>
+<script>
+(() => {
+  const root = document.getElementById('hvjb-fastening-mount-faces-v01');
+  const models = __MODEL_DATA__;
+  const select = root.querySelector('[data-model]');
+  const namespace = 'http://www.w3.org/2000/svg';
+  const element = (parent, name, attributes = {}, content) => {
+    const node = document.createElementNS(namespace, name);
+    for (const [key, value] of Object.entries(attributes)) node.setAttribute(key, value);
+    if (content !== undefined) node.textContent = content;
+    parent.appendChild(node);
+    return node;
+  };
+  const text = (svg, x, y, value, anchor = 'start') =>
+    element(svg, 'text', {x, y, 'text-anchor': anchor, 'data-label': ''}, value);
+  const line = (svg, x1, y1, x2, y2, kind = 'dimension') =>
+    element(svg, 'line', {x1, y1, x2, y2, class: kind});
+  const rounded = value => Number(value.toFixed(3)).toLocaleString('ja-JP');
+  const render = (svg, model, view, width) => {
+    svg.replaceChildren();
+    const [lower, upper] = model.bounds_mm;
+    const length = upper[0] - lower[0], breadth = upper[1] - lower[1];
+    const detail = view === 'detail';
+    // Cropping is display-only; every original triangle and boundary is retained.
+    const xbounds = detail ? model.detail_bounds_mm : [lower[0], upper[0]];
+    const scale = (width - 88) / (xbounds[1] - xbounds[0]);
+    const faceHeight = breadth * scale;
+    const top = 42, bottom = top + faceHeight, height = bottom + 54;
+    const x = value => 44 + (value - xbounds[0]) * scale;
+    const y = value => top + (upper[1] - value) * scale;
+    svg.setAttribute('viewBox', `0 0 ${width} ${height}`);
+    svg.setAttribute('height', height);
+    svg.dataset.projection = JSON.stringify({view, width, height, scale, xbounds, top, transverse_max: upper[1]});
+    element(svg, 'title', {}, `${select.value} ${detail ? '中央の取付面を拡大' : '取付面全体'}`);
+    element(svg, 'desc', {}, '色面は元CADの平面三角形。線はその境界。ねじ穴の用途・規格は未確定。');
+    text(svg, 12, 18, detail ? '取付面の拡大' : '取付面の全体');
+    const defs = element(svg, 'defs');
+    const clipId = `hvjb-mount-clip-${view}`;
+    const clip = element(defs, 'clipPath', {id: clipId});
+    element(clip, 'rect', {x: 43, y: top - 1, width: width - 86, height: faceHeight + 2});
+    const group = element(svg, 'g', {'clip-path': `url(#${clipId})`});
+    const path = points => points.map(([a, b], i) => `${i ? 'L' : 'M'}${x(a)},${y(b)}`).join(' ');
+    element(group, 'path', {d: model.triangles_mm.map(t => path(t) + 'Z').join(' '), class: 'surface'});
+    element(group, 'path', {d: model.boundaries_mm.map(path).join(' '), class: 'boundary'});
+    if (detail && model.gap_edges_mm) {
+      const [low, high] = model.gap_edges_mm;
+      line(svg, 28, y(high), 28, y(low));
+      for (const edge of [high, low]) line(svg, 24, y(edge), 36, y(edge));
+      text(svg, 44, bottom + 24, `中央の間隔 ${rounded(model.gap_mm)} mm`);
+      text(svg, 44, bottom + 44, `${model.axis_labels[0]} ${rounded(xbounds[0])}〜${rounded(xbounds[1])} mm`);
+    } else {
+      const dimensionY = bottom + 18;
+      line(svg, x(lower[0]), dimensionY, x(upper[0]), dimensionY);
+      for (const end of [lower[0], upper[0]]) line(svg, x(end), dimensionY - 4, x(end), dimensionY + 4);
+      text(svg, width / 2, bottom + 42, `${model.axis_labels[0]}方向 ${rounded(length)} mm`, 'middle');
+    }
+    if (detail) {
+      line(svg, 43, top - 4, 43, bottom + 4, 'guide');
+      line(svg, width - 43, top - 4, width - 43, bottom + 4, 'guide');
+    }
+  };
+  const draw = () => {
+    const model = models[select.value];
+    const width = root.querySelector('[data-drawing]').getBoundingClientRect().width;
+    render(root.querySelector('[data-overview]'), model, 'overview', width);
+    render(root.querySelector('[data-detail-view]'), model, 'detail', width);
+    root.querySelector('[data-detail]').textContent = '色面：抽出した平面　線：元形状の境界';
+    root.dataset.observation = JSON.stringify({model: select.value, gap_mm: model.gap_mm,
+      triangles: model.triangles_mm.length, boundaries: model.boundaries_mm.length});
+    root.dataset.ready = 'true';
+  };
+  select.addEventListener('change', draw);
+  new ResizeObserver(draw).observe(root.querySelector('[data-drawing]'));
+  draw();
+})();
+</script>

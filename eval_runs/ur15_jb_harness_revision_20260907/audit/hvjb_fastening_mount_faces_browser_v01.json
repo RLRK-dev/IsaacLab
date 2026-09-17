@@ -1,0 +1,695 @@
+{
+  "observed_at": "2026-09-17T13:25:43.166Z",
+  "preview_sha256": "89698d7fe8a67ab7d2fd7224d2e10094ed1b6515f19396514c6565d95b88d482",
+  "record_sha256": "14820510483ac4b2fdb30b29a33caea01abe42ff7484414c86e7f7f615e70dfd",
+  "results": [
+    {
+      "requested_width": 736,
+      "scheme": "light",
+      "model": "SES1601",
+      "gap_mm": 8.00000037997961,
+      "triangles": 128,
+      "boundaries": 2,
+      "width": 736,
+      "document_width": 736,
+      "outside": [],
+      "labelOverlaps": [],
+      "labelSizes": [
+        12,
+        12,
+        12,
+        12,
+        12
+      ],
+      "selected": "SES1601",
+      "figures": [
+        {
+          "view": "overview",
+          "width": 736,
+          "height": 145.30434506909057,
+          "scale": 2.3478259873243763,
+          "xbounds": [
+            24.000000208616257,
+            300.00001192092896
+          ],
+          "top": 42,
+          "transverse_max": 10.499999858438969,
+          "viewBox": "0 0 736 145.30434506909057",
+          "path_sha256": [
+            "127b33b1b2ab4a69699e5320d5044c7ddecc178b6ad72418450315e94a1168f9",
+            "c84757ccabda9b1a5fa3db9388a5f6e9a0b5f11c8dd86cf128da24f88da68793"
+          ]
+        },
+        {
+          "view": "detail",
+          "width": 736,
+          "height": 290.39999737909864,
+          "scale": 9.257142857142858,
+          "xbounds": [
+            127.0000060647726,
+            197.0000060647726
+          ],
+          "top": 42,
+          "transverse_max": 10.499999858438969,
+          "viewBox": "0 0 736 290.39999737909864",
+          "path_sha256": [
+            "2250c1b1be32dbadccd9e6513c49fcec108ffedbb867c6b21e98f3b8b68a26d5",
+            "d69875076e9d8477555cc80bd000054a2a701ea7cd719cfd9df484ffb600f5f8"
+          ]
+        }
+      ]
+    },
+    {
+      "requested_width": 736,
+      "scheme": "light",
+      "model": "SEM2001",
+      "gap_mm": 12.000000104308128,
+      "triangles": 16,
+      "boundaries": 2,
+      "width": 736,
+      "document_width": 736,
+      "outside": [],
+      "labelOverlaps": [],
+      "labelSizes": [
+        12,
+        12,
+        12,
+        12,
+        12
+      ],
+      "selected": "SEM2001",
+      "figures": [
+        {
+          "view": "overview",
+          "width": 736,
+          "height": 141.16890222704848,
+          "scale": 1.7372654344271798,
+          "xbounds": [
+            -186.49999797344208,
+            186.49999797344208
+          ],
+          "top": 42,
+          "transverse_max": 13.000000268220901,
+          "viewBox": "0 0 736 141.16890222704848",
+          "path_sha256": [
+            "9fc2d79cb82d3a573254456fdbab8defe6ba78e132d2ab0c642ee3c1d84d0f29",
+            "b3a317a706eb85b4cd7bf2b0ec5aa7223e55ebc9a160ff5c71f9453c76aed72d"
+          ]
+        },
+        {
+          "view": "detail",
+          "width": 736,
+          "height": 336.6857192516327,
+          "scale": 9.257142857142858,
+          "xbounds": [
+            -35,
+            35
+          ],
+          "top": 42,
+          "transverse_max": 13.000000268220901,
+          "viewBox": "0 0 736 336.6857192516327",
+          "path_sha256": [
+            "f8ff7df15f772ab013ca3acfa03e71fadda63548cc5334c65eb6ddef95be05a4",
+            "454db7a59242b6704194e213a8394d97cbe945d9e1c431cc6af8f5161161f6fb"
+          ]
+        }
+      ]
+    },
+    {
+      "requested_width": 736,
+      "scheme": "light",
+      "model": "SEV2001",
+      "gap_mm": 12.000000104308128,
+      "triangles": 482,
+      "boundaries": 10,
+      "width": 736,
+      "document_width": 736,
+      "outside": [],
+      "labelOverlaps": [],
+      "labelSizes": [
+        12,
+        12,
+        12,
+        12,
+        12
+      ],
+      "selected": "SEV2001",
+      "figures": [
+        {
+          "view": "overview",
+          "width": 736,
+          "height": 170.513351073569,
+          "scale": 1.3305955138140801,
+          "xbounds": [
+            -1.4210854397564648e-13,
+            486.9999885559082
+          ],
+          "top": 42,
+          "transverse_max": 28.00000086426735,
+          "viewBox": "0 0 736 170.513351073569",
+          "path_sha256": [
+            "5544a3d25820a4bdb1df9e485c3b3ac0dd0e3f0f7c536749abc73398f32180b3",
+            "5e7984250acb6bc86232627e6117104e8e1b02c99271ab92ba63f9db052b88cd"
+          ]
+        },
+        {
+          "view": "detail",
+          "width": 736,
+          "height": 614.4000160012927,
+          "scale": 9.257142857142858,
+          "xbounds": [
+            37,
+            107
+          ],
+          "top": 42,
+          "transverse_max": 28.00000086426735,
+          "viewBox": "0 0 736 614.4000160012927",
+          "path_sha256": [
+            "1cfc73b656e642850bbb58e2dcee04212e516b4ffd23bf9ca5d220f31ceb07e3",
+            "7c15d9ecd83af96202c53dd5005f6ae18857ae47cccb175f73b624f52494ccab"
+          ]
+        }
+      ]
+    },
+    {
+      "requested_width": 736,
+      "scheme": "dark",
+      "model": "SES1601",
+      "gap_mm": 8.00000037997961,
+      "triangles": 128,
+      "boundaries": 2,
+      "width": 736,
+      "document_width": 736,
+      "outside": [],
+      "labelOverlaps": [],
+      "labelSizes": [
+        12,
+        12,
+        12,
+        12,
+        12
+      ],
+      "selected": "SES1601",
+      "figures": [
+        {
+          "view": "overview",
+          "width": 736,
+          "height": 145.30434506909057,
+          "scale": 2.3478259873243763,
+          "xbounds": [
+            24.000000208616257,
+            300.00001192092896
+          ],
+          "top": 42,
+          "transverse_max": 10.499999858438969,
+          "viewBox": "0 0 736 145.30434506909057",
+          "path_sha256": [
+            "127b33b1b2ab4a69699e5320d5044c7ddecc178b6ad72418450315e94a1168f9",
+            "c84757ccabda9b1a5fa3db9388a5f6e9a0b5f11c8dd86cf128da24f88da68793"
+          ]
+        },
+        {
+          "view": "detail",
+          "width": 736,
+          "height": 290.39999737909864,
+          "scale": 9.257142857142858,
+          "xbounds": [
+            127.0000060647726,
+            197.0000060647726
+          ],
+          "top": 42,
+          "transverse_max": 10.499999858438969,
+          "viewBox": "0 0 736 290.39999737909864",
+          "path_sha256": [
+            "2250c1b1be32dbadccd9e6513c49fcec108ffedbb867c6b21e98f3b8b68a26d5",
+            "d69875076e9d8477555cc80bd000054a2a701ea7cd719cfd9df484ffb600f5f8"
+          ]
+        }
+      ]
+    },
+    {
+      "requested_width": 736,
+      "scheme": "dark",
+      "model": "SEM2001",
+      "gap_mm": 12.000000104308128,
+      "triangles": 16,
+      "boundaries": 2,
+      "width": 736,
+      "document_width": 736,
+      "outside": [],
+      "labelOverlaps": [],
+      "labelSizes": [
+        12,
+        12,
+        12,
+        12,
+        12
+      ],
+      "selected": "SEM2001",
+      "figures": [
+        {
+          "view": "overview",
+          "width": 736,
+          "height": 141.16890222704848,
+          "scale": 1.7372654344271798,
+          "xbounds": [
+            -186.49999797344208,
+            186.49999797344208
+          ],
+          "top": 42,
+          "transverse_max": 13.000000268220901,
+          "viewBox": "0 0 736 141.16890222704848",
+          "path_sha256": [
+            "9fc2d79cb82d3a573254456fdbab8defe6ba78e132d2ab0c642ee3c1d84d0f29",
+            "b3a317a706eb85b4cd7bf2b0ec5aa7223e55ebc9a160ff5c71f9453c76aed72d"
+          ]
+        },
+        {
+          "view": "detail",
+          "width": 736,
+          "height": 336.6857192516327,
+          "scale": 9.257142857142858,
+          "xbounds": [
+            -35,
+            35
+          ],
+          "top": 42,
+          "transverse_max": 13.000000268220901,
+          "viewBox": "0 0 736 336.6857192516327",
+          "path_sha256": [
+            "f8ff7df15f772ab013ca3acfa03e71fadda63548cc5334c65eb6ddef95be05a4",
+            "454db7a59242b6704194e213a8394d97cbe945d9e1c431cc6af8f5161161f6fb"
+          ]
+        }
+      ]
+    },
+    {
+      "requested_width": 736,
+      "scheme": "dark",
+      "model": "SEV2001",
+      "gap_mm": 12.000000104308128,
+      "triangles": 482,
+      "boundaries": 10,
+      "width": 736,
+      "document_width": 736,
+      "outside": [],
+      "labelOverlaps": [],
+      "labelSizes": [
+        12,
+        12,
+        12,
+        12,
+        12
+      ],
+      "selected": "SEV2001",
+      "figures": [
+        {
+          "view": "overview",
+          "width": 736,
+          "height": 170.513351073569,
+          "scale": 1.3305955138140801,
+          "xbounds": [
+            -1.4210854397564648e-13,
+            486.9999885559082
+          ],
+          "top": 42,
+          "transverse_max": 28.00000086426735,
+          "viewBox": "0 0 736 170.513351073569",
+          "path_sha256": [
+            "5544a3d25820a4bdb1df9e485c3b3ac0dd0e3f0f7c536749abc73398f32180b3",
+            "5e7984250acb6bc86232627e6117104e8e1b02c99271ab92ba63f9db052b88cd"
+          ]
+        },
+        {
+          "view": "detail",
+          "width": 736,
+          "height": 614.4000160012927,
+          "scale": 9.257142857142858,
+          "xbounds": [
+            37,
+            107
+          ],
+          "top": 42,
+          "transverse_max": 28.00000086426735,
+          "viewBox": "0 0 736 614.4000160012927",
+          "path_sha256": [
+            "1cfc73b656e642850bbb58e2dcee04212e516b4ffd23bf9ca5d220f31ceb07e3",
+            "7c15d9ecd83af96202c53dd5005f6ae18857ae47cccb175f73b624f52494ccab"
+          ]
+        }
+      ]
+    },
+    {
+      "requested_width": 320,
+      "scheme": "light",
+      "model": "SES1601",
+      "gap_mm": 8.00000037997961,
+      "triangles": 128,
+      "boundaries": 2,
+      "width": 320,
+      "document_width": 320,
+      "outside": [],
+      "labelOverlaps": [],
+      "labelSizes": [
+        12,
+        12,
+        12,
+        12,
+        12
+      ],
+      "selected": "SES1601",
+      "figures": [
+        {
+          "view": "overview",
+          "width": 320,
+          "height": 113.6521729259707,
+          "scale": 0.8405796744741595,
+          "xbounds": [
+            24.000000208616257,
+            300.00001192092896
+          ],
+          "top": 42,
+          "transverse_max": 10.499999858438969,
+          "viewBox": "0 0 320 113.6521729259707",
+          "path_sha256": [
+            "179d47bd2d52df53c0a04ebdc8c186997a7a4f3ccaf3b21949c8343604b73738",
+            "2690f3be5b2cdaef9a210a41956d04766b873c51c77f27f2bafadfdd9af7e7d4"
+          ]
+        },
+        {
+          "view": "detail",
+          "width": 320,
+          "height": 165.5999990616526,
+          "scale": 3.3142857142857145,
+          "xbounds": [
+            127.0000060647726,
+            197.0000060647726
+          ],
+          "top": 42,
+          "transverse_max": 10.499999858438969,
+          "viewBox": "0 0 320 165.5999990616526",
+          "path_sha256": [
+            "e967bca0921db80334c7841ba52e79b06f3434ef9e57f87dcc500ef0155b89cf",
+            "5254ec65eca2b146d16bc5b41fa08550c0d79913c92dc51114f8b985cd804449"
+          ]
+        }
+      ]
+    },
+    {
+      "requested_width": 320,
+      "scheme": "light",
+      "model": "SEM2001",
+      "gap_mm": 12.000000104308128,
+      "triangles": 16,
+      "boundaries": 2,
+      "width": 320,
+      "document_width": 320,
+      "outside": [],
+      "labelOverlaps": [],
+      "labelSizes": [
+        12,
+        12,
+        12,
+        12,
+        12
+      ],
+      "selected": "SEM2001",
+      "figures": [
+        {
+          "view": "overview",
+          "width": 320,
+          "height": 112.17158227881983,
+          "scale": 0.6219839209677557,
+          "xbounds": [
+            -186.49999797344208,
+            186.49999797344208
+          ],
+          "top": 42,
+          "transverse_max": 13.000000268220901,
+          "viewBox": "0 0 320 112.17158227881983",
+          "path_sha256": [
+            "d72f140163d206a39d66b8c8da5cb82077720c7464ea8d848805bde1a7652eec",
+            "bb86aa755b27b7162f4dce13c24e0157e33b297eae38bca24e31a36495fb97c1"
+          ]
+        },
+        {
+          "view": "detail",
+          "width": 320,
+          "height": 182.17143034934998,
+          "scale": 3.3142857142857145,
+          "xbounds": [
+            -35,
+            35
+          ],
+          "top": 42,
+          "transverse_max": 13.000000268220901,
+          "viewBox": "0 0 320 182.17143034934998",
+          "path_sha256": [
+            "2023f1d71de7560d6094346d0e84e96900108b1a0f6342ff44d514481db19192",
+            "1f395e80546855dfc21675a590e16e485db87df570d71b6b70b4d8479aa656a5"
+          ]
+        }
+      ]
+    },
+    {
+      "requested_width": 320,
+      "scheme": "light",
+      "model": "SEV2001",
+      "gap_mm": 12.000000104308128,
+      "triangles": 482,
+      "boundaries": 10,
+      "width": 320,
+      "document_width": 320,
+      "outside": [],
+      "labelOverlaps": [],
+      "labelSizes": [
+        12,
+        12,
+        12,
+        12,
+        12
+      ],
+      "selected": "SEV2001",
+      "figures": [
+        {
+          "view": "overview",
+          "width": 320,
+          "height": 122.67761952016667,
+          "scale": 0.4763860481556583,
+          "xbounds": [
+            -1.4210854397564648e-13,
+            486.9999885559082
+          ],
+          "top": 42,
+          "transverse_max": 28.00000086426735,
+          "viewBox": "0 0 320 122.67761952016667",
+          "path_sha256": [
+            "67a395d8234a0b95bcbd3d266e8b49738f8ba6605b2353cffaaf22048ff04513",
+            "1bdf23b5ec7b1ae88b223e00076b44e0412940aa79b32821ba7f3ffb1f3a5d7b"
+          ]
+        },
+        {
+          "view": "detail",
+          "width": 320,
+          "height": 281.60000572885787,
+          "scale": 3.3142857142857145,
+          "xbounds": [
+            37,
+            107
+          ],
+          "top": 42,
+          "transverse_max": 28.00000086426735,
+          "viewBox": "0 0 320 281.60000572885787",
+          "path_sha256": [
+            "d5e2bcb6723de5dedb4d162e9dd9e8c188cca59fea6fd90f197712ca5194b990",
+            "83fe68aeede9af9769129df94b0766bf8749f96b3792dfec1ff106f601a07388"
+          ]
+        }
+      ]
+    },
+    {
+      "requested_width": 320,
+      "scheme": "dark",
+      "model": "SES1601",
+      "gap_mm": 8.00000037997961,
+      "triangles": 128,
+      "boundaries": 2,
+      "width": 320,
+      "document_width": 320,
+      "outside": [],
+      "labelOverlaps": [],
+      "labelSizes": [
+        12,
+        12,
+        12,
+        12,
+        12
+      ],
+      "selected": "SES1601",
+      "figures": [
+        {
+          "view": "overview",
+          "width": 320,
+          "height": 113.6521729259707,
+          "scale": 0.8405796744741595,
+          "xbounds": [
+            24.000000208616257,
+            300.00001192092896
+          ],
+          "top": 42,
+          "transverse_max": 10.499999858438969,
+          "viewBox": "0 0 320 113.6521729259707",
+          "path_sha256": [
+            "179d47bd2d52df53c0a04ebdc8c186997a7a4f3ccaf3b21949c8343604b73738",
+            "2690f3be5b2cdaef9a210a41956d04766b873c51c77f27f2bafadfdd9af7e7d4"
+          ]
+        },
+        {
+          "view": "detail",
+          "width": 320,
+          "height": 165.5999990616526,
+          "scale": 3.3142857142857145,
+          "xbounds": [
+            127.0000060647726,
+            197.0000060647726
+          ],
+          "top": 42,
+          "transverse_max": 10.499999858438969,
+          "viewBox": "0 0 320 165.5999990616526",
+          "path_sha256": [
+            "e967bca0921db80334c7841ba52e79b06f3434ef9e57f87dcc500ef0155b89cf",
+            "5254ec65eca2b146d16bc5b41fa08550c0d79913c92dc51114f8b985cd804449"
+          ]
+        }
+      ]
+    },
+    {
+      "requested_width": 320,
+      "scheme": "dark",
+      "model": "SEM2001",
+      "gap_mm": 12.000000104308128,
+      "triangles": 16,
+      "boundaries": 2,
+      "width": 320,
+      "document_width": 320,
+      "outside": [],
+      "labelOverlaps": [],
+      "labelSizes": [
+        12,
+        12,
+        12,
+        12,
+        12
+      ],
+      "selected": "SEM2001",
+      "figures": [
+        {
+          "view": "overview",
+          "width": 320,
+          "height": 112.17158227881983,
+          "scale": 0.6219839209677557,
+          "xbounds": [
+            -186.49999797344208,
+            186.49999797344208
+          ],
+          "top": 42,
+          "transverse_max": 13.000000268220901,
+          "viewBox": "0 0 320 112.17158227881983",
+          "path_sha256": [
+            "d72f140163d206a39d66b8c8da5cb82077720c7464ea8d848805bde1a7652eec",
+            "bb86aa755b27b7162f4dce13c24e0157e33b297eae38bca24e31a36495fb97c1"
+          ]
+        },
+        {
+          "view": "detail",
+          "width": 320,
+          "height": 182.17143034934998,
+          "scale": 3.3142857142857145,
+          "xbounds": [
+            -35,
+            35
+          ],
+          "top": 42,
+          "transverse_max": 13.000000268220901,
+          "viewBox": "0 0 320 182.17143034934998",
+          "path_sha256": [
+            "2023f1d71de7560d6094346d0e84e96900108b1a0f6342ff44d514481db19192",
+            "1f395e80546855dfc21675a590e16e485db87df570d71b6b70b4d8479aa656a5"
+          ]
+        }
+      ]
+    },
+    {
+      "requested_width": 320,
+      "scheme": "dark",
+      "model": "SEV2001",
+      "gap_mm": 12.000000104308128,
+      "triangles": 482,
+      "boundaries": 10,
+      "width": 320,
+      "document_width": 320,
+      "outside": [],
+      "labelOverlaps": [],
+      "labelSizes": [
+        12,
+        12,
+        12,
+        12,
+        12
+      ],
+      "selected": "SEV2001",
+      "figures": [
+        {
+          "view": "overview",
+          "width": 320,
+          "height": 122.67761952016667,
+          "scale": 0.4763860481556583,
+          "xbounds": [
+            -1.4210854397564648e-13,
+            486.9999885559082
+          ],
+          "top": 42,
+          "transverse_max": 28.00000086426735,
+          "viewBox": "0 0 320 122.67761952016667",
+          "path_sha256": [
+            "67a395d8234a0b95bcbd3d266e8b49738f8ba6605b2353cffaaf22048ff04513",
+            "1bdf23b5ec7b1ae88b223e00076b44e0412940aa79b32821ba7f3ffb1f3a5d7b"
+          ]
+        },
+        {
+          "view": "detail",
+          "width": 320,
+          "height": 281.60000572885787,
+          "scale": 3.3142857142857145,
+          "xbounds": [
+            37,
+            107
+          ],
+          "top": 42,
+          "transverse_max": 28.00000086426735,
+          "viewBox": "0 0 320 281.60000572885787",
+          "path_sha256": [
+            "d5e2bcb6723de5dedb4d162e9dd9e8c188cca59fea6fd90f197712ca5194b990",
+            "83fe68aeede9af9769129df94b0766bf8749f96b3792dfec1ff106f601a07388"
+          ]
+        }
+      ]
+    }
+  ],
+  "screenshots": {
+    "736_light_SES1601.png": "255bebe99b0d17ae3a588057571186756bc119fe2e55b92d37d85fc344b5220c",
+    "736_light_SEM2001.png": "38f9a8dd40d8868a3af029bae388ffe459bd1300ce034d2aa43d9ca3d121664f",
+    "736_light_SEV2001.png": "c1a14a9696b0f4c02d0f1aed2118be287837408673683dff309443102f53fca5",
+    "736_dark_SES1601.png": "c2c51f8f4c886edef7dd8d3cf32421d8af804942e281cfeccf0251b58ac0ab68",
+    "736_dark_SEM2001.png": "6d671e8369dd651ea616f40df98df07e149ec0c0d5bbe2ab1134eb79318ca356",
+    "736_dark_SEV2001.png": "8e1bd514c5926c031ac8ab2207744b77b7b2e88bf23512f7bcc21651d6e6561e",
+    "320_light_SES1601.png": "3fb4fee8246b991f6f3a3322b26008b62be982dcb37ebc0ac528d0347e10535a",
+    "320_light_SEM2001.png": "9f623ba73927e4e97c6d5588b05dda4e53010c599a097768fb94349bfe9d51b0",
+    "320_light_SEV2001.png": "1b9695c25094b013f0af4b194f96688c0597c2cac8f6e61c5d10c6873d305f65",
+    "320_dark_SES1601.png": "dc2386e63d143a8ccafe398cf6a9c614beadef389933f8e35a9823a76655fcc3",
+    "320_dark_SEM2001.png": "56fbcaf511e52f05ed2124494b300752e2cb56c037312fa00b1e1483a66add0b",
+    "320_dark_SEV2001.png": "fb698357f6db4f00f6c34ba9866bde3bffd6732eb5a07b2acd473661d16859f9"
+  },
+  "javascript_errors": [],
+  "scope": "Saved plane vertices, equal-axis projection, selection, label bounds and themes; no physical verdict"
+}
