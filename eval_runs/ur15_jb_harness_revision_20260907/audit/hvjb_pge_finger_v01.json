@@ -1,0 +1,212 @@
+{
+  "observed_at": "2026-09-17T03:39:31.433188+00:00",
+  "builder_sha256": "b5f207be2781f135b2e5345ecbb22b8e2c844d653ddbf3cf81ab24a3289c1982",
+  "config_sha256": "d04b7ac688b8679103d93146c3884c8ed6f25ae249e142e3b5e633459a3d4ce3",
+  "baseline_before": {
+    "data/hvjb_pge_mount_v01.json": "9d5e2b6010ed4f0262b274ed3f536a0f4b991005ac4f02b3d6000fff7fdaf14a",
+    "data/hand_tool_interface_inputs_v01.json": "91f6a2fbb150c5ae29b7b921044f47f7ea98694e24026b290023d7676cbee392",
+    "data/hand_sleeve_clamp_v01.json": "d0b722854690ad96f68d1b67c1312250ae972bb78dd651c76bb1bfc08bbc43e5",
+    "data/hand_root_clamp_v03.json": "72300cdff2cdf934f7056f97bab9a22f60e2698fafc172be6bc1da8ed5572794",
+    "data/hand_working_default_v01.json": "1cf2a19f24f753eb44b4e96fd7e73ee8bdfe5b97367a77bf8cfa0cf30a4d107c",
+    "data/hvjb_photo_model_v03_p03.json.gz": "6687b12ec1b3db24babf75f8fef1b6f6bc123c288b713824b9763d9214553ba6",
+    "data/hvjb_photo_correspondence_v03_p01.json": "6c5b7cb9bab859a33c8f5d5cd5429ce9f06fb0951b8a8fa4ae2a31ad99052ca0",
+    "UR15_JB_photo_correspondence_v03_p03.blend": "5205d3aa2c2b99f7df6f538d17b3d3ca36ba8208c546858ee8ec8a5a3564a282",
+    "data/hvjb_robot_selection_v01.json": "ad1d0fc6ad2f0c9d36f4d9839faf559ce80aa9ffb4965174facef944f1a58db8",
+    "data/hvjb_task_occupancy_v01.json": "4da5b53687b05cd2cd1d294cf57121abde6ee9d04b19ed0a37ef2fb2a4d79df9"
+  },
+  "baseline_after": {
+    "data/hvjb_pge_mount_v01.json": "9d5e2b6010ed4f0262b274ed3f536a0f4b991005ac4f02b3d6000fff7fdaf14a",
+    "data/hand_tool_interface_inputs_v01.json": "91f6a2fbb150c5ae29b7b921044f47f7ea98694e24026b290023d7676cbee392",
+    "data/hand_sleeve_clamp_v01.json": "d0b722854690ad96f68d1b67c1312250ae972bb78dd651c76bb1bfc08bbc43e5",
+    "data/hand_root_clamp_v03.json": "72300cdff2cdf934f7056f97bab9a22f60e2698fafc172be6bc1da8ed5572794",
+    "data/hand_working_default_v01.json": "1cf2a19f24f753eb44b4e96fd7e73ee8bdfe5b97367a77bf8cfa0cf30a4d107c",
+    "data/hvjb_photo_model_v03_p03.json.gz": "6687b12ec1b3db24babf75f8fef1b6f6bc123c288b713824b9763d9214553ba6",
+    "data/hvjb_photo_correspondence_v03_p01.json": "6c5b7cb9bab859a33c8f5d5cd5429ce9f06fb0951b8a8fa4ae2a31ad99052ca0",
+    "UR15_JB_photo_correspondence_v03_p03.blend": "5205d3aa2c2b99f7df6f538d17b3d3ca36ba8208c546858ee8ec8a5a3564a282",
+    "data/hvjb_robot_selection_v01.json": "ad1d0fc6ad2f0c9d36f4d9839faf559ce80aa9ffb4965174facef944f1a58db8",
+    "data/hvjb_task_occupancy_v01.json": "4da5b53687b05cd2cd1d294cf57121abde6ee9d04b19ed0a37ef2fb2a4d79df9"
+  },
+  "legacy_resolution": {
+    "observed_at": "2026-09-17T12:39:31.190712+09:00",
+    "config_sha256": "1cf2a19f24f753eb44b4e96fd7e73ee8bdfe5b97367a77bf8cfa0cf30a4d107c",
+    "candidate": "T050",
+    "default_state": "near",
+    "signed_world_x_rotation_deg": -14.999999999999998,
+    "mesh_count_excluding_guide": 20,
+    "states": [
+      "near",
+      "early",
+      "open",
+      "clear"
+    ],
+    "input_paths": {
+      "mesh": "/home/rlrk/IsaacLab-op040/eval_runs/ur15_jb_harness_revision_20260907/references/hvjb_local_access_20260917/hand_source/hand_clockwise_tilt_meshes_v01.json",
+      "observations": "/home/rlrk/IsaacLab-op040/eval_runs/ur15_jb_harness_revision_20260907/references/hvjb_local_access_20260917/hand_source/hand_clockwise_tilt_observations_v01.json",
+      "native_observations": "/home/rlrk/IsaacLab-op040/eval_runs/ur15_jb_harness_revision_20260907/references/hvjb_local_access_20260917/hand_source/hand_clockwise_tilt_native_v01.json",
+      "native": "/home/rlrk/IsaacLab-op040/eval_runs/ur15_jb_harness_revision_20260907/references/hvjb_local_access_20260917/hand_source/hand_clockwise_tilt_v01.blend",
+      "glb": "/home/rlrk/IsaacLab-op040/eval_runs/ur15_jb_harness_revision_20260907/references/hvjb_local_access_20260917/hand_source/hand_clockwise_tilt_T050_v01.glb"
+    },
+    "input_sha256": {
+      "mesh": "93d914c9eed05fc5b61e686b6cecca4420f6e4fd2b46c2d1eb8bf56fb900d95c",
+      "observations": "a8e2f40a4a4062bb3f75b34537dbda75fec4a020f25f710841bcb743e22f0dc3",
+      "native_observations": "be8b95f8e03af27dae85bb398cd10d4b5ad133c64ce400c0286070799c6b2b42",
+      "native": "a3bf9eeba0e1c16ed515d1dad99dbd31bc6b2dfa0dd869e41455d7d20b545d1c",
+      "glb": "e6443f4bd0765903097aaed12ba7d96aec44c751c9a05471e1e3cf9b0dd04603"
+    },
+    "source_candidate_objects_and_all_transforms_preserved": true,
+    "geometry_rebuilt": false,
+    "physical_acceptance_verdict": null
+  },
+  "baseline_unchanged": true,
+  "unchanged_reference_objects": [
+    "reference_lug_6R6_uncrimped",
+    "comparison_wire",
+    "illustrative_sleeve",
+    "illustrative_busbar_coupon"
+  ],
+  "finger_observations": {
+    "-1": {
+      "parts": [
+        "left_mounting_shoe",
+        "left_offset_neck",
+        "left_carrier_rail",
+        "left_front_pad",
+        "left_front_pad_seat",
+        "left_root_pad",
+        "left_root_pad_seat"
+      ],
+      "opening_displacements_m": {
+        "left_mounting_shoe": [
+          -0.007,
+          0.0,
+          0.0
+        ],
+        "left_offset_neck": [
+          -0.007,
+          0.0,
+          0.0
+        ],
+        "left_carrier_rail": [
+          -0.007,
+          0.0,
+          0.0
+        ],
+        "left_front_pad": [
+          -0.007,
+          0.0,
+          0.0
+        ],
+        "left_front_pad_seat": [
+          -0.007,
+          0.0,
+          0.0
+        ],
+        "left_root_pad": [
+          -0.007,
+          0.0,
+          0.0
+        ],
+        "left_root_pad_seat": [
+          -0.007,
+          0.0,
+          0.0
+        ]
+      },
+      "finger_bounds_body_datum_m": [
+        [
+          -0.0205,
+          -0.03758317449977111,
+          -0.05714781967023916
+        ],
+        [
+          -0.004949747,
+          0.01698111781779027,
+          3.6085866239599085e-10
+        ]
+      ],
+      "finger_extent_m": [
+        0.015550253,
+        0.05456429231756138,
+        0.05714782003109782
+      ],
+      "maximum_projection_below_jaw_face_m": 0.05714781967023916,
+      "projection_is_not_manufacturer_allowable_length": true
+    },
+    "1": {
+      "parts": [
+        "right_mounting_shoe",
+        "right_offset_neck",
+        "right_carrier_rail",
+        "right_front_pad",
+        "right_front_pad_seat",
+        "right_root_pad",
+        "right_root_pad_seat"
+      ],
+      "opening_displacements_m": {
+        "right_mounting_shoe": [
+          0.007,
+          0.0,
+          0.0
+        ],
+        "right_offset_neck": [
+          0.007,
+          0.0,
+          0.0
+        ],
+        "right_carrier_rail": [
+          0.007,
+          0.0,
+          0.0
+        ],
+        "right_front_pad": [
+          0.007,
+          0.0,
+          0.0
+        ],
+        "right_front_pad_seat": [
+          0.007,
+          0.0,
+          0.0
+        ],
+        "right_root_pad": [
+          0.007,
+          0.0,
+          0.0
+        ],
+        "right_root_pad_seat": [
+          0.007,
+          0.0,
+          0.0
+        ]
+      },
+      "finger_bounds_body_datum_m": [
+        [
+          0.004949747,
+          -0.03758317449977111,
+          -0.05714781967023916
+        ],
+        [
+          0.0205,
+          0.01698111781779027,
+          3.6085866239599085e-10
+        ]
+      ],
+      "finger_extent_m": [
+        0.015550253,
+        0.05456429231756138,
+        0.05714782003109782
+      ],
+      "maximum_projection_below_jaw_face_m": 0.05714781967023916,
+      "projection_is_not_manufacturer_allowable_length": true
+    }
+  },
+  "objects": 21,
+  "finger_count": 2,
+  "pad_count": 4,
+  "actuator_count": 1,
+  "mesh_sha256": "c9171a968fd38b263099b21627a31fe37cab61a5e98b8d494ea3a38abfef4570",
+  "glb_sha256": "93af4447f6ad0b864eef4b32c09d312ea57af00648407d659c700810e0b51120",
+  "json_readback_identical": true,
+  "scope": "Constructed sample geometry and discrete translations; no physical or manufacturing verdict",
+  "physical_verdict": null
+}

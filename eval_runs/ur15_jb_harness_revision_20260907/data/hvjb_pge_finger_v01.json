@@ -1,0 +1,60 @@
+{
+  "revision": "v01",
+  "status": "isolated_dimensional_sample_not_manufacturing_release",
+  "basis": "User continuation after PGE mounting concept; dimensions remain replaceable pending actual sleeve/tool inputs",
+  "pinned": {
+    "data/hvjb_pge_mount_v01.json": "9d5e2b6010ed4f0262b274ed3f536a0f4b991005ac4f02b3d6000fff7fdaf14a",
+    "data/hand_tool_interface_inputs_v01.json": "91f6a2fbb150c5ae29b7b921044f47f7ea98694e24026b290023d7676cbee392",
+    "data/hand_sleeve_clamp_v01.json": "d0b722854690ad96f68d1b67c1312250ae972bb78dd651c76bb1bfc08bbc43e5",
+    "data/hand_root_clamp_v03.json": "72300cdff2cdf934f7056f97bab9a22f60e2698fafc172be6bc1da8ed5572794"
+  },
+  "legacy_source_directory": "references/hvjb_local_access_20260917/hand_source",
+  "reference_objects": [
+    "reference_lug_6R6_uncrimped",
+    "comparison_wire",
+    "illustrative_sleeve",
+    "illustrative_busbar_coupon"
+  ],
+  "reference_scope": "Unchanged old Klauke 6R6 uncrimped CAD and illustrative 14 mm wire/15.2 mm sleeve; not Ampere hardware or crimp compatibility",
+  "catalogue_geometry_mm": {
+    "body_width": 55.0,
+    "body_depth": 26.0,
+    "total_axial_length": 95.0,
+    "jaw_face": 14.0,
+    "exposed_jaw_height": 4.5,
+    "jaw_gap_range": [1.0, 27.0]
+  },
+  "catalogue_scope": "Nominal without-brake envelopes from the pinned manufacturer drawing, not complete vendor CAD",
+  "trial_geometry_mm": {
+    "jaw_gap_at_contour_match": 13.0,
+    "jaw_gap_at_open_display": 27.0,
+    "body_datum_y": 66.0,
+    "body_datum_above_reference_wire_axis": 42.0,
+    "mounting_shoe_thickness": 3.0,
+    "carrier_thickness": 3.0,
+    "rail_height": 6.0,
+    "rail_center_above_wire_axis": 20.0,
+    "pad_crown_thickness": 2.0,
+    "front_band_y": [22.0, 30.0],
+    "root_band_y": [61.0, 71.0],
+    "stem_yz_width": 6.0
+  },
+  "trial_scope": "Display construction values, not manufacturer finger limits or adopted manufacturing dimensions; front/root bands reuse the old comparison",
+  "clockwise_tilt_deg": 15.0,
+  "groove_half_angle_deg": 45.0,
+  "groove_radius_rule": "Use each unchanged sample's nominal outer radius, with no force or compression model",
+  "motion_scope": "Two static contour-match/open layouts; both rigid fingers translate by equal opposite X offsets. No trajectory, dwell or arm motion",
+  "old_T050_default_changed": false,
+  "old_40_mm_setback_reinterpreted_as_new_finger_length": false,
+  "actual_ampere_wire_diameter_mm": null,
+  "actual_ampere_sleeve_diameter_mm": null,
+  "grip_command_N": null,
+  "pad_material": null,
+  "pad_stiffness_N_per_mm": null,
+  "manufacturer_custom_finger_projection_limit_mm": null,
+  "manufacturer_custom_finger_mass_limit_kg": null,
+  "full_fastening_tool_geometry": null,
+  "mounting_holes_pins_fasteners_and_arm_adapter_modeled": false,
+  "carrier_model": "Joined rigid envelope primitives for shape review; joints, fillets and manufacturing fastening details are not specified",
+  "formal_physical_verdict": null
+}

@@ -1,0 +1,23 @@
+{
+  "native_sha256": "85e0af062a268c1dc8f69dae44849a9c9d5181bb9fee5581e722b7dca0c47b6b",
+  "source_mesh_payload_sha256": "c9171a968fd38b263099b21627a31fe37cab61a5e98b8d494ea3a38abfef4570",
+  "native_readback_identical": true,
+  "readback_fields": [
+    "world matrices",
+    "vertex SHA",
+    "face SHA",
+    "mesh counts",
+    "visibility"
+  ],
+  "mesh_counts": {
+    "PGE_SAMPLE_contour": 21,
+    "PGE_SAMPLE_open": 21
+  },
+  "previews": {
+    "PGE_SAMPLE_contour.png": "e931679b33a0591b440bfc76d768aa74adc6c81e123cc87d175c517904d3216c",
+    "PGE_SAMPLE_open.png": "4304d192d520c17498400f3c4483e94ec35d93d2458101d513d794521949b91d"
+  },
+  "production_native_opened": false,
+  "video_created": false,
+  "physical_acceptance_verdict": null
+}

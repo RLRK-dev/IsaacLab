@@ -1,0 +1,139 @@
+<!-- Copyright (c) 2022-2026, The Isaac Lab Project Developers. SPDX-License-Identifier: BSD-3-Clause -->
+<div id="hvjb-pge-finger-v01">
+  <h3>前後パッド付き専用指</h3>
+  <div class="viz-controls">
+    <label class="form-label">状態
+      <select class="form-select" data-field="state">
+        <option value="contour">輪郭を合わせる</option>
+        <option value="open">横へ開く</option>
+      </select>
+    </label>
+    <label class="form-label">視点
+      <select class="form-select" data-field="view">
+        <option value="oblique">斜め・全体</option>
+        <option value="side">側面・全体</option>
+        <option value="pads">パッド詳細</option>
+      </select>
+    </label>
+  </div>
+  <div class="pge-viewport">
+    <canvas role="img" aria-label="15度傾けた公称本体と2本の専用指。左右それぞれに端子側と根元側のパッドを備える寸法比較モデル。"></canvas>
+    <svg class="pge-overlay" aria-hidden="true"><g data-dimension></g></svg>
+  </div>
+  <div class="viz-row pge-legend text-small">
+    <span><i data-swatch="hardware"></i>公称本体</span>
+    <span><i data-swatch="insert"></i>専用指</span>
+    <span><i data-swatch="pad"></i>前後パッド</span>
+  </div>
+  <div class="text-small pge-detail" aria-live="polite" data-detail></div>
+  <div class="text-small text-muted">比較対象：線 φ14 mm／被覆 φ15.2 mm・実物寸法未確認</div>
+  <div class="text-small text-muted" data-tooltip="40 mmは今回の前後パッド中心間距離。旧T050の本体40 mm後退とは別の寸法です。">仮寸法：端子側 8 mm／根元側 10 mm／パッド中心間 40 mm</div>
+  <span data-color-probe hidden></span>
+  <script type="application/json" data-model>__MODEL_DATA__</script>
+</div>
+<style>
+  #hvjb-pge-finger-v01 .pge-viewport {position:relative; margin-block:12px;}
+  #hvjb-pge-finger-v01 canvas {display:block; width:100%; height:460px;}
+  #hvjb-pge-finger-v01 .pge-overlay {position:absolute; inset:0; width:100%; height:100%; pointer-events:none; overflow:visible;}
+  #hvjb-pge-finger-v01 .pge-overlay text {fill:var(--foreground); font-size:12px; font-weight:400;}
+  #hvjb-pge-finger-v01 .pge-overlay path {fill:none; stroke:var(--muted-foreground); stroke-width:1;}
+  #hvjb-pge-finger-v01 .pge-legend i {display:inline-block; width:10px; height:10px; margin-right:5px;}
+  #hvjb-pge-finger-v01 [data-swatch="hardware"] {background:var(--muted-foreground);}
+  #hvjb-pge-finger-v01 [data-swatch="insert"] {background:var(--blue);}
+  #hvjb-pge-finger-v01 [data-swatch="pad"] {background:var(--green);}
+  #hvjb-pge-finger-v01 .pge-detail {margin-block:8px;}
+  @media(max-width:450px) {#hvjb-pge-finger-v01 canvas {height:380px;}}
+</style>
+<script>
+(() => {
+  "use strict";
+  const root = document.getElementById("hvjb-pge-finger-v01");
+  const find = selector => root.querySelector(selector);
+  const model = JSON.parse(find("[data-model]").textContent);
+  const canvas = find("canvas"), overlay = find("svg"), dimension = find("[data-dimension]");
+  const gl = canvas.getContext("webgl", {alpha:true, antialias:true, preserveDrawingBuffer:true});
+  if (!gl) {find("[data-detail]").textContent = "3D表示を初期化できませんでした。"; throw new Error("WebGL unavailable");}
+  const sub = (a,b) => a.map((v,i) => v-b[i]);
+  const dot = (a,b) => a.reduce((s,v,i) => s+v*b[i],0);
+  const cross = (a,b) => [a[1]*b[2]-a[2]*b[1],a[2]*b[0]-a[0]*b[2],a[0]*b[1]-a[1]*b[0]];
+  const unit = v => {const n=Math.hypot(...v); return v.map(x=>x/(n||1));};
+  const light = unit([-.5,-.7,1]);
+  const colorCanvas=document.createElement("canvas"); colorCanvas.width=colorCanvas.height=1;
+  const colorContext=colorCanvas.getContext("2d"), probe=find("[data-color-probe]");
+  function themeColor(token) {
+    colorContext.clearRect(0,0,1,1);
+    probe.style.color="var(--background)";
+    colorContext.fillStyle=getComputedStyle(probe).color;
+    colorContext.fillRect(0,0,1,1);
+    probe.style.color=`var(${token})`;
+    colorContext.fillStyle=getComputedStyle(probe).color;
+    colorContext.fillRect(0,0,1,1);
+    return [...colorContext.getImageData(0,0,1,1).data].slice(0,3).map(v=>v/255);
+  }
+  function compile(type,source) {
+    const shader=gl.createShader(type); gl.shaderSource(shader,source); gl.compileShader(shader);
+    if(!gl.getShaderParameter(shader,gl.COMPILE_STATUS)) throw new Error(gl.getShaderInfoLog(shader));
+    return shader;
+  }
+  const program=gl.createProgram();
+  gl.attachShader(program,compile(gl.VERTEX_SHADER,"attribute vec3 a_position;attribute vec4 a_color;varying vec4 v_color;void main(){gl_Position=vec4(a_position,1.0);v_color=a_color;}"));
+  gl.attachShader(program,compile(gl.FRAGMENT_SHADER,"precision mediump float;varying vec4 v_color;void main(){gl_FragColor=v_color;}"));
+  gl.linkProgram(program);
+  if(!gl.getProgramParameter(program,gl.LINK_STATUS)) throw new Error(gl.getProgramInfoLog(program));
+  gl.useProgram(program);
+  const buffer=gl.createBuffer(),position=gl.getAttribLocation(program,"a_position"),color=gl.getAttribLocation(program,"a_color");
+  gl.bindBuffer(gl.ARRAY_BUFFER,buffer);
+  gl.enableVertexAttribArray(position); gl.enableVertexAttribArray(color);
+  gl.vertexAttribPointer(position,3,gl.FLOAT,false,28,0); gl.vertexAttribPointer(color,4,gl.FLOAT,false,28,12);
+  gl.enable(gl.DEPTH_TEST); gl.depthFunc(gl.LEQUAL); gl.enable(gl.CULL_FACE); gl.cullFace(gl.BACK);
+  let pending=false;
+  const isDetailPart = name => !/body_envelope|moving_jaw|mounting_shoe|offset_neck/.test(name);
+  function worldVertices(obj,opening) {return obj.vertices.map(v=>[v[0]+obj.side*opening,v[1],v[2]]);}
+  function draw() {
+    pending=false;
+    const state=find('[data-field="state"]').value,view=find('[data-field="view"]').value;
+    const opening=state==="open"?model.opening_m:0;
+    const width=canvas.clientWidth,height=canvas.clientHeight,dpr=Math.min(devicePixelRatio||1,1.5);
+    canvas.width=Math.round(width*dpr); canvas.height=Math.round(height*dpr);
+    gl.viewport(0,0,canvas.width,canvas.height); gl.clearColor(0,0,0,0); gl.clear(gl.COLOR_BUFFER_BIT|gl.DEPTH_BUFFER_BIT);
+    const colors={hardware:themeColor("--muted-foreground"),insert:themeColor("--blue"),pad:themeColor("--green"),wire:themeColor("--orange"),sleeve:themeColor("--foreground"),target:themeColor("--muted-foreground"),coupon:themeColor("--border")};
+    colors.sleeve=colors.hardware.map(value=>value*.45);
+    const objects=Object.entries(model.objects).filter(([name])=>view!=="pads"||isDetailPart(name));
+    const bounds=[[Infinity,Infinity,Infinity],[-Infinity,-Infinity,-Infinity]];
+    for(const [,obj] of objects) for(const move of [0,model.opening_m]) for(const p of worldVertices(obj,move))
+      for(let axis=0;axis<3;axis++) {bounds[0][axis]=Math.min(bounds[0][axis],p[axis]);bounds[1][axis]=Math.max(bounds[1][axis],p[axis]);}
+    const focus=bounds[0].map((v,i)=>(v+bounds[1][i])/2);
+    const [yaw,pitch]=view==="side"?[Math.PI/2,0]:[.82,.40];
+    const right=[Math.cos(yaw),Math.sin(yaw),0],up=[-Math.sin(yaw)*Math.sin(pitch),Math.cos(yaw)*Math.sin(pitch),Math.cos(pitch)],forward=cross(right,up);
+    const corners=[];
+    for(const x of [0,1]) for(const y of [0,1]) for(const z of [0,1]) corners.push([bounds[x][0],bounds[y][1],bounds[z][2]]);
+    const extent=axis=>Math.max(...corners.map(v=>dot(sub(v,focus),axis)))-Math.min(...corners.map(v=>dot(sub(v,focus),axis)));
+    const scale=.80*Math.min(width/Math.max(.001,extent(right)),height/Math.max(.001,extent(up)));
+    const project=v=>[dot(sub(v,focus),right)*2*scale/width,dot(sub(v,focus),up)*2*scale/height,-dot(sub(v,focus),forward)];
+    const vertices=[]; let maximum=0;
+    for(const [,obj] of objects) {
+      const world=worldVertices(obj,opening),points=world.map(project),base=colors[obj.color_key];
+      for(const p of points) maximum=Math.max(maximum,Math.abs(p[0]),Math.abs(p[1]));
+      for(const f of obj.faces) {
+        const n=unit(cross(sub(world[f[1]],world[f[0]]),sub(world[f[2]],world[f[0]])));
+        const shade=.55+.45*Math.max(0,dot(n,light));
+        for(const index of f) vertices.push(...points[index],...base.map(c=>c*shade),1);
+      }
+    }
+    const data=new Float32Array(vertices);
+    gl.bufferData(gl.ARRAY_BUFFER,data,gl.DYNAMIC_DRAW); gl.drawArrays(gl.TRIANGLES,0,data.length/7);
+    overlay.setAttribute("viewBox",`0 0 ${width} ${height}`);
+    const bar=.020*scale, y=height-15;
+    dimension.innerHTML=`<path d="M 14 ${y-4} V ${y} H ${14+bar} V ${y-4}"/><text x="14" y="${y-10}">20 mm</text>`;
+    find("[data-detail]").textContent=(view==="pads"?"接触部の拡大・本体を省略 ｜ ":"2本指・1駆動・本体15° ｜ ")+(state==="open"?"左右各7 mmの開放表示":"前後の外周輪郭を合わせた表示");
+    root.dataset.ready="true";
+    root.dataset.observation=JSON.stringify({state,view,width,height,objects:objects.length,pads:objects.filter(([,o])=>o.color_key==="pad").length,opening_per_jaw_m:opening,maximum_normalized_xy:maximum,finite_vertices:[...data].every(Number.isFinite),gl_error:gl.getError(),scale_px_per_m:scale,theme:colors});
+  }
+  function schedule(){if(!pending){pending=true;requestAnimationFrame(draw);}}
+  for(const select of root.querySelectorAll("select")) select.addEventListener("change",schedule);
+  new ResizeObserver(schedule).observe(canvas);
+  new MutationObserver(schedule).observe(document.documentElement,{attributes:true,attributeFilter:["class","style","data-theme"]});
+  matchMedia("(prefers-color-scheme: dark)").addEventListener("change",schedule);
+  document.fonts.ready.then(schedule); schedule();
+})();
+</script>

@@ -1,0 +1,26 @@
+{
+  "observed_at": "2026-09-17T03:46:18.385925+00:00",
+  "reference_fields_compared": [
+    "vertices",
+    "faces",
+    "color",
+    "category"
+  ],
+  "reference_objects_identical_to_pinned_T050": {
+    "reference_lug_6R6_uncrimped": true,
+    "comparison_wire": true,
+    "illustrative_sleeve": true,
+    "illustrative_busbar_coupon": true
+  },
+  "first_to_final_geometry_changes": [
+    "left_front_pad_seat",
+    "left_root_pad_seat",
+    "right_front_pad_seat",
+    "right_root_pad_seat"
+  ],
+  "change": "Four pad seats end at the rail underside instead of overlapping the lower 3 mm of the rail",
+  "pad_meshes_unchanged": true,
+  "saved_states_unchanged": true,
+  "scene_and_tool_geometry_added": false,
+  "physical_verdict": null
+}
