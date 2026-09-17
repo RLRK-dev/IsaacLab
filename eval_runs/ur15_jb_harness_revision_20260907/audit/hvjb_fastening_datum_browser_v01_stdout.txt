@@ -1,0 +1,1 @@
+FASTENING_DATUM_BROWSER_OK {"states":24,"errors":0}

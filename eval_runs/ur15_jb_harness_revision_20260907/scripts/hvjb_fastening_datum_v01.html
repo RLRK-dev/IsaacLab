@@ -1,0 +1,91 @@
+<!-- Copyright (c) 2022-2026, The Isaac Lab Project Developers. SPDX-License-Identifier: BSD-3-Clause -->
+<div id="hvjb-fastening-datum-v01">
+  <h3>締付工具の軸と取付側の平面</h3>
+  <div class="viz-controls">
+    <label class="form-label">メーカー例示工具
+      <select class="form-select" data-field="model">
+        <option value="SES1601">SES1601 · ねじ</option>
+        <option value="SEM2001">SEM2001 · ナット</option>
+        <option value="SEV2001">SEV2001 · 真空保持付きねじ</option>
+      </select>
+    </label>
+    <label class="form-label">見る範囲
+      <select class="form-select" data-field="view">
+        <option value="front">先端・取付側（後部は画面外）</option>
+        <option value="whole">全体</option>
+      </select>
+    </label>
+  </div>
+  <div class="datum-legend viz-row" data-layout>
+    <span><span class="datum-axis-key" aria-hidden="true"></span>点線：工具軸</span>
+    <span><span class="datum-plane-key" aria-hidden="true"></span>実線：取付側の平面</span>
+  </div>
+  <div class="datum-picture">
+    <img alt="" data-image>
+    <svg data-overlay role="img" aria-label="工具軸と取付側の平面の位置関係"></svg>
+  </div>
+  <div class="tabular-nums" aria-live="polite" data-detail></div>
+  <div class="text-small text-muted">保存姿勢／締結時のビット先端位置は未確定</div>
+  <script type="application/json" data-model>__MODEL_DATA__</script>
+</div>
+<style>
+  #hvjb-fastening-datum-v01 .datum-legend {margin-block:8px;}
+  #hvjb-fastening-datum-v01 .datum-axis-key,
+  #hvjb-fastening-datum-v01 .datum-plane-key {display:inline-block; width:22px; vertical-align:middle; margin-inline-end:6px;}
+  #hvjb-fastening-datum-v01 .datum-axis-key {border-top:2px dashed var(--viz-series-1);}
+  #hvjb-fastening-datum-v01 .datum-plane-key {border-top:3px solid var(--viz-series-2);}
+  #hvjb-fastening-datum-v01 .datum-picture {position:relative; margin-block:8px;}
+  #hvjb-fastening-datum-v01 [data-image] {display:block; width:100%; height:auto;}
+  #hvjb-fastening-datum-v01 [data-overlay] {position:absolute; inset:0; width:100%; height:100%; pointer-events:none;}
+  #hvjb-fastening-datum-v01 [data-detail] {margin-block:8px;}
+</style>
+<script>
+(() => {
+  "use strict";
+  const root = document.getElementById("hvjb-fastening-datum-v01");
+  const find = selector => root.querySelector(selector);
+  const data = JSON.parse(find("[data-model]").textContent);
+  const picture = find("[data-image]"), svg = find("[data-overlay]");
+  const ns = "http://www.w3.org/2000/svg";
+  let selected, frame;
+  function draw() {
+    if (!frame) return;
+    const width = picture.clientWidth, height = width * frame.pixels[1] / frame.pixels[0];
+    svg.setAttribute("viewBox", `0 0 ${width} ${height}`);
+    svg.replaceChildren();
+    const project = point => [(point[0]-frame.x_m[0])/(frame.x_m[1]-frame.x_m[0])*width,
+      (frame.z_m[1]-point[1])/(frame.z_m[1]-frame.z_m[0])*height];
+    function line(points, color, weight, dash = "") {
+      const endpoints = points.map(project);
+      const element = document.createElementNS(ns, "line");
+      for (const [key,value] of Object.entries({x1:endpoints[0][0],y1:endpoints[0][1],
+        x2:endpoints[1][0],y2:endpoints[1][1],stroke:color,"stroke-width":weight,"stroke-dasharray":dash})) {
+        element.setAttribute(key, value);
+      }
+      svg.append(element);
+      return endpoints;
+    }
+    line(selected.annotations.axis_line_xz_m, "var(--viz-series-1)", 1.8, "7 5");
+    line(selected.annotations.plane_line_xz_m, "var(--viz-series-2)", 3);
+    const dimension = line(selected.annotations.dimension_line_xz_m, "var(--foreground)", 1.2);
+    for (const [x,y] of dimension) {
+      const cap = document.createElementNS(ns, "line");
+      for (const [key,value] of Object.entries({x1:x-5,y1:y,x2:x+5,y2:y,stroke:"var(--foreground)","stroke-width":1.2})) cap.setAttribute(key,value);
+      svg.append(cap);
+    }
+  }
+  function update() {
+    const model = find('[data-field="model"]').value, view = find('[data-field="view"]').value;
+    selected = data.models[model]; frame = selected.frames[view];
+    picture.width = frame.pixels[0]; picture.height = frame.pixels[1]; picture.src = frame.data_url;
+    picture.alt = `${model}の保存CAD。点線が工具軸、実線が取付側の平面。垂直距離${selected.distance_mm.toFixed(1)} mm。${view === "front" ? "後部は画面外。" : "全体図。"}`;
+    find("[data-detail]").textContent = `${model} · 軸から取付側の平面まで ${selected.distance_mm.toFixed(1)} mm`;
+    root.dataset.observation = JSON.stringify({model,view,pixels:frame.pixels,png_sha256:frame.png_sha256,
+      webp_sha256:frame.webp_sha256,distance_mm:selected.distance_mm,annotations:selected.annotations});
+    draw(); root.dataset.ready = "true";
+  }
+  root.querySelectorAll("select").forEach(select => select.addEventListener("change", update));
+  new ResizeObserver(draw).observe(find(".datum-picture"));
+  update();
+})();
+</script>

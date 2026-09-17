@@ -1,0 +1,15 @@
+ANALYTICAL_CAD_SAVED SES1601
+Traceback (most recent call last):
+  File "/home/rlrk/IsaacLab-op040/eval_runs/ur15_jb_harness_revision_20260907/scripts/extract_hvjb_fastening_surfaces_v01.py", line 178, in <module>
+    main()
+  File "/home/rlrk/IsaacLab-op040/eval_runs/ur15_jb_harness_revision_20260907/scripts/extract_hvjb_fastening_surfaces_v01.py", line 150, in main
+    report, rows = _convert(source, output, cascadio)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/rlrk/IsaacLab-op040/eval_runs/ur15_jb_harness_revision_20260907/scripts/extract_hvjb_fastening_surfaces_v01.py", line 110, in _convert
+    rows = _surface_rows(scene)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/rlrk/IsaacLab-op040/eval_runs/ur15_jb_harness_revision_20260907/scripts/extract_hvjb_fastening_surfaces_v01.py", line 51, in _surface_rows
+    primitives = mesh.metadata["cascadio"]["brep_primitives"]
+                 ~~~~~~~~~~~~~^^^^^^^^^^^^
+KeyError: 'cascadio'
+[INFO] Using Python: "/home/rlrk/src/ur15-line-render/venv/bin/python"
