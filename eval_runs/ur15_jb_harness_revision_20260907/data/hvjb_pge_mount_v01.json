@@ -1,0 +1,123 @@
+{
+  "revision": "v01",
+  "observed_date": "2026-09-17",
+  "status": "interface_transcription_and_finger_concept_only",
+  "previous_comparison": {
+    "path": "data/hvjb_compact_hand_v01.json",
+    "sha256": "60b96be53abc061d67935f548f154315363f72639599fe3aa88b99ee9ce00294"
+  },
+  "candidate": "PGE-5-26_without_brake",
+  "adopted_hardware": null,
+  "sources": [
+    {
+      "id": "DH_PGE_PRECICON",
+      "author": "DH-Robotics",
+      "host": "Precicon; distributor-hosted manufacturer document",
+      "url": "https://www.precicon.com.sg/wp-content/uploads/2022/12/PGE-Series-Slim-type-Electric-Parallel-Gripper_DH-Robotics_compressed.pdf",
+      "local_path": "references/hvjb_pge_interface_20260917/PGE_precicon_mirror.pdf",
+      "sha256": "dcced833c2c4f1d92071ff9ef39d7b0dde4c654c76a6af71d2474ab301f45c65",
+      "pdf_pages": 8,
+      "used_pdf_page_index": 2,
+      "pdf_creation_date": "2022-11-18",
+      "pdf_modification_date": "2022-12-08",
+      "manufacturer_revision_identifier": null,
+      "drawing_visual_inspection_completed": true,
+      "same_bytes_as_official_EN2307": null
+    },
+    {
+      "id": "DH_PGE_NEOBOTIX",
+      "author": "DH-Robotics",
+      "host": "Neobotix; distributor-hosted manufacturer document",
+      "url": "https://www.neobotix-roboter.de/fileadmin/user_upload/PGE-Gripper_Datasheet.pdf",
+      "local_path": "references/hvjb_pge_interface_20260917/PGE_neobotix_mirror.pdf",
+      "sha256": "5ba0c59ff8fbd52b06ce9ba3c80ee66d993aca0cf60a99cf9a203cffd47f6097",
+      "pdf_pages": 7,
+      "used_pdf_page_index": 2,
+      "printed_page": "09",
+      "pdf_creation_date": "2022-03-11",
+      "manufacturer_revision_identifier": null,
+      "drawing_visual_inspection_completed": true,
+      "use": "Cross-check topology only; older speed and tolerance values are not merged into the newer drawing"
+    }
+  ],
+  "interface": {
+    "source_id": "DH_PGE_PRECICON",
+    "scope": "One moving jaw end face, without-brake drawing; not an arm flange",
+    "coordinate_definition": "u is horizontal and v vertical in the published end view; origin at the M3 axis",
+    "nominal_face_size_mm": [14.0, 14.0],
+    "screw_axes_per_jaw": 1,
+    "screw_axes_total_two_jaws": 2,
+    "screw_designation": "M3",
+    "thread_depth_mm": 4.0,
+    "screw_axis_uv_mm": [0.0, 0.0],
+    "locator_centers_uv_mm": [[-4.0, 0.0], [4.0, 0.0]],
+    "locator_center_spacing_mm": 8.0,
+    "round_locator_diameter_mm": 2.5,
+    "round_locator_tolerance_mm": [0.0, 0.02],
+    "locator_depth_mm": 3.2,
+    "other_locator": "Published end view shows a relieved/elongated locator on the opposite side of M3",
+    "other_locator_callouts": ["2-2.90", "2-phi2.50 +0.02/0 Depth3.2"],
+    "other_locator_tolerance_profile_transcribed_for_manufacturing": false,
+    "mounting_screw_torque_Nm": null,
+    "screw_engagement_selected_mm": null,
+    "mating_pin_fit_selected": null,
+    "adapter_clearance_hole_selected_mm": null,
+    "all_source_chamfers_and_tolerances_modeled": false
+  },
+  "finger_concept": {
+    "finger_count": 2,
+    "actuator_count": 1,
+    "motion": "Opposed lateral parallel closing",
+    "parts_per_finger": [
+      "Mounting shoe located against the moving jaw end face",
+      "Rigid offset carrier with two separate pad seats",
+      "Replaceable terminal-facing sleeve pad",
+      "Replaceable root-jacket pad"
+    ],
+    "fastening_concept": "One M3 screw per jaw plus locating features; screw and pin selections remain open",
+    "contact_count_total": 4,
+    "metal_terminal_contact": false,
+    "upper_hold_down": false,
+    "passive_pad_conformity": "In the lateral closing direction; material, travel and stiffness remain unselected",
+    "old_T050_40_mm_setback_and_15_degree_default_changed": false,
+    "clockwise_body_tilt_initial_intent_deg": 15.0,
+    "new_body_pose_from_old_setback_derived": false,
+    "front_to_root_spacing_mm": null,
+    "projection_from_manufacturer_jaw_datum_mm": null,
+    "carrier_section_mm": null,
+    "carrier_mass_kg": null,
+    "pad_groove_diameters_mm": [null, null],
+    "grip_command_N": null,
+    "schematic": "Side view shows the nearer finger only; both fingers are retained in the concept, with no upper pressing motion"
+  },
+  "drawing_constraints_not_acceptance": {
+    "static_axial_load_N": 50.0,
+    "loading_moments_Nm": {"Mx": 0.3, "My": 0.25, "Mz": 0.3},
+    "load_basis": "Catalogue static load and moment annotations; not assigned contact forces or verified combined-load limits",
+    "gripper_supply_cable_drawing_reserve_mm": 100.0,
+    "gripper_supply_cable_drawing_bend_radius_mm": 50.0,
+    "cable_scope": "Gripper electrical lead only; not Ampere HV wire, the prior 56 mm line cable or a selected moving-cable route",
+    "custom_finger_max_projection_mm": null,
+    "custom_finger_mass_limit_kg": null,
+    "finger_length_derived_by_dividing_moment_by_force": false
+  },
+  "source_boundaries": [
+    "Direct downloads from DH returned HTTP 403; public manufacturer-authored mirrors were acquired instead",
+    "Official integrated manual 3.2 was discoverable, but its image-only pages were not locally acquired or visually inspected",
+    "Precicon PDF metadata dates do not prove a current manufacturing revision",
+    "Neobotix speed is 0.2 s, Precicon and live model table are 0.3 s; no process time is derived",
+    "Locator tolerance changed between these documents; the older +0.01/+0.03 values are not combined with the newer 0/+0.02",
+    "14 mm is the jaw face dimension, not a two-bolt pitch; 2-M3 counts both jaws",
+    "Brake state, power-loss retention and product lifecycle remain unconfirmed for hardware adoption"
+  ],
+  "next_inputs": [
+    "Verified individual target wire and sleeve dimensions, grasp bands and allowed pressure",
+    "Full tightening-tool envelope and intended assembly-stage surrounding geometry",
+    "Manufacturer custom-finger projection, mass and combined-load conditions",
+    "Mating pin fit, screw engagement and torque, adapter and robot-side interface",
+    "Continuous support and lateral opening path for both fingers"
+  ],
+  "manufacturing_release": false,
+  "arm_motion_created": false,
+  "formal_physical_verdict": null
+}

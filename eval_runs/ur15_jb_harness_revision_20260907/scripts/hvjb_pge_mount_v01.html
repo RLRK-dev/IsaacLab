@@ -1,0 +1,141 @@
+<div id="hvjb-pge-mount-20260917">
+  <div class="viz-row">
+    <span>PGE-5-26の専用指 · 比較案</span>
+    <div class="viz-controls" aria-label="見る部分">
+      <button type="button" class="btn" data-mount-view="finger" aria-pressed="true">指とパッド</button>
+      <button type="button" class="btn" data-mount-view="interface" aria-pressed="false">取付面</button>
+    </div>
+  </div>
+  <div class="text-small" data-view-detail aria-live="polite">2本指・1駆動 · 手前の指を側面から表示</div>
+  <svg role="img" aria-label="専用指の構成とPGEの取付面"></svg>
+  <div class="viz-row text-small" data-view-legend></div>
+</div>
+<style>
+  #hvjb-pge-mount-20260917 svg { display: block; width: 100%; }
+  #hvjb-pge-mount-20260917 svg text { fill: var(--foreground); font-size: 12px; font-weight: 400; }
+  #hvjb-pge-mount-20260917 .outline { fill: var(--muted); stroke: var(--foreground); stroke-width: 1; }
+  #hvjb-pge-mount-20260917 .carrier { fill: none; stroke: var(--blue); stroke-linecap: round; stroke-linejoin: round; }
+  #hvjb-pge-mount-20260917 .pad { fill: var(--green); fill-opacity: .32; stroke: var(--green); stroke-width: 2; }
+  #hvjb-pge-mount-20260917 .lead { fill: none; stroke: var(--muted-foreground); stroke-width: 1; }
+  #hvjb-pge-mount-20260917 .dimension { fill: none; stroke: var(--foreground); stroke-width: 1; }
+  #hvjb-pge-mount-20260917 .locator { fill: var(--background); stroke: var(--blue); stroke-width: 2; }
+  #hvjb-pge-mount-20260917 .screw { fill: var(--background); stroke: var(--foreground); stroke-width: 1.5; }
+</style>
+<script>
+(() => {
+  const root = document.getElementById('hvjb-pge-mount-20260917');
+  const svg = root.querySelector('svg');
+  const buttons = [...root.querySelectorAll('[data-mount-view]')];
+  const ns = 'http://www.w3.org/2000/svg';
+  const dimensions = {face: 14, locatorPitch: 8, locatorDiameter: 2.5, threadDepth: 4, locatorDepth: 3.2};
+  let view = 'finger';
+  function node(parent, tag, attrs, content) {
+    const result = document.createElementNS(ns, tag);
+    Object.entries(attrs).forEach(([key, value]) => result.setAttribute(key, value));
+    if (content !== undefined) result.textContent = content;
+    parent.append(result);
+    return result;
+  }
+  function label(x, y, content, anchor = 'start') {
+    return node(svg, 'text', {x, y, 'text-anchor': anchor, 'data-label': ''}, content);
+  }
+  function path(d, cls, extra = {}) { return node(svg, 'path', {d, class: cls, ...extra}); }
+  function dimension(x1, y1, x2, y2) {
+    path(`M${x1},${y1} L${x2},${y2}`, 'dimension');
+    if (y1 === y2) path(`M${x1},${y1 - 4} v8 M${x2},${y2 - 4} v8`, 'dimension');
+    else path(`M${x1 - 4},${y1} h8 M${x2 - 4},${y2} h8`, 'dimension');
+  }
+  function drawFinger(w) {
+    const front = w * .27, rear = w * .66, mount = w * .73;
+    const cableY = 293, carrierY = 236, faceY = 181;
+    node(svg, 'title', {}, '2本指のうち手前側だけを示す構造図。被覆を横から挟む。縮尺はない。');
+    label(10, 25, '側面 · 構造図');
+    label(w - 10, 25, '本体は端子から離す向き', 'end');
+    const body = node(svg, 'g', {transform: `rotate(15 ${mount} ${faceY})`, 'data-body-tilt-deg': 15});
+    node(body, 'rect', {x: mount - 22, y: faceY - 108, width: 44, height: 96, rx: 3, class: 'outline'});
+    node(body, 'rect', {x: mount - 9, y: faceY - 12, width: 18, height: 12, class: 'outline'});
+    node(body, 'rect', {x: mount - 10, y: faceY, width: 20, height: 6, fill: 'var(--blue)', 'data-mount-shoe': ''});
+    path(`M${mount - 1.5},${faceY + 5} L${mount - 7},${carrierY} L${front},${carrierY} L${front},${cableY}`, 'carrier', {'stroke-width': 9, 'data-visible-finger': ''});
+    path(`M${rear},${carrierY} L${rear},${cableY}`, 'carrier', {'stroke-width': 9});
+    const wireStart = front + 15;
+    node(svg, 'rect', {x: wireStart, y: cableY - 8, width: w - wireStart - 14, height: 16, rx: 7, fill: 'var(--orange)', 'data-wire': ''});
+    node(svg, 'rect', {x: front - 15, y: cableY - 10, width: 32, height: 20, rx: 3, fill: 'var(--muted-foreground)', 'data-sleeve': ''});
+    const terminalX = Math.max(26, front - 46);
+    node(svg, 'rect', {x: terminalX, y: cableY - 5, width: front - 15 - terminalX, height: 10, class: 'outline'});
+    node(svg, 'ellipse', {cx: terminalX - 7, cy: cableY, rx: 15, ry: 9, class: 'outline'});
+    node(svg, 'ellipse', {cx: terminalX - 9, cy: cableY, rx: 4, ry: 3, fill: 'var(--background)', stroke: 'var(--foreground)'});
+    for (const [name, x] of [['sleeve', front], ['root', rear]]) {
+      node(svg, 'rect', {x: x - 12, y: cableY - 15, width: 24, height: 30, rx: 5, class: 'pad', 'data-visible-pad': name});
+    }
+    label(w - 10, 52, '傾斜15°の初期意図', 'end');
+    label(10, 123, '剛性キャリア');
+    path(`M10,131 H${front - 25} L${front - 6},${carrierY}`, 'lead');
+    label(10, 165, '交換式の前パッド');
+    path(`M10,173 H${front - 29} L${front - 13},${cableY - 17}`, 'lead');
+    label(w - 10, 218, '取付座', 'end');
+    path(`M${w - 52},210 L${mount + 5},${faceY + 6}`, 'lead');
+    label(w - 10, 327, '交換式の根元パッド', 'end');
+    path(`M${w - 105},316 L${rear + 13},${cableY + 9}`, 'lead');
+    label(10, 355, '金属端子は挟まない');
+    path(`M${terminalX - 8},340 V${cableY + 12}`, 'lead');
+    dimension(front, 382, rear, 382);
+    label((front + rear) / 2, 404, 'パッド間隔・溝径：実寸待ち', 'middle');
+    root.querySelector('[data-view-legend]').textContent = '前後の被覆を横から保持 · この図は縮尺なし';
+  }
+  function drawInterface(w) {
+    node(svg, 'title', {}, 'PGE-5-26片爪の端面。14ミリ角。中央M3一本、位置決め部の中心間隔8ミリ。');
+    const side = Math.min(196, w - 152), unit = side / dimensions.face;
+    const cx = w / 2, cy = 164, half = side / 2;
+    const left = cx - half, top = cy - half, pitch = dimensions.locatorPitch * unit;
+    const diameter = dimensions.locatorDiameter * unit;
+    label(10, 22, '片爪の端面 · 公開寸法図から');
+    const face = node(svg, 'rect', {x: left, y: top, width: side, height: side, class: 'outline',
+      'data-jaw-face-mm': dimensions.face});
+    face.dataset.screwCount = 1;
+    path(`M${left - 8},${cy} H${cx + half + 8} M${cx},${top - 7} V${cy + half + 7}`, 'lead', {'stroke-dasharray': '3 3'});
+    const slotWidth = diameter * 1.16;
+    node(svg, 'rect', {x: cx - pitch / 2 - slotWidth / 2, y: cy - diameter / 2, width: slotWidth, height: diameter,
+      rx: diameter / 2, class: 'locator', 'data-locator': 'relieved', 'data-u-mm': -4});
+    node(svg, 'circle', {cx: cx + pitch / 2, cy, r: diameter / 2, class: 'locator',
+      'data-locator': 'round', 'data-u-mm': 4, 'data-diameter-mm': dimensions.locatorDiameter});
+    node(svg, 'circle', {cx, cy, r: 1.5 * unit, class: 'screw', 'data-jaw-screw': 'M3'});
+    node(svg, 'path', {d: `M${cx - unit},${cy} h${unit * 2} M${cx},${cy - unit} v${unit * 2}`, class: 'dimension'});
+    dimension(left, top - 18, cx + half, top - 18);
+    label(cx, top - 28, '14 mm', 'middle');
+    dimension(left - 18, top, left - 18, cy + half);
+    label(left - 26, cy - 16, '14', 'end');
+    const pitchY = cy + half + 29;
+    path(`M${cx - pitch / 2},${cy + diameter / 2 + 4} V${pitchY + 4} M${cx + pitch / 2},${cy + diameter / 2 + 4} V${pitchY + 4}`, 'lead');
+    dimension(cx - pitch / 2, pitchY, cx + pitch / 2, pitchY);
+    label(cx, pitchY + 20, '中心間 8 mm', 'middle');
+    label(w - 8, 72, 'M3 × 1', 'end');
+    path(`M${w - 12},80 H${cx + half + 10} L${cx + unit},${cy - unit}`, 'lead');
+    label(w - 8, 221, '丸穴', 'end');
+    path(`M${w - 12},228 H${cx + half + 10} L${cx + pitch / 2 + diameter / 2},${cy + 3}`, 'lead');
+    label(8, 249, '逃げ穴');
+    path(`M10,256 H${left - 11} L${cx - pitch / 2 - slotWidth / 2},${cy + 4}`, 'lead');
+    label(10, 338, 'ねじ深さ 4 mm');
+    label(w - 10, 338, '位置決め深さ 3.2 mm', 'end');
+    label(10, 367, '丸穴 φ2.50（0 / +0.02 mm）');
+    root.querySelector('[data-view-legend]').textContent = 'ねじ1本＋位置決め部／片爪 · 相手ピン・ねじ長は未選定';
+  }
+  function draw() {
+    const width = Math.max(280, Math.round(root.clientWidth));
+    svg.replaceChildren();
+    svg.setAttribute('viewBox', `0 0 ${width} 418`);
+    svg.style.height = '418px';
+    root.dataset.view = view;
+    root.dataset.ready = 'true';
+    root.dataset.fingerCount = '2';
+    root.dataset.actuatorCount = '1';
+    root.querySelector('[data-view-detail]').textContent = view === 'finger'
+      ? '2本指・1駆動 · 手前の指を側面から表示'
+      : '片爪につきM3ねじ1本 · 位置決め部はねじの両脇';
+    buttons.forEach(button => button.setAttribute('aria-pressed', String(button.dataset.mountView === view)));
+    if (view === 'finger') drawFinger(width); else drawInterface(width);
+  }
+  buttons.forEach(button => button.addEventListener('click', () => { view = button.dataset.mountView; draw(); }));
+  new ResizeObserver(draw).observe(root);
+  draw();
+})();
+</script>

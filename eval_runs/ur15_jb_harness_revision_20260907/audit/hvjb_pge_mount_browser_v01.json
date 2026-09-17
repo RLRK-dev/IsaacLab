@@ -1,0 +1,191 @@
+{
+  "observed_at": "2026-09-17T02:28:52.344Z",
+  "preview_sha256": "13b6ce761a25ca118eddea92ef74b3575a6232e81e4a648626aebaeb325e8831",
+  "spec_sha256": "9d5e2b6010ed4f0262b274ed3f536a0f4b991005ac4f02b3d6000fff7fdaf14a",
+  "results": [
+    {
+      "requested_width": 736,
+      "scheme": "light",
+      "state": "finger",
+      "width": 736,
+      "documentWidth": 736,
+      "fingers": 2,
+      "actuators": 1,
+      "visibleFinger": 1,
+      "visiblePads": 2,
+      "pressed": [
+        "finger"
+      ],
+      "faceMm": 0,
+      "screws": 0,
+      "locatorCenters": [],
+      "circleDiameter": 0,
+      "outside": [],
+      "overlap": []
+    },
+    {
+      "requested_width": 736,
+      "scheme": "light",
+      "state": "interface",
+      "width": 736,
+      "documentWidth": 736,
+      "fingers": 2,
+      "actuators": 1,
+      "visibleFinger": 0,
+      "visiblePads": 0,
+      "pressed": [
+        "interface"
+      ],
+      "faceMm": 14,
+      "screws": 1,
+      "locatorCenters": [
+        -4,
+        4
+      ],
+      "circleDiameter": 2.5,
+      "outside": [],
+      "overlap": []
+    },
+    {
+      "requested_width": 736,
+      "scheme": "dark",
+      "state": "finger",
+      "width": 736,
+      "documentWidth": 736,
+      "fingers": 2,
+      "actuators": 1,
+      "visibleFinger": 1,
+      "visiblePads": 2,
+      "pressed": [
+        "finger"
+      ],
+      "faceMm": 0,
+      "screws": 0,
+      "locatorCenters": [],
+      "circleDiameter": 0,
+      "outside": [],
+      "overlap": []
+    },
+    {
+      "requested_width": 736,
+      "scheme": "dark",
+      "state": "interface",
+      "width": 736,
+      "documentWidth": 736,
+      "fingers": 2,
+      "actuators": 1,
+      "visibleFinger": 0,
+      "visiblePads": 0,
+      "pressed": [
+        "interface"
+      ],
+      "faceMm": 14,
+      "screws": 1,
+      "locatorCenters": [
+        -4,
+        4
+      ],
+      "circleDiameter": 2.5,
+      "outside": [],
+      "overlap": []
+    },
+    {
+      "requested_width": 320,
+      "scheme": "light",
+      "state": "finger",
+      "width": 320,
+      "documentWidth": 320,
+      "fingers": 2,
+      "actuators": 1,
+      "visibleFinger": 1,
+      "visiblePads": 2,
+      "pressed": [
+        "finger"
+      ],
+      "faceMm": 0,
+      "screws": 0,
+      "locatorCenters": [],
+      "circleDiameter": 0,
+      "outside": [],
+      "overlap": []
+    },
+    {
+      "requested_width": 320,
+      "scheme": "light",
+      "state": "interface",
+      "width": 320,
+      "documentWidth": 320,
+      "fingers": 2,
+      "actuators": 1,
+      "visibleFinger": 0,
+      "visiblePads": 0,
+      "pressed": [
+        "interface"
+      ],
+      "faceMm": 14,
+      "screws": 1,
+      "locatorCenters": [
+        -4,
+        4
+      ],
+      "circleDiameter": 2.5,
+      "outside": [],
+      "overlap": []
+    },
+    {
+      "requested_width": 320,
+      "scheme": "dark",
+      "state": "finger",
+      "width": 320,
+      "documentWidth": 320,
+      "fingers": 2,
+      "actuators": 1,
+      "visibleFinger": 1,
+      "visiblePads": 2,
+      "pressed": [
+        "finger"
+      ],
+      "faceMm": 0,
+      "screws": 0,
+      "locatorCenters": [],
+      "circleDiameter": 0,
+      "outside": [],
+      "overlap": []
+    },
+    {
+      "requested_width": 320,
+      "scheme": "dark",
+      "state": "interface",
+      "width": 320,
+      "documentWidth": 320,
+      "fingers": 2,
+      "actuators": 1,
+      "visibleFinger": 0,
+      "visiblePads": 0,
+      "pressed": [
+        "interface"
+      ],
+      "faceMm": 14,
+      "screws": 1,
+      "locatorCenters": [
+        -4,
+        4
+      ],
+      "circleDiameter": 2.5,
+      "outside": [],
+      "overlap": []
+    }
+  ],
+  "images": {
+    "736_light_finger.png": "065ff507e74040636487bf58b6bf3891ec5e82d5d0d07392d7b610e390b3be94",
+    "736_light_interface.png": "ee942dfbc93f333d0ffa7ad0abf2c90b5e71b3adb8b930d5551b3474191787d3",
+    "736_dark_finger.png": "095fe143923a332985e7ef2ffb7ec421b7bae121ac21fd47dd665803cfb635aa",
+    "736_dark_interface.png": "1ab69af035a9bf329091425f44ee1577f267c64436bc2fd3b02cbed2f463265a",
+    "320_light_finger.png": "0ccef699072aadc829fcbcbcdcdac8b876c7a2729f198d7635f47fac531c29f8",
+    "320_light_interface.png": "cca44cbe3f30187aca89808f91542b18f989458f7fb6cf7e168de8595cc09e6b",
+    "320_dark_finger.png": "c5e7400dabc3d5a8eb1319f6dd6e1e3f8acf257e0254cfa16c6a8f1fe267c840",
+    "320_dark_interface.png": "22e22438ef7124cee461bb4940f1de75aa9664b1afbfa61cf48d5a87733d723d"
+  },
+  "javascript_errors": [],
+  "scope": "UI, source correspondence and label bounds only; no physical verdict"
+}

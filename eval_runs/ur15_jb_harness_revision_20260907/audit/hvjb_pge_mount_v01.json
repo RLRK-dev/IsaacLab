@@ -1,0 +1,111 @@
+{
+  "observed_at": "2026-09-17T02:30:52.377971+00:00",
+  "auditor_sha256": "3f42e9f8b6a120fd4bd1cf527588941eae2d5eb8c622b09a04ad84445e9ad744",
+  "spec_sha256": "9d5e2b6010ed4f0262b274ed3f536a0f4b991005ac4f02b3d6000fff7fdaf14a",
+  "previous_comparison_sha256": "60b96be53abc061d67935f548f154315363f72639599fe3aa88b99ee9ce00294",
+  "baseline_before": {
+    "data/hand_working_default_v01.json": "1cf2a19f24f753eb44b4e96fd7e73ee8bdfe5b97367a77bf8cfa0cf30a4d107c",
+    "data/hvjb_photo_model_v03_p03.json.gz": "6687b12ec1b3db24babf75f8fef1b6f6bc123c288b713824b9763d9214553ba6",
+    "data/hvjb_photo_correspondence_v03_p01.json": "6c5b7cb9bab859a33c8f5d5cd5429ce9f06fb0951b8a8fa4ae2a31ad99052ca0",
+    "UR15_JB_photo_correspondence_v03_p03.blend": "5205d3aa2c2b99f7df6f538d17b3d3ca36ba8208c546858ee8ec8a5a3564a282",
+    "data/hvjb_robot_selection_v01.json": "ad1d0fc6ad2f0c9d36f4d9839faf559ce80aa9ffb4965174facef944f1a58db8",
+    "data/hvjb_task_occupancy_v01.json": "4da5b53687b05cd2cd1d294cf57121abde6ee9d04b19ed0a37ef2fb2a4d79df9"
+  },
+  "baseline_after": {
+    "data/hand_working_default_v01.json": "1cf2a19f24f753eb44b4e96fd7e73ee8bdfe5b97367a77bf8cfa0cf30a4d107c",
+    "data/hvjb_photo_model_v03_p03.json.gz": "6687b12ec1b3db24babf75f8fef1b6f6bc123c288b713824b9763d9214553ba6",
+    "data/hvjb_photo_correspondence_v03_p01.json": "6c5b7cb9bab859a33c8f5d5cd5429ce9f06fb0951b8a8fa4ae2a31ad99052ca0",
+    "UR15_JB_photo_correspondence_v03_p03.blend": "5205d3aa2c2b99f7df6f538d17b3d3ca36ba8208c546858ee8ec8a5a3564a282",
+    "data/hvjb_robot_selection_v01.json": "ad1d0fc6ad2f0c9d36f4d9839faf559ce80aa9ffb4965174facef944f1a58db8",
+    "data/hvjb_task_occupancy_v01.json": "4da5b53687b05cd2cd1d294cf57121abde6ee9d04b19ed0a37ef2fb2a4d79df9"
+  },
+  "baseline_unchanged": true,
+  "sources": [
+    {
+      "id": "DH_PGE_PRECICON",
+      "author": "DH-Robotics",
+      "host": "Precicon; distributor-hosted manufacturer document",
+      "url": "https://www.precicon.com.sg/wp-content/uploads/2022/12/PGE-Series-Slim-type-Electric-Parallel-Gripper_DH-Robotics_compressed.pdf",
+      "local_path": "references/hvjb_pge_interface_20260917/PGE_precicon_mirror.pdf",
+      "sha256": "dcced833c2c4f1d92071ff9ef39d7b0dde4c654c76a6af71d2474ab301f45c65",
+      "pdf_pages": 8,
+      "used_pdf_page_index": 2,
+      "pdf_creation_date": "2022-11-18",
+      "pdf_modification_date": "2022-12-08",
+      "manufacturer_revision_identifier": null,
+      "drawing_visual_inspection_completed": true,
+      "same_bytes_as_official_EN2307": null,
+      "observed_sha256": "dcced833c2c4f1d92071ff9ef39d7b0dde4c654c76a6af71d2474ab301f45c65",
+      "bytes": 810484
+    },
+    {
+      "id": "DH_PGE_NEOBOTIX",
+      "author": "DH-Robotics",
+      "host": "Neobotix; distributor-hosted manufacturer document",
+      "url": "https://www.neobotix-roboter.de/fileadmin/user_upload/PGE-Gripper_Datasheet.pdf",
+      "local_path": "references/hvjb_pge_interface_20260917/PGE_neobotix_mirror.pdf",
+      "sha256": "5ba0c59ff8fbd52b06ce9ba3c80ee66d993aca0cf60a99cf9a203cffd47f6097",
+      "pdf_pages": 7,
+      "used_pdf_page_index": 2,
+      "printed_page": "09",
+      "pdf_creation_date": "2022-03-11",
+      "manufacturer_revision_identifier": null,
+      "drawing_visual_inspection_completed": true,
+      "use": "Cross-check topology only; older speed and tolerance values are not merged into the newer drawing",
+      "observed_sha256": "5ba0c59ff8fbd52b06ce9ba3c80ee66d993aca0cf60a99cf9a203cffd47f6097",
+      "bytes": 504228
+    }
+  ],
+  "selected_plan": "S5_AB",
+  "selected_assembly_arm_count": 5,
+  "workcard_count": 20,
+  "interface": {
+    "source_id": "DH_PGE_PRECICON",
+    "scope": "One moving jaw end face, without-brake drawing; not an arm flange",
+    "coordinate_definition": "u is horizontal and v vertical in the published end view; origin at the M3 axis",
+    "nominal_face_size_mm": [
+      14.0,
+      14.0
+    ],
+    "screw_axes_per_jaw": 1,
+    "screw_axes_total_two_jaws": 2,
+    "screw_designation": "M3",
+    "thread_depth_mm": 4.0,
+    "screw_axis_uv_mm": [
+      0.0,
+      0.0
+    ],
+    "locator_centers_uv_mm": [
+      [
+        -4.0,
+        0.0
+      ],
+      [
+        4.0,
+        0.0
+      ]
+    ],
+    "locator_center_spacing_mm": 8.0,
+    "round_locator_diameter_mm": 2.5,
+    "round_locator_tolerance_mm": [
+      0.0,
+      0.02
+    ],
+    "locator_depth_mm": 3.2,
+    "other_locator": "Published end view shows a relieved/elongated locator on the opposite side of M3",
+    "other_locator_callouts": [
+      "2-2.90",
+      "2-phi2.50 +0.02/0 Depth3.2"
+    ],
+    "other_locator_tolerance_profile_transcribed_for_manufacturing": false,
+    "mounting_screw_torque_Nm": null,
+    "screw_engagement_selected_mm": null,
+    "mating_pin_fit_selected": null,
+    "adapter_clearance_hole_selected_mm": null,
+    "all_source_chamfers_and_tolerances_modeled": false
+  },
+  "interface_basis": "Manual transcription from inspected PDF; not specimen measurement or manufacturer CAD",
+  "manufacturing_release": false,
+  "formal_physical_verdict": null,
+  "scope": "File identity and source transcription only; no force, trajectory or physical classification"
+}
