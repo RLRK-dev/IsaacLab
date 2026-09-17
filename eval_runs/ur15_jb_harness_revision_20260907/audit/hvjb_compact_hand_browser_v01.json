@@ -1,0 +1,275 @@
+{
+  "observed_at": "2026-09-17T00:41:35.008Z",
+  "preview_sha256": "d9b58fe626757099ad1a58badfed96dbc1fa488cd0b9eb4c87e795679a647c18",
+  "spec_sha256": "60b96be53abc061d67935f548f154315363f72639599fe3aa88b99ee9ce00294",
+  "results": [
+    {
+      "requested_width": 736,
+      "scheme": "light",
+      "state": "hold",
+      "width": 736,
+      "documentWidth": 736,
+      "fingers": 2,
+      "pads": 4,
+      "opening": [
+        0,
+        0
+      ],
+      "pressed": [
+        "hold"
+      ],
+      "bodies": [
+        {
+          "id": "PGE-5-26_without_brake",
+          "width": 55,
+          "depth": 26,
+          "text": "PGE-5-26第一比較・ブレーキなしの寸法55 × 26 mm軸方向長さ 95 mm片爪 0.8〜5 N爪間の全変化 26 mm"
+        },
+        {
+          "id": "EGP_25_N_N_B",
+          "width": 26.5,
+          "depth": 18,
+          "text": "EGP 25-N-N-B最大指長 32 mm・張り出し制限あり26.5 × 18 mm軸方向長さ 72.7 mm両爪合計 20〜40 N爪間の全変化 6 mm"
+        }
+      ],
+      "outside": [],
+      "overlap": []
+    },
+    {
+      "requested_width": 736,
+      "scheme": "light",
+      "state": "open",
+      "width": 736,
+      "documentWidth": 736,
+      "fingers": 2,
+      "pads": 4,
+      "opening": [
+        28,
+        28
+      ],
+      "pressed": [
+        "open"
+      ],
+      "bodies": [
+        {
+          "id": "PGE-5-26_without_brake",
+          "width": 55,
+          "depth": 26,
+          "text": "PGE-5-26第一比較・ブレーキなしの寸法55 × 26 mm軸方向長さ 95 mm片爪 0.8〜5 N爪間の全変化 26 mm"
+        },
+        {
+          "id": "EGP_25_N_N_B",
+          "width": 26.5,
+          "depth": 18,
+          "text": "EGP 25-N-N-B最大指長 32 mm・張り出し制限あり26.5 × 18 mm軸方向長さ 72.7 mm両爪合計 20〜40 N爪間の全変化 6 mm"
+        }
+      ],
+      "outside": [],
+      "overlap": []
+    },
+    {
+      "requested_width": 736,
+      "scheme": "dark",
+      "state": "hold",
+      "width": 736,
+      "documentWidth": 736,
+      "fingers": 2,
+      "pads": 4,
+      "opening": [
+        0,
+        0
+      ],
+      "pressed": [
+        "hold"
+      ],
+      "bodies": [
+        {
+          "id": "PGE-5-26_without_brake",
+          "width": 55,
+          "depth": 26,
+          "text": "PGE-5-26第一比較・ブレーキなしの寸法55 × 26 mm軸方向長さ 95 mm片爪 0.8〜5 N爪間の全変化 26 mm"
+        },
+        {
+          "id": "EGP_25_N_N_B",
+          "width": 26.5,
+          "depth": 18,
+          "text": "EGP 25-N-N-B最大指長 32 mm・張り出し制限あり26.5 × 18 mm軸方向長さ 72.7 mm両爪合計 20〜40 N爪間の全変化 6 mm"
+        }
+      ],
+      "outside": [],
+      "overlap": []
+    },
+    {
+      "requested_width": 736,
+      "scheme": "dark",
+      "state": "open",
+      "width": 736,
+      "documentWidth": 736,
+      "fingers": 2,
+      "pads": 4,
+      "opening": [
+        28,
+        28
+      ],
+      "pressed": [
+        "open"
+      ],
+      "bodies": [
+        {
+          "id": "PGE-5-26_without_brake",
+          "width": 55,
+          "depth": 26,
+          "text": "PGE-5-26第一比較・ブレーキなしの寸法55 × 26 mm軸方向長さ 95 mm片爪 0.8〜5 N爪間の全変化 26 mm"
+        },
+        {
+          "id": "EGP_25_N_N_B",
+          "width": 26.5,
+          "depth": 18,
+          "text": "EGP 25-N-N-B最大指長 32 mm・張り出し制限あり26.5 × 18 mm軸方向長さ 72.7 mm両爪合計 20〜40 N爪間の全変化 6 mm"
+        }
+      ],
+      "outside": [],
+      "overlap": []
+    },
+    {
+      "requested_width": 320,
+      "scheme": "light",
+      "state": "hold",
+      "width": 320,
+      "documentWidth": 320,
+      "fingers": 2,
+      "pads": 4,
+      "opening": [
+        0,
+        0
+      ],
+      "pressed": [
+        "hold"
+      ],
+      "bodies": [
+        {
+          "id": "PGE-5-26_without_brake",
+          "width": 55,
+          "depth": 26,
+          "text": "PGE-5-26第一比較・ブレーキなしの寸法55 × 26 mm軸方向長さ 95 mm片爪 0.8〜5 N爪間の全変化 26 mm"
+        },
+        {
+          "id": "EGP_25_N_N_B",
+          "width": 26.5,
+          "depth": 18,
+          "text": "EGP 25-N-N-B最大指長 32 mm・張り出し制限あり26.5 × 18 mm軸方向長さ 72.7 mm両爪合計 20〜40 N爪間の全変化 6 mm"
+        }
+      ],
+      "outside": [],
+      "overlap": []
+    },
+    {
+      "requested_width": 320,
+      "scheme": "light",
+      "state": "open",
+      "width": 320,
+      "documentWidth": 320,
+      "fingers": 2,
+      "pads": 4,
+      "opening": [
+        28,
+        28
+      ],
+      "pressed": [
+        "open"
+      ],
+      "bodies": [
+        {
+          "id": "PGE-5-26_without_brake",
+          "width": 55,
+          "depth": 26,
+          "text": "PGE-5-26第一比較・ブレーキなしの寸法55 × 26 mm軸方向長さ 95 mm片爪 0.8〜5 N爪間の全変化 26 mm"
+        },
+        {
+          "id": "EGP_25_N_N_B",
+          "width": 26.5,
+          "depth": 18,
+          "text": "EGP 25-N-N-B最大指長 32 mm・張り出し制限あり26.5 × 18 mm軸方向長さ 72.7 mm両爪合計 20〜40 N爪間の全変化 6 mm"
+        }
+      ],
+      "outside": [],
+      "overlap": []
+    },
+    {
+      "requested_width": 320,
+      "scheme": "dark",
+      "state": "hold",
+      "width": 320,
+      "documentWidth": 320,
+      "fingers": 2,
+      "pads": 4,
+      "opening": [
+        0,
+        0
+      ],
+      "pressed": [
+        "hold"
+      ],
+      "bodies": [
+        {
+          "id": "PGE-5-26_without_brake",
+          "width": 55,
+          "depth": 26,
+          "text": "PGE-5-26第一比較・ブレーキなしの寸法55 × 26 mm軸方向長さ 95 mm片爪 0.8〜5 N爪間の全変化 26 mm"
+        },
+        {
+          "id": "EGP_25_N_N_B",
+          "width": 26.5,
+          "depth": 18,
+          "text": "EGP 25-N-N-B最大指長 32 mm・張り出し制限あり26.5 × 18 mm軸方向長さ 72.7 mm両爪合計 20〜40 N爪間の全変化 6 mm"
+        }
+      ],
+      "outside": [],
+      "overlap": []
+    },
+    {
+      "requested_width": 320,
+      "scheme": "dark",
+      "state": "open",
+      "width": 320,
+      "documentWidth": 320,
+      "fingers": 2,
+      "pads": 4,
+      "opening": [
+        28,
+        28
+      ],
+      "pressed": [
+        "open"
+      ],
+      "bodies": [
+        {
+          "id": "PGE-5-26_without_brake",
+          "width": 55,
+          "depth": 26,
+          "text": "PGE-5-26第一比較・ブレーキなしの寸法55 × 26 mm軸方向長さ 95 mm片爪 0.8〜5 N爪間の全変化 26 mm"
+        },
+        {
+          "id": "EGP_25_N_N_B",
+          "width": 26.5,
+          "depth": 18,
+          "text": "EGP 25-N-N-B最大指長 32 mm・張り出し制限あり26.5 × 18 mm軸方向長さ 72.7 mm両爪合計 20〜40 N爪間の全変化 6 mm"
+        }
+      ],
+      "outside": [],
+      "overlap": []
+    }
+  ],
+  "images": {
+    "736_light_hold.png": "dc486c83566816e9d8fd7944403d29b8ba21d7355cc7a7d8828e81ac7f4af649",
+    "736_light_open.png": "d3335de655133db0df2999cb1e0184789d6b7a10a9ce39e626e815045dfa7b16",
+    "736_dark_hold.png": "b2011d1277660b815dc9ebe9624d0137ae68bdfce440b6e126e21fc93df6eaa7",
+    "736_dark_open.png": "286d797b21cd976946449c333dca3906dbdb96c1140bfa0f96ea3dc20c7e4f72",
+    "320_light_hold.png": "b6cba00395ad168c37d4b7646a66e2edac4c7db44a712d7fc5b63622dbfe8128",
+    "320_light_open.png": "bd6f7f3144abaf7d7865149d63daa94e15b5f6510904bae70fffda70609c3d6f",
+    "320_dark_hold.png": "e50c69422854f7c0e5b1c38cf42c7fb0aadf74e1daa15240da902d8a4ff7110e",
+    "320_dark_open.png": "50e4f9cf435f61026e5d6c52a839139d500c662522d884278c81e1eb7e73269b"
+  },
+  "javascript_errors": [],
+  "scope": "UI, source correspondence and label bounds only; no physical verdict"
+}

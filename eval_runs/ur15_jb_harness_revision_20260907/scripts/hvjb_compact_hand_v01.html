@@ -1,0 +1,150 @@
+<!-- Copyright (c) 2022-2026, The Isaac Lab Project Developers (https://github.com/isaac-sim/IsaacLab/blob/main/CONTRIBUTORS.md).
+All rights reserved. SPDX-License-Identifier: BSD-3-Clause -->
+<div id="hvjb-compact-hand-20260917">
+  <div class="viz-row">
+    <span>被覆を保持する2本指</span>
+    <span class="text-small">上面の概念図・寸法未設定</span>
+  </div>
+  <div class="viz-controls" role="group" aria-label="指の形状比較">
+    <button type="button" class="btn" data-hand-state="hold" aria-pressed="true">名目保持</button>
+    <button type="button" class="btn" data-hand-state="open" aria-pressed="false">開放形状</button>
+  </div>
+  <svg class="tip-diagram" role="img" aria-label="端子側の被覆とケーブル根元を、対向する2本の指で保持する概念図"></svg>
+  <div class="text-small" data-state-detail aria-live="polite">前後2か所のパッド・2本指・1駆動</div>
+  <hr>
+  <div>市販本体の公称断面</div>
+  <div class="text-small">同一縮尺／専用指・配線・取付具の突出は含まない</div>
+  <svg class="body-diagram" role="img" aria-label="PGE-5-26とEGP 25の公称本体断面を同じ縮尺で比較"></svg>
+  <div class="text-small">把持力は公称値。被覆への指令値は未設定。</div>
+</div>
+<style>
+  #hvjb-compact-hand-20260917 { color: var(--foreground); }
+  #hvjb-compact-hand-20260917 .tip-diagram,
+  #hvjb-compact-hand-20260917 .body-diagram { display: block; width: 100%; }
+  #hvjb-compact-hand-20260917 svg text { fill: var(--foreground); font-size: 12px; font-weight: 400; }
+  #hvjb-compact-hand-20260917 .mechanism { fill: var(--viz-series-1); fill-opacity: .2; stroke: var(--viz-series-1); stroke-width: 1; }
+  #hvjb-compact-hand-20260917 .pad { fill: var(--viz-series-3); }
+  #hvjb-compact-hand-20260917 .metal { fill: var(--foreground); fill-opacity: .17; stroke: var(--border); stroke-width: 1; }
+  #hvjb-compact-hand-20260917 .sleeve { fill: var(--foreground); fill-opacity: .75; }
+  #hvjb-compact-hand-20260917 .wire { fill: var(--orange); }
+  #hvjb-compact-hand-20260917 .line { fill: none; stroke: var(--foreground); stroke-width: 1; }
+  #hvjb-compact-hand-20260917 .body-outline { fill: var(--viz-series-1); fill-opacity: .15; }
+  #hvjb-compact-hand-20260917 .gap { fill: var(--background); }
+</style>
+<script>
+(() => {
+  const root = document.getElementById('hvjb-compact-hand-20260917');
+  const tip = root.querySelector('.tip-diagram');
+  const body = root.querySelector('.body-diagram');
+  const buttons = [...root.querySelectorAll('[data-hand-state]')];
+  const ns = 'http://www.w3.org/2000/svg';
+  const candidates = [
+    {id: 'PGE-5-26_without_brake', name: 'PGE-5-26', width: 55, depth: 26, length: 95,
+      force: '片爪 0.8〜5 N', stroke: '爪間の全変化 26 mm', note: '第一比較・ブレーキなしの寸法',
+      url: 'https://en.dh-robotics.com/product/pge'},
+    {id: 'EGP_25_N_N_B', name: 'EGP 25-N-N-B', width: 26.5, depth: 18, length: 72.7,
+      force: '両爪合計 20〜40 N', stroke: '爪間の全変化 6 mm', note: '最大指長 32 mm・張り出し制限あり',
+      url: 'https://schunk.com/gb/en/gripping-systems/parallel-gripper/egp/egp-25-n-n-b/p/000000000000310900'}
+  ];
+  let state = 'hold';
+  function node(parent, tag, attrs = {}, content) {
+    const element = document.createElementNS(ns, tag);
+    Object.entries(attrs).forEach(([key, value]) => element.setAttribute(key, String(value)));
+    if (content !== undefined) element.textContent = content;
+    parent.appendChild(element);
+    return element;
+  }
+  function label(parent, x, y, text, anchor = 'middle') {
+    return node(parent, 'text', {x, y, 'text-anchor': anchor, 'data-label': ''}, text);
+  }
+  function drawTip(width) {
+    const scale = Math.min((width - 30) / 340, 1.8);
+    const x0 = (width - 340 * scale) / 2;
+    const y0 = 55;
+    const height = 285;
+    tip.setAttribute('viewBox', `0 0 ${width} ${height}`);
+    tip.setAttribute('height', height);
+    tip.replaceChildren();
+    node(tip, 'title', {}, '被覆と根元を支える対向2本指。寸法のない構造説明。');
+    const yScale = .75;
+    const X = x => x0 + x * scale;
+    const Y = y => y0 + y * yScale;
+    const diagram = node(tip, 'g', {'data-tip-shapes': ''});
+    const rect = (parent, x, y, w, h, cls, more = {}) => node(parent, 'rect', {
+      x: X(x), y: Y(y), width: w * scale, height: h * yScale, class: cls, ...more
+    });
+    rect(diagram, 78, 116, 52, 16, 'metal');
+    node(diagram, 'ellipse', {cx: X(61), cy: Y(124), rx: 29 * scale, ry: 27 * yScale, class: 'metal'});
+    node(diagram, 'ellipse', {cx: X(61), cy: Y(124), rx: 11 * scale, ry: 10 * yScale, class: 'gap'});
+    rect(diagram, 150, 117, 184, 14, 'wire');
+    rect(diagram, 112, 113, 58, 22, 'sleeve');
+    const offset = state === 'open' ? 28 : 0;
+    [-1, 1].forEach(side => {
+      const jaw = node(diagram, 'g', {'data-finger': side, 'data-opening': offset,
+        transform: `translate(0 ${side * offset * yScale})`});
+      const top = side === -1;
+      rect(jaw, 126, top ? 84 : 154, 191, 10, 'mechanism');
+      rect(jaw, 302, top ? 72 : 154, 21, 22, 'mechanism');
+      rect(jaw, 130, top ? 94 : 135, 27, 19, 'pad', {'data-contact': 'sleeve'});
+      rect(jaw, 246, top ? 94 : 131, 27, 23, 'pad', {'data-contact': 'root'});
+    });
+    node(diagram, 'path', {d: `M ${X(51)} ${Y(124)} H ${X(71)} M ${X(61)} ${Y(114)} V ${Y(134)}`, class: 'line'});
+    label(tip, X(61), 28, '工具の進入軸');
+    node(tip, 'path', {d: `M ${X(61)} 35 V ${Y(88)}`, class: 'line'});
+    label(tip, X(144), 54, '① 被覆側');
+    label(tip, X(259), 54, '② 根元側');
+    node(tip, 'path', {d: `M ${X(144)} 61 V ${Y(84 - offset) - 5}`, class: 'line'});
+    node(tip, 'path', {d: `M ${X(259)} 61 V ${Y(84 - offset) - 5}`, class: 'line'});
+    label(tip, X(61), 235, '環状端子');
+    label(tip, X(220), 235, '2パッドを同じ指に取り付け');
+    label(tip, X(61), 256, '金属部は挟まない');
+    label(tip, X(220), 256, state === 'open' ? '両側へ開く形状を比較' : '溝径・柔らかさは個別調整');
+    tip.dataset.state = state;
+  }
+  function drawBodies(width) {
+    const stacked = width < 580;
+    const panelWidth = stacked ? width : width / 2;
+    const panelHeight = 252;
+    const height = stacked ? panelHeight * 2 : panelHeight;
+    const scale = Math.min(2.4, (panelWidth - 70) / 55);
+    body.setAttribute('viewBox', `0 0 ${width} ${height}`);
+    body.setAttribute('height', height);
+    body.replaceChildren();
+    node(body, 'title', {}, '専用指と配線の突出を含まない公称本体断面。完成ハンドの外形ではない。');
+    candidates.forEach((candidate, index) => {
+      const x = stacked ? 0 : index * panelWidth;
+      const y = stacked ? index * panelHeight : 0;
+      const center = x + panelWidth / 2;
+      const panel = node(body, 'g', {'data-candidate': candidate.id});
+      const link = node(panel, 'a', {href: candidate.url, target: '_blank', rel: 'noopener noreferrer'});
+      label(link, center, y + 26, candidate.name);
+      label(panel, center, y + 49, candidate.note);
+      node(panel, 'rect', {x: center - candidate.width * scale / 2, y: y + 68,
+        width: candidate.width * scale, height: candidate.depth * scale,
+        class: 'body-outline', 'data-body-width-mm': candidate.width, 'data-body-depth-mm': candidate.depth});
+      label(panel, center, y + 153, `${candidate.width} × ${candidate.depth} mm`);
+      label(panel, center, y + 175, `軸方向長さ ${candidate.length} mm`);
+      label(panel, center, y + 203, candidate.force);
+      label(panel, center, y + 225, candidate.stroke);
+    });
+    body.dataset.stacked = String(stacked);
+  }
+  function draw() {
+    const width = Math.max(root.getBoundingClientRect().width, 280);
+    drawTip(width);
+    drawBodies(width);
+    root.dataset.state = state;
+    root.dataset.ready = 'true';
+  }
+  buttons.forEach(button => button.addEventListener('click', () => {
+    state = button.dataset.handState;
+    buttons.forEach(peer => peer.setAttribute('aria-pressed', String(peer === button)));
+    root.querySelector('[data-state-detail]').textContent = state === 'hold'
+      ? '前後2か所のパッド・2本指・1駆動'
+      : '開放量と退避経路は未設定・寸法のない形状比較';
+    draw();
+  }));
+  new ResizeObserver(draw).observe(root);
+  draw();
+})();
+</script>

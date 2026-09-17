@@ -1,0 +1,62 @@
+{
+  "observed_at": "2026-09-17T00:47:42.590468+00:00",
+  "auditor_sha256": "8a18cd014d4c01735e5e9239807b6888b9383093c4d7a14bcd117a5458d95573",
+  "spec_sha256": "60b96be53abc061d67935f548f154315363f72639599fe3aa88b99ee9ce00294",
+  "baseline_before": {
+    "data/hand_working_default_v01.json": "1cf2a19f24f753eb44b4e96fd7e73ee8bdfe5b97367a77bf8cfa0cf30a4d107c",
+    "data/hvjb_photo_model_v03_p03.json.gz": "6687b12ec1b3db24babf75f8fef1b6f6bc123c288b713824b9763d9214553ba6",
+    "data/hvjb_photo_correspondence_v03_p01.json": "6c5b7cb9bab859a33c8f5d5cd5429ce9f06fb0951b8a8fa4ae2a31ad99052ca0",
+    "UR15_JB_photo_correspondence_v03_p03.blend": "5205d3aa2c2b99f7df6f538d17b3d3ca36ba8208c546858ee8ec8a5a3564a282",
+    "data/hvjb_robot_selection_v01.json": "ad1d0fc6ad2f0c9d36f4d9839faf559ce80aa9ffb4965174facef944f1a58db8",
+    "data/hvjb_task_occupancy_v01.json": "4da5b53687b05cd2cd1d294cf57121abde6ee9d04b19ed0a37ef2fb2a4d79df9"
+  },
+  "baseline_after": {
+    "data/hand_working_default_v01.json": "1cf2a19f24f753eb44b4e96fd7e73ee8bdfe5b97367a77bf8cfa0cf30a4d107c",
+    "data/hvjb_photo_model_v03_p03.json.gz": "6687b12ec1b3db24babf75f8fef1b6f6bc123c288b713824b9763d9214553ba6",
+    "data/hvjb_photo_correspondence_v03_p01.json": "6c5b7cb9bab859a33c8f5d5cd5429ce9f06fb0951b8a8fa4ae2a31ad99052ca0",
+    "UR15_JB_photo_correspondence_v03_p03.blend": "5205d3aa2c2b99f7df6f538d17b3d3ca36ba8208c546858ee8ec8a5a3564a282",
+    "data/hvjb_robot_selection_v01.json": "ad1d0fc6ad2f0c9d36f4d9839faf559ce80aa9ffb4965174facef944f1a58db8",
+    "data/hvjb_task_occupancy_v01.json": "4da5b53687b05cd2cd1d294cf57121abde6ee9d04b19ed0a37ef2fb2a4d79df9"
+  },
+  "baseline_unchanged": true,
+  "selected_plan": "S5_AB",
+  "selected_assembly_arm_count": 5,
+  "workcard_count": 20,
+  "references": {
+    "egp25_drawings.html": {
+      "bytes": 44211,
+      "sha256": "16f79dc78ccab1b2f070f6771bbdf7d239fbab1952162b243ebcf7fd18c8dedf"
+    },
+    "egp25_main_view.png": {
+      "bytes": 312425,
+      "sha256": "d01dfe4914b76e8badd8f38c513065bd79ef0a54feea49155fefcc68a7896bb7"
+    },
+    "egp25_main_view.webp": {
+      "bytes": 44100,
+      "sha256": "1f3de93af92bf46eb6f9a0b36d35820fb58d66f524e69b56f93efbc3a8f97760"
+    },
+    "egp25_product.html": {
+      "bytes": 269984,
+      "sha256": "18f5aa8984b48848da2519e189b2a7ea34ea3a06ccfe64ace1d8290dced653e6"
+    },
+    "egp25_projection.png": {
+      "bytes": 20187,
+      "sha256": "ee3b55a8f67bc3fff7e59324a68c85b80a4d4f480c3a3a81504511d44227b201"
+    },
+    "egp25_projection.webp": {
+      "bytes": 3450,
+      "sha256": "5bb0a70adc0195a133f771ccdf900cc8507ccc213481bf2a1f6b0aee4cc770f6"
+    },
+    "egp25_projection_definition.png": {
+      "bytes": 44589,
+      "sha256": "86c756283ccace6b8cc4b8f490d6c4643a245c64a8fefff97baced07a2f5d867"
+    },
+    "egp25_projection_definition.webp": {
+      "bytes": 8116,
+      "sha256": "cab0480d338fbfda2731022920a2a714804bf195cce8b9e53ce2dc6a09a16e16"
+    }
+  },
+  "candidate_count": 2,
+  "formal_physical_verdict": null,
+  "scope": "File identity and source recording only; schematic geometry is not a physical measurement"
+}
