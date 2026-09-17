@@ -1,0 +1,1227 @@
+{
+  "observed_at": "2026-09-17T04:51:04.169Z",
+  "preview_sha256": "2ba0308c51443adec0695099185e15f1e3d0c900043e6c92e55da1e8642cf1bd",
+  "observations_sha256": "7f66810c233eaadadb19cb88b68235b6c8a71bc07c4e3b5f9892e7d27f3b0388",
+  "results": [
+    {
+      "requested_width": 736,
+      "scheme": "light",
+      "state": "contour",
+      "band": "tip",
+      "width": 736,
+      "height": 460,
+      "objects": 21,
+      "pads": 4,
+      "measured_objects": 17,
+      "measurement": {
+        "radius_to_surface_m": 0.022646854196027844,
+        "object": "left_front_pad",
+        "witness_m": [
+          -0.005374012,
+          0.022,
+          -0.000625988
+        ],
+        "source_face_index": 153,
+        "z_above_reference_seat_m": [
+          0.0037999999999999996,
+          0.0538
+        ]
+      },
+      "opening_per_jaw_m": 0,
+      "maximum_normalized_xy": 0.7505239298501004,
+      "finite_vertices": true,
+      "gl_error": 0,
+      "scale_px_per_m": 1944.2737863466268,
+      "theme": {
+        "hardware": [
+          0.5568627450980392,
+          0.5607843137254902,
+          0.5647058823529412
+        ],
+        "insert": [
+          0.2,
+          0.611764705882353,
+          1
+        ],
+        "pad": [
+          0,
+          0.6352941176470588,
+          0.25098039215686274
+        ],
+        "wire": [
+          0.8862745098039215,
+          0.3333333333333333,
+          0.027450980392156862
+        ],
+        "sleeve": [
+          0.25058823529411767,
+          0.2523529411764706,
+          0.25411764705882356
+        ],
+        "target": [
+          0.5568627450980392,
+          0.5607843137254902,
+          0.5647058823529412
+        ],
+        "coupon": [
+          0.9294117647058824,
+          0.9294117647058824,
+          0.9294117647058824
+        ]
+      },
+      "documentWidth": 736,
+      "outside": [],
+      "overlappingLabels": [],
+      "controlsOverlap": false,
+      "selected": [
+        "contour",
+        "tip"
+      ]
+    },
+    {
+      "requested_width": 736,
+      "scheme": "light",
+      "state": "contour",
+      "band": "upper",
+      "width": 736,
+      "height": 460,
+      "objects": 21,
+      "pads": 4,
+      "measured_objects": 17,
+      "measurement": {
+        "radius_to_surface_m": 0.05460765,
+        "object": "PGE_nominal_body_envelope",
+        "witness_m": [
+          0,
+          0.05460765,
+          0.043711314
+        ],
+        "source_face_index": 1,
+        "z_above_reference_seat_m": [
+          0.0538,
+          0.14512760100000002
+        ]
+      },
+      "opening_per_jaw_m": 0,
+      "maximum_normalized_xy": 0.7505239298501004,
+      "finite_vertices": true,
+      "gl_error": 0,
+      "scale_px_per_m": 1944.2737863466268,
+      "theme": {
+        "hardware": [
+          0.5568627450980392,
+          0.5607843137254902,
+          0.5647058823529412
+        ],
+        "insert": [
+          0.2,
+          0.611764705882353,
+          1
+        ],
+        "pad": [
+          0,
+          0.6352941176470588,
+          0.25098039215686274
+        ],
+        "wire": [
+          0.8862745098039215,
+          0.3333333333333333,
+          0.027450980392156862
+        ],
+        "sleeve": [
+          0.25058823529411767,
+          0.2523529411764706,
+          0.25411764705882356
+        ],
+        "target": [
+          0.5568627450980392,
+          0.5607843137254902,
+          0.5647058823529412
+        ],
+        "coupon": [
+          0.9294117647058824,
+          0.9294117647058824,
+          0.9294117647058824
+        ]
+      },
+      "documentWidth": 736,
+      "outside": [],
+      "overlappingLabels": [],
+      "controlsOverlap": false,
+      "selected": [
+        "contour",
+        "upper"
+      ]
+    },
+    {
+      "requested_width": 736,
+      "scheme": "light",
+      "state": "open",
+      "band": "tip",
+      "width": 736,
+      "height": 460,
+      "objects": 21,
+      "pads": 4,
+      "measured_objects": 17,
+      "measurement": {
+        "radius_to_surface_m": 0.025241160293776987,
+        "object": "left_front_pad",
+        "witness_m": [
+          -0.012374012,
+          0.022,
+          -0.000625988
+        ],
+        "source_face_index": 153,
+        "z_above_reference_seat_m": [
+          0.0037999999999999996,
+          0.0538
+        ]
+      },
+      "opening_per_jaw_m": 0.007,
+      "maximum_normalized_xy": 0.7505239298501004,
+      "finite_vertices": true,
+      "gl_error": 0,
+      "scale_px_per_m": 1944.2737863466268,
+      "theme": {
+        "hardware": [
+          0.5568627450980392,
+          0.5607843137254902,
+          0.5647058823529412
+        ],
+        "insert": [
+          0.2,
+          0.611764705882353,
+          1
+        ],
+        "pad": [
+          0,
+          0.6352941176470588,
+          0.25098039215686274
+        ],
+        "wire": [
+          0.8862745098039215,
+          0.3333333333333333,
+          0.027450980392156862
+        ],
+        "sleeve": [
+          0.25058823529411767,
+          0.2523529411764706,
+          0.25411764705882356
+        ],
+        "target": [
+          0.5568627450980392,
+          0.5607843137254902,
+          0.5647058823529412
+        ],
+        "coupon": [
+          0.9294117647058824,
+          0.9294117647058824,
+          0.9294117647058824
+        ]
+      },
+      "documentWidth": 736,
+      "outside": [],
+      "overlappingLabels": [],
+      "controlsOverlap": false,
+      "selected": [
+        "open",
+        "tip"
+      ]
+    },
+    {
+      "requested_width": 736,
+      "scheme": "light",
+      "state": "open",
+      "band": "upper",
+      "width": 736,
+      "height": 460,
+      "objects": 21,
+      "pads": 4,
+      "measured_objects": 17,
+      "measurement": {
+        "radius_to_surface_m": 0.05460765,
+        "object": "PGE_nominal_body_envelope",
+        "witness_m": [
+          0,
+          0.05460765,
+          0.043711314
+        ],
+        "source_face_index": 1,
+        "z_above_reference_seat_m": [
+          0.0538,
+          0.14512760100000002
+        ]
+      },
+      "opening_per_jaw_m": 0.007,
+      "maximum_normalized_xy": 0.7505239298501004,
+      "finite_vertices": true,
+      "gl_error": 0,
+      "scale_px_per_m": 1944.2737863466268,
+      "theme": {
+        "hardware": [
+          0.5568627450980392,
+          0.5607843137254902,
+          0.5647058823529412
+        ],
+        "insert": [
+          0.2,
+          0.611764705882353,
+          1
+        ],
+        "pad": [
+          0,
+          0.6352941176470588,
+          0.25098039215686274
+        ],
+        "wire": [
+          0.8862745098039215,
+          0.3333333333333333,
+          0.027450980392156862
+        ],
+        "sleeve": [
+          0.25058823529411767,
+          0.2523529411764706,
+          0.25411764705882356
+        ],
+        "target": [
+          0.5568627450980392,
+          0.5607843137254902,
+          0.5647058823529412
+        ],
+        "coupon": [
+          0.9294117647058824,
+          0.9294117647058824,
+          0.9294117647058824
+        ]
+      },
+      "documentWidth": 736,
+      "outside": [],
+      "overlappingLabels": [],
+      "controlsOverlap": false,
+      "selected": [
+        "open",
+        "upper"
+      ]
+    },
+    {
+      "requested_width": 736,
+      "scheme": "dark",
+      "state": "contour",
+      "band": "tip",
+      "width": 736,
+      "height": 460,
+      "objects": 21,
+      "pads": 4,
+      "measured_objects": 17,
+      "measurement": {
+        "radius_to_surface_m": 0.022646854196027844,
+        "object": "left_front_pad",
+        "witness_m": [
+          -0.005374012,
+          0.022,
+          -0.000625988
+        ],
+        "source_face_index": 153,
+        "z_above_reference_seat_m": [
+          0.0037999999999999996,
+          0.0538
+        ]
+      },
+      "opening_per_jaw_m": 0,
+      "maximum_normalized_xy": 0.7505239298501004,
+      "finite_vertices": true,
+      "gl_error": 0,
+      "scale_px_per_m": 1944.2737863466268,
+      "theme": {
+        "hardware": [
+          0.5450980392156862,
+          0.5450980392156862,
+          0.5450980392156862
+        ],
+        "insert": [
+          0.2,
+          0.611764705882353,
+          1
+        ],
+        "pad": [
+          0.25098039215686274,
+          0.788235294117647,
+          0.4666666666666667
+        ],
+        "wire": [
+          0.984313725490196,
+          0.41568627450980394,
+          0.13333333333333333
+        ],
+        "sleeve": [
+          0.2452941176470588,
+          0.2452941176470588,
+          0.2452941176470588
+        ],
+        "target": [
+          0.5450980392156862,
+          0.5450980392156862,
+          0.5450980392156862
+        ],
+        "coupon": [
+          0.16862745098039217,
+          0.16862745098039217,
+          0.16862745098039217
+        ]
+      },
+      "documentWidth": 736,
+      "outside": [],
+      "overlappingLabels": [],
+      "controlsOverlap": false,
+      "selected": [
+        "contour",
+        "tip"
+      ]
+    },
+    {
+      "requested_width": 736,
+      "scheme": "dark",
+      "state": "contour",
+      "band": "upper",
+      "width": 736,
+      "height": 460,
+      "objects": 21,
+      "pads": 4,
+      "measured_objects": 17,
+      "measurement": {
+        "radius_to_surface_m": 0.05460765,
+        "object": "PGE_nominal_body_envelope",
+        "witness_m": [
+          0,
+          0.05460765,
+          0.043711314
+        ],
+        "source_face_index": 1,
+        "z_above_reference_seat_m": [
+          0.0538,
+          0.14512760100000002
+        ]
+      },
+      "opening_per_jaw_m": 0,
+      "maximum_normalized_xy": 0.7505239298501004,
+      "finite_vertices": true,
+      "gl_error": 0,
+      "scale_px_per_m": 1944.2737863466268,
+      "theme": {
+        "hardware": [
+          0.5450980392156862,
+          0.5450980392156862,
+          0.5450980392156862
+        ],
+        "insert": [
+          0.2,
+          0.611764705882353,
+          1
+        ],
+        "pad": [
+          0.25098039215686274,
+          0.788235294117647,
+          0.4666666666666667
+        ],
+        "wire": [
+          0.984313725490196,
+          0.41568627450980394,
+          0.13333333333333333
+        ],
+        "sleeve": [
+          0.2452941176470588,
+          0.2452941176470588,
+          0.2452941176470588
+        ],
+        "target": [
+          0.5450980392156862,
+          0.5450980392156862,
+          0.5450980392156862
+        ],
+        "coupon": [
+          0.16862745098039217,
+          0.16862745098039217,
+          0.16862745098039217
+        ]
+      },
+      "documentWidth": 736,
+      "outside": [],
+      "overlappingLabels": [],
+      "controlsOverlap": false,
+      "selected": [
+        "contour",
+        "upper"
+      ]
+    },
+    {
+      "requested_width": 736,
+      "scheme": "dark",
+      "state": "open",
+      "band": "tip",
+      "width": 736,
+      "height": 460,
+      "objects": 21,
+      "pads": 4,
+      "measured_objects": 17,
+      "measurement": {
+        "radius_to_surface_m": 0.025241160293776987,
+        "object": "left_front_pad",
+        "witness_m": [
+          -0.012374012,
+          0.022,
+          -0.000625988
+        ],
+        "source_face_index": 153,
+        "z_above_reference_seat_m": [
+          0.0037999999999999996,
+          0.0538
+        ]
+      },
+      "opening_per_jaw_m": 0.007,
+      "maximum_normalized_xy": 0.7505239298501004,
+      "finite_vertices": true,
+      "gl_error": 0,
+      "scale_px_per_m": 1944.2737863466268,
+      "theme": {
+        "hardware": [
+          0.5450980392156862,
+          0.5450980392156862,
+          0.5450980392156862
+        ],
+        "insert": [
+          0.2,
+          0.611764705882353,
+          1
+        ],
+        "pad": [
+          0.25098039215686274,
+          0.788235294117647,
+          0.4666666666666667
+        ],
+        "wire": [
+          0.984313725490196,
+          0.41568627450980394,
+          0.13333333333333333
+        ],
+        "sleeve": [
+          0.2452941176470588,
+          0.2452941176470588,
+          0.2452941176470588
+        ],
+        "target": [
+          0.5450980392156862,
+          0.5450980392156862,
+          0.5450980392156862
+        ],
+        "coupon": [
+          0.16862745098039217,
+          0.16862745098039217,
+          0.16862745098039217
+        ]
+      },
+      "documentWidth": 736,
+      "outside": [],
+      "overlappingLabels": [],
+      "controlsOverlap": false,
+      "selected": [
+        "open",
+        "tip"
+      ]
+    },
+    {
+      "requested_width": 736,
+      "scheme": "dark",
+      "state": "open",
+      "band": "upper",
+      "width": 736,
+      "height": 460,
+      "objects": 21,
+      "pads": 4,
+      "measured_objects": 17,
+      "measurement": {
+        "radius_to_surface_m": 0.05460765,
+        "object": "PGE_nominal_body_envelope",
+        "witness_m": [
+          0,
+          0.05460765,
+          0.043711314
+        ],
+        "source_face_index": 1,
+        "z_above_reference_seat_m": [
+          0.0538,
+          0.14512760100000002
+        ]
+      },
+      "opening_per_jaw_m": 0.007,
+      "maximum_normalized_xy": 0.7505239298501004,
+      "finite_vertices": true,
+      "gl_error": 0,
+      "scale_px_per_m": 1944.2737863466268,
+      "theme": {
+        "hardware": [
+          0.5450980392156862,
+          0.5450980392156862,
+          0.5450980392156862
+        ],
+        "insert": [
+          0.2,
+          0.611764705882353,
+          1
+        ],
+        "pad": [
+          0.25098039215686274,
+          0.788235294117647,
+          0.4666666666666667
+        ],
+        "wire": [
+          0.984313725490196,
+          0.41568627450980394,
+          0.13333333333333333
+        ],
+        "sleeve": [
+          0.2452941176470588,
+          0.2452941176470588,
+          0.2452941176470588
+        ],
+        "target": [
+          0.5450980392156862,
+          0.5450980392156862,
+          0.5450980392156862
+        ],
+        "coupon": [
+          0.16862745098039217,
+          0.16862745098039217,
+          0.16862745098039217
+        ]
+      },
+      "documentWidth": 736,
+      "outside": [],
+      "overlappingLabels": [],
+      "controlsOverlap": false,
+      "selected": [
+        "open",
+        "upper"
+      ]
+    },
+    {
+      "requested_width": 320,
+      "scheme": "light",
+      "state": "contour",
+      "band": "tip",
+      "width": 320,
+      "height": 380,
+      "objects": 21,
+      "pads": 4,
+      "measured_objects": 17,
+      "measurement": {
+        "radius_to_surface_m": 0.022646854196027844,
+        "object": "left_front_pad",
+        "witness_m": [
+          -0.005374012,
+          0.022,
+          -0.000625988
+        ],
+        "source_face_index": 153,
+        "z_above_reference_seat_m": [
+          0.0037999999999999996,
+          0.0538
+        ]
+      },
+      "opening_per_jaw_m": 0,
+      "maximum_normalized_xy": 0.7505239298501004,
+      "finite_vertices": true,
+      "gl_error": 0,
+      "scale_px_per_m": 1606.1392148080831,
+      "theme": {
+        "hardware": [
+          0.5568627450980392,
+          0.5607843137254902,
+          0.5647058823529412
+        ],
+        "insert": [
+          0.2,
+          0.611764705882353,
+          1
+        ],
+        "pad": [
+          0,
+          0.6352941176470588,
+          0.25098039215686274
+        ],
+        "wire": [
+          0.8862745098039215,
+          0.3333333333333333,
+          0.027450980392156862
+        ],
+        "sleeve": [
+          0.25058823529411767,
+          0.2523529411764706,
+          0.25411764705882356
+        ],
+        "target": [
+          0.5568627450980392,
+          0.5607843137254902,
+          0.5647058823529412
+        ],
+        "coupon": [
+          0.9294117647058824,
+          0.9294117647058824,
+          0.9294117647058824
+        ]
+      },
+      "documentWidth": 320,
+      "outside": [],
+      "overlappingLabels": [],
+      "controlsOverlap": false,
+      "selected": [
+        "contour",
+        "tip"
+      ]
+    },
+    {
+      "requested_width": 320,
+      "scheme": "light",
+      "state": "contour",
+      "band": "upper",
+      "width": 320,
+      "height": 380,
+      "objects": 21,
+      "pads": 4,
+      "measured_objects": 17,
+      "measurement": {
+        "radius_to_surface_m": 0.05460765,
+        "object": "PGE_nominal_body_envelope",
+        "witness_m": [
+          0,
+          0.05460765,
+          0.043711314
+        ],
+        "source_face_index": 1,
+        "z_above_reference_seat_m": [
+          0.0538,
+          0.14512760100000002
+        ]
+      },
+      "opening_per_jaw_m": 0,
+      "maximum_normalized_xy": 0.7505239298501004,
+      "finite_vertices": true,
+      "gl_error": 0,
+      "scale_px_per_m": 1606.1392148080831,
+      "theme": {
+        "hardware": [
+          0.5568627450980392,
+          0.5607843137254902,
+          0.5647058823529412
+        ],
+        "insert": [
+          0.2,
+          0.611764705882353,
+          1
+        ],
+        "pad": [
+          0,
+          0.6352941176470588,
+          0.25098039215686274
+        ],
+        "wire": [
+          0.8862745098039215,
+          0.3333333333333333,
+          0.027450980392156862
+        ],
+        "sleeve": [
+          0.25058823529411767,
+          0.2523529411764706,
+          0.25411764705882356
+        ],
+        "target": [
+          0.5568627450980392,
+          0.5607843137254902,
+          0.5647058823529412
+        ],
+        "coupon": [
+          0.9294117647058824,
+          0.9294117647058824,
+          0.9294117647058824
+        ]
+      },
+      "documentWidth": 320,
+      "outside": [],
+      "overlappingLabels": [],
+      "controlsOverlap": false,
+      "selected": [
+        "contour",
+        "upper"
+      ]
+    },
+    {
+      "requested_width": 320,
+      "scheme": "light",
+      "state": "open",
+      "band": "tip",
+      "width": 320,
+      "height": 380,
+      "objects": 21,
+      "pads": 4,
+      "measured_objects": 17,
+      "measurement": {
+        "radius_to_surface_m": 0.025241160293776987,
+        "object": "left_front_pad",
+        "witness_m": [
+          -0.012374012,
+          0.022,
+          -0.000625988
+        ],
+        "source_face_index": 153,
+        "z_above_reference_seat_m": [
+          0.0037999999999999996,
+          0.0538
+        ]
+      },
+      "opening_per_jaw_m": 0.007,
+      "maximum_normalized_xy": 0.7505239298501004,
+      "finite_vertices": true,
+      "gl_error": 0,
+      "scale_px_per_m": 1606.1392148080831,
+      "theme": {
+        "hardware": [
+          0.5568627450980392,
+          0.5607843137254902,
+          0.5647058823529412
+        ],
+        "insert": [
+          0.2,
+          0.611764705882353,
+          1
+        ],
+        "pad": [
+          0,
+          0.6352941176470588,
+          0.25098039215686274
+        ],
+        "wire": [
+          0.8862745098039215,
+          0.3333333333333333,
+          0.027450980392156862
+        ],
+        "sleeve": [
+          0.25058823529411767,
+          0.2523529411764706,
+          0.25411764705882356
+        ],
+        "target": [
+          0.5568627450980392,
+          0.5607843137254902,
+          0.5647058823529412
+        ],
+        "coupon": [
+          0.9294117647058824,
+          0.9294117647058824,
+          0.9294117647058824
+        ]
+      },
+      "documentWidth": 320,
+      "outside": [],
+      "overlappingLabels": [],
+      "controlsOverlap": false,
+      "selected": [
+        "open",
+        "tip"
+      ]
+    },
+    {
+      "requested_width": 320,
+      "scheme": "light",
+      "state": "open",
+      "band": "upper",
+      "width": 320,
+      "height": 380,
+      "objects": 21,
+      "pads": 4,
+      "measured_objects": 17,
+      "measurement": {
+        "radius_to_surface_m": 0.05460765,
+        "object": "PGE_nominal_body_envelope",
+        "witness_m": [
+          0,
+          0.05460765,
+          0.043711314
+        ],
+        "source_face_index": 1,
+        "z_above_reference_seat_m": [
+          0.0538,
+          0.14512760100000002
+        ]
+      },
+      "opening_per_jaw_m": 0.007,
+      "maximum_normalized_xy": 0.7505239298501004,
+      "finite_vertices": true,
+      "gl_error": 0,
+      "scale_px_per_m": 1606.1392148080831,
+      "theme": {
+        "hardware": [
+          0.5568627450980392,
+          0.5607843137254902,
+          0.5647058823529412
+        ],
+        "insert": [
+          0.2,
+          0.611764705882353,
+          1
+        ],
+        "pad": [
+          0,
+          0.6352941176470588,
+          0.25098039215686274
+        ],
+        "wire": [
+          0.8862745098039215,
+          0.3333333333333333,
+          0.027450980392156862
+        ],
+        "sleeve": [
+          0.25058823529411767,
+          0.2523529411764706,
+          0.25411764705882356
+        ],
+        "target": [
+          0.5568627450980392,
+          0.5607843137254902,
+          0.5647058823529412
+        ],
+        "coupon": [
+          0.9294117647058824,
+          0.9294117647058824,
+          0.9294117647058824
+        ]
+      },
+      "documentWidth": 320,
+      "outside": [],
+      "overlappingLabels": [],
+      "controlsOverlap": false,
+      "selected": [
+        "open",
+        "upper"
+      ]
+    },
+    {
+      "requested_width": 320,
+      "scheme": "dark",
+      "state": "contour",
+      "band": "tip",
+      "width": 320,
+      "height": 380,
+      "objects": 21,
+      "pads": 4,
+      "measured_objects": 17,
+      "measurement": {
+        "radius_to_surface_m": 0.022646854196027844,
+        "object": "left_front_pad",
+        "witness_m": [
+          -0.005374012,
+          0.022,
+          -0.000625988
+        ],
+        "source_face_index": 153,
+        "z_above_reference_seat_m": [
+          0.0037999999999999996,
+          0.0538
+        ]
+      },
+      "opening_per_jaw_m": 0,
+      "maximum_normalized_xy": 0.7505239298501004,
+      "finite_vertices": true,
+      "gl_error": 0,
+      "scale_px_per_m": 1606.1392148080831,
+      "theme": {
+        "hardware": [
+          0.5450980392156862,
+          0.5450980392156862,
+          0.5450980392156862
+        ],
+        "insert": [
+          0.2,
+          0.611764705882353,
+          1
+        ],
+        "pad": [
+          0.25098039215686274,
+          0.788235294117647,
+          0.4666666666666667
+        ],
+        "wire": [
+          0.984313725490196,
+          0.41568627450980394,
+          0.13333333333333333
+        ],
+        "sleeve": [
+          0.2452941176470588,
+          0.2452941176470588,
+          0.2452941176470588
+        ],
+        "target": [
+          0.5450980392156862,
+          0.5450980392156862,
+          0.5450980392156862
+        ],
+        "coupon": [
+          0.16862745098039217,
+          0.16862745098039217,
+          0.16862745098039217
+        ]
+      },
+      "documentWidth": 320,
+      "outside": [],
+      "overlappingLabels": [],
+      "controlsOverlap": false,
+      "selected": [
+        "contour",
+        "tip"
+      ]
+    },
+    {
+      "requested_width": 320,
+      "scheme": "dark",
+      "state": "contour",
+      "band": "upper",
+      "width": 320,
+      "height": 380,
+      "objects": 21,
+      "pads": 4,
+      "measured_objects": 17,
+      "measurement": {
+        "radius_to_surface_m": 0.05460765,
+        "object": "PGE_nominal_body_envelope",
+        "witness_m": [
+          0,
+          0.05460765,
+          0.043711314
+        ],
+        "source_face_index": 1,
+        "z_above_reference_seat_m": [
+          0.0538,
+          0.14512760100000002
+        ]
+      },
+      "opening_per_jaw_m": 0,
+      "maximum_normalized_xy": 0.7505239298501004,
+      "finite_vertices": true,
+      "gl_error": 0,
+      "scale_px_per_m": 1606.1392148080831,
+      "theme": {
+        "hardware": [
+          0.5450980392156862,
+          0.5450980392156862,
+          0.5450980392156862
+        ],
+        "insert": [
+          0.2,
+          0.611764705882353,
+          1
+        ],
+        "pad": [
+          0.25098039215686274,
+          0.788235294117647,
+          0.4666666666666667
+        ],
+        "wire": [
+          0.984313725490196,
+          0.41568627450980394,
+          0.13333333333333333
+        ],
+        "sleeve": [
+          0.2452941176470588,
+          0.2452941176470588,
+          0.2452941176470588
+        ],
+        "target": [
+          0.5450980392156862,
+          0.5450980392156862,
+          0.5450980392156862
+        ],
+        "coupon": [
+          0.16862745098039217,
+          0.16862745098039217,
+          0.16862745098039217
+        ]
+      },
+      "documentWidth": 320,
+      "outside": [],
+      "overlappingLabels": [],
+      "controlsOverlap": false,
+      "selected": [
+        "contour",
+        "upper"
+      ]
+    },
+    {
+      "requested_width": 320,
+      "scheme": "dark",
+      "state": "open",
+      "band": "tip",
+      "width": 320,
+      "height": 380,
+      "objects": 21,
+      "pads": 4,
+      "measured_objects": 17,
+      "measurement": {
+        "radius_to_surface_m": 0.025241160293776987,
+        "object": "left_front_pad",
+        "witness_m": [
+          -0.012374012,
+          0.022,
+          -0.000625988
+        ],
+        "source_face_index": 153,
+        "z_above_reference_seat_m": [
+          0.0037999999999999996,
+          0.0538
+        ]
+      },
+      "opening_per_jaw_m": 0.007,
+      "maximum_normalized_xy": 0.7505239298501004,
+      "finite_vertices": true,
+      "gl_error": 0,
+      "scale_px_per_m": 1606.1392148080831,
+      "theme": {
+        "hardware": [
+          0.5450980392156862,
+          0.5450980392156862,
+          0.5450980392156862
+        ],
+        "insert": [
+          0.2,
+          0.611764705882353,
+          1
+        ],
+        "pad": [
+          0.25098039215686274,
+          0.788235294117647,
+          0.4666666666666667
+        ],
+        "wire": [
+          0.984313725490196,
+          0.41568627450980394,
+          0.13333333333333333
+        ],
+        "sleeve": [
+          0.2452941176470588,
+          0.2452941176470588,
+          0.2452941176470588
+        ],
+        "target": [
+          0.5450980392156862,
+          0.5450980392156862,
+          0.5450980392156862
+        ],
+        "coupon": [
+          0.16862745098039217,
+          0.16862745098039217,
+          0.16862745098039217
+        ]
+      },
+      "documentWidth": 320,
+      "outside": [],
+      "overlappingLabels": [],
+      "controlsOverlap": false,
+      "selected": [
+        "open",
+        "tip"
+      ]
+    },
+    {
+      "requested_width": 320,
+      "scheme": "dark",
+      "state": "open",
+      "band": "upper",
+      "width": 320,
+      "height": 380,
+      "objects": 21,
+      "pads": 4,
+      "measured_objects": 17,
+      "measurement": {
+        "radius_to_surface_m": 0.05460765,
+        "object": "PGE_nominal_body_envelope",
+        "witness_m": [
+          0,
+          0.05460765,
+          0.043711314
+        ],
+        "source_face_index": 1,
+        "z_above_reference_seat_m": [
+          0.0538,
+          0.14512760100000002
+        ]
+      },
+      "opening_per_jaw_m": 0.007,
+      "maximum_normalized_xy": 0.7505239298501004,
+      "finite_vertices": true,
+      "gl_error": 0,
+      "scale_px_per_m": 1606.1392148080831,
+      "theme": {
+        "hardware": [
+          0.5450980392156862,
+          0.5450980392156862,
+          0.5450980392156862
+        ],
+        "insert": [
+          0.2,
+          0.611764705882353,
+          1
+        ],
+        "pad": [
+          0.25098039215686274,
+          0.788235294117647,
+          0.4666666666666667
+        ],
+        "wire": [
+          0.984313725490196,
+          0.41568627450980394,
+          0.13333333333333333
+        ],
+        "sleeve": [
+          0.2452941176470588,
+          0.2452941176470588,
+          0.2452941176470588
+        ],
+        "target": [
+          0.5450980392156862,
+          0.5450980392156862,
+          0.5450980392156862
+        ],
+        "coupon": [
+          0.16862745098039217,
+          0.16862745098039217,
+          0.16862745098039217
+        ]
+      },
+      "documentWidth": 320,
+      "outside": [],
+      "overlappingLabels": [],
+      "controlsOverlap": false,
+      "selected": [
+        "open",
+        "upper"
+      ]
+    }
+  ],
+  "images": {
+    "736_light_contour_tip.png": "67a6616e306d7ea580fc143443b5f3916a0d07f1a90ee0d33333439a08bffd1e",
+    "736_light_contour_upper.png": "6c7b09fc7466ee3044e8586a184419ad3145e5387c56371e0016f7f479996d9b",
+    "736_light_open_tip.png": "18eb8c219d83057e04a57114bd3c91fbc0d723d213adae4bc12afba68d6a9baf",
+    "736_light_open_upper.png": "9b762a760d05c763b7bd55b1ce0a895267a2494a3416b3731df6a78fcd3696d3",
+    "736_dark_contour_tip.png": "cd1101a61148978da8432e13291b34f7209f68b15b90356c706fd6910b5edfdf",
+    "736_dark_contour_upper.png": "8f93f496f562d72e89029b974f2d1f13c4245cbee9a0e28b63d570a66380f7a7",
+    "736_dark_open_tip.png": "351703a8b837d23e96a789dc7e2d8a65ed2c649414088c028287a36bdea4a117",
+    "736_dark_open_upper.png": "cf0f5bd441b172aea6827bdfa5d4429d1adfc82a2b8f31e3a876e117f8ac2eab",
+    "320_light_contour_tip.png": "bc34717a04e19785db245fd763d76e1e0fc5e142e67cc7bd2ae4cad1457103d8",
+    "320_light_contour_upper.png": "e1b6d67ea2111c065b30a9ae94325435050664a08fe107c11a9a9a4945351d0b",
+    "320_light_open_tip.png": "a4d89429c7331d5c07fa1204b294fbb1c04f3bd17db43820d8a2ea9f7dfbebce",
+    "320_light_open_upper.png": "1328a3cc758a36fb91745fcd658b940c42adfeb249d81a4d5bd6c407b6864e66",
+    "320_dark_contour_tip.png": "c27e10c7b1ecb4ef5574b3c0e891e2d819549f35601f523596dbde40cc6d212a",
+    "320_dark_contour_upper.png": "2a6210b53210c87c1fe64669513b9dbcc1f64eeb6b690d1c3fbae57346d53088",
+    "320_dark_open_tip.png": "3b0ee10c3eb3342eddee11709fa5c22e888cf5a6ffa629555706843acc715f4b",
+    "320_dark_open_upper.png": "b18b6e1ddac3775c8d978b8164ac754ad771abd01d36a19c105061d4cb72b4a9"
+  },
+  "javascript_errors": [],
+  "scope": "Saved-state display, numerical projection and UI only; no contact, force or physical verdict"
+}

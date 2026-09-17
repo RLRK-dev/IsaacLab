@@ -1,0 +1,2451 @@
+{
+  "observed_at": "2026-09-17T04:40:39.426449+00:00",
+  "scope": "Unchanged nominal PGE sample; horizontal axis-to-hand distance, not complete-tool clearance",
+  "reference_frame": {
+    "units": "m",
+    "tool_axis_xy_m": [
+      0.0,
+      0.0
+    ],
+    "terminal_seat_z_m": -0.014,
+    "tool_reference_axis_world": [
+      0.0,
+      0.0,
+      1.0
+    ],
+    "note": "Existing isolated comparison frame; not a surveyed station origin"
+  },
+  "reference_target": {
+    "reference_part": "Klauke 6R6",
+    "adopted_ampere_part": null,
+    "geometry_state": "uncrimped reference CAD; no measured crimp or heatshrink geometry",
+    "json_sha256": "b190844a0e814349ada37674f2d78d16c7c0ed4edff15846cddad303f460d283",
+    "step_sha256": "721503e3485c0b72cb1ec2d8b2fd9011ff36442e2a027b9043b364d49fb43a52",
+    "seat_z_m": -0.014,
+    "hole_center_to_barrel_end_m": 0.037,
+    "raw_barrel_axis_above_seat_m": 0.008,
+    "wire_radius_m": 0.007,
+    "wire_visible_length_m": 0.05,
+    "wire_basis": "14 mm legacy comparison only; no Ampere wire selection or electrical compatibility assertion",
+    "sleeve_outer_radius_m": 0.0076,
+    "sleeve_y_range_m": [
+      0.02,
+      0.044
+    ],
+    "sleeve_basis": "illustrative annular sleeve over uncrimped CAD, not actual heatshrink or crimp geometry"
+  },
+  "measurements": {
+    "states": {
+      "contour": {
+        "objects": [
+          {
+            "name": "PGE_nominal_body_envelope",
+            "category": "hardware",
+            "triangles": 12
+          },
+          {
+            "name": "left_moving_jaw_envelope",
+            "category": "hardware",
+            "triangles": 12
+          },
+          {
+            "name": "left_mounting_shoe",
+            "category": "insert",
+            "triangles": 12
+          },
+          {
+            "name": "left_offset_neck",
+            "category": "insert",
+            "triangles": 12
+          },
+          {
+            "name": "left_carrier_rail",
+            "category": "insert",
+            "triangles": 12
+          },
+          {
+            "name": "left_front_pad",
+            "category": "pad",
+            "triangles": 196
+          },
+          {
+            "name": "left_front_pad_seat",
+            "category": "insert",
+            "triangles": 12
+          },
+          {
+            "name": "left_root_pad",
+            "category": "pad",
+            "triangles": 196
+          },
+          {
+            "name": "left_root_pad_seat",
+            "category": "insert",
+            "triangles": 12
+          },
+          {
+            "name": "right_moving_jaw_envelope",
+            "category": "hardware",
+            "triangles": 12
+          },
+          {
+            "name": "right_mounting_shoe",
+            "category": "insert",
+            "triangles": 12
+          },
+          {
+            "name": "right_offset_neck",
+            "category": "insert",
+            "triangles": 12
+          },
+          {
+            "name": "right_carrier_rail",
+            "category": "insert",
+            "triangles": 12
+          },
+          {
+            "name": "right_front_pad",
+            "category": "pad",
+            "triangles": 196
+          },
+          {
+            "name": "right_front_pad_seat",
+            "category": "insert",
+            "triangles": 12
+          },
+          {
+            "name": "right_root_pad",
+            "category": "pad",
+            "triangles": 196
+          },
+          {
+            "name": "right_root_pad_seat",
+            "category": "insert",
+            "triangles": 12
+          }
+        ],
+        "bands": {
+          "tip": {
+            "radius_to_surface_m": 0.022646854196027844,
+            "object": "left_front_pad",
+            "witness_m": [
+              -0.005374012,
+              0.022,
+              -0.000625988
+            ],
+            "source_face_index": 153,
+            "z_above_reference_seat_m": [
+              0.0037999999999999996,
+              0.0538
+            ]
+          },
+          "upper": {
+            "radius_to_surface_m": 0.05460765,
+            "object": "PGE_nominal_body_envelope",
+            "witness_m": [
+              0.0,
+              0.05460765,
+              0.043711314
+            ],
+            "source_face_index": 1,
+            "z_above_reference_seat_m": [
+              0.0538,
+              0.14512760100000002
+            ]
+          }
+        },
+        "profile": [
+          {
+            "z_above_reference_seat_m": [
+              0.0,
+              0.002
+            ],
+            "radius_to_surface_m": null,
+            "object": null,
+            "witness_m": null,
+            "source_face_index": null
+          },
+          {
+            "z_above_reference_seat_m": [
+              0.002,
+              0.004
+            ],
+            "radius_to_surface_m": 0.022646854196027844,
+            "object": "left_front_pad",
+            "witness_m": [
+              -0.005374012,
+              0.022,
+              -0.011374012
+            ],
+            "source_face_index": 60
+          },
+          {
+            "z_above_reference_seat_m": [
+              0.004,
+              0.006
+            ],
+            "radius_to_surface_m": 0.022928112410275377,
+            "object": "left_front_pad",
+            "witness_m": [
+              -0.006457425082664431,
+              0.022,
+              -0.01
+            ],
+            "source_face_index": 73
+          },
+          {
+            "z_above_reference_seat_m": [
+              0.006,
+              0.008
+            ],
+            "radius_to_surface_m": 0.023189308898413606,
+            "object": "left_front_pad",
+            "witness_m": [
+              -0.007331033159524284,
+              0.022,
+              -0.008
+            ],
+            "source_face_index": 89
+          },
+          {
+            "z_above_reference_seat_m": [
+              0.008,
+              0.01
+            ],
+            "radius_to_surface_m": 0.023189308898413606,
+            "object": "left_front_pad",
+            "witness_m": [
+              -0.007331033159524284,
+              0.022,
+              -0.004
+            ],
+            "source_face_index": 125
+          },
+          {
+            "z_above_reference_seat_m": [
+              0.01,
+              0.012
+            ],
+            "radius_to_surface_m": 0.022928112410275377,
+            "object": "left_front_pad",
+            "witness_m": [
+              -0.006457425082664432,
+              0.022,
+              -0.002
+            ],
+            "source_face_index": 141
+          },
+          {
+            "z_above_reference_seat_m": [
+              0.012,
+              0.014
+            ],
+            "radius_to_surface_m": 0.022646854196027844,
+            "object": "left_front_pad",
+            "witness_m": [
+              -0.005374012,
+              0.022,
+              -0.000625988
+            ],
+            "source_face_index": 153
+          },
+          {
+            "z_above_reference_seat_m": [
+              0.014,
+              0.016
+            ],
+            "radius_to_surface_m": 0.024003333101883996,
+            "object": "left_front_pad_seat",
+            "witness_m": [
+              -0.0096,
+              0.022,
+              0.002
+            ],
+            "source_face_index": 256
+          },
+          {
+            "z_above_reference_seat_m": [
+              0.016,
+              0.018000000000000002
+            ],
+            "radius_to_surface_m": 0.024003333101883996,
+            "object": "left_front_pad_seat",
+            "witness_m": [
+              -0.0096,
+              0.022,
+              0.004000000000000002
+            ],
+            "source_face_index": 256
+          },
+          {
+            "z_above_reference_seat_m": [
+              0.018000000000000002,
+              0.02
+            ],
+            "radius_to_surface_m": 0.024003333101883996,
+            "object": "left_front_pad_seat",
+            "witness_m": [
+              -0.0096,
+              0.022,
+              0.006
+            ],
+            "source_face_index": 256
+          },
+          {
+            "z_above_reference_seat_m": [
+              0.02,
+              0.022
+            ],
+            "radius_to_surface_m": 0.024003333101883996,
+            "object": "left_front_pad_seat",
+            "witness_m": [
+              -0.0096,
+              0.022,
+              0.007999999999999998
+            ],
+            "source_face_index": 256
+          },
+          {
+            "z_above_reference_seat_m": [
+              0.022,
+              0.024
+            ],
+            "radius_to_surface_m": 0.024003333101883996,
+            "object": "left_front_pad_seat",
+            "witness_m": [
+              -0.0096,
+              0.022,
+              0.01
+            ],
+            "source_face_index": 256
+          },
+          {
+            "z_above_reference_seat_m": [
+              0.024,
+              0.026000000000000002
+            ],
+            "radius_to_surface_m": 0.024003333101883996,
+            "object": "left_carrier_rail",
+            "witness_m": [
+              -0.0096,
+              0.022,
+              0.011
+            ],
+            "source_face_index": 51
+          },
+          {
+            "z_above_reference_seat_m": [
+              0.026000000000000002,
+              0.028
+            ],
+            "radius_to_surface_m": 0.024003333101883996,
+            "object": "left_carrier_rail",
+            "witness_m": [
+              -0.0096,
+              0.022,
+              0.014
+            ],
+            "source_face_index": 48
+          },
+          {
+            "z_above_reference_seat_m": [
+              0.028,
+              0.03
+            ],
+            "radius_to_surface_m": 0.024003333101883996,
+            "object": "left_carrier_rail",
+            "witness_m": [
+              -0.0096,
+              0.022,
+              0.016
+            ],
+            "source_face_index": 48
+          },
+          {
+            "z_above_reference_seat_m": [
+              0.03,
+              0.032
+            ],
+            "radius_to_surface_m": 0.024003333101883996,
+            "object": "left_carrier_rail",
+            "witness_m": [
+              -0.0096,
+              0.022,
+              0.017
+            ],
+            "source_face_index": 52
+          },
+          {
+            "z_above_reference_seat_m": [
+              0.032,
+              0.034
+            ],
+            "radius_to_surface_m": 0.05886858897334794,
+            "object": "left_offset_neck",
+            "witness_m": [
+              -0.011756762,
+              0.05768266043611667,
+              0.018000000000000002
+            ],
+            "source_face_index": 36
+          },
+          {
+            "z_above_reference_seat_m": [
+              0.034,
+              0.036000000000000004
+            ],
+            "radius_to_surface_m": 0.05940381539056618,
+            "object": "left_offset_neck",
+            "witness_m": [
+              -0.011756762,
+              0.05822878867220083,
+              0.020000000000000004
+            ],
+            "source_face_index": 36
+          },
+          {
+            "z_above_reference_seat_m": [
+              0.036000000000000004,
+              0.038
+            ],
+            "radius_to_surface_m": 0.059939238486157384,
+            "object": "left_offset_neck",
+            "witness_m": [
+              -0.011756762,
+              0.058774916908285006,
+              0.022000000000000006
+            ],
+            "source_face_index": 36
+          },
+          {
+            "z_above_reference_seat_m": [
+              0.038,
+              0.04
+            ],
+            "radius_to_surface_m": 0.060474853036158176,
+            "object": "left_offset_neck",
+            "witness_m": [
+              -0.011756762,
+              0.05932104514436918,
+              0.024
+            ],
+            "source_face_index": 36
+          },
+          {
+            "z_above_reference_seat_m": [
+              0.04,
+              0.042
+            ],
+            "radius_to_surface_m": 0.06101065399821498,
+            "object": "left_offset_neck",
+            "witness_m": [
+              -0.011756762,
+              0.059867173380453345,
+              0.026000000000000002
+            ],
+            "source_face_index": 36
+          },
+          {
+            "z_above_reference_seat_m": [
+              0.042,
+              0.044
+            ],
+            "radius_to_surface_m": 0.06154663650383649,
+            "object": "left_offset_neck",
+            "witness_m": [
+              -0.011756762,
+              0.06041330161653752,
+              0.028000000000000004
+            ],
+            "source_face_index": 36
+          },
+          {
+            "z_above_reference_seat_m": [
+              0.044,
+              0.046
+            ],
+            "radius_to_surface_m": 0.06208279585103548,
+            "object": "left_offset_neck",
+            "witness_m": [
+              -0.011756762,
+              0.06095942985262169,
+              0.03
+            ],
+            "source_face_index": 36
+          },
+          {
+            "z_above_reference_seat_m": [
+              0.046,
+              0.048
+            ],
+            "radius_to_surface_m": 0.062213480354187146,
+            "object": "left_mounting_shoe",
+            "witness_m": [
+              -0.0065,
+              0.06187299198988869,
+              0.034
+            ],
+            "source_face_index": 26
+          },
+          {
+            "z_above_reference_seat_m": [
+              0.048,
+              0.05
+            ],
+            "radius_to_surface_m": 0.058822297585965175,
+            "object": "left_mounting_shoe",
+            "witness_m": [
+              -0.0065,
+              0.058462062,
+              0.034913956
+            ],
+            "source_face_index": 24
+          },
+          {
+            "z_above_reference_seat_m": [
+              0.05,
+              0.052000000000000005
+            ],
+            "radius_to_surface_m": 0.05911152879171317,
+            "object": "left_mounting_shoe",
+            "witness_m": [
+              -0.0065,
+              0.05875306661012287,
+              0.036000000000000004
+            ],
+            "source_face_index": 24
+          },
+          {
+            "z_above_reference_seat_m": [
+              0.052000000000000005,
+              0.054
+            ],
+            "radius_to_surface_m": 0.059644206509163744,
+            "object": "left_moving_jaw_envelope",
+            "witness_m": [
+              -0.0065,
+              0.05928896499440491,
+              0.038000000000000006
+            ],
+            "source_face_index": 12
+          },
+          {
+            "z_above_reference_seat_m": [
+              0.054,
+              0.056
+            ],
+            "radius_to_surface_m": 0.06017694145741984,
+            "object": "left_moving_jaw_envelope",
+            "witness_m": [
+              -0.0065,
+              0.059824863419566075,
+              0.04
+            ],
+            "source_face_index": 12
+          },
+          {
+            "z_above_reference_seat_m": [
+              0.056,
+              0.058
+            ],
+            "radius_to_surface_m": 0.05460765,
+            "object": "PGE_nominal_body_envelope",
+            "witness_m": [
+              0.0,
+              0.05460765,
+              0.043711314
+            ],
+            "source_face_index": 1
+          },
+          {
+            "z_above_reference_seat_m": [
+              0.058,
+              0.06
+            ],
+            "radius_to_surface_m": 0.054685003182194346,
+            "object": "PGE_nominal_body_envelope",
+            "witness_m": [
+              6.938893903907228e-18,
+              0.054685003182194346,
+              0.044000000000000004
+            ],
+            "source_face_index": 1
+          },
+          {
+            "z_above_reference_seat_m": [
+              0.06,
+              0.062
+            ],
+            "radius_to_surface_m": 0.05522090157833647,
+            "object": "PGE_nominal_body_envelope",
+            "witness_m": [
+              0.0,
+              0.05522090157833647,
+              0.046
+            ],
+            "source_face_index": 1
+          },
+          {
+            "z_above_reference_seat_m": [
+              0.062,
+              0.064
+            ],
+            "radius_to_surface_m": 0.0557567999744786,
+            "object": "PGE_nominal_body_envelope",
+            "witness_m": [
+              1.0408340855860843e-17,
+              0.0557567999744786,
+              0.048
+            ],
+            "source_face_index": 1
+          },
+          {
+            "z_above_reference_seat_m": [
+              0.064,
+              0.066
+            ],
+            "radius_to_surface_m": 0.05629269837062073,
+            "object": "PGE_nominal_body_envelope",
+            "witness_m": [
+              0.0,
+              0.05629269837062073,
+              0.05
+            ],
+            "source_face_index": 1
+          },
+          {
+            "z_above_reference_seat_m": [
+              0.066,
+              0.068
+            ],
+            "radius_to_surface_m": 0.05682859676676286,
+            "object": "PGE_nominal_body_envelope",
+            "witness_m": [
+              -3.469446951953614e-18,
+              0.05682859676676286,
+              0.052000000000000005
+            ],
+            "source_face_index": 1
+          },
+          {
+            "z_above_reference_seat_m": [
+              0.068,
+              0.07
+            ],
+            "radius_to_surface_m": 0.05736449516290499,
+            "object": "PGE_nominal_body_envelope",
+            "witness_m": [
+              -1.3877787807814457e-17,
+              0.05736449516290499,
+              0.054000000000000006
+            ],
+            "source_face_index": 1
+          },
+          {
+            "z_above_reference_seat_m": [
+              0.07,
+              0.07200000000000001
+            ],
+            "radius_to_surface_m": 0.057900393559047116,
+            "object": "PGE_nominal_body_envelope",
+            "witness_m": [
+              -3.469446951953614e-18,
+              0.057900393559047116,
+              0.05600000000000001
+            ],
+            "source_face_index": 1
+          },
+          {
+            "z_above_reference_seat_m": [
+              0.07200000000000001,
+              0.074
+            ],
+            "radius_to_surface_m": 0.05843629195518925,
+            "object": "PGE_nominal_body_envelope",
+            "witness_m": [
+              -3.469446951953614e-18,
+              0.05843629195518925,
+              0.05800000000000001
+            ],
+            "source_face_index": 1
+          },
+          {
+            "z_above_reference_seat_m": [
+              0.074,
+              0.076
+            ],
+            "radius_to_surface_m": 0.05897219035133137,
+            "object": "PGE_nominal_body_envelope",
+            "witness_m": [
+              6.938893903907228e-18,
+              0.05897219035133137,
+              0.06
+            ],
+            "source_face_index": 1
+          },
+          {
+            "z_above_reference_seat_m": [
+              0.076,
+              0.078
+            ],
+            "radius_to_surface_m": 0.0595080887474735,
+            "object": "PGE_nominal_body_envelope",
+            "witness_m": [
+              0.0,
+              0.0595080887474735,
+              0.062
+            ],
+            "source_face_index": 1
+          },
+          {
+            "z_above_reference_seat_m": [
+              0.078,
+              0.08
+            ],
+            "radius_to_surface_m": 0.060043987143615626,
+            "object": "PGE_nominal_body_envelope",
+            "witness_m": [
+              3.469446951953614e-18,
+              0.060043987143615626,
+              0.064
+            ],
+            "source_face_index": 1
+          },
+          {
+            "z_above_reference_seat_m": [
+              0.08,
+              0.082
+            ],
+            "radius_to_surface_m": 0.06057988553975776,
+            "object": "PGE_nominal_body_envelope",
+            "witness_m": [
+              3.469446951953614e-18,
+              0.06057988553975776,
+              0.066
+            ],
+            "source_face_index": 1
+          },
+          {
+            "z_above_reference_seat_m": [
+              0.082,
+              0.084
+            ],
+            "radius_to_surface_m": 0.061115783935899885,
+            "object": "PGE_nominal_body_envelope",
+            "witness_m": [
+              0.0,
+              0.061115783935899885,
+              0.068
+            ],
+            "source_face_index": 1
+          },
+          {
+            "z_above_reference_seat_m": [
+              0.084,
+              0.08600000000000001
+            ],
+            "radius_to_surface_m": 0.06165168233204202,
+            "object": "PGE_nominal_body_envelope",
+            "witness_m": [
+              0.0,
+              0.06165168233204202,
+              0.07
+            ],
+            "source_face_index": 1
+          },
+          {
+            "z_above_reference_seat_m": [
+              0.08600000000000001,
+              0.088
+            ],
+            "radius_to_surface_m": 0.062187580728184144,
+            "object": "PGE_nominal_body_envelope",
+            "witness_m": [
+              0.0,
+              0.062187580728184144,
+              0.07200000000000001
+            ],
+            "source_face_index": 1
+          },
+          {
+            "z_above_reference_seat_m": [
+              0.088,
+              0.09
+            ],
+            "radius_to_surface_m": 0.06272347912432627,
+            "object": "PGE_nominal_body_envelope",
+            "witness_m": [
+              -3.469446951953614e-18,
+              0.06272347912432627,
+              0.074
+            ],
+            "source_face_index": 1
+          },
+          {
+            "z_above_reference_seat_m": [
+              0.09,
+              0.092
+            ],
+            "radius_to_surface_m": 0.0632593775204684,
+            "object": "PGE_nominal_body_envelope",
+            "witness_m": [
+              0.0,
+              0.0632593775204684,
+              0.076
+            ],
+            "source_face_index": 1
+          },
+          {
+            "z_above_reference_seat_m": [
+              0.092,
+              0.094
+            ],
+            "radius_to_surface_m": 0.06379527591661052,
+            "object": "PGE_nominal_body_envelope",
+            "witness_m": [
+              3.469446951953614e-18,
+              0.06379527591661052,
+              0.078
+            ],
+            "source_face_index": 1
+          },
+          {
+            "z_above_reference_seat_m": [
+              0.094,
+              0.096
+            ],
+            "radius_to_surface_m": 0.06433117431275265,
+            "object": "PGE_nominal_body_envelope",
+            "witness_m": [
+              0.0,
+              0.06433117431275265,
+              0.08
+            ],
+            "source_face_index": 1
+          },
+          {
+            "z_above_reference_seat_m": [
+              0.096,
+              0.098
+            ],
+            "radius_to_surface_m": 0.06486707270889479,
+            "object": "PGE_nominal_body_envelope",
+            "witness_m": [
+              -3.469446951953614e-18,
+              0.06486707270889479,
+              0.082
+            ],
+            "source_face_index": 1
+          },
+          {
+            "z_above_reference_seat_m": [
+              0.098,
+              0.1
+            ],
+            "radius_to_surface_m": 0.06540297110503691,
+            "object": "PGE_nominal_body_envelope",
+            "witness_m": [
+              3.469446951953614e-18,
+              0.06540297110503691,
+              0.084
+            ],
+            "source_face_index": 1
+          },
+          {
+            "z_above_reference_seat_m": [
+              0.1,
+              0.10200000000000001
+            ],
+            "radius_to_surface_m": 0.06593886950117904,
+            "object": "PGE_nominal_body_envelope",
+            "witness_m": [
+              3.469446951953614e-18,
+              0.06593886950117904,
+              0.08600000000000001
+            ],
+            "source_face_index": 1
+          },
+          {
+            "z_above_reference_seat_m": [
+              0.10200000000000001,
+              0.10400000000000001
+            ],
+            "radius_to_surface_m": 0.06647476789732117,
+            "object": "PGE_nominal_body_envelope",
+            "witness_m": [
+              -5.421010862427522e-20,
+              0.06647476789732117,
+              0.08800000000000001
+            ],
+            "source_face_index": 5
+          },
+          {
+            "z_above_reference_seat_m": [
+              0.10400000000000001,
+              0.106
+            ],
+            "radius_to_surface_m": 0.0670106662934633,
+            "object": "PGE_nominal_body_envelope",
+            "witness_m": [
+              2.168404344971009e-19,
+              0.0670106662934633,
+              0.09000000000000001
+            ],
+            "source_face_index": 5
+          },
+          {
+            "z_above_reference_seat_m": [
+              0.106,
+              0.108
+            ],
+            "radius_to_surface_m": 0.06754656468960543,
+            "object": "PGE_nominal_body_envelope",
+            "witness_m": [
+              3.0791341698588326e-17,
+              0.06754656468960543,
+              0.092
+            ],
+            "source_face_index": 5
+          },
+          {
+            "z_above_reference_seat_m": [
+              0.108,
+              0.11
+            ],
+            "radius_to_surface_m": 0.06808246308574756,
+            "object": "PGE_nominal_body_envelope",
+            "witness_m": [
+              0.0,
+              0.06808246308574756,
+              0.094
+            ],
+            "source_face_index": 5
+          },
+          {
+            "z_above_reference_seat_m": [
+              0.11,
+              0.112
+            ],
+            "radius_to_surface_m": 0.06861836148188968,
+            "object": "PGE_nominal_body_envelope",
+            "witness_m": [
+              0.0,
+              0.06861836148188968,
+              0.096
+            ],
+            "source_face_index": 5
+          },
+          {
+            "z_above_reference_seat_m": [
+              0.112,
+              0.114
+            ],
+            "radius_to_surface_m": 0.06915425987803181,
+            "object": "PGE_nominal_body_envelope",
+            "witness_m": [
+              0.0,
+              0.06915425987803181,
+              0.098
+            ],
+            "source_face_index": 5
+          },
+          {
+            "z_above_reference_seat_m": [
+              0.114,
+              0.116
+            ],
+            "radius_to_surface_m": 0.06969015827417394,
+            "object": "PGE_nominal_body_envelope",
+            "witness_m": [
+              0.0,
+              0.06969015827417394,
+              0.1
+            ],
+            "source_face_index": 5
+          },
+          {
+            "z_above_reference_seat_m": [
+              0.116,
+              0.11800000000000001
+            ],
+            "radius_to_surface_m": 0.07022605667031606,
+            "object": "PGE_nominal_body_envelope",
+            "witness_m": [
+              1.734723475976807e-18,
+              0.07022605667031606,
+              0.10200000000000001
+            ],
+            "source_face_index": 5
+          },
+          {
+            "z_above_reference_seat_m": [
+              0.11800000000000001,
+              0.12
+            ],
+            "radius_to_surface_m": 0.0707619550664582,
+            "object": "PGE_nominal_body_envelope",
+            "witness_m": [
+              0.0,
+              0.0707619550664582,
+              0.10400000000000001
+            ],
+            "source_face_index": 5
+          },
+          {
+            "z_above_reference_seat_m": [
+              0.12,
+              0.122
+            ],
+            "radius_to_surface_m": 0.07129785346260033,
+            "object": "PGE_nominal_body_envelope",
+            "witness_m": [
+              0.0,
+              0.07129785346260033,
+              0.106
+            ],
+            "source_face_index": 5
+          },
+          {
+            "z_above_reference_seat_m": [
+              0.122,
+              0.124
+            ],
+            "radius_to_surface_m": 0.07183375185874245,
+            "object": "PGE_nominal_body_envelope",
+            "witness_m": [
+              0.0,
+              0.07183375185874245,
+              0.108
+            ],
+            "source_face_index": 5
+          },
+          {
+            "z_above_reference_seat_m": [
+              0.124,
+              0.126
+            ],
+            "radius_to_surface_m": 0.07236965025488458,
+            "object": "PGE_nominal_body_envelope",
+            "witness_m": [
+              -1.734723475976807e-18,
+              0.07236965025488458,
+              0.11
+            ],
+            "source_face_index": 5
+          },
+          {
+            "z_above_reference_seat_m": [
+              0.126,
+              0.128
+            ],
+            "radius_to_surface_m": 0.0729055486510267,
+            "object": "PGE_nominal_body_envelope",
+            "witness_m": [
+              0.0,
+              0.0729055486510267,
+              0.112
+            ],
+            "source_face_index": 5
+          },
+          {
+            "z_above_reference_seat_m": [
+              0.128,
+              0.13
+            ],
+            "radius_to_surface_m": 0.07344144704716885,
+            "object": "PGE_nominal_body_envelope",
+            "witness_m": [
+              0.0,
+              0.07344144704716885,
+              0.114
+            ],
+            "source_face_index": 5
+          },
+          {
+            "z_above_reference_seat_m": [
+              0.13,
+              0.132
+            ],
+            "radius_to_surface_m": 0.07397734544331097,
+            "object": "PGE_nominal_body_envelope",
+            "witness_m": [
+              0.0,
+              0.07397734544331097,
+              0.116
+            ],
+            "source_face_index": 5
+          },
+          {
+            "z_above_reference_seat_m": [
+              0.132,
+              0.134
+            ],
+            "radius_to_surface_m": 0.0745132438394531,
+            "object": "PGE_nominal_body_envelope",
+            "witness_m": [
+              3.469446951953614e-18,
+              0.0745132438394531,
+              0.11800000000000001
+            ],
+            "source_face_index": 5
+          },
+          {
+            "z_above_reference_seat_m": [
+              0.134,
+              0.136
+            ],
+            "radius_to_surface_m": 0.07504914223559522,
+            "object": "PGE_nominal_body_envelope",
+            "witness_m": [
+              0.0,
+              0.07504914223559522,
+              0.12000000000000001
+            ],
+            "source_face_index": 5
+          },
+          {
+            "z_above_reference_seat_m": [
+              0.136,
+              0.138
+            ],
+            "radius_to_surface_m": 0.07558504063173735,
+            "object": "PGE_nominal_body_envelope",
+            "witness_m": [
+              3.469446951953614e-18,
+              0.07558504063173735,
+              0.12200000000000001
+            ],
+            "source_face_index": 5
+          },
+          {
+            "z_above_reference_seat_m": [
+              0.138,
+              0.14
+            ],
+            "radius_to_surface_m": 0.07612093902787949,
+            "object": "PGE_nominal_body_envelope",
+            "witness_m": [
+              0.0,
+              0.07612093902787949,
+              0.12400000000000001
+            ],
+            "source_face_index": 5
+          },
+          {
+            "z_above_reference_seat_m": [
+              0.14,
+              0.14200000000000002
+            ],
+            "radius_to_surface_m": 0.0766568374240216,
+            "object": "PGE_nominal_body_envelope",
+            "witness_m": [
+              -3.469446951953614e-18,
+              0.0766568374240216,
+              0.126
+            ],
+            "source_face_index": 5
+          },
+          {
+            "z_above_reference_seat_m": [
+              0.14200000000000002,
+              0.14400000000000002
+            ],
+            "radius_to_surface_m": 0.07719273582016374,
+            "object": "PGE_nominal_body_envelope",
+            "witness_m": [
+              3.469446951953614e-18,
+              0.07719273582016374,
+              0.128
+            ],
+            "source_face_index": 5
+          },
+          {
+            "z_above_reference_seat_m": [
+              0.14400000000000002,
+              0.146
+            ],
+            "radius_to_surface_m": 0.07772863421630587,
+            "object": "PGE_nominal_body_envelope",
+            "witness_m": [
+              0.0,
+              0.07772863421630587,
+              0.13
+            ],
+            "source_face_index": 5
+          }
+        ]
+      },
+      "open": {
+        "objects": [
+          {
+            "name": "PGE_nominal_body_envelope",
+            "category": "hardware",
+            "triangles": 12
+          },
+          {
+            "name": "left_moving_jaw_envelope",
+            "category": "hardware",
+            "triangles": 12
+          },
+          {
+            "name": "left_mounting_shoe",
+            "category": "insert",
+            "triangles": 12
+          },
+          {
+            "name": "left_offset_neck",
+            "category": "insert",
+            "triangles": 12
+          },
+          {
+            "name": "left_carrier_rail",
+            "category": "insert",
+            "triangles": 12
+          },
+          {
+            "name": "left_front_pad",
+            "category": "pad",
+            "triangles": 196
+          },
+          {
+            "name": "left_front_pad_seat",
+            "category": "insert",
+            "triangles": 12
+          },
+          {
+            "name": "left_root_pad",
+            "category": "pad",
+            "triangles": 196
+          },
+          {
+            "name": "left_root_pad_seat",
+            "category": "insert",
+            "triangles": 12
+          },
+          {
+            "name": "right_moving_jaw_envelope",
+            "category": "hardware",
+            "triangles": 12
+          },
+          {
+            "name": "right_mounting_shoe",
+            "category": "insert",
+            "triangles": 12
+          },
+          {
+            "name": "right_offset_neck",
+            "category": "insert",
+            "triangles": 12
+          },
+          {
+            "name": "right_carrier_rail",
+            "category": "insert",
+            "triangles": 12
+          },
+          {
+            "name": "right_front_pad",
+            "category": "pad",
+            "triangles": 196
+          },
+          {
+            "name": "right_front_pad_seat",
+            "category": "insert",
+            "triangles": 12
+          },
+          {
+            "name": "right_root_pad",
+            "category": "pad",
+            "triangles": 196
+          },
+          {
+            "name": "right_root_pad_seat",
+            "category": "insert",
+            "triangles": 12
+          }
+        ],
+        "bands": {
+          "tip": {
+            "radius_to_surface_m": 0.025241160293776987,
+            "object": "left_front_pad",
+            "witness_m": [
+              -0.012374012,
+              0.022,
+              -0.000625988
+            ],
+            "source_face_index": 153,
+            "z_above_reference_seat_m": [
+              0.0037999999999999996,
+              0.0538
+            ]
+          },
+          "upper": {
+            "radius_to_surface_m": 0.05460765,
+            "object": "PGE_nominal_body_envelope",
+            "witness_m": [
+              0.0,
+              0.05460765,
+              0.043711314
+            ],
+            "source_face_index": 1,
+            "z_above_reference_seat_m": [
+              0.0538,
+              0.14512760100000002
+            ]
+          }
+        },
+        "profile": [
+          {
+            "z_above_reference_seat_m": [
+              0.0,
+              0.002
+            ],
+            "radius_to_surface_m": null,
+            "object": null,
+            "witness_m": null,
+            "source_face_index": null
+          },
+          {
+            "z_above_reference_seat_m": [
+              0.002,
+              0.004
+            ],
+            "radius_to_surface_m": 0.025241160293776987,
+            "object": "left_front_pad",
+            "witness_m": [
+              -0.012374012,
+              0.022,
+              -0.011374012
+            ],
+            "source_face_index": 60
+          },
+          {
+            "z_above_reference_seat_m": [
+              0.004,
+              0.006
+            ],
+            "radius_to_surface_m": 0.025789577155423193,
+            "object": "left_front_pad",
+            "witness_m": [
+              -0.013457425082664431,
+              0.022,
+              -0.01
+            ],
+            "source_face_index": 73
+          },
+          {
+            "z_above_reference_seat_m": [
+              0.006,
+              0.008
+            ],
+            "radius_to_surface_m": 0.026256018575164523,
+            "object": "left_front_pad",
+            "witness_m": [
+              -0.014331033159524284,
+              0.022,
+              -0.008
+            ],
+            "source_face_index": 89
+          },
+          {
+            "z_above_reference_seat_m": [
+              0.008,
+              0.01
+            ],
+            "radius_to_surface_m": 0.026256018575164523,
+            "object": "left_front_pad",
+            "witness_m": [
+              -0.014331033159524284,
+              0.022,
+              -0.004
+            ],
+            "source_face_index": 125
+          },
+          {
+            "z_above_reference_seat_m": [
+              0.01,
+              0.012
+            ],
+            "radius_to_surface_m": 0.025789577155423193,
+            "object": "left_front_pad",
+            "witness_m": [
+              -0.013457425082664431,
+              0.022,
+              -0.002
+            ],
+            "source_face_index": 141
+          },
+          {
+            "z_above_reference_seat_m": [
+              0.012,
+              0.014
+            ],
+            "radius_to_surface_m": 0.025241160293776987,
+            "object": "left_front_pad",
+            "witness_m": [
+              -0.012374012,
+              0.022,
+              -0.000625988
+            ],
+            "source_face_index": 153
+          },
+          {
+            "z_above_reference_seat_m": [
+              0.014,
+              0.016
+            ],
+            "radius_to_surface_m": 0.027560116110060203,
+            "object": "left_front_pad_seat",
+            "witness_m": [
+              -0.0166,
+              0.022,
+              0.002
+            ],
+            "source_face_index": 256
+          },
+          {
+            "z_above_reference_seat_m": [
+              0.016,
+              0.018000000000000002
+            ],
+            "radius_to_surface_m": 0.027560116110060203,
+            "object": "left_front_pad_seat",
+            "witness_m": [
+              -0.0166,
+              0.022,
+              0.004000000000000002
+            ],
+            "source_face_index": 256
+          },
+          {
+            "z_above_reference_seat_m": [
+              0.018000000000000002,
+              0.02
+            ],
+            "radius_to_surface_m": 0.027560116110060203,
+            "object": "left_front_pad_seat",
+            "witness_m": [
+              -0.0166,
+              0.022,
+              0.006
+            ],
+            "source_face_index": 256
+          },
+          {
+            "z_above_reference_seat_m": [
+              0.02,
+              0.022
+            ],
+            "radius_to_surface_m": 0.027560116110060203,
+            "object": "left_front_pad_seat",
+            "witness_m": [
+              -0.0166,
+              0.022,
+              0.007999999999999998
+            ],
+            "source_face_index": 256
+          },
+          {
+            "z_above_reference_seat_m": [
+              0.022,
+              0.024
+            ],
+            "radius_to_surface_m": 0.027560116110060203,
+            "object": "left_front_pad_seat",
+            "witness_m": [
+              -0.0166,
+              0.022,
+              0.01
+            ],
+            "source_face_index": 256
+          },
+          {
+            "z_above_reference_seat_m": [
+              0.024,
+              0.026000000000000002
+            ],
+            "radius_to_surface_m": 0.027560116110060203,
+            "object": "left_carrier_rail",
+            "witness_m": [
+              -0.0166,
+              0.022,
+              0.011
+            ],
+            "source_face_index": 51
+          },
+          {
+            "z_above_reference_seat_m": [
+              0.026000000000000002,
+              0.028
+            ],
+            "radius_to_surface_m": 0.027560116110060203,
+            "object": "left_carrier_rail",
+            "witness_m": [
+              -0.0166,
+              0.022,
+              0.014
+            ],
+            "source_face_index": 48
+          },
+          {
+            "z_above_reference_seat_m": [
+              0.028,
+              0.03
+            ],
+            "radius_to_surface_m": 0.027560116110060203,
+            "object": "left_carrier_rail",
+            "witness_m": [
+              -0.0166,
+              0.022,
+              0.016
+            ],
+            "source_face_index": 48
+          },
+          {
+            "z_above_reference_seat_m": [
+              0.03,
+              0.032
+            ],
+            "radius_to_surface_m": 0.027560116110060203,
+            "object": "left_carrier_rail",
+            "witness_m": [
+              -0.0166,
+              0.022,
+              0.017
+            ],
+            "source_face_index": 52
+          },
+          {
+            "z_above_reference_seat_m": [
+              0.032,
+              0.034
+            ],
+            "radius_to_surface_m": 0.06061058423265191,
+            "object": "right_offset_neck",
+            "witness_m": [
+              0.01650791316277717,
+              0.05831922259455796,
+              0.018000000000000002
+            ],
+            "source_face_index": 505
+          },
+          {
+            "z_above_reference_seat_m": [
+              0.034,
+              0.036000000000000004
+            ],
+            "radius_to_surface_m": 0.061136066378124077,
+            "object": "right_offset_neck",
+            "witness_m": [
+              0.016651033605120037,
+              0.058824839073911256,
+              0.020000000000000004
+            ],
+            "source_face_index": 505
+          },
+          {
+            "z_above_reference_seat_m": [
+              0.036000000000000004,
+              0.038
+            ],
+            "radius_to_surface_m": 0.06166154852359626,
+            "object": "left_offset_neck",
+            "witness_m": [
+              -0.016794154047463046,
+              0.05933045555326452,
+              0.022000000000000006
+            ],
+            "source_face_index": 41
+          },
+          {
+            "z_above_reference_seat_m": [
+              0.038,
+              0.04
+            ],
+            "radius_to_surface_m": 0.06218703066906844,
+            "object": "left_offset_neck",
+            "witness_m": [
+              -0.016937274489806083,
+              0.05983607203261777,
+              0.024
+            ],
+            "source_face_index": 41
+          },
+          {
+            "z_above_reference_seat_m": [
+              0.04,
+              0.042
+            ],
+            "radius_to_surface_m": 0.0627125128145406,
+            "object": "left_offset_neck",
+            "witness_m": [
+              -0.01708039493214915,
+              0.060341688511971005,
+              0.026000000000000002
+            ],
+            "source_face_index": 41
+          },
+          {
+            "z_above_reference_seat_m": [
+              0.042,
+              0.044
+            ],
+            "radius_to_surface_m": 0.06323799484970251,
+            "object": "left_offset_neck",
+            "witness_m": [
+              -0.01722353461264614,
+              0.06084729943110032,
+              0.028000000000000004
+            ],
+            "source_face_index": 37
+          },
+          {
+            "z_above_reference_seat_m": [
+              0.044,
+              0.046
+            ],
+            "radius_to_surface_m": 0.06376347685443354,
+            "object": "left_offset_neck",
+            "witness_m": [
+              -0.01736665517676754,
+              0.06135291572971194,
+              0.03
+            ],
+            "source_face_index": 37
+          },
+          {
+            "z_above_reference_seat_m": [
+              0.046,
+              0.048
+            ],
+            "radius_to_surface_m": 0.06332864389658782,
+            "object": "left_mounting_shoe",
+            "witness_m": [
+              -0.0135,
+              0.06187299198988869,
+              0.034
+            ],
+            "source_face_index": 26
+          },
+          {
+            "z_above_reference_seat_m": [
+              0.048,
+              0.05
+            ],
+            "radius_to_surface_m": 0.060000522441824154,
+            "object": "left_mounting_shoe",
+            "witness_m": [
+              -0.0135,
+              0.058462062,
+              0.034913956
+            ],
+            "source_face_index": 24
+          },
+          {
+            "z_above_reference_seat_m": [
+              0.05,
+              0.052000000000000005
+            ],
+            "radius_to_surface_m": 0.060284101022521144,
+            "object": "left_mounting_shoe",
+            "witness_m": [
+              -0.0135,
+              0.05875306661012287,
+              0.036000000000000004
+            ],
+            "source_face_index": 24
+          },
+          {
+            "z_above_reference_seat_m": [
+              0.052000000000000005,
+              0.054
+            ],
+            "radius_to_surface_m": 0.06080650762959316,
+            "object": "left_moving_jaw_envelope",
+            "witness_m": [
+              -0.0135,
+              0.05928896499440491,
+              0.038000000000000006
+            ],
+            "source_face_index": 12
+          },
+          {
+            "z_above_reference_seat_m": [
+              0.054,
+              0.056
+            ],
+            "radius_to_surface_m": 0.060994360836617204,
+            "object": "PGE_nominal_body_envelope",
+            "witness_m": [
+              0.0,
+              0.060994360836617204,
+              0.042
+            ],
+            "source_face_index": 3
+          },
+          {
+            "z_above_reference_seat_m": [
+              0.056,
+              0.058
+            ],
+            "radius_to_surface_m": 0.05460765,
+            "object": "PGE_nominal_body_envelope",
+            "witness_m": [
+              0.0,
+              0.05460765,
+              0.043711314
+            ],
+            "source_face_index": 1
+          },
+          {
+            "z_above_reference_seat_m": [
+              0.058,
+              0.06
+            ],
+            "radius_to_surface_m": 0.054685003182194346,
+            "object": "PGE_nominal_body_envelope",
+            "witness_m": [
+              6.938893903907228e-18,
+              0.054685003182194346,
+              0.044000000000000004
+            ],
+            "source_face_index": 1
+          },
+          {
+            "z_above_reference_seat_m": [
+              0.06,
+              0.062
+            ],
+            "radius_to_surface_m": 0.05522090157833647,
+            "object": "PGE_nominal_body_envelope",
+            "witness_m": [
+              0.0,
+              0.05522090157833647,
+              0.046
+            ],
+            "source_face_index": 1
+          },
+          {
+            "z_above_reference_seat_m": [
+              0.062,
+              0.064
+            ],
+            "radius_to_surface_m": 0.0557567999744786,
+            "object": "PGE_nominal_body_envelope",
+            "witness_m": [
+              1.0408340855860843e-17,
+              0.0557567999744786,
+              0.048
+            ],
+            "source_face_index": 1
+          },
+          {
+            "z_above_reference_seat_m": [
+              0.064,
+              0.066
+            ],
+            "radius_to_surface_m": 0.05629269837062073,
+            "object": "PGE_nominal_body_envelope",
+            "witness_m": [
+              0.0,
+              0.05629269837062073,
+              0.05
+            ],
+            "source_face_index": 1
+          },
+          {
+            "z_above_reference_seat_m": [
+              0.066,
+              0.068
+            ],
+            "radius_to_surface_m": 0.05682859676676286,
+            "object": "PGE_nominal_body_envelope",
+            "witness_m": [
+              -3.469446951953614e-18,
+              0.05682859676676286,
+              0.052000000000000005
+            ],
+            "source_face_index": 1
+          },
+          {
+            "z_above_reference_seat_m": [
+              0.068,
+              0.07
+            ],
+            "radius_to_surface_m": 0.05736449516290499,
+            "object": "PGE_nominal_body_envelope",
+            "witness_m": [
+              -1.3877787807814457e-17,
+              0.05736449516290499,
+              0.054000000000000006
+            ],
+            "source_face_index": 1
+          },
+          {
+            "z_above_reference_seat_m": [
+              0.07,
+              0.07200000000000001
+            ],
+            "radius_to_surface_m": 0.057900393559047116,
+            "object": "PGE_nominal_body_envelope",
+            "witness_m": [
+              -3.469446951953614e-18,
+              0.057900393559047116,
+              0.05600000000000001
+            ],
+            "source_face_index": 1
+          },
+          {
+            "z_above_reference_seat_m": [
+              0.07200000000000001,
+              0.074
+            ],
+            "radius_to_surface_m": 0.05843629195518925,
+            "object": "PGE_nominal_body_envelope",
+            "witness_m": [
+              -3.469446951953614e-18,
+              0.05843629195518925,
+              0.05800000000000001
+            ],
+            "source_face_index": 1
+          },
+          {
+            "z_above_reference_seat_m": [
+              0.074,
+              0.076
+            ],
+            "radius_to_surface_m": 0.05897219035133137,
+            "object": "PGE_nominal_body_envelope",
+            "witness_m": [
+              6.938893903907228e-18,
+              0.05897219035133137,
+              0.06
+            ],
+            "source_face_index": 1
+          },
+          {
+            "z_above_reference_seat_m": [
+              0.076,
+              0.078
+            ],
+            "radius_to_surface_m": 0.0595080887474735,
+            "object": "PGE_nominal_body_envelope",
+            "witness_m": [
+              0.0,
+              0.0595080887474735,
+              0.062
+            ],
+            "source_face_index": 1
+          },
+          {
+            "z_above_reference_seat_m": [
+              0.078,
+              0.08
+            ],
+            "radius_to_surface_m": 0.060043987143615626,
+            "object": "PGE_nominal_body_envelope",
+            "witness_m": [
+              3.469446951953614e-18,
+              0.060043987143615626,
+              0.064
+            ],
+            "source_face_index": 1
+          },
+          {
+            "z_above_reference_seat_m": [
+              0.08,
+              0.082
+            ],
+            "radius_to_surface_m": 0.06057988553975776,
+            "object": "PGE_nominal_body_envelope",
+            "witness_m": [
+              3.469446951953614e-18,
+              0.06057988553975776,
+              0.066
+            ],
+            "source_face_index": 1
+          },
+          {
+            "z_above_reference_seat_m": [
+              0.082,
+              0.084
+            ],
+            "radius_to_surface_m": 0.061115783935899885,
+            "object": "PGE_nominal_body_envelope",
+            "witness_m": [
+              0.0,
+              0.061115783935899885,
+              0.068
+            ],
+            "source_face_index": 1
+          },
+          {
+            "z_above_reference_seat_m": [
+              0.084,
+              0.08600000000000001
+            ],
+            "radius_to_surface_m": 0.06165168233204202,
+            "object": "PGE_nominal_body_envelope",
+            "witness_m": [
+              0.0,
+              0.06165168233204202,
+              0.07
+            ],
+            "source_face_index": 1
+          },
+          {
+            "z_above_reference_seat_m": [
+              0.08600000000000001,
+              0.088
+            ],
+            "radius_to_surface_m": 0.062187580728184144,
+            "object": "PGE_nominal_body_envelope",
+            "witness_m": [
+              0.0,
+              0.062187580728184144,
+              0.07200000000000001
+            ],
+            "source_face_index": 1
+          },
+          {
+            "z_above_reference_seat_m": [
+              0.088,
+              0.09
+            ],
+            "radius_to_surface_m": 0.06272347912432627,
+            "object": "PGE_nominal_body_envelope",
+            "witness_m": [
+              -3.469446951953614e-18,
+              0.06272347912432627,
+              0.074
+            ],
+            "source_face_index": 1
+          },
+          {
+            "z_above_reference_seat_m": [
+              0.09,
+              0.092
+            ],
+            "radius_to_surface_m": 0.0632593775204684,
+            "object": "PGE_nominal_body_envelope",
+            "witness_m": [
+              0.0,
+              0.0632593775204684,
+              0.076
+            ],
+            "source_face_index": 1
+          },
+          {
+            "z_above_reference_seat_m": [
+              0.092,
+              0.094
+            ],
+            "radius_to_surface_m": 0.06379527591661052,
+            "object": "PGE_nominal_body_envelope",
+            "witness_m": [
+              3.469446951953614e-18,
+              0.06379527591661052,
+              0.078
+            ],
+            "source_face_index": 1
+          },
+          {
+            "z_above_reference_seat_m": [
+              0.094,
+              0.096
+            ],
+            "radius_to_surface_m": 0.06433117431275265,
+            "object": "PGE_nominal_body_envelope",
+            "witness_m": [
+              0.0,
+              0.06433117431275265,
+              0.08
+            ],
+            "source_face_index": 1
+          },
+          {
+            "z_above_reference_seat_m": [
+              0.096,
+              0.098
+            ],
+            "radius_to_surface_m": 0.06486707270889479,
+            "object": "PGE_nominal_body_envelope",
+            "witness_m": [
+              -3.469446951953614e-18,
+              0.06486707270889479,
+              0.082
+            ],
+            "source_face_index": 1
+          },
+          {
+            "z_above_reference_seat_m": [
+              0.098,
+              0.1
+            ],
+            "radius_to_surface_m": 0.06540297110503691,
+            "object": "PGE_nominal_body_envelope",
+            "witness_m": [
+              3.469446951953614e-18,
+              0.06540297110503691,
+              0.084
+            ],
+            "source_face_index": 1
+          },
+          {
+            "z_above_reference_seat_m": [
+              0.1,
+              0.10200000000000001
+            ],
+            "radius_to_surface_m": 0.06593886950117904,
+            "object": "PGE_nominal_body_envelope",
+            "witness_m": [
+              3.469446951953614e-18,
+              0.06593886950117904,
+              0.08600000000000001
+            ],
+            "source_face_index": 1
+          },
+          {
+            "z_above_reference_seat_m": [
+              0.10200000000000001,
+              0.10400000000000001
+            ],
+            "radius_to_surface_m": 0.06647476789732117,
+            "object": "PGE_nominal_body_envelope",
+            "witness_m": [
+              -5.421010862427522e-20,
+              0.06647476789732117,
+              0.08800000000000001
+            ],
+            "source_face_index": 5
+          },
+          {
+            "z_above_reference_seat_m": [
+              0.10400000000000001,
+              0.106
+            ],
+            "radius_to_surface_m": 0.0670106662934633,
+            "object": "PGE_nominal_body_envelope",
+            "witness_m": [
+              2.168404344971009e-19,
+              0.0670106662934633,
+              0.09000000000000001
+            ],
+            "source_face_index": 5
+          },
+          {
+            "z_above_reference_seat_m": [
+              0.106,
+              0.108
+            ],
+            "radius_to_surface_m": 0.06754656468960543,
+            "object": "PGE_nominal_body_envelope",
+            "witness_m": [
+              3.0791341698588326e-17,
+              0.06754656468960543,
+              0.092
+            ],
+            "source_face_index": 5
+          },
+          {
+            "z_above_reference_seat_m": [
+              0.108,
+              0.11
+            ],
+            "radius_to_surface_m": 0.06808246308574756,
+            "object": "PGE_nominal_body_envelope",
+            "witness_m": [
+              0.0,
+              0.06808246308574756,
+              0.094
+            ],
+            "source_face_index": 5
+          },
+          {
+            "z_above_reference_seat_m": [
+              0.11,
+              0.112
+            ],
+            "radius_to_surface_m": 0.06861836148188968,
+            "object": "PGE_nominal_body_envelope",
+            "witness_m": [
+              0.0,
+              0.06861836148188968,
+              0.096
+            ],
+            "source_face_index": 5
+          },
+          {
+            "z_above_reference_seat_m": [
+              0.112,
+              0.114
+            ],
+            "radius_to_surface_m": 0.06915425987803181,
+            "object": "PGE_nominal_body_envelope",
+            "witness_m": [
+              0.0,
+              0.06915425987803181,
+              0.098
+            ],
+            "source_face_index": 5
+          },
+          {
+            "z_above_reference_seat_m": [
+              0.114,
+              0.116
+            ],
+            "radius_to_surface_m": 0.06969015827417394,
+            "object": "PGE_nominal_body_envelope",
+            "witness_m": [
+              0.0,
+              0.06969015827417394,
+              0.1
+            ],
+            "source_face_index": 5
+          },
+          {
+            "z_above_reference_seat_m": [
+              0.116,
+              0.11800000000000001
+            ],
+            "radius_to_surface_m": 0.07022605667031606,
+            "object": "PGE_nominal_body_envelope",
+            "witness_m": [
+              1.734723475976807e-18,
+              0.07022605667031606,
+              0.10200000000000001
+            ],
+            "source_face_index": 5
+          },
+          {
+            "z_above_reference_seat_m": [
+              0.11800000000000001,
+              0.12
+            ],
+            "radius_to_surface_m": 0.0707619550664582,
+            "object": "PGE_nominal_body_envelope",
+            "witness_m": [
+              0.0,
+              0.0707619550664582,
+              0.10400000000000001
+            ],
+            "source_face_index": 5
+          },
+          {
+            "z_above_reference_seat_m": [
+              0.12,
+              0.122
+            ],
+            "radius_to_surface_m": 0.07129785346260033,
+            "object": "PGE_nominal_body_envelope",
+            "witness_m": [
+              0.0,
+              0.07129785346260033,
+              0.106
+            ],
+            "source_face_index": 5
+          },
+          {
+            "z_above_reference_seat_m": [
+              0.122,
+              0.124
+            ],
+            "radius_to_surface_m": 0.07183375185874245,
+            "object": "PGE_nominal_body_envelope",
+            "witness_m": [
+              0.0,
+              0.07183375185874245,
+              0.108
+            ],
+            "source_face_index": 5
+          },
+          {
+            "z_above_reference_seat_m": [
+              0.124,
+              0.126
+            ],
+            "radius_to_surface_m": 0.07236965025488458,
+            "object": "PGE_nominal_body_envelope",
+            "witness_m": [
+              -1.734723475976807e-18,
+              0.07236965025488458,
+              0.11
+            ],
+            "source_face_index": 5
+          },
+          {
+            "z_above_reference_seat_m": [
+              0.126,
+              0.128
+            ],
+            "radius_to_surface_m": 0.0729055486510267,
+            "object": "PGE_nominal_body_envelope",
+            "witness_m": [
+              0.0,
+              0.0729055486510267,
+              0.112
+            ],
+            "source_face_index": 5
+          },
+          {
+            "z_above_reference_seat_m": [
+              0.128,
+              0.13
+            ],
+            "radius_to_surface_m": 0.07344144704716885,
+            "object": "PGE_nominal_body_envelope",
+            "witness_m": [
+              0.0,
+              0.07344144704716885,
+              0.114
+            ],
+            "source_face_index": 5
+          },
+          {
+            "z_above_reference_seat_m": [
+              0.13,
+              0.132
+            ],
+            "radius_to_surface_m": 0.07397734544331097,
+            "object": "PGE_nominal_body_envelope",
+            "witness_m": [
+              0.0,
+              0.07397734544331097,
+              0.116
+            ],
+            "source_face_index": 5
+          },
+          {
+            "z_above_reference_seat_m": [
+              0.132,
+              0.134
+            ],
+            "radius_to_surface_m": 0.0745132438394531,
+            "object": "PGE_nominal_body_envelope",
+            "witness_m": [
+              3.469446951953614e-18,
+              0.0745132438394531,
+              0.11800000000000001
+            ],
+            "source_face_index": 5
+          },
+          {
+            "z_above_reference_seat_m": [
+              0.134,
+              0.136
+            ],
+            "radius_to_surface_m": 0.07504914223559522,
+            "object": "PGE_nominal_body_envelope",
+            "witness_m": [
+              0.0,
+              0.07504914223559522,
+              0.12000000000000001
+            ],
+            "source_face_index": 5
+          },
+          {
+            "z_above_reference_seat_m": [
+              0.136,
+              0.138
+            ],
+            "radius_to_surface_m": 0.07558504063173735,
+            "object": "PGE_nominal_body_envelope",
+            "witness_m": [
+              3.469446951953614e-18,
+              0.07558504063173735,
+              0.12200000000000001
+            ],
+            "source_face_index": 5
+          },
+          {
+            "z_above_reference_seat_m": [
+              0.138,
+              0.14
+            ],
+            "radius_to_surface_m": 0.07612093902787949,
+            "object": "PGE_nominal_body_envelope",
+            "witness_m": [
+              0.0,
+              0.07612093902787949,
+              0.12400000000000001
+            ],
+            "source_face_index": 5
+          },
+          {
+            "z_above_reference_seat_m": [
+              0.14,
+              0.14200000000000002
+            ],
+            "radius_to_surface_m": 0.0766568374240216,
+            "object": "PGE_nominal_body_envelope",
+            "witness_m": [
+              -3.469446951953614e-18,
+              0.0766568374240216,
+              0.126
+            ],
+            "source_face_index": 5
+          },
+          {
+            "z_above_reference_seat_m": [
+              0.14200000000000002,
+              0.14400000000000002
+            ],
+            "radius_to_surface_m": 0.07719273582016374,
+            "object": "PGE_nominal_body_envelope",
+            "witness_m": [
+              3.469446951953614e-18,
+              0.07719273582016374,
+              0.128
+            ],
+            "source_face_index": 5
+          },
+          {
+            "z_above_reference_seat_m": [
+              0.14400000000000002,
+              0.146
+            ],
+            "radius_to_surface_m": 0.07772863421630587,
+            "object": "PGE_nominal_body_envelope",
+            "witness_m": [
+              0.0,
+              0.07772863421630587,
+              0.13
+            ],
+            "source_face_index": 5
+          }
+        ]
+      }
+    },
+    "hand_top_z_m": 0.131127601,
+    "profile_bin_height_m": 0.002
+  },
+  "method": "Existing exact triangle Z-band clipping followed by XY axis distance and a 3D witness",
+  "bands_are": "Observation ranges inherited from the older hand comparison, not selected tool dimensions",
+  "included_categories": [
+    "hardware",
+    "insert",
+    "pad"
+  ],
+  "excluded_reference_objects": [
+    "reference_lug_6R6_uncrimped",
+    "comparison_wire",
+    "illustrative_sleeve",
+    "illustrative_busbar_coupon"
+  ],
+  "scene_obstacles_included": false,
+  "source_geometry_and_states_unchanged": true,
+  "analytic_checks": [
+    {
+      "case": "clipped_vertical",
+      "expected": 2.0,
+      "measured": 2.0
+    },
+    {
+      "case": "projected_axis_inside",
+      "expected": 0.0,
+      "measured": 0.0
+    },
+    {
+      "case": "degenerate_xy_line",
+      "expected": 2.0,
+      "measured": 2.0
+    },
+    {
+      "case": "boundary_tangency",
+      "expected": 2.0,
+      "measured": 2.0
+    },
+    {
+      "case": "outside_slab",
+      "expected": null,
+      "measured": null
+    }
+  ],
+  "selected_role_plan": "S5_AB",
+  "all_task_ids": [
+    "D00",
+    "D01",
+    "D10",
+    "D11",
+    "D12",
+    "D20",
+    "D21",
+    "D22",
+    "D30",
+    "D31",
+    "D40",
+    "D42",
+    "D45",
+    "D50",
+    "D60",
+    "D61",
+    "D70",
+    "D71",
+    "D80",
+    "D81"
+  ],
+  "workcard_D60": {
+    "id": "D60",
+    "hands": [
+      "H03",
+      "H04",
+      "H08"
+    ],
+    "entities": [
+      "V25_RING_ENDS"
+    ],
+    "additional_target_ja": "電気的な共通点と物理的な共締めを区別する",
+    "start_ja": "対象接続に重なる部材一式をそろえる",
+    "keep_ja": "R-Cと必要時X-Cが対象を保持中にT-Cで締結する。大小同時対象には2主軸",
+    "end_ja": "担当接続を終え工具退避後に解除。両腕対象は同時退避",
+    "reuse_ja": "剛体1点保持と次の部材取得は同じ主担当の順次兼務候補",
+    "missing_ja": "部品境界・共締め積層・接続点・大小の組・未接続端の引継ぎ",
+    "task": {
+      "id": "D60",
+      "operation": "O60",
+      "cell": "C",
+      "work_ja": "バスバー・丸端子・共締め部材をそろえて保持中に締結",
+      "primary": [
+        "R-C"
+      ],
+      "other": [
+        "F-C",
+        "T-C"
+      ],
+      "conditional": [
+        "X-C"
+      ],
+      "sharing_ja": "剛体1点保持は主担当が兼務。両端や別部材の独立保持・大小同時締結は該当接続に残す。"
+    }
+  },
+  "product_overlay": "Deferred: 15.2 mm reference sleeve and 5.6 mm photo-display sleeve are different proxies",
+  "complete_tool_geometry": null,
+  "allowable_tool_diameter_m": null,
+  "required_clearance_m": null,
+  "physical_acceptance_verdict": null,
+  "input_sha256_before": {
+    "data/hand_working_default_v01.json": "1cf2a19f24f753eb44b4e96fd7e73ee8bdfe5b97367a77bf8cfa0cf30a4d107c",
+    "data/hvjb_photo_model_v03_p03.json.gz": "6687b12ec1b3db24babf75f8fef1b6f6bc123c288b713824b9763d9214553ba6",
+    "data/hvjb_photo_correspondence_v03_p01.json": "6c5b7cb9bab859a33c8f5d5cd5429ce9f06fb0951b8a8fa4ae2a31ad99052ca0",
+    "UR15_JB_photo_correspondence_v03_p03.blend": "5205d3aa2c2b99f7df6f538d17b3d3ca36ba8208c546858ee8ec8a5a3564a282",
+    "data/hvjb_robot_selection_v01.json": "ad1d0fc6ad2f0c9d36f4d9839faf559ce80aa9ffb4965174facef944f1a58db8",
+    "data/hvjb_task_occupancy_v01.json": "4da5b53687b05cd2cd1d294cf57121abde6ee9d04b19ed0a37ef2fb2a4d79df9",
+    "data/hvjb_pge_finger_v01_meshes.json.gz": "c9171a968fd38b263099b21627a31fe37cab61a5e98b8d494ea3a38abfef4570",
+    "data/hand_tool_interface_inputs_v01.json": "91f6a2fbb150c5ae29b7b921044f47f7ea98694e24026b290023d7676cbee392",
+    "scripts/probe_hand_tool_access_v01.py": "55456e6d55f84931bcc3f502e77372414a6efa2578e27970d5620f176c53417c"
+  },
+  "input_sha256_after": {
+    "data/hand_working_default_v01.json": "1cf2a19f24f753eb44b4e96fd7e73ee8bdfe5b97367a77bf8cfa0cf30a4d107c",
+    "data/hvjb_photo_model_v03_p03.json.gz": "6687b12ec1b3db24babf75f8fef1b6f6bc123c288b713824b9763d9214553ba6",
+    "data/hvjb_photo_correspondence_v03_p01.json": "6c5b7cb9bab859a33c8f5d5cd5429ce9f06fb0951b8a8fa4ae2a31ad99052ca0",
+    "UR15_JB_photo_correspondence_v03_p03.blend": "5205d3aa2c2b99f7df6f538d17b3d3ca36ba8208c546858ee8ec8a5a3564a282",
+    "data/hvjb_robot_selection_v01.json": "ad1d0fc6ad2f0c9d36f4d9839faf559ce80aa9ffb4965174facef944f1a58db8",
+    "data/hvjb_task_occupancy_v01.json": "4da5b53687b05cd2cd1d294cf57121abde6ee9d04b19ed0a37ef2fb2a4d79df9",
+    "data/hvjb_pge_finger_v01_meshes.json.gz": "c9171a968fd38b263099b21627a31fe37cab61a5e98b8d494ea3a38abfef4570",
+    "data/hand_tool_interface_inputs_v01.json": "91f6a2fbb150c5ae29b7b921044f47f7ea98694e24026b290023d7676cbee392",
+    "scripts/probe_hand_tool_access_v01.py": "55456e6d55f84931bcc3f502e77372414a6efa2578e27970d5620f176c53417c"
+  },
+  "probe_sha256": "03f78304c3d1c52eefe1196e2ccaccee38320e58da8b0c167037bf9305d600d7",
+  "fragment_sha256": "82dc22502cc3e5a41cf5271e6eb4714cab30788ace06398e561ba90f897a2b2d",
+  "viewer_template_sha256": "1bb3efe90df538a9121b72a0b432cdec6252badc8d0082ffdaaff33beef8fae3",
+  "viewer_note": "After initial UI check, moved only the axis label left to avoid its overlap with the body drawing; no measurement rerun or geometry change."
+}

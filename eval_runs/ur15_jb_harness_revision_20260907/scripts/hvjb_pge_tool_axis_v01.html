@@ -1,0 +1,154 @@
+<!-- Copyright (c) 2022-2026, The Isaac Lab Project Developers. SPDX-License-Identifier: BSD-3-Clause -->
+<div id="hvjb-pge-tool-axis-v01">
+  <h3>工具中心線から手先まで</h3>
+  <div class="viz-controls">
+    <label class="form-label">状態
+      <select class="form-select" data-field="state">
+        <option value="contour">輪郭合わせ</option>
+        <option value="open">横へ開く</option>
+      </select>
+    </label>
+    <label class="form-label">観察する高さ
+      <select class="form-select" data-field="band">
+        <option value="tip">先端側の比較帯</option>
+        <option value="upper">本体側の比較帯</option>
+      </select>
+    </label>
+  </div>
+  <div class="pge-viewport">
+    <canvas role="img" aria-label="15度傾けたPGE比較モデル。工具の中心線と手先表面の最短水平距離を示す。工具外形や他の設備は含まない。"></canvas>
+    <svg class="pge-overlay" aria-hidden="true"><g data-axis></g><g data-dimension></g></svg>
+  </div>
+  <div class="viz-row pge-legend text-small">
+    <span><i data-swatch="hardware"></i>公称本体</span>
+    <span><i data-swatch="insert"></i>専用指</span>
+    <span><i data-swatch="pad"></i>前後パッド</span>
+  </div>
+  <div class="pge-detail tabular-nums" aria-live="polite" data-detail></div>
+  <div class="text-small text-muted tabular-nums" data-band-detail></div>
+  <div class="text-small text-muted">工具外形なし・手先単独の観測</div>
+  <div class="text-small text-muted">比較対象：線 φ14 mm／被覆 φ15.2 mm</div>
+  <span data-color-probe hidden></span>
+  <script type="application/json" data-model>__MODEL_DATA__</script>
+</div>
+<style>
+  #hvjb-pge-tool-axis-v01 .pge-viewport {position:relative; margin-block:12px;}
+  #hvjb-pge-tool-axis-v01 canvas {display:block; width:100%; height:460px;}
+  #hvjb-pge-tool-axis-v01 .pge-overlay {position:absolute; inset:0; width:100%; height:100%; pointer-events:none; overflow:visible;}
+  #hvjb-pge-tool-axis-v01 .pge-overlay text {fill:var(--foreground); font-size:12px; font-weight:400;}
+  #hvjb-pge-tool-axis-v01 .pge-overlay path {fill:none; stroke:var(--muted-foreground); stroke-width:1;}
+  #hvjb-pge-tool-axis-v01 .pge-overlay .pge-axis {stroke-dasharray:5 4;}
+  #hvjb-pge-tool-axis-v01 .pge-overlay .pge-witness {stroke:var(--foreground); stroke-width:1.5;}
+  #hvjb-pge-tool-axis-v01 .pge-overlay circle {fill:var(--background); stroke:var(--foreground); stroke-width:1.5;}
+  #hvjb-pge-tool-axis-v01 .pge-legend i {display:inline-block; width:10px; height:10px; margin-right:5px;}
+  #hvjb-pge-tool-axis-v01 [data-swatch="hardware"] {background:var(--muted-foreground);}
+  #hvjb-pge-tool-axis-v01 [data-swatch="insert"] {background:var(--blue);}
+  #hvjb-pge-tool-axis-v01 [data-swatch="pad"] {background:var(--green);}
+  #hvjb-pge-tool-axis-v01 .pge-detail {margin-block:8px;}
+  @media(max-width:450px) {#hvjb-pge-tool-axis-v01 canvas {height:380px;}}
+</style>
+<script>
+(() => {
+  "use strict";
+  const root = document.getElementById("hvjb-pge-tool-axis-v01");
+  const find = selector => root.querySelector(selector);
+  const model = JSON.parse(find("[data-model]").textContent);
+  const canvas = find("canvas"), overlay = find("svg"), dimension = find("[data-dimension]"), axisOverlay = find("[data-axis]");
+  const gl = canvas.getContext("webgl", {alpha:true, antialias:true, preserveDrawingBuffer:true});
+  if (!gl) {find("[data-detail]").textContent = "3D表示を初期化できませんでした。"; throw new Error("WebGL unavailable");}
+  const sub = (a,b) => a.map((v,i) => v-b[i]);
+  const dot = (a,b) => a.reduce((s,v,i) => s+v*b[i],0);
+  const cross = (a,b) => [a[1]*b[2]-a[2]*b[1],a[2]*b[0]-a[0]*b[2],a[0]*b[1]-a[1]*b[0]];
+  const unit = v => {const n=Math.hypot(...v); return v.map(x=>x/(n||1));};
+  const light = unit([-.5,-.7,1]);
+  const colorCanvas=document.createElement("canvas"); colorCanvas.width=colorCanvas.height=1;
+  const colorContext=colorCanvas.getContext("2d"), probe=find("[data-color-probe]");
+  function themeColor(token) {
+    colorContext.clearRect(0,0,1,1);
+    probe.style.color="var(--background)";
+    colorContext.fillStyle=getComputedStyle(probe).color;
+    colorContext.fillRect(0,0,1,1);
+    probe.style.color=`var(${token})`;
+    colorContext.fillStyle=getComputedStyle(probe).color;
+    colorContext.fillRect(0,0,1,1);
+    return [...colorContext.getImageData(0,0,1,1).data].slice(0,3).map(v=>v/255);
+  }
+  function compile(type,source) {
+    const shader=gl.createShader(type); gl.shaderSource(shader,source); gl.compileShader(shader);
+    if(!gl.getShaderParameter(shader,gl.COMPILE_STATUS)) throw new Error(gl.getShaderInfoLog(shader));
+    return shader;
+  }
+  const program=gl.createProgram();
+  gl.attachShader(program,compile(gl.VERTEX_SHADER,"attribute vec3 a_position;attribute vec4 a_color;varying vec4 v_color;void main(){gl_Position=vec4(a_position,1.0);v_color=a_color;}"));
+  gl.attachShader(program,compile(gl.FRAGMENT_SHADER,"precision mediump float;varying vec4 v_color;void main(){gl_FragColor=v_color;}"));
+  gl.linkProgram(program);
+  if(!gl.getProgramParameter(program,gl.LINK_STATUS)) throw new Error(gl.getProgramInfoLog(program));
+  gl.useProgram(program);
+  const buffer=gl.createBuffer(),position=gl.getAttribLocation(program,"a_position"),color=gl.getAttribLocation(program,"a_color");
+  gl.bindBuffer(gl.ARRAY_BUFFER,buffer);
+  gl.enableVertexAttribArray(position); gl.enableVertexAttribArray(color);
+  gl.vertexAttribPointer(position,3,gl.FLOAT,false,28,0); gl.vertexAttribPointer(color,4,gl.FLOAT,false,28,12);
+  gl.enable(gl.DEPTH_TEST); gl.depthFunc(gl.LEQUAL); gl.enable(gl.CULL_FACE); gl.cullFace(gl.BACK);
+  let pending=false;
+  function worldVertices(obj,opening) {return obj.vertices.map(v=>[v[0]+obj.side*opening,v[1],v[2]]);}
+  function draw() {
+    pending=false;
+    const state=find('[data-field="state"]').value,band=find('[data-field="band"]').value;
+    const observed=model.measurements.states[state],measurement=observed.bands[band];
+    const opening=state==="open"?model.opening_m:0;
+    const width=canvas.clientWidth,height=canvas.clientHeight,dpr=Math.min(devicePixelRatio||1,1.5);
+    canvas.width=Math.round(width*dpr); canvas.height=Math.round(height*dpr);
+    gl.viewport(0,0,canvas.width,canvas.height); gl.clearColor(0,0,0,0); gl.clear(gl.COLOR_BUFFER_BIT|gl.DEPTH_BUFFER_BIT);
+    const colors={hardware:themeColor("--muted-foreground"),insert:themeColor("--blue"),pad:themeColor("--green"),wire:themeColor("--orange"),sleeve:themeColor("--foreground"),target:themeColor("--muted-foreground"),coupon:themeColor("--border")};
+    colors.sleeve=colors.hardware.map(value=>value*.45);
+    const objects=Object.entries(model.objects);
+    const axisXY=model.frame.tool_axis_xy_m,seat=model.frame.terminal_seat_z_m;
+    const axisEnds=[[...axisXY,seat],[...axisXY,model.measurements.hand_top_z_m+.006]];
+    const bounds=[[Infinity,Infinity,Infinity],[-Infinity,-Infinity,-Infinity]];
+    for(const [,obj] of objects) for(const move of [0,model.opening_m]) for(const p of worldVertices(obj,move))
+      for(let axis=0;axis<3;axis++) {bounds[0][axis]=Math.min(bounds[0][axis],p[axis]);bounds[1][axis]=Math.max(bounds[1][axis],p[axis]);}
+    for(const p of axisEnds) for(let axis=0;axis<3;axis++) {bounds[0][axis]=Math.min(bounds[0][axis],p[axis]);bounds[1][axis]=Math.max(bounds[1][axis],p[axis]);}
+    const focus=bounds[0].map((v,i)=>(v+bounds[1][i])/2);
+    const [yaw,pitch]=[.82,.40];
+    const right=[Math.cos(yaw),Math.sin(yaw),0],up=[-Math.sin(yaw)*Math.sin(pitch),Math.cos(yaw)*Math.sin(pitch),Math.cos(pitch)],forward=cross(right,up);
+    const corners=[];
+    for(const x of [0,1]) for(const y of [0,1]) for(const z of [0,1]) corners.push([bounds[x][0],bounds[y][1],bounds[z][2]]);
+    const extent=axis=>Math.max(...corners.map(v=>dot(sub(v,focus),axis)))-Math.min(...corners.map(v=>dot(sub(v,focus),axis)));
+    const scale=.80*Math.min(width/Math.max(.001,extent(right)),height/Math.max(.001,extent(up)));
+    const project=v=>[dot(sub(v,focus),right)*2*scale/width,dot(sub(v,focus),up)*2*scale/height,-dot(sub(v,focus),forward)];
+    const screen=v=>{const p=project(v);return [(p[0]+1)*width/2,(1-p[1])*height/2];};
+    const vertices=[]; let maximum=0;
+    for(const [,obj] of objects) {
+      const world=worldVertices(obj,opening),points=world.map(project),base=colors[obj.color_key];
+      for(const p of points) maximum=Math.max(maximum,Math.abs(p[0]),Math.abs(p[1]));
+      for(const f of obj.faces) {
+        const n=unit(cross(sub(world[f[1]],world[f[0]]),sub(world[f[2]],world[f[0]])));
+        const shade=.55+.45*Math.max(0,dot(n,light));
+        for(const index of f) vertices.push(...points[index],...base.map(c=>c*shade),1);
+      }
+    }
+    const data=new Float32Array(vertices);
+    gl.bufferData(gl.ARRAY_BUFFER,data,gl.DYNAMIC_DRAW); gl.drawArrays(gl.TRIANGLES,0,data.length/7);
+    overlay.setAttribute("viewBox",`0 0 ${width} ${height}`);
+    const bar=.020*scale, y=height-15;
+    dimension.innerHTML=`<path d="M 14 ${y-4} V ${y} H ${14+bar} V ${y-4}"/><text x="14" y="${y-10}">20 mm</text>`;
+    const [bottom,top]=axisEnds.map(screen),witness=measurement.witness_m;
+    const point=[witness[0]+axisXY[0],witness[1]+axisXY[1],witness[2]];
+    const onAxis=screen([...axisXY,witness[2]]),atSurface=screen(point);
+    const labelX=Math.max(88,Math.min(width-12,top[0]-10)),labelY=Math.max(18,top[1]-6);
+    axisOverlay.innerHTML=`<path class="pge-axis" d="M ${bottom[0]} ${bottom[1]} L ${top[0]} ${top[1]}"/><text text-anchor="end" x="${labelX}" y="${labelY}">工具中心線</text><path class="pge-witness" d="M ${onAxis[0]} ${onAxis[1]} L ${atSurface[0]} ${atSurface[1]}"/><circle cx="${atSurface[0]}" cy="${atSurface[1]}" r="4"/>`;
+    const part=measurement.object.includes("front_pad")?"端子側パッド":measurement.object.includes("root_pad")?"根元側パッド":measurement.object.includes("body_envelope")?"公称本体":"専用指・可動部";
+    find("[data-detail]").textContent=`中心線→${part} ${(measurement.radius_to_surface_m*1000).toFixed(2)} mm`;
+    const heights=measurement.z_above_reference_seat_m.map(v=>(v*1000).toFixed(1));
+    find("[data-band-detail]").textContent=`観察帯：基準座面から ${heights.join("–")} mm`;
+    root.dataset.ready="true";
+    root.dataset.observation=JSON.stringify({state,band,width,height,objects:objects.length,pads:objects.filter(([,o])=>o.color_key==="pad").length,measured_objects:observed.objects.length,measurement,opening_per_jaw_m:opening,maximum_normalized_xy:maximum,finite_vertices:[...data].every(Number.isFinite),gl_error:gl.getError(),scale_px_per_m:scale,theme:colors});
+  }
+  function schedule(){if(!pending){pending=true;requestAnimationFrame(draw);}}
+  for(const select of root.querySelectorAll("select")) select.addEventListener("change",schedule);
+  new ResizeObserver(schedule).observe(canvas);
+  new MutationObserver(schedule).observe(document.documentElement,{attributes:true,attributeFilter:["class","style","data-theme"]});
+  matchMedia("(prefers-color-scheme: dark)").addEventListener("change",schedule);
+  document.fonts.ready.then(schedule); schedule();
+})();
+</script>
