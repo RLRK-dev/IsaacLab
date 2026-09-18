@@ -1,0 +1,1143 @@
+{
+  "observed_at": "2026-09-18T06:26:12.424333+00:00",
+  "scope": "Equal-scale source CAD comparison, not an installation pose or tool-to-hand clearance",
+  "models": {
+    "SES2001": {
+      "source_glb_file": "previews/hvjb_ses2001_cad_v01/ses2001.glb",
+      "source_glb_sha256": "e2185874a0f81d981e7f72ef56cc5321ac6bd7351eac90249cb843e637bf1b0a",
+      "surface_nodes": 17,
+      "triangles": 743217,
+      "observation": {
+        "source_step_cylinders": [
+          {
+            "entity": "63743",
+            "kind": "CYLINDRICAL_SURFACE",
+            "definitions": {
+              "63743": "CYLINDRICAL_SURFACE($,#75732,12.5)",
+              "75732": "AXIS2_PLACEMENT_3D($,#113307,#86550,#86551)",
+              "113307": "CARTESIAN_POINT('Origin',(111.023824037297,1.09778488321057E-013,\r\n1.94009907654723E-014))",
+              "86550": "DIRECTION('center_axis',(-1.,-1.90919110123575E-014,-3.37408535051688E-015))",
+              "86551": "DIRECTION('ref_axis',(-3.43374340470359E-015,9.45201738567976E-016,\r\n1.))"
+            },
+            "origin_m": [
+              0.111023824037297,
+              1.0977848832105701e-16,
+              1.94009907654723e-17
+            ],
+            "direction": [
+              -1.0,
+              -1.90919110123575e-14,
+              -3.37408535051688e-15
+            ],
+            "reference_direction": [
+              -3.43374340470359e-15,
+              9.45201738567976e-16,
+              1.0
+            ],
+            "source_length_unit": "mm",
+            "radius_m": 0.0125
+          },
+          {
+            "entity": "63745",
+            "kind": "CYLINDRICAL_SURFACE",
+            "definitions": {
+              "63745": "CYLINDRICAL_SURFACE($,#75745,12.5)",
+              "75745": "AXIS2_PLACEMENT_3D($,#113326,#86576,#86577)",
+              "113326": "CARTESIAN_POINT('Origin',(165.523824037297,1.15028763849454E-012,\r\n2.03288642368642E-013))",
+              "86576": "DIRECTION('center_axis',(-1.,-1.90919110123575E-014,-3.37408535051688E-015))",
+              "86577": "DIRECTION('ref_axis',(-3.43374340470359E-015,9.45201738567977E-016,\r\n1.))"
+            },
+            "origin_m": [
+              0.165523824037297,
+              1.15028763849454e-15,
+              2.03288642368642e-16
+            ],
+            "direction": [
+              -1.0,
+              -1.90919110123575e-14,
+              -3.37408535051688e-15
+            ],
+            "reference_direction": [
+              -3.43374340470359e-15,
+              9.45201738567977e-16,
+              1.0
+            ],
+            "source_length_unit": "mm",
+            "radius_m": 0.0125
+          }
+        ],
+        "source_step_planes": [
+          {
+            "entity": "13153",
+            "kind": "PLANE",
+            "definitions": {
+              "13153": "PLANE($,#76627)",
+              "76627": "AXIS2_PLACEMENT_3D($,#116346,#88879,#88880)",
+              "116346": "CARTESIAN_POINT('Origin',(466.773824037295,7.35303827454639E-012,\r\n-57.9999999999989))",
+              "88879": "DIRECTION('center_axis',(-3.52845250900266E-015,7.55324561317946E-016,\r\n1.))",
+              "88880": "DIRECTION('ref_axis',(1.,0.,3.5527136788005E-015))"
+            },
+            "origin_m": [
+              0.466773824037295,
+              7.353038274546389e-15,
+              -0.0579999999999989
+            ],
+            "direction": [
+              -3.52845250900266e-15,
+              7.55324561317946e-16,
+              1.0
+            ],
+            "reference_direction": [
+              1.0,
+              0.0,
+              3.5527136788005e-15
+            ],
+            "source_length_unit": "mm"
+          },
+          {
+            "entity": "13169",
+            "kind": "PLANE",
+            "definitions": {
+              "13169": "PLANE($,#76674)",
+              "76674": "AXIS2_PLACEMENT_3D($,#116516,#89025,#89026)",
+              "116516": "CARTESIAN_POINT('Origin',(466.773824037295,7.35303827454639E-012,\r\n-57.9999999999989))",
+              "89025": "DIRECTION('center_axis',(-3.52845250900266E-015,7.55324561317946E-016,\r\n1.))",
+              "89026": "DIRECTION('ref_axis',(1.,0.,3.5527136788005E-015))"
+            },
+            "origin_m": [
+              0.466773824037295,
+              7.353038274546389e-15,
+              -0.0579999999999989
+            ],
+            "direction": [
+              -3.52845250900266e-15,
+              7.55324561317946e-16,
+              1.0
+            ],
+            "reference_direction": [
+              1.0,
+              0.0,
+              3.5527136788005e-15
+            ],
+            "source_length_unit": "mm"
+          }
+        ],
+        "source_axis_crossings_m": [
+          [
+            0.0,
+            -2.009878480450655e-15,
+            -3.552028674771353e-16
+          ],
+          [
+            0.0,
+            -2.0098784804506562e-15,
+            -3.5520286747713567e-16
+          ]
+        ],
+        "source_axis_to_plane_distance_m": 0.057999999999998546,
+        "source_plane_coordinate_m": -0.0579999999999989,
+        "stored_float32_plane_coordinate_m": -0.057999998331069946,
+        "float32_plane_rounding_m": 1.6689289533688978e-09,
+        "plane_selection": "Exact equality to the float32 representation of the STEP plane coordinate",
+        "coordinate_match_tolerance_m": 1e-09,
+        "axis_direction_match_tolerance": 1e-10,
+        "matching_scope": "Identify source CAD coordinates; no physical clearance or acceptance threshold",
+        "query_hint": {
+          "long_axis": 0,
+          "mount_axis": 2
+        },
+        "axis_point_m": [
+          0.0,
+          -2.009878480450655e-15,
+          0.05799999833106959
+        ],
+        "axis_direction": [
+          -1.0,
+          -1.90919110123575e-14,
+          -3.37408535051688e-15
+        ],
+        "plane_coordinate_m": 0,
+        "plane_normal_index": 2,
+        "display_plane": {
+          "surface_part_index": 4,
+          "triangles": 16,
+          "tessellated_area_m2": 0.006112000532180084,
+          "bounds_m": [
+            [
+              0.24777382612228394,
+              -0.013000000268220901,
+              0.0
+            ],
+            [
+              0.6857738494873047,
+              0.013000000268220901,
+              0.0
+            ]
+          ],
+          "maximum_coordinate_residual_m": 0.0
+        },
+        "plane_candidates": [
+          {
+            "surface_part_index": 4,
+            "triangles": 16,
+            "tessellated_area_m2": 0.006112000532180084,
+            "bounds_m": [
+              [
+                0.24777382612228394,
+                -0.013000000268220901,
+                0.0
+              ],
+              [
+                0.6857738494873047,
+                0.013000000268220901,
+                0.0
+              ]
+            ],
+            "maximum_coordinate_residual_m": 0.0
+          }
+        ],
+        "axis_to_plane_distance_m": 0.05799999833106959,
+        "source_to_observation_matrix": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            0.057999998331069946
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ],
+        "source_cylinder_diameter_m": 0.025,
+        "cylinder_scope": "Selected source cylinders, not a maximum nose envelope or clearance diameter",
+        "mounting_hole_pattern": null,
+        "fastening_tcp": null,
+        "bit_stroke_m": null
+      },
+      "render": {
+        "display_matrix": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            -0.05627382546663284
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            -0.0040035005658864975
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            -0.06564342230558395
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ],
+        "display_bounds_m": [
+          [
+            0.0,
+            -0.0324964988976717,
+            -0.06564342230558395
+          ],
+          [
+            1.1289942190051079,
+            0.0324964988976717,
+            0.06564342230558395
+          ]
+        ],
+        "annotations": {
+          "axis_line_xz_m": [
+            [
+              -0.025,
+              -0.0076434239745143615
+            ],
+            [
+              1.1539942190051078,
+              -0.0076434239745143615
+            ]
+          ],
+          "plane_line_xz_m": [
+            [
+              0.1915000006556511,
+              -0.06564342230558395
+            ],
+            [
+              0.6295000240206718,
+              -0.06564342230558395
+            ]
+          ],
+          "dimension_line_xz_m": [
+            [
+              0.41050001233816147,
+              -0.0076434239745143615
+            ],
+            [
+              0.41050001233816147,
+              -0.06564342230558395
+            ]
+          ],
+          "plane_line_scope": "Longitudinal bounds of coplanar triangles; not a continuous contact-area claim"
+        },
+        "frames": {
+          "whole": {
+            "pixels": [
+              1200,
+              220
+            ],
+            "x_m": [
+              -0.045,
+              1.195
+            ],
+            "z_m": [
+              -0.11366666666666667,
+              0.11366666666666667
+            ],
+            "png_file": "previews/hvjb_ses2001_comparison_v01/ses2001_whole.png",
+            "png_sha256": "5f60fbbe18f33f18c36f32e698c2c10ce4ef3251f7253b2bdabcad78151ac42e",
+            "webp_sha256": "98b1110c97625bdcdd8546ff5e289ad9400f083333f15868dba5b9a9f85fcb4a",
+            "webp_bytes": 12598,
+            "foreground_pixels": 48853
+          },
+          "front": {
+            "pixels": [
+              1000,
+              380
+            ],
+            "x_m": [
+              -0.025,
+              0.525
+            ],
+            "z_m": [
+              -0.10450000000000001,
+              0.10450000000000001
+            ],
+            "png_file": "previews/hvjb_ses2001_comparison_v01/ses2001_front.png",
+            "png_sha256": "5c177afdf1490afdae484b5def1cbe8aef1761a231d50a50f1bfc1a7e5554244",
+            "webp_sha256": "d1dfffb401ab521a1066f6561f342c6ce2a2a40f7871f68801c1b67a66264d70",
+            "webp_bytes": 13760,
+            "foreground_pixels": 98835
+          }
+        },
+        "source_to_display_matrix": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            -0.05627382546663284
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            -0.0040035005658864975
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            -0.007643423974514008
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ]
+      }
+    },
+    "SEV2001": {
+      "source_glb_file": "previews/hvjb_fastening_cad_v01_material_read/sev2001.glb",
+      "source_glb_sha256": "93f65622c549fae858140da82f48e96c7966f077a9646c741129e4a81bd917da",
+      "surface_nodes": 21,
+      "triangles": 885750,
+      "observation": {
+        "query_hint": {
+          "long_axis": 2,
+          "mount_axis": 1,
+          "axis_point_m": [
+            0,
+            0.08,
+            0
+          ]
+        },
+        "coordinate_match_tolerance_m": 1e-09,
+        "axis_direction_match_tolerance": 1e-10,
+        "matching_tolerance_purpose": "Identify near-exact CAD coordinates; not physical clearance limits",
+        "axis_point_m": [
+          6.024168410968639e-16,
+          0.07999999999999981,
+          0.0
+        ],
+        "axis_direction": [
+          -1.91996429054139e-16,
+          3.81008491100288e-17,
+          1.0
+        ],
+        "axis_witness_count": 8,
+        "axis_witnesses": [
+          {
+            "node": "3D_Parasolid_automatic_screwdriver_for_screws_with_vacuum_unit_SEV2001_series.x_b_82ccab",
+            "type": "cylinder",
+            "primitive": {
+              "face_index": 212,
+              "extent_angle": [
+                3.633677634914324,
+                9.91686294209391
+              ],
+              "extent_height": [
+                0.0071999999999999885,
+                0.0075
+              ],
+              "origin": [
+                5.65937519576577e-16,
+                0.07999999999999981,
+                0.19
+              ],
+              "axis": [
+                1.91996429054139e-16,
+                -3.81008491100288e-17,
+                -1.0
+              ],
+              "radius": 0.0106
+            },
+            "triangles": 146,
+            "tessellated_area_m2": 1.997655725380772e-05,
+            "bounds_m": [
+              [
+                -0.010599999688565731,
+                0.06940245628356934,
+                0.18250000476837158
+              ],
+              [
+                0.010595244355499744,
+                0.09059881418943405,
+                0.18279999494552612
+              ]
+            ],
+            "maximum_vertex_surface_residual_m": 3.592048533618275e-09,
+            "axis_crossing_m": [
+              6.024168410968634e-16,
+              0.0799999999999998,
+              0.0
+            ]
+          },
+          {
+            "node": "3D_Parasolid_automatic_screwdriver_for_screws_with_vacuum_unit_SEV2001_series.x_b_82ccab",
+            "type": "cylinder",
+            "primitive": {
+              "face_index": 214,
+              "extent_angle": [
+                3.1415926535897913,
+                9.42477796076938
+              ],
+              "extent_height": [
+                0.0001999999999999993,
+                0.16200000000000028
+              ],
+              "origin": [
+                5.970409410833481e-16,
+                0.07999999999999981,
+                0.027999999999999702
+              ],
+              "axis": [
+                -1.91996429054139e-16,
+                3.81008491100288e-17,
+                1.0
+              ],
+              "radius": 0.01
+            },
+            "triangles": 142,
+            "tessellated_area_m2": 0.01016287690205043,
+            "bounds_m": [
+              [
+                -0.009992439299821854,
+                0.07000140845775604,
+                0.028200000524520874
+              ],
+              [
+                0.009999856352806091,
+                0.08999622613191605,
+                0.1899999976158142
+              ]
+            ],
+            "maximum_vertex_surface_residual_m": 3.4182449978187313e-09,
+            "axis_crossing_m": [
+              6.024168410968639e-16,
+              0.07999999999999981,
+              0.0
+            ]
+          },
+          {
+            "node": "3D_Parasolid_automatic_screwdriver_for_screws_with_vacuum_unit_SEV2001_series.x_b_82ccab",
+            "type": "cylinder",
+            "primitive": {
+              "face_index": 215,
+              "extent_angle": [
+                0.49208498132453116,
+                6.775270288504117
+              ],
+              "extent_height": [
+                0.0,
+                0.002199999999999989
+              ],
+              "origin": [
+                5.65937519576577e-16,
+                0.07999999999999981,
+                0.19
+              ],
+              "axis": [
+                1.91996429054139e-16,
+                -3.81008491100288e-17,
+                -1.0
+              ],
+              "radius": 0.0106
+            },
+            "triangles": 146,
+            "tessellated_area_m2": 0.0001464784155350312,
+            "bounds_m": [
+              [
+                -0.010596132837235928,
+                0.06940245628356934,
+                0.18780000507831573
+              ],
+              [
+                0.010599999688565731,
+                0.09059903025627136,
+                0.1899999976158142
+              ]
+            ],
+            "maximum_vertex_surface_residual_m": 3.5924759399924566e-09,
+            "axis_crossing_m": [
+              6.024168410968634e-16,
+              0.0799999999999998,
+              0.0
+            ]
+          },
+          {
+            "node": "3D_Parasolid_automatic_screwdriver_for_screws_with_vacuum_unit_SEV2001_series.x_b_82ccab",
+            "type": "cylinder",
+            "primitive": {
+              "face_index": 217,
+              "extent_angle": [
+                3.141592653589793,
+                9.424777960769381
+              ],
+              "extent_height": [
+                -7.105427357601002e-18,
+                0.15450000000000028
+              ],
+              "origin": [
+                5.970409410833481e-16,
+                0.07999999999999981,
+                0.027999999999999702
+              ],
+              "axis": [
+                -1.91996429054139e-16,
+                3.81008491100288e-17,
+                1.0
+              ],
+              "radius": 0.01065
+            },
+            "triangles": 146,
+            "tessellated_area_m2": 0.010335319652025075,
+            "bounds_m": [
+              [
+                -0.01064684521406889,
+                0.06935860961675644,
+                0.02800000086426735
+              ],
+              [
+                0.01064813882112503,
+                0.09064995497465134,
+                0.18250000476837158
+              ]
+            ],
+            "maximum_vertex_surface_residual_m": 3.3165752522795744e-09,
+            "axis_crossing_m": [
+              6.024168410968639e-16,
+              0.07999999999999981,
+              0.0
+            ]
+          },
+          {
+            "node": "3D_Parasolid_automatic_screwdriver_for_screws_with_vacuum_unit_SEV2001_series.x_b_82ccab",
+            "type": "cylinder",
+            "primitive": {
+              "face_index": 560,
+              "extent_angle": [
+                4.491855719463858,
+                6.283185307179587
+              ],
+              "extent_height": [
+                0.0,
+                0.004899999999999977
+              ],
+              "origin": [
+                3.29660335967357e-16,
+                0.0800000000000001,
+                0.48709999999999903
+              ],
+              "axis": [
+                -5.29635659205535e-16,
+                -4.4769591475681e-17,
+                1.0
+              ],
+              "radius": 0.0152
+            },
+            "triangles": 50,
+            "tessellated_area_m2": 0.0001333899352706382,
+            "bounds_m": [
+              [
+                -0.011865496635437012,
+                0.06480975449085236,
+                0.4871000051498413
+              ],
+              [
+                0.011865496635437012,
+                0.07050000131130219,
+                0.492000013589859
+              ]
+            ],
+            "maximum_vertex_surface_residual_m": 3.551029442716569e-09,
+            "axis_crossing_m": [
+              5.876458655663726e-16,
+              0.08000000000000013,
+              0.0
+            ]
+          },
+          {
+            "node": "3D_Parasolid_automatic_screwdriver_for_screws_with_vacuum_unit_SEV2001_series.x_b_82ccab",
+            "type": "cylinder",
+            "primitive": {
+              "face_index": 732,
+              "extent_angle": [
+                0.0,
+                6.283185307179586
+              ],
+              "extent_height": [
+                -0.013375,
+                0.0013249999999999887
+              ],
+              "origin": [
+                3.52488930969721e-16,
+                0.0799999999999997,
+                0.234325
+              ],
+              "axis": [
+                8.37211072662223e-16,
+                -9.43282745571243e-17,
+                -1.0
+              ],
+              "radius": 0.002
+            },
+            "triangles": 127,
+            "tessellated_area_m2": 0.00018465041190497426,
+            "bounds_m": [
+              [
+                -0.0019988270942121744,
+                0.07800117135047913,
+                0.2329999953508377
+              ],
+              [
+                0.0019999132491648197,
+                0.0819997563958168,
+                0.24770000576972961
+              ]
+            ],
+            "maximum_vertex_surface_residual_m": 3.6087950301688654e-09,
+            "axis_crossing_m": [
+              5.486684155712964e-16,
+              0.07999999999999967,
+              0.0
+            ]
+          },
+          {
+            "node": "3D_Parasolid_automatic_screwdriver_for_screws_with_vacuum_unit_SEV2001_series.x_b_82ccab",
+            "type": "cylinder",
+            "primitive": {
+              "face_index": 733,
+              "extent_angle": [
+                2.1623385491251006,
+                4.053626578886284
+              ],
+              "extent_height": [
+                0.0032039999999999716,
+                0.006447550098263806
+              ],
+              "origin": [
+                3.52488930969721e-16,
+                0.0799999999999997,
+                0.234325
+              ],
+              "axis": [
+                8.37211072662223e-16,
+                -9.43282745571243e-17,
+                -1.0
+              ],
+              "radius": 0.002
+            },
+            "triangles": 93,
+            "tessellated_area_m2": 9.18988936356138e-06,
+            "bounds_m": [
+              [
+                -0.0016210000030696392,
+                0.08117147535085678,
+                0.22787900269031525
+              ],
+              [
+                0.0016209440072998405,
+                0.0820000022649765,
+                0.2311210036277771
+              ]
+            ],
+            "maximum_vertex_surface_residual_m": 4.802882192602755e-07,
+            "axis_crossing_m": [
+              5.486684155712964e-16,
+              0.07999999999999967,
+              0.0
+            ]
+          },
+          {
+            "node": "3D_Parasolid_automatic_screwdriver_for_screws_with_vacuum_unit_SEV2001_series.x_b_82ccab",
+            "type": "cylinder",
+            "primitive": {
+              "face_index": 736,
+              "extent_angle": [
+                0.0,
+                6.283185307179586
+              ],
+              "extent_height": [
+                -0.0016000000000000228,
+                0.002
+              ],
+              "origin": [
+                3.3961681072754e-16,
+                0.0799999999999997,
+                0.2497
+              ],
+              "axis": [
+                8.37211072662223e-16,
+                -9.43282745571243e-17,
+                -1.0
+              ],
+              "radius": 0.0032500000000000003
+            },
+            "triangles": 126,
+            "tessellated_area_m2": 7.348283199648799e-05,
+            "bounds_m": [
+              [
+                -0.0032473283354192972,
+                0.07675190269947052,
+                0.24770000576972961
+              ],
+              [
+                0.003249858971685171,
+                0.08324960619211197,
+                0.25130000710487366
+              ]
+            ],
+            "maximum_vertex_surface_residual_m": 3.5391692111697015e-09,
+            "axis_crossing_m": [
+              5.486684155712971e-16,
+              0.07999999999999967,
+              0.0
+            ]
+          }
+        ],
+        "plane_coordinate_m": 0,
+        "plane_normal_index": 1,
+        "plane_candidates": [
+          {
+            "surface_part_index": 11,
+            "triangles": 482,
+            "tessellated_area_m2": 0.012205522672039679,
+            "bounds_m": [
+              [
+                -0.02800000086426735,
+                -3.3069076821226184e-16,
+                -1.4210854397564648e-16
+              ],
+              [
+                0.02800000086426735,
+                -1.9083650978150407e-16,
+                0.4869999885559082
+              ]
+            ],
+            "maximum_coordinate_residual_m": 3.3069076821226184e-16
+          }
+        ],
+        "display_plane": {
+          "surface_part_index": 11,
+          "triangles": 482,
+          "tessellated_area_m2": 0.012205522672039679,
+          "bounds_m": [
+            [
+              -0.02800000086426735,
+              -3.3069076821226184e-16,
+              -1.4210854397564648e-16
+            ],
+            [
+              0.02800000086426735,
+              -1.9083650978150407e-16,
+              0.4869999885559082
+            ]
+          ],
+          "maximum_coordinate_residual_m": 3.3069076821226184e-16
+        },
+        "axis_to_plane_distance_m": 0.07999999999999981,
+        "mounting_hole_pattern": null,
+        "fastening_tcp": null,
+        "bit_stroke_m": null,
+        "supply_hose_envelope": null
+      },
+      "render": {
+        "display_matrix": [
+          [
+            0.0,
+            0.0,
+            -1.0,
+            0.6169999837875366
+          ],
+          [
+            -1.0,
+            0.0,
+            0.0,
+            -0.0017499998211860657
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            -0.08310901373624785
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ],
+        "display_bounds_m": [
+          [
+            0.0,
+            -0.03474999964237213,
+            -0.08310901373624818
+          ],
+          [
+            1.1164941787719727,
+            0.03474999964237213,
+            0.08310901373624818
+          ]
+        ],
+        "annotations": {
+          "axis_line_xz_m": [
+            [
+              -0.025,
+              -0.0031090137362480424
+            ],
+            [
+              1.1414941787719726,
+              -0.0031090137362480424
+            ]
+          ],
+          "plane_line_xz_m": [
+            [
+              0.12999999523162842,
+              -0.08310901373624785
+            ],
+            [
+              0.6169999837875367,
+              -0.08310901373624785
+            ]
+          ],
+          "dimension_line_xz_m": [
+            [
+              0.3734999895095826,
+              -0.0031090137362480424
+            ],
+            [
+              0.3734999895095826,
+              -0.08310901373624785
+            ]
+          ],
+          "plane_line_scope": "Longitudinal bounds of coplanar triangles; not a continuous contact-area claim"
+        },
+        "frames": {
+          "whole": {
+            "pixels": [
+              1200,
+              220
+            ],
+            "x_m": [
+              -0.045,
+              1.195
+            ],
+            "z_m": [
+              -0.11366666666666667,
+              0.11366666666666667
+            ],
+            "png_file": "previews/hvjb_ses2001_comparison_v01/sev2001_whole.png",
+            "png_sha256": "4f8a7a5b09c83adec147d040208ec0000bc3cb4eeb20f32b296eb8bb254a1cd3",
+            "webp_sha256": "14dfb5df69d3b5f2e2918a93d2d39f929f86ce3379c0d6857805a72ed73100ff",
+            "webp_bytes": 10092,
+            "foreground_pixels": 58610
+          },
+          "front": {
+            "pixels": [
+              1000,
+              380
+            ],
+            "x_m": [
+              -0.025,
+              0.525
+            ],
+            "z_m": [
+              -0.10450000000000001,
+              0.10450000000000001
+            ],
+            "png_file": "previews/hvjb_ses2001_comparison_v01/sev2001_front.png",
+            "png_sha256": "0d71e5dbe5abe79e326e5c2189614f56bb3e52ddff36c68c591c9755320cfccd",
+            "webp_sha256": "d4e4ace8165b6d3d7ae4fb23cb143440768e18fb89bdb0c9b08c71ece4d67923",
+            "webp_bytes": 13642,
+            "foreground_pixels": 127203
+          }
+        },
+        "source_to_display_matrix": [
+          [
+            0.0,
+            0.0,
+            -1.0,
+            0.6169999837875366
+          ],
+          [
+            -1.0,
+            0.0,
+            0.0,
+            -0.0017499998211860657
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            -0.08310901373624785
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ]
+      }
+    }
+  },
+  "script_sha256": "8be484b9dc6ff4d847840b8e8053fa7968c2b1644a013feb394a21268b5c8b7a",
+  "template_sha256": "eff80c3e649c767eb3248868acd6e6e5d26f1a9ed5c5087258867c42dd16a9b6",
+  "inline_html": {
+    "path": "/home/rlrk/IsaacLab/work/hvjb-ses2001-comparison-20260918/ses2001-sev2001.html",
+    "sha256": "39ba8eb587c7ac7b214c8890ac641547180d3519fef8411b4d772b7aed364e35"
+  },
+  "input_sha256_before": {
+    "data/hand_working_default_v01.json": "1cf2a19f24f753eb44b4e96fd7e73ee8bdfe5b97367a77bf8cfa0cf30a4d107c",
+    "data/hvjb_photo_model_v03_p03.json.gz": "6687b12ec1b3db24babf75f8fef1b6f6bc123c288b713824b9763d9214553ba6",
+    "data/hvjb_photo_correspondence_v03_p01.json": "6c5b7cb9bab859a33c8f5d5cd5429ce9f06fb0951b8a8fa4ae2a31ad99052ca0",
+    "UR15_JB_photo_correspondence_v03_p03.blend": "5205d3aa2c2b99f7df6f538d17b3d3ca36ba8208c546858ee8ec8a5a3564a282",
+    "data/hvjb_robot_selection_v01.json": "ad1d0fc6ad2f0c9d36f4d9839faf559ce80aa9ffb4965174facef944f1a58db8",
+    "data/hvjb_task_occupancy_v01.json": "4da5b53687b05cd2cd1d294cf57121abde6ee9d04b19ed0a37ef2fb2a4d79df9",
+    "data/hvjb_pge_finger_v01_meshes.json.gz": "c9171a968fd38b263099b21627a31fe37cab61a5e98b8d494ea3a38abfef4570",
+    "data/hand_tool_interface_inputs_v01.json": "91f6a2fbb150c5ae29b7b921044f47f7ea98694e24026b290023d7676cbee392",
+    "scripts/probe_hand_tool_access_v01.py": "55456e6d55f84931bcc3f502e77372414a6efa2578e27970d5620f176c53417c",
+    "data/hvjb_fastening_datum_v01.json": "f7b1f5ad0731123518dcf645c86b2fb3a672335053871285b6b7880fc93c0b7b",
+    "data/hvjb_fastening_cad_v01.json": "7869a1fc0829fe97eab600cc41a5cf4a9c30982e4c4953bbf42b20f2a579da61",
+    "references/hvjb_fastening_cad_20260917/additional_info_SES.pdf": "0b529f27167cb96896ddf99210c76a0b75dcb26a102301876681755305214466",
+    "previews/hvjb_fastening_cad_v01_material_read/ses1601.glb": "9c4089004527c8872adbf1bf65c400e74554c979101d29c22aedf49cd81ecaaf",
+    "previews/hvjb_fastening_cad_v01_material_read/sem2001.glb": "7f5baae09ee470287e96e39628fe24b31b07a1f997edeff5275bc18c17038e3e",
+    "previews/hvjb_fastening_cad_v01_material_read/sev2001.glb": "93f65622c549fae858140da82f48e96c7966f077a9646c741129e4a81bd917da",
+    "references/connector_correction_20260915/te_408_32095_instruction.pdf": "cd13cd856b679e2683f7672f079bd4c99ff87ac2e361d3da73700e12c12fa63d",
+    "references/connector_correction_20260915/te_2103340_drawing.pdf": "be59744129dc5134d2a3363e25af93294e662cde4254ec28411b80bd01673dc6",
+    "references/connector_correction_20260915/te_2103346_drawing.pdf": "fbdeb1d56aba02ae85ed2464b3acd68ce6444cd47179f33225d7f0ba1b580e28",
+    "data/hvjb_header_interface_inputs_v01.json": "ebc87a9b4c338c219ea51a1b81c7ee1802486947a96f5caabf33da6662aae565",
+    "data/hand_fastening_reference_v01.json": "f2acc43f0ca0ba9de55ab26ea06e1ea1c8329ff56715b096bf2e8477ab19f36f",
+    "analysis/hvjb_final_connection_v01.md": "9f28157a45680f0b9d86fb82dc14e34bb92366b3461ecb67998e70eb2957d912",
+    "data/hvjb_fastening_mount_faces_v01.json": "14820510483ac4b2fdb30b29a33caea01abe42ff7484414c86e7f7f615e70dfd",
+    "data/hvjb_header_fastening_inputs_v01.json": "db01f30a9a6cdefd5593648db9c0680eada08ab729e774daee0376250601952c",
+    "audit/hvjb_fastener_interface_sources_v01.json": "626ef58d8202d242d1635fa4db7e51877afcea8db0c159a9c782747272d0d206",
+    "data/header_review_v03/meshes.json.gz": "8c0bbe8c60f0a78f8dcba56d76ed825d13d3f88dd67e9fd8cdeb932e88fa4130",
+    "scripts/build_header_review_v03.py": "216f596e8662b6f8a46a73fb8e3e6527972c241af6453bdb8102b98d82a1b01d",
+    "audit/hvjb_header_fastening_v01.json": "5fefe650b9ea5627a914769a5482fc66a283702d4b51bdca4c88a51ef53e55cc",
+    "data/hvjb_header_screw_options_v01.json": "5e4052fd5d25fff75464f20d83c6eee7c71f7e20d69ca97566de80e360a13099",
+    "references/hvjb_header_screw_followup_20260918/nbk_snpi1s_catalog.pdf": "6b6773014c4cb7db2ec04264d0cfe5bf8608aba5816fa9c14fea270918d61dca",
+    "references/hvjb_header_screw_followup_20260918/nbk_sfb_catalog.pdf": "2da298a9ba4b5fe10eff249533ede600708fccf77cfb18ff2fb9ec7d607c161f",
+    "scripts/analyze_hvjb_header_screw_options_v01.py": "1ead622b3fac845ac86734c9b9fe4067a25f4e673c271e0d562025c5a014d130",
+    "analysis/hvjb_header_screw_options_v01.md": "2a0e5e31df523f8c3eea6e1b2b396b70b03d6ca4b9cd4f353c6586637c301c11",
+    "audit/hvjb_header_screw_options_v01.json": "7d53d817915f3d2274a0fb098b49e4666a7ecee25f5ed35b6c93f8dbb97f813b",
+    "audit/hvjb_header_screw_options_v01_stdout.txt": "00a447bdd6e4f11491199290b00382c7fd3765d6d87901133c2dfef3190f270b",
+    "audit/hvjb_header_screw_options_v01_research_log.txt": "977a35c8d163cfa48f89ec08b7912839a8920fd285bd409e987b143dde7bbbec",
+    "data/header_review_v03/motion.npz": "b84b0f77a20cf2dd61c512514f4183c70bd3486e44b5c47dbcc8146b1be1b1e9",
+    "audit/header_review_v03_prepare.json": "a898d97a94a4ea2b9b1e1935f779738d7ab9743012ff2929b1449e268ddf3b1d",
+    "audit/header_review_v03_p03_build.json": "1f8066ef76c6778bca18ccd90e5a3d7738314164f0002a0fe5dbbd1651c80ec8",
+    "audit/header_review_v03_p03_probe.json": "e11920ee22dcbfbdb5ef2fffa683571c79b7519df82b9cd89f695cde95089d38",
+    "UR15_JB_initial_hands_v03_p03.blend": "2b828f98402cc95033ed62a380cdea0fb04f95bb31cae0d525b98357cd870614",
+    "scripts/prepare_header_review_v03.py": "6743845f7fd3f67de4c3b939ec0d8145882e51838bc952e3d993b716d3045ae6",
+    "data/hvjb_header_hand_access_v01.json": "83f553fb4deb5639d7b56b1621146bebd6abee0b786357c1c609183ad8588eca",
+    "audit/hvjb_header_screw_options_v01_readback.json": "ed93da6f86bc6a309bdf864f5c33993e2dc9b511d73dc208b818f79144921243",
+    "analysis/hvjb_header_hand_access_v01.md": "9cae19fb7a589c18796c571fdb009c16b5366bf47956868a20c821ed536f8beb",
+    "data/hvjb_header_hand_display_v01.json": "b904360a8188a2d710193f281233c89db8b384f18a93c700a4e42b3d463a68df",
+    "data/hvjb_header_hand_display_v01_p02.json": "b35626356c7c36812bbc647f4eb5f195ec17a6b5d47fc1b6e56986b68e041118",
+    "scripts/probe_hvjb_header_hand_access_v01.py": "f9bb18d1be68f04c2eb19143896f850582949e40ff80589b88cc6c12cc7bb6e6",
+    "scripts/build_hvjb_header_hand_figure_v01.py": "e002ca6c332aa2fe016b6d5dec1607633ac67ed14d65262b7d57f647e3e255f8",
+    "scripts/check_hvjb_header_hand_access_v01.mjs": "147eb125a1b59dcbf8f07553ef1cbcf886aaf87cb716f24944ae77a262a8e6d9",
+    "scripts/hvjb_header_hand_access_v01.html": "aefb7e330eab7deadc660d0c051bb1f5544a5cd9ef0a2eb0510a282998778790",
+    "audit/hvjb_header_hand_access_v01.json": "d189dc9dd14944f294f46abc9088f3a0138caa814ec305890ab6d4dc886a2c89",
+    "audit/hvjb_header_hand_access_v01_stdout.txt": "f43627aa67be289fd463d33bde4db884bf56455a666e9d55229ab49b3067250a",
+    "audit/hvjb_header_hand_access_v01_run2_stdout.txt": "70b1a3b83bc5b66540ecc92d2121679ac8893d4f898fa0f42980f022de4a75db",
+    "audit/hvjb_header_hand_access_v01_witness_diagnostic.json": "e6818fa06cc5a692bde52fda9ee7212ccc9fc20bd970f82fcabd2bec886ab08a",
+    "audit/hvjb_header_hand_access_v01_validator_check.json": "efdb474b1528be97bc01d76d7a40580a834dc8c9eb7118e169bfe39f5154e981",
+    "audit/hvjb_header_hand_access_v01_research_log.txt": "831001805a88a4ca675c175d7651c3d5b82fa6e6b0179b0b178d4e5bb23f298b",
+    "audit/hvjb_header_hand_browser_v01.json": "80849ef7057533c9859f14696c3c9840a3ca5df3170e64e48e0aaebf24d07fe1",
+    "audit/hvjb_header_hand_browser_v01_stdout.txt": "5ffd7e4688a568260848fe71b2656422ba27adcfb99affb50e079c4f20bd1aab",
+    "audit/hvjb_header_hand_browser_v01_diag_stdout.txt": "1c8d97f39faa35f07cff33cc8d313844472ada36924a96f5b62dcefbb04a9b8b",
+    "audit/hvjb_header_hand_browser_v01_p02_stdout.txt": "4410f81d6e9728c0851db59cc0ac4bbe8d1371d15ce03e71b3f98aac0a9ebe1a",
+    "audit/hvjb_header_hand_figure_v01_stdout.txt": "650693486944e18dbeb688d922b8f97713e274ba117c0d743bcab0f7007e5c90",
+    "audit/hvjb_header_hand_figure_v01_p02_stdout.txt": "0899e0ba41b9743d6069981d900cb0eb0b4fd10116c0ae582507a8261bc46573",
+    "references/hvjb_fastening_datum_20260917/SES_SEM_1017_EN.pdf": "7a2a396fb7cdc3b0aee6f51dfc792db4f21e40afc7f07b5a42470254aa9be58a",
+    "references/hvjb_fastening_cad_20260917/ses1601.pdf": "dd4bbe1c7a5217ca363b34848c7ba8f98aff2a9cf3e0755369716eb532480867",
+    "references/hvjb_fastening_cad_20260917/sev2001.pdf": "10a4439f537ec6c1cf2d8bb32ea86d9a7bc4fc871e87a4a3f2f417b2540a1330",
+    "references/hvjb_header_tool_configuration_20260918/stoeger_screw_dimensions.html": "deb85567bf74a963023ed05629097ecd9277bdc111a4cf8438354703401a272f",
+    "audit/hvjb_header_hand_access_v01_readback.json": "c742255c02909b14ce9f84384620c80eaa36af7586b1fb924e3622dff720d7cf",
+    "data/hvjb_fastener_interface_sources_v01.json": "094fc0fc6ac12435242bb4b1d953f1a46ab04fd289df64c9b9a9f4a8a5943b99",
+    "data/hvjb_header_tool_configuration_v01.json": "516de9712665ef087a0cd03cd8c3271a2dac98d54b1926c69f537c7c6ac57265",
+    "analysis/hvjb_header_tool_configuration_v01.md": "8eac794b7875556be84664507013ff102b62a7a04ddeb5c0e22cf32bd7a700e9",
+    "scripts/analyze_hvjb_header_tool_configuration_v01.py": "0124d344fd11f8fb69bd81a60aab2878dc72e1d5c47ef75c7152b3313946c8c9",
+    "audit/hvjb_header_tool_configuration_v01.json": "6cf69453e830745ae5bfd1fdf51554950e592213b79446413c25e3b83f4b349e",
+    "audit/hvjb_header_tool_configuration_v01_stdout.txt": "3f2ae28899c5c2a796f2780bb8e1b0be4025e3cd22e42c77bbef43df166a5fe9",
+    "references/hvjb_ses2001_cad_20260918/ses2001.pdf": "43eaccd68fae6be1eb2012e4a4879dc30f3d73fb3db6ce08f162e6caa09953af",
+    "references/hvjb_ses2001_cad_20260918/ses2001_step.zip": "a04b96f36f4a788732bf2bd573f827c867c8bbb040bbc7fc92622ab9b5db9286",
+    "data/hvjb_ses2001_sources_v01.json": "5be2cf68b31e45c399c307178fe467427b1d786975dd4c1ff312849bddbfc122",
+    "audit/hvjb_header_tool_configuration_v01_readback.json": "5784042bf789f3c220556037255451cbe920d26d6d1a22ee4c88b27f3af553a6",
+    "scripts/prepare_hvjb_fastening_cad_v01.py": "455fa8f175cfc2bb1bf065d862995791444d5a0824107184792bcb2db063096c",
+    "scripts/extract_hvjb_fastening_surfaces_v01.py": "d2ffc2db7eb928991c1c9fae38492fffa97a516067eb5c63badc24db07c5a416",
+    "scripts/render_hvjb_fastening_cad_v01.py": "aec52718f43a99a5e640cca5bb1d3037f010d7bf78376010c14e7f7bcfbf67c8",
+    "scripts/build_hvjb_fastening_datum_v01.py": "6fec1c0b6e4438535a03aaccc2078ceb27e36c4af71131e2ab9cd5a2e9499054",
+    "audit/hvjb_ses2001_cad_v01.json": "17238846214a8579b9649a09a791028b327624b31d005615ef3f9dcd69610fc3",
+    "previews/hvjb_ses2001_cad_v01/ses2001.glb": "e2185874a0f81d981e7f72ef56cc5321ac6bd7351eac90249cb843e637bf1b0a",
+    "previews/hvjb_ses2001_cad_v01/objects.json.gz": "a11b434b34b147dbd06e655580fdfaa70d402e53a00ed7e704f79675aa11c004",
+    "previews/hvjb_ses2001_cad_v01/surfaces.json.gz": "1ceb331f461254e6a6ee94cc41df200808e15abf1d21afcd6a95074f7d2cf786"
+  },
+  "input_sha256_after": {
+    "data/hand_working_default_v01.json": "1cf2a19f24f753eb44b4e96fd7e73ee8bdfe5b97367a77bf8cfa0cf30a4d107c",
+    "data/hvjb_photo_model_v03_p03.json.gz": "6687b12ec1b3db24babf75f8fef1b6f6bc123c288b713824b9763d9214553ba6",
+    "data/hvjb_photo_correspondence_v03_p01.json": "6c5b7cb9bab859a33c8f5d5cd5429ce9f06fb0951b8a8fa4ae2a31ad99052ca0",
+    "UR15_JB_photo_correspondence_v03_p03.blend": "5205d3aa2c2b99f7df6f538d17b3d3ca36ba8208c546858ee8ec8a5a3564a282",
+    "data/hvjb_robot_selection_v01.json": "ad1d0fc6ad2f0c9d36f4d9839faf559ce80aa9ffb4965174facef944f1a58db8",
+    "data/hvjb_task_occupancy_v01.json": "4da5b53687b05cd2cd1d294cf57121abde6ee9d04b19ed0a37ef2fb2a4d79df9",
+    "data/hvjb_pge_finger_v01_meshes.json.gz": "c9171a968fd38b263099b21627a31fe37cab61a5e98b8d494ea3a38abfef4570",
+    "data/hand_tool_interface_inputs_v01.json": "91f6a2fbb150c5ae29b7b921044f47f7ea98694e24026b290023d7676cbee392",
+    "scripts/probe_hand_tool_access_v01.py": "55456e6d55f84931bcc3f502e77372414a6efa2578e27970d5620f176c53417c",
+    "data/hvjb_fastening_datum_v01.json": "f7b1f5ad0731123518dcf645c86b2fb3a672335053871285b6b7880fc93c0b7b",
+    "data/hvjb_fastening_cad_v01.json": "7869a1fc0829fe97eab600cc41a5cf4a9c30982e4c4953bbf42b20f2a579da61",
+    "references/hvjb_fastening_cad_20260917/additional_info_SES.pdf": "0b529f27167cb96896ddf99210c76a0b75dcb26a102301876681755305214466",
+    "previews/hvjb_fastening_cad_v01_material_read/ses1601.glb": "9c4089004527c8872adbf1bf65c400e74554c979101d29c22aedf49cd81ecaaf",
+    "previews/hvjb_fastening_cad_v01_material_read/sem2001.glb": "7f5baae09ee470287e96e39628fe24b31b07a1f997edeff5275bc18c17038e3e",
+    "previews/hvjb_fastening_cad_v01_material_read/sev2001.glb": "93f65622c549fae858140da82f48e96c7966f077a9646c741129e4a81bd917da",
+    "references/connector_correction_20260915/te_408_32095_instruction.pdf": "cd13cd856b679e2683f7672f079bd4c99ff87ac2e361d3da73700e12c12fa63d",
+    "references/connector_correction_20260915/te_2103340_drawing.pdf": "be59744129dc5134d2a3363e25af93294e662cde4254ec28411b80bd01673dc6",
+    "references/connector_correction_20260915/te_2103346_drawing.pdf": "fbdeb1d56aba02ae85ed2464b3acd68ce6444cd47179f33225d7f0ba1b580e28",
+    "data/hvjb_header_interface_inputs_v01.json": "ebc87a9b4c338c219ea51a1b81c7ee1802486947a96f5caabf33da6662aae565",
+    "data/hand_fastening_reference_v01.json": "f2acc43f0ca0ba9de55ab26ea06e1ea1c8329ff56715b096bf2e8477ab19f36f",
+    "analysis/hvjb_final_connection_v01.md": "9f28157a45680f0b9d86fb82dc14e34bb92366b3461ecb67998e70eb2957d912",
+    "data/hvjb_fastening_mount_faces_v01.json": "14820510483ac4b2fdb30b29a33caea01abe42ff7484414c86e7f7f615e70dfd",
+    "data/hvjb_header_fastening_inputs_v01.json": "db01f30a9a6cdefd5593648db9c0680eada08ab729e774daee0376250601952c",
+    "audit/hvjb_fastener_interface_sources_v01.json": "626ef58d8202d242d1635fa4db7e51877afcea8db0c159a9c782747272d0d206",
+    "data/header_review_v03/meshes.json.gz": "8c0bbe8c60f0a78f8dcba56d76ed825d13d3f88dd67e9fd8cdeb932e88fa4130",
+    "scripts/build_header_review_v03.py": "216f596e8662b6f8a46a73fb8e3e6527972c241af6453bdb8102b98d82a1b01d",
+    "audit/hvjb_header_fastening_v01.json": "5fefe650b9ea5627a914769a5482fc66a283702d4b51bdca4c88a51ef53e55cc",
+    "data/hvjb_header_screw_options_v01.json": "5e4052fd5d25fff75464f20d83c6eee7c71f7e20d69ca97566de80e360a13099",
+    "references/hvjb_header_screw_followup_20260918/nbk_snpi1s_catalog.pdf": "6b6773014c4cb7db2ec04264d0cfe5bf8608aba5816fa9c14fea270918d61dca",
+    "references/hvjb_header_screw_followup_20260918/nbk_sfb_catalog.pdf": "2da298a9ba4b5fe10eff249533ede600708fccf77cfb18ff2fb9ec7d607c161f",
+    "scripts/analyze_hvjb_header_screw_options_v01.py": "1ead622b3fac845ac86734c9b9fe4067a25f4e673c271e0d562025c5a014d130",
+    "analysis/hvjb_header_screw_options_v01.md": "2a0e5e31df523f8c3eea6e1b2b396b70b03d6ca4b9cd4f353c6586637c301c11",
+    "audit/hvjb_header_screw_options_v01.json": "7d53d817915f3d2274a0fb098b49e4666a7ecee25f5ed35b6c93f8dbb97f813b",
+    "audit/hvjb_header_screw_options_v01_stdout.txt": "00a447bdd6e4f11491199290b00382c7fd3765d6d87901133c2dfef3190f270b",
+    "audit/hvjb_header_screw_options_v01_research_log.txt": "977a35c8d163cfa48f89ec08b7912839a8920fd285bd409e987b143dde7bbbec",
+    "data/header_review_v03/motion.npz": "b84b0f77a20cf2dd61c512514f4183c70bd3486e44b5c47dbcc8146b1be1b1e9",
+    "audit/header_review_v03_prepare.json": "a898d97a94a4ea2b9b1e1935f779738d7ab9743012ff2929b1449e268ddf3b1d",
+    "audit/header_review_v03_p03_build.json": "1f8066ef76c6778bca18ccd90e5a3d7738314164f0002a0fe5dbbd1651c80ec8",
+    "audit/header_review_v03_p03_probe.json": "e11920ee22dcbfbdb5ef2fffa683571c79b7519df82b9cd89f695cde95089d38",
+    "UR15_JB_initial_hands_v03_p03.blend": "2b828f98402cc95033ed62a380cdea0fb04f95bb31cae0d525b98357cd870614",
+    "scripts/prepare_header_review_v03.py": "6743845f7fd3f67de4c3b939ec0d8145882e51838bc952e3d993b716d3045ae6",
+    "data/hvjb_header_hand_access_v01.json": "83f553fb4deb5639d7b56b1621146bebd6abee0b786357c1c609183ad8588eca",
+    "audit/hvjb_header_screw_options_v01_readback.json": "ed93da6f86bc6a309bdf864f5c33993e2dc9b511d73dc208b818f79144921243",
+    "analysis/hvjb_header_hand_access_v01.md": "9cae19fb7a589c18796c571fdb009c16b5366bf47956868a20c821ed536f8beb",
+    "data/hvjb_header_hand_display_v01.json": "b904360a8188a2d710193f281233c89db8b384f18a93c700a4e42b3d463a68df",
+    "data/hvjb_header_hand_display_v01_p02.json": "b35626356c7c36812bbc647f4eb5f195ec17a6b5d47fc1b6e56986b68e041118",
+    "scripts/probe_hvjb_header_hand_access_v01.py": "f9bb18d1be68f04c2eb19143896f850582949e40ff80589b88cc6c12cc7bb6e6",
+    "scripts/build_hvjb_header_hand_figure_v01.py": "e002ca6c332aa2fe016b6d5dec1607633ac67ed14d65262b7d57f647e3e255f8",
+    "scripts/check_hvjb_header_hand_access_v01.mjs": "147eb125a1b59dcbf8f07553ef1cbcf886aaf87cb716f24944ae77a262a8e6d9",
+    "scripts/hvjb_header_hand_access_v01.html": "aefb7e330eab7deadc660d0c051bb1f5544a5cd9ef0a2eb0510a282998778790",
+    "audit/hvjb_header_hand_access_v01.json": "d189dc9dd14944f294f46abc9088f3a0138caa814ec305890ab6d4dc886a2c89",
+    "audit/hvjb_header_hand_access_v01_stdout.txt": "f43627aa67be289fd463d33bde4db884bf56455a666e9d55229ab49b3067250a",
+    "audit/hvjb_header_hand_access_v01_run2_stdout.txt": "70b1a3b83bc5b66540ecc92d2121679ac8893d4f898fa0f42980f022de4a75db",
+    "audit/hvjb_header_hand_access_v01_witness_diagnostic.json": "e6818fa06cc5a692bde52fda9ee7212ccc9fc20bd970f82fcabd2bec886ab08a",
+    "audit/hvjb_header_hand_access_v01_validator_check.json": "efdb474b1528be97bc01d76d7a40580a834dc8c9eb7118e169bfe39f5154e981",
+    "audit/hvjb_header_hand_access_v01_research_log.txt": "831001805a88a4ca675c175d7651c3d5b82fa6e6b0179b0b178d4e5bb23f298b",
+    "audit/hvjb_header_hand_browser_v01.json": "80849ef7057533c9859f14696c3c9840a3ca5df3170e64e48e0aaebf24d07fe1",
+    "audit/hvjb_header_hand_browser_v01_stdout.txt": "5ffd7e4688a568260848fe71b2656422ba27adcfb99affb50e079c4f20bd1aab",
+    "audit/hvjb_header_hand_browser_v01_diag_stdout.txt": "1c8d97f39faa35f07cff33cc8d313844472ada36924a96f5b62dcefbb04a9b8b",
+    "audit/hvjb_header_hand_browser_v01_p02_stdout.txt": "4410f81d6e9728c0851db59cc0ac4bbe8d1371d15ce03e71b3f98aac0a9ebe1a",
+    "audit/hvjb_header_hand_figure_v01_stdout.txt": "650693486944e18dbeb688d922b8f97713e274ba117c0d743bcab0f7007e5c90",
+    "audit/hvjb_header_hand_figure_v01_p02_stdout.txt": "0899e0ba41b9743d6069981d900cb0eb0b4fd10116c0ae582507a8261bc46573",
+    "references/hvjb_fastening_datum_20260917/SES_SEM_1017_EN.pdf": "7a2a396fb7cdc3b0aee6f51dfc792db4f21e40afc7f07b5a42470254aa9be58a",
+    "references/hvjb_fastening_cad_20260917/ses1601.pdf": "dd4bbe1c7a5217ca363b34848c7ba8f98aff2a9cf3e0755369716eb532480867",
+    "references/hvjb_fastening_cad_20260917/sev2001.pdf": "10a4439f537ec6c1cf2d8bb32ea86d9a7bc4fc871e87a4a3f2f417b2540a1330",
+    "references/hvjb_header_tool_configuration_20260918/stoeger_screw_dimensions.html": "deb85567bf74a963023ed05629097ecd9277bdc111a4cf8438354703401a272f",
+    "audit/hvjb_header_hand_access_v01_readback.json": "c742255c02909b14ce9f84384620c80eaa36af7586b1fb924e3622dff720d7cf",
+    "data/hvjb_fastener_interface_sources_v01.json": "094fc0fc6ac12435242bb4b1d953f1a46ab04fd289df64c9b9a9f4a8a5943b99",
+    "data/hvjb_header_tool_configuration_v01.json": "516de9712665ef087a0cd03cd8c3271a2dac98d54b1926c69f537c7c6ac57265",
+    "analysis/hvjb_header_tool_configuration_v01.md": "8eac794b7875556be84664507013ff102b62a7a04ddeb5c0e22cf32bd7a700e9",
+    "scripts/analyze_hvjb_header_tool_configuration_v01.py": "0124d344fd11f8fb69bd81a60aab2878dc72e1d5c47ef75c7152b3313946c8c9",
+    "audit/hvjb_header_tool_configuration_v01.json": "6cf69453e830745ae5bfd1fdf51554950e592213b79446413c25e3b83f4b349e",
+    "audit/hvjb_header_tool_configuration_v01_stdout.txt": "3f2ae28899c5c2a796f2780bb8e1b0be4025e3cd22e42c77bbef43df166a5fe9",
+    "references/hvjb_ses2001_cad_20260918/ses2001.pdf": "43eaccd68fae6be1eb2012e4a4879dc30f3d73fb3db6ce08f162e6caa09953af",
+    "references/hvjb_ses2001_cad_20260918/ses2001_step.zip": "a04b96f36f4a788732bf2bd573f827c867c8bbb040bbc7fc92622ab9b5db9286",
+    "data/hvjb_ses2001_sources_v01.json": "5be2cf68b31e45c399c307178fe467427b1d786975dd4c1ff312849bddbfc122",
+    "audit/hvjb_header_tool_configuration_v01_readback.json": "5784042bf789f3c220556037255451cbe920d26d6d1a22ee4c88b27f3af553a6",
+    "scripts/prepare_hvjb_fastening_cad_v01.py": "455fa8f175cfc2bb1bf065d862995791444d5a0824107184792bcb2db063096c",
+    "scripts/extract_hvjb_fastening_surfaces_v01.py": "d2ffc2db7eb928991c1c9fae38492fffa97a516067eb5c63badc24db07c5a416",
+    "scripts/render_hvjb_fastening_cad_v01.py": "aec52718f43a99a5e640cca5bb1d3037f010d7bf78376010c14e7f7bcfbf67c8",
+    "scripts/build_hvjb_fastening_datum_v01.py": "6fec1c0b6e4438535a03aaccc2078ceb27e36c4af71131e2ab9cd5a2e9499054",
+    "audit/hvjb_ses2001_cad_v01.json": "17238846214a8579b9649a09a791028b327624b31d005615ef3f9dcd69610fc3",
+    "previews/hvjb_ses2001_cad_v01/ses2001.glb": "e2185874a0f81d981e7f72ef56cc5321ac6bd7351eac90249cb843e637bf1b0a",
+    "previews/hvjb_ses2001_cad_v01/objects.json.gz": "a11b434b34b147dbd06e655580fdfaa70d402e53a00ed7e704f79675aa11c004",
+    "previews/hvjb_ses2001_cad_v01/surfaces.json.gz": "1ceb331f461254e6a6ee94cc41df200808e15abf1d21afcd6a95074f7d2cf786"
+  },
+  "native_opened": false,
+  "native_saved": false,
+  "motion_recomputed": false,
+  "selected_tool_configuration": null,
+  "physical_acceptance_verdict": null
+}

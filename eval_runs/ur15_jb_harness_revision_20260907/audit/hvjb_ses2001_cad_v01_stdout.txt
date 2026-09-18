@@ -1,0 +1,4 @@
+SES2001_STEP_VERIFIED 3D_Stepfile_automatic_screwdriver_for_screws_SES2001_series.stp 9a0975d529b2f31f85f81e93dc792f94745b07ade8dcb04fd4a29008b9c5e853
+SES2001_GLB_SAVED e2185874a0f81d981e7f72ef56cc5321ac6bd7351eac90249cb843e637bf1b0a
+SES2001_CAD_READ_COMPLETE {"extents_m": [1.1289942190051079, 0.0649929977953434, 0.1312868446111679], "triangles": 743217}
+[INFO] Using Python: "/home/rlrk/src/ur15-line-render/venv/bin/python"

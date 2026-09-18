@@ -1,0 +1,8 @@
+DATUM_FRAME_SAVED SES2001 whole
+DATUM_FRAME_SAVED SES2001 front
+TOOL_DATUM SES2001 axis_to_mount_mm 57.99999833106959
+DATUM_FRAME_SAVED SEV2001 whole
+DATUM_FRAME_SAVED SEV2001 front
+TOOL_DATUM SEV2001 axis_to_mount_mm 79.9999999999998
+SES2001_COMPARISON_COMPLETE /home/rlrk/IsaacLab/work/hvjb-ses2001-comparison-20260918/ses2001-sev2001.html
+[INFO] Using Python: "/home/rlrk/src/ur15-line-render/venv/bin/python"

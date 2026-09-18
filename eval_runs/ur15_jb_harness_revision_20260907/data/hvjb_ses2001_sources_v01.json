@@ -1,0 +1,42 @@
+{
+  "model": "SES2001",
+  "scope": "Official example CAD, not a selected Ampere fastening configuration",
+  "download_page": "https://www.stoeger.com/en/downloads.html",
+  "sources": [
+    {
+      "file": "references/hvjb_ses2001_cad_20260918/ses2001.pdf",
+      "sha256": "43eaccd68fae6be1eb2012e4a4879dc30f3d73fb3db6ce08f162e6caa09953af",
+      "url": "https://www.stoeger.com/en/downloads.html?file=files/stoeger/downloads/CAD/SES/automatic_screwdriver_for_screws_SES2001_series.pdf",
+      "bytes": 352439,
+      "observed_at": "2026-09-18T05:52:28.020027+00:00"
+    },
+    {
+      "file": "references/hvjb_ses2001_cad_20260918/ses2001_step.zip",
+      "sha256": "a04b96f36f4a788732bf2bd573f827c867c8bbb040bbc7fc92622ab9b5db9286",
+      "url": "https://www.stoeger.com/en/downloads.html?file=files/stoeger/downloads/CAD/SES/3D_Step_file_automatic_screwdriver_for_screws_SES2001_series.zip",
+      "bytes": 3488743,
+      "observed_at": "2026-09-18T05:52:29.695725+00:00"
+    }
+  ],
+  "drawing_observation": {
+    "page": 1,
+    "example_body_length_excluding_motor_m": 0.6485,
+    "axis_to_mounting_side_m": 0.058,
+    "example_front_diameter_m": 0.025,
+    "body_width_callout_m": 0.065,
+    "opposite_side_callout_m": 0.073,
+    "unit_weight_without_motor_kg": 2.9,
+    "manufacturer_scope": "Example dimensions may vary; motor changes the overall length",
+    "configuration_adopted": false
+  },
+  "reuse": {
+    "conversion": "scripts/prepare_hvjb_fastening_cad_v01.py",
+    "partial_analytical_surface_reader": "scripts/extract_hvjb_fastening_surfaces_v01.py",
+    "whole_mesh_renderer": "scripts/render_hvjb_fastening_cad_v01.py",
+    "datum_observer": "scripts/build_hvjb_fastening_datum_v01.py",
+    "reason_for_new_entry": "Existing orchestration pins SES1601, SEM2001 and SEV2001; SES2001 is a separate missing source"
+  },
+  "previous_readback": "audit/hvjb_header_tool_configuration_v01_readback.json",
+  "selected_tool_configuration": null,
+  "physical_acceptance_verdict": null
+}
