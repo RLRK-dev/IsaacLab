@@ -1,0 +1,13 @@
+{
+  "diagnostic_sha256": "e6818fa06cc5a692bde52fda9ee7212ccc9fc20bd970f82fcabd2bec886ab08a",
+  "script_sha256": "f9bb18d1be68f04c2eb19143896f850582949e40ff80589b88cc6c12cc7bb6e6",
+  "numeric_tolerance_m": 1e-10,
+  "old_validator_error_m": 8.221789998819555e-09,
+  "new_validator_error_m": 0.0,
+  "negative_control_offset_m": 1e-06,
+  "negative_control_error_m": 9.99999999996249e-07,
+  "old_reproduction_fails": true,
+  "new_reproduction_passes": true,
+  "off_surface_point_rejected": true,
+  "measurement_algorithm_changed": false
+}

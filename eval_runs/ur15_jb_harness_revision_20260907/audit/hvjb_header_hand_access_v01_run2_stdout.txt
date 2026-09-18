@@ -1,0 +1,16 @@
+HEADER_HAND_AXIS_OBSERVED P16 0 frame 575 radius_m 0.010930004574565872 object left_left_header_pad
+HEADER_HAND_AXIS_OBSERVED P16 1 frame 605 radius_m 0.008549999999996657 object left_left_header_carrier
+HEADER_HAND_AXIS_OBSERVED P16 2 frame 635 radius_m 0.040604002265784415 object left_left_header_pad
+HEADER_HAND_AXIS_OBSERVED P16 3 frame 665 radius_m 0.02429197124590091 object hardware_left_left_inner_finger_0
+HEADER_HAND_AXIS_OBSERVED P16 4 frame 695 radius_m 0.04060400226579087 object left_right_header_pad
+HEADER_HAND_AXIS_OBSERVED P16 5 frame 725 radius_m 0.024291973296319616 object hardware_left_right_inner_finger_0
+HEADER_HAND_AXIS_OBSERVED P16 6 frame 755 radius_m 0.010930004574569776 object left_right_header_pad
+HEADER_HAND_AXIS_OBSERVED P16 7 frame 785 radius_m 0.008550000000003763 object left_right_header_carrier
+HEADER_HAND_AXIS_OBSERVED P17 0 frame 1135 radius_m 0.010930004574577488 object left_left_header_pad
+HEADER_HAND_AXIS_OBSERVED P17 1 frame 1165 radius_m 0.008550000000010403 object left_left_header_carrier
+HEADER_HAND_AXIS_OBSERVED P17 2 frame 1195 radius_m 0.04060400226578702 object left_right_header_pad
+HEADER_HAND_AXIS_OBSERVED P17 3 frame 1225 radius_m 0.024291971245914586 object hardware_left_left_inner_finger_0
+HEADER_HAND_AXIS_OBSERVED P17 4 frame 1255 radius_m 0.010930004574570037 object left_right_header_pad
+HEADER_HAND_AXIS_OBSERVED P17 5 frame 1285 radius_m 0.008549999999998857 object left_right_header_carrier
+HEADER_HAND_ACCESS_COMPLETE /home/rlrk/IsaacLab-op040/eval_runs/ur15_jb_harness_revision_20260907/audit/hvjb_header_hand_access_v01.json
+[INFO] Using Python: "/home/rlrk/src/ur15-line-render/venv/bin/python"

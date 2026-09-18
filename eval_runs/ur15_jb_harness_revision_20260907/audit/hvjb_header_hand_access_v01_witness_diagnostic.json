@@ -1,0 +1,64 @@
+{
+  "pose": 635,
+  "axis": [
+    -0.01695,
+    -0.01375
+  ],
+  "trimesh_version": "4.12.2",
+  "diagnostics": [
+    {
+      "bounds_m": [
+        0.048,
+        0.05
+      ],
+      "result": {
+        "radius_to_surface_m": 0.07491893576440127,
+        "object": "hardware_left_left_inner_knuckle_0",
+        "witness_m": [
+          -0.01948408230945852,
+          0.07234098058935011,
+          0.048
+        ],
+        "source_face_index": 41238
+      },
+      "triangle_query_m": [
+        [
+          -0.019024655293872893,
+          0.07246472157387314,
+          0.05249999193736048
+        ],
+        [
+          -0.019782485782039692,
+          0.07226060957731946,
+          0.047999991674839995
+        ],
+        [
+          -0.01902465373502695,
+          0.07246472157387314,
+          0.04799999193736075
+        ]
+      ],
+      "raw_closest_m": [
+        -0.019484082309455673,
+        0.07234098058935011,
+        0.04799999177821
+      ],
+      "raw_error_m": 8.221789998819555e-09,
+      "normalization_scale_m": 0.004567928536942829,
+      "normalized_error_m": 0.0,
+      "barycentric_uv": [
+        0.60624062579528,
+        0.39375754714027594
+      ],
+      "barycentric_residual_m": 0.0,
+      "lstsq_rank": 2,
+      "singular_values_m": [
+        0.006388296136313082,
+        0.0005528504258693874
+      ],
+      "trimesh_tol_zero": 1e-13
+    }
+  ],
+  "script_sha256": "533148bebc2f18aed717f34c97ea1afda235366f98c25f666dbcec40d17a0ade",
+  "note": "Read-only reproduction of the failed witness validator; radial measurement and source geometry unchanged"
+}

@@ -1,0 +1,6139 @@
+{
+  "observed_at": "2026-09-18T02:55:44.495Z",
+  "preview_sha256": "7ac15512452d7fcaa0e4f64d404fb4c3d15ae2e79e31a4182f2eaa81604edfe3",
+  "record_sha256": "b35626356c7c36812bbc647f4eb5f195ec17a6b5d47fc1b6e56986b68e041118",
+  "results": [
+    {
+      "requested_width": 736,
+      "scheme": "light",
+      "id": "P16_1",
+      "axes_total": 14,
+      "nearest": {
+        "radius_mm": 10.930004574565872,
+        "category": "contact_pad",
+        "object": "left_left_header_pad",
+        "witness_header_mm": [
+          -56.599999999996875,
+          -5.499999999938845,
+          -4.999999999995897
+        ]
+      },
+      "frame": 575,
+      "width": 736,
+      "outside": [],
+      "label_overlaps": [],
+      "document_width": 736,
+      "labels_min_px": 12,
+      "selected": "P16_1",
+      "option_count": 14,
+      "marker_ids": [
+        "P16_1",
+        "P16_2",
+        "P16_3",
+        "P16_4",
+        "P16_5",
+        "P16_6",
+        "P16_7",
+        "P16_8"
+      ],
+      "rings": 1,
+      "projection": {
+        "width": 736,
+        "height": 306.4651162790698,
+        "left": 64,
+        "top": 38,
+        "scale": 5.5813953488372094,
+        "xBounds": [
+          -58.05,
+          58.05
+        ],
+        "zBounds": [
+          -19.75,
+          19.75
+        ],
+        "feature_id": "P16"
+      },
+      "profile": {
+        "width": 736,
+        "height": 310,
+        "x_domain": [
+          -8.08,
+          100.08
+        ],
+        "y_domain": [
+          0,
+          171.78334443572294
+        ],
+        "bins": 52,
+        "visible": [
+          "hardware",
+          "insert",
+          "contact_pad"
+        ]
+      },
+      "series": [
+        "hardware",
+        "insert",
+        "contact_pad"
+      ],
+      "plot_viewBox": "0 0 736 310",
+      "x_ticks": 6,
+      "hover": {
+        "depth_mm": 36.44441560371517,
+        "guide_x": 334.928,
+        "band": [
+          36.00000000000001,
+          38
+        ],
+        "series": [
+          {
+            "key": "hardware",
+            "radius_mm": 156.8933476898729
+          },
+          {
+            "key": "insert",
+            "radius_mm": 72.75000000000392
+          },
+          {
+            "key": "contact_pad",
+            "radius_mm": null
+          }
+        ],
+        "expected_x": 334.928,
+        "markers": [
+          {
+            "key": "hardware",
+            "cx": 334.928
+          },
+          {
+            "key": "insert",
+            "cx": 334.928
+          }
+        ],
+        "tooltip_hidden": false
+      }
+    },
+    {
+      "requested_width": 736,
+      "scheme": "light",
+      "id": "P16_2",
+      "axes_total": 14,
+      "nearest": {
+        "radius_mm": 8.549999999996658,
+        "category": "insert",
+        "object": "left_left_header_carrier",
+        "witness_header_mm": [
+          -58.599999999996655,
+          -8.499999999938908,
+          13.75
+        ]
+      },
+      "frame": 605,
+      "width": 736,
+      "outside": [],
+      "label_overlaps": [],
+      "document_width": 736,
+      "labels_min_px": 12,
+      "selected": "P16_2",
+      "option_count": 14,
+      "marker_ids": [
+        "P16_1",
+        "P16_2",
+        "P16_3",
+        "P16_4",
+        "P16_5",
+        "P16_6",
+        "P16_7",
+        "P16_8"
+      ],
+      "rings": 1,
+      "projection": {
+        "width": 736,
+        "height": 306.4651162790698,
+        "left": 64,
+        "top": 38,
+        "scale": 5.5813953488372094,
+        "xBounds": [
+          -58.05,
+          58.05
+        ],
+        "zBounds": [
+          -19.75,
+          19.75
+        ],
+        "feature_id": "P16"
+      },
+      "profile": {
+        "width": 736,
+        "height": 310,
+        "x_domain": [
+          -8.08,
+          100.08
+        ],
+        "y_domain": [
+          0,
+          144.09807796863964
+        ],
+        "bins": 52,
+        "visible": [
+          "hardware",
+          "insert",
+          "contact_pad"
+        ]
+      },
+      "series": [
+        "hardware",
+        "insert",
+        "contact_pad"
+      ],
+      "plot_viewBox": "0 0 736 310",
+      "x_ticks": 6,
+      "hover": {
+        "depth_mm": 36.44441560371517,
+        "guide_x": 334.928,
+        "band": [
+          36.00000000000001,
+          38
+        ],
+        "series": [
+          {
+            "key": "hardware",
+            "radius_mm": 129.86455895932372
+          },
+          {
+            "key": "insert",
+            "radius_mm": 45.250000000003816
+          },
+          {
+            "key": "contact_pad",
+            "radius_mm": null
+          }
+        ],
+        "expected_x": 334.928,
+        "markers": [
+          {
+            "key": "hardware",
+            "cx": 334.928
+          },
+          {
+            "key": "insert",
+            "cx": 334.928
+          }
+        ],
+        "tooltip_hidden": false
+      }
+    },
+    {
+      "requested_width": 736,
+      "scheme": "light",
+      "id": "P16_3",
+      "axes_total": 14,
+      "nearest": {
+        "radius_mm": 40.604002265784416,
+        "category": "contact_pad",
+        "object": "left_left_header_pad",
+        "witness_header_mm": [
+          -56.599999999996875,
+          -5.499999999938845,
+          -4.999999999995786
+        ]
+      },
+      "frame": 635,
+      "width": 736,
+      "outside": [],
+      "label_overlaps": [],
+      "document_width": 736,
+      "labels_min_px": 12,
+      "selected": "P16_3",
+      "option_count": 14,
+      "marker_ids": [
+        "P16_1",
+        "P16_2",
+        "P16_3",
+        "P16_4",
+        "P16_5",
+        "P16_6",
+        "P16_7",
+        "P16_8"
+      ],
+      "rings": 1,
+      "projection": {
+        "width": 736,
+        "height": 306.4651162790698,
+        "left": 64,
+        "top": 38,
+        "scale": 5.5813953488372094,
+        "xBounds": [
+          -58.05,
+          58.05
+        ],
+        "zBounds": [
+          -19.75,
+          19.75
+        ],
+        "feature_id": "P16"
+      },
+      "profile": {
+        "width": 736,
+        "height": 310,
+        "x_domain": [
+          -8.08,
+          100.08
+        ],
+        "y_domain": [
+          0,
+          165.48177382036044
+        ],
+        "bins": 52,
+        "visible": [
+          "hardware",
+          "insert",
+          "contact_pad"
+        ]
+      },
+      "series": [
+        "hardware",
+        "insert",
+        "contact_pad"
+      ],
+      "plot_viewBox": "0 0 736 310",
+      "x_ticks": 6,
+      "hover": {
+        "depth_mm": 36.44441560371517,
+        "guide_x": 334.928,
+        "band": [
+          36.00000000000001,
+          38
+        ],
+        "series": [
+          {
+            "key": "hardware",
+            "radius_mm": 154.5526623751938
+          },
+          {
+            "key": "insert",
+            "radius_mm": 79.74073613906744
+          },
+          {
+            "key": "contact_pad",
+            "radius_mm": null
+          }
+        ],
+        "expected_x": 334.928,
+        "markers": [
+          {
+            "key": "hardware",
+            "cx": 334.928
+          },
+          {
+            "key": "insert",
+            "cx": 334.928
+          }
+        ],
+        "tooltip_hidden": false
+      }
+    },
+    {
+      "requested_width": 736,
+      "scheme": "light",
+      "id": "P16_4",
+      "axes_total": 14,
+      "nearest": {
+        "radius_mm": 24.29197124590091,
+        "category": "hardware",
+        "object": "hardware_left_left_inner_finger_0",
+        "witness_header_mm": [
+          -37.49070438350088,
+          -52.999997613309255,
+          26.71839737366588
+        ]
+      },
+      "frame": 665,
+      "width": 736,
+      "outside": [],
+      "label_overlaps": [],
+      "document_width": 736,
+      "labels_min_px": 12,
+      "selected": "P16_4",
+      "option_count": 14,
+      "marker_ids": [
+        "P16_1",
+        "P16_2",
+        "P16_3",
+        "P16_4",
+        "P16_5",
+        "P16_6",
+        "P16_7",
+        "P16_8"
+      ],
+      "rings": 1,
+      "projection": {
+        "width": 736,
+        "height": 306.4651162790698,
+        "left": 64,
+        "top": 38,
+        "scale": 5.5813953488372094,
+        "xBounds": [
+          -58.05,
+          58.05
+        ],
+        "zBounds": [
+          -19.75,
+          19.75
+        ],
+        "feature_id": "P16"
+      },
+      "profile": {
+        "width": 736,
+        "height": 310,
+        "x_domain": [
+          -8.08,
+          100.08
+        ],
+        "y_domain": [
+          0,
+          136.74651658450802
+        ],
+        "bins": 52,
+        "visible": [
+          "hardware",
+          "insert",
+          "contact_pad"
+        ]
+      },
+      "series": [
+        "hardware",
+        "insert",
+        "contact_pad"
+      ],
+      "plot_viewBox": "0 0 736 310",
+      "x_ticks": 6,
+      "hover": {
+        "depth_mm": 36.44441560371517,
+        "guide_x": 334.928,
+        "band": [
+          36.00000000000001,
+          38
+        ],
+        "series": [
+          {
+            "key": "hardware",
+            "radius_mm": 127.05266237519366
+          },
+          {
+            "key": "insert",
+            "radius_mm": 55.799507166283675
+          },
+          {
+            "key": "contact_pad",
+            "radius_mm": null
+          }
+        ],
+        "expected_x": 334.928,
+        "markers": [
+          {
+            "key": "hardware",
+            "cx": 334.928
+          },
+          {
+            "key": "insert",
+            "cx": 334.928
+          }
+        ],
+        "tooltip_hidden": false
+      }
+    },
+    {
+      "requested_width": 736,
+      "scheme": "light",
+      "id": "P16_5",
+      "axes_total": 14,
+      "nearest": {
+        "radius_mm": 40.60400226579087,
+        "category": "contact_pad",
+        "object": "left_right_header_pad",
+        "witness_header_mm": [
+          56.60000000000353,
+          -5.499999999938929,
+          -4.999999999996008
+        ]
+      },
+      "frame": 695,
+      "width": 736,
+      "outside": [],
+      "label_overlaps": [],
+      "document_width": 736,
+      "labels_min_px": 12,
+      "selected": "P16_5",
+      "option_count": 14,
+      "marker_ids": [
+        "P16_1",
+        "P16_2",
+        "P16_3",
+        "P16_4",
+        "P16_5",
+        "P16_6",
+        "P16_7",
+        "P16_8"
+      ],
+      "rings": 1,
+      "projection": {
+        "width": 736,
+        "height": 306.4651162790698,
+        "left": 64,
+        "top": 38,
+        "scale": 5.5813953488372094,
+        "xBounds": [
+          -58.05,
+          58.05
+        ],
+        "zBounds": [
+          -19.75,
+          19.75
+        ],
+        "feature_id": "P16"
+      },
+      "profile": {
+        "width": 736,
+        "height": 310,
+        "x_domain": [
+          -8.08,
+          100.08
+        ],
+        "y_domain": [
+          0,
+          165.48177382055243
+        ],
+        "bins": 52,
+        "visible": [
+          "hardware",
+          "insert",
+          "contact_pad"
+        ]
+      },
+      "series": [
+        "hardware",
+        "insert",
+        "contact_pad"
+      ],
+      "plot_viewBox": "0 0 736 310",
+      "x_ticks": 6,
+      "hover": {
+        "depth_mm": 36.44441560371517,
+        "guide_x": 334.928,
+        "band": [
+          36.00000000000001,
+          38
+        ],
+        "series": [
+          {
+            "key": "hardware",
+            "radius_mm": 154.55266237519368
+          },
+          {
+            "key": "insert",
+            "radius_mm": 79.74073613907007
+          },
+          {
+            "key": "contact_pad",
+            "radius_mm": null
+          }
+        ],
+        "expected_x": 334.928,
+        "markers": [
+          {
+            "key": "hardware",
+            "cx": 334.928
+          },
+          {
+            "key": "insert",
+            "cx": 334.928
+          }
+        ],
+        "tooltip_hidden": false
+      }
+    },
+    {
+      "requested_width": 736,
+      "scheme": "light",
+      "id": "P16_6",
+      "axes_total": 14,
+      "nearest": {
+        "radius_mm": 24.291973296319615,
+        "category": "hardware",
+        "object": "hardware_left_right_inner_finger_0",
+        "witness_header_mm": [
+          37.4907068083794,
+          -66.99999999993898,
+          26.71839737366577
+        ]
+      },
+      "frame": 725,
+      "width": 736,
+      "outside": [],
+      "label_overlaps": [],
+      "document_width": 736,
+      "labels_min_px": 12,
+      "selected": "P16_6",
+      "option_count": 14,
+      "marker_ids": [
+        "P16_1",
+        "P16_2",
+        "P16_3",
+        "P16_4",
+        "P16_5",
+        "P16_6",
+        "P16_7",
+        "P16_8"
+      ],
+      "rings": 1,
+      "projection": {
+        "width": 736,
+        "height": 306.4651162790698,
+        "left": 64,
+        "top": 38,
+        "scale": 5.5813953488372094,
+        "xBounds": [
+          -58.05,
+          58.05
+        ],
+        "zBounds": [
+          -19.75,
+          19.75
+        ],
+        "feature_id": "P16"
+      },
+      "profile": {
+        "width": 736,
+        "height": 310,
+        "x_domain": [
+          -8.08,
+          100.08
+        ],
+        "y_domain": [
+          0,
+          136.7465165846994
+        ],
+        "bins": 52,
+        "visible": [
+          "hardware",
+          "insert",
+          "contact_pad"
+        ]
+      },
+      "series": [
+        "hardware",
+        "insert",
+        "contact_pad"
+      ],
+      "plot_viewBox": "0 0 736 310",
+      "x_ticks": 6,
+      "hover": {
+        "depth_mm": 36.44441560371517,
+        "guide_x": 334.928,
+        "band": [
+          36.00000000000001,
+          38
+        ],
+        "series": [
+          {
+            "key": "hardware",
+            "radius_mm": 127.05266237519366
+          },
+          {
+            "key": "insert",
+            "radius_mm": 55.799507166287626
+          },
+          {
+            "key": "contact_pad",
+            "radius_mm": null
+          }
+        ],
+        "expected_x": 334.928,
+        "markers": [
+          {
+            "key": "hardware",
+            "cx": 334.928
+          },
+          {
+            "key": "insert",
+            "cx": 334.928
+          }
+        ],
+        "tooltip_hidden": false
+      }
+    },
+    {
+      "requested_width": 736,
+      "scheme": "light",
+      "id": "P16_7",
+      "axes_total": 14,
+      "nearest": {
+        "radius_mm": 10.930004574569775,
+        "category": "contact_pad",
+        "object": "left_right_header_pad",
+        "witness_header_mm": [
+          56.60000000000353,
+          -5.499999999938929,
+          -4.999999999996008
+        ]
+      },
+      "frame": 755,
+      "width": 736,
+      "outside": [],
+      "label_overlaps": [],
+      "document_width": 736,
+      "labels_min_px": 12,
+      "selected": "P16_7",
+      "option_count": 14,
+      "marker_ids": [
+        "P16_1",
+        "P16_2",
+        "P16_3",
+        "P16_4",
+        "P16_5",
+        "P16_6",
+        "P16_7",
+        "P16_8"
+      ],
+      "rings": 1,
+      "projection": {
+        "width": 736,
+        "height": 306.4651162790698,
+        "left": 64,
+        "top": 38,
+        "scale": 5.5813953488372094,
+        "xBounds": [
+          -58.05,
+          58.05
+        ],
+        "zBounds": [
+          -19.75,
+          19.75
+        ],
+        "feature_id": "P16"
+      },
+      "profile": {
+        "width": 736,
+        "height": 310,
+        "x_domain": [
+          -8.08,
+          100.08
+        ],
+        "y_domain": [
+          0,
+          171.78334442106694
+        ],
+        "bins": 52,
+        "visible": [
+          "hardware",
+          "insert",
+          "contact_pad"
+        ]
+      },
+      "series": [
+        "hardware",
+        "insert",
+        "contact_pad"
+      ],
+      "plot_viewBox": "0 0 736 310",
+      "x_ticks": 6,
+      "hover": {
+        "depth_mm": 36.44441560371517,
+        "guide_x": 334.928,
+        "band": [
+          36.00000000000001,
+          38
+        ],
+        "series": [
+          {
+            "key": "hardware",
+            "radius_mm": 156.89334768987175
+          },
+          {
+            "key": "insert",
+            "radius_mm": 72.75000000000384
+          },
+          {
+            "key": "contact_pad",
+            "radius_mm": null
+          }
+        ],
+        "expected_x": 334.928,
+        "markers": [
+          {
+            "key": "hardware",
+            "cx": 334.928
+          },
+          {
+            "key": "insert",
+            "cx": 334.928
+          }
+        ],
+        "tooltip_hidden": false
+      }
+    },
+    {
+      "requested_width": 736,
+      "scheme": "light",
+      "id": "P16_8",
+      "axes_total": 14,
+      "nearest": {
+        "radius_mm": 8.550000000003763,
+        "category": "insert",
+        "object": "left_right_header_carrier",
+        "witness_header_mm": [
+          58.60000000000376,
+          -6.348484848424329,
+          13.749999999999993
+        ]
+      },
+      "frame": 785,
+      "width": 736,
+      "outside": [],
+      "label_overlaps": [],
+      "document_width": 736,
+      "labels_min_px": 12,
+      "selected": "P16_8",
+      "option_count": 14,
+      "marker_ids": [
+        "P16_1",
+        "P16_2",
+        "P16_3",
+        "P16_4",
+        "P16_5",
+        "P16_6",
+        "P16_7",
+        "P16_8"
+      ],
+      "rings": 1,
+      "projection": {
+        "width": 736,
+        "height": 306.4651162790698,
+        "left": 64,
+        "top": 38,
+        "scale": 5.5813953488372094,
+        "xBounds": [
+          -58.05,
+          58.05
+        ],
+        "zBounds": [
+          -19.75,
+          19.75
+        ],
+        "feature_id": "P16"
+      },
+      "profile": {
+        "width": 736,
+        "height": 310,
+        "x_domain": [
+          -8.08,
+          100.08
+        ],
+        "y_domain": [
+          0,
+          144.09807796863754
+        ],
+        "bins": 52,
+        "visible": [
+          "hardware",
+          "insert",
+          "contact_pad"
+        ]
+      },
+      "series": [
+        "hardware",
+        "insert",
+        "contact_pad"
+      ],
+      "plot_viewBox": "0 0 736 310",
+      "x_ticks": 6,
+      "hover": {
+        "depth_mm": 36.44441560371517,
+        "guide_x": 334.928,
+        "band": [
+          36.00000000000001,
+          38
+        ],
+        "series": [
+          {
+            "key": "hardware",
+            "radius_mm": 129.86455895932238
+          },
+          {
+            "key": "insert",
+            "radius_mm": 45.25000000000386
+          },
+          {
+            "key": "contact_pad",
+            "radius_mm": null
+          }
+        ],
+        "expected_x": 334.928,
+        "markers": [
+          {
+            "key": "hardware",
+            "cx": 334.928
+          },
+          {
+            "key": "insert",
+            "cx": 334.928
+          }
+        ],
+        "tooltip_hidden": false
+      }
+    },
+    {
+      "requested_width": 736,
+      "scheme": "light",
+      "id": "P17_9",
+      "axes_total": 14,
+      "nearest": {
+        "radius_mm": 10.930004574577488,
+        "category": "contact_pad",
+        "object": "left_left_header_pad",
+        "witness_header_mm": [
+          -39.65000000001062,
+          -5.500005871590427,
+          -4.999999999991678
+        ]
+      },
+      "frame": 1135,
+      "width": 736,
+      "outside": [],
+      "label_overlaps": [],
+      "document_width": 736,
+      "labels_min_px": 12,
+      "selected": "P17_9",
+      "option_count": 14,
+      "marker_ids": [
+        "P17_9",
+        "P17_10",
+        "P17_11",
+        "P17_12",
+        "P17_13",
+        "P17_14"
+      ],
+      "rings": 1,
+      "projection": {
+        "width": 736,
+        "height": 397.3868613138687,
+        "left": 64,
+        "top": 38,
+        "scale": 7.883211678832118,
+        "xBounds": [
+          -41.099999999999994,
+          41.099999999999994
+        ],
+        "zBounds": [
+          -19.75,
+          19.75
+        ],
+        "feature_id": "P17"
+      },
+      "profile": {
+        "width": 736,
+        "height": 310,
+        "x_domain": [
+          -8.08,
+          100.08
+        ],
+        "y_domain": [
+          0,
+          173.460551784288
+        ],
+        "bins": 52,
+        "visible": [
+          "hardware",
+          "insert",
+          "contact_pad"
+        ]
+      },
+      "series": [
+        "hardware",
+        "insert",
+        "contact_pad"
+      ],
+      "plot_viewBox": "0 0 736 310",
+      "x_ticks": 6,
+      "hover": {
+        "depth_mm": 36.44441560371517,
+        "guide_x": 334.928,
+        "band": [
+          36.00000000000001,
+          38
+        ],
+        "series": [
+          {
+            "key": "hardware",
+            "radius_mm": 160.40025827398415
+          },
+          {
+            "key": "insert",
+            "radius_mm": 72.75000000000834
+          },
+          {
+            "key": "contact_pad",
+            "radius_mm": null
+          }
+        ],
+        "expected_x": 334.928,
+        "markers": [
+          {
+            "key": "hardware",
+            "cx": 334.928
+          },
+          {
+            "key": "insert",
+            "cx": 334.928
+          }
+        ],
+        "tooltip_hidden": false
+      }
+    },
+    {
+      "requested_width": 736,
+      "scheme": "light",
+      "id": "P17_10",
+      "axes_total": 14,
+      "nearest": {
+        "radius_mm": 8.550000000010403,
+        "category": "insert",
+        "object": "left_left_header_carrier",
+        "witness_header_mm": [
+          -41.6500000000104,
+          -8.5000058715904,
+          13.750000000000004
+        ]
+      },
+      "frame": 1165,
+      "width": 736,
+      "outside": [],
+      "label_overlaps": [],
+      "document_width": 736,
+      "labels_min_px": 12,
+      "selected": "P17_10",
+      "option_count": 14,
+      "marker_ids": [
+        "P17_9",
+        "P17_10",
+        "P17_11",
+        "P17_12",
+        "P17_13",
+        "P17_14"
+      ],
+      "rings": 1,
+      "projection": {
+        "width": 736,
+        "height": 397.3868613138687,
+        "left": 64,
+        "top": 38,
+        "scale": 7.883211678832118,
+        "xBounds": [
+          -41.099999999999994,
+          41.099999999999994
+        ],
+        "zBounds": [
+          -19.75,
+          19.75
+        ],
+        "feature_id": "P17"
+      },
+      "profile": {
+        "width": 736,
+        "height": 310,
+        "x_domain": [
+          -8.08,
+          100.08
+        ],
+        "y_domain": [
+          0,
+          145.0868446087016
+        ],
+        "bins": 52,
+        "visible": [
+          "hardware",
+          "insert",
+          "contact_pad"
+        ]
+      },
+      "series": [
+        "hardware",
+        "insert",
+        "contact_pad"
+      ],
+      "plot_viewBox": "0 0 736 310",
+      "x_ticks": 6,
+      "hover": {
+        "depth_mm": 36.44441560371517,
+        "guide_x": 334.928,
+        "band": [
+          36.00000000000001,
+          38
+        ],
+        "series": [
+          {
+            "key": "hardware",
+            "radius_mm": 132.96809109335703
+          },
+          {
+            "key": "insert",
+            "radius_mm": 45.250000000008335
+          },
+          {
+            "key": "contact_pad",
+            "radius_mm": null
+          }
+        ],
+        "expected_x": 334.928,
+        "markers": [
+          {
+            "key": "hardware",
+            "cx": 334.928
+          },
+          {
+            "key": "insert",
+            "cx": 334.928
+          }
+        ],
+        "tooltip_hidden": false
+      }
+    },
+    {
+      "requested_width": 736,
+      "scheme": "light",
+      "id": "P17_11",
+      "axes_total": 14,
+      "nearest": {
+        "radius_mm": 40.60400226578702,
+        "category": "contact_pad",
+        "object": "left_right_header_pad",
+        "witness_header_mm": [
+          39.64999999999863,
+          -5.49999999993743,
+          -4.999999999991678
+        ]
+      },
+      "frame": 1195,
+      "width": 736,
+      "outside": [],
+      "label_overlaps": [],
+      "document_width": 736,
+      "labels_min_px": 12,
+      "selected": "P17_11",
+      "option_count": 14,
+      "marker_ids": [
+        "P17_9",
+        "P17_10",
+        "P17_11",
+        "P17_12",
+        "P17_13",
+        "P17_14"
+      ],
+      "rings": 1,
+      "projection": {
+        "width": 736,
+        "height": 397.3868613138687,
+        "left": 64,
+        "top": 38,
+        "scale": 7.883211678832118,
+        "xBounds": [
+          -41.099999999999994,
+          41.099999999999994
+        ],
+        "zBounds": [
+          -19.75,
+          19.75
+        ],
+        "feature_id": "P17"
+      },
+      "profile": {
+        "width": 736,
+        "height": 310,
+        "x_domain": [
+          -8.08,
+          100.08
+        ],
+        "y_domain": [
+          0,
+          170.38857777033482
+        ],
+        "bins": 52,
+        "visible": [
+          "hardware",
+          "insert",
+          "contact_pad"
+        ]
+      },
+      "series": [
+        "hardware",
+        "insert",
+        "contact_pad"
+      ],
+      "plot_viewBox": "0 0 736 310",
+      "x_ticks": 6,
+      "hover": {
+        "depth_mm": 36.44441560371517,
+        "guide_x": 334.928,
+        "band": [
+          36.00000000000001,
+          38
+        ],
+        "series": [
+          {
+            "key": "hardware",
+            "radius_mm": 160.01899845483044
+          },
+          {
+            "key": "insert",
+            "radius_mm": 79.74073613907208
+          },
+          {
+            "key": "contact_pad",
+            "radius_mm": null
+          }
+        ],
+        "expected_x": 334.928,
+        "markers": [
+          {
+            "key": "hardware",
+            "cx": 334.928
+          },
+          {
+            "key": "insert",
+            "cx": 334.928
+          }
+        ],
+        "tooltip_hidden": false
+      }
+    },
+    {
+      "requested_width": 736,
+      "scheme": "light",
+      "id": "P17_12",
+      "axes_total": 14,
+      "nearest": {
+        "radius_mm": 24.291971245914585,
+        "category": "hardware",
+        "object": "hardware_left_left_inner_finger_0",
+        "witness_header_mm": [
+          -20.540704383514186,
+          -53.000003484960686,
+          26.718397373670435
+        ]
+      },
+      "frame": 1225,
+      "width": 736,
+      "outside": [],
+      "label_overlaps": [],
+      "document_width": 736,
+      "labels_min_px": 12,
+      "selected": "P17_12",
+      "option_count": 14,
+      "marker_ids": [
+        "P17_9",
+        "P17_10",
+        "P17_11",
+        "P17_12",
+        "P17_13",
+        "P17_14"
+      ],
+      "rings": 1,
+      "projection": {
+        "width": 736,
+        "height": 397.3868613138687,
+        "left": 64,
+        "top": 38,
+        "scale": 7.883211678832118,
+        "xBounds": [
+          -41.099999999999994,
+          41.099999999999994
+        ],
+        "zBounds": [
+          -19.75,
+          19.75
+        ],
+        "feature_id": "P17"
+      },
+      "profile": {
+        "width": 736,
+        "height": 310,
+        "x_domain": [
+          -8.08,
+          100.08
+        ],
+        "y_domain": [
+          0,
+          141.5135777703348
+        ],
+        "bins": 52,
+        "visible": [
+          "hardware",
+          "insert",
+          "contact_pad"
+        ]
+      },
+      "series": [
+        "hardware",
+        "insert",
+        "contact_pad"
+      ],
+      "plot_viewBox": "0 0 736 310",
+      "x_ticks": 6,
+      "hover": {
+        "depth_mm": 36.44441560371517,
+        "guide_x": 334.928,
+        "band": [
+          36.00000000000001,
+          38
+        ],
+        "series": [
+          {
+            "key": "hardware",
+            "radius_mm": 132.5189984548304
+          },
+          {
+            "key": "insert",
+            "radius_mm": 55.79950716628828
+          },
+          {
+            "key": "contact_pad",
+            "radius_mm": null
+          }
+        ],
+        "expected_x": 334.928,
+        "markers": [
+          {
+            "key": "hardware",
+            "cx": 334.928
+          },
+          {
+            "key": "insert",
+            "cx": 334.928
+          }
+        ],
+        "tooltip_hidden": false
+      }
+    },
+    {
+      "requested_width": 736,
+      "scheme": "light",
+      "id": "P17_13",
+      "axes_total": 14,
+      "nearest": {
+        "radius_mm": 10.930004574570038,
+        "category": "contact_pad",
+        "object": "left_right_header_pad",
+        "witness_header_mm": [
+          39.64999999999819,
+          -5.49999999993743,
+          -4.999999999991678
+        ]
+      },
+      "frame": 1255,
+      "width": 736,
+      "outside": [],
+      "label_overlaps": [],
+      "document_width": 736,
+      "labels_min_px": 12,
+      "selected": "P17_13",
+      "option_count": 14,
+      "marker_ids": [
+        "P17_9",
+        "P17_10",
+        "P17_11",
+        "P17_12",
+        "P17_13",
+        "P17_14"
+      ],
+      "rings": 1,
+      "projection": {
+        "width": 736,
+        "height": 397.3868613138687,
+        "left": 64,
+        "top": 38,
+        "scale": 7.883211678832118,
+        "xBounds": [
+          -41.099999999999994,
+          41.099999999999994
+        ],
+        "zBounds": [
+          -19.75,
+          19.75
+        ],
+        "feature_id": "P17"
+      },
+      "profile": {
+        "width": 736,
+        "height": 310,
+        "x_domain": [
+          -8.08,
+          100.08
+        ],
+        "y_domain": [
+          0,
+          173.46055178428995
+        ],
+        "bins": 52,
+        "visible": [
+          "hardware",
+          "insert",
+          "contact_pad"
+        ]
+      },
+      "series": [
+        "hardware",
+        "insert",
+        "contact_pad"
+      ],
+      "plot_viewBox": "0 0 736 310",
+      "x_ticks": 6,
+      "hover": {
+        "depth_mm": 36.44441560371517,
+        "guide_x": 334.928,
+        "band": [
+          36.00000000000001,
+          38
+        ],
+        "series": [
+          {
+            "key": "hardware",
+            "radius_mm": 160.40025827398492
+          },
+          {
+            "key": "insert",
+            "radius_mm": 72.75000000000834
+          },
+          {
+            "key": "contact_pad",
+            "radius_mm": null
+          }
+        ],
+        "expected_x": 334.928,
+        "markers": [
+          {
+            "key": "hardware",
+            "cx": 334.928
+          },
+          {
+            "key": "insert",
+            "cx": 334.928
+          }
+        ],
+        "tooltip_hidden": false
+      }
+    },
+    {
+      "requested_width": 736,
+      "scheme": "light",
+      "id": "P17_14",
+      "axes_total": 14,
+      "nearest": {
+        "radius_mm": 8.549999999998857,
+        "category": "insert",
+        "object": "left_right_header_carrier",
+        "witness_header_mm": [
+          41.649999999998855,
+          -6.348484848423257,
+          13.75
+        ]
+      },
+      "frame": 1285,
+      "width": 736,
+      "outside": [],
+      "label_overlaps": [],
+      "document_width": 736,
+      "labels_min_px": 12,
+      "selected": "P17_14",
+      "option_count": 14,
+      "marker_ids": [
+        "P17_9",
+        "P17_10",
+        "P17_11",
+        "P17_12",
+        "P17_13",
+        "P17_14"
+      ],
+      "rings": 1,
+      "projection": {
+        "width": 736,
+        "height": 397.3868613138687,
+        "left": 64,
+        "top": 38,
+        "scale": 7.883211678832118,
+        "xBounds": [
+          -41.099999999999994,
+          41.099999999999994
+        ],
+        "zBounds": [
+          -19.75,
+          19.75
+        ],
+        "feature_id": "P17"
+      },
+      "profile": {
+        "width": 736,
+        "height": 310,
+        "x_domain": [
+          -8.08,
+          100.08
+        ],
+        "y_domain": [
+          0,
+          145.08684460870387
+        ],
+        "bins": 52,
+        "visible": [
+          "hardware",
+          "insert",
+          "contact_pad"
+        ]
+      },
+      "series": [
+        "hardware",
+        "insert",
+        "contact_pad"
+      ],
+      "plot_viewBox": "0 0 736 310",
+      "x_ticks": 6,
+      "hover": {
+        "depth_mm": 36.44441560371517,
+        "guide_x": 334.928,
+        "band": [
+          36.00000000000001,
+          38
+        ],
+        "series": [
+          {
+            "key": "hardware",
+            "radius_mm": 132.9680910933578
+          },
+          {
+            "key": "insert",
+            "radius_mm": 45.250000000008335
+          },
+          {
+            "key": "contact_pad",
+            "radius_mm": null
+          }
+        ],
+        "expected_x": 334.928,
+        "markers": [
+          {
+            "key": "hardware",
+            "cx": 334.928
+          },
+          {
+            "key": "insert",
+            "cx": 334.928
+          }
+        ],
+        "tooltip_hidden": false
+      }
+    },
+    {
+      "requested_width": 736,
+      "scheme": "dark",
+      "id": "P16_1",
+      "axes_total": 14,
+      "nearest": {
+        "radius_mm": 10.930004574565872,
+        "category": "contact_pad",
+        "object": "left_left_header_pad",
+        "witness_header_mm": [
+          -56.599999999996875,
+          -5.499999999938845,
+          -4.999999999995897
+        ]
+      },
+      "frame": 575,
+      "width": 736,
+      "outside": [],
+      "label_overlaps": [],
+      "document_width": 736,
+      "labels_min_px": 12,
+      "selected": "P16_1",
+      "option_count": 14,
+      "marker_ids": [
+        "P16_1",
+        "P16_2",
+        "P16_3",
+        "P16_4",
+        "P16_5",
+        "P16_6",
+        "P16_7",
+        "P16_8"
+      ],
+      "rings": 1,
+      "projection": {
+        "width": 736,
+        "height": 306.4651162790698,
+        "left": 64,
+        "top": 38,
+        "scale": 5.5813953488372094,
+        "xBounds": [
+          -58.05,
+          58.05
+        ],
+        "zBounds": [
+          -19.75,
+          19.75
+        ],
+        "feature_id": "P16"
+      },
+      "profile": {
+        "width": 736,
+        "height": 310,
+        "x_domain": [
+          -8.08,
+          100.08
+        ],
+        "y_domain": [
+          0,
+          171.78334443572294
+        ],
+        "bins": 52,
+        "visible": [
+          "hardware",
+          "insert",
+          "contact_pad"
+        ]
+      },
+      "series": [
+        "hardware",
+        "insert",
+        "contact_pad"
+      ],
+      "plot_viewBox": "0 0 736 310",
+      "x_ticks": 6,
+      "hover": {
+        "depth_mm": 36.44441560371517,
+        "guide_x": 334.928,
+        "band": [
+          36.00000000000001,
+          38
+        ],
+        "series": [
+          {
+            "key": "hardware",
+            "radius_mm": 156.8933476898729
+          },
+          {
+            "key": "insert",
+            "radius_mm": 72.75000000000392
+          },
+          {
+            "key": "contact_pad",
+            "radius_mm": null
+          }
+        ],
+        "expected_x": 334.928,
+        "markers": [
+          {
+            "key": "hardware",
+            "cx": 334.928
+          },
+          {
+            "key": "insert",
+            "cx": 334.928
+          }
+        ],
+        "tooltip_hidden": false
+      }
+    },
+    {
+      "requested_width": 736,
+      "scheme": "dark",
+      "id": "P16_2",
+      "axes_total": 14,
+      "nearest": {
+        "radius_mm": 8.549999999996658,
+        "category": "insert",
+        "object": "left_left_header_carrier",
+        "witness_header_mm": [
+          -58.599999999996655,
+          -8.499999999938908,
+          13.75
+        ]
+      },
+      "frame": 605,
+      "width": 736,
+      "outside": [],
+      "label_overlaps": [],
+      "document_width": 736,
+      "labels_min_px": 12,
+      "selected": "P16_2",
+      "option_count": 14,
+      "marker_ids": [
+        "P16_1",
+        "P16_2",
+        "P16_3",
+        "P16_4",
+        "P16_5",
+        "P16_6",
+        "P16_7",
+        "P16_8"
+      ],
+      "rings": 1,
+      "projection": {
+        "width": 736,
+        "height": 306.4651162790698,
+        "left": 64,
+        "top": 38,
+        "scale": 5.5813953488372094,
+        "xBounds": [
+          -58.05,
+          58.05
+        ],
+        "zBounds": [
+          -19.75,
+          19.75
+        ],
+        "feature_id": "P16"
+      },
+      "profile": {
+        "width": 736,
+        "height": 310,
+        "x_domain": [
+          -8.08,
+          100.08
+        ],
+        "y_domain": [
+          0,
+          144.09807796863964
+        ],
+        "bins": 52,
+        "visible": [
+          "hardware",
+          "insert",
+          "contact_pad"
+        ]
+      },
+      "series": [
+        "hardware",
+        "insert",
+        "contact_pad"
+      ],
+      "plot_viewBox": "0 0 736 310",
+      "x_ticks": 6,
+      "hover": {
+        "depth_mm": 36.44441560371517,
+        "guide_x": 334.928,
+        "band": [
+          36.00000000000001,
+          38
+        ],
+        "series": [
+          {
+            "key": "hardware",
+            "radius_mm": 129.86455895932372
+          },
+          {
+            "key": "insert",
+            "radius_mm": 45.250000000003816
+          },
+          {
+            "key": "contact_pad",
+            "radius_mm": null
+          }
+        ],
+        "expected_x": 334.928,
+        "markers": [
+          {
+            "key": "hardware",
+            "cx": 334.928
+          },
+          {
+            "key": "insert",
+            "cx": 334.928
+          }
+        ],
+        "tooltip_hidden": false
+      }
+    },
+    {
+      "requested_width": 736,
+      "scheme": "dark",
+      "id": "P16_3",
+      "axes_total": 14,
+      "nearest": {
+        "radius_mm": 40.604002265784416,
+        "category": "contact_pad",
+        "object": "left_left_header_pad",
+        "witness_header_mm": [
+          -56.599999999996875,
+          -5.499999999938845,
+          -4.999999999995786
+        ]
+      },
+      "frame": 635,
+      "width": 736,
+      "outside": [],
+      "label_overlaps": [],
+      "document_width": 736,
+      "labels_min_px": 12,
+      "selected": "P16_3",
+      "option_count": 14,
+      "marker_ids": [
+        "P16_1",
+        "P16_2",
+        "P16_3",
+        "P16_4",
+        "P16_5",
+        "P16_6",
+        "P16_7",
+        "P16_8"
+      ],
+      "rings": 1,
+      "projection": {
+        "width": 736,
+        "height": 306.4651162790698,
+        "left": 64,
+        "top": 38,
+        "scale": 5.5813953488372094,
+        "xBounds": [
+          -58.05,
+          58.05
+        ],
+        "zBounds": [
+          -19.75,
+          19.75
+        ],
+        "feature_id": "P16"
+      },
+      "profile": {
+        "width": 736,
+        "height": 310,
+        "x_domain": [
+          -8.08,
+          100.08
+        ],
+        "y_domain": [
+          0,
+          165.48177382036044
+        ],
+        "bins": 52,
+        "visible": [
+          "hardware",
+          "insert",
+          "contact_pad"
+        ]
+      },
+      "series": [
+        "hardware",
+        "insert",
+        "contact_pad"
+      ],
+      "plot_viewBox": "0 0 736 310",
+      "x_ticks": 6,
+      "hover": {
+        "depth_mm": 36.44441560371517,
+        "guide_x": 334.928,
+        "band": [
+          36.00000000000001,
+          38
+        ],
+        "series": [
+          {
+            "key": "hardware",
+            "radius_mm": 154.5526623751938
+          },
+          {
+            "key": "insert",
+            "radius_mm": 79.74073613906744
+          },
+          {
+            "key": "contact_pad",
+            "radius_mm": null
+          }
+        ],
+        "expected_x": 334.928,
+        "markers": [
+          {
+            "key": "hardware",
+            "cx": 334.928
+          },
+          {
+            "key": "insert",
+            "cx": 334.928
+          }
+        ],
+        "tooltip_hidden": false
+      }
+    },
+    {
+      "requested_width": 736,
+      "scheme": "dark",
+      "id": "P16_4",
+      "axes_total": 14,
+      "nearest": {
+        "radius_mm": 24.29197124590091,
+        "category": "hardware",
+        "object": "hardware_left_left_inner_finger_0",
+        "witness_header_mm": [
+          -37.49070438350088,
+          -52.999997613309255,
+          26.71839737366588
+        ]
+      },
+      "frame": 665,
+      "width": 736,
+      "outside": [],
+      "label_overlaps": [],
+      "document_width": 736,
+      "labels_min_px": 12,
+      "selected": "P16_4",
+      "option_count": 14,
+      "marker_ids": [
+        "P16_1",
+        "P16_2",
+        "P16_3",
+        "P16_4",
+        "P16_5",
+        "P16_6",
+        "P16_7",
+        "P16_8"
+      ],
+      "rings": 1,
+      "projection": {
+        "width": 736,
+        "height": 306.4651162790698,
+        "left": 64,
+        "top": 38,
+        "scale": 5.5813953488372094,
+        "xBounds": [
+          -58.05,
+          58.05
+        ],
+        "zBounds": [
+          -19.75,
+          19.75
+        ],
+        "feature_id": "P16"
+      },
+      "profile": {
+        "width": 736,
+        "height": 310,
+        "x_domain": [
+          -8.08,
+          100.08
+        ],
+        "y_domain": [
+          0,
+          136.74651658450802
+        ],
+        "bins": 52,
+        "visible": [
+          "hardware",
+          "insert",
+          "contact_pad"
+        ]
+      },
+      "series": [
+        "hardware",
+        "insert",
+        "contact_pad"
+      ],
+      "plot_viewBox": "0 0 736 310",
+      "x_ticks": 6,
+      "hover": {
+        "depth_mm": 36.44441560371517,
+        "guide_x": 334.928,
+        "band": [
+          36.00000000000001,
+          38
+        ],
+        "series": [
+          {
+            "key": "hardware",
+            "radius_mm": 127.05266237519366
+          },
+          {
+            "key": "insert",
+            "radius_mm": 55.799507166283675
+          },
+          {
+            "key": "contact_pad",
+            "radius_mm": null
+          }
+        ],
+        "expected_x": 334.928,
+        "markers": [
+          {
+            "key": "hardware",
+            "cx": 334.928
+          },
+          {
+            "key": "insert",
+            "cx": 334.928
+          }
+        ],
+        "tooltip_hidden": false
+      }
+    },
+    {
+      "requested_width": 736,
+      "scheme": "dark",
+      "id": "P16_5",
+      "axes_total": 14,
+      "nearest": {
+        "radius_mm": 40.60400226579087,
+        "category": "contact_pad",
+        "object": "left_right_header_pad",
+        "witness_header_mm": [
+          56.60000000000353,
+          -5.499999999938929,
+          -4.999999999996008
+        ]
+      },
+      "frame": 695,
+      "width": 736,
+      "outside": [],
+      "label_overlaps": [],
+      "document_width": 736,
+      "labels_min_px": 12,
+      "selected": "P16_5",
+      "option_count": 14,
+      "marker_ids": [
+        "P16_1",
+        "P16_2",
+        "P16_3",
+        "P16_4",
+        "P16_5",
+        "P16_6",
+        "P16_7",
+        "P16_8"
+      ],
+      "rings": 1,
+      "projection": {
+        "width": 736,
+        "height": 306.4651162790698,
+        "left": 64,
+        "top": 38,
+        "scale": 5.5813953488372094,
+        "xBounds": [
+          -58.05,
+          58.05
+        ],
+        "zBounds": [
+          -19.75,
+          19.75
+        ],
+        "feature_id": "P16"
+      },
+      "profile": {
+        "width": 736,
+        "height": 310,
+        "x_domain": [
+          -8.08,
+          100.08
+        ],
+        "y_domain": [
+          0,
+          165.48177382055243
+        ],
+        "bins": 52,
+        "visible": [
+          "hardware",
+          "insert",
+          "contact_pad"
+        ]
+      },
+      "series": [
+        "hardware",
+        "insert",
+        "contact_pad"
+      ],
+      "plot_viewBox": "0 0 736 310",
+      "x_ticks": 6,
+      "hover": {
+        "depth_mm": 36.44441560371517,
+        "guide_x": 334.928,
+        "band": [
+          36.00000000000001,
+          38
+        ],
+        "series": [
+          {
+            "key": "hardware",
+            "radius_mm": 154.55266237519368
+          },
+          {
+            "key": "insert",
+            "radius_mm": 79.74073613907007
+          },
+          {
+            "key": "contact_pad",
+            "radius_mm": null
+          }
+        ],
+        "expected_x": 334.928,
+        "markers": [
+          {
+            "key": "hardware",
+            "cx": 334.928
+          },
+          {
+            "key": "insert",
+            "cx": 334.928
+          }
+        ],
+        "tooltip_hidden": false
+      }
+    },
+    {
+      "requested_width": 736,
+      "scheme": "dark",
+      "id": "P16_6",
+      "axes_total": 14,
+      "nearest": {
+        "radius_mm": 24.291973296319615,
+        "category": "hardware",
+        "object": "hardware_left_right_inner_finger_0",
+        "witness_header_mm": [
+          37.4907068083794,
+          -66.99999999993898,
+          26.71839737366577
+        ]
+      },
+      "frame": 725,
+      "width": 736,
+      "outside": [],
+      "label_overlaps": [],
+      "document_width": 736,
+      "labels_min_px": 12,
+      "selected": "P16_6",
+      "option_count": 14,
+      "marker_ids": [
+        "P16_1",
+        "P16_2",
+        "P16_3",
+        "P16_4",
+        "P16_5",
+        "P16_6",
+        "P16_7",
+        "P16_8"
+      ],
+      "rings": 1,
+      "projection": {
+        "width": 736,
+        "height": 306.4651162790698,
+        "left": 64,
+        "top": 38,
+        "scale": 5.5813953488372094,
+        "xBounds": [
+          -58.05,
+          58.05
+        ],
+        "zBounds": [
+          -19.75,
+          19.75
+        ],
+        "feature_id": "P16"
+      },
+      "profile": {
+        "width": 736,
+        "height": 310,
+        "x_domain": [
+          -8.08,
+          100.08
+        ],
+        "y_domain": [
+          0,
+          136.7465165846994
+        ],
+        "bins": 52,
+        "visible": [
+          "hardware",
+          "insert",
+          "contact_pad"
+        ]
+      },
+      "series": [
+        "hardware",
+        "insert",
+        "contact_pad"
+      ],
+      "plot_viewBox": "0 0 736 310",
+      "x_ticks": 6,
+      "hover": {
+        "depth_mm": 36.44441560371517,
+        "guide_x": 334.928,
+        "band": [
+          36.00000000000001,
+          38
+        ],
+        "series": [
+          {
+            "key": "hardware",
+            "radius_mm": 127.05266237519366
+          },
+          {
+            "key": "insert",
+            "radius_mm": 55.799507166287626
+          },
+          {
+            "key": "contact_pad",
+            "radius_mm": null
+          }
+        ],
+        "expected_x": 334.928,
+        "markers": [
+          {
+            "key": "hardware",
+            "cx": 334.928
+          },
+          {
+            "key": "insert",
+            "cx": 334.928
+          }
+        ],
+        "tooltip_hidden": false
+      }
+    },
+    {
+      "requested_width": 736,
+      "scheme": "dark",
+      "id": "P16_7",
+      "axes_total": 14,
+      "nearest": {
+        "radius_mm": 10.930004574569775,
+        "category": "contact_pad",
+        "object": "left_right_header_pad",
+        "witness_header_mm": [
+          56.60000000000353,
+          -5.499999999938929,
+          -4.999999999996008
+        ]
+      },
+      "frame": 755,
+      "width": 736,
+      "outside": [],
+      "label_overlaps": [],
+      "document_width": 736,
+      "labels_min_px": 12,
+      "selected": "P16_7",
+      "option_count": 14,
+      "marker_ids": [
+        "P16_1",
+        "P16_2",
+        "P16_3",
+        "P16_4",
+        "P16_5",
+        "P16_6",
+        "P16_7",
+        "P16_8"
+      ],
+      "rings": 1,
+      "projection": {
+        "width": 736,
+        "height": 306.4651162790698,
+        "left": 64,
+        "top": 38,
+        "scale": 5.5813953488372094,
+        "xBounds": [
+          -58.05,
+          58.05
+        ],
+        "zBounds": [
+          -19.75,
+          19.75
+        ],
+        "feature_id": "P16"
+      },
+      "profile": {
+        "width": 736,
+        "height": 310,
+        "x_domain": [
+          -8.08,
+          100.08
+        ],
+        "y_domain": [
+          0,
+          171.78334442106694
+        ],
+        "bins": 52,
+        "visible": [
+          "hardware",
+          "insert",
+          "contact_pad"
+        ]
+      },
+      "series": [
+        "hardware",
+        "insert",
+        "contact_pad"
+      ],
+      "plot_viewBox": "0 0 736 310",
+      "x_ticks": 6,
+      "hover": {
+        "depth_mm": 36.44441560371517,
+        "guide_x": 334.928,
+        "band": [
+          36.00000000000001,
+          38
+        ],
+        "series": [
+          {
+            "key": "hardware",
+            "radius_mm": 156.89334768987175
+          },
+          {
+            "key": "insert",
+            "radius_mm": 72.75000000000384
+          },
+          {
+            "key": "contact_pad",
+            "radius_mm": null
+          }
+        ],
+        "expected_x": 334.928,
+        "markers": [
+          {
+            "key": "hardware",
+            "cx": 334.928
+          },
+          {
+            "key": "insert",
+            "cx": 334.928
+          }
+        ],
+        "tooltip_hidden": false
+      }
+    },
+    {
+      "requested_width": 736,
+      "scheme": "dark",
+      "id": "P16_8",
+      "axes_total": 14,
+      "nearest": {
+        "radius_mm": 8.550000000003763,
+        "category": "insert",
+        "object": "left_right_header_carrier",
+        "witness_header_mm": [
+          58.60000000000376,
+          -6.348484848424329,
+          13.749999999999993
+        ]
+      },
+      "frame": 785,
+      "width": 736,
+      "outside": [],
+      "label_overlaps": [],
+      "document_width": 736,
+      "labels_min_px": 12,
+      "selected": "P16_8",
+      "option_count": 14,
+      "marker_ids": [
+        "P16_1",
+        "P16_2",
+        "P16_3",
+        "P16_4",
+        "P16_5",
+        "P16_6",
+        "P16_7",
+        "P16_8"
+      ],
+      "rings": 1,
+      "projection": {
+        "width": 736,
+        "height": 306.4651162790698,
+        "left": 64,
+        "top": 38,
+        "scale": 5.5813953488372094,
+        "xBounds": [
+          -58.05,
+          58.05
+        ],
+        "zBounds": [
+          -19.75,
+          19.75
+        ],
+        "feature_id": "P16"
+      },
+      "profile": {
+        "width": 736,
+        "height": 310,
+        "x_domain": [
+          -8.08,
+          100.08
+        ],
+        "y_domain": [
+          0,
+          144.09807796863754
+        ],
+        "bins": 52,
+        "visible": [
+          "hardware",
+          "insert",
+          "contact_pad"
+        ]
+      },
+      "series": [
+        "hardware",
+        "insert",
+        "contact_pad"
+      ],
+      "plot_viewBox": "0 0 736 310",
+      "x_ticks": 6,
+      "hover": {
+        "depth_mm": 36.44441560371517,
+        "guide_x": 334.928,
+        "band": [
+          36.00000000000001,
+          38
+        ],
+        "series": [
+          {
+            "key": "hardware",
+            "radius_mm": 129.86455895932238
+          },
+          {
+            "key": "insert",
+            "radius_mm": 45.25000000000386
+          },
+          {
+            "key": "contact_pad",
+            "radius_mm": null
+          }
+        ],
+        "expected_x": 334.928,
+        "markers": [
+          {
+            "key": "hardware",
+            "cx": 334.928
+          },
+          {
+            "key": "insert",
+            "cx": 334.928
+          }
+        ],
+        "tooltip_hidden": false
+      }
+    },
+    {
+      "requested_width": 736,
+      "scheme": "dark",
+      "id": "P17_9",
+      "axes_total": 14,
+      "nearest": {
+        "radius_mm": 10.930004574577488,
+        "category": "contact_pad",
+        "object": "left_left_header_pad",
+        "witness_header_mm": [
+          -39.65000000001062,
+          -5.500005871590427,
+          -4.999999999991678
+        ]
+      },
+      "frame": 1135,
+      "width": 736,
+      "outside": [],
+      "label_overlaps": [],
+      "document_width": 736,
+      "labels_min_px": 12,
+      "selected": "P17_9",
+      "option_count": 14,
+      "marker_ids": [
+        "P17_9",
+        "P17_10",
+        "P17_11",
+        "P17_12",
+        "P17_13",
+        "P17_14"
+      ],
+      "rings": 1,
+      "projection": {
+        "width": 736,
+        "height": 397.3868613138687,
+        "left": 64,
+        "top": 38,
+        "scale": 7.883211678832118,
+        "xBounds": [
+          -41.099999999999994,
+          41.099999999999994
+        ],
+        "zBounds": [
+          -19.75,
+          19.75
+        ],
+        "feature_id": "P17"
+      },
+      "profile": {
+        "width": 736,
+        "height": 310,
+        "x_domain": [
+          -8.08,
+          100.08
+        ],
+        "y_domain": [
+          0,
+          173.460551784288
+        ],
+        "bins": 52,
+        "visible": [
+          "hardware",
+          "insert",
+          "contact_pad"
+        ]
+      },
+      "series": [
+        "hardware",
+        "insert",
+        "contact_pad"
+      ],
+      "plot_viewBox": "0 0 736 310",
+      "x_ticks": 6,
+      "hover": {
+        "depth_mm": 36.44441560371517,
+        "guide_x": 334.928,
+        "band": [
+          36.00000000000001,
+          38
+        ],
+        "series": [
+          {
+            "key": "hardware",
+            "radius_mm": 160.40025827398415
+          },
+          {
+            "key": "insert",
+            "radius_mm": 72.75000000000834
+          },
+          {
+            "key": "contact_pad",
+            "radius_mm": null
+          }
+        ],
+        "expected_x": 334.928,
+        "markers": [
+          {
+            "key": "hardware",
+            "cx": 334.928
+          },
+          {
+            "key": "insert",
+            "cx": 334.928
+          }
+        ],
+        "tooltip_hidden": false
+      }
+    },
+    {
+      "requested_width": 736,
+      "scheme": "dark",
+      "id": "P17_10",
+      "axes_total": 14,
+      "nearest": {
+        "radius_mm": 8.550000000010403,
+        "category": "insert",
+        "object": "left_left_header_carrier",
+        "witness_header_mm": [
+          -41.6500000000104,
+          -8.5000058715904,
+          13.750000000000004
+        ]
+      },
+      "frame": 1165,
+      "width": 736,
+      "outside": [],
+      "label_overlaps": [],
+      "document_width": 736,
+      "labels_min_px": 12,
+      "selected": "P17_10",
+      "option_count": 14,
+      "marker_ids": [
+        "P17_9",
+        "P17_10",
+        "P17_11",
+        "P17_12",
+        "P17_13",
+        "P17_14"
+      ],
+      "rings": 1,
+      "projection": {
+        "width": 736,
+        "height": 397.3868613138687,
+        "left": 64,
+        "top": 38,
+        "scale": 7.883211678832118,
+        "xBounds": [
+          -41.099999999999994,
+          41.099999999999994
+        ],
+        "zBounds": [
+          -19.75,
+          19.75
+        ],
+        "feature_id": "P17"
+      },
+      "profile": {
+        "width": 736,
+        "height": 310,
+        "x_domain": [
+          -8.08,
+          100.08
+        ],
+        "y_domain": [
+          0,
+          145.0868446087016
+        ],
+        "bins": 52,
+        "visible": [
+          "hardware",
+          "insert",
+          "contact_pad"
+        ]
+      },
+      "series": [
+        "hardware",
+        "insert",
+        "contact_pad"
+      ],
+      "plot_viewBox": "0 0 736 310",
+      "x_ticks": 6,
+      "hover": {
+        "depth_mm": 36.44441560371517,
+        "guide_x": 334.928,
+        "band": [
+          36.00000000000001,
+          38
+        ],
+        "series": [
+          {
+            "key": "hardware",
+            "radius_mm": 132.96809109335703
+          },
+          {
+            "key": "insert",
+            "radius_mm": 45.250000000008335
+          },
+          {
+            "key": "contact_pad",
+            "radius_mm": null
+          }
+        ],
+        "expected_x": 334.928,
+        "markers": [
+          {
+            "key": "hardware",
+            "cx": 334.928
+          },
+          {
+            "key": "insert",
+            "cx": 334.928
+          }
+        ],
+        "tooltip_hidden": false
+      }
+    },
+    {
+      "requested_width": 736,
+      "scheme": "dark",
+      "id": "P17_11",
+      "axes_total": 14,
+      "nearest": {
+        "radius_mm": 40.60400226578702,
+        "category": "contact_pad",
+        "object": "left_right_header_pad",
+        "witness_header_mm": [
+          39.64999999999863,
+          -5.49999999993743,
+          -4.999999999991678
+        ]
+      },
+      "frame": 1195,
+      "width": 736,
+      "outside": [],
+      "label_overlaps": [],
+      "document_width": 736,
+      "labels_min_px": 12,
+      "selected": "P17_11",
+      "option_count": 14,
+      "marker_ids": [
+        "P17_9",
+        "P17_10",
+        "P17_11",
+        "P17_12",
+        "P17_13",
+        "P17_14"
+      ],
+      "rings": 1,
+      "projection": {
+        "width": 736,
+        "height": 397.3868613138687,
+        "left": 64,
+        "top": 38,
+        "scale": 7.883211678832118,
+        "xBounds": [
+          -41.099999999999994,
+          41.099999999999994
+        ],
+        "zBounds": [
+          -19.75,
+          19.75
+        ],
+        "feature_id": "P17"
+      },
+      "profile": {
+        "width": 736,
+        "height": 310,
+        "x_domain": [
+          -8.08,
+          100.08
+        ],
+        "y_domain": [
+          0,
+          170.38857777033482
+        ],
+        "bins": 52,
+        "visible": [
+          "hardware",
+          "insert",
+          "contact_pad"
+        ]
+      },
+      "series": [
+        "hardware",
+        "insert",
+        "contact_pad"
+      ],
+      "plot_viewBox": "0 0 736 310",
+      "x_ticks": 6,
+      "hover": {
+        "depth_mm": 36.44441560371517,
+        "guide_x": 334.928,
+        "band": [
+          36.00000000000001,
+          38
+        ],
+        "series": [
+          {
+            "key": "hardware",
+            "radius_mm": 160.01899845483044
+          },
+          {
+            "key": "insert",
+            "radius_mm": 79.74073613907208
+          },
+          {
+            "key": "contact_pad",
+            "radius_mm": null
+          }
+        ],
+        "expected_x": 334.928,
+        "markers": [
+          {
+            "key": "hardware",
+            "cx": 334.928
+          },
+          {
+            "key": "insert",
+            "cx": 334.928
+          }
+        ],
+        "tooltip_hidden": false
+      }
+    },
+    {
+      "requested_width": 736,
+      "scheme": "dark",
+      "id": "P17_12",
+      "axes_total": 14,
+      "nearest": {
+        "radius_mm": 24.291971245914585,
+        "category": "hardware",
+        "object": "hardware_left_left_inner_finger_0",
+        "witness_header_mm": [
+          -20.540704383514186,
+          -53.000003484960686,
+          26.718397373670435
+        ]
+      },
+      "frame": 1225,
+      "width": 736,
+      "outside": [],
+      "label_overlaps": [],
+      "document_width": 736,
+      "labels_min_px": 12,
+      "selected": "P17_12",
+      "option_count": 14,
+      "marker_ids": [
+        "P17_9",
+        "P17_10",
+        "P17_11",
+        "P17_12",
+        "P17_13",
+        "P17_14"
+      ],
+      "rings": 1,
+      "projection": {
+        "width": 736,
+        "height": 397.3868613138687,
+        "left": 64,
+        "top": 38,
+        "scale": 7.883211678832118,
+        "xBounds": [
+          -41.099999999999994,
+          41.099999999999994
+        ],
+        "zBounds": [
+          -19.75,
+          19.75
+        ],
+        "feature_id": "P17"
+      },
+      "profile": {
+        "width": 736,
+        "height": 310,
+        "x_domain": [
+          -8.08,
+          100.08
+        ],
+        "y_domain": [
+          0,
+          141.5135777703348
+        ],
+        "bins": 52,
+        "visible": [
+          "hardware",
+          "insert",
+          "contact_pad"
+        ]
+      },
+      "series": [
+        "hardware",
+        "insert",
+        "contact_pad"
+      ],
+      "plot_viewBox": "0 0 736 310",
+      "x_ticks": 6,
+      "hover": {
+        "depth_mm": 36.44441560371517,
+        "guide_x": 334.928,
+        "band": [
+          36.00000000000001,
+          38
+        ],
+        "series": [
+          {
+            "key": "hardware",
+            "radius_mm": 132.5189984548304
+          },
+          {
+            "key": "insert",
+            "radius_mm": 55.79950716628828
+          },
+          {
+            "key": "contact_pad",
+            "radius_mm": null
+          }
+        ],
+        "expected_x": 334.928,
+        "markers": [
+          {
+            "key": "hardware",
+            "cx": 334.928
+          },
+          {
+            "key": "insert",
+            "cx": 334.928
+          }
+        ],
+        "tooltip_hidden": false
+      }
+    },
+    {
+      "requested_width": 736,
+      "scheme": "dark",
+      "id": "P17_13",
+      "axes_total": 14,
+      "nearest": {
+        "radius_mm": 10.930004574570038,
+        "category": "contact_pad",
+        "object": "left_right_header_pad",
+        "witness_header_mm": [
+          39.64999999999819,
+          -5.49999999993743,
+          -4.999999999991678
+        ]
+      },
+      "frame": 1255,
+      "width": 736,
+      "outside": [],
+      "label_overlaps": [],
+      "document_width": 736,
+      "labels_min_px": 12,
+      "selected": "P17_13",
+      "option_count": 14,
+      "marker_ids": [
+        "P17_9",
+        "P17_10",
+        "P17_11",
+        "P17_12",
+        "P17_13",
+        "P17_14"
+      ],
+      "rings": 1,
+      "projection": {
+        "width": 736,
+        "height": 397.3868613138687,
+        "left": 64,
+        "top": 38,
+        "scale": 7.883211678832118,
+        "xBounds": [
+          -41.099999999999994,
+          41.099999999999994
+        ],
+        "zBounds": [
+          -19.75,
+          19.75
+        ],
+        "feature_id": "P17"
+      },
+      "profile": {
+        "width": 736,
+        "height": 310,
+        "x_domain": [
+          -8.08,
+          100.08
+        ],
+        "y_domain": [
+          0,
+          173.46055178428995
+        ],
+        "bins": 52,
+        "visible": [
+          "hardware",
+          "insert",
+          "contact_pad"
+        ]
+      },
+      "series": [
+        "hardware",
+        "insert",
+        "contact_pad"
+      ],
+      "plot_viewBox": "0 0 736 310",
+      "x_ticks": 6,
+      "hover": {
+        "depth_mm": 36.44441560371517,
+        "guide_x": 334.928,
+        "band": [
+          36.00000000000001,
+          38
+        ],
+        "series": [
+          {
+            "key": "hardware",
+            "radius_mm": 160.40025827398492
+          },
+          {
+            "key": "insert",
+            "radius_mm": 72.75000000000834
+          },
+          {
+            "key": "contact_pad",
+            "radius_mm": null
+          }
+        ],
+        "expected_x": 334.928,
+        "markers": [
+          {
+            "key": "hardware",
+            "cx": 334.928
+          },
+          {
+            "key": "insert",
+            "cx": 334.928
+          }
+        ],
+        "tooltip_hidden": false
+      }
+    },
+    {
+      "requested_width": 736,
+      "scheme": "dark",
+      "id": "P17_14",
+      "axes_total": 14,
+      "nearest": {
+        "radius_mm": 8.549999999998857,
+        "category": "insert",
+        "object": "left_right_header_carrier",
+        "witness_header_mm": [
+          41.649999999998855,
+          -6.348484848423257,
+          13.75
+        ]
+      },
+      "frame": 1285,
+      "width": 736,
+      "outside": [],
+      "label_overlaps": [],
+      "document_width": 736,
+      "labels_min_px": 12,
+      "selected": "P17_14",
+      "option_count": 14,
+      "marker_ids": [
+        "P17_9",
+        "P17_10",
+        "P17_11",
+        "P17_12",
+        "P17_13",
+        "P17_14"
+      ],
+      "rings": 1,
+      "projection": {
+        "width": 736,
+        "height": 397.3868613138687,
+        "left": 64,
+        "top": 38,
+        "scale": 7.883211678832118,
+        "xBounds": [
+          -41.099999999999994,
+          41.099999999999994
+        ],
+        "zBounds": [
+          -19.75,
+          19.75
+        ],
+        "feature_id": "P17"
+      },
+      "profile": {
+        "width": 736,
+        "height": 310,
+        "x_domain": [
+          -8.08,
+          100.08
+        ],
+        "y_domain": [
+          0,
+          145.08684460870387
+        ],
+        "bins": 52,
+        "visible": [
+          "hardware",
+          "insert",
+          "contact_pad"
+        ]
+      },
+      "series": [
+        "hardware",
+        "insert",
+        "contact_pad"
+      ],
+      "plot_viewBox": "0 0 736 310",
+      "x_ticks": 6,
+      "hover": {
+        "depth_mm": 36.44441560371517,
+        "guide_x": 334.928,
+        "band": [
+          36.00000000000001,
+          38
+        ],
+        "series": [
+          {
+            "key": "hardware",
+            "radius_mm": 132.9680910933578
+          },
+          {
+            "key": "insert",
+            "radius_mm": 45.250000000008335
+          },
+          {
+            "key": "contact_pad",
+            "radius_mm": null
+          }
+        ],
+        "expected_x": 334.928,
+        "markers": [
+          {
+            "key": "hardware",
+            "cx": 334.928
+          },
+          {
+            "key": "insert",
+            "cx": 334.928
+          }
+        ],
+        "tooltip_hidden": false
+      }
+    },
+    {
+      "requested_width": 320,
+      "scheme": "light",
+      "id": "P16_1",
+      "axes_total": 14,
+      "nearest": {
+        "radius_mm": 10.930004574565872,
+        "category": "contact_pad",
+        "object": "left_left_header_pad",
+        "witness_header_mm": [
+          -56.599999999996875,
+          -5.499999999938845,
+          -4.999999999995897
+        ]
+      },
+      "frame": 575,
+      "width": 320,
+      "outside": [],
+      "label_overlaps": [],
+      "document_width": 320,
+      "labels_min_px": 12,
+      "selected": "P16_1",
+      "option_count": 14,
+      "marker_ids": [
+        "P16_1",
+        "P16_2",
+        "P16_3",
+        "P16_4",
+        "P16_5",
+        "P16_6",
+        "P16_7",
+        "P16_8"
+      ],
+      "rings": 1,
+      "projection": {
+        "width": 320,
+        "height": 164.93195521102498,
+        "left": 64,
+        "top": 38,
+        "scale": 1.9982773471145565,
+        "xBounds": [
+          -58.05,
+          58.05
+        ],
+        "zBounds": [
+          -19.75,
+          19.75
+        ],
+        "feature_id": "P16"
+      },
+      "profile": {
+        "width": 320,
+        "height": 310,
+        "x_domain": [
+          -8.08,
+          100.08
+        ],
+        "y_domain": [
+          0,
+          171.78334443572294
+        ],
+        "bins": 52,
+        "visible": [
+          "hardware",
+          "insert",
+          "contact_pad"
+        ]
+      },
+      "series": [
+        "hardware",
+        "insert",
+        "contact_pad"
+      ],
+      "plot_viewBox": "0 0 320 310",
+      "x_ticks": 3,
+      "hover": {
+        "depth_mm": 36.18095304347826,
+        "guide_x": 163.12,
+        "band": [
+          36.00000000000001,
+          38
+        ],
+        "series": [
+          {
+            "key": "hardware",
+            "radius_mm": 156.8933476898729
+          },
+          {
+            "key": "insert",
+            "radius_mm": 72.75000000000392
+          },
+          {
+            "key": "contact_pad",
+            "radius_mm": null
+          }
+        ],
+        "expected_x": 163.12,
+        "markers": [
+          {
+            "key": "hardware",
+            "cx": 163.12
+          },
+          {
+            "key": "insert",
+            "cx": 163.12
+          }
+        ],
+        "tooltip_hidden": false
+      }
+    },
+    {
+      "requested_width": 320,
+      "scheme": "light",
+      "id": "P16_2",
+      "axes_total": 14,
+      "nearest": {
+        "radius_mm": 8.549999999996658,
+        "category": "insert",
+        "object": "left_left_header_carrier",
+        "witness_header_mm": [
+          -58.599999999996655,
+          -8.499999999938908,
+          13.75
+        ]
+      },
+      "frame": 605,
+      "width": 320,
+      "outside": [],
+      "label_overlaps": [],
+      "document_width": 320,
+      "labels_min_px": 12,
+      "selected": "P16_2",
+      "option_count": 14,
+      "marker_ids": [
+        "P16_1",
+        "P16_2",
+        "P16_3",
+        "P16_4",
+        "P16_5",
+        "P16_6",
+        "P16_7",
+        "P16_8"
+      ],
+      "rings": 1,
+      "projection": {
+        "width": 320,
+        "height": 164.93195521102498,
+        "left": 64,
+        "top": 38,
+        "scale": 1.9982773471145565,
+        "xBounds": [
+          -58.05,
+          58.05
+        ],
+        "zBounds": [
+          -19.75,
+          19.75
+        ],
+        "feature_id": "P16"
+      },
+      "profile": {
+        "width": 320,
+        "height": 310,
+        "x_domain": [
+          -8.08,
+          100.08
+        ],
+        "y_domain": [
+          0,
+          144.09807796863964
+        ],
+        "bins": 52,
+        "visible": [
+          "hardware",
+          "insert",
+          "contact_pad"
+        ]
+      },
+      "series": [
+        "hardware",
+        "insert",
+        "contact_pad"
+      ],
+      "plot_viewBox": "0 0 320 310",
+      "x_ticks": 3,
+      "hover": {
+        "depth_mm": 36.18095304347826,
+        "guide_x": 163.12,
+        "band": [
+          36.00000000000001,
+          38
+        ],
+        "series": [
+          {
+            "key": "hardware",
+            "radius_mm": 129.86455895932372
+          },
+          {
+            "key": "insert",
+            "radius_mm": 45.250000000003816
+          },
+          {
+            "key": "contact_pad",
+            "radius_mm": null
+          }
+        ],
+        "expected_x": 163.12,
+        "markers": [
+          {
+            "key": "hardware",
+            "cx": 163.12
+          },
+          {
+            "key": "insert",
+            "cx": 163.12
+          }
+        ],
+        "tooltip_hidden": false
+      }
+    },
+    {
+      "requested_width": 320,
+      "scheme": "light",
+      "id": "P16_3",
+      "axes_total": 14,
+      "nearest": {
+        "radius_mm": 40.604002265784416,
+        "category": "contact_pad",
+        "object": "left_left_header_pad",
+        "witness_header_mm": [
+          -56.599999999996875,
+          -5.499999999938845,
+          -4.999999999995786
+        ]
+      },
+      "frame": 635,
+      "width": 320,
+      "outside": [],
+      "label_overlaps": [],
+      "document_width": 320,
+      "labels_min_px": 12,
+      "selected": "P16_3",
+      "option_count": 14,
+      "marker_ids": [
+        "P16_1",
+        "P16_2",
+        "P16_3",
+        "P16_4",
+        "P16_5",
+        "P16_6",
+        "P16_7",
+        "P16_8"
+      ],
+      "rings": 1,
+      "projection": {
+        "width": 320,
+        "height": 164.93195521102498,
+        "left": 64,
+        "top": 38,
+        "scale": 1.9982773471145565,
+        "xBounds": [
+          -58.05,
+          58.05
+        ],
+        "zBounds": [
+          -19.75,
+          19.75
+        ],
+        "feature_id": "P16"
+      },
+      "profile": {
+        "width": 320,
+        "height": 310,
+        "x_domain": [
+          -8.08,
+          100.08
+        ],
+        "y_domain": [
+          0,
+          165.48177382036044
+        ],
+        "bins": 52,
+        "visible": [
+          "hardware",
+          "insert",
+          "contact_pad"
+        ]
+      },
+      "series": [
+        "hardware",
+        "insert",
+        "contact_pad"
+      ],
+      "plot_viewBox": "0 0 320 310",
+      "x_ticks": 3,
+      "hover": {
+        "depth_mm": 36.18095304347826,
+        "guide_x": 163.12,
+        "band": [
+          36.00000000000001,
+          38
+        ],
+        "series": [
+          {
+            "key": "hardware",
+            "radius_mm": 154.5526623751938
+          },
+          {
+            "key": "insert",
+            "radius_mm": 79.74073613906744
+          },
+          {
+            "key": "contact_pad",
+            "radius_mm": null
+          }
+        ],
+        "expected_x": 163.12,
+        "markers": [
+          {
+            "key": "hardware",
+            "cx": 163.12
+          },
+          {
+            "key": "insert",
+            "cx": 163.12
+          }
+        ],
+        "tooltip_hidden": false
+      }
+    },
+    {
+      "requested_width": 320,
+      "scheme": "light",
+      "id": "P16_4",
+      "axes_total": 14,
+      "nearest": {
+        "radius_mm": 24.29197124590091,
+        "category": "hardware",
+        "object": "hardware_left_left_inner_finger_0",
+        "witness_header_mm": [
+          -37.49070438350088,
+          -52.999997613309255,
+          26.71839737366588
+        ]
+      },
+      "frame": 665,
+      "width": 320,
+      "outside": [],
+      "label_overlaps": [],
+      "document_width": 320,
+      "labels_min_px": 12,
+      "selected": "P16_4",
+      "option_count": 14,
+      "marker_ids": [
+        "P16_1",
+        "P16_2",
+        "P16_3",
+        "P16_4",
+        "P16_5",
+        "P16_6",
+        "P16_7",
+        "P16_8"
+      ],
+      "rings": 1,
+      "projection": {
+        "width": 320,
+        "height": 164.93195521102498,
+        "left": 64,
+        "top": 38,
+        "scale": 1.9982773471145565,
+        "xBounds": [
+          -58.05,
+          58.05
+        ],
+        "zBounds": [
+          -19.75,
+          19.75
+        ],
+        "feature_id": "P16"
+      },
+      "profile": {
+        "width": 320,
+        "height": 310,
+        "x_domain": [
+          -8.08,
+          100.08
+        ],
+        "y_domain": [
+          0,
+          136.74651658450802
+        ],
+        "bins": 52,
+        "visible": [
+          "hardware",
+          "insert",
+          "contact_pad"
+        ]
+      },
+      "series": [
+        "hardware",
+        "insert",
+        "contact_pad"
+      ],
+      "plot_viewBox": "0 0 320 310",
+      "x_ticks": 3,
+      "hover": {
+        "depth_mm": 36.18095304347826,
+        "guide_x": 163.12,
+        "band": [
+          36.00000000000001,
+          38
+        ],
+        "series": [
+          {
+            "key": "hardware",
+            "radius_mm": 127.05266237519366
+          },
+          {
+            "key": "insert",
+            "radius_mm": 55.799507166283675
+          },
+          {
+            "key": "contact_pad",
+            "radius_mm": null
+          }
+        ],
+        "expected_x": 163.12,
+        "markers": [
+          {
+            "key": "hardware",
+            "cx": 163.12
+          },
+          {
+            "key": "insert",
+            "cx": 163.12
+          }
+        ],
+        "tooltip_hidden": false
+      }
+    },
+    {
+      "requested_width": 320,
+      "scheme": "light",
+      "id": "P16_5",
+      "axes_total": 14,
+      "nearest": {
+        "radius_mm": 40.60400226579087,
+        "category": "contact_pad",
+        "object": "left_right_header_pad",
+        "witness_header_mm": [
+          56.60000000000353,
+          -5.499999999938929,
+          -4.999999999996008
+        ]
+      },
+      "frame": 695,
+      "width": 320,
+      "outside": [],
+      "label_overlaps": [],
+      "document_width": 320,
+      "labels_min_px": 12,
+      "selected": "P16_5",
+      "option_count": 14,
+      "marker_ids": [
+        "P16_1",
+        "P16_2",
+        "P16_3",
+        "P16_4",
+        "P16_5",
+        "P16_6",
+        "P16_7",
+        "P16_8"
+      ],
+      "rings": 1,
+      "projection": {
+        "width": 320,
+        "height": 164.93195521102498,
+        "left": 64,
+        "top": 38,
+        "scale": 1.9982773471145565,
+        "xBounds": [
+          -58.05,
+          58.05
+        ],
+        "zBounds": [
+          -19.75,
+          19.75
+        ],
+        "feature_id": "P16"
+      },
+      "profile": {
+        "width": 320,
+        "height": 310,
+        "x_domain": [
+          -8.08,
+          100.08
+        ],
+        "y_domain": [
+          0,
+          165.48177382055243
+        ],
+        "bins": 52,
+        "visible": [
+          "hardware",
+          "insert",
+          "contact_pad"
+        ]
+      },
+      "series": [
+        "hardware",
+        "insert",
+        "contact_pad"
+      ],
+      "plot_viewBox": "0 0 320 310",
+      "x_ticks": 3,
+      "hover": {
+        "depth_mm": 36.18095304347826,
+        "guide_x": 163.12,
+        "band": [
+          36.00000000000001,
+          38
+        ],
+        "series": [
+          {
+            "key": "hardware",
+            "radius_mm": 154.55266237519368
+          },
+          {
+            "key": "insert",
+            "radius_mm": 79.74073613907007
+          },
+          {
+            "key": "contact_pad",
+            "radius_mm": null
+          }
+        ],
+        "expected_x": 163.12,
+        "markers": [
+          {
+            "key": "hardware",
+            "cx": 163.12
+          },
+          {
+            "key": "insert",
+            "cx": 163.12
+          }
+        ],
+        "tooltip_hidden": false
+      }
+    },
+    {
+      "requested_width": 320,
+      "scheme": "light",
+      "id": "P16_6",
+      "axes_total": 14,
+      "nearest": {
+        "radius_mm": 24.291973296319615,
+        "category": "hardware",
+        "object": "hardware_left_right_inner_finger_0",
+        "witness_header_mm": [
+          37.4907068083794,
+          -66.99999999993898,
+          26.71839737366577
+        ]
+      },
+      "frame": 725,
+      "width": 320,
+      "outside": [],
+      "label_overlaps": [],
+      "document_width": 320,
+      "labels_min_px": 12,
+      "selected": "P16_6",
+      "option_count": 14,
+      "marker_ids": [
+        "P16_1",
+        "P16_2",
+        "P16_3",
+        "P16_4",
+        "P16_5",
+        "P16_6",
+        "P16_7",
+        "P16_8"
+      ],
+      "rings": 1,
+      "projection": {
+        "width": 320,
+        "height": 164.93195521102498,
+        "left": 64,
+        "top": 38,
+        "scale": 1.9982773471145565,
+        "xBounds": [
+          -58.05,
+          58.05
+        ],
+        "zBounds": [
+          -19.75,
+          19.75
+        ],
+        "feature_id": "P16"
+      },
+      "profile": {
+        "width": 320,
+        "height": 310,
+        "x_domain": [
+          -8.08,
+          100.08
+        ],
+        "y_domain": [
+          0,
+          136.7465165846994
+        ],
+        "bins": 52,
+        "visible": [
+          "hardware",
+          "insert",
+          "contact_pad"
+        ]
+      },
+      "series": [
+        "hardware",
+        "insert",
+        "contact_pad"
+      ],
+      "plot_viewBox": "0 0 320 310",
+      "x_ticks": 3,
+      "hover": {
+        "depth_mm": 36.18095304347826,
+        "guide_x": 163.12,
+        "band": [
+          36.00000000000001,
+          38
+        ],
+        "series": [
+          {
+            "key": "hardware",
+            "radius_mm": 127.05266237519366
+          },
+          {
+            "key": "insert",
+            "radius_mm": 55.799507166287626
+          },
+          {
+            "key": "contact_pad",
+            "radius_mm": null
+          }
+        ],
+        "expected_x": 163.12,
+        "markers": [
+          {
+            "key": "hardware",
+            "cx": 163.12
+          },
+          {
+            "key": "insert",
+            "cx": 163.12
+          }
+        ],
+        "tooltip_hidden": false
+      }
+    },
+    {
+      "requested_width": 320,
+      "scheme": "light",
+      "id": "P16_7",
+      "axes_total": 14,
+      "nearest": {
+        "radius_mm": 10.930004574569775,
+        "category": "contact_pad",
+        "object": "left_right_header_pad",
+        "witness_header_mm": [
+          56.60000000000353,
+          -5.499999999938929,
+          -4.999999999996008
+        ]
+      },
+      "frame": 755,
+      "width": 320,
+      "outside": [],
+      "label_overlaps": [],
+      "document_width": 320,
+      "labels_min_px": 12,
+      "selected": "P16_7",
+      "option_count": 14,
+      "marker_ids": [
+        "P16_1",
+        "P16_2",
+        "P16_3",
+        "P16_4",
+        "P16_5",
+        "P16_6",
+        "P16_7",
+        "P16_8"
+      ],
+      "rings": 1,
+      "projection": {
+        "width": 320,
+        "height": 164.93195521102498,
+        "left": 64,
+        "top": 38,
+        "scale": 1.9982773471145565,
+        "xBounds": [
+          -58.05,
+          58.05
+        ],
+        "zBounds": [
+          -19.75,
+          19.75
+        ],
+        "feature_id": "P16"
+      },
+      "profile": {
+        "width": 320,
+        "height": 310,
+        "x_domain": [
+          -8.08,
+          100.08
+        ],
+        "y_domain": [
+          0,
+          171.78334442106694
+        ],
+        "bins": 52,
+        "visible": [
+          "hardware",
+          "insert",
+          "contact_pad"
+        ]
+      },
+      "series": [
+        "hardware",
+        "insert",
+        "contact_pad"
+      ],
+      "plot_viewBox": "0 0 320 310",
+      "x_ticks": 3,
+      "hover": {
+        "depth_mm": 36.18095304347826,
+        "guide_x": 163.12,
+        "band": [
+          36.00000000000001,
+          38
+        ],
+        "series": [
+          {
+            "key": "hardware",
+            "radius_mm": 156.89334768987175
+          },
+          {
+            "key": "insert",
+            "radius_mm": 72.75000000000384
+          },
+          {
+            "key": "contact_pad",
+            "radius_mm": null
+          }
+        ],
+        "expected_x": 163.12,
+        "markers": [
+          {
+            "key": "hardware",
+            "cx": 163.12
+          },
+          {
+            "key": "insert",
+            "cx": 163.12
+          }
+        ],
+        "tooltip_hidden": false
+      }
+    },
+    {
+      "requested_width": 320,
+      "scheme": "light",
+      "id": "P16_8",
+      "axes_total": 14,
+      "nearest": {
+        "radius_mm": 8.550000000003763,
+        "category": "insert",
+        "object": "left_right_header_carrier",
+        "witness_header_mm": [
+          58.60000000000376,
+          -6.348484848424329,
+          13.749999999999993
+        ]
+      },
+      "frame": 785,
+      "width": 320,
+      "outside": [],
+      "label_overlaps": [],
+      "document_width": 320,
+      "labels_min_px": 12,
+      "selected": "P16_8",
+      "option_count": 14,
+      "marker_ids": [
+        "P16_1",
+        "P16_2",
+        "P16_3",
+        "P16_4",
+        "P16_5",
+        "P16_6",
+        "P16_7",
+        "P16_8"
+      ],
+      "rings": 1,
+      "projection": {
+        "width": 320,
+        "height": 164.93195521102498,
+        "left": 64,
+        "top": 38,
+        "scale": 1.9982773471145565,
+        "xBounds": [
+          -58.05,
+          58.05
+        ],
+        "zBounds": [
+          -19.75,
+          19.75
+        ],
+        "feature_id": "P16"
+      },
+      "profile": {
+        "width": 320,
+        "height": 310,
+        "x_domain": [
+          -8.08,
+          100.08
+        ],
+        "y_domain": [
+          0,
+          144.09807796863754
+        ],
+        "bins": 52,
+        "visible": [
+          "hardware",
+          "insert",
+          "contact_pad"
+        ]
+      },
+      "series": [
+        "hardware",
+        "insert",
+        "contact_pad"
+      ],
+      "plot_viewBox": "0 0 320 310",
+      "x_ticks": 3,
+      "hover": {
+        "depth_mm": 36.18095304347826,
+        "guide_x": 163.12,
+        "band": [
+          36.00000000000001,
+          38
+        ],
+        "series": [
+          {
+            "key": "hardware",
+            "radius_mm": 129.86455895932238
+          },
+          {
+            "key": "insert",
+            "radius_mm": 45.25000000000386
+          },
+          {
+            "key": "contact_pad",
+            "radius_mm": null
+          }
+        ],
+        "expected_x": 163.12,
+        "markers": [
+          {
+            "key": "hardware",
+            "cx": 163.12
+          },
+          {
+            "key": "insert",
+            "cx": 163.12
+          }
+        ],
+        "tooltip_hidden": false
+      }
+    },
+    {
+      "requested_width": 320,
+      "scheme": "light",
+      "id": "P17_9",
+      "axes_total": 14,
+      "nearest": {
+        "radius_mm": 10.930004574577488,
+        "category": "contact_pad",
+        "object": "left_left_header_pad",
+        "witness_header_mm": [
+          -39.65000000001062,
+          -5.500005871590427,
+          -4.999999999991678
+        ]
+      },
+      "frame": 1135,
+      "width": 320,
+      "outside": [],
+      "label_overlaps": [],
+      "document_width": 320,
+      "labels_min_px": 12,
+      "selected": "P17_9",
+      "option_count": 14,
+      "marker_ids": [
+        "P17_9",
+        "P17_10",
+        "P17_11",
+        "P17_12",
+        "P17_13",
+        "P17_14"
+      ],
+      "rings": 1,
+      "projection": {
+        "width": 320,
+        "height": 197.48418491484188,
+        "left": 64,
+        "top": 38,
+        "scale": 2.822384428223845,
+        "xBounds": [
+          -41.099999999999994,
+          41.099999999999994
+        ],
+        "zBounds": [
+          -19.75,
+          19.75
+        ],
+        "feature_id": "P17"
+      },
+      "profile": {
+        "width": 320,
+        "height": 310,
+        "x_domain": [
+          -8.08,
+          100.08
+        ],
+        "y_domain": [
+          0,
+          173.460551784288
+        ],
+        "bins": 52,
+        "visible": [
+          "hardware",
+          "insert",
+          "contact_pad"
+        ]
+      },
+      "series": [
+        "hardware",
+        "insert",
+        "contact_pad"
+      ],
+      "plot_viewBox": "0 0 320 310",
+      "x_ticks": 3,
+      "hover": {
+        "depth_mm": 36.18095304347826,
+        "guide_x": 163.12,
+        "band": [
+          36.00000000000001,
+          38
+        ],
+        "series": [
+          {
+            "key": "hardware",
+            "radius_mm": 160.40025827398415
+          },
+          {
+            "key": "insert",
+            "radius_mm": 72.75000000000834
+          },
+          {
+            "key": "contact_pad",
+            "radius_mm": null
+          }
+        ],
+        "expected_x": 163.12,
+        "markers": [
+          {
+            "key": "hardware",
+            "cx": 163.12
+          },
+          {
+            "key": "insert",
+            "cx": 163.12
+          }
+        ],
+        "tooltip_hidden": false
+      }
+    },
+    {
+      "requested_width": 320,
+      "scheme": "light",
+      "id": "P17_10",
+      "axes_total": 14,
+      "nearest": {
+        "radius_mm": 8.550000000010403,
+        "category": "insert",
+        "object": "left_left_header_carrier",
+        "witness_header_mm": [
+          -41.6500000000104,
+          -8.5000058715904,
+          13.750000000000004
+        ]
+      },
+      "frame": 1165,
+      "width": 320,
+      "outside": [],
+      "label_overlaps": [],
+      "document_width": 320,
+      "labels_min_px": 12,
+      "selected": "P17_10",
+      "option_count": 14,
+      "marker_ids": [
+        "P17_9",
+        "P17_10",
+        "P17_11",
+        "P17_12",
+        "P17_13",
+        "P17_14"
+      ],
+      "rings": 1,
+      "projection": {
+        "width": 320,
+        "height": 197.48418491484188,
+        "left": 64,
+        "top": 38,
+        "scale": 2.822384428223845,
+        "xBounds": [
+          -41.099999999999994,
+          41.099999999999994
+        ],
+        "zBounds": [
+          -19.75,
+          19.75
+        ],
+        "feature_id": "P17"
+      },
+      "profile": {
+        "width": 320,
+        "height": 310,
+        "x_domain": [
+          -8.08,
+          100.08
+        ],
+        "y_domain": [
+          0,
+          145.0868446087016
+        ],
+        "bins": 52,
+        "visible": [
+          "hardware",
+          "insert",
+          "contact_pad"
+        ]
+      },
+      "series": [
+        "hardware",
+        "insert",
+        "contact_pad"
+      ],
+      "plot_viewBox": "0 0 320 310",
+      "x_ticks": 3,
+      "hover": {
+        "depth_mm": 36.18095304347826,
+        "guide_x": 163.12,
+        "band": [
+          36.00000000000001,
+          38
+        ],
+        "series": [
+          {
+            "key": "hardware",
+            "radius_mm": 132.96809109335703
+          },
+          {
+            "key": "insert",
+            "radius_mm": 45.250000000008335
+          },
+          {
+            "key": "contact_pad",
+            "radius_mm": null
+          }
+        ],
+        "expected_x": 163.12,
+        "markers": [
+          {
+            "key": "hardware",
+            "cx": 163.12
+          },
+          {
+            "key": "insert",
+            "cx": 163.12
+          }
+        ],
+        "tooltip_hidden": false
+      }
+    },
+    {
+      "requested_width": 320,
+      "scheme": "light",
+      "id": "P17_11",
+      "axes_total": 14,
+      "nearest": {
+        "radius_mm": 40.60400226578702,
+        "category": "contact_pad",
+        "object": "left_right_header_pad",
+        "witness_header_mm": [
+          39.64999999999863,
+          -5.49999999993743,
+          -4.999999999991678
+        ]
+      },
+      "frame": 1195,
+      "width": 320,
+      "outside": [],
+      "label_overlaps": [],
+      "document_width": 320,
+      "labels_min_px": 12,
+      "selected": "P17_11",
+      "option_count": 14,
+      "marker_ids": [
+        "P17_9",
+        "P17_10",
+        "P17_11",
+        "P17_12",
+        "P17_13",
+        "P17_14"
+      ],
+      "rings": 1,
+      "projection": {
+        "width": 320,
+        "height": 197.48418491484188,
+        "left": 64,
+        "top": 38,
+        "scale": 2.822384428223845,
+        "xBounds": [
+          -41.099999999999994,
+          41.099999999999994
+        ],
+        "zBounds": [
+          -19.75,
+          19.75
+        ],
+        "feature_id": "P17"
+      },
+      "profile": {
+        "width": 320,
+        "height": 310,
+        "x_domain": [
+          -8.08,
+          100.08
+        ],
+        "y_domain": [
+          0,
+          170.38857777033482
+        ],
+        "bins": 52,
+        "visible": [
+          "hardware",
+          "insert",
+          "contact_pad"
+        ]
+      },
+      "series": [
+        "hardware",
+        "insert",
+        "contact_pad"
+      ],
+      "plot_viewBox": "0 0 320 310",
+      "x_ticks": 3,
+      "hover": {
+        "depth_mm": 36.18095304347826,
+        "guide_x": 163.12,
+        "band": [
+          36.00000000000001,
+          38
+        ],
+        "series": [
+          {
+            "key": "hardware",
+            "radius_mm": 160.01899845483044
+          },
+          {
+            "key": "insert",
+            "radius_mm": 79.74073613907208
+          },
+          {
+            "key": "contact_pad",
+            "radius_mm": null
+          }
+        ],
+        "expected_x": 163.12,
+        "markers": [
+          {
+            "key": "hardware",
+            "cx": 163.12
+          },
+          {
+            "key": "insert",
+            "cx": 163.12
+          }
+        ],
+        "tooltip_hidden": false
+      }
+    },
+    {
+      "requested_width": 320,
+      "scheme": "light",
+      "id": "P17_12",
+      "axes_total": 14,
+      "nearest": {
+        "radius_mm": 24.291971245914585,
+        "category": "hardware",
+        "object": "hardware_left_left_inner_finger_0",
+        "witness_header_mm": [
+          -20.540704383514186,
+          -53.000003484960686,
+          26.718397373670435
+        ]
+      },
+      "frame": 1225,
+      "width": 320,
+      "outside": [],
+      "label_overlaps": [],
+      "document_width": 320,
+      "labels_min_px": 12,
+      "selected": "P17_12",
+      "option_count": 14,
+      "marker_ids": [
+        "P17_9",
+        "P17_10",
+        "P17_11",
+        "P17_12",
+        "P17_13",
+        "P17_14"
+      ],
+      "rings": 1,
+      "projection": {
+        "width": 320,
+        "height": 197.48418491484188,
+        "left": 64,
+        "top": 38,
+        "scale": 2.822384428223845,
+        "xBounds": [
+          -41.099999999999994,
+          41.099999999999994
+        ],
+        "zBounds": [
+          -19.75,
+          19.75
+        ],
+        "feature_id": "P17"
+      },
+      "profile": {
+        "width": 320,
+        "height": 310,
+        "x_domain": [
+          -8.08,
+          100.08
+        ],
+        "y_domain": [
+          0,
+          141.5135777703348
+        ],
+        "bins": 52,
+        "visible": [
+          "hardware",
+          "insert",
+          "contact_pad"
+        ]
+      },
+      "series": [
+        "hardware",
+        "insert",
+        "contact_pad"
+      ],
+      "plot_viewBox": "0 0 320 310",
+      "x_ticks": 3,
+      "hover": {
+        "depth_mm": 36.18095304347826,
+        "guide_x": 163.12,
+        "band": [
+          36.00000000000001,
+          38
+        ],
+        "series": [
+          {
+            "key": "hardware",
+            "radius_mm": 132.5189984548304
+          },
+          {
+            "key": "insert",
+            "radius_mm": 55.79950716628828
+          },
+          {
+            "key": "contact_pad",
+            "radius_mm": null
+          }
+        ],
+        "expected_x": 163.12,
+        "markers": [
+          {
+            "key": "hardware",
+            "cx": 163.12
+          },
+          {
+            "key": "insert",
+            "cx": 163.12
+          }
+        ],
+        "tooltip_hidden": false
+      }
+    },
+    {
+      "requested_width": 320,
+      "scheme": "light",
+      "id": "P17_13",
+      "axes_total": 14,
+      "nearest": {
+        "radius_mm": 10.930004574570038,
+        "category": "contact_pad",
+        "object": "left_right_header_pad",
+        "witness_header_mm": [
+          39.64999999999819,
+          -5.49999999993743,
+          -4.999999999991678
+        ]
+      },
+      "frame": 1255,
+      "width": 320,
+      "outside": [],
+      "label_overlaps": [],
+      "document_width": 320,
+      "labels_min_px": 12,
+      "selected": "P17_13",
+      "option_count": 14,
+      "marker_ids": [
+        "P17_9",
+        "P17_10",
+        "P17_11",
+        "P17_12",
+        "P17_13",
+        "P17_14"
+      ],
+      "rings": 1,
+      "projection": {
+        "width": 320,
+        "height": 197.48418491484188,
+        "left": 64,
+        "top": 38,
+        "scale": 2.822384428223845,
+        "xBounds": [
+          -41.099999999999994,
+          41.099999999999994
+        ],
+        "zBounds": [
+          -19.75,
+          19.75
+        ],
+        "feature_id": "P17"
+      },
+      "profile": {
+        "width": 320,
+        "height": 310,
+        "x_domain": [
+          -8.08,
+          100.08
+        ],
+        "y_domain": [
+          0,
+          173.46055178428995
+        ],
+        "bins": 52,
+        "visible": [
+          "hardware",
+          "insert",
+          "contact_pad"
+        ]
+      },
+      "series": [
+        "hardware",
+        "insert",
+        "contact_pad"
+      ],
+      "plot_viewBox": "0 0 320 310",
+      "x_ticks": 3,
+      "hover": {
+        "depth_mm": 36.18095304347826,
+        "guide_x": 163.12,
+        "band": [
+          36.00000000000001,
+          38
+        ],
+        "series": [
+          {
+            "key": "hardware",
+            "radius_mm": 160.40025827398492
+          },
+          {
+            "key": "insert",
+            "radius_mm": 72.75000000000834
+          },
+          {
+            "key": "contact_pad",
+            "radius_mm": null
+          }
+        ],
+        "expected_x": 163.12,
+        "markers": [
+          {
+            "key": "hardware",
+            "cx": 163.12
+          },
+          {
+            "key": "insert",
+            "cx": 163.12
+          }
+        ],
+        "tooltip_hidden": false
+      }
+    },
+    {
+      "requested_width": 320,
+      "scheme": "light",
+      "id": "P17_14",
+      "axes_total": 14,
+      "nearest": {
+        "radius_mm": 8.549999999998857,
+        "category": "insert",
+        "object": "left_right_header_carrier",
+        "witness_header_mm": [
+          41.649999999998855,
+          -6.348484848423257,
+          13.75
+        ]
+      },
+      "frame": 1285,
+      "width": 320,
+      "outside": [],
+      "label_overlaps": [],
+      "document_width": 320,
+      "labels_min_px": 12,
+      "selected": "P17_14",
+      "option_count": 14,
+      "marker_ids": [
+        "P17_9",
+        "P17_10",
+        "P17_11",
+        "P17_12",
+        "P17_13",
+        "P17_14"
+      ],
+      "rings": 1,
+      "projection": {
+        "width": 320,
+        "height": 197.48418491484188,
+        "left": 64,
+        "top": 38,
+        "scale": 2.822384428223845,
+        "xBounds": [
+          -41.099999999999994,
+          41.099999999999994
+        ],
+        "zBounds": [
+          -19.75,
+          19.75
+        ],
+        "feature_id": "P17"
+      },
+      "profile": {
+        "width": 320,
+        "height": 310,
+        "x_domain": [
+          -8.08,
+          100.08
+        ],
+        "y_domain": [
+          0,
+          145.08684460870387
+        ],
+        "bins": 52,
+        "visible": [
+          "hardware",
+          "insert",
+          "contact_pad"
+        ]
+      },
+      "series": [
+        "hardware",
+        "insert",
+        "contact_pad"
+      ],
+      "plot_viewBox": "0 0 320 310",
+      "x_ticks": 3,
+      "hover": {
+        "depth_mm": 36.18095304347826,
+        "guide_x": 163.12,
+        "band": [
+          36.00000000000001,
+          38
+        ],
+        "series": [
+          {
+            "key": "hardware",
+            "radius_mm": 132.9680910933578
+          },
+          {
+            "key": "insert",
+            "radius_mm": 45.250000000008335
+          },
+          {
+            "key": "contact_pad",
+            "radius_mm": null
+          }
+        ],
+        "expected_x": 163.12,
+        "markers": [
+          {
+            "key": "hardware",
+            "cx": 163.12
+          },
+          {
+            "key": "insert",
+            "cx": 163.12
+          }
+        ],
+        "tooltip_hidden": false
+      }
+    },
+    {
+      "requested_width": 320,
+      "scheme": "dark",
+      "id": "P16_1",
+      "axes_total": 14,
+      "nearest": {
+        "radius_mm": 10.930004574565872,
+        "category": "contact_pad",
+        "object": "left_left_header_pad",
+        "witness_header_mm": [
+          -56.599999999996875,
+          -5.499999999938845,
+          -4.999999999995897
+        ]
+      },
+      "frame": 575,
+      "width": 320,
+      "outside": [],
+      "label_overlaps": [],
+      "document_width": 320,
+      "labels_min_px": 12,
+      "selected": "P16_1",
+      "option_count": 14,
+      "marker_ids": [
+        "P16_1",
+        "P16_2",
+        "P16_3",
+        "P16_4",
+        "P16_5",
+        "P16_6",
+        "P16_7",
+        "P16_8"
+      ],
+      "rings": 1,
+      "projection": {
+        "width": 320,
+        "height": 164.93195521102498,
+        "left": 64,
+        "top": 38,
+        "scale": 1.9982773471145565,
+        "xBounds": [
+          -58.05,
+          58.05
+        ],
+        "zBounds": [
+          -19.75,
+          19.75
+        ],
+        "feature_id": "P16"
+      },
+      "profile": {
+        "width": 320,
+        "height": 310,
+        "x_domain": [
+          -8.08,
+          100.08
+        ],
+        "y_domain": [
+          0,
+          171.78334443572294
+        ],
+        "bins": 52,
+        "visible": [
+          "hardware",
+          "insert",
+          "contact_pad"
+        ]
+      },
+      "series": [
+        "hardware",
+        "insert",
+        "contact_pad"
+      ],
+      "plot_viewBox": "0 0 320 310",
+      "x_ticks": 3,
+      "hover": {
+        "depth_mm": 36.18095304347826,
+        "guide_x": 163.12,
+        "band": [
+          36.00000000000001,
+          38
+        ],
+        "series": [
+          {
+            "key": "hardware",
+            "radius_mm": 156.8933476898729
+          },
+          {
+            "key": "insert",
+            "radius_mm": 72.75000000000392
+          },
+          {
+            "key": "contact_pad",
+            "radius_mm": null
+          }
+        ],
+        "expected_x": 163.12,
+        "markers": [
+          {
+            "key": "hardware",
+            "cx": 163.12
+          },
+          {
+            "key": "insert",
+            "cx": 163.12
+          }
+        ],
+        "tooltip_hidden": false
+      }
+    },
+    {
+      "requested_width": 320,
+      "scheme": "dark",
+      "id": "P16_2",
+      "axes_total": 14,
+      "nearest": {
+        "radius_mm": 8.549999999996658,
+        "category": "insert",
+        "object": "left_left_header_carrier",
+        "witness_header_mm": [
+          -58.599999999996655,
+          -8.499999999938908,
+          13.75
+        ]
+      },
+      "frame": 605,
+      "width": 320,
+      "outside": [],
+      "label_overlaps": [],
+      "document_width": 320,
+      "labels_min_px": 12,
+      "selected": "P16_2",
+      "option_count": 14,
+      "marker_ids": [
+        "P16_1",
+        "P16_2",
+        "P16_3",
+        "P16_4",
+        "P16_5",
+        "P16_6",
+        "P16_7",
+        "P16_8"
+      ],
+      "rings": 1,
+      "projection": {
+        "width": 320,
+        "height": 164.93195521102498,
+        "left": 64,
+        "top": 38,
+        "scale": 1.9982773471145565,
+        "xBounds": [
+          -58.05,
+          58.05
+        ],
+        "zBounds": [
+          -19.75,
+          19.75
+        ],
+        "feature_id": "P16"
+      },
+      "profile": {
+        "width": 320,
+        "height": 310,
+        "x_domain": [
+          -8.08,
+          100.08
+        ],
+        "y_domain": [
+          0,
+          144.09807796863964
+        ],
+        "bins": 52,
+        "visible": [
+          "hardware",
+          "insert",
+          "contact_pad"
+        ]
+      },
+      "series": [
+        "hardware",
+        "insert",
+        "contact_pad"
+      ],
+      "plot_viewBox": "0 0 320 310",
+      "x_ticks": 3,
+      "hover": {
+        "depth_mm": 36.18095304347826,
+        "guide_x": 163.12,
+        "band": [
+          36.00000000000001,
+          38
+        ],
+        "series": [
+          {
+            "key": "hardware",
+            "radius_mm": 129.86455895932372
+          },
+          {
+            "key": "insert",
+            "radius_mm": 45.250000000003816
+          },
+          {
+            "key": "contact_pad",
+            "radius_mm": null
+          }
+        ],
+        "expected_x": 163.12,
+        "markers": [
+          {
+            "key": "hardware",
+            "cx": 163.12
+          },
+          {
+            "key": "insert",
+            "cx": 163.12
+          }
+        ],
+        "tooltip_hidden": false
+      }
+    },
+    {
+      "requested_width": 320,
+      "scheme": "dark",
+      "id": "P16_3",
+      "axes_total": 14,
+      "nearest": {
+        "radius_mm": 40.604002265784416,
+        "category": "contact_pad",
+        "object": "left_left_header_pad",
+        "witness_header_mm": [
+          -56.599999999996875,
+          -5.499999999938845,
+          -4.999999999995786
+        ]
+      },
+      "frame": 635,
+      "width": 320,
+      "outside": [],
+      "label_overlaps": [],
+      "document_width": 320,
+      "labels_min_px": 12,
+      "selected": "P16_3",
+      "option_count": 14,
+      "marker_ids": [
+        "P16_1",
+        "P16_2",
+        "P16_3",
+        "P16_4",
+        "P16_5",
+        "P16_6",
+        "P16_7",
+        "P16_8"
+      ],
+      "rings": 1,
+      "projection": {
+        "width": 320,
+        "height": 164.93195521102498,
+        "left": 64,
+        "top": 38,
+        "scale": 1.9982773471145565,
+        "xBounds": [
+          -58.05,
+          58.05
+        ],
+        "zBounds": [
+          -19.75,
+          19.75
+        ],
+        "feature_id": "P16"
+      },
+      "profile": {
+        "width": 320,
+        "height": 310,
+        "x_domain": [
+          -8.08,
+          100.08
+        ],
+        "y_domain": [
+          0,
+          165.48177382036044
+        ],
+        "bins": 52,
+        "visible": [
+          "hardware",
+          "insert",
+          "contact_pad"
+        ]
+      },
+      "series": [
+        "hardware",
+        "insert",
+        "contact_pad"
+      ],
+      "plot_viewBox": "0 0 320 310",
+      "x_ticks": 3,
+      "hover": {
+        "depth_mm": 36.18095304347826,
+        "guide_x": 163.12,
+        "band": [
+          36.00000000000001,
+          38
+        ],
+        "series": [
+          {
+            "key": "hardware",
+            "radius_mm": 154.5526623751938
+          },
+          {
+            "key": "insert",
+            "radius_mm": 79.74073613906744
+          },
+          {
+            "key": "contact_pad",
+            "radius_mm": null
+          }
+        ],
+        "expected_x": 163.12,
+        "markers": [
+          {
+            "key": "hardware",
+            "cx": 163.12
+          },
+          {
+            "key": "insert",
+            "cx": 163.12
+          }
+        ],
+        "tooltip_hidden": false
+      }
+    },
+    {
+      "requested_width": 320,
+      "scheme": "dark",
+      "id": "P16_4",
+      "axes_total": 14,
+      "nearest": {
+        "radius_mm": 24.29197124590091,
+        "category": "hardware",
+        "object": "hardware_left_left_inner_finger_0",
+        "witness_header_mm": [
+          -37.49070438350088,
+          -52.999997613309255,
+          26.71839737366588
+        ]
+      },
+      "frame": 665,
+      "width": 320,
+      "outside": [],
+      "label_overlaps": [],
+      "document_width": 320,
+      "labels_min_px": 12,
+      "selected": "P16_4",
+      "option_count": 14,
+      "marker_ids": [
+        "P16_1",
+        "P16_2",
+        "P16_3",
+        "P16_4",
+        "P16_5",
+        "P16_6",
+        "P16_7",
+        "P16_8"
+      ],
+      "rings": 1,
+      "projection": {
+        "width": 320,
+        "height": 164.93195521102498,
+        "left": 64,
+        "top": 38,
+        "scale": 1.9982773471145565,
+        "xBounds": [
+          -58.05,
+          58.05
+        ],
+        "zBounds": [
+          -19.75,
+          19.75
+        ],
+        "feature_id": "P16"
+      },
+      "profile": {
+        "width": 320,
+        "height": 310,
+        "x_domain": [
+          -8.08,
+          100.08
+        ],
+        "y_domain": [
+          0,
+          136.74651658450802
+        ],
+        "bins": 52,
+        "visible": [
+          "hardware",
+          "insert",
+          "contact_pad"
+        ]
+      },
+      "series": [
+        "hardware",
+        "insert",
+        "contact_pad"
+      ],
+      "plot_viewBox": "0 0 320 310",
+      "x_ticks": 3,
+      "hover": {
+        "depth_mm": 36.18095304347826,
+        "guide_x": 163.12,
+        "band": [
+          36.00000000000001,
+          38
+        ],
+        "series": [
+          {
+            "key": "hardware",
+            "radius_mm": 127.05266237519366
+          },
+          {
+            "key": "insert",
+            "radius_mm": 55.799507166283675
+          },
+          {
+            "key": "contact_pad",
+            "radius_mm": null
+          }
+        ],
+        "expected_x": 163.12,
+        "markers": [
+          {
+            "key": "hardware",
+            "cx": 163.12
+          },
+          {
+            "key": "insert",
+            "cx": 163.12
+          }
+        ],
+        "tooltip_hidden": false
+      }
+    },
+    {
+      "requested_width": 320,
+      "scheme": "dark",
+      "id": "P16_5",
+      "axes_total": 14,
+      "nearest": {
+        "radius_mm": 40.60400226579087,
+        "category": "contact_pad",
+        "object": "left_right_header_pad",
+        "witness_header_mm": [
+          56.60000000000353,
+          -5.499999999938929,
+          -4.999999999996008
+        ]
+      },
+      "frame": 695,
+      "width": 320,
+      "outside": [],
+      "label_overlaps": [],
+      "document_width": 320,
+      "labels_min_px": 12,
+      "selected": "P16_5",
+      "option_count": 14,
+      "marker_ids": [
+        "P16_1",
+        "P16_2",
+        "P16_3",
+        "P16_4",
+        "P16_5",
+        "P16_6",
+        "P16_7",
+        "P16_8"
+      ],
+      "rings": 1,
+      "projection": {
+        "width": 320,
+        "height": 164.93195521102498,
+        "left": 64,
+        "top": 38,
+        "scale": 1.9982773471145565,
+        "xBounds": [
+          -58.05,
+          58.05
+        ],
+        "zBounds": [
+          -19.75,
+          19.75
+        ],
+        "feature_id": "P16"
+      },
+      "profile": {
+        "width": 320,
+        "height": 310,
+        "x_domain": [
+          -8.08,
+          100.08
+        ],
+        "y_domain": [
+          0,
+          165.48177382055243
+        ],
+        "bins": 52,
+        "visible": [
+          "hardware",
+          "insert",
+          "contact_pad"
+        ]
+      },
+      "series": [
+        "hardware",
+        "insert",
+        "contact_pad"
+      ],
+      "plot_viewBox": "0 0 320 310",
+      "x_ticks": 3,
+      "hover": {
+        "depth_mm": 36.18095304347826,
+        "guide_x": 163.12,
+        "band": [
+          36.00000000000001,
+          38
+        ],
+        "series": [
+          {
+            "key": "hardware",
+            "radius_mm": 154.55266237519368
+          },
+          {
+            "key": "insert",
+            "radius_mm": 79.74073613907007
+          },
+          {
+            "key": "contact_pad",
+            "radius_mm": null
+          }
+        ],
+        "expected_x": 163.12,
+        "markers": [
+          {
+            "key": "hardware",
+            "cx": 163.12
+          },
+          {
+            "key": "insert",
+            "cx": 163.12
+          }
+        ],
+        "tooltip_hidden": false
+      }
+    },
+    {
+      "requested_width": 320,
+      "scheme": "dark",
+      "id": "P16_6",
+      "axes_total": 14,
+      "nearest": {
+        "radius_mm": 24.291973296319615,
+        "category": "hardware",
+        "object": "hardware_left_right_inner_finger_0",
+        "witness_header_mm": [
+          37.4907068083794,
+          -66.99999999993898,
+          26.71839737366577
+        ]
+      },
+      "frame": 725,
+      "width": 320,
+      "outside": [],
+      "label_overlaps": [],
+      "document_width": 320,
+      "labels_min_px": 12,
+      "selected": "P16_6",
+      "option_count": 14,
+      "marker_ids": [
+        "P16_1",
+        "P16_2",
+        "P16_3",
+        "P16_4",
+        "P16_5",
+        "P16_6",
+        "P16_7",
+        "P16_8"
+      ],
+      "rings": 1,
+      "projection": {
+        "width": 320,
+        "height": 164.93195521102498,
+        "left": 64,
+        "top": 38,
+        "scale": 1.9982773471145565,
+        "xBounds": [
+          -58.05,
+          58.05
+        ],
+        "zBounds": [
+          -19.75,
+          19.75
+        ],
+        "feature_id": "P16"
+      },
+      "profile": {
+        "width": 320,
+        "height": 310,
+        "x_domain": [
+          -8.08,
+          100.08
+        ],
+        "y_domain": [
+          0,
+          136.7465165846994
+        ],
+        "bins": 52,
+        "visible": [
+          "hardware",
+          "insert",
+          "contact_pad"
+        ]
+      },
+      "series": [
+        "hardware",
+        "insert",
+        "contact_pad"
+      ],
+      "plot_viewBox": "0 0 320 310",
+      "x_ticks": 3,
+      "hover": {
+        "depth_mm": 36.18095304347826,
+        "guide_x": 163.12,
+        "band": [
+          36.00000000000001,
+          38
+        ],
+        "series": [
+          {
+            "key": "hardware",
+            "radius_mm": 127.05266237519366
+          },
+          {
+            "key": "insert",
+            "radius_mm": 55.799507166287626
+          },
+          {
+            "key": "contact_pad",
+            "radius_mm": null
+          }
+        ],
+        "expected_x": 163.12,
+        "markers": [
+          {
+            "key": "hardware",
+            "cx": 163.12
+          },
+          {
+            "key": "insert",
+            "cx": 163.12
+          }
+        ],
+        "tooltip_hidden": false
+      }
+    },
+    {
+      "requested_width": 320,
+      "scheme": "dark",
+      "id": "P16_7",
+      "axes_total": 14,
+      "nearest": {
+        "radius_mm": 10.930004574569775,
+        "category": "contact_pad",
+        "object": "left_right_header_pad",
+        "witness_header_mm": [
+          56.60000000000353,
+          -5.499999999938929,
+          -4.999999999996008
+        ]
+      },
+      "frame": 755,
+      "width": 320,
+      "outside": [],
+      "label_overlaps": [],
+      "document_width": 320,
+      "labels_min_px": 12,
+      "selected": "P16_7",
+      "option_count": 14,
+      "marker_ids": [
+        "P16_1",
+        "P16_2",
+        "P16_3",
+        "P16_4",
+        "P16_5",
+        "P16_6",
+        "P16_7",
+        "P16_8"
+      ],
+      "rings": 1,
+      "projection": {
+        "width": 320,
+        "height": 164.93195521102498,
+        "left": 64,
+        "top": 38,
+        "scale": 1.9982773471145565,
+        "xBounds": [
+          -58.05,
+          58.05
+        ],
+        "zBounds": [
+          -19.75,
+          19.75
+        ],
+        "feature_id": "P16"
+      },
+      "profile": {
+        "width": 320,
+        "height": 310,
+        "x_domain": [
+          -8.08,
+          100.08
+        ],
+        "y_domain": [
+          0,
+          171.78334442106694
+        ],
+        "bins": 52,
+        "visible": [
+          "hardware",
+          "insert",
+          "contact_pad"
+        ]
+      },
+      "series": [
+        "hardware",
+        "insert",
+        "contact_pad"
+      ],
+      "plot_viewBox": "0 0 320 310",
+      "x_ticks": 3,
+      "hover": {
+        "depth_mm": 36.18095304347826,
+        "guide_x": 163.12,
+        "band": [
+          36.00000000000001,
+          38
+        ],
+        "series": [
+          {
+            "key": "hardware",
+            "radius_mm": 156.89334768987175
+          },
+          {
+            "key": "insert",
+            "radius_mm": 72.75000000000384
+          },
+          {
+            "key": "contact_pad",
+            "radius_mm": null
+          }
+        ],
+        "expected_x": 163.12,
+        "markers": [
+          {
+            "key": "hardware",
+            "cx": 163.12
+          },
+          {
+            "key": "insert",
+            "cx": 163.12
+          }
+        ],
+        "tooltip_hidden": false
+      }
+    },
+    {
+      "requested_width": 320,
+      "scheme": "dark",
+      "id": "P16_8",
+      "axes_total": 14,
+      "nearest": {
+        "radius_mm": 8.550000000003763,
+        "category": "insert",
+        "object": "left_right_header_carrier",
+        "witness_header_mm": [
+          58.60000000000376,
+          -6.348484848424329,
+          13.749999999999993
+        ]
+      },
+      "frame": 785,
+      "width": 320,
+      "outside": [],
+      "label_overlaps": [],
+      "document_width": 320,
+      "labels_min_px": 12,
+      "selected": "P16_8",
+      "option_count": 14,
+      "marker_ids": [
+        "P16_1",
+        "P16_2",
+        "P16_3",
+        "P16_4",
+        "P16_5",
+        "P16_6",
+        "P16_7",
+        "P16_8"
+      ],
+      "rings": 1,
+      "projection": {
+        "width": 320,
+        "height": 164.93195521102498,
+        "left": 64,
+        "top": 38,
+        "scale": 1.9982773471145565,
+        "xBounds": [
+          -58.05,
+          58.05
+        ],
+        "zBounds": [
+          -19.75,
+          19.75
+        ],
+        "feature_id": "P16"
+      },
+      "profile": {
+        "width": 320,
+        "height": 310,
+        "x_domain": [
+          -8.08,
+          100.08
+        ],
+        "y_domain": [
+          0,
+          144.09807796863754
+        ],
+        "bins": 52,
+        "visible": [
+          "hardware",
+          "insert",
+          "contact_pad"
+        ]
+      },
+      "series": [
+        "hardware",
+        "insert",
+        "contact_pad"
+      ],
+      "plot_viewBox": "0 0 320 310",
+      "x_ticks": 3,
+      "hover": {
+        "depth_mm": 36.18095304347826,
+        "guide_x": 163.12,
+        "band": [
+          36.00000000000001,
+          38
+        ],
+        "series": [
+          {
+            "key": "hardware",
+            "radius_mm": 129.86455895932238
+          },
+          {
+            "key": "insert",
+            "radius_mm": 45.25000000000386
+          },
+          {
+            "key": "contact_pad",
+            "radius_mm": null
+          }
+        ],
+        "expected_x": 163.12,
+        "markers": [
+          {
+            "key": "hardware",
+            "cx": 163.12
+          },
+          {
+            "key": "insert",
+            "cx": 163.12
+          }
+        ],
+        "tooltip_hidden": false
+      }
+    },
+    {
+      "requested_width": 320,
+      "scheme": "dark",
+      "id": "P17_9",
+      "axes_total": 14,
+      "nearest": {
+        "radius_mm": 10.930004574577488,
+        "category": "contact_pad",
+        "object": "left_left_header_pad",
+        "witness_header_mm": [
+          -39.65000000001062,
+          -5.500005871590427,
+          -4.999999999991678
+        ]
+      },
+      "frame": 1135,
+      "width": 320,
+      "outside": [],
+      "label_overlaps": [],
+      "document_width": 320,
+      "labels_min_px": 12,
+      "selected": "P17_9",
+      "option_count": 14,
+      "marker_ids": [
+        "P17_9",
+        "P17_10",
+        "P17_11",
+        "P17_12",
+        "P17_13",
+        "P17_14"
+      ],
+      "rings": 1,
+      "projection": {
+        "width": 320,
+        "height": 197.48418491484188,
+        "left": 64,
+        "top": 38,
+        "scale": 2.822384428223845,
+        "xBounds": [
+          -41.099999999999994,
+          41.099999999999994
+        ],
+        "zBounds": [
+          -19.75,
+          19.75
+        ],
+        "feature_id": "P17"
+      },
+      "profile": {
+        "width": 320,
+        "height": 310,
+        "x_domain": [
+          -8.08,
+          100.08
+        ],
+        "y_domain": [
+          0,
+          173.460551784288
+        ],
+        "bins": 52,
+        "visible": [
+          "hardware",
+          "insert",
+          "contact_pad"
+        ]
+      },
+      "series": [
+        "hardware",
+        "insert",
+        "contact_pad"
+      ],
+      "plot_viewBox": "0 0 320 310",
+      "x_ticks": 3,
+      "hover": {
+        "depth_mm": 36.18095304347826,
+        "guide_x": 163.12,
+        "band": [
+          36.00000000000001,
+          38
+        ],
+        "series": [
+          {
+            "key": "hardware",
+            "radius_mm": 160.40025827398415
+          },
+          {
+            "key": "insert",
+            "radius_mm": 72.75000000000834
+          },
+          {
+            "key": "contact_pad",
+            "radius_mm": null
+          }
+        ],
+        "expected_x": 163.12,
+        "markers": [
+          {
+            "key": "hardware",
+            "cx": 163.12
+          },
+          {
+            "key": "insert",
+            "cx": 163.12
+          }
+        ],
+        "tooltip_hidden": false
+      }
+    },
+    {
+      "requested_width": 320,
+      "scheme": "dark",
+      "id": "P17_10",
+      "axes_total": 14,
+      "nearest": {
+        "radius_mm": 8.550000000010403,
+        "category": "insert",
+        "object": "left_left_header_carrier",
+        "witness_header_mm": [
+          -41.6500000000104,
+          -8.5000058715904,
+          13.750000000000004
+        ]
+      },
+      "frame": 1165,
+      "width": 320,
+      "outside": [],
+      "label_overlaps": [],
+      "document_width": 320,
+      "labels_min_px": 12,
+      "selected": "P17_10",
+      "option_count": 14,
+      "marker_ids": [
+        "P17_9",
+        "P17_10",
+        "P17_11",
+        "P17_12",
+        "P17_13",
+        "P17_14"
+      ],
+      "rings": 1,
+      "projection": {
+        "width": 320,
+        "height": 197.48418491484188,
+        "left": 64,
+        "top": 38,
+        "scale": 2.822384428223845,
+        "xBounds": [
+          -41.099999999999994,
+          41.099999999999994
+        ],
+        "zBounds": [
+          -19.75,
+          19.75
+        ],
+        "feature_id": "P17"
+      },
+      "profile": {
+        "width": 320,
+        "height": 310,
+        "x_domain": [
+          -8.08,
+          100.08
+        ],
+        "y_domain": [
+          0,
+          145.0868446087016
+        ],
+        "bins": 52,
+        "visible": [
+          "hardware",
+          "insert",
+          "contact_pad"
+        ]
+      },
+      "series": [
+        "hardware",
+        "insert",
+        "contact_pad"
+      ],
+      "plot_viewBox": "0 0 320 310",
+      "x_ticks": 3,
+      "hover": {
+        "depth_mm": 36.18095304347826,
+        "guide_x": 163.12,
+        "band": [
+          36.00000000000001,
+          38
+        ],
+        "series": [
+          {
+            "key": "hardware",
+            "radius_mm": 132.96809109335703
+          },
+          {
+            "key": "insert",
+            "radius_mm": 45.250000000008335
+          },
+          {
+            "key": "contact_pad",
+            "radius_mm": null
+          }
+        ],
+        "expected_x": 163.12,
+        "markers": [
+          {
+            "key": "hardware",
+            "cx": 163.12
+          },
+          {
+            "key": "insert",
+            "cx": 163.12
+          }
+        ],
+        "tooltip_hidden": false
+      }
+    },
+    {
+      "requested_width": 320,
+      "scheme": "dark",
+      "id": "P17_11",
+      "axes_total": 14,
+      "nearest": {
+        "radius_mm": 40.60400226578702,
+        "category": "contact_pad",
+        "object": "left_right_header_pad",
+        "witness_header_mm": [
+          39.64999999999863,
+          -5.49999999993743,
+          -4.999999999991678
+        ]
+      },
+      "frame": 1195,
+      "width": 320,
+      "outside": [],
+      "label_overlaps": [],
+      "document_width": 320,
+      "labels_min_px": 12,
+      "selected": "P17_11",
+      "option_count": 14,
+      "marker_ids": [
+        "P17_9",
+        "P17_10",
+        "P17_11",
+        "P17_12",
+        "P17_13",
+        "P17_14"
+      ],
+      "rings": 1,
+      "projection": {
+        "width": 320,
+        "height": 197.48418491484188,
+        "left": 64,
+        "top": 38,
+        "scale": 2.822384428223845,
+        "xBounds": [
+          -41.099999999999994,
+          41.099999999999994
+        ],
+        "zBounds": [
+          -19.75,
+          19.75
+        ],
+        "feature_id": "P17"
+      },
+      "profile": {
+        "width": 320,
+        "height": 310,
+        "x_domain": [
+          -8.08,
+          100.08
+        ],
+        "y_domain": [
+          0,
+          170.38857777033482
+        ],
+        "bins": 52,
+        "visible": [
+          "hardware",
+          "insert",
+          "contact_pad"
+        ]
+      },
+      "series": [
+        "hardware",
+        "insert",
+        "contact_pad"
+      ],
+      "plot_viewBox": "0 0 320 310",
+      "x_ticks": 3,
+      "hover": {
+        "depth_mm": 36.18095304347826,
+        "guide_x": 163.12,
+        "band": [
+          36.00000000000001,
+          38
+        ],
+        "series": [
+          {
+            "key": "hardware",
+            "radius_mm": 160.01899845483044
+          },
+          {
+            "key": "insert",
+            "radius_mm": 79.74073613907208
+          },
+          {
+            "key": "contact_pad",
+            "radius_mm": null
+          }
+        ],
+        "expected_x": 163.12,
+        "markers": [
+          {
+            "key": "hardware",
+            "cx": 163.12
+          },
+          {
+            "key": "insert",
+            "cx": 163.12
+          }
+        ],
+        "tooltip_hidden": false
+      }
+    },
+    {
+      "requested_width": 320,
+      "scheme": "dark",
+      "id": "P17_12",
+      "axes_total": 14,
+      "nearest": {
+        "radius_mm": 24.291971245914585,
+        "category": "hardware",
+        "object": "hardware_left_left_inner_finger_0",
+        "witness_header_mm": [
+          -20.540704383514186,
+          -53.000003484960686,
+          26.718397373670435
+        ]
+      },
+      "frame": 1225,
+      "width": 320,
+      "outside": [],
+      "label_overlaps": [],
+      "document_width": 320,
+      "labels_min_px": 12,
+      "selected": "P17_12",
+      "option_count": 14,
+      "marker_ids": [
+        "P17_9",
+        "P17_10",
+        "P17_11",
+        "P17_12",
+        "P17_13",
+        "P17_14"
+      ],
+      "rings": 1,
+      "projection": {
+        "width": 320,
+        "height": 197.48418491484188,
+        "left": 64,
+        "top": 38,
+        "scale": 2.822384428223845,
+        "xBounds": [
+          -41.099999999999994,
+          41.099999999999994
+        ],
+        "zBounds": [
+          -19.75,
+          19.75
+        ],
+        "feature_id": "P17"
+      },
+      "profile": {
+        "width": 320,
+        "height": 310,
+        "x_domain": [
+          -8.08,
+          100.08
+        ],
+        "y_domain": [
+          0,
+          141.5135777703348
+        ],
+        "bins": 52,
+        "visible": [
+          "hardware",
+          "insert",
+          "contact_pad"
+        ]
+      },
+      "series": [
+        "hardware",
+        "insert",
+        "contact_pad"
+      ],
+      "plot_viewBox": "0 0 320 310",
+      "x_ticks": 3,
+      "hover": {
+        "depth_mm": 36.18095304347826,
+        "guide_x": 163.12,
+        "band": [
+          36.00000000000001,
+          38
+        ],
+        "series": [
+          {
+            "key": "hardware",
+            "radius_mm": 132.5189984548304
+          },
+          {
+            "key": "insert",
+            "radius_mm": 55.79950716628828
+          },
+          {
+            "key": "contact_pad",
+            "radius_mm": null
+          }
+        ],
+        "expected_x": 163.12,
+        "markers": [
+          {
+            "key": "hardware",
+            "cx": 163.12
+          },
+          {
+            "key": "insert",
+            "cx": 163.12
+          }
+        ],
+        "tooltip_hidden": false
+      }
+    },
+    {
+      "requested_width": 320,
+      "scheme": "dark",
+      "id": "P17_13",
+      "axes_total": 14,
+      "nearest": {
+        "radius_mm": 10.930004574570038,
+        "category": "contact_pad",
+        "object": "left_right_header_pad",
+        "witness_header_mm": [
+          39.64999999999819,
+          -5.49999999993743,
+          -4.999999999991678
+        ]
+      },
+      "frame": 1255,
+      "width": 320,
+      "outside": [],
+      "label_overlaps": [],
+      "document_width": 320,
+      "labels_min_px": 12,
+      "selected": "P17_13",
+      "option_count": 14,
+      "marker_ids": [
+        "P17_9",
+        "P17_10",
+        "P17_11",
+        "P17_12",
+        "P17_13",
+        "P17_14"
+      ],
+      "rings": 1,
+      "projection": {
+        "width": 320,
+        "height": 197.48418491484188,
+        "left": 64,
+        "top": 38,
+        "scale": 2.822384428223845,
+        "xBounds": [
+          -41.099999999999994,
+          41.099999999999994
+        ],
+        "zBounds": [
+          -19.75,
+          19.75
+        ],
+        "feature_id": "P17"
+      },
+      "profile": {
+        "width": 320,
+        "height": 310,
+        "x_domain": [
+          -8.08,
+          100.08
+        ],
+        "y_domain": [
+          0,
+          173.46055178428995
+        ],
+        "bins": 52,
+        "visible": [
+          "hardware",
+          "insert",
+          "contact_pad"
+        ]
+      },
+      "series": [
+        "hardware",
+        "insert",
+        "contact_pad"
+      ],
+      "plot_viewBox": "0 0 320 310",
+      "x_ticks": 3,
+      "hover": {
+        "depth_mm": 36.18095304347826,
+        "guide_x": 163.12,
+        "band": [
+          36.00000000000001,
+          38
+        ],
+        "series": [
+          {
+            "key": "hardware",
+            "radius_mm": 160.40025827398492
+          },
+          {
+            "key": "insert",
+            "radius_mm": 72.75000000000834
+          },
+          {
+            "key": "contact_pad",
+            "radius_mm": null
+          }
+        ],
+        "expected_x": 163.12,
+        "markers": [
+          {
+            "key": "hardware",
+            "cx": 163.12
+          },
+          {
+            "key": "insert",
+            "cx": 163.12
+          }
+        ],
+        "tooltip_hidden": false
+      }
+    },
+    {
+      "requested_width": 320,
+      "scheme": "dark",
+      "id": "P17_14",
+      "axes_total": 14,
+      "nearest": {
+        "radius_mm": 8.549999999998857,
+        "category": "insert",
+        "object": "left_right_header_carrier",
+        "witness_header_mm": [
+          41.649999999998855,
+          -6.348484848423257,
+          13.75
+        ]
+      },
+      "frame": 1285,
+      "width": 320,
+      "outside": [],
+      "label_overlaps": [],
+      "document_width": 320,
+      "labels_min_px": 12,
+      "selected": "P17_14",
+      "option_count": 14,
+      "marker_ids": [
+        "P17_9",
+        "P17_10",
+        "P17_11",
+        "P17_12",
+        "P17_13",
+        "P17_14"
+      ],
+      "rings": 1,
+      "projection": {
+        "width": 320,
+        "height": 197.48418491484188,
+        "left": 64,
+        "top": 38,
+        "scale": 2.822384428223845,
+        "xBounds": [
+          -41.099999999999994,
+          41.099999999999994
+        ],
+        "zBounds": [
+          -19.75,
+          19.75
+        ],
+        "feature_id": "P17"
+      },
+      "profile": {
+        "width": 320,
+        "height": 310,
+        "x_domain": [
+          -8.08,
+          100.08
+        ],
+        "y_domain": [
+          0,
+          145.08684460870387
+        ],
+        "bins": 52,
+        "visible": [
+          "hardware",
+          "insert",
+          "contact_pad"
+        ]
+      },
+      "series": [
+        "hardware",
+        "insert",
+        "contact_pad"
+      ],
+      "plot_viewBox": "0 0 320 310",
+      "x_ticks": 3,
+      "hover": {
+        "depth_mm": 36.18095304347826,
+        "guide_x": 163.12,
+        "band": [
+          36.00000000000001,
+          38
+        ],
+        "series": [
+          {
+            "key": "hardware",
+            "radius_mm": 132.9680910933578
+          },
+          {
+            "key": "insert",
+            "radius_mm": 45.250000000008335
+          },
+          {
+            "key": "contact_pad",
+            "radius_mm": null
+          }
+        ],
+        "expected_x": 163.12,
+        "markers": [
+          {
+            "key": "hardware",
+            "cx": 163.12
+          },
+          {
+            "key": "insert",
+            "cx": 163.12
+          }
+        ],
+        "tooltip_hidden": false
+      }
+    }
+  ],
+  "screenshots": {
+    "736_light_P16_2.png": "926cc164bb19d0ee32a4560e8fb4863f0ba1f20cd557d7acc5a28e971255bd52",
+    "736_light_P17_14.png": "57380f3bbc4f6c30f4ba4374a903cae9822b274c83bf154f9d26399953b3b722",
+    "736_dark_P16_2.png": "d0bfdc57c23883019157a74f70e2fbf76457d7bd42e40f033c370aca41ad74c2",
+    "736_dark_P17_14.png": "13f2767b382a4526a287109714a686c36d0e117b991834edbc4ef9207c0ceac6",
+    "320_light_P16_2.png": "30ab4279504e225fe28b6ccab2084cf89e209694f4f3862a9e87e037347e889e",
+    "320_light_P17_14.png": "07e4733a5c680e374c144d252cdf59043c7f9a398dc1023d5a912db3d5b10d6b",
+    "320_dark_P16_2.png": "00f54163ebc77baf838e14e9a05d686ddd98882551f6455ad54ba098899a774e",
+    "320_dark_P17_14.png": "01d90add69662848e6abe1ebf5a936fcd2578634277bcd57cf6435e66a0ab391"
+  },
+  "legend": {
+    "hidden": [
+      "insert",
+      "contact_pad"
+    ],
+    "pressed": "false",
+    "restored": 3
+  },
+  "javascript_errors": [],
+  "scope": "Axis selection, complete saved interval data, hover, labels and themes; no physical verdict"
+}

@@ -1,0 +1,158 @@
+<div id="hvjb-header-hand-access-v01">
+  <style>
+    #hvjb-header-hand-access-v01 { position:relative; }
+    #hvjb-header-hand-access-v01 .drawing { display:block; width:100%; }
+    #hvjb-header-hand-access-v01 .drawing text { fill:var(--foreground); font-size:12px; }
+    #hvjb-header-hand-access-v01 .frame { fill:none; stroke:var(--border); }
+    #hvjb-header-hand-access-v01 .aperture { fill:var(--muted); fill-opacity:.3; stroke:var(--border); }
+    #hvjb-header-hand-access-v01 .axis-mark { fill:none; stroke:var(--foreground); }
+    #hvjb-header-hand-access-v01 .active-ring { fill:none; stroke:var(--viz-series-1); stroke-width:2; }
+    #hvjb-header-hand-access-v01 .series-legend { display:flex; flex-wrap:wrap; gap:8px 18px; }
+    #hvjb-header-hand-access-v01 .series-legend button { display:inline-flex; align-items:center; gap:6px; padding:0; background:none; border:0; color:var(--foreground); font:inherit; cursor:pointer; }
+    #hvjb-header-hand-access-v01 .series-legend button[aria-pressed="false"] { opacity:.45; }
+    #hvjb-header-hand-access-v01 .swatch { width:20px; height:2px; display:inline-block; }
+    #hvjb-header-hand-access-v01 .tooltip { position:absolute; pointer-events:none; background:var(--popover); color:var(--popover-foreground); padding:8px; max-width:calc(100% - 16px); }
+    @media (pointer:coarse) { #hvjb-header-hand-access-v01 .series-legend button { min-height:44px; } }
+  </style>
+  <h3>保持中のフィンガと14本のねじ軸</h3>
+  <div class="viz-controls">
+    <label class="form-label">ねじ位置
+      <select class="form-select" data-screw aria-label="ねじ位置"></select>
+    </label>
+  </div>
+  <div class="text-small tabular-nums" data-selected aria-live="polite"></div>
+  <svg class="drawing" data-map role="img" aria-label="選択したヘッダーの公称ねじ軸位置"></svg>
+  <div class="series-legend" aria-label="距離の対象"></div>
+  <svg class="drawing" data-profile role="img" aria-label="筐体外面からの位置と、ねじ軸からハンド表面までの区間最短距離"></svg>
+  <div class="text-small">2 mm区間の表面最短距離。実工具の使用可能径・干渉判定ではありません。</div>
+  <div class="tooltip text-small tabular-nums" role="tooltip" hidden></div>
+  <script src="https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js"></script>
+  <script>
+  (() => {
+    const root=document.getElementById('hvjb-header-hand-access-v01');
+    const data=__HEADER_HAND_DATA__, rows=data.headers.flatMap(h=>h.axes);
+    const ns='http://www.w3.org/2000/svg', select=root.querySelector('select');
+    const categories=[['hardware','黒い機構',1],['insert','キャリア',2],['contact_pad','接触パッド',3]];
+    const visible=new Set(categories.map(c=>c[0])), tooltip=root.querySelector('[role="tooltip"]');
+    const fmt=n=>Number(n.toFixed(3)).toString();
+    let pinned=false;
+    for(const row of rows) {
+      const option=document.createElement('option');
+      option.value=row.id; option.textContent=`${row.header_label} · ${row.number}`; select.append(option);
+    }
+    select.value=rows[1].id;
+    const element=(svg,tag,attrs,text)=>{
+      const node=document.createElementNS(ns,tag);
+      for(const [k,v] of Object.entries(attrs)) node.setAttribute(k,String(v));
+      if(text!==undefined) node.textContent=text;
+      svg.append(node); return node;
+    };
+    const label=(svg,x,y,text,anchor='start')=>element(svg,'text',{x,y,'text-anchor':anchor,'data-label':''},text);
+    for(const [key,name,color] of categories) {
+      const button=document.createElement('button'); button.type='button'; button.setAttribute('aria-pressed','true');
+      button.dataset.series=key;
+      const swatch=document.createElement('span'); swatch.className='swatch'; swatch.style.background=`var(--viz-series-${color})`;
+      button.append(swatch,document.createTextNode(name));
+      button.addEventListener('click',()=>{visible.has(key)?visible.delete(key):visible.add(key);button.setAttribute('aria-pressed',String(visible.has(key)));draw();});
+      root.querySelector('.series-legend').append(button);
+    }
+    function drawMap(header,selected) {
+      const svg=root.querySelector('[data-map]'), width=svg.getBoundingClientRect().width;
+      const xs=header.axes.map(a=>a.axis_xz_mm[0]), zs=header.axes.map(a=>a.axis_xz_mm[1]);
+      const xBounds=[Math.min(...xs)-8,Math.max(...xs)+8], zBounds=[Math.min(...zs)-6,Math.max(...zs)+6];
+      const left=64,right=24,top=38,scale=(width-left-right)/(xBounds[1]-xBounds[0]);
+      const inside=(zBounds[1]-zBounds[0])*scale, height=top+inside+48;
+      const x=v=>left+(v-xBounds[0])*scale, y=v=>top+(zBounds[1]-v)*scale;
+      svg.replaceChildren(); svg.setAttribute('viewBox',`0 0 ${width} ${height}`);svg.style.height=`${height}px`;
+      label(svg,0,18,`${header.label} · ${header.part_number}`);
+      element(svg,'rect',{x:left,y:top,width:width-left-right,height:inside,class:'frame'});
+      for(let i=0;i<header.bay_x_mm.length;i++) {
+        const w=header.aperture_widths_mm[i];
+        element(svg,'rect',{x:x(header.bay_x_mm[i]-w/2),y:y(data.aperture_height_mm/2),width:w*scale,
+          height:data.aperture_height_mm*scale,rx:data.aperture_radius_mm*scale,class:'aperture'});
+      }
+      for(const value of [...new Set(xs)]) label(svg,x(value),top+inside+19,fmt(value),'middle');
+      for(const value of [...new Set(zs)]) label(svg,left-8,y(value)+4,fmt(value),'end');
+      label(svg,(left+width-right)/2,height-5,'X [mm]','middle');label(svg,1,top+inside/2,'Z [mm]');
+      for(const row of header.axes) {
+        const px=x(row.axis_xz_mm[0]),py=y(row.axis_xz_mm[1]);
+        element(svg,'path',{d:`M${px-4} ${py}H${px+4}M${px} ${py-4}V${py+4}`,class:'axis-mark','data-id':row.id});
+        label(svg,px+8,py+4,String(row.number));
+        if(row.id===selected.id) element(svg,'circle',{cx:px,cy:py,r:9,class:'active-ring'});
+      }
+      svg.dataset.projection=JSON.stringify({width,height,left,top,scale,xBounds,zBounds,feature_id:header.feature_id});
+    }
+    function drawProfile(selected) {
+      const svg=root.querySelector('[data-profile]'), width=svg.getBoundingClientRect().width, height=310;
+      const left=64,right=16,top=22,bottom=55;
+      const xValues=selected.profile.flatMap(b=>b.depth_mm), yValues=selected.profile.flatMap(b=>Object.values(b.radius_mm)).filter(v=>v!==null);
+      const xe=d3.extent(xValues), ye=d3.extent([0,...yValues]);
+      const x=d3.scaleLinear().domain([xe[0]-(xe[1]-xe[0])*.02,xe[1]+(xe[1]-xe[0])*.02]).range([left+5,width-right-5]);
+      const y=d3.scaleLinear().domain([ye[0],ye[1]+(ye[1]-ye[0])*.05]).range([height-bottom-5,top+5]);
+      svg.replaceChildren(); svg.setAttribute('viewBox',`0 0 ${width} ${height}`);svg.style.height=`${height}px`;
+      element(svg,'rect',{x:left,y:top,width:width-left-right,height:height-top-bottom,class:'frame','data-chart-frame':''});
+      for(const value of x.ticks(width<400?3:6)) label(svg,x(value),height-bottom+21,fmt(value),'middle');
+      for(const value of y.ticks(5)) {
+        element(svg,'line',{x1:left,y1:y(value),x2:width-right,y2:y(value),stroke:'var(--border)'});
+        label(svg,left-8,y(value)+4,fmt(value),'end');
+      }
+      const xt=label(svg,(left+width-right)/2,height-9,'筐体外面から外側 d [mm]','middle');xt.classList.add('axis-title');xt.dataset.axis='x';
+      const yt=label(svg,17,(top+height-bottom)/2,'軸から表面 r [mm]','middle');yt.classList.add('axis-title');yt.dataset.axis='y';
+      yt.setAttribute('transform',`rotate(-90 17 ${(top+height-bottom)/2})`);
+      const line=d3.line().defined(p=>p.r!==null).x(p=>x(p.d)).y(p=>y(p.r));
+      for(const [key,,color] of categories) {
+        if(!visible.has(key)) continue;
+        const points=selected.profile.flatMap(b=>[{d:b.depth_mm[0],r:b.radius_mm[key]},{d:b.depth_mm[1],r:b.radius_mm[key]}]);
+        element(svg,'path',{d:line(points),fill:'none',stroke:`var(--viz-series-${color})`,'stroke-width':2,'data-series-path':key});
+      }
+      const guide=element(svg,'line',{y1:top,y2:height-bottom,stroke:'var(--foreground)','data-chart-hover-guide':'',visibility:'hidden'});
+      const marks=element(svg,'g',{'data-markers':''});
+      const overlay=element(svg,'rect',{x:left,y:top,width:width-left-right,height:height-top-bottom,fill:'transparent',
+        'data-chart-hit':'','data-chart-hover-overlay':'cross-series'});
+      const show=event=>{
+        const box=svg.getBoundingClientRect();
+        const px=Math.min(width-right,Math.max(left,(event.clientX-box.left)*width/box.width)),d=x.invert(px);
+        guide.setAttribute('x1',px);guide.setAttribute('x2',px);guide.setAttribute('visibility','visible');marks.replaceChildren();
+        const band=selected.profile.find((b,i)=>d>=b.depth_mm[0]&&(d<b.depth_mm[1]||(i===selected.profile.length-1&&d<=b.depth_mm[1])));
+        tooltip.replaceChildren();const heading=document.createElement('div');
+        heading.textContent=band?`d ${fmt(d)} mm · 区間 ${fmt(band.depth_mm[0])}–${fmt(band.depth_mm[1])}`:`d ${fmt(d)} mm`;tooltip.append(heading);
+        const hover=[];
+        for(const [key,name,color] of categories) {
+          if(!visible.has(key)) continue;
+          const r=band?.radius_mm[key]??null, detail=document.createElement('div');
+          detail.textContent=`${name} ${r===null?'表面なし':fmt(r)+' mm'}`;tooltip.append(detail);
+          if(r!==null) element(marks,'circle',{cx:px,cy:y(r),r:3,fill:`var(--viz-series-${color})`,'data-chart-hover-marker':key});
+          hover.push({key,radius_mm:r});
+        }
+        tooltip.hidden=false;
+        const svgBox=svg.getBoundingClientRect(),rootBox=root.getBoundingClientRect(),tipBox=tooltip.getBoundingClientRect();
+        tooltip.style.left=`${Math.max(4,Math.min(svgBox.left-rootBox.left+px+12,rootBox.width-tipBox.width-4))}px`;
+        tooltip.style.top=`${svgBox.top-rootBox.top+top+8}px`;
+        svg.dataset.hover=JSON.stringify({depth_mm:d,guide_x:px,band:band?.depth_mm??null,series:hover});
+      };
+      overlay.addEventListener('pointermove',event=>{if(!pinned)show(event);});
+      overlay.addEventListener('pointerleave',()=>{if(!pinned){tooltip.hidden=true;guide.setAttribute('visibility','hidden');marks.replaceChildren();}});
+      overlay.addEventListener('click',event=>{pinned=!pinned;show(event);});
+      svg.dataset.profile=JSON.stringify({width,height,x_domain:x.domain(),y_domain:y.domain(),bins:selected.profile.length,
+        data:selected.profile,visible:[...visible]});
+    }
+    function checkLabels() {
+      const labels=[...root.querySelectorAll('[data-label]')],overlaps=[];
+      for(let i=0;i<labels.length;i++) for(let j=i+1;j<labels.length;j++) {
+        const a=labels[i].getBoundingClientRect(),b=labels[j].getBoundingClientRect();
+        if(a.left<b.right+4&&a.right+4>b.left&&a.top<b.bottom+4&&a.bottom+4>b.top) overlaps.push([labels[i].textContent,labels[j].textContent]);
+      }
+      root.dataset.labelOverlaps=JSON.stringify(overlaps);
+    }
+    function draw() {
+      const selected=rows.find(row=>row.id===select.value),header=data.headers.find(h=>h.axes.includes(selected));
+      pinned=false;tooltip.hidden=true;drawMap(header,selected);drawProfile(selected);
+      const part=categories.find(c=>c[0]===selected.nearest.category)[1];
+      root.querySelector('[data-selected]').textContent=`${selected.header_label} ${selected.number} · 最短 ${fmt(selected.nearest.radius_mm)} mm · ${part}`;
+      root.dataset.observation=JSON.stringify({id:selected.id,axes_total:rows.length,nearest:selected.nearest,frame:selected.frame});
+      requestAnimationFrame(checkLabels);root.dataset.ready='true';
+    }
+    select.addEventListener('change',draw);new ResizeObserver(draw).observe(root);draw();
+  })();
+  </script>
+</div>

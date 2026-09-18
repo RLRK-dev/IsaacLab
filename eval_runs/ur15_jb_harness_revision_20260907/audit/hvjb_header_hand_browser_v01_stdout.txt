@@ -1,0 +1,8 @@
+file:///home/rlrk/IsaacLab-op040/eval_runs/ur15_jb_harness_revision_20260907/scripts/check_hvjb_header_hand_access_v01.mjs:120
+        if(!band||hover.tooltip_hidden||Math.abs(hover.guide_x-hover.expected_x)>1e-6)throw new Error('Hover guide displaced');
+                                                                                            ^
+
+Error: Hover guide displaced
+    at file:///home/rlrk/IsaacLab-op040/eval_runs/ur15_jb_harness_revision_20260907/scripts/check_hvjb_header_hand_access_v01.mjs:120:93
+
+Node.js v22.21.1

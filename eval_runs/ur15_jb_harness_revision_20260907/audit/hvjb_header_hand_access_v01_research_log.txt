@@ -1,0 +1,69 @@
+2026-09-18 JST / H05 header-hand surface observation
+
+Prior-art and scope
+- Exact guard keywords: ヘッダー 工具 フィンガ.
+- Exit 2, findings 30, blockers 3, lessons 2. The initial abbreviated tool
+  output was read again with the same keywords to obtain the entire result.
+- The three blockers are the main, archive and delivery copies of the old
+  v05 OP030A wrist/M4 collision and lift record. The two lesson matches refer
+  to the same 2026-09-08 direct-mounted-tool / three-ST user decision.
+- Before source work or geometry observation, logged the distinct current
+  TE P16/P17 H05 read-only scope at 2026-09-18 10:53:47 in the main Vault.
+- H05 / 区間投影 / 最近点 returned exit 0, findings 0 before the validator repair.
+  The repair delta was logged before the second full observation at 11:20:53.
+
+Reuse and inputs
+- Read existing H05 hand_profile, motion_bank, header build/native probe,
+  nominal 14-axis audit, and the previous screw-condition readback.
+- Reused probe_hand_tool_access_v01.py's complete slab clipping and projection.
+  All 10 hardware, 2 carrier and 2 pad meshes are included. No geometry
+  simplification, scaling, new IK, arm motion or native save.
+- Public TE hole-pattern data and saved local CAD are inherited from the prior
+  source audits. No new manufacturer dimension or torque was adopted.
+- D3 7.9.0 is used only for the inline plot's numeric scales and paths,
+  loaded as a static script from the skill-approved jsDelivr URL.
+
+Non-measurement setup errors
+- A few read commands used the main repo or the revision directory for a path
+  belonging to the worktree root/revision. They returned missing-file errors.
+  Absolute/correct-worktree paths were then read. No source was changed by them.
+- Ruff reported overlong descriptive string lines in the new scripts; these
+  were split without changing values. Final selected-rule checks and format
+  checks passed before execution.
+
+First geometry observation
+- Preserved complete stdout/stderr in hvjb_header_hand_access_v01_stdout.txt.
+- It stopped at P16 index 2 / frame 635 in a separate witness validator.
+- Wrapper exit 0 did not mean completion: the log contained AssertionError,
+  no completion marker, and no completed output JSON was written.
+- Reproduction in hvjb_header_hand_access_v01_witness_diagnostic.json stores
+  the full triangle, witness, original validator result and initial script SHA.
+- Installed trimesh 4.12.2 closest_point returned an edge point 8.221789998819555e-9 m
+  away from a point in the triangle interior. Its internal absolute tolerance
+  is 1e-13. Longest-edge normalization before this validator produced error 0;
+  an independent least-squares barycentric reconstruction also had residual 0.
+- Changed only the validator coordinate translation/normalization. Preserved
+  the reused measurement algorithm, 2 mm bins and 1e-10 m numeric comparison.
+- The old validator fails on the same reproduction; the corrected validator
+  passes. An intentionally 1 um off-plane point is rejected. Values and hashes
+  are in hvjb_header_hand_access_v01_validator_check.json.
+- Second observation completed all 14 axes, rechecked 43 protected inputs and
+  read back its JSON. Full log: hvjb_header_hand_access_v01_run2_stdout.txt.
+
+Figure checks
+- Initial figure and display JSON retained. Browser check failed only at the
+  cursor guide's numeric equality. The diagnostic repeat added error details:
+  expected 334.928 px, SVGPoint/D3 gave 334.9280090332031 px.
+- The final p02 figure computes pointer coordinates from the element's CSS
+  bounding box and current viewBox width, without the SVGPoint float conversion.
+  No distance data, figure domain, measurement or check tolerance changed.
+- Both failed browser logs are preserved as *_browser_v01_stdout.txt and
+  *_browser_v01_diag_stdout.txt. The final p02 check passed 56 selections:
+  14 axes x 736/320 px x light/dark. No JavaScript exceptions.
+- Every plot's 52 intervals and three categories matched the saved display
+  data. Hover interval values, guide/marker alignment, legend toggle, complete
+  header-axis labels and label bounds were checked. Eight screenshots saved.
+- The 736 px light P16_2 and 320 px dark P17_14 screenshots were visually read:
+  the diagrams, profile series, units, selection and scope caption were legible.
+- No video was generated. These are auxiliary numeric/display observations,
+  not a tool selection, process completion or formal physical-validity verdict.

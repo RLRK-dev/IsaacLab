@@ -1,0 +1,18 @@
+HEADER_HAND_AXIS_OBSERVED P16 0 frame 575 radius_m 0.010930004574565872 object left_left_header_pad
+HEADER_HAND_AXIS_OBSERVED P16 1 frame 605 radius_m 0.008549999999996657 object left_left_header_carrier
+Traceback (most recent call last):
+  File "/home/rlrk/IsaacLab-op040/eval_runs/ur15_jb_harness_revision_20260907/scripts/probe_hvjb_header_hand_access_v01.py", line 248, in <module>
+    main()
+  File "/home/rlrk/IsaacLab-op040/eval_runs/ur15_jb_harness_revision_20260907/scripts/probe_hvjb_header_hand_access_v01.py", line 210, in main
+    observe_header(
+  File "/home/rlrk/IsaacLab-op040/eval_runs/ur15_jb_harness_revision_20260907/scripts/probe_hvjb_header_hand_access_v01.py", line 179, in observe_header
+    row = observe_axis(axis, pose, objects, settings)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/rlrk/IsaacLab-op040/eval_runs/ur15_jb_harness_revision_20260907/scripts/probe_hvjb_header_hand_access_v01.py", line 144, in observe_axis
+    rows = {name: observe_band(group, band, axis, tolerance) for name, group in groups.items()}
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/rlrk/IsaacLab-op040/eval_runs/ur15_jb_harness_revision_20260907/scripts/probe_hvjb_header_hand_access_v01.py", line 113, in observe_band
+    assert error < tolerance, (name, index, error)
+           ^^^^^^^^^^^^^^^^^
+AssertionError: ('hardware_left_left_inner_knuckle_0', 41238, 8.221789998819555e-09)
+[INFO] Using Python: "/home/rlrk/src/ur15-line-render/venv/bin/python"

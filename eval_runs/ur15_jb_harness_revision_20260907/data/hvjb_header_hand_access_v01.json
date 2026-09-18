@@ -1,0 +1,44 @@
+{
+  "recorded_on": "2026-09-18",
+  "scope": "Read-only radial observations of the saved H05 flange-holding meshes at fourteen saved fastening poses",
+  "previous_readback": "audit/hvjb_header_screw_options_v01_readback.json",
+  "header_axes": "audit/hvjb_header_fastening_v01.json",
+  "header_settings": "data/hvjb_header_fastening_inputs_v01.json",
+  "hand_meshes": "data/header_review_v03/meshes.json.gz",
+  "motion_bank": "data/header_review_v03/motion.npz",
+  "prepare_record": "audit/header_review_v03_prepare.json",
+  "build_record": "audit/header_review_v03_p03_build.json",
+  "prior_native_probe": "audit/header_review_v03_p03_probe.json",
+  "reused_distance_script": "scripts/probe_hand_tool_access_v01.py",
+  "additional_sha256": {
+    "data/header_review_v03/motion.npz": "b84b0f77a20cf2dd61c512514f4183c70bd3486e44b5c47dbcc8146b1be1b1e9",
+    "audit/header_review_v03_prepare.json": "a898d97a94a4ea2b9b1e1935f779738d7ab9743012ff2929b1449e268ddf3b1d",
+    "audit/header_review_v03_p03_build.json": "1f8066ef76c6778bca18ccd90e5a3d7738314164f0002a0fe5dbbd1651c80ec8",
+    "audit/header_review_v03_p03_probe.json": "e11920ee22dcbfbdb5ef2fffa683571c79b7519df82b9cd89f695cde95089d38",
+    "UR15_JB_initial_hands_v03_p03.blend": "2b828f98402cc95033ed62a380cdea0fb04f95bb31cae0d525b98357cd870614",
+    "scripts/prepare_header_review_v03.py": "6743845f7fd3f67de4c3b939ec0d8145882e51838bc952e3d993b716d3045ae6"
+  },
+  "measurement": {
+    "saved_movie_offset_s": 12.0,
+    "sample_after_authored_fastening_start_s": 0.3,
+    "profile_bin_depth_m": 0.002,
+    "numeric_comparison_tolerance_m": 1e-10,
+    "expected_objects_per_pose": 14,
+    "expected_triangles_per_pose": 51580,
+    "categories": ["hardware", "insert", "contact_pad"],
+    "coordinates_ja": "ヘッダー局所X=右、Y=筐体側、Z=上。軸方向深さd=-Yは筐体の基準外面から外側へ正。計算器へは(x-X軸,z-Z軸,-y)の右手系剛体変換で渡す。",
+    "depth_bin_meaning_ja": "2 mm区間内の全三角形を境界で切り、その投影表面までの最短半径。中央一点の断面値ではない。数値許容差は丸め検査用で、製造・受入公差ではない。"
+  },
+  "guard_disposition_ja": "ヘッダー/工具/フィンガ guardは30件・blocker3・lesson2、exit2。旧v05支持部の手首/M4干渉と複製記録を読み、2026-09-18 10:53:47 JSTのVault logに、現行TEヘッダーH05の保存形状を読む別対象であることを実行前記録。旧軌道の再実行・形状変更・縮小・除外は行わない。",
+  "limits_ja": [
+    "保存配列の14時点を読む。新しいFK/IK、腕軌道、nativeの再保存は行わない。",
+    "全H05機構・キャリア・接触パッドを含む。ロボット腕、カメラ、筐体、ヘッダー自体、隣ヘッダー、別の保持手、配線は距離の対象外であり、線全体の余裕ではない。",
+    "メッシュ表面距離であり、閉体への包含や荷重、連続移動、工具の供給動作、保持・締結品質を判定しない。",
+    "実工具のビット係合/TCP/供給ノーズ/ストロークが未確定。距離を実工具の使用可能径や成立判定にしない。",
+    "旧H05専用形状はレビュー用。S5_ABのロボット型式や初期姿勢を新たに採用するものではない。"
+  ],
+  "selected_tool": null,
+  "selected_fastener": null,
+  "fastening_tcp_m": null,
+  "physical_acceptance_verdict": null
+}
