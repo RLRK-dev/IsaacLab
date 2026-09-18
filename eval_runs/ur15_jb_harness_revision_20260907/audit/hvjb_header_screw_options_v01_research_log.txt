@@ -1,0 +1,68 @@
+2026-09-18 JST | Research observations; not a model or script rerun log
+
+Prior-art guard: scripts/check_thread_vault_prior_art.sh --fail-on-blocker ヘッダー M4 止まり穴
+findings=0 blockers=0 lessons=0, exit 0.
+Prior-art guard: scripts/check_thread_vault_prior_art.sh --fail-on-blocker 座金 首下長 ねじ受け
+findings=0 blockers=0 lessons=0, exit 0.
+Reuse search over main source/, scripts/, thread_isaac_lab/ returned the existing Vault log.
+Existing build_header_review_v03.py and saved header observation were read.
+
+Local HTML fetch:
+https://www.nbk1560.com/en-US/products/specialscrew/nedzicom/screw_with_washer/SNPI1S/
+No HTML was saved. The wrapper returned exit 0 despite this Python exception:
+
+Traceback (most recent call last):
+  File "<string>", line 13, in <module>
+  File "/usr/lib/python3.12/urllib/request.py", line 215, in urlopen
+    return opener.open(url, data, timeout)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/urllib/request.py", line 521, in open
+    response = meth(req, response)
+               ^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/urllib/request.py", line 630, in http_response
+    response = self.parent.error(
+               ^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/urllib/request.py", line 559, in error
+    return self._call_chain(*args)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/urllib/request.py", line 492, in _call_chain
+    result = func(*args)
+             ^^^^^^^^^^^
+  File "/usr/lib/python3.12/urllib/request.py", line 639, in http_error_default
+    raise HTTPError(req.full_url, code, msg, hdrs, fp)
+urllib.error.HTTPError: HTTP Error 403: Forbidden
+[INFO] Using Python: "/home/rlrk/src/ur15-line-render/venv/bin/python"
+
+The public product page was readable through web search/open. A subsequent public search
+returned separate manufacturer PDF URLs. Those PDFs downloaded successfully, without
+retrying the failed HTML URL or changing any authentication/access setting.
+
+NBK_PDF_SAVED 2026-09-17T23:46:40.992909+00:00
+https://www.nbk1560.com/images/ja-JP/product/miniaturescrew/SNPI1S/SNPI1S_1.pdf
+429188 bytes, SHA256 6b6773014c4cb7db2ec04264d0cfe5bf8608aba5816fa9c14fea270918d61dca
+
+SFB_PDF_SAVED 2026-09-17T23:53:41.086151+00:00
+https://www.nbk1560.com/images/ja-JP/product/socketheadcapscrew/SFBS/SFBS_1.pdf
+427212 bytes, SHA256 2da298a9ba4b5fe10eff249533ede600708fccf77cfb18ff2fb9ec7d607c161f
+
+pdftotext and pdftoppm each emitted this warning for both NBK PDFs (exit 0):
+Syntax Warning: Invalid Font Weight
+The complete single-page drawings, tables and notes were visually read after rendering.
+The TE 408-32095 page 2, and both header drawing page 1 images, were also visually read.
+No revision/date was inferred from a search engine's PDF publication/crawl date.
+
+Other read-only inspection issues:
+- The sparse OP040 worktree has no root AGENTS.md; the user-supplied root instructions
+  and the local eval-run AGENTS.md were applied.
+- A broad /tmp inventory encountered permission-denied messages in system-owned folders.
+  The two known, task-owned TE page images were found and read; no permission changes.
+- Initial JSON schema inspection used the nonexistent key 'headers' and raised KeyError.
+  The printed top-level keys showed 'models'; inspection was corrected to that key.
+  This did not write or measure anything and is not an error in the comparison script.
+- A web open of Bossard's f-047-en.pdf returned Internal Error. Its search excerpt was
+  not adopted as a torque or fastener-selection input.
+
+Final numerical script:
+analyze_hvjb_header_screw_options_v01.py completed without an exception.
+Full execution stdout is hvjb_header_screw_options_v01_stdout.txt.
+No source model, prior observation, threshold or geometry was changed.

@@ -1,0 +1,142 @@
+{
+  "recorded_on": "2026-09-18",
+  "scope_ja": "公開ねじの条件比較と、保存済みCAD平面を使った名目積層の計算。Ampere採用品の同定や実装用ねじの選定ではない。",
+  "previous_observation": "audit/hvjb_header_fastening_v01.json",
+  "previous_observation_sha256": "5fefe650b9ea5627a914769a5482fc66a283702d4b51bdca4c88a51ef53e55cc",
+  "sources": [
+    {
+      "id": "TE_INSTALL",
+      "path": "references/connector_correction_20260915/te_408_32095_instruction.pdf",
+      "sha256": "cd13cd856b679e2683f7672f079bd4c99ff87ac2e361d3da73700e12c12fa63d",
+      "url": "https://www.te.com/commerce/DocumentDelivery/DDEController?Action=srchrtrv&DocFormat=pdf&DocLang=English&DocNm=408-32095&DocType=Specification+Or+Standard&PartCntxt=2103340-1",
+      "revision": "B, 2013-11-06",
+      "pages_read": [1, 2, 3],
+      "pages_visually_read_this_step": [2]
+    },
+    {
+      "id": "TE_3BAY",
+      "path": "references/connector_correction_20260915/te_2103340_drawing.pdf",
+      "sha256": "be59744129dc5134d2a3363e25af93294e662cde4254ec28411b80bd01673dc6",
+      "url": "https://www.te.com/en/product-2103340-1.html",
+      "revision": "A2, 2017-08-08",
+      "pages_visually_read_this_step": [1]
+    },
+    {
+      "id": "TE_2BAY",
+      "path": "references/connector_correction_20260915/te_2103346_drawing.pdf",
+      "sha256": "fbdeb1d56aba02ae85ed2464b3acd68ce6444cd47179f33225d7f0ba1b580e28",
+      "url": "https://www.te.com/en/product-2103346-2.html",
+      "revision": "A3, 2019-05-07",
+      "pages_visually_read_this_step": [1]
+    },
+    {
+      "id": "NBK_SNPI1S",
+      "path": "references/hvjb_header_screw_followup_20260918/nbk_snpi1s_catalog.pdf",
+      "sha256": "6b6773014c4cb7db2ec04264d0cfe5bf8608aba5816fa9c14fea270918d61dca",
+      "url": "https://www.nbk1560.com/images/ja-JP/product/miniaturescrew/SNPI1S/SNPI1S_1.pdf",
+      "bytes": 429188,
+      "retrieved_at": "2026-09-17T23:46:40.992909+00:00",
+      "revision": null,
+      "pages_visually_read_this_step": [1]
+    },
+    {
+      "id": "NBK_SFB",
+      "path": "references/hvjb_header_screw_followup_20260918/nbk_sfb_catalog.pdf",
+      "sha256": "2da298a9ba4b5fe10eff249533ede600708fccf77cfb18ff2fb9ec7d607c161f",
+      "url": "https://www.nbk1560.com/images/ja-JP/product/socketheadcapscrew/SFBS/SFBS_1.pdf",
+      "bytes": 427212,
+      "retrieved_at": "2026-09-17T23:53:41.086151+00:00",
+      "revision": null,
+      "pages_visually_read_this_step": [1]
+    }
+  ],
+  "te_conditions": {
+    "fastener_supply": "customer supplied",
+    "thread": "M4",
+    "torque_range_nm": [2.0, 2.5],
+    "length_m": null,
+    "minimum_retention_diameter_m": 0.0086,
+    "maximum_head_diameter_m": 0.0087,
+    "maximum_height_outside_head_diameter_m": 0.0008,
+    "holes": "blind, per fastener specification; maximize thread engagement",
+    "minimum_wall_thickness_m": 0.003,
+    "thread_depth_m": null,
+    "positioning_hole_depth_is_not_thread_depth": true
+  },
+  "catalog_examples": [
+    {
+      "id": "SNPI1S-M4",
+      "source": "NBK_SNPI1S",
+      "thread": "M4",
+      "pitch_m": 0.0007,
+      "lengths_for_comparison_m": [0.008, 0.01],
+      "head_diameter_m": 0.007,
+      "retention_diameter_m": 0.009,
+      "head_height_m": 0.0026,
+      "outside_height_m": 0.0008,
+      "separate_washer_in_under_head_length_m": 0.0008,
+      "length_origin_ja": "図のLはねじ頭下面から先端。座金厚さtを含むため、ヘッダーの前でtを一度差し引く。",
+      "drive": "Phillips cross recess No. 2",
+      "drive_depth_m": null,
+      "material": "SUSXM7, A2-50; captive plain washer SUS304",
+      "published_max_torque_nm": null,
+      "manufacturing_tolerance_limits": null,
+      "selected": false
+    },
+    {
+      "id": "SFB-M4",
+      "source": "NBK_SFB",
+      "thread": "M4",
+      "pitch_m": 0.0007,
+      "lengths_for_comparison_m": [0.008, 0.01],
+      "head_diameter_m": 0.0068,
+      "retention_diameter_m": 0.0092,
+      "head_height_m": 0.0022,
+      "outside_height_m": 0.0007,
+      "separate_washer_in_under_head_length_m": 0,
+      "length_origin_ja": "図のLは一体フランジ下面から先端。フランジ厚t1をLから重ねて差し引かない。",
+      "drive": "hex socket, across flats 2.5 mm",
+      "drive_depth_m": 0.0013,
+      "drive_depth_scope_ja": "カタログ寸法t。選定済みビットの実係合深さではない。",
+      "material": "SCM435, black oxide, property class 10.9",
+      "published_max_torque_nm": 2.0,
+      "manufacturing_tolerance_limits": null,
+      "selected": false
+    },
+    {
+      "id": "SFBS-M4",
+      "source": "NBK_SFB",
+      "thread": "M4",
+      "pitch_m": 0.0007,
+      "lengths_for_comparison_m": [],
+      "head_diameter_m": 0.0068,
+      "retention_diameter_m": 0.0092,
+      "head_height_m": 0.0022,
+      "outside_height_m": 0.0007,
+      "separate_washer_in_under_head_length_m": 0,
+      "length_origin_ja": "SFBと共通の寸法図。トルク条件は別のSFBS行から読む。",
+      "drive": "hex socket, across flats 2.5 mm",
+      "drive_depth_m": 0.0013,
+      "material": "SUSXM7, A2-50",
+      "published_max_torque_nm": 0.5,
+      "manufacturing_tolerance_limits": null,
+      "selected": false
+    }
+  ],
+  "conditional_calculation": {
+    "support_plane_ja": "前段で観測した頭部近傍のCAD平面に、座金または一体フランジの下面が着くと仮定する。実際の接触・受圧面の検証ではない。",
+    "formula": "tip_world_y = saved_plane_world_y - separate_washer_in_under_head_length + nominal_length",
+    "height_scope_ja": "頭部外側端を計算するが、ビット係合深さと締結TCPは設定しない。",
+    "penetration_scope_ja": "壁外面から先端までの名目進み量。面取り・不完全ねじ山・下穴形状を差し引いておらず、有効ねじ掛かり長さではない。"
+  },
+  "unresolved_inputs": [
+    "実ねじの型式・長さ・公差・対応トルクとビット",
+    "受け側の材質、局所厚さ、入口と底の形状、有効ねじ深さ",
+    "必要なねじ掛かりと底部条件の設計指定",
+    "実際のヘッダー・シールの着座位置と積層のばらつき",
+    "採用工具のノーズ・供給・ビット行程と締結TCP"
+  ],
+  "selected_fastener": null,
+  "selected_receiver_geometry": null,
+  "physical_acceptance_verdict": null
+}
