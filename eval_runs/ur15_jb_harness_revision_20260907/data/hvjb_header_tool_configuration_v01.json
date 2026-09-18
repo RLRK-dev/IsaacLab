@@ -1,0 +1,127 @@
+{
+  "recorded_on": "2026-09-18",
+  "scope_ja": "ヘッダー固定用工具の公開標準範囲と、保存CADで供給できる配置入力の照合。工具・締結条件の採用ではない。",
+  "previous_readback": "audit/hvjb_header_hand_access_v01_readback.json",
+  "interface_record": "data/hvjb_fastener_interface_sources_v01.json",
+  "screw_options_record": "data/hvjb_header_screw_options_v01.json",
+  "hand_observation": "audit/hvjb_header_hand_access_v01.json",
+  "datum_record": "data/hvjb_fastening_datum_v01.json",
+  "mount_record": "data/hvjb_fastening_mount_faces_v01.json",
+  "sources": [
+    {
+      "id": "STOEGER_CATALOG",
+      "url": "https://www.stoeger.com/files/stoeger/downloads/Broschueren/SES_1017_END_ENG_web.pdf",
+      "file": "references/hvjb_fastening_datum_20260917/SES_SEM_1017_EN.pdf",
+      "sha256": "7a2a396fb7cdc3b0aee6f51dfc792db4f21e40afc7f07b5a42470254aa9be58a",
+      "revision": "Status 10/2017",
+      "pages_visually_read_this_step": [2, 4],
+      "scope_ja": "標準表と先端機構の説明。2026年の案件別構成図・選定駆動部の仕様ではない。"
+    },
+    {
+      "id": "SES1601_DRAWING",
+      "url": "https://www.stoeger.com/de/downloads.html?file=files/stoeger/downloads/CAD/SES/automatic_screwdriver_for_screws_SES1601_series.pdf",
+      "file": "references/hvjb_fastening_cad_20260917/ses1601.pdf",
+      "sha256": "dd4bbe1c7a5217ca363b34848c7ba8f98aff2a9cf3e0755369716eb532480867",
+      "pages_visually_read_this_step": [1],
+      "scope_ja": "例示寸法。案件ごとに変わり、モーター側の長さも可変と記載。"
+    },
+    {
+      "id": "SEV2001_DRAWING",
+      "url": "https://www.stoeger.com/de/downloads.html?file=files/stoeger/downloads/CAD/SEV/automatic_screwdriver_for_screws_with_vacuum_unit_SEV2001_series.pdf",
+      "file": "references/hvjb_fastening_cad_20260917/sev2001.pdf",
+      "sha256": "10a4439f537ec6c1cf2d8bb32ea86d9a7bc4fc871e87a4a3f2f417b2540a1330",
+      "pages_visually_read_this_step": [1],
+      "scope_ja": "例示寸法。全動作状態のノーズ・真空管外形ではない。"
+    },
+    {
+      "id": "STOEGER_CONFIGURATOR",
+      "url": "https://www.stoeger.com/en/screw-dimensions.html",
+      "file": "references/hvjb_header_tool_configuration_20260918/stoeger_screw_dimensions.html",
+      "sha256": "deb85567bf74a963023ed05629097ecd9277bdc111a4cf8438354703401a272f",
+      "retrieved_at": "2026-09-18T04:04:05.110399+00:00",
+      "http_status": 200,
+      "scope_ja": "公開入力欄のみを読取。ねじ寸法・工具構成の入力、送信、メーカーへの照会は行わない。"
+    }
+  ],
+  "published_standard_rows": [
+    {
+      "model": "SES1601",
+      "source": "STOEGER_CATALOG",
+      "page_one_based": 2,
+      "torque_range_n_m": [0.03, 1.6],
+      "screw_nominal_diameter_range_m": [0.002, 0.004],
+      "maximum_screw_head_diameter_m": 0.007,
+      "feed_stroke_options_m": [0.015, 0.030],
+      "approximate_feed_stroke_m": null,
+      "vacuum_version": false,
+      "saved_example_model_key": "SES1601"
+    },
+    {
+      "model": "SES2001",
+      "source": "STOEGER_CATALOG",
+      "page_one_based": 2,
+      "torque_range_n_m": [0.2, 4.5],
+      "screw_nominal_diameter_range_m": [0.002, 0.005],
+      "maximum_screw_head_diameter_m": 0.011,
+      "feed_stroke_options_m": [0.025, 0.050],
+      "approximate_feed_stroke_m": null,
+      "vacuum_version": false,
+      "saved_example_model_key": null
+    },
+    {
+      "model": "SEV2001",
+      "source": "STOEGER_CATALOG",
+      "page_one_based": 2,
+      "torque_range_n_m": [0.2, 4.5],
+      "screw_nominal_diameter_range_m": [0.002, 0.005],
+      "maximum_screw_head_diameter_m": 0.010,
+      "feed_stroke_options_m": [],
+      "approximate_feed_stroke_m": 0.080,
+      "vacuum_version": true,
+      "saved_example_model_key": "SEV2001"
+    }
+  ],
+  "catalog_limits_ja": [
+    "ねじ径と頭径は標準例で、別寸法も可能との注記がある。未指定の特注品へ数値を拡張しない。",
+    "供給行程はビット行程・突出量・ねじへの係合深さではない。",
+    "標準表のトルク範囲が重なることは、具体的なモーター・制御器・工具構成の選定ではない。",
+    "頭径の上限と、座金・一体フランジの供給適合を区別する。SEM2001はナット用の既存例で、SES2001のCADとして流用しない。"
+  ],
+  "tip_configuration_observations": [
+    {
+      "source": "STOEGER_CATALOG",
+      "page_one_based": 1,
+      "statement_ja": "ノーズをワークに触れる手前で止め、ビットの送りを設定する構成が説明される。図面の最先端頂点を締結TCPに置換できない。"
+    },
+    {
+      "source": "STOEGER_CATALOG",
+      "page_one_based": 4,
+      "statement_ja": "真空構成は管でねじを保持し、締付工具が進む。管径はねじ頭径より約1〜2 mm大きいとの一般説明で、採用ノーズの寸法図ではない。座金付きねじにも同じ径を無条件に当てはめない。"
+    },
+    {
+      "source": "STOEGER_CONFIGURATOR",
+      "statement_ja": "公開入力欄は頭部形状、頭部またはカラーの径、高さ、軸径・軸長、トルク、周囲障害物の寸法、駆動部等を区別する。H05の最短半径だけではこの形状入力を埋められない。"
+    }
+  ],
+  "pose_inputs": {
+    "known_source_records_ja": [
+      "工具CADの保存座標、主軸、取付側平面、全メッシュと選択平面の境界",
+      "ヘッダー局所X/Z上の14ねじ軸と、H05保持メッシュの保存姿勢・2 mm区間別距離"
+    ],
+    "unresolved_ja": [
+      "採用ねじの品番・長さ・頭部/座金/駆動穴、受け側の積層と実際の着座位置",
+      "採用ビットの品番と取付時突出量、ねじへの係合基準",
+      "ノーズ・真空管・供給爪の案件別形状、開閉状態と各行程の座標",
+      "CADと取付面上の実穴配置・アダプター・回り止めの対応",
+      "ねじ軸まわりの工具向き、給材口・ホース・配線経路、干渉確認対象となる周辺形状"
+    ],
+    "mount_to_engagement_transform": null,
+    "tool_roll_rad": null,
+    "bit_engagement_depth_m": null,
+    "actual_bit_stroke_m": null,
+    "actual_nose_states": null
+  },
+  "selected_fastener": null,
+  "selected_tool_configuration": null,
+  "physical_acceptance_verdict": null
+}

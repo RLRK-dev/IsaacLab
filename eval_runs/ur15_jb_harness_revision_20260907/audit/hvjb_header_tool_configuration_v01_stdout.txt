@@ -1,0 +1,6 @@
+SES1601 published torque range [0.03, 1.6] contains TE range False
+SES2001 published torque range [0.2, 4.5] contains TE range True
+SEV2001 published torque range [0.2, 4.5] contains TE range True
+COMPLETE: 14 saved header axes linked; 69 protected files unchanged
+audit/hvjb_header_tool_configuration_v01.json
+[INFO] Using Python: "/home/rlrk/src/ur15-line-render/venv/bin/python"
