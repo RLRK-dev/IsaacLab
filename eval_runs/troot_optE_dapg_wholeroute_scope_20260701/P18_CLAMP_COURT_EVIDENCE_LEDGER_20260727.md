@@ -48309,3 +48309,12 @@ ALT-1 (downgrade) — not chosen (the human's word). ALT-2 (`agent prompt`) — 
 - ⛔ 解錠なし・run 0（当卓）・当卓は裁定しない。
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1516 — ⚠ **訂正: §1515 の見出し「idle 窓: 394 → pZ」と commit `5129048328` の subject「394 delivered to pZ」は誤り — 394 → pZ = HELD(foreign_text_in_composer)（08:58:41.481）= 死んだ leg 8 件目（§1515 本文の状態行は正しい）／idle 窓の完了: 400 → p6**（当卓 2026-09-20 08:58–09:00 JST 実測）
+
+- **誤りの経緯**: guard（08:58:41）= READY（composer ghost）→ tool の直前読みで他文 → send 行 HELD(foreign_text_in_composer)。見出しと commit subject は send 前に書いた文言をそのまま残した（当卓の記録の誤り・commit は amend せず本節で訂正）。
+- **死んだ leg 一覧（本日 8 件）**: 379 → pZ（08:23:54）／386 → p11（08:27:11）／385 → p4（08:33:51）／381 → p0（08:36:04）／377 → p11（08:39:01）／391 → p4（08:48:15）／392 → p11（08:53:15）／394 → pZ（08:58:41）。
+- **hub の動き**: **400 → p6** = DELIVERED(fused_with_unknown_prefix)（08:59:18.957 → `2026-09-19T23:59:19.271Z`）（400 の fan-out で p6 は ready(empty) だったが全体 hold）。
+- ⛔ 解錠なし・run 0（当卓）・当卓は裁定しない。
+
+**Banked — 時刻は本節 commit の author date が正。**
