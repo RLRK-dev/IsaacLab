@@ -290,3 +290,91 @@ for nm in NAMES:
         bsrc = (ast.unparse(bs[0][1]).replace("\n", " ")[:90] if bs else "<driver: not module-bound>")
         print(f"  {nm:18} {where:18} equal-to-driver={str(same):5} | H: {hsrc}\n  {'':18} {'':18} {'':17} | D: {bsrc}")
 ```
+
+## Addendum 5 (2026-09-20 08:39:08 JST) — row 4 re-pinned in the `:2812` link-centre form per v3 §17.7 @ `7427c1764c`: `GL = (0.1125, 0.28, 0.954)` cab27 / `GR = (0.1875, 0.28, 0.954)` cab32, derived twice independently (agreement 1.7e-16); addendum 2's values were the `:1241` commanded-x form and are withdrawn as the bar; the follow-up harness `ffa612ea33` still binds the `:1241` form (catch for p0)
+
+**Order of existence at writing**: p11 §17.7 landed at `7427c1764c` (2026-09-20 08:23:05 JST; design-doc commits after it = 0); harness commits after `ffa612ea33` = 1 (its rows 2-5 binding predates §17.7); HEAD `827766ffa2`. §17.7's order: this re-pin → p0's announce/follow-up → my execution. Nothing physical stepped; the driver never imported.
+
+**§17.7's three readings of the driver, checked in blob `d2bc133e1320` (base of this prereg) by me**: ① `cable_at` `:1210-1217` returns the centre of the link nearest x (body origin + `CABLE_SEG/2` along the link's x axis) — confirmed. ② two module-level bindings of `GL`/`GR`: `:1241-1242` = **x commanded** (`GRASP_CENTRE_X ∓ GRIP_HALF_SPAN`), y/z from the link; `:2812-2813` = **x/y/z all from the link centre** — confirmed by AST (the only Store sites of `GL`/`GR` are `:1241`, `:1242`, `:2812`, `:2813`). ③ `STEPS` is bound at `:2890`, after `:2812-2813`; `:3161` only maps the `RELEASE` strings — confirmed ⇒ at run time rows 2-5 command the `:2812` form. Addendum 2's `(0.106, 0.28, 0.954)` / `(0.194, 0.28, 0.954)` are exactly what `:1241-1242` bind (my instrument reproduced that form: same y/z, commanded x) — **not what `STEPS` commands**; withdrawn as the bar, links unchanged.
+
+**Row 4 (re-pinned)**: rows 2-5 targets = the emitted cell's rest state (the dump's initial state, `mj_forward`, settle 0) evaluated by the driver's own `cable_at` in the `:2812` form. Two independent derivations (appendix F, `pz_r0_targets.py`):
+- **(b-1)** the driver's `cable_at` taken from the blob text by AST segment (`:1210-1217`, segment sha256 `da0881e7b1abf365…`) and `exec`'d with `CAB` = the 40 `cab{i}` bodies, on the dump `_gen/_steps_cell_full.xml` (sha256 `4158e4e638e9b0fc0eddad324f2a0fdd8b80a77d51b9526d63d1be3cf4e2204b`, 61,833 bytes, untracked; meshes loaded from their referenced paths with unique asset keys, none substituted): **L = cab27 `(0.1125, 0.28, 0.954)`, R = cab32 `(0.1875, 0.28, 0.954)`** (x to 1.7e-16 of these decimals).
+- **(b-2)** closed form from committed constants (`ur15_cell_spec.py` blob `6bdf7ea4f9ca`, `task_config.py` blob `d86380dbe186`): `CABLE_SEG = 0.015`, `CABLE_N = 40` ⇒ `x0 = −0.300`; `c_i = (x0 + (i + ½)·CABLE_SEG, REST_Y = 0.28, REST_TOP + CABLE_R = 0.950 + 0.004)`; nearest link to `GRASP_CENTRE_X ∓ GRIP_HALF_SPAN = 0.150 ∓ 0.044` ⇒ **cab27 `(0.1125, 0.28, 0.954)`, cab32 `(0.1875, 0.28, 0.954)`**.
+- **Agreement (b-1) vs (b-2)**: links 27 == 27, 32 == 32; max |Δ| = 1.665e-16 both sides (bar 1e-9). **Equal to §17.7's stated values** to ≤ 1.7e-16. Effective `GRASP_CENTRE_X = C1[0] = 0.150`, `WORK_ROW_DY = 0.0` (both env unset at derivation). The dump's `cab0` origin `(−0.300, 0.28, 0.954)`; link-centre x span `[−0.2925, +0.2925]`.
+- **(a) U0** `(0.0986, 0.28, 0.9488)` / `(0.1886, 0.28, 0.951)` (`_gen/dod_c2_20260810/run.log :93`, sha256 `04599b84e34be51e…`) = report-only rows outside the denominator, settle offset (a) − (b) = **L `(−0.0139, 0, −0.0052)`, R `(+0.0011, 0, −0.0030)`** (computed from the two tuples; the harness must print its own).
+- Rows 6-18 unchanged (addendum 2).
+
+**Expectation table, rows 2-5 re-solved with the `:2812` targets** (my instrument `pz_r0.py` with a 2-line env override for `GL`/`GR` — `pz_r0_v2.py`, appendix G — on the closure of blob `84a372439c59` @ `96e9ece175` (closure sha256 `a87deb96fde026b3…`, identical to `d2bc133e1320`'s), composed models from `build_side` @ HEAD, `HOME_POSE` start, seed 1, `n_try` 22, `mj_step` calls 0, driver family in `sys.modules` = []):
+
+| step | L target | L conv / solved / pe mm (was) | R target | R conv / solved / pe mm (was) |
+|---|---|---|---|---|
+| 2 | (0.1125, 0.28, 1.03) | ✓ / 10 / 0.0 (was 11 / 1.2652) | (0.1875, 0.28, 1.03) | ✓ / 13 / 0.0 (unchanged) |
+| 3 | (0.1125, 0.28, 0.954) | ✓ / 13 / 0.0 (unchanged) | (0.1875, 0.28, 0.954) | ✓ / 13 / 0.0 (unchanged) |
+| 4 | (0.1125, 0.28, 0.954) | ✓ / 13 / 0.0 (unchanged) | (0.1875, 0.28, 0.954) | ✓ / 13 / 0.0 (unchanged) |
+| 5 | (0.1125, 0.28, 1.03) | ✓ / 10 / 0.0 (was 11 / 1.2652) | (0.1875, 0.28, 1.03) | ✓ / 13 / 0.0 (unchanged) |
+
+Rows 6-18: conv/solved/pe identical to addendum 3's table on both sides. Totals **L 17/17, R 17/17**; stop-cause tag on every row: none. Still convergence only (Rs1 Q1); the non-discrimination finding of addendum 3 stands (not re-measured here).
+
+**Catch for p0's follow-up (order per §17.7: after this re-pin)**: the follow-up harness `ffa612ea33` `_targets()` `:930-932` binds rows 2-5 to `x = C1[0] ∓ GRIP_HALF_SPAN, y = REST_Y, z = REST_TOP + CABLE_R` = `(0.106, 0.28, 0.954)` / `(0.194, 0.28, 0.954)` = the **`:1241` form** (x off by 6.5 mm per side from the `:2812` form; links unchanged). Under §17.7 the harness must: bind the `:2812` form; derive it by both routes (driver `cable_at` on the dump with its sha printed; closed form from the constants), print both values, the link numbers and the effective `GRASP_CENTRE_X`/`WORK_ROW_DY`, and **STOP with the instrument tag** if the routes disagree by > 1e-9; solve the (a) U0 targets as extra rows tagged 「settled example (U0)」 outside the denominator and print the settle offset (a) − (b) per side (3 components) with the log sha and the `:2814` print line. Rows 6-18 unchanged. My execution (rows 2a, 3, 5-11) waits for that follow-up per §17.7's order; when it lands, the table above is the expectation for rows 2-5.
+
+Supersedes sha `9088954e1e8f70b55925373d953fba7e3492ee3ba94a1d73c72433d6dd4fde74` @ e8a2d6d02a (rows 1-11, 1′, addenda 2-4 stand, with row 4 in this form).
+
+## Appendix F — `pz_r0_targets.py` (verbatim; sha256 caf8fd117fae7f2869f82936126f4b30bd99ba82bbfb919c3555b60ba223439a)
+```python
+"""pZ row-4 re-pin (v3 §17.7): rows 2-5 targets by two independent routes.
+(b-1) the driver's own cable_at rule (blob text, :1210-1216) on the emitted cell dump's initial state (mj_forward, no settle);
+(b-2) the closed form from the cell constants: c_i = (x0 + (i+1/2)*CABLE_SEG, REST_Y, REST_TOP + CABLE_R), x0 = -CABLE_SEG*CABLE_N/2.
+Both in the :2812 form (x/y/z = link centre).  Nothing stepped; the driver is never imported."""
+import sys, re, os, hashlib, ast, numpy as np, mujoco
+DUMP, MESHDIR, BLOB, SPECDIR = sys.argv[1:5]
+raw = open(DUMP, "rb").read(); print("dump sha256", hashlib.sha256(raw).hexdigest(), "bytes", len(raw))
+xml = raw.decode()
+# assets: resolve each mesh file to the mesh dir and give every <mesh> element a unique file key
+assets = {}; n = [0]
+def sub(mo):
+    n[0] += 1; ref = mo.group(1); src = ref if os.path.isabs(ref) else os.path.join(MESHDIR, ref)
+    assert os.path.exists(src), f"mesh missing on disk: {src}"      # no silent substitution of geometry
+    key = f"{n[0]:02d}_{os.path.basename(ref)}"                        # MuJoCo keys assets by basename -> make each unique
+    assets[key] = open(src, "rb").read(); return f'file="{key}"'
+xml2 = re.sub(r'file="([^"]+)"', sub, xml)
+m = mujoco.MjModel.from_xml_string(xml2, assets); d = mujoco.MjData(m)
+mujoco.mj_forward(m, d)   # initial state = the emitter's rest placement, settle 0
+# constants from the committed spec (imported from its dir; the spec is constants only)
+sys.path.insert(0, SPECDIR); import ur15_cell_spec as sp
+CABLE_SEG, CABLE_N, REST_Y, REST_TOP, CABLE_R = sp.CABLE_SEG, sp.CABLE_N, sp.REST_Y, sp.REST_TOP, sp.CABLE_R
+GRASP_CENTRE_X = float(os.environ.get("GRASP_CENTRE_X", sp.C1[0])); GRIP_HALF_SPAN = sp.GRIP_HALF_SPAN
+print("constants:", dict(CABLE_SEG=CABLE_SEG, CABLE_N=CABLE_N, REST_Y=REST_Y, REST_TOP=REST_TOP, CABLE_R=CABLE_R, GRASP_CENTRE_X=GRASP_CENTRE_X, GRIP_HALF_SPAN=GRIP_HALF_SPAN,
+      env_GRASP_CENTRE_X=os.environ.get("GRASP_CENTRE_X"), env_WORK_ROW_DY=os.environ.get("WORK_ROW_DY")))
+# (b-1): the driver's cable_at, taken from the blob text by AST segment and exec'd with CAB/d/np/CABLE_SEG bound
+src = open(BLOB).read(); tree = ast.parse(src)
+fn = [s for s in tree.body if isinstance(s, ast.FunctionDef) and s.name == "cable_at"][0]
+seg = ast.get_source_segment(src, fn); print("cable_at from blob :%d-%d sha256 %s" % (fn.lineno, fn.end_lineno, hashlib.sha256(seg.encode()).hexdigest()[:16]))
+CAB = [mujoco.mj_name2id(m, mujoco.mjtObj.mjOBJ_BODY, f"cab{i}") for i in range(CABLE_N)]
+assert min(CAB) >= 0, "cab bodies missing"
+ns = {"np": np, "d": d, "CAB": CAB, "CABLE_SEG": CABLE_SEG}; exec(seg, ns); cable_at = ns["cable_at"]
+gL, iL = cable_at(GRASP_CENTRE_X - GRIP_HALF_SPAN); gR, iR = cable_at(GRASP_CENTRE_X + GRIP_HALF_SPAN)
+GL_2812 = (float(gL[0]), float(gL[1]), float(gL[2])); GR_2812 = (float(gR[0]), float(gR[1]), float(gR[2]))
+GL_1241 = (float(GRASP_CENTRE_X - GRIP_HALF_SPAN), float(gL[1]), float(gL[2])); GR_1241 = (float(GRASP_CENTRE_X + GRIP_HALF_SPAN), float(gR[1]), float(gR[2]))
+print(f"(b-1) driver cable_at on the dump: L=cab{iL} {GL_2812}  R=cab{iR} {GR_2812}   [:2812 form]")
+print(f"      the :1241 form (commanded x, y/z from the link): L {GL_1241}  R {GR_1241}")
+# (b-2): closed form
+x0 = -CABLE_SEG * CABLE_N / 2.0
+def closed(x):
+    i = int(np.argmin([abs(x0 + (k + 0.5) * CABLE_SEG - x) for k in range(CABLE_N)]))
+    return (x0 + (i + 0.5) * CABLE_SEG, REST_Y, REST_TOP + CABLE_R), i
+cL, jL = closed(GRASP_CENTRE_X - GRIP_HALF_SPAN); cR, jR = closed(GRASP_CENTRE_X + GRIP_HALF_SPAN)
+print(f"(b-2) closed form: x0={x0} L=cab{jL} {cL}  R=cab{jR} {cR}")
+dL = max(abs(a - b) for a, b in zip(GL_2812, cL)); dR = max(abs(a - b) for a, b in zip(GR_2812, cR))
+print(f"agreement (b-1) vs (b-2): links {iL}=={jL} {iR}=={jR}; max|diff| L={dL:.3e} R={dR:.3e}  (bar 1e-9: {'OK' if max(dL,dR)<=1e-9 and iL==jL and iR==jR else 'STOP'})")
+print(f"p11 §17.7 values (0.1125, 0.28, 0.954)/(0.1875, 0.28, 0.954): max|diff| L={max(abs(a-b) for a,b in zip(GL_2812,(0.1125,0.28,0.954))):.3e} R={max(abs(a-b) for a,b in zip(GR_2812,(0.1875,0.28,0.954))):.3e}")
+print(f"cab bodies {CABLE_N}; cab0 origin {np.round(d.xpos[CAB[0]],4)}; link-centre x span [{min(float(np.array(d.xpos[b])[0]+CABLE_SEG/2) for b in CAB):.4f}, {max(float(np.array(d.xpos[b])[0]+CABLE_SEG/2) for b in CAB):.4f}]; mj_step calls 0 (never called)")
+```
+
+## Appendix G — `pz_r0_v2.py` = appendix C's `pz_r0.py` with one line replaced (verbatim delta; v2 sha256 f22116e367e6ac40dbc9f49468fefb792fc18669b3578ef5dc64475862897096)
+```text
+- GL, GR = (0.106, 0.28, 0.954), (0.194, 0.28, 0.954); C1, C2 = spec.C1, spec.C2; H = spec.GRIP_HALF_SPAN
++ GL, GR = (0.106, 0.28, 0.954), (0.194, 0.28, 0.954)
++ if os.environ.get("PZ_R0_GLGR"): GL, GR = [tuple(float(v) for v in s.split(",")) for s in os.environ["PZ_R0_GLGR"].split(";")]   # v2: row-4 re-pin (v3 §17.7, :2812 link-centre form) via env; default = the addendum 2 (:1241-form) values
++ C1, C2 = spec.C1, spec.C2; H = spec.GRIP_HALF_SPAN
+```
+Run: `PZ_R0_GLGR="0.1125,0.28,0.954;0.1875,0.28,0.954" python pz_r0_v2.py <blob 84a372439c59 as text> <git archive of the sim dir> L|R <out.json> own`.
