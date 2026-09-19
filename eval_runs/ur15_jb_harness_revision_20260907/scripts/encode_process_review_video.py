@@ -18,8 +18,12 @@ ROOT = Path(__file__).resolve().parents[1]
 
 
 def collect_frames(folders: list[str], plan_path: Path) -> tuple[dict, dict, list[dict], dict]:
-    """Verify native-to-PNG mapping and the saved process camera at every sample."""
+    """Verify native or explicitly identified saved-sample PNG provenance."""
     plan = json.loads(plan_path.read_text())
+    if plan.get("source_kind") == "saved_geometry_samples":
+        from collect_saved_geometry_review import collect_saved_geometry_frames
+
+        return collect_saved_geometry_frames(folders, plan_path)
     native_sha = digest(ROOT / plan["native"])
     assert plan["native_sha256"] == native_sha
     assert plan["motion_sha256"] == digest(ROOT / "data" / plan["motion"])
@@ -66,10 +70,20 @@ def encode(plan_path: Path, folders: list[str], basename: str) -> Path:
     if any(path.exists() for path in (output, captions, report_path)):
         raise FileExistsError("Keep existing videos and observations unchanged; choose a new version")
     plan, records, manifests, settings = collect_frames(folders, plan_path)
-    mapping = [
-        dict(native_frame=frame, camera=row["camera"], png_sha256=row["sha256"])
-        for frame, row in sorted(records.items())
-    ]
+    mapping = []
+    for frame, row in sorted(records.items()):
+        item = dict(camera=row["camera"], png_sha256=row["sha256"])
+        if plan.get("source_kind") == "saved_geometry_samples":
+            item.update(
+                output_sample_index=len(mapping),
+                source_sample={
+                    key: row[key]
+                    for key in ("feature_id", "saved_frame", "saved_bank_index", "saved_time_s", "display_segment")
+                },
+            )
+        else:
+            item["native_frame"] = frame
+        mapping.append(item)
     duration = len(mapping) / 15
     captions_write(captions, plan, duration)
     with tempfile.TemporaryDirectory(prefix="process_review_", dir=ROOT / "previews") as temporary:
@@ -150,6 +164,7 @@ def encode(plan_path: Path, folders: list[str], basename: str) -> Path:
         shutil.move(pending, output)
     metadata["format"]["filename"] = str(output)
     report = dict(
+        source_kind=plan.get("source_kind", "native_process"),
         native_sha256=plan["native_sha256"],
         motion_sha256=plan["motion_sha256"],
         presentation_sha256=digest(plan_path),

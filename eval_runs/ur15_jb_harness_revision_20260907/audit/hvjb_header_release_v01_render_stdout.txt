@@ -1,0 +1,14 @@
+Traceback (most recent call last):
+  File "/home/rlrk/IsaacLab-op040/eval_runs/ur15_jb_harness_revision_20260907/scripts/render_hvjb_header_release_v01.py", line 214, in <module>
+    main()
+  File "/home/rlrk/IsaacLab-op040/eval_runs/ur15_jb_harness_revision_20260907/scripts/render_hvjb_header_release_v01.py", line 163, in main
+    images, camera = _render_all(
+                     ^^^^^^^^^^^^
+  File "/home/rlrk/IsaacLab-op040/eval_runs/ur15_jb_harness_revision_20260907/scripts/render_hvjb_header_release_v01.py", line 90, in _render_all
+    pose=_look_at(offset, [0, 0, 0.15]),
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/rlrk/IsaacLab-op040/eval_runs/ur15_jb_harness_revision_20260907/scripts/render_hvjb_fastening_cad_v01.py", line 40, in _look_at
+    camera_z = eye - target
+               ~~~~^~~~~~~~
+TypeError: unsupported operand type(s) for -: 'list' and 'list'
+[INFO] Using Python: "/home/rlrk/src/ur15-line-render/venv/bin/python"

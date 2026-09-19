@@ -1,0 +1,24 @@
+{
+  "recorded_on": "2026-09-20",
+  "previous_readback": "audit/hvjb_header_workpiece_v01_readback.json",
+  "sources": [],
+  "workpiece_settings": "data/hvjb_header_workpiece_v01.json",
+  "prepare_record": "audit/header_review_v03_prepare.json",
+  "saved_movie_offset_s": 12,
+  "source_opening_start_after_done_s": 0.15,
+  "source_opening_stop_after_done_s": 0.65,
+  "source_retreat_stop_after_done_s": 1.8,
+  "source_timing_basis": "Unchanged prepare_header_review_v03.py operation(); authored source timing, not production takt",
+  "scope_ja": "H05の開放・上昇区間にある保存姿勢を全点読む。現在のp03筐体とヘッダーに対する局所観測で、新しいアーム軌道・工程順序の採用ではない。",
+  "limits_ja": [
+    "形状・関節指令・保存行列を変更せず、一定の平行移動だけで現在のヘッダー位置へ対応する。IKを再実行しない。",
+    "前段と同じ全14手先と5ワーク群を含める。接触パッドも含む。",
+    "実締付工具・腕・配線・内部ハウジング・他の保持手は含めない。退避を開始できる実機条件は別に必要。",
+    "BVHの三角形対は表面の観測。包含、連続干渉、接触力、保持成立、締結品質は判定しない。",
+    "工具・ビットはユーザー指定により未選定の比較候補を維持する。"
+  ],
+  "review_playback_rate": 0.5,
+  "review_endpoint_pause_s": 2,
+  "selected_tool_configuration": null,
+  "physical_acceptance_verdict": null
+}

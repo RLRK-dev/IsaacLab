@@ -1,0 +1,24 @@
+[Script Info]
+ScriptType: v4.00+
+PlayResX: 1280
+PlayResY: 720
+WrapStyle: 0
+
+[V4+ Styles]
+Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
+Style: Main,Noto Sans CJK JP,22,&H00FFFFFF,&H00FFFFFF,&H901C2D36,&H901C2D36,0,0,0,0,100,100,0,0,3,6,0,2,22,22,18,1
+Style: Scope,Noto Sans CJK JP,17,&H00FFFFFF,&H00FFFFFF,&H901C2D36,&H901C2D36,0,0,0,0,100,100,0,0,3,4,0,8,12,12,12,1
+
+[Events]
+Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
+Dialogue: 0,0:00:00.00,0:00:15.60,Scope,,0,0,0,,H05 開放・退避の局所確認｜工具・腕・配線は対象外／実機成立は未判定
+Dialogue: 0,0:00:00.00,0:00:02.00,Main,,0,0,0,,3口ヘッダー｜開始姿勢（静止表示）｜保存姿勢を0.5倍速表示
+Dialogue: 0,0:00:02.00,0:00:02.40,Main,,0,0,0,,3口ヘッダー｜保持位置｜保存姿勢を0.5倍速表示
+Dialogue: 0,0:00:02.40,0:00:03.33,Main,,0,0,0,,3口ヘッダー｜指を開く｜保存姿勢を0.5倍速表示
+Dialogue: 0,0:00:03.33,0:00:05.73,Main,,0,0,0,,3口ヘッダー｜開放後に上へ退避｜保存姿勢を0.5倍速表示
+Dialogue: 0,0:00:05.73,0:00:07.73,Main,,0,0,0,,3口ヘッダー｜退避後（静止表示）｜保存姿勢を0.5倍速表示
+Dialogue: 0,0:00:07.73,0:00:09.73,Main,,0,0,0,,2口ヘッダー｜開始姿勢（静止表示）｜保存姿勢を0.5倍速表示
+Dialogue: 0,0:00:09.73,0:00:10.13,Main,,0,0,0,,2口ヘッダー｜保持位置｜保存姿勢を0.5倍速表示
+Dialogue: 0,0:00:10.13,0:00:11.20,Main,,0,0,0,,2口ヘッダー｜指を開く｜保存姿勢を0.5倍速表示
+Dialogue: 0,0:00:11.20,0:00:13.60,Main,,0,0,0,,2口ヘッダー｜開放後に上へ退避｜保存姿勢を0.5倍速表示
+Dialogue: 0,0:00:13.60,0:00:15.60,Main,,0,0,0,,2口ヘッダー｜退避後（静止表示）｜保存姿勢を0.5倍速表示
