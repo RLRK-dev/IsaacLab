@@ -26,7 +26,7 @@ session_history:
     started_at: 2026-07-20T20:01:09+09:00
     note: "Rs 承認 (node 作成 + 起動、2026-07-20) により起票。[DEFINE] = 00-Project-Management/node-proposal-T-ROOT-Kinematic-Pin-Complete-Removal-20260719.md @ 14a891d256。既往 c4-c48 は §3 adopted_existing_arc provenance であり本 session の成果ではない。起票時点 = step2 CLOSE / step3 docs-records-only OPEN。"
 created: 2026-07-20T20:01:09+09:00
-last_updated: 2026-09-16T18:43:36+09:00
+last_updated: 2026-09-20T08:08:32+09:00
 spec_version: LTM-1 v1.2
 ---
 
@@ -112,12 +112,12 @@ disposition / status だけ・**census = 35 固定**。
 
 ### 7.1 成果物と担当（p4 起案・Rs1 要件「成果物・担当」）
 
-| # | 成果物 | 担当 | pointer（p6 09-16 18:43 実測・HEAD `9f46a6281b`・初版 17:58 @ `dc090f7753`） |
+| # | 成果物 | 担当 | pointer（p6 09-20 08:08 実測・HEAD `9768998578`・初版 17:58 @ `dc090f7753`） |
 |---|---|---|---|
 | ① | 設計 v3 `eval_runs/troot_optE_dapg_wholeroute_scope_20260701/P11_UR15B_CONTROLLER_DESIGN_20260913.md` | p11 | 最新 `2743fc4549`（§17.6 = p4 の条件 (i)(ii)＋cite 訂正・259 行・初版 §17 = `dc090f7753`）。「未検証」の札は v3 `:1` のまま |
 | ② | D4（姿勢 cap 計器の側別化・wired 2 関数＋print） | 実装 p0／検証 pZ（事前登録 `cb787871f0`・R3 `98d8e63173`） | 着地 `3370f7a872`（09-16 17:48:52・記録 = P0 §8.51 @ `4b328fb025`）・pZ leg 9/9 hold＋R3 静的 hold `ab0ac56f97`（追記 `f6ab51c3ff`）・**p4 受入済 09-16 18:03:56（item 6 @ `bf489e1bb2`・② のみ・controller の完成ではない・R3 数値は #69 の run 内）** |
 | ③ | B 記録行（Q2 = B・側別 controller の記録行） | spec p11／実装 p0／検証 pZ | spec = v3 §17.2 @ `dc090f7753`・pZ prereg `aed109d06f`＋row 3′ `e41d0a9304`（条件 (ii) 充足 = p4）・**窓 open（p4 09-16 18:16・item 9 @ `1d42a6f198`）**。**p0 着地 `96e9ece175`**（09-16 18:23:08・+11/−0・blob `84a372439c59`・記録 P0 §8.53 @ `65af36a2bf`）・pZ leg・p4 受入 = 未 |
-| ④ | R0 静的収束検査（Q1） | spec p11（v3 §10＋§17.1）／作成 p0／独立検証・実行 pZ | spec = §17.1（「収束のみ」を名乗る）・pZ prereg `bf4433bfe6`＋row 1′ `642a9162f0`（条件 (i) 充足 = p4）・**窓 open（p4 09-16 18:16・item 9 @ `1d42a6f198`）**。**p0 着地 `d038e2536f`**（09-16 18:35:54・新 file `r0_convergence_harness.py` +778・blob `1d6b53840028`・記録 P0 §8.54 @ `675241151c`）・**受入待ち**（follow-up commit 見込み = 30 global／rows 2-5 の出所 pin／`pose_only=k`）・pZ pre-harness 測定 addendum 3 `dd7cfd18b4`（17/17 収束・負の対照も 17/17 ⇒ 収束 ≠ 正しさ）・p4 読み（item 15 @ `996fb68d93`）: ④ = Q1 射程（収束）・正しさは ⑤・R0-ii は p11 決定・rows 2-5 の出所行 = p11 が §17 に append（m-p4-275） |
+| ④ | R0 静的収束検査（Q1） | spec p11（v3 §10＋§17.1）／作成 p0／独立検証・実行 pZ | spec = §17.1（「収束のみ」を名乗る）・pZ prereg `bf4433bfe6`＋row 1′ `642a9162f0`（条件 (i) 充足 = p4）・**窓 open（p4 09-16 18:16・item 9 @ `1d42a6f198`）**。**p0 着地 `d038e2536f`**（09-16 18:35:54・新 file `r0_convergence_harness.py` +778・blob `1d6b53840028`・記録 P0 §8.54 @ `675241151c`）・**受入保留（p4 09-16 18:44・item 16 @ `6592e12c49`・relay 09-20）**: follow-up (a) 閉包 4 関数（`_never` stub 置換分）を blob から逐語 copy (b) rows 2-5 の拘束値を spec-nominal へ（U0 実測は報告行）・R0-ii 採用時 `pose_only=k`・順序 = p11 §17 行 → p0 follow-up → pZ leg → p4・pZ pre-harness 測定 addendum 3 `dd7cfd18b4`（17/17 収束・負の対照も 17/17 ⇒ 収束 ≠ 正しさ）・p4 読み（item 15 @ `996fb68d93`）: ④ = Q1 射程（収束）・正しさは ⑤・R0-ii は p11 決定・rows 2-5 の出所行 = p11 が §17 に append（m-p4-275） |
 | ⑤ | R1／R1′／R2 静的 legs | pZ | 未（R1 の pin は §17.3 で reference/ へ） |
 | ⑥ | reference 一式（Q3） | 取込 p4／照合 pZ | 取込 `e6172b2e3b`（23 file）・照合 `170cbf54a7`（manifest 20/20・4 source 同一・blob==bytes 23/23） |
 | ⑦ | まとめ・受入 | p4 | 未（着手 ≠ 受入・Rs1 補足 b） |
