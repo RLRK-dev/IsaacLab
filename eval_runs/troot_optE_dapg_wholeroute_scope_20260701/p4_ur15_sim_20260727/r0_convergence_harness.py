@@ -7,38 +7,52 @@
 Authority: Rs1 (the human), 2026-09-14, Q1 verbatim 「認可する。p0が作り、pZが独立に検証・実行する。」 with the scope
 「物理ステップを進めず、実行副作用のあるdriverをimportしない静的検査に限定します。収束確認と、衝突・把持・動的追従の
 成立は区別します。」  Spec = P11_UR15B_CONTROLLER_DESIGN_20260913.md section 10 (row R0), 11, 17.1 @ dc090f7753;
-pre-registration = pZ PZ_R0_CONVERGENCE_LEG_PREREG_20260916.md rows 1-11 + 1' @ 642a9162f0.  Written by p0; executed
-and judged by pZ (p0 runs py_compile only).
+pre-registration = pZ PZ_R0_CONVERGENCE_LEG_PREREG_20260916.md rows 1-11 + 1' with addenda 2-3 @ dd7cfd18b4.  Written
+by p0; executed and judged by pZ (p0 runs py_compile only).  Follow-up (a)(b) of the chain court (kickoff 09-16 item 16):
+(a) the whole 14-function closure is copied, nothing is stubbed; (b) rows 2-5 bind to the spec-nominal grasp targets
+derived from committed text, the settled run-time values are reported beside them.
 
-WHAT THIS IS.  The wired driver's per-arm 6D damped-least-squares solver -- `solve_ik` and everything it calls on the
-kinematic path (`pinch`, `pinch_jac`, `wrist_jac`, `sigma_min`, `_measure_axfix`, `_wrap`, `_rdes`, `pose_menu`) -- is
-copied below VERBATIM from the landed driver blob 84a372439c59 (commit 96e9ece175; the same statements are byte-identical
-in the D4 blob d2bc133e1320 @ 3370f7a872, the pre-registration's base).  Copy fidelity = AST equality after N1-N3, checked
-outside this file (the record section names the check).  The ONE permitted rebinding (prereg row 1) is the set of module
-globals those functions read: `m`, `d`, `AXFIX`, `QADR`, `VADR`, `PAD`, `TOOLB`, `SIDES`, `LIM` and the spec constants
-are bound per side to a COMPOSED model built by `ur15_gripper_mirror_acceptance.build_side` (one arm + its ko hand on its
-mount, C-2 constants, no column, no cable, no other arm), and the scene-dependent helpers the solver calls after a
-candidate has converged are STUBS that report "nothing within the search radius" -- vacuous by construction, because the
-composed model contains nothing to be near.  Nothing in this file steps physics: the copied loop calls mj_kinematics /
-mj_comPos / mj_forward only, and `mujoco.mj_step` is wrapped by a counter that the report prints (must read 0).
+WHAT THIS IS.  The wired driver's per-arm 6D damped-least-squares solver and every function it reaches --
+`solve_ik -> pose_menu, _wrap, _rdes, pinch, touching, sigma_min -> wrist_jac, column_gap, path_mast_min, arm_pair_min,
+path_arm_min, furniture_gap, path_furniture_min` (the closure of pZ's addendum 2 item 1) -- is copied below VERBATIM
+from the landed driver blob 84a372439c59 (commit 96e9ece175; the same statements are byte-identical in the D4 blob
+d2bc133e1320 @ 3370f7a872, the pre-registration's base), together with the driver's own rules for `ARMB`
+(`_own_bodies`) and `AXFIX` (`_measure_axfix`).  Copy fidelity = AST equality, checked outside this file (the record
+section names the check).  The ONE permitted rebinding (prereg row 1 / 1', 30 module globals per addendum 3) is the set
+of module globals that closure reads: they are bound per side to a COMPOSED model built by
+`ur15_gripper_mirror_acceptance.build_side` (one arm + its ko hand on its mount, C-2 constants, no column, no cable,
+no table, no other arm).  Where the driver's rule is model-free its assignment is pasted verbatim (`LIM`, `_MASTNAMES`,
+the three mutable dicts); where it reads the model it is evaluated verbatim on the composed model inside `_bind`
+(`GNAME`, `ARMG`, `FURNG`, `COLG`, `COLFREE`); where it names the driver's bodies by side prefix (`QADR`, `VADR`,
+`PAD`, `TOOLB` by `{t}_`/`{t}g_`, `ARMB` by `_own_bodies(f"{t}_") | _own_bodies(f"{t}g_")`) the same rule is applied
+with the composed model's prefixes `a_`/`g_`.  On this model `FURNG` and `COLG` come out EMPTY by the driver's own
+comprehensions (no saddle/table geoms, no mast geom names), so `column_gap`/`path_mast_min` run and find nothing;
+`touching` runs on the contacts of the composed model; `arm_pair_min`/`path_arm_min` are behind `other is not None`,
+`furniture_gap`/`path_furniture_min` behind the env switches `FURNITURE`/`ARM_PATH`, none of which this file sets.
+Nothing in this file steps physics: the copied loop calls mj_kinematics / mj_comPos / mj_forward only, and
+`mujoco.mj_step` is wrapped by a counter that the report prints (must read 0).
 
 WHAT IT DECIDES.  Per target row (the L and R columns of the driver's STEP table, rows 2-18) and per side, whether
 `solve_ik` returns a converged pose under the wired test (`pe <= 0.002 m` and `re <= re_max`, tested inside the copied
-function), with the wired defaults `tries=None` (full menu, twice), `iters=300`, `re_max=0.05`, `near=None`, `other=None`
-and ONE fixed seed shared by both sides so candidate index k draws the same random restart on L and on R.  The bar
-(section 10 R0): rows where L converges and R does not = 0; R converged = 0 -> section 11 STOP-and-report.  Negative
-control (prereg row 8): the R rows solved on the L model must differ from the R run on >= 1 row, else the leg is dead.
+function), with the wired defaults `tries=None` (full menu, twice), `iters=300`, `re_max=0.05`, `near=None`, `other=None`,
+`quiet=True` (gates prints only), ONE fixed seed shared by both sides, and the arm started at the spec's `HOME_POSE`
+(fingers 0), the start pZ's instrument used.  The bar (section 10 R0): rows where L converges and R does not = 0;
+R converged = 0 -> section 11 STOP-and-report.  Negative control (prereg row 8): the R rows solved on the L model,
+recorded whether or not it differs (pZ addendum 3 measured that it does not fire).
 
 WHAT IT DOES NOT SHOW.  「収束のみ／衝突・把持・動的追従は未証明」 -- collision avoidance, grasp, dynamic tracking and the
-mast/furniture/other-arm clearances are NOT measured here (those are the authorized run, #69, with pB/pC).  Stop-cause
-tag on every report line: {instrument calibration stop / controller non-convergence / other}.
+mast/furniture/other-arm clearances are NOT measured here (those are the authorized run, #69, with pB/pC); and per pZ
+addendum 3, convergence does not discriminate a correct UR15-B from the rotated copy -- that is the static legs' work.
+Stop-cause tag on every row: {none, controller non-convergence, instrument calibration stop, other}.
 
-Targets.  STEP rows 6-18 resolve from ur15_cell_spec constants exactly as the driver writes them (C1, C2, GRIP_HALF_SPAN,
-Z_RISE_ROUTE, Z_SEAT = seat_z(FLOAT_Z), RX_MID = mean(C1[0], C2[0])).  Rows 2-5 use GL/GR, which the driver measures
-from the settled cable at run time (the "re-measured after the approach" line), so they are taken from the C-2 run
-record (_gen/dod_c2_20260810/run.log :93, sha256 04599b84e34be51e...; the 0.22/45 record :94 prints the same numbers):
-GL = (0.0986, 0.28, 0.9488), GR = (0.1886, 0.28, 0.951), rounded by that print to 1e-4 m -- below the 2e-3 m
-convergence bar, and stated as record-sourced, not literal.
+Targets.  STEP rows 6-18 resolve from ur15_cell_spec constants exactly as the driver writes them (C1, C2,
+GRIP_HALF_SPAN, Z_RISE_ROUTE, Z_SEAT = seat_z(FLOAT_Z), RX_MID = mean(C1[0], C2[0])).  Rows 2-5 use GL/GR, which the
+driver measures on the live cable (`cable_at`, :1221; GRASP_CENTRE_X default C1[0], :1246; re-measured after the
+approach, :2812).  BINDING values here = the spec-nominal derivation from committed text (chain court m-p4-274/275):
+x = C1[0] -/+ GRIP_HALF_SPAN, y = REST_Y, z = REST_TOP + CABLE_R (the driver's cable placement rule, :337 `z0`),
+i.e. the compile-time cable before it settles; pZ's dump-derived values (addendum 2) are the same numbers.  REPORTED
+beside them, not solved: the settled run-time values of the C-2 run record (_gen/dod_c2_20260810/run.log :93, sha256
+04599b84e34be51e...): GL = (0.0986, 0.28, 0.9488), GR = (0.1886, 0.28, 0.951).
 """
 
 from __future__ import annotations
@@ -61,8 +75,8 @@ HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE))
 import ur15_cell_spec as _spec  # noqa: E402
 from ur15_cell_spec import (  # noqa: E402
-    ARM_CLEARANCE, ARM_DECIDE_CUTOFF, C1, C2, FLOAT_Z, GRIP_HALF_SPAN, LIMS, SIGMA_FLOOR, SIGMA_GOOD, SIGMA_PENALTY,
-    Z_RISE_REST, Z_RISE_ROUTE, seat_z,
+    ARM_CLEARANCE, ARM_DECIDE_CUTOFF, ARM_PAIR_CUTOFF, C1, C2, CABLE_R, COLUMN_R, FLOAT_Z, GRIP_HALF_SPAN, HOME_POSE,
+    LIMS, REST_TOP, REST_Y, SIGMA_FLOOR, SIGMA_GOOD, SIGMA_PENALTY, Z_RISE_REST, Z_RISE_ROUTE, seat_z,
 )
 import ur15_gripper_mirror_acceptance as _acc  # noqa: E402  build_side @ b7a5e39ecf (composed model, C-2 constants)
 
@@ -79,147 +93,41 @@ def _mj_step_counted(*a, **k):
 
 mujoco.mj_step = _mj_step_counted
 
-# ---- the rebinding: module globals the copied functions read, bound per side before each solve ---------------------
+# ---- the rebinding (prereg row 1/1', 30 globals): model-free rules pasted verbatim from the driver ------------------
+_MASTNAMES = ("stem", "foot", "crown", "stereo_head")
 LIM = np.array(LIMS)
+CLEARANCE_REPORT = {}
+LAST_CLEAR = {}
+_DEPTH_AUDIT = {"calls": 0, "checked": 0, "neg": 0, "below_lower": 0, "seg_disagree": 0,
+                "seg_over": 0, "seg_under": 0, "by_caller": {}, "pairs": {}, "type_pairs": {},
+                "chan": {}, "chan_viol": {}, "rows": [],
+                "type_all": {}, "repaired": 0, "repair_zero": 0, "repair_signed": 0,
+                "unrepairable": 0, "bound_informative": 0, "last_flagged": False,
+                "cand_evals": 0, "rej_total": 0, "rej_flagged": 0,
+                # ⭐ p18 §837 / p5: the DECIDER counter, on the mechanism that settled the counts
+                # pair.  `_blame` counts rejections AGAINST A PART and the mast test runs whether
+                # or not the candidate was already decided, so a ranking built on it over-counts.
+                # This tallies per CANDIDATE, untruncated: "sole" is one candidate one vote and
+                # carries no ordering convention; "mult" says how often a sole cause even exists.
+                # ⭐ (b) p18 ordering ruling 20260804-1430: the same tally, restricted to the
+                # candidates whose far-arm rejection was decided by a call the floors had FLAGGED.
+                # Without this split the flagged subset's sole-cause count has to be assumed equal
+                # to the whole set's, and "about 12 would flip" was exactly that assumption wearing
+                # a number.  ⚠ The bit is set at the far-arm test only -- the mast, furniture and
+                # path tests make their own distance calls and are not tracked -- so a candidate
+                # counted UNFLAGGED here may still have been rejected by a flagged call elsewhere.
+                "decider": {"n": 0, "sole": {}, "any": {}, "mult": {},
+                            "flagged": {"n": 0, "sole": {}, "any": {}, "mult": {}}},
+                "seg_under_contact": 0, "seg_under_narrow": 0,
+                "sign_checked": 0, "sign_ghost": 0, "sign_missed": 0}
+
 SIDES = dict(_spec.SIDES)          # {"L": -1.0, "R": +1.0}; narrowed to one side while that side's model is bound
 m = d = None                       # the composed model / data of the side being solved
 QADR = VADR = PAD = TOOLB = AXFIX = None
-CLEARANCE_REPORT = {}
-LAST_CLEAR = {}
-_DEPTH_AUDIT = {"cand_evals": 0, "rej_total": 0, "rej_flagged": 0, "sign_checked": 0, "sign_ghost": 0,
-                "sign_missed": 0, "_ret_pair": None, "_ret_flagged": False,
-                "decider": {"n": 0, "mult": {}, "any": {}, "sole": {},
-                            "flagged": {"n": 0, "mult": {}, "any": {}, "sole": {}}}}
-
-
-# ---- stubs: the scene-dependent helpers, vacuous by construction (no column, cable, table or other arm here) --------
-def touching(t, dd):
-    """Wired: the bodies the arm is in contact with.  Composed model: nothing to touch but itself -> none."""
-    return []
-
-
-def column_gap(t, dd=None, want_who=False, cutoff=None):
-    """Wired: signed gap to the mast.  Composed model: no mast -> beyond the search radius."""
-    return (None, None) if want_who else None
-
-
-def path_mast_min(t, sc, q_from, q_to, cutoff=None):
-    return (None, None)
-
-
-def _never(name):
-    def f(*a, **k):
-        raise RuntimeError(f"{name} was called: this branch needs other= or an env flag, neither is set in R0")
-    return f
-
-
-arm_pair_min = _never("arm_pair_min")
-furniture_gap = _never("furniture_gap")
-path_arm_min = _never("path_arm_min")
-path_furniture_min = _never("path_furniture_min")
+GNAME = ARMB = ARMG = FURNG = COLG = COLFREE = None
 
 
 # ==== VERBATIM COPIES from the landed driver blob 84a372439c59 (AST-equal; do not edit here) ========================
-def pinch(t, dd=None):
-    dd = dd if dd is not None else d
-    return 0.5 * (np.array(dd.xpos[PAD[t][0]]) + np.array(dd.xpos[PAD[t][1]]))
-
-
-def pinch_jac(t):
-    """Translational Jacobian of the pinch point, plus the rotational Jacobian of the tool."""
-    Js = []
-    for b in PAD[t]:
-        jp = np.zeros((3, m.nv))
-        mujoco.mj_jacBody(m, d, jp, None, b)
-        Js.append(jp[:, VADR[t]])
-    jr = np.zeros((3, m.nv))
-    mujoco.mj_jacBody(m, d, None, jr, TOOLB[t])
-    return 0.5 * (Js[0] + Js[1]), jr[:, VADR[t]]
-
-
-def wrist_jac(t, dd=None):
-    """The 6x6 tool Jacobian of arm `t`: translation of the pinch stacked on tool rotation."""
-    dd = dd if dd is not None else d
-    Js = []
-    for b in PAD[t]:
-        jp = np.zeros((3, m.nv))
-        mujoco.mj_jacBody(m, dd, jp, None, b)
-        Js.append(jp[:, VADR[t]])
-    jr = np.zeros((3, m.nv))
-    mujoco.mj_jacBody(m, dd, None, jr, TOOLB[t])
-    return np.vstack([0.5 * (Js[0] + Js[1]), jr[:, VADR[t]]])
-
-
-def sigma_min(t, dd=None):
-    """Smallest singular value of that Jacobian.  Near zero means the arm has lost a direction --
-    a singularity -- and the servo command for a small tool motion becomes a huge joint motion."""
-    return float(np.linalg.svd(wrist_jac(t, dd), compute_uv=False)[-1])
-
-
-def _measure_axfix():
-    """Measure, per arm, where the closing axis and the approach axis sit in the tool's own frame.
-    Measured on a throwaway MjData; the live state is never touched."""
-    sc = mujoco.MjData(m)
-    for t in SIDES:
-        for k, a in enumerate(QADR[t]):
-            sc.qpos[a] = [0.0, -1.2, 1.0, -1.4, -1.57, 0.0][k]
-    mujoco.mj_forward(m, sc)
-    out = {}
-    for t in SIDES:
-        pl, pr = np.array(sc.xpos[PAD[t][0]]), np.array(sc.xpos[PAD[t][1]])
-        c_w = (pr - pl) / max(np.linalg.norm(pr - pl), 1e-9)
-        pinch_w = 0.5 * (pl + pr)
-        a_w = np.array(sc.xpos[TOOLB[t]]) - pinch_w
-        a_w = a_w / max(np.linalg.norm(a_w), 1e-9)
-        Rt = np.array(sc.xmat[TOOLB[t]]).reshape(3, 3)
-        c_l, a_l = Rt.T @ c_w, Rt.T @ a_w
-        s_l = np.cross(a_l, c_l)
-        out[t] = np.column_stack([c_l, s_l, a_l]).T  # B_local^T
-    return out
-
-
-def _wrap(q):
-    q = q.copy()
-    for k in range(6):
-        while q[k] > math.pi and q[k] - 2 * math.pi >= LIM[k, 0]:
-            q[k] -= 2 * math.pi
-        while q[k] < -math.pi and q[k] + 2 * math.pi <= LIM[k, 1]:
-            q[k] += 2 * math.pi
-    return q
-
-
-def _rdes(yaw, roll=0.0):
-    """Closing axis across the cable, approach down; `yaw` spins the tool about the vertical and
-    `roll` tips it about the closing axis, which walks the WRIST outboard while the pinch stays
-    put.  Rolling is what lets two arms share an 88 mm span without their wrists meeting."""
-    base = Rotation.from_euler("z", yaw) * Rotation.from_euler("z", math.pi / 2.0)
-    return (base * Rotation.from_euler("y", roll)).as_matrix()
-
-
-def pose_menu(t, wide=False):
-    """The attitude menu for arm `t`, as (yaw, roll) pairs.
-
-    ⭐ p5 -167: the sign belongs on the YAW as well as the roll.  Rolling exists to let two arms
-    share an 88 mm span without their wrists meeting, which is a statement about the PAIR -- and a
-    menu that mirrors one and not the other hands the two arms attitudes that are not mirror
-    images of each other the moment the yaw is non-zero.
-    ⚠ An entry INDEX therefore names a different attitude on the right arm than it did before the
-    sign was added; a right-arm pose recorded as an index has to be re-read as a value.
-
-    ⛔ Lifted out of solve_ik so it can be PRINTED without running a solve.  The change above was
-    reported as demonstrated on the strength of a trace line reading yaw +0.15 where it had read
-    -0.15 -- and p6 was right that a plus-minus symmetric set prints that either way, so the line
-    was no evidence at all.  The menu itself is the evidence, and now it can be shown.
-    """
-    sgn = -1.0 if t == "L" else 1.0
-    menu = [(0.0, sgn * r) for r in (0.0, 0.35, 0.6, 0.85, 1.1)] + \
-           [(sgn * y, sgn * r) for r in (0.35, 0.6, 0.85) for y in (0.3, -0.3)]
-    if wide:  # per-STEP waypoints get a bigger pose menu so a CONTINUOUS branch survives
-        menu = menu + [(sgn * y, sgn * r)
-                       for r in (0.2, 0.5, 0.75, 1.0) for y in (0.15, -0.15, 0.5, -0.5)]
-    return menu
-
-
 def solve_ik(t, tgt, tries=26, iters=300, seed=1, near=None, quiet=False, warm=None, other=None, re_max=0.05, wide=False, pose_only=None, pose_rd=None, label="start-pose"):
     """Damped least-squares IK for position AND tool orientation on scratch MjData.  Keeps every
     solution that converges, wraps it to the nearest branch, drops the ones that would sit in
@@ -642,28 +550,386 @@ def solve_ik(t, tgt, tries=26, iters=300, seed=1, near=None, quiet=False, warm=N
               " ".join(f"{v:+.6f}" for v in q) + "] rad")
     return q
 
+
+def pose_menu(t, wide=False):
+    """The attitude menu for arm `t`, as (yaw, roll) pairs.
+
+    ⭐ p5 -167: the sign belongs on the YAW as well as the roll.  Rolling exists to let two arms
+    share an 88 mm span without their wrists meeting, which is a statement about the PAIR -- and a
+    menu that mirrors one and not the other hands the two arms attitudes that are not mirror
+    images of each other the moment the yaw is non-zero.
+    ⚠ An entry INDEX therefore names a different attitude on the right arm than it did before the
+    sign was added; a right-arm pose recorded as an index has to be re-read as a value.
+
+    ⛔ Lifted out of solve_ik so it can be PRINTED without running a solve.  The change above was
+    reported as demonstrated on the strength of a trace line reading yaw +0.15 where it had read
+    -0.15 -- and p6 was right that a plus-minus symmetric set prints that either way, so the line
+    was no evidence at all.  The menu itself is the evidence, and now it can be shown.
+    """
+    sgn = -1.0 if t == "L" else 1.0
+    menu = [(0.0, sgn * r) for r in (0.0, 0.35, 0.6, 0.85, 1.1)] + \
+           [(sgn * y, sgn * r) for r in (0.35, 0.6, 0.85) for y in (0.3, -0.3)]
+    if wide:  # per-STEP waypoints get a bigger pose menu so a CONTINUOUS branch survives
+        menu = menu + [(sgn * y, sgn * r)
+                       for r in (0.2, 0.5, 0.75, 1.0) for y in (0.15, -0.15, 0.5, -0.5)]
+    return menu
+
+
+def _wrap(q):
+    q = q.copy()
+    for k in range(6):
+        while q[k] > math.pi and q[k] - 2 * math.pi >= LIM[k, 0]:
+            q[k] -= 2 * math.pi
+        while q[k] < -math.pi and q[k] + 2 * math.pi <= LIM[k, 1]:
+            q[k] += 2 * math.pi
+    return q
+
+
+def _rdes(yaw, roll=0.0):
+    """Closing axis across the cable, approach down; `yaw` spins the tool about the vertical and
+    `roll` tips it about the closing axis, which walks the WRIST outboard while the pinch stays
+    put.  Rolling is what lets two arms share an 88 mm span without their wrists meeting."""
+    base = Rotation.from_euler("z", yaw) * Rotation.from_euler("z", math.pi / 2.0)
+    return (base * Rotation.from_euler("y", roll)).as_matrix()
+
+
+def pinch(t, dd=None):
+    dd = dd if dd is not None else d
+    return 0.5 * (np.array(dd.xpos[PAD[t][0]]) + np.array(dd.xpos[PAD[t][1]]))
+
+
+def touching(t, dd):
+    """What this arm is in contact with, other than itself."""
+    out = set()
+    for i in range(dd.ncon):
+        g1, g2 = dd.contact[i].geom1, dd.contact[i].geom2
+        a1, a2 = g1 in ARMG[t], g2 in ARMG[t]
+        if a1 != a2:
+            other = g2 if a1 else g1
+            near = g1 if a1 else g2
+            ob = m.geom_bodyid[other]
+            # p18 -622(6): the near side used to be dropped, so a contact could be reported without
+            # saying which of THIS arm's parts made it -- and the open question about STEP13 is
+            # precisely whether a claw plate is one of them.  Both ends are named now.
+            out.add(f"{mujoco.mj_id2name(m, mujoco.mjtObj.mjOBJ_BODY, ob) or GNAME[other]}"
+                    f" (via {GNAME[near]})")
+    return out
+
+
+def sigma_min(t, dd=None):
+    """Smallest singular value of that Jacobian.  Near zero means the arm has lost a direction --
+    a singularity -- and the servo command for a small tool motion becomes a huge joint motion."""
+    return float(np.linalg.svd(wrist_jac(t, dd), compute_uv=False)[-1])
+
+
+def wrist_jac(t, dd=None):
+    """The 6x6 tool Jacobian of arm `t`: translation of the pinch stacked on tool rotation."""
+    dd = dd if dd is not None else d
+    Js = []
+    for b in PAD[t]:
+        jp = np.zeros((3, m.nv))
+        mujoco.mj_jacBody(m, dd, jp, None, b)
+        Js.append(jp[:, VADR[t]])
+    jr = np.zeros((3, m.nv))
+    mujoco.mj_jacBody(m, dd, None, jr, TOOLB[t])
+    return np.vstack([0.5 * (Js[0] + Js[1]), jr[:, VADR[t]]])
+
+
+def column_gap(t, dd=None, want_who=False, cutoff=None):
+    """Closest signed distance from this arm's geoms to the yoke mast [m].  Negative means the arm
+    is inside the mast.  mj_geomDistance is a geometry query, so it reports this whether or not the
+    pair can collide.
+
+    Rs, 2026-07-28, watching the run: "the left hand is slamming into the cylinder" -- so the name
+    of the part comes out with the number.  Twenty runs reported this as a bare figure, and a bare
+    figure cannot say whether a hand arrived or a mount never left.  (It was the arm: pB refuted
+    the mount reading from the trace itself -- a permanent overlap cannot read +387.5 mm at one
+    step -- and the named reading confirms a link that moves.)"""
+    dd = dd if dd is not None else d
+    best, who = 1e9, None
+    for g in COLFREE[t]:
+        for c in COLG:
+            # Same exact prefilter as the arm-to-arm query, and here for the same reason: this
+            # runs for every IK candidate of every solve, and the unfiltered form is what once
+            # made a run take hours.  Two geoms cannot be closer than the gap between their
+            # bounding spheres, so a pair already past the cutoff cannot lower the minimum.
+            if cutoff is not None and (
+                    float(np.linalg.norm(dd.geom_xpos[g] - dd.geom_xpos[c]))
+                    - m.geom_rbound[g] - m.geom_rbound[c]) >= cutoff:
+                continue
+            d_ = mujoco.mj_geomDistance(m, dd, g, c, 1.0, None)
+            if d_ < best:
+                best, who = d_, f"{GNAME[g]} vs {GNAME[c]}"
+    # ⛔ None, not the cutoff, when nothing is in range -- the cutoff wearing a distance's clothes
+    # is the failure this instrument already had once, at the arm-to-arm surface.
+    # ⛔ Metres, like the arm-to-arm query, so that BOTH gaps format through gap_mm and nothing
+    # multiplies one of them by a thousand at a call site.  This used to return mm, and the mixed
+    # pair of units is what put a bare "* 1000" in four different places.
+    if best > 1e8:
+        return (None, None) if want_who else None
+    return (best, who) if want_who else best
+
+
+def path_mast_min(t, sc, q_from, q_to, cutoff=None):
+    """Smallest mast gap reached anywhere ALONG the joint-space move from q_from to q_to [m].
+
+    The endpoint test cannot see this, and the run showed exactly that: at STEP3 the mast rejected
+    none of the right arm's candidates -- every commanded pose was clear -- and the arm still ended
+    up 0.6 mm inside the stem, because the FOREARM sweeps through the mast on the way there and
+    jams.  Joint 1 then sits at its whole 433 N.m pushing on the column and arrives 92 degrees
+    short.  A pose the arm never reaches is not made safe by being clear.
+
+    Sample count is derived, not chosen: it is the travel of the fastest-moving geom divided by the
+    mast's own radius, so no sample-to-sample step can carry a part clean through the obstacle.
+    ⚠ That bounds tunnelling THROUGH the mast; it does not promise to catch a graze that begins and
+    ends between two samples.  The bound is the obstacle's size because the obstacle is what is
+    being tunnelled through -- nothing here is tuned.
+
+    ⛔ Writes into `sc` and leaves it at q_to, which is where every caller wants it anyway.  Uses
+    mj_kinematics rather than mj_forward: this needs geom poses, not contacts, and the full solve
+    would cost far more for nothing.
+    """
+    q_from, q_to = np.asarray(q_from, float), np.asarray(q_to, float)
+    for _k, _a in enumerate(QADR[t]):
+        sc.qpos[_a] = q_from[_k]
+    mujoco.mj_kinematics(m, sc)
+    p0 = np.asarray(sc.geom_xpos)[COLFREE[t]].copy()
+    for _k, _a in enumerate(QADR[t]):
+        sc.qpos[_a] = q_to[_k]
+    mujoco.mj_kinematics(m, sc)
+    travel = float(np.linalg.norm(np.asarray(sc.geom_xpos)[COLFREE[t]] - p0, axis=1).max())
+    n = max(1, int(math.ceil(travel / COLUMN_R)))
+    best, who = 1e9, None
+    for i in range(1, n):        # the two ends are tested by the caller's own endpoint reading
+        q = q_from + (q_to - q_from) * (i / n)
+        for _k, _a in enumerate(QADR[t]):
+            sc.qpos[_a] = q[_k]
+        mujoco.mj_kinematics(m, sc)
+        g_, w_ = column_gap(t, sc, want_who=True, cutoff=cutoff)
+        if g_ is not None and g_ < best:
+            best, who = g_, f"{w_} at {i}/{n} along the move"
+    for _k, _a in enumerate(QADR[t]):
+        sc.qpos[_a] = q_to[_k]
+    mujoco.mj_kinematics(m, sc)
+    return (None, None) if best > 1e8 else (best, who)
+
+
+def arm_pair_min(dd, ta="L", tb="R", want_who=False, cutoff=None):
+    """Smallest signed distance between any geom of arm `ta` and any of arm `tb` [m].
+
+    ⚠ Written this way for speed, and the speed matters: the naive form is 38x38 = 1444 distance
+    calls, and it runs for every IK candidate of every solve.  It made a run take hours.
+
+    The prefilter is exact rather than approximate.  Two geoms cannot be closer than the gap
+    between their bounding spheres, so any pair whose centres are farther apart than
+    cutoff + rbound + rbound is already past the cutoff and cannot lower the minimum.  Those are
+    dropped by one vectorised comparison, and only the survivors are measured properly.  The
+    answer is identical to the exhaustive form; only the work is smaller.
+    """
+    # ARMG holds sets -- numpy cannot index with one, and the first run said so immediately.
+    _DEPTH_AUDIT["_ret_flagged"] = False
+    _DEPTH_AUDIT["_ret_pair"] = None
+    cut = ARM_PAIR_CUTOFF if cutoff is None else cutoff
+    ga, gb = np.fromiter(sorted(ARMG[ta]), int), np.fromiter(sorted(ARMG[tb]), int)
+    pa = np.asarray(dd.geom_xpos)[ga]
+    pb = np.asarray(dd.geom_xpos)[gb]
+    ra = np.asarray(m.geom_rbound)[ga]
+    rb = np.asarray(m.geom_rbound)[gb]
+    sep = np.linalg.norm(pa[:, None, :] - pb[None, :, :], axis=2) - ra[:, None] - rb[None, :]
+    # ⛔ None, not the cutoff, when nothing is within range.  Returning the cutoff made the report
+    # read "+176.0 mm" with an empty pair name, which is the cutoff wearing a distance's clothes --
+    # the same saturation the claw-tip reading has, and the same way of hiding it.  A caller that
+    # wants a number for a comparison can substitute one knowingly; the reader gets told.
+    best, who = None, ""
+    for ia, ib in zip(*np.where(sep < cut)):
+        dv = mujoco.mj_geomDistance(m, dd, int(ga[ia]), int(gb[ib]), cut, None)
+        if dv >= cut:
+            continue
+        # The bound check used to sit here.  It moved to the wrapper installed beside _DEPTH_AUDIT,
+        # because here it saw arm-against-arm only -- one of the six functions that ask this
+        # question, and not the one p18's ruling 20260803-1173 names (the mast).  See there.
+        if best is None or dv < best:
+            best = dv
+            # ⭐ p6 via p18 20260803-1232: the MINIMUM is what the clearance test compares, so the
+            # only call whose contamination can flip a candidate is the one that produced it.
+            _DEPTH_AUDIT["_ret_flagged"] = _DEPTH_AUDIT["last_flagged"]
+            _DEPTH_AUDIT["_ret_pair"] = (int(ga[ia]), int(gb[ib]))
+            if want_who:
+                who = (f"{mujoco.mj_id2name(m, mujoco.mjtObj.mjOBJ_GEOM, int(ga[ia])) or ga[ia]}"
+                       f" <-> {mujoco.mj_id2name(m, mujoco.mjtObj.mjOBJ_GEOM, int(gb[ib])) or gb[ib]}")
+    return (best, who) if want_who else best
+
+
+def path_arm_min(t, sc, q_from, q_to, cutoff=None):
+    """Smallest gap to the OTHER ARM reached anywhere along the joint-space move [m].
+
+    ⛔ This did not exist, and the same docstring one function up says why it had to.  The mast got
+    a path test because "the FOREARM sweeps through the mast on the way there and jams ... a pose
+    the arm never reaches is not made safe by being clear".  The other arm never got one: it was
+    tested at the candidate pose and nowhere else.
+
+    Measured consequence, 2026-08-02: both arms sweep about 250 degrees from home to their start
+    poses, pass through each other on the way, and arrive in contact -- the right arm 53 degrees
+    short of its own command.  The tracking gate then requires each arm to be within 5.18 mrad of
+    that command, so it never opens and every STEP reports 0.0% held on every tick.  Endpoint-clear
+    poses, no clear way to reach them.
+
+    Sample count derived the same way as the mast's, with the other arm's own smallest bounding
+    radius as the obstacle size, so no sample-to-sample step can carry a part clean through it.
+    ⚠ Same limit as the mast's: it bounds tunnelling, not a graze between two samples.
+    """
+    tb = "R" if t == "L" else "L"
+    q_from, q_to = np.asarray(q_from, float), np.asarray(q_to, float)
+    for _k, _a in enumerate(QADR[t]):
+        sc.qpos[_a] = q_from[_k]
+    mujoco.mj_kinematics(m, sc)
+    _mine = np.fromiter(sorted(ARMG[t]), int)
+    p0 = np.asarray(sc.geom_xpos)[_mine].copy()
+    for _k, _a in enumerate(QADR[t]):
+        sc.qpos[_a] = q_to[_k]
+    mujoco.mj_kinematics(m, sc)
+    travel = float(np.linalg.norm(np.asarray(sc.geom_xpos)[_mine] - p0, axis=1).max())
+    _r = float(np.asarray(m.geom_rbound)[np.fromiter(sorted(ARMG[tb]), int)].min())
+    n = max(1, int(math.ceil(travel / max(_r, 1e-4))))
+    best, who = 1e9, None
+    for i in range(1, n):        # the ends are the caller's own endpoint reading
+        q = q_from + (q_to - q_from) * (i / n)
+        for _k, _a in enumerate(QADR[t]):
+            sc.qpos[_a] = q[_k]
+        mujoco.mj_kinematics(m, sc)
+        g_, w_ = arm_pair_min(sc, t, tb, want_who=True, cutoff=cutoff)
+        if g_ is not None and g_ < best:
+            best, who = g_, f"{w_} at {i}/{n} along the move"
+    for _k, _a in enumerate(QADR[t]):
+        sc.qpos[_a] = q_to[_k]
+    mujoco.mj_kinematics(m, sc)
+    return (None, None) if best > 1e8 else (best, who)
+
+
+def furniture_gap(t, dd, want_who=False, cutoff=None):
+    """Smallest distance from arm `t` to the saddles and the table [m], or None if nothing near."""
+    cut = ARM_DECIDE_CUTOFF if cutoff is None else cutoff
+    best, who = None, ""
+    ga = np.fromiter(sorted(ARMG[t]), int)
+    for gb in FURNG:
+        for gaa in ga:
+            v = mujoco.mj_geomDistance(m, dd, int(gaa), int(gb), cut, None)
+            if v < cut and (best is None or v < best):
+                best = v
+                who = (f"{GNAME[gaa]} vs "
+                       f"{mujoco.mj_id2name(m, mujoco.mjtObj.mjOBJ_GEOM, gb)}")
+    return (best, who) if want_who else best
+
+
+def path_furniture_min(t, sc, q_from, q_to, cutoff=None):
+    """Smallest gap to the saddles and table anywhere along the move [m]. Same form as the others."""
+    q_from, q_to = np.asarray(q_from, float), np.asarray(q_to, float)
+    for _k, _a in enumerate(QADR[t]):
+        sc.qpos[_a] = q_from[_k]
+    mujoco.mj_kinematics(m, sc)
+    _mine = np.fromiter(sorted(ARMG[t]), int)
+    p0 = np.asarray(sc.geom_xpos)[_mine].copy()
+    for _k, _a in enumerate(QADR[t]):
+        sc.qpos[_a] = q_to[_k]
+    mujoco.mj_kinematics(m, sc)
+    travel = float(np.linalg.norm(np.asarray(sc.geom_xpos)[_mine] - p0, axis=1).max())
+    _r = float(np.asarray(m.geom_rbound)[np.fromiter(FURNG, int)].min()) if FURNG else 0.05
+    n = max(1, int(math.ceil(travel / max(_r, 1e-4))))
+    best, who = 1e9, None
+    for i in range(1, n):
+        q = q_from + (q_to - q_from) * (i / n)
+        for _k, _a in enumerate(QADR[t]):
+            sc.qpos[_a] = q[_k]
+        mujoco.mj_kinematics(m, sc)
+        g_, w_ = furniture_gap(t, sc, want_who=True, cutoff=cutoff)
+        if g_ is not None and g_ < best:
+            best, who = g_, f"{w_} at {i}/{n} along the move"
+    for _k, _a in enumerate(QADR[t]):
+        sc.qpos[_a] = q_to[_k]
+    mujoco.mj_kinematics(m, sc)
+    return (None, None) if best > 1e8 else (best, who)
+
+
+def _own_bodies(prefix):
+    """Bodies belonging to one arm, by ancestry -- the URDF geoms are UNNAMED, so a name-prefix
+    test silently matches nothing.  Walk the body tree instead."""
+    out = set()
+    for b in range(m.nbody):
+        nb = mujoco.mj_id2name(m, mujoco.mjtObj.mjOBJ_BODY, b) or ""
+        if nb.startswith(prefix):
+            out.add(b)
+    changed = True
+    while changed:
+        changed = False
+        for b in range(m.nbody):
+            if b not in out and m.body_parentid[b] in out:
+                out.add(b)
+                changed = True
+    return out
+
+
+def _measure_axfix():
+    """Measure, per arm, where the closing axis and the approach axis sit in the tool's own frame.
+    Measured on a throwaway MjData; the live state is never touched."""
+    sc = mujoco.MjData(m)
+    for t in SIDES:
+        for k, a in enumerate(QADR[t]):
+            sc.qpos[a] = [0.0, -1.2, 1.0, -1.4, -1.57, 0.0][k]
+    mujoco.mj_forward(m, sc)
+    out = {}
+    for t in SIDES:
+        pl, pr = np.array(sc.xpos[PAD[t][0]]), np.array(sc.xpos[PAD[t][1]])
+        c_w = (pr - pl) / max(np.linalg.norm(pr - pl), 1e-9)
+        pinch_w = 0.5 * (pl + pr)
+        a_w = np.array(sc.xpos[TOOLB[t]]) - pinch_w
+        a_w = a_w / max(np.linalg.norm(a_w), 1e-9)
+        Rt = np.array(sc.xmat[TOOLB[t]]).reshape(3, 3)
+        c_l, a_l = Rt.T @ c_w, Rt.T @ a_w
+        s_l = np.cross(a_l, c_l)
+        out[t] = np.column_stack([c_l, s_l, a_l]).T  # B_local^T
+    return out
+
 # ==== end of the verbatim copies ====================================================================================
 
 
 def _bind(t, model, data):
-    """Bind the copied functions' globals to one side's composed model (the one permitted rebinding)."""
-    global m, d, QADR, VADR, PAD, TOOLB, AXFIX, SIDES
+    """Bind the closure's globals to one side's composed model (the one permitted rebinding)."""
+    global m, d, SIDES, QADR, VADR, PAD, TOOLB, AXFIX, GNAME, ARMB, ARMG, FURNG, COLG, COLFREE
     m, d = model, data
-    J6 = ["shoulder_pan_joint", "shoulder_lift_joint", "elbow_joint", "wrist_1_joint", "wrist_2_joint", "wrist_3_joint"]
-    QADR = {t: [m.jnt_qposadr[mujoco.mj_name2id(m, mujoco.mjtObj.mjOBJ_JOINT, f"a_{j}")] for j in J6]}
-    VADR = {t: [m.jnt_dofadr[mujoco.mj_name2id(m, mujoco.mjtObj.mjOBJ_JOINT, f"a_{j}")] for j in J6]}
-    PAD = {t: [mujoco.mj_name2id(m, mujoco.mjtObj.mjOBJ_BODY, f"g_{s}_pad") for s in ("left", "right")]}
-    TOOLB = {t: mujoco.mj_name2id(m, mujoco.mjtObj.mjOBJ_BODY, "g_base")}
-    assert all(v >= 0 for v in [*QADR[t], *VADR[t], *PAD[t], TOOLB[t]]), "composed-model name lookup failed"
     SIDES = {t: _spec.SIDES[t]}
-    AXFIX = _measure_axfix()          # the copied function, on this model's own throwaway data (seed :600, fingers 0)
-    d.qpos[:] = 0.0
+    J6 = ["shoulder_pan_joint", "shoulder_lift_joint", "elbow_joint", "wrist_1_joint", "wrist_2_joint", "wrist_3_joint"]
+    # the driver's rules :451-:453/:471 with the composed prefixes (`a_` arm joints, `g_` hand bodies)
+    QADR = {t: [m.jnt_qposadr[mujoco.mj_name2id(m, mujoco.mjtObj.mjOBJ_JOINT, f"a_{j}")] for j in J6] for t in SIDES}
+    VADR = {t: [m.jnt_dofadr[mujoco.mj_name2id(m, mujoco.mjtObj.mjOBJ_JOINT, f"a_{j}")] for j in J6] for t in SIDES}
+    PAD = {t: [mujoco.mj_name2id(m, mujoco.mjtObj.mjOBJ_BODY, f"g_{s}_pad") for s in ("left", "right")] for t in SIDES}
+    TOOLB = {t: mujoco.mj_name2id(m, mujoco.mjtObj.mjOBJ_BODY, "g_base") for t in SIDES}
+    assert all(v >= 0 for v in [*QADR[t], *VADR[t], *PAD[t], TOOLB[t]]), "composed-model name lookup failed"
+    # the driver's rule :499 with the composed prefixes (pZ addendum 3 (b))
+    ARMB = {t: _own_bodies("a_") | _own_bodies("g_") for t in SIDES}
+    # the driver's own assignments, verbatim, evaluated on the composed model
+    GNAME = {g: (mujoco.mj_id2name(m, mujoco.mjtObj.mjOBJ_GEOM, g)
+                 or f"g{g} on {mujoco.mj_id2name(m, mujoco.mjtObj.mjOBJ_BODY, m.geom_bodyid[g]) or 'an unnamed body'}")
+             for g in range(m.ngeom)}
+    ARMG = {t: {g for g in range(m.ngeom) if m.geom_bodyid[g] in ARMB[t]} for t in SIDES}
+    FURNG = [g for g in range(m.ngeom)
+             if (mujoco.mj_id2name(m, mujoco.mjtObj.mjOBJ_GEOM, g) or "").startswith(("S", "table_"))
+             and (mujoco.mj_id2name(m, mujoco.mjtObj.mjOBJ_GEOM, g) or "")[1:2].isdigit()
+             or (mujoco.mj_id2name(m, mujoco.mjtObj.mjOBJ_GEOM, g) or "") == "table_top"]
+    COLG = [g for g in (mujoco.mj_name2id(m, mujoco.mjtObj.mjOBJ_GEOM, n) for n in _MASTNAMES)
+            if g >= 0]
+    COLFREE = {t: sorted(ARMG[t]) for t in SIDES}
+
+    AXFIX = _measure_axfix()          # the copied rule (seed :600, fingers 0, throwaway data)
+    for k, a in enumerate(QADR[t]):   # start pose = the spec's HOME_POSE (where the arms wait), as pZ's instrument
+        d.qpos[a] = HOME_POSE[k]
     mujoco.mj_forward(m, d)
 
 
 def _targets():
     """The STEP table's L and R columns, rows 2-18, as the driver builds them (see the module docstring)."""
-    GL, GR = (0.0986, 0.28, 0.9488), (0.1886, 0.28, 0.951)          # record-sourced (dod_c2 run.log :93)
+    z0 = REST_TOP + CABLE_R                                            # the driver's cable placement, :337
+    GL = (C1[0] - GRIP_HALF_SPAN, REST_Y, z0)                          # x = GRASP_CENTRE_X (default C1[0]) - span
+    GR = (C1[0] + GRIP_HALF_SPAN, REST_Y, z0)
     Z_SEAT = seat_z(FLOAT_Z)
     LX1, RX1 = C1[0] - GRIP_HALF_SPAN, C1[0] + GRIP_HALF_SPAN
     LX2, RX2 = C2[0] - GRIP_HALF_SPAN, C2[0] + GRIP_HALF_SPAN
@@ -687,7 +953,17 @@ def _targets():
         (17, "解放", (LX2, C2[1], Z_SEAT), (RX2, C2[1], Z_SEAT)),
         (18, "上昇", (LX2, C2[1], Z_RISE_ROUTE), (RX2, C2[1], Z_RISE_ROUTE)),
     ]
-    return [(n, name, np.array(L, float), np.array(R, float)) for n, name, L, R in rows]
+    source = {
+        "rows_2_5_binding": "spec-nominal from committed text: x = C1[0] -/+ GRIP_HALF_SPAN (GRASP_CENTRE_X default, "
+                            "driver :1246), y = REST_Y, z = REST_TOP + CABLE_R (driver :337); chain court m-p4-274/275",
+        "GL": [float(v) for v in GL], "GR": [float(v) for v in GR],
+        "rows_2_5_reported_settled_U0": {"GL": [0.0986, 0.28, 0.9488], "GR": [0.1886, 0.28, 0.951],
+                                         "source": "_gen/dod_c2_20260810/run.log :93 (sha256 04599b84e34be51e...), "
+                                                   "re-measured after the approach; reported, not solved"},
+        "rows_6_18": "ur15_cell_spec constants: C1, C2, GRIP_HALF_SPAN, Z_RISE_ROUTE, Z_RISE_REST, seat_z(FLOAT_Z), "
+                     "RX_MID = mean(C1[0], C2[0]); driver STEPS :2901-:2920 @ 84a372439c59",
+    }
+    return [(n, name, np.array(L, float), np.array(R, float)) for n, name, L, R in rows], source
 
 
 def _solve_rows(t, rows, col, seed, re_max):
@@ -696,14 +972,19 @@ def _solve_rows(t, rows, col, seed, re_max):
     for n, name, L, R in rows:
         tgt = L if col == "L" else R
         LAST_CLEAR.pop(t, None)
+        CLEARANCE_REPORT.pop(t, None)
+        q, conv, tag, note = None, False, "none", ""
         try:
-            q = solve_ik(t, tgt, tries=None, iters=300, seed=seed, near=None, other=None, re_max=re_max, label="R0")
-            conv, n_conv = True, len(LAST_CLEAR.get(t, []))
-        except RuntimeError as e:          # "no IK solution for ..." = no candidate passed the wired test
-            if not str(e).startswith("no IK solution"):
-                raise
-            q, conv, n_conv = None, False, 0
-        pe = re_ = None
+            q = solve_ik(t, tgt, tries=None, iters=300, seed=seed, near=None, other=None, re_max=re_max, quiet=True)
+            conv = True
+        except RuntimeError as e:          # "no IK solution for ..." (:2339) = no candidate passed the wired test
+            if str(e).startswith("no IK solution"):
+                tag, note = "controller non-convergence", str(e)
+            else:
+                tag, note = "other", f"RuntimeError: {e}"
+        except AssertionError as e:        # a calibration raise inside the copied closure = instrument stop
+            tag, note = "instrument calibration stop", f"AssertionError: {e}"
+        pe = None
         if q is not None:                  # re-evaluate the returned pose on a throwaway data, kinematics only
             sc = mujoco.MjData(m)
             for k, a in enumerate(QADR[t]):
@@ -711,10 +992,14 @@ def _solve_rows(t, rows, col, seed, re_max):
             mujoco.mj_kinematics(m, sc)
             mujoco.mj_comPos(m, sc)
             pe = float(np.linalg.norm(tgt - pinch(t, sc)))
-            re_ = None                     # the attitude that won is not returned by solve_ik; pe is re-checked, re is not
+        cr = CLEARANCE_REPORT.get(t)
         out.append({"step": n, "name": name, "side": t, "column": col, "target": [float(v) for v in tgt],
-                    "converged": conv, "n_converged_candidates": n_conv, "pe_recheck_m": pe,
-                    "re_recheck": re_, "q": None if q is None else [float(v) for v in q],
+                    "converged": conv, "stop_cause_tag": tag, "note": note,
+                    "n_converged_candidates": len(LAST_CLEAR.get(t, [])),
+                    "n_candidates_total": None if cr is None else int(cr[1]),
+                    "pe_recheck_m": pe,
+                    "re_recheck": None,    # the attitude that won is not returned by solve_ik; pe is re-checked, re is not
+                    "q": None if q is None else [float(v) for v in q],
                     "q_absmax": None if q is None else float(np.abs(q).max())})
     return out
 
@@ -729,14 +1014,20 @@ def main() -> int:
     t0 = time.time()
     models = {"L": _acc.build_side("ur15_base.xml", _acc.KO_LEFT, _spec.SIDES["L"]),
               "R": _acc.build_side("ur15_base_mirrored.xml", _acc.KO_MIRROR, _spec.SIDES["R"])}
-    rows = _targets()
-    print(f"[r0] targets: {len(rows)} rows (2-18); L/R columns as the driver's STEP table; GL/GR record-sourced")
+    rows, source = _targets()
+    print(f"[r0] targets: {len(rows)} rows (2-18); L/R columns as the driver's STEP table")
+    print(f"[r0] rows 2-5 binding = {source['rows_2_5_binding']}")
+    print(f"[r0] rows 2-5 GL={source['GL']} GR={source['GR']}; reported settled U0 = "
+          f"{source['rows_2_5_reported_settled_U0']}")
     for n, name, L, R in rows:
-        print(f"[r0] row {n:2d} {name:10s} L={np.round(L, 4)} R={np.round(R, 4)}")
-    res = {}
+        print(f"[r0] row {n:2d} {name:10s} L={np.round(L, 6)} R={np.round(R, 6)}")
+    res, branches = {}, {}
     for t in ("L", "R"):
         _bind(t, *models[t])
-        print(f"[r0] side {t}: composed model nq={m.nq} nbody={m.nbody} ngeom={m.ngeom}; AXFIX rows c/s/a =")
+        branches[t] = {"COLG": len(COLG), "FURNG": len(FURNG), "ARMG": len(ARMG[t]), "COLFREE": len(COLFREE[t]),
+                       "FURNITURE_env": bool(os.environ.get("FURNITURE")), "ARM_PATH_env": bool(os.environ.get("ARM_PATH")),
+                       "other": None, "near": None}
+        print(f"[r0] side {t}: composed model nq={m.nq} nbody={m.nbody} ngeom={m.ngeom}; {branches[t]}; AXFIX rows c/s/a =")
         for k, lab in enumerate("csa"):
             print(f"[r0]   {lab} = [" + " ".join(f"{v:+.6f}" for v in AXFIX[t][k]) + "]")
         res[t] = _solve_rows(t, rows, t, args.seed, args.re_max)
@@ -749,29 +1040,33 @@ def main() -> int:
     r_not_l = [r["step"] for cl, cr, r in zip(convL, convR, res["R"]) if cr and not cl]
     neg_diff = [r["step"] for cr, cn, r in zip(convR, convN, neg) if cr != cn]
     stop = sum(convR) == 0
+    tags = sorted({r["stop_cause_tag"] for blk in (res["L"], res["R"], neg) for r in blk} - {"none"})
     summary = {
         "claim": "収束のみ／衝突・把持・動的追従は未証明 (convergence only; collision, grasp and dynamic tracking are not shown)",
-        "stop_cause_tag": "controller non-convergence" if stop else "none",
+        "stop_cause_tags_seen": tags,
+        "section_11_STOP_R_converged_0": stop,
         "rows": len(rows), "L_converged": sum(convL), "R_converged": sum(convR),
         "L_converges_R_not": l_not_r, "R_converges_L_not": r_not_l,
         "bar_L_not_R_must_be_0": len(l_not_r) == 0,
-        "section_11_STOP_R_converged_0": stop,
         "negative_control_R_rows_on_L_model_differ_on_steps": neg_diff,
-        "negative_control_alive": len(neg_diff) >= 1,
-        "seed": args.seed, "re_max": args.re_max, "tries": None, "iters": 300,
+        "negative_control_fired": len(neg_diff) >= 1,
+        "seed": args.seed, "re_max": args.re_max, "tries": None, "iters": 300, "quiet": True, "start_pose": list(HOME_POSE),
+        "branches_on_composed_model": branches,
         "mj_step_calls": _MJ_STEP_CALLS,
         "mounting": {"YOKE_SPREAD": float(_acc.acc.YOKE_SPREAD), "TILT_rad": float(_acc.acc.TILT),
                      "SHOULDER_HEIGHT": float(_acc.acc.SHOULDER_HEIGHT)},
-        "env_overrides_set": {k: os.environ[k] for k in ("YOKE_SPREAD_OVERRIDE", "TILT_DEG_OVERRIDE") if k in os.environ},
+        "env_overrides_set": {k: os.environ[k] for k in ("YOKE_SPREAD_OVERRIDE", "TILT_DEG_OVERRIDE", "WORK_ROW_DY",
+                                                         "GRASP_CENTRE_X") if k in os.environ},
+        "targets_source": source,
         "harness_sha256": hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
         "elapsed_s": round(time.time() - t0, 3),
     }
     rec = {"summary": summary, "L": res["L"], "R": res["R"], "negative_control_R_on_L": neg}
     (out_dir / "R0_CONVERGENCE_REPORT.json").write_text(json.dumps(rec, indent=1, ensure_ascii=False) + "\n")
-    print("[r0] " + " | ".join(f"{k}={v}" for k, v in summary.items() if k not in ("claim",)))
+    print("[r0] " + " | ".join(f"{k}={v}" for k, v in summary.items() if k not in ("claim", "targets_source", "branches_on_composed_model")))
     print(f"[r0] {summary['claim']}")
     print(f"[r0] report -> {out_dir / 'R0_CONVERGENCE_REPORT.json'}")
-    return 0 if (len(l_not_r) == 0 and not stop and len(neg_diff) >= 1) else 1
+    return 0 if (len(l_not_r) == 0 and not stop) else 1
 
 
 if __name__ == "__main__":
