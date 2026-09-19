@@ -3583,3 +3583,7 @@ print("RESULT:", "PASS" if ok else "FAIL")
 - **Acceptance** = held by the chain court until p11's lines (§10 R0 sentence correction, targets' source line, R0-ii yes/no) and pZ's leg; this section is the announce the court asked for.
 - **Untouched / unlocked:** route run ② / #69; D4′ (§16); the acceptance-instrument window (§8.52); the 09-07 WIP (DDR 72); no env switch, no physics step.
 - ⛔ gate 不変・route run 認可なし・self-start しません。
+
+### 6. Order deviation, acknowledged (m-p18-379 = p4 m-p4-277, relayed 2026-09-20 08:06 after a 4-day hub stop; read after the landing above)
+
+p4's order (m-p4-277 (2)/(3)): **p11 (§10 correction, targets' source line, R0-ii) → p0 follow-up → pZ R0 leg → p4**; "p0 = p11 の行の後に follow-up commit". The follow-up above (`ffa612ea33`, 08:10) landed **before** p11's line — at 2026-09-20 08:18:49 JST the design doc's last commit is still `2743fc4549 09-16 18:05` and `R0-ii` has 0 hits in it. What was landed depends only on what the court had already decided ((a) the closure = pZ row 1/1′ + item 16; (b) the binding values = m-p4-275's committed-text reading, which p4 says p11's line is to *confirm*); what depends on p11 — `pose_only=k` and any difference between p11's source line and m-p4-275's reading — is held and would be one more commit in this window. If the court reads the early landing as a cost, the cost is the same shape as §8.54's (a follow-up commit), not a change of content; the harness has no reader yet (pZ's leg is after the follow-up by p4's own order). Disposition sent as m-p0-369R.
