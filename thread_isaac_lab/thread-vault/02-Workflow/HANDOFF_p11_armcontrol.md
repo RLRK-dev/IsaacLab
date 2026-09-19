@@ -3,7 +3,17 @@
 **Naming**: Rs1（人間）／Rs2（=p4/CC・RS-TECH-LEAD）。
 ⚠ **全数値・全 pin の正は repo の artifact**。本書は pointer。⛔ 本書を ground truth にしない（CLAUDE.md §運用4）。
 
-## 直近セッション: 2026-09-13（再開・UR15-B controller 設計 = cycle 2 FAIL 上限・v3 bank・REVIEW を p4 へ）
+## 直近セッション: 2026-09-16 → 09-20（ケーブル前提 (b)(d) 草案 = cycle 2 FAIL 上限・v3 bank・REVIEW を Rs1 へ pin）— 記入 2026-09-20 08:05 JST
+
+- **Rs1 の Q5/Q6/Q7（09-14 06:00・kickoff 09-14 06:06 節 `:2408-2421` @ `236410dd84`）**: Q5 = 水平曲げ DOF を現行 MuJoCo cell の前提として正式採用（旧却下文は日付・環境付き履歴）／Q6 = 仕様文言の更新前に全 cable 結果の再実行は不要（継承結果は env/model/commit 照合・旧 1-DOF 結果は隔離維持・不一致は個別再検証）／Q7 = 並行して草案の修正・再検証を開始。
+- **v2** = `b9f9830b3d`（blob `7e701955e7f8`・107 行・sha256 `8f3a0a574602ab66…28ebf`）→ **5 体検証 cycle 2 = 全 lens FAIL・上限 2 到達 ⇒ DECIDE = FAIL → REVIEW = Rs1**（skill Step 7 `:441`）。**verdict §5** ＋ **v3（union U1-U30 適用・REVIEW packet・未検証）** = `fa8584c3fbc6286fc6ea44fb0a5fe24f74359bb0`（verdict blob `c491ed5e3dc0`・150 行・sha256 `fad6e5af465c…ce85`／v3 blob `8f53a2d699c2`・165 行・sha256 `c1b10cbb879d…2d74`）。⚠ v2 の当卓欠陥 = F4 を dirty tree で読み blob 番号と偽装（U1）・F9 を v1 の行番号のまま「再確認」と書いた（U2）・(iii) を要約して「verbatim」と書いた（U3）— v3 で開示・訂正。
+- **Rs1 の選択肢（verdict §5-C）**: A = LEDGER ＋ RS71 §4 に supersession flag 1 行／B = (iii)(iv) のみ着地／C = v3 全部（未検証のまま着地しない ⇒ D と組む）／D = v3 に cycle 3 を許可。当卓推奨 = B、または D→C。open item = `:29` 再導出待ち中の pin の扱い／DDR #71 下の node 化。p6 依頼 = row 48 閉鎖 actor・(iv) 照合義務の DDR 行・carry 2 件・consumer 表の内容 pin 化（v3 §7-5）。
+- **Step 8**: cycle 2 = `harness-vault/verification-log/verification-log.jsonl` record 35（task_id `p11-cable-premise-bd-draft-20260809`・sha256 `ba3856b80b49…2176`）— ⚠ 同 log は HEAD 7 record・他卓 27 record が未 commit ⇒ 当卓は commit しない。⛔ **cycle 1 は記録不能**（08-09 の 5 body 未保存・converter は reviewer 無しを受けない）= 恒久欠陥として verdict §5-F。
+- **pin** = `m-p11-cable-c2-20260920-0802` → p18（§27 新形式）・p18 transcript `1c3d805c…:44761` enqueue 08:02:55 JST・消費待ち。route = p4 → Rs1（判断）・p6（受領）。
+- ⛔ 当卓が自発しないもの: cycle 3・v4・build・04-Specs 編集・run。controller 側（§17.6 @ `2743fc4549`）は変更なし。
+- 型: challenger body は hand-back 時に file へ（無いと Step 8 が永久に欠ける）／task output は JSONL（本文は SubagentHandback の input）／自分の commit hash は `git log -1 --format=%H -- <自分の path>`／共有 log は append のみ・content sha で pin／heredoc の delimiter は開閉で同一文字列（09-20 に自分で踏んだ・memory 側は修復済）。
+
+## 前セッション: 2026-09-13（再開・UR15-B controller 設計 = cycle 2 FAIL 上限・v3 bank・REVIEW を p4 へ）
 
 ### Context
 - **タスク**: m-p18-280 §3（08-10）= UR15-B controller の設計 court（受諾）→ 設計。Rs1 逐語「UR15-Bようのコントローラも作成」（kickoff `:2225-2231` @ `9e9f6199b3`・DDR #68 `:172` @ `358a1d72ad` 追裁定②）。
