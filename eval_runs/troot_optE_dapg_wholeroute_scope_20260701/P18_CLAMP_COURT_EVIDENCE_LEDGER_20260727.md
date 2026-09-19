@@ -48244,3 +48244,14 @@ ALT-1 (downgrade) — not chosen (the human's word). ALT-2 (`agent prompt`) — 
 - ⛔ 解錠なし・run 0（当卓）・当卓は裁定しない。
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1509 — ✅ **p0 m-p0-372R（391 受領・pZ の catch は 3cb2a28c36 で既に充足と p0 は書く・新規 commit なし・§8.56 addendum 2 `aeee14db72`・次 = pZ leg）→ m-p18-396（→ pZ cc p4 p11 p6・HELD）／idle 窓: 392 → p0（p4 m-p4-280 = 引用行の返却・GRASP1）／§1508 の bank = `692dd1294d`**（当卓 2026-09-20 08:49–08:52 JST 実測）
+
+- **着信**: m-p0-372R `:45369`（08:49:02）。§27 形。
+- **検証**: `aeee14db72`（08:49:02・+4・§8.56 addendum 2）= 実在。3cb2a28c36 = §1504 と同一（以後 commit 0・08:50）。**充足の主張 = p0 の読み**（当卓は裁定しない・pZ の読み・p4 の受入）。**時系列の事実**: p11 §17.8（394・p0/pZ へ hold）は p0 に R0-ii sweep（pose_only=k・model B/RC/NH）の follow-up を求める — 372R は 394 到達前の p0 の語（「新規 commit なし」は §17.8 前の判断）。
+- **hub の動き**: **m-p18-396** = m-p0-372R（`bodies/m-p18-396.txt`・§17.8 未達の注記つき）→ pZ cc p4 p11 p6: held: pZ = HELD(working)・p4 = HELD(paste_in_composer)・p11 = HELD(working)・p6 = HELD(working)（08:50:48.404）。watcher（08:49:32 に p0 READY を検知）→ 完了 **392 → p0**: p0 = DELIVERED(fused_with_unknown_prefix)（08:50:48.589 → `2026-09-19T23:50:48.892Z`）。
+- **watcher pairs の優先を更新**（`next_pairs.py` PRIO）: p0 = 394 を先頭（§17.8 が p0 に follow-up を求める）・pZ = 389 → 394 → 396 → …・p4 = 388 → 395 → 394 → 396 → …・p11 = 392 → 389 → 391 → 396 → …・p6 = 392 → 394 → 396 → …。現 pairs = m-p18-388 RS-TECH-LEAD／m-p18-389 IMPL-VERIFIER／m-p18-394 IMPL-BUILDER／m-p18-392 ARM-CONTROL-DESIGN／m-p18-392 PLAN-KEEPER。
+- **hold 中の leg（08:52・pending.py 実測・死んだ leg 6 件を含む）**: 354（p11・p6） 357（p11・p6） 358（p11） 359（p0・p11・pZ） 360（p11） 361（p11・pZ） 363（p0・p11） 364（p0・p11） 365（p0） 366（p11） 367（pZ） 368（p0・p11） 369（p0・pZ） 370（p0・pZ） 371（p11・pZ） 372（p11） 374（p0） 375（p0・p11・pZ） 376（p0・p11） 377（p0・p11） 378（p11・pZ） 379（p11・pZ） 381（p0・p11） 382（p11・p4・pZ） 383（p11・p4・p6・pZ） 384（p0・p11・p4・p6） 385（p4・pZ） 386（p11） 387（p11・pZ） 388（p4） 389（p11・pZ） 390（p11・p4・pZ） 391（p11・p4） 392（p11・p6・pZ） 394（p0・p4・p6・pZ） 395（p4） 396（p11・p4・p6・pZ）（37 id）。
+- ⛔ 解錠なし・run 0（当卓）・当卓は裁定しない。
+
+**Banked — 時刻は本節 commit の author date が正。**

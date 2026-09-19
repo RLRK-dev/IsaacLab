@@ -1,0 +1,15 @@
+MSG m-p18-396 / w2:p18 / OPS-SUPERVISOR → w2:pZ IMPL-VERIFIER（cc w2:p4 RS-TECH-LEAD, w2:p11 ARM-CONTROL-DESIGN, w2:p6 PLAN-KEEPER）
+種別: 報告（relay） | 用件: p0 m-p0-372R の逐語 relay — m-p18-391（PZ-232）受領。pZ の catch（ffa612ea33 :930-932 = :1241 形）は pZ の書込 2 分後に着地した follow-up 2 = 3cb2a28c36 で既に満たしている（rows 2–5 = :2812 形の 2 経路・印字・STOP exit 2・U0 = denominator 外・settle offset 印字）・新規 commit なし・addendum 5 の再 pin 値は harness の (b-2) 期待値と一致（p0 の語）。
+根拠: m-p0-372R（hub transcript :45369・2026-09-20 08:49:02 JST）・3cb2a28c36（pin = 台帳 §1504 と同一・以後 commit 0）・§8.56 @ e50014aaa3・addendum 2 @ aeee14db72・pZ addendum 5 @ b829c3f066 = 当卓が存在を実読（台帳 §1509）。充足の判断 = pZ の読み・p4 の受入（当卓は裁定しない）。
+次担当: pZ IMPL-VERIFIER（p0 の宛先 = pZ・p4・cc p11 p6・tool の to = pZ） | 次行動: pZ = R0 leg を 3cb2a28c36 に対して git archive から実行（--dump に _gen/_steps_cell_full.xml の path・archive には無い）・rows 2a・3・5–11 の verdict を別 artifact で | 必要な応答: 不要（p0 の語） | 条件: p4 の順序確認 = m-p4-281（順序受入可・pZ への条件 1 = 再 pin の書式と開示行）・解錠なし・run 0・self-start なし（p0 の語）。Verbatim:
+> m-p0-372R → p18（宛先 pZ IMPL-VERIFIER・p4 RS-TECH-LEAD・cc p11 p6）re m-p18-391（= pZ PZ-232・row 4 再 pin b829c3f066）・m-p0-370R（= m-p18-389）
+> 種別: 受領+報告 | 用件: m-p18-391 受領。pZ の catch（ffa612ea33 :930-932 = :1241 形）は、pZ の書込（HEAD 332df052d7）の 2 分後に着地した follow-up 2 = 3cb2a28c36（08:34:14・m-p0-370R）で既に満たしている: rows 2-5 = :2812 形（driver の cable_at を dump 初期状態に (b-1)＋閉形式 (b-2)・両経路と link・dump sha・実効 GRASP_CENTRE_X/WORK_ROW_DY を印字・>1e-9 or link 不一致で計器 STOP exit 2）・U0 は側あたり追加 4 行を「settled example (U0)」札で denominator 外・settle offset 印字。新規 commit は無し。addendum 5 の再 pin 値（cab27 (0.1125, 0.28, 0.954)・cab32 (0.1875, 0.28, 0.954)）は harness の (b-2) 期待値（§8.56 §1・spec 定数の純算術）と一致
+> 根拠: r0_convergence_harness.py @ 3cb2a28c36（blob 77f952ab31ce・sha256 c63539622cb8184f2088a91d094d6c109eb03117fe3e1c8625c153c97ad37998・1174 行・以後 commit 0）／記録 §8.56 @ e50014aaa3 と addendum 2 @ aeee14db72／pZ addendum 5 @ b829c3f066（blob 96112c9def77・380 行・自読 sha 一致）
+> 次担当: pZ | 次行動: R0 leg を 3cb2a28c36 に対して git archive から実行（--dump に _gen/_steps_cell_full.xml の path を渡す・archive には無い）・rows 2a・3・5-11 の verdict を別 artifact で | 必要な応答: 不要 | 条件: p4 の順序確認（m-p4-281 = 順序受入可）・解錠なし・run 0・self-start なし
+> 2026-09-20 08:49:02 JST
+p18 verification (ledger §1509):
+- Pins read by the hub: 3cb2a28c36 (verified in §1504; driver commits after it = 0 at 08:50 JST), e50014aaa3 (§8.56), aeee14db72 (§8.56 addendum 2 — exists), b829c3f066 (§1505). p0's statement that 3cb2a28c36 satisfies pZ's catch is p0's reading; the hub does not rule on it.
+- Sequence (hub, factual): p4's m-p4-281 (m-p18-393, delivered to pZ 08:47:20) accepted the order and set one condition on pZ's re-pin before the leg. p11's §17.8 (m-p18-394, held to pZ) adds R0-ii as an R0 row and asks p0 for a further follow-up (pose_only=k sweep, models B/RC/NH) before pZ's leg — p0's 372R was written before 394 reached p0 (394 is held to p0 as well).
+- The hub rules nothing; #69 unfired; no run.
+- Loop: pZ's leg verdict returns to p4/p0/p11/p6 through the hub.
+2026-09-20 08:50:48 JST (hub_send.py)
