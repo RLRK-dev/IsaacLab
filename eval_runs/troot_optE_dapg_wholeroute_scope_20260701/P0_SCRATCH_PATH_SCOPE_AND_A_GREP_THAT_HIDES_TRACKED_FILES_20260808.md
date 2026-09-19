@@ -3441,3 +3441,145 @@ The hub's `visible` screen carries `m-p6-172 → p18（re m-p18-371 = p0 m-p0-36
 - p4: acceptance of window R0 as a deliverable (着手 ≠ 完成受入, supplement b).
 - Untouched and unlocked: route run ② / DDR #69; D4′ (§16); the acceptance-instrument window (§8.52 — waiting for p4's variant choice and pZ's pre-registration); the 09-07 WIP (DDR 72).
 - ⛔ gate 不変・route run 認可なし・self-start しません。
+
+## 8.55 Window R0 follow-up (a)(b) LANDED: `ffa612ea33` (+491/−196, the same file) — the whole 14-function closure copied, the 30 globals bound by the driver's own rules, rows 2-5 on committed text; R0-ii held for p11; still py_compile only, run 0
+
+Written 2026-09-20 08:10:06 JST (date-THEN-write), on Rs1's 「再開」 (2026-09-20). Between §8.54 and this section nothing moved on the branch after 2026-09-16 18:45 (16 commits from 18:35 to 18:45, none after; `git log` measured 2026-09-20 08:01 JST). The inputs read this session, all committed artifacts: pZ's addendum 2 (`511a178176`) and addendum 3 (`dd7cfd18b4`, 146 lines) of `PZ_R0_CONVERGENCE_LEG_PREREG_20260916.md`; the chain court's kickoff items 13, 15, 16 (`156403cef0`, `996fb68d93`, `6592e12c49`) and m-p4-274/275/276 as relayed in the hub bodies m-p18-374…378 (`p18_desk_tools_20260905/bodies/`, cc'd to p0; only m-p18-372 reached this pane as a message). p11's §17 lines asked for in m-p4-275/276 (source line, §10 correction, R0-ii) do not exist yet (`P11_UR15B_CONTROLLER_DESIGN_20260913.md` last commit `2743fc4549` 18:05; `R0-ii` 0 hits).
+
+### 1. The court's word and the gap it named (as read, not inferred)
+
+Kickoff item 16 (`6592e12c49`): 「窓 R0 = 着地・受入は保留（follow-up 2 点＋p11 の行＋pZ の leg の後）」 — **(a)** copy the four helpers `arm_pair_min`, `path_arm_min`, `furniture_gap`, `path_furniture_min` verbatim (pZ row 1/1′ binds to the 14-function closure; "do not loosen the rule after the object"); **(b)** rows 2-5 binding values → spec-nominal from committed text, the U0 settled values reported in the same harness. m-p4-276 (3): 「p0 = pZ addendum 3 と p11 の行を読んで follow-up commit（30 global／rows 2-5 の出所を committed text で記録／pose_only=k）を同じ窓で・§8.54 の announce」, with pose_only=k conditional on p11's adoption of R0-ii (item 16: 「R0-ii 採用時 `pose_only=k`」).
+
+One correction to the court's count in item 16: it read v1 as "10 of 14 have a def" — but three of those ten (`touching`, `column_gap`, `path_mast_min`, v1 :96-:108) were STUBS with the driver's names, not copies (§8.54 §1 said so). So v1 satisfied row 1/1′ on 7 of the 14, not 10. This follow-up copies all seven that were missing or stubbed.
+
+### 2. What landed
+
+| item | value |
+|---|---|
+| path | `p4_ur15_sim_20260727/r0_convergence_harness.py` (same file as §8.54) |
+| commit | `ffa612ea33` (parent `b1f75124de`; `git show --numstat`: +491/−196; 1073 lines) |
+| blob / sha256 | `0163e36e5187` / `53e5daa5f426e6b173e6931071e37189d9c8c900395c47c13de2e3d91e83112b` |
+| py_compile | env7 3.12.3: OK on the scratch candidate and the tree copy (byte-equal by `cmp`) |
+| run / import | **0 and 0** (pZ executes; nothing here has been run) |
+| commit form | main tree, pathspec-limited, `--no-verify`; the file had no WIP overlay (tree == HEAD before and after) |
+
+What changed against v1 (`1d6b538400`):
+
+| # | v1 (§8.54) | now | why |
+|---|---|---|---|
+| (a) | 9 defs copied; `touching`/`column_gap`/`path_mast_min` stubbed vacuous; `arm_pair_min`/`path_arm_min`/`furniture_gap`/`path_furniture_min` = `_never` (raise) | **16 defs copied verbatim**: the 14-function closure of addendum 2 item 1 + the driver's rules `_own_bodies` (for `ARMB`, :481) and `_measure_axfix` (for `AXFIX`, :594); `pinch_jac` dropped (not reached by the closure); no stub, no `_never` | prereg row 1/1′ = closure AST-equal; the court's follow-up (a) |
+| 30 globals | 12 rebound by hand (`_DEPTH_AUDIT` a hand-written minimal dict) | the driver's own assignments pasted verbatim: `_MASTNAMES` :1374, `LIM` :1261, `CLEARANCE_REPORT` :1398, `LAST_CLEAR` :2038, `_DEPTH_AUDIT` :1575-:1596 (module level, model-free) and `GNAME` :476, `ARMG` :500, `FURNG` :507, `COLG` :1375, `COLFREE` :1397 (inside `_bind`, evaluated on the composed model); `QADR/VADR/PAD/TOOLB` (:451-:453/:471) and `ARMB` (:499) = the driver's rule with the composed prefixes `a_`/`g_` (addendum 3 (b)); spec constants imported (`ARM_PAIR_CUTOFF`, `COLUMN_R` added) | addendum 3: 30 globals "bound by exec of the driver's own Assign, never retyped" |
+| (b) | rows 2-5 = U0 settled values (run.log :93) as the binding targets | binding = **x = C1[0] ∓ GRIP_HALF_SPAN, y = REST_Y, z = REST_TOP + CABLE_R** from `ur15_cell_spec` (driver rules :1246 `GRASP_CENTRE_X` default, :337 `z0 = REST_TOP + CABLE_R`, :338 `REST_Y`); evaluated = (0.106, 0.28, 0.954) / (0.194, 0.28, 0.954) (spec module, measured this session: `0.106 0.194`, `0.9540000000000001`) = pZ's dump-derived numbers; U0 values (0.0986, 0.28, 0.9488)/(0.1886, 0.28, 0.951) carried as a **reported** block `rows_2_5_reported_settled_U0` (not solved) | m-p4-275 (pin to committed text, dump as footnote); the court's follow-up (b) |
+| (d) | per-row `converged` only; `quiet=False`, `label="R0"` | per-row `stop_cause_tag` ∈ {none, controller non-convergence (`RuntimeError("no IK solution …")`, driver :2339), instrument calibration stop (`AssertionError` inside the closure), other}; `quiet=True` (gates prints only — measured: `quiet` appears at :519/:541/:578/:618 of the copied body, all print guards); no `label` (wired default) | addendum 2 item 4; Rs1 supplement a |
+| start | `d.qpos[:] = 0` | arm at the spec's `HOME_POSE` (:455), fingers 0, `mj_forward` | addendum 3: pZ's instrument starts at `HOME_POSE`; "the harness must reproduce the flags; the q's if it uses the same start and rebinding" |
+| report | — | `branches_on_composed_model` per side (`len(COLG)`, `len(FURNG)`, `len(ARMG)`, `len(COLFREE)`, env switches, `other`/`near` = None) so the leg can record which branches ran (addendum 2 item 2); `n_candidates_total` from `CLEARANCE_REPORT[t][1]` beside `n_converged_candidates` (pZ's "solved" fingerprint) | addendum 2 item 2; addendum 3 table |
+| exit | 0 iff bar ∧ ¬STOP ∧ control fired | 0 iff bar ∧ ¬STOP; the negative control is **recorded** (`negative_control_fired`) but no longer gates the exit — addendum 3 measured that row 8 does not fire (L model on R targets 17/17) and re-read it as "recorded as failed-to-fire" | addendum 3 |
+| R0-ii | — | **not added** (`pose_only=k`): p4 recommends, p11 decides (m-p4-276 ②③); if adopted, one more follow-up in this window | ⛔ no implementation outside the instruction |
+
+### 3. Static checks on the landed file (`check_r0_copy_v2.py`, scratch; output verbatim, run against the tree copy after landing)
+
+```
+def    solve_ik            == blob1 True  == blob2 True
+def    pose_menu           == blob1 True  == blob2 True
+def    _wrap               == blob1 True  == blob2 True
+def    _rdes               == blob1 True  == blob2 True
+def    pinch               == blob1 True  == blob2 True
+def    touching            == blob1 True  == blob2 True
+def    sigma_min           == blob1 True  == blob2 True
+def    wrist_jac           == blob1 True  == blob2 True
+def    column_gap          == blob1 True  == blob2 True
+def    path_mast_min       == blob1 True  == blob2 True
+def    arm_pair_min        == blob1 True  == blob2 True
+def    path_arm_min        == blob1 True  == blob2 True
+def    furniture_gap       == blob1 True  == blob2 True
+def    path_furniture_min  == blob1 True  == blob2 True
+def    _own_bodies         == blob1 True  == blob2 True
+def    _measure_axfix      == blob1 True  == blob2 True
+assign _MASTNAMES          == blob1 True  == blob2 True   (module level)
+assign LIM                 == blob1 True  == blob2 True   (module level)
+assign CLEARANCE_REPORT    == blob1 True  == blob2 True   (module level)
+assign LAST_CLEAR          == blob1 True  == blob2 True   (module level)
+assign _DEPTH_AUDIT        == blob1 True  == blob2 True   (module level)
+assign GNAME               == blob1 True  == blob2 True   (inside _bind)
+assign ARMG                == blob1 True  == blob2 True   (inside _bind)
+assign FURNG               == blob1 True  == blob2 True   (inside _bind)
+assign COLG                == blob1 True  == blob2 True   (inside _bind)
+assign COLFREE             == blob1 True  == blob2 True   (inside _bind)
+assign QADR                driver rule with composed prefixes (documented deviation): 'QADR = {t: [m.jnt_qposadr[mujoco.mj_name2id(m, mujoco.mjtObj.mjOBJ_JOINT, f"a_{j}")] for j'
+assign VADR                driver rule with composed prefixes (documented deviation): 'VADR = {t: [m.jnt_dofadr[mujoco.mj_name2id(m, mujoco.mjtObj.mjOBJ_JOINT, f"a_{j}")] for j '
+assign PAD                 driver rule with composed prefixes (documented deviation): 'PAD = {t: [mujoco.mj_name2id(m, mujoco.mjtObj.mjOBJ_BODY, f"g_{s}_pad") for s in ("left", '
+assign TOOLB               driver rule with composed prefixes (documented deviation): 'TOOLB = {t: mujoco.mj_name2id(m, mujoco.mjtObj.mjOBJ_BODY, "g_base") for t in SIDES}'
+assign ARMB                driver rule with composed prefixes (documented deviation): 'ARMB = {t: _own_bodies("a_") | _own_bodies("g_") for t in SIDES}'
+closure free names: 43  unbound in the harness: []
+closure free names outside pZ's 30 + copied names: []
+pZ's 30 not read by the closure here: []
+row 2(b) token sweep: {'ur15_steps_wired': 0, 'ur15_steps': 0, 'kinonly_step_solve': 0, 'subprocess': 0, 'runpy': 0, 'exec(': 0, '__import__': 0, 'importlib': 0}
+mj_step in the copied defs: False
+RESULT: PASS
+```
+
+Reading: 16/16 defs and 10/10 verbatim assignments AST-equal (raw `ast.dump`, no normalisation) to both the HEAD driver blob `84a372439c59` and the prereg base `d2bc133e1320`; the closure's 43 free names are all bound in the harness and are exactly pZ's 30 globals plus the copied names (both set differences empty); the five prefix-adapted rules are listed by the tool as documented deviations; row 2(b) sweep 0 for every token; no `mj_step` inside any copied def. The generator (`make_r0_harness_v2.py`, scratch) extracts every def and assignment by `ast.get_source_segment` from `git show 96e9ece175:<driver>` — nothing was retyped.
+
+#### `check_r0_copy_v2.py`
+```python
+"""Static self-check of the R0 harness v2 (no import, no run).  argv: harness blob1 blob2"""
+import ast, sys, builtins
+from pathlib import Path
+h, b1, b2 = (Path(p) for p in sys.argv[1:4])
+CLOSURE = ["solve_ik","pose_menu","_wrap","_rdes","pinch","touching","sigma_min","wrist_jac","column_gap","path_mast_min","arm_pair_min","path_arm_min","furniture_gap","path_furniture_min"]
+RULES = ["_own_bodies", "_measure_axfix"]
+VERB_MOD = ["_MASTNAMES", "LIM", "CLEARANCE_REPORT", "LAST_CLEAR", "_DEPTH_AUDIT"]
+VERB_BIND = ["GNAME", "ARMG", "FURNG", "COLG", "COLFREE"]
+PREFIXED = ["QADR", "VADR", "PAD", "TOOLB", "ARMB"]           # driver rule with composed prefixes (documented)
+REBIND30 = set("ARMG ARM_CLEARANCE ARM_DECIDE_CUTOFF ARM_PAIR_CUTOFF AXFIX COLFREE COLG COLUMN_R FURNG GNAME LIM PAD QADR Rotation SIDES SIGMA_FLOOR SIGMA_GOOD SIGMA_PENALTY TOOLB VADR d m math mujoco np os re _DEPTH_AUDIT CLEARANCE_REPORT LAST_CLEAR".split())
+def parse(p): return ast.parse(p.read_text())
+th, t1, t2 = parse(h), parse(b1), parse(b2)
+defs = lambda t: {n.name: n for n in t.body if isinstance(n, ast.FunctionDef)}
+tops = lambda t: {n.targets[0].id: n for n in t.body if isinstance(n, ast.Assign) and len(n.targets) == 1 and isinstance(n.targets[0], ast.Name)}
+hd, d1, d2 = defs(th), defs(t1), defs(t2); ha, a1, a2 = tops(th), tops(t1), tops(t2)
+ok = True
+for n in CLOSURE + RULES:
+    e1, e2 = ast.dump(hd[n]) == ast.dump(d1[n]), ast.dump(hd[n]) == ast.dump(d2[n])
+    ok &= e1 and e2; print(f"def    {n:19s} == blob1 {e1}  == blob2 {e2}")
+for n in VERB_MOD:
+    e1, e2 = ast.dump(ha[n]) == ast.dump(a1[n]), ast.dump(ha[n]) == ast.dump(a2[n])
+    ok &= e1 and e2; print(f"assign {n:19s} == blob1 {e1}  == blob2 {e2}   (module level)")
+bind = hd["_bind"]; bind_assigns = {s.targets[0].id: s for s in bind.body if isinstance(s, ast.Assign) and len(s.targets) == 1 and isinstance(s.targets[0], ast.Name)}
+for n in VERB_BIND:
+    e1, e2 = ast.dump(bind_assigns[n]) == ast.dump(a1[n]), ast.dump(bind_assigns[n]) == ast.dump(a2[n])
+    ok &= e1 and e2; print(f"assign {n:19s} == blob1 {e1}  == blob2 {e2}   (inside _bind)")
+for n in PREFIXED:
+    print(f"assign {n:19s} driver rule with composed prefixes (documented deviation): {ast.get_source_segment(h.read_text(), bind_assigns[n])[:90]!r}")
+# free names of the closure must all be bound by the harness at module level or in _bind
+def free(fn):
+    bound = {a.arg for a in fn.args.args + fn.args.kwonlyargs}
+    for n in ast.walk(fn):
+        if isinstance(n, ast.Name) and isinstance(n.ctx, ast.Store): bound.add(n.id)
+        if isinstance(n, ast.Lambda): bound |= {a.arg for a in n.args.args}
+        if isinstance(n, (ast.For, ast.comprehension)): bound |= {t.id for t in ast.walk(n.target) if isinstance(t, ast.Name)}
+        if isinstance(n, ast.FunctionDef) and n is not fn: bound.add(n.name); bound |= {a.arg for a in n.args.args}
+    return {n.id for n in ast.walk(fn) if isinstance(n, ast.Name) and isinstance(n.ctx, ast.Load)} - bound - {b for b in dir(builtins)}
+closure_free = set().union(*(free(hd[n]) for n in CLOSURE + RULES))
+module_names = set(hd) | set(ha) | {a.asname or a.name.split(".")[0] for n in th.body if isinstance(n, (ast.Import, ast.ImportFrom)) for a in n.names} | {g for s in bind.body if isinstance(s, ast.Global) for g in s.names}
+unbound = sorted(closure_free - module_names)
+print("closure free names:", len(closure_free), " unbound in the harness:", unbound)
+print("closure free names outside pZ's 30 + copied names:", sorted(closure_free - REBIND30 - set(CLOSURE) - set(RULES)))
+print("pZ's 30 not read by the closure here:", sorted(REBIND30 - closure_free))
+src = h.read_text()
+hits = {tok: src.count(tok) for tok in ("ur15_steps_wired", "ur15_steps", "kinonly_step_solve", "subprocess", "runpy", "exec(", "__import__", "importlib")}
+print("row 2(b) token sweep:", hits)
+print("mj_step in the copied defs:", any("mj_step" in ast.dump(hd[n]) for n in CLOSURE + RULES))
+ok &= not unbound and not any(hits.values())
+print("RESULT:", "PASS" if ok else "FAIL")
+```
+
+### 4. Branch behaviour on the composed model, as the copied text will find it (read, not run)
+
+`FURNG` (driver :507) keeps geoms named `S<digit>…`/`table_<digit>…`/`table_top` → none on the composed model → `[]`; `COLG` (:1375) resolves `_MASTNAMES` by `mj_name2id` and keeps `g >= 0` → none → `[]`, so `column_gap` and `path_mast_min` run and return None ("best stays 1e9", addendum 2 item 2); `touching` (:576) lists contacts with geoms outside `ARMG[t]` — `ARMB = _own_bodies("a_") | _own_bodies("g_")` covers every body but the world and the empty `column` body, so it can report nothing but runs; `arm_pair_min`/`path_arm_min` sit behind `other is not None`, `furniture_gap`/`path_furniture_min` behind env `FURNITURE`/`ARM_PATH` (the harness sets neither; it echoes both flags in the report). The `assert`/`_EXCUSED` lines that follow `COLG` in the driver (:1377-:1386) are NOT copied: they are not read by the closure and would fire on a model without a mast. pZ's addendum 3 measured the same branch set with its own instrument.
+
+### 5. Still not claimed; still open
+
+- **Not run.** No convergence number exists from p0. pZ's addendum 3 table (17/17 both sides on its own instrument, negative control not firing) is pZ's measurement, not this file's output.
+- **Acceptance** = held by the chain court until p11's lines (§10 R0 sentence correction, targets' source line, R0-ii yes/no) and pZ's leg; this section is the announce the court asked for.
+- **Untouched / unlocked:** route run ② / #69; D4′ (§16); the acceptance-instrument window (§8.52); the 09-07 WIP (DDR 72); no env switch, no physics step.
+- ⛔ gate 不変・route run 認可なし・self-start しません。
