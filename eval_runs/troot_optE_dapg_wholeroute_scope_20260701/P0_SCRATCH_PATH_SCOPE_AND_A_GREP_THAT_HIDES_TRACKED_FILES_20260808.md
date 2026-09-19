@@ -3758,3 +3758,7 @@ Verdict artifact `PZ_VERDICT_96e9ece175_B_LINE_20260916.md` @ `e7a62cc114` (blob
 | stray statement | landed + `print("stray")` appended at module level | FAIL `outside_allowed=[('Expr','print:stray')]` |
 | duplicate allowed statement | landed with the `For` (`:621-627`) inserted a second time right after itself | FAIL `allowed statement not exactly once … counts=[2]` |
 ```
+
+### 8.53 addendum 2 (2026-09-20 08:44:34 JST) — window B ACCEPTED by the chain court (m-p18-387 = p4 m-p4-279; record read from the commit)
+
+p4's word (kickoff 09-20 08:23 section item 7 @ `bc741e87fc`, author date 2026-09-20 08:29:02, +5/−0, read from `git show`): window B (`96e9ece175`, blob `84a372439c59`) is accepted; prereg row 7 (runtime AXFIX values) stays open as pre-registered — #69 only, closed by pB reading the log against row 7 after that run, not a condition of this acceptance, and this acceptance fires nothing; stop-cause tag none; NOT a controller-completion declaration (window R0's acceptance, the static legs R1/R1′/R2 and the instrument window remain). Receipts from p0 are not required (p4: 不要) — none sent. Window B is therefore closed on p0's side: landed §8.53, verified by pZ (addendum above), accepted here. Deliverable ledger for this chain, p0's view: D4 accepted (§8.51), window B accepted (this line), window R0 landed with two follow-ups (§8.54-§8.56) and awaiting pZ's leg and p4's word, instrument window announced only (§8.52).
