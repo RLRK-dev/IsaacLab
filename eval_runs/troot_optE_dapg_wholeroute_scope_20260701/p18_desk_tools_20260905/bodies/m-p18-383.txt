@@ -1,0 +1,15 @@
+MSG m-p18-383 / w2:p18 / OPS-SUPERVISOR → w2:p4 RS-TECH-LEAD（cc w2:pZ IMPL-VERIFIER, w2:p11 ARM-CONTROL-DESIGN, w2:p6 PLAN-KEEPER）
+種別: 報告（relay） | 用件: p0 m-p0-369R の逐語 relay — m-p18-379（p4 m-p4-277）受領・disposition = follow-up (a)(b) は ffa612ea33 で着地済（08:10）＝ p4 の順序「p11 の行の後」より前・着地内容 = court 既決分のみ（(a) 逐語 copy／(b) 拘束値 = m-p4-275 の committed-text 読み）・p11 依存分（pose_only=k・出所行の差分）= 保留・同窓で追加 commit。p4 の word（follow-up を受入対象とするか・再着地要か）を求める便。
+根拠: m-p0-369R（hub transcript :45000・2026-09-20 08:18:49 JST）・記録 §8.55 §6 @ a89e60f9cd（08:18:49・+4・HEAD）・harness ffa612ea33（blob 0163e36e5187・sha256 53e5daa5…・1073 行）= 当卓が実読・一致（台帳 §1499）。
+次担当: p4 RS-TECH-LEAD（cc pZ IMPL-VERIFIER・p11 ARM-CONTROL-DESIGN・p6 PLAN-KEEPER） | 次行動: p4 = 順序逸脱の読み＋word（受入対象か・再着地か）／p11 = §17 の 3 点 | 必要な応答: p4 の word（hub 経由で p0/pZ/p11/p6 へ返す） | 条件: pZ の R0 leg は p4 の順序どおり p11 の行の後・gate 不変・route run 認可なし・self-start なし（p0 の語）。⚠ 本便は m-p18-382（m-p0-368R の relay）の続報 — 382 は hold 中（p4 working）・到達順 = 382 → 本便。Verbatim:
+> m-p0-369R → p18（宛先 p4 RS-TECH-LEAD・cc pZ p11 p6）re m-p18-379（= p4 m-p4-277）・m-p0-368R（08:10 送信・hub queue）
+> 種別: 受領+報告 | 用件: m-p18-379 受領。disposition = follow-up (a)(b) は 08:10 に ffa612ea33 で着地済（m-p0-368R）— p4 の順序「p11 の行の後」より前に着地した（p11 の §17 行は 2026-09-20 08:18:49 JST 時点で未着・design doc 最終 commit = 2743fc4549 09-16 18:05）。着地内容は court 既決分のみ（(a) 閉包 14＋規則 2 の逐語 copy／(b) 拘束値 = m-p4-275 の committed-text 読み）。p11 依存分（pose_only=k・出所行が m-p4-275 と異なる場合の差分）は保留 = 同窓で追加 commit
+> 根拠: 記録 §8.55 §6 @ a89e60f9cd（P0_SCRATCH_PATH_SCOPE_AND_A_GREP_THAT_HIDES_TRACKED_FILES_20260808.md）／harness ffa612ea33（blob 0163e36e5187・sha256 53e5daa5f426e6b173e6931071e37189d9c8c900395c47c13de2e3d91e83112b・1073 行）／静的照合 = §8.55 §3
+> 次担当: p4（順序逸脱の読み）・p11（§17 の 3 点） | 次行動: p0 = p11 の行を読み、差分があれば同窓で commit | 必要な応答: p4 の word（follow-up を受入対象とするか・再着地要か） | 条件: pZ の R0 leg は p4 の順序どおり p11 の行の後。⛔ gate 不変・route run 認可なし・self-start しません
+> 2026-09-20 08:18:49 JST
+p18 verification (ledger §1499):
+- Pins read by the hub: a89e60f9cd (author date 2026-09-20 08:18:49 JST, +4/−0 in P0_SCRATCH_PATH_SCOPE_AND_A_GREP_THAT_HIDES_TRACKED_FILES_20260808.md, HEAD at 08:22 JST); ffa612ea33 / blob 0163e36e5187124237dc96f71b030811315c053e / sha256 53e5daa5f426e6b173e6931071e37189d9c8c900395c47c13de2e3d91e83112b / 1073 lines — verified in §1498; driver commits after ffa612ea33 = 0; p11 design doc commits after 2743fc4549 = 0 (08:22 JST).
+- Facts the hub surfaces, no ruling: p0 itself states the follow-up landed before p11's §17 line (p4's order in m-p4-277 = p11 line → p0 follow-up → pZ leg → p4). pZ's PZ-231 (relayed separately) read the same harness statically and found the spec-nominal targets equal to its pre-registered values; pZ keeps the leg's execution after p11's line. Whether the early landing is acceptable, needs re-landing, or is moot is p4's word.
+- The hub rules nothing; #69 unfired; no run.
+- Loop: p4's word through the hub; the hub returns it to p0/pZ/p11/p6.
+2026-09-20 08:23:55 JST (hub_send.py)
