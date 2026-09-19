@@ -3587,3 +3587,153 @@ print("RESULT:", "PASS" if ok else "FAIL")
 ### 6. Order deviation, acknowledged (m-p18-379 = p4 m-p4-277, relayed 2026-09-20 08:06 after a 4-day hub stop; read after the landing above)
 
 p4's order (m-p4-277 (2)/(3)): **p11 (§10 correction, targets' source line, R0-ii) → p0 follow-up → pZ R0 leg → p4**; "p0 = p11 の行の後に follow-up commit". The follow-up above (`ffa612ea33`, 08:10) landed **before** p11's line — at 2026-09-20 08:18:49 JST the design doc's last commit is still `2743fc4549 09-16 18:05` and `R0-ii` has 0 hits in it. What was landed depends only on what the court had already decided ((a) the closure = pZ row 1/1′ + item 16; (b) the binding values = m-p4-275's committed-text reading, which p4 says p11's line is to *confirm*); what depends on p11 — `pose_only=k` and any difference between p11's source line and m-p4-275's reading — is held and would be one more commit in this window. If the court reads the early landing as a cost, the cost is the same shape as §8.54's (a follow-up commit), not a change of content; the harness has no reader yet (pZ's leg is after the follow-up by p4's own order). Disposition sent as m-p0-369R.
+
+## 8.56 Window R0 follow-up 2 LANDED: `3cb2a28c36` (+154/−53, the same file) — rows 2-5 bound to §17.7's link-centre form by two agreeing paths, `cable_at` copied, the U0 rows solved as reported extras; this is the R0 announce with the §17.6 (i) row; still py_compile only, run 0
+
+Written 2026-09-20 08:34:13 JST (date-THEN-write). Trigger = m-p18-385 (relay of p11 m-p11-r0src-20260920-0823, 08:23:55): §17.7 of `P11_UR15B_CONTROLLER_DESIGN_20260913.md` @ `7427c1764c` (blob `f6289caa63c4`, sha256 `1e751b5c57df229b…`, 267 lines; §17.7 = :261-:267; §17.6 condition (i) = :256) — read in full from the blob, not from the relay. Order set there and by p4 (item 12): §17.7 → pZ re-pins row 4 in the `:2812` form → p0 announces → pZ executes. Status of pZ's re-pin at this write: prereg last commit = `e8a2d6d02a 09-20 08:18 Read p0's follow-up R0 harness statically before p11's line: 16 defs AST-equa` (4 addenda; addendum 4 of 08:18 pre-read `ffa612ea33` against addendum 2's `:1241`-form values, before §17.7).
+
+### 1. What §17.7 decides, and what it changed here
+
+Binding value for rows 2-5 = the driver's own `cable_at` (:1221-:1228 @ `84a372439c59`; `:1210` @ `d2bc133e1320`) evaluated on the emitted cell's rest state — the dump `_gen/_steps_cell_full.xml` the driver writes at import (:446), loaded and `mj_forward`ed at its initial state, before any settle — in the **`:2812-:2813` form** (x, y, z all = the centre of the nearest cable link; the form `STEPS` commands at run time), **not** the `:1241` form (commanded x) that v2 (§8.55) and pZ's addendum 2 used. Two paths must agree to ≤ 1e-9 and in link number, else the instrument STOPs: (b-1) `cable_at` on the dump; (b-2) the closed form from the cell constants, link i at `c_i = (x0 + (i + ½)·CABLE_SEG, REST_Y, REST_TOP + CABLE_R)`, `x0 = −CABLE_SEG·CABLE_N/2` (driver :336-:338), `i = argmin |c_i.x − (GRASP_CENTRE_X ∓ GRIP_HALF_SPAN)|`. §17.7's numbers: `GL = (0.1125, 0.28, 0.954)` cab27, `GR = (0.1875, 0.28, 0.954)` cab32 — 6.5 mm per side in x from v2's (0.106/0.194). Path (a) = the U0 settled values: reported, solved as extra rows outside the denominator, settle offset (a) − (b) printed per side in three components.
+
+| # | v2 (`ffa612ea33`, §8.55) | now | where |
+|---|---|---|---|
+| rows 2-5 binding | spec-nominal `:1241` form from constants: (0.106, 0.28, 0.954)/(0.194, 0.28, 0.954) | `_grasp_targets(dump)`: (b-2) closed form from `ur15_cell_spec` constants; (b-1) the copied `cable_at` on the dump's initial state with `CAB` (:454) pasted verbatim inside the function and `m`/`d` bound to the dump model/data while it runs; `InstrumentStop` (tag 「instrument calibration stop」, exit 2, JSON written) on absent/unloadable dump, on `max|b1 − b2| > 1e-9`, or on unequal link numbers; both paths, link numbers, dump sha256, effective `GRASP_CENTRE_X` (:1246 pasted verbatim, env-set flag) and `WORK_ROW_DY` (spec :397, env-set flag) go to the report | harness `_grasp_targets`, `main` |
+| copied rules | `_own_bodies`, `_measure_axfix` | + `cable_at` (17 defs copied) | verbatim section |
+| verbatim assigns | 10 | + `GRASP_CENTRE_X` (module level), `CAB` (inside `_grasp_targets`) = 12 | check output §3 |
+| U0 values | a reported block, not solved | 4 extra rows per side (steps 2-5 at the U0 GL/GR), `row_tag` 「settled example (U0)」, `in_denominator: false`; settle offset printed; provenance = `_gen/dod_c2_20260810/run.log` :93 (sha256 `04599b84e34be51ec906662f0d92aa8349eae833034c3a7e8d070d6c808b8868`), the driver's 「re-measured after the approach」 print (:2825 @ `84a372439c59`; :2695 in `c737f6974e`, the last driver commit before that run day — the log carries no driver stamp (E1's RUN_METRICS came later), so the driver version at the U0 run is an **inference** from the commit timeline, to be confirmed by p4's custody) | `_u0_rows`, `U0_SETTLED` |
+| CLI | `--out --seed --re-max` | + `--dump` (default `<HERE>/_gen/_steps_cell_full.xml`) — needed because pZ runs from a `git archive`, which has no `_gen/` (the dump is gitignored, `git check-ignore` rc=0 for the path) | `main` |
+| exit code | 0 iff bar ∧ ¬STOP | same; 2 on instrument stop | `main` |
+| R0-ii | not added | not added — §17.7 covers the source line only; the §10 correction and R0-ii yes/no (m-p4-276 (3)) are still p11's | — |
+
+Expected (b-2) numbers, computed this session by pure arithmetic from the spec module (NOT a harness run; the harness was not executed): L → cab27 `(0.11249999999999999, 0.28, 0.9540000000000001)`, R → cab32 `(0.1875, 0.28, 0.9540000000000001)` — §17.7's values. Path (b-1) has not been evaluated by p0; if the dump's absolute mesh paths (`/home/rlrk/src/ur15-line-render/assets/…`) do not resolve where pZ runs, the harness stops with the loader's message rather than solving on a guess. pZ's addendum 3 loaded the same dump (sha256 `4158e4e638e9b0fc…`, 40 `cab` bodies) on this machine.
+
+### 2. What landed
+
+| item | value |
+|---|---|
+| path / commit | `p4_ur15_sim_20260727/r0_convergence_harness.py` @ `3cb2a28c36` (parent `332df052d7`; +154/−53; 1174 lines) |
+| blob / sha256 | `77f952ab31ce` / `c63539622cb8184f2088a91d094d6c109eb03117fe3e1c8625c153c97ad37998` |
+| py_compile | env7 3.12.3 OK (scratch candidate and tree copy byte-equal) |
+| run / import | 0 and 0 |
+| commit form | main tree, pathspec-limited, `--no-verify`; tree == HEAD before and after |
+
+### 3. Static checks on the landed file (`check_r0_copy_v3.py`, output verbatim, run on the tree copy after landing) — this carries §17.6 condition (i)
+
+```
+def    solve_ik            == blob1 True  == blob2 True
+def    pose_menu           == blob1 True  == blob2 True
+def    _wrap               == blob1 True  == blob2 True
+def    _rdes               == blob1 True  == blob2 True
+def    pinch               == blob1 True  == blob2 True
+def    touching            == blob1 True  == blob2 True
+def    sigma_min           == blob1 True  == blob2 True
+def    wrist_jac           == blob1 True  == blob2 True
+def    column_gap          == blob1 True  == blob2 True
+def    path_mast_min       == blob1 True  == blob2 True
+def    arm_pair_min        == blob1 True  == blob2 True
+def    path_arm_min        == blob1 True  == blob2 True
+def    furniture_gap       == blob1 True  == blob2 True
+def    path_furniture_min  == blob1 True  == blob2 True
+def    _own_bodies         == blob1 True  == blob2 True
+def    _measure_axfix      == blob1 True  == blob2 True
+def    cable_at            == blob1 True  == blob2 True
+assign _MASTNAMES          == blob1 True  == blob2 True   (module level)
+assign LIM                 == blob1 True  == blob2 True   (module level)
+assign CLEARANCE_REPORT    == blob1 True  == blob2 True   (module level)
+assign LAST_CLEAR          == blob1 True  == blob2 True   (module level)
+assign _DEPTH_AUDIT        == blob1 True  == blob2 True   (module level)
+assign GRASP_CENTRE_X      == blob1 True  == blob2 True   (module level)
+assign GNAME               == blob1 True  == blob2 True   (inside _bind)
+assign ARMG                == blob1 True  == blob2 True   (inside _bind)
+assign FURNG               == blob1 True  == blob2 True   (inside _bind)
+assign COLG                == blob1 True  == blob2 True   (inside _bind)
+assign COLFREE             == blob1 True  == blob2 True   (inside _bind)
+assign CAB                 == blob1 True  == blob2 True   (inside _grasp_targets)
+assign QADR                driver rule with composed prefixes (documented deviation)
+assign VADR                driver rule with composed prefixes (documented deviation)
+assign PAD                 driver rule with composed prefixes (documented deviation)
+assign TOOLB               driver rule with composed prefixes (documented deviation)
+assign ARMB                driver rule with composed prefixes (documented deviation)
+negative control (17.6 i): solve_ik copy with one literal 0.002->0.003 reads unequal to both blobs: True (literals changed: 1)
+closure free names: 43  cable_at free names: ['CAB', 'CABLE_SEG', 'd', 'np']  unbound in the harness: []
+closure free names outside pZ's 30 + copied names: []
+pZ's 30 not read by the closure here: []
+row 2(b) token sweep: {'ur15_steps_wired': 0, 'ur15_steps': 0, 'kinonly_step_solve': 0, 'subprocess': 0, 'runpy': 0, 'exec(': 0, '__import__': 0, 'importlib': 0}
+mj_step in the copied defs: False
+RESULT: PASS
+```
+
+§17.6 (i) as read: the solver AST-equal to the D4 blob `d2bc133e1320`'s `solve_ik` + dependencies after the one enumerated rebinding, negative control = one literal changed reads unequal. Here: 17 defs and 12 assignments equal under raw `ast.dump` (stricter than N1-N3 — no normalisation was needed because the text is AST-extracted, never retyped) to `d2bc133e1320` AND `84a372439c59`; the negative control mutates the acceptance literal `0.002 → 0.003` inside the harness's `solve_ik` copy and the comparison reads unequal to both blobs. The five prefix-adapted rules and the two `SIDES`-narrowed comprehensions are the enumerated rebinding.
+
+#### `check_r0_copy_v3.py`
+```python
+"""Static self-check v3 (no import, no run).  argv: harness blob1 blob2.  Adds section 17.6 (i) negative control."""
+import ast, sys, builtins, copy
+from pathlib import Path
+h, b1, b2 = (Path(p) for p in sys.argv[1:4])
+CLOSURE = ["solve_ik","pose_menu","_wrap","_rdes","pinch","touching","sigma_min","wrist_jac","column_gap","path_mast_min","arm_pair_min","path_arm_min","furniture_gap","path_furniture_min"]
+RULES = ["_own_bodies", "_measure_axfix", "cable_at"]
+VERB_MOD = ["_MASTNAMES", "LIM", "CLEARANCE_REPORT", "LAST_CLEAR", "_DEPTH_AUDIT", "GRASP_CENTRE_X"]
+VERB_BIND = ["GNAME", "ARMG", "FURNG", "COLG", "COLFREE"]; VERB_DUMP = ["CAB"]
+PREFIXED = ["QADR", "VADR", "PAD", "TOOLB", "ARMB"]
+REBIND30 = set("ARMG ARM_CLEARANCE ARM_DECIDE_CUTOFF ARM_PAIR_CUTOFF AXFIX COLFREE COLG COLUMN_R FURNG GNAME LIM PAD QADR Rotation SIDES SIGMA_FLOOR SIGMA_GOOD SIGMA_PENALTY TOOLB VADR d m math mujoco np os re _DEPTH_AUDIT CLEARANCE_REPORT LAST_CLEAR".split())
+RULE_GLOBALS = {"CAB", "CABLE_SEG", "CABLE_N", "C1", "GRIP_HALF_SPAN", "GRASP_CENTRE_X"}   # read by cable_at / the target rules
+parse = lambda p: ast.parse(p.read_text()); th, t1, t2 = parse(h), parse(b1), parse(b2)
+defs = lambda t: {n.name: n for n in t.body if isinstance(n, ast.FunctionDef)}
+tops = lambda t: {n.targets[0].id: n for n in t.body if isinstance(n, ast.Assign) and len(n.targets) == 1 and isinstance(n.targets[0], ast.Name)}
+inner = lambda fn: {s.targets[0].id: s for s in fn.body if isinstance(s, ast.Assign) and len(s.targets) == 1 and isinstance(s.targets[0], ast.Name)}
+hd, d1, d2 = defs(th), defs(t1), defs(t2); ha, a1, a2 = tops(th), tops(t1), tops(t2)
+ok = True
+for n in CLOSURE + RULES:
+    e1, e2 = ast.dump(hd[n]) == ast.dump(d1[n]), ast.dump(hd[n]) == ast.dump(d2[n]); ok &= e1 and e2
+    print(f"def    {n:19s} == blob1 {e1}  == blob2 {e2}")
+for n in VERB_MOD:
+    e1, e2 = ast.dump(ha[n]) == ast.dump(a1[n]), ast.dump(ha[n]) == ast.dump(a2[n]); ok &= e1 and e2
+    print(f"assign {n:19s} == blob1 {e1}  == blob2 {e2}   (module level)")
+ba, da = inner(hd["_bind"]), inner(hd["_grasp_targets"])
+for n in VERB_BIND:
+    e1, e2 = ast.dump(ba[n]) == ast.dump(a1[n]), ast.dump(ba[n]) == ast.dump(a2[n]); ok &= e1 and e2
+    print(f"assign {n:19s} == blob1 {e1}  == blob2 {e2}   (inside _bind)")
+for n in VERB_DUMP:
+    e1, e2 = ast.dump(da[n]) == ast.dump(a1[n]), ast.dump(da[n]) == ast.dump(a2[n]); ok &= e1 and e2
+    print(f"assign {n:19s} == blob1 {e1}  == blob2 {e2}   (inside _grasp_targets)")
+for n in PREFIXED:
+    print(f"assign {n:19s} driver rule with composed prefixes (documented deviation)")
+# section 17.6 (i) negative control: one literal changed in the harness's solve_ik copy must read UNEQUAL
+mut = copy.deepcopy(hd["solve_ik"]); hit = 0
+for node in ast.walk(mut):
+    if isinstance(node, ast.Constant) and node.value == 0.002 and hit == 0:
+        node.value = 0.003; hit += 1
+neg_unequal = hit == 1 and ast.dump(mut) != ast.dump(d1["solve_ik"]) and ast.dump(mut) != ast.dump(d2["solve_ik"])
+print(f"negative control (17.6 i): solve_ik copy with one literal 0.002->0.003 reads unequal to both blobs: {neg_unequal} (literals changed: {hit})")
+ok &= neg_unequal
+def free(fn):
+    bound = {a.arg for a in fn.args.args + fn.args.kwonlyargs}
+    for n in ast.walk(fn):
+        if isinstance(n, ast.Name) and isinstance(n.ctx, ast.Store): bound.add(n.id)
+        if isinstance(n, ast.Lambda): bound |= {a.arg for a in n.args.args}
+        if isinstance(n, (ast.For, ast.comprehension)): bound |= {t.id for t in ast.walk(n.target) if isinstance(t, ast.Name)}
+        if isinstance(n, ast.FunctionDef) and n is not fn: bound.add(n.name); bound |= {a.arg for a in n.args.args}
+    return {n.id for n in ast.walk(fn) if isinstance(n, ast.Name) and isinstance(n.ctx, ast.Load)} - bound - set(dir(builtins))
+closure_free = set().union(*(free(hd[n]) for n in CLOSURE + RULES[:2]))
+rule_free = free(hd["cable_at"])
+module_names = set(hd) | set(ha) | {a.asname or a.name.split(".")[0] for n in th.body if isinstance(n, (ast.Import, ast.ImportFrom)) for a in n.names} | {g for f in ("_bind", "_grasp_targets") for s in hd[f].body if isinstance(s, ast.Global) for g in s.names}
+unbound = sorted((closure_free | rule_free) - module_names)
+print("closure free names:", len(closure_free), " cable_at free names:", sorted(rule_free), " unbound in the harness:", unbound)
+print("closure free names outside pZ's 30 + copied names:", sorted(closure_free - REBIND30 - set(CLOSURE) - set(RULES)))
+print("pZ's 30 not read by the closure here:", sorted(REBIND30 - closure_free))
+src = h.read_text()
+hits = {tok: src.count(tok) for tok in ("ur15_steps_wired", "ur15_steps", "kinonly_step_solve", "subprocess", "runpy", "exec(", "__import__", "importlib")}
+print("row 2(b) token sweep:", hits)
+print("mj_step in the copied defs:", any("mj_step" in ast.dump(hd[n]) for n in CLOSURE + RULES))
+ok &= not unbound and not any(hits.values())
+print("RESULT:", "PASS" if ok else "FAIL")
+```
+
+### 4. Open, not claimed
+
+- Not run; no number from p0. pZ: re-pin row 4 (if not yet), then execute from the commit with `--dump <path to _gen/_steps_cell_full.xml>` (the archive has none), rows 1-11 + 1′ + addenda; stop-cause tag per row and for the target calibration.
+- p11: §10 R0 sentence correction and R0-ii (m-p4-276 (3)) — not in §17.7; `pose_only=k` stays out until decided.
+- p4: acceptance of window R0 after pZ's leg; window B after pZ's B-line leg.
+- Untouched / unlocked: route run ② / #69; D4′; the acceptance-instrument window (§8.52); WIP. ⛔ gate 不変・route run 認可なし・self-start しません。
