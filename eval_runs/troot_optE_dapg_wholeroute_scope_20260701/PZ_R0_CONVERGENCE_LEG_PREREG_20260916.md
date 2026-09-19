@@ -144,3 +144,149 @@ rec = dict(side=SIDE, model=MODEL, module_state_init={k: ast.unparse(_mod[k])[:9
 open(OUT, "w").write(json.dumps(rec, indent=1)); print(json.dumps({k: v for k, v in rec.items() if k != "rows"})); print("converged rows:", sum(r["converged"] for r in rows), "/", len(rows), "| pe_mm max:", max([r.get("pe_mm", 0) for r in rows] or [0]))
 for r in rows: print(" ", r)
 ```
+
+## Addendum 4 (2026-09-20 08:18:24 JST) — static read of p0's follow-up harness `ffa612ea33` before p11's §17 line: rows 1/1′/2b/2c/3 hold statically, and the row-4 re-pin is number-preserving (spec-nominal == addendum 2's values, difference 0)
+
+**Order of existence at writing**: HEAD `2f7e9208fb`; harness commits after `ffa612ea33` = 0; p11 design-doc commits after `2743fc4549` = 0 (no §17 line on the R0 targets' source yet); the hub's ledger last banked @ `5adf8d6483 2026-09-16 18:44` (PZ-230 not yet banked). The **leg itself (execution, rows 2a-runtime, 3-AXFIX, 5-11) is not run here** — p4's order (kickoff item 16 @ `6592e12c49`, m-p4-276 via m-p18-377) puts it after p11's line. This addendum records what the object already shows statically so that p11's line can be written against measured facts, and so that a later leg does not re-derive them.
+
+**Object**: `ffa612ea33` (author date 2026-09-20 08:10:06 JST, parent `b1f75124de`, +491/−196, one file), harness blob `0163e36e5187` (sha256 `53e5daa5f426e6b173e6931071e37189d9c8c900395c47c13de2e3d91e83112b`, 1,073 lines); its previous blob `1d6b53840028` @ `d038e2536f` (778 lines, sha256 `28115a3d523a1061…`). Driver blobs compared against: `84a372439c59` @ `96e9ece175` and `d2bc133e1320` @ `3370f7a872`.
+
+| row | static result on `ffa612ea33` | measurement (appendix D/E instruments; python3 AST only, nothing imported or run) |
+|---|---|---|
+| 1 / 1′ copy fidelity | **holds statically** | 16 top-level defs of the harness have the same name in the driver and are **raw-`ast.dump`-equal** (no N1-N3) to **both** driver blobs: the 14-function closure of addendum 2 (`solve_ik :131-551`, `pose_menu`, `_wrap`, `_rdes`, `pinch`, `touching`, `sigma_min`, `wrist_jac`, `column_gap`, `path_mast_min`, `arm_pair_min`, `path_arm_min`, `furniture_gap`, `path_furniture_min`) + the driver's rules `_own_bodies` (:853) and `_measure_axfix` (:871). v1's three stubs and four raisers are gone. **Negative control fired**: the harness's `solve_ik` with `0.002 → 0.003` reads **unequal** to the blob (the comparison is alive) |
+| 1′ the 30-global binding | **30/30 bound** | free names of the closure (v2 scan, store-context Names = locals) = the 30 of addendum 3; the harness's copied defs read exactly those 30; every one is bound at module level or in `_bind()` via `global`. By statement: **16 bound by a statement AST-equal to the driver's own** (`ARMG`, `AXFIX = _measure_axfix()`, `COLFREE`, `COLG`, `FURNG`, `GNAME`, `CLEARANCE_REPORT = {}`, `LAST_CLEAR = {}`, `LIM = np.array(LIMS)`, `_DEPTH_AUDIT` init, `Rotation`, `math`, `mujoco`, `np`, `os`, `re`); **4 with the composed prefixes** (`QADR`/`VADR` `a_{j}` for `{t}_{j}`, `PAD` `g_{s}_pad` for `{t}g_{s}_pad`, `TOOLB` `g_base` for `{t}g_base`) plus `ARMB = _own_bodies("a_") | _own_bodies("g_")` for the driver's `{t}_`/`{t}g_` (`:499`, = addendum 3 (b)); `SIDES` narrowed to `{t: _spec.SIDES[t]}`; `m`/`d` = the composed model; the 7 spec constants (`ARM_CLEARANCE`, `ARM_DECIDE_CUTOFF`, `ARM_PAIR_CUTOFF`, `COLUMN_R`, `SIGMA_FLOOR/GOOD/PENALTY`) imported from `ur15_cell_spec` by name, the driver's source. `mujoco.mj_step` is rebound to a counter (the row-2a witness) — the one rebinding outside the closure's globals |
+| 2b static sweep | **0 hits** | `ur15_steps_wired`, `ur15_steps`, `kinonly_step_solve`, `subprocess`, `runpy`, `exec(`, `__import__`, `importlib` = 0 each; `py_compile` OK (env7 3.12) |
+| 2c outputs | **untracked path only** | default `--out` = `p4_ur15_sim_20260727/_gen/r0_convergence/` (tracked files under `_gen` = 0); my execution will run from a `git archive` in the scratchpad with `--out` there |
+| 3 composed models | **same builder** | `build_side` @ HEAD blob `ad1d80d49f24` == the `b7a5e39ecf` blob (same blob id; all 6 defs AST-equal). Measured today on both sides: `nbody` 22, `ngeom` 38, `nq` 14; bodies outside `a_`/`g_` = `world`, `column` with **0 geoms** ⇒ 0 collidable non-arm geoms; `ncon` = 0 at `qpos = 0` and at the AXFIX seed pose |
+| 4 targets (re-pin, pending p11) | **numbers unchanged** | the harness binds rows 2-5 to **spec-nominal committed text**: `x = C1[0] ∓ GRIP_HALF_SPAN`, `y = REST_Y`, `z = REST_TOP + CABLE_R` (driver `:337-338` cable placement, `:1246` `GRASP_CENTRE_X` default) — evaluated from `ur15_cell_spec.py` blob `6bdf7ea4f9ca` (`C1 :537`, `GRIP_HALF_SPAN :65`, `REST_Y :433`, `REST_TOP :512`, `CABLE_R :57`) = **`GL = (0.106, 0.28, 0.954)`, `GR = (0.194, 0.28, 0.954)` — identical to addendum 2's dump-derived values, difference 0.0 in all six numbers** (the L1 dump holds the cable at exactly that placement pose). The U0 settled values `(0.0986, 0.28, 0.9488)` / `(0.1886, 0.28, 0.951)` (`_gen/dod_c2_20260810/run.log :93`, sha256 `04599b84e34be51e…`, present on disk, untracked) are **reported beside, not solved**. Rows 6-18: `Z_SEAT = seat_z(FLOAT_Z) = 0.809`, `Z_RISE_REST = 1.030`, `Z_RISE_ROUTE = 0.980`, `RX_MID = 0.095` = addendum 2. ⇒ addendum 3's expectation table applies unchanged to the harness's binding targets. The formal re-pin follows p11's line: if (b) spec-nominal, these numbers; if (a) the U0 values, rows 2-5 move ≤ 7.4 mm in x / ≤ 5.2 mm in z and are re-solved |
+| 5 / 6 run form, converged | **matches the wired form** | `_solve_rows` (:969): `solve_ik(t, tgt, tries=None, iters=300, seed=seed, near=None, other=None, re_max=re_max, quiet=True)`, defaults seed 1 / re_max 0.05; converged := `solve_ik` returned; `RuntimeError("no IK solution …")` → tag `controller non-convergence`, `AssertionError` in the closure → `instrument calibration stop`, other `RuntimeError` → `other` (§17.4); `pe` re-checked on a throwaway `MjData` (kinematics only), `re` not re-checked — stated in the record, not hidden; start pose = the spec's `HOME_POSE` = my instrument's |
+| 7 / 8 bar, negative control | **computed as pre-registered** | `main` (:1007): `L_converges_R_not` must be `[]`, `R_converged == 0` → STOP flag; negative control (R column on the L model) **recorded** (`negative_control_fired`) and no longer gates the exit — consistent with addendum 3 (row 8 measured as failed-to-fire); exit 0 iff bar ∧ ¬STOP |
+| R0-ii | absent | `pose_only` does not occur in the harness — held for p11 (m-p4-276 ③) |
+
+**A v1 concern, closed by measurement.** v1 (`1d6b53840028`) stubbed `touching → []`. The driver's `touching` (`:576-591`) reports contacts between this arm's geoms (`ARMG`) and geoms **outside** it; on the composed model there are 0 geoms outside the `a_`/`g_` bodies, so the real function returns ∅ there — v1's stub was equivalent by measurement, not only "by construction". Moot for v2 (the real function is copied), recorded so the reasoning is not lost.
+
+**What remains for the leg (after p11's line)**: run `ffa612ea33` from a `git archive` under my `mj_step` counter (row 2a + positive control), `sys.modules` sweep, AXFIX vs my banked values ≤ 1e-9 (row 3), the 17 rows both sides (rows 5-7), negative control (row 8), row-for-row cross-check with `pz_r0.py` (row 9), report form with stop-cause tags (row 10), pins (row 11); plus R0-ii if p11 adopts it. Nothing executed by this desk for this addendum; route run (2) / #69 / D4′ / WIP untouched.
+
+Supersedes sha `7746348239a179527ea0bdb1ebee60b3e622cd2f0d9fa0f0886490ea6bd92836` @ dd7cfd18b4 (rows 1-11, 1′, addenda 2-3 stand).
+
+## Appendix D — `pz_r0_static.py` (verbatim; sha256 45e6b5f93d62157c3c9006de4bb779789781245d92faa98be091517d154f1419)
+```python
+"""pZ static read of the R0 harness: copy fidelity (raw ast.dump), closure coverage, free-name binding, negative control."""
+import ast, sys, builtins
+H, BLOB = sys.argv[1], sys.argv[2]
+hs = open(H).read(); bs = open(BLOB).read()
+ht, bt = ast.parse(hs), ast.parse(bs)
+hf = {n.name: n for n in ht.body if isinstance(n, ast.FunctionDef)}
+bf = {n.name: n for n in bt.body if isinstance(n, ast.FunctionDef)}
+CLOSURE = ["solve_ik","pose_menu","_wrap","_rdes","pinch","touching","sigma_min","wrist_jac","column_gap","path_mast_min","arm_pair_min","path_arm_min","furniture_gap","path_furniture_min"]
+print("== per-def raw ast.dump equality (harness vs blob) ==")
+eq = {}
+for n, f in hf.items():
+    if n in bf:
+        eq[n] = ast.dump(f) == ast.dump(bf[n])
+        print(f"  {n:22} harness {f.lineno}-{f.end_lineno:<4} blob {bf[n].lineno}-{bf[n].end_lineno:<5} equal={eq[n]}")
+print("== my 14-function closure: status in the harness ==")
+hassign = {}
+for s in ht.body:
+    if isinstance(s, ast.Assign):
+        for tg in s.targets: hassign[ast.unparse(tg)] = ast.unparse(s.value)[:60]
+for n in CLOSURE:
+    if n in hf: st = "COPY(AST-equal)" if eq.get(n) else "REDEFINED(stub, not equal)"
+    elif n in hassign: st = f"ASSIGNED = {hassign[n]}"
+    else: st = "ABSENT"
+    print(f"  {n:22} {st}")
+# free names (v2: store-context Names are locals; params too)
+def free(fn):
+    params = {a.arg for a in fn.args.args + fn.args.kwonlyargs + fn.args.posonlyargs}
+    if fn.args.vararg: params.add(fn.args.vararg.arg)
+    if fn.args.kwarg: params.add(fn.args.kwarg.arg)
+    loc = set(params); glob_decl = set()
+    for n in ast.walk(fn):
+        if isinstance(n, ast.Name) and isinstance(n.ctx, ast.Store): loc.add(n.id)
+        if isinstance(n, ast.Global): glob_decl |= set(n.names)
+        if isinstance(n, (ast.FunctionDef, ast.AsyncFunctionDef, ast.ClassDef)) and n is not fn: loc.add(n.name)
+        if isinstance(n, ast.arg): loc.add(n.arg)
+        if isinstance(n, ast.ExceptHandler) and n.name: loc.add(n.name)
+        if isinstance(n, ast.comprehension): pass
+    loc -= glob_decl
+    out = set()
+    for n in ast.walk(fn):
+        if isinstance(n, ast.Name) and isinstance(n.ctx, ast.Load) and n.id not in loc and not hasattr(builtins, n.id): out.add(n.id)
+    return out
+closure_free = set()
+for n in CLOSURE:
+    if n in bf: closure_free |= free(bf[n])
+closure_free -= set(CLOSURE)
+print(f"== driver closure (14 fns) free names: {len(closure_free)} ==\n  {sorted(closure_free)}")
+copied = [n for n in hf if n in bf and eq.get(n)]
+cf = set()
+for n in copied: cf |= free(hf[n])
+cf -= set(hf)
+print(f"== harness copied defs ({len(copied)}) free names: {len(cf)} ==\n  {sorted(cf)}")
+# binding in the harness: module-level names
+bound = set()
+for s in ht.body:
+    if isinstance(s, ast.Assign):
+        for tg in s.targets:
+            for n in ast.walk(tg):
+                if isinstance(n, ast.Name): bound.add(n.id)
+    if isinstance(s, (ast.Import, ast.ImportFrom)): bound |= {(a.asname or a.name).split(".")[0] for a in s.names}
+    if isinstance(s, (ast.FunctionDef, ast.ClassDef)): bound.add(s.name)
+# names set via `global` inside functions
+gset = set()
+for f in hf.values():
+    for n in ast.walk(f):
+        if isinstance(n, ast.Global): gset |= set(n.names)
+print(f"== unbound free names of the copied defs at harness module level: {sorted(cf - bound)}  (global-decl in fns: {sorted(gset)})")
+print(f"== closure names the harness does NOT bind or define: {sorted(closure_free - bound)}")
+# negative control for row 1': one literal changed in the harness's solve_ik must read unequal
+src2 = hs.replace("pe > 0.002", "pe > 0.003", 1)
+assert src2 != hs, "literal not found"
+f2 = {n.name: n for n in ast.parse(src2).body if isinstance(n, ast.FunctionDef)}["solve_ik"]
+print("== row 1' negative control: solve_ik with 0.002->0.003 equal to blob? ", ast.dump(f2) == ast.dump(bf["solve_ik"]), "(must be False)")
+```
+
+## Appendix E — `pz_r0_bind.py` (verbatim; sha256 6957aa83feb98e780df14e87074d88f6a5562007c76108e56efbeb18b5f35bc7)
+```python
+"""pZ: for each of the 30 closure globals, compare the harness's binding statement with the driver's own Assign (raw ast.dump)."""
+import ast, sys
+H, BLOB = sys.argv[1], sys.argv[2]
+ht, bt = ast.parse(open(H).read()), ast.parse(open(BLOB).read())
+NAMES = ['ARMG','ARM_CLEARANCE','ARM_DECIDE_CUTOFF','ARM_PAIR_CUTOFF','AXFIX','CLEARANCE_REPORT','COLFREE','COLG','COLUMN_R','FURNG','GNAME','LAST_CLEAR','LIM','PAD','QADR','Rotation','SIDES','SIGMA_FLOOR','SIGMA_GOOD','SIGMA_PENALTY','TOOLB','VADR','_DEPTH_AUDIT','d','m','math','mujoco','np','os','re']
+def binders(tree, into_fns=True):
+    out = {}
+    def add(name, node, where):
+        out.setdefault(name, []).append((where, node))
+    for s in tree.body:
+        if isinstance(s, (ast.Import, ast.ImportFrom)):
+            for a in s.names: add((a.asname or a.name).split(".")[0], s, "module import")
+        if isinstance(s, (ast.Assign, ast.AugAssign, ast.AnnAssign)):
+            for tg in (s.targets if isinstance(s, ast.Assign) else [s.target]):
+                for n in ast.walk(tg):
+                    if isinstance(n, ast.Name): add(n.id, s, "module assign")
+        if isinstance(s, ast.For):
+            for n in ast.walk(s):
+                if isinstance(n, (ast.Assign, ast.AugAssign)):
+                    for tg in (n.targets if isinstance(n, ast.Assign) else [n.target]):
+                        for nn in ast.walk(tg):
+                            if isinstance(nn, ast.Name) and isinstance(nn.ctx, ast.Store): add(nn.id, s, "module for-loop")
+        if into_fns and isinstance(s, ast.FunctionDef):
+            g = set()
+            for n in ast.walk(s):
+                if isinstance(n, ast.Global): g |= set(n.names)
+            for n in ast.walk(s):
+                if isinstance(n, (ast.Assign, ast.AugAssign)):
+                    for tg in (n.targets if isinstance(n, ast.Assign) else [n.target]):
+                        for nn in ast.walk(tg):
+                            if isinstance(nn, ast.Name) and nn.id in g: add(nn.id, n, f"in {s.name}()")
+    return out
+hb, bb = binders(ht), binders(bt, into_fns=False)
+for nm in NAMES:
+    hs = hb.get(nm, []); bs = bb.get(nm, [])
+    if not hs: print(f"  {nm:18} HARNESS: UNBOUND"); continue
+    for where, node in hs:
+        hsrc = ast.unparse(node).replace("\n", " ")[:110]
+        same = any(ast.dump(node) == ast.dump(bn) for _, bn in bs)
+        bsrc = (ast.unparse(bs[0][1]).replace("\n", " ")[:90] if bs else "<driver: not module-bound>")
+        print(f"  {nm:18} {where:18} equal-to-driver={str(same):5} | H: {hsrc}\n  {'':18} {'':18} {'':17} | D: {bsrc}")
+```
