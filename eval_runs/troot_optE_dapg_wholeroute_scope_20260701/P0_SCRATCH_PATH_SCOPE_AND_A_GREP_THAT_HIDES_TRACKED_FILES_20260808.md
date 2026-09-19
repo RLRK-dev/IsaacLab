@@ -3774,3 +3774,88 @@ pZ's addendum 5 @ `b829c3f066` (blob `96112c9def77`, sha256 `b5fde52464790ee5…
 ### 8.56 addendum 3 (2026-09-20 08:51:29 JST) — m-p18-392 (= p4 m-p4-280, 08:40, written before p4 saw follow-up 2): receipt; one open item that may touch this harness
 
 p4 (kickoff item 9 @ `c6c71f4621`, +10/−0): agrees with §17.7 and re-derived cab27/cab32, 0.1125/0.1875, 6.5 mm per side; returns to p11 four citation lines only (cell_spec :432/:433/:512 are dirty-tree numbers — in `0f6b4a733e` they are :397/:398/:472; task_config :23 → :235; design unchanged); records that its own 09-16 phrase 「spec-nominal = C1[0] ∓ span」 was the `:1241` form (corrected by insertion); concludes follow-up 2 is needed — landed as `3cb2a28c36` at 08:34, received and its order accepted in m-p4-281 (§8.56 addendum). **Open item for p11 (p4's question):** whether R0's row set should also carry GRASP1 (`:1249` in `d2bc133e1320` — the approach point, commanded in the `:1241` form at Z_RISE_REST); p4's reading = cheap to add, as a separate row from rows 2-5's bar. If p11 adopts it, the harness gets one more row per side by a small follow-up in this window (the :1241-form x, y/z per the driver's line — to be read from the blob then, not guessed now); nothing added until p11's word. Receipt sent as m-p0-373R; no new commit.
+
+## 8.57 Window R0 follow-up 3 LANDED: `84c7ad3b62` (+104/−2, the same file) — R0-ii, the mirrored-target identity sweep of §17.8 (b); the three follow-ups §17.8 names are now all in the file; still py_compile only, run 0
+
+Written 2026-09-20 08:58:52 JST (date-THEN-write). Trigger = m-p18-394 (relay of p11 m-p11-r0ii-20260920-0846): §17.8 of `P11_UR15B_CONTROLLER_DESIGN_20260913.md` @ `e0b2857a50` (blob `7cb15ec6b4fa`, sha256 `697f15c19c12a5e6…`, 273 lines; §17.8 = :269-:273) — read in full from the blob. §17.8: (a) the §10 sentence "R0 = the only leg deciding B is right" withdrawn on pZ's measurement; R0 = Rs1 Q1's scope (convergence, §11 STOP); correctness = R1/R1′/R2 + R0-ii; (b) R0-ii adopted with its form and bar; (c) targets' source = §17.7 (pZ's addendum 3 table was in the `:1241` form → pZ re-runs with §17.7's values; done in pZ's addendum 5). §17.8 also lists the follow-up items expected of p0 in this window: ① 30 globals (§8.55, `ffa612ea33`), ② rows 2-5 by §17.7's two paths (§8.56, `3cb2a28c36`), ③ `pose_only=k` sweep with the models {B, RC, NH} — this section.
+
+### 1. What R0-ii does in the file (§17.8 (b), as implemented)
+
+| element | implementation (harness names) | §17.8 wording it follows |
+|---|---|---|
+| targets | rows 2-18, `L_COL[r]` from `_targets(GL, GR)` (GL/GR by §17.7's two paths) and `MxL[r] = L_COL[r] * MX`, `MX = diag(−1, 1, 1)` (module constant, printed and written) | 「targets = 17.7 の L 列とその鏡像 MxL」・「Mx = diag(−1,1,1)…harness は写像と両側の target を印字」 |
+| attitude index | `k ∈ 0..len(pose_menu("L"))−1` (the copied `pose_menu`; asserted equal on both sides; 11 without `wide`) | 「各 attitude index k ∈ {0..len(pose_menu(t))−1}（pZ 実測 = 11）」 |
+| call | `_solve_one`: `solve_ik(t, tgt, tries=None, iters=300, seed=<seed>, near=None, warm=None, other=None, re_max=<re_max>, pose_only=k, quiet=True)` — `re_max` passed explicitly at the wired default 0.05 (the only argument §17.8's list leaves to the default) | 「同じ引数 solve_ik(t, tgt, tries=None, iters=300, seed=1, near=None, warm=None, other=None, pose_only=k, quiet=True)」 |
+| identical | both sides converged ∧ `max|q_R − q_L| < 1e-6 rad` (`R0II_TOL_RAD`) | 「両側収束 ∧ max|q_R − q_L| < 1e-6 rad」 |
+| models | right side = B (`models["R"]`, mirrored arm + `KO_MIRROR`, sign +1), RC (`build_side("ur15_base.xml", KO_LEFT, +1)`), NH (`build_side("ur15_base_mirrored.xml", KO_LEFT, +1)`); left side = the correct L model; each bound by `_bind` (own `AXFIX`, HOME_POSE start) | 「model = 正 B・負の対照 RC（stock 腕＋stock hand・右 mount・sgn +1）・NH（鏡像腕＋stock hand）」 = pZ's `PZ_R0_MODEL` three |
+| bar / report | `R0ii_bar`: `controls_RC_NH_identical_0`, `B_every_row_has_identical_k`, `B_both_converged_not_identical_count` (prediction 0; > 0 = finding for p11, not STOP), `row_valid` (= controls at 0); per model: identical pairs, both-converged count, non-identical pairs with `max|Δq|`, rows with/without an identical k, and every (r, k) pair with both convergence flags and `max|Δq|` | bar ①②③ verbatim; 「非同一は report・§11 STOP ではない」 |
+| unsharpened form | per model, rows solved at `MxL` with `tries=None` and no `pose_only`, compared with the main leg's L solution (same call form) → `unsharpened_identical_rows` | 「tries=None（pose_only なし）の 5/17 は鋭化前の形として併記」 |
+| exit code | unchanged: R0's own bar (L∧¬R = 0 ∧ ¬STOP); R0-ii is reported, it does not stop the leg | p4 m-p4-281: 「R0-ii 採用時は addendum 行集合で leg を止めない」 |
+
+Cost, static estimate: main leg 59 solves × 22 tries (rows 2-18 both sides, negative control, 8 U0 rows) + R0-ii 748 solves × 2 tries (17 rows × 11 k × 4 side-models) + 51 unsharpened solves × 22 tries ≈ 3,900 candidate attempts × 300 iterations, kinematics only; `mj_step` still 0 by construction (the counter reports it).
+
+### 2. What landed
+
+| item | value |
+|---|---|
+| path / commit | `p4_ur15_sim_20260727/r0_convergence_harness.py` @ `84c7ad3b62` (parent `5129048328`; +104/−2; 1276 lines) |
+| blob / sha256 | `1d6812ad97b4` / `7a14c3e43e0cefc850d9135392cce3b416a70c52d50f1044a4406ce811b665db` |
+| py_compile | env7 3.12.3 OK (scratch candidate and tree copy byte-equal) |
+| run / import | 0 and 0 |
+| copied set | unchanged from §8.56 (17 defs, 12 assignments) — R0-ii is scaffold only; the copied closure is not touched |
+| commit form | main tree, pathspec-limited, `--no-verify`; tree == HEAD before and after |
+
+### 3. Static checks on the landed file (`check_r0_copy_v3.py`, unchanged script; output verbatim)
+
+```
+def    solve_ik            == blob1 True  == blob2 True
+def    pose_menu           == blob1 True  == blob2 True
+def    _wrap               == blob1 True  == blob2 True
+def    _rdes               == blob1 True  == blob2 True
+def    pinch               == blob1 True  == blob2 True
+def    touching            == blob1 True  == blob2 True
+def    sigma_min           == blob1 True  == blob2 True
+def    wrist_jac           == blob1 True  == blob2 True
+def    column_gap          == blob1 True  == blob2 True
+def    path_mast_min       == blob1 True  == blob2 True
+def    arm_pair_min        == blob1 True  == blob2 True
+def    path_arm_min        == blob1 True  == blob2 True
+def    furniture_gap       == blob1 True  == blob2 True
+def    path_furniture_min  == blob1 True  == blob2 True
+def    _own_bodies         == blob1 True  == blob2 True
+def    _measure_axfix      == blob1 True  == blob2 True
+def    cable_at            == blob1 True  == blob2 True
+assign _MASTNAMES          == blob1 True  == blob2 True   (module level)
+assign LIM                 == blob1 True  == blob2 True   (module level)
+assign CLEARANCE_REPORT    == blob1 True  == blob2 True   (module level)
+assign LAST_CLEAR          == blob1 True  == blob2 True   (module level)
+assign _DEPTH_AUDIT        == blob1 True  == blob2 True   (module level)
+assign GRASP_CENTRE_X      == blob1 True  == blob2 True   (module level)
+assign GNAME               == blob1 True  == blob2 True   (inside _bind)
+assign ARMG                == blob1 True  == blob2 True   (inside _bind)
+assign FURNG               == blob1 True  == blob2 True   (inside _bind)
+assign COLG                == blob1 True  == blob2 True   (inside _bind)
+assign COLFREE             == blob1 True  == blob2 True   (inside _bind)
+assign CAB                 == blob1 True  == blob2 True   (inside _grasp_targets)
+assign QADR                driver rule with composed prefixes (documented deviation)
+assign VADR                driver rule with composed prefixes (documented deviation)
+assign PAD                 driver rule with composed prefixes (documented deviation)
+assign TOOLB               driver rule with composed prefixes (documented deviation)
+assign ARMB                driver rule with composed prefixes (documented deviation)
+negative control (17.6 i): solve_ik copy with one literal 0.002->0.003 reads unequal to both blobs: True (literals changed: 1)
+closure free names: 43  cable_at free names: ['CAB', 'CABLE_SEG', 'd', 'np']  unbound in the harness: []
+closure free names outside pZ's 30 + copied names: []
+pZ's 30 not read by the closure here: []
+row 2(b) token sweep: {'ur15_steps_wired': 0, 'ur15_steps': 0, 'kinonly_step_solve': 0, 'subprocess': 0, 'runpy': 0, 'exec(': 0, '__import__': 0, 'importlib': 0}
+mj_step in the copied defs: False
+RESULT: PASS
+```
+
+A second scan (scratch, not reproduced) walked every scaffold function for names not bound at module level: `_solve_one`, `_r0ii`, `_grasp_targets`, `_bind`, `_targets`, `_u0_rows`, `_solve_rows` = none; `main` = `ARMG AXFIX COLFREE COLG FURNG __file__`, which are the chained module assignments (`QADR = VADR = PAD = TOOLB = AXFIX = None`, `GNAME = ARMB = ARMG = FURNG = COLG = COLFREE = None`) the scanner reads only the first target of, and the module builtin — false positives, the same as in §8.56's file.
+
+### 4. Open, not claimed
+
+- Not run; no number from p0. pZ: the leg (rows 1-11, 1′, addenda 2-3, 5, R0-ii) on `84c7ad3b62` from a `git archive` with `--dump <path to _gen/_steps_cell_full.xml>`.
+- p11: the four citation-line corrections of §17.7 and the GRASP1 word (m-p4-280 = m-p18-392) — if GRASP1 is added to R0's row set, one more row per side by a small follow-up (§8.56 addendum 3).
+- p4: acceptance of window R0 after pZ's leg (§17.5 着手/受入分離).
+- Untouched / unlocked: route run ② / #69; D4′; the acceptance-instrument window (§8.52); WIP. ⛔ gate 不変・route run 認可なし・self-start しません。
