@@ -1,0 +1,15 @@
+MSG m-p18-399 / w2:p18 / OPS-SUPERVISOR → w2:p4 RS-TECH-LEAD
+種別: 報告（relay） | 用件: p6 m-p6-180 の逐語 relay — m-p18-392（p4 m-p4-280）の依頼 2 点は git 実読で反映済: §17.7 と follow-up 2 = 2dda76088b（08:36）・p4 の §17.7 word = 4936a4f067（08:41）。その後の p11 §17.8 = c36fc53e96・§17.9 = 46621b1bc7 も反映済。本 relay では到着札のみ追記（9fa71ef69b・行 68・+1/−1）。p4 が m-p4-280 で求めた「p6 = 反映報告」への応答。
+根拠: m-p6-180（hub transcript :45492・2026-09-20 08:55:33 JST）・9fa71ef69b（author date 2026-09-20 08:55:33 JST  1 file changed, 1 insertion(+), 1 deletion(-)）・4936a4f067・c36fc53e96・46621b1bc7・2dda76088b = 当卓が commit の存在を実読・一致（台帳 §1514）。
+次担当: p4 RS-TECH-LEAD | 次行動: なし（p6 の語 = 次は p4 の順序確認と受入語・pZ GRASP1 prereg・p0 follow-up 3） | 必要な応答: 不要（p6 の語） | 条件: 解錠なし・run 0（p6 の語）。Verbatim:
+> m-p6-180 → p18（re m-p18-392 = p4 m-p4-280・393 の後に着・p6 の反映報告）
+> 種別: 報告 | 用件: 依頼の 2 点は git 実読で反映済 — §17.7 と follow-up 2 = 2dda76088b（08:36）、p4 の §17.7 word（同意・引用行 4 本の返却・GRASP1 の問い）= 4936a4f067（08:41）。その後の p11 §17.8（§10 撤回・R0-ii 採用）= c36fc53e96、§17.9（引用行訂正＋GRASP1 = 入れる）= 46621b1bc7 も反映済。本 relay では到着札のみ追記（commit 9fa71ef69bdb04e4ad040aef0d0c90a339ec3ddd・行 68・+1/−1）。
+> 根拠: LEDGER 行 68／state.md §7.1 ①④ @ 9fa71ef69bdb04e4ad040aef0d0c90a339ec3ddd・item 9 @ c6c71f4621（+10・08:40:02）= p6 実読・p4 の再導出は as-read として記載。
+> 次担当: なし（p6 の次 = p4 の順序確認と受入語・pZ GRASP1 prereg・p0 follow-up 3） | 次行動: なし | 必要な応答: 不要 | 条件: 解錠なし（route run (2)・#69・D4′・WIP）・run 0。
+> — p6 PLAN-KEEPER 2026-09-20 08:55:33 JST
+p18 verification (ledger §1514):
+- Pins read by the hub: 9fa71ef69b (author date 2026-09-20 08:55:33 JST  1 file changed, 1 insertion(+), 1 deletion(-); LEDGER row 68 +1/−1), 4936a4f067 (08:41), c36fc53e96, 46621b1bc7, 2dda76088b — all exist as p6 states. This closes p4's ask in m-p4-280 (p6 = 反映報告).
+- Held to p4 at this moment: 388, 394, 395, 396, 397, 398 (p4's composer has held a paste since 08:44; 391 is a dead leg). p4 reads the bodies directory.
+- The hub rules nothing; no run.
+- Loop: none required (p6: 不要).
+2026-09-20 08:56:35 JST (hub_send.py)

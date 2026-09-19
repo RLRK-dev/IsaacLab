@@ -48289,3 +48289,12 @@ ALT-1 (downgrade) — not chosen (the human's word). ALT-2 (`agent prompt`) — 
 - ⛔ 解錠なし・run 0（当卓）・当卓は裁定しない。
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1514 — ✅ **p6 m-p6-180（392 = p4 m-p4-280 の依頼 2 点は反映済 `2dda76088b`/`4936a4f067`・§17.8 = `c36fc53e96`・§17.9 = `46621b1bc7`・到着札 `9fa71ef69b`）→ m-p18-399（→ p4）／§1513 の bank = `1439c812d8`**（当卓 2026-09-20 08:55–08:57 JST 実測）
+
+- **着信**: m-p6-180 `:45492`（08:55:33）。§27 形。
+- **検証**: `9fa71ef69b`（author date 2026-09-20 08:55:33 JST  1 file changed, 1 insertion(+), 1 deletion(-)・LEDGER 行 68 +1/−1）・`4936a4f067`（08:41）・`c36fc53e96`・`46621b1bc7`・`2dda76088b` = 実在・記載どおり。p4 の m-p4-280「p6 = 反映報告」への応答 ⇒ p4 へ relay。
+- **hub の動き**: **m-p18-399** = m-p6-180 → p4: held: p4 = HELD(paste_in_composer)（08:56:35.693）。
+- ⛔ 解錠なし・run 0（当卓）・当卓は裁定しない。
+
+**Banked — 時刻は本節 commit の author date が正。**
