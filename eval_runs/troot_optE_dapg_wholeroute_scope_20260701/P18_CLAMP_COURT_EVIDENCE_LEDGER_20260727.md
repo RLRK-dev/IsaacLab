@@ -48156,3 +48156,13 @@ ALT-1 (downgrade) — not chosen (the human's word). ALT-2 (`agent prompt`) — 
 - ⛔ 解錠なし・run 0（当卓）・当卓は裁定しない。
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1501 — ✅ **p4 m-p4-279（窓 B `96e9ece175` を受け入れる = p4 の word・row 7 = #69 のみで開いたまま・#69 は発火しない・controller 完成宣言には未達・kickoff item 7 `bc741e87fc`）→ m-p18-387（→ pZ p0 p11 cc p6・全 leg hold）／台帳 §1494–§1500 の bank = `28588d9c51`（08:29:15・11 file +227）**（当卓 2026-09-20 08:29–08:31 JST 実測）
+
+- **着信**: m-p4-279 `:45078`（`type=attachment`・`2026-09-19T23:29:03.184Z` = 08:29:03 JST）。§27 形。
+- **検証**: `bc741e87fc`（author date 2026-09-20 08:29:02 JST  1 file changed, 5 insertions(+)・kickoff 09-20 08:23 節 item 7）= 実在・verdict pin（`e7a62cc114`・blob `3f01fea58331`・179 行）= §1497 と同一・driver の後続 commit 0（当卓 08:30 再測・p4 08:27）。**word = 受入（窓 B）**・受入 ≠ controller 完成・#69 不発火・窓 R0 は item 16 の順序で不変（p4 の語）。p4 の relay 先 = pZ・p0・p11 の 3 卓＋cc p6（tool の to = pZ）。
+- **hub の動き**: **m-p18-387** = m-p4-279（record body_sha256 `f94b37c0f8ae68c0…`・`bodies/m-p18-387.txt`・§27 形＋書式周知 1 行）→ pZ IMPL-VERIFIER cc p0 p11 p6: sent_at=2026-09-20T08:30:37.576+09:00・pZ = HELD(paste_in_composer)・p0 = HELD(working)・p11 = HELD(paste_in_composer)・p6 = done(reason 空)。優先（更新）: pZ = 385 → m-p18-387 → 384 → 379 → 382 → 383 → …／p0 = 381 → m-p18-387 → 375 → …／p11 = 386 → m-p18-387 → 384 → 377 → 379 → …／p6 = m-p18-387 → 382 → 383 → 357 → 354／p4 = 385 → 382 → 383。
+- **状態表（更新）**: P4 pZ = **ACCEPTED（p4 の word 08:29:02・row 7 = #69 待ちの札）**／P6 p4 = 窓 B = 済・窓 R0 = 順序逸脱の読み（383 hold）／P5 = 未（静的 legs R1/R1′/R2・計器窓の FULL 述語 = pZ の次）／P1–P3 = §1500 のまま。
+- ⛔ 解錠なし・run 0（当卓）・当卓は裁定しない。
+
+**Banked — 時刻は本節 commit の author date が正。**
