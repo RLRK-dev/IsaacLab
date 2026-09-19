@@ -48166,3 +48166,12 @@ ALT-1 (downgrade) — not chosen (the human's word). ALT-2 (`agent prompt`) — 
 - ⛔ 解錠なし・run 0（当卓）・当卓は裁定しない。
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1502 — ✅ **idle 窓の完了: 387 の p6 leg（p4 m-p4-279 = 窓 B 受入 → p6 = state.md §7 / LEDGER へ反映し commit を報告）／§1501 の bank = `6c29efbb6d`（08:30:37）**（当卓 2026-09-20 08:31 JST 実測）
+
+- **387 → p6**: sent_at=2026-09-20T08:31:32.732+09:00 → delivered_at=2026-09-19T23:31:33.034Z・DELIVERED(fused_with_unknown_prefix)（`verify` rc 0）。pZ/p11 = composer に paste で hold・p0 = working。
+- **hold 中の leg（08:31・pending.py 実測）**: 354（p11・p6） 357（p11・p6） 358（p11） 359（p0・p11・pZ） 360（p11） 361（p11・pZ） 363（p0・p11） 364（p0・p11） 365（p0） 366（p11） 367（pZ） 368（p0・p11） 369（p0・pZ） 370（p0・pZ） 371（p11・pZ） 372（p11） 374（p0） 375（p0・p11・pZ） 376（p0・p11） 377（p0・p11） 378（p11・pZ） 379（p11・pZ） 381（p0・p11） 382（p11・p4・p6・pZ） 383（p11・p4・p6・pZ） 384（p0・p11・p4・p6） 385（p4・pZ） 386（p11） 387（p0・p11・pZ）（29 id）。優先 = §1501。
+- **watcher**: 停止中（pZ/p11 が「idle だが composer に paste」の間は pending.py が即 exit 0 になり誤起床するため・着信で起きる）。
+- ⛔ 解錠なし・run 0（当卓）・当卓は裁定しない。
+
+**Banked — 時刻は本節 commit の author date が正。**
