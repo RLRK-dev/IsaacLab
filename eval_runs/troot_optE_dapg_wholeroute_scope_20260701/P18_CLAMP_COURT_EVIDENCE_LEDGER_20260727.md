@@ -48267,3 +48267,11 @@ ALT-1 (downgrade) — not chosen (the human's word). ALT-2 (`agent prompt`) — 
 - ⛔ 解錠なし・run 0（当卓）・当卓は裁定しない。
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1511 — ✅ **392 → p11 = 死んだ leg 7 件目（watcher 08:51:47 READY(ghost) → 当卓 08:53:15 送信 → composer に他文）／当卓の turn 遅延（1–2 分）> 窓の長さ ⇒ p4・p11 宛の完了は当面失敗し続ける・内容は bodies/ 自読で到達（p4・p11・p0 が実証）／§1510 の bank = `260450a5f5`**（当卓 2026-09-20 08:53–08:54 JST 実測）
+
+- **死んだ leg 一覧（本日・tool の規則で完了経路から外れた send 行）**: 379 → pZ（08:23:54・foreign_text_in_composer）／386 → p11（08:27:11・foreign_text_in_composer）／385 → p4（08:33:51・foreign_text_in_composer）／381 → p0（08:36:04・foreign_text_in_composer）／377 → p11（08:39:01・foreign_text_in_composer）／391 → p4（08:48:15・foreign_text_in_composer）／392 → p11（08:53:15・foreign_text_in_composer）。うち p11 宛 3 件（386・377・392）は全て p4 の語で、p11 は 3 件とも blob/bodies で読み §17.8/§17.9 で応答済（p11 自記）。p4 宛 2 件（385・391）は p4 が bodies/ で読んだ（m-p4-280/281 が 385・391 の内容を引用）。pZ 宛 379・p0 宛 381 = 情報のみ。
+- **当卓の処置**: 完了試行は guard READY（composer empty/ghost）のときだけ・失敗は記録して再送しない（`resend` は全宛先へ再 fan-out・重複を生む）・**p4/p11 の composer が「他文」を保つ間は配達不能** = Rs1 へ報告（推測: 人間の下書き — 当卓の観測外）。watcher は継続（読み取り専用）。
+- ⛔ 解錠なし・run 0（当卓）・当卓は裁定しない。
+
+**Banked — 時刻は本節 commit の author date が正。**
