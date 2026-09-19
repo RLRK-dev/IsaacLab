@@ -48220,3 +48220,13 @@ ALT-1 (downgrade) — not chosen (the human's word). ALT-2 (`agent prompt`) — 
 - ⛔ 解錠なし・run 0（当卓）・当卓は裁定しない。
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1507 — ✅ **p4 m-p4-281（follow-up 2 `3cb2a28c36` 受領・p0 先行着地の順序 = 受入可・pZ への条件 1 = 再 pin は §17.7 literal＋閉形式自算＋dump sha 自測＋開示行の後に leg・受入は leg 後＋p11 の §10/引用行訂正・item 11 `a3334ac777`）→ m-p18-393（→ pZ cc p0 p11 p6）／watcher: pZ の窓（08:45:02）は当卓の報告執筆中に閉じ 389 → pZ 未送**（当卓 2026-09-20 08:45–08:47 JST 実測）
+
+- **着信**: m-p4-281 `:45314`（08:46:07）。§27 形。
+- **検証**: `a3334ac777`（author date 2026-09-20 08:46:07 JST  1 file changed, 6 insertions(+)・kickoff item 11）= 実在。harness pin = §1504 と同一・3cb2a28c36 以後の driver commit 0。p4 の blob 実読（import 2 module のみ・mj_step wrapper・`_grasp_targets` 2 経路・STOP exit 2・印字・U0 札）= p4 の as-read。**p4 未読の事実**: pZ の再 pin `b829c3f066`（08:39:08 = 391・p4 へ hold）は本便より前に存在 — p4 の条件を満たすかは pZ の読み・p4 の受入（relay の head に明記）。
+- **hub の動き**: **m-p18-393** = m-p4-281（`bodies/m-p18-393.txt`・時系列注記つき）→ pZ cc p0 p11 p6: held 行なし（配達済か）。watcher（読み取り専用・`watch_ready.sh`・pairs = `watch_pairs.txt`）: 08:45:02 に pZ READY を検知 → 当卓が報告を書いている間に pZ が working へ（08:46:07 再 guard = NOT_READY）→ 送らず。watcher 再起動（08:46）。
+- **hold 中の leg（08:47・pending.py 実測）**: 354（p11・p6） 357（p11・p6） 358（p11） 359（p0・p11・pZ） 360（p11） 361（p11・pZ） 363（p0・p11） 364（p0・p11） 365（p0） 366（p11） 367（pZ） 368（p0・p11） 369（p0・pZ） 370（p0・pZ） 371（p11・pZ） 372（p11） 374（p0） 375（p0・p11・pZ） 376（p0・p11） 377（p0・p11） 378（p11・pZ） 379（p11・pZ） 381（p0・p11） 382（p11・p4・pZ） 383（p11・p4・p6・pZ） 384（p0・p11・p4・p6） 385（p4・pZ） 386（p11） 387（p11・pZ） 388（p4） 389（p11・pZ） 390（p11・p4・pZ） 391（p0・p11・p4） 392（p0・p11・p6・pZ）（34 id）。優先: pZ = 389 → m-p18-393 → 385 → 387 → 392 → 391 → …／p4 = 391 → 388 → 382 → 383 → 390／p0 = 391 → 392 → m-p18-393 → 375 → …／p11 = 392 → 389 → 391 → m-p18-393 → 387 → …／p6 = 392 → m-p18-393 → 383 → 357 → 354。
+- ⛔ 解錠なし・run 0（当卓）・当卓は裁定しない。
+
+**Banked — 時刻は本節 commit の author date が正。**
