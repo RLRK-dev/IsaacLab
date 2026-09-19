@@ -48255,3 +48255,15 @@ ALT-1 (downgrade) — not chosen (the human's word). ALT-2 (`agent prompt`) — 
 - ⛔ 解錠なし・run 0（当卓）・当卓は裁定しない。
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1510 — ✅ **p11 m-p11-s179-20260920-0851（p4 の引用行返却を受入 = §17.9 挿入訂正・GRASP1 = 入れる（R0 の別行・bar = 収束のみ）・§10 訂正と R0-ii = §17.8 で回答済 ⇒ p4 が受入前に要した 2 点は p11 の語で完了・`20281bbf83`）→ m-p18-397（→ p4 cc pZ p0 p6・HELD）／p0 m-p0-373R（392 受領・GRASP1 は p11 の一語待ち・§8.56 addendum 3 `1875546a96`）→ m-p18-398（→ p4 cc p11 pZ p6・HELD）／watcher の窓: m-p18-392 → ARM-CONTROL-DESIGN**（当卓 2026-09-20 08:51–08:53 JST 実測）
+
+- **着信**: m-p11-s179 `:45394`（08:51:12）／m-p0-373R `:45395`（08:51:29）。§27 形。
+- **m-p11-s179 の検証**: `20281bbf83`（08:50:29・+5）・blob `dc188577b4d8…`・sha256 `f163874e6f22bf9c…`・278 行・`### 17.9` = `:275` = p11 の記載と一致。§17.8 pin = §1508。内容 = 引用行 4 本の訂正（設計・数値不変）・GRASP1 = 入れる（側ごと 1 行・(0.106, 0.28, 1.03)/(0.194, 0.28, 1.03)・denominator 18 行/側・事前登録 = pZ）・§17.7 の一文を訂正。p11 は m-p4-280 を blob で読んだ（392 = p11 hold）・390 未達と自記。
+- **m-p0-373R の検証**: `1875546a96`（08:51:29・+4・§8.56 addendum 3）= 実在。GRASP1 の一語（s179・08:51:12）は本便の 17 秒前 — p0 未達（relay 397 の p0 leg = hold）。
+- **hub の動き**: **m-p18-397** = s179 → p4 cc pZ p0 p6: held: p4 = HELD(paste_in_composer)・pZ = HELD(working)・p0 = ready(ghost)・p6 = ready(empty)（08:52:33.218）。**m-p18-398** = 373R → p4 cc p11 pZ p6: held: p4 = HELD(paste_in_composer)・p11 = ready(ghost)・pZ = HELD(working)・p6 = ready(empty)（08:52:33.318）。watcher の窓（m-p18-392 → ARM-CONTROL-DESIGN）: p11 = HELD(foreign_text_in_composer)（08:53:15.627）。PRIO 更新（397/398 を各卓の列へ）。
+- **工程の現在位置（hub 記帳）**: p11 = §17.7/17.8/17.9 着地（p4 の受入前提 2 点 = p11 の語で完了・p4 の読み待ち）／pZ = 次 = GRASP1 行の事前登録 → leg／p0 = 次 = follow-up 3（GRASP1 行＋R0-ii sweep）／p4 = 388/394/395/396/397/398 hold（composer に paste・391 = 死んだ leg）— **p4 への配達が本日 3 回目の窓で止まっている**（p4 は bodies/ を自読）。
+- **hold 中の leg（08:53・pending.py 実測・死んだ leg 6 件を含む）**: 354（p11・p6） 357（p11・p6） 358（p11） 359（p0・p11・pZ） 360（p11） 361（p11・pZ） 363（p0・p11） 364（p0・p11） 365（p0） 366（p11） 367（pZ） 368（p0・p11） 369（p0・pZ） 370（p0・pZ） 371（p11・pZ） 372（p11） 374（p0） 375（p0・p11・pZ） 376（p0・p11） 377（p0・p11） 378（p11・pZ） 379（p11・pZ） 381（p0・p11） 382（p11・p4・pZ） 383（p11・p4・p6・pZ） 384（p0・p11・p4・p6） 385（p4・pZ） 386（p11） 387（p11・pZ） 388（p4） 389（p11・pZ） 390（p11・p4・pZ） 391（p11・p4） 392（p11・p6・pZ） 394（p0・p4・p6・pZ） 395（p4） 396（p11・p4・p6・pZ） 397（p0・p4・p6・pZ） 398（p11・p4・p6・pZ）（39 id）。
+- ⛔ 解錠なし・run 0（当卓）・当卓は裁定しない。
+
+**Banked — 時刻は本節 commit の author date が正。**

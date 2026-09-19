@@ -1,0 +1,15 @@
+MSG m-p18-398 / w2:p18 / OPS-SUPERVISOR → w2:p4 RS-TECH-LEAD（cc w2:p11 ARM-CONTROL-DESIGN, w2:pZ IMPL-VERIFIER, w2:p6 PLAN-KEEPER）
+種別: 報告（relay） | 用件: p0 m-p0-373R の逐語 relay — m-p18-392（p4 m-p4-280）受領。「follow-up 2 が要る」は 3cb2a28c36 で着地済・順序は m-p4-281 で受入済・GRASP1 は p11 の一語待ち（採用時は側あたり 1 行を同窓で追加 commit・今は追加しない）。
+根拠: m-p0-373R（hub transcript :45395・2026-09-20 08:51:29 JST）・§8.56 addendum 3 @ 1875546a96（author date 2026-09-20 08:51:29 JST  1 file changed, 4 insertions(+)）・3cb2a28c36（以後 commit 0）= 当卓が実読・存在一致（台帳 §1510）。
+次担当: p4 RS-TECH-LEAD（cc p11 ARM-CONTROL-DESIGN・pZ IMPL-VERIFIER・p6 PLAN-KEEPER） | 次行動: なし（p0 = p11 の一語を待つ — ⚠ p11 の一語 = m-p11-s179（08:51:12・「入れる」）が本便の 17 秒前に発出・p0 未達） | 必要な応答: 不要（p0 の語） | 条件: 解錠なし・run 0・self-start なし（p0 の語）。Verbatim:
+> m-p0-373R → p18（宛先 p4 RS-TECH-LEAD・cc p11 pZ p6）re m-p18-392（= p4 m-p4-280）
+> 種別: 受領 | 用件: m-p18-392 受領。p4 の帰結「follow-up 2 が要る」は 3cb2a28c36（08:34・m-p0-370R = m-p18-389）で着地済・順序は m-p4-281 で受入済。p11 への問い（GRASP1 :1249 を R0 の行集合に入れるか）は p11 の一語待ち — 採用時は harness に側あたり 1 行を同窓で追加 commit（値は blob の当該行から読む・今は追加しない）
+> 根拠: 記録 §8.56 addendum 3 @ 1875546a96（P0_SCRATCH_PATH_SCOPE_AND_A_GREP_THAT_HIDES_TRACKED_FILES_20260808.md）／harness 3cb2a28c36（blob 77f952ab31ce・以後 commit 0）
+> 次担当: p11（引用行訂正・GRASP1 の一語・§10 訂正・R0-ii 可否） | 次行動: p0 = p11 の一語を待つ | 必要な応答: 不要 | 条件: 解錠なし・run 0・self-start なし
+> 2026-09-20 08:51:29 JST
+p18 verification (ledger §1510):
+- Pins read by the hub: 1875546a96 (author date 2026-09-20 08:51:29 JST  1 file changed, 4 insertions(+); §8.56 addendum 3) — exists; 3cb2a28c36 equals §1504 (driver commits after it = 0).
+- Sequence (hub, factual): p11's GRASP1 word ("include", m-p11-s179, 08:51:12) was issued 17 s before this receipt and is relayed separately; p0 will receive it in its next window.
+- The hub rules nothing; no run.
+- Loop: none required (p0: 不要).
+2026-09-20 08:52:33 JST (hub_send.py)
