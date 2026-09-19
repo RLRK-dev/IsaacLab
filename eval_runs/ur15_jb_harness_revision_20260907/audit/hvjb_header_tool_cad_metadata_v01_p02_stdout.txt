@@ -1,0 +1,5 @@
+SES 20 PRODUCT 1 MANIFOLD_SOLID_BREP 17 NEXT_ASSEMBLY_USAGE_OCCURRENCE 0
+SEV 20 PRODUCT 1 MANIFOLD_SOLID_BREP 19 NEXT_ASSEMBLY_USAGE_OCCURRENCE 0
+Protected inputs unchanged: 120; configuration request contains 14 saved header axes
+HEADER_TOOL_CAD_METADATA_COMPLETE audit/hvjb_header_tool_cad_metadata_v01_p02.json
+[INFO] Using Python: "/home/rlrk/src/ur15-line-render/venv/bin/python"

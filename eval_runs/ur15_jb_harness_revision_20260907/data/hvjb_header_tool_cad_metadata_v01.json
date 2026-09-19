@@ -1,0 +1,83 @@
+{
+  "recorded_on": "2026-09-19",
+  "scope_ja": "2020年公開例示STEPの製品・形状名を読み、ビット構成を特定できる記録を調べる。CAD変換や工具の採用は行わない。",
+  "previous_readback": "audit/hvjb_header_tool_tip_sources_v01_readback.json",
+  "header_directory": "references/hvjb_tool_tip_cad_20260919/step_headers",
+  "sources": [
+    {
+      "model": "SES 20",
+      "file": "references/hvjb_tool_tip_cad_20260919/ses20_581105_CAD.zip",
+      "sha256": "318974d35a3c1d83bb17f78e98f6c3e5562c5609e59e44f7ab0b9197082d9c3d",
+      "url": "https://www.stoeger.com/en/list-of-products/automatic-screwdrivers-for-screws.html?file=files%2Fstoeger%2Fprodukte%2F2020%2FSTEP%2F581105_CAD.zip",
+      "step_entry": "581105.stp",
+      "step_sha256": "61ed60804d95e24d8e445dcf724d87887deb333b940f67aea405514dff0f6a73"
+    },
+    {
+      "model": "SEV 20",
+      "file": "references/hvjb_tool_tip_cad_20260919/sev20_581145_CAD.zip",
+      "sha256": "ee65f866911498d93cbfd909be128e86941c4236ecf258728f1461a40bb5c00e",
+      "url": "https://www.stoeger.com/en/list-of-products/automatic-screwdrivers-for-screws.html?file=files%2Fstoeger%2Fprodukte%2F2020%2FSTEP%2F581145_CAD.zip",
+      "step_entry": "581145.stp",
+      "step_sha256": "5b62e66c8832cf4e350a9cc5d74f3561c6185cb2eb05d91315eb3f88e3bcd3b8"
+    }
+  ],
+  "reuse": [
+    "scripts/prepare_hvjb_ses2001_cad_v01.py",
+    "scripts/check_hvjb_header_tool_tip_sources_v01.py",
+    "scripts/analyze_hvjb_header_tool_configuration_v01.py"
+  ],
+  "source_records": {
+    "hand": "audit/hvjb_header_hand_access_v01.json",
+    "screw_conditions": "data/hvjb_header_screw_options_v01.json",
+    "tip_drawing_conditions": "data/hvjb_header_tool_tip_sources_v01.json"
+  },
+  "metadata_entity_types": [
+    "PRODUCT",
+    "PRODUCT_DEFINITION",
+    "PRODUCT_DEFINITION_FORMATION",
+    "PRODUCT_DEFINITION_FORMATION_WITH_SPECIFIED_SOURCE",
+    "MANIFOLD_SOLID_BREP",
+    "NEXT_ASSEMBLY_USAGE_OCCURRENCE",
+    "ASSEMBLY_COMPONENT_USAGE",
+    "SPECIFIED_HIGHER_USAGE_OCCURRENCE",
+    "PROMISSORY_USAGE_OCCURRENCE",
+    "DESCRIPTIVE_REPRESENTATION_ITEM",
+    "PROPERTY_DEFINITION",
+    "SHAPE_ASPECT",
+    "DIMENSIONAL_LOCATION",
+    "DIMENSIONAL_SIZE"
+  ],
+  "questions": [
+    {
+      "id": "FASTENER_AND_RECEIVER",
+      "question_ja": "採用するM4ねじのメーカー・完全品番・首下長・頭部/座金・駆動穴は何か。受け側の材質、着座面、積層、穴深さと有効ねじ部を示す図面はどれか。",
+      "answer": null
+    },
+    {
+      "id": "CONFIGURED_TOOL_AND_BIT",
+      "question_ja": "そのねじに対応する工具・ビット・ノーズの品番は何か。ビットの装着突出量、係合基準、取付面から締付基準点までを示す構成図/CADはどれか。",
+      "answer": null
+    },
+    {
+      "id": "OPERATING_STATES",
+      "question_ja": "供給、接近、締付、復帰時のノーズ・真空管・爪・ビットの位置と可動外形は何か。ねじ詰まり排出とビット交換に必要な状態も示せるか。",
+      "answer": null
+    },
+    {
+      "id": "MOUNTING_AND_SUPPLY",
+      "question_ja": "取付アダプター・穴配置・軸まわりの向き・継手側・供給ホースをどう構成するか。実ねじの座金/フランジを含む供給適合と必要空間を示す資料はどれか。",
+      "answer": null
+    }
+  ],
+  "selected_fastener": null,
+  "selected_tool_configuration": null,
+  "selected_axial_registration_m": null,
+  "physical_acceptance_verdict": null,
+  "prior_art": {
+    "keywords": ["581105", "581145", "ビット構成"],
+    "exit_code": 0,
+    "findings": 0,
+    "blockers": 0,
+    "lessons": 0
+  }
+}
