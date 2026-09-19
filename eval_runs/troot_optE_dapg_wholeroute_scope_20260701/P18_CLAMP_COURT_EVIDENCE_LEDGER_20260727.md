@@ -48211,3 +48211,12 @@ ALT-1 (downgrade) — not chosen (the human's word). ALT-2 (`agent prompt`) — 
 - ⛔ 解錠なし・run 0（当卓）・当卓は裁定しない。
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1506 — ✅ **idle 窓の完了（guard 修正後）: 389 → p4・387 → p0・391 → p6／guard `dry_ok.py` の読み違いを 2 度目で修正（ready の dry-run 行は send 形 `dry_run(would_send)`・held 形は members）／§1505 の bank = `5c9511cd82`**（当卓 2026-09-20 08:42–08:45 JST 実測）
+
+- **guard の誤り 2 件（当卓の記録）**: (1) 08:39 = 文字列 grep（空出力を READY と読み 377 → p11 が終端化）。(2) 08:41–08:43 = JSON 解析だが members だけを見た — ready の member は tool が **send 形の行**（`row_type=send`・`state=dry_run(would_send)`・`status`・`composer_before_kind`）で出すため members が空 → 全て NOT_READY（389 → p4・387 → p0・391 → p6 を送らず・害なし）。raw 出力を 3 卓分読んで確定（08:43:30）→ 修正 = send 形なら `state == dry_run(would_send)` かつ status idle/done かつ composer empty/ghost で READY・held 形は常に NOT_READY。
+- **hub の動き（修正後）**: 389 → p4 = DELIVERED(fused_with_unknown_prefix)（08:44:13.859 → `2026-09-19T23:44:14.164Z`）／387 → p0 = DELIVERED(fused_with_unknown_prefix)（08:44:14.884 → `2026-09-19T23:44:15.191Z`）／391 → p6 = DELIVERED(fused_with_unknown_prefix)（08:44:15.921 → `2026-09-19T23:44:16.219Z`）／389 → pZ・392 → p11 = working で送らず。
+- **hold 中の leg（08:45・pending.py 実測）**: 354（p11・p6） 357（p11・p6） 358（p11） 359（p0・p11・pZ） 360（p11） 361（p11・pZ） 363（p0・p11） 364（p0・p11） 365（p0） 366（p11） 367（pZ） 368（p0・p11） 369（p0・pZ） 370（p0・pZ） 371（p11・pZ） 372（p11） 374（p0） 375（p0・p11・pZ） 376（p0・p11） 377（p0・p11） 378（p11・pZ） 379（p11・pZ） 381（p0・p11） 382（p11・p4・pZ） 383（p11・p4・p6・pZ） 384（p0・p11・p4・p6） 385（p4・pZ） 386（p11） 387（p11・pZ） 388（p4） 389（p11・pZ） 390（p11・p4・pZ） 391（p0・p11・p4） 392（p0・p11・p6・pZ）（34 id）。優先: p4 = 391 → 388 → 382 → 383 → 390／pZ = 389 → 385 → 387 → 392 → 391 → 384 → 383／p0 = 391 → 392 → 375 → …／p11 = 392 → 389 → 391 → 387 → 384 → 390 → …／p6 = 392 → 383 → 357 → 354。
+- ⛔ 解錠なし・run 0（当卓）・当卓は裁定しない。
+
+**Banked — 時刻は本節 commit の author date が正。**
