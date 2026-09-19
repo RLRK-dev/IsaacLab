@@ -378,3 +378,72 @@ print(f"cab bodies {CABLE_N}; cab0 origin {np.round(d.xpos[CAB[0]],4)}; link-cen
 + C1, C2 = spec.C1, spec.C2; H = spec.GRIP_HALF_SPAN
 ```
 Run: `PZ_R0_GLGR="0.1125,0.28,0.954;0.1875,0.28,0.954" python pz_r0_v2.py <blob 84a372439c59 as text> <git archive of the sim dir> L|R <out.json> own`.
+
+## Addendum 6 (2026-09-20 08:46:14 JST) — the execution instrument for rows 2a/2b/3/9 exists and is calibrated on the superseded harness `ffa612ea33` before the object of the leg (p0's §17.7-compliant follow-up) exists
+
+**Order of existence**: harness commits after `ffa612ea33` = 1 at writing (the §17.7-compliant follow-up does not exist yet); HEAD `a3334ac777`. The runs below are **instrument calibration, not the leg**: they execute the superseded v2 harness in the scratchpad and carry no verdict.
+
+**`pz_r0_exec.py`** (appendix H, sha256 a7c1b5010f9b6469989d6b9447cf36b31354b88bc8fc9a67b61ed72fb7967332): runs p0's harness from a `git archive` of its commit **in-process** — my counter is installed on `mujoco.mj_step` *before* the harness wraps it, so any physics step is counted by both; the module is executed with a non-`__main__` run name so its globals survive, then its own `main()` is called with `--out` in the scratchpad; afterwards the driver-family sweep of `sys.modules`, the list of modules loaded from the archive, and the row-3 measurement (the harness's own `_bind` on models built exactly as its `main` builds them; `AXFIX` read from the live namespace) against the banked expectation `c = [0, +1, 0]`, `s = [+1, 0, 0]`, `a = [0, 0, −1]` on both sides and the relation `AXFIX_R = diag(1,−1,1)·AXFIX_L·A`. `MODE=control` runs a copy with **one injected `mujoco.mj_step`** after the targets are built (row 2a positive control).
+
+**Calibration on v2 (`ffa612ea33`, harness sha `53e5daa5…`), 2026-09-20 08:41-08:45 JST:**
+
+| run | my `mj_step` count | harness's count (JSON) | harness module counter | exit | driver family in `sys.modules` | modules loaded from the archive |
+|---|---|---|---|---|---|---|
+| as landed | **0** | **0** | 0 | 0 | [] | `ur15_cell_spec`, `ur15_gripper_mirror_acceptance`, `ur15_mirror_acceptance` |
+| one injected step | **1** | **1** | — | 0 | [] | same; the copy's self-reported sha differs (`fb775c76…`) |
+
+Row 3 on v2: `AXFIX` vs banked, max |Δ| **L 3.8e-15, R 3.3e-15**; mirror relation **4.9e-15** (= the R3 instrument's value). Row-9 mechanics validated on v2's own (`:1241`) targets against my 09-16 results: converged flags equal 17/17 both sides; `n_converged_candidates` equals my `solved` on every row; `pe` equal (my 4-decimal rounding is the only difference); `q` max |Δ| ≤ 5.0e-10 rad on L (my saved precision; R's 09-16 record kept no `q` — the leg compares against the `:2812` runs, which keep it). v2's summary: L 17/17, R 17/17, `L_converges_R_not = []`, negative control differs on 0 rows (as addendum 3 predicted), stop tags none, 50 s.
+
+**Leg procedure (unchanged rows, now with the instrument named)**: on the follow-up's commit — `git archive` → `pz_r0_exec.py run` and `control` → rows 2a (0 / 1), 2b (sweep + `sys.modules`), 3 (≤ 1e-9), 5-8 from the JSON, 9 = row-for-row against `r0_L_2812.json` / `r0_R_2812.json` (converged flags equal; candidate counts equal; `pe`, `q` ≤ 1e-9 where the start and rebinding are the same), §17.7 additions (both derivations printed and ≤ 1e-9; U0 rows reported outside the denominator; settle offsets), 10-11 pins; stop-cause tag per row. Supersedes sha `b5fde52464790ee57fe915376eb8300218103eef639217e2701582739d583fbb` @ b829c3f066 (everything before stands).
+
+## Appendix H — `pz_r0_exec.py` (verbatim; sha256 a7c1b5010f9b6469989d6b9447cf36b31354b88bc8fc9a67b61ed72fb7967332)
+```python
+"""pZ R0 execution instrument: run p0's harness (from a git archive of its commit) IN-PROCESS under my own mj_step counter,
+installed before the harness wraps mujoco.mj_step, so any physics step is counted by both.  MODE=run executes the harness
+as landed; MODE=control executes a copy with ONE injected mujoco.mj_step call (positive control: both counters must read 1).
+After the run: my counter, the harness's counter (from its JSON), the sys.modules sweep for the driver family, exit code."""
+import sys, os, io, runpy, hashlib, json, contextlib, pathlib, re
+W, HARNESS_REL, OUT, MODE = sys.argv[1:5]
+import mujoco
+_my = {"n": 0}; _orig = mujoco.mj_step
+def _counted(*a, **k):
+    _my["n"] += 1; return _orig(*a, **k)
+mujoco.mj_step = _counted                          # installed FIRST
+hpath = pathlib.Path(W) / HARNESS_REL
+src = hpath.read_text(); sha = hashlib.sha256(src.encode()).hexdigest()
+if MODE == "control":
+    anchor = "    rows, source = _targets()\n"
+    assert src.count(anchor) == 1, "anchor for the injected step not found exactly once"
+    src = src.replace(anchor, anchor + "    mujoco.mj_step(models['L'][0], models['L'][1])   # pZ positive control: ONE injected physics step\n")
+    hpath = hpath.with_name("_pz_control_copy.py"); hpath.write_text(src)
+os.chdir(hpath.parent); sys.path.insert(0, str(hpath.parent))
+sys.argv = [str(hpath), "--out", OUT]
+buf = io.StringIO(); code = None
+with contextlib.redirect_stdout(buf):
+    g = runpy.run_path(str(hpath), run_name="pz_r0_harness")     # module executed, its __main__ guard skipped -> globals kept
+    try:
+        code = g["main"]()                                        # the harness's own main, same argv
+    except SystemExit as e:
+        code = e.code
+# row 3: AXFIX per side, measured by the harness's own _bind on models built exactly as its main builds them, vs my banked expectation
+import numpy as np
+EXP = {"L": np.array([[0, 1, 0], [1, 0, 0], [0, 0, -1]], float), "R": np.array([[0, 1, 0], [1, 0, 0], [0, 0, -1]], float)}
+axfix = {}
+with contextlib.redirect_stdout(io.StringIO()):
+    models = {"L": g["_acc"].build_side("ur15_base.xml", g["_acc"].KO_LEFT, g["_spec"].SIDES["L"]),
+              "R": g["_acc"].build_side("ur15_base_mirrored.xml", g["_acc"].KO_MIRROR, g["_spec"].SIDES["R"])}
+    ns = g["_bind"].__globals__                                   # the LIVE module namespace (run_path's dict is a snapshot)
+    for t in ("L", "R"):
+        g["_bind"](t, *models[t]); axfix[t] = np.array(ns["AXFIX"][t], float)
+A = np.diag([-1, 1, 1]); rel = float(np.abs(axfix["R"] - np.diag([1, -1, 1]) @ axfix["L"] @ A).max())
+row3 = {t: float(np.abs(axfix[t] - EXP[t]).max()) for t in axfix}; row3["mirror_relation"] = rel
+log = pathlib.Path(OUT) / f"harness_stdout_{MODE}.log"; log.parent.mkdir(parents=True, exist_ok=True); log.write_text(buf.getvalue())
+rep = json.load(open(pathlib.Path(OUT) / "R0_CONVERGENCE_REPORT.json"))
+fam = sorted(k for k in sys.modules if any(w in k for w in ("ur15_steps", "kinonly_step_solve")))
+print(json.dumps({"mode": MODE, "harness_sha256": sha, "harness_reported_sha256": rep["summary"].get("harness_sha256"),
+                  "exit_code": code, "my_mj_step_count": _my["n"], "harness_mj_step_count": rep["summary"].get("mj_step_calls"),
+                  "driver_family_in_sys_modules": fam, "modules_loaded_from_archive": sorted({k for k, v in sys.modules.items() if getattr(v, "__file__", None) and str(v.__file__).startswith(str(hpath.parent))}),
+                  "L_converged": rep["summary"].get("L_converged"), "R_converged": rep["summary"].get("R_converged"),
+                  "L_not_R": rep["summary"].get("L_converges_R_not"), "neg_diff": rep["summary"].get("negative_control_R_rows_on_L_model_differ_on_steps"),
+                  "stop_tags": rep["summary"].get("stop_cause_tags_seen"), "row3_axfix_maxabs_vs_banked": row3, "harness_module_counter": g["_bind"].__globals__.get("_MJ_STEP_CALLS"), "elapsed_s": rep["summary"].get("elapsed_s"), "stdout_log": str(log)}, ensure_ascii=False))
+```
