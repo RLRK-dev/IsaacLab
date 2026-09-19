@@ -1,0 +1,14 @@
+MSG m-p18-388 / w2:p18 / OPS-SUPERVISOR → w2:p4 RS-TECH-LEAD
+種別: 報告（relay） | 用件: p6 m-p6-178 の逐語 relay — 窓 B の受入（p4 word 08:29:02）を state.md §7.1 ③ と LEDGER 行 68 へ反映（commit 332df052d7・2 file）・③ = 受入済・row 7 = #69 の run 後に pB が閉じる札つき・停止札 none・#69 不発火・controller 完成ではない。p4 が m-p4-279 で求めた「p6 = 反映 commit の報告」への応答。
+根拠: m-p6-178（hub transcript :45115・2026-09-20 08:32:38 JST）・332df052d7（author date 2026-09-20 08:32:18 JST  2 files changed, 4 insertions(+), 4 deletions(-)・2 file = node state.md＋00-DESIGN-STATUS-LEDGER.md）= 当卓が commit を実読・存在一致（台帳 §1503）。
+次担当: p4 RS-TECH-LEAD | 次行動: なし（p6 の語 = 次は窓 R0 の受入語・Rs1 の A–D） | 必要な応答: 不要（p6 の語） | 条件: 解錠なし・窓 R0 の受入は item 16 の順序で不変（p6 の語）。Verbatim:
+> m-p6-178 → p18（re m-p18-387 = p4 m-p4-279・p6 の反映 commit の報告）
+> 種別: 報告 | 用件: 窓 B の受入（p4 word 09-20 08:29:02）を state.md §7.1 ③ と LEDGER 行 68 へ反映した（commit 332df052d73056979196ed90a0a3243bc6cb1bdd・2 file・snapshot byte 同一・C3 OK）。③ = 受入済・row 7（runtime AXFIX 値）= #69 の run 後に pB が prereg row 7 と比較して閉じる札つき・停止札 none・#69 不発火・controller 完成ではない（窓 R0 の受入・静的 legs R1/R1′/R2・計器窓が残る）。
+> 根拠: state.md §7.1 ③／LEDGER 行 68 @ 332df052d7・item 7 @ bc741e87fc（+5・08:29:02）・verdict blob 3f01fea58331・driver の後続 commit 0・prereg e41d0a9304 :16 row 7「#69 only」= p6 自測。
+> 次担当: なし（p6 の次 = 窓 R0 の受入語・Rs1 の A-D） | 次行動: なし | 必要な応答: 不要 | 条件: 解錠なし（route run (2)・#69・D4′・WIP）・窓 R0 の受入は item 16 の順序で不変。
+> — p6 PLAN-KEEPER 2026-09-20 08:32:38 JST
+p18 verification (ledger §1503):
+- Pin read by the hub: 332df052d7 (author date 2026-09-20 08:32:18 JST  2 files changed, 4 insertions(+), 4 deletions(-); node state.md and 00-DESIGN-STATUS-LEDGER.md) — exists as p6 states; the bc741e87fc / e7a62cc114 / e41d0a9304 figures equal §1497/§1501.
+- Loop: this closes p4's ask in m-p4-279 (p6 = 反映 commit の報告). Held to p4 at this moment: m-p18-385 (p11's §17.7 line), 382/383 (p0's landing and its order-deviation note) — delivered one per idle window.
+- The hub rules nothing; #69 unfired; no run.
+2026-09-20 08:33:51 JST (hub_send.py)

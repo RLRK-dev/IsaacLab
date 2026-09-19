@@ -48175,3 +48175,13 @@ ALT-1 (downgrade) — not chosen (the human's word). ALT-2 (`agent prompt`) — 
 - ⛔ 解錠なし・run 0（当卓）・当卓は裁定しない。
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1503 — ✅ **p6 m-p6-178（窓 B 受入を state.md §7.1 ③・LEDGER 行 68 へ反映 `332df052d7`・p4 m-p4-279 の「p6 = 反映 commit の報告」への応答）→ m-p18-388（→ p4・HELD）／idle 窓: 385 → p4 = HELD(foreign_text_in_composer)・382 → p6 = DELIVERED／dry-run（読み取りのみ）= pZ working・p11 の 386 leg は完了経路が skip**（当卓 2026-09-20 08:32–08:34 JST 実測）
+
+- **着信**: m-p6-178 `:45115`（`type=user`・`23:32:38.618Z` = 08:32:38 JST）。§27 形。
+- **検証**: `332df052d7`（08:32:18・LEDGER +1/−1・node state.md +3/−3）= 実在・記載どおり。item 7 `bc741e87fc`・verdict blob `3f01fea58331`・prereg `e41d0a9304` :16 = §1497/§1501 と同一（p6 自測は p6 の語）。p6 の「必要な応答: 不要」は p6 の便について。p4 の m-p4-279 が p6 に求めた報告 ⇒ loop の閉じ先 = p4。
+- **hub の動き**: 385 → p4: p4 = HELD(foreign_text_in_composer)（08:33:51.581）（p4 = idle だが composer に他文 → fail-closed）。**m-p18-388** = m-p6-178（`bodies/m-p18-388.txt`）→ p4: held: p4 = HELD(paste_in_composer)（08:33:51.673・record body_sha256 `f382f7d5e81004d5…`）。382 → p6: p6 = DELIVERED(fused_with_unknown_prefix)（08:33:51.777 → `2026-09-19T23:33:52.077Z`）（DELIVERED(fused_with_unknown_prefix)・`verify` rc 0）。**dry-run（`HUB_SEND_READONLY=1 … --dry_run`・記録なし）**: 385 → pZ = pZ working（composer 空）／386 → p11 = `skipped(HELD(foreign_text_in_composer))`・`nothing to complete` ⇒ **send 行が HELD(foreign_text_in_composer) の leg（379 → pZ・385 → p4・386 → p11・388 → p4）は `send --id` の完了経路では再試行されない** — 再送経路は tool の help/source を読んで §1504 に記す（未確認のまま blind 再送はしない）。
+- **hold 中の leg（08:34・pending.py 実測）**: 354（p11・p6） 357（p11・p6） 358（p11） 359（p0・p11・pZ） 360（p11） 361（p11・pZ） 363（p0・p11） 364（p0・p11） 365（p0） 366（p11） 367（pZ） 368（p0・p11） 369（p0・pZ） 370（p0・pZ） 371（p11・pZ） 372（p11） 374（p0） 375（p0・p11・pZ） 376（p0・p11） 377（p0・p11） 378（p11・pZ） 379（p11・pZ） 381（p0・p11） 382（p11・p4・pZ） 383（p11・p4・p6・pZ） 384（p0・p11・p4・p6） 385（p4・pZ） 386（p11） 387（p0・p11・pZ） 388（p4）（30 id）。
+- ⛔ 解錠なし・run 0（当卓）・当卓は裁定しない。
+
+**Banked — 時刻は本節 commit の author date が正。**
