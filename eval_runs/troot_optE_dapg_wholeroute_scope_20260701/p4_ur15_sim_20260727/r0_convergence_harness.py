@@ -63,6 +63,21 @@ printed.  REPORTED, outside the denominator: the settled run-time values of the 
 _gen/dod_c2_20260810/run.log :93 「re-measured after the approach」, sha256 04599b84e34be51ec906662f0d92aa8349eae833034c3a7e8d070d6c808b8868, driver c737f6974e at
 that time) GL = (0.0986, 0.28, 0.9488), GR = (0.1886, 0.28, 0.951), solved as four extra rows per side tagged
 「settled example (U0)」, with the settle offset (a) - (b) printed per side in three components.
+R0-ii (section 17.8 (b), p11's decision; a row of R0, not a substitute for R1/R1').  Prediction from the identity joint
+map (section 5 D1) with per-side AXFIX (section 6 D2): solving the mirror image Mx*p = (-x, y, z) of an L target on the
+right side gives q_R == q_L on a correct UR15-B when seed, start and attitude index are the same.  Form: for every row
+r in 2..18 (targets = section 17.7's L column and its mirror MxL) and every attitude index k in 0..len(pose_menu)-1,
+the SAME call `solve_ik(t, tgt, tries=None, iters=300, seed=<seed>, near=None, warm=None, other=None, pose_only=k,
+quiet=True)` (menu pinned to one attitude -> n_try = 2) on L with L_COL[r] and on R with MxL[r]; a pair (r, k) is
+IDENTICAL iff both sides converge and max|q_R - q_L| < 1e-6 rad.  Models on the right: B (mirrored arm + mirrored ko,
+sign +1), and the two negative controls RC (stock arm + stock ko on the right mount, sign +1) and NH (mirrored arm +
+stock ko), the three of pZ's instrument.  Bar: (1) RC and NH show 0 identical pairs (else the row has no discriminating
+power and is reported invalid); (2) on B every row has >= 1 identical k; (3) on B the count of (both converge and not
+identical) is reported (prediction 0; > 0 is a finding for p11, not a section 11 STOP).  The unsharpened form
+(tries=None without pose_only; pZ measured 5/17 identical rows on B) is reported alongside.  Mx = diag(-1, 1, 1) is
+interpreted in the composed one-arm model's frame; the map and both targets are printed.  Not shown by this row: reach
+of the real R targets (rows 2-18 show that), mounting correctness (R1/R2), collision/grasp/dynamics.
+
 """
 
 from __future__ import annotations
@@ -1086,6 +1101,83 @@ def _solve_rows(t, rows, col, seed, re_max, tag_rows="", in_denominator=True):
     return out
 
 
+MX = np.array([-1.0, 1.0, 1.0])            # section 17.8: the mirror map diag(-1, 1, 1), composed-model frame
+R0II_TOL_RAD = 1e-6
+
+
+def _solve_one(t, tgt, seed, re_max, pose_only=None):
+    """One solve in the wired form (section 17.8 call); returns (q or None, stop-cause tag, note)."""
+    LAST_CLEAR.pop(t, None)
+    CLEARANCE_REPORT.pop(t, None)
+    try:
+        q = solve_ik(t, tgt, tries=None, iters=300, seed=seed, near=None, warm=None, other=None, re_max=re_max,
+                     pose_only=pose_only, quiet=True)
+        return np.asarray(q, float), "none", ""
+    except RuntimeError as e:
+        if str(e).startswith("no IK solution"):
+            return None, "controller non-convergence", str(e)
+        return None, "other", f"RuntimeError: {e}"
+    except AssertionError as e:
+        return None, "instrument calibration stop", f"AssertionError: {e}"
+
+
+def _r0ii(models_R, model_L, rows, seed, re_max, qL_unsharpened):
+    """Section 17.8 (b): the mirrored-target identity row, sharpened by pose_only=k, on B and the controls RC/NH."""
+    K = len(pose_menu("L"))
+    assert K == len(pose_menu("R")), "menu length differs between sides"
+    L_rows = [(n, name, L, L * MX) for n, name, L, _R in rows]          # (row, name, L_COL, MxL)
+    # L side: sharpened sweep on the correct L model (the unsharpened L solutions come from the main leg)
+    _bind("L", *model_L)
+    qL = {}
+    for n, name, L, _ in L_rows:
+        for k in range(K):
+            qL[(n, k)] = _solve_one("L", L, seed, re_max, pose_only=k)
+    out = {"Mx": MX.tolist(), "menu_len": K, "seed": seed, "re_max": re_max, "tol_rad": R0II_TOL_RAD,
+           "targets": [{"step": n, "name": name, "L": L.tolist(), "MxL": M.tolist()} for n, name, L, M in L_rows],
+           "L_sharpened_converged_pairs": sum(1 for v in qL.values() if v[0] is not None),
+           "models": {}}
+    for mname, md in models_R.items():
+        _bind("R", *md)
+        ident, both_not_ident, both, pairs, uns_ident = [], [], 0, [], []
+        for n, name, L, M in L_rows:
+            for k in range(K):
+                qR, tag, note = _solve_one("R", M, seed, re_max, pose_only=k)
+                qLk = qL[(n, k)][0]
+                dq = None if (qR is None or qLk is None) else float(np.abs(qR - qLk).max())
+                if dq is not None:
+                    both += 1
+                    if dq < R0II_TOL_RAD:
+                        ident.append((n, k))
+                    else:
+                        both_not_ident.append((n, k, dq))
+                pairs.append({"step": n, "k": k, "L_converged": qLk is not None, "R_converged": qR is not None,
+                              "R_tag": tag, "max_abs_dq_rad": dq})
+            # unsharpened form (tries=None, no pose_only) at MxL, against the main leg's L solution
+            qRu, tagu, _ = _solve_one("R", M, seed, re_max, pose_only=None)
+            qLu = qL_unsharpened.get(n)
+            if qRu is not None and qLu is not None and float(np.abs(qRu - qLu).max()) < R0II_TOL_RAD:
+                uns_ident.append(n)
+        rows_with = sorted({n for n, _ in ident}); rows_without = [n for n, *_ in L_rows if n not in rows_with]
+        out["models"][mname] = {
+            "identical_pairs": ident, "identical_count": len(ident),
+            "both_converged_pairs": both, "both_converged_not_identical": both_not_ident,
+            "rows_with_identical_k": rows_with, "rows_without_identical_k": rows_without,
+            "unsharpened_identical_rows": uns_ident, "pairs": pairs}
+        print(f"[r0-ii] model {mname}: identical (r,k) = {len(ident)} of {both} both-converged pairs "
+              f"({len(L_rows)} rows x {K} k); rows with >= 1 identical k = {len(rows_with)}/{len(L_rows)}; "
+              f"both-converged-not-identical = {len(both_not_ident)}; unsharpened identical rows = {len(uns_ident)}/{len(L_rows)}")
+    B, RC, NH = (out["models"].get(x, {}) for x in ("B", "RC", "NH"))
+    out["bar"] = {
+        "controls_RC_NH_identical_0": RC.get("identical_count", -1) == 0 and NH.get("identical_count", -1) == 0,
+        "B_every_row_has_identical_k": len(B.get("rows_without_identical_k", [1])) == 0,
+        "B_both_converged_not_identical_count": len(B.get("both_converged_not_identical", [])),
+        "row_valid": RC.get("identical_count", -1) == 0 and NH.get("identical_count", -1) == 0,
+        "claim": "鏡像同一性（solver 経路）のみ／実 R target への到達・取付の正しさ（R1/R2）・衝突・把持・動的追従は示さない",
+    }
+    print(f"[r0-ii] bar: {out['bar']}")
+    return out
+
+
 def main() -> int:
     ap = argparse.ArgumentParser(description="R0 convergence leg (static; convergence only)")
     ap.add_argument("--out", default=str(HERE / "_gen" / "r0_convergence"))
@@ -1115,6 +1207,10 @@ def main() -> int:
           f"  (a = {U0_SETTLED['source']})")
     models = {"L": _acc.build_side("ur15_base.xml", _acc.KO_LEFT, _spec.SIDES["L"]),
               "R": _acc.build_side("ur15_base_mirrored.xml", _acc.KO_MIRROR, _spec.SIDES["R"])}
+    # R0-ii negative controls (section 17.8, pZ's instrument): RC = stock arm + stock ko on the right mount (sign +1),
+    # NH = mirrored arm + stock ko
+    models_r0ii = {"B": None, "RC": _acc.build_side("ur15_base.xml", _acc.KO_LEFT, _spec.SIDES["R"]),
+                   "NH": _acc.build_side("ur15_base_mirrored.xml", _acc.KO_LEFT, _spec.SIDES["R"])}
     rows, u0 = _targets(GL, GR), _u0_rows()
     print(f"[r0] targets: {len(rows)} rows (2-18) in the denominator; {len(u0)} extra U0 rows reported")
     for n, name, L, R in rows:
@@ -1133,6 +1229,10 @@ def main() -> int:
     # negative control (prereg row 8): the R column on the L model
     _bind("L", *models["L"])
     neg = _solve_rows("L", rows, "R", args.seed, args.re_max, tag_rows="negative control: R targets on the L model", in_denominator=False)
+    # R0-ii (section 17.8 (b)): mirrored L targets, pose_only=k sweep, on B and the controls RC / NH
+    models_r0ii["B"] = models["R"]
+    qL_uns = {r["step"]: (None if r["q"] is None else np.asarray(r["q"], float)) for r in res["L"]}
+    r0ii = _r0ii(models_r0ii, models["L"], rows, args.seed, args.re_max, qL_uns)
     convL = [r["converged"] for r in res["L"]]; convR = [r["converged"] for r in res["R"]]
     convN = [r["converged"] for r in neg]
     l_not_r = [r["step"] for cl, cr, r in zip(convL, convR, res["R"]) if cl and not cr]
@@ -1150,6 +1250,8 @@ def main() -> int:
         "negative_control_R_rows_on_L_model_differ_on_steps": neg_diff,
         "negative_control_fired": len(neg_diff) >= 1,
         "U0_settled_rows_reported": {t: {r["step"]: r["converged"] for r in resu0[t]} for t in ("L", "R")},
+        "R0ii_bar": r0ii["bar"],
+        "R0ii_counts": {mn: {k: v for k, v in mv.items() if k != "pairs"} for mn, mv in r0ii["models"].items()},
         "seed": args.seed, "re_max": args.re_max, "tries": None, "iters": 300, "quiet": True, "start_pose": list(HOME_POSE),
         "branches_on_composed_model": branches,
         "mj_step_calls": _MJ_STEP_CALLS,
@@ -1162,9 +1264,9 @@ def main() -> int:
         "elapsed_s": round(time.time() - t0, 3),
     }
     rec = {"summary": summary, "L": res["L"], "R": res["R"], "U0_settled_L": resu0["L"], "U0_settled_R": resu0["R"],
-           "negative_control_R_on_L": neg}
+           "negative_control_R_on_L": neg, "R0ii": r0ii}
     (out_dir / "R0_CONVERGENCE_REPORT.json").write_text(json.dumps(rec, indent=1, ensure_ascii=False) + "\n")
-    print("[r0] " + " | ".join(f"{k}={v}" for k, v in summary.items() if k not in ("claim", "targets_source", "branches_on_composed_model")))
+    print("[r0] " + " | ".join(f"{k}={v}" for k, v in summary.items() if k not in ("claim", "targets_source", "branches_on_composed_model", "R0ii_counts")))
     print(f"[r0] {claim}")
     print(f"[r0] report -> {out_dir / 'R0_CONVERGENCE_REPORT.json'}")
     return 0 if (len(l_not_r) == 0 and not stop) else 1
