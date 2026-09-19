@@ -1,0 +1,4 @@
+Protected inputs unchanged: 114; preserved: S5_AB / 20 cards / 92 targets / 14 axes
+Separate new drawing sources: SES 20 581105 / SEV 20 581145; selected configuration/TCP: null
+HEADER_TOOL_TIP_SOURCES_READBACK_COMPLETE audit/hvjb_header_tool_tip_sources_v01_readback.json
+[INFO] Using Python: "/home/rlrk/src/ur15-line-render/venv/bin/python"

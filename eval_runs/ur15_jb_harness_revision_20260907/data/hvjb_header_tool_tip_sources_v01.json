@@ -1,0 +1,138 @@
+{
+  "recorded_on": "2026-09-19",
+  "scope_ja": "2020年付SES 20 / SEV 20例示図の読取。既存SES2001 / SEV2001 CADへの寸法転用、機種採用、TCP決定ではない。",
+  "previous_readback": "audit/hvjb_header_tool_envelope_v01_readback.json",
+  "sources": [
+    {
+      "id": "SES20_581105",
+      "url": "https://www.stoeger.com/en/list-of-products/automatic-screwdrivers-for-screws.html?file=files%2Fstoeger%2Fprodukte%2F2020%2FPDF%2F581105.pdf",
+      "file": "references/hvjb_tool_tip_sources_20260919/ses20_581105.pdf",
+      "sha256": "b2b24a35a42ca83087477950b9f7c8a03f7b5f8b984a9ceac04bccfc158ff5e9",
+      "printed_model": "SES 20",
+      "drawing_number": "581105",
+      "printed_creation_date": "2020-09-25",
+      "pdf_metadata_creation_date_utc": "2021-02-03T08:59:50+00:00",
+      "pages_visually_read": [1, 2],
+      "languages": ["en", "de"],
+      "page_images": [
+        "previews/hvjb_tool_tip_sources_v01/ses20-1.png",
+        "previews/hvjb_tool_tip_sources_v01/ses20-2.png"
+      ],
+      "text_extract": "references/hvjb_tool_tip_sources_20260919/ses20_581105.txt"
+    },
+    {
+      "id": "SEV20_581145",
+      "url": "https://www.stoeger.com/en/list-of-products/automatic-screwdrivers-for-screws.html?file=files%2Fstoeger%2Fprodukte%2F2020%2FPDF%2F581145.pdf",
+      "file": "references/hvjb_tool_tip_sources_20260919/sev20_581145.pdf",
+      "sha256": "2354199d0e85ba97c032c15ad2143ac5c21c3d9f6050c8b74faf5389b17e0f5a",
+      "printed_model": "SEV 20",
+      "drawing_number": "581145",
+      "printed_creation_date": "2020-09-30",
+      "pdf_metadata_creation_date_utc": "2021-02-03T09:08:19+00:00",
+      "pages_visually_read": [1, 2],
+      "languages": ["en", "de"],
+      "page_images": [
+        "previews/hvjb_tool_tip_sources_v01/sev20-1.png",
+        "previews/hvjb_tool_tip_sources_v01/sev20-2.png"
+      ],
+      "text_extract": "references/hvjb_tool_tip_sources_20260919/sev20_581145.txt"
+    },
+    {
+      "id": "PRODUCT_OVERVIEW",
+      "url": "https://www.stoeger.com/en/list-of-products/automatic-screwdrivers-for-screws.html",
+      "file": "references/hvjb_tool_tip_sources_20260919/product_overview.html",
+      "sha256": "8b02dfab2f03867c8fe9c6f2582f4110130736579b590965a079a05e3189523d",
+      "observed_on": "2026-09-19",
+      "scope_ja": "SES 20欄は581105.pdf / 581105_CAD.zip / 2017年SES冊子を、SEV 20欄は581145.pdf / 581145_CAD.zipを掲載。旧CADとの形状・構成の同一性を証明する記載として扱わない。"
+    }
+  ],
+  "drawing_observations": [
+    {
+      "source": "SES20_581105",
+      "source_page": 1,
+      "reference_distance_to_workpiece_range_m": [0.001, 0.002],
+      "distance_is_variable": true,
+      "distance_scope_ja": "図中のワーク直前にある先端とワークの例示距離。ビット突出量や取付面からのTCPではない。",
+      "standard_head_stroke_options_m": [0.025, 0.050],
+      "recovery_note_ja": "詰まり時の排出には締付方向と反対へ離れ、ヘッド行程はねじ長さより数mm長くするとの注記。実ねじ長さや本案件の復帰行程は未選定。",
+      "jaws_opening_shown": true,
+      "jaw_opening_angle_rad": null,
+      "jaw_open_envelope": null,
+      "mount_plane_to_axis_reference_distance_m": 0.058,
+      "illustrated_configuration_length_range_m": [0.630, 0.730],
+      "length_scope_ja": "図の寸法矢印間。別途描かれたモーター側・後端ケーブルを含む保存CAD全長ではない。",
+      "drawing_example_only": true,
+      "same_configuration_as_saved_ses2001": null
+    },
+    {
+      "source": "SEV20_581145",
+      "source_page": 1,
+      "reference_distance_to_workpiece_range_m": null,
+      "distance_is_variable": true,
+      "distance_scope_ja": "先端とワーク間に可変距離の矢印はあるが数値はない。SES 20の1〜2mmを転用しない。",
+      "standard_head_stroke_options_m_in_this_drawing": null,
+      "mount_plane_to_axis_reference_distance_m": 0.080,
+      "illustrated_configuration_length_range_m": [0.680, 0.820],
+      "length_scope_ja": "図の寸法矢印間。別途描かれたモーター側・後端ケーブルを含む保存CAD全長ではない。",
+      "drawing_example_only": true,
+      "same_configuration_as_saved_sev2001": null
+    }
+  ],
+  "common_drawing_notes": {
+    "sources": ["SES20_581105", "SEV20_581145"],
+    "source_page": 1,
+    "hose_connector_approx_adjustment_angle_deg": 240,
+    "hose_rotation_scope_ja": "継手の向きの調整についての記載。運転中の連続回転・工具軸まわりの許可回転ではない。",
+    "hose_table_heading_ja": "供給ホース内径（ねじ頭径+1mm）と最小曲げ半径。座金・フランジ付きねじへの適合は未確認。",
+    "hose_reference_rows": [
+      {"inside_diameter_range_m": [0.0015, 0.0027], "minimum_radius_m": 0.095},
+      {"inside_diameter_range_m": [0.0030, 0.0040], "minimum_radius_m": 0.100},
+      {"inside_diameter_range_m": [0.0043, 0.0075], "minimum_radius_m": 0.110},
+      {"inside_diameter_range_m": [0.0080, 0.0095], "minimum_radius_m": 0.150},
+      {"inside_diameter_range_m": [0.0100, 0.0130], "minimum_radius_m": 0.200},
+      {"inside_diameter_range_m": [0.0140, 0.0160], "minimum_radius_m": 0.300}
+    ],
+    "hose_scope_ja": "図示供給ホースの参考表。HVJBの高電圧ケーブルや56mm配線の曲げ条件ではない。表の区間の間を補間しない。",
+    "service_notes_ja": [
+      "ビット交換時に前側機構を傾ける図と空間確保の注意がある。角度と全可動外形の数値はない。",
+      "空気継手、ボタン、センサーを左右どちらかに配置できるとの注記。採用側は未決定。"
+    ],
+    "mounting_notes": {
+      "surface_flatness_drawing_value_m": 0.00005,
+      "use_all_m6_mounting_holes": true,
+      "hole_count": null,
+      "scope_ja": "平面度記号と0.05の図面注記を読取。穴数は変動すると記載。本案件の取付板・穴配置・締付条件の指定ではない。"
+    }
+  },
+  "handoff_to_configuration": {
+    "available_ja": [
+      "SES 20 / SEV 20ごとに別管理した例示図と、供給・交換・復帰の図面注記",
+      "前段で保存したSES2001 / SEV2001の全メッシュ外形とH05保持中の14ねじ軸の対応"
+    ],
+    "required_unresolved_ja": [
+      "採用ねじの品番・長さ・頭部/座金/駆動穴、着座面と受け側積層",
+      "そのねじに対応するビット品番、装着突出量、係合基準、取付面からの締付TCP",
+      "採用ノーズ・真空管・爪の形状と、供給/接近/締付/復帰の各状態",
+      "工具の軸まわりの向き、供給ホース型式・経路、アダプターと周辺形状"
+    ],
+    "bit_part_number": null,
+    "installed_bit_projection_m": null,
+    "mount_to_engagement_transform": null,
+    "actual_bit_stroke_m": null,
+    "actual_nose_states": null,
+    "selected_hose_inside_diameter_m": null,
+    "selected_fastener": null,
+    "selected_tool_configuration": null,
+    "selected_axial_registration_m": null
+  },
+  "previous_comparison_scope_ja": "前段の0〜100mmは保存工具全体の仮の平行移動。今回の図面からビット長・行程・締付配置へ読み替えない。",
+  "prior_art": {
+    "keywords": ["SES20", "SEV20", "先端寸法"],
+    "exit_code": 0,
+    "findings": 0,
+    "blockers": 0,
+    "lessons": 0
+  },
+  "geometry_or_motion_modified": false,
+  "physical_acceptance_verdict": null
+}
