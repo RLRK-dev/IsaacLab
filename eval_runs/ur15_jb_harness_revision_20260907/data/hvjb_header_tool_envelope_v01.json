@@ -1,0 +1,35 @@
+{
+  "scope": "Auxiliary radial envelope comparison of complete saved tool surfaces and saved H05 poses, with unselected axial registration",
+  "previous_readback": "audit/hvjb_ses2001_comparison_v01_readback.json",
+  "tools": "data/hvjb_ses2001_comparison_v01.json",
+  "hand_observation": "audit/hvjb_header_hand_access_v01.json",
+  "hand_display": "data/hvjb_header_hand_display_v01_p02.json",
+  "reused_clipping": "scripts/probe_hand_tool_access_v01.py",
+  "reused_witness_validator": "scripts/probe_hvjb_header_hand_access_v01.py",
+  "reused_tool_loader": "scripts/render_hvjb_fastening_cad_v01.py",
+  "profile_bin_depth_m": 0.002,
+  "profile_lower_depth_m": -0.006,
+  "numeric_comparison_tolerance_m": 1e-10,
+  "comparison_translation_m": {
+    "minimum": 0.0,
+    "maximum": 0.1,
+    "step": 0.002,
+    "initial_display": 0.0,
+    "selected_value": null,
+    "meaning": "Hypothetical location d of the entire saved tool CAD's leading end; d=-header Y. Not a bit protrusion, TCP or actual fastening pose."
+  },
+  "tool_radius": "Maximum perpendicular distance from the source CAD axis over every triangle clipped to a complete axial bin, regardless of azimuth",
+  "hand_radius": "Previously observed minimum perpendicular distance from the nominal screw axis over every H05 triangle clipped to the corresponding bin",
+  "difference": "Hand minimum radius minus tool maximum radius. Neither a 3D minimum distance nor a penetration depth; overlapping radial bounds do not prove surface intersection.",
+  "tool_state": "Exactly the saved manufacturer example; no bit, nose, jaws, hose or stroke geometry is added or actuated",
+  "excluded": [
+    "robot arms and bases",
+    "cameras",
+    "case and header bodies",
+    "neighboring parts, other hands and product wiring",
+    "unmodeled feed hoses, moving nose states and the actual selected fastener/bit assembly",
+    "solid containment, continuous motion, compliance, gripping forces and fastening quality"
+  ],
+  "selected_tool_configuration": null,
+  "physical_acceptance_verdict": null
+}
