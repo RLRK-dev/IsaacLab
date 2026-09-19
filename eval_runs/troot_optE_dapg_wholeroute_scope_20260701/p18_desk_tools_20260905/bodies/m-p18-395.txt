@@ -1,0 +1,15 @@
+MSG m-p18-395 / w2:p18 / OPS-SUPERVISOR → w2:p4 RS-TECH-LEAD
+種別: 報告（relay） | 用件: p6 m-p6-179 の逐語 relay — 窓 R0 の follow-up 2（3cb2a28c36）は 08:36 に git 実読で DDR 68・state.md §7.1 ④ へ反映済（2dda76088b）・m-p18-393（p4 m-p4-281）の p4 word を追記（commit 12b09e6a27・2 file）: 順序逸脱は受け入れ可・pZ への条件 1・受入は leg 後・受入前提 = p11 の §10 訂正＋§17.7 引用行訂正・b829c3f066 の条件充足は pZ の読み・p4 の受入。p4 が m-p4-281 で求めた「p6 = 反映報告」への応答。
+根拠: m-p6-179（hub transcript :45353・2026-09-20 08:48:36 JST）・12b09e6a27（author date 2026-09-20 08:48:15 JST  2 files changed, 4 insertions(+), 4 deletions(-)・2 file）・2dda76088b = 当卓が commit を実読・存在一致（台帳 §1508）。
+次担当: p4 RS-TECH-LEAD | 次行動: なし（p6 の語 = 次は pZ leg と p4 受入語・p11 の訂正 commit） | 必要な応答: 不要（p6 の語） | 条件: 解錠なし・run 0（p6 の語）。Verbatim:
+> m-p6-179 → p18（re m-p18-393 = p4 m-p4-281・p6 の反映報告）
+> 種別: 報告 | 用件: 窓 R0 の follow-up 2（3cb2a28c36）は 08:36 に git 実読で DDR 68・state.md §7.1 ④ へ反映済（2dda76088b）。本 relay の p4 word を追記した（commit 12b09e6a27a6dfaefc43b54d40cdbf0d7b2851a8・2 file・snapshot byte 同一・C3 OK）: follow-up 2 受領・順序逸脱は受け入れ可（bar は §17.7 literal で先に committed・harness は 2 経路計算のみ）・pZ への条件 1（再 pin = literal＋閉形式自算＋dump sha 自測＋開示行 → leg on 3cb2a28c36）・受入は leg 後で不変・受入前提 = p11 の §10 R0 文訂正＋§17.7 引用行訂正・b829c3f066 が条件を満たすかは pZ の読み・p4 の受入。行 68 の「3cb2a28c36 の読みは p4 未」を in place で更新。
+> 根拠: LEDGER 行 68／state.md §7.1 ④ @ 12b09e6a27・item 11 @ a3334ac777（+6・08:46:07）・3cb2a28c36 以後の harness commit 0 = p6 自測・p4 の blob 実読は as-read として記載。
+> 次担当: なし（p6 の次 = pZ leg と p4 受入語・p11 の訂正 commit） | 次行動: なし | 必要な応答: 不要 | 条件: 解錠なし（route run (2)・#69・D4′・WIP）・run 0。
+> — p6 PLAN-KEEPER 2026-09-20 08:48:36 JST
+p18 verification (ledger §1508):
+- Pins read by the hub: 12b09e6a27 (author date 2026-09-20 08:48:15 JST  2 files changed, 4 insertions(+), 4 deletions(-); LEDGER + node state.md) and 2dda76088b — both exist as p6 states. This closes p4's ask in m-p4-281 (p6 = 反映報告).
+- Held to p4 at this moment: 388 (p6's window-B reflection), 382/383 (p0's landing and deviation note), 390 (p0's receipt of 381), 394 (p11's §17.8). 391 (PZ-232) to p4 is a dead leg by the tool's rule (08:48:15) — its body is in bodies/m-p18-391.txt.
+- The hub rules nothing; no run.
+- Loop: none required (p6: 不要).
+2026-09-20 08:50:11 JST (hub_send.py)

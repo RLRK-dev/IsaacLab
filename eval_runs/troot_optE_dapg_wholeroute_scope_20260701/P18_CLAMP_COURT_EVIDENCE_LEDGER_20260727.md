@@ -48230,3 +48230,17 @@ ALT-1 (downgrade) — not chosen (the human's word). ALT-2 (`agent prompt`) — 
 - ⛔ 解錠なし・run 0（当卓）・当卓は裁定しない。
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1508 — ✅ **393（p4 m-p4-281）= 4 卓へ即時配達／p11 m-p11-r0ii-20260920-0846（§10 の R0 文を撤回・R0-ii を R0 の行として採用・targets = §17.7・§17.8 `e0b2857a50`）→ m-p18-394（→ p4 cc pZ p0 p6・HELD）／p6 m-p6-179（m-p4-281 の word を DDR 68・state.md ④ に反映 `12b09e6a27`）→ m-p18-395（→ p4）／idle 窓: 391 → p0 = DELIVERED・**391 → p4 = 死んだ leg 6 件目（guard READY の 1 秒後に composer へ文 = 競合）****（当卓 2026-09-20 08:46–08:50 JST 実測）
+
+- **着信**: m-p11-r0ii-20260920-0846 `:45331`（08:46:47）／m-p6-179 `:45353`（08:48:36）。§27 形。
+- **393 の配達**: pZ 08:47:20.025・p0 08:47:20.836・p11 08:47:21.665・p6 08:47:22.213（全て DELIVERED(fused_with_unknown_prefix)・`verify` rc 0）— 4 卓が同時に ready だった唯一の窓。
+- **m-p11-r0ii の検証**: `e0b2857a50`（08:46:02・+6）・blob `7cb15ec6b4fa…`・sha256 `697f15c19c12a5e6…`・273 行・`### 17.8` = `:269` = p11 の記載と一致。内容 = p4 m-p4-276 の 3 項（§10 撤回・R0-ii 採用＋形・bar・targets = §17.7）— 377（p11 leg = 死んだ leg）を p11 は blob で読んで書いた。**未反映** = m-p4-280（引用行 4 本・GRASP1 = 392・p11 hold）と m-p4-281（393 = 08:47 配達）。solve_ik 挙動・bar の設計 = p11（当卓は pin のみ）。
+- **m-p6-179 の検証**: `12b09e6a27`（author date 2026-09-20 08:48:15 JST  2 files changed, 4 insertions(+), 4 deletions(-)・2 file）・`2dda76088b`（08:36・follow-up 2 の反映）= 実在。p4 の「p6 = 反映報告」への応答 ⇒ p4 へ relay。
+- **hub の動き**: **m-p18-394** = m-p11-r0ii（`bodies/m-p18-394.txt`・未反映 2 便の注記つき）→ p4 cc pZ p0 p6: held: p4 = ready(ghost)・pZ = HELD(working)・p0 = ready(empty)・p6 = HELD(working)（08:48:15.064）。**m-p18-395** = m-p6-179 → p4: held: p4 = HELD(paste_in_composer)（08:50:11.953）。完了 **391 → p0** = DELIVERED（08:48:15.698）。**391 → p4 = HELD(foreign_text_in_composer)（08:48:15.439）= 死んだ leg 6 件目** — guard は 08:48:14 に READY（composer empty）と読み、tool の直前読みで文があった ⇒ **guard は競合を消せない**（tool 自身の読み→送信の間隙は小さいが、完了試行が文に当たると終端になる規則は残る）。p4 は bodies/ を自読する（385 で実証）ので内容は届く。⚠ 推測（当卓の観測外）: 各卓の composer に数分単位で現れる「他文」は人間（Rs1）が pane に打ち込む下書きの可能性 — 貼付 prefix の常駐（`<pasted_content id=…>` が卓ごとに固定）とは別の現象。
+- **watcher**: 08:46:16 に p0 READY（391）を検知 → 08:48:15 に配達（上記）。pairs の計算に死んだ leg の除外を追加（`next_pairs.py`・send 行 HELD(foreign/paste) を除く）→ p4 の次 = 388。
+- **hold 中の leg（08:50・pending.py 実測・死んだ leg 6 件を含む）**: 354（p11・p6） 357（p11・p6） 358（p11） 359（p0・p11・pZ） 360（p11） 361（p11・pZ） 363（p0・p11） 364（p0・p11） 365（p0） 366（p11） 367（pZ） 368（p0・p11） 369（p0・pZ） 370（p0・pZ） 371（p11・pZ） 372（p11） 374（p0） 375（p0・p11・pZ） 376（p0・p11） 377（p0・p11） 378（p11・pZ） 379（p11・pZ） 381（p0・p11） 382（p11・p4・pZ） 383（p11・p4・p6・pZ） 384（p0・p11・p4・p6） 385（p4・pZ） 386（p11） 387（p11・pZ） 388（p4） 389（p11・pZ） 390（p11・p4・pZ） 391（p11・p4） 392（p0・p11・p6・pZ） 394（p0・p4・p6・pZ） 395（p4）（36 id）。優先: p4 = 388 → m-p18-395 → 394 → 382 → 383 → 390／pZ = 389 → 394 → 385 → 387 → 392 → 391 → 384 → 383／p0 = 392 → 394 → 375 → …／p11 = 392 → 389 → 391 → 387 → 384 → 390 → …／p6 = 392 → 394 → 383 → 357 → 354。
+- **工程の現在位置（hub 記帳）**: p11 = §17.7（出所）＋§17.8（§10 撤回・R0-ii）着地・残り = 引用行 4 本の訂正＋GRASP1（392 待ち）／p0 = follow-up 2 着地・次 = R0-ii sweep（§17.8）／pZ = 再 pin 着地・p4 条件（393）を受領・次 = 389/394 を読み leg／p4 = 順序逸脱を受入可・受入は leg 後／p6 = 反映済。窓 B = ACCEPTED。cable 前提 = Rs1 A–D 待ち。
+- ⛔ 解錠なし・run 0（当卓）・当卓は裁定しない。
+
+**Banked — 時刻は本節 commit の author date が正。**
