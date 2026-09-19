@@ -48282,3 +48282,10 @@ ALT-1 (downgrade) — not chosen (the human's word). ALT-2 (`agent prompt`) — 
 - ⛔ 解錠なし・run 0（当卓）・当卓は裁定しない。
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1513 — ✅ **idle 窓の完了: 392 → p6（p4 m-p4-280 = 引用行返却・GRASP1 の問い・cc p6）= state=DELIVERED(fused_with_unknown_prefix) status=idle via=Enter sent_at=2026-09-20T08:54:53.475+09:00 delivered_at=2026-09-19T23:54:53.784Z（watcher 08:54:28 READY → 当卓 08:54:53・`verify` rc 0）／§1512 の bank = `b7e58dc0e7`**（当卓 2026-09-20 08:54–08:55 JST 実測）
+
+- watcher pairs（08:55）: p4 = 388・pZ = 389・p0 = 397・p11 = 389・p6 = 394。
+- ⛔ 解錠なし・run 0（当卓）・当卓は裁定しない。
+
+**Banked — 時刻は本節 commit の author date が正。**
