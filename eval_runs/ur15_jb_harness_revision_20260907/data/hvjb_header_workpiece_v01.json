@@ -1,0 +1,54 @@
+{
+  "recorded_on": "2026-09-20",
+  "scope_ja": "保存済みH05の14保持姿勢を、現行p03のヘッダー配置基準へ平行移動した参照観測。新しい把持姿勢や実工程順序の採用ではない。",
+  "previous_readback": "audit/hvjb_header_tool_cad_metadata_v01_p02_readback.json",
+  "product_meshes": "data/hvjb_photo_model_v03_p03.json.gz",
+  "hand_meshes": "data/header_review_v03/meshes.json.gz",
+  "motion_bank": "data/header_review_v03/motion.npz",
+  "hand_observation": "audit/hvjb_header_hand_access_v01.json",
+  "header_settings": "data/hvjb_header_fastening_inputs_v01.json",
+  "numeric_mapping_tolerance_m": 1e-07,
+  "numeric_pose_tolerance_m": 1e-10,
+  "numeric_basis_ja": "1e-7 mはbuild_hvjb_header_interface_model_v01.pyの保存数値比較、1e-10 mは既存H05観測の数値照合値を継承。製造・接触受入の公差ではない。",
+  "bvh_epsilon_m": 0,
+  "api_source": "https://docs.blender.org/api/main/mathutils.bvhtree.html",
+  "target_policy_ja": "P01の全保存メッシュ、P16/P17の全公式CAD面と既存表示ねじを含める。表示ねじは未採用のため公式CADと分ける。隣ヘッダーは設置位置にある参照状態で、実際の設置順序・同時施工を主張しない。",
+  "limits_ja": [
+    "メッシュ表面についてBVHTree.overlapが返す三角形対を記録する。接触圧力・固体包含・貫通深さ・完全な接触判定ではない。",
+    "同一平面・接線接触や縮退面、保存精度に影響され得る。0件でも離隔や把持成立の証明ではない。",
+    "腕・カメラ・別の保持手・配線・内部ハウジング・締付工具は含めない。動作や部品到着を再計算しない。",
+    "筐体形状とヘッダー間隔はp03の表示形状。未公開のAmpere加工寸法を新しく指定しない。",
+    "H05の60 mm外側配置、T050の40 mm/15度、S5_AB、20仕事・92特徴を維持する。"
+  ],
+  "selected_tool_configuration": null,
+  "selected_arm_trajectory": null,
+  "physical_acceptance_verdict": null,
+  "prior_art": {
+    "keywords": [
+      "H05",
+      "P01",
+      "ヘッダー保持"
+    ],
+    "findings": 0,
+    "blockers": 0,
+    "lessons": 0,
+    "exit_code": 0
+  },
+  "sources": [
+    {
+      "file": "scripts/probe_hvjb_entry_display_v03.py",
+      "sha256": "3e79af3fe414f8ff3112d96258eb9c1a342e04d68be26bfbd2b44373397d68ca",
+      "kind": "existing_local_implementation"
+    },
+    {
+      "file": "scripts/build_hvjb_photo_catalog_v01.py",
+      "sha256": "fe7166bf06b66fed127ad1d41d903bb46d5fda7755cf5de14d9589f35afa47ba",
+      "kind": "existing_local_implementation"
+    },
+    {
+      "file": "scripts/build_hvjb_header_interface_model_v01.py",
+      "sha256": "92cf0666100b986fce43c6127e8ad43bf04212d680e019540b44e0011e01f68a",
+      "kind": "existing_local_implementation"
+    }
+  ]
+}

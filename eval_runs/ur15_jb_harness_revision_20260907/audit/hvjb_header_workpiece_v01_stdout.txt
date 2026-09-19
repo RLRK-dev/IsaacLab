@@ -1,0 +1,18 @@
+HEADER_WORKPIECE_POSE P16 575 {"P01_case": 0, "P16_official": 11, "P16_saved_screws": 0, "P17_official": 0, "P17_saved_screws": 0}
+HEADER_WORKPIECE_POSE P16 605 {"P01_case": 0, "P16_official": 11, "P16_saved_screws": 0, "P17_official": 0, "P17_saved_screws": 0}
+HEADER_WORKPIECE_POSE P16 635 {"P01_case": 0, "P16_official": 11, "P16_saved_screws": 0, "P17_official": 0, "P17_saved_screws": 0}
+HEADER_WORKPIECE_POSE P16 665 {"P01_case": 0, "P16_official": 11, "P16_saved_screws": 0, "P17_official": 0, "P17_saved_screws": 0}
+HEADER_WORKPIECE_POSE P16 695 {"P01_case": 0, "P16_official": 11, "P16_saved_screws": 0, "P17_official": 0, "P17_saved_screws": 0}
+HEADER_WORKPIECE_POSE P16 725 {"P01_case": 0, "P16_official": 11, "P16_saved_screws": 0, "P17_official": 0, "P17_saved_screws": 0}
+HEADER_WORKPIECE_POSE P16 755 {"P01_case": 0, "P16_official": 11, "P16_saved_screws": 0, "P17_official": 0, "P17_saved_screws": 0}
+HEADER_WORKPIECE_POSE P16 785 {"P01_case": 0, "P16_official": 11, "P16_saved_screws": 0, "P17_official": 0, "P17_saved_screws": 0}
+HEADER_WORKPIECE_POSE P17 1135 {"P01_case": 0, "P16_official": 0, "P16_saved_screws": 0, "P17_official": 11, "P17_saved_screws": 0}
+HEADER_WORKPIECE_POSE P17 1165 {"P01_case": 0, "P16_official": 0, "P16_saved_screws": 0, "P17_official": 11, "P17_saved_screws": 0}
+HEADER_WORKPIECE_POSE P17 1195 {"P01_case": 0, "P16_official": 0, "P16_saved_screws": 0, "P17_official": 11, "P17_saved_screws": 0}
+HEADER_WORKPIECE_POSE P17 1225 {"P01_case": 0, "P16_official": 0, "P16_saved_screws": 0, "P17_official": 11, "P17_saved_screws": 0}
+HEADER_WORKPIECE_POSE P17 1255 {"P01_case": 0, "P16_official": 0, "P16_saved_screws": 0, "P17_official": 11, "P17_saved_screws": 0}
+HEADER_WORKPIECE_POSE P17 1285 {"P01_case": 0, "P16_official": 0, "P16_saved_screws": 0, "P17_official": 11, "P17_saved_screws": 0}
+HEADER_WORKPIECE_COMPLETE audit/hvjb_header_workpiece_v01.json poses=14 protected_inputs=134
+Blender 4.5.13 LTS (hash daeeeca98fb0 built 2026-08-25 01:31:19)
+
+Blender quit
