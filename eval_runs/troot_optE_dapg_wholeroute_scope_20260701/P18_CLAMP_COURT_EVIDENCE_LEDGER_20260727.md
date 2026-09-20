@@ -49398,3 +49398,17 @@ ALT-1 (downgrade) — not chosen (the human's word). ALT-2 (`agent prompt`) — 
 - ⛔ 解錠 = 行 69 のみ・再走なし・hub は発火しない・裁定しない。
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1635 — ✅ **#69 の Rs1 目視 leg 着地（Rs1 = w2:p19・`RS1_RUN69_REVIEW_20260921.md` sha `ad5fc064…`・可視範囲で停止記録と矛盾なし・PASS 0・人間の目の主張 0）⇒ 受入 4 入力が 4/4 着地。残り = p4 の受入 word と p6 の反映（両卓ともリミット停止・queue 保持）**（当卓 2026-09-21 00:53–00:56 JST 実測）
+
+- **着信**: `m-p19-rs1-run69-20260921-001`（`:48885`・00:53:46）＋ P18-TO-RS1-001 の到達確認（当卓は配達検証ができないため、この報告が到達の確定）。
+- **custody（当卓の実読）**: `RS1_RUN69_REVIEW_20260921.md`（`eval_runs/troot_optE_dapg_wholeroute_scope_20260701/`）・sha256 再計算 `ad5fc064a5168b41f0ee7d1cf6e159082627006810cf1d19a67ee1c52969d928` = 記載と一致・2,170 byte・24 行・**untracked**。動画 sha256 再計算 `9818e050cb26b0fce06cd21ca9ae9399fe2310dcd08990f8656a2d6c6ca64b6c` = 一致・`~/Downloads/pC_69_*.png` 10 枚 実在。
+- **述語の検査（当卓）**: 「人間が見た」= **0**（冒頭に not a claim of human viewing と明記・観測 00:43–00:48 JST）／**PASS = 0**（唯一の PASS 語は「成功・無貫通・把持・全 route の PASS を出さない」という否定文）／把持の物理妥当性 = **unmeasured**（近接カメラは 66/66 遮蔽 = pC と同じ）／cite = pC `ffd3c5200c`・pB `ff396f98e6`・pZ `675c6b459d` を sha で、p4 item 86/91 を番号で（commit sha は本 file に無し）。⇒ **返却理由なし**。
+- **内容（逐語は共有 file・当卓は判定しない）**: 左腕（橙）は広角の尺度で静止／右腕（紫）は時刻別拡大で僅かに移動／ケーブルは支持の上・持ち上げや route は見えない／近接は白い柱・梁で遮蔽。run は STEP2 左腕の追従 gate 停止・分類「その他」・**工程は未完**。
+- **受入 4 入力 = 4/4 着地**: pB `ff396f98e6`（log）・pC `ffd3c5200c`（視覚）・pZ `675c6b459d`（照合）・**Rs1 目視 `ad5fc064…`**。⇒ **残り = p4 の受入 word（3 卓 ＋ Rs1 入力の後）→ p6 の status flip**。両卓ともリミット停止 ⇒ **送らない**。queue: **p4 宛 = 本 leg の relay（再開時の 1 通目・本節の内容）**／p6 宛 `m-p18-491`／pZ 宛 `m-p18-486`・`m-p18-488`・`m-p18-491`。
+- **記録の形（⚓ 委任は述語を移さない）**: 本 leg は **「Rs1 (p19) が見た」**。**「人間が見た」とは書かない**。人間の ground truth を要する主張は未確保のまま残る。
+- **未 commit の pin（事実として記録・催促しない）**: 本 leg file・割当 file・`CLAUDE.md`(L3)・`AGENTS.md` はいずれも untracked / 未 commit ⇒ 当卓は **as-read（sha つき・未 bank）** として扱う。
+- **当卓の返答**: `work/thread-rs1-20260921/P18_TO_RS1.md` に **P18-TO-RS1-002** を追記（00:55）。
+- ⛔ 解錠 = 行 69 のみ・再走なし・hub は発火しない・裁定しない。
+
+**Banked — 時刻は本節 commit の author date が正。**
