@@ -48701,3 +48701,14 @@ ALT-1 (downgrade) — not chosen (the human's word). ALT-2 (`agent prompt`) — 
 - ⛔ 解錠なし・run 0（当卓）・当卓は裁定しない。
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1556 — ✅ **p0 m-p0-382R = 計器窓 FULL の着地 `92059373a3`（`ur15_mirror_acceptance.py` blob `11ea985d8b19`・248 行・+15/−9・親 blob `0803ea391298` = pZ の base・記録 §8.61 `bbc26fbc1b`）→ m-p18-428（→ pZ・p4・cc p11・p6 = 全卓 working ゆえ hold）**（当卓 2026-09-20 11:21–11:24 JST 実測）
+
+- **着信**: m-p0-382R `:46571`（`type=attachment`・`2026-09-20T02:21:41.616Z` = 11:21:41 JST・queue op `:46559`/`:46568`）・§27 形・宛先 = pZ・p4、cc p11・p6。
+- **検証**: `92059373a3`（11:21:41・parent `aabae73074`・1 file +15/−9）・blob `11ea985d8b19`・sha256 `4a2e3396059214409cd4e1746972a06a6cf8d501d21df754c1e1db31c5a7667b`・248 行・`:49` REF_DIR = HERE / "reference" / "ur15-dual-arm-cell"・`:220` want = (lo_a, hi_a)・`:236` HONEST SCOPE 文 = p0 の記載と一致。親 commit の同 file blob = `0803ea391298` = pZ が述語 v2 を発火した base blob（§1552）。後続 commit 0。⚠ **作業 tree に同 file の未 stage 差分 1 件**（`git status --porcelain` = 1・p0 自記「WIP overlay は未 stage のまま」）— pin は commit の blob。`bbc26fbc1b`（11:21:41・p0 記録 +37・§8.61）。述語 PASS／base FAIL／literal FAIL・mj_step 0・py_compile = p0 の as-run（検証 = pZ の archive leg）。
+- **時系列（記録のみ）**: p4 の着地許可 `669b574f03`（11:19:48）→ 着地 `92059373a3`（11:21:41・親 = p4 の送信記録 `aabae73074` 11:20:14）→ 288 の relay 426 は p0 へ 11:22:48 配達（着地の後）。p0 が許可を git で読んだかは p0 の語（本便は 423 と 362R を re に挙げる）。
+- **hub の動き**: **m-p18-428** = m-p0-382R（`bodies/m-p18-428.txt`・§27 形＋時系列と WIP の注記）→ pZ IMPL-VERIFIER cc p4 RS-TECH-LEAD・p11 ARM-CONTROL-DESIGN・p6 PLAN-KEEPER: held: pZ = HELD(working)・p4 = HELD(working)・p11 = HELD(working)・p6 = HELD(working)（11:24:18.491）。
+- **hold の順**: pZ = m-p18-428 → 421／p4 = m-p18-428 → 424／p0 = 426／p6 = 426 → m-p18-428／p11 = 426 → m-p18-428。
+- ⛔ 解錠なし・run 0（当卓）・当卓は裁定しない。
+
+**Banked — 時刻は本節 commit の author date が正。**
