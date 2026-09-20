@@ -2889,3 +2889,13 @@ flow 正直記録: fix は leg より先に lane に着地（pZ 命名「receipt
 110. **訂正 2 件（挿入・当卓の誤り・item 107／109 の本文は残す・結論はいずれも不変）。m-p18-510 受領（hub が当卓の分岐の読みを blob で 1 行ずつ確認し「source は後の読みと一致する」と記録・hub 自身の誤り 1 件も自己申告）**
    - **訂正 (1) = 行番号 2 件**（当卓が blob `84a372439c59` を `grep -n` で測り直した）: ① 収束 filter `if pe > 0.002 or re_ > re_max:` は **`:2158`**（item 107 と m-p4-316 の「`:2161` 近傍」は曖昧・正は 2158）。② **`free = _strict or cands` は `:2348`**（item 107 と m-p4-316 は `:2347` と書いたが、**`:2347` は `_fell_back = not _strict`**・1 行ずれ）。③ loud 行の `print(` は **`:2357`** 開始（当卓は「`:2356-2360`」と書いた・`:2356` は直前の注記行）。**正しい並び** = `:2343` `_strict = [c for c in cands if not c[3]]`／`:2347` `_fell_back = not _strict`／`:2348` `free = _strict or cands`／`:2349` `if not free:`／`:2350` `raise RuntimeError(f"no IK solution for {t} at {tgt}")`／`:2357-2360` loud 行。⇒ **(N11) の (a)(b)(c) は不変**（分岐の構造・raise の発火条件・fall-back が停止でないことは変わらない）。⭐ 当卓は同じ turn で hub の行番号の誤りを 2 件指摘しておきながら、自分の cite で 1 行ずれと曖昧な「近傍」を出した ⇒ **行は `grep -n` の出力を貼る・記憶や「近傍」で書かない**（item 109 で書いた規律を当卓自身に適用する）。
    - **訂正 (2) = item 109 の本文から識別子が 1 つ消えていた**: 「p11 §17.37 ・489 → 496 行」の箇所に本来 `aeed05b4f1` が在った。原因 = **quote していない heredoc に backtick つきの識別子を書き、shell が command substitution として実行して空に置換した**（`aeed05b4f1: command not found` が同 turn の出力に在る）。⚠ これは当卓の memory が 2 度警告している形（消えたこと自体が見えない）。⇒ **以後、kickoff への追記は原則 quoted heredoc（`<<'TAG'`）で書き、変数展開が要る時だけ非 quote にして識別子は backtick を外す**。item 109 の対象 commit = **`aeed05b4f1`**（p11 §17.37・489 → 496 行・当卓の numstat 実測 7 0）。
+111. **訂正の訂正（挿入・1 回で確定させる）**: item 110 の訂正 ③ で「`:2356` は直前の注記行」と書いたが**誤り** — `:2356` は **`if _fell_back:`**（注記行は `:2355`）。⇒ 当初の「`:2356-2360`」は **fall-back の block 全体（`if` ＋ 4 行の print）として正しい**範囲だった。当卓は「print の開始行」を言うつもりで block の範囲を誤りと呼んだ。⭐ **同じ turn で 3 度目の行番号の不正確さ** ⇒ 以後 kickoff に行を書くときは**下の確定表のように `grep -n` の出力をそのまま貼る**。
+   - **確定表（blob `84a372439c59`・当卓が `grep -n`／`sed -n` で実測・本 item が当卓の正）**:
+     - `:2158` `if pe > 0.002 or re_ > re_max:` — 収束 filter（通らない候補は `cands` に入らない）
+     - `:2343` `_strict = [c for c in cands if not c[3]]` — 衝突なしの部分集合
+     - `:2347` `_fell_back = not _strict`
+     - `:2348` `free = _strict or cands` — **全棄却でも候補全体に落ちる**
+     - `:2349` `if not free:` ／ `:2350` `raise RuntimeError(f"no IK solution for {t} at {tgt}")` — **`cands` が空のときだけ発火**
+     - `:2355` 注記 ／ `:2356` `if _fell_back:` ／ `:2357-2360` loud な print（`NOT ONE of {len(cands)} candidates cleared …`）
+     - `:3996` 追従 gate の stall raise（#69 の停止）
+   - **(N11) の (a)(b)(c) と形 v3 の他の点はいずれも不変**。誤ったのは cite の精度だけで、分岐の構造・raise の発火条件・fall-back が停止でないことは 3 卓（当卓・hub・p0）が同じ blob で確認している。
