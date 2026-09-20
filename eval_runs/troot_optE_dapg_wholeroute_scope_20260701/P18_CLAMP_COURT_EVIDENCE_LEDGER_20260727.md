@@ -48629,3 +48629,13 @@ ALT-1 (downgrade) — not chosen (the human's word). ALT-2 (`agent prompt`) — 
 - ⛔ 解錠なし・run 0（当卓）・当卓は裁定しない。
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1549 — ✅ **p4 m-p4-286 = 窓 R0 受入（harness `8e5905539c`・prereg addendum 8 `75121f34b8`・verdict `2bd3be01c2`・運ぶ主張 = 収束のみ＋鏡像 target の同一性のみ・kickoff item 22 `30897c8a49`）→ m-p18-420（→ pZ・p0・p11 = 配達／p6 = HELD(working)）／410 → p11 配達**（当卓 2026-09-20 11:05–11:07 JST 実測）
+
+- **着信**: m-p4-286 `:46357`（`type=attachment`・`2026-09-20T02:05:38.171Z` = 11:05:38 JST・queue op `:46345`/`:46354`）・§27 形・宛先 = pZ・p0・p6、cc p11（p4 の指定）。
+- **検証**: `30897c8a49`（11:05:37・parent `7d5296e2e9`・kickoff +6/−0・HEAD で clean 11:06）= item 22（09-20 08:23 節）: 419 受領・verdict blob `fb402cf8a417`/sha256 `b2a65613…`/107 行 = p4 も blob で実読（pZ/p18 と一致）・条件 (i) 3 点の照合（①driver `:419`/`:423`/`:38-39`/`:446` を D4 blob で同読 ②diff 4 種のみ ③exit 0・18/18×2・R0-ii bar・1e-12 同一）・前提 §17.8 (a)/§17.9 = 着地済（item 15）・**word = 窓 R0 受入**・鎖 = D4 済／B 済（row 7 = #69 待ち）／R0 済／残 = 計器窓（pZ FULL 述語再 pin → p0 → pZ leg・m-p4-276）・静的 legs R1/R1′/R2・§17.10 読み（407 到達後）→ controller 完成宣言（state.md §7.2）・#69 = Rs1。harness `8e5905539c` 以後 0・driver `96e9ece175` 以後 0（11:06 再測）。受入 = p4 の word（chain court）・当卓は照合のみ。
+- **hub の動き**: **m-p18-420** = m-p4-286（`bodies/m-p18-420.txt`・§27 形）→ pZ IMPL-VERIFIER cc p0 IMPL-BUILDER・p6 PLAN-KEEPER・p11 ARM-CONTROL-DESIGN: **pZ 11:06:55.901 DELIVERED(fused_with_unknown_prefix)／p0 11:06:56.498 DELIVERED／p11 11:06:57.102 DELIVERED**（いずれも via=agent_prompt）／**p6 = HELD(working)**（11:06:55.896・composer 空・次の idle 窓で完了）。**410 → p11 = DELIVERED(fused_with_unknown_prefix)**（11:05:47.152・`user@10774823+29`・watcher READY → `send --id`）。
+- **hold の優先順（p4 の語「407 到達後に読む」を反映）**: p4 = **407**（§17.10）→ 410 → 418／p11 = 406 → 418／p6 = **420**（受入・p6 に反映 commit の依頼あり）→ 407 → 406 → 418。
+- ⛔ 解錠なし・run 0（当卓）・当卓は裁定しない。#69 の発火 = Rs1（p4 の語）。
+
+**Banked — 時刻は本節 commit の author date が正。**
