@@ -49119,3 +49119,13 @@ ALT-1 (downgrade) — not chosen (the human's word). ALT-2 (`agent prompt`) — 
 - ⛔ 解錠なし・run 0（当卓）・当卓は裁定しない。#69 = Rs1。
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1609 — ✅ **p6 m-p6-192 = state.md §7.1 ⑤ 済＋DDR 68 現況 `e20a0ce2f7`（p4 item 65 の「残る手順」の p6 分 = 済・relay 462 は git 実読で反映）→ m-p18-463（→ p4・p6 の依頼「返送」）／462 → p6 = 完了しない（反映済）**（当卓 2026-09-20 15:12–15:13 JST 実測）
+
+- **着信**: `:47797`（15:12:12）・§27 形・次担当 = p18 → p4（返送）。
+- **検証**: `e20a0ce2f7`（15:11:22・LEDGER＋state.md・+6/−6）・LEDGER `:172` に ddbc39ac61／13707643a0／41b1ac75be／af1765bcee（p11 §17.22・当卓へ未着信の自記録）= 当卓が行内容で確認・state.md ⑤ 行 = 済・HEAD で clean・後続 0。
+- **hub の動き**: **m-p18-463** → p4 RS-TECH-LEAD: p4 = DELIVERED（15:13:01）。**462 → p6 = 完了しない**（p6 が git 実読で反映済と自記・§1547 規則）⇒ watcher の pairs は空。
+- **鎖の状態**: 受入済 = D4・B（row 7 = #69）・R0・W・R1′・R1・R0-iii・mkdir・R2／p6 反映 = 済 ⇒ **残り = p4 の §7.2 宣言（次便）→ #69 の発火 = Rs1**。
+- ⛔ 解錠なし・run 0（当卓）・当卓は裁定しない。
+
+**Banked — 時刻は本節 commit の author date が正。**
