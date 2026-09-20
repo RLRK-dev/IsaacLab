@@ -49384,3 +49384,17 @@ ALT-1 (downgrade) — not chosen (the human's word). ALT-2 (`agent prompt`) — 
 - ⛔ 解錠 = 行 69 のみ・再走なし・hub は発火しない・裁定しない。p19 は hub tool の role 表に無く当卓から relay できない（p19/p1A の label = Rs1 の行為・既存の Rs1 待ち）。
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1634 — ⭐ **Rs1 の担当交代（利用者の逐語「Rs1は君に置き換えて」・00:21:28 JST）= w2:p19（Codex）へ。当卓の custody 検査・宛先の移管・返答経路 = 共有 file（hub tool は Codex を拒否）**（当卓 2026-09-21 00:27–00:30 JST 実測）
+
+- **着信**: `m-p19-rs1-assignment-20260921-001`（`:48838`・00:27:06）。
+- **権限の接地（当卓が実読）**: 利用者（人間）の逐語 **「Rs1は君に置き換えて」** = p19 の codex rollout `~/.codex/sessions/2026/09/13/rollout-2026-09-13T23-19-12-01a09b22-edb6-7b93-ab1a-ba559bd40f93.jsonl` **`:2405`**（`2026-09-20T15:21:28.740Z` = **00:21:28 JST**・`payload.type=message`・`role=user`・本文はこの 1 文のみ）。⚠ **判別子の限界を明記**: `role=user` の欄は人間と relay を分けない（memory の既知失敗形）。当該 rollout には MSG header 付き relay record **0 件**／bare user record 32 件 ⇒ **file 内では判別できない**。**裏付け = 独立事象**: 同じ利用者が当卓の pane に 00:14 頃「再開」を打ち、p19 が 00:16 に伝えた「p18 のみ再開した」が当卓で実際に起きた（model 切替＋当卓のみ稼働）。⇒ 当卓は**利用者の行為として適用**（当卓は裁定しない・利用者の訂正があれば即従う）。
+- **割当 file**: `thread_isaac_lab/thread-vault/02-Workflow/RS1-Assignment-20260921.md`・当卓が sha256 再計算 `c48731aa7952a700fa210daeeaf1e5b3902b643810ae5fd3db1dd8bdff0f4463` = 記載と一致・3,500 byte・**untracked**。`CLAUDE.md`（**L3**）+20/−2・`AGENTS.md` +28 が作業 tree で変更・**未 commit**（当卓 00:27 実測）⇒ **権限の根拠は現状 commit されていない**（実体 = rollout の逐語 ＋ 作業 tree の差分）。当卓は事実として記録するのみ・commit の可否は Rs1 (p19) の決定。
+- **移管（当卓の宛先変更）**: 「Rs1 待ち」5 件 = ①#69 の目視 ②未 push 287 commit ③`CLAUDE.md` §27 の commit ④p19 / p1A の label ⑤行 68 の spec 反映 → **宛先 w2:p19**。⛔ **担当交代だけで 5 件を承認済にしない**（割当 file の記載と同じ）。
+- ⚓ **人間の目という述語（当卓の読み・訂正歓迎）**: 統治文書（⚓ アンカー式検証 #3・`CLAUDE.md` autonomy grant「video 物理妥当性のみ Rs 専権」）は**人間**を名指す。割当 file 自身が「観測できない事項は未観測として扱い、**人間が見たとは記録しない**」と限定している。⇒ 当卓は #69 の受入を **「Rs1 (p19) が見た」** と記し、**「人間が見た」とは書かない**。人間の ground truth を要する主張は未確保のまま残す。委任は述語を移さない。
+- **返答経路**: `hub_send.py` は Codex pane を `check_kind` で拒否（当卓は guard を外さない）⇒ p19 への配達検証（readback）ができない。**共有 file `work/thread-rs1-20260921/P18_TO_RS1.md`** に当卓が **P18-TO-RS1-001** を追記（23 行・file sha256 `445b3d960e3c657d28d5b8d141e5c6686ee22cf0c76724f74b067eabd4f57301`・00:29:22）。**到達の確定は p19 の読取り報告に依る**（当卓は「書いた」までしか言えない）。
+- **読み替えの境界**: 既存記録中の「Rs1」は **00:21:28 より前 = 人間**、以後 = **p19**。過去の人間発言・裁定は書き換えない。
+- **停止中の卓（不変）**: 定常 relay・巡回は停止のまま。queue = p6 宛 `m-p18-491`／pZ 宛 `m-p18-486`・`m-p18-488`・`m-p18-491`。
+- ⛔ 解錠 = 行 69 のみ・再走なし・hub は発火しない・裁定しない。
+
+**Banked — 時刻は本節 commit の author date が正。**
