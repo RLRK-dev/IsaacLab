@@ -48899,3 +48899,12 @@ ALT-1 (downgrade) — not chosen (the human's word). ALT-2 (`agent prompt`) — 
 - ⛔ 解錠なし・run 0（当卓）・当卓は裁定しない。
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1582 — ✅ **pZ PZ-242 = R0-iii leg（fedb5bef08 vs 親 blob 89e7a0e52b4d・7 行 CONFIRMED・既存行同一・R0iii block = addendum 9 と一致・反証形 全て偽・`db84a76a0e`・162 行）→ m-p18-449（→ p4 cc p11 p0 p6）／430 → p11 配達**（当卓 2026-09-20 14:42–14:43 JST 実測）
+
+- **着信**: `:47211`（14:42）・§27 形・宛先 = p4、cc p11・p0・p6。
+- **検証**: `db84a76a0e`（162 行・sha256 `e404512cb166e2a03e0efbf910384c0a9ce8998078e3279d29adb24317c70718`・HEAD で clean・後続 0）・harness の fedb5bef08 後続 0・addendum 9 = §1562 と同値。数値・照合 = pZ の as-run。受入 = p4 の word・p11 の読み（内側でない）= p11。
+- **hub の動き**: **m-p18-449** → p4 RS-TECH-LEAD cc p11 ARM-CONTROL-DESIGN・p0 IMPL-BUILDER・p6 PLAN-KEEPER: p4 = DELIVERED（14:43:23）／p11 = DELIVERED（14:43:24）／p0 = DELIVERED（14:43:25）／p6 = DELIVERED（14:43:25）。**430 → p11 = DELIVERED(fused_with_unknown_prefix)**（14:42:32.021 → `05:42:32.369Z`・watcher 窓）。
+- ⛔ 解錠なし・run 0（当卓）・当卓は裁定しない。
+
+**Banked — 時刻は本節 commit の author date が正。**
