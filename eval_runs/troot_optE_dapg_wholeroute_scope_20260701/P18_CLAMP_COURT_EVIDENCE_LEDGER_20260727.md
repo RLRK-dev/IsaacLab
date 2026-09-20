@@ -48414,3 +48414,14 @@ ALT-1 (downgrade) — not chosen (the human's word). ALT-2 (`agent prompt`) — 
 - ⛔ 解錠なし・run 0（当卓）・当卓は裁定しない。
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1527 — ✅ **p11 m-p11-r0ii-read-20260920-0937（§17.10 = 149 対の読み: menu の attitude 意味論・同一は roll = 0 のみ・§17.8 (b) 予測を挿入訂正・bar 不変・要判断 = pose_menu docstring の finding と手首向きの report 行の可否/置き場・`ded9c8ee30`）→ m-p18-407（→ p4 cc pZ p0 p6）／§1526 の bank = `d1e62117ae`（406 → p0 の例外試行 = 死んだ leg 10 件目・停止は例外なしで継続）**（当卓 2026-09-20 09:37–09:40 JST 実測）
+
+- **着信**: m-p11-r0ii-read `:45764`（09:37:49）。§27 形。
+- **検証**: `ded9c8ee30`（author date 2026-09-20 09:37:03 JST  1 file changed, 7 insertions(+)）・blob `d773631bdfb1…`・sha256 `2ba481cc07d09faa…`・285 行・`§17.10` = `:280` = p11 の記載と一致。述語・角度・再実装 = p11 の読み（当卓は pin のみ）。p4 の 406（§17.10 の依頼）到達前に p11 が verdict blob から書いた。
+- **hub の動き**: **m-p18-407** = m-p11-r0ii-read（`bodies/m-p18-407.txt`）→ p4 cc pZ p0 p6: held: p4 = ready(ghost)・pZ = ready(empty)・p0 = HELD(paste_in_composer)・p6 = ready(empty)（09:39:05.530）。完了送信 = 停止（例外なし）。
+- **工程の現在位置（hub 記帳）**: 窓 R0 = word (i)（p0 = loader 修正・再着地 → pZ 再 leg → p4 受入）・§17.10 着地・p4 の追加 word = 手首向き report 行の可否。
+- **hold 中の leg（09:40・pending.py 実測・死んだ leg 10 件を含む）**: 354（p11・p6） 357（p11・p6） 358（p11） 359（p0・p11・pZ） 360（p11） 361（p11・pZ） 363（p0・p11） 364（p0・p11） 365（p0） 366（p11） 367（pZ） 368（p0・p11） 369（p0・pZ） 370（p0・pZ） 371（p11・pZ） 372（p11） 374（p0） 375（p0・p11・pZ） 376（p0・p11） 377（p0・p11） 378（p11・pZ） 379（p11・pZ） 381（p0・p11） 382（p11・p4・pZ） 383（p11・p4・p6・pZ） 384（p0・p11・p4・p6） 385（p4・pZ） 386（p11） 387（p11・pZ） 388（p4） 389（p11・pZ） 390（p11・p4・pZ） 391（p11・p4） 392（p11・pZ） 394（p4・p6・pZ） 395（p4） 396（p11・p4・p6・pZ） 397（p0・p4・p6・pZ） 398（p11・p4・p6・pZ） 399（p4） 400（p0・p11・p4） 401（p11・p4・p6・pZ） 402（p0・p11・p6・pZ） 403（p11・p4・p6・pZ） 405（p11・p4・p6・pZ） 406（p0・p11・p6・pZ） 407（p0・p4・p6・pZ）（47 id）。
+- ⛔ 解錠なし・run 0（当卓）・当卓は裁定しない。
+
+**Banked — 時刻は本節 commit の author date が正。**
