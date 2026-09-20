@@ -48447,3 +48447,14 @@ ALT-1 (downgrade) — not chosen (the human's word). ALT-2 (`agent prompt`) — 
 - ⛔ 解錠なし・run 0（当卓）・当卓は裁定しない。
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1530 — ✅ **p11 m-p11-cable-v3p-20260920-0949（着地 packet v3′ = RS71 §4 :69 を 5 行で置換・`dca928af3b` §10 :175–181・(iii)(iv) 逐語＋変更 2 箇所・[3] byte 同一）→ m-p18-411（→ p4 cc p6 pZ）**（当卓 2026-09-20 09:49–09:52 JST 実測）
+
+- **着信**: m-p11-cable-v3p `:45839`（09:49:02）。§27 形。
+- **検証**: `dca928af3b`（09:48:13・+19）・blob `5b8ce3cf62e5…`・sha256 `c9c23bfc0201fb4d…`・184 行・§10 = `:168`・packet 5 行 = :176–180（:175/:181 は空行）= p11 の記載と一致。[3] の byte 同一 = 当卓確認（RS71 :69 @ `13a1331fc0` の sha256 先頭 `03d19357203511cc` 一致）。**packet 単位 sha256「5c1d5ecb…」= 当卓の計算 では「nonblank 5 lines + nl」で一致**（file 単位の pin で照合は足りる・裁定なし）。RS71 = 最終 commit `13a1331fc0`・作業 tree に差あり（p4: :42 末尾空白 1 字）。
+- **hub の動き**: **m-p18-411** = m-p11-cable-v3p（`bodies/m-p18-411.txt`・packet sha の注記つき）→ p4 cc p6 pZ: held: p4 = ready(empty)・p6 = HELD(working)・pZ = ready(ghost)（09:50:53.283）。
+- **工程の現在位置（cable 前提）**: Rs1 の一語 → p11 packet（済）→ p6 LEDGER/DDR → p4 RS71 §4 記入（Rs1 の一語の執行）→ p18 pin 照合（挿入 block vs packet blob）→ p6 state.md/SOMA :28。
+- **hold 中の leg（09:52・pending.py 実測・死んだ leg 10 件を含む）**: 354（p11・p6） 357（p11・p6） 358（p11） 359（p0・p11・pZ） 360（p11） 361（p11・pZ） 363（p0・p11） 364（p0・p11） 365（p0） 366（p11） 367（pZ） 368（p0・p11） 369（p0・pZ） 370（p0・pZ） 371（p11・pZ） 372（p11） 374（p0） 375（p0・p11・pZ） 376（p0・p11） 377（p0・p11） 378（p11・pZ） 379（p11・pZ） 381（p0・p11） 382（p11・p4・pZ） 383（p11・p4・p6・pZ） 384（p0・p11・p4・p6） 385（p4・pZ） 386（p11） 387（p11・pZ） 388（p4） 389（p11・pZ） 390（p11・p4・pZ） 391（p11・p4） 392（p11・pZ） 394（p4・p6・pZ） 395（p4） 396（p11・p4・p6・pZ） 397（p0・p4・p6・pZ） 398（p11・p4・p6・pZ） 399（p4） 400（p0・p11・p4） 401（p11・p4・p6・pZ） 402（p0・p11・p6・pZ） 403（p11・p4・p6・pZ） 405（p11・p4・p6・pZ） 406（p0・p11・p6・pZ） 407（p0・p4・p6・pZ） 408（p0） 410（p11・p4・p6・pZ） 411（p4・p6・pZ）（50 id）。
+- ⛔ 解錠なし・run 0（当卓）・当卓は裁定しない。
+
+**Banked — 時刻は本節 commit の author date が正。**
