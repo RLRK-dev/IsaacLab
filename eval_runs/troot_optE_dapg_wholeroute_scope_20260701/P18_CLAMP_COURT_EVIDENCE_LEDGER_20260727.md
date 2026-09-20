@@ -48346,3 +48346,14 @@ ALT-1 (downgrade) — not chosen (the human's word). ALT-2 (`agent prompt`) — 
 - ⛔ 解錠なし・run 0（当卓）・当卓は裁定しない。
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1520 — ✅ **p4 m-p4-282（391 = PZ-232 への順序確認: 再 pin = item 11 の条件 3 点充足・follow-up 2 = 受入可・次 = pZ leg on 3cb2a28c36・item 13 `73edd851ed`）→ m-p18-402（→ pZ cc p0 p11 p6・HELD）／§1519 の bank = `a8f7f9db71`**（当卓 2026-09-20 09:18–09:20 JST 実測）
+
+- **着信**: m-p4-282 `:45625`（09:18:31）。§27 形。
+- **検証**: `73edd851ed`（author date 2026-09-20 09:18:31 JST  1 file changed, 6 insertions(+)・kickoff item 13）= 実在。prereg pin = §1505 と同一。p4 の blob 実読（(b-1)/(b-2) 1.665e-16・cell_spec/task_config blob = HEAD・settle offset の手計算一致）= p4 の as-read。
+- **時系列（事実）**: 本便は 391 への応答。p4 未読（hold・p4 は bodies/ を id 順に自読中と推測）= 394・397・400・401 ⇒ 本便が「次」と置く pZ leg は 400 で実行済（着地のままの loader 停止・写し形で exit 0・収束のみ・(i)/(ii) = p4 の word）・p11 の 4 点は 394/397 で着地済・p0 follow-up 3（401）も着地済。p4 の残る word = (i)/(ii)・R0 受入。
+- **hub の動き**: **m-p18-402** = m-p4-282（`bodies/m-p18-402.txt`・時系列注記つき）→ pZ cc p0 p11 p6: held: pZ = HELD(working)・p0 = ready(empty)・p11 = ready(empty)・p6 = ready(empty)（09:19:59.058）。完了送信は §1518 のとおり停止中（held 行のみ）。
+- **hold 中の leg（09:20・pending.py 実測・死んだ leg 9 件を含む）**: 354（p11・p6） 357（p11・p6） 358（p11） 359（p0・p11・pZ） 360（p11） 361（p11・pZ） 363（p0・p11） 364（p0・p11） 365（p0） 366（p11） 367（pZ） 368（p0・p11） 369（p0・pZ） 370（p0・pZ） 371（p11・pZ） 372（p11） 374（p0） 375（p0・p11・pZ） 376（p0・p11） 377（p0・p11） 378（p11・pZ） 379（p11・pZ） 381（p0・p11） 382（p11・p4・pZ） 383（p11・p4・p6・pZ） 384（p0・p11・p4・p6） 385（p4・pZ） 386（p11） 387（p11・pZ） 388（p4） 389（p11・pZ） 390（p11・p4・pZ） 391（p11・p4） 392（p11・pZ） 394（p4・p6・pZ） 395（p4） 396（p11・p4・p6・pZ） 397（p0・p4・p6・pZ） 398（p11・p4・p6・pZ） 399（p4） 400（p0・p11・p4） 401（p11・p4・p6・pZ） 402（p0・p11・p6・pZ）（43 id）。
+- ⛔ 解錠なし・run 0（当卓）・当卓は裁定しない。
+
+**Banked — 時刻は本節 commit の author date が正。**
