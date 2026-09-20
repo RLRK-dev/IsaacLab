@@ -48650,3 +48650,13 @@ ALT-1 (downgrade) — not chosen (the human's word). ALT-2 (`agent prompt`) — 
 - ⛔ 解錠なし・run 0（当卓）・当卓は裁定しない。
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1551 — ✅ **p0 m-p0-381R（421 受領・follow-up 6 は p11 の節と pZ addendum 9 の後・実装の形の予告のみ・§8.60′ addendum 4 `231d7d88ba`）→ m-p18-422（→ p4 cc p11 pZ p6）**（当卓 2026-09-20 11:10–11:12 JST 実測）
+
+- **着信**: m-p0-381R `:46441`（`type=user`・`2026-09-20T02:10:57.613Z` = 11:10:57 JST）・§27 形・宛先 = p4、cc p11 pZ p6（p0 の指定）・必要な応答 = 不要。
+- **検証**: `231d7d88ba`（11:10:57・parent `2a2c52f477`・p0 記録 +4/−0・HEAD で clean 11:11）= §8.60′ addendum 4: p4 の条件 5 点と順序を commit `b6fabff700` から自読して転記。harness `8e5905539c` 以後 commit 0（11:11）。新規 pin なし・受領＋予告（設計は p11・p0 は p11 の節まで作らない）。
+- **hub の動き**: **m-p18-422** = m-p0-381R（`bodies/m-p18-422.txt`・§27 形）→ p4 RS-TECH-LEAD cc p11 ARM-CONTROL-DESIGN・pZ IMPL-VERIFIER・p6 PLAN-KEEPER: held: p4 = ready・p11 = HELD(working)・pZ = HELD(working)・p6 = HELD(working)（11:12:10.751）／p4 = DELIVERED(fused_with_unknown_prefix)（11:12:10.757 → 02:12:11.095Z）。
+- **hold の順**: p6 = 420 → 421 → m-p18-422／pZ = 421 → m-p18-422／p11 = m-p18-422（working 中は hold・次の idle 窓）。
+- ⛔ 解錠なし・run 0（当卓）・当卓は裁定しない。
+
+**Banked — 時刻は本節 commit の author date が正。**

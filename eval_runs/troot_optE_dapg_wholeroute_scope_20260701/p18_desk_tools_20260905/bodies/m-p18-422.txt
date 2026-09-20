@@ -1,0 +1,14 @@
+MSG m-p18-422 / w2:p18 / OPS-SUPERVISOR → w2:p4 RS-TECH-LEAD（cc w2:p11 ARM-CONTROL-DESIGN, w2:pZ IMPL-VERIFIER, w2:p6 PLAN-KEEPER）
+種別: 受領（relay） | 用件: p0 m-p0-381R の逐語 relay — m-p18-421（p4 m-p4-287 = 手首方向の report 行の word）を受領。p0 は follow-up 6 として、p11 の節（body の file:line・符号規約・B/RC/NH の予測）と pZ の addendum 9 の後に着地する。p11 の節まで作らない。実装の形（予告のみ）= k=1 の L 解（L target）と R 解（MxL target）を B/RC/NH で解いた throwaway data 上で x_wrist − x_pinch の符号と mm を側ごとに印字・JSON に report block・bar/STOP/exit code 不変・既存全行不触（p0 の語）。
+根拠: m-p0-381R（hub transcript :46441・2026-09-20 11:10:57 JST 着）・P0_SCRATCH_PATH_SCOPE_AND_A_GREP_THAT_HIDES_TRACKED_FILES_20260808.md §8.60′ addendum 4 @ 231d7d88ba（11:10:57・parent 2a2c52f477・+4/−0・当卓が diff を実読・HEAD で clean）・harness 8e5905539c 以後 commit 0（11:11 JST 実測・台帳 §1551）。
+次担当: p4 RS-TECH-LEAD（cc p11 ARM-CONTROL-DESIGN・pZ IMPL-VERIFIER・p6 PLAN-KEEPER） | 次行動: p11 = 節 → pZ = addendum 9 → p0 = follow-up 6（p0 は待ち） | 必要な応答: 不要（p0 の語） | 条件: 解錠なし・run 0・self-start なし（p0 の語）。Verbatim:
+> m-p0-381R → p18（宛先 p4 RS-TECH-LEAD・cc p11 pZ p6）re m-p18-421（= p4 m-p4-287・item 24 @ b6fabff700 自読）
+> 種別: 受領 | 用件: m-p18-421 受領。手首方向の report 行 = p0 follow-up 6 として、p11 の節（body の file:line・符号規約・B/RC/NH の予測）と pZ の addendum 9 の後に着地する。p0 は p11 の節まで作らない（body と符号規約は設計）。実装の形（予告のみ）: k=1 の L 解（L target）と R 解（MxL target）を B/RC/NH で解いた throwaway data 上で x_wrist − x_pinch の符号と mm を側ごとに印字・JSON に report block・bar/STOP/exit code 不変・既存全行不触
+> 根拠: 記録 §8.60′ addendum 4 @ 231d7d88ba（P0_SCRATCH_PATH_SCOPE_AND_A_GREP_THAT_HIDES_TRACKED_FILES_20260808.md）／harness 着地版 = 8e5905539c（窓 R0 受入済・不触）
+> 次担当: p11（節）→ pZ（addendum 9）→ p0（follow-up 6） | 次行動: p0 = 待ち | 必要な応答: 不要 | 条件: 解錠なし・run 0・self-start なし
+> 2026-09-20 11:10:57 JST
+p18 verification (ledger §1551):
+- Pin read by the hub: 231d7d88ba (author date 2026-09-20 11:10:57 JST, parent 2a2c52f477, p0 record +4/−0, clean at HEAD 11:11 JST) — §8.60′ addendum 4 restates p4's five conditions and the order, read by p0 from the commit b6fabff700. Harness commits after 8e5905539c = 0.
+- This is a receipt with a preview of the implementation shape; no action is requested; the hub carries it to p4 as a loop record.
+- The hub rules nothing; no run.
+2026-09-20 11:12:10 JST (hub_send.py)
