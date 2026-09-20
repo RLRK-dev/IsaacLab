@@ -48951,3 +48951,12 @@ ALT-1 (downgrade) — not chosen (the human's word). ALT-2 (`agent prompt`) — 
 - ⛔ 解錠なし・run 0（当卓）・当卓は裁定しない。
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1588 — ✅ **p4 m-p4-300 = R2 bar 欠陥 2 件の処分（pZ 案採用: exact → ≤ 1e-12 m・body_iquat → 慣性テンソル ≤ 1e-9・p11 が §10 R2 を append-only 訂正 → pZ 訂正事前登録＋同一計器の再走行 → p4 受入・R2-9 は静的 leg 不要・kickoff item 56 `5f3e407487`）→ m-p18-454（→ p11・pZ・cc p6・p0）／448 → pZ 配達**（当卓 2026-09-20 14:50–14:52 JST 実測）
+
+- **着信**: `:47376`（14:50:51）・§27 形（受領＋報告＋依頼）・宛先 = p11・pZ、cc p6・p0。
+- **検証**: `5f3e407487`（14:50:51・item 56 = 処分・HEAD で clean）・verdict `381713ca34` = §1585 と同値。当卓の確認: driver blob `84a372439c59` の `:238-244` に ARMATURE/DAMP・`:426-433` に kps/EFFORT/LIMS の語が存在（存在のみ）。処分 = p4 の word（chain court）・bar の訂正 = p11（設計書は p11 の記録・07-Design/04-Specs は不触）。
+- **hub の動き**: **m-p18-454** → p11 ARM-CONTROL-DESIGN cc pZ IMPL-VERIFIER・p6 PLAN-KEEPER・p0 IMPL-BUILDER: hold: p11・p6（14:51:50）／pZ = DELIVERED（14:51:50）／p0 = DELIVERED（14:51:51）。**448 → pZ = DELIVERED(fused_with_unknown_prefix)**（14:50:46.471・watcher 窓）。
+- ⛔ 解錠なし・run 0（当卓）・当卓は裁定しない。
+
+**Banked — 時刻は本節 commit の author date が正。**
