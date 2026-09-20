@@ -49440,3 +49440,15 @@ ALT-1 (downgrade) — not chosen (the human's word). ALT-2 (`agent prompt`) — 
 - ⛔ 解錠 = 行 69 のみ・再走なし・新 run なし・hub は発火しない・裁定しない。
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1638 — ✅ **p4 の carry（R0 targets の再導出条件）に穴 1 件 — p0 m-p0-392R（`d6a4613825`）と p11 §17.29（`912c67f920`）が独立に到達: link 選択は `GRASP_CENTRE_X`（既定 = C1[0]）にも依存。当卓が閉形式で再計算し 3 者同値 → m-p18-494（p0 分）／m-p18-495（p11 分）**（当卓 2026-09-21 01:15–01:18 JST 実測）
+
+- **着信**: m-p0-392R `:49102`（01:15:55）／m-p11-r0carry-20260921-0116 `:49127`（01:16:29）。⇒ **p0 と p11 は稼働中**（493 を 01:13:27 に受領し処理して返した）。pZ・pB は保持のまま。
+- **穴の内容**: p4 item 93 の carry は targets の依存を `REST_Y`／`TABLE_TOP`／`CABLE_R`／`CABLE_SEG`／`x0` の 5 定数としたが、これらは**格子の値**を決めるだけで、**どの格子点を GL/GR と名指すか**は `x_cmd = GRASP_CENTRE_X ∓ GRIP_HALF_SPAN` が決める。`GRASP_CENTRE_X` は **env 24 key の 1 つ**（driver `84a372439c59` :1246・harness `8e5905539c` :164・既定 = `C1[0]` = cell_spec `6bdf7ea4f9ca` :499 の 0.150）。⇒ **当該 key を設定した run、または clip 位置 C1/C2 が動いた cell では、5 定数が不変でも targets が変わる**。#69 は `env_before.txt`/`env_after.txt` :10 が執行前後とも `<unset>` ゆえ**本 run の targets は不変**。
+- **当卓の独立再計算**: `CABLE_SEG_LEN 0.015`（task_config @ `96e9ece175` :136）⇒ **半 pitch 7.5 mm**。閉形式（x0 = −0.30・cen[i] = x0 + (i+0.5)·0.015・`GRIP_HALF_SPAN` 0.044 = :235）で当卓が計算: **0.1500 → L cab27 / R cab32**（= run.log `c79fdfd1d410` :44 の measured grasp と同 link）・**0.1575 → R cab33**・**0.1650 → L cab28**・**0.1700 → L cab28 / R cab34**。⇒ p11 の閉形式・p0 の実測 sweep・当卓の再計算が**同値**。⚠ **限界**: 3 者とも同じ harness と同じ定数を読んでいる ⇒ **1 つの source についての一致であり、独立な計器による確認ではない**（相関した同意）。
+- **検査の費用**: harness は実効 `GRASP_CENTRE_X`・env 設定フラグ・両経路の link 番号・dump sha を自ら印字する（:1031・:1041・:1270）⇒ 以後の run では**費用 0 で検査できる**（p11 の指摘・当卓も行を実読）。
+- **hub の動き**: **`m-p18-494`**（m-p0-392R 逐語 ＋ 当卓の検算）→ p4 cc p6・p11・pZ: p11 = DELIVERED（01:16:55）・p4・p6・pZ = QUEUED(observed)。**`m-p18-495`**（m-p11 逐語 ＋ 当卓の再計算）→ p6 cc p4・pZ。いずれも Rs1 の同一案件 `--queue` 許可の範囲（`m-p19-rs1-handoff-priority-20260921-001`）。**採否は p4 の語**であり、**受入 word を待たせない**（別件）。
+- **受入の状態（不変）**: 4 入力 = 4/4 着地・**p4 は Rs1 目視 leg を受領済（492・01:14:19）** ⇒ 次 = **p4 の受入 word → p6 の反映**。
+- ⛔ 解錠 = 行 69 のみ・再走なし・新 run なし・R0 窓の受入（item 22）は不変・hub は発火しない・裁定しない。
+
+**Banked — 時刻は本節 commit の author date が正。**
