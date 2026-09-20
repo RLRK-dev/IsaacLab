@@ -46,7 +46,7 @@ sys.path.insert(0, str(HERE))
 
 from ur15_cell_spec import SHOULDER_HEIGHT, TILT, YOKE_SPREAD  # noqa: E402
 
-REF_DIR = Path("/home/rlrk/Downloads/ur15-dual-arm-cell")
+REF_DIR = HERE / "reference" / "ur15-dual-arm-cell"   # the repo copy (was ~/Downloads, absent since); Rs1 Q3/Q9
 REF_JSON = REF_DIR / "ur15-dual-arm-cell.json"
 J6 = ["shoulder_pan_joint", "shoulder_lift_joint", "elbow_joint",
       "wrist_1_joint", "wrist_2_joint", "wrist_3_joint"]
@@ -196,10 +196,16 @@ def main() -> int:
     # --- the limit leg, which the position legs cannot see -----------------------------------
     # p5 -163, unconditional: joint LIMITS do not enter FK, so no amount of tool-landing evidence
     # touches them, and the reference's poses reach |q| = 5.63 rad against a 6.283 rad limit --
-    # they never come near it, so a wrong limit passes in silence.  Convention #2 says the axis
-    # and the limit inverted together, atomically; that is exactly [lo, hi] -> [-hi, -lo].
+    # they never come near it, so a wrong limit passes in silence.  ⛔ The rule this leg tested
+    # from 07-29 to 09-16 was [lo, hi] -> [-hi, -lo] -- the SIGN-FLIP convention (q_R = -q_L).  The
+    # mirror build does not use it: it flips the joint AXIS and keeps q (make_ko_mirror.py:16-19;
+    # PZ-216 measured q_R = q_L to 2.2e-15), and under M R(n,q) M = R(-Mn, q) the range that goes
+    # with a flipped axis and the same q is the SAME [lo, hi].  Byte-identical ranges are the
+    # requirement (DDR 73; three desks read it: p11 v3 sec 5 D6, pZ PZ-216, p0 sec 8.50).  The old
+    # rule could not fail on these assets because every stock range is symmetric.
     out.append("")
-    out.append("=== LEG limit (static, no FK): mirrored [lo,hi] must equal the stock [-hi,-lo] ===")
+    out.append("=== LEG limit (static, no FK): mirrored [lo,hi] must equal the stock [lo,hi] "
+               "(axis flipped, q kept; the 07-29 rule [-hi,-lo] was the sign-flip convention) ===")
     out.append("    ⛔ Position legs are blind here: limits are not in the kinematics, and the")
     out.append("    reference's largest |joint| is far inside the range, so a wrong limit is silent.")
     lim_ok, lim_n = True, 0
@@ -211,7 +217,7 @@ def main() -> int:
             ja, jb = a.joint(name), b.joint(name)
             lo_a, hi_a = float(ja.range[0]), float(ja.range[1])
             lo_b, hi_b = float(jb.range[0]), float(jb.range[1])
-            want = (-hi_a, -lo_a)
+            want = (lo_a, hi_a)
             ok = abs(lo_b - want[0]) < 1e-9 and abs(hi_b - want[1]) < 1e-9
             ax_a, ax_b = a.jnt_axis[ja.id], b.jnt_axis[jb.id]
             ax_ok = bool(np.allclose(ax_b, -ax_a))
@@ -227,10 +233,10 @@ def main() -> int:
     out.append(f"  -- limit: {'all ' + str(lim_n) + ' joints consistent' if lim_ok else 'MISMATCH'}"
                f" (axis inversion checked alongside, which is the other half of the atomic pair)")
     if sym_all:
-        out.append("  ⚠ HONEST SCOPE: every stock range is symmetric about zero, so [-hi,-lo] "
-                   "equals [lo,hi] and this leg CANNOT fail on these assets.  It is a standing "
-                   "check for the day a range is not symmetric -- today it confirms the axes are "
-                   "inverted and records that the limits had nothing asymmetric to preserve.")
+        out.append("  ⚠ HONEST SCOPE: every stock range is symmetric about zero, so [lo,hi] and the "
+                   "sign-flip rule's [-hi,-lo] coincide and this leg CANNOT tell the two rules apart "
+                   "on these assets.  It is a standing check for the day a range is not symmetric -- "
+                   "today it confirms the axes are inverted and the ranges are byte-identical.")
 
     text = "\n".join(out) + "\n"
     (HERE / "UR15_MIRROR_ACCEPTANCE_20260729.txt").write_text(text)
