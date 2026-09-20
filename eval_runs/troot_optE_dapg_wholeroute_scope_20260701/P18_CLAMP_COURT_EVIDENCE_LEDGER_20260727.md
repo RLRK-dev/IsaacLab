@@ -48722,3 +48722,13 @@ ALT-1 (downgrade) — not chosen (the human's word). ALT-2 (`agent prompt`) — 
 - ⛔ 解錠なし・run 0（当卓）・当卓は裁定しない。
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1558 — ✅ **p11 m-p11-r0iii-20260920-1124 = RESUBMISSION（supersedes -1114・RETURN 425 を受入・§17.13 で §17.10/§17.12 の cite を挿入訂正＋3 blob の再測表・仕様/符号規約/予測は不変・`8d9fdf3bbb`）= VERIFIED（再測表の cite 25 本を当卓が 1 本ずつ再測 = 全て成立）→ m-p18-431（→ pZ・p0・cc p4・p6）**（当卓 2026-09-20 11:24–11:27 JST 実測）
+
+- **着信**: `:46612`（`type=attachment`・`2026-09-20T02:24:45.624Z` = 11:24:45 JST）・§27 形・supersedes を明記・宛先 = pZ・p0（route p4・cc p6）。routing: AMBIGUITY DETECTED → RETURNED（425・§1554）→ **RESUBMISSION RECEIVED**（11:24:45）→ **VERIFIED**（11:26）。
+- **検証**: `8d9fdf3bbb`（11:24:02・parent `60ae2d616d`・design doc +18 → 319 行・blob `960e8a0d590d`・sha256 `ef7a3bf3b126399cbbded5a300df242b31ed2560225ee3f230c40723fb8357ac`・§17.12 = `:292`・§17.13 = `:303`・HEAD で clean・後続 0）= p11 の記載と一致。**cite の再測（当卓・11:26）**: d2bc133e1320 = `def _rdes` :1347（docstring :1348）・`def pinch` :619・PAD :453・TOOLB :471・`def pose_menu` :2030・`def solve_ik` :2054・comment :2081/:2085・rotvec :2133/:2146／84a372439c59 = `def _rdes` :1358（return :1363）・`def pinch` :630／harness @ 8e5905539c = `def _rdes` :631・`def _solve_one` :1174・呼出 :1200/:1210/:1222・`def _solve_rows` :1131・PAD :1066・TOOLB :1067／acceptance @ HEAD = `def build_side` :52・attach :61・a_wrist_3_link :64 — **25/25 成立**（scratch `cite_check_1124.txt` = ALL_OK）。仕様・符号規約・予測は p11 の設計の語（当卓は裁定しない）・3 成分印字 vs p4 条件③の x = p4 の読み。
+- **hub の動き**: **m-p18-431** = 再提出便（`bodies/m-p18-431.txt`・§27 形＋routing 状態）→ pZ IMPL-VERIFIER cc p0 IMPL-BUILDER・p4 RS-TECH-LEAD・p6 PLAN-KEEPER: held: pZ = HELD(working)・p0 = ready・p4 = ready・p6 = HELD(working)（11:27:14.873）／p0 = DELIVERED(fused_with_unknown_prefix)（11:27:14.878 → 02:27:15.213Z）／p4 = DELIVERED(fused_with_unknown_prefix)（11:27:15.485 → 02:27:15.821Z）。
+- **hold の順（11:27）**: pZ = 428 → m-p18-431 → 421 → 429 → 430／p0 = 426 → 430 → m-p18-431／p4 = 428 → 424 → m-p18-431／p6 = 426 → 428 → 429 → m-p18-431／p11 = 426 → 430 → 428 → 429。
+- ⛔ 解錠なし・run 0（当卓）・当卓は裁定しない。
+
+**Banked — 時刻は本節 commit の author date が正。**
