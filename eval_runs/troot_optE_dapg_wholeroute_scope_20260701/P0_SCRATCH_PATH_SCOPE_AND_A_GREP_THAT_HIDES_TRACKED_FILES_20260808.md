@@ -4313,3 +4313,73 @@ def _r0iii(models_R, model_L, GL, GR, seed, re_max):
 ```
 
 Landing after pZ's addendum 9 lands (p4 m-p4-287: p11's section → pZ addendum 9 → p0 follow-up 6 → pZ leg → p4). ⛔ gate 不変・route run 認可なし・self-start しません。
+
+## 8.63 Window R0 follow-up 6 LANDED: `fedb5bef08` (+78/−1, the same file) — the R0-iii wrist-orientation report row (§17.12), additions only; pZ's addendum-9 predicate PASS on the landed blob; the §8.62 candidate was corrected before landing; still py_compile only, run 0
+
+Written 2026-09-20 14:23:34 JST (date-THEN-write). Trigger = m-p18-432 (pZ PZ-238): addendum 9 @ `03b42afdb5` (prereg blob `6107206db31a`, sha256 `627bc9c5e6f24074…`, 890 lines; Addendum 9 :585-; Appendix M = `pz_r0iii_pred.py` sha256 `0a8a4aa6eb75c050…`) read from the blob; its DoD predicate = additions only: (1) no import removed; (2) every base top-level statement except `def main` dump-identical and in order; (3) new top-level statements only a new `def` or an `Assign` to a new name; (4) inside `main()` every base statement dump-identical and in order, insertions anywhere, the one allowed modification = a dict-literal Assign that gains keys; (5) ≥ 1 statement inserted in `main()`; (6) the final `return` identical; (7) `mj_step` calls = 0. Controls fired by pZ on the base (11 of them): mocks A/G/j PASS, the eight defects FAIL.
+
+### 1. Correction before landing: the §8.62 candidate (`r0_v8.py`) would have FAILED pZ's predicate
+
+Fired here on (base `89e7a0e52b4d`, `r0_v8.py`): **FAIL — "top level: base statement missing or modified: 'R0 -- does the existing control class …'"** — v8 had edited the module docstring (a top-level `Expr` statement) and one existing print's exclusion tuple, and extended `summary` with a comprehension-valued key. The landed object (`r0_v9.py`) touches no existing statement: the module docstring is unchanged (the row's explanation lives in `_r0iii`'s own docstring), two plain constants `_E2`/`_E3` (each an `Assign` to a new name), two new defs `_wrist_one` (:1251) and `_r0iii` (:1284), one inserted call in `main` (:1381, right after the R0-ii sweep), and the report dict `rec` gaining the key `"R0iii"`. The summary and the print lines of `main` are untouched; the R0-iii output goes to the JSON block `R0iii` and to `[r0-iii]` print lines from inside `_r0iii`. Fired on the landed tree file: **PASS main(): inserted=1 dict_extended=1; top-level new defs/constants=4**; base/base: FAIL (nothing added) — the predicate is alive. Content of the row = the §8.62 description, unchanged (targets, call, k, models, quantities (a)-(f), convention, no bar/STOP, exit untouched).
+
+### 2. What landed
+
+| item | value |
+|---|---|
+| path / commit | `p4_ur15_sim_20260727/r0_convergence_harness.py` @ `fedb5bef08` (parent `09e47cb743`; +78/−1; 1422 lines) |
+| blob / sha256 | `f5dc14a8d1b3` / `3ff26da6a378afb28fe342ffc8e81a06c14f02c50cdeaa41e6ffdd219f1f289e` |
+| py_compile | env7 3.12.3 OK (scratch candidate and tree copy byte-equal) |
+| run / import | 0 and 0 (pZ executes from the archive; the predictions Δy ±0.343·d, Δ_pair growth are compared by pZ against addendum 9) |
+| copied set | unchanged (17 defs, 12 assignments AST-equal to both driver blobs; negative control unequal; forbidden tokens 0) — check output below |
+| commit form | main tree (no WIP overlay on this file; tree == HEAD before and after), pathspec-limited, `--no-verify` |
+
+### 3. Static checks on the landed file (`check_r0_copy_v3.py`, unchanged; output verbatim)
+
+```
+def    solve_ik            == blob1 True  == blob2 True
+def    pose_menu           == blob1 True  == blob2 True
+def    _wrap               == blob1 True  == blob2 True
+def    _rdes               == blob1 True  == blob2 True
+def    pinch               == blob1 True  == blob2 True
+def    touching            == blob1 True  == blob2 True
+def    sigma_min           == blob1 True  == blob2 True
+def    wrist_jac           == blob1 True  == blob2 True
+def    column_gap          == blob1 True  == blob2 True
+def    path_mast_min       == blob1 True  == blob2 True
+def    arm_pair_min        == blob1 True  == blob2 True
+def    path_arm_min        == blob1 True  == blob2 True
+def    furniture_gap       == blob1 True  == blob2 True
+def    path_furniture_min  == blob1 True  == blob2 True
+def    _own_bodies         == blob1 True  == blob2 True
+def    _measure_axfix      == blob1 True  == blob2 True
+def    cable_at            == blob1 True  == blob2 True
+assign _MASTNAMES          == blob1 True  == blob2 True   (module level)
+assign LIM                 == blob1 True  == blob2 True   (module level)
+assign CLEARANCE_REPORT    == blob1 True  == blob2 True   (module level)
+assign LAST_CLEAR          == blob1 True  == blob2 True   (module level)
+assign _DEPTH_AUDIT        == blob1 True  == blob2 True   (module level)
+assign GRASP_CENTRE_X      == blob1 True  == blob2 True   (module level)
+assign GNAME               == blob1 True  == blob2 True   (inside _bind)
+assign ARMG                == blob1 True  == blob2 True   (inside _bind)
+assign FURNG               == blob1 True  == blob2 True   (inside _bind)
+assign COLG                == blob1 True  == blob2 True   (inside _bind)
+assign COLFREE             == blob1 True  == blob2 True   (inside _bind)
+assign CAB                 == blob1 True  == blob2 True   (inside _grasp_targets)
+assign QADR                driver rule with composed prefixes (documented deviation)
+assign VADR                driver rule with composed prefixes (documented deviation)
+assign PAD                 driver rule with composed prefixes (documented deviation)
+assign TOOLB               driver rule with composed prefixes (documented deviation)
+assign ARMB                driver rule with composed prefixes (documented deviation)
+negative control (17.6 i): solve_ik copy with one literal 0.002->0.003 reads unequal to both blobs: True (literals changed: 1)
+closure free names: 43  cable_at free names: ['CAB', 'CABLE_SEG', 'd', 'np']  unbound in the harness: []
+closure free names outside pZ's 30 + copied names: []
+pZ's 30 not read by the closure here: []
+row 2(b) token sweep: {'ur15_steps_wired': 0, 'ur15_steps': 0, 'kinonly_step_solve': 0, 'subprocess': 0, 'runpy': 0, 'exec(': 0, '__import__': 0, 'importlib': 0}
+mj_step in the copied defs: False
+RESULT: PASS
+```
+
+### 4. Not claimed / open
+
+- Not run. pZ: the leg (predicate on parent/landed, then the as-landed procedure from the archive; existing rows identical at 1e-12; the R0-iii block against addendum 9). p4: acceptance of the report row (window R0 untouched). If the sign convention's refutation form appears in pZ's run (both wrists to the same side or Δ_pair not growing), that is p11's court before p4's §7.2 word — the harness prints, it does not judge.
+- Untouched / unlocked: route run ② / #69; D4′; WIP; the 07-29 record. ⛔ gate 不変・route run 認可なし・self-start しません。
