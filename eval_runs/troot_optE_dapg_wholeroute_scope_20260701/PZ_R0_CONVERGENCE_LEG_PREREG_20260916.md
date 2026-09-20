@@ -581,3 +581,310 @@ for model in ("R", "RC", "NH"):
     print(f"   both-converged-but-not-identical cells: {sum(len(v) for v in nonid.values())}; max dq per row (rad): { {s: f'{max(d for _, d in v):.2e}' for s, v in sorted(nonid.items())} }")
     print(f"   rows with no both-converged k: {[s for s in range(2, 19) if s not in both]}")
 ```
+
+## Addendum 9 (2026-09-20 11:42:22 JST) — R0-iii pre-registered: v3 §17.12's wrist-direction report rows (@ `8d9fdf3bbb`, cites as corrected by §17.13) copied verbatim as the report form, p4's word and conditions (kickoff item 24 @ `b6fabff700` = m-p4-287, cite-corrected by item 29 = m-p4-289), this desk's independent derivation and its expectation measured by its own instrument before p0's follow-up 6 exists, and the DoD predicate for that follow-up with its controls
+
+**Order of existence (measured in the writing command, each count asserted before this text was written)**: harness commits after `8e5905539c` = **0** (blob `89e7a0e52b4d`, sha256 `f630c9715832f40d…`, 1,345 lines = the accepted window-R0 harness); driver commits after `96e9ece175` = **0** (blob `84a372439c59`, sha256 `f461984bd7016a4e…`); design commits after `8d9fdf3bbb` = **0** (blob `960e8a0d590d`); HEAD `696566d455`. p0's announce seen on the hub's screen (m-p0-384R, 11:28) says the candidate is built first and lands **after** this addendum — the object does not exist at writing. The expectations below were measured by `pz_r0iii.py` (appendix K) on four runs at 11:37-11:38 JST on the `git archive` of `8e5905539c` (its `ur15_gripper_mirror_acceptance.py` / `ur15_cell_spec.py`), the driver blob `84a372439c59` read as text, never imported.
+
+### Row R0-iii (v3 §17.12 @ `8d9fdf3bbb` `:292-301`, verbatim — the report form adopted; no bar, no STOP, exit code unchanged)
+```text
+### 17.12 R0-iii = 手首方向の report 行（p4 m-p4-287 → m-p18-421 の word「可・置き場 = R0 harness の report 行」・条件 5 点・kickoff 09-20 08:23 節 item 24 @ `b6fabff700`・受領 2026-09-20 11:14:09 JST）— 行の仕様・body の file:line・符号規約・B/RC/NH の予測（pZ が addendum 9 に写す）。⚠ 節番号: p4 の語の「§17.11」は本節（17.11 は窓 R0 受入の記録に使用済）
+- **当卓の訂正（17.10 の枠組み）**: 17.10 は「手首 x − pinch x の符号」と書いたが、**roll が動かす軸は x ではない**。blob `d2bc133e1320` `_rdes` `:2049-2054` = `RD = Rz(yaw)·Rz(π/2)·Ry(roll)`（scipy の積 = 右から適用）で、収束時 `Rt = RD·AXFIX`（誤差 `:2133/:2146` = `rotvec((RD·AXFIX)·Rtᵀ)` = 0）ゆえ tool の world 軸は **closing `c = RD·e1`・side `s = RD·e2`・approach `a = RD·e3`**（`a` = pinch → tool base の向き・pz_r0 / harness の AXFIX 測定どおり）。yaw = 0 で **`a = (0, sin roll, cos roll)`・`c = (0, cos roll, −sin roll)`・`s = (−1, 0, 0)`** ⇒ **roll = world x（cable 軸）まわりの回転・手首は cable を横切る ±y へ倒れる**（x 成分 ≈ 0）。docstring `:2050-2052`「tips it about the closing axis」は不正確（回転軸 = `s` = cable 軸・closing 軸は roll とともに y-z 面で傾く）— finding（条件 ⑤ のとおり driver 不変）。
+- **行の仕様（R0-iii・report のみ・bar なし・STOP なし・exit code 不変・窓 R0 の受入は不触 = 条件 ①④）**: harness @ `8e5905539c` の既存 solver（`_solve_one` `:1200/:1210` と同じ引数 `tries=None, iters=300, seed=<seed>, near=None, warm=None, other=None, pose_only=k`）で、**targets = STEPS row 4 の自側 target（17.7 の GL / GR）**・**k ∈ {0, 1}**（roll 0 / 0.35 rad・yaw 0）・**model ∈ {B, RC, NH}**（R0-ii と同じ 3 つ）を解き、収束した解ごとに次を印字する: (a) **wrist := `TOOLB[t]`**（ko base body・driver `:471` `f"{t}g_base"`・harness `:1067` `"g_base"`）の world 位置 `w`、(b) **pinch := `pinch(t, sc)`**（pad 中点・driver `:619-621`・`PAD` `:453` / harness `:1066`）の world 位置 `p`、(c) **`Δ = w − p` の 3 成分 [mm]** と `d = |Δ|` [mm]、(d) 補助として親 link **`a_wrist_3_link`**（composed model・`build_side` `:61` の接頭辞 `a_`・`:64` の frame 名）の `w′ − p` も同形式で、(e) **roll 軸の world 向き `RD·e2`** と `a = RD·e3`（式から・比較用）、(f) **pair 量 `Δ_pair(k) = |w_R − w_L|` [mm]**（両側の自側 target 解・cell 座標）を k = 0 と k = 1 で。行の名乗り = 「report（手首方向）・bar なし」（17.4 の札 = none）。pZ の再 leg の期待 = 既存全行 1e-12 同一 ＋ 新 print 行のみ（条件 ①）。
+- **符号規約（条件 ②）**: 「外側 / 離れる」= **pair 量 `Δ_pair` が k = 0 → 1 で増える**こと（cable 軸 x 上の pinch 間隔 = 17.7 の 0.1875 − 0.1125 = 75 mm が k = 0 の基準）。側ごとの「外側」= **`sign(Δy_L) = −1`・`sign(Δy_R) = +1`**（cell 座標 y・両手首が cable を挟んで反対側へ倒れる）。x の符号は判別に使わない（予測 ≈ 0）。
+- **予測（事前登録・model B / RC / NH で同一**: 収束時の tool の world 姿勢は `RD` で強制され、腕の chirality は q にしか現れないので、3 model で `Δ` は同じ。**もし model 間で符号や大きさが違えば AXFIX / pinch の取り扱いの異常 = 報告**）:
+  - **k = 0（roll 0）**: `Δ ≈ (0, 0, +d)`（wrist は pinch の真上）。許容 = 位置 `pe ≤ 2 mm` ＋ 姿勢 `re ≤ re_max = 0.05 rad` ⇒ `|Δx|, |Δy| ≤ 2 mm + 0.05·d`。
+  - **k = 1（L: roll −0.35・R: roll +0.35）**: **`Δy_L = −d·sin 0.35 = −0.343·d`・`Δy_R = +0.343·d`**・`Δx ≈ 0`（同じ許容）・`Δz ≈ 0.940·d`。⇒ **`Δ_pair(1) = √(75² + (2·0.343·d)²) mm > Δ_pair(0) ≈ 75 mm`**（d は harness が印字・例: d = 200 mm なら Δ_pair(1) ≈ 156 mm）。`a_wrist_3_link` も同符号（tool 軸上の別点）。
+  - **反証形**: `sign(Δy_L) = sign(Δy_R)`（両手首が同じ側へ）または `Δ_pair(1) ≤ Δ_pair(0)` ⇒ menu の目的（手首が出会わない）が果たされていない = **当卓の設計 court の判断を p4 の §7.2 宣言の前に要す**（p4 の語）。`|Δx| > 2 mm + 0.05·d` ⇒ roll 軸が x でない = 本節①の導出の誤り（報告）。
+- **R0-ii の 149 対（17.10）との接続（予測）**: L の k = 1 解の identity 鏡像（x 鏡像は y を保つ）は `Δy = −0.343·d` のまま、R の実際の k = 1 解は `+0.343·d` ⇒ **menu の roll 二重反転の物理的意味 = 両手首を反対側へ倒す**。docstring の「mirror images」の語は誤りだが、行為は述べた目的（tip AWAY）に沿う — 本行が確認または反証する。
+- **順序（p4）**: 本 17.12 → pZ addendum 9（本節の予測を写す）→ p0 follow-up 6（print 行の追加のみ）→ pZ leg → p4（report 行の受入・窓 R0 不触）。計器窓・R1/R1′/R2 と並行。⛔ 解錠なし（route run・#69・D4′・WIP）・run 0・driver 不変（条件 ⑤）・当卓の数値は blob text の再実装（numpy）と式から。
+```
+**Cites as corrected by §17.13 and re-measured here**: `_rdes` = driver blob `84a372439c59` `:1358-1363` (D4 blob `:1347-1352`), harness `:631-636`; `pinch` = driver `:630-632`, harness **`:639-641`** (§17.13's table shows "—" for the harness's `pinch`; measured: the copied closure has it at `:639-641`); `PAD` / `TOOLB` = driver `:453` / `:471`, harness `:1066` / `:1067`; `pose_menu` = harness `:597-618` (`menu[0] = (0.0, 0.0)`, `menu[1] = (0.0, sgn·0.35)`, `sgn = −1` for L / `+1` for R, `:612-613`); `_solve_one` = harness `:1174-1187` (the argument list §17.12 names, `:1179-1180`); `_measure_axfix` = harness `:914-933` — its third row is `a_w = base − pinch` (`:927`), so the tool's approach axis points **pinch → base**, which fixes the sign of `Δ = w − p` below.
+
+### This desk's independent derivation (scipy on the driver's `_rdes` expression re-typed from the blob, not p11's numbers; `pz_r0iii_derive.py` sha256 `cb46a96a7118b5e6…`)
+```text
+L k=0 yaw=0.0 roll=+0.00: c=RD.e1=[0. 1. 0.] s=RD.e2=[-1.  0.  0.] a=RD.e3=[0. 0. 1.] -> Delta/d = a: Delta_x/d=+0.000000 Delta_y/d=+0.000000 Delta_z/d=+1.000000
+L k=1 yaw=0.0 roll=-0.35: c=RD.e1=[0.       0.939373 0.342898] s=RD.e2=[-1.  0.  0.] a=RD.e3=[-0.       -0.342898  0.939373] -> Delta/d = a: Delta_x/d=-0.000000 Delta_y/d=-0.342898 Delta_z/d=+0.939373
+R k=0 yaw=0.0 roll=+0.00: c=RD.e1=[0. 1. 0.] s=RD.e2=[-1.  0.  0.] a=RD.e3=[0. 0. 1.] -> Delta/d = a: Delta_x/d=+0.000000 Delta_y/d=+0.000000 Delta_z/d=+1.000000
+R k=1 yaw=0.0 roll=+0.35: c=RD.e1=[ 0.        0.939373 -0.342898] s=RD.e2=[-1.  0.  0.] a=RD.e3=[0.       0.342898 0.939373] -> Delta/d = a: Delta_x/d=+0.000000 Delta_y/d=+0.342898 Delta_z/d=+0.939373
+sin(0.35)=0.342898 cos(0.35)=0.939373
+p11 closed forms at yaw 0 (a=(0,sin r,cos r); c=(0,cos r,-sin r); s=(-1,0,0)) allclose: True True True
+d=111.92 mm: Delta_pair(0)=75.000 mm Delta_pair(1)=107.314 mm (closed form sqrt(75^2+(2*sin0.35*d)^2)=107.314)
+d=200.0 mm: Delta_pair(0)=75.000 mm Delta_pair(1)=156.325 mm (closed form sqrt(75^2+(2*sin0.35*d)^2)=156.325)
+```
+Reading: with the solver's orientation residual `rotvec((RD·AXFIX)·Rtᵀ) = 0` and AXFIX's third row `a_l = Rtᵀ·(base − pinch)/|·|`, the world direction of base − pinch at convergence is `Rt·a_l = RD·AXFIX·a_l = RD·e3` (AXFIX rows orthonormal; measured `c = [0,1,0]`, `s = [1,0,0]`, `a = [0,0,−1]` in the R0 leg), hence **`Δ = w − p = d·(RD·e3)`**, `d` = the rigid base–pinch distance. At yaw 0: `RD·e3 = (0, sin roll, cos roll)`, `RD·e2 = (−1, 0, 0)` (the roll axis is world x, the cable axis). p11's three closed forms reproduce (`allclose` True ×3). L's k = 1 is roll −0.35 → `Δy_L = −0.343·d`; R's is +0.35 → `Δy_R = +0.343·d`.
+
+### Expectation (my instrument, appendices K/L; driver blob `84a372439c59` sha256 `f461984bd7016a4e…`, closure sha256 `a87deb96fde026b3…`, `HOME_POSE`, seed 1, iters 300, `tries=None`, `pose_only=k`, `mj_step` **0**, driver family in `sys.modules` = `[]` on all four runs; STEPS row 4 own-side targets `GL = [0.1125, 0.28, 0.954]` / `GR = [0.1875, 0.28, 0.954]` = §17.7's `:2812` form)
+
+| model | k | (yaw, roll) | converged | Δ = w − p [mm] (x, y, z) | d [mm] | a_wrist_3_link − p [mm] | d₃ [mm] | sign(Δy) | cos(Δ, RD·e3) | pe [mm] | re [rad] | stop-cause tag |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| L | 0 | (+0.00, -0.00) | yes | (-0.000, +0.000, +111.920) | 111.920 | (-0.000, +0.000, +122.720) | 122.720 | 0 (|Δy| < 1e-9) | +1.000000 | 0.0000 | 8.7e-16 | none |
+| L | 1 | (+0.00, -0.35) | yes | (-0.000, -38.377, +105.135) | 111.920 | (-0.000, -42.080, +115.280) | 122.720 | -1 | +1.000000 | 0.0000 | 4.1e-16 | none |
+| B | 0 | (+0.00, +0.00) | yes | (+0.000, -0.000, +111.920) | 111.920 | (+0.000, -0.000, +122.720) | 122.720 | 0 (|Δy| < 1e-9) | +1.000000 | 0.0000 | 2.2e-16 | none |
+| B | 1 | (+0.00, +0.35) | yes | (+0.000, +38.377, +105.135) | 111.920 | (+0.000, +42.080, +115.280) | 122.720 | +1 | +1.000000 | 0.0000 | 6.7e-16 | none |
+| RC | 0 | (+0.00, +0.00) | yes | (-0.000, +0.000, +111.920) | 111.920 | (-0.000, +0.000, +122.720) | 122.720 | 0 (|Δy| < 1e-9) | +1.000000 | 0.0000 | 7.3e-16 | none |
+| RC | 1 | (+0.00, +0.35) | **no** | — | — | — | — | — | — | — | — | **controller non-convergence** (`no IK solution for R at [0.1875 0.28   0.954 `) |
+| NH | 0 | (+0.00, +0.00) | yes | (-0.000, +0.000, +111.920) | 111.920 | (-0.000, +0.000, +122.720) | 122.720 | 0 (|Δy| < 1e-9) | +1.000000 | 0.0000 | 6.0e-16 | none |
+| NH | 1 | (+0.00, +0.35) | yes | (-0.000, +38.377, +105.135) | 111.920 | (-0.000, +42.080, +115.280) | 122.720 | +1 | +1.000000 | 0.0000 | 1.8e-16 | none |
+
+Pair quantities and the model check (appendix L output):
+```text
+L model L row 4 target [0.1125, 0.28, 0.954]
+== R model R (target [0.1875, 0.28, 0.954]) ==
+k=0: Delta_pair=75.000 mm (pinch gap |p_R-p_L|=75.000 mm); Delta_L=(-0.000,+0.000,+111.920) d_L=111.920; Delta_R=(+0.000,-0.000,+111.920) d_R=111.920; sign(dy_L)=+0 sign(dy_R)=-1; |dx|<=tol: L True R True
+k=1: Delta_pair=107.314 mm (pinch gap |p_R-p_L|=75.000 mm); Delta_L=(-0.000,-38.377,+105.135) d_L=111.920; Delta_R=(+0.000,+38.377,+105.135) d_R=111.920; sign(dy_L)=-1 sign(dy_R)=+1; |dx|<=tol: L True R True
+   Delta_pair(1) > Delta_pair(0): True; closed form sqrt(75^2 + (sin0.35*(d_L+d_R))^2) = 107.314 mm; k=1 signs opposite (L -1, R +1): True; predicted dy_L=-0.343*d_L=-38.377 measured -38.377; predicted dy_R=+38.377 measured +38.377
+== R model RC (target [0.1875, 0.28, 0.954]) ==
+k=0: Delta_pair=75.000 mm (pinch gap |p_R-p_L|=75.000 mm); Delta_L=(-0.000,+0.000,+111.920) d_L=111.920; Delta_R=(-0.000,+0.000,+111.920) d_R=111.920; sign(dy_L)=+0 sign(dy_R)=+1; |dx|<=tol: L True R True
+k=1: not both converged (L True R False)
+== R model NH (target [0.1875, 0.28, 0.954]) ==
+k=0: Delta_pair=75.000 mm (pinch gap |p_R-p_L|=75.000 mm); Delta_L=(-0.000,+0.000,+111.920) d_L=111.920; Delta_R=(-0.000,+0.000,+111.920) d_R=111.920; sign(dy_L)=+0 sign(dy_R)=+1; |dx|<=tol: L True R True
+k=1: Delta_pair=107.314 mm (pinch gap |p_R-p_L|=75.000 mm); Delta_L=(-0.000,-38.377,+105.135) d_L=111.920; Delta_R=(-0.000,+38.377,+105.135) d_R=111.920; sign(dy_L)=-1 sign(dy_R)=+1; |dx|<=tol: L True R True
+   Delta_pair(1) > Delta_pair(0): True; closed form sqrt(75^2 + (sin0.35*(d_L+d_R))^2) = 107.314 mm; k=1 signs opposite (L -1, R +1): True; predicted dy_L=-0.343*d_L=-38.377 measured -38.377; predicted dy_R=+38.377 measured +38.377
+== model invariance of Delta_R (max |Delta_R(model) - Delta_R(B)| over k, mm) ==
+RC vs R: 4.405e-13 mm
+NH vs R: 2.771e-13 mm
+```
+**Reading (fact, not design)**: on **B**, §17.12's predictions hold exactly: `Δy_L(1) = −0.343·d = -38.377` mm, `Δy_R(1) = +38.377` mm (opposite signs, L −1 / R +1), `Δx = 0` on every converged cell, `Δ_pair(0) = 75.000` mm (= the pinch gap `0.1875 − 0.1125`), `Δ_pair(1) = 107.314` mm = the closed form with the measured `d`; the auxiliary `a_wrist_3_link` has the same signs. **NH** reproduces B's Δ to 2.8e-13 mm (the tool attitude is forced by `RD`, as §17.12 predicts; the arm's chirality is only in `q`). **RC does not converge at k = 1** (`_solve_one`'s tag = controller non-convergence on the control model; k = 0 converges with the same Δ as B to 4.4e-13 mm) — so §17.12's "3 model で Δ は同じ" is expected to hold on the **converged** cells, and the RC k = 1 cell is expected to carry a tag, not a Δ. At k = 0 the y-sign is undefined (|Δy| < 1e-9 mm); the sign convention is k = 1's. The `d` p11 used for illustration (200 mm → 156 mm) is not the asset's: the measured rigid base–pinch distance is **d = 111.920 mm** on every model and k, and `a_wrist_3_link`–pinch **d₃ = 122.720 mm**; the harness prints `d`, so the leg compares the printed values, not the illustration. Falsification forms of §17.12 (same-side signs at k = 1; `Δ_pair(1) ≤ Δ_pair(0)`; `|Δx| > 2 mm + 0.05·d`) are **all false** on my instrument; if the landed harness prints otherwise, that is the report.
+
+### DoD predicate for p0's follow-up 6 (`pz_r0iii_pred.py`, appendix M; sha256 `0a8a4aa6eb75c050…`) — additions only, fired on the base before the object exists
+Rules: (1) no import removed; (2) every base top-level statement except `def main` present dump-identical and in order; (3) new top-level statements only a new `def` or a new constant; (4) inside `main()` every base statement present dump-identical and in order, insertions allowed anywhere, the one allowed modification = a dict-literal `Assign` that **gains** keys (base pairs kept, in order); (5) at least one statement added in `main()`; (6) the final `return` of `main()` dump-identical; (7) `mj_step` calls = 0 (AST). N1-N3 normalisation of `pz_d4_pred.py` v3 (@ `aed109d06f`) applies. Controls (mocks built by `build_r0iii_controls.py` on the archive copy of blob `89e7a0e52b4d`; every mutant `cmp`-differs from mock A):
+```text
+## controls fired 2026-09-20 11:39:04 JST on harness blob 89e7a0e52b4d (8e5905539c) before the object exists (harness commits after 8e5905539c = 0)
+base/base                                                                FAIL main(): nothing added (not a landing)   [vs A: differs]
+A: new def + 2 inserted statements in main (report + rec key)            PASS main(): inserted=2 dict_extended=0; top-level new defs/constants=1   [vs A: same as A]
+G: report added by EXTENDING the rec dict literal                        PASS main(): inserted=1 dict_extended=1; top-level new defs/constants=1   [vs A: differs]
+b: A + existing literal changed (iters=300 -> 301 in _solve_one)         FAIL top level: base statement missing or modified: 'def _solve_one(t, tgt, seed, re_max, pose_only=None):\n    """One solve'   [vs A: differs]
+c: A + an existing statement removed (print claim at the end of main)    FAIL main(): base statement missing or modified: "print(f'[r0] {claim}')"   [vs A: differs]
+d: A + mujoco.mj_step inside the new function                            FAIL mj_step calls in candidate = 1   [vs A: differs]
+e: A + final return changed                                              FAIL main(): base statement missing or modified: 'return 0 if len(l_not_r) == 0 and (not stop) else 1'   [vs A: differs]
+f: A + two existing statements swapped                                   FAIL main(): base statement missing or modified: "print(f'[r0] report -> {out_dir / 'R0_CONVERGENCE_REPORT.json'}')"   [vs A: differs]
+h: A + an existing dict VALUE changed (summary tries None -> 0)          FAIL main(): base statement missing or modified: "summary = {'claim': claim, 'stop_cause_tags_seen': tags, 'section_11_S"   [vs A: differs]
+i: A + a module-level print (not a def/constant)                         FAIL new top-level statement is not a new def/constant: "print('hello')"   [vs A: differs]
+j: A + a new module-level constant (allowed)                             PASS main(): inserted=2 dict_extended=0; top-level new defs/constants=2   [vs A: differs]
+```
+
+### Leg procedure (after p0 lands follow-up 6; judged against the landed file's own parent blob)
+1. **Static**: `pz_r0iii_pred.py (parent blob, landed blob)` = PASS; `mj_step` = 0 (AST + grep); parent = `89e7a0e52b4d` unless a later commit intervenes (then that commit's blob, and the count is written down).
+2. **Execution** from a `git archive` of the landed commit with the as-landed procedure of `pz_r0_exec.py` (appendix H): the run and the positive control (one injected `mj_step`, counted); exit **0**; every existing summary number and row equal to the `8e5905539c` verdict (`PZ_VERDICT_8e5905539c_R0_LEG_20260920.md` @ `2bd3be01c2`, expectation table = `8ec2abdec3` (2)) to 1e-12 — the window-R0 rows are untouched (p4 condition ①).
+3. **The report block** compared with `r0iii_{L,B,RC,NH}.json` per (model, k): converged flags and stop-cause tags equal; `Δ` components, `d`, `a_wrist_3_link − p`, `RD·e2` / `RD·e3` equal to ≤ 1e-6 mm / 1e-9; `Δ_pair(0)` / `Δ_pair(1)` equal to ≤ 1e-6 mm; k = 1 signs (L −1, R +1); `|Δx| ≤ 2 mm + 0.05·d`. The harness's printed values are the report; mine are the expectation.
+4. **Falsification forms** (§17.12) evaluated on the harness's own printed values; if any holds it is reported as such (p11's design court precedes p4's §7.2 word — p4 condition ④); `|Δx|` beyond tolerance ⇒ the roll-axis derivation is wrong = reported.
+5. **Stop-cause tags** (Rs1 supplement a): RC k = 1 = controller non-convergence expected (a control model; not an instrument stop); any `AssertionError` = instrument calibration stop, reported separately. Run 0 (no route run); bar / STOP / exit unchanged (rule 6 + measured exit 0); the 07-29 record and window R0's acceptance untouched.
+
+## Appendix K — `pz_r0iii.py` (verbatim; sha256 8b216c7e440faad84c7719d1e436823dbb601b6173a70c89e4edb8293ca62c48) — `pz_r0ii.py` (appendix I) lines 1-57 verbatim, then the R0-iii body
+```python
+"""pZ R0 instrument: the wired solver closure, loaded from the driver BLOB TEXT (never imported), rebound onto a composed one-arm model."""
+import sys, os, io, re, ast, math, json, hashlib, contextlib, numpy as np, mujoco
+from scipy.spatial.transform import Rotation
+BLOB, W, SIDE, OUT = sys.argv[1], sys.argv[2], sys.argv[3], sys.argv[4]
+sys.path.insert(0, W)
+with contextlib.redirect_stdout(io.StringIO()):
+    import ur15_gripper_mirror_acceptance as g; import ur15_cell_spec as spec
+src = open(BLOB).read(); tree = ast.parse(src)
+CLOSURE = ["solve_ik","pose_menu","_wrap","_rdes","pinch","touching","sigma_min","wrist_jac","column_gap","path_mast_min","arm_pair_min","path_arm_min","furniture_gap","path_furniture_min"]
+fns = {n.name: n for n in tree.body if isinstance(n, ast.FunctionDef)}
+code = "\n".join(ast.get_source_segment(src, fns[f]) for f in CLOSURE)
+closure_sha = hashlib.sha256(code.encode()).hexdigest()
+# composed model
+MODEL = os.environ.get("PZ_R0_MODEL", SIDE)   # L | R | RC (rotated copy: stock arm + stock hand on the RIGHT mount) | NH (mirrored arm + stock hand, the acceptance's negative)
+m, d = {"L": lambda: g.build_side("ur15_base.xml", g.KO_LEFT, g.acc.SIDE_SIGN["L"]), "R": lambda: g.build_side("ur15_base_mirrored.xml", g.KO_MIRROR, g.acc.SIDE_SIGN["R"]),
+        "RC": lambda: g.build_side("ur15_base.xml", g.KO_LEFT, g.acc.SIDE_SIGN["R"]), "NH": lambda: g.build_side("ur15_base_mirrored.xml", g.KO_LEFT, g.acc.SIDE_SIGN["R"])}[MODEL]()
+B = lambda n: mujoco.mj_name2id(m, mujoco.mjtObj.mjOBJ_BODY, n); G = lambda n: mujoco.mj_name2id(m, mujoco.mjtObj.mjOBJ_GEOM, n); J = lambda n: mujoco.mj_name2id(m, mujoco.mjtObj.mjOBJ_JOINT, n)
+t = SIDE
+QADR = {t: [m.jnt_qposadr[J(f"a_{j}")] for j in g.acc.J6]}; VADR = {t: [m.jnt_dofadr[J(f"a_{j}")] for j in g.acc.J6]}
+PAD = {t: [B("g_left_pad"), B("g_right_pad")]}; TOOLB = {t: B("g_base")}
+assert min(QADR[t]) >= 0 and min(PAD[t]) >= 0 and TOOLB[t] >= 0
+def _own(prefix): return {b for b in range(m.nbody) if (mujoco.mj_id2name(m, mujoco.mjtObj.mjOBJ_BODY, b) or "").startswith(prefix)}
+ARMB = {t: _own("a_") | _own("g_")}                       # the driver's rule (:499) with the composed prefixes
+ARMG = {t: {gg for gg in range(m.ngeom) if m.geom_bodyid[gg] in ARMB[t]}}
+GNAME = {gg: (mujoco.mj_id2name(m, mujoco.mjtObj.mjOBJ_GEOM, gg) or f"g{gg} on {mujoco.mj_id2name(m, mujoco.mjtObj.mjOBJ_BODY, m.geom_bodyid[gg]) or 'an unnamed body'}") for gg in range(m.ngeom)}
+COLG = []; COLFREE = {t: sorted(ARMG[t])}; FURNG = []      # no mast, no furniture on the composed model
+LIM = np.array(spec.LIMS); SIDES = spec.SIDES
+# AXFIX by the driver's rule (:594-616): seed q, fingers 0, throwaway data
+sc0 = mujoco.MjData(m)
+for k, a in enumerate(QADR[t]): sc0.qpos[a] = [0.0, -1.2, 1.0, -1.4, -1.57, 0.0][k]
+mujoco.mj_forward(m, sc0)
+pl, pr = np.array(sc0.xpos[PAD[t][0]]), np.array(sc0.xpos[PAD[t][1]]); c_w = (pr-pl)/max(np.linalg.norm(pr-pl),1e-9); pinch_w = 0.5*(pl+pr)
+a_w = np.array(sc0.xpos[TOOLB[t]]) - pinch_w; a_w = a_w/max(np.linalg.norm(a_w),1e-9); Rt = np.array(sc0.xmat[TOOLB[t]]).reshape(3,3)
+c_l, a_l = Rt.T @ c_w, Rt.T @ a_w; AXFIX = {t: np.column_stack([c_l, np.cross(a_l, c_l), a_l]).T}
+# start state = HOME_POSE (documented choice)
+for k, a in enumerate(QADR[t]): d.qpos[a] = spec.HOME_POSE[k]
+mujoco.mj_forward(m, d)
+ns = dict(m=m, d=d, QADR=QADR, VADR=VADR, PAD=PAD, TOOLB=TOOLB, AXFIX=AXFIX, ARMG=ARMG, GNAME=GNAME, COLG=COLG, COLFREE=COLFREE, FURNG=FURNG, LIM=LIM, SIDES=SIDES,
+          ARM_CLEARANCE=spec.ARM_CLEARANCE, ARM_DECIDE_CUTOFF=spec.ARM_DECIDE_CUTOFF, ARM_PAIR_CUTOFF=spec.ARM_PAIR_CUTOFF, COLUMN_R=spec.COLUMN_R,
+          SIGMA_FLOOR=spec.SIGMA_FLOOR, SIGMA_GOOD=spec.SIGMA_GOOD, SIGMA_PENALTY=spec.SIGMA_PENALTY, Rotation=Rotation, math=math, mujoco=mujoco, np=np, os=os, re=re)
+# module state the closure mutates (found by the v2 scan: store-only locals): initialised exactly as the driver does, by AST unparse of its own Assign
+_mod = {n.targets[0].id: n for n in tree.body if isinstance(n, ast.Assign) and isinstance(n.targets[0], ast.Name)}
+for _name in ("_DEPTH_AUDIT", "CLEARANCE_REPORT", "LAST_CLEAR"):
+    exec(ast.unparse(_mod[_name]), ns)
+steps = 0
+_orig = mujoco.mj_step
+def _counted(*a, **k):
+    global steps; steps += 1; return _orig(*a, **k)
+mujoco.mj_step = _counted
+exec(compile(code, "<wired closure>", "exec"), ns)
+# targets (pre-registered static values; rows 6-18 from spec constants; rows 2-5 from the L1 dump by cable_at)
+GL, GR = (0.106, 0.28, 0.954), (0.194, 0.28, 0.954)
+if os.environ.get("PZ_R0_GLGR"): GL, GR = [tuple(float(v) for v in s.split(",")) for s in os.environ["PZ_R0_GLGR"].split(";")]   # v2: row-4 re-pin (v3 §17.7, :2812 link-centre form) via env; default = the addendum 2 (:1241-form) values
+C1, C2 = spec.C1, spec.C2; H = spec.GRIP_HALF_SPAN
+LX1, RX1 = C1[0]-H, C1[0]+H; LX2, RX2 = C2[0]-H, C2[0]+H; RX_MID = float(np.mean([C1[0], C2[0]])); ZR, ZQ, ZS = spec.Z_RISE_REST, spec.Z_RISE_ROUTE, spec.seat_z(spec.FLOAT_Z)
+L_COL = [(GL[0],GL[1],ZR), GL, GL, (GL[0],GL[1],ZR), (LX1,C1[1],ZQ), (LX1,C1[1],ZS), (LX1,C1[1],ZS), (LX1,C1[1],ZS), (LX1,C1[1],ZQ), (LX2,C2[1],ZQ), (LX2,C2[1],ZQ), (LX2,C2[1],ZQ), (LX2,C2[1],ZQ), (LX2,C2[1],ZS), (LX2,C2[1],ZS), (LX2,C2[1],ZS), (LX2,C2[1],ZQ)]
+R_COL = [(GR[0],GR[1],ZR), GR, GR, (GR[0],GR[1],ZR), (RX1,C1[1],ZQ), (RX1,C1[1],ZS), (RX1,C1[1],ZS), (RX1,C1[1],ZS), (RX1,C1[1],ZQ), (RX2,C2[1],ZQ), (RX2,C2[1],ZQ), (RX_MID,C2[1],ZQ), (RX_MID,C2[1],ZQ), (RX2,C2[1],ZS), (RX2,C2[1],ZS), (RX2,C2[1],ZS), (RX2,C2[1],ZQ)]
+# ---- R0-iii (v3 section 17.12): wrist-direction report on STEPS row 4 (own-side target), k in {0, 1}, one model ----
+ROW = int(os.environ.get("PZ_R0III_ROW", "4"))
+tgt = np.array((L_COL if SIDE == "L" else R_COL)[ROW - 2], float)
+menu = ns["pose_menu"](t); K = len(menu)
+WR3 = B("a_wrist_3_link"); assert WR3 >= 0, "a_wrist_3_link not found on the composed model"
+e1, e2, e3 = np.eye(3)
+entries = []
+for k_ in (0, 1):
+    yaw, roll = menu[k_]
+    RD = np.asarray(ns["_rdes"](yaw, roll), float)
+    ent = dict(k=k_, yaw=float(yaw), roll=float(roll), target=tgt.tolist(), RD_e1=(RD @ e1).tolist(), RD_e2=(RD @ e2).tolist(), RD_e3=(RD @ e3).tolist())
+    buf = io.StringIO()
+    try:
+        with contextlib.redirect_stdout(buf):
+            q = ns["solve_ik"](t, tgt, tries=None, iters=300, seed=1, near=None, warm=None, other=None, pose_only=k_, quiet=True)
+        sc = mujoco.MjData(m); sc.qpos[:] = d.qpos
+        for kk, a in enumerate(QADR[t]): sc.qpos[a] = q[kk]
+        mujoco.mj_forward(m, sc)
+        w = np.array(sc.xpos[TOOLB[t]]); p = np.asarray(ns["pinch"](t, sc), float); w3 = np.array(sc.xpos[WR3])
+        Rt = np.array(sc.xmat[TOOLB[t]]).reshape(3, 3)
+        D = (w - p) * 1000.0; dn = float(np.linalg.norm(D)); D3 = (w3 - p) * 1000.0; d3 = float(np.linalg.norm(D3))
+        re_ = float(np.linalg.norm(Rotation.from_matrix((RD @ AXFIX[t]) @ Rt.T).as_rotvec()))   # the solver's own orientation-error form
+        pe = float(np.linalg.norm(tgt - p) * 1000.0)
+        ent.update(converged=True, tag="none", q=[float(v) for v in q], w_mm=(w * 1000).tolist(), p_mm=(p * 1000).tolist(), Delta_mm=D.tolist(), d_mm=dn,
+                   Delta_wrist3_mm=D3.tolist(), d_wrist3_mm=d3, pe_mm=pe, re_rad=re_, cos_Delta_vs_RDe3=float((D / dn) @ (RD @ e3)),
+                   cos_Delta3_vs_RDe3=float((D3 / d3) @ (RD @ e3)), sign_Delta_y=int(np.sign(D[1])), sign_Delta3_y=int(np.sign(D3[1])),
+                   tol_xy_mm=2.0 + 0.05 * dn)
+    except RuntimeError as e:
+        ent.update(converged=False, tag="controller non-convergence", err=str(e)[:100])
+    entries.append(ent)
+rec = dict(side=SIDE, model=MODEL, row=ROW, K=K, target=tgt.tolist(), blob_sha256=hashlib.sha256(src.encode()).hexdigest(), closure_sha256=closure_sha,
+           mj_step_calls=steps, driver_family_in_sys_modules=[k for k in sys.modules if "ur15_steps" in k], start="HOME_POSE", GL=list(GL), GR=list(GR),
+           AXFIX=AXFIX[t].tolist(), entries=entries)
+open(OUT, "w").write(json.dumps(rec, indent=1))
+print(json.dumps({k: v for k, v in rec.items() if k not in ("entries", "AXFIX")}))
+for e in entries:
+    if e["converged"]:
+        print(f"[r0-iii] {SIDE}/{MODEL} row {ROW} k={e['k']} (yaw {e['yaw']:+.2f}, roll {e['roll']:+.2f}): Delta=w-p [mm] = ({e['Delta_mm'][0]:+.3f}, {e['Delta_mm'][1]:+.3f}, {e['Delta_mm'][2]:+.3f}) d={e['d_mm']:.3f}; "
+              f"wrist3-p = ({e['Delta_wrist3_mm'][0]:+.3f}, {e['Delta_wrist3_mm'][1]:+.3f}, {e['Delta_wrist3_mm'][2]:+.3f}) d3={e['d_wrist3_mm']:.3f}; RD.e2={np.round(e['RD_e2'],4).tolist()} RD.e3={np.round(e['RD_e3'],4).tolist()}; "
+              f"cos(Delta,RD.e3)={e['cos_Delta_vs_RDe3']:+.6f} pe={e['pe_mm']:.4f} mm re={e['re_rad']:.2e} rad sign(dy)={e['sign_Delta_y']:+d} tol_xy={e['tol_xy_mm']:.2f} mm")
+    else:
+        print(f"[r0-iii] {SIDE}/{MODEL} row {ROW} k={e['k']}: NOT converged ({e['err']})")
+print("mj_step calls:", steps)
+```
+
+## Appendix L — `pz_r0iii_pair.py` (verbatim; sha256 52f59d42bd4feaf26d4af5723c8fde44533bb438f4181621216be69b045a80f5)
+```python
+"""pZ R0-iii pair/consistency check: argv = L.json R.json [RC.json NH.json ...]; prints Delta_pair(k), the sign rows, and the model-invariance of Delta."""
+import sys, json, math, numpy as np
+J = [json.load(open(p)) for p in sys.argv[1:]]
+L = J[0]; Rs = J[1:]
+def ent(j, k): return next(e for e in j["entries"] if e["k"] == k)
+print(f"L model {L['model']} row {L['row']} target {L['target']}")
+for R in Rs:
+    print(f"== R model {R['model']} (target {R['target']}) ==")
+    pair = {}
+    for k in (0, 1):
+        eL, eR = ent(L, k), ent(R, k)
+        if not (eL["converged"] and eR["converged"]): print(f"k={k}: not both converged (L {eL['converged']} R {eR['converged']})"); continue
+        wL, wR = np.array(eL["w_mm"]), np.array(eR["w_mm"]); pair[k] = float(np.linalg.norm(wR - wL))
+        pL, pR = np.array(eL["p_mm"]), np.array(eR["p_mm"])
+        print(f"k={k}: Delta_pair={pair[k]:.3f} mm (pinch gap |p_R-p_L|={np.linalg.norm(pR-pL):.3f} mm); Delta_L=({eL['Delta_mm'][0]:+.3f},{eL['Delta_mm'][1]:+.3f},{eL['Delta_mm'][2]:+.3f}) d_L={eL['d_mm']:.3f}; "
+              f"Delta_R=({eR['Delta_mm'][0]:+.3f},{eR['Delta_mm'][1]:+.3f},{eR['Delta_mm'][2]:+.3f}) d_R={eR['d_mm']:.3f}; sign(dy_L)={eL['sign_Delta_y']:+d} sign(dy_R)={eR['sign_Delta_y']:+d}; "
+              f"|dx|<=tol: L {abs(eL['Delta_mm'][0]) <= eL['tol_xy_mm']} R {abs(eR['Delta_mm'][0]) <= eR['tol_xy_mm']}")
+    if 0 in pair and 1 in pair:
+        eL1, eR1 = ent(L, 1), ent(R, 1)
+        closed = math.sqrt(75.0 ** 2 + (math.sin(0.35) * (eL1["d_mm"] + eR1["d_mm"])) ** 2)
+        print(f"   Delta_pair(1) > Delta_pair(0): {pair[1] > pair[0]}; closed form sqrt(75^2 + (sin0.35*(d_L+d_R))^2) = {closed:.3f} mm; "
+              f"k=1 signs opposite (L -1, R +1): {eL1['sign_Delta_y'] == -1 and eR1['sign_Delta_y'] == +1}; predicted dy_L=-0.343*d_L={-math.sin(0.35)*eL1['d_mm']:+.3f} measured {eL1['Delta_mm'][1]:+.3f}; predicted dy_R={math.sin(0.35)*eR1['d_mm']:+.3f} measured {eR1['Delta_mm'][1]:+.3f}")
+if len(Rs) >= 2:
+    print("== model invariance of Delta_R (max |Delta_R(model) - Delta_R(B)| over k, mm) ==")
+    base = Rs[0]
+    for R in Rs[1:]:
+        mx = max(float(np.abs(np.array(ent(R, k)["Delta_mm"]) - np.array(ent(base, k)["Delta_mm"])).max()) for k in (0, 1) if ent(R, k)["converged"] and ent(base, k)["converged"])
+        print(f"{R['model']} vs {base['model']}: {mx:.3e} mm")
+```
+
+## Appendix M — `pz_r0iii_pred.py` (verbatim; sha256 0a8a4aa6eb75c050c107e8954a1751a87b1d34bc48a122fbf4dcf716c4f8e5c0; depends on `pz_d4_pred.py` v3 @ `aed109d06f`)
+```python
+"""pZ DoD predicate for R0-iii (v3 section 17.12; p4 kickoff item 24 conditions): the harness may only GAIN a report -- additions only.
+Rules: (1) no import removed; (2) every base top-level statement except `def main` is present in the candidate dump-identical and in the same order;
+(3) new top-level statements may only be FunctionDef (a new name) or Assign to a new Name; (4) inside main(): every base statement is present, dump-identical,
+in order (insertions allowed anywhere); the one allowed modification is an Assign whose value is a dict literal that GAINS keys (base key/value pairs kept
+dump-identical and in order); (5) at least one statement inserted in main() (a report that changes nothing is not a landing); (6) the final `return` of main()
+is dump-identical; (7) `mj_step` calls in the candidate = 0 (AST).  argv: base.py candidate.py"""
+import ast, sys, importlib.util
+spec = importlib.util.spec_from_file_location("d4", __file__.replace("pz_r0iii_pred.py", "pz_d4_pred.py")); d4 = importlib.util.module_from_spec(spec); spec.loader.exec_module(d4)
+def dumps(body): return [ast.dump(s) for s in body]
+def dict_extended(sb, sc):
+    """sb, sc: Assign statements; True iff same targets, both values dict literals, base (key, value) dumps a subsequence of the candidate's."""
+    if not (isinstance(sb, ast.Assign) and isinstance(sc, ast.Assign) and isinstance(sb.value, ast.Dict) and isinstance(sc.value, ast.Dict)): return False
+    if [ast.dump(t) for t in sb.targets] != [ast.dump(t) for t in sc.targets]: return False
+    bi = [(ast.dump(k) if k is not None else None, ast.dump(v)) for k, v in zip(sb.value.keys, sb.value.values)]
+    ci = [(ast.dump(k) if k is not None else None, ast.dump(v)) for k, v in zip(sc.value.keys, sc.value.values)]
+    j = 0
+    for item in bi:
+        while j < len(ci) and ci[j] != item: j += 1
+        if j == len(ci): return False
+        j += 1
+    return len(ci) > len(bi)
+def subseq(base_body, cand_body, allow_dict_ext):
+    """Walk the candidate; every base statement must be matched in order (dump-identical, or dict-extended if allowed).
+    Returns (msgs, inserted_count, dict_ext_count)."""
+    msgs, ins, ext, j = [], 0, 0, 0
+    for sb in base_body:
+        db = ast.dump(sb); found = False
+        while j < len(cand_body):
+            sc = cand_body[j]; j += 1
+            if ast.dump(sc) == db: found = True; break
+            if allow_dict_ext and dict_extended(sb, sc): ext += 1; found = True; break
+            ins += 1
+        if not found:
+            msgs.append(f"base statement missing or modified: {ast.unparse(sb)[:70]!r}"); return msgs, ins, ext
+    ins += len(cand_body) - j
+    return msgs, ins, ext
+def pred(base_p, cand_p):
+    b, c = d4.load(base_p), d4.load(cand_p)
+    if d4.imports(b) - d4.imports(c): return "FAIL", f"import removed: {d4.imports(b) - d4.imports(c)}"
+    n_step = sum(1 for x in ast.walk(c) if isinstance(x, ast.Call) and (getattr(x.func, "attr", "") == "mj_step" or getattr(x.func, "id", "") == "mj_step"))
+    if n_step: return "FAIL", f"mj_step calls in candidate = {n_step}"
+    mb = [s for s in b.body if isinstance(s, ast.FunctionDef) and s.name == "main"]; mc = [s for s in c.body if isinstance(s, ast.FunctionDef) and s.name == "main"]
+    if len(mb) != 1 or len(mc) != 1: return "FAIL", "main() count != 1"
+    top_b = [s for s in b.body if s is not mb[0]]; top_c = [s for s in c.body if s is not mc[0]]
+    msgs, _, _ = subseq(top_b, top_c, allow_dict_ext=False)
+    if msgs: return "FAIL", "top level: " + msgs[0]
+    base_dumps = set(dumps(top_b)); base_names = {t.id for s in b.body if isinstance(s, ast.Assign) for t in s.targets if isinstance(t, ast.Name)} | {s.name for s in b.body if isinstance(s, ast.FunctionDef)}
+    for s in top_c:
+        if ast.dump(s) in base_dumps: continue
+        if isinstance(s, ast.FunctionDef) and s.name not in base_names: continue
+        if isinstance(s, ast.Assign) and all(isinstance(t, ast.Name) and t.id not in base_names for t in s.targets): continue
+        return "FAIL", f"new top-level statement is not a new def/constant: {ast.unparse(s)[:70]!r}"
+    msgs, ins, ext = subseq(mb[0].body, mc[0].body, allow_dict_ext=True)
+    if msgs: return "FAIL", "main(): " + msgs[0]
+    if ast.dump(mb[0].body[-1]) != ast.dump(mc[0].body[-1]) or not isinstance(mc[0].body[-1], ast.Return): return "FAIL", "main(): final return changed"
+    if ins == 0 and ext == 0: return "FAIL", "main(): nothing added (not a landing)"
+    return "PASS", f"main(): inserted={ins} dict_extended={ext}; top-level new defs/constants={len([s for s in top_c if ast.dump(s) not in base_dumps])}"
+if __name__ == "__main__": print(*pred(sys.argv[1], sys.argv[2]))
+```
+
+## Appendix N — R0-iii instrument outputs (verbatim; runs 11:37-11:38 JST; `PZ_R0_GLGR="0.1125,0.28,0.954;0.1875,0.28,0.954"`, `PZ_R0_MODEL` ∈ {L, R, RC, NH}, side L for L and R for the three right models)
+```text
+## L (r0iii_L.log)
+[r0-iii] L/L row 4 k=0 (yaw +0.00, roll -0.00): Delta=w-p [mm] = (-0.000, +0.000, +111.920) d=111.920; wrist3-p = (-0.000, +0.000, +122.720) d3=122.720; RD.e2=[-1.0, 0.0, 0.0] RD.e3=[0.0, 0.0, 1.0]; cos(Delta,RD.e3)=+1.000000 pe=0.0000 mm re=8.67e-16 rad sign(dy)=+0 tol_xy=7.60 mm
+[r0-iii] L/L row 4 k=1 (yaw +0.00, roll -0.35): Delta=w-p [mm] = (-0.000, -38.377, +105.135) d=111.920; wrist3-p = (-0.000, -42.080, +115.280) d3=122.720; RD.e2=[-1.0, 0.0, 0.0] RD.e3=[-0.0, -0.3429, 0.9394]; cos(Delta,RD.e3)=+1.000000 pe=0.0000 mm re=4.06e-16 rad sign(dy)=-1 tol_xy=7.60 mm
+mj_step calls: 0
+## B (r0iii_B.log)
+[r0-iii] R/R row 4 k=0 (yaw +0.00, roll +0.00): Delta=w-p [mm] = (+0.000, -0.000, +111.920) d=111.920; wrist3-p = (+0.000, -0.000, +122.720) d3=122.720; RD.e2=[-1.0, 0.0, 0.0] RD.e3=[0.0, 0.0, 1.0]; cos(Delta,RD.e3)=+1.000000 pe=0.0000 mm re=2.16e-16 rad sign(dy)=-1 tol_xy=7.60 mm
+[r0-iii] R/R row 4 k=1 (yaw +0.00, roll +0.35): Delta=w-p [mm] = (+0.000, +38.377, +105.135) d=111.920; wrist3-p = (+0.000, +42.080, +115.280) d3=122.720; RD.e2=[-1.0, 0.0, 0.0] RD.e3=[0.0, 0.3429, 0.9394]; cos(Delta,RD.e3)=+1.000000 pe=0.0000 mm re=6.71e-16 rad sign(dy)=+1 tol_xy=7.60 mm
+mj_step calls: 0
+## RC (r0iii_RC.log)
+[r0-iii] R/RC row 4 k=0 (yaw +0.00, roll +0.00): Delta=w-p [mm] = (-0.000, +0.000, +111.920) d=111.920; wrist3-p = (-0.000, +0.000, +122.720) d3=122.720; RD.e2=[-1.0, 0.0, 0.0] RD.e3=[0.0, 0.0, 1.0]; cos(Delta,RD.e3)=+1.000000 pe=0.0000 mm re=7.30e-16 rad sign(dy)=+1 tol_xy=7.60 mm
+[r0-iii] R/RC row 4 k=1: NOT converged (no IK solution for R at [0.1875 0.28   0.954 ])
+mj_step calls: 0
+## NH (r0iii_NH.log)
+[r0-iii] R/NH row 4 k=0 (yaw +0.00, roll +0.00): Delta=w-p [mm] = (-0.000, +0.000, +111.920) d=111.920; wrist3-p = (-0.000, +0.000, +122.720) d3=122.720; RD.e2=[-1.0, 0.0, 0.0] RD.e3=[0.0, 0.0, 1.0]; cos(Delta,RD.e3)=+1.000000 pe=0.0000 mm re=5.97e-16 rad sign(dy)=+1 tol_xy=7.60 mm
+[r0-iii] R/NH row 4 k=1 (yaw +0.00, roll +0.35): Delta=w-p [mm] = (-0.000, +38.377, +105.135) d=111.920; wrist3-p = (-0.000, +42.080, +115.280) d3=122.720; RD.e2=[-1.0, 0.0, 0.0] RD.e3=[0.0, 0.3429, 0.9394]; cos(Delta,RD.e3)=+1.000000 pe=0.0000 mm re=1.84e-16 rad sign(dy)=+1 tol_xy=7.60 mm
+mj_step calls: 0
+```
