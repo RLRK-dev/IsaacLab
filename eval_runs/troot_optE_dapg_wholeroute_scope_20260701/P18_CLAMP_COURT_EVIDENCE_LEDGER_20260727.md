@@ -48458,3 +48458,10 @@ ALT-1 (downgrade) — not chosen (the human's word). ALT-2 (`agent prompt`) — 
 - ⛔ 解錠なし・run 0（当卓）・当卓は裁定しない。
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1531 — ⚠ **訂正: commit `6c8474ab23` の subject「packet-level hash queried」は誤り — p11 の packet sha256「5c1d5ecb…」は「非空 5 行（:176–180）を改行で連結＋末尾改行」で当卓の計算と一致（§1530 本文のとおり）ため p11 への照会便は送っていない（送信 0・id 消費 0）。subject は commit 前に書いた条件分岐の文言をそのまま残した当卓の誤り（amend せず本節で訂正）**（当卓 2026-09-20 09:51 JST 実測）
+
+- 411（p11 packet → p4 cc p6 pZ）= hold（p6 working・p4/pZ ready）。完了送信は停止中（例外なし）。
+- ⛔ 解錠なし・run 0（当卓）・当卓は裁定しない。
+
+**Banked — 時刻は本節 commit の author date が正。**
