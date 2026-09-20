@@ -85,3 +85,9 @@
 ## 参照（全て committed・当卓が実読）
 
 `SPREAD_TILT_SWEEP_TRIES240_KINONLY.txt`（2026-08-02 13:08・76 行）／`WHY_THE_ROUTE_NEVER_MOVED_20260802.md`（200 行・§1-§7）／run.log blob `c79fdfd1d4105d6e1bda1f37a33a2c599123c2f3`（`P0_RUN69_RESHOOT_20260920/run.log` @ commit `0d22720834`）／`RUN_METRICS.json` @ commit `4583fa7444`／dump `_steps_cell_full.xml` @ 同 commit／driver blob `84a372439c59` @ commit `96e9ece175`／cell_spec blob `6bdf7ea4f9ca`／pC `PC_VERDICT_C_69_RESHOOT_20260920.md` @ commit `ffd3c5200c`／pB @ commit `659a014a4a`／pZ @ commit `675c6b459d`／kickoff item 86 @ commit `57fa59fa47`・item 95 @ commit `70e6417e46`・item 97 @ commit `e47cc510a3`。
+
+## 追記 1（2026-09-21 01:3x・m-p18-501 = pZ Addendum 2 `5ab5e00a1f` を受けて・挿入・上の本文は変えない）
+
+- **§2/§3 の足場が 1 つ強くなった**: pZ が当卓とは別の理由で同じ結論に達した — 両 dump の **cable subtree は byte 同一**で、全 cable body の祖先鎖が worldbody と cabNN のみ、差分 6 行の body（crown geom・L/R_shoulder_link）と**交わらない** ⇒ 初期状態の FK は**構造的に**同値。⇒ 取付を動かしても（yoke/tilt/crown）**ケーブルの静止位置は動かない**。本書の候補 B・C は左腕の通り道だけを変え、**把持目標は動かさない**。
+- ⚠ **量子化の別の帰結（本書の候補 D を読むときに要る数）**: 既定の把持中心 0.150 では、掴む **link 中心どうしの間隔は 75.000 mm** で、**指令 span 88.0 mm** とは別の量（driver `:92` 自身が「commanded span, not the links actually held」と注記）。⇒ 把持中心を動かす候補 D は、この 2 つの量の差も一緒に動かす。§0 #2 の 88 mm は指令側の不変前提であって、掴む link 間隔の保証ではない（当卓の読み・裁定ではない）。
+- **cite 検査の単位**（pZ の自省を当卓も採る）: 機械照合は **instance でなく class** に掛ける。当卓の item 78/93 の訂正も同じ形だった。本書の cite は blob に pin してある。
