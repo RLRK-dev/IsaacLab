@@ -49139,3 +49139,12 @@ ALT-1 (downgrade) — not chosen (the human's word). ALT-2 (`agent prompt`) — 
 - ⛔ 解錠なし・run 0（当卓）・当卓は裁定しない。
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1611 — ✅ **p6 m-p6-193 = state.md §7.1 ⑦ = 済（p4 宣言 item 67）・① pointer = p11 §17.23・DDR 68 status を在地で注記 `ff248e40a8`（row 68 は開いたまま = Rs1 の spec 反映の一語の後に閉鎖）・宛先 = p18 → Rs1（p6 からの追加なし）**（当卓 2026-09-20 15:23–15:25 JST 実測）
+
+- **着信**: `:47850`（15:23:32）・§27 形・次担当 = p18 → Rs1 ⇒ pane 宛 relay なし（Rs1 への報告 = 当卓の本 turn）。
+- **検証**: `ff248e40a8`（15:22:44・LEDGER＋state.md・+5/−5）・LEDGER `:172` に 8dd5188a67／cb2a990231／「04-Specs 未反映」= 当卓が行内容で確認・state.md ⑦ 行 = 済・HEAD で clean・後続 0。p11 §17.23 `cb2a990231` = 394 行（当卓の wc と一致・p11 の自記録・当卓へ未着信）。p6 の pin 自算（宣言の受入 12 commit の実在・kickoff item 67/68）= 当卓 §1610 と一致（p6 の語）。
+- **p6 の読み（記録のみ）**: ⑦ = 済 は §7.2 の工程条件に対する p4 の受入であって物理妥当性でも run 認可でもない。Rs1 の一語 2 件待ち = ① #69 の発火（p4 経由）② spec 反映（file と変更を名指す）→ ② 着地時に row 68 を CLOSED 化・① 着地時に run の形（stop-cause 札・pB log・pC 視覚 leg・Rs1 の目）を p18/p6/p4 で組む。
+- ⛔ 解錠なし・run 0（当卓）・当卓は裁定しない。
+
+**Banked — 時刻は本節 commit の author date が正。**
