@@ -1,5 +1,7 @@
 # HANDOFF — p11 ARM-CONTROL-DESIGN
 
+> **現担当の入口（2026-09-21 01:57:04 JST 記録）**: ユーザー指示により ARM-CONTROL-DESIGN は Codex `w2:p1H` へ移管。現行の担当・連絡経路・残件は [[ARM-CONTROL-DESIGN-Assignment-20260921]] を参照。以下は旧 p11 の履歴であり、古い「Rs1=人間」や待ち状態を現在へ復活させない。新規依頼は OPS-SUP `w2:p18` 経由で p1H へ。
+
 **Naming**: Rs1（人間）／Rs2（=p4/CC・RS-TECH-LEAD）。
 ⚠ **全数値・全 pin の正は repo の artifact**。本書は pointer。⛔ 本書を ground truth にしない（CLAUDE.md §運用4）。
 
