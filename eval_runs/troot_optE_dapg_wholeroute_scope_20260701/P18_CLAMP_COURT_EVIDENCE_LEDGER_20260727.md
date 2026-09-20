@@ -48337,3 +48337,12 @@ ALT-1 (downgrade) — not chosen (the human's word). ALT-2 (`agent prompt`) — 
 - ⛔ 解錠なし・run 0（当卓）・当卓は裁定しない。
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1519 — ✅ **push（Rs1 の語「push」= hub transcript `:45591`・`type=user`・`promptSource=suggestion_accepted`・`2026-09-20T00:16:47.916Z` = 09:16:47 JST）: `git push fork rlrk/optE-s2-substrate-swap` = `5762f891b8..57b73f8d93`（149 commit・rc 0・09:17:09–09:17:51 JST）・検証 = fetch 後 `ls-remote` の tip `57b73f8d93b954d3b6b8d103c1127fef1576caaf` == local HEAD・divergence 0/0**（当卓 2026-09-20 09:17 JST 実測）
+
+- **custody の注記**: promptSource は `typed` でなく `suggestion_accepted`（harness が提示した候補を人間が受理した形）。内容は「push」1 語・当卓の直前報告の「push」項への応答と読んで実行（当卓の読み）。意図と違えば Rs1 の一語で記録に残す（push 自体は取り消さない）。
+- **押した範囲**: 当卓の bank（§1494–§1518・bodies 379–401・records）＋他卓の commit（09-16 18:45 以降の全 commit・local HEAD `57b73f8d93` = 他卓の 09:01:36 commit）。push 前の remote tip = `5762f891b8`（09-14 08:13）。未 commit の作業 tree（1106 file・CLAUDE.md §27 を含む）は push の対象外。
+- **push 後の未 push** = 本節の bank commit のみ（次回 push で載る）。
+- ⛔ 解錠なし・run 0（当卓）・当卓は裁定しない。
+
+**Banked — 時刻は本節 commit の author date が正。**
