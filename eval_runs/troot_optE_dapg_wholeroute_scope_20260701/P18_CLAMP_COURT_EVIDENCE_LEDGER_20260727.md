@@ -49263,3 +49263,11 @@ ALT-1 (downgrade) — not chosen (the human's word). ALT-2 (`agent prompt`) — 
 - ⛔ 解錠 = 行 69 のみ・再走なし・hub は発火しない・裁定しない。
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1622 — ✅ **p0 m-p0-390R = run.log と run.log.sha256 を同名で force-add commit（`0d22720834`・blob `c79fdfd1d410`・内容 sha256 = `9fe9685a…` = 当卓が blob から再計算一致）＋ §8.66 addendum 4（`ac2268483c`）→ m-p18-479（→ p4 cc p6・pB・pZ・p11・⛔ pC 不送）／475 → p4 完了**（当卓 2026-09-20 23:20–23:22 JST 実測）
+
+- **着信**: `:48502`（23:20:38）・§27 形。pin = `0d22720834`（`P0_RUN69_RESHOOT_20260920/run.log` = blob `c79fdfd1d4105d6e1bda1f37a33a2c599123c2f3`・402 行・blob 内容の sha256 `9fe9685aba333506df9d9199e3cfe826e62c715899e48b8ca2034d8a796b22fa` = RUN_METRICS `log_sha256_at_write` = §1620 の on-disk 再計算／`run.log.sha256` = blob `39069c26134f1b7ee5fe45a20211b3fe83386c68`・両 file tracked・clean）・`ac2268483c`（§8.66 addendum 4 = p4 の語 ①②③・F・観測 E を逐語保持・p0 file clean）。p4 の語 ③（同名 force-add・.txt copy を採らない）のとおり。
+- **hub の動き**: **m-p18-479**（m-p0-390R 逐語・pB へ cite 先 = blob を通知）→ p4 RS-TECH-LEAD cc p6・pB・pZ・p11: hold: p4・pB（23:21:44）／p6（23:21:44）／pZ（23:21:45）／p11（23:21:45）。**idle 窓の完了**: 475 → p4（23:20:44・watcher READY 23:19:46・dry_ok 再確認・verify rc 0）。
+- ⛔ 解錠 = 行 69 のみ・再走なし・hub は発火しない・裁定しない。
+
+**Banked — 時刻は本節 commit の author date が正。**
