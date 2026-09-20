@@ -272,3 +272,32 @@ p4 の問い（観測 E・裁定でない）: 札が「controller の不収束�
 - §3 の第三面「p0 §8.66 札行 = 『controller の不収束』」は **4583fa7444 時点の p0 の分類**。p4（chain court）は観測 E の裁定として分類を **「その他」** に置き換えた（p0 の行は挿入で改める・停止 1・札 1 の計数は不変）。根拠 = P11 設計書 §17.4 `:249-250` の定義で「controller の不収束」= R0（IK 収束計器）・§11 STOP の系だが、本停止はどちらも不発（本 file §3: `§11`/`[steps] STOP` 文字列 0・raise 元 = driver `:3996` の stall gate）・IK は solved（`:362`「solved pose」）。p4 の札の文（逐語）= 「その他: driver の追従 gate（stall raise :3996）・原因 = L 腕 rest 姿勢の接触（column・R_shoulder_link）と 3 関節の力飽和・IK は solved・§11／calibration 不発・R 腕は追従」。
 - 本 file の §3「三者一致」は **同じ 1 停止を指すこと（行番号・例外文・end_reason の同一）**についての一致であり、分類語の是非は含まない（§6 の限界どおり）。分類の第三面は p0 の addendum（p4 の語を受けた改訂）で読み替える。射程 = p4 の語のとおり分類の裁定のみ（run の受入・工程の成否・cell の是非ではない）。
 - 数値・§0-§7・Addendum 1-2 は不変。
+
+## Addendum 4（2026-09-21 01:17:38 JST・re m-p18-489 = pZ PZ-250 A-2 の報告）— 行番号の訂正 3 件（**数値は全て不変**・追記のみ・既存行は残す）
+
+pZ が A-2 で 1 件（`:369` ARM-TO-ARM）を捕らえた。私は**同じ class を全部検査**した（本 file の散文 cite 93 件を run.log blob `c79fdfd1d4105d6e1bda1f37a33a2c599123c2f3` と driver blob `84a372439c59` に機械照合）。結果 = 同型の誤り **3 箇所**（pZ の 1 件を含む）＋ 別 object 由来の cite 1 件 ＋ 出所が曖昧な cite 1 件。**いずれも数値・判定・照合結果を変えない**（pZ C-1〜C-6・p4 item 86 の裁定に影響なし）。
+
+### 訂正 1（本体）— ARM-TO-ARM の行番号は `:367`（`:369` は CARRY 行）
+
+| 箇所 | 誤 | 正 |
+|---|---|---|
+| §3「停止直前の状態」行 | `:369` `STEP 2 ARM-TO-ARM: closest -1.1 mm …` | **`:367`**（内容は正・行番号のみ 2 ずれ） |
+| Addendum 1 A1-4 (a) | 対応づけの cite 群に `:369` | **`:367`**（geom 名 `9 <-> 42` を持つのは `:367`） |
+| Addendum 1 A1-4 (b) | `:369` ARM-TO-ARM −1.1 mm（pZ 指摘） | **`:367`** ARM-TO-ARM −1.1 mm |
+
+- **`:367` 逐語**（本 file で初めて引く。A1-2 の行選択が `:367` を落とし `:369` を採ったため、A1-2 の引用自体は「`:369` = CARRY」で**正しく**印字されている）:
+  `[steps] STEP 2 ARM-TO-ARM: closest -1.1 mm (9 <-> 42)  <- TOUCHING OR THROUGH   along the move -1.2 mm (9 <-> 42 at t=0.24s)   worst so far -1.2 mm   ⚠ measured between the two arms only; posts, table and cable are not in this`
+- 数値（−1.1 mm・along −1.2 mm・t=0.24s・9 <-> 42）は初版から正しく、RUN_METRICS `steps[0].arm_to_arm`（`closest_mm` −1.1194554926176923・`along_move_mm` −1.168352386937335）とも一致。**変わったのは指し先の行番号だけ。**
+
+### 訂正 2 — §2 の calibration raise の cite `:1301` は**別 blob の行**
+
+- `:1301` は pZ の R3 prereg が base とした driver blob `22feba17a6` の `if upright and max(upright) > TILT_CAL_DEG:`（同 blob `:1300-1302` = 検査と raise）。**本 run の driver blob `84a372439c59` では同じ検査が `:1328-1330`（upright 側）、対の tilted 検査が `:1335-1336`**（私が両 blob を実読）。
+- 実質は不変: 本 run でその raise は**発火していない**（`:112` の vertical check 行が印字された = §2 の判定根拠はこの行の存在であって行番号ではない）。§3 が引く p0 の札行中の「`:1310` 系」は p0 の文の逐語なので触らない（p0 の語）。
+
+### 訂正 3 — §1 表の「pZ 計器 `:70`」の出所
+
+- 鏡像関係の式 `AXFIX_R = diag(1,−1,1)·AXFIX_L·A`（`A = diag(−1,1,1)`）の cite `:70` は **`PZ_R3_TILT_CAP_LEG_PREREG_20260913.md` @ `98d8e63173` の appendix** の行（同 blob `:70` を私が実読）。同じ表の隣で引いた B 行 prereg `e41d0a9304` の行ではない。
+
+### 私の側の原因（記録）
+
+A1-1〜A1-3 は script が `run.log[n]` を印字したので **番号と内容が原理的にずれない**。ずれたのは **私が手で書いた pointer 文**（§3 の行・A1-4）だけで、そこだけ「内容を覚えていて番号を後から付けた」。⇒ 以後、pointer 文の番号も同じ script 経路で生成するか、書いた後に blob へ機械照合する（本 addendum で実施した 93 件照合がその形）。
