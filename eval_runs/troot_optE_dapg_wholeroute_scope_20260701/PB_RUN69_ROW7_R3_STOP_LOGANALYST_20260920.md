@@ -266,3 +266,9 @@ p4 の問い（観測 E・裁定でない）: 札が「controller の不収束�
 - run.log は p4 の語 ③ どおり **同名のまま force-add で commit** された: `eval_runs/troot_optE_dapg_wholeroute_scope_20260701/P0_RUN69_RESHOOT_20260920/run.log` @ `0d22720834` = blob **`c79fdfd1d4105d6e1bda1f37a33a2c599123c2f3`**（`run.log.sha256` = blob `39069c26134f1b7ee5fe45a20211b3fe83386c68`・記録 = p0 §8.66 addendum 4 @ `ac2268483c`）。
 - 私の再計算（23:29 JST）: blob の内容 sha256 = `9fe9685aba333506df9d9199e3cfe826e62c715899e48b8ca2034d8a796b22fa`・402 行・**as-run copy `/home/rlrk/p0_runs/run69_reshoot_20260920/run.log` とバイト同一**（`cmp` = 差なし）・HEAD でも同 blob。
 - ⇒ 本 file の `:41-42`・`:112`・`:375-378`・`:92-111`・`:362-374`・`:379-402` 等の **run.log 行番号は全て blob `c79fdfd1d410…` の中の位置として読める**（§0 の「未 commit・on-disk で bank」は本 addendum で解消。§0 の記述は当時の事実として残す）。数値・判定なしの立場は不変。
+
+## Addendum 3（2026-09-20 23:37:27 JST・re m-p18-486 = p4 m-p4-310・kickoff item 86 @ `57fa59fa47`）— 札の分類は p4 の裁定で「その他」に置き換わった（pointer・本 file の第三面の読み替え）
+
+- §3 の第三面「p0 §8.66 札行 = 『controller の不収束』」は **4583fa7444 時点の p0 の分類**。p4（chain court）は観測 E の裁定として分類を **「その他」** に置き換えた（p0 の行は挿入で改める・停止 1・札 1 の計数は不変）。根拠 = P11 設計書 §17.4 `:249-250` の定義で「controller の不収束」= R0（IK 収束計器）・§11 STOP の系だが、本停止はどちらも不発（本 file §3: `§11`/`[steps] STOP` 文字列 0・raise 元 = driver `:3996` の stall gate）・IK は solved（`:362`「solved pose」）。p4 の札の文（逐語）= 「その他: driver の追従 gate（stall raise :3996）・原因 = L 腕 rest 姿勢の接触（column・R_shoulder_link）と 3 関節の力飽和・IK は solved・§11／calibration 不発・R 腕は追従」。
+- 本 file の §3「三者一致」は **同じ 1 停止を指すこと（行番号・例外文・end_reason の同一）**についての一致であり、分類語の是非は含まない（§6 の限界どおり）。分類の第三面は p0 の addendum（p4 の語を受けた改訂）で読み替える。射程 = p4 の語のとおり分類の裁定のみ（run の受入・工程の成否・cell の是非ではない）。
+- 数値・§0-§7・Addendum 1-2 は不変。
