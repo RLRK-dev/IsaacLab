@@ -49477,3 +49477,16 @@ ALT-1 (downgrade) — not chosen (the human's word). ALT-2 (`agent prompt`) — 
 - ⛔ 解錠 = 行 69 のみ・再走なし・**行 68 の CLOSED は静的 chain の仕様反映のみで工程成功・node COMPLETE・training-ready を意味しない**・hub は発火しない・裁定しない。
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1641 — ✅⭐ **#69 = p4 が受理（kickoff item 95 `70e6417e46`・01:20:22）— 形どおり 1 回執行・5 面一致・B4 返却理由なし・再走なし。⛔ 工程の成否も物理妥当性も含まず human GT は未適用のまま。carry 確定形 ①-⑧ を採用（item 97 `e47cc510a3`）→ m-p18-498（p6 へ 01:23:59 配達）。⚠ 当卓の数え違いを p4 が捕捉し訂正（+18 → +29・`--numstat`）／pC の役割は p1D へ移管（利用者逐語・rollout `:9`）**（当卓 2026-09-21 01:21–01:25 JST 実測）
+
+- **受入の語（p4・逐語は m-p18-498 / kickoff item 95）**: 「#69 再撮影 run を受理する。固定した形（LEDGER 行 69 v1+v2・6 記録）どおりに 1 回だけ執行され、p0 の札と産物・pB の log 数値・pC の視覚観測・pZ の照合・Rs1 (p19) の目視記録の 5 面が、同じ 1 つの停止と同じ 1 つの状態を指している。B4 の返却理由は無い。再走は無い。」
+- ⛔ **受入が意味しないもの（p4 の列挙）**: 工程の成否・把持・持ち上げ・route・衝突回避・動的追従・物理妥当性・行 68 の閉鎖・node COMPLETE・training-ready・再走認可・parameter 変更・C-2 取付の是非。
+- ⚓ **human GT は未適用のまま（p4 の明記・当卓の読みと一致）**: 委任は述語を移さない。受理できる理由 = 受入が主張するのは**形の履行と 5 記録の指示対象の同一性だけ**で（item 91 で発語前に宣言・bar を後から動かしていない）、本 run が**何も達成していない**（STEP2 停止・把持なし）ため human GT が支える種類の主張が 1 つも bank されていないから。**standing condition** = (1) 把持・持ち上げ・route・貫通の有無を主張する run は bank 前に**利用者（人間）の目視**が要る（役の交代はこの述語を移さない）(2) 近接カメラは 66/66 遮蔽 ⇒ 把持を視覚で判定する run の前に camera を直す。
+- **carry 確定形（item 97 で採用）**: R0 rows 2-5 の targets は ① `REST_Y`（0.28 + `WORK_ROW_DY`）② `TABLE_TOP` ③ `CABLE_R` ④ `CABLE_SEG` ⑤ `CABLE_N`（= x0）⑥ **`GRASP_CENTRE_X`**（env key・既定 `C1[0]` = 0.150）⑦ **`CLIP_POSITIONS` の C1／C2** ⑧ **`GRIP_HALF_SPAN`**（§0 #2 の 88 mm ゆえ変更は Rs 専権）のいずれかが動いた run / cell で**再導出**。mount 変更では不要。限界 = 4 者とも同じ harness と定数を読んでおり独立計器の確認でない・部分的に独立なのは run.log :44 のみ。
+- ⚠ **当卓の誤りと訂正（p4 が先に捕捉）**: `m-p18-496` の「pB Addendum 4 = +18/−0」は**誤り**。正 = **+29/−0**（`git diff --numstat` = 29 0・274 → 303 行）。原因 = `grep -c '^+[^+]'` が**内容が + で始まる追加行を落とす**。⇒ **追加行数は `--numstat` で取る**（当卓の運用に追加）。結論（追記のみ・数値不変）は不変。⭐ **自分の道具の癖が数字を作る — 数え方を pin と同じ厳密さで扱う。**
+- **hub の動き**: **`m-p18-498`**（m-p4-313 逐語 ＋ 当卓の訂正）→ p6 DELIVERED（01:23:59）・pB・p0・p11 DELIVERED・pZ QUEUED。**残り = p6 の反映 commit 1 件**（行 69 status flip ＋ carry ①-⑧ ＋ 呼称の境界時刻 ＋ head の「p4 停止中」除去）。
+- **pC → p1D の役割移管**: 利用者の逐語 **「herdrでのpCの役割を君に移管させたい」**（p1D rollout `:9`・**01:15:24 JST**・当該 session の最初の利用者入力・当卓が直読）。割当 file sha256 `e6cf719d9be3f7bca6a10ab824e44dc21fe1cdea1cbea86c1341c0ccd6d3205f`・untracked。⚠ 文型は**意図形**（命令形でない）・`role=user` は人間と relay を分けない ⇒ 裏付け = 同 rollout `:153` の同型発話と Rs1 交代と同夜の連続。**当卓の処置**: 宛先表で VIDEO-ANALYST = p1D・**旧 pC への新規依頼を停止**・⛔ 旧 pC に数値を送らない・旧 pane は閉じない・過去記録は書き換えない。**pC の未引継ぎ案件 = 0**（最終配達 `m-p18-477`・23:25:38）・pC の #69 成果物は `ffd3c5200c` として受理済。返答 = `work/thread-pc-transfer-20260921/P18_TO_P1D.md`（当卓が新規作成・hub tool は Codex を拒否するため到達の確定は p1D の読取り報告に依る）。
+- ⛔ 解錠 = 行 69 のみ・再走なし・新 run なし・hub は発火しない・裁定しない。
+
+**Banked — 時刻は本節 commit の author date が正。**
