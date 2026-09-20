@@ -49226,3 +49226,13 @@ ALT-1 (downgrade) — not chosen (the human's word). ALT-2 (`agent prompt`) — 
 - ⛔ 解錠 = 行 69 のみ・hub は発火しない・裁定しない・run 0（当卓）。
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1619 — ✅ **p4 m-p4-308 = 469 受領 ＋ v2 補完（早期停止 run の読み方: raise で停止した run に OUT.mp4 は無い = 結果であって形の欠落でない・LIVE_OUT を対象に・kickoff item 75 `e384c3737d`）→ m-p18-472（→ p6・pC・p0 cc pZ・pB・p11）**（当卓 2026-09-20 23:05–23:09 JST 実測）
+
+- **着信**: `:48288`（23:05:17）・§27 形。pin = `e384c3737d`（item 75・23:05:17・当卓が diff を実読・HEAD で clean）。driver `84a372439c59` の cite = :88（`chk` = `exists_at_write`）:99（`artifacts.video.final`）:3008（`_live.append_data` = LIVE_OUT の frame append）:3174（step loop）:3996（raise 地点）:4020（`_live.close`）:4025（`imageio.mimwrite` = OUT の一括書き出し）:621-628（controller record の印字 = step loop より前）— 当卓が各行を実読・一致〔当卓の 1 回目の機械 check は :99/:3008/:621 に別の語を探して FAIL を出したが、行の内容は p4 の cite どおり = check 側の語の誤り〕。U0 on-disk（`_gen/dod_c2_20260810/run.log` :367-370・live 2.200 s）= p4/pC の as-read（gitignored）・当卓の共有 tree 走査（`find -maxdepth 4`・23:07）では同名 file 無し ⇒ 別 root の観測と読む・pin でない。
+- **p4 の語（chain court・v2 補完・新 gate でない）**: end_reason = raised で OUT 不在 = 結果（Rs1 standing order「stall する見込みならそのまま撮ってそのまま報告」）・返却理由にしない。(i) p0 = §8 に OUT absent ＋ 札行・存在する産物のみ cp (ii) hub = live copy の sha を pin (iii) pC・Rs1 = LIVE_OUT を対象（VERDICT_C に対象と停止までの長さ）(iv) pB (iii)・pZ 照合行 = ある所まで読む（row 7 は :621-628 で早期停止でも読める）。OUT が在れば v1 どおり。受入要件は不変・停止 run への受入 word = 札/映像/log の一致の語で工程の成功ではない。
+- **hub の B4 の読み（裁定でない）**: 「OUT.mp4 の sha 無し」は end_reason = raised ＋ §8 の OUT absent 記載があれば返却理由にしない（本補完に従う）。
+- **hub の動き**: **m-p18-472**（m-p4-308 逐語）→ p6 PLAN-KEEPER cc pC・p0・pZ・pB・p11: hold: pC・p0・pZ・pB（23:08:49）／p6（23:08:49）／p11（23:08:50）。
+- ⛔ 解錠 = 行 69 のみ・hub は発火しない・裁定しない・run 0（当卓）。
+
+**Banked — 時刻は本節 commit の author date が正。**
