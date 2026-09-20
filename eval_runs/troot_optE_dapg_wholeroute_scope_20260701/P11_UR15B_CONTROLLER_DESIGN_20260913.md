@@ -348,3 +348,8 @@ position servo への線形 ramp（現行・不変）。one-shot 目標なし。
 - **結果（pZ as-run・当卓は走らせない）**: 7 行 CONFIRMED・run 0・mj_step 0（陽性対照 1）・追加のみ述語 PASS・既存行 = 受入済 `8e5905539c` の verdict と同一（harness sha と経過秒以外）・**R0iii block = addendum 9 の期待と全 (model, k) で一致（worst 3.4e-13 mm）・k = 1 の符号 L −1 / R +1・|Δx| 許容内・Δ_pair 75.000 → 107.314 mm（B・NH）・RC の k = 1 = controller non-convergence（17.14 の読みどおり・対照 model の札）**。
 - **読み（17.12 の反証形との照合・harness の印字値で）**: 「両手首が同じ側」= 偽（L −38.377 mm・R +38.377 mm・d = 111.920 mm）／「pair 量が増えない」= 偽（+32.314 mm）／「|Δx| 超過」= 偽 ⇒ **外側** = menu の roll 二重反転は両手首を cable を挟んで反対側へ倒す（17.10 の物理的意味・17.14 の先行測定と同じ数値を着地 object が再現）。p4 の完成 word の前提「R0-iii 結果（内側なら p11 の判断が先）」は **該当せず・当卓の追加行為なし**。
 - 不変: `pose_menu` docstring「mirror images」「tips it about the closing axis」は finding のまま（driver 不変・条件 ⑤）・R0-ii/R0-iii は R1/R1′/R2 の代替でない・report 行は bar/STOP を持たない。受入 = p4（窓 R0 不触）。⛔ 解錠なし・run 0。
+
+### 17.19 R0-iii（手首方向 report 行・`fedb5bef08`）= **受入**（p4 m-p4-298 → m-p18-451 受領 2026-09-20 14:47:42 JST・kickoff 09-20 08:23 節 item 51 @ `668e85b26f` を当卓が blob で直読）— 記録のみ（当卓への依頼なし）
+- **p4 の word**: 受入（bar なし・窓 R0 不触）。pZ leg @ `db84a76a0e` rows 1-7 CONFIRMED（17.18）。item 24 の「内側なら p11 の設計 court 判断を §7.2 前に要す」は **発動しない**。Δ_pair 実測 107.314 mm = 17.12 の式 √(75² + (0.686·111.92)²) = 107.3（p4 の手計算・当卓 17.14 の閉形式と同じ）。
+- **示さないもの（p4 の語）**: 静的な手首幾何のみ（route 中の clearance は #69）・RC の非収束は B について無言・「外側」規約の設計上の読みは p11 の court（= 17.18 に記録済）。
+- **§7.2 宣言の前提の残り（p4）**: R2（pZ 事前登録 → run → p4）・p6 の state.md 反映・p4 の 17.14 / 17.18 の読み（relay 450）。鎖 = D4・B（row 7 = #69 のみ開）・R0・W・R1′・R1・R0-iii = 済。本書の「未検証」印は §7.2 宣言まで残す。⛔ 解錠なし・run 0。
