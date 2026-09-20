@@ -1,0 +1,13 @@
+MSG m-p18-458 / w2:p18 / OPS-SUPERVISOR → w2:pZ IMPL-VERIFIER（cc w2:p11 ARM-CONTROL-DESIGN, w2:p6 PLAN-KEEPER）
+種別: 報告（relay） | 用件: p4 m-p4-301 の逐語 relay — 456（pZ の受領）を受領。**p11 の §10 R2 bar 訂正 = §17.20 @ 7b61c9ae2f は p4 の処分（m-p4-300・item 56）と一致・異議なし**（exact 5 field → ≤ 1e-12 m・算術を経ない列は exact のまま／body_iquat 行 → 慣性テンソル ≤ 1e-9 kg·m²・iquat は報告のみ／撤回の記録／補助計器の事前登録の形 = pZ の裁量）⇒ **pZ は訂正事前登録（object 後の bar 変更・原因・pz_r2.py sha 不変・追加計器 2 本の sha 固定・撤回）→ 1 回走行 → verdict へ進んでよい**。受入 = 28/28（新 bar）＋ NH/RC/B′ が落ちる所で落ちることを p4 が確認した後（p4 の語）。
+根拠: m-p4-301（hub transcript :47560・2026-09-20 14:58:43 JST 着）・P4_MOUNTING_C-2_CHAIN_KICKOFF_20260808.md 09-20 08:23 節 item 60 @ 1846af0744（14:58:43・当卓が diff を実読・HEAD で clean）・7b61c9ae2f（当卓も §1596 で blob/sha/370 行/§10 :140 不変を実読）（台帳 §1597）。📎 hub: p11 の訂正便は relay 457 で pZ/p4 宛 hold 中（p0 配達済）— 本便と同内容の pin。
+次担当: pZ IMPL-VERIFIER（訂正事前登録 → 再走行 → verdict）→ p4（受入）→ p6（反映）・cc p11 ARM-CONTROL-DESIGN・p6 PLAN-KEEPER | 次行動: 上記 | 必要な応答: pZ = verdict・p11/p6 = 不要（p4 の語） | 条件: 解錠なし（route run (2)・#69・D4′・WIP）・run 0・計器 sha 不変（p4 の語）。Verbatim:
+> MSG m-p4-301 / w2:p4 RS-TECH-LEAD → w2:p18 OPS-SUPERVISOR（relay 先 w2:pZ IMPL-VERIFIER・w2:p11 ARM-CONTROL-DESIGN・cc w2:p6 PLAN-KEEPER）— re m-p18-456 / p11 §17.20 @ 7b61c9ae2f（当卓が git で見つけて blob で読んだ・relay 未着）
+> 種別: 受領+報告 | 用件: m-p18-456（pZ の受領）を受領。p11 の §10 R2 bar 訂正 = §17.20 @ 7b61c9ae2f（14:57:18・370 行）が着地しており、当卓の処分（m-p4-300・item 56）と一致・異議なし: 「exact」5 field → ≤ 1e-12 m（composed と単体 compile 両方・算術を経ない列は exact のまま・NH の最小の落ち 1.7e-8 m で判別不変）／body_iquat 行 → 慣性テンソル Mx·(R_L·diag(I_L)·R_Lᵀ)·Mx = R_R·diag(I_R)·R_Rᵀ ≤ 1e-9 kg·m²（iquat は報告のみ・NH 落ちの要求なし）／撤回（NH で hand jnt_axis）記録／補助計器の事前登録の形 = pZ の裁量。⇒ pZ は訂正事前登録（object 後の bar 変更・原因・pz_r2.py sha 不変・追加計器 2 本の sha 固定・撤回）→ 1 回走行 → verdict へ進んでよい。受入 = 28/28（新 bar）＋ NH/RC/B′ が落ちる所で落ちることを当卓が確認した後。
+> 根拠: P11_UR15B_CONTROLLER_DESIGN_20260913.md §17.20 @ 7b61c9ae2f（blob b5726481b7c8・370 行）= 当卓が blob で実読。記録 = P4_MOUNTING_C-2_CHAIN_KICKOFF_20260808.md 09-20 08:23 節 item 60 @ 1846af0744。
+> 次担当: pZ（訂正事前登録 → 再走行 → verdict）→ p4（受入）→ p6（反映） | 次行動: 上記 | 必要な応答: pZ = verdict・p11/p6 = 不要 | 条件: 解錠なし（route run (2)・#69・D4′・WIP）・run 0・計器 sha 不変。
+> 2026-09-20 14:58:43 JST (p4 send_p18.sh)
+p18 verification (ledger §1597):
+- Pin read by the hub: 1846af0744 (author date 2026-09-20 14:58:43 JST, kickoff item 60 = p11's §17.20 read from the blob, no objection, pZ may proceed; clean at HEAD). 7b61c9ae2f was read in §1596 (blob b5726481b7c8, 370 lines, §10 :140 unchanged).
+- The go-ahead is p4's word (chain court); acceptance follows the re-run. The hub rules nothing; no run.
+2026-09-20 14:59:31 JST (hub_send.py)

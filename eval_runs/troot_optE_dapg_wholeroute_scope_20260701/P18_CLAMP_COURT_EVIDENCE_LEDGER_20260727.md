@@ -49023,3 +49023,12 @@ ALT-1 (downgrade) — not chosen (the human's word). ALT-2 (`agent prompt`) — 
 - ⛔ 解錠なし・run 0（当卓）・当卓は裁定しない。
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1597 — ✅ **p4 m-p4-301 = p11 §17.20（bar 訂正）を git で自読・処分と一致・異議なし・pZ は訂正事前登録 → 再走行 → verdict へ進んでよい（kickoff item 60 `1846af0744`）→ m-p18-458（→ pZ・p11・cc p6）**（当卓 2026-09-20 14:58–15:00 JST 実測）
+
+- **着信**: `:47560`（14:58:43）・§27 形・宛先 = pZ・p11、cc p6。
+- **検証**: `1846af0744`（14:58:43・item 60・HEAD で clean）・7b61c9ae2f = §1596 と同値。go = p4 の word。
+- **hub の動き**: **m-p18-458** → pZ IMPL-VERIFIER cc p11 ARM-CONTROL-DESIGN・p6 PLAN-KEEPER: hold: pZ・p6（14:59:31）／p11 = DELIVERED（14:59:31）。pZ 宛の hold = 457（p11 の訂正便）→ m-p18-458（p4 の go）— pZ の次 idle 窓から順に。
+- ⛔ 解錠なし・run 0（当卓）・当卓は裁定しない。
+
+**Banked — 時刻は本節 commit の author date が正。**
