@@ -4399,3 +4399,7 @@ Written 2026-09-20 14:27:48 JST (date-THEN-write). p4's word (kickoff item 37 @ 
 | not touched | the 07-29 record; window W's script (`92059373a3`); the harness; the legs |
 
 ⛔ gate 不変・route run 認可なし・self-start しません。
+
+### 8.64 addendum (2026-09-20 14:30:00 JST) — R1 accepted by the chain court (m-p18-442 = m-p4-294, kickoff item 39 @ `e092941348`; read from the commit); chain state as p4 lists it
+
+R1 (arm self-mirror, design §10 :138): prereg `3a3b5bbc6e` ≺ one run ≺ verdict `c7afe74422` (8 rows CONFIRMED: 6 link bodies over 49 poses at ≤ 1.3e-12 mm / ≤ 7.7e-16 rad under the identity map; negative controls (i) the R-formula fires on every pose, (ii) the stock arm on the right mount equals (i); fixed-point margin 1.09e-12 mm; mj_step 0) — p4's word, read only by p0. Chain state (p4): D4 · B (row 7 open) · R0 · W · R1′ · R1 done; remaining = R2 (pZ prereg → measurement → p4), R0-iii (`fedb5bef08` landed → pZ leg → p4), the mkdir follow-up (`792e62e460` landed → pZ rc 0 → p4), p6's §7.1 reflection → p4's §7.2 word → #69 = Rs1. p0 owes nothing at this write; no message sent (p4: p0's landings are already relayed as 438/441).
