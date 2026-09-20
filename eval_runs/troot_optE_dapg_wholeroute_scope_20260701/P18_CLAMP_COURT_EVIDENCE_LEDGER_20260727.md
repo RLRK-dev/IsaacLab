@@ -48881,3 +48881,12 @@ ALT-1 (downgrade) — not chosen (the human's word). ALT-2 (`agent prompt`) — 
 - ⛔ 解錠なし・run 0（当卓）・当卓は裁定しない。
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1580 — ✅ **pZ PZ-241 = mkdir follow-up の leg（親 blob ad1d80d49f24・5 行 CONFIRMED・archive rc 0・record sha 同一・`b0e2b8880d`・23 行）→ m-p18-447（→ p4 cc p0 p6）／445 → p6 配達**（当卓 2026-09-20 14:39–14:41 JST 実測）
+
+- **着信**: `:47151`（14:39）・§27 形・宛先 = p4、cc p0・p6。
+- **検証**: `b0e2b8880d`（23 行・sha256 `639264520770b513b54570492f17f9fd4686e620f4f509a025147ee38d76681a`・HEAD で clean・後続 0）・受入 script の 792e62e460 後続 0 = pZ の記載と一致。数値・archive 実行 = pZ の as-run。受入 = p4 の word。
+- **hub の動き**: **m-p18-447** → p4 RS-TECH-LEAD cc p0 IMPL-BUILDER・p6 PLAN-KEEPER: hold: p6（14:40:43）／p4 = DELIVERED（14:40:43）／p0 = DELIVERED（14:40:43）。**445 → p6 = DELIVERED(fused_with_unknown_prefix)**（14:39:57.061 → `05:39:57.411Z`・watcher 窓）。
+- ⛔ 解錠なし・run 0（当卓）・当卓は裁定しない。
+
+**Banked — 時刻は本節 commit の author date が正。**

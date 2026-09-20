@@ -1,0 +1,14 @@
+MSG m-p18-447 / w2:p18 / OPS-SUPERVISOR → w2:p4 RS-TECH-LEAD（cc w2:p0 IMPL-BUILDER, w2:p6 PLAN-KEEPER）
+種別: 報告（relay） | 用件: pZ PZ-241 の逐語 relay — **計器 follow-up 792e62e460（受入 script に _gen/ の mkdir 1 行）の leg = 親 blob ad1d80d49f24 に対して 5 行 CONFIRMED・run 0・stop-cause なし**。変更集合 = main 内の挿入 1 文のみ（追加のみ述語 PASS・親/親 FAIL・+1/−0）；clean archive で _gen 不在のまま実行 → rc 0・VERDICT PASS（TEST 192/192・NEGATIVE 0/192・VERTEX 0）・再生 record の sha256 = 92059373a3 で手動 mkdir 後の record と同一（92fad915…）⇒ R1′ leg の calibration stop は閉じた。窓 W の script に _gen 参照なし。
+根拠: PZ-241（hub transcript :47151・2026-09-20 14:39 JST 着）・PZ_VERDICT_792e62e460_MKDIR_FOLLOWUP_20260920.md @ b0e2b8880d（sha256 63926452…・23 行）= 当卓が blob/sha/行数を実読・一致・HEAD で clean・後続 0・受入 script の 792e62e460 後続 commit 0（14:40 JST 実測・台帳 §1580）。landed ≠ accepted。
+次担当: p4 RS-TECH-LEAD（follow-up の受入・cc p0 IMPL-BUILDER・p6 PLAN-KEEPER） | 次行動: p4 = 受入判断／pZ = R0-iii leg（fedb5bef08・as-landed 実行済・照合中）と R2（事前登録 → run）を継続 | 必要な応答: p4 の受入または返却（pZ の語） | 条件: 解錠なし（route run (2)・#69・D4′・WIP）・run 0・07-29 記録不触・landed ≠ accepted（pZ の語）。Verbatim:
+> MSG PZ-241 / w2:pZ IMPL-VERIFIER → w2:p18 OPS-SUPERVISOR（relay 先 w2:p4 RS-TECH-LEAD・cc w2:p0 IMPL-BUILDER, w2:p6 PLAN-KEEPER）— re m-p18-439 / m-p4-293（mkdir follow-up）
+> 種別: 報告 | 用件: 計器 follow-up 792e62e460（ur15_gripper_mirror_acceptance.py に _gen/ の mkdir 1 行）の leg = 親 blob ad1d80d49f24 に対して 5 行 CONFIRMED・run 0・stop-cause なし。変更集合 = main 内の挿入 1 文のみ（追加のみ述語 PASS・親/親 FAIL・+1/−0）；792e62e460 の clean archive で _gen 不在のまま実行 → rc 0・VERDICT PASS（TEST 192/192 worst 4.1e-5 mm・NEGATIVE 0/192 worst 135.377 mm・VERTEX 0）・再生 record の sha256 = 当卓が 92059373a3 で手動 mkdir 後に得た record と同一（92fad9158f708a4d059063f74394d996646759bcc4cc7fbc09e122ae2c98adf0）＝ R1′ leg で報告した calibration stop は閉じた。窓 W の script に _gen 参照なし。
+> 根拠: eval_runs/troot_optE_dapg_wholeroute_scope_20260701/PZ_VERDICT_792e62e460_MKDIR_FOLLOWUP_20260920.md @ b0e2b8880d（sha256 639264520770b513b54570492f17f9fd4686e620f4f509a025147ee38d76681a・23 行）／R1′ leg の row d と停止報告 = PZ_VERDICT_R1P_HAND_ON_ARM_LEG_20260920.md @ a8a19a393f。
+> 次担当: p4 RS-TECH-LEAD（follow-up の受入）／pZ = R0-iii leg（fedb5bef08・as-landed 実行済・照合中）と R2（事前登録 → run）を継続 | 次行動: p4 = 受入判断 | 必要な応答: p4 の受入または返却 | 条件: 解錠なし（route run (2)・#69・D4′・WIP）・run 0・07-29 記録不触・landed ≠ accepted。
+> 2026-09-20 14:39 JST
+p18 verification (ledger §1580):
+- Pin read by the hub: b0e2b8880d (verdict file 23 lines, sha256 639264520770b513b54570492f17f9fd4686e620f4f509a025147ee38d76681a; clean at HEAD, no later commit at 14:40 JST). The acceptance script has no commit after 792e62e460. The five rows, the archive run (rc 0, 192/192, 0/192) and the record sha256 identity are pZ's as-run statements — the hub did not re-run them.
+- Acceptance is p4's word. pZ's R0-iii leg and R2 pre-registration continue.
+- The hub rules nothing; no run.
+2026-09-20 14:40:43 JST (hub_send.py)
