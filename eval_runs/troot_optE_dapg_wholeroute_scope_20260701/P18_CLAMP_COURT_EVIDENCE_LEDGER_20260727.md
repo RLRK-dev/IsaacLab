@@ -48385,3 +48385,14 @@ ALT-1 (downgrade) — not chosen (the human's word). ALT-2 (`agent prompt`) — 
 - ⛔ 解錠なし・run 0（当卓）・当卓は裁定しない。
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1524 — ✅ **p0 m-p0-376R（404 受領・loader 停止の原因 = emitter の bare basename／(i) 用の候補を §8.59 `797ce795c2` に用意（未着地・未実行）・推奨 (i)・p11 向け観測 = 同一は k=0 のみ）→ m-p18-405（→ p4 cc pZ p11 p6）／§1523 の bank = `021696b335`**（当卓 2026-09-20 09:35–09:37 JST 実測）
+
+- **着信**: m-p0-376R `:45718`（09:35:29）。§27 形。
+- **検証**: `797ce795c2`（author date 2026-09-20 09:35:29 JST  1 file changed, 69 insertions(+)・§8.59）= 実在。verdict pin = §1523・harness 着地版 = f5b50967f8（後続 commit 0）。原因診断・候補の静的照合・helper sha = p0 の as-read/as-run（当卓は検証外）。候補は p0 の語で未着地（p4 の word 後に着地）。
+- **hub の動き**: **m-p18-405** = m-p0-376R（`bodies/m-p18-405.txt`）→ p4 cc pZ p11 p6: held: p4 = HELD(working)・pZ = ready(empty)・p11 = HELD(working)・p6 = ready(empty)（09:36:19.441）。
+- **工程の現在位置**: 窓 R0 = p4 の word 待ち（(i) 候補着地 → pZ 再 leg／(ii) 受入）・p11 = 149 対の読み待ち。
+- **hold 中の leg（09:37・pending.py 実測・死んだ leg 9 件を含む）**: 354（p11・p6） 357（p11・p6） 358（p11） 359（p0・p11・pZ） 360（p11） 361（p11・pZ） 363（p0・p11） 364（p0・p11） 365（p0） 366（p11） 367（pZ） 368（p0・p11） 369（p0・pZ） 370（p0・pZ） 371（p11・pZ） 372（p11） 374（p0） 375（p0・p11・pZ） 376（p0・p11） 377（p0・p11） 378（p11・pZ） 379（p11・pZ） 381（p0・p11） 382（p11・p4・pZ） 383（p11・p4・p6・pZ） 384（p0・p11・p4・p6） 385（p4・pZ） 386（p11） 387（p11・pZ） 388（p4） 389（p11・pZ） 390（p11・p4・pZ） 391（p11・p4） 392（p11・pZ） 394（p4・p6・pZ） 395（p4） 396（p11・p4・p6・pZ） 397（p0・p4・p6・pZ） 398（p11・p4・p6・pZ） 399（p4） 400（p0・p11・p4） 401（p11・p4・p6・pZ） 402（p0・p11・p6・pZ） 403（p11・p4・p6・pZ） 405（p11・p4・p6・pZ）（45 id）。
+- ⛔ 解錠なし・run 0（当卓）・当卓は裁定しない。
+
+**Banked — 時刻は本節 commit の author date が正。**
