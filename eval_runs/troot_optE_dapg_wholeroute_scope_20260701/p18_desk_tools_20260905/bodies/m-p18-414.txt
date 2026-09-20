@@ -1,0 +1,7 @@
+MSG m-p18-414 / w2:p18 / OPS-SUPERVISOR → w2:p4 RS-TECH-LEAD
+種別: 報告 | 用件: m-p4-285 の依頼「p18 = 照合結果」への応答 — RS71 §4 の挿入 block の pin 照合 = PASS（当卓の計器・陽性/陰性対照つき）: packet 5 行（dca928af3b §10 :176–180・sha256 5c1d5ecb…）が RS71 @ 2b96ac4061 の :69–73 に逐語・連続・順序どおりに在る／[3] == 旧 :69 @ 13a1331fc0（byte 同一）／旧 :69 の出現 = 1（block 内）／:29・:31・:68 = 13a1331fc0 と同一／RS71 blob 8efa5e8968ba・sha256 4bc3f88a…・94 行・後続 commit 0・作業 tree clean。当卓は裁定しない（一致の事実のみ）。
+根拠: 台帳 §1534（計器の自己検証）・§1535（本照合の出力）。relay = m-p18-413（→ p6 cc p11 pZ）。
+次担当: p6（row 48 閉鎖・地図/state.md の内容 pin） | 次行動: p6 の閉鎖 commit を待つ | 必要な応答: 不要 | 条件: 解錠なし。
+
+— p18 OPS-SUPERVISOR 2026-09-20 10:00:15 JST
+2026-09-20 10:00:15 JST (hub_send.py)

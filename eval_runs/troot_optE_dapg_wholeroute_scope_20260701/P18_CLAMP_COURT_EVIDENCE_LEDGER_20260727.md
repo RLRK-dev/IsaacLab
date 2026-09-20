@@ -48490,3 +48490,15 @@ ALT-1 (downgrade) — not chosen (the human's word). ALT-2 (`agent prompt`) — 
 - ⛔ 解錠なし・run 0（当卓）。
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1535 — ✅ **p4 m-p4-285（RS71 §4 に packet v3′ を記入 `2b96ac4061`・SOMA :28 flag `9a2c6eb32f`・item 19 `49f017f08e`・1 回目 commit の index.lock 衝突を開示）→ 当卓の pin 照合 = **PASS** → m-p18-413（→ p6 cc p11 pZ）＋照合結果を p4 へ m-p18-414**（当卓 2026-09-20 09:58–10:01 JST 実測）
+
+- **着信**: m-p4-285 `:45956`（09:58:16）。§27 形。
+- **照合（§1534 の計器・`collate_rs71.py 2b96ac4061`・rc 0）**: packet sha256 `5c1d5ecbe4a876e1…` = p11 の値／[3] == RS71 :69 @ `13a1331fc0` = True／RS71 @ `2b96ac4061`: blob `8efa5e8968ba…`・sha256 `4bc3f88a34f88c71…`・wc 94 行（計器の split 数え = 95 = 末尾改行分）・packet 5 行 = :69–73 逐語・連続・順序 = True／旧 :69 の出現 = 1（block 内 [3]）／:29・:31・:68 の sha = 13a1331fc0 と同一／RS71 の後続 commit 0・作業 tree clean（RS71・SOMA）。p4 の自己検査（同じ sha・同じ行）と一致。
+- **他 pin**: `9a2c6eb32f`（09:58:16・SOMA のみ +1/−1・1,073 行）・`49f017f08e`（09:58:16・item 19）・`57959fe7cf`（p6・09:54:49・p4 の 1 回目 commit と衝突した相手）= 実在。
+- **hub の動き**: **m-p18-413** = m-p4-285（`bodies/m-p18-413.txt`・照合結果を head に明記）→ p6 cc p11 pZ: p6 = DELIVERED(fused_with_unknown_prefix)（10:00:14.699 → `2026-09-20T01:00:15.004Z`）／p11 = HELD(foreign_text_in_composer)（10:00:15.551）／pZ = HELD(fanout_stopped)（10:00:15.569）。**m-p18-414** = 照合結果（hub → p4・p4 の「必要な応答: p18 = 照合結果」への応答）: p4 = HELD(foreign_text_in_composer)（10:00:15.650）。
+- **工程の現在位置（cable 前提）**: Rs1 の一語 → p11 packet → p6 register → **p4 RS71 §4 記入（済・照合 PASS）** → p6 の地図/state.md 内容 pin・row 48 閉鎖（次）・p11 = SOMA :28 文言に異議があれば。
+- **hold 中の leg（10:01・pending.py 実測・死んだ leg 10 件を含む）**: 354（p11・p6） 357（p11・p6） 358（p11） 359（p0・p11・pZ） 360（p11） 361（p11・pZ） 363（p0・p11） 364（p0・p11） 365（p0） 366（p11） 367（pZ） 368（p0・p11） 369（p0・pZ） 370（p0・pZ） 371（p11・pZ） 372（p11） 374（p0） 375（p0・p11・pZ） 376（p0・p11） 377（p0・p11） 378（p11・pZ） 379（p11・pZ） 381（p0・p11） 382（p11・p4・pZ） 383（p11・p4・p6・pZ） 384（p0・p11・p4・p6） 385（p4・pZ） 386（p11） 387（p11・pZ） 388（p4） 389（p11・pZ） 390（p11・p4・pZ） 391（p11・p4） 392（p11・pZ） 394（p4・p6・pZ） 395（p4） 396（p11・p4・p6・pZ） 397（p0・p4・p6・pZ） 398（p11・p4・p6・pZ） 399（p4） 400（p0・p11・p4） 401（p11・p4・p6・pZ） 402（p0・p11・p6・pZ） 403（p11・p4・p6・pZ） 405（p11・p4・p6・pZ） 406（p0・p11・p6・pZ） 407（p0・p4・p6・pZ） 408（p0） 410（p11・p4・p6・pZ） 411（p4・p6・pZ） 413（p11・pZ） 414（p4）（52 id）。
+- ⛔ 解錠なし・run 0（当卓）・当卓は裁定しない（一致の事実のみ）。
+
+**Banked — 時刻は本節 commit の author date が正。**
