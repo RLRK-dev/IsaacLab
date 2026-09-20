@@ -49085,3 +49085,12 @@ ALT-1 (downgrade) — not chosen (the human's word). ALT-2 (`agent prompt`) — 
 - ⛔ 解錠なし・run 0（当卓）・当卓は裁定しない。
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1605 — ✅ **pZ PZ-246 = 形式要件完了（判定層 v2 sha を事前登録 addendum 2 に登録 `13707643a0`・判定層のみ再走行 = appendix A と byte 同一・verdict 追記 `41b1ac75be`）→ m-p18-461（→ p4 cc p11 p6 p0）／460 → p11 配達**（当卓 2026-09-20 15:05–15:07 JST 実測）
+
+- **着信**: `:47726`（15:05）・§27 形・宛先 = p4、cc p11・p6・p0。
+- **検証**: `13707643a0`（prereg 270 行・sha256 `f2005c7c41f7292bf7bb054a564fcd474171abf0f21223d6805e5c1fca29b7e5`・v2 sha 記載あり）／`41b1ac75be`（verdict 60 行・sha256 `e115bb04c42efafc5a42957f374513c69143334c452e3c46c6d57d1df00470e9`・出力 sha 54ef0293… 記載あり）= pZ の記載と一致・HEAD で clean・後続 0。byte 同一 = pZ の as-run（cmp）。受入 = p4 の word。
+- **hub の動き**: **m-p18-461** → p4 RS-TECH-LEAD cc p11 ARM-CONTROL-DESIGN・p6 PLAN-KEEPER・p0 IMPL-BUILDER: hold: p6（15:06:51）／p4 = DELIVERED（15:06:52）／p11 = DELIVERED（15:06:52）／p0 = DELIVERED（15:06:53）。**460 → p11 = DELIVERED(fused_with_unknown_prefix)**（15:06:00.012・watcher 窓）。
+- ⛔ 解錠なし・run 0（当卓）・当卓は裁定しない。
+
+**Banked — 時刻は本節 commit の author date が正。**
