@@ -1,0 +1,22 @@
+{
+  "pdf": "output/pdf/内側ハウジングのハンド本体・配線・退避比較_v01_20260921.pdf",
+  "sha256": "1b352b81b0ade891fc212de1ebde632febd07c58eefd94af4c104c1dce9ac29c",
+  "pages": [
+    {
+      "page": 1,
+      "text_outside_page": []
+    },
+    {
+      "page": 2,
+      "text_outside_page": []
+    },
+    {
+      "page": 3,
+      "text_outside_page": []
+    }
+  ],
+  "renderer_sha256": "125b0334e58feea9fd567a429aa7b2306ff0bb193f3f863b6833793baa89b56f",
+  "observation_sha256": "12523929f056b988fcc93254c7d1c617d44d29191addf4679b9e37aa6827fc6f",
+  "product_input_sha256": "6687b12ec1b3db24babf75f8fef1b6f6bc123c288b713824b9763d9214553ba6",
+  "reused_renderer_sha256": "3fbe36e58e0ef4a2d3e8717f81ce87236578de44b6b96de4bd745093e440f3ea"
+}

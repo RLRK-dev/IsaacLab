@@ -1,0 +1,1120 @@
+{
+  "config": {
+    "status": "comparison_only_not_selected_hardware_or_robot_motion",
+    "body_jaw_datum_world_z_m": 0.09,
+    "stem_width_m": 0.002,
+    "mounting_shoe_thickness_m": 0.003,
+    "radial_openings_each_m": [
+      0.002,
+      0.004
+    ],
+    "rearward_comparison_m": 0.008,
+    "upward_comparison_m": 0.05,
+    "strict_interior_numeric_inset_m": 1e-09,
+    "mapping_numeric_epsilon_m": 1e-07,
+    "whole_pge_cad": false,
+    "gripper_electrical_lead_or_robot_adapter_included": false,
+    "product_wire_shapes_completed": false
+  },
+  "bays": [
+    {
+      "id": "I01",
+      "key": "A",
+      "mapping": {
+        "inner_origin_world_m": [
+          -0.08590000122785568,
+          -0.11110000312328339,
+          0.04600000148639083
+        ],
+        "inner_rigid_mapping_residual_m": 3.841705620288849e-09,
+        "body_jaw_datum_world_m": [
+          -0.08590000122785568,
+          -0.06980000312328338,
+          0.09
+        ],
+        "jaw_gap_closed_m": 0.006750000417232517,
+        "stem_vertical_extent_m": 0.04399999851360917
+      },
+      "comparisons": {
+        "closed": {
+          "all_target_features": 92,
+          "aabb_candidate_features": 2,
+          "candidate_records": [
+            {
+              "feature_id": "P01",
+              "aabb_candidate_parts": 212,
+              "unique_source_triangles_with_positive_clipped_area": 0,
+              "summed_clipped_surface_area_m2": 0.0,
+              "clipped_surface_area_by_tip_part_m2": {},
+              "clipped_points_bounds_m": null,
+              "meaning": "Saved mesh surface inside/on closed trial-tip volumes; not loaded contact area."
+            },
+            {
+              "feature_id": "I01",
+              "aabb_candidate_parts": 212,
+              "unique_source_triangles_with_positive_clipped_area": 0,
+              "summed_clipped_surface_area_m2": 0.0,
+              "clipped_surface_area_by_tip_part_m2": {},
+              "clipped_points_bounds_m": null,
+              "meaning": "Saved mesh surface inside/on closed trial-tip volumes; not loaded contact area."
+            }
+          ],
+          "positive_surface_features": []
+        },
+        "open_2_sweep": {
+          "all_target_features": 92,
+          "aabb_candidate_features": 2,
+          "candidate_records": [
+            {
+              "feature_id": "P01",
+              "aabb_candidate_parts": 212,
+              "unique_source_triangles_with_positive_clipped_area": 0,
+              "summed_clipped_surface_area_m2": 0.0,
+              "clipped_surface_area_by_tip_part_m2": {},
+              "clipped_points_bounds_m": null,
+              "meaning": "Saved mesh surface inside/on closed trial-tip volumes; not loaded contact area."
+            },
+            {
+              "feature_id": "I01",
+              "aabb_candidate_parts": 212,
+              "unique_source_triangles_with_positive_clipped_area": 0,
+              "summed_clipped_surface_area_m2": 0.0,
+              "clipped_surface_area_by_tip_part_m2": {},
+              "clipped_points_bounds_m": null,
+              "meaning": "Saved mesh surface inside/on closed trial-tip volumes; not loaded contact area."
+            }
+          ],
+          "positive_surface_features": []
+        },
+        "back_8_after_open_2_sweep": {
+          "all_target_features": 92,
+          "aabb_candidate_features": 2,
+          "candidate_records": [
+            {
+              "feature_id": "P01",
+              "aabb_candidate_parts": 212,
+              "unique_source_triangles_with_positive_clipped_area": 0,
+              "summed_clipped_surface_area_m2": 0.0,
+              "clipped_surface_area_by_tip_part_m2": {},
+              "clipped_points_bounds_m": null,
+              "meaning": "Saved mesh surface inside/on closed trial-tip volumes; not loaded contact area."
+            },
+            {
+              "feature_id": "I01",
+              "aabb_candidate_parts": 192,
+              "unique_source_triangles_with_positive_clipped_area": 0,
+              "summed_clipped_surface_area_m2": 0.0,
+              "clipped_surface_area_by_tip_part_m2": {},
+              "clipped_points_bounds_m": null,
+              "meaning": "Saved mesh surface inside/on closed trial-tip volumes; not loaded contact area."
+            }
+          ],
+          "positive_surface_features": []
+        },
+        "lift_50_after_open_2_sweep": {
+          "all_target_features": 92,
+          "aabb_candidate_features": 2,
+          "candidate_records": [
+            {
+              "feature_id": "P01",
+              "aabb_candidate_parts": 212,
+              "unique_source_triangles_with_positive_clipped_area": 0,
+              "summed_clipped_surface_area_m2": 0.0,
+              "clipped_surface_area_by_tip_part_m2": {},
+              "clipped_points_bounds_m": null,
+              "meaning": "Saved mesh surface inside/on closed trial-tip volumes; not loaded contact area."
+            },
+            {
+              "feature_id": "I01",
+              "aabb_candidate_parts": 192,
+              "unique_source_triangles_with_positive_clipped_area": 4897,
+              "summed_clipped_surface_area_m2": 0.00013820119500979197,
+              "clipped_surface_area_by_tip_part_m2": {
+                "tip_pad_000": 2.945905554517886e-05,
+                "tip_carrier_035": 3.964154195971698e-05,
+                "tip_pad_105": 2.9459055545178913e-05,
+                "tip_carrier_140": 3.9641541959717124e-05
+              },
+              "clipped_points_bounds_m": [
+                [
+                  -0.09427499771118164,
+                  -0.07200000212328339,
+                  0.04267500340938568
+                ],
+                [
+                  -0.07752500474452972,
+                  -0.06850000470876694,
+                  0.04932500049471855
+                ]
+              ],
+              "meaning": "Saved mesh surface inside/on closed trial-tip volumes; not loaded contact area."
+            }
+          ],
+          "positive_surface_features": [
+            "I01"
+          ]
+        },
+        "open_4_sweep": {
+          "all_target_features": 92,
+          "aabb_candidate_features": 2,
+          "candidate_records": [
+            {
+              "feature_id": "P01",
+              "aabb_candidate_parts": 212,
+              "unique_source_triangles_with_positive_clipped_area": 0,
+              "summed_clipped_surface_area_m2": 0.0,
+              "clipped_surface_area_by_tip_part_m2": {},
+              "clipped_points_bounds_m": null,
+              "meaning": "Saved mesh surface inside/on closed trial-tip volumes; not loaded contact area."
+            },
+            {
+              "feature_id": "I01",
+              "aabb_candidate_parts": 212,
+              "unique_source_triangles_with_positive_clipped_area": 0,
+              "summed_clipped_surface_area_m2": 0.0,
+              "clipped_surface_area_by_tip_part_m2": {},
+              "clipped_points_bounds_m": null,
+              "meaning": "Saved mesh surface inside/on closed trial-tip volumes; not loaded contact area."
+            }
+          ],
+          "positive_surface_features": []
+        },
+        "lift_50_after_open_4_sweep": {
+          "all_target_features": 92,
+          "aabb_candidate_features": 2,
+          "candidate_records": [
+            {
+              "feature_id": "P01",
+              "aabb_candidate_parts": 212,
+              "unique_source_triangles_with_positive_clipped_area": 0,
+              "summed_clipped_surface_area_m2": 0.0,
+              "clipped_surface_area_by_tip_part_m2": {},
+              "clipped_points_bounds_m": null,
+              "meaning": "Saved mesh surface inside/on closed trial-tip volumes; not loaded contact area."
+            },
+            {
+              "feature_id": "I01",
+              "aabb_candidate_parts": 12,
+              "unique_source_triangles_with_positive_clipped_area": 0,
+              "summed_clipped_surface_area_m2": 0.0,
+              "clipped_surface_area_by_tip_part_m2": {},
+              "clipped_points_bounds_m": null,
+              "meaning": "Saved mesh surface inside/on closed trial-tip volumes; not loaded contact area."
+            }
+          ],
+          "positive_surface_features": []
+        }
+      }
+    },
+    {
+      "id": "I02",
+      "key": "D",
+      "mapping": {
+        "inner_origin_world_m": [
+          -0.052000001072883606,
+          -0.11110000312328339,
+          0.04600000148639083
+        ],
+        "inner_rigid_mapping_residual_m": 3.841705620288849e-09,
+        "body_jaw_datum_world_m": [
+          -0.052000001072883606,
+          -0.06980000312328338,
+          0.09
+        ],
+        "jaw_gap_closed_m": 0.006750000417232517,
+        "stem_vertical_extent_m": 0.04399999851360917
+      },
+      "comparisons": {
+        "closed": {
+          "all_target_features": 92,
+          "aabb_candidate_features": 2,
+          "candidate_records": [
+            {
+              "feature_id": "P01",
+              "aabb_candidate_parts": 212,
+              "unique_source_triangles_with_positive_clipped_area": 0,
+              "summed_clipped_surface_area_m2": 0.0,
+              "clipped_surface_area_by_tip_part_m2": {},
+              "clipped_points_bounds_m": null,
+              "meaning": "Saved mesh surface inside/on closed trial-tip volumes; not loaded contact area."
+            },
+            {
+              "feature_id": "I02",
+              "aabb_candidate_parts": 212,
+              "unique_source_triangles_with_positive_clipped_area": 0,
+              "summed_clipped_surface_area_m2": 0.0,
+              "clipped_surface_area_by_tip_part_m2": {},
+              "clipped_points_bounds_m": null,
+              "meaning": "Saved mesh surface inside/on closed trial-tip volumes; not loaded contact area."
+            }
+          ],
+          "positive_surface_features": []
+        },
+        "open_2_sweep": {
+          "all_target_features": 92,
+          "aabb_candidate_features": 2,
+          "candidate_records": [
+            {
+              "feature_id": "P01",
+              "aabb_candidate_parts": 212,
+              "unique_source_triangles_with_positive_clipped_area": 0,
+              "summed_clipped_surface_area_m2": 0.0,
+              "clipped_surface_area_by_tip_part_m2": {},
+              "clipped_points_bounds_m": null,
+              "meaning": "Saved mesh surface inside/on closed trial-tip volumes; not loaded contact area."
+            },
+            {
+              "feature_id": "I02",
+              "aabb_candidate_parts": 212,
+              "unique_source_triangles_with_positive_clipped_area": 0,
+              "summed_clipped_surface_area_m2": 0.0,
+              "clipped_surface_area_by_tip_part_m2": {},
+              "clipped_points_bounds_m": null,
+              "meaning": "Saved mesh surface inside/on closed trial-tip volumes; not loaded contact area."
+            }
+          ],
+          "positive_surface_features": []
+        },
+        "back_8_after_open_2_sweep": {
+          "all_target_features": 92,
+          "aabb_candidate_features": 2,
+          "candidate_records": [
+            {
+              "feature_id": "P01",
+              "aabb_candidate_parts": 212,
+              "unique_source_triangles_with_positive_clipped_area": 0,
+              "summed_clipped_surface_area_m2": 0.0,
+              "clipped_surface_area_by_tip_part_m2": {},
+              "clipped_points_bounds_m": null,
+              "meaning": "Saved mesh surface inside/on closed trial-tip volumes; not loaded contact area."
+            },
+            {
+              "feature_id": "I02",
+              "aabb_candidate_parts": 192,
+              "unique_source_triangles_with_positive_clipped_area": 0,
+              "summed_clipped_surface_area_m2": 0.0,
+              "clipped_surface_area_by_tip_part_m2": {},
+              "clipped_points_bounds_m": null,
+              "meaning": "Saved mesh surface inside/on closed trial-tip volumes; not loaded contact area."
+            }
+          ],
+          "positive_surface_features": []
+        },
+        "lift_50_after_open_2_sweep": {
+          "all_target_features": 92,
+          "aabb_candidate_features": 2,
+          "candidate_records": [
+            {
+              "feature_id": "P01",
+              "aabb_candidate_parts": 212,
+              "unique_source_triangles_with_positive_clipped_area": 0,
+              "summed_clipped_surface_area_m2": 0.0,
+              "clipped_surface_area_by_tip_part_m2": {},
+              "clipped_points_bounds_m": null,
+              "meaning": "Saved mesh surface inside/on closed trial-tip volumes; not loaded contact area."
+            },
+            {
+              "feature_id": "I02",
+              "aabb_candidate_parts": 192,
+              "unique_source_triangles_with_positive_clipped_area": 4829,
+              "summed_clipped_surface_area_m2": 0.00013820118770922022,
+              "clipped_surface_area_by_tip_part_m2": {
+                "tip_pad_000": 2.945905604539592e-05,
+                "tip_carrier_035": 3.96415378092143e-05,
+                "tip_pad_105": 2.9459056045395914e-05,
+                "tip_carrier_140": 3.964153780921431e-05
+              },
+              "clipped_points_bounds_m": [
+                [
+                  -0.06037500128149986,
+                  -0.07200000212328339,
+                  0.04267500340938568
+                ],
+                [
+                  -0.04362500086426735,
+                  -0.06850000470876694,
+                  0.04932500049471855
+                ]
+              ],
+              "meaning": "Saved mesh surface inside/on closed trial-tip volumes; not loaded contact area."
+            }
+          ],
+          "positive_surface_features": [
+            "I02"
+          ]
+        },
+        "open_4_sweep": {
+          "all_target_features": 92,
+          "aabb_candidate_features": 2,
+          "candidate_records": [
+            {
+              "feature_id": "P01",
+              "aabb_candidate_parts": 212,
+              "unique_source_triangles_with_positive_clipped_area": 0,
+              "summed_clipped_surface_area_m2": 0.0,
+              "clipped_surface_area_by_tip_part_m2": {},
+              "clipped_points_bounds_m": null,
+              "meaning": "Saved mesh surface inside/on closed trial-tip volumes; not loaded contact area."
+            },
+            {
+              "feature_id": "I02",
+              "aabb_candidate_parts": 212,
+              "unique_source_triangles_with_positive_clipped_area": 0,
+              "summed_clipped_surface_area_m2": 0.0,
+              "clipped_surface_area_by_tip_part_m2": {},
+              "clipped_points_bounds_m": null,
+              "meaning": "Saved mesh surface inside/on closed trial-tip volumes; not loaded contact area."
+            }
+          ],
+          "positive_surface_features": []
+        },
+        "lift_50_after_open_4_sweep": {
+          "all_target_features": 92,
+          "aabb_candidate_features": 2,
+          "candidate_records": [
+            {
+              "feature_id": "P01",
+              "aabb_candidate_parts": 212,
+              "unique_source_triangles_with_positive_clipped_area": 0,
+              "summed_clipped_surface_area_m2": 0.0,
+              "clipped_surface_area_by_tip_part_m2": {},
+              "clipped_points_bounds_m": null,
+              "meaning": "Saved mesh surface inside/on closed trial-tip volumes; not loaded contact area."
+            },
+            {
+              "feature_id": "I02",
+              "aabb_candidate_parts": 12,
+              "unique_source_triangles_with_positive_clipped_area": 0,
+              "summed_clipped_surface_area_m2": 0.0,
+              "clipped_surface_area_by_tip_part_m2": {},
+              "clipped_points_bounds_m": null,
+              "meaning": "Saved mesh surface inside/on closed trial-tip volumes; not loaded contact area."
+            }
+          ],
+          "positive_surface_features": []
+        }
+      }
+    },
+    {
+      "id": "I03",
+      "key": "E",
+      "mapping": {
+        "inner_origin_world_m": [
+          -0.01810000091791153,
+          -0.11110000312328339,
+          0.04600000148639083
+        ],
+        "inner_rigid_mapping_residual_m": 3.841705620288849e-09,
+        "body_jaw_datum_world_m": [
+          -0.01810000091791153,
+          -0.06980000312328338,
+          0.09
+        ],
+        "jaw_gap_closed_m": 0.00675000041723251,
+        "stem_vertical_extent_m": 0.04399999851360917
+      },
+      "comparisons": {
+        "closed": {
+          "all_target_features": 92,
+          "aabb_candidate_features": 2,
+          "candidate_records": [
+            {
+              "feature_id": "P01",
+              "aabb_candidate_parts": 212,
+              "unique_source_triangles_with_positive_clipped_area": 0,
+              "summed_clipped_surface_area_m2": 0.0,
+              "clipped_surface_area_by_tip_part_m2": {},
+              "clipped_points_bounds_m": null,
+              "meaning": "Saved mesh surface inside/on closed trial-tip volumes; not loaded contact area."
+            },
+            {
+              "feature_id": "I03",
+              "aabb_candidate_parts": 212,
+              "unique_source_triangles_with_positive_clipped_area": 0,
+              "summed_clipped_surface_area_m2": 0.0,
+              "clipped_surface_area_by_tip_part_m2": {},
+              "clipped_points_bounds_m": null,
+              "meaning": "Saved mesh surface inside/on closed trial-tip volumes; not loaded contact area."
+            }
+          ],
+          "positive_surface_features": []
+        },
+        "open_2_sweep": {
+          "all_target_features": 92,
+          "aabb_candidate_features": 2,
+          "candidate_records": [
+            {
+              "feature_id": "P01",
+              "aabb_candidate_parts": 212,
+              "unique_source_triangles_with_positive_clipped_area": 0,
+              "summed_clipped_surface_area_m2": 0.0,
+              "clipped_surface_area_by_tip_part_m2": {},
+              "clipped_points_bounds_m": null,
+              "meaning": "Saved mesh surface inside/on closed trial-tip volumes; not loaded contact area."
+            },
+            {
+              "feature_id": "I03",
+              "aabb_candidate_parts": 212,
+              "unique_source_triangles_with_positive_clipped_area": 0,
+              "summed_clipped_surface_area_m2": 0.0,
+              "clipped_surface_area_by_tip_part_m2": {},
+              "clipped_points_bounds_m": null,
+              "meaning": "Saved mesh surface inside/on closed trial-tip volumes; not loaded contact area."
+            }
+          ],
+          "positive_surface_features": []
+        },
+        "back_8_after_open_2_sweep": {
+          "all_target_features": 92,
+          "aabb_candidate_features": 2,
+          "candidate_records": [
+            {
+              "feature_id": "P01",
+              "aabb_candidate_parts": 212,
+              "unique_source_triangles_with_positive_clipped_area": 0,
+              "summed_clipped_surface_area_m2": 0.0,
+              "clipped_surface_area_by_tip_part_m2": {},
+              "clipped_points_bounds_m": null,
+              "meaning": "Saved mesh surface inside/on closed trial-tip volumes; not loaded contact area."
+            },
+            {
+              "feature_id": "I03",
+              "aabb_candidate_parts": 192,
+              "unique_source_triangles_with_positive_clipped_area": 0,
+              "summed_clipped_surface_area_m2": 0.0,
+              "clipped_surface_area_by_tip_part_m2": {},
+              "clipped_points_bounds_m": null,
+              "meaning": "Saved mesh surface inside/on closed trial-tip volumes; not loaded contact area."
+            }
+          ],
+          "positive_surface_features": []
+        },
+        "lift_50_after_open_2_sweep": {
+          "all_target_features": 92,
+          "aabb_candidate_features": 2,
+          "candidate_records": [
+            {
+              "feature_id": "P01",
+              "aabb_candidate_parts": 212,
+              "unique_source_triangles_with_positive_clipped_area": 0,
+              "summed_clipped_surface_area_m2": 0.0,
+              "clipped_surface_area_by_tip_part_m2": {},
+              "clipped_points_bounds_m": null,
+              "meaning": "Saved mesh surface inside/on closed trial-tip volumes; not loaded contact area."
+            },
+            {
+              "feature_id": "I03",
+              "aabb_candidate_parts": 192,
+              "unique_source_triangles_with_positive_clipped_area": 4829,
+              "summed_clipped_surface_area_m2": 0.00013820118534304475,
+              "clipped_surface_area_by_tip_part_m2": {
+                "tip_pad_000": 2.9459054970945934e-05,
+                "tip_carrier_035": 3.964153569794039e-05,
+                "tip_pad_105": 2.945905690845806e-05,
+                "tip_carrier_140": 3.9641537765699764e-05
+              },
+              "clipped_points_bounds_m": [
+                [
+                  -0.026475001126527786,
+                  -0.07200000212328339,
+                  0.04267500340938568
+                ],
+                [
+                  -0.009725000709295273,
+                  -0.06850000470876694,
+                  0.04932500049471855
+                ]
+              ],
+              "meaning": "Saved mesh surface inside/on closed trial-tip volumes; not loaded contact area."
+            }
+          ],
+          "positive_surface_features": [
+            "I03"
+          ]
+        },
+        "open_4_sweep": {
+          "all_target_features": 92,
+          "aabb_candidate_features": 2,
+          "candidate_records": [
+            {
+              "feature_id": "P01",
+              "aabb_candidate_parts": 212,
+              "unique_source_triangles_with_positive_clipped_area": 0,
+              "summed_clipped_surface_area_m2": 0.0,
+              "clipped_surface_area_by_tip_part_m2": {},
+              "clipped_points_bounds_m": null,
+              "meaning": "Saved mesh surface inside/on closed trial-tip volumes; not loaded contact area."
+            },
+            {
+              "feature_id": "I03",
+              "aabb_candidate_parts": 212,
+              "unique_source_triangles_with_positive_clipped_area": 0,
+              "summed_clipped_surface_area_m2": 0.0,
+              "clipped_surface_area_by_tip_part_m2": {},
+              "clipped_points_bounds_m": null,
+              "meaning": "Saved mesh surface inside/on closed trial-tip volumes; not loaded contact area."
+            }
+          ],
+          "positive_surface_features": []
+        },
+        "lift_50_after_open_4_sweep": {
+          "all_target_features": 92,
+          "aabb_candidate_features": 2,
+          "candidate_records": [
+            {
+              "feature_id": "P01",
+              "aabb_candidate_parts": 212,
+              "unique_source_triangles_with_positive_clipped_area": 0,
+              "summed_clipped_surface_area_m2": 0.0,
+              "clipped_surface_area_by_tip_part_m2": {},
+              "clipped_points_bounds_m": null,
+              "meaning": "Saved mesh surface inside/on closed trial-tip volumes; not loaded contact area."
+            },
+            {
+              "feature_id": "I03",
+              "aabb_candidate_parts": 12,
+              "unique_source_triangles_with_positive_clipped_area": 0,
+              "summed_clipped_surface_area_m2": 0.0,
+              "clipped_surface_area_by_tip_part_m2": {},
+              "clipped_points_bounds_m": null,
+              "meaning": "Saved mesh surface inside/on closed trial-tip volumes; not loaded contact area."
+            }
+          ],
+          "positive_surface_features": []
+        }
+      }
+    },
+    {
+      "id": "I04",
+      "key": "D",
+      "mapping": {
+        "inner_origin_world_m": [
+          0.05505000054836273,
+          -0.11110000312328339,
+          0.04600000148639083
+        ],
+        "inner_rigid_mapping_residual_m": 3.841705620288849e-09,
+        "body_jaw_datum_world_m": [
+          0.05505000054836273,
+          -0.06980000312328338,
+          0.09
+        ],
+        "jaw_gap_closed_m": 0.006750000417232517,
+        "stem_vertical_extent_m": 0.04399999851360917
+      },
+      "comparisons": {
+        "closed": {
+          "all_target_features": 92,
+          "aabb_candidate_features": 2,
+          "candidate_records": [
+            {
+              "feature_id": "P01",
+              "aabb_candidate_parts": 212,
+              "unique_source_triangles_with_positive_clipped_area": 0,
+              "summed_clipped_surface_area_m2": 0.0,
+              "clipped_surface_area_by_tip_part_m2": {},
+              "clipped_points_bounds_m": null,
+              "meaning": "Saved mesh surface inside/on closed trial-tip volumes; not loaded contact area."
+            },
+            {
+              "feature_id": "I04",
+              "aabb_candidate_parts": 212,
+              "unique_source_triangles_with_positive_clipped_area": 0,
+              "summed_clipped_surface_area_m2": 0.0,
+              "clipped_surface_area_by_tip_part_m2": {},
+              "clipped_points_bounds_m": null,
+              "meaning": "Saved mesh surface inside/on closed trial-tip volumes; not loaded contact area."
+            }
+          ],
+          "positive_surface_features": []
+        },
+        "open_2_sweep": {
+          "all_target_features": 92,
+          "aabb_candidate_features": 2,
+          "candidate_records": [
+            {
+              "feature_id": "P01",
+              "aabb_candidate_parts": 212,
+              "unique_source_triangles_with_positive_clipped_area": 0,
+              "summed_clipped_surface_area_m2": 0.0,
+              "clipped_surface_area_by_tip_part_m2": {},
+              "clipped_points_bounds_m": null,
+              "meaning": "Saved mesh surface inside/on closed trial-tip volumes; not loaded contact area."
+            },
+            {
+              "feature_id": "I04",
+              "aabb_candidate_parts": 212,
+              "unique_source_triangles_with_positive_clipped_area": 0,
+              "summed_clipped_surface_area_m2": 0.0,
+              "clipped_surface_area_by_tip_part_m2": {},
+              "clipped_points_bounds_m": null,
+              "meaning": "Saved mesh surface inside/on closed trial-tip volumes; not loaded contact area."
+            }
+          ],
+          "positive_surface_features": []
+        },
+        "back_8_after_open_2_sweep": {
+          "all_target_features": 92,
+          "aabb_candidate_features": 3,
+          "candidate_records": [
+            {
+              "feature_id": "P01",
+              "aabb_candidate_parts": 212,
+              "unique_source_triangles_with_positive_clipped_area": 0,
+              "summed_clipped_surface_area_m2": 0.0,
+              "clipped_surface_area_by_tip_part_m2": {},
+              "clipped_points_bounds_m": null,
+              "meaning": "Saved mesh surface inside/on closed trial-tip volumes; not loaded contact area."
+            },
+            {
+              "feature_id": "I04",
+              "aabb_candidate_parts": 192,
+              "unique_source_triangles_with_positive_clipped_area": 0,
+              "summed_clipped_surface_area_m2": 0.0,
+              "clipped_surface_area_by_tip_part_m2": {},
+              "clipped_points_bounds_m": null,
+              "meaning": "Saved mesh surface inside/on closed trial-tip volumes; not loaded contact area."
+            },
+            {
+              "feature_id": "WI41",
+              "aabb_candidate_parts": 4,
+              "unique_source_triangles_with_positive_clipped_area": 269,
+              "summed_clipped_surface_area_m2": 5.5115249674421474e-05,
+              "clipped_surface_area_by_tip_part_m2": {
+                "tip_pad_017": 7.934866030437744e-06,
+                "tip_carrier_052": 2.237595862629546e-05,
+                "tip_thrust_087": 1.3616441313961531e-05,
+                "stem_-1": 1.1187983703726718e-05
+              },
+              "clipped_points_bounds_m": [
+                [
+                  0.04167500133974647,
+                  -0.06378189474344254,
+                  0.04450000077486038
+                ],
+                [
+                  0.04514313489198685,
+                  -0.059600004123283375,
+                  0.04749999940395355
+                ]
+              ],
+              "meaning": "Saved mesh surface inside/on closed trial-tip volumes; not loaded contact area."
+            }
+          ],
+          "positive_surface_features": [
+            "WI41"
+          ]
+        },
+        "lift_50_after_open_2_sweep": {
+          "all_target_features": 92,
+          "aabb_candidate_features": 2,
+          "candidate_records": [
+            {
+              "feature_id": "P01",
+              "aabb_candidate_parts": 212,
+              "unique_source_triangles_with_positive_clipped_area": 0,
+              "summed_clipped_surface_area_m2": 0.0,
+              "clipped_surface_area_by_tip_part_m2": {},
+              "clipped_points_bounds_m": null,
+              "meaning": "Saved mesh surface inside/on closed trial-tip volumes; not loaded contact area."
+            },
+            {
+              "feature_id": "I04",
+              "aabb_candidate_parts": 192,
+              "unique_source_triangles_with_positive_clipped_area": 4829,
+              "summed_clipped_surface_area_m2": 0.00013820119783357958,
+              "clipped_surface_area_by_tip_part_m2": {
+                "tip_pad_000": 2.945905604539592e-05,
+                "tip_carrier_035": 3.96415378092143e-05,
+                "tip_pad_105": 2.945905941936755e-05,
+                "tip_carrier_140": 3.9641544559602254e-05
+              },
+              "clipped_points_bounds_m": [
+                [
+                  0.046675000339746475,
+                  -0.07200000212328339,
+                  0.04267500340938568
+                ],
+                [
+                  0.06342500448226929,
+                  -0.06850000470876694,
+                  0.04932500049471855
+                ]
+              ],
+              "meaning": "Saved mesh surface inside/on closed trial-tip volumes; not loaded contact area."
+            }
+          ],
+          "positive_surface_features": [
+            "I04"
+          ]
+        },
+        "open_4_sweep": {
+          "all_target_features": 92,
+          "aabb_candidate_features": 2,
+          "candidate_records": [
+            {
+              "feature_id": "P01",
+              "aabb_candidate_parts": 212,
+              "unique_source_triangles_with_positive_clipped_area": 0,
+              "summed_clipped_surface_area_m2": 0.0,
+              "clipped_surface_area_by_tip_part_m2": {},
+              "clipped_points_bounds_m": null,
+              "meaning": "Saved mesh surface inside/on closed trial-tip volumes; not loaded contact area."
+            },
+            {
+              "feature_id": "I04",
+              "aabb_candidate_parts": 212,
+              "unique_source_triangles_with_positive_clipped_area": 0,
+              "summed_clipped_surface_area_m2": 0.0,
+              "clipped_surface_area_by_tip_part_m2": {},
+              "clipped_points_bounds_m": null,
+              "meaning": "Saved mesh surface inside/on closed trial-tip volumes; not loaded contact area."
+            }
+          ],
+          "positive_surface_features": []
+        },
+        "lift_50_after_open_4_sweep": {
+          "all_target_features": 92,
+          "aabb_candidate_features": 2,
+          "candidate_records": [
+            {
+              "feature_id": "P01",
+              "aabb_candidate_parts": 212,
+              "unique_source_triangles_with_positive_clipped_area": 0,
+              "summed_clipped_surface_area_m2": 0.0,
+              "clipped_surface_area_by_tip_part_m2": {},
+              "clipped_points_bounds_m": null,
+              "meaning": "Saved mesh surface inside/on closed trial-tip volumes; not loaded contact area."
+            },
+            {
+              "feature_id": "I04",
+              "aabb_candidate_parts": 12,
+              "unique_source_triangles_with_positive_clipped_area": 0,
+              "summed_clipped_surface_area_m2": 0.0,
+              "clipped_surface_area_by_tip_part_m2": {},
+              "clipped_points_bounds_m": null,
+              "meaning": "Saved mesh surface inside/on closed trial-tip volumes; not loaded contact area."
+            }
+          ],
+          "positive_surface_features": []
+        }
+      }
+    },
+    {
+      "id": "I05",
+      "key": "F",
+      "mapping": {
+        "inner_origin_world_m": [
+          0.08895000070333481,
+          -0.11110000312328339,
+          0.04600000148639083
+        ],
+        "inner_rigid_mapping_residual_m": 3.841705620288849e-09,
+        "body_jaw_datum_world_m": [
+          0.08895000070333481,
+          -0.06980000312328338,
+          0.09
+        ],
+        "jaw_gap_closed_m": 0.006750000417232517,
+        "stem_vertical_extent_m": 0.04399999851360917
+      },
+      "comparisons": {
+        "closed": {
+          "all_target_features": 92,
+          "aabb_candidate_features": 2,
+          "candidate_records": [
+            {
+              "feature_id": "P01",
+              "aabb_candidate_parts": 212,
+              "unique_source_triangles_with_positive_clipped_area": 0,
+              "summed_clipped_surface_area_m2": 0.0,
+              "clipped_surface_area_by_tip_part_m2": {},
+              "clipped_points_bounds_m": null,
+              "meaning": "Saved mesh surface inside/on closed trial-tip volumes; not loaded contact area."
+            },
+            {
+              "feature_id": "I05",
+              "aabb_candidate_parts": 212,
+              "unique_source_triangles_with_positive_clipped_area": 0,
+              "summed_clipped_surface_area_m2": 0.0,
+              "clipped_surface_area_by_tip_part_m2": {},
+              "clipped_points_bounds_m": null,
+              "meaning": "Saved mesh surface inside/on closed trial-tip volumes; not loaded contact area."
+            }
+          ],
+          "positive_surface_features": []
+        },
+        "open_2_sweep": {
+          "all_target_features": 92,
+          "aabb_candidate_features": 2,
+          "candidate_records": [
+            {
+              "feature_id": "P01",
+              "aabb_candidate_parts": 212,
+              "unique_source_triangles_with_positive_clipped_area": 0,
+              "summed_clipped_surface_area_m2": 0.0,
+              "clipped_surface_area_by_tip_part_m2": {},
+              "clipped_points_bounds_m": null,
+              "meaning": "Saved mesh surface inside/on closed trial-tip volumes; not loaded contact area."
+            },
+            {
+              "feature_id": "I05",
+              "aabb_candidate_parts": 212,
+              "unique_source_triangles_with_positive_clipped_area": 0,
+              "summed_clipped_surface_area_m2": 0.0,
+              "clipped_surface_area_by_tip_part_m2": {},
+              "clipped_points_bounds_m": null,
+              "meaning": "Saved mesh surface inside/on closed trial-tip volumes; not loaded contact area."
+            }
+          ],
+          "positive_surface_features": []
+        },
+        "back_8_after_open_2_sweep": {
+          "all_target_features": 92,
+          "aabb_candidate_features": 3,
+          "candidate_records": [
+            {
+              "feature_id": "P01",
+              "aabb_candidate_parts": 212,
+              "unique_source_triangles_with_positive_clipped_area": 0,
+              "summed_clipped_surface_area_m2": 0.0,
+              "clipped_surface_area_by_tip_part_m2": {},
+              "clipped_points_bounds_m": null,
+              "meaning": "Saved mesh surface inside/on closed trial-tip volumes; not loaded contact area."
+            },
+            {
+              "feature_id": "I05",
+              "aabb_candidate_parts": 192,
+              "unique_source_triangles_with_positive_clipped_area": 0,
+              "summed_clipped_surface_area_m2": 0.0,
+              "clipped_surface_area_by_tip_part_m2": {},
+              "clipped_points_bounds_m": null,
+              "meaning": "Saved mesh surface inside/on closed trial-tip volumes; not loaded contact area."
+            },
+            {
+              "feature_id": "WI51",
+              "aabb_candidate_parts": 2,
+              "unique_source_triangles_with_positive_clipped_area": 92,
+              "summed_clipped_surface_area_m2": 1.985876786577647e-05,
+              "clipped_surface_area_by_tip_part_m2": {
+                "tip_carrier_052": 1.3239185589002755e-05,
+                "stem_-1": 6.619582276773707e-06
+              },
+              "clipped_points_bounds_m": [
+                [
+                  0.07557500149471855,
+                  -0.06329317358404773,
+                  0.0446544451273433
+                ],
+                [
+                  0.07649635523557663,
+                  -0.059600004123283375,
+                  0.04734555505147064
+                ]
+              ],
+              "meaning": "Saved mesh surface inside/on closed trial-tip volumes; not loaded contact area."
+            }
+          ],
+          "positive_surface_features": [
+            "WI51"
+          ]
+        },
+        "lift_50_after_open_2_sweep": {
+          "all_target_features": 92,
+          "aabb_candidate_features": 2,
+          "candidate_records": [
+            {
+              "feature_id": "P01",
+              "aabb_candidate_parts": 212,
+              "unique_source_triangles_with_positive_clipped_area": 0,
+              "summed_clipped_surface_area_m2": 0.0,
+              "clipped_surface_area_by_tip_part_m2": {},
+              "clipped_points_bounds_m": null,
+              "meaning": "Saved mesh surface inside/on closed trial-tip volumes; not loaded contact area."
+            },
+            {
+              "feature_id": "I05",
+              "aabb_candidate_parts": 192,
+              "unique_source_triangles_with_positive_clipped_area": 4897,
+              "summed_clipped_surface_area_m2": 0.00013820119500979197,
+              "clipped_surface_area_by_tip_part_m2": {
+                "tip_pad_000": 2.945905554517886e-05,
+                "tip_carrier_035": 3.964154195971698e-05,
+                "tip_pad_105": 2.9459055545178913e-05,
+                "tip_carrier_140": 3.9641541959717124e-05
+              },
+              "clipped_points_bounds_m": [
+                [
+                  0.08057500422000885,
+                  -0.07200000212328339,
+                  0.04267500340938568
+                ],
+                [
+                  0.09732499718666077,
+                  -0.06850000470876694,
+                  0.04932500049471855
+                ]
+              ],
+              "meaning": "Saved mesh surface inside/on closed trial-tip volumes; not loaded contact area."
+            }
+          ],
+          "positive_surface_features": [
+            "I05"
+          ]
+        },
+        "open_4_sweep": {
+          "all_target_features": 92,
+          "aabb_candidate_features": 2,
+          "candidate_records": [
+            {
+              "feature_id": "P01",
+              "aabb_candidate_parts": 212,
+              "unique_source_triangles_with_positive_clipped_area": 0,
+              "summed_clipped_surface_area_m2": 0.0,
+              "clipped_surface_area_by_tip_part_m2": {},
+              "clipped_points_bounds_m": null,
+              "meaning": "Saved mesh surface inside/on closed trial-tip volumes; not loaded contact area."
+            },
+            {
+              "feature_id": "I05",
+              "aabb_candidate_parts": 212,
+              "unique_source_triangles_with_positive_clipped_area": 0,
+              "summed_clipped_surface_area_m2": 0.0,
+              "clipped_surface_area_by_tip_part_m2": {},
+              "clipped_points_bounds_m": null,
+              "meaning": "Saved mesh surface inside/on closed trial-tip volumes; not loaded contact area."
+            }
+          ],
+          "positive_surface_features": []
+        },
+        "lift_50_after_open_4_sweep": {
+          "all_target_features": 92,
+          "aabb_candidate_features": 2,
+          "candidate_records": [
+            {
+              "feature_id": "P01",
+              "aabb_candidate_parts": 212,
+              "unique_source_triangles_with_positive_clipped_area": 0,
+              "summed_clipped_surface_area_m2": 0.0,
+              "clipped_surface_area_by_tip_part_m2": {},
+              "clipped_points_bounds_m": null,
+              "meaning": "Saved mesh surface inside/on closed trial-tip volumes; not loaded contact area."
+            },
+            {
+              "feature_id": "I05",
+              "aabb_candidate_parts": 12,
+              "unique_source_triangles_with_positive_clipped_area": 0,
+              "summed_clipped_surface_area_m2": 0.0,
+              "clipped_surface_area_by_tip_part_m2": {},
+              "clipped_points_bounds_m": null,
+              "meaning": "Saved mesh surface inside/on closed trial-tip volumes; not loaded contact area."
+            }
+          ],
+          "positive_surface_features": []
+        }
+      }
+    }
+  ],
+  "wire_coverage": {
+    "observations": [
+      {
+        "wire_id": "WI11",
+        "nearby_inner": "I01",
+        "wire_min_y_minus_housing_rear_y_m": 0.005510754883289337,
+        "source_bind_display_geometry": false,
+        "cavity_number": null
+      },
+      {
+        "wire_id": "WI12",
+        "nearby_inner": "I01",
+        "wire_min_y_minus_housing_rear_y_m": 0.005418866872787476,
+        "source_bind_display_geometry": false,
+        "cavity_number": null
+      },
+      {
+        "wire_id": "WI21",
+        "nearby_inner": "I02",
+        "wire_min_y_minus_housing_rear_y_m": 0.005399346351623535,
+        "source_bind_display_geometry": false,
+        "cavity_number": null
+      },
+      {
+        "wire_id": "WI22",
+        "nearby_inner": "I02",
+        "wire_min_y_minus_housing_rear_y_m": 0.005431726574897766,
+        "source_bind_display_geometry": false,
+        "cavity_number": null
+      },
+      {
+        "wire_id": "WI41",
+        "nearby_inner": "I04",
+        "wire_min_y_minus_housing_rear_y_m": 0.004718109965324402,
+        "source_bind_display_geometry": false,
+        "cavity_number": null
+      },
+      {
+        "wire_id": "WI42",
+        "nearby_inner": "I04",
+        "wire_min_y_minus_housing_rear_y_m": 0.005049288272857666,
+        "source_bind_display_geometry": false,
+        "cavity_number": null
+      },
+      {
+        "wire_id": "WI51",
+        "nearby_inner": "I05",
+        "wire_min_y_minus_housing_rear_y_m": 0.0050621554255485535,
+        "source_bind_display_geometry": false,
+        "cavity_number": null
+      },
+      {
+        "wire_id": "WI52",
+        "nearby_inner": "I05",
+        "wire_min_y_minus_housing_rear_y_m": 0.004793532192707062,
+        "source_bind_display_geometry": false,
+        "cavity_number": null
+      }
+    ],
+    "no_saved_WI_fragments_for": [
+      "I03"
+    ],
+    "meaning": "Axial gaps between retained display extents, not measured real wire lengths or mating defects."
+  },
+  "input_manifest_sha256": "dc41b70a42c1f2ddc4e06ccf9ff5f38a3a89013fdd8e5b0c7c5723ee674856db",
+  "input_product_sha256": "6687b12ec1b3db24babf75f8fef1b6f6bc123c288b713824b9763d9214553ba6",
+  "catalog_sha256": "6c5b7cb9bab859a33c8f5d5cd5429ce9f06fb0951b8a8fa4ae2a31ad99052ca0",
+  "pge_sha256": "c9171a968fd38b263099b21627a31fe37cab61a5e98b8d494ea3a38abfef4570",
+  "script_sha256": "52a1c0bc8296d4c66f72b46dee5d22c22289a920756ede8f7ef9d6ee43ab7b6c",
+  "rear_thrust_script_sha256": "e8460fbc9873369ae4d83360b3a22dffe6067d6abda1256b03869ca358331172",
+  "saved_hand_meshes_sha256": {
+    "I01": "2bd341010638396b94ce294978bb224859a448e885cb72fa4fa3f8c5ff8e0a08",
+    "I02": "fe13ef0b3523262952e4c33fc93ecacf5c50163253600e4c7576ed0c181176d7",
+    "I03": "c0fdccc3f2cb304ceaeff209bcc938ba615a590c276c3633beb1a99cadb2a549",
+    "I04": "a13596c6e5f5879875555ffc78849bd52e047fbb97bd6527a9abf16d4bc652e1",
+    "I05": "854f450d5a59a0fcaff145bed6c98f65d73e2466042b756d770e61e17ad51f8c"
+  },
+  "numerical_checks": {
+    "intermediate_plane_missed_at_endpoints_but_found_in_sweep": true,
+    "swept_triangle_area_m2": 0.18000000000000005,
+    "retained_clipping_checks": {
+      "analytical_clipping_areas": [
+        0.5,
+        0.125,
+        0.0
+      ],
+      "expected": [
+        0.5,
+        0.125,
+        0.0
+      ]
+    }
+  },
+  "formal_physical_verdict": null,
+  "limits": [
+    "Saved display product is not a complete manufactured assembly or an actual assembly-time state.",
+    "Surface in swept convex tool volumes is auxiliary geometry, not collision-force or grasp acceptance.",
+    "Zero surface hits do not exclude a tool entirely contained in an obstacle solid.",
+    "Same-target rear-rim intended contact is reported separately by feature ID, not silently omitted.",
+    "Source wire endpoints, contacts, HVIL leads and actual mating depth remain unresolved.",
+    "PGE catalogue envelope excludes connectors, electrical lead, robot flange and mounting details."
+  ]
+}

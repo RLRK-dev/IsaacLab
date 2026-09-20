@@ -1,0 +1,5802 @@
+{
+  "parent_product": "/home/rlrk/IsaacLab-op040/eval_runs/ur15_jb_harness_revision_20260907/data/hvjb_photo_model_v03_p03.json.gz",
+  "parent_sha256": "6687b12ec1b3db24babf75f8fef1b6f6bc123c288b713824b9763d9214553ba6",
+  "features": {
+    "P01": {
+      "model_id": "REF_P01",
+      "basis": "photo estimated display envelope; unpublished manufacturing dimensions",
+      "meshes": [
+        {
+          "name": "Photo_case_back",
+          "color": [
+            0.01600000075995922,
+            0.020999999716877937,
+            0.024000000208616257,
+            1.0
+          ],
+          "vertices_array": "a0",
+          "faces_array": "a1"
+        },
+        {
+          "name": "Photo_case_floor",
+          "color": [
+            0.01600000075995922,
+            0.020999999716877937,
+            0.024000000208616257,
+            1.0
+          ],
+          "vertices_array": "a2",
+          "faces_array": "a1"
+        },
+        {
+          "name": "Photo_case_mount_flange",
+          "color": [
+            0.01600000075995922,
+            0.020999999716877937,
+            0.024000000208616257,
+            1.0
+          ],
+          "vertices_array": "a3",
+          "faces_array": "a1"
+        },
+        {
+          "name": "Photo_case_mount_flange.001",
+          "color": [
+            0.01600000075995922,
+            0.020999999716877937,
+            0.024000000208616257,
+            1.0
+          ],
+          "vertices_array": "a4",
+          "faces_array": "a1"
+        },
+        {
+          "name": "Photo_lid_boss",
+          "color": [
+            0.01600000075995922,
+            0.020999999716877937,
+            0.024000000208616257,
+            1.0
+          ],
+          "vertices_array": "a5",
+          "faces_array": "a6"
+        },
+        {
+          "name": "Photo_lid_boss.001",
+          "color": [
+            0.01600000075995922,
+            0.020999999716877937,
+            0.024000000208616257,
+            1.0
+          ],
+          "vertices_array": "a7",
+          "faces_array": "a6"
+        },
+        {
+          "name": "Photo_lid_boss.002",
+          "color": [
+            0.01600000075995922,
+            0.020999999716877937,
+            0.024000000208616257,
+            1.0
+          ],
+          "vertices_array": "a8",
+          "faces_array": "a6"
+        },
+        {
+          "name": "Photo_lid_boss.003",
+          "color": [
+            0.01600000075995922,
+            0.020999999716877937,
+            0.024000000208616257,
+            1.0
+          ],
+          "vertices_array": "a9",
+          "faces_array": "a6"
+        },
+        {
+          "name": "Photo_lid_boss_recess",
+          "color": [
+            0.012000000104308128,
+            0.01600000075995922,
+            0.019999999552965164,
+            1.0
+          ],
+          "vertices_array": "a10",
+          "faces_array": "a6"
+        },
+        {
+          "name": "Photo_lid_boss_recess.001",
+          "color": [
+            0.012000000104308128,
+            0.01600000075995922,
+            0.019999999552965164,
+            1.0
+          ],
+          "vertices_array": "a11",
+          "faces_array": "a6"
+        },
+        {
+          "name": "Photo_lid_boss_recess.002",
+          "color": [
+            0.012000000104308128,
+            0.01600000075995922,
+            0.019999999552965164,
+            1.0
+          ],
+          "vertices_array": "a12",
+          "faces_array": "a6"
+        },
+        {
+          "name": "Photo_lid_boss_recess.003",
+          "color": [
+            0.012000000104308128,
+            0.01600000075995922,
+            0.019999999552965164,
+            1.0
+          ],
+          "vertices_array": "a13",
+          "faces_array": "a6"
+        },
+        {
+          "name": "Photo_lid_boss_rim",
+          "color": [
+            0.5600000023841858,
+            0.5799999833106995,
+            0.5600000023841858,
+            1.0
+          ],
+          "vertices_array": "a14",
+          "faces_array": "a15"
+        },
+        {
+          "name": "Photo_lid_boss_rim.001",
+          "color": [
+            0.5600000023841858,
+            0.5799999833106995,
+            0.5600000023841858,
+            1.0
+          ],
+          "vertices_array": "a16",
+          "faces_array": "a15"
+        },
+        {
+          "name": "Photo_lid_boss_rim.002",
+          "color": [
+            0.5600000023841858,
+            0.5799999833106995,
+            0.5600000023841858,
+            1.0
+          ],
+          "vertices_array": "a17",
+          "faces_array": "a15"
+        },
+        {
+          "name": "Photo_lid_boss_rim.003",
+          "color": [
+            0.5600000023841858,
+            0.5799999833106995,
+            0.5600000023841858,
+            1.0
+          ],
+          "vertices_array": "a18",
+          "faces_array": "a15"
+        },
+        {
+          "name": "Photo_main_wall_band",
+          "color": [
+            0.01600000075995922,
+            0.020999999716877937,
+            0.024000000208616257,
+            1.0
+          ],
+          "vertices_array": "a19",
+          "faces_array": "a1"
+        },
+        {
+          "name": "Photo_main_wall_band.001",
+          "color": [
+            0.01600000075995922,
+            0.020999999716877937,
+            0.024000000208616257,
+            1.0
+          ],
+          "vertices_array": "a20",
+          "faces_array": "a1"
+        },
+        {
+          "name": "Photo_main_wall_band.002",
+          "color": [
+            0.01600000075995922,
+            0.020999999716877937,
+            0.024000000208616257,
+            1.0
+          ],
+          "vertices_array": "a21",
+          "faces_array": "a1"
+        },
+        {
+          "name": "Photo_main_wall_band.003",
+          "color": [
+            0.01600000075995922,
+            0.020999999716877937,
+            0.024000000208616257,
+            1.0
+          ],
+          "vertices_array": "a22",
+          "faces_array": "a1"
+        },
+        {
+          "name": "Photo_main_wall_side",
+          "color": [
+            0.01600000075995922,
+            0.020999999716877937,
+            0.024000000208616257,
+            1.0
+          ],
+          "vertices_array": "a23",
+          "faces_array": "a1"
+        },
+        {
+          "name": "Photo_main_wall_side.001",
+          "color": [
+            0.01600000075995922,
+            0.020999999716877937,
+            0.024000000208616257,
+            1.0
+          ],
+          "vertices_array": "a24",
+          "faces_array": "a1"
+        },
+        {
+          "name": "Photo_main_wall_side.002",
+          "color": [
+            0.01600000075995922,
+            0.020999999716877937,
+            0.024000000208616257,
+            1.0
+          ],
+          "vertices_array": "a25",
+          "faces_array": "a1"
+        },
+        {
+          "name": "Photo_main_wall_side.003",
+          "color": [
+            0.01600000075995922,
+            0.020999999716877937,
+            0.024000000208616257,
+            1.0
+          ],
+          "vertices_array": "a26",
+          "faces_array": "a1"
+        },
+        {
+          "name": "Photo_mount_pilot",
+          "color": [
+            0.5600000023841858,
+            0.5799999833106995,
+            0.5600000023841858,
+            1.0
+          ],
+          "vertices_array": "a27",
+          "faces_array": "a28"
+        },
+        {
+          "name": "Photo_mount_pilot.001",
+          "color": [
+            0.5600000023841858,
+            0.5799999833106995,
+            0.5600000023841858,
+            1.0
+          ],
+          "vertices_array": "a29",
+          "faces_array": "a28"
+        },
+        {
+          "name": "Photo_mount_pilot.002",
+          "color": [
+            0.5600000023841858,
+            0.5799999833106995,
+            0.5600000023841858,
+            1.0
+          ],
+          "vertices_array": "a30",
+          "faces_array": "a31"
+        },
+        {
+          "name": "Photo_mount_pilot.003",
+          "color": [
+            0.5600000023841858,
+            0.5799999833106995,
+            0.5600000023841858,
+            1.0
+          ],
+          "vertices_array": "a32",
+          "faces_array": "a31"
+        },
+        {
+          "name": "REF_P01_TE_mount_wall_band",
+          "color": [
+            0.01600000075995922,
+            0.020999999716877937,
+            0.024000000208616257,
+            1.0
+          ],
+          "vertices_array": "a33",
+          "faces_array": "a34"
+        },
+        {
+          "name": "REF_P01_TE_mount_wall_band.001",
+          "color": [
+            0.01600000075995922,
+            0.020999999716877937,
+            0.024000000208616257,
+            1.0
+          ],
+          "vertices_array": "a35",
+          "faces_array": "a34"
+        },
+        {
+          "name": "REF_P01_TE_mount_wall_pier",
+          "color": [
+            0.01600000075995922,
+            0.020999999716877937,
+            0.024000000208616257,
+            1.0
+          ],
+          "vertices_array": "a36",
+          "faces_array": "a34"
+        },
+        {
+          "name": "REF_P01_TE_mount_wall_pier.001",
+          "color": [
+            0.01600000075995922,
+            0.020999999716877937,
+            0.024000000208616257,
+            1.0
+          ],
+          "vertices_array": "a37",
+          "faces_array": "a34"
+        },
+        {
+          "name": "REF_P01_TE_mount_wall_pier.002",
+          "color": [
+            0.01600000075995922,
+            0.020999999716877937,
+            0.024000000208616257,
+            1.0
+          ],
+          "vertices_array": "a38",
+          "faces_array": "a34"
+        },
+        {
+          "name": "REF_P01_TE_mount_wall_pier.003",
+          "color": [
+            0.01600000075995922,
+            0.020999999716877937,
+            0.024000000208616257,
+            1.0
+          ],
+          "vertices_array": "a39",
+          "faces_array": "a34"
+        },
+        {
+          "name": "REF_P01_TE_mount_wall_pier.004",
+          "color": [
+            0.01600000075995922,
+            0.020999999716877937,
+            0.024000000208616257,
+            1.0
+          ],
+          "vertices_array": "a40",
+          "faces_array": "a34"
+        },
+        {
+          "name": "REF_P01_TE_mount_wall_pier.005",
+          "color": [
+            0.01600000075995922,
+            0.020999999716877937,
+            0.024000000208616257,
+            1.0
+          ],
+          "vertices_array": "a41",
+          "faces_array": "a34"
+        },
+        {
+          "name": "REF_P01_TE_mount_wall_R4_4",
+          "color": [
+            0.01600000075995922,
+            0.020999999716877937,
+            0.024000000208616257,
+            1.0
+          ],
+          "vertices_array": "a42",
+          "faces_array": "a43"
+        },
+        {
+          "name": "REF_P01_TE_mount_wall_R4_4.001",
+          "color": [
+            0.01600000075995922,
+            0.020999999716877937,
+            0.024000000208616257,
+            1.0
+          ],
+          "vertices_array": "a44",
+          "faces_array": "a43"
+        },
+        {
+          "name": "REF_P01_TE_mount_wall_R4_4.002",
+          "color": [
+            0.01600000075995922,
+            0.020999999716877937,
+            0.024000000208616257,
+            1.0
+          ],
+          "vertices_array": "a45",
+          "faces_array": "a43"
+        },
+        {
+          "name": "REF_P01_TE_mount_wall_R4_4.003",
+          "color": [
+            0.01600000075995922,
+            0.020999999716877937,
+            0.024000000208616257,
+            1.0
+          ],
+          "vertices_array": "a46",
+          "faces_array": "a43"
+        },
+        {
+          "name": "REF_P01_TE_mount_wall_R4_4.004",
+          "color": [
+            0.01600000075995922,
+            0.020999999716877937,
+            0.024000000208616257,
+            1.0
+          ],
+          "vertices_array": "a47",
+          "faces_array": "a43"
+        },
+        {
+          "name": "REF_P01_TE_mount_wall_R4_4.005",
+          "color": [
+            0.01600000075995922,
+            0.020999999716877937,
+            0.024000000208616257,
+            1.0
+          ],
+          "vertices_array": "a48",
+          "faces_array": "a43"
+        },
+        {
+          "name": "REF_P01_TE_mount_wall_R4_4.006",
+          "color": [
+            0.01600000075995922,
+            0.020999999716877937,
+            0.024000000208616257,
+            1.0
+          ],
+          "vertices_array": "a49",
+          "faces_array": "a43"
+        },
+        {
+          "name": "REF_P01_TE_mount_wall_R4_4.007",
+          "color": [
+            0.01600000075995922,
+            0.020999999716877937,
+            0.024000000208616257,
+            1.0
+          ],
+          "vertices_array": "a50",
+          "faces_array": "a43"
+        },
+        {
+          "name": "REF_P01_TE_mount_wall_R4_4.008",
+          "color": [
+            0.01600000075995922,
+            0.020999999716877937,
+            0.024000000208616257,
+            1.0
+          ],
+          "vertices_array": "a51",
+          "faces_array": "a43"
+        },
+        {
+          "name": "REF_P01_TE_mount_wall_R4_4.009",
+          "color": [
+            0.01600000075995922,
+            0.020999999716877937,
+            0.024000000208616257,
+            1.0
+          ],
+          "vertices_array": "a52",
+          "faces_array": "a43"
+        },
+        {
+          "name": "REF_P01_TE_mount_wall_R4_4.010",
+          "color": [
+            0.01600000075995922,
+            0.020999999716877937,
+            0.024000000208616257,
+            1.0
+          ],
+          "vertices_array": "a53",
+          "faces_array": "a43"
+        },
+        {
+          "name": "REF_P01_TE_mount_wall_R4_4.011",
+          "color": [
+            0.01600000075995922,
+            0.020999999716877937,
+            0.024000000208616257,
+            1.0
+          ],
+          "vertices_array": "a54",
+          "faces_array": "a43"
+        },
+        {
+          "name": "REF_P01_TE_mount_wall_R4_4.012",
+          "color": [
+            0.01600000075995922,
+            0.020999999716877937,
+            0.024000000208616257,
+            1.0
+          ],
+          "vertices_array": "a55",
+          "faces_array": "a43"
+        },
+        {
+          "name": "REF_P01_TE_mount_wall_R4_4.013",
+          "color": [
+            0.01600000075995922,
+            0.020999999716877937,
+            0.024000000208616257,
+            1.0
+          ],
+          "vertices_array": "a56",
+          "faces_array": "a43"
+        },
+        {
+          "name": "REF_P01_TE_mount_wall_R4_4.014",
+          "color": [
+            0.01600000075995922,
+            0.020999999716877937,
+            0.024000000208616257,
+            1.0
+          ],
+          "vertices_array": "a57",
+          "faces_array": "a43"
+        },
+        {
+          "name": "REF_P01_TE_mount_wall_R4_4.015",
+          "color": [
+            0.01600000075995922,
+            0.020999999716877937,
+            0.024000000208616257,
+            1.0
+          ],
+          "vertices_array": "a58",
+          "faces_array": "a43"
+        },
+        {
+          "name": "REF_P01_TE_mount_wall_R4_4.016",
+          "color": [
+            0.01600000075995922,
+            0.020999999716877937,
+            0.024000000208616257,
+            1.0
+          ],
+          "vertices_array": "a59",
+          "faces_array": "a43"
+        },
+        {
+          "name": "REF_P01_TE_mount_wall_R4_4.017",
+          "color": [
+            0.01600000075995922,
+            0.020999999716877937,
+            0.024000000208616257,
+            1.0
+          ],
+          "vertices_array": "a60",
+          "faces_array": "a43"
+        },
+        {
+          "name": "REF_P01_TE_mount_wall_R4_4.018",
+          "color": [
+            0.01600000075995922,
+            0.020999999716877937,
+            0.024000000208616257,
+            1.0
+          ],
+          "vertices_array": "a61",
+          "faces_array": "a43"
+        },
+        {
+          "name": "REF_P01_TE_mount_wall_R4_4.019",
+          "color": [
+            0.01600000075995922,
+            0.020999999716877937,
+            0.024000000208616257,
+            1.0
+          ],
+          "vertices_array": "a62",
+          "faces_array": "a43"
+        }
+      ],
+      "archive": "case"
+    },
+    "P16": {
+      "model_id": "REF_P16",
+      "basis": "official TE STEP rigid transform; material appearance from photo",
+      "meshes": [
+        {
+          "name": "REF_P16_mount_M4_drive_recess",
+          "color": [
+            0.03500000014901161,
+            0.03999999910593033,
+            0.04399999976158142,
+            1.0
+          ],
+          "vertices_array": "a0",
+          "faces_array": "a1"
+        },
+        {
+          "name": "REF_P16_mount_M4_head",
+          "color": [
+            0.5600000023841858,
+            0.5799999833106995,
+            0.5600000023841858,
+            1.0
+          ],
+          "vertices_array": "a2",
+          "faces_array": "a3"
+        },
+        {
+          "name": "REF_P16_mount_M4_shank",
+          "color": [
+            0.5600000023841858,
+            0.5799999833106995,
+            0.5600000023841858,
+            1.0
+          ],
+          "vertices_array": "a4",
+          "faces_array": "a5"
+        },
+        {
+          "name": "REF_P16_mount_M4_drive_recess.001",
+          "color": [
+            0.03500000014901161,
+            0.03999999910593033,
+            0.04399999976158142,
+            1.0
+          ],
+          "vertices_array": "a6",
+          "faces_array": "a1"
+        },
+        {
+          "name": "REF_P16_mount_M4_head.001",
+          "color": [
+            0.5600000023841858,
+            0.5799999833106995,
+            0.5600000023841858,
+            1.0
+          ],
+          "vertices_array": "a7",
+          "faces_array": "a3"
+        },
+        {
+          "name": "REF_P16_mount_M4_shank.001",
+          "color": [
+            0.5600000023841858,
+            0.5799999833106995,
+            0.5600000023841858,
+            1.0
+          ],
+          "vertices_array": "a8",
+          "faces_array": "a5"
+        },
+        {
+          "name": "REF_P16_mount_M4_drive_recess.002",
+          "color": [
+            0.03500000014901161,
+            0.03999999910593033,
+            0.04399999976158142,
+            1.0
+          ],
+          "vertices_array": "a9",
+          "faces_array": "a1"
+        },
+        {
+          "name": "REF_P16_mount_M4_head.002",
+          "color": [
+            0.5600000023841858,
+            0.5799999833106995,
+            0.5600000023841858,
+            1.0
+          ],
+          "vertices_array": "a10",
+          "faces_array": "a3"
+        },
+        {
+          "name": "REF_P16_mount_M4_shank.002",
+          "color": [
+            0.5600000023841858,
+            0.5799999833106995,
+            0.5600000023841858,
+            1.0
+          ],
+          "vertices_array": "a11",
+          "faces_array": "a5"
+        },
+        {
+          "name": "REF_P16_mount_M4_drive_recess.003",
+          "color": [
+            0.03500000014901161,
+            0.03999999910593033,
+            0.04399999976158142,
+            1.0
+          ],
+          "vertices_array": "a12",
+          "faces_array": "a1"
+        },
+        {
+          "name": "REF_P16_mount_M4_head.003",
+          "color": [
+            0.5600000023841858,
+            0.5799999833106995,
+            0.5600000023841858,
+            1.0
+          ],
+          "vertices_array": "a13",
+          "faces_array": "a3"
+        },
+        {
+          "name": "REF_P16_mount_M4_shank.003",
+          "color": [
+            0.5600000023841858,
+            0.5799999833106995,
+            0.5600000023841858,
+            1.0
+          ],
+          "vertices_array": "a14",
+          "faces_array": "a5"
+        },
+        {
+          "name": "REF_P16_mount_M4_drive_recess.004",
+          "color": [
+            0.03500000014901161,
+            0.03999999910593033,
+            0.04399999976158142,
+            1.0
+          ],
+          "vertices_array": "a15",
+          "faces_array": "a1"
+        },
+        {
+          "name": "REF_P16_mount_M4_head.004",
+          "color": [
+            0.5600000023841858,
+            0.5799999833106995,
+            0.5600000023841858,
+            1.0
+          ],
+          "vertices_array": "a16",
+          "faces_array": "a3"
+        },
+        {
+          "name": "REF_P16_mount_M4_shank.004",
+          "color": [
+            0.5600000023841858,
+            0.5799999833106995,
+            0.5600000023841858,
+            1.0
+          ],
+          "vertices_array": "a17",
+          "faces_array": "a5"
+        },
+        {
+          "name": "REF_P16_mount_M4_drive_recess.005",
+          "color": [
+            0.03500000014901161,
+            0.03999999910593033,
+            0.04399999976158142,
+            1.0
+          ],
+          "vertices_array": "a18",
+          "faces_array": "a1"
+        },
+        {
+          "name": "REF_P16_mount_M4_head.005",
+          "color": [
+            0.5600000023841858,
+            0.5799999833106995,
+            0.5600000023841858,
+            1.0
+          ],
+          "vertices_array": "a19",
+          "faces_array": "a3"
+        },
+        {
+          "name": "REF_P16_mount_M4_shank.005",
+          "color": [
+            0.5600000023841858,
+            0.5799999833106995,
+            0.5600000023841858,
+            1.0
+          ],
+          "vertices_array": "a20",
+          "faces_array": "a5"
+        },
+        {
+          "name": "REF_P16_mount_M4_drive_recess.006",
+          "color": [
+            0.03500000014901161,
+            0.03999999910593033,
+            0.04399999976158142,
+            1.0
+          ],
+          "vertices_array": "a21",
+          "faces_array": "a1"
+        },
+        {
+          "name": "REF_P16_mount_M4_head.006",
+          "color": [
+            0.5600000023841858,
+            0.5799999833106995,
+            0.5600000023841858,
+            1.0
+          ],
+          "vertices_array": "a22",
+          "faces_array": "a3"
+        },
+        {
+          "name": "REF_P16_mount_M4_shank.006",
+          "color": [
+            0.5600000023841858,
+            0.5799999833106995,
+            0.5600000023841858,
+            1.0
+          ],
+          "vertices_array": "a23",
+          "faces_array": "a5"
+        },
+        {
+          "name": "REF_P16_mount_M4_drive_recess.007",
+          "color": [
+            0.03500000014901161,
+            0.03999999910593033,
+            0.04399999976158142,
+            1.0
+          ],
+          "vertices_array": "a24",
+          "faces_array": "a1"
+        },
+        {
+          "name": "REF_P16_mount_M4_head.007",
+          "color": [
+            0.5600000023841858,
+            0.5799999833106995,
+            0.5600000023841858,
+            1.0
+          ],
+          "vertices_array": "a25",
+          "faces_array": "a3"
+        },
+        {
+          "name": "REF_P16_mount_M4_shank.007",
+          "color": [
+            0.5600000023841858,
+            0.5799999833106995,
+            0.5600000023841858,
+            1.0
+          ],
+          "vertices_array": "a26",
+          "faces_array": "a5"
+        },
+        {
+          "name": "REF_P16_official_CAD",
+          "color": [
+            0.949999988079071,
+            0.20999999344348907,
+            0.014999999664723873,
+            1.0
+          ],
+          "vertices_array": "a27",
+          "faces_array": "a28"
+        },
+        {
+          "name": "REF_P16_official_CAD",
+          "color": [
+            0.5600000023841858,
+            0.5799999833106995,
+            0.5600000023841858,
+            1.0
+          ],
+          "vertices_array": "a27",
+          "faces_array": "a29"
+        },
+        {
+          "name": "REF_P16_official_CAD",
+          "color": [
+            0.020999999716877937,
+            0.02500000037252903,
+            0.028999999165534973,
+            1.0
+          ],
+          "vertices_array": "a27",
+          "faces_array": "a30"
+        }
+      ],
+      "archive": "P16"
+    },
+    "P17": {
+      "model_id": "REF_P17",
+      "basis": "official TE STEP rigid transform; material appearance from photo",
+      "meshes": [
+        {
+          "name": "REF_P17_mount_M4_drive_recess",
+          "color": [
+            0.03500000014901161,
+            0.03999999910593033,
+            0.04399999976158142,
+            1.0
+          ],
+          "vertices_array": "a0",
+          "faces_array": "a1"
+        },
+        {
+          "name": "REF_P17_mount_M4_head",
+          "color": [
+            0.5600000023841858,
+            0.5799999833106995,
+            0.5600000023841858,
+            1.0
+          ],
+          "vertices_array": "a2",
+          "faces_array": "a3"
+        },
+        {
+          "name": "REF_P17_mount_M4_shank",
+          "color": [
+            0.5600000023841858,
+            0.5799999833106995,
+            0.5600000023841858,
+            1.0
+          ],
+          "vertices_array": "a4",
+          "faces_array": "a5"
+        },
+        {
+          "name": "REF_P17_mount_M4_drive_recess.001",
+          "color": [
+            0.03500000014901161,
+            0.03999999910593033,
+            0.04399999976158142,
+            1.0
+          ],
+          "vertices_array": "a6",
+          "faces_array": "a1"
+        },
+        {
+          "name": "REF_P17_mount_M4_head.001",
+          "color": [
+            0.5600000023841858,
+            0.5799999833106995,
+            0.5600000023841858,
+            1.0
+          ],
+          "vertices_array": "a7",
+          "faces_array": "a3"
+        },
+        {
+          "name": "REF_P17_mount_M4_shank.001",
+          "color": [
+            0.5600000023841858,
+            0.5799999833106995,
+            0.5600000023841858,
+            1.0
+          ],
+          "vertices_array": "a8",
+          "faces_array": "a5"
+        },
+        {
+          "name": "REF_P17_mount_M4_drive_recess.002",
+          "color": [
+            0.03500000014901161,
+            0.03999999910593033,
+            0.04399999976158142,
+            1.0
+          ],
+          "vertices_array": "a9",
+          "faces_array": "a1"
+        },
+        {
+          "name": "REF_P17_mount_M4_head.002",
+          "color": [
+            0.5600000023841858,
+            0.5799999833106995,
+            0.5600000023841858,
+            1.0
+          ],
+          "vertices_array": "a10",
+          "faces_array": "a3"
+        },
+        {
+          "name": "REF_P17_mount_M4_shank.002",
+          "color": [
+            0.5600000023841858,
+            0.5799999833106995,
+            0.5600000023841858,
+            1.0
+          ],
+          "vertices_array": "a11",
+          "faces_array": "a5"
+        },
+        {
+          "name": "REF_P17_mount_M4_drive_recess.003",
+          "color": [
+            0.03500000014901161,
+            0.03999999910593033,
+            0.04399999976158142,
+            1.0
+          ],
+          "vertices_array": "a12",
+          "faces_array": "a1"
+        },
+        {
+          "name": "REF_P17_mount_M4_head.003",
+          "color": [
+            0.5600000023841858,
+            0.5799999833106995,
+            0.5600000023841858,
+            1.0
+          ],
+          "vertices_array": "a13",
+          "faces_array": "a3"
+        },
+        {
+          "name": "REF_P17_mount_M4_shank.003",
+          "color": [
+            0.5600000023841858,
+            0.5799999833106995,
+            0.5600000023841858,
+            1.0
+          ],
+          "vertices_array": "a14",
+          "faces_array": "a5"
+        },
+        {
+          "name": "REF_P17_mount_M4_drive_recess.004",
+          "color": [
+            0.03500000014901161,
+            0.03999999910593033,
+            0.04399999976158142,
+            1.0
+          ],
+          "vertices_array": "a15",
+          "faces_array": "a1"
+        },
+        {
+          "name": "REF_P17_mount_M4_head.004",
+          "color": [
+            0.5600000023841858,
+            0.5799999833106995,
+            0.5600000023841858,
+            1.0
+          ],
+          "vertices_array": "a16",
+          "faces_array": "a3"
+        },
+        {
+          "name": "REF_P17_mount_M4_shank.004",
+          "color": [
+            0.5600000023841858,
+            0.5799999833106995,
+            0.5600000023841858,
+            1.0
+          ],
+          "vertices_array": "a17",
+          "faces_array": "a5"
+        },
+        {
+          "name": "REF_P17_mount_M4_drive_recess.005",
+          "color": [
+            0.03500000014901161,
+            0.03999999910593033,
+            0.04399999976158142,
+            1.0
+          ],
+          "vertices_array": "a18",
+          "faces_array": "a1"
+        },
+        {
+          "name": "REF_P17_mount_M4_head.005",
+          "color": [
+            0.5600000023841858,
+            0.5799999833106995,
+            0.5600000023841858,
+            1.0
+          ],
+          "vertices_array": "a19",
+          "faces_array": "a3"
+        },
+        {
+          "name": "REF_P17_mount_M4_shank.005",
+          "color": [
+            0.5600000023841858,
+            0.5799999833106995,
+            0.5600000023841858,
+            1.0
+          ],
+          "vertices_array": "a20",
+          "faces_array": "a5"
+        },
+        {
+          "name": "REF_P17_official_CAD",
+          "color": [
+            0.949999988079071,
+            0.20999999344348907,
+            0.014999999664723873,
+            1.0
+          ],
+          "vertices_array": "a21",
+          "faces_array": "a22"
+        },
+        {
+          "name": "REF_P17_official_CAD",
+          "color": [
+            0.5600000023841858,
+            0.5799999833106995,
+            0.5600000023841858,
+            1.0
+          ],
+          "vertices_array": "a21",
+          "faces_array": "a23"
+        },
+        {
+          "name": "REF_P17_official_CAD",
+          "color": [
+            0.020999999716877937,
+            0.02500000037252903,
+            0.028999999165534973,
+            1.0
+          ],
+          "vertices_array": "a21",
+          "faces_array": "a24"
+        }
+      ],
+      "archive": "P17"
+    },
+    "I01": {
+      "model_id": "REF_I01",
+      "basis": "official STEP, no scale; common CAD nose datum and v03 outer wall datum",
+      "meshes": [
+        {
+          "name": "REF_I01_official_STEP",
+          "color": [
+            0.949999988079071,
+            0.20999999344348907,
+            0.014999999664723873,
+            1.0
+          ],
+          "vertices_array": "a0",
+          "faces_array": "a1"
+        }
+      ],
+      "archive": "inner_housings"
+    },
+    "I02": {
+      "model_id": "REF_I02",
+      "basis": "official STEP, no scale; common CAD nose datum and v03 outer wall datum",
+      "meshes": [
+        {
+          "name": "REF_I02_official_STEP",
+          "color": [
+            0.949999988079071,
+            0.20999999344348907,
+            0.014999999664723873,
+            1.0
+          ],
+          "vertices_array": "a2",
+          "faces_array": "a3"
+        }
+      ],
+      "archive": "inner_housings"
+    },
+    "I03": {
+      "model_id": "REF_I03",
+      "basis": "official STEP, no scale; common CAD nose datum and v03 outer wall datum",
+      "meshes": [
+        {
+          "name": "REF_I03_official_STEP",
+          "color": [
+            0.949999988079071,
+            0.20999999344348907,
+            0.014999999664723873,
+            1.0
+          ],
+          "vertices_array": "a4",
+          "faces_array": "a5"
+        }
+      ],
+      "archive": "inner_housings"
+    },
+    "I04": {
+      "model_id": "REF_I04",
+      "basis": "official STEP, no scale; common CAD nose datum and v03 outer wall datum",
+      "meshes": [
+        {
+          "name": "REF_I04_official_STEP",
+          "color": [
+            0.949999988079071,
+            0.20999999344348907,
+            0.014999999664723873,
+            1.0
+          ],
+          "vertices_array": "a6",
+          "faces_array": "a3"
+        }
+      ],
+      "archive": "inner_housings"
+    },
+    "I05": {
+      "model_id": "REF_I05",
+      "basis": "official STEP, no scale; common CAD nose datum and v03 outer wall datum",
+      "meshes": [
+        {
+          "name": "REF_I05_official_STEP",
+          "color": [
+            0.949999988079071,
+            0.20999999344348907,
+            0.014999999664723873,
+            1.0
+          ],
+          "vertices_array": "a7",
+          "faces_array": "a8"
+        }
+      ],
+      "archive": "inner_housings"
+    },
+    "P02": {
+      "model_id": "REF_P02",
+      "basis": "photo estimated display envelope; unpublished manufacturing dimensions",
+      "meshes": [
+        {
+          "name": "REF_P02_base",
+          "color": [
+            0.03500000014901161,
+            0.03999999910593033,
+            0.04399999976158142,
+            1.0
+          ],
+          "vertices_array": "a0",
+          "faces_array": "a1"
+        },
+        {
+          "name": "REF_P02_power_stud_outline",
+          "color": [
+            0.5600000023841858,
+            0.5799999833106995,
+            0.5600000023841858,
+            1.0
+          ],
+          "vertices_array": "a2",
+          "faces_array": "a3"
+        },
+        {
+          "name": "REF_P02_power_stud_outline.001",
+          "color": [
+            0.5600000023841858,
+            0.5799999833106995,
+            0.5600000023841858,
+            1.0
+          ],
+          "vertices_array": "a4",
+          "faces_array": "a3"
+        },
+        {
+          "name": "REF_P02_power_terminal_base",
+          "color": [
+            0.03500000014901161,
+            0.03999999910593033,
+            0.04399999976158142,
+            1.0
+          ],
+          "vertices_array": "a5",
+          "faces_array": "a1"
+        },
+        {
+          "name": "REF_P02_power_terminal_base.001",
+          "color": [
+            0.03500000014901161,
+            0.03999999910593033,
+            0.04399999976158142,
+            1.0
+          ],
+          "vertices_array": "a6",
+          "faces_array": "a1"
+        },
+        {
+          "name": "REF_P02_rim_rib",
+          "color": [
+            0.03500000014901161,
+            0.03999999910593033,
+            0.04399999976158142,
+            1.0
+          ],
+          "vertices_array": "a7",
+          "faces_array": "a1"
+        },
+        {
+          "name": "REF_P02_rim_rib.001",
+          "color": [
+            0.03500000014901161,
+            0.03999999910593033,
+            0.04399999976158142,
+            1.0
+          ],
+          "vertices_array": "a8",
+          "faces_array": "a1"
+        },
+        {
+          "name": "REF_P02_rim_rib.002",
+          "color": [
+            0.03500000014901161,
+            0.03999999910593033,
+            0.04399999976158142,
+            1.0
+          ],
+          "vertices_array": "a9",
+          "faces_array": "a1"
+        },
+        {
+          "name": "REF_P02_rim_rib.003",
+          "color": [
+            0.03500000014901161,
+            0.03999999910593033,
+            0.04399999976158142,
+            1.0
+          ],
+          "vertices_array": "a10",
+          "faces_array": "a1"
+        },
+        {
+          "name": "REF_P02_rim_rib.004",
+          "color": [
+            0.03500000014901161,
+            0.03999999910593033,
+            0.04399999976158142,
+            1.0
+          ],
+          "vertices_array": "a11",
+          "faces_array": "a1"
+        },
+        {
+          "name": "REF_P02_rim_rib.005",
+          "color": [
+            0.03500000014901161,
+            0.03999999910593033,
+            0.04399999976158142,
+            1.0
+          ],
+          "vertices_array": "a12",
+          "faces_array": "a1"
+        },
+        {
+          "name": "REF_P02_rim_rib.006",
+          "color": [
+            0.03500000014901161,
+            0.03999999910593033,
+            0.04399999976158142,
+            1.0
+          ],
+          "vertices_array": "a13",
+          "faces_array": "a1"
+        },
+        {
+          "name": "REF_P02_rim_rib.007",
+          "color": [
+            0.03500000014901161,
+            0.03999999910593033,
+            0.04399999976158142,
+            1.0
+          ],
+          "vertices_array": "a14",
+          "faces_array": "a1"
+        },
+        {
+          "name": "REF_P02_rim_rib.008",
+          "color": [
+            0.03500000014901161,
+            0.03999999910593033,
+            0.04399999976158142,
+            1.0
+          ],
+          "vertices_array": "a15",
+          "faces_array": "a1"
+        },
+        {
+          "name": "REF_P02_rim_rib.009",
+          "color": [
+            0.03500000014901161,
+            0.03999999910593033,
+            0.04399999976158142,
+            1.0
+          ],
+          "vertices_array": "a16",
+          "faces_array": "a1"
+        },
+        {
+          "name": "REF_P02_rim_rib.010",
+          "color": [
+            0.03500000014901161,
+            0.03999999910593033,
+            0.04399999976158142,
+            1.0
+          ],
+          "vertices_array": "a17",
+          "faces_array": "a1"
+        },
+        {
+          "name": "REF_P02_rim_rib.011",
+          "color": [
+            0.03500000014901161,
+            0.03999999910593033,
+            0.04399999976158142,
+            1.0
+          ],
+          "vertices_array": "a18",
+          "faces_array": "a1"
+        },
+        {
+          "name": "REF_P02_rim_rib.012",
+          "color": [
+            0.03500000014901161,
+            0.03999999910593033,
+            0.04399999976158142,
+            1.0
+          ],
+          "vertices_array": "a19",
+          "faces_array": "a1"
+        },
+        {
+          "name": "REF_P02_rim_rib.013",
+          "color": [
+            0.03500000014901161,
+            0.03999999910593033,
+            0.04399999976158142,
+            1.0
+          ],
+          "vertices_array": "a20",
+          "faces_array": "a1"
+        },
+        {
+          "name": "REF_P02_rim_rib.014",
+          "color": [
+            0.03500000014901161,
+            0.03999999910593033,
+            0.04399999976158142,
+            1.0
+          ],
+          "vertices_array": "a21",
+          "faces_array": "a1"
+        },
+        {
+          "name": "REF_P02_rim_rib.015",
+          "color": [
+            0.03500000014901161,
+            0.03999999910593033,
+            0.04399999976158142,
+            1.0
+          ],
+          "vertices_array": "a22",
+          "faces_array": "a1"
+        },
+        {
+          "name": "REF_P02_rim_rib.016",
+          "color": [
+            0.03500000014901161,
+            0.03999999910593033,
+            0.04399999976158142,
+            1.0
+          ],
+          "vertices_array": "a23",
+          "faces_array": "a1"
+        },
+        {
+          "name": "REF_P02_rim_rib.017",
+          "color": [
+            0.03500000014901161,
+            0.03999999910593033,
+            0.04399999976158142,
+            1.0
+          ],
+          "vertices_array": "a24",
+          "faces_array": "a1"
+        },
+        {
+          "name": "REF_P02_rim_rib.018",
+          "color": [
+            0.03500000014901161,
+            0.03999999910593033,
+            0.04399999976158142,
+            1.0
+          ],
+          "vertices_array": "a25",
+          "faces_array": "a1"
+        },
+        {
+          "name": "REF_P02_rim_rib.019",
+          "color": [
+            0.03500000014901161,
+            0.03999999910593033,
+            0.04399999976158142,
+            1.0
+          ],
+          "vertices_array": "a26",
+          "faces_array": "a1"
+        },
+        {
+          "name": "REF_P02_rim_rib.020",
+          "color": [
+            0.03500000014901161,
+            0.03999999910593033,
+            0.04399999976158142,
+            1.0
+          ],
+          "vertices_array": "a27",
+          "faces_array": "a1"
+        },
+        {
+          "name": "REF_P02_rim_rib.021",
+          "color": [
+            0.03500000014901161,
+            0.03999999910593033,
+            0.04399999976158142,
+            1.0
+          ],
+          "vertices_array": "a28",
+          "faces_array": "a1"
+        },
+        {
+          "name": "REF_P02_rim_rib.022",
+          "color": [
+            0.03500000014901161,
+            0.03999999910593033,
+            0.04399999976158142,
+            1.0
+          ],
+          "vertices_array": "a29",
+          "faces_array": "a1"
+        },
+        {
+          "name": "REF_P02_rim_rib.023",
+          "color": [
+            0.03500000014901161,
+            0.03999999910593033,
+            0.04399999976158142,
+            1.0
+          ],
+          "vertices_array": "a30",
+          "faces_array": "a1"
+        },
+        {
+          "name": "REF_P02_rim_rib.024",
+          "color": [
+            0.03500000014901161,
+            0.03999999910593033,
+            0.04399999976158142,
+            1.0
+          ],
+          "vertices_array": "a31",
+          "faces_array": "a1"
+        },
+        {
+          "name": "REF_P02_rim_rib.025",
+          "color": [
+            0.03500000014901161,
+            0.03999999910593033,
+            0.04399999976158142,
+            1.0
+          ],
+          "vertices_array": "a32",
+          "faces_array": "a1"
+        },
+        {
+          "name": "REF_P02_rim_rib.026",
+          "color": [
+            0.03500000014901161,
+            0.03999999910593033,
+            0.04399999976158142,
+            1.0
+          ],
+          "vertices_array": "a33",
+          "faces_array": "a1"
+        },
+        {
+          "name": "REF_P02_rim_rib.027",
+          "color": [
+            0.03500000014901161,
+            0.03999999910593033,
+            0.04399999976158142,
+            1.0
+          ],
+          "vertices_array": "a34",
+          "faces_array": "a1"
+        },
+        {
+          "name": "REF_P02_rim_rib.028",
+          "color": [
+            0.03500000014901161,
+            0.03999999910593033,
+            0.04399999976158142,
+            1.0
+          ],
+          "vertices_array": "a35",
+          "faces_array": "a1"
+        },
+        {
+          "name": "REF_P02_rim_rib.029",
+          "color": [
+            0.03500000014901161,
+            0.03999999910593033,
+            0.04399999976158142,
+            1.0
+          ],
+          "vertices_array": "a36",
+          "faces_array": "a1"
+        },
+        {
+          "name": "REF_P02_rim_rib.030",
+          "color": [
+            0.03500000014901161,
+            0.03999999910593033,
+            0.04399999976158142,
+            1.0
+          ],
+          "vertices_array": "a37",
+          "faces_array": "a1"
+        },
+        {
+          "name": "REF_P02_rim_rib.031",
+          "color": [
+            0.03500000014901161,
+            0.03999999910593033,
+            0.04399999976158142,
+            1.0
+          ],
+          "vertices_array": "a38",
+          "faces_array": "a1"
+        },
+        {
+          "name": "REF_P02_rim_rib.032",
+          "color": [
+            0.03500000014901161,
+            0.03999999910593033,
+            0.04399999976158142,
+            1.0
+          ],
+          "vertices_array": "a39",
+          "faces_array": "a1"
+        },
+        {
+          "name": "REF_P02_rim_rib.033",
+          "color": [
+            0.03500000014901161,
+            0.03999999910593033,
+            0.04399999976158142,
+            1.0
+          ],
+          "vertices_array": "a40",
+          "faces_array": "a1"
+        },
+        {
+          "name": "REF_P02_rim_rib.034",
+          "color": [
+            0.03500000014901161,
+            0.03999999910593033,
+            0.04399999976158142,
+            1.0
+          ],
+          "vertices_array": "a41",
+          "faces_array": "a1"
+        },
+        {
+          "name": "REF_P02_rim_rib.035",
+          "color": [
+            0.03500000014901161,
+            0.03999999910593033,
+            0.04399999976158142,
+            1.0
+          ],
+          "vertices_array": "a42",
+          "faces_array": "a1"
+        },
+        {
+          "name": "REF_P02_rim_rib.036",
+          "color": [
+            0.03500000014901161,
+            0.03999999910593033,
+            0.04399999976158142,
+            1.0
+          ],
+          "vertices_array": "a43",
+          "faces_array": "a1"
+        },
+        {
+          "name": "REF_P02_rim_rib.037",
+          "color": [
+            0.03500000014901161,
+            0.03999999910593033,
+            0.04399999976158142,
+            1.0
+          ],
+          "vertices_array": "a44",
+          "faces_array": "a1"
+        },
+        {
+          "name": "REF_P02_rim_rib.038",
+          "color": [
+            0.03500000014901161,
+            0.03999999910593033,
+            0.04399999976158142,
+            1.0
+          ],
+          "vertices_array": "a45",
+          "faces_array": "a1"
+        },
+        {
+          "name": "REF_P02_rim_rib.039",
+          "color": [
+            0.03500000014901161,
+            0.03999999910593033,
+            0.04399999976158142,
+            1.0
+          ],
+          "vertices_array": "a46",
+          "faces_array": "a1"
+        },
+        {
+          "name": "REF_P02_rim_rib.040",
+          "color": [
+            0.03500000014901161,
+            0.03999999910593033,
+            0.04399999976158142,
+            1.0
+          ],
+          "vertices_array": "a47",
+          "faces_array": "a1"
+        },
+        {
+          "name": "REF_P02_rim_rib.041",
+          "color": [
+            0.03500000014901161,
+            0.03999999910593033,
+            0.04399999976158142,
+            1.0
+          ],
+          "vertices_array": "a48",
+          "faces_array": "a1"
+        },
+        {
+          "name": "REF_P02_rim_rib.042",
+          "color": [
+            0.03500000014901161,
+            0.03999999910593033,
+            0.04399999976158142,
+            1.0
+          ],
+          "vertices_array": "a49",
+          "faces_array": "a1"
+        },
+        {
+          "name": "REF_P02_rim_rib.043",
+          "color": [
+            0.03500000014901161,
+            0.03999999910593033,
+            0.04399999976158142,
+            1.0
+          ],
+          "vertices_array": "a50",
+          "faces_array": "a1"
+        },
+        {
+          "name": "REF_P02_rim_rib.044",
+          "color": [
+            0.03500000014901161,
+            0.03999999910593033,
+            0.04399999976158142,
+            1.0
+          ],
+          "vertices_array": "a51",
+          "faces_array": "a1"
+        },
+        {
+          "name": "REF_P02_rim_rib.045",
+          "color": [
+            0.03500000014901161,
+            0.03999999910593033,
+            0.04399999976158142,
+            1.0
+          ],
+          "vertices_array": "a52",
+          "faces_array": "a1"
+        },
+        {
+          "name": "REF_P02_rim_rib.046",
+          "color": [
+            0.03500000014901161,
+            0.03999999910593033,
+            0.04399999976158142,
+            1.0
+          ],
+          "vertices_array": "a53",
+          "faces_array": "a1"
+        },
+        {
+          "name": "REF_P02_rim_rib.047",
+          "color": [
+            0.03500000014901161,
+            0.03999999910593033,
+            0.04399999976158142,
+            1.0
+          ],
+          "vertices_array": "a54",
+          "faces_array": "a1"
+        },
+        {
+          "name": "REF_P02_rim_rib.048",
+          "color": [
+            0.03500000014901161,
+            0.03999999910593033,
+            0.04399999976158142,
+            1.0
+          ],
+          "vertices_array": "a55",
+          "faces_array": "a1"
+        },
+        {
+          "name": "REF_P02_rim_rib.049",
+          "color": [
+            0.03500000014901161,
+            0.03999999910593033,
+            0.04399999976158142,
+            1.0
+          ],
+          "vertices_array": "a56",
+          "faces_array": "a1"
+        },
+        {
+          "name": "REF_P02_rim_rib.050",
+          "color": [
+            0.03500000014901161,
+            0.03999999910593033,
+            0.04399999976158142,
+            1.0
+          ],
+          "vertices_array": "a57",
+          "faces_array": "a1"
+        },
+        {
+          "name": "REF_P02_rim_rib.051",
+          "color": [
+            0.03500000014901161,
+            0.03999999910593033,
+            0.04399999976158142,
+            1.0
+          ],
+          "vertices_array": "a58",
+          "faces_array": "a1"
+        },
+        {
+          "name": "REF_P02_rim_rib.052",
+          "color": [
+            0.03500000014901161,
+            0.03999999910593033,
+            0.04399999976158142,
+            1.0
+          ],
+          "vertices_array": "a59",
+          "faces_array": "a1"
+        },
+        {
+          "name": "REF_P02_rim_rib.053",
+          "color": [
+            0.03500000014901161,
+            0.03999999910593033,
+            0.04399999976158142,
+            1.0
+          ],
+          "vertices_array": "a60",
+          "faces_array": "a1"
+        },
+        {
+          "name": "REF_P02_rim_rib.054",
+          "color": [
+            0.03500000014901161,
+            0.03999999910593033,
+            0.04399999976158142,
+            1.0
+          ],
+          "vertices_array": "a61",
+          "faces_array": "a1"
+        },
+        {
+          "name": "REF_P02_rim_rib.055",
+          "color": [
+            0.03500000014901161,
+            0.03999999910593033,
+            0.04399999976158142,
+            1.0
+          ],
+          "vertices_array": "a62",
+          "faces_array": "a1"
+        },
+        {
+          "name": "REF_P02_rim_rib.056",
+          "color": [
+            0.03500000014901161,
+            0.03999999910593033,
+            0.04399999976158142,
+            1.0
+          ],
+          "vertices_array": "a63",
+          "faces_array": "a1"
+        },
+        {
+          "name": "REF_P02_rim_rib.057",
+          "color": [
+            0.03500000014901161,
+            0.03999999910593033,
+            0.04399999976158142,
+            1.0
+          ],
+          "vertices_array": "a64",
+          "faces_array": "a1"
+        },
+        {
+          "name": "REF_P02_rim_rib.058",
+          "color": [
+            0.03500000014901161,
+            0.03999999910593033,
+            0.04399999976158142,
+            1.0
+          ],
+          "vertices_array": "a65",
+          "faces_array": "a1"
+        },
+        {
+          "name": "REF_P02_rim_rib.059",
+          "color": [
+            0.03500000014901161,
+            0.03999999910593033,
+            0.04399999976158142,
+            1.0
+          ],
+          "vertices_array": "a66",
+          "faces_array": "a1"
+        },
+        {
+          "name": "REF_P02_rim_rib.060",
+          "color": [
+            0.03500000014901161,
+            0.03999999910593033,
+            0.04399999976158142,
+            1.0
+          ],
+          "vertices_array": "a67",
+          "faces_array": "a1"
+        },
+        {
+          "name": "REF_P02_rim_rib.061",
+          "color": [
+            0.03500000014901161,
+            0.03999999910593033,
+            0.04399999976158142,
+            1.0
+          ],
+          "vertices_array": "a68",
+          "faces_array": "a1"
+        },
+        {
+          "name": "REF_P02_rim_rib.062",
+          "color": [
+            0.03500000014901161,
+            0.03999999910593033,
+            0.04399999976158142,
+            1.0
+          ],
+          "vertices_array": "a69",
+          "faces_array": "a1"
+        },
+        {
+          "name": "REF_P02_rim_rib.063",
+          "color": [
+            0.03500000014901161,
+            0.03999999910593033,
+            0.04399999976158142,
+            1.0
+          ],
+          "vertices_array": "a70",
+          "faces_array": "a1"
+        },
+        {
+          "name": "REF_P02_round_body",
+          "color": [
+            0.03500000014901161,
+            0.03999999910593033,
+            0.04399999976158142,
+            1.0
+          ],
+          "vertices_array": "a71",
+          "faces_array": "a72"
+        },
+        {
+          "name": "REF_P02_top",
+          "color": [
+            0.020999999716877937,
+            0.02500000037252903,
+            0.028999999165534973,
+            1.0
+          ],
+          "vertices_array": "a73",
+          "faces_array": "a72"
+        },
+        {
+          "name": "REF_P02_top_rim",
+          "color": [
+            0.03500000014901161,
+            0.03999999910593033,
+            0.04399999976158142,
+            1.0
+          ],
+          "vertices_array": "a74",
+          "faces_array": "a75"
+        },
+        {
+          "name": "REF_P02_vertical_rib",
+          "color": [
+            0.03500000014901161,
+            0.03999999910593033,
+            0.04399999976158142,
+            1.0
+          ],
+          "vertices_array": "a76",
+          "faces_array": "a1"
+        },
+        {
+          "name": "REF_P02_vertical_rib.001",
+          "color": [
+            0.03500000014901161,
+            0.03999999910593033,
+            0.04399999976158142,
+            1.0
+          ],
+          "vertices_array": "a77",
+          "faces_array": "a1"
+        },
+        {
+          "name": "REF_P02_vertical_rib.002",
+          "color": [
+            0.03500000014901161,
+            0.03999999910593033,
+            0.04399999976158142,
+            1.0
+          ],
+          "vertices_array": "a78",
+          "faces_array": "a1"
+        },
+        {
+          "name": "REF_P02_vertical_rib.003",
+          "color": [
+            0.03500000014901161,
+            0.03999999910593033,
+            0.04399999976158142,
+            1.0
+          ],
+          "vertices_array": "a79",
+          "faces_array": "a1"
+        },
+        {
+          "name": "REF_P02_vertical_rib.004",
+          "color": [
+            0.03500000014901161,
+            0.03999999910593033,
+            0.04399999976158142,
+            1.0
+          ],
+          "vertices_array": "a80",
+          "faces_array": "a1"
+        },
+        {
+          "name": "REF_P02_vertical_rib.005",
+          "color": [
+            0.03500000014901161,
+            0.03999999910593033,
+            0.04399999976158142,
+            1.0
+          ],
+          "vertices_array": "a81",
+          "faces_array": "a1"
+        },
+        {
+          "name": "REF_P02_vertical_rib.006",
+          "color": [
+            0.03500000014901161,
+            0.03999999910593033,
+            0.04399999976158142,
+            1.0
+          ],
+          "vertices_array": "a82",
+          "faces_array": "a1"
+        },
+        {
+          "name": "REF_P02_vertical_rib.007",
+          "color": [
+            0.03500000014901161,
+            0.03999999910593033,
+            0.04399999976158142,
+            1.0
+          ],
+          "vertices_array": "a83",
+          "faces_array": "a1"
+        },
+        {
+          "name": "REF_P02_vertical_rib.008",
+          "color": [
+            0.03500000014901161,
+            0.03999999910593033,
+            0.04399999976158142,
+            1.0
+          ],
+          "vertices_array": "a84",
+          "faces_array": "a1"
+        },
+        {
+          "name": "REF_P02_vertical_rib.009",
+          "color": [
+            0.03500000014901161,
+            0.03999999910593033,
+            0.04399999976158142,
+            1.0
+          ],
+          "vertices_array": "a85",
+          "faces_array": "a1"
+        },
+        {
+          "name": "REF_P02_vertical_rib.010",
+          "color": [
+            0.03500000014901161,
+            0.03999999910593033,
+            0.04399999976158142,
+            1.0
+          ],
+          "vertices_array": "a86",
+          "faces_array": "a1"
+        },
+        {
+          "name": "REF_P02_vertical_rib.011",
+          "color": [
+            0.03500000014901161,
+            0.03999999910593033,
+            0.04399999976158142,
+            1.0
+          ],
+          "vertices_array": "a87",
+          "faces_array": "a1"
+        },
+        {
+          "name": "REF_P02_vertical_rib.012",
+          "color": [
+            0.03500000014901161,
+            0.03999999910593033,
+            0.04399999976158142,
+            1.0
+          ],
+          "vertices_array": "a88",
+          "faces_array": "a1"
+        },
+        {
+          "name": "REF_P02_vertical_rib.013",
+          "color": [
+            0.03500000014901161,
+            0.03999999910593033,
+            0.04399999976158142,
+            1.0
+          ],
+          "vertices_array": "a89",
+          "faces_array": "a1"
+        },
+        {
+          "name": "REF_P02_vertical_rib.014",
+          "color": [
+            0.03500000014901161,
+            0.03999999910593033,
+            0.04399999976158142,
+            1.0
+          ],
+          "vertices_array": "a90",
+          "faces_array": "a1"
+        },
+        {
+          "name": "REF_P02_vertical_rib.015",
+          "color": [
+            0.03500000014901161,
+            0.03999999910593033,
+            0.04399999976158142,
+            1.0
+          ],
+          "vertices_array": "a91",
+          "faces_array": "a1"
+        },
+        {
+          "name": "REF_P02_vertical_rib.016",
+          "color": [
+            0.03500000014901161,
+            0.03999999910593033,
+            0.04399999976158142,
+            1.0
+          ],
+          "vertices_array": "a92",
+          "faces_array": "a1"
+        },
+        {
+          "name": "REF_P02_vertical_rib.017",
+          "color": [
+            0.03500000014901161,
+            0.03999999910593033,
+            0.04399999976158142,
+            1.0
+          ],
+          "vertices_array": "a93",
+          "faces_array": "a1"
+        },
+        {
+          "name": "REF_P02_vertical_rib.018",
+          "color": [
+            0.03500000014901161,
+            0.03999999910593033,
+            0.04399999976158142,
+            1.0
+          ],
+          "vertices_array": "a94",
+          "faces_array": "a1"
+        },
+        {
+          "name": "REF_P02_vertical_rib.019",
+          "color": [
+            0.03500000014901161,
+            0.03999999910593033,
+            0.04399999976158142,
+            1.0
+          ],
+          "vertices_array": "a95",
+          "faces_array": "a1"
+        },
+        {
+          "name": "REF_P02_vertical_rib.020",
+          "color": [
+            0.03500000014901161,
+            0.03999999910593033,
+            0.04399999976158142,
+            1.0
+          ],
+          "vertices_array": "a96",
+          "faces_array": "a1"
+        },
+        {
+          "name": "REF_P02_vertical_rib.021",
+          "color": [
+            0.03500000014901161,
+            0.03999999910593033,
+            0.04399999976158142,
+            1.0
+          ],
+          "vertices_array": "a97",
+          "faces_array": "a1"
+        },
+        {
+          "name": "REF_P02_vertical_rib.022",
+          "color": [
+            0.03500000014901161,
+            0.03999999910593033,
+            0.04399999976158142,
+            1.0
+          ],
+          "vertices_array": "a98",
+          "faces_array": "a1"
+        },
+        {
+          "name": "REF_P02_vertical_rib.023",
+          "color": [
+            0.03500000014901161,
+            0.03999999910593033,
+            0.04399999976158142,
+            1.0
+          ],
+          "vertices_array": "a99",
+          "faces_array": "a1"
+        },
+        {
+          "name": "REF_P02_vertical_rib.024",
+          "color": [
+            0.03500000014901161,
+            0.03999999910593033,
+            0.04399999976158142,
+            1.0
+          ],
+          "vertices_array": "a100",
+          "faces_array": "a1"
+        },
+        {
+          "name": "REF_P02_vertical_rib.025",
+          "color": [
+            0.03500000014901161,
+            0.03999999910593033,
+            0.04399999976158142,
+            1.0
+          ],
+          "vertices_array": "a101",
+          "faces_array": "a1"
+        },
+        {
+          "name": "REF_P02_vertical_rib.026",
+          "color": [
+            0.03500000014901161,
+            0.03999999910593033,
+            0.04399999976158142,
+            1.0
+          ],
+          "vertices_array": "a102",
+          "faces_array": "a1"
+        },
+        {
+          "name": "REF_P02_vertical_rib.027",
+          "color": [
+            0.03500000014901161,
+            0.03999999910593033,
+            0.04399999976158142,
+            1.0
+          ],
+          "vertices_array": "a103",
+          "faces_array": "a1"
+        },
+        {
+          "name": "REF_P02_vertical_rib.028",
+          "color": [
+            0.03500000014901161,
+            0.03999999910593033,
+            0.04399999976158142,
+            1.0
+          ],
+          "vertices_array": "a104",
+          "faces_array": "a1"
+        },
+        {
+          "name": "REF_P02_vertical_rib.029",
+          "color": [
+            0.03500000014901161,
+            0.03999999910593033,
+            0.04399999976158142,
+            1.0
+          ],
+          "vertices_array": "a105",
+          "faces_array": "a1"
+        },
+        {
+          "name": "REF_P02_vertical_rib.030",
+          "color": [
+            0.03500000014901161,
+            0.03999999910593033,
+            0.04399999976158142,
+            1.0
+          ],
+          "vertices_array": "a106",
+          "faces_array": "a1"
+        },
+        {
+          "name": "REF_P02_vertical_rib.031",
+          "color": [
+            0.03500000014901161,
+            0.03999999910593033,
+            0.04399999976158142,
+            1.0
+          ],
+          "vertices_array": "a107",
+          "faces_array": "a1"
+        },
+        {
+          "name": "REF_P02_vertical_rib.032",
+          "color": [
+            0.03500000014901161,
+            0.03999999910593033,
+            0.04399999976158142,
+            1.0
+          ],
+          "vertices_array": "a108",
+          "faces_array": "a1"
+        },
+        {
+          "name": "REF_P02_vertical_rib.033",
+          "color": [
+            0.03500000014901161,
+            0.03999999910593033,
+            0.04399999976158142,
+            1.0
+          ],
+          "vertices_array": "a109",
+          "faces_array": "a1"
+        },
+        {
+          "name": "REF_P02_vertical_rib.034",
+          "color": [
+            0.03500000014901161,
+            0.03999999910593033,
+            0.04399999976158142,
+            1.0
+          ],
+          "vertices_array": "a110",
+          "faces_array": "a1"
+        },
+        {
+          "name": "REF_P02_vertical_rib.035",
+          "color": [
+            0.03500000014901161,
+            0.03999999910593033,
+            0.04399999976158142,
+            1.0
+          ],
+          "vertices_array": "a111",
+          "faces_array": "a1"
+        },
+        {
+          "name": "REF_P02_vertical_rib.036",
+          "color": [
+            0.03500000014901161,
+            0.03999999910593033,
+            0.04399999976158142,
+            1.0
+          ],
+          "vertices_array": "a112",
+          "faces_array": "a1"
+        },
+        {
+          "name": "REF_P02_vertical_rib.037",
+          "color": [
+            0.03500000014901161,
+            0.03999999910593033,
+            0.04399999976158142,
+            1.0
+          ],
+          "vertices_array": "a113",
+          "faces_array": "a1"
+        },
+        {
+          "name": "REF_P02_vertical_rib.038",
+          "color": [
+            0.03500000014901161,
+            0.03999999910593033,
+            0.04399999976158142,
+            1.0
+          ],
+          "vertices_array": "a114",
+          "faces_array": "a1"
+        },
+        {
+          "name": "REF_P02_vertical_rib.039",
+          "color": [
+            0.03500000014901161,
+            0.03999999910593033,
+            0.04399999976158142,
+            1.0
+          ],
+          "vertices_array": "a115",
+          "faces_array": "a1"
+        },
+        {
+          "name": "REF_P02_vertical_rib.040",
+          "color": [
+            0.03500000014901161,
+            0.03999999910593033,
+            0.04399999976158142,
+            1.0
+          ],
+          "vertices_array": "a116",
+          "faces_array": "a1"
+        },
+        {
+          "name": "REF_P02_vertical_rib.041",
+          "color": [
+            0.03500000014901161,
+            0.03999999910593033,
+            0.04399999976158142,
+            1.0
+          ],
+          "vertices_array": "a117",
+          "faces_array": "a1"
+        },
+        {
+          "name": "REF_P02_vertical_rib.042",
+          "color": [
+            0.03500000014901161,
+            0.03999999910593033,
+            0.04399999976158142,
+            1.0
+          ],
+          "vertices_array": "a118",
+          "faces_array": "a1"
+        },
+        {
+          "name": "REF_P02_vertical_rib.043",
+          "color": [
+            0.03500000014901161,
+            0.03999999910593033,
+            0.04399999976158142,
+            1.0
+          ],
+          "vertices_array": "a119",
+          "faces_array": "a1"
+        },
+        {
+          "name": "REF_P02_vertical_rib.044",
+          "color": [
+            0.03500000014901161,
+            0.03999999910593033,
+            0.04399999976158142,
+            1.0
+          ],
+          "vertices_array": "a120",
+          "faces_array": "a1"
+        },
+        {
+          "name": "REF_P02_vertical_rib.045",
+          "color": [
+            0.03500000014901161,
+            0.03999999910593033,
+            0.04399999976158142,
+            1.0
+          ],
+          "vertices_array": "a121",
+          "faces_array": "a1"
+        },
+        {
+          "name": "REF_P02_vertical_rib.046",
+          "color": [
+            0.03500000014901161,
+            0.03999999910593033,
+            0.04399999976158142,
+            1.0
+          ],
+          "vertices_array": "a122",
+          "faces_array": "a1"
+        },
+        {
+          "name": "REF_P02_vertical_rib.047",
+          "color": [
+            0.03500000014901161,
+            0.03999999910593033,
+            0.04399999976158142,
+            1.0
+          ],
+          "vertices_array": "a123",
+          "faces_array": "a1"
+        },
+        {
+          "name": "REF_P02_vertical_rib.048",
+          "color": [
+            0.03500000014901161,
+            0.03999999910593033,
+            0.04399999976158142,
+            1.0
+          ],
+          "vertices_array": "a124",
+          "faces_array": "a1"
+        },
+        {
+          "name": "REF_P02_vertical_rib.049",
+          "color": [
+            0.03500000014901161,
+            0.03999999910593033,
+            0.04399999976158142,
+            1.0
+          ],
+          "vertices_array": "a125",
+          "faces_array": "a1"
+        },
+        {
+          "name": "REF_P02_vertical_rib.050",
+          "color": [
+            0.03500000014901161,
+            0.03999999910593033,
+            0.04399999976158142,
+            1.0
+          ],
+          "vertices_array": "a126",
+          "faces_array": "a1"
+        },
+        {
+          "name": "REF_P02_vertical_rib.051",
+          "color": [
+            0.03500000014901161,
+            0.03999999910593033,
+            0.04399999976158142,
+            1.0
+          ],
+          "vertices_array": "a127",
+          "faces_array": "a1"
+        },
+        {
+          "name": "REF_P02_vertical_rib.052",
+          "color": [
+            0.03500000014901161,
+            0.03999999910593033,
+            0.04399999976158142,
+            1.0
+          ],
+          "vertices_array": "a128",
+          "faces_array": "a1"
+        },
+        {
+          "name": "REF_P02_vertical_rib.053",
+          "color": [
+            0.03500000014901161,
+            0.03999999910593033,
+            0.04399999976158142,
+            1.0
+          ],
+          "vertices_array": "a129",
+          "faces_array": "a1"
+        },
+        {
+          "name": "REF_P02_vertical_rib.054",
+          "color": [
+            0.03500000014901161,
+            0.03999999910593033,
+            0.04399999976158142,
+            1.0
+          ],
+          "vertices_array": "a130",
+          "faces_array": "a1"
+        },
+        {
+          "name": "REF_P02_vertical_rib.055",
+          "color": [
+            0.03500000014901161,
+            0.03999999910593033,
+            0.04399999976158142,
+            1.0
+          ],
+          "vertices_array": "a131",
+          "faces_array": "a1"
+        },
+        {
+          "name": "REF_P02_vertical_rib.056",
+          "color": [
+            0.03500000014901161,
+            0.03999999910593033,
+            0.04399999976158142,
+            1.0
+          ],
+          "vertices_array": "a132",
+          "faces_array": "a1"
+        },
+        {
+          "name": "REF_P02_vertical_rib.057",
+          "color": [
+            0.03500000014901161,
+            0.03999999910593033,
+            0.04399999976158142,
+            1.0
+          ],
+          "vertices_array": "a133",
+          "faces_array": "a1"
+        },
+        {
+          "name": "REF_P02_vertical_rib.058",
+          "color": [
+            0.03500000014901161,
+            0.03999999910593033,
+            0.04399999976158142,
+            1.0
+          ],
+          "vertices_array": "a134",
+          "faces_array": "a1"
+        },
+        {
+          "name": "REF_P02_vertical_rib.059",
+          "color": [
+            0.03500000014901161,
+            0.03999999910593033,
+            0.04399999976158142,
+            1.0
+          ],
+          "vertices_array": "a135",
+          "faces_array": "a1"
+        },
+        {
+          "name": "REF_P02_vertical_rib.060",
+          "color": [
+            0.03500000014901161,
+            0.03999999910593033,
+            0.04399999976158142,
+            1.0
+          ],
+          "vertices_array": "a136",
+          "faces_array": "a1"
+        },
+        {
+          "name": "REF_P02_vertical_rib.061",
+          "color": [
+            0.03500000014901161,
+            0.03999999910593033,
+            0.04399999976158142,
+            1.0
+          ],
+          "vertices_array": "a137",
+          "faces_array": "a1"
+        },
+        {
+          "name": "REF_P02_vertical_rib.062",
+          "color": [
+            0.03500000014901161,
+            0.03999999910593033,
+            0.04399999976158142,
+            1.0
+          ],
+          "vertices_array": "a138",
+          "faces_array": "a1"
+        },
+        {
+          "name": "REF_P02_vertical_rib.063",
+          "color": [
+            0.03500000014901161,
+            0.03999999910593033,
+            0.04399999976158142,
+            1.0
+          ],
+          "vertices_array": "a139",
+          "faces_array": "a1"
+        }
+      ],
+      "archive": "internals"
+    },
+    "P03": {
+      "model_id": "REF_P03",
+      "basis": "photo estimated display envelope; unpublished manufacturing dimensions",
+      "meshes": [
+        {
+          "name": "REF_P03_outline",
+          "color": [
+            0.03500000014901161,
+            0.03999999910593033,
+            0.04399999976158142,
+            1.0
+          ],
+          "vertices_array": "a140",
+          "faces_array": "a1"
+        },
+        {
+          "name": "REF_P03_outline.001",
+          "color": [
+            0.012000000104308128,
+            0.01600000075995922,
+            0.019999999552965164,
+            1.0
+          ],
+          "vertices_array": "a141",
+          "faces_array": "a1"
+        }
+      ],
+      "archive": "internals"
+    },
+    "P04": {
+      "model_id": "REF_P04",
+      "basis": "photo estimated display envelope; unpublished manufacturing dimensions",
+      "meshes": [
+        {
+          "name": "REF_P04_outline",
+          "color": [
+            0.03500000014901161,
+            0.03999999910593033,
+            0.04399999976158142,
+            1.0
+          ],
+          "vertices_array": "a142",
+          "faces_array": "a1"
+        },
+        {
+          "name": "REF_P04_outline.001",
+          "color": [
+            0.012000000104308128,
+            0.01600000075995922,
+            0.019999999552965164,
+            1.0
+          ],
+          "vertices_array": "a143",
+          "faces_array": "a1"
+        }
+      ],
+      "archive": "internals"
+    },
+    "P05": {
+      "model_id": "REF_P05",
+      "basis": "photo estimated display envelope; unpublished manufacturing dimensions",
+      "meshes": [
+        {
+          "name": "REF_P05_cap",
+          "color": [
+            0.5600000023841858,
+            0.5799999833106995,
+            0.5600000023841858,
+            1.0
+          ],
+          "vertices_array": "a144",
+          "faces_array": "a3"
+        },
+        {
+          "name": "REF_P05_cap.001",
+          "color": [
+            0.5600000023841858,
+            0.5799999833106995,
+            0.5600000023841858,
+            1.0
+          ],
+          "vertices_array": "a145",
+          "faces_array": "a3"
+        },
+        {
+          "name": "REF_P05_ceramic_outline",
+          "color": [
+            0.8799999952316284,
+            0.8799999952316284,
+            0.8199999928474426,
+            1.0
+          ],
+          "vertices_array": "a146",
+          "faces_array": "a3"
+        },
+        {
+          "name": "REF_P05_clip_back",
+          "color": [
+            0.5600000023841858,
+            0.5799999833106995,
+            0.5600000023841858,
+            1.0
+          ],
+          "vertices_array": "a147",
+          "faces_array": "a1"
+        },
+        {
+          "name": "REF_P05_clip_back.001",
+          "color": [
+            0.5600000023841858,
+            0.5799999833106995,
+            0.5600000023841858,
+            1.0
+          ],
+          "vertices_array": "a148",
+          "faces_array": "a1"
+        },
+        {
+          "name": "REF_P05_spring_clip_outline",
+          "color": [
+            0.5600000023841858,
+            0.5799999833106995,
+            0.5600000023841858,
+            1.0
+          ],
+          "vertices_array": "a149",
+          "faces_array": "a150"
+        },
+        {
+          "name": "REF_P05_spring_clip_outline.001",
+          "color": [
+            0.5600000023841858,
+            0.5799999833106995,
+            0.5600000023841858,
+            1.0
+          ],
+          "vertices_array": "a151",
+          "faces_array": "a150"
+        },
+        {
+          "name": "REF_P05_visible_label_band",
+          "color": [
+            0.009999999776482582,
+            0.41999998688697815,
+            0.1899999976158142,
+            1.0
+          ],
+          "vertices_array": "a152",
+          "faces_array": "a3"
+        }
+      ],
+      "archive": "internals"
+    },
+    "P06": {
+      "model_id": "REF_P06",
+      "basis": "photo estimated display envelope; unpublished manufacturing dimensions",
+      "meshes": [
+        {
+          "name": "REF_P06_cap",
+          "color": [
+            0.5600000023841858,
+            0.5799999833106995,
+            0.5600000023841858,
+            1.0
+          ],
+          "vertices_array": "a153",
+          "faces_array": "a3"
+        },
+        {
+          "name": "REF_P06_cap.001",
+          "color": [
+            0.5600000023841858,
+            0.5799999833106995,
+            0.5600000023841858,
+            1.0
+          ],
+          "vertices_array": "a154",
+          "faces_array": "a3"
+        },
+        {
+          "name": "REF_P06_ceramic_outline",
+          "color": [
+            0.8799999952316284,
+            0.8799999952316284,
+            0.8199999928474426,
+            1.0
+          ],
+          "vertices_array": "a155",
+          "faces_array": "a3"
+        },
+        {
+          "name": "REF_P06_clip_back",
+          "color": [
+            0.5600000023841858,
+            0.5799999833106995,
+            0.5600000023841858,
+            1.0
+          ],
+          "vertices_array": "a156",
+          "faces_array": "a1"
+        },
+        {
+          "name": "REF_P06_clip_back.001",
+          "color": [
+            0.5600000023841858,
+            0.5799999833106995,
+            0.5600000023841858,
+            1.0
+          ],
+          "vertices_array": "a157",
+          "faces_array": "a1"
+        },
+        {
+          "name": "REF_P06_spring_clip_outline",
+          "color": [
+            0.5600000023841858,
+            0.5799999833106995,
+            0.5600000023841858,
+            1.0
+          ],
+          "vertices_array": "a158",
+          "faces_array": "a150"
+        },
+        {
+          "name": "REF_P06_spring_clip_outline.001",
+          "color": [
+            0.5600000023841858,
+            0.5799999833106995,
+            0.5600000023841858,
+            1.0
+          ],
+          "vertices_array": "a159",
+          "faces_array": "a150"
+        },
+        {
+          "name": "REF_P06_visible_label_band",
+          "color": [
+            0.009999999776482582,
+            0.41999998688697815,
+            0.1899999976158142,
+            1.0
+          ],
+          "vertices_array": "a160",
+          "faces_array": "a3"
+        }
+      ],
+      "archive": "internals"
+    },
+    "P07": {
+      "model_id": "REF_P07",
+      "basis": "photo estimated display envelope; unpublished manufacturing dimensions",
+      "meshes": [
+        {
+          "name": "REF_P07_backing_outline",
+          "color": [
+            0.03500000014901161,
+            0.03999999910593033,
+            0.04399999976158142,
+            1.0
+          ],
+          "vertices_array": "a161",
+          "faces_array": "a1"
+        }
+      ],
+      "archive": "internals"
+    },
+    "P08": {
+      "model_id": "REF_P08",
+      "basis": "photo estimated display envelope; unpublished manufacturing dimensions",
+      "meshes": [
+        {
+          "name": "REF_P08_curved_cover_outline",
+          "color": [
+            0.020999999716877937,
+            0.02500000037252903,
+            0.028999999165534973,
+            1.0
+          ],
+          "vertices_array": "a162",
+          "faces_array": "a163"
+        }
+      ],
+      "archive": "internals"
+    },
+    "P09": {
+      "model_id": "REF_P09",
+      "basis": "photo estimated display envelope; unpublished manufacturing dimensions",
+      "meshes": [
+        {
+          "name": "REF_P09_foot_bend",
+          "color": [
+            0.5600000023841858,
+            0.5799999833106995,
+            0.5600000023841858,
+            1.0
+          ],
+          "vertices_array": "a164",
+          "faces_array": "a1"
+        },
+        {
+          "name": "REF_P09_terminal_foot",
+          "color": [
+            0.5600000023841858,
+            0.5799999833106995,
+            0.5600000023841858,
+            1.0
+          ],
+          "vertices_array": "a165",
+          "faces_array": "a1"
+        },
+        {
+          "name": "REF_P09_upright_visible_sheet",
+          "color": [
+            0.5600000023841858,
+            0.5799999833106995,
+            0.5600000023841858,
+            1.0
+          ],
+          "vertices_array": "a166",
+          "faces_array": "a1"
+        }
+      ],
+      "archive": "internals"
+    },
+    "P10": {
+      "model_id": "REF_P10",
+      "basis": "photo estimated display envelope; unpublished manufacturing dimensions",
+      "meshes": [
+        {
+          "name": "REF_P10_foot_bend",
+          "color": [
+            0.5600000023841858,
+            0.5799999833106995,
+            0.5600000023841858,
+            1.0
+          ],
+          "vertices_array": "a167",
+          "faces_array": "a1"
+        },
+        {
+          "name": "REF_P10_terminal_foot",
+          "color": [
+            0.5600000023841858,
+            0.5799999833106995,
+            0.5600000023841858,
+            1.0
+          ],
+          "vertices_array": "a168",
+          "faces_array": "a1"
+        },
+        {
+          "name": "REF_P10_upright_visible_sheet",
+          "color": [
+            0.5600000023841858,
+            0.5799999833106995,
+            0.5600000023841858,
+            1.0
+          ],
+          "vertices_array": "a169",
+          "faces_array": "a1"
+        }
+      ],
+      "archive": "internals"
+    },
+    "P11": {
+      "model_id": "REF_P11",
+      "basis": "photo estimated display envelope; unpublished manufacturing dimensions",
+      "meshes": [
+        {
+          "name": "REF_P11_outline",
+          "color": [
+            0.5600000023841858,
+            0.5799999833106995,
+            0.5600000023841858,
+            1.0
+          ],
+          "vertices_array": "a170",
+          "faces_array": "a1"
+        }
+      ],
+      "archive": "internals"
+    },
+    "P12": {
+      "model_id": "REF_P12",
+      "basis": "photo estimated display envelope; unpublished manufacturing dimensions",
+      "meshes": [
+        {
+          "name": "REF_P12_outline",
+          "color": [
+            0.5600000023841858,
+            0.5799999833106995,
+            0.5600000023841858,
+            1.0
+          ],
+          "vertices_array": "a171",
+          "faces_array": "a1"
+        }
+      ],
+      "archive": "internals"
+    },
+    "P13": {
+      "model_id": "REF_P13",
+      "basis": "photo estimated display envelope; unpublished manufacturing dimensions",
+      "meshes": [
+        {
+          "name": "REF_P13_outline",
+          "color": [
+            0.5600000023841858,
+            0.5799999833106995,
+            0.5600000023841858,
+            1.0
+          ],
+          "vertices_array": "a172",
+          "faces_array": "a1"
+        }
+      ],
+      "archive": "internals"
+    },
+    "P14": {
+      "model_id": "REF_P14",
+      "basis": "photo estimated display envelope; unpublished manufacturing dimensions",
+      "meshes": [
+        {
+          "name": "REF_P14_photo_cap_tab",
+          "color": [
+            0.8799999952316284,
+            0.8799999952316284,
+            0.8199999928474426,
+            1.0
+          ],
+          "vertices_array": "a173",
+          "faces_array": "a1"
+        },
+        {
+          "name": "REF_P14_photo_cap_tab.001",
+          "color": [
+            0.8799999952316284,
+            0.8799999952316284,
+            0.8199999928474426,
+            1.0
+          ],
+          "vertices_array": "a174",
+          "faces_array": "a1"
+        },
+        {
+          "name": "REF_P14_photo_metal_flange",
+          "color": [
+            0.5600000023841858,
+            0.5799999833106995,
+            0.5600000023841858,
+            1.0
+          ],
+          "vertices_array": "a175",
+          "faces_array": "a1"
+        },
+        {
+          "name": "REF_P14_photo_metal_shell",
+          "color": [
+            0.5600000023841858,
+            0.5799999833106995,
+            0.5600000023841858,
+            1.0
+          ],
+          "vertices_array": "a176",
+          "faces_array": "a177"
+        },
+        {
+          "name": "REF_P14_photo_metal_shell.001",
+          "color": [
+            0.5600000023841858,
+            0.5799999833106995,
+            0.5600000023841858,
+            1.0
+          ],
+          "vertices_array": "a178",
+          "faces_array": "a177"
+        },
+        {
+          "name": "REF_P14_photo_mount_head_outline",
+          "color": [
+            0.5600000023841858,
+            0.5799999833106995,
+            0.5600000023841858,
+            1.0
+          ],
+          "vertices_array": "a179",
+          "faces_array": "a180"
+        },
+        {
+          "name": "REF_P14_photo_mount_head_outline.001",
+          "color": [
+            0.5600000023841858,
+            0.5799999833106995,
+            0.5600000023841858,
+            1.0
+          ],
+          "vertices_array": "a181",
+          "faces_array": "a180"
+        },
+        {
+          "name": "REF_P14_photo_mount_head_outline.002",
+          "color": [
+            0.5600000023841858,
+            0.5799999833106995,
+            0.5600000023841858,
+            1.0
+          ],
+          "vertices_array": "a182",
+          "faces_array": "a180"
+        },
+        {
+          "name": "REF_P14_photo_mount_head_outline.003",
+          "color": [
+            0.5600000023841858,
+            0.5799999833106995,
+            0.5600000023841858,
+            1.0
+          ],
+          "vertices_array": "a183",
+          "faces_array": "a180"
+        },
+        {
+          "name": "REF_P14_photo_white_shipping_cap",
+          "color": [
+            0.8799999952316284,
+            0.8799999952316284,
+            0.8199999928474426,
+            1.0
+          ],
+          "vertices_array": "a184",
+          "faces_array": "a177"
+        },
+        {
+          "name": "REF_P14_photo_white_shipping_cap.001",
+          "color": [
+            0.8799999952316284,
+            0.8799999952316284,
+            0.8199999928474426,
+            1.0
+          ],
+          "vertices_array": "a185",
+          "faces_array": "a177"
+        }
+      ],
+      "archive": "internals"
+    },
+    "P15": {
+      "model_id": "REF_P15",
+      "basis": "photo estimated display envelope; unpublished manufacturing dimensions",
+      "meshes": [
+        {
+          "name": "REF_P15_photo_cap_tab",
+          "color": [
+            0.8799999952316284,
+            0.8799999952316284,
+            0.8199999928474426,
+            1.0
+          ],
+          "vertices_array": "a186",
+          "faces_array": "a1"
+        },
+        {
+          "name": "REF_P15_photo_cap_tab.001",
+          "color": [
+            0.8799999952316284,
+            0.8799999952316284,
+            0.8199999928474426,
+            1.0
+          ],
+          "vertices_array": "a187",
+          "faces_array": "a1"
+        },
+        {
+          "name": "REF_P15_photo_metal_flange",
+          "color": [
+            0.5600000023841858,
+            0.5799999833106995,
+            0.5600000023841858,
+            1.0
+          ],
+          "vertices_array": "a188",
+          "faces_array": "a1"
+        },
+        {
+          "name": "REF_P15_photo_metal_shell",
+          "color": [
+            0.5600000023841858,
+            0.5799999833106995,
+            0.5600000023841858,
+            1.0
+          ],
+          "vertices_array": "a189",
+          "faces_array": "a177"
+        },
+        {
+          "name": "REF_P15_photo_metal_shell.001",
+          "color": [
+            0.5600000023841858,
+            0.5799999833106995,
+            0.5600000023841858,
+            1.0
+          ],
+          "vertices_array": "a190",
+          "faces_array": "a177"
+        },
+        {
+          "name": "REF_P15_photo_mount_head_outline",
+          "color": [
+            0.5600000023841858,
+            0.5799999833106995,
+            0.5600000023841858,
+            1.0
+          ],
+          "vertices_array": "a191",
+          "faces_array": "a180"
+        },
+        {
+          "name": "REF_P15_photo_mount_head_outline.001",
+          "color": [
+            0.5600000023841858,
+            0.5799999833106995,
+            0.5600000023841858,
+            1.0
+          ],
+          "vertices_array": "a192",
+          "faces_array": "a180"
+        },
+        {
+          "name": "REF_P15_photo_mount_head_outline.002",
+          "color": [
+            0.5600000023841858,
+            0.5799999833106995,
+            0.5600000023841858,
+            1.0
+          ],
+          "vertices_array": "a193",
+          "faces_array": "a180"
+        },
+        {
+          "name": "REF_P15_photo_mount_head_outline.003",
+          "color": [
+            0.5600000023841858,
+            0.5799999833106995,
+            0.5600000023841858,
+            1.0
+          ],
+          "vertices_array": "a194",
+          "faces_array": "a180"
+        },
+        {
+          "name": "REF_P15_photo_white_shipping_cap",
+          "color": [
+            0.8799999952316284,
+            0.8799999952316284,
+            0.8199999928474426,
+            1.0
+          ],
+          "vertices_array": "a195",
+          "faces_array": "a177"
+        },
+        {
+          "name": "REF_P15_photo_white_shipping_cap.001",
+          "color": [
+            0.8799999952316284,
+            0.8799999952316284,
+            0.8199999928474426,
+            1.0
+          ],
+          "vertices_array": "a196",
+          "faces_array": "a177"
+        }
+      ],
+      "archive": "internals"
+    },
+    "P18": {
+      "model_id": "REF_P18",
+      "basis": "photo estimated display envelope; unpublished manufacturing dimensions",
+      "meshes": [
+        {
+          "name": "REF_P18_mount",
+          "color": [
+            0.03500000014901161,
+            0.03999999910593033,
+            0.04399999976158142,
+            1.0
+          ],
+          "vertices_array": "a197",
+          "faces_array": "a1"
+        },
+        {
+          "name": "REF_P18_photo_outline",
+          "color": [
+            0.03500000014901161,
+            0.03999999910593033,
+            0.04399999976158142,
+            1.0
+          ],
+          "vertices_array": "a198",
+          "faces_array": "a1"
+        }
+      ],
+      "archive": "internals"
+    },
+    "T31": {
+      "model_id": "REF_T31",
+      "basis": "photo estimated display envelope; unpublished manufacturing dimensions",
+      "meshes": [
+        {
+          "name": "REF_T31_sleeve_wall",
+          "color": [
+            0.33000001311302185,
+            0.4300000071525574,
+            0.3199999928474426,
+            1.0
+          ],
+          "vertices_array": "a199",
+          "faces_array": "a1"
+        },
+        {
+          "name": "REF_T31_sleeve_wall.001",
+          "color": [
+            0.33000001311302185,
+            0.4300000071525574,
+            0.3199999928474426,
+            1.0
+          ],
+          "vertices_array": "a200",
+          "faces_array": "a1"
+        },
+        {
+          "name": "REF_T31_sleeve_wall.002",
+          "color": [
+            0.33000001311302185,
+            0.4300000071525574,
+            0.3199999928474426,
+            1.0
+          ],
+          "vertices_array": "a201",
+          "faces_array": "a1"
+        },
+        {
+          "name": "REF_T31_sleeve_wall.003",
+          "color": [
+            0.33000001311302185,
+            0.4300000071525574,
+            0.3199999928474426,
+            1.0
+          ],
+          "vertices_array": "a202",
+          "faces_array": "a1"
+        },
+        {
+          "name": "REF_T31_sleeve_wall.004",
+          "color": [
+            0.33000001311302185,
+            0.4300000071525574,
+            0.3199999928474426,
+            1.0
+          ],
+          "vertices_array": "a203",
+          "faces_array": "a1"
+        }
+      ],
+      "archive": "internals"
+    },
+    "T32": {
+      "model_id": "REF_T32",
+      "basis": "photo estimated display envelope; unpublished manufacturing dimensions",
+      "meshes": [
+        {
+          "name": "REF_T32_sleeve_wall",
+          "color": [
+            0.33000001311302185,
+            0.4300000071525574,
+            0.3199999928474426,
+            1.0
+          ],
+          "vertices_array": "a204",
+          "faces_array": "a1"
+        },
+        {
+          "name": "REF_T32_sleeve_wall.001",
+          "color": [
+            0.33000001311302185,
+            0.4300000071525574,
+            0.3199999928474426,
+            1.0
+          ],
+          "vertices_array": "a205",
+          "faces_array": "a1"
+        },
+        {
+          "name": "REF_T32_sleeve_wall.002",
+          "color": [
+            0.33000001311302185,
+            0.4300000071525574,
+            0.3199999928474426,
+            1.0
+          ],
+          "vertices_array": "a206",
+          "faces_array": "a1"
+        },
+        {
+          "name": "REF_T32_sleeve_wall.003",
+          "color": [
+            0.33000001311302185,
+            0.4300000071525574,
+            0.3199999928474426,
+            1.0
+          ],
+          "vertices_array": "a207",
+          "faces_array": "a1"
+        },
+        {
+          "name": "REF_T32_sleeve_wall.004",
+          "color": [
+            0.33000001311302185,
+            0.4300000071525574,
+            0.3199999928474426,
+            1.0
+          ],
+          "vertices_array": "a208",
+          "faces_array": "a1"
+        }
+      ],
+      "archive": "internals"
+    },
+    "T33": {
+      "model_id": "REF_T33",
+      "basis": "photo estimated display envelope; unpublished manufacturing dimensions",
+      "meshes": [
+        {
+          "name": "REF_T33_sleeve_wall",
+          "color": [
+            0.7900000214576721,
+            0.800000011920929,
+            0.6700000166893005,
+            1.0
+          ],
+          "vertices_array": "a209",
+          "faces_array": "a1"
+        },
+        {
+          "name": "REF_T33_sleeve_wall.001",
+          "color": [
+            0.7900000214576721,
+            0.800000011920929,
+            0.6700000166893005,
+            1.0
+          ],
+          "vertices_array": "a210",
+          "faces_array": "a1"
+        },
+        {
+          "name": "REF_T33_sleeve_wall.002",
+          "color": [
+            0.7900000214576721,
+            0.800000011920929,
+            0.6700000166893005,
+            1.0
+          ],
+          "vertices_array": "a211",
+          "faces_array": "a1"
+        },
+        {
+          "name": "REF_T33_sleeve_wall.003",
+          "color": [
+            0.7900000214576721,
+            0.800000011920929,
+            0.6700000166893005,
+            1.0
+          ],
+          "vertices_array": "a212",
+          "faces_array": "a1"
+        },
+        {
+          "name": "REF_T33_sleeve_wall.004",
+          "color": [
+            0.7900000214576721,
+            0.800000011920929,
+            0.6700000166893005,
+            1.0
+          ],
+          "vertices_array": "a213",
+          "faces_array": "a1"
+        }
+      ],
+      "archive": "internals"
+    },
+    "T34": {
+      "model_id": "REF_T34",
+      "basis": "photo estimated display envelope; unpublished manufacturing dimensions",
+      "meshes": [
+        {
+          "name": "REF_T34_sleeve_wall",
+          "color": [
+            0.7900000214576721,
+            0.800000011920929,
+            0.6700000166893005,
+            1.0
+          ],
+          "vertices_array": "a214",
+          "faces_array": "a1"
+        },
+        {
+          "name": "REF_T34_sleeve_wall.001",
+          "color": [
+            0.7900000214576721,
+            0.800000011920929,
+            0.6700000166893005,
+            1.0
+          ],
+          "vertices_array": "a215",
+          "faces_array": "a1"
+        },
+        {
+          "name": "REF_T34_sleeve_wall.002",
+          "color": [
+            0.7900000214576721,
+            0.800000011920929,
+            0.6700000166893005,
+            1.0
+          ],
+          "vertices_array": "a216",
+          "faces_array": "a1"
+        },
+        {
+          "name": "REF_T34_sleeve_wall.003",
+          "color": [
+            0.7900000214576721,
+            0.800000011920929,
+            0.6700000166893005,
+            1.0
+          ],
+          "vertices_array": "a217",
+          "faces_array": "a1"
+        },
+        {
+          "name": "REF_T34_sleeve_wall.004",
+          "color": [
+            0.7900000214576721,
+            0.800000011920929,
+            0.6700000166893005,
+            1.0
+          ],
+          "vertices_array": "a218",
+          "faces_array": "a1"
+        }
+      ],
+      "archive": "internals"
+    },
+    "T41": {
+      "model_id": "REF_T41",
+      "basis": "photo estimated display envelope; unpublished manufacturing dimensions",
+      "meshes": [
+        {
+          "name": "REF_T41_sleeve_wall",
+          "color": [
+            0.33000001311302185,
+            0.4300000071525574,
+            0.3199999928474426,
+            1.0
+          ],
+          "vertices_array": "a219",
+          "faces_array": "a1"
+        },
+        {
+          "name": "REF_T41_sleeve_wall.001",
+          "color": [
+            0.33000001311302185,
+            0.4300000071525574,
+            0.3199999928474426,
+            1.0
+          ],
+          "vertices_array": "a220",
+          "faces_array": "a1"
+        },
+        {
+          "name": "REF_T41_sleeve_wall.002",
+          "color": [
+            0.33000001311302185,
+            0.4300000071525574,
+            0.3199999928474426,
+            1.0
+          ],
+          "vertices_array": "a221",
+          "faces_array": "a1"
+        },
+        {
+          "name": "REF_T41_sleeve_wall.003",
+          "color": [
+            0.33000001311302185,
+            0.4300000071525574,
+            0.3199999928474426,
+            1.0
+          ],
+          "vertices_array": "a222",
+          "faces_array": "a1"
+        },
+        {
+          "name": "REF_T41_sleeve_wall.004",
+          "color": [
+            0.33000001311302185,
+            0.4300000071525574,
+            0.3199999928474426,
+            1.0
+          ],
+          "vertices_array": "a223",
+          "faces_array": "a1"
+        }
+      ],
+      "archive": "internals"
+    },
+    "T42": {
+      "model_id": "REF_T42",
+      "basis": "photo estimated display envelope; unpublished manufacturing dimensions",
+      "meshes": [
+        {
+          "name": "REF_T42_sleeve_wall",
+          "color": [
+            0.33000001311302185,
+            0.4300000071525574,
+            0.3199999928474426,
+            1.0
+          ],
+          "vertices_array": "a224",
+          "faces_array": "a1"
+        },
+        {
+          "name": "REF_T42_sleeve_wall.001",
+          "color": [
+            0.33000001311302185,
+            0.4300000071525574,
+            0.3199999928474426,
+            1.0
+          ],
+          "vertices_array": "a225",
+          "faces_array": "a1"
+        },
+        {
+          "name": "REF_T42_sleeve_wall.002",
+          "color": [
+            0.33000001311302185,
+            0.4300000071525574,
+            0.3199999928474426,
+            1.0
+          ],
+          "vertices_array": "a226",
+          "faces_array": "a1"
+        },
+        {
+          "name": "REF_T42_sleeve_wall.003",
+          "color": [
+            0.33000001311302185,
+            0.4300000071525574,
+            0.3199999928474426,
+            1.0
+          ],
+          "vertices_array": "a227",
+          "faces_array": "a1"
+        },
+        {
+          "name": "REF_T42_sleeve_wall.004",
+          "color": [
+            0.33000001311302185,
+            0.4300000071525574,
+            0.3199999928474426,
+            1.0
+          ],
+          "vertices_array": "a228",
+          "faces_array": "a1"
+        }
+      ],
+      "archive": "internals"
+    },
+    "T43": {
+      "model_id": "REF_T43",
+      "basis": "photo estimated display envelope; unpublished manufacturing dimensions",
+      "meshes": [
+        {
+          "name": "REF_T43_sleeve_wall",
+          "color": [
+            0.7900000214576721,
+            0.800000011920929,
+            0.6700000166893005,
+            1.0
+          ],
+          "vertices_array": "a229",
+          "faces_array": "a1"
+        },
+        {
+          "name": "REF_T43_sleeve_wall.001",
+          "color": [
+            0.7900000214576721,
+            0.800000011920929,
+            0.6700000166893005,
+            1.0
+          ],
+          "vertices_array": "a230",
+          "faces_array": "a1"
+        },
+        {
+          "name": "REF_T43_sleeve_wall.002",
+          "color": [
+            0.7900000214576721,
+            0.800000011920929,
+            0.6700000166893005,
+            1.0
+          ],
+          "vertices_array": "a231",
+          "faces_array": "a1"
+        },
+        {
+          "name": "REF_T43_sleeve_wall.003",
+          "color": [
+            0.7900000214576721,
+            0.800000011920929,
+            0.6700000166893005,
+            1.0
+          ],
+          "vertices_array": "a232",
+          "faces_array": "a1"
+        },
+        {
+          "name": "REF_T43_sleeve_wall.004",
+          "color": [
+            0.7900000214576721,
+            0.800000011920929,
+            0.6700000166893005,
+            1.0
+          ],
+          "vertices_array": "a233",
+          "faces_array": "a1"
+        }
+      ],
+      "archive": "internals"
+    },
+    "T44": {
+      "model_id": "REF_T44",
+      "basis": "photo estimated display envelope; unpublished manufacturing dimensions",
+      "meshes": [
+        {
+          "name": "REF_T44_sleeve_wall",
+          "color": [
+            0.7900000214576721,
+            0.800000011920929,
+            0.6700000166893005,
+            1.0
+          ],
+          "vertices_array": "a234",
+          "faces_array": "a1"
+        },
+        {
+          "name": "REF_T44_sleeve_wall.001",
+          "color": [
+            0.7900000214576721,
+            0.800000011920929,
+            0.6700000166893005,
+            1.0
+          ],
+          "vertices_array": "a235",
+          "faces_array": "a1"
+        },
+        {
+          "name": "REF_T44_sleeve_wall.002",
+          "color": [
+            0.7900000214576721,
+            0.800000011920929,
+            0.6700000166893005,
+            1.0
+          ],
+          "vertices_array": "a236",
+          "faces_array": "a1"
+        },
+        {
+          "name": "REF_T44_sleeve_wall.003",
+          "color": [
+            0.7900000214576721,
+            0.800000011920929,
+            0.6700000166893005,
+            1.0
+          ],
+          "vertices_array": "a237",
+          "faces_array": "a1"
+        },
+        {
+          "name": "REF_T44_sleeve_wall.004",
+          "color": [
+            0.7900000214576721,
+            0.800000011920929,
+            0.6700000166893005,
+            1.0
+          ],
+          "vertices_array": "a238",
+          "faces_array": "a1"
+        }
+      ],
+      "archive": "internals"
+    },
+    "P19": {
+      "model_id": "REF_P19",
+      "basis": "photo estimated display envelope; unpublished manufacturing dimensions",
+      "meshes": [
+        {
+          "name": "REF_P19_cap",
+          "color": [
+            0.5600000023841858,
+            0.5799999833106995,
+            0.5600000023841858,
+            1.0
+          ],
+          "vertices_array": "a239",
+          "faces_array": "a3"
+        },
+        {
+          "name": "REF_P19_cap.001",
+          "color": [
+            0.5600000023841858,
+            0.5799999833106995,
+            0.5600000023841858,
+            1.0
+          ],
+          "vertices_array": "a240",
+          "faces_array": "a3"
+        },
+        {
+          "name": "REF_P19_ceramic_outline",
+          "color": [
+            0.8799999952316284,
+            0.8799999952316284,
+            0.8199999928474426,
+            1.0
+          ],
+          "vertices_array": "a241",
+          "faces_array": "a3"
+        },
+        {
+          "name": "REF_P19_clip_back",
+          "color": [
+            0.5600000023841858,
+            0.5799999833106995,
+            0.5600000023841858,
+            1.0
+          ],
+          "vertices_array": "a242",
+          "faces_array": "a1"
+        },
+        {
+          "name": "REF_P19_clip_back.001",
+          "color": [
+            0.5600000023841858,
+            0.5799999833106995,
+            0.5600000023841858,
+            1.0
+          ],
+          "vertices_array": "a243",
+          "faces_array": "a1"
+        },
+        {
+          "name": "REF_P19_spring_clip_outline",
+          "color": [
+            0.5600000023841858,
+            0.5799999833106995,
+            0.5600000023841858,
+            1.0
+          ],
+          "vertices_array": "a244",
+          "faces_array": "a245"
+        },
+        {
+          "name": "REF_P19_spring_clip_outline.001",
+          "color": [
+            0.5600000023841858,
+            0.5799999833106995,
+            0.5600000023841858,
+            1.0
+          ],
+          "vertices_array": "a246",
+          "faces_array": "a245"
+        },
+        {
+          "name": "REF_P19_visible_label_band",
+          "color": [
+            0.949999988079071,
+            0.7200000286102295,
+            0.03999999910593033,
+            1.0
+          ],
+          "vertices_array": "a247",
+          "faces_array": "a3"
+        }
+      ],
+      "archive": "internals"
+    },
+    "P20": {
+      "model_id": "REF_P20",
+      "basis": "photo estimated display envelope; unpublished manufacturing dimensions",
+      "meshes": [
+        {
+          "name": "REF_P20_cap",
+          "color": [
+            0.5600000023841858,
+            0.5799999833106995,
+            0.5600000023841858,
+            1.0
+          ],
+          "vertices_array": "a248",
+          "faces_array": "a3"
+        },
+        {
+          "name": "REF_P20_cap.001",
+          "color": [
+            0.5600000023841858,
+            0.5799999833106995,
+            0.5600000023841858,
+            1.0
+          ],
+          "vertices_array": "a249",
+          "faces_array": "a3"
+        },
+        {
+          "name": "REF_P20_ceramic_outline",
+          "color": [
+            0.8799999952316284,
+            0.8799999952316284,
+            0.8199999928474426,
+            1.0
+          ],
+          "vertices_array": "a250",
+          "faces_array": "a3"
+        },
+        {
+          "name": "REF_P20_clip_back",
+          "color": [
+            0.5600000023841858,
+            0.5799999833106995,
+            0.5600000023841858,
+            1.0
+          ],
+          "vertices_array": "a251",
+          "faces_array": "a1"
+        },
+        {
+          "name": "REF_P20_clip_back.001",
+          "color": [
+            0.5600000023841858,
+            0.5799999833106995,
+            0.5600000023841858,
+            1.0
+          ],
+          "vertices_array": "a252",
+          "faces_array": "a1"
+        },
+        {
+          "name": "REF_P20_spring_clip_outline",
+          "color": [
+            0.5600000023841858,
+            0.5799999833106995,
+            0.5600000023841858,
+            1.0
+          ],
+          "vertices_array": "a253",
+          "faces_array": "a245"
+        },
+        {
+          "name": "REF_P20_spring_clip_outline.001",
+          "color": [
+            0.5600000023841858,
+            0.5799999833106995,
+            0.5600000023841858,
+            1.0
+          ],
+          "vertices_array": "a254",
+          "faces_array": "a245"
+        },
+        {
+          "name": "REF_P20_visible_label_band",
+          "color": [
+            0.949999988079071,
+            0.7200000286102295,
+            0.03999999910593033,
+            1.0
+          ],
+          "vertices_array": "a255",
+          "faces_array": "a3"
+        }
+      ],
+      "archive": "internals"
+    },
+    "P21": {
+      "model_id": "REF_P21",
+      "basis": "photo estimated display envelope; unpublished manufacturing dimensions",
+      "meshes": [
+        {
+          "name": "REF_P21_cap",
+          "color": [
+            0.5600000023841858,
+            0.5799999833106995,
+            0.5600000023841858,
+            1.0
+          ],
+          "vertices_array": "a256",
+          "faces_array": "a3"
+        },
+        {
+          "name": "REF_P21_cap.001",
+          "color": [
+            0.5600000023841858,
+            0.5799999833106995,
+            0.5600000023841858,
+            1.0
+          ],
+          "vertices_array": "a257",
+          "faces_array": "a3"
+        },
+        {
+          "name": "REF_P21_ceramic_outline",
+          "color": [
+            0.8799999952316284,
+            0.8799999952316284,
+            0.8199999928474426,
+            1.0
+          ],
+          "vertices_array": "a258",
+          "faces_array": "a3"
+        },
+        {
+          "name": "REF_P21_clip_back",
+          "color": [
+            0.5600000023841858,
+            0.5799999833106995,
+            0.5600000023841858,
+            1.0
+          ],
+          "vertices_array": "a259",
+          "faces_array": "a1"
+        },
+        {
+          "name": "REF_P21_clip_back.001",
+          "color": [
+            0.5600000023841858,
+            0.5799999833106995,
+            0.5600000023841858,
+            1.0
+          ],
+          "vertices_array": "a260",
+          "faces_array": "a1"
+        },
+        {
+          "name": "REF_P21_spring_clip_outline",
+          "color": [
+            0.5600000023841858,
+            0.5799999833106995,
+            0.5600000023841858,
+            1.0
+          ],
+          "vertices_array": "a261",
+          "faces_array": "a245"
+        },
+        {
+          "name": "REF_P21_spring_clip_outline.001",
+          "color": [
+            0.5600000023841858,
+            0.5799999833106995,
+            0.5600000023841858,
+            1.0
+          ],
+          "vertices_array": "a262",
+          "faces_array": "a245"
+        },
+        {
+          "name": "REF_P21_visible_label_band",
+          "color": [
+            0.75,
+            0.019999999552965164,
+            0.02500000037252903,
+            1.0
+          ],
+          "vertices_array": "a263",
+          "faces_array": "a3"
+        }
+      ],
+      "archive": "internals"
+    },
+    "P22": {
+      "model_id": "REF_P22",
+      "basis": "photo estimated display envelope; unpublished manufacturing dimensions",
+      "meshes": [
+        {
+          "name": "REF_P22_body_outline",
+          "color": [
+            0.8799999952316284,
+            0.8799999952316284,
+            0.8199999928474426,
+            1.0
+          ],
+          "vertices_array": "a264",
+          "faces_array": "a3"
+        },
+        {
+          "name": "REF_P22_end_outline",
+          "color": [
+            0.5600000023841858,
+            0.5799999833106995,
+            0.5600000023841858,
+            1.0
+          ],
+          "vertices_array": "a265",
+          "faces_array": "a3"
+        },
+        {
+          "name": "REF_P22_end_outline.001",
+          "color": [
+            0.5600000023841858,
+            0.5799999833106995,
+            0.5600000023841858,
+            1.0
+          ],
+          "vertices_array": "a266",
+          "faces_array": "a3"
+        },
+        {
+          "name": "REF_P22_flat_terminal_outline",
+          "color": [
+            0.5600000023841858,
+            0.5799999833106995,
+            0.5600000023841858,
+            1.0
+          ],
+          "vertices_array": "a267",
+          "faces_array": "a1"
+        },
+        {
+          "name": "REF_P22_flat_terminal_outline.001",
+          "color": [
+            0.5600000023841858,
+            0.5799999833106995,
+            0.5600000023841858,
+            1.0
+          ],
+          "vertices_array": "a268",
+          "faces_array": "a1"
+        }
+      ],
+      "archive": "internals"
+    },
+    "L01": {
+      "model_id": "REF_L01",
+      "basis": "photo estimated display envelope; unpublished manufacturing dimensions",
+      "meshes": [
+        {
+          "name": "REF_L01_barrel",
+          "color": [
+            0.5600000023841858,
+            0.5799999833106995,
+            0.5600000023841858,
+            1.0
+          ],
+          "vertices_array": "a269",
+          "faces_array": "a270"
+        },
+        {
+          "name": "REF_L01_sleeve",
+          "color": [
+            0.020999999716877937,
+            0.02500000037252903,
+            0.028999999165534973,
+            1.0
+          ],
+          "vertices_array": "a271",
+          "faces_array": "a270"
+        },
+        {
+          "name": "REF_L01_visible_ring",
+          "color": [
+            0.5600000023841858,
+            0.5799999833106995,
+            0.5600000023841858,
+            1.0
+          ],
+          "vertices_array": "a272",
+          "faces_array": "a273"
+        }
+      ],
+      "archive": "internals"
+    },
+    "L02": {
+      "model_id": "REF_L02",
+      "basis": "photo estimated display envelope; unpublished manufacturing dimensions",
+      "meshes": [
+        {
+          "name": "REF_L02_barrel",
+          "color": [
+            0.5600000023841858,
+            0.5799999833106995,
+            0.5600000023841858,
+            1.0
+          ],
+          "vertices_array": "a274",
+          "faces_array": "a270"
+        },
+        {
+          "name": "REF_L02_sleeve",
+          "color": [
+            0.020999999716877937,
+            0.02500000037252903,
+            0.028999999165534973,
+            1.0
+          ],
+          "vertices_array": "a275",
+          "faces_array": "a270"
+        },
+        {
+          "name": "REF_L02_visible_ring",
+          "color": [
+            0.5600000023841858,
+            0.5799999833106995,
+            0.5600000023841858,
+            1.0
+          ],
+          "vertices_array": "a276",
+          "faces_array": "a273"
+        }
+      ],
+      "archive": "internals"
+    },
+    "L03": {
+      "model_id": "REF_L03",
+      "basis": "photo estimated display envelope; unpublished manufacturing dimensions",
+      "meshes": [
+        {
+          "name": "REF_L03_barrel",
+          "color": [
+            0.5600000023841858,
+            0.5799999833106995,
+            0.5600000023841858,
+            1.0
+          ],
+          "vertices_array": "a277",
+          "faces_array": "a270"
+        },
+        {
+          "name": "REF_L03_sleeve",
+          "color": [
+            0.020999999716877937,
+            0.02500000037252903,
+            0.028999999165534973,
+            1.0
+          ],
+          "vertices_array": "a278",
+          "faces_array": "a270"
+        },
+        {
+          "name": "REF_L03_visible_ring",
+          "color": [
+            0.5600000023841858,
+            0.5799999833106995,
+            0.5600000023841858,
+            1.0
+          ],
+          "vertices_array": "a279",
+          "faces_array": "a273"
+        }
+      ],
+      "archive": "internals"
+    },
+    "L04": {
+      "model_id": "REF_L04",
+      "basis": "photo estimated display envelope; unpublished manufacturing dimensions",
+      "meshes": [
+        {
+          "name": "REF_L04_barrel",
+          "color": [
+            0.5600000023841858,
+            0.5799999833106995,
+            0.5600000023841858,
+            1.0
+          ],
+          "vertices_array": "a280",
+          "faces_array": "a270"
+        },
+        {
+          "name": "REF_L04_sleeve",
+          "color": [
+            0.020999999716877937,
+            0.02500000037252903,
+            0.028999999165534973,
+            1.0
+          ],
+          "vertices_array": "a281",
+          "faces_array": "a270"
+        },
+        {
+          "name": "REF_L04_visible_ring",
+          "color": [
+            0.5600000023841858,
+            0.5799999833106995,
+            0.5600000023841858,
+            1.0
+          ],
+          "vertices_array": "a282",
+          "faces_array": "a273"
+        }
+      ],
+      "archive": "internals"
+    },
+    "L05": {
+      "model_id": "REF_L05",
+      "basis": "photo estimated display envelope; unpublished manufacturing dimensions",
+      "meshes": [
+        {
+          "name": "REF_L05_barrel",
+          "color": [
+            0.5600000023841858,
+            0.5799999833106995,
+            0.5600000023841858,
+            1.0
+          ],
+          "vertices_array": "a283",
+          "faces_array": "a270"
+        },
+        {
+          "name": "REF_L05_sleeve",
+          "color": [
+            0.020999999716877937,
+            0.02500000037252903,
+            0.028999999165534973,
+            1.0
+          ],
+          "vertices_array": "a284",
+          "faces_array": "a270"
+        },
+        {
+          "name": "REF_L05_visible_ring",
+          "color": [
+            0.5600000023841858,
+            0.5799999833106995,
+            0.5600000023841858,
+            1.0
+          ],
+          "vertices_array": "a285",
+          "faces_array": "a273"
+        }
+      ],
+      "archive": "internals"
+    },
+    "L06": {
+      "model_id": "REF_L06",
+      "basis": "photo estimated display envelope; unpublished manufacturing dimensions",
+      "meshes": [
+        {
+          "name": "REF_L06_barrel",
+          "color": [
+            0.5600000023841858,
+            0.5799999833106995,
+            0.5600000023841858,
+            1.0
+          ],
+          "vertices_array": "a286",
+          "faces_array": "a270"
+        },
+        {
+          "name": "REF_L06_sleeve",
+          "color": [
+            0.020999999716877937,
+            0.02500000037252903,
+            0.028999999165534973,
+            1.0
+          ],
+          "vertices_array": "a287",
+          "faces_array": "a270"
+        },
+        {
+          "name": "REF_L06_visible_ring",
+          "color": [
+            0.5600000023841858,
+            0.5799999833106995,
+            0.5600000023841858,
+            1.0
+          ],
+          "vertices_array": "a288",
+          "faces_array": "a273"
+        }
+      ],
+      "archive": "internals"
+    },
+    "L07": {
+      "model_id": "REF_L07",
+      "basis": "photo estimated display envelope; unpublished manufacturing dimensions",
+      "meshes": [
+        {
+          "name": "REF_L07_barrel",
+          "color": [
+            0.5600000023841858,
+            0.5799999833106995,
+            0.5600000023841858,
+            1.0
+          ],
+          "vertices_array": "a289",
+          "faces_array": "a270"
+        },
+        {
+          "name": "REF_L07_sleeve",
+          "color": [
+            0.020999999716877937,
+            0.02500000037252903,
+            0.028999999165534973,
+            1.0
+          ],
+          "vertices_array": "a290",
+          "faces_array": "a270"
+        },
+        {
+          "name": "REF_L07_visible_ring",
+          "color": [
+            0.5600000023841858,
+            0.5799999833106995,
+            0.5600000023841858,
+            1.0
+          ],
+          "vertices_array": "a291",
+          "faces_array": "a273"
+        }
+      ],
+      "archive": "internals"
+    },
+    "J01": {
+      "model_id": "REF_J01",
+      "basis": "photo estimated display envelope; unpublished manufacturing dimensions",
+      "meshes": [
+        {
+          "name": "REF_J01_exposed_stud",
+          "color": [
+            0.5600000023841858,
+            0.5799999833106995,
+            0.5600000023841858,
+            1.0
+          ],
+          "vertices_array": "a292",
+          "faces_array": "a3"
+        },
+        {
+          "name": "REF_J01_hex_nut",
+          "color": [
+            0.5600000023841858,
+            0.5799999833106995,
+            0.5600000023841858,
+            1.0
+          ],
+          "vertices_array": "a293",
+          "faces_array": "a294"
+        },
+        {
+          "name": "REF_J01_washer",
+          "color": [
+            0.5600000023841858,
+            0.5799999833106995,
+            0.5600000023841858,
+            1.0
+          ],
+          "vertices_array": "a295",
+          "faces_array": "a3"
+        }
+      ],
+      "archive": "internals"
+    },
+    "J02": {
+      "model_id": "REF_J02",
+      "basis": "photo estimated display envelope; unpublished manufacturing dimensions",
+      "meshes": [
+        {
+          "name": "REF_J02_exposed_stud",
+          "color": [
+            0.5600000023841858,
+            0.5799999833106995,
+            0.5600000023841858,
+            1.0
+          ],
+          "vertices_array": "a296",
+          "faces_array": "a3"
+        },
+        {
+          "name": "REF_J02_hex_nut",
+          "color": [
+            0.5600000023841858,
+            0.5799999833106995,
+            0.5600000023841858,
+            1.0
+          ],
+          "vertices_array": "a297",
+          "faces_array": "a294"
+        },
+        {
+          "name": "REF_J02_washer",
+          "color": [
+            0.5600000023841858,
+            0.5799999833106995,
+            0.5600000023841858,
+            1.0
+          ],
+          "vertices_array": "a298",
+          "faces_array": "a3"
+        }
+      ],
+      "archive": "internals"
+    },
+    "J03": {
+      "model_id": "REF_J03",
+      "basis": "photo estimated display envelope; unpublished manufacturing dimensions",
+      "meshes": [
+        {
+          "name": "REF_J03_round_socket_head",
+          "color": [
+            0.5600000023841858,
+            0.5799999833106995,
+            0.5600000023841858,
+            1.0
+          ],
+          "vertices_array": "a299",
+          "faces_array": "a300"
+        },
+        {
+          "name": "REF_J03_washer",
+          "color": [
+            0.5600000023841858,
+            0.5799999833106995,
+            0.5600000023841858,
+            1.0
+          ],
+          "vertices_array": "a301",
+          "faces_array": "a3"
+        }
+      ],
+      "archive": "internals"
+    },
+    "J04": {
+      "model_id": "REF_J04",
+      "basis": "photo estimated display envelope; unpublished manufacturing dimensions",
+      "meshes": [
+        {
+          "name": "REF_J04_round_socket_head",
+          "color": [
+            0.5600000023841858,
+            0.5799999833106995,
+            0.5600000023841858,
+            1.0
+          ],
+          "vertices_array": "a302",
+          "faces_array": "a300"
+        },
+        {
+          "name": "REF_J04_washer",
+          "color": [
+            0.5600000023841858,
+            0.5799999833106995,
+            0.5600000023841858,
+            1.0
+          ],
+          "vertices_array": "a303",
+          "faces_array": "a3"
+        }
+      ],
+      "archive": "internals"
+    },
+    "J05": {
+      "model_id": "REF_J05",
+      "basis": "photo estimated display envelope; unpublished manufacturing dimensions",
+      "meshes": [
+        {
+          "name": "REF_J05_round_socket_head",
+          "color": [
+            0.5600000023841858,
+            0.5799999833106995,
+            0.5600000023841858,
+            1.0
+          ],
+          "vertices_array": "a304",
+          "faces_array": "a305"
+        },
+        {
+          "name": "REF_J05_washer",
+          "color": [
+            0.5600000023841858,
+            0.5799999833106995,
+            0.5600000023841858,
+            1.0
+          ],
+          "vertices_array": "a306",
+          "faces_array": "a3"
+        }
+      ],
+      "archive": "internals"
+    },
+    "J06": {
+      "model_id": "REF_J06",
+      "basis": "photo estimated display envelope; unpublished manufacturing dimensions",
+      "meshes": [
+        {
+          "name": "REF_J06_round_socket_head",
+          "color": [
+            0.5600000023841858,
+            0.5799999833106995,
+            0.5600000023841858,
+            1.0
+          ],
+          "vertices_array": "a307",
+          "faces_array": "a305"
+        },
+        {
+          "name": "REF_J06_washer",
+          "color": [
+            0.5600000023841858,
+            0.5799999833106995,
+            0.5600000023841858,
+            1.0
+          ],
+          "vertices_array": "a308",
+          "faces_array": "a3"
+        }
+      ],
+      "archive": "internals"
+    },
+    "J07": {
+      "model_id": "REF_J07",
+      "basis": "photo estimated display envelope; unpublished manufacturing dimensions",
+      "meshes": [
+        {
+          "name": "REF_J07_round_socket_head",
+          "color": [
+            0.5600000023841858,
+            0.5799999833106995,
+            0.5600000023841858,
+            1.0
+          ],
+          "vertices_array": "a309",
+          "faces_array": "a305"
+        },
+        {
+          "name": "REF_J07_washer",
+          "color": [
+            0.5600000023841858,
+            0.5799999833106995,
+            0.5600000023841858,
+            1.0
+          ],
+          "vertices_array": "a310",
+          "faces_array": "a3"
+        }
+      ],
+      "archive": "internals"
+    },
+    "J08": {
+      "model_id": "REF_J08",
+      "basis": "photo estimated display envelope; unpublished manufacturing dimensions",
+      "meshes": [
+        {
+          "name": "REF_J08_round_socket_head",
+          "color": [
+            0.5600000023841858,
+            0.5799999833106995,
+            0.5600000023841858,
+            1.0
+          ],
+          "vertices_array": "a311",
+          "faces_array": "a305"
+        },
+        {
+          "name": "REF_J08_washer",
+          "color": [
+            0.5600000023841858,
+            0.5799999833106995,
+            0.5600000023841858,
+            1.0
+          ],
+          "vertices_array": "a312",
+          "faces_array": "a3"
+        }
+      ],
+      "archive": "internals"
+    },
+    "J09": {
+      "model_id": "REF_J09",
+      "basis": "photo estimated display envelope; unpublished manufacturing dimensions",
+      "meshes": [
+        {
+          "name": "REF_J09_round_socket_head",
+          "color": [
+            0.5600000023841858,
+            0.5799999833106995,
+            0.5600000023841858,
+            1.0
+          ],
+          "vertices_array": "a313",
+          "faces_array": "a305"
+        },
+        {
+          "name": "REF_J09_washer",
+          "color": [
+            0.5600000023841858,
+            0.5799999833106995,
+            0.5600000023841858,
+            1.0
+          ],
+          "vertices_array": "a314",
+          "faces_array": "a3"
+        }
+      ],
+      "archive": "internals"
+    },
+    "J10": {
+      "model_id": "REF_J10",
+      "basis": "photo estimated display envelope; unpublished manufacturing dimensions",
+      "meshes": [
+        {
+          "name": "REF_J10_round_socket_head",
+          "color": [
+            0.5600000023841858,
+            0.5799999833106995,
+            0.5600000023841858,
+            1.0
+          ],
+          "vertices_array": "a315",
+          "faces_array": "a305"
+        },
+        {
+          "name": "REF_J10_washer",
+          "color": [
+            0.5600000023841858,
+            0.5799999833106995,
+            0.5600000023841858,
+            1.0
+          ],
+          "vertices_array": "a316",
+          "faces_array": "a3"
+        }
+      ],
+      "archive": "internals"
+    },
+    "J11": {
+      "model_id": "REF_J11",
+      "basis": "photo estimated display envelope; unpublished manufacturing dimensions",
+      "meshes": [
+        {
+          "name": "REF_J11_round_socket_head",
+          "color": [
+            0.5600000023841858,
+            0.5799999833106995,
+            0.5600000023841858,
+            1.0
+          ],
+          "vertices_array": "a317",
+          "faces_array": "a305"
+        },
+        {
+          "name": "REF_J11_washer",
+          "color": [
+            0.5600000023841858,
+            0.5799999833106995,
+            0.5600000023841858,
+            1.0
+          ],
+          "vertices_array": "a318",
+          "faces_array": "a3"
+        }
+      ],
+      "archive": "internals"
+    },
+    "J12": {
+      "model_id": "REF_J12",
+      "basis": "photo estimated display envelope; unpublished manufacturing dimensions",
+      "meshes": [
+        {
+          "name": "REF_J12_round_socket_head",
+          "color": [
+            0.5600000023841858,
+            0.5799999833106995,
+            0.5600000023841858,
+            1.0
+          ],
+          "vertices_array": "a319",
+          "faces_array": "a305"
+        },
+        {
+          "name": "REF_J12_washer",
+          "color": [
+            0.5600000023841858,
+            0.5799999833106995,
+            0.5600000023841858,
+            1.0
+          ],
+          "vertices_array": "a320",
+          "faces_array": "a3"
+        }
+      ],
+      "archive": "internals"
+    },
+    "J13": {
+      "model_id": "REF_J13",
+      "basis": "photo estimated display envelope; unpublished manufacturing dimensions",
+      "meshes": [
+        {
+          "name": "REF_J13_round_socket_head",
+          "color": [
+            0.5600000023841858,
+            0.5799999833106995,
+            0.5600000023841858,
+            1.0
+          ],
+          "vertices_array": "a321",
+          "faces_array": "a305"
+        },
+        {
+          "name": "REF_J13_washer",
+          "color": [
+            0.5600000023841858,
+            0.5799999833106995,
+            0.5600000023841858,
+            1.0
+          ],
+          "vertices_array": "a322",
+          "faces_array": "a3"
+        }
+      ],
+      "archive": "internals"
+    },
+    "J14": {
+      "model_id": "REF_J14",
+      "basis": "photo estimated display envelope; unpublished manufacturing dimensions",
+      "meshes": [
+        {
+          "name": "REF_J14_round_socket_head",
+          "color": [
+            0.5600000023841858,
+            0.5799999833106995,
+            0.5600000023841858,
+            1.0
+          ],
+          "vertices_array": "a323",
+          "faces_array": "a305"
+        },
+        {
+          "name": "REF_J14_washer",
+          "color": [
+            0.5600000023841858,
+            0.5799999833106995,
+            0.5600000023841858,
+            1.0
+          ],
+          "vertices_array": "a324",
+          "faces_array": "a3"
+        }
+      ],
+      "archive": "internals"
+    },
+    "J15": {
+      "model_id": "REF_J15",
+      "basis": "photo estimated display envelope; unpublished manufacturing dimensions",
+      "meshes": [
+        {
+          "name": "REF_J15_round_socket_head",
+          "color": [
+            0.5600000023841858,
+            0.5799999833106995,
+            0.5600000023841858,
+            1.0
+          ],
+          "vertices_array": "a325",
+          "faces_array": "a305"
+        },
+        {
+          "name": "REF_J15_washer",
+          "color": [
+            0.5600000023841858,
+            0.5799999833106995,
+            0.5600000023841858,
+            1.0
+          ],
+          "vertices_array": "a326",
+          "faces_array": "a3"
+        }
+      ],
+      "archive": "internals"
+    },
+    "J16": {
+      "model_id": "REF_J16",
+      "basis": "photo estimated display envelope; unpublished manufacturing dimensions",
+      "meshes": [
+        {
+          "name": "REF_J16_round_socket_head",
+          "color": [
+            0.5600000023841858,
+            0.5799999833106995,
+            0.5600000023841858,
+            1.0
+          ],
+          "vertices_array": "a327",
+          "faces_array": "a305"
+        },
+        {
+          "name": "REF_J16_washer",
+          "color": [
+            0.5600000023841858,
+            0.5799999833106995,
+            0.5600000023841858,
+            1.0
+          ],
+          "vertices_array": "a328",
+          "faces_array": "a3"
+        }
+      ],
+      "archive": "internals"
+    },
+    "J17": {
+      "model_id": "REF_J17",
+      "basis": "photo estimated display envelope; unpublished manufacturing dimensions",
+      "meshes": [
+        {
+          "name": "REF_J17_round_socket_head",
+          "color": [
+            0.5600000023841858,
+            0.5799999833106995,
+            0.5600000023841858,
+            1.0
+          ],
+          "vertices_array": "a329",
+          "faces_array": "a305"
+        },
+        {
+          "name": "REF_J17_washer",
+          "color": [
+            0.5600000023841858,
+            0.5799999833106995,
+            0.5600000023841858,
+            1.0
+          ],
+          "vertices_array": "a330",
+          "faces_array": "a3"
+        }
+      ],
+      "archive": "internals"
+    },
+    "J18": {
+      "model_id": "REF_J18",
+      "basis": "photo estimated display envelope; unpublished manufacturing dimensions",
+      "meshes": [
+        {
+          "name": "REF_J18_round_socket_head",
+          "color": [
+            0.5600000023841858,
+            0.5799999833106995,
+            0.5600000023841858,
+            1.0
+          ],
+          "vertices_array": "a331",
+          "faces_array": "a305"
+        },
+        {
+          "name": "REF_J18_washer",
+          "color": [
+            0.5600000023841858,
+            0.5799999833106995,
+            0.5600000023841858,
+            1.0
+          ],
+          "vertices_array": "a332",
+          "faces_array": "a3"
+        }
+      ],
+      "archive": "internals"
+    },
+    "J19": {
+      "model_id": "REF_J19",
+      "basis": "photo estimated display envelope; unpublished manufacturing dimensions",
+      "meshes": [
+        {
+          "name": "REF_J19_round_socket_head",
+          "color": [
+            0.5600000023841858,
+            0.5799999833106995,
+            0.5600000023841858,
+            1.0
+          ],
+          "vertices_array": "a333",
+          "faces_array": "a305"
+        },
+        {
+          "name": "REF_J19_washer",
+          "color": [
+            0.5600000023841858,
+            0.5799999833106995,
+            0.5600000023841858,
+            1.0
+          ],
+          "vertices_array": "a334",
+          "faces_array": "a3"
+        }
+      ],
+      "archive": "internals"
+    },
+    "J20": {
+      "model_id": "REF_J20",
+      "basis": "photo estimated display envelope; unpublished manufacturing dimensions",
+      "meshes": [
+        {
+          "name": "REF_J20_round_socket_head",
+          "color": [
+            0.5600000023841858,
+            0.5799999833106995,
+            0.5600000023841858,
+            1.0
+          ],
+          "vertices_array": "a335",
+          "faces_array": "a305"
+        },
+        {
+          "name": "REF_J20_washer",
+          "color": [
+            0.5600000023841858,
+            0.5799999833106995,
+            0.5600000023841858,
+            1.0
+          ],
+          "vertices_array": "a336",
+          "faces_array": "a3"
+        }
+      ],
+      "archive": "internals"
+    },
+    "J21": {
+      "model_id": "REF_J21",
+      "basis": "photo estimated display envelope; unpublished manufacturing dimensions",
+      "meshes": [
+        {
+          "name": "REF_J21_round_socket_head",
+          "color": [
+            0.5600000023841858,
+            0.5799999833106995,
+            0.5600000023841858,
+            1.0
+          ],
+          "vertices_array": "a337",
+          "faces_array": "a305"
+        },
+        {
+          "name": "REF_J21_washer",
+          "color": [
+            0.5600000023841858,
+            0.5799999833106995,
+            0.5600000023841858,
+            1.0
+          ],
+          "vertices_array": "a338",
+          "faces_array": "a3"
+        }
+      ],
+      "archive": "internals"
+    },
+    "J22": {
+      "model_id": "REF_J22",
+      "basis": "photo estimated display envelope; unpublished manufacturing dimensions",
+      "meshes": [
+        {
+          "name": "REF_J22_round_socket_head",
+          "color": [
+            0.5600000023841858,
+            0.5799999833106995,
+            0.5600000023841858,
+            1.0
+          ],
+          "vertices_array": "a339",
+          "faces_array": "a305"
+        },
+        {
+          "name": "REF_J22_washer",
+          "color": [
+            0.5600000023841858,
+            0.5799999833106995,
+            0.5600000023841858,
+            1.0
+          ],
+          "vertices_array": "a340",
+          "faces_array": "a3"
+        }
+      ],
+      "archive": "internals"
+    },
+    "J23": {
+      "model_id": "REF_J23",
+      "basis": "photo estimated display envelope; unpublished manufacturing dimensions",
+      "meshes": [
+        {
+          "name": "REF_J23_round_socket_head",
+          "color": [
+            0.5600000023841858,
+            0.5799999833106995,
+            0.5600000023841858,
+            1.0
+          ],
+          "vertices_array": "a341",
+          "faces_array": "a305"
+        },
+        {
+          "name": "REF_J23_washer",
+          "color": [
+            0.5600000023841858,
+            0.5799999833106995,
+            0.5600000023841858,
+            1.0
+          ],
+          "vertices_array": "a342",
+          "faces_array": "a3"
+        }
+      ],
+      "archive": "internals"
+    },
+    "W01": {
+      "model_id": "REF_W01",
+      "basis": "photo estimated display envelope; unpublished manufacturing dimensions",
+      "meshes": [
+        {
+          "name": "REF_W01_visible_trace",
+          "color": [
+            0.949999988079071,
+            0.20999999344348907,
+            0.014999999664723873,
+            1.0
+          ],
+          "vertices_array": "a0",
+          "faces_array": "a1"
+        }
+      ],
+      "archive": "wires"
+    },
+    "W02": {
+      "model_id": "REF_W02",
+      "basis": "photo estimated display envelope; unpublished manufacturing dimensions",
+      "meshes": [
+        {
+          "name": "REF_W02_visible_trace",
+          "color": [
+            0.949999988079071,
+            0.20999999344348907,
+            0.014999999664723873,
+            1.0
+          ],
+          "vertices_array": "a2",
+          "faces_array": "a3"
+        }
+      ],
+      "archive": "wires"
+    },
+    "W03": {
+      "model_id": "REF_W03",
+      "basis": "photo estimated display envelope; unpublished manufacturing dimensions",
+      "meshes": [
+        {
+          "name": "REF_W03_visible_trace",
+          "color": [
+            0.949999988079071,
+            0.20999999344348907,
+            0.014999999664723873,
+            1.0
+          ],
+          "vertices_array": "a4",
+          "faces_array": "a5"
+        }
+      ],
+      "archive": "wires"
+    },
+    "W04": {
+      "model_id": "REF_W04",
+      "basis": "photo estimated display envelope; unpublished manufacturing dimensions",
+      "meshes": [
+        {
+          "name": "REF_W04_visible_trace",
+          "color": [
+            0.949999988079071,
+            0.20999999344348907,
+            0.014999999664723873,
+            1.0
+          ],
+          "vertices_array": "a6",
+          "faces_array": "a7"
+        }
+      ],
+      "archive": "wires"
+    },
+    "W05": {
+      "model_id": "REF_W05",
+      "basis": "photo estimated display envelope; unpublished manufacturing dimensions",
+      "meshes": [
+        {
+          "name": "REF_W05_visible_trace",
+          "color": [
+            0.949999988079071,
+            0.20999999344348907,
+            0.014999999664723873,
+            1.0
+          ],
+          "vertices_array": "a8",
+          "faces_array": "a9"
+        }
+      ],
+      "archive": "wires"
+    },
+    "W06": {
+      "model_id": "REF_W06",
+      "basis": "photo estimated display envelope; unpublished manufacturing dimensions",
+      "meshes": [
+        {
+          "name": "REF_W06_visible_trace",
+          "color": [
+            0.949999988079071,
+            0.20999999344348907,
+            0.014999999664723873,
+            1.0
+          ],
+          "vertices_array": "a10",
+          "faces_array": "a11"
+        }
+      ],
+      "archive": "wires"
+    },
+    "W07": {
+      "model_id": "REF_W07",
+      "basis": "photo estimated display envelope; unpublished manufacturing dimensions",
+      "meshes": [
+        {
+          "name": "REF_W07_visible_trace",
+          "color": [
+            0.949999988079071,
+            0.20999999344348907,
+            0.014999999664723873,
+            1.0
+          ],
+          "vertices_array": "a12",
+          "faces_array": "a13"
+        }
+      ],
+      "archive": "wires"
+    },
+    "W08": {
+      "model_id": "REF_W08",
+      "basis": "photo estimated display envelope; unpublished manufacturing dimensions",
+      "meshes": [
+        {
+          "name": "REF_W08_visible_trace",
+          "color": [
+            0.949999988079071,
+            0.20999999344348907,
+            0.014999999664723873,
+            1.0
+          ],
+          "vertices_array": "a14",
+          "faces_array": "a15"
+        }
+      ],
+      "archive": "wires"
+    },
+    "W09": {
+      "model_id": "REF_W09",
+      "basis": "photo estimated display envelope; unpublished manufacturing dimensions",
+      "meshes": [
+        {
+          "name": "REF_W09_visible_trace",
+          "color": [
+            0.949999988079071,
+            0.20999999344348907,
+            0.014999999664723873,
+            1.0
+          ],
+          "vertices_array": "a16",
+          "faces_array": "a17"
+        }
+      ],
+      "archive": "wires"
+    },
+    "W10": {
+      "model_id": "REF_W10",
+      "basis": "photo estimated display envelope; unpublished manufacturing dimensions",
+      "meshes": [
+        {
+          "name": "REF_W10_visible_trace",
+          "color": [
+            0.949999988079071,
+            0.20999999344348907,
+            0.014999999664723873,
+            1.0
+          ],
+          "vertices_array": "a18",
+          "faces_array": "a19"
+        }
+      ],
+      "archive": "wires"
+    },
+    "W11": {
+      "model_id": "REF_W11",
+      "basis": "photo estimated display envelope; unpublished manufacturing dimensions",
+      "meshes": [
+        {
+          "name": "REF_W11_visible_trace",
+          "color": [
+            0.6499999761581421,
+            0.017999999225139618,
+            0.10999999940395355,
+            1.0
+          ],
+          "vertices_array": "a20",
+          "faces_array": "a21"
+        }
+      ],
+      "archive": "wires"
+    },
+    "W12": {
+      "model_id": "REF_W12",
+      "basis": "photo estimated display envelope; unpublished manufacturing dimensions",
+      "meshes": [
+        {
+          "name": "REF_W12_visible_trace",
+          "color": [
+            0.02500000037252903,
+            0.2800000011920929,
+            0.6299999952316284,
+            1.0
+          ],
+          "vertices_array": "a22",
+          "faces_array": "a23"
+        }
+      ],
+      "archive": "wires"
+    },
+    "W13": {
+      "model_id": "REF_W13",
+      "basis": "photo estimated display envelope; unpublished manufacturing dimensions",
+      "meshes": [
+        {
+          "name": "REF_W13_visible_trace",
+          "color": [
+            0.7900000214576721,
+            0.800000011920929,
+            0.6700000166893005,
+            1.0
+          ],
+          "vertices_array": "a24",
+          "faces_array": "a25"
+        }
+      ],
+      "archive": "wires"
+    },
+    "W14": {
+      "model_id": "REF_W14",
+      "basis": "photo estimated display envelope; unpublished manufacturing dimensions",
+      "meshes": [
+        {
+          "name": "REF_W14_visible_trace",
+          "color": [
+            0.012000000104308128,
+            0.01600000075995922,
+            0.019999999552965164,
+            1.0
+          ],
+          "vertices_array": "a26",
+          "faces_array": "a27"
+        }
+      ],
+      "archive": "wires"
+    },
+    "WI11": {
+      "model_id": "REF_WI11",
+      "basis": "photo estimated display envelope; unpublished manufacturing dimensions",
+      "meshes": [
+        {
+          "name": "REF_WI11_visible_trace",
+          "color": [
+            0.949999988079071,
+            0.20999999344348907,
+            0.014999999664723873,
+            1.0
+          ],
+          "vertices_array": "a28",
+          "faces_array": "a29"
+        }
+      ],
+      "archive": "wires"
+    },
+    "WI12": {
+      "model_id": "REF_WI12",
+      "basis": "photo estimated display envelope; unpublished manufacturing dimensions",
+      "meshes": [
+        {
+          "name": "REF_WI12_visible_trace",
+          "color": [
+            0.949999988079071,
+            0.20999999344348907,
+            0.014999999664723873,
+            1.0
+          ],
+          "vertices_array": "a30",
+          "faces_array": "a29"
+        }
+      ],
+      "archive": "wires"
+    },
+    "WI21": {
+      "model_id": "REF_WI21",
+      "basis": "photo estimated display envelope; unpublished manufacturing dimensions",
+      "meshes": [
+        {
+          "name": "REF_WI21_visible_trace",
+          "color": [
+            0.949999988079071,
+            0.20999999344348907,
+            0.014999999664723873,
+            1.0
+          ],
+          "vertices_array": "a31",
+          "faces_array": "a32"
+        }
+      ],
+      "archive": "wires"
+    },
+    "WI22": {
+      "model_id": "REF_WI22",
+      "basis": "photo estimated display envelope; unpublished manufacturing dimensions",
+      "meshes": [
+        {
+          "name": "REF_WI22_visible_trace",
+          "color": [
+            0.949999988079071,
+            0.20999999344348907,
+            0.014999999664723873,
+            1.0
+          ],
+          "vertices_array": "a33",
+          "faces_array": "a29"
+        }
+      ],
+      "archive": "wires"
+    },
+    "WI41": {
+      "model_id": "REF_WI41",
+      "basis": "photo estimated display envelope; unpublished manufacturing dimensions",
+      "meshes": [
+        {
+          "name": "REF_WI41_visible_trace",
+          "color": [
+            0.949999988079071,
+            0.20999999344348907,
+            0.014999999664723873,
+            1.0
+          ],
+          "vertices_array": "a34",
+          "faces_array": "a29"
+        }
+      ],
+      "archive": "wires"
+    },
+    "WI42": {
+      "model_id": "REF_WI42",
+      "basis": "photo estimated display envelope; unpublished manufacturing dimensions",
+      "meshes": [
+        {
+          "name": "REF_WI42_visible_trace",
+          "color": [
+            0.949999988079071,
+            0.20999999344348907,
+            0.014999999664723873,
+            1.0
+          ],
+          "vertices_array": "a35",
+          "faces_array": "a29"
+        }
+      ],
+      "archive": "wires"
+    },
+    "WI51": {
+      "model_id": "REF_WI51",
+      "basis": "photo estimated display envelope; unpublished manufacturing dimensions",
+      "meshes": [
+        {
+          "name": "REF_WI51_visible_trace",
+          "color": [
+            0.949999988079071,
+            0.20999999344348907,
+            0.014999999664723873,
+            1.0
+          ],
+          "vertices_array": "a36",
+          "faces_array": "a29"
+        }
+      ],
+      "archive": "wires"
+    },
+    "WI52": {
+      "model_id": "REF_WI52",
+      "basis": "photo estimated display envelope; unpublished manufacturing dimensions",
+      "meshes": [
+        {
+          "name": "REF_WI52_visible_trace",
+          "color": [
+            0.949999988079071,
+            0.20999999344348907,
+            0.014999999664723873,
+            1.0
+          ],
+          "vertices_array": "a37",
+          "faces_array": "a29"
+        }
+      ],
+      "archive": "wires"
+    },
+    "W15": {
+      "model_id": "REF_W15",
+      "basis": "photo estimated display envelope; unpublished manufacturing dimensions",
+      "meshes": [
+        {
+          "name": "REF_W15_visible_trace",
+          "color": [
+            0.949999988079071,
+            0.20999999344348907,
+            0.014999999664723873,
+            1.0
+          ],
+          "vertices_array": "a38",
+          "faces_array": "a39"
+        }
+      ],
+      "archive": "wires"
+    },
+    "W16": {
+      "model_id": "REF_W16",
+      "basis": "photo estimated display envelope; unpublished manufacturing dimensions",
+      "meshes": [
+        {
+          "name": "REF_W16_visible_trace",
+          "color": [
+            0.949999988079071,
+            0.20999999344348907,
+            0.014999999664723873,
+            1.0
+          ],
+          "vertices_array": "a40",
+          "faces_array": "a41"
+        }
+      ],
+      "archive": "wires"
+    },
+    "W17": {
+      "model_id": "REF_W17",
+      "basis": "photo estimated display envelope; unpublished manufacturing dimensions",
+      "meshes": [
+        {
+          "name": "REF_W17_visible_trace",
+          "color": [
+            0.949999988079071,
+            0.20999999344348907,
+            0.014999999664723873,
+            1.0
+          ],
+          "vertices_array": "a42",
+          "faces_array": "a43"
+        }
+      ],
+      "archive": "wires"
+    },
+    "W18": {
+      "model_id": "REF_W18",
+      "basis": "photo estimated display envelope; unpublished manufacturing dimensions",
+      "meshes": [
+        {
+          "name": "REF_W18_visible_trace",
+          "color": [
+            0.949999988079071,
+            0.20999999344348907,
+            0.014999999664723873,
+            1.0
+          ],
+          "vertices_array": "a44",
+          "faces_array": "a45"
+        }
+      ],
+      "archive": "wires"
+    },
+    "W19": {
+      "model_id": "REF_W19",
+      "basis": "photo estimated display envelope; unpublished manufacturing dimensions",
+      "meshes": [
+        {
+          "name": "REF_W19_visible_trace",
+          "color": [
+            0.949999988079071,
+            0.20999999344348907,
+            0.014999999664723873,
+            1.0
+          ],
+          "vertices_array": "a46",
+          "faces_array": "a47"
+        }
+      ],
+      "archive": "wires"
+    }
+  },
+  "archives": [
+    {
+      "file": "case.npz",
+      "sha256": "04e70e1e8c60fc5e12cc40eab9fb062351d1de130e6a5c83c5c8e16d2d1e82c6",
+      "bytes": 89155
+    },
+    {
+      "file": "P16.npz",
+      "sha256": "b40309eb66f2e9c55f2eb8a2d9c543384184ed37a56f2f910da399a982891d90",
+      "bytes": 846990
+    },
+    {
+      "file": "P17.npz",
+      "sha256": "3bb6616c9c5df182053ad10195857bf1d0653f1c42d45bb5791309992fa49d29",
+      "bytes": 815370
+    },
+    {
+      "file": "inner_housings.npz",
+      "sha256": "551326397a7826c442d18759cda1c9b8989e21c9f4e1334e769351bc5574297b",
+      "bytes": 671547
+    },
+    {
+      "file": "internals.npz",
+      "sha256": "da8424834137e9790b31643e9b4861652ceca4be28ca0d4b06ef3a3d5a7eaf59",
+      "bytes": 416943
+    },
+    {
+      "file": "wires.npz",
+      "sha256": "7c615998fe54e2a02847dac58ff9efcc150d822f42dbef574de42cb2fb44b3eb",
+      "bytes": 211564
+    }
+  ],
+  "feature_count": 92,
+  "mesh_count": 465,
+  "lossless_array_readback_equal": true,
+  "pge_parent_sha256": "c9171a968fd38b263099b21627a31fe37cab61a5e98b8d494ea3a38abfef4570",
+  "script_sha256": "e6c4cc9ac6e0422343520ba3ba7565fa0690d5c32005db5e1c0af02904bb782a"
+}

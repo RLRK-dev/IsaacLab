@@ -1,0 +1,44 @@
+{
+  "observed_at": "2026-09-21T07:49:17.195485+09:00",
+  "basis": "Command output and SHA/array readback; all final PDF pages visually inspected in this session.",
+  "product_features": 92,
+  "product_meshes": 465,
+  "product_triangles": 463032,
+  "input_array_equality": true,
+  "source_and_artifact_hashes_verified": true,
+  "pdf_sha256": "1b352b81b0ade891fc212de1ebde632febd07c58eefd94af4c104c1dce9ac29c",
+  "pages": [
+    {
+      "page": 1,
+      "sha256": "c4467c9cbad8a613ef3942e0356e7176440399584c20007961b622ccbbd19218",
+      "observed_layout": "Text readable; no clipping or label overlap observed."
+    },
+    {
+      "page": 2,
+      "sha256": "854ff19d56a3b61cca8c25dbec5310d0fbc94c5706cece3f11f3b6953c709c65",
+      "observed_layout": "Text readable; no clipping or label overlap observed."
+    },
+    {
+      "page": 3,
+      "sha256": "557a87fed5a97cbb7202fa9b04e14d5d2b7a2b3a8d57fc634b3fb5a93d64a45c",
+      "observed_layout": "Text readable; no clipping or label overlap observed."
+    }
+  ],
+  "numerical_checks": {
+    "intermediate_plane_missed_at_endpoints_but_found_in_sweep": true,
+    "swept_triangle_area_m2": 0.18000000000000005,
+    "retained_clipping_checks": {
+      "analytical_clipping_areas": [
+        0.5,
+        0.125,
+        0.0
+      ],
+      "expected": [
+        0.5,
+        0.125,
+        0.0
+      ]
+    }
+  },
+  "formal_physical_verdict": null
+}

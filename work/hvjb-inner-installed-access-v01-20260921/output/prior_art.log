@@ -1,0 +1,7 @@
+keywords=['HVJB', '内側ハウジング', '電線出口', 'ハンド本体']
+findings=5 blockers=0 lessons=0
+INFO: eval_runs/ur15_jb_harness_revision_20260907/analysis/hvjb_ur15_feasibility_survey_20260915.md:34: keyword='HVJB': [ローカル写真照合v02](/home/rlrk/IsaacLab-op040/eval_runs/ur15_jb_harness_revision_20260907/analysis/hvjb_photo_correspondence_v02.md)
+INFO: eval_runs/ur15_jb_harness_revision_20260907/analysis/hvjb_ur15_feasibility_survey_20260915.md:35: keyword='内側ハウジング': には、補機ヒューズが左3段／右2段、補機内側ハウジングが5個、各口に電力2＋HVIL2コンタクトとある。
+INFO: eval_runs/ur15_jb_harness_revision_20260907/analysis/hvjb_ur15_feasibility_survey_20260915.md:44: keyword='内側ハウジング': - 145秒：配線・内側ハウジングが付いた内部ユニットを、開いた筐体の上へ持っている。
+INFO: eval_runs/ur15_jb_harness_revision_20260907/analysis/hvjb_ur15_feasibility_survey_20260915.md:135: keyword='内側ハウジング': - C：補機・LV/HVIL。箱外で端子・内側ハウジング・ヒューズ板を準備できる範囲を比較する。
+INFO: eval_runs/ur15_jb_harness_revision_20260907/analysis/hvjb_ur15_feasibility_survey_20260915.md:151: keyword='内側ハウジング': | 前面補機口の内側ハウジング嵌合 | TEの対象CAD、端子・線付き外形、ラッチ、必要挿入方向 | 周辺部品取付前／後、保持・開放・抜去 |

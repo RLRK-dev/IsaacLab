@@ -1,0 +1,108 @@
+{
+  "delivery_root": "/home/rlrk/Downloads/HVJB_内側ハウジング実装・退避比較_v01_20260921",
+  "files": [
+    {
+      "path": "README.md",
+      "repository_path": "README.md",
+      "sha256": "d7d5400ec35e1941dd491e89576376c68509237f4a3260a43c26c69fe0f31c7d",
+      "bytes": 8964
+    },
+    {
+      "path": "document_audit.json",
+      "repository_path": "output/document_audit.json",
+      "sha256": "a4b860817cdb4a75de56127760f717ed8d1bd53bb1d47f77a84f2c9ab456958b",
+      "bytes": 755
+    },
+    {
+      "path": "geometry_run.log",
+      "repository_path": "output/geometry_run.log",
+      "sha256": "f68cf77673da56606846842c4812a5e39dcbd6f1f9d3742d6cdc2fa0b286c08f",
+      "bytes": 905
+    },
+    {
+      "path": "hand_I01.json.gz",
+      "repository_path": "output/hand_I01.json.gz",
+      "sha256": "2bd341010638396b94ce294978bb224859a448e885cb72fa4fa3f8c5ff8e0a08",
+      "bytes": 10847
+    },
+    {
+      "path": "hand_I02.json.gz",
+      "repository_path": "output/hand_I02.json.gz",
+      "sha256": "fe13ef0b3523262952e4c33fc93ecacf5c50163253600e4c7576ed0c181176d7",
+      "bytes": 10912
+    },
+    {
+      "path": "hand_I03.json.gz",
+      "repository_path": "output/hand_I03.json.gz",
+      "sha256": "c0fdccc3f2cb304ceaeff209bcc938ba615a590c276c3633beb1a99cadb2a549",
+      "bytes": 11002
+    },
+    {
+      "path": "hand_I04.json.gz",
+      "repository_path": "output/hand_I04.json.gz",
+      "sha256": "a13596c6e5f5879875555ffc78849bd52e047fbb97bd6527a9abf16d4bc652e1",
+      "bytes": 10772
+    },
+    {
+      "path": "hand_I05.json.gz",
+      "repository_path": "output/hand_I05.json.gz",
+      "sha256": "854f450d5a59a0fcaff145bed6c98f65d73e2466042b756d770e61e17ad51f8c",
+      "bytes": 10699
+    },
+    {
+      "path": "inputs_run.log",
+      "repository_path": "output/inputs_run.log",
+      "sha256": "ea2f9e84df5d29293c826533a317663d85066383425e5062774cd03f48ed3b00",
+      "bytes": 811
+    },
+    {
+      "path": "installed_access_observations.json",
+      "repository_path": "output/installed_access_observations.json",
+      "sha256": "12523929f056b988fcc93254c7d1c617d44d29191addf4679b9e37aa6827fc6f",
+      "bytes": 44986
+    },
+    {
+      "path": "pages/page-1.png",
+      "repository_path": "output/pages/page-1.png",
+      "sha256": "c4467c9cbad8a613ef3942e0356e7176440399584c20007961b622ccbbd19218",
+      "bytes": 273715
+    },
+    {
+      "path": "pages/page-2.png",
+      "repository_path": "output/pages/page-2.png",
+      "sha256": "854ff19d56a3b61cca8c25dbec5310d0fbc94c5706cece3f11f3b6953c709c65",
+      "bytes": 167366
+    },
+    {
+      "path": "pages/page-3.png",
+      "repository_path": "output/pages/page-3.png",
+      "sha256": "557a87fed5a97cbb7202fa9b04e14d5d2b7a2b3a8d57fc634b3fb5a93d64a45c",
+      "bytes": 195969
+    },
+    {
+      "path": "pdf/内側ハウジングのハンド本体・配線・退避比較_v01_20260921.pdf",
+      "repository_path": "output/pdf/内側ハウジングのハンド本体・配線・退避比較_v01_20260921.pdf",
+      "sha256": "1b352b81b0ade891fc212de1ebde632febd07c58eefd94af4c104c1dce9ac29c",
+      "bytes": 456415
+    },
+    {
+      "path": "prior_art.log",
+      "repository_path": "output/prior_art.log",
+      "sha256": "3bad57c4ba7cbc0cad9956461a40b5ef1ef501a7607c68252dd41124c299d05b",
+      "bytes": 1491
+    },
+    {
+      "path": "qa_receipt.json",
+      "repository_path": "output/qa_receipt.json",
+      "sha256": "7a1dc428f31b553dacb5f4b4a054097c7e9e2c6d23e4be206ac31fc324d33bdd",
+      "bytes": 1392
+    },
+    {
+      "path": "render_run.log",
+      "repository_path": "output/render_run.log",
+      "sha256": "e3958a05718c56ab90ffff510a36cf74c8bdcc8f0d45404cc4590a6a7fc2f59c",
+      "bytes": 271
+    }
+  ],
+  "formal_physical_verdict": null
+}
