@@ -48514,3 +48514,9 @@ ALT-1 (downgrade) — not chosen (the human's word). ALT-2 (`agent prompt`) — 
 - ⛔ 解錠なし・run 0（当卓）・当卓は裁定しない。
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1537 — ⚠ **訂正: §1536 の着信行の transcript 行番号が空（`:`）— 正 = m-p19-delivery-repair-20260920-01 = hub transcript `:45941`（`type=user`・09:56:59 JST）。原因 = 当卓の走査開始行を m-p4-285（:45956）の後に置いたが、p19 の便はその前に着いていた（sed の空置換・commit 前の残渣検査を行わなかった当卓の誤り）**（当卓 2026-09-20 10:03 JST 実測）
+
+- ⛔ 解錠なし・当卓は裁定しない。
+
+**Banked — 時刻は本節 commit の author date が正。**
