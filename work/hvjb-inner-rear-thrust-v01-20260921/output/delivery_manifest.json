@@ -1,0 +1,54 @@
+{
+  "files": [
+    {
+      "path": "README.md",
+      "sha256": "f636f50fd13938390121fbdc9c91018e127317b306143b27fd46ebef8783a2c8",
+      "bytes": 5650
+    },
+    {
+      "path": "document_audit.json",
+      "sha256": "77d8c25d0af627bf15f1287ac84c158654a78660a333ae650b9aa66e708466cd",
+      "bytes": 674
+    },
+    {
+      "path": "geometry_run.log",
+      "sha256": "f942284292c96b60dcbfa45d7cf47b7967d71fd8a608d2c868117d13dd318a49",
+      "bytes": 669
+    },
+    {
+      "path": "pages/page-1.png",
+      "sha256": "18e3b565c6d56b44ab53aab71887a0d94b45b4bd2e33a3033aa973c026790a5c",
+      "bytes": 246945
+    },
+    {
+      "path": "pages/page-2.png",
+      "sha256": "0a376e1d5b4c67d5d950de9de64c48b2998a0f51b80aca187275590e9dbdcc81",
+      "bytes": 161099
+    },
+    {
+      "path": "pdf/内側ハウジング後端の押し面比較_v01_20260921.pdf",
+      "sha256": "3f71b60194599f7e4e1f5dc1d7b6058f0a9522ac5b6ac78dce31bba9f502a21e",
+      "bytes": 304765
+    },
+    {
+      "path": "rear_thrust_observations.json",
+      "sha256": "3da8e19cc434472978c7ce6a844aa2c35179990a14e70ece2691bcf5a23b9f70",
+      "bytes": 19529
+    },
+    {
+      "path": "rear_thrust_tip_meshes.json.gz",
+      "sha256": "45fd0104e3f451ec5acc06fef0d7390cd3ba52a69461d3a48193c2182d5125e1",
+      "bytes": 7837
+    },
+    {
+      "path": "render_run.log",
+      "sha256": "634e9708f16535007eff6493caf50a11b98613671d1a520a0de998bf31afb3f7",
+      "bytes": 243
+    }
+  ],
+  "pdf_pages_visually_checked": [
+    1,
+    2
+  ],
+  "status": "comparison_only_not_physical_acceptance"
+}

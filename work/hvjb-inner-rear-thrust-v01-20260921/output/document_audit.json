@@ -1,0 +1,18 @@
+{
+  "pdf": "output/pdf/内側ハウジング後端の押し面比較_v01_20260921.pdf",
+  "sha256": "3f71b60194599f7e4e1f5dc1d7b6058f0a9522ac5b6ac78dce31bba9f502a21e",
+  "pages": [
+    {
+      "page": 1,
+      "text_outside_page": []
+    },
+    {
+      "page": 2,
+      "text_outside_page": []
+    }
+  ],
+  "observation_json_sha256": "3da8e19cc434472978c7ce6a844aa2c35179990a14e70ece2691bcf5a23b9f70",
+  "renderer_sha256": "4cc49b64d929742a1a706c22fba737ab7d96d03189649ced7a1b767bd6d8c7d5",
+  "reused_renderer_sha256": "3fbe36e58e0ef4a2d3e8717f81ce87236578de44b6b96de4bd745093e440f3ea",
+  "style_sha256": "f20d23ee507221a8be1f5c774988246562d3adc86c49dd1c6bbe6c15a35b3388"
+}

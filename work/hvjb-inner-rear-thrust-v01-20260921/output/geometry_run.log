@@ -1,0 +1,7 @@
+I01 bearing_mm2 [2.741043, 2.741043] cavity_overlap_mm2 [0.0, 0.0] header_axial_separation_mm 0.45006844997406287
+I02 bearing_mm2 [2.741043, 2.741043] cavity_overlap_mm2 [0.0, 0.0] header_axial_separation_mm 0.45006844997406287
+I03 bearing_mm2 [2.741043, 2.741043] cavity_overlap_mm2 [0.0, 0.0] header_axial_separation_mm 0.45006844997406287
+I04 bearing_mm2 [2.741043, 2.741043] cavity_overlap_mm2 [0.0, 0.0] header_axial_separation_mm 0.5000692963600186
+I05 bearing_mm2 [2.741043, 2.741043] cavity_overlap_mm2 [0.0, 0.0] header_axial_separation_mm 0.5000692963600186
+REAR_THRUST_OBSERVATIONS_COMPLETE
+[INFO] Using Python: "/home/rlrk/IsaacLab/env_isaaclab/bin/python"

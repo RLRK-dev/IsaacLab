@@ -1,0 +1,534 @@
+{
+  "config": {
+    "status": "comparison_only_not_manufacturing_or_acceptance_specification",
+    "pad_source_z_m": [
+      -0.0422,
+      -0.0391
+    ],
+    "carrier_source_z_m": [
+      -0.0435,
+      -0.0391
+    ],
+    "pad_offsets_from_original_rear_profile_m": [
+      0.0001,
+      0.001
+    ],
+    "carrier_offsets_m": [
+      0.001,
+      0.003
+    ],
+    "rear_lip_offsets_m": [
+      -0.0005,
+      0.001
+    ],
+    "rear_lip_front": "unchanged CAD minimum Z plane",
+    "opening_each_side_m": 0.002,
+    "withdrawal_m": 0.008,
+    "cavity_section_ahead_of_rear_plane_m": 5e-07,
+    "planar_selection_numeric_epsilon_m": 1e-08,
+    "strict_interior_numeric_inset_m": 1e-09,
+    "display_registration": "header-local (X,Y,Z) = (source X + bay X, -source Z - 0.0311, source Y)",
+    "display_registration_is_not_measured_mated_pose": true,
+    "wall_header_y_m": [
+      0.0,
+      0.003
+    ]
+  },
+  "bays": [
+    {
+      "id": "I01",
+      "key": "A",
+      "part_number": "2103245-1",
+      "header": "P16",
+      "rear_contact": {
+        "rear_plane_source_z_m": -0.04259999841451645,
+        "rear_flat_face_triangle_count": 272,
+        "rear_flat_face_total_m2": 2.037330913458573e-05,
+        "projected_bearing_by_side": [
+          {
+            "side": -1,
+            "rear_flat_face_projected_overlap_m2": 2.7410430568618747e-06
+          },
+          {
+            "side": 1,
+            "rear_flat_face_projected_overlap_m2": 2.7410430568618755e-06
+          }
+        ],
+        "cavity_sections": [
+          {
+            "section_bounds_m": [
+              [
+                -0.007639801884298629,
+                -0.0025898018481633127,
+                -0.04259949841451645
+              ],
+              [
+                -0.0027601981440135777,
+                0.0025898018481633127,
+                -0.04259949841451645
+              ]
+            ],
+            "section_area_m2": 2.5107399782919282e-05,
+            "closed_lip_projection_overlap_with_section_m2": 0
+          },
+          {
+            "section_bounds_m": [
+              [
+                0.0027601981440135777,
+                -0.0025898018481633127,
+                -0.04259949841451645
+              ],
+              [
+                0.007639801884298629,
+                0.0025898018481633127,
+                -0.04259949841451645
+              ]
+            ],
+            "section_area_m2": 2.5107399782919282e-05,
+            "closed_lip_projection_overlap_with_section_m2": 0
+          }
+        ],
+        "housing_surface_in_strict_tip_interiors": {
+          "unique_source_triangles_with_positive_clipped_area": 0,
+          "summed_clipped_surface_area_m2": 0.0,
+          "clipped_surface_area_by_tip_part_m2": {},
+          "clipped_points_bounds_m": null,
+          "meaning": "Saved mesh surface inside/on closed trial-tip volumes; not loaded contact area."
+        },
+        "meaning": "Nominal CAD projection, not deformed contact area, force capacity or wire clearance."
+      },
+      "closed_header_surface_in_tip_volumes": {
+        "unique_source_triangles_with_positive_clipped_area": 0,
+        "summed_clipped_surface_area_m2": 0.0,
+        "clipped_surface_area_by_tip_part_m2": {},
+        "clipped_points_bounds_m": null,
+        "meaning": "Saved mesh surface inside/on closed trial-tip volumes; not loaded contact area."
+      },
+      "release_comparison": {
+        "scope": "Open radially 0..2 mm each, then withdraw axially 0..8 mm, housing held stationary as an assumption.",
+        "bound_method": "Monotone translations; union endpoint AABB contains both full translation sweeps.",
+        "swept_tip_bounds_source_m": [
+          [
+            -0.013375000208616256,
+            -0.006324999939650297,
+            -0.0515
+          ],
+          [
+            0.013375000208616256,
+            0.006324999939650297,
+            -0.0391
+          ]
+        ],
+        "whole_header_axial_aabb_separation_m": 0.00045006844997406287,
+        "display_wall_axial_separation_m": 0.0050000000000000044,
+        "caveat": "Only tips versus retained header/wall pose; no actual wires, hand body, other internals or latch state."
+      }
+    },
+    {
+      "id": "I02",
+      "key": "D",
+      "part_number": "2103245-4",
+      "header": "P16",
+      "rear_contact": {
+        "rear_plane_source_z_m": -0.04259999841451645,
+        "rear_flat_face_triangle_count": 272,
+        "rear_flat_face_total_m2": 2.037330913458573e-05,
+        "projected_bearing_by_side": [
+          {
+            "side": -1,
+            "rear_flat_face_projected_overlap_m2": 2.7410430568618747e-06
+          },
+          {
+            "side": 1,
+            "rear_flat_face_projected_overlap_m2": 2.7410430568618755e-06
+          }
+        ],
+        "cavity_sections": [
+          {
+            "section_bounds_m": [
+              [
+                -0.007639801884298629,
+                -0.0025898018481633127,
+                -0.04259949841451645
+              ],
+              [
+                -0.0027601981440135777,
+                0.0025898018481633127,
+                -0.04259949841451645
+              ]
+            ],
+            "section_area_m2": 2.5107399782919282e-05,
+            "closed_lip_projection_overlap_with_section_m2": 0
+          },
+          {
+            "section_bounds_m": [
+              [
+                0.0027601981440135777,
+                -0.0025898018481633127,
+                -0.04259949841451645
+              ],
+              [
+                0.007639801884298629,
+                0.0025898018481633127,
+                -0.04259949841451645
+              ]
+            ],
+            "section_area_m2": 2.5107399782919282e-05,
+            "closed_lip_projection_overlap_with_section_m2": 0
+          }
+        ],
+        "housing_surface_in_strict_tip_interiors": {
+          "unique_source_triangles_with_positive_clipped_area": 0,
+          "summed_clipped_surface_area_m2": 0.0,
+          "clipped_surface_area_by_tip_part_m2": {},
+          "clipped_points_bounds_m": null,
+          "meaning": "Saved mesh surface inside/on closed trial-tip volumes; not loaded contact area."
+        },
+        "meaning": "Nominal CAD projection, not deformed contact area, force capacity or wire clearance."
+      },
+      "closed_header_surface_in_tip_volumes": {
+        "unique_source_triangles_with_positive_clipped_area": 0,
+        "summed_clipped_surface_area_m2": 0.0,
+        "clipped_surface_area_by_tip_part_m2": {},
+        "clipped_points_bounds_m": null,
+        "meaning": "Saved mesh surface inside/on closed trial-tip volumes; not loaded contact area."
+      },
+      "release_comparison": {
+        "scope": "Open radially 0..2 mm each, then withdraw axially 0..8 mm, housing held stationary as an assumption.",
+        "bound_method": "Monotone translations; union endpoint AABB contains both full translation sweeps.",
+        "swept_tip_bounds_source_m": [
+          [
+            -0.013375000208616256,
+            -0.006324999939650297,
+            -0.0515
+          ],
+          [
+            0.013375000208616256,
+            0.006324999939650297,
+            -0.0391
+          ]
+        ],
+        "whole_header_axial_aabb_separation_m": 0.00045006844997406287,
+        "display_wall_axial_separation_m": 0.0050000000000000044,
+        "caveat": "Only tips versus retained header/wall pose; no actual wires, hand body, other internals or latch state."
+      }
+    },
+    {
+      "id": "I03",
+      "key": "E",
+      "part_number": "2103245-5",
+      "header": "P16",
+      "rear_contact": {
+        "rear_plane_source_z_m": -0.04259999841451645,
+        "rear_flat_face_triangle_count": 272,
+        "rear_flat_face_total_m2": 2.037330913458573e-05,
+        "projected_bearing_by_side": [
+          {
+            "side": -1,
+            "rear_flat_face_projected_overlap_m2": 2.7410430568618747e-06
+          },
+          {
+            "side": 1,
+            "rear_flat_face_projected_overlap_m2": 2.7410430568618755e-06
+          }
+        ],
+        "cavity_sections": [
+          {
+            "section_bounds_m": [
+              [
+                -0.007639801884298629,
+                -0.0025898018481633127,
+                -0.04259949841451645
+              ],
+              [
+                -0.0027601981440135777,
+                0.0025898018481633127,
+                -0.04259949841451645
+              ]
+            ],
+            "section_area_m2": 2.5107399782919282e-05,
+            "closed_lip_projection_overlap_with_section_m2": 0
+          },
+          {
+            "section_bounds_m": [
+              [
+                0.0027601981440135777,
+                -0.0025898018481633127,
+                -0.04259949841451645
+              ],
+              [
+                0.007639801884298629,
+                0.0025898018481633127,
+                -0.04259949841451645
+              ]
+            ],
+            "section_area_m2": 2.5107399782919282e-05,
+            "closed_lip_projection_overlap_with_section_m2": 0
+          }
+        ],
+        "housing_surface_in_strict_tip_interiors": {
+          "unique_source_triangles_with_positive_clipped_area": 0,
+          "summed_clipped_surface_area_m2": 0.0,
+          "clipped_surface_area_by_tip_part_m2": {},
+          "clipped_points_bounds_m": null,
+          "meaning": "Saved mesh surface inside/on closed trial-tip volumes; not loaded contact area."
+        },
+        "meaning": "Nominal CAD projection, not deformed contact area, force capacity or wire clearance."
+      },
+      "closed_header_surface_in_tip_volumes": {
+        "unique_source_triangles_with_positive_clipped_area": 0,
+        "summed_clipped_surface_area_m2": 0.0,
+        "clipped_surface_area_by_tip_part_m2": {},
+        "clipped_points_bounds_m": null,
+        "meaning": "Saved mesh surface inside/on closed trial-tip volumes; not loaded contact area."
+      },
+      "release_comparison": {
+        "scope": "Open radially 0..2 mm each, then withdraw axially 0..8 mm, housing held stationary as an assumption.",
+        "bound_method": "Monotone translations; union endpoint AABB contains both full translation sweeps.",
+        "swept_tip_bounds_source_m": [
+          [
+            -0.013375000208616256,
+            -0.006324999939650297,
+            -0.0515
+          ],
+          [
+            0.013375000208616256,
+            0.006324999939650297,
+            -0.0391
+          ]
+        ],
+        "whole_header_axial_aabb_separation_m": 0.00045006844997406287,
+        "display_wall_axial_separation_m": 0.0050000000000000044,
+        "caveat": "Only tips versus retained header/wall pose; no actual wires, hand body, other internals or latch state."
+      }
+    },
+    {
+      "id": "I04",
+      "key": "D",
+      "part_number": "2103245-4",
+      "header": "P17",
+      "rear_contact": {
+        "rear_plane_source_z_m": -0.04259999841451645,
+        "rear_flat_face_triangle_count": 272,
+        "rear_flat_face_total_m2": 2.037330913458573e-05,
+        "projected_bearing_by_side": [
+          {
+            "side": -1,
+            "rear_flat_face_projected_overlap_m2": 2.7410430568618747e-06
+          },
+          {
+            "side": 1,
+            "rear_flat_face_projected_overlap_m2": 2.7410430568618755e-06
+          }
+        ],
+        "cavity_sections": [
+          {
+            "section_bounds_m": [
+              [
+                -0.007639801884298629,
+                -0.0025898018481633127,
+                -0.04259949841451645
+              ],
+              [
+                -0.0027601981440135777,
+                0.0025898018481633127,
+                -0.04259949841451645
+              ]
+            ],
+            "section_area_m2": 2.5107399782919282e-05,
+            "closed_lip_projection_overlap_with_section_m2": 0
+          },
+          {
+            "section_bounds_m": [
+              [
+                0.0027601981440135777,
+                -0.0025898018481633127,
+                -0.04259949841451645
+              ],
+              [
+                0.007639801884298629,
+                0.0025898018481633127,
+                -0.04259949841451645
+              ]
+            ],
+            "section_area_m2": 2.5107399782919282e-05,
+            "closed_lip_projection_overlap_with_section_m2": 0
+          }
+        ],
+        "housing_surface_in_strict_tip_interiors": {
+          "unique_source_triangles_with_positive_clipped_area": 0,
+          "summed_clipped_surface_area_m2": 0.0,
+          "clipped_surface_area_by_tip_part_m2": {},
+          "clipped_points_bounds_m": null,
+          "meaning": "Saved mesh surface inside/on closed trial-tip volumes; not loaded contact area."
+        },
+        "meaning": "Nominal CAD projection, not deformed contact area, force capacity or wire clearance."
+      },
+      "closed_header_surface_in_tip_volumes": {
+        "unique_source_triangles_with_positive_clipped_area": 0,
+        "summed_clipped_surface_area_m2": 0.0,
+        "clipped_surface_area_by_tip_part_m2": {},
+        "clipped_points_bounds_m": null,
+        "meaning": "Saved mesh surface inside/on closed trial-tip volumes; not loaded contact area."
+      },
+      "release_comparison": {
+        "scope": "Open radially 0..2 mm each, then withdraw axially 0..8 mm, housing held stationary as an assumption.",
+        "bound_method": "Monotone translations; union endpoint AABB contains both full translation sweeps.",
+        "swept_tip_bounds_source_m": [
+          [
+            -0.013375000208616256,
+            -0.006324999939650297,
+            -0.0515
+          ],
+          [
+            0.013375000208616256,
+            0.006324999939650297,
+            -0.0391
+          ]
+        ],
+        "whole_header_axial_aabb_separation_m": 0.0005000692963600187,
+        "display_wall_axial_separation_m": 0.0050000000000000044,
+        "caveat": "Only tips versus retained header/wall pose; no actual wires, hand body, other internals or latch state."
+      }
+    },
+    {
+      "id": "I05",
+      "key": "F",
+      "part_number": "2103245-6",
+      "header": "P17",
+      "rear_contact": {
+        "rear_plane_source_z_m": -0.04259999841451645,
+        "rear_flat_face_triangle_count": 272,
+        "rear_flat_face_total_m2": 2.037330913458573e-05,
+        "projected_bearing_by_side": [
+          {
+            "side": -1,
+            "rear_flat_face_projected_overlap_m2": 2.7410430568618747e-06
+          },
+          {
+            "side": 1,
+            "rear_flat_face_projected_overlap_m2": 2.7410430568618755e-06
+          }
+        ],
+        "cavity_sections": [
+          {
+            "section_bounds_m": [
+              [
+                -0.007639801884298629,
+                -0.0025898018481633127,
+                -0.04259949841451645
+              ],
+              [
+                -0.0027601981440135777,
+                0.0025898018481633127,
+                -0.04259949841451645
+              ]
+            ],
+            "section_area_m2": 2.5107399782919282e-05,
+            "closed_lip_projection_overlap_with_section_m2": 0
+          },
+          {
+            "section_bounds_m": [
+              [
+                0.0027601981440135777,
+                -0.0025898018481633127,
+                -0.04259949841451645
+              ],
+              [
+                0.007639801884298629,
+                0.0025898018481633127,
+                -0.04259949841451645
+              ]
+            ],
+            "section_area_m2": 2.5107399782919282e-05,
+            "closed_lip_projection_overlap_with_section_m2": 0
+          }
+        ],
+        "housing_surface_in_strict_tip_interiors": {
+          "unique_source_triangles_with_positive_clipped_area": 0,
+          "summed_clipped_surface_area_m2": 0.0,
+          "clipped_surface_area_by_tip_part_m2": {},
+          "clipped_points_bounds_m": null,
+          "meaning": "Saved mesh surface inside/on closed trial-tip volumes; not loaded contact area."
+        },
+        "meaning": "Nominal CAD projection, not deformed contact area, force capacity or wire clearance."
+      },
+      "closed_header_surface_in_tip_volumes": {
+        "unique_source_triangles_with_positive_clipped_area": 0,
+        "summed_clipped_surface_area_m2": 0.0,
+        "clipped_surface_area_by_tip_part_m2": {},
+        "clipped_points_bounds_m": null,
+        "meaning": "Saved mesh surface inside/on closed trial-tip volumes; not loaded contact area."
+      },
+      "release_comparison": {
+        "scope": "Open radially 0..2 mm each, then withdraw axially 0..8 mm, housing held stationary as an assumption.",
+        "bound_method": "Monotone translations; union endpoint AABB contains both full translation sweeps.",
+        "swept_tip_bounds_source_m": [
+          [
+            -0.013375000208616256,
+            -0.006324999939650297,
+            -0.0515
+          ],
+          [
+            0.013375000208616256,
+            0.006324999939650297,
+            -0.0391
+          ]
+        ],
+        "whole_header_axial_aabb_separation_m": 0.0005000692963600187,
+        "display_wall_axial_separation_m": 0.0050000000000000044,
+        "caveat": "Only tips versus retained header/wall pose; no actual wires, hand body, other internals or latch state."
+      }
+    }
+  ],
+  "numerical_checks": {
+    "analytical_clipping_areas": [
+      0.5,
+      0.125,
+      0.0
+    ],
+    "expected": [
+      0.5,
+      0.125,
+      0.0
+    ]
+  },
+  "input_inner_sha256": "1ac417baa3ff67ae8bc3ed5c32ac91cfb778a2effbd1e1a19d24900066c38f32",
+  "input_apertures_sha256": "ebc87a9b4c338c219ea51a1b81c7ee1802486947a96f5caabf33da6662aae565",
+  "input_outer_provenance": {
+    "parent_file": "/home/rlrk/IsaacLab-op040/eval_runs/ur15_jb_harness_revision_20260907/data/header_review_v03/meshes.json.gz",
+    "parent_sha256": "8c0bbe8c60f0a78f8dcba56d76ed825d13d3f88dd67e9fd8cdeb932e88fa4130",
+    "unchanged_header_rows_only": true,
+    "files": [
+      {
+        "file": "2103340-1.json.gz",
+        "sha256": "1b143f674a54d4c16a45bd9d5fed6f53aeaeedbad234bd0d3d90cb250eeebd97",
+        "bytes": 1329840
+      },
+      {
+        "file": "2103346-2.json.gz",
+        "sha256": "a0159c8c5aa93e2c1244c0715b95a818f76f8b5a64a1751426eabf96aae04ac4",
+        "bytes": 1358164
+      },
+      {
+        "file": "te_2103340_drawing.pdf",
+        "sha256": "be59744129dc5134d2a3363e25af93294e662cde4254ec28411b80bd01673dc6"
+      },
+      {
+        "file": "te_2103346_drawing.pdf",
+        "sha256": "fbdeb1d56aba02ae85ed2464b3acd68ce6444cd47179f33225d7f0ba1b580e28"
+      }
+    ]
+  },
+  "geometry_script_sha256": "e8460fbc9873369ae4d83360b3a22dffe6067d6abda1256b03869ca358331172",
+  "reused_geometry_script_sha256": "b6eaa2283aae56f45f268a10dca2188fbe0e6f4c6cdaaba080ed3af166f32154",
+  "trial_tip_meshes_sha256": "45fd0104e3f451ec5acc06fef0d7390cd3ba52a69461d3a48193c2182d5125e1",
+  "limits_ja": [
+    "比較寸法であり製作仕様・受入条件ではない。後端樹脂縁の許容荷重は未確認。",
+    "0.1 mmの表示逃げを残しているため、閉指令・圧縮量・保持成立を示さない。",
+    "穴の投影を塞がないことと、実電線の経路を避けることは別であり、後者は未評価。",
+    "内外CADは既存表示の登録位置。実測嵌合位置・ロック完了位置ではない。",
+    "開放後に内側ハウジングが残留保持される条件・確認方法はまだ定めていない。",
+    "開放・後退の図は指先だけの幾何比較。アーム軌道や実機動作を決めたものではない。"
+  ]
+}
