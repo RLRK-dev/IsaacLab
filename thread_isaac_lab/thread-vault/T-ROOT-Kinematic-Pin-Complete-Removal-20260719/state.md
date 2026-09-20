@@ -26,7 +26,7 @@ session_history:
     started_at: 2026-07-20T20:01:09+09:00
     note: "Rs 承認 (node 作成 + 起動、2026-07-20) により起票。[DEFINE] = 00-Project-Management/node-proposal-T-ROOT-Kinematic-Pin-Complete-Removal-20260719.md @ 14a891d256。既往 c4-c48 は §3 adopted_existing_arc provenance であり本 session の成果ではない。起票時点 = step2 CLOSE / step3 docs-records-only OPEN。"
 created: 2026-07-20T20:01:09+09:00
-last_updated: 2026-09-21T01:32:46+09:00
+last_updated: 2026-09-21T01:34:32+09:00
 spec_version: LTM-1 v1.2
 ---
 
@@ -106,7 +106,7 @@ disposition / status だけ・**census = 35 固定**。
 
 ## 7. UR15-B controller 適合工程 — pointer 節（Rs1（人間）Q4 回答 2026-09-14「独立nodeにしない。」）
 
-**現在注記（Rs1 p19、2026-09-21）:** DDR 68の仕様反映を `04-Specs/UR15-B-Controller.md`・RS71 §0/§1・SOMAへ実施。controller完成宣言と合わせ、仕様反映待ちは閉鎖。#69はpB/pC/pZの3記録が着地し、Rs1の可視範囲の照合も完了（`eval_runs/troot_optE_dapg_wholeroute_scope_20260701/RS1_RUN69_REVIEW_20260921.md`）。p4の正式受入とp6の反映は各卓の再開後。以下の2/3・pZ未・人間目視待ち等は過去の観測であり、現在状態ではない。工程成功・node COMPLETEは未成立。
+**現在注記（Rs1 p19、2026-09-21）:** DDR 68の仕様反映を `04-Specs/UR15-B-Controller.md`・RS71 §0/§1・SOMAへ実施。controller完成宣言と合わせ、仕様反映待ちは閉鎖。#69はpB/pC/pZの3記録が着地し、Rs1の可視範囲の照合も完了（`eval_runs/troot_optE_dapg_wholeroute_scope_20260701/RS1_RUN69_REVIEW_20260921.md`）。p4が `70e6417e46` で停止記録の一致を受理し、p6が `27c9fccb45`（表修復 `d0864a5252`）で反映済み。#69の1回実行の認可は履行済み（LEDGER 行 69 = CLOSED〔認可 履行済〕）。STEP2停止・工程未完・node COMPLETE未成立。〔更新 = Rs1 (p19) の依頼 `m-p19-rs1-current-note-refresh-20260921-001`（2026-09-21 01:33:51）による・受入は再審査していない・他の履歴は維持・p6 09-21 01:34:32 実測〕以下の2/3・pZ未・人間目視待ち等は過去の観測であり、現在状態ではない。工程成功・node COMPLETEは未成立。
 
 
 **起票 = p6 PLAN-KEEPER 2026-09-16 17:58:18 JST（§1 custody）・起案 = p4 RS-TECH-LEAD kickoff item 4 Q4 @ `42848e4f4c`・Rs1（人間）逐語（custody = p4 transcript `ad899cc6-2451-4364-ba3c-910b67075aa4.jsonl:2361`・09-14 06:00:22 JST・typed・bank = kickoff `P4_MOUNTING_C-2_CHAIN_KICKOFF_20260808.md` 09-14 06:06 節 @ `236410dd84`・p6 再読）**:
@@ -115,7 +115,7 @@ disposition / status だけ・**census = 35 固定**。
 
 ### 7.1 成果物と担当（p4 起案・Rs1 要件「成果物・担当」）
 
-| # | 成果物 | 担当 | pointer（p6 09-21 01:32 実測・HEAD `d808cc044a`・初版 17:58 @ `dc090f7753`） |
+| # | 成果物 | 担当 | pointer（p6 09-21 01:34 実測・HEAD `12fb0a7c88`・初版 17:58 @ `dc090f7753`） |
 |---|---|---|---|
 | ① | 設計 v3 `eval_runs/troot_optE_dapg_wholeroute_scope_20260701/P11_UR15B_CONTROLLER_DESIGN_20260913.md` | p11 | 最新 `cb2a990231`（09-20 15:17:47・§17.23 = §7.2 宣言の記録・`:1` の「未検証」→「p4 完成受入 @ 8dd5188a67」〔§17.5 の規則・取消線残置〕・394 行・§17.22 = `af1765bcee`〔R2 受入の記録・385 行・宣言 item 67 が指す版〕・§17.21 = `90cb5503c0`〔R2 再走行の設計 court 読み・登録 bar == §17.20・計数 27 barred＋報告 2 = 初回の 28 と同集合〕・§17.20 = `7b61c9ae2f`〔§10 R2 の bar 訂正・append-only・exact 5 field → ≤ 1e-12 m・`body_iquat` 行 → 慣性テンソル ≤ 1e-9・`jnt_axis` 写像明記・撤回記録〕・§17.19 = `3427066836`〔R0-iii 受入の記録〕・§17.18 = `c07b4e3b9c`〔R0-iii leg の記録と p11 の読み = 外側・§7.2 宣言前の設計 court 判断は不要〕・§17.17 = `6a73dc3aa4`〔窓 W 受入の記録〕・§17.16 = `4c0811064f`〔R1 受入の記録〕・§17.15 = `ec3b5c29c8`〔R1′ 受入の記録〕・§17.14 = `09e47cb743`〔R0-iii 事前登録の記録・予測は pZ 計器上で成立・RC k=1 = class 非収束・p11 判断不要〕・§17.13 = `8d9fdf3bbb`〔引用行の挿入訂正・式・仕様・予測は不変〕・§17.12 = `40aa696587`〔R0-iii 手首方向 report 行の仕様・body file:line・符号規約・B/RC/NH の予測・反証形・⚠ p4 の語「§17.11」= 17.12〕・§17.11 = `ebbe062874`〔窓 R0 受入の記録・「未検証」印 `:1` は残す〕・§17.10 = `ded9c8ee30`〔R0-ii 149 対の読み・menu の attitude 意味論・17.8 (b) 予測の挿入訂正〕・§17.9 = `20281bbf83`・§17.8 = `e0b2857a50`〔§10 撤回・R0-ii 採用〕・§17.7 = `7427c1764c`・§17.6 = `2743fc4549`・初版 §17 = `dc090f7753`）。「未検証」の札は v3 `:1` で §17.23 により「p4 完成受入 @ 8dd5188a67」へ更新（旧語 取消線残置・`cb2a990231`） |
 | ② | D4（姿勢 cap 計器の側別化・wired 2 関数＋print） | 実装 p0／検証 pZ（事前登録 `cb787871f0`・R3 `98d8e63173`） | 着地 `3370f7a872`（09-16 17:48:52・記録 = P0 §8.51 @ `4b328fb025`）・pZ leg 9/9 hold＋R3 静的 hold `ab0ac56f97`（追記 `f6ab51c3ff`）・**p4 受入済 09-16 18:03:56（item 6 @ `bf489e1bb2`・② のみ・controller の完成ではない・R3 数値は #69 の run 内）** |
