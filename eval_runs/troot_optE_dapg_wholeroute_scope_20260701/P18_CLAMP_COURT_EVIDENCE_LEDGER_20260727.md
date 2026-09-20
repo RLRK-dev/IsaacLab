@@ -48502,3 +48502,15 @@ ALT-1 (downgrade) — not chosen (the human's word). ALT-2 (`agent prompt`) — 
 - ⛔ 解錠なし・run 0（当卓）・当卓は裁定しない（一致の事実のみ）。
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1536 — ✅ **p19 m-p19-delivery-repair-20260920-01（Rs1 の新指示「ok 改善して」= 配達・受領確認・共有記録反映の改善／候補 = 隔離 worktree の hub_send 改修＋設計 doc・共有側は未変更／依頼 = 受領とレビュー）— 受領・custody 実読・当卓のレビュー所見（下記）／⚠ 訂正: §1518 の推測「入力欄の他文 = 人間の下書き」は当卓の記録で否定 — 本日の HELD(foreign_text_in_composer) 12 件は全て pre-send check で composer_before_kind = ghost（薄字の候補文）・via = none・landed_as 空 = tool 自身の paste 後読みが候補文を「他文」と分類した可能性が高い（p19 の診断と一致・当卓は原因を裁定しない）**（当卓 2026-09-20 09:56–10:03 JST 実測）
+
+- **着信**: m-p19-delivery-repair-20260920-01 `:`（09:56:59・w2:p19 codex・label 無）。
+- **custody（当卓が実読）**: p19 rollout `rollout-2026-09-13T23-19-12-01a09b22-….jsonl` `:1337` = user「ok 改善して」（`2026-09-20T00:44:34.981Z` = 09:44:34 JST）— 直前 `:1323`（09:43:40）= user「連携面では、成果の共有が遅れています。] これは時間の問題であってかいぜんすべきものではないということか」。Vault log `:9845` = `[2026-09-20 09:47:22 JST] decision | Improve pane delivery and receipt tracking on the user's new instruction`。⇒ 人間の語は p19 の pane で・p19 が挙げた論点（共有の遅れ）に対する「改善して」。利用者 = Rs1 は当卓の推定（§1495 と同じ inference 札）。
+- **候補（read-only で実読）**: `/tmp/thread-hub-delivery-20260920/`（worktree・HEAD `dca928af3b`）の `DELIVERY_RELIABILITY_20260920.md`（78 行・sha256 `901d5a62…` = p19 の記載と一致・未 commit）＋ `hub_send.py` の diff（+123/−84 vs 凍結 `44e0f9a2d1`）。共有 tree の `hub_send.py` = 凍結 sha `b4944c19…` のまま（当卓確認）。
+- **当卓の記録による裏付け**: 本日の HELD(foreign_text_in_composer) send 行 12 件（379→pZ・386→p11・385→p4・381→p0・377→p11・391→p4・392→p11・394→pZ・397→p0・406→p0・413→p11・414→p4）= **全て kind=ghost・via=none**。`herdr agent prompt` と `agent read --source visible` = herdr 0.9.0 に実在（help 出力）。
+- **レビュー所見（運用側・裁定なし）**: (1) 権限 = 人間の語 custody あり・凍結物の変更ゆえ着地前に事前登録（期待表）＋独立検証（p19 以外・当卓は運用者で検証者でない）を要すると当卓は読む — 可否は Rs1。(2) 診断は当卓の 12/12 と整合。(3) 未検証 = `agent prompt` の working pane での挙動（queue）・`--source visible` が各 pane の composer 行を含むか（before/after の実読）・`<pasted_content>` 29 byte prefix が新経路でも付くか・14 case の fake test は当卓未実行。(4) 設計上の同意点 = 意図の先行記録（UNKNOWN(submission_in_progress)）・never_submitted のみ完了・部分 fan-out 配達・`.floor` lock・`pending` 副命令（当卓の scratch `pending.py` を置換可）。(5) 注意点 = 旧 HELD 12 件は「operator-review items」= 内容は bodies/ で到達済（p0/p4/p11/pZ が実証）・一括再送しない（合意）／background の read-only dry-run は lock を取らない実装か／record schema の新 field（submission_attempted・submitted_at・send_rc）は当卓の読み script と両立／rollout の 1 通は合成でなく実用便（次の p6 宛 relay）で行い、台帳に id・宛先 session・record 行・状態を記す。(6) 当卓の凍結 sha 記載（memory・台帳）は着地 commit で更新する。
+- **hub の動き**: 返却 leg は tool が unlabelled pane を refuse ⇒ 本節と当卓の出力を p19 が自読（p19 の語「通常出力で可」）。413 → p6 = DELIVERED（10:00:14）・413 → p11 = HELD(foreign_text)（新規 send でも fan-out 途中の member が終端化する事実 = 本日初観測）・pZ = fanout_stopped／414（照合結果 → p4）= HELD(foreign_text)（p4 は bodies/ 自読）。
+- ⛔ 解錠なし・run 0（当卓）・当卓は裁定しない。
+
+**Banked — 時刻は本節 commit の author date が正。**
