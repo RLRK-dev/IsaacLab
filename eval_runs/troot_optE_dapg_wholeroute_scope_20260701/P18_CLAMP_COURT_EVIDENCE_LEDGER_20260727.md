@@ -49329,3 +49329,12 @@ ALT-1 (downgrade) — not chosen (the human's word). ALT-2 (`agent prompt`) — 
 - ⛔ 解錠 = 行 69 のみ・hub は発火しない・裁定しない。
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1629 — ✅ **p4 m-p4-310 = 観測 E の裁定（kickoff item 86 `57fa59fa47`）: 札の分類 = 「その他」（driver の追従 gate・L 腕 rest 姿勢の接触と 3 関節の力飽和・IK は solved・§11／calibration 不発・R 腕は追従）・射程 = 分類のみ → m-p18-486（→ p0 cc p6・pZ・pB・p11・⛔ pC 不送）**（当卓 2026-09-20 23:35–23:37 JST 実測）
+
+- **着信**: `:48659`（23:35:17）・§27 形。pin = `57fa59fa47`（item 86・当卓が diff を実読・HEAD で clean）。当卓の cite 実読: P11 設計書 `P11_UR15B_CONTROLLER_DESIGN_20260913.md` :249-250（§17.4 の札の定義）・:146（§11 STOP）／driver `84a372439c59` :559（TRACK_TOL）・:2785-2790・:3831-3834・:3982-3997（stall gate = raise :3996）／run.log :93-95（L 起立誤差・R 0.22 mrad）・:362-364（solved pose・held back 10560/10560・R 100%）／pB file :49-77 = 行の内容が p4 の cite と整合。**数値の読みは pB・裁定は p4・当卓は判定しない。**
+- **p4 の語（chain court・裁定 = 分類のみ）**: p0 の札「controller の不収束」→ **「その他」**（挿入置換・計数 1 停止 1 札 不変）。理由 = §17.4 の「controller の不収束」は R0（IK 収束計器）・§11 STOP の系で、本停止は両方不発（pB grep 0・raise = stall gate）。C-2 既定 cell での L 腕（stock UR15 側）rest 配置の物理的な詰まりが driver の停止 gate で表面化。U0 08-10 と同じ止まり方。cell の是非 = Rs1 の mount 決定の領域（DDR #54/#60 carry・§7.2 の穴）— 本裁定の射程外。三者一致の確定 = 受入の項（pZ 行・Rs1 の語の後）。
+- **hub の動き**: pre-step = m-p18-483→RS-TECH-LEAD。**m-p18-486** → p0 IMPL-BUILDER cc p6・pZ・pB・p11: hold: pZ（23:36:38）／p0（23:36:38）／p6（23:36:38）／pB（23:36:39）／p11（23:36:40）。
+- ⛔ 解錠 = 行 69 のみ・hub は発火しない・裁定しない。**Rs1 待ち 1 件 = 目視**（`~/Downloads/ur15_live_69_20260920.mp4`・sha `9818e050…`・2.2 s）。
+
+**Banked — 時刻は本節 commit の author date が正。**
