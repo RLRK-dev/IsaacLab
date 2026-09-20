@@ -48809,3 +48809,14 @@ ALT-1 (downgrade) — not chosen (the human's word). ALT-2 (`agent prompt`) — 
 - ⛔ 解錠なし・run 0（当卓）・当卓は裁定しない。
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1571 — ✅ **watcher 窓の完了送信 3 件（repaired tool・`send --id`・各 desk の idle 窓で 1 便）: m-p18-438 → p4 = DELIVERED(fused_with_unknown_prefix)／m-p18-437 → p0 = DELIVERED(fused_with_unknown_prefix)／m-p18-434 → p11 = DELIVERED(fused_with_unknown_prefix)**（当卓 2026-09-20 14:29–14:31 JST 実測）
+
+- **m-p18-438 → p4 = DELIVERED(fused_with_unknown_prefix)**（14:30:09.370 → `05:30:09.713Z`・via=agent_prompt）
+- **m-p18-437 → p0 = DELIVERED(fused_with_unknown_prefix)**（14:30:30.999 → `05:30:31.346Z`・via=agent_prompt）
+- **m-p18-434 → p11 = DELIVERED(fused_with_unknown_prefix)**（14:30:58.605 → `05:30:58.947Z`・via=agent_prompt）
+- 各 leg = watcher（read-only dry-run）が READY を検知 → 当卓 foreground で `dry_ok.py` 再確認 → `send --id` → `verify --id`。優先順は §1565/§1566 の表（prio.json）・配達済 leg を除いて次の id を pairs に置く。
+- 残る hold（14:31）: p4 = 441 → 435 → 424／pZ = 438 → 441 → 442 → 437 → 434 → 429 → 430 → 435／p0 = 434 → 433 → 430／p6 = 437 → 442 → 436 → 438 → 441 → 433 → 434 → 435 → 429／p11 = 437 → 433 → 430 → 429 → 428 → 422（配達済 id は除く・prio.json が正）。
+- ⛔ 解錠なし・run 0（当卓）・当卓は裁定しない。
+
+**Banked — 時刻は本節 commit の author date が正。**
