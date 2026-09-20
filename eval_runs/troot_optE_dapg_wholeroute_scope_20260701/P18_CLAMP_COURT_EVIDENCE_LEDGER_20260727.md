@@ -49466,3 +49466,14 @@ ALT-1 (downgrade) — not chosen (the human's word). ALT-2 (`agent prompt`) — 
 - ⛔ 解錠 = 行 69 のみ・再走なし・新 run なし・hub は発火しない・裁定しない。
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1640 — ✅ **p6 m-p6-200: 行 68 を CLOSED（Rs1 p19 の spec 着地 `cf44999454` ＋ 済 item 67）・行 69 に #69 の 4 入力と carry を反映（`7aca686f1d` ＋ head 訂正 `2801d3039d`）→ m-p18-497（→ p4）。⇒ **#69 に残るのは p4 の受入 word 1 件のみ**（当卓 2026-09-21 01:20–01:22 JST 実測）
+
+- **着信**: `:49181`（01:20:38）。**検算（一致）**: `7aca686f1d0b14ea2b6796313760a28160db46c8`（01:19:06・LEDGER +2/−2・state.md +3/−3）／`2801d3039dd51f049b35467b653d97b1088d65ce`（01:20:38・LEDGER +1/−1）・両 file とも HEAD で clean。行 172 に **CLOSED**・行 173 に 4 入力の sha（`ff396f98e6`・`ffd3c5200c`・`675c6b459d`・`cf44999454`）と `GRASP_CENTRE_X` の**提案**記載を当卓が実読。
+- **行 68 = CLOSED**: 待ちの 2 条件が着地（① Rs1 p19 の spec 着地 = 新 `04-Specs/UR15-B-Controller.md` 50 行 ＋ RS71 §0#1/§1 ＋ SOMA ＋ index・head cell は Rs1 自身が編集 ② ⑦ = 済 item 67）。**caveat = 動的成功は含まない**・§0#1 は識別の括弧のみで作用文言は逐語のまま（当卓 §1636 の読みと一致）。
+- **行 69**: **4 入力すべて着地** ⇒ **残り = p4 の受入 word のみ**。札 = 「その他」。**carry** = p4 item 93 の 5 定数条件を本体に登録し、**`GRASP_CENTRE_X` と既定 `C1[0]` の補完は「提案」として登録**（採否 = p4 の語で本体へ昇格）。当卓 §1638 の限定（3 者は同じ harness と定数を読んでおり**独立計器の確認ではない**）も p6 が併記。
+- **p6 の自己訂正 2 件**: 23:28 の stamp が文字どおりの placeholder だった欠陥／head の「p4 停止中」は誤り（p4 は 01:10-01:12 に稼働）。⇒ 当卓・p0・p11・pB・p6 の 5 卓がこの窓で自分の記録を自ら訂正した。
+- **hub の動き**: **m-p18-497**（m-p6-200 逐語 ＋ 当卓の検算）→ p4（queue）。
+- ⛔ 解錠 = 行 69 のみ・再走なし・**行 68 の CLOSED は静的 chain の仕様反映のみで工程成功・node COMPLETE・training-ready を意味しない**・hub は発火しない・裁定しない。
+
+**Banked — 時刻は本節 commit の author date が正。**
