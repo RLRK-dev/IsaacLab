@@ -208,3 +208,55 @@ RM tool_err_mm step 2 cable上空へ: L=1126.4214452980132 R=2.1632956854191416
 RM depth_audit keys=['_ret_flagged', '_ret_pair', 'below_lower', 'bound_informative', 'by_caller', 'calls', 'cand_evals', 'chan', 'chan_viol', 'checked', 'decider', 'last_flagged', 'neg', 'pairs', 'rej_flagged', 'rej_total', 'repair_signed', 'repair_zero', 'repaired', 'seg_disagree', 'seg_over', 'seg_under', 'seg_under_contact', 'seg_under_narrow', 'sign_checked', 'sign_ghost', 'sign_missed', 'type_all', 'type_pairs', 'unrepairable']  (release_ctrl row = display-only)
 exit=0  (0=present+within bars, 1=bar exceeded, 2=required line absent; never a PASS by itself)
 ```
+
+## Addendum 1（2026-09-20 23:27:22 JST・re m-p18-478 = p4 m-p4-309 観測 E への限界つきの答え）— (iii) の材料: 接触・sigma_min・mast・DEPTH AUDIT（逐語・判定なし）
+
+p4 の問い（観測 E・裁定でない）: 札が「controller の不収束」か「幾何の詰まり（接触）」かは、pB の (iii)（DEPTH AUDIT・接触・sigma_min・mast）の後に p4 が裁定する。本 addendum は **その材料を run.log（sha `9fe9685aba333506df9d9199e3cfe826e62c715899e48b8ca2034d8a796b22fa`・同一 file）と RUN_METRICS.json から逐語で並べる**だけで、分類は行わない。⛔ `release_ctrl` の NOT exercised は表示専用（§5）。
+
+### A1-1. 指令の追従に関する印字（driver の語で「stall」「held back」「saturated」を含む行）
+
+- `:93` `[steps] STANDING ERROR L: 662.68 mrad at rest vs TRACK_TOL 5.14 mrad -> ⛔ THE RAMP GATE CANNOT OPEN (room <= 0 before anything moves)`
+- `:94` `[steps] STANDING ERROR L per joint [mrad]: j0=-8.8 j1=-662.7 j2=-112.6 j3=-8.5 j4=+312.0 j5=-1.8   (no joint at a limit)   touching: ['R_shoulder_link (via g9 on L_wrist_3_link)', 'column (via g13 on Lg_base)']`
+- `:95` `[steps] STANDING ERROR R: 0.22 mrad at rest vs TRACK_TOL 5.14 mrad -> gate opens with 96% of the tolerance free`
+- `:102` `[steps] STEP1 L: tool err= 658.5mm`
+- `:103` `          joint err   = [  -8.8 -662.7 -112.6   -8.5  312.    -1.8] mrad`
+- `:104` `          act force   = [ 88.8 433.  204.   10.5 -70.    2. ] N.m   (limits (433.0, 433.0, 204.0, 70.0, 70.0, 70.0))`
+- `:106` `          saturated   = [np.False_, np.True_, np.True_, np.False_, np.True_, np.False_]`
+- `:362` `[steps] STEP 2 COMMAND L: reached   0.0% of the way to the solved pose in    2.2s (1.00x the 2.2s the table allots -- the table no longer ends the step), held back on 10560 of 10560 ticks because THIS arm was more than 5.1 mrad behind its own command   <- STALLED: no progress for a whole step's worth of ticks   <- THE MOVE DID NOT FINISH`
+- `:363` `[steps] STEP 2 COMMAND R: reached 100.0% of the way to the solved pose in    2.2s (1.00x the 2.2s the table allots -- the table no longer ends the step), never held back`
+- RUN_METRICS `steps[0].command` = L {"reached_frac": 0.0, "held_ticks": 10560, "ticks": 10560, "stalled": true} / R {"reached_frac": 1.0, "held_ticks": 0, "ticks": 10560, "stalled": false}
+
+### A1-2. 接触・幾何に関する印字（driver の語で「touching」「TOUCHING OR THROUGH」「INSIDE THE MAST」「mast」「gap」を含む行）
+
+- `:92` `[steps] 88mm-SPAN INTERLEAVE: arms closest +0.0 mm (6 <-> 50)   <- TOUCHING OR THROUGH   spread 0.280 tilt 20.0 deg   crown r 0.110   ⚠ commanded span, not the links actually held`
+- `:99` `[steps] STEP1 L arm touching: ['R_shoulder_link (via g9 on L_wrist_3_link)', 'column (via g13 on Lg_base)']`
+- `:100` `[steps] STEP1 R arm touching: ['L_wrist_3_link (via g42 on R_shoulder_link)']`
+- `:364` `[steps] STEP 2 sigma_min L=0.1105 R=0.1517  mast L=-0.6 mm (g12 on Lg_base vs crown) R=+27.6 mm (g42 on R_shoulder_link vs crown)   <- INSIDE THE MAST`
+- `:365` `[steps] STEP 2 ARM REACH: L  26.6 mm below the mouth (Lg_right_pad_f1ext), +609.1 mm vs the table | R  51.4 mm below the mouth (geom43), +147.5 mm vs the table`
+- `:366` `[steps] STEP 2 AS REALISED: L 37.3 deg off straight down, pads +79.89 mm | R 20.1 deg off straight down, pads +79.89 mm   (the gate read the commanded state at solve time; this is what the step ended in)`
+- `:369` `[steps] STEP 2 CARRY: L mouth[+0.394 -0.150 +0.636] holds cab39 at (-107.9,+429.6,-479.9) mm | R mouth[+0.189 +0.273 +0.199] holds cab33 at ( +7.5, +6.8,-47.5) mm`
+- `:373` `[steps] STEP 2 PENETRATION: clear   (clip-cable contacts now: 0)`
+- RUN_METRICS `steps[0].sigma_min` = {"L": 0.11047350128312033, "R": 0.151651571628065}／`steps[0].mast` = {"L": {"gap_mm": -0.6403175818046059, "who": "g12 on Lg_base vs crown"}, "R": {"gap_mm": 27.6162330999606, "who": "g42 on R_shoulder_link vs crown"}}／`steps[0].arm_to_arm` = {"closest_mm": -1.1194554926176923, "closest_who": "9 <-> 42", "along_move_mm": -1.168352386937335, "along_who": "9 <-> 42 at t=0.24s", "worst_so_far_mm": -1.168352386937335}／`steps[0].penetration` = {"inside_mm": 0.0, "part": "", "geom": "", "link": -1, "contacts": 0}
+- RUN_METRICS `worst` = sigma_min {"L": 0.10793926206857601, "R": 0.14883235967913658} @ {"L": "STEP2 t=0.0s", "R": "STEP2 t=0.0s"}／mast_m {"L": -0.0007341430112716013, "R": 0.0276162330999606} @ {"L": "g12 on Lg_base vs crown, STEP2 t=0.0s", "R": "g42 on R_shoulder_link vs crown, STEP2 t=2.2s"}／arm_gap_min_m -0.0011194554926176922／arm_gap_path_m -0.001168352386937335
+
+### A1-3. DEPTH AUDIT（at exit・run 全体の累積・`:379-401`）のうち接触・棄却に関わる行
+
+- `:380` `[steps] DEPTH AUDIT [at exit -- cumulative over the WHOLE run]: 785850 calls, 335608 unsaturated, 4966 negative`
+- `:381` `[steps] DEPTH AUDIT [at exit -- cumulative over the WHOLE run] channels exercised -- violations / calls (rate): furniture_gap:513 20/380000 (0.00526%) | arm_pair_min:1966 1018/279859 (0.36375%) | column_gap:1421 102/123854 (0.08236%) | jaw_gaps:1007 0/2124 (0.00000%) | gap:2878 0/13 (0.00000%)`
+- `:383` `[steps] DEPTH AUDIT [at exit -- cumulative over the WHOLE run] coverage -- MEASURED: ['arm_pair_min:1966', 'column_gap:1421', 'furniture_gap:513', 'jaw_gaps:1007'] | ASKED BUT TOO FEW TIMES TO TELL: ['gap:2878 (13 calls)'] | NEVER ASKED: ['release_ctrl']`
+- `:384` `[steps] DEPTH AUDIT [at exit -- cumulative over the WHOLE run] floor 1 (below the bounding-sphere gap): 386 (0.1150% of unsaturated) -- but its DENOMINATOR is the 234281 calls whose spheres were apart enough for the bound to say anything (69.81% of unsaturated), giving 0.1648% within that visible domain.  Outside it the bound is vacuous and a clean sheet from floor 1 is not evidence.`
+- `:385` `[steps] DEPTH AUDIT [at exit -- cumulative over the WHOLE run] floor 2 (scalar disagrees with its own segment): 1140 (0.3397%) -- 0 claiming MORE room than the segment (over-acceptance), 1140 claiming LESS (over-rejection)`
+- `:386` `[steps] DEPTH AUDIT [at exit -- cumulative over the WHOLE run] by call surface: arm_pair_min<-<module>:2554 x701, arm_pair_min<-<module>:3750 x280, column_gap<-<module>:2561 x99, arm_pair_min<-solve_ik:2199 x32, furniture_gap<-<module>:2562 x20, arm_pair_min<-_interleave_report:2496 x5, column_gap<-solve_ik:2295 x3`
+- `:387` `[steps] DEPTH AUDIT [at exit -- cumulative over the WHOLE run] localisation: 455 distinct geom pairs; top pairs = 8<->42 x25, 14<->42 x23, 15<->42 x23, 10<->42 x22, 11<->42 x22, 12<->42 x19, 13<->42 x19, 16<->42 x17, 17<->42 x17, 44<->80 x10, 6<->80 x10, 26<->42 x10, 26<->43 x10, 20<->42 x10, 21<->42 x10, 8<->44 x8, 25<->43 x8, 27<->42 x8, 16<->54 x7, 16<->55 x7, 17<->54 x7, 17<->55 x7, 46<->1 x7, 8<->1 x7, 18<->42 x7, 19<->42 x7, 18<->43 x7, 19<->43 x7, 42<->8 x6, 20<->56 x5, 20<->57 x5, 21<->56 x5, 21<->57 x5, 12<->50 x5, 12<->51 x5, 13<->50 x5, 13<->51 x5, 9<->50 x5, 9<->51 x5, 12<->70 x5,  …〔以下切り詰め・原文 5494 字〕`
+- `:388` `[steps] DEPTH AUDIT [at exit -- cumulative over the WHOLE run] mechanism -- violations / calls per geom-type pair (mesh x mesh is arm against arm, cylinder x mesh is arm against the stem and foot): MESHxMESH 855/134902 (0.63379%) | BOXxMESH 174/76215 (0.22830%) | CYLINDERxMESH 76/52849 (0.14381%) | CAPSULExMESH 0/36023 (0.00000%) | BOXxBOX 9/14417 (0.06243%) | CYLINDERxBOX 26/14034 (0.18526%) | CAPSULExBOX 0/7168 (0.00000%)`
+- `:390` `[steps] DEPTH AUDIT [at exit -- cumulative over the WHOLE run] seg_under split: 1140 asserted CONTACT (dv <= 0, answerable by the contact list), 0 merely too narrow (dv > 0, a magnitude error the contact list cannot speak to)`
+- `:391` `[steps] DEPTH AUDIT decider [at exit -- cumulative over the WHOLE run] (sole cause, one candidate one vote, untruncated): of 275 rejected candidates -- g6 on L_forearm_link vs crown x89, g6 on L_forearm_link vs stem x61, the other arm x22, g44 on R_forearm_link vs crown x15, g6 on L_forearm_link vs crown at 6/13 along the move (on the way) x12, g8 on L_wrist_2_link vs stem x4, g5 on L_upper_arm_link vs stem x4, g6 on L_forearm_link vs crown at 4/6 along the move (on the way) x3, g7 on L_wrist_1_link vs stem x3, g5 on L_upper_arm_link vs crown x3, g44 on R_forearm_link vs stem x3`
+- `:392` `[steps] DEPTH AUDIT decider [at exit -- cumulative over the WHOLE run] (any cause, a candidate counts once per part that rejected it): g6 on L_forearm_link vs crown x96, the other arm x78, g6 on L_forearm_link vs stem x65, g44 on R_forearm_link vs crown x32, g6 on L_forearm_link vs crown at 6/13 along the move (on the way) x12, g43 on R_upper_arm_link vs stem x9, g5 on L_upper_arm_link vs stem x9, g8 on L_wrist_2_link vs stem x6, g44 on R_forearm_link vs stem x6, g5 on L_upper_arm_link vs crown x6, g6 on L_forearm_link vs crown at 4/6 along the move (on the way) x3, g7 on L_wrist_1_link vs stem x3, g44 on R_forearm_link vs crown at 3/6 along the move (on the way) x3, g43 on R_upper_arm_link vs crown x3`
+- `:399` `[steps] DEPTH AUDIT [at exit -- cumulative over the WHOLE run] sign reference: 97 minima cross-checked against the solver's own contact list -- 4 asserted contact the solver does not record (ghost), 0 asserted clearance over a pair the solver IS contacting (miss).  ⚠ bounds neither way: contacts live inside the margin band only, and the list is per pair while the minimum is one pair.`
+- `:400` `[steps] DEPTH AUDIT [at exit -- cumulative over the WHOLE run] rejection attribution: of 78 candidates dropped by the arm-clearance test, 4 were dropped by a call the floors had flagged (5.128%) -- measured, not bounded.  Candidate evaluations: 570; violations per evaluation = 2.68`
+
+### A1-4. 対応づけ（印字にある名前だけ・私の同定はしない）
+
+- geom 番号と link の対応は driver が印字したものに限る: `g9 on L_wrist_3_link`・`g42 on R_shoulder_link`・`g12`/`g13 on Lg_base`・`g6 on L_forearm_link`・`g44 on R_forearm_link`・`g5 on L_upper_arm_link`・`g7 on L_wrist_1_link`・`g8 on L_wrist_2_link`（`:94-95`・`:364`・`:369`・`:391-392`）。`:387` の pair 番号（例 `8<->42`・`44<->80`・`6<->80`）のうち上記に無い番号は私は同定しない。
+- 接触の三面: (a) 解析器の接触リスト（`touching` = `:99-100`・RUN_METRICS `step1_approach.*.touching`）(b) 距離の最小値（`:369` ARM-TO-ARM −1.1 mm・`:364` mast L −0.6 mm・RUN_METRICS `worst.arm_gap_min_m` −0.00112）(c) DEPTH AUDIT の cross-check（`:399` 97 minima・ghost 4・miss 0）。三者はそれぞれ別の量であり、私はここで統合しない。
+- 本 addendum は §6 の限界をそのまま引き継ぐ（数値の転記・因果と分類は p4 の裁定）。
