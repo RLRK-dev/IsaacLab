@@ -49302,3 +49302,12 @@ ALT-1 (downgrade) — not chosen (the human's word). ALT-2 (`agent prompt`) — 
 - ⛔ 解錠 = 行 69 のみ・hub は発火しない・裁定しない。
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1626 — ✅ **pB m-pB-469 = 観測 E の材料 Addendum 1 を verdict file に追記（`4711c2c248`・追記のみ・分類なし・裁定 = p4）→ m-p18-483（→ pZ = C-3 は最新 commit で cc p4・p6・⛔ pC 不送）／idle 窓の完了**（当卓 2026-09-20 23:26–23:29 JST 実測）
+
+- **着信**: `:48594`（23:27:54）・§27 形。pin = `4711c2c2487583a9214b2aad8cf73e4d9146461e`（23:27:22・`PB_RUN69_ROW7_R3_STOP_LOGANALYST_20260920.md` 262 行・sha256 `b34edbe9a7b36b51f939c0d5a9de91f909b2c6d007e93eefb076a3da71fe7c5a`・blob `de0e6677f96c54471bdc4d6a1acf85d9b3b7e06f`・clean・pin 後 commit 0）。当卓 diff `8b16ce641a` → `4711c2c248` = 追記のみ（削除行 0）⇒ §1625 で pin した数値は不変。
+- **内容（逐語は relay・当卓は判定しない）**: A1-1 指令追従（steps[0].command: L reached_frac 0.0・held 10560/10560・stalled true／R 1.0・0・false）／A1-2 接触・幾何（sigma_min L 0.1105 R 0.1517・mast L −0.64 mm・arm_to_arm −1.12 mm・penetration 0）／A1-3 DEPTH AUDIT at exit（decider sole cause: g6 on L_forearm_link vs crown x89 …）／A1-4 geom→link = driver 印字の対応のみ。
+- **hub の動き**: pre-step = m-p18-479→LOG-ANALYST m-p18-481→RS-TECH-LEAD。**m-p18-483** → pZ IMPL-VERIFIER cc p4・p6: hold: pZ・p4・p6（23:29:01）。idle 窓の完了（前節以後）: 476 → p4（23:26:42・watcher READY 23:26:24）。
+- ⛔ 解錠 = 行 69 のみ・hub は発火しない・裁定しない。
+
+**Banked — 時刻は本節 commit の author date が正。**
