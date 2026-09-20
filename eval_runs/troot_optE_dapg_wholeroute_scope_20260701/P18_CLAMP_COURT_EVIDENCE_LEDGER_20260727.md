@@ -49490,3 +49490,14 @@ ALT-1 (downgrade) — not chosen (the human's word). ALT-2 (`agent prompt`) — 
 - ⛔ 解錠 = 行 69 のみ・再走なし・新 run なし・hub は発火しない・裁定しない。
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1642 — ✅ **Rs1 (p19) の次工程指定（4 札化は今は不採用・p4 は既存資料だけで取付/初期接触/画角の比較を準備・run 0）＋ pC の agent 不在を当卓が実測し live 照会を省略 → m-p18-499（p4 へ 01:26:08 配達・他 5 卓へ queue）**（当卓 2026-09-21 01:25–01:27 JST 実測）
+
+- **着信**: m-p1D-pc-transfer-20260921-002 `:49266`（01:23:21）／m-p19-rs1-next-preparation-20260921-001 `:49267`（01:25:06）。
+- **Rs1 の次工程（逐語は relay）**: **4 札化は今は採用しない**（現行 3 分類 ＋「その他」本文に機構を名指す運用・**#69 は遡及変更しない**）。**p4 = 既存資料だけで取付・初期接触・画角を比較**し、1 ページ程度で **推奨 1 案・根拠 artifact・変更候補箇所・未測定・実行前に必要な検証**を示す。⛔ **run 0・source 編集なし・parameter 変更なし・失敗した C-2 の再走なし**・採用済の両腕/UR15-B/既存 IK・servo は維持・停止卓を起こさない。事前検索は Rs1 が実施済（`work/thread-rs1-20260921/NEXT_SCOPE.md` 2,561 byte・当卓が実読: findings 10 / blockers 6 / lessons 4）。目的 = **接触を解消する具体的差分**と**把持が見える画角**。
+- **pC の状態（当卓の独立実測 01:25:31）**: `herdr agent read w2:pC` = **`agent_not_found`**・`pane list` の当該 pane = **agent None・status unknown** ⇒ **agent 不在**（pane は残る）。p1D の観測と一致。⇒ **live 引継ぎ照会は省略**（理由は実測であって新担当の選択ではない）。継承 = 保存資料 4 件（`work/thread-pc-transfer-20260921/inherited/`・当卓が実在確認）。⛔ 再起動しない・閉じない・数値を送らない・過去記録を書き換えない。**未引継ぎ = 0 件**・pC の #69 成果物 `ffd3c5200c` は受理済。
+- **hub の動き**: **`m-p18-499`**（Rs1 次工程 ＋ 役割変更の逐語 2 通 ＋ 当卓の実測）→ p4 DELIVERED（01:26:08）・p6・pZ・pB・p0・p11 QUEUED。返答 = `work/thread-pc-transfer-20260921/P18_TO_P1D.md` に **P18-TO-P1D-002** を追記。
+- **現在の残件**: **p6 の #69 反映 commit 1 件**（行 69 status flip ＋ carry ①-⑧ ＋ 呼称の境界時刻 ＋ head の「p4 停止中」除去）→ それで #69 は閉じる。次工程 = p4 の比較資料（run 0）。
+- ⛔ 解錠 = 行 69 のみ・再走なし・新 run なし・hub は発火しない・裁定しない。
+
+**Banked — 時刻は本節 commit の author date が正。**
