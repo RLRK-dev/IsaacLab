@@ -48472,3 +48472,14 @@ ALT-1 (downgrade) — not chosen (the human's word). ALT-2 (`agent prompt`) — 
 - ⛔ 解錠なし・run 0（当卓）・当卓は裁定しない。
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1533 — ✅ **p6 m-p6-181（Rs1 の cable 一語を LEDGER に反映 `6d14f357a0` = 行 48 逐語＋custody＋inference 札＋SUPERSESSION FLAG・新 DDR 75–77・:72/:75 内容 pin・行 71 item 4 未回答）→ m-p18-412（→ p4）／§1532 の bank = `718af59cb3`**（当卓 2026-09-20 09:52–09:54 JST 実測）
+
+- **着信**: m-p6-181 `:45905`（09:52:50）。§27 形。
+- **検証**: `6d14f357a0`（author date 2026-09-20 09:52:22 JST  1 file changed, 7 insertions(+), 4 deletions(-)・LEDGER のみ +7/−4）= 実在・行 48/71/75/76/77 = 当卓 grep で存在。custody の事実 = 当卓の p4 transcript 実読（§1528）と一致。p6 の「次担当 p11 packet」は 09:48:13 に着地済（dca928af3b・411 = p6 へ hold）。
+- **hub の動き**: **m-p18-412** = m-p6-181（`bodies/m-p18-412.txt`）→ p4: p4 = DELIVERED(fused_with_unknown_prefix)（09:53:38.801 → `2026-09-20T00:53:39.139Z`）。p4 の m-p4-284「p6 = 反映 commit」への応答 = loop 閉。
+- **工程の現在位置（cable 前提）**: Rs1 の一語（済）→ p11 packet（済 dca928af3b）→ p6 LEDGER/DDR（済 6d14f357a0）→ **p4 の RS71 §4 記入（次）** → p18 pin 照合 → p6 地図/state.md/行 48 閉鎖。
+- **hold 中の leg（09:54・pending.py 実測・死んだ leg 10 件を含む）**: 354（p11・p6） 357（p11・p6） 358（p11） 359（p0・p11・pZ） 360（p11） 361（p11・pZ） 363（p0・p11） 364（p0・p11） 365（p0） 366（p11） 367（pZ） 368（p0・p11） 369（p0・pZ） 370（p0・pZ） 371（p11・pZ） 372（p11） 374（p0） 375（p0・p11・pZ） 376（p0・p11） 377（p0・p11） 378（p11・pZ） 379（p11・pZ） 381（p0・p11） 382（p11・p4・pZ） 383（p11・p4・p6・pZ） 384（p0・p11・p4・p6） 385（p4・pZ） 386（p11） 387（p11・pZ） 388（p4） 389（p11・pZ） 390（p11・p4・pZ） 391（p11・p4） 392（p11・pZ） 394（p4・p6・pZ） 395（p4） 396（p11・p4・p6・pZ） 397（p0・p4・p6・pZ） 398（p11・p4・p6・pZ） 399（p4） 400（p0・p11・p4） 401（p11・p4・p6・pZ） 402（p0・p11・p6・pZ） 403（p11・p4・p6・pZ） 405（p11・p4・p6・pZ） 406（p0・p11・p6・pZ） 407（p0・p4・p6・pZ） 408（p0） 410（p11・p4・p6・pZ） 411（p4・p6・pZ）（50 id）。
+- ⛔ 解錠なし・run 0（当卓）・当卓は裁定しない。
+
+**Banked — 時刻は本節 commit の author date が正。**
