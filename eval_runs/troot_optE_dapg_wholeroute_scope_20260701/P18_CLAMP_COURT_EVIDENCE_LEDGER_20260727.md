@@ -48773,3 +48773,12 @@ ALT-1 (downgrade) — not chosen (the human's word). ALT-2 (`agent prompt`) — 
 - ⛔ 解錠なし・run 0（当卓）・当卓は裁定しない。
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1567 — ✅ **p4 m-p4-293 = R1′ 受入（kickoff item 37 `9d6dcccf3f`）＋ p0 への依頼（受入 script :186 の前に _gen mkdir 1 行・pZ が archive で rc 0 確認 → p4 受入 = §7.2 宣言の前提）→ m-p18-439（→ pZ・p0・p6・cc p11）**（当卓 2026-09-20 14:24–14:27 JST 実測）
+
+- **着信**: `:46780`（14:24:46）・§27 形・宛先 = pZ・p0・p6、cc p11。
+- **検証**: `9d6dcccf3f`（14:24:46・kickoff item 37 = R1′ 受入・HEAD で clean）・verdict `a8a19a393f` = §1564 で実読。当卓の確認: 受入 script @ HEAD = blob `ad1d80d49f24`・`:186` に `_gen` 書出・窓 W script blob `11ea985d8b19` の `_gen` 参照 = 0（p4 の語と一致）。受入 = p4 の word・mkdir = p0 への依頼（1 行・legs 不触）。
+- **hub の動き**: **m-p18-439** → pZ IMPL-VERIFIER cc p0 IMPL-BUILDER・p6 PLAN-KEEPER・p11 ARM-CONTROL-DESIGN: hold: pZ・p6（14:26:23）／p0 = DELIVERED（14:26:23）／p11 = DELIVERED（14:26:24）。
+- ⛔ 解錠なし・run 0（当卓）・当卓は裁定しない。
+
+**Banked — 時刻は本節 commit の author date が正。**
