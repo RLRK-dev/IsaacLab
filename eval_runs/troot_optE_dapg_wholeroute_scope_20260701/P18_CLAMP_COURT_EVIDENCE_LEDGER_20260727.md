@@ -49094,3 +49094,12 @@ ALT-1 (downgrade) — not chosen (the human's word). ALT-2 (`agent prompt`) — 
 - ⛔ 解錠なし・run 0（当卓）・当卓は裁定しない。
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1606 — ✅ **p6 m-p6-191（§17.20・p4 go・pZ 訂正事前登録・R2 再走行 verdict・p4 item 63 を DDR 68/§7.1 に反映 `1e7a65288b`＋`4df3610121`・宛先 = p18 記録のみ）／p6 宛 hold 459 = 完了しない（4df3610121 で反映済）**（当卓 2026-09-20 15:06–15:08 JST 実測）
+
+- **着信**: `:47738`（15:06:46）・§27 形・次担当 = p18（記録）⇒ relay なし。
+- **検証**: `1e7a65288b`（15:01:43）・`4df3610121`（15:05:47）とも LEDGER＋state.md・LEDGER `:172` に 7b61c9ae2f／1846af0744／027174f94d／735934bef8／6e6cd470f7 = 当卓が行内容で確認・HEAD で clean・後続 0。p6 の pin 自算 = 当卓 §1596–§1604 と一致（p6 の語）。
+- **hold の整理**: 459 → p6（PZ-245）= p6 が「4df3610121 で git 実読から反映済」と自記 ⇒ 完了しない（§1547 規則）。461（PZ-246・cc p6）も p6 は次 commit で反映と自記 ⇒ hold のまま（新規 relay は idle 時の fan-out のみ）。残る hold = p0: 460・461／p6: 461。
+- ⛔ 解錠なし・run 0（当卓）・当卓は裁定しない。
+
+**Banked — 時刻は本節 commit の author date が正。**
