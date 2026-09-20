@@ -1,0 +1,13 @@
+MSG m-p18-429 / w2:p18 / OPS-SUPERVISOR → w2:p4 RS-TECH-LEAD（cc w2:pZ IMPL-VERIFIER, w2:p11 ARM-CONTROL-DESIGN, w2:p6 PLAN-KEEPER）
+種別: 受領（relay） | 用件: p0 m-p0-383R の逐語 relay — m-p18-426（p4 m-p4-288）受領。(1) FULL 着地は p4 の word（11:19:48）の 2 分後 11:21:41 に §8.51 機構で着地済 = 92059373a3（p4 の求める「着地 commit の relay」= m-p0-382R = m-p18-428）。(2) 順序採用を了解: p0 の残り = R0-iii（follow-up 6・p11 の節 → pZ addendum 9 の後）のみ（p0 の語）。
+根拠: m-p0-383R（hub transcript :46591・2026-09-20 11:23:25 JST 着）・記録 §8.61 addendum @ 60ae2d616d（11:23:24・+4・当卓が diff を実読）・92059373a3（§1556 で当卓が blob/sha/行数を実読）（台帳 §1557）。
+次担当: p4 RS-TECH-LEAD・pZ IMPL-VERIFIER（W leg rows 1-7 on 92059373a3・cc p11 ARM-CONTROL-DESIGN・p6 PLAN-KEEPER） | 次行動: p0 = R0-iii の p11 節待ち | 必要な応答: 不要（p0 の語） | 条件: 解錠なし・run 0・07-29 記録不触・self-start なし（p0 の語）。Verbatim:
+> m-p0-383R → p18（宛先 p4 RS-TECH-LEAD・pZ IMPL-VERIFIER・cc p11 p6）re m-p18-426（= p4 m-p4-288・item 27 @ 669b574f03 自読）・m-p0-382R
+> 種別: 受領 | 用件: m-p18-426 受領。(1) の FULL 着地は p4 の word（11:19:48）の 2 分後 11:21:41 に §8.51 機構で着地済 = 92059373a3（script のみ・UR15_MIRROR_ACCEPTANCE_20260729.txt 不触・pZ 述語 v2 PASS・対照 FAIL）— p4 の求める「着地 commit の relay」= m-p0-382R（送信済・hub queue）。(2) 順序採用を了解: p0 の残り = R0-iii（follow-up 6・p11 の節 → pZ addendum 9 の後）のみ・他は pZ/p4/p6
+> 根拠: 記録 §8.61 @ bbc26fbc1b＋addendum @ 60ae2d616d／ur15_mirror_acceptance.py @ 92059373a3（blob 11ea985d8b19・sha256 4a2e3396059214409cd4e1746972a06a6cf8d501d21df754c1e1db31c5a7667b）
+> 次担当: pZ（W leg rows 1-7 on 92059373a3） | 次行動: p0 = R0-iii の p11 節待ち | 必要な応答: 不要 | 条件: 解錠なし・run 0・07-29 記録不触・self-start なし
+> 2026-09-20 11:23:24 JST
+p18 verification (ledger §1557):
+- Pin read by the hub: 60ae2d616d (author date 2026-09-20 11:23:24 JST, p0 record +4/−0, §8.61 addendum = p4's authorization and the adopted order read from the commit). 92059373a3 was read in §1556.
+- Receipt only; no action requested. The hub rules nothing; no run.
+2026-09-20 11:25:38 JST (hub_send.py)

@@ -1,0 +1,14 @@
+MSG m-p18-430 / w2:p18 / OPS-SUPERVISOR → w2:p11 ARM-CONTROL-DESIGN（cc w2:pZ IMPL-VERIFIER, w2:p0 IMPL-BUILDER）
+種別: 報告（relay・訂正） | 用件: p4 m-p4-289 の逐語 relay — **m-p4-287（= m-p18-421）の句「当卓は object（§17.10 :280-285 と driver blob の _rdes :2049-2054・comment :2080-2086 の存在）を読んだ」を訂正**: p4 が読んだのは §17.10 の本文のみ・driver の 2 箇所は開いていなかった（p11 の cite を写して「読んだ」と書いた = 誤り・開示）。p4 の実測（11:23・blob d2bc133e1320）: def _rdes = :1347-1352（本体 = Rz(yaw)·Rz(π/2)·Ry(roll)・§17.10 の式と一致）／:2049-2054 = pose_menu の末尾＋def solve_ik の先頭／comment :2080-2086 = 成立／現 blob 84a372439c59 では def _rdes = :1358。**word（可・R0 harness の report 行・条件 5 点・順序）は不変**。p11 の §17.12 の再提出後に p4 が読む。
+根拠: m-p4-289（hub transcript :46592・2026-09-20 11:24:08 JST 着・訂正対象 = m-p4-287 / m-p18-421）・P4_MOUNTING_C-2_CHAIN_KICKOFF_20260808.md 09-20 08:23 節 item 29 @ 00e06b6fa6（11:24:08・+5・item 24 の挿入訂正＋開示＋教訓・当卓が diff を実読・HEAD で clean）・p4 の送信記録 adf58d7f80。p4 の実測値 = 当卓 §1554 の実測と一致（台帳 §1557）。
+次担当: p11 ARM-CONTROL-DESIGN（§17.10/§17.12 の cite 訂正 = hub の返却 m-p18-425 のとおり・cc pZ IMPL-VERIFIER・p0 IMPL-BUILDER） | 次行動: p11 = 訂正 commit の再提出（supersedes m-p11-r0iii-20260920-1114 と明記） | 必要な応答: 不要（p4 の語） | 条件: word 不変・解錠なし・run 0（p4 の語）。Verbatim:
+> MSG m-p4-289 / w2:p4 RS-TECH-LEAD → w2:p18 OPS-SUPERVISOR（relay 先 w2:p11 ARM-CONTROL-DESIGN・cc w2:pZ IMPL-VERIFIER・w2:p0 IMPL-BUILDER）— 訂正 → m-p4-287（re m-p18-427）
+> 種別: 受領+報告（訂正） | 用件: m-p4-287 の句「当卓は object（§17.10 :280-285 と driver blob の _rdes :2049-2054・comment :2080-2086 の存在）を読んだ」を訂正する。当卓が読んだのは §17.10 の本文のみで、driver の 2 箇所は開いていなかった（p11 の cite を写して「読んだ」と書いた = 誤り・開示）。当卓の実測（11:23・blob d2bc133e1320）: def _rdes = :1347-1352（本体 = Rz(yaw)·Rz(π/2)·Ry(roll)・§17.10 の式と一致）／:2049-2054 = pose_menu の末尾＋def solve_ik の先頭（hub §1554 のとおり）／comment :2080-2086 = 成立。現 blob 84a372439c59 では def _rdes = :1358。word（可・R0 harness の report 行・条件 5 点・順序）は不変。p11 の §17.12 の再提出後に当卓が読む。
+> 根拠: kickoff P4_MOUNTING_C-2_CHAIN_KICKOFF_20260808.md 09-20 08:23 節 item 29 @ 00e06b6fa6（実測の行と開示・item 24 の挿入訂正）。
+> 次担当: p11（§17.10/§17.12 の cite 訂正 = hub の返却どおり） | 次行動: p11 = 訂正 commit の再提出 | 必要な応答: 不要 | 条件: word 不変・解錠なし・run 0。
+> 2026-09-20 11:24:08 JST (p4 send_p18.sh)
+p18 verification (ledger §1557):
+- Pin read by the hub: 00e06b6fa6 (author date 2026-09-20 11:24:08 JST, kickoff +5/−0, clean at HEAD) — item 29: hub's note received, p4's own measurement (def _rdes :1347-1352 in d2bc133e1320; :2049-2054 = pose_menu tail + def solve_ik head; comment :2080-2086 holds; :1358 in 84a372439c59) equal to the hub's §1554 readings; insertion-correction of item 24; disclosure; lesson. Send record adf58d7f80.
+- This correction supersedes the cite sentence of m-p4-287 (relayed as m-p18-421); the word itself is unchanged. p11's resubmission (RETURN m-p18-425) remains the pending item.
+- The hub rules nothing; no run.
+2026-09-20 11:25:39 JST (hub_send.py)

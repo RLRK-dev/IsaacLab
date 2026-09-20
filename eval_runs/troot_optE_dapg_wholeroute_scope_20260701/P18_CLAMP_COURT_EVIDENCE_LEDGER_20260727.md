@@ -48712,3 +48712,13 @@ ALT-1 (downgrade) — not chosen (the human's word). ALT-2 (`agent prompt`) — 
 - ⛔ 解錠なし・run 0（当卓）・当卓は裁定しない。
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1557 — ✅ **p0 m-p0-383R（426 受領・着地済 92059373a3・残り = R0-iii のみ・§8.61 addendum `60ae2d616d`）→ m-p18-429（→ p4・pZ・cc p11・p6）／p4 m-p4-289 = m-p4-287（421）の cite 句の訂正（driver 2 箇所は開いていなかった = 開示・実測 def _rdes :1347-1352 = 当卓 §1554 と一致・word 不変・kickoff item 29 `00e06b6fa6`）→ m-p18-430（→ p11・cc pZ・p0）**（当卓 2026-09-20 11:23–11:26 JST 実測）
+
+- **着信**: m-p0-383R `:46591`（`type=attachment`・`02:23:25.021Z` = 11:23:25 JST）／m-p4-289 `:46592`（`type=attachment`・`02:24:08.623Z` = 11:24:08 JST）・両便 §27 形。
+- **検証**: `60ae2d616d`（11:23:24・p0 記録 +4/−0・§8.61 addendum = p4 の許可と採用順序を commit から自読）／`00e06b6fa6`（11:24:08・kickoff +5/−0・item 29 = 427 受領・p4 の実測 = `def _rdes` :1347-1352／:2049-2054 = pose_menu 末尾＋def solve_ik 先頭／comment :2080-2086 成立／84a372439c59 では :1358 = **当卓 §1554 の実測と一致**・item 24 の挿入訂正・開示・教訓）・送信記録 `adf58d7f80`（11:24:38）・HEAD で clean。訂正の対象 = m-p4-287 の cite 句（421 で運んだもの）・word は不変。
+- **hub の動き**: **m-p18-429** = m-p0-383R → p4 RS-TECH-LEAD cc pZ IMPL-VERIFIER・p11 ARM-CONTROL-DESIGN・p6 PLAN-KEEPER: held: p4 = ready・pZ = HELD(working)・p11 = ready・p6 = HELD(working)（11:25:38.254）／p4 = DELIVERED(fused_with_unknown_prefix)（11:25:38.260 → 02:25:38.590Z）／p11 = DELIVERED(fused_with_unknown_prefix)（11:25:38.848 → 02:25:39.187Z）。**m-p18-430** = m-p4-289 → p11 ARM-CONTROL-DESIGN cc pZ IMPL-VERIFIER・p0 IMPL-BUILDER: held: p11 = HELD(working)・pZ = HELD(working)・p0 = ready（11:25:39.753）／p0 = DELIVERED(fused_with_unknown_prefix)（11:25:39.758 → 02:25:40.094Z）。
+- **hold の順**: pZ = 428 → 421 → m-p18-429 → m-p18-430／p4 = 428 → 424 → m-p18-429／p11 = 426 → m-p18-430 → 428 → m-p18-429／p0 = 426 → m-p18-430／p6 = 426 → 428 → m-p18-429。残る Rs1 待ち以外の未決 = p11 の再提出（RETURN 425）・pZ の W leg。
+- ⛔ 解錠なし・run 0（当卓）・当卓は裁定しない。
+
+**Banked — 時刻は本節 commit の author date が正。**
