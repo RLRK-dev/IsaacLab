@@ -48396,3 +48396,14 @@ ALT-1 (downgrade) — not chosen (the human's word). ALT-2 (`agent prompt`) — 
 - ⛔ 解錠なし・run 0（当卓）・当卓は裁定しない。
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1525 — ✅ **p4 m-p4-283（窓 R0 の word = (i)・p0 = loader 修正・再着地（driver と同じ規則・file:line・hardcode 不可・他不触）→ pZ 再 leg → p4 受入・(ii) の数値は期待表として存置・受入前提 = 済・149 対 = p11 §17.10・item 15 `5a56870712`・394/397/400–403 を bodies/ で as-read）→ m-p18-406（→ p0 cc pZ p11 p6）／§1524 の bank = `79839c4048`**（当卓 2026-09-20 09:35–09:38 JST 実測）
+
+- **着信**: m-p4-283 `:45733`（09:35:39）。§27 形。
+- **検証**: `5a56870712`（author date 2026-09-20 09:35:39 JST  1 file changed, 8 insertions(+)・kickoff item 15）= 実在。verdict pin = §1523・harness 後続 commit 0。p4 の blob 実読・dump の grep（ko 手 8 本 = basename・腕 = 絶対 path・meshdir なし）= p4 の as-read。**時系列**: 本便は p0 の 376R（405・09:35:29・候補 = meshdir 解決 + from_xml_string・推奨 (i)）の 10 秒後 — p4 未読。word (i) は p0 の推奨と一致・p4 は修正の条件 3 点を付加（候補の適合は p0 の読み・p4 の受入）。p4 が「394/397/400–403 を bodies/ から as-read・個別返答は本便で包含」と自記 ⇒ p4 宛 hold の当該 leg は内容到達済（tool の記録は hold のまま）。
+- **hub の動き**: **m-p18-406** = m-p4-283（`bodies/m-p18-406.txt`・時系列注記つき）→ p0 cc pZ p11 p6: held: p0 = ready(ghost)・pZ = ready(empty)・p11 = HELD(working)・p6 = ready(empty)（09:37:17.169）。
+- **工程の現在位置（hub 記帳）**: 窓 R0 = word (i) 発出 → p0 の loader 修正・再着地 → pZ 再 leg → p4 受入。p11 = §17.10（149 対）。窓 B = ACCEPTED。cable 前提 = Rs1 A–D 待ち。
+- **hold 中の leg（09:38・pending.py 実測・死んだ leg 9 件を含む）**: 354（p11・p6） 357（p11・p6） 358（p11） 359（p0・p11・pZ） 360（p11） 361（p11・pZ） 363（p0・p11） 364（p0・p11） 365（p0） 366（p11） 367（pZ） 368（p0・p11） 369（p0・pZ） 370（p0・pZ） 371（p11・pZ） 372（p11） 374（p0） 375（p0・p11・pZ） 376（p0・p11） 377（p0・p11） 378（p11・pZ） 379（p11・pZ） 381（p0・p11） 382（p11・p4・pZ） 383（p11・p4・p6・pZ） 384（p0・p11・p4・p6） 385（p4・pZ） 386（p11） 387（p11・pZ） 388（p4） 389（p11・pZ） 390（p11・p4・pZ） 391（p11・p4） 392（p11・pZ） 394（p4・p6・pZ） 395（p4） 396（p11・p4・p6・pZ） 397（p0・p4・p6・pZ） 398（p11・p4・p6・pZ） 399（p4） 400（p0・p11・p4） 401（p11・p4・p6・pZ） 402（p0・p11・p6・pZ） 403（p11・p4・p6・pZ） 405（p11・p4・p6・pZ） 406（p0・p11・p6・pZ）（46 id）。
+- ⛔ 解錠なし・run 0（当卓）・当卓は裁定しない。
+
+**Banked — 時刻は本節 commit の author date が正。**
