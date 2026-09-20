@@ -48618,3 +48618,14 @@ ALT-1 (downgrade) — not chosen (the human's word). ALT-2 (`agent prompt`) — 
 - ⛔ 解錠なし・run 0（当卓）・当卓は裁定しない。
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1548 — ✅ **pZ PZ-235（R0 再 leg = 8e5905539c を git archive から着地のままの手順で実行・exit 0・L 18/18・R 18/18・R0-ii bar 成立・全 rows が 8ec2abdec3 (2) と 1e-12 で同一・札 none・`2bd3be01c2`）→ m-p18-419（→ p4・p0・cc p11・p6 = 4 卓とも配達）／p4・p11 の composer は 10:57:10–12 に外部の submit で空いた（414 → p4・413 → p11 = 遅延配達を `verify` で記録）**（当卓 2026-09-20 10:57–11:05 JST 実測）
+
+- **着信**: PZ-235 `:46282`（`type=attachment`・`2026-09-20T01:57:39.501Z` = 10:57:39 JST・queue op `:46241`/`:46277`）・§27 形。宛先 = p4・p0、cc p11・p6（pZ の指定）。
+- **検証**: `2bd3be01c2`（10:30:00・parent `8c7137575e`・1 file +107/−0）・`PZ_VERDICT_8e5905539c_R0_LEG_20260920.md` blob `fb402cf8a417`・sha256 `b2a65613efd2fe76f26d0718df23adb5ee0aec5b14ba3932422c6d5fb2f343d0`・107 行 = pZ の記載と一致・HEAD で clean（11:01）。harness `r0_convergence_harness.py` の `8e5905539c` 後続 commit = 0・driver `ur15_steps_wired.py`（blob `84a372439c59`）の `96e9ece175` 後続 commit = 0（11:01）。exit 0／L 18/18・R 18/18／R0-ii bar／`8ec2abdec3` (2) との 1e-12 同一性／loader 規則の file:line 確認（`:419`/`:423`/`:38-39`）／札 none = pZ の as-run（archive 実行・物理 step 0・当卓は再実行せず）。着地 ≠ 受入（受入 = p4 の word・m-p4-283 の条件 3 点は p4 の読み）。
+- **hub の動き**: **m-p18-419** = PZ-235（`bodies/m-p18-419.txt`・body_sha256 `ab51ae95ffc99a73…`・§27 形＋hold 便の予告 1 行）→ p4 RS-TECH-LEAD cc p0 IMPL-BUILDER・p11 ARM-CONTROL-DESIGN・p6 PLAN-KEEPER: **4 卓とも DELIVERED(fused_with_unknown_prefix)・via=agent_prompt**（p4 11:03:43.408 → `02:03:43.761Z`／p0 11:03:43.995 → `02:03:44.337Z`／p11 11:03:44.597 → `02:03:44.942Z`／p6 11:03:45.184 → `02:03:45.529Z`）。`--to` は単一引数（`hub_send.py:1044`）ゆえ p0 は cc 側に置き、head に「宛先 p0」と明記。
+- **p4・p11 の composer が空いた（外部 submit・hub tool 不関与）**: p4 transcript `:3523`（`01:57:12.803Z` = 10:57:12 JST・kind=human・本文 = m-p18-414 の逐語）／p11 transcript `:2963`（`01:57:10.146Z` = 10:57:10 JST・kind=human・本文 = `<pasted_content id="58fa">` ＋ m-p18-413 の逐語）。2 卓 2 秒差の Enter = **Rs1 の行為と推定**（当卓の 10:25 報告で「p4 で Enter」を任意の人の行為として提示した・inference 札）。`verify` で遅延配達を記録: **414 → p4 = DELIVERED（`user@11449829+0`・delivered_at `01:57:12.803Z`）**／**413 → p11 = DELIVERED(fused_with_unknown_prefix)（`user@10660415+29`・`01:57:10.146Z`）**。効果 = p4 が hub の照合 PASS を kickoff に記録 `d033846bf2`（10:57:39・+1 行）・p11 が cable 前提の着地を draft に記録＋handoff の行 pin を content pin に変換 `e50cda1036`（10:59:15・draft +9・handoff 3 行）— いずれも当卓へ未着信（自記録）。
+- **hold の現況（11:04 `pending`・never_submitted・完了予定 = 各卓の次の idle 窓から順に）**: p4 = 410（p0 378R = 8e5905539c 着地）→ 407（§17.10）→ 418（p0 受領）／p11 = 410 → 406（p4 word (i)）→ 418／p6・pZ の 406・407 leg と 411 の p4/p6/pZ leg = 内容が既読（p6 反映済 `57959fe7cf`・pZ verdict が 8e5905539c を扱う・p6 登録済 `6d14f357a0`・p4 記入済 `2b96ac4061`）⇒ §1547 の規則どおり完了しない。watcher（10:25:46 READY 411 → p6）は同規則で送らず。
+- ⛔ 解錠なし・run 0（当卓）・当卓は裁定しない。
+
+**Banked — 時刻は本節 commit の author date が正。**
