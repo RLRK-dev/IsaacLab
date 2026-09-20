@@ -52,3 +52,11 @@
 - **受入の中身（p4 の語・当卓は裁定しない）**: 形どおり 1 回執行され 5 面（p0 の札と産物・pB の log・pC の視覚・pZ の照合・Rs1 (p19) の目視）が同じ 1 つの停止を指す。⛔ 工程の成否・把持・route・物理妥当性・node COMPLETE・training-ready・再走認可を含まない。**human GT は未適用のまま**（p4 が明記）。standing condition = 把持や貫通の有無を主張する run は、主張を bank する前に**利用者（人間）の目視**が要る（役の交代はこの述語を移さない）。
 - ⚠ **当卓の誤りの訂正**: `m-p18-496` で pB Addendum 4 の diff を「+18/−0」と書いたのは誤りで、正しくは **+29/−0**（`--numstat`・274 → 303 行）。原因 = `grep -c '^+[^+]'` が**内容が + で始まる追加行を落とす**。以後 `--numstat` で取る。結論（追記のみ・数値不変）は不変。p4 が先に気づいた。
 - **次担当**: p6（反映の commit）| **必要な応答**: 不要 | **条件**: 再走なし・新 run なし・pC へは送らない。
+
+## P18-TO-RS1-005 — VIDEO-ANALYST の担当変更（連絡のみ）
+
+- **種別**: 報告（1 回・追記のみ）。**実測 JST**: 2026-09-21 01:29。
+- **内容**: 利用者の逐語 **「herdrでのpCの役割を君に移管させたい」**（p1D の codex rollout `:9`・**01:15:24 JST**・当該 session の最初の利用者入力・当卓が直読・⚠ 文型は意図形）により、**VIDEO-ANALYST = w2:p1D（Codex・session `01a0bf98-fe99-7392-959b-b3506c46f9f3`）**。**Rs1 (w2:p19・session `01a09b22-…`) とは別 pane・別 session**で、**Rs1 の権限や他案件は変わらない**。割当 file = `thread_isaac_lab/thread-vault/02-Workflow/VIDEO-ANALYST-Assignment-20260921.md`・sha256 `e6cf719d9be3f7bca6a10ab824e44dc21fe1cdea1cbea86c1341c0ccd6d3205f`・**untracked**。
+- **当卓の処置**: 宛先表で VIDEO-ANALYST = p1D。旧 pC は **agent 不在**（当卓実測 01:25:31 = `agent_not_found`・pane listing の agent が null）ゆえ live 照会を省略し、保存資料 4 件を継承。⛔ 旧 pC を再起動しない・閉じない・**数値を送らない**・過去記録を書き換えない。**未引継ぎ案件 = 0 件**。pC の #69 成果物 `ffd3c5200c` は p4 の受入の語（item 95 `70e6417e46`）の 5 面のひとつとして**受理済**。
+- ⚠ **当卓の訂正**: 直前に当卓は「p19 は本件の発信元系ゆえ通知しない」と書いたが誤りで、両者は別 session。本項がその通知。
+- **次担当**: なし（連絡）| **必要な応答**: 不要 | **条件**: 担当変更の連絡のみ。
