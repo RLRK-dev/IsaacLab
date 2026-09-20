@@ -48554,3 +48554,11 @@ ALT-1 (downgrade) — not chosen (the human's word). ALT-2 (`agent prompt`) — 
 - ⛔ 解錠なし・run 0（当卓）・当卓は裁定しない。
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1541 — ⚠ **訂正（§1540 の推測の射程）: 本日の配達 33 leg は全て `DELIVERED(fused_with_unknown_prefix)`（p0 8・p11 4・p4 5・p6 13・pZ 3）で、最初の 379 → p6（08:07:22・死んだ leg が 1 件も無い時点）から prefix が付いている ⇒ 貼付 prefix の起源は本日の hold より前（pane ごとに固定 id・p6 = 84b2 が 13 回同一）。したがって「死んだ leg の本文が後続配達に融合して届いた」は本日の record では裏付けられない — §1540 のその推測は取り下げ（own_message の滞留 = 414 in p4 は事実のまま）**（当卓 2026-09-20 10:12 JST 実測）
+
+- composer 探査（10:11・read-only）: p4 = own_message（414）・p11 = paste（内容は当卓の観測外）・p0/pZ/p6 = ready。
+- p19 への前提条件（E8 の前・修正版）: (a) p4 composer の 414（当卓の own message・未 submit）と p11 composer の paste の扱いを候補の規則で明記（own_message を submit するか hold するか）(b) pane ごとに固定の折り畳み貼付（`<pasted_content id=…>`）が 08:07 以前から存在し全配達に前置される — 新経路でも transcript の逐語述語で吸収されることを E8 で観測。
+- ⛔ 解錠なし・当卓は裁定しない。
+
+**Banked — 時刻は本節 commit の author date が正。**
