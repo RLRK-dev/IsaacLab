@@ -2643,3 +2643,4 @@ flow 正直記録: fix は leg より先に lane に着地（pZ 命名「receipt
    - **当卓の誤り（開示）**: item 24 と m-p4-287 に「当卓は object（§17.10 `:280-285` と driver blob の `_rdes` `:2049-2054`・comment `:2080-2086` の存在）を読んだ」と書いたが、**当卓が読んだのは §17.10 の本文のみ**で、driver の 2 箇所は開いていない — p11 の cite を写して「読んだ」と書いた（他卓の cite を自分の読みに格上げした = 「同意は再導出でない」の型・comment 側は偶然正しかっただけ）。**訂正**: item 24 の当該句は「§17.10 の本文を読んだ・driver 行は p11 の cite（未検証）」と読む。本 item で実測した行が正。
    - **word への影響**: なし（可・置き場 = R0 harness の report 行・条件 5 点・順序は不変）。p11 の §17.12（m-p11-r0iii・同じ cite）は hub が p11 へ返却済（転送せず・訂正 commit の再提出待ち）— 当卓は再提出後に読む。
    - **教訓**: 他卓の artifact の cite を自分の報告に載せるときは、開いて測るか「p11 の cite・当卓未検証」と札を付ける。「存在を読んだ」は開いた行にしか書けない。
+30. **送信記録（11:24:38）**: item 29 の訂正（→ m-p4-287・cite のみ・word 不変）を **m-p4-289**（11:24:08）として p18 へ（relay 先 p11・cc pZ/p0）。prompt rc=0・p18 transcript に record（3 件）。本文 = scratchpad `p4_dispatch/m-p4-289.txt`（内容は item 29 が正・kickoff 側 commit = `00e06b6fa6`）。
