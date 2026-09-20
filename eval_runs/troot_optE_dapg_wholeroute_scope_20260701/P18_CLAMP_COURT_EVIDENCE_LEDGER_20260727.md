@@ -48975,3 +48975,11 @@ ALT-1 (downgrade) — not chosen (the human's word). ALT-2 (`agent prompt`) — 
 - ⛔ 解錠なし・run 0（当卓）・当卓は裁定しない。
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1591 — ✅ **watcher 窓の完了送信: 451 → p6（p4 の R0-iii 受入）= DELIVERED(fused_with_unknown_prefix)**（14:53:57.984 → `05:53:58.331Z`・via=agent_prompt）／**p6 宛 hold 451・445・446・447・448・449・450・452・453・454 = 完了しない**（当卓 2026-09-20 14:53–14:55 JST 実測）
+
+- **p6 宛 hold の整理（§1547 規則）**: p6 m-p6-186〜189 は「届いた relay は 432 のみ・他は全て git で実読」と自記し、187/188/189 の `c75a3d6031`/`5ab53d3896`/`5c04da7e9c` が 6abbaa1f39・b0e2b8880d・7902650b1d・db84a76a0e・c07b4e3b9c・381713ca34・5f3e407487（= relay 446〜454 の内容）を register に反映済 ⇒ 446・447・448・449・450・452・453・454 → p6 は完了しない。以後 p6 へは新規 relay のみ（fan-out 時に idle なら配達・hold は完了しない）。
+- 残る hold（14:55・prio.json）: pZ = 442 → 437 → 441 → 434 → 429 → 430 → 435 → 444 → 445 → 446 → 450 → 453／p11 = 452 → 422 → 444 → 445 → 449 → 453／p4・p0・p6 = なし。
+- ⛔ 解錠なし・run 0（当卓）・当卓は裁定しない。
+
+**Banked — 時刻は本節 commit の author date が正。**
