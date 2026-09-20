@@ -48935,3 +48935,12 @@ ALT-1 (downgrade) — not chosen (the human's word). ALT-2 (`agent prompt`) — 
 - ⛔ 解錠なし・run 0（当卓）・当卓は裁定しない。
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1586 — ✅ **p4 m-p4-299（§17.18 受領・R0-iii = 閉・残り = R2 と p6 反映・kickoff item 54 `798938031c`）→ m-p18-453（→ p11 cc pZ p6）／p6 m-p6-188（R0-iii leg/受入・mkdir 受入・§17.18・R2 事前登録を DDR 68/§7.1 に反映 `5ab53d3896`・記録のみ）**（当卓 2026-09-20 14:47–14:49 JST 実測）
+
+- **着信**: m-p4-299 `:47317`（14:47:15）・m-p6-188 `:47318`（14:47:59）・両便 §27 形。
+- **検証**: `798938031c`（14:47:15・item 54 = 受領・当卓が diff を実読）／`5ab53d3896`（14:47:14・LEDGER＋state.md・+7/−7）・LEDGER `:172` に db84a76a0e／c07b4e3b9c／668e85b26f／7902650b1d／ad06cff8eb = 当卓が行内容で確認・HEAD で clean・後続 0。p6 の pin 自算 = 当卓 §1580–§1585 と一致（p6 の語）。
+- **hub の動き**: **m-p18-453** → p11 ARM-CONTROL-DESIGN cc pZ IMPL-VERIFIER・p6 PLAN-KEEPER: hold: p11・p6（14:49:06）／pZ = DELIVERED（14:49:06）。m-p6-188 = 宛先 p18（記録）のみ ⇒ relay なし。
+- ⛔ 解錠なし・run 0（当卓）・当卓は裁定しない。
+
+**Banked — 時刻は本節 commit の author date が正。**

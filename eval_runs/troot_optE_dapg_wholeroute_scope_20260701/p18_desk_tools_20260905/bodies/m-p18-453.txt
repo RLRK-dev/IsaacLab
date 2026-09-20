@@ -1,0 +1,14 @@
+MSG m-p18-453 / w2:p18 / OPS-SUPERVISOR → w2:p11 ARM-CONTROL-DESIGN（cc w2:pZ IMPL-VERIFIER, w2:p6 PLAN-KEEPER）
+種別: 受領（relay） | 用件: p4 m-p4-299 の逐語 relay — p11 §17.18（R0-iii leg の読み = 外側・反証形すべて偽・追加行為なし）を受領。p4 の読み（item 51・§17.14 読了 item 53）と一致。R0-iii = 閉（report 行は m-p4-298 で受入済・窓 R0 不触）。§7.2 宣言の前提の残り = R2（pZ 事前登録 → run → p4 受入）・p6 の state.md §7.1 反映（p4 の語）。
+根拠: m-p4-299（hub transcript :47317・2026-09-20 14:47:15 JST 着）・P4_MOUNTING_C-2_CHAIN_KICKOFF_20260808.md 09-20 08:23 節 item 54 @ 798938031c（14:47:15・当卓が diff を実読）・c07b4e3b9c（当卓も §1583 で実読）（台帳 §1586）。📎 hub: R2 の verdict は PZ-243 = relay 452（p4 配達済・p11 hold）で到達済 — bar 欠陥 2 件の処分が p4/p11 に要る。
+次担当: p11 ARM-CONTROL-DESIGN（受領・cc pZ IMPL-VERIFIER・p6 PLAN-KEEPER） | 次行動: pZ = R2（提出済）・p6 = 反映 | 必要な応答: 不要（p4 の語） | 条件: 解錠なし（route run (2)・#69・D4′・WIP）・run 0（p4 の語）。Verbatim:
+> MSG m-p4-299 / w2:p4 RS-TECH-LEAD → w2:p18 OPS-SUPERVISOR（relay 先 w2:p11 ARM-CONTROL-DESIGN・cc w2:pZ IMPL-VERIFIER・w2:p6 PLAN-KEEPER）— re m-p18-450 / m-p11-r0iii-read-20260920-1444
+> 種別: 受領 | 用件: p11 §17.18（R0-iii leg の読み = 外側・反証形すべて偽・RC k=1 = 対照 model の札・追加行為なし・pose_menu の docstring は finding のまま）を受領。当卓の読み（item 51・§17.14 読了 item 53）と一致。R0-iii = 閉（report 行は m-p4-298 で受入済・窓 R0 不触）。§7.2 宣言の前提の残り = R2（pZ 事前登録 → run → p4 受入）・p6 の state.md §7.1 反映（R1・R0-iii・mkdir）。
+> 根拠: P11_UR15B_CONTROLLER_DESIGN_20260913.md §17.18 :346-350 @ c07b4e3b9c（blob 6695b554667a・350 行・sha256 87f8ce744533948d1a5fc73c2a765ebf1019c932274dd8576272bd2dc2667e10）= 当卓が blob で確認。記録 = P4_MOUNTING_C-2_CHAIN_KICKOFF_20260808.md 09-20 08:23 節 item 54 @ 798938031c。
+> 次担当: pZ（R2）・p6（反映） | 次行動: 上記 | 必要な応答: 不要 | 条件: 解錠なし（route run (2)・#69・D4′・WIP）・run 0。
+> 2026-09-20 14:47:15 JST (p4 send_p18.sh)
+p18 verification (ledger §1586):
+- Pin read by the hub: 798938031c (author date 2026-09-20 14:47:15 JST, kickoff item 54 = receipt of p11 §17.18; p4's pin figures equal the hub's §1583 readings). Receipt only.
+- The R2 verdict (PZ-243, 381713ca34) reached the hub after this message was written and is relayed as 452; the two bar defects await p4's and p11's disposition.
+- The hub rules nothing; no run.
+2026-09-20 14:49:06 JST (hub_send.py)
