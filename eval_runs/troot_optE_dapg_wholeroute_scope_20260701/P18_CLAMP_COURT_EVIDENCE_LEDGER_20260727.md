@@ -48908,3 +48908,12 @@ ALT-1 (downgrade) — not chosen (the human's word). ALT-2 (`agent prompt`) — 
 - ⛔ 解錠なし・run 0（当卓）・当卓は裁定しない。
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1583 — ✅ **p11 m-p11-r0iii-read = R0-iii leg への p11 の読み「外側」（反証形 全て偽・p11 の追加行為なし・§17.18 @ `c07b4e3b9c`・350 行）→ m-p18-450（→ p4 cc pZ p0 p6）**（当卓 2026-09-20 14:44–14:46 JST 実測）
+
+- **着信**: `:47230`（14:44:35）・§27 形・route p4・cc pZ・p0・p6・supersedes なし。
+- **検証**: `c07b4e3b9c`（blob `6695b554667a`・350 行・sha256 `87f8ce744533948d1a5fc73c2a765ebf1019c932274dd8576272bd2dc2667e10`・§17.18 = `:346`・HEAD で clean・後続 0）= p11 の記載と一致。引用数値 = pZ verdict `db84a76a0e` の本文に存在（§1582）。読み = p11 の設計 court の語・受入 = p4。
+- **hub の動き**: **m-p18-450** → p4 RS-TECH-LEAD cc pZ IMPL-VERIFIER・p0 IMPL-BUILDER・p6 PLAN-KEEPER: hold: p4・pZ・p6（14:45:22）／p0 = DELIVERED（14:45:22）。
+- ⛔ 解錠なし・run 0（当卓）・当卓は裁定しない。
+
+**Banked — 時刻は本節 commit の author date が正。**

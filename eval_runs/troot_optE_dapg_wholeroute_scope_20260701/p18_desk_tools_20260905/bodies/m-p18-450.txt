@@ -1,0 +1,14 @@
+MSG m-p18-450 / w2:p18 / OPS-SUPERVISOR → w2:p4 RS-TECH-LEAD（cc w2:pZ IMPL-VERIFIER, w2:p0 IMPL-BUILDER, w2:p6 PLAN-KEEPER）
+種別: 報告（relay） | 用件: p11 m-p11-r0iii-read-20260920-1444 の逐語 relay — R0-iii の leg（fedb5bef08・全 7 行 CONFIRMED）に対する **p11 の読み = 「外側」（内側でない）**: §17.12 の反証形は harness の印字値で全て偽（k=1 の符号 L −1 / R +1・Δy = ∓38.377 mm・d = 111.920 mm・Δ_pair 75.000 → 107.314 mm・|Δx| 許容内・RC k=1 = controller non-convergence = 対照 model の札）⇒ p4 の完成 word の前提「R0-iii 結果（内側なら p11 の判断が先）」は該当せず・p11 の追加行為なし。pose_menu の docstring は finding のまま（driver 不変）（p11 の語）。
+根拠: m-p11-r0iii-read（hub transcript :47230・2026-09-20 14:44:35 JST 着）・P11_UR15B_CONTROLLER_DESIGN_20260913.md §17.18 :346-350 @ c07b4e3b9c（blob 6695b554667a・350 行・sha256 87f8ce74…）= 当卓が blob/sha/行数/:346 見出しを実読・一致・HEAD で clean・後続 0／数値の出所 = PZ_VERDICT_fedb5bef08_R0III_LEG_20260920.md @ db84a76a0e（当卓 §1582 で実読・38.377/111.920/107.314 が本文に存在）（14:45 JST 実測・台帳 §1583）。
+次担当: p4 RS-TECH-LEAD（report 行の受入・窓 R0 不触・§7.2 の前提のうち R0-iii = 閉・cc pZ IMPL-VERIFIER・p0 IMPL-BUILDER・p6 PLAN-KEEPER） | 次行動: p4 = 受入判断／pZ = R2 継続／p11 = 不要 | 必要な応答: 受領（p4）・他 = 不要（p11 の語） | 条件: 解錠なし（route run・#69・D4′・WIP）・run 0・07-29 記録不触（p11 の語）。Verbatim:
+> [m-p11-r0iii-read-20260920-1444] p11 -> p18 (route: p4 chain court; cc pZ IMPL-VERIFIER, p0 IMPL-BUILDER, p6 PLAN-KEEPER). Re m-p18-449 / PZ-242 (verdict @ db84a76a0e, read by p11 from the blob). Supersedes nothing.
+> 種別: 報告 | 用件: R0-iii の leg（着地 object fedb5bef08・全 7 行 CONFIRMED）に対する p11 の読み = 「外側」（内側でない）: section 17.12 の反証形は harness の印字値で全て偽（k=1 の符号 L −1 / R +1・Δy = ∓38.377 mm・d = 111.920 mm・Δ_pair 75.000 → 107.314 mm・|Δx| 許容内・RC k=1 = controller non-convergence = 対照 model の札）。⇒ p4 の完成 word の前提「R0-iii 結果（内側なら p11 の判断が先）」は該当せず、p11 の追加行為はない。pose_menu の docstring は finding のまま（driver 不変）。
+> 根拠: eval_runs/troot_optE_dapg_wholeroute_scope_20260701/P11_UR15B_CONTROLLER_DESIGN_20260913.md section 17.18 (:346-350) @ c07b4e3b9c50c66403c7314c922064d14d7ad8a5 (blob 6695b554667a51b265f1a167c72943b61ac14fb0, 350 lines, sha256 87f8ce744533948d1a5fc73c2a765ebf1019c932274dd8576272bd2dc2667e10)；数値は PZ_VERDICT_fedb5bef08_R0III_LEG_20260920.md @ db84a76a0e rows 4-6 (p11 は走らせない・run 0)。
+> 次担当: p4 (report 行の受入・窓 R0 不触・§7.2 の前提のうち R0-iii = 閉) | 次行動: p4 = 受入判断 ; pZ = R2 継続 ; p11 = 不要 | 必要な応答: 受領 (p4)・他 = 不要 | 条件: 解錠なし (route run・#69・D4 prime・WIP)・run 0・07-29 記録不触。
+> 2026-09-20 14:44:35 JST
+p18 verification (ledger §1583):
+- Pin read by the hub: c07b4e3b9c (design doc blob 6695b554667a, 350 lines, sha256 87f8ce744533948d1a5fc73c2a765ebf1019c932274dd8576272bd2dc2667e10; §17.18 heading at :346; clean at HEAD, no later commit at 14:45 JST). The numbers p11 quotes (38.377, 111.920, 107.314) occur in pZ's verdict db84a76a0e, read by the hub in §1582; p11 ran nothing.
+- The reading ("outside", no further act) is p11's design-court statement; the acceptance of the report row is p4's word.
+- The hub rules nothing; no run.
+2026-09-20 14:45:22 JST (hub_send.py)
