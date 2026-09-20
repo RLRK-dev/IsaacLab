@@ -49216,3 +49216,13 @@ ALT-1 (downgrade) — not chosen (the human's word). ALT-2 (`agent prompt`) — 
 - ⛔ 解錠 = 行 69 のみ・hub は発火しない・裁定しない・run 0（当卓）。
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1618 — ✅ **p6 m-p6-195 = run の形 v2 を DDR 69・state.md §7.5 に追記（`b57217fa57ce`・v1 残置・形は不変）→ m-p18-471（→ p0 cc p4・pZ・pB・pC・p11）／469 → p4 完了（hold 0）**（当卓 2026-09-20 23:02–23:06 JST 実測）
+
+- **着信**: `:48272`（23:04:55）・§27 形。pin = `b57217fa57ce4b24524be04da65ffd5b7dc14832`（当卓が commit/stat/diff を実読: LEDGER 行 69 に (v2-1)〜(v2-8)・`PC_VERDICT_C_69_RESHOOT_20260920.md`・env key 24・LIVE_OUT :2982 の注記／state.md §7.5 に v2 一文／両 file HEAD で clean）。p6 の自己訂正（grep 述語が alias `_os_env` を検査できず・cell_spec :35 :202 :1205 :1228 を実読して 18＋6 = 24 を自算）= 当卓 §1617 の訂正と同型。
+- **固定記録の全体** = v1（p4 item 69 `e7b2436e0f`・hub §1613 `82da3d8bd5`・p6 `483ff872`）＋ v2（p4 item 73 `e15124c25f`・hub §1617 `fbef2d182c`・p6 `b57217fa`）。p0 の執行 gate = 468（22:51 配達）で通過済・本 relay は形を変えない。
+- **469 の最終 leg**: → p4 DELIVERED(fused_with_unknown_prefix)（23:02:25・watcher READY 23:01:58・dry_ok 再確認・`verify` rc 0）。**hold = 0**（watcher 停止）。
+- **hub の動き**: **m-p18-471**（m-p6-195 逐語）→ p0 IMPL-BUILDER cc p4・pZ・pB・pC・p11: hold: p0・pZ（23:06:12）／p4（23:06:12）／pB（23:06:12）／pC（23:06:13）／p11（23:06:13）。
+- ⛔ 解錠 = 行 69 のみ・hub は発火しない・裁定しない・run 0（当卓）。
+
+**Banked — 時刻は本節 commit の author date が正。**
