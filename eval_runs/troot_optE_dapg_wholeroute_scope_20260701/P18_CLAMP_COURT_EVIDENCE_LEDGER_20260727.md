@@ -49253,3 +49253,13 @@ ALT-1 (downgrade) — not chosen (the human's word). ALT-2 (`agent prompt`) — 
 - ⛔ 解錠 = 行 69 のみ・再走 = 返却後のみ（返却なし = 再走なし）・hub は発火しない・裁定しない。**Rs1 の目視対象** = `~/Downloads/ur15_live_69_20260920.mp4`（sha256 `9818e050…`・2.2 s・停止までの frame）。
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1621 — ✅ **p4 m-p4-309 = 着地への chain court の語（kickoff item 78 `cb01a67273`）: 所見 ①②③ = 返却なし・再走なし／① dump 期待 `4158e4e6…` は p4 の誤り（挿入訂正）② 左 hand XML = 三者 sha 一致・object 無傷（穴 = 以後 grip_xml sha 照合行必須）③ run.log = `git add -f` 同名 commit／補足 F（CPU driver・CUDA 空振り）／観測 E = pB への限界つきの問い → m-p18-478（→ p0 cc p6・pB・pZ・p11・⛔ pC 不送）／idle 窓の完了 3 件**（当卓 2026-09-20 23:17–23:20 JST 実測）
+
+- **着信**: `:48469`（23:18:34）・§27 形。pin = `cb01a67273`（item 78・A-G・23:18:34・当卓が diff を実読・HEAD で clean）。
+- **当卓の再導出（p4 の主張の実体）**: ② 左 hand XML `thread_isaac_lab/assets/ur5e_robotiq/robotiq_2f85/_ur15_2f85_koshape_actuated.xml` = on-disk sha256 `01861b95e9c8413c…` = blob@`96e9ece175` の sha256 = RUN_METRICS `ur15_steps.identity.LEFT.grip_xml.sha256`・clean ✓／① U0 on-disk dump（`p4_ur15_sim_20260727/_gen/_steps_cell_full.xml`・sha `4158e4e638e9b0fc…`）vs 本 run の committed dump（`f650fc32…`）= diff 6 行 = crown capsule の size 0.22→0.28・L/R_shoulder_link の pos/quat（他は同一）✓／F: driver blob `84a372439c59` の import = atexit・hashlib・imageio・json・math・mujoco・numpy・os・pathlib・re・scipy・sys・time・ur（torch・warp・newton・cuda = 0）✓／E: run.log :41-42（controller record）:99（STEP1 L touching）:102（L tool err）:107（R tool err）:112（vertical check）:378（raise）:402（RUN_METRICS）= 行の存在のみ確認・**数値の読みは pB の領分（当卓は判定しない）**／③ force-add の先例 = `git ls-files` に `b2_cpC_wave1/rec_*/run.log`・`P4_ENV7_UPGRADE_20260803/postupgrade_run.log` ✓。
+- **p4 の語（chain court）**: 返却なし・再走なし・item 69 ③ の期待を挿入訂正・以後の形に grip_xml sha == blob sha の照合行（p0 §8）を必須として記録・run.log と run.log.sha256 を同名で force-add（.txt copy は採らない = pB の行番号 cite が割れる）・観測 E の札の分類（controller の不収束 か 幾何の詰まり）= pB (iii) の後に p4 が裁定・受入 word = pB verdict・VERDICT_C・Rs1 の語 ＋ pZ 行の後・Rs1 の目視は p4 が案内。
+- **hub の動き**: **m-p18-478**（m-p4-309 逐語）→ p0 IMPL-BUILDER cc p6・pB・pZ・p11（⛔ pC 不送 = VERDICT_C commit まで数値不読）: hold: p6・pB（23:19:41）／p0（23:19:41）／pZ（23:19:41）／p11（23:19:42）。**idle 窓の完了（watcher・dry_ok 再確認・verify rc 0）**: 475 → p6（23:17:24）／**473 → pB（23:17:48 = 着地 relay 到達）**／475 → p11（23:18:10）。残 hold = 472 → pC／475 → p4／478 → p6・pB。
+- ⛔ 解錠 = 行 69 のみ・再走なし・hub は発火しない・裁定しない。
+
+**Banked — 時刻は本節 commit の author date が正。**
