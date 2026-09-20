@@ -4243,3 +4243,73 @@ p4 discloses that m-p4-287's phrase 「当卓は object（… driver blob の _r
 ### 8.60′ addendum 6 (2026-09-20 11:28:38 JST) — p11's R0-iii specification received (m-p18-431 = m-p11-r0iii-20260920-1124, RESUBMISSION VERIFIED by the hub); follow-up 6 to be built now, landed after pZ's addendum 9
 
 §17.12 (:292-:301) and §17.13 (:303-:319) @ `8d9fdf3bbb` (blob `960e8a0d590d`, sha256 `ef7a3bf3b126399c…`, 319 lines; read from `git show`, sha re-measured equal). Spec as read: solve with the existing `_solve_one` call (tries=None, iters=300, seed, near=None, warm=None, other=None, pose_only=k) the STEPS row 4 own-side targets (§17.7's GL on L, GR on R), k ∈ {0, 1}, R on models B/RC/NH; per converged solution print (a) wrist := `TOOLB[t]` (ko base, `g_base`) world position w, (b) pinch := `pinch(t, sc)` p, (c) Δ = w − p in mm (3 components) and d = |Δ|, (d) the same for the parent link `a_wrist_3_link`, (e) the roll axis RD·e2 and a = RD·e3 from `_rdes` of the menu entry, (f) Δ_pair(k) = |w_R − w_L| in mm for k = 0 and 1; row named 「report（手首方向）・bar なし」; expectation = existing rows identical at 1e-12, new print lines only. Sign convention: outside = Δ_pair grows from k = 0 to 1; sign(Δy_L) = −1, sign(Δy_R) = +1; x not used. Predictions (same on the 3 models): k = 0 Δ ≈ (0, 0, +d); k = 1 Δy_L = −0.343·d, Δy_R = +0.343·d, Δx ≈ 0 (|Δx| ≤ 2 mm + 0.05·d), Δz ≈ 0.940·d, Δ_pair(1) = √(75² + (0.686·d)²) > 75 mm; refutation form = both wrists to the same side or Δ_pair not growing ⇒ p11's court before p4's §7.2 word. Note: §17.12 prints three components (p11 corrected §17.10's 「x のみ」 as an axis error); p4's condition ③ said the x sign and mm — p4's reading. p0's build: a scaffold-only `_r0iii` (no change to the copied closure or any existing row), landed after pZ's addendum 9 per p4's order; receipt m-p0-384R.
+
+## 8.62 ANNOUNCE-FIRST, not landed: follow-up 6 = the R0-iii wrist-orientation report row (§17.12), candidate built on `8e5905539c`; landing after pZ's addendum 9 (p4's order)
+
+Written 2026-09-20 11:30:17 JST (date-THEN-write). Candidate = scratch `r0_v8.py`, sha256 `641e160c97354e851c6e1f0279c3c40c67ee3ad10322eae3709c295d8fc2e32c`, = the landed `8e5905539c` text + 81/−2 lines (docstring paragraph, `_E2/_E3`, `_wrist_one`, `_r0iii`, the call in `main`, the `R0iii` block in the JSON and a compact `R0iii_report` in the summary). py_compile OK; `check_r0_copy_v3.py` PASS (the 17 copied defs and 12 assignments unchanged, AST-equal to both driver blobs; negative control alive; forbidden tokens 0; no `mj_step` in the copies); the two new functions have no unbound name. Not run. pZ's addendum 9 at this write: not on the branch (prereg last commit = 75121f34b8 09-20 09:23).
+
+What it does, element by element against §17.12: targets = §17.7's GL (L) / GR (R) = STEPS row 4 own-side (the harness's `GL, GR` from `_grasp_targets`); call = `_solve_one(t, tgt, seed, re_max, pose_only=k)` (same arguments as R0-ii; `re_max` at the wired default) for k ∈ {0, 1}; L on the L model once, R on B / RC / NH (the R0-ii model set); per converged solution on a throwaway `MjData` after `mj_kinematics`/`mj_comPos`: (a) w = `sc.xpos[TOOLB[t]]` (ko base `g_base`), (b) p = `pinch(t, sc)`, (c) Δ = (w − p)·1000 [mm] and d = |Δ|, plus sign(Δy), (d) the same for `a_wrist_3_link` (looked up by name; None if absent), (e) `RD = _rdes(*pose_menu(t)[k])`, RD·e2 and RD·e3 (the copied `_rdes` returns a 3×3 matrix), (f) Δ_pair(k) = |w_R − w_L|·1000 [mm] per model, and `pair_grows_k0_to_k1`; print lines tagged `[r0-iii]` ending 「[mm; report only]」, claim string 「report（手首方向）・bar なし」, the sign convention written into the JSON; no bar, no STOP, the exit code expression untouched; every existing row, the R0-ii sweep and the counters untouched (pZ's expectation: identical at 1e-12 plus the new lines). Predictions are not evaluated by the harness — it prints the quantities; pZ compares to addendum 9.
+
+```python
+_E2, _E3 = np.array([0.0, 1.0, 0.0]), np.array([0.0, 0.0, 1.0])
+
+
+def _wrist_one(t, tgt, k, seed, re_max):
+    """R0-iii: one solve at attitude index k and the wrist / pinch geometry of the returned pose (kinematics only)."""
+    q, tag, note = _solve_one(t, tgt, seed, re_max, pose_only=k)
+    yaw, roll = pose_menu(t)[k]
+    RD = _rdes(yaw, roll)
+    rec = {"side": t, "k": k, "yaw": float(yaw), "roll": float(roll), "target": [float(v) for v in tgt],
+           "converged": q is not None, "stop_cause_tag": tag, "note": note,
+           "roll_axis_RD_e2": (RD @ _E2).tolist(), "approach_RD_e3": (RD @ _E3).tolist()}
+    if q is None:
+        return rec
+    sc = mujoco.MjData(m)
+    for i, a in enumerate(QADR[t]):
+        sc.qpos[a] = q[i]
+    mujoco.mj_kinematics(m, sc)
+    mujoco.mj_comPos(m, sc)
+    p = np.asarray(pinch(t, sc), float)
+    w = np.array(sc.xpos[TOOLB[t]], float)
+    b3 = mujoco.mj_name2id(m, mujoco.mjtObj.mjOBJ_BODY, "a_wrist_3_link")
+    w3 = None if b3 < 0 else np.array(sc.xpos[b3], float)
+    dl = (w - p) * 1000.0
+    rec.update({"wrist_w_m": w.tolist(), "pinch_p_m": p.tolist(), "delta_mm": dl.tolist(), "d_mm": float(np.linalg.norm(dl)),
+                "sign_delta_y": int(np.sign(dl[1])),
+                "wrist3_delta_mm": None if w3 is None else ((w3 - p) * 1000.0).tolist(),
+                "wrist3_d_mm": None if w3 is None else float(np.linalg.norm((w3 - p) * 1000.0)),
+                "q": q.tolist()})
+    return rec
+
+
+def _r0iii(models_R, model_L, GL, GR, seed, re_max):
+    """Section 17.12: the wrist-orientation report row (report only; no bar, no STOP; exit code unchanged)."""
+    GL, GR = np.asarray(GL, float), np.asarray(GR, float)
+    _bind("L", *model_L)
+    L = {k: _wrist_one("L", GL, k, seed, re_max) for k in (0, 1)}
+    out = {"claim": "report（手首方向）・bar なし (section 17.12; the wrist geometry of the row-4 solutions; no bar, no STOP)",
+           "convention": {"outside": "Delta_pair grows from k=0 to k=1", "sign_delta_y_L": -1, "sign_delta_y_R": +1,
+                          "x_not_used": True},
+           "targets": {"L": GL.tolist(), "R": GR.tolist()}, "L": L, "models": {}}
+    for mname, md in models_R.items():
+        _bind("R", *md)
+        R = {k: _wrist_one("R", GR, k, seed, re_max) for k in (0, 1)}
+        pair = {}
+        for k in (0, 1):
+            if L[k]["converged"] and R[k]["converged"]:
+                pair[k] = float(np.linalg.norm(np.array(R[k]["wrist_w_m"]) - np.array(L[k]["wrist_w_m"])) * 1000.0)
+            else:
+                pair[k] = None
+        out["models"][mname] = {"R": R, "pair_mm": pair,
+                                "pair_grows_k0_to_k1": None if None in pair.values() else bool(pair[1] > pair[0])}
+        for k in (0, 1):
+            lk, rk = L[k], R[k]
+            fl = lambda r: ("Δ=(" + " ".join(f"{v:+.1f}" for v in r["delta_mm"]) + f") d={r['d_mm']:.1f}") if r["converged"] else f"NOT CONVERGED ({r['stop_cause_tag']})"
+            print(f"[r0-iii] model {mname} k={k} (roll L {lk['roll']:+.2f} / R {rk['roll']:+.2f}): L {fl(lk)} | R {fl(rk)} | "
+                  f"sign(Δy) L={lk.get('sign_delta_y')} R={rk.get('sign_delta_y')} | Δ_pair={pair[k]} mm  [mm; report only]")
+        print(f"[r0-iii] model {mname}: Δ_pair k0 -> k1 = {pair[0]} -> {pair[1]} mm; grows = {out['models'][mname]['pair_grows_k0_to_k1']}; "
+              f"roll axis RD·e2 (L k=1) = {np.round(L[1]['roll_axis_RD_e2'], 3).tolist()}, a = RD·e3 = {np.round(L[1]['approach_RD_e3'], 3).tolist()}")
+    return out
+```
+
+Landing after pZ's addendum 9 lands (p4 m-p4-287: p11's section → pZ addendum 9 → p0 follow-up 6 → pZ leg → p4). ⛔ gate 不変・route run 認可なし・self-start しません。
