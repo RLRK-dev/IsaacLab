@@ -48660,3 +48660,22 @@ ALT-1 (downgrade) — not chosen (the human's word). ALT-2 (`agent prompt`) — 
 - ⛔ 解錠なし・run 0（当卓）・当卓は裁定しない。
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1552 — ✅ **pZ PZ-236（420 受領・計器窓の FULL 述語再 pin `c401aa330a`＝述語 v2 を object 存在前に対照 9 本で発火・静的 legs の順序案 `caa742b8d3`＝W → R1′ → R1 → R2（並行可）→ p4 完成 word）→ m-p18-423（→ p4・p0・p11・p6 = 4 卓配達）／p6 宛 hold 420/421/422 = 完了しない（p6 `4cc0051560` が同内容を反映済）**（当卓 2026-09-20 11:13–11:18 JST 実測）
+
+- **着信**: PZ-236 `:46475`（`type=user`・`2026-09-20T02:13:01.357Z` = 11:13:01 JST）・§27 形・宛先 = p4・p0、cc p11・p6（pZ の指定）。
+- **検証**: `c401aa330a`（prereg +118/−0 → 184 行・sha256 `7550b577bd11e05a808c93300d598dee71ef0987b0b65f8ddf21f0cfab3645b3`・Appendix C = `pz_acc_pred_v2.py` 逐語（sha256 `106b124b…`）・Appendix D = 対照出力（11:11:45 JST・base blob `0803ea391298`・`38678f5946` 以後 commit 0 = object 未存在）・HEAD で clean・後続 0）／`caa742b8d3`（新規 27 行・sha256 `40bf9a13969c687b6bb7dba41acb91a3c7cbab916686ac394a0eb7f00fd6e634`・§7.2 の残り／依存表／順序案・clean・後続 0）= pZ の記載と一致（11:15）。対照 9 本の結果・依存表 = pZ の as-run（当卓は述語を再発火せず）。順序 = 提案・裁定 = p4。
+- **hub の動き**: **m-p18-423** = PZ-236（`bodies/m-p18-423.txt`・§27 形＋p6 hold の注記 1 行）→ p4 RS-TECH-LEAD cc p0 IMPL-BUILDER・p11 ARM-CONTROL-DESIGN・p6 PLAN-KEEPER: p4 = DELIVERED(fused_with_unknown_prefix)（11:17:58.106 → 02:17:58.456Z）／p0 = DELIVERED(fused_with_unknown_prefix)（11:17:58.698 → 02:17:59.077Z）／p11 = DELIVERED(fused_with_unknown_prefix)（11:17:59.336 → 02:17:59.682Z）／p6 = DELIVERED(fused_with_unknown_prefix)（11:17:59.929 → 02:18:00.280Z）。
+- **hold の整理**: **420・421・422 → p6 = 完了しない** — p6 m-p6-184（§1553）の `4cc0051560` が 30897c8a49（420 の内容）・b6fabff700（421）・p0 addenda 2-4 = `231d7d88ba`（422）を register に反映済（watcher 11:15:16 の READY 420 → p6 は送らず）。**421 → pZ = 現行**（p4 の report 行の word・pZ の addendum 9 の入力）・**422 → p11 = 失効**（p11 は 421 を blob から自読し §17.12 を書いた・§1554）。
+- ⛔ 解錠なし・run 0（当卓）・当卓は裁定しない。
+
+**Banked — 時刻は本節 commit の author date が正。**
+
+## §1553 — ✅ **p6 m-p6-184（窓 R0 を DDR 68・node §7.1 ④ に反映 `4cc0051560`・DDR 73 = pZ FULL 再 pin・DDR 68 閉鎖 = 未 = (a) Rs1 の spec 一語 (b) p4 の完成宣言）→ m-p18-424（→ p4・異議があれば）**（当卓 2026-09-20 11:14–11:19 JST 実測）
+
+- **着信**: m-p6-184 `:46504`（`type=attachment`・`2026-09-20T02:14:57.556Z` = 11:14:57 JST・queue op `:46496`/`:46502`）・§27 形・必要な応答 = 不要。
+- **検証**: `4cc0051560`（11:13:57・LEDGER +3/−3・state.md +5/−5・行数不変）・LEDGER `:172` = DDR 68 行（Rs1 premise 裁定 08-10・⛔04-Specs 未反映）・`:177` = DDR 73 行（07-29 mirror 受入の limit 述語の反転 → pZ 述語 v2）= 当卓が行頭を実読・HEAD で clean・後続 0（11:16）。p6 の pin 再測（verdict blob/sha/107 行・harness/driver 後続 0・prereg 184 行）= 当卓 §1548/§1552 と一致。閉鎖条件 = p6 の読み（裁定でない）。
+- **hub の動き**: **m-p18-424** = m-p6-184（`bodies/m-p18-424.txt`・§27 形）→ p4 RS-TECH-LEAD: held: p4 = HELD(working)（11:19:40.582）（loop 記録・p4 の異議があれば word）。
+- ⛔ 解錠なし・run 0（当卓）・当卓は裁定しない。
+
+**Banked — 時刻は本節 commit の author date が正。**
