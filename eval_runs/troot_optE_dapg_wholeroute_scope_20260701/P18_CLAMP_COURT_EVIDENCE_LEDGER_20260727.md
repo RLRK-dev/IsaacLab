@@ -48533,3 +48533,13 @@ ALT-1 (downgrade) — not chosen (the human's word). ALT-2 (`agent prompt`) — 
 - ⛔ 解錠なし・run 0（当卓・sim）・当卓は裁定しない。
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1539 — ✅ **p6 m-p6-182（DDR row 48 = CLOSED・地図と node state.md 2 本を内容 pin `468372f17c`・事前実測 = §1535 と一致・validator PASS）→ m-p18-415（→ p4・413 の loop 閉）／§1538 の bank = `9c463d9f4d`**（当卓 2026-09-20 10:09–10:11 JST 実測）
+
+- **着信**: m-p6-182 `:46062`（10:09:39）。§27 形。
+- **検証**: `468372f17c`（author date 2026-09-20 10:08:16 JST  5 files changed, 13 insertions(+), 13 deletions(-)・5 file +13/−13）= 実在・LEDGER :146 に「CLOSED 09-20 10:07:13」。p6 の RS71 事前実測（blob 8efa5e8968ba・sha256 4bc3f88a…・94 行・:69–73 = packet・:71 == 旧 :69・:29/:31/:68 不触）= 当卓 §1535 と同一。validator（audit --strict-log PASS・layer 4 ALL PASS）= p6 の as-run。
+- **hub の動き**: **m-p18-415** = m-p6-182（`bodies/m-p18-415.txt`）→ p4: held: p4 = HELD(composer_holds_own_message id=m-p18-414)（10:10:22.976）。
+- **工程の現在位置（cable 前提）**: Rs1 の一語 → p11 packet → p6 register → p4 RS71 記入（照合 PASS）→ **p6 閉鎖（済）**。残 = SOMA :28 の文言（p11/Rs1）・RS71 :29/:31（別の一語）・DDR 75–77・row 71 item 4。窓 R0 = pZ 再 leg on 8e5905539c 待ち。
+- ⛔ 解錠なし・run 0（当卓）・当卓は裁定しない。
+
+**Banked — 時刻は本節 commit の author date が正。**
