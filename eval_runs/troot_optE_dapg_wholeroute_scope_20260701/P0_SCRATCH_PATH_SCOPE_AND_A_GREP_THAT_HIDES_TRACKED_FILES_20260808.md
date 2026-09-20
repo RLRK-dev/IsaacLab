@@ -4383,3 +4383,19 @@ RESULT: PASS
 
 - Not run. pZ: the leg (predicate on parent/landed, then the as-landed procedure from the archive; existing rows identical at 1e-12; the R0-iii block against addendum 9). p4: acceptance of the report row (window R0 untouched). If the sign convention's refutation form appears in pZ's run (both wrists to the same side or Δ_pair not growing), that is p11's court before p4's §7.2 word — the harness prints, it does not judge.
 - Untouched / unlocked: route run ② / #69; D4′; WIP; the 07-29 record. ⛔ gate 不変・route run 認可なし・self-start しません。
+
+## 8.64 Instrument follow-up LANDED: `792e62e460` (+1/−0, `ur15_gripper_mirror_acceptance.py`) — one line, the `_gen/` directory created before the record write (p4 m-p4-293 via m-p18-439); R1′ accepted by the chain court in the same message
+
+Written 2026-09-20 14:27:48 JST (date-THEN-write). p4's word (kickoff item 37 @ `9d6dcccf3f`): R1′ (hand-on-arm) accepted on pZ's verdict `a8a19a393f` (B 84/84, geoms 192/192, NH control 98.600 mm, RC 0/84, My 0/84, AXFIX relation 4.94e-15); its row d ran the acceptance script from an archive and ended rc 1 after all legs because the script writes under `_gen/` (untracked, absent in a clean checkout) — a calibration stop, not an acceptance condition, with no effect on window W (that script has no `_gen` reference). Request to p0: insert `(HERE / "_gen").mkdir(parents=True, exist_ok=True)` before the write (the harness's own form, :1330), one line, legs untouched, from a clean worktree; pZ then confirms rc 0 from the archive with identical numbers; p4 accepts — a prerequisite of p4's §7.2 word.
+
+| item | value |
+|---|---|
+| base | blob `ad1d80d49f24` @ `b7a5e39ecf`; the write = :186 `(HERE / "_gen" / "ko_mirror_acceptance.txt").write_text(text)` (the only `_gen` use besides a comment at :126) |
+| change | one inserted statement in `main()`, now :186, immediately before the write; the trailing comment names the request; nothing else — AST: `main()` has exactly one inserted statement (the mkdir call), every other statement identical and in order, every top-level statement outside `main` identical; pZ's additions-only predicate of addendum 9 (Appendix M, reused as an independent check because its rules are generic) on (base, landed) = PASS `inserted=1 dict_extended=0`; `diff` = 1 added line, 0 removed |
+| commit / blob / sha256 | `792e62e460` (parent `dd05fd3051`; +1/−0) / `f1909891539c` / `7876c6cd1e60cfb13a1272d655844c8130ca7f1d30472527330f9c3a16a97b08` |
+| py_compile | env7 3.12.3 OK |
+| route | the shared tree carries a WIP overlay on this file too (`M` +29/−24), so: scratch worktree `wt_acc` reset to the tip → candidate → checks → commit (`--no-verify`, pathspec) → `update-ref` compare-and-swap → main tree `git reset -q HEAD -- <path>`; main-tree status after = ` M eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p4_ur15_sim_20260727/ur15_gripper_mirror_acceptance.py` (the overlay, unstaged) |
+| run | 0 by p0; pZ's archive run gives the rc and the numbers |
+| not touched | the 07-29 record; window W's script (`92059373a3`); the harness; the legs |
+
+⛔ gate 不変・route run 認可なし・self-start しません。
