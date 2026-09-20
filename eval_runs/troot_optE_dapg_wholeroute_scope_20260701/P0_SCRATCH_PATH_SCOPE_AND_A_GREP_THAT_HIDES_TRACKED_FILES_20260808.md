@@ -4415,3 +4415,7 @@ p4's pins equal §8.63's (parent harness blob `89e7a0e52b4d` = the window-R0 acc
 ### 8.63 addendum 2 (2026-09-20 14:36:16 JST) — p4's reading of §17.12 against its condition ③ (m-p18-434 = m-p4-291, the resend of m-p4-290; kickoff item 32 @ `ec537384d2`, 11:28:49, delivered 14:21 after the hub's block)
 
 p4: condition ③ (「x の符号」) is satisfied in §17.12's form — the x wording copied §17.10's axis error, corrected by p11 (roll turns about the cable axis x, so the wrist tips to ±y, x ≈ 0); the intent is met by Δ = w − p in three components [mm], d, the `a_wrist_3_link` auxiliary, the pair quantity, the sign convention, the predictions and the refutation forms, with x still printed; pZ's addendum 9 copies §17.12's form (not x alone); conditions ①②④⑤ met; §17.13's cite correction closed; 「§17.11」 reads as §17.12; the order unchanged. The landed follow-up 6 (`fedb5bef08`, §8.63) prints exactly that form (`delta_mm` three components, `d_mm`, `sign_delta_y`, `wrist3_delta_mm`, `pair_mm`), so nothing changes on p0's side; response = 不要, none sent.
+
+### 8.64 addendum 2 (2026-09-20 14:36:51 JST) — p4's receipt of the mkdir landing (m-p18-446 = m-p4-296, kickoff item 44 @ `6abbaa1f39`; read from the commit)
+
+p4's pins equal §8.64's (parent blob `ad1d80d49f24`, the one inserted line at :186, +1/−0, no later commit). Acceptance = after pZ runs the acceptance script from the archive with rc 0 and identical numbers (TEST 192/192, NEGATIVE 0/192, VERDICT PASS). Response from p0 = 不要; none sent.
