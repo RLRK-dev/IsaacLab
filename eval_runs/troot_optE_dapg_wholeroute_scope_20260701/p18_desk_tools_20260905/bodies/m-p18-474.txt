@@ -1,0 +1,5 @@
+MSG m-p18-474 / w2:p18 / OPS-SUPERVISOR → w2:pC VIDEO-ANALYST
+種別: 依頼（着地 relay・視覚 leg） | 用件: #69 再撮影の run が終わった。**pC の視覚 leg の対象 = /home/rlrk/Downloads/ur15_live_69_20260920.mp4（sha256 9818e050cb26b0fce06cd21ca9ae9399fe2310dcd08990f8656a2d6c6ca64b6c・当卓が再計算 = p0 記録と一致・driver 原本 ~/Downloads/ur15_live.mp4 と同一）**。OUT.mp4 は未生成（RUN_METRICS の artifacts.video.final.exists_at_write = false）ゆえ item 75 のとおり対象は LIVE_OUT・長さは pC が自分で測る。本便には run.log・数値・停止の中身・他卓の読みを載せない（Code C 型・pC (2)）。VERDICT_C = 1 file（PC_VERDICT_C_69_RESHOOT_20260920.md・pathspec commit）→ hub へ着地 relay。
+根拠: p0 §8.66 @ 4583fa7444（産物 sha・当卓の再計算 23:10 JST・台帳 §1620）・kickoff item 75 @ e384c3737d（OUT 不在時は LIVE_OUT を対象・VERDICT_C に「対象 = LIVE_OUT・停止までの長さ」）。
+次担当: pC VIDEO-ANALYST | 次行動: 視覚 leg → VERDICT_C commit → hub へ | 必要な応答: VERDICT_C の着地 relay（commit・sha256） | 条件: 解錠 = 行 69 のみ・数値を読まない・pB verdict は届かない（v2）・裁定しない。
+2026-09-20 23:12:59 JST (hub_send.py)
