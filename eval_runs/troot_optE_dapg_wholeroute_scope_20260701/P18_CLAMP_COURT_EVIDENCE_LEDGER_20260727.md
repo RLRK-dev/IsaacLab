@@ -48374,3 +48374,14 @@ ALT-1 (downgrade) — not chosen (the human's word). ALT-2 (`agent prompt`) — 
 - ⛔ 解錠なし・run 0（当卓）・当卓は裁定しない。
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1523 — ✅ **pZ PZ-234（harness 最新版 `f5b50967f8` の leg: 着地のままの loader = 計器停止／dump 写しで exit 0・L 18/18・R 18/18・R0-ii bar 成立・非同一 149 対 = 報告量（§17.8 の予測 0 と矛盾・p11 の court）・verdict `8ec2abdec3`・prereg addendum 8 `75121f34b8`）→ m-p18-404（→ p4 cc p0 p11 p6）／§1522 の bank = `b920dd3043`**（当卓 2026-09-20 09:31–09:33 JST 実測）
+
+- **着信**: PZ-234 `:45694`（09:31）。§27 形。
+- **検証**: `8ec2abdec3`（author date 2026-09-20 09:31:03 JST  1 file changed, 232 insertions(+)・親 `b920dd3043` = 当卓の §1522 bank）・verdict blob `4c760ae79f9c…`・sha256 `e2d51a0f8abbd578…`・232 行 = pZ の記載と一致。addendum 8 @ `75121f34b8`（09:23:22・09:24 の push で fork に在り）。harness/driver の後続 commit 0（09:32）。run 結果・計器一致・自己開示（陽性対照 anchor の再実行）= pZ の as-run。
+- **hub の動き**: **m-p18-404** = PZ-234（`bodies/m-p18-404.txt`・版と 400 との関係の注記つき）→ p4 cc p0 p11 p6: p4 = DELIVERED(fused_with_unknown_prefix)（09:32:05.591 → `2026-09-20T00:32:05.898Z`）／p0 = DELIVERED(fused_with_unknown_prefix)（09:32:06.391 → `2026-09-20T00:32:06.698Z`）／p11 = DELIVERED(fused_with_unknown_prefix)（09:32:07.204 → `2026-09-20T00:32:07.515Z`）／p6 = DELIVERED(fused_with_unknown_prefix)（09:32:08.007 → `2026-09-20T00:32:08.340Z`）。完了送信は停止中（§1518）。
+- **工程の現在位置（hub 記帳）**: 窓 R0 = 最新版の leg 済（収束のみ＋鏡像同一性のみ・(ii) 形）・受入 = p4 の word（(i)/(ii)＋R0 受入）・p11 = 149 対の読み・p0 = (i) なら loader 修正。窓 B = ACCEPTED。cable 前提 = Rs1 A–D 待ち。
+- **hold 中の leg（09:33・pending.py 実測・死んだ leg 9 件を含む）**: 354（p11・p6） 357（p11・p6） 358（p11） 359（p0・p11・pZ） 360（p11） 361（p11・pZ） 363（p0・p11） 364（p0・p11） 365（p0） 366（p11） 367（pZ） 368（p0・p11） 369（p0・pZ） 370（p0・pZ） 371（p11・pZ） 372（p11） 374（p0） 375（p0・p11・pZ） 376（p0・p11） 377（p0・p11） 378（p11・pZ） 379（p11・pZ） 381（p0・p11） 382（p11・p4・pZ） 383（p11・p4・p6・pZ） 384（p0・p11・p4・p6） 385（p4・pZ） 386（p11） 387（p11・pZ） 388（p4） 389（p11・pZ） 390（p11・p4・pZ） 391（p11・p4） 392（p11・pZ） 394（p4・p6・pZ） 395（p4） 396（p11・p4・p6・pZ） 397（p0・p4・p6・pZ） 398（p11・p4・p6・pZ） 399（p4） 400（p0・p11・p4） 401（p11・p4・p6・pZ） 402（p0・p11・p6・pZ） 403（p11・p4・p6・pZ）（44 id）。
+- ⛔ 解錠なし・run 0（当卓）・当卓は裁定しない。
+
+**Banked — 時刻は本節 commit の author date が正。**
