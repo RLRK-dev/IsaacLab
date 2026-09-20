@@ -49371,3 +49371,16 @@ ALT-1 (downgrade) — not chosen (the human's word). ALT-2 (`agent prompt`) — 
 - ⛔ 解錠 = 行 69 のみ・hub は発火しない・裁定しない。
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1633 — ⚠✅ **§1632 の訂正（p11 の relay は送られていなかった・記録した ID は別便）＋ 実送信 m-p18-490（p11 §17.27・初回配達）／m-p18-491（p4 m-p4-311）／p19 の点検引継ぎ受領（REVIEW.md sha 一致）／運用変更 = リミット停止を idle と区別し定常 relay を止める**（当卓 2026-09-21 00:14–00:19 JST 実測）
+
+- ⚠ **§1632 の誤り（records-must-match-fact）**: §1632 は「p11 `m-p11-r0targets-20260920-2341`（§17.27 `e6b3fed386`）の relay = **m-p18-488**（23:44・→ p4 cc pZ・p6）」と書いたが**誤り**。実際は (1) 直前の command が機械 check の偽 FAIL で `exit 9` し、その後段にあった `relayEF_head.txt` の生成に到達しなかった (2) 次の command で `build_relay.py` が本文 head 不在で例外 (3) 送信も本文 file 不在で失敗 (4) それでも処理が続き、**増えていない `.floor` を読んだ** `EF=m-p18-$(cat .floor)` が**別便の ID** を p11 の relay として記録した。**`m-p18-488` の実体 = §1631 の relay**（p0 addendum 6 ＋ pB Addendum 3・→ p4 cc p6・pZ・pB・p0・p11）。**p11 の本文の初回配達 = 本窓の `m-p18-490`**（00:16:28・p4・pZ・p6 とも DELIVERED・本文に再送である旨と本訂正を明記）。
+- **hash は object を名指す（3 者が別物）**: `bodies/m-p18-488.txt`（on-disk = committed blob `be943eab2b0f`・当卓 00:18 再計算）= `88c1b5c19b084b65d5bd7a39f8999dbeb7233890d398c75da28894b1a48ffbcd`／`sent_records.jsonl` の `body_sha256`（提出テキスト）= `9c03a86e58700c48f6365b4a9fb941239fadfd2b39a6379f57ea6f1e34c5b49e`／relay 元 file `relay_391_471.txt` = `bd592e769aa4…`。p19 の点検は record の欄を、当卓は file を hash した ⇒ **同じ便についての別 object であって矛盾ではない**。
+- **機構の処置（本窓から適用）**: send の ID は `.floor` の**再読でなく増分**で取る — `F0=$(cat .floor)` → send → `F1=$(cat .floor)` → `[ "$F1" -gt "$F0" ]` でなければ **SEND FAILED で停止**（記録も relay も作らない）。本窓の 490（489→490）・491（490→491）はこの形で確認済。⭐ **失敗した送信の後に ID を「今の値」から取ると、他人の便の名前を自分の便に付けてしまう。**
+- **p19 `m-p19-audit-handoff-20260921-001` 受領**（`:48815`・00:16:12）: Rs1 の指示「p18 のみ再開した。上記の問題、解決さくを渡して」による点検引継ぎ。`work/thread-progress-audit-20260920/REVIEW.md` = 当卓が sha256 再計算 `b1f6ad529018697d4bc748f1bbe6d157a3278121a71c6a19f22b89462d1fd85d` = 記載と一致・72 行・**untracked（未 commit WIP）**・観測基準 HEAD `3439744f0851` = 当卓の当時の HEAD と一致。**当卓との差分**: ① = 当卓が 00:14 に自力で検出し本節で訂正（重複なし）／②③⑤⑥ = 当卓の面に既出（§1629 の札裁定・§1624 の把持 NOT MEASURED・往復量・C3C5）／**④ = 新しい事実**。
+- **④ の処置（運用変更）**: herdr の agent list は idle を返すが pane 表示は Fable のリミット停止 ⇒ **配達 ≠ 処理**。当卓の `dry_ok` の READY はリミット停止を idle と読む。**定常の watcher と hold 完了の巡回を止める**（`watch_pairs.txt` を空に）。未配達は queue に保持し、各卓の**再開後に 1 通ずつ**出す: PLAN-KEEPER `m-p18-491`／IMPL-VERIFIER `m-p18-486`・`m-p18-488`・`m-p18-491`。⛔ 停止中の卓へ定常 relay・再送をしない。
+- **本窓の relay**: **`m-p18-490`**（p11 §17.27 逐語・初回配達）→ p4 cc pZ・p6 = 3 卓 DELIVERED（00:16:28）／**`m-p18-491`**（p4 m-p4-311 逐語 = pZ 照合行の受領・再 pin 不要・pZ の穴は item 78 B のとおり・三者一致の下書き・受入の語の射程・Rs1 へ運ぶ実体の発見）→ p6 cc pZ・pB・p11・p0 = pB・p11・p0 DELIVERED（00:16:31）・p6/pZ hold。pin = kickoff item 91 `181babc70a`（当卓が diff 全行を実読・clean）・run.log blob `c79fdfd1d410` :115・RUN_METRICS `elapsed_s` 483.301・pB file の先頭 210 行が初版と diff 0。
+- **受入の状態（不変）**: VERDICT_C `ffd3c5200c`・pB `ff396f98e6`・pZ `675c6b459d`・札「その他」（item 86）= 着地済／**Rs1 の目視 = 未** → p4 の受入 word → p6 の status flip。
+- ⛔ 解錠 = 行 69 のみ・再走なし・hub は発火しない・裁定しない。p19 は hub tool の role 表に無く当卓から relay できない（p19/p1A の label = Rs1 の行為・既存の Rs1 待ち）。
+
+**Banked — 時刻は本節 commit の author date が正。**
