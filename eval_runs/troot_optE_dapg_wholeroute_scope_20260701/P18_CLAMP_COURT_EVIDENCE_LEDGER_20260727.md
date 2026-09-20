@@ -49292,3 +49292,13 @@ ALT-1 (downgrade) — not chosen (the human's word). ALT-2 (`agent prompt`) — 
 - ⛔ 解錠 = 行 69 のみ・hub は発火しない・裁定しない。**Rs1 へ**: 目視対象は同じ file（`~/Downloads/ur15_live_69_20260920.mp4`）・pC の観測は参考・物理妥当性の判定は Rs1。
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1625 — ✅ **pB m-pB-468 = run #69 の pB verdict 着地（`PB_RUN69_ROW7_R3_STOP_LOGANALYST_20260920.md` @ `8b16ce641a`・数値報告のみ・PASS なし・row 7 = 期待と差 0・R3 cap 5.73・(iii) 三者一致）→ hub B4 = 返却理由なし → m-p18-482（→ pZ = C-3 照合 cc p4・p6・⛔ pC 不送）／pre-step の完了**（当卓 2026-09-20 23:23–23:27 JST 実測）
+
+- **着信**: `:48551`（23:23:54）・§27 形。pin = `8b16ce641ac3cddcca847830e959677538b3d935`（23:23:23・sha256 `b8a3ab568ddf6abba6aee1d806dcd3ccd12e713d488164193078e266d696557a`・210 行・blob `15c5f1f652426ebd2db06ddd1e9a09f52215a3d0`・clean・pin 後 commit 0 = 当卓が実読一致）。file 内の cite = run.log `9fe9685a…`・RUN_METRICS `bcf7fa57…`・dump `f650fc32…`（§1620 の hub pin と同一）・判定行としての PASS = 0。
+- **pB の読み（逐語は relay・当卓は数値を判定しない）**: row 7 = run.log :41-42 の AXFIX 18 数 max|印字−期待| 0.000e+00・鏡像残差 0.000e+00／R3 = :112 cap 5.73（L/R）／(iii) = run.log :375 Traceback ↔ driver :3996 stall raise ↔ RUN_METRICS run（raised・exit 1・RuntimeError・:378 とバイト同一）↔ p0 札「controller の不収束」= 三者一致・phase_max_reached 2／tool_err_mm 報告 = step1 L 658.49 / R 2.19・step 2 L 1126.42 / R 2.16（因果判定なし）。動画は開いていない。
+- **B4（当卓が適用・裁定でない）**: numeric 単独 PASS なし ⇒ 返却理由なし。**受入 word の 3 者 = pB verdict 着地・VERDICT_C 着地（§1624）・Rs1 の語 未・＋ pZ 照合行 未。**
+- **hub の動き**: pre-step（fan-out 前の READY hold 完了）= m-p18-478→LOG-ANALYST m-p18-477→VIDEO-ANALYST m-p18-477→RS-TECH-LEAD。**m-p18-482**（m-pB-468 逐語 ＋ B4）→ pZ IMPL-VERIFIER cc p4・p6: hold: p4・p6（23:25:40）／pZ（23:25:40）。
+- ⛔ 解錠 = 行 69 のみ・hub は発火しない・裁定しない。
+
+**Banked — 時刻は本節 commit の author date が正。**
