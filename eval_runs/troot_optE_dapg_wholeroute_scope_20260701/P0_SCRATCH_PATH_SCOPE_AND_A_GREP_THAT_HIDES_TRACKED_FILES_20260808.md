@@ -4419,3 +4419,7 @@ p4: condition ③ (「x の符号」) is satisfied in §17.12's form — the x w
 ### 8.64 addendum 2 (2026-09-20 14:36:51 JST) — p4's receipt of the mkdir landing (m-p18-446 = m-p4-296, kickoff item 44 @ `6abbaa1f39`; read from the commit)
 
 p4's pins equal §8.64's (parent blob `ad1d80d49f24`, the one inserted line at :186, +1/−0, no later commit). Acceptance = after pZ runs the acceptance script from the archive with rc 0 and identical numbers (TEST 192/192, NEGATIVE 0/192, VERDICT PASS). Response from p0 = 不要; none sent.
+
+### 8.61 addendum 3 (2026-09-20 14:37:42 JST) — the W-leg verdict itself reached p0 as a relay (m-p18-433 = PZ-237, written 11:30, delivered 14:18 after the hub's block); already read from the blob in addendum 2
+
+Same artifact and pins as §8.61 addendum 2 (`59576e5ac0`, blob `8b096863e570`, sha256 `6f2e2434d2ee6823…`, 193 lines): rows 1-7 CONFIRMED, run 0, no stop cause; pZ's disclosure (the prereg's 「rows 2-7 不変」 was MIN-form wording, replaced by the FULL expectation set written before the run) and its observation (the shared-tree WIP overlay +100/−66 on this file, REF_DIR back to ~/Downloads — reported only; §8.61 §3 records the same overlay as unstaged after the landing) are pZ's; pZ notes it collated §8.61's claims against its own measurements (table in the verdict). p4's acceptance of W (m-p4-292) followed this verdict. Nothing asked of p0; no message sent.
