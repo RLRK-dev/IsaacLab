@@ -48763,3 +48763,13 @@ ALT-1 (downgrade) — not chosen (the human's word). ALT-2 (`agent prompt`) — 
 - ⛔ 解錠なし・run 0（当卓）・当卓は裁定しない。#69 = Rs1。
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1566 — ✅ **p0 m-p0-385R = follow-up 6（R0-iii 手首方向 report 行）着地 `fedb5bef08`（harness blob `f5dc14a8d1b3`・1422 行・+78/−1 = 追加＋rec dict 閉じ行の置換・親 blob `89e7a0e52b4d` = 窓 R0 受入版と同一・記録 §8.63 `eca124a730`）→ m-p18-438（→ pZ・p4・cc p11・p6）**（当卓 2026-09-20 14:23–14:25 JST 実測）
+
+- **着信**: `:46762`（`type=attachment`・`05:23:35.192Z` = 14:23:35 JST）・§27 形・宛先 = pZ・p4、cc p11・p6。
+- **検証**: `fedb5bef08`（14:23:35・parent `09e47cb743`・1 file +78/−1）・blob `f5dc14a8d1b3`・sha256 `3ff26da6a378afb28fe342ffc8e81a06c14f02c50cdeaa41e6ffdd219f1f289e`・1422 行・`:1251` `def _wrist_one`・`:1284` `def _r0iii`・`:1381` 呼出・−1 = rec dict の閉じ行（"R0iii" key を足した同一行に置換）= p0 の記載と一致。**親の harness blob `89e7a0e52b4d` = `8e5905539c` の blob（窓 R0 受入版）と同一**。HEAD で clean・後続 0。記録 `eca124a730`（§8.63・14:23:35）。述語 PASS／base FAIL／v8 FAIL・copy check・py_compile・run 0 = p0 の as-run（検証 = pZ の archive leg・受入 = p4）。
+- **hub の動き**: **m-p18-438** = m-p0-385R（`bodies/m-p18-438.txt`・§27 形）→ pZ IMPL-VERIFIER cc p4 RS-TECH-LEAD・p11 ARM-CONTROL-DESIGN・p6 PLAN-KEEPER: hold: pZ・p4・p6（14:25:25）／p11 = DELIVERED（14:25:25）。
+- **hold の順（更新）**: pZ = m-p18-438 → 437 → 434 → 429 → 430 → 435／p4 = m-p18-438 → 435 → 424／p0 = 437 → 434 → 433 → 430／p6 = 437 → 436 → m-p18-438 → 433 → 434 → 435 → 429／p11 = 434 → 437 → m-p18-438 → 433 → 430 → 429 → 428 → 422。
+- ⛔ 解錠なし・run 0（当卓）・当卓は裁定しない。
+
+**Banked — 時刻は本節 commit の author date が正。**
