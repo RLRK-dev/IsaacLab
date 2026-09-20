@@ -49412,3 +49412,18 @@ ALT-1 (downgrade) — not chosen (the human's word). ALT-2 (`agent prompt`) — 
 - ⛔ 解錠 = 行 69 のみ・再走なし・hub は発火しない・裁定しない。
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1636 — ✅ **Rs1 (p19) の closeout `cf44999454`（12 file）を当卓が照合: push は 2 回で当卓の backlog 289 commit（うち台帳 93 件）＋本 commit を公開・未 push 0／例外は利用者の逐語「今回だけ例外を認めてコミット」（rollout `:2783`）／§1635 の pin `ad5fc064…` は `60bf5378…` へ supersede（header 追加・本体 24 行と 7 述語は存置）／§0 #1 の作用文言は不変**（当卓 2026-09-21 01:06–01:10 JST 実測）
+
+- **着信**: `m-p19-rs1-closeout-20260921-001`（`:48920`・01:06:28）。
+- **commit**: `cf4499945493cd2a207dd4031ad691724eddc63c`（01:04:24・12 file・+162/−7）= 当卓が stat と全 diff を実読。HEAD の祖先・**fork tip == HEAD**・**未 push 0**（`git fetch fork` 後に実測）。
+- **push の射程（当卓の catch）**: remote-tracking reflog = push 2 回。①`85934d69bb`（09-20 09:51:15 = 人間の朝の push 地点）→ `dde73b7efe` で **289 commit 公開**（うち **93 件が当卓の `Bank section …`**）②→ `cf44999454`。⇒ 当卓が「未 push 287/288/289」と報告していた backlog は**全て公開済**。**12 file だけでなく全祖先が公開された**ことを記録する。
+- **例外の接地**: 利用者（人間）の逐語 **「今回だけ例外を認めてコミット」** = p19 rollout `:2783`（`2026-09-20T16:01:20.637Z` = **01:01:20 JST**・`role=user`・209 字・p19 の問い〔12 file 限定・既存検査エラーを記録のうえ commit 可否〕の引用を含む）を当卓が直読。⇒ **利用者のもの・12 file 限定・1 回限り**。`AGENTS.md` の「全検査合格後に commit」は無効化されていない。
+- ⚠ **当卓の pin の失効**: §1635 の `RS1_RUN69_REVIEW_20260921.md` `ad5fc064…`（untracked・24 行）→ **`60bf5378fd0b79916d735c5fd66d9d6ca0e2711562f395c30397d0ec77b46f2f`（committed・30 行）**。照合 = SPDX header 6 行を除く本体が **24 行**で一致・判別力のある 7 語（"not a claim of human viewing"／"issues no …PASS"／動画 sha `9818e050…`／"unmeasured"／`ffd3c5200c`・`ff396f98e6`・`675c6b459d`）が**全て存置**。⚠ **限界 = header 前の版は未 commit ゆえ byte diff は不可能**（行数と述語の存置まで）。⭐ **untracked を pin にすると、その版は後から取り直せない。**
+- **§0 に触れた差分（当卓の読み・裁定でない）**: 不変前提 **#1 DUAL-ARM** = 識別の括弧が `UR15 × 2` → `current MuJoCo cell: left UR15 + right UR15-B` に変わったのみ・**作用文言（EVERY motion で両腕・片腕を parked にしない）は逐語のまま**。識別の出所 = **DDR 68 = 人間の 08-10 逐語**（custody `e00a990c45`）の反映であり新前提でない。§1 = 見出し変更＋現行 identity/controller 節＋旧 Newton 値の **HISTORICAL** 明示。新 spec `04-Specs/UR15-B-Controller.md`（50 行）= **IK のみ・物理迂回の禁止・両腕必須**を明文で維持。⇒ 当卓が見る限り**実質の不変前提は不変**。
+- **面**: `CLAUDE.md` が Rs1 割当＋§27 を載せた（最も読まれる自動読込面が担当交代を運ぶ）。`nest_role_labels.txt` に `RS1`・p1A 拡張なし・LEDGER 行 68 = ✅04-Specs 反映済・`Vault Write Permissions` +2・`index.md` +6/−2・SOMA に現行 identity 注記。**当卓は `MEMORY.md` を触らない**（索引は hard limit の 90% 超・規則は成長でなく coordinated 圧縮の起票）。
+- **残り（不変）**: **p4 の受入 word → p6 の status flip**（両卓リミット停止・送らず queue 保持: p4 = #69 Rs1 目視 leg／p6 = `m-p18-491`／pZ = `m-p18-486`・`m-p18-488`・`m-p18-491`）。
+- **当卓の返答**: `work/thread-rs1-20260921/P18_TO_RS1.md` に **P18-TO-RS1-003** を追記（01:09）。
+- ⛔ 解錠 = 行 69 のみ・再走なし・hub は発火しない・裁定しない。
+
+**Banked — 時刻は本節 commit の author date が正。**
