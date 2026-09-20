@@ -183,6 +183,7 @@ def main() -> int:
                f"(test holds: {ok_test}; negative fails as it must: {not ok_neg}; "
                f"vertices: {vert_ok}; denominator {n_test} geom-instances)")
     text = "\n".join(out) + "\n"
+    (HERE / "_gen").mkdir(parents=True, exist_ok=True)   # p4 m-p4-293: the dir is untracked and absent in a clean checkout
     (HERE / "_gen" / "ko_mirror_acceptance.txt").write_text(text)
     print(text)
     return 0 if verdict else 1
