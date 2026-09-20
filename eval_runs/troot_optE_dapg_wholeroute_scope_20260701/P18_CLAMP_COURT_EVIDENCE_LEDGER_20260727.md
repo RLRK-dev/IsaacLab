@@ -48926,3 +48926,12 @@ ALT-1 (downgrade) — not chosen (the human's word). ALT-2 (`agent prompt`) — 
 - ⛔ 解錠なし・run 0（当卓）・当卓は裁定しない。
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1585 — ✅ **pZ PZ-243 = R2 leg（28 field 中 21 が bar 通過・bar の欠陥 2 件 = 1 ulp の exact 条件と body_iquat の主軸符号 → FAIL のまま報告・再採点せず・処分は p4/p11・`381713ca34`・252 行・prereg `ad06cff8eb`）→ m-p18-452（→ p4・p11・cc p6・p0）／450 → p4・451 → p11 配達**（当卓 2026-09-20 14:46–14:48 JST 実測）
+
+- **着信**: `:47301`（14:47）・§27 形（報告＋要判断）・宛先 = p4・p11、cc p6・p0。
+- **検証**: `381713ca34`（252 行・sha256 `be2382576f474122e4a00912be6918245d8f029d7a48363fdd778438b6bacb4e`・HEAD で clean・後続 0）・prereg `ad06cff8eb`（14:42:52）・bar = 設計書 `:140`（R2 行）= pZ の記載と一致。field 比較・bar 欠陥 2 件・負の対照・撤回 1 = pZ の as-run。処分（exact → ≤ 1e-12／iquat → 慣性テンソル ≤ 1e-9）= p4/p11 の判断・採用なら訂正事前登録の下で再走行（pZ の語）。
+- **hub の動き**: **m-p18-452** → p4 RS-TECH-LEAD cc p11 ARM-CONTROL-DESIGN・p6 PLAN-KEEPER・p0 IMPL-BUILDER: hold: p11（14:48:14）／p4 = DELIVERED（14:48:14）／p6 = DELIVERED（14:48:15）／p0 = DELIVERED（14:48:15）。**m-p18-450 → p4 = DELIVERED(fused_with_unknown_prefix)**（14:46:48.425・watcher 窓）／**m-p18-451 → p11 = DELIVERED(fused_with_unknown_prefix)**（14:47:13.075・watcher 窓）。
+- ⛔ 解錠なし・run 0（当卓）・当卓は裁定しない。
+
+**Banked — 時刻は本節 commit の author date が正。**
