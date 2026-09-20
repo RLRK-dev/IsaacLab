@@ -1244,6 +1244,81 @@ def _r0ii(models_R, model_L, rows, seed, re_max, qL_unsharpened):
     return out
 
 
+_E2 = np.array([0.0, 1.0, 0.0])            # section 17.12: the roll axis of the tool frame, RD @ e2
+_E3 = np.array([0.0, 0.0, 1.0])            # section 17.12: the approach axis, RD @ e3
+
+
+def _wrist_one(t, tgt, k, seed, re_max):
+    """R0-iii (section 17.12): one solve at attitude index k and the wrist / pinch geometry of the returned pose.
+
+    Kinematics only on a throwaway MjData.  Prints nothing; returns a record with the wrist := TOOLB[t] (ko base
+    `g_base`) world position w, the pinch := pinch(t, sc) world position p, Delta = w - p in mm and d = |Delta|,
+    sign(Delta_y), the same for the parent link `a_wrist_3_link`, and the roll axis RD @ e2 / approach RD @ e3 of the
+    menu entry from the copied `_rdes`."""
+    q, tag, note = _solve_one(t, tgt, seed, re_max, pose_only=k)
+    yaw, roll = pose_menu(t)[k]
+    RD = _rdes(yaw, roll)
+    rec = {"side": t, "k": k, "yaw": float(yaw), "roll": float(roll), "target": [float(v) for v in tgt],
+           "converged": q is not None, "stop_cause_tag": tag, "note": note,
+           "roll_axis_RD_e2": (RD @ _E2).tolist(), "approach_RD_e3": (RD @ _E3).tolist()}
+    if q is None:
+        return rec
+    sc = mujoco.MjData(m)
+    for i, a in enumerate(QADR[t]):
+        sc.qpos[a] = q[i]
+    mujoco.mj_kinematics(m, sc)
+    mujoco.mj_comPos(m, sc)
+    p = np.asarray(pinch(t, sc), float)
+    w = np.array(sc.xpos[TOOLB[t]], float)
+    b3 = mujoco.mj_name2id(m, mujoco.mjtObj.mjOBJ_BODY, "a_wrist_3_link")
+    w3 = None if b3 < 0 else np.array(sc.xpos[b3], float)
+    dl = (w - p) * 1000.0
+    rec.update({"wrist_w_m": w.tolist(), "pinch_p_m": p.tolist(), "delta_mm": dl.tolist(), "d_mm": float(np.linalg.norm(dl)),
+                "sign_delta_y": int(np.sign(dl[1])),
+                "wrist3_delta_mm": None if w3 is None else ((w3 - p) * 1000.0).tolist(),
+                "wrist3_d_mm": None if w3 is None else float(np.linalg.norm((w3 - p) * 1000.0)),
+                "q": q.tolist()})
+    return rec
+
+
+def _r0iii(models_R, model_L, GL, GR, seed, re_max):
+    """R0-iii, section 17.12 (p11's specification on p4's word m-p4-287): the wrist-orientation REPORT row.
+
+    With the same wired call pinned to one attitude (pose_only = k, k in {0, 1}: roll 0 / 0.35 rad, yaw 0), the STEPS
+    row 4 own-side targets (section 17.7's GL on L, GR on R) are solved on the L model and, for R, on B / RC / NH; per
+    converged solution the wrist / pinch geometry of `_wrist_one` is recorded and printed, plus the pair quantity
+    Delta_pair(k) = |w_R - w_L| in mm and whether it grows from k = 0 to k = 1.  Sign convention (17.12): 「outside」 =
+    Delta_pair grows; sign(Delta_y_L) = -1 and sign(Delta_y_R) = +1 (cell y); x is not used.  Predictions are
+    pre-registered by pZ (addendum 9) and compared there, not here.  Report only: no bar, no STOP, the exit code and
+    every existing row are untouched."""
+    GL, GR = np.asarray(GL, float), np.asarray(GR, float)
+    _bind("L", *model_L)
+    L = {k: _wrist_one("L", GL, k, seed, re_max) for k in (0, 1)}
+    out = {"claim": "report（手首方向）・bar なし (section 17.12; the wrist geometry of the row-4 solutions; no bar, no STOP)",
+           "convention": {"outside": "Delta_pair grows from k=0 to k=1", "sign_delta_y_L": -1, "sign_delta_y_R": +1,
+                          "x_not_used": True},
+           "targets": {"L": GL.tolist(), "R": GR.tolist()}, "L": L, "models": {}}
+    for mname, md in models_R.items():
+        _bind("R", *md)
+        R = {k: _wrist_one("R", GR, k, seed, re_max) for k in (0, 1)}
+        pair = {}
+        for k in (0, 1):
+            if L[k]["converged"] and R[k]["converged"]:
+                pair[k] = float(np.linalg.norm(np.array(R[k]["wrist_w_m"]) - np.array(L[k]["wrist_w_m"])) * 1000.0)
+            else:
+                pair[k] = None
+        out["models"][mname] = {"R": R, "pair_mm": pair,
+                                "pair_grows_k0_to_k1": None if None in pair.values() else bool(pair[1] > pair[0])}
+        for k in (0, 1):
+            lk, rk = L[k], R[k]
+            fl = lambda r: ("Δ=(" + " ".join(f"{v:+.1f}" for v in r["delta_mm"]) + f") d={r['d_mm']:.1f}") if r["converged"] else f"NOT CONVERGED ({r['stop_cause_tag']})"
+            print(f"[r0-iii] model {mname} k={k} (roll L {lk['roll']:+.2f} / R {rk['roll']:+.2f}): L {fl(lk)} | R {fl(rk)} | "
+                  f"sign(Δy) L={lk.get('sign_delta_y')} R={rk.get('sign_delta_y')} | Δ_pair={pair[k]} mm  [mm; report only]")
+        print(f"[r0-iii] model {mname}: Δ_pair k0 -> k1 = {pair[0]} -> {pair[1]} mm; grows = {out['models'][mname]['pair_grows_k0_to_k1']}; "
+              f"roll axis RD·e2 (L k=1) = {np.round(L[1]['roll_axis_RD_e2'], 3).tolist()}, a = RD·e3 = {np.round(L[1]['approach_RD_e3'], 3).tolist()}")
+    return out
+
+
 def main() -> int:
     ap = argparse.ArgumentParser(description="R0 convergence leg (static; convergence only)")
     ap.add_argument("--out", default=str(HERE / "_gen" / "r0_convergence"))
@@ -1302,6 +1377,8 @@ def main() -> int:
     models_r0ii["B"] = models["R"]
     qL_uns = {r["step"]: (None if r["q"] is None else np.asarray(r["q"], float)) for r in res["L"]}
     r0ii = _r0ii(models_r0ii, models["L"], rows, args.seed, args.re_max, qL_uns)
+    # R0-iii (section 17.12): the wrist-orientation report row on the row-4 targets, k in {0, 1}, R on B / RC / NH
+    r0iii = _r0iii(models_r0ii, models["L"], GL, GR, args.seed, args.re_max)
     convL = [r["converged"] for r in res["L"]]; convR = [r["converged"] for r in res["R"]]
     convN = [r["converged"] for r in neg]
     l_not_r = [r["step"] for cl, cr, r in zip(convL, convR, res["R"]) if cl and not cr]
@@ -1333,7 +1410,7 @@ def main() -> int:
         "elapsed_s": round(time.time() - t0, 3),
     }
     rec = {"summary": summary, "L": res["L"], "R": res["R"], "U0_settled_L": resu0["L"], "U0_settled_R": resu0["R"],
-           "negative_control_R_on_L": neg, "R0ii": r0ii}
+           "negative_control_R_on_L": neg, "R0ii": r0ii, "R0iii": r0iii}
     (out_dir / "R0_CONVERGENCE_REPORT.json").write_text(json.dumps(rec, indent=1, ensure_ascii=False) + "\n")
     print("[r0] " + " | ".join(f"{k}={v}" for k, v in summary.items() if k not in ("claim", "targets_source", "branches_on_composed_model", "R0ii_counts")))
     print(f"[r0] {claim}")
