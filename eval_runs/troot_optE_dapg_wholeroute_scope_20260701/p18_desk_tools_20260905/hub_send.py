@@ -10,7 +10,20 @@ Design of record: eval_runs/troot_optE_dapg_wholeroute_scope_20260701/P18_D1_VER
 (PROPOSE v3, increment 1'). Authorized by Rs1 (the human): files = transcript line 39366; build = line 40230.
 Post-build fixes (2026-09-06, 層2/層5 cycle 1): CONTROLS_20260906.md in this directory lists them with the rows.
 
-Procedure (send):
+Current transport (2026-09-20, user-directed reliability repair):
+- See DELIVERY_RELIABILITY_20260920.md for scope, prior-art delta, tests and rollout. The frozen transport below
+  is historical. send_one now rechecks the recipient identity/status and visible composer, records submission
+  intent, then uses `herdr agent prompt` for ordered text plus Enter. It never presses a separate key according
+  to a folded paste count. send_rc records the prompt result; via=agent_prompt names the combined operation.
+- Only never-submitted legs qualify for send --id completion. An interrupted or failed prompt is uncertain,
+  even if no recipient record is yet visible; legacy post-paste HELD rows are not made retryable.
+- Send/resend operations take a nonblocking lock on .floor; a busy lock means no submission. Ready recipients
+  may be delivered while other fan-out recipients are held. pending is a read-only recorded-state view; it
+  does not replace verify, recipient readback, or an owner's engineering acceptance.
+- The final read-to-submit interval can still race with human/other-client input. No exactly-once guarantee
+  or global composer lock is claimed. Existing --queue same-matter permission remains required.
+
+Historical baseline procedure (through 2026-09-13; transport superseded above):
 - Guard = a pane bind, not a two-factor bind: HERDR_PANE_ID must be w2:p18 and CLAUDE_CODE_SESSION_ID must equal
   the live w2:p18 agent session. Subagents and background jobs of the hub inherit both (measured 2026-09-05) and
   cannot be excluded by the environment: they run this tool only as HUB_SEND_READONLY=1 ... --dry_run (nothing
@@ -263,7 +276,7 @@ def viewport_rows(pane: str) -> int:
 
 def read_view(pane: str) -> dict:
     rows = viewport_rows(pane)  # 0.9.0 default read = 80 rows; --lines <viewport_rows> covers the whole viewport
-    argv = ["herdr", "agent", "read", pane, "--source", "recent-unwrapped", "--format", "ansi"]
+    argv = ["herdr", "agent", "read", pane, "--source", "visible", "--format", "ansi"]
     out, rc = run_rc(argv + (["--lines", str(rows)] if rows else []))
     if rc != 0 or not out.strip():  # raw ANSI text on stdout (keeps the NBSP; --format text drops it); rc=1 = error
         return {"error": "read_failed"}
@@ -573,6 +586,21 @@ def recorded_members(rows: list[dict], mid: str) -> set[str]:
     return panes
 
 
+def never_submitted(row: dict) -> bool:
+    """Allow completion only with affirmative evidence that no submission was attempted.
+
+    Legacy post-paste HELD rows deliberately do not qualify, even with via=none.
+    """
+    state = str(row.get("state", ""))
+    if state.startswith(FINAL_STATES) or row.get("submission_attempted") is True:
+        return False
+    return (
+        not row
+        or state == "HELD(fanout_stopped)"
+        or (state.startswith("HELD(") and row.get("submission_attempted") is False)
+    )
+
+
 def do_send(args: argparse.Namespace) -> int:
     agents = agent_list()
     hub_sid = guard(agents)
@@ -606,8 +634,9 @@ def do_send(args: argparse.Namespace) -> int:
         mid = args.id
         unsent = []
         for role, a in members:
-            st = str(latest.get((mid, a["pane_id"]), {}).get("state", ""))
-            if st == "" or st == "HELD(fanout_stopped)":
+            previous = latest.get((mid, a["pane_id"]), {})
+            st = str(previous.get("state", ""))
+            if never_submitted(previous):
                 unsent.append((role, a))
             else:
                 print(f"{a['pane_id']} {role}: skipped({st})")
@@ -674,9 +703,10 @@ def do_send(args: argparse.Namespace) -> int:
                 ],
             }
         )
-        return 2
-    rc = 0
-    pending = list(decisions)
+        if all(reason for _, _, reason, _ in decisions):
+            return 2
+    rc = 2 if any(reason for _, _, reason, _ in decisions) else 0
+    pending = [decision for decision in decisions if not decision[2]]
     while pending:
         role, a, _, facts = pending.pop(0)
         if args.id and any(
@@ -705,6 +735,7 @@ def stopped_row(role: str, a: dict, facts: dict) -> dict:
         "pre_send_offset": tpath.stat().st_size if tpath.exists() else 0,
         "via": "none",
         "state": "HELD(fanout_stopped)",
+        "submission_attempted": False,
         "status": facts["status"],
         "sent_at": jst_now(),
         "composer_before_kind": facts["composer_before_kind"],
@@ -737,98 +768,58 @@ def send_one(mid: str, role: str, a: dict, text: str, head: str, sha: str, base:
         "sent_at": jst_now(),
         "composer_before_kind": facts["composer_before_kind"],
         "composer_before_sha256": facts["composer_before_sha256"],
+        "submission_attempted": False,
     }
     if READONLY:
         row["state"] = "dry_run(would_send)"
         append_row(row)
         return 0
-    _, row["send_rc"] = run_rc(["herdr", "pane", "send-text", pane, text])
+    # Earlier fan-out members can take seconds: their initial guard is not a guard for this recipient.
+    fresh = next((agent for agent in agent_list() if agent.get("pane_id") == pane), None)
+    if (
+        fresh is None
+        or fresh.get("agent_session") != a.get("agent_session")
+        or fresh.get("agent") != a.get("agent")
+        or live_label(fresh) != live_label(a)
+    ):
+        row["state"] = "HELD(destination_changed)"
+        append_row(row)
+        print(pane, row["state"])
+        return 2
+    reason, fresh_facts = decide(str(fresh.get("agent_status")), read_view(pane), queue, {mid: head})
+    row.update(fresh_facts)
+    if reason:
+        row["state"] = reason
+        append_row(row)
+        print(pane, row["state"], "(nothing submitted)")
+        return 2
+    row["pre_send_offset"] = tpath.stat().st_size if tpath.exists() else 0
+    # Persist intent first. A process death or transport error must never turn a possible send into a retry.
+    row.update(state="UNKNOWN(submission_in_progress)", submission_attempted=True, submitted_at=jst_now())
+    append_row(row)
     try:
-        return _after_send(mid, a, text, head, row, queue)
+        _, row["send_rc"] = run_rc(["herdr", "agent", "prompt", pane, text])
+        row.update(state="", via="agent_prompt", enter_at=jst_now())
+        return _after_send(mid, fresh, text, head, row, queue)
     except BaseException as exc:
-        if not row["state"]:
-            kind = "UNKNOWN" if row.get("via", "none") != "none" else "HELD"
-            row["state"] = f"{kind}(error:{type(exc).__name__})"
-            append_row(row)
-            print(a["pane_id"], row["state"])
+        row["state"] = f"UNKNOWN(submission_error:{type(exc).__name__})"
+        append_row(row)
+        print(pane, row["state"])
         raise
 
 
 def _after_send(mid: str, a: dict, text: str, head: str, row: dict, queue: bool) -> int:
-    """Post-send gate, status re-read, keypress and observation; the caller banks the row on any exception."""
+    """Observe the ordered agent-prompt submission; never press a key based on rendered paste size."""
     pane = a["pane_id"]
     tpath = Path(row["transcript_path"])
     offset = int(row["pre_send_offset"])
-    landed = ""
-    n_lines = text.count("\n") + 1
-    for _ in range(6):
-        v = read_view(pane)
-        comp = v.get("composer_plain", "")
-        if comp.startswith(head):
-            landed = "head"
-            break
-        pm = paste_marker_lines(comp)
-        if pm == n_lines:
-            landed = comp.strip()
-            break
-        if pm:
-            row["state"] = f"HELD(paste_count_mismatch:{pm}!={n_lines})"
-            append_row(row)
-            print(pane, row["state"])
-            return 2
-        if comp and not comp.startswith("MSG " + mid):
-            row["state"] = "HELD(foreign_text_in_composer)"
-            append_row(row)
-            print(pane, row["state"])
-            return 2
-        time.sleep(0.25)
-    if not landed:
-        row["state"] = "HELD(send_not_rendered)"
-        append_row(row)
-        print(pane, row["state"])
-        return 2
-    row["landed_as"] = landed
-    before, now = str(a.get("agent_status")), status_of(pane)
-    row["status_at_keypress"] = now
-    if now not in ("idle", "done", "working") or (before == "working") != (now == "working"):
-        row["state"] = f"HELD(status_changed:{before}->{now})"
-        append_row(row)
-        print(pane, row["state"])
-        return 2
-    key = "Tab" if (now == "working" and queue) else "Enter"
-    _, row["keypress_rc"] = run_rc(["herdr", "pane", "send-keys", pane, key])
-    if row["keypress_rc"] != 0:
-        row["state"] = f"HELD(keypress_refused:rc={row['keypress_rc']})"
-        append_row(row)
-        print(pane, row["state"])
-        return 2
-    row["via"] = key
-    row["enter_at"] = jst_now()
-    if key == "Enter":
-        for _ in range(12):
-            time.sleep(0.5)
-            res = scan(tpath, offset, text, head, mid)
-            if res["state"].startswith("DELIVERED"):
-                row.update(res, first_seen_at=jst_now())
-                break
-        else:
-            v = read_view(pane)
-            stuck = "composer_plain" in v and (
-                v["composer_plain"].startswith("MSG " + mid) or "[pasted text" in v["composer_plain"].lower()
-            )
-            row.update(scan(tpath, offset, text, head, mid))
-            if stuck:
-                row["state"] = "STUCK_IN_COMPOSER"
-    else:
-        time.sleep(0.5)
-        v = read_view(pane)
-        whole = "\n".join(v.get("plain", [])).lower()
+    for _ in range(12):
         res = scan(tpath, offset, text, head, mid)
-        if res["state"] == "UNKNOWN(no-record)":
-            res["state"] = (
-                "QUEUED(observed:viewport)" if any(m in whole for m in QUEUED_MARKERS) else "UNKNOWN(no-observation)"
-            )
         row.update(res)
+        if res["state"].startswith(("DELIVERED", "QUEUED", "ABSORBED")):
+            row["first_seen_at"] = jst_now()
+            break
+        time.sleep(0.25)
     append_row(row)
     print(pane, row["state"], row.get("evidence", ""))
     return 0 if row["state"].startswith(("DELIVERED", "QUEUED")) else 1
@@ -854,6 +845,9 @@ VERIFY_COPY = (
     "sent_at",
     "via",
     "enter_at",
+    "submitted_at",
+    "submission_attempted",
+    "send_rc",
 )
 
 
@@ -938,6 +932,48 @@ def do_resend(args: argparse.Namespace) -> int:
     return do_send(ns)
 
 
+def do_pending(args: argparse.Namespace) -> int:
+    """Print recorded outstanding recipient legs without sending or inferring content acceptance."""
+    legs: dict[tuple[str, str], dict] = {}
+    for row in load_rows():
+        mid = row.get("id", "")
+        if args.id and mid != args.id:
+            continue
+        if row.get("row_type") == "held":
+            for member in row.get("members", []):
+                member = {"pane": member} if isinstance(member, str) else member
+                key = (mid, member.get("pane", ""))
+                legs.setdefault(
+                    key,
+                    {**row, **member, "state": member.get("reason") or "HELD(unsent)", "submission_attempted": False},
+                )
+        elif row.get("row_type") in ("send", "resend", "verify") and row.get("pane"):
+            legs[(mid, row["pane"])] = row
+    pending = []
+    for (mid, pane), row in sorted(legs.items()):
+        state = str(row.get("state", ""))
+        if state.startswith(FINAL_STATES):
+            continue
+        pending.append(
+            {
+                "id": mid,
+                "pane": pane,
+                "role": row.get("role", ""),
+                "state": state,
+                "never_submitted": never_submitted(row),
+                "next_action": "complete_if_current" if never_submitted(row) else "verify_or_operator_review",
+                "evidence": row.get("evidence", ""),
+                "body_file": str(BODIES / f"{mid}.txt"),
+            }
+        )
+    print(
+        json.dumps(
+            {"observed_at": jst_now(), "basis": "recorded_only", "pending": pending}, ensure_ascii=False, indent=2
+        )
+    )
+    return 0
+
+
 def id_files(root: str) -> list[Path]:
     """Id-shaped files of the retired by-hand directories only (the hub's subagents write elsewhere in root)."""
     paths = glob.glob(root + "/ids_retired_*/*") + glob.glob(root + "/desk_msgs_retired_*/*")
@@ -1002,7 +1038,7 @@ def do_init(_args: argparse.Namespace) -> int:
 
 
 def main(argv: list[str] | None = None) -> int:
-    ap = argparse.ArgumentParser(description="hub-only send/verify/resend tool for w2:p18")
+    ap = argparse.ArgumentParser(description="hub-only send/verify/resend tool; pending is read-only")
     sub = ap.add_subparsers(dest="cmd", required=True)
     s = sub.add_parser("send")
     s.add_argument("--to", required=True)
@@ -1022,11 +1058,27 @@ def main(argv: list[str] | None = None) -> int:
     r.set_defaults(func=do_resend)
     i = sub.add_parser("init")
     i.set_defaults(func=do_init)
-    for p in (s, v, r, i):
+    pending = sub.add_parser("pending")
+    pending.add_argument("--id")
+    pending.set_defaults(func=do_pending)
+    for p in (s, v, r, i, pending):
         p.add_argument("--dry_run", action="store_true", help="after the subcommand: read and print only")
     args = ap.parse_args(argv)
     global READONLY
     READONLY = READONLY or bool(getattr(args, "dry_run", False))
+    if args.cmd in ("send", "resend") and not READONLY:
+        if not FLOOR.exists():
+            raise SystemExit("refused(no_floor): run `hub_send.py init` first")
+        with FLOOR.open("r", encoding="utf-8") as lock:
+            try:
+                fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
+            except BlockingIOError:
+                print("HELD(sender_busy): no submission attempted")
+                return 2
+            try:
+                return args.func(args)
+            finally:
+                fcntl.flock(lock, fcntl.LOCK_UN)
     return args.func(args)
 
 
