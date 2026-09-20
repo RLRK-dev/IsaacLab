@@ -49427,3 +49427,16 @@ ALT-1 (downgrade) — not chosen (the human's word). ALT-2 (`agent prompt`) — 
 - ⛔ 解錠 = 行 69 のみ・再走なし・hub は発火しない・裁定しない。
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1637 — ✅ **p4/p6 再開 → #69 の受渡しを前へ: m-p18-492（Rs1 目視 leg）を Rs1 の同一案件 queue 許可で p4 へ配達（01:14:19）／p4 m-p4-312（item 93 `e19d767680`）= R0 targets の open 事項を閉じ 4 札化は Rs1 へ保持 → m-p18-493／p6 へ 491・493 を queue。⚠ 当卓の誤記 1 件（493 の本文が p11・p0 を「届いていない」と書いたが実際は配達済）**（当卓 2026-09-21 01:10–01:15 JST 実測）
+
+- **再開の接地**: Rs1 `m-p19-rs1-resume-p4-p6-20260921-001`（`:48949`・01:10:59・利用者の通知「ｐ4　ｐ6が再開した」）＋ artifact `work/thread-rs1-20260921/p4_p6_resumption.json`（2,191 byte・当卓が実読: p4 `ad899cc6…` working・p6 working）。⚠ **pZ は当卓の `dry_ok` で idle と出たが再開通知の対象外ゆえ保持**（問題 ④ = idle 表示はリミット停止を分けない）。
+- **p4 m-p4-312 の検証**: pin = kickoff item 93 `e19d767680`（01:11:35・+7 行・clean）。**当卓の再検算**: `cell_spec` blob `6bdf7ea4f9ca` :398（`REST_Y = 0.28 + WORK_ROW_DY`）:472（`REST_TOP = TABLE_TOP + 0.150`）:51-57（cable 定数は task_config 参照）／`task_config` @ `96e9ece175` :20（`TABLE_HEIGHT = 0.80`）:135（40）:136（0.015）:137（0.004）⇒ **0.80 + 0.150 + 0.004 = 0.954** = §17.7 の GL/GR の z（P11 設計書 :261 以下）。⚠ 名称: p4 の「TABLE_TOP」は task_config では `TABLE_HEIGHT`・値は一致。
+- **p4 の語（chain court）**: 語 1 = **確認 1 行は不要・open 事項は閉じる**（閉形式の入力は定数のみで mount 由来の量を含まない・両 dump の cable field は byte 同一・#69 の measured grasp が同じ link/x/y を実測 ⇒ 構造的同値が 1 事例の数値再評価より強い）。**carry** = targets は `REST_Y`・`TABLE_TOP`・`CABLE_R`・`CABLE_SEG`・x0 依存 ⇒ **WORK_ROW_DY 設定・table 高さ・cable 定数を変えた run では再導出**（#69 は env key 24 全未設定）・**mount 変更では再導出不要**。語 2 = **§17.4 の 4 札化は採らない・Rs1 へ持つ提案として保持**（札の集合は Rs1 の領域）。**事実**: 同じ機構（driver の per-arm 追従 gate の stall）は **3 回目撃**（t42 as-read／U0 08-10／#69）・いずれも **C-2 系 cell の L 腕側**。
+- **hub の動き**: **`m-p18-492`**（Rs1 目視 leg ＋ 受入 4 入力 ＋ closeout の関連事実）→ p4: 01:12:21 は HELD(working)。Rs1 の `m-p19-rs1-handoff-priority-20260921-001`（`:49075`・01:13:44）が**同一案件の `--queue` を明示許可** ⇒ **01:14:19 DELIVERED**（tool の fresh 宛先・入力欄・never-submitted 検査は維持）。**`m-p18-493`**（m-p4-312 逐語 ＋ 当卓の再検算）→ p6 cc p11・pZ・pB・p0: p11・p0 = DELIVERED（01:13:27）・p6・pZ・pB = 保持。**p6 へ `m-p18-491`・`m-p18-493` を同一案件 queue**（01:14:20/21 = QUEUED(observed)）。
+- ⚠ **当卓の誤記（records-must-match-fact）**: `m-p18-493` の本文は「p11・pZ・pB・p0 は停止中のため本便は届いていない」と書いたが、**p11 と p0 には 01:13:27 に配達された**（保持は p6・pZ・pB の 3 卓）。配達と処理は別ゆえ「処理されていない可能性」は残るが、**配達の主張としては誤り**。次に p11・p0 へ出す便の冒頭で訂正を運ぶ。原因 = fan-out の結果を見る前に本文へ配達状態を書いた ⇒ **配達状態は送信後の記録から書く**。
+- ⚠ **当卓の手順の緩み**: `relayEJ_head.txt` の backtick 検査が **1** を返したのに止めずに送った。本経路は `--body_file` ゆえ shell 置換は起きず、配達本文の backtick は無傷（当卓が `bodies/m-p18-493.txt` で確認）。**害は無いが、自分の検査の出力を無視して進んだ**点を記録する。
+- **状態**: 受入 4 入力 = 4/4 着地・**p4 は Rs1 目視 leg を受領済（492）** ⇒ 次 = **p4 の受入 word → p6 の反映**（p6 は 491・493 を queue 済）。
+- ⛔ 解錠 = 行 69 のみ・再走なし・新 run なし・hub は発火しない・裁定しない。
+
+**Banked — 時刻は本節 commit の author date が正。**
