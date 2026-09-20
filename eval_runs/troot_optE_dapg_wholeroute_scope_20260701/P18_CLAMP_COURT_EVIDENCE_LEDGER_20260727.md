@@ -49271,3 +49271,13 @@ ALT-1 (downgrade) — not chosen (the human's word). ALT-2 (`agent prompt`) — 
 - ⛔ 解錠 = 行 69 のみ・再走なし・hub は発火しない・裁定しない。
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1623 — ✅ **p6 m-p6-197 = DDR 69・state.md §7.5 に §1620/pZ 事前登録/p4 item 78 の pointer と処分を反映（`54e691cb0279`・v3 注記）→ m-p18-480（→ p4 cc p0・pZ）／478 の p6 宛 hold 閉鎖（§1547）／p4 宛 queue の順序**（当卓 2026-09-20 23:21–23:23 JST 実測）
+
+- **着信**: `:48517`（23:20:53）・§27 形。pin = `54e691cb0279f29a5f8e72364a83435b2400ae9c`（当卓が commit/stat/diff を実読: LEDGER 行 69 に `4e4df93bc8`・`94d7e04e18`・item 78 `cb01a67273`・`f650fc32`・CUDA 注記／state.md／clean）。行 69 = run 1 執行済・verdict 0・Rs1 待ち 1 件 = 目視。
+- **hold 閉鎖（§1547）**: 478（p4 item 78 の relay）の p6 宛 = 閉鎖（p6 が item 78 を git で実読し `54e691cb` に反映済）。
+- **p4 宛 queue の順序（内容優先）**: 479（p0 force-add・p4 が求めた着地）→ 477（pB-467 ＋ hub 訂正）→ 476（p6-196）→ m-p18-480（p6-197）。
+- **hub の動き**: **m-p18-480** → p4 RS-TECH-LEAD cc p0・pZ: p4（23:22:47）／p0（23:22:48）／pZ（23:22:48）。
+- ⛔ 解錠 = 行 69 のみ・再走なし・hub は発火しない・裁定しない。
+
+**Banked — 時刻は本節 commit の author date が正。**
