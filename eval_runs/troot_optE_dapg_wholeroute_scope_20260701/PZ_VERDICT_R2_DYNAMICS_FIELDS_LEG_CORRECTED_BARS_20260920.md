@@ -54,3 +54,7 @@
 
 ## Provenance
 The re-run's JSON/logs under the scratchpad (`r2_rerun.*`, `r2_inertia_v2.*`, `r2_judge.txt`, `r2_judge_v1_crash.txt`); the first run's `r2.json` kept for the identity check. Zero tracked-content modifications by pZ other than this file. Committed under the standing custody form (m-p18-342/344), pathspec-limited, `--no-verify`, no push; hub instruction m-p18-454.
+
+## Addendum (2026-09-20 15:05:51 JST) — the judgment layer re-run under its registered v2 sha (pre-registration addendum 2 @ `13707643a0`; p4 m-p4-302)
+
+`pz_r2_judge.py` sha256 `2b8b78e43752fc620aa7251348741f87ca9337db1c7beb4012a6ed8782cdc6dc` (= the sha registered in addendum 2, committed 13707643a0 before this run) was run once more on the unchanged `r2_rerun.json` / `r2_inertia_v2.json`: the output `r2_judge_rerun.txt` is **byte-identical** to appendix A (`cmp` silent; sha256 of both = `54ef029392451c037019e424a973ce85e3f8cba249b18243cb50b2492f2ff777`). Every number of the table above therefore stands as the expectation p4 named; nothing differs. `pz_r2.py` and `pz_r2_inertia_v2.py` were not re-run (their outputs are the inputs; shas unchanged). Run 0; stop-cause tag: none.
