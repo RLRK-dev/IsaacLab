@@ -3939,3 +3939,72 @@ RESULT: PASS
 - p4: acceptance of window R0 after pZ's leg; p11's two prerequisites (§10 correction, §17.7 citation lines) are answered by §17.8/§17.9 per p11 — p4's read follows.
 - The four follow-ups in this window: `ffa612ea33` (closure, 30 globals), `3cb2a28c36` (rows 2-5 by two paths, U0 reported), `84c7ad3b62` (R0-ii), `f5b50967f8` (GRASP1). No further ask is open to p0 at this write.
 - Untouched / unlocked: route run ② / #69; D4′; the acceptance-instrument window (§8.52); WIP. ⛔ gate 不変・route run 認可なし・self-start しません。
+
+## 8.59 ANNOUNCE-FIRST, not landed: a dump loader for the R0 harness (pZ's leg on `f5b50967f8` stops only at the dump's bare mesh names); p4's word (i)/(ii) decides; one observation for p11's court on R0-ii
+
+Written 2026-09-20 09:35:28 JST (date-THEN-write). Trigger = m-p18-404 (relay of pZ PZ-234): verdict `PZ_VERDICT_f5b50967f8_R0_LEG_20260920.md` @ `8ec2abdec3` (blob `4c760ae79f9c`, sha256 `e2d51a0f8abbd578…`, 232 lines; read from `git show`, sha re-measured equal). pZ's as-run, on `f5b50967f8` from a `git archive`: (1) with the dump at its landed path → the harness's own `InstrumentStop` (exit 2, 「instrument calibration stop」; stdout :100 `cell dump unloadable: … Error: Error opening file 'pad.stl'`); (2) the same dump bytes (sha `4158e4e6…`) copied beside the ko meshes → exit 0: `mj_step` 0 (positive control 1 = 1), driver import 0, AXFIX ≤ 3.8e-15, two paths 1.7e-16, GRASP1 equal, **L 18/18, R 18/18**, L∧¬R = 0, no §11 STOP, **R0-ii bar holds** (B: 17/17 rows with an identical k, all at k = 0, 17 identical of 166 both-converged; RC 0/137; NH 0/175; row valid), 149 both-converged-non-identical pairs on B at k ≥ 1 (contradicts §17.8's prediction 0 — p11's court, not STOP); all numbers equal to pZ's instrument (q ≤ 5e-10 rad, Δq ≤ 2.7e-15). Stop tags: (1) instrument calibration stop, (2) none. pZ asks p4 for the word: (i) p0 fixes the loader and re-lands → pZ re-legs, or (ii) accept the relocated-copy run form (the verdict's numbers are (ii)).
+
+### 1. Cause of the stop (read, not run)
+
+The driver's emitter (:446 `cell.to_xml()`) writes the two ko hands' 8 meshes by **bare basename** (`base_mount.stl base.stl coupler.stl driver.stl follower.stl pad.stl silicone_pad.stl spring_link.stl`, 16 entries: `Lg_*` and `Rg_*`) with no `meshdir` (the dump's `<compiler angle="radian"/>` carries none), while the arm meshes are absolute (14 entries, `/home/rlrk/src/ur15-line-render/assets/…`). Each hand asset declares its own meshdir: the stock ko `_ur15_2f85_koshape_actuated.xml` → `meshdir="assets"` (→ `thread_isaac_lab/assets/ur5e_robotiq/robotiq_2f85/assets/`, the 8 STLs present), the mirrored ko `_ur15_2f85_koshape_actuated_mirrored.xml` → `meshdir="ko_mirror_meshes"` (→ `p4_ur15_sim_20260727/ko_mirror_meshes/`, 8 STLs, tracked). `MjModel.from_xml_path(dump)` resolves a bare name against the dump's own directory (`_gen/`), where no STL sits — hence the stop; a copy beside either mesh set loads (pZ's (2)). Note the two hands share basenames but not directories: a copy beside ONE set loads both hands' meshes from that set (for the cable-only reading `cable_at` needs, the meshes do not matter; for "the cell as compiled" they do).
+
+### 2. The candidate (scratch `r0_v6.py`, sha256 `43f49831fb0b296c893e698626f50081106f9f8fbaf164a40f9b0d508bb9ef3e`; = `f5b50967f8` + `_load_dump`, +43/−6 lines; py_compile OK; copy check PASS unchanged; NOT landed, NOT run)
+
+`_grasp_targets` calls `_load_dump(dump_path)` instead of `from_xml_path`: the dump text is read; every `<mesh name=… file=…>` whose file has no `/` is resolved against the meshdir of the asset that owns it by name prefix — `Lg_*` → `KO_LEFT`'s `<compiler meshdir>`, `Rg_*` → `KO_MIRROR`'s — both read from the committed XMLs at run time (no literal directory); a relative mesh of neither prefix, or a file absent where its owner says, is an `InstrumentStop` (never a guess); the model is compiled with `from_xml_string` from the rewritten text. The dump's bytes and sha256 are those of the file as found (untouched); the report gains `targets_source.dump_load` (owner dirs, count resolved, the map). Static check of the resolution this session (regex over the committed asset XMLs and the dump, no model build): owner dirs `Lg_ → …/robotiq_2f85/assets`, `Rg_ → …/p4_ur15_sim_20260727/ko_mirror_meshes`; **relative meshes resolved 16, missing 0**.
+
+```python
+_MESHDIR_RE = re.compile(r'<compiler\b[^>]*\bmeshdir="([^"]*)"')
+_MESH_RE = re.compile(r'<mesh\b[^>]*\bname="([^"]*)"[^>]*\bfile="([^"]*)"')
+
+
+def _load_dump(dump_path):
+    """Load the emitted cell (driver :446 `cell.to_xml()`) from anywhere.
+
+    The emitter writes the two ko hands' meshes by BARE basename (`pad.stl`, ...) without the `meshdir` each hand
+    asset declares, so `from_xml_path` resolves them against the dump's own directory and fails unless the STLs sit
+    beside it (pZ's leg on f5b50967f8: 'Error opening file pad.stl').  Here every relative mesh file is resolved
+    against the meshdir of the asset that owns it -- `Lg_*` -> the stock ko (`KO_LEFT`'s `<compiler meshdir>`),
+    `Rg_*` -> the mirrored ko (`KO_MIRROR`'s) -- read from those committed XMLs, and the model is compiled from the
+    rewritten text.  The dump's bytes are untouched (its sha256 is of the file as found); only the in-memory text
+    gets absolute paths.  Any relative mesh that is not one of the two hands', or that does not exist where its
+    owner says, is an InstrumentStop (never a guess)."""
+    text = dump_path.read_text()
+    owners = {}
+    for prefix, xml in (("Lg_", _acc.KO_LEFT), ("Rg_", _acc.KO_MIRROR)):
+        xml = Path(xml)
+        mm = _MESHDIR_RE.search(xml.read_text())
+        owners[prefix] = (xml.parent / mm.group(1)).resolve() if mm else xml.parent.resolve()
+    resolved = {}
+
+    def _fix(mo):
+        name, f = mo.group(1), mo.group(2)
+        if "/" in f:
+            return mo.group(0)
+        owner = next((p for p in owners if name.startswith(p)), None)
+        if owner is None:
+            raise InstrumentStop(f"dump mesh {name!r} file={f!r} is relative and belongs to neither hand ({list(owners)})")
+        p = owners[owner] / f
+        if not p.is_file():
+            raise InstrumentStop(f"dump mesh {name!r}: {p} does not exist ({owner} meshdir from the committed asset)")
+        resolved[name] = str(p)
+        return mo.group(0).replace(f'file="{f}"', f'file="{p}"')
+
+    text = _MESH_RE.sub(_fix, text)
+    try:
+        md = mujoco.MjModel.from_xml_string(text)
+    except Exception as e:  # noqa: BLE001
+        raise InstrumentStop(f"cell dump unloadable after mesh resolution: {dump_path}: {e}") from e
+    return md, {"mesh_owner_dirs": {k: str(v) for k, v in owners.items()}, "relative_meshes_resolved": len(resolved),
+```
+
+Reading for p4's word: (i) costs one landing (scaffold only; the copied closure and every row are untouched) and one re-leg by pZ, and removes a manual relocation step from the run form; (ii) keeps `f5b50967f8` and the numbers already measured, with the relocation written into the run form. p0's recommendation, stated once: **(i)** — an instrument that needs its input copied elsewhere first is a hidden step in every future run, and the fix reads its directories from committed text. Under (i) the mirrored hand's meshes also come from their own directory, which the relocated copy does not do. The choice is p4's; nothing is landed until the word.
+
+### 3. One observation for p11's court on R0-ii (fact from the copied text; not a design claim)
+
+pZ's identical pairs on B are all at k = 0. In the copied `pose_menu` (driver :2041-:2062) entry 0 is `(0.0, sgn * 0.0)` — the only attitude with yaw = roll = 0; every k ≥ 1 carries a non-zero roll (and for k ≥ 5 a non-zero yaw) with the side sign `sgn` on both. So "identical only at k = 0" coincides exactly with "identical only where the attitude is its own mirror image". Whether the identity map prediction should hold under the sign-mirrored attitudes, or whether the mirror of an attitude in the composed model's frame is something other than `(sgn·yaw, sgn·roll)`, is the design court's question; the harness prints `Mx` and both targets but does not mirror the attitude itself — it lets `pose_menu`'s own `sgn` do that, as `solve_ik` does at run time.
+
+### 4. Not claimed / open
+
+- The 18/18 and R0-ii numbers are pZ's as-run on the relocated-copy form; p0 has run nothing.
+- p4: (i)/(ii). p11: the 149-pair reading. Under (i): land → pZ re-leg → p4.
+- Untouched / unlocked: route run ② / #69; D4′; the acceptance-instrument window (§8.52); WIP. ⛔ gate 不変・route run 認可なし・self-start しません。
