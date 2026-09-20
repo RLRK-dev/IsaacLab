@@ -48357,3 +48357,13 @@ ALT-1 (downgrade) — not chosen (the human's word). ALT-2 (`agent prompt`) — 
 - ⛔ 解錠なし・run 0（当卓）・当卓は裁定しない。
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1521 — ✅ **p0 m-p0-375R（397 を bodies/ 自読で受領・GRASP1 行 = follow-up 4 着地 `f5b50967f8`・§8.58 `b231c7e0bd`・p0 分の GRASP1 行＋R0-ii は揃った）→ m-p18-403（→ pZ cc p4 p11 p6・HELD）／§1520 の bank = `7e0b11d373`**（当卓 2026-09-20 09:18–09:21 JST 実測）
+
+- **着信**: m-p0-375R `:45640`（09:18:59）。§27 形。
+- **検証**: `f5b50967f8`（author date 2026-09-20 09:18:59 JST  1 file changed, 28 insertions(+), 8 deletions(-)・1 file +28/−8）・blob `5c38dcf27a00…`・sha256 `14c6c23eb7c82224…`・1296 行 = p0 の記載と一致・着地後 driver commit 0。§8.58 @ `b231c7e0bd`。harness の版 = 3cb2a28c36 → 84c7ad3b62 → f5b50967f8（24 分で 3 版）・pZ の verdict（400）は初版に対するもの。loader 停止（pZ の指摘・(i)/(ii) = p4 の word）への言及なし。
+- **hub の動き**: **m-p18-403** = m-p0-375R（`bodies/m-p18-403.txt`・版の注記つき）→ pZ cc p4 p11 p6: held: pZ = HELD(working)・p4 = ready(empty)・p11 = ready(empty)・p6 = ready(empty)（09:20:51.452）。完了送信は停止中（§1518）。
+- **hold 中の leg（09:21・pending.py 実測・死んだ leg 9 件を含む）**: 354（p11・p6） 357（p11・p6） 358（p11） 359（p0・p11・pZ） 360（p11） 361（p11・pZ） 363（p0・p11） 364（p0・p11） 365（p0） 366（p11） 367（pZ） 368（p0・p11） 369（p0・pZ） 370（p0・pZ） 371（p11・pZ） 372（p11） 374（p0） 375（p0・p11・pZ） 376（p0・p11） 377（p0・p11） 378（p11・pZ） 379（p11・pZ） 381（p0・p11） 382（p11・p4・pZ） 383（p11・p4・p6・pZ） 384（p0・p11・p4・p6） 385（p4・pZ） 386（p11） 387（p11・pZ） 388（p4） 389（p11・pZ） 390（p11・p4・pZ） 391（p11・p4） 392（p11・pZ） 394（p4・p6・pZ） 395（p4） 396（p11・p4・p6・pZ） 397（p0・p4・p6・pZ） 398（p11・p4・p6・pZ） 399（p4） 400（p0・p11・p4） 401（p11・p4・p6・pZ） 402（p0・p11・p6・pZ） 403（p11・p4・p6・pZ）（44 id）。
+- ⛔ 解錠なし・run 0（当卓）・当卓は裁定しない。
+
+**Banked — 時刻は本節 commit の author date が正。**
