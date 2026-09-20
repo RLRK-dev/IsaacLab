@@ -49359,3 +49359,15 @@ ALT-1 (downgrade) — not chosen (the human's word). ALT-2 (`agent prompt`) — 
 - ⛔ 解錠 = 行 69 のみ・hub は発火しない・裁定しない。
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1632 — ✅ **p11 m-p11-r0targets-20260920-2341 = pZ の open 事項（R0 targets は C-2 既定 cell の cable rest を名指すか）への設計 court の読み = はい（§17.27 `e6b3fed386`）→ m-p18-488（→ p4 cc pZ・p6）／pZ PZ-250 = 照合 verdict Addendum 1（`675c6b459d`・C-3 cite 先 = pB 最新 `ff396f98e6`・pB cite 30/30 再読・C-5 分類語 = item 86・追記のみ）→ m-p18-489（→ p4 cc p6・pB・p0・p11）・⛔ 両便とも pC 不送**（当卓 2026-09-20 23:41–23:46 JST 実測）
+
+- **着信**: m-p11-r0targets `:48757`（23:41:37）／PZ-250 `:48773`（23:41）・§27 形。
+- **p11 の検証**: `e6b3fed38648b316833eb5416dd0e7bd4e461b3f`（`P11_UR15B_CONTROLLER_DESIGN_20260913.md` blob `5aa7c7f6dbcb85522a9ffe92bf48bebf6378967f`・sha256 `6dbcd12da2cb0c131f26da76915046de9a4f730e56607c2a1fa9a7f72bd6b7d2`・420 行・clean・pin 後 commit 0・§17.27 = :415-420）。内側の cite = R0 harness `p4_ur15_sim_20260727/r0_convergence_harness.py` @ `8e5905539c` :24 :116 :1008-1009 :1250（build_side の C-2 定数・09-05 dump は (b-1) 評価のみ）／run.log blob `c79fdfd1d410` :43（cable settled x[−0.300,+0.285]）:44（measured grasp L cab27 [0.1125 0.28 0.9486]・R cab32 [0.1875 0.28 0.9509]）:101／pZ 照合行 @ `160e06ce0f` :14（C-4）:23（open 事項）／item 78 @ `cb01a67273` = 当卓が各行を実読・整合。〔⚠ 当卓の 1 回目の機械 check は `git show --stat` の省略 path「…/r0_convergence_harness.py」をそのまま使って偽 FAIL を出した — path は `ls-tree` で取る〕
+- **p11 の読み（設計 court・射程 = targets の名指しのみ）**: はい。(1) harness は C-2 定数で模型を組む (2) 両 dump の差は crown と shoulder mount のみ・(b-2) 閉形式が (b-1) と 1e-9 以下で一致 (3) #69 の measured grasp = R0 targets と同じ link・同じ x/y。確認 1 行の要否 = p4。
+- **pZ の検証**: `675c6b459d`（`PZ_VERDICT_69_COLLATION_20260920.md` 130 行・sha256 `51dcee118139532fd31ed6da9b18eb78ba64e5aa78d343e373f677a911b9db22`・clean・pin 後 commit 0・diff `160e06ce0f` → = +22/−0）。当卓の再導出: pB file の先頭 210 行は `8b16ce641a` と `ff396f98e6` で diff 0（4 commit = 210 → 262 → 268 → 274 行・全て追記）／run.log blob :367 = ARM-TO-ARM 行・:369 = CARRY 行（pZ の報告どおり・pB A1-4 (b) の行番号は 2 ずれ・数値は正）／p11 §17.26 @ `48ad9c1e37` 実在。
+- **hub の動き**: pre-step = m-p18-487→PLAN-KEEPER m-p18-488→RS-TECH-LEAD。**m-p18-488** → p4 cc pZ・p6: hold: p4・p6・pZ・pB・p11（23:39:09）／p0（23:39:09）／pB（23:40:05）／hold: p11（23:40:06）／hold: p11（23:41:25）／p11（23:42:47）／hold: p4（23:42:48）／p4（23:44:16）。**m-p18-489** → p4 cc p6・pB・p0・p11: hold: p4（23:44:18）／p6（23:44:18）／pB（23:44:19）／p0（23:44:19）／p11（23:44:20）。
+- **受入 word の材料（不変）**: pB `ff396f98e6`・VERDICT_C `ffd3c5200c`・pZ `675c6b459d`（照合行の続き）・札「その他」（item 86）・**Rs1 の語 = 未**。
+- ⛔ 解錠 = 行 69 のみ・hub は発火しない・裁定しない。
+
+**Banked — 時刻は本節 commit の author date が正。**
