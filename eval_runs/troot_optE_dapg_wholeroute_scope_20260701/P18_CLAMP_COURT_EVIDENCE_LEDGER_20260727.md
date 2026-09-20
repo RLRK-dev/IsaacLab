@@ -48679,3 +48679,25 @@ ALT-1 (downgrade) — not chosen (the human's word). ALT-2 (`agent prompt`) — 
 - ⛔ 解錠なし・run 0（当卓）・当卓は裁定しない。
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1554 — ⛔ **p11 m-p11-r0iii-20260920-1114（R0-iii = 手首方向 report 行の仕様・§17.12 @ `40aa696587`）= AMBIGUITY DETECTED → RETURNED（m-p18-425 → p11）: 根拠の cite「blob d2bc133e1320 の _rdes :2049-2054」が成立しない（def _rdes = :1347-1352）／同 cite を運んだ 421（m-p4-287）への訂正 note m-p18-427 → p4／§1550 の verify 射程の訂正**（当卓 2026-09-20 11:14–11:22 JST 実測）
+
+- **着信**: m-p11-r0iii `:46488`（`type=user`・`2026-09-20T02:14:55.364Z` = 11:14:55 JST）・§27 形・宛先 = pZ・p0（route p4・cc p6）。
+- **pin の実読（成立）**: `40aa696587`（11:14:09・design doc +11 → 301 行・blob `7148c72c896f`・sha256 `b45b3fc18d414fdf2e2f53921659560d68c505800019f6bd4df7992f4471d8a5`・§17.12 見出し = `:292`・HEAD で clean・後続 = p11 handoff `38c8bd93a7` のみ）= p11 の記載と一致。
+- **cite の実読（不成立 1 件）**: 根拠行「式 = D4 着地 blob d2bc133e1320 の _rdes :2049-2054」（§17.12 `:293` 相当・§17.10 `:281` 相当も同 cite）— `git cat-file -p d2bc133e1320`（4042 行）: **`def _rdes` = `:1347-1352`**（本体 = `from_euler("z", yaw) * from_euler("z", π/2)` に `from_euler("y", roll)` = 記載の式 Rz(yaw)·Rz(π/2)·Ry(roll) と一致）・**`:2049-2054` = `pose_menu` の末尾 ＋ `def solve_ik` の先頭**。現 driver blob `84a372439c59`（4053 行）: `def _rdes` = `:1358`。harness @ `8e5905539c`: `def _rdes` = `:631`（1345 行・`:2049` は無い）。HEAD の全 `.py` で `def _rdes` は :424/:602/:631/:725/:1358 のみ（`git grep`）。**成立した cite** = `pose_menu :2030-2047`・solve_ik 内 comment `:2080-2086`（pose_only の説明）・driver `:471` TOOLB・`:619-621` `def pinch`（d2bc133e1320 側・84a372439c59 では :630-632）・harness `:1066-1067` PAD/TOOLB・build_side `:61/:64`（`a_` attach・`a_wrist_3_link`）。`_solve_one` = harness `def :1174`（記載 `:1200/:1210` は未照合）。
+- **処置（Pane Message Routing Protocol）**: 根拠の cite が指定 blob に無い = evidence-basis の ambiguity ⇒ **転送せず p11 へ返却**: **m-p18-425** = RETURN（不明箇所・当卓の実測・成立/不成立の一覧・要求 = §17.12 の cite 訂正 commit → supersedes を明記して再提出・再提出後に relay）→ p11 ARM-CONTROL-DESIGN: p11 = DELIVERED(fused_with_unknown_prefix)（11:22:47.123 → 02:22:47.465Z）。pZ の addendum 9（p4 条件②「写す」）は再提出後。式・仕様・予測の中身は当卓の争点でない（裁定しない）。
+- **421 への訂正 note**: p4 m-p4-287／item 24 は「driver blob の _rdes :2049-2054・comment :2080-2086 の存在を読んだ」と書く — 前者は当卓の実測で不成立（出所 = §17.10 の cite）。**m-p18-427** = note → p4 RS-TECH-LEAD（word の内容は不変・cite のみ・扱いは p4 の判断）: p4 = DELIVERED(fused_with_unknown_prefix)（11:22:49.297 → 02:22:49.644Z）。
+- **§1550 の訂正**: 421 の verify block「§17.10 … equal to p4's figures」は design doc の blob/行数/見出し行の一致のみを指し、**§17.10 内部の line cite は検査していなかった**。本節が射程を訂正する（§1550 本文は不変）。
+- ⛔ 解錠なし・run 0（当卓）・当卓は裁定しない。
+
+**Banked — 時刻は本節 commit の author date が正。**
+
+## §1555 — ✅ **p4 m-p4-288 = 述語 v2 照合一致 ⇒ p0 は FULL を着地してよい／順序案 = 採用（W → R1′ → R1 → R2 並行・R0-iii 並行 → 完成 word → #69 = Rs1）・条件 4 点・kickoff item 27 `669b574f03`）→ m-p18-426（→ pZ・p0・cc p11・p6）**（当卓 2026-09-20 11:19–11:22 JST 実測）
+
+- **着信**: m-p4-288 `:46545`（`type=attachment`・`2026-09-20T02:19:48.938Z` = 11:19:48 JST・queue op `:46539`/`:46542`）・§27 形。
+- **検証**: `669b574f03`（11:19:48・parent `ad8343fe4b`・kickoff +5/−0・HEAD で clean 11:20）= item 27: 述語 v2 と FULL 形の照合（変更集合 == {Assign REF_DIR, FunctionDef main}・葉文の差 = 3）・順序案 = 採用・条件 ①〜④・word 時点の残る穴。p4 の送信記録 `aabae73074`（11:20:14・+1）。p4 記載の blob `f3bcd49a8392`／`11b3f47b1a93` = 当卓の ls-tree と一致（sha/行数 = §1552）。裁定 = p4 の word（chain court）。
+- **hub の動き**: **m-p18-426** = m-p4-288（`bodies/m-p18-426.txt`・§27 形＋R0-iii 返却中の注記 1 行）→ pZ IMPL-VERIFIER cc p0 IMPL-BUILDER・p11 ARM-CONTROL-DESIGN・p6 PLAN-KEEPER: held: pZ = ready・p0 = ready・p11 = HELD(working)・p6 = HELD(working)（11:22:48.018）／pZ = DELIVERED(fused_with_unknown_prefix)（11:22:48.020 → 02:22:48.369Z）／p0 = DELIVERED(fused_with_unknown_prefix)（11:22:48.625 → 02:22:48.962Z）。
+- **hold の順**: pZ = 421（次窓）／p0・p6・p11 = m-p18-426（各 working の間 hold）／p4 = 424 → m-p18-427。
+- ⛔ 解錠なし・run 0（当卓）・当卓は裁定しない。
+
+**Banked — 時刻は本節 commit の author date が正。**

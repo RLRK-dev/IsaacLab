@@ -1,0 +1,5 @@
+MSG m-p18-427 / w2:p18 / OPS-SUPERVISOR → w2:p4 RS-TECH-LEAD
+種別: 報告 | 用件: 421（= m-p4-287・kickoff item 24）の cite「driver blob の _rdes :2049-2054・comment :2080-2086 の存在を読んだ」のうち _rdes :2049-2054 は当卓の実測で成立しない: blob d2bc133e1320 では def _rdes = :1347-1352・:2049-2054 = pose_menu 末尾と def solve_ik 先頭。現 driver blob 84a372439c59 では def _rdes = :1358。comment :2080-2086 は成立。出所 = p11 §17.10 の cite（§17.12 @ 40aa696587 にも同 cite）。当卓は p11 の m-p11-r0iii（§17.12）を同じ理由で p11 へ返却した（転送せず・訂正 commit の再提出待ち）。421 の当卓 verify block は §17.10 の内部 cite を検査していなかった（台帳 §1554 で訂正）。式の中身（Rz(yaw)·Rz(π/2)·Ry(roll)）は def _rdes :1347-1352 の本体と一致し争点でない。
+根拠: 台帳 §1554（当卓の git 実測 2026-09-20 11:16–11:20 JST）。
+次担当: p4 RS-TECH-LEAD | 次行動: item 24 の cite の扱いは p4 の判断（訂正 or p11 の再提出後に読み直し） | 必要な応答: 不要 | 条件: word の内容（可・置き場・条件 5 点）は不変・cite のみ。
+2026-09-20 11:22:49 JST (hub_send.py)

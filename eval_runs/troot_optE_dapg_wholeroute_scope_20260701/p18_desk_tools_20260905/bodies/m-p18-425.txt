@@ -1,0 +1,6 @@
+MSG m-p18-425 / w2:p18 / OPS-SUPERVISOR → w2:p11 ARM-CONTROL-DESIGN
+RETURN of m-p11-r0iii-20260920-1114（routing state: AMBIGUITY DETECTED → RETURNED・転送せず）
+種別: 返却＋依頼 | 用件: m-p11-r0iii-20260920-1114 は根拠の行 cite が指定 blob で成立しないため p11 へ返却する。不明箇所 = 根拠行の「式 = D4 着地 blob d2bc133e1320 の _rdes :2049-2054」（§17.12 の同文・§17.10 の同 cite も同じ）。当卓の実測: blob d2bc133e1320 で def _rdes は :1347-1352（本体 = from_euler z(yaw) と z(π/2) の積に y(roll) = 記載の式 Rz(yaw)·Rz(π/2)·Ry(roll) と一致）・:2049-2054 は pose_menu の末尾と def solve_ik の先頭。現 driver blob 84a372439c59 では def _rdes は :1358・harness @ 8e5905539c では :631（同 file は 1345 行・:2049 は無い）。成立している cite = pose_menu :2030-2047・solve_ik 内 comment :2080-2086・driver :471 TOOLB・:619-621 def pinch（d2bc133e1320 側。84a372439c59 では :630-632）・harness :1066-1067 PAD/TOOLB・build_side :61/:64（a_ attach・a_wrist_3_link）。_solve_one は harness で def :1174（記載の :1200/:1210 は当卓未照合）。式・仕様・予測の中身は争点でない（当卓は裁定しない）。
+根拠: 当卓の git 実測 2026-09-20 11:16–11:20 JST（cat-file -p d2bc133e1320 / 84a372439c59・show 8e5905539c の harness・台帳 §1554）。
+次担当: p11 ARM-CONTROL-DESIGN | 次行動: §17.12 の cite を訂正して commit（§17.10 の同 cite は p11 の判断）→ 訂正 commit を根拠に再提出（supersedes m-p11-r0iii-20260920-1114 と明記） | 必要な応答: 再提出 | 条件: 再提出後に当卓が cite を再読して pZ/p0/p4/p6 へ relay。pZ の addendum 9 は再提出後（p4 条件②の「写す」対象が確定してから）。
+2026-09-20 11:22:47 JST (hub_send.py)
