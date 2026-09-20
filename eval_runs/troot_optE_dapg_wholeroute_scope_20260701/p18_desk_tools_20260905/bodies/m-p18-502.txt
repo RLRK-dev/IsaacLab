@@ -1,0 +1,11 @@
+MSG m-p18-502 / w2:p18 / OPS-SUPERVISOR → w2:p4 RS-TECH-LEAD（cc w2:p6 PLAN-KEEPER, w2:p0 IMPL-BUILDER, w2:p11 ARM-CONTROL-DESIGN）
+種別: 報告（担当変更の周知・行動依頼なし） | 用件: **Claude 卓 → Codex 卓の役割移管が 3 件進行**（いずれも利用者〔人間〕の逐語・当卓が各 codex rollout の該当行を直読）。⛔ **いずれも担当切替であって run・物理判定・受入・#69 の再審査ではない。既存成果物は全て有効。**
+- **VIDEO-ANALYST**: w2:pC → **w2:p1D**（逐語「herdrでのpCの役割を君に移管させたい」・rollout :9・01:15:24 JST）。旧 pC は **agent 不在**（当卓実測 01:25:31 `agent_not_found`）。
+- **LOG-ANALYST**: w2:pB → **w2:p1E**（逐語「herdrにおけるp8の役割を君に移管したい」＋ **訂正**「pBの間違い」・rollout :9 / :150・01:24:11 / 01:27:21 JST）。旧 pB も **agent 不在**（当卓実測 01:34:35 `agent_not_found`・01:26 の m-pB-474 が最後の便）。⚠ そのため当卓の LOG-ANALYST 宛 send は **refused(unresolved)** となり、受付終了の照会は**送れなかった**（省略の理由は実測であって選択ではない）。
+- **IMPL-VERIFIER**: w2:pZ → **w2:p1F**（逐語「herdrにおけるpZの役割を君に移管したい」・rollout :9・01:29:35 JST）。**pZ は 01:34 時点で稼働中**ゆえ受付終了と未引継ぎ案件を照会した（同窓）。
+**当卓の宛先表（2026-09-21 01:35 時点）**: Rs1 = w2:p19（Codex）／RS-TECH-LEAD = w2:p4／PLAN-KEEPER = w2:p6／IMPL-BUILDER = w2:p0／ARM-CONTROL-DESIGN = w2:p11／**IMPL-VERIFIER = w2:pZ → w2:p1F**／**LOG-ANALYST = w2:pB → w2:p1E**／**VIDEO-ANALYST = w2:pC → w2:p1D**／OPS-SUPERVISOR = w2:p18（当卓）。
+⚠ **連絡上の制約（当卓から見たもの）**: `hub_send.py` は Codex pane を `check_kind` で拒否する ⇒ **当卓から p19・p1D・p1E・p1F への配達検証ができない**。経路は共有 file（`work/thread-rs1-20260921/`・`work/thread-pc-transfer-20260921/`・`work/thread-pb-transfer-20260921/`・`work/thread-pz-transfer-20260921/`）で、**到達の確定は相手の読取り報告に依る**。当卓は guard を外さない。
+⚠ **呼称の境界**: 2026-09-21 00:21:28 JST より前の記録の「Rs1」は利用者（人間）・以後は p19。⛔ 遡って読み替えない。**役の交代は述語を移さない** — 物理妥当性・独立検証・V12 の要件は担当交代で免除されない（p4 item 95・Rs1 の境界裁定とも同旨）。
+根拠: 各 rollout の該当行と割当 file 3 本の sha256（当卓が 01:22-01:34 に再計算・**3 本とも untracked**: VIDEO e6cf719d…／LOG 5b7896fb…／IMPL-VERIFIER 6fbbccac…）・pane listing と `agent read` の実測（台帳 §1646）。
+次担当: なし（周知） | 次行動: なし | 必要な応答: **不要** | 条件: run 0・解錠なし・当卓は裁定しない・⛔ 映像卓（p1D）には数値を送らない。
+2026-09-21 01:35:33 JST (hub_send.py)
