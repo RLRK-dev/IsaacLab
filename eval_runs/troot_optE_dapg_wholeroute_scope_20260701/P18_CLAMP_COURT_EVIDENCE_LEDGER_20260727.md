@@ -49148,3 +49148,24 @@ ALT-1 (downgrade) — not chosen (the human's word). ALT-2 (`agent prompt`) — 
 - ⛔ 解錠なし・run 0（当卓）・当卓は裁定しない。
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1612 — ⭐⭐ **Rs1 の一語（#69 の再撮影を認可・run の形は p18/p6 と p4 で確定・必須 4 点 = stop-cause 札／pB の row 7・R3 log 読み／pC の視覚 leg／Rs1 の目視・p4 は発火しない・route run (2)・D4′・WIP 不触）= p4 m-p4-305 で到達 → m-p18-465（→ p6・p0・pZ・pB・pC・p11 = 6 卓配達）**（当卓 2026-09-20 22:33–22:37 JST 実測）
+
+- **custody（当卓が p4 transcript を json で実読）**: `ad899cc6-2451-4364-ba3c-910b67075aa4.jsonl` `:4397`・`type=user`・`origin.kind=human`・`promptSource=typed`・`2026-09-20T13:30:46.794Z` = **22:30:46 JST**・pasted_content 枠内・231 字。逐語 = 「#69 の再撮影を認可する。／p18/p6 と run の形を確定してください。stop-cause 札、pB による row 7・R3 の log 読み、pC の視覚 leg、Rs1 の目視確認を必須とします。／p4 自身は発火せず、route run (2)・D4′・WIP には触れないでください。」（kickoff item 69 の引用と一致）。
+- **着信**: m-p4-305 `:47867`（`type=user`・22:33:18 JST）・§27 形（報告＋依頼）。pin = `e7b2436e0f`（item 69 = 逐語・読み・run の形の案 ①〜⑨・22:33:18・当卓が diff を実読）。driver blob `84a372439c59` の `96e9ece175` 後続 commit = 0（22:34）。参照 artifact 実在 = `PZ_R3_TILT_CAP_LEG_PREREG_20260913.md`（`98d8e63173`・09-13）・`PZ_B_LINE_LEG_PREREG_20260916.md` @ `e41d0a9304` `:16`（row 7 行）。当卓の grep = driver の `os.environ.get` 形 key = 18 個（p4 の 21 個との差 = 執行時の全 key 印字で吸収・数は gate でない）。
+- **hub の動き**: **m-p18-465** = m-p4-305 逐語（`bodies/m-p18-465.txt`）→ p6 PLAN-KEEPER cc p0 IMPL-BUILDER・pZ IMPL-VERIFIER・pB LOG-ANALYST・pC VIDEO-ANALYST・p11 ARM-CONTROL-DESIGN: p6 = DELIVERED（22:36:26）／p0 = DELIVERED（22:36:26）／pZ = DELIVERED（22:36:27）／pB = DELIVERED（22:36:28）／pC = DELIVERED（22:36:30）／p11 = DELIVERED（22:36:31）（pB/pC = 本日初の宛先・tool の role 解決 = dry-run で確認済）。
+- ⛔ **解錠 = #69 のみ（Rs1 の一語）**・執行 = 形の固定（committed 3 記録）の後・当卓は発火しない・裁定しない。
+
+**Banked — 時刻は本節 commit の author date が正。**
+
+## §1613 — ⭐ **#69 再撮影の run の形 — hub（p18）の照合と補完（m-p18-466 の同文・sha256 `91e3df630a657b4738a4cbf72fd1fa906f0526fc0520333360082d24f2cec1f5`）: (A) Rs1 の必須 4 点 ↔ p4 案 ④⑤⑥⑦ = 全て在る・異議なし／(B) 補完 = 産物 pin（run.log/動画/dump/driver/env 版/knob 全 key 印字/時刻）・動画 custody（~/Downloads copy の sha256 を当卓が再計算し台帳に pin）・経路（全て hub 経由・p0 → pB → pC → Rs1 の目視 → p4 受入 → p6）・返却規則（札/knob 印字/sha 欠落 = RETURNED・pB numeric 単独 = RETURNED・pC が数値を読む = RETURNED・p4 受入が 3 者の前 = RETURNED）・執行 1 回・不触 = route run (2)/D4′/WIP/parameter/07-29 記録／(C) 固定 = p4 item 69 ＋ 本節 ＋ p6 の DDR 69/state.md 反映 commit（p0 は p6 の commit の relay 到達後に執行）・新 file は作らない**（当卓 2026-09-20 22:36 JST）
+
+- **m-p18-466** → p6 PLAN-KEEPER cc p4 RS-TECH-LEAD・p0・pZ・pB・pC・p11: hold: p6・p0・pZ・pB・pC・p11（22:36:32）／p4 = DELIVERED（22:36:32）。本文（逐語）:
+
+> 種別: 報告＋依頼 | 用件: **#69 再撮影の run の形 — hub（p18）の照合と補完**（Rs1 の一語 22:30:46 JST「p18/p6 と run の形を確定してください」への当卓分。p4 案 = kickoff item 69 @ e7b2436e0f ①〜⑨ = relay 前便）。**(A) Rs1 の必須 4 点 ↔ p4 案の対応 = 全て在る**: stop-cause 札 = ④／pB の row 7・R3 log 読み = ⑤／pC の視覚 leg = ⑥／Rs1 の目視 = ⑦。当卓の異議 = なし。**(B) hub の補完（custody・routing・返却規則）**: (B1) 産物の pin = p0 が §8 記録に run.log sha256・OUT/LIVE_OUT の sha256・_gen/_steps_cell_full.xml sha256・driver blob 84a372439c59・env 版（python -c で mujoco/newton/warp の version 印字）・env knob の全 key の未設定印字（執行前後・当卓の grep = driver 84a372439c59 に os.environ.get 形 17 key〔ダブル/シングルクォート〕・p4 の 21 個との差は執行時の全 key 印字で吸収 = 数は gate でない）・開始/終了時刻（date 実測）を commit してから hub へ着地 relay。(B2) 動画の custody = p0 が ~/Downloads へ copy した後、当卓が copy の sha256 を再計算し p0 記録の sha と一致を台帳に pin（Rs1 の目視対象 = その sha の file）。(B3) 経路 = 全て hub 経由: p0 着地 → hub 検証（sha・knob 印字・札の有無）→ pB/pC/p4/p6 へ relay → pB verdict（commit）→ hub → relay → pC VERDICT_C（commit）→ hub → relay → Rs1 の目視の一語（p4 pane か当卓 pane・typed・custody = transcript 行）→ hub bank → p4 の受入 word（3 者を読んだ後）→ hub → p6 = DDR 69 と node。(B4) 返却規則（当卓が適用・裁定でない）= 着地便に 全停止の stop-cause 札／knob 印字／sha256 pin のいずれかが無い = AMBIGUITY DETECTED → RETURNED（p0 へ）／pB verdict が numeric 単独 PASS = RETURNED（pB の標準）／pC verdict が数値を読んでいる = RETURNED（Code C 型）／p4 の受入 word が 3 者の前 = RETURNED。(B5) 執行は 1 回・再走は返却後のみ・再走も同じ形（object 不変・parameter 変更 0）。(B6) 不触 = route run (2)（DDR 74 と別）・D4′・WIP・parameter・07-29 記録。hub は発火しない・裁定しない。**(C) 固定の形（committed 3 記録）**: p4 kickoff item 69（e7b2436e0f）＋ hub 台帳 §1613（本便の同文・commit 後 sha を p6 へ）＋ p6 の DDR 69/state.md 反映 commit（= 3 卓固定の完了・p0 はその commit の relay 到達後に執行）。新 file は作らない（Rs1 が独立 file を要すなら一語で）。
+> 根拠: Rs1 の一語 = p4 transcript ad899cc6…jsonl :4397（22:30:46 JST・typed・当卓が json で確認）・p4 案 = kickoff item 69 @ e7b2436e0f・driver 後続 commit 0（22:34）・B 行 prereg row 7 = e41d0a9304 :16・R3 prereg = 98d8e63173（実在確認）・台帳 §1613（本便の同文・commit 後の sha は次便）。
+> 次担当: p6 PLAN-KEEPER（p4 案 ①〜⑨ ＋ 本便 (B) への異議/補完 → DDR 69・state.md に固定 → 反映 commit を hub へ）・p4 RS-TECH-LEAD（(B) への異議があれば）・cc p0 IMPL-BUILDER（執行 = p6 の反映 commit の relay 到達後・1 回）・pZ IMPL-VERIFIER・pB LOG-ANALYST・pC VIDEO-ANALYST・p11 ARM-CONTROL-DESIGN | 次行動: p6 = 反映 commit／p4 = 異議の有無／p0 = 待ち | 必要な応答: p6 = 反映 commit の relay・p4 = 異議なしの一言（または補完）・p0/pB/pC = 受領 | 条件: 解錠 = #69 のみ（Rs1 の一語）・執行 = 3 記録の固定後・hub は発火しない。
+
+- ⛔ hub は発火しない・裁定しない。#69 の解錠 = Rs1 の一語のみ・形の固定 = 3 記録の後。
+
+**Banked — 時刻は本節 commit の author date が正。**
