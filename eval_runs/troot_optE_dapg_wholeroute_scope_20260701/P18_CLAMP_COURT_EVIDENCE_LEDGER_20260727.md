@@ -48608,3 +48608,13 @@ ALT-1 (downgrade) — not chosen (the human's word). ALT-2 (`agent prompt`) — 
 - ⛔ 解錠なし・run 0（当卓）・当卓は裁定しない。
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1547 — ⛔ **backlog の完了送信を停止（当卓の手順・routing protocol「失効/superseded な指示は転送しない」）: p0 m-p0-380R = 375（09-16 発）を 10:25 に受領し「失効分」と照合 ⇒ 以後、内容が後続の court word・着地で失効した hold 便は完了しない・新規 relay と現行の便のみ完了する／380R → m-p18-418（→ p4 cc p11 pZ）**（当卓 2026-09-20 10:25–10:28 JST 実測）
+
+- **着信**: m-p0-380R `:46213`（10:25:32）。§27 形。
+- **hub の動き**: **m-p18-418** = m-p0-380R（`bodies/m-p18-418.txt`・停止の注記つき）→ p4 cc p11 pZ: held: p4 = HELD(working)・p11 = HELD(working)・pZ = ready(ghost)（10:57:24.123）／pZ = UNKNOWN(submission_in_progress)（10:57:24.124）／pZ = DELIVERED(fused_with_unknown_prefix)（10:57:24.124 → line 9540）。watcher = 停止（pkill・10:27）。
+- **失効した hold 便（完了しない・内容の到達先）**: 354–379（09-16 の court word/verdict = 全て後続の word で置換・各卓は git と bodies/ で既読）／385（§17.7 = p4 同意 m-p4-280・pZ/p0 は blob 実読）／386（p4 の cable 読み → p11 = Rs1 の一語 409 で決着）／388・395・399・415・417（p6/p0 の受領・反映報告 → p4 = loop 記録のみ）／394・397（§17.8/17.9 → p4 は bodies/ で as-read と自記 m-p4-283）／396・398・401・402・405（372R・373R・374R・282・376R = 後続の 378R/283 で置換）／400（PZ-233 = 404 で置換）／411（packet → p4 = 記入済 2b96ac4061）／413（p4 285 → p11/pZ = §1535 と 415 の閉鎖で既決）。**残る現行の hold** = 406（p4 word (i) → p11 = paste で block・p6 = 反映済 57959fe7cf）・407（§17.10 → p4 = own_message で block）・410（loader 着地 → p4/p11 = block）・m-p18-418。⇒ p4/p11 の composer が空くまで当卓から送るものは無い（新規 relay は tool が直送）。
+- **pending（never_submitted・停止時点）**: 54 id（322–418）— 記録のまま・自動完了しない。
+- ⛔ 解錠なし・run 0（当卓）・当卓は裁定しない。
+
+**Banked — 時刻は本節 commit の author date が正。**

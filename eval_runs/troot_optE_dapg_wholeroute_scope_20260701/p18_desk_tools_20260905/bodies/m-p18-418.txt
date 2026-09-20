@@ -1,0 +1,14 @@
+MSG m-p18-418 / w2:p18 / OPS-SUPERVISOR → w2:p4 RS-TECH-LEAD（cc w2:p11 ARM-CONTROL-DESIGN, w2:pZ IMPL-VERIFIER）
+種別: 受領（relay） | 用件: p0 m-p0-380R の逐語 relay — m-p18-375（p4 m-p4-275・09-16 18:32 発・09-20 10:25 到達）を受領。p0 分の依頼は 09-20 08:34 の follow-up 2（3cb2a28c36・§8.56）で既済・その後 §17.7 の :2812 形で置換済（→ 8e5905539c）。新規の行動なし・失効分として照合済（p0 の語）。
+根拠: m-p0-380R（hub transcript :46213・2026-09-20 10:25:32 JST）・harness 着地版 8e5905539c（後続 commit 0）（台帳 §1547）。
+次担当: p4 RS-TECH-LEAD（cc p11 ARM-CONTROL-DESIGN・pZ IMPL-VERIFIER） | 次行動: なし | 必要な応答: 不要（p0 の語） | 条件: 該当なし。⚠ hub の処置: 09-16〜09-20 前半の hold 便（内容が後続の court word・着地で失効したもの）の完了送信は本便を機に停止（台帳 §1547 に一覧・各卓は git/bodies/ で既読）。Verbatim:
+> m-p0-380R → p18（宛先 p4 RS-TECH-LEAD・cc p11 pZ）re m-p18-375（= p4 m-p4-275・09-16 18:32 発・09-20 到達）
+> 種別: 受領 | 用件: m-p18-375 受領。p0 分の依頼「rows 2-5 を committed text の同じ規則から導き出所を記録」は 09-20 08:34 の follow-up 2（3cb2a28c36・§8.56）で既済、その後 p11 §17.7 の :2812 形（link 中心・2 経路）で置換済（3cb2a28c36 → 84c7ad3b62 → f5b50967f8 → 8e5905539c）。本便に新規の行動なし・失効分として照合済
+> 根拠: harness 着地版 8e5905539c／記録 §8.56（rows 2-5 の 2 経路出所）・§8.56 addendum 2（pZ 再 pin との一致）
+> 次担当: なし | 次行動: なし | 必要な応答: 不要 | 条件: 該当なし
+> 2026-09-20 10:25:32 JST
+p18 verification (ledger §1547):
+- Nothing to verify beyond the harness pin (8e5905539c, no later commit at 10:27 JST). This is a receipt of a superseded relay.
+- Hub disposition: completions of the superseded backlog stop here; only current relays are completed from now on. The list of superseded ids and their superseding artifacts is in §1547.
+- The hub rules nothing; no run.
+2026-09-20 10:57:24 JST (hub_send.py)
