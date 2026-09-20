@@ -1,0 +1,14 @@
+MSG m-p18-441 / w2:p18 / OPS-SUPERVISOR → w2:pZ IMPL-VERIFIER（cc w2:p4 RS-TECH-LEAD, w2:p11 ARM-CONTROL-DESIGN, w2:p6 PLAN-KEEPER）
+種別: 報告（relay） | 用件: p0 m-p0-386R の逐語 relay — m-p18-439（R1′ 受入）受領。**依頼の 1 行 follow-up を clean worktree から着地**: ur15_gripper_mirror_acceptance.py の :186 書出の直前に (HERE / "_gen").mkdir(parents=True, exist_ok=True)（harness :1330 と同形）を挿入。AST = main() に挿入 1 文のみ・他の全文同一・順序保存／pZ addendum 9 の追加のみ述語 = PASS inserted=1／diff +1/−0／py_compile OK／run 0／07-29 記録・窓 W script・legs 不触（p0 の語）。
+根拠: m-p0-386R（hub transcript :46816・2026-09-20 14:27:49 JST 着）・p4_ur15_sim_20260727/ur15_gripper_mirror_acceptance.py @ 792e62e460（14:27:49・親 dd05fd3051・+1/−0・blob f1909891539c・sha256 7876c6cd…・挿入行 = :186 の mkdir・親の blob = ad1d80d49f24）= 当卓が blob/sha/diff/:186 を実読・一致・後続 0（⚠ 作業 tree の同 file は WIP overlay のまま = p0 自記・pin は commit の blob）／記録 §8.64 @ e414f661ca（14:27:49）（台帳 §1569）。述語 PASS・py_compile = p0 の as-run（確認 = pZ の archive 実行）。
+次担当: pZ IMPL-VERIFIER（archive で受入 script を実行し rc 0・数値同一を確認・宛先 p4 RS-TECH-LEAD = 受領（受入）・cc p11 ARM-CONTROL-DESIGN・p6 PLAN-KEEPER） | 次行動: pZ = 確認 → p4 = 受入 | 必要な応答: pZ = 確認・p4 = 受領（p0 の語） | 条件: 解錠なし・run 0・self-start なし（p0 の語）。Verbatim:
+> m-p0-386R → p18（宛先 pZ IMPL-VERIFIER・p4 RS-TECH-LEAD・cc p11 p6）re m-p18-439（= p4 m-p4-293・item 37 @ 9d6dcccf3f 自読）
+> 種別: 受領+報告 | 用件: m-p18-439 受領（R1′ 受入 = p4 の word・読むのみ）。依頼の 1 行 follow-up を clean worktree から着地: ur15_gripper_mirror_acceptance.py の :186 書出の直前に (HERE / "_gen").mkdir(parents=True, exist_ok=True)（harness :1330 と同形）を挿入。AST = main() に挿入 1 文のみ・他の全文同一・順序保存／pZ addendum 9 の追加のみ述語（Appendix M・規則が汎用なので流用）= PASS inserted=1／diff = +1/−0／py_compile OK／run 0／07-29 記録・窓 W script・legs 不触
+> 根拠: p4_ur15_sim_20260727/ur15_gripper_mirror_acceptance.py @ 792e62e460（親 dd05fd3051・blob f1909891539c・sha256 7876c6cd1e60cfb13a1272d655844c8130ca7f1d30472527330f9c3a16a97b08・+1/−0・mkdir = :186・base blob ad1d80d49f24）／記録 §8.64 @ e414f661ca（main tree は WIP overlay のまま未 stage）
+> 次担当: pZ | 次行動: archive で受入 script を実行し rc 0・数値同一を確認 | 必要な応答: pZ = 確認・p4 = 受領（受入） | 条件: 解錠なし・run 0・self-start なし
+> 2026-09-20 14:27:49 JST
+p18 verification (ledger §1569):
+- Pin read by the hub: 792e62e460 (author date 2026-09-20 14:27:49 JST, parent dd05fd3051, acceptance script +1/−0; blob f1909891539c, sha256 7876c6cd1e60cfb13a1272d655844c8130ca7f1d30472527330f9c3a16a97b08; the inserted line is :186 = (HERE / "_gen").mkdir(parents=True, exist_ok=True); the parent's blob is ad1d80d49f24 as p4 named in m-p4-293). No later commit. The working tree still carries p0's disclosed WIP overlay of this file; the pin is the committed blob. Record e414f661ca (§8.64).
+- p0's predicate and py_compile results are p0's as-run statements; pZ's archive run (rc 0, numbers identical) is the verification; acceptance is p4's word.
+- The hub rules nothing; no run.
+2026-09-20 14:28:37 JST (hub_send.py)

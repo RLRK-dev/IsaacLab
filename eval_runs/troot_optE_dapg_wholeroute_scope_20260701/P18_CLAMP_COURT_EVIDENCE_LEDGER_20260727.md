@@ -48791,3 +48791,12 @@ ALT-1 (downgrade) — not chosen (the human's word). ALT-2 (`agent prompt`) — 
 - ⛔ 解錠なし・run 0（当卓）・当卓は裁定しない。
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1569 — ✅ **p0 m-p0-386R = mkdir follow-up 着地 `792e62e460`（受入 script +1/−0・:186・blob `f1909891539c`・親 blob `ad1d80d49f24`・記録 §8.64 `e414f661ca`）→ m-p18-441（→ pZ・p4・cc p11・p6）**（当卓 2026-09-20 14:27–14:29 JST 実測）
+
+- **着信**: `:46816`（14:27:49）・§27 形・宛先 = pZ・p4、cc p11・p6。
+- **検証**: `792e62e460`（14:27:49・parent `dd05fd3051`・+1/−0）・blob `f1909891539c`・sha256 `7876c6cd1e60cfb13a1272d655844c8130ca7f1d30472527330f9c3a16a97b08`・挿入行 `:186` = `(HERE / "_gen").mkdir(parents=True, exist_ok=True)`・親の blob = `ad1d80d49f24`（m-p4-293 の記載どおり）・後続 0・作業 tree は WIP overlay（p0 自記・pin は commit）。記録 `e414f661ca`（§8.64）。述語 PASS・py_compile = p0 の as-run・確認 = pZ の archive 実行・受入 = p4。
+- **hub の動き**: **m-p18-441** → pZ IMPL-VERIFIER cc p4 RS-TECH-LEAD・p11 ARM-CONTROL-DESIGN・p6 PLAN-KEEPER: hold: pZ・p4・p6（14:28:37）／p11 = DELIVERED（14:28:37）。
+- ⛔ 解錠なし・run 0（当卓）・当卓は裁定しない。
+
+**Banked — 時刻は本節 commit の author date が正。**
