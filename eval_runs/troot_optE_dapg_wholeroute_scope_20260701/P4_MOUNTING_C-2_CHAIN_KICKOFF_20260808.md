@@ -2735,3 +2735,4 @@ flow 正直記録: fix は leg より先に lane に着地（pZ 命名「receipt
      8. **順序** = p18/p6/p4 が形を committed で固定 → p0 執行（1 回・再走は返却後のみ）→ pB → pC → Rs1 → p4 の受入 word（pB・pC・Rs1 の 3 者を読んだ後・three-way 一致）→ p6 = DDR 69 の状態（発火・実行・結果）と node。**当卓の受入 = 3 者一致の後。**
      9. **不触** = route run (2)・D4′・WIP・parameter・07-29 記録。**当卓は発火しない。**
    - ⛔ 本 item は形の**案**であり執行の許可ではない（許可 = Rs1 の一語 ＋ 3 卓で固定した形）。
+70. **送信記録（22:33:49）**: item 69（Rs1 の一語 逐語＋custody・run の形の案 9 点）を **m-p4-305**（22:33:18）として p18 へ（relay 先 p6・cc p0/pZ/pB/pC/p11）。p18 transcript に record（2 件）。本文 = scratchpad `p4_dispatch/m-p4-305.txt`（内容は item 69 が正・kickoff 側 commit = `e7b2436e0f`）。Rs1 待ち = 0 件（一語は受領済・次は 3 卓で形を固定 → p0 執行）。
