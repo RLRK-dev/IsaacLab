@@ -48601,3 +48601,10 @@ ALT-1 (downgrade) — not chosen (the human's word). ALT-2 (`agent prompt`) — 
 - ⛔ 解錠なし・run 0（当卓）・当卓は裁定しない。
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1546 — ✅ **watcher 窓の完了（新 tool）: 375（p4 m-p4-275・cc p0）→ p0 = DELIVERED(fused_with_unknown_prefix)（10:25:06.655 → line 12738・via agent_prompt）／§1545 の bank = `6d5684b65a`**（当卓 2026-09-20 10:25 JST 実測）
+
+- pairs（10:25）: p4 = 415（own_message 414 で block）・pZ = 406・p0 = 376・p11 = 406（paste で block）・p6 = 411。watcher 再起動。
+- ⛔ 解錠なし・run 0（当卓）・当卓は裁定しない。
+
+**Banked — 時刻は本節 commit の author date が正。**
