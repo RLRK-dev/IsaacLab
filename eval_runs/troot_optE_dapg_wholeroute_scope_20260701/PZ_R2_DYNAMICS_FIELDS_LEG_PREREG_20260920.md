@@ -258,3 +258,13 @@ print(json.dumps({k: {"passed": v["passed"], "barred": v["barred"], "failed_fiel
 - **R2-9（driver 注入 parameter）**: p4 が driver blob `:238-244`（armature/damping）・`:426-433`（kp/kv/`forcerange`/`ctrlrange`）を読み text 上の両側同一を確認、静的 leg 不要・実効値は R4（p4 の word・item 56）。§10 R2 の記載「計器の model に無い・実測は #69 run のみ」と整合、訂正なし。
 - **鎖の状態**: R2 = 本訂正 → pZ 訂正事前登録 → 同一計器の再走行 → verdict → p4 受入（28/28 ＋ 対照 3 種が落ちる所で落ちる）。§7.2 前提の残り = R2・p6 の state.md 反映。⛔ 解錠なし（route run (2)・#69・D4′・WIP）・run 0・当卓は run しない。
 ```
+
+## Addendum 2 (2026-09-20 15:05:51 JST) — the judgment layer registered at its corrected sha (p4 m-p4-302 via m-p18-460: 「v2 sha を事前登録に追記 → 判定層のみ再走行 → verdict に追記」; the form p0's v8→v9 took)
+
+**What changed and why**: the addendum above registered `pz_r2_judge.py` at sha256 `20d823d0a4866a993733fd1c4301618ab52e76a12ebc9b7cb4c223fcc470dc2d` (v1). On the re-run v1 stopped at its print line — `NameError: name 'mx' is not defined. Did you mean: 'm'?` — before printing any judgment (the crash is in the formatting of the output; the bars, the field list and the counting were not reached). It was corrected in place to sha256 **`2b8b78e43752fc620aa7251348741f87ca9337db1c7beb4012a6ed8782cdc6dc`** (v2) by rewriting that one print statement; the `diff` is appendix C of `PZ_VERDICT_R2_DYNAMICS_FIELDS_LEG_CORRECTED_BARS_20260920.md` @ `735934bef8` (two lines; no bar, field, tolerance or count touched), which p4 read and confirmed (item 63). **This addendum registers v2 by sha before the judgment layer is run again.** `pz_r2.py` (sha256 `3f6dab44b655d64b…`) and `pz_r2_inertia_v2.py` (sha256 `6609eacef7fa3f1a…`) are not re-run: their outputs (`r2_rerun.json`, `r2_inertia_v2.json`) are the inputs and are unchanged.
+
+**Order of existence (measured in the writing command)**: `r2_judge_rerun.txt` does not exist (asserted); the pre-registration and the verdict are clean in the shared tree; HEAD `4df3610121`.
+
+**Expectation (fixed now)**: the re-run's output is **byte-identical** to the verdict's appendix A (`r2_judge.txt`, sha256 `54ef029392451c037019e424a973ce85e3f8cba249b18243cb50b2492f2ff777`): L vs B 27/27; NH 23/27 failing `body_ipos`/`body_quat`/`geom_pos`/tensor; RC 21/27 failing `body_pos`/`body_ipos`/`body_quat`/`jnt_axis (−A·a)`/`geom_pos`/tensor; B′ 26/27 failing `body_mass` only; arm 18/18; hand 27/27. Any differing line ⇒ return (p4's word).
+
+**Leg procedure**: `python pz_r2_judge.py r2_rerun.json r2_inertia_v2.json > r2_judge_rerun.txt` once; `cmp` against `r2_judge.txt`; the result appended to the verdict.
