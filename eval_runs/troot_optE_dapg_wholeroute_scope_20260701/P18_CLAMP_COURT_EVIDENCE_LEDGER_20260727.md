@@ -48639,3 +48639,14 @@ ALT-1 (downgrade) — not chosen (the human's word). ALT-2 (`agent prompt`) — 
 - ⛔ 解錠なし・run 0（当卓）・当卓は裁定しない。#69 の発火 = Rs1（p4 の語）。
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1550 — ✅ **p4 m-p4-287 = p11 §17.10 の要判断への word（手首方向の report 行 = 可・置き場 = R0 harness の report 行・条件 5 点・順序 p11 → pZ addendum 9 → p0 follow-up 6 → pZ leg → p4・kickoff item 24 `b6fabff700`）→ m-p18-421（→ p11・pZ・p0・cc p6）／407 → p4 は p4 が bodies/ から as-read = 完了しない／406 → p11・418 = 失効（419/420 が後続）**（当卓 2026-09-20 11:07–11:10 JST 実測）
+
+- **着信**: m-p4-287 `:46389`（`type=user`・`2026-09-20T02:07:56.970Z` = 11:07:56 JST・queue op `:46383`）・§27 形・宛先 = p11・pZ・p0、cc p6（p4 の指定）。
+- **検証**: `b6fabff700`（11:07:52・parent `ebbe062874`・kickoff +5/−0・HEAD で clean 11:08）= item 23（m-p4-286 の送信記録）＋ item 24（407 を bodies/ から as-read・§17.10 @ `ded9c8ee30` blob `d773631bdfb1`/285 行/`:280-285` = 当卓も実読一致・p11 の読みの要旨・**word = (a) 可 (b) 置き場 = R0 harness の report 行**・条件 ①〜⑤・順序・「内側」なら p11 の設計 court の判断を §7.2 宣言の前に要す・角度の数値は p4 未再計算）。p4 の送信記録 `d000656373`（11:08:20・+1）。
+- **観測（裁定でない）**: design doc は `ebbe062874`（11:07:36・+5・290 行）で p11 が **§17.11 = 窓 R0 受入の記録**（依頼なし）を追加済 ⇒ p4 の語「p11 §17.11 = 行の仕様」と節番号が重なる。番号は p11 の判断・p4 の条件は番号に依存しない。relay の head に同旨を 1 行同梱。
+- **hub の動き**: **m-p18-421** = m-p4-287（`bodies/m-p18-421.txt`・§27 形）→ p11 ARM-CONTROL-DESIGN cc pZ IMPL-VERIFIER・p0 IMPL-BUILDER・p6 PLAN-KEEPER: held: p11 = ready・pZ = HELD(working)・p0 = ready・p6 = HELD(working)（11:10:20.967）／p11 = DELIVERED(fused_with_unknown_prefix)（11:10:20.973 → 02:10:21.322Z）／p0 = DELIVERED(fused_with_unknown_prefix)（11:10:21.569 → 02:10:21.916Z）。
+- **hold の整理（§1547 の規則）**: **407 → p4 = 完了しない**（p4 が bodies/ から as-read・item 24）／**407 → p6・pZ = 失効**（後続 word = 本 287）／**406 → p11・418 → p4/p11 = 失効**（419・420 が後続・watcher 11:08:07 の READY 406 → p11 は送らず）／**残る現行 hold = 420 → p6（受入・反映 commit の依頼あり）→ m-p18-421 → p6・pZ（working）**。
+- ⛔ 解錠なし・run 0（当卓）・当卓は裁定しない。
+
+**Banked — 時刻は本節 commit の author date が正。**
