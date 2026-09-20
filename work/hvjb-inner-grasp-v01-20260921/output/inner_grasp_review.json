@@ -1,0 +1,777 @@
+{
+  "created_at": "2026-09-21T04:31:12.417726+09:00",
+  "scope": "Comparison-only rear contour pocket and axial shoulder; no selected manufacture or motion",
+  "source_sha256": {
+    "/home/rlrk/IsaacLab-op040/eval_runs/ur15_jb_harness_revision_20260907/data/hvjb_photo_cad_v01.json.gz": "1ac417baa3ff67ae8bc3ed5c32ac91cfb778a2effbd1e1a19d24900066c38f32",
+    "/home/rlrk/IsaacLab-op040/eval_runs/ur15_jb_harness_revision_20260907/references/hvjb_photo_inventory_20260915/te_2103245_drawing.pdf": "23aff5f20acb75d87a63bf3a1aa0c076a8ab43b30c83914cfc8e5c9b41788ffa",
+    "/home/rlrk/IsaacLab-op040/eval_runs/ur15_jb_harness_revision_20260907/references/connector_correction_20260915/te_408_32095_instruction.pdf": "cd13cd856b679e2683f7672f079bd4c99ff87ac2e361d3da73700e12c12fa63d",
+    "/home/rlrk/IsaacLab-op040/eval_runs/ur15_jb_harness_revision_20260907/data/hvjb_header_interface_inputs_v01.json": "ebc87a9b4c338c219ea51a1b81c7ee1802486947a96f5caabf33da6662aae565",
+    "/home/rlrk/IsaacLab/work/hvjb-header-retention-v01-20260921/output/retention_review.json": "bcef06737fb7a19430f597e7dc7be6847c6ee3f66bd1bbd4961c39dabaa2fa4a",
+    "/home/rlrk/IsaacLab/work/hvjb-hand-plan-v01-20260920/data/hand_plan.json": "ecbd1ae45e269e823ffa7f783744d210758065d874c6cd50cf7b00e55a1977e0",
+    "/home/rlrk/IsaacLab/work/hvjb-hand-plan-v01-20260920/draw_plan.py": "f20d23ee507221a8be1f5c774988246562d3adc86c49dd1c6bbe6c15a35b3388"
+  },
+  "source_job_count_preserved": 20,
+  "cards_unmodified": [
+    {
+      "id": "D45",
+      "title_ja": "C 内側端末引出し",
+      "primary_label_ja": "C主腕",
+      "hands_label_ja": "H05 内側",
+      "assistance_label_ja": "C補助※",
+      "transfer_ja": "外側で端末支持を引継ぐ",
+      "hand_families": [
+        "H05"
+      ],
+      "primary": [
+        "ARM_C"
+      ],
+      "conditional": [
+        "ASSIST_2"
+      ],
+      "other": [
+        "F-C"
+      ],
+      "operation": "O45",
+      "cell": "C",
+      "unresolved_ja": "線付きの通過空間・把持面・各端末順序・外側での一時支持・ロック順",
+      "source_card_unmodified": {
+        "id": "D45",
+        "hands": [
+          "H05"
+        ],
+        "entities": [
+          "V25_CASE",
+          "V25_INNER_ENDS"
+        ],
+        "additional_target_ja": "内側ハウジング5個の開口通過。2025映像と各I番号の対応は未確認",
+        "start_ja": "R-Cが対象ハウジングを持ち、必要時X-Cが配線を案内する",
+        "keep_ja": "側面開口へハウジングを合わせる間、線と他の自由端を引き続き管理する",
+        "end_ja": "次のヘッダー・ロック作業へ端末支持を引き継ぐ。単に外へ出ただけで放置しない",
+        "reuse_ja": "内側ハウジングを一方の手で保持したまま外側ヘッダーを取るなら別の役が必要",
+        "missing_ja": "線付きの通過空間・把持面・各端末順序・外側での一時支持・ロック順",
+        "task": {
+          "id": "D45",
+          "operation": "O45",
+          "cell": "C",
+          "work_ja": "内側ハウジングの姿勢合わせ・開口引出し・線の案内",
+          "primary": [
+            "R-C"
+          ],
+          "other": [
+            "F-C"
+          ],
+          "conditional": [
+            "X-C"
+          ],
+          "sharing_ja": "ハウジングと線に独立した操作が必要なら二役を残す。案内完了・保持の引継ぎまで補助役を占有。"
+        }
+      }
+    },
+    {
+      "id": "D50",
+      "title_ja": "C 外側口の固定",
+      "primary_label_ja": "C主腕",
+      "hands_label_ja": "H05 外側",
+      "assistance_label_ja": "T-C / 内側保持役※",
+      "transfer_ja": "全対象穴の締結・工具退避まで保持",
+      "hand_families": [
+        "H05"
+      ],
+      "primary": [
+        "ARM_C"
+      ],
+      "conditional": [
+        "ASSIST_2"
+      ],
+      "other": [
+        "F-C",
+        "T-C"
+      ],
+      "operation": "O50",
+      "cell": "C",
+      "unresolved_ja": "締付順・条件・工具全外形・内側ロックとフランジ固定の順・主2極/LV固定",
+      "source_card_unmodified": {
+        "id": "D50",
+        "hands": [
+          "H05"
+        ],
+        "entities": [
+          "V25_OUTER_HEADERS",
+          "V25_INNER_ENDS"
+        ],
+        "additional_target_ja": "P16は8点、P17は6点のM4フランジ固定。主2極・LV口は別の未確定仕事",
+        "start_ja": "外側ヘッダーを一つ取得し筐体へ合わせる",
+        "keep_ja": "R-Cがそのヘッダーを保持したままT-Cが対象穴群を締結。内側端末保持が続くならX-Cも占有",
+        "end_ja": "対象ヘッダーの締結終了・工具退避後に保持を解き指を退避する",
+        "reuse_ja": "P16とP17は同じ保持腕・工具の順次兼務候補。片方の保持中に同じ腕で他方を取りに行かない",
+        "missing_ja": "締付順・条件・工具全外形・内側ロックとフランジ固定の順・主2極/LV固定",
+        "task": {
+          "id": "D50",
+          "operation": "O50",
+          "cell": "C",
+          "work_ja": "外側ヘッダー・主接続口の配置、保持、ねじ固定・内側端末対応",
+          "primary": [
+            "R-C"
+          ],
+          "other": [
+            "F-C",
+            "T-C"
+          ],
+          "conditional": [
+            "X-C"
+          ],
+          "sharing_ja": "OP020作業をこの位置で1回行う。主担当のH05保持＋工具群。内側ロックとフランジ固定の詳細順、主2極/LV口の固定は要照合。"
+        }
+      }
+    }
+  ],
+  "headers_unmodified": [
+    {
+      "feature_id": "P16",
+      "part_number": "2103340-1",
+      "drawing": "references/connector_correction_20260915/te_2103340_drawing.pdf",
+      "drawing_sha256": "be59744129dc5134d2a3363e25af93294e662cde4254ec28411b80bd01673dc6",
+      "drawing_revision": "A2",
+      "drawing_sheet": 1,
+      "product_url": "https://www.te.com/en/product-2103340-1.html",
+      "hole_x_m": [
+        -0.05005,
+        -0.01695,
+        0.01695,
+        0.05005
+      ],
+      "hole_z_m": [
+        -0.01375,
+        0.01375
+      ],
+      "model_translation_m": [
+        -0.052,
+        -0.08,
+        0.046
+      ],
+      "bay_centers_x_m": [
+        -0.0339,
+        0,
+        0.0339
+      ],
+      "aperture_widths_m": [
+        0.023,
+        0.0228,
+        0.023
+      ]
+    },
+    {
+      "feature_id": "P17",
+      "part_number": "2103346-2",
+      "drawing": "references/connector_correction_20260915/te_2103346_drawing.pdf",
+      "drawing_sha256": "fbdeb1d56aba02ae85ed2464b3acd68ce6444cd47179f33225d7f0ba1b580e28",
+      "drawing_revision": "A3",
+      "drawing_sheet": 1,
+      "product_url": "https://www.te.com/en/product-2103346-2.html",
+      "hole_x_m": [
+        -0.0331,
+        0,
+        0.0331
+      ],
+      "hole_z_m": [
+        -0.01375,
+        0.01375
+      ],
+      "model_translation_m": [
+        0.072,
+        -0.08,
+        0.046
+      ],
+      "bay_centers_x_m": [
+        -0.01695,
+        0.01695
+      ],
+      "aperture_widths_m": [
+        0.0228,
+        0.023
+      ],
+      "x_derivation_ja": "ヘッダー中央をX=0とする。左側は-(16.95+16.15)、中央は0、右側は50.05-16.95 mm。"
+    }
+  ],
+  "apertures_unmodified": [
+    {
+      "id": "I01",
+      "header": "P16",
+      "bay": 1,
+      "key": "A",
+      "part_number": "2103245-1",
+      "center_x_m": -0.0859,
+      "width_m": 0.023,
+      "drawing": "TE3"
+    },
+    {
+      "id": "I02",
+      "header": "P16",
+      "bay": 2,
+      "key": "D",
+      "part_number": "2103245-4",
+      "center_x_m": -0.052,
+      "width_m": 0.0228,
+      "drawing": "TE3"
+    },
+    {
+      "id": "I03",
+      "header": "P16",
+      "bay": 3,
+      "key": "E",
+      "part_number": "2103245-5",
+      "center_x_m": -0.0181,
+      "width_m": 0.023,
+      "drawing": "TE3"
+    },
+    {
+      "id": "I04",
+      "header": "P17",
+      "bay": 1,
+      "key": "D",
+      "part_number": "2103245-4",
+      "center_x_m": 0.05505,
+      "width_m": 0.0228,
+      "drawing": "TE2"
+    },
+    {
+      "id": "I05",
+      "header": "P17",
+      "bay": 2,
+      "key": "F",
+      "part_number": "2103245-6",
+      "center_x_m": 0.08895,
+      "width_m": 0.023,
+      "drawing": "TE2"
+    }
+  ],
+  "housing_geometry": {
+    "2103245-1": {
+      "key": "A",
+      "vertex_count": 13936,
+      "face_count": 19604,
+      "source_bounds_m": [
+        [
+          -0.01119999960064888,
+          -0.006300000008195639,
+          -0.04259999841451645
+        ],
+        [
+          0.01119999960064888,
+          0.006300000008195639,
+          1.7104836429576552e-16
+        ]
+      ],
+      "aabb_extents_m": [
+        0.02239999920129776,
+        0.012600000016391277,
+        0.04259999841451662
+      ],
+      "nominal_plane_sections": [
+        {
+          "source_z_m": -0.002,
+          "segment_count": 292,
+          "xy_min_m": [
+            -0.009349999949336052,
+            -0.004449999891221523
+          ],
+          "xy_max_m": [
+            0.009349999949336052,
+            0.004449999891221523
+          ]
+        },
+        {
+          "source_z_m": -0.02,
+          "segment_count": 230,
+          "xy_min_m": [
+            -0.009349999949336052,
+            -0.004449999891221523
+          ],
+          "xy_max_m": [
+            0.009349999949336052,
+            0.004449999891221523
+          ]
+        },
+        {
+          "source_z_m": -0.03,
+          "segment_count": 232,
+          "xy_min_m": [
+            -0.01119999960064888,
+            -0.004449999891221523
+          ],
+          "xy_max_m": [
+            0.01119999960064888,
+            0.006300000008195639
+          ]
+        },
+        {
+          "source_z_m": -0.0326,
+          "segment_count": 142,
+          "xy_min_m": [
+            -0.01119999960064888,
+            -0.006300000008195639
+          ],
+          "xy_max_m": [
+            0.01119999960064888,
+            0.006300000008195639
+          ]
+        },
+        {
+          "source_z_m": -0.033,
+          "segment_count": 378,
+          "xy_min_m": [
+            -0.01119999960064888,
+            -0.006300000008195639
+          ],
+          "xy_max_m": [
+            0.01119999960064888,
+            0.006300000008195639
+          ]
+        },
+        {
+          "source_z_m": -0.035,
+          "segment_count": 272,
+          "xy_min_m": [
+            -0.008375000208616257,
+            -0.003324999939650297
+          ],
+          "xy_max_m": [
+            0.008375000208616257,
+            0.003324999939650297
+          ]
+        },
+        {
+          "source_z_m": -0.04,
+          "segment_count": 272,
+          "xy_min_m": [
+            -0.008375000208616257,
+            -0.003324999939650297
+          ],
+          "xy_max_m": [
+            0.008375000208616257,
+            0.003324999939650297
+          ]
+        },
+        {
+          "source_z_m": -0.042,
+          "segment_count": 544,
+          "xy_min_m": [
+            -0.008375000208616257,
+            -0.003324999939650297
+          ],
+          "xy_max_m": [
+            0.008375000208616257,
+            0.003324999939650297
+          ]
+        }
+      ]
+    },
+    "2103245-4": {
+      "key": "D",
+      "vertex_count": 13936,
+      "face_count": 19604,
+      "source_bounds_m": [
+        [
+          -0.01119999960064888,
+          -0.006300000008195639,
+          -0.04259999841451645
+        ],
+        [
+          0.01119999960064888,
+          0.006300000008195639,
+          1.7104836429576552e-16
+        ]
+      ],
+      "aabb_extents_m": [
+        0.02239999920129776,
+        0.012600000016391277,
+        0.04259999841451662
+      ],
+      "nominal_plane_sections": [
+        {
+          "source_z_m": -0.002,
+          "segment_count": 292,
+          "xy_min_m": [
+            -0.009349999949336052,
+            -0.004449999891221523
+          ],
+          "xy_max_m": [
+            0.009349999949336052,
+            0.004449999891221523
+          ]
+        },
+        {
+          "source_z_m": -0.02,
+          "segment_count": 229,
+          "xy_min_m": [
+            -0.009349999949336052,
+            -0.004449999891221523
+          ],
+          "xy_max_m": [
+            0.009349999949336052,
+            0.004449999891221523
+          ]
+        },
+        {
+          "source_z_m": -0.03,
+          "segment_count": 233,
+          "xy_min_m": [
+            -0.01119999960064888,
+            -0.004449999891221523
+          ],
+          "xy_max_m": [
+            0.01119999960064888,
+            0.006300000008195639
+          ]
+        },
+        {
+          "source_z_m": -0.0326,
+          "segment_count": 142,
+          "xy_min_m": [
+            -0.01119999960064888,
+            -0.006300000008195639
+          ],
+          "xy_max_m": [
+            0.01119999960064888,
+            0.006300000008195639
+          ]
+        },
+        {
+          "source_z_m": -0.033,
+          "segment_count": 378,
+          "xy_min_m": [
+            -0.01119999960064888,
+            -0.006300000008195639
+          ],
+          "xy_max_m": [
+            0.01119999960064888,
+            0.006300000008195639
+          ]
+        },
+        {
+          "source_z_m": -0.035,
+          "segment_count": 272,
+          "xy_min_m": [
+            -0.008375000208616257,
+            -0.003324999939650297
+          ],
+          "xy_max_m": [
+            0.008375000208616257,
+            0.003324999939650297
+          ]
+        },
+        {
+          "source_z_m": -0.04,
+          "segment_count": 272,
+          "xy_min_m": [
+            -0.008375000208616257,
+            -0.003324999939650297
+          ],
+          "xy_max_m": [
+            0.008375000208616257,
+            0.003324999939650297
+          ]
+        },
+        {
+          "source_z_m": -0.042,
+          "segment_count": 544,
+          "xy_min_m": [
+            -0.008375000208616257,
+            -0.003324999939650297
+          ],
+          "xy_max_m": [
+            0.008375000208616257,
+            0.003324999939650297
+          ]
+        }
+      ]
+    },
+    "2103245-5": {
+      "key": "E",
+      "vertex_count": 13888,
+      "face_count": 19572,
+      "source_bounds_m": [
+        [
+          -0.01119999960064888,
+          -0.006300000008195639,
+          -0.04259999841451645
+        ],
+        [
+          0.01119999960064888,
+          0.006300000008195639,
+          1.7104836429576552e-16
+        ]
+      ],
+      "aabb_extents_m": [
+        0.02239999920129776,
+        0.012600000016391277,
+        0.04259999841451662
+      ],
+      "nominal_plane_sections": [
+        {
+          "source_z_m": -0.002,
+          "segment_count": 292,
+          "xy_min_m": [
+            -0.009349999949336052,
+            -0.004449999891221523
+          ],
+          "xy_max_m": [
+            0.009349999949336052,
+            0.004449999891221523
+          ]
+        },
+        {
+          "source_z_m": -0.02,
+          "segment_count": 226,
+          "xy_min_m": [
+            -0.009349999949336052,
+            -0.004449999891221523
+          ],
+          "xy_max_m": [
+            0.009349999949336052,
+            0.004449999891221523
+          ]
+        },
+        {
+          "source_z_m": -0.03,
+          "segment_count": 226,
+          "xy_min_m": [
+            -0.009349999949336052,
+            -0.004449999891221523
+          ],
+          "xy_max_m": [
+            0.01119999960064888,
+            0.006300000008195639
+          ]
+        },
+        {
+          "source_z_m": -0.0326,
+          "segment_count": 140,
+          "xy_min_m": [
+            -0.01119999960064888,
+            -0.006300000008195639
+          ],
+          "xy_max_m": [
+            0.01119999960064888,
+            0.006300000008195639
+          ]
+        },
+        {
+          "source_z_m": -0.033,
+          "segment_count": 376,
+          "xy_min_m": [
+            -0.01119999960064888,
+            -0.006300000008195639
+          ],
+          "xy_max_m": [
+            0.01119999960064888,
+            0.006300000008195639
+          ]
+        },
+        {
+          "source_z_m": -0.035,
+          "segment_count": 272,
+          "xy_min_m": [
+            -0.008375000208616257,
+            -0.003324999939650297
+          ],
+          "xy_max_m": [
+            0.008375000208616257,
+            0.003324999939650297
+          ]
+        },
+        {
+          "source_z_m": -0.04,
+          "segment_count": 272,
+          "xy_min_m": [
+            -0.008375000208616257,
+            -0.003324999939650297
+          ],
+          "xy_max_m": [
+            0.008375000208616257,
+            0.003324999939650297
+          ]
+        },
+        {
+          "source_z_m": -0.042,
+          "segment_count": 544,
+          "xy_min_m": [
+            -0.008375000208616257,
+            -0.003324999939650297
+          ],
+          "xy_max_m": [
+            0.008375000208616257,
+            0.003324999939650297
+          ]
+        }
+      ]
+    },
+    "2103245-6": {
+      "key": "F",
+      "vertex_count": 13888,
+      "face_count": 19572,
+      "source_bounds_m": [
+        [
+          -0.01119999960064888,
+          -0.006300000008195639,
+          -0.04259999841451645
+        ],
+        [
+          0.01119999960064888,
+          0.006300000008195639,
+          1.7104836429576552e-16
+        ]
+      ],
+      "aabb_extents_m": [
+        0.02239999920129776,
+        0.012600000016391277,
+        0.04259999841451662
+      ],
+      "nominal_plane_sections": [
+        {
+          "source_z_m": -0.002,
+          "segment_count": 292,
+          "xy_min_m": [
+            -0.009349999949336052,
+            -0.004449999891221523
+          ],
+          "xy_max_m": [
+            0.009349999949336052,
+            0.004449999891221523
+          ]
+        },
+        {
+          "source_z_m": -0.02,
+          "segment_count": 226,
+          "xy_min_m": [
+            -0.009349999949336052,
+            -0.004449999891221523
+          ],
+          "xy_max_m": [
+            0.009349999949336052,
+            0.004449999891221523
+          ]
+        },
+        {
+          "source_z_m": -0.03,
+          "segment_count": 226,
+          "xy_min_m": [
+            -0.01119999960064888,
+            -0.004449999891221523
+          ],
+          "xy_max_m": [
+            0.009349999949336052,
+            0.006300000008195639
+          ]
+        },
+        {
+          "source_z_m": -0.0326,
+          "segment_count": 140,
+          "xy_min_m": [
+            -0.01119999960064888,
+            -0.006300000008195639
+          ],
+          "xy_max_m": [
+            0.01119999960064888,
+            0.006300000008195639
+          ]
+        },
+        {
+          "source_z_m": -0.033,
+          "segment_count": 376,
+          "xy_min_m": [
+            -0.01119999960064888,
+            -0.006300000008195639
+          ],
+          "xy_max_m": [
+            0.01119999960064888,
+            0.006300000008195639
+          ]
+        },
+        {
+          "source_z_m": -0.035,
+          "segment_count": 272,
+          "xy_min_m": [
+            -0.008375000208616257,
+            -0.003324999939650297
+          ],
+          "xy_max_m": [
+            0.008375000208616257,
+            0.003324999939650297
+          ]
+        },
+        {
+          "source_z_m": -0.04,
+          "segment_count": 272,
+          "xy_min_m": [
+            -0.008375000208616257,
+            -0.003324999939650297
+          ],
+          "xy_max_m": [
+            0.008375000208616257,
+            0.003324999939650297
+          ]
+        },
+        {
+          "source_z_m": -0.042,
+          "segment_count": 544,
+          "xy_min_m": [
+            -0.008375000208616257,
+            -0.003324999939650297
+          ],
+          "xy_max_m": [
+            0.008375000208616257,
+            0.003324999939650297
+          ]
+        }
+      ]
+    }
+  },
+  "coordinate_note": "Source Z=0 nose, negative Z towards wire-entry rear. Display (u,v,w)=(Z+0.0426,X,Y).",
+  "drawn_candidate": {
+    "finger_count": 2,
+    "family": "H05 inner housing; not the external-header H05 contour",
+    "positioning": "Contour pocket at outer surfaces of wire-entry rear extensions",
+    "insertion_load_path": "Stepped finger face onto rear face of housing collar",
+    "avoided_regions": [
+      "wire bores",
+      "long insertion body",
+      "key and locking features"
+    ],
+    "release_illustration": "Open transversely then withdraw towards wires after support handoff",
+    "allowed_clamp_force_N": null,
+    "allowed_insertion_force_N": null,
+    "selected_finger_dimensions_m": null,
+    "selected": false
+  },
+  "visual_region_note": "Color masks are illustrative region annotations, not contact-patch extraction.",
+  "grip_section_note": "Source Z=-0.042 m section near the rear mouth. Finger overlays are dimensionless explanatory symbols, not a selected axial contact position or manufactured contours; corner relief and tolerances are not specified. The stored mesh has only external loops at Z=-0.040 m; this drawing does not assert full cavity fidelity.",
+  "section_method": "Exact plane-triangle intersections of the stored triangulation; no vertex-band absence inference",
+  "cad_dimensions_note": "Complete CAD AABB length 0.0426 m differs from drawing reference length 0.0324 m.",
+  "diagnostic_note": "Initial read-only vertex-band reduction hit an empty band. Replaced by plane-triangle sections; no input changes.",
+  "reuse": "Reused saved official CAD, official Rev A1 drawing, Rev B instruction, hand-plan graphic style and D45/D50 records.",
+  "custom_reason": "Existing H05 external-header fingers target a different part. Only a comparison diagram is authored for the inner housing.",
+  "official_sources_checked": [
+    {
+      "url": "https://www.te.com/en/product-2103245-1.html",
+      "note": "Drawing Rev A1 and instruction Rev B listed"
+    },
+    {
+      "url": "https://www.te.com/en/product-2103245-6.html",
+      "note": "Without strain relief; no clamp-load specification on inspected page"
+    }
+  ],
+  "unresolved": [
+    "Allowed rear-shell and collar loading and deformation",
+    "Full finger/part/wire envelope through case wall and outer header",
+    "Grasp-specific clearance to adjacent bays and retained wiring",
+    "C assistant availability after prior wire-guidance handoff",
+    "Detection of completed inner latch and selected flange fastening order"
+  ],
+  "native_changed": false,
+  "new_robot_motion": false,
+  "new_video": false,
+  "new_collision_measurement": false,
+  "new_manufactured_finger_mesh": false,
+  "physical_acceptance_verdict": null
+}

@@ -1,0 +1,268 @@
+{
+  "created_at": "2026-09-21T03:40:00.545459+09:00",
+  "source_job_count_preserved": 20,
+  "cards_unmodified": [
+    {
+      "id": "D45",
+      "title_ja": "C 内側端末引出し",
+      "primary_label_ja": "C主腕",
+      "hands_label_ja": "H05 内側",
+      "assistance_label_ja": "C補助※",
+      "transfer_ja": "外側で端末支持を引継ぐ",
+      "hand_families": [
+        "H05"
+      ],
+      "primary": [
+        "ARM_C"
+      ],
+      "conditional": [
+        "ASSIST_2"
+      ],
+      "other": [
+        "F-C"
+      ],
+      "operation": "O45",
+      "cell": "C",
+      "unresolved_ja": "線付きの通過空間・把持面・各端末順序・外側での一時支持・ロック順",
+      "source_card_unmodified": {
+        "id": "D45",
+        "hands": [
+          "H05"
+        ],
+        "entities": [
+          "V25_CASE",
+          "V25_INNER_ENDS"
+        ],
+        "additional_target_ja": "内側ハウジング5個の開口通過。2025映像と各I番号の対応は未確認",
+        "start_ja": "R-Cが対象ハウジングを持ち、必要時X-Cが配線を案内する",
+        "keep_ja": "側面開口へハウジングを合わせる間、線と他の自由端を引き続き管理する",
+        "end_ja": "次のヘッダー・ロック作業へ端末支持を引き継ぐ。単に外へ出ただけで放置しない",
+        "reuse_ja": "内側ハウジングを一方の手で保持したまま外側ヘッダーを取るなら別の役が必要",
+        "missing_ja": "線付きの通過空間・把持面・各端末順序・外側での一時支持・ロック順",
+        "task": {
+          "id": "D45",
+          "operation": "O45",
+          "cell": "C",
+          "work_ja": "内側ハウジングの姿勢合わせ・開口引出し・線の案内",
+          "primary": [
+            "R-C"
+          ],
+          "other": [
+            "F-C"
+          ],
+          "conditional": [
+            "X-C"
+          ],
+          "sharing_ja": "ハウジングと線に独立した操作が必要なら二役を残す。案内完了・保持の引継ぎまで補助役を占有。"
+        }
+      }
+    },
+    {
+      "id": "D50",
+      "title_ja": "C 外側口の固定",
+      "primary_label_ja": "C主腕",
+      "hands_label_ja": "H05 外側",
+      "assistance_label_ja": "T-C / 内側保持役※",
+      "transfer_ja": "全対象穴の締結・工具退避まで保持",
+      "hand_families": [
+        "H05"
+      ],
+      "primary": [
+        "ARM_C"
+      ],
+      "conditional": [
+        "ASSIST_2"
+      ],
+      "other": [
+        "F-C",
+        "T-C"
+      ],
+      "operation": "O50",
+      "cell": "C",
+      "unresolved_ja": "締付順・条件・工具全外形・内側ロックとフランジ固定の順・主2極/LV固定",
+      "source_card_unmodified": {
+        "id": "D50",
+        "hands": [
+          "H05"
+        ],
+        "entities": [
+          "V25_OUTER_HEADERS",
+          "V25_INNER_ENDS"
+        ],
+        "additional_target_ja": "P16は8点、P17は6点のM4フランジ固定。主2極・LV口は別の未確定仕事",
+        "start_ja": "外側ヘッダーを一つ取得し筐体へ合わせる",
+        "keep_ja": "R-Cがそのヘッダーを保持したままT-Cが対象穴群を締結。内側端末保持が続くならX-Cも占有",
+        "end_ja": "対象ヘッダーの締結終了・工具退避後に保持を解き指を退避する",
+        "reuse_ja": "P16とP17は同じ保持腕・工具の順次兼務候補。片方の保持中に同じ腕で他方を取りに行かない",
+        "missing_ja": "締付順・条件・工具全外形・内側ロックとフランジ固定の順・主2極/LV固定",
+        "task": {
+          "id": "D50",
+          "operation": "O50",
+          "cell": "C",
+          "work_ja": "外側ヘッダー・主接続口の配置、保持、ねじ固定・内側端末対応",
+          "primary": [
+            "R-C"
+          ],
+          "other": [
+            "F-C",
+            "T-C"
+          ],
+          "conditional": [
+            "X-C"
+          ],
+          "sharing_ja": "OP020作業をこの位置で1回行う。主担当のH05保持＋工具群。内側ロックとフランジ固定の詳細順、主2極/LV口の固定は要照合。"
+        }
+      }
+    }
+  ],
+  "headers_unmodified": [
+    {
+      "feature_id": "P16",
+      "part_number": "2103340-1",
+      "drawing": "references/connector_correction_20260915/te_2103340_drawing.pdf",
+      "drawing_sha256": "be59744129dc5134d2a3363e25af93294e662cde4254ec28411b80bd01673dc6",
+      "drawing_revision": "A2",
+      "drawing_sheet": 1,
+      "product_url": "https://www.te.com/en/product-2103340-1.html",
+      "hole_x_m": [
+        -0.05005,
+        -0.01695,
+        0.01695,
+        0.05005
+      ],
+      "hole_z_m": [
+        -0.01375,
+        0.01375
+      ],
+      "model_translation_m": [
+        -0.052,
+        -0.08,
+        0.046
+      ],
+      "bay_centers_x_m": [
+        -0.0339,
+        0,
+        0.0339
+      ],
+      "aperture_widths_m": [
+        0.023,
+        0.0228,
+        0.023
+      ]
+    },
+    {
+      "feature_id": "P17",
+      "part_number": "2103346-2",
+      "drawing": "references/connector_correction_20260915/te_2103346_drawing.pdf",
+      "drawing_sha256": "fbdeb1d56aba02ae85ed2464b3acd68ce6444cd47179f33225d7f0ba1b580e28",
+      "drawing_revision": "A3",
+      "drawing_sheet": 1,
+      "product_url": "https://www.te.com/en/product-2103346-2.html",
+      "hole_x_m": [
+        -0.0331,
+        0,
+        0.0331
+      ],
+      "hole_z_m": [
+        -0.01375,
+        0.01375
+      ],
+      "model_translation_m": [
+        0.072,
+        -0.08,
+        0.046
+      ],
+      "bay_centers_x_m": [
+        -0.01695,
+        0.01695
+      ],
+      "aperture_widths_m": [
+        0.0228,
+        0.023
+      ],
+      "x_derivation_ja": "ヘッダー中央をX=0とする。左側は-(16.95+16.15)、中央は0、右側は50.05-16.95 mm。"
+    }
+  ],
+  "interfaces": [
+    {
+      "id": 1,
+      "parts": [
+        "metal_contact",
+        "inner_housing"
+      ],
+      "source": "408-32095 Rev B 3.2.A.3"
+    },
+    {
+      "id": 2,
+      "parts": [
+        "inner_housing",
+        "outer_header"
+      ],
+      "source": "408-32095 Rev B 3.2.A.4"
+    },
+    {
+      "id": 3,
+      "parts": [
+        "outer_header",
+        "case"
+      ],
+      "source": "408-32095 Rev B 3.2.A.1-2"
+    }
+  ],
+  "te_documented_order": [
+    3,
+    1,
+    2
+  ],
+  "selected_automated_order": null,
+  "selected_automated_release_condition": null,
+  "inner_end_next_support_selected": null,
+  "candidate_holding_roles": {
+    "ARM_C": "outer header",
+    "ASSIST_2": "inner housing; conditional handoff first"
+  },
+  "candidate_is_selected": false,
+  "observations": [
+    {
+      "source_seek_s": 187.5,
+      "visible": "Hands on inside and outside of sidewall region",
+      "hidden": "Precise inner contact and completed latch engagement"
+    },
+    {
+      "source_seek_s": 189.5,
+      "visible": "Different shot with tool at flange fastener region",
+      "hidden": "Complete fastening order, all points, latch event"
+    }
+  ],
+  "observation_status": "Auxiliary still-frame observations only; not formal physical validity",
+  "video_identity": "b7fcb74eaeec06e517d5726994a38a6b0812e05198d8b771b7ff771e68a0e1eb",
+  "source_sha256": {
+    "/home/rlrk/IsaacLab/work/hvjb-hand-plan-v01-20260920/draw_plan.py": "f20d23ee507221a8be1f5c774988246562d3adc86c49dd1c6bbe6c15a35b3388",
+    "/home/rlrk/IsaacLab/work/hvjb-hand-plan-v01-20260920/data/hand_plan.json": "ecbd1ae45e269e823ffa7f783744d210758065d874c6cd50cf7b00e55a1977e0",
+    "/home/rlrk/IsaacLab/work/hvjb-header-handoff-v01-20260921/output/header_handoff.json": "b3eeb18f1547befc4a43186ee99b6f9f1f699fd1b8ae48cf31d6322f0ed5f38b",
+    "/home/rlrk/IsaacLab-op040/eval_runs/ur15_jb_harness_revision_20260907/references/connector_correction_20260915/te_408_32095_instruction.pdf": "cd13cd856b679e2683f7672f079bd4c99ff87ac2e361d3da73700e12c12fa63d",
+    "/home/rlrk/IsaacLab/work/hvjb-header-retention-v01-20260921/evidence/frames.json": "3716546fa49573bb030c50a7e51bcb3b3945036f97abf29f86d8b2a9db3216f1",
+    "/home/rlrk/IsaacLab-op040/eval_runs/ur15_jb_harness_revision_20260907/references/connector_correction_20260915/te_2103340_drawing.pdf": "be59744129dc5134d2a3363e25af93294e662cde4254ec28411b80bd01673dc6",
+    "/home/rlrk/IsaacLab-op040/eval_runs/ur15_jb_harness_revision_20260907/references/connector_correction_20260915/te_2103346_drawing.pdf": "fbdeb1d56aba02ae85ed2464b3acd68ce6444cd47179f33225d7f0ba1b580e28",
+    "/home/rlrk/IsaacLab/work/hvjb-header-retention-v01-20260921/evidence/frames/assembly_184.500s.png": "284be5dc62869bf7f561795bbbb621b01f009d67f377e70f477730a2deb3e2f2",
+    "/home/rlrk/IsaacLab/work/hvjb-header-retention-v01-20260921/evidence/frames/assembly_185.000s.png": "f9cfc62454b2429cf46d53d53680e42e5f55631e47edfb951f802bc7f6485c52",
+    "/home/rlrk/IsaacLab/work/hvjb-header-retention-v01-20260921/evidence/frames/assembly_185.500s.png": "38ea5e11aab52d16cf0d0a953f10f9d0d846fe7c324ff6927b663b2dcff98a2c",
+    "/home/rlrk/IsaacLab/work/hvjb-header-retention-v01-20260921/evidence/frames/assembly_186.000s.png": "441bc087b3c79f93cdfa1f8ec49fdc1ec212c2b189fa975464b539e71de25955",
+    "/home/rlrk/IsaacLab/work/hvjb-header-retention-v01-20260921/evidence/frames/assembly_186.500s.png": "af0e6697e7c0d621b63850b63627af7a902468f8a1fe686293d091b9c58f7597",
+    "/home/rlrk/IsaacLab/work/hvjb-header-retention-v01-20260921/evidence/frames/assembly_187.000s.png": "7982f13bc127719ea33ebf118ed9f727d51f243bd30f4757cf6953dba3d0a0eb",
+    "/home/rlrk/IsaacLab/work/hvjb-header-retention-v01-20260921/evidence/frames/assembly_187.500s.png": "77f8bfa0654877352c30ec51fc66e03b7ecbbf3ca336250c2495e433c41e4803",
+    "/home/rlrk/IsaacLab/work/hvjb-header-retention-v01-20260921/evidence/frames/assembly_188.000s.png": "b63c6bbd708b96d0bd6ecde585ccefc2d0b6f01fbdd9b573d5286ecc79356977",
+    "/home/rlrk/IsaacLab/work/hvjb-header-retention-v01-20260921/evidence/frames/assembly_188.500s.png": "a0b05e21de619e6a567a0b15929a6713cacd2217bd60af8c2240e78c2a3d7358",
+    "/home/rlrk/IsaacLab/work/hvjb-header-retention-v01-20260921/evidence/frames/assembly_189.000s.png": "b455b93cb9c05045d98db42c3400b4cd03149d4aebaa1c4f09ed59b9d02e40d0",
+    "/home/rlrk/IsaacLab/work/hvjb-header-retention-v01-20260921/evidence/frames/assembly_189.500s.png": "6c3117b228d98c3555e10d07ef8c991b7f642fd2d37bd8935fdf93b1a5f5c368",
+    "/home/rlrk/IsaacLab/work/hvjb-header-retention-v01-20260921/evidence/frames/assembly_190.000s.png": "ee1900cc18c0b6bf85a3a6a45ac2183657fd5e3e0f90e6435961765bb0ff7ab1",
+    "/home/rlrk/IsaacLab/work/hvjb-header-retention-v01-20260921/evidence/frames/assembly_190.500s.png": "9a751984a32138e53d21b1443cb3b01bd7cf1d11c0b2a872b4905c4aba1a9ceb",
+    "/home/rlrk/IsaacLab/work/hvjb-header-retention-v01-20260921/evidence/frames/assembly_191.000s.png": "00900f594df20dc5af708fee06e5e664af44fa9545332510c3bf54ac490706f5",
+    "/home/rlrk/IsaacLab/work/hvjb-header-retention-v01-20260921/evidence/frames/assembly_191.500s.png": "bf9020f60aed59376fe54e69368f10554fd82987de001c217853ecdb8e5a4fb6",
+    "/home/rlrk/IsaacLab/work/hvjb-header-retention-v01-20260921/evidence/frames/assembly_192.000s.png": "af67d6c5ca095f7c3edd2db6c9661f94b0159e63e2ed43af3fc5ffebadfa8166"
+  },
+  "new_geometry_or_motion": false,
+  "new_video": false,
+  "new_collision_measurement": false,
+  "physical_acceptance_verdict": null
+}

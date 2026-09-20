@@ -1,0 +1,39 @@
+{
+  "observed_at": "2026-09-21T04:33:42.132820+09:00",
+  "target": "/home/rlrk/Downloads/HVJB_内側ハウジング把持案_v01_20260921",
+  "files": [
+    {
+      "file": "README.md",
+      "bytes": 3263,
+      "sha256": "c449ef36032dbe97c2a9af15b233201d89908c11507a7453eeea9056a9f7e35b"
+    },
+    {
+      "file": "inner_grasp_review.json",
+      "bytes": 22693,
+      "sha256": "fb1b09a5638486291450075c86afb0b97d2163166126ec7f7b7ce05d1aab0075"
+    },
+    {
+      "file": "pages/page-1.png",
+      "bytes": 191473,
+      "sha256": "0ea6fb2cf749206562f7a16fddfc95e94f437f9d0f9bdb5c4c92c1aa74247f38"
+    },
+    {
+      "file": "pages/page-2.png",
+      "bytes": 185500,
+      "sha256": "3bf54d5f28bd3e3faf92737f21d927d086f7be1fe961a1050ed31645b0351933"
+    },
+    {
+      "file": "pdf/内側ハウジングの把持候補と指の退避_v01_20260921.pdf",
+      "bytes": 221043,
+      "sha256": "35243d448de1b252f4963f548765c2b9f7a4acc0d28e934b8523d94d9d104a9b"
+    }
+  ],
+  "total_bytes": 623972,
+  "visual_qa": {
+    "page_count": 2,
+    "reviewed_final_pngs": true,
+    "layout_issues_observed": []
+  },
+  "source_pins_verified": 7,
+  "physical_acceptance_verdict": null
+}

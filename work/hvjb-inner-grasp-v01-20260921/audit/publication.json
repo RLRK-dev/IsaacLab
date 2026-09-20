@@ -1,0 +1,27 @@
+{
+  "regenerated_pages": [
+    {
+      "page": 1,
+      "pixel_identical": true,
+      "size": [
+        1800,
+        1273
+      ]
+    },
+    {
+      "page": 2,
+      "pixel_identical": true,
+      "size": [
+        1800,
+        1273
+      ]
+    }
+  ],
+  "json_changed_fields": [
+    "created_at",
+    "source_sha256"
+  ],
+  "archived_delivery_hashes_match": true,
+  "original_generator_sha256": "9661058afa37330ebca4cff585f5c477f1f09f9bbbc572209b3b6ae4124d3de0",
+  "published_generator_sha256": "cad691e32a3c531d0a2e8fea841fb6b28a0cc40e5d8c55544535f36498ceb372"
+}
