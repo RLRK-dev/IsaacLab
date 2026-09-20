@@ -32,7 +32,9 @@ own comprehensions (no saddle/table geoms, no mast geom names), so `column_gap`/
 `furniture_gap`/`path_furniture_min` behind the env switches `FURNITURE`/`ARM_PATH`, none of which this file sets.
 Nothing in this file steps physics: the copied loop calls mj_kinematics / mj_comPos / mj_forward only, the cell dump is
 read at its initial state with mj_forward only, and `mujoco.mj_step` is wrapped by a counter that the report prints
-(must read 0).
+(must read 0).  The dump is loaded by `_load_dump`: the emitter writes the two ko hands' meshes by bare basename, so
+each relative mesh is resolved against the meshdir its owning asset declares (`Lg_*` -> KO_LEFT's, `Rg_*` -> KO_MIRROR's,
+read from the committed XMLs) and the model is compiled from the rewritten text; the dump file itself is untouched.
 
 WHAT IT DECIDES.  Per target row (the L and R columns of the driver's STEP table, rows 2-18) and per side, whether
 `solve_ik` returns a converged pose under the wired test (`pe <= 0.002 m` and `re <= re_max`, tested inside the copied
@@ -943,6 +945,56 @@ def cable_at(x):
 # ==== end of the verbatim copies ====================================================================================
 
 
+_MESHDIR_RE = re.compile(r'<compiler\b[^>]*\bmeshdir="([^"]*)"')
+_MESH_RE = re.compile(r'<mesh\b[^>]*\bname="([^"]*)"[^>]*\bfile="([^"]*)"')
+
+
+def _load_dump(dump_path):
+    """Load the emitted cell (driver :446 `cell.to_xml()`) from anywhere.
+
+    The emitter writes the two ko hands' meshes by BARE basename (`pad.stl`, ...) without the `meshdir` each hand
+    asset declares, so `from_xml_path` resolves them against the dump's own directory and fails unless the STLs sit
+    beside it (pZ's leg on f5b50967f8: 'Error opening file pad.stl').  Here every relative mesh file is resolved
+    by the driver's own rule for assembling the cell: each hand is loaded with `mujoco.MjSpec.from_file(GRIP_XML if
+    tag == "L" else GRIP_XML_MIRRORED)` (driver :419 @ 84a372439c59; the two paths :38-:39) and attached under the
+    prefix `{tag}g_` (:423) -- so a hand's meshes resolve against ITS OWN asset file's directory plus that file's
+    `<compiler meshdir>` (stock ko `_ur15_2f85_koshape_actuated.xml` :2 `meshdir="assets"` @ 1a1efe0ac5; mirrored ko
+    `_ur15_2f85_koshape_actuated_mirrored.xml` :6 `meshdir="ko_mirror_meshes"` @ b7a5e39ecf), and the prefix names the
+    owner: `Lg_*` -> the stock ko (`_acc.KO_LEFT` :42 == the driver's GRIP_XML), `Rg_*` -> the mirrored ko
+    (`_acc.KO_MIRROR` :43 == GRIP_XML_MIRRORED), meshdir read from those committed XMLs at run time; the model is
+    compiled from the rewritten text.  The dump's bytes are untouched (its sha256 is of the file as found); only the in-memory text
+    gets absolute paths.  Any relative mesh that is not one of the two hands', or that does not exist where its
+    owner says, is an InstrumentStop (never a guess)."""
+    text = dump_path.read_text()
+    owners = {}
+    for prefix, xml in (("Lg_", _acc.KO_LEFT), ("Rg_", _acc.KO_MIRROR)):
+        xml = Path(xml)
+        mm = _MESHDIR_RE.search(xml.read_text())
+        owners[prefix] = (xml.parent / mm.group(1)).resolve() if mm else xml.parent.resolve()
+    resolved = {}
+
+    def _fix(mo):
+        name, f = mo.group(1), mo.group(2)
+        if "/" in f:
+            return mo.group(0)
+        owner = next((p for p in owners if name.startswith(p)), None)
+        if owner is None:
+            raise InstrumentStop(f"dump mesh {name!r} file={f!r} is relative and belongs to neither hand ({list(owners)})")
+        p = owners[owner] / f
+        if not p.is_file():
+            raise InstrumentStop(f"dump mesh {name!r}: {p} does not exist ({owner} meshdir from the committed asset)")
+        resolved[name] = str(p)
+        return mo.group(0).replace(f'file="{f}"', f'file="{p}"')
+
+    text = _MESH_RE.sub(_fix, text)
+    try:
+        md = mujoco.MjModel.from_xml_string(text)
+    except Exception as e:  # noqa: BLE001
+        raise InstrumentStop(f"cell dump unloadable after mesh resolution: {dump_path}: {e}") from e
+    return md, {"mesh_owner_dirs": {k: str(v) for k, v in owners.items()}, "relative_meshes_resolved": len(resolved),
+                "resolved": resolved}
+
+
 class InstrumentStop(RuntimeError):
     """The harness cannot calibrate its own targets (section 17.7): reported as 「instrument calibration stop」."""
 
@@ -964,10 +1016,7 @@ def _grasp_targets(dump_path):
     if not dump_path.is_file():
         raise InstrumentStop(f"cell dump absent: {dump_path} (pass --dump; the driver writes it at import, :446)")
     dump_sha = hashlib.sha256(dump_path.read_bytes()).hexdigest()
-    try:
-        md = mujoco.MjModel.from_xml_path(str(dump_path))
-    except Exception as e:  # noqa: BLE001
-        raise InstrumentStop(f"cell dump unloadable: {dump_path}: {e}") from e
+    md, load_info = _load_dump(dump_path)
     dd = mujoco.MjData(md)
     mujoco.mj_forward(md, dd)
     m, d = md, dd
@@ -983,7 +1032,7 @@ def _grasp_targets(dump_path):
            "WORK_ROW_DY": float(_spec.WORK_ROW_DY), "WORK_ROW_DY_env_set": "WORK_ROW_DY" in os.environ,
            "REST_Y": float(REST_Y), "z0_REST_TOP_plus_CABLE_R": float(z0), "x0": float(x0),
            "CABLE_SEG": float(CABLE_SEG), "CABLE_N": int(CABLE_N),
-           "dump": str(dump_path), "dump_sha256": dump_sha,
+           "dump": str(dump_path), "dump_sha256": dump_sha, "dump_load": load_info,
            "path_b1_driver_cable_at_on_dump": {t: {"link": f"cab{i}", "xyz": [float(v) for v in c]} for t, (c, i) in measured.items()},
            "path_b2_closed_form": {t: {"link": f"cab{i}", "xyz": [float(v) for v in c]} for t, (c, i) in closed.items()},
            "reported_settled_U0": U0_SETTLED}
