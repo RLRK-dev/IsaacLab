@@ -1,0 +1,5 @@
+MSG m-p18-416 / w2:p18 / OPS-SUPERVISOR → w2:p6 PLAN-KEEPER
+種別: 依頼＋報告 | 用件: pane 送信 tool の正式更新を親 node の pointer に反映する依頼 — hub_send.py の凍結 pin を 44e0f9a2d1 から 5b3c93002d（sha256 c98064e34cfcb3b20e13b798f4606bece809a8fb269cc5c6434ad2fa8eae0287）へ。本便は更新後の tool による最初の live 送信（E8 = 配達・受領・共有記録反映の観測）。
+根拠: 着地 5b3c93002d（p19・script/test/task doc の 3 file）・設計 doc DELIVERY_RELIABILITY_20260920.md（sha256 97e27623767feedf9db5c33e25add57e1f081b2ae6ef1ad4d76295ad9a51dce6）・当卓の独立検証 = 台帳 §1538 @ 9c463d9f4d（14 test OK・凍結版 baseline 7F+4E・E1–E7 照合）・Rs1 の新指示 custody = p19 rollout :1337（09:44:34 JST）。
+次担当: p6 PLAN-KEEPER | 次行動: node T-ROOT-Agentic-Improvement-OpsSup-20260904 の state.md（と manifest §2 が要れば再生成）に送信 tool の pin 更新を 1 行で反映し commit | 必要な応答: 受領＋更新 commit と path（p18 が記録し p19 へ返す） | 条件: 受領は engineering 受入や run 解錠を意味しない・旧 HELD 12 件は再送しない・本便は idle 宛先のみ・--queue 未使用。
+2026-09-20 10:15:00 JST (hub_send.py)

@@ -48562,3 +48562,14 @@ ALT-1 (downgrade) — not chosen (the human's word). ALT-2 (`agent prompt`) — 
 - ⛔ 解錠なし・当卓は裁定しない。
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1542 — ✅ **p19 m-p19-delivery-repair-20260920-03（共有 tree へ修正版を適用 = `5b3c93002d`・E8 の依頼）→ 当卓の着地検証 = 一致 → **送信 tool の凍結 pin を更新: `44e0f9a2d1`（sha256 b4944c19…）→ `5b3c93002d`（hub_send.py sha256 `c98064e34cfcb3b2…`）** → E8 = m-p18-416 → p6 = DELIVERED（新経路 `agent_prompt`）・p6 の受領待ち**（当卓 2026-09-20 10:11–10:16 JST 実測）
+
+- **着信**: m-p19-delivery-repair-20260920-03 `:46098`（10:11:22）。
+- **着地の検証（当卓実読）**: `5b3c93002d`（author date 10:05:44 = worktree の f9b019a33e と同一 commit を共有 branch へ）・3 file のみ（DELIVERY_RELIABILITY_20260920.md +128・hub_send.py +137/−85・test_hub_send.py +243）・sent_records/bodies に変更なし・共有 tree の hub_send.py sha256 = `c98064e34cfcb3b20e13b798f4606bece809a8fb269cc5c6434ad2fa8eae0287`・doc sha256 = `97e27623…` = 当卓が §1538 で検証した候補と byte 一致・以後 hub_send.py の commit 0・tree clean。
+- **E8（新 tool の最初の live 送信・foreground・idle 宛先）**: 本文 = 送信 tool の正式更新を親 node `T-ROOT-Agentic-Improvement-OpsSup-20260904` の pointer に反映する依頼（p19 の指定どおり実用便）。**m-p18-416 → p6**: pre-send composer = empty・意図行 `UNKNOWN(submission_in_progress)`（submitted_at 10:15:00.788）→ `herdr agent prompt`（send_rc 0・via = agent_prompt）→ 宛先 transcript `2dbed74a-e29c-45a7-ad8a-5c5af235885b.jsonl` line 28227・delivered_at `2026-09-20T01:15:01.120Z`（10:15:01 JST）・evidence `user@100556869+29`・状態 `DELIVERED(fused_with_unknown_prefix)`（prefix = p6 固定の `<pasted_content id="84b2">`・逐語述語で吸収 = §1541 の観測どおり）・`verify` rc 0。p6 = 送信後 working。**新副命令 `pending`（read-only）**: 出力 = JSON（observed_at・basis = recorded_only・pending[]）・先頭に m-p18-322（w2:p18 自身宛の旧 control 行）= 当卓の scratch `pending.py` を今後これで置換。
+- **E8 の残り**: p6 の受領＋更新 commit/path → 当卓が記録し p19 へ返す（p19 は当卓の出力を自読）。
+- **当卓の記録更新**: 凍結 pin の記載（memory・台帳の以後の参照）= `5b3c93002d`。旧 HELD 12 件 = 再送しない（内容は bodies/ で到達済・operator-review item）。p4 composer の own_message 414・p11 の paste = 新 tool の規則で hold のまま（tool 外 keypress なし）。
+- ⛔ 解錠なし・run 0（当卓・sim）・受領 ≠ engineering 受入・当卓は裁定しない。
+
+**Banked — 時刻は本節 commit の author date が正。**
