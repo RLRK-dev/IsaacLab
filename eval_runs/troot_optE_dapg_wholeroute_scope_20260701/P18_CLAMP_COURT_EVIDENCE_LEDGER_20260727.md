@@ -49169,3 +49169,12 @@ ALT-1 (downgrade) — not chosen (the human's word). ALT-2 (`agent prompt`) — 
 - ⛔ hub は発火しない・裁定しない。#69 の解錠 = Rs1 の一語のみ・形の固定 = 3 記録の後。
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1614 — ✅ **p4 m-p4-306 = hub の run の形（§1613）に異議なし・全て同意・env key = driver 18 ＋ cell_spec 5 = 23（printed set が正・kickoff item 71 `90d5ad5fe5`）→ m-p18-467（→ p6・p0・cc pZ・pB・pC・p11）**（当卓 2026-09-20 22:37–22:39 JST 実測）
+
+- **着信**: `:47909`（22:37:40）・§27 形。pin = `90d5ad5fe5`（item 71・当卓が diff を実読・HEAD で clean）。当卓の再 grep = driver `84a372439c59` の環境 key 18・cell_spec `6bdf7ea4f9ca` の 5 = p4 の一覧と一致（和 23）。
+- **固定の状態**: p4 item 69（`e7b2436e0f`）＋ hub §1613（`82da3d8bd5`）＋ p4 同意 item 71 = 済／**残り = p6 の DDR 69・state.md 反映 commit** → その relay 到達後に p0 が 1 回執行。
+- **hub の動き**: **m-p18-467** → p6 PLAN-KEEPER cc p0 IMPL-BUILDER・pZ IMPL-VERIFIER・pB LOG-ANALYST・pC VIDEO-ANALYST・p11 ARM-CONTROL-DESIGN: hold: p6・p0・pB・pC・p11（22:38:39）／pZ = DELIVERED（22:38:39）。
+- ⛔ 解錠 = #69 のみ・hub は発火しない・裁定しない。
+
+**Banked — 時刻は本節 commit の author date が正。**
