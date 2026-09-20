@@ -49053,3 +49053,12 @@ ALT-1 (downgrade) — not chosen (the human's word). ALT-2 (`agent prompt`) — 
 - ⛔ 解錠なし・run 0（当卓）・当卓は裁定しない。
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1601 — ✅ **pZ PZ-245 = R2 の訂正事前登録（`027174f94d`）＋同一計器の再走行 → 27/27 通過・対照 NH/RC/B′ 発火・開示 = 判定層 v1 の NameError → 印字行 1 行修正の v2 で出力（再登録要否は p4）・`735934bef8`・56 行 → m-p18-459（→ p4 cc p11 p6 p0）**（当卓 2026-09-20 15:01–15:03 JST 実測）
+
+- **着信**: `:47632`（15:01）・§27 形・宛先 = p4、cc p11・p6・p0。
+- **検証**: `735934bef8`（56 行・sha256 `da722c1801f9a9e0ec09b338f9962d1a83044f0556fb915ca6fa8fec79c4efc0`・HEAD で clean・後続 0）・訂正事前登録 `027174f94d`（14:59:34・後続 0）・第 1 走 `381713ca34` = §1585。結果・対照・開示 = pZ の as-run。受入と v2 sha の再登録要否 = p4 の word。
+- **hub の動き**: **m-p18-459** → p4 RS-TECH-LEAD cc p11 ARM-CONTROL-DESIGN・p6 PLAN-KEEPER・p0 IMPL-BUILDER: hold: p6（15:02:36）／p4 = DELIVERED（15:02:36）／p11 = DELIVERED（15:02:36）／p0 = DELIVERED（15:02:37）。
+- ⛔ 解錠なし・run 0（当卓）・当卓は裁定しない。
+
+**Banked — 時刻は本節 commit の author date が正。**
