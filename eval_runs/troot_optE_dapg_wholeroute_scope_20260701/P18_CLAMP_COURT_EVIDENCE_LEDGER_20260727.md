@@ -48543,3 +48543,14 @@ ALT-1 (downgrade) — not chosen (the human's word). ALT-2 (`agent prompt`) — 
 - ⛔ 解錠なし・run 0（当卓）・当卓は裁定しない。
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1540 — ⚠ **観測: 415 → p4 = HELD(composer_holds_own_message id=m-p18-414)（10:10:22）= p4 の composer に当卓の 414 本文が未送信のまま残っている ⇒ 「死んだ leg」の少なくとも一部は paste 済み・Enter 未押下で宛先 composer に滞留し、次に成功した配達に折り畳み貼付（`<pasted_content id=…>`）として融合して届いた可能性（推測・当卓は宛先 transcript の貼付内容を読んでいない）／p19 の候補の E8 に対する前提条件として報告**（当卓 2026-09-20 10:10–10:13 JST 実測）
+
+- **事実**: 414（照合結果 → p4）の send 行は 10:00:15 に HELD(foreign_text_in_composer)・via=none・pre-send kind=ghost。10:10:22 の 415 送信で tool の pre-send 読みが p4 の composer を `own_message`（head = MSG m-p18-414）と分類 ⇒ 414 の本文は paste 済み・Enter 未押下で残存。凍結 tool の手順（paste → 描画確認 → Enter）では、paste 後の読みが候補文/折り畳みを「他文」と読むと Enter を押さず本文が composer に残る（tool doc :41 の記述と一致）。
+- **読み取り専用の composer 探査（10:1x・dry-run）**: ／RS-TECH-LEAD = w2:p4 RS-TECH-LEAD: HELD(composer_holds_own_message id=m-p18-414) status=idle composer=own_message ／IMPL-BUILDER = ／IMPL-VERIFIER = ／ARM-CONTROL-DESIGN = w2:p11 ARM-CONTROL-DESIGN: HELD(paste_in_composer) status=idle composer=paste ／PLAN-KEEPER = 。
+- **本日の配達の貼付 prefix**: 配達 record の 29 byte prefix `<pasted_content id=…>` は pane ごとに固定 id（p6 = 84b2・p4 = 3f0e・p0 = 8453・p11 = 58fa）。推測: 折り畳まれた貼付が composer に常駐し、次の成功送信で本文と一緒に submit された（宛先の Claude Code は貼付内容を transcript に tag で記録し tool は本文の逐語一致で DELIVERED と判定）。⇒ 「死んだ leg」の内容は融合して届いていた可能性がある（各卓が hold 中の便を「受領」と書いた事実と整合）— 断定しない。
+- **p19 への前提条件（E8 の前）**: 着地後の最初の live 送信の前に、各宛先 composer に滞留する当卓の own_message（少なくとも p4 = 414）の扱いを決める — (a) 宛先で Enter を押して submit（当卓は tool 外で key を押さない・p19 の候補にその経路があるか）(b) 候補が `own_message` を検出したときの動作（E2 の「real draft」と区別されるか・submit するか hold するか）を明記。E8 の p6 宛便が p6 の常駐貼付（84b2）と融合する可能性も同様。
+- **当卓の処置**: tool 外の key 操作はしない（規則）。415 は held 行（never_submitted）として候補着地後の完了対象。§1518 の停止は継続。
+- ⛔ 解錠なし・run 0（当卓）・当卓は裁定しない。
+
+**Banked — 時刻は本節 commit の author date が正。**
