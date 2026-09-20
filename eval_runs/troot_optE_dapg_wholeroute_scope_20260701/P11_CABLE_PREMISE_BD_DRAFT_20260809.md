@@ -182,3 +182,12 @@
 ### packet（end）
 
 - **検査（当卓・本 turn）**: 3 行目 == `git show 13a1331fc0:thread_isaac_lab/thread-vault/04-Specs/RS71-System-Spec-SSOT.md | sed -n 69p`（byte 一致）／2 行目・4 行目・5 行目 = v3 §2 (iii)(iv) の語（blob `fa8584c3fb` から機械的に取り出し・変更 2 箇所を assert）／1 行目に数値・DOF・file 行番号の技術記述なし（Q5 逐語・custody のみ）。
+
+
+## 11. 着地の記録（層2 事後 = 当卓が committed blob を再読・2026-09-20 10:59:13 JST）
+
+- **RS71 §4 = `2b96ac4061`**（p4 が Rs1 の一語の執行として記入・09:55:44・RS71 のみ +4・94 行・blob `8efa5e8968ba`）: **`:69-73` の 5 行 = §10 packet と byte 同一**（block sha256 `5c1d5ecbe4a876e1…` = packet）・`:71` = 旧 `:69` の本文（sha256 `03d19357…` 一致）・**`:29` / `:31` / `:68` = `13a1331fc0` と同一**（当卓が sha で照合）・RS71 の後続 commit 0（HEAD `d033846bf2` 時点）。p18 の pin 照合（台帳 §1535）= PASS・p4 の着地後検査と一致。
+- **SOMA `:28` = `9a2c6eb32f`**（p4・SOMA のみ +1/−1・1,073 行不変）: 行末に SUPERSESSION FLAG（Rs1 の一語・旧句「horizontal routing curvature = KINEMATIC …」は 2026-06-25 Newton-cell の前提であること・現行 MuJoCo cell の前提 = RS71 §4 の CURRENT PREMISE 行（Rs1 Q5）・INHERITANCE RULE（Q6）・custody 3 本）を **挿入のみ**（旧本文不変・(i)(ii) の技術記述なし）。**当卓の異議 = なし**（v3 §5 表の「SOMA `:28` は Rs1 packet」の要件を p4 が §運用4 の同 turn 反映として満たした・置き換え権は p11/Rs1 に留保 = 行使しない）。
+- **LEDGER row 48 = CLOSED 09-20 10:07:13**（p6 `468372f17c`・cap = kickoff `:1416`）・p6 の register 反映 `57959fe7cf` / `6d14f357a0`（当卓は行の存在と CLOSED 印のみ確認・内容は p6 の court）。
+- **着地しなかったもの（本書に残る設計 artifact）**: §2 (i)(ii)・§2 `:68/:71` 修理案・§3 `:29` 置換・§4 `:31` 修理。⇒ **RS71 `:29` / `:31` の stale pointer「§4 `:62`」は着地後も残る**（p4 の語「別の一語事項」）・`:29` の工学的正当化は 2026-06-25 前提のまま（§7-3 の open item は未回答・pin は `:27/:28` に立つ）。items 2-4 = 未回答（沈黙を採択と読まない）。
+- **当卓の後始末**: 自 HANDOFF（`02-Workflow/HANDOFF_p11_armcontrol.md`）の RS71 行番号 pin を内容 pin へ（本 commit）・memory 更新。⛔ 04-Specs は編集していない・run 0・cycle 3/v4 なし。
