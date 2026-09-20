@@ -49281,3 +49281,14 @@ ALT-1 (downgrade) — not chosen (the human's word). ALT-2 (`agent prompt`) — 
 - ⛔ 解錠 = 行 69 のみ・再走なし・hub は発火しない・裁定しない。
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1624 — ✅ **pC m-pC-2 = VERDICT_C 着地（`PC_VERDICT_C_69_RESHOOT_20260920.md` @ `ffd3c5200c`・観測のみ・PASS/FAIL なし・数値不読）→ hub B4 = 返却理由なし → m-p18-481（→ p4 cc p6）／⚠ 順序の滑り 2 回目（480 が hold 中の 479 より先に p4 へ）→ 以後は fan-out 前に READY hold を完了する pre-step を command に固定**（当卓 2026-09-20 23:22–23:25 JST 実測）
+
+- **着信**: `:48530`（23:22:38）・§27 形。pin = `ffd3c5200c`（sha256 `d95a2399a05316643f8e81fdd207dd856acff192ca2f5227225619f2797fdf50`・95 行・clean・pin 後 commit 0 = 当卓が実読一致）。file 内: 対象動画の sha `9818e050…`（§1620 の hub pin と同一）・run.log/RUN_METRICS の引用 0・PASS/FAIL 判定行 0・画素/明度の数値 = pC 自身の計器（Code C の範囲）・事前登録（23:08:53・sha256 `70e4be6c…`・動画到着 23:12:56 の前）。成果物 = `~/Downloads/pC_69_*.png`（当卓 ls で実在）。
+- **pC の観測（逐語は relay・判定は Rs1）**: ケーブルは支持柱 2 本の上に架かったまま・クリップ 2 個は空・把持/持ち上げ/押し込みの事象なし／L（橙）動きなし・R（紫）が俯瞰で約 1 cm 弱移動して静止・f65 で動作途中に終了／近接パネル 66/66 遮蔽 = 把持接触判定 NOT MEASURED／貫通の視認なし（重なり 1 箇所 = 単一視点・記録のみ）。
+- **B4（当卓が適用・裁定でない）**: pC verdict が数値（run.log・RUN_METRICS・task 結果）を読んだ形跡 = 0 ⇒ 返却理由なし。**受入 word の 3 者 = VERDICT_C 着地・pB verdict 未・Rs1 の語 未・＋ pZ 行 未。**
+- ⚠ **順序の滑り（2 回目・当卓）**: 23:22:47 の 480 fan-out が idle の p4 へ即時配達され、p4 宛 hold 中の 479（p0 force-add）・477・476 より先に届いた（§1620 で同型を記録した直後の再発）。内容の欠落なし。**処置 = 本節から、`send --to` の前に watch_pairs の各 pair を dry_ok で見て READY なら `send --id` で完了させる pre-step を command 冒頭に固定**（本節の command で実施: m-p18-479→p4（23:24:21）／m-p18-472→pC（23:24:21））。
+- **hub の動き**: **m-p18-481**（m-pC-2 逐語 ＋ B4）→ p4 RS-TECH-LEAD cc p6: hold: p4・p6（23:24:23）。
+- ⛔ 解錠 = 行 69 のみ・hub は発火しない・裁定しない。**Rs1 へ**: 目視対象は同じ file（`~/Downloads/ur15_live_69_20260920.mp4`）・pC の観測は参考・物理妥当性の判定は Rs1。
+
+**Banked — 時刻は本節 commit の author date が正。**
