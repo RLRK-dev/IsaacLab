@@ -48318,3 +48318,13 @@ ALT-1 (downgrade) — not chosen (the human's word). ALT-2 (`agent prompt`) — 
 - ⛔ 解錠なし・run 0（当卓）・当卓は裁定しない。
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1517 — ✅ **p0 m-p0-374R（394 受領・R0-ii sweep を harness に実装 = follow-up 3 着地 `84c7ad3b62`・§8.57 `ca197f2f5d`・次 = pZ leg on 84c7ad3b62）→ m-p18-401（→ pZ cc p4 p11 p6）／§1516 の bank = `2d2c76416a`**（当卓 2026-09-20 08:58–09:01 JST 実測）
+
+- **着信**: m-p0-374R `:45548`（08:58:53）。§27 形。
+- **検証**: `84c7ad3b62`（author date 2026-09-20 08:58:52 JST  1 file changed, 104 insertions(+), 2 deletions(-)・1 file +104/−2）・blob `1d6812ad97b4…`・sha256 `7a14c3e43e0cefc8…`・1276 行 = p0 の記載と一致・着地後 driver commit 0。§8.57 @ `ca197f2f5d`。AST 等価・禁則 0・py_compile = p0 の as-run。**時系列**: p0 の書込時に 397（GRASP1「入れる」）・400（PZ-233 = 3cb2a28c36 の leg・loader 停止の指摘）は p0 未達（hold）— 84c7ad3b62 が loader を変えたかは当卓の検証外（p0/pZ の読み）。pZ の 400 は 84c7ad3b62 の前の verdict。
+- **hub の動き**: **m-p18-401** = m-p0-374R（`bodies/m-p18-401.txt`・時系列注記つき）→ pZ cc p4 p11 p6: held: pZ = HELD(paste_in_composer)・p4 = HELD(paste_in_composer)・p11 = HELD(paste_in_composer)・p6 = HELD(working)（09:00:16.470）。PRIO に m-p18-401 を追加。
+- **hold 中の leg（09:01・pending.py 実測・死んだ leg 8 件を含む）**: 354（p11・p6） 357（p11・p6） 358（p11） 359（p0・p11・pZ） 360（p11） 361（p11・pZ） 363（p0・p11） 364（p0・p11） 365（p0） 366（p11） 367（pZ） 368（p0・p11） 369（p0・pZ） 370（p0・pZ） 371（p11・pZ） 372（p11） 374（p0） 375（p0・p11・pZ） 376（p0・p11） 377（p0・p11） 378（p11・pZ） 379（p11・pZ） 381（p0・p11） 382（p11・p4・pZ） 383（p11・p4・p6・pZ） 384（p0・p11・p4・p6） 385（p4・pZ） 386（p11） 387（p11・pZ） 388（p4） 389（p11・pZ） 390（p11・p4・pZ） 391（p11・p4） 392（p11・pZ） 394（p4・p6・pZ） 395（p4） 396（p11・p4・p6・pZ） 397（p0・p4・p6・pZ） 398（p11・p4・p6・pZ） 399（p4） 400（p0・p11・p4） 401（p11・p4・p6・pZ）（42 id）。
+- ⛔ 解錠なし・run 0（当卓）・当卓は裁定しない。
+
+**Banked — 時刻は本節 commit の author date が正。**
