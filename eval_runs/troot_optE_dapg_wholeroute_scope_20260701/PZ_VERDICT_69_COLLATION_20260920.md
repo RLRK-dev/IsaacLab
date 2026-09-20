@@ -106,3 +106,25 @@ Stop lines:
 
 ## Provenance
 Products by `git show` at the pinned commits (sha256 checked against p0 §8.66 / hub §1620 before any parse); pB's verdict by `git show` at `8b16ce641a`; instruments = appendices A/B of the pre-registration (shas equal). Zero tracked-content modifications by pZ other than this file. Committed under the standing custody form (m-p18-342/344), pathspec-limited, `--no-verify`, no push; hub instruction m-p18-482. Not sent to pC (v2-6).
+
+
+## Addendum 1 (2026-09-20 23:41:56 JST; re m-p18-483 / m-p18-486 / m-p18-488) — C-3 re-collated on pB's latest commit; C-5's class word re-cited to p4's ruling (item 86); one line-cite slip in pB's Addendum 1 reported, not returned
+
+HEAD at writing `e6b3fed386`; this file's prior commit `160e06ce0f`; run 0; no product modified.
+
+**A-1 · C-3 on the moving pB file (each commit judged against its own parent; prefix compared as bytes to the `8b16ce641a` blob that the table above collated):**
+
+| commit | time | blob | sha256 | lines | numstat vs parent | first 210 lines vs `8b16ce641a` |
+|---|---|---|---|---|---|---|
+| `8b16ce641a` | 23:23:23 | `15c5f1f65242` | `b8a3ab568ddf6abb…` | 210 | +210 / −0 | identical |
+| `4711c2c248` | 23:27:22 | `de0e6677f96c` | `b34edbe9a7b36b51…` | 262 | +52 / −0 | identical |
+| `e36c84a161` | 23:29:43 | `850860c4d8df` | `2fe36e586cc3137a…` | 268 | +6 / −0 | identical |
+| `ff396f98e6` | 23:37:27 | `b45f792fd068` | `09afb7f82babb8d0…` | 274 | +6 / −0 | identical |
+
+Commits touching the file after `ff396f98e6` at reading: **0**. Every step is append-only and the 210-line prefix is byte-identical, so **every number C-3 collated is unchanged at `4711c2c248` and at `ff396f98e6`** — the C-3 verdict stands with the cite moved to the latest commit.
+
+**A-2 · pB's Addendum 1 (the observation-E material) re-read against the same run.log blob `c79fdfd1d410` (sha `9fe9685aba333506…`) and `RUN_METRICS`:** its 30 bullet cites of the form `:NNN` + quoted text → **30/30 text-equal** to the cited line; `steps[0].command` (L 0.0 / 10560 of 10560 / stalled true; R 1.0 / 0 / false), `steps[0].sigma_min` (L 0.11047350128312033 / R 0.151651571628065), `steps[0].mast` (L −0.6403175818046059 mm, g12 on Lg_base vs crown), `steps[0].arm_to_arm.closest_mm` −1.1194554926176923 — all equal. **One cite slip (reported, not a return):** A1-4 (b) writes "`:369` ARM-TO-ARM −1.1 mm"; in the blob the ARM-TO-ARM line is **`:367`** (`[steps] STEP 2 ARM-TO-ARM: closest -1.1 mm (9 <-> 42)  <- TOUC…`) and `:369` is the CARRY line (`[steps] STEP 2 CARRY: L mouth[+0.394…`). The number is right, the line number is off by two in a pointer sentence; the bullet list itself does not cite `:367` at all. pB's to fix append-only if it wishes; nothing in this desk's rows depends on it.
+
+**A-3 · C-5 class word:** the count stays **1 stop / 1 tag**. The class quoted in the C-5 row (「controller の不収束」, p0 §8.66 @ `4583fa7444`) is **superseded** by p4's chain-court ruling, kickoff item 86 @ `57fa59fa47` (23:35:17): class = **「その他」**, tag text verbatim 「その他: driver の追従 gate（stall raise `:3996`）・原因 = L 腕 rest 姿勢の接触（column・R_shoulder_link）と 3 関節の力飽和・IK は solved・§11／calibration 不発・R 腕は追従」. Follow-ups read at their commits: p0 §8.66 addendum 6 @ `88dc6842aa` (insertion, existing lines untouched); pB Addendum 3 @ `ff396f98e6` (pointer); p11 §17.26 @ `48ad9c1e37` (design court: §17.4 applied as defined, no objection). This desk does not rule the class; C-5 now cites item 86 for the word. This leg's own stop-cause tag: **none**.
+
+**A-4 · Nothing else changes.** C-1, C-2, C-4, C-6 untouched; no return reason; acceptance remains p4's word after Rs1's eye.
