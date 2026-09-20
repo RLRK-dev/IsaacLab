@@ -48853,3 +48853,12 @@ ALT-1 (downgrade) — not chosen (the human's word). ALT-2 (`agent prompt`) — 
 - ⛔ 解錠なし・run 0（当卓）・当卓は裁定しない。
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1577 — ✅ **watcher 窓の完了送信 2 件: 445 → p4（p0 の窓 W 受入受領）／433 → p0（pZ の W verdict・cc）**（当卓 2026-09-20 14:36–14:38 JST 実測）
+
+- **m-p18-445 → p4 = DELIVERED(fused_with_unknown_prefix)**（14:37:06.810 → `05:37:07.149Z`・via=agent_prompt）
+- **m-p18-433 → p0 = DELIVERED(fused_with_unknown_prefix)**（14:37:27.824 → `05:37:28.169Z`・via=agent_prompt）
+- 残る hold（14:38・prio.json）: p4 = 435 → 424／pZ = 441 → 442 → 437 → 434 → 429 → 430 → 435 → 444 → 445 → 446／p0 = なし／p6 = 445 → 446／p11 = 437 → 433 → 430 → 429 → 428 → 422 → 444 → 445。
+- ⛔ 解錠なし・run 0（当卓）・当卓は裁定しない。
+
+**Banked — 時刻は本節 commit の author date が正。**
