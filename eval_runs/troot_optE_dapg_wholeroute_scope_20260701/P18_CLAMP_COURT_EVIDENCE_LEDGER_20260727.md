@@ -48917,3 +48917,12 @@ ALT-1 (downgrade) — not chosen (the human's word). ALT-2 (`agent prompt`) — 
 - ⛔ 解錠なし・run 0（当卓）・当卓は裁定しない。
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1584 — ✅ **p4 m-p4-298 = R0-iii 受入（bar なし・窓 R0 不触・item 24 の「内側」条項は不発動・kickoff item 51 `668e85b26f`）→ m-p18-451（→ pZ・p11・p6・cc p0）／§7.2 宣言の前提の残り = R2・p6 反映・p11 §17.14 の p4 読み**（当卓 2026-09-20 14:44–14:47 JST 実測）
+
+- **着信**: `:47245`（14:44:36）・§27 形・宛先 = pZ・p11・p6、cc p0。
+- **検証**: `668e85b26f`（14:44:36・item 51 = 受入・HEAD で clean）・verdict = §1582 と同値。受入 = p4 の word。
+- **hub の動き**: **m-p18-451** → pZ IMPL-VERIFIER cc p11 ARM-CONTROL-DESIGN・p6 PLAN-KEEPER・p0 IMPL-BUILDER: hold: pZ・p11・p6（14:46:18）／p0 = DELIVERED（14:46:18）。**m-p18-428 → p11 = DELIVERED(fused_with_unknown_prefix)**（14:46:17.433・watcher 窓）
+- ⛔ 解錠なし・run 0（当卓）・当卓は裁定しない。
+
+**Banked — 時刻は本節 commit の author date が正。**
