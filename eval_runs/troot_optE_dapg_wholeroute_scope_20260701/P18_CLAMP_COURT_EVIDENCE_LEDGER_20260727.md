@@ -48520,3 +48520,16 @@ ALT-1 (downgrade) — not chosen (the human's word). ALT-2 (`agent prompt`) — 
 - ⛔ 解錠なし・当卓は裁定しない。
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1538 — ✅ **p19 m-p19-delivery-repair-20260920-02（候補を `f9b019a33e` に固定・独立検証の依頼）→ 当卓の独立検証（隔離・live send 0）: pin 一致／14 test OK・凍結版 baseline は同 suite で 7 failures + 4 errors（識別性あり）／E1–E7 = 各々に対応する test の assert と code 行が在る／E8 = 着地後の live 便で確認（未）**（当卓 2026-09-20 10:06–10:10 JST 実測）
+
+- **着信**: m-p19-delivery-repair-20260920-02 `:46016`（10:06:18）。
+- **pin（当卓実読）**: worktree `/tmp/thread-hub-delivery-20260920` @ `f9b019a33e`（10:05:44「fix: Make hub delivery observable and retry-aware」）・`DELIVERY_RELIABILITY_20260920.md` sha256 `97e27623767feedf9…`（128 行）・`hub_send.py` sha256 `c98064e34cfcb3b2…` = p19 の記載と一致。共有 tree の `hub_send.py` = 凍結 `b4944c19…` のまま・共有 records 不変（test 実行後も git status 空）。
+- **test（`./isaaclab.sh -p <worktree>/…/test_hub_send.py`・subprocess は fake・実 process は AssertionError で拒否）**: 候補 = `Ran 14 tests … OK`。baseline（`HUB_SEND_UNDER_TEST=<共有の凍結 hub_send.py>`）= `FAILED (failures=7, errors=4)`（例: 旧経路は `herdr pane send-text` を呼ぶ・候補は `agent prompt`）— suite は旧版と新版を識別する。⚠ `isaaclab.sh -p` は exit code を隠す（rc 0 表示）— 判定は出力の OK/FAILED で行った。
+- **E1–E7 の照合（test 名 + code 行・当卓の読み）**: E1 = `test_ghost_suggestion_does_not_leave_a_partial_paste`（calls == [agent prompt] / DELIVERED）＋`test_successful_cli_without_transcript_is_not_delivery`（record 無 → UNKNOWN(no-record)）・code :801／E2 = `test_foreign_draft_after_initial_fanout_check_submits_nothing`（rc 2・calls []・submission_attempted False・never_submitted True）＋`test_session_replacement_submits_nothing`（HELD(destination_changed)）・code :785–795／E3 = `test_unknown_transport_failure_is_not_retryable`（UNKNOWN・submission_attempted True・never_submitted False）＋`test_nonzero_transport_result_is_retained`・code :798（intent 行を prompt 前に append）／E4 = `test_working_recipient_is_rechecked_before_submission`（rc 2・calls []）／E5 = `test_busy_cc_does_not_hold_an_idle_primary`（rc 2・1 call → w2:p6・DELIVERED）・code :708／E6 = `test_sender_lock_contention_submits_nothing`（rc 2・calls []・rows []）・code :1069–1081（LOCK_EX|LOCK_NB・send/resend かつ非 READONLY のみ ⇒ read-only dry-run は lock を取らない = 当卓の懸念に合致）／E7 = `test_pending_distinguishes_never_sent_and_uncertain_without_writes`（rows []・calls []）＋`test_legacy_post_paste_hold_is_never_completed_automatically`（旧 HELD via none → never_submitted False）＋`test_dry_run_does_not_submit_or_read_new_input`・code :935–・:984/:987 READONLY guard。**= 7/7 に test と code の対応あり**（当卓は test を実行し code を読んだ・live 挙動は未観測）。
+- **未観測（着地後の E8 で）**: `agent prompt` の実 pane 挙動（idle のみで開始・working --queue は別扱い）・`--source visible` の composer 被覆（p19 の 10:01:24 read-only 観測のみ）・29 byte 貼付 prefix（transcript の exact-substring 述語で吸収 = 本日の配達で同述語が prefix つき record を DELIVERED と判定済 ⇒ 妥当と読む）。
+- **当卓の記録 script**: 候補の新 state（`UNKNOWN(submission_in_progress)`・`HELD(destination_changed)`・`submission_attempted`）は当卓の scratch `pending.py`/`next_pairs.py` の前提（HELD send 行 = 終端）と食い違う ⇒ 着地後は tool の `pending` 副命令を正とし scratch script は退役（repo 変更なし）。
+- **当卓の読み（裁定なし）**: 隔離検証は E1–E7 について肯定・E8 は live で。共有 tree への適用 = p19 の行為（pathspec 限定 commit・着地 sha を当卓へ）・当卓の凍結 sha 記載（台帳/memory）は着地 commit で更新・最初の live 使用 = idle 宛先の実用便 1 通（p6 宛の次便）・旧 HELD 12 件は再送しない・`--queue` は未検証のまま使わない。
+- ⛔ 解錠なし・run 0（当卓・sim）・当卓は裁定しない。
+
+**Banked — 時刻は本節 commit の author date が正。**
