@@ -1,0 +1,16 @@
+audited_files=3
+errors=0 warnings=0
+╔══════════════════════════════════════╗
+║  validate.sh — SSOT & Safety Check   ║
+╚══════════════════════════════════════╝
+  (.validateignore: 120 patterns excluded)
+
+=== Layer 7: Planning-surface consistency (M3) ===
+  [WARN] C1 manifest stale: last_updated 2026-09-05 lags log.md newest (2026-09-18) by 13d (>2d)
+  [WARN] C1 map stale: last_updated 2026-07-18 lags log.md newest (2026-09-18) by 62d (>2d)
+  [WARN] C1 LEDGER stale: last_updated 2026-07-27 lags log.md newest (2026-09-18) by 53d (>2d)
+  [INFO] C2 node-id leg = FAIL (membership = snapshot ∪ §2 GEN; role labels in nest_role_labels.txt recognized as a category 2026-07-21, DDR#34 fix — a T-ROOT-<role> is a role ref, not a node); SOMA node-id = permanent WARN; sha-token leg = deferred WARN/unwired (design-specified anchor extractor UNevaluated — owner %12, see design doc)
+  [PASS] C3 manifest §2 GEN region in sync with generator
+
+═══════════════════════════════════════
+RESULT: PASS with 3 warning(s)

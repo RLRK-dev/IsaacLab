@@ -1,0 +1,2467 @@
+{
+  "observed_at": "2026-09-21T02:11:04.314+09:00",
+  "basis": "recorded_only",
+  "pending": [
+    {
+      "id": "m-p18-322",
+      "pane": "w2:p18",
+      "role": "",
+      "state": "HELD(unsent)",
+      "never_submitted": true,
+      "next_action": "complete_if_current",
+      "evidence": "",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-322.txt"
+    },
+    {
+      "id": "m-p18-354",
+      "pane": "w2:p11",
+      "role": "ARM-CONTROL-DESIGN",
+      "state": "HELD(working)",
+      "never_submitted": true,
+      "next_action": "complete_if_current",
+      "evidence": "",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-354.txt"
+    },
+    {
+      "id": "m-p18-354",
+      "pane": "w2:p6",
+      "role": "PLAN-KEEPER",
+      "state": "HELD(working)",
+      "never_submitted": true,
+      "next_action": "complete_if_current",
+      "evidence": "",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-354.txt"
+    },
+    {
+      "id": "m-p18-357",
+      "pane": "w2:p11",
+      "role": "ARM-CONTROL-DESIGN",
+      "state": "HELD(working)",
+      "never_submitted": true,
+      "next_action": "complete_if_current",
+      "evidence": "",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-357.txt"
+    },
+    {
+      "id": "m-p18-357",
+      "pane": "w2:p6",
+      "role": "PLAN-KEEPER",
+      "state": "HELD(working)",
+      "never_submitted": true,
+      "next_action": "complete_if_current",
+      "evidence": "",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-357.txt"
+    },
+    {
+      "id": "m-p18-358",
+      "pane": "w2:p11",
+      "role": "ARM-CONTROL-DESIGN",
+      "state": "HELD(working)",
+      "never_submitted": true,
+      "next_action": "complete_if_current",
+      "evidence": "",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-358.txt"
+    },
+    {
+      "id": "m-p18-359",
+      "pane": "w2:p0",
+      "role": "IMPL-BUILDER",
+      "state": "HELD(working)",
+      "never_submitted": true,
+      "next_action": "complete_if_current",
+      "evidence": "",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-359.txt"
+    },
+    {
+      "id": "m-p18-359",
+      "pane": "w2:p11",
+      "role": "ARM-CONTROL-DESIGN",
+      "state": "HELD(working)",
+      "never_submitted": true,
+      "next_action": "complete_if_current",
+      "evidence": "",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-359.txt"
+    },
+    {
+      "id": "m-p18-359",
+      "pane": "w2:pZ",
+      "role": "IMPL-VERIFIER",
+      "state": "HELD(working)",
+      "never_submitted": true,
+      "next_action": "complete_if_current",
+      "evidence": "",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-359.txt"
+    },
+    {
+      "id": "m-p18-360",
+      "pane": "w2:p11",
+      "role": "ARM-CONTROL-DESIGN",
+      "state": "HELD(working)",
+      "never_submitted": true,
+      "next_action": "complete_if_current",
+      "evidence": "",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-360.txt"
+    },
+    {
+      "id": "m-p18-361",
+      "pane": "w2:p11",
+      "role": "ARM-CONTROL-DESIGN",
+      "state": "HELD(working)",
+      "never_submitted": true,
+      "next_action": "complete_if_current",
+      "evidence": "",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-361.txt"
+    },
+    {
+      "id": "m-p18-361",
+      "pane": "w2:pZ",
+      "role": "IMPL-VERIFIER",
+      "state": "HELD(working)",
+      "never_submitted": true,
+      "next_action": "complete_if_current",
+      "evidence": "",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-361.txt"
+    },
+    {
+      "id": "m-p18-363",
+      "pane": "w2:p0",
+      "role": "IMPL-BUILDER",
+      "state": "HELD(working)",
+      "never_submitted": true,
+      "next_action": "complete_if_current",
+      "evidence": "",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-363.txt"
+    },
+    {
+      "id": "m-p18-363",
+      "pane": "w2:p11",
+      "role": "ARM-CONTROL-DESIGN",
+      "state": "HELD(working)",
+      "never_submitted": true,
+      "next_action": "complete_if_current",
+      "evidence": "",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-363.txt"
+    },
+    {
+      "id": "m-p18-364",
+      "pane": "w2:p0",
+      "role": "IMPL-BUILDER",
+      "state": "HELD(working)",
+      "never_submitted": true,
+      "next_action": "complete_if_current",
+      "evidence": "",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-364.txt"
+    },
+    {
+      "id": "m-p18-364",
+      "pane": "w2:p11",
+      "role": "ARM-CONTROL-DESIGN",
+      "state": "HELD(working)",
+      "never_submitted": true,
+      "next_action": "complete_if_current",
+      "evidence": "",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-364.txt"
+    },
+    {
+      "id": "m-p18-365",
+      "pane": "w2:p0",
+      "role": "IMPL-BUILDER",
+      "state": "HELD(working)",
+      "never_submitted": true,
+      "next_action": "complete_if_current",
+      "evidence": "",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-365.txt"
+    },
+    {
+      "id": "m-p18-366",
+      "pane": "w2:p11",
+      "role": "ARM-CONTROL-DESIGN",
+      "state": "HELD(working)",
+      "never_submitted": true,
+      "next_action": "complete_if_current",
+      "evidence": "",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-366.txt"
+    },
+    {
+      "id": "m-p18-367",
+      "pane": "w2:pZ",
+      "role": "IMPL-VERIFIER",
+      "state": "HELD(working)",
+      "never_submitted": true,
+      "next_action": "complete_if_current",
+      "evidence": "",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-367.txt"
+    },
+    {
+      "id": "m-p18-368",
+      "pane": "w2:p0",
+      "role": "IMPL-BUILDER",
+      "state": "HELD(working)",
+      "never_submitted": true,
+      "next_action": "complete_if_current",
+      "evidence": "",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-368.txt"
+    },
+    {
+      "id": "m-p18-368",
+      "pane": "w2:p11",
+      "role": "ARM-CONTROL-DESIGN",
+      "state": "HELD(working)",
+      "never_submitted": true,
+      "next_action": "complete_if_current",
+      "evidence": "",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-368.txt"
+    },
+    {
+      "id": "m-p18-369",
+      "pane": "w2:p0",
+      "role": "IMPL-BUILDER",
+      "state": "HELD(working)",
+      "never_submitted": true,
+      "next_action": "complete_if_current",
+      "evidence": "",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-369.txt"
+    },
+    {
+      "id": "m-p18-369",
+      "pane": "w2:pZ",
+      "role": "IMPL-VERIFIER",
+      "state": "HELD(working)",
+      "never_submitted": true,
+      "next_action": "complete_if_current",
+      "evidence": "",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-369.txt"
+    },
+    {
+      "id": "m-p18-370",
+      "pane": "w2:p0",
+      "role": "IMPL-BUILDER",
+      "state": "HELD(working)",
+      "never_submitted": true,
+      "next_action": "complete_if_current",
+      "evidence": "",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-370.txt"
+    },
+    {
+      "id": "m-p18-370",
+      "pane": "w2:pZ",
+      "role": "IMPL-VERIFIER",
+      "state": "HELD(working)",
+      "never_submitted": true,
+      "next_action": "complete_if_current",
+      "evidence": "",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-370.txt"
+    },
+    {
+      "id": "m-p18-371",
+      "pane": "w2:p11",
+      "role": "ARM-CONTROL-DESIGN",
+      "state": "HELD(working)",
+      "never_submitted": true,
+      "next_action": "complete_if_current",
+      "evidence": "",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-371.txt"
+    },
+    {
+      "id": "m-p18-371",
+      "pane": "w2:pZ",
+      "role": "IMPL-VERIFIER",
+      "state": "HELD(working)",
+      "never_submitted": true,
+      "next_action": "complete_if_current",
+      "evidence": "",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-371.txt"
+    },
+    {
+      "id": "m-p18-372",
+      "pane": "w2:p11",
+      "role": "ARM-CONTROL-DESIGN",
+      "state": "HELD(working)",
+      "never_submitted": true,
+      "next_action": "complete_if_current",
+      "evidence": "",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-372.txt"
+    },
+    {
+      "id": "m-p18-374",
+      "pane": "w2:p0",
+      "role": "IMPL-BUILDER",
+      "state": "HELD(working)",
+      "never_submitted": true,
+      "next_action": "complete_if_current",
+      "evidence": "",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-374.txt"
+    },
+    {
+      "id": "m-p18-375",
+      "pane": "w2:p11",
+      "role": "ARM-CONTROL-DESIGN",
+      "state": "HELD(working)",
+      "never_submitted": true,
+      "next_action": "complete_if_current",
+      "evidence": "",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-375.txt"
+    },
+    {
+      "id": "m-p18-375",
+      "pane": "w2:pZ",
+      "role": "IMPL-VERIFIER",
+      "state": "HELD(working)",
+      "never_submitted": true,
+      "next_action": "complete_if_current",
+      "evidence": "",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-375.txt"
+    },
+    {
+      "id": "m-p18-376",
+      "pane": "w2:p0",
+      "role": "IMPL-BUILDER",
+      "state": "HELD(working)",
+      "never_submitted": true,
+      "next_action": "complete_if_current",
+      "evidence": "",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-376.txt"
+    },
+    {
+      "id": "m-p18-376",
+      "pane": "w2:p11",
+      "role": "ARM-CONTROL-DESIGN",
+      "state": "HELD(working)",
+      "never_submitted": true,
+      "next_action": "complete_if_current",
+      "evidence": "",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-376.txt"
+    },
+    {
+      "id": "m-p18-377",
+      "pane": "w2:p0",
+      "role": "IMPL-BUILDER",
+      "state": "HELD(unsent)",
+      "never_submitted": true,
+      "next_action": "complete_if_current",
+      "evidence": "",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-377.txt"
+    },
+    {
+      "id": "m-p18-377",
+      "pane": "w2:p11",
+      "role": "ARM-CONTROL-DESIGN",
+      "state": "HELD(foreign_text_in_composer)",
+      "never_submitted": false,
+      "next_action": "verify_or_operator_review",
+      "evidence": "",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-377.txt"
+    },
+    {
+      "id": "m-p18-378",
+      "pane": "w2:p11",
+      "role": "ARM-CONTROL-DESIGN",
+      "state": "HELD(working)",
+      "never_submitted": true,
+      "next_action": "complete_if_current",
+      "evidence": "",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-378.txt"
+    },
+    {
+      "id": "m-p18-378",
+      "pane": "w2:pZ",
+      "role": "IMPL-VERIFIER",
+      "state": "HELD(working)",
+      "never_submitted": true,
+      "next_action": "complete_if_current",
+      "evidence": "",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-378.txt"
+    },
+    {
+      "id": "m-p18-379",
+      "pane": "w2:p11",
+      "role": "ARM-CONTROL-DESIGN",
+      "state": "HELD(working)",
+      "never_submitted": true,
+      "next_action": "complete_if_current",
+      "evidence": "",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-379.txt"
+    },
+    {
+      "id": "m-p18-379",
+      "pane": "w2:pZ",
+      "role": "IMPL-VERIFIER",
+      "state": "HELD(foreign_text_in_composer)",
+      "never_submitted": false,
+      "next_action": "verify_or_operator_review",
+      "evidence": "",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-379.txt"
+    },
+    {
+      "id": "m-p18-381",
+      "pane": "w2:p0",
+      "role": "IMPL-BUILDER",
+      "state": "HELD(foreign_text_in_composer)",
+      "never_submitted": false,
+      "next_action": "verify_or_operator_review",
+      "evidence": "",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-381.txt"
+    },
+    {
+      "id": "m-p18-381",
+      "pane": "w2:p11",
+      "role": "ARM-CONTROL-DESIGN",
+      "state": "HELD(working)",
+      "never_submitted": true,
+      "next_action": "complete_if_current",
+      "evidence": "",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-381.txt"
+    },
+    {
+      "id": "m-p18-382",
+      "pane": "w2:p11",
+      "role": "ARM-CONTROL-DESIGN",
+      "state": "HELD(working)",
+      "never_submitted": true,
+      "next_action": "complete_if_current",
+      "evidence": "",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-382.txt"
+    },
+    {
+      "id": "m-p18-382",
+      "pane": "w2:p4",
+      "role": "RS-TECH-LEAD",
+      "state": "HELD(working)",
+      "never_submitted": true,
+      "next_action": "complete_if_current",
+      "evidence": "",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-382.txt"
+    },
+    {
+      "id": "m-p18-382",
+      "pane": "w2:pZ",
+      "role": "IMPL-VERIFIER",
+      "state": "HELD(working)",
+      "never_submitted": true,
+      "next_action": "complete_if_current",
+      "evidence": "",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-382.txt"
+    },
+    {
+      "id": "m-p18-383",
+      "pane": "w2:p11",
+      "role": "ARM-CONTROL-DESIGN",
+      "state": "HELD(working)",
+      "never_submitted": true,
+      "next_action": "complete_if_current",
+      "evidence": "",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-383.txt"
+    },
+    {
+      "id": "m-p18-383",
+      "pane": "w2:p4",
+      "role": "RS-TECH-LEAD",
+      "state": "HELD(working)",
+      "never_submitted": true,
+      "next_action": "complete_if_current",
+      "evidence": "",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-383.txt"
+    },
+    {
+      "id": "m-p18-383",
+      "pane": "w2:p6",
+      "role": "PLAN-KEEPER",
+      "state": "HELD(working)",
+      "never_submitted": true,
+      "next_action": "complete_if_current",
+      "evidence": "",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-383.txt"
+    },
+    {
+      "id": "m-p18-383",
+      "pane": "w2:pZ",
+      "role": "IMPL-VERIFIER",
+      "state": "HELD(paste_in_composer)",
+      "never_submitted": true,
+      "next_action": "complete_if_current",
+      "evidence": "",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-383.txt"
+    },
+    {
+      "id": "m-p18-384",
+      "pane": "w2:p0",
+      "role": "IMPL-BUILDER",
+      "state": "HELD(unsent)",
+      "never_submitted": true,
+      "next_action": "complete_if_current",
+      "evidence": "",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-384.txt"
+    },
+    {
+      "id": "m-p18-384",
+      "pane": "w2:p11",
+      "role": "ARM-CONTROL-DESIGN",
+      "state": "HELD(working)",
+      "never_submitted": true,
+      "next_action": "complete_if_current",
+      "evidence": "",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-384.txt"
+    },
+    {
+      "id": "m-p18-384",
+      "pane": "w2:p4",
+      "role": "RS-TECH-LEAD",
+      "state": "HELD(working)",
+      "never_submitted": true,
+      "next_action": "complete_if_current",
+      "evidence": "",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-384.txt"
+    },
+    {
+      "id": "m-p18-384",
+      "pane": "w2:p6",
+      "role": "PLAN-KEEPER",
+      "state": "HELD(working)",
+      "never_submitted": true,
+      "next_action": "complete_if_current",
+      "evidence": "",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-384.txt"
+    },
+    {
+      "id": "m-p18-385",
+      "pane": "w2:p4",
+      "role": "RS-TECH-LEAD",
+      "state": "HELD(foreign_text_in_composer)",
+      "never_submitted": false,
+      "next_action": "verify_or_operator_review",
+      "evidence": "",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-385.txt"
+    },
+    {
+      "id": "m-p18-385",
+      "pane": "w2:pZ",
+      "role": "IMPL-VERIFIER",
+      "state": "HELD(paste_in_composer)",
+      "never_submitted": true,
+      "next_action": "complete_if_current",
+      "evidence": "",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-385.txt"
+    },
+    {
+      "id": "m-p18-386",
+      "pane": "w2:p11",
+      "role": "ARM-CONTROL-DESIGN",
+      "state": "HELD(foreign_text_in_composer)",
+      "never_submitted": false,
+      "next_action": "verify_or_operator_review",
+      "evidence": "",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-386.txt"
+    },
+    {
+      "id": "m-p18-387",
+      "pane": "w2:p11",
+      "role": "ARM-CONTROL-DESIGN",
+      "state": "HELD(paste_in_composer)",
+      "never_submitted": true,
+      "next_action": "complete_if_current",
+      "evidence": "",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-387.txt"
+    },
+    {
+      "id": "m-p18-387",
+      "pane": "w2:pZ",
+      "role": "IMPL-VERIFIER",
+      "state": "HELD(paste_in_composer)",
+      "never_submitted": true,
+      "next_action": "complete_if_current",
+      "evidence": "",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-387.txt"
+    },
+    {
+      "id": "m-p18-388",
+      "pane": "w2:p4",
+      "role": "RS-TECH-LEAD",
+      "state": "HELD(paste_in_composer)",
+      "never_submitted": true,
+      "next_action": "complete_if_current",
+      "evidence": "",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-388.txt"
+    },
+    {
+      "id": "m-p18-389",
+      "pane": "w2:p11",
+      "role": "ARM-CONTROL-DESIGN",
+      "state": "HELD(unsent)",
+      "never_submitted": true,
+      "next_action": "complete_if_current",
+      "evidence": "",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-389.txt"
+    },
+    {
+      "id": "m-p18-389",
+      "pane": "w2:pZ",
+      "role": "IMPL-VERIFIER",
+      "state": "HELD(working)",
+      "never_submitted": true,
+      "next_action": "complete_if_current",
+      "evidence": "",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-389.txt"
+    },
+    {
+      "id": "m-p18-390",
+      "pane": "w2:p11",
+      "role": "ARM-CONTROL-DESIGN",
+      "state": "HELD(paste_in_composer)",
+      "never_submitted": true,
+      "next_action": "complete_if_current",
+      "evidence": "",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-390.txt"
+    },
+    {
+      "id": "m-p18-390",
+      "pane": "w2:p4",
+      "role": "RS-TECH-LEAD",
+      "state": "HELD(working)",
+      "never_submitted": true,
+      "next_action": "complete_if_current",
+      "evidence": "",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-390.txt"
+    },
+    {
+      "id": "m-p18-390",
+      "pane": "w2:pZ",
+      "role": "IMPL-VERIFIER",
+      "state": "HELD(working)",
+      "never_submitted": true,
+      "next_action": "complete_if_current",
+      "evidence": "",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-390.txt"
+    },
+    {
+      "id": "m-p18-391",
+      "pane": "w2:p11",
+      "role": "ARM-CONTROL-DESIGN",
+      "state": "HELD(paste_in_composer)",
+      "never_submitted": true,
+      "next_action": "complete_if_current",
+      "evidence": "",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-391.txt"
+    },
+    {
+      "id": "m-p18-391",
+      "pane": "w2:p4",
+      "role": "RS-TECH-LEAD",
+      "state": "HELD(foreign_text_in_composer)",
+      "never_submitted": false,
+      "next_action": "verify_or_operator_review",
+      "evidence": "",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-391.txt"
+    },
+    {
+      "id": "m-p18-392",
+      "pane": "w2:p11",
+      "role": "ARM-CONTROL-DESIGN",
+      "state": "HELD(foreign_text_in_composer)",
+      "never_submitted": false,
+      "next_action": "verify_or_operator_review",
+      "evidence": "",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-392.txt"
+    },
+    {
+      "id": "m-p18-392",
+      "pane": "w2:pZ",
+      "role": "IMPL-VERIFIER",
+      "state": "HELD(working)",
+      "never_submitted": true,
+      "next_action": "complete_if_current",
+      "evidence": "",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-392.txt"
+    },
+    {
+      "id": "m-p18-394",
+      "pane": "w2:p4",
+      "role": "RS-TECH-LEAD",
+      "state": "HELD(unsent)",
+      "never_submitted": true,
+      "next_action": "complete_if_current",
+      "evidence": "",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-394.txt"
+    },
+    {
+      "id": "m-p18-394",
+      "pane": "w2:p6",
+      "role": "PLAN-KEEPER",
+      "state": "HELD(working)",
+      "never_submitted": true,
+      "next_action": "complete_if_current",
+      "evidence": "",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-394.txt"
+    },
+    {
+      "id": "m-p18-394",
+      "pane": "w2:pZ",
+      "role": "IMPL-VERIFIER",
+      "state": "HELD(foreign_text_in_composer)",
+      "never_submitted": false,
+      "next_action": "verify_or_operator_review",
+      "evidence": "",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-394.txt"
+    },
+    {
+      "id": "m-p18-395",
+      "pane": "w2:p4",
+      "role": "RS-TECH-LEAD",
+      "state": "HELD(paste_in_composer)",
+      "never_submitted": true,
+      "next_action": "complete_if_current",
+      "evidence": "",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-395.txt"
+    },
+    {
+      "id": "m-p18-396",
+      "pane": "w2:p11",
+      "role": "ARM-CONTROL-DESIGN",
+      "state": "HELD(working)",
+      "never_submitted": true,
+      "next_action": "complete_if_current",
+      "evidence": "",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-396.txt"
+    },
+    {
+      "id": "m-p18-396",
+      "pane": "w2:p4",
+      "role": "RS-TECH-LEAD",
+      "state": "HELD(paste_in_composer)",
+      "never_submitted": true,
+      "next_action": "complete_if_current",
+      "evidence": "",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-396.txt"
+    },
+    {
+      "id": "m-p18-396",
+      "pane": "w2:p6",
+      "role": "PLAN-KEEPER",
+      "state": "HELD(working)",
+      "never_submitted": true,
+      "next_action": "complete_if_current",
+      "evidence": "",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-396.txt"
+    },
+    {
+      "id": "m-p18-396",
+      "pane": "w2:pZ",
+      "role": "IMPL-VERIFIER",
+      "state": "HELD(working)",
+      "never_submitted": true,
+      "next_action": "complete_if_current",
+      "evidence": "",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-396.txt"
+    },
+    {
+      "id": "m-p18-397",
+      "pane": "w2:p0",
+      "role": "IMPL-BUILDER",
+      "state": "HELD(foreign_text_in_composer)",
+      "never_submitted": false,
+      "next_action": "verify_or_operator_review",
+      "evidence": "",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-397.txt"
+    },
+    {
+      "id": "m-p18-397",
+      "pane": "w2:p4",
+      "role": "RS-TECH-LEAD",
+      "state": "HELD(paste_in_composer)",
+      "never_submitted": true,
+      "next_action": "complete_if_current",
+      "evidence": "",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-397.txt"
+    },
+    {
+      "id": "m-p18-397",
+      "pane": "w2:p6",
+      "role": "PLAN-KEEPER",
+      "state": "HELD(unsent)",
+      "never_submitted": true,
+      "next_action": "complete_if_current",
+      "evidence": "",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-397.txt"
+    },
+    {
+      "id": "m-p18-397",
+      "pane": "w2:pZ",
+      "role": "IMPL-VERIFIER",
+      "state": "HELD(working)",
+      "never_submitted": true,
+      "next_action": "complete_if_current",
+      "evidence": "",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-397.txt"
+    },
+    {
+      "id": "m-p18-398",
+      "pane": "w2:p11",
+      "role": "ARM-CONTROL-DESIGN",
+      "state": "HELD(unsent)",
+      "never_submitted": true,
+      "next_action": "complete_if_current",
+      "evidence": "",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-398.txt"
+    },
+    {
+      "id": "m-p18-398",
+      "pane": "w2:p4",
+      "role": "RS-TECH-LEAD",
+      "state": "HELD(paste_in_composer)",
+      "never_submitted": true,
+      "next_action": "complete_if_current",
+      "evidence": "",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-398.txt"
+    },
+    {
+      "id": "m-p18-398",
+      "pane": "w2:p6",
+      "role": "PLAN-KEEPER",
+      "state": "HELD(unsent)",
+      "never_submitted": true,
+      "next_action": "complete_if_current",
+      "evidence": "",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-398.txt"
+    },
+    {
+      "id": "m-p18-398",
+      "pane": "w2:pZ",
+      "role": "IMPL-VERIFIER",
+      "state": "HELD(working)",
+      "never_submitted": true,
+      "next_action": "complete_if_current",
+      "evidence": "",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-398.txt"
+    },
+    {
+      "id": "m-p18-399",
+      "pane": "w2:p4",
+      "role": "RS-TECH-LEAD",
+      "state": "HELD(paste_in_composer)",
+      "never_submitted": true,
+      "next_action": "complete_if_current",
+      "evidence": "",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-399.txt"
+    },
+    {
+      "id": "m-p18-400",
+      "pane": "w2:p0",
+      "role": "IMPL-BUILDER",
+      "state": "HELD(working)",
+      "never_submitted": true,
+      "next_action": "complete_if_current",
+      "evidence": "",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-400.txt"
+    },
+    {
+      "id": "m-p18-400",
+      "pane": "w2:p11",
+      "role": "ARM-CONTROL-DESIGN",
+      "state": "HELD(paste_in_composer)",
+      "never_submitted": true,
+      "next_action": "complete_if_current",
+      "evidence": "",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-400.txt"
+    },
+    {
+      "id": "m-p18-400",
+      "pane": "w2:p4",
+      "role": "RS-TECH-LEAD",
+      "state": "HELD(paste_in_composer)",
+      "never_submitted": true,
+      "next_action": "complete_if_current",
+      "evidence": "",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-400.txt"
+    },
+    {
+      "id": "m-p18-401",
+      "pane": "w2:p11",
+      "role": "ARM-CONTROL-DESIGN",
+      "state": "HELD(paste_in_composer)",
+      "never_submitted": true,
+      "next_action": "complete_if_current",
+      "evidence": "",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-401.txt"
+    },
+    {
+      "id": "m-p18-401",
+      "pane": "w2:p4",
+      "role": "RS-TECH-LEAD",
+      "state": "HELD(paste_in_composer)",
+      "never_submitted": true,
+      "next_action": "complete_if_current",
+      "evidence": "",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-401.txt"
+    },
+    {
+      "id": "m-p18-401",
+      "pane": "w2:p6",
+      "role": "PLAN-KEEPER",
+      "state": "HELD(working)",
+      "never_submitted": true,
+      "next_action": "complete_if_current",
+      "evidence": "",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-401.txt"
+    },
+    {
+      "id": "m-p18-401",
+      "pane": "w2:pZ",
+      "role": "IMPL-VERIFIER",
+      "state": "HELD(paste_in_composer)",
+      "never_submitted": true,
+      "next_action": "complete_if_current",
+      "evidence": "",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-401.txt"
+    },
+    {
+      "id": "m-p18-402",
+      "pane": "w2:p0",
+      "role": "IMPL-BUILDER",
+      "state": "HELD(unsent)",
+      "never_submitted": true,
+      "next_action": "complete_if_current",
+      "evidence": "",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-402.txt"
+    },
+    {
+      "id": "m-p18-402",
+      "pane": "w2:p11",
+      "role": "ARM-CONTROL-DESIGN",
+      "state": "HELD(unsent)",
+      "never_submitted": true,
+      "next_action": "complete_if_current",
+      "evidence": "",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-402.txt"
+    },
+    {
+      "id": "m-p18-402",
+      "pane": "w2:p6",
+      "role": "PLAN-KEEPER",
+      "state": "HELD(unsent)",
+      "never_submitted": true,
+      "next_action": "complete_if_current",
+      "evidence": "",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-402.txt"
+    },
+    {
+      "id": "m-p18-402",
+      "pane": "w2:pZ",
+      "role": "IMPL-VERIFIER",
+      "state": "HELD(working)",
+      "never_submitted": true,
+      "next_action": "complete_if_current",
+      "evidence": "",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-402.txt"
+    },
+    {
+      "id": "m-p18-403",
+      "pane": "w2:p11",
+      "role": "ARM-CONTROL-DESIGN",
+      "state": "HELD(unsent)",
+      "never_submitted": true,
+      "next_action": "complete_if_current",
+      "evidence": "",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-403.txt"
+    },
+    {
+      "id": "m-p18-403",
+      "pane": "w2:p4",
+      "role": "RS-TECH-LEAD",
+      "state": "HELD(unsent)",
+      "never_submitted": true,
+      "next_action": "complete_if_current",
+      "evidence": "",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-403.txt"
+    },
+    {
+      "id": "m-p18-403",
+      "pane": "w2:p6",
+      "role": "PLAN-KEEPER",
+      "state": "HELD(unsent)",
+      "never_submitted": true,
+      "next_action": "complete_if_current",
+      "evidence": "",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-403.txt"
+    },
+    {
+      "id": "m-p18-403",
+      "pane": "w2:pZ",
+      "role": "IMPL-VERIFIER",
+      "state": "HELD(working)",
+      "never_submitted": true,
+      "next_action": "complete_if_current",
+      "evidence": "",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-403.txt"
+    },
+    {
+      "id": "m-p18-405",
+      "pane": "w2:p11",
+      "role": "ARM-CONTROL-DESIGN",
+      "state": "HELD(working)",
+      "never_submitted": true,
+      "next_action": "complete_if_current",
+      "evidence": "",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-405.txt"
+    },
+    {
+      "id": "m-p18-405",
+      "pane": "w2:p4",
+      "role": "RS-TECH-LEAD",
+      "state": "HELD(working)",
+      "never_submitted": true,
+      "next_action": "complete_if_current",
+      "evidence": "",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-405.txt"
+    },
+    {
+      "id": "m-p18-405",
+      "pane": "w2:p6",
+      "role": "PLAN-KEEPER",
+      "state": "HELD(unsent)",
+      "never_submitted": true,
+      "next_action": "complete_if_current",
+      "evidence": "",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-405.txt"
+    },
+    {
+      "id": "m-p18-405",
+      "pane": "w2:pZ",
+      "role": "IMPL-VERIFIER",
+      "state": "HELD(unsent)",
+      "never_submitted": true,
+      "next_action": "complete_if_current",
+      "evidence": "",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-405.txt"
+    },
+    {
+      "id": "m-p18-406",
+      "pane": "w2:p11",
+      "role": "ARM-CONTROL-DESIGN",
+      "state": "HELD(working)",
+      "never_submitted": true,
+      "next_action": "complete_if_current",
+      "evidence": "",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-406.txt"
+    },
+    {
+      "id": "m-p18-406",
+      "pane": "w2:p6",
+      "role": "PLAN-KEEPER",
+      "state": "HELD(unsent)",
+      "never_submitted": true,
+      "next_action": "complete_if_current",
+      "evidence": "",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-406.txt"
+    },
+    {
+      "id": "m-p18-406",
+      "pane": "w2:pZ",
+      "role": "IMPL-VERIFIER",
+      "state": "HELD(unsent)",
+      "never_submitted": true,
+      "next_action": "complete_if_current",
+      "evidence": "",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-406.txt"
+    },
+    {
+      "id": "m-p18-407",
+      "pane": "w2:p4",
+      "role": "RS-TECH-LEAD",
+      "state": "HELD(unsent)",
+      "never_submitted": true,
+      "next_action": "complete_if_current",
+      "evidence": "",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-407.txt"
+    },
+    {
+      "id": "m-p18-407",
+      "pane": "w2:p6",
+      "role": "PLAN-KEEPER",
+      "state": "HELD(unsent)",
+      "never_submitted": true,
+      "next_action": "complete_if_current",
+      "evidence": "",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-407.txt"
+    },
+    {
+      "id": "m-p18-407",
+      "pane": "w2:pZ",
+      "role": "IMPL-VERIFIER",
+      "state": "HELD(unsent)",
+      "never_submitted": true,
+      "next_action": "complete_if_current",
+      "evidence": "",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-407.txt"
+    },
+    {
+      "id": "m-p18-408",
+      "pane": "w2:p0",
+      "role": "IMPL-BUILDER",
+      "state": "HELD(working)",
+      "never_submitted": true,
+      "next_action": "complete_if_current",
+      "evidence": "",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-408.txt"
+    },
+    {
+      "id": "m-p18-410",
+      "pane": "w2:p4",
+      "role": "RS-TECH-LEAD",
+      "state": "HELD(unsent)",
+      "never_submitted": true,
+      "next_action": "complete_if_current",
+      "evidence": "",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-410.txt"
+    },
+    {
+      "id": "m-p18-411",
+      "pane": "w2:p4",
+      "role": "RS-TECH-LEAD",
+      "state": "HELD(unsent)",
+      "never_submitted": true,
+      "next_action": "complete_if_current",
+      "evidence": "",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-411.txt"
+    },
+    {
+      "id": "m-p18-411",
+      "pane": "w2:p6",
+      "role": "PLAN-KEEPER",
+      "state": "HELD(working)",
+      "never_submitted": true,
+      "next_action": "complete_if_current",
+      "evidence": "",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-411.txt"
+    },
+    {
+      "id": "m-p18-411",
+      "pane": "w2:pZ",
+      "role": "IMPL-VERIFIER",
+      "state": "HELD(unsent)",
+      "never_submitted": true,
+      "next_action": "complete_if_current",
+      "evidence": "",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-411.txt"
+    },
+    {
+      "id": "m-p18-413",
+      "pane": "w2:pZ",
+      "role": "IMPL-VERIFIER",
+      "state": "HELD(fanout_stopped)",
+      "never_submitted": true,
+      "next_action": "complete_if_current",
+      "evidence": "",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-413.txt"
+    },
+    {
+      "id": "m-p18-415",
+      "pane": "w2:p4",
+      "role": "RS-TECH-LEAD",
+      "state": "HELD(composer_holds_own_message id=m-p18-414)",
+      "never_submitted": true,
+      "next_action": "complete_if_current",
+      "evidence": "",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-415.txt"
+    },
+    {
+      "id": "m-p18-417",
+      "pane": "w2:p11",
+      "role": "ARM-CONTROL-DESIGN",
+      "state": "HELD(paste_in_composer)",
+      "never_submitted": true,
+      "next_action": "complete_if_current",
+      "evidence": "",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-417.txt"
+    },
+    {
+      "id": "m-p18-417",
+      "pane": "w2:p4",
+      "role": "RS-TECH-LEAD",
+      "state": "HELD(composer_holds_own_message id=m-p18-414)",
+      "never_submitted": true,
+      "next_action": "complete_if_current",
+      "evidence": "",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-417.txt"
+    },
+    {
+      "id": "m-p18-417",
+      "pane": "w2:p6",
+      "role": "PLAN-KEEPER",
+      "state": "HELD(working)",
+      "never_submitted": true,
+      "next_action": "complete_if_current",
+      "evidence": "",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-417.txt"
+    },
+    {
+      "id": "m-p18-417",
+      "pane": "w2:pZ",
+      "role": "IMPL-VERIFIER",
+      "state": "HELD(working)",
+      "never_submitted": true,
+      "next_action": "complete_if_current",
+      "evidence": "",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-417.txt"
+    },
+    {
+      "id": "m-p18-418",
+      "pane": "w2:p11",
+      "role": "ARM-CONTROL-DESIGN",
+      "state": "HELD(working)",
+      "never_submitted": true,
+      "next_action": "complete_if_current",
+      "evidence": "",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-418.txt"
+    },
+    {
+      "id": "m-p18-418",
+      "pane": "w2:p4",
+      "role": "RS-TECH-LEAD",
+      "state": "HELD(working)",
+      "never_submitted": true,
+      "next_action": "complete_if_current",
+      "evidence": "",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-418.txt"
+    },
+    {
+      "id": "m-p18-420",
+      "pane": "w2:p6",
+      "role": "PLAN-KEEPER",
+      "state": "HELD(working)",
+      "never_submitted": true,
+      "next_action": "complete_if_current",
+      "evidence": "",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-420.txt"
+    },
+    {
+      "id": "m-p18-421",
+      "pane": "w2:p6",
+      "role": "PLAN-KEEPER",
+      "state": "HELD(working)",
+      "never_submitted": true,
+      "next_action": "complete_if_current",
+      "evidence": "",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-421.txt"
+    },
+    {
+      "id": "m-p18-421",
+      "pane": "w2:pZ",
+      "role": "IMPL-VERIFIER",
+      "state": "HELD(working)",
+      "never_submitted": true,
+      "next_action": "complete_if_current",
+      "evidence": "",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-421.txt"
+    },
+    {
+      "id": "m-p18-422",
+      "pane": "w2:p11",
+      "role": "ARM-CONTROL-DESIGN",
+      "state": "HELD(working)",
+      "never_submitted": true,
+      "next_action": "complete_if_current",
+      "evidence": "",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-422.txt"
+    },
+    {
+      "id": "m-p18-422",
+      "pane": "w2:p6",
+      "role": "PLAN-KEEPER",
+      "state": "HELD(working)",
+      "never_submitted": true,
+      "next_action": "complete_if_current",
+      "evidence": "",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-422.txt"
+    },
+    {
+      "id": "m-p18-422",
+      "pane": "w2:pZ",
+      "role": "IMPL-VERIFIER",
+      "state": "HELD(working)",
+      "never_submitted": true,
+      "next_action": "complete_if_current",
+      "evidence": "",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-422.txt"
+    },
+    {
+      "id": "m-p18-426",
+      "pane": "w2:p6",
+      "role": "PLAN-KEEPER",
+      "state": "HELD(working)",
+      "never_submitted": true,
+      "next_action": "complete_if_current",
+      "evidence": "",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-426.txt"
+    },
+    {
+      "id": "m-p18-428",
+      "pane": "w2:p4",
+      "role": "RS-TECH-LEAD",
+      "state": "HELD(working)",
+      "never_submitted": true,
+      "next_action": "complete_if_current",
+      "evidence": "",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-428.txt"
+    },
+    {
+      "id": "m-p18-428",
+      "pane": "w2:p6",
+      "role": "PLAN-KEEPER",
+      "state": "HELD(working)",
+      "never_submitted": true,
+      "next_action": "complete_if_current",
+      "evidence": "",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-428.txt"
+    },
+    {
+      "id": "m-p18-428",
+      "pane": "w2:pZ",
+      "role": "IMPL-VERIFIER",
+      "state": "HELD(working)",
+      "never_submitted": true,
+      "next_action": "complete_if_current",
+      "evidence": "",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-428.txt"
+    },
+    {
+      "id": "m-p18-429",
+      "pane": "w2:p6",
+      "role": "PLAN-KEEPER",
+      "state": "HELD(working)",
+      "never_submitted": true,
+      "next_action": "complete_if_current",
+      "evidence": "",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-429.txt"
+    },
+    {
+      "id": "m-p18-429",
+      "pane": "w2:pZ",
+      "role": "IMPL-VERIFIER",
+      "state": "HELD(working)",
+      "never_submitted": true,
+      "next_action": "complete_if_current",
+      "evidence": "",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-429.txt"
+    },
+    {
+      "id": "m-p18-430",
+      "pane": "w2:pZ",
+      "role": "IMPL-VERIFIER",
+      "state": "HELD(working)",
+      "never_submitted": true,
+      "next_action": "complete_if_current",
+      "evidence": "",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-430.txt"
+    },
+    {
+      "id": "m-p18-431",
+      "pane": "w2:p6",
+      "role": "PLAN-KEEPER",
+      "state": "HELD(working)",
+      "never_submitted": true,
+      "next_action": "complete_if_current",
+      "evidence": "",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-431.txt"
+    },
+    {
+      "id": "m-p18-431",
+      "pane": "w2:pZ",
+      "role": "IMPL-VERIFIER",
+      "state": "HELD(working)",
+      "never_submitted": true,
+      "next_action": "complete_if_current",
+      "evidence": "",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-431.txt"
+    },
+    {
+      "id": "m-p18-432",
+      "pane": "w2:p4",
+      "role": "RS-TECH-LEAD",
+      "state": "HELD(dialog:do you want to proceed?)",
+      "never_submitted": true,
+      "next_action": "complete_if_current",
+      "evidence": "",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-432.txt"
+    },
+    {
+      "id": "m-p18-433",
+      "pane": "w2:p4",
+      "role": "RS-TECH-LEAD",
+      "state": "HELD(dialog:do you want to proceed?)",
+      "never_submitted": true,
+      "next_action": "complete_if_current",
+      "evidence": "",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-433.txt"
+    },
+    {
+      "id": "m-p18-433",
+      "pane": "w2:p6",
+      "role": "PLAN-KEEPER",
+      "state": "HELD(working)",
+      "never_submitted": true,
+      "next_action": "complete_if_current",
+      "evidence": "",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-433.txt"
+    },
+    {
+      "id": "m-p18-434",
+      "pane": "w2:p6",
+      "role": "PLAN-KEEPER",
+      "state": "HELD(working)",
+      "never_submitted": true,
+      "next_action": "complete_if_current",
+      "evidence": "",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-434.txt"
+    },
+    {
+      "id": "m-p18-434",
+      "pane": "w2:pZ",
+      "role": "IMPL-VERIFIER",
+      "state": "HELD(working)",
+      "never_submitted": true,
+      "next_action": "complete_if_current",
+      "evidence": "",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-434.txt"
+    },
+    {
+      "id": "m-p18-435",
+      "pane": "w2:p11",
+      "role": "ARM-CONTROL-DESIGN",
+      "state": "HELD(working)",
+      "never_submitted": true,
+      "next_action": "complete_if_current",
+      "evidence": "",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-435.txt"
+    },
+    {
+      "id": "m-p18-435",
+      "pane": "w2:p6",
+      "role": "PLAN-KEEPER",
+      "state": "HELD(working)",
+      "never_submitted": true,
+      "next_action": "complete_if_current",
+      "evidence": "",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-435.txt"
+    },
+    {
+      "id": "m-p18-435",
+      "pane": "w2:pZ",
+      "role": "IMPL-VERIFIER",
+      "state": "HELD(working)",
+      "never_submitted": true,
+      "next_action": "complete_if_current",
+      "evidence": "",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-435.txt"
+    },
+    {
+      "id": "m-p18-436",
+      "pane": "w2:p0",
+      "role": "IMPL-BUILDER",
+      "state": "HELD(working)",
+      "never_submitted": true,
+      "next_action": "complete_if_current",
+      "evidence": "",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-436.txt"
+    },
+    {
+      "id": "m-p18-436",
+      "pane": "w2:p6",
+      "role": "PLAN-KEEPER",
+      "state": "HELD(working)",
+      "never_submitted": true,
+      "next_action": "complete_if_current",
+      "evidence": "",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-436.txt"
+    },
+    {
+      "id": "m-p18-437",
+      "pane": "w2:p6",
+      "role": "PLAN-KEEPER",
+      "state": "HELD(working)",
+      "never_submitted": true,
+      "next_action": "complete_if_current",
+      "evidence": "",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-437.txt"
+    },
+    {
+      "id": "m-p18-438",
+      "pane": "w2:p6",
+      "role": "PLAN-KEEPER",
+      "state": "HELD(working)",
+      "never_submitted": true,
+      "next_action": "complete_if_current",
+      "evidence": "",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-438.txt"
+    },
+    {
+      "id": "m-p18-439",
+      "pane": "w2:p6",
+      "role": "PLAN-KEEPER",
+      "state": "HELD(working)",
+      "never_submitted": true,
+      "next_action": "complete_if_current",
+      "evidence": "",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-439.txt"
+    },
+    {
+      "id": "m-p18-439",
+      "pane": "w2:pZ",
+      "role": "IMPL-VERIFIER",
+      "state": "HELD(working)",
+      "never_submitted": true,
+      "next_action": "complete_if_current",
+      "evidence": "",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-439.txt"
+    },
+    {
+      "id": "m-p18-440",
+      "pane": "w2:p6",
+      "role": "PLAN-KEEPER",
+      "state": "HELD(working)",
+      "never_submitted": true,
+      "next_action": "complete_if_current",
+      "evidence": "",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-440.txt"
+    },
+    {
+      "id": "m-p18-441",
+      "pane": "w2:p6",
+      "role": "PLAN-KEEPER",
+      "state": "HELD(working)",
+      "never_submitted": true,
+      "next_action": "complete_if_current",
+      "evidence": "",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-441.txt"
+    },
+    {
+      "id": "m-p18-442",
+      "pane": "w2:p6",
+      "role": "PLAN-KEEPER",
+      "state": "HELD(working)",
+      "never_submitted": true,
+      "next_action": "complete_if_current",
+      "evidence": "",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-442.txt"
+    },
+    {
+      "id": "m-p18-444",
+      "pane": "w2:pZ",
+      "role": "IMPL-VERIFIER",
+      "state": "HELD(working)",
+      "never_submitted": true,
+      "next_action": "complete_if_current",
+      "evidence": "",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-444.txt"
+    },
+    {
+      "id": "m-p18-445",
+      "pane": "w2:p11",
+      "role": "ARM-CONTROL-DESIGN",
+      "state": "HELD(working)",
+      "never_submitted": true,
+      "next_action": "complete_if_current",
+      "evidence": "",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-445.txt"
+    },
+    {
+      "id": "m-p18-445",
+      "pane": "w2:pZ",
+      "role": "IMPL-VERIFIER",
+      "state": "HELD(working)",
+      "never_submitted": true,
+      "next_action": "complete_if_current",
+      "evidence": "",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-445.txt"
+    },
+    {
+      "id": "m-p18-446",
+      "pane": "w2:p6",
+      "role": "PLAN-KEEPER",
+      "state": "HELD(working)",
+      "never_submitted": true,
+      "next_action": "complete_if_current",
+      "evidence": "",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-446.txt"
+    },
+    {
+      "id": "m-p18-446",
+      "pane": "w2:pZ",
+      "role": "IMPL-VERIFIER",
+      "state": "HELD(working)",
+      "never_submitted": true,
+      "next_action": "complete_if_current",
+      "evidence": "",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-446.txt"
+    },
+    {
+      "id": "m-p18-447",
+      "pane": "w2:p6",
+      "role": "PLAN-KEEPER",
+      "state": "HELD(working)",
+      "never_submitted": true,
+      "next_action": "complete_if_current",
+      "evidence": "",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-447.txt"
+    },
+    {
+      "id": "m-p18-448",
+      "pane": "w2:p6",
+      "role": "PLAN-KEEPER",
+      "state": "HELD(working)",
+      "never_submitted": true,
+      "next_action": "complete_if_current",
+      "evidence": "",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-448.txt"
+    },
+    {
+      "id": "m-p18-450",
+      "pane": "w2:p6",
+      "role": "PLAN-KEEPER",
+      "state": "HELD(working)",
+      "never_submitted": true,
+      "next_action": "complete_if_current",
+      "evidence": "",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-450.txt"
+    },
+    {
+      "id": "m-p18-450",
+      "pane": "w2:pZ",
+      "role": "IMPL-VERIFIER",
+      "state": "HELD(working)",
+      "never_submitted": true,
+      "next_action": "complete_if_current",
+      "evidence": "",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-450.txt"
+    },
+    {
+      "id": "m-p18-453",
+      "pane": "w2:p11",
+      "role": "ARM-CONTROL-DESIGN",
+      "state": "HELD(working)",
+      "never_submitted": true,
+      "next_action": "complete_if_current",
+      "evidence": "",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-453.txt"
+    },
+    {
+      "id": "m-p18-453",
+      "pane": "w2:p6",
+      "role": "PLAN-KEEPER",
+      "state": "HELD(working)",
+      "never_submitted": true,
+      "next_action": "complete_if_current",
+      "evidence": "",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-453.txt"
+    },
+    {
+      "id": "m-p18-454",
+      "pane": "w2:p6",
+      "role": "PLAN-KEEPER",
+      "state": "HELD(working)",
+      "never_submitted": true,
+      "next_action": "complete_if_current",
+      "evidence": "",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-454.txt"
+    },
+    {
+      "id": "m-p18-456",
+      "pane": "w2:p11",
+      "role": "ARM-CONTROL-DESIGN",
+      "state": "HELD(working)",
+      "never_submitted": true,
+      "next_action": "complete_if_current",
+      "evidence": "",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-456.txt"
+    },
+    {
+      "id": "m-p18-457",
+      "pane": "w2:p6",
+      "role": "PLAN-KEEPER",
+      "state": "HELD(working)",
+      "never_submitted": true,
+      "next_action": "complete_if_current",
+      "evidence": "",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-457.txt"
+    },
+    {
+      "id": "m-p18-458",
+      "pane": "w2:p6",
+      "role": "PLAN-KEEPER",
+      "state": "HELD(working)",
+      "never_submitted": true,
+      "next_action": "complete_if_current",
+      "evidence": "",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-458.txt"
+    },
+    {
+      "id": "m-p18-459",
+      "pane": "w2:p6",
+      "role": "PLAN-KEEPER",
+      "state": "HELD(working)",
+      "never_submitted": true,
+      "next_action": "complete_if_current",
+      "evidence": "",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-459.txt"
+    },
+    {
+      "id": "m-p18-460",
+      "pane": "w2:p6",
+      "role": "PLAN-KEEPER",
+      "state": "HELD(working)",
+      "never_submitted": true,
+      "next_action": "complete_if_current",
+      "evidence": "",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-460.txt"
+    },
+    {
+      "id": "m-p18-461",
+      "pane": "w2:p6",
+      "role": "PLAN-KEEPER",
+      "state": "HELD(working)",
+      "never_submitted": true,
+      "next_action": "complete_if_current",
+      "evidence": "",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-461.txt"
+    },
+    {
+      "id": "m-p18-462",
+      "pane": "w2:p6",
+      "role": "PLAN-KEEPER",
+      "state": "HELD(working)",
+      "never_submitted": true,
+      "next_action": "complete_if_current",
+      "evidence": "",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-462.txt"
+    },
+    {
+      "id": "m-p18-466",
+      "pane": "w2:p0",
+      "role": "IMPL-BUILDER",
+      "state": "HELD(working)",
+      "never_submitted": true,
+      "next_action": "complete_if_current",
+      "evidence": "",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-466.txt"
+    },
+    {
+      "id": "m-p18-466",
+      "pane": "w2:p11",
+      "role": "ARM-CONTROL-DESIGN",
+      "state": "HELD(working)",
+      "never_submitted": true,
+      "next_action": "complete_if_current",
+      "evidence": "",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-466.txt"
+    },
+    {
+      "id": "m-p18-466",
+      "pane": "w2:p6",
+      "role": "PLAN-KEEPER",
+      "state": "HELD(working)",
+      "never_submitted": true,
+      "next_action": "complete_if_current",
+      "evidence": "",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-466.txt"
+    },
+    {
+      "id": "m-p18-466",
+      "pane": "w2:pB",
+      "role": "LOG-ANALYST",
+      "state": "HELD(working)",
+      "never_submitted": true,
+      "next_action": "complete_if_current",
+      "evidence": "",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-466.txt"
+    },
+    {
+      "id": "m-p18-466",
+      "pane": "w2:pC",
+      "role": "VIDEO-ANALYST",
+      "state": "HELD(working)",
+      "never_submitted": true,
+      "next_action": "complete_if_current",
+      "evidence": "",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-466.txt"
+    },
+    {
+      "id": "m-p18-466",
+      "pane": "w2:pZ",
+      "role": "IMPL-VERIFIER",
+      "state": "HELD(working)",
+      "never_submitted": true,
+      "next_action": "complete_if_current",
+      "evidence": "",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-466.txt"
+    },
+    {
+      "id": "m-p18-467",
+      "pane": "w2:p0",
+      "role": "IMPL-BUILDER",
+      "state": "HELD(working)",
+      "never_submitted": true,
+      "next_action": "complete_if_current",
+      "evidence": "",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-467.txt"
+    },
+    {
+      "id": "m-p18-467",
+      "pane": "w2:p11",
+      "role": "ARM-CONTROL-DESIGN",
+      "state": "HELD(working)",
+      "never_submitted": true,
+      "next_action": "complete_if_current",
+      "evidence": "",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-467.txt"
+    },
+    {
+      "id": "m-p18-467",
+      "pane": "w2:p6",
+      "role": "PLAN-KEEPER",
+      "state": "HELD(working)",
+      "never_submitted": true,
+      "next_action": "complete_if_current",
+      "evidence": "",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-467.txt"
+    },
+    {
+      "id": "m-p18-467",
+      "pane": "w2:pB",
+      "role": "LOG-ANALYST",
+      "state": "HELD(working)",
+      "never_submitted": true,
+      "next_action": "complete_if_current",
+      "evidence": "",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-467.txt"
+    },
+    {
+      "id": "m-p18-467",
+      "pane": "w2:pC",
+      "role": "VIDEO-ANALYST",
+      "state": "HELD(working)",
+      "never_submitted": true,
+      "next_action": "complete_if_current",
+      "evidence": "",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-467.txt"
+    },
+    {
+      "id": "m-p18-471",
+      "pane": "w2:p0",
+      "role": "IMPL-BUILDER",
+      "state": "HELD(working)",
+      "never_submitted": true,
+      "next_action": "complete_if_current",
+      "evidence": "",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-471.txt"
+    },
+    {
+      "id": "m-p18-471",
+      "pane": "w2:pZ",
+      "role": "IMPL-VERIFIER",
+      "state": "HELD(working)",
+      "never_submitted": true,
+      "next_action": "complete_if_current",
+      "evidence": "",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-471.txt"
+    },
+    {
+      "id": "m-p18-472",
+      "pane": "w2:p0",
+      "role": "IMPL-BUILDER",
+      "state": "HELD(working)",
+      "never_submitted": true,
+      "next_action": "complete_if_current",
+      "evidence": "",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-472.txt"
+    },
+    {
+      "id": "m-p18-472",
+      "pane": "w2:pZ",
+      "role": "IMPL-VERIFIER",
+      "state": "HELD(working)",
+      "never_submitted": true,
+      "next_action": "complete_if_current",
+      "evidence": "",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-472.txt"
+    },
+    {
+      "id": "m-p18-478",
+      "pane": "w2:p6",
+      "role": "PLAN-KEEPER",
+      "state": "HELD(working)",
+      "never_submitted": true,
+      "next_action": "complete_if_current",
+      "evidence": "",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-478.txt"
+    },
+    {
+      "id": "m-p18-482",
+      "pane": "w2:p6",
+      "role": "PLAN-KEEPER",
+      "state": "HELD(working)",
+      "never_submitted": true,
+      "next_action": "complete_if_current",
+      "evidence": "",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-482.txt"
+    },
+    {
+      "id": "m-p18-483",
+      "pane": "w2:p6",
+      "role": "PLAN-KEEPER",
+      "state": "HELD(working)",
+      "never_submitted": true,
+      "next_action": "complete_if_current",
+      "evidence": "",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-483.txt"
+    },
+    {
+      "id": "m-p18-486",
+      "pane": "w2:pZ",
+      "role": "IMPL-VERIFIER",
+      "state": "HELD(working)",
+      "never_submitted": true,
+      "next_action": "complete_if_current",
+      "evidence": "",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-486.txt"
+    },
+    {
+      "id": "m-p18-488",
+      "pane": "w2:pZ",
+      "role": "IMPL-VERIFIER",
+      "state": "HELD(working)",
+      "never_submitted": true,
+      "next_action": "complete_if_current",
+      "evidence": "",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-488.txt"
+    },
+    {
+      "id": "m-p18-491",
+      "pane": "w2:p6",
+      "role": "PLAN-KEEPER",
+      "state": "QUEUED(observed)",
+      "never_submitted": false,
+      "next_action": "verify_or_operator_review",
+      "evidence": "enqueue@108802786",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-491.txt"
+    },
+    {
+      "id": "m-p18-491",
+      "pane": "w2:pZ",
+      "role": "IMPL-VERIFIER",
+      "state": "HELD(working)",
+      "never_submitted": true,
+      "next_action": "complete_if_current",
+      "evidence": "",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-491.txt"
+    },
+    {
+      "id": "m-p18-493",
+      "pane": "w2:p6",
+      "role": "PLAN-KEEPER",
+      "state": "QUEUED(observed)",
+      "never_submitted": false,
+      "next_action": "verify_or_operator_review",
+      "evidence": "enqueue@108810378",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-493.txt"
+    },
+    {
+      "id": "m-p18-493",
+      "pane": "w2:pZ",
+      "role": "IMPL-VERIFIER",
+      "state": "QUEUED(observed)",
+      "never_submitted": false,
+      "next_action": "verify_or_operator_review",
+      "evidence": "enqueue@29835900",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-493.txt"
+    },
+    {
+      "id": "m-p18-494",
+      "pane": "w2:p4",
+      "role": "RS-TECH-LEAD",
+      "state": "QUEUED(observed)",
+      "never_submitted": false,
+      "next_action": "verify_or_operator_review",
+      "evidence": "enqueue@15986505",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-494.txt"
+    },
+    {
+      "id": "m-p18-494",
+      "pane": "w2:p6",
+      "role": "PLAN-KEEPER",
+      "state": "QUEUED(observed)",
+      "never_submitted": false,
+      "next_action": "verify_or_operator_review",
+      "evidence": "enqueue@108982669",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-494.txt"
+    },
+    {
+      "id": "m-p18-494",
+      "pane": "w2:pZ",
+      "role": "IMPL-VERIFIER",
+      "state": "QUEUED(observed)",
+      "never_submitted": false,
+      "next_action": "verify_or_operator_review",
+      "evidence": "enqueue@29681875",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-494.txt"
+    },
+    {
+      "id": "m-p18-495",
+      "pane": "w2:p4",
+      "role": "RS-TECH-LEAD",
+      "state": "QUEUED(observed)",
+      "never_submitted": false,
+      "next_action": "verify_or_operator_review",
+      "evidence": "enqueue@16033238",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-495.txt"
+    },
+    {
+      "id": "m-p18-495",
+      "pane": "w2:p6",
+      "role": "PLAN-KEEPER",
+      "state": "QUEUED(observed)",
+      "never_submitted": false,
+      "next_action": "verify_or_operator_review",
+      "evidence": "enqueue@109054939",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-495.txt"
+    },
+    {
+      "id": "m-p18-495",
+      "pane": "w2:pZ",
+      "role": "IMPL-VERIFIER",
+      "state": "QUEUED(observed)",
+      "never_submitted": false,
+      "next_action": "verify_or_operator_review",
+      "evidence": "enqueue@29750397",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-495.txt"
+    },
+    {
+      "id": "m-p18-496",
+      "pane": "w2:p4",
+      "role": "RS-TECH-LEAD",
+      "state": "QUEUED(observed)",
+      "never_submitted": false,
+      "next_action": "verify_or_operator_review",
+      "evidence": "enqueue@16104898",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-496.txt"
+    },
+    {
+      "id": "m-p18-496",
+      "pane": "w2:p6",
+      "role": "PLAN-KEEPER",
+      "state": "QUEUED(observed)",
+      "never_submitted": false,
+      "next_action": "verify_or_operator_review",
+      "evidence": "enqueue@109135468",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-496.txt"
+    },
+    {
+      "id": "m-p18-496",
+      "pane": "w2:pZ",
+      "role": "IMPL-VERIFIER",
+      "state": "QUEUED(observed)",
+      "never_submitted": false,
+      "next_action": "verify_or_operator_review",
+      "evidence": "enqueue@29844630",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-496.txt"
+    },
+    {
+      "id": "m-p18-497",
+      "pane": "w2:p4",
+      "role": "RS-TECH-LEAD",
+      "state": "QUEUED(observed)",
+      "never_submitted": false,
+      "next_action": "verify_or_operator_review",
+      "evidence": "enqueue@16212203",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-497.txt"
+    },
+    {
+      "id": "m-p18-498",
+      "pane": "w2:pZ",
+      "role": "IMPL-VERIFIER",
+      "state": "QUEUED(observed)",
+      "never_submitted": false,
+      "next_action": "verify_or_operator_review",
+      "evidence": "enqueue@30015152",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-498.txt"
+    },
+    {
+      "id": "m-p18-499",
+      "pane": "w2:p0",
+      "role": "IMPL-BUILDER",
+      "state": "QUEUED(observed)",
+      "never_submitted": false,
+      "next_action": "verify_or_operator_review",
+      "evidence": "enqueue@37465668",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-499.txt"
+    },
+    {
+      "id": "m-p18-499",
+      "pane": "w2:p11",
+      "role": "ARM-CONTROL-DESIGN",
+      "state": "QUEUED(observed)",
+      "never_submitted": false,
+      "next_action": "verify_or_operator_review",
+      "evidence": "enqueue@13535738",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-499.txt"
+    },
+    {
+      "id": "m-p18-499",
+      "pane": "w2:p6",
+      "role": "PLAN-KEEPER",
+      "state": "QUEUED(observed)",
+      "never_submitted": false,
+      "next_action": "verify_or_operator_review",
+      "evidence": "enqueue@109359131",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-499.txt"
+    },
+    {
+      "id": "m-p18-499",
+      "pane": "w2:pB",
+      "role": "LOG-ANALYST",
+      "state": "QUEUED(observed)",
+      "never_submitted": false,
+      "next_action": "verify_or_operator_review",
+      "evidence": "enqueue@2512812",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-499.txt"
+    },
+    {
+      "id": "m-p18-499",
+      "pane": "w2:pZ",
+      "role": "IMPL-VERIFIER",
+      "state": "QUEUED(observed)",
+      "never_submitted": false,
+      "next_action": "verify_or_operator_review",
+      "evidence": "enqueue@30125540",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-499.txt"
+    },
+    {
+      "id": "m-p18-500",
+      "pane": "w2:p4",
+      "role": "RS-TECH-LEAD",
+      "state": "QUEUED(observed)",
+      "never_submitted": false,
+      "next_action": "verify_or_operator_review",
+      "evidence": "enqueue@16434850",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-500.txt"
+    },
+    {
+      "id": "m-p18-500",
+      "pane": "w2:p6",
+      "role": "PLAN-KEEPER",
+      "state": "QUEUED(observed)",
+      "never_submitted": false,
+      "next_action": "verify_or_operator_review",
+      "evidence": "enqueue@109425954",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-500.txt"
+    },
+    {
+      "id": "m-p18-500",
+      "pane": "w2:pZ",
+      "role": "IMPL-VERIFIER",
+      "state": "QUEUED(observed)",
+      "never_submitted": false,
+      "next_action": "verify_or_operator_review",
+      "evidence": "enqueue@30209009",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-500.txt"
+    },
+    {
+      "id": "m-p18-501",
+      "pane": "w2:p4",
+      "role": "RS-TECH-LEAD",
+      "state": "QUEUED(observed)",
+      "never_submitted": false,
+      "next_action": "verify_or_operator_review",
+      "evidence": "enqueue@16577566",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-501.txt"
+    },
+    {
+      "id": "m-p18-501",
+      "pane": "w2:p6",
+      "role": "PLAN-KEEPER",
+      "state": "QUEUED(observed)",
+      "never_submitted": false,
+      "next_action": "verify_or_operator_review",
+      "evidence": "enqueue@109655741",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-501.txt"
+    },
+    {
+      "id": "m-p18-502",
+      "pane": "w2:p4",
+      "role": "RS-TECH-LEAD",
+      "state": "QUEUED(observed)",
+      "never_submitted": false,
+      "next_action": "verify_or_operator_review",
+      "evidence": "enqueue@16709641",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-502.txt"
+    },
+    {
+      "id": "m-p18-504",
+      "pane": "w2:p11",
+      "role": "ARM-CONTROL-DESIGN",
+      "state": "QUEUED(observed)",
+      "never_submitted": false,
+      "next_action": "verify_or_operator_review",
+      "evidence": "enqueue@13833579",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-504.txt"
+    },
+    {
+      "id": "m-p18-505",
+      "pane": "w2:p11",
+      "role": "ARM-CONTROL-DESIGN",
+      "state": "QUEUED(observed)",
+      "never_submitted": false,
+      "next_action": "verify_or_operator_review",
+      "evidence": "enqueue@13914049",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-505.txt"
+    },
+    {
+      "id": "m-p18-505",
+      "pane": "w2:p4",
+      "role": "RS-TECH-LEAD",
+      "state": "QUEUED(observed)",
+      "never_submitted": false,
+      "next_action": "verify_or_operator_review",
+      "evidence": "enqueue@16827336",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-505.txt"
+    },
+    {
+      "id": "m-p18-505",
+      "pane": "w2:p6",
+      "role": "PLAN-KEEPER",
+      "state": "QUEUED(observed)",
+      "never_submitted": false,
+      "next_action": "verify_or_operator_review",
+      "evidence": "enqueue@110293424",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-505.txt"
+    },
+    {
+      "id": "m-p18-506",
+      "pane": "w2:p4",
+      "role": "RS-TECH-LEAD",
+      "state": "QUEUED(observed)",
+      "never_submitted": false,
+      "next_action": "verify_or_operator_review",
+      "evidence": "enqueue@16850153",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-506.txt"
+    },
+    {
+      "id": "m-p18-506",
+      "pane": "w2:p6",
+      "role": "PLAN-KEEPER",
+      "state": "QUEUED(observed)",
+      "never_submitted": false,
+      "next_action": "verify_or_operator_review",
+      "evidence": "enqueue@110298438",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-506.txt"
+    },
+    {
+      "id": "m-p18-507",
+      "pane": "w2:p0",
+      "role": "IMPL-BUILDER",
+      "state": "QUEUED(observed)",
+      "never_submitted": false,
+      "next_action": "verify_or_operator_review",
+      "evidence": "enqueue@37696172",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-507.txt"
+    },
+    {
+      "id": "m-p18-507",
+      "pane": "w2:p11",
+      "role": "ARM-CONTROL-DESIGN",
+      "state": "QUEUED(observed)",
+      "never_submitted": false,
+      "next_action": "verify_or_operator_review",
+      "evidence": "enqueue@13965022",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-507.txt"
+    },
+    {
+      "id": "m-p18-507",
+      "pane": "w2:p4",
+      "role": "RS-TECH-LEAD",
+      "state": "QUEUED(observed)",
+      "never_submitted": false,
+      "next_action": "verify_or_operator_review",
+      "evidence": "enqueue@16881304",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-507.txt"
+    },
+    {
+      "id": "m-p18-507",
+      "pane": "w2:p6",
+      "role": "PLAN-KEEPER",
+      "state": "QUEUED(observed)",
+      "never_submitted": false,
+      "next_action": "verify_or_operator_review",
+      "evidence": "enqueue@110350521",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-507.txt"
+    },
+    {
+      "id": "m-p18-508",
+      "pane": "w2:p0",
+      "role": "IMPL-BUILDER",
+      "state": "QUEUED(observed)",
+      "never_submitted": false,
+      "next_action": "verify_or_operator_review",
+      "evidence": "enqueue@37779311",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-508.txt"
+    },
+    {
+      "id": "m-p18-509",
+      "pane": "w2:p0",
+      "role": "IMPL-BUILDER",
+      "state": "QUEUED(observed)",
+      "never_submitted": false,
+      "next_action": "verify_or_operator_review",
+      "evidence": "enqueue@37841129",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-509.txt"
+    },
+    {
+      "id": "m-p18-509",
+      "pane": "w2:p11",
+      "role": "ARM-CONTROL-DESIGN",
+      "state": "QUEUED(observed)",
+      "never_submitted": false,
+      "next_action": "verify_or_operator_review",
+      "evidence": "enqueue@14033827",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-509.txt"
+    },
+    {
+      "id": "m-p18-509",
+      "pane": "w2:p4",
+      "role": "RS-TECH-LEAD",
+      "state": "QUEUED(observed)",
+      "never_submitted": false,
+      "next_action": "verify_or_operator_review",
+      "evidence": "enqueue@16979571",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-509.txt"
+    },
+    {
+      "id": "m-p18-510",
+      "pane": "w2:p0",
+      "role": "IMPL-BUILDER",
+      "state": "QUEUED(observed)",
+      "never_submitted": false,
+      "next_action": "verify_or_operator_review",
+      "evidence": "enqueue@37884113",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-510.txt"
+    },
+    {
+      "id": "m-p18-510",
+      "pane": "w2:p11",
+      "role": "ARM-CONTROL-DESIGN",
+      "state": "QUEUED(observed)",
+      "never_submitted": false,
+      "next_action": "verify_or_operator_review",
+      "evidence": "enqueue@14073875",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-510.txt"
+    },
+    {
+      "id": "m-p18-510",
+      "pane": "w2:p4",
+      "role": "RS-TECH-LEAD",
+      "state": "QUEUED(observed)",
+      "never_submitted": false,
+      "next_action": "verify_or_operator_review",
+      "evidence": "enqueue@17014727",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-510.txt"
+    },
+    {
+      "id": "m-p18-513",
+      "pane": "w2:p4",
+      "role": "RS-TECH-LEAD",
+      "state": "QUEUED(observed)",
+      "never_submitted": false,
+      "next_action": "verify_or_operator_review",
+      "evidence": "enqueue@17205610",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-513.txt"
+    },
+    {
+      "id": "m-p18-515",
+      "pane": "w2:p0",
+      "role": "IMPL-BUILDER",
+      "state": "QUEUED(observed)",
+      "never_submitted": false,
+      "next_action": "verify_or_operator_review",
+      "evidence": "enqueue@38194871",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-515.txt"
+    },
+    {
+      "id": "m-p18-515",
+      "pane": "w2:p11",
+      "role": "ARM-CONTROL-DESIGN",
+      "state": "QUEUED(observed)",
+      "never_submitted": false,
+      "next_action": "verify_or_operator_review",
+      "evidence": "enqueue@14318256",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-515.txt"
+    },
+    {
+      "id": "m-p18-515",
+      "pane": "w2:p4",
+      "role": "RS-TECH-LEAD",
+      "state": "QUEUED(observed)",
+      "never_submitted": false,
+      "next_action": "verify_or_operator_review",
+      "evidence": "enqueue@17349577",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-515.txt"
+    },
+    {
+      "id": "m-p18-516",
+      "pane": "w2:p0",
+      "role": "IMPL-BUILDER",
+      "state": "QUEUED(observed)",
+      "never_submitted": false,
+      "next_action": "verify_or_operator_review",
+      "evidence": "enqueue@38209981",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-516.txt"
+    },
+    {
+      "id": "m-p18-516",
+      "pane": "w2:p11",
+      "role": "ARM-CONTROL-DESIGN",
+      "state": "QUEUED(observed)",
+      "never_submitted": false,
+      "next_action": "verify_or_operator_review",
+      "evidence": "enqueue@14373708",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-516.txt"
+    },
+    {
+      "id": "m-p18-516",
+      "pane": "w2:p4",
+      "role": "RS-TECH-LEAD",
+      "state": "QUEUED(observed)",
+      "never_submitted": false,
+      "next_action": "verify_or_operator_review",
+      "evidence": "enqueue@17400422",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-516.txt"
+    },
+    {
+      "id": "m-p18-518",
+      "pane": "w2:p4",
+      "role": "RS-TECH-LEAD",
+      "state": "ABSORBED(unacked)",
+      "never_submitted": false,
+      "next_action": "verify_or_operator_review",
+      "evidence": "queued_command@18025730",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-518.txt"
+    },
+    {
+      "id": "m-p18-519",
+      "pane": "w2:p4",
+      "role": "RS-TECH-LEAD",
+      "state": "QUEUED(observed)",
+      "never_submitted": false,
+      "next_action": "verify_or_operator_review",
+      "evidence": "enqueue@18175537",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-519.txt"
+    },
+    {
+      "id": "m-p18-520",
+      "pane": "w2:p4",
+      "role": "RS-TECH-LEAD",
+      "state": "QUEUED(observed)",
+      "never_submitted": false,
+      "next_action": "verify_or_operator_review",
+      "evidence": "enqueue@18279407",
+      "body_file": "/home/rlrk/IsaacLab/eval_runs/troot_optE_dapg_wholeroute_scope_20260701/p18_desk_tools_20260905/bodies/m-p18-520.txt"
+    }
+  ]
+}
+[INFO] Using Python: "/home/rlrk/IsaacLab/env_isaaclab/bin/python"

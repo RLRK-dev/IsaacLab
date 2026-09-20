@@ -1,0 +1,13 @@
+╔══════════════════════════════════════╗
+║  validate.sh — SSOT & Safety Check   ║
+╚══════════════════════════════════════╝
+  (.validateignore: 120 patterns excluded)
+
+=== Layer 4: Vault Current-State Freshness ===
+  [CHECK 9] Vault current-state freshness
+audited_files=3
+errors=0 warnings=0
+  [PASS] Vault current-state surfaces are fresh
+
+═══════════════════════════════════════
+RESULT: ALL PASS

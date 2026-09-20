@@ -1,0 +1,33 @@
+=== Preflight Check (manual session) ===
+  IsaacLab: /home/rlrk/IsaacLab
+  Shared:   /home/rlrk/Claudecode/shared
+
+[P1] CLAUDE.md
+  ✓ P1: PASS — version v26.09.13
+[P2] prohibited.md
+  ✓ P2: PASS — 41 lines
+[P3] Core SSOT files
+  ✓ P3: PASS — task_config.py, SOMA.md, GOALS.md
+[P4] Vault structure
+  ✓ P4: PASS — all key vault dirs present
+[P5] Git status
+  ⚠ P5: WARN — 1106 uncommitted changes (previous session residue?)
+[P6] GPU
+  ✓ P6: PASS — 1 GPU(s): NVIDIA RTX PRO 4000 Blackwell, 1959 MiB, 24467 MiB;
+[P7] Lock files
+  ⚠ P7: WARN — stale locks: .RESULTS_B.lock (>1h old) .ab_loop.lock (>1h old) .activerun.lock (>1h old) .autonomy_code_a.lock (>1h old) .autonomy_code_b.lock (>1h old) .autonomy_code_c.lock (>1h old) .gpu_allocator.lock (>1h old) .monitor_ssot.lock (>1h old) .poc_single_arm.lock (>1h old) .ssot.lock (>1h old) ActiveRun.json.lock (>1h old) STATE.json.lock (>1h old)
+[P8] Orchestrator state
+  ✓ P8: PASS — cycle=1, paused=True
+[P9] Python venv
+  ⚠ P9: WARN — venv not found at /home/rlrk/env_isaaclab6/bin/python
+[P10] MEMORY.md link integrity
+  ✓ P10: PASS — 67 links resolve, no path divergence
+[P11] NEST freshness
+  ⚠ P11: WARN — 2 NEST freshness issue(s) — detail below
+      [WARN] D1 snapshot stale: a node state.md is newer than nest-snapshot.json
+      [WARN] D3 manifest stale: project-tree-manifest.md last_updated 2026-09-05 (⚠ 本日付が保証するのは §2 GEN region のみ = 09-05 11:1x 実測 `--check-manifest-section` exit 0 / **254 nodes**。⛔ file 全体の整合は保証しない。〔2026-08-10 の「未解消の食い違い 2 件」を本日 disposition — **消さずに格下げ**〕 ① **`root_node_id` = 存置（p6 は動かさない）**: 値 ` (16d ago > 14d)
+
+=== Result: 7/11 PASS, 0 FAIL, 4 WARN ===
+
+⚠ Warnings present — CC should note these in task report.
+✅ Preflight OK — CC may proceed with task.
