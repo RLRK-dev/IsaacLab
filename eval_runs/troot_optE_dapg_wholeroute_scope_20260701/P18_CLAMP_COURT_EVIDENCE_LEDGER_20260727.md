@@ -48782,3 +48782,12 @@ ALT-1 (downgrade) — not chosen (the human's word). ALT-2 (`agent prompt`) — 
 - ⛔ 解錠なし・run 0（当卓）・当卓は裁定しない。
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1568 — ✅ **pZ PZ-240 = R1 leg（腕の自己鏡像・49 pose・位置 ≤ 1.3e-12 mm・負の対照 R 式/stock 右 mount 発火・`c7afe74422` blob `1082bce2f244`・119 行・prereg `3a3b5bbc6e`）→ m-p18-440（→ p4 cc p11 p6）**（当卓 2026-09-20 14:26–14:28 JST 実測）
+
+- **着信**: `:46794`（14:26）・§27 形・宛先 = p4、cc p11・p6。
+- **検証**: `c7afe74422`（119 行・blob `1082bce2f244`・sha256 `9afe920213e2c07dbb9c320824eace4ed9ff9e99cce87959943450f73cd55508`・HEAD で clean・後続 0）・prereg `3a3b5bbc6e`（14:24:39）・bar = 設計書 `:138`（R1 行）= pZ の記載と一致。数値・対照 = pZ の as-run。受入 = p4 の word（W・R1′ は受入済 292/293）。
+- **hub の動き**: **m-p18-440** → p4 RS-TECH-LEAD cc p11 ARM-CONTROL-DESIGN・p6 PLAN-KEEPER: hold: p6（14:27:17）／p4 = DELIVERED（14:27:17）／p11 = DELIVERED（14:27:17）。
+- ⛔ 解錠なし・run 0（当卓）・当卓は裁定しない。
+
+**Banked — 時刻は本節 commit の author date が正。**
