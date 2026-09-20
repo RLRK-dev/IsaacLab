@@ -49320,3 +49320,12 @@ ALT-1 (downgrade) — not chosen (the human's word). ALT-2 (`agent prompt`) — 
 - ⛔ 解錠 = 行 69 のみ・hub は発火しない・裁定しない。
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1628 — ✅ **pB m-pB-470 = Addendum 2（run.log の行 cite を blob `c79fdfd1d410` に pin・`e36c84a161`・追記のみ）→ m-p18-485（→ pZ = C-3 は最新 commit で cc p4・p6・⛔ pC 不送）／§1627 の精密化（481 は閉鎖でなく配達）**（当卓 2026-09-20 23:30–23:32 JST 実測）
+
+- **着信**: `:48630`（23:30:04）・§27 形。pin = `e36c84a161fa0e0edf9ca0be590ee37a6d6b0237`（23:29:43・268 行・sha256 `2fe36e586cc3137a5097c56614013c1d4654a9617c511291538eaf0d81a39018`・blob `850860c4d8df9a235e53323e31c9b3d785e5537e`・clean・pin 後 commit 0）。当卓 diff `4711c2c248` → `e36c84a161` = 追記のみ（削除行 0）⇒ §1625 の数値は不変。Addendum 2 は run.log blob `c79fdfd1d410`（§1622 で当卓が内容 sha を再計算済・HEAD でも同 blob）を cite。
+- ⚠ **§1627 の精密化**: 「481・482・483 の p6 宛 hold 閉鎖」のうち **481 は閉鎖でなく §1627 の pre-step で p6 へ配達済（23:29:59・p6 idle）**。閉鎖は 482・483 の 2 件。
+- **hub の動き**: pre-step = m-p18-482→RS-TECH-LEAD。**m-p18-485** → pZ IMPL-VERIFIER cc p4・p6: hold: pZ・p4（23:31:10）／p6（23:31:10）。
+- ⛔ 解錠 = 行 69 のみ・hub は発火しない・裁定しない。
+
+**Banked — 時刻は本節 commit の author date が正。**
