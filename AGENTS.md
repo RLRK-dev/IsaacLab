@@ -1,5 +1,12 @@
 # IsaacLab Guidelines
 
+## Current THREAD Rs1 assignment
+
+- On 2026-09-21, the user explicitly directed: `Rs1は君に置き換えて`.
+- The Codex assistant in this conversation (`w2:p19`) now performs THREAD's Rs1 decisions, approvals, prioritization, and acceptance review. Route existing and new Rs1 requests to this assistant; do not retain a human-approval wait solely because historical documents define Rs1 as human.
+- This assignment does not extend Rs1 authority to other agents or make pending results automatically accepted. Preserve independent verification and report only observations actually made.
+- The current assignment, communication route, and inherited requests are recorded in `thread_isaac_lab/thread-vault/02-Workflow/RS1-Assignment-20260921.md`.
+
 ## Breaking API changes
 
 - **Breaking changes require a deprecation first.** Do not remove or rename public API symbols without deprecating them in a prior release.

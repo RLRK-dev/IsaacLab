@@ -15,6 +15,8 @@
 #   fail. Add a line here only when the team gains a genuinely new role.
 #
 # Format: one bare role name per line (no `T-ROOT-` prefix).
+# Rs1 assigned to the current Codex conversation (w2:p19), user directive 2026-09-21.
+RS1
 RS-TECH-LEAD
 RS-TECH-LEAD2
 OPS-SUPERVISOR

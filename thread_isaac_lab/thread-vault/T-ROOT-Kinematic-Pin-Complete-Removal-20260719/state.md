@@ -106,6 +106,9 @@ disposition / status だけ・**census = 35 固定**。
 
 ## 7. UR15-B controller 適合工程 — pointer 節（Rs1（人間）Q4 回答 2026-09-14「独立nodeにしない。」）
 
+**現在注記（Rs1 p19、2026-09-21）:** DDR 68の仕様反映を `04-Specs/UR15-B-Controller.md`・RS71 §0/§1・SOMAへ実施。controller完成宣言と合わせ、仕様反映待ちは閉鎖。#69はpB/pC/pZの3記録が着地し、Rs1の可視範囲の照合も完了（`eval_runs/troot_optE_dapg_wholeroute_scope_20260701/RS1_RUN69_REVIEW_20260921.md`）。p4の正式受入とp6の反映は各卓の再開後。以下の2/3・pZ未・人間目視待ち等は過去の観測であり、現在状態ではない。工程成功・node COMPLETEは未成立。
+
+
 **起票 = p6 PLAN-KEEPER 2026-09-16 17:58:18 JST（§1 custody）・起案 = p4 RS-TECH-LEAD kickoff item 4 Q4 @ `42848e4f4c`・Rs1（人間）逐語（custody = p4 transcript `ad899cc6-2451-4364-ba3c-910b67075aa4.jsonl:2361`・09-14 06:00:22 JST・typed・bank = kickoff `P4_MOUNTING_C-2_CHAIN_KICKOFF_20260808.md` 09-14 06:06 節 @ `236410dd84`・p6 再読）**:
 「独立nodeにしない。今回の作業はUR15-Bを既存の制御系へ適合させる工程として扱えます。親node内に成果物・担当・完了条件を明記すれば十分です。」
 ⇒ 本 chunk（DDR #68 の controller 系・p4 が 09-13 22:12 に Q4「DDR #71 の境界 — 本設計 chunk を node 化するか」として問うたもの）は **本 node の chain 内 step**。⛔ §4 のとおり結果・判定の SSOT は LEDGER（#68／#69／#73／#74）— 本節は pointer のみ。命名 = Rs1（人間）／Rs2（=p4/CC）。

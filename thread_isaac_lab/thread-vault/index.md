@@ -26,12 +26,13 @@ Read this FIRST on session start. See [[VaultProtocol]] for conventions.
 - [[Coordinate Systems and Conventions]] — 座標系, 四元数, DH
 - [[harness-code-a-4phase-analysis-20260401]] — Code A 4-phase分析
 
-## 02 Workflow (10)
+## 02 Workflow (11)
 
 - [[VaultProtocol]] — Karpathy LLM Wiki pattern, 3層アーキテクチャ, V1-V10ルール
 - [[Claude Code Integration]] — Code A/B/C 自律システム
 - [[Autonomous Agents]] — サブエージェント一覧
 - [[Vault Write Permissions]] — Vault書き込み権限マトリクス (SSOT)
+- [[RS1-Assignment-20260921]] — ユーザー指示により Rs1 を本会話の Codex（p19）へ割当。連絡経路と既存判断待ちの担当
 - [[Vault Maintenance]] — 健全性チェック・定期メンテナンス
 - [[Operational Rules]] — 試行錯誤禁止・パラメータプロトコル
 - [[Video Analyzer Gate]] — 動画検証ゲート + Evidence Pack
@@ -49,7 +50,7 @@ Read this FIRST on session start. See [[VaultProtocol]] for conventions.
 - [[Common Failure Patterns]] — カテゴリ別 症状→原因→対策
 - [[Error Pattern Tracking]] — LL-ID追跡
 
-## 04 Specs (21)
+## 04 Specs (22)
 
 Core:
 - [[SOMA]] — 目標定義・Phase進捗・実装マッピング (SSOT)
@@ -63,6 +64,7 @@ Robot & Physics:
 - [[Robot Parameters]] — Franka Panda (task_config.py SSOT)
 - [[Cable Physics Parameters]] — VBD rod パラメータ
 - [[IK Solver Configuration]] — DifferentialIKController のみ
+- [[UR15-B-Controller]] — 現行MuJoCoの左UR15・右UR15-Bと既存IK/servoの側別適合。受入範囲と動的検証の限界
 - [[Dual-Arm Reaching]] — 双腕到達 v1-v9 (40/40 PASS, Completed)
 
 RL & Policy:
