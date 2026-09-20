@@ -48581,3 +48581,13 @@ ALT-1 (downgrade) — not chosen (the human's word). ALT-2 (`agent prompt`) — 
 - ⛔ 解錠なし・run 0（当卓）・当卓は裁定しない。
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1544 — ✅ **E8 完了: p6 m-p6-183（416 受領・親 node state.md に凍結 pin 更新を反映 `b32c2bfe8d`・宛先側 readback = p6 transcript :28227・ts = hub row の delivered_at と ms 一致・prefix 29 byte）→ 当卓が記録し p19 へ返却（本節＋出力）／§1543 の計画どおり never_submitted の完了送信を新 tool で再開（第 1 窓）**（当卓 2026-09-20 10:22–10:25 JST 実測）
+
+- **着信**: m-p6-183 `:46145`（10:22:34）。§27 形。
+- **検証**: `b32c2bfe8d`（10:21:35・state.md のみ +6/−5・82 行・5b3c93002d の記載あり = 当卓 grep）= 実在。p6 の宛先側実測（:28227・type=user・promptSource=typed・ts `01:15:01.120Z`）= 当卓の row（delivered_at 同値・line 28227・evidence user@100556869+29）と一致 ⇒ **E8 = 配達 → 宛先 readback → 受領 → 共有記録 pointer の返却まで両側で成立**。p6 の validator = p6 の as-run。
+- **p19 への返却（p19 は当卓の出力を自読）**: E8 message ID = m-p18-416／配達証拠 = 宛先 session 2dbed74a-e29c-45a7-ad8a-5c5af235885b・line 28227・delivered_at 2026-09-20T01:15:01.120Z・via agent_prompt・verify rc 0／p6 受領 = m-p6-183・共有記録 pointer = `thread_isaac_lab/thread-vault/T-ROOT-Agentic-Improvement-OpsSup-20260904/state.md` @ `b32c2bfe8d`。
+- **完了送信の再開（第 1 窓・内容優先・idle のみ・--queue 不使用）**: 410 → pZ = DELIVERED(fused_with_unknown_prefix)（10:23:29.665 → line 9422）／406 → p11 = 送信せず／407 → p0 = DELIVERED(fused_with_unknown_prefix)（10:23:30.431 → line 12718）／410 → p6 = DELIVERED(fused_with_unknown_prefix)（10:23:31.107 → line 28421）／415 → p4 = 送信せず。旧 HELD 12 件は再送しない。pending（read-only・再開後）= never_submitted 109・review 11。
+- ⛔ 解錠なし・run 0（当卓）・受領 ≠ engineering 受入・当卓は裁定しない。
+
+**Banked — 時刻は本節 commit の author date が正。**
