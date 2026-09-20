@@ -49311,3 +49311,12 @@ ALT-1 (downgrade) — not chosen (the human's word). ALT-2 (`agent prompt`) — 
 - ⛔ 解錠 = 行 69 のみ・hub は発火しない・裁定しない。
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1627 — ✅ **p6 m-p6-198 = DDR 69・state.md §7.5 に pC VERDICT_C と pB log 読み（＋addendum）を反映（`50e55d775cdc`・verdict 2/3・pZ 行 未・Rs1 目視 待ち・p4 受入 未）→ m-p18-484（→ p4 cc pZ）／481・482・483 の p6 宛 hold 閉鎖（§1547）**（当卓 2026-09-20 23:28–23:31 JST 実測）
+
+- **着信**: `:48612`（23:28:36）・§27 形。pin = `50e55d775cdccc407aff211c00614124706acdc2`（当卓が commit/stat/diff を実読: LEDGER 行 69 に `ffd3c5200c`〔初版 `a1a39b4f03`〕・`8b16ce641a`・`4711c2c248`・`0d22720834`・両 sha256・verdict 2/3／state.md／clean）。
+- **hold 閉鎖（§1547）**: 481（pC VERDICT_C 着地 relay）・482（pB verdict 着地 relay）・483（pB addendum）の p6 宛 = 閉鎖（p6 が 3 commit を git で実読し `50e55d77` に反映済）。
+- **hub の動き**: pre-step = m-p18-481→PLAN-KEEPER。**m-p18-484** → p4 RS-TECH-LEAD cc pZ: hold: p4・pZ（23:30:01）。
+- ⛔ 解錠 = 行 69 のみ・hub は発火しない・裁定しない。
+
+**Banked — 時刻は本節 commit の author date が正。**
