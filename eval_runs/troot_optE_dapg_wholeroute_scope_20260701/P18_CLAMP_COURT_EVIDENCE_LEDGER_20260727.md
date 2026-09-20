@@ -48573,3 +48573,11 @@ ALT-1 (downgrade) — not chosen (the human's word). ALT-2 (`agent prompt`) — 
 - ⛔ 解錠なし・run 0（当卓・sim）・受領 ≠ engineering 受入・当卓は裁定しない。
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1543 — ✅ **新 tool の `pending`（read-only・10:16:05）= 124 leg: never_submitted 112（p0 16・p11 33・p4 19・p6 16・pZ 27・p18 1 = 旧 control 行 322）／uncertain（operator review）12 = 本日の HELD(foreign_text) 12 件と一致（p0 3・p11 4・p4 3・pZ 2）／next_action = complete_if_current 112・verify_or_operator_review 12**（当卓 2026-09-20 10:16 JST 実測）
+
+- **当卓の運用（新 tool 下）**: §1518 の停止は旧 tool の「完了試行が composer 文で終端化する」規則への対処だった。新 tool は composer に文があれば submit せず never_submitted のまま保持する（§1538 E2）ため、**E8（p6 の受領）完了後に never_submitted の完了送信を再開**する — 1 卓 1 窓・idle 宛先のみ・`--queue` 不使用・内容の優先順で（court の word と最新の verdict を先に・superseded の便は完了しない場合も当卓が記録して判断）。uncertain 12 件は再送しない（内容は bodies/ で到達済）。
+- scratch script（pending.py / next_pairs.py / dry_ok.py / watch_ready.sh）= 退役。観測は tool の `pending` と `verify` で行う。
+- ⛔ 解錠なし・run 0（当卓）・当卓は裁定しない。
+
+**Banked — 時刻は本節 commit の author date が正。**
