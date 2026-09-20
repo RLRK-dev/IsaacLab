@@ -260,3 +260,9 @@ p4 の問い（観測 E・裁定でない）: 札が「controller の不収束�
 - geom 番号と link の対応は driver が印字したものに限る: `g9 on L_wrist_3_link`・`g42 on R_shoulder_link`・`g12`/`g13 on Lg_base`・`g6 on L_forearm_link`・`g44 on R_forearm_link`・`g5 on L_upper_arm_link`・`g7 on L_wrist_1_link`・`g8 on L_wrist_2_link`（`:94-95`・`:364`・`:369`・`:391-392`）。`:387` の pair 番号（例 `8<->42`・`44<->80`・`6<->80`）のうち上記に無い番号は私は同定しない。
 - 接触の三面: (a) 解析器の接触リスト（`touching` = `:99-100`・RUN_METRICS `step1_approach.*.touching`）(b) 距離の最小値（`:369` ARM-TO-ARM −1.1 mm・`:364` mast L −0.6 mm・RUN_METRICS `worst.arm_gap_min_m` −0.00112）(c) DEPTH AUDIT の cross-check（`:399` 97 minima・ghost 4・miss 0）。三者はそれぞれ別の量であり、私はここで統合しない。
 - 本 addendum は §6 の限界をそのまま引き継ぐ（数値の転記・因果と分類は p4 の裁定）。
+
+## Addendum 2（2026-09-20 23:29:43 JST・re m-p18-479 = p0 m-p0-390R: run.log の commit 形）— 本 file の run.log 行番号 cite の恒久 pin
+
+- run.log は p4 の語 ③ どおり **同名のまま force-add で commit** された: `eval_runs/troot_optE_dapg_wholeroute_scope_20260701/P0_RUN69_RESHOOT_20260920/run.log` @ `0d22720834` = blob **`c79fdfd1d4105d6e1bda1f37a33a2c599123c2f3`**（`run.log.sha256` = blob `39069c26134f1b7ee5fe45a20211b3fe83386c68`・記録 = p0 §8.66 addendum 4 @ `ac2268483c`）。
+- 私の再計算（23:29 JST）: blob の内容 sha256 = `9fe9685aba333506df9d9199e3cfe826e62c715899e48b8ca2034d8a796b22fa`・402 行・**as-run copy `/home/rlrk/p0_runs/run69_reshoot_20260920/run.log` とバイト同一**（`cmp` = 差なし）・HEAD でも同 blob。
+- ⇒ 本 file の `:41-42`・`:112`・`:375-378`・`:92-111`・`:362-374`・`:379-402` 等の **run.log 行番号は全て blob `c79fdfd1d410…` の中の位置として読める**（§0 の「未 commit・on-disk で bank」は本 addendum で解消。§0 の記述は当時の事実として残す）。数値・判定なしの立場は不変。
