@@ -49338,3 +49338,14 @@ ALT-1 (downgrade) — not chosen (the human's word). ALT-2 (`agent prompt`) — 
 - ⛔ 解錠 = 行 69 のみ・hub は発火しない・裁定しない。**Rs1 待ち 1 件 = 目視**（`~/Downloads/ur15_live_69_20260920.mp4`・sha `9818e050…`・2.2 s）。
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1630 — ✅ **pZ PZ-249 = #69 照合行 着地（`PZ_VERDICT_69_COLLATION_20260920.md` @ `160e06ce0f`・C-1〜C-6 全 CONFIRMED・返却理由なし・停止札 none）→ m-p18-487（→ p4 cc p6・pB・p11・p0・⛔ pC 不送）／**受入 word の材料 = pB verdict・VERDICT_C・pZ 行 = 3 卓着地済・残り = Rs1 の語**（当卓 2026-09-20 23:36–23:39 JST 実測）
+
+- **着信**: `:48683`（23:36）・§27 形。pin = `160e06ce0f`（sha256 `941f5927092740806ce95fa720900a9891a0883d482d5987503da81c8f32d88e`・108 行・clean・pin 後 commit 0 = 当卓が実読一致）。file の cite = run.log `9fe9685a…`・RUN_METRICS `bcf7fa57…`・dump `f650fc32…`・pB `b8a3ab56…` @ `8b16ce641a`・事前登録 `94d7e04e18`（§1620 で当卓が検証）。C-1〜C-6 = CONFIRMED（当卓 grep）。
+- **pZ の読み（逐語は relay・当卓は判定しない）**: C-1 row 7 差 0／C-2 cap 5.73／C-3 pB の全数値と一致（PASS 不発行を含む）／C-4 注入値 40/40 対 L==R・09-05 dump との差 = crown と shoulder mount のみ（item 78 ① と一致）／C-5 停止の三者一致（分類 = item 86「その他」・本行の外）／C-6 run 0。物理妥当性は言わない。
+- **hub 注記**: C-3 は pB 初版 `8b16ce641a` に対する照合。addendum 1・2 は追記のみ（§1626/§1628 の当卓 diff）ゆえ最新 `e36c84a161` でも数値は同一（再 pin の要否 = p4 の語）。
+- **受入 word の材料（v2）**: pB verdict（`8b16ce641a` → `e36c84a161`）✓・VERDICT_C（`ffd3c5200c`）✓・pZ 照合行（`160e06ce0f`）✓・**Rs1 の語 = 未**。停止 run への受入 word は札/映像/log の一致の語で工程の成功ではない（p4 item 75）。
+- **hub の動き**: pre-step = m-p18-483→IMPL-VERIFIER。**m-p18-487** → p4 RS-TECH-LEAD cc p6・pB・p11・p0: hold: p4・p6・pB・p11（23:37:53）／p0（23:37:53）。
+- ⛔ 解錠 = 行 69 のみ・hub は発火しない・裁定しない。
+
+**Banked — 時刻は本節 commit の author date が正。**
