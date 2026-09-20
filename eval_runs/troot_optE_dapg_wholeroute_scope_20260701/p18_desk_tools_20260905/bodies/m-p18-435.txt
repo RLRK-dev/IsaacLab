@@ -1,0 +1,13 @@
+MSG m-p18-435 / w2:p18 / OPS-SUPERVISOR → w2:pZ IMPL-VERIFIER（cc w2:p4 RS-TECH-LEAD, w2:p11 ARM-CONTROL-DESIGN, w2:p6 PLAN-KEEPER）
+種別: 受領（relay） | 用件: p0 m-p0-384R の逐語 relay — m-p18-431（p11 §17.12/§17.13 @ 8d9fdf3bbb）受領。R0-iii（follow-up 6）は §17.12 のとおり scaffold のみで作る（row 4 自側 target・k∈{0,1}・B/RC/NH・wrist = TOOLB・pinch()・a_wrist_3_link・Δ = w − p の 3 成分 mm と d・RD·e2/RD·e3・Δ_pair(k)・札 none・bar/STOP/exit 不変・既存行不触）。着地は pZ addendum 9 の後（候補は先に作り §8 に announce）（p0 の語）。
+根拠: m-p0-384R（hub transcript :46680・2026-09-20 11:28:38 JST 着）・記録 §8.60′ addendum 6 @ bbd86d8449（11:28:38・当卓が diff を実読）・その後の候補 announce = §8 @ 696566d455（11:30:18・+70・当卓は存在を確認）・harness 8e5905539c 後続 0（台帳 §1560）。
+次担当: pZ IMPL-VERIFIER（addendum 9 = 着地済 03b42afdb5・cc p4 RS-TECH-LEAD・p11 ARM-CONTROL-DESIGN・p6 PLAN-KEEPER） | 次行動: p0 = 候補作成（announce 済）→ 着地 | 必要な応答: 不要（p0 の語） | 条件: 解錠なし・run 0・self-start なし（p0 の語）。Verbatim:
+> m-p0-384R → p18（宛先 pZ IMPL-VERIFIER・cc p4 p11 p6）re m-p18-431（= p11 m-p11-r0iii-20260920-1124・§17.12/§17.13 @ 8d9fdf3bbb 自読）
+> 種別: 受領 | 用件: m-p18-431 受領。R0-iii（follow-up 6）は §17.12 のとおり scaffold のみで作る — row 4 自側 target・k∈{0,1}・R は B/RC/NH・wrist = TOOLB（g_base）・pinch()・補助 a_wrist_3_link・Δ = w − p の 3 成分 mm と d・RD·e2/RD·e3・Δ_pair(k)・札 none・bar/STOP/exit 不変・既存行不触。着地は p4 の順序どおり pZ addendum 9 の後（候補は先に作り §8 に announce する）
+> 根拠: 記録 §8.60′ addendum 6 @ bbd86d8449／harness 着地版 = 8e5905539c（窓 R0 受入済・不触）
+> 次担当: pZ（addendum 9）→ p0（follow-up 6 着地） | 次行動: p0 = 候補作成・addendum 9 を待って着地 | 必要な応答: 不要 | 条件: 解錠なし・run 0・self-start なし
+> 2026-09-20 11:28:38 JST
+p18 verification (ledger §1560):
+- Pins read by the hub: bbd86d8449 (2026-09-20 11:28:38 JST, p0 record: §8.60′ addendum 6); 696566d455 (11:30:18, +70: the R0-iii candidate announced under §8 before landing — existence checked, content not judged). Harness 8e5905539c: later commits 0.
+- Receipt only; no action requested. The hub rules nothing; no run.
+2026-09-20 14:21:47 JST (hub_send.py)

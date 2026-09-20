@@ -48732,3 +48732,34 @@ ALT-1 (downgrade) — not chosen (the human's word). ALT-2 (`agent prompt`) — 
 - ⛔ 解錠なし・run 0（当卓）・当卓は裁定しない。
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1559 — ⚠ **当卓 pane の block（11:29 頃〜14:18・interactive input 待ち・p4 item 33 = `herdr agent prompt` rc=1 agent_blocked 11:29:27 実測）／p6 m-p6-185（DDR 68/73・§7.1 反映 `24047c9fd3`）= 記録のみ／426 → p11 配達（11:27:54・watcher 完了）**（当卓 2026-09-20 11:27–14:19 JST 実測）
+
+- **block の事実**: 当卓 transcript は `:46680`（m-p0-384R・11:28:38）の後、次の tool 実行が **14:18:04**（本節冒頭の command）。その間の着信 record 0・p4 kickoff item 33 @ `5b92614d86`（11:29:27）= 「w2:p18 is blocked and requires interactive input」で m-p4-290 未配達。**原因 = 証拠不足**（11:15 に同種 command（`pkill` を含む）が「rejected」で返った実績あり・14:18 に同種 command が実行された ⇒ 権限 dialog が pane に立っていた可能性 = inference 札）。**処置**: watcher の停止を `pkill` から「pairs file を空にする」方式へ変更（scratch `watch_ready.sh` に STOPFILE 分岐・14:20）。block 中に書かれた便 = PZ-237（11:30）・PZ-238（11:43）は 14:18:07/11 に到達・m-p4-290 は p4 が m-p4-291 として再送（14:18:43・item 34 `4cb2500e11`）。
+- **m-p6-185**: `:46663`（`type=user`・11:28:22）・`24047c9fd3`（11:27:26・LEDGER +2/−2・state.md +6/−6）・LEDGER `:172` に caa742b8d3/669b574f03/40aa696587/8d9fdf3bbb/00e06b6fa6/§1552/§1554・`:177` に 92059373a3/11ea985d8b19/bbc26fbc1b = 当卓が行内容を確認・HEAD で clean。宛先 = p18（記録）のみ ⇒ relay なし。p6 宛 hold 426/428/431 = 同 commit と後続で反映済 ⇒ 完了しない（§1547 規則）。
+- **426 → p11 = DELIVERED**（11:27:54.371・watcher READY 11:27:22・`send --id`）。
+- ⛔ 解錠なし・run 0（当卓）・当卓は裁定しない。
+
+**Banked — 時刻は本節 commit の author date が正。**
+
+## §1560 — ✅ **p0 m-p0-384R（431 受領・R0-iii は §17.12 のとおり scaffold のみ・§8.60′ addendum 6 `bbd86d8449`・候補 announce §8 `696566d455`）→ m-p18-435（→ pZ cc p4 p11 p6 = 全 hold）**（当卓 14:21 JST）
+- 着信 `:46680`（11:28:38）。pin = `bbd86d8449`（addendum 6）・`696566d455`（+70・存在確認）・harness 後続 0。受領のみ。hub: hold: pZ・p4・p11・p6（14:21:47）。
+
+## §1561 — ✅ **pZ PZ-237 = 計器窓 W の leg rows 1-7 全 CONFIRMED（`59576e5ac0`・blob `8b096863e570`・193 行・run 0）→ m-p18-433（→ p4 cc p0 p6 p11 = 全 hold）**（当卓 14:20 JST）
+- 着信 `:46695`（本文 11:30・到達 14:18:07）。pin = 当卓が blob/sha256 `6f2e2434…`/193 行を実読・一致・clean・後続 0・acceptance script の 92059373a3 後続 0。7 行・対照・record 3 行差・WIP overlay 観測 = pZ の as-run。hub: hold: p4・p0・p6・p11（14:20:54）。**p4 は block 中に git で読み 14:21 に受入（§1565）⇒ 433 の p4 leg は p4 の語「用済」により完了しない。**
+
+## §1562 — ✅ **pZ PZ-238 = R0-iii の事前登録 addendum 9（`03b42afdb5`・blob `6107206db31a`・890 行・:585-・pZ 計器で予測を先に測定 = 反証形 全て偽・DoD 述語 対照 11 本）→ m-p18-432（→ p0・p11・p6 配達／p4 = HELD(dialog)）**（当卓 14:20 JST）
+- 着信 `:46696`（本文 11:43・到達 14:18:11）。pin = 当卓が blob/sha256 `627bc9c5…`/890 行/:585 見出しを実読・一致・clean・後続 0・harness/driver/設計書/acceptance 後続 0。数値・対照 = pZ の as-run。**p4 = HELD(dialog:do you want to proceed?)（14:20:51 実測 = p4 pane に権限 dialog）** → 14:22:34 には配達可（436）。hub: hold: p4（14:20:52）／p0 = DELIVERED（14:20:52）／p11 = DELIVERED（14:20:52）／p6 = DELIVERED（14:20:53）。
+
+## §1563 — ✅ **p4 m-p4-291（= 290 の再送）= 条件③は §17.12 の形で充足・addendum 9 は §17.12 の形で写す・順序不変（kickoff item 32 `ec537384d2`）→ m-p18-434（→ pZ・p0 cc p11 p6 = 全 hold）**（当卓 14:21 JST）
+- 着信 `:46709`（14:18:43）。pin = `ec537384d2`（11:28:49・+5・当卓が diff を実読）・`5b92614d86`（item 33 = 290 の失敗記録）・設計書後続 0。読み = p4 の word。hub: hold: pZ・p0・p11・p6（14:21:46）。
+
+## §1564 — ✅ **pZ PZ-239 = R1′ leg（84/84・192/192・NH 対照 12/84・AXFIX 4.94e-15・archive 実行 rc 1→mkdir→rc 0・`a8a19a393f` blob `2162a9329f52`・156 行）→ m-p18-436（→ p4・p11 配達／p6・p0 hold）**（当卓 14:22 JST）
+- 着信 `:46722`（14:19:29）。pin = 当卓が blob/sha256 `fc737efc…`/156 行を実読・一致・clean・後続 0・bar = 設計書 8d9fdf3bbb :139（R1′ 行）＋ prereg 9d118cbf93（08-10）・受入 script の b7a5e39ecf 後続 0。数値 = pZ の as-run・mkdir 提案 = 未実装・p4 判断。hub: hold: p6・p0（14:22:35）／p4 = DELIVERED（14:22:35）／p11 = DELIVERED（14:22:35）。
+
+## §1565 — ✅ **p4 m-p4-292 = 窓 W 受入（pZ verdict を git で自読・kickoff item 35 `2cbcb9b985`・送信記録 `28a36969d8`）→ m-p18-437（→ p6・pZ・p0 cc p11 = 全 hold）／hold の整理**（当卓 14:22–14:24 JST）
+- 着信 `:46735`（14:21:16）。pin = `2cbcb9b985`（14:21:15・当卓が diff を実読・GUARD = item 35＋受入）・verdict/着地 = §1561/§1556 と同値。受入 = p4 の word・p6 が DDR 73 を閉鎖。hub: hold: p6・pZ・p0・p11（14:22:37）。
+- **hold の整理（§1547 規則・14:24）**: 完了しない = p4: 428（着地 → 受入済 292）・433（p4 の語「用済」）／pZ: 421（addendum 9 済）・428（leg 済）・431（addendum 9 が 8d9fdf3bbb を写した）／p6: 420・421・422・426・428・431（24047c9fd3 で反映済）。**完了する順** = p4: 435 → 424／pZ: 437 → 434 → 429 → 430 → 435／p0: 437 → 434 → 433 → 430／p6: 437 → 436 → 433 → 434 → 435 → 429／p11: 434 → 437 → 433 → 430 → 429 → 428 → 422。
+- ⛔ 解錠なし・run 0（当卓）・当卓は裁定しない。#69 = Rs1。
+
+**Banked — 時刻は本節 commit の author date が正。**
