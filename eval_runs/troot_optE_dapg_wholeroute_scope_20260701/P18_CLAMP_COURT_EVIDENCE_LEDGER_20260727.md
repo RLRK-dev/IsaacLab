@@ -49039,3 +49039,10 @@ ALT-1 (downgrade) — not chosen (the human's word). ALT-2 (`agent prompt`) — 
 - ⛔ 解錠なし・run 0（当卓）・当卓は裁定しない。
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1599 — ✅ **watcher 窓の完了送信: 452 → p11（pZ の R2 leg）= DELIVERED(fused_with_unknown_prefix)**（15:00:31.999 → `06:00:32.343Z`・via=agent_prompt）／**受領便・失効便の hold を閉じる（§1547 規則）: pZ 宛 434・429・430・435・444・445・446・450／p11 宛 422・445・453・456**（当卓 2026-09-20 15:00–15:01 JST 実測）
+
+- **閉じる理由**: pZ 宛 434（p4 291 = 条件③の読み・addendum 9 は §17.12 形で着地済）・429/430/435/444/445/446/450/453（各卓の受領便・p4 の受領・p11 の読み = pZ は PZ-244 で p4 の word 4 件を受領済・R0-iii は自ら leg 済）＝ 内容が後続の word/着地で失効した loop 記録。p11 宛 422/444/445/453/456（受領便）・449（R0-iii verdict = p11 は §17.18 で blob 自読）＝ 同上。**残る現行 hold = pZ: 457（p11 bar 訂正）→ 458（p4 の go）のみ。** 以後は新規 relay のみ完了する（fan-out 時に idle なら配達）。
+- ⛔ 解錠なし・run 0（当卓）・当卓は裁定しない。
+
+**Banked — 時刻は本節 commit の author date が正。**
