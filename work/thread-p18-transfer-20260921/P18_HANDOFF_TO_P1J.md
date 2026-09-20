@@ -38,7 +38,7 @@
 
 - **全 commit `--no-verify` ＋ 明示 pathspec**（`git add -- <paths>` → `git commit --no-verify --only -q -F <msgfile> -- <paths>`）。ref lock 失敗時は 2 秒後に再試行。
 - ⛔ **共有ツリーで `./isaaclab.sh -f` を走らせない**（1000 file 規模を書き換える）。
-- ⛔ **push は Rs1 の一言があるときだけ**。**本日の当卓の commit = 21 件**（session trailer で数えた。⚠ git user は全卓共有なので author では数えられない — 本日の全卓合計は 104 件）。
+- ⛔ **push は Rs1 の一言があるときだけ**。⭐ **2026-09-21 02:13 に利用者の逐語「push」で実行済** = `cf44999454..72b8666729`・**104 commit（全卓分）**・rc=0・fetch 後 **0 ahead / 0 behind**・remote tip `72b86667292a36e632180ec6fe6e2d8138783f6b`。事前に秘密混入 0 を実測（file 名と追加行の両方）。⇒ **本日の記録は公開済**で、以後の commit から再び差分が溜まる。**本日の当卓の commit = 21 件**（session trailer で数えた。⚠ git user は全卓共有なので author では数えられない — 本日の全卓合計は 104 件）。
 - ⛔ **他卓の file を commit しない。**
 
 ## 5. ⭐ 本日の当卓の誤り 6 件（後継が同じ穴に落ちないために）

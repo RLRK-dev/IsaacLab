@@ -49724,3 +49724,14 @@ ALT-1 (downgrade) — not chosen (the human's word). ALT-2 (`agent prompt`) — 
 - ⛔ 解錠なし・run 0（当卓）・当卓は裁定しない。**Rs1 の待ちは本日 解消した**（裁定 = 新規 run 1 回の認可）。
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1655 — ✅ **利用者の一語で push 実行（104 commit・全卓分）= `cf44999454..72b8666729`・remote と一致を実測**（当卓 2026-09-21 02:13 JST 実測）
+
+- **権限**: 利用者（人間）の逐語 **「push」**（本 session・02:12 頃）。当卓の standing 制約 = **push は Rs1 の一言があるときだけ** ⇒ 本件はその一語に当たる。⚠ **当卓は 02:10:12 に受付終了済**だが、本件は**新規案件の受理ではなく、利用者の直接指示に対する当卓自身の行為**。
+- **事前検査（当卓が push 前に実測）**: branch `rlrk/optE-s2-substrate-swap`・remote `fork` = `https://github.com/RLRK-dev/IsaacLab.git`・**104 commit ahead / 0 behind**・期間 01:10〜02:12・touched = `eval_runs/troot_optE_…`(39)・`work/thread-p18-transfer-…`(18)・`thread_isaac_lab/thread-vault`(3)・各 transfer file(6)。**秘密の混入 = 0**（file 名の pattern 検査と、追加行に対する鍵・token・password の pattern 検査の両方が空）。
+- **実行と検証**: `git push fork rlrk/optE-s2-substrate-swap` → **`cf44999454..72b8666729`**・rc=0（02:13:25）。**fetch 後の再測 = 0 ahead / 0 behind**・remote tip = **`72b86667292a36e632180ec6fe6e2d8138783f6b`**（02:13:36 実測）。
+- ⚠ **104 commit は全卓分**（共有 tree・共有 git user）。当卓の分は **session trailer で 22 件**（⛔ author では数えられない）。⇒ **本 push は hub の記録だけでなく、p4・p0・p11・p6 の本日の記録も公開した。**
+- **後継への反映**: 引継ぎ書 §4 に push 済の事実と remote tip を追記（本 turn）。
+- ⛔ 解錠なし・run 0・当卓は裁定しない。**Rs1 が認可した run の実行は p0・実行結果の追記債務は p1J。**
+
+**Banked — 時刻は本節 commit の author date が正。**
