@@ -49103,3 +49103,10 @@ ALT-1 (downgrade) — not chosen (the human's word). ALT-2 (`agent prompt`) — 
 - ⛔ 解錠なし・run 0（当卓）・当卓は裁定しない。
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1607 — ✅ **watcher 窓の完了送信: 460 → p0（p4 の R2 形式要件・cc）= DELIVERED(fused_with_unknown_prefix)**（15:07:50.741 → `06:07:51.076Z`・via=agent_prompt）／**当卓からの現行 hold = 461 → p6（p6 は次 commit で反映と自記・完了しない）のみ = watcher の pairs は空**（当卓 2026-09-20 15:07–15:08 JST 実測）
+
+- 残る現行 hold（15:08・prio.json）: なし（p6 宛 461 は §1606 の規則で完了しない・p6 は git で反映）。以後は新規 relay のみ。
+- ⛔ 解錠なし・run 0（当卓）・当卓は裁定しない。
+
+**Banked — 時刻は本節 commit の author date が正。**
