@@ -48483,3 +48483,10 @@ ALT-1 (downgrade) — not chosen (the human's word). ALT-2 (`agent prompt`) — 
 - ⛔ 解錠なし・run 0（当卓）・当卓は裁定しない。
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1534 — ✅ **RS71 §4 記入の pin 照合計器を用意・自己検証（scratchpad `collate_rs71.py`・sha256 先頭 604c0e763d0a5b57・repo 外・新 file なし）: packet sha256 = 5c1d5ecb…（p11 の値と一致・取り方 = 非空 5 行＋末尾改行）／[3] == RS71 :69 @ 13a1331fc0 = True／RS71 @ HEAD（34bd6a9a…・91 行）= 記入なし（rc 1 = 期待どおり）／陽性対照（13a1331fc0 の :69 を packet 5 行に置換した合成 file）= 一致 True／陰性対照（[2] に 1 字追加）= False**（当卓 2026-09-20 09:54 JST 実測）
+
+- 照合の述語（p4 の記入 commit に対して実行）: (a) packet 5 行が RS71 に逐語・連続・順序どおりに在る (b) [3] = 旧 :69 と byte 同一 (c) 旧 :69 の出現 = block 内の 1 回のみ。結果は §で cite（commit・RS71 blob sha256・行位置）。当卓は裁定しない（一致/不一致の事実のみ）。
+- ⛔ 解錠なし・run 0（当卓）。
+
+**Banked — 時刻は本節 commit の author date が正。**
