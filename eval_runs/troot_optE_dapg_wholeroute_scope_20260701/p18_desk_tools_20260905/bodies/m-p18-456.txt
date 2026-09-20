@@ -1,0 +1,13 @@
+MSG m-p18-456 / w2:p18 / OPS-SUPERVISOR → w2:p4 RS-TECH-LEAD（cc w2:p6 PLAN-KEEPER, w2:p11 ARM-CONTROL-DESIGN, w2:p0 IMPL-BUILDER）
+種別: 受領（relay） | 用件: pZ PZ-244 の逐語 relay — p4 の受入 word 4 件（窓 W・R1・mkdir follow-up・R0-iii）と R2 の処分（m-p4-300）を受領。pZ の残り = R2 の再走行のみ: p11 の §10 R2 bar 訂正（append-only）→ pZ の訂正事前登録（object 後の bar 変更・原因・計器 sha 不変・NH の hand jnt_axis 期待の撤回を明記）→ 同一計器 pz_r2.py（sha 3f6dab44… 不変）＋慣性テンソル計器 v2＋判定層を 1 回走行 → verdict。p11 の訂正 commit は pZ の実測で未着地（設計書の後続 commit 0・最新節 §17.19）— 着地 relay を待つ（pZ の語）。
+根拠: PZ-244（hub transcript :47520・2026-09-20 14:56 JST 着）・受領対象 = 437・442・448・451・454（台帳 §1565/§1570/§1581/§1584/§1588）・pZ 提出済 verdict 6 本（59576e5ac0・a8a19a393f・c7afe74422・b0e2b8880d・db84a76a0e・381713ca34 = 当卓が各節で実読）・当卓の実測 14:57: 設計書の最新 commit = §17.19 まで（p11 の R2 bar 訂正 = 未着地）（台帳 §1595）。
+次担当: p4 RS-TECH-LEAD（受領・cc p6 PLAN-KEEPER・p11 ARM-CONTROL-DESIGN = §10 R2 bar 訂正 commit が次・p0 IMPL-BUILDER） | 次行動: p11 = 訂正 commit → pZ = 訂正事前登録 → 再走行 → verdict → p4 = 受入 | 必要な応答: 不要（pZ の語） | 条件: 解錠なし（route run (2)・#69・D4′・WIP）・run 0・計器 sha 不変・07-29 記録不触（pZ の語）。Verbatim:
+> MSG PZ-244 / w2:pZ IMPL-VERIFIER → w2:p18 OPS-SUPERVISOR（relay 先 w2:p4 RS-TECH-LEAD・cc w2:p6 PLAN-KEEPER, w2:p11 ARM-CONTROL-DESIGN, w2:p0 IMPL-BUILDER）— re m-p18-437 / 442 / 448 / 451 / 454
+> 種別: 受領 | 用件: p4 の受入 word 4 件（窓 W = m-p4-292・R1 = m-p4-294・mkdir follow-up = m-p4-297・R0-iii = m-p4-298）と R2 の処分（m-p4-300: 当卓の訂正案採用・受入は訂正事前登録の下での再走行後）を受領。当卓の残り = R2 の再走行のみ: 順序は p11 の §10 R2 bar 訂正（append-only）→ 当卓の訂正事前登録（object 後の bar 変更・原因・計器 sha 不変・NH の hand jnt_axis 期待の撤回を明記）→ 同一計器 pz_r2.py（sha 3f6dab44b655d64b… 不変）＋ 慣性テンソル計器 v2（6 比較に拡張・sha 6609eacef7fa3f1a…）＋ 判定層（sha 20d823d0a4866a99…）を 1 回走行 → verdict（28/28 と対照 NH/RC/B′ の落ち方）。p11 の訂正 commit は当卓の実測で未着地（設計書の後続 commit = 0 件・最新節 §17.19）— 着地 relay を待つ。
+> 根拠: 受領対象 = m-p18-437・442・448・451・454（各 relay の pin は hub 台帳 §1565/§1570/§1581/§1584/§1588）／当卓の提出済 verdict = 59576e5ac0（W）・a8a19a393f（R1′）・c7afe74422（R1）・b0e2b8880d（mkdir）・db84a76a0e（R0-iii）・381713ca34（R2・処分待ち）。
+> 次担当: p11 ARM-CONTROL-DESIGN（§10 R2 bar 訂正 commit）→ pZ（訂正事前登録 → 再走行 → verdict）→ p4（受入） | 次行動: pZ = p11 着地後に着手 | 必要な応答: 不要 | 条件: 解錠なし（route run (2)・#69・D4′・WIP）・run 0・計器 sha 不変・07-29 記録不触。
+> 2026-09-20 14:56 JST
+p18 verification (ledger §1595):
+- Receipt of five relays (437, 442, 448, 451, 454), all delivered to pZ by the hub (delivery rows in sent_records.jsonl). The six verdict pins pZ lists were read by the hub in §1561, §1564, §1568, §1580, §1582 and §1585. Hub's own check at 14:57 JST: the design doc's latest commit still ends at §17.19 — p11's §10 R2 bar correction has not landed yet, as pZ states.
+- The hub rules nothing; no run.
+2026-09-20 14:57:27 JST (hub_send.py)

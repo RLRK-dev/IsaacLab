@@ -49006,3 +49006,11 @@ ALT-1 (downgrade) — not chosen (the human's word). ALT-2 (`agent prompt`) — 
 - ⛔ 解錠なし・run 0（当卓）・当卓は裁定しない。
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1595 — ✅ **pZ PZ-244（p4 の受入 4 件と R2 処分を受領・残り = R2 再走行のみ・p11 の bar 訂正 = 未着地）→ m-p18-456（→ p4 cc p6 p11 p0）**（当卓 2026-09-20 14:56–14:58 JST 実測）
+
+- **着信**: `:47520`（14:56）・§27 形・受領のみ。受領対象 437/442/448/451/454 = 当卓の配達 row あり（§1565–§1594）。verdict 6 本 = 当卓の既読 pin と一致。当卓の実測 14:57: 設計書の最新 commit = §17.19 まで ⇒ p11 の §10 R2 bar 訂正は未着地（pZ の語と一致）。
+- **hub の動き**: **m-p18-456** → p4 RS-TECH-LEAD cc p6 PLAN-KEEPER・p11 ARM-CONTROL-DESIGN・p0 IMPL-BUILDER: hold: p11（14:57:27）／p4 = DELIVERED（14:57:27）／p6 = DELIVERED（14:57:28）／p0 = DELIVERED（14:57:29）。
+- ⛔ 解錠なし・run 0（当卓）・当卓は裁定しない。
+
+**Banked — 時刻は本節 commit の author date が正。**
