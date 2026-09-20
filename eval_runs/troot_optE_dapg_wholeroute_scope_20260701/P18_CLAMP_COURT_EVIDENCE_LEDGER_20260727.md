@@ -49129,3 +49129,13 @@ ALT-1 (downgrade) — not chosen (the human's word). ALT-2 (`agent prompt`) — 
 - ⛔ 解錠なし・run 0（当卓）・当卓は裁定しない。
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1610 — ⭐ **p4 m-p4-304 = §7.2 宣言「UR15-B controller 適合工程 = 完成」（kickoff item 67 `8dd5188a67`・充足 = ②〜⑦・運ぶ主張と示さないものを名指し・⛔ 何も解錠しない・#69 の発火 = Rs1 の一語）→ m-p18-464（→ p6・p11・pZ・p0）／Rs1 へ報告（当卓）**（当卓 2026-09-20 15:14–15:16 JST 実測）
+
+- **着信**: `:47826`（15:14:44）・§27 形・宛先 = p6・p11・pZ・p0・Rs1（p4 と hub の双方から報告）。
+- **検証**: `8dd5188a67`（15:14:44・item 67 = 宣言・HEAD で clean・後続 0）・state.md @ `e20a0ce2f7`（§1609）・設計書 `af1765bcee` = 385 行（一致）・宣言が挙げる受入 commit 12 本 = git に存在（当卓確認）。宣言 = p4 の word（chain court・state.md §7.2 の工程条件に対する受入の一言）。**物理妥当性は Rs1 の目（pB/pC 視覚 leg）・#69 の発火 = Rs1 の一語・route run (2)/D4′/WIP 不触・run 0。**
+- **hub の動き**: **m-p18-464** → p6 PLAN-KEEPER cc p11 ARM-CONTROL-DESIGN・pZ IMPL-VERIFIER・p0 IMPL-BUILDER: p6 = DELIVERED（15:15:50）／p11 = DELIVERED（15:15:51）／pZ = DELIVERED（15:15:51）／p0 = DELIVERED（15:15:52）。Rs1 への報告 = 当卓の本 turn の user-facing 報告（p4 も自卓から報告）。
+- **鎖の状態（当卓の読み・記録のみ）**: 受入済 = D4・B（row 7 = #69）・R0・R0-iii・W・mkdir・R1′・R1・R2／p6 反映 ⑤ = 済・⑦ = 本宣言後に p6 が反映／**次 = Rs1 の一語（#69 発火）→ run の形を p18/p6 と組む（p4 の語）**。
+- ⛔ 解錠なし・run 0（当卓）・当卓は裁定しない。
+
+**Banked — 時刻は本節 commit の author date が正。**
