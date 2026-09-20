@@ -426,3 +426,16 @@ position servo への線形 ramp（現行・不変）。one-shot 目標なし。
 - **受入の語の射程（p4 が Rs1 の目視の前に明記・当卓の記録側の読み）**: 受入 = **固定した形どおりの 1 回執行と 4 記録（札・動画・log・照合）が同じ 1 つの停止・同じ状態を指すこと**の受入。⛔ **工程の成否・行 68 閉鎖・node COMPLETE・training-ready・cell の是非を意味しない**。⇒ 受入語が来ても本書の §7.2 完成受入印（`:1`・17.23）の射程は広がらない（静的 legs と受入 item のまま）。
 - **三者一致の下書き（p4・確定は Rs1 の語の後）**: 動画（L 不動・R 約 1 cm 後静止・ケーブル/クリップ不触・2.2 s）↔ log（L 0.0%・held 10560/10560・R 100%・stall raise `:3996`）↔ 照合（row 7・R3-i 事前登録どおり・停止 1）= 矛盾 0・把持は「無し」で整合。**Rs1 へ運ぶ実体の発見（受入と別）= C-2 既定 cell で L 腕が rest 姿勢で柱と R 腕 shoulder に接触（1.1 mm 貫入・3 関節力飽和）**= 当卓 §17.26 の原因読みと同じ・cell の是非は Rs1。
 - 残り = **Rs1 の目視の一語**（対象 `~/Downloads/ur15_live_69_20260920.mp4`・sha `9818e050…`・2.2 s）→ p4 の受入または返却 → p6。当卓 = 待ち・run 0・driver 不触。
+
+### 17.29 p4 の語 2 件（R0 targets の open 事項 close ＋ 4 札化は不採用・Rs1 へ保持）と、**再導出条件への補完 1 点**（p4 m-p4-312 → m-p18-493 cc 受領 2026-09-21 01:15:57 JST・kickoff item 93 @ `e19d767680` を当卓が blob で直読）
+- **語 1 = 確認 1 行は不要・open 事項は閉じる**（p4 が独立に検算: 閉形式の入力は cell_spec/task_config の定数のみで mount 由来の量を含まない・両 dump の cable field は byte 同一・#69 の run 自身が同じ link/x/y を測っている）。⇒ §17.27 は close。**R0 窓の受入（item 22）は不変**・本件は受入の拡張でない。当卓の数値再確認（blob 直読・python 再計算）: `TABLE_HEIGHT` 0.80（task_config `:20`）＋ 0.150（cell_spec `:472`）＋ `CABLE_RADIUS` 0.004（`:137`）= **z 0.954**／`x0 = −CABLE_SEG·CABLE_N/2 = −0.300`（0.015 × 40）／cab27 **0.1125**・cab32 **0.1875** = §17.7 の GL/GR。
+- **p4 の carry（p6 の DDR へ）**: targets は `REST_Y`／`TABLE_TOP`／`CABLE_R`／`CABLE_SEG`／`x0` に依存 ⇒ **`WORK_ROW_DY` を設定した run・table 高さ・cable 定数を変えた run では R0 targets を再導出**（#69 は env 24 key 全て未設定 = `WORK_ROW_DY` 0 を env_before/after で確認済）。**mount（yoke/tilt/crown）の変更では再導出不要**。
+- **⭐ 当卓の補完（carry の 5 定数は「格子の値」を決める入力・本節は「どの格子点を名指すか」と「他の行の値」を決める入力を足す）**:
+  - **選択の入力** = `x_cmd = GRASP_CENTRE_X ∓ GRIP_HALF_SPAN`（harness `:1005`・driver `:1241` 形）。`GRASP_CENTRE_X` は **env 上書き可**（harness `:164`・driver `:1246`・既定 = `C1[0]` = 0.150 = cell_spec `:499`）、`GRIP_HALF_SPAN` = 0.044（task_config `:235`）。⇒ **`GRASP_CENTRE_X` を設定した run、または clip 位置 `C1`/`C2` が動いた cell では、5 定数が不変でも R0 targets を再導出する**。
+  - **量子化床 = 半 pitch 7.5 mm**（当卓が閉形式で再計算）: 指令中心を +7.5 mm 動かすと **R 側だけ cab32 → cab33**、+15 mm で **L cab27 → cab28・R → cab33**。近接選択ゆえ小さな移動で名指しが跳ぶ（[[feedback-nearest-node-selection-has-a-quantization-floor-interpolate-the-crossing-2026-07-15]]）。
+  - **他の行**: GRASP1（row 1・§17.9）は `GRASP_CENTRE_X ∓ GRIP_HALF_SPAN` を **値として**持ち、rows 6-18 は `C1`/`C2`（harness `:1093`・`:1095`・`:1101`）を値として持つ ⇒ 同じ条件で再導出対象。
+  - **費用 0 の検査（新計器なし）**: harness は実効 `GRASP_CENTRE_X` と env 設定フラグ・両経路の link 番号・dump sha を自分で印字/記録する（`:1031`・`:1041`・`:1270`）。将来 run はこの印字を読めば再導出要否が決まる。
+- **語 2 = §17.26 の 4 札化提案は不採用・Rs1 へ持つ提案として保持**（§17.4 は Rs1 補足 (a) の逐語に基づく報告規則ゆえ札集合の拡張は Rs1 の領域・p4）。運用 = 札が「その他」のときは **札の文に機構を名指す**（item 86 の文は既にその形）。本 run の札は item 86 の文のまま・当卓は変えない。⇒ §17.26 の提案 = **保持（Rs1 待ち）**。
+- **事実（p4 が運ぶ・当卓の 17.26 と同じ機構）**: driver の per-arm 追従 gate の stall は **3 回目撃** — t42（driver 注記 `:3982-3995`・p4 は run 未測定 = as-read）／U0 08-10（p4 が run.log `:367-370` 実読）／#69。いずれも **C-2 系 cell の L 腕側**。
+- **名称の注記（本書の cite 読み替え）**: task_config は `TABLE_HEIGHT`（`:20`）、cell_spec が `TABLE_TOP = _tc.TABLE_HEIGHT`（`:51`）と呼ぶ。同値・§17.7/§17.27 の「TABLE_TOP」は後者の名。
+- 残り = **Rs1 の目視の一語** → p4 の受入または返却 → p6。当卓 = 待ち・run 0・driver 不触。
