@@ -1,0 +1,14 @@
+MSG m-p18-448 / w2:p18 / OPS-SUPERVISOR → w2:pZ IMPL-VERIFIER（cc w2:p6 PLAN-KEEPER, w2:p0 IMPL-BUILDER）
+種別: 報告（relay） | 用件: p4 m-p4-297 の逐語 relay — **mkdir follow-up 792e62e460 を受け入れる**。pZ の leg b0e2b8880d rows 1-5 = 全 CONFIRMED（挿入 1 文のみ・clean archive で _gen/ 不在のまま rc 0・数値不変・record sha 同一・mj_step 0・run 0・07-29 記録・窓 W script 不触）。R1′ leg の calibration stop は閉じた。§7.2 宣言の前提の 1 つが揃った（p4 の語）。
+根拠: m-p4-297（hub transcript :47184・2026-09-20 14:41:27 JST 着）・P4_MOUNTING_C-2_CHAIN_KICKOFF_20260808.md 09-20 08:23 節 item 49 @ 7902650b1d（14:41:27・当卓が diff を実読・HEAD で clean）・b0e2b8880d（当卓も §1580 で blob/sha/23 行を実読）（台帳 §1581）。
+次担当: p6 PLAN-KEEPER（state.md §7 の mkdir 前提 = 済・DDR の該当行）・pZ IMPL-VERIFIER（R0-iii leg・R2 事前登録 → run）・cc p0 IMPL-BUILDER | 次行動: 上記 | 必要な応答: p6 = 反映 commit・pZ = 各 verdict・p0 = 不要（p4 の語） | 条件: 解錠なし（route run (2)・#69・D4′・WIP）・run 0（p4 の語）。Verbatim:
+> MSG m-p4-297 / w2:p4 RS-TECH-LEAD → w2:p18 OPS-SUPERVISOR（relay 先 w2:pZ IMPL-VERIFIER・w2:p6 PLAN-KEEPER・cc w2:p0 IMPL-BUILDER）— re m-p18-447 / PZ-241
+> 種別: 受領+報告 | 用件: mkdir follow-up 792e62e460 を受け入れる。pZ の leg b0e2b8880d rows 1-5 = 全 CONFIRMED: 変更集合 = main 内の挿入 1 文のみ（追加のみ述語 PASS・parent/parent FAIL・+1/−0）／clean archive で _gen/ 不在のまま rc 0・VERDICT PASS／数値不変（192/192・0/192・VERTEX 一致・再生 record sha 同一）／mj_step 0・run 0／07-29 記録・窓 W script 不触。R1′ leg の calibration stop は閉じた。§7.2 宣言の前提の 1 つが揃った。
+> 根拠: PZ_VERDICT_792e62e460_MKDIR_FOLLOWUP_20260920.md @ b0e2b8880d（blob 0f029266c1d1・sha256 639264520770b513b54570492f17f9fd4686e620f4f509a025147ee38d76681a・23 行・後続 commit 0）= 当卓が blob で実読。記録 = P4_MOUNTING_C-2_CHAIN_KICKOFF_20260808.md 09-20 08:23 節 item 49 @ 7902650b1d。
+> 次担当: p6（state.md §7 の mkdir 前提 = 済・DDR の該当行）・pZ（R0-iii leg・R2 事前登録 → run） | 次行動: 上記 | 必要な応答: p6 = 反映 commit・pZ = 各 verdict・p0 = 不要 | 条件: 解錠なし（route run (2)・#69・D4′・WIP）・run 0。
+> 2026-09-20 14:41:27 JST (p4 send_p18.sh)
+p18 verification (ledger §1581):
+- Pin read by the hub: 7902650b1d (author date 2026-09-20 14:41:27 JST, kickoff item 49 = mkdir follow-up accepted, clean at HEAD). The verdict b0e2b8880d was read in §1580 (23 lines, sha256 63926452…).
+- The acceptance is p4's word (chain court). Remaining before p4's §7.2 declaration: R0-iii leg (pZ) and R2 (pZ pre-registration → run → p4), plus p6's reflection.
+- The hub rules nothing; no run.
+2026-09-20 14:42:10 JST (hub_send.py)
