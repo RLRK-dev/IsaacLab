@@ -1,0 +1,63 @@
+{
+  "observed_at": "2026-09-21T06:16:02.728703+09:00",
+  "destination": "/home/rlrk/Downloads/HVJB_内側ハウジング指先3D比較_v01_20260921",
+  "pdf_pages_rendered_and_visually_inspected": 3,
+  "visual_inspection_scope": "Document layout and plotted correspondence only; no physical acceptance.",
+  "files": [
+    {
+      "file": "README.md",
+      "sha256": "a8ef3960ff911b2982bccdfefe99502ee54168297e9ceee4433cf12ed2ecdc83",
+      "bytes": 1267
+    },
+    {
+      "file": "document_audit.json",
+      "sha256": "fefae54c598801470cbcd85115a9c44a30ae5a4fa1f343630c0ce130bf337e84",
+      "bytes": 611
+    },
+    {
+      "file": "geometry_run.log",
+      "sha256": "00ae963d4d759013d334f0ecd4899570627d4a9d0354bfebcbce51708e789f60",
+      "bytes": 675
+    },
+    {
+      "file": "pages/page-1.png",
+      "sha256": "c8671b812f9fed5aead3326e0e84f49b9eee02d34ee1fff24d6f41e92407c5f9",
+      "bytes": 257306
+    },
+    {
+      "file": "pages/page-2.png",
+      "sha256": "2ba596dd927c043b1129aaa35cbf6529541fce381b91ff641a83decd04ceda84",
+      "bytes": 223080
+    },
+    {
+      "file": "pages/page-3.png",
+      "sha256": "573a333b93b743d69186f5e2b0269ef7c741b46d361ecd7e5931624fd116cb7c",
+      "bytes": 193031
+    },
+    {
+      "file": "pdf/内側ハウジング指先の3D比較と開放空間_v01_20260921.pdf",
+      "sha256": "8006bab6372e804b3aff531260ba993ad713b52c08e0378268736503a35aabd3",
+      "bytes": 379443
+    },
+    {
+      "file": "rear_only_tip_meshes.json.gz",
+      "sha256": "351642db2eae619e4de0f15b628b66f9b5197de2fb9056870623fb6e5f76e62b",
+      "bytes": 4856
+    },
+    {
+      "file": "render_run.log",
+      "sha256": "5f1df75b7f78f3e179fdf958191d44aa9049239a174c7ae470a3615a1ac9a786",
+      "bytes": 249
+    },
+    {
+      "file": "tip_access_observations.json",
+      "sha256": "52a75b4a728f527ee42372f18725782218332d51963de5bb60e6da6e50aafdb2",
+      "bytes": 32962
+    },
+    {
+      "file": "trial_tip_meshes.json.gz",
+      "sha256": "131216d7680126bb17b7fc8fe10c033d75930b4b79b4aa4fefd17f4f37bd4d91",
+      "bytes": 4959
+    }
+  ]
+}

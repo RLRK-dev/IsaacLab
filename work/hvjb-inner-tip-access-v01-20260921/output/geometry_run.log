@@ -1,0 +1,7 @@
+I01 [('closed', 6112), ('open_2mm_each', 4656), ('withdraw_8mm_then_open', 0), ('rear_only_closed_comparison', 0)]
+I02 [('closed', 6112), ('open_2mm_each', 4652), ('withdraw_8mm_then_open', 0), ('rear_only_closed_comparison', 0)]
+I03 [('closed', 5978), ('open_2mm_each', 4575), ('withdraw_8mm_then_open', 0), ('rear_only_closed_comparison', 0)]
+I04 [('closed', 6128), ('open_2mm_each', 5017), ('withdraw_8mm_then_open', 0), ('rear_only_closed_comparison', 0)]
+I05 [('closed', 6054), ('open_2mm_each', 4945), ('withdraw_8mm_then_open', 0), ('rear_only_closed_comparison', 0)]
+TIP_ACCESS_OBSERVATIONS_COMPLETE
+[INFO] Using Python: "/home/rlrk/IsaacLab/env_isaaclab/bin/python"

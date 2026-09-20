@@ -1,0 +1,946 @@
+{
+  "config": {
+    "status": "comparison_only_not_selected_manufacturing_dimensions",
+    "source_section_z_m": -0.04,
+    "rear_band_source_z_m": [
+      -0.0405,
+      -0.036
+    ],
+    "display_relief_m": 0.0001,
+    "pad_outer_offset_m": 0.001,
+    "carrier_outer_offset_m": 0.003,
+    "thrust_right_xy_min_m": [
+      0.0094,
+      -0.0008
+    ],
+    "thrust_right_xy_max_m": [
+      0.0104,
+      0.0008
+    ],
+    "thrust_source_z_m": [
+      -0.036,
+      -0.0339
+    ],
+    "comparison_open_each_side_m": 0.002,
+    "comparison_axial_withdrawal_m": 0.008,
+    "rear_only_comparison_source_z_m": [
+      -0.0422,
+      -0.0391
+    ],
+    "rear_only_comparison_has_no_thrust_shoulder": true,
+    "display_wall_header_y_m": [
+      0.0,
+      0.003
+    ],
+    "display_inner_transform": "header-local (X,Y,Z) = (source X + bay X, -source Z - 0.0311, source Y)",
+    "display_registration_is_not_measured_mated_pose": true,
+    "profile_collinear_numeric_epsilon_m": 1e-08,
+    "clipped_area_reporting_epsilon_m2": 1e-16
+  },
+  "source_inner_sha256": "1ac417baa3ff67ae8bc3ed5c32ac91cfb778a2effbd1e1a19d24900066c38f32",
+  "apertures_sha256": "ebc87a9b4c338c219ea51a1b81c7ee1802486947a96f5caabf33da6662aae565",
+  "profile_source_xy_m": [
+    [
+      0.005200000130571425,
+      -0.003324999939650297
+    ],
+    [
+      0.007375000044703484,
+      -0.003324999939650297
+    ],
+    [
+      0.00747301708906889,
+      -0.0033201847691088915
+    ],
+    [
+      0.007570090238004923,
+      -0.003305785357952118
+    ],
+    [
+      0.007665284909307957,
+      -0.0032819402404129505
+    ],
+    [
+      0.0077576832845807076,
+      -0.0032488794531673193
+    ],
+    [
+      0.007846396416425705,
+      -0.003206921275705099
+    ],
+    [
+      0.007930570282042027,
+      -0.0031564696691930294
+    ],
+    [
+      0.008009393699467182,
+      -0.003098010551184416
+    ],
+    [
+      0.008082106709480286,
+      -0.0030321066733449697
+    ],
+    [
+      0.008148010820150375,
+      -0.002959393197670579
+    ],
+    [
+      0.008206469938158989,
+      -0.0028805702459067106
+    ],
+    [
+      0.008256921544671059,
+      -0.0027963968459516764
+    ],
+    [
+      0.008298879489302635,
+      -0.0027076834812760353
+    ],
+    [
+      0.00833194050937891,
+      -0.002615284640341997
+    ],
+    [
+      0.00835578516125679,
+      -0.0025200904347002506
+    ],
+    [
+      0.00837018433958292,
+      -0.0024230170529335737
+    ],
+    [
+      0.008375000208616257,
+      -0.0023250000085681677
+    ],
+    [
+      0.008375000208616257,
+      0.0023250000085681677
+    ],
+    [
+      0.00837018433958292,
+      0.0024230170529335737
+    ],
+    [
+      0.00835578516125679,
+      0.0025200904347002506
+    ],
+    [
+      0.00833194050937891,
+      0.002615284640341997
+    ],
+    [
+      0.008298879489302635,
+      0.0027076834812760353
+    ],
+    [
+      0.008256921544671059,
+      0.0027963968459516764
+    ],
+    [
+      0.008206469938158989,
+      0.0028805702459067106
+    ],
+    [
+      0.008148010820150375,
+      0.002959393197670579
+    ],
+    [
+      0.008082106709480286,
+      0.0030321066733449697
+    ],
+    [
+      0.008009393699467182,
+      0.003098010551184416
+    ],
+    [
+      0.007930570282042027,
+      0.0031564696691930294
+    ],
+    [
+      0.007846396416425705,
+      0.003206921275705099
+    ],
+    [
+      0.0077576832845807076,
+      0.0032488794531673193
+    ],
+    [
+      0.007665284909307957,
+      0.0032819402404129505
+    ],
+    [
+      0.007570090238004923,
+      0.003305785357952118
+    ],
+    [
+      0.00747301708906889,
+      0.0033201847691088915
+    ],
+    [
+      0.007375000044703484,
+      0.003324999939650297
+    ],
+    [
+      0.005200000130571425,
+      0.003324999939650297
+    ]
+  ],
+  "closed_tip_bounds_m": [
+    [
+      -0.011375000208616256,
+      -0.006324999939650297,
+      -0.0405
+    ],
+    [
+      0.011375000208616256,
+      0.006324999939650297,
+      -0.0339
+    ]
+  ],
+  "bays": [
+    {
+      "id": "I01",
+      "header": "P16",
+      "key": "A",
+      "states": [
+        {
+          "state": "closed",
+          "opening_each_m": 0.0,
+          "axial_withdrawal_m": 0.0,
+          "aperture": {
+            "max_signed_projected_distance_to_nominal_aperture_m": -0.00012472292158181852,
+            "projection_sign": "negative=inside_nominal_boundary, positive=outside; tips only, no tolerance stack",
+            "tip_surface_points_in_display_wall_slab": 68,
+            "max_signed_distance_in_display_wall_slab_m": -0.0011000000000000003
+          },
+          "outer_header_surface_in_tip_volumes": {
+            "unique_source_triangles_with_positive_clipped_area": 6112,
+            "summed_clipped_surface_area_m2": 0.00027909345883298366,
+            "clipped_surface_area_by_tip_part_m2": {
+              "carrier": 0.00027111345971034517,
+              "thrust": 7.979999122638245e-06
+            },
+            "clipped_points_bounds_m": [
+              [
+                -0.011250000602006906,
+                -0.006324999939650298,
+                -0.03864993155002594
+              ],
+              [
+                0.011250000292062766,
+                0.006324999939650297,
+                -0.0339
+              ]
+            ],
+            "meaning": "Saved mesh surface inside/on closed trial-tip volumes; not loaded contact area."
+          }
+        },
+        {
+          "state": "open_2mm_each",
+          "opening_each_m": 0.002,
+          "axial_withdrawal_m": 0.0,
+          "aperture": {
+            "max_signed_projected_distance_to_nominal_aperture_m": 0.001875188836338945,
+            "projection_sign": "negative=inside_nominal_boundary, positive=outside; tips only, no tolerance stack",
+            "tip_surface_points_in_display_wall_slab": 68,
+            "max_signed_distance_in_display_wall_slab_m": 0.0008999999999999998
+          },
+          "outer_header_surface_in_tip_volumes": {
+            "unique_source_triangles_with_positive_clipped_area": 4656,
+            "summed_clipped_surface_area_m2": 0.0001486080091122107,
+            "clipped_surface_area_by_tip_part_m2": {
+              "pad": 6.527751548507957e-05,
+              "carrier": 8.33304936271313e-05
+            },
+            "clipped_points_bounds_m": [
+              [
+                -0.011250000602006906,
+                -0.006324999939650297,
+                -0.038100000470876694
+              ],
+              [
+                0.011250000292062766,
+                0.006324999939650297,
+                -0.036
+              ]
+            ],
+            "meaning": "Saved mesh surface inside/on closed trial-tip volumes; not loaded contact area."
+          }
+        },
+        {
+          "state": "withdraw_8mm_then_open",
+          "opening_each_m": 0.002,
+          "axial_withdrawal_m": 0.008,
+          "aperture": {
+            "max_signed_projected_distance_to_nominal_aperture_m": 0.001875188836338945,
+            "projection_sign": "negative=inside_nominal_boundary, positive=outside; tips only, no tolerance stack",
+            "tip_surface_points_in_display_wall_slab": 0,
+            "max_signed_distance_in_display_wall_slab_m": null
+          },
+          "outer_header_surface_in_tip_volumes": {
+            "unique_source_triangles_with_positive_clipped_area": 0,
+            "summed_clipped_surface_area_m2": 0.0,
+            "clipped_surface_area_by_tip_part_m2": {},
+            "clipped_points_bounds_m": null,
+            "meaning": "Saved mesh surface inside/on closed trial-tip volumes; not loaded contact area."
+          }
+        },
+        {
+          "state": "rear_only_closed_comparison",
+          "opening_each_m": 0.0,
+          "axial_withdrawal_m": 0.0,
+          "aperture": {
+            "max_signed_projected_distance_to_nominal_aperture_m": -0.00012472292158181852,
+            "projection_sign": "negative=inside_nominal_boundary, positive=outside; tips only, no tolerance stack",
+            "tip_surface_points_in_display_wall_slab": 0,
+            "max_signed_distance_in_display_wall_slab_m": null
+          },
+          "outer_header_surface_in_tip_volumes": {
+            "unique_source_triangles_with_positive_clipped_area": 0,
+            "summed_clipped_surface_area_m2": 0.0,
+            "clipped_surface_area_by_tip_part_m2": {},
+            "clipped_points_bounds_m": null,
+            "meaning": "Saved mesh surface inside/on closed trial-tip volumes; not loaded contact area."
+          }
+        }
+      ],
+      "flat_shoulder": {
+        "source_z_m": -0.0339,
+        "trial_rectangle_area_each_m2": 1.6e-06,
+        "sides": [
+          {
+            "side": -1,
+            "cad_flat_face_under_thrust_rectangle_m2": 1.5999999999999984e-06
+          },
+          {
+            "side": 1,
+            "cad_flat_face_under_thrust_rectangle_m2": 1.3282422443821035e-06
+          }
+        ]
+      },
+      "opened_tips_vs_other_inner_housings_x_interval_gaps": [
+        {
+          "id": "I02",
+          "x_interval_gap_m": 0.009325000190734872
+        },
+        {
+          "id": "I03",
+          "x_interval_gap_m": 0.043225000190734865
+        },
+        {
+          "id": "I04",
+          "x_interval_gap_m": 0.11637500019073488
+        },
+        {
+          "id": "I05",
+          "x_interval_gap_m": 0.15027500019073486
+        }
+      ]
+    },
+    {
+      "id": "I02",
+      "header": "P16",
+      "key": "D",
+      "states": [
+        {
+          "state": "closed",
+          "opening_each_m": 0.0,
+          "axial_withdrawal_m": 0.0,
+          "aperture": {
+            "max_signed_projected_distance_to_nominal_aperture_m": -2.4729249638241746e-05,
+            "projection_sign": "negative=inside_nominal_boundary, positive=outside; tips only, no tolerance stack",
+            "tip_surface_points_in_display_wall_slab": 68,
+            "max_signed_distance_in_display_wall_slab_m": -0.0010000000000000009
+          },
+          "outer_header_surface_in_tip_volumes": {
+            "unique_source_triangles_with_positive_clipped_area": 6112,
+            "summed_clipped_surface_area_m2": 0.0002790934533505099,
+            "clipped_surface_area_by_tip_part_m2": {
+              "carrier": 0.00027111345422787197,
+              "thrust": 7.979999122638254e-06
+            },
+            "clipped_points_bounds_m": [
+              [
+                -0.011250000447034836,
+                -0.006324999939650298,
+                -0.03864993155002594
+              ],
+              [
+                0.011250000447034836,
+                0.006324999939650297,
+                -0.0339
+              ]
+            ],
+            "meaning": "Saved mesh surface inside/on closed trial-tip volumes; not loaded contact area."
+          }
+        },
+        {
+          "state": "open_2mm_each",
+          "opening_each_m": 0.002,
+          "axial_withdrawal_m": 0.0,
+          "aperture": {
+            "max_signed_projected_distance_to_nominal_aperture_m": 0.001975185877559663,
+            "projection_sign": "negative=inside_nominal_boundary, positive=outside; tips only, no tolerance stack",
+            "tip_surface_points_in_display_wall_slab": 68,
+            "max_signed_distance_in_display_wall_slab_m": 0.0009999999999999992
+          },
+          "outer_header_surface_in_tip_volumes": {
+            "unique_source_triangles_with_positive_clipped_area": 4652,
+            "summed_clipped_surface_area_m2": 0.0001486080098552618,
+            "clipped_surface_area_by_tip_part_m2": {
+              "pad": 6.527751033186155e-05,
+              "carrier": 8.333049952339971e-05
+            },
+            "clipped_points_bounds_m": [
+              [
+                -0.011250000447034836,
+                -0.006324999939650297,
+                -0.038100000470876694
+              ],
+              [
+                0.011250000447034836,
+                0.006324999939650297,
+                -0.036
+              ]
+            ],
+            "meaning": "Saved mesh surface inside/on closed trial-tip volumes; not loaded contact area."
+          }
+        },
+        {
+          "state": "withdraw_8mm_then_open",
+          "opening_each_m": 0.002,
+          "axial_withdrawal_m": 0.008,
+          "aperture": {
+            "max_signed_projected_distance_to_nominal_aperture_m": 0.001975185877559663,
+            "projection_sign": "negative=inside_nominal_boundary, positive=outside; tips only, no tolerance stack",
+            "tip_surface_points_in_display_wall_slab": 0,
+            "max_signed_distance_in_display_wall_slab_m": null
+          },
+          "outer_header_surface_in_tip_volumes": {
+            "unique_source_triangles_with_positive_clipped_area": 0,
+            "summed_clipped_surface_area_m2": 0.0,
+            "clipped_surface_area_by_tip_part_m2": {},
+            "clipped_points_bounds_m": null,
+            "meaning": "Saved mesh surface inside/on closed trial-tip volumes; not loaded contact area."
+          }
+        },
+        {
+          "state": "rear_only_closed_comparison",
+          "opening_each_m": 0.0,
+          "axial_withdrawal_m": 0.0,
+          "aperture": {
+            "max_signed_projected_distance_to_nominal_aperture_m": -2.4729249638241746e-05,
+            "projection_sign": "negative=inside_nominal_boundary, positive=outside; tips only, no tolerance stack",
+            "tip_surface_points_in_display_wall_slab": 0,
+            "max_signed_distance_in_display_wall_slab_m": null
+          },
+          "outer_header_surface_in_tip_volumes": {
+            "unique_source_triangles_with_positive_clipped_area": 0,
+            "summed_clipped_surface_area_m2": 0.0,
+            "clipped_surface_area_by_tip_part_m2": {},
+            "clipped_points_bounds_m": null,
+            "meaning": "Saved mesh surface inside/on closed trial-tip volumes; not loaded contact area."
+          }
+        }
+      ],
+      "flat_shoulder": {
+        "source_z_m": -0.0339,
+        "trial_rectangle_area_each_m2": 1.6e-06,
+        "sides": [
+          {
+            "side": -1,
+            "cad_flat_face_under_thrust_rectangle_m2": 1.5999999999999984e-06
+          },
+          {
+            "side": 1,
+            "cad_flat_face_under_thrust_rectangle_m2": 1.3282422443821035e-06
+          }
+        ]
+      },
+      "opened_tips_vs_other_inner_housings_x_interval_gaps": [
+        {
+          "id": "I01",
+          "x_interval_gap_m": 0.009325000190734872
+        },
+        {
+          "id": "I03",
+          "x_interval_gap_m": 0.009325000190734865
+        },
+        {
+          "id": "I04",
+          "x_interval_gap_m": 0.08247500019073487
+        },
+        {
+          "id": "I05",
+          "x_interval_gap_m": 0.11637500019073485
+        }
+      ]
+    },
+    {
+      "id": "I03",
+      "header": "P16",
+      "key": "E",
+      "states": [
+        {
+          "state": "closed",
+          "opening_each_m": 0.0,
+          "axial_withdrawal_m": 0.0,
+          "aperture": {
+            "max_signed_projected_distance_to_nominal_aperture_m": -0.00012472292158181852,
+            "projection_sign": "negative=inside_nominal_boundary, positive=outside; tips only, no tolerance stack",
+            "tip_surface_points_in_display_wall_slab": 68,
+            "max_signed_distance_in_display_wall_slab_m": -0.0011000000000000003
+          },
+          "outer_header_surface_in_tip_volumes": {
+            "unique_source_triangles_with_positive_clipped_area": 5978,
+            "summed_clipped_surface_area_m2": 0.0002791820145932203,
+            "clipped_surface_area_by_tip_part_m2": {
+              "carrier": 0.00027288202002793505,
+              "thrust": 6.299994565285731e-06
+            },
+            "clipped_points_bounds_m": [
+              [
+                -0.011250000292062759,
+                -0.006324999939650297,
+                -0.03864993155002594
+              ],
+              [
+                0.011250000602006913,
+                0.006324999939650297,
+                -0.0339
+              ]
+            ],
+            "meaning": "Saved mesh surface inside/on closed trial-tip volumes; not loaded contact area."
+          }
+        },
+        {
+          "state": "open_2mm_each",
+          "opening_each_m": 0.002,
+          "axial_withdrawal_m": 0.0,
+          "aperture": {
+            "max_signed_projected_distance_to_nominal_aperture_m": 0.001875188836338945,
+            "projection_sign": "negative=inside_nominal_boundary, positive=outside; tips only, no tolerance stack",
+            "tip_surface_points_in_display_wall_slab": 68,
+            "max_signed_distance_in_display_wall_slab_m": 0.0008999999999999998
+          },
+          "outer_header_surface_in_tip_volumes": {
+            "unique_source_triangles_with_positive_clipped_area": 4575,
+            "summed_clipped_surface_area_m2": 0.00014942486661352424,
+            "clipped_surface_area_by_tip_part_m2": {
+              "pad": 6.609437298639899e-05,
+              "carrier": 8.333049362712511e-05
+            },
+            "clipped_points_bounds_m": [
+              [
+                -0.011250000292062759,
+                -0.006324999939650297,
+                -0.038100000470876694
+              ],
+              [
+                0.011250000602006913,
+                0.006324999939650297,
+                -0.036
+              ]
+            ],
+            "meaning": "Saved mesh surface inside/on closed trial-tip volumes; not loaded contact area."
+          }
+        },
+        {
+          "state": "withdraw_8mm_then_open",
+          "opening_each_m": 0.002,
+          "axial_withdrawal_m": 0.008,
+          "aperture": {
+            "max_signed_projected_distance_to_nominal_aperture_m": 0.001875188836338945,
+            "projection_sign": "negative=inside_nominal_boundary, positive=outside; tips only, no tolerance stack",
+            "tip_surface_points_in_display_wall_slab": 0,
+            "max_signed_distance_in_display_wall_slab_m": null
+          },
+          "outer_header_surface_in_tip_volumes": {
+            "unique_source_triangles_with_positive_clipped_area": 0,
+            "summed_clipped_surface_area_m2": 0.0,
+            "clipped_surface_area_by_tip_part_m2": {},
+            "clipped_points_bounds_m": null,
+            "meaning": "Saved mesh surface inside/on closed trial-tip volumes; not loaded contact area."
+          }
+        },
+        {
+          "state": "rear_only_closed_comparison",
+          "opening_each_m": 0.0,
+          "axial_withdrawal_m": 0.0,
+          "aperture": {
+            "max_signed_projected_distance_to_nominal_aperture_m": -0.00012472292158181852,
+            "projection_sign": "negative=inside_nominal_boundary, positive=outside; tips only, no tolerance stack",
+            "tip_surface_points_in_display_wall_slab": 0,
+            "max_signed_distance_in_display_wall_slab_m": null
+          },
+          "outer_header_surface_in_tip_volumes": {
+            "unique_source_triangles_with_positive_clipped_area": 0,
+            "summed_clipped_surface_area_m2": 0.0,
+            "clipped_surface_area_by_tip_part_m2": {},
+            "clipped_points_bounds_m": null,
+            "meaning": "Saved mesh surface inside/on closed trial-tip volumes; not loaded contact area."
+          }
+        }
+      ],
+      "flat_shoulder": {
+        "source_z_m": -0.0339,
+        "trial_rectangle_area_each_m2": 1.6e-06,
+        "sides": [
+          {
+            "side": -1,
+            "cad_flat_face_under_thrust_rectangle_m2": 1.5999999999999984e-06
+          },
+          {
+            "side": 1,
+            "cad_flat_face_under_thrust_rectangle_m2": 1.3282422443821035e-06
+          }
+        ]
+      },
+      "opened_tips_vs_other_inner_housings_x_interval_gaps": [
+        {
+          "id": "I01",
+          "x_interval_gap_m": 0.043225000190734865
+        },
+        {
+          "id": "I02",
+          "x_interval_gap_m": 0.009325000190734865
+        },
+        {
+          "id": "I04",
+          "x_interval_gap_m": 0.04857500019073487
+        },
+        {
+          "id": "I05",
+          "x_interval_gap_m": 0.08247500019073487
+        }
+      ]
+    },
+    {
+      "id": "I04",
+      "header": "P17",
+      "key": "D",
+      "states": [
+        {
+          "state": "closed",
+          "opening_each_m": 0.0,
+          "axial_withdrawal_m": 0.0,
+          "aperture": {
+            "max_signed_projected_distance_to_nominal_aperture_m": -2.4729249638241746e-05,
+            "projection_sign": "negative=inside_nominal_boundary, positive=outside; tips only, no tolerance stack",
+            "tip_surface_points_in_display_wall_slab": 68,
+            "max_signed_distance_in_display_wall_slab_m": -0.0010000000000000009
+          },
+          "outer_header_surface_in_tip_volumes": {
+            "unique_source_triangles_with_positive_clipped_area": 6128,
+            "summed_clipped_surface_area_m2": 0.00027958019357066625,
+            "clipped_surface_area_by_tip_part_m2": {
+              "carrier": 0.0002712872924321614,
+              "thrust": 8.292901138504967e-06
+            },
+            "clipped_points_bounds_m": [
+              [
+                -0.011250000524520881,
+                -0.006324999939650298,
+                -0.038599930703639984
+              ],
+              [
+                0.011249999903887503,
+                0.006324999939650297,
+                -0.0339
+              ]
+            ],
+            "meaning": "Saved mesh surface inside/on closed trial-tip volumes; not loaded contact area."
+          }
+        },
+        {
+          "state": "open_2mm_each",
+          "opening_each_m": 0.002,
+          "axial_withdrawal_m": 0.0,
+          "aperture": {
+            "max_signed_projected_distance_to_nominal_aperture_m": 0.001975185877559663,
+            "projection_sign": "negative=inside_nominal_boundary, positive=outside; tips only, no tolerance stack",
+            "tip_surface_points_in_display_wall_slab": 68,
+            "max_signed_distance_in_display_wall_slab_m": 0.0009999999999999992
+          },
+          "outer_header_surface_in_tip_volumes": {
+            "unique_source_triangles_with_positive_clipped_area": 5017,
+            "summed_clipped_surface_area_m2": 0.00014735873612753327,
+            "clipped_surface_area_by_tip_part_m2": {
+              "pad": 6.466157425752819e-05,
+              "carrier": 8.269716187000522e-05
+            },
+            "clipped_points_bounds_m": [
+              [
+                -0.011250000524520881,
+                -0.006324999939650297,
+                -0.038100000470876694
+              ],
+              [
+                0.011249999903887503,
+                0.006324999939650297,
+                -0.036
+              ]
+            ],
+            "meaning": "Saved mesh surface inside/on closed trial-tip volumes; not loaded contact area."
+          }
+        },
+        {
+          "state": "withdraw_8mm_then_open",
+          "opening_each_m": 0.002,
+          "axial_withdrawal_m": 0.008,
+          "aperture": {
+            "max_signed_projected_distance_to_nominal_aperture_m": 0.001975185877559663,
+            "projection_sign": "negative=inside_nominal_boundary, positive=outside; tips only, no tolerance stack",
+            "tip_surface_points_in_display_wall_slab": 0,
+            "max_signed_distance_in_display_wall_slab_m": null
+          },
+          "outer_header_surface_in_tip_volumes": {
+            "unique_source_triangles_with_positive_clipped_area": 0,
+            "summed_clipped_surface_area_m2": 0.0,
+            "clipped_surface_area_by_tip_part_m2": {},
+            "clipped_points_bounds_m": null,
+            "meaning": "Saved mesh surface inside/on closed trial-tip volumes; not loaded contact area."
+          }
+        },
+        {
+          "state": "rear_only_closed_comparison",
+          "opening_each_m": 0.0,
+          "axial_withdrawal_m": 0.0,
+          "aperture": {
+            "max_signed_projected_distance_to_nominal_aperture_m": -2.4729249638241746e-05,
+            "projection_sign": "negative=inside_nominal_boundary, positive=outside; tips only, no tolerance stack",
+            "tip_surface_points_in_display_wall_slab": 0,
+            "max_signed_distance_in_display_wall_slab_m": null
+          },
+          "outer_header_surface_in_tip_volumes": {
+            "unique_source_triangles_with_positive_clipped_area": 0,
+            "summed_clipped_surface_area_m2": 0.0,
+            "clipped_surface_area_by_tip_part_m2": {},
+            "clipped_points_bounds_m": null,
+            "meaning": "Saved mesh surface inside/on closed trial-tip volumes; not loaded contact area."
+          }
+        }
+      ],
+      "flat_shoulder": {
+        "source_z_m": -0.0339,
+        "trial_rectangle_area_each_m2": 1.6e-06,
+        "sides": [
+          {
+            "side": -1,
+            "cad_flat_face_under_thrust_rectangle_m2": 1.5999999999999984e-06
+          },
+          {
+            "side": 1,
+            "cad_flat_face_under_thrust_rectangle_m2": 1.3282422443821035e-06
+          }
+        ]
+      },
+      "opened_tips_vs_other_inner_housings_x_interval_gaps": [
+        {
+          "id": "I01",
+          "x_interval_gap_m": 0.11637500019073488
+        },
+        {
+          "id": "I02",
+          "x_interval_gap_m": 0.08247500019073487
+        },
+        {
+          "id": "I03",
+          "x_interval_gap_m": 0.04857500019073487
+        },
+        {
+          "id": "I05",
+          "x_interval_gap_m": 0.009325000190734865
+        }
+      ]
+    },
+    {
+      "id": "I05",
+      "header": "P17",
+      "key": "F",
+      "states": [
+        {
+          "state": "closed",
+          "opening_each_m": 0.0,
+          "axial_withdrawal_m": 0.0,
+          "aperture": {
+            "max_signed_projected_distance_to_nominal_aperture_m": -0.00012472292158181852,
+            "projection_sign": "negative=inside_nominal_boundary, positive=outside; tips only, no tolerance stack",
+            "tip_surface_points_in_display_wall_slab": 68,
+            "max_signed_distance_in_display_wall_slab_m": -0.0011000000000000003
+          },
+          "outer_header_surface_in_tip_volumes": {
+            "unique_source_triangles_with_positive_clipped_area": 6054,
+            "summed_clipped_surface_area_m2": 0.0002795965697839534,
+            "clipped_surface_area_by_tip_part_m2": {
+              "carrier": 0.0002732965703307886,
+              "thrust": 6.299999453164601e-06
+            },
+            "clipped_points_bounds_m": [
+              [
+                -0.011249999903887517,
+                -0.006324999939650297,
+                -0.038599930703639984
+              ],
+              [
+                0.011250000524520867,
+                0.006324999939650297,
+                -0.0339
+              ]
+            ],
+            "meaning": "Saved mesh surface inside/on closed trial-tip volumes; not loaded contact area."
+          }
+        },
+        {
+          "state": "open_2mm_each",
+          "opening_each_m": 0.002,
+          "axial_withdrawal_m": 0.0,
+          "aperture": {
+            "max_signed_projected_distance_to_nominal_aperture_m": 0.001875188836338945,
+            "projection_sign": "negative=inside_nominal_boundary, positive=outside; tips only, no tolerance stack",
+            "tip_surface_points_in_display_wall_slab": 68,
+            "max_signed_distance_in_display_wall_slab_m": 0.0008999999999999998
+          },
+          "outer_header_surface_in_tip_volumes": {
+            "unique_source_triangles_with_positive_clipped_area": 4945,
+            "summed_clipped_surface_area_m2": 0.0001481755167915868,
+            "clipped_surface_area_by_tip_part_m2": {
+              "pad": 6.54783559262931e-05,
+              "carrier": 8.269716086529329e-05
+            },
+            "clipped_points_bounds_m": [
+              [
+                -0.011249999903887517,
+                -0.006324999939650297,
+                -0.038100000470876694
+              ],
+              [
+                0.011250000524520867,
+                0.006324999939650297,
+                -0.036
+              ]
+            ],
+            "meaning": "Saved mesh surface inside/on closed trial-tip volumes; not loaded contact area."
+          }
+        },
+        {
+          "state": "withdraw_8mm_then_open",
+          "opening_each_m": 0.002,
+          "axial_withdrawal_m": 0.008,
+          "aperture": {
+            "max_signed_projected_distance_to_nominal_aperture_m": 0.001875188836338945,
+            "projection_sign": "negative=inside_nominal_boundary, positive=outside; tips only, no tolerance stack",
+            "tip_surface_points_in_display_wall_slab": 0,
+            "max_signed_distance_in_display_wall_slab_m": null
+          },
+          "outer_header_surface_in_tip_volumes": {
+            "unique_source_triangles_with_positive_clipped_area": 0,
+            "summed_clipped_surface_area_m2": 0.0,
+            "clipped_surface_area_by_tip_part_m2": {},
+            "clipped_points_bounds_m": null,
+            "meaning": "Saved mesh surface inside/on closed trial-tip volumes; not loaded contact area."
+          }
+        },
+        {
+          "state": "rear_only_closed_comparison",
+          "opening_each_m": 0.0,
+          "axial_withdrawal_m": 0.0,
+          "aperture": {
+            "max_signed_projected_distance_to_nominal_aperture_m": -0.00012472292158181852,
+            "projection_sign": "negative=inside_nominal_boundary, positive=outside; tips only, no tolerance stack",
+            "tip_surface_points_in_display_wall_slab": 0,
+            "max_signed_distance_in_display_wall_slab_m": null
+          },
+          "outer_header_surface_in_tip_volumes": {
+            "unique_source_triangles_with_positive_clipped_area": 0,
+            "summed_clipped_surface_area_m2": 0.0,
+            "clipped_surface_area_by_tip_part_m2": {},
+            "clipped_points_bounds_m": null,
+            "meaning": "Saved mesh surface inside/on closed trial-tip volumes; not loaded contact area."
+          }
+        }
+      ],
+      "flat_shoulder": {
+        "source_z_m": -0.0339,
+        "trial_rectangle_area_each_m2": 1.6e-06,
+        "sides": [
+          {
+            "side": -1,
+            "cad_flat_face_under_thrust_rectangle_m2": 1.5999999999999984e-06
+          },
+          {
+            "side": 1,
+            "cad_flat_face_under_thrust_rectangle_m2": 1.3282422443821035e-06
+          }
+        ]
+      },
+      "opened_tips_vs_other_inner_housings_x_interval_gaps": [
+        {
+          "id": "I01",
+          "x_interval_gap_m": 0.15027500019073486
+        },
+        {
+          "id": "I02",
+          "x_interval_gap_m": 0.11637500019073485
+        },
+        {
+          "id": "I03",
+          "x_interval_gap_m": 0.08247500019073487
+        },
+        {
+          "id": "I04",
+          "x_interval_gap_m": 0.009325000190734865
+        }
+      ]
+    }
+  ],
+  "limits_ja": [
+    "基本案の3つの静止位置と後端寄せ比較。開閉と後退の連続軌道を計算したものではない。",
+    "8 mm後退は比較の表示位置。後退前の保持解除とハウジングの残留保持は別問題。",
+    "保存された内外CADの表示位置を使用。実測の嵌合位置・ロック成立を示さない。",
+    "指先だけの比較。ハンド本体・取付具・実電線・他の内部部品の占有範囲は含まない。",
+    "三角形の体積内切出しは補助観測であり、ゼロ件でも固体の非干渉を保証しない。",
+    "0.1 mmは図示用の逃げ。閉指令・圧縮量・把持力・公差・工程受入値ではない。",
+    "後端寄せ案はつば押し面を含まず、軸方向の保持・挿入力の伝達を未解決のまま残す。"
+  ],
+  "numerical_checks": {
+    "analytical_clipping_areas": [
+      0.5,
+      0.125,
+      0.0
+    ],
+    "expected": [
+      0.5,
+      0.125,
+      0.0
+    ]
+  },
+  "provenance": {
+    "parent_file": "/home/rlrk/IsaacLab-op040/eval_runs/ur15_jb_harness_revision_20260907/data/header_review_v03/meshes.json.gz",
+    "parent_sha256": "8c0bbe8c60f0a78f8dcba56d76ed825d13d3f88dd67e9fd8cdeb932e88fa4130",
+    "unchanged_header_rows_only": true,
+    "files": [
+      {
+        "file": "2103340-1.json.gz",
+        "sha256": "1b143f674a54d4c16a45bd9d5fed6f53aeaeedbad234bd0d3d90cb250eeebd97",
+        "bytes": 1329840
+      },
+      {
+        "file": "2103346-2.json.gz",
+        "sha256": "a0159c8c5aa93e2c1244c0715b95a818f76f8b5a64a1751426eabf96aae04ac4",
+        "bytes": 1358164
+      },
+      {
+        "file": "te_2103340_drawing.pdf",
+        "sha256": "be59744129dc5134d2a3363e25af93294e662cde4254ec28411b80bd01673dc6"
+      },
+      {
+        "file": "te_2103346_drawing.pdf",
+        "sha256": "fbdeb1d56aba02ae85ed2464b3acd68ce6444cd47179f33225d7f0ba1b580e28"
+      }
+    ]
+  },
+  "trial_tip_meshes_sha256": "131216d7680126bb17b7fc8fe10c033d75930b4b79b4aa4fefd17f4f37bd4d91",
+  "rear_only_tip_meshes_sha256": "351642db2eae619e4de0f15b628b66f9b5197de2fb9056870623fb6e5f76e62b",
+  "producing_script_sha256": "b6eaa2283aae56f45f268a10dca2188fbe0e6f4c6cdaaba080ed3af166f32154"
+}

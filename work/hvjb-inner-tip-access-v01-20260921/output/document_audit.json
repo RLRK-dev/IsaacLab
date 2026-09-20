@@ -1,0 +1,20 @@
+{
+  "pdf": "output/pdf/\u5185\u5074\u30cf\u30a6\u30b8\u30f3\u30b0\u6307\u5148\u306e3D\u6bd4\u8f03\u3068\u958b\u653e\u7a7a\u9593_v01_20260921.pdf",
+  "sha256": "8006bab6372e804b3aff531260ba993ad713b52c08e0378268736503a35aabd3",
+  "pages": [
+    {
+      "page": 1,
+      "text_outside_page": []
+    },
+    {
+      "page": 2,
+      "text_outside_page": []
+    },
+    {
+      "page": 3,
+      "text_outside_page": []
+    }
+  ],
+  "observation_json_sha256": "52a75b4a728f527ee42372f18725782218332d51963de5bb60e6da6e50aafdb2",
+  "renderer_sha256": "3fbe36e58e0ef4a2d3e8717f81ce87236578de44b6b96de4bd745093e440f3ea"
+}
