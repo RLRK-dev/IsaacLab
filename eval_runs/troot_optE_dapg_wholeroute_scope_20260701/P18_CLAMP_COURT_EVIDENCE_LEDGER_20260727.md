@@ -49452,3 +49452,17 @@ ALT-1 (downgrade) — not chosen (the human's word). ALT-2 (`agent prompt`) — 
 - ⛔ 解錠 = 行 69 のみ・再走なし・新 run なし・R0 窓の受入（item 22）は不変・hub は発火しない・裁定しない。
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1639 — ✅ **pB m-pB-472/473: 自 file の散文 cite 93 件を機械照合して行番号 3 類を訂正（Addendum 4 `77ba6e0b25`・追記のみ・数値と判定は不変）＋ pB は 01:14 再開（保持解除）→ m-p18-496。当卓の注記 = pB の「blob 22feba17a6」は commit（同じ class の label 誤り・内容は正）／pZ の旧保持 3 件は §1547 で閉鎖・現行の 1 件のみ queue**（当卓 2026-09-21 01:18–01:21 JST 実測）
+
+- **着信**: m-pB-472 `:49145`（01:18:17）／m-pB-473 `:49152`（01:18:43）。
+- **検証（当卓が実読）**: `77ba6e0b25b02e97097665796859a98897ea777d`（01:17:39・`PB_RUN69_ROW7_R3_STOP_LOGANALYST_20260920.md` 303 行・sha256 `7cf7b3324f54ae72811cdf8923a7e0cc1937e80bea6c810ff282f74cfce82f91`・blob `80b756e4347b37170ee39dff124f5123410a2f39`・clean・**diff `ff396f98e6` → = +18/−0 = 追記のみ**）。訂正 1 = run.log blob `c79fdfd1d410` :367 = ARM-TO-ARM（closest −1.1 mm・9 to 42）・:369 = CARRY ⇒ pZ の指摘どおり・数値は RUN_METRICS `steps[0].arm_to_arm`（`closest_mm` −1.1194554926176923・`along_move_mm` −1.168352386937335・t=0.24s）と一致。訂正 2 = calibration raise は本 run の driver `84a372439c59` では :1328-1330（対の検査 :1335-1336）・本 run では未発火。訂正 3 = 鏡像式の計器は `PZ_R3_TILT_CAP_LEG_PREREG_20260913.md` @ `98d8e63173` の appendix :70。⛔ **数値・判定・照合結果は 1 つも変わらない**（pZ C-1〜C-6・p4 item 86 に影響なし）。
+- ⭐ **pB の手当ての形（当卓が評価に値すると見る点）**: 指摘を 1 件直すのでなく **同じ class を全部検査した**（散文 cite 93 件を機械照合 ⇒ 同型 3 ＋ 別 blob 由来 1 ＋ 出所曖昧 1）。原因の名指しも具体的 = script 生成の引用は番号と内容がずれ得ないが、**手書き pointer 文だけ番号を後付けした**。
+- **当卓の注記 1 件（返却でない・同じ class）**: pB が「pZ prereg の base blob `22feba17a6`」と書いた識別子は **blob でなく commit**（当卓の `git cat-file -t` = commit）。当該 commit の driver では calibration raise が :1301・対が :1307 で **記述内容は正しい**。⇒ 直すのは種別語のみ。**「以後 pointer も機械照合」に識別子の種別も含めるのが当卓の読み。**
+- **pB の再開と custody の境界**: pB は **01:14 JST に再開**（利用者の一語「再開」）。Rs1 割当を自読し「裁定しない・routing は p18」と明記。自 file の header「Rs1 = 人間」は **09-20 22:30:46 の認可 custody についての記述**であり今後の目視の語の主体を指さない ⇒ 編集しない、と判断。**当卓の §1634 の境界（00:21:28 前 = 人間・以後 = p19）と整合**。
+- **hub の動き**: pB の**保持解除** = `m-p18-493` → pB DELIVERED（01:20:16）。pZ = `m-p18-493` を queue（現行性 = p4 item 93 が pZ の open 事項を閉じたため）・**旧保持 `m-p18-486`・`488`・`491` は §1547 で閉鎖**（内容は pZ 自身の照合 Addendum 1 と p4 item 91/93 で既に実現済）。**`m-p18-496`**（m-pB-472/473 逐語 ＋ 当卓の検算）→ pZ cc p4・p6（いずれも QUEUED(observed)・Rs1 の同一案件 queue 許可の範囲）。
+- **稼働の現況（当卓の実測）**: p4・p6・p0・p11・pB = 稼働（いずれも本 session で配達物を処理して返答）。pZ = queue は受けるが返答は未。pC = 停止のまま・**当卓は pC に送らない**（v2-6）。
+- **受入の状態（不変）**: 4 入力 = 4/4・p4 は Rs1 目視 leg を受領済（492）⇒ 次 = **p4 の受入 word → p6 の反映**。
+- ⛔ 解錠 = 行 69 のみ・再走なし・新 run なし・hub は発火しない・裁定しない。
+
+**Banked — 時刻は本節 commit の author date が正。**
