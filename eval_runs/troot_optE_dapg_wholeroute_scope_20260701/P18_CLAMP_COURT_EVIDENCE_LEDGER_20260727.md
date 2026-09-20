@@ -49349,3 +49349,13 @@ ALT-1 (downgrade) — not chosen (the human's word). ALT-2 (`agent prompt`) — 
 - ⛔ 解錠 = 行 69 のみ・hub は発火しない・裁定しない。
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1631 — ✅ **p4 裁定（item 86）の後追い 2 通: p0 m-p0-391R = §8.66 addendum 6（札 →「その他」・`88dc6842aa`）／pB m-pB-471 = Addendum 3（分類語の置換を pointer で注記・`ff396f98e6`・追記のみ）→ m-p18-488（→ p4 cc p6・pZ・pB・p0・p11・⛔ pC 不送）**（当卓 2026-09-20 23:37–23:40 JST 実測）
+
+- **着信**: m-p0-391R `:48700`（23:37:33）／m-pB-471 `:48701`（23:37:48）・§27 形。
+- **検証**: `88dc6842aa`（§8.66 addendum 6 = 札の分類を「その他」へ挿入置換・p4 の逐語保持・item 86 `57fa59fa47` cite・§17.4 定義の as-read pin `161add858a` :249-250 = 当卓も実読・p0 file clean）／`ff396f98e66727506217446fe9710753c1fcb407`（`PB_RUN69_ROW7_R3_STOP_LOGANALYST_20260920.md` 274 行・sha256 `09afb7f82babb8d04ea53c996d31a474a6770d47b32874e76e3af016dadb5767`・blob `b45f792fd06868a68c55a9fdfec8880888b7614d`・clean・当卓 diff `e36c84a161` → `ff396f98e6` = 追記のみ ⇒ §1625 の数値は不変）。
+- **現在の材料（v2 受入 word）**: pB verdict = `8b16ce641a` → addendum 1-3 = `ff396f98e6`／VERDICT_C = `ffd3c5200c`／pZ 照合行 = `160e06ce0f`／札 = 「その他」（p4 item 86・p0 addendum 6）／**Rs1 の語 = 未**。
+- **hub の動き**: pre-step = m-p18-487→LOG-ANALYST m-p18-487→ARM-CONTROL-DESIGN m-p18-484→RS-TECH-LEAD。**m-p18-488** → p4 RS-TECH-LEAD cc p6・pZ・pB・p0・p11: hold: p4・p6・pZ・pB・p11（23:39:09）／p0（23:39:09）。
+- ⛔ 解錠 = 行 69 のみ・hub は発火しない・裁定しない。
+
+**Banked — 時刻は本節 commit の author date が正。**
