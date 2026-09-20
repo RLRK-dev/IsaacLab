@@ -453,3 +453,131 @@ print(json.dumps({"mode": MODE, "harness_sha256": sha, "harness_reported_sha256"
 - **Correction.** Addendum 5 (committed `b829c3f066`, 08:39:08 JST) and addendum 6 (`3ad4ac4399`, 08:46:14 JST) both carried the measured count "harness commits after `ffa612ea33` = **1**" — and both then said the opposite in prose: addendum 5 judged `ffa612ea33` as "the follow-up harness" and raised a catch on its `:1241`-form binding; addendum 6 wrote "the §17.7-compliant follow-up does not exist yet". The branch reflog shows `3cb2a28c36` (author/committer 2026-09-20 08:34:14 JST, parent `332df052d7`) at the tip from 08:34:14 and it is an ancestor of both my commits. So at both writings the §17.7-compliant follow-up **existed**; the addendum-5 catch was true of `ffa612ea33` only and was **already resolved** by `3cb2a28c36` when I wrote and sent it (PZ-232) — withdrawn as a catch on the current object. Cause: the count was interpolated into the text but my prose was written assuming 0; the number did not gate the sentence. Rule kept from here: a measured count of "objects after X" must be asserted `== 0` before any sentence says "does not exist yet".
 - **Disclosure line (p4's condition)**: **harness `3cb2a28c36` (08:34:14 JST) landed before this desk's row-4 re-pin (`b829c3f066`, 08:39:08 JST) — as-read order.** The re-pin's three elements are in addendum 5 and were not taken from the harness: (i) §17.7's literal, compared to my own numbers (≤ 1.7e-16); (ii) the closed form computed by me from the committed cell constants (appendix F, `pz_r0_targets.py`); (iii) the dump's sha256 measured by me from the file bytes (`hashlib.sha256` = `sha256sum`; re-measured at this writing: `4158e4e638e9b0fc0eddad324f2a0fdd8b80a77d51b9526d63d1be3cf4e2204b`). The leg on `3cb2a28c36` follows in `PZ_VERDICT_3cb2a28c36_R0_LEG_20260920.md`.
 - Order at writing: HEAD `260450a5f5`; harness commits after `3cb2a28c36` = 0; driver commits after `96e9ece175` = 0. Supersedes sha `2cac69a439d1ae3e4fd9abcf71a769d93ad34036b85083817964de4df8c3b2d3` @ 3ad4ac4399 (everything before stands, with the two sentences corrected as above).
+
+## Addendum 8 (2026-09-20 09:23:21 JST) — two rows pre-registered on v3 §17.8 (R0-ii, @ `e0b2857a50`) and §17.9 (GRASP1, @ `20281bbf83`), with this desk's expectations measured by its own instrument; the as-read order disclosed
+
+**Order of existence (measured, not assumed)**: p0's follow-up 3 exists — `84c7ad3b62` (R0-ii sweep, 08:58:52 JST) and `f5b50967f8` (GRASP1 row, 09:18:59 JST) — **before this pre-registration**; harness commits after `f5b50967f8` = 0; driver commits after `96e9ece175` = 0; design commits after `20281bbf83` = 0; HEAD `1fd2ef6eba`. The expectations below were measured by `pz_r0ii.py` on runs started 09:18:25 JST (after `84c7ad3b62`, 34 s before `f5b50967f8`), from the driver blob text and my composed models — p0's harness was not read for them and is not their source (p4's standing reading, m-p4-281: the bar lives in the spec, committed before the harness; the harness computes, it does not hardcode).
+
+### Row R0-ii (v3 §17.8 (b), verbatim form adopted as the bar)
+For each row r ∈ {2..18} (targets = §17.7's L column) and each attitude index k ∈ {0..len(pose_menu)−1} (measured 11): solve `L_COL[r]` on the L model and its mirror `MxL[r] = (−x, y, z)` on the right model with the **same** call `solve_ik(t, tgt, tries=None, iters=300, seed=1, near=None, warm=None, other=None, pose_only=k, quiet=True)`; a pair is **identical** iff both converge ∧ max|q_R − q_L| < 1e-6 rad. Right models = **B** (`ur15_base_mirrored.xml` + KO_MIRROR + SIDES["R"]), **RC** (stock arm + stock ko on the right mount, sign +1), **NH** (mirrored arm + stock ko). **Bar**: RC and NH identical pairs = **0** (else the row has no discriminating power); on B **every row has ≥ 1 identical k**; on B the "both converge ∧ not identical" pairs are **reported** (not a §11 STOP); not a substitute for R1/R1′.
+
+**Expectation (my instrument, appendix I/J; blob `84a372439c59`, closure sha `a87deb96…`, `HOME_POSE`, seed 1, `mj_step` 0, driver family in `sys.modules` = [] on all four runs; K = 11; 187 (row, k) cells per model):**
+
+| model | converged cells | identical (row, k) | rows with ≥ 1 identical k | which k | both-converged-not-identical | bar |
+|---|---|---|---|---|---|---|
+| L (own targets) | 175 / 187 | — | — | — | — | — |
+| **B** (MxL) | 176 / 187 | **17** | **17 / 17** | **k = 0 on every row, no other k** | 149 (max Δq per row 3.8-5.7 rad) | ≥ 1 per row: **holds** |
+| **RC** | 145 / 187 | **0** | 0 / 17 | — | 137 | = 0: **holds** |
+| **NH** | 187 / 187 | **0** | 0 / 17 | — | 175 | = 0: **holds** |
+
+Reading (fact, not design): sharpened by `pose_only=k`, the identity map holds on B **exactly at k = 0 on all 17 rows** and at **no** k ≥ 1; the two defects give **0** identical pairs anywhere. So the row discriminates B from RC/NH where convergence alone (addendum 3) could not. The 149 both-converged-not-identical pairs on B (k ≥ 1) are the reported quantity §17.8 asks for — its prediction of 0 is contradicted on k ≥ 1; the interpretation (why only k = 0 is mirror-identical) is p11's, not measured here. Unsharpened form (addendum 3, `:1241` targets): 5/17 on B, 0/17 on RC/NH — to be re-read on the §17.7 targets by the harness's own report.
+
+### Row GRASP1 (v3 §17.9 (2))
+One extra row per side, step 1: target = `(GRASP_CENTRE_X ∓ GRIP_HALF_SPAN, y_rest, Z_RISE_REST)` = **`(0.106, 0.28, 1.03)` / `(0.194, 0.28, 1.03)`** (the `:1241` form of x, the §17.7 rest-link y, `Z_RISE_REST`); bar = convergence only (`pe ≤ 0.002`, "L converges ∧ R not = 0 rows", §11 STOP scope), separate from rows 2-5 (denominator 18 per side), solver = R0 defaults (`tries=None`, seed 1, `HOME_POSE`), the `START_TRIES = 24` form report-only. **Expectation** = addendum 3's rows 2/5 on these very targets (p11 §17.9: "流用可"): **L converged, 11 candidates, pe 1.2652 mm; R converged, 13 candidates, pe 0.0** (blob `d2bc133e1320`; the closure is identical in `84a372439c59`; a fresh run on `84a372439c59` is recorded in the verdict).
+
+### Leg procedure for these rows
+On the harness commit: rows 1-11 + 1′ + addenda as before; **R0-ii** = the harness's `R0ii` block compared (row, k) for (row, k) with `r0ii_{L,R,RC,NH}.json` (identical sets equal; both-converged sets equal; Δq values equal to ≤ 1e-9 where both instruments have both solutions) and its `bar` dict against the table above; **GRASP1** = the step-1 rows compared with my rows 2/5 on the `:1241` targets (flags, candidate counts, `pe`, `q`). Stop-cause tag per row. Supersedes sha `ac52d6de5ba9dfcc…` @ 3ea663a5b4 (everything before stands).
+
+## Appendix I — `pz_r0ii.py` (verbatim; sha256 ee7aa6c04ccb77104aaf8dcb9cf4a1eb55d044d1091130e62f401eb69dffc71e) — `pz_r0_v2.py` with the row loop replaced by the (row, k) sweep of §17.8
+```python
+"""pZ R0 instrument: the wired solver closure, loaded from the driver BLOB TEXT (never imported), rebound onto a composed one-arm model."""
+import sys, os, io, re, ast, math, json, hashlib, contextlib, numpy as np, mujoco
+from scipy.spatial.transform import Rotation
+BLOB, W, SIDE, OUT = sys.argv[1], sys.argv[2], sys.argv[3], sys.argv[4]
+sys.path.insert(0, W)
+with contextlib.redirect_stdout(io.StringIO()):
+    import ur15_gripper_mirror_acceptance as g; import ur15_cell_spec as spec
+src = open(BLOB).read(); tree = ast.parse(src)
+CLOSURE = ["solve_ik","pose_menu","_wrap","_rdes","pinch","touching","sigma_min","wrist_jac","column_gap","path_mast_min","arm_pair_min","path_arm_min","furniture_gap","path_furniture_min"]
+fns = {n.name: n for n in tree.body if isinstance(n, ast.FunctionDef)}
+code = "\n".join(ast.get_source_segment(src, fns[f]) for f in CLOSURE)
+closure_sha = hashlib.sha256(code.encode()).hexdigest()
+# composed model
+MODEL = os.environ.get("PZ_R0_MODEL", SIDE)   # L | R | RC (rotated copy: stock arm + stock hand on the RIGHT mount) | NH (mirrored arm + stock hand, the acceptance's negative)
+m, d = {"L": lambda: g.build_side("ur15_base.xml", g.KO_LEFT, g.acc.SIDE_SIGN["L"]), "R": lambda: g.build_side("ur15_base_mirrored.xml", g.KO_MIRROR, g.acc.SIDE_SIGN["R"]),
+        "RC": lambda: g.build_side("ur15_base.xml", g.KO_LEFT, g.acc.SIDE_SIGN["R"]), "NH": lambda: g.build_side("ur15_base_mirrored.xml", g.KO_LEFT, g.acc.SIDE_SIGN["R"])}[MODEL]()
+B = lambda n: mujoco.mj_name2id(m, mujoco.mjtObj.mjOBJ_BODY, n); G = lambda n: mujoco.mj_name2id(m, mujoco.mjtObj.mjOBJ_GEOM, n); J = lambda n: mujoco.mj_name2id(m, mujoco.mjtObj.mjOBJ_JOINT, n)
+t = SIDE
+QADR = {t: [m.jnt_qposadr[J(f"a_{j}")] for j in g.acc.J6]}; VADR = {t: [m.jnt_dofadr[J(f"a_{j}")] for j in g.acc.J6]}
+PAD = {t: [B("g_left_pad"), B("g_right_pad")]}; TOOLB = {t: B("g_base")}
+assert min(QADR[t]) >= 0 and min(PAD[t]) >= 0 and TOOLB[t] >= 0
+def _own(prefix): return {b for b in range(m.nbody) if (mujoco.mj_id2name(m, mujoco.mjtObj.mjOBJ_BODY, b) or "").startswith(prefix)}
+ARMB = {t: _own("a_") | _own("g_")}                       # the driver's rule (:499) with the composed prefixes
+ARMG = {t: {gg for gg in range(m.ngeom) if m.geom_bodyid[gg] in ARMB[t]}}
+GNAME = {gg: (mujoco.mj_id2name(m, mujoco.mjtObj.mjOBJ_GEOM, gg) or f"g{gg} on {mujoco.mj_id2name(m, mujoco.mjtObj.mjOBJ_BODY, m.geom_bodyid[gg]) or 'an unnamed body'}") for gg in range(m.ngeom)}
+COLG = []; COLFREE = {t: sorted(ARMG[t])}; FURNG = []      # no mast, no furniture on the composed model
+LIM = np.array(spec.LIMS); SIDES = spec.SIDES
+# AXFIX by the driver's rule (:594-616): seed q, fingers 0, throwaway data
+sc0 = mujoco.MjData(m)
+for k, a in enumerate(QADR[t]): sc0.qpos[a] = [0.0, -1.2, 1.0, -1.4, -1.57, 0.0][k]
+mujoco.mj_forward(m, sc0)
+pl, pr = np.array(sc0.xpos[PAD[t][0]]), np.array(sc0.xpos[PAD[t][1]]); c_w = (pr-pl)/max(np.linalg.norm(pr-pl),1e-9); pinch_w = 0.5*(pl+pr)
+a_w = np.array(sc0.xpos[TOOLB[t]]) - pinch_w; a_w = a_w/max(np.linalg.norm(a_w),1e-9); Rt = np.array(sc0.xmat[TOOLB[t]]).reshape(3,3)
+c_l, a_l = Rt.T @ c_w, Rt.T @ a_w; AXFIX = {t: np.column_stack([c_l, np.cross(a_l, c_l), a_l]).T}
+# start state = HOME_POSE (documented choice)
+for k, a in enumerate(QADR[t]): d.qpos[a] = spec.HOME_POSE[k]
+mujoco.mj_forward(m, d)
+ns = dict(m=m, d=d, QADR=QADR, VADR=VADR, PAD=PAD, TOOLB=TOOLB, AXFIX=AXFIX, ARMG=ARMG, GNAME=GNAME, COLG=COLG, COLFREE=COLFREE, FURNG=FURNG, LIM=LIM, SIDES=SIDES,
+          ARM_CLEARANCE=spec.ARM_CLEARANCE, ARM_DECIDE_CUTOFF=spec.ARM_DECIDE_CUTOFF, ARM_PAIR_CUTOFF=spec.ARM_PAIR_CUTOFF, COLUMN_R=spec.COLUMN_R,
+          SIGMA_FLOOR=spec.SIGMA_FLOOR, SIGMA_GOOD=spec.SIGMA_GOOD, SIGMA_PENALTY=spec.SIGMA_PENALTY, Rotation=Rotation, math=math, mujoco=mujoco, np=np, os=os, re=re)
+# module state the closure mutates (found by the v2 scan: store-only locals): initialised exactly as the driver does, by AST unparse of its own Assign
+_mod = {n.targets[0].id: n for n in tree.body if isinstance(n, ast.Assign) and isinstance(n.targets[0], ast.Name)}
+for _name in ("_DEPTH_AUDIT", "CLEARANCE_REPORT", "LAST_CLEAR"):
+    exec(ast.unparse(_mod[_name]), ns)
+steps = 0
+_orig = mujoco.mj_step
+def _counted(*a, **k):
+    global steps; steps += 1; return _orig(*a, **k)
+mujoco.mj_step = _counted
+exec(compile(code, "<wired closure>", "exec"), ns)
+# targets (pre-registered static values; rows 6-18 from spec constants; rows 2-5 from the L1 dump by cable_at)
+GL, GR = (0.106, 0.28, 0.954), (0.194, 0.28, 0.954)
+if os.environ.get("PZ_R0_GLGR"): GL, GR = [tuple(float(v) for v in s.split(",")) for s in os.environ["PZ_R0_GLGR"].split(";")]   # v2: row-4 re-pin (v3 §17.7, :2812 link-centre form) via env; default = the addendum 2 (:1241-form) values
+C1, C2 = spec.C1, spec.C2; H = spec.GRIP_HALF_SPAN
+LX1, RX1 = C1[0]-H, C1[0]+H; LX2, RX2 = C2[0]-H, C2[0]+H; RX_MID = float(np.mean([C1[0], C2[0]])); ZR, ZQ, ZS = spec.Z_RISE_REST, spec.Z_RISE_ROUTE, spec.seat_z(spec.FLOAT_Z)
+L_COL = [(GL[0],GL[1],ZR), GL, GL, (GL[0],GL[1],ZR), (LX1,C1[1],ZQ), (LX1,C1[1],ZS), (LX1,C1[1],ZS), (LX1,C1[1],ZS), (LX1,C1[1],ZQ), (LX2,C2[1],ZQ), (LX2,C2[1],ZQ), (LX2,C2[1],ZQ), (LX2,C2[1],ZQ), (LX2,C2[1],ZS), (LX2,C2[1],ZS), (LX2,C2[1],ZS), (LX2,C2[1],ZQ)]
+R_COL = [(GR[0],GR[1],ZR), GR, GR, (GR[0],GR[1],ZR), (RX1,C1[1],ZQ), (RX1,C1[1],ZS), (RX1,C1[1],ZS), (RX1,C1[1],ZS), (RX1,C1[1],ZQ), (RX2,C2[1],ZQ), (RX2,C2[1],ZQ), (RX_MID,C2[1],ZQ), (RX_MID,C2[1],ZQ), (RX2,C2[1],ZS), (RX2,C2[1],ZS), (RX2,C2[1],ZS), (RX2,C2[1],ZQ)]
+TSEL = sys.argv[5] if len(sys.argv) > 5 else "own"
+TGT = {"own": (L_COL if SIDE == "L" else R_COL), "Rtargets": R_COL, "MxL": [(-x, y, z) for (x, y, z) in L_COL]}[TSEL]   # MxL = the mirror images of the L targets (identity-map prediction: q_R == q_L on a correct B)
+# ---- R0-ii (v3 section 17.8 (b)): per row r, per attitude index k, the SAME argument list on both sides ----
+K = len(ns["pose_menu"](t))                        # the menu length on this side (pZ measured 11)
+rows = []
+for i, tgt in enumerate(TGT):
+    step = i + 2
+    for k_ in range(K):
+        buf = io.StringIO()
+        try:
+            with contextlib.redirect_stdout(buf):
+                q = ns["solve_ik"](t, np.array(tgt, float), tries=None, iters=300, seed=1, near=None, warm=None, other=None, pose_only=k_, quiet=True)
+            sc = mujoco.MjData(m); sc.qpos[:] = d.qpos
+            for kk, a in enumerate(QADR[t]): sc.qpos[a] = q[kk]
+            mujoco.mj_forward(m, sc); pe = float(np.linalg.norm(np.array(tgt) - ns["pinch"](t, sc)))
+            rows.append(dict(step=step, k=k_, tgt=[round(x, 4) for x in tgt], q=[float(v) for v in q], converged=True, pe_mm=round(pe * 1000, 4), tag="none"))
+        except RuntimeError as e:
+            rows.append(dict(step=step, k=k_, tgt=[round(x, 4) for x in tgt], converged=False, err=str(e)[:80], tag="controller non-convergence"))
+rec = dict(side=SIDE, model=MODEL, K=K, targets=TSEL, blob_sha256=hashlib.sha256(src.encode()).hexdigest(), closure_sha256=closure_sha, mj_step_calls=steps, driver_family_in_sys_modules=[k for k in sys.modules if k.startswith(("ur15_steps", "kinonly"))], start="HOME_POSE", GL=list(GL), GR=list(GR), rows=rows)
+open(OUT, "w").write(json.dumps(rec, indent=1)); print(json.dumps({k: v for k, v in rec.items() if k != "rows"})); print("converged (row,k) cells:", sum(r["converged"] for r in rows), "/", len(rows))
+```
+
+## Appendix J — `pz_r0ii_compare.py` (verbatim; sha256 8e828a92f6c3ff7b30a02904aa803f20c60efe70964c5976e5368a9426809f56)
+```python
+"""pZ R0-ii tally (v3 section 17.8 (b)): per model, per row, the attitude indices k where both sides converge and max|q_R - q_L| < 1e-6 rad."""
+import json, sys, pathlib, numpy as np
+S = pathlib.Path(sys.argv[1]); BAR = 1e-6
+L = json.load(open(S / "r0ii_L.json")); qL = {(r["step"], r["k"]): r for r in L["rows"]}
+print(f"L model: K={L['K']} cells={len(L['rows'])} converged={sum(r['converged'] for r in L['rows'])} mj_step={L['mj_step_calls']} driver_mods={L['driver_family_in_sys_modules']} GL={L['GL']}")
+for model in ("R", "RC", "NH"):
+    M = json.load(open(S / f"r0ii_{model}.json")); qM = {(r["step"], r["k"]): r for r in M["rows"]}
+    ident = {}; both = {}; nonid = {}
+    for (s, k), rl in qL.items():
+        rm = qM[(s, k)]
+        if rl["converged"] and rm["converged"]:
+            both.setdefault(s, []).append(k)
+            dq = float(np.abs(np.array(rm["q"]) - np.array(rl["q"])).max())
+            (ident if dq < BAR else nonid).setdefault(s, []).append((k, dq))
+    rows_with_ident = sorted(ident); total_ident = sum(len(v) for v in ident.values())
+    print(f"{model} model ({M['model']}): cells={len(M['rows'])} converged={sum(r['converged'] for r in M['rows'])} mj_step={M['mj_step_calls']}; identical (row,k) cells={total_ident}; rows with >=1 identical k: {len(rows_with_ident)}/17 -> {rows_with_ident}")
+    print(f"   identical k per row: { {s: [k for k, _ in v] for s, v in sorted(ident.items())} }")
+    print(f"   both-converged-but-not-identical cells: {sum(len(v) for v in nonid.values())}; max dq per row (rad): { {s: f'{max(d for _, d in v):.2e}' for s, v in sorted(nonid.items())} }")
+    print(f"   rows with no both-converged k: {[s for s in range(2, 19) if s not in both]}")
+```
