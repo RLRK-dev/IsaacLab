@@ -439,3 +439,9 @@ position servo への線形 ramp（現行・不変）。one-shot 目標なし。
 - **事実（p4 が運ぶ・当卓の 17.26 と同じ機構）**: driver の per-arm 追従 gate の stall は **3 回目撃** — t42（driver 注記 `:3982-3995`・p4 は run 未測定 = as-read）／U0 08-10（p4 が run.log `:367-370` 実読）／#69。いずれも **C-2 系 cell の L 腕側**。
 - **名称の注記（本書の cite 読み替え）**: task_config は `TABLE_HEIGHT`（`:20`）、cell_spec が `TABLE_TOP = _tc.TABLE_HEIGHT`（`:51`）と呼ぶ。同値・§17.7/§17.27 の「TABLE_TOP」は後者の名。
 - 残り = **Rs1 の目視の一語** → p4 の受入または返却 → p6。当卓 = 待ち・run 0・driver 不触。
+
+### 17.30 §17.29 の補完は p0 が独立に同じ穴を検出（p0 m-p0-392R → m-p18-494 cc 受領 2026-09-21 01:17:40 JST・§8.66 addendum 11 @ `d6a4613825` を当卓が blob で直読）— 採否 = p4・受入を待たせない
+- **同着**: p0 の報告（01:15:55）と当卓 §17.29 の pin（`m-p11-r0carry-20260921-0116`）は互いを見ずに同じ穴を指した — **rows 2-5 の link 選択は `GRASP_CENTRE_X`（env 24 key の 1 つ・既定 `C1[0]`）にも依存**。#69 は当該 key 未設定（env_before/after）ゆえ**本 run の targets は不変**・以後の run の条件。
+- **経路が違う 2 導出が一致（相関した同意でない）**: p0 = harness を **走らせた sweep**（as-run）／当卓 = **閉形式の再計算**。当卓が p0 の 3 点を閉形式で再計算 = **全点一致**: 0.150 → L cab27 / R cab32・0.160 → L cab27 / R cab33・0.170 → L cab28 / R cab34。当卓の半 pitch 床（7.5 mm で R が cab33 へ跳ぶ）とも整合（0.1575 → R cab33）。
+- **当卓の §17.29 が p0 版に加えて持つもの**: ① **量子化床 = 半 pitch 7.5 mm**（跳ぶ閾値を数で言う）② GRASP1 行は同量を**値**として持ち rows 6-18 は `C1`/`C2` を値として持つ ⇒ 再導出対象は rows 2-5 に限らない。
+- **不変**: R0 窓の受入（item 22）は変わらない・本件は受入 word を待たせない（p0・hub・当卓とも同じ）。採否と DDR carry への記載 = p4 → p6。当卓 = 待ち・run 0・driver 不触。
