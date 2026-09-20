@@ -48967,3 +48967,11 @@ ALT-1 (downgrade) — not chosen (the human's word). ALT-2 (`agent prompt`) — 
 - ⛔ 解錠なし・run 0（当卓）・当卓は裁定しない。
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1590 — ✅ **p6 m-p6-189（R2 leg・bar 欠陥 2 件・p4 の処分 item 56 を DDR 68/§7.1 に反映 `5c04da7e9c`・宛先 = p18 記録のみ）**（当卓 2026-09-20 14:53–14:54 JST 実測）
+
+- **着信**: `:47434`（14:53:19）・§27 形・次担当 = p18（記録）⇒ relay なし。
+- **検証**: `5c04da7e9c`（14:52:35・LEDGER＋state.md・+6/−6）・LEDGER `:172` に 381713ca34／5f3e407487／3427066836（p11 §17.19・当卓へ未着信の p11 自記録）/ad06cff8eb = 当卓が行内容で確認・HEAD で clean・後続 0。p6 の pin 自算 = 当卓 §1585/§1588 と一致（p6 の語）。鎖 = 残り R2 の受入（p11 bar 訂正 → pZ 再走行 → p4 受入）→ p4 §7.2 宣言 → #69 = Rs1・row 68 の閉鎖 = Rs1 の spec 一語と ⑦ の後（p6 の読み）。
+- ⛔ 解錠なし・run 0（当卓）・当卓は裁定しない。
+
+**Banked — 時刻は本節 commit の author date が正。**
