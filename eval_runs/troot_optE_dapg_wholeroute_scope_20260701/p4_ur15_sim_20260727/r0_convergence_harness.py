@@ -78,6 +78,13 @@ identical) is reported (prediction 0; > 0 is a finding for p11, not a section 11
 interpreted in the composed one-arm model's frame; the map and both targets are printed.  Not shown by this row: reach
 of the real R targets (rows 2-18 show that), mounting correctness (R1/R2), collision/grasp/dynamics.
 
+GRASP1 (section 17.9 (2), p11's word: in).  The driver's START-pose target and STEP 1 reference (GRASP1, :1249 =
+(GL[0], GL[1], Z_RISE_REST) with GL in the :1241 form = commanded x, link y) is commanded at run time (:2604/:2642,
+:2820-2821), so R0 carries it as ONE MORE ROW per side, step 1, bar = convergence only, denominator 18 rows per side;
+its value here = (GRASP_CENTRE_X -/+ GRIP_HALF_SPAN, the rest link's y from the same two paths, Z_RISE_REST), expected
+(0.106, 0.28, 1.03) / (0.194, 0.28, 1.03) (section 17.9; = pZ addendum 2's row 2 values).  It is not part of R0-ii
+(section 17.8 rows 2-18) and has no U0 counterpart.
+
 """
 
 from __future__ import annotations
@@ -990,7 +997,12 @@ def _grasp_targets(dump_path):
     src["GL"], src["GR"] = list(GL), list(GR)
     src["settle_offset_a_minus_b"] = {"L": [float(a - b) for a, b in zip(U0_SETTLED["GL"], GL)],
                                       "R": [float(a - b) for a, b in zip(U0_SETTLED["GR"], GR)]}
-    return GL, GR, src
+    # GRASP1 (section 17.9): the :1241 form (commanded x, the link's y) with z = Z_RISE_REST (driver :1249)
+    G1 = {"L": (float(x_cmd["L"]), GL[1], float(Z_RISE_REST)), "R": (float(x_cmd["R"]), GR[1], float(Z_RISE_REST))}
+    src["GRASP1"] = {"form": ":1249 = (GL[0], GL[1], Z_RISE_REST) with GL in the :1241 form (commanded x, link y); "
+                             "section 17.9 (2); bar = convergence only; not in R0-ii; no U0 counterpart",
+                     "L": list(G1["L"]), "R": list(G1["R"])}
+    return GL, GR, G1, src
 
 
 def _bind(t, model, data):
@@ -1052,6 +1064,11 @@ def _targets(GL, GR):
         (18, "上昇", (LX2, C2[1], Z_RISE_ROUTE), (RX2, C2[1], Z_RISE_ROUTE)),
     ]
     return [(n, name, np.array(L, float), np.array(R, float)) for n, name, L, R in rows]
+
+
+def _grasp1_row(G1):
+    """Section 17.9: the START-pose / STEP 1 target as one more convergence row per side (step 1)."""
+    return [(1, "START(GRASP1)", np.array(G1["L"], float), np.array(G1["R"], float))]
 
 
 def _u0_rows():
@@ -1190,7 +1207,7 @@ def main() -> int:
     t0 = time.time()
     claim = "収束のみ／衝突・把持・動的追従は未証明 (convergence only; collision, grasp and dynamic tracking are not shown)"
     try:
-        GL, GR, source = _grasp_targets(args.dump)
+        GL, GR, G1, source = _grasp_targets(args.dump)
     except InstrumentStop as e:
         rec = {"summary": {"claim": claim, "stop_cause_tags_seen": ["instrument calibration stop"],
                            "instrument_stop": str(e), "mj_step_calls": _MJ_STEP_CALLS}}
@@ -1211,9 +1228,12 @@ def main() -> int:
     # NH = mirrored arm + stock ko
     models_r0ii = {"B": None, "RC": _acc.build_side("ur15_base.xml", _acc.KO_LEFT, _spec.SIDES["R"]),
                    "NH": _acc.build_side("ur15_base_mirrored.xml", _acc.KO_LEFT, _spec.SIDES["R"])}
-    rows, u0 = _targets(GL, GR), _u0_rows()
-    print(f"[r0] targets: {len(rows)} rows (2-18) in the denominator; {len(u0)} extra U0 rows reported")
-    for n, name, L, R in rows:
+    rows, u0 = _targets(GL, GR), _u0_rows()                 # rows 2-18 (R0-ii's set)
+    rows_conv = _grasp1_row(G1) + rows                     # step 1 (GRASP1) + rows 2-18: the convergence denominator
+    print(f"[r0] GRASP1 (section 17.9): L={source['GRASP1']['L']} R={source['GRASP1']['R']}")
+    print(f"[r0] targets: {len(rows_conv)} rows (1-18) in the denominator; {len(u0)} extra U0 rows reported; "
+          f"R0-ii over {len(rows)} rows (2-18)")
+    for n, name, L, R in rows_conv:
         print(f"[r0] row {n:2d} {name:10s} L={np.round(L, 6)} R={np.round(R, 6)}")
     res, resu0, branches = {}, {}, {}
     for t in ("L", "R"):
@@ -1224,11 +1244,11 @@ def main() -> int:
         print(f"[r0] side {t}: composed model nq={m.nq} nbody={m.nbody} ngeom={m.ngeom}; {branches[t]}; AXFIX rows c/s/a =")
         for k, lab in enumerate("csa"):
             print(f"[r0]   {lab} = [" + " ".join(f"{v:+.6f}" for v in AXFIX[t][k]) + "]")
-        res[t] = _solve_rows(t, rows, t, args.seed, args.re_max)
+        res[t] = _solve_rows(t, rows_conv, t, args.seed, args.re_max)
         resu0[t] = _solve_rows(t, u0, t, args.seed, args.re_max, tag_rows="settled example (U0)", in_denominator=False)
     # negative control (prereg row 8): the R column on the L model
     _bind("L", *models["L"])
-    neg = _solve_rows("L", rows, "R", args.seed, args.re_max, tag_rows="negative control: R targets on the L model", in_denominator=False)
+    neg = _solve_rows("L", rows_conv, "R", args.seed, args.re_max, tag_rows="negative control: R targets on the L model", in_denominator=False)
     # R0-ii (section 17.8 (b)): mirrored L targets, pose_only=k sweep, on B and the controls RC / NH
     models_r0ii["B"] = models["R"]
     qL_uns = {r["step"]: (None if r["q"] is None else np.asarray(r["q"], float)) for r in res["L"]}
@@ -1244,7 +1264,7 @@ def main() -> int:
         "claim": claim,
         "stop_cause_tags_seen": tags,
         "section_11_STOP_R_converged_0": stop,
-        "rows": len(rows), "L_converged": sum(convL), "R_converged": sum(convR),
+        "rows": len(rows_conv), "rows_list": [r[0] for r in rows_conv], "L_converged": sum(convL), "R_converged": sum(convR),
         "L_converges_R_not": l_not_r, "R_converges_L_not": r_not_l,
         "bar_L_not_R_must_be_0": len(l_not_r) == 0,
         "negative_control_R_rows_on_L_model_differ_on_steps": neg_diff,
