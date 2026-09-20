@@ -4091,3 +4091,90 @@ RESULT: PASS
 - If the loader still stops where pZ runs (e.g. the ko asset paths differ there), the stop is the harness's own tag and the message names the missing file and its owner directory.
 - p11: §17.10 (R0-ii's 149 k ≥ 1 pairs; the k = 0 observation of §8.59 §3 is offered). p4: acceptance after the re-leg.
 - Untouched / unlocked: route run ② / #69; D4′; the acceptance-instrument window (§8.52); WIP. ⛔ gate 不変・route run 認可なし・self-start しません。
+
+### ⛔ CORRECTION (2026-09-20 09:45:47 JST) — §8.60 as committed at `0ad6abbde8` (09:44:05) is FALSE: it records a landing that did not happen, with every pin blank
+
+What happened (read from the tool output, not from memory): the docstring patch that was to add the rule's citations to the candidate failed on a text-wrapping mismatch (`AssertionError`), so no `r0_v7.py` existed; `cp` failed; the harness in the tree stayed at `f5b50967f8` (`git commit` answered "no changes added"); but the chain was not gated on those failures, so the record section was appended with its placeholders substituted by EMPTY strings and committed, and m-p0-377R went out with blank evidence fields (the hub read them as blank). Nothing in §8.60 above is a pin; its prose is the intended text. The true landing is §8.60′ below; the message correction is m-p0-378R (377R withdrawn). Cause = my landing chain ran its record and message steps without checking that the landing step had succeeded (`&&` on some steps, newlines on others, no `set -e`, no non-empty check on the pin variables) — the same class as records-must-match-fact: a record written from a template is not a record of an event. Fixed for this landing (`set -e`, every pin checked non-empty before the record is written) and to be kept.
+
+## 8.60′ Window R0 follow-up 5 LANDED — the TRUE record (§8.60 @ `0ad6abbde8` is FALSE, see the correction line above it): `8e5905539c` (+55/−6, the same file) — the dump loaded by the driver's own mesh rule (p4's word (i), m-p18-406 = m-p4-283); still py_compile only, run 0
+
+Written 2026-09-20 09:45:47 JST (date-THEN-write). p4's word (kickoff item 15 @ `5a56870712`, +8/−0, 09:35:39; read from the commit): (i) — fix the loader and re-land; conditions: resolve the bare-basename mesh references **by the same rule the driver uses when it assembles the cell and name that rule's file:line**; no scratch path hardcoded; bars, rows and the rest of the instrument untouched; pZ re-legs from the archive with the landed procedure and the verdict (2) numbers as the expectation table; the relocated-copy run is not banked as "ran". This is §8.59's candidate with the rule's citations written into the loader's docstring and nothing else.
+
+### 1. The rule, as named (file:line, all committed)
+
+| what | where |
+|---|---|
+| the driver loads each hand from its own asset file: `g = mujoco.MjSpec.from_file(GRIP_XML if tag == "L" else GRIP_XML_MIRRORED)` | `ur15_steps_wired.py` :419 @ `84a372439c59` (the same statement in the D4 blob `d2bc133e1320` :408) |
+| the two asset paths: `GRIP_XML` = `…/robotiq_2f85/_ur15_2f85_koshape_actuated.xml`, `GRIP_XML_MIRRORED` = `<driver dir>/_ur15_2f85_koshape_actuated_mirrored.xml` | driver :38-:39 |
+| the hand is attached under the prefix `{tag}g_` — which is why `Lg_*`/`Rg_*` in the dump name their owner | driver :423 |
+| `MjSpec.from_file` resolves a hand's meshes against that file's directory plus its `<compiler meshdir>` (MuJoCo's rule for a spec loaded from a file) — the stock ko declares `meshdir="assets"` | `_ur15_2f85_koshape_actuated.xml` :2 @ `1a1efe0ac5` → `thread_isaac_lab/assets/ur5e_robotiq/robotiq_2f85/assets/` (8 STLs) |
+| the mirrored ko declares `meshdir="ko_mirror_meshes"` | `_ur15_2f85_koshape_actuated_mirrored.xml` :6 @ `b7a5e39ecf` → `p4_ur15_sim_20260727/ko_mirror_meshes/` (8 STLs, tracked) |
+| the harness reaches the same two files through `ur15_gripper_mirror_acceptance.KO_LEFT` :42 (== `GRIP_XML`) and `KO_MIRROR` :43 (== `GRIP_XML_MIRRORED`) — the constants `build_side` (:62 `MjSpec.from_file(grip_xml)`) already uses | `ur15_gripper_mirror_acceptance.py` @ HEAD |
+| the emitter that drops the meshdir: `(S / "_steps_cell_full.xml").write_text(cell.to_xml())` | driver :446 |
+
+What `_load_dump` (harness :952-, called at :1019) does with it: read the dump text; for every `<mesh name=… file=…>` whose file has no `/`, pick the owner by the name prefix (`Lg_` → `KO_LEFT`, `Rg_` → `KO_MIRROR`), read that XML's `<compiler meshdir>` at run time, and substitute the absolute path `owner_dir / meshdir / file` — the file must exist there, else `InstrumentStop`; a relative mesh of neither prefix is also `InstrumentStop`; absolute references (the 14 arm meshes) are untouched; then `mujoco.MjModel.from_xml_string(text)`. The dump file is never written; its sha256 is of the bytes as found. The report gains `targets_source.dump_load` = {owner dirs, count resolved, the name → path map}. No scratch path: every directory is derived from the two committed constants and the two committed XMLs.
+
+### 2. What landed
+
+| item | value |
+|---|---|
+| path / commit | `p4_ur15_sim_20260727/r0_convergence_harness.py` @ `8e5905539c` (parent `548eb89b92`; +55/−6; 1345 lines) |
+| blob / sha256 | `89e7a0e52b4d` / `f630c9715832f40de7961a2cf9d912692d95259bb8f9fecf610780356acf5724` |
+| py_compile | env7 3.12.3 OK (scratch candidate and tree copy byte-equal) |
+| run / import | 0 and 0 — p0 did not run the harness, did not load the dump, did not build a model; the resolution was checked statically (§8.59 §2: 16 relative meshes resolved, 0 missing, by the same regex over the same committed XMLs and the dump) |
+| untouched | the copied closure (17 defs, 12 assignments AST-equal to both blobs; negative control unequal — check output below), rows, bars, the `mj_step` counter, the two-path target check, R0-ii, GRASP1, U0, CLI |
+| removed line | the former `from_xml_path` call (§8.58 file :968) |
+| commit form | main tree, pathspec-limited, `--no-verify`; tree == HEAD before and after |
+
+### 3. Static checks on the landed file (`check_r0_copy_v3.py`, unchanged script; output verbatim)
+
+```
+def    solve_ik            == blob1 True  == blob2 True
+def    pose_menu           == blob1 True  == blob2 True
+def    _wrap               == blob1 True  == blob2 True
+def    _rdes               == blob1 True  == blob2 True
+def    pinch               == blob1 True  == blob2 True
+def    touching            == blob1 True  == blob2 True
+def    sigma_min           == blob1 True  == blob2 True
+def    wrist_jac           == blob1 True  == blob2 True
+def    column_gap          == blob1 True  == blob2 True
+def    path_mast_min       == blob1 True  == blob2 True
+def    arm_pair_min        == blob1 True  == blob2 True
+def    path_arm_min        == blob1 True  == blob2 True
+def    furniture_gap       == blob1 True  == blob2 True
+def    path_furniture_min  == blob1 True  == blob2 True
+def    _own_bodies         == blob1 True  == blob2 True
+def    _measure_axfix      == blob1 True  == blob2 True
+def    cable_at            == blob1 True  == blob2 True
+assign _MASTNAMES          == blob1 True  == blob2 True   (module level)
+assign LIM                 == blob1 True  == blob2 True   (module level)
+assign CLEARANCE_REPORT    == blob1 True  == blob2 True   (module level)
+assign LAST_CLEAR          == blob1 True  == blob2 True   (module level)
+assign _DEPTH_AUDIT        == blob1 True  == blob2 True   (module level)
+assign GRASP_CENTRE_X      == blob1 True  == blob2 True   (module level)
+assign GNAME               == blob1 True  == blob2 True   (inside _bind)
+assign ARMG                == blob1 True  == blob2 True   (inside _bind)
+assign FURNG               == blob1 True  == blob2 True   (inside _bind)
+assign COLG                == blob1 True  == blob2 True   (inside _bind)
+assign COLFREE             == blob1 True  == blob2 True   (inside _bind)
+assign CAB                 == blob1 True  == blob2 True   (inside _grasp_targets)
+assign QADR                driver rule with composed prefixes (documented deviation)
+assign VADR                driver rule with composed prefixes (documented deviation)
+assign PAD                 driver rule with composed prefixes (documented deviation)
+assign TOOLB               driver rule with composed prefixes (documented deviation)
+assign ARMB                driver rule with composed prefixes (documented deviation)
+negative control (17.6 i): solve_ik copy with one literal 0.002->0.003 reads unequal to both blobs: True (literals changed: 1)
+closure free names: 43  cable_at free names: ['CAB', 'CABLE_SEG', 'd', 'np']  unbound in the harness: []
+closure free names outside pZ's 30 + copied names: []
+pZ's 30 not read by the closure here: []
+row 2(b) token sweep: {'ur15_steps_wired': 0, 'ur15_steps': 0, 'kinonly_step_solve': 0, 'subprocess': 0, 'runpy': 0, 'exec(': 0, '__import__': 0, 'importlib': 0}
+mj_step in the copied defs: False
+RESULT: PASS
+```
+
+### 4. Not claimed / open
+
+- The re-leg is pZ's: from the archive, landed procedure (`--dump` at its default or given), expectation = verdict `8ec2abdec3` (2) row by row (same dump bytes). p0 predicts equality but has measured nothing.
+- If the loader still stops where pZ runs (e.g. the ko asset paths differ there), the stop is the harness's own tag and the message names the missing file and its owner directory.
+- p11: §17.10 (R0-ii's 149 k ≥ 1 pairs; the k = 0 observation of §8.59 §3 is offered). p4: acceptance after the re-leg.
+- Untouched / unlocked: route run ② / #69; D4′; the acceptance-instrument window (§8.52); WIP. ⛔ gate 不変・route run 認可なし・self-start しません。
