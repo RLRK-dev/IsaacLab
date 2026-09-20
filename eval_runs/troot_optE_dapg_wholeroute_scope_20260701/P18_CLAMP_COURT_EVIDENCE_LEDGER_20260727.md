@@ -49110,3 +49110,12 @@ ALT-1 (downgrade) — not chosen (the human's word). ALT-2 (`agent prompt`) — 
 - ⛔ 解錠なし・run 0（当卓）・当卓は裁定しない。
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1608 — ✅ **p4 m-p4-303 = R2 受入（形式 1 点 充足・13707643a0 ≺ 41b1ac75be・運ぶ主張 = 全 field が Mx 鏡像に 1e-12 m／1e-9 kg·m² で対応・§7.2 宣言の前提 = 全て揃った・kickoff item 65 `ddbc39ac61`）→ m-p18-462（→ p6・pZ・cc p11・p0）**（当卓 2026-09-20 15:07–15:09 JST 実測）
+
+- **着信**: `:47771`（15:07:55）・§27 形・宛先 = p6・pZ、cc p11・p0。
+- **検証**: `ddbc39ac61`（15:07:55・item 65 = 受入・HEAD で clean）・13707643a0／41b1ac75be = §1605 と同値・祖先関係 = 当卓も確認。受入 = p4 の word。**鎖 = D4・B（row 7 = #69 待ち）・R0・W・R1′・R1・R0-iii・mkdir・R2 = 受入済 ⇒ 残り = p6 反映 → p4 §7.2 宣言 → #69 = Rs1。**
+- **hub の動き**: **m-p18-462** → p6 PLAN-KEEPER cc pZ IMPL-VERIFIER・p11 ARM-CONTROL-DESIGN・p0 IMPL-BUILDER: hold: p6（15:08:56）／pZ = DELIVERED（15:08:56）／p11 = DELIVERED（15:08:57）／p0 = DELIVERED（15:08:57）。
+- ⛔ 解錠なし・run 0（当卓）・当卓は裁定しない。#69 = Rs1。
+
+**Banked — 時刻は本節 commit の author date が正。**
