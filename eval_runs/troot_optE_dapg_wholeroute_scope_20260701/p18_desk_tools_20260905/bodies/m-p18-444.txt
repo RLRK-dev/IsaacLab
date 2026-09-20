@@ -1,0 +1,13 @@
+MSG m-p18-444 / w2:p18 / OPS-SUPERVISOR → w2:p0 IMPL-BUILDER（cc w2:pZ IMPL-VERIFIER, w2:p11 ARM-CONTROL-DESIGN, w2:p6 PLAN-KEEPER）
+種別: 受領（relay） | 用件: p4 m-p4-295 の逐語 relay — follow-up 6（R0-iii 手首方向 report 行）の着地 fedb5bef08 を受領。p4 の pin 確認 = 親の harness blob 89e7a0e52b4d = 窓 R0 受入版 8e5905539c の blob と同一・+78/−1（−1 = rec dict 閉じ行の置換）・:1251/:1284/:1381・以後 commit 0。v8 の docstring 変更を述語で自己捕捉して v9 で着地 = 正当。受入 = pZ の leg の後・report 行のみ・窓 R0 不触（p4 の語）。
+根拠: m-p4-295（hub transcript :46920・2026-09-20 14:31:01 JST 着）・P4_MOUNTING_C-2_CHAIN_KICKOFF_20260808.md 09-20 08:23 節 item 41 @ f32e9b4f71（14:31:01・当卓が diff を実読）・fedb5bef08（当卓も §1566 で同値を実読）（台帳 §1572）。
+次担当: p0 IMPL-BUILDER（受領・cc pZ IMPL-VERIFIER = leg・p11 ARM-CONTROL-DESIGN・p6 PLAN-KEEPER） | 次行動: pZ = leg → p4 = report 行の受入 | 必要な応答: pZ = leg verdict・他 = 不要（p4 の語） | 条件: 解錠なし（route run (2)・#69・D4′・WIP）・run 0・窓 R0 の受入不変（p4 の語）。Verbatim:
+> MSG m-p4-295 / w2:p4 RS-TECH-LEAD → w2:p18 OPS-SUPERVISOR（relay 先 w2:p0 IMPL-BUILDER・cc w2:pZ IMPL-VERIFIER・w2:p11 ARM-CONTROL-DESIGN・w2:p6 PLAN-KEEPER）— re m-p18-438 / m-p0-385R
+> 種別: 受領 | 用件: follow-up 6（R0-iii 手首方向 report 行）の着地 fedb5bef08 を受領。当卓の pin 確認 = 親の harness blob 89e7a0e52b4d は窓 R0 受入版 8e5905539c の blob と同一・+78/−1（−1 = rec dict の閉じ行に "R0iii" key を足した同一行の置換）・:1251 _wrist_one・:1284 _r0iii・:1381 呼出・以後 commit 0。v8 の docstring 変更を述語で自己捕捉して v9 で着地 = 正当。受入 = pZ の leg（述語 on 親/着地 blob・archive で as-landed 手順・既存行 1e-12 同一・R0iii block を addendum 9 の期待と照合・反証形の有無）の後・report 行のみ・窓 R0 不触。
+> 根拠: r0_convergence_harness.py @ fedb5bef08（blob f5dc14a8d1b3・sha256 3ff26da6a378afb28fe342ffc8e81a06c14f02c50cdeaa41e6ffdd219f1f289e・1,422 行）= 当卓が git で実測。記録 = P4_MOUNTING_C-2_CHAIN_KICKOFF_20260808.md 09-20 08:23 節 item 41 @ f32e9b4f71。
+> 次担当: pZ（leg）→ p4（report 行の受入） | 次行動: 上記 | 必要な応答: pZ = leg verdict・他 = 不要 | 条件: 解錠なし（route run (2)・#69・D4′・WIP）・run 0・窓 R0 の受入不変。
+> 2026-09-20 14:31:01 JST (p4 send_p18.sh)
+p18 verification (ledger §1572):
+- Pin read by the hub: f32e9b4f71 (author date 2026-09-20 14:31:01 JST, kickoff item 41 = receipt of the R0-iii landing; p4's pin figures equal the hub's §1566 readings). Receipt only.
+- The hub rules nothing; no run.
+2026-09-20 14:33:06 JST (hub_send.py)

@@ -48820,3 +48820,19 @@ ALT-1 (downgrade) — not chosen (the human's word). ALT-2 (`agent prompt`) — 
 - ⛔ 解錠なし・run 0（当卓）・当卓は裁定しない。
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1572 — ✅ **p4 m-p4-295（438 受領・R0-iii 着地の pin 確認・受入は pZ leg 後・kickoff item 41 `f32e9b4f71`）→ m-p18-444（→ p0 cc pZ p11 p6）**（当卓 14:31–14:33 JST）
+- 着信 `:46920`（14:31:01）。pin = `f32e9b4f71`（item 41・当卓が diff を実読・p4 の pin 値 = §1566 と同値）。受領のみ。hub: hold: pZ（14:33:06）／p0 = DELIVERED（14:33:06）／p11 = DELIVERED（14:33:07）／p6 = DELIVERED（14:33:08）。
+
+## §1573 — ✅ **p0 m-p0-387R（437 受領・scratch worktree 除去・残り = R0-iii leg と mkdir rc 0・§8.61 addendum 2 `e4fa55a00f`）→ m-p18-445（→ p4 cc pZ p6 p11）**（当卓 14:31–14:33 JST）
+- 着信 `:46921`（14:31:07）。pin = `e4fa55a00f`（addendum 2・当卓が diff を実読）。受領のみ。hub: hold: p4・pZ・p6・p11（14:33:09）。
+
+## §1574 — ✅ **p6 m-p6-186 = DDR 73 CLOSED（p4 item 35 に基づく・block 中の着地一式を DDR 68/§7.1 に反映・`e3a16ea334`）→ m-p18-443（→ p4・p6 の依頼「p4 へ返送」）／p6 宛 hold 433–437/439/440 = 完了しない（p6 の語「同内容を反映済」）**（当卓 2026-09-20 14:31–14:33 JST 実測）
+
+- **着信**: `:46922`（14:31:07）・§27 形・次担当 = p18（記録・p4 へ返送）。
+- **検証**: `e3a16ea334`（14:30:11・LEDGER +2/−2・state.md +6/−6）・LEDGER `:177` に CLOSED・`59576e5ac0`・`2cbcb9b985` = 当卓が行内容で確認・HEAD で clean・後続 0。p6 の pin 自算 = 当卓 §1561–§1568 と一致（p6 の語・当卓は verdict 4 本・prereg 2 本・harness・kickoff を既読）。閉鎖 = p6 の行為（p4 の word に基づく）・row 68 = open（Rs1 の spec 一語と ⑦ の後 = p6 の読み）。
+- **hub の動き**: **m-p18-443** → p4 RS-TECH-LEAD: p4 = DELIVERED（14:33:06）。**p6 宛 hold の整理**: 433・434・435・436・437・439・440 → p6 = 完了しない（p6 が git で実読・反映済）。以後 p6 へは新規 relay のみ。
+- **§1571 の commit**: 初回 `git commit` が ref lock の競合（他卓の同時 commit: HEAD が e4fa55a00f → 4bd26e54f8）で fatal → 再試行で `a160227366`（14:31:50）。台帳への追記は 1 回のみ（重複なし）。
+- ⛔ 解錠なし・run 0（当卓）・当卓は裁定しない。
+
+**Banked — 時刻は本節 commit の author date が正。**
