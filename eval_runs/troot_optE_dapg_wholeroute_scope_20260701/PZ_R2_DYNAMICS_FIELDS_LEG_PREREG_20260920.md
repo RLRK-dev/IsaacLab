@@ -149,3 +149,112 @@ print(f"[r2] mj_step calls: {steps}; driver family in sys.modules: {res['driver_
 
 ## Provenance
 Blob ids by `git ls-tree` at HEAD and at `92059373a3`; no instrument output exists at writing (asserted). Committed by pZ under the standing custody form (m-p18-342/344), pathspec-limited, `--no-verify`, no push; hub instruction m-p18-426.
+
+## Addendum (corrected pre-registration, 2026-09-20 14:59:34 JST) — the bars of rows R2-1b/R2-1d/R2-3/R2-6/R2-7 replaced per p4's disposition (m-p4-300 via m-p18-454) and p11's append-only correction §17.20 @ `7b61c9ae2f`; the same instrument re-run once under this addendum
+
+**This is a bar change made after the object was measured**, and it is written as such: the first run (14:42:53 JST, verdict `PZ_VERDICT_R2_DYNAMICS_FIELDS_LEG_20260920.md` @ `381713ca34`) reported 6 field comparisons as FAIL under the bars above and did not re-grade them; p4 ruled both to be bar defects and adopted this desk's proposal; p11 corrected the source of the bars (§10 R2 `:140`) in §17.20 with the reasons and the discrimination margins. **Order of existence (measured in the writing command)**: §17.20 = `7b61c9ae2f` (14:57:18 JST; blob `b5726481b7c8`, sha256 `7affe9b0cb29d2d2…`, 370 lines, `:357-370`; design commits after it = 0); the re-run's outputs (`r2_rerun.json`/`.log`, `r2_inertia_v2.json`, `r2_judge.txt`) do **not** exist (asserted); HEAD `927c45f9d3`; objects unchanged (the six input blobs equal their blobs at `792e62e460`, re-asserted). The instrument **`pz_r2.py` is byte-identical** (sha256 `3f6dab44b655d64bd38d23696fe5aeadaddffa6aa3a92b31cb3e6b1d71ace5f0` = appendix A) — p4's condition 「計器 sha 不変」; the tensor row and the judgment under the corrected bars are two small additional instruments registered here by sha before the run (p11 §17.20 left their form to this desk).
+
+### Corrected rows (replace the bar column of the rows named; everything else in the table above stands)
+
+| # | row | corrected bar (§17.20) | judged from |
+|---|---|---|---|
+| R2-1b | `body_pos`, `body_ipos` (Mx) | **≤ 1e-12 m** (was exact) | `pz_r2.py`'s per-field `max` |
+| R2-1d | `body_iquat` → **the frame-independent inertia tensor** `Mx·(R_L·diag(I_L)·R_Lᵀ)·Mx = R_R·diag(I_R)·R_Rᵀ` per name-matched body | **≤ 1e-9 kg·m²** (composed and single-asset alike); `body_iquat`'s `Mx·R·Mx` residual **reported only** | `pz_r2_inertia_v2.py` (appendix B below; sha256 `6609eacef7fa3f1a5280326f4bf83860fb836c972c6edf04c5001c96d77aa363`; = the verdict's appendix-C instrument `pz_r2_inertia.py` sha256 `b96f2bc967325e6801b38e73174767261fef6b707595194a80ff83fca8c8e166` extended from L-vs-B to all six comparisons; same formula) |
+| R2-3 | `geom_size`, `geom_pos` (Mx) | **≤ 1e-12 m** (was exact); non-mesh `geom_quat` ≤ 1e-12 unchanged; the other geom fields exact unchanged | `pz_r2.py` `max` |
+| R2-6 | `eq_data` | **≤ 1e-12** (was exact); `eq_type`/`active`, `eq_solref`/`solimp` exact unchanged | `pz_r2.py` `max` |
+| R2-7 | single-asset compiles | the same corrected bars; the arm's `body_iquat ≤ 1e-10` and the hand's `≤ 1e-8` are replaced by the tensor row | as above |
+| R2-2 | `jnt_axis` | map made explicit by §17.20: `a_R = −A·a_L`, exact (unchanged); `−a` reported only (unchanged) | `pz_r2.py` |
+| R2-8 | controls | unchanged except the withdrawn expectation below; the tensor row carries **no** control requirement (§17.20: hand chirality is carried by `body_ipos`/`body_quat`/`geom_pos` and R1′); NH/RC/B′ tensor values are reported | `pz_r2_judge.py` lists, per comparison, the fields that fail the corrected bars |
+
+**Withdrawn** (recorded in §17.20 too): the R2-8 expectation that the hand `jnt_axis` (−A·a) row fails on NH — every hand axis is `(1, 0, 0)`, for which `−A·a = a`; `body_pos` likewise cannot see the hand (local offsets have `x = 0`).
+
+**Unchanged bars**: `body_mass`, `body_inertia`, `jnt_type`/`range`/`stiffness`/`qpos_spring`/`dof_armature`/`damping`, `jnt_pos`, `geom_type`, `geom_solref`/`solimp`, friction/condim/contype/conaffinity, actuator, tendon, `eq_type`/`active`, `eq_solref`/`solimp` — exact (text constants, no arithmetic; measured 0.0 on the first run).
+
+### Expectation under the corrected bars (fixed before the re-run; the first run's numbers are known and the instrument is deterministic, so this is a prediction only in the formal sense)
+- L vs B: **all 28 barred comparisons pass** (27 `pz_r2.py` fields + the tensor row); reported-only: `body_iquat` residual 2.0 on the three sign-flipped bodies, `−a` failing on the 8 hand joints.
+- NH: fails `body_ipos` (max ~7.2e-4 m), `body_quat` (`g_base`), `geom_pos` (~7.2e-4 m); tensor row reported (expected to fail on hand bodies — reported, not required); arm rows pass. RC: fails `body_pos` (~1.3 m), `body_ipos`, `jnt_axis (−A·a)` on the 6 arm joints, `geom_pos`, tensor on arm bodies (reported). B′: exactly `body_mass` (1 pair, 1e-7 kg) beyond B's result; tensor unchanged (inertia explicit).
+- Single assets: arm and hand pass all corrected bars.
+
+### Leg procedure (re-run)
+In the `git archive` of `792e62e460`: `python pz_r2.py <archive> r2_rerun.json` (unchanged instrument), then `python pz_r2_inertia_v2.py <archive> r2_inertia_v2.json`, then `python pz_r2_judge.py r2_rerun.json r2_inertia_v2.json > r2_judge.txt`; each once; the verdict embeds all three outputs verbatim and judges by the judge's lists. Run 0; `mj_step` counted by `pz_r2.py` (must stay 0).
+
+## Appendix B — `pz_r2_inertia_v2.py` (verbatim; sha256 6609eacef7fa3f1a5280326f4bf83860fb836c972c6edf04c5001c96d77aa363)
+```python
+"""pZ R2 inertia-tensor row (v2 of the supplementary instrument; now on all six comparisons of pz_r2.py): per name-matched body,
+I_body = R(iquat) diag(inertia) R(iquat)^T, compared as Mx.I_L.Mx vs I_R (frame-independent); body_iquat residual reported alongside.
+Comparisons: composed L vs {B, NH, RC, B'(perturbed hand xml already written by pz_r2.py)}; single assets arm L/R, hand L/R.  argv: W OUT"""
+import sys, io, json, contextlib, numpy as np, mujoco
+W, OUT = sys.argv[1], sys.argv[2]; sys.path.insert(0, W)
+with contextlib.redirect_stdout(io.StringIO()), contextlib.redirect_stderr(io.StringIO()):
+    import ur15_gripper_mirror_acceptance as g
+    L = g.build_side("ur15_base.xml", g.KO_LEFT, g.acc.SIDE_SIGN["L"])[0]; B = g.build_side("ur15_base_mirrored.xml", g.KO_MIRROR, g.acc.SIDE_SIGN["R"])[0]
+    NH = g.build_side("ur15_base_mirrored.xml", g.KO_LEFT, g.acc.SIDE_SIGN["R"])[0]; RC = g.build_side("ur15_base.xml", g.KO_LEFT, g.acc.SIDE_SIGN["R"])[0]
+    BP = g.build_side("ur15_base_mirrored.xml", f"{W}/_pz_r2_perturbed_hand.xml", g.acc.SIDE_SIGN["R"])[0]
+    armL, armR = mujoco.MjModel.from_xml_path(f"{W}/ur15_base.xml"), mujoco.MjModel.from_xml_path(f"{W}/ur15_base_mirrored.xml")
+    handL, handR = mujoco.MjModel.from_xml_path(g.KO_LEFT), mujoco.MjModel.from_xml_path(g.KO_MIRROR)
+Mx = np.diag([-1.0, 1.0, 1.0])
+def q2R(q): m = np.zeros(9); mujoco.mju_quat2Mat(m, np.asarray(q, float)); return m.reshape(3, 3)
+def name(m, i): return mujoco.mj_id2name(m, mujoco.mjtObj.mjOBJ_BODY, int(i))
+def cmp(mL, mR):
+    bL = {name(mL, i): i for i in range(mL.nbody)}; bR = {name(mR, i): i for i in range(mR.nbody)}
+    out = {"per_body": {}, "iquat_residual": {}, "n": 0, "worst": 0.0, "worst_at": None}
+    for k in sorted(set(bL) & set(bR)):
+        if k in ("world", "column"): continue
+        i, j = bL[k], bR[k]
+        IL = q2R(mL.body_iquat[i]) @ np.diag(mL.body_inertia[i]) @ q2R(mL.body_iquat[i]).T; IR = q2R(mR.body_iquat[j]) @ np.diag(mR.body_inertia[j]) @ q2R(mR.body_iquat[j]).T
+        d = float(np.abs(Mx @ IL @ Mx - IR).max()); out["per_body"][k] = d; out["n"] += 1
+        out["iquat_residual"][k] = float(np.abs(Mx @ q2R(mL.body_iquat[i]) @ Mx - q2R(mR.body_iquat[j])).max())
+        if d > out["worst"]: out["worst"], out["worst_at"] = d, k
+    return out
+res = {"composed_L_vs_B": cmp(L, B), "composed_L_vs_NH": cmp(L, NH), "composed_L_vs_RC": cmp(L, RC), "composed_L_vs_Bperturbed": cmp(L, BP), "arm_stock_vs_mirrored": cmp(armL, armR), "hand_stock_vs_mirrored": cmp(handL, handR)}
+open(OUT, "w").write(json.dumps(res, indent=1))
+for k, v in res.items():
+    nfl = sum(1 for d in v["per_body"].values() if d > 1e-9)
+    print(f"[r2-I] {k:26s}: bodies {v['n']:2d}, inertia tensor under Mx worst {v['worst']:.3e} kg m^2 at {v['worst_at']}; bodies > 1e-9: {nfl}; iquat residuals > 1e-8: {sum(1 for r in v['iquat_residual'].values() if r > 1e-8)}")
+```
+
+## Appendix C — `pz_r2_judge.py` (verbatim; sha256 20d823d0a4866a993733fd1c4301618ab52e76a12ebc9b7cb4c223fcc470dc2d)
+```python
+"""pZ R2 judgment layer under the CORRECTED bars (p4 m-p4-300): applies field bars to pz_r2.py's per-field max (r2.json) and to
+pz_r2_inertia_v2.py's per-body tensor differences (r2_inertia_v2.json).  Bars: exact (max == 0) for the integer/range/parameter fields;
+<= 1e-12 for body_pos, body_ipos, geom_size, geom_pos, eq_data, body_quat, non-mesh geom_quat; jnt_axis (-A.a) exact; inertia tensor <= 1e-9 kg m^2.
+Reported only (no bar): body_iquat, jnt_axis (-a).  argv: r2.json r2_inertia_v2.json"""
+import json, sys
+r = json.load(open(sys.argv[1])); I = json.load(open(sys.argv[2]))
+TOL = {"body_pos (Mx, exact)": 1e-12, "body_ipos (Mx, exact)": 1e-12, "geom_size (exact)": 1e-12, "geom_pos (Mx, exact)": 1e-12, "eq_data (exact)": 1e-12, "body_quat (Mx.R.Mx)": 1e-12, "geom_quat non-mesh (Mx.R.Mx)": 1e-12}
+REPORT_ONLY = {"body_iquat (Mx.R.Mx)", "jnt_axis (-a, reported)"}
+KEYMAP = {"composed_L_vs_B": "composed_L_vs_B", "composed_L_vs_NH (negative: stock hand)": "composed_L_vs_NH", "composed_L_vs_RC (negative: stock arm on the right mount)": "composed_L_vs_RC",
+          "composed_L_vs_Bperturbed (negative: one hand mass +1e-7)": "composed_L_vs_Bperturbed", "arm_stock_vs_mirrored (single asset)": "arm_stock_vs_mirrored", "hand_stock_vs_mirrored (single asset)": "hand_stock_vs_mirrored"}
+summary = {}
+for cmp_, tab in r.items():
+    if not isinstance(tab, dict) or cmp_ not in KEYMAP: continue
+    barred, passed, failed, reported = 0, 0, [], {}
+    for field, v in tab.items():
+        if field.startswith("_"): continue
+        if field in REPORT_ONLY: reported[field] = (v["fail"], v["max"]); continue
+        bar = TOL.get(field, 0.0); ok = (v["max"] <= bar) if bar > 0 else (v["max"] == 0.0); barred += 1; passed += ok
+        if not ok: failed.append((field, v["max"], v["fail"], v["n"]))
+    it = I[KEYMAP[cmp_]]; ok_I = it["worst"] <= 1e-9; barred += 1; passed += ok_I
+    if not ok_I: failed.append(("inertia tensor (Mx, <= 1e-9)", it["worst"], sum(1 for d in it["per_body"].values() if d > 1e-9), it["n"]))
+    summary[cmp_] = {"barred": barred, "passed": passed, "failed": failed, "reported": reported, "inertia_worst": it["worst"]}
+    print(f"[r2-judge] {cmp_}: {passed}/{barred} barred comparisons pass; failed = {[(f, f'{m:.2e}', nf, n) for f, m, nf, n in failed]}; reported-only = {{k: (nf, f'{mx:.2e}') for k, (nf, mx) in reported.items()}}; inertia tensor worst {it['worst']:.2e}")
+print(json.dumps({k: {"passed": v["passed"], "barred": v["barred"], "failed_fields": [f for f, *_ in v["failed"]]} for k, v in summary.items()}))
+```
+
+## Appendix D — p11 §17.20 @ `7b61c9ae2f` `:357-370` (verbatim, the source of the corrected bars)
+```text
+### 17.20 §10 R2（`:140`）の bar 訂正 = append-only（§10 本文は不触）— p4 m-p4-300 → m-p18-454 受領 2026-09-20 14:57:18 JST・kickoff 09-20 08:23 節 item 56 @ `5f3e407487`（当卓が blob で直読）・pZ verdict `PZ_VERDICT_R2_DYNAMICS_FIELDS_LEG_20260920.md` @ `381713ca34`（rows 表 R2-8 = `:24`・処分案 `:29`-`:31`・appendix C `:211`・当卓が blob で実読）・pZ 事前登録 `PZ_R2_DYNAMICS_FIELDS_LEG_PREREG_20260920.md` @ `ad06cff8eb`（写像 `:23`/`:53`・exact の実装 `:70`・`jnt_axis` `:89`・NH 期待 `:34`）
+- **何が起きたか**: R2 leg（1 回の run・計器 `pz_r2.py` sha256 `3f6dab44b655d64b…`）は 28 比較中 21 が bar 通過、7 が FAIL のうち 1 は報告行（`−a`）、残る **6 は bar の欠陥**（pZ が再採点せず FAIL のまま報告・p4 同意・当卓同意）。bar の出所は当卓の §10 R2 `:140`（@ `8d9fdf3bbb`・on-disk `:140` と byte 同一を当卓が確認）ゆえ訂正は当卓が理由つきで書く。**object を見た後の bar 変更**である — 以下に理由と判別の余裕を書き、pZ が訂正事前登録の下で同一計器を再走行し、p4 が受け入れる（順序 = p4 の word・item 56）。
+- **訂正 1 — 「exact」5 field → `≤ 1e-12 m`**: `body_pos`・`body_ipos`（Mx 写像後）・`geom_size`・`geom_pos`（Mx 写像後）・`eq_data`。composed model と単体 compile（R2-7）の両方に適用。
+  - 理由（当卓の読み・帰結は p4 と同じ）: IEEE 754 の符号反転そのものは exact だが、これら 5 field は **compile 時の算術の出力**（mount 姿勢との frame 合成・`fromto`/frame 変換からの size・pos・connect の第 2 anchor の算出）であり、両側で被演算数の順序と符号が異なるため double の最下位桁（1 ulp 級）の残差が原理的に残る。差 0 を要求する bar（事前登録 `:70` = `diff != 0` で FAIL）は物理量を測っていない。実測 = max 2.8e-17 m（`geom_pos` `a_wrist_1_link#0` 2.776e-17／`eq_data` 2.082e-16 は無次元 anchor 成分の 1 ulp／`body_pos` `g_base_mount` 3.109e-18、verdict log）。
+  - 判別の余裕: 対照 NH の最小の落ち = **1.7e-8 m**（verdict `:29`）。bar 1e-12 は雑音 2.8e-17 の約 3.6e4 倍上・対照 1.7e-8 の約 1.7e4 倍下 — **判別不変**（同じ bar を `body_quat` が既に持つ）。RC は `body_pos` 最大 1.295 m・B′ は `body_mass` 1 field のみ（1.0e-7 kg）で、いずれも訂正の影響外（verdict `:24`）。
+  - 変えないもの: int/range/`body_mass`/`body_inertia`/`jnt_*`/actuator/tendon/`eq_type`/`eq_solref`/`eq_solimp`/`geom_solref`/`geom_solimp`/friction 列は **exact のまま**（text 定数の copy で算術を経ない・実測差 0.0）。
+- **訂正 2 — `body_iquat` 行 → frame 非依存の慣性テンソル行**: 各対応 body で `Mx·(R_L·diag(I_L)·R_Lᵀ)·Mx = R_R·diag(I_R)·R_Rᵀ`（`R` = `body_iquat` の回転行列・`diag(I)` = `body_inertia`・`Mx = diag(−1,1,1)` = 事前登録 `:23`）、bar **`≤ 1e-9 kg·m²`**（hand・arm 共通、composed と単体 compile とも）。`body_iquat` の `Mx·R·Mx` 残差は **報告のみ（bar なし）**。旧 bar「`body_iquat` ≤ 1e-8（hand）・≤ 1e-10（arm）」は本行で置換。
+  - 理由: MuJoCo は `body_iquat` を慣性テンソルの固有分解で定め、**主軸の符号（= 主軸まわり 180° 回転）は一意でない**（縮退主モーメントでは軸自体も）。よって `Mx·R·Mx` 比較は同一の慣性に対し残差 2.0 を返し得る — 実測 `g_base_mount`・`g_left/right_silicone_pad` の 3 body（verdict R2-1d）。物理量 = テンソル `R·diag(I)·Rᵀ`（body frame）で、その Mx 共役差は同 3 body で **0.0**・全 body max **1.0e-10 kg·m²**（verdict appendix C `:211`、事前登録外の補助測定 `pz_r2_inertia.py` sha256 `b96f2bc967325e68…`）。bar 1e-9 = 実測 max の 10 倍・pZ 処分案 `:30` の値・p4 の word。
+  - 対照: 本行に「NH で落ちる」を要求しない — hand の chirality は `body_ipos`（NH 最大 7.21e-4 m）・`body_quat`・`geom_pos` 行と R1′ が担う（verdict `:24`）。本行の NH/RC/B′ 値は報告。
+  - pZ への注記（質問であって finding でない）: 本行の計器は appendix C の補助測定に相当し、`pz_r2.py`（sha 不変）の外にある。p4 の条件「計器 sha 不変」の下で本行をどう事前登録するか（appendix C 計器を sha で登録・`pz_r2.py` の log から `max` を新 bar で判定）は pZ の裁量。当卓は要件（上式・max・bar）のみ書く。
+- **`jnt_axis` の写像を明記**（§10 は map を書いていなかった）: `a_R = −A·a_L`、`A = diag(−1,1,1)`（事前登録 `:23`/`:89`・08-10 B3 の loader-level 写像）、exact のまま（実測 14/14 差 0.0）。`−a` は報告行（arm 6 で成立・hand 8 で不成立 = hand の axis が全て (1,0,0)）。
+- **撤回の記録**: pZ 事前登録 R2-8（`:34`）の期待「NH で hand `jnt_axis`（−A·a）行が落ちる」は verdict R2-8（`:24`）で反証 — hand の全 axis = (1,0,0) ゆえ `−A·a = a` で行は chirality を見ない（`body_pos` も hand の local offset x = 0 で同様）。撤回 = pZ（verdict `:31`）、当卓も同じ読み。§10 R2 の bar は本件で変わらない。
+- **R2-9（driver 注入 parameter）**: p4 が driver blob `:238-244`（armature/damping）・`:426-433`（kp/kv/`forcerange`/`ctrlrange`）を読み text 上の両側同一を確認、静的 leg 不要・実効値は R4（p4 の word・item 56）。§10 R2 の記載「計器の model に無い・実測は #69 run のみ」と整合、訂正なし。
+- **鎖の状態**: R2 = 本訂正 → pZ 訂正事前登録 → 同一計器の再走行 → verdict → p4 受入（28/28 ＋ 対照 3 種が落ちる所で落ちる）。§7.2 前提の残り = R2・p6 の state.md 反映。⛔ 解錠なし（route run (2)・#69・D4′・WIP）・run 0・当卓は run しない。
+```
