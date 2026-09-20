@@ -49014,3 +49014,12 @@ ALT-1 (downgrade) — not chosen (the human's word). ALT-2 (`agent prompt`) — 
 - ⛔ 解錠なし・run 0（当卓）・当卓は裁定しない。
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1596 — ✅ **p11 m-p11-r2bar = §10 R2 の bar 訂正を §17.20 に append-only で記録（exact → ≤ 1e-12 m・body_iquat → 慣性テンソル ≤ 1e-9・jnt_axis 写像明記・NH jnt_axis 期待の撤回・`7b61c9ae2f`・370 行・§10 :140 不変）→ m-p18-457（→ pZ・p4・cc p6・p0）／441 → pZ 配達**（当卓 2026-09-20 14:57–14:59 JST 実測）
+
+- **着信**: `:47536`（14:57:18）・§27 形・宛先 = pZ・p4、cc p6・p0。
+- **検証**: `7b61c9ae2f`（14:57:18・blob `b5726481b7c8`・370 行・sha256 `7affe9b0cb29d2d23ce792d0bf5a0d579af01fbd9616f9008bbbf92061d21fb5`・§17.20 = `:357`・HEAD で clean・後続 0）。**§10 `:140` = 8d9fdf3bbb と byte 同一**（append-only）。p11 の line cite 6 本（verdict `381713ca34` :24/:29-31/:211・prereg `ad06cff8eb` :23/:34/:70）= 当卓が blob で再読・全て成立。訂正の内容 = p4 処分 ①（m-p4-300）どおり・設計の語は p11。
+- **hub の動き**: **m-p18-457** → pZ IMPL-VERIFIER cc p4 RS-TECH-LEAD・p6 PLAN-KEEPER・p0 IMPL-BUILDER: hold: pZ・p4・p6（14:58:47）／p0 = DELIVERED（14:58:47）。**441 → pZ = DELIVERED(fused_with_unknown_prefix)**（14:57:56.964・watcher 窓）。
+- ⛔ 解錠なし・run 0（当卓）・当卓は裁定しない。
+
+**Banked — 時刻は本節 commit の author date が正。**
