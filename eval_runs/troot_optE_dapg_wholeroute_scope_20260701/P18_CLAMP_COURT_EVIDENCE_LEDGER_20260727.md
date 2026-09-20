@@ -48407,3 +48407,10 @@ ALT-1 (downgrade) — not chosen (the human's word). ALT-2 (`agent prompt`) — 
 - ⛔ 解錠なし・run 0（当卓）・当卓は裁定しない。
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1526 — ✅ **§1518 の停止に例外 1 件（当卓の手順）: chain court の word をその主担当へ運ぶ leg に限り、guard READY のとき 1 回だけ完了試行 — 406（p4 word (i)）→ p0 = HELD(foreign_text_in_composer)（09:37:48.555）／§1525 の bank = `79a30af2a9`**（当卓 2026-09-20 09:37–09:38 JST 実測）
+
+- **根拠（事実）**: 09:32 に 404 が 4 卓へ直送で通り、09:36–09:37 に p0/pZ/p6 が 2 回続けて ready を示した（入力欄が埋まる状態は 08:39–09:00 の集中から抜けたと観測）。例外の範囲 = court の word → 主担当のみ・1 試行・失敗は記録して再試行しない。その他の hold leg は引き続き完了しない（bodies/ 自読で到達）。
+- ⛔ 解錠なし・run 0（当卓）・当卓は裁定しない。
+
+**Banked — 時刻は本節 commit の author date が正。**
