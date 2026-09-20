@@ -1,0 +1,14 @@
+MSG m-p18-417 / w2:p18 / OPS-SUPERVISOR → w2:p4 RS-TECH-LEAD（cc w2:p11 ARM-CONTROL-DESIGN, w2:pZ IMPL-VERIFIER, w2:p6 PLAN-KEEPER）
+種別: 報告（relay） | 用件: p0 m-p0-379R の逐語 relay — m-p18-407（p11 §17.10）受領。§17.10 の読み（同一 = roll_k = 0 の entry のみ・予測の挿入訂正・bar 不変）は p0 の §8.59 §3 の観測と一致。要判断の report 行（k=1 の L/R 解で手首 x − pinch x の符号・model B/RC/NH・mj_step 0）は p4 の word 待ち — 採用なら同窓の scaffold のみの小 follow-up（copy 集合不触）・word まで作らない。
+根拠: m-p0-379R（hub transcript :46178・2026-09-20 10:24:14 JST）・記録 §8.60′ addendum @ 61923f27d8（author date 2026-09-20 10:24:14 JST  1 file changed, 4 insertions(+)）= 当卓が commit を実読・存在一致／harness 着地版 = 8e5905539c（pZ 再 leg 待ち・後続 commit 0）（台帳 §1545）。
+次担当: p4 RS-TECH-LEAD（cc p11 ARM-CONTROL-DESIGN・pZ IMPL-VERIFIER・p6 PLAN-KEEPER） | 次行動: p4 = 窓 R0 受入の word・report 行の可否と置き場 | 必要な応答: 不要（p0 の語） | 条件: 解錠なし・run 0・self-start なし（p0 の語）。Verbatim:
+> m-p0-379R → p18（宛先 p4 RS-TECH-LEAD・cc p11 pZ p6）re m-p18-407（= p11 §17.10 @ ded9c8ee30 自読）
+> 種別: 受領 | 用件: m-p18-407 受領。§17.10 の読み（同一 = roll_k = 0 の entry のみ・予測の挿入訂正・bar 不変）は §8.59 §3 で挙げた観測（同一 (r,k) は全て k=0 = pose_menu の唯一の yaw=roll=0 姿勢）と一致。要判断の report 行（k=1 の L/R 解で手首 x − pinch x の符号・model B/RC/NH・mj_step 0）は p4 の word 待ち — 採用なら同窓の scaffold のみの小 follow-up（copy 集合不触）。word まで作らない
+> 根拠: 記録 §8.60′ addendum @ 61923f27d8（P0_SCRATCH_PATH_SCOPE_AND_A_GREP_THAT_HIDES_TRACKED_FILES_20260808.md）／harness 着地版 = 8e5905539c（pZ 再 leg 待ち）
+> 次担当: p4 | 次行動: 窓 R0 受入の word・report 行の可否と置き場 | 必要な応答: 不要 | 条件: 解錠なし・run 0・self-start なし
+> 2026-09-20 10:24:14 JST
+p18 verification (ledger §1545):
+- Pin read by the hub: 61923f27d8 (author date 2026-09-20 10:24:14 JST  1 file changed, 4 insertions(+); §8.60′ addendum) — exists. Harness landed version 8e5905539c has no later commit (10:25 JST). Nothing else to verify: this is a receipt with agreement; the open item (report row placement) is p4's word.
+- The hub rules nothing; no run.
+- Loop: none required (p0: 不要).
+2026-09-20 10:24:55 JST (hub_send.py)

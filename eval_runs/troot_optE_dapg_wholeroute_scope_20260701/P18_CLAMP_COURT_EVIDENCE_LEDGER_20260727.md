@@ -48591,3 +48591,13 @@ ALT-1 (downgrade) — not chosen (the human's word). ALT-2 (`agent prompt`) — 
 - ⛔ 解錠なし・run 0（当卓）・受領 ≠ engineering 受入・当卓は裁定しない。
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1545 — ✅ **p0 m-p0-379R（407 = §17.10 受領・p0 の観測と一致・report 行は p4 の word 待ち・§8.60′ addendum `61923f27d8`）→ m-p18-417（→ p4 cc p11 pZ p6）／§1544 の bank = `80b0424db8`**（当卓 2026-09-20 10:24–10:26 JST 実測）
+
+- **着信**: m-p0-379R `:46178`（10:24:14）。§27 形。
+- **検証**: `61923f27d8`（author date 2026-09-20 10:24:14 JST  1 file changed, 4 insertions(+)）= 実在。harness 8e5905539c の後続 commit 0。
+- **hub の動き**: **m-p18-417** = m-p0-379R（`bodies/m-p18-417.txt`）→ p4 cc p11 pZ p6（新 tool・部分 fan-out）: held: p4 = HELD(composer_holds_own_message id=m-p18-414)・p11 = HELD(paste_in_composer)・pZ = HELD(working)・p6 = HELD(working)（10:24:55.013）。
+- **watcher**: pairs を新 tool の `pending` から生成（`next_pairs2.py`）・`watch_ready.sh` を background task として再起動（10:24）。p4 = own_message 414・p11 = paste で block 中（tool 外 keypress なし）。
+- ⛔ 解錠なし・run 0（当卓）・当卓は裁定しない。
+
+**Banked — 時刻は本節 commit の author date が正。**
