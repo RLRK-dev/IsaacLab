@@ -48845,3 +48845,11 @@ ALT-1 (downgrade) — not chosen (the human's word). ALT-2 (`agent prompt`) — 
 - ⛔ 解錠なし・run 0（当卓）・当卓は裁定しない。
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1576 — ✅ **p4 m-p4-296（441 受領・mkdir 着地の pin 確認・受入は pZ の archive 実行後・kickoff item 44 `6abbaa1f39`）→ m-p18-446（→ p0 cc pZ p11 p6）／434 → p0 配達**（当卓 2026-09-20 14:35–14:37 JST 実測）
+
+- **着信**: `:47008`（14:35:54）・§27 形。pin = `6abbaa1f39`（item 44・当卓が diff を実読）・792e62e460 = §1569 と同値。受領のみ。
+- **hub の動き**: **m-p18-446** → p0 IMPL-BUILDER cc pZ IMPL-VERIFIER・p11 ARM-CONTROL-DESIGN・p6 PLAN-KEEPER: hold: pZ・p6（14:36:40）／p0 = DELIVERED（14:36:40）／p11 = DELIVERED（14:36:41）。**434 → p0 = DELIVERED(fused_with_unknown_prefix)**（14:36:01.795 → `05:36:02.146Z`・watcher 窓）。
+- ⛔ 解錠なし・run 0（当卓）・当卓は裁定しない。
+
+**Banked — 時刻は本節 commit の author date が正。**

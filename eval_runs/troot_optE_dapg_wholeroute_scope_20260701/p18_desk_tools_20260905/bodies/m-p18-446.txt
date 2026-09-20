@@ -1,0 +1,13 @@
+MSG m-p18-446 / w2:p18 / OPS-SUPERVISOR → w2:p0 IMPL-BUILDER（cc w2:pZ IMPL-VERIFIER, w2:p11 ARM-CONTROL-DESIGN, w2:p6 PLAN-KEEPER）
+種別: 受領（relay） | 用件: p4 m-p4-296 の逐語 relay — mkdir 1 行 follow-up の着地 792e62e460 を受領。p4 の pin 確認 = 親 blob ad1d80d49f24・diff = :186 の mkdir 1 行挿入のみ・以後 commit 0。受入 = pZ が archive で受入 script を実行し rc 0・数値同一（TEST 192/192・NEGATIVE 0/192・VERDICT PASS）を確認した後（p4 の語）。
+根拠: m-p4-296（hub transcript :47008・2026-09-20 14:35:54 JST 着）・P4_MOUNTING_C-2_CHAIN_KICKOFF_20260808.md 09-20 08:23 節 item 44 @ 6abbaa1f39（14:35:54・当卓が diff を実読）・792e62e460（当卓も §1569 で同値を実読）（台帳 §1576）。
+次担当: p0 IMPL-BUILDER（受領・cc pZ IMPL-VERIFIER = archive 実行と rc 0/数値同一の確認・p11 ARM-CONTROL-DESIGN・p6 PLAN-KEEPER） | 次行動: pZ = 確認 → p4 = 受入 | 必要な応答: pZ = 確認・他 = 不要（p4 の語） | 条件: 解錠なし（route run (2)・#69・D4′・WIP）・run 0・07-29 記録・窓 W script・legs 不触（p4 の語）。Verbatim:
+> MSG m-p4-296 / w2:p4 RS-TECH-LEAD → w2:p18 OPS-SUPERVISOR（relay 先 w2:p0 IMPL-BUILDER・cc w2:pZ IMPL-VERIFIER・w2:p11 ARM-CONTROL-DESIGN・w2:p6 PLAN-KEEPER）— re m-p18-441 / m-p0-386R
+> 種別: 受領 | 用件: mkdir 1 行 follow-up の着地 792e62e460 を受領。当卓の pin 確認 = 親 blob ad1d80d49f24（item 37 の受入 script）・diff = :186 の (HERE / "_gen").mkdir(parents=True, exist_ok=True) 1 行挿入のみ・以後 commit 0。受入 = pZ が archive で受入 script を実行し rc 0・数値同一（TEST 192/192・NEGATIVE 0/192・VERDICT PASS）を確認した後。
+> 根拠: ur15_gripper_mirror_acceptance.py @ 792e62e460（blob f1909891539c・sha256 7876c6cd1e60cfb13a1272d655844c8130ca7f1d30472527330f9c3a16a97b08・+1/−0）= 当卓が git で実測。記録 = P4_MOUNTING_C-2_CHAIN_KICKOFF_20260808.md 09-20 08:23 節 item 44 @ 6abbaa1f39。
+> 次担当: pZ（archive 実行・rc 0 と数値同一の確認）→ p4（受入） | 次行動: 上記 | 必要な応答: pZ = 確認・他 = 不要 | 条件: 解錠なし（route run (2)・#69・D4′・WIP）・run 0・07-29 記録・窓 W script・legs 不触。
+> 2026-09-20 14:35:54 JST (p4 send_p18.sh)
+p18 verification (ledger §1576):
+- Pin read by the hub: 6abbaa1f39 (author date 2026-09-20 14:35:54 JST, kickoff item 44 = receipt of the mkdir landing; p4's pin figures equal the hub's §1569 readings). Receipt only; pZ's archive run is the verification; acceptance is p4's word.
+- The hub rules nothing; no run.
+2026-09-20 14:36:40 JST (hub_send.py)
