@@ -19,7 +19,7 @@ dependencies:
     - "P2-envcore COMPLETE (基底 build f6ee1443f5→HEAD 1640L) / P2-routeexec COMPLETE-with-carry-forward (抽出 twin run_route:1028 byte-repro 81/81)"
   blocker: []
 created: 2026-07-12T13:51:00+09:00
-last_updated: 2026-07-14T04:05:00+09:00
+last_updated: 2026-09-20T10:07:13+09:00
 spec_version: LTM-1 v1.2
 session_history:
   - "2026-07-14 ~04:05 %11 (COORD, w2:p3) ⭐**B3a (producer capture + offline bank v2 builder) build COMPLETE — build 本体 commit = `575069abe5` (⚠`a00a0a97f8` ではない、B3a-F1 参照)、legs 全 PASS (W1_B3A_LEGS_FAIL=0)。3-leg post-verify PASS (%12+%9) + %10 audit PASS-WITH-FINDINGS。** ⛔**同時に B3b = STOP (BLOCKED_FOR_USER、上記参照)**。chain: conformance v2.2 → 5体 [VERIFY] (CRIT 5 class を build 前に捕捉: Rs-LOCK 抵触 / bar が空虚 / fork write-set 欠落 / qd の ground truth ゼロ / seg window 陳腐) → %12+%9 joint PASS-WITH-CORRECTIONS → [RULE-CHECK] → B3a build → ⭐**leg 走行で自己捕捉 DEFECT 2 件 (bar 緩和でなく fix-first)**: **DEFECT-1 = capture が dead mirror (mjw_data) を読んでいた** (task_config.py:116 USE_MUJOCO_CPU=True ⇒ live は mj_data、mjw_data は put_data で無条件生成されるが CPU path で一度も step されない) ⇒ hidden-state channel が no-op (qacc_warmstart 0/562611・eq_active 変動ゼロ) ⇒ k=3/4/5 の fork が **pin OFF を restore** = FORK-1 同 class の silent mismatch。fix 後の live 実測 = **warmstart 非ゼロ 559764/562611 / absmax 1.08e6** (mjDSBL_WARMSTART=OFF、%12 独立確認) ⇒ ⭐**『0/562611』は死んだ計器の artifact であって substrate の事実でなかった — 当方は これを根拠に「非 item 化」を提起しており、%12 の F-5 (1) 裁定 (symptom で再分類するな + regret 非対称) が absmax 1e6 の live hidden state を bank から落とす事故を防いだ**。**DEFECT-2 = leg3 の bar が構造的に不適** (SIM_SUBSTEPS=10 ゆえ位置差分は frame 平均のみ ⇒ κ=0.92/1.81 の k=2/3 で 4 変種同時 FAIL = 計器の帯域不足 / 「wrong substep」は κ/10≈1.6% しか動かず 20% bar で原理的に不可視 / scale に盲目) ⇒ **2-param 回帰 (gain / substep index m̂ = 15.5−10·(b/g) / R²) + identifiability 表 8 摂動へ置換** (real のみ ACCEPT、m=9→9.30 / null→degenerate / ×0.98 逆符号 / permuted / frame-shift 全 REJECT)。⭐**副次 catch: leg6 が index-space trap を捕捉 — 記録 pinned_body=Newton body id (55) vs eq_obj1id=MuJoCo body id (56、worldbody が index 0) ⇒ 初版 resolve_pin_eq_index は eq 26 に着地 (正解 27) = 別 constraint を silent に pin。F6 (_jws) の第 2 目撃例、しかも『その罠を防ぐために書いた関数』自身が踏んだ。** fix = offset を producer 自身の eq 表から導出 + round-trip assert。%12/%9 ERRATUM 群 fold: **§18 ERRATUM-F** (source inspection では liveness を discharge できない — 設定 backend 上の runtime 測定のみ) / **F-5** (D-1 の bar 差替え = 存在でなく L5a の restore-vs-zero A/B が決める; eq_active は構造的必須) / **F-6** (provenance = backend_id + layout_hash、eq は identity 解決) / **F-7.4** (⭐**零・不在・変動なしの測定は「対象が無い」のか「計器が死んでいる」のか区別できない ⇒ 必ず positive control を併走させよ**)。legs: leg1 run_route byte-identical (2080 行) / leg2 capture read-only (npz sha EXACT 1/1) / leg3 substep readout (m̂ 9.81・9.89 vs 予測 10、identifiability 8/8) / leg4 units (境界 EXACT + fail-loud 5 種 + null-bank 棄却) / leg5 producer 5-cell byte-repro 5/5 / leg6 hidden-state liveness (eq_active[27] ≡ 記録 pin_active、**lag=0 を実測して pin**、identity round-trip、per-field liveness gate)。source = route_executor.py +570 / test_routeexec_state_bank.py +160−3 = **730 行 (cap 800 内、%10 F-6 実測で訂正)**、増分は全て検証機構。npz は commit せず sha256 で pin (capture = 312dc63898…)。⛔**B3-α (%9 発見、%11+%12 が on-disk 独立確認) で B3b STOP**: RL env は pin 候補 eq をゼロ本しか作らない ⇒ banked eq_active に restore 先が無い + **env は C1 を保持できない** (%12 実測: C1 距離 4.16mm 一定 [記録] vs 単調離脱 52.87mm [env])。**移植の検証は donor だけでなく recipient (受け皿の能力) を検査せよ** = 本 arc の新 sub-type。"
@@ -63,7 +63,7 @@ session_history:
 
 ✅✅ **RESOLVED 2026-07-15 00:5x — Rs 承認「クリップ *のみ* pin を RL env に恒久配線しろ」。以下は上程時点の記録 (歴史)。**
 ~~BLOCKED_FOR_USER: RL env に clip-retention pin (INVARIANT #5 の唯一の認可例外) を配線してよいか。配線しない場合、bank v2 の k≥3 fork は実現不能であり、かつ RL task 自体の達成可能性が open になる。~~
-⇒ **裁定 = YES (クリップのみ)**。⭐**根拠は後日 RS71 §4:62 の synthesis (`7eea86512e`) が独立に裏づけた**: cable は水平に曲がれない ⇒ 水平ルーティングは kinematic ⇒ **「pin はバグを隠しているのではない。pin が *水平曲率そのもの* である」** ⇒ pin-less RL env では task が表現できない、という上程の中核前提は **正しかった**。⚠**残 = RS71 §0 spec 本文の更新 (Rs 専権、未了)**。
+⇒ **裁定 = YES (クリップのみ)**。⭐**根拠は後日 RS71 §4:62 の synthesis (`7eea86512e`) が独立に裏づけた**〔内容 pin p6 09-20: 当該 FIDELITY BOUNDARY 行 = `2b96ac4061` で `:71`（HISTORY・逐語保存）・現行 MuJoCo cell の前提 = `:69` CURRENT PREMISE（Rs1 Q5 09-14・一語 09-20 着地）ゆえ現行 cell については superseded・継承 = `:73` INHERITANCE RULE（DDR 75）・本節の裁定（clip のみ pin = YES）は不変・LEDGER 行 48 CLOSED〕: cable は水平に曲がれない ⇒ 水平ルーティングは kinematic ⇒ **「pin はバグを隠しているのではない。pin が *水平曲率そのもの* である」** ⇒ pin-less RL env では task が表現できない、という上程の中核前提は **正しかった**。⚠**残 = RS71 §0 spec 本文の更新 (Rs 専権、未了)**。
 
 ### Context (全て on-disk 実測、%12 独立検証済)
 
@@ -103,7 +103,7 @@ pin = **RS71 §0 INVARIANT #5 (NO KINEMATIC TRICK) の唯一の認可例外**。
 
 **問題は「bank の restore 先が無い」より遥かに大きい。banked spec 自身が pin を routing の機構として名指ししている。**
 
-**FACT 1 (%12 verified — `RS71-System-Spec-SSOT.md` §4 CABLE、FIDELITY BOUNDARY、Rs DECISION B2 2026-06-25、Rs-accepted)**:
+**FACT 1 (%12 verified — `RS71-System-Spec-SSOT.md` §4 CABLE、FIDELITY BOUNDARY、Rs DECISION B2 2026-06-25、Rs-accepted)**: 〔内容 pin p6 09-20: `:66` の pin と同じ — 06-25 Newton cell の前提・現行 MuJoCo cell では superseded（RS71 §4 `:69` CURRENT PREMISE @ `2b96ac4061`・`:71` = 逐語履歴・`:73` 継承規則）・本 FACT の逐語は 06-25 build について真で不変〕
 > cable は **1-DOF/joint の PLANAR bender**、bend plane = **VERTICAL (sag)** → 動的に表現するのは **vertical SAG + position + free-root pose** のみで、**horizontal routing curvature は表現しない** (5-clip 千鳥の X-Y 曲率には第 2 の bend DOF が要る)。**「Horizontal routing through the staggered clips is therefore KINEMATIC (grasp-drag + the AUTHORIZED clip-retention pin)、NOT a dynamically-curved cable」**。これは **banked sim2real fidelity limitation (Rs-accepted、defect ではない)**。**Cable-SHAPE robustness は in-sim では vertical sag についてのみ trainable/validatable、horizontal routing curvature については不可。**
 
 ⇒ **pin は「あれば便利」ではなく、banked spec が routed-hold の機構として指名している。** pin を持たない env は **routing task を表現できない** (cable model に水平曲率の DOF が無い)。
@@ -145,7 +145,7 @@ pin = **RS71 §0 INVARIANT #5 (NO KINEMATIC TRICK) の唯一の認可例外**。
 
 ### 層 3 (p5、%12 on-disk VERIFIED): ⛔ **5-clip 目標状態は cable の配位空間の外** — pin では救えない
 
-- **cable = 平面鎖** (RS71 §4: 39 joint 各 1 revolute、bend plane VERTICAL) + **Stage-B 実測「horiz out-of-plane tangent ≤0.173° across 30 held configs」** ⇒ **水平投影は直線**。
+- **cable = 平面鎖** (RS71 §4: 39 joint 各 1 revolute、bend plane VERTICAL) + **Stage-B 実測「horiz out-of-plane tangent ≤0.173° across 30 held configs」** ⇒ **水平投影は直線**。 〔pin p6 09-20: 06-25 Newton cell の前提（RS71 §4 `:71` HISTORY @ `2b96ac4061`）・現行 MuJoCo cell では superseded（`:69` CURRENT PREMISE）・Stage-B 実測はその build の値〕
 - **clip は千鳥** (`task_config.py:202-204`、%12 実測): C1(0.35, +0.150) / **C2(0.40, +0.075)** / C3(0.35, 0.000) / C4(0.40, −0.075) / C5(0.35, −0.150)。
 - ⭐**C1 と C3 は共に x=0.35 → その直線から C2 は 50.0mm 外れる。溝捕捉半径 = 6.0mm。比 = 8.3×。**
 ⇒ **平面 cable は C1+C2 に入れば C3 を外し、C1+C3 に入れば C2 を外す。3 本同時 = 配位空間の外。**
@@ -261,7 +261,7 @@ pin = **RS71 §0 INVARIANT #5 (NO KINEMATIC TRICK) の唯一の認可例外**。
 ⭐⭐ **%9 の META (bank 済 `feedback-a-wall-is-a-forgotten-degree-of-freedom-2026-07-14`)**: **「壁とは、自由度を 1 つ忘れたときに現れるもの」。**
 ⭐ **p5 も HARD STOP を撤回・自己診断**: 「**私自身の tool 出力に反証が印字されていた** — 『C1,C3,C5: cross=+0.00000 -> COLLINEAR』。出力しておきながら『route は偶数 clip も要る』で読み飛ばした = **自分で生成した反証の握り潰し**」(prohibited.md 確証バイアス、p5 自認)。
 - ✅ **%9 の調停 (XY rank)**: seated {C1,C2,C3} = rank 2 (非共線) ⇒ 平面 **PINNED** ⇒ **%10 の予算式 (≤5.4mm) は正しい** / seated {C1,C3,C5} = rank 1 (共線) ⇒ 平面 **FREE** ⇒ 上限なし。⇒ **%10 と %12 は矛盾していなかった — 効いているのは seating の *順序*。**
-- ✅ **RS71 §4 の読み方 (%9 が正、%12 受諾)**: 「horizontal routing curvature を動的に表現しない」は **fidelity の言明** (sim2real robustness を validate できない) であって **不能の言明ではない**。⇒ **substrate 変更 (2nd bend DOF 追加) の提案は撤回。新規上程 不要** (境界は RS71 が既に bank・Rs 受諾済)。
+- ✅ **RS71 §4 の読み方 (%9 が正、%12 受諾)**: 「horizontal routing curvature を動的に表現しない」は **fidelity の言明** (sim2real robustness を validate できない) であって **不能の言明ではない**。⇒ **substrate 変更 (2nd bend DOF 追加) の提案は撤回。新規上程 不要** (境界は RS71 が既に bank・Rs 受諾済)。 〔pin p6 09-20: 本読み方は 06-25 前提についての読み・現行 MuJoCo cell の前提 = RS71 §4 `:69` CURRENT PREMISE @ `2b96ac4061`（Rs1 Q5: 水平曲げ自由度を正式採用）・継承 = `:73` INHERITANCE RULE（DDR 75）〕
 - ✅ **副次決着**: hop 弦長 **90.14mm** ⇒ **1 hop に ≥7 seg** (p5 の banked step-table §2.1「5 seg」は誤り。訂正は p5 領域 ⇒ p5 が Rs へ上程)。**h_lip 実測 = 46.4mm** / **seated 平面の実測 Z = 829.0mm** (%10 の CRIT-1 を %9 が独立確認)。
 
 ⛔ **ただし「壁が無い」≠「達成できる」(%12 の止め、%9 全面受諾)**: ⭐**5-clip 着座の witness (実際に構成して FK で検算した配置) は *まだ誰も作っていない*。** 4 つの壁は全て「証拠なしに断定した」から死んだ ⇒ **逆向きの断定も同じ規律に服する。**
