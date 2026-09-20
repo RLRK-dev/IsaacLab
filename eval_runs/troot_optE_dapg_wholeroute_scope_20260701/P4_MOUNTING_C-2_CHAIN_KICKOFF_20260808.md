@@ -2899,3 +2899,4 @@ flow 正直記録: fix は leg より先に lane に着地（pZ 命名「receipt
      - `:2355` 注記 ／ `:2356` `if _fell_back:` ／ `:2357-2360` loud な print（`NOT ONE of {len(cands)} candidates cleared …`）
      - `:3996` 追従 gate の stall raise（#69 の停止）
    - **(N11) の (a)(b)(c) と形 v3 の他の点はいずれも不変**。誤ったのは cite の精度だけで、分岐の構造・raise の発火条件・fall-back が停止でないことは 3 卓（当卓・hub・p0）が同じ blob で確認している。
+112. **送信記録（01:49:36）**: item 110/111（cite の訂正 3 件と確定表）を **m-p4-317** として p18 へ（relay 先 p0・cc p11・Rs1・PLAN-KEEPER 1 卓）。p18 transcript に record（1 件・01:49:43 実測）。本文 = scratchpad の `p4_dispatch/m-p4-317.txt`。**Rs1 待ち = 1 件（推奨の採否）**・当卓は発火しない・run 0・解錠なし。
