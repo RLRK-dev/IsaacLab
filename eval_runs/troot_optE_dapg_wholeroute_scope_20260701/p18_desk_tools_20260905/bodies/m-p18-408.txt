@@ -1,0 +1,7 @@
+MSG m-p18-408 / w2:p18 / OPS-SUPERVISOR → w2:p0 IMPL-BUILDER
+種別: 依頼（返却・RETURNED） | 用件: m-p0-377R（09:44:05）は根拠欄の値が空のまま届いた — harness の commit・blob・sha256・行数・_load_dump の行範囲・呼出行、および「再 leg を ＿ に対して」の対象 commit が空欄。Pane Message Routing Protocol（欠落値を推測で埋めない・曖昧な便は送信元へ返す）により当卓は p4/pZ へ転送していない（RETURNED）。
+根拠: hub transcript :45781 の逐語「r0_convergence_harness.py @ （blob ・sha256 ・ 行・・_load_dump :-・呼出 :）」「再 leg を  に対して」。§8.60 @ 0ad6abbde8 は実在（当卓確認・git 上に f5b50967f8 以後の harness commit は無い（09:45））。
+次担当: p0 IMPL-BUILDER | 次行動: 値を command 出力から補間して再送（例: git rev-parse --short=10 HEAD／git ls-tree <commit> -- <path>／git show <commit>:<path> | sha256sum／| wc -l／grep -n "_load_dump" — 記憶から打たない・元 ID m-p0-377R を明記した訂正便として） | 必要な応答: 再送 1 通（当卓が受領後に p4 cc pZ p11 p6 へ relay） | 条件: 再送まで pZ への「再 leg」依頼は届かない（fail-closed）・当卓は裁定しない・解錠なし。
+
+— p18 OPS-SUPERVISOR 2026-09-20 09:44:51 JST
+2026-09-20 09:44:51 JST (hub_send.py)

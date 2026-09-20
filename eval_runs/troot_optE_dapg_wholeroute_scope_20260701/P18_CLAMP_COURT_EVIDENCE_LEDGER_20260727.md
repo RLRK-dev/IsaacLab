@@ -48425,3 +48425,13 @@ ALT-1 (downgrade) — not chosen (the human's word). ALT-2 (`agent prompt`) — 
 - ⛔ 解錠なし・run 0（当卓）・当卓は裁定しない。
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1528 — ⚠/✅ **p0 m-p0-377R（「(i) を着地 = follow-up 5」だが根拠欄の commit・blob・sha256・行数・関数行・再 leg 対象が空欄）= AMBIGUITY DETECTED → RETURNED（m-p18-408 → p0・p4/pZ へ未転送）／p4 m-p4-284（Rs1 の一語「ケーブル前提は B ＋ A の 1 行で着地」・p4 transcript :3405・09:42:22 JST・p4 の読み = inference・依頼 p11 packet v3′ → p6 → p4 RS71 記入 → p18 pin 照合・item 17 `5e948ec610`）→ m-p18-409（→ p11 cc p6 pZ）**（当卓 2026-09-20 09:44–09:47 JST 実測）
+
+- **m-p0-377R（`:45781`・09:44:05）**: 根拠欄の逐語 = 「r0_convergence_harness.py @ （blob ・sha256 ・ 行・・_load_dump :-・呼出 :）」「再 leg を  に対して」= 値なし。当卓の実測: **git に f5b50967f8 以後の harness commit は無い（09:45）**・記録 §8.60 @ `0ad6abbde8`（09:44:05・+83）の見出しも「LANDED: `` (, the same file)」と空欄。⇒ 着地の主張に commit が無い（未 commit か記載漏れかは p0 の再送で確定・当卓は補間しない）。**routing state = AMBIGUITY DETECTED → RETURNED**: 返却便 **m-p18-408** → p0（`bodies/m-p18-408.txt`・空欄の逐語と再送条件 = command 出力から補間・元 ID 明記）: held: p0 = HELD(working)（09:44:51.276）。p4/pZ/p11/p6 へは転送しない（fail-closed）— 再送受領後に relay。
+- **m-p4-284（`:45796`・09:44:30）の検証**: Rs1 の語の custody = p4 transcript `ad899cc6-2451-4364-ba3c-910b67075aa4.jsonl:3405` を当卓が実読: `type=user`・compact summary でない・`promptSource=suggestion_accepted`（当卓の「push」2 語と同形）・`2026-09-20T00:42:22.109Z` = 09:42:22 JST・本文 = 「Rs1 の回答: ケーブル前提は B ＋ A の 1 行で着地」（逐語一致）。`5e948ec610`（09:44:30・item 17）= 実在。v3 = §1496。**Rs1 待ち項目「cable A–D」= 決着（B ＋ A の 1 行）**・具体化 = p4 の inference（(iii)＋(iv)・§4 に 1 文・row 48 flag・C/D 不採用・items 2–4 未回答）。04-Specs は CC read-only ⇒ p4 の RS71 記入 = Rs1 の一語の執行として p4 が根拠づける（前例 RS71 :42）・当卓 = pin 照合のみ。
+- **hub の動き**: **m-p18-409** = m-p4-284（`bodies/m-p18-409.txt`・custody の実読結果を head に明記）→ p11 cc p6 pZ: p11 = DELIVERED(fused_with_unknown_prefix)（09:45:40.394 → `2026-09-20T00:45:40.708Z`）／p6 = DELIVERED(fused_with_unknown_prefix)（09:45:41.200 → `2026-09-20T00:45:41.510Z`）／pZ = DELIVERED(fused_with_unknown_prefix)（09:45:42.053 → `2026-09-20T00:45:42.368Z`）。
+- **hold 中の leg（09:47・pending.py 実測・死んだ leg 10 件を含む）**: 354（p11・p6） 357（p11・p6） 358（p11） 359（p0・p11・pZ） 360（p11） 361（p11・pZ） 363（p0・p11） 364（p0・p11） 365（p0） 366（p11） 367（pZ） 368（p0・p11） 369（p0・pZ） 370（p0・pZ） 371（p11・pZ） 372（p11） 374（p0） 375（p0・p11・pZ） 376（p0・p11） 377（p0・p11） 378（p11・pZ） 379（p11・pZ） 381（p0・p11） 382（p11・p4・pZ） 383（p11・p4・p6・pZ） 384（p0・p11・p4・p6） 385（p4・pZ） 386（p11） 387（p11・pZ） 388（p4） 389（p11・pZ） 390（p11・p4・pZ） 391（p11・p4） 392（p11・pZ） 394（p4・p6・pZ） 395（p4） 396（p11・p4・p6・pZ） 397（p0・p4・p6・pZ） 398（p11・p4・p6・pZ） 399（p4） 400（p0・p11・p4） 401（p11・p4・p6・pZ） 402（p0・p11・p6・pZ） 403（p11・p4・p6・pZ） 405（p11・p4・p6・pZ） 406（p0・p11・p6・pZ） 407（p0・p4・p6・pZ） 408（p0）（48 id）。
+- ⛔ 解錠なし・run 0（当卓）・当卓は裁定しない。
+
+**Banked — 時刻は本節 commit の author date が正。**
