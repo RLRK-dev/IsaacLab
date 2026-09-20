@@ -49204,3 +49204,15 @@ ALT-1 (downgrade) — not chosen (the human's word). ALT-2 (`agent prompt`) — 
 - ⛔ 解錠 = 行 69 のみ・hub は発火しない・裁定しない。
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1617 — ✅ **p4 m-p4-307 = (D1)(D2) 異議なし・(D3) 3 点採用・(D4) 採用・v2 順序確定（kickoff item 73 `e15124c25f`）＋ 訂正 2 件（LIVE_OUT :2982／env key 24）→ m-p18-470（→ p6 cc p0・pZ・pB・pC・p11）／**hub 自身の訂正**: 468 (D1) の「記録用 tuple にのみ在る」は誤り／469 の idle 窓 完了 6 件**（当卓 2026-09-20 22:55–23:01 JST 実測）
+
+- **着信**: `:48231`（22:59:46）・§27 形。pin = `e15124c25f`（item 73・22:58:54・当卓が diff を実読・A-H・HEAD で clean）。
+- **p4 の語（chain court）**: (D3-a) pZ の照合 1 行 = pB verdict の後・p4 受入の前・1 file・不一致 = B4 返却／(D3-b) p11 補完 1 = **pB** 担当（RUN_METRICS.json の step1_approach・steps の tool_err_mm L vs R を pB verdict の同 file に報告等級・bar なし）／(D3-c) p11 補完 2 = **pZ** 担当（cell dump の両側 actuator gainprm/biasprm/forcerange/ctrlrange と J6 armature/damping の両側同一 = text 読み・同 file・不一致は p4 へ loud）／(D3-d) pC (1)(2)(3) 採用／(D4) 採用（各卓 verdict = `eval_runs/troot_optE_dapg_wholeroute_scope_20260701/` に 1 file・pathspec commit・`PC_VERDICT_C_69_RESHOOT_20260920.md` で可・§1613 (C) は固定記録の規則で verdict file に及ばない）。**v2 の順序** = p0 執行 → §8 commit → hub 着地 relay → pB ∥ pC → pZ 照合行 → Rs1 目視 → p4 受入 word（pB verdict・VERDICT_C・Rs1 の語 ＋ pZ の照合行の後）→ p6。本便は形を変えない（p0 の gate = 468 で通過済）。
+- **訂正 2 件（p4・挿入・値と形は不変）**: ① item 69 ② の LIVE_OUT 行 = :2982（:2971 は旧 blob `d2bc133e1320` の行 = 当卓が同 blob :2971 を実読・LIVE_OUT 行で一致）。② item 71 の env key = 23 でなく **24**: cell_spec `6bdf7ea4f9ca` は :35 `from os import environ as _os_env` の alias で `CABLE_BEND_STIFFNESS_OVERRIDE` を :202 :1205 :1228 で読む（当卓が 4 行を実読・一致）⇒ 実効 knob = driver の environ 直読 18 ＋ cell_spec の alias 読み 6 = 24 = `_RM_ENV`（:47-53）。pZ E1 F-c（`PZ_E1_LEG_VERDICT_b19c4c5f5d_20260905.md` :50・09-05）が「_RM_ENV 23 は読まれる 24 を欠く」と指摘し、その後 tuple が 24 に直された経緯 = p4 の語。
+- ⚠ **hub 自身の訂正（records-must-match-fact）**: m-p18-468 (D1) と §1615 の「`CABLE_BEND_STIFFNESS_OVERRIDE` = driver の記録用 tuple にのみ在る」は**誤り**。原因 = 当卓の grep pattern `environ(\.get\(|\[)` が名前 environ にしか合わず alias `_os_env` を見落とした（= 「不在は sink で検証・source 変数名で grep するな」の再発）。**結論は不変**: (D2) ④ の印字集合 = `_RM_ENV` の 24（p0 は 24 key の未設定を執行前後に印字）。以後の当卓の env key grep は `from os import environ as X` の alias を先に集めてから読む。
+- **469 の idle 窓 完了（watcher・dry_ok 再確認・`send --id`・`verify` rc 0）**: pZ 22:55:07／p6 22:55:47／p0 22:56:09／pB 22:56:37／pC 22:57:00／p11 22:57:21 = 全て DELIVERED(fused_with_unknown_prefix)。残 = p4 宛 1 件（watcher 稼働中）。
+- **hub の動き**: **m-p18-470**（m-p4-307 逐語）→ p6 PLAN-KEEPER cc p0・pZ・pB・pC・p11: p6（23:01:51）／p0（23:01:52）／pZ（23:01:52）／pB（23:01:53）／pC（23:01:54）／p11（23:01:54）。
+- ⛔ 解錠 = 行 69 のみ・hub は発火しない・裁定しない・run 0（当卓）。
+
+**Banked — 時刻は本節 commit の author date が正。**
