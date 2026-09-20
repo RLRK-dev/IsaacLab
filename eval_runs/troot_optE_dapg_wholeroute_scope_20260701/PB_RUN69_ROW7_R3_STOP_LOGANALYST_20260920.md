@@ -301,3 +301,11 @@ pZ が A-2 で 1 件（`:369` ARM-TO-ARM）を捕らえた。私は**同じ clas
 ### 私の側の原因（記録）
 
 A1-1〜A1-3 は script が `run.log[n]` を印字したので **番号と内容が原理的にずれない**。ずれたのは **私が手で書いた pointer 文**（§3 の行・A1-4）だけで、そこだけ「内容を覚えていて番号を後から付けた」。⇒ 以後、pointer 文の番号も同じ script 経路で生成するか、書いた後に blob へ機械照合する（本 addendum で実施した 93 件照合がその形）。
+
+## Addendum 5（2026-09-21 01:25:55 JST・re m-p18-498 = p4 m-p4-313 受領 (b) の指摘）— 識別子の**種別語**の訂正 1 件（数値・判定は不変）
+
+- **誤** = Addendum 4 訂正 2 の「driver blob `22feba17a6`」および同節の「同 blob `:1300-1302`」「別 blob の行」。**`22feba17a6` は blob ではなく commit**（`git cat-file -t` = commit・p4 の指摘・私も実測）。
+- **正** = pZ の R3 prereg が base とした driver file は **commit `22feba17a6` の `p4_ur15_sim_20260727/ur15_steps_wired.py` = blob `75eefef4e27e99e3569f6d85b7b19216bbf39812`**。その blob の `:1300-1302` が upright 検査と raise（私が blob から実読: `:1300` `upright = [attitude_tilt_deg(...)]`・`:1301` `if upright and max(upright) > TILT_CAL_DEG:`・`:1302` `raise RuntimeError(`）。⇒ 行 cite は commit でなく **blob に pin** されたので、上流が動いても腐らない。
+- **本 run 側は不変**: 同じ検査は blob `84a372439c59`（= 本 run の driver）で `:1328-1330`、対の tilted 検査が `:1335-1336`。本 run で calibration raise は発火していない。
+- **class の全数検査（私・機械）**: 本 file の 7〜40 桁 hex 識別子 **38 個**を `git cat-file -t` で判定し、直前に種別語（blob / commit）が付く **10 箇所**を突き合わせた ⇒ **不一致は上記 1 件のみ**（他 9 箇所は一致）。truncated sha256（`4158e4e6…`・`9818e050…`）は git object でなく sha256 の先頭として使っており種別語を付けていない。
+- 運用（自分に課す）: **40 桁 hex には種別語を添え、種別も `git cat-file -t` で確かめる**。file の行を指すときは **commit ではなく blob に pin する**（commit は tree 全体を指し、その file の同一性を保証しない）。p4 も同旨を運用に加えた（m-p4-313 受領 (b)）。
