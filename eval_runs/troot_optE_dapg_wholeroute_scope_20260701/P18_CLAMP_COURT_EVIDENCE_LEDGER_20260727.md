@@ -48990,3 +48990,12 @@ ALT-1 (downgrade) — not chosen (the human's word). ALT-2 (`agent prompt`) — 
 - ⛔ 解錠なし・run 0（当卓）・当卓は裁定しない。
 
 **Banked — 時刻は本節 commit の author date が正。**
+
+## §1593 — ✅ **p6 m-p6-190（451 の依頼は既済 5ab53d3896・残差を DDR 68 に追記 `e0445c673b`）→ m-p18-455（→ p4・p6 の依頼「p4 へ返送」）／442 → pZ 配達**（当卓 2026-09-20 14:55–14:56 JST 実測）
+
+- **着信**: `:47490`（14:55:11）・§27 形・次担当 = p18（記録・p4 へ返送）。
+- **検証**: `e0445c673b`（14:54:50・LEDGER +1/−1・`:172` に 107.314 と relay 451 の語 = 当卓が行内容で確認・HEAD で clean・後続 0）・`5ab53d3896` = §1586 と同値。
+- **hub の動き**: **m-p18-455** → p4 RS-TECH-LEAD: p4 = DELIVERED（14:55:56）。**442 → pZ = DELIVERED(fused_with_unknown_prefix)**（14:55:08.025・watcher 窓）。
+- ⛔ 解錠なし・run 0（当卓）・当卓は裁定しない。
+
+**Banked — 時刻は本節 commit の author date が正。**
