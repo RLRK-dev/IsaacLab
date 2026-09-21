@@ -1,0 +1,20 @@
+{
+  "observed_at": "2026-09-21T12:13:39.338988+09:00",
+  "pdf_sha256": "280385af553004884b4c04675a275f59631a6a516807cec2a88926ad71d9ae87",
+  "pages": [
+    {
+      "page": 1,
+      "sha256": "8a1f32c8dcebac49ceaeebae038b7caa278937898d8796d8666c829b9b76532c",
+      "text_and_diagrams_readable": true,
+      "clipping_or_unintended_overlap_observed": false
+    },
+    {
+      "page": 2,
+      "sha256": "83fa359a12d13a26d8238897e33ae3802c0cf0ddc51c5590cd144dbfae85f4be",
+      "text_and_diagrams_readable": true,
+      "clipping_or_unintended_overlap_observed": false
+    }
+  ],
+  "observation_basis": "Both final PDF pages rendered with Poppler and viewed via view_image this session",
+  "physical_verdict": null
+}

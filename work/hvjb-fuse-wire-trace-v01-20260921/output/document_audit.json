@@ -1,0 +1,14 @@
+{
+  "observed_at": "2026-09-21T12:08:03.529769+09:00",
+  "script_sha256": "c10beae166af178b8f91289ac0d243c6aa4aede4a784be0eb98a99f62ccda5da",
+  "data_sha256": "5b2a699f48ecdc9aa1c45d12b816df5171667c76ab8250e020be80b8e31f0263",
+  "pdf_path": "output/pdf/HVJB_ヒューズ対応候補と配線追跡_v01_20260921.pdf",
+  "pdf_sha256": "280385af553004884b4c04675a275f59631a6a516807cec2a88926ad71d9ae87",
+  "pages": 2,
+  "text_records_inside_page": 100,
+  "conditional_assignments": 4,
+  "new_confirmed_physical_connections": 0,
+  "previous_port_map_preserved_exactly": true,
+  "source_files_unchanged": true,
+  "physical_verdict": null
+}

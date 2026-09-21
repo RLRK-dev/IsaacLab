@@ -1,0 +1,87 @@
+{
+  "observed_at": "2026-09-21T11:51:36.560163+09:00",
+  "source": "/home/rlrk/IsaacLab-op040/eval_runs/ur15_jb_harness_revision_20260907/references/hvjb_assembly_followup_20260915/assembly_20250607.mp4",
+  "source_sha256": "b7fcb74eaeec06e517d5726994a38a6b0812e05198d8b771b7ff771e68a0e1eb",
+  "url": "https://www.youtube.com/watch?v=Sm_D-vmNYqc",
+  "source_unchanged": true,
+  "frames": [
+    {
+      "file": "assembly_62s.png",
+      "sha256": "e3cfe3c47a8bd51c84131b0c5db00b814882921a013068c99d782d37d6b76d8b",
+      "requested_seek_s": 62,
+      "command": [
+        "ffmpeg",
+        "-v",
+        "error",
+        "-n",
+        "-ss",
+        "62",
+        "-i",
+        "/home/rlrk/IsaacLab-op040/eval_runs/ur15_jb_harness_revision_20260907/references/hvjb_assembly_followup_20260915/assembly_20250607.mp4",
+        "-frames:v",
+        "1",
+        "/tmp/hvjb-fuse-wire-trace-20260921/assembly_62s.png"
+      ],
+      "pixel_transform": "none; full decoded frame"
+    },
+    {
+      "file": "assembly_70s.png",
+      "sha256": "1e2af2120f101ac41949059c4ab2ac76c3bf548e1a0f75d8d2a2b7513ce13849",
+      "requested_seek_s": 70,
+      "command": [
+        "ffmpeg",
+        "-v",
+        "error",
+        "-n",
+        "-ss",
+        "70",
+        "-i",
+        "/home/rlrk/IsaacLab-op040/eval_runs/ur15_jb_harness_revision_20260907/references/hvjb_assembly_followup_20260915/assembly_20250607.mp4",
+        "-frames:v",
+        "1",
+        "/tmp/hvjb-fuse-wire-trace-20260921/assembly_70s.png"
+      ],
+      "pixel_transform": "none; full decoded frame"
+    },
+    {
+      "file": "assembly_78s.png",
+      "sha256": "d9fa629cc28e7edbba3800090c83fcb72017a344098255a06e1c5b97ed8f07d6",
+      "requested_seek_s": 78,
+      "command": [
+        "ffmpeg",
+        "-v",
+        "error",
+        "-n",
+        "-ss",
+        "78",
+        "-i",
+        "/home/rlrk/IsaacLab-op040/eval_runs/ur15_jb_harness_revision_20260907/references/hvjb_assembly_followup_20260915/assembly_20250607.mp4",
+        "-frames:v",
+        "1",
+        "/tmp/hvjb-fuse-wire-trace-20260921/assembly_78s.png"
+      ],
+      "pixel_transform": "none; full decoded frame"
+    },
+    {
+      "file": "assembly_86s.png",
+      "sha256": "59ae7e05b4c1838d04ae6002b4778271b5780f6280a8a8e3761e79195b3523ed",
+      "requested_seek_s": 86,
+      "command": [
+        "ffmpeg",
+        "-v",
+        "error",
+        "-n",
+        "-ss",
+        "86",
+        "-i",
+        "/home/rlrk/IsaacLab-op040/eval_runs/ur15_jb_harness_revision_20260907/references/hvjb_assembly_followup_20260915/assembly_20250607.mp4",
+        "-frames:v",
+        "1",
+        "/tmp/hvjb-fuse-wire-trace-20260921/assembly_86s.png"
+      ],
+      "pixel_transform": "none; full decoded frame"
+    }
+  ],
+  "reuse": "collect_hvjb_video_evidence_v02.py ffmpeg accurate-seek pattern; new timestamps only",
+  "physical_verdict": null
+}

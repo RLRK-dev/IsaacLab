@@ -1,0 +1,90 @@
+{
+  "delivery_root": "/home/rlrk/Downloads/HVJB_ヒューズ対応と配線追跡_v01_20260921",
+  "files": [
+    {
+      "path": "README.md",
+      "repository_path": "README.md",
+      "sha256": "f79ba68771a6dddfafb713167c6844cc0db9128980710fe444ce0911c7cb108f",
+      "bytes": 6052
+    },
+    {
+      "path": "references/assembly_62s.png",
+      "repository_path": "references/assembly_62s.png",
+      "sha256": "e3cfe3c47a8bd51c84131b0c5db00b814882921a013068c99d782d37d6b76d8b",
+      "bytes": 1793995
+    },
+    {
+      "path": "references/assembly_86s.png",
+      "repository_path": "references/assembly_86s.png",
+      "sha256": "59ae7e05b4c1838d04ae6002b4778271b5780f6280a8a8e3761e79195b3523ed",
+      "bytes": 1734315
+    },
+    {
+      "path": "references/fuse_panel.jpg",
+      "repository_path": "references/fuse_panel.jpg",
+      "sha256": "99574f981ae301adf41a9ce9d4840eb15aa66dc7b477a10afe6b55a2accd2106",
+      "bytes": 376300
+    },
+    {
+      "path": "references/overview.jpg",
+      "repository_path": "references/overview.jpg",
+      "sha256": "5724681b4bef4399f0799751a62577e48ef9b7fd3d6ed5b56d85fd95924937ad",
+      "bytes": 167012
+    },
+    {
+      "path": "references/source_identity.json",
+      "repository_path": "references/source_identity.json",
+      "sha256": "01d7c7020806222d72848c57ead23e516a188d9f97db0f18354a11894211caa0",
+      "bytes": 1190
+    },
+    {
+      "path": "document_audit.json",
+      "repository_path": "output/document_audit.json",
+      "sha256": "6a8f65365054bcd9829bea199ec23fff3c55117e79d5f3c0d35f7288376b25a7",
+      "bytes": 635
+    },
+    {
+      "path": "extraction_record.json",
+      "repository_path": "output/extraction_record.json",
+      "sha256": "4bd7b4c48010d64d5579fc84328da1e53dbf62363e750e7a8f09f43f84ecbe2b",
+      "bytes": 2878
+    },
+    {
+      "path": "fuse_wire_trace.json",
+      "repository_path": "output/fuse_wire_trace.json",
+      "sha256": "5b2a699f48ecdc9aa1c45d12b816df5171667c76ab8250e020be80b8e31f0263",
+      "bytes": 100648
+    },
+    {
+      "path": "pages/page-1.png",
+      "repository_path": "output/pages/page-1.png",
+      "sha256": "8a1f32c8dcebac49ceaeebae038b7caa278937898d8796d8666c829b9b76532c",
+      "bytes": 810211
+    },
+    {
+      "path": "pages/page-2.png",
+      "repository_path": "output/pages/page-2.png",
+      "sha256": "83fa359a12d13a26d8238897e33ae3802c0cf0ddc51c5590cd144dbfae85f4be",
+      "bytes": 703507
+    },
+    {
+      "path": "pdf/HVJB_ヒューズ対応候補と配線追跡_v01_20260921.pdf",
+      "repository_path": "output/pdf/HVJB_ヒューズ対応候補と配線追跡_v01_20260921.pdf",
+      "sha256": "280385af553004884b4c04675a275f59631a6a516807cec2a88926ad71d9ae87",
+      "bytes": 687812
+    },
+    {
+      "path": "qa_receipt.json",
+      "repository_path": "output/qa_receipt.json",
+      "sha256": "047d1246ed00281fdb8dd0b61c483dfffe06109b5513e46b216f70b9a142fe5c",
+      "bytes": 715
+    },
+    {
+      "path": "render_run.log",
+      "repository_path": "output/render_run.log",
+      "sha256": "a7ce14f22cb88e19ed20f3bdc1c02df9ab34a13cb2dd6efa3182767fb1365769",
+      "bytes": 305
+    }
+  ],
+  "physical_verdict": null
+}
