@@ -1,0 +1,72 @@
+{
+  "delivery_root": "/home/rlrk/Downloads/HVJB_内側ハウジング配線出口比較_v01_20260921",
+  "files": [
+    {
+      "path": "README.md",
+      "repository_path": "README.md",
+      "sha256": "f50eac5db20c00a9c2f8a1ba63f63e81dd7b6704b85952b94ba4968b7dbcdb0c",
+      "bytes": 7203
+    },
+    {
+      "path": "document_audit.json",
+      "repository_path": "output/document_audit.json",
+      "sha256": "c4a0e4bb0ba0ebc842f08d21cb28a9ac609eebdb3fef4b1d4e69e3755c1d2365",
+      "bytes": 757
+    },
+    {
+      "path": "exit_projection_observations.json",
+      "repository_path": "output/exit_projection_observations.json",
+      "sha256": "bb6c248701c8756e3307e53f3f0679d250278fb323d7e8e678f29a7dd91dc93d",
+      "bytes": 398398
+    },
+    {
+      "path": "geometry_run.log",
+      "repository_path": "output/geometry_run.log",
+      "sha256": "b823994a1be4ade72de21e50310712888dd0e3891ca3078991f9a49ca27d4467",
+      "bytes": 747
+    },
+    {
+      "path": "pages/page-1.png",
+      "repository_path": "output/pages/page-1.png",
+      "sha256": "96de15ba6875e097d85d8913cc4748e018a7112ae6c0182517830639222a3561",
+      "bytes": 304813
+    },
+    {
+      "path": "pages/page-2.png",
+      "repository_path": "output/pages/page-2.png",
+      "sha256": "7ced5d50ecac60f6be05948359201fc001ea99b1f53afef25349faface163483",
+      "bytes": 200699
+    },
+    {
+      "path": "pdf/内側ハウジングの4つの配線出口と指の退避_v01_20260921.pdf",
+      "repository_path": "output/pdf/内側ハウジングの4つの配線出口と指の退避_v01_20260921.pdf",
+      "sha256": "476a9dc4c87646f9618362b754cf2c582ee3dc10f8a63613e5f8d582b0be4c3a",
+      "bytes": 255452
+    },
+    {
+      "path": "prior_art.log",
+      "repository_path": "output/prior_art.log",
+      "sha256": "431ebf5847fc4389f671990e80e0f6cbb3c24d200ba23b6612a0e2e23b3f4676",
+      "bytes": 144
+    },
+    {
+      "path": "public_interface.json",
+      "repository_path": "output/public_interface.json",
+      "sha256": "ff5615bb515985ef07cc3c1f43b2cd58884e87b4461bf262d06d65c2f706f3fe",
+      "bytes": 10599
+    },
+    {
+      "path": "qa_receipt.json",
+      "repository_path": "output/qa_receipt.json",
+      "sha256": "1f64f04a6f9cf03576311e45024a2ee80d1310fece2dc53f1c7710e03918119f",
+      "bytes": 644
+    },
+    {
+      "path": "render_run.log",
+      "repository_path": "output/render_run.log",
+      "sha256": "c3bf35d8e38a1135e791f6837feb6011abe5d18195f8b037983ebe5bb4e24e1e",
+      "bytes": 252
+    }
+  ],
+  "physical_verdict": null
+}

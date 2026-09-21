@@ -1,0 +1,3 @@
+keywords=['HVJB', '2103245', 'WI41', '電線出口']
+findings=0 blockers=0 lessons=0
+PASS: no related prior-art hits found in configured roots.

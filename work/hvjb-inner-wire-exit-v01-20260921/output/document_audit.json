@@ -1,0 +1,20 @@
+{
+  "pdf": "output/pdf/内側ハウジングの4つの配線出口と指の退避_v01_20260921.pdf",
+  "pdf_sha256": "476a9dc4c87646f9618362b754cf2c582ee3dc10f8a63613e5f8d582b0be4c3a",
+  "renderer_sha256": "2d40ebba3519f5c5a3744ca8f855e9ff094626aa488995693eeca3e9f6fb7b63",
+  "observations_sha256": "bb6c248701c8756e3307e53f3f0679d250278fb323d7e8e678f29a7dd91dc93d",
+  "text_records_inside_page": 47,
+  "pages": 2,
+  "source_pdf_sha256": "cd13cd856b679e2683f7672f079bd4c99ff87ac2e361d3da73700e12c12fa63d",
+  "source_image": {
+    "page": 3,
+    "image_index": 2,
+    "pdf_object": "70 0",
+    "pixels": [
+      255,
+      146
+    ]
+  },
+  "source_png_sha256": "354413c3a8fdb7938b76ef9b68d6a246e92c7347cd591fafb9ba0bfffdbdaf7e",
+  "physical_verdict": null
+}

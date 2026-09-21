@@ -1,0 +1,20 @@
+{
+  "observed_at": "2026-09-21T09:01:03.438558+09:00",
+  "pdf_sha256": "476a9dc4c87646f9618362b754cf2c582ee3dc10f8a63613e5f8d582b0be4c3a",
+  "pages": [
+    {
+      "page": 1,
+      "sha256": "96de15ba6875e097d85d8913cc4748e018a7112ae6c0182517830639222a3561",
+      "visual_observation": "Readable; no clipping or overlap observed."
+    },
+    {
+      "page": 2,
+      "sha256": "7ced5d50ecac60f6be05948359201fc001ea99b1f53afef25349faface163483",
+      "visual_observation": "Readable; no clipping or overlap observed."
+    }
+  ],
+  "source_and_output_hashes_verified": true,
+  "required_contacts": 20,
+  "bays": 5,
+  "physical_verdict": null
+}

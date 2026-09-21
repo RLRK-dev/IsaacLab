@@ -1,0 +1,304 @@
+{
+  "recorded_at": "2026-09-21T08:39:09.341985+09:00",
+  "status": "public_interface_requirements_not_complete_actual_wire_mapping",
+  "basis": [
+    "TE 2103245 Rev A1 wire-end view",
+    "TE 408-32095 Rev B Figure 1/5 and section 3.2.A",
+    "Existing photo correspondence v03"
+  ],
+  "sources": [
+    {
+      "path": "eval_runs/ur15_jb_harness_revision_20260907/references/hvjb_photo_inventory_20260915/te_2103245_drawing.pdf",
+      "sha256": "23aff5f20acb75d87a63bf3a1aa0c076a8ab43b30c83914cfc8e5c9b41788ffa"
+    },
+    {
+      "path": "eval_runs/ur15_jb_harness_revision_20260907/references/connector_correction_20260915/te_408_32095_instruction.pdf",
+      "sha256": "cd13cd856b679e2683f7672f079bd4c99ff87ac2e361d3da73700e12c12fa63d"
+    }
+  ],
+  "source_urls": [
+    "https://www.te.com/en/product-2103245-1.html",
+    "https://www.te.com/commerce/DocumentDelivery/DDEController?Action=srchrtrv&DocFormat=pdf&DocLang=English&DocNm=2103245&DocType=Customer+Drawing&PartCntxt=2103245-1",
+    "https://www.te.com/commerce/DocumentDelivery/DDEController?Action=srchrtrv&DocFormat=pdf&DocLang=English&DocNm=408-32095&DocType=Specification+Or+Standard&PartCntxt=2103245-1",
+    "https://help.ampereev.com/hc/en-us/articles/31292470232087-High-Voltage-Junction-Box-HVJB-5-400"
+  ],
+  "bays": [
+    {
+      "id": "I01",
+      "housing_part_number": "2103245-1",
+      "required_interfaces": [
+        {
+          "cavity_number_in_drawing": 1,
+          "role": "power",
+          "position_in_te_wire_end_view": "right",
+          "photo_wire_id": null,
+          "selected_contact_part_number": null,
+          "electrical_node": null,
+          "selected_wire_diameter_m": null,
+          "actual_exit_centerline_m": null,
+          "min_bend_radius_m": null,
+          "support_or_bundle_geometry": null
+        },
+        {
+          "cavity_number_in_drawing": 2,
+          "role": "power",
+          "position_in_te_wire_end_view": "left",
+          "photo_wire_id": null,
+          "selected_contact_part_number": null,
+          "electrical_node": null,
+          "selected_wire_diameter_m": null,
+          "actual_exit_centerline_m": null,
+          "min_bend_radius_m": null,
+          "support_or_bundle_geometry": null
+        },
+        {
+          "cavity_number_in_drawing": 3,
+          "role": "HVIL",
+          "position_in_te_wire_end_view": "central_upper",
+          "photo_wire_id": null,
+          "selected_contact_part_number": null,
+          "electrical_node": null,
+          "selected_wire_diameter_m": null,
+          "actual_exit_centerline_m": null,
+          "min_bend_radius_m": null,
+          "support_or_bundle_geometry": null
+        },
+        {
+          "cavity_number_in_drawing": 4,
+          "role": "HVIL",
+          "position_in_te_wire_end_view": "central_lower",
+          "photo_wire_id": null,
+          "selected_contact_part_number": null,
+          "electrical_node": null,
+          "selected_wire_diameter_m": null,
+          "actual_exit_centerline_m": null,
+          "min_bend_radius_m": null,
+          "support_or_bundle_geometry": null
+        }
+      ]
+    },
+    {
+      "id": "I02",
+      "housing_part_number": "2103245-4",
+      "required_interfaces": [
+        {
+          "cavity_number_in_drawing": 1,
+          "role": "power",
+          "position_in_te_wire_end_view": "right",
+          "photo_wire_id": null,
+          "selected_contact_part_number": null,
+          "electrical_node": null,
+          "selected_wire_diameter_m": null,
+          "actual_exit_centerline_m": null,
+          "min_bend_radius_m": null,
+          "support_or_bundle_geometry": null
+        },
+        {
+          "cavity_number_in_drawing": 2,
+          "role": "power",
+          "position_in_te_wire_end_view": "left",
+          "photo_wire_id": null,
+          "selected_contact_part_number": null,
+          "electrical_node": null,
+          "selected_wire_diameter_m": null,
+          "actual_exit_centerline_m": null,
+          "min_bend_radius_m": null,
+          "support_or_bundle_geometry": null
+        },
+        {
+          "cavity_number_in_drawing": 3,
+          "role": "HVIL",
+          "position_in_te_wire_end_view": "central_upper",
+          "photo_wire_id": null,
+          "selected_contact_part_number": null,
+          "electrical_node": null,
+          "selected_wire_diameter_m": null,
+          "actual_exit_centerline_m": null,
+          "min_bend_radius_m": null,
+          "support_or_bundle_geometry": null
+        },
+        {
+          "cavity_number_in_drawing": 4,
+          "role": "HVIL",
+          "position_in_te_wire_end_view": "central_lower",
+          "photo_wire_id": null,
+          "selected_contact_part_number": null,
+          "electrical_node": null,
+          "selected_wire_diameter_m": null,
+          "actual_exit_centerline_m": null,
+          "min_bend_radius_m": null,
+          "support_or_bundle_geometry": null
+        }
+      ]
+    },
+    {
+      "id": "I03",
+      "housing_part_number": "2103245-5",
+      "required_interfaces": [
+        {
+          "cavity_number_in_drawing": 1,
+          "role": "power",
+          "position_in_te_wire_end_view": "right",
+          "photo_wire_id": null,
+          "selected_contact_part_number": null,
+          "electrical_node": null,
+          "selected_wire_diameter_m": null,
+          "actual_exit_centerline_m": null,
+          "min_bend_radius_m": null,
+          "support_or_bundle_geometry": null
+        },
+        {
+          "cavity_number_in_drawing": 2,
+          "role": "power",
+          "position_in_te_wire_end_view": "left",
+          "photo_wire_id": null,
+          "selected_contact_part_number": null,
+          "electrical_node": null,
+          "selected_wire_diameter_m": null,
+          "actual_exit_centerline_m": null,
+          "min_bend_radius_m": null,
+          "support_or_bundle_geometry": null
+        },
+        {
+          "cavity_number_in_drawing": 3,
+          "role": "HVIL",
+          "position_in_te_wire_end_view": "central_upper",
+          "photo_wire_id": null,
+          "selected_contact_part_number": null,
+          "electrical_node": null,
+          "selected_wire_diameter_m": null,
+          "actual_exit_centerline_m": null,
+          "min_bend_radius_m": null,
+          "support_or_bundle_geometry": null
+        },
+        {
+          "cavity_number_in_drawing": 4,
+          "role": "HVIL",
+          "position_in_te_wire_end_view": "central_lower",
+          "photo_wire_id": null,
+          "selected_contact_part_number": null,
+          "electrical_node": null,
+          "selected_wire_diameter_m": null,
+          "actual_exit_centerline_m": null,
+          "min_bend_radius_m": null,
+          "support_or_bundle_geometry": null
+        }
+      ]
+    },
+    {
+      "id": "I04",
+      "housing_part_number": "2103245-4",
+      "required_interfaces": [
+        {
+          "cavity_number_in_drawing": 1,
+          "role": "power",
+          "position_in_te_wire_end_view": "right",
+          "photo_wire_id": null,
+          "selected_contact_part_number": null,
+          "electrical_node": null,
+          "selected_wire_diameter_m": null,
+          "actual_exit_centerline_m": null,
+          "min_bend_radius_m": null,
+          "support_or_bundle_geometry": null
+        },
+        {
+          "cavity_number_in_drawing": 2,
+          "role": "power",
+          "position_in_te_wire_end_view": "left",
+          "photo_wire_id": null,
+          "selected_contact_part_number": null,
+          "electrical_node": null,
+          "selected_wire_diameter_m": null,
+          "actual_exit_centerline_m": null,
+          "min_bend_radius_m": null,
+          "support_or_bundle_geometry": null
+        },
+        {
+          "cavity_number_in_drawing": 3,
+          "role": "HVIL",
+          "position_in_te_wire_end_view": "central_upper",
+          "photo_wire_id": null,
+          "selected_contact_part_number": null,
+          "electrical_node": null,
+          "selected_wire_diameter_m": null,
+          "actual_exit_centerline_m": null,
+          "min_bend_radius_m": null,
+          "support_or_bundle_geometry": null
+        },
+        {
+          "cavity_number_in_drawing": 4,
+          "role": "HVIL",
+          "position_in_te_wire_end_view": "central_lower",
+          "photo_wire_id": null,
+          "selected_contact_part_number": null,
+          "electrical_node": null,
+          "selected_wire_diameter_m": null,
+          "actual_exit_centerline_m": null,
+          "min_bend_radius_m": null,
+          "support_or_bundle_geometry": null
+        }
+      ]
+    },
+    {
+      "id": "I05",
+      "housing_part_number": "2103245-6",
+      "required_interfaces": [
+        {
+          "cavity_number_in_drawing": 1,
+          "role": "power",
+          "position_in_te_wire_end_view": "right",
+          "photo_wire_id": null,
+          "selected_contact_part_number": null,
+          "electrical_node": null,
+          "selected_wire_diameter_m": null,
+          "actual_exit_centerline_m": null,
+          "min_bend_radius_m": null,
+          "support_or_bundle_geometry": null
+        },
+        {
+          "cavity_number_in_drawing": 2,
+          "role": "power",
+          "position_in_te_wire_end_view": "left",
+          "photo_wire_id": null,
+          "selected_contact_part_number": null,
+          "electrical_node": null,
+          "selected_wire_diameter_m": null,
+          "actual_exit_centerline_m": null,
+          "min_bend_radius_m": null,
+          "support_or_bundle_geometry": null
+        },
+        {
+          "cavity_number_in_drawing": 3,
+          "role": "HVIL",
+          "position_in_te_wire_end_view": "central_upper",
+          "photo_wire_id": null,
+          "selected_contact_part_number": null,
+          "electrical_node": null,
+          "selected_wire_diameter_m": null,
+          "actual_exit_centerline_m": null,
+          "min_bend_radius_m": null,
+          "support_or_bundle_geometry": null
+        },
+        {
+          "cavity_number_in_drawing": 4,
+          "role": "HVIL",
+          "position_in_te_wire_end_view": "central_lower",
+          "photo_wire_id": null,
+          "selected_contact_part_number": null,
+          "electrical_node": null,
+          "selected_wire_diameter_m": null,
+          "actual_exit_centerline_m": null,
+          "min_bend_radius_m": null,
+          "support_or_bundle_geometry": null
+        }
+      ]
+    }
+  ],
+  "required_contact_counts": {
+    "power": 10,
+    "HVIL": 10
+  },
+  "physical_wire_count": null,
+  "HVIL_loop_order": null,
+  "physical_verdict": null
+}

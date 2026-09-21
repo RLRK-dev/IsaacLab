@@ -1,0 +1,7 @@
+I01 {'closed': [], 'open_0_to_4': [], 'lift_0_to_50_after_open_4': [], 'lift_0_to_50_after_open_2': ['POWER_LEFT', 'POWER_RIGHT']}
+I02 {'closed': [], 'open_0_to_4': [], 'lift_0_to_50_after_open_4': [], 'lift_0_to_50_after_open_2': ['POWER_LEFT', 'POWER_RIGHT']}
+I03 {'closed': [], 'open_0_to_4': [], 'lift_0_to_50_after_open_4': [], 'lift_0_to_50_after_open_2': ['POWER_LEFT', 'POWER_RIGHT']}
+I04 {'closed': [], 'open_0_to_4': [], 'lift_0_to_50_after_open_4': [], 'lift_0_to_50_after_open_2': ['POWER_LEFT', 'POWER_RIGHT']}
+I05 {'closed': [], 'open_0_to_4': [], 'lift_0_to_50_after_open_4': [], 'lift_0_to_50_after_open_2': ['POWER_LEFT', 'POWER_RIGHT']}
+EXIT_PROJECTION_COMPLETE
+[INFO] Using Python: "/home/rlrk/IsaacLab/env_isaaclab/bin/python"
