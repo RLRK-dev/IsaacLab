@@ -1,0 +1,28 @@
+{
+  "evidence_basis": "Saved display arrays and pinned files; no physical or mechanical verdict.",
+  "bank_sha256": "52eede374a2d782aabf1cc2604801cc64e6f884b39060728c437631a8dca36dc",
+  "plan_sha256": "6eb3775b07a288c86d97de5074c17ace01cac5b3d8b6a4d472c021a299426216",
+  "source_tasks": 20,
+  "source_operations": 12,
+  "storyboard_scenes": 16,
+  "output_frames": 1785,
+  "fps": 15,
+  "duration_s": 119,
+  "dynamic_objects": 304,
+  "pallet_z_span_display_units": 2.220446049250313e-16,
+  "pallet_z_rounding_bound_float64": 2.220446049250313e-16,
+  "case_return_max_matrix_difference": 0.0,
+  "case_parts_compared": 8,
+  "pallet_return_position_identical": true,
+  "AB_assist_after_S06_max_matrix_difference": 0.0,
+  "paired_rise_max_displacement_difference": 2.220446049250313e-16,
+  "paired_rise_rounding_bound_float64": 8.881784197001252e-16,
+  "original_files_unchanged": 9,
+  "static_task_scenes": [
+    "S02",
+    "S09",
+    "S13",
+    "S14"
+  ],
+  "formal_physical_validity_verdict": null
+}

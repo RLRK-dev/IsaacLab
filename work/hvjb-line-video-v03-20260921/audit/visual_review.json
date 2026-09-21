@@ -1,0 +1,45 @@
+{
+  "observed_at": "2026-09-21T16:11:01.059178+09:00",
+  "basis": "18-scene preview images plus final unknown-work frames and decoded MP4 samples viewed with view_image; full decode and source-to-frame mapping checked by the existing encoder.",
+  "video_sha256": "ef460dbdff618c217cc2e40a8bd4d3acc2189a8ff4be043da66afa4e7af95100",
+  "decoded_samples_s": [
+    7,
+    46,
+    65,
+    79,
+    114
+  ],
+  "encoded_sample_images": [
+    {
+      "file": "audit/encoded_7.png",
+      "sha256": "89e3f838c658d95c5554ee907043d9b6e3161776c321c19540391ff8d5a8bbfc"
+    },
+    {
+      "file": "audit/encoded_46.png",
+      "sha256": "8aebf1b9e91f7ca6a10a6294b7455ebdc7ea73f7b386bfcdcddb46020baa2a5f"
+    },
+    {
+      "file": "audit/encoded_65.png",
+      "sha256": "651774793ec2b87fe5d3af6948ed3bf915497c2c8eab3ebe0f1ac93365b4c8dd"
+    },
+    {
+      "file": "audit/encoded_79.png",
+      "sha256": "f4474acfefb0bbbc66ba009455eec18475d7209af6bfe14c8d4f1534578b72d2"
+    },
+    {
+      "file": "audit/encoded_114.png",
+      "sha256": "840809b918580a7ba0d41c4b6ee4d4ebbaf39a6c247b8dd15bfd65d27af6b91e"
+    }
+  ],
+  "observations": [
+    "Process and actor labels are readable in the inspected images.",
+    "Unknown-work banners remain visible; overlapping actor labels were removed in S09 and S13.",
+    "Representative outside assembly, insertion, sidewall and return scenes are shown."
+  ],
+  "limits": [
+    "S02/S09/S13/S14 explain unfinished task slots; individual operations are not animated.",
+    "The simplified model is not a detailed replica of the photograph or current finger meshes.",
+    "No full physical grasp, clearance, cable retention or manufacturing acceptance is established."
+  ],
+  "formal_physical_validity_verdict": null
+}

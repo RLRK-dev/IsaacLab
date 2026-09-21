@@ -1,0 +1,10 @@
+{
+  "basis": "Comparison of copied legacy display methods before the v03 overrides; not robot validation.",
+  "sample_count": 23,
+  "dynamic_objects": 304,
+  "max_world_matrix_difference": 0.0,
+  "camera_identical": true,
+  "original_sha256": "aa462f421e0d0151bc381f51449764c1b45f8ebbe6c1e37a2d0cc061448671dc",
+  "local_sha256": "83eba07a5eaa7717dc24a9e17f218127a6512d88441484d491ba9d8da1aa3e4d",
+  "physical_validity_verdict": null
+}

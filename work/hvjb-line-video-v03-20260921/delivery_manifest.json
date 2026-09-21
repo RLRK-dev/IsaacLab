@@ -1,0 +1,97 @@
+{
+  "observed_at": "2026-09-21T16:11:01.059178+09:00",
+  "destination": "/home/rlrk/Downloads/HVJB_ライン工程確認_v03_20260921",
+  "video_types": 1,
+  "files": [
+    {
+      "source": "work/hvjb-line-video-v03-20260921/HVJB_line_split_process_concept_v03_review.mp4",
+      "delivered_file": "HVJB_line_split_process_concept_v03_review.mp4",
+      "sha256": "ef460dbdff618c217cc2e40a8bd4d3acc2189a8ff4be043da66afa4e7af95100",
+      "bytes": 3701984
+    },
+    {
+      "source": "work/hvjb-line-video-v03-20260921/README.md",
+      "delivered_file": "README.md",
+      "sha256": "16d986fd8b1876d4378a334b0b2cf616167b365ad5cd6f981a723845172ec2e1",
+      "bytes": 6932
+    },
+    {
+      "source": "work/hvjb-line-video-v03-20260921/data/concept_v03.npz",
+      "delivered_file": "data/concept_v03.npz",
+      "sha256": "52eede374a2d782aabf1cc2604801cc64e6f884b39060728c437631a8dca36dc",
+      "bytes": 8418546
+    },
+    {
+      "source": "work/hvjb-line-video-v03-20260921/data/concept_v03.json",
+      "delivered_file": "data/concept_v03.json",
+      "sha256": "6eb3775b07a288c86d97de5074c17ace01cac5b3d8b6a4d472c021a299426216",
+      "bytes": 255039
+    },
+    {
+      "source": "work/hvjb-line-video-v03-20260921/data/concept_v03_final.json",
+      "delivered_file": "data/concept_v03_final.json",
+      "sha256": "2ace6d18797d5fd3ff713e0de2967fd969aa57a97b66ecad15909d223521b7be",
+      "bytes": 255834
+    },
+    {
+      "source": "work/hvjb-line-video-v03-20260921/data/scene_index.csv",
+      "delivered_file": "data/scene_index.csv",
+      "sha256": "ef5865667136d048c10875a5b8c19d22f57a83b813f2de7eae086756366c32b4",
+      "bytes": 2240
+    },
+    {
+      "source": "work/hvjb-line-video-v03-20260921/inputs/line_process_plan.json",
+      "delivered_file": "inputs/line_process_plan.json",
+      "sha256": "e640a9cb3008e418a595465d94bfaf6994bbbdb12a6c7ecbe94edd73996c05d2",
+      "bytes": 314162
+    },
+    {
+      "source": "work/hvjb-line-video-v03-20260921/inputs/original_sources.json",
+      "delivered_file": "inputs/original_sources.json",
+      "sha256": "fc548ef0789e4448a57d342529211848252dc09c3efa51a2d0d20b04ad5b3305",
+      "bytes": 1768
+    },
+    {
+      "source": "work/hvjb-line-video-v03-20260921/audit/display_checks.json",
+      "delivered_file": "audit/display_checks.json",
+      "sha256": "b6ef3af0922676532c58694d4e78777ca3ec801db52b09fe1632912b72da7984",
+      "bytes": 997
+    },
+    {
+      "source": "work/hvjb-line-video-v03-20260921/audit/label_refinement.json",
+      "delivered_file": "audit/label_refinement.json",
+      "sha256": "86bcf70dcd77fff1d4be78a613b6ba531a51c6e73b06a4a47a24fef6befc6ba7",
+      "bytes": 396
+    },
+    {
+      "source": "work/hvjb-line-video-v03-20260921/audit/legacy_copy_equivalence.json",
+      "delivered_file": "audit/legacy_copy_equivalence.json",
+      "sha256": "305fe0819b19bae0931c36a29e25b9d51e7f7f9ad59999e9ec6fe6b5890fbb3f",
+      "bytes": 435
+    },
+    {
+      "source": "work/hvjb-line-video-v03-20260921/audit/visual_review.json",
+      "delivered_file": "audit/visual_review.json",
+      "sha256": "daad1ba82c8c6a9ce9e63847309af631e1b6b785174667455b534aab70afdc48",
+      "bytes": 1741
+    },
+    {
+      "source": "work/hvjb-line-video-v03-20260921/audit/HVJB_line_split_process_concept_v03_review_video.json",
+      "delivered_file": "audit/HVJB_line_split_process_concept_v03_review_video.json",
+      "sha256": "0a675c1da218264814814cb80fd70ae4642f6c25eff96823df8d5e1adbf36143",
+      "bytes": 682515
+    },
+    {
+      "source": "work/hvjb-line-video-v03-20260921/previews/concept_v03/manifest.json",
+      "delivered_file": "audit/source_render_manifest.json",
+      "sha256": "e3da3704215e12e2a0e2966370b4484830ca03ce843d6460d921880dbce169a8",
+      "bytes": 665869
+    },
+    {
+      "source": "work/hvjb-line-video-v03-20260921/previews/concept_v03_final/manifest.json",
+      "delivered_file": "audit/render_manifest.json",
+      "sha256": "9363b8578e4aaf5b93cf1fd45a61b8fc1e3bd261b9ec62494737146bf923b130",
+      "bytes": 850676
+    }
+  ]
+}

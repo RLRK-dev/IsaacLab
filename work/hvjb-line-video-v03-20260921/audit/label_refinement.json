@@ -1,0 +1,12 @@
+{
+  "scenes": [
+    "S09",
+    "S13"
+  ],
+  "change": "Do not place role labels over the unknown-work banner.",
+  "source_plan_sha256": "6eb3775b07a288c86d97de5074c17ace01cac5b3d8b6a4d472c021a299426216",
+  "geometry_or_motion_changed": false,
+  "redrawn_frames": 120,
+  "unique_static_images": 2,
+  "original_manifest_sha256": "e3da3704215e12e2a0e2966370b4484830ca03ce843d6460d921880dbce169a8"
+}

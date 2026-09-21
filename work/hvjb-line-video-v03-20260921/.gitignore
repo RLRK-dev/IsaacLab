@@ -1,0 +1,5 @@
+# Large local evidence; identities are retained by the tracked manifests.
+*.mp4
+data/*.npz
+previews/
+__pycache__/

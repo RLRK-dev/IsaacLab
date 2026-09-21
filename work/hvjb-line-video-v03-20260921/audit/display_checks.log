@@ -1,0 +1,2 @@
+DISPLAY_CHECKS_COMPLETE tasks=20 scenes=16 frames=1785 pallet_z_span=2.220446049250313e-16 case_return_error=0
+[INFO] Using Python: "/home/rlrk/IsaacLab/env_isaaclab/bin/python"
