@@ -1,0 +1,245 @@
+{
+  "observed_at": "2026-09-21T17:30:16.850961+09:00",
+  "status": "source_backed_interface_review_and_unselected_allocation_comparison",
+  "source_pins": {
+    "/tmp/hvjb-inner-grasp-push-20260921/work/hvjb-port-connection-map-v01-20260921/output/port_connection_map.json": "60049f203971fbb629d98daafcf738989787081dc4a9619d2fd366f9683d55a5",
+    "/tmp/hvjb-inner-grasp-push-20260921/work/hvjb-line-process-v03-20260921/output/line_process_plan.json": "e640a9cb3008e418a595465d94bfaf6994bbbdb12a6c7ecbe94edd73996c05d2",
+    "/tmp/hvjb-inner-grasp-push-20260921/work/hvjb-after-process-v01-20260921/output/after_process_review.json": "00e3d04437d71ace2ea0514f57903bb10db82e9aad090b40219b049333fd8043",
+    "/tmp/hvjb-inner-grasp-push-20260921/work/hvjb-line-video-v03-20260921/delivery_manifest.json": "c64c192fab9722e2c56d083752cb2f94782f84f87dba1edf2ffb7df828cafddb",
+    "/tmp/hvjb-inner-grasp-push-20260921/work/hvjb-line-process-v03-20260921/build_review.py": "3e87ab9a2cec0164ab1d0eb666cd9d1a8d3dd3969743d7634b63ef3f6beb0680",
+    "/tmp/hvjb-inner-grasp-push-20260921/work/hvjb-test-plug-v01-20260921/data/sources.json": "09b9ac0bf9099b306b9fdb15e58eadc7bed20607c161df7b85345f5a1dd871d3"
+  },
+  "sources": [
+    {
+      "id": "TE_APPLICATION",
+      "url": "https://www.te.com/commerce/DocumentDelivery/DDEController?Action=srchrtrv&DocFormat=pdf&DocLang=English&DocNm=114-13259&DocType=Specification+Or+Standard&PartCntxt=4-2103177-1",
+      "revision": "Rev G3, 2025-11-20 on cover; body footers say Rev G",
+      "observed_at": "2026-09-21T17:27:47.343569+09:00",
+      "local_custody_path": "/home/rlrk/IsaacLab/work/hvjb-inner-grasp-push-20260921/test_plug_sources/te_114_13259.pdf",
+      "sha256": "9d8ffa3e7a8c8b3467a9f4df052a1595fd60a51ea70fc693a7ea94994ccad396",
+      "bytes": 1970379,
+      "pages_examined": [
+        1,
+        9,
+        10
+      ],
+      "basis": "Official PDF text and rendered diagrams; retrieved via curl after observed product-page document links."
+    },
+    {
+      "id": "TE_JAPANESE",
+      "url": "https://www.te.com/commerce/DocumentDelivery/DDEController?Action=srchrtrv&DocFormat=pdf&DocLang=Japanese&DocNm=408-78078&DocType=Specification+Or+Standard&PartCntxt=4-2103177-1",
+      "revision": "Rev C2, 2025-03-12",
+      "observed_at": "2026-09-21T17:27:47.343569+09:00",
+      "local_custody_path": "/home/rlrk/IsaacLab/work/hvjb-inner-grasp-push-20260921/test_plug_sources/te_408_78078.pdf",
+      "sha256": "3c3b005c3bcd90892c4756f08cfa8f35e519025247859c14f1a86247376dc4cc",
+      "bytes": 598827,
+      "pages_examined": [
+        10,
+        11
+      ],
+      "basis": "Official PDF text and rendered diagrams; retrieved via curl after observed product-page document links."
+    },
+    {
+      "id": "TE_DRAWING",
+      "url": "https://www.te.com/commerce/DocumentDelivery/DDEController?Action=srchrtrv&DocFormat=pdf&DocLang=English&DocNm=2103177&DocType=Customer+Drawing&PartCntxt=4-2103177-1",
+      "revision": "Rev B3, 2017-03-16",
+      "observed_at": "2026-09-21T17:27:47.343569+09:00",
+      "local_custody_path": "/home/rlrk/IsaacLab/work/hvjb-inner-grasp-push-20260921/test_plug_sources/te_2103177.pdf",
+      "sha256": "adffe5cae8bd09786fc21f92abe8959ea926ccd2a34a55d8f7c795d27279db16",
+      "bytes": 656824,
+      "pages_examined": [
+        1
+      ],
+      "basis": "Official PDF text and rendered diagrams; retrieved via curl after observed product-page document links."
+    },
+    {
+      "id": "AMPERE_V11",
+      "url": "https://ampereev.com/wp-content/uploads/2022/05/HVJB-5-400-Datasheet-V1.1.pdf",
+      "local_custody_path": "/home/rlrk/IsaacLab-op040/eval_runs/ur15_jb_harness_revision_20260907/references/op040_real_products_20260912/ampere_hvjb_5_400_v1_1.pdf",
+      "sha256": "643648bcea77b4d7c37c65d073664f746f68689952da2d5ce932e3d10bd5a9e1",
+      "bytes": 553747,
+      "revision": "V1.1, 2022",
+      "pages_examined": [
+        3,
+        4
+      ],
+      "basis": "Existing pinned official PDF; pages 3 and 4 rendered and visually read in this session."
+    }
+  ],
+  "front_ports": [
+    {
+      "model_bay_id": "I01",
+      "model_id_denotes": "existing_internal_housing_not_external_test_plug",
+      "header_model_id": "P16",
+      "header_part_number": "2103340-1",
+      "key": "A",
+      "function": "Heater 1",
+      "function_mapping_basis": "Inference matching public front labels to the saved 3+2 bay order.",
+      "finger_accessible_body_candidates": {
+        "with_CPA": "4-2103177-1",
+        "without_CPA": "5-2103177-1"
+      },
+      "candidates_are_complete_test_harness_BOM": false,
+      "complete_mating_qualification": null,
+      "selected_test_plug": null
+    },
+    {
+      "model_bay_id": "I02",
+      "model_id_denotes": "existing_internal_housing_not_external_test_plug",
+      "header_model_id": "P16",
+      "header_part_number": "2103340-1",
+      "key": "D",
+      "function": "AC",
+      "function_mapping_basis": "Inference matching public front labels to the saved 3+2 bay order.",
+      "finger_accessible_body_candidates": {
+        "with_CPA": "4-2103177-4",
+        "without_CPA": "5-2103177-4"
+      },
+      "candidates_are_complete_test_harness_BOM": false,
+      "complete_mating_qualification": null,
+      "selected_test_plug": null
+    },
+    {
+      "model_bay_id": "I03",
+      "model_id_denotes": "existing_internal_housing_not_external_test_plug",
+      "header_model_id": "P16",
+      "header_part_number": "2103340-1",
+      "key": "E",
+      "function": "Heater 2",
+      "function_mapping_basis": "Inference matching public front labels to the saved 3+2 bay order.",
+      "finger_accessible_body_candidates": {
+        "with_CPA": "4-2103177-5",
+        "without_CPA": "5-2103177-5"
+      },
+      "candidates_are_complete_test_harness_BOM": false,
+      "complete_mating_qualification": null,
+      "selected_test_plug": null
+    },
+    {
+      "model_bay_id": "I04",
+      "model_id_denotes": "existing_internal_housing_not_external_test_plug",
+      "header_model_id": "P17",
+      "header_part_number": "2103346-2",
+      "key": "D",
+      "function": "Charger",
+      "function_mapping_basis": "Inference matching public front labels to the saved 3+2 bay order.",
+      "finger_accessible_body_candidates": {
+        "with_CPA": "4-2103177-4",
+        "without_CPA": "5-2103177-4"
+      },
+      "candidates_are_complete_test_harness_BOM": false,
+      "complete_mating_qualification": null,
+      "selected_test_plug": null
+    },
+    {
+      "model_bay_id": "I05",
+      "model_id_denotes": "existing_internal_housing_not_external_test_plug",
+      "header_model_id": "P17",
+      "header_part_number": "2103346-2",
+      "key": "F",
+      "function": "DC-DC",
+      "function_mapping_basis": "Inference matching public front labels to the saved 3+2 bay order.",
+      "finger_accessible_body_candidates": {
+        "with_CPA": "4-2103177-6",
+        "without_CPA": "5-2103177-6"
+      },
+      "candidates_are_complete_test_harness_BOM": false,
+      "complete_mating_qualification": null,
+      "selected_test_plug": null
+    }
+  ],
+  "all_external_interfaces": {
+    "auxiliary_ports": 5,
+    "main_power_ports": 2,
+    "LV_12_way_ports": 1
+  },
+  "actual_test_connection_set": null,
+  "main_and_LV_mating_part_numbers": null,
+  "published_unmating_observation": {
+    "source": "TE_APPLICATION §3.10.B p.9–10 / TE_JAPANESE §7 p.11",
+    "sequence": [
+      "flexible_latch",
+      "intermediate_withdrawal",
+      "floating_latch",
+      "full_withdrawal"
+    ],
+    "approximate_intermediate_travel_m": 0.0045,
+    "intermediate_HVIL_state": "open",
+    "intermediate_HV_terminals_state": "still_in_contact",
+    "pull_on_cables": false,
+    "automation_threshold_or_tolerance": null,
+    "CPA_specific_sequence": null,
+    "complete_automated_cycle_established": false
+  },
+  "comparison_only": [
+    "existing_arm_with_dedicated_contact_and_latch_features",
+    "fixed_guided_connection_mechanism"
+  ],
+  "unselected": {
+    "test_plug_assembly_and_contacts": null,
+    "cable_and_HVIL_configuration": null,
+    "CPA_variant": null,
+    "fixture_CAD_and_contact_surfaces": null,
+    "insertion_and_extraction_force": null,
+    "full_stroke_and_alignment_tolerances": null,
+    "finger_and_latch_actuator_counts": null,
+    "mechanism_axis_and_added_robot_counts": null,
+    "test_connection_durability_and_replacement_interval": null,
+    "test_equipment_disconnect_permission": null
+  },
+  "preserved_selected_arm_roles": {
+    "revision": "hvjb_robot_selection_v01",
+    "decision_date": "2026-09-16",
+    "status": "user_selected_role_allocation",
+    "user_directive_ja": "補助を2腕に分ける",
+    "selected_plan": "S5_AB",
+    "selected_plan_ja": "主担当3腕＋A/B共用補助1腕＋C専用補助1腕",
+    "source_comparison": "data/hvjb_robot_sharing_v01.json",
+    "source_sha256": "7888693db9b5cd0314b7acecb6c0fa09ab7c207e43c2391fbfbf642833b99b90",
+    "selected_primary_arm_count": 3,
+    "selected_assist_arm_count": 2,
+    "selected_assembly_arm_count": 5,
+    "assist_groups": [
+      [
+        "X-A",
+        "X-B"
+      ],
+      [
+        "X-C"
+      ]
+    ],
+    "role_to_unit": {
+      "R-A": "ARM_A",
+      "R-B": "ARM_B",
+      "R-C": "ARM_C",
+      "X-A": "ASSIST_1",
+      "X-B": "ASSIST_1",
+      "X-C": "ASSIST_2"
+    },
+    "count_scope_ja": "A/B/Cの組立役に割り当てる5腕。ロボットの機台数や、OP010 XYZ・締付工具・搬送等を含むライン全体の設備台数ではない。",
+    "operating_constraints_ja": [
+      "AとBが同時に補助を必要とする場合は、把持開始前に作業順序を調整する。保持途中で手を離して別セルへ移らない。",
+      "A/B共用補助は、前の支持引継ぎ・開放・退避と、必要な手先交換・移動を終えてから次の保持を開始する。",
+      "C専用補助は自由端の案内と支持引継ぎを担当し、筐体搭載終了だけで空き扱いにしない。",
+      "既存の20仕事・据置締付工具・支持・供給・検査・回収の役割を保持する。該当する大小同時締結の2主軸条件を継承する。"
+    ],
+    "next_work_ja": "5腕の分担を前提に、A/B共用補助の保持区間・受渡しと、C専用補助の継続担当を具体化する。その上で配置・到達・干渉を確認する。",
+    "selected_robot_models": null,
+    "selected_robot_base_count": null,
+    "selected_layout": null,
+    "minimum_robot_count": null,
+    "measured_cycle_time_s": null,
+    "physical_acceptance_verdict": null
+  },
+  "coverage": {
+    "tasks": 20,
+    "original_operations": 12
+  },
+  "D70_D71_relative_order": null,
+  "test_conditions_acceptance_values_and_durations": null,
+  "source_video_sha256": "ef460dbdff618c217cc2e40a8bd4d3acc2189a8ff4be043da66afa4e7af95100",
+  "source_process_or_video_modified": false,
+  "new_motion_or_video_created": false,
+  "new_robot_or_fixture_selected": false,
+  "formal_physical_validity_verdict": null
+}

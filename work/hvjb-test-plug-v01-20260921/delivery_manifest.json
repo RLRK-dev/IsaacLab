@@ -1,0 +1,55 @@
+{
+  "observed_at": "2026-09-21T17:34:43.197596+09:00",
+  "destination": "/home/rlrk/Downloads/HVJB_試験プラグの接続解除と担当比較_v01_20260921",
+  "new_video_count": 0,
+  "files": [
+    {
+      "source": "work/hvjb-test-plug-v01-20260921/README.md",
+      "delivered_file": "README.md",
+      "sha256": "ffa028b45a9c52fdc17ba5eccc4a0f4c9453704c53cd8d22b86aba7c4657cf20",
+      "bytes": 5324
+    },
+    {
+      "source": "work/hvjb-test-plug-v01-20260921/qa_receipt.json",
+      "delivered_file": "qa_receipt.json",
+      "sha256": "7e3f4337ed59483ac9775f9eea3b936073b75982fabac3b2747ea1f94bb7a359",
+      "bytes": 1151
+    },
+    {
+      "source": "work/hvjb-test-plug-v01-20260921/data/sources.json",
+      "delivered_file": "data/sources.json",
+      "sha256": "09b9ac0bf9099b306b9fdb15e58eadc7bed20607c161df7b85345f5a1dd871d3",
+      "bytes": 2729
+    },
+    {
+      "source": "work/hvjb-test-plug-v01-20260921/output/test_plug_review.json",
+      "delivered_file": "test_plug_review.json",
+      "sha256": "fe48aa827fa59643dbcb8362f8ef2ac028183553f704740b52eea6f27350ee63",
+      "bytes": 11017
+    },
+    {
+      "source": "work/hvjb-test-plug-v01-20260921/output/document_audit.json",
+      "delivered_file": "document_audit.json",
+      "sha256": "8f32f19ea20d18585d1910530a93c77cea4f6bee1a5b81a337123b108062b8ea",
+      "bytes": 15851
+    },
+    {
+      "source": "work/hvjb-test-plug-v01-20260921/output/pdf/HVJB_試験プラグの接続解除と担当比較_v01_20260921.pdf",
+      "delivered_file": "pdf/HVJB_試験プラグの接続解除と担当比較_v01_20260921.pdf",
+      "sha256": "59152230b4f194d4b2c2f86fe53b7e5f6743fe341f21e6ecebceafc05cbebaf5",
+      "bytes": 11672
+    },
+    {
+      "source": "work/hvjb-test-plug-v01-20260921/output/pages/page-1.png",
+      "delivered_file": "pages/page-1.png",
+      "sha256": "de7958000a1f7b62a43c8665b600e7a35c0a12bac1eb0bf6e9ea94d9fc88e5f1",
+      "bytes": 264776
+    },
+    {
+      "source": "work/hvjb-test-plug-v01-20260921/output/pages/page-2.png",
+      "delivered_file": "pages/page-2.png",
+      "sha256": "37da8a7e9174189c4958e5268c678c1b1e6b2253c48df9726895b02c670e8d6f",
+      "bytes": 340316
+    }
+  ]
+}

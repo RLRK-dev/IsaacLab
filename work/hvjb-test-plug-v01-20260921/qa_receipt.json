@@ -1,0 +1,27 @@
+{
+  "observed_at": "2026-09-21T17:34:43.197596+09:00",
+  "basis": "Both final Poppler pages opened with view_image; pdfinfo, text extraction, hashes and preserved unknown fields checked.",
+  "pdf_sha256": "59152230b4f194d4b2c2f86fe53b7e5f6743fe341f21e6ecebceafc05cbebaf5",
+  "pages": [
+    {
+      "file": "output/pages/page-1.png",
+      "sha256": "de7958000a1f7b62a43c8665b600e7a35c0a12bac1eb0bf6e9ea94d9fc88e5f1"
+    },
+    {
+      "file": "output/pages/page-2.png",
+      "sha256": "37da8a7e9174189c4958e5268c678c1b1e6b2253c48df9726895b02c670e8d6f"
+    }
+  ],
+  "observations": [
+    "Both pages have legible labels and no visible clipped text or overlapping diagram annotations.",
+    "Official interface observations, unselected plug variants and allocation comparison are separately labelled.",
+    "CPA-specific sequence, main and LV mating types, test conditions and lid sequence remain unspecified."
+  ],
+  "source_pins_unchanged": 6,
+  "official_PDF_pins_checked": 4,
+  "previous_delivery_files_unchanged": {
+    "hvjb-line-video-v03-20260921": 15,
+    "hvjb-after-process-v01-20260921": 7
+  },
+  "formal_physical_validity_verdict": null
+}

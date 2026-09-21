@@ -1,0 +1,57 @@
+[
+  {
+    "id": "TE_APPLICATION",
+    "url": "https://www.te.com/commerce/DocumentDelivery/DDEController?Action=srchrtrv&DocFormat=pdf&DocLang=English&DocNm=114-13259&DocType=Specification+Or+Standard&PartCntxt=4-2103177-1",
+    "revision": "Rev G3, 2025-11-20 on cover; body footers say Rev G",
+    "observed_at": "2026-09-21T17:27:47.343569+09:00",
+    "local_custody_path": "/home/rlrk/IsaacLab/work/hvjb-inner-grasp-push-20260921/test_plug_sources/te_114_13259.pdf",
+    "sha256": "9d8ffa3e7a8c8b3467a9f4df052a1595fd60a51ea70fc693a7ea94994ccad396",
+    "bytes": 1970379,
+    "pages_examined": [
+      1,
+      9,
+      10
+    ],
+    "basis": "Official PDF text and rendered diagrams; retrieved via curl after observed product-page document links."
+  },
+  {
+    "id": "TE_JAPANESE",
+    "url": "https://www.te.com/commerce/DocumentDelivery/DDEController?Action=srchrtrv&DocFormat=pdf&DocLang=Japanese&DocNm=408-78078&DocType=Specification+Or+Standard&PartCntxt=4-2103177-1",
+    "revision": "Rev C2, 2025-03-12",
+    "observed_at": "2026-09-21T17:27:47.343569+09:00",
+    "local_custody_path": "/home/rlrk/IsaacLab/work/hvjb-inner-grasp-push-20260921/test_plug_sources/te_408_78078.pdf",
+    "sha256": "3c3b005c3bcd90892c4756f08cfa8f35e519025247859c14f1a86247376dc4cc",
+    "bytes": 598827,
+    "pages_examined": [
+      10,
+      11
+    ],
+    "basis": "Official PDF text and rendered diagrams; retrieved via curl after observed product-page document links."
+  },
+  {
+    "id": "TE_DRAWING",
+    "url": "https://www.te.com/commerce/DocumentDelivery/DDEController?Action=srchrtrv&DocFormat=pdf&DocLang=English&DocNm=2103177&DocType=Customer+Drawing&PartCntxt=4-2103177-1",
+    "revision": "Rev B3, 2017-03-16",
+    "observed_at": "2026-09-21T17:27:47.343569+09:00",
+    "local_custody_path": "/home/rlrk/IsaacLab/work/hvjb-inner-grasp-push-20260921/test_plug_sources/te_2103177.pdf",
+    "sha256": "adffe5cae8bd09786fc21f92abe8959ea926ccd2a34a55d8f7c795d27279db16",
+    "bytes": 656824,
+    "pages_examined": [
+      1
+    ],
+    "basis": "Official PDF text and rendered diagrams; retrieved via curl after observed product-page document links."
+  },
+  {
+    "id": "AMPERE_V11",
+    "url": "https://ampereev.com/wp-content/uploads/2022/05/HVJB-5-400-Datasheet-V1.1.pdf",
+    "local_custody_path": "/home/rlrk/IsaacLab-op040/eval_runs/ur15_jb_harness_revision_20260907/references/op040_real_products_20260912/ampere_hvjb_5_400_v1_1.pdf",
+    "sha256": "643648bcea77b4d7c37c65d073664f746f68689952da2d5ce932e3d10bd5a9e1",
+    "bytes": 553747,
+    "revision": "V1.1, 2022",
+    "pages_examined": [
+      3,
+      4
+    ],
+    "basis": "Existing pinned official PDF; pages 3 and 4 rendered and visually read in this session."
+  }
+]
