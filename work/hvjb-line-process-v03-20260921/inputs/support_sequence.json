@@ -1,0 +1,48 @@
+{
+  "adopted": [
+    "outside_case_unitization_procedure",
+    "five_arm_roles_S5_AB",
+    "OP010_XYZ_20_shared_slots",
+    "one_level_reciprocal_conveyor",
+    "fixed_pallet_height"
+  ],
+  "comparison_only": [
+    "H06_family_for_unit_transport",
+    "F-C_support_shape",
+    "A/B_assist_accompaniment"
+  ],
+  "unit_grasp_faces": null,
+  "unit_receiver_faces": null,
+  "finger_release_direction_and_distance": null,
+  "existing_process_assumption": "The panel-to-base joint carries the panel load during regrip and transport; unverified.",
+  "new_geometry_or_motion": false,
+  "physical_validity_verdict": null,
+  "source_job_ids": [
+    "D31",
+    "D40"
+  ],
+  "source_role_states": [
+    "Q5",
+    "Q6",
+    "Q7",
+    "Q8",
+    "Q9"
+  ],
+  "load_handoff_chain": [
+    "unit",
+    "case_internal_receiver",
+    "case",
+    "pallet_fixture"
+  ],
+  "source_sha256": {
+    "/home/rlrk/IsaacLab/work/hvjb-hand-plan-v01-20260920/draw_plan.py": "f20d23ee507221a8be1f5c774988246562d3adc86c49dd1c6bbe6c15a35b3388",
+    "/home/rlrk/IsaacLab/work/hvjb-hand-plan-v01-20260920/data/hand_plan.json": "ecbd1ae45e269e823ffa7f783744d210758065d874c6cd50cf7b00e55a1977e0",
+    "/home/rlrk/IsaacLab/work/hvjb-pallet-assembly-v02-20260921/output/assembly_access_observations.json": "d53e0d21e536185e5c9619681562dcf479b226ff81c71ffd1e0e0ecbe0b9d597",
+    "/home/rlrk/IsaacLab/work/hvjb-unit-access-followup-v01-20260921/output/unit_interface_evidence.json": "de6e81f144da4b0daa36130a891daa2a8f1aac70f6c9ef2b1efa2d0f2130fdaf",
+    "/home/rlrk/IsaacLab-op040/eval_runs/ur15_jb_harness_revision_20260907/analysis/hvjb_unitization_procedure_v01.md": "92baef66ea6a69576eed3a1cfdd5a11094d99542495afb3cd584d7f44a38b3e5",
+    "/home/rlrk/IsaacLab-op040/eval_runs/ur15_jb_harness_revision_20260907/analysis/hvjb_unitization_roles_v01.md": "d20748e12f048a72108d2570315ba97e4cf379693232a32c8a49dd7de6b773d3",
+    "/home/rlrk/IsaacLab-op040/eval_runs/ur15_jb_harness_revision_20260907/analysis/hvjb_receiving_support_v01.md": "16658097a27f6d04e6cbb6830f6bf6af656fa8df9d9f83bb8a370283e50a2130",
+    "/home/rlrk/IsaacLab-op040/eval_runs/ur15_jb_harness_revision_20260907/analysis/hvjb_receiving_interfaces_v01.md": "c9eb174c7280100eac2e138651e11188e0dcf1bcb026791272dc27278d2b0814"
+  },
+  "created_at": "2026-09-21T02:33:04.043228+09:00"
+}

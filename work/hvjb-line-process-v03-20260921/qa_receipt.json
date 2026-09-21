@@ -1,0 +1,40 @@
+{
+  "observed_at": "2026-09-21T13:40:45.644021+09:00",
+  "pdf_sha256": "ac96074676ddfed0875704157bbd8d4e5c23f2958d78bb77be9f342d9a702dd5",
+  "basis": "Three Poppler pages opened with view_image; after the CSV LF-only fix, regenerated pages match the inspected page bytes exactly. Pinned source JSON, CSV and scene coverage compared.",
+  "observations": [
+    "All final pages legible; no visible clipped text or overlap.",
+    "C location boxes use stage/location labels, not misleading sequential numbers.",
+    "Partly unknown main-fuse and LV/HVIL work stays explicit.",
+    "All twenty tasks and twelve operation IDs retained across sixteen explanatory scenes.",
+    "Single-level pallet return and twenty shared storage slots shown; hand variants remain distinct.",
+    "CSV record terminators normalized to LF; all three regenerated page hashes unchanged."
+  ],
+  "pages": [
+    {
+      "file": "output/pages/page-1.png",
+      "sha256": "8d3f935f84aad48a786fb9077962ff3498f60465513c29f5276dede8898f76fc",
+      "size_px": [
+        1654,
+        1138
+      ]
+    },
+    {
+      "file": "output/pages/page-2.png",
+      "sha256": "35b8e0e20f9f0bac7dc5a05571d73992d1260ea32c58b48274c7524c21cad0de",
+      "size_px": [
+        1654,
+        1138
+      ]
+    },
+    {
+      "file": "output/pages/page-3.png",
+      "sha256": "7e3f4d919ccb742f5023354eea35626f6d7e4c05f885282979328923c472f7f6",
+      "size_px": [
+        1654,
+        1138
+      ]
+    }
+  ],
+  "physical_acceptance_verdict": null
+}

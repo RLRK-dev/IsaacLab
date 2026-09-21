@@ -1,0 +1,1123 @@
+{
+  "observed_at": "2026-09-21T01:07:37.485162+09:00",
+  "scope": "Auxiliary geometry of unchanged pallet and existing contour H05 poses; no new robot motion",
+  "source_sha256": {
+    "/home/rlrk/IsaacLab-op040/eval_runs/ur15_jb_harness_revision_20260907/data/hvjb_photo_model_v03_p03.json.gz": "6687b12ec1b3db24babf75f8fef1b6f6bc123c288b713824b9763d9214553ba6",
+    "/home/rlrk/IsaacLab/work/hvjb-pallet-location-v01-20260920/build_pallet.py": "586d0aca707cf075302cf12f1c1588c62a84372f6fe32521f3976d11d428ae1c",
+    "/home/rlrk/IsaacLab/work/hvjb-pallet-location-v01-20260920/output/pallet_location_observations.json": "3e1c06676079bf863cda76baa515201eb474efb0c1effc4f9d69c22abf1c2d93",
+    "/home/rlrk/IsaacLab/work/hvjb-pallet-location-v01-20260920/output/handoff_sequence_observations.json": "8b78ecc507c109ae2f0b4490887071781d7382bd2105569a7ef64a325b58b6e3",
+    "/home/rlrk/IsaacLab/work/hvjb-contour-grasp-v01-20260920/build_contour.py": "8f403a9aa8447d0e6c05d25b5def53a49e3d0a1d2b7765ab644b670cd0ca245e",
+    "/home/rlrk/IsaacLab/work/hvjb-review-v02-20260920/render_hand_assets.py": "7846bb9e5a45ecda35ab4f8b5f6545c874f18a568f11ca0f1facc8d20173f3ea",
+    "/home/rlrk/IsaacLab/work/hvjb-h06-flange-concept-v01-20260920/build_h06.py": "6e867e2377f96d0eba31ce9e6da3c7268da3b3d4e8a2f082ea3645895d955b27",
+    "/home/rlrk/IsaacLab-op040/eval_runs/ur15_jb_harness_revision_20260907/data/header_review_v03/meshes.json.gz": "8c0bbe8c60f0a78f8dcba56d76ed825d13d3f88dd67e9fd8cdeb932e88fa4130",
+    "/home/rlrk/IsaacLab-op040/eval_runs/ur15_jb_harness_revision_20260907/data/header_review_v03/motion.npz": "b84b0f77a20cf2dd61c512514f4183c70bd3486e44b5c47dbcc8146b1be1b1e9",
+    "/home/rlrk/IsaacLab-op040/eval_runs/ur15_jb_harness_revision_20260907/audit/hvjb_header_release_v01.json": "02963ae778e91d3aaf45e2b603395672b09fc756388a6dcabfaf72b85790ba14",
+    "/home/rlrk/IsaacLab-op040/eval_runs/ur15_jb_harness_revision_20260907/data/hvjb_header_fastening_inputs_v01.json": "db01f30a9a6cdefd5593648db9c0680eada08ab729e774daee0376250601952c",
+    "/home/rlrk/IsaacLab-op040/eval_runs/ur15_jb_harness_revision_20260907/analysis/hvjb_unitization_procedure_v01.md": "92baef66ea6a69576eed3a1cfdd5a11094d99542495afb3cd584d7f44a38b3e5",
+    "/home/rlrk/IsaacLab-op040/eval_runs/ur15_jb_harness_revision_20260907/analysis/hvjb_receiving_interfaces_v01.md": "c9eb174c7280100eac2e138651e11188e0dcf1bcb026791272dc27278d2b0814",
+    "/home/rlrk/IsaacLab/work/hvjb-hand-plan-v01-20260920/data/hand_plan.json": "ecbd1ae45e269e823ffa7f783744d210758065d874c6cd50cf7b00e55a1977e0"
+  },
+  "source_files_unchanged": true,
+  "pallet_geometry_changed": false,
+  "fixture_meshes": 12,
+  "header_hand_to_pallet": [
+    {
+      "feature": "P16",
+      "samples": [
+        {
+          "saved_frame": 805,
+          "phase": "held",
+          "hand_mesh_count": 18,
+          "closest": {
+            "distance_m": 0.0435,
+            "finger_mesh": "left_left_contour_pad",
+            "target_mesh": "insert_plate"
+          },
+          "aabb_overlap_candidates": []
+        },
+        {
+          "saved_frame": 807,
+          "phase": "held",
+          "hand_mesh_count": 18,
+          "closest": {
+            "distance_m": 0.0435,
+            "finger_mesh": "left_left_contour_pad",
+            "target_mesh": "insert_plate"
+          },
+          "aabb_overlap_candidates": []
+        },
+        {
+          "saved_frame": 809,
+          "phase": "held",
+          "hand_mesh_count": 18,
+          "closest": {
+            "distance_m": 0.0435,
+            "finger_mesh": "left_left_contour_pad",
+            "target_mesh": "insert_plate"
+          },
+          "aabb_overlap_candidates": []
+        },
+        {
+          "saved_frame": 811,
+          "phase": "opening",
+          "hand_mesh_count": 18,
+          "closest": {
+            "distance_m": 0.04350000006188358,
+            "finger_mesh": "left_left_contour_backing",
+            "target_mesh": "insert_plate"
+          },
+          "aabb_overlap_candidates": []
+        },
+        {
+          "saved_frame": 813,
+          "phase": "opening",
+          "hand_mesh_count": 18,
+          "closest": {
+            "distance_m": 0.0434999999999959,
+            "finger_mesh": "left_right_contour_pad",
+            "target_mesh": "insert_plate"
+          },
+          "aabb_overlap_candidates": []
+        },
+        {
+          "saved_frame": 815,
+          "phase": "opening",
+          "hand_mesh_count": 18,
+          "closest": {
+            "distance_m": 0.04349999999999252,
+            "finger_mesh": "left_right_contour_pad",
+            "target_mesh": "insert_plate"
+          },
+          "aabb_overlap_candidates": []
+        },
+        {
+          "saved_frame": 817,
+          "phase": "opening",
+          "hand_mesh_count": 18,
+          "closest": {
+            "distance_m": 0.04349999999997284,
+            "finger_mesh": "left_left_contour_pad",
+            "target_mesh": "insert_plate"
+          },
+          "aabb_overlap_candidates": []
+        },
+        {
+          "saved_frame": 819,
+          "phase": "opening",
+          "hand_mesh_count": 18,
+          "closest": {
+            "distance_m": 0.04349999999996963,
+            "finger_mesh": "left_left_contour_backing",
+            "target_mesh": "insert_plate"
+          },
+          "aabb_overlap_candidates": []
+        },
+        {
+          "saved_frame": 821,
+          "phase": "opening",
+          "hand_mesh_count": 18,
+          "closest": {
+            "distance_m": 0.043499999999986355,
+            "finger_mesh": "left_left_contour_pad",
+            "target_mesh": "insert_plate"
+          },
+          "aabb_overlap_candidates": []
+        },
+        {
+          "saved_frame": 823,
+          "phase": "opening",
+          "hand_mesh_count": 18,
+          "closest": {
+            "distance_m": 0.043499999999996666,
+            "finger_mesh": "left_left_contour_pad",
+            "target_mesh": "insert_plate"
+          },
+          "aabb_overlap_candidates": []
+        },
+        {
+          "saved_frame": 825,
+          "phase": "upward_withdrawal",
+          "hand_mesh_count": 18,
+          "closest": {
+            "distance_m": 0.043504765282325886,
+            "finger_mesh": "left_right_contour_backing",
+            "target_mesh": "insert_plate"
+          },
+          "aabb_overlap_candidates": []
+        },
+        {
+          "saved_frame": 827,
+          "phase": "upward_withdrawal",
+          "hand_mesh_count": 18,
+          "closest": {
+            "distance_m": 0.0440445543022711,
+            "finger_mesh": "left_right_contour_pad",
+            "target_mesh": "insert_plate"
+          },
+          "aabb_overlap_candidates": []
+        },
+        {
+          "saved_frame": 829,
+          "phase": "upward_withdrawal",
+          "hand_mesh_count": 18,
+          "closest": {
+            "distance_m": 0.04639215164069832,
+            "finger_mesh": "left_right_contour_backing",
+            "target_mesh": "insert_plate"
+          },
+          "aabb_overlap_candidates": []
+        },
+        {
+          "saved_frame": 831,
+          "phase": "upward_withdrawal",
+          "hand_mesh_count": 18,
+          "closest": {
+            "distance_m": 0.05140432155950493,
+            "finger_mesh": "left_right_contour_backing",
+            "target_mesh": "insert_plate"
+          },
+          "aabb_overlap_candidates": []
+        },
+        {
+          "saved_frame": 833,
+          "phase": "upward_withdrawal",
+          "hand_mesh_count": 18,
+          "closest": {
+            "distance_m": 0.05795165581325354,
+            "finger_mesh": "left_left_contour_backing",
+            "target_mesh": "C1_toe_envelope"
+          },
+          "aabb_overlap_candidates": []
+        },
+        {
+          "saved_frame": 835,
+          "phase": "upward_withdrawal",
+          "hand_mesh_count": 18,
+          "closest": {
+            "distance_m": 0.06527594210525167,
+            "finger_mesh": "left_left_contour_backing",
+            "target_mesh": "C1_toe_envelope"
+          },
+          "aabb_overlap_candidates": []
+        },
+        {
+          "saved_frame": 837,
+          "phase": "upward_withdrawal",
+          "hand_mesh_count": 18,
+          "closest": {
+            "distance_m": 0.07562849023647175,
+            "finger_mesh": "left_left_contour_backing",
+            "target_mesh": "C1_toe_envelope"
+          },
+          "aabb_overlap_candidates": []
+        },
+        {
+          "saved_frame": 839,
+          "phase": "upward_withdrawal",
+          "hand_mesh_count": 18,
+          "closest": {
+            "distance_m": 0.088652779836878,
+            "finger_mesh": "left_left_contour_backing",
+            "target_mesh": "C1_toe_envelope"
+          },
+          "aabb_overlap_candidates": []
+        },
+        {
+          "saved_frame": 841,
+          "phase": "upward_withdrawal",
+          "hand_mesh_count": 18,
+          "closest": {
+            "distance_m": 0.10355997334452795,
+            "finger_mesh": "left_left_contour_backing",
+            "target_mesh": "C1_toe_envelope"
+          },
+          "aabb_overlap_candidates": []
+        },
+        {
+          "saved_frame": 843,
+          "phase": "upward_withdrawal",
+          "hand_mesh_count": 18,
+          "closest": {
+            "distance_m": 0.11934949433171453,
+            "finger_mesh": "left_left_contour_backing",
+            "target_mesh": "C1_toe_envelope"
+          },
+          "aabb_overlap_candidates": []
+        },
+        {
+          "saved_frame": 845,
+          "phase": "upward_withdrawal",
+          "hand_mesh_count": 18,
+          "closest": {
+            "distance_m": 0.134976843033701,
+            "finger_mesh": "left_left_contour_backing",
+            "target_mesh": "C1_toe_envelope"
+          },
+          "aabb_overlap_candidates": []
+        },
+        {
+          "saved_frame": 847,
+          "phase": "upward_withdrawal",
+          "hand_mesh_count": 18,
+          "closest": {
+            "distance_m": 0.1494637866951149,
+            "finger_mesh": "left_left_contour_backing",
+            "target_mesh": "C1_toe_envelope"
+          },
+          "aabb_overlap_candidates": []
+        },
+        {
+          "saved_frame": 849,
+          "phase": "upward_withdrawal",
+          "hand_mesh_count": 18,
+          "closest": {
+            "distance_m": 0.16197959932890515,
+            "finger_mesh": "left_left_contour_backing",
+            "target_mesh": "C1_toe_envelope"
+          },
+          "aabb_overlap_candidates": []
+        },
+        {
+          "saved_frame": 851,
+          "phase": "upward_withdrawal",
+          "hand_mesh_count": 18,
+          "closest": {
+            "distance_m": 0.17191241015444492,
+            "finger_mesh": "left_left_contour_backing",
+            "target_mesh": "C1_toe_envelope"
+          },
+          "aabb_overlap_candidates": []
+        },
+        {
+          "saved_frame": 853,
+          "phase": "upward_withdrawal",
+          "hand_mesh_count": 18,
+          "closest": {
+            "distance_m": 0.17893838136406784,
+            "finger_mesh": "left_left_contour_backing",
+            "target_mesh": "C1_toe_envelope"
+          },
+          "aabb_overlap_candidates": []
+        },
+        {
+          "saved_frame": 855,
+          "phase": "upward_withdrawal",
+          "hand_mesh_count": 18,
+          "closest": {
+            "distance_m": 0.18309075446923193,
+            "finger_mesh": "left_left_contour_backing",
+            "target_mesh": "C1_toe_envelope"
+          },
+          "aabb_overlap_candidates": []
+        },
+        {
+          "saved_frame": 857,
+          "phase": "upward_withdrawal",
+          "hand_mesh_count": 18,
+          "closest": {
+            "distance_m": 0.18482863506341204,
+            "finger_mesh": "left_left_contour_backing",
+            "target_mesh": "C1_toe_envelope"
+          },
+          "aabb_overlap_candidates": []
+        },
+        {
+          "saved_frame": 859,
+          "phase": "upward_withdrawal",
+          "hand_mesh_count": 18,
+          "closest": {
+            "distance_m": 0.18510491108080726,
+            "finger_mesh": "left_left_contour_backing",
+            "target_mesh": "C1_toe_envelope"
+          },
+          "aabb_overlap_candidates": []
+        }
+      ]
+    },
+    {
+      "feature": "P17",
+      "samples": [
+        {
+          "saved_frame": 1305,
+          "phase": "held",
+          "hand_mesh_count": 18,
+          "closest": {
+            "distance_m": 0.03218044787430764,
+            "finger_mesh": "left_right_contour_backing",
+            "target_mesh": "B2_diamond_envelope"
+          },
+          "aabb_overlap_candidates": []
+        },
+        {
+          "saved_frame": 1307,
+          "phase": "held",
+          "hand_mesh_count": 18,
+          "closest": {
+            "distance_m": 0.03218044787430764,
+            "finger_mesh": "left_right_contour_backing",
+            "target_mesh": "B2_diamond_envelope"
+          },
+          "aabb_overlap_candidates": []
+        },
+        {
+          "saved_frame": 1309,
+          "phase": "held",
+          "hand_mesh_count": 18,
+          "closest": {
+            "distance_m": 0.03218044787430764,
+            "finger_mesh": "left_right_contour_backing",
+            "target_mesh": "B2_diamond_envelope"
+          },
+          "aabb_overlap_candidates": []
+        },
+        {
+          "saved_frame": 1311,
+          "phase": "opening",
+          "hand_mesh_count": 18,
+          "closest": {
+            "distance_m": 0.03217893754310411,
+            "finger_mesh": "left_right_contour_backing",
+            "target_mesh": "B2_diamond_envelope"
+          },
+          "aabb_overlap_candidates": []
+        },
+        {
+          "saved_frame": 1313,
+          "phase": "opening",
+          "hand_mesh_count": 18,
+          "closest": {
+            "distance_m": 0.03202886945647114,
+            "finger_mesh": "left_right_contour_backing",
+            "target_mesh": "B2_diamond_envelope"
+          },
+          "aabb_overlap_candidates": []
+        },
+        {
+          "saved_frame": 1315,
+          "phase": "opening",
+          "hand_mesh_count": 18,
+          "closest": {
+            "distance_m": 0.03149545719808817,
+            "finger_mesh": "left_right_contour_backing",
+            "target_mesh": "B2_diamond_envelope"
+          },
+          "aabb_overlap_candidates": []
+        },
+        {
+          "saved_frame": 1317,
+          "phase": "opening",
+          "hand_mesh_count": 18,
+          "closest": {
+            "distance_m": 0.0306451960894062,
+            "finger_mesh": "left_right_contour_backing",
+            "target_mesh": "B2_diamond_envelope"
+          },
+          "aabb_overlap_candidates": []
+        },
+        {
+          "saved_frame": 1319,
+          "phase": "opening",
+          "hand_mesh_count": 18,
+          "closest": {
+            "distance_m": 0.029730788549781766,
+            "finger_mesh": "left_right_contour_backing",
+            "target_mesh": "B2_diamond_envelope"
+          },
+          "aabb_overlap_candidates": []
+        },
+        {
+          "saved_frame": 1321,
+          "phase": "opening",
+          "hand_mesh_count": 18,
+          "closest": {
+            "distance_m": 0.029005706455477495,
+            "finger_mesh": "left_right_contour_backing",
+            "target_mesh": "B2_diamond_envelope"
+          },
+          "aabb_overlap_candidates": []
+        },
+        {
+          "saved_frame": 1323,
+          "phase": "opening",
+          "hand_mesh_count": 18,
+          "closest": {
+            "distance_m": 0.028602440227591678,
+            "finger_mesh": "left_right_contour_backing",
+            "target_mesh": "B2_diamond_envelope"
+          },
+          "aabb_overlap_candidates": []
+        },
+        {
+          "saved_frame": 1325,
+          "phase": "opening",
+          "hand_mesh_count": 18,
+          "closest": {
+            "distance_m": 0.028495469766302094,
+            "finger_mesh": "left_right_contour_backing",
+            "target_mesh": "B2_diamond_envelope"
+          },
+          "aabb_overlap_candidates": []
+        },
+        {
+          "saved_frame": 1327,
+          "phase": "upward_withdrawal",
+          "hand_mesh_count": 18,
+          "closest": {
+            "distance_m": 0.028592552123609814,
+            "finger_mesh": "left_right_contour_backing",
+            "target_mesh": "B2_diamond_envelope"
+          },
+          "aabb_overlap_candidates": []
+        },
+        {
+          "saved_frame": 1329,
+          "phase": "upward_withdrawal",
+          "hand_mesh_count": 18,
+          "closest": {
+            "distance_m": 0.029643510704404217,
+            "finger_mesh": "left_right_contour_backing",
+            "target_mesh": "B2_diamond_envelope"
+          },
+          "aabb_overlap_candidates": []
+        },
+        {
+          "saved_frame": 1331,
+          "phase": "upward_withdrawal",
+          "hand_mesh_count": 18,
+          "closest": {
+            "distance_m": 0.03264452956652669,
+            "finger_mesh": "left_right_contour_backing",
+            "target_mesh": "B2_diamond_envelope"
+          },
+          "aabb_overlap_candidates": []
+        },
+        {
+          "saved_frame": 1333,
+          "phase": "upward_withdrawal",
+          "hand_mesh_count": 18,
+          "closest": {
+            "distance_m": 0.0383311957799637,
+            "finger_mesh": "left_right_contour_backing",
+            "target_mesh": "B2_diamond_envelope"
+          },
+          "aabb_overlap_candidates": []
+        },
+        {
+          "saved_frame": 1335,
+          "phase": "upward_withdrawal",
+          "hand_mesh_count": 18,
+          "closest": {
+            "distance_m": 0.047090804510088784,
+            "finger_mesh": "left_right_contour_backing",
+            "target_mesh": "B2_diamond_envelope"
+          },
+          "aabb_overlap_candidates": []
+        },
+        {
+          "saved_frame": 1337,
+          "phase": "upward_withdrawal",
+          "hand_mesh_count": 18,
+          "closest": {
+            "distance_m": 0.058856668499758284,
+            "finger_mesh": "left_right_contour_backing",
+            "target_mesh": "B2_diamond_envelope"
+          },
+          "aabb_overlap_candidates": []
+        },
+        {
+          "saved_frame": 1339,
+          "phase": "upward_withdrawal",
+          "hand_mesh_count": 18,
+          "closest": {
+            "distance_m": 0.07316034015241439,
+            "finger_mesh": "left_right_contour_backing",
+            "target_mesh": "B2_diamond_envelope"
+          },
+          "aabb_overlap_candidates": []
+        },
+        {
+          "saved_frame": 1341,
+          "phase": "upward_withdrawal",
+          "hand_mesh_count": 18,
+          "closest": {
+            "distance_m": 0.08926405102911313,
+            "finger_mesh": "left_right_contour_backing",
+            "target_mesh": "B2_diamond_envelope"
+          },
+          "aabb_overlap_candidates": []
+        },
+        {
+          "saved_frame": 1343,
+          "phase": "upward_withdrawal",
+          "hand_mesh_count": 18,
+          "closest": {
+            "distance_m": 0.10627847866326193,
+            "finger_mesh": "left_right_contour_backing",
+            "target_mesh": "B2_diamond_envelope"
+          },
+          "aabb_overlap_candidates": []
+        },
+        {
+          "saved_frame": 1345,
+          "phase": "upward_withdrawal",
+          "hand_mesh_count": 18,
+          "closest": {
+            "distance_m": 0.12325374701256876,
+            "finger_mesh": "left_right_contour_backing",
+            "target_mesh": "B2_diamond_envelope"
+          },
+          "aabb_overlap_candidates": []
+        },
+        {
+          "saved_frame": 1347,
+          "phase": "upward_withdrawal",
+          "hand_mesh_count": 18,
+          "closest": {
+            "distance_m": 0.13925739826190067,
+            "finger_mesh": "left_right_contour_backing",
+            "target_mesh": "B2_diamond_envelope"
+          },
+          "aabb_overlap_candidates": []
+        },
+        {
+          "saved_frame": 1349,
+          "phase": "upward_withdrawal",
+          "hand_mesh_count": 18,
+          "closest": {
+            "distance_m": 0.15344845033110804,
+            "finger_mesh": "left_right_contour_backing",
+            "target_mesh": "B2_diamond_envelope"
+          },
+          "aabb_overlap_candidates": []
+        },
+        {
+          "saved_frame": 1351,
+          "phase": "upward_withdrawal",
+          "hand_mesh_count": 18,
+          "closest": {
+            "distance_m": 0.1651509146536182,
+            "finger_mesh": "left_right_contour_backing",
+            "target_mesh": "B2_diamond_envelope"
+          },
+          "aabb_overlap_candidates": []
+        },
+        {
+          "saved_frame": 1353,
+          "phase": "upward_withdrawal",
+          "hand_mesh_count": 18,
+          "closest": {
+            "distance_m": 0.17392762611372983,
+            "finger_mesh": "left_right_contour_backing",
+            "target_mesh": "B2_diamond_envelope"
+          },
+          "aabb_overlap_candidates": []
+        },
+        {
+          "saved_frame": 1355,
+          "phase": "upward_withdrawal",
+          "hand_mesh_count": 18,
+          "closest": {
+            "distance_m": 0.17965442559341502,
+            "finger_mesh": "left_right_contour_backing",
+            "target_mesh": "B2_diamond_envelope"
+          },
+          "aabb_overlap_candidates": []
+        },
+        {
+          "saved_frame": 1357,
+          "phase": "upward_withdrawal",
+          "hand_mesh_count": 18,
+          "closest": {
+            "distance_m": 0.18259453171737813,
+            "finger_mesh": "left_right_contour_backing",
+            "target_mesh": "B2_diamond_envelope"
+          },
+          "aabb_overlap_candidates": []
+        },
+        {
+          "saved_frame": 1359,
+          "phase": "upward_withdrawal",
+          "hand_mesh_count": 18,
+          "closest": {
+            "distance_m": 0.18347290548649242,
+            "finger_mesh": "left_right_contour_backing",
+            "target_mesh": "B2_diamond_envelope"
+          },
+          "aabb_overlap_candidates": []
+        },
+        {
+          "saved_frame": 1361,
+          "phase": "upward_withdrawal",
+          "hand_mesh_count": 18,
+          "closest": {
+            "distance_m": 0.18351003046492081,
+            "finger_mesh": "left_right_contour_backing",
+            "target_mesh": "B2_diamond_envelope"
+          },
+          "aabb_overlap_candidates": []
+        }
+      ]
+    }
+  ],
+  "summary": {
+    "saved_pose_count": 57,
+    "aabb_overlap_candidates": 0,
+    "nearest_pose": {
+      "saved_frame": 1325,
+      "phase": "opening",
+      "closest": {
+        "distance_m": 0.028495469766302094,
+        "finger_mesh": "left_right_contour_backing",
+        "target_mesh": "B2_diamond_envelope"
+      }
+    },
+    "nominal_header_axes": 14,
+    "minimum_axis_half_line_distance_m": 0.04254008403846895
+  },
+  "sampling_limit": "Only held/opening/withdrawal saved poses; no intervals, approach, arm, tool or cable sweep",
+  "axis_method": "Euclidean half-line to mesh AABB; zero-radius line, not adopted tool diameter or usable clearance",
+  "nominal_header_axes_to_pallet": [
+    {
+      "feature": "P16",
+      "nominal_axis_origin_m": [
+        -0.10205,
+        -0.08,
+        0.03225
+      ],
+      "direction": [
+        0,
+        -1,
+        0
+      ],
+      "minimum_half_line_to_fixture_aabb_m": 0.04825,
+      "nearest_fixture_mesh": "insert_plate"
+    },
+    {
+      "feature": "P16",
+      "nominal_axis_origin_m": [
+        -0.10205,
+        -0.08,
+        0.05975
+      ],
+      "direction": [
+        0,
+        -1,
+        0
+      ],
+      "minimum_half_line_to_fixture_aabb_m": 0.07498469843908157,
+      "nearest_fixture_mesh": "C1_toe_envelope"
+    },
+    {
+      "feature": "P16",
+      "nominal_axis_origin_m": [
+        -0.06895,
+        -0.08,
+        0.03225
+      ],
+      "direction": [
+        0,
+        -1,
+        0
+      ],
+      "minimum_half_line_to_fixture_aabb_m": 0.04825,
+      "nearest_fixture_mesh": "insert_plate"
+    },
+    {
+      "feature": "P16",
+      "nominal_axis_origin_m": [
+        -0.06895,
+        -0.08,
+        0.05975
+      ],
+      "direction": [
+        0,
+        -1,
+        0
+      ],
+      "minimum_half_line_to_fixture_aabb_m": 0.07575,
+      "nearest_fixture_mesh": "insert_plate"
+    },
+    {
+      "feature": "P16",
+      "nominal_axis_origin_m": [
+        -0.03505,
+        -0.08,
+        0.03225
+      ],
+      "direction": [
+        0,
+        -1,
+        0
+      ],
+      "minimum_half_line_to_fixture_aabb_m": 0.04825,
+      "nearest_fixture_mesh": "insert_plate"
+    },
+    {
+      "feature": "P16",
+      "nominal_axis_origin_m": [
+        -0.03505,
+        -0.08,
+        0.05975
+      ],
+      "direction": [
+        0,
+        -1,
+        0
+      ],
+      "minimum_half_line_to_fixture_aabb_m": 0.07575,
+      "nearest_fixture_mesh": "insert_plate"
+    },
+    {
+      "feature": "P16",
+      "nominal_axis_origin_m": [
+        -0.0019500000000000003,
+        -0.08,
+        0.03225
+      ],
+      "direction": [
+        0,
+        -1,
+        0
+      ],
+      "minimum_half_line_to_fixture_aabb_m": 0.04825,
+      "nearest_fixture_mesh": "insert_plate"
+    },
+    {
+      "feature": "P16",
+      "nominal_axis_origin_m": [
+        -0.0019500000000000003,
+        -0.08,
+        0.05975
+      ],
+      "direction": [
+        0,
+        -1,
+        0
+      ],
+      "minimum_half_line_to_fixture_aabb_m": 0.07575,
+      "nearest_fixture_mesh": "insert_plate"
+    },
+    {
+      "feature": "P17",
+      "nominal_axis_origin_m": [
+        0.0389,
+        -0.08,
+        0.03225
+      ],
+      "direction": [
+        0,
+        -1,
+        0
+      ],
+      "minimum_half_line_to_fixture_aabb_m": 0.04825,
+      "nearest_fixture_mesh": "insert_plate"
+    },
+    {
+      "feature": "P17",
+      "nominal_axis_origin_m": [
+        0.0389,
+        -0.08,
+        0.05975
+      ],
+      "direction": [
+        0,
+        -1,
+        0
+      ],
+      "minimum_half_line_to_fixture_aabb_m": 0.07575,
+      "nearest_fixture_mesh": "insert_plate"
+    },
+    {
+      "feature": "P17",
+      "nominal_axis_origin_m": [
+        0.072,
+        -0.08,
+        0.03225
+      ],
+      "direction": [
+        0,
+        -1,
+        0
+      ],
+      "minimum_half_line_to_fixture_aabb_m": 0.04825,
+      "nearest_fixture_mesh": "insert_plate"
+    },
+    {
+      "feature": "P17",
+      "nominal_axis_origin_m": [
+        0.072,
+        -0.08,
+        0.05975
+      ],
+      "direction": [
+        0,
+        -1,
+        0
+      ],
+      "minimum_half_line_to_fixture_aabb_m": 0.07575,
+      "nearest_fixture_mesh": "insert_plate"
+    },
+    {
+      "feature": "P17",
+      "nominal_axis_origin_m": [
+        0.1051,
+        -0.08,
+        0.03225
+      ],
+      "direction": [
+        0,
+        -1,
+        0
+      ],
+      "minimum_half_line_to_fixture_aabb_m": 0.04254008403846895,
+      "nearest_fixture_mesh": "B2_diamond_envelope"
+    },
+    {
+      "feature": "P17",
+      "nominal_axis_origin_m": [
+        0.1051,
+        -0.08,
+        0.05975
+      ],
+      "direction": [
+        0,
+        -1,
+        0
+      ],
+      "minimum_half_line_to_fixture_aabb_m": 0.06384088619372386,
+      "nearest_fixture_mesh": "B2_diamond_envelope"
+    }
+  ],
+  "saved_static_connectors_to_pallet": {
+    "P14": {
+      "closest": {
+        "distance_m": 0.015969975243168757,
+        "finger_mesh": "P14__REF_P14_photo_metal_flange__002",
+        "target_mesh": "C1_toe_envelope"
+      },
+      "aabb_overlap_candidates": []
+    },
+    "P15": {
+      "closest": {
+        "distance_m": 0.015969975243168757,
+        "finger_mesh": "P15__REF_P15_photo_metal_flange__002",
+        "target_mesh": "C2_toe_envelope"
+      },
+      "aabb_overlap_candidates": []
+    },
+    "P16": {
+      "closest": {
+        "distance_m": 0.04169999918341637,
+        "finger_mesh": "P16__REF_P16_official_CAD__024",
+        "target_mesh": "insert_plate"
+      },
+      "aabb_overlap_candidates": []
+    },
+    "P17": {
+      "closest": {
+        "distance_m": 0.03205942565344397,
+        "finger_mesh": "P17__REF_P17_official_CAD__018",
+        "target_mesh": "B2_diamond_envelope"
+      },
+      "aabb_overlap_candidates": []
+    },
+    "P18": {
+      "closest": {
+        "distance_m": 0.04648184503596072,
+        "finger_mesh": "P18__REF_P18_mount__000",
+        "target_mesh": "B1_round_envelope"
+      },
+      "aabb_overlap_candidates": []
+    }
+  },
+  "top_access": {
+    "max_fixture_z_m": 0.008199999999999999,
+    "saved_case_rim_z_m": 0.08629,
+    "reference": "case bottom is Z=0; all receiver envelopes below the displayed rim",
+    "actual_internal_unit_insertion_checked": false,
+    "missing": [
+      "movable baseplate outline",
+      "grasp/release surfaces",
+      "free-end paths",
+      "case interior fit"
+    ]
+  },
+  "workflow": [
+    "H06 seats case; pallet retention confirmed before H06 release",
+    "Case stays on same-height pallet; H06 case hand withdraws",
+    "Insert outside-preassembled combined unit with separate unit gripper; C assistant guides free ends",
+    "Retain unit pose through internal fixing; target/fastener detail remains unknown",
+    "Draw inner housings and leads through openings before outer headers",
+    "Hold exterior header with H05 while inner-end holding and fastening roles are maintained",
+    "Release H05 only after header fixation and tool withdrawal are confirmed",
+    "Complete remaining connections, cover/test; H06 holds case before pallet retention opens"
+  ],
+  "load_paths": {
+    "vertical_insertion": "unit receiver / case / bottom supports; real interface and load rating unverified",
+    "side_assembly": "case / fixture location and retention / pallet / station restraint; ratings unknown",
+    "no_assumed_load_capacity_of_nominal_4p9_mm_pin": true,
+    "clamp_envelopes_not_force_simulation": true
+  },
+  "not_measured": [
+    "internal unit fit, gripper and tool paths",
+    "inner housing plus wires and fingers passing openings",
+    "header initial approach and hand-to-populated-product collision with new contour fingers",
+    "full fastening tool, bit, feed mechanism, mount and TCP",
+    "side main ports P14/P15 and rear P18 installation paths",
+    "closed cover and completed external harness handoff",
+    "roller/stopper/ST lock mechanisms, force, torque, stability and position repeatability"
+  ],
+  "physical_acceptance_verdict": null,
+  "pallet_lift": false,
+  "single_level_reciprocal_conveyor": true,
+  "shared_stock_slots": 20,
+  "robot_roles_unchanged": true,
+  "views": [
+    {
+      "file": "figures/P16_H05_pallet.png",
+      "sha256": "8d2e4f39f092f95ea798c951ac2c399628ea071a94cf3320c8410b0847223097",
+      "camera": [
+        [
+          0.870753567080177,
+          -0.1531720705666144,
+          0.4672542586381463,
+          0.48
+        ],
+        [
+          0.4917196614099823,
+          0.27124220829504636,
+          -0.8274294163383841,
+          -0.8762499999999698
+        ],
+        [
+          -0.0,
+          0.9502452216336384,
+          0.3115028390920975,
+          0.4257844992274153
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "span_m": 0.28809854962009196,
+      "meshes": 134,
+      "framing_locked_within_group": true
+    },
+    {
+      "file": "figures/P17_H05_pallet.png",
+      "sha256": "49b7913b3794b726782a3830f11ef989e00d99ee64a673d6def722ab25f3e112",
+      "camera": [
+        [
+          0.870753567080177,
+          -0.1531720705666144,
+          0.4672542586381463,
+          0.48
+        ],
+        [
+          0.4917196614099823,
+          0.27124220829504636,
+          -0.8274294163383841,
+          -0.8762499999999698
+        ],
+        [
+          -0.0,
+          0.9502452216336384,
+          0.3115028390920975,
+          0.4257844992274153
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "span_m": 0.28809854962009196,
+      "meshes": 134,
+      "framing_locked_within_group": true
+    },
+    {
+      "file": "figures/populated_reference.png",
+      "sha256": "d82e0a2ca1f760a7f502f1ecee13a2b2ce4669c07dca8e2113e111d8c35ef5ff",
+      "camera": [
+        [
+          0.9486832980505138,
+          -0.23464053310389682,
+          0.211999576001272,
+          0.2
+        ],
+        [
+          0.31622776601683794,
+          0.7039215993116904,
+          -0.635998728003816,
+          -0.6
+        ],
+        [
+          -0.0,
+          0.6704015231539908,
+          0.741998516004452,
+          0.7311450009346008
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "span_m": 0.26740219894383815,
+      "meshes": 477,
+      "framing_locked_within_group": true
+    },
+    {
+      "file": "figures/empty_case_receiver.png",
+      "sha256": "0fb4aa7bd560abf01d6eb46c4d66b0e437e41f05d042548ecf1983016549d4ac",
+      "camera": [
+        [
+          0.894427190999916,
+          -0.23381275989813985,
+          0.38122380999724403,
+          0.35
+        ],
+        [
+          0.447213595499958,
+          0.4676255197962797,
+          -0.7624476199944881,
+          -0.7
+        ],
+        [
+          -0.0,
+          0.8524423537953018,
+          0.5228212251390775,
+          0.5111450009346008
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "span_m": 0.27297917869317434,
+      "meshes": 68,
+      "framing_locked_within_group": true
+    }
+  ],
+  "exports": [
+    {
+      "path": "output/models/P16_H05_pallet.glb",
+      "sha256": "838dec6645001c48eb1ad3f615c7b8082e9fe7366f270f465cb0cd8f0c708ff4",
+      "mesh_count": 134,
+      "readback_max_bounds_error_m": 6.5565109175214076e-09
+    },
+    {
+      "path": "output/models/P17_H05_pallet.glb",
+      "sha256": "b1bf544d0d9b730b21b52b8d1aaf505ae23d612fced9de9f78d356f6952dd3ba",
+      "mesh_count": 134,
+      "readback_max_bounds_error_m": 6.5565109175214076e-09
+    }
+  ]
+}

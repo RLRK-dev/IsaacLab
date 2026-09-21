@@ -1,0 +1,60 @@
+{
+  "observed_at": "2026-09-21T13:40:45.644021+09:00",
+  "destination": "/home/rlrk/Downloads/HVJB_ライン全体と動画用工程表_v03_20260921",
+  "files": [
+    {
+      "source": "work/hvjb-line-process-v03-20260921/README.md",
+      "delivered_file": "README.md",
+      "sha256": "43167a4b69376e8adab0df23deac2c2dfcf68e0c2987ba0c8ad9be3f16c021b7",
+      "bytes": 5332
+    },
+    {
+      "source": "work/hvjb-line-process-v03-20260921/qa_receipt.json",
+      "delivered_file": "qa_receipt.json",
+      "sha256": "52bcaa9525b0b60903a874bb214e952c6242537e6a6b646aa0f51b2afd277a37",
+      "bytes": 1501
+    },
+    {
+      "source": "work/hvjb-line-process-v03-20260921/output/20仕事_場所と手先.csv",
+      "delivered_file": "20仕事_場所と手先.csv",
+      "sha256": "5ed7cca2f528091ca60ac7b3ad2519a2d1bb8d6d95ec67a8a3b99bf2c993d06f",
+      "bytes": 4121
+    },
+    {
+      "source": "work/hvjb-line-process-v03-20260921/output/document_audit.json",
+      "delivered_file": "document_audit.json",
+      "sha256": "0d691e8de60424be58877eeb3bdc78b75e7f132c447c1261dad4a78c9f65718d",
+      "bytes": 34406
+    },
+    {
+      "source": "work/hvjb-line-process-v03-20260921/output/line_process_plan.json",
+      "delivered_file": "line_process_plan.json",
+      "sha256": "e640a9cb3008e418a595465d94bfaf6994bbbdb12a6c7ecbe94edd73996c05d2",
+      "bytes": 314162
+    },
+    {
+      "source": "work/hvjb-line-process-v03-20260921/output/pages/page-1.png",
+      "delivered_file": "pages/page-1.png",
+      "sha256": "8d3f935f84aad48a786fb9077962ff3498f60465513c29f5276dede8898f76fc",
+      "bytes": 338807
+    },
+    {
+      "source": "work/hvjb-line-process-v03-20260921/output/pages/page-2.png",
+      "delivered_file": "pages/page-2.png",
+      "sha256": "35b8e0e20f9f0bac7dc5a05571d73992d1260ea32c58b48274c7524c21cad0de",
+      "bytes": 352080
+    },
+    {
+      "source": "work/hvjb-line-process-v03-20260921/output/pages/page-3.png",
+      "delivered_file": "pages/page-3.png",
+      "sha256": "7e3f4d919ccb742f5023354eea35626f6d7e4c05f885282979328923c472f7f6",
+      "bytes": 408325
+    },
+    {
+      "source": "work/hvjb-line-process-v03-20260921/output/pdf/HVJB_ライン全体と動画用工程表_v03_20260921.pdf",
+      "delivered_file": "pdf/HVJB_ライン全体と動画用工程表_v03_20260921.pdf",
+      "sha256": "ac96074676ddfed0875704157bbd8d4e5c23f2958d78bb77be9f342d9a702dd5",
+      "bytes": 22956
+    }
+  ]
+}
