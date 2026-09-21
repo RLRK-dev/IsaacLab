@@ -1,0 +1,24 @@
+{
+  "observed_at": "2026-09-21T16:51:49.498048+09:00",
+  "basis": "Both final Poppler pages opened with view_image; text fit, page count, hashes, original task links and preserved unresolved fields checked.",
+  "pdf_sha256": "a7135c0630f030a6de99718ca42c09a6764c81e9b7909641131e7ad987d38a9b",
+  "observations": [
+    "No visible overlap, clipped text or missing glyphs on either page.",
+    "Official tester-use evidence and proposed robot/support allocation are separately labelled.",
+    "D70/D71 relative order remains unspecified; four scene task mappings retained.",
+    "Main-fuse stage and physical LV/HVIL endpoints remain unresolved."
+  ],
+  "pages": [
+    {
+      "file": "output/pages/page-1.png",
+      "sha256": "62f8255e184b9a8de280c1da48fbd1cf6ca97282d69b29949bbf1d97fcf05094"
+    },
+    {
+      "file": "output/pages/page-2.png",
+      "sha256": "3b900ccb315c64ce81b18b43e9ffb9e675c7ce941d16882362b574c081134b47"
+    }
+  ],
+  "source_pins_unchanged": 4,
+  "previous_video_delivery_files_unchanged": 15,
+  "formal_physical_validity_verdict": null
+}

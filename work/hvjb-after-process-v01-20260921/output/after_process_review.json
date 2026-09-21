@@ -1,0 +1,144 @@
+{
+  "observed_at": "2026-09-21T16:47:36.113283+09:00",
+  "source_identity": {
+    "/tmp/hvjb-inner-grasp-push-20260921/work/hvjb-line-process-v03-20260921/output/line_process_plan.json": "e640a9cb3008e418a595465d94bfaf6994bbbdb12a6c7ecbe94edd73996c05d2",
+    "/tmp/hvjb-inner-grasp-push-20260921/work/hvjb-assembly-location-v01-20260921/output/assembly_location.json": "f72dcbf515f4d4db5bef63dbd973ddf4eebeb974213297e3296b1748f127a3f6",
+    "/tmp/hvjb-inner-grasp-push-20260921/work/hvjb-line-video-v03-20260921/delivery_manifest.json": "c64c192fab9722e2c56d083752cb2f94782f84f87dba1edf2ffb7df828cafddb",
+    "/tmp/hvjb-inner-grasp-push-20260921/work/hvjb-line-process-v03-20260921/build_review.py": "3e87ab9a2cec0164ab1d0eb666cd9d1a8d3dd3969743d7634b63ef3f6beb0680"
+  },
+  "sources": [
+    {
+      "id": "AMPERE_TESTER_2024",
+      "url": "https://ampereev.com/ampere-evs-hvjb-tester/",
+      "title": "Ampere EV's High Voltage Junction Box Tester",
+      "published_date": "2024-06-27",
+      "accessed_date": "2026-09-21",
+      "basis": "Official article body read with the web tool; no tester video observation.",
+      "paraphrase_ja": "専用治具でリレー・接触器・抵抗等の電力と動作順序を確認。梱包前に行う複数検証の一つ。",
+      "not_established_ja": "全検査項目、合否値、蓋との順序、自動接続機構、対象製造版との一致。"
+    },
+    {
+      "id": "AMPERE_PRODUCT",
+      "url": "https://help.ampereev.com/hc/en-us/articles/31292470232087-High-Voltage-Junction-Box-HVJB-5-400",
+      "accessed_date": "2026-09-21",
+      "basis": "Official product-page body read with the web tool.",
+      "paraphrase_ja": "ダイカストアルミのIP67筐体、各コネクタのHVIL等を説明。",
+      "not_established_ja": "IP67記載から量産時の気密試験方法・合否値を決めない。"
+    }
+  ],
+  "existing_video_sha256": "ef460dbdff618c217cc2e40a8bd4d3acc2189a8ff4be043da66afa4e7af95100",
+  "source_video_or_process_modified": false,
+  "public_evidence_added": [
+    "AMPERE_TESTER_2024"
+  ],
+  "unresolved_scene_review": [
+    {
+      "scene": "S02",
+      "tasks": [
+        "D01",
+        "D81"
+      ],
+      "known_ja": "端末準備と部品・ボルト供給の仕事は残る。",
+      "unknown_ja": "加工済み入荷の範囲、補給単位・容器・供給点。",
+      "next_ja": "加工する対象と購入する完成端末を分けて、供給状態を対応する。"
+    },
+    {
+      "scene": "S09",
+      "tasks": [
+        "D42"
+      ],
+      "known_ja": "既存観察に搭載後の筐体内工具作業がある。",
+      "unknown_ja": "工具先端の対象、ねじの位置・数・積層。",
+      "next_ja": "固定相手を特定する資料が必要。見えないねじを追加しない。"
+    },
+    {
+      "scene": "S13",
+      "tasks": [
+        "D61"
+      ],
+      "known_ja": "LV/HVILの機能と、残る端末の接続仕事を保持。",
+      "unknown_ja": "各物理線の両端、極・端子、HVILの実配線順。",
+      "next_ja": "接続群の数を線数・動作回数に変換せず、端末ごとに照合する。"
+    },
+    {
+      "scene": "S14",
+      "tasks": [
+        "D70",
+        "D71"
+      ],
+      "known_ja": "今回：専用の機能検査治具に関する公式説明を確認。",
+      "unknown_ja": "蓋・シールとの順序、対象口、条件・合否値・所要時間。",
+      "next_ja": "試験接続の保持・解除を、既存内側ハウジング保持と分ける。"
+    }
+  ],
+  "preserved_open_interfaces": {
+    "main_fuse_P22_and_cover_P08_assembly_stage": null,
+    "O42_hidden_tool_target": null,
+    "individual_LV_HVIL_endpoint_locations": null,
+    "individual_wire_to_fuse_or_bolt_assignment": null,
+    "joint_stacks_fastener_positions_torques": null,
+    "new_confirmed_physical_connections": []
+  },
+  "preserved_selected_arm_roles": {
+    "revision": "hvjb_robot_selection_v01",
+    "decision_date": "2026-09-16",
+    "status": "user_selected_role_allocation",
+    "user_directive_ja": "補助を2腕に分ける",
+    "selected_plan": "S5_AB",
+    "selected_plan_ja": "主担当3腕＋A/B共用補助1腕＋C専用補助1腕",
+    "source_comparison": "data/hvjb_robot_sharing_v01.json",
+    "source_sha256": "7888693db9b5cd0314b7acecb6c0fa09ab7c207e43c2391fbfbf642833b99b90",
+    "selected_primary_arm_count": 3,
+    "selected_assist_arm_count": 2,
+    "selected_assembly_arm_count": 5,
+    "assist_groups": [
+      [
+        "X-A",
+        "X-B"
+      ],
+      [
+        "X-C"
+      ]
+    ],
+    "role_to_unit": {
+      "R-A": "ARM_A",
+      "R-B": "ARM_B",
+      "R-C": "ARM_C",
+      "X-A": "ASSIST_1",
+      "X-B": "ASSIST_1",
+      "X-C": "ASSIST_2"
+    },
+    "count_scope_ja": "A/B/Cの組立役に割り当てる5腕。ロボットの機台数や、OP010 XYZ・締付工具・搬送等を含むライン全体の設備台数ではない。",
+    "operating_constraints_ja": [
+      "AとBが同時に補助を必要とする場合は、把持開始前に作業順序を調整する。保持途中で手を離して別セルへ移らない。",
+      "A/B共用補助は、前の支持引継ぎ・開放・退避と、必要な手先交換・移動を終えてから次の保持を開始する。",
+      "C専用補助は自由端の案内と支持引継ぎを担当し、筐体搭載終了だけで空き扱いにしない。",
+      "既存の20仕事・据置締付工具・支持・供給・検査・回収の役割を保持する。該当する大小同時締結の2主軸条件を継承する。"
+    ],
+    "next_work_ja": "5腕の分担を前提に、A/B共用補助の保持区間・受渡しと、C専用補助の継続担当を具体化する。その上で配置・到達・干渉を確認する。",
+    "selected_robot_models": null,
+    "selected_robot_base_count": null,
+    "selected_layout": null,
+    "minimum_robot_count": null,
+    "measured_cycle_time_s": null,
+    "physical_acceptance_verdict": null
+  },
+  "coverage": {
+    "tasks": 20,
+    "original_operations": 12,
+    "video_scenes": 16
+  },
+  "D71_role_breakdown_proposal": [
+    "workpiece_support",
+    "test_connection",
+    "equipment_test",
+    "disconnect_and_retreat"
+  ],
+  "D70_D71_relative_order": null,
+  "robot_release_condition_ja": "本体・配線・接続維持の必要な支持を設備へ引き継げる場合に限って兼務を比較。",
+  "test_conditions_acceptance_values_and_durations": null,
+  "specific_test_connector_or_end_effector": null,
+  "new_equipment_selection": false,
+  "new_motion_or_video_created": false,
+  "formal_physical_validity_verdict": null
+}

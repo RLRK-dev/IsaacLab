@@ -1,0 +1,49 @@
+{
+  "observed_at": "2026-09-21T16:51:49.498048+09:00",
+  "destination": "/home/rlrk/Downloads/HVJB_後工程の役割と未確定工程_v01_20260921",
+  "new_video_count": 0,
+  "files": [
+    {
+      "source": "work/hvjb-after-process-v01-20260921/README.md",
+      "delivered_file": "README.md",
+      "sha256": "265299be02d9f4ea670425c3218201496366c798c7a7d15dce69a68af9b516ac",
+      "bytes": 3861
+    },
+    {
+      "source": "work/hvjb-after-process-v01-20260921/qa_receipt.json",
+      "delivered_file": "qa_receipt.json",
+      "sha256": "a31c3b1930072a0079ed679b07218ec8b17cdeb8fda33c9dd38e81785f56f0c5",
+      "bytes": 1064
+    },
+    {
+      "source": "work/hvjb-after-process-v01-20260921/output/after_process_review.json",
+      "delivered_file": "after_process_review.json",
+      "sha256": "00e3d04437d71ace2ea0514f57903bb10db82e9aad090b40219b049333fd8043",
+      "bytes": 6691
+    },
+    {
+      "source": "work/hvjb-after-process-v01-20260921/output/document_audit.json",
+      "delivered_file": "document_audit.json",
+      "sha256": "f07f262318fb8ee6cb8803626feefec17f1a87b03ae9c7a8dd3e2ed754d0ccea",
+      "bytes": 12663
+    },
+    {
+      "source": "work/hvjb-after-process-v01-20260921/output/pdf/HVJB_後工程の役割と未確定工程_v01_20260921.pdf",
+      "delivered_file": "pdf/HVJB_後工程の役割と未確定工程_v01_20260921.pdf",
+      "sha256": "a7135c0630f030a6de99718ca42c09a6764c81e9b7909641131e7ad987d38a9b",
+      "bytes": 9017
+    },
+    {
+      "source": "work/hvjb-after-process-v01-20260921/output/pages/page-1.png",
+      "delivered_file": "pages/page-1.png",
+      "sha256": "62f8255e184b9a8de280c1da48fbd1cf6ca97282d69b29949bbf1d97fcf05094",
+      "bytes": 304291
+    },
+    {
+      "source": "work/hvjb-after-process-v01-20260921/output/pages/page-2.png",
+      "delivered_file": "pages/page-2.png",
+      "sha256": "3b900ccb315c64ce81b18b43e9ffb9e675c7ce941d16882362b574c081134b47",
+      "bytes": 282249
+    }
+  ]
+}
