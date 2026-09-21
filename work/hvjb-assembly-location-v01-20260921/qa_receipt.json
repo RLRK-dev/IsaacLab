@@ -1,0 +1,48 @@
+{
+  "observed_at": "2026-09-21T12:57:07.940038+09:00",
+  "basis": "Final three Poppler PNGs opened with view_image; source JSONs read and hashes checked.",
+  "observations": [
+    "All three pages have legible Japanese text, distinct rows and no visible clipping or overlap.",
+    "Page 1 separates preassembly, insertion, internal work and sidewall-interface work.",
+    "Page 2 explicitly leaves main fuse P22 / cover P08 assembly stage unresolved.",
+    "Page 3 includes all 20 task IDs and distinguishes O operation IDs from line OP IDs.",
+    "The diagram preserves single-level reciprocal pallets and the 20-slot shared stocker.",
+    "These are document-display observations, not physical or manufacturing acceptance."
+  ],
+  "pdf_sha256": "27817c3dfa37ae0c28db890f608ebac6586f9036d9743491b0c54e2ec4db8335",
+  "pages": [
+    {
+      "file": "output/pages/page-1.png",
+      "sha256": "1dcf35d442bb97ba704df7e2f94fdee160227da2b51887c8aa0ae1b8c09fadb5",
+      "size_px": [
+        1654,
+        1138
+      ]
+    },
+    {
+      "file": "output/pages/page-2.png",
+      "sha256": "0c52a858b6c9362db578273633a3059760185c46c13da8665b93b27a0f1588e3",
+      "size_px": [
+        1654,
+        1138
+      ]
+    },
+    {
+      "file": "output/pages/page-3.png",
+      "sha256": "f3e2c1cb19cce0aac3ba68833ab51dd033ac3ac8483b5b3e7d442841e89b96a7",
+      "size_px": [
+        1654,
+        1138
+      ]
+    }
+  ],
+  "coverage": {
+    "tasks": 20,
+    "operations": 12,
+    "photo_features": 92,
+    "functions": 17,
+    "circuit_groups": 13,
+    "lv_pins": 12
+  },
+  "physical_acceptance_verdict": null
+}

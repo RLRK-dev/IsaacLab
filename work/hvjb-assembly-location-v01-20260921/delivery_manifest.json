@@ -1,0 +1,60 @@
+{
+  "observed_at": "2026-09-21T12:57:07.940038+09:00",
+  "destination": "/home/rlrk/Downloads/HVJB_筐体内外の組立区分_v01_20260921",
+  "files": [
+    {
+      "source": "work/hvjb-assembly-location-v01-20260921/README.md",
+      "delivered_file": "README.md",
+      "sha256": "5e9f9e7514476155e4d68d3e8d7efe86b81c22cf8ded9b28fa01c1012833cf55",
+      "bytes": 6865
+    },
+    {
+      "source": "work/hvjb-assembly-location-v01-20260921/build_review.py",
+      "delivered_file": "build_review.py",
+      "sha256": "5204d3f7438a09dd3c1ddfb0e8fa7074b97140974c8c46c90d473a5bef7d5317",
+      "bytes": 23228
+    },
+    {
+      "source": "work/hvjb-assembly-location-v01-20260921/output/assembly_location.json",
+      "delivered_file": "assembly_location.json",
+      "sha256": "f72dcbf515f4d4db5bef63dbd973ddf4eebeb974213297e3296b1748f127a3f6",
+      "bytes": 216197
+    },
+    {
+      "source": "work/hvjb-assembly-location-v01-20260921/output/document_audit.json",
+      "delivered_file": "document_audit.json",
+      "sha256": "1470c821a7c15a5c68cfcfdaeb11ccef9d7c1116ef63fd843bc8aad11140aa47",
+      "bytes": 37952
+    },
+    {
+      "source": "work/hvjb-assembly-location-v01-20260921/output/pages/page-1.png",
+      "delivered_file": "pages/page-1.png",
+      "sha256": "1dcf35d442bb97ba704df7e2f94fdee160227da2b51887c8aa0ae1b8c09fadb5",
+      "bytes": 318482
+    },
+    {
+      "source": "work/hvjb-assembly-location-v01-20260921/output/pages/page-2.png",
+      "delivered_file": "pages/page-2.png",
+      "sha256": "0c52a858b6c9362db578273633a3059760185c46c13da8665b93b27a0f1588e3",
+      "bytes": 498946
+    },
+    {
+      "source": "work/hvjb-assembly-location-v01-20260921/output/pages/page-3.png",
+      "delivered_file": "pages/page-3.png",
+      "sha256": "f3e2c1cb19cce0aac3ba68833ab51dd033ac3ac8483b5b3e7d442841e89b96a7",
+      "bytes": 433583
+    },
+    {
+      "source": "work/hvjb-assembly-location-v01-20260921/output/pdf/HVJB_筐体内外の組立区分_v01_20260921.pdf",
+      "delivered_file": "pdf/HVJB_筐体内外の組立区分_v01_20260921.pdf",
+      "sha256": "27817c3dfa37ae0c28db890f608ebac6586f9036d9743491b0c54e2ec4db8335",
+      "bytes": 25283
+    },
+    {
+      "source": "work/hvjb-assembly-location-v01-20260921/qa_receipt.json",
+      "delivered_file": "qa_receipt.json",
+      "sha256": "f0b957631ef1e0cd7b9af8adb33b3451f649113400ff9e2b5e5291044d0cd678",
+      "bytes": 1599
+    }
+  ]
+}
