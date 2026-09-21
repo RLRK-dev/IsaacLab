@@ -1,0 +1,8 @@
+keywords=['HVJB', 'HVIL', '配線対応', '接続図']
+findings=6 blockers=0 lessons=0
+INFO: eval_runs/ur15_jb_harness_revision_20260907/WORK_LOG.md:782: keyword='HVJB': 根拠: 公式Web/PDF/内部写真の閲覧、ローカルNPZ/JSON、SHA照合コマンド。Ampere EV HVJB-5-400は同一製品の内部回路・外形・写真・主要構成数が公開され、現行ヘルプ添付V1.1と旧公式PDFは今回の取得でバイト一致。全製造BOM・内部寸法は今回の公開資料から未確定。Tesla整備接続図とProterra改修キット部品表はそれぞれ別範囲の参考資料。製品間で構成・型式を混同しない。既存4口からAmpereの主2口＋補機5口へ変更するなら上流側の製品定義も影響するため、採用・公開範囲での再現方針を照会した。新しい受入基準・物理妥当性判定なし。
+INFO: eval_runs/ur15_jb_harness_revision_20260907/WORK_LOG.md:782: keyword='接続図': 根拠: 公式Web/PDF/内部写真の閲覧、ローカルNPZ/JSON、SHA照合コマンド。Ampere EV HVJB-5-400は同一製品の内部回路・外形・写真・主要構成数が公開され、現行ヘルプ添付V1.1と旧公式PDFは今回の取得でバイト一致。全製造BOM・内部寸法は今回の公開資料から未確定。Tesla整備接続図とProterra改修キット部品表はそれぞれ別範囲の参考資料。製品間で構成・型式を混同しない。既存4口からAmpereの主2口＋補機5口へ変更するなら上流側の製品定義も影響するため、採用・公開範囲での再現方針を照会した。新しい受入基準・物理妥当性判定なし。
+INFO: eval_runs/ur15_jb_harness_revision_20260907/analysis/hvjb_ur15_feasibility_survey_20260915.md:34: keyword='HVJB': [ローカル写真照合v02](/home/rlrk/IsaacLab-op040/eval_runs/ur15_jb_harness_revision_20260907/analysis/hvjb_photo_correspondence_v02.md)
+INFO: eval_runs/ur15_jb_harness_revision_20260907/analysis/hvjb_ur15_feasibility_survey_20260915.md:35: keyword='HVIL': には、補機ヒューズが左3段／右2段、補機内側ハウジングが5個、各口に電力2＋HVIL2コンタクトとある。
+INFO: eval_runs/ur15_jb_harness_revision_20260907/analysis/hvjb_ur15_feasibility_survey_20260915.md:94: keyword='HVIL': | 自由端や途中の線が動く | 一体ハーネス、LV/HVIL、内部ユニットの挿入時 | 実際の支持と供給状態を決め、必要な独立保持を残す |
+INFO: eval_runs/ur15_jb_harness_revision_20260907/analysis/hvjb_ur15_feasibility_survey_20260915.md:135: keyword='HVIL': - C：補機・LV/HVIL。箱外で端子・内側ハウジング・ヒューズ板を準備できる範囲を比較する。

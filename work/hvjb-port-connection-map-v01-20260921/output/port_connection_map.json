@@ -1,0 +1,949 @@
+{
+  "recorded_at": "2026-09-21T10:24:58.731937+09:00",
+  "status": "public_label_pin_cross_reference_not_complete_physical_netlist",
+  "basis": [
+    "TE 2103245 Rev A1 wire-end view",
+    "TE 408-32095 Rev B Figure 1/5 and section 3.2.A",
+    "Existing photo correspondence v03",
+    "Ampere DSC02840 front labels and HVJB-5-400 V1.1 p.2-4"
+  ],
+  "sources": [
+    {
+      "path": "eval_runs/ur15_jb_harness_revision_20260907/references/hvjb_photo_inventory_20260915/te_2103245_drawing.pdf",
+      "sha256": "23aff5f20acb75d87a63bf3a1aa0c076a8ab43b30c83914cfc8e5c9b41788ffa"
+    },
+    {
+      "path": "eval_runs/ur15_jb_harness_revision_20260907/references/connector_correction_20260915/te_408_32095_instruction.pdf",
+      "sha256": "cd13cd856b679e2683f7672f079bd4c99ff87ac2e361d3da73700e12c12fa63d"
+    }
+  ],
+  "source_urls": [
+    "https://www.te.com/en/product-2103245-1.html",
+    "https://www.te.com/commerce/DocumentDelivery/DDEController?Action=srchrtrv&DocFormat=pdf&DocLang=English&DocNm=2103245&DocType=Customer+Drawing&PartCntxt=2103245-1",
+    "https://www.te.com/commerce/DocumentDelivery/DDEController?Action=srchrtrv&DocFormat=pdf&DocLang=English&DocNm=408-32095&DocType=Specification+Or+Standard&PartCntxt=2103245-1",
+    "https://help.ampereev.com/hc/en-us/articles/31292470232087-High-Voltage-Junction-Box-HVJB-5-400"
+  ],
+  "bays": [
+    {
+      "id": "I01",
+      "housing_part_number": "2103245-1",
+      "required_interfaces": [
+        {
+          "cavity_number_in_drawing": 1,
+          "role": "power",
+          "position_in_te_wire_end_view": "right",
+          "photo_wire_id": null,
+          "selected_contact_part_number": null,
+          "electrical_node": null,
+          "selected_wire_diameter_m": null,
+          "actual_exit_centerline_m": null,
+          "min_bend_radius_m": null,
+          "support_or_bundle_geometry": null,
+          "documented_electrical_role": "HV+",
+          "position_in_published_mating_view": "left",
+          "documented_role_basis": "AMPERE_V11 p.3",
+          "HVIL_in_or_out": null
+        },
+        {
+          "cavity_number_in_drawing": 2,
+          "role": "power",
+          "position_in_te_wire_end_view": "left",
+          "photo_wire_id": null,
+          "selected_contact_part_number": null,
+          "electrical_node": null,
+          "selected_wire_diameter_m": null,
+          "actual_exit_centerline_m": null,
+          "min_bend_radius_m": null,
+          "support_or_bundle_geometry": null,
+          "documented_electrical_role": "HV-",
+          "position_in_published_mating_view": "right",
+          "documented_role_basis": "AMPERE_V11 p.3",
+          "HVIL_in_or_out": null
+        },
+        {
+          "cavity_number_in_drawing": 3,
+          "role": "HVIL",
+          "position_in_te_wire_end_view": "central_upper",
+          "photo_wire_id": null,
+          "selected_contact_part_number": null,
+          "electrical_node": null,
+          "selected_wire_diameter_m": null,
+          "actual_exit_centerline_m": null,
+          "min_bend_radius_m": null,
+          "support_or_bundle_geometry": null,
+          "documented_electrical_role": "HVIL",
+          "position_in_published_mating_view": null,
+          "documented_role_basis": "TE 408-32095 Figure 1/5",
+          "HVIL_in_or_out": null
+        },
+        {
+          "cavity_number_in_drawing": 4,
+          "role": "HVIL",
+          "position_in_te_wire_end_view": "central_lower",
+          "photo_wire_id": null,
+          "selected_contact_part_number": null,
+          "electrical_node": null,
+          "selected_wire_diameter_m": null,
+          "actual_exit_centerline_m": null,
+          "min_bend_radius_m": null,
+          "support_or_bundle_geometry": null,
+          "documented_electrical_role": "HVIL",
+          "position_in_published_mating_view": null,
+          "documented_role_basis": "TE 408-32095 Figure 1/5",
+          "HVIL_in_or_out": null
+        }
+      ],
+      "position_left_to_right_in_public_front_view": 1,
+      "header_model_id": "P16",
+      "header_part_number": "2103340-1",
+      "header_local_bay_number": 1,
+      "key": "A",
+      "published_function": "Heater 1",
+      "logical_electrical_group_id": "EC04",
+      "published_branch_fuse_a": 20,
+      "function_mapping_basis": "Inference matching public front labels to the saved 3+2 bay order.",
+      "physical_fuse_photo_id": null,
+      "physical_joint_ids": null,
+      "visible_entry_segment_ids": [
+        "WI11",
+        "WI12"
+      ],
+      "visible_entry_is_pin_assignment": false,
+      "physical_wire_pair_complete": false
+    },
+    {
+      "id": "I02",
+      "housing_part_number": "2103245-4",
+      "required_interfaces": [
+        {
+          "cavity_number_in_drawing": 1,
+          "role": "power",
+          "position_in_te_wire_end_view": "right",
+          "photo_wire_id": null,
+          "selected_contact_part_number": null,
+          "electrical_node": null,
+          "selected_wire_diameter_m": null,
+          "actual_exit_centerline_m": null,
+          "min_bend_radius_m": null,
+          "support_or_bundle_geometry": null,
+          "documented_electrical_role": "HV+",
+          "position_in_published_mating_view": "left",
+          "documented_role_basis": "AMPERE_V11 p.3",
+          "HVIL_in_or_out": null
+        },
+        {
+          "cavity_number_in_drawing": 2,
+          "role": "power",
+          "position_in_te_wire_end_view": "left",
+          "photo_wire_id": null,
+          "selected_contact_part_number": null,
+          "electrical_node": null,
+          "selected_wire_diameter_m": null,
+          "actual_exit_centerline_m": null,
+          "min_bend_radius_m": null,
+          "support_or_bundle_geometry": null,
+          "documented_electrical_role": "HV-",
+          "position_in_published_mating_view": "right",
+          "documented_role_basis": "AMPERE_V11 p.3",
+          "HVIL_in_or_out": null
+        },
+        {
+          "cavity_number_in_drawing": 3,
+          "role": "HVIL",
+          "position_in_te_wire_end_view": "central_upper",
+          "photo_wire_id": null,
+          "selected_contact_part_number": null,
+          "electrical_node": null,
+          "selected_wire_diameter_m": null,
+          "actual_exit_centerline_m": null,
+          "min_bend_radius_m": null,
+          "support_or_bundle_geometry": null,
+          "documented_electrical_role": "HVIL",
+          "position_in_published_mating_view": null,
+          "documented_role_basis": "TE 408-32095 Figure 1/5",
+          "HVIL_in_or_out": null
+        },
+        {
+          "cavity_number_in_drawing": 4,
+          "role": "HVIL",
+          "position_in_te_wire_end_view": "central_lower",
+          "photo_wire_id": null,
+          "selected_contact_part_number": null,
+          "electrical_node": null,
+          "selected_wire_diameter_m": null,
+          "actual_exit_centerline_m": null,
+          "min_bend_radius_m": null,
+          "support_or_bundle_geometry": null,
+          "documented_electrical_role": "HVIL",
+          "position_in_published_mating_view": null,
+          "documented_role_basis": "TE 408-32095 Figure 1/5",
+          "HVIL_in_or_out": null
+        }
+      ],
+      "position_left_to_right_in_public_front_view": 2,
+      "header_model_id": "P16",
+      "header_part_number": "2103340-1",
+      "header_local_bay_number": 2,
+      "key": "D",
+      "published_function": "AC",
+      "logical_electrical_group_id": "EC05",
+      "published_branch_fuse_a": 30,
+      "function_mapping_basis": "Inference matching public front labels to the saved 3+2 bay order.",
+      "physical_fuse_photo_id": null,
+      "physical_joint_ids": null,
+      "visible_entry_segment_ids": [
+        "WI21",
+        "WI22"
+      ],
+      "visible_entry_is_pin_assignment": false,
+      "physical_wire_pair_complete": false
+    },
+    {
+      "id": "I03",
+      "housing_part_number": "2103245-5",
+      "required_interfaces": [
+        {
+          "cavity_number_in_drawing": 1,
+          "role": "power",
+          "position_in_te_wire_end_view": "right",
+          "photo_wire_id": null,
+          "selected_contact_part_number": null,
+          "electrical_node": null,
+          "selected_wire_diameter_m": null,
+          "actual_exit_centerline_m": null,
+          "min_bend_radius_m": null,
+          "support_or_bundle_geometry": null,
+          "documented_electrical_role": "HV+",
+          "position_in_published_mating_view": "left",
+          "documented_role_basis": "AMPERE_V11 p.3",
+          "HVIL_in_or_out": null
+        },
+        {
+          "cavity_number_in_drawing": 2,
+          "role": "power",
+          "position_in_te_wire_end_view": "left",
+          "photo_wire_id": null,
+          "selected_contact_part_number": null,
+          "electrical_node": null,
+          "selected_wire_diameter_m": null,
+          "actual_exit_centerline_m": null,
+          "min_bend_radius_m": null,
+          "support_or_bundle_geometry": null,
+          "documented_electrical_role": "HV-",
+          "position_in_published_mating_view": "right",
+          "documented_role_basis": "AMPERE_V11 p.3",
+          "HVIL_in_or_out": null
+        },
+        {
+          "cavity_number_in_drawing": 3,
+          "role": "HVIL",
+          "position_in_te_wire_end_view": "central_upper",
+          "photo_wire_id": null,
+          "selected_contact_part_number": null,
+          "electrical_node": null,
+          "selected_wire_diameter_m": null,
+          "actual_exit_centerline_m": null,
+          "min_bend_radius_m": null,
+          "support_or_bundle_geometry": null,
+          "documented_electrical_role": "HVIL",
+          "position_in_published_mating_view": null,
+          "documented_role_basis": "TE 408-32095 Figure 1/5",
+          "HVIL_in_or_out": null
+        },
+        {
+          "cavity_number_in_drawing": 4,
+          "role": "HVIL",
+          "position_in_te_wire_end_view": "central_lower",
+          "photo_wire_id": null,
+          "selected_contact_part_number": null,
+          "electrical_node": null,
+          "selected_wire_diameter_m": null,
+          "actual_exit_centerline_m": null,
+          "min_bend_radius_m": null,
+          "support_or_bundle_geometry": null,
+          "documented_electrical_role": "HVIL",
+          "position_in_published_mating_view": null,
+          "documented_role_basis": "TE 408-32095 Figure 1/5",
+          "HVIL_in_or_out": null
+        }
+      ],
+      "position_left_to_right_in_public_front_view": 3,
+      "header_model_id": "P16",
+      "header_part_number": "2103340-1",
+      "header_local_bay_number": 3,
+      "key": "E",
+      "published_function": "Heater 2",
+      "logical_electrical_group_id": "EC06",
+      "published_branch_fuse_a": 20,
+      "function_mapping_basis": "Inference matching public front labels to the saved 3+2 bay order.",
+      "physical_fuse_photo_id": null,
+      "physical_joint_ids": null,
+      "visible_entry_segment_ids": [],
+      "visible_entry_is_pin_assignment": false,
+      "physical_wire_pair_complete": false
+    },
+    {
+      "id": "I04",
+      "housing_part_number": "2103245-4",
+      "required_interfaces": [
+        {
+          "cavity_number_in_drawing": 1,
+          "role": "power",
+          "position_in_te_wire_end_view": "right",
+          "photo_wire_id": null,
+          "selected_contact_part_number": null,
+          "electrical_node": null,
+          "selected_wire_diameter_m": null,
+          "actual_exit_centerline_m": null,
+          "min_bend_radius_m": null,
+          "support_or_bundle_geometry": null,
+          "documented_electrical_role": "HV+",
+          "position_in_published_mating_view": "left",
+          "documented_role_basis": "AMPERE_V11 p.3",
+          "HVIL_in_or_out": null
+        },
+        {
+          "cavity_number_in_drawing": 2,
+          "role": "power",
+          "position_in_te_wire_end_view": "left",
+          "photo_wire_id": null,
+          "selected_contact_part_number": null,
+          "electrical_node": null,
+          "selected_wire_diameter_m": null,
+          "actual_exit_centerline_m": null,
+          "min_bend_radius_m": null,
+          "support_or_bundle_geometry": null,
+          "documented_electrical_role": "HV-",
+          "position_in_published_mating_view": "right",
+          "documented_role_basis": "AMPERE_V11 p.3",
+          "HVIL_in_or_out": null
+        },
+        {
+          "cavity_number_in_drawing": 3,
+          "role": "HVIL",
+          "position_in_te_wire_end_view": "central_upper",
+          "photo_wire_id": null,
+          "selected_contact_part_number": null,
+          "electrical_node": null,
+          "selected_wire_diameter_m": null,
+          "actual_exit_centerline_m": null,
+          "min_bend_radius_m": null,
+          "support_or_bundle_geometry": null,
+          "documented_electrical_role": "HVIL",
+          "position_in_published_mating_view": null,
+          "documented_role_basis": "TE 408-32095 Figure 1/5",
+          "HVIL_in_or_out": null
+        },
+        {
+          "cavity_number_in_drawing": 4,
+          "role": "HVIL",
+          "position_in_te_wire_end_view": "central_lower",
+          "photo_wire_id": null,
+          "selected_contact_part_number": null,
+          "electrical_node": null,
+          "selected_wire_diameter_m": null,
+          "actual_exit_centerline_m": null,
+          "min_bend_radius_m": null,
+          "support_or_bundle_geometry": null,
+          "documented_electrical_role": "HVIL",
+          "position_in_published_mating_view": null,
+          "documented_role_basis": "TE 408-32095 Figure 1/5",
+          "HVIL_in_or_out": null
+        }
+      ],
+      "position_left_to_right_in_public_front_view": 4,
+      "header_model_id": "P17",
+      "header_part_number": "2103346-2",
+      "header_local_bay_number": 1,
+      "key": "D",
+      "published_function": "Charger",
+      "logical_electrical_group_id": "EC07",
+      "published_branch_fuse_a": 30,
+      "function_mapping_basis": "Inference matching public front labels to the saved 3+2 bay order.",
+      "physical_fuse_photo_id": null,
+      "physical_joint_ids": null,
+      "visible_entry_segment_ids": [
+        "WI41",
+        "WI42"
+      ],
+      "visible_entry_is_pin_assignment": false,
+      "physical_wire_pair_complete": false
+    },
+    {
+      "id": "I05",
+      "housing_part_number": "2103245-6",
+      "required_interfaces": [
+        {
+          "cavity_number_in_drawing": 1,
+          "role": "power",
+          "position_in_te_wire_end_view": "right",
+          "photo_wire_id": null,
+          "selected_contact_part_number": null,
+          "electrical_node": null,
+          "selected_wire_diameter_m": null,
+          "actual_exit_centerline_m": null,
+          "min_bend_radius_m": null,
+          "support_or_bundle_geometry": null,
+          "documented_electrical_role": "HV+",
+          "position_in_published_mating_view": "left",
+          "documented_role_basis": "AMPERE_V11 p.3",
+          "HVIL_in_or_out": null
+        },
+        {
+          "cavity_number_in_drawing": 2,
+          "role": "power",
+          "position_in_te_wire_end_view": "left",
+          "photo_wire_id": null,
+          "selected_contact_part_number": null,
+          "electrical_node": null,
+          "selected_wire_diameter_m": null,
+          "actual_exit_centerline_m": null,
+          "min_bend_radius_m": null,
+          "support_or_bundle_geometry": null,
+          "documented_electrical_role": "HV-",
+          "position_in_published_mating_view": "right",
+          "documented_role_basis": "AMPERE_V11 p.3",
+          "HVIL_in_or_out": null
+        },
+        {
+          "cavity_number_in_drawing": 3,
+          "role": "HVIL",
+          "position_in_te_wire_end_view": "central_upper",
+          "photo_wire_id": null,
+          "selected_contact_part_number": null,
+          "electrical_node": null,
+          "selected_wire_diameter_m": null,
+          "actual_exit_centerline_m": null,
+          "min_bend_radius_m": null,
+          "support_or_bundle_geometry": null,
+          "documented_electrical_role": "HVIL",
+          "position_in_published_mating_view": null,
+          "documented_role_basis": "TE 408-32095 Figure 1/5",
+          "HVIL_in_or_out": null
+        },
+        {
+          "cavity_number_in_drawing": 4,
+          "role": "HVIL",
+          "position_in_te_wire_end_view": "central_lower",
+          "photo_wire_id": null,
+          "selected_contact_part_number": null,
+          "electrical_node": null,
+          "selected_wire_diameter_m": null,
+          "actual_exit_centerline_m": null,
+          "min_bend_radius_m": null,
+          "support_or_bundle_geometry": null,
+          "documented_electrical_role": "HVIL",
+          "position_in_published_mating_view": null,
+          "documented_role_basis": "TE 408-32095 Figure 1/5",
+          "HVIL_in_or_out": null
+        }
+      ],
+      "position_left_to_right_in_public_front_view": 5,
+      "header_model_id": "P17",
+      "header_part_number": "2103346-2",
+      "header_local_bay_number": 2,
+      "key": "F",
+      "published_function": "DC-DC",
+      "logical_electrical_group_id": "EC08",
+      "published_branch_fuse_a": 10,
+      "function_mapping_basis": "Inference matching public front labels to the saved 3+2 bay order.",
+      "physical_fuse_photo_id": null,
+      "physical_joint_ids": null,
+      "visible_entry_segment_ids": [
+        "WI51",
+        "WI52"
+      ],
+      "visible_entry_is_pin_assignment": false,
+      "physical_wire_pair_complete": false
+    }
+  ],
+  "required_contact_counts": {
+    "power": 10,
+    "HVIL": 10
+  },
+  "physical_wire_count": null,
+  "HVIL_loop_order": null,
+  "physical_verdict": null,
+  "builder_sha256": "7eb9604494db203dee80bb3de974c5860a40315ec0afea691abf4667f69b7616",
+  "previous_public_interface_sha256": "ff5615bb515985ef07cc3c1f43b2cd58884e87b4461bf262d06d65c2f706f3fe",
+  "photo_catalog_sha256": "6c5b7cb9bab859a33c8f5d5cd5429ce9f06fb0951b8a8fa4ae2a31ad99052ca0",
+  "confirmed_physical_wire_to_cavity_bindings": [],
+  "physical_aux_fuses": {
+    "observed_count": 5,
+    "photo_ids": [
+      "P05",
+      "P06",
+      "P19",
+      "P20",
+      "P21"
+    ],
+    "port_assignment_complete": false
+  },
+  "preserved_catalog": {
+    "photo_features": 92,
+    "required_functions": [
+      {
+        "id": "REQ_K",
+        "name_ja": "主接触器",
+        "quantity": 1,
+        "matched_photo_ids": [
+          "P02"
+        ],
+        "note_ja": "写真の本体へ対応。電力端子・制御・補助接点を別に管理。",
+        "basis": "Ampere V1.1 pages 1-2",
+        "not_located_is_not_omitted": true
+      },
+      {
+        "id": "REQ_PC_RLY",
+        "name_ja": "プリチャージリレー",
+        "quantity": 1,
+        "matched_photo_ids": [],
+        "note_ja": "写真のP03/P04のどちらかは未特定。",
+        "basis": "Ampere V1.1 pages 1-2",
+        "not_located_is_not_omitted": true
+      },
+      {
+        "id": "REQ_D_RLY",
+        "name_ja": "放電リレー",
+        "quantity": 1,
+        "matched_photo_ids": [],
+        "note_ja": "写真のP03/P04のどちらかは未特定。",
+        "basis": "Ampere V1.1 pages 1-2",
+        "not_located_is_not_omitted": true
+      },
+      {
+        "id": "REQ_PC_RES",
+        "name_ja": "プリチャージ抵抗",
+        "quantity": 1,
+        "matched_photo_ids": [],
+        "note_ja": "2025年組立品で2個の所在が見える。指定2022年写真への同一版・位置対応は未確定。",
+        "basis": "Ampere V1.1 pages 1-2",
+        "not_located_is_not_omitted": true
+      },
+      {
+        "id": "REQ_D_RES",
+        "name_ja": "放電抵抗",
+        "quantity": 1,
+        "matched_photo_ids": [],
+        "note_ja": "2025年組立品で2個の所在が見える。指定2022年写真への同一版・位置対応は未確定。",
+        "basis": "Ampere V1.1 pages 1-2",
+        "not_located_is_not_omitted": true
+      },
+      {
+        "id": "REQ_MAIN_FUSE",
+        "name_ja": "主400 Aヒューズ",
+        "quantity": 1,
+        "matched_photo_ids": [
+          "P22"
+        ],
+        "note_ja": "中央被覆内へ位置対応。単体例の胴・端子形状を表示推定。注文品番・固定積層は未確定。",
+        "basis": "Ampere V1.1 pages 1-2",
+        "not_located_is_not_omitted": true
+      },
+      {
+        "id": "REQ_AF1",
+        "name_ja": "補機Heater 1・20 Aヒューズ",
+        "quantity": 1,
+        "matched_photo_ids": [],
+        "note_ja": "物理5個はP05/P06/P19/P20/P21で確認。各補機口までの線を追い切れておらず、系統割当は未確定。",
+        "basis": "Ampere V1.1 pages 1-2",
+        "not_located_is_not_omitted": true,
+        "location_candidates": [
+          "P05",
+          "P06",
+          "P19",
+          "P20",
+          "P21"
+        ]
+      },
+      {
+        "id": "REQ_AF2",
+        "name_ja": "補機AC・30 Aヒューズ",
+        "quantity": 1,
+        "matched_photo_ids": [],
+        "note_ja": "物理5個はP05/P06/P19/P20/P21で確認。各補機口までの線を追い切れておらず、系統割当は未確定。",
+        "basis": "Ampere V1.1 pages 1-2",
+        "not_located_is_not_omitted": true,
+        "location_candidates": [
+          "P05",
+          "P06",
+          "P19",
+          "P20",
+          "P21"
+        ]
+      },
+      {
+        "id": "REQ_AF3",
+        "name_ja": "補機Heater 2・20 Aヒューズ",
+        "quantity": 1,
+        "matched_photo_ids": [],
+        "note_ja": "物理5個はP05/P06/P19/P20/P21で確認。各補機口までの線を追い切れておらず、系統割当は未確定。",
+        "basis": "Ampere V1.1 pages 1-2",
+        "not_located_is_not_omitted": true,
+        "location_candidates": [
+          "P05",
+          "P06",
+          "P19",
+          "P20",
+          "P21"
+        ]
+      },
+      {
+        "id": "REQ_AF4",
+        "name_ja": "補機Charger・30 Aヒューズ",
+        "quantity": 1,
+        "matched_photo_ids": [],
+        "note_ja": "物理5個はP05/P06/P19/P20/P21で確認。各補機口までの線を追い切れておらず、系統割当は未確定。",
+        "basis": "Ampere V1.1 pages 1-2",
+        "not_located_is_not_omitted": true,
+        "location_candidates": [
+          "P05",
+          "P06",
+          "P19",
+          "P20",
+          "P21"
+        ]
+      },
+      {
+        "id": "REQ_AF5",
+        "name_ja": "補機DC-DC・10 Aヒューズ",
+        "quantity": 1,
+        "matched_photo_ids": [],
+        "note_ja": "物理5個はP05/P06/P19/P20/P21で確認。各補機口までの線を追い切れておらず、系統割当は未確定。",
+        "basis": "Ampere V1.1 pages 1-2",
+        "not_located_is_not_omitted": true,
+        "location_candidates": [
+          "P05",
+          "P06",
+          "P19",
+          "P20",
+          "P21"
+        ]
+      },
+      {
+        "id": "REQ_MAIN_PORTS",
+        "name_ja": "主2極接続口",
+        "quantity": 2,
+        "matched_photo_ids": [
+          "P14",
+          "P15"
+        ],
+        "basis": "Ampere V1.1 pages 2-3"
+      },
+      {
+        "id": "REQ_AUX_PORTS",
+        "name_ja": "補機2極接続口",
+        "quantity": 5,
+        "matched_photo_ids": [
+          "P16",
+          "P17"
+        ],
+        "basis": "3+2 functional bays, not five outer housings"
+      },
+      {
+        "id": "REQ_INNER",
+        "name_ja": "補機内側ハウジング",
+        "quantity": 5,
+        "matched_photo_ids": [
+          "I01",
+          "I02",
+          "I03",
+          "I04",
+          "I05"
+        ],
+        "basis": "Photo and TE 408-32095 / 2103245"
+      },
+      {
+        "id": "REQ_LV",
+        "name_ja": "低圧12極接続口",
+        "quantity": 1,
+        "matched_photo_ids": [
+          "P18"
+        ],
+        "basis": "Ampere V1.1 pages 2,4"
+      },
+      {
+        "id": "REQ_AUX_POWER_CONTACTS",
+        "name_ja": "補機内側の電力コンタクト",
+        "quantity": 10,
+        "matched_photo_ids": [],
+        "note_ja": "各口2個。MCP 2.8、線径/嵌合先に対応する注文品番は未選定。",
+        "basis": "TE 408-32095 Rev B, Figures 1/3 and assembly sections",
+        "not_located_is_not_omitted": true
+      },
+      {
+        "id": "REQ_AUX_HVIL_CONTACTS",
+        "name_ja": "補機内側のHVILコンタクト",
+        "quantity": 10,
+        "matched_photo_ids": [],
+        "note_ja": "各口2個。MQS、回路順序・注文品番は未確定。",
+        "basis": "TE 408-32095 Rev B, Figures 1/3 and assembly sections",
+        "not_located_is_not_omitted": true
+      }
+    ],
+    "electrical_groups": [
+      {
+        "id": "EC01",
+        "name_ja": "主電力経路",
+        "basis_ja": "主2口・主ヒューズ・主接触器を含む回路。主端子AがHV+、BがHV−と記載。",
+        "datasheet_pages": [
+          1,
+          2,
+          3
+        ],
+        "lv_pins": [],
+        "physical_wires": null,
+        "fastener_count": null,
+        "photo_to_physical_net_complete": false
+      },
+      {
+        "id": "EC02",
+        "name_ja": "プリチャージの電力側",
+        "basis_ja": "プリチャージリレーと抵抗を含む枝路。制御線はEC10で区別。",
+        "datasheet_pages": [
+          1,
+          2
+        ],
+        "lv_pins": [],
+        "physical_wires": null,
+        "fastener_count": null,
+        "photo_to_physical_net_complete": false
+      },
+      {
+        "id": "EC03",
+        "name_ja": "放電の電力側",
+        "basis_ja": "放電リレーと抵抗を含む枝路。制御線はEC11で区別。",
+        "datasheet_pages": [
+          1,
+          2
+        ],
+        "lv_pins": [],
+        "physical_wires": null,
+        "fastener_count": null,
+        "photo_to_physical_net_complete": false
+      },
+      {
+        "id": "EC04",
+        "name_ja": "補機：Heater 1",
+        "basis_ja": "20Aヒューズを含む補機系統。補機端子は1がHV+、2がHV−。",
+        "datasheet_pages": [
+          1,
+          2,
+          3
+        ],
+        "lv_pins": [],
+        "physical_wires": null,
+        "fastener_count": null,
+        "photo_to_physical_net_complete": false
+      },
+      {
+        "id": "EC05",
+        "name_ja": "補機：AC",
+        "basis_ja": "30Aヒューズを含む補機系統。",
+        "datasheet_pages": [
+          1,
+          2,
+          3
+        ],
+        "lv_pins": [],
+        "physical_wires": null,
+        "fastener_count": null,
+        "photo_to_physical_net_complete": false
+      },
+      {
+        "id": "EC06",
+        "name_ja": "補機：Heater 2",
+        "basis_ja": "20Aヒューズを含む補機系統。",
+        "datasheet_pages": [
+          1,
+          2,
+          3
+        ],
+        "lv_pins": [],
+        "physical_wires": null,
+        "fastener_count": null,
+        "photo_to_physical_net_complete": false
+      },
+      {
+        "id": "EC07",
+        "name_ja": "補機：Charger",
+        "basis_ja": "30Aヒューズを含む補機系統。",
+        "datasheet_pages": [
+          1,
+          2,
+          3
+        ],
+        "lv_pins": [],
+        "physical_wires": null,
+        "fastener_count": null,
+        "photo_to_physical_net_complete": false
+      },
+      {
+        "id": "EC08",
+        "name_ja": "補機：DC-DC",
+        "basis_ja": "10Aヒューズを含む補機系統。",
+        "datasheet_pages": [
+          1,
+          2,
+          3
+        ],
+        "lv_pins": [],
+        "physical_wires": null,
+        "fastener_count": null,
+        "photo_to_physical_net_complete": false
+      },
+      {
+        "id": "EC09",
+        "name_ja": "低圧：接触器駆動",
+        "basis_ja": "LVの2番はContactor 12V、8番はContactor Ground。",
+        "datasheet_pages": [
+          4
+        ],
+        "lv_pins": [
+          2,
+          8
+        ],
+        "physical_wires": null,
+        "fastener_count": null,
+        "photo_to_physical_net_complete": false
+      },
+      {
+        "id": "EC10",
+        "name_ja": "低圧：プリチャージリレー駆動",
+        "basis_ja": "LVの3番はリレー12V、9番はリレーGround。",
+        "datasheet_pages": [
+          4
+        ],
+        "lv_pins": [
+          3,
+          9
+        ],
+        "physical_wires": null,
+        "fastener_count": null,
+        "photo_to_physical_net_complete": false
+      },
+      {
+        "id": "EC11",
+        "name_ja": "低圧：放電リレー駆動",
+        "basis_ja": "LVの4番はリレー12V、10番はリレーGround。",
+        "datasheet_pages": [
+          4
+        ],
+        "lv_pins": [
+          4,
+          10
+        ],
+        "physical_wires": null,
+        "fastener_count": null,
+        "photo_to_physical_net_complete": false
+      },
+      {
+        "id": "EC12",
+        "name_ja": "低圧：接触器フィードバック",
+        "basis_ja": "LVの1番と7番がContactor Feedbackと記載。",
+        "datasheet_pages": [
+          4
+        ],
+        "lv_pins": [
+          1,
+          7
+        ],
+        "physical_wires": null,
+        "fastener_count": null,
+        "photo_to_physical_net_complete": false
+      },
+      {
+        "id": "EC13",
+        "name_ja": "HVIL",
+        "basis_ja": "LVの5番がHVIL In、11番がHVIL Out。公式記事は各接続口へのHVIL内蔵を記載。",
+        "datasheet_pages": [
+          4
+        ],
+        "lv_pins": [
+          5,
+          11
+        ],
+        "physical_wires": null,
+        "fastener_count": null,
+        "photo_to_physical_net_complete": false
+      }
+    ],
+    "lv_pin_map": {
+      "1": "Contactor Feedback",
+      "2": "Contactor 12V",
+      "3": "Pre-Charge Relay 12V",
+      "4": "Discharge Relay 12V",
+      "5": "HVIL In",
+      "6": "Reserved",
+      "7": "Contactor Feedback",
+      "8": "Contactor Ground",
+      "9": "Pre-Charge Relay Ground",
+      "10": "Discharge Relay Ground",
+      "11": "HVIL Out",
+      "12": "Reserved"
+    }
+  },
+  "new_source_records": [
+    {
+      "id": "AMPERE_CLOSED_FRONT",
+      "url": "https://ampereev.com/wp-content/uploads/2022/05/DSC02840-1024x683.jpg",
+      "local_path": "references/ampere_closed_front.jpg",
+      "sha256": "29f551a4b836bbfddb8833cca0f4dcacf64e43e2bd4aab86910fdc28955bcd82",
+      "source_size_px": [
+        1024,
+        683
+      ],
+      "observation": "Five front labels above the 3+2 bays, read left to right.",
+      "observed_labels": [
+        "HEATER 1",
+        "AC",
+        "HEATER 2",
+        "CHARGER",
+        "DC/DC"
+      ],
+      "label_centers_px": [
+        [
+          355,
+          423
+        ],
+        [
+          431,
+          423
+        ],
+        [
+          507,
+          423
+        ],
+        [
+          650,
+          423
+        ],
+        [
+          725,
+          423
+        ]
+      ],
+      "pixels_modified": false
+    },
+    {
+      "id": "AMPERE_V11",
+      "url": "https://help.ampereev.com/hc/en-us/article_attachments/31292430639639",
+      "local_path": "/home/rlrk/IsaacLab-op040/eval_runs/ur15_jb_harness_revision_20260907/references/op040_real_products_20260912/ampere_hvjb_5_400_v1_1.pdf",
+      "sha256": "643648bcea77b4d7c37c65d073664f746f68689952da2d5ce932e3d10bd5a9e1",
+      "pages": {
+        "branch_fuses": 2,
+        "power_pin_polarity": 3,
+        "LV_pins": 4
+      },
+      "current_download_same_bytes_observed": true
+    }
+  ],
+  "limits": [
+    "Model bay correspondence combines public exterior positions, header keying and the saved catalog.",
+    "It is not proof of the exact individual unit, hidden wiring or an as-built manufacturing revision.",
+    "Branch fuse rating is a circuit requirement, not a rating assigned to an observed physical fuse body.",
+    "Cavity role does not identify the nearby visible WI segment, bolt, ring terminal or joint stack.",
+    "HVIL cavities 3/4 retain unknown loop order and in/out assignments.",
+    "No saved CAD, hand, motion, dimension, physical verdict or acceptance criterion is changed."
+  ]
+}

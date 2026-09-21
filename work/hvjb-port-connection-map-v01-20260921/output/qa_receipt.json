@@ -1,0 +1,22 @@
+{
+  "observed_at": "2026-09-21T10:30:12.957757+09:00",
+  "pdf_sha256": "4fbb9d8c7bb295a5afb3211cb104cbc7fc9b0c0ef060aae73f9372c86484ba48",
+  "pages": [
+    {
+      "page": 1,
+      "sha256": "771fab3006795427b130566f0dc08f208bcc0fca5764e41e2f70352593796c45",
+      "visual_observation": "Text, pictures and labels readable; no clipping or unintended overlap observed."
+    },
+    {
+      "page": 2,
+      "sha256": "31242fc92da515aa2856c950a58890b0f9d6b4d3af08804a5ade5cb604fcfecf",
+      "visual_observation": "Text, pictures and labels readable; no clipping or unintended overlap observed."
+    }
+  ],
+  "public_position_correspondences": 5,
+  "power_pin_roles": 10,
+  "required_HVIL_interfaces_retained": 10,
+  "physical_connections_completed": false,
+  "source_and_output_identity_verified": true,
+  "physical_verdict": null
+}

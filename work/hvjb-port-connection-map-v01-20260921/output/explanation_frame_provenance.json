@@ -1,0 +1,38 @@
+{
+  "observed_at": "2026-09-21T10:01:59.118184+09:00",
+  "source": {
+    "title": "EV Enlightenment - JUNCTION BOX EXPLAINED",
+    "url": "https://www.youtube.com/watch?v=oXPIRNZ4xcs",
+    "channel": "Ampere EV",
+    "upload_date": "20240201",
+    "file": "references/hvjb_assembly_followup_20260915/explanation_20240201.mp4",
+    "sha256": "72e7a53fcc88d56767464f82816d89946ba3234e881f87db762f69ef564dbc97",
+    "metadata_sha256": "0a41fc8066b9c790054240be23879a9770996e478eb0ab0bc3ab6de95b12d0cf",
+    "size_px": [
+      1920,
+      1080
+    ],
+    "duration_s": 183.399883,
+    "frame_rate": "60000/1001",
+    "automatic_caption_role": "navigation aid only; not a verified transcription or part-number source"
+  },
+  "source_unchanged": true,
+  "command": [
+    "ffmpeg",
+    "-v",
+    "error",
+    "-n",
+    "-ss",
+    "135",
+    "-i",
+    "/home/rlrk/IsaacLab-op040/eval_runs/ur15_jb_harness_revision_20260907/references/hvjb_assembly_followup_20260915/explanation_20240201.mp4",
+    "-frames:v",
+    "1",
+    "/tmp/hvjb-wire-correspondence-20260921/explanation_135s.png"
+  ],
+  "requested_seek_s": 135,
+  "timestamp_basis": "ffmpeg accurate seek; first display frame at/after requested time",
+  "frame_sha256": "a34f1a097a7fe096e65b48d4a04fd1132a6f18a418beb06efe91b4cfb19a707d",
+  "pixels_modified": false,
+  "physical_verdict": null
+}

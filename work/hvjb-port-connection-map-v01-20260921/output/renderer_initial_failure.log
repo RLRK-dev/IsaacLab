@@ -1,0 +1,14 @@
+Traceback (most recent call last):
+  File "/tmp/hvjb-inner-grasp-push-20260921/work/hvjb-port-connection-map-v01-20260921/build_review.py", line 351, in <module>
+    main()
+  File "/tmp/hvjb-inner-grasp-push-20260921/work/hvjb-port-connection-map-v01-20260921/build_review.py", line 326, in main
+    page_one(document, data)
+  File "/tmp/hvjb-inner-grasp-push-20260921/work/hvjb-port-connection-map-v01-20260921/build_review.py", line 214, in page_one
+    header(
+  File "/tmp/hvjb-inner-grasp-push-20260921/work/hvjb-port-connection-map-v01-20260921/build_review.py", line 202, in header
+    label(
+  File "/tmp/hvjb-inner-grasp-push-20260921/work/hvjb-port-connection-map-v01-20260921/build_review.py", line 167, in label
+    assert x >= 0 and x + width <= W - 30 and baseline > 20, line
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 公開資料と保存モデルの対応図。実物の全配線・製造BOM・組立成立を確定したものではありません。
+[INFO] Using Python: "/home/rlrk/IsaacLab/env_isaaclab/bin/python"

@@ -1,0 +1,84 @@
+{
+  "delivery_root": "/home/rlrk/Downloads/HVJB_補機5口_用途と配線対応_v01_20260921",
+  "files": [
+    {
+      "path": "README.md",
+      "repository_path": "README.md",
+      "sha256": "1e2b0df37eb5215c5093ee66d15290eff579d35a8e83644c12c372e509ab2b0a",
+      "bytes": 6545
+    },
+    {
+      "path": "references/ampere_closed_front.jpg",
+      "repository_path": "references/ampere_closed_front.jpg",
+      "sha256": "29f551a4b836bbfddb8833cca0f4dcacf64e43e2bd4aab86910fdc28955bcd82",
+      "bytes": 42135
+    },
+    {
+      "path": "references/ampere_product_photo_1.jpg",
+      "repository_path": "references/ampere_product_photo_1.jpg",
+      "sha256": "5724681b4bef4399f0799751a62577e48ef9b7fd3d6ed5b56d85fd95924937ad",
+      "bytes": 167012
+    },
+    {
+      "path": "document_audit.json",
+      "repository_path": "output/document_audit.json",
+      "sha256": "5bbdf49b08954e8b91b55dcab2d59bdb786def6ee7925c6d3972aca248ab67e4",
+      "bytes": 623
+    },
+    {
+      "path": "explanation_frame_provenance.json",
+      "repository_path": "output/explanation_frame_provenance.json",
+      "sha256": "ee7180feb311440f181ee3273e078ed291d3d9890eeeafb6af0a45569e791b5b",
+      "bytes": 1342
+    },
+    {
+      "path": "pages/page-1.png",
+      "repository_path": "output/pages/page-1.png",
+      "sha256": "771fab3006795427b130566f0dc08f208bcc0fca5764e41e2f70352593796c45",
+      "bytes": 367462
+    },
+    {
+      "path": "pages/page-2.png",
+      "repository_path": "output/pages/page-2.png",
+      "sha256": "31242fc92da515aa2856c950a58890b0f9d6b4d3af08804a5ade5cb604fcfecf",
+      "bytes": 238044
+    },
+    {
+      "path": "pdf/HVJB_5口の用途・極性と未追跡配線_v01_20260921.pdf",
+      "repository_path": "output/pdf/HVJB_5口の用途・極性と未追跡配線_v01_20260921.pdf",
+      "sha256": "4fbb9d8c7bb295a5afb3211cb104cbc7fc9b0c0ef060aae73f9372c86484ba48",
+      "bytes": 60922
+    },
+    {
+      "path": "port_connection_map.json",
+      "repository_path": "output/port_connection_map.json",
+      "sha256": "60049f203971fbb629d98daafcf738989787081dc4a9619d2fd366f9683d55a5",
+      "bytes": 32129
+    },
+    {
+      "path": "prior_art.log",
+      "repository_path": "output/prior_art.log",
+      "sha256": "347ce266cc2b4d3d958ab5c8e02e83d411229a7b22e9cf18e32fc55848779712",
+      "bytes": 2755
+    },
+    {
+      "path": "qa_receipt.json",
+      "repository_path": "output/qa_receipt.json",
+      "sha256": "6b2c3be82d8394599db2789759ffa27b925519879f47f1660a0b3eb2446b644c",
+      "bytes": 831
+    },
+    {
+      "path": "render_run.log",
+      "repository_path": "output/render_run.log",
+      "sha256": "3847ba40923c844c42528d5d2cf3545928df7501c1ed2b67c7c1fd5d9f579ea9",
+      "bytes": 314
+    },
+    {
+      "path": "renderer_initial_failure.log",
+      "repository_path": "output/renderer_initial_failure.log",
+      "sha256": "20bbae13e5d33a9a39c39e141167597150209684e8f8fc1b5a1c9ba730b4e68b",
+      "bytes": 1069
+    }
+  ],
+  "physical_verdict": null
+}

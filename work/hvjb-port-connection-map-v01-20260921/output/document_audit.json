@@ -1,0 +1,14 @@
+{
+  "observed_at": "2026-09-21T10:24:58.751871+09:00",
+  "script_sha256": "7eb9604494db203dee80bb3de974c5860a40315ec0afea691abf4667f69b7616",
+  "pdf_sha256": "4fbb9d8c7bb295a5afb3211cb104cbc7fc9b0c0ef060aae73f9372c86484ba48",
+  "pdf_path": "output/pdf/HVJB_5口の用途・極性と未追跡配線_v01_20260921.pdf",
+  "data_sha256": "60049f203971fbb629d98daafcf738989787081dc4a9619d2fd366f9683d55a5",
+  "pages": 2,
+  "text_records_inside_page": 88,
+  "source_files_unchanged": true,
+  "catalog_features_preserved": 92,
+  "contacts_retained": 20,
+  "physical_wire_connections_resolved": false,
+  "physical_verdict": null
+}
