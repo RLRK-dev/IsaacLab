@@ -1,0 +1,8 @@
+{
+  "observed_at": "2026-09-23T20:30:39.053164+09:00",
+  "producing_source_file": "producing_sources/build_page.py.txt",
+  "producing_source_sha256": "bdb8571dbf80bc29d8f796316d9ddf383eb63f132db403f08495caa13e98109f",
+  "formatted_source_sha256": "be14faf3cd64508b86fb31cbfb6a871a995e1186a2171692fac4d2ec8c465bd3",
+  "ast_equal": true,
+  "change": "ruff quote normalization after wrapping two HTML literals; no data, page or image change"
+}

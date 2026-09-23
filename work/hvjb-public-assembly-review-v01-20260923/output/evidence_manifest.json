@@ -1,0 +1,68 @@
+{
+  "observed_at": "2026-09-23T20:19:35.131886+09:00",
+  "files": [
+    {
+      "path": "README.md",
+      "sha256": "32bb417283388a5e525013a8cc7c31a80fc6aeb548588d16718c8fbc47905f54",
+      "bytes": 1608
+    },
+    {
+      "path": "evidence.css",
+      "sha256": "6e6923e89e2bc40412be206c1c311474f1cec19cfe034dc0424dd8a8fda23afd",
+      "bytes": 2624
+    },
+    {
+      "path": "evidence_data.json",
+      "sha256": "e8d23f8c9e750c2d1d53f38e0da710e6c5583146808c988f6972cc4d6fc268a3",
+      "bytes": 42327
+    },
+    {
+      "path": "figures/plate_024.png",
+      "sha256": "2eac2f1258cc6f20b547ed50160049dcdef1d34d9b12dfd75db2dc980df73611",
+      "bytes": 842333
+    },
+    {
+      "path": "figures/plate_050.png",
+      "sha256": "28e1ba4e73d1d1baa0d75b9b1a9c7e8416030caeeb512da296cec9dd20beaa00",
+      "bytes": 639508
+    },
+    {
+      "path": "figures/plate_146.png",
+      "sha256": "81aff6363f8f188e3a8b19d8ed8390a098d001f33bd00db4b1b831dd6f4bdfe3",
+      "bytes": 571839
+    },
+    {
+      "path": "figures/plate_154.png",
+      "sha256": "6fefff2e72c878f9ca4b43fbd6ce9c14792b2b7a53c236387cd19ffb3d4e257b",
+      "bytes": 645351
+    },
+    {
+      "path": "figures/plate_158.png",
+      "sha256": "e0e2908424d502c98baf4c63dda201d849b9353fb427b3fd47fac3e726363269",
+      "bytes": 735347
+    },
+    {
+      "path": "figures/plate_170.png",
+      "sha256": "8bb806e8354bee590233acb9390d2197abd1a9671f4299d256de6108653d485e",
+      "bytes": 711062
+    },
+    {
+      "path": "figures/six_scenes.png",
+      "sha256": "43206fa1e0de25eeba5cc6c2c9ff7ede7cf7b20df954a538c16661b0f4a68d3b",
+      "bytes": 1477826
+    },
+    {
+      "path": "index.html",
+      "sha256": "7c59a10f118e3ad14e6388696549158ce1b5b655713ce38485bf2e0d985c6363",
+      "bytes": 16055
+    }
+  ],
+  "source_file_hashes": {
+    "README.md": "32bb417283388a5e525013a8cc7c31a80fc6aeb548588d16718c8fbc47905f54",
+    "REVIEW_SCOPE.md": "7829421fe631a469431443de3bbf4c37cff364493cd0cb2881a84d70f22f55fc",
+    "build_page.py": "bdb8571dbf80bc29d8f796316d9ddf383eb63f132db403f08495caa13e98109f",
+    "evidence.css": "6e6923e89e2bc40412be206c1c311474f1cec19cfe034dc0424dd8a8fda23afd"
+  },
+  "entry_sha256": "c3a9c63244027457084973a72798238911da1443b474ae44be9e68228b2da430",
+  "source_video_sha256_after": "b7fcb74eaeec06e517d5726994a38a6b0812e05198d8b771b7ff771e68a0e1eb"
+}

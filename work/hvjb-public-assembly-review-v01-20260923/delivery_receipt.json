@@ -1,0 +1,73 @@
+{
+  "observed_at": "2026-09-23T20:34:03.871188+09:00",
+  "destination": "/home/rlrk/Downloads/HVJB_ライン全体レビュー_v05b_20260923",
+  "entry": "index_v05b_1.html",
+  "previous_files_preserved": 427,
+  "added_files": 15,
+  "files_total": 442,
+  "files": [
+    {
+      "path": "public_review/README.md",
+      "sha256": "32bb417283388a5e525013a8cc7c31a80fc6aeb548588d16718c8fbc47905f54"
+    },
+    {
+      "path": "public_review/evidence.css",
+      "sha256": "6e6923e89e2bc40412be206c1c311474f1cec19cfe034dc0424dd8a8fda23afd"
+    },
+    {
+      "path": "public_review/evidence_data.json",
+      "sha256": "e8d23f8c9e750c2d1d53f38e0da710e6c5583146808c988f6972cc4d6fc268a3"
+    },
+    {
+      "path": "public_review/evidence_manifest.json",
+      "sha256": "c56baa94429525e707ea5244f1612bd8107b1e1074193e3d9bb59bc5fcff2528"
+    },
+    {
+      "path": "public_review/figures/plate_024.png",
+      "sha256": "2eac2f1258cc6f20b547ed50160049dcdef1d34d9b12dfd75db2dc980df73611"
+    },
+    {
+      "path": "public_review/figures/plate_050.png",
+      "sha256": "28e1ba4e73d1d1baa0d75b9b1a9c7e8416030caeeb512da296cec9dd20beaa00"
+    },
+    {
+      "path": "public_review/figures/plate_146.png",
+      "sha256": "81aff6363f8f188e3a8b19d8ed8390a098d001f33bd00db4b1b831dd6f4bdfe3"
+    },
+    {
+      "path": "public_review/figures/plate_154.png",
+      "sha256": "6fefff2e72c878f9ca4b43fbd6ce9c14792b2b7a53c236387cd19ffb3d4e257b"
+    },
+    {
+      "path": "public_review/figures/plate_158.png",
+      "sha256": "e0e2908424d502c98baf4c63dda201d849b9353fb427b3fd47fac3e726363269"
+    },
+    {
+      "path": "public_review/figures/plate_170.png",
+      "sha256": "8bb806e8354bee590233acb9390d2197abd1a9671f4299d256de6108653d485e"
+    },
+    {
+      "path": "public_review/figures/six_scenes.png",
+      "sha256": "43206fa1e0de25eeba5cc6c2c9ff7ede7cf7b20df954a538c16661b0f4a68d3b"
+    },
+    {
+      "path": "public_review/index.html",
+      "sha256": "7c59a10f118e3ad14e6388696549158ce1b5b655713ce38485bf2e0d985c6363"
+    },
+    {
+      "path": "public_review/qa_receipt.json",
+      "sha256": "fb5f1368cebcea59abf11bb3117edd795d8e7e7a6e0ded57213617ac909b95a8"
+    },
+    {
+      "path": "public_review/visual_observations.json",
+      "sha256": "381f134367c0eecc13a9c6de74c534a9450493eb97e0b486546b0adbad3a1134"
+    },
+    {
+      "path": "index_v05b_1.html",
+      "sha256": "c3a9c63244027457084973a72798238911da1443b474ae44be9e68228b2da430"
+    }
+  ],
+  "mp4_count": 1,
+  "movie_sha256_unchanged": "65ed3f0f861370c55e3d09de5b6d5d17889aea14d1394de757aba7cf2360ba03",
+  "script_sha256": "77e58ff57c84dde35a6595b5e06448b354a4678797784d30372d6ac1968950be"
+}

@@ -1,0 +1,23 @@
+{
+  "recorded_at": "2026-09-23T20:32:28.269859+09:00",
+  "basis": "Direct view_image inspection of six pinned full source frames and the generated six-frame contact sheet in this session",
+  "source_frames_inspected": 6,
+  "frame_ids": [
+    "plate_024",
+    "plate_050",
+    "plate_146",
+    "plate_154",
+    "plate_158",
+    "plate_170"
+  ],
+  "contact_sheet_inspected": true,
+  "contact_sheet_sha256": "43206fa1e0de25eeba5cc6c2c9ff7ede7cf7b20df954a538c16661b0f4a68d3b",
+  "observations_ja": [
+    "6場面が時刻順に並び、タイトル・時刻・出典が読める。",
+    "元画像全画面の範囲を保持した縮小図である。",
+    "画像で隠れている下板輪郭、工具先端、線の反対端は推定で補わない。",
+    "HTMLブラウザでの表示確認は行っていない。ページ参照と縮小画像は別の静的読戻し記録による。"
+  ],
+  "html_browser_observed": false,
+  "formal_physical_validity_verdict": null
+}
