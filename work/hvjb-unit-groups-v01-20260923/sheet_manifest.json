@@ -1,0 +1,19 @@
+{
+  "sheet_count": 11,
+  "source_render_count": 44,
+  "font_sha256": "b76b0433203017ca80401b2ee0dd69350349871c4b19d504c34dbdd80541690a",
+  "script_sha256": "7e632655a4c46b57bb0f45480df461ea116548e7f6454e750e1910487d6e41bc",
+  "files": {
+    "sheets/FG_BASE.png": "b5309c41183cbdcd6763c767a27ea206fe4c7f7e18d5382b9eeb6ef9ee9c9508",
+    "sheets/FG_BUS.png": "defd3e7f9e1cb7a3e809867b9b84a80f1ae51cab8b79e2e160ff499dfd628158",
+    "sheets/FG_CASE.png": "c032d4eef6cfa81c60f472a46b99e59f609303a40a9033452f790aa26f7428f6",
+    "sheets/FG_FASTENER.png": "ec3d6971b2f0092d3a7bc265d20fc6c1816398a3afd72f57e46056137228713e",
+    "sheets/FG_FUSE.png": "d724ac828bc4c728a54f2a6f2ef3f056f61905cf03186081cc70d26868406e8b",
+    "sheets/FG_INNER.png": "dd74850b2021fdbaf688060f6b4a10a12dcc1a0cc9822570103d307fb6976ee3",
+    "sheets/FG_LUG.png": "15ba23a2c3ab245434a4e96eda4897a4c8fdce3ce0d767c11481bcfd4ab34a2b",
+    "sheets/FG_MAINFUSE.png": "8d1b53b568d6cc9ae9068747195d67864b6ccae6999c83ed3ff1d03a9ea5698d",
+    "sheets/FG_PORT.png": "07f8c6a5abb050c5a63500f9615fd6319a6cc73469eea58630a64e069d0394d1",
+    "sheets/FG_RELAY_END.png": "0b95eab79dcdb814102f8afb75e9eea3275e97304a67fb6154858d9647dd09ee",
+    "sheets/FG_WIRE.png": "6c93a381eae43e4e98227d1f538c0a4cebb2a2f3b6288783c1e3abafe90dd8da"
+  }
+}

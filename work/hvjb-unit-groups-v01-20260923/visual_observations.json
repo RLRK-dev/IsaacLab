@@ -1,0 +1,82 @@
+{
+  "recorded_at": "2026-09-23T17:02:38.083189+09:00",
+  "basis": "Images opened with view_image by the producing assistant; auxiliary layout observations only.",
+  "opened": [
+    {
+      "path": "contacts/contact-1.png",
+      "sha256": "c5ba74fe53ad21eeb134c14e4503f25652c4b7fd1838bbfa79c6fe82f34b21e9"
+    },
+    {
+      "path": "contacts/contact-2.png",
+      "sha256": "ea55922b6775d2c01f1eb4960096682b8ae434a38062a5e81ea6d8986af06abe"
+    },
+    {
+      "path": "contacts/contact-3.png",
+      "sha256": "03e35465dafe68758b054ce50f38e831d5807c67ef544d492a0e19e4e45118dc"
+    },
+    {
+      "path": "render_contacts/contact-1.png",
+      "sha256": "83b3100995aabe9cb2bf40819390d81b0a496efd57201a04236e2745ae55d7a4"
+    },
+    {
+      "path": "render_contacts/contact-10.png",
+      "sha256": "e3a164f2690ef698852ec1cf1b0e258141cd56be4c9dbc70696f3365f1fa9535"
+    },
+    {
+      "path": "render_contacts/contact-11.png",
+      "sha256": "9579814d519afa66b40d03ed33d1a4b89f99341d8449befd873d15c291e2e620"
+    },
+    {
+      "path": "render_contacts/contact-2.png",
+      "sha256": "31444d859a44fd2f3ad21824cac3812e2b7c6f3c4cd28879ed7a020c1c9c790d"
+    },
+    {
+      "path": "render_contacts/contact-3.png",
+      "sha256": "6efa1007bedaaea699fd350193df9ec21ad7e6982f0cfe0926516d0c59e78580"
+    },
+    {
+      "path": "render_contacts/contact-4.png",
+      "sha256": "f3244dfae693f67f087e62968aee3fd2bcfe8bbbbfce2d484086e9c0838915c8"
+    },
+    {
+      "path": "render_contacts/contact-5.png",
+      "sha256": "2add509995f2b9f9ec5815a123a512872431f773328906af74106c48b00f196c"
+    },
+    {
+      "path": "render_contacts/contact-6.png",
+      "sha256": "ccc7349184c55f7b42f050f250b67abce646836607feecd041e0008de12372d2"
+    },
+    {
+      "path": "render_contacts/contact-7.png",
+      "sha256": "e1a90ed850c043048727fd5c9104e259436f1f0d2e1577ce7fa89194a2883af1"
+    },
+    {
+      "path": "render_contacts/contact-8.png",
+      "sha256": "cdd890206410e4bb4feaeac679a3aff5e7367f520d3d96de19bf3388fe1d0d44"
+    },
+    {
+      "path": "render_contacts/contact-9.png",
+      "sha256": "20250c710fa2fc21a3f09f0baa83e7f361cb0d94aa54e18395d86f1dc2d99a4c"
+    },
+    {
+      "path": "sheets/FG_FUSE.png",
+      "sha256": "d724ac828bc4c728a54f2a6f2ef3f056f61905cf03186081cc70d26868406e8b"
+    }
+  ],
+  "coverage": {
+    "raw_render_images_in_contacts": 44,
+    "explanation_sheets_in_contacts": 11
+  },
+  "observations_ja": [
+    "11枚の説明図で、タイトル・未確定事項・ID列の切れと重なりは見られなかった。",
+    "Bの説明図を原寸でも開き、板と補機ヒューズ5個を表示として確認した。",
+    "低い位置からの全体図では筐体や周辺物が対象を隠す。群だけの図との比較に利用する。",
+    "配線だけの図は未見区間を持たない可視区間の集合であり、完成ハーネス形状には見立てない。",
+    "主ヒューズと被覆は工程未確定の群として分かれ、補機ヒューズ群へ混在していない。"
+  ],
+  "browser_ui_observed": false,
+  "grasp_contact_observed": false,
+  "new_physical_operation_selection": null,
+  "formal_physical_validity_verdict": null,
+  "script_sha256": "f65e1673669f629439a7eced92c78063630628fe391d3189f529ef21958b85fb"
+}

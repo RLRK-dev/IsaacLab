@@ -1,0 +1,277 @@
+{
+  "observed_at": "2026-09-23T17:04:01.418789+09:00",
+  "destination": "/home/rlrk/Downloads/HVJB_ライン全体レビュー_v05_20260923",
+  "entry": "index_v05_1.html",
+  "previous_files_preserved": 348,
+  "added_files": 66,
+  "files_total": 414,
+  "files": [
+    {
+      "path": "unit_review/README.md",
+      "sha256": "2383cce58ad5257e1121f274ae26e1d9830b493382ca3f1c8250f5cdfbb29232"
+    },
+    {
+      "path": "unit_review/all_groups.html",
+      "sha256": "f68a85eb0cdade0aeaaeae68ed74ae95a5af1634ace51d26f7f8ed2814de68fb"
+    },
+    {
+      "path": "unit_review/figures/FG_BASE_front_context.png",
+      "sha256": "19bd7e5ffe117d1024fecb86d6dfb4e53272cc0b596c0d24b315401817d958b8"
+    },
+    {
+      "path": "unit_review/figures/FG_BASE_front_isolated.png",
+      "sha256": "5b9405b5abe8b83e90914ff1504e4012d2babf66ee0b8096ec3e4ec5f07d8445"
+    },
+    {
+      "path": "unit_review/figures/FG_BASE_oblique_context.png",
+      "sha256": "56ad1b85ed8ce4422c6d49a8bb2c269e3995164ac41f0f96ecf5724a71a3d0a4"
+    },
+    {
+      "path": "unit_review/figures/FG_BASE_oblique_isolated.png",
+      "sha256": "14da4e8a63ee0ca4110beb9bb0f8a3e19c5db6982489695bf4a3c6b6d72edde5"
+    },
+    {
+      "path": "unit_review/figures/FG_BUS_front_context.png",
+      "sha256": "fcc11751ef87b22db6004842a75e8b15126fc5d06fd4623dfcfd91c46ca3cad0"
+    },
+    {
+      "path": "unit_review/figures/FG_BUS_front_isolated.png",
+      "sha256": "3dec2d101d6487139305df5556eeb1448966b8fbfe2e36e8d03813ff71748be5"
+    },
+    {
+      "path": "unit_review/figures/FG_BUS_oblique_context.png",
+      "sha256": "95dfdfd04cb312d9185c04d40140976701659d45996ce737ac1711ce00e7edc5"
+    },
+    {
+      "path": "unit_review/figures/FG_BUS_oblique_isolated.png",
+      "sha256": "499f61e6910e51fded6a2d0b9f10a08787eb52080de6b6f27b3fb726a540c72d"
+    },
+    {
+      "path": "unit_review/figures/FG_CASE_front_context.png",
+      "sha256": "c4d61f6c6cc841694e9d85454569eec024604c99f4a6115b810141ac326b3ab8"
+    },
+    {
+      "path": "unit_review/figures/FG_CASE_front_isolated.png",
+      "sha256": "dd569cef2baae6831e70689b975242d58b695e535ea7fbf3338def3bcf4a1c33"
+    },
+    {
+      "path": "unit_review/figures/FG_CASE_oblique_context.png",
+      "sha256": "c06f133c3a2ba56b820726dc2fb7d241245c948616da10b3947fdca9e6033110"
+    },
+    {
+      "path": "unit_review/figures/FG_CASE_oblique_isolated.png",
+      "sha256": "453ff29bc465ecf239666d6c4b266039a4832737bd9ed6183fe6b38d9129f0fd"
+    },
+    {
+      "path": "unit_review/figures/FG_FASTENER_front_context.png",
+      "sha256": "1af657f578925bdd9de96590228715f6740bcf5d5c70684c44dfebc17880cc26"
+    },
+    {
+      "path": "unit_review/figures/FG_FASTENER_front_isolated.png",
+      "sha256": "771d08229e8d667f74957c4aef8f22f6e4cb3a5c83f3604dc3a9fe36de4e467c"
+    },
+    {
+      "path": "unit_review/figures/FG_FASTENER_oblique_context.png",
+      "sha256": "f5d38be0cef0d3fc51d45100259bc118186eb480d98a56ad2a92a2f44b05e649"
+    },
+    {
+      "path": "unit_review/figures/FG_FASTENER_oblique_isolated.png",
+      "sha256": "7e11c28cab2ddabc99f7595dab8033a9a2969e0390be45a635d8c6e7bb4afee3"
+    },
+    {
+      "path": "unit_review/figures/FG_FUSE_front_context.png",
+      "sha256": "46f0dd49231fd20519a546a83f20ae11a57da27f4da192e2c4980429d6045ad3"
+    },
+    {
+      "path": "unit_review/figures/FG_FUSE_front_isolated.png",
+      "sha256": "8e2a40fd52dfa8a74228be2185190f806df4cd614ecc08ce796494f1408a48f4"
+    },
+    {
+      "path": "unit_review/figures/FG_FUSE_oblique_context.png",
+      "sha256": "fecdddbc6fa98c496a91c139a39d13ec66700db90c7476e399ca718b9e40426b"
+    },
+    {
+      "path": "unit_review/figures/FG_FUSE_oblique_isolated.png",
+      "sha256": "b3db14273592dbd9408131a4a01267f78203a3ef04ab16952f63dee9efa951fd"
+    },
+    {
+      "path": "unit_review/figures/FG_INNER_front_context.png",
+      "sha256": "e576a7b42d0e80bf2d67f1e3b070d43298ecfca29f983a9daf7bdd0e0e1152b2"
+    },
+    {
+      "path": "unit_review/figures/FG_INNER_front_isolated.png",
+      "sha256": "597df619af975602f7af524c875a37544412978be1d7edc6a87ef41c7b97c47c"
+    },
+    {
+      "path": "unit_review/figures/FG_INNER_oblique_context.png",
+      "sha256": "9d6dd9120d4f3727c56f99332ae24bb4fd8b843ede20f23241e5f915256701ca"
+    },
+    {
+      "path": "unit_review/figures/FG_INNER_oblique_isolated.png",
+      "sha256": "fcbef5e40147478d0502062582d378b349bcfbdb443125b07d106d2409ecdc09"
+    },
+    {
+      "path": "unit_review/figures/FG_LUG_front_context.png",
+      "sha256": "a8ff5e3f5353d540140ffcfd9819b932325652132c1c7fb04fd3200bbefe1813"
+    },
+    {
+      "path": "unit_review/figures/FG_LUG_front_isolated.png",
+      "sha256": "b1d1a2ff69203c68a178f2860d4bac5013fce738466e541c5b24e43878359bf5"
+    },
+    {
+      "path": "unit_review/figures/FG_LUG_oblique_context.png",
+      "sha256": "7f4cca23af55b39e89bf7854241c58c26b4e066408bf854853126f7a8e5f3a99"
+    },
+    {
+      "path": "unit_review/figures/FG_LUG_oblique_isolated.png",
+      "sha256": "8054cb4610a7bbc0729097009f09c6d0d090ea0be7e53cffd18f814003219734"
+    },
+    {
+      "path": "unit_review/figures/FG_MAINFUSE_front_context.png",
+      "sha256": "bb950d180296dae78f958a7baa38a7ef93116fc8cbbe61aca267578a525eeedb"
+    },
+    {
+      "path": "unit_review/figures/FG_MAINFUSE_front_isolated.png",
+      "sha256": "54b93b7441c03802c7331e0baf4b1df5e74621893aec36acb92f0da6d8647d00"
+    },
+    {
+      "path": "unit_review/figures/FG_MAINFUSE_oblique_context.png",
+      "sha256": "26d1a9c107d821d024cde1aedbde92a181069aa255e072147dd281faf74e38fb"
+    },
+    {
+      "path": "unit_review/figures/FG_MAINFUSE_oblique_isolated.png",
+      "sha256": "c78aaaf59f3d6cb0c4fa30aaeb4d258b226a55bfa5f2c19388334615f5b0e9be"
+    },
+    {
+      "path": "unit_review/figures/FG_PORT_front_context.png",
+      "sha256": "b78f45464225b4c02b72f0f7ebe97afd46a204d3d348f6addf117f1820b1c275"
+    },
+    {
+      "path": "unit_review/figures/FG_PORT_front_isolated.png",
+      "sha256": "bdfdc5a3e84977ba05f49b9384e913adf0041f835925c6097311cb44996bb0c6"
+    },
+    {
+      "path": "unit_review/figures/FG_PORT_oblique_context.png",
+      "sha256": "baa5ece5441127b97ab651624b524cc5fe94404fec70b868b5787bc8ac518b3a"
+    },
+    {
+      "path": "unit_review/figures/FG_PORT_oblique_isolated.png",
+      "sha256": "dafedf0db3fd8b7eca9030ac27fcd2bcccb603ad1d89b71ad4ed2610d80aec4b"
+    },
+    {
+      "path": "unit_review/figures/FG_RELAY_END_front_context.png",
+      "sha256": "df43d74524884cd30246f9ab4f7859a80a444999b7878730f9e9faee2f408321"
+    },
+    {
+      "path": "unit_review/figures/FG_RELAY_END_front_isolated.png",
+      "sha256": "02a2380bd78f56516508467ef5ef611decaa4f60ca9e4e61792d766b95a15e8d"
+    },
+    {
+      "path": "unit_review/figures/FG_RELAY_END_oblique_context.png",
+      "sha256": "dcf58dc74bf379567a2b192af848daa0b92599481d578e246d9039af6be38d68"
+    },
+    {
+      "path": "unit_review/figures/FG_RELAY_END_oblique_isolated.png",
+      "sha256": "2c0b0204a4177f14627f8c38fd6ec5f3b503b1ae89765cad3eea9331067863bb"
+    },
+    {
+      "path": "unit_review/figures/FG_WIRE_front_context.png",
+      "sha256": "7f070d6fb494f37cd370cfb94aec6b59e1238b7ee308074cef0cdc35253117e5"
+    },
+    {
+      "path": "unit_review/figures/FG_WIRE_front_isolated.png",
+      "sha256": "245508cd5c6e59bb5debecc02b5abb10c7d7aae5ac946a4ca6300cdeede52aa3"
+    },
+    {
+      "path": "unit_review/figures/FG_WIRE_oblique_context.png",
+      "sha256": "b25bfcc0a4da25c11e1d2a44c7a8ca0be43d25313b920d29af9da3d379f658b7"
+    },
+    {
+      "path": "unit_review/figures/FG_WIRE_oblique_isolated.png",
+      "sha256": "226dcd472bb0059aac5c41b7694d6e52b91c1296b2bd90942695af8909858308"
+    },
+    {
+      "path": "unit_review/group_manifest.json",
+      "sha256": "613df21e0223dff684017c14ec962de315a897c1c9b4f49673b0728d9d80f62e"
+    },
+    {
+      "path": "unit_review/group_review.json",
+      "sha256": "aa02e798871dfc2af5f05a12b408a1e10b0b43404e8dc6d18f0437395aaaa752"
+    },
+    {
+      "path": "unit_review/groups.css",
+      "sha256": "d18489d57359b4297cc06b4029ed5304968e68a22c59922e1f84bd47af742a5b"
+    },
+    {
+      "path": "unit_review/groups.js",
+      "sha256": "66adbf1b247640b3269a53ad5f7b1ea3b6f09e27b8b07d25df30982465f052d9"
+    },
+    {
+      "path": "unit_review/index.html",
+      "sha256": "fb4e13c110c9d17150fde6e5415490a93796352e19900dffad313b6b7196bb0f"
+    },
+    {
+      "path": "unit_review/render_receipt.json",
+      "sha256": "b68659ae3a75b3086d5dca1b9890b028d75ee2650bb05f86371f3f8a7389127f"
+    },
+    {
+      "path": "unit_review/sheets/FG_BASE.png",
+      "sha256": "b5309c41183cbdcd6763c767a27ea206fe4c7f7e18d5382b9eeb6ef9ee9c9508"
+    },
+    {
+      "path": "unit_review/sheets/FG_BUS.png",
+      "sha256": "defd3e7f9e1cb7a3e809867b9b84a80f1ae51cab8b79e2e160ff499dfd628158"
+    },
+    {
+      "path": "unit_review/sheets/FG_CASE.png",
+      "sha256": "c032d4eef6cfa81c60f472a46b99e59f609303a40a9033452f790aa26f7428f6"
+    },
+    {
+      "path": "unit_review/sheets/FG_FASTENER.png",
+      "sha256": "ec3d6971b2f0092d3a7bc265d20fc6c1816398a3afd72f57e46056137228713e"
+    },
+    {
+      "path": "unit_review/sheets/FG_FUSE.png",
+      "sha256": "d724ac828bc4c728a54f2a6f2ef3f056f61905cf03186081cc70d26868406e8b"
+    },
+    {
+      "path": "unit_review/sheets/FG_INNER.png",
+      "sha256": "dd74850b2021fdbaf688060f6b4a10a12dcc1a0cc9822570103d307fb6976ee3"
+    },
+    {
+      "path": "unit_review/sheets/FG_LUG.png",
+      "sha256": "15ba23a2c3ab245434a4e96eda4897a4c8fdce3ce0d767c11481bcfd4ab34a2b"
+    },
+    {
+      "path": "unit_review/sheets/FG_MAINFUSE.png",
+      "sha256": "8d1b53b568d6cc9ae9068747195d67864b6ccae6999c83ed3ff1d03a9ea5698d"
+    },
+    {
+      "path": "unit_review/sheets/FG_PORT.png",
+      "sha256": "07f8c6a5abb050c5a63500f9615fd6319a6cc73469eea58630a64e069d0394d1"
+    },
+    {
+      "path": "unit_review/sheets/FG_RELAY_END.png",
+      "sha256": "0b95eab79dcdb814102f8afb75e9eea3275e97304a67fb6154858d9647dd09ee"
+    },
+    {
+      "path": "unit_review/sheets/FG_WIRE.png",
+      "sha256": "6c93a381eae43e4e98227d1f538c0a4cebb2a2f3b6288783c1e3abafe90dd8da"
+    },
+    {
+      "path": "unit_review/qa_receipt.json",
+      "sha256": "0c8bc1c6f3df33c9e9c4a65dce761a94db536c83db4ea97cadd0fc3f589519c5"
+    },
+    {
+      "path": "unit_review/visual_observations.json",
+      "sha256": "68e0fd473de1e913dc601faa83e16199d9d10d7171e9cd294c6f0d9eeb007b73"
+    },
+    {
+      "path": "index_v05_1.html",
+      "sha256": "07ce8e6e37bb7ed9851b472d10c33de2be62918d49ab83fd03955b78b6e87cc2"
+    }
+  ],
+  "mp4_count": 1,
+  "movie_sha256_unchanged": "fd768cb5c86707d206fe499142e83b3324c7312d5a8867d31c7e98caa0a5ad5c",
+  "script_sha256": "d6e644e8098713b80670f1a75543d30625842f01770b4ce0ee9654f40f558d76"
+}
