@@ -1,0 +1,1719 @@
+{
+  "created_at": "2026-09-23T13:58:04.765581+09:00",
+  "scope": "Display of eight inherited independent cases, not a timed schedule or controller",
+  "default_scenario": "AC",
+  "scenarios": [
+    {
+      "id": "NONE",
+      "active_assists": [],
+      "active_roles": [
+        "R-A",
+        "R-B",
+        "R-C"
+      ],
+      "unit_assignments": {
+        "ARM_A": [
+          "R-A"
+        ],
+        "ARM_B": [
+          "R-B"
+        ],
+        "ARM_C": [
+          "R-C"
+        ]
+      },
+      "duplicate_assignments": {},
+      "title_ja": "どのセルも補助不要と仮定",
+      "diagram": "figures/NONE.svg",
+      "png": "figures/NONE.png",
+      "note_ja": "この役割表では同じ補助腕への重複なし。到達・移動・支持・工具を含む同時運転は未確認。"
+    },
+    {
+      "id": "A",
+      "active_assists": [
+        "X-A"
+      ],
+      "active_roles": [
+        "R-A",
+        "R-B",
+        "R-C",
+        "X-A"
+      ],
+      "unit_assignments": {
+        "ARM_A": [
+          "R-A"
+        ],
+        "ARM_B": [
+          "R-B"
+        ],
+        "ARM_C": [
+          "R-C"
+        ],
+        "ASSIST_1": [
+          "X-A"
+        ]
+      },
+      "duplicate_assignments": {},
+      "title_ja": "Aだけに補助が必要",
+      "diagram": "figures/A.svg",
+      "png": "figures/A.png",
+      "note_ja": "この役割表では同じ補助腕への重複なし。到達・移動・支持・工具を含む同時運転は未確認。"
+    },
+    {
+      "id": "B",
+      "active_assists": [
+        "X-B"
+      ],
+      "active_roles": [
+        "R-A",
+        "R-B",
+        "R-C",
+        "X-B"
+      ],
+      "unit_assignments": {
+        "ARM_A": [
+          "R-A"
+        ],
+        "ARM_B": [
+          "R-B"
+        ],
+        "ARM_C": [
+          "R-C"
+        ],
+        "ASSIST_1": [
+          "X-B"
+        ]
+      },
+      "duplicate_assignments": {},
+      "title_ja": "Bだけに補助が必要",
+      "diagram": "figures/B.svg",
+      "png": "figures/B.png",
+      "note_ja": "この役割表では同じ補助腕への重複なし。到達・移動・支持・工具を含む同時運転は未確認。"
+    },
+    {
+      "id": "C",
+      "active_assists": [
+        "X-C"
+      ],
+      "active_roles": [
+        "R-A",
+        "R-B",
+        "R-C",
+        "X-C"
+      ],
+      "unit_assignments": {
+        "ARM_A": [
+          "R-A"
+        ],
+        "ARM_B": [
+          "R-B"
+        ],
+        "ARM_C": [
+          "R-C"
+        ],
+        "ASSIST_2": [
+          "X-C"
+        ]
+      },
+      "duplicate_assignments": {},
+      "title_ja": "Cだけに補助が必要",
+      "diagram": "figures/C.svg",
+      "png": "figures/C.png",
+      "note_ja": "この役割表では同じ補助腕への重複なし。到達・移動・支持・工具を含む同時運転は未確認。"
+    },
+    {
+      "id": "AB",
+      "active_assists": [
+        "X-A",
+        "X-B"
+      ],
+      "active_roles": [
+        "R-A",
+        "R-B",
+        "R-C",
+        "X-A",
+        "X-B"
+      ],
+      "unit_assignments": {
+        "ARM_A": [
+          "R-A"
+        ],
+        "ARM_B": [
+          "R-B"
+        ],
+        "ARM_C": [
+          "R-C"
+        ],
+        "ASSIST_1": [
+          "X-A",
+          "X-B"
+        ]
+      },
+      "duplicate_assignments": {
+        "ASSIST_1": [
+          "X-A",
+          "X-B"
+        ]
+      },
+      "title_ja": "AとBに補助が必要",
+      "diagram": "figures/AB.svg",
+      "png": "figures/AB.png",
+      "note_ja": "A/B共用補助への同時要求。どちらかの保持開始を、前の支持引継ぎと退避の後へ置く。"
+    },
+    {
+      "id": "AC",
+      "active_assists": [
+        "X-A",
+        "X-C"
+      ],
+      "active_roles": [
+        "R-A",
+        "R-B",
+        "R-C",
+        "X-A",
+        "X-C"
+      ],
+      "unit_assignments": {
+        "ARM_A": [
+          "R-A"
+        ],
+        "ARM_B": [
+          "R-B"
+        ],
+        "ARM_C": [
+          "R-C"
+        ],
+        "ASSIST_1": [
+          "X-A"
+        ],
+        "ASSIST_2": [
+          "X-C"
+        ]
+      },
+      "duplicate_assignments": {},
+      "title_ja": "AとCに補助が必要",
+      "diagram": "figures/AC.svg",
+      "png": "figures/AC.png",
+      "note_ja": "この役割表では同じ補助腕への重複なし。到達・移動・支持・工具を含む同時運転は未確認。"
+    },
+    {
+      "id": "BC",
+      "active_assists": [
+        "X-B",
+        "X-C"
+      ],
+      "active_roles": [
+        "R-A",
+        "R-B",
+        "R-C",
+        "X-B",
+        "X-C"
+      ],
+      "unit_assignments": {
+        "ARM_A": [
+          "R-A"
+        ],
+        "ARM_B": [
+          "R-B"
+        ],
+        "ARM_C": [
+          "R-C"
+        ],
+        "ASSIST_1": [
+          "X-B"
+        ],
+        "ASSIST_2": [
+          "X-C"
+        ]
+      },
+      "duplicate_assignments": {},
+      "title_ja": "BとCに補助が必要",
+      "diagram": "figures/BC.svg",
+      "png": "figures/BC.png",
+      "note_ja": "この役割表では同じ補助腕への重複なし。到達・移動・支持・工具を含む同時運転は未確認。"
+    },
+    {
+      "id": "ABC",
+      "active_assists": [
+        "X-A",
+        "X-B",
+        "X-C"
+      ],
+      "active_roles": [
+        "R-A",
+        "R-B",
+        "R-C",
+        "X-A",
+        "X-B",
+        "X-C"
+      ],
+      "unit_assignments": {
+        "ARM_A": [
+          "R-A"
+        ],
+        "ARM_B": [
+          "R-B"
+        ],
+        "ARM_C": [
+          "R-C"
+        ],
+        "ASSIST_1": [
+          "X-A",
+          "X-B"
+        ],
+        "ASSIST_2": [
+          "X-C"
+        ]
+      },
+      "duplicate_assignments": {
+        "ASSIST_1": [
+          "X-A",
+          "X-B"
+        ]
+      },
+      "title_ja": "A・B・Cに補助が必要",
+      "diagram": "figures/ABC.svg",
+      "png": "figures/ABC.png",
+      "note_ja": "A/B共用補助への同時要求。どちらかの保持開始を、前の支持引継ぎと退避の後へ置く。"
+    }
+  ],
+  "role_selection_unmodified": {
+    "revision": "hvjb_robot_selection_v01",
+    "decision_date": "2026-09-16",
+    "status": "user_selected_role_allocation",
+    "user_directive_ja": "補助を2腕に分ける",
+    "selected_plan": "S5_AB",
+    "selected_plan_ja": "主担当3腕＋A/B共用補助1腕＋C専用補助1腕",
+    "source_comparison": "data/hvjb_robot_sharing_v01.json",
+    "source_sha256": "7888693db9b5cd0314b7acecb6c0fa09ab7c207e43c2391fbfbf642833b99b90",
+    "selected_primary_arm_count": 3,
+    "selected_assist_arm_count": 2,
+    "selected_assembly_arm_count": 5,
+    "assist_groups": [
+      [
+        "X-A",
+        "X-B"
+      ],
+      [
+        "X-C"
+      ]
+    ],
+    "role_to_unit": {
+      "R-A": "ARM_A",
+      "R-B": "ARM_B",
+      "R-C": "ARM_C",
+      "X-A": "ASSIST_1",
+      "X-B": "ASSIST_1",
+      "X-C": "ASSIST_2"
+    },
+    "count_scope_ja": "A/B/Cの組立役に割り当てる5腕。ロボットの機台数や、OP010 XYZ・締付工具・搬送等を含むライン全体の設備台数ではない。",
+    "operating_constraints_ja": [
+      "AとBが同時に補助を必要とする場合は、把持開始前に作業順序を調整する。保持途中で手を離して別セルへ移らない。",
+      "A/B共用補助は、前の支持引継ぎ・開放・退避と、必要な手先交換・移動を終えてから次の保持を開始する。",
+      "C専用補助は自由端の案内と支持引継ぎを担当し、筐体搭載終了だけで空き扱いにしない。",
+      "既存の20仕事・据置締付工具・支持・供給・検査・回収の役割を保持する。該当する大小同時締結の2主軸条件を継承する。"
+    ],
+    "next_work_ja": "5腕の分担を前提に、A/B共用補助の保持区間・受渡しと、C専用補助の継続担当を具体化する。その上で配置・到達・干渉を確認する。",
+    "selected_robot_models": null,
+    "selected_robot_base_count": null,
+    "selected_layout": null,
+    "minimum_robot_count": null,
+    "measured_cycle_time_s": null,
+    "physical_acceptance_verdict": null
+  },
+  "logistics_unmodified": {
+    "user_instruction_ja": "コンベアは1段でパレットを往復。筐体を取り出した枠に完成品を置く。",
+    "deck_count": 1,
+    "travel": "reciprocal_on_same_deck",
+    "shared_stock_slots": 20,
+    "supply_and_return_resource": "G-010",
+    "return_load": "finished_product_on_pallet",
+    "slot_reservation": "source_slot_kept_vacant_for_same_product",
+    "empty_pallet_after_storage": "at_supply_waiting_for_next_enclosure",
+    "pallet_fleet_count_selected": null,
+    "schedule_selected": null,
+    "illustrative_snapshots": [
+      {
+        "phase": "供給前",
+        "slots": [
+          {
+            "slot": 1,
+            "state": "empty_enclosure",
+            "product_id": "P01"
+          },
+          {
+            "slot": 2,
+            "state": "empty_enclosure",
+            "product_id": "P02"
+          },
+          {
+            "slot": 3,
+            "state": "empty_enclosure",
+            "product_id": "P03"
+          },
+          {
+            "slot": 4,
+            "state": "empty_enclosure",
+            "product_id": "P04"
+          },
+          {
+            "slot": 5,
+            "state": "empty_enclosure",
+            "product_id": "P05"
+          },
+          {
+            "slot": 6,
+            "state": "empty_enclosure",
+            "product_id": "P06"
+          },
+          {
+            "slot": 7,
+            "state": "empty_enclosure",
+            "product_id": "P07"
+          },
+          {
+            "slot": 8,
+            "state": "empty_enclosure",
+            "product_id": "P08"
+          },
+          {
+            "slot": 9,
+            "state": "empty_enclosure",
+            "product_id": "P09"
+          },
+          {
+            "slot": 10,
+            "state": "empty_enclosure",
+            "product_id": "P10"
+          },
+          {
+            "slot": 11,
+            "state": "empty_enclosure",
+            "product_id": "P11"
+          },
+          {
+            "slot": 12,
+            "state": "empty_enclosure",
+            "product_id": "P12"
+          },
+          {
+            "slot": 13,
+            "state": "empty_enclosure",
+            "product_id": "P13"
+          },
+          {
+            "slot": 14,
+            "state": "empty_enclosure",
+            "product_id": "P14"
+          },
+          {
+            "slot": 15,
+            "state": "empty_enclosure",
+            "product_id": "P15"
+          },
+          {
+            "slot": 16,
+            "state": "empty_enclosure",
+            "product_id": "P16"
+          },
+          {
+            "slot": 17,
+            "state": "empty_enclosure",
+            "product_id": "P17"
+          },
+          {
+            "slot": 18,
+            "state": "empty_enclosure",
+            "product_id": "P18"
+          },
+          {
+            "slot": 19,
+            "state": "empty_enclosure",
+            "product_id": "P19"
+          },
+          {
+            "slot": 20,
+            "state": "empty_enclosure",
+            "product_id": "P20"
+          }
+        ],
+        "wip_products": 0,
+        "pallet_state": "empty_at_supply"
+      },
+      {
+        "phase": "01番から取出し・組立中",
+        "slots": [
+          {
+            "slot": 1,
+            "state": "reserved_vacant",
+            "product_id": "P01"
+          },
+          {
+            "slot": 2,
+            "state": "empty_enclosure",
+            "product_id": "P02"
+          },
+          {
+            "slot": 3,
+            "state": "empty_enclosure",
+            "product_id": "P03"
+          },
+          {
+            "slot": 4,
+            "state": "empty_enclosure",
+            "product_id": "P04"
+          },
+          {
+            "slot": 5,
+            "state": "empty_enclosure",
+            "product_id": "P05"
+          },
+          {
+            "slot": 6,
+            "state": "empty_enclosure",
+            "product_id": "P06"
+          },
+          {
+            "slot": 7,
+            "state": "empty_enclosure",
+            "product_id": "P07"
+          },
+          {
+            "slot": 8,
+            "state": "empty_enclosure",
+            "product_id": "P08"
+          },
+          {
+            "slot": 9,
+            "state": "empty_enclosure",
+            "product_id": "P09"
+          },
+          {
+            "slot": 10,
+            "state": "empty_enclosure",
+            "product_id": "P10"
+          },
+          {
+            "slot": 11,
+            "state": "empty_enclosure",
+            "product_id": "P11"
+          },
+          {
+            "slot": 12,
+            "state": "empty_enclosure",
+            "product_id": "P12"
+          },
+          {
+            "slot": 13,
+            "state": "empty_enclosure",
+            "product_id": "P13"
+          },
+          {
+            "slot": 14,
+            "state": "empty_enclosure",
+            "product_id": "P14"
+          },
+          {
+            "slot": 15,
+            "state": "empty_enclosure",
+            "product_id": "P15"
+          },
+          {
+            "slot": 16,
+            "state": "empty_enclosure",
+            "product_id": "P16"
+          },
+          {
+            "slot": 17,
+            "state": "empty_enclosure",
+            "product_id": "P17"
+          },
+          {
+            "slot": 18,
+            "state": "empty_enclosure",
+            "product_id": "P18"
+          },
+          {
+            "slot": 19,
+            "state": "empty_enclosure",
+            "product_id": "P19"
+          },
+          {
+            "slot": 20,
+            "state": "empty_enclosure",
+            "product_id": "P20"
+          }
+        ],
+        "wip_products": 1,
+        "pallet_state": "assembly_side"
+      },
+      {
+        "phase": "完成品を載せて同段復路",
+        "slots": [
+          {
+            "slot": 1,
+            "state": "reserved_vacant",
+            "product_id": "P01"
+          },
+          {
+            "slot": 2,
+            "state": "empty_enclosure",
+            "product_id": "P02"
+          },
+          {
+            "slot": 3,
+            "state": "empty_enclosure",
+            "product_id": "P03"
+          },
+          {
+            "slot": 4,
+            "state": "empty_enclosure",
+            "product_id": "P04"
+          },
+          {
+            "slot": 5,
+            "state": "empty_enclosure",
+            "product_id": "P05"
+          },
+          {
+            "slot": 6,
+            "state": "empty_enclosure",
+            "product_id": "P06"
+          },
+          {
+            "slot": 7,
+            "state": "empty_enclosure",
+            "product_id": "P07"
+          },
+          {
+            "slot": 8,
+            "state": "empty_enclosure",
+            "product_id": "P08"
+          },
+          {
+            "slot": 9,
+            "state": "empty_enclosure",
+            "product_id": "P09"
+          },
+          {
+            "slot": 10,
+            "state": "empty_enclosure",
+            "product_id": "P10"
+          },
+          {
+            "slot": 11,
+            "state": "empty_enclosure",
+            "product_id": "P11"
+          },
+          {
+            "slot": 12,
+            "state": "empty_enclosure",
+            "product_id": "P12"
+          },
+          {
+            "slot": 13,
+            "state": "empty_enclosure",
+            "product_id": "P13"
+          },
+          {
+            "slot": 14,
+            "state": "empty_enclosure",
+            "product_id": "P14"
+          },
+          {
+            "slot": 15,
+            "state": "empty_enclosure",
+            "product_id": "P15"
+          },
+          {
+            "slot": 16,
+            "state": "empty_enclosure",
+            "product_id": "P16"
+          },
+          {
+            "slot": 17,
+            "state": "empty_enclosure",
+            "product_id": "P17"
+          },
+          {
+            "slot": 18,
+            "state": "empty_enclosure",
+            "product_id": "P18"
+          },
+          {
+            "slot": 19,
+            "state": "empty_enclosure",
+            "product_id": "P19"
+          },
+          {
+            "slot": 20,
+            "state": "empty_enclosure",
+            "product_id": "P20"
+          }
+        ],
+        "wip_products": 1,
+        "pallet_state": "returning_loaded"
+      },
+      {
+        "phase": "01番へ完成品を収納",
+        "slots": [
+          {
+            "slot": 1,
+            "state": "finished_product",
+            "product_id": "P01"
+          },
+          {
+            "slot": 2,
+            "state": "empty_enclosure",
+            "product_id": "P02"
+          },
+          {
+            "slot": 3,
+            "state": "empty_enclosure",
+            "product_id": "P03"
+          },
+          {
+            "slot": 4,
+            "state": "empty_enclosure",
+            "product_id": "P04"
+          },
+          {
+            "slot": 5,
+            "state": "empty_enclosure",
+            "product_id": "P05"
+          },
+          {
+            "slot": 6,
+            "state": "empty_enclosure",
+            "product_id": "P06"
+          },
+          {
+            "slot": 7,
+            "state": "empty_enclosure",
+            "product_id": "P07"
+          },
+          {
+            "slot": 8,
+            "state": "empty_enclosure",
+            "product_id": "P08"
+          },
+          {
+            "slot": 9,
+            "state": "empty_enclosure",
+            "product_id": "P09"
+          },
+          {
+            "slot": 10,
+            "state": "empty_enclosure",
+            "product_id": "P10"
+          },
+          {
+            "slot": 11,
+            "state": "empty_enclosure",
+            "product_id": "P11"
+          },
+          {
+            "slot": 12,
+            "state": "empty_enclosure",
+            "product_id": "P12"
+          },
+          {
+            "slot": 13,
+            "state": "empty_enclosure",
+            "product_id": "P13"
+          },
+          {
+            "slot": 14,
+            "state": "empty_enclosure",
+            "product_id": "P14"
+          },
+          {
+            "slot": 15,
+            "state": "empty_enclosure",
+            "product_id": "P15"
+          },
+          {
+            "slot": 16,
+            "state": "empty_enclosure",
+            "product_id": "P16"
+          },
+          {
+            "slot": 17,
+            "state": "empty_enclosure",
+            "product_id": "P17"
+          },
+          {
+            "slot": 18,
+            "state": "empty_enclosure",
+            "product_id": "P18"
+          },
+          {
+            "slot": 19,
+            "state": "empty_enclosure",
+            "product_id": "P19"
+          },
+          {
+            "slot": 20,
+            "state": "empty_enclosure",
+            "product_id": "P20"
+          }
+        ],
+        "wip_products": 0,
+        "pallet_state": "empty_at_supply"
+      }
+    ],
+    "retained_auxiliary_tasks_ja": "空容器回収、ボルト補給、必要な両手トレー搬送を別仕事として残す。"
+  },
+  "jobs_unmodified": [
+    {
+      "id": "D00",
+      "operation": "O00",
+      "title_ja": "筐体供給",
+      "location": "outside_supply",
+      "location_ja": "供給位置",
+      "group": "LOGISTICS",
+      "primary_ja": "XYZ",
+      "hands_ja": "H06 筐体",
+      "assistance_ja": "なし",
+      "transfer_ja": "パレットに支持を渡して開放",
+      "unresolved_ja": "許容把持面・重心・パレット受け位置・20枠の実寸・XYZ移動距離。",
+      "scene_ids": [
+        "S01"
+      ],
+      "review_feature_ids": [
+        "P01"
+      ],
+      "feature_assignment_kind": "existing_review_candidates_not_selected_physical_operations"
+    },
+    {
+      "id": "D01",
+      "operation": "O01",
+      "title_ja": "線材・端末準備",
+      "location": "outside_prep",
+      "location_ja": "筐体外・準備",
+      "group": "OPEN",
+      "primary_ja": "準備設備",
+      "hands_ja": "入荷・加工範囲未定",
+      "assistance_ja": "設備側で別計上",
+      "transfer_ja": "加工後の支持先へ渡す",
+      "unresolved_ja": "入荷単位・全線の両端・線長・品番・加工条件・加工設備",
+      "scene_ids": [
+        "S02"
+      ],
+      "review_feature_ids": [
+        "I01",
+        "I02",
+        "I03",
+        "I04",
+        "I05",
+        "T31",
+        "T32",
+        "T33",
+        "T34",
+        "T41",
+        "T42",
+        "T43",
+        "T44",
+        "L01",
+        "L02",
+        "L03",
+        "L04",
+        "L05",
+        "L06",
+        "L07",
+        "W01",
+        "W02",
+        "W03",
+        "W04",
+        "W05",
+        "W06",
+        "W07",
+        "W08",
+        "W09",
+        "W10",
+        "W11",
+        "W12",
+        "W13",
+        "W14",
+        "WI11",
+        "WI12",
+        "WI21",
+        "WI22",
+        "WI41",
+        "WI42",
+        "WI51",
+        "WI52",
+        "W15",
+        "W16",
+        "W17",
+        "W18",
+        "W19"
+      ],
+      "feature_assignment_kind": "existing_review_candidates_not_selected_physical_operations"
+    },
+    {
+      "id": "D10",
+      "operation": "O10",
+      "title_ja": "A 本体部品固定",
+      "location": "outside_A",
+      "location_ja": "筐体外・A",
+      "group": "A",
+      "primary_ja": "A主腕",
+      "hands_ja": "H01 / H02",
+      "assistance_ja": "工具 T-A",
+      "transfer_ja": "締結・工具退避後に開放",
+      "unresolved_ja": "下板の固定点、機械固定と電力端子の区別、抵抗の写真対応",
+      "scene_ids": [
+        "S03"
+      ],
+      "review_feature_ids": [
+        "P02",
+        "P03",
+        "P04",
+        "J01",
+        "J02",
+        "J03",
+        "J04"
+      ],
+      "feature_assignment_kind": "existing_review_candidates_not_selected_physical_operations"
+    },
+    {
+      "id": "D11",
+      "operation": "O10",
+      "title_ja": "A 配線・接続",
+      "location": "outside_A",
+      "location_ja": "筐体外・A",
+      "group": "A",
+      "primary_ja": "A主腕",
+      "hands_ja": "H04 / H05内側",
+      "assistance_ja": "共用補助※ / T-A",
+      "transfer_ja": "残る自由端の案内を継続",
+      "unresolved_ja": "線の両端・所属・共締め部材・同時に締める大小の点組",
+      "scene_ids": [
+        "S03"
+      ],
+      "review_feature_ids": [
+        "P02",
+        "P03",
+        "P04",
+        "I01",
+        "I02",
+        "I03",
+        "I04",
+        "I05",
+        "T31",
+        "T32",
+        "T33",
+        "T34",
+        "T41",
+        "T42",
+        "T43",
+        "T44",
+        "L01",
+        "L02",
+        "L03",
+        "L04",
+        "L05",
+        "L06",
+        "L07",
+        "J01",
+        "J02",
+        "J03",
+        "J04",
+        "W01",
+        "W02",
+        "W03",
+        "W04",
+        "W05",
+        "W06",
+        "W07",
+        "W08",
+        "W09",
+        "W10",
+        "W11",
+        "W12",
+        "W13",
+        "W14",
+        "WI11",
+        "WI12",
+        "WI21",
+        "WI22",
+        "WI41",
+        "WI42",
+        "WI51",
+        "WI52",
+        "W15",
+        "W16",
+        "W17",
+        "W18",
+        "W19"
+      ],
+      "feature_assignment_kind": "existing_review_candidates_not_selected_physical_operations"
+    },
+    {
+      "id": "D12",
+      "operation": "O10",
+      "title_ja": "A ユニット受渡し",
+      "location": "outside_transfer",
+      "location_ja": "筐体外",
+      "group": "C",
+      "primary_ja": "A主腕",
+      "hands_ja": "H06 下板用を比較",
+      "assistance_ja": "共用補助※ → C補助※",
+      "transfer_ja": "本体と自由端を別々に引継ぐ",
+      "unresolved_ja": "運搬用手先・許容把持面・自由端数・製品照合・支持付き待ち位置",
+      "scene_ids": [
+        "S05"
+      ],
+      "review_feature_ids": [
+        "P02",
+        "P03",
+        "P04",
+        "W01",
+        "W02",
+        "W03",
+        "W04",
+        "W05",
+        "W06",
+        "W07",
+        "W08",
+        "W09",
+        "W10",
+        "W11",
+        "W12",
+        "W13",
+        "W14",
+        "WI11",
+        "WI12",
+        "WI21",
+        "WI22",
+        "WI41",
+        "WI42",
+        "WI51",
+        "WI52",
+        "W15",
+        "W16",
+        "W17",
+        "W18",
+        "W19"
+      ],
+      "feature_assignment_kind": "existing_review_candidates_not_selected_physical_operations"
+    },
+    {
+      "id": "D20",
+      "operation": "O20",
+      "title_ja": "B 本体部品固定",
+      "location": "outside_B",
+      "location_ja": "筐体外・B",
+      "group": "B",
+      "primary_ja": "B主腕",
+      "hands_ja": "H02 / H08",
+      "assistance_ja": "工具 T-B",
+      "transfer_ja": "締結・工具退避後に開放",
+      "unresolved_ja": "機械固定と電気共締めの区別、主ヒューズの所属、板の許容保持面",
+      "scene_ids": [
+        "S04"
+      ],
+      "review_feature_ids": [
+        "P05",
+        "P06",
+        "P07",
+        "P08",
+        "P19",
+        "P20",
+        "P21",
+        "P22",
+        "J14",
+        "J15",
+        "J16",
+        "J17",
+        "J18",
+        "J19",
+        "J20",
+        "J21",
+        "J22",
+        "J23"
+      ],
+      "feature_assignment_kind": "existing_review_candidates_not_selected_physical_operations"
+    },
+    {
+      "id": "D21",
+      "operation": "O20",
+      "title_ja": "B 配線・接続",
+      "location": "outside_B",
+      "location_ja": "筐体外・B",
+      "group": "B",
+      "primary_ja": "B主腕",
+      "hands_ja": "H04 / H05内側",
+      "assistance_ja": "共用補助※ / T-B",
+      "transfer_ja": "両端保持は同時把持・同時退避",
+      "unresolved_ja": "物理5ヒューズと系統の割当、線の両端、積層、両端保持が必要な対象",
+      "scene_ids": [
+        "S04"
+      ],
+      "review_feature_ids": [
+        "P05",
+        "P06",
+        "P07",
+        "P08",
+        "I01",
+        "I02",
+        "I03",
+        "I04",
+        "I05",
+        "P19",
+        "P20",
+        "P21",
+        "P22",
+        "L01",
+        "L02",
+        "L03",
+        "L04",
+        "L05",
+        "L06",
+        "L07",
+        "J14",
+        "J15",
+        "J16",
+        "J17",
+        "J18",
+        "J19",
+        "J20",
+        "J21",
+        "J22",
+        "J23",
+        "W01",
+        "W02",
+        "W03",
+        "W04",
+        "W05",
+        "W06",
+        "W07",
+        "W08",
+        "W09",
+        "W10",
+        "W11",
+        "W12",
+        "W13",
+        "W14",
+        "WI11",
+        "WI12",
+        "WI21",
+        "WI22",
+        "WI41",
+        "WI42",
+        "WI51",
+        "WI52",
+        "W15",
+        "W16",
+        "W17",
+        "W18",
+        "W19"
+      ],
+      "feature_assignment_kind": "existing_review_candidates_not_selected_physical_operations"
+    },
+    {
+      "id": "D22",
+      "operation": "O20",
+      "title_ja": "B ユニット受渡し",
+      "location": "outside_transfer",
+      "location_ja": "筐体外",
+      "group": "C",
+      "primary_ja": "B主腕",
+      "hands_ja": "H07 板用を比較",
+      "assistance_ja": "共用補助※",
+      "transfer_ja": "Cの板保持・案内へ引継ぐ",
+      "unresolved_ja": "板搬送手先・自由端の支持と引継ぎ・待ち位置",
+      "scene_ids": [
+        "S05"
+      ],
+      "review_feature_ids": [
+        "P05",
+        "P06",
+        "P07",
+        "P19",
+        "P20",
+        "P21",
+        "W01",
+        "W02",
+        "W03",
+        "W04",
+        "W05",
+        "W06",
+        "W07",
+        "W08",
+        "W09",
+        "W10",
+        "W11",
+        "W12",
+        "W13",
+        "W14",
+        "WI11",
+        "WI12",
+        "WI21",
+        "WI22",
+        "WI41",
+        "WI42",
+        "WI51",
+        "WI52",
+        "W15",
+        "W16",
+        "W17",
+        "W18",
+        "W19"
+      ],
+      "feature_assignment_kind": "existing_review_candidates_not_selected_physical_operations"
+    },
+    {
+      "id": "D30",
+      "operation": "O30",
+      "title_ja": "C 板合わせ・固定",
+      "location": "outside_C",
+      "location_ja": "筐体外・C",
+      "group": "C",
+      "primary_ja": "C主腕",
+      "hands_ja": "H07 板用を比較",
+      "assistance_ja": "支持 F-C / 工具 T-C",
+      "transfer_ja": "板保持のまま工具を退避",
+      "unresolved_ja": "板間の支持形状・ねじ点・荷重経路・板保持面",
+      "scene_ids": [
+        "S06"
+      ],
+      "review_feature_ids": [],
+      "feature_assignment_kind": "existing_review_candidates_not_selected_physical_operations"
+    },
+    {
+      "id": "D31",
+      "operation": "O30",
+      "title_ja": "C 治具上持ち替え",
+      "location": "outside_C",
+      "location_ja": "筐体外・C",
+      "group": "C",
+      "primary_ja": "C主腕",
+      "hands_ja": "H07 → H06 を比較",
+      "assistance_ja": "F-C / C補助※",
+      "transfer_ja": "支持を残して搬送把持へ",
+      "unresolved_ja": "接合部の荷重受容・搬送把持面・手先交換・自由端案内方法",
+      "scene_ids": [
+        "S07"
+      ],
+      "review_feature_ids": [
+        "I01",
+        "I02",
+        "I03",
+        "I04",
+        "I05",
+        "L01",
+        "L02",
+        "L03",
+        "L04",
+        "L05",
+        "L06",
+        "L07",
+        "W01",
+        "W02",
+        "W03",
+        "W04",
+        "W05",
+        "W06",
+        "W07",
+        "W08",
+        "W09",
+        "W10",
+        "W11",
+        "W12",
+        "W13",
+        "W14",
+        "WI11",
+        "WI12",
+        "WI21",
+        "WI22",
+        "WI41",
+        "WI42",
+        "WI51",
+        "WI52",
+        "W15",
+        "W16",
+        "W17",
+        "W18",
+        "W19"
+      ],
+      "feature_assignment_kind": "existing_review_candidates_not_selected_physical_operations"
+    },
+    {
+      "id": "D40",
+      "operation": "O40",
+      "title_ja": "C 一体搭載",
+      "location": "insertion",
+      "location_ja": "外 → 内",
+      "group": "C",
+      "primary_ja": "C主腕",
+      "hands_ja": "H06 ユニット用を比較",
+      "assistance_ja": "C補助※ / 筐体側受け",
+      "transfer_ja": "本体開放後も案内は継続",
+      "unresolved_ja": "受け面・把持解除と指の抜け・内寸・全自由端の経路",
+      "scene_ids": [
+        "S08"
+      ],
+      "review_feature_ids": [
+        "P01",
+        "I01",
+        "I02",
+        "I03",
+        "I04",
+        "I05",
+        "L01",
+        "L02",
+        "L03",
+        "L04",
+        "L05",
+        "L06",
+        "L07",
+        "W01",
+        "W02",
+        "W03",
+        "W04",
+        "W05",
+        "W06",
+        "W07",
+        "W08",
+        "W09",
+        "W10",
+        "W11",
+        "W12",
+        "W13",
+        "W14",
+        "WI11",
+        "WI12",
+        "WI21",
+        "WI22",
+        "WI41",
+        "WI42",
+        "WI51",
+        "WI52",
+        "W15",
+        "W16",
+        "W17",
+        "W18",
+        "W19"
+      ],
+      "feature_assignment_kind": "existing_review_candidates_not_selected_physical_operations"
+    },
+    {
+      "id": "D42",
+      "operation": "O42",
+      "title_ja": "C 箱内工具作業",
+      "location": "inside_C",
+      "location_ja": "搭載後・内側",
+      "group": "C",
+      "primary_ja": "C主腕枠",
+      "hands_ja": "対象・手先未特定",
+      "assistance_ja": "T-C / C補助※",
+      "transfer_ja": "対象不明を省略しない",
+      "unresolved_ja": "工具作業点・部材・点数・保持相手・所要時間",
+      "scene_ids": [
+        "S09"
+      ],
+      "review_feature_ids": [
+        "P01",
+        "I01",
+        "I02",
+        "I03",
+        "I04",
+        "I05",
+        "L01",
+        "L02",
+        "L03",
+        "L04",
+        "L05",
+        "L06",
+        "L07",
+        "W01",
+        "W02",
+        "W03",
+        "W04",
+        "W05",
+        "W06",
+        "W07",
+        "W08",
+        "W09",
+        "W10",
+        "W11",
+        "W12",
+        "W13",
+        "W14",
+        "WI11",
+        "WI12",
+        "WI21",
+        "WI22",
+        "WI41",
+        "WI42",
+        "WI51",
+        "WI52",
+        "W15",
+        "W16",
+        "W17",
+        "W18",
+        "W19"
+      ],
+      "feature_assignment_kind": "existing_review_candidates_not_selected_physical_operations"
+    },
+    {
+      "id": "D45",
+      "operation": "O45",
+      "title_ja": "C 内側端末引出し",
+      "location": "wall_crossing",
+      "location_ja": "内 → 開口 → 外",
+      "group": "C",
+      "primary_ja": "C主腕",
+      "hands_ja": "H05 内側",
+      "assistance_ja": "C補助※",
+      "transfer_ja": "外側で端末支持を引継ぐ",
+      "unresolved_ja": "線付きの通過空間・把持面・各端末順序・外側での一時支持・ロック順",
+      "scene_ids": [
+        "S10"
+      ],
+      "review_feature_ids": [
+        "P01",
+        "I01",
+        "I02",
+        "I03",
+        "I04",
+        "I05",
+        "W01",
+        "W02",
+        "W03",
+        "W04",
+        "W05",
+        "W06",
+        "W07",
+        "W08",
+        "W09",
+        "W10",
+        "W11",
+        "W12",
+        "W13",
+        "W14",
+        "WI11",
+        "WI12",
+        "WI21",
+        "WI22",
+        "WI41",
+        "WI42",
+        "WI51",
+        "WI52",
+        "W15",
+        "W16",
+        "W17",
+        "W18",
+        "W19"
+      ],
+      "feature_assignment_kind": "existing_review_candidates_not_selected_physical_operations"
+    },
+    {
+      "id": "D50",
+      "operation": "O50",
+      "title_ja": "C 外側口の固定",
+      "location": "wall_interface",
+      "location_ja": "搭載後・側壁両側",
+      "group": "C",
+      "primary_ja": "C主腕",
+      "hands_ja": "H05 外側",
+      "assistance_ja": "T-C / 内側保持役※",
+      "transfer_ja": "全対象穴の締結・工具退避まで保持",
+      "unresolved_ja": "締付順・条件・工具全外形・内側ロックとフランジ固定の順・主2極/LV固定",
+      "scene_ids": [
+        "S11"
+      ],
+      "review_feature_ids": [
+        "P01",
+        "P14",
+        "P15",
+        "P16",
+        "P17",
+        "P18",
+        "I01",
+        "I02",
+        "I03",
+        "I04",
+        "I05"
+      ],
+      "feature_assignment_kind": "existing_review_candidates_not_selected_physical_operations"
+    },
+    {
+      "id": "D60",
+      "operation": "O60",
+      "title_ja": "C 主接続・共締め",
+      "location": "inside_C",
+      "location_ja": "搭載後・内側",
+      "group": "C",
+      "primary_ja": "C主腕",
+      "hands_ja": "H03 / 補助H04候補。H08主ヒューズの工程は未確定",
+      "assistance_ja": "C補助 H04※ / T-C",
+      "transfer_ja": "他の自由端の担当も残す",
+      "unresolved_ja": "部品境界・共締め積層・接続点・大小の組・未接続端の引継ぎ",
+      "scene_ids": [
+        "S12"
+      ],
+      "review_feature_ids": [
+        "P08",
+        "P09",
+        "P10",
+        "P11",
+        "P12",
+        "P13",
+        "P14",
+        "P15",
+        "P16",
+        "P17",
+        "P18",
+        "P22",
+        "L01",
+        "L02",
+        "L03",
+        "L04",
+        "L05",
+        "L06",
+        "L07",
+        "J01",
+        "J02",
+        "J03",
+        "J04",
+        "J05",
+        "J06",
+        "J07",
+        "J08",
+        "J09",
+        "J10",
+        "J11",
+        "J12",
+        "J13",
+        "J14",
+        "J15",
+        "J16",
+        "J17",
+        "J18",
+        "J19",
+        "J20",
+        "J21",
+        "J22",
+        "J23",
+        "W01",
+        "W02",
+        "W03",
+        "W04",
+        "W05",
+        "W06",
+        "W07",
+        "W08",
+        "W09",
+        "W10",
+        "W11",
+        "W12",
+        "W13",
+        "W14",
+        "WI11",
+        "WI12",
+        "WI21",
+        "WI22",
+        "WI41",
+        "WI42",
+        "WI51",
+        "WI52",
+        "W15",
+        "W16",
+        "W17",
+        "W18",
+        "W19"
+      ],
+      "feature_assignment_kind": "existing_review_candidates_not_selected_physical_operations"
+    },
+    {
+      "id": "D61",
+      "operation": "O60",
+      "title_ja": "C LV・HVIL接続",
+      "location": "late_interface_unresolved",
+      "location_ja": "搭載後・位置要照合",
+      "group": "OPEN",
+      "primary_ja": "C主腕",
+      "hands_ja": "対象別に照合（元H05候補）。端末の内外位置は未確定",
+      "assistance_ja": "C補助※ / T-C※",
+      "transfer_ja": "個別の挿入・ロック後に引継ぐ",
+      "unresolved_ja": "実配線の両端・極・端子品番・挿入順・HVILの全経路",
+      "scene_ids": [
+        "S13"
+      ],
+      "review_feature_ids": [
+        "P14",
+        "P15",
+        "P16",
+        "P17",
+        "P18",
+        "I01",
+        "I02",
+        "I03",
+        "I04",
+        "I05",
+        "T31",
+        "T32",
+        "T33",
+        "T34",
+        "T41",
+        "T42",
+        "T43",
+        "T44",
+        "W01",
+        "W02",
+        "W03",
+        "W04",
+        "W05",
+        "W06",
+        "W07",
+        "W08",
+        "W09",
+        "W10",
+        "W11",
+        "W12",
+        "W13",
+        "W14",
+        "WI11",
+        "WI12",
+        "WI21",
+        "WI22",
+        "WI41",
+        "WI42",
+        "WI51",
+        "WI52",
+        "W15",
+        "W16",
+        "W17",
+        "W18",
+        "W19"
+      ],
+      "feature_assignment_kind": "existing_review_candidates_not_selected_physical_operations"
+    },
+    {
+      "id": "D70",
+      "operation": "O70",
+      "title_ja": "蓋・シール",
+      "location": "top_closure",
+      "location_ja": "筐体上面",
+      "group": "OPEN",
+      "primary_ja": "C主腕を比較",
+      "hands_ja": "H07 カバー",
+      "assistance_ja": "T-C / 支持",
+      "transfer_ja": "検査との順・シール扱いは未定",
+      "unresolved_ja": "蓋・シール構成・保持面・工具点・検査との順序・所要時間",
+      "scene_ids": [
+        "S14"
+      ],
+      "review_feature_ids": [
+        "P01"
+      ],
+      "feature_assignment_kind": "existing_review_candidates_not_selected_physical_operations"
+    },
+    {
+      "id": "D71",
+      "operation": "O70",
+      "title_ja": "検査・記録",
+      "location": "inspection",
+      "location_ja": "検査位置",
+      "group": "OPEN",
+      "primary_ja": "検査設備",
+      "hands_ja": "対象・接続方法未定",
+      "assistance_ja": "C主腕※",
+      "transfer_ja": "検査接続と支持を引継ぐ",
+      "unresolved_ja": "検査項目・条件・合否値・受入経路・支持と接続設備",
+      "scene_ids": [
+        "S14"
+      ],
+      "review_feature_ids": [],
+      "feature_assignment_kind": "existing_review_candidates_not_selected_physical_operations"
+    },
+    {
+      "id": "D80",
+      "operation": "O80",
+      "title_ja": "完成品収納",
+      "location": "outside_output",
+      "location_ja": "共用20区画ストッカ",
+      "group": "LOGISTICS",
+      "primary_ja": "供給と同じXYZ",
+      "hands_ja": "H06 筐体",
+      "assistance_ja": "なし",
+      "transfer_ja": "元の20枠の空き位置へ返す",
+      "unresolved_ja": "完成品の重心・許容把持面・空筐体用爪との共用・元枠の支持と収納空間。",
+      "scene_ids": [
+        "S16"
+      ],
+      "review_feature_ids": [
+        "P01"
+      ],
+      "feature_assignment_kind": "existing_review_candidates_not_selected_physical_operations"
+    },
+    {
+      "id": "D81",
+      "operation": "O80",
+      "title_ja": "往復・回収・補給",
+      "location": "outside_logistics",
+      "location_ja": "搬送・供給位置",
+      "group": "LOGISTICS",
+      "primary_ja": "搬送・補給設備",
+      "hands_ja": "容器の手先は未定",
+      "assistance_ja": "必要な手扱いは別計上",
+      "transfer_ja": "完成品を載せ同じ段で戻す",
+      "unresolved_ja": "全体のパレット枚数・通行順、回収容器・補給単位・実施間隔・手扱いの設備境界。",
+      "scene_ids": [
+        "S02",
+        "S15"
+      ],
+      "review_feature_ids": [],
+      "feature_assignment_kind": "existing_review_candidates_not_selected_physical_operations"
+    }
+  ],
+  "cross_task_reservations_unmodified": [
+    {
+      "id": "HOLD_PANEL_TO_CARRY",
+      "resource": "R-C",
+      "tasks": [
+        "D30",
+        "D31",
+        "D40"
+      ],
+      "note_ja": "板保持→工具退避→治具上持ち替え→一体搬送。治具に支持させる持ち替え中も、手先交換を含む仕事をR-Cに予約する。",
+      "condition_ja": "採用済み板間固定が荷重を受け、治具と搬送手に支持を引き継げることが前提。支持成立は未検証。",
+      "mapped_unit": "ARM_C"
+    },
+    {
+      "id": "GUIDE_THROUGH_INSERTION",
+      "resource": "X-C",
+      "tasks": [
+        "D31",
+        "D40",
+        "D42",
+        "D45",
+        "D50"
+      ],
+      "note_ja": "独立案内が必要な自由端は、搭載後・開口通過後も次の支持へ引き継ぐまで案内担当を予約する。",
+      "condition_ja": "全区間に同じ腕が必須という確定ではない。自由端ごとの支持方法と引継ぎが決まるまでは途中を空き時間として数えない。",
+      "mapped_unit": "ASSIST_2"
+    }
+  ],
+  "same_arm_request_overlap_cases": [
+    "AB",
+    "ABC"
+  ],
+  "source_identity": {
+    "historical": {
+      "path": "/home/rlrk/IsaacLab-op040/eval_runs/ur15_jb_harness_revision_20260907/data/hvjb_robot_sharing_v01.json",
+      "sha256": "7888693db9b5cd0314b7acecb6c0fa09ab7c207e43c2391fbfbf642833b99b90"
+    },
+    "current": {
+      "path": "/tmp/hvjb-line-progress-20260923/work/hvjb-line-progress-20260923/data/line_review_data.json",
+      "sha256": "55948e4d2603b4ebe1ccd30160c89baa990623ad96eedc515c17583bac4bb440"
+    }
+  },
+  "time_values_s": null,
+  "motion_generated": false,
+  "new_physical_assignment": null,
+  "physical_acceptance_verdict": null
+}

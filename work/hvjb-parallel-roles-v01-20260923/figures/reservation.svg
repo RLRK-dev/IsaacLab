@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 550"
+ width="1400" height="550" role="img">
+<rect width="100%" height="100%" fill="#f4f7fa"/>
+<text x="40" y="52" font-family="Noto Sans CJK JP, sans-serif" font-size="32" font-weight="700" fill="#233447">C補助は、搭載が終わっただけでは空きにならない</text>
+<text x="40" y="91" font-family="Noto Sans CJK JP, sans-serif" font-size="23" font-weight="400" fill="#586d80">既存の継続予約 D31→D40→D42→D45→D50。自由端ごとに次の支持先まで追う。</text>
+<rect x="40" y="130" width="248" height="110" rx="16" fill="#edf8f4" stroke="#198773" stroke-width="2"/>
+<text x="58" y="171" font-family="Noto Sans CJK JP, sans-serif" font-size="27" font-weight="700" fill="#198773">D31</text>
+<text x="58" y="214" font-family="Noto Sans CJK JP, sans-serif" font-size="25" font-weight="400" fill="#233447">持ち替え</text>
+<rect x="308" y="130" width="248" height="110" rx="16" fill="#edf8f4" stroke="#198773" stroke-width="2"/>
+<text x="326" y="171" font-family="Noto Sans CJK JP, sans-serif" font-size="27" font-weight="700" fill="#198773">D40</text>
+<text x="326" y="214" font-family="Noto Sans CJK JP, sans-serif" font-size="25" font-weight="400" fill="#233447">筐体搭載</text>
+<rect x="576" y="130" width="248" height="110" rx="16" fill="#edf8f4" stroke="#198773" stroke-width="2"/>
+<text x="594" y="171" font-family="Noto Sans CJK JP, sans-serif" font-size="27" font-weight="700" fill="#198773">D42</text>
+<text x="594" y="214" font-family="Noto Sans CJK JP, sans-serif" font-size="25" font-weight="400" fill="#233447">箱内工具</text>
+<rect x="844" y="130" width="248" height="110" rx="16" fill="#edf8f4" stroke="#198773" stroke-width="2"/>
+<text x="862" y="171" font-family="Noto Sans CJK JP, sans-serif" font-size="27" font-weight="700" fill="#198773">D45</text>
+<text x="862" y="214" font-family="Noto Sans CJK JP, sans-serif" font-size="25" font-weight="400" fill="#233447">開口引出し</text>
+<rect x="1112" y="130" width="248" height="110" rx="16" fill="#edf8f4" stroke="#198773" stroke-width="2"/>
+<text x="1130" y="171" font-family="Noto Sans CJK JP, sans-serif" font-size="27" font-weight="700" fill="#198773">D50</text>
+<text x="1130" y="214" font-family="Noto Sans CJK JP, sans-serif" font-size="25" font-weight="400" fill="#233447">外側ヘッダー</text>
+<rect x="40" y="270" width="1320" height="79" rx="16" fill="#198773" stroke="none" stroke-width="2"/>
+<text x="65" y="320" font-family="Noto Sans CJK JP, sans-serif" font-size="27" font-weight="700" fill="white">C専用補助：次の支持先へ引き継ぐまで、案内担当の占有を残す</text>
+<text x="40" y="394" font-family="Noto Sans CJK JP, sans-serif" font-size="24" font-weight="400" fill="#233447">全区間で同じ腕が必須と確定した意味ではありません。</text>
+<text x="40" y="436" font-family="Noto Sans CJK JP, sans-serif" font-size="23" font-weight="400" fill="#586d80">D60 / D61にも対象別の支持確認が残ります。複数の自由端を1つの手で扱えるとは未確認です。</text>
+<text x="40" y="490" font-family="Noto Sans CJK JP, sans-serif" font-size="23" font-weight="400" fill="#586d80">A/B共用補助のC同行は未採用。Cへ貸し出して不足を埋めた図にはしていません。</text>
+</svg>

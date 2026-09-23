@@ -1,0 +1,302 @@
+{
+  "created_at": "2026-09-23T14:16:23.990879+09:00",
+  "files": [
+    {
+      "path": "README.md",
+      "bytes": 3454,
+      "sha256": "3ef31c2e0e6338496c9524cf50f350698693261ee141dd924e4c0cf6276caa6c"
+    },
+    {
+      "path": "all_cases.html",
+      "bytes": 3149,
+      "sha256": "824b62bb615659c9cd95595a43f29d607bada20bda068eec1b49ca8b9a0ea039"
+    },
+    {
+      "path": "figures/A.png",
+      "bytes": 347545,
+      "sha256": "5c375d1555a1833631e25a9c6793130be9401cfa197f7c6772ccda6c02db8d78"
+    },
+    {
+      "path": "figures/A.svg",
+      "bytes": 6626,
+      "sha256": "29b80ee85c02b97cb0d9f3b966f719eeb0ab472e0b546b406ae88e4e790c39a1"
+    },
+    {
+      "path": "figures/AB.png",
+      "bytes": 369630,
+      "sha256": "34b058c27188242a6c6313b37ab0da0607932e220aeca69062abe6c28a0f69fb"
+    },
+    {
+      "path": "figures/AB.svg",
+      "bytes": 6369,
+      "sha256": "fa126a699822d526756daeedb60a10119f1f2039a56feb16df03e61d55f9b148"
+    },
+    {
+      "path": "figures/ABC.png",
+      "bytes": 355042,
+      "sha256": "083421e920214c8309a0f47a35e53f2bc330ec97b1accc7e1463f108e0171952"
+    },
+    {
+      "path": "figures/ABC.svg",
+      "bytes": 6077,
+      "sha256": "d14a052ae6d0059737a14bb414101cc970617da99b6befa287200a6e86355061"
+    },
+    {
+      "path": "figures/AC.png",
+      "bytes": 352337,
+      "sha256": "9d313a7e660ff3fccb0d449723503b90e61dc7c95ba47d32e3307fec6a2e13f1"
+    },
+    {
+      "path": "figures/AC.svg",
+      "bytes": 6328,
+      "sha256": "692600028e121243fd62697cd6aae66fc001e6a1b4010b632a69dfd26036fdfa"
+    },
+    {
+      "path": "figures/B.png",
+      "bytes": 347393,
+      "sha256": "fc46eab02749d589d4a2fe5e0554ad8fe10d458acfd8af05f730e28c08147c07"
+    },
+    {
+      "path": "figures/B.svg",
+      "bytes": 6624,
+      "sha256": "755b8580b9600252d4b099412b8b096fd97a3b6f16249e7a14ed506196574bcb"
+    },
+    {
+      "path": "figures/BC.png",
+      "bytes": 351849,
+      "sha256": "31362453d7b83e651ebc84762a19ae6cbba3019cb8834190a4a3db11208f5be9"
+    },
+    {
+      "path": "figures/BC.svg",
+      "bytes": 6326,
+      "sha256": "b48e3deea8845509df195231981c35cc55ec77bec59a069ccec8b769a4f6e217"
+    },
+    {
+      "path": "figures/C.png",
+      "bytes": 348571,
+      "sha256": "3b04a56e0012f5379a6cf557aa9a75481b85e8aea62ba110d3bcfec3ddeca37c"
+    },
+    {
+      "path": "figures/C.svg",
+      "bytes": 6624,
+      "sha256": "eff95b449671e28f79556bf082571460fc82e9716c0e476f9b10fd54a91ebfd5"
+    },
+    {
+      "path": "figures/NONE.png",
+      "bytes": 336147,
+      "sha256": "93831e548817d32f86437cd6d782f5a44b1bcc2fa5811d498ea5c3d02c6abce4"
+    },
+    {
+      "path": "figures/NONE.svg",
+      "bytes": 6931,
+      "sha256": "778a567d7dab9df5452d78f00581f52e012cc9b84bb938816088da1308a1e0ff"
+    },
+    {
+      "path": "figures/handoff.png",
+      "bytes": 251811,
+      "sha256": "c9735943e480ede27065206d13a17fed4868db48624173051d0585185d4ee286"
+    },
+    {
+      "path": "figures/handoff.svg",
+      "bytes": 5287,
+      "sha256": "664cf4bfd52c1101e410c57960e9cae529b150b7cf32f38e1ca66c271e3c3469"
+    },
+    {
+      "path": "figures/reservation.png",
+      "bytes": 263093,
+      "sha256": "b55f02f1044c60d568a61bbc815547c32a07789e17768dc0619a820c7c67b1c7"
+    },
+    {
+      "path": "figures/reservation.svg",
+      "bytes": 3359,
+      "sha256": "76a009b47e2b35d44ec5befe4ce2b16cdd4bd52a79e61e0cd78f6271dbd42e10"
+    },
+    {
+      "path": "index.html",
+      "bytes": 9817,
+      "sha256": "47c25b31f411a7ab16171db9bcc926bdc72ab768c37e67ff9e2b0d6814e85f33"
+    },
+    {
+      "path": "manual_scope_20260923.md",
+      "bytes": 3406,
+      "sha256": "2c8fb45fb13554a61caf54b35c1669b6eef4e369acc463bbc4a01c5cad010df7"
+    },
+    {
+      "path": "manual_source_identity.json",
+      "bytes": 813,
+      "sha256": "071d23122819c761cb09096ef10433e774db9437cc0478927fe7a0420122964b"
+    },
+    {
+      "path": "parallel.css",
+      "bytes": 3060,
+      "sha256": "8491ecb7d18d0138e7b2c051ac5bf66f15c651cd7f386ace49fde48c235a1b67"
+    },
+    {
+      "path": "parallel.js",
+      "bytes": 1384,
+      "sha256": "9c211f04ed2747cb5f6733c604efded3be636f8c700f493eede988bf247e9e93"
+    },
+    {
+      "path": "parallel_review_data.json",
+      "bytes": 42340,
+      "sha256": "2f5ff58b68617aebff55b5dc448b3063e86482a952d1d3a1034917284eba667e"
+    }
+  ],
+  "png_rasterization": [
+    {
+      "argv": [
+        "convert",
+        "-font",
+        "/usr/share/fonts/opentype/noto/NotoSansCJK-Regular.ttc",
+        "-background",
+        "white",
+        "/tmp/hvjb-line-progress-20260923/work/hvjb-parallel-roles-v01-20260923/figures/A.svg",
+        "/tmp/hvjb-line-progress-20260923/work/hvjb-parallel-roles-v01-20260923/figures/A.png"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "convert",
+        "-font",
+        "/usr/share/fonts/opentype/noto/NotoSansCJK-Regular.ttc",
+        "-background",
+        "white",
+        "/tmp/hvjb-line-progress-20260923/work/hvjb-parallel-roles-v01-20260923/figures/AB.svg",
+        "/tmp/hvjb-line-progress-20260923/work/hvjb-parallel-roles-v01-20260923/figures/AB.png"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "convert",
+        "-font",
+        "/usr/share/fonts/opentype/noto/NotoSansCJK-Regular.ttc",
+        "-background",
+        "white",
+        "/tmp/hvjb-line-progress-20260923/work/hvjb-parallel-roles-v01-20260923/figures/ABC.svg",
+        "/tmp/hvjb-line-progress-20260923/work/hvjb-parallel-roles-v01-20260923/figures/ABC.png"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "convert",
+        "-font",
+        "/usr/share/fonts/opentype/noto/NotoSansCJK-Regular.ttc",
+        "-background",
+        "white",
+        "/tmp/hvjb-line-progress-20260923/work/hvjb-parallel-roles-v01-20260923/figures/AC.svg",
+        "/tmp/hvjb-line-progress-20260923/work/hvjb-parallel-roles-v01-20260923/figures/AC.png"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "convert",
+        "-font",
+        "/usr/share/fonts/opentype/noto/NotoSansCJK-Regular.ttc",
+        "-background",
+        "white",
+        "/tmp/hvjb-line-progress-20260923/work/hvjb-parallel-roles-v01-20260923/figures/B.svg",
+        "/tmp/hvjb-line-progress-20260923/work/hvjb-parallel-roles-v01-20260923/figures/B.png"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "convert",
+        "-font",
+        "/usr/share/fonts/opentype/noto/NotoSansCJK-Regular.ttc",
+        "-background",
+        "white",
+        "/tmp/hvjb-line-progress-20260923/work/hvjb-parallel-roles-v01-20260923/figures/BC.svg",
+        "/tmp/hvjb-line-progress-20260923/work/hvjb-parallel-roles-v01-20260923/figures/BC.png"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "convert",
+        "-font",
+        "/usr/share/fonts/opentype/noto/NotoSansCJK-Regular.ttc",
+        "-background",
+        "white",
+        "/tmp/hvjb-line-progress-20260923/work/hvjb-parallel-roles-v01-20260923/figures/C.svg",
+        "/tmp/hvjb-line-progress-20260923/work/hvjb-parallel-roles-v01-20260923/figures/C.png"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "convert",
+        "-font",
+        "/usr/share/fonts/opentype/noto/NotoSansCJK-Regular.ttc",
+        "-background",
+        "white",
+        "/tmp/hvjb-line-progress-20260923/work/hvjb-parallel-roles-v01-20260923/figures/NONE.svg",
+        "/tmp/hvjb-line-progress-20260923/work/hvjb-parallel-roles-v01-20260923/figures/NONE.png"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "convert",
+        "-font",
+        "/usr/share/fonts/opentype/noto/NotoSansCJK-Regular.ttc",
+        "-background",
+        "white",
+        "/tmp/hvjb-line-progress-20260923/work/hvjb-parallel-roles-v01-20260923/figures/handoff.svg",
+        "/tmp/hvjb-line-progress-20260923/work/hvjb-parallel-roles-v01-20260923/figures/handoff.png"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "convert",
+        "-font",
+        "/usr/share/fonts/opentype/noto/NotoSansCJK-Regular.ttc",
+        "-background",
+        "white",
+        "/tmp/hvjb-line-progress-20260923/work/hvjb-parallel-roles-v01-20260923/figures/reservation.svg",
+        "/tmp/hvjb-line-progress-20260923/work/hvjb-parallel-roles-v01-20260923/figures/reservation.png"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  ],
+  "new_motion_or_video": false,
+  "inputs": {
+    "data": "2f5ff58b68617aebff55b5dc448b3063e86482a952d1d3a1034917284eba667e",
+    "font": "b76b0433203017ca80401b2ee0dd69350349871c4b19d504c34dbdd80541690a"
+  },
+  "build_sources": {
+    "build_data.py": "71ed12a9c3ee5bdca088f6c3a8478781775eed9b3dc032633d5fdef4f9d490b9",
+    "build_page.py": "4f6ac53a16bab6f35dc5f0e4cf3ebf43e7b72db611fa60ee0192fb77b1fdc7e1",
+    "draw_diagrams.py": "844141ebba9cca79af811e8557441d410f365d61e5b0b1d57d39198ba90a1b82",
+    "parallel.css": "8491ecb7d18d0138e7b2c051ac5bf66f15c651cd7f386ace49fde48c235a1b67",
+    "parallel.js": "9c211f04ed2747cb5f6733c604efded3be636f8c700f493eede988bf247e9e93",
+    "template.html": "cb9da8aeb7657a161e1cbe3c6fe11a58f6105c3b02bc86dc888e10f2a4f5cf50",
+    "verify_interactions.js": "da7165ec78c53402af565a56835e1f50b75ba50e5bd92501953ae108ebcf8486",
+    "verify_page.py": "1d94532da6616517e944770d05bf4da4cc4dc1c11bdd3c4f50d0b0e421670753"
+  }
+}

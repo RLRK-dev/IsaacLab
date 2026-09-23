@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>HVJB | 3ST・5腕の役割と支持引継ぎ</title>
+  <link rel="stylesheet" href="parallel.css">
+</head>
+<body>
+  <main>
+    <nav aria-label="関連資料"><a href="../index_v04_1.html">← ライン全体・動画・部品へ</a><a href="../hand_review/index.html">手先の用途を見る</a></nav>
+    <header>
+      <p class="eyebrow">HVJB · 3ST / S5_AB · 2026-09-23</p>
+      <h1>並行処理と、補助腕の受け渡し</h1>
+      <p class="lead">主担当はA・B・Cに1腕ずつ。補助はA/B共用の1腕と、C専用の1腕です。</p>
+      <p>A/Bで次の部材を準備し、Cで前の一式を組み合わせる説明例です。図中の3つの作業物を区別して見てください。</p>
+    </header>
+    <section aria-labelledby="scenario-heading">
+      <div class="section-heading"><span class="step">1</span><div><h2 id="scenario-heading">補助が必要なセルを選んで比較する</h2><p>8つの独立した条件例です。切替は、保持中の腕を移動・解除する操作ではありません。</p></div></div>
+      <div id="scenario-controls" class="choices" role="group" aria-label="必要な補助の組合せ"><button type="button" data-scenario="NONE" aria-pressed="false" aria-label="どのセルも補助不要と仮定">補助なし</button>
+<button type="button" data-scenario="A" aria-pressed="false" aria-label="Aだけに補助が必要">A</button>
+<button type="button" data-scenario="B" aria-pressed="false" aria-label="Bだけに補助が必要">B</button>
+<button type="button" data-scenario="C" aria-pressed="false" aria-label="Cだけに補助が必要">C</button>
+<button type="button" data-scenario="AB" aria-pressed="false" aria-label="AとBに補助が必要">A＋B</button>
+<button type="button" data-scenario="AC" aria-pressed="true" aria-label="AとCに補助が必要">A＋C</button>
+<button type="button" data-scenario="BC" aria-pressed="false" aria-label="BとCに補助が必要">B＋C</button>
+<button type="button" data-scenario="ABC" aria-pressed="false" aria-label="A・B・Cに補助が必要">A＋B＋C</button></div>
+      <p id="scenario-message" class="scenario-message" aria-live="polite">この役割表では同じ補助腕への重複なし。到達・移動・支持・工具を含む同時運転は未確認。</p>
+      <figure><img id="scenario-image" src="figures/AC.png" width="1400" height="850" alt="AとCに補助が必要の担当図"><figcaption id="scenario-caption">AとCに補助が必要。役割配置は無寸法で、設備の実配置ではありません。</figcaption></figure>
+      <div class="small-links"><a id="scenario-png" href="figures/AC.png">この図をPNGで開く</a><a id="scenario-svg" href="figures/AC.svg">SVGで開く</a><a href="all_cases.html">8ケースを一覧で見る</a></div>
+      <p class="note">同じ補助腕への重複がないことだけでは、移動・工具・支持を含む同時運転の成立は分かりません。実機台数・配置・時間は未選定です。</p>
+    </section>
+    <section aria-labelledby="handoff-heading">
+      <div class="section-heading"><span class="step">2</span><div><h2 id="handoff-heading">共用補助は、前の支持を渡してから次へ</h2><p>AとBが同時に補助を必要とするときは、保持を始める前に順序を調整します。</p></div></div>
+      <figure><img src="figures/handoff.png" width="1400" height="480" alt="保持、支持引継ぎ、指の開放と退避、交換と移動、次の保持の5段階"></figure>
+      <p>どこへ支持を渡すかは、対象ごとに具体化が必要です。台・治具・次のハンドの形状や、引継ぎを確認する方法は、この図で新しく決めていません。</p>
+    </section>
+    <section aria-labelledby="reservation-heading">
+      <div class="section-heading"><span class="step">3</span><div><h2 id="reservation-heading">C専用補助の仕事は、搭載後も残る</h2><p>本体を筐体に置けても、自由端の案内・保持をどこへ渡すかは別に確認します。</p></div></div>
+      <figure><img src="figures/reservation.png" width="1400" height="550" alt="C補助のD31からD50にわたる支持引継ぎの継続予約"></figure>
+      <div class="job-links"><a href="../hand_review/index.html#job-D31">D31：C 治具上持ち替え</a>
+<a href="../hand_review/index.html#job-D40">D40：C 一体搭載</a>
+<a href="../hand_review/index.html#job-D42">D42：C 箱内工具作業</a>
+<a href="../hand_review/index.html#job-D45">D45：C 内側端末引出し</a>
+<a href="../hand_review/index.html#job-D50">D50：C 外側口の固定</a>
+<a href="../hand_review/index.html#job-D60">D60：C 主接続・共締め</a>
+<a href="../hand_review/index.html#job-D61">D61：C LV・HVIL接続</a></div>
+    </section>
+    <section class="boundary" aria-labelledby="boundary-heading">
+      <h2 id="boundary-heading">全体計画で維持していること</h2>
+      <ul><li>組立の5腕に加え、OP010のXYZ、据置工具、供給、支持、検査、回収を残します。</li>
+      <li>パレットは1段で往復。筐体を出した20枠の同じ空き枠へ、その完成品を戻します。</li>
+      <li>20仕事を省略していません。個別の対象・支持・接続の未確定事項は、全体ページと手先ページで確認できます。</li>
+      <li>時間のない説明図です。稼働率・実タクト・受入条件・物理妥当性は判定していません。</li></ul>
+      <p><a href="parallel_review_data.json">対応データJSON</a> · <a href="README.md">出典と確認範囲</a> · <a href="manual_scope_20260923.md">公開取扱資料の追加確認</a></p>
+    </section>
+  </main>
+  <script type="application/json" id="parallel-data">{"default_scenario": "AC", "scenarios": [{"id": "NONE", "active_assists": [], "active_roles": ["R-A", "R-B", "R-C"], "unit_assignments": {"ARM_A": ["R-A"], "ARM_B": ["R-B"], "ARM_C": ["R-C"]}, "duplicate_assignments": {}, "title_ja": "どのセルも補助不要と仮定", "diagram": "figures/NONE.svg", "png": "figures/NONE.png", "note_ja": "この役割表では同じ補助腕への重複なし。到達・移動・支持・工具を含む同時運転は未確認。"}, {"id": "A", "active_assists": ["X-A"], "active_roles": ["R-A", "R-B", "R-C", "X-A"], "unit_assignments": {"ARM_A": ["R-A"], "ARM_B": ["R-B"], "ARM_C": ["R-C"], "ASSIST_1": ["X-A"]}, "duplicate_assignments": {}, "title_ja": "Aだけに補助が必要", "diagram": "figures/A.svg", "png": "figures/A.png", "note_ja": "この役割表では同じ補助腕への重複なし。到達・移動・支持・工具を含む同時運転は未確認。"}, {"id": "B", "active_assists": ["X-B"], "active_roles": ["R-A", "R-B", "R-C", "X-B"], "unit_assignments": {"ARM_A": ["R-A"], "ARM_B": ["R-B"], "ARM_C": ["R-C"], "ASSIST_1": ["X-B"]}, "duplicate_assignments": {}, "title_ja": "Bだけに補助が必要", "diagram": "figures/B.svg", "png": "figures/B.png", "note_ja": "この役割表では同じ補助腕への重複なし。到達・移動・支持・工具を含む同時運転は未確認。"}, {"id": "C", "active_assists": ["X-C"], "active_roles": ["R-A", "R-B", "R-C", "X-C"], "unit_assignments": {"ARM_A": ["R-A"], "ARM_B": ["R-B"], "ARM_C": ["R-C"], "ASSIST_2": ["X-C"]}, "duplicate_assignments": {}, "title_ja": "Cだけに補助が必要", "diagram": "figures/C.svg", "png": "figures/C.png", "note_ja": "この役割表では同じ補助腕への重複なし。到達・移動・支持・工具を含む同時運転は未確認。"}, {"id": "AB", "active_assists": ["X-A", "X-B"], "active_roles": ["R-A", "R-B", "R-C", "X-A", "X-B"], "unit_assignments": {"ARM_A": ["R-A"], "ARM_B": ["R-B"], "ARM_C": ["R-C"], "ASSIST_1": ["X-A", "X-B"]}, "duplicate_assignments": {"ASSIST_1": ["X-A", "X-B"]}, "title_ja": "AとBに補助が必要", "diagram": "figures/AB.svg", "png": "figures/AB.png", "note_ja": "A/B共用補助への同時要求。どちらかの保持開始を、前の支持引継ぎと退避の後へ置く。"}, {"id": "AC", "active_assists": ["X-A", "X-C"], "active_roles": ["R-A", "R-B", "R-C", "X-A", "X-C"], "unit_assignments": {"ARM_A": ["R-A"], "ARM_B": ["R-B"], "ARM_C": ["R-C"], "ASSIST_1": ["X-A"], "ASSIST_2": ["X-C"]}, "duplicate_assignments": {}, "title_ja": "AとCに補助が必要", "diagram": "figures/AC.svg", "png": "figures/AC.png", "note_ja": "この役割表では同じ補助腕への重複なし。到達・移動・支持・工具を含む同時運転は未確認。"}, {"id": "BC", "active_assists": ["X-B", "X-C"], "active_roles": ["R-A", "R-B", "R-C", "X-B", "X-C"], "unit_assignments": {"ARM_A": ["R-A"], "ARM_B": ["R-B"], "ARM_C": ["R-C"], "ASSIST_1": ["X-B"], "ASSIST_2": ["X-C"]}, "duplicate_assignments": {}, "title_ja": "BとCに補助が必要", "diagram": "figures/BC.svg", "png": "figures/BC.png", "note_ja": "この役割表では同じ補助腕への重複なし。到達・移動・支持・工具を含む同時運転は未確認。"}, {"id": "ABC", "active_assists": ["X-A", "X-B", "X-C"], "active_roles": ["R-A", "R-B", "R-C", "X-A", "X-B", "X-C"], "unit_assignments": {"ARM_A": ["R-A"], "ARM_B": ["R-B"], "ARM_C": ["R-C"], "ASSIST_1": ["X-A", "X-B"], "ASSIST_2": ["X-C"]}, "duplicate_assignments": {"ASSIST_1": ["X-A", "X-B"]}, "title_ja": "A・B・Cに補助が必要", "diagram": "figures/ABC.svg", "png": "figures/ABC.png", "note_ja": "A/B共用補助への同時要求。どちらかの保持開始を、前の支持引継ぎと退避の後へ置く。"}]}</script>
+  <script src="parallel.js"></script>
+</body>
+</html>

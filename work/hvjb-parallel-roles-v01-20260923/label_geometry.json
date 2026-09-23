@@ -1,0 +1,2122 @@
+{
+  "NONE": [
+    {
+      "text": "3STと5腕の役割分担",
+      "x": 40,
+      "baseline_y": 54,
+      "width": 297.078125,
+      "maximum_width": 900
+    },
+    {
+      "text": "無寸法の役割図。A/Bで次の部材、Cで前の一式を扱う説明例。",
+      "x": 40,
+      "baseline_y": 90,
+      "width": 650.78125,
+      "maximum_width": 1300
+    },
+    {
+      "text": "A/B共用補助：1腕",
+      "x": 246,
+      "baseline_y": 151,
+      "width": 205.296875,
+      "maximum_width": 452
+    },
+    {
+      "text": "要求なしの例",
+      "x": 246,
+      "baseline_y": 190,
+      "width": 150.0,
+      "maximum_width": 452
+    },
+    {
+      "text": "C専用補助：1腕",
+      "x": 976,
+      "baseline_y": 151,
+      "width": 179.828125,
+      "maximum_width": 360
+    },
+    {
+      "text": "要求なしの例",
+      "x": 976,
+      "baseline_y": 190,
+      "width": 150.0,
+      "maximum_width": 360
+    },
+    {
+      "text": "ST A",
+      "x": 64,
+      "baseline_y": 310,
+      "width": 60.140625,
+      "maximum_width": 360
+    },
+    {
+      "text": "下板側ユニット",
+      "x": 64,
+      "baseline_y": 352,
+      "width": 175.0,
+      "maximum_width": 360
+    },
+    {
+      "text": "主担当 A：1腕",
+      "x": 82,
+      "baseline_y": 418,
+      "width": 166.078125,
+      "maximum_width": 324
+    },
+    {
+      "text": "補助不要の作業と仮定",
+      "x": 64,
+      "baseline_y": 484,
+      "width": 240.0,
+      "maximum_width": 360
+    },
+    {
+      "text": "共用補助を使う",
+      "x": 64,
+      "baseline_y": 525,
+      "width": 154.0,
+      "maximum_width": 360
+    },
+    {
+      "text": "保持解除を指示する表示ではない",
+      "x": 64,
+      "baseline_y": 525,
+      "width": 285.0,
+      "maximum_width": 360
+    },
+    {
+      "text": "次の一式の部材",
+      "x": 64,
+      "baseline_y": 569,
+      "width": 154.0,
+      "maximum_width": 360
+    },
+    {
+      "text": "D10 / D11 / D12",
+      "x": 64,
+      "baseline_y": 608,
+      "width": 134.421875,
+      "maximum_width": 360
+    },
+    {
+      "text": "ST B",
+      "x": 520,
+      "baseline_y": 310,
+      "width": 61.609375,
+      "maximum_width": 360
+    },
+    {
+      "text": "ヒューズ板側ユニット",
+      "x": 520,
+      "baseline_y": 352,
+      "width": 248.75,
+      "maximum_width": 360
+    },
+    {
+      "text": "主担当 B：1腕",
+      "x": 538,
+      "baseline_y": 418,
+      "width": 167.34375,
+      "maximum_width": 324
+    },
+    {
+      "text": "補助不要の作業と仮定",
+      "x": 520,
+      "baseline_y": 484,
+      "width": 240.0,
+      "maximum_width": 360
+    },
+    {
+      "text": "共用補助を使う",
+      "x": 520,
+      "baseline_y": 525,
+      "width": 154.0,
+      "maximum_width": 360
+    },
+    {
+      "text": "保持解除を指示する表示ではない",
+      "x": 520,
+      "baseline_y": 525,
+      "width": 285.0,
+      "maximum_width": 360
+    },
+    {
+      "text": "次の一式の部材",
+      "x": 520,
+      "baseline_y": 569,
+      "width": 154.0,
+      "maximum_width": 360
+    },
+    {
+      "text": "D20 / D21 / D22",
+      "x": 520,
+      "baseline_y": 608,
+      "width": 134.421875,
+      "maximum_width": 360
+    },
+    {
+      "text": "ST C",
+      "x": 976,
+      "baseline_y": 310,
+      "width": 61.046875,
+      "maximum_width": 360
+    },
+    {
+      "text": "合流・搭載・残接続",
+      "x": 976,
+      "baseline_y": 352,
+      "width": 225.0,
+      "maximum_width": 360
+    },
+    {
+      "text": "主担当 C：1腕",
+      "x": 994,
+      "baseline_y": 418,
+      "width": 166.859375,
+      "maximum_width": 324
+    },
+    {
+      "text": "補助不要の作業と仮定",
+      "x": 976,
+      "baseline_y": 484,
+      "width": 240.0,
+      "maximum_width": 360
+    },
+    {
+      "text": "C専用補助を使う",
+      "x": 976,
+      "baseline_y": 525,
+      "width": 168.03125,
+      "maximum_width": 360
+    },
+    {
+      "text": "保持解除を指示する表示ではない",
+      "x": 976,
+      "baseline_y": 525,
+      "width": 285.0,
+      "maximum_width": 360
+    },
+    {
+      "text": "前の一式",
+      "x": 976,
+      "baseline_y": 569,
+      "width": 88.0,
+      "maximum_width": 360
+    },
+    {
+      "text": "D30〜D61",
+      "x": 976,
+      "baseline_y": 608,
+      "width": 87.34375,
+      "maximum_width": 360
+    },
+    {
+      "text": "どのセルも補助不要と仮定",
+      "x": 64,
+      "baseline_y": 691,
+      "width": 312.0,
+      "maximum_width": 1272
+    },
+    {
+      "text": "この担当ID表では同じ補助腕への要求が重ならない。",
+      "x": 64,
+      "baseline_y": 731,
+      "width": 599.53125,
+      "maximum_width": 1272
+    },
+    {
+      "text": "到達・移動・支持・工具まで含む同時運転の成立を示すものではない。",
+      "x": 64,
+      "baseline_y": 764,
+      "width": 672.0,
+      "maximum_width": 1272
+    },
+    {
+      "text": "5腕は組立の役割数。XYZ、工具、供給、検査、回収などを含む設備台数ではありません。",
+      "x": 40,
+      "baseline_y": 824,
+      "width": 884.46875,
+      "maximum_width": 1320
+    }
+  ],
+  "A": [
+    {
+      "text": "3STと5腕の役割分担",
+      "x": 40,
+      "baseline_y": 54,
+      "width": 297.078125,
+      "maximum_width": 900
+    },
+    {
+      "text": "無寸法の役割図。A/Bで次の部材、Cで前の一式を扱う説明例。",
+      "x": 40,
+      "baseline_y": 90,
+      "width": 650.78125,
+      "maximum_width": 1300
+    },
+    {
+      "text": "A/B共用補助：1腕",
+      "x": 246,
+      "baseline_y": 151,
+      "width": 205.296875,
+      "maximum_width": 452
+    },
+    {
+      "text": "Aを補助",
+      "x": 246,
+      "baseline_y": 190,
+      "width": 90.203125,
+      "maximum_width": 452
+    },
+    {
+      "text": "C専用補助：1腕",
+      "x": 976,
+      "baseline_y": 151,
+      "width": 179.828125,
+      "maximum_width": 360
+    },
+    {
+      "text": "要求なしの例",
+      "x": 976,
+      "baseline_y": 190,
+      "width": 150.0,
+      "maximum_width": 360
+    },
+    {
+      "text": "ST A",
+      "x": 64,
+      "baseline_y": 310,
+      "width": 60.140625,
+      "maximum_width": 360
+    },
+    {
+      "text": "下板側ユニット",
+      "x": 64,
+      "baseline_y": 352,
+      "width": 175.0,
+      "maximum_width": 360
+    },
+    {
+      "text": "主担当 A：1腕",
+      "x": 82,
+      "baseline_y": 418,
+      "width": 166.078125,
+      "maximum_width": 324
+    },
+    {
+      "text": "補助の独立保持が必要",
+      "x": 64,
+      "baseline_y": 484,
+      "width": 240.0,
+      "maximum_width": 360
+    },
+    {
+      "text": "共用補助を使う",
+      "x": 64,
+      "baseline_y": 525,
+      "width": 154.0,
+      "maximum_width": 360
+    },
+    {
+      "text": "次の一式の部材",
+      "x": 64,
+      "baseline_y": 569,
+      "width": 154.0,
+      "maximum_width": 360
+    },
+    {
+      "text": "D10 / D11 / D12",
+      "x": 64,
+      "baseline_y": 608,
+      "width": 134.421875,
+      "maximum_width": 360
+    },
+    {
+      "text": "ST B",
+      "x": 520,
+      "baseline_y": 310,
+      "width": 61.609375,
+      "maximum_width": 360
+    },
+    {
+      "text": "ヒューズ板側ユニット",
+      "x": 520,
+      "baseline_y": 352,
+      "width": 248.75,
+      "maximum_width": 360
+    },
+    {
+      "text": "主担当 B：1腕",
+      "x": 538,
+      "baseline_y": 418,
+      "width": 167.34375,
+      "maximum_width": 324
+    },
+    {
+      "text": "補助不要の作業と仮定",
+      "x": 520,
+      "baseline_y": 484,
+      "width": 240.0,
+      "maximum_width": 360
+    },
+    {
+      "text": "共用補助を使う",
+      "x": 520,
+      "baseline_y": 525,
+      "width": 154.0,
+      "maximum_width": 360
+    },
+    {
+      "text": "保持解除を指示する表示ではない",
+      "x": 520,
+      "baseline_y": 525,
+      "width": 285.0,
+      "maximum_width": 360
+    },
+    {
+      "text": "次の一式の部材",
+      "x": 520,
+      "baseline_y": 569,
+      "width": 154.0,
+      "maximum_width": 360
+    },
+    {
+      "text": "D20 / D21 / D22",
+      "x": 520,
+      "baseline_y": 608,
+      "width": 134.421875,
+      "maximum_width": 360
+    },
+    {
+      "text": "ST C",
+      "x": 976,
+      "baseline_y": 310,
+      "width": 61.046875,
+      "maximum_width": 360
+    },
+    {
+      "text": "合流・搭載・残接続",
+      "x": 976,
+      "baseline_y": 352,
+      "width": 225.0,
+      "maximum_width": 360
+    },
+    {
+      "text": "主担当 C：1腕",
+      "x": 994,
+      "baseline_y": 418,
+      "width": 166.859375,
+      "maximum_width": 324
+    },
+    {
+      "text": "補助不要の作業と仮定",
+      "x": 976,
+      "baseline_y": 484,
+      "width": 240.0,
+      "maximum_width": 360
+    },
+    {
+      "text": "C専用補助を使う",
+      "x": 976,
+      "baseline_y": 525,
+      "width": 168.03125,
+      "maximum_width": 360
+    },
+    {
+      "text": "保持解除を指示する表示ではない",
+      "x": 976,
+      "baseline_y": 525,
+      "width": 285.0,
+      "maximum_width": 360
+    },
+    {
+      "text": "前の一式",
+      "x": 976,
+      "baseline_y": 569,
+      "width": 88.0,
+      "maximum_width": 360
+    },
+    {
+      "text": "D30〜D61",
+      "x": 976,
+      "baseline_y": 608,
+      "width": 87.34375,
+      "maximum_width": 360
+    },
+    {
+      "text": "Aだけに補助が必要",
+      "x": 64,
+      "baseline_y": 691,
+      "width": 223.8125,
+      "maximum_width": 1272
+    },
+    {
+      "text": "この担当ID表では同じ補助腕への要求が重ならない。",
+      "x": 64,
+      "baseline_y": 731,
+      "width": 599.53125,
+      "maximum_width": 1272
+    },
+    {
+      "text": "到達・移動・支持・工具まで含む同時運転の成立を示すものではない。",
+      "x": 64,
+      "baseline_y": 764,
+      "width": 672.0,
+      "maximum_width": 1272
+    },
+    {
+      "text": "5腕は組立の役割数。XYZ、工具、供給、検査、回収などを含む設備台数ではありません。",
+      "x": 40,
+      "baseline_y": 824,
+      "width": 884.46875,
+      "maximum_width": 1320
+    }
+  ],
+  "B": [
+    {
+      "text": "3STと5腕の役割分担",
+      "x": 40,
+      "baseline_y": 54,
+      "width": 297.078125,
+      "maximum_width": 900
+    },
+    {
+      "text": "無寸法の役割図。A/Bで次の部材、Cで前の一式を扱う説明例。",
+      "x": 40,
+      "baseline_y": 90,
+      "width": 650.78125,
+      "maximum_width": 1300
+    },
+    {
+      "text": "A/B共用補助：1腕",
+      "x": 246,
+      "baseline_y": 151,
+      "width": 205.296875,
+      "maximum_width": 452
+    },
+    {
+      "text": "Bを補助",
+      "x": 246,
+      "baseline_y": 190,
+      "width": 91.421875,
+      "maximum_width": 452
+    },
+    {
+      "text": "C専用補助：1腕",
+      "x": 976,
+      "baseline_y": 151,
+      "width": 179.828125,
+      "maximum_width": 360
+    },
+    {
+      "text": "要求なしの例",
+      "x": 976,
+      "baseline_y": 190,
+      "width": 150.0,
+      "maximum_width": 360
+    },
+    {
+      "text": "ST A",
+      "x": 64,
+      "baseline_y": 310,
+      "width": 60.140625,
+      "maximum_width": 360
+    },
+    {
+      "text": "下板側ユニット",
+      "x": 64,
+      "baseline_y": 352,
+      "width": 175.0,
+      "maximum_width": 360
+    },
+    {
+      "text": "主担当 A：1腕",
+      "x": 82,
+      "baseline_y": 418,
+      "width": 166.078125,
+      "maximum_width": 324
+    },
+    {
+      "text": "補助不要の作業と仮定",
+      "x": 64,
+      "baseline_y": 484,
+      "width": 240.0,
+      "maximum_width": 360
+    },
+    {
+      "text": "共用補助を使う",
+      "x": 64,
+      "baseline_y": 525,
+      "width": 154.0,
+      "maximum_width": 360
+    },
+    {
+      "text": "保持解除を指示する表示ではない",
+      "x": 64,
+      "baseline_y": 525,
+      "width": 285.0,
+      "maximum_width": 360
+    },
+    {
+      "text": "次の一式の部材",
+      "x": 64,
+      "baseline_y": 569,
+      "width": 154.0,
+      "maximum_width": 360
+    },
+    {
+      "text": "D10 / D11 / D12",
+      "x": 64,
+      "baseline_y": 608,
+      "width": 134.421875,
+      "maximum_width": 360
+    },
+    {
+      "text": "ST B",
+      "x": 520,
+      "baseline_y": 310,
+      "width": 61.609375,
+      "maximum_width": 360
+    },
+    {
+      "text": "ヒューズ板側ユニット",
+      "x": 520,
+      "baseline_y": 352,
+      "width": 248.75,
+      "maximum_width": 360
+    },
+    {
+      "text": "主担当 B：1腕",
+      "x": 538,
+      "baseline_y": 418,
+      "width": 167.34375,
+      "maximum_width": 324
+    },
+    {
+      "text": "補助の独立保持が必要",
+      "x": 520,
+      "baseline_y": 484,
+      "width": 240.0,
+      "maximum_width": 360
+    },
+    {
+      "text": "共用補助を使う",
+      "x": 520,
+      "baseline_y": 525,
+      "width": 154.0,
+      "maximum_width": 360
+    },
+    {
+      "text": "次の一式の部材",
+      "x": 520,
+      "baseline_y": 569,
+      "width": 154.0,
+      "maximum_width": 360
+    },
+    {
+      "text": "D20 / D21 / D22",
+      "x": 520,
+      "baseline_y": 608,
+      "width": 134.421875,
+      "maximum_width": 360
+    },
+    {
+      "text": "ST C",
+      "x": 976,
+      "baseline_y": 310,
+      "width": 61.046875,
+      "maximum_width": 360
+    },
+    {
+      "text": "合流・搭載・残接続",
+      "x": 976,
+      "baseline_y": 352,
+      "width": 225.0,
+      "maximum_width": 360
+    },
+    {
+      "text": "主担当 C：1腕",
+      "x": 994,
+      "baseline_y": 418,
+      "width": 166.859375,
+      "maximum_width": 324
+    },
+    {
+      "text": "補助不要の作業と仮定",
+      "x": 976,
+      "baseline_y": 484,
+      "width": 240.0,
+      "maximum_width": 360
+    },
+    {
+      "text": "C専用補助を使う",
+      "x": 976,
+      "baseline_y": 525,
+      "width": 168.03125,
+      "maximum_width": 360
+    },
+    {
+      "text": "保持解除を指示する表示ではない",
+      "x": 976,
+      "baseline_y": 525,
+      "width": 285.0,
+      "maximum_width": 360
+    },
+    {
+      "text": "前の一式",
+      "x": 976,
+      "baseline_y": 569,
+      "width": 88.0,
+      "maximum_width": 360
+    },
+    {
+      "text": "D30〜D61",
+      "x": 976,
+      "baseline_y": 608,
+      "width": 87.34375,
+      "maximum_width": 360
+    },
+    {
+      "text": "Bだけに補助が必要",
+      "x": 64,
+      "baseline_y": 691,
+      "width": 225.078125,
+      "maximum_width": 1272
+    },
+    {
+      "text": "この担当ID表では同じ補助腕への要求が重ならない。",
+      "x": 64,
+      "baseline_y": 731,
+      "width": 599.53125,
+      "maximum_width": 1272
+    },
+    {
+      "text": "到達・移動・支持・工具まで含む同時運転の成立を示すものではない。",
+      "x": 64,
+      "baseline_y": 764,
+      "width": 672.0,
+      "maximum_width": 1272
+    },
+    {
+      "text": "5腕は組立の役割数。XYZ、工具、供給、検査、回収などを含む設備台数ではありません。",
+      "x": 40,
+      "baseline_y": 824,
+      "width": 884.46875,
+      "maximum_width": 1320
+    }
+  ],
+  "C": [
+    {
+      "text": "3STと5腕の役割分担",
+      "x": 40,
+      "baseline_y": 54,
+      "width": 297.078125,
+      "maximum_width": 900
+    },
+    {
+      "text": "無寸法の役割図。A/Bで次の部材、Cで前の一式を扱う説明例。",
+      "x": 40,
+      "baseline_y": 90,
+      "width": 650.78125,
+      "maximum_width": 1300
+    },
+    {
+      "text": "A/B共用補助：1腕",
+      "x": 246,
+      "baseline_y": 151,
+      "width": 205.296875,
+      "maximum_width": 452
+    },
+    {
+      "text": "要求なしの例",
+      "x": 246,
+      "baseline_y": 190,
+      "width": 150.0,
+      "maximum_width": 452
+    },
+    {
+      "text": "C専用補助：1腕",
+      "x": 976,
+      "baseline_y": 151,
+      "width": 179.828125,
+      "maximum_width": 360
+    },
+    {
+      "text": "Cを補助",
+      "x": 976,
+      "baseline_y": 190,
+      "width": 90.953125,
+      "maximum_width": 360
+    },
+    {
+      "text": "ST A",
+      "x": 64,
+      "baseline_y": 310,
+      "width": 60.140625,
+      "maximum_width": 360
+    },
+    {
+      "text": "下板側ユニット",
+      "x": 64,
+      "baseline_y": 352,
+      "width": 175.0,
+      "maximum_width": 360
+    },
+    {
+      "text": "主担当 A：1腕",
+      "x": 82,
+      "baseline_y": 418,
+      "width": 166.078125,
+      "maximum_width": 324
+    },
+    {
+      "text": "補助不要の作業と仮定",
+      "x": 64,
+      "baseline_y": 484,
+      "width": 240.0,
+      "maximum_width": 360
+    },
+    {
+      "text": "共用補助を使う",
+      "x": 64,
+      "baseline_y": 525,
+      "width": 154.0,
+      "maximum_width": 360
+    },
+    {
+      "text": "保持解除を指示する表示ではない",
+      "x": 64,
+      "baseline_y": 525,
+      "width": 285.0,
+      "maximum_width": 360
+    },
+    {
+      "text": "次の一式の部材",
+      "x": 64,
+      "baseline_y": 569,
+      "width": 154.0,
+      "maximum_width": 360
+    },
+    {
+      "text": "D10 / D11 / D12",
+      "x": 64,
+      "baseline_y": 608,
+      "width": 134.421875,
+      "maximum_width": 360
+    },
+    {
+      "text": "ST B",
+      "x": 520,
+      "baseline_y": 310,
+      "width": 61.609375,
+      "maximum_width": 360
+    },
+    {
+      "text": "ヒューズ板側ユニット",
+      "x": 520,
+      "baseline_y": 352,
+      "width": 248.75,
+      "maximum_width": 360
+    },
+    {
+      "text": "主担当 B：1腕",
+      "x": 538,
+      "baseline_y": 418,
+      "width": 167.34375,
+      "maximum_width": 324
+    },
+    {
+      "text": "補助不要の作業と仮定",
+      "x": 520,
+      "baseline_y": 484,
+      "width": 240.0,
+      "maximum_width": 360
+    },
+    {
+      "text": "共用補助を使う",
+      "x": 520,
+      "baseline_y": 525,
+      "width": 154.0,
+      "maximum_width": 360
+    },
+    {
+      "text": "保持解除を指示する表示ではない",
+      "x": 520,
+      "baseline_y": 525,
+      "width": 285.0,
+      "maximum_width": 360
+    },
+    {
+      "text": "次の一式の部材",
+      "x": 520,
+      "baseline_y": 569,
+      "width": 154.0,
+      "maximum_width": 360
+    },
+    {
+      "text": "D20 / D21 / D22",
+      "x": 520,
+      "baseline_y": 608,
+      "width": 134.421875,
+      "maximum_width": 360
+    },
+    {
+      "text": "ST C",
+      "x": 976,
+      "baseline_y": 310,
+      "width": 61.046875,
+      "maximum_width": 360
+    },
+    {
+      "text": "合流・搭載・残接続",
+      "x": 976,
+      "baseline_y": 352,
+      "width": 225.0,
+      "maximum_width": 360
+    },
+    {
+      "text": "主担当 C：1腕",
+      "x": 994,
+      "baseline_y": 418,
+      "width": 166.859375,
+      "maximum_width": 324
+    },
+    {
+      "text": "補助の独立保持が必要",
+      "x": 976,
+      "baseline_y": 484,
+      "width": 240.0,
+      "maximum_width": 360
+    },
+    {
+      "text": "C専用補助を使う",
+      "x": 976,
+      "baseline_y": 525,
+      "width": 168.03125,
+      "maximum_width": 360
+    },
+    {
+      "text": "前の一式",
+      "x": 976,
+      "baseline_y": 569,
+      "width": 88.0,
+      "maximum_width": 360
+    },
+    {
+      "text": "D30〜D61",
+      "x": 976,
+      "baseline_y": 608,
+      "width": 87.34375,
+      "maximum_width": 360
+    },
+    {
+      "text": "Cだけに補助が必要",
+      "x": 64,
+      "baseline_y": 691,
+      "width": 224.59375,
+      "maximum_width": 1272
+    },
+    {
+      "text": "この担当ID表では同じ補助腕への要求が重ならない。",
+      "x": 64,
+      "baseline_y": 731,
+      "width": 599.53125,
+      "maximum_width": 1272
+    },
+    {
+      "text": "到達・移動・支持・工具まで含む同時運転の成立を示すものではない。",
+      "x": 64,
+      "baseline_y": 764,
+      "width": 672.0,
+      "maximum_width": 1272
+    },
+    {
+      "text": "5腕は組立の役割数。XYZ、工具、供給、検査、回収などを含む設備台数ではありません。",
+      "x": 40,
+      "baseline_y": 824,
+      "width": 884.46875,
+      "maximum_width": 1320
+    }
+  ],
+  "AB": [
+    {
+      "text": "3STと5腕の役割分担",
+      "x": 40,
+      "baseline_y": 54,
+      "width": 297.078125,
+      "maximum_width": 900
+    },
+    {
+      "text": "無寸法の役割図。A/Bで次の部材、Cで前の一式を扱う説明例。",
+      "x": 40,
+      "baseline_y": 90,
+      "width": 650.78125,
+      "maximum_width": 1300
+    },
+    {
+      "text": "A/B共用補助：1腕",
+      "x": 246,
+      "baseline_y": 151,
+      "width": 205.296875,
+      "maximum_width": 452
+    },
+    {
+      "text": "AとBが同じ1腕を要求",
+      "x": 246,
+      "baseline_y": 190,
+      "width": 245.5,
+      "maximum_width": 452
+    },
+    {
+      "text": "C専用補助：1腕",
+      "x": 976,
+      "baseline_y": 151,
+      "width": 179.828125,
+      "maximum_width": 360
+    },
+    {
+      "text": "要求なしの例",
+      "x": 976,
+      "baseline_y": 190,
+      "width": 150.0,
+      "maximum_width": 360
+    },
+    {
+      "text": "ST A",
+      "x": 64,
+      "baseline_y": 310,
+      "width": 60.140625,
+      "maximum_width": 360
+    },
+    {
+      "text": "下板側ユニット",
+      "x": 64,
+      "baseline_y": 352,
+      "width": 175.0,
+      "maximum_width": 360
+    },
+    {
+      "text": "主担当 A：1腕",
+      "x": 82,
+      "baseline_y": 418,
+      "width": 166.078125,
+      "maximum_width": 324
+    },
+    {
+      "text": "補助の独立保持が必要",
+      "x": 64,
+      "baseline_y": 484,
+      "width": 240.0,
+      "maximum_width": 360
+    },
+    {
+      "text": "共用補助を使う",
+      "x": 64,
+      "baseline_y": 525,
+      "width": 154.0,
+      "maximum_width": 360
+    },
+    {
+      "text": "次の一式の部材",
+      "x": 64,
+      "baseline_y": 569,
+      "width": 154.0,
+      "maximum_width": 360
+    },
+    {
+      "text": "D10 / D11 / D12",
+      "x": 64,
+      "baseline_y": 608,
+      "width": 134.421875,
+      "maximum_width": 360
+    },
+    {
+      "text": "ST B",
+      "x": 520,
+      "baseline_y": 310,
+      "width": 61.609375,
+      "maximum_width": 360
+    },
+    {
+      "text": "ヒューズ板側ユニット",
+      "x": 520,
+      "baseline_y": 352,
+      "width": 248.75,
+      "maximum_width": 360
+    },
+    {
+      "text": "主担当 B：1腕",
+      "x": 538,
+      "baseline_y": 418,
+      "width": 167.34375,
+      "maximum_width": 324
+    },
+    {
+      "text": "補助の独立保持が必要",
+      "x": 520,
+      "baseline_y": 484,
+      "width": 240.0,
+      "maximum_width": 360
+    },
+    {
+      "text": "共用補助を使う",
+      "x": 520,
+      "baseline_y": 525,
+      "width": 154.0,
+      "maximum_width": 360
+    },
+    {
+      "text": "次の一式の部材",
+      "x": 520,
+      "baseline_y": 569,
+      "width": 154.0,
+      "maximum_width": 360
+    },
+    {
+      "text": "D20 / D21 / D22",
+      "x": 520,
+      "baseline_y": 608,
+      "width": 134.421875,
+      "maximum_width": 360
+    },
+    {
+      "text": "ST C",
+      "x": 976,
+      "baseline_y": 310,
+      "width": 61.046875,
+      "maximum_width": 360
+    },
+    {
+      "text": "合流・搭載・残接続",
+      "x": 976,
+      "baseline_y": 352,
+      "width": 225.0,
+      "maximum_width": 360
+    },
+    {
+      "text": "主担当 C：1腕",
+      "x": 994,
+      "baseline_y": 418,
+      "width": 166.859375,
+      "maximum_width": 324
+    },
+    {
+      "text": "補助不要の作業と仮定",
+      "x": 976,
+      "baseline_y": 484,
+      "width": 240.0,
+      "maximum_width": 360
+    },
+    {
+      "text": "C専用補助を使う",
+      "x": 976,
+      "baseline_y": 525,
+      "width": 168.03125,
+      "maximum_width": 360
+    },
+    {
+      "text": "保持解除を指示する表示ではない",
+      "x": 976,
+      "baseline_y": 525,
+      "width": 285.0,
+      "maximum_width": 360
+    },
+    {
+      "text": "前の一式",
+      "x": 976,
+      "baseline_y": 569,
+      "width": 88.0,
+      "maximum_width": 360
+    },
+    {
+      "text": "D30〜D61",
+      "x": 976,
+      "baseline_y": 608,
+      "width": 87.34375,
+      "maximum_width": 360
+    },
+    {
+      "text": "AとBに補助が必要",
+      "x": 64,
+      "baseline_y": 691,
+      "width": 214.890625,
+      "maximum_width": 1272
+    },
+    {
+      "text": "共用補助の保持開始を同時には割り当てない。前の支持引継ぎ・退避後に次へ。",
+      "x": 64,
+      "baseline_y": 731,
+      "width": 900.0,
+      "maximum_width": 1272
+    },
+    {
+      "text": "保持中の腕を途中で離す方法は、この分担に含めない。",
+      "x": 64,
+      "baseline_y": 764,
+      "width": 525.0,
+      "maximum_width": 1272
+    },
+    {
+      "text": "5腕は組立の役割数。XYZ、工具、供給、検査、回収などを含む設備台数ではありません。",
+      "x": 40,
+      "baseline_y": 824,
+      "width": 884.46875,
+      "maximum_width": 1320
+    }
+  ],
+  "AC": [
+    {
+      "text": "3STと5腕の役割分担",
+      "x": 40,
+      "baseline_y": 54,
+      "width": 297.078125,
+      "maximum_width": 900
+    },
+    {
+      "text": "無寸法の役割図。A/Bで次の部材、Cで前の一式を扱う説明例。",
+      "x": 40,
+      "baseline_y": 90,
+      "width": 650.78125,
+      "maximum_width": 1300
+    },
+    {
+      "text": "A/B共用補助：1腕",
+      "x": 246,
+      "baseline_y": 151,
+      "width": 205.296875,
+      "maximum_width": 452
+    },
+    {
+      "text": "Aを補助",
+      "x": 246,
+      "baseline_y": 190,
+      "width": 90.203125,
+      "maximum_width": 452
+    },
+    {
+      "text": "C専用補助：1腕",
+      "x": 976,
+      "baseline_y": 151,
+      "width": 179.828125,
+      "maximum_width": 360
+    },
+    {
+      "text": "Cを補助",
+      "x": 976,
+      "baseline_y": 190,
+      "width": 90.953125,
+      "maximum_width": 360
+    },
+    {
+      "text": "ST A",
+      "x": 64,
+      "baseline_y": 310,
+      "width": 60.140625,
+      "maximum_width": 360
+    },
+    {
+      "text": "下板側ユニット",
+      "x": 64,
+      "baseline_y": 352,
+      "width": 175.0,
+      "maximum_width": 360
+    },
+    {
+      "text": "主担当 A：1腕",
+      "x": 82,
+      "baseline_y": 418,
+      "width": 166.078125,
+      "maximum_width": 324
+    },
+    {
+      "text": "補助の独立保持が必要",
+      "x": 64,
+      "baseline_y": 484,
+      "width": 240.0,
+      "maximum_width": 360
+    },
+    {
+      "text": "共用補助を使う",
+      "x": 64,
+      "baseline_y": 525,
+      "width": 154.0,
+      "maximum_width": 360
+    },
+    {
+      "text": "次の一式の部材",
+      "x": 64,
+      "baseline_y": 569,
+      "width": 154.0,
+      "maximum_width": 360
+    },
+    {
+      "text": "D10 / D11 / D12",
+      "x": 64,
+      "baseline_y": 608,
+      "width": 134.421875,
+      "maximum_width": 360
+    },
+    {
+      "text": "ST B",
+      "x": 520,
+      "baseline_y": 310,
+      "width": 61.609375,
+      "maximum_width": 360
+    },
+    {
+      "text": "ヒューズ板側ユニット",
+      "x": 520,
+      "baseline_y": 352,
+      "width": 248.75,
+      "maximum_width": 360
+    },
+    {
+      "text": "主担当 B：1腕",
+      "x": 538,
+      "baseline_y": 418,
+      "width": 167.34375,
+      "maximum_width": 324
+    },
+    {
+      "text": "補助不要の作業と仮定",
+      "x": 520,
+      "baseline_y": 484,
+      "width": 240.0,
+      "maximum_width": 360
+    },
+    {
+      "text": "共用補助を使う",
+      "x": 520,
+      "baseline_y": 525,
+      "width": 154.0,
+      "maximum_width": 360
+    },
+    {
+      "text": "保持解除を指示する表示ではない",
+      "x": 520,
+      "baseline_y": 525,
+      "width": 285.0,
+      "maximum_width": 360
+    },
+    {
+      "text": "次の一式の部材",
+      "x": 520,
+      "baseline_y": 569,
+      "width": 154.0,
+      "maximum_width": 360
+    },
+    {
+      "text": "D20 / D21 / D22",
+      "x": 520,
+      "baseline_y": 608,
+      "width": 134.421875,
+      "maximum_width": 360
+    },
+    {
+      "text": "ST C",
+      "x": 976,
+      "baseline_y": 310,
+      "width": 61.046875,
+      "maximum_width": 360
+    },
+    {
+      "text": "合流・搭載・残接続",
+      "x": 976,
+      "baseline_y": 352,
+      "width": 225.0,
+      "maximum_width": 360
+    },
+    {
+      "text": "主担当 C：1腕",
+      "x": 994,
+      "baseline_y": 418,
+      "width": 166.859375,
+      "maximum_width": 324
+    },
+    {
+      "text": "補助の独立保持が必要",
+      "x": 976,
+      "baseline_y": 484,
+      "width": 240.0,
+      "maximum_width": 360
+    },
+    {
+      "text": "C専用補助を使う",
+      "x": 976,
+      "baseline_y": 525,
+      "width": 168.03125,
+      "maximum_width": 360
+    },
+    {
+      "text": "前の一式",
+      "x": 976,
+      "baseline_y": 569,
+      "width": 88.0,
+      "maximum_width": 360
+    },
+    {
+      "text": "D30〜D61",
+      "x": 976,
+      "baseline_y": 608,
+      "width": 87.34375,
+      "maximum_width": 360
+    },
+    {
+      "text": "AとCに補助が必要",
+      "x": 64,
+      "baseline_y": 691,
+      "width": 214.40625,
+      "maximum_width": 1272
+    },
+    {
+      "text": "この担当ID表では同じ補助腕への要求が重ならない。",
+      "x": 64,
+      "baseline_y": 731,
+      "width": 599.53125,
+      "maximum_width": 1272
+    },
+    {
+      "text": "到達・移動・支持・工具まで含む同時運転の成立を示すものではない。",
+      "x": 64,
+      "baseline_y": 764,
+      "width": 672.0,
+      "maximum_width": 1272
+    },
+    {
+      "text": "5腕は組立の役割数。XYZ、工具、供給、検査、回収などを含む設備台数ではありません。",
+      "x": 40,
+      "baseline_y": 824,
+      "width": 884.46875,
+      "maximum_width": 1320
+    }
+  ],
+  "BC": [
+    {
+      "text": "3STと5腕の役割分担",
+      "x": 40,
+      "baseline_y": 54,
+      "width": 297.078125,
+      "maximum_width": 900
+    },
+    {
+      "text": "無寸法の役割図。A/Bで次の部材、Cで前の一式を扱う説明例。",
+      "x": 40,
+      "baseline_y": 90,
+      "width": 650.78125,
+      "maximum_width": 1300
+    },
+    {
+      "text": "A/B共用補助：1腕",
+      "x": 246,
+      "baseline_y": 151,
+      "width": 205.296875,
+      "maximum_width": 452
+    },
+    {
+      "text": "Bを補助",
+      "x": 246,
+      "baseline_y": 190,
+      "width": 91.421875,
+      "maximum_width": 452
+    },
+    {
+      "text": "C専用補助：1腕",
+      "x": 976,
+      "baseline_y": 151,
+      "width": 179.828125,
+      "maximum_width": 360
+    },
+    {
+      "text": "Cを補助",
+      "x": 976,
+      "baseline_y": 190,
+      "width": 90.953125,
+      "maximum_width": 360
+    },
+    {
+      "text": "ST A",
+      "x": 64,
+      "baseline_y": 310,
+      "width": 60.140625,
+      "maximum_width": 360
+    },
+    {
+      "text": "下板側ユニット",
+      "x": 64,
+      "baseline_y": 352,
+      "width": 175.0,
+      "maximum_width": 360
+    },
+    {
+      "text": "主担当 A：1腕",
+      "x": 82,
+      "baseline_y": 418,
+      "width": 166.078125,
+      "maximum_width": 324
+    },
+    {
+      "text": "補助不要の作業と仮定",
+      "x": 64,
+      "baseline_y": 484,
+      "width": 240.0,
+      "maximum_width": 360
+    },
+    {
+      "text": "共用補助を使う",
+      "x": 64,
+      "baseline_y": 525,
+      "width": 154.0,
+      "maximum_width": 360
+    },
+    {
+      "text": "保持解除を指示する表示ではない",
+      "x": 64,
+      "baseline_y": 525,
+      "width": 285.0,
+      "maximum_width": 360
+    },
+    {
+      "text": "次の一式の部材",
+      "x": 64,
+      "baseline_y": 569,
+      "width": 154.0,
+      "maximum_width": 360
+    },
+    {
+      "text": "D10 / D11 / D12",
+      "x": 64,
+      "baseline_y": 608,
+      "width": 134.421875,
+      "maximum_width": 360
+    },
+    {
+      "text": "ST B",
+      "x": 520,
+      "baseline_y": 310,
+      "width": 61.609375,
+      "maximum_width": 360
+    },
+    {
+      "text": "ヒューズ板側ユニット",
+      "x": 520,
+      "baseline_y": 352,
+      "width": 248.75,
+      "maximum_width": 360
+    },
+    {
+      "text": "主担当 B：1腕",
+      "x": 538,
+      "baseline_y": 418,
+      "width": 167.34375,
+      "maximum_width": 324
+    },
+    {
+      "text": "補助の独立保持が必要",
+      "x": 520,
+      "baseline_y": 484,
+      "width": 240.0,
+      "maximum_width": 360
+    },
+    {
+      "text": "共用補助を使う",
+      "x": 520,
+      "baseline_y": 525,
+      "width": 154.0,
+      "maximum_width": 360
+    },
+    {
+      "text": "次の一式の部材",
+      "x": 520,
+      "baseline_y": 569,
+      "width": 154.0,
+      "maximum_width": 360
+    },
+    {
+      "text": "D20 / D21 / D22",
+      "x": 520,
+      "baseline_y": 608,
+      "width": 134.421875,
+      "maximum_width": 360
+    },
+    {
+      "text": "ST C",
+      "x": 976,
+      "baseline_y": 310,
+      "width": 61.046875,
+      "maximum_width": 360
+    },
+    {
+      "text": "合流・搭載・残接続",
+      "x": 976,
+      "baseline_y": 352,
+      "width": 225.0,
+      "maximum_width": 360
+    },
+    {
+      "text": "主担当 C：1腕",
+      "x": 994,
+      "baseline_y": 418,
+      "width": 166.859375,
+      "maximum_width": 324
+    },
+    {
+      "text": "補助の独立保持が必要",
+      "x": 976,
+      "baseline_y": 484,
+      "width": 240.0,
+      "maximum_width": 360
+    },
+    {
+      "text": "C専用補助を使う",
+      "x": 976,
+      "baseline_y": 525,
+      "width": 168.03125,
+      "maximum_width": 360
+    },
+    {
+      "text": "前の一式",
+      "x": 976,
+      "baseline_y": 569,
+      "width": 88.0,
+      "maximum_width": 360
+    },
+    {
+      "text": "D30〜D61",
+      "x": 976,
+      "baseline_y": 608,
+      "width": 87.34375,
+      "maximum_width": 360
+    },
+    {
+      "text": "BとCに補助が必要",
+      "x": 64,
+      "baseline_y": 691,
+      "width": 215.671875,
+      "maximum_width": 1272
+    },
+    {
+      "text": "この担当ID表では同じ補助腕への要求が重ならない。",
+      "x": 64,
+      "baseline_y": 731,
+      "width": 599.53125,
+      "maximum_width": 1272
+    },
+    {
+      "text": "到達・移動・支持・工具まで含む同時運転の成立を示すものではない。",
+      "x": 64,
+      "baseline_y": 764,
+      "width": 672.0,
+      "maximum_width": 1272
+    },
+    {
+      "text": "5腕は組立の役割数。XYZ、工具、供給、検査、回収などを含む設備台数ではありません。",
+      "x": 40,
+      "baseline_y": 824,
+      "width": 884.46875,
+      "maximum_width": 1320
+    }
+  ],
+  "ABC": [
+    {
+      "text": "3STと5腕の役割分担",
+      "x": 40,
+      "baseline_y": 54,
+      "width": 297.078125,
+      "maximum_width": 900
+    },
+    {
+      "text": "無寸法の役割図。A/Bで次の部材、Cで前の一式を扱う説明例。",
+      "x": 40,
+      "baseline_y": 90,
+      "width": 650.78125,
+      "maximum_width": 1300
+    },
+    {
+      "text": "A/B共用補助：1腕",
+      "x": 246,
+      "baseline_y": 151,
+      "width": 205.296875,
+      "maximum_width": 452
+    },
+    {
+      "text": "AとBが同じ1腕を要求",
+      "x": 246,
+      "baseline_y": 190,
+      "width": 245.5,
+      "maximum_width": 452
+    },
+    {
+      "text": "C専用補助：1腕",
+      "x": 976,
+      "baseline_y": 151,
+      "width": 179.828125,
+      "maximum_width": 360
+    },
+    {
+      "text": "Cを補助",
+      "x": 976,
+      "baseline_y": 190,
+      "width": 90.953125,
+      "maximum_width": 360
+    },
+    {
+      "text": "ST A",
+      "x": 64,
+      "baseline_y": 310,
+      "width": 60.140625,
+      "maximum_width": 360
+    },
+    {
+      "text": "下板側ユニット",
+      "x": 64,
+      "baseline_y": 352,
+      "width": 175.0,
+      "maximum_width": 360
+    },
+    {
+      "text": "主担当 A：1腕",
+      "x": 82,
+      "baseline_y": 418,
+      "width": 166.078125,
+      "maximum_width": 324
+    },
+    {
+      "text": "補助の独立保持が必要",
+      "x": 64,
+      "baseline_y": 484,
+      "width": 240.0,
+      "maximum_width": 360
+    },
+    {
+      "text": "共用補助を使う",
+      "x": 64,
+      "baseline_y": 525,
+      "width": 154.0,
+      "maximum_width": 360
+    },
+    {
+      "text": "次の一式の部材",
+      "x": 64,
+      "baseline_y": 569,
+      "width": 154.0,
+      "maximum_width": 360
+    },
+    {
+      "text": "D10 / D11 / D12",
+      "x": 64,
+      "baseline_y": 608,
+      "width": 134.421875,
+      "maximum_width": 360
+    },
+    {
+      "text": "ST B",
+      "x": 520,
+      "baseline_y": 310,
+      "width": 61.609375,
+      "maximum_width": 360
+    },
+    {
+      "text": "ヒューズ板側ユニット",
+      "x": 520,
+      "baseline_y": 352,
+      "width": 248.75,
+      "maximum_width": 360
+    },
+    {
+      "text": "主担当 B：1腕",
+      "x": 538,
+      "baseline_y": 418,
+      "width": 167.34375,
+      "maximum_width": 324
+    },
+    {
+      "text": "補助の独立保持が必要",
+      "x": 520,
+      "baseline_y": 484,
+      "width": 240.0,
+      "maximum_width": 360
+    },
+    {
+      "text": "共用補助を使う",
+      "x": 520,
+      "baseline_y": 525,
+      "width": 154.0,
+      "maximum_width": 360
+    },
+    {
+      "text": "次の一式の部材",
+      "x": 520,
+      "baseline_y": 569,
+      "width": 154.0,
+      "maximum_width": 360
+    },
+    {
+      "text": "D20 / D21 / D22",
+      "x": 520,
+      "baseline_y": 608,
+      "width": 134.421875,
+      "maximum_width": 360
+    },
+    {
+      "text": "ST C",
+      "x": 976,
+      "baseline_y": 310,
+      "width": 61.046875,
+      "maximum_width": 360
+    },
+    {
+      "text": "合流・搭載・残接続",
+      "x": 976,
+      "baseline_y": 352,
+      "width": 225.0,
+      "maximum_width": 360
+    },
+    {
+      "text": "主担当 C：1腕",
+      "x": 994,
+      "baseline_y": 418,
+      "width": 166.859375,
+      "maximum_width": 324
+    },
+    {
+      "text": "補助の独立保持が必要",
+      "x": 976,
+      "baseline_y": 484,
+      "width": 240.0,
+      "maximum_width": 360
+    },
+    {
+      "text": "C専用補助を使う",
+      "x": 976,
+      "baseline_y": 525,
+      "width": 168.03125,
+      "maximum_width": 360
+    },
+    {
+      "text": "前の一式",
+      "x": 976,
+      "baseline_y": 569,
+      "width": 88.0,
+      "maximum_width": 360
+    },
+    {
+      "text": "D30〜D61",
+      "x": 976,
+      "baseline_y": 608,
+      "width": 87.34375,
+      "maximum_width": 360
+    },
+    {
+      "text": "A・B・Cに補助が必要",
+      "x": 64,
+      "baseline_y": 691,
+      "width": 257.484375,
+      "maximum_width": 1272
+    },
+    {
+      "text": "共用補助の保持開始を同時には割り当てない。前の支持引継ぎ・退避後に次へ。",
+      "x": 64,
+      "baseline_y": 731,
+      "width": 900.0,
+      "maximum_width": 1272
+    },
+    {
+      "text": "保持中の腕を途中で離す方法は、この分担に含めない。",
+      "x": 64,
+      "baseline_y": 764,
+      "width": 525.0,
+      "maximum_width": 1272
+    },
+    {
+      "text": "5腕は組立の役割数。XYZ、工具、供給、検査、回収などを含む設備台数ではありません。",
+      "x": 40,
+      "baseline_y": 824,
+      "width": 884.46875,
+      "maximum_width": 1320
+    }
+  ],
+  "handoff": [
+    {
+      "text": "共用補助が次のセルへ移るまで",
+      "x": 40,
+      "baseline_y": 52,
+      "width": 448.0,
+      "maximum_width": 1320
+    },
+    {
+      "text": "A→B / B→Aのどちらも同じ扱い。秒数・移動経路・支持面は未選定。",
+      "x": 40,
+      "baseline_y": 91,
+      "width": 721.515625,
+      "maximum_width": 1320
+    },
+    {
+      "text": "1",
+      "x": 70,
+      "baseline_y": 175,
+      "width": 13.3125,
+      "maximum_width": 30
+    },
+    {
+      "text": "前の仕事で保持",
+      "x": 57,
+      "baseline_y": 227,
+      "width": 161.0,
+      "maximum_width": 216
+    },
+    {
+      "text": "保持を継続。",
+      "x": 57,
+      "baseline_y": 282,
+      "width": 102.0,
+      "maximum_width": 216
+    },
+    {
+      "text": "次の要求は開始待ち。",
+      "x": 57,
+      "baseline_y": 314,
+      "width": 170.0,
+      "maximum_width": 216
+    },
+    {
+      "text": "2",
+      "x": 338,
+      "baseline_y": 175,
+      "width": 13.3125,
+      "maximum_width": 30
+    },
+    {
+      "text": "次の支持先へ渡す",
+      "x": 325,
+      "baseline_y": 227,
+      "width": 184.0,
+      "maximum_width": 216
+    },
+    {
+      "text": "台・治具・次の保持役。",
+      "x": 325,
+      "baseline_y": 282,
+      "width": 187.0,
+      "maximum_width": 216
+    },
+    {
+      "text": "具体的な支持先は要確認。",
+      "x": 325,
+      "baseline_y": 314,
+      "width": 204.0,
+      "maximum_width": 216
+    },
+    {
+      "text": "3",
+      "x": 606,
+      "baseline_y": 175,
+      "width": 13.3125,
+      "maximum_width": 30
+    },
+    {
+      "text": "指を開放・退避",
+      "x": 593,
+      "baseline_y": 227,
+      "width": 161.0,
+      "maximum_width": 216
+    },
+    {
+      "text": "支持の引継ぎ後に開く。",
+      "x": 593,
+      "baseline_y": 282,
+      "width": 187.0,
+      "maximum_width": 216
+    },
+    {
+      "text": "指の抜け方も要確認。",
+      "x": 593,
+      "baseline_y": 314,
+      "width": 170.0,
+      "maximum_width": 216
+    },
+    {
+      "text": "4",
+      "x": 874,
+      "baseline_y": 175,
+      "width": 13.3125,
+      "maximum_width": 30
+    },
+    {
+      "text": "交換・移動",
+      "x": 861,
+      "baseline_y": 227,
+      "width": 115.0,
+      "maximum_width": 216
+    },
+    {
+      "text": "必要な手先交換と移動。",
+      "x": 861,
+      "baseline_y": 282,
+      "width": 187.0,
+      "maximum_width": 216
+    },
+    {
+      "text": "次の把持はまだ始めない。",
+      "x": 861,
+      "baseline_y": 314,
+      "width": 204.0,
+      "maximum_width": 216
+    },
+    {
+      "text": "5",
+      "x": 1142,
+      "baseline_y": 175,
+      "width": 13.3125,
+      "maximum_width": 30
+    },
+    {
+      "text": "次のセルで保持",
+      "x": 1129,
+      "baseline_y": 227,
+      "width": 161.0,
+      "maximum_width": 216
+    },
+    {
+      "text": "前の手順が終わってから、",
+      "x": 1129,
+      "baseline_y": 282,
+      "width": 203.15625,
+      "maximum_width": 216
+    },
+    {
+      "text": "新しい対象を保持する。",
+      "x": 1129,
+      "baseline_y": 314,
+      "width": 187.0,
+      "maximum_width": 216
+    },
+    {
+      "text": "時間は未測定です。引継ぎ・退避・交換・移動を、後で個別に計上します。",
+      "x": 40,
+      "baseline_y": 410,
+      "width": 811.1875,
+      "maximum_width": 1320
+    },
+    {
+      "text": "相手の支持が成立したとする条件・信号・力の値を、この説明図から新しく定めません。",
+      "x": 40,
+      "baseline_y": 452,
+      "width": 878.6875,
+      "maximum_width": 1320
+    }
+  ],
+  "reservation": [
+    {
+      "text": "C補助は、搭載が終わっただけでは空きにならない",
+      "x": 40,
+      "baseline_y": 52,
+      "width": 724.421875,
+      "maximum_width": 1320
+    },
+    {
+      "text": "既存の継続予約 D31→D40→D42→D45→D50。自由端ごとに次の支持先まで追う。",
+      "x": 40,
+      "baseline_y": 91,
+      "width": 854.578125,
+      "maximum_width": 1320
+    },
+    {
+      "text": "D31",
+      "x": 58,
+      "baseline_y": 171,
+      "width": 48.546875,
+      "maximum_width": 212
+    },
+    {
+      "text": "持ち替え",
+      "x": 58,
+      "baseline_y": 214,
+      "width": 100.0,
+      "maximum_width": 212
+    },
+    {
+      "text": "D40",
+      "x": 326,
+      "baseline_y": 171,
+      "width": 48.546875,
+      "maximum_width": 212
+    },
+    {
+      "text": "筐体搭載",
+      "x": 326,
+      "baseline_y": 214,
+      "width": 100.0,
+      "maximum_width": 212
+    },
+    {
+      "text": "D42",
+      "x": 594,
+      "baseline_y": 171,
+      "width": 48.546875,
+      "maximum_width": 212
+    },
+    {
+      "text": "箱内工具",
+      "x": 594,
+      "baseline_y": 214,
+      "width": 100.0,
+      "maximum_width": 212
+    },
+    {
+      "text": "D45",
+      "x": 862,
+      "baseline_y": 171,
+      "width": 48.546875,
+      "maximum_width": 212
+    },
+    {
+      "text": "開口引出し",
+      "x": 862,
+      "baseline_y": 214,
+      "width": 125.0,
+      "maximum_width": 212
+    },
+    {
+      "text": "D50",
+      "x": 1130,
+      "baseline_y": 171,
+      "width": 48.546875,
+      "maximum_width": 212
+    },
+    {
+      "text": "外側ヘッダー",
+      "x": 1130,
+      "baseline_y": 214,
+      "width": 150.0,
+      "maximum_width": 212
+    },
+    {
+      "text": "C専用補助：次の支持先へ引き継ぐまで、案内担当の占有を残す",
+      "x": 65,
+      "baseline_y": 320,
+      "width": 772.140625,
+      "maximum_width": 1270
+    },
+    {
+      "text": "全区間で同じ腕が必須と確定した意味ではありません。",
+      "x": 40,
+      "baseline_y": 394,
+      "width": 599.28125,
+      "maximum_width": 1320
+    },
+    {
+      "text": "D60 / D61にも対象別の支持確認が残ります。複数の自由端を1つの手で扱えるとは未確認です。",
+      "x": 40,
+      "baseline_y": 436,
+      "width": 983.53125,
+      "maximum_width": 1320
+    },
+    {
+      "text": "A/B共用補助のC同行は未採用。Cへ貸し出して不足を埋めた図にはしていません。",
+      "x": 40,
+      "baseline_y": 490,
+      "width": 847.390625,
+      "maximum_width": 1320
+    }
+  ]
+}

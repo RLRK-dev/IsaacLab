@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 480"
+ width="1400" height="480" role="img">
+<rect width="100%" height="100%" fill="#f4f7fa"/>
+<text x="40" y="52" font-family="Noto Sans CJK JP, sans-serif" font-size="32" font-weight="700" fill="#233447">共用補助が次のセルへ移るまで</text>
+<text x="40" y="91" font-family="Noto Sans CJK JP, sans-serif" font-size="23" font-weight="400" fill="#586d80">A→B / B→Aのどちらも同じ扱い。秒数・移動経路・支持面は未選定。</text>
+<rect x="40" y="128" width="248" height="234" rx="16" fill="white" stroke="#946111" stroke-width="2"/>
+<rect x="57" y="144" width="43" height="42" rx="8" fill="#fff2e1" stroke="none" stroke-width="2"/>
+<text x="70" y="175" font-family="Noto Sans CJK JP, sans-serif" font-size="24" font-weight="700" fill="#946111">1</text>
+<text x="57" y="227" font-family="Noto Sans CJK JP, sans-serif" font-size="23" font-weight="700" fill="#233447">前の仕事で保持</text>
+<text x="57" y="282" font-family="Noto Sans CJK JP, sans-serif" font-size="17" font-weight="400" fill="#586d80">保持を継続。</text>
+<text x="57" y="314" font-family="Noto Sans CJK JP, sans-serif" font-size="17" font-weight="400" fill="#586d80">次の要求は開始待ち。</text>
+<polyline points="290,245 303,245" fill="none" stroke="#946111" stroke-width="3" stroke-linejoin="round"/>
+<rect x="308" y="128" width="248" height="234" rx="16" fill="white" stroke="#946111" stroke-width="2"/>
+<rect x="325" y="144" width="43" height="42" rx="8" fill="#fff2e1" stroke="none" stroke-width="2"/>
+<text x="338" y="175" font-family="Noto Sans CJK JP, sans-serif" font-size="24" font-weight="700" fill="#946111">2</text>
+<text x="325" y="227" font-family="Noto Sans CJK JP, sans-serif" font-size="23" font-weight="700" fill="#233447">次の支持先へ渡す</text>
+<text x="325" y="282" font-family="Noto Sans CJK JP, sans-serif" font-size="17" font-weight="400" fill="#586d80">台・治具・次の保持役。</text>
+<text x="325" y="314" font-family="Noto Sans CJK JP, sans-serif" font-size="17" font-weight="400" fill="#586d80">具体的な支持先は要確認。</text>
+<polyline points="558,245 571,245" fill="none" stroke="#946111" stroke-width="3" stroke-linejoin="round"/>
+<rect x="576" y="128" width="248" height="234" rx="16" fill="white" stroke="#946111" stroke-width="2"/>
+<rect x="593" y="144" width="43" height="42" rx="8" fill="#fff2e1" stroke="none" stroke-width="2"/>
+<text x="606" y="175" font-family="Noto Sans CJK JP, sans-serif" font-size="24" font-weight="700" fill="#946111">3</text>
+<text x="593" y="227" font-family="Noto Sans CJK JP, sans-serif" font-size="23" font-weight="700" fill="#233447">指を開放・退避</text>
+<text x="593" y="282" font-family="Noto Sans CJK JP, sans-serif" font-size="17" font-weight="400" fill="#586d80">支持の引継ぎ後に開く。</text>
+<text x="593" y="314" font-family="Noto Sans CJK JP, sans-serif" font-size="17" font-weight="400" fill="#586d80">指の抜け方も要確認。</text>
+<polyline points="826,245 839,245" fill="none" stroke="#946111" stroke-width="3" stroke-linejoin="round"/>
+<rect x="844" y="128" width="248" height="234" rx="16" fill="white" stroke="#946111" stroke-width="2"/>
+<rect x="861" y="144" width="43" height="42" rx="8" fill="#fff2e1" stroke="none" stroke-width="2"/>
+<text x="874" y="175" font-family="Noto Sans CJK JP, sans-serif" font-size="24" font-weight="700" fill="#946111">4</text>
+<text x="861" y="227" font-family="Noto Sans CJK JP, sans-serif" font-size="23" font-weight="700" fill="#233447">交換・移動</text>
+<text x="861" y="282" font-family="Noto Sans CJK JP, sans-serif" font-size="17" font-weight="400" fill="#586d80">必要な手先交換と移動。</text>
+<text x="861" y="314" font-family="Noto Sans CJK JP, sans-serif" font-size="17" font-weight="400" fill="#586d80">次の把持はまだ始めない。</text>
+<polyline points="1094,245 1107,245" fill="none" stroke="#946111" stroke-width="3" stroke-linejoin="round"/>
+<rect x="1112" y="128" width="248" height="234" rx="16" fill="white" stroke="#946111" stroke-width="2"/>
+<rect x="1129" y="144" width="43" height="42" rx="8" fill="#fff2e1" stroke="none" stroke-width="2"/>
+<text x="1142" y="175" font-family="Noto Sans CJK JP, sans-serif" font-size="24" font-weight="700" fill="#946111">5</text>
+<text x="1129" y="227" font-family="Noto Sans CJK JP, sans-serif" font-size="23" font-weight="700" fill="#233447">次のセルで保持</text>
+<text x="1129" y="282" font-family="Noto Sans CJK JP, sans-serif" font-size="17" font-weight="400" fill="#586d80">前の手順が終わってから、</text>
+<text x="1129" y="314" font-family="Noto Sans CJK JP, sans-serif" font-size="17" font-weight="400" fill="#586d80">新しい対象を保持する。</text>
+<text x="40" y="410" font-family="Noto Sans CJK JP, sans-serif" font-size="24" font-weight="400" fill="#233447">時間は未測定です。引継ぎ・退避・交換・移動を、後で個別に計上します。</text>
+<text x="40" y="452" font-family="Noto Sans CJK JP, sans-serif" font-size="22" font-weight="400" fill="#586d80">相手の支持が成立したとする条件・信号・力の値を、この説明図から新しく定めません。</text>
+</svg>

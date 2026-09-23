@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 850"
+ width="1400" height="850" role="img">
+<rect width="100%" height="100%" fill="#f4f7fa"/>
+<text x="40" y="54" font-family="Noto Sans CJK JP, sans-serif" font-size="32" font-weight="700" fill="#233447">3STと5腕の役割分担</text>
+<text x="40" y="90" font-family="Noto Sans CJK JP, sans-serif" font-size="23" font-weight="400" fill="#586d80">無寸法の役割図。A/Bで次の部材、Cで前の一式を扱う説明例。</text>
+<rect x="222" y="116" width="500" height="98" rx="16" fill="#fff2e1" stroke="#946111" stroke-width="2"/>
+<text x="246" y="151" font-family="Noto Sans CJK JP, sans-serif" font-size="25" font-weight="700" fill="#946111">A/B共用補助：1腕</text>
+<text x="246" y="190" font-family="Noto Sans CJK JP, sans-serif" font-size="25" font-weight="400" fill="#233447">Aを補助</text>
+<rect x="952" y="116" width="408" height="98" rx="16" fill="#edf8f4" stroke="#198773" stroke-width="2"/>
+<text x="976" y="151" font-family="Noto Sans CJK JP, sans-serif" font-size="25" font-weight="700" fill="#198773">C専用補助：1腕</text>
+<text x="976" y="190" font-family="Noto Sans CJK JP, sans-serif" font-size="25" font-weight="400" fill="#233447">要求なしの例</text>
+<polyline points="472,214 244,237 244,262" fill="none" stroke="#286db3" stroke-width="5" stroke-linejoin="round"/>
+<rect x="40" y="267" width="408" height="361" rx="16" fill="white" stroke="#286db3" stroke-width="2"/>
+<text x="64" y="310" font-family="Noto Sans CJK JP, sans-serif" font-size="30" font-weight="700" fill="#286db3">ST A</text>
+<text x="64" y="352" font-family="Noto Sans CJK JP, sans-serif" font-size="25" font-weight="400" fill="#233447">下板側ユニット</text>
+<rect x="64" y="375" width="360" height="67" rx="16" fill="#edf4fc" stroke="none" stroke-width="2"/>
+<text x="82" y="418" font-family="Noto Sans CJK JP, sans-serif" font-size="26" font-weight="700" fill="#286db3">主担当 A：1腕</text>
+<text x="64" y="484" font-family="Noto Sans CJK JP, sans-serif" font-size="24" font-weight="400" fill="#233447">補助の独立保持が必要</text>
+<text x="64" y="525" font-family="Noto Sans CJK JP, sans-serif" font-size="22" font-weight="400" fill="#286db3">共用補助を使う</text>
+<text x="64" y="569" font-family="Noto Sans CJK JP, sans-serif" font-size="22" font-weight="700" fill="#233447">次の一式の部材</text>
+<text x="64" y="608" font-family="Noto Sans CJK JP, sans-serif" font-size="19" font-weight="400" fill="#586d80">D10 / D11 / D12</text>
+<polyline points="472,214 700,237 700,262" fill="none" stroke="#c5d0db" stroke-width="5" stroke-linejoin="round" stroke-dasharray="9 7"/>
+<rect x="496" y="267" width="408" height="361" rx="16" fill="white" stroke="#9e478f" stroke-width="2"/>
+<text x="520" y="310" font-family="Noto Sans CJK JP, sans-serif" font-size="30" font-weight="700" fill="#9e478f">ST B</text>
+<text x="520" y="352" font-family="Noto Sans CJK JP, sans-serif" font-size="25" font-weight="400" fill="#233447">ヒューズ板側ユニット</text>
+<rect x="520" y="375" width="360" height="67" rx="16" fill="#faf0f8" stroke="none" stroke-width="2"/>
+<text x="538" y="418" font-family="Noto Sans CJK JP, sans-serif" font-size="26" font-weight="700" fill="#9e478f">主担当 B：1腕</text>
+<text x="520" y="484" font-family="Noto Sans CJK JP, sans-serif" font-size="24" font-weight="400" fill="#233447">補助不要の作業と仮定</text>
+<text x="520" y="525" font-family="Noto Sans CJK JP, sans-serif" font-size="22" font-weight="400" fill="#9e478f">共用補助を使う</text>
+<rect x="512" y="497" width="376" height="43" rx="0" fill="white" stroke="none" stroke-width="2"/>
+<text x="520" y="525" font-family="Noto Sans CJK JP, sans-serif" font-size="19" font-weight="400" fill="#586d80">保持解除を指示する表示ではない</text>
+<text x="520" y="569" font-family="Noto Sans CJK JP, sans-serif" font-size="22" font-weight="700" fill="#233447">次の一式の部材</text>
+<text x="520" y="608" font-family="Noto Sans CJK JP, sans-serif" font-size="19" font-weight="400" fill="#586d80">D20 / D21 / D22</text>
+<polyline points="1156,214 1156,237 1156,262" fill="none" stroke="#c5d0db" stroke-width="5" stroke-linejoin="round" stroke-dasharray="9 7"/>
+<rect x="952" y="267" width="408" height="361" rx="16" fill="white" stroke="#198773" stroke-width="2"/>
+<text x="976" y="310" font-family="Noto Sans CJK JP, sans-serif" font-size="30" font-weight="700" fill="#198773">ST C</text>
+<text x="976" y="352" font-family="Noto Sans CJK JP, sans-serif" font-size="25" font-weight="400" fill="#233447">合流・搭載・残接続</text>
+<rect x="976" y="375" width="360" height="67" rx="16" fill="#edf8f4" stroke="none" stroke-width="2"/>
+<text x="994" y="418" font-family="Noto Sans CJK JP, sans-serif" font-size="26" font-weight="700" fill="#198773">主担当 C：1腕</text>
+<text x="976" y="484" font-family="Noto Sans CJK JP, sans-serif" font-size="24" font-weight="400" fill="#233447">補助不要の作業と仮定</text>
+<text x="976" y="525" font-family="Noto Sans CJK JP, sans-serif" font-size="22" font-weight="400" fill="#198773">C専用補助を使う</text>
+<rect x="968" y="497" width="376" height="43" rx="0" fill="white" stroke="none" stroke-width="2"/>
+<text x="976" y="525" font-family="Noto Sans CJK JP, sans-serif" font-size="19" font-weight="400" fill="#586d80">保持解除を指示する表示ではない</text>
+<text x="976" y="569" font-family="Noto Sans CJK JP, sans-serif" font-size="22" font-weight="700" fill="#233447">前の一式</text>
+<text x="976" y="608" font-family="Noto Sans CJK JP, sans-serif" font-size="19" font-weight="400" fill="#586d80">D30〜D61</text>
+<rect x="40" y="651" width="1320" height="131" rx="16" fill="#eaf0f5" stroke="none" stroke-width="2"/>
+<text x="64" y="691" font-family="Noto Sans CJK JP, sans-serif" font-size="26" font-weight="700" fill="#233447">Aだけに補助が必要</text>
+<text x="64" y="731" font-family="Noto Sans CJK JP, sans-serif" font-size="25" font-weight="400" fill="#233447">この担当ID表では同じ補助腕への要求が重ならない。</text>
+<text x="64" y="764" font-family="Noto Sans CJK JP, sans-serif" font-size="21" font-weight="400" fill="#586d80">到達・移動・支持・工具まで含む同時運転の成立を示すものではない。</text>
+<text x="40" y="824" font-family="Noto Sans CJK JP, sans-serif" font-size="22" font-weight="400" fill="#586d80">5腕は組立の役割数。XYZ、工具、供給、検査、回収などを含む設備台数ではありません。</text>
+</svg>

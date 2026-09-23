@@ -1,0 +1,134 @@
+{
+  "observed_at": "2026-09-23T14:22:09.850911+09:00",
+  "destination": "/home/rlrk/Downloads/HVJB_ライン全体と組立場所_v04_20260923",
+  "entry": "index_v04_2.html",
+  "previous_files_preserved": 272,
+  "files": [
+    {
+      "path": "parallel_review/README.md",
+      "sha256": "3ef31c2e0e6338496c9524cf50f350698693261ee141dd924e4c0cf6276caa6c"
+    },
+    {
+      "path": "parallel_review/all_cases.html",
+      "sha256": "824b62bb615659c9cd95595a43f29d607bada20bda068eec1b49ca8b9a0ea039"
+    },
+    {
+      "path": "parallel_review/figures/A.png",
+      "sha256": "5c375d1555a1833631e25a9c6793130be9401cfa197f7c6772ccda6c02db8d78"
+    },
+    {
+      "path": "parallel_review/figures/A.svg",
+      "sha256": "29b80ee85c02b97cb0d9f3b966f719eeb0ab472e0b546b406ae88e4e790c39a1"
+    },
+    {
+      "path": "parallel_review/figures/AB.png",
+      "sha256": "34b058c27188242a6c6313b37ab0da0607932e220aeca69062abe6c28a0f69fb"
+    },
+    {
+      "path": "parallel_review/figures/AB.svg",
+      "sha256": "fa126a699822d526756daeedb60a10119f1f2039a56feb16df03e61d55f9b148"
+    },
+    {
+      "path": "parallel_review/figures/ABC.png",
+      "sha256": "083421e920214c8309a0f47a35e53f2bc330ec97b1accc7e1463f108e0171952"
+    },
+    {
+      "path": "parallel_review/figures/ABC.svg",
+      "sha256": "d14a052ae6d0059737a14bb414101cc970617da99b6befa287200a6e86355061"
+    },
+    {
+      "path": "parallel_review/figures/AC.png",
+      "sha256": "9d313a7e660ff3fccb0d449723503b90e61dc7c95ba47d32e3307fec6a2e13f1"
+    },
+    {
+      "path": "parallel_review/figures/AC.svg",
+      "sha256": "692600028e121243fd62697cd6aae66fc001e6a1b4010b632a69dfd26036fdfa"
+    },
+    {
+      "path": "parallel_review/figures/B.png",
+      "sha256": "fc46eab02749d589d4a2fe5e0554ad8fe10d458acfd8af05f730e28c08147c07"
+    },
+    {
+      "path": "parallel_review/figures/B.svg",
+      "sha256": "755b8580b9600252d4b099412b8b096fd97a3b6f16249e7a14ed506196574bcb"
+    },
+    {
+      "path": "parallel_review/figures/BC.png",
+      "sha256": "31362453d7b83e651ebc84762a19ae6cbba3019cb8834190a4a3db11208f5be9"
+    },
+    {
+      "path": "parallel_review/figures/BC.svg",
+      "sha256": "b48e3deea8845509df195231981c35cc55ec77bec59a069ccec8b769a4f6e217"
+    },
+    {
+      "path": "parallel_review/figures/C.png",
+      "sha256": "3b04a56e0012f5379a6cf557aa9a75481b85e8aea62ba110d3bcfec3ddeca37c"
+    },
+    {
+      "path": "parallel_review/figures/C.svg",
+      "sha256": "eff95b449671e28f79556bf082571460fc82e9716c0e476f9b10fd54a91ebfd5"
+    },
+    {
+      "path": "parallel_review/figures/NONE.png",
+      "sha256": "93831e548817d32f86437cd6d782f5a44b1bcc2fa5811d498ea5c3d02c6abce4"
+    },
+    {
+      "path": "parallel_review/figures/NONE.svg",
+      "sha256": "778a567d7dab9df5452d78f00581f52e012cc9b84bb938816088da1308a1e0ff"
+    },
+    {
+      "path": "parallel_review/figures/handoff.png",
+      "sha256": "c9735943e480ede27065206d13a17fed4868db48624173051d0585185d4ee286"
+    },
+    {
+      "path": "parallel_review/figures/handoff.svg",
+      "sha256": "664cf4bfd52c1101e410c57960e9cae529b150b7cf32f38e1ca66c271e3c3469"
+    },
+    {
+      "path": "parallel_review/figures/reservation.png",
+      "sha256": "b55f02f1044c60d568a61bbc815547c32a07789e17768dc0619a820c7c67b1c7"
+    },
+    {
+      "path": "parallel_review/figures/reservation.svg",
+      "sha256": "76a009b47e2b35d44ec5befe4ce2b16cdd4bd52a79e61e0cd78f6271dbd42e10"
+    },
+    {
+      "path": "parallel_review/index.html",
+      "sha256": "47c25b31f411a7ab16171db9bcc926bdc72ab768c37e67ff9e2b0d6814e85f33"
+    },
+    {
+      "path": "parallel_review/manual_scope_20260923.md",
+      "sha256": "2c8fb45fb13554a61caf54b35c1669b6eef4e369acc463bbc4a01c5cad010df7"
+    },
+    {
+      "path": "parallel_review/manual_source_identity.json",
+      "sha256": "071d23122819c761cb09096ef10433e774db9437cc0478927fe7a0420122964b"
+    },
+    {
+      "path": "parallel_review/parallel.css",
+      "sha256": "8491ecb7d18d0138e7b2c051ac5bf66f15c651cd7f386ace49fde48c235a1b67"
+    },
+    {
+      "path": "parallel_review/parallel.js",
+      "sha256": "9c211f04ed2747cb5f6733c604efded3be636f8c700f493eede988bf247e9e93"
+    },
+    {
+      "path": "parallel_review/parallel_manifest.json",
+      "sha256": "a1a97d200d09980953f02f3b91b1e6f088eb4de5e3ea0f8efc13dbe4d0cdf33e"
+    },
+    {
+      "path": "parallel_review/parallel_review_data.json",
+      "sha256": "2f5ff58b68617aebff55b5dc448b3063e86482a952d1d3a1034917284eba667e"
+    },
+    {
+      "path": "parallel_review/qa_receipt.json",
+      "sha256": "0a5af6b51a55c981cb7ab001f450086ce4cbb3853ea05a39f8a30a9e23b5f37e"
+    },
+    {
+      "path": "index_v04_2.html",
+      "sha256": "756f1414f03703d7c1402c6d11fd7ebf800a3e156c4bc228838c588cf71ff250"
+    }
+  ],
+  "mp4_count": 1,
+  "script_sha256": "8d65dc804606e86f89673a576c8fbe4c7f2a2695f13c1538ba31a38548076196"
+}
