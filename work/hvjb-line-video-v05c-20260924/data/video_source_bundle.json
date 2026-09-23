@@ -1,0 +1,67 @@
+{
+  "kind": "identified_multiple_saved_sources_not_a_new_robot_motion_bank",
+  "sources": {
+    "main_manifest": {
+      "path": "/tmp/hvjb-line-progress-20260923/work/hvjb-line-video-v05b-20260923/previews/concept_v05b/manifest.json",
+      "sha256": "8f2c886a996dd1948da808d8a23472a09f151ebebace0a73324a69dceb006210"
+    },
+    "corrected_manifest": {
+      "path": "/tmp/hvjb-line-progress-20260923/work/hvjb-line-video-v05c-20260924/changed_pngs/manifest.json",
+      "sha256": "25a8f112cc3c699476624c28674f6674dd0eea118fea4c8f4dc9f718ca1dc043"
+    },
+    "H06_manifest": {
+      "path": "/tmp/hvjb-line-progress-20260923/work/hvjb-h06-motion-review-v01-20260924/output/process/manifest.json",
+      "sha256": "db2bdc6a55b67d760f0ab7f1d86d3480e0ed0b51f5d0c4ed0da5146920e1c097"
+    },
+    "H05_manifest": {
+      "path": "/tmp/hvjb-line-progress-20260923/work/hvjb-h05-motion-review-v01-20260924/output/process/manifest.json",
+      "sha256": "e4597517855df14432bdb91aae53c91799617db161a1faecfaa19c65182a77e1"
+    },
+    "H06_readback": {
+      "path": "/tmp/hvjb-line-progress-20260923/work/hvjb-h06-motion-review-v01-20260924/audit/sequence_readback.json",
+      "sha256": "229f4cd19bf5c4291455365b3d82b430470a841c41f6ec58c5cf294e445c1be8"
+    },
+    "H05_readback": {
+      "path": "/tmp/hvjb-line-progress-20260923/work/hvjb-h05-motion-review-v01-20260924/audit/release_readback.json",
+      "sha256": "52770dd7d01999aac37ddfbc61ca218cbc6bee5aac240244d861b89acadbb61b"
+    },
+    "display_delta": {
+      "path": "/tmp/hvjb-line-progress-20260923/work/hvjb-xyz-display-v01-20260924/audit/display_delta.json",
+      "sha256": "d10151019ec841877e17c4409f6223e1e19ba8a940c0c66b12d755b245f24ac3"
+    }
+  },
+  "chapters": [
+    {
+      "id": "MAIN",
+      "start_s": 0,
+      "stop_s": 119,
+      "label_ja": "ライン全体・20仕事"
+    },
+    {
+      "id": "H06_loading",
+      "start_s": 119,
+      "stop_s": 129,
+      "label_ja": "H06 空筐体の載置と開放"
+    },
+    {
+      "id": "H06_pickup",
+      "start_s": 129,
+      "stop_s": 139,
+      "label_ja": "H06 再把持と取出し"
+    },
+    {
+      "id": "H05_P16",
+      "start_s": 139,
+      "stop_s": 147,
+      "label_ja": "H05 3口ヘッダーの開放・退避"
+    },
+    {
+      "id": "H05_P17",
+      "start_s": 147,
+      "stop_s": 155.2,
+      "label_ja": "H05 2口ヘッダーの開放・退避"
+    }
+  ],
+  "H05_display_repetition": "3 per pose plus 18 extra first/last frames, with no geometry interpolation",
+  "H06_display_interpolation": "Existing comparison states, not a control trajectory"
+}
