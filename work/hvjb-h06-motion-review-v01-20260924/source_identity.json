@@ -1,0 +1,28 @@
+{
+  "observed_at": "2026-09-24T02:15:39.698960+09:00",
+  "source_files": [
+    {
+      "source": "/home/rlrk/IsaacLab/work/hvjb-pallet-location-v01-20260920/output/models/H06_FC02_handoff_populated_comparison.glb",
+      "copy": "sources/H06_FC02_handoff_populated_comparison.glb",
+      "sha256": "c2c76dbd4fe6d408e0b9cbe9d3025619cde72457a98f6aa3b89367b707f1ad52"
+    },
+    {
+      "source": "/home/rlrk/IsaacLab/work/hvjb-pallet-location-v01-20260920/output/handoff_sequence_observations.json",
+      "copy": "sources/handoff_sequence_observations.json",
+      "sha256": "8b78ecc507c109ae2f0b4490887071781d7382bd2105569a7ef64a325b58b6e3"
+    },
+    {
+      "source": "/home/rlrk/IsaacLab/work/hvjb-pallet-location-v01-20260920/output/pallet_location_observations.json",
+      "copy": "sources/pallet_location_observations.json",
+      "sha256": "3e1c06676079bf863cda76baa515201eb474efb0c1effc4f9d69c22abf1c2d93"
+    },
+    {
+      "source": "/home/rlrk/IsaacLab/work/hvjb-pallet-location-v01-20260920/output/README.md",
+      "copy": "sources/README.md",
+      "sha256": "5c1e96ef91d6c44f7ac7e5106da8aef4e1b8428c5ad00710e9e8384f09d6554f"
+    }
+  ],
+  "source_bytes_unchanged": true,
+  "script_sha256": "470daca5fbffe6594e3de414fc44a722495cd57f4c61252eb70dadb8514d883a",
+  "scope": "Reuse FC02 comparison poses; no mechanism or controller design change."
+}

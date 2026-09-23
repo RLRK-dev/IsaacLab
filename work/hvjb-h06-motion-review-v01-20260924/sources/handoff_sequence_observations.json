@@ -1,0 +1,518 @@
+{
+  "observed_at": "2026-09-21T00:00:10.684254+09:00",
+  "source_sha256": {
+    "/home/rlrk/IsaacLab-op040/eval_runs/ur15_jb_harness_revision_20260907/data/hvjb_photo_model_v03_p03.json.gz": "6687b12ec1b3db24babf75f8fef1b6f6bc123c288b713824b9763d9214553ba6",
+    "/home/rlrk/IsaacLab/work/hvjb-pallet-location-v01-20260920/build_pallet.py": "586d0aca707cf075302cf12f1c1588c62a84372f6fe32521f3976d11d428ae1c",
+    "/home/rlrk/IsaacLab/work/hvjb-pallet-location-v01-20260920/output/pallet_location_observations.json": "3e1c06676079bf863cda76baa515201eb474efb0c1effc4f9d69c22abf1c2d93"
+  },
+  "scope": "bidirectional translating geometry comparison, not physical grasp or control validation",
+  "saved_product_features": 92,
+  "saved_product_mesh_rows": 465,
+  "empty_case_is_included_as_subset": true,
+  "lid_or_actual_finished_harness_not_added": true,
+  "clamp_opening_reference_mm": 18.0,
+  "clamp_reference_not_vendor_motion_or_adopted_stroke": true,
+  "states": {
+    "loading": [
+      {
+        "id": "L0_above",
+        "opening_per_jaw_mm": 0,
+        "hand_lift_mm": 12,
+        "clamp_toe_outward_mm": 18.0,
+        "case_lift_mm": 12,
+        "intended_holder_not_measured": [
+          "H06"
+        ]
+      },
+      {
+        "id": "L1_seated",
+        "opening_per_jaw_mm": 0,
+        "hand_lift_mm": 0,
+        "clamp_toe_outward_mm": 18.0,
+        "case_lift_mm": 0,
+        "intended_holder_not_measured": [
+          "H06"
+        ]
+      },
+      {
+        "id": "L2_both",
+        "opening_per_jaw_mm": 0,
+        "hand_lift_mm": 0,
+        "clamp_toe_outward_mm": 0,
+        "case_lift_mm": 0,
+        "intended_holder_not_measured": [
+          "H06",
+          "pallet_C"
+        ]
+      },
+      {
+        "id": "L3_hand_open",
+        "opening_per_jaw_mm": 22,
+        "hand_lift_mm": 0,
+        "clamp_toe_outward_mm": 0,
+        "case_lift_mm": 0,
+        "intended_holder_not_measured": [
+          "pallet_C"
+        ]
+      },
+      {
+        "id": "L4_hand_clear",
+        "opening_per_jaw_mm": 22,
+        "hand_lift_mm": 60,
+        "clamp_toe_outward_mm": 0,
+        "case_lift_mm": 0,
+        "intended_holder_not_measured": [
+          "pallet_C"
+        ]
+      }
+    ],
+    "pickup": [
+      {
+        "id": "U0_hand_clear",
+        "opening_per_jaw_mm": 22,
+        "hand_lift_mm": 60,
+        "clamp_toe_outward_mm": 0,
+        "case_lift_mm": 0,
+        "intended_holder_not_measured": [
+          "pallet_C"
+        ]
+      },
+      {
+        "id": "U1_hand_open",
+        "opening_per_jaw_mm": 22,
+        "hand_lift_mm": 0,
+        "clamp_toe_outward_mm": 0,
+        "case_lift_mm": 0,
+        "intended_holder_not_measured": [
+          "pallet_C"
+        ]
+      },
+      {
+        "id": "U2_both",
+        "opening_per_jaw_mm": 0,
+        "hand_lift_mm": 0,
+        "clamp_toe_outward_mm": 0,
+        "case_lift_mm": 0,
+        "intended_holder_not_measured": [
+          "H06",
+          "pallet_C"
+        ]
+      },
+      {
+        "id": "U3_seated",
+        "opening_per_jaw_mm": 0,
+        "hand_lift_mm": 0,
+        "clamp_toe_outward_mm": 18.0,
+        "case_lift_mm": 0,
+        "intended_holder_not_measured": [
+          "H06"
+        ]
+      },
+      {
+        "id": "U4_above",
+        "opening_per_jaw_mm": 0,
+        "hand_lift_mm": 12,
+        "clamp_toe_outward_mm": 18.0,
+        "case_lift_mm": 12,
+        "intended_holder_not_measured": [
+          "H06"
+        ]
+      }
+    ]
+  },
+  "stage_sweeps": [
+    {
+      "operation": "load",
+      "from": "L0_above",
+      "to": "L1_seated",
+      "observations": {
+        "hand_to_fixture": {
+          "closest_swept_aabb": {
+            "distance_m": 0.0007999999999999986,
+            "a": "H06_-1_crossbar_links",
+            "b": "C1_toe_envelope"
+          },
+          "overlap_candidates": []
+        },
+        "hand_to_saved_product": {
+          "closest_swept_aabb": {
+            "distance_m": 0.0001999938488006503,
+            "a": "H06_-1_-1_closing_pad",
+            "b": "P01__Photo_case_mount_flange__002"
+          },
+          "overlap_candidates": []
+        },
+        "clamp_reservations_to_saved_product": {
+          "closest_swept_aabb": {
+            "distance_m": 0.01094999384880066,
+            "a": "C1_toe_envelope",
+            "b": "P01__Photo_case_mount_flange__002"
+          },
+          "overlap_candidates": []
+        }
+      }
+    },
+    {
+      "operation": "load",
+      "from": "L1_seated",
+      "to": "L2_both",
+      "observations": {
+        "hand_to_fixture": {
+          "closest_swept_aabb": {
+            "distance_m": 0.0007999999999999986,
+            "a": "H06_-1_crossbar_links",
+            "b": "C1_toe_envelope"
+          },
+          "overlap_candidates": []
+        },
+        "hand_to_saved_product": {
+          "closest_swept_aabb": {
+            "distance_m": 0.0001999938488006503,
+            "a": "H06_-1_-1_closing_pad",
+            "b": "P01__Photo_case_mount_flange__002"
+          },
+          "overlap_candidates": []
+        },
+        "clamp_reservations_to_saved_product": {
+          "closest_swept_aabb": {
+            "distance_m": 0.00019999994784593647,
+            "a": "C1_toe_envelope",
+            "b": "P01__Photo_case_mount_flange__002"
+          },
+          "overlap_candidates": []
+        }
+      }
+    },
+    {
+      "operation": "load",
+      "from": "L2_both",
+      "to": "L3_hand_open",
+      "observations": {
+        "hand_to_fixture": {
+          "closest_swept_aabb": {
+            "distance_m": 0.0007999999999999986,
+            "a": "H06_-1_crossbar_links",
+            "b": "C1_toe_envelope"
+          },
+          "overlap_candidates": []
+        },
+        "hand_to_saved_product": {
+          "closest_swept_aabb": {
+            "distance_m": 0.0001999938488006503,
+            "a": "H06_-1_-1_closing_pad",
+            "b": "P01__Photo_case_mount_flange__002"
+          },
+          "overlap_candidates": []
+        },
+        "clamp_reservations_to_saved_product": {
+          "closest_swept_aabb": {
+            "distance_m": 0.00019999994784593647,
+            "a": "C1_toe_envelope",
+            "b": "P01__Photo_case_mount_flange__002"
+          },
+          "overlap_candidates": []
+        }
+      }
+    },
+    {
+      "operation": "load",
+      "from": "L3_hand_open",
+      "to": "L4_hand_clear",
+      "observations": {
+        "hand_to_fixture": {
+          "closest_swept_aabb": {
+            "distance_m": 0.0007999999999999986,
+            "a": "H06_-1_crossbar_links",
+            "b": "C1_toe_envelope"
+          },
+          "overlap_candidates": []
+        },
+        "hand_to_saved_product": {
+          "closest_swept_aabb": {
+            "distance_m": 0.008949993848800658,
+            "a": "H06_-1_-1_lower_backing_window_0",
+            "b": "P01__Photo_case_mount_flange__002"
+          },
+          "overlap_candidates": []
+        },
+        "clamp_reservations_to_saved_product": {
+          "closest_swept_aabb": {
+            "distance_m": 0.00019999994784593647,
+            "a": "C1_toe_envelope",
+            "b": "P01__Photo_case_mount_flange__002"
+          },
+          "overlap_candidates": []
+        }
+      }
+    },
+    {
+      "operation": "pickup",
+      "from": "U0_hand_clear",
+      "to": "U1_hand_open",
+      "observations": {
+        "hand_to_fixture": {
+          "closest_swept_aabb": {
+            "distance_m": 0.0007999999999999952,
+            "a": "H06_-1_crossbar_links",
+            "b": "C1_toe_envelope"
+          },
+          "overlap_candidates": []
+        },
+        "hand_to_saved_product": {
+          "closest_swept_aabb": {
+            "distance_m": 0.008949993848800658,
+            "a": "H06_-1_-1_lower_backing_window_0",
+            "b": "P01__Photo_case_mount_flange__002"
+          },
+          "overlap_candidates": []
+        },
+        "clamp_reservations_to_saved_product": {
+          "closest_swept_aabb": {
+            "distance_m": 0.00019999994784593647,
+            "a": "C1_toe_envelope",
+            "b": "P01__Photo_case_mount_flange__002"
+          },
+          "overlap_candidates": []
+        }
+      }
+    },
+    {
+      "operation": "pickup",
+      "from": "U1_hand_open",
+      "to": "U2_both",
+      "observations": {
+        "hand_to_fixture": {
+          "closest_swept_aabb": {
+            "distance_m": 0.0007999999999999986,
+            "a": "H06_-1_crossbar_links",
+            "b": "C1_toe_envelope"
+          },
+          "overlap_candidates": []
+        },
+        "hand_to_saved_product": {
+          "closest_swept_aabb": {
+            "distance_m": 0.0001999938488006503,
+            "a": "H06_-1_-1_closing_pad",
+            "b": "P01__Photo_case_mount_flange__002"
+          },
+          "overlap_candidates": []
+        },
+        "clamp_reservations_to_saved_product": {
+          "closest_swept_aabb": {
+            "distance_m": 0.00019999994784593647,
+            "a": "C1_toe_envelope",
+            "b": "P01__Photo_case_mount_flange__002"
+          },
+          "overlap_candidates": []
+        }
+      }
+    },
+    {
+      "operation": "pickup",
+      "from": "U2_both",
+      "to": "U3_seated",
+      "observations": {
+        "hand_to_fixture": {
+          "closest_swept_aabb": {
+            "distance_m": 0.0007999999999999986,
+            "a": "H06_-1_crossbar_links",
+            "b": "C1_toe_envelope"
+          },
+          "overlap_candidates": []
+        },
+        "hand_to_saved_product": {
+          "closest_swept_aabb": {
+            "distance_m": 0.0001999938488006503,
+            "a": "H06_-1_-1_closing_pad",
+            "b": "P01__Photo_case_mount_flange__002"
+          },
+          "overlap_candidates": []
+        },
+        "clamp_reservations_to_saved_product": {
+          "closest_swept_aabb": {
+            "distance_m": 0.00019999994784593647,
+            "a": "C1_toe_envelope",
+            "b": "P01__Photo_case_mount_flange__002"
+          },
+          "overlap_candidates": []
+        }
+      }
+    },
+    {
+      "operation": "pickup",
+      "from": "U3_seated",
+      "to": "U4_above",
+      "observations": {
+        "hand_to_fixture": {
+          "closest_swept_aabb": {
+            "distance_m": 0.0007999999999999986,
+            "a": "H06_-1_crossbar_links",
+            "b": "C1_toe_envelope"
+          },
+          "overlap_candidates": []
+        },
+        "hand_to_saved_product": {
+          "closest_swept_aabb": {
+            "distance_m": 0.0001999938488006503,
+            "a": "H06_-1_-1_closing_pad",
+            "b": "P01__Photo_case_mount_flange__002"
+          },
+          "overlap_candidates": []
+        },
+        "clamp_reservations_to_saved_product": {
+          "closest_swept_aabb": {
+            "distance_m": 0.01094999384880066,
+            "a": "C1_toe_envelope",
+            "b": "P01__Photo_case_mount_flange__002"
+          },
+          "overlap_candidates": []
+        }
+      }
+    }
+  ],
+  "sweep_method": "per-mesh relative-translation AABB sweep, without rotation",
+  "unmeasured_release_conditions": {
+    "before_H06_open": [
+      "case seated",
+      "pallet C retains case",
+      "H06 still holding until then"
+    ],
+    "before_C_open": [
+      "H06 retains case",
+      "pallet fixed at ST"
+    ],
+    "before_case_lift": [
+      "C confirmed clear",
+      "H06 retains case"
+    ],
+    "before_lateral_case_transfer": [
+      "case above both pin tips",
+      "grip retained"
+    ],
+    "before_conveyor_transfer": [
+      "C retains case",
+      "H06 clear",
+      "ST pallet lock released"
+    ]
+  },
+  "unconfirmed_seat_or_retention": "Do not release the previous holder or force the case down using C",
+  "release_authorization_signals_are_not_implemented_or_measured": true,
+  "does_not_intentionally_slide_case_inside_hand": true,
+  "does_not_lift_pallet": true,
+  "reference_pin_tip_mm": 4.8,
+  "reference_lifted_case_bottom_mm": 12,
+  "reference_vertical_pin_separation_mm": 7.2,
+  "reference_poses_are_not_selected_machine_strokes": true,
+  "product_to_pins_or_supports": "Not a hole-fit test: saved rings are decorative; support contact is intended",
+  "contact_preload_and_force_not_solved": true,
+  "clearances_are_nominal_display_geometry_not_tolerance_allowances": true,
+  "formal_physical_verdict": null,
+  "views": [
+    {
+      "file": "figures/handoff_above.png",
+      "sha256": "dcec1f884d22b34673db1d82ef86d84de4305c3c14d6c94512eab7ef9793b03f",
+      "camera": [
+        [
+          0.8221921916437787,
+          -0.24659258354926747,
+          0.5130225119217455,
+          0.45
+        ],
+        [
+          0.5692099788303082,
+          0.35618928734894195,
+          -0.7410325172202992,
+          -0.65
+        ],
+        [
+          -0.0,
+          0.9012886825631122,
+          0.4332190100672518,
+          0.4615
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "span_m": 0.28581512881506255,
+      "meshes": 543,
+      "framing_locked_within_group": true
+    },
+    {
+      "file": "figures/handoff_both.png",
+      "sha256": "d97c129feff1673650f206fede3894f1e4cd780a36f9c3723898478463ea6226",
+      "camera": [
+        [
+          0.8221921916437787,
+          -0.24659258354926747,
+          0.5130225119217455,
+          0.45
+        ],
+        [
+          0.5692099788303082,
+          0.35618928734894195,
+          -0.7410325172202992,
+          -0.65
+        ],
+        [
+          -0.0,
+          0.9012886825631122,
+          0.4332190100672518,
+          0.4615
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "span_m": 0.28581512881506255,
+      "meshes": 543,
+      "framing_locked_within_group": true
+    },
+    {
+      "file": "figures/handoff_clear.png",
+      "sha256": "5830979384c795a9b567ff6ccd3d052bac438f43c2a710a89c563d433e391207",
+      "camera": [
+        [
+          0.8221921916437787,
+          -0.24659258354926747,
+          0.5130225119217455,
+          0.45
+        ],
+        [
+          0.5692099788303082,
+          0.35618928734894195,
+          -0.7410325172202992,
+          -0.65
+        ],
+        [
+          -0.0,
+          0.9012886825631122,
+          0.4332190100672518,
+          0.4615
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "span_m": 0.28581512881506255,
+      "meshes": 543,
+      "framing_locked_within_group": true
+    }
+  ],
+  "export": {
+    "path": "output/models/H06_FC02_handoff_populated_comparison.glb",
+    "sha256": "c2c76dbd4fe6d408e0b9cbe9d3025619cde72457a98f6aa3b89367b707f1ad52",
+    "mesh_count": 543,
+    "readback_max_bounds_error_m": 6.5565109175214076e-09
+  },
+  "overlap_candidate_count": 0
+}

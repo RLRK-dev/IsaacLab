@@ -1,0 +1,56 @@
+{
+  "observed_at": "2026-09-24T02:35:07.170032+09:00",
+  "manifest_sha256": "db2bdc6a55b67d760f0ab7f1d86d3480e0ed0b51f5d0c4ed0da5146920e1c097",
+  "source_sha256": "8b78ecc507c109ae2f0b4490887071781d7382bd2105569a7ef64a325b58b6e3",
+  "readback_frames": 300,
+  "cameras_identical_for_load_and_pickup": true,
+  "diagram_relationships": [
+    {
+      "operation": "loading",
+      "samples": 150,
+      "max_hand_minus_case_lift_change_during_case_motion_mm": 0.0,
+      "jaw_opening_during_case_motion_mm": [
+        0.0
+      ],
+      "jaw_opening_during_clamp_toe_motion_mm": [
+        0.0
+      ],
+      "clamp_toe_opening_during_jaw_motion_mm": [
+        0.0
+      ],
+      "case_lift_during_jaw_motion_mm": [
+        0.0
+      ]
+    },
+    {
+      "operation": "pickup",
+      "samples": 150,
+      "max_hand_minus_case_lift_change_during_case_motion_mm": 0.0,
+      "jaw_opening_during_case_motion_mm": [
+        0.0
+      ],
+      "jaw_opening_during_clamp_toe_motion_mm": [
+        0.0
+      ],
+      "clamp_toe_opening_during_jaw_motion_mm": [
+        0.0
+      ],
+      "case_lift_during_jaw_motion_mm": [
+        0.0
+      ]
+    }
+  ],
+  "framing": "All displayed mesh bounding boxes project inside each fixed render canvas.",
+  "contact_sheets": [
+    {
+      "file": "audit/contacts/loading.png",
+      "sha256": "42dcd38f52b35b7e8071922e73a02e42ea327dff9fa8e5afc1aad9b2043b8cee"
+    },
+    {
+      "file": "audit/contacts/pickup.png",
+      "sha256": "2b9e0d1f34d271bbc9372072e6599f6fc8fb2ee4ebebc3157359ef5c83c2ecae"
+    }
+  ],
+  "basis": "Image/file readback and numerical diagram poses, not force, sensors or physical retention.",
+  "physical_acceptance_verdict": null
+}
