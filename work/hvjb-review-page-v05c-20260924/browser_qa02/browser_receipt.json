@@ -1,0 +1,232 @@
+{
+  "observed_at": "2026-09-23T19:39:08.819Z",
+  "method": "Isolated headless Chrome; local file package; no user browser profile",
+  "browser_version": "153.0.8010.52",
+  "entry_sha256": "b75ffc85cab3310b9084e08b911d0782d906206f4244ab65ca0c4afb74749408",
+  "script_sha256": "f8404212bb7dd386bad3d5d1d9099cdfdc1d2faa6e900d6ad25a314f0e025d52",
+  "observations": [
+    {
+      "initialVideoMetadata": {
+        "duration": 155.2,
+        "width": 1920,
+        "height": 1080,
+        "currentSrc": "file:///tmp/hvjb-line-progress-20260923/work/hvjb-review-page-v05c-20260924/output/HVJB_line_split_process_concept_v05c_review.mp4",
+        "paused": true
+      },
+      "scenes": 22,
+      "jobs": 20,
+      "features": 92,
+      "diagrams": 6
+    },
+    {
+      "scene": "H06_loading",
+      "requestedTime": 119,
+      "visibleLabel": "H06_loading · 拡大：H06 空筐体をパレットへ載せる",
+      "readyState": 4,
+      "mediaError": null
+    },
+    {
+      "scene": "H06_pickup",
+      "requestedTime": 129,
+      "visibleLabel": "H06_pickup · 拡大：H06 再把持して筐体を取り出す",
+      "readyState": 4,
+      "mediaError": null
+    },
+    {
+      "scene": "H05_P16",
+      "requestedTime": 139,
+      "visibleLabel": "H05_P16 · 拡大：H05 3口ヘッダーの開放・退避",
+      "readyState": 4,
+      "mediaError": null
+    },
+    {
+      "scene": "H05_P17",
+      "requestedTime": 147,
+      "visibleLabel": "H05_P17 · 拡大：H05 2口ヘッダーの開放・退避",
+      "readyState": 4,
+      "mediaError": null
+    },
+    {
+      "scene": "H05_P17",
+      "requestedTime": 147,
+      "visibleLabel": "H05_P17 · 拡大：H05 2口ヘッダーの開放・退避",
+      "readyState": 4,
+      "mediaError": null
+    },
+    {
+      "scene": "H05_P16",
+      "requestedTime": 139,
+      "visibleLabel": "H05_P16 · 拡大：H05 3口ヘッダーの開放・退避",
+      "readyState": 4,
+      "mediaError": null
+    },
+    {
+      "handReviewDeepLink": "H05_P16",
+      "source": "hand_review/index.html"
+    },
+    {
+      "scene": "H06_loading",
+      "requestedTime": 119,
+      "visibleLabel": "H06_loading · 拡大：H06 空筐体をパレットへ載せる",
+      "readyState": 4,
+      "mediaError": null
+    },
+    {
+      "mobileWidth": {
+        "viewport": 430,
+        "body": 430,
+        "page": 430
+      }
+    }
+  ],
+  "screenshots": [
+    {
+      "file": "browser_qa02/H06_loading.png",
+      "sha256": "5199becc47bc12cb8f7618d69817aa3557f7987e28fefd227a047d19019504bc",
+      "viewport": {
+        "width": 1680,
+        "height": 1050
+      }
+    },
+    {
+      "file": "browser_qa02/H06_pickup.png",
+      "sha256": "e47451e8b6049ec859226759c68978dea8f128e0e2d1562dcab043a350920f7a",
+      "viewport": {
+        "width": 1680,
+        "height": 1050
+      }
+    },
+    {
+      "file": "browser_qa02/H05_P16.png",
+      "sha256": "592776d8d8e58aff09a507eb576d45958f0fd549130d99555eb8356c65359404",
+      "viewport": {
+        "width": 1680,
+        "height": 1050
+      }
+    },
+    {
+      "file": "browser_qa02/H05_P17.png",
+      "sha256": "98854d463943115f423ac0e34b4dd03539079559f8c6bfd018bfa7921d97daab",
+      "viewport": {
+        "width": 1680,
+        "height": 1050
+      }
+    },
+    {
+      "file": "browser_qa02/job_D50.png",
+      "sha256": "54cddd89ad16828388143e9fbd797ebedca15c9808a44fbe41acc0cfe204b3ae",
+      "viewport": {
+        "width": 1680,
+        "height": 1050
+      }
+    },
+    {
+      "file": "browser_qa02/feature_P16.png",
+      "sha256": "9280f7d5c350142905b4ee1bb171f9043ea0fd14f39494b65cd3604944796527",
+      "viewport": {
+        "width": 1680,
+        "height": 1050
+      }
+    },
+    {
+      "file": "browser_qa02/mobile_H06.png",
+      "sha256": "6edc295b834a48aa6fcb8c0d02cde7ee1a12ab0fc7db76580d4a167777a421a5",
+      "viewport": {
+        "width": 430,
+        "height": 932
+      }
+    }
+  ],
+  "page_errors": [],
+  "all_requestfailed_events": [
+    {
+      "url": "file:///tmp/hvjb-line-progress-20260923/work/hvjb-review-page-v05c-20260924/output/HVJB_line_split_process_concept_v05c_review.mp4",
+      "type": "media",
+      "reason": {
+        "errorText": "net::ERR_ABORTED"
+      }
+    },
+    {
+      "url": "file:///tmp/hvjb-line-progress-20260923/work/hvjb-review-page-v05c-20260924/output/HVJB_line_split_process_concept_v05c_review.mp4",
+      "type": "media",
+      "reason": {
+        "errorText": "net::ERR_ABORTED"
+      }
+    },
+    {
+      "url": "file:///tmp/hvjb-line-progress-20260923/work/hvjb-review-page-v05c-20260924/output/HVJB_line_split_process_concept_v05c_review.mp4",
+      "type": "media",
+      "reason": {
+        "errorText": "net::ERR_ABORTED"
+      }
+    },
+    {
+      "url": "file:///tmp/hvjb-line-progress-20260923/work/hvjb-review-page-v05c-20260924/output/HVJB_line_split_process_concept_v05c_review.mp4",
+      "type": "media",
+      "reason": {
+        "errorText": "net::ERR_ABORTED"
+      }
+    },
+    {
+      "url": "file:///tmp/hvjb-line-progress-20260923/work/hvjb-review-page-v05c-20260924/output/HVJB_line_split_process_concept_v05c_review.mp4",
+      "type": "media",
+      "reason": {
+        "errorText": "net::ERR_ABORTED"
+      }
+    },
+    {
+      "url": "file:///tmp/hvjb-line-progress-20260923/work/hvjb-review-page-v05c-20260924/output/HVJB_line_split_process_concept_v05c_review.mp4",
+      "type": "media",
+      "reason": {
+        "errorText": "net::ERR_ABORTED"
+      }
+    }
+  ],
+  "media_cancellations_during_seek_or_navigation": [
+    {
+      "url": "file:///tmp/hvjb-line-progress-20260923/work/hvjb-review-page-v05c-20260924/output/HVJB_line_split_process_concept_v05c_review.mp4",
+      "type": "media",
+      "reason": {
+        "errorText": "net::ERR_ABORTED"
+      }
+    },
+    {
+      "url": "file:///tmp/hvjb-line-progress-20260923/work/hvjb-review-page-v05c-20260924/output/HVJB_line_split_process_concept_v05c_review.mp4",
+      "type": "media",
+      "reason": {
+        "errorText": "net::ERR_ABORTED"
+      }
+    },
+    {
+      "url": "file:///tmp/hvjb-line-progress-20260923/work/hvjb-review-page-v05c-20260924/output/HVJB_line_split_process_concept_v05c_review.mp4",
+      "type": "media",
+      "reason": {
+        "errorText": "net::ERR_ABORTED"
+      }
+    },
+    {
+      "url": "file:///tmp/hvjb-line-progress-20260923/work/hvjb-review-page-v05c-20260924/output/HVJB_line_split_process_concept_v05c_review.mp4",
+      "type": "media",
+      "reason": {
+        "errorText": "net::ERR_ABORTED"
+      }
+    },
+    {
+      "url": "file:///tmp/hvjb-line-progress-20260923/work/hvjb-review-page-v05c-20260924/output/HVJB_line_split_process_concept_v05c_review.mp4",
+      "type": "media",
+      "reason": {
+        "errorText": "net::ERR_ABORTED"
+      }
+    },
+    {
+      "url": "file:///tmp/hvjb-line-progress-20260923/work/hvjb-review-page-v05c-20260924/output/HVJB_line_split_process_concept_v05c_review.mp4",
+      "type": "media",
+      "reason": {
+        "errorText": "net::ERR_ABORTED"
+      }
+    }
+  ],
+  "unexpected_failed_requests": [],
+  "physical_acceptance_verdict": null,
+  "visual_inspection_recorded_separately": true
+}

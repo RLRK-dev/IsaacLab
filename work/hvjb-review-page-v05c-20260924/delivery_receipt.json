@@ -1,0 +1,16 @@
+{
+  "observed_at": "2026-09-24T04:58:53.017666+09:00",
+  "destination": "/home/rlrk/Downloads/HVJB_ライン全体レビュー_v05c_20260924",
+  "entry": "index.html",
+  "files_delivered_and_read_back": 483,
+  "manifest_sha256": "48ec38dfc7bf4f242624c393edfbf7df6a34649e88a8923fba5cf36b2307c591",
+  "qa_receipt_sha256": "b730dd2015edd39387be9c38befef313242db6c41a87bbc54b3e4d2f820622c0",
+  "browser_receipt_sha256": "f75fd1b75bcc9ea2cdae7f5bbdfa3ab4837293e30fc739db44fd4a31e90c5660",
+  "playback_receipt_sha256": "28bc1deaf85db67596c51f4c0df1e1c2a68386637f56707f106f8b550db7ec16",
+  "video_sha256": "18372546c5298ab6b908351e1cfa68db7fa6af596c5fc1f8a72bc9cb768b0c5e",
+  "mp4_files": [
+    "HVJB_line_split_process_concept_v05c_review.mp4"
+  ],
+  "earlier_versions_modified": false,
+  "script_sha256": "84e9c845b70323eb5e64272aa6f0706ed6344f1edf2a77e3b62e450c4feba736"
+}

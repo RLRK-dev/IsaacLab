@@ -1,0 +1,124 @@
+{
+  "observed_at": "2026-09-24T04:19:42.835220+09:00",
+  "manifest_sha256": "ef6861101acc84ede1fb0cf304600055dee19e96370a8914845f201c21fac627",
+  "files_read_back": 483,
+  "jobs": 20,
+  "features": 92,
+  "original_scenes": 18,
+  "appended_local_review_scenes": 4,
+  "duration_s": 155.2,
+  "job_changes_only_additional_review_scene_links": {
+    "D00": [
+      "H06_loading"
+    ],
+    "D80": [
+      "H06_pickup"
+    ],
+    "D50": [
+      "H05_P16",
+      "H05_P17"
+    ]
+  },
+  "html_pages": [
+    {
+      "path": "coverage_review/index.html",
+      "local_and_external_links": 30
+    },
+    {
+      "path": "hand_review/index.html",
+      "local_and_external_links": 81
+    },
+    {
+      "path": "index.html",
+      "local_and_external_links": 27
+    },
+    {
+      "path": "index_v04_1.html",
+      "local_and_external_links": 1
+    },
+    {
+      "path": "index_v04_2.html",
+      "local_and_external_links": 1
+    },
+    {
+      "path": "index_v05_1.html",
+      "local_and_external_links": 1
+    },
+    {
+      "path": "index_v05b_1.html",
+      "local_and_external_links": 1
+    },
+    {
+      "path": "index_v05b_2.html",
+      "local_and_external_links": 1
+    },
+    {
+      "path": "logistics_review/all_states.html",
+      "local_and_external_links": 26
+    },
+    {
+      "path": "logistics_review/index.html",
+      "local_and_external_links": 26
+    },
+    {
+      "path": "parallel_review/all_cases.html",
+      "local_and_external_links": 18
+    },
+    {
+      "path": "parallel_review/index.html",
+      "local_and_external_links": 20
+    },
+    {
+      "path": "public_review/index.html",
+      "local_and_external_links": 42
+    },
+    {
+      "path": "unit_review/all_groups.html",
+      "local_and_external_links": 25
+    },
+    {
+      "path": "unit_review/index.html",
+      "local_and_external_links": 261
+    }
+  ],
+  "javascript_syntax": [
+    {
+      "path": "coverage_review/coverage.js",
+      "exit_code": 0
+    },
+    {
+      "path": "logistics_review/logistics.js",
+      "exit_code": 0
+    },
+    {
+      "path": "parallel_review/parallel.js",
+      "exit_code": 0
+    },
+    {
+      "path": "review.js",
+      "exit_code": 0
+    },
+    {
+      "path": "unit_review/groups.js",
+      "exit_code": 0
+    }
+  ],
+  "images_decoded": 384,
+  "external_references_not_refetched": [
+    "https://ampereev.com/documentation/hvjb-5-400-specifications/",
+    "https://www.youtube.com/watch?v=Sm_D-vmNYqc&t=146s",
+    "https://www.youtube.com/watch?v=Sm_D-vmNYqc&t=154s",
+    "https://www.youtube.com/watch?v=Sm_D-vmNYqc&t=158s",
+    "https://www.youtube.com/watch?v=Sm_D-vmNYqc&t=170s",
+    "https://www.youtube.com/watch?v=Sm_D-vmNYqc&t=24s",
+    "https://www.youtube.com/watch?v=Sm_D-vmNYqc&t=50s"
+  ],
+  "mp4_files": [
+    "HVJB_line_split_process_concept_v05c_review.mp4"
+  ],
+  "video_sha256": "18372546c5298ab6b908351e1cfa68db7fa6af596c5fc1f8a72bc9cb768b0c5e",
+  "browser_ui_observed": false,
+  "browser_qa_recorded_separately": true,
+  "formal_physical_validity_verdict": null,
+  "script_sha256": "b522c9aa1967c5ed8ad93e74a885a4fbfa186a25812503018e55645976f3fac7"
+}

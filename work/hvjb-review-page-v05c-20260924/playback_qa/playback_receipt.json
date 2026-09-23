@@ -1,0 +1,31 @@
+{
+  "observed_at": "2026-09-23T19:55:16.941Z",
+  "entry_sha256": "b75ffc85cab3310b9084e08b911d0782d906206f4244ab65ca0c4afb74749408",
+  "script_sha256": "e48d7979d5a9328a5e9605e14e7101dcd58f38ab209ad4838bce98e8ca5dcc83",
+  "method": "Headless Chrome: start and pause playback after successful scene seek; investigate transient native spinner",
+  "observations": [
+    {
+      "scene": "H06_loading",
+      "start": 119,
+      "currentTime": 120.110689,
+      "readyState": 4,
+      "paused": true,
+      "mediaError": null,
+      "frames": 21,
+      "screenshot": "H06_loading.png",
+      "sha256": "69cdc82537e0883216051573313f17e9e2762c64b6a81885411282ef103c4b12"
+    },
+    {
+      "scene": "H05_P16",
+      "start": 139,
+      "currentTime": 140.116748,
+      "readyState": 4,
+      "paused": true,
+      "mediaError": null,
+      "frames": 43,
+      "screenshot": "H05_P16.png",
+      "sha256": "ce776c9b70b317cdf1c0da1c48532a0b779b675e2a0617173a97a0bc1bea438d"
+    }
+  ],
+  "physical_acceptance_verdict": null
+}
