@@ -1,0 +1,162 @@
+{
+  "observed_at": "2026-09-23T12:59:03.557954+09:00",
+  "manifest_sha256": "3948a831602e6d4ec8504d5c41fe09dc6721b1f898ef9614ddf51b4e0c70ac5b",
+  "files_read_back": 23,
+  "jobs_preserved": 20,
+  "families": 8,
+  "application_cards": 12,
+  "unmatched_target_specific_family_illustrations": {
+    "D11": [
+      "H05"
+    ],
+    "D21": [
+      "H05"
+    ],
+    "D61": [
+      "H05"
+    ]
+  },
+  "P22_stage_selected": false,
+  "images": [
+    {
+      "file": "H01_schematic.png",
+      "size": [
+        960,
+        660
+      ],
+      "sha256": "c12f086c852dfa71908c392bd7a1d6d57250d654551556bfaaec80cdd4c5a3fd"
+    },
+    {
+      "file": "H02_schematic.png",
+      "size": [
+        960,
+        660
+      ],
+      "sha256": "ee2526b344e0bde1c06b87e6dfcb59c00dd0f606fe8cff94da059861f75d831d"
+    },
+    {
+      "file": "H03_schematic.png",
+      "size": [
+        960,
+        660
+      ],
+      "sha256": "e67b056cba21886e7161d30fbcc5f98d4224dfcb5032bddbe4f139726468cf0d"
+    },
+    {
+      "file": "H04_contact.png",
+      "size": [
+        1200,
+        900
+      ],
+      "sha256": "d921ec7fae9301ba7311c4c510a89bb0d299f0be1614cd528754bf762eb1655d"
+    },
+    {
+      "file": "H04_open.png",
+      "size": [
+        1200,
+        900
+      ],
+      "sha256": "8dc6a910ca99c1ec1a6d2479abade4a77741e0b4f19339e285cafcf9d8d676c6"
+    },
+    {
+      "file": "H04_side.png",
+      "size": [
+        1200,
+        900
+      ],
+      "sha256": "728dcd6d24586991b246e8e48c4a9bd711df9f18e8325a64b51b7ff94f92cf68"
+    },
+    {
+      "file": "H05_inner.png",
+      "size": [
+        1087,
+        1087
+      ],
+      "sha256": "e7b09bc78013d78ce129ee925c4dd6677ba7376cfcb374af4dce3e8c76dbb280"
+    },
+    {
+      "file": "H05_inner_hand.png",
+      "size": [
+        506,
+        1203
+      ],
+      "sha256": "292e0021044e19f502c1960c44e99278006c801a987c6894efedee3625e04eef"
+    },
+    {
+      "file": "H05_outer2.png",
+      "size": [
+        1200,
+        900
+      ],
+      "sha256": "97a1b7e4c7d2f641003407ddfc0588447e2c48cd6b293d41e546fe9957167e02"
+    },
+    {
+      "file": "H05_outer3.png",
+      "size": [
+        1200,
+        900
+      ],
+      "sha256": "2c1c28313f2b28bdae16afa6d7fc860cff1216f7484cfe82e0cebd987213097f"
+    },
+    {
+      "file": "H05_outer3_open.png",
+      "size": [
+        1200,
+        900
+      ],
+      "sha256": "ce039156c9c15f31b6c6cdfb915d894635dea0e90a4f931d3ce7690dccf92520"
+    },
+    {
+      "file": "H06_case.png",
+      "size": [
+        1200,
+        900
+      ],
+      "sha256": "d97c129feff1673650f206fede3894f1e4cd780a36f9c3723898478463ea6226"
+    },
+    {
+      "file": "H06_case_clear.png",
+      "size": [
+        1200,
+        900
+      ],
+      "sha256": "5830979384c795a9b567ff6ccd3d052bac438f43c2a710a89c563d433e391207"
+    },
+    {
+      "file": "H06_pin_passage.png",
+      "size": [
+        1200,
+        900
+      ],
+      "sha256": "4238f90781f58dccc2b14cdcd318e6efd5d6cbf3289e3d412cb726c5dba66d9d"
+    },
+    {
+      "file": "H07_schematic.png",
+      "size": [
+        960,
+        660
+      ],
+      "sha256": "b47558844fdc88e40aa873b4b941d779252753263f47d5294fbdb6f9f9198792"
+    },
+    {
+      "file": "H08_schematic.png",
+      "size": [
+        960,
+        660
+      ],
+      "sha256": "000c64a9bb0bc99191244a21e4f17baa5423bc57d9289ac4063b48c01868712c"
+    },
+    {
+      "file": "unit_target_reference.png",
+      "size": [
+        1600,
+        1100
+      ],
+      "sha256": "d30a05313b415d3f5862f0016aa13b523eb7bf09e6d65bd2ad9fb0a0dd99ee94"
+    }
+  ],
+  "figure_observation": "Five reused schematics visually opened; H02 and H08 labels moved away from leaders/arrows.",
+  "browser_ui_observed": false,
+  "formal_physical_validity_verdict": null,
+  "script_sha256": "26c551eaf1cfe203bc9bcb933d1003af0b00be5a17d12f2a31f96bf3b630bff2"
+}

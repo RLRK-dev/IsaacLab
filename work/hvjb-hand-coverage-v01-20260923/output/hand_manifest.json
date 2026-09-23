@@ -1,0 +1,126 @@
+{
+  "observed_at": "2026-09-23T12:51:56.605985+09:00",
+  "files": [
+    {
+      "path": "20仕事と手先用途.csv",
+      "sha256": "ceacd45c5dfd0e24dba2cad97748f5abf6789c0613543a8afad56523cfffc5ef",
+      "bytes": 2584
+    },
+    {
+      "path": "figures/H01_schematic.png",
+      "sha256": "c12f086c852dfa71908c392bd7a1d6d57250d654551556bfaaec80cdd4c5a3fd",
+      "bytes": 37527
+    },
+    {
+      "path": "figures/H02_schematic.png",
+      "sha256": "ee2526b344e0bde1c06b87e6dfcb59c00dd0f606fe8cff94da059861f75d831d",
+      "bytes": 33617
+    },
+    {
+      "path": "figures/H03_schematic.png",
+      "sha256": "e67b056cba21886e7161d30fbcc5f98d4224dfcb5032bddbe4f139726468cf0d",
+      "bytes": 35473
+    },
+    {
+      "path": "figures/H04_contact.png",
+      "sha256": "d921ec7fae9301ba7311c4c510a89bb0d299f0be1614cd528754bf762eb1655d",
+      "bytes": 48757
+    },
+    {
+      "path": "figures/H04_open.png",
+      "sha256": "8dc6a910ca99c1ec1a6d2479abade4a77741e0b4f19339e285cafcf9d8d676c6",
+      "bytes": 74803
+    },
+    {
+      "path": "figures/H04_side.png",
+      "sha256": "728dcd6d24586991b246e8e48c4a9bd711df9f18e8325a64b51b7ff94f92cf68",
+      "bytes": 51638
+    },
+    {
+      "path": "figures/H05_inner.png",
+      "sha256": "e7b09bc78013d78ce129ee925c4dd6677ba7376cfcb374af4dce3e8c76dbb280",
+      "bytes": 162829
+    },
+    {
+      "path": "figures/H05_inner_hand.png",
+      "sha256": "292e0021044e19f502c1960c44e99278006c801a987c6894efedee3625e04eef",
+      "bytes": 54374
+    },
+    {
+      "path": "figures/H05_outer2.png",
+      "sha256": "97a1b7e4c7d2f641003407ddfc0588447e2c48cd6b293d41e546fe9957167e02",
+      "bytes": 71464
+    },
+    {
+      "path": "figures/H05_outer3.png",
+      "sha256": "2c1c28313f2b28bdae16afa6d7fc860cff1216f7484cfe82e0cebd987213097f",
+      "bytes": 81181
+    },
+    {
+      "path": "figures/H05_outer3_open.png",
+      "sha256": "ce039156c9c15f31b6c6cdfb915d894635dea0e90a4f931d3ce7690dccf92520",
+      "bytes": 82335
+    },
+    {
+      "path": "figures/H06_case.png",
+      "sha256": "d97c129feff1673650f206fede3894f1e4cd780a36f9c3723898478463ea6226",
+      "bytes": 96806
+    },
+    {
+      "path": "figures/H06_case_clear.png",
+      "sha256": "5830979384c795a9b567ff6ccd3d052bac438f43c2a710a89c563d433e391207",
+      "bytes": 102053
+    },
+    {
+      "path": "figures/H06_pin_passage.png",
+      "sha256": "4238f90781f58dccc2b14cdcd318e6efd5d6cbf3289e3d412cb726c5dba66d9d",
+      "bytes": 17524
+    },
+    {
+      "path": "figures/H07_schematic.png",
+      "sha256": "b47558844fdc88e40aa873b4b941d779252753263f47d5294fbdb6f9f9198792",
+      "bytes": 28154
+    },
+    {
+      "path": "figures/H08_schematic.png",
+      "sha256": "000c64a9bb0bc99191244a21e4f17baa5423bc57d9289ac4063b48c01868712c",
+      "bytes": 27328
+    },
+    {
+      "path": "figures/unit_target_reference.png",
+      "sha256": "d30a05313b415d3f5862f0016aa13b523eb7bf09e6d65bd2ad9fb0a0dd99ee94",
+      "bytes": 240956
+    },
+    {
+      "path": "hand_review_data.json",
+      "sha256": "e152faa4df90a91d38a6d549beca848780b9201003a5de61505f39d5341ee75e",
+      "bytes": 57618
+    },
+    {
+      "path": "hands.css",
+      "sha256": "5428cf689ecb67f6328995b88d14933b641b12bbf4db122c5554a86972ed2762",
+      "bytes": 3934
+    },
+    {
+      "path": "index.html",
+      "sha256": "af89be043eaa9e2c2b61aafeac7b838e873c5b29ff5840c6a1cf9a503110bffe",
+      "bytes": 27456
+    },
+    {
+      "path": "schematic_receipt.json",
+      "sha256": "03a3273479a9ed2b0a385afc0a538a165a44c727e6c221ef8e218c9b5d84b506",
+      "bytes": 3753
+    },
+    {
+      "path": "source_identity.json",
+      "sha256": "a81fc670babe60870388b862b38c73013fd598f8b0ca7e410d6620806199209b",
+      "bytes": 6629
+    }
+  ],
+  "families": 8,
+  "application_cards": 12,
+  "jobs": 20,
+  "source_identity_sha256": "a81fc670babe60870388b862b38c73013fd598f8b0ca7e410d6620806199209b",
+  "script_sha256": "794585193c06c5db15138a524be1db8fcf08c8eeba05502ee4b2fc8242a2614e",
+  "physical_acceptance_verdict": null
+}

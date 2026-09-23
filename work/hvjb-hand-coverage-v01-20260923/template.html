@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>HVJB 手先・支持の引継ぎ — 8系統と12用途</title>
+  <link rel="stylesheet" href="hands.css">
+</head>
+<body>
+  <header id="top">
+    <a class="back" href="../index.html">← 全体動画・20仕事・92項目へ</a>
+    <div class="eyebrow">HVJB · 手先と仕事の対応 · 2026-09-23</div>
+    <h1>何を保持し、どこを工具のために空けるか</h1>
+    <p class="lead">8系統の手先を、対象の違う12用途に分けました。基準面、保持を続ける区間、開く前の引継ぎを図から確認できます。</p>
+    <div class="principles"><span>2本指・連動開閉が初期仕様</span><span>形状の基準側と押付け側を分ける</span><span>支持を渡してから開く</span></div>
+    <p class="caption">12用途はハンド12台の採用ではありません。同じ系統名でも、実部品の輪郭・荷重・工具通路・交換方式の照合が残ります。</p>
+  </header>
+  <main>
+    <section class="summary-panel" aria-labelledby="review-guide">
+      <h2 id="review-guide">先に見分ける3点</h2>
+      <div class="three-points">
+        <div><h3>H05：内側と外側</h3><p>内側ハウジングを通す指と、外側ヘッダーをねじ固定中に保持する指は、別の接触面を使います。</p></div>
+        <div><h3>H06：筐体と内部ユニット</h3><p>FC02は筐体フランジ・パレットの比較。一体ユニットを持つ面はまだ確定していません。</p></div>
+        <div><h3>H07：板と蓋</h3><p>Bの板と製品の蓋は別対象です。側縁保持という原理が共通でも、同じ爪の採用にはしていません。</p></div>
+      </div>
+      <p class="caption">青：受け構造の例、青緑：接触パッドの例。保存3D図の灰色は元の機構・対象を含みます。模式図は無寸法で、部品形状への実適合・安定把持を判定したものではありません。</p>
+    </section>
+    <nav class="hand-nav" aria-label="手先の用途を選ぶ">__NAVIGATION__</nav>
+    <div class="hand-grid">__CARDS__</div>
+    <section class="jobs-section" id="jobs">
+      <div class="heading-row"><h2>20仕事との対応</h2><a href="20仕事と手先用途.csv" download>CSVを開く</a></div>
+      <p>元の20仕事を残しています。「手先の用途図がある」と「各実部品へ適用できる」は別です。補助が保持している間の占有も省略しません。</p>
+      <div class="table-wrap"><table><thead><tr><th>仕事</th><th>場所・主担当</th><th>用途図</th><th>補助の役割</th><th>支持の引継ぎ</th></tr></thead><tbody>__JOB_ROWS__</tbody></table></div>
+    </section>
+    <section class="summary-panel">
+      <h2>保持と工具の切替を読む</h2>
+      <ol class="handoff-chain"><li>対象を保持する</li><li>保持したまま搬送・接続する</li><li>次の支持へ荷重を渡す</li><li>工具と周囲の退避を確認して開く</li></ol>
+      <p>A/B共用補助は保持途中で別セルへ移りません。C専用補助も搭載終了だけでは空きにならず、自由端の支持先が決まるまで担当が残ります。検出・力・許容ずれの数値は未選定です。</p>
+      <p>主ヒューズP22・被覆P08の取付工程、隠れた箱内工具作業、LV/HVILの個別端末は引き続き未確定です。工具をフィンガでつかむ方式には変更していません。</p>
+    </section>
+  </main>
+  <footer><p><a href="#top">先頭へ</a> · <a href="../index.html">全体の確認ページへ</a></p><details><summary>根拠と確認範囲</summary><ul><li><a href="hand_review_data.json">8系統・12用途・20仕事の対応記録</a></li><li><a href="source_identity.json">保存資料・図の出所とSHA</a></li><li><a href="schematic_receipt.json">既存原理図の再表示記録</a></li><li><a href="hand_manifest.json">ファイル一覧</a></li></ul><p>既存の接触方針・比較形状を整理した資料です。実機機種、把持力、締結品質、干渉の正式判定、採用加工寸法は確定していません。</p></details></footer>
+</body>
+</html>

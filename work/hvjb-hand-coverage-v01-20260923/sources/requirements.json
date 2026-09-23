@@ -1,0 +1,102 @@
+{
+  "revision": "v01_20260920",
+  "user_requirement_ja": "把持完了から組付け・支持引継ぎまで、すべてのフィンガで対象部品の位置と向きを手の中に保持する。単に挟めるだけの仕様にしない。",
+  "authority": "current_user_directive",
+  "allowable_translation_m": null,
+  "allowable_rotation_rad": null,
+  "physical_acceptance_verdict": null,
+  "common": {
+    "finger_baseline": "opposed 2 fingers, 1 linked closing drive; multiple pads do not mean independent fingers",
+    "part_relative_to_hand_pose_commanded_to_change_after_clamp": false,
+    "insertion_accommodation": "move or comply with the complete hand while retaining the grasped datum",
+    "contact_roles": ["shape-matched datum", "opposed preload", "load/assembly-force receiving face", "anti-rotation feature", "release clearance"],
+    "holding_window": ["pick and clamp", "lift", "transfer and orientation change", "assembly/fastening", "support transfer before release"],
+    "observation": "track target pose relative to hand; jaw width/object detection alone does not establish no slip",
+    "parameters_not_selected": ["grip force", "pad material/hardness", "allowable contact pressure", "preload", "numeric pose-drift acceptance", "sensor or classifier", "tool and bit part number"]
+  },
+  "families": [
+    {
+      "id": "H01",
+      "title_ja": "円形本体",
+      "shape_ja": "胴の円弧受け＋実在する耳・平面への回り止め",
+      "datum_ja": "胴の広い円弧を基準にし、非円形の外縁で向きを決める。",
+      "force_ja": "荷重を受けられる段差があれば軸方向の受けに使う。",
+      "open_ja": "着座面の下へ爪を回り込ませず、側方に開いて抜く。",
+      "unresolved_ja": "実物の許容側面・耳の形状。段差がない軸方向は摩擦保持を要確認。",
+      "geometry_status": "schematic_only_no_new_actual_part_geometry"
+    },
+    {
+      "id": "H02",
+      "title_ja": "角形本体・支持部",
+      "shape_ja": "外形ポケット＋端当て＋対向する押付けパッド",
+      "datum_ja": "基準側の面と長手端で位置を決め、反対側から押し付ける。",
+      "force_ja": "組付け方向に肩・端面の受けを置き、薄肉部を避ける。",
+      "open_ja": "指先の面取りと開放側の逃げを設ける。",
+      "unresolved_ja": "実部品の許容面、公差、荷重方向。全面を硬く一致させない。",
+      "geometry_status": "schematic_only_no_new_actual_part_geometry"
+    },
+    {
+      "id": "H03",
+      "title_ja": "剛体バスバー",
+      "shape_ja": "非接続縁の浅い輪郭受け＋端当て＋離れた接触点",
+      "datum_ja": "長辺と端部を基準にし、離れた受けで傾き・回転を抑える。",
+      "force_ja": "剛性のある非接続部で支える。工具反力を薄い縁へ集中させない。",
+      "open_ja": "電気接続面・ボルト穴を空け、締結後に横へ抜ける。",
+      "unresolved_ja": "導通面以外の許容把持域、変形、締付工具と抜き方向。",
+      "geometry_status": "schematic_only_no_new_actual_part_geometry"
+    },
+    {
+      "id": "H04",
+      "title_ja": "ケーブル・黒被覆",
+      "shape_ja": "端子側の黒被覆と根元被覆を、二つの丸底受けで保持",
+      "datum_ja": "線径に合う溝で横ずれと傾きを抑える。金属端子はつかまない。",
+      "force_ja": "接触長と予圧を両立させ、被覆をつぶして固定しない。",
+      "open_ja": "40 mm後退・15度の既定姿勢を維持し、工具空間を残す。",
+      "unresolved_ja": "丸溝だけでは軸滑り・軸回転を拘束できない。被覆と端子間の滑りも未確認。",
+      "geometry_status": "retained_T050_no_new_cable_dimensions",
+      "axial_stop": "only if an actual load-bearing sleeve shoulder is established; none invented",
+      "rotation_constraint": "friction verification or an actual permitted non-round datum is needed"
+    },
+    {
+      "id": "H05",
+      "title_ja": "ヘッダー・差込端末",
+      "shape_ja": "硬いハウジングの専用輪郭受け＋組付け力を受ける面",
+      "datum_ja": "左右輪郭と曲面で位置・向きを定め、肩の当てで押込力を伝える。",
+      "force_ja": "外側ヘッダーはフランジ外縁と外側前面の当てを比較。",
+      "open_ja": "シール側へ爪を回さず、ねじ穴・ラッチ・端子開口を避ける。",
+      "unresolved_ja": "逆方向の引張は摩擦依存が残る。内側端末には別の外形照合が必要。",
+      "geometry_status": "P16_P17_isolated_CAD_derived_comparison_created",
+      "manufacturer_grasp_face_approval": null
+    },
+    {
+      "id": "H06",
+      "title_ja": "筐体・完成品・一体ユニット",
+      "shape_ja": "幅広爪＋離れた輪郭受け＋実在縁への端当て",
+      "datum_ja": "長手方向に離れた二か所を各爪で保持し、姿勢を支える。",
+      "force_ja": "荷重を受けられる既存の側縁・段差を使い、支持域を広げる。",
+      "open_ja": "筐体は供給と完成品で共用を検討。ユニットは別の接触面を照合。",
+      "unresolved_ja": "搭載後重心、外縁強度、一体ユニットの実在搬送基準。架空の持ち手は追加しない。",
+      "geometry_status": "schematic_only_no_new_actual_part_geometry"
+    },
+    {
+      "id": "H07",
+      "title_ja": "カバー・板保持",
+      "shape_ja": "側縁用ポケット＋離れた受け＋長手端当て",
+      "datum_ja": "板の側縁と端を基準にし、二点間隔で回り込みを抑える。",
+      "force_ja": "曲がりやすい中央に力を集中させず、許容された縁を支える。",
+      "open_ja": "着座面の下へ爪を残さない。先に支持を渡して側方へ抜く。",
+      "unresolved_ja": "対象ごとの板縁、許容圧、反り、着座後の開放域。存在しない取手を作らない。",
+      "geometry_status": "schematic_only_no_new_actual_part_geometry"
+    },
+    {
+      "id": "H08",
+      "title_ja": "ヒューズ本体",
+      "shape_ja": "胴の専用輪郭＋非導電部の肩受け・向き基準",
+      "datum_ja": "円筒は円弧、角形はポケットに合わせ、接触点を離す。",
+      "force_ja": "荷重を許容する胴を保持し、導電端へ把持力を掛けない。",
+      "open_ja": "接続・ばね接点・工具が入る場所を空ける。",
+      "unresolved_ja": "滑らかな円筒の軸滑り・軸回転と、実物の胴の許容荷重。",
+      "geometry_status": "schematic_only_no_new_actual_part_geometry"
+    }
+  ]
+}

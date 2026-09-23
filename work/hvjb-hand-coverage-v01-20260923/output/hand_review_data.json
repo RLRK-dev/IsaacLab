@@ -1,0 +1,1784 @@
+{
+  "requirements": {
+    "revision": "v01_20260920",
+    "user_requirement_ja": "把持完了から組付け・支持引継ぎまで、すべてのフィンガで対象部品の位置と向きを手の中に保持する。単に挟めるだけの仕様にしない。",
+    "authority": "current_user_directive",
+    "allowable_translation_m": null,
+    "allowable_rotation_rad": null,
+    "physical_acceptance_verdict": null,
+    "common": {
+      "finger_baseline": "opposed 2 fingers, 1 linked closing drive; multiple pads do not mean independent fingers",
+      "part_relative_to_hand_pose_commanded_to_change_after_clamp": false,
+      "insertion_accommodation": "move or comply with the complete hand while retaining the grasped datum",
+      "contact_roles": [
+        "shape-matched datum",
+        "opposed preload",
+        "load/assembly-force receiving face",
+        "anti-rotation feature",
+        "release clearance"
+      ],
+      "holding_window": [
+        "pick and clamp",
+        "lift",
+        "transfer and orientation change",
+        "assembly/fastening",
+        "support transfer before release"
+      ],
+      "observation": "track target pose relative to hand; jaw width/object detection alone does not establish no slip",
+      "parameters_not_selected": [
+        "grip force",
+        "pad material/hardness",
+        "allowable contact pressure",
+        "preload",
+        "numeric pose-drift acceptance",
+        "sensor or classifier",
+        "tool and bit part number"
+      ]
+    },
+    "families": [
+      {
+        "id": "H01",
+        "title_ja": "円形本体",
+        "shape_ja": "胴の円弧受け＋実在する耳・平面への回り止め",
+        "datum_ja": "胴の広い円弧を基準にし、非円形の外縁で向きを決める。",
+        "force_ja": "荷重を受けられる段差があれば軸方向の受けに使う。",
+        "open_ja": "着座面の下へ爪を回り込ませず、側方に開いて抜く。",
+        "unresolved_ja": "実物の許容側面・耳の形状。段差がない軸方向は摩擦保持を要確認。",
+        "geometry_status": "schematic_only_no_new_actual_part_geometry"
+      },
+      {
+        "id": "H02",
+        "title_ja": "角形本体・支持部",
+        "shape_ja": "外形ポケット＋端当て＋対向する押付けパッド",
+        "datum_ja": "基準側の面と長手端で位置を決め、反対側から押し付ける。",
+        "force_ja": "組付け方向に肩・端面の受けを置き、薄肉部を避ける。",
+        "open_ja": "指先の面取りと開放側の逃げを設ける。",
+        "unresolved_ja": "実部品の許容面、公差、荷重方向。全面を硬く一致させない。",
+        "geometry_status": "schematic_only_no_new_actual_part_geometry"
+      },
+      {
+        "id": "H03",
+        "title_ja": "剛体バスバー",
+        "shape_ja": "非接続縁の浅い輪郭受け＋端当て＋離れた接触点",
+        "datum_ja": "長辺と端部を基準にし、離れた受けで傾き・回転を抑える。",
+        "force_ja": "剛性のある非接続部で支える。工具反力を薄い縁へ集中させない。",
+        "open_ja": "電気接続面・ボルト穴を空け、締結後に横へ抜ける。",
+        "unresolved_ja": "導通面以外の許容把持域、変形、締付工具と抜き方向。",
+        "geometry_status": "schematic_only_no_new_actual_part_geometry"
+      },
+      {
+        "id": "H04",
+        "title_ja": "ケーブル・黒被覆",
+        "shape_ja": "端子側の黒被覆と根元被覆を、二つの丸底受けで保持",
+        "datum_ja": "線径に合う溝で横ずれと傾きを抑える。金属端子はつかまない。",
+        "force_ja": "接触長と予圧を両立させ、被覆をつぶして固定しない。",
+        "open_ja": "40 mm後退・15度の既定姿勢を維持し、工具空間を残す。",
+        "unresolved_ja": "丸溝だけでは軸滑り・軸回転を拘束できない。被覆と端子間の滑りも未確認。",
+        "geometry_status": "retained_T050_no_new_cable_dimensions",
+        "axial_stop": "only if an actual load-bearing sleeve shoulder is established; none invented",
+        "rotation_constraint": "friction verification or an actual permitted non-round datum is needed"
+      },
+      {
+        "id": "H05",
+        "title_ja": "ヘッダー・差込端末",
+        "shape_ja": "硬いハウジングの専用輪郭受け＋組付け力を受ける面",
+        "datum_ja": "左右輪郭と曲面で位置・向きを定め、肩の当てで押込力を伝える。",
+        "force_ja": "外側ヘッダーはフランジ外縁と外側前面の当てを比較。",
+        "open_ja": "シール側へ爪を回さず、ねじ穴・ラッチ・端子開口を避ける。",
+        "unresolved_ja": "逆方向の引張は摩擦依存が残る。内側端末には別の外形照合が必要。",
+        "geometry_status": "P16_P17_isolated_CAD_derived_comparison_created",
+        "manufacturer_grasp_face_approval": null
+      },
+      {
+        "id": "H06",
+        "title_ja": "筐体・完成品・一体ユニット",
+        "shape_ja": "幅広爪＋離れた輪郭受け＋実在縁への端当て",
+        "datum_ja": "長手方向に離れた二か所を各爪で保持し、姿勢を支える。",
+        "force_ja": "荷重を受けられる既存の側縁・段差を使い、支持域を広げる。",
+        "open_ja": "筐体は供給と完成品で共用を検討。ユニットは別の接触面を照合。",
+        "unresolved_ja": "搭載後重心、外縁強度、一体ユニットの実在搬送基準。架空の持ち手は追加しない。",
+        "geometry_status": "schematic_only_no_new_actual_part_geometry"
+      },
+      {
+        "id": "H07",
+        "title_ja": "カバー・板保持",
+        "shape_ja": "側縁用ポケット＋離れた受け＋長手端当て",
+        "datum_ja": "板の側縁と端を基準にし、二点間隔で回り込みを抑える。",
+        "force_ja": "曲がりやすい中央に力を集中させず、許容された縁を支える。",
+        "open_ja": "着座面の下へ爪を残さない。先に支持を渡して側方へ抜く。",
+        "unresolved_ja": "対象ごとの板縁、許容圧、反り、着座後の開放域。存在しない取手を作らない。",
+        "geometry_status": "schematic_only_no_new_actual_part_geometry"
+      },
+      {
+        "id": "H08",
+        "title_ja": "ヒューズ本体",
+        "shape_ja": "胴の専用輪郭＋非導電部の肩受け・向き基準",
+        "datum_ja": "円筒は円弧、角形はポケットに合わせ、接触点を離す。",
+        "force_ja": "荷重を許容する胴を保持し、導電端へ把持力を掛けない。",
+        "open_ja": "接続・ばね接点・工具が入る場所を空ける。",
+        "unresolved_ja": "滑らかな円筒の軸滑り・軸回転と、実物の胴の許容荷重。",
+        "geometry_status": "schematic_only_no_new_actual_part_geometry"
+      }
+    ]
+  },
+  "families": [
+    {
+      "id": "H01",
+      "title_ja": "円形本体",
+      "shape_ja": "胴の円弧受け＋実在する耳・平面への回り止め",
+      "datum_ja": "胴の広い円弧を基準にし、非円形の外縁で向きを決める。",
+      "force_ja": "荷重を受けられる段差があれば軸方向の受けに使う。",
+      "open_ja": "着座面の下へ爪を回り込ませず、側方に開いて抜く。",
+      "unresolved_ja": "実物の許容側面・耳の形状。段差がない軸方向は摩擦保持を要確認。",
+      "geometry_status": "schematic_only_no_new_actual_part_geometry"
+    },
+    {
+      "id": "H02",
+      "title_ja": "角形本体・支持部",
+      "shape_ja": "外形ポケット＋端当て＋対向する押付けパッド",
+      "datum_ja": "基準側の面と長手端で位置を決め、反対側から押し付ける。",
+      "force_ja": "組付け方向に肩・端面の受けを置き、薄肉部を避ける。",
+      "open_ja": "指先の面取りと開放側の逃げを設ける。",
+      "unresolved_ja": "実部品の許容面、公差、荷重方向。全面を硬く一致させない。",
+      "geometry_status": "schematic_only_no_new_actual_part_geometry"
+    },
+    {
+      "id": "H03",
+      "title_ja": "剛体バスバー",
+      "shape_ja": "非接続縁の浅い輪郭受け＋端当て＋離れた接触点",
+      "datum_ja": "長辺と端部を基準にし、離れた受けで傾き・回転を抑える。",
+      "force_ja": "剛性のある非接続部で支える。工具反力を薄い縁へ集中させない。",
+      "open_ja": "電気接続面・ボルト穴を空け、締結後に横へ抜ける。",
+      "unresolved_ja": "導通面以外の許容把持域、変形、締付工具と抜き方向。",
+      "geometry_status": "schematic_only_no_new_actual_part_geometry"
+    },
+    {
+      "id": "H04",
+      "title_ja": "ケーブル・黒被覆",
+      "shape_ja": "端子側の黒被覆と根元被覆を、二つの丸底受けで保持",
+      "datum_ja": "線径に合う溝で横ずれと傾きを抑える。金属端子はつかまない。",
+      "force_ja": "接触長と予圧を両立させ、被覆をつぶして固定しない。",
+      "open_ja": "40 mm後退・15度の既定姿勢を維持し、工具空間を残す。",
+      "unresolved_ja": "丸溝だけでは軸滑り・軸回転を拘束できない。被覆と端子間の滑りも未確認。",
+      "geometry_status": "retained_T050_no_new_cable_dimensions",
+      "axial_stop": "only if an actual load-bearing sleeve shoulder is established; none invented",
+      "rotation_constraint": "friction verification or an actual permitted non-round datum is needed"
+    },
+    {
+      "id": "H05",
+      "title_ja": "ヘッダー・差込端末",
+      "shape_ja": "硬いハウジングの専用輪郭受け＋組付け力を受ける面",
+      "datum_ja": "左右輪郭と曲面で位置・向きを定め、肩の当てで押込力を伝える。",
+      "force_ja": "外側ヘッダーはフランジ外縁と外側前面の当てを比較。",
+      "open_ja": "シール側へ爪を回さず、ねじ穴・ラッチ・端子開口を避ける。",
+      "unresolved_ja": "逆方向の引張は摩擦依存が残る。内側端末には別の外形照合が必要。",
+      "geometry_status": "P16_P17_isolated_CAD_derived_comparison_created",
+      "manufacturer_grasp_face_approval": null
+    },
+    {
+      "id": "H06",
+      "title_ja": "筐体・完成品・一体ユニット",
+      "shape_ja": "幅広爪＋離れた輪郭受け＋実在縁への端当て",
+      "datum_ja": "長手方向に離れた二か所を各爪で保持し、姿勢を支える。",
+      "force_ja": "荷重を受けられる既存の側縁・段差を使い、支持域を広げる。",
+      "open_ja": "筐体は供給と完成品で共用を検討。ユニットは別の接触面を照合。",
+      "unresolved_ja": "搭載後重心、外縁強度、一体ユニットの実在搬送基準。架空の持ち手は追加しない。",
+      "geometry_status": "schematic_only_no_new_actual_part_geometry"
+    },
+    {
+      "id": "H07",
+      "title_ja": "カバー・板保持",
+      "shape_ja": "側縁用ポケット＋離れた受け＋長手端当て",
+      "datum_ja": "板の側縁と端を基準にし、二点間隔で回り込みを抑える。",
+      "force_ja": "曲がりやすい中央に力を集中させず、許容された縁を支える。",
+      "open_ja": "着座面の下へ爪を残さない。先に支持を渡して側方へ抜く。",
+      "unresolved_ja": "対象ごとの板縁、許容圧、反り、着座後の開放域。存在しない取手を作らない。",
+      "geometry_status": "schematic_only_no_new_actual_part_geometry"
+    },
+    {
+      "id": "H08",
+      "title_ja": "ヒューズ本体",
+      "shape_ja": "胴の専用輪郭＋非導電部の肩受け・向き基準",
+      "datum_ja": "円筒は円弧、角形はポケットに合わせ、接触点を離す。",
+      "force_ja": "荷重を許容する胴を保持し、導電端へ把持力を掛けない。",
+      "open_ja": "接続・ばね接点・工具が入る場所を空ける。",
+      "unresolved_ja": "滑らかな円筒の軸滑り・軸回転と、実物の胴の許容荷重。",
+      "geometry_status": "schematic_only_no_new_actual_part_geometry"
+    }
+  ],
+  "variants": [
+    {
+      "id": "H01_BODY",
+      "family": "H01",
+      "title": "主接触器などの円形本体",
+      "status": "構成図・実把持面は未確定",
+      "jobs": [
+        "D10"
+      ],
+      "features": [
+        "P02"
+      ],
+      "image": "H01_schematic.png",
+      "image_note": "既存の無寸法構成図。GIGAVAC実部品の許容把持面を確定した図ではありません。",
+      "support": "本体を置いて固定する間、受け側と保持手の役割を残す。",
+      "tool": "電気端子・配線出口・本体固定穴を空ける。",
+      "open": "着座面に爪を潜り込ませず、固定後に側方へ開く。",
+      "unresolved": "実在する回り止め面、胴・耳の許容荷重、接触器の採用型式。",
+      "physical_target_to_job_assignment": null,
+      "new_gripper_model_selected": null
+    },
+    {
+      "id": "H02_BODY",
+      "family": "H02",
+      "title": "角形リレー・抵抗・支持部",
+      "status": "構成図・対象別の輪郭は未確定",
+      "jobs": [
+        "D10",
+        "D20"
+      ],
+      "features": [
+        "P03",
+        "P04"
+      ],
+      "image": "H02_schematic.png",
+      "image_note": "基準側・端当て・押付け側を分けた既存構成図。対象ごとの寸法は未指定です。",
+      "support": "一方の面と長手端で位置を決め、反対側から押さえる。",
+      "tool": "固定穴・端末・ロックと、工具が通る方向を空ける。",
+      "open": "次の支持に渡してから、側方の逃げへ開放する。",
+      "unresolved": "リレー・抵抗・支持部のすべてに同じ爪を使えるとは未確認。",
+      "physical_target_to_job_assignment": null,
+      "new_gripper_model_selected": null
+    },
+    {
+      "id": "H03_BUS",
+      "family": "H03",
+      "title": "剛体バスバーの保持と締結",
+      "status": "構成図・導通面以外の許容域は未確定",
+      "jobs": [
+        "D60"
+      ],
+      "features": [
+        "P09",
+        "P10",
+        "P11",
+        "P12",
+        "P13"
+      ],
+      "image": "H03_schematic.png",
+      "image_note": "穴の周囲は接続・工具用に空ける図です。中央の図示保持域も実物への適用は未確定です。",
+      "support": "剛体部材の外縁を保持し、線側の保持と分ける。",
+      "tool": "ボルト穴・座金・ソケット通路を空けた状態で締結を検討する。",
+      "open": "締結・支持引継ぎと工具退避の後、板から横へ開く。",
+      "unresolved": "物理的な積層・共締め、実工具ノーズ、必要反力。回路の共通点だけでは共締めを決めない。",
+      "physical_target_to_job_assignment": null,
+      "new_gripper_model_selected": null
+    },
+    {
+      "id": "H04_CABLE",
+      "family": "H04",
+      "title": "端子側の黒被覆と根元の保持",
+      "status": "T050の作業用初期姿勢を継承",
+      "jobs": [
+        "D11",
+        "D21",
+        "D60"
+      ],
+      "features": [],
+      "image": "H04_contact.png",
+      "extra_image": "H04_side.png",
+      "image_note": "端子はKlauke 6R6未圧着参考CAD、被覆は比較形状。Ampereの実採用径・圧着外形ではありません。",
+      "support": "金属端子をつかまず、同じ2本指の前後2区間で被覆を支える。",
+      "tool": "40 mm後退後に時計回り15度。端子穴への通路は実工具一式で未確認。",
+      "open": "接続中は保持を継続し、工具退避・支持引継ぎ後に開く。該当する両端保持は両腕同時退避。",
+      "unresolved": "滑らかな丸溝だけでは軸方向滑りと軸回転を形状拘束できない。被覆内部の相対滑りも未確認。",
+      "physical_target_to_job_assignment": null,
+      "new_gripper_model_selected": null
+    },
+    {
+      "id": "H05_OUTER3",
+      "family": "H05",
+      "title": "筐体外側の3口ヘッダー",
+      "status": "TE CAD由来の輪郭受け比較あり",
+      "jobs": [
+        "D50"
+      ],
+      "features": [
+        "P16"
+      ],
+      "image": "H05_outer3.png",
+      "extra_image": "H05_outer3_open.png",
+      "image_note": "P16：TE 2103340-1。輪郭受けは比較形状で、メーカー承認の把持面・荷重ではありません。",
+      "support": "フランジ外縁と前面側の受けを比較。内側端末の保持も別に残す。",
+      "tool": "フランジのねじ穴と筐体密着面・シール域を空ける。締付工具は別役。",
+      "open": "固定後、保存された2Fの開放時上昇を含む動きで指を抜く。",
+      "unresolved": "実工具外形、許容押付け荷重、保持力、内側から外側への支持引継ぎ。",
+      "physical_target_to_job_assignment": null,
+      "new_gripper_model_selected": null
+    },
+    {
+      "id": "H05_OUTER2",
+      "family": "H05",
+      "title": "筐体外側の2口ヘッダー",
+      "status": "TE CAD由来の輪郭受け比較あり",
+      "jobs": [
+        "D50"
+      ],
+      "features": [
+        "P17"
+      ],
+      "image": "H05_outer2.png",
+      "image_note": "P17：TE 2103346-2。3口用とは個別に輪郭を抽出しています。",
+      "support": "2口用フランジの外形に合わせる。3口用の爪との共用は未決定。",
+      "tool": "固定穴、シール域、内側端末と工具の空間を分けて確認する。",
+      "open": "固定・工具退避・支持引継ぎの後、既存リンクの開放軌跡を考慮して抜く。",
+      "unresolved": "共用爪の可否、実際の締付ノーズ、取付部とホースを含む全外形。",
+      "physical_target_to_job_assignment": null,
+      "new_gripper_model_selected": null
+    },
+    {
+      "id": "H05_INNER",
+      "family": "H05",
+      "title": "内側ハウジングを開口へ通す",
+      "status": "剛体肩受け・指退避の比較あり",
+      "jobs": [
+        "D45"
+      ],
+      "features": [
+        "I01",
+        "I02",
+        "I03",
+        "I04",
+        "I05"
+      ],
+      "image": "H05_inner_hand.png",
+      "extra_image": "H05_inner.png",
+      "image_note": "TE内側ハウジングの既存比較。外側ヘッダー用H05と同じ爪ではありません。",
+      "support": "線の摩擦把持を挿入力の経路にせず、剛体面・肩を受ける候補。自由線の案内は別役。",
+      "tool": "ロック・シール・配線出口を空け、外側の受取りと固定まで保持役を分ける。",
+      "open": "開口を通しただけでは開放しない。次の保持に引き継ぎ、ロックと配線を避けて指を抜く。",
+      "unresolved": "I03の未追跡配線、引継ぎ時の同時占有、内側本体の許容把持面。D11/D21/D61の他端末は個別形状未照合。",
+      "physical_target_to_job_assignment": null,
+      "new_gripper_model_selected": null
+    },
+    {
+      "id": "H06_CASE",
+      "family": "H06",
+      "title": "空筐体と完成品をXYZで受け渡す",
+      "status": "FC02：位置決めピン通路の比較あり",
+      "jobs": [
+        "D00",
+        "D80"
+      ],
+      "features": [
+        "P01"
+      ],
+      "image": "H06_case.png",
+      "extra_image": "H06_pin_passage.png",
+      "image_note": "四隅を持つ2本指のFC02比較。紫色はパレットクランプの配置予約です。完成品図は蓋なし保存モデルです。",
+      "support": "パレット支持とH06の保持が重なる区間を設けて引き継ぐ。筐体を指内で滑らせない。",
+      "tool": "フランジ保持位置と既存取付穴のピン通路を分ける。パレットは作業中に上昇させない。",
+      "open": "着座・パレット側保持の後に開放。取出しではH06へ支持を戻してからピンを上へ抜く。",
+      "unresolved": "穴公差、実フランジ形状、クランプ機種、完成品の蓋・突出・質量・重心。XYZだけでは回転ずれを補正できない。",
+      "physical_target_to_job_assignment": null,
+      "new_gripper_model_selected": null
+    },
+    {
+      "id": "H06_UNIT",
+      "family": "H06",
+      "title": "下板・一体ユニットを搬送する",
+      "status": "搬送の役割のみ・実把持面は未確定",
+      "jobs": [
+        "D12",
+        "D31",
+        "D40"
+      ],
+      "features": [],
+      "image": "unit_target_reference.png",
+      "image_note": "完成状態の対象参照だけです。筐体・内部ユニットを一つの把持対象とした図ではなく、ユニット用の爪は表示していません。",
+      "support": "F-Cが本体を支える間に搬送把持へ切替。一体搭載中も自由端を別に案内する。",
+      "tool": "板間の実接合点と、搬送で使う基準面・指退避域を分けて確定する必要がある。",
+      "open": "筐体内の受けへ本体の支持を移してから、ユニット用の指を開く。",
+      "unresolved": "板間接合が搬送荷重を負担する前提は未検証。H06筐体用FC02を内部ユニットへ転用できるとは未確認。",
+      "physical_target_to_job_assignment": null,
+      "new_gripper_model_selected": null
+    },
+    {
+      "id": "H07_PANEL",
+      "family": "H07",
+      "title": "Bのヒューズ板をCへ渡す",
+      "status": "側縁保持の構成図・板用の実形状未確定",
+      "jobs": [
+        "D22",
+        "D30",
+        "D31"
+      ],
+      "features": [
+        "P07"
+      ],
+      "image": "H07_schematic.png",
+      "image_note": "既存の板・カバー共通の原理図です。P07の輪郭に適合した製作図ではありません。",
+      "support": "板の位置・向きを保持してCの下板側へ合わせ、固定後も持ち替え支持を残す。",
+      "tool": "板間固定の実ねじ位置を確定し、保持指と工具の通路を分ける。",
+      "open": "F-Cの支持上で、H07からユニット搬送用H06へ切り替える比較。",
+      "unresolved": "実際の板縁、板間接合、荷重の受け面、自由端の支持と交換時の占有。",
+      "physical_target_to_job_assignment": null,
+      "new_gripper_model_selected": null
+    },
+    {
+      "id": "H07_LID",
+      "family": "H07",
+      "title": "蓋を搬送し、シールを避けて設置",
+      "status": "構成図・実蓋外形は未確定",
+      "jobs": [
+        "D70"
+      ],
+      "features": [],
+      "image": "H07_schematic.png",
+      "image_note": "蓋は内部写真の92項目に含まれません。板用H07との同一爪・共用は未決定です。",
+      "support": "薄い板を一点でつままず、離れた側縁の受けで姿勢を保つ。",
+      "tool": "シール面と固定穴を空け、蓋固定の工具・担当を別に検討する。",
+      "open": "蓋の着座・支持引継ぎ後、下面へ爪を残さず外側へ開放する。",
+      "unresolved": "実蓋の縁、シール工程、固定順序、工具、開放域と完成品外形。",
+      "physical_target_to_job_assignment": null,
+      "new_gripper_model_selected": null
+    },
+    {
+      "id": "H08_FUSE",
+      "family": "H08",
+      "title": "ヒューズ本体を形式別に保持",
+      "status": "構成図・取り付け方式は部品別に照合",
+      "jobs": [
+        "D20",
+        "D60"
+      ],
+      "features": [
+        "P05",
+        "P06",
+        "P19",
+        "P20",
+        "P21",
+        "P22"
+      ],
+      "unassigned_features": [
+        "P22"
+      ],
+      "image": "H08_schematic.png",
+      "image_note": "原理図の形を実採用ヒューズの形としません。P22主ヒューズの取付工程は未確定のままです。",
+      "support": "導電端をつかまず、荷重を許容する胴を形式に合わせて受ける。",
+      "tool": "端部の接続・ばね接点・ボルト穴を空ける。補機側は箱外Bで組立。",
+      "open": "実際の装着・固定方式に従い、接続先の支持ができてから開放する。",
+      "unresolved": "クリップ式／ボルト式の部品別対応と把持可能面。元D60のH08候補をP22の工程採用に読み替えない。",
+      "physical_target_to_job_assignment": null,
+      "new_gripper_model_selected": null
+    }
+  ],
+  "jobs": [
+    {
+      "id": "D00",
+      "operation": "O00",
+      "title_ja": "筐体供給",
+      "location": "outside_supply",
+      "location_ja": "供給位置",
+      "group": "LOGISTICS",
+      "primary_ja": "XYZ",
+      "hands_ja": "H06 筐体",
+      "assistance_ja": "なし",
+      "transfer_ja": "パレットに支持を渡して開放",
+      "unresolved_ja": "許容把持面・重心・パレット受け位置・20枠の実寸・XYZ移動距離。",
+      "scene_ids": [
+        "S01"
+      ],
+      "review_feature_ids": [
+        "P01"
+      ],
+      "feature_assignment_kind": "existing_review_candidates_not_selected_physical_operations",
+      "families": [
+        "H06"
+      ],
+      "variants": [
+        "H06_CASE"
+      ],
+      "unmatched_families": []
+    },
+    {
+      "id": "D01",
+      "operation": "O01",
+      "title_ja": "線材・端末準備",
+      "location": "outside_prep",
+      "location_ja": "筐体外・準備",
+      "group": "OPEN",
+      "primary_ja": "準備設備",
+      "hands_ja": "入荷・加工範囲未定",
+      "assistance_ja": "設備側で別計上",
+      "transfer_ja": "加工後の支持先へ渡す",
+      "unresolved_ja": "入荷単位・全線の両端・線長・品番・加工条件・加工設備",
+      "scene_ids": [
+        "S02"
+      ],
+      "review_feature_ids": [
+        "I01",
+        "I02",
+        "I03",
+        "I04",
+        "I05",
+        "T31",
+        "T32",
+        "T33",
+        "T34",
+        "T41",
+        "T42",
+        "T43",
+        "T44",
+        "L01",
+        "L02",
+        "L03",
+        "L04",
+        "L05",
+        "L06",
+        "L07",
+        "W01",
+        "W02",
+        "W03",
+        "W04",
+        "W05",
+        "W06",
+        "W07",
+        "W08",
+        "W09",
+        "W10",
+        "W11",
+        "W12",
+        "W13",
+        "W14",
+        "WI11",
+        "WI12",
+        "WI21",
+        "WI22",
+        "WI41",
+        "WI42",
+        "WI51",
+        "WI52",
+        "W15",
+        "W16",
+        "W17",
+        "W18",
+        "W19"
+      ],
+      "feature_assignment_kind": "existing_review_candidates_not_selected_physical_operations",
+      "families": [],
+      "variants": [],
+      "unmatched_families": []
+    },
+    {
+      "id": "D10",
+      "operation": "O10",
+      "title_ja": "A 本体部品固定",
+      "location": "outside_A",
+      "location_ja": "筐体外・A",
+      "group": "A",
+      "primary_ja": "A主腕",
+      "hands_ja": "H01 / H02",
+      "assistance_ja": "工具 T-A",
+      "transfer_ja": "締結・工具退避後に開放",
+      "unresolved_ja": "下板の固定点、機械固定と電力端子の区別、抵抗の写真対応",
+      "scene_ids": [
+        "S03"
+      ],
+      "review_feature_ids": [
+        "P02",
+        "P03",
+        "P04",
+        "J01",
+        "J02",
+        "J03",
+        "J04"
+      ],
+      "feature_assignment_kind": "existing_review_candidates_not_selected_physical_operations",
+      "families": [
+        "H01",
+        "H02"
+      ],
+      "variants": [
+        "H01_BODY",
+        "H02_BODY"
+      ],
+      "unmatched_families": []
+    },
+    {
+      "id": "D11",
+      "operation": "O10",
+      "title_ja": "A 配線・接続",
+      "location": "outside_A",
+      "location_ja": "筐体外・A",
+      "group": "A",
+      "primary_ja": "A主腕",
+      "hands_ja": "H04 / H05内側",
+      "assistance_ja": "共用補助※ / T-A",
+      "transfer_ja": "残る自由端の案内を継続",
+      "unresolved_ja": "線の両端・所属・共締め部材・同時に締める大小の点組",
+      "scene_ids": [
+        "S03"
+      ],
+      "review_feature_ids": [
+        "P02",
+        "P03",
+        "P04",
+        "I01",
+        "I02",
+        "I03",
+        "I04",
+        "I05",
+        "T31",
+        "T32",
+        "T33",
+        "T34",
+        "T41",
+        "T42",
+        "T43",
+        "T44",
+        "L01",
+        "L02",
+        "L03",
+        "L04",
+        "L05",
+        "L06",
+        "L07",
+        "J01",
+        "J02",
+        "J03",
+        "J04",
+        "W01",
+        "W02",
+        "W03",
+        "W04",
+        "W05",
+        "W06",
+        "W07",
+        "W08",
+        "W09",
+        "W10",
+        "W11",
+        "W12",
+        "W13",
+        "W14",
+        "WI11",
+        "WI12",
+        "WI21",
+        "WI22",
+        "WI41",
+        "WI42",
+        "WI51",
+        "WI52",
+        "W15",
+        "W16",
+        "W17",
+        "W18",
+        "W19"
+      ],
+      "feature_assignment_kind": "existing_review_candidates_not_selected_physical_operations",
+      "families": [
+        "H04",
+        "H05"
+      ],
+      "variants": [
+        "H04_CABLE"
+      ],
+      "unmatched_families": [
+        "H05"
+      ]
+    },
+    {
+      "id": "D12",
+      "operation": "O10",
+      "title_ja": "A ユニット受渡し",
+      "location": "outside_transfer",
+      "location_ja": "筐体外",
+      "group": "C",
+      "primary_ja": "A主腕",
+      "hands_ja": "H06 下板用を比較",
+      "assistance_ja": "共用補助※ → C補助※",
+      "transfer_ja": "本体と自由端を別々に引継ぐ",
+      "unresolved_ja": "運搬用手先・許容把持面・自由端数・製品照合・支持付き待ち位置",
+      "scene_ids": [
+        "S05"
+      ],
+      "review_feature_ids": [
+        "P02",
+        "P03",
+        "P04",
+        "W01",
+        "W02",
+        "W03",
+        "W04",
+        "W05",
+        "W06",
+        "W07",
+        "W08",
+        "W09",
+        "W10",
+        "W11",
+        "W12",
+        "W13",
+        "W14",
+        "WI11",
+        "WI12",
+        "WI21",
+        "WI22",
+        "WI41",
+        "WI42",
+        "WI51",
+        "WI52",
+        "W15",
+        "W16",
+        "W17",
+        "W18",
+        "W19"
+      ],
+      "feature_assignment_kind": "existing_review_candidates_not_selected_physical_operations",
+      "families": [
+        "H06"
+      ],
+      "variants": [
+        "H06_UNIT"
+      ],
+      "unmatched_families": []
+    },
+    {
+      "id": "D20",
+      "operation": "O20",
+      "title_ja": "B 本体部品固定",
+      "location": "outside_B",
+      "location_ja": "筐体外・B",
+      "group": "B",
+      "primary_ja": "B主腕",
+      "hands_ja": "H02 / H08",
+      "assistance_ja": "工具 T-B",
+      "transfer_ja": "締結・工具退避後に開放",
+      "unresolved_ja": "機械固定と電気共締めの区別、主ヒューズの所属、板の許容保持面",
+      "scene_ids": [
+        "S04"
+      ],
+      "review_feature_ids": [
+        "P05",
+        "P06",
+        "P07",
+        "P08",
+        "P19",
+        "P20",
+        "P21",
+        "P22",
+        "J14",
+        "J15",
+        "J16",
+        "J17",
+        "J18",
+        "J19",
+        "J20",
+        "J21",
+        "J22",
+        "J23"
+      ],
+      "feature_assignment_kind": "existing_review_candidates_not_selected_physical_operations",
+      "families": [
+        "H02",
+        "H08"
+      ],
+      "variants": [
+        "H02_BODY",
+        "H08_FUSE"
+      ],
+      "unmatched_families": []
+    },
+    {
+      "id": "D21",
+      "operation": "O20",
+      "title_ja": "B 配線・接続",
+      "location": "outside_B",
+      "location_ja": "筐体外・B",
+      "group": "B",
+      "primary_ja": "B主腕",
+      "hands_ja": "H04 / H05内側",
+      "assistance_ja": "共用補助※ / T-B",
+      "transfer_ja": "両端保持は同時把持・同時退避",
+      "unresolved_ja": "物理5ヒューズと系統の割当、線の両端、積層、両端保持が必要な対象",
+      "scene_ids": [
+        "S04"
+      ],
+      "review_feature_ids": [
+        "P05",
+        "P06",
+        "P07",
+        "P08",
+        "I01",
+        "I02",
+        "I03",
+        "I04",
+        "I05",
+        "P19",
+        "P20",
+        "P21",
+        "P22",
+        "L01",
+        "L02",
+        "L03",
+        "L04",
+        "L05",
+        "L06",
+        "L07",
+        "J14",
+        "J15",
+        "J16",
+        "J17",
+        "J18",
+        "J19",
+        "J20",
+        "J21",
+        "J22",
+        "J23",
+        "W01",
+        "W02",
+        "W03",
+        "W04",
+        "W05",
+        "W06",
+        "W07",
+        "W08",
+        "W09",
+        "W10",
+        "W11",
+        "W12",
+        "W13",
+        "W14",
+        "WI11",
+        "WI12",
+        "WI21",
+        "WI22",
+        "WI41",
+        "WI42",
+        "WI51",
+        "WI52",
+        "W15",
+        "W16",
+        "W17",
+        "W18",
+        "W19"
+      ],
+      "feature_assignment_kind": "existing_review_candidates_not_selected_physical_operations",
+      "families": [
+        "H04",
+        "H05"
+      ],
+      "variants": [
+        "H04_CABLE"
+      ],
+      "unmatched_families": [
+        "H05"
+      ]
+    },
+    {
+      "id": "D22",
+      "operation": "O20",
+      "title_ja": "B ユニット受渡し",
+      "location": "outside_transfer",
+      "location_ja": "筐体外",
+      "group": "C",
+      "primary_ja": "B主腕",
+      "hands_ja": "H07 板用を比較",
+      "assistance_ja": "共用補助※",
+      "transfer_ja": "Cの板保持・案内へ引継ぐ",
+      "unresolved_ja": "板搬送手先・自由端の支持と引継ぎ・待ち位置",
+      "scene_ids": [
+        "S05"
+      ],
+      "review_feature_ids": [
+        "P05",
+        "P06",
+        "P07",
+        "P19",
+        "P20",
+        "P21",
+        "W01",
+        "W02",
+        "W03",
+        "W04",
+        "W05",
+        "W06",
+        "W07",
+        "W08",
+        "W09",
+        "W10",
+        "W11",
+        "W12",
+        "W13",
+        "W14",
+        "WI11",
+        "WI12",
+        "WI21",
+        "WI22",
+        "WI41",
+        "WI42",
+        "WI51",
+        "WI52",
+        "W15",
+        "W16",
+        "W17",
+        "W18",
+        "W19"
+      ],
+      "feature_assignment_kind": "existing_review_candidates_not_selected_physical_operations",
+      "families": [
+        "H07"
+      ],
+      "variants": [
+        "H07_PANEL"
+      ],
+      "unmatched_families": []
+    },
+    {
+      "id": "D30",
+      "operation": "O30",
+      "title_ja": "C 板合わせ・固定",
+      "location": "outside_C",
+      "location_ja": "筐体外・C",
+      "group": "C",
+      "primary_ja": "C主腕",
+      "hands_ja": "H07 板用を比較",
+      "assistance_ja": "支持 F-C / 工具 T-C",
+      "transfer_ja": "板保持のまま工具を退避",
+      "unresolved_ja": "板間の支持形状・ねじ点・荷重経路・板保持面",
+      "scene_ids": [
+        "S06"
+      ],
+      "review_feature_ids": [],
+      "feature_assignment_kind": "existing_review_candidates_not_selected_physical_operations",
+      "families": [
+        "H07"
+      ],
+      "variants": [
+        "H07_PANEL"
+      ],
+      "unmatched_families": []
+    },
+    {
+      "id": "D31",
+      "operation": "O30",
+      "title_ja": "C 治具上持ち替え",
+      "location": "outside_C",
+      "location_ja": "筐体外・C",
+      "group": "C",
+      "primary_ja": "C主腕",
+      "hands_ja": "H07 → H06 を比較",
+      "assistance_ja": "F-C / C補助※",
+      "transfer_ja": "支持を残して搬送把持へ",
+      "unresolved_ja": "接合部の荷重受容・搬送把持面・手先交換・自由端案内方法",
+      "scene_ids": [
+        "S07"
+      ],
+      "review_feature_ids": [
+        "I01",
+        "I02",
+        "I03",
+        "I04",
+        "I05",
+        "L01",
+        "L02",
+        "L03",
+        "L04",
+        "L05",
+        "L06",
+        "L07",
+        "W01",
+        "W02",
+        "W03",
+        "W04",
+        "W05",
+        "W06",
+        "W07",
+        "W08",
+        "W09",
+        "W10",
+        "W11",
+        "W12",
+        "W13",
+        "W14",
+        "WI11",
+        "WI12",
+        "WI21",
+        "WI22",
+        "WI41",
+        "WI42",
+        "WI51",
+        "WI52",
+        "W15",
+        "W16",
+        "W17",
+        "W18",
+        "W19"
+      ],
+      "feature_assignment_kind": "existing_review_candidates_not_selected_physical_operations",
+      "families": [
+        "H07",
+        "H06"
+      ],
+      "variants": [
+        "H06_UNIT",
+        "H07_PANEL"
+      ],
+      "unmatched_families": []
+    },
+    {
+      "id": "D40",
+      "operation": "O40",
+      "title_ja": "C 一体搭載",
+      "location": "insertion",
+      "location_ja": "外 → 内",
+      "group": "C",
+      "primary_ja": "C主腕",
+      "hands_ja": "H06 ユニット用を比較",
+      "assistance_ja": "C補助※ / 筐体側受け",
+      "transfer_ja": "本体開放後も案内は継続",
+      "unresolved_ja": "受け面・把持解除と指の抜け・内寸・全自由端の経路",
+      "scene_ids": [
+        "S08"
+      ],
+      "review_feature_ids": [
+        "P01",
+        "I01",
+        "I02",
+        "I03",
+        "I04",
+        "I05",
+        "L01",
+        "L02",
+        "L03",
+        "L04",
+        "L05",
+        "L06",
+        "L07",
+        "W01",
+        "W02",
+        "W03",
+        "W04",
+        "W05",
+        "W06",
+        "W07",
+        "W08",
+        "W09",
+        "W10",
+        "W11",
+        "W12",
+        "W13",
+        "W14",
+        "WI11",
+        "WI12",
+        "WI21",
+        "WI22",
+        "WI41",
+        "WI42",
+        "WI51",
+        "WI52",
+        "W15",
+        "W16",
+        "W17",
+        "W18",
+        "W19"
+      ],
+      "feature_assignment_kind": "existing_review_candidates_not_selected_physical_operations",
+      "families": [
+        "H06"
+      ],
+      "variants": [
+        "H06_UNIT"
+      ],
+      "unmatched_families": []
+    },
+    {
+      "id": "D42",
+      "operation": "O42",
+      "title_ja": "C 箱内工具作業",
+      "location": "inside_C",
+      "location_ja": "搭載後・内側",
+      "group": "C",
+      "primary_ja": "C主腕枠",
+      "hands_ja": "対象・手先未特定",
+      "assistance_ja": "T-C / C補助※",
+      "transfer_ja": "対象不明を省略しない",
+      "unresolved_ja": "工具作業点・部材・点数・保持相手・所要時間",
+      "scene_ids": [
+        "S09"
+      ],
+      "review_feature_ids": [
+        "P01",
+        "I01",
+        "I02",
+        "I03",
+        "I04",
+        "I05",
+        "L01",
+        "L02",
+        "L03",
+        "L04",
+        "L05",
+        "L06",
+        "L07",
+        "W01",
+        "W02",
+        "W03",
+        "W04",
+        "W05",
+        "W06",
+        "W07",
+        "W08",
+        "W09",
+        "W10",
+        "W11",
+        "W12",
+        "W13",
+        "W14",
+        "WI11",
+        "WI12",
+        "WI21",
+        "WI22",
+        "WI41",
+        "WI42",
+        "WI51",
+        "WI52",
+        "W15",
+        "W16",
+        "W17",
+        "W18",
+        "W19"
+      ],
+      "feature_assignment_kind": "existing_review_candidates_not_selected_physical_operations",
+      "families": [],
+      "variants": [],
+      "unmatched_families": []
+    },
+    {
+      "id": "D45",
+      "operation": "O45",
+      "title_ja": "C 内側端末引出し",
+      "location": "wall_crossing",
+      "location_ja": "内 → 開口 → 外",
+      "group": "C",
+      "primary_ja": "C主腕",
+      "hands_ja": "H05 内側",
+      "assistance_ja": "C補助※",
+      "transfer_ja": "外側で端末支持を引継ぐ",
+      "unresolved_ja": "線付きの通過空間・把持面・各端末順序・外側での一時支持・ロック順",
+      "scene_ids": [
+        "S10"
+      ],
+      "review_feature_ids": [
+        "P01",
+        "I01",
+        "I02",
+        "I03",
+        "I04",
+        "I05",
+        "W01",
+        "W02",
+        "W03",
+        "W04",
+        "W05",
+        "W06",
+        "W07",
+        "W08",
+        "W09",
+        "W10",
+        "W11",
+        "W12",
+        "W13",
+        "W14",
+        "WI11",
+        "WI12",
+        "WI21",
+        "WI22",
+        "WI41",
+        "WI42",
+        "WI51",
+        "WI52",
+        "W15",
+        "W16",
+        "W17",
+        "W18",
+        "W19"
+      ],
+      "feature_assignment_kind": "existing_review_candidates_not_selected_physical_operations",
+      "families": [
+        "H05"
+      ],
+      "variants": [
+        "H05_INNER"
+      ],
+      "unmatched_families": []
+    },
+    {
+      "id": "D50",
+      "operation": "O50",
+      "title_ja": "C 外側口の固定",
+      "location": "wall_interface",
+      "location_ja": "搭載後・側壁両側",
+      "group": "C",
+      "primary_ja": "C主腕",
+      "hands_ja": "H05 外側",
+      "assistance_ja": "T-C / 内側保持役※",
+      "transfer_ja": "全対象穴の締結・工具退避まで保持",
+      "unresolved_ja": "締付順・条件・工具全外形・内側ロックとフランジ固定の順・主2極/LV固定",
+      "scene_ids": [
+        "S11"
+      ],
+      "review_feature_ids": [
+        "P01",
+        "P14",
+        "P15",
+        "P16",
+        "P17",
+        "P18",
+        "I01",
+        "I02",
+        "I03",
+        "I04",
+        "I05"
+      ],
+      "feature_assignment_kind": "existing_review_candidates_not_selected_physical_operations",
+      "families": [
+        "H05"
+      ],
+      "variants": [
+        "H05_OUTER3",
+        "H05_OUTER2"
+      ],
+      "unmatched_families": []
+    },
+    {
+      "id": "D60",
+      "operation": "O60",
+      "title_ja": "C 主接続・共締め",
+      "location": "inside_C",
+      "location_ja": "搭載後・内側",
+      "group": "C",
+      "primary_ja": "C主腕",
+      "hands_ja": "H03 / 補助H04候補。H08主ヒューズの工程は未確定",
+      "assistance_ja": "C補助 H04※ / T-C",
+      "transfer_ja": "他の自由端の担当も残す",
+      "unresolved_ja": "部品境界・共締め積層・接続点・大小の組・未接続端の引継ぎ",
+      "scene_ids": [
+        "S12"
+      ],
+      "review_feature_ids": [
+        "P08",
+        "P09",
+        "P10",
+        "P11",
+        "P12",
+        "P13",
+        "P14",
+        "P15",
+        "P16",
+        "P17",
+        "P18",
+        "P22",
+        "L01",
+        "L02",
+        "L03",
+        "L04",
+        "L05",
+        "L06",
+        "L07",
+        "J01",
+        "J02",
+        "J03",
+        "J04",
+        "J05",
+        "J06",
+        "J07",
+        "J08",
+        "J09",
+        "J10",
+        "J11",
+        "J12",
+        "J13",
+        "J14",
+        "J15",
+        "J16",
+        "J17",
+        "J18",
+        "J19",
+        "J20",
+        "J21",
+        "J22",
+        "J23",
+        "W01",
+        "W02",
+        "W03",
+        "W04",
+        "W05",
+        "W06",
+        "W07",
+        "W08",
+        "W09",
+        "W10",
+        "W11",
+        "W12",
+        "W13",
+        "W14",
+        "WI11",
+        "WI12",
+        "WI21",
+        "WI22",
+        "WI41",
+        "WI42",
+        "WI51",
+        "WI52",
+        "W15",
+        "W16",
+        "W17",
+        "W18",
+        "W19"
+      ],
+      "feature_assignment_kind": "existing_review_candidates_not_selected_physical_operations",
+      "families": [
+        "H03",
+        "H04",
+        "H08"
+      ],
+      "variants": [
+        "H03_BUS",
+        "H04_CABLE",
+        "H08_FUSE"
+      ],
+      "unmatched_families": []
+    },
+    {
+      "id": "D61",
+      "operation": "O60",
+      "title_ja": "C LV・HVIL接続",
+      "location": "late_interface_unresolved",
+      "location_ja": "搭載後・位置要照合",
+      "group": "OPEN",
+      "primary_ja": "C主腕",
+      "hands_ja": "対象別に照合（元H05候補）。端末の内外位置は未確定",
+      "assistance_ja": "C補助※ / T-C※",
+      "transfer_ja": "個別の挿入・ロック後に引継ぐ",
+      "unresolved_ja": "実配線の両端・極・端子品番・挿入順・HVILの全経路",
+      "scene_ids": [
+        "S13"
+      ],
+      "review_feature_ids": [
+        "P14",
+        "P15",
+        "P16",
+        "P17",
+        "P18",
+        "I01",
+        "I02",
+        "I03",
+        "I04",
+        "I05",
+        "T31",
+        "T32",
+        "T33",
+        "T34",
+        "T41",
+        "T42",
+        "T43",
+        "T44",
+        "W01",
+        "W02",
+        "W03",
+        "W04",
+        "W05",
+        "W06",
+        "W07",
+        "W08",
+        "W09",
+        "W10",
+        "W11",
+        "W12",
+        "W13",
+        "W14",
+        "WI11",
+        "WI12",
+        "WI21",
+        "WI22",
+        "WI41",
+        "WI42",
+        "WI51",
+        "WI52",
+        "W15",
+        "W16",
+        "W17",
+        "W18",
+        "W19"
+      ],
+      "feature_assignment_kind": "existing_review_candidates_not_selected_physical_operations",
+      "families": [
+        "H05"
+      ],
+      "variants": [],
+      "unmatched_families": [
+        "H05"
+      ]
+    },
+    {
+      "id": "D70",
+      "operation": "O70",
+      "title_ja": "蓋・シール",
+      "location": "top_closure",
+      "location_ja": "筐体上面",
+      "group": "OPEN",
+      "primary_ja": "C主腕を比較",
+      "hands_ja": "H07 カバー",
+      "assistance_ja": "T-C / 支持",
+      "transfer_ja": "検査との順・シール扱いは未定",
+      "unresolved_ja": "蓋・シール構成・保持面・工具点・検査との順序・所要時間",
+      "scene_ids": [
+        "S14"
+      ],
+      "review_feature_ids": [
+        "P01"
+      ],
+      "feature_assignment_kind": "existing_review_candidates_not_selected_physical_operations",
+      "families": [
+        "H07"
+      ],
+      "variants": [
+        "H07_LID"
+      ],
+      "unmatched_families": []
+    },
+    {
+      "id": "D71",
+      "operation": "O70",
+      "title_ja": "検査・記録",
+      "location": "inspection",
+      "location_ja": "検査位置",
+      "group": "OPEN",
+      "primary_ja": "検査設備",
+      "hands_ja": "対象・接続方法未定",
+      "assistance_ja": "C主腕※",
+      "transfer_ja": "検査接続と支持を引継ぐ",
+      "unresolved_ja": "検査項目・条件・合否値・受入経路・支持と接続設備",
+      "scene_ids": [
+        "S14"
+      ],
+      "review_feature_ids": [],
+      "feature_assignment_kind": "existing_review_candidates_not_selected_physical_operations",
+      "families": [],
+      "variants": [],
+      "unmatched_families": []
+    },
+    {
+      "id": "D80",
+      "operation": "O80",
+      "title_ja": "完成品収納",
+      "location": "outside_output",
+      "location_ja": "共用20区画ストッカ",
+      "group": "LOGISTICS",
+      "primary_ja": "供給と同じXYZ",
+      "hands_ja": "H06 筐体",
+      "assistance_ja": "なし",
+      "transfer_ja": "元の20枠の空き位置へ返す",
+      "unresolved_ja": "完成品の重心・許容把持面・空筐体用爪との共用・元枠の支持と収納空間。",
+      "scene_ids": [
+        "S16"
+      ],
+      "review_feature_ids": [
+        "P01"
+      ],
+      "feature_assignment_kind": "existing_review_candidates_not_selected_physical_operations",
+      "families": [
+        "H06"
+      ],
+      "variants": [
+        "H06_CASE"
+      ],
+      "unmatched_families": []
+    },
+    {
+      "id": "D81",
+      "operation": "O80",
+      "title_ja": "往復・回収・補給",
+      "location": "outside_logistics",
+      "location_ja": "搬送・供給位置",
+      "group": "LOGISTICS",
+      "primary_ja": "搬送・補給設備",
+      "hands_ja": "容器の手先は未定",
+      "assistance_ja": "必要な手扱いは別計上",
+      "transfer_ja": "完成品を載せ同じ段で戻す",
+      "unresolved_ja": "全体のパレット枚数・通行順、回収容器・補給単位・実施間隔・手扱いの設備境界。",
+      "scene_ids": [
+        "S02",
+        "S15"
+      ],
+      "review_feature_ids": [],
+      "feature_assignment_kind": "existing_review_candidates_not_selected_physical_operations",
+      "families": [],
+      "variants": [],
+      "unmatched_families": []
+    }
+  ],
+  "roles": [
+    {
+      "role": "G-010",
+      "hands": [
+        "H06"
+      ],
+      "tasks": [
+        "D00",
+        "D80"
+      ],
+      "status": "user_selected_shared_xyz"
+    },
+    {
+      "role": "ARM_A",
+      "hands": [
+        "H01",
+        "H02",
+        "H04",
+        "H05",
+        "H06"
+      ],
+      "tasks": [
+        "D10",
+        "D11",
+        "D12"
+      ],
+      "status": "family_assignment_comparison"
+    },
+    {
+      "role": "ARM_B",
+      "hands": [
+        "H02",
+        "H08",
+        "H04",
+        "H05",
+        "H07"
+      ],
+      "tasks": [
+        "D20",
+        "D21",
+        "D22"
+      ],
+      "status": "family_assignment_comparison"
+    },
+    {
+      "role": "ASSIST_1",
+      "hands": [
+        "H04",
+        "H05"
+      ],
+      "tasks": [
+        "D11",
+        "D12",
+        "D21",
+        "D22"
+      ],
+      "conditional_accompaniment_tasks": [
+        "D30",
+        "D31",
+        "D40",
+        "D42",
+        "D45",
+        "D50",
+        "D60",
+        "D61"
+      ],
+      "status": "existing_assistant_accompaniment_unselected"
+    },
+    {
+      "role": "ARM_C",
+      "hands": [
+        "H07",
+        "H06",
+        "H05",
+        "H03",
+        "H08"
+      ],
+      "tasks": [
+        "D30",
+        "D31",
+        "D40",
+        "D42",
+        "D45",
+        "D50",
+        "D60",
+        "D61",
+        "D70",
+        "D71"
+      ],
+      "status": "family_assignment_comparison_with_unresolved_tasks"
+    },
+    {
+      "role": "ASSIST_2",
+      "hands": [
+        "H04",
+        "H05"
+      ],
+      "tasks": [
+        "D31",
+        "D40",
+        "D42",
+        "D45",
+        "D50",
+        "D60",
+        "D61"
+      ],
+      "status": "continuous_reservation_until_handoff"
+    }
+  ],
+  "selected_role_allocation": {
+    "revision": "hvjb_robot_selection_v01",
+    "decision_date": "2026-09-16",
+    "status": "user_selected_role_allocation",
+    "user_directive_ja": "補助を2腕に分ける",
+    "selected_plan": "S5_AB",
+    "selected_plan_ja": "主担当3腕＋A/B共用補助1腕＋C専用補助1腕",
+    "source_comparison": "data/hvjb_robot_sharing_v01.json",
+    "source_sha256": "7888693db9b5cd0314b7acecb6c0fa09ab7c207e43c2391fbfbf642833b99b90",
+    "selected_primary_arm_count": 3,
+    "selected_assist_arm_count": 2,
+    "selected_assembly_arm_count": 5,
+    "assist_groups": [
+      [
+        "X-A",
+        "X-B"
+      ],
+      [
+        "X-C"
+      ]
+    ],
+    "role_to_unit": {
+      "R-A": "ARM_A",
+      "R-B": "ARM_B",
+      "R-C": "ARM_C",
+      "X-A": "ASSIST_1",
+      "X-B": "ASSIST_1",
+      "X-C": "ASSIST_2"
+    },
+    "count_scope_ja": "A/B/Cの組立役に割り当てる5腕。ロボットの機台数や、OP010 XYZ・締付工具・搬送等を含むライン全体の設備台数ではない。",
+    "operating_constraints_ja": [
+      "AとBが同時に補助を必要とする場合は、把持開始前に作業順序を調整する。保持途中で手を離して別セルへ移らない。",
+      "A/B共用補助は、前の支持引継ぎ・開放・退避と、必要な手先交換・移動を終えてから次の保持を開始する。",
+      "C専用補助は自由端の案内と支持引継ぎを担当し、筐体搭載終了だけで空き扱いにしない。",
+      "既存の20仕事・据置締付工具・支持・供給・検査・回収の役割を保持する。該当する大小同時締結の2主軸条件を継承する。"
+    ],
+    "next_work_ja": "5腕の分担を前提に、A/B共用補助の保持区間・受渡しと、C専用補助の継続担当を具体化する。その上で配置・到達・干渉を確認する。",
+    "selected_robot_models": null,
+    "selected_robot_base_count": null,
+    "selected_layout": null,
+    "minimum_robot_count": null,
+    "measured_cycle_time_s": null,
+    "physical_acceptance_verdict": null
+  },
+  "working_default": {
+    "schema_version": 1,
+    "decision_date": "2026-09-14",
+    "decision_basis": "User: ok これをデフォルトとしてすすめて",
+    "status": "user_selected_working_default",
+    "candidate": "T050",
+    "default_state": "near",
+    "clockwise_angle_deg": 15.0,
+    "signed_world_x_rotation_deg": -15.0,
+    "side_view": {
+      "screen_right": "+Y",
+      "screen_up": "+Z",
+      "view_from": "+X"
+    },
+    "setback_before_rotation_m": 0.04,
+    "front_grasp": "terminal-facing black sleeve, not metal terminal",
+    "root_grasp": "cable at mounting area",
+    "finger_count": 2,
+    "source_hardware": "retained Robotiq 2F-85 reference geometry",
+    "working_geometry_relief_m": 0.0005,
+    "manufacturing_relief_selected": false,
+    "source_directory": "/home/rlrk/Downloads/THREAD_フィンガ15度傾斜_v01_20260914",
+    "source_commit": "d91cd07d2559a262de5d1a2db3437f2c90ffd8f2",
+    "source_files": {
+      "mesh": {
+        "name": "hand_clockwise_tilt_meshes_v01.json",
+        "sha256": "93d914c9eed05fc5b61e686b6cecca4420f6e4fd2b46c2d1eb8bf56fb900d95c"
+      },
+      "observations": {
+        "name": "hand_clockwise_tilt_observations_v01.json",
+        "sha256": "a8e2f40a4a4062bb3f75b34537dbda75fec4a020f25f710841bcb743e22f0dc3"
+      },
+      "native_observations": {
+        "name": "hand_clockwise_tilt_native_v01.json",
+        "sha256": "be8b95f8e03af27dae85bb398cd10d4b5ad133c64ce400c0286070799c6b2b42"
+      },
+      "native": {
+        "name": "hand_clockwise_tilt_v01.blend",
+        "sha256": "a3bf9eeba0e1c16ed515d1dad99dbd31bc6b2dfa0dd869e41455d7d20b545d1c"
+      },
+      "glb": {
+        "name": "hand_clockwise_tilt_T050_v01.glb",
+        "sha256": "e6443f4bd0765903097aaed12ba7d96aec44c751c9a05471e1e3cf9b0dd04603"
+      }
+    },
+    "native_scene": "T050_near",
+    "historical_comparisons": [
+      "H025",
+      "H050",
+      "T025",
+      "D30",
+      "D60"
+    ],
+    "scope": "Current sleeve/root cable holding hand; other target families may need other fingers or counts",
+    "tool_part_number_selected": null,
+    "pad_material_selected": null,
+    "grip_force_N": null,
+    "arm_motion_authorized_by_this_default": false,
+    "physical_acceptance_verdict": null
+  },
+  "unit_support_sequence": {
+    "adopted": [
+      "outside_case_unitization_procedure",
+      "five_arm_roles_S5_AB",
+      "OP010_XYZ_20_shared_slots",
+      "one_level_reciprocal_conveyor",
+      "fixed_pallet_height"
+    ],
+    "comparison_only": [
+      "H06_family_for_unit_transport",
+      "F-C_support_shape",
+      "A/B_assist_accompaniment"
+    ],
+    "unit_grasp_faces": null,
+    "unit_receiver_faces": null,
+    "finger_release_direction_and_distance": null,
+    "existing_process_assumption": "The panel-to-base joint carries the panel load during regrip and transport; unverified.",
+    "new_geometry_or_motion": false,
+    "physical_validity_verdict": null,
+    "source_job_ids": [
+      "D31",
+      "D40"
+    ],
+    "source_role_states": [
+      "Q5",
+      "Q6",
+      "Q7",
+      "Q8",
+      "Q9"
+    ],
+    "load_handoff_chain": [
+      "unit",
+      "case_internal_receiver",
+      "case",
+      "pallet_fixture"
+    ],
+    "source_sha256": {
+      "/home/rlrk/IsaacLab/work/hvjb-hand-plan-v01-20260920/draw_plan.py": "f20d23ee507221a8be1f5c774988246562d3adc86c49dd1c6bbe6c15a35b3388",
+      "/home/rlrk/IsaacLab/work/hvjb-hand-plan-v01-20260920/data/hand_plan.json": "ecbd1ae45e269e823ffa7f783744d210758065d874c6cd50cf7b00e55a1977e0",
+      "/home/rlrk/IsaacLab/work/hvjb-pallet-assembly-v02-20260921/output/assembly_access_observations.json": "d53e0d21e536185e5c9619681562dcf479b226ff81c71ffd1e0e0ecbe0b9d597",
+      "/home/rlrk/IsaacLab/work/hvjb-unit-access-followup-v01-20260921/output/unit_interface_evidence.json": "de6e81f144da4b0daa36130a891daa2a8f1aac70f6c9ef2b1efa2d0f2130fdaf",
+      "/home/rlrk/IsaacLab-op040/eval_runs/ur15_jb_harness_revision_20260907/analysis/hvjb_unitization_procedure_v01.md": "92baef66ea6a69576eed3a1cfdd5a11094d99542495afb3cd584d7f44a38b3e5",
+      "/home/rlrk/IsaacLab-op040/eval_runs/ur15_jb_harness_revision_20260907/analysis/hvjb_unitization_roles_v01.md": "d20748e12f048a72108d2570315ba97e4cf379693232a32c8a49dd7de6b773d3",
+      "/home/rlrk/IsaacLab-op040/eval_runs/ur15_jb_harness_revision_20260907/analysis/hvjb_receiving_support_v01.md": "16658097a27f6d04e6cbb6830f6bf6af656fa8df9d9f83bb8a370283e50a2130",
+      "/home/rlrk/IsaacLab-op040/eval_runs/ur15_jb_harness_revision_20260907/analysis/hvjb_receiving_interfaces_v01.md": "c9eb174c7280100eac2e138651e11188e0dcf1bcb026791272dc27278d2b0814"
+    },
+    "created_at": "2026-09-21T02:33:04.043228+09:00"
+  },
+  "formal_physical_validity_verdict": null
+}

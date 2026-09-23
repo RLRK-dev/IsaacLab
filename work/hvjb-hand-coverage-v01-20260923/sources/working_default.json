@@ -1,0 +1,50 @@
+{
+  "schema_version": 1,
+  "decision_date": "2026-09-14",
+  "decision_basis": "User: ok これをデフォルトとしてすすめて",
+  "status": "user_selected_working_default",
+  "candidate": "T050",
+  "default_state": "near",
+  "clockwise_angle_deg": 15.0,
+  "signed_world_x_rotation_deg": -15.0,
+  "side_view": {"screen_right": "+Y", "screen_up": "+Z", "view_from": "+X"},
+  "setback_before_rotation_m": 0.04,
+  "front_grasp": "terminal-facing black sleeve, not metal terminal",
+  "root_grasp": "cable at mounting area",
+  "finger_count": 2,
+  "source_hardware": "retained Robotiq 2F-85 reference geometry",
+  "working_geometry_relief_m": 0.0005,
+  "manufacturing_relief_selected": false,
+  "source_directory": "/home/rlrk/Downloads/THREAD_フィンガ15度傾斜_v01_20260914",
+  "source_commit": "d91cd07d2559a262de5d1a2db3437f2c90ffd8f2",
+  "source_files": {
+    "mesh": {
+      "name": "hand_clockwise_tilt_meshes_v01.json",
+      "sha256": "93d914c9eed05fc5b61e686b6cecca4420f6e4fd2b46c2d1eb8bf56fb900d95c"
+    },
+    "observations": {
+      "name": "hand_clockwise_tilt_observations_v01.json",
+      "sha256": "a8e2f40a4a4062bb3f75b34537dbda75fec4a020f25f710841bcb743e22f0dc3"
+    },
+    "native_observations": {
+      "name": "hand_clockwise_tilt_native_v01.json",
+      "sha256": "be8b95f8e03af27dae85bb398cd10d4b5ad133c64ce400c0286070799c6b2b42"
+    },
+    "native": {
+      "name": "hand_clockwise_tilt_v01.blend",
+      "sha256": "a3bf9eeba0e1c16ed515d1dad99dbd31bc6b2dfa0dd869e41455d7d20b545d1c"
+    },
+    "glb": {
+      "name": "hand_clockwise_tilt_T050_v01.glb",
+      "sha256": "e6443f4bd0765903097aaed12ba7d96aec44c751c9a05471e1e3cf9b0dd04603"
+    }
+  },
+  "native_scene": "T050_near",
+  "historical_comparisons": ["H025", "H050", "T025", "D30", "D60"],
+  "scope": "Current sleeve/root cable holding hand; other target families may need other fingers or counts",
+  "tool_part_number_selected": null,
+  "pad_material_selected": null,
+  "grip_force_N": null,
+  "arm_motion_authorized_by_this_default": false,
+  "physical_acceptance_verdict": null
+}

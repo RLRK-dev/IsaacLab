@@ -1,0 +1,444 @@
+# Copyright (c) 2022-2026, The Isaac Lab Project Developers (https://github.com/isaac-sim/IsaacLab/blob/main/CONTRIBUTORS.md).
+# All rights reserved.
+#
+# SPDX-License-Identifier: BSD-3-Clause
+"""Assemble review drawings from saved specifications and explicitly dimensionless schematics."""
+
+import json
+import os
+import re
+import unicodedata
+from pathlib import Path
+
+os.environ.setdefault("MPLCONFIGDIR", "/tmp/hvjb-drawings-mpl")
+import matplotlib
+
+matplotlib.use("Agg")
+import matplotlib.pyplot as plt
+from matplotlib.backends.backend_pdf import PdfPages
+from matplotlib.font_manager import FontProperties
+from matplotlib.patches import Circle, FancyArrowPatch, Polygon, Rectangle, Wedge
+from PIL import Image
+
+ROOT = Path(__file__).resolve().parent
+OUT = ROOT / "output/pdf"
+PNG = ROOT / "output/finger_png"
+PNG.mkdir(exist_ok=True)
+FONT = FontProperties(fname="/usr/share/fonts/opentype/noto/NotoSansCJK-Regular.ttc")
+BOLD = FontProperties(fname="/usr/share/fonts/opentype/noto/NotoSansCJK-Bold.ttc")
+matplotlib.rcParams["pdf.fonttype"] = 3
+matplotlib.rcParams["axes.unicode_minus"] = False
+INK, GRAY, PALE = "#19394d", "#617786", "#f0f6f8"
+BLUE, TEAL, ORANGE, RED = "#337d9f", "#24a4a1", "#e8974d", "#b74f45"
+METAL, DARK, GOLD = "#c3cdd1", "#3c4850", "#92601c"
+W, H = 1600, 1100
+PDF = OUT / "HVJB_フィンガ詳細図_v01_20260920.pdf"
+MANIFEST = []
+
+
+def text(ax, x, y, value, size=13, color=INK, bold=False, ha="left", va="center", **kwargs):
+    return ax.text(x, y, value, fontsize=size, fontproperties=BOLD if bold else FONT,
+                   color=color, ha=ha, va=va, linespacing=1.55, **kwargs)
+
+
+def rect(ax, x, y, w, h, color=BLUE, edge=None, **kwargs):
+    ax.add_patch(Rectangle((x, y), w, h, facecolor=color, edgecolor=edge or color, lw=1.4, **kwargs))
+
+
+def circle(ax, x, y, r, color=METAL, edge=GRAY, **kwargs):
+    ax.add_patch(Circle((x, y), r, facecolor=color, edgecolor=edge, lw=1.5, **kwargs))
+
+
+def arrow(ax, start, end, color=BLUE, both=False, **kwargs):
+    ax.add_patch(FancyArrowPatch(start, end, arrowstyle="<->" if both else "-|>",
+                               mutation_scale=15, color=color, lw=1.8, **kwargs))
+
+
+def callout(ax, anchor, endpoint, label, color=INK, align="left"):
+    ax.plot([anchor[0], endpoint[0]], [anchor[1], endpoint[1]], color=color, lw=1)
+    circle(ax, anchor[0], anchor[1], .65, color, color)
+    text(ax, endpoint[0], endpoint[1] + 2, label, 12, color, ha=align, va="bottom")
+
+
+def sheet(code, title, subtitle, number, status="初期仕様の模式図／寸法未確定"):
+    fig = plt.figure(figsize=(16.54, 11.69), facecolor="white")
+    ax = fig.add_axes([0, 0, 1, 1])
+    ax.set(xlim=(0, W), ylim=(H, 0)); ax.axis("off")
+    text(ax, 55, 54, f"{code}  {title}", 23, bold=True)
+    text(ax, 55, 98, subtitle, 12, GRAY)
+    text(ax, 1545, 45, f"FINGER ATLAS  /  {number:02d}", 11, GRAY, ha="right")
+    rect(ax, 55, 128, 1490, 37, PALE)
+    text(ax, 73, 146, status, 11, BLUE, True)
+    ax.plot([55, 1545], [998, 998], color="#cedae0", lw=1)
+    text(ax, 55, 1024, "青：指の構造体　青緑：接触パッド　灰／橙：対象　赤破線：空ける部位", 11, GRAY)
+    text(ax, 55, 1056, "形状レビュー用。明記した値以外は無寸法。加工図・実物での保持確認を表す図ではありません。", 10, GRAY)
+    text(ax, 1545, 1080, "2026-09-20  /  v01", 9, GRAY, ha="right")
+    return fig, ax
+
+
+def panel(fig, rect_xywh, title, limits=(100, 70)):
+    x, y, w, h = rect_xywh
+    ax = fig.add_axes([x/W, (H-y-h)/H, w/W, h/H])
+    ax.set(xlim=(0, limits[0]), ylim=(0, limits[1])); ax.axis("off")
+    ax.set_aspect("equal")
+    text(ax, 1, limits[1]-2, title, 13, bold=True, va="top")
+    return ax
+
+
+def picture(fig, name, area, title):
+    x, y, w, h = area
+    ax = fig.add_axes([x/W, (H-y-h)/H, w/W, h/H])
+    ax.imshow(Image.open(ROOT / "figures" / (name + ".png")))
+    ax.axis("off")
+    ax.set_title(title, fontproperties=BOLD, color=INK, fontsize=12, loc="left", pad=9)
+
+
+def notes(ax, sections):
+    rect(ax, 1110, 190, 435, 752, PALE)
+    y = 215
+    for title, body in sections:
+        text(ax, 1131, y, title, 13, BLUE, True, va="top")
+        y += 36
+        lines = []
+        for paragraph in body.split("\n"):
+            current, width = "", 0
+            for token in re.findall(r"[A-Za-z0-9][A-Za-z0-9./×°+\-]*|.", paragraph):
+                token_width = sum(1 if unicodedata.east_asian_width(ch) in "WF" else .55 for ch in token)
+                if current and width + token_width > 24 and token not in "。、，．）」":
+                    lines.append(current)
+                    current, width = "", 0
+                current += token
+                width += token_width
+            lines.append(current)
+        text(ax, 1131, y, "\n".join(lines), 12, va="top")
+        y += len(lines) * 25 + 27
+    assert y <= 966, y
+
+
+def source(ax, content):
+    text(ax, 58, 967, "保存仕様：" + content, 9, GRAY)
+
+
+def save(pdf, fig, name):
+    pdf.savefig(fig)
+    output = PNG / f"{len(MANIFEST)+1:02d}_{name}.png"
+    fig.savefig(output, dpi=160)
+    MANIFEST.append({"page": len(MANIFEST)+1, "png": str(output.relative_to(ROOT)), "label": name})
+    plt.close(fig)
+
+
+def flat_target(ax, width=30, height=23, ports=False):
+    rect(ax, 50-width/2, 34-height/2, width, height, METAL, GRAY)
+    if ports:
+        for x in (43, 50, 57):
+            circle(ax, x, 47, 2, ORANGE)
+    for x, sign in ((50-width/2, -1), (50+width/2, 1)):
+        rect(ax, x-8 if sign < 0 else x+2, 21, 6, 28)
+        rect(ax, x-2 if sign < 0 else x, 25, 2, 18, TEAL)
+        arrow(ax, (x+sign*15, 35), (x+sign*7, 35))
+    rect(ax, 50-width/2-2, 21, 8, 3, TEAL)
+
+
+def open_side(ax, target="本体", thin=False):
+    rect(ax, 32, 28, 36, 6 if thin else 19, METAL, GRAY)
+    text(ax, 50, 39 if thin else 37, target, 12, ha="center")
+    for x in (24, 70):
+        rect(ax, x, 31, 6, 25)
+    rect(ax, 30, 29 if thin else 31, 2, 5 if thin else 12, TEAL)
+    rect(ax, 68, 29 if thin else 31, 2, 5 if thin else 12, TEAL)
+    ax.plot([15, 85], [26, 26], color=GRAY, lw=2)
+    text(ax, 50, 19, "着座面へ爪を潜らせない", 12, GRAY, ha="center")
+    arrow(ax, (26, 51), (14, 51)); arrow(ax, (74, 51), (86, 51))
+    text(ax, 50, 58, "開放 → 上方へ退避", 12, BLUE, ha="center")
+
+
+def generic_page(pdf, code, title, subtitle, sections, top, bottom, number, source_text="hand_provisional_spec_v01 / hvjb_task_occupancy_v01"):
+    fig, base = sheet(code, title, subtitle, number)
+    top(panel(fig, (55, 192, 1020, 365), "上面・把持面（模式）"))
+    bottom(panel(fig, (55, 583, 1020, 326), "側面・開放経路（模式）"))
+    notes(base, sections)
+    source(base, source_text)
+    save(pdf, fig, code)
+
+
+def draw_h01(ax):
+    circle(ax, 50, 33, 15)
+    rect(ax, 42, 46, 16, 5, METAL, GRAY)
+    for a, b in ((145, 215), (-35, 35)):
+        ax.add_patch(Wedge((50, 33), 23, a, b, width=6, color=BLUE))
+        ax.add_patch(Wedge((50, 33), 17, a, b, width=2, color=TEAL))
+    ax.add_patch(Polygon([(29, 42), (33, 40), (40, 46), (40, 50)], closed=True, color=BLUE))
+    rect(ax, 37, 45, 6, 6, TEAL)
+    for x in (46, 54):
+        circle(ax, x, 35, 2.5, ORANGE)
+    arrow(ax, (13, 33), (26, 33)); arrow(ax, (87, 33), (74, 33))
+    callout(ax, (38, 48), (18, 59), "実在する非円形面に当てる", align="left")
+    text(ax, 50, 7, "円筒側面の輪郭＋回り止めの当て面", 12, ha="center")
+
+
+def draw_h02(ax):
+    flat_target(ax, ports=True)
+    callout(ax, (34, 31), (10, 8), "片側の基準面")
+    callout(ax, (38, 23), (46, 8), "長手端当て")
+    callout(ax, (66, 35), (73, 54), "交換パッド")
+    for x in (43, 50, 57):
+        circle(ax, x, 47, 4, "none", RED, linestyle="--")
+
+
+def draw_h03(ax):
+    rect(ax, 18, 25, 64, 17, METAL, GRAY)
+    for x in (26, 74):
+        circle(ax, x, 33.5, 4, "white")
+        circle(ax, x, 33.5, 9, "none", RED, linestyle="--")
+    for y in (18, 45):
+        rect(ax, 40, y, 20, 5)
+    rect(ax, 40, 23, 20, 2, TEAL); rect(ax, 40, 42, 20, 3, TEAL)
+    rect(ax, 37, 23, 3, 6, TEAL)
+    arrow(ax, (50, 57), (50, 49)); arrow(ax, (50, 9), (50, 18))
+    text(ax, 8, 55, "締結穴・電気接続面", 12, RED)
+    text(ax, 50, 3, "図示した中央域も、実部品の許容面確認後に使用", 11, GRAY, ha="center")
+
+
+def draw_h06(ax):
+    rect(ax, 25, 20, 50, 30, METAL, GRAY)
+    rect(ax, 29, 24, 42, 22, PALE, GRAY)
+    for x in (17, 79):
+        rect(ax, x, 17, 4, 36)
+    for y in (24, 41):
+        rect(ax, 21, y, 4, 6, TEAL); rect(ax, 75, y, 4, 6, TEAL)
+    for x in (40, 49, 58):
+        rect(ax, x, 16, 6, 4, ORANGE)
+    arrow(ax, (4, 36), (17, 36)); arrow(ax, (96, 36), (83, 36))
+    callout(ax, (23, 44), (4, 56), "左爪：2接触域")
+    callout(ax, (77, 27), (64, 8), "右爪：2接触域")
+
+
+def draw_h07(ax):
+    rect(ax, 25, 22, 50, 25, METAL, GRAY)
+    for x in (28, 72):
+        for y in (25, 44):
+            circle(ax, x, y, 1.5, "white")
+            circle(ax, x, y, 3, "none", RED, linestyle="--")
+    for y in (15, 51):
+        rect(ax, 32, y, 36, 4)
+    for x in (35, 57):
+        rect(ax, x, 19, 8, 3, TEAL); rect(ax, x, 47, 8, 4, TEAL)
+    arrow(ax, (50, 64), (50, 55)); arrow(ax, (50, 5), (50, 15))
+    text(ax, 83, 36, "固定穴を\n空ける", 12, RED, ha="center")
+    text(ax, 50, 3, "端当て位置は実際の側縁形状で決定", 11, GRAY, ha="center")
+
+
+def draw_h08(ax):
+    rect(ax, 32, 24, 36, 20, METAL, GRAY)
+    for x in (25, 68):
+        rect(ax, x, 25, 7, 18, GRAY)
+    for x in (17, 75):
+        rect(ax, x, 30, 8, 7, METAL, GRAY)
+        circle(ax, x+4, 33.5, 8, "none", RED, linestyle="--")
+    for y in (18, 46):
+        rect(ax, 39, y, 22, 4)
+    rect(ax, 39, 22, 22, 2, TEAL); rect(ax, 39, 44, 22, 2, TEAL)
+    arrow(ax, (50, 61), (50, 51)); arrow(ax, (50, 7), (50, 18))
+    text(ax, 50, 56, "胴の把持可能面を使う", 12, ha="center")
+    text(ax, 50, 2, "導電端・接続面は保持しない", 12, RED, ha="center")
+
+
+def cable_plan(ax):
+    # Sample dimensions only, copied from saved ranges. Not Ampere production dimensions.
+    rect(ax, 24, 28, 66, 12, ORANGE)
+    rect(ax, 24, 28, 24, 12, DARK)
+    rect(ax, 15, 28, 10, 12, METAL)
+    circle(ax, 15, 34, 10, METAL)
+    circle(ax, 15, 34, 3.6, "white")
+    for y in (18, 46):
+        rect(ax, 30, y, 45, 4)
+    for x, width in ((30, 8), (65, 10)):
+        rect(ax, x, 22, width, 6, TEAL); rect(ax, x, 40, width, 6, TEAL)
+    for y, sign in ((17, -1), (51, 1)):
+        arrow(ax, (53, y+sign*8), (53, y))
+    callout(ax, (34, 25), (14, 6), "端子側の黒被覆")
+    callout(ax, (71, 43), (65, 58), "根元被覆")
+    circle(ax, 15, 34, 12.5, "none", RED, linestyle="--")
+
+
+def h05_inner(ax):
+    rect(ax, 32, 22, 36, 23, METAL, GRAY)
+    rect(ax, 31, 20, 38, 3, GRAY)
+    rect(ax, 41, 45, 18, 6, ORANGE)
+    rect(ax, 46, 6, 8, 14, ORANGE)
+    for x in (23, 71):
+        rect(ax, x, 20, 6, 25)
+    rect(ax, 29, 25, 3, 14, TEAL); rect(ax, 68, 25, 3, 14, TEAL)
+    rect(ax, 29, 18, 11, 4, TEAL); rect(ax, 60, 18, 11, 4, TEAL)
+    arrow(ax, (50, 54), (50, 63))
+    text(ax, 59, 57, "挿入方向", 12, BLUE)
+    callout(ax, (34, 20), (3, 5), "後端・肩で力を受ける")
+    callout(ax, (68, 33), (80, 47), "剛体面")
+
+
+def fuse_section(ax):
+    circle(ax, 50, 33, 13)
+    for lo, hi in ((145, 215), (-35, 35)):
+        ax.add_patch(Wedge((50, 33), 21, lo, hi, width=6, color=BLUE))
+        ax.add_patch(Wedge((50, 33), 15, lo, hi, width=2, color=TEAL))
+    arrow(ax, (28, 33), (15, 33)); arrow(ax, (72, 33), (85, 33))
+    text(ax, 50, 55, "円筒胴：丸底輪郭の断面例", 12, ha="center")
+    text(ax, 50, 9, "角形は外形ポケットへ交換／角度基準は別途", 11, GRAY, ha="center")
+
+
+def main():
+    with PdfPages(PDF) as pdf:
+        fig, ax = sheet("HVJB", "各フィンガの詳細図", "既存8系統の把持方針＋保存済み立体モデル。用途ごとに、指先・接触域・開放を読む。", 1,
+                        "今回のライン変更：1段往復コンベア／筐体と完成品で20枠を共用／同じ空き枠へ返却")
+        rows = [
+            ("H01", "円形本体", "側面輪郭＋回り止め", "2"),
+            ("H02", "角形本体・支持部", "浅いポケット＋端当て", "3"),
+            ("H03", "剛体バスバー", "非接続部の外縁保持", "4"),
+            ("H04", "ケーブル・丸端子配線", "黒被覆＋根元／T050・PGE比較", "5-6"),
+            ("H05", "筐体側ヘッダー・内側端末", "外形ポケット／受け面", "7-8"),
+            ("H06", "筐体・完成品", "幅広2爪／4接触域", "9"),
+            ("H07", "カバー・板", "側縁ポケット＋端当て", "10"),
+            ("H08", "ヒューズ本体", "形式別の交換輪郭", "11"),
+        ]
+        widths = [55, 190, 635, 1330]
+        for j, label in enumerate(["系統", "対象", "指先の違い", "掲載頁"]):
+            text(ax, widths[j]+15, 210, label, 13, BLUE, True)
+        for i, row in enumerate(rows):
+            y = 270+i*61
+            if i % 2 == 0: rect(ax, 55, y-26, 1490, 54, PALE)
+            for j, value in enumerate(row): text(ax, widths[j]+15, y, value, 13, bold=j==0)
+        text(ax, 70, 805, "基本はすべて対向2本指・開閉1駆動。接触パッドが4か所でも、独立した4本指ではありません。", 14, bold=True)
+        text(ax, 70, 849, "8系統は指先の種類です。ロボット8台／ハンド8台を意味しません。", 13)
+        text(ax, 70, 891, "H04/T050とH05外側は保存モデルを再表示。PGEは小型化の比較案。その他の図は接触方針の模式図です。", 12, GRAY)
+        source(ax, "hand_provisional_spec_v01 / hand_working_default_v01 / hvjb_receiving_interfaces_v01")
+        save(pdf, fig, "一覧")
+
+        generic_page(pdf, "H01", "円形本体を保持", "Aの本体組付けなど。電気端子と固定工具の位置を避け、側面を使う。", [
+            ("構成", "対向2本指／開閉1駆動。円周に沿う浅い輪郭。"),
+            ("位置決め", "円筒面だけに頼らず、実在する平面または取付耳の外縁で向きを決める。"),
+            ("開放", "固定完了後に側方へ開く。本体下面へ爪を入れない。"),
+            ("未確定", "荷重を受けられる実面、ポケット寸法、パッド材と保持力。"),
+        ], draw_h01, lambda a: open_side(a), 2)
+
+        generic_page(pdf, "H02", "角形本体・支持部を保持", "角形リレー、支持部など。形状ごとにポケットを交換する。", [
+            ("構成", "対向2本指／開閉1駆動。浅い角形ポケットと交換パッド。"),
+            ("位置決め", "片側を基準面とし、長手端当てで横ずれ・向きを抑える。対向側で押さえる。"),
+            ("空ける場所", "端子、ロック、ばね、固定穴、工具通路と着座面。"),
+            ("未確定", "対象ごとの許容面・外形・必要開度。共通寸法を一括適用しない。"),
+        ], draw_h02, lambda a: open_side(a, "角形本体"), 3)
+
+        generic_page(pdf, "H03", "剛体バスバーを保持", "B／Cの接続・締結。つかんだ位置で締結し、工具が退避してから開く。", [
+            ("構成", "対向2本指／開閉1駆動。非接続部の長辺を受ける浅い輪郭と端当て。"),
+            ("接触面", "電気接続に使わない外縁を使う。接続面や締結穴の上に指を置かない。"),
+            ("開放", "側方へ開き、上方へ退避。薄板の下へ爪を残さない。"),
+            ("未確定", "実バスバーの接続域、板厚、工具ノーズの外形と反力。"),
+        ], draw_h03, lambda a: open_side(a, "板（厚さは模式）", thin=True), 4)
+
+        fig, ax = sheet("H04", "黒被覆と根元を2か所で保持", "ケーブル用T050。金属端子・締結穴をつかまず、黒被覆の端子側を保持する。", 5,
+                        "ユーザー指定の初期値：傾斜前40 mm後退／側面から時計回り15°／対向2本指")
+        picture(fig, "H04_side", (60, 208, 400, 395), "側面：+Xから見る（右がケーブル側）")
+        picture(fig, "H04_contact", (505, 208, 555, 395), "指先拡大：黒い機構を非表示")
+        picture(fig, "H04_open", (55, 650, 440, 255), "保存した開放状態")
+        cable_plan(panel(fig, (510, 631, 565, 285), "接触域・開閉方向（模式）"))
+        notes(ax, [
+            ("構成", "2本指／1駆動。左右それぞれに前後パッドを持つ。前後を別々には開けない。"),
+            ("保持する場所", "前：端子側の黒被覆。後：取付部寄りの根元被覆。上押さえは付けない。"),
+            ("保持・開放", "接続・締結完了まで保持。工具退避後に開放。両端保持では両腕同時に上昇する方針。"),
+            ("対象ごとの調整", "実際の線径・被覆長・材質は別途適合。比較線径14 mmを全配線に転用しない。図の端子は未圧着参考CADで、Ampere採用端子の再現ではない。"),
+        ])
+        source(ax, "hand_working_default_v01 / hand_clockwise_tilt_meshes_v01：T050 near・open")
+        save(pdf, fig, "H04_T050")
+
+        fig, ax = sheet("H04 比較", "小型PGE本体＋前後パッド", "既存の寸法比較モデル。T050の代替採用は未決定。端子・被覆は実物未対応の比較形状。", 6,
+                        "比較案：2本指／1直動駆動／4パッド。寸法は保存比較モデルの表示値。")
+        picture(fig, "PGE_iso", (55, 210, 505, 410), "輪郭合わせ状態")
+        picture(fig, "PGE_open", (585, 210, 505, 410), "左右各7 mmの開放表示")
+        a = panel(fig, (60, 650, 1010, 260), "前後パッドの位置（保存比較値／mm）", (110, 62))
+        rect(a, 10, 19, 90, 12, ORANGE); rect(a, 10, 19, 28, 12, DARK)
+        for x, length in ((22, 8), (61, 10)):
+            rect(a, x, 14, length, 5, TEAL); rect(a, x, 31, length, 5, TEAL)
+            arrow(a, (x, 10), (x+length, 10), both=True)
+            text(a, x+length/2, 5, f"{length}", 12, ha="center")
+        arrow(a, (26, 42), (66, 42), both=True)
+        text(a, 46, 46, "中心間40", 12, ha="center")
+        notes(ax, [
+            ("比較本体", "PGE-5-26の公称外形を表示。95×55×26 mm。完全なメーカーCADではない。"),
+            ("比較指先", "前パッド幅8 mm・溝R7.6。根元幅10 mm・溝R7。キャリア厚3 mm。"),
+            ("40 mmの区別", "前後パッド中心間40 mmは、T050本体の40 mm後退とは別の寸法。"),
+            ("未確定", "実対象への適合、取付締結、強度、力、アーム側アダプタ。製作用寸法として採用していない。"),
+        ])
+        source(ax, "hvjb_pge_finger_v01 / hvjb_pge_finger_v01_meshes：PGE_SAMPLE contour・open")
+        save(pdf, fig, "H04_PGE比較")
+
+        fig, ax = sheet("H05 外側", "筐体側ヘッダーを保持してねじ固定", "筐体へ固定するヘッダーの工程。ケーブル付き外部プラグの嵌合とは別。", 7,
+                        "保存H05：専用側面パッド／機構を外側へ60 mm配置。T050の40 mm・15°とは別設定。")
+        picture(fig, "H05_P16_held", (55, 213, 505, 410), "3口：TE 2103340-1（P16）")
+        picture(fig, "H05_P17_held", (580, 213, 505, 410), "2口：TE 2103346-2（P17）")
+        picture(fig, "H05_P16_open", (60, 658, 505, 255), "3口：保存した開放状態")
+        a = panel(fig, (590, 650, 490, 264), "工程中の役割分担", (100, 62))
+        rect(a, 26, 20, 47, 21, ORANGE)
+        for x in (23, 73): rect(a, x, 24, 3, 14, TEAL)
+        for x in (32, 46, 60, 70):
+            for y in (23, 38): circle(a, x, y, 1, "white")
+        arrow(a, (50, 58), (50, 44), RED)
+        text(a, 50, 60, "別の常設工具", 12, RED, ha="center", va="bottom")
+        text(a, 50, 7, "全ねじ締結 → 工具退避 → 指を開く", 11, ha="center")
+        notes(ax, [
+            ("構成", "対向2本指／1駆動。3口・2口で保存済みの開閉量を使い分ける。"),
+            ("保持と工具", "ヘッダー側面を保持し、ST側の締付工具が固定ねじへ接近する。手で工具をつかまない。"),
+            ("開放", "固定・工具退避後に開く。リンク式の開放では爪の上下変位も生じる。"),
+            ("未確定", "実ねじ・ビット・供給ノーズは未選定。保存表示は工具全体との成立確認ではない。"),
+        ])
+        source(ax, "header_review_v03 / hvjb_header_release_v01 / hvjb_header_fastening_inputs_v01")
+        save(pdf, fig, "H05_外側ヘッダー")
+
+        generic_page(pdf, "H05 内側", "ハウジング付き端末を案内・保持", "Cで扱う内側端末の系統図。外側ヘッダーと同じ爪を無条件に共用する意味ではない。", [
+            ("構成", "対向2本指／1駆動。剛体外形ポケットと、許容された後端・肩の受け面。"),
+            ("力の伝え方", "挿入方向の力を受け面で伝える。ケーブルだけをつかんで押し込む方式にしない。"),
+            ("空ける場所", "接点、シール、ロック、ケーブル出口。開放時にもロックを避ける。"),
+            ("未確定", "実端末との個体対応、許容剛体面、ポケット幅、挿入力・退避域。"),
+        ], h05_inner, lambda a: open_side(a, "ハウジング"), 8,
+           "hand_provisional_spec_v01 / hvjb_receiving_interfaces_v01")
+
+        fig, ax = sheet("H06", "空筐体と完成品を同じXYZで搬送", "OP010：筐体供給と完成品収納。取り出した枠を対応付けて、同じ枠へ返す。", 9,
+                        "対向2爪／1駆動／左右各2接触域。広い開度の搬送ハンド（型式・寸法未選定）。")
+        draw_h06(panel(fig, (55, 193, 1020, 359), "上面：幅広爪と離れた接触域（模式）"))
+        a = panel(fig, (55, 590, 1020, 315), "ストッカ枠の使い方（模式）", (130, 65))
+        for x0, state, color in ((4, "筐体", METAL), (48, "空き", "white"), (92, "完成品", TEAL)):
+            for r in range(5):
+                for c in range(4): rect(a, x0+c*6.5, 20+r*6.5, 5.8, 5.8, METAL, GRAY)
+            rect(a, x0, 20, 5.8, 5.8, color, GRAY)
+            text(a, x0+11, 12, "01："+state, 12, ha="center")
+        arrow(a, (33, 35), (45, 35)); arrow(a, (77, 35), (89, 35))
+        text(a, 65, 2, "同じ01枠：空筐体 → 工程中は空き → 完成品", 12, ha="center")
+        notes(ax, [
+            ("把持方針", "幅広の側面爪に4接触域。筐体の許容面を使い、コネクターとシール面を避ける。"),
+            ("共用ストッカ", "20枠を空筐体・完成品で共用。1段コンベアで完成品を戻し、供給XYZで元の枠へ収納。"),
+            ("下板搬送への転用", "A下板へのH06系適用は比較段階。実下板の把持面はまだ未選定。"),
+            ("未確定", "完成品の質量・重心、許容面、必要開度・把持力。2F-85で全幅を挟むとはしない。"),
+        ])
+        source(ax, "hand_provisional_spec_v01 / hvjb_receiving_interfaces_v01 ＋ 今回のストッカ共用指示")
+        save(pdf, fig, "H06_筐体と完成品")
+
+        generic_page(pdf, "H07", "カバー・板の側縁を保持", "カバー用の初期系統。Bヒューズ板への転用は、独立した比較対象。", [
+            ("構成", "対向2本指／1駆動。薄い側縁ポケットと端当て。長辺に離れた接触域。"),
+            ("接触面", "実在する縁の輪郭を使う。シール面、固定穴、着座面は空ける。"),
+            ("開放", "着座後に外側へ開放。下面に爪を残さず、製品に把持突起を新設しない。"),
+            ("未確定", "実カバーの縁・許容面。B板の2つの把持域や受渡し姿勢も未選定。"),
+        ], draw_h07, lambda a: open_side(a, "カバー／板", thin=True), 10)
+
+        generic_page(pdf, "H08", "ヒューズの胴を保持", "B／C。円筒・角形など実際の形式に合わせ、交換指先を使い分ける。", [
+            ("構成", "対向2本指／1駆動。円筒は丸底輪郭、角形は外形ポケット。"),
+            ("接触面", "許容される胴で保持。導電端、接点、ばね、締結穴を空ける。"),
+            ("保持・開放", "取付形式に従い装着／締結完了まで保持してから開放。"),
+            ("未確定", "入荷状態、形式別の実把持可能面と必要力。円筒軸回りの向きは別の基準面が必要。"),
+        ], draw_h08, fuse_section, 11)
+
+    (ROOT / "audit/finger_pages.json").write_text(json.dumps(
+        {"pdf": str(PDF.relative_to(ROOT)), "pages": MANIFEST, "selected_new_manufacturing_dimensions": False},
+        ensure_ascii=False, indent=2) + "\n")
+    print(PDF, len(MANIFEST), "pages")
+
+
+if __name__ == "__main__":
+    main()

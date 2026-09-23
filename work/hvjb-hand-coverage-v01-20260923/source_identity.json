@@ -1,0 +1,137 @@
+{
+  "observed_at": "2026-09-23T12:31:12.037780+09:00",
+  "files": [
+    {
+      "source": "/home/rlrk/IsaacLab/work/hvjb-contour-grasp-v01-20260920/output/grasp_requirements.json",
+      "copy": "sources/requirements.json",
+      "sha256": "07895e11684139bbdb03fb82c2e77080ac859d5c47291569bf8620df83b1f078"
+    },
+    {
+      "source": "/tmp/hvjb-line-progress-20260923/work/hvjb-hand-plan-v01-20260920/data/hand_plan.json",
+      "copy": "sources/hand_plan.json",
+      "sha256": "ecbd1ae45e269e823ffa7f783744d210758065d874c6cd50cf7b00e55a1977e0"
+    },
+    {
+      "source": "/tmp/hvjb-line-progress-20260923/work/hvjb-line-progress-20260923/data/line_review_data.json",
+      "copy": "sources/line_review_data.json",
+      "sha256": "55948e4d2603b4ebe1ccd30160c89baa990623ad96eedc515c17583bac4bb440"
+    },
+    {
+      "source": "/home/rlrk/IsaacLab-op040/eval_runs/ur15_jb_harness_revision_20260907/data/hand_working_default_v01.json",
+      "copy": "sources/working_default.json",
+      "sha256": "1cf2a19f24f753eb44b4e96fd7e73ee8bdfe5b97367a77bf8cfa0cf30a4d107c"
+    },
+    {
+      "source": "/home/rlrk/IsaacLab-op040/eval_runs/ur15_jb_harness_revision_20260907/data/hand_provisional_spec_v01.json",
+      "copy": "sources/provisional_spec.json",
+      "sha256": "0ed18d28e261b73ae1fd3beb1686ad4c2b55071974d9b8708e358b79efa8b799"
+    },
+    {
+      "source": "/home/rlrk/IsaacLab/work/hvjb-review-v02-20260920/build_finger_drawings.py",
+      "copy": "sources/legacy_finger_drawings.py.txt",
+      "sha256": "b7b3c3b30adbc54597b1416286107714a4aacb837d425982e597624f99ed088e"
+    },
+    {
+      "source": "/home/rlrk/IsaacLab/work/hvjb-contour-grasp-v01-20260920/README.md",
+      "copy": "sources/H05_outer_README.md",
+      "sha256": "5016bf5987370e7138592b3964f8511b2cdb1cd49aa0d33d602e23c6b354f38b"
+    },
+    {
+      "source": "/home/rlrk/IsaacLab/work/hvjb-covered-crimp-concept-v01-20260920/output/README.md",
+      "copy": "sources/H04_README.md",
+      "sha256": "970df9fb94033c13d2938188d7c9baedfc724cec107fcc0bb591525727cf4f3a"
+    },
+    {
+      "source": "/home/rlrk/IsaacLab/work/hvjb-pallet-location-v01-20260920/output/README.md",
+      "copy": "sources/H06_FC02_README.md",
+      "sha256": "5c1e96ef91d6c44f7ac7e5106da8aef4e1b8428c5ad00710e9e8384f09d6554f"
+    },
+    {
+      "source": "/home/rlrk/IsaacLab/work/hvjb-h06-flange-concept-v01-20260920/output/README.md",
+      "copy": "sources/H06_FC01_README.md",
+      "sha256": "bceec4363b0316a053e19b93fa64a6cbc3d305f6cf671123686f3293a9fc1531"
+    },
+    {
+      "source": "/tmp/hvjb-line-progress-20260923/work/hvjb-line-process-v03-20260921/inputs/support_sequence.json",
+      "copy": "sources/unit_support_sequence.json",
+      "sha256": "52141627e00da0be47699ec1a5f3d8acf744519090b724dc05b06ca137fe848b"
+    },
+    {
+      "source": "/home/rlrk/IsaacLab/work/hvjb-pallet-location-v01-20260920/output/pallet_location_observations.json",
+      "copy": "sources/H06_FC02_observations.json",
+      "sha256": "3e1c06676079bf863cda76baa515201eb474efb0c1effc4f9d69c22abf1c2d93"
+    },
+    {
+      "source": "/tmp/hvjb-line-progress-20260923/work/hvjb-inner-grasp-v01-20260921/output/inner_grasp_review.json",
+      "copy": "sources/H05_inner_observations.json",
+      "sha256": "fb1b09a5638486291450075c86afb0b97d2163166126ec7f7b7ce05d1aab0075"
+    },
+    {
+      "source": "/tmp/hvjb-line-progress-20260923/work/hvjb-inner-installed-access-v01-20260921/output/installed_access_observations.json",
+      "copy": "sources/H05_installed_observations.json",
+      "sha256": "12523929f056b988fcc93254c7d1c617d44d29191addf4679b9e37aa6827fc6f"
+    },
+    {
+      "source": "/home/rlrk/IsaacLab/work/hvjb-review-v02-20260920/figures/H04_side.png",
+      "copy": "figures/H04_side.png",
+      "sha256": "728dcd6d24586991b246e8e48c4a9bd711df9f18e8325a64b51b7ff94f92cf68"
+    },
+    {
+      "source": "/home/rlrk/IsaacLab/work/hvjb-review-v02-20260920/figures/H04_contact.png",
+      "copy": "figures/H04_contact.png",
+      "sha256": "d921ec7fae9301ba7311c4c510a89bb0d299f0be1614cd528754bf762eb1655d"
+    },
+    {
+      "source": "/home/rlrk/IsaacLab/work/hvjb-review-v02-20260920/figures/H04_open.png",
+      "copy": "figures/H04_open.png",
+      "sha256": "8dc6a910ca99c1ec1a6d2479abade4a77741e0b4f19339e285cafcf9d8d676c6"
+    },
+    {
+      "source": "/home/rlrk/IsaacLab/work/hvjb-contour-grasp-v01-20260920/figures/P16_after.png",
+      "copy": "figures/H05_outer3.png",
+      "sha256": "2c1c28313f2b28bdae16afa6d7fc860cff1216f7484cfe82e0cebd987213097f"
+    },
+    {
+      "source": "/home/rlrk/IsaacLab/work/hvjb-contour-grasp-v01-20260920/figures/P17_after.png",
+      "copy": "figures/H05_outer2.png",
+      "sha256": "97a1b7e4c7d2f641003407ddfc0588447e2c48cd6b293d41e546fe9957167e02"
+    },
+    {
+      "source": "/home/rlrk/IsaacLab/work/hvjb-contour-grasp-v01-20260920/figures/P16_opened.png",
+      "copy": "figures/H05_outer3_open.png",
+      "sha256": "ce039156c9c15f31b6c6cdfb915d894635dea0e90a4f931d3ce7690dccf92520"
+    },
+    {
+      "source": "/tmp/hvjb-line-progress-20260923/work/hvjb-inner-grasp-v01-20260921/figures/oblique.png",
+      "copy": "figures/H05_inner.png",
+      "sha256": "e7b09bc78013d78ce129ee925c4dd6677ba7376cfcb374af4dce3e8c76dbb280"
+    },
+    {
+      "source": "/tmp/hvjb-line-progress-20260923/work/hvjb-inner-installed-access-v01-20260921/figures/hand_only.png",
+      "copy": "figures/H05_inner_hand.png",
+      "sha256": "292e0021044e19f502c1960c44e99278006c801a987c6894efedee3625e04eef"
+    },
+    {
+      "source": "/home/rlrk/IsaacLab/work/hvjb-pallet-location-v01-20260920/figures/handoff_both.png",
+      "copy": "figures/H06_case.png",
+      "sha256": "d97c129feff1673650f206fede3894f1e4cd780a36f9c3723898478463ea6226"
+    },
+    {
+      "source": "/home/rlrk/IsaacLab/work/hvjb-pallet-location-v01-20260920/figures/handoff_clear.png",
+      "copy": "figures/H06_case_clear.png",
+      "sha256": "5830979384c795a9b567ff6ccd3d052bac438f43c2a710a89c563d433e391207"
+    },
+    {
+      "source": "/home/rlrk/IsaacLab/work/hvjb-pallet-location-v01-20260920/figures/backing_pin_passage.png",
+      "copy": "figures/H06_pin_passage.png",
+      "sha256": "4238f90781f58dccc2b14cdcd318e6efd5d6cbf3289e3d412cb726c5dba66d9d"
+    },
+    {
+      "source": "/tmp/hvjb-line-progress-20260923/work/hvjb-line-progress-20260923/figures/product_final/product.png",
+      "copy": "figures/unit_target_reference.png",
+      "sha256": "d30a05313b415d3f5862f0016aa13b523eb7bf09e6d65bd2ad9fb0a0dd99ee94"
+    }
+  ],
+  "source_bytes_unchanged": true,
+  "script_sha256": "613e4480af7ccda8e7fa4f5f40f283a3e625eb8300504cf96db6fb12f2646bdf"
+}

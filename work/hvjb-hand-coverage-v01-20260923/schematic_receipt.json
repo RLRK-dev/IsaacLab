@@ -1,0 +1,147 @@
+{
+  "source_sha256": "b7b3c3b30adbc54597b1416286107714a4aacb837d425982e597624f99ed088e",
+  "outputs": [
+    {
+      "id": "H01",
+      "file": "figures/H01_schematic.png",
+      "sha256": "c12f086c852dfa71908c392bd7a1d6d57250d654551556bfaaec80cdd4c5a3fd",
+      "text_bounds": [
+        {
+          "text": "実在する非円形面に当てる",
+          "bounds_px": [
+            205.44000000000003,
+            556.38,
+            404.94000000000005,
+            573.38
+          ]
+        },
+        {
+          "text": "円筒側面の輪郭＋回り止めの当て面",
+          "bounds_px": [
+            347.0000000000001,
+            84.56,
+            613.0000000000001,
+            101.56
+          ]
+        }
+      ],
+      "label_positions_adjusted": false
+    },
+    {
+      "id": "H02",
+      "file": "figures/H02_schematic.png",
+      "sha256": "ee2526b344e0bde1c06b87e6dfcb59c00dd0f606fe8cff94da059861f75d831d",
+      "text_bounds": [
+        {
+          "text": "片側の基準面",
+          "bounds_px": [
+            68.16,
+            67.32,
+            167.91,
+            84.32
+          ]
+        },
+        {
+          "text": "長手端当て",
+          "bounds_px": [
+            445.68000000000006,
+            67.32,
+            528.8050000000001,
+            84.32
+          ]
+        },
+        {
+          "text": "交換パッド",
+          "bounds_px": [
+            677.3400000000001,
+            513.48,
+            760.4650000000001,
+            530.48
+          ]
+        }
+      ],
+      "label_positions_adjusted": true
+    },
+    {
+      "id": "H03",
+      "file": "figures/H03_schematic.png",
+      "sha256": "e67b056cba21886e7161d30fbcc5f98d4224dfcb5032bddbe4f139726468cf0d",
+      "text_bounds": [
+        {
+          "text": "締結穴・電気接続面",
+          "bounds_px": [
+            119.64000000000001,
+            496.4,
+            269.39,
+            513.4
+          ]
+        },
+        {
+          "text": "図示した中央域も、実部品の許容面確認後に使用",
+          "bounds_px": [
+            312.2500000000001,
+            50.24,
+            647.7500000000001,
+            67.24000000000001
+          ]
+        }
+      ],
+      "label_positions_adjusted": false
+    },
+    {
+      "id": "H07",
+      "file": "figures/H07_schematic.png",
+      "sha256": "b47558844fdc88e40aa873b4b941d779252753263f47d5294fbdb6f9f9198792",
+      "text_bounds": [
+        {
+          "text": "固定穴を\n空ける",
+          "bounds_px": [
+            729.8900000000001,
+            321.305,
+            796.3900000000001,
+            362.455
+          ]
+        },
+        {
+          "text": "端当て位置は実際の側縁形状で決定",
+          "bounds_px": [
+            358.0000000000001,
+            50.24,
+            602.0000000000001,
+            67.24000000000001
+          ]
+        }
+      ],
+      "label_positions_adjusted": false
+    },
+    {
+      "id": "H08",
+      "file": "figures/H08_schematic.png",
+      "sha256": "000c64a9bb0bc99191244a21e4f17baa5423bc57d9289ac4063b48c01868712c",
+      "text_bounds": [
+        {
+          "text": "胴の把持可能面を使う",
+          "bounds_px": [
+            128.22000000000003,
+            522.14,
+            294.47,
+            539.14
+          ]
+        },
+        {
+          "text": "導電端・接続面は保持しない",
+          "bounds_px": [
+            371.8750000000001,
+            41.66,
+            588.1250000000001,
+            58.66
+          ]
+        }
+      ],
+      "label_positions_adjusted": true
+    }
+  ],
+  "schematic_dimensions_selected": false,
+  "source_geometry_changed": false,
+  "renderer_sha256": "4b28bbd48289f3ebe7842cbf7f69360d851e5a5b5f66113efc099d1ed7b7b0bd"
+}
