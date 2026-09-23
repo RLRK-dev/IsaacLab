@@ -1,0 +1,402 @@
+{
+  "observed_at": "2026-09-23T11:00:00.214614+09:00",
+  "atlas_sha256": "85211134ed8a764cb28cad2b5850ad9d477454b24c7dfa7658649f3e5531d038",
+  "images_read_back": 184,
+  "distinct_feature_ids": 92,
+  "source_geometry_arrays_sha256": "fe934591ea11d5e265aac0eb454bb574cff663b9c674e8db8103abec1d63969a",
+  "isolated_framing": [
+    {
+      "id": "P01",
+      "all_isolated_vertices_inside_frame": true
+    },
+    {
+      "id": "P16",
+      "all_isolated_vertices_inside_frame": true
+    },
+    {
+      "id": "P17",
+      "all_isolated_vertices_inside_frame": true
+    },
+    {
+      "id": "I01",
+      "all_isolated_vertices_inside_frame": true
+    },
+    {
+      "id": "I02",
+      "all_isolated_vertices_inside_frame": true
+    },
+    {
+      "id": "I03",
+      "all_isolated_vertices_inside_frame": true
+    },
+    {
+      "id": "I04",
+      "all_isolated_vertices_inside_frame": true
+    },
+    {
+      "id": "I05",
+      "all_isolated_vertices_inside_frame": true
+    },
+    {
+      "id": "P02",
+      "all_isolated_vertices_inside_frame": true
+    },
+    {
+      "id": "P03",
+      "all_isolated_vertices_inside_frame": true
+    },
+    {
+      "id": "P04",
+      "all_isolated_vertices_inside_frame": true
+    },
+    {
+      "id": "P05",
+      "all_isolated_vertices_inside_frame": true
+    },
+    {
+      "id": "P06",
+      "all_isolated_vertices_inside_frame": true
+    },
+    {
+      "id": "P07",
+      "all_isolated_vertices_inside_frame": true
+    },
+    {
+      "id": "P08",
+      "all_isolated_vertices_inside_frame": true
+    },
+    {
+      "id": "P09",
+      "all_isolated_vertices_inside_frame": true
+    },
+    {
+      "id": "P10",
+      "all_isolated_vertices_inside_frame": true
+    },
+    {
+      "id": "P11",
+      "all_isolated_vertices_inside_frame": true
+    },
+    {
+      "id": "P12",
+      "all_isolated_vertices_inside_frame": true
+    },
+    {
+      "id": "P13",
+      "all_isolated_vertices_inside_frame": true
+    },
+    {
+      "id": "P14",
+      "all_isolated_vertices_inside_frame": true
+    },
+    {
+      "id": "P15",
+      "all_isolated_vertices_inside_frame": true
+    },
+    {
+      "id": "P18",
+      "all_isolated_vertices_inside_frame": true
+    },
+    {
+      "id": "T31",
+      "all_isolated_vertices_inside_frame": true
+    },
+    {
+      "id": "T32",
+      "all_isolated_vertices_inside_frame": true
+    },
+    {
+      "id": "T33",
+      "all_isolated_vertices_inside_frame": true
+    },
+    {
+      "id": "T34",
+      "all_isolated_vertices_inside_frame": true
+    },
+    {
+      "id": "T41",
+      "all_isolated_vertices_inside_frame": true
+    },
+    {
+      "id": "T42",
+      "all_isolated_vertices_inside_frame": true
+    },
+    {
+      "id": "T43",
+      "all_isolated_vertices_inside_frame": true
+    },
+    {
+      "id": "T44",
+      "all_isolated_vertices_inside_frame": true
+    },
+    {
+      "id": "P19",
+      "all_isolated_vertices_inside_frame": true
+    },
+    {
+      "id": "P20",
+      "all_isolated_vertices_inside_frame": true
+    },
+    {
+      "id": "P21",
+      "all_isolated_vertices_inside_frame": true
+    },
+    {
+      "id": "P22",
+      "all_isolated_vertices_inside_frame": true
+    },
+    {
+      "id": "L01",
+      "all_isolated_vertices_inside_frame": true
+    },
+    {
+      "id": "L02",
+      "all_isolated_vertices_inside_frame": true
+    },
+    {
+      "id": "L03",
+      "all_isolated_vertices_inside_frame": true
+    },
+    {
+      "id": "L04",
+      "all_isolated_vertices_inside_frame": true
+    },
+    {
+      "id": "L05",
+      "all_isolated_vertices_inside_frame": true
+    },
+    {
+      "id": "L06",
+      "all_isolated_vertices_inside_frame": true
+    },
+    {
+      "id": "L07",
+      "all_isolated_vertices_inside_frame": true
+    },
+    {
+      "id": "J01",
+      "all_isolated_vertices_inside_frame": true
+    },
+    {
+      "id": "J02",
+      "all_isolated_vertices_inside_frame": true
+    },
+    {
+      "id": "J03",
+      "all_isolated_vertices_inside_frame": true
+    },
+    {
+      "id": "J04",
+      "all_isolated_vertices_inside_frame": true
+    },
+    {
+      "id": "J05",
+      "all_isolated_vertices_inside_frame": true
+    },
+    {
+      "id": "J06",
+      "all_isolated_vertices_inside_frame": true
+    },
+    {
+      "id": "J07",
+      "all_isolated_vertices_inside_frame": true
+    },
+    {
+      "id": "J08",
+      "all_isolated_vertices_inside_frame": true
+    },
+    {
+      "id": "J09",
+      "all_isolated_vertices_inside_frame": true
+    },
+    {
+      "id": "J10",
+      "all_isolated_vertices_inside_frame": true
+    },
+    {
+      "id": "J11",
+      "all_isolated_vertices_inside_frame": true
+    },
+    {
+      "id": "J12",
+      "all_isolated_vertices_inside_frame": true
+    },
+    {
+      "id": "J13",
+      "all_isolated_vertices_inside_frame": true
+    },
+    {
+      "id": "J14",
+      "all_isolated_vertices_inside_frame": true
+    },
+    {
+      "id": "J15",
+      "all_isolated_vertices_inside_frame": true
+    },
+    {
+      "id": "J16",
+      "all_isolated_vertices_inside_frame": true
+    },
+    {
+      "id": "J17",
+      "all_isolated_vertices_inside_frame": true
+    },
+    {
+      "id": "J18",
+      "all_isolated_vertices_inside_frame": true
+    },
+    {
+      "id": "J19",
+      "all_isolated_vertices_inside_frame": true
+    },
+    {
+      "id": "J20",
+      "all_isolated_vertices_inside_frame": true
+    },
+    {
+      "id": "J21",
+      "all_isolated_vertices_inside_frame": true
+    },
+    {
+      "id": "J22",
+      "all_isolated_vertices_inside_frame": true
+    },
+    {
+      "id": "J23",
+      "all_isolated_vertices_inside_frame": true
+    },
+    {
+      "id": "W01",
+      "all_isolated_vertices_inside_frame": true
+    },
+    {
+      "id": "W02",
+      "all_isolated_vertices_inside_frame": true
+    },
+    {
+      "id": "W03",
+      "all_isolated_vertices_inside_frame": true
+    },
+    {
+      "id": "W04",
+      "all_isolated_vertices_inside_frame": true
+    },
+    {
+      "id": "W05",
+      "all_isolated_vertices_inside_frame": true
+    },
+    {
+      "id": "W06",
+      "all_isolated_vertices_inside_frame": true
+    },
+    {
+      "id": "W07",
+      "all_isolated_vertices_inside_frame": true
+    },
+    {
+      "id": "W08",
+      "all_isolated_vertices_inside_frame": true
+    },
+    {
+      "id": "W09",
+      "all_isolated_vertices_inside_frame": true
+    },
+    {
+      "id": "W10",
+      "all_isolated_vertices_inside_frame": true
+    },
+    {
+      "id": "W11",
+      "all_isolated_vertices_inside_frame": true
+    },
+    {
+      "id": "W12",
+      "all_isolated_vertices_inside_frame": true
+    },
+    {
+      "id": "W13",
+      "all_isolated_vertices_inside_frame": true
+    },
+    {
+      "id": "W14",
+      "all_isolated_vertices_inside_frame": true
+    },
+    {
+      "id": "WI11",
+      "all_isolated_vertices_inside_frame": true
+    },
+    {
+      "id": "WI12",
+      "all_isolated_vertices_inside_frame": true
+    },
+    {
+      "id": "WI21",
+      "all_isolated_vertices_inside_frame": true
+    },
+    {
+      "id": "WI22",
+      "all_isolated_vertices_inside_frame": true
+    },
+    {
+      "id": "WI41",
+      "all_isolated_vertices_inside_frame": true
+    },
+    {
+      "id": "WI42",
+      "all_isolated_vertices_inside_frame": true
+    },
+    {
+      "id": "WI51",
+      "all_isolated_vertices_inside_frame": true
+    },
+    {
+      "id": "WI52",
+      "all_isolated_vertices_inside_frame": true
+    },
+    {
+      "id": "W15",
+      "all_isolated_vertices_inside_frame": true
+    },
+    {
+      "id": "W16",
+      "all_isolated_vertices_inside_frame": true
+    },
+    {
+      "id": "W17",
+      "all_isolated_vertices_inside_frame": true
+    },
+    {
+      "id": "W18",
+      "all_isolated_vertices_inside_frame": true
+    },
+    {
+      "id": "W19",
+      "all_isolated_vertices_inside_frame": true
+    }
+  ],
+  "context_features_without_selected_pixels": [
+    "P13",
+    "L04",
+    "L05",
+    "J03",
+    "J09",
+    "J10",
+    "J11",
+    "J12",
+    "J13",
+    "W04",
+    "W05",
+    "WI11",
+    "WI12",
+    "WI21",
+    "WI22",
+    "WI41",
+    "WI42",
+    "WI51",
+    "WI52"
+  ],
+  "scope": "Image identity and display framing only. The fixed view can occlude features.",
+  "physical_operation_selection": null,
+  "formal_physical_validity_verdict": null,
+  "script_sha256": "5615b4aa42163a86e93b75bc7ded2f1fa6e08872730a02ebe58ed86b43c01efc"
+}

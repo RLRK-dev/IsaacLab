@@ -1,0 +1,32 @@
+[Script Info]
+ScriptType: v4.00+
+PlayResX: 1280
+PlayResY: 720
+WrapStyle: 0
+
+[V4+ Styles]
+Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
+Style: Main,Noto Sans CJK JP,22,&H00FFFFFF,&H00FFFFFF,&H901C2D36,&H901C2D36,0,0,0,0,100,100,0,0,3,6,0,2,22,22,18,1
+Style: Scope,Noto Sans CJK JP,17,&H00FFFFFF,&H00FFFFFF,&H901C2D36,&H901C2D36,0,0,0,0,100,100,0,0,3,4,0,8,12,12,12,1
+
+[Events]
+Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
+Dialogue: 0,0:00:00.00,0:01:59.00,Scope,,0,0,0,,HVJB 全体工程 v04｜左：模式動作 / 右：完成状態の部品照合図 / 実機仕様・実タクトは未確定
+Dialogue: 0,0:00:00.00,0:00:03.00,Main,,0,0,0,,1段往復パレット / 20枠共用 / 主担当3腕と補助2腕
+Dialogue: 0,0:00:03.00,0:00:10.00,Main,,0,0,0,,筐体を支持・位置決めしてからハンド開放
+Dialogue: 0,0:00:10.00,0:00:14.00,Main,,0,0,0,,入荷済み範囲、空容器回収の仕事を残す
+Dialogue: 0,0:00:14.00,0:00:24.00,Main,,0,0,0,,接触器・リレー・抵抗等。自由端の案内を継続
+Dialogue: 0,0:00:24.00,0:00:32.00,Main,,0,0,0,,板側締結を完了。反対端の接続は別に扱う
+Dialogue: 0,0:00:32.00,0:00:44.00,Main,,0,0,0,,案内役の占有と次の支持先を示す
+Dialogue: 0,0:00:44.00,0:00:50.00,Main,,0,0,0,,採用済み仮手順。実物の固定点は未確認
+Dialogue: 0,0:00:50.00,0:00:55.00,Main,,0,0,0,,支持F-Cと自由端案内を維持して持ち替える
+Dialogue: 0,0:00:55.00,0:01:03.00,Main,,0,0,0,,本体の支持引継ぎ後も自由端案内を続ける
+Dialogue: 0,0:01:03.00,0:01:07.00,Main,,0,0,0,,隠れたねじを追加せず、未特定箇所を表示
+Dialogue: 0,0:01:07.00,0:01:15.00,Main,,0,0,0,,通した後の外側支持を引き継ぐまで保持
+Dialogue: 0,0:01:15.00,0:01:25.00,Main,,0,0,0,,外側取得と内側保持を同じ手に重ねない
+Dialogue: 0,0:01:25.00,0:01:33.00,Main,,0,0,0,,導体と線を別に保持。主ヒューズは工程未確定
+Dialogue: 0,0:01:33.00,0:01:37.00,Main,,0,0,0,,未追跡の端末を、接続済みとして描かない
+Dialogue: 0,0:01:37.00,0:01:43.00,Main,,0,0,0,,内部の残接続を省かない。検査との順序は未定
+Dialogue: 0,0:01:43.00,0:01:48.00,Main,,0,0,0,,同じ高さ・経路を逆方向へ戻す
+Dialogue: 0,0:01:48.00,0:01:56.00,Main,,0,0,0,,XYZの保持確認後、パレット保持を解放
+Dialogue: 0,0:01:56.00,0:01:59.00,Main,,0,0,0,,1段往復パレット / 20枠共用 / 主担当3腕と補助2腕

@@ -1,0 +1,21 @@
+{
+  "observed_at": "2026-09-23T11:23:14.717731+09:00",
+  "manifest_sha256": "c06b6b44f231c6219bd4a1a046156669d865ee5b11cc6d179662c04d40e78d05",
+  "files_read_back": 244,
+  "counts": {
+    "jobs": 20,
+    "features": 92,
+    "scenes": 18,
+    "duration_s": 119
+  },
+  "inherited_document_files_unchanged": 26,
+  "local_asset_links_present": true,
+  "job_feature_links_bidirectional": true,
+  "external_links": [
+    "https://ampereev.com/documentation/hvjb-5-400-specifications/"
+  ],
+  "browser_ui_observed": false,
+  "browser_blocker": "CUA inventory apps=[] browsers=[]; iab and chrome unavailable.",
+  "formal_physical_validity_verdict": null,
+  "script_sha256": "e384c6dc67d1ddfbd92bff3f78913f4a25adfbbb0fe47c32b29c0647e6da5492"
+}

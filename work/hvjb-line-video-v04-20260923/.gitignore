@@ -1,0 +1,4 @@
+/data/*.npz
+/previews/*/*.png
+/*.mp4
+__pycache__/

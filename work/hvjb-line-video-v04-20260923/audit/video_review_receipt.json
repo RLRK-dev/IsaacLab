@@ -1,0 +1,21 @@
+{
+  "observed_at": "2026-09-23T10:57:12.536007+09:00",
+  "basis": "Encoded MP4 complete decode plus 18 identified decoded stills inspected in three contact sheets; S08 and S14 also opened at full size.",
+  "video_sha256": "d8095427b3f79229e731acd4beaea8d2224a3491cd9ccdb549e025ce46d4474a",
+  "readback_sha256": "2c7d5dd532d9a668dcb93ee11a21b46f4eae8725d8b2c05e7a79b79133339677",
+  "frame_count": 1785,
+  "duration_s": 119.0,
+  "scene_stills_inspected": 18,
+  "observations": [
+    "Scene titles, step strip and product-reference captions are present in the inspected samples.",
+    "Top and bottom encoder captions occupy the reserved margins without overlapping the note panel in the inspected samples.",
+    "S08 caption names the C main arm and dedicated assistant rather than the supply XYZ.",
+    "S02, S09, S13 and S14 retain explicit unresolved-task banners.",
+    "Right-hand images are labelled as the completed saved model, separate from the schematic motion."
+  ],
+  "limits": [
+    "The sampled frames do not constitute continuous human playback review.",
+    "Arm and equipment clearance, retention force, assembly sequence validity and real takt are not judged."
+  ],
+  "formal_physical_validity_verdict": null
+}

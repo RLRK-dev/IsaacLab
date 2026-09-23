@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>HVJB ライン全体レビュー v04</title>
+  <link rel="stylesheet" href="review.css">
+  <script src="review.js" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="eyebrow">AMPERE HVJB · 工程の具体化 · 2026-09-23</div>
+    <h1>筐体の供給から、完成品の収納まで</h1>
+    <p>箱外でA/Bを組み、Cでまとめて筐体へ搭載。動き・仕事・部品の対応をたどれます。</p>
+    <div class="principles"><span>3ST：A / B / C</span><span>主担当3腕 + 補助2腕</span><span>XYZ + 共用20区画</span><span>1段の往復パレット</span></div>
+  </header>
+  <nav class="tabs" aria-label="確認する内容" role="tablist">
+    <button id="tab-video" role="tab" aria-controls="panel-video" aria-selected="true" type="button">全体動画</button>
+    <button id="tab-jobs" role="tab" aria-controls="panel-jobs" aria-selected="false" type="button">20仕事</button>
+    <button id="tab-features" role="tab" aria-controls="panel-features" aria-selected="false" type="button">92項目の部品対応</button>
+    <button id="tab-diagrams" role="tab" aria-controls="panel-diagrams" aria-selected="false" type="button">図解6ページ</button>
+  </nav>
+  <main>
+    <section id="panel-video" role="tabpanel" aria-labelledby="tab-video">
+      <div class="section-heading"><h2>ラインの流れを動画で確認</h2><a class="text-link" href="HVJB_line_split_process_concept_v04_review.mp4" download>動画を開く・保存</a></div>
+      <p class="secondary">119秒。左はロボットと手先の模式動作、右は完成状態の保存モデルです。表示時間は実タクトではありません。</p>
+      <div class="video-layout">
+        <div class="video-main">
+          <video id="video" controls preload="metadata" playsinline poster="video_stills/INTRO.png" aria-label="HVJB全体工程の概略動作動画">
+            <source src="HVJB_line_split_process_concept_v04_review.mp4" type="video/mp4">
+            動画の再生に対応したブラウザで開いてください。
+          </video>
+          <div id="scene-current" class="current-scene" aria-live="polite"></div>
+          <p id="scene-hold"></p>
+        </div>
+        <div class="scene-navigation"><h3>場面へ移動</h3><p class="secondary small">選ぶとその場面で一時停止します。</p><div id="scene-buttons"></div></div>
+      </div>
+      <div class="reading-note"><strong>未確定の仕事も枠を残しています。</strong><p>線材・端末の準備、隠れた箱内工具作業、LV/HVILの個別接続、蓋・試験の細部は、施工動作が確定していません。後工程後の復路は、完了を仮定した説明です。</p></div>
+    </section>
+    <section id="panel-jobs" role="tabpanel" aria-labelledby="tab-jobs" hidden>
+      <div class="section-heading"><h2>20仕事の場所・担当・引継ぎ</h2><a class="text-link" href="data/20仕事_場所_担当_引継ぎ.csv" download>対応表 CSV</a></div>
+      <p class="secondary">工程の枠と、個々の施工の確定を分けて確認します。仕事を選ぶと対応場面と部品を表示します。</p>
+      <div class="job-layout">
+        <div id="job-buttons" class="job-navigation" aria-label="仕事を選択"></div>
+        <article id="job-detail" class="detail-panel" aria-live="polite">
+          <div id="job-kicker" class="eyebrow"></div><h3 id="job-title"></h3>
+          <dl id="job-fields" class="field-list"></dl>
+          <h4>動画の対応場面</h4><div id="job-scenes" class="button-row"></div>
+          <h4>既存の工程検討先になっている写真特徴</h4><div id="job-features" class="id-grid"></div>
+          <p class="secondary small">部品ごとの物理施工を、この対応だけで採用した意味ではありません。</p>
+        </article>
+      </div>
+    </section>
+    <section id="panel-features" role="tabpanel" aria-labelledby="tab-features" hidden>
+      <div class="section-heading"><h2>写真モデルの92項目を一つずつ確認</h2><a class="text-link" href="data/92項目_既存工程候補との対応.csv" download>対応表 CSV</a></div>
+      <p class="secondary">部品・可視配線・締結特徴の台帳です。完全BOMや隠れた部分を含む全配線ではありません。</p>
+      <div class="feature-controls">
+        <label>ID・部品名<input id="feature-search" type="search" placeholder="例：P22、ヒューズ、端子"></label>
+        <label>部品群<select id="feature-group"><option value="">すべての部品群</option></select></label>
+        <span id="feature-count" class="secondary" aria-live="polite"></span>
+      </div>
+      <div id="feature-buttons" class="feature-grid" aria-label="写真特徴を選択"></div>
+      <article id="feature-detail" class="detail-panel" aria-live="polite">
+        <div id="feature-kicker" class="eyebrow"></div><h3 id="feature-title"></h3>
+        <div class="feature-images">
+          <figure><figcaption>完成状態の中での位置 · 青が選択対象</figcaption><img id="feature-context" alt=""><p id="feature-visibility" class="secondary small"></p></figure>
+          <figure><figcaption>選択対象の単体表示 · 拡大率は個別</figcaption><img id="feature-isolated" alt=""><p class="secondary small">保存メッシュを取り出した表示です。分解・組立手順を示す図ではありません。</p></figure>
+        </div>
+        <dl id="feature-fields" class="field-list"></dl>
+        <h4>工程の検討先</h4><div id="feature-jobs" class="button-row"></div>
+      </article>
+      <details class="source-photo"><summary>元の製品写真と出典</summary><img src="review_resources/reference_photo.jpg" alt="ユーザーが提示したAmpere EV HVJB内部の製品写真"><p>ユーザー提示のAmpere EV製品写真。モデルはこの写真と公開資料を照合している検討用の形状です。<a href="https://ampereev.com/documentation/hvjb-5-400-specifications/" target="_blank" rel="noreferrer">Ampere公式資料</a></p></details>
+    </section>
+    <section id="panel-diagrams" role="tabpanel" aria-labelledby="tab-diagrams" hidden>
+      <div class="section-heading"><h2>全体と支持の引継ぎを図で確認</h2><a id="pdf-link" class="text-link" href="output/pdf/HVJB_ライン全体と組立場所_v04_20260923.pdf" target="_blank">PDFを開く</a></div>
+      <div id="diagram-buttons" class="button-row"></div>
+      <figure class="diagram-figure"><a id="diagram-link" href="output/pages/page-1.png" target="_blank"><img id="diagram-image" src="output/pages/page-1.png" alt="ライン全体の工程図"></a><figcaption id="diagram-caption"></figcaption></figure>
+    </section>
+  </main>
+  <footer><p>工具・ビット・ロボット機種は比較段階。図と動画は配置・役割・引継ぎの検討用です。</p><details><summary>確認記録と資料の範囲</summary><p>20仕事 / 12元工程 / 92写真特徴を継承。モデルの頂点・面とv03の保存動作は変更していません。把持力・締結品質・実機成立の正式判定は含みません。</p><ul><li><a href="qa_receipt.json">6ページ資料の読戻し記録</a></li><li><a href="video_audit/video_review_receipt.json">動画の照合と表示確認</a></li><li><a href="feature_atlas/atlas.json">92項目の図と元データの対応</a></li><li><a href="connector_followup.md">CPA一般操作の追加照合</a></li><li><a href="review_manifest.json">このページのファイル記録</a></li></ul></details></footer>
+  <script id="review-data" type="application/json">__REVIEW_DATA__</script>
+</body>
+</html>
