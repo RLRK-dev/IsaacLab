@@ -1,0 +1,36 @@
+{
+  "observed_at": "2026-09-23T15:37:32.498763+09:00",
+  "video_sha256": "fd768cb5c86707d206fe499142e83b3324c7312d5a8867d31c7e98caa0a5ad5c",
+  "readback_sha256": "d55482ba0d69290bce7edb05f94973e5b5e66c9016e688056fc61079f5e59a94",
+  "basis": "42 decoded stills read as seven contact sheets; decoded frame-18 and frame-34 also read at full size.",
+  "frame_count": 1785,
+  "duration_s": 119.0,
+  "scene_stills_inspected": 42,
+  "distinct_scenes_inspected": 18,
+  "contacts": {
+    "decoded_contacts/contact-1.png": "2645ec5f251673fd86612e08483e68e4aa779949cb6b2fc745a0188fe82b19cd",
+    "decoded_contacts/contact-2.png": "820043a0e18bc282badfe85710912470aeab78edfbf42c76e1e3a9d05d3e5711",
+    "decoded_contacts/contact-3.png": "084d9fc4b8eae4818c382ef1f0cbdc9d92d640792793ebd909e0afaa541cc31c",
+    "decoded_contacts/contact-4.png": "644defbd8b2d198bd4d188bd5a795f5c9e3f7c24add7497d4ff021568b5557af",
+    "decoded_contacts/contact-5.png": "72f95d82e05bd907beee7bbcd60287e46fbd2d7bc79448be612db9aef8e8075a",
+    "decoded_contacts/contact-6.png": "6908dbd847ec334fc1edbc21020b81b7c9825c554455b0e17d4ad86d341fe5c1",
+    "decoded_contacts/contact-7.png": "87e50651e1a85a76a19f248deb2c524dbdcde2734934a82b3a99b2694f7e0302"
+  },
+  "observations": [
+    "The v05 title and original scene notes remain visible in the inspected decoded samples.",
+    "A's sampled opening and upward retreat are represented before its return toward the preparation position.",
+    "B's sampled approach and release show intermediate hand orientations; C's busbar hand turns during approach.",
+    "The wider S12 frame includes the main hand and busbar supply in the selected pickup samples.",
+    "A's unit approach is outside the tight S04 camera; that interval is checked numerically, not visually here.",
+    "S02, S09, S13 and S14 retain the unresolved-task banner rather than a fabricated operation.",
+    "The completed-product image remains labelled separately from the left schematic motion."
+  ],
+  "preview02_identical_pngs_out_of_24": 19,
+  "limits": [
+    "This is sampled frame inspection, not continuous human video playback.",
+    "Detailed finger-to-part contact faces and all free-end retention are not established by this schematic.",
+    "No arm/equipment clearance, retention-force, fastening-quality or real-takt verdict was made."
+  ],
+  "formal_physical_validity_verdict": null,
+  "script_sha256": "601b34efaeea0c98d4436152fab7dc88a43239a74515f29d63923702d9195175"
+}

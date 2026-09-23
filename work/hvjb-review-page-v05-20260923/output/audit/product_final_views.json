@@ -1,0 +1,206 @@
+{
+  "observed_at": "2026-09-23T09:06:19.987036+09:00",
+  "views": [
+    {
+      "name": "product",
+      "file": "figures/product_final/product.png",
+      "sha256": "d30a05313b415d3f5862f0016aa13b523eb7bf09e6d65bd2ad9fb0a0dd99ee94",
+      "highlighted_features": [],
+      "included_feature_count": 92,
+      "included_mesh_count": 465,
+      "visible_pixels": 433889
+    },
+    {
+      "name": "outside_A",
+      "file": "figures/product_final/outside_A.png",
+      "sha256": "3dcfd30f17a6f1a3435f057f6fc71ff751d6f7e0367b33dba91f64d879e443d1",
+      "highlighted_features": [
+        "P02",
+        "P03",
+        "P04"
+      ],
+      "included_feature_count": 92,
+      "included_mesh_count": 465,
+      "visible_pixels": 433889
+    },
+    {
+      "name": "outside_B",
+      "file": "figures/product_final/outside_B.png",
+      "sha256": "f6ec93e36e019addee1090552c21b350f4ca92716d010eb94d8a4ec16fb837d9",
+      "highlighted_features": [
+        "P05",
+        "P06",
+        "P07",
+        "P19",
+        "P20",
+        "P21"
+      ],
+      "included_feature_count": 92,
+      "included_mesh_count": 465,
+      "visible_pixels": 433889
+    },
+    {
+      "name": "after_insertion_bus",
+      "file": "figures/product_final/after_insertion_bus.png",
+      "sha256": "1ebdeac6c8e1257618f92393bd1232e972a09052fb478d8086c2b28bf68d98ff",
+      "highlighted_features": [
+        "P09",
+        "P10",
+        "P11",
+        "P12",
+        "P13"
+      ],
+      "included_feature_count": 92,
+      "included_mesh_count": 465,
+      "visible_pixels": 433889
+    },
+    {
+      "name": "external_headers",
+      "file": "figures/product_final/external_headers.png",
+      "sha256": "3d141b70f9e1b60e8c4d0dde203f300353408896ea8736f304eaaab18d4214e0",
+      "highlighted_features": [
+        "P16",
+        "P17"
+      ],
+      "included_feature_count": 92,
+      "included_mesh_count": 465,
+      "visible_pixels": 433889
+    },
+    {
+      "name": "internal_housings",
+      "file": "figures/product_final/internal_housings.png",
+      "sha256": "28750afc206b4788f4e6f998977340f6cbc3e07ab468a8fad2d1e42c55fcd1a0",
+      "highlighted_features": [
+        "I01",
+        "I02",
+        "I03",
+        "I04",
+        "I05"
+      ],
+      "included_feature_count": 92,
+      "included_mesh_count": 465,
+      "visible_pixels": 433889
+    },
+    {
+      "name": "case",
+      "file": "figures/product_final/case.png",
+      "sha256": "804a3a906d1c6c389190a73dee6f7f6f7ee3d817323f1b725df38d5eec869948",
+      "highlighted_features": [
+        "P01"
+      ],
+      "included_feature_count": 92,
+      "included_mesh_count": 465,
+      "visible_pixels": 433889
+    },
+    {
+      "name": "main_fuse_unassigned",
+      "file": "figures/product_final/main_fuse_unassigned.png",
+      "sha256": "a356f01471d61e4cfb7b7028ec5c1c47809b5890ccabc123fdbe7e34eaed890c",
+      "highlighted_features": [
+        "P08",
+        "P22"
+      ],
+      "included_feature_count": 92,
+      "included_mesh_count": 465,
+      "visible_pixels": 433889
+    },
+    {
+      "name": "main_and_lv_unassigned",
+      "file": "figures/product_final/main_and_lv_unassigned.png",
+      "sha256": "9f4fa8b01c35b3fd5693783f621695aaddbcf7df4fa04948d3c228ed1fd89135",
+      "highlighted_features": [
+        "P14",
+        "P15",
+        "P18"
+      ],
+      "included_feature_count": 92,
+      "included_mesh_count": 465,
+      "visible_pixels": 433889
+    },
+    {
+      "name": "wires_display_only",
+      "file": "figures/product_final/wires_display_only.png",
+      "sha256": "459339d8dcc9cc79cf54e53a82a9b226d1176c0782082646221966d45e9898fd",
+      "highlighted_features": [
+        "W01",
+        "W02",
+        "W03",
+        "W04",
+        "W05",
+        "W06",
+        "W07",
+        "W08",
+        "W09",
+        "W10",
+        "W11",
+        "W12",
+        "W13",
+        "W14",
+        "W15",
+        "W16",
+        "W17",
+        "W18",
+        "W19",
+        "WI11",
+        "WI12",
+        "WI21",
+        "WI22",
+        "WI41",
+        "WI42",
+        "WI51",
+        "WI52"
+      ],
+      "included_feature_count": 92,
+      "included_mesh_count": 465,
+      "visible_pixels": 433889
+    }
+  ],
+  "manifest_sha256": "dc41b70a42c1f2ddc4e06ccf9ff5f38a3a89013fdd8e5b0c7c5723ee674856db",
+  "parent_product_sha256": "6687b12ec1b3db24babf75f8fef1b6f6bc123c288b713824b9763d9214553ba6",
+  "loader_sha256": "e6c4cc9ac6e0422343520ba3ba7565fa0690d5c32005db5e1c0af02904bb782a",
+  "render_helper_sha256": "b87bd76092f3b6a9f279de2ce7f0f7976703e1f54637fcd4dc1c51ed686241f9",
+  "script_sha256": "5ddd63991a1c4a3e5cc31c775958a4a2d4c1a0092f2f5d1cccd7abd38f13e83e",
+  "camera_matrix": [
+    [
+      0.807391122257898,
+      -0.45958849589477446,
+      0.36999728396342446,
+      0.38
+    ],
+    [
+      0.5900165893423099,
+      0.6289105733296915,
+      -0.5063120727920546,
+      -0.5244785737991333
+    ],
+    [
+      -0.0,
+      0.6270964082143173,
+      0.7789416504493147,
+      0.8431450009346009
+    ],
+    [
+      0.0,
+      0.0,
+      0.0,
+      1.0
+    ]
+  ],
+  "product_bounds_m": [
+    [
+      -0.14624999463558197,
+      -0.11110000312328339,
+      0.0
+    ],
+    [
+      0.14624999463558197,
+      0.10214285552501678,
+      0.08629000186920166
+    ]
+  ],
+  "geometry_modified": false,
+  "mesh_subset_removed": false,
+  "highlight_basis": "Existing group candidates, not a new part-by-part operation selection.",
+  "scope": "Completed-product display configuration; not intermediate assembly geometry or a complete BOM.",
+  "physical_validity_verdict": null
+}

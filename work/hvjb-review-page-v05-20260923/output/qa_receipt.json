@@ -1,0 +1,82 @@
+{
+  "observed_at": "2026-09-23T09:53:59.536142+09:00",
+  "basis": "saved input hashes, PDF readback, CSV cross-check, assistant visual inspection of all six page PNGs",
+  "pdf_sha256": "7ba22646f108ec7a1d9dc26d8dd339dfed5835934809b48aeac6332eeae89e19",
+  "page_count": 6,
+  "job_ids_on_page_4": [
+    "D00",
+    "D01",
+    "D10",
+    "D11",
+    "D12",
+    "D20",
+    "D21",
+    "D22",
+    "D30",
+    "D31",
+    "D40",
+    "D42",
+    "D45",
+    "D50",
+    "D60",
+    "D61",
+    "D70",
+    "D71",
+    "D80",
+    "D81"
+  ],
+  "source_operation_count": 12,
+  "job_csv_rows": 20,
+  "photo_feature_csv_rows": 92,
+  "product_views_checked": 10,
+  "features_per_product_view": 92,
+  "meshes_per_product_view": 465,
+  "text_boundary_check": "passed",
+  "pages": [
+    {
+      "page": 1,
+      "png": "output/pages/page-1.png",
+      "sha256": "2758a5673701249bb813f615c8e61e63819439fd321f708915e5d964bc142489"
+    },
+    {
+      "page": 2,
+      "png": "output/pages/page-2.png",
+      "sha256": "edfaee964f45def2781f94e4e05f008a1d7558f1540a72a92ea7707e21efbf9c"
+    },
+    {
+      "page": 3,
+      "png": "output/pages/page-3.png",
+      "sha256": "61501659c82f71ba12e36a78931d513f8e42affc8426a73a6fe2ad8e98049054"
+    },
+    {
+      "page": 4,
+      "png": "output/pages/page-4.png",
+      "sha256": "b5c09dba8959006c3c38c7219676d1dd8f88e70b0a86c5620c3247a7da4c9abf"
+    },
+    {
+      "page": 5,
+      "png": "output/pages/page-5.png",
+      "sha256": "4326afae9b75ec1414e60ccc5e02c41fd686e771bfd1e940eae81b0898dcc5e5"
+    },
+    {
+      "page": 6,
+      "png": "output/pages/page-6.png",
+      "sha256": "f162616064341582f911ba0ae05b6f361498a7ff32c7ef8bc26b2a474af1e6dc"
+    }
+  ],
+  "visual_observations": [
+    "All six final page images were opened and inspected; headings, diagrams and footnotes are readable.",
+    "Page 1 A/B transfer arrows terminate at C; they do not imply transfer through the shared assistant.",
+    "Page 4 contains all 20 job cards; detailed hand variants remain in the accompanying CSV.",
+    "Page 5 distinguishes shared-assistant occupancy from time and from a verified parallel schedule.",
+    "Page 6 distinguishes the small green CPA symbol from the orange plug and the adjacent header."
+  ],
+  "limits": [
+    "The colored product views show completed saved geometry, not verified intermediate workpieces.",
+    "92 photo features do not constitute a complete manufacturing BOM or complete physical wiring.",
+    "Arm roles and schematic handoffs do not prove reach, retention, fastening or real takt.",
+    "This receipt is document QA by the creating assistant, not independent physical acceptance."
+  ],
+  "formal_physical_validity_verdict": null,
+  "verifier_sha256": "d9b050874e5e80106429046fcb34b7be16d6f4c477e4d143877f9db226253b6f"
+}

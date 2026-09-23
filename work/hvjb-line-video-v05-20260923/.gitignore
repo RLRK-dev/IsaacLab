@@ -1,0 +1,3 @@
+data/*.npz
+previews/*/*.png
+*.mp4

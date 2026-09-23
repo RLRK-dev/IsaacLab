@@ -1,0 +1,3072 @@
+{
+  "source_sha256": "52eede374a2d782aabf1cc2604801cc64e6f884b39060728c437631a8dca36dc",
+  "hands": {
+    "A": {
+      "translation_display_units": [
+        {
+          "from_sample_index": 558,
+          "to_sample_index": 559,
+          "from_video_s": 37.2,
+          "to_video_s": 37.266666666666666,
+          "source_clock_before_after": [
+            27.633333333333336,
+            27.705555555555556
+          ],
+          "scene_before_after": [
+            "S05",
+            "S05"
+          ],
+          "object_column": 8,
+          "object_name": "A_right_finger",
+          "value": 0.5425612900613248,
+          "position_before": [
+            0.196,
+            0.36,
+            0.9800000000000001
+          ],
+          "position_after": [
+            -0.3465379613115029,
+            0.36004042799352903,
+            0.9850311404815022
+          ]
+        },
+        {
+          "from_sample_index": 455,
+          "to_sample_index": 456,
+          "from_video_s": 30.333333333333332,
+          "to_video_s": 30.4,
+          "source_clock_before_after": [
+            21.479166666666668,
+            21.5
+          ],
+          "scene_before_after": [
+            "S04",
+            "S04"
+          ],
+          "object_column": 8,
+          "object_name": "A_right_finger",
+          "value": 0.5047965925558607,
+          "position_before": [
+            -1.7287637752468423,
+            0.8203595196759259,
+            0.9757447193287038
+          ],
+          "position_after": [
+            -1.224,
+            0.82,
+            0.9700000000000001
+          ]
+        },
+        {
+          "from_sample_index": 558,
+          "to_sample_index": 559,
+          "from_video_s": 37.2,
+          "to_video_s": 37.266666666666666,
+          "source_clock_before_after": [
+            27.633333333333336,
+            27.705555555555556
+          ],
+          "scene_before_after": [
+            "S05",
+            "S05"
+          ],
+          "object_column": 6,
+          "object_name": "A_palm",
+          "value": 0.2701151524045866,
+          "position_before": [
+            -0.13,
+            0.36,
+            1.105
+          ],
+          "position_after": [
+            -0.4000682905296099,
+            0.36004042799352903,
+            1.1100311404815022
+          ]
+        },
+        {
+          "from_sample_index": 455,
+          "to_sample_index": 456,
+          "from_video_s": 30.333333333333332,
+          "to_video_s": 30.4,
+          "source_clock_before_after": [
+            21.479166666666668,
+            21.5
+          ],
+          "scene_before_after": [
+            "S04",
+            "S04"
+          ],
+          "object_column": 6,
+          "object_name": "A_palm",
+          "value": 0.2698431166564853,
+          "position_before": [
+            -1.8197817201967594,
+            0.8203595196759259,
+            1.1007447193287037
+          ],
+          "position_after": [
+            -1.55,
+            0.82,
+            1.095
+          ]
+        },
+        {
+          "from_sample_index": 567,
+          "to_sample_index": 568,
+          "from_video_s": 37.8,
+          "to_video_s": 37.86666666666667,
+          "source_clock_before_after": [
+            28.28333333333333,
+            28.355555555555554
+          ],
+          "scene_before_after": [
+            "S05",
+            "S05"
+          ],
+          "object_column": 7,
+          "object_name": "A_left_finger",
+          "value": 0.12961624739169253,
+          "position_before": [
+            -1.0651833139466254,
+            0.6732765218564023,
+            1.2263075911596613
+          ],
+          "position_after": [
+            -1.1690126253970203,
+            0.734743474235036,
+            1.2736537571810413
+          ]
+        },
+        {
+          "from_sample_index": 567,
+          "to_sample_index": 568,
+          "from_video_s": 37.8,
+          "to_video_s": 37.86666666666667,
+          "source_clock_before_after": [
+            28.28333333333333,
+            28.355555555555554
+          ],
+          "scene_before_after": [
+            "S05",
+            "S05"
+          ],
+          "object_column": 8,
+          "object_name": "A_right_finger",
+          "value": 0.12961624739169242,
+          "position_before": [
+            -0.7931833139466253,
+            0.6732765218564023,
+            1.2263075911596613
+          ],
+          "position_after": [
+            -0.8970126253970202,
+            0.734743474235036,
+            1.2736537571810413
+          ]
+        },
+        {
+          "from_sample_index": 567,
+          "to_sample_index": 568,
+          "from_video_s": 37.8,
+          "to_video_s": 37.86666666666667,
+          "source_clock_before_after": [
+            28.28333333333333,
+            28.355555555555554
+          ],
+          "scene_before_after": [
+            "S05",
+            "S05"
+          ],
+          "object_column": 6,
+          "object_name": "A_palm",
+          "value": 0.12961624739169242,
+          "position_before": [
+            -0.9291833139466253,
+            0.6732765218564023,
+            1.3513075911596613
+          ],
+          "position_after": [
+            -1.0330126253970202,
+            0.734743474235036,
+            1.3986537571810413
+          ]
+        },
+        {
+          "from_sample_index": 568,
+          "to_sample_index": 569,
+          "from_video_s": 37.86666666666667,
+          "to_video_s": 37.93333333333333,
+          "source_clock_before_after": [
+            28.355555555555554,
+            28.427777777777774
+          ],
+          "scene_before_after": [
+            "S05",
+            "S05"
+          ],
+          "object_column": 8,
+          "object_name": "A_right_finger",
+          "value": 0.1293692627995,
+          "position_before": [
+            -0.8970126253970202,
+            0.734743474235036,
+            1.2736537571810413
+          ],
+          "position_after": [
+            -1.0006440894273405,
+            0.7960933009409856,
+            1.3209097047788674
+          ]
+        }
+      ],
+      "rotation_degrees": [
+        {
+          "from_sample_index": 798,
+          "to_sample_index": 799,
+          "from_video_s": 53.2,
+          "to_video_s": 53.266666666666666,
+          "source_clock_before_after": [
+            39.28,
+            39.306666666666665
+          ],
+          "scene_before_after": [
+            "S07",
+            "S07"
+          ],
+          "object_column": 6,
+          "object_name": "A_palm",
+          "value": 0.0,
+          "position_before": [
+            -1.5500000000000003,
+            0.82,
+            1.1199999999999999
+          ],
+          "position_after": [
+            -1.5500000000000003,
+            0.82,
+            1.1199999999999999
+          ]
+        },
+        {
+          "from_sample_index": 1086,
+          "to_sample_index": 1087,
+          "from_video_s": 72.4,
+          "to_video_s": 72.46666666666667,
+          "source_clock_before_after": [
+            48.0,
+            48.0
+          ],
+          "scene_before_after": [
+            "S10",
+            "S10"
+          ],
+          "object_column": 7,
+          "object_name": "A_left_finger",
+          "value": 0.0,
+          "position_before": [
+            -1.786,
+            1.1,
+            1.555
+          ],
+          "position_after": [
+            -1.786,
+            1.1,
+            1.555
+          ]
+        },
+        {
+          "from_sample_index": 1470,
+          "to_sample_index": 1471,
+          "from_video_s": 98.0,
+          "to_video_s": 98.06666666666666,
+          "source_clock_before_after": [
+            63.166666666666664,
+            63.24444444444444
+          ],
+          "scene_before_after": [
+            "S14",
+            "S14"
+          ],
+          "object_column": 8,
+          "object_name": "A_right_finger",
+          "value": 0.0,
+          "position_before": [
+            -1.5139999999999998,
+            1.1,
+            1.555
+          ],
+          "position_after": [
+            -1.5139999999999998,
+            1.1,
+            1.555
+          ]
+        },
+        {
+          "from_sample_index": 1470,
+          "to_sample_index": 1471,
+          "from_video_s": 98.0,
+          "to_video_s": 98.06666666666666,
+          "source_clock_before_after": [
+            63.166666666666664,
+            63.24444444444444
+          ],
+          "scene_before_after": [
+            "S14",
+            "S14"
+          ],
+          "object_column": 7,
+          "object_name": "A_left_finger",
+          "value": 0.0,
+          "position_before": [
+            -1.786,
+            1.1,
+            1.555
+          ],
+          "position_after": [
+            -1.786,
+            1.1,
+            1.555
+          ]
+        },
+        {
+          "from_sample_index": 1470,
+          "to_sample_index": 1471,
+          "from_video_s": 98.0,
+          "to_video_s": 98.06666666666666,
+          "source_clock_before_after": [
+            63.166666666666664,
+            63.24444444444444
+          ],
+          "scene_before_after": [
+            "S14",
+            "S14"
+          ],
+          "object_column": 6,
+          "object_name": "A_palm",
+          "value": 0.0,
+          "position_before": [
+            -1.65,
+            1.1,
+            1.68
+          ],
+          "position_after": [
+            -1.65,
+            1.1,
+            1.68
+          ]
+        },
+        {
+          "from_sample_index": 1526,
+          "to_sample_index": 1527,
+          "from_video_s": 101.73333333333333,
+          "to_video_s": 101.8,
+          "source_clock_before_after": [
+            67.52222222222223,
+            67.6
+          ],
+          "scene_before_after": [
+            "S14",
+            "S14"
+          ],
+          "object_column": 6,
+          "object_name": "A_palm",
+          "value": 0.0,
+          "position_before": [
+            -1.65,
+            1.1,
+            1.68
+          ],
+          "position_after": [
+            -1.65,
+            1.1,
+            1.68
+          ]
+        },
+        {
+          "from_sample_index": 1526,
+          "to_sample_index": 1527,
+          "from_video_s": 101.73333333333333,
+          "to_video_s": 101.8,
+          "source_clock_before_after": [
+            67.52222222222223,
+            67.6
+          ],
+          "scene_before_after": [
+            "S14",
+            "S14"
+          ],
+          "object_column": 7,
+          "object_name": "A_left_finger",
+          "value": 0.0,
+          "position_before": [
+            -1.786,
+            1.1,
+            1.555
+          ],
+          "position_after": [
+            -1.786,
+            1.1,
+            1.555
+          ]
+        },
+        {
+          "from_sample_index": 1526,
+          "to_sample_index": 1527,
+          "from_video_s": 101.73333333333333,
+          "to_video_s": 101.8,
+          "source_clock_before_after": [
+            67.52222222222223,
+            67.6
+          ],
+          "scene_before_after": [
+            "S14",
+            "S14"
+          ],
+          "object_column": 8,
+          "object_name": "A_right_finger",
+          "value": 0.0,
+          "position_before": [
+            -1.5139999999999998,
+            1.1,
+            1.555
+          ],
+          "position_after": [
+            -1.5139999999999998,
+            1.1,
+            1.555
+          ]
+        }
+      ]
+    },
+    "B": {
+      "translation_display_units": [
+        {
+          "from_sample_index": 222,
+          "to_sample_index": 223,
+          "from_video_s": 14.8,
+          "to_video_s": 14.866666666666667,
+          "source_clock_before_after": [
+            11.68,
+            11.736666666666666
+          ],
+          "scene_before_after": [
+            "S03",
+            "S03"
+          ],
+          "object_column": 17,
+          "object_name": "B_left_finger",
+          "value": 0.1305352343824933,
+          "position_before": [
+            2.2329783264746226,
+            0.30116762688614535,
+            1.1256275994513032
+          ],
+          "position_after": [
+            2.35,
+            0.25999999999999995,
+            1.085
+          ]
+        },
+        {
+          "from_sample_index": 222,
+          "to_sample_index": 223,
+          "from_video_s": 14.8,
+          "to_video_s": 14.866666666666667,
+          "source_clock_before_after": [
+            11.68,
+            11.736666666666666
+          ],
+          "scene_before_after": [
+            "S03",
+            "S03"
+          ],
+          "object_column": 18,
+          "object_name": "B_right_finger",
+          "value": 0.12797878964005746,
+          "position_before": [
+            2.464978326474623,
+            0.30116762688614535,
+            1.1256275994513032
+          ],
+          "position_after": [
+            2.35,
+            0.34,
+            1.085
+          ]
+        },
+        {
+          "from_sample_index": 214,
+          "to_sample_index": 215,
+          "from_video_s": 14.266666666666667,
+          "to_video_s": 14.333333333333334,
+          "source_clock_before_after": [
+            11.226666666666667,
+            11.283333333333333
+          ],
+          "scene_before_after": [
+            "S03",
+            "S03"
+          ],
+          "object_column": 17,
+          "object_name": "B_left_finger",
+          "value": 0.10814210336300399,
+          "position_before": [
+            1.8568021744652743,
+            0.7310832291825435,
+            1.3567072356856171
+          ],
+          "position_after": [
+            1.9228177615200934,
+            0.6556368439770361,
+            1.316154803637657
+          ]
+        },
+        {
+          "from_sample_index": 214,
+          "to_sample_index": 215,
+          "from_video_s": 14.266666666666667,
+          "to_video_s": 14.333333333333334,
+          "source_clock_before_after": [
+            11.226666666666667,
+            11.283333333333333
+          ],
+          "scene_before_after": [
+            "S03",
+            "S03"
+          ],
+          "object_column": 18,
+          "object_name": "B_right_finger",
+          "value": 0.10814210336300399,
+          "position_before": [
+            2.0888021744652745,
+            0.7310832291825435,
+            1.3567072356856171
+          ],
+          "position_after": [
+            2.1548177615200936,
+            0.6556368439770361,
+            1.316154803637657
+          ]
+        },
+        {
+          "from_sample_index": 214,
+          "to_sample_index": 215,
+          "from_video_s": 14.266666666666667,
+          "to_video_s": 14.333333333333334,
+          "source_clock_before_after": [
+            11.226666666666667,
+            11.283333333333333
+          ],
+          "scene_before_after": [
+            "S03",
+            "S03"
+          ],
+          "object_column": 16,
+          "object_name": "B_palm",
+          "value": 0.10814210336300399,
+          "position_before": [
+            1.9728021744652744,
+            0.7310832291825435,
+            1.4817072356856171
+          ],
+          "position_after": [
+            2.0388177615200935,
+            0.6556368439770361,
+            1.441154803637657
+          ]
+        },
+        {
+          "from_sample_index": 213,
+          "to_sample_index": 214,
+          "from_video_s": 14.2,
+          "to_video_s": 14.266666666666667,
+          "source_clock_before_after": [
+            11.17,
+            11.226666666666667
+          ],
+          "scene_before_after": [
+            "S03",
+            "S03"
+          ],
+          "object_column": 16,
+          "object_name": "B_palm",
+          "value": 0.10672783378645646,
+          "position_before": [
+            1.907649931412894,
+            0.8055429355281211,
+            1.521729327846365
+          ],
+          "position_after": [
+            1.9728021744652744,
+            0.7310832291825435,
+            1.4817072356856171
+          ]
+        },
+        {
+          "from_sample_index": 213,
+          "to_sample_index": 214,
+          "from_video_s": 14.2,
+          "to_video_s": 14.266666666666667,
+          "source_clock_before_after": [
+            11.17,
+            11.226666666666667
+          ],
+          "scene_before_after": [
+            "S03",
+            "S03"
+          ],
+          "object_column": 17,
+          "object_name": "B_left_finger",
+          "value": 0.10672783378645646,
+          "position_before": [
+            1.791649931412894,
+            0.8055429355281211,
+            1.396729327846365
+          ],
+          "position_after": [
+            1.8568021744652743,
+            0.7310832291825435,
+            1.3567072356856171
+          ]
+        },
+        {
+          "from_sample_index": 213,
+          "to_sample_index": 214,
+          "from_video_s": 14.2,
+          "to_video_s": 14.266666666666667,
+          "source_clock_before_after": [
+            11.17,
+            11.226666666666667
+          ],
+          "scene_before_after": [
+            "S03",
+            "S03"
+          ],
+          "object_column": 18,
+          "object_name": "B_right_finger",
+          "value": 0.10672783378645646,
+          "position_before": [
+            2.023649931412894,
+            0.8055429355281211,
+            1.396729327846365
+          ],
+          "position_after": [
+            2.0888021744652745,
+            0.7310832291825435,
+            1.3567072356856171
+          ]
+        }
+      ],
+      "rotation_degrees": [
+        {
+          "from_sample_index": 222,
+          "to_sample_index": 223,
+          "from_video_s": 14.8,
+          "to_video_s": 14.866666666666667,
+          "source_clock_before_after": [
+            11.68,
+            11.736666666666666
+          ],
+          "scene_before_after": [
+            "S03",
+            "S03"
+          ],
+          "object_column": 18,
+          "object_name": "B_right_finger",
+          "value": 89.99999999999999,
+          "position_before": [
+            2.464978326474623,
+            0.30116762688614535,
+            1.1256275994513032
+          ],
+          "position_after": [
+            2.35,
+            0.34,
+            1.085
+          ]
+        },
+        {
+          "from_sample_index": 653,
+          "to_sample_index": 654,
+          "from_video_s": 43.53333333333333,
+          "to_video_s": 43.6,
+          "source_clock_before_after": [
+            34.49444444444444,
+            34.56666666666667
+          ],
+          "scene_before_after": [
+            "S05",
+            "S05"
+          ],
+          "object_column": 18,
+          "object_name": "B_right_finger",
+          "value": 89.99999999999999,
+          "position_before": [
+            0.07000000000000002,
+            0.51,
+            1.10501888330031
+          ],
+          "position_after": [
+            0.1362600960219494,
+            0.47362271604938305,
+            1.1473576406035668
+          ]
+        },
+        {
+          "from_sample_index": 653,
+          "to_sample_index": 654,
+          "from_video_s": 43.53333333333333,
+          "to_video_s": 43.6,
+          "source_clock_before_after": [
+            34.49444444444444,
+            34.56666666666667
+          ],
+          "scene_before_after": [
+            "S05",
+            "S05"
+          ],
+          "object_column": 17,
+          "object_name": "B_left_finger",
+          "value": 89.99999999999999,
+          "position_before": [
+            0.06999999999999999,
+            0.43,
+            1.10501888330031
+          ],
+          "position_after": [
+            0.021910987654321257,
+            0.47362271604938305,
+            1.1473576406035668
+          ]
+        },
+        {
+          "from_sample_index": 653,
+          "to_sample_index": 654,
+          "from_video_s": 43.53333333333333,
+          "to_video_s": 43.6,
+          "source_clock_before_after": [
+            34.49444444444444,
+            34.56666666666667
+          ],
+          "scene_before_after": [
+            "S05",
+            "S05"
+          ],
+          "object_column": 16,
+          "object_name": "B_palm",
+          "value": 89.99999999999999,
+          "position_before": [
+            0.07,
+            0.47,
+            1.23001888330031
+          ],
+          "position_after": [
+            0.07908554183813533,
+            0.47362271604938305,
+            1.2723576406035668
+          ]
+        },
+        {
+          "from_sample_index": 222,
+          "to_sample_index": 223,
+          "from_video_s": 14.8,
+          "to_video_s": 14.866666666666667,
+          "source_clock_before_after": [
+            11.68,
+            11.736666666666666
+          ],
+          "scene_before_after": [
+            "S03",
+            "S03"
+          ],
+          "object_column": 17,
+          "object_name": "B_left_finger",
+          "value": 89.99999999999999,
+          "position_before": [
+            2.2329783264746226,
+            0.30116762688614535,
+            1.1256275994513032
+          ],
+          "position_after": [
+            2.35,
+            0.25999999999999995,
+            1.085
+          ]
+        },
+        {
+          "from_sample_index": 222,
+          "to_sample_index": 223,
+          "from_video_s": 14.8,
+          "to_video_s": 14.866666666666667,
+          "source_clock_before_after": [
+            11.68,
+            11.736666666666666
+          ],
+          "scene_before_after": [
+            "S03",
+            "S03"
+          ],
+          "object_column": 16,
+          "object_name": "B_palm",
+          "value": 89.99999999999999,
+          "position_before": [
+            2.3489783264746227,
+            0.30116762688614535,
+            1.2506275994513032
+          ],
+          "position_after": [
+            2.35,
+            0.3,
+            1.21
+          ]
+        },
+        {
+          "from_sample_index": 1710,
+          "to_sample_index": 1711,
+          "from_video_s": 114.0,
+          "to_video_s": 114.06666666666666,
+          "source_clock_before_after": [
+            80.0,
+            80.06666666666666
+          ],
+          "scene_before_after": [
+            "S16",
+            "S16"
+          ],
+          "object_column": 17,
+          "object_name": "B_left_finger",
+          "value": 0.0,
+          "position_before": [
+            1.5339999999999998,
+            1.1,
+            1.555
+          ],
+          "position_after": [
+            1.5339999999999998,
+            1.1,
+            1.555
+          ]
+        },
+        {
+          "from_sample_index": 1383,
+          "to_sample_index": 1384,
+          "from_video_s": 92.2,
+          "to_video_s": 92.26666666666667,
+          "source_clock_before_after": [
+            61.300000000000004,
+            61.358333333333334
+          ],
+          "scene_before_after": [
+            "S12",
+            "S12"
+          ],
+          "object_column": 17,
+          "object_name": "B_left_finger",
+          "value": 0.0,
+          "position_before": [
+            1.5339999999999998,
+            1.1,
+            1.555
+          ],
+          "position_after": [
+            1.5339999999999998,
+            1.1,
+            1.555
+          ]
+        }
+      ]
+    },
+    "AB補助": {
+      "translation_display_units": [
+        {
+          "from_sample_index": 580,
+          "to_sample_index": 581,
+          "from_video_s": 38.666666666666664,
+          "to_video_s": 38.733333333333334,
+          "source_clock_before_after": [
+            29.22222222222222,
+            29.294444444444444
+          ],
+          "scene_before_after": [
+            "S05",
+            "S05"
+          ],
+          "object_column": 28,
+          "object_name": "AB補助_right_finger",
+          "value": 0.1956056200559766,
+          "position_before": [
+            0.7640914955080838,
+            0.3149413119048865,
+            1.4033023622738137
+          ],
+          "position_after": [
+            0.9509008707625172,
+            0.36705129552849164,
+            1.377839339647288
+          ]
+        },
+        {
+          "from_sample_index": 580,
+          "to_sample_index": 581,
+          "from_video_s": 38.666666666666664,
+          "to_video_s": 38.733333333333334,
+          "source_clock_before_after": [
+            29.22222222222222,
+            29.294444444444444
+          ],
+          "scene_before_after": [
+            "S05",
+            "S05"
+          ],
+          "object_column": 27,
+          "object_name": "AB補助_left_finger",
+          "value": 0.1956056200559766,
+          "position_before": [
+            0.5320914955080838,
+            0.3149413119048865,
+            1.4033023622738137
+          ],
+          "position_after": [
+            0.7189008707625172,
+            0.36705129552849164,
+            1.377839339647288
+          ]
+        },
+        {
+          "from_sample_index": 580,
+          "to_sample_index": 581,
+          "from_video_s": 38.666666666666664,
+          "to_video_s": 38.733333333333334,
+          "source_clock_before_after": [
+            29.22222222222222,
+            29.294444444444444
+          ],
+          "scene_before_after": [
+            "S05",
+            "S05"
+          ],
+          "object_column": 26,
+          "object_name": "AB補助_palm",
+          "value": 0.1956056200559766,
+          "position_before": [
+            0.6480914955080838,
+            0.3149413119048865,
+            1.5283023622738137
+          ],
+          "position_after": [
+            0.8349008707625172,
+            0.36705129552849164,
+            1.502839339647288
+          ]
+        },
+        {
+          "from_sample_index": 579,
+          "to_sample_index": 580,
+          "from_video_s": 38.6,
+          "to_video_s": 38.666666666666664,
+          "source_clock_before_after": [
+            29.150000000000002,
+            29.22222222222222
+          ],
+          "scene_before_after": [
+            "S05",
+            "S05"
+          ],
+          "object_column": 28,
+          "object_name": "AB補助_right_finger",
+          "value": 0.1937876162407417,
+          "position_before": [
+            0.5797640871525225,
+            0.26352366641623,
+            1.433851870773853
+          ],
+          "position_after": [
+            0.7640914955080838,
+            0.3149413119048865,
+            1.4033023622738137
+          ]
+        },
+        {
+          "from_sample_index": 579,
+          "to_sample_index": 580,
+          "from_video_s": 38.6,
+          "to_video_s": 38.666666666666664,
+          "source_clock_before_after": [
+            29.150000000000002,
+            29.22222222222222
+          ],
+          "scene_before_after": [
+            "S05",
+            "S05"
+          ],
+          "object_column": 26,
+          "object_name": "AB補助_palm",
+          "value": 0.1937876162407417,
+          "position_before": [
+            0.4637640871525225,
+            0.26352366641623,
+            1.558851870773853
+          ],
+          "position_after": [
+            0.6480914955080838,
+            0.3149413119048865,
+            1.5283023622738137
+          ]
+        },
+        {
+          "from_sample_index": 579,
+          "to_sample_index": 580,
+          "from_video_s": 38.6,
+          "to_video_s": 38.666666666666664,
+          "source_clock_before_after": [
+            29.150000000000002,
+            29.22222222222222
+          ],
+          "scene_before_after": [
+            "S05",
+            "S05"
+          ],
+          "object_column": 27,
+          "object_name": "AB補助_left_finger",
+          "value": 0.1937876162407417,
+          "position_before": [
+            0.3477640871525225,
+            0.26352366641623,
+            1.433851870773853
+          ],
+          "position_after": [
+            0.5320914955080838,
+            0.3149413119048865,
+            1.4033023622738137
+          ]
+        },
+        {
+          "from_sample_index": 581,
+          "to_sample_index": 582,
+          "from_video_s": 38.733333333333334,
+          "to_video_s": 38.8,
+          "source_clock_before_after": [
+            29.294444444444444,
+            29.366666666666664
+          ],
+          "scene_before_after": [
+            "S05",
+            "S05"
+          ],
+          "object_column": 28,
+          "object_name": "AB補助_right_finger",
+          "value": 0.19069125218092378,
+          "position_before": [
+            0.9509008707625172,
+            0.36705129552849164,
+            1.377839339647288
+          ],
+          "position_after": [
+            1.1337390989787601,
+            0.41805353813618046,
+            1.359615530768237
+          ]
+        },
+        {
+          "from_sample_index": 581,
+          "to_sample_index": 582,
+          "from_video_s": 38.733333333333334,
+          "to_video_s": 38.8,
+          "source_clock_before_after": [
+            29.294444444444444,
+            29.366666666666664
+          ],
+          "scene_before_after": [
+            "S05",
+            "S05"
+          ],
+          "object_column": 27,
+          "object_name": "AB補助_left_finger",
+          "value": 0.19069125218092367,
+          "position_before": [
+            0.7189008707625172,
+            0.36705129552849164,
+            1.377839339647288
+          ],
+          "position_after": [
+            0.90173909897876,
+            0.41805353813618046,
+            1.359615530768237
+          ]
+        }
+      ],
+      "rotation_degrees": [
+        {
+          "from_sample_index": 408,
+          "to_sample_index": 409,
+          "from_video_s": 27.2,
+          "to_video_s": 27.266666666666666,
+          "source_clock_before_after": [
+            20.5,
+            20.520833333333332
+          ],
+          "scene_before_after": [
+            "S04",
+            "S04"
+          ],
+          "object_column": 28,
+          "object_name": "AB補助_right_finger",
+          "value": 0.0,
+          "position_before": [
+            -1.5915000000000001,
+            0.53,
+            1.1649999999999998
+          ],
+          "position_after": [
+            -1.5915000000000001,
+            0.53,
+            1.1649999999999998
+          ]
+        },
+        {
+          "from_sample_index": 1458,
+          "to_sample_index": 1459,
+          "from_video_s": 97.2,
+          "to_video_s": 97.26666666666667,
+          "source_clock_before_after": [
+            62.233333333333334,
+            62.31111111111111
+          ],
+          "scene_before_after": [
+            "S14",
+            "S14"
+          ],
+          "object_column": 28,
+          "object_name": "AB補助_right_finger",
+          "value": 0.0,
+          "position_before": [
+            0.116,
+            1.75,
+            1.855
+          ],
+          "position_after": [
+            0.116,
+            1.75,
+            1.855
+          ]
+        },
+        {
+          "from_sample_index": 106,
+          "to_sample_index": 107,
+          "from_video_s": 7.066666666666666,
+          "to_video_s": 7.133333333333334,
+          "source_clock_before_after": [
+            8.066666666666666,
+            8.133333333333333
+          ],
+          "scene_before_after": [
+            "S01",
+            "S01"
+          ],
+          "object_column": 28,
+          "object_name": "AB補助_right_finger",
+          "value": 0.0,
+          "position_before": [
+            0.116,
+            1.75,
+            1.8549999999999998
+          ],
+          "position_after": [
+            0.116,
+            1.75,
+            1.8549999999999998
+          ]
+        },
+        {
+          "from_sample_index": 1242,
+          "to_sample_index": 1243,
+          "from_video_s": 82.8,
+          "to_video_s": 82.86666666666666,
+          "source_clock_before_after": [
+            53.68,
+            53.72
+          ],
+          "scene_before_after": [
+            "S11",
+            "S11"
+          ],
+          "object_column": 26,
+          "object_name": "AB補助_palm",
+          "value": 0.0,
+          "position_before": [
+            0.0,
+            1.75,
+            1.98
+          ],
+          "position_after": [
+            0.0,
+            1.75,
+            1.98
+          ]
+        },
+        {
+          "from_sample_index": 1383,
+          "to_sample_index": 1384,
+          "from_video_s": 92.2,
+          "to_video_s": 92.26666666666667,
+          "source_clock_before_after": [
+            61.300000000000004,
+            61.358333333333334
+          ],
+          "scene_before_after": [
+            "S12",
+            "S12"
+          ],
+          "object_column": 26,
+          "object_name": "AB補助_palm",
+          "value": 0.0,
+          "position_before": [
+            0.0,
+            1.75,
+            1.98
+          ],
+          "position_after": [
+            0.0,
+            1.75,
+            1.98
+          ]
+        },
+        {
+          "from_sample_index": 1383,
+          "to_sample_index": 1384,
+          "from_video_s": 92.2,
+          "to_video_s": 92.26666666666667,
+          "source_clock_before_after": [
+            61.300000000000004,
+            61.358333333333334
+          ],
+          "scene_before_after": [
+            "S12",
+            "S12"
+          ],
+          "object_column": 27,
+          "object_name": "AB補助_left_finger",
+          "value": 0.0,
+          "position_before": [
+            -0.116,
+            1.75,
+            1.855
+          ],
+          "position_after": [
+            -0.116,
+            1.75,
+            1.855
+          ]
+        },
+        {
+          "from_sample_index": 1383,
+          "to_sample_index": 1384,
+          "from_video_s": 92.2,
+          "to_video_s": 92.26666666666667,
+          "source_clock_before_after": [
+            61.300000000000004,
+            61.358333333333334
+          ],
+          "scene_before_after": [
+            "S12",
+            "S12"
+          ],
+          "object_column": 28,
+          "object_name": "AB補助_right_finger",
+          "value": 0.0,
+          "position_before": [
+            0.116,
+            1.75,
+            1.855
+          ],
+          "position_after": [
+            0.116,
+            1.75,
+            1.855
+          ]
+        },
+        {
+          "from_sample_index": 1242,
+          "to_sample_index": 1243,
+          "from_video_s": 82.8,
+          "to_video_s": 82.86666666666666,
+          "source_clock_before_after": [
+            53.68,
+            53.72
+          ],
+          "scene_before_after": [
+            "S11",
+            "S11"
+          ],
+          "object_column": 27,
+          "object_name": "AB補助_left_finger",
+          "value": 0.0,
+          "position_before": [
+            -0.116,
+            1.75,
+            1.855
+          ],
+          "position_after": [
+            -0.116,
+            1.75,
+            1.855
+          ]
+        }
+      ]
+    },
+    "C主": {
+      "translation_display_units": [
+        {
+          "from_sample_index": 1281,
+          "to_sample_index": 1282,
+          "from_video_s": 85.4,
+          "to_video_s": 85.46666666666667,
+          "source_clock_before_after": [
+            55.35000000000001,
+            55.40833333333333
+          ],
+          "scene_before_after": [
+            "S12",
+            "S12"
+          ],
+          "object_column": 38,
+          "object_name": "C主_right_finger",
+          "value": 0.1768305891030967,
+          "position_before": [
+            -0.664161392843936,
+            -1.289892578124973,
+            1.422822265624989
+          ],
+          "position_after": [
+            -0.6701673268575876,
+            -1.1265658908420153,
+            1.355313901548033
+          ]
+        },
+        {
+          "from_sample_index": 1281,
+          "to_sample_index": 1282,
+          "from_video_s": 85.4,
+          "to_video_s": 85.46666666666667,
+          "source_clock_before_after": [
+            55.35000000000001,
+            55.40833333333333
+          ],
+          "scene_before_after": [
+            "S12",
+            "S12"
+          ],
+          "object_column": 36,
+          "object_name": "C主_palm",
+          "value": 0.17674198236204633,
+          "position_before": [
+            -0.8081347656250004,
+            -1.289892578124973,
+            1.547822265624989
+          ],
+          "position_after": [
+            -0.8103124547887732,
+            -1.1265658908420153,
+            1.480313901548033
+          ]
+        },
+        {
+          "from_sample_index": 1281,
+          "to_sample_index": 1282,
+          "from_video_s": 85.4,
+          "to_video_s": 85.46666666666667,
+          "source_clock_before_after": [
+            55.35000000000001,
+            55.40833333333333
+          ],
+          "scene_before_after": [
+            "S12",
+            "S12"
+          ],
+          "object_column": 37,
+          "object_name": "C主_left_finger",
+          "value": 0.17673627339413045,
+          "position_before": [
+            -0.9521081384060648,
+            -1.289892578124973,
+            1.422822265624989
+          ],
+          "position_after": [
+            -0.9504575827199588,
+            -1.1265658908420153,
+            1.355313901548033
+          ]
+        },
+        {
+          "from_sample_index": 1282,
+          "to_sample_index": 1283,
+          "from_video_s": 85.46666666666667,
+          "to_video_s": 85.53333333333333,
+          "source_clock_before_after": [
+            55.40833333333333,
+            55.46666666666667
+          ],
+          "scene_before_after": [
+            "S12",
+            "S12"
+          ],
+          "object_column": 38,
+          "object_name": "C主_right_finger",
+          "value": 0.17574168755121805,
+          "position_before": [
+            -0.6701673268575876,
+            -1.1265658908420153,
+            1.355313901548033
+          ],
+          "position_after": [
+            -0.6758478796844185,
+            -0.9642361111111013,
+            1.2882175925925885
+          ]
+        },
+        {
+          "from_sample_index": 1282,
+          "to_sample_index": 1283,
+          "from_video_s": 85.46666666666667,
+          "to_video_s": 85.53333333333333,
+          "source_clock_before_after": [
+            55.40833333333333,
+            55.46666666666667
+          ],
+          "scene_before_after": [
+            "S12",
+            "S12"
+          ],
+          "object_column": 36,
+          "object_name": "C主_palm",
+          "value": 0.17566319101501657,
+          "position_before": [
+            -0.8103124547887732,
+            -1.1265658908420153,
+            1.480313901548033
+          ],
+          "position_after": [
+            -0.8124768518518519,
+            -0.9642361111111013,
+            1.4132175925925885
+          ]
+        },
+        {
+          "from_sample_index": 1282,
+          "to_sample_index": 1283,
+          "from_video_s": 85.46666666666667,
+          "to_video_s": 85.53333333333333,
+          "source_clock_before_after": [
+            55.40833333333333,
+            55.46666666666667
+          ],
+          "scene_before_after": [
+            "S12",
+            "S12"
+          ],
+          "object_column": 37,
+          "object_name": "C主_left_finger",
+          "value": 0.17565505775387277,
+          "position_before": [
+            -0.9504575827199588,
+            -1.1265658908420153,
+            1.355313901548033
+          ],
+          "position_after": [
+            -0.9491058240192853,
+            -0.9642361111111013,
+            1.2882175925925885
+          ]
+        },
+        {
+          "from_sample_index": 628,
+          "to_sample_index": 629,
+          "from_video_s": 41.86666666666667,
+          "to_video_s": 41.93333333333333,
+          "source_clock_before_after": [
+            32.68888888888889,
+            32.761111111111106
+          ],
+          "scene_before_after": [
+            "S05",
+            "S05"
+          ],
+          "object_column": 38,
+          "object_name": "C主_right_finger",
+          "value": 0.17072516252910774,
+          "position_before": [
+            -0.44623499299348635,
+            -0.8529662091556436,
+            1.6442683107249911
+          ],
+          "position_after": [
+            -0.4217554702644448,
+            -0.6840805328754108,
+            1.6392222791241176
+          ]
+        },
+        {
+          "from_sample_index": 628,
+          "to_sample_index": 629,
+          "from_video_s": 41.86666666666667,
+          "to_video_s": 41.93333333333333,
+          "source_clock_before_after": [
+            32.68888888888889,
+            32.761111111111106
+          ],
+          "scene_before_after": [
+            "S05",
+            "S05"
+          ],
+          "object_column": 37,
+          "object_name": "C主_left_finger",
+          "value": 0.17072516252910774,
+          "position_before": [
+            -0.6782349929934863,
+            -0.8529662091556436,
+            1.6442683107249911
+          ],
+          "position_after": [
+            -0.6537554702644448,
+            -0.6840805328754108,
+            1.6392222791241176
+          ]
+        }
+      ],
+      "rotation_degrees": [
+        {
+          "from_sample_index": 1297,
+          "to_sample_index": 1298,
+          "from_video_s": 86.46666666666667,
+          "to_video_s": 86.53333333333333,
+          "source_clock_before_after": [
+            56.28333333333333,
+            56.34166666666667
+          ],
+          "scene_before_after": [
+            "S12",
+            "S12"
+          ],
+          "object_column": 38,
+          "object_name": "C主_right_finger",
+          "value": 89.99999999999999,
+          "position_before": [
+            -0.7637718518518518,
+            -0.4,
+            1.055
+          ],
+          "position_after": [
+            -0.82,
+            -0.3425,
+            1.058572609599396
+          ]
+        },
+        {
+          "from_sample_index": 1297,
+          "to_sample_index": 1298,
+          "from_video_s": 86.46666666666667,
+          "to_video_s": 86.53333333333333,
+          "source_clock_before_after": [
+            56.28333333333333,
+            56.34166666666667
+          ],
+          "scene_before_after": [
+            "S12",
+            "S12"
+          ],
+          "object_column": 37,
+          "object_name": "C主_left_finger",
+          "value": 89.99999999999999,
+          "position_before": [
+            -0.8762281481481481,
+            -0.4,
+            1.055
+          ],
+          "position_after": [
+            -0.82,
+            -0.4575,
+            1.058572609599396
+          ]
+        },
+        {
+          "from_sample_index": 1297,
+          "to_sample_index": 1298,
+          "from_video_s": 86.46666666666667,
+          "to_video_s": 86.53333333333333,
+          "source_clock_before_after": [
+            56.28333333333333,
+            56.34166666666667
+          ],
+          "scene_before_after": [
+            "S12",
+            "S12"
+          ],
+          "object_column": 36,
+          "object_name": "C主_palm",
+          "value": 89.99999999999999,
+          "position_before": [
+            -0.82,
+            -0.4,
+            1.18
+          ],
+          "position_after": [
+            -0.82,
+            -0.4,
+            1.183572609599396
+          ]
+        },
+        {
+          "from_sample_index": 776,
+          "to_sample_index": 777,
+          "from_video_s": 51.733333333333334,
+          "to_video_s": 51.8,
+          "source_clock_before_after": [
+            38.693333333333335,
+            38.72
+          ],
+          "scene_before_after": [
+            "S07",
+            "S07"
+          ],
+          "object_column": 37,
+          "object_name": "C主_left_finger",
+          "value": 4.497083333332894,
+          "position_before": [
+            -0.4112369332640891,
+            0.06749731115037272,
+            1.5622172685185183
+          ],
+          "position_after": [
+            -0.43347514213596927,
+            0.0902986130818878,
+            1.5482462500000005
+          ]
+        },
+        {
+          "from_sample_index": 776,
+          "to_sample_index": 777,
+          "from_video_s": 51.733333333333334,
+          "to_video_s": 51.8,
+          "source_clock_before_after": [
+            38.693333333333335,
+            38.72
+          ],
+          "scene_before_after": [
+            "S07",
+            "S07"
+          ],
+          "object_column": 36,
+          "object_name": "C主_palm",
+          "value": 4.497083333332894,
+          "position_before": [
+            -0.13,
+            0.36,
+            1.6872172685185183
+          ],
+          "position_after": [
+            -0.13,
+            0.36,
+            1.6732462500000005
+          ]
+        },
+        {
+          "from_sample_index": 776,
+          "to_sample_index": 777,
+          "from_video_s": 51.733333333333334,
+          "to_video_s": 51.8,
+          "source_clock_before_after": [
+            38.693333333333335,
+            38.72
+          ],
+          "scene_before_after": [
+            "S07",
+            "S07"
+          ],
+          "object_column": 38,
+          "object_name": "C主_right_finger",
+          "value": 4.497083333332894,
+          "position_before": [
+            0.1512369332640891,
+            0.6525026888496273,
+            1.5622172685185183
+          ],
+          "position_after": [
+            0.17347514213596926,
+            0.6297013869181122,
+            1.5482462500000005
+          ]
+        },
+        {
+          "from_sample_index": 775,
+          "to_sample_index": 776,
+          "from_video_s": 51.666666666666664,
+          "to_video_s": 51.733333333333334,
+          "source_clock_before_after": [
+            38.666666666666664,
+            38.693333333333335
+          ],
+          "scene_before_after": [
+            "S07",
+            "S07"
+          ],
+          "object_column": 37,
+          "object_name": "C主_left_finger",
+          "value": 4.4870833333334925,
+          "position_before": [
+            -0.3842014132338701,
+            0.05039818335641172,
+            1.5730960648148151
+          ],
+          "position_after": [
+            -0.4112369332640891,
+            0.06749731115037272,
+            1.5622172685185183
+          ]
+        },
+        {
+          "from_sample_index": 775,
+          "to_sample_index": 776,
+          "from_video_s": 51.666666666666664,
+          "to_video_s": 51.733333333333334,
+          "source_clock_before_after": [
+            38.666666666666664,
+            38.693333333333335
+          ],
+          "scene_before_after": [
+            "S07",
+            "S07"
+          ],
+          "object_column": 36,
+          "object_name": "C主_palm",
+          "value": 4.4870833333334925,
+          "position_before": [
+            -0.13,
+            0.36000000000000004,
+            1.6980960648148151
+          ],
+          "position_after": [
+            -0.13,
+            0.36,
+            1.6872172685185183
+          ]
+        }
+      ]
+    },
+    "C補助": {
+      "translation_display_units": [
+        {
+          "from_sample_index": 541,
+          "to_sample_index": 542,
+          "from_video_s": 36.06666666666667,
+          "to_video_s": 36.13333333333333,
+          "source_clock_before_after": [
+            26.40555555555556,
+            26.477777777777778
+          ],
+          "scene_before_after": [
+            "S05",
+            "S05"
+          ],
+          "object_column": 46,
+          "object_name": "C補助_palm",
+          "value": 0.1266047544751524,
+          "position_before": [
+            0.2554630205893013,
+            -0.9068056596357789,
+            1.6411230070886158
+          ],
+          "position_after": [
+            0.1966396081597019,
+            -0.8005633739210942,
+            1.6053298969699046
+          ]
+        },
+        {
+          "from_sample_index": 541,
+          "to_sample_index": 542,
+          "from_video_s": 36.06666666666667,
+          "to_video_s": 36.13333333333333,
+          "source_clock_before_after": [
+            26.40555555555556,
+            26.477777777777778
+          ],
+          "scene_before_after": [
+            "S05",
+            "S05"
+          ],
+          "object_column": 47,
+          "object_name": "C補助_left_finger",
+          "value": 0.1266047544751524,
+          "position_before": [
+            0.13946302058930132,
+            -0.9068056596357789,
+            1.5161230070886158
+          ],
+          "position_after": [
+            0.0806396081597019,
+            -0.8005633739210942,
+            1.4803298969699046
+          ]
+        },
+        {
+          "from_sample_index": 541,
+          "to_sample_index": 542,
+          "from_video_s": 36.06666666666667,
+          "to_video_s": 36.13333333333333,
+          "source_clock_before_after": [
+            26.40555555555556,
+            26.477777777777778
+          ],
+          "scene_before_after": [
+            "S05",
+            "S05"
+          ],
+          "object_column": 48,
+          "object_name": "C補助_right_finger",
+          "value": 0.12660475447515238,
+          "position_before": [
+            0.3714630205893013,
+            -0.9068056596357789,
+            1.5161230070886158
+          ],
+          "position_after": [
+            0.31263960815970193,
+            -0.8005633739210942,
+            1.4803298969699046
+          ]
+        },
+        {
+          "from_sample_index": 542,
+          "to_sample_index": 543,
+          "from_video_s": 36.13333333333333,
+          "to_video_s": 36.2,
+          "source_clock_before_after": [
+            26.477777777777778,
+            26.550000000000004
+          ],
+          "scene_before_after": [
+            "S05",
+            "S05"
+          ],
+          "object_column": 48,
+          "object_name": "C補助_right_finger",
+          "value": 0.12621742075599207,
+          "position_before": [
+            0.31263960815970193,
+            -0.8005633739210942,
+            1.4803298969699046
+          ],
+          "position_after": [
+            0.2546342592592561,
+            -0.6957986111111054,
+            1.4404480555555532
+          ]
+        },
+        {
+          "from_sample_index": 542,
+          "to_sample_index": 543,
+          "from_video_s": 36.13333333333333,
+          "to_video_s": 36.2,
+          "source_clock_before_after": [
+            26.477777777777778,
+            26.550000000000004
+          ],
+          "scene_before_after": [
+            "S05",
+            "S05"
+          ],
+          "object_column": 47,
+          "object_name": "C補助_left_finger",
+          "value": 0.12621742075599207,
+          "position_before": [
+            0.0806396081597019,
+            -0.8005633739210942,
+            1.4803298969699046
+          ],
+          "position_after": [
+            0.022634259259256093,
+            -0.6957986111111054,
+            1.4404480555555532
+          ]
+        },
+        {
+          "from_sample_index": 542,
+          "to_sample_index": 543,
+          "from_video_s": 36.13333333333333,
+          "to_video_s": 36.2,
+          "source_clock_before_after": [
+            26.477777777777778,
+            26.550000000000004
+          ],
+          "scene_before_after": [
+            "S05",
+            "S05"
+          ],
+          "object_column": 46,
+          "object_name": "C補助_palm",
+          "value": 0.12621742075599207,
+          "position_before": [
+            0.1966396081597019,
+            -0.8005633739210942,
+            1.6053298969699046
+          ],
+          "position_after": [
+            0.1386342592592561,
+            -0.6957986111111054,
+            1.5654480555555532
+          ]
+        },
+        {
+          "from_sample_index": 540,
+          "to_sample_index": 541,
+          "from_video_s": 36.0,
+          "to_video_s": 36.06666666666667,
+          "source_clock_before_after": [
+            26.333333333333332,
+            26.40555555555556
+          ],
+          "scene_before_after": [
+            "S05",
+            "S05"
+          ],
+          "object_column": 47,
+          "object_name": "C補助_left_finger",
+          "value": 0.12541854700482793,
+          "position_before": [
+            0.19834486612813207,
+            -1.01315348270081,
+            1.5469917733106784
+          ],
+          "position_after": [
+            0.13946302058930132,
+            -0.9068056596357789,
+            1.5161230070886158
+          ]
+        },
+        {
+          "from_sample_index": 540,
+          "to_sample_index": 541,
+          "from_video_s": 36.0,
+          "to_video_s": 36.06666666666667,
+          "source_clock_before_after": [
+            26.333333333333332,
+            26.40555555555556
+          ],
+          "scene_before_after": [
+            "S05",
+            "S05"
+          ],
+          "object_column": 48,
+          "object_name": "C補助_right_finger",
+          "value": 0.12541854700482793,
+          "position_before": [
+            0.43034486612813205,
+            -1.01315348270081,
+            1.5469917733106784
+          ],
+          "position_after": [
+            0.3714630205893013,
+            -0.9068056596357789,
+            1.5161230070886158
+          ]
+        }
+      ],
+      "rotation_degrees": [
+        {
+          "from_sample_index": 591,
+          "to_sample_index": 592,
+          "from_video_s": 39.4,
+          "to_video_s": 39.46666666666667,
+          "source_clock_before_after": [
+            30.016666666666666,
+            30.08888888888889
+          ],
+          "scene_before_after": [
+            "S05",
+            "S05"
+          ],
+          "object_column": 47,
+          "object_name": "C補助_left_finger",
+          "value": 0.0,
+          "position_before": [
+            -0.28850000000000003,
+            0.07,
+            1.175
+          ],
+          "position_after": [
+            -0.28850000000000003,
+            0.07,
+            1.175
+          ]
+        },
+        {
+          "from_sample_index": 53,
+          "to_sample_index": 54,
+          "from_video_s": 3.533333333333333,
+          "to_video_s": 3.6,
+          "source_clock_before_after": [
+            4.533333333333333,
+            4.6
+          ],
+          "scene_before_after": [
+            "S01",
+            "S01"
+          ],
+          "object_column": 46,
+          "object_name": "C補助_palm",
+          "value": 0.0,
+          "position_before": [
+            0.7499999999999999,
+            -1.7999999999999998,
+            1.7799999999999998
+          ],
+          "position_after": [
+            0.7500000000000001,
+            -1.8000000000000003,
+            1.78
+          ]
+        },
+        {
+          "from_sample_index": 1253,
+          "to_sample_index": 1254,
+          "from_video_s": 83.53333333333333,
+          "to_video_s": 83.6,
+          "source_clock_before_after": [
+            54.12,
+            54.16
+          ],
+          "scene_before_after": [
+            "S11",
+            "S11"
+          ],
+          "object_column": 46,
+          "object_name": "C補助_palm",
+          "value": 0.0,
+          "position_before": [
+            -0.17,
+            -1.38,
+            1.2
+          ],
+          "position_after": [
+            -0.17,
+            -1.38,
+            1.2
+          ]
+        },
+        {
+          "from_sample_index": 873,
+          "to_sample_index": 874,
+          "from_video_s": 58.2,
+          "to_video_s": 58.266666666666666,
+          "source_clock_before_after": [
+            43.2,
+            43.266666666666666
+          ],
+          "scene_before_after": [
+            "S08",
+            "S08"
+          ],
+          "object_column": 46,
+          "object_name": "C補助_palm",
+          "value": 0.0,
+          "position_before": [
+            -0.16889791999999978,
+            -0.39322496000000273,
+            2.14
+          ],
+          "position_after": [
+            -0.16370007703703712,
+            -0.45559907555555457,
+            2.14
+          ]
+        },
+        {
+          "from_sample_index": 873,
+          "to_sample_index": 874,
+          "from_video_s": 58.2,
+          "to_video_s": 58.266666666666666,
+          "source_clock_before_after": [
+            43.2,
+            43.266666666666666
+          ],
+          "scene_before_after": [
+            "S08",
+            "S08"
+          ],
+          "object_column": 47,
+          "object_name": "C補助_left_finger",
+          "value": 0.0,
+          "position_before": [
+            -0.3048979199999998,
+            -0.39322496000000273,
+            2.015
+          ],
+          "position_after": [
+            -0.29970007703703716,
+            -0.45559907555555457,
+            2.015
+          ]
+        },
+        {
+          "from_sample_index": 873,
+          "to_sample_index": 874,
+          "from_video_s": 58.2,
+          "to_video_s": 58.266666666666666,
+          "source_clock_before_after": [
+            43.2,
+            43.266666666666666
+          ],
+          "scene_before_after": [
+            "S08",
+            "S08"
+          ],
+          "object_column": 48,
+          "object_name": "C補助_right_finger",
+          "value": 0.0,
+          "position_before": [
+            -0.032897919999999775,
+            -0.39322496000000273,
+            2.015
+          ],
+          "position_after": [
+            -0.027700077037037113,
+            -0.45559907555555457,
+            2.015
+          ]
+        },
+        {
+          "from_sample_index": 346,
+          "to_sample_index": 347,
+          "from_video_s": 23.066666666666666,
+          "to_video_s": 23.133333333333333,
+          "source_clock_before_after": [
+            18.706666666666667,
+            18.763333333333335
+          ],
+          "scene_before_after": [
+            "S03",
+            "S03"
+          ],
+          "object_column": 48,
+          "object_name": "C補助_right_finger",
+          "value": 0.0,
+          "position_before": [
+            0.866,
+            -1.8,
+            1.655
+          ],
+          "position_after": [
+            0.866,
+            -1.8,
+            1.655
+          ]
+        },
+        {
+          "from_sample_index": 346,
+          "to_sample_index": 347,
+          "from_video_s": 23.066666666666666,
+          "to_video_s": 23.133333333333333,
+          "source_clock_before_after": [
+            18.706666666666667,
+            18.763333333333335
+          ],
+          "scene_before_after": [
+            "S03",
+            "S03"
+          ],
+          "object_column": 47,
+          "object_name": "C補助_left_finger",
+          "value": 0.0,
+          "position_before": [
+            0.634,
+            -1.8,
+            1.655
+          ],
+          "position_after": [
+            0.634,
+            -1.8,
+            1.655
+          ]
+        }
+      ]
+    },
+    "infeed": {
+      "translation_display_units": [
+        {
+          "from_sample_index": 49,
+          "to_sample_index": 50,
+          "from_video_s": 3.2666666666666666,
+          "to_video_s": 3.3333333333333335,
+          "source_clock_before_after": [
+            4.266666666666667,
+            4.333333333333334
+          ],
+          "scene_before_after": [
+            "S01",
+            "S01"
+          ],
+          "object_column": 255,
+          "object_name": "infeed_left_finger",
+          "value": 0.11601427394088944,
+          "position_before": [
+            -5.183592592592593,
+            -0.15,
+            1.4672633744855965
+          ],
+          "position_after": [
+            -5.165074074074074,
+            -0.15,
+            1.352736625514402
+          ]
+        },
+        {
+          "from_sample_index": 49,
+          "to_sample_index": 50,
+          "from_video_s": 3.2666666666666666,
+          "to_video_s": 3.3333333333333335,
+          "source_clock_before_after": [
+            4.266666666666667,
+            4.333333333333334
+          ],
+          "scene_before_after": [
+            "S01",
+            "S01"
+          ],
+          "object_column": 256,
+          "object_name": "infeed_right_finger",
+          "value": 0.11601427394088944,
+          "position_before": [
+            -4.216407407407408,
+            -0.15,
+            1.4672633744855965
+          ],
+          "position_after": [
+            -4.234925925925927,
+            -0.15,
+            1.352736625514402
+          ]
+        },
+        {
+          "from_sample_index": 49,
+          "to_sample_index": 50,
+          "from_video_s": 3.2666666666666666,
+          "to_video_s": 3.3333333333333335,
+          "source_clock_before_after": [
+            4.266666666666667,
+            4.333333333333334
+          ],
+          "scene_before_after": [
+            "S01",
+            "S01"
+          ],
+          "object_column": 254,
+          "object_name": "infeed_palm",
+          "value": 0.11452674897119453,
+          "position_before": [
+            -4.7,
+            -0.15,
+            1.5922633744855965
+          ],
+          "position_after": [
+            -4.7,
+            -0.15,
+            1.477736625514402
+          ]
+        },
+        {
+          "from_sample_index": 50,
+          "to_sample_index": 51,
+          "from_video_s": 3.3333333333333335,
+          "to_video_s": 3.4,
+          "source_clock_before_after": [
+            4.333333333333334,
+            4.4
+          ],
+          "scene_before_after": [
+            "S01",
+            "S01"
+          ],
+          "object_column": 256,
+          "object_name": "infeed_right_finger",
+          "value": 0.11147820778529435,
+          "position_before": [
+            -4.234925925925927,
+            -0.15,
+            1.352736625514402
+          ],
+          "position_after": [
+            -4.259,
+            -0.15,
+            1.243888888888888
+          ]
+        },
+        {
+          "from_sample_index": 50,
+          "to_sample_index": 51,
+          "from_video_s": 3.3333333333333335,
+          "to_video_s": 3.4,
+          "source_clock_before_after": [
+            4.333333333333334,
+            4.4
+          ],
+          "scene_before_after": [
+            "S01",
+            "S01"
+          ],
+          "object_column": 255,
+          "object_name": "infeed_left_finger",
+          "value": 0.11147820778529435,
+          "position_before": [
+            -5.165074074074074,
+            -0.15,
+            1.352736625514402
+          ],
+          "position_after": [
+            -5.141,
+            -0.15,
+            1.243888888888888
+          ]
+        },
+        {
+          "from_sample_index": 48,
+          "to_sample_index": 49,
+          "from_video_s": 3.2,
+          "to_video_s": 3.2666666666666666,
+          "source_clock_before_after": [
+            4.2,
+            4.266666666666667
+          ],
+          "scene_before_after": [
+            "S01",
+            "S01"
+          ],
+          "object_column": 256,
+          "object_name": "infeed_right_finger",
+          "value": 0.10909949336727708,
+          "position_before": [
+            -4.2090000000000005,
+            -0.15,
+            1.5761111111111104
+          ],
+          "position_after": [
+            -4.216407407407408,
+            -0.15,
+            1.4672633744855965
+          ]
+        },
+        {
+          "from_sample_index": 48,
+          "to_sample_index": 49,
+          "from_video_s": 3.2,
+          "to_video_s": 3.2666666666666666,
+          "source_clock_before_after": [
+            4.2,
+            4.266666666666667
+          ],
+          "scene_before_after": [
+            "S01",
+            "S01"
+          ],
+          "object_column": 255,
+          "object_name": "infeed_left_finger",
+          "value": 0.10909949336727708,
+          "position_before": [
+            -5.191,
+            -0.15,
+            1.5761111111111104
+          ],
+          "position_after": [
+            -5.183592592592593,
+            -0.15,
+            1.4672633744855965
+          ]
+        },
+        {
+          "from_sample_index": 50,
+          "to_sample_index": 51,
+          "from_video_s": 3.3333333333333335,
+          "to_video_s": 3.4,
+          "source_clock_before_after": [
+            4.333333333333334,
+            4.4
+          ],
+          "scene_before_after": [
+            "S01",
+            "S01"
+          ],
+          "object_column": 254,
+          "object_name": "infeed_palm",
+          "value": 0.10884773662551406,
+          "position_before": [
+            -4.7,
+            -0.15,
+            1.477736625514402
+          ],
+          "position_after": [
+            -4.7,
+            -0.15,
+            1.368888888888888
+          ]
+        }
+      ],
+      "rotation_degrees": [
+        {
+          "from_sample_index": 1102,
+          "to_sample_index": 1103,
+          "from_video_s": 73.46666666666667,
+          "to_video_s": 73.53333333333333,
+          "source_clock_before_after": [
+            48.0,
+            48.0
+          ],
+          "scene_before_after": [
+            "S10",
+            "S10"
+          ],
+          "object_column": 254,
+          "object_name": "infeed_palm",
+          "value": 0.0,
+          "position_before": [
+            -3.7,
+            -1.2,
+            1.8299999999999998
+          ],
+          "position_after": [
+            -3.7,
+            -1.2,
+            1.8299999999999998
+          ]
+        },
+        {
+          "from_sample_index": 189,
+          "to_sample_index": 190,
+          "from_video_s": 12.6,
+          "to_video_s": 12.666666666666666,
+          "source_clock_before_after": [
+            11.0,
+            11.0
+          ],
+          "scene_before_after": [
+            "S02",
+            "S02"
+          ],
+          "object_column": 255,
+          "object_name": "infeed_left_finger",
+          "value": 0.0,
+          "position_before": [
+            -4.191,
+            -1.2,
+            1.7049999999999998
+          ],
+          "position_after": [
+            -4.191,
+            -1.2,
+            1.7049999999999998
+          ]
+        },
+        {
+          "from_sample_index": 652,
+          "to_sample_index": 653,
+          "from_video_s": 43.46666666666667,
+          "to_video_s": 43.53333333333333,
+          "source_clock_before_after": [
+            34.422222222222224,
+            34.49444444444444
+          ],
+          "scene_before_after": [
+            "S05",
+            "S05"
+          ],
+          "object_column": 254,
+          "object_name": "infeed_palm",
+          "value": 0.0,
+          "position_before": [
+            -3.7,
+            -1.2,
+            1.8299999999999998
+          ],
+          "position_after": [
+            -3.7,
+            -1.1999999999999997,
+            1.8299999999999998
+          ]
+        },
+        {
+          "from_sample_index": 652,
+          "to_sample_index": 653,
+          "from_video_s": 43.46666666666667,
+          "to_video_s": 43.53333333333333,
+          "source_clock_before_after": [
+            34.422222222222224,
+            34.49444444444444
+          ],
+          "scene_before_after": [
+            "S05",
+            "S05"
+          ],
+          "object_column": 255,
+          "object_name": "infeed_left_finger",
+          "value": 0.0,
+          "position_before": [
+            -4.191,
+            -1.2,
+            1.7049999999999998
+          ],
+          "position_after": [
+            -4.191,
+            -1.1999999999999997,
+            1.7049999999999998
+          ]
+        },
+        {
+          "from_sample_index": 652,
+          "to_sample_index": 653,
+          "from_video_s": 43.46666666666667,
+          "to_video_s": 43.53333333333333,
+          "source_clock_before_after": [
+            34.422222222222224,
+            34.49444444444444
+          ],
+          "scene_before_after": [
+            "S05",
+            "S05"
+          ],
+          "object_column": 256,
+          "object_name": "infeed_right_finger",
+          "value": 0.0,
+          "position_before": [
+            -3.209,
+            -1.2,
+            1.7049999999999998
+          ],
+          "position_after": [
+            -3.209,
+            -1.1999999999999997,
+            1.7049999999999998
+          ]
+        },
+        {
+          "from_sample_index": 857,
+          "to_sample_index": 858,
+          "from_video_s": 57.13333333333333,
+          "to_video_s": 57.2,
+          "source_clock_before_after": [
+            42.13333333333333,
+            42.2
+          ],
+          "scene_before_after": [
+            "S08",
+            "S08"
+          ],
+          "object_column": 254,
+          "object_name": "infeed_palm",
+          "value": 0.0,
+          "position_before": [
+            -3.7,
+            -1.2,
+            1.8299999999999998
+          ],
+          "position_after": [
+            -3.7,
+            -1.2,
+            1.8299999999999998
+          ]
+        },
+        {
+          "from_sample_index": 1512,
+          "to_sample_index": 1513,
+          "from_video_s": 100.8,
+          "to_video_s": 100.86666666666666,
+          "source_clock_before_after": [
+            66.43333333333334,
+            66.5111111111111
+          ],
+          "scene_before_after": [
+            "S14",
+            "S14"
+          ],
+          "object_column": 254,
+          "object_name": "infeed_palm",
+          "value": 0.0,
+          "position_before": [
+            -3.7,
+            -1.2,
+            1.8299999999999998
+          ],
+          "position_after": [
+            -3.7,
+            -1.2,
+            1.8299999999999998
+          ]
+        },
+        {
+          "from_sample_index": 296,
+          "to_sample_index": 297,
+          "from_video_s": 19.733333333333334,
+          "to_video_s": 19.8,
+          "source_clock_before_after": [
+            15.873333333333335,
+            15.93
+          ],
+          "scene_before_after": [
+            "S03",
+            "S03"
+          ],
+          "object_column": 254,
+          "object_name": "infeed_palm",
+          "value": 0.0,
+          "position_before": [
+            -3.7,
+            -1.2,
+            1.8299999999999998
+          ],
+          "position_after": [
+            -3.7,
+            -1.2,
+            1.8299999999999998
+          ]
+        }
+      ]
+    },
+    "outfeed": {
+      "translation_display_units": [
+        {
+          "from_sample_index": 1552,
+          "to_sample_index": 1553,
+          "from_video_s": 103.46666666666667,
+          "to_video_s": 103.53333333333333,
+          "source_clock_before_after": [
+            69.46666666666667,
+            69.53333333333333
+          ],
+          "scene_before_after": [
+            "S15",
+            "S15"
+          ],
+          "object_column": 262,
+          "object_name": "outfeed_left_finger",
+          "value": 0.15890254417708546,
+          "position_before": [
+            2.7265851851851886,
+            -0.7049185185185154,
+            1.8549999999999998
+          ],
+          "position_after": [
+            2.841414814814812,
+            -0.5950814814814844,
+            1.855
+          ]
+        },
+        {
+          "from_sample_index": 1552,
+          "to_sample_index": 1553,
+          "from_video_s": 103.46666666666667,
+          "to_video_s": 103.53333333333333,
+          "source_clock_before_after": [
+            69.46666666666667,
+            69.53333333333333
+          ],
+          "scene_before_after": [
+            "S15",
+            "S15"
+          ],
+          "object_column": 261,
+          "object_name": "outfeed_palm",
+          "value": 0.15890254417708546,
+          "position_before": [
+            3.2175851851851887,
+            -0.7049185185185154,
+            1.9799999999999998
+          ],
+          "position_after": [
+            3.332414814814812,
+            -0.5950814814814844,
+            1.98
+          ]
+        },
+        {
+          "from_sample_index": 1552,
+          "to_sample_index": 1553,
+          "from_video_s": 103.46666666666667,
+          "to_video_s": 103.53333333333333,
+          "source_clock_before_after": [
+            69.46666666666667,
+            69.53333333333333
+          ],
+          "scene_before_after": [
+            "S15",
+            "S15"
+          ],
+          "object_column": 263,
+          "object_name": "outfeed_right_finger",
+          "value": 0.15890254417708546,
+          "position_before": [
+            3.7085851851851888,
+            -0.7049185185185154,
+            1.8549999999999998
+          ],
+          "position_after": [
+            3.823414814814812,
+            -0.5950814814814844,
+            1.855
+          ]
+        },
+        {
+          "from_sample_index": 1551,
+          "to_sample_index": 1552,
+          "from_video_s": 103.4,
+          "to_video_s": 103.46666666666667,
+          "source_clock_before_after": [
+            69.4,
+            69.46666666666667
+          ],
+          "scene_before_after": [
+            "S15",
+            "S15"
+          ],
+          "object_column": 262,
+          "object_name": "outfeed_left_finger",
+          "value": 0.1560734187614696,
+          "position_before": [
+            2.6138000000000097,
+            -0.812799999999991,
+            1.855
+          ],
+          "position_after": [
+            2.7265851851851886,
+            -0.7049185185185154,
+            1.8549999999999998
+          ]
+        },
+        {
+          "from_sample_index": 1551,
+          "to_sample_index": 1552,
+          "from_video_s": 103.4,
+          "to_video_s": 103.46666666666667,
+          "source_clock_before_after": [
+            69.4,
+            69.46666666666667
+          ],
+          "scene_before_after": [
+            "S15",
+            "S15"
+          ],
+          "object_column": 263,
+          "object_name": "outfeed_right_finger",
+          "value": 0.1560734187614696,
+          "position_before": [
+            3.59580000000001,
+            -0.812799999999991,
+            1.855
+          ],
+          "position_after": [
+            3.7085851851851888,
+            -0.7049185185185154,
+            1.8549999999999998
+          ]
+        },
+        {
+          "from_sample_index": 1551,
+          "to_sample_index": 1552,
+          "from_video_s": 103.4,
+          "to_video_s": 103.46666666666667,
+          "source_clock_before_after": [
+            69.4,
+            69.46666666666667
+          ],
+          "scene_before_after": [
+            "S15",
+            "S15"
+          ],
+          "object_column": 261,
+          "object_name": "outfeed_palm",
+          "value": 0.1560734187614696,
+          "position_before": [
+            3.1048000000000098,
+            -0.812799999999991,
+            1.98
+          ],
+          "position_after": [
+            3.2175851851851887,
+            -0.7049185185185154,
+            1.9799999999999998
+          ]
+        },
+        {
+          "from_sample_index": 1553,
+          "to_sample_index": 1554,
+          "from_video_s": 103.53333333333333,
+          "to_video_s": 103.6,
+          "source_clock_before_after": [
+            69.53333333333333,
+            69.6
+          ],
+          "scene_before_after": [
+            "S15",
+            "S15"
+          ],
+          "object_column": 261,
+          "object_name": "outfeed_palm",
+          "value": 0.1560734187614695,
+          "position_before": [
+            3.332414814814812,
+            -0.5950814814814844,
+            1.98
+          ],
+          "position_after": [
+            3.445199999999991,
+            -0.487200000000009,
+            1.98
+          ]
+        },
+        {
+          "from_sample_index": 1553,
+          "to_sample_index": 1554,
+          "from_video_s": 103.53333333333333,
+          "to_video_s": 103.6,
+          "source_clock_before_after": [
+            69.53333333333333,
+            69.6
+          ],
+          "scene_before_after": [
+            "S15",
+            "S15"
+          ],
+          "object_column": 262,
+          "object_name": "outfeed_left_finger",
+          "value": 0.1560734187614695,
+          "position_before": [
+            2.841414814814812,
+            -0.5950814814814844,
+            1.855
+          ],
+          "position_after": [
+            2.954199999999991,
+            -0.487200000000009,
+            1.855
+          ]
+        }
+      ],
+      "rotation_degrees": [
+        {
+          "from_sample_index": 482,
+          "to_sample_index": 483,
+          "from_video_s": 32.13333333333333,
+          "to_video_s": 32.2,
+          "source_clock_before_after": [
+            22.144444444444446,
+            22.21666666666667
+          ],
+          "scene_before_after": [
+            "S05",
+            "S05"
+          ],
+          "object_column": 262,
+          "object_name": "outfeed_left_finger",
+          "value": 0.0,
+          "position_before": [
+            3.3590000000000004,
+            -0.1,
+            1.8550000000000002
+          ],
+          "position_after": [
+            3.3590000000000004,
+            -0.1,
+            1.855
+          ]
+        },
+        {
+          "from_sample_index": 570,
+          "to_sample_index": 571,
+          "from_video_s": 38.0,
+          "to_video_s": 38.06666666666667,
+          "source_clock_before_after": [
+            28.5,
+            28.572222222222226
+          ],
+          "scene_before_after": [
+            "S05",
+            "S05"
+          ],
+          "object_column": 261,
+          "object_name": "outfeed_palm",
+          "value": 0.0,
+          "position_before": [
+            3.8499999999999996,
+            -0.1,
+            1.9799999999999998
+          ],
+          "position_after": [
+            3.8499999999999996,
+            -0.1,
+            1.9799999999999998
+          ]
+        },
+        {
+          "from_sample_index": 240,
+          "to_sample_index": 241,
+          "from_video_s": 16.0,
+          "to_video_s": 16.066666666666666,
+          "source_clock_before_after": [
+            12.7,
+            12.756666666666666
+          ],
+          "scene_before_after": [
+            "S03",
+            "S03"
+          ],
+          "object_column": 261,
+          "object_name": "outfeed_palm",
+          "value": 0.0,
+          "position_before": [
+            3.85,
+            -0.1,
+            1.9799999999999998
+          ],
+          "position_after": [
+            3.85,
+            -0.1,
+            1.98
+          ]
+        },
+        {
+          "from_sample_index": 651,
+          "to_sample_index": 652,
+          "from_video_s": 43.4,
+          "to_video_s": 43.46666666666667,
+          "source_clock_before_after": [
+            34.349999999999994,
+            34.422222222222224
+          ],
+          "scene_before_after": [
+            "S05",
+            "S05"
+          ],
+          "object_column": 261,
+          "object_name": "outfeed_palm",
+          "value": 0.0,
+          "position_before": [
+            3.8500000000000005,
+            -0.1,
+            1.98
+          ],
+          "position_after": [
+            3.85,
+            -0.1,
+            1.98
+          ]
+        },
+        {
+          "from_sample_index": 651,
+          "to_sample_index": 652,
+          "from_video_s": 43.4,
+          "to_video_s": 43.46666666666667,
+          "source_clock_before_after": [
+            34.349999999999994,
+            34.422222222222224
+          ],
+          "scene_before_after": [
+            "S05",
+            "S05"
+          ],
+          "object_column": 262,
+          "object_name": "outfeed_left_finger",
+          "value": 0.0,
+          "position_before": [
+            3.3590000000000004,
+            -0.1,
+            1.855
+          ],
+          "position_after": [
+            3.359,
+            -0.1,
+            1.855
+          ]
+        },
+        {
+          "from_sample_index": 651,
+          "to_sample_index": 652,
+          "from_video_s": 43.4,
+          "to_video_s": 43.46666666666667,
+          "source_clock_before_after": [
+            34.349999999999994,
+            34.422222222222224
+          ],
+          "scene_before_after": [
+            "S05",
+            "S05"
+          ],
+          "object_column": 263,
+          "object_name": "outfeed_right_finger",
+          "value": 0.0,
+          "position_before": [
+            4.341,
+            -0.1,
+            1.855
+          ],
+          "position_after": [
+            4.341,
+            -0.1,
+            1.855
+          ]
+        },
+        {
+          "from_sample_index": 1230,
+          "to_sample_index": 1231,
+          "from_video_s": 82.0,
+          "to_video_s": 82.06666666666666,
+          "source_clock_before_after": [
+            53.2,
+            53.239999999999995
+          ],
+          "scene_before_after": [
+            "S11",
+            "S11"
+          ],
+          "object_column": 262,
+          "object_name": "outfeed_left_finger",
+          "value": 0.0,
+          "position_before": [
+            3.359,
+            -0.1,
+            1.855
+          ],
+          "position_after": [
+            3.359,
+            -0.1,
+            1.855
+          ]
+        },
+        {
+          "from_sample_index": 1230,
+          "to_sample_index": 1231,
+          "from_video_s": 82.0,
+          "to_video_s": 82.06666666666666,
+          "source_clock_before_after": [
+            53.2,
+            53.239999999999995
+          ],
+          "scene_before_after": [
+            "S11",
+            "S11"
+          ],
+          "object_column": 261,
+          "object_name": "outfeed_palm",
+          "value": 0.0,
+          "position_before": [
+            3.85,
+            -0.1,
+            1.98
+          ],
+          "position_after": [
+            3.85,
+            -0.1,
+            1.98
+          ]
+        }
+      ]
+    }
+  },
+  "physical_validity_verdict": null
+}

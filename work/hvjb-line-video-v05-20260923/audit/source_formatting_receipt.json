@@ -1,0 +1,8 @@
+{
+  "original_snapshot": "record_review_before_wrap.py.txt",
+  "original_sha256": "601b34efaeea0c98d4436152fab7dc88a43239a74515f29d63923702d9195175",
+  "formatted_script": "record_review.py",
+  "formatted_sha256": "dbd04c7259ea4e453c4fdc1ecc266af4f54ece50a02144b2bad56b64e82eb429",
+  "python_ast_identical": true,
+  "change": "Wrapped three long string literals to comply with line length 120; generated values unchanged."
+}

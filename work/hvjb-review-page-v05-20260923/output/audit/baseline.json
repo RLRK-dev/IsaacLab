@@ -1,0 +1,624 @@
+{
+  "observed_at": "2026-09-23T08:49:39.123736+09:00",
+  "base_commit": "91a1002bc6b92fb8122ea88e287e4164af431f46",
+  "deliveries": [
+    {
+      "package": "hvjb-assembly-location-v01-20260921",
+      "manifest": "work/hvjb-assembly-location-v01-20260921/delivery_manifest.json",
+      "delivered_file": "/home/rlrk/Downloads/HVJB_筐体内外の組立区分_v01_20260921/README.md",
+      "expected_sha256": "5e9f9e7514476155e4d68d3e8d7efe86b81c22cf8ded9b28fa01c1012833cf55",
+      "observed_sha256": "5e9f9e7514476155e4d68d3e8d7efe86b81c22cf8ded9b28fa01c1012833cf55",
+      "restored_source": "work/hvjb-assembly-location-v01-20260921/README.md",
+      "restored_source_sha256": "5e9f9e7514476155e4d68d3e8d7efe86b81c22cf8ded9b28fa01c1012833cf55",
+      "source_absence_note": null
+    },
+    {
+      "package": "hvjb-assembly-location-v01-20260921",
+      "manifest": "work/hvjb-assembly-location-v01-20260921/delivery_manifest.json",
+      "delivered_file": "/home/rlrk/Downloads/HVJB_筐体内外の組立区分_v01_20260921/build_review.py",
+      "expected_sha256": "5204d3f7438a09dd3c1ddfb0e8fa7074b97140974c8c46c90d473a5bef7d5317",
+      "observed_sha256": "5204d3f7438a09dd3c1ddfb0e8fa7074b97140974c8c46c90d473a5bef7d5317",
+      "restored_source": "work/hvjb-assembly-location-v01-20260921/build_review.py",
+      "restored_source_sha256": "5204d3f7438a09dd3c1ddfb0e8fa7074b97140974c8c46c90d473a5bef7d5317",
+      "source_absence_note": null
+    },
+    {
+      "package": "hvjb-assembly-location-v01-20260921",
+      "manifest": "work/hvjb-assembly-location-v01-20260921/delivery_manifest.json",
+      "delivered_file": "/home/rlrk/Downloads/HVJB_筐体内外の組立区分_v01_20260921/assembly_location.json",
+      "expected_sha256": "f72dcbf515f4d4db5bef63dbd973ddf4eebeb974213297e3296b1748f127a3f6",
+      "observed_sha256": "f72dcbf515f4d4db5bef63dbd973ddf4eebeb974213297e3296b1748f127a3f6",
+      "restored_source": "work/hvjb-assembly-location-v01-20260921/output/assembly_location.json",
+      "restored_source_sha256": "f72dcbf515f4d4db5bef63dbd973ddf4eebeb974213297e3296b1748f127a3f6",
+      "source_absence_note": null
+    },
+    {
+      "package": "hvjb-assembly-location-v01-20260921",
+      "manifest": "work/hvjb-assembly-location-v01-20260921/delivery_manifest.json",
+      "delivered_file": "/home/rlrk/Downloads/HVJB_筐体内外の組立区分_v01_20260921/document_audit.json",
+      "expected_sha256": "1470c821a7c15a5c68cfcfdaeb11ccef9d7c1116ef63fd843bc8aad11140aa47",
+      "observed_sha256": "1470c821a7c15a5c68cfcfdaeb11ccef9d7c1116ef63fd843bc8aad11140aa47",
+      "restored_source": "work/hvjb-assembly-location-v01-20260921/output/document_audit.json",
+      "restored_source_sha256": "1470c821a7c15a5c68cfcfdaeb11ccef9d7c1116ef63fd843bc8aad11140aa47",
+      "source_absence_note": null
+    },
+    {
+      "package": "hvjb-assembly-location-v01-20260921",
+      "manifest": "work/hvjb-assembly-location-v01-20260921/delivery_manifest.json",
+      "delivered_file": "/home/rlrk/Downloads/HVJB_筐体内外の組立区分_v01_20260921/pages/page-1.png",
+      "expected_sha256": "1dcf35d442bb97ba704df7e2f94fdee160227da2b51887c8aa0ae1b8c09fadb5",
+      "observed_sha256": "1dcf35d442bb97ba704df7e2f94fdee160227da2b51887c8aa0ae1b8c09fadb5",
+      "restored_source": "work/hvjb-assembly-location-v01-20260921/output/pages/page-1.png",
+      "restored_source_sha256": "1dcf35d442bb97ba704df7e2f94fdee160227da2b51887c8aa0ae1b8c09fadb5",
+      "source_absence_note": null
+    },
+    {
+      "package": "hvjb-assembly-location-v01-20260921",
+      "manifest": "work/hvjb-assembly-location-v01-20260921/delivery_manifest.json",
+      "delivered_file": "/home/rlrk/Downloads/HVJB_筐体内外の組立区分_v01_20260921/pages/page-2.png",
+      "expected_sha256": "0c52a858b6c9362db578273633a3059760185c46c13da8665b93b27a0f1588e3",
+      "observed_sha256": "0c52a858b6c9362db578273633a3059760185c46c13da8665b93b27a0f1588e3",
+      "restored_source": "work/hvjb-assembly-location-v01-20260921/output/pages/page-2.png",
+      "restored_source_sha256": "0c52a858b6c9362db578273633a3059760185c46c13da8665b93b27a0f1588e3",
+      "source_absence_note": null
+    },
+    {
+      "package": "hvjb-assembly-location-v01-20260921",
+      "manifest": "work/hvjb-assembly-location-v01-20260921/delivery_manifest.json",
+      "delivered_file": "/home/rlrk/Downloads/HVJB_筐体内外の組立区分_v01_20260921/pages/page-3.png",
+      "expected_sha256": "f3e2c1cb19cce0aac3ba68833ab51dd033ac3ac8483b5b3e7d442841e89b96a7",
+      "observed_sha256": "f3e2c1cb19cce0aac3ba68833ab51dd033ac3ac8483b5b3e7d442841e89b96a7",
+      "restored_source": "work/hvjb-assembly-location-v01-20260921/output/pages/page-3.png",
+      "restored_source_sha256": "f3e2c1cb19cce0aac3ba68833ab51dd033ac3ac8483b5b3e7d442841e89b96a7",
+      "source_absence_note": null
+    },
+    {
+      "package": "hvjb-assembly-location-v01-20260921",
+      "manifest": "work/hvjb-assembly-location-v01-20260921/delivery_manifest.json",
+      "delivered_file": "/home/rlrk/Downloads/HVJB_筐体内外の組立区分_v01_20260921/pdf/HVJB_筐体内外の組立区分_v01_20260921.pdf",
+      "expected_sha256": "27817c3dfa37ae0c28db890f608ebac6586f9036d9743491b0c54e2ec4db8335",
+      "observed_sha256": "27817c3dfa37ae0c28db890f608ebac6586f9036d9743491b0c54e2ec4db8335",
+      "restored_source": "work/hvjb-assembly-location-v01-20260921/output/pdf/HVJB_筐体内外の組立区分_v01_20260921.pdf",
+      "restored_source_sha256": "27817c3dfa37ae0c28db890f608ebac6586f9036d9743491b0c54e2ec4db8335",
+      "source_absence_note": null
+    },
+    {
+      "package": "hvjb-assembly-location-v01-20260921",
+      "manifest": "work/hvjb-assembly-location-v01-20260921/delivery_manifest.json",
+      "delivered_file": "/home/rlrk/Downloads/HVJB_筐体内外の組立区分_v01_20260921/qa_receipt.json",
+      "expected_sha256": "f0b957631ef1e0cd7b9af8adb33b3451f649113400ff9e2b5e5291044d0cd678",
+      "observed_sha256": "f0b957631ef1e0cd7b9af8adb33b3451f649113400ff9e2b5e5291044d0cd678",
+      "restored_source": "work/hvjb-assembly-location-v01-20260921/qa_receipt.json",
+      "restored_source_sha256": "f0b957631ef1e0cd7b9af8adb33b3451f649113400ff9e2b5e5291044d0cd678",
+      "source_absence_note": null
+    },
+    {
+      "package": "hvjb-line-process-v03-20260921",
+      "manifest": "work/hvjb-line-process-v03-20260921/delivery_manifest.json",
+      "delivered_file": "/home/rlrk/Downloads/HVJB_ライン全体と動画用工程表_v03_20260921/README.md",
+      "expected_sha256": "43167a4b69376e8adab0df23deac2c2dfcf68e0c2987ba0c8ad9be3f16c021b7",
+      "observed_sha256": "43167a4b69376e8adab0df23deac2c2dfcf68e0c2987ba0c8ad9be3f16c021b7",
+      "restored_source": "work/hvjb-line-process-v03-20260921/README.md",
+      "restored_source_sha256": "43167a4b69376e8adab0df23deac2c2dfcf68e0c2987ba0c8ad9be3f16c021b7",
+      "source_absence_note": null
+    },
+    {
+      "package": "hvjb-line-process-v03-20260921",
+      "manifest": "work/hvjb-line-process-v03-20260921/delivery_manifest.json",
+      "delivered_file": "/home/rlrk/Downloads/HVJB_ライン全体と動画用工程表_v03_20260921/qa_receipt.json",
+      "expected_sha256": "52bcaa9525b0b60903a874bb214e952c6242537e6a6b646aa0f51b2afd277a37",
+      "observed_sha256": "52bcaa9525b0b60903a874bb214e952c6242537e6a6b646aa0f51b2afd277a37",
+      "restored_source": "work/hvjb-line-process-v03-20260921/qa_receipt.json",
+      "restored_source_sha256": "52bcaa9525b0b60903a874bb214e952c6242537e6a6b646aa0f51b2afd277a37",
+      "source_absence_note": null
+    },
+    {
+      "package": "hvjb-line-process-v03-20260921",
+      "manifest": "work/hvjb-line-process-v03-20260921/delivery_manifest.json",
+      "delivered_file": "/home/rlrk/Downloads/HVJB_ライン全体と動画用工程表_v03_20260921/20仕事_場所と手先.csv",
+      "expected_sha256": "5ed7cca2f528091ca60ac7b3ad2519a2d1bb8d6d95ec67a8a3b99bf2c993d06f",
+      "observed_sha256": "5ed7cca2f528091ca60ac7b3ad2519a2d1bb8d6d95ec67a8a3b99bf2c993d06f",
+      "restored_source": "work/hvjb-line-process-v03-20260921/output/20仕事_場所と手先.csv",
+      "restored_source_sha256": "5ed7cca2f528091ca60ac7b3ad2519a2d1bb8d6d95ec67a8a3b99bf2c993d06f",
+      "source_absence_note": null
+    },
+    {
+      "package": "hvjb-line-process-v03-20260921",
+      "manifest": "work/hvjb-line-process-v03-20260921/delivery_manifest.json",
+      "delivered_file": "/home/rlrk/Downloads/HVJB_ライン全体と動画用工程表_v03_20260921/document_audit.json",
+      "expected_sha256": "0d691e8de60424be58877eeb3bdc78b75e7f132c447c1261dad4a78c9f65718d",
+      "observed_sha256": "0d691e8de60424be58877eeb3bdc78b75e7f132c447c1261dad4a78c9f65718d",
+      "restored_source": "work/hvjb-line-process-v03-20260921/output/document_audit.json",
+      "restored_source_sha256": "0d691e8de60424be58877eeb3bdc78b75e7f132c447c1261dad4a78c9f65718d",
+      "source_absence_note": null
+    },
+    {
+      "package": "hvjb-line-process-v03-20260921",
+      "manifest": "work/hvjb-line-process-v03-20260921/delivery_manifest.json",
+      "delivered_file": "/home/rlrk/Downloads/HVJB_ライン全体と動画用工程表_v03_20260921/line_process_plan.json",
+      "expected_sha256": "e640a9cb3008e418a595465d94bfaf6994bbbdb12a6c7ecbe94edd73996c05d2",
+      "observed_sha256": "e640a9cb3008e418a595465d94bfaf6994bbbdb12a6c7ecbe94edd73996c05d2",
+      "restored_source": "work/hvjb-line-process-v03-20260921/output/line_process_plan.json",
+      "restored_source_sha256": "e640a9cb3008e418a595465d94bfaf6994bbbdb12a6c7ecbe94edd73996c05d2",
+      "source_absence_note": null
+    },
+    {
+      "package": "hvjb-line-process-v03-20260921",
+      "manifest": "work/hvjb-line-process-v03-20260921/delivery_manifest.json",
+      "delivered_file": "/home/rlrk/Downloads/HVJB_ライン全体と動画用工程表_v03_20260921/pages/page-1.png",
+      "expected_sha256": "8d3f935f84aad48a786fb9077962ff3498f60465513c29f5276dede8898f76fc",
+      "observed_sha256": "8d3f935f84aad48a786fb9077962ff3498f60465513c29f5276dede8898f76fc",
+      "restored_source": "work/hvjb-line-process-v03-20260921/output/pages/page-1.png",
+      "restored_source_sha256": "8d3f935f84aad48a786fb9077962ff3498f60465513c29f5276dede8898f76fc",
+      "source_absence_note": null
+    },
+    {
+      "package": "hvjb-line-process-v03-20260921",
+      "manifest": "work/hvjb-line-process-v03-20260921/delivery_manifest.json",
+      "delivered_file": "/home/rlrk/Downloads/HVJB_ライン全体と動画用工程表_v03_20260921/pages/page-2.png",
+      "expected_sha256": "35b8e0e20f9f0bac7dc5a05571d73992d1260ea32c58b48274c7524c21cad0de",
+      "observed_sha256": "35b8e0e20f9f0bac7dc5a05571d73992d1260ea32c58b48274c7524c21cad0de",
+      "restored_source": "work/hvjb-line-process-v03-20260921/output/pages/page-2.png",
+      "restored_source_sha256": "35b8e0e20f9f0bac7dc5a05571d73992d1260ea32c58b48274c7524c21cad0de",
+      "source_absence_note": null
+    },
+    {
+      "package": "hvjb-line-process-v03-20260921",
+      "manifest": "work/hvjb-line-process-v03-20260921/delivery_manifest.json",
+      "delivered_file": "/home/rlrk/Downloads/HVJB_ライン全体と動画用工程表_v03_20260921/pages/page-3.png",
+      "expected_sha256": "7e3f4d919ccb742f5023354eea35626f6d7e4c05f885282979328923c472f7f6",
+      "observed_sha256": "7e3f4d919ccb742f5023354eea35626f6d7e4c05f885282979328923c472f7f6",
+      "restored_source": "work/hvjb-line-process-v03-20260921/output/pages/page-3.png",
+      "restored_source_sha256": "7e3f4d919ccb742f5023354eea35626f6d7e4c05f885282979328923c472f7f6",
+      "source_absence_note": null
+    },
+    {
+      "package": "hvjb-line-process-v03-20260921",
+      "manifest": "work/hvjb-line-process-v03-20260921/delivery_manifest.json",
+      "delivered_file": "/home/rlrk/Downloads/HVJB_ライン全体と動画用工程表_v03_20260921/pdf/HVJB_ライン全体と動画用工程表_v03_20260921.pdf",
+      "expected_sha256": "ac96074676ddfed0875704157bbd8d4e5c23f2958d78bb77be9f342d9a702dd5",
+      "observed_sha256": "ac96074676ddfed0875704157bbd8d4e5c23f2958d78bb77be9f342d9a702dd5",
+      "restored_source": "work/hvjb-line-process-v03-20260921/output/pdf/HVJB_ライン全体と動画用工程表_v03_20260921.pdf",
+      "restored_source_sha256": "ac96074676ddfed0875704157bbd8d4e5c23f2958d78bb77be9f342d9a702dd5",
+      "source_absence_note": null
+    },
+    {
+      "package": "hvjb-line-video-v03-20260921",
+      "manifest": "work/hvjb-line-video-v03-20260921/delivery_manifest.json",
+      "delivered_file": "/home/rlrk/Downloads/HVJB_ライン工程確認_v03_20260921/HVJB_line_split_process_concept_v03_review.mp4",
+      "expected_sha256": "ef460dbdff618c217cc2e40a8bd4d3acc2189a8ff4be043da66afa4e7af95100",
+      "observed_sha256": "ef460dbdff618c217cc2e40a8bd4d3acc2189a8ff4be043da66afa4e7af95100",
+      "restored_source": "work/hvjb-line-video-v03-20260921/HVJB_line_split_process_concept_v03_review.mp4",
+      "restored_source_sha256": null,
+      "source_absence_note": "Large delivery-only artifact; original preserved."
+    },
+    {
+      "package": "hvjb-line-video-v03-20260921",
+      "manifest": "work/hvjb-line-video-v03-20260921/delivery_manifest.json",
+      "delivered_file": "/home/rlrk/Downloads/HVJB_ライン工程確認_v03_20260921/README.md",
+      "expected_sha256": "16d986fd8b1876d4378a334b0b2cf616167b365ad5cd6f981a723845172ec2e1",
+      "observed_sha256": "16d986fd8b1876d4378a334b0b2cf616167b365ad5cd6f981a723845172ec2e1",
+      "restored_source": "work/hvjb-line-video-v03-20260921/README.md",
+      "restored_source_sha256": "16d986fd8b1876d4378a334b0b2cf616167b365ad5cd6f981a723845172ec2e1",
+      "source_absence_note": null
+    },
+    {
+      "package": "hvjb-line-video-v03-20260921",
+      "manifest": "work/hvjb-line-video-v03-20260921/delivery_manifest.json",
+      "delivered_file": "/home/rlrk/Downloads/HVJB_ライン工程確認_v03_20260921/data/concept_v03.npz",
+      "expected_sha256": "52eede374a2d782aabf1cc2604801cc64e6f884b39060728c437631a8dca36dc",
+      "observed_sha256": "52eede374a2d782aabf1cc2604801cc64e6f884b39060728c437631a8dca36dc",
+      "restored_source": "work/hvjb-line-video-v03-20260921/data/concept_v03.npz",
+      "restored_source_sha256": null,
+      "source_absence_note": "Large delivery-only artifact; original preserved."
+    },
+    {
+      "package": "hvjb-line-video-v03-20260921",
+      "manifest": "work/hvjb-line-video-v03-20260921/delivery_manifest.json",
+      "delivered_file": "/home/rlrk/Downloads/HVJB_ライン工程確認_v03_20260921/data/concept_v03.json",
+      "expected_sha256": "6eb3775b07a288c86d97de5074c17ace01cac5b3d8b6a4d472c021a299426216",
+      "observed_sha256": "6eb3775b07a288c86d97de5074c17ace01cac5b3d8b6a4d472c021a299426216",
+      "restored_source": "work/hvjb-line-video-v03-20260921/data/concept_v03.json",
+      "restored_source_sha256": "6eb3775b07a288c86d97de5074c17ace01cac5b3d8b6a4d472c021a299426216",
+      "source_absence_note": null
+    },
+    {
+      "package": "hvjb-line-video-v03-20260921",
+      "manifest": "work/hvjb-line-video-v03-20260921/delivery_manifest.json",
+      "delivered_file": "/home/rlrk/Downloads/HVJB_ライン工程確認_v03_20260921/data/concept_v03_final.json",
+      "expected_sha256": "2ace6d18797d5fd3ff713e0de2967fd969aa57a97b66ecad15909d223521b7be",
+      "observed_sha256": "2ace6d18797d5fd3ff713e0de2967fd969aa57a97b66ecad15909d223521b7be",
+      "restored_source": "work/hvjb-line-video-v03-20260921/data/concept_v03_final.json",
+      "restored_source_sha256": "2ace6d18797d5fd3ff713e0de2967fd969aa57a97b66ecad15909d223521b7be",
+      "source_absence_note": null
+    },
+    {
+      "package": "hvjb-line-video-v03-20260921",
+      "manifest": "work/hvjb-line-video-v03-20260921/delivery_manifest.json",
+      "delivered_file": "/home/rlrk/Downloads/HVJB_ライン工程確認_v03_20260921/data/scene_index.csv",
+      "expected_sha256": "ef5865667136d048c10875a5b8c19d22f57a83b813f2de7eae086756366c32b4",
+      "observed_sha256": "ef5865667136d048c10875a5b8c19d22f57a83b813f2de7eae086756366c32b4",
+      "restored_source": "work/hvjb-line-video-v03-20260921/data/scene_index.csv",
+      "restored_source_sha256": "ef5865667136d048c10875a5b8c19d22f57a83b813f2de7eae086756366c32b4",
+      "source_absence_note": null
+    },
+    {
+      "package": "hvjb-line-video-v03-20260921",
+      "manifest": "work/hvjb-line-video-v03-20260921/delivery_manifest.json",
+      "delivered_file": "/home/rlrk/Downloads/HVJB_ライン工程確認_v03_20260921/inputs/line_process_plan.json",
+      "expected_sha256": "e640a9cb3008e418a595465d94bfaf6994bbbdb12a6c7ecbe94edd73996c05d2",
+      "observed_sha256": "e640a9cb3008e418a595465d94bfaf6994bbbdb12a6c7ecbe94edd73996c05d2",
+      "restored_source": "work/hvjb-line-video-v03-20260921/inputs/line_process_plan.json",
+      "restored_source_sha256": "e640a9cb3008e418a595465d94bfaf6994bbbdb12a6c7ecbe94edd73996c05d2",
+      "source_absence_note": null
+    },
+    {
+      "package": "hvjb-line-video-v03-20260921",
+      "manifest": "work/hvjb-line-video-v03-20260921/delivery_manifest.json",
+      "delivered_file": "/home/rlrk/Downloads/HVJB_ライン工程確認_v03_20260921/inputs/original_sources.json",
+      "expected_sha256": "fc548ef0789e4448a57d342529211848252dc09c3efa51a2d0d20b04ad5b3305",
+      "observed_sha256": "fc548ef0789e4448a57d342529211848252dc09c3efa51a2d0d20b04ad5b3305",
+      "restored_source": "work/hvjb-line-video-v03-20260921/inputs/original_sources.json",
+      "restored_source_sha256": "fc548ef0789e4448a57d342529211848252dc09c3efa51a2d0d20b04ad5b3305",
+      "source_absence_note": null
+    },
+    {
+      "package": "hvjb-line-video-v03-20260921",
+      "manifest": "work/hvjb-line-video-v03-20260921/delivery_manifest.json",
+      "delivered_file": "/home/rlrk/Downloads/HVJB_ライン工程確認_v03_20260921/audit/display_checks.json",
+      "expected_sha256": "b6ef3af0922676532c58694d4e78777ca3ec801db52b09fe1632912b72da7984",
+      "observed_sha256": "b6ef3af0922676532c58694d4e78777ca3ec801db52b09fe1632912b72da7984",
+      "restored_source": "work/hvjb-line-video-v03-20260921/audit/display_checks.json",
+      "restored_source_sha256": "b6ef3af0922676532c58694d4e78777ca3ec801db52b09fe1632912b72da7984",
+      "source_absence_note": null
+    },
+    {
+      "package": "hvjb-line-video-v03-20260921",
+      "manifest": "work/hvjb-line-video-v03-20260921/delivery_manifest.json",
+      "delivered_file": "/home/rlrk/Downloads/HVJB_ライン工程確認_v03_20260921/audit/label_refinement.json",
+      "expected_sha256": "86bcf70dcd77fff1d4be78a613b6ba531a51c6e73b06a4a47a24fef6befc6ba7",
+      "observed_sha256": "86bcf70dcd77fff1d4be78a613b6ba531a51c6e73b06a4a47a24fef6befc6ba7",
+      "restored_source": "work/hvjb-line-video-v03-20260921/audit/label_refinement.json",
+      "restored_source_sha256": "86bcf70dcd77fff1d4be78a613b6ba531a51c6e73b06a4a47a24fef6befc6ba7",
+      "source_absence_note": null
+    },
+    {
+      "package": "hvjb-line-video-v03-20260921",
+      "manifest": "work/hvjb-line-video-v03-20260921/delivery_manifest.json",
+      "delivered_file": "/home/rlrk/Downloads/HVJB_ライン工程確認_v03_20260921/audit/legacy_copy_equivalence.json",
+      "expected_sha256": "305fe0819b19bae0931c36a29e25b9d51e7f7f9ad59999e9ec6fe6b5890fbb3f",
+      "observed_sha256": "305fe0819b19bae0931c36a29e25b9d51e7f7f9ad59999e9ec6fe6b5890fbb3f",
+      "restored_source": "work/hvjb-line-video-v03-20260921/audit/legacy_copy_equivalence.json",
+      "restored_source_sha256": "305fe0819b19bae0931c36a29e25b9d51e7f7f9ad59999e9ec6fe6b5890fbb3f",
+      "source_absence_note": null
+    },
+    {
+      "package": "hvjb-line-video-v03-20260921",
+      "manifest": "work/hvjb-line-video-v03-20260921/delivery_manifest.json",
+      "delivered_file": "/home/rlrk/Downloads/HVJB_ライン工程確認_v03_20260921/audit/visual_review.json",
+      "expected_sha256": "daad1ba82c8c6a9ce9e63847309af631e1b6b785174667455b534aab70afdc48",
+      "observed_sha256": "daad1ba82c8c6a9ce9e63847309af631e1b6b785174667455b534aab70afdc48",
+      "restored_source": "work/hvjb-line-video-v03-20260921/audit/visual_review.json",
+      "restored_source_sha256": "daad1ba82c8c6a9ce9e63847309af631e1b6b785174667455b534aab70afdc48",
+      "source_absence_note": null
+    },
+    {
+      "package": "hvjb-line-video-v03-20260921",
+      "manifest": "work/hvjb-line-video-v03-20260921/delivery_manifest.json",
+      "delivered_file": "/home/rlrk/Downloads/HVJB_ライン工程確認_v03_20260921/audit/HVJB_line_split_process_concept_v03_review_video.json",
+      "expected_sha256": "0a675c1da218264814814cb80fd70ae4642f6c25eff96823df8d5e1adbf36143",
+      "observed_sha256": "0a675c1da218264814814cb80fd70ae4642f6c25eff96823df8d5e1adbf36143",
+      "restored_source": "work/hvjb-line-video-v03-20260921/audit/HVJB_line_split_process_concept_v03_review_video.json",
+      "restored_source_sha256": "0a675c1da218264814814cb80fd70ae4642f6c25eff96823df8d5e1adbf36143",
+      "source_absence_note": null
+    },
+    {
+      "package": "hvjb-line-video-v03-20260921",
+      "manifest": "work/hvjb-line-video-v03-20260921/delivery_manifest.json",
+      "delivered_file": "/home/rlrk/Downloads/HVJB_ライン工程確認_v03_20260921/audit/source_render_manifest.json",
+      "expected_sha256": "e3da3704215e12e2a0e2966370b4484830ca03ce843d6460d921880dbce169a8",
+      "observed_sha256": "e3da3704215e12e2a0e2966370b4484830ca03ce843d6460d921880dbce169a8",
+      "restored_source": "work/hvjb-line-video-v03-20260921/previews/concept_v03/manifest.json",
+      "restored_source_sha256": "e3da3704215e12e2a0e2966370b4484830ca03ce843d6460d921880dbce169a8",
+      "source_absence_note": null
+    },
+    {
+      "package": "hvjb-line-video-v03-20260921",
+      "manifest": "work/hvjb-line-video-v03-20260921/delivery_manifest.json",
+      "delivered_file": "/home/rlrk/Downloads/HVJB_ライン工程確認_v03_20260921/audit/render_manifest.json",
+      "expected_sha256": "9363b8578e4aaf5b93cf1fd45a61b8fc1e3bd261b9ec62494737146bf923b130",
+      "observed_sha256": "9363b8578e4aaf5b93cf1fd45a61b8fc1e3bd261b9ec62494737146bf923b130",
+      "restored_source": "work/hvjb-line-video-v03-20260921/previews/concept_v03_final/manifest.json",
+      "restored_source_sha256": "9363b8578e4aaf5b93cf1fd45a61b8fc1e3bd261b9ec62494737146bf923b130",
+      "source_absence_note": null
+    },
+    {
+      "package": "hvjb-after-process-v01-20260921",
+      "manifest": "work/hvjb-after-process-v01-20260921/delivery_manifest.json",
+      "delivered_file": "/home/rlrk/Downloads/HVJB_後工程の役割と未確定工程_v01_20260921/README.md",
+      "expected_sha256": "265299be02d9f4ea670425c3218201496366c798c7a7d15dce69a68af9b516ac",
+      "observed_sha256": "265299be02d9f4ea670425c3218201496366c798c7a7d15dce69a68af9b516ac",
+      "restored_source": "work/hvjb-after-process-v01-20260921/README.md",
+      "restored_source_sha256": "265299be02d9f4ea670425c3218201496366c798c7a7d15dce69a68af9b516ac",
+      "source_absence_note": null
+    },
+    {
+      "package": "hvjb-after-process-v01-20260921",
+      "manifest": "work/hvjb-after-process-v01-20260921/delivery_manifest.json",
+      "delivered_file": "/home/rlrk/Downloads/HVJB_後工程の役割と未確定工程_v01_20260921/qa_receipt.json",
+      "expected_sha256": "a31c3b1930072a0079ed679b07218ec8b17cdeb8fda33c9dd38e81785f56f0c5",
+      "observed_sha256": "a31c3b1930072a0079ed679b07218ec8b17cdeb8fda33c9dd38e81785f56f0c5",
+      "restored_source": "work/hvjb-after-process-v01-20260921/qa_receipt.json",
+      "restored_source_sha256": "a31c3b1930072a0079ed679b07218ec8b17cdeb8fda33c9dd38e81785f56f0c5",
+      "source_absence_note": null
+    },
+    {
+      "package": "hvjb-after-process-v01-20260921",
+      "manifest": "work/hvjb-after-process-v01-20260921/delivery_manifest.json",
+      "delivered_file": "/home/rlrk/Downloads/HVJB_後工程の役割と未確定工程_v01_20260921/after_process_review.json",
+      "expected_sha256": "00e3d04437d71ace2ea0514f57903bb10db82e9aad090b40219b049333fd8043",
+      "observed_sha256": "00e3d04437d71ace2ea0514f57903bb10db82e9aad090b40219b049333fd8043",
+      "restored_source": "work/hvjb-after-process-v01-20260921/output/after_process_review.json",
+      "restored_source_sha256": "00e3d04437d71ace2ea0514f57903bb10db82e9aad090b40219b049333fd8043",
+      "source_absence_note": null
+    },
+    {
+      "package": "hvjb-after-process-v01-20260921",
+      "manifest": "work/hvjb-after-process-v01-20260921/delivery_manifest.json",
+      "delivered_file": "/home/rlrk/Downloads/HVJB_後工程の役割と未確定工程_v01_20260921/document_audit.json",
+      "expected_sha256": "f07f262318fb8ee6cb8803626feefec17f1a87b03ae9c7a8dd3e2ed754d0ccea",
+      "observed_sha256": "f07f262318fb8ee6cb8803626feefec17f1a87b03ae9c7a8dd3e2ed754d0ccea",
+      "restored_source": "work/hvjb-after-process-v01-20260921/output/document_audit.json",
+      "restored_source_sha256": "f07f262318fb8ee6cb8803626feefec17f1a87b03ae9c7a8dd3e2ed754d0ccea",
+      "source_absence_note": null
+    },
+    {
+      "package": "hvjb-after-process-v01-20260921",
+      "manifest": "work/hvjb-after-process-v01-20260921/delivery_manifest.json",
+      "delivered_file": "/home/rlrk/Downloads/HVJB_後工程の役割と未確定工程_v01_20260921/pdf/HVJB_後工程の役割と未確定工程_v01_20260921.pdf",
+      "expected_sha256": "a7135c0630f030a6de99718ca42c09a6764c81e9b7909641131e7ad987d38a9b",
+      "observed_sha256": "a7135c0630f030a6de99718ca42c09a6764c81e9b7909641131e7ad987d38a9b",
+      "restored_source": "work/hvjb-after-process-v01-20260921/output/pdf/HVJB_後工程の役割と未確定工程_v01_20260921.pdf",
+      "restored_source_sha256": "a7135c0630f030a6de99718ca42c09a6764c81e9b7909641131e7ad987d38a9b",
+      "source_absence_note": null
+    },
+    {
+      "package": "hvjb-after-process-v01-20260921",
+      "manifest": "work/hvjb-after-process-v01-20260921/delivery_manifest.json",
+      "delivered_file": "/home/rlrk/Downloads/HVJB_後工程の役割と未確定工程_v01_20260921/pages/page-1.png",
+      "expected_sha256": "62f8255e184b9a8de280c1da48fbd1cf6ca97282d69b29949bbf1d97fcf05094",
+      "observed_sha256": "62f8255e184b9a8de280c1da48fbd1cf6ca97282d69b29949bbf1d97fcf05094",
+      "restored_source": "work/hvjb-after-process-v01-20260921/output/pages/page-1.png",
+      "restored_source_sha256": "62f8255e184b9a8de280c1da48fbd1cf6ca97282d69b29949bbf1d97fcf05094",
+      "source_absence_note": null
+    },
+    {
+      "package": "hvjb-after-process-v01-20260921",
+      "manifest": "work/hvjb-after-process-v01-20260921/delivery_manifest.json",
+      "delivered_file": "/home/rlrk/Downloads/HVJB_後工程の役割と未確定工程_v01_20260921/pages/page-2.png",
+      "expected_sha256": "3b900ccb315c64ce81b18b43e9ffb9e675c7ce941d16882362b574c081134b47",
+      "observed_sha256": "3b900ccb315c64ce81b18b43e9ffb9e675c7ce941d16882362b574c081134b47",
+      "restored_source": "work/hvjb-after-process-v01-20260921/output/pages/page-2.png",
+      "restored_source_sha256": "3b900ccb315c64ce81b18b43e9ffb9e675c7ce941d16882362b574c081134b47",
+      "source_absence_note": null
+    },
+    {
+      "package": "hvjb-test-plug-v01-20260921",
+      "manifest": "work/hvjb-test-plug-v01-20260921/delivery_manifest.json",
+      "delivered_file": "/home/rlrk/Downloads/HVJB_試験プラグの接続解除と担当比較_v01_20260921/README.md",
+      "expected_sha256": "ffa028b45a9c52fdc17ba5eccc4a0f4c9453704c53cd8d22b86aba7c4657cf20",
+      "observed_sha256": "ffa028b45a9c52fdc17ba5eccc4a0f4c9453704c53cd8d22b86aba7c4657cf20",
+      "restored_source": "work/hvjb-test-plug-v01-20260921/README.md",
+      "restored_source_sha256": "ffa028b45a9c52fdc17ba5eccc4a0f4c9453704c53cd8d22b86aba7c4657cf20",
+      "source_absence_note": null
+    },
+    {
+      "package": "hvjb-test-plug-v01-20260921",
+      "manifest": "work/hvjb-test-plug-v01-20260921/delivery_manifest.json",
+      "delivered_file": "/home/rlrk/Downloads/HVJB_試験プラグの接続解除と担当比較_v01_20260921/qa_receipt.json",
+      "expected_sha256": "7e3f4337ed59483ac9775f9eea3b936073b75982fabac3b2747ea1f94bb7a359",
+      "observed_sha256": "7e3f4337ed59483ac9775f9eea3b936073b75982fabac3b2747ea1f94bb7a359",
+      "restored_source": "work/hvjb-test-plug-v01-20260921/qa_receipt.json",
+      "restored_source_sha256": "7e3f4337ed59483ac9775f9eea3b936073b75982fabac3b2747ea1f94bb7a359",
+      "source_absence_note": null
+    },
+    {
+      "package": "hvjb-test-plug-v01-20260921",
+      "manifest": "work/hvjb-test-plug-v01-20260921/delivery_manifest.json",
+      "delivered_file": "/home/rlrk/Downloads/HVJB_試験プラグの接続解除と担当比較_v01_20260921/data/sources.json",
+      "expected_sha256": "09b9ac0bf9099b306b9fdb15e58eadc7bed20607c161df7b85345f5a1dd871d3",
+      "observed_sha256": "09b9ac0bf9099b306b9fdb15e58eadc7bed20607c161df7b85345f5a1dd871d3",
+      "restored_source": "work/hvjb-test-plug-v01-20260921/data/sources.json",
+      "restored_source_sha256": "09b9ac0bf9099b306b9fdb15e58eadc7bed20607c161df7b85345f5a1dd871d3",
+      "source_absence_note": null
+    },
+    {
+      "package": "hvjb-test-plug-v01-20260921",
+      "manifest": "work/hvjb-test-plug-v01-20260921/delivery_manifest.json",
+      "delivered_file": "/home/rlrk/Downloads/HVJB_試験プラグの接続解除と担当比較_v01_20260921/test_plug_review.json",
+      "expected_sha256": "fe48aa827fa59643dbcb8362f8ef2ac028183553f704740b52eea6f27350ee63",
+      "observed_sha256": "fe48aa827fa59643dbcb8362f8ef2ac028183553f704740b52eea6f27350ee63",
+      "restored_source": "work/hvjb-test-plug-v01-20260921/output/test_plug_review.json",
+      "restored_source_sha256": "fe48aa827fa59643dbcb8362f8ef2ac028183553f704740b52eea6f27350ee63",
+      "source_absence_note": null
+    },
+    {
+      "package": "hvjb-test-plug-v01-20260921",
+      "manifest": "work/hvjb-test-plug-v01-20260921/delivery_manifest.json",
+      "delivered_file": "/home/rlrk/Downloads/HVJB_試験プラグの接続解除と担当比較_v01_20260921/document_audit.json",
+      "expected_sha256": "8f32f19ea20d18585d1910530a93c77cea4f6bee1a5b81a337123b108062b8ea",
+      "observed_sha256": "8f32f19ea20d18585d1910530a93c77cea4f6bee1a5b81a337123b108062b8ea",
+      "restored_source": "work/hvjb-test-plug-v01-20260921/output/document_audit.json",
+      "restored_source_sha256": "8f32f19ea20d18585d1910530a93c77cea4f6bee1a5b81a337123b108062b8ea",
+      "source_absence_note": null
+    },
+    {
+      "package": "hvjb-test-plug-v01-20260921",
+      "manifest": "work/hvjb-test-plug-v01-20260921/delivery_manifest.json",
+      "delivered_file": "/home/rlrk/Downloads/HVJB_試験プラグの接続解除と担当比較_v01_20260921/pdf/HVJB_試験プラグの接続解除と担当比較_v01_20260921.pdf",
+      "expected_sha256": "59152230b4f194d4b2c2f86fe53b7e5f6743fe341f21e6ecebceafc05cbebaf5",
+      "observed_sha256": "59152230b4f194d4b2c2f86fe53b7e5f6743fe341f21e6ecebceafc05cbebaf5",
+      "restored_source": "work/hvjb-test-plug-v01-20260921/output/pdf/HVJB_試験プラグの接続解除と担当比較_v01_20260921.pdf",
+      "restored_source_sha256": "59152230b4f194d4b2c2f86fe53b7e5f6743fe341f21e6ecebceafc05cbebaf5",
+      "source_absence_note": null
+    },
+    {
+      "package": "hvjb-test-plug-v01-20260921",
+      "manifest": "work/hvjb-test-plug-v01-20260921/delivery_manifest.json",
+      "delivered_file": "/home/rlrk/Downloads/HVJB_試験プラグの接続解除と担当比較_v01_20260921/pages/page-1.png",
+      "expected_sha256": "de7958000a1f7b62a43c8665b600e7a35c0a12bac1eb0bf6e9ea94d9fc88e5f1",
+      "observed_sha256": "de7958000a1f7b62a43c8665b600e7a35c0a12bac1eb0bf6e9ea94d9fc88e5f1",
+      "restored_source": "work/hvjb-test-plug-v01-20260921/output/pages/page-1.png",
+      "restored_source_sha256": "de7958000a1f7b62a43c8665b600e7a35c0a12bac1eb0bf6e9ea94d9fc88e5f1",
+      "source_absence_note": null
+    },
+    {
+      "package": "hvjb-test-plug-v01-20260921",
+      "manifest": "work/hvjb-test-plug-v01-20260921/delivery_manifest.json",
+      "delivered_file": "/home/rlrk/Downloads/HVJB_試験プラグの接続解除と担当比較_v01_20260921/pages/page-2.png",
+      "expected_sha256": "37da8a7e9174189c4958e5268c678c1b1e6b2253c48df9726895b02c670e8d6f",
+      "observed_sha256": "37da8a7e9174189c4958e5268c678c1b1e6b2253c48df9726895b02c670e8d6f",
+      "restored_source": "work/hvjb-test-plug-v01-20260921/output/pages/page-2.png",
+      "restored_source_sha256": "37da8a7e9174189c4958e5268c678c1b1e6b2253c48df9726895b02c670e8d6f",
+      "source_absence_note": null
+    }
+  ],
+  "delivery_files_compared": 48,
+  "product_display": {
+    "manifest_sha256": "dc41b70a42c1f2ddc4e06ccf9ff5f38a3a89013fdd8e5b0c7c5723ee674856db",
+    "feature_count": 92,
+    "mesh_count": 465,
+    "archives": [
+      {
+        "file": "work/hvjb-inner-installed-access-v01-20260921/data/case.npz",
+        "sha256": "04e70e1e8c60fc5e12cc40eab9fb062351d1de130e6a5c83c5c8e16d2d1e82c6"
+      },
+      {
+        "file": "work/hvjb-inner-installed-access-v01-20260921/data/P16.npz",
+        "sha256": "b40309eb66f2e9c55f2eb8a2d9c543384184ed37a56f2f910da399a982891d90"
+      },
+      {
+        "file": "work/hvjb-inner-installed-access-v01-20260921/data/P17.npz",
+        "sha256": "3bb6616c9c5df182053ad10195857bf1d0653f1c42d45bb5791309992fa49d29"
+      },
+      {
+        "file": "work/hvjb-inner-installed-access-v01-20260921/data/inner_housings.npz",
+        "sha256": "551326397a7826c442d18759cda1c9b8989e21c9f4e1334e769351bc5574297b"
+      },
+      {
+        "file": "work/hvjb-inner-installed-access-v01-20260921/data/internals.npz",
+        "sha256": "da8424834137e9790b31643e9b4861652ceca4be28ca0d4b06ef3a3d5a7eaf59"
+      },
+      {
+        "file": "work/hvjb-inner-installed-access-v01-20260921/data/wires.npz",
+        "sha256": "7c615998fe54e2a02847dac58ff9efcc150d822f42dbef574de42cb2fb44b3eb"
+      }
+    ],
+    "scope": "Saved display geometry identity, not assembly completeness or physical validation."
+  },
+  "plan_sha256": "e640a9cb3008e418a595465d94bfaf6994bbbdb12a6c7ecbe94edd73996c05d2",
+  "work_ids": [
+    "D00",
+    "D01",
+    "D10",
+    "D11",
+    "D12",
+    "D20",
+    "D21",
+    "D22",
+    "D30",
+    "D31",
+    "D40",
+    "D42",
+    "D45",
+    "D50",
+    "D60",
+    "D61",
+    "D70",
+    "D71",
+    "D80",
+    "D81"
+  ],
+  "source_operations": [
+    "O00",
+    "O01",
+    "O10",
+    "O20",
+    "O30",
+    "O40",
+    "O42",
+    "O45",
+    "O50",
+    "O60",
+    "O70",
+    "O80"
+  ],
+  "coverage": {
+    "tasks": 20,
+    "operations": 12,
+    "photo_features": 92,
+    "functions": 17,
+    "circuit_groups": 13,
+    "lv_pins": 12
+  },
+  "role_selection": {
+    "revision": "hvjb_robot_selection_v01",
+    "decision_date": "2026-09-16",
+    "status": "user_selected_role_allocation",
+    "user_directive_ja": "補助を2腕に分ける",
+    "selected_plan": "S5_AB",
+    "selected_plan_ja": "主担当3腕＋A/B共用補助1腕＋C専用補助1腕",
+    "source_comparison": "data/hvjb_robot_sharing_v01.json",
+    "source_sha256": "7888693db9b5cd0314b7acecb6c0fa09ab7c207e43c2391fbfbf642833b99b90",
+    "selected_primary_arm_count": 3,
+    "selected_assist_arm_count": 2,
+    "selected_assembly_arm_count": 5,
+    "assist_groups": [
+      [
+        "X-A",
+        "X-B"
+      ],
+      [
+        "X-C"
+      ]
+    ],
+    "role_to_unit": {
+      "R-A": "ARM_A",
+      "R-B": "ARM_B",
+      "R-C": "ARM_C",
+      "X-A": "ASSIST_1",
+      "X-B": "ASSIST_1",
+      "X-C": "ASSIST_2"
+    },
+    "count_scope_ja": "A/B/Cの組立役に割り当てる5腕。ロボットの機台数や、OP010 XYZ・締付工具・搬送等を含むライン全体の設備台数ではない。",
+    "operating_constraints_ja": [
+      "AとBが同時に補助を必要とする場合は、把持開始前に作業順序を調整する。保持途中で手を離して別セルへ移らない。",
+      "A/B共用補助は、前の支持引継ぎ・開放・退避と、必要な手先交換・移動を終えてから次の保持を開始する。",
+      "C専用補助は自由端の案内と支持引継ぎを担当し、筐体搭載終了だけで空き扱いにしない。",
+      "既存の20仕事・据置締付工具・支持・供給・検査・回収の役割を保持する。該当する大小同時締結の2主軸条件を継承する。"
+    ],
+    "next_work_ja": "5腕の分担を前提に、A/B共用補助の保持区間・受渡しと、C専用補助の継続担当を具体化する。その上で配置・到達・干渉を確認する。",
+    "selected_robot_models": null,
+    "selected_robot_base_count": null,
+    "selected_layout": null,
+    "minimum_robot_count": null,
+    "measured_cycle_time_s": null,
+    "physical_acceptance_verdict": null
+  },
+  "logistics": {
+    "user_instruction_ja": "コンベアは1段でパレットを往復。筐体を取り出した枠に完成品を置く。",
+    "deck_count": 1,
+    "travel": "reciprocal_on_same_deck",
+    "shared_stock_slots": 20,
+    "supply_and_return_resource": "G-010",
+    "return_load": "finished_product_on_pallet",
+    "slot_reservation": "source_slot_kept_vacant_for_same_product",
+    "empty_pallet_after_storage": "at_supply_waiting_for_next_enclosure",
+    "pallet_fleet_count_selected": null,
+    "schedule_selected": null,
+    "retained_auxiliary_tasks_ja": "空容器回収、ボルト補給、必要な両手トレー搬送を別仕事として残す。"
+  },
+  "original_artifacts_modified": false,
+  "formal_physical_validity_verdict": null,
+  "script_sha256": "44c8065618cfb20a27f8b713c7bbf303f9818456c68aac9ed49341523fc6cfd9"
+}
