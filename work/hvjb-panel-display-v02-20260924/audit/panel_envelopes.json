@@ -1,0 +1,401 @@
+{
+  "input_bank": "/tmp/hvjb-line-progress-20260923/work/hvjb-hold-display-v01-20260924/data/concept_display_v05d.npz",
+  "input_bank_sha256": "72779ccf3e7a15087b45f2eeaa6cb5ccbb0ca1bef3cf7f06ac79a00c379d45b9",
+  "script_sha256": "51b409a34b43e023af2c19a4634041aaa9325d927df05d35180bed2c659c7f86",
+  "model_source_sha256": "83eba07a5eaa7717dc24a9e17f218127a6512d88441484d491ba9d8da1aa3e4d",
+  "dimensions": {
+    "board_top_above_origin": 0.249999997317791,
+    "component_top_above_origin": 0.20249999880790712,
+    "finger_bottom_from_target": -0.02000000298023224,
+    "display_free_band": [
+      0.20249999880790712,
+      0.249999997317791
+    ],
+    "illustration_tip_bottom": 0.22624999806284907,
+    "illustration_target_height": 0.2462500010430813,
+    "rule": "Center the finger bottom in the free upper band of the existing schematic board.",
+    "physical_length_unit": null
+  },
+  "observations": [
+    {
+      "id": "B_first",
+      "sample": 315,
+      "pairs": [
+        {
+          "finger": "B_left_finger",
+          "component_ordinal": 1,
+          "aabb_overlap_widths": [
+            -0.28000000059604635,
+            0.03200000151991844,
+            0.06250000178813919
+          ],
+          "positive_aabb_overlap": false
+        },
+        {
+          "finger": "B_left_finger",
+          "component_ordinal": 2,
+          "aabb_overlap_widths": [
+            -0.2949999974668025,
+            -0.07749999916553496,
+            0.02500000037252903
+          ],
+          "positive_aabb_overlap": false
+        },
+        {
+          "finger": "B_left_finger",
+          "component_ordinal": 3,
+          "aabb_overlap_widths": [
+            -0.0900000005960464,
+            0.03200000151991844,
+            0.06250000178813919
+          ],
+          "positive_aabb_overlap": false
+        },
+        {
+          "finger": "B_left_finger",
+          "component_ordinal": 4,
+          "aabb_overlap_widths": [
+            -0.10499999746680255,
+            -0.07749999916553496,
+            0.02500000037252903
+          ],
+          "positive_aabb_overlap": false
+        },
+        {
+          "finger": "B_left_finger",
+          "component_ordinal": 5,
+          "aabb_overlap_widths": [
+            0.09999999940395354,
+            0.03200000151991844,
+            0.06250000178813919
+          ],
+          "positive_aabb_overlap": true
+        },
+        {
+          "finger": "B_left_finger",
+          "component_ordinal": 6,
+          "aabb_overlap_widths": [
+            0.0850000025331974,
+            -0.07749999916553496,
+            0.02500000037252903
+          ],
+          "positive_aabb_overlap": false
+        },
+        {
+          "finger": "B_right_finger",
+          "component_ordinal": 1,
+          "aabb_overlap_widths": [
+            -0.28000000059604635,
+            -0.04400000058114528,
+            0.06250000178813919
+          ],
+          "positive_aabb_overlap": false
+        },
+        {
+          "finger": "B_right_finger",
+          "component_ordinal": 2,
+          "aabb_overlap_widths": [
+            -0.2949999974668025,
+            -0.15749999916553503,
+            0.02500000037252903
+          ],
+          "positive_aabb_overlap": false
+        },
+        {
+          "finger": "B_right_finger",
+          "component_ordinal": 3,
+          "aabb_overlap_widths": [
+            -0.0900000005960464,
+            -0.04400000058114528,
+            0.06250000178813919
+          ],
+          "positive_aabb_overlap": false
+        },
+        {
+          "finger": "B_right_finger",
+          "component_ordinal": 4,
+          "aabb_overlap_widths": [
+            -0.10499999746680255,
+            -0.15749999916553503,
+            0.02500000037252903
+          ],
+          "positive_aabb_overlap": false
+        },
+        {
+          "finger": "B_right_finger",
+          "component_ordinal": 5,
+          "aabb_overlap_widths": [
+            0.09999999940395354,
+            -0.04400000058114528,
+            0.06250000178813919
+          ],
+          "positive_aabb_overlap": false
+        },
+        {
+          "finger": "B_right_finger",
+          "component_ordinal": 6,
+          "aabb_overlap_widths": [
+            0.0850000025331974,
+            -0.15749999916553503,
+            0.02500000037252903
+          ],
+          "positive_aabb_overlap": false
+        }
+      ]
+    },
+    {
+      "id": "B_next",
+      "sample": 825,
+      "pairs": [
+        {
+          "finger": "B_left_finger",
+          "component_ordinal": 1,
+          "aabb_overlap_widths": [
+            -0.28000000059604657,
+            0.03200000151991844,
+            0.06250000178813941
+          ],
+          "positive_aabb_overlap": false
+        },
+        {
+          "finger": "B_left_finger",
+          "component_ordinal": 2,
+          "aabb_overlap_widths": [
+            -0.2949999974668027,
+            -0.07749999916553496,
+            0.02500000037252903
+          ],
+          "positive_aabb_overlap": false
+        },
+        {
+          "finger": "B_left_finger",
+          "component_ordinal": 3,
+          "aabb_overlap_widths": [
+            -0.09000000059604663,
+            0.03200000151991844,
+            0.06250000178813941
+          ],
+          "positive_aabb_overlap": false
+        },
+        {
+          "finger": "B_left_finger",
+          "component_ordinal": 4,
+          "aabb_overlap_widths": [
+            -0.10499999746680277,
+            -0.07749999916553496,
+            0.02500000037252903
+          ],
+          "positive_aabb_overlap": false
+        },
+        {
+          "finger": "B_left_finger",
+          "component_ordinal": 5,
+          "aabb_overlap_widths": [
+            0.09999999940395332,
+            0.03200000151991844,
+            0.06250000178813941
+          ],
+          "positive_aabb_overlap": true
+        },
+        {
+          "finger": "B_left_finger",
+          "component_ordinal": 6,
+          "aabb_overlap_widths": [
+            0.08500000253319717,
+            -0.07749999916553496,
+            0.02500000037252903
+          ],
+          "positive_aabb_overlap": false
+        },
+        {
+          "finger": "B_right_finger",
+          "component_ordinal": 1,
+          "aabb_overlap_widths": [
+            -0.28000000059604657,
+            -0.04400000058114528,
+            0.06250000178813941
+          ],
+          "positive_aabb_overlap": false
+        },
+        {
+          "finger": "B_right_finger",
+          "component_ordinal": 2,
+          "aabb_overlap_widths": [
+            -0.2949999974668027,
+            -0.15749999916553503,
+            0.02500000037252903
+          ],
+          "positive_aabb_overlap": false
+        },
+        {
+          "finger": "B_right_finger",
+          "component_ordinal": 3,
+          "aabb_overlap_widths": [
+            -0.09000000059604663,
+            -0.04400000058114528,
+            0.06250000178813941
+          ],
+          "positive_aabb_overlap": false
+        },
+        {
+          "finger": "B_right_finger",
+          "component_ordinal": 4,
+          "aabb_overlap_widths": [
+            -0.10499999746680277,
+            -0.15749999916553503,
+            0.02500000037252903
+          ],
+          "positive_aabb_overlap": false
+        },
+        {
+          "finger": "B_right_finger",
+          "component_ordinal": 5,
+          "aabb_overlap_widths": [
+            0.09999999940395332,
+            -0.04400000058114528,
+            0.06250000178813941
+          ],
+          "positive_aabb_overlap": false
+        },
+        {
+          "finger": "B_right_finger",
+          "component_ordinal": 6,
+          "aabb_overlap_widths": [
+            0.08500000253319717,
+            -0.15749999916553503,
+            0.02500000037252903
+          ],
+          "positive_aabb_overlap": false
+        }
+      ]
+    },
+    {
+      "id": "C_panel",
+      "sample": 690,
+      "pairs": [
+        {
+          "finger": "C主_left_finger",
+          "component_ordinal": 1,
+          "aabb_overlap_widths": [
+            0.09999999940395354,
+            0.03200000151991844,
+            0.06250000178813941
+          ],
+          "positive_aabb_overlap": true
+        },
+        {
+          "finger": "C主_left_finger",
+          "component_ordinal": 2,
+          "aabb_overlap_widths": [
+            0.0850000025331974,
+            -0.07749999916553502,
+            0.02500000037252903
+          ],
+          "positive_aabb_overlap": false
+        },
+        {
+          "finger": "C主_left_finger",
+          "component_ordinal": 3,
+          "aabb_overlap_widths": [
+            -0.09000000059604646,
+            0.03200000151991844,
+            0.06250000178813941
+          ],
+          "positive_aabb_overlap": false
+        },
+        {
+          "finger": "C主_left_finger",
+          "component_ordinal": 4,
+          "aabb_overlap_widths": [
+            -0.10499999746680261,
+            -0.07749999916553502,
+            0.02500000037252903
+          ],
+          "positive_aabb_overlap": false
+        },
+        {
+          "finger": "C主_left_finger",
+          "component_ordinal": 5,
+          "aabb_overlap_widths": [
+            -0.28000000059604646,
+            0.03200000151991844,
+            0.06250000178813941
+          ],
+          "positive_aabb_overlap": false
+        },
+        {
+          "finger": "C主_left_finger",
+          "component_ordinal": 6,
+          "aabb_overlap_widths": [
+            -0.2949999974668026,
+            -0.07749999916553502,
+            0.02500000037252903
+          ],
+          "positive_aabb_overlap": false
+        },
+        {
+          "finger": "C主_right_finger",
+          "component_ordinal": 1,
+          "aabb_overlap_widths": [
+            0.09999999940395354,
+            -0.04400000058114534,
+            0.06250000178813941
+          ],
+          "positive_aabb_overlap": false
+        },
+        {
+          "finger": "C主_right_finger",
+          "component_ordinal": 2,
+          "aabb_overlap_widths": [
+            0.0850000025331974,
+            -0.15749999916553503,
+            0.02500000037252903
+          ],
+          "positive_aabb_overlap": false
+        },
+        {
+          "finger": "C主_right_finger",
+          "component_ordinal": 3,
+          "aabb_overlap_widths": [
+            -0.09000000059604646,
+            -0.04400000058114534,
+            0.06250000178813941
+          ],
+          "positive_aabb_overlap": false
+        },
+        {
+          "finger": "C主_right_finger",
+          "component_ordinal": 4,
+          "aabb_overlap_widths": [
+            -0.10499999746680261,
+            -0.15749999916553503,
+            0.02500000037252903
+          ],
+          "positive_aabb_overlap": false
+        },
+        {
+          "finger": "C主_right_finger",
+          "component_ordinal": 5,
+          "aabb_overlap_widths": [
+            -0.28000000059604646,
+            -0.04400000058114534,
+            0.06250000178813941
+          ],
+          "positive_aabb_overlap": false
+        },
+        {
+          "finger": "C主_right_finger",
+          "component_ordinal": 6,
+          "aabb_overlap_widths": [
+            -0.2949999974668026,
+            -0.15749999916553503,
+            0.02500000037252903
+          ],
+          "positive_aabb_overlap": false
+        }
+      ]
+    }
+  ],
+  "scope": "Axis-aligned bounds of simple schematic boxes, not real contact judgment.",
+  "physical_acceptance_verdict": null
+}

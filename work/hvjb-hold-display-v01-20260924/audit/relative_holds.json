@@ -1,0 +1,534 @@
+{
+  "observed_at": "2026-09-24T05:22:11.871236+09:00",
+  "input_sha256": {
+    "/tmp/hvjb-line-progress-20260923/work/hvjb-xyz-display-v01-20260924/data/concept_display_v05c.npz": "21a64890540a06d94c06c6ee8e607f90dbe9c5b69ddf14fe944135614e28c409",
+    "/tmp/hvjb-line-progress-20260923/work/hvjb-line-video-v05b-20260923/data/concept_v05b.json": "d2a9937c621df4b8be60092146890f6a04ccf359efd5023595c41dee61793a7b",
+    "/tmp/hvjb-line-progress-20260923/work/hvjb-display-continuity-v01-20260923/probe_saved.py": "c58c517ee79e2ac1c390478924e49a430038537dfa8ebb759e8c2b7153351be5",
+    "/tmp/hvjb-line-progress-20260923/work/hvjb-hold-display-v01-20260924/probe_holds.py": "64b17f95575db5060d1c3c64c950868a7831e74a30951964420b12cffe5210bd",
+    "/tmp/hvjb-line-progress-20260923/work/hvjb-line-video-v03-20260921/legacy_model.py": "83eba07a5eaa7717dc24a9e17f218127a6512d88441484d491ba9d8da1aa3e4d"
+  },
+  "pairs": [
+    {
+      "id": "XYZ_load",
+      "hand": "infeed",
+      "product_node_first_occurrence": "case",
+      "application": "H06_CASE",
+      "window_source_clock": [
+        4.6,
+        8.7
+      ],
+      "samples": 62,
+      "scenes": [
+        "S01"
+      ],
+      "first_last_sample_index": [
+        54,
+        115
+      ],
+      "first_last_video_s": [
+        3.6,
+        7.666666666666667
+      ],
+      "relative_position_first_last": [
+        [
+          0.0,
+          0.0,
+          0.14000000000000012
+        ],
+        [
+          0.0,
+          0.0,
+          0.14
+        ]
+      ],
+      "relative_position_range": [
+        0.0,
+        0.0,
+        6.661338147750939e-16
+      ],
+      "opening_min_max": [
+        0.7499999999999996,
+        0.7500000000000004
+      ],
+      "yaw_degrees_min_max": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "id": "A_part",
+      "hand": "A",
+      "product_node_first_occurrence": "contactor",
+      "application": "H01_BODY",
+      "window_source_clock": [
+        12.2,
+        19
+      ],
+      "samples": 120,
+      "scenes": [
+        "S03"
+      ],
+      "first_last_sample_index": [
+        232,
+        351
+      ],
+      "first_last_video_s": [
+        15.466666666666667,
+        23.4
+      ],
+      "relative_position_first_last": [
+        [
+          0.0,
+          0.0,
+          1.1102230246251565e-16
+        ],
+        [
+          0.0,
+          0.0,
+          0.0
+        ]
+      ],
+      "relative_position_range": [
+        4.440892098500626e-16,
+        2.220446049250313e-16,
+        2.220446049250313e-16
+      ],
+      "opening_min_max": [
+        0.14999999999999994,
+        0.15000000000000016
+      ],
+      "yaw_degrees_min_max": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "id": "B_panel_stock",
+      "hand": "B",
+      "product_node_first_occurrence": "panel",
+      "application": "H07_PANEL",
+      "window_source_clock": [
+        12,
+        17
+      ],
+      "samples": 88,
+      "scenes": [
+        "S03"
+      ],
+      "first_last_sample_index": [
+        228,
+        315
+      ],
+      "first_last_video_s": [
+        15.2,
+        21.0
+      ],
+      "relative_position_first_last": [
+        [
+          0.20000000000000018,
+          0.0,
+          0.16000000000000003
+        ],
+        [
+          0.19999999999999996,
+          0.0,
+          0.16000000000000003
+        ]
+      ],
+      "relative_position_range": [
+        2.220446049250313e-16,
+        0.0,
+        1.1102230246251565e-16
+      ],
+      "opening_min_max": [
+        0.04799999999999985,
+        0.04800000000000007
+      ],
+      "yaw_degrees_min_max": [
+        89.99999999999999,
+        89.99999999999999
+      ]
+    },
+    {
+      "id": "A_unit_to_C",
+      "hand": "A",
+      "product_node_first_occurrence": "base",
+      "application": "H06_UNIT",
+      "window_source_clock": [
+        22,
+        27
+      ],
+      "samples": 70,
+      "scenes": [
+        "S05"
+      ],
+      "first_last_sample_index": [
+        480,
+        549
+      ],
+      "first_last_video_s": [
+        32.0,
+        36.6
+      ],
+      "relative_position_first_last": [
+        [
+          0.0,
+          0.0,
+          0.04500000000000004
+        ],
+        [
+          0.0,
+          0.0,
+          0.04500000000000004
+        ]
+      ],
+      "relative_position_range": [
+        0.0,
+        0.0,
+        2.220446049250313e-16
+      ],
+      "opening_min_max": [
+        0.6199999999999999,
+        0.6200000000000001
+      ],
+      "yaw_degrees_min_max": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "id": "B_panel_to_C",
+      "hand": "B",
+      "product_node_first_occurrence": "panel",
+      "application": "H07_PANEL",
+      "window_source_clock": [
+        29,
+        34.5
+      ],
+      "samples": 77,
+      "scenes": [
+        "S05"
+      ],
+      "first_last_sample_index": [
+        577,
+        653
+      ],
+      "first_last_video_s": [
+        38.46666666666667,
+        43.53333333333333
+      ],
+      "relative_position_first_last": [
+        [
+          0.19999999999999996,
+          0.0,
+          0.16000000000000003
+        ],
+        [
+          0.2,
+          0.0,
+          0.16000000000000003
+        ]
+      ],
+      "relative_position_range": [
+        1.1102230246251565e-16,
+        0.0,
+        1.1102230246251565e-16
+      ],
+      "opening_min_max": [
+        0.04799999999999985,
+        0.04800000000000007
+      ],
+      "yaw_degrees_min_max": [
+        89.99999999999999,
+        89.99999999999999
+      ]
+    },
+    {
+      "id": "C_unit_to_case",
+      "hand": "C主",
+      "product_node_first_occurrence": "base",
+      "application": "H06_UNIT",
+      "window_source_clock": [
+        40,
+        47
+      ],
+      "samples": 106,
+      "scenes": [
+        "S08"
+      ],
+      "first_last_sample_index": [
+        825,
+        930
+      ],
+      "first_last_video_s": [
+        55.0,
+        62.0
+      ],
+      "relative_position_first_last": [
+        [
+          0.0,
+          0.0,
+          0.04500000000000004
+        ],
+        [
+          0.0,
+          0.0,
+          0.04500000000000004
+        ]
+      ],
+      "relative_position_range": [
+        0.0,
+        0.0,
+        2.220446049250313e-16
+      ],
+      "opening_min_max": [
+        0.6199999999999999,
+        0.6200000000000001
+      ],
+      "yaw_degrees_min_max": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "id": "C_outer_header",
+      "hand": "C主",
+      "product_node_first_occurrence": "header_flange",
+      "application": "H05_OUTER3",
+      "window_source_clock": [
+        50,
+        51.8
+      ],
+      "samples": 45,
+      "scenes": [
+        "S11"
+      ],
+      "first_last_sample_index": [
+        1150,
+        1194
+      ],
+      "first_last_video_s": [
+        76.66666666666667,
+        79.6
+      ],
+      "relative_position_first_last": [
+        [
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          -0.05980444444444455,
+          0.009967407407407425
+        ]
+      ],
+      "relative_position_range": [
+        0.0,
+        0.05980444444444455,
+        0.009967407407407425
+      ],
+      "opening_min_max": [
+        0.2849999999999999,
+        0.28500000000000014
+      ],
+      "yaw_degrees_min_max": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "id": "C_busbar",
+      "hand": "C主",
+      "product_node_first_occurrence": "busbar",
+      "application": "H03_BUS",
+      "window_source_clock": [
+        56.3,
+        58
+      ],
+      "samples": 29,
+      "scenes": [
+        "S12"
+      ],
+      "first_last_sample_index": [
+        1298,
+        1326
+      ],
+      "first_last_video_s": [
+        86.53333333333333,
+        88.4
+      ],
+      "relative_position_first_last": [
+        [
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0
+        ]
+      ],
+      "relative_position_range": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "opening_min_max": [
+        0.08299999999999988,
+        0.08300000000000021
+      ],
+      "yaw_degrees_min_max": [
+        89.99999999999999,
+        89.99999999999999
+      ]
+    },
+    {
+      "id": "XYZ_return",
+      "hand": "infeed",
+      "product_node_first_occurrence": "case",
+      "application": "H06_CASE",
+      "window_source_clock": [
+        74.7,
+        79.4
+      ],
+      "samples": 71,
+      "scenes": [
+        "S16"
+      ],
+      "first_last_sample_index": [
+        1631,
+        1701
+      ],
+      "first_last_video_s": [
+        108.73333333333333,
+        113.4
+      ],
+      "relative_position_first_last": [
+        [
+          0.0,
+          0.0,
+          0.1399999999999999
+        ],
+        [
+          0.0,
+          0.0,
+          0.14000000000000012
+        ]
+      ],
+      "relative_position_range": [
+        0.0,
+        0.0,
+        4.440892098500626e-16
+      ],
+      "opening_min_max": [
+        0.75,
+        0.7500000000000004
+      ],
+      "yaw_degrees_min_max": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "id": "A_next_unit",
+      "hand": "A",
+      "product_node_first_occurrence": "base_next",
+      "application": "H06_UNIT",
+      "window_source_clock": [
+        32,
+        37
+      ],
+      "samples": 102,
+      "scenes": [
+        "S05",
+        "S06"
+      ],
+      "first_last_sample_index": [
+        619,
+        720
+      ],
+      "first_last_video_s": [
+        41.266666666666666,
+        48.0
+      ],
+      "relative_position_first_last": [
+        [
+          0.0,
+          0.0,
+          0.15000000000000002
+        ],
+        [
+          0.0,
+          0.0,
+          0.04999999999999993
+        ]
+      ],
+      "relative_position_range": [
+        0.0,
+        0.0,
+        0.10000000000000042
+      ],
+      "opening_min_max": [
+        0.08499999999999999,
+        0.08500000000000021
+      ],
+      "yaw_degrees_min_max": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "id": "B_next_panel",
+      "hand": "B",
+      "product_node_first_occurrence": "panel_next",
+      "application": "H07_PANEL",
+      "window_source_clock": [
+        38,
+        42
+      ],
+      "samples": 106,
+      "scenes": [
+        "S07",
+        "S08"
+      ],
+      "first_last_sample_index": [
+        750,
+        855
+      ],
+      "first_last_video_s": [
+        50.0,
+        57.0
+      ],
+      "relative_position_first_last": [
+        [
+          0.0,
+          0.0,
+          0.20000000000000007
+        ],
+        [
+          0.0,
+          0.0,
+          0.20000000000000007
+        ]
+      ],
+      "relative_position_range": [
+        0.0,
+        0.0,
+        6.661338147750939e-16
+      ],
+      "opening_min_max": [
+        0.054999999999999744,
+        0.05500000000000019
+      ],
+      "yaw_degrees_min_max": [
+        0.0,
+        0.0
+      ]
+    }
+  ],
+  "position_units": "Dimensionless explanatory coordinates; not manufacturing length units.",
+  "window_basis": "Existing legacy carry key times; duplicate group names use their first object plus stored offset.",
+  "physical_acceptance_verdict": null
+}

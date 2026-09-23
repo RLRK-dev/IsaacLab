@@ -1,0 +1,5849 @@
+{
+  "observed_at": "2026-09-24T06:11:11.373178+09:00",
+  "input_sha256": {
+    "/tmp/hvjb-line-progress-20260923/work/hvjb-hold-display-v01-20260924/data/concept_display_v05d.npz": "72779ccf3e7a15087b45f2eeaa6cb5ccbb0ca1bef3cf7f06ac79a00c379d45b9",
+    "/tmp/hvjb-line-progress-20260923/work/hvjb-panel-display-v02-20260924/audit/panel_envelopes.json": "8728c96de76d9565279feaf638973a079380e703b94759071a94265720496637",
+    "/tmp/hvjb-line-progress-20260923/work/hvjb-panel-display-v02-20260924/build_bank.py": "32fa8518f63806ad48563b96d561d63c4ad11f77ac45154d3ab37930fe268111",
+    "/tmp/hvjb-line-progress-20260923/work/hvjb-panel-display-v02-20260924/correct_panel.py": "7d658be24dbf1fc0093d732ae5268e424fa766b598b7a3ec4634a7a6cf410b75",
+    "/tmp/hvjb-line-progress-20260923/work/hvjb-panel-display-v02-20260924/probe_panel.py": "51b409a34b43e023af2c19a4634041aaa9325d927df05d35180bed2c659c7f86",
+    "/tmp/hvjb-line-progress-20260923/work/hvjb-line-video-v05b-20260923/data/concept_v05b.json": "d2a9937c621df4b8be60092146890f6a04ccf359efd5023595c41dee61793a7b",
+    "/tmp/hvjb-line-progress-20260923/work/hvjb-display-continuity-v01-20260923/probe_saved.py": "c58c517ee79e2ac1c390478924e49a430038537dfa8ebb759e8c2b7153351be5",
+    "/tmp/hvjb-line-progress-20260923/work/hvjb-line-video-v04-20260923/render_review.py": "068e446492ab4d8d4e1d95fb78bcf839646fd569f5bbe3d785d570a09732407f",
+    "/tmp/hvjb-line-progress-20260923/work/hvjb-line-video-v03-20260921/render_process.py": "3ab9f8b5b904799cb1c8eba4e07eade42fc5d0b8c12c685feffb8f070b068b3c",
+    "/tmp/hvjb-line-progress-20260923/work/hvjb-line-video-v03-20260921/legacy_model.py": "83eba07a5eaa7717dc24a9e17f218127a6512d88441484d491ba9d8da1aa3e4d",
+    "/tmp/hvjb-line-progress-20260923/work/hvjb-line-video-v03-20260921/inputs/line_process_plan.json": "e640a9cb3008e418a595465d94bfaf6994bbbdb12a6c7ecbe94edd73996c05d2",
+    "/tmp/hvjb-line-progress-20260923/work/hvjb-line-video-v03-20260921/data/concept_v03.json": "6eb3775b07a288c86d97de5074c17ace01cac5b3d8b6a4d472c021a299426216",
+    "/tmp/hvjb-line-progress-20260923/work/hvjb-line-progress-20260923/data/line_review_data.json": "55948e4d2603b4ebe1ccd30160c89baa990623ad96eedc515c17583bac4bb440",
+    "/tmp/hvjb-line-progress-20260923/work/hvjb-line-progress-20260923/audit/product_final_views.json": "8259c68f05a2d43152d69751e783168d7a3cb2328936b44809da211199cdaac4",
+    "/home/rlrk/src/ur15-line-render/render_ur15_line.py": "b87bd76092f3b6a9f279de2ce7f0f7976703e1f54637fcd4dc1c51ed686241f9",
+    "/usr/share/fonts/opentype/noto/NotoSansCJK-Regular.ttc": "b76b0433203017ca80401b2ee0dd69350349871c4b19d504c34dbdd80541690a",
+    "/tmp/hvjb-line-progress-20260923/work/hvjb-line-video-v04-20260923/data/concept_v03_reused.npz": "52eede374a2d782aabf1cc2604801cc64e6f884b39060728c437631a8dca36dc",
+    "/tmp/hvjb-line-progress-20260923/work/hvjb-line-progress-20260923/figures/product_final/after_insertion_bus.png": "1ebdeac6c8e1257618f92393bd1232e972a09052fb478d8086c2b28bf68d98ff",
+    "/tmp/hvjb-line-progress-20260923/work/hvjb-line-progress-20260923/figures/product_final/case.png": "804a3a906d1c6c389190a73dee6f7f6f7ee3d817323f1b725df38d5eec869948",
+    "/tmp/hvjb-line-progress-20260923/work/hvjb-line-progress-20260923/figures/product_final/external_headers.png": "3d141b70f9e1b60e8c4d0dde203f300353408896ea8736f304eaaab18d4214e0",
+    "/tmp/hvjb-line-progress-20260923/work/hvjb-line-progress-20260923/figures/product_final/internal_housings.png": "28750afc206b4788f4e6f998977340f6cbc3e07ab468a8fad2d1e42c55fcd1a0",
+    "/tmp/hvjb-line-progress-20260923/work/hvjb-line-progress-20260923/figures/product_final/main_and_lv_unassigned.png": "9f4fa8b01c35b3fd5693783f621695aaddbcf7df4fa04948d3c228ed1fd89135",
+    "/tmp/hvjb-line-progress-20260923/work/hvjb-line-progress-20260923/figures/product_final/main_fuse_unassigned.png": "a356f01471d61e4cfb7b7028ec5c1c47809b5890ccabc123fdbe7e34eaed890c",
+    "/tmp/hvjb-line-progress-20260923/work/hvjb-line-progress-20260923/figures/product_final/outside_A.png": "3dcfd30f17a6f1a3435f057f6fc71ff751d6f7e0367b33dba91f64d879e443d1",
+    "/tmp/hvjb-line-progress-20260923/work/hvjb-line-progress-20260923/figures/product_final/outside_B.png": "f6ec93e36e019addee1090552c21b350f4ca92716d010eb94d8a4ec16fb837d9",
+    "/tmp/hvjb-line-progress-20260923/work/hvjb-line-progress-20260923/figures/product_final/product.png": "d30a05313b415d3f5862f0016aa13b523eb7bf09e6d65bd2ad9fb0a0dd99ee94",
+    "/tmp/hvjb-line-progress-20260923/work/hvjb-line-progress-20260923/figures/product_final/wires_display_only.png": "459339d8dcc9cc79cf54e53a82a9b226d1176c0782082646221966d45e9898fd",
+    "/tmp/hvjb-line-progress-20260923/work/hvjb-line-video-v05-20260923/render_review.py": "61f7424969caf8fa1f3c11ca03ec4ad25f1f178cd75a7e226ed27d0e1c529245",
+    "/tmp/hvjb-line-progress-20260923/work/hvjb-line-video-v04-20260923/previews/concept_v04/manifest.json": "5dd7e1f92358971f427d54bc2867911d0270ec243f962b0f0e786f72e9b45554",
+    "/tmp/hvjb-line-progress-20260923/work/hvjb-display-continuity-v01-20260923/correct_display.py": "61c0e255965216795fe078894e72fa64de59ff661a7110b6012858be71b7fa68",
+    "/tmp/hvjb-line-progress-20260923/work/hvjb-display-continuity-v01-20260923/audit/correction_verification.json": "d5e52826edc6905a71c7a267bdf74d0b4dce7aff141d9c29f35f60f9c96b98b6",
+    "/tmp/hvjb-line-progress-20260923/work/hvjb-display-continuity-v01-20260923/audit/display_v05_delta.json": "8c83ab80a456085005715d7c8db2a3b5d9a88b4725deb9e78e12a686af1b35fe",
+    "/tmp/hvjb-line-progress-20260923/work/hvjb-line-video-v05-20260923/audit/camera_framing.json": "135ec3153771d0fba5f391dda3f13241921faad9a73f5f8b6a6f72d0e4cf4489",
+    "/tmp/hvjb-line-progress-20260923/work/hvjb-line-video-v05-20260923/prepare_camera.py": "361dce7d48ebf61f0f3cf3a08f5a7e707f3b845593fdb9a50b8a04c35abf3730",
+    "/tmp/hvjb-line-progress-20260923/work/hvjb-line-video-v05-20260923/data/concept_display_v05_framed.npz": "7702cadf9e412895a14c82d1a6b85a6aa659f2978c22e59ddf16e2714c793a60",
+    "/tmp/hvjb-line-progress-20260923/work/hvjb-line-video-v05b-20260923/render_review.py": "99c68006cfa4c9ab1c4d7190918cbd1ecc28548fc7887f44513ef482f8743d66",
+    "/tmp/hvjb-line-progress-20260923/work/hvjb-line-video-v05b-20260923/REVIEW_SCOPE.md": "de58bc063df4bc9c93cb9b2561fab194a5a5bc3dfc8560322cb6cb44204f595f",
+    "/tmp/hvjb-line-progress-20260923/work/hvjb-logistics-review-v01-20260923/audit/logistics_observations.json": "219ebd9fb43f2f69ead76d09a412958b4d606af4665021dab6d882880f59cf03",
+    "/tmp/hvjb-line-progress-20260923/work/hvjb-line-video-v05b-20260923/data/concept_display_v05_reused.npz": "7702cadf9e412895a14c82d1a6b85a6aa659f2978c22e59ddf16e2714c793a60",
+    "/tmp/hvjb-line-progress-20260923/work/hvjb-xyz-display-v01-20260924/data/concept_display_v05c.npz": "21a64890540a06d94c06c6ee8e607f90dbe9c5b69ddf14fe944135614e28c409",
+    "/tmp/hvjb-line-progress-20260923/work/hvjb-hold-display-v01-20260924/build_bank.py": "d934d25dc9201635c985eb3d71902301859003f8293fca8da985a1d3d5b2d140",
+    "/tmp/hvjb-line-progress-20260923/work/hvjb-hold-display-v01-20260924/correct_holds.py": "94985af0b5d1c22c10ad31d254130d7f6d04fa966bae123c591079510b8e7435",
+    "/tmp/hvjb-line-progress-20260923/work/hvjb-hold-display-v01-20260924/probe_holds.py": "ca629a15833b48d2a20fe3c644c668a6f838c47e1ade3d19302446abb0813431"
+  },
+  "output_bank": "data/concept_display_v05d.npz",
+  "output_sha256": "0bb2f0e4e55e40def49cd2cfd7eecf99e0e7a4bdc9b7ea4097768f7c1cc00044",
+  "changed_samples": 797,
+  "changed_columns": [
+    {
+      "column": 10,
+      "name": "B_link_0"
+    },
+    {
+      "column": 11,
+      "name": "B_link_1"
+    },
+    {
+      "column": 12,
+      "name": "B_link_2"
+    },
+    {
+      "column": 14,
+      "name": "B_joint_1"
+    },
+    {
+      "column": 15,
+      "name": "B_joint_2"
+    },
+    {
+      "column": 16,
+      "name": "B_palm"
+    },
+    {
+      "column": 17,
+      "name": "B_left_finger"
+    },
+    {
+      "column": 18,
+      "name": "B_right_finger"
+    },
+    {
+      "column": 19,
+      "name": "B_carrier"
+    },
+    {
+      "column": 30,
+      "name": "C主_link_0"
+    },
+    {
+      "column": 31,
+      "name": "C主_link_1"
+    },
+    {
+      "column": 32,
+      "name": "C主_link_2"
+    },
+    {
+      "column": 34,
+      "name": "C主_joint_1"
+    },
+    {
+      "column": 35,
+      "name": "C主_joint_2"
+    },
+    {
+      "column": 36,
+      "name": "C主_palm"
+    },
+    {
+      "column": 37,
+      "name": "C主_left_finger"
+    },
+    {
+      "column": 38,
+      "name": "C主_right_finger"
+    },
+    {
+      "column": 39,
+      "name": "C主_carrier"
+    }
+  ],
+  "action_sample_counts": {
+    "B_panel_symbol_upper_band": 796,
+    "C_panel_receive_and_release_symbol": 154
+  },
+  "actions": [
+    {
+      "index": 148,
+      "video_s": 9.866666666666667,
+      "scene": "S01",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 149,
+      "video_s": 9.933333333333334,
+      "scene": "S01",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 150,
+      "video_s": 10.0,
+      "scene": "S02",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 151,
+      "video_s": 10.066666666666666,
+      "scene": "S02",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 152,
+      "video_s": 10.133333333333333,
+      "scene": "S02",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 153,
+      "video_s": 10.2,
+      "scene": "S02",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 154,
+      "video_s": 10.266666666666667,
+      "scene": "S02",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 155,
+      "video_s": 10.333333333333334,
+      "scene": "S02",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 156,
+      "video_s": 10.4,
+      "scene": "S02",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 157,
+      "video_s": 10.466666666666667,
+      "scene": "S02",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 158,
+      "video_s": 10.533333333333333,
+      "scene": "S02",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 159,
+      "video_s": 10.6,
+      "scene": "S02",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 160,
+      "video_s": 10.666666666666666,
+      "scene": "S02",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 161,
+      "video_s": 10.733333333333333,
+      "scene": "S02",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 162,
+      "video_s": 10.8,
+      "scene": "S02",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 163,
+      "video_s": 10.866666666666667,
+      "scene": "S02",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 164,
+      "video_s": 10.933333333333334,
+      "scene": "S02",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 165,
+      "video_s": 11.0,
+      "scene": "S02",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 166,
+      "video_s": 11.066666666666666,
+      "scene": "S02",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 167,
+      "video_s": 11.133333333333333,
+      "scene": "S02",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 168,
+      "video_s": 11.2,
+      "scene": "S02",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 169,
+      "video_s": 11.266666666666667,
+      "scene": "S02",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 170,
+      "video_s": 11.333333333333334,
+      "scene": "S02",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 171,
+      "video_s": 11.4,
+      "scene": "S02",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 172,
+      "video_s": 11.466666666666667,
+      "scene": "S02",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 173,
+      "video_s": 11.533333333333333,
+      "scene": "S02",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 174,
+      "video_s": 11.6,
+      "scene": "S02",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 175,
+      "video_s": 11.666666666666666,
+      "scene": "S02",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 176,
+      "video_s": 11.733333333333333,
+      "scene": "S02",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 177,
+      "video_s": 11.8,
+      "scene": "S02",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 178,
+      "video_s": 11.866666666666667,
+      "scene": "S02",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 179,
+      "video_s": 11.933333333333334,
+      "scene": "S02",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 180,
+      "video_s": 12.0,
+      "scene": "S02",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 181,
+      "video_s": 12.066666666666666,
+      "scene": "S02",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 182,
+      "video_s": 12.133333333333333,
+      "scene": "S02",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 183,
+      "video_s": 12.2,
+      "scene": "S02",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 184,
+      "video_s": 12.266666666666667,
+      "scene": "S02",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 185,
+      "video_s": 12.333333333333334,
+      "scene": "S02",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 186,
+      "video_s": 12.4,
+      "scene": "S02",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 187,
+      "video_s": 12.466666666666667,
+      "scene": "S02",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 188,
+      "video_s": 12.533333333333333,
+      "scene": "S02",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 189,
+      "video_s": 12.6,
+      "scene": "S02",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 190,
+      "video_s": 12.666666666666666,
+      "scene": "S02",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 191,
+      "video_s": 12.733333333333333,
+      "scene": "S02",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 192,
+      "video_s": 12.8,
+      "scene": "S02",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 193,
+      "video_s": 12.866666666666667,
+      "scene": "S02",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 194,
+      "video_s": 12.933333333333334,
+      "scene": "S02",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 195,
+      "video_s": 13.0,
+      "scene": "S02",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 196,
+      "video_s": 13.066666666666666,
+      "scene": "S02",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 197,
+      "video_s": 13.133333333333333,
+      "scene": "S02",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 198,
+      "video_s": 13.2,
+      "scene": "S02",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 199,
+      "video_s": 13.266666666666667,
+      "scene": "S02",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 200,
+      "video_s": 13.333333333333334,
+      "scene": "S02",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 201,
+      "video_s": 13.4,
+      "scene": "S02",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 202,
+      "video_s": 13.466666666666667,
+      "scene": "S02",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 203,
+      "video_s": 13.533333333333333,
+      "scene": "S02",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 204,
+      "video_s": 13.6,
+      "scene": "S02",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 205,
+      "video_s": 13.666666666666666,
+      "scene": "S02",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 206,
+      "video_s": 13.733333333333333,
+      "scene": "S02",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 207,
+      "video_s": 13.8,
+      "scene": "S02",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 208,
+      "video_s": 13.866666666666667,
+      "scene": "S02",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 209,
+      "video_s": 13.933333333333334,
+      "scene": "S02",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 210,
+      "video_s": 14.0,
+      "scene": "S03",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 211,
+      "video_s": 14.066666666666666,
+      "scene": "S03",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 212,
+      "video_s": 14.133333333333333,
+      "scene": "S03",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 213,
+      "video_s": 14.2,
+      "scene": "S03",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 214,
+      "video_s": 14.266666666666667,
+      "scene": "S03",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 215,
+      "video_s": 14.333333333333334,
+      "scene": "S03",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 216,
+      "video_s": 14.4,
+      "scene": "S03",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 217,
+      "video_s": 14.466666666666667,
+      "scene": "S03",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 218,
+      "video_s": 14.533333333333333,
+      "scene": "S03",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 219,
+      "video_s": 14.6,
+      "scene": "S03",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 220,
+      "video_s": 14.666666666666666,
+      "scene": "S03",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 221,
+      "video_s": 14.733333333333333,
+      "scene": "S03",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 222,
+      "video_s": 14.8,
+      "scene": "S03",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 223,
+      "video_s": 14.866666666666667,
+      "scene": "S03",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 224,
+      "video_s": 14.933333333333334,
+      "scene": "S03",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 225,
+      "video_s": 15.0,
+      "scene": "S03",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 226,
+      "video_s": 15.066666666666666,
+      "scene": "S03",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 227,
+      "video_s": 15.133333333333333,
+      "scene": "S03",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 228,
+      "video_s": 15.2,
+      "scene": "S03",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 229,
+      "video_s": 15.266666666666667,
+      "scene": "S03",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 230,
+      "video_s": 15.333333333333334,
+      "scene": "S03",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 231,
+      "video_s": 15.4,
+      "scene": "S03",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 232,
+      "video_s": 15.466666666666667,
+      "scene": "S03",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 233,
+      "video_s": 15.533333333333333,
+      "scene": "S03",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 234,
+      "video_s": 15.6,
+      "scene": "S03",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 235,
+      "video_s": 15.666666666666666,
+      "scene": "S03",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 236,
+      "video_s": 15.733333333333333,
+      "scene": "S03",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 237,
+      "video_s": 15.8,
+      "scene": "S03",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 238,
+      "video_s": 15.866666666666667,
+      "scene": "S03",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 239,
+      "video_s": 15.933333333333334,
+      "scene": "S03",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 240,
+      "video_s": 16.0,
+      "scene": "S03",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 241,
+      "video_s": 16.066666666666666,
+      "scene": "S03",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 242,
+      "video_s": 16.133333333333333,
+      "scene": "S03",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 243,
+      "video_s": 16.2,
+      "scene": "S03",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 244,
+      "video_s": 16.266666666666666,
+      "scene": "S03",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 245,
+      "video_s": 16.333333333333332,
+      "scene": "S03",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 246,
+      "video_s": 16.4,
+      "scene": "S03",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 247,
+      "video_s": 16.466666666666665,
+      "scene": "S03",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 248,
+      "video_s": 16.533333333333335,
+      "scene": "S03",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 249,
+      "video_s": 16.6,
+      "scene": "S03",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 250,
+      "video_s": 16.666666666666668,
+      "scene": "S03",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 251,
+      "video_s": 16.733333333333334,
+      "scene": "S03",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 252,
+      "video_s": 16.8,
+      "scene": "S03",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 253,
+      "video_s": 16.866666666666667,
+      "scene": "S03",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 254,
+      "video_s": 16.933333333333334,
+      "scene": "S03",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 255,
+      "video_s": 17.0,
+      "scene": "S03",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 256,
+      "video_s": 17.066666666666666,
+      "scene": "S03",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 257,
+      "video_s": 17.133333333333333,
+      "scene": "S03",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 258,
+      "video_s": 17.2,
+      "scene": "S03",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 259,
+      "video_s": 17.266666666666666,
+      "scene": "S03",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 260,
+      "video_s": 17.333333333333332,
+      "scene": "S03",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 261,
+      "video_s": 17.4,
+      "scene": "S03",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 262,
+      "video_s": 17.466666666666665,
+      "scene": "S03",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 263,
+      "video_s": 17.533333333333335,
+      "scene": "S03",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 264,
+      "video_s": 17.6,
+      "scene": "S03",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 265,
+      "video_s": 17.666666666666668,
+      "scene": "S03",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 266,
+      "video_s": 17.733333333333334,
+      "scene": "S03",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 267,
+      "video_s": 17.8,
+      "scene": "S03",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 268,
+      "video_s": 17.866666666666667,
+      "scene": "S03",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 269,
+      "video_s": 17.933333333333334,
+      "scene": "S03",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 270,
+      "video_s": 18.0,
+      "scene": "S03",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 271,
+      "video_s": 18.066666666666666,
+      "scene": "S03",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 272,
+      "video_s": 18.133333333333333,
+      "scene": "S03",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 273,
+      "video_s": 18.2,
+      "scene": "S03",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 274,
+      "video_s": 18.266666666666666,
+      "scene": "S03",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 275,
+      "video_s": 18.333333333333332,
+      "scene": "S03",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 276,
+      "video_s": 18.4,
+      "scene": "S03",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 277,
+      "video_s": 18.466666666666665,
+      "scene": "S03",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 278,
+      "video_s": 18.533333333333335,
+      "scene": "S03",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 279,
+      "video_s": 18.6,
+      "scene": "S03",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 280,
+      "video_s": 18.666666666666668,
+      "scene": "S03",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 281,
+      "video_s": 18.733333333333334,
+      "scene": "S03",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 282,
+      "video_s": 18.8,
+      "scene": "S03",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 283,
+      "video_s": 18.866666666666667,
+      "scene": "S03",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 284,
+      "video_s": 18.933333333333334,
+      "scene": "S03",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 285,
+      "video_s": 19.0,
+      "scene": "S03",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 286,
+      "video_s": 19.066666666666666,
+      "scene": "S03",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 287,
+      "video_s": 19.133333333333333,
+      "scene": "S03",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 288,
+      "video_s": 19.2,
+      "scene": "S03",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 289,
+      "video_s": 19.266666666666666,
+      "scene": "S03",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 290,
+      "video_s": 19.333333333333332,
+      "scene": "S03",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 291,
+      "video_s": 19.4,
+      "scene": "S03",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 292,
+      "video_s": 19.466666666666665,
+      "scene": "S03",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 293,
+      "video_s": 19.533333333333335,
+      "scene": "S03",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 294,
+      "video_s": 19.6,
+      "scene": "S03",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 295,
+      "video_s": 19.666666666666668,
+      "scene": "S03",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 296,
+      "video_s": 19.733333333333334,
+      "scene": "S03",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 297,
+      "video_s": 19.8,
+      "scene": "S03",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 298,
+      "video_s": 19.866666666666667,
+      "scene": "S03",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 299,
+      "video_s": 19.933333333333334,
+      "scene": "S03",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 300,
+      "video_s": 20.0,
+      "scene": "S03",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 301,
+      "video_s": 20.066666666666666,
+      "scene": "S03",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 302,
+      "video_s": 20.133333333333333,
+      "scene": "S03",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 303,
+      "video_s": 20.2,
+      "scene": "S03",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 304,
+      "video_s": 20.266666666666666,
+      "scene": "S03",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 305,
+      "video_s": 20.333333333333332,
+      "scene": "S03",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 306,
+      "video_s": 20.4,
+      "scene": "S03",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 307,
+      "video_s": 20.466666666666665,
+      "scene": "S03",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 308,
+      "video_s": 20.533333333333335,
+      "scene": "S03",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 309,
+      "video_s": 20.6,
+      "scene": "S03",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 310,
+      "video_s": 20.666666666666668,
+      "scene": "S03",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 311,
+      "video_s": 20.733333333333334,
+      "scene": "S03",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 312,
+      "video_s": 20.8,
+      "scene": "S03",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 313,
+      "video_s": 20.866666666666667,
+      "scene": "S03",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 314,
+      "video_s": 20.933333333333334,
+      "scene": "S03",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 315,
+      "video_s": 21.0,
+      "scene": "S03",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 316,
+      "video_s": 21.066666666666666,
+      "scene": "S03",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 317,
+      "video_s": 21.133333333333333,
+      "scene": "S03",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 318,
+      "video_s": 21.2,
+      "scene": "S03",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 319,
+      "video_s": 21.266666666666666,
+      "scene": "S03",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 320,
+      "video_s": 21.333333333333332,
+      "scene": "S03",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 321,
+      "video_s": 21.4,
+      "scene": "S03",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 322,
+      "video_s": 21.466666666666665,
+      "scene": "S03",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 323,
+      "video_s": 21.533333333333335,
+      "scene": "S03",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 324,
+      "video_s": 21.6,
+      "scene": "S03",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 325,
+      "video_s": 21.666666666666668,
+      "scene": "S03",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 326,
+      "video_s": 21.733333333333334,
+      "scene": "S03",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 327,
+      "video_s": 21.8,
+      "scene": "S03",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 328,
+      "video_s": 21.866666666666667,
+      "scene": "S03",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 329,
+      "video_s": 21.933333333333334,
+      "scene": "S03",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 330,
+      "video_s": 22.0,
+      "scene": "S03",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 331,
+      "video_s": 22.066666666666666,
+      "scene": "S03",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 332,
+      "video_s": 22.133333333333333,
+      "scene": "S03",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 333,
+      "video_s": 22.2,
+      "scene": "S03",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 334,
+      "video_s": 22.266666666666666,
+      "scene": "S03",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 335,
+      "video_s": 22.333333333333332,
+      "scene": "S03",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 336,
+      "video_s": 22.4,
+      "scene": "S03",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 337,
+      "video_s": 22.466666666666665,
+      "scene": "S03",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 338,
+      "video_s": 22.533333333333335,
+      "scene": "S03",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 339,
+      "video_s": 22.6,
+      "scene": "S03",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 340,
+      "video_s": 22.666666666666668,
+      "scene": "S03",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 341,
+      "video_s": 22.733333333333334,
+      "scene": "S03",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 342,
+      "video_s": 22.8,
+      "scene": "S03",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 343,
+      "video_s": 22.866666666666667,
+      "scene": "S03",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 344,
+      "video_s": 22.933333333333334,
+      "scene": "S03",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 345,
+      "video_s": 23.0,
+      "scene": "S03",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 346,
+      "video_s": 23.066666666666666,
+      "scene": "S03",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 347,
+      "video_s": 23.133333333333333,
+      "scene": "S03",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 348,
+      "video_s": 23.2,
+      "scene": "S03",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 349,
+      "video_s": 23.266666666666666,
+      "scene": "S03",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 350,
+      "video_s": 23.333333333333332,
+      "scene": "S03",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 351,
+      "video_s": 23.4,
+      "scene": "S03",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 352,
+      "video_s": 23.466666666666665,
+      "scene": "S03",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 353,
+      "video_s": 23.533333333333335,
+      "scene": "S03",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 354,
+      "video_s": 23.6,
+      "scene": "S03",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 355,
+      "video_s": 23.666666666666668,
+      "scene": "S03",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 356,
+      "video_s": 23.733333333333334,
+      "scene": "S03",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 357,
+      "video_s": 23.8,
+      "scene": "S03",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 358,
+      "video_s": 23.866666666666667,
+      "scene": "S03",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 359,
+      "video_s": 23.933333333333334,
+      "scene": "S03",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 360,
+      "video_s": 24.0,
+      "scene": "S04",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 361,
+      "video_s": 24.066666666666666,
+      "scene": "S04",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 362,
+      "video_s": 24.133333333333333,
+      "scene": "S04",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 363,
+      "video_s": 24.2,
+      "scene": "S04",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 364,
+      "video_s": 24.266666666666666,
+      "scene": "S04",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 365,
+      "video_s": 24.333333333333332,
+      "scene": "S04",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 366,
+      "video_s": 24.4,
+      "scene": "S04",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 367,
+      "video_s": 24.466666666666665,
+      "scene": "S04",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 368,
+      "video_s": 24.533333333333335,
+      "scene": "S04",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 369,
+      "video_s": 24.6,
+      "scene": "S04",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 370,
+      "video_s": 24.666666666666668,
+      "scene": "S04",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 371,
+      "video_s": 24.733333333333334,
+      "scene": "S04",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 372,
+      "video_s": 24.8,
+      "scene": "S04",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 373,
+      "video_s": 24.866666666666667,
+      "scene": "S04",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 374,
+      "video_s": 24.933333333333334,
+      "scene": "S04",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 375,
+      "video_s": 25.0,
+      "scene": "S04",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 376,
+      "video_s": 25.066666666666666,
+      "scene": "S04",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 377,
+      "video_s": 25.133333333333333,
+      "scene": "S04",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 378,
+      "video_s": 25.2,
+      "scene": "S04",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 379,
+      "video_s": 25.266666666666666,
+      "scene": "S04",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 380,
+      "video_s": 25.333333333333332,
+      "scene": "S04",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 381,
+      "video_s": 25.4,
+      "scene": "S04",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 382,
+      "video_s": 25.466666666666665,
+      "scene": "S04",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 383,
+      "video_s": 25.533333333333335,
+      "scene": "S04",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 384,
+      "video_s": 25.6,
+      "scene": "S04",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 385,
+      "video_s": 25.666666666666668,
+      "scene": "S04",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 386,
+      "video_s": 25.733333333333334,
+      "scene": "S04",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 387,
+      "video_s": 25.8,
+      "scene": "S04",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 388,
+      "video_s": 25.866666666666667,
+      "scene": "S04",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 389,
+      "video_s": 25.933333333333334,
+      "scene": "S04",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 390,
+      "video_s": 26.0,
+      "scene": "S04",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 391,
+      "video_s": 26.066666666666666,
+      "scene": "S04",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 392,
+      "video_s": 26.133333333333333,
+      "scene": "S04",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 393,
+      "video_s": 26.2,
+      "scene": "S04",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 394,
+      "video_s": 26.266666666666666,
+      "scene": "S04",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 395,
+      "video_s": 26.333333333333332,
+      "scene": "S04",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 396,
+      "video_s": 26.4,
+      "scene": "S04",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 397,
+      "video_s": 26.466666666666665,
+      "scene": "S04",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 398,
+      "video_s": 26.533333333333335,
+      "scene": "S04",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 399,
+      "video_s": 26.6,
+      "scene": "S04",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 400,
+      "video_s": 26.666666666666668,
+      "scene": "S04",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 401,
+      "video_s": 26.733333333333334,
+      "scene": "S04",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 402,
+      "video_s": 26.8,
+      "scene": "S04",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 403,
+      "video_s": 26.866666666666667,
+      "scene": "S04",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 404,
+      "video_s": 26.933333333333334,
+      "scene": "S04",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 405,
+      "video_s": 27.0,
+      "scene": "S04",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 406,
+      "video_s": 27.066666666666666,
+      "scene": "S04",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 407,
+      "video_s": 27.133333333333333,
+      "scene": "S04",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 408,
+      "video_s": 27.2,
+      "scene": "S04",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 409,
+      "video_s": 27.266666666666666,
+      "scene": "S04",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 410,
+      "video_s": 27.333333333333332,
+      "scene": "S04",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 411,
+      "video_s": 27.4,
+      "scene": "S04",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 412,
+      "video_s": 27.466666666666665,
+      "scene": "S04",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 413,
+      "video_s": 27.533333333333335,
+      "scene": "S04",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 414,
+      "video_s": 27.6,
+      "scene": "S04",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 415,
+      "video_s": 27.666666666666668,
+      "scene": "S04",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 416,
+      "video_s": 27.733333333333334,
+      "scene": "S04",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 417,
+      "video_s": 27.8,
+      "scene": "S04",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 418,
+      "video_s": 27.866666666666667,
+      "scene": "S04",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 419,
+      "video_s": 27.933333333333334,
+      "scene": "S04",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 420,
+      "video_s": 28.0,
+      "scene": "S04",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 421,
+      "video_s": 28.066666666666666,
+      "scene": "S04",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 422,
+      "video_s": 28.133333333333333,
+      "scene": "S04",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 423,
+      "video_s": 28.2,
+      "scene": "S04",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 424,
+      "video_s": 28.266666666666666,
+      "scene": "S04",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 425,
+      "video_s": 28.333333333333332,
+      "scene": "S04",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 426,
+      "video_s": 28.4,
+      "scene": "S04",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 427,
+      "video_s": 28.466666666666665,
+      "scene": "S04",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 428,
+      "video_s": 28.533333333333335,
+      "scene": "S04",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 429,
+      "video_s": 28.6,
+      "scene": "S04",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 430,
+      "video_s": 28.666666666666668,
+      "scene": "S04",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 431,
+      "video_s": 28.733333333333334,
+      "scene": "S04",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 432,
+      "video_s": 28.8,
+      "scene": "S04",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 433,
+      "video_s": 28.866666666666667,
+      "scene": "S04",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 434,
+      "video_s": 28.933333333333334,
+      "scene": "S04",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 435,
+      "video_s": 29.0,
+      "scene": "S04",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 436,
+      "video_s": 29.066666666666666,
+      "scene": "S04",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 437,
+      "video_s": 29.133333333333333,
+      "scene": "S04",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 438,
+      "video_s": 29.2,
+      "scene": "S04",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 439,
+      "video_s": 29.266666666666666,
+      "scene": "S04",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 440,
+      "video_s": 29.333333333333332,
+      "scene": "S04",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 441,
+      "video_s": 29.4,
+      "scene": "S04",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 442,
+      "video_s": 29.466666666666665,
+      "scene": "S04",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 443,
+      "video_s": 29.533333333333335,
+      "scene": "S04",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 444,
+      "video_s": 29.6,
+      "scene": "S04",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 445,
+      "video_s": 29.666666666666668,
+      "scene": "S04",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 446,
+      "video_s": 29.733333333333334,
+      "scene": "S04",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 447,
+      "video_s": 29.8,
+      "scene": "S04",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 448,
+      "video_s": 29.866666666666667,
+      "scene": "S04",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 449,
+      "video_s": 29.933333333333334,
+      "scene": "S04",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 450,
+      "video_s": 30.0,
+      "scene": "S04",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 451,
+      "video_s": 30.066666666666666,
+      "scene": "S04",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 452,
+      "video_s": 30.133333333333333,
+      "scene": "S04",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 453,
+      "video_s": 30.2,
+      "scene": "S04",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 454,
+      "video_s": 30.266666666666666,
+      "scene": "S04",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 455,
+      "video_s": 30.333333333333332,
+      "scene": "S04",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 456,
+      "video_s": 30.4,
+      "scene": "S04",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 457,
+      "video_s": 30.466666666666665,
+      "scene": "S04",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 458,
+      "video_s": 30.533333333333335,
+      "scene": "S04",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 459,
+      "video_s": 30.6,
+      "scene": "S04",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 460,
+      "video_s": 30.666666666666668,
+      "scene": "S04",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 461,
+      "video_s": 30.733333333333334,
+      "scene": "S04",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 462,
+      "video_s": 30.8,
+      "scene": "S04",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 463,
+      "video_s": 30.866666666666667,
+      "scene": "S04",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 464,
+      "video_s": 30.933333333333334,
+      "scene": "S04",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 465,
+      "video_s": 31.0,
+      "scene": "S04",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 466,
+      "video_s": 31.066666666666666,
+      "scene": "S04",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 467,
+      "video_s": 31.133333333333333,
+      "scene": "S04",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 468,
+      "video_s": 31.2,
+      "scene": "S04",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 469,
+      "video_s": 31.266666666666666,
+      "scene": "S04",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 470,
+      "video_s": 31.333333333333332,
+      "scene": "S04",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 471,
+      "video_s": 31.4,
+      "scene": "S04",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 472,
+      "video_s": 31.466666666666665,
+      "scene": "S04",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 473,
+      "video_s": 31.533333333333335,
+      "scene": "S04",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 474,
+      "video_s": 31.6,
+      "scene": "S04",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 475,
+      "video_s": 31.666666666666668,
+      "scene": "S04",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 476,
+      "video_s": 31.733333333333334,
+      "scene": "S04",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 477,
+      "video_s": 31.8,
+      "scene": "S04",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 478,
+      "video_s": 31.866666666666667,
+      "scene": "S04",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 479,
+      "video_s": 31.933333333333334,
+      "scene": "S04",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 480,
+      "video_s": 32.0,
+      "scene": "S05",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 481,
+      "video_s": 32.06666666666667,
+      "scene": "S05",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 482,
+      "video_s": 32.13333333333333,
+      "scene": "S05",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 483,
+      "video_s": 32.2,
+      "scene": "S05",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 484,
+      "video_s": 32.266666666666666,
+      "scene": "S05",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 485,
+      "video_s": 32.333333333333336,
+      "scene": "S05",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 486,
+      "video_s": 32.4,
+      "scene": "S05",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 487,
+      "video_s": 32.46666666666667,
+      "scene": "S05",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 488,
+      "video_s": 32.53333333333333,
+      "scene": "S05",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 489,
+      "video_s": 32.6,
+      "scene": "S05",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 490,
+      "video_s": 32.666666666666664,
+      "scene": "S05",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 491,
+      "video_s": 32.733333333333334,
+      "scene": "S05",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 492,
+      "video_s": 32.8,
+      "scene": "S05",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 493,
+      "video_s": 32.86666666666667,
+      "scene": "S05",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 494,
+      "video_s": 32.93333333333333,
+      "scene": "S05",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 495,
+      "video_s": 33.0,
+      "scene": "S05",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 496,
+      "video_s": 33.06666666666667,
+      "scene": "S05",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 497,
+      "video_s": 33.13333333333333,
+      "scene": "S05",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 498,
+      "video_s": 33.2,
+      "scene": "S05",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 499,
+      "video_s": 33.266666666666666,
+      "scene": "S05",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 500,
+      "video_s": 33.333333333333336,
+      "scene": "S05",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 501,
+      "video_s": 33.4,
+      "scene": "S05",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 502,
+      "video_s": 33.46666666666667,
+      "scene": "S05",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 503,
+      "video_s": 33.53333333333333,
+      "scene": "S05",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 504,
+      "video_s": 33.6,
+      "scene": "S05",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 505,
+      "video_s": 33.666666666666664,
+      "scene": "S05",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 506,
+      "video_s": 33.733333333333334,
+      "scene": "S05",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 507,
+      "video_s": 33.8,
+      "scene": "S05",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 508,
+      "video_s": 33.86666666666667,
+      "scene": "S05",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 509,
+      "video_s": 33.93333333333333,
+      "scene": "S05",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 510,
+      "video_s": 34.0,
+      "scene": "S05",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 511,
+      "video_s": 34.06666666666667,
+      "scene": "S05",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 512,
+      "video_s": 34.13333333333333,
+      "scene": "S05",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 513,
+      "video_s": 34.2,
+      "scene": "S05",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 514,
+      "video_s": 34.266666666666666,
+      "scene": "S05",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 515,
+      "video_s": 34.333333333333336,
+      "scene": "S05",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 516,
+      "video_s": 34.4,
+      "scene": "S05",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 517,
+      "video_s": 34.46666666666667,
+      "scene": "S05",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 518,
+      "video_s": 34.53333333333333,
+      "scene": "S05",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 519,
+      "video_s": 34.6,
+      "scene": "S05",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 520,
+      "video_s": 34.666666666666664,
+      "scene": "S05",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 521,
+      "video_s": 34.733333333333334,
+      "scene": "S05",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 522,
+      "video_s": 34.8,
+      "scene": "S05",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 523,
+      "video_s": 34.86666666666667,
+      "scene": "S05",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 524,
+      "video_s": 34.93333333333333,
+      "scene": "S05",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 525,
+      "video_s": 35.0,
+      "scene": "S05",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 526,
+      "video_s": 35.06666666666667,
+      "scene": "S05",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 527,
+      "video_s": 35.13333333333333,
+      "scene": "S05",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 528,
+      "video_s": 35.2,
+      "scene": "S05",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 529,
+      "video_s": 35.266666666666666,
+      "scene": "S05",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 530,
+      "video_s": 35.333333333333336,
+      "scene": "S05",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 531,
+      "video_s": 35.4,
+      "scene": "S05",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 532,
+      "video_s": 35.46666666666667,
+      "scene": "S05",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 533,
+      "video_s": 35.53333333333333,
+      "scene": "S05",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 534,
+      "video_s": 35.6,
+      "scene": "S05",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 535,
+      "video_s": 35.666666666666664,
+      "scene": "S05",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 536,
+      "video_s": 35.733333333333334,
+      "scene": "S05",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 537,
+      "video_s": 35.8,
+      "scene": "S05",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 538,
+      "video_s": 35.86666666666667,
+      "scene": "S05",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 539,
+      "video_s": 35.93333333333333,
+      "scene": "S05",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 540,
+      "video_s": 36.0,
+      "scene": "S05",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 541,
+      "video_s": 36.06666666666667,
+      "scene": "S05",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 542,
+      "video_s": 36.13333333333333,
+      "scene": "S05",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 543,
+      "video_s": 36.2,
+      "scene": "S05",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 544,
+      "video_s": 36.266666666666666,
+      "scene": "S05",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 545,
+      "video_s": 36.333333333333336,
+      "scene": "S05",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 546,
+      "video_s": 36.4,
+      "scene": "S05",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 547,
+      "video_s": 36.46666666666667,
+      "scene": "S05",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 548,
+      "video_s": 36.53333333333333,
+      "scene": "S05",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 549,
+      "video_s": 36.6,
+      "scene": "S05",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 550,
+      "video_s": 36.666666666666664,
+      "scene": "S05",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 551,
+      "video_s": 36.733333333333334,
+      "scene": "S05",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 552,
+      "video_s": 36.8,
+      "scene": "S05",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 553,
+      "video_s": 36.86666666666667,
+      "scene": "S05",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 554,
+      "video_s": 36.93333333333333,
+      "scene": "S05",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 555,
+      "video_s": 37.0,
+      "scene": "S05",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 556,
+      "video_s": 37.06666666666667,
+      "scene": "S05",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 557,
+      "video_s": 37.13333333333333,
+      "scene": "S05",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 558,
+      "video_s": 37.2,
+      "scene": "S05",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 559,
+      "video_s": 37.266666666666666,
+      "scene": "S05",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 560,
+      "video_s": 37.333333333333336,
+      "scene": "S05",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 561,
+      "video_s": 37.4,
+      "scene": "S05",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 562,
+      "video_s": 37.46666666666667,
+      "scene": "S05",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 563,
+      "video_s": 37.53333333333333,
+      "scene": "S05",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 564,
+      "video_s": 37.6,
+      "scene": "S05",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 565,
+      "video_s": 37.666666666666664,
+      "scene": "S05",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 566,
+      "video_s": 37.733333333333334,
+      "scene": "S05",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 567,
+      "video_s": 37.8,
+      "scene": "S05",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 568,
+      "video_s": 37.86666666666667,
+      "scene": "S05",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 569,
+      "video_s": 37.93333333333333,
+      "scene": "S05",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 570,
+      "video_s": 38.0,
+      "scene": "S05",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 571,
+      "video_s": 38.06666666666667,
+      "scene": "S05",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 572,
+      "video_s": 38.13333333333333,
+      "scene": "S05",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 573,
+      "video_s": 38.2,
+      "scene": "S05",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 574,
+      "video_s": 38.266666666666666,
+      "scene": "S05",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 575,
+      "video_s": 38.333333333333336,
+      "scene": "S05",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 576,
+      "video_s": 38.4,
+      "scene": "S05",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 577,
+      "video_s": 38.46666666666667,
+      "scene": "S05",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 578,
+      "video_s": 38.53333333333333,
+      "scene": "S05",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 579,
+      "video_s": 38.6,
+      "scene": "S05",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 580,
+      "video_s": 38.666666666666664,
+      "scene": "S05",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 581,
+      "video_s": 38.733333333333334,
+      "scene": "S05",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 582,
+      "video_s": 38.8,
+      "scene": "S05",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 583,
+      "video_s": 38.86666666666667,
+      "scene": "S05",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 584,
+      "video_s": 38.93333333333333,
+      "scene": "S05",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 585,
+      "video_s": 39.0,
+      "scene": "S05",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 586,
+      "video_s": 39.06666666666667,
+      "scene": "S05",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 587,
+      "video_s": 39.13333333333333,
+      "scene": "S05",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 588,
+      "video_s": 39.2,
+      "scene": "S05",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 589,
+      "video_s": 39.266666666666666,
+      "scene": "S05",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 590,
+      "video_s": 39.333333333333336,
+      "scene": "S05",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 591,
+      "video_s": 39.4,
+      "scene": "S05",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 592,
+      "video_s": 39.46666666666667,
+      "scene": "S05",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 593,
+      "video_s": 39.53333333333333,
+      "scene": "S05",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 594,
+      "video_s": 39.6,
+      "scene": "S05",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 595,
+      "video_s": 39.666666666666664,
+      "scene": "S05",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 596,
+      "video_s": 39.733333333333334,
+      "scene": "S05",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 597,
+      "video_s": 39.8,
+      "scene": "S05",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 598,
+      "video_s": 39.86666666666667,
+      "scene": "S05",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 599,
+      "video_s": 39.93333333333333,
+      "scene": "S05",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 600,
+      "video_s": 40.0,
+      "scene": "S05",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 601,
+      "video_s": 40.06666666666667,
+      "scene": "S05",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 602,
+      "video_s": 40.13333333333333,
+      "scene": "S05",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 603,
+      "video_s": 40.2,
+      "scene": "S05",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 604,
+      "video_s": 40.266666666666666,
+      "scene": "S05",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 605,
+      "video_s": 40.333333333333336,
+      "scene": "S05",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 606,
+      "video_s": 40.4,
+      "scene": "S05",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 607,
+      "video_s": 40.46666666666667,
+      "scene": "S05",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 608,
+      "video_s": 40.53333333333333,
+      "scene": "S05",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 609,
+      "video_s": 40.6,
+      "scene": "S05",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 610,
+      "video_s": 40.666666666666664,
+      "scene": "S05",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 611,
+      "video_s": 40.733333333333334,
+      "scene": "S05",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 612,
+      "video_s": 40.8,
+      "scene": "S05",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 613,
+      "video_s": 40.86666666666667,
+      "scene": "S05",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 614,
+      "video_s": 40.93333333333333,
+      "scene": "S05",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 615,
+      "video_s": 41.0,
+      "scene": "S05",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 616,
+      "video_s": 41.06666666666667,
+      "scene": "S05",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 617,
+      "video_s": 41.13333333333333,
+      "scene": "S05",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 618,
+      "video_s": 41.2,
+      "scene": "S05",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 619,
+      "video_s": 41.266666666666666,
+      "scene": "S05",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 619,
+      "video_s": 41.266666666666666,
+      "scene": "S05",
+      "action": "C_panel_receive_and_release_symbol"
+    },
+    {
+      "index": 620,
+      "video_s": 41.333333333333336,
+      "scene": "S05",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 620,
+      "video_s": 41.333333333333336,
+      "scene": "S05",
+      "action": "C_panel_receive_and_release_symbol"
+    },
+    {
+      "index": 621,
+      "video_s": 41.4,
+      "scene": "S05",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 621,
+      "video_s": 41.4,
+      "scene": "S05",
+      "action": "C_panel_receive_and_release_symbol"
+    },
+    {
+      "index": 622,
+      "video_s": 41.46666666666667,
+      "scene": "S05",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 622,
+      "video_s": 41.46666666666667,
+      "scene": "S05",
+      "action": "C_panel_receive_and_release_symbol"
+    },
+    {
+      "index": 623,
+      "video_s": 41.53333333333333,
+      "scene": "S05",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 623,
+      "video_s": 41.53333333333333,
+      "scene": "S05",
+      "action": "C_panel_receive_and_release_symbol"
+    },
+    {
+      "index": 624,
+      "video_s": 41.6,
+      "scene": "S05",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 624,
+      "video_s": 41.6,
+      "scene": "S05",
+      "action": "C_panel_receive_and_release_symbol"
+    },
+    {
+      "index": 625,
+      "video_s": 41.666666666666664,
+      "scene": "S05",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 625,
+      "video_s": 41.666666666666664,
+      "scene": "S05",
+      "action": "C_panel_receive_and_release_symbol"
+    },
+    {
+      "index": 626,
+      "video_s": 41.733333333333334,
+      "scene": "S05",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 626,
+      "video_s": 41.733333333333334,
+      "scene": "S05",
+      "action": "C_panel_receive_and_release_symbol"
+    },
+    {
+      "index": 627,
+      "video_s": 41.8,
+      "scene": "S05",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 627,
+      "video_s": 41.8,
+      "scene": "S05",
+      "action": "C_panel_receive_and_release_symbol"
+    },
+    {
+      "index": 628,
+      "video_s": 41.86666666666667,
+      "scene": "S05",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 628,
+      "video_s": 41.86666666666667,
+      "scene": "S05",
+      "action": "C_panel_receive_and_release_symbol"
+    },
+    {
+      "index": 629,
+      "video_s": 41.93333333333333,
+      "scene": "S05",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 629,
+      "video_s": 41.93333333333333,
+      "scene": "S05",
+      "action": "C_panel_receive_and_release_symbol"
+    },
+    {
+      "index": 630,
+      "video_s": 42.0,
+      "scene": "S05",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 630,
+      "video_s": 42.0,
+      "scene": "S05",
+      "action": "C_panel_receive_and_release_symbol"
+    },
+    {
+      "index": 631,
+      "video_s": 42.06666666666667,
+      "scene": "S05",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 631,
+      "video_s": 42.06666666666667,
+      "scene": "S05",
+      "action": "C_panel_receive_and_release_symbol"
+    },
+    {
+      "index": 632,
+      "video_s": 42.13333333333333,
+      "scene": "S05",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 632,
+      "video_s": 42.13333333333333,
+      "scene": "S05",
+      "action": "C_panel_receive_and_release_symbol"
+    },
+    {
+      "index": 633,
+      "video_s": 42.2,
+      "scene": "S05",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 633,
+      "video_s": 42.2,
+      "scene": "S05",
+      "action": "C_panel_receive_and_release_symbol"
+    },
+    {
+      "index": 634,
+      "video_s": 42.266666666666666,
+      "scene": "S05",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 634,
+      "video_s": 42.266666666666666,
+      "scene": "S05",
+      "action": "C_panel_receive_and_release_symbol"
+    },
+    {
+      "index": 635,
+      "video_s": 42.333333333333336,
+      "scene": "S05",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 635,
+      "video_s": 42.333333333333336,
+      "scene": "S05",
+      "action": "C_panel_receive_and_release_symbol"
+    },
+    {
+      "index": 636,
+      "video_s": 42.4,
+      "scene": "S05",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 636,
+      "video_s": 42.4,
+      "scene": "S05",
+      "action": "C_panel_receive_and_release_symbol"
+    },
+    {
+      "index": 637,
+      "video_s": 42.46666666666667,
+      "scene": "S05",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 637,
+      "video_s": 42.46666666666667,
+      "scene": "S05",
+      "action": "C_panel_receive_and_release_symbol"
+    },
+    {
+      "index": 638,
+      "video_s": 42.53333333333333,
+      "scene": "S05",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 638,
+      "video_s": 42.53333333333333,
+      "scene": "S05",
+      "action": "C_panel_receive_and_release_symbol"
+    },
+    {
+      "index": 639,
+      "video_s": 42.6,
+      "scene": "S05",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 639,
+      "video_s": 42.6,
+      "scene": "S05",
+      "action": "C_panel_receive_and_release_symbol"
+    },
+    {
+      "index": 640,
+      "video_s": 42.666666666666664,
+      "scene": "S05",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 640,
+      "video_s": 42.666666666666664,
+      "scene": "S05",
+      "action": "C_panel_receive_and_release_symbol"
+    },
+    {
+      "index": 641,
+      "video_s": 42.733333333333334,
+      "scene": "S05",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 641,
+      "video_s": 42.733333333333334,
+      "scene": "S05",
+      "action": "C_panel_receive_and_release_symbol"
+    },
+    {
+      "index": 642,
+      "video_s": 42.8,
+      "scene": "S05",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 642,
+      "video_s": 42.8,
+      "scene": "S05",
+      "action": "C_panel_receive_and_release_symbol"
+    },
+    {
+      "index": 643,
+      "video_s": 42.86666666666667,
+      "scene": "S05",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 643,
+      "video_s": 42.86666666666667,
+      "scene": "S05",
+      "action": "C_panel_receive_and_release_symbol"
+    },
+    {
+      "index": 644,
+      "video_s": 42.93333333333333,
+      "scene": "S05",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 644,
+      "video_s": 42.93333333333333,
+      "scene": "S05",
+      "action": "C_panel_receive_and_release_symbol"
+    },
+    {
+      "index": 645,
+      "video_s": 43.0,
+      "scene": "S05",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 645,
+      "video_s": 43.0,
+      "scene": "S05",
+      "action": "C_panel_receive_and_release_symbol"
+    },
+    {
+      "index": 646,
+      "video_s": 43.06666666666667,
+      "scene": "S05",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 646,
+      "video_s": 43.06666666666667,
+      "scene": "S05",
+      "action": "C_panel_receive_and_release_symbol"
+    },
+    {
+      "index": 647,
+      "video_s": 43.13333333333333,
+      "scene": "S05",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 647,
+      "video_s": 43.13333333333333,
+      "scene": "S05",
+      "action": "C_panel_receive_and_release_symbol"
+    },
+    {
+      "index": 648,
+      "video_s": 43.2,
+      "scene": "S05",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 648,
+      "video_s": 43.2,
+      "scene": "S05",
+      "action": "C_panel_receive_and_release_symbol"
+    },
+    {
+      "index": 649,
+      "video_s": 43.266666666666666,
+      "scene": "S05",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 649,
+      "video_s": 43.266666666666666,
+      "scene": "S05",
+      "action": "C_panel_receive_and_release_symbol"
+    },
+    {
+      "index": 650,
+      "video_s": 43.333333333333336,
+      "scene": "S05",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 650,
+      "video_s": 43.333333333333336,
+      "scene": "S05",
+      "action": "C_panel_receive_and_release_symbol"
+    },
+    {
+      "index": 651,
+      "video_s": 43.4,
+      "scene": "S05",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 651,
+      "video_s": 43.4,
+      "scene": "S05",
+      "action": "C_panel_receive_and_release_symbol"
+    },
+    {
+      "index": 652,
+      "video_s": 43.46666666666667,
+      "scene": "S05",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 652,
+      "video_s": 43.46666666666667,
+      "scene": "S05",
+      "action": "C_panel_receive_and_release_symbol"
+    },
+    {
+      "index": 653,
+      "video_s": 43.53333333333333,
+      "scene": "S05",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 653,
+      "video_s": 43.53333333333333,
+      "scene": "S05",
+      "action": "C_panel_receive_and_release_symbol"
+    },
+    {
+      "index": 654,
+      "video_s": 43.6,
+      "scene": "S05",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 654,
+      "video_s": 43.6,
+      "scene": "S05",
+      "action": "C_panel_receive_and_release_symbol"
+    },
+    {
+      "index": 655,
+      "video_s": 43.666666666666664,
+      "scene": "S05",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 655,
+      "video_s": 43.666666666666664,
+      "scene": "S05",
+      "action": "C_panel_receive_and_release_symbol"
+    },
+    {
+      "index": 656,
+      "video_s": 43.733333333333334,
+      "scene": "S05",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 656,
+      "video_s": 43.733333333333334,
+      "scene": "S05",
+      "action": "C_panel_receive_and_release_symbol"
+    },
+    {
+      "index": 657,
+      "video_s": 43.8,
+      "scene": "S05",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 657,
+      "video_s": 43.8,
+      "scene": "S05",
+      "action": "C_panel_receive_and_release_symbol"
+    },
+    {
+      "index": 658,
+      "video_s": 43.86666666666667,
+      "scene": "S05",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 658,
+      "video_s": 43.86666666666667,
+      "scene": "S05",
+      "action": "C_panel_receive_and_release_symbol"
+    },
+    {
+      "index": 659,
+      "video_s": 43.93333333333333,
+      "scene": "S05",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 659,
+      "video_s": 43.93333333333333,
+      "scene": "S05",
+      "action": "C_panel_receive_and_release_symbol"
+    },
+    {
+      "index": 660,
+      "video_s": 44.0,
+      "scene": "S06",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 660,
+      "video_s": 44.0,
+      "scene": "S06",
+      "action": "C_panel_receive_and_release_symbol"
+    },
+    {
+      "index": 661,
+      "video_s": 44.06666666666667,
+      "scene": "S06",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 661,
+      "video_s": 44.06666666666667,
+      "scene": "S06",
+      "action": "C_panel_receive_and_release_symbol"
+    },
+    {
+      "index": 662,
+      "video_s": 44.13333333333333,
+      "scene": "S06",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 662,
+      "video_s": 44.13333333333333,
+      "scene": "S06",
+      "action": "C_panel_receive_and_release_symbol"
+    },
+    {
+      "index": 663,
+      "video_s": 44.2,
+      "scene": "S06",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 663,
+      "video_s": 44.2,
+      "scene": "S06",
+      "action": "C_panel_receive_and_release_symbol"
+    },
+    {
+      "index": 664,
+      "video_s": 44.266666666666666,
+      "scene": "S06",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 664,
+      "video_s": 44.266666666666666,
+      "scene": "S06",
+      "action": "C_panel_receive_and_release_symbol"
+    },
+    {
+      "index": 665,
+      "video_s": 44.333333333333336,
+      "scene": "S06",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 665,
+      "video_s": 44.333333333333336,
+      "scene": "S06",
+      "action": "C_panel_receive_and_release_symbol"
+    },
+    {
+      "index": 666,
+      "video_s": 44.4,
+      "scene": "S06",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 666,
+      "video_s": 44.4,
+      "scene": "S06",
+      "action": "C_panel_receive_and_release_symbol"
+    },
+    {
+      "index": 667,
+      "video_s": 44.46666666666667,
+      "scene": "S06",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 667,
+      "video_s": 44.46666666666667,
+      "scene": "S06",
+      "action": "C_panel_receive_and_release_symbol"
+    },
+    {
+      "index": 668,
+      "video_s": 44.53333333333333,
+      "scene": "S06",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 668,
+      "video_s": 44.53333333333333,
+      "scene": "S06",
+      "action": "C_panel_receive_and_release_symbol"
+    },
+    {
+      "index": 669,
+      "video_s": 44.6,
+      "scene": "S06",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 669,
+      "video_s": 44.6,
+      "scene": "S06",
+      "action": "C_panel_receive_and_release_symbol"
+    },
+    {
+      "index": 670,
+      "video_s": 44.666666666666664,
+      "scene": "S06",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 670,
+      "video_s": 44.666666666666664,
+      "scene": "S06",
+      "action": "C_panel_receive_and_release_symbol"
+    },
+    {
+      "index": 671,
+      "video_s": 44.733333333333334,
+      "scene": "S06",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 671,
+      "video_s": 44.733333333333334,
+      "scene": "S06",
+      "action": "C_panel_receive_and_release_symbol"
+    },
+    {
+      "index": 672,
+      "video_s": 44.8,
+      "scene": "S06",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 672,
+      "video_s": 44.8,
+      "scene": "S06",
+      "action": "C_panel_receive_and_release_symbol"
+    },
+    {
+      "index": 673,
+      "video_s": 44.86666666666667,
+      "scene": "S06",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 673,
+      "video_s": 44.86666666666667,
+      "scene": "S06",
+      "action": "C_panel_receive_and_release_symbol"
+    },
+    {
+      "index": 674,
+      "video_s": 44.93333333333333,
+      "scene": "S06",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 674,
+      "video_s": 44.93333333333333,
+      "scene": "S06",
+      "action": "C_panel_receive_and_release_symbol"
+    },
+    {
+      "index": 675,
+      "video_s": 45.0,
+      "scene": "S06",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 675,
+      "video_s": 45.0,
+      "scene": "S06",
+      "action": "C_panel_receive_and_release_symbol"
+    },
+    {
+      "index": 676,
+      "video_s": 45.06666666666667,
+      "scene": "S06",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 676,
+      "video_s": 45.06666666666667,
+      "scene": "S06",
+      "action": "C_panel_receive_and_release_symbol"
+    },
+    {
+      "index": 677,
+      "video_s": 45.13333333333333,
+      "scene": "S06",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 677,
+      "video_s": 45.13333333333333,
+      "scene": "S06",
+      "action": "C_panel_receive_and_release_symbol"
+    },
+    {
+      "index": 678,
+      "video_s": 45.2,
+      "scene": "S06",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 678,
+      "video_s": 45.2,
+      "scene": "S06",
+      "action": "C_panel_receive_and_release_symbol"
+    },
+    {
+      "index": 679,
+      "video_s": 45.266666666666666,
+      "scene": "S06",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 679,
+      "video_s": 45.266666666666666,
+      "scene": "S06",
+      "action": "C_panel_receive_and_release_symbol"
+    },
+    {
+      "index": 680,
+      "video_s": 45.333333333333336,
+      "scene": "S06",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 680,
+      "video_s": 45.333333333333336,
+      "scene": "S06",
+      "action": "C_panel_receive_and_release_symbol"
+    },
+    {
+      "index": 681,
+      "video_s": 45.4,
+      "scene": "S06",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 681,
+      "video_s": 45.4,
+      "scene": "S06",
+      "action": "C_panel_receive_and_release_symbol"
+    },
+    {
+      "index": 682,
+      "video_s": 45.46666666666667,
+      "scene": "S06",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 682,
+      "video_s": 45.46666666666667,
+      "scene": "S06",
+      "action": "C_panel_receive_and_release_symbol"
+    },
+    {
+      "index": 683,
+      "video_s": 45.53333333333333,
+      "scene": "S06",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 683,
+      "video_s": 45.53333333333333,
+      "scene": "S06",
+      "action": "C_panel_receive_and_release_symbol"
+    },
+    {
+      "index": 684,
+      "video_s": 45.6,
+      "scene": "S06",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 684,
+      "video_s": 45.6,
+      "scene": "S06",
+      "action": "C_panel_receive_and_release_symbol"
+    },
+    {
+      "index": 685,
+      "video_s": 45.666666666666664,
+      "scene": "S06",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 685,
+      "video_s": 45.666666666666664,
+      "scene": "S06",
+      "action": "C_panel_receive_and_release_symbol"
+    },
+    {
+      "index": 686,
+      "video_s": 45.733333333333334,
+      "scene": "S06",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 686,
+      "video_s": 45.733333333333334,
+      "scene": "S06",
+      "action": "C_panel_receive_and_release_symbol"
+    },
+    {
+      "index": 687,
+      "video_s": 45.8,
+      "scene": "S06",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 687,
+      "video_s": 45.8,
+      "scene": "S06",
+      "action": "C_panel_receive_and_release_symbol"
+    },
+    {
+      "index": 688,
+      "video_s": 45.86666666666667,
+      "scene": "S06",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 688,
+      "video_s": 45.86666666666667,
+      "scene": "S06",
+      "action": "C_panel_receive_and_release_symbol"
+    },
+    {
+      "index": 689,
+      "video_s": 45.93333333333333,
+      "scene": "S06",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 689,
+      "video_s": 45.93333333333333,
+      "scene": "S06",
+      "action": "C_panel_receive_and_release_symbol"
+    },
+    {
+      "index": 690,
+      "video_s": 46.0,
+      "scene": "S06",
+      "action": "C_panel_receive_and_release_symbol"
+    },
+    {
+      "index": 691,
+      "video_s": 46.06666666666667,
+      "scene": "S06",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 691,
+      "video_s": 46.06666666666667,
+      "scene": "S06",
+      "action": "C_panel_receive_and_release_symbol"
+    },
+    {
+      "index": 692,
+      "video_s": 46.13333333333333,
+      "scene": "S06",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 692,
+      "video_s": 46.13333333333333,
+      "scene": "S06",
+      "action": "C_panel_receive_and_release_symbol"
+    },
+    {
+      "index": 693,
+      "video_s": 46.2,
+      "scene": "S06",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 693,
+      "video_s": 46.2,
+      "scene": "S06",
+      "action": "C_panel_receive_and_release_symbol"
+    },
+    {
+      "index": 694,
+      "video_s": 46.266666666666666,
+      "scene": "S06",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 694,
+      "video_s": 46.266666666666666,
+      "scene": "S06",
+      "action": "C_panel_receive_and_release_symbol"
+    },
+    {
+      "index": 695,
+      "video_s": 46.333333333333336,
+      "scene": "S06",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 695,
+      "video_s": 46.333333333333336,
+      "scene": "S06",
+      "action": "C_panel_receive_and_release_symbol"
+    },
+    {
+      "index": 696,
+      "video_s": 46.4,
+      "scene": "S06",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 696,
+      "video_s": 46.4,
+      "scene": "S06",
+      "action": "C_panel_receive_and_release_symbol"
+    },
+    {
+      "index": 697,
+      "video_s": 46.46666666666667,
+      "scene": "S06",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 697,
+      "video_s": 46.46666666666667,
+      "scene": "S06",
+      "action": "C_panel_receive_and_release_symbol"
+    },
+    {
+      "index": 698,
+      "video_s": 46.53333333333333,
+      "scene": "S06",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 698,
+      "video_s": 46.53333333333333,
+      "scene": "S06",
+      "action": "C_panel_receive_and_release_symbol"
+    },
+    {
+      "index": 699,
+      "video_s": 46.6,
+      "scene": "S06",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 699,
+      "video_s": 46.6,
+      "scene": "S06",
+      "action": "C_panel_receive_and_release_symbol"
+    },
+    {
+      "index": 700,
+      "video_s": 46.666666666666664,
+      "scene": "S06",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 700,
+      "video_s": 46.666666666666664,
+      "scene": "S06",
+      "action": "C_panel_receive_and_release_symbol"
+    },
+    {
+      "index": 701,
+      "video_s": 46.733333333333334,
+      "scene": "S06",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 701,
+      "video_s": 46.733333333333334,
+      "scene": "S06",
+      "action": "C_panel_receive_and_release_symbol"
+    },
+    {
+      "index": 702,
+      "video_s": 46.8,
+      "scene": "S06",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 702,
+      "video_s": 46.8,
+      "scene": "S06",
+      "action": "C_panel_receive_and_release_symbol"
+    },
+    {
+      "index": 703,
+      "video_s": 46.86666666666667,
+      "scene": "S06",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 703,
+      "video_s": 46.86666666666667,
+      "scene": "S06",
+      "action": "C_panel_receive_and_release_symbol"
+    },
+    {
+      "index": 704,
+      "video_s": 46.93333333333333,
+      "scene": "S06",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 704,
+      "video_s": 46.93333333333333,
+      "scene": "S06",
+      "action": "C_panel_receive_and_release_symbol"
+    },
+    {
+      "index": 705,
+      "video_s": 47.0,
+      "scene": "S06",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 705,
+      "video_s": 47.0,
+      "scene": "S06",
+      "action": "C_panel_receive_and_release_symbol"
+    },
+    {
+      "index": 706,
+      "video_s": 47.06666666666667,
+      "scene": "S06",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 706,
+      "video_s": 47.06666666666667,
+      "scene": "S06",
+      "action": "C_panel_receive_and_release_symbol"
+    },
+    {
+      "index": 707,
+      "video_s": 47.13333333333333,
+      "scene": "S06",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 707,
+      "video_s": 47.13333333333333,
+      "scene": "S06",
+      "action": "C_panel_receive_and_release_symbol"
+    },
+    {
+      "index": 708,
+      "video_s": 47.2,
+      "scene": "S06",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 708,
+      "video_s": 47.2,
+      "scene": "S06",
+      "action": "C_panel_receive_and_release_symbol"
+    },
+    {
+      "index": 709,
+      "video_s": 47.266666666666666,
+      "scene": "S06",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 709,
+      "video_s": 47.266666666666666,
+      "scene": "S06",
+      "action": "C_panel_receive_and_release_symbol"
+    },
+    {
+      "index": 710,
+      "video_s": 47.333333333333336,
+      "scene": "S06",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 710,
+      "video_s": 47.333333333333336,
+      "scene": "S06",
+      "action": "C_panel_receive_and_release_symbol"
+    },
+    {
+      "index": 711,
+      "video_s": 47.4,
+      "scene": "S06",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 711,
+      "video_s": 47.4,
+      "scene": "S06",
+      "action": "C_panel_receive_and_release_symbol"
+    },
+    {
+      "index": 712,
+      "video_s": 47.46666666666667,
+      "scene": "S06",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 712,
+      "video_s": 47.46666666666667,
+      "scene": "S06",
+      "action": "C_panel_receive_and_release_symbol"
+    },
+    {
+      "index": 713,
+      "video_s": 47.53333333333333,
+      "scene": "S06",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 713,
+      "video_s": 47.53333333333333,
+      "scene": "S06",
+      "action": "C_panel_receive_and_release_symbol"
+    },
+    {
+      "index": 714,
+      "video_s": 47.6,
+      "scene": "S06",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 714,
+      "video_s": 47.6,
+      "scene": "S06",
+      "action": "C_panel_receive_and_release_symbol"
+    },
+    {
+      "index": 715,
+      "video_s": 47.666666666666664,
+      "scene": "S06",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 715,
+      "video_s": 47.666666666666664,
+      "scene": "S06",
+      "action": "C_panel_receive_and_release_symbol"
+    },
+    {
+      "index": 716,
+      "video_s": 47.733333333333334,
+      "scene": "S06",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 716,
+      "video_s": 47.733333333333334,
+      "scene": "S06",
+      "action": "C_panel_receive_and_release_symbol"
+    },
+    {
+      "index": 717,
+      "video_s": 47.8,
+      "scene": "S06",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 717,
+      "video_s": 47.8,
+      "scene": "S06",
+      "action": "C_panel_receive_and_release_symbol"
+    },
+    {
+      "index": 718,
+      "video_s": 47.86666666666667,
+      "scene": "S06",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 718,
+      "video_s": 47.86666666666667,
+      "scene": "S06",
+      "action": "C_panel_receive_and_release_symbol"
+    },
+    {
+      "index": 719,
+      "video_s": 47.93333333333333,
+      "scene": "S06",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 719,
+      "video_s": 47.93333333333333,
+      "scene": "S06",
+      "action": "C_panel_receive_and_release_symbol"
+    },
+    {
+      "index": 720,
+      "video_s": 48.0,
+      "scene": "S06",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 720,
+      "video_s": 48.0,
+      "scene": "S06",
+      "action": "C_panel_receive_and_release_symbol"
+    },
+    {
+      "index": 721,
+      "video_s": 48.06666666666667,
+      "scene": "S06",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 721,
+      "video_s": 48.06666666666667,
+      "scene": "S06",
+      "action": "C_panel_receive_and_release_symbol"
+    },
+    {
+      "index": 722,
+      "video_s": 48.13333333333333,
+      "scene": "S06",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 722,
+      "video_s": 48.13333333333333,
+      "scene": "S06",
+      "action": "C_panel_receive_and_release_symbol"
+    },
+    {
+      "index": 723,
+      "video_s": 48.2,
+      "scene": "S06",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 723,
+      "video_s": 48.2,
+      "scene": "S06",
+      "action": "C_panel_receive_and_release_symbol"
+    },
+    {
+      "index": 724,
+      "video_s": 48.266666666666666,
+      "scene": "S06",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 724,
+      "video_s": 48.266666666666666,
+      "scene": "S06",
+      "action": "C_panel_receive_and_release_symbol"
+    },
+    {
+      "index": 725,
+      "video_s": 48.333333333333336,
+      "scene": "S06",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 725,
+      "video_s": 48.333333333333336,
+      "scene": "S06",
+      "action": "C_panel_receive_and_release_symbol"
+    },
+    {
+      "index": 726,
+      "video_s": 48.4,
+      "scene": "S06",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 726,
+      "video_s": 48.4,
+      "scene": "S06",
+      "action": "C_panel_receive_and_release_symbol"
+    },
+    {
+      "index": 727,
+      "video_s": 48.46666666666667,
+      "scene": "S06",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 727,
+      "video_s": 48.46666666666667,
+      "scene": "S06",
+      "action": "C_panel_receive_and_release_symbol"
+    },
+    {
+      "index": 728,
+      "video_s": 48.53333333333333,
+      "scene": "S06",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 728,
+      "video_s": 48.53333333333333,
+      "scene": "S06",
+      "action": "C_panel_receive_and_release_symbol"
+    },
+    {
+      "index": 729,
+      "video_s": 48.6,
+      "scene": "S06",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 729,
+      "video_s": 48.6,
+      "scene": "S06",
+      "action": "C_panel_receive_and_release_symbol"
+    },
+    {
+      "index": 730,
+      "video_s": 48.666666666666664,
+      "scene": "S06",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 730,
+      "video_s": 48.666666666666664,
+      "scene": "S06",
+      "action": "C_panel_receive_and_release_symbol"
+    },
+    {
+      "index": 731,
+      "video_s": 48.733333333333334,
+      "scene": "S06",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 731,
+      "video_s": 48.733333333333334,
+      "scene": "S06",
+      "action": "C_panel_receive_and_release_symbol"
+    },
+    {
+      "index": 732,
+      "video_s": 48.8,
+      "scene": "S06",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 732,
+      "video_s": 48.8,
+      "scene": "S06",
+      "action": "C_panel_receive_and_release_symbol"
+    },
+    {
+      "index": 733,
+      "video_s": 48.86666666666667,
+      "scene": "S06",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 733,
+      "video_s": 48.86666666666667,
+      "scene": "S06",
+      "action": "C_panel_receive_and_release_symbol"
+    },
+    {
+      "index": 734,
+      "video_s": 48.93333333333333,
+      "scene": "S06",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 734,
+      "video_s": 48.93333333333333,
+      "scene": "S06",
+      "action": "C_panel_receive_and_release_symbol"
+    },
+    {
+      "index": 735,
+      "video_s": 49.0,
+      "scene": "S06",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 735,
+      "video_s": 49.0,
+      "scene": "S06",
+      "action": "C_panel_receive_and_release_symbol"
+    },
+    {
+      "index": 736,
+      "video_s": 49.06666666666667,
+      "scene": "S06",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 736,
+      "video_s": 49.06666666666667,
+      "scene": "S06",
+      "action": "C_panel_receive_and_release_symbol"
+    },
+    {
+      "index": 737,
+      "video_s": 49.13333333333333,
+      "scene": "S06",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 737,
+      "video_s": 49.13333333333333,
+      "scene": "S06",
+      "action": "C_panel_receive_and_release_symbol"
+    },
+    {
+      "index": 738,
+      "video_s": 49.2,
+      "scene": "S06",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 738,
+      "video_s": 49.2,
+      "scene": "S06",
+      "action": "C_panel_receive_and_release_symbol"
+    },
+    {
+      "index": 739,
+      "video_s": 49.266666666666666,
+      "scene": "S06",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 739,
+      "video_s": 49.266666666666666,
+      "scene": "S06",
+      "action": "C_panel_receive_and_release_symbol"
+    },
+    {
+      "index": 740,
+      "video_s": 49.333333333333336,
+      "scene": "S06",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 740,
+      "video_s": 49.333333333333336,
+      "scene": "S06",
+      "action": "C_panel_receive_and_release_symbol"
+    },
+    {
+      "index": 741,
+      "video_s": 49.4,
+      "scene": "S06",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 741,
+      "video_s": 49.4,
+      "scene": "S06",
+      "action": "C_panel_receive_and_release_symbol"
+    },
+    {
+      "index": 742,
+      "video_s": 49.46666666666667,
+      "scene": "S06",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 742,
+      "video_s": 49.46666666666667,
+      "scene": "S06",
+      "action": "C_panel_receive_and_release_symbol"
+    },
+    {
+      "index": 743,
+      "video_s": 49.53333333333333,
+      "scene": "S06",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 743,
+      "video_s": 49.53333333333333,
+      "scene": "S06",
+      "action": "C_panel_receive_and_release_symbol"
+    },
+    {
+      "index": 744,
+      "video_s": 49.6,
+      "scene": "S06",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 744,
+      "video_s": 49.6,
+      "scene": "S06",
+      "action": "C_panel_receive_and_release_symbol"
+    },
+    {
+      "index": 745,
+      "video_s": 49.666666666666664,
+      "scene": "S06",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 745,
+      "video_s": 49.666666666666664,
+      "scene": "S06",
+      "action": "C_panel_receive_and_release_symbol"
+    },
+    {
+      "index": 746,
+      "video_s": 49.733333333333334,
+      "scene": "S06",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 746,
+      "video_s": 49.733333333333334,
+      "scene": "S06",
+      "action": "C_panel_receive_and_release_symbol"
+    },
+    {
+      "index": 747,
+      "video_s": 49.8,
+      "scene": "S06",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 747,
+      "video_s": 49.8,
+      "scene": "S06",
+      "action": "C_panel_receive_and_release_symbol"
+    },
+    {
+      "index": 748,
+      "video_s": 49.86666666666667,
+      "scene": "S06",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 748,
+      "video_s": 49.86666666666667,
+      "scene": "S06",
+      "action": "C_panel_receive_and_release_symbol"
+    },
+    {
+      "index": 749,
+      "video_s": 49.93333333333333,
+      "scene": "S06",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 749,
+      "video_s": 49.93333333333333,
+      "scene": "S06",
+      "action": "C_panel_receive_and_release_symbol"
+    },
+    {
+      "index": 750,
+      "video_s": 50.0,
+      "scene": "S07",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 750,
+      "video_s": 50.0,
+      "scene": "S07",
+      "action": "C_panel_receive_and_release_symbol"
+    },
+    {
+      "index": 751,
+      "video_s": 50.06666666666667,
+      "scene": "S07",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 751,
+      "video_s": 50.06666666666667,
+      "scene": "S07",
+      "action": "C_panel_receive_and_release_symbol"
+    },
+    {
+      "index": 752,
+      "video_s": 50.13333333333333,
+      "scene": "S07",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 752,
+      "video_s": 50.13333333333333,
+      "scene": "S07",
+      "action": "C_panel_receive_and_release_symbol"
+    },
+    {
+      "index": 753,
+      "video_s": 50.2,
+      "scene": "S07",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 753,
+      "video_s": 50.2,
+      "scene": "S07",
+      "action": "C_panel_receive_and_release_symbol"
+    },
+    {
+      "index": 754,
+      "video_s": 50.266666666666666,
+      "scene": "S07",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 754,
+      "video_s": 50.266666666666666,
+      "scene": "S07",
+      "action": "C_panel_receive_and_release_symbol"
+    },
+    {
+      "index": 755,
+      "video_s": 50.333333333333336,
+      "scene": "S07",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 755,
+      "video_s": 50.333333333333336,
+      "scene": "S07",
+      "action": "C_panel_receive_and_release_symbol"
+    },
+    {
+      "index": 756,
+      "video_s": 50.4,
+      "scene": "S07",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 756,
+      "video_s": 50.4,
+      "scene": "S07",
+      "action": "C_panel_receive_and_release_symbol"
+    },
+    {
+      "index": 757,
+      "video_s": 50.46666666666667,
+      "scene": "S07",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 757,
+      "video_s": 50.46666666666667,
+      "scene": "S07",
+      "action": "C_panel_receive_and_release_symbol"
+    },
+    {
+      "index": 758,
+      "video_s": 50.53333333333333,
+      "scene": "S07",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 758,
+      "video_s": 50.53333333333333,
+      "scene": "S07",
+      "action": "C_panel_receive_and_release_symbol"
+    },
+    {
+      "index": 759,
+      "video_s": 50.6,
+      "scene": "S07",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 759,
+      "video_s": 50.6,
+      "scene": "S07",
+      "action": "C_panel_receive_and_release_symbol"
+    },
+    {
+      "index": 760,
+      "video_s": 50.666666666666664,
+      "scene": "S07",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 760,
+      "video_s": 50.666666666666664,
+      "scene": "S07",
+      "action": "C_panel_receive_and_release_symbol"
+    },
+    {
+      "index": 761,
+      "video_s": 50.733333333333334,
+      "scene": "S07",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 761,
+      "video_s": 50.733333333333334,
+      "scene": "S07",
+      "action": "C_panel_receive_and_release_symbol"
+    },
+    {
+      "index": 762,
+      "video_s": 50.8,
+      "scene": "S07",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 762,
+      "video_s": 50.8,
+      "scene": "S07",
+      "action": "C_panel_receive_and_release_symbol"
+    },
+    {
+      "index": 763,
+      "video_s": 50.86666666666667,
+      "scene": "S07",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 763,
+      "video_s": 50.86666666666667,
+      "scene": "S07",
+      "action": "C_panel_receive_and_release_symbol"
+    },
+    {
+      "index": 764,
+      "video_s": 50.93333333333333,
+      "scene": "S07",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 764,
+      "video_s": 50.93333333333333,
+      "scene": "S07",
+      "action": "C_panel_receive_and_release_symbol"
+    },
+    {
+      "index": 765,
+      "video_s": 51.0,
+      "scene": "S07",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 765,
+      "video_s": 51.0,
+      "scene": "S07",
+      "action": "C_panel_receive_and_release_symbol"
+    },
+    {
+      "index": 766,
+      "video_s": 51.06666666666667,
+      "scene": "S07",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 766,
+      "video_s": 51.06666666666667,
+      "scene": "S07",
+      "action": "C_panel_receive_and_release_symbol"
+    },
+    {
+      "index": 767,
+      "video_s": 51.13333333333333,
+      "scene": "S07",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 767,
+      "video_s": 51.13333333333333,
+      "scene": "S07",
+      "action": "C_panel_receive_and_release_symbol"
+    },
+    {
+      "index": 768,
+      "video_s": 51.2,
+      "scene": "S07",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 768,
+      "video_s": 51.2,
+      "scene": "S07",
+      "action": "C_panel_receive_and_release_symbol"
+    },
+    {
+      "index": 769,
+      "video_s": 51.266666666666666,
+      "scene": "S07",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 769,
+      "video_s": 51.266666666666666,
+      "scene": "S07",
+      "action": "C_panel_receive_and_release_symbol"
+    },
+    {
+      "index": 770,
+      "video_s": 51.333333333333336,
+      "scene": "S07",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 770,
+      "video_s": 51.333333333333336,
+      "scene": "S07",
+      "action": "C_panel_receive_and_release_symbol"
+    },
+    {
+      "index": 771,
+      "video_s": 51.4,
+      "scene": "S07",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 771,
+      "video_s": 51.4,
+      "scene": "S07",
+      "action": "C_panel_receive_and_release_symbol"
+    },
+    {
+      "index": 772,
+      "video_s": 51.46666666666667,
+      "scene": "S07",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 772,
+      "video_s": 51.46666666666667,
+      "scene": "S07",
+      "action": "C_panel_receive_and_release_symbol"
+    },
+    {
+      "index": 773,
+      "video_s": 51.53333333333333,
+      "scene": "S07",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 774,
+      "video_s": 51.6,
+      "scene": "S07",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 775,
+      "video_s": 51.666666666666664,
+      "scene": "S07",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 776,
+      "video_s": 51.733333333333334,
+      "scene": "S07",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 777,
+      "video_s": 51.8,
+      "scene": "S07",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 778,
+      "video_s": 51.86666666666667,
+      "scene": "S07",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 779,
+      "video_s": 51.93333333333333,
+      "scene": "S07",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 780,
+      "video_s": 52.0,
+      "scene": "S07",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 781,
+      "video_s": 52.06666666666667,
+      "scene": "S07",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 782,
+      "video_s": 52.13333333333333,
+      "scene": "S07",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 783,
+      "video_s": 52.2,
+      "scene": "S07",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 784,
+      "video_s": 52.266666666666666,
+      "scene": "S07",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 785,
+      "video_s": 52.333333333333336,
+      "scene": "S07",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 786,
+      "video_s": 52.4,
+      "scene": "S07",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 787,
+      "video_s": 52.46666666666667,
+      "scene": "S07",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 788,
+      "video_s": 52.53333333333333,
+      "scene": "S07",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 789,
+      "video_s": 52.6,
+      "scene": "S07",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 790,
+      "video_s": 52.666666666666664,
+      "scene": "S07",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 791,
+      "video_s": 52.733333333333334,
+      "scene": "S07",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 792,
+      "video_s": 52.8,
+      "scene": "S07",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 793,
+      "video_s": 52.86666666666667,
+      "scene": "S07",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 794,
+      "video_s": 52.93333333333333,
+      "scene": "S07",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 795,
+      "video_s": 53.0,
+      "scene": "S07",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 796,
+      "video_s": 53.06666666666667,
+      "scene": "S07",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 797,
+      "video_s": 53.13333333333333,
+      "scene": "S07",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 798,
+      "video_s": 53.2,
+      "scene": "S07",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 799,
+      "video_s": 53.266666666666666,
+      "scene": "S07",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 800,
+      "video_s": 53.333333333333336,
+      "scene": "S07",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 801,
+      "video_s": 53.4,
+      "scene": "S07",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 802,
+      "video_s": 53.46666666666667,
+      "scene": "S07",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 803,
+      "video_s": 53.53333333333333,
+      "scene": "S07",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 804,
+      "video_s": 53.6,
+      "scene": "S07",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 805,
+      "video_s": 53.666666666666664,
+      "scene": "S07",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 806,
+      "video_s": 53.733333333333334,
+      "scene": "S07",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 807,
+      "video_s": 53.8,
+      "scene": "S07",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 808,
+      "video_s": 53.86666666666667,
+      "scene": "S07",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 809,
+      "video_s": 53.93333333333333,
+      "scene": "S07",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 810,
+      "video_s": 54.0,
+      "scene": "S07",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 811,
+      "video_s": 54.06666666666667,
+      "scene": "S07",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 812,
+      "video_s": 54.13333333333333,
+      "scene": "S07",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 813,
+      "video_s": 54.2,
+      "scene": "S07",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 814,
+      "video_s": 54.266666666666666,
+      "scene": "S07",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 815,
+      "video_s": 54.333333333333336,
+      "scene": "S07",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 816,
+      "video_s": 54.4,
+      "scene": "S07",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 817,
+      "video_s": 54.46666666666667,
+      "scene": "S07",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 818,
+      "video_s": 54.53333333333333,
+      "scene": "S07",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 819,
+      "video_s": 54.6,
+      "scene": "S07",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 820,
+      "video_s": 54.666666666666664,
+      "scene": "S07",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 821,
+      "video_s": 54.733333333333334,
+      "scene": "S07",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 822,
+      "video_s": 54.8,
+      "scene": "S07",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 823,
+      "video_s": 54.86666666666667,
+      "scene": "S07",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 824,
+      "video_s": 54.93333333333333,
+      "scene": "S07",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 825,
+      "video_s": 55.0,
+      "scene": "S08",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 826,
+      "video_s": 55.06666666666667,
+      "scene": "S08",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 827,
+      "video_s": 55.13333333333333,
+      "scene": "S08",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 828,
+      "video_s": 55.2,
+      "scene": "S08",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 829,
+      "video_s": 55.266666666666666,
+      "scene": "S08",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 830,
+      "video_s": 55.333333333333336,
+      "scene": "S08",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 831,
+      "video_s": 55.4,
+      "scene": "S08",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 832,
+      "video_s": 55.46666666666667,
+      "scene": "S08",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 833,
+      "video_s": 55.53333333333333,
+      "scene": "S08",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 834,
+      "video_s": 55.6,
+      "scene": "S08",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 835,
+      "video_s": 55.666666666666664,
+      "scene": "S08",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 836,
+      "video_s": 55.733333333333334,
+      "scene": "S08",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 837,
+      "video_s": 55.8,
+      "scene": "S08",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 838,
+      "video_s": 55.86666666666667,
+      "scene": "S08",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 839,
+      "video_s": 55.93333333333333,
+      "scene": "S08",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 840,
+      "video_s": 56.0,
+      "scene": "S08",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 841,
+      "video_s": 56.06666666666667,
+      "scene": "S08",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 842,
+      "video_s": 56.13333333333333,
+      "scene": "S08",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 843,
+      "video_s": 56.2,
+      "scene": "S08",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 844,
+      "video_s": 56.266666666666666,
+      "scene": "S08",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 845,
+      "video_s": 56.333333333333336,
+      "scene": "S08",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 846,
+      "video_s": 56.4,
+      "scene": "S08",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 847,
+      "video_s": 56.46666666666667,
+      "scene": "S08",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 848,
+      "video_s": 56.53333333333333,
+      "scene": "S08",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 849,
+      "video_s": 56.6,
+      "scene": "S08",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 850,
+      "video_s": 56.666666666666664,
+      "scene": "S08",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 851,
+      "video_s": 56.733333333333334,
+      "scene": "S08",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 852,
+      "video_s": 56.8,
+      "scene": "S08",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 853,
+      "video_s": 56.86666666666667,
+      "scene": "S08",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 854,
+      "video_s": 56.93333333333333,
+      "scene": "S08",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 855,
+      "video_s": 57.0,
+      "scene": "S08",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 856,
+      "video_s": 57.06666666666667,
+      "scene": "S08",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 857,
+      "video_s": 57.13333333333333,
+      "scene": "S08",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 858,
+      "video_s": 57.2,
+      "scene": "S08",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 859,
+      "video_s": 57.266666666666666,
+      "scene": "S08",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 860,
+      "video_s": 57.333333333333336,
+      "scene": "S08",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 861,
+      "video_s": 57.4,
+      "scene": "S08",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 862,
+      "video_s": 57.46666666666667,
+      "scene": "S08",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 863,
+      "video_s": 57.53333333333333,
+      "scene": "S08",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 864,
+      "video_s": 57.6,
+      "scene": "S08",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 865,
+      "video_s": 57.666666666666664,
+      "scene": "S08",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 866,
+      "video_s": 57.733333333333334,
+      "scene": "S08",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 867,
+      "video_s": 57.8,
+      "scene": "S08",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 868,
+      "video_s": 57.86666666666667,
+      "scene": "S08",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 869,
+      "video_s": 57.93333333333333,
+      "scene": "S08",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 870,
+      "video_s": 58.0,
+      "scene": "S08",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 871,
+      "video_s": 58.06666666666667,
+      "scene": "S08",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 872,
+      "video_s": 58.13333333333333,
+      "scene": "S08",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 873,
+      "video_s": 58.2,
+      "scene": "S08",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 874,
+      "video_s": 58.266666666666666,
+      "scene": "S08",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 875,
+      "video_s": 58.333333333333336,
+      "scene": "S08",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 876,
+      "video_s": 58.4,
+      "scene": "S08",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 877,
+      "video_s": 58.46666666666667,
+      "scene": "S08",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 878,
+      "video_s": 58.53333333333333,
+      "scene": "S08",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 879,
+      "video_s": 58.6,
+      "scene": "S08",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 880,
+      "video_s": 58.666666666666664,
+      "scene": "S08",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 881,
+      "video_s": 58.733333333333334,
+      "scene": "S08",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 882,
+      "video_s": 58.8,
+      "scene": "S08",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 883,
+      "video_s": 58.86666666666667,
+      "scene": "S08",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 884,
+      "video_s": 58.93333333333333,
+      "scene": "S08",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 885,
+      "video_s": 59.0,
+      "scene": "S08",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 886,
+      "video_s": 59.06666666666667,
+      "scene": "S08",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 887,
+      "video_s": 59.13333333333333,
+      "scene": "S08",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 888,
+      "video_s": 59.2,
+      "scene": "S08",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 889,
+      "video_s": 59.266666666666666,
+      "scene": "S08",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 890,
+      "video_s": 59.333333333333336,
+      "scene": "S08",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 891,
+      "video_s": 59.4,
+      "scene": "S08",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 892,
+      "video_s": 59.46666666666667,
+      "scene": "S08",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 893,
+      "video_s": 59.53333333333333,
+      "scene": "S08",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 894,
+      "video_s": 59.6,
+      "scene": "S08",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 895,
+      "video_s": 59.666666666666664,
+      "scene": "S08",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 896,
+      "video_s": 59.733333333333334,
+      "scene": "S08",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 897,
+      "video_s": 59.8,
+      "scene": "S08",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 898,
+      "video_s": 59.86666666666667,
+      "scene": "S08",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 899,
+      "video_s": 59.93333333333333,
+      "scene": "S08",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 900,
+      "video_s": 60.0,
+      "scene": "S08",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 901,
+      "video_s": 60.06666666666667,
+      "scene": "S08",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 902,
+      "video_s": 60.13333333333333,
+      "scene": "S08",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 903,
+      "video_s": 60.2,
+      "scene": "S08",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 904,
+      "video_s": 60.266666666666666,
+      "scene": "S08",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 905,
+      "video_s": 60.333333333333336,
+      "scene": "S08",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 906,
+      "video_s": 60.4,
+      "scene": "S08",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 907,
+      "video_s": 60.46666666666667,
+      "scene": "S08",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 908,
+      "video_s": 60.53333333333333,
+      "scene": "S08",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 909,
+      "video_s": 60.6,
+      "scene": "S08",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 910,
+      "video_s": 60.666666666666664,
+      "scene": "S08",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 911,
+      "video_s": 60.733333333333334,
+      "scene": "S08",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 912,
+      "video_s": 60.8,
+      "scene": "S08",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 913,
+      "video_s": 60.86666666666667,
+      "scene": "S08",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 914,
+      "video_s": 60.93333333333333,
+      "scene": "S08",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 915,
+      "video_s": 61.0,
+      "scene": "S08",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 916,
+      "video_s": 61.06666666666667,
+      "scene": "S08",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 917,
+      "video_s": 61.13333333333333,
+      "scene": "S08",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 918,
+      "video_s": 61.2,
+      "scene": "S08",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 919,
+      "video_s": 61.266666666666666,
+      "scene": "S08",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 920,
+      "video_s": 61.333333333333336,
+      "scene": "S08",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 921,
+      "video_s": 61.4,
+      "scene": "S08",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 922,
+      "video_s": 61.46666666666667,
+      "scene": "S08",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 923,
+      "video_s": 61.53333333333333,
+      "scene": "S08",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 924,
+      "video_s": 61.6,
+      "scene": "S08",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 925,
+      "video_s": 61.666666666666664,
+      "scene": "S08",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 926,
+      "video_s": 61.733333333333334,
+      "scene": "S08",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 927,
+      "video_s": 61.8,
+      "scene": "S08",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 928,
+      "video_s": 61.86666666666667,
+      "scene": "S08",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 929,
+      "video_s": 61.93333333333333,
+      "scene": "S08",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 930,
+      "video_s": 62.0,
+      "scene": "S08",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 931,
+      "video_s": 62.06666666666667,
+      "scene": "S08",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 932,
+      "video_s": 62.13333333333333,
+      "scene": "S08",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 933,
+      "video_s": 62.2,
+      "scene": "S08",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 934,
+      "video_s": 62.266666666666666,
+      "scene": "S08",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 935,
+      "video_s": 62.333333333333336,
+      "scene": "S08",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 936,
+      "video_s": 62.4,
+      "scene": "S08",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 937,
+      "video_s": 62.46666666666667,
+      "scene": "S08",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 938,
+      "video_s": 62.53333333333333,
+      "scene": "S08",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 939,
+      "video_s": 62.6,
+      "scene": "S08",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 940,
+      "video_s": 62.666666666666664,
+      "scene": "S08",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 941,
+      "video_s": 62.733333333333334,
+      "scene": "S08",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 942,
+      "video_s": 62.8,
+      "scene": "S08",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 943,
+      "video_s": 62.86666666666667,
+      "scene": "S08",
+      "action": "B_panel_symbol_upper_band"
+    },
+    {
+      "index": 944,
+      "video_s": 62.93333333333333,
+      "scene": "S08",
+      "action": "B_panel_symbol_upper_band"
+    }
+  ],
+  "schematic_dimensions": {
+    "board_top_above_origin": 0.249999997317791,
+    "component_top_above_origin": 0.20249999880790712,
+    "finger_bottom_from_target": -0.02000000298023224,
+    "display_free_band": [
+      0.20249999880790712,
+      0.249999997317791
+    ],
+    "illustration_tip_bottom": 0.22624999806284907,
+    "illustration_target_height": 0.2462500010430813,
+    "rule": "Center the finger bottom in the free upper band of the existing schematic board.",
+    "physical_length_unit": null
+  },
+  "product_tools_wires_pallet_assistants_cameras_times_unchanged": true,
+  "source_files_unchanged": true,
+  "readback_identical": true,
+  "position_units": "Dimensionless explanatory coordinates",
+  "physical_acceptance_verdict": null
+}
