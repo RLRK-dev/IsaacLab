@@ -1,0 +1,65 @@
+:root { color-scheme:light; --ink:#173b4d; --muted:#526c78; --accent:#14816c; --line:#d4e0e7; }
+* { box-sizing:border-box; }
+body { margin:0; background:#f3f6f8; color:var(--ink); font:16px/1.75 "Noto Sans CJK JP","Yu Gothic",sans-serif; }
+a { color:#126c7e; text-underline-offset:3px; }
+a:focus-visible,summary:focus-visible { outline:3px solid #ecab44; outline-offset:3px; }
+header,main,footer { max-width:1500px; margin:auto; padding:0 32px; }
+header { padding-top:28px; padding-bottom:20px; }
+.back { display:inline-block; margin-bottom:26px; font-size:14px; }
+.eyebrow { font-size:13px; color:var(--accent); font-weight:600; letter-spacing:.04em; }
+h1,h2,h3,p { margin:0; }
+h1 { font-size:clamp(25px,3vw,37px); line-height:1.4; margin:9px 0 16px; }
+h2 { font-size:23px; line-height:1.55; font-weight:650; }
+h3 { font-size:18px; margin-bottom:8px; }
+p + p { margin-top:12px; }
+.lead { max-width:1110px; }
+.principles { display:flex; flex-wrap:wrap; gap:12px 25px; margin:23px 0 15px; font-size:14px; }
+.principles span { border-left:3px solid var(--accent); padding-left:10px; }
+.caption { font-size:13px; line-height:1.75; color:var(--muted); }
+.summary-panel { border-top:1px solid var(--line); border-bottom:1px solid var(--line); padding:23px 0; margin:22px 0 30px; }
+.three-points { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:30px; margin:22px 0; }
+.three-points p { font-size:15px; }
+.hand-nav { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:8px 20px; margin-bottom:30px; }
+.hand-nav a { padding:7px 0; font-size:14px; border-bottom:1px solid var(--line); }
+.hand-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:25px; }
+.hand-card { background:white; border:1px solid var(--line); border-radius:9px; padding:25px; scroll-margin-top:20px; min-width:0; }
+.hand-card h2 { margin:8px 0 20px; }
+.main-figure { display:block; width:100%; height:350px; object-fit:contain; background:white; }
+.hand-card .caption { margin-top:12px; }
+.extra { padding:12px 0 0; font-size:14px; }
+summary { cursor:pointer; }
+.extra img { display:block; width:100%; height:auto; margin:15px 0; }
+dl { display:grid; grid-template-columns:145px minmax(0,1fr); margin:22px 0 0; border-top:1px solid var(--line); font-size:15px; }
+dt,dd { margin:0; padding:11px 0; border-bottom:1px solid var(--line); }
+dt { color:var(--muted); font-size:13px; padding-right:16px; }
+dd { overflow-wrap:anywhere; }
+.job-links { margin-top:17px; font-size:14px; }
+.jobs-section { margin:45px 0; }
+.heading-row { display:flex; flex-wrap:wrap; align-items:baseline; gap:18px; justify-content:space-between; margin-bottom:12px; }
+.table-wrap { overflow:auto; margin-top:20px; background:white; border:1px solid var(--line); }
+table { border-collapse:collapse; width:100%; font-size:14px; min-width:950px; }
+th,td { padding:13px 15px; border-bottom:1px solid var(--line); vertical-align:top; text-align:left; }
+thead th { background:#e9f0f3; }
+tbody th { width:18%; font-weight:500; }
+tbody td:nth-child(2) { width:17%; }
+tbody td:nth-child(3) { width:20%; }
+tr:target { background:#fff4d8; }
+.hand-card:target { border-color:#14816c; box-shadow:0 0 0 2px #14816c; }
+.handoff-chain { display:flex; flex-wrap:wrap; gap:12px 33px; padding-left:25px; margin:20px 0; }
+footer { padding-top:10px; padding-bottom:40px; color:var(--muted); font-size:14px; }
+footer details { margin-top:20px; }
+@media(max-width:1050px) {
+  .hand-grid { grid-template-columns:1fr; }
+  .main-figure { height:420px; }
+  .hand-nav { grid-template-columns:repeat(2,minmax(0,1fr)); }
+}
+@media(max-width:700px) {
+  header,main,footer { padding-left:18px; padding-right:18px; }
+  .three-points { grid-template-columns:1fr; gap:20px; }
+  .hand-nav { grid-template-columns:1fr; }
+  .hand-card { padding:18px; }
+  .main-figure { height:290px; }
+  dl { grid-template-columns:1fr; }
+  dt { border:0; padding-bottom:0; }
+  dd { padding-top:4px; }
+}

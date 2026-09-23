@@ -1,0 +1,656 @@
+{
+  "source_kind": "saved_geometry_samples",
+  "authored_motion_kind": "unchanged_v05_schematic_bank_with_obsolete_outfeed_display_omitted",
+  "native": null,
+  "native_sha256": null,
+  "motion": "concept_display_v05_reused.npz",
+  "motion_sha256": "7702cadf9e412895a14c82d1a6b85a6aa659f2978c22e59ddf16e2714c793a60",
+  "input_sha256": {
+    "/tmp/hvjb-line-progress-20260923/work/hvjb-line-video-v04-20260923/render_review.py": "068e446492ab4d8d4e1d95fb78bcf839646fd569f5bbe3d785d570a09732407f",
+    "/tmp/hvjb-line-progress-20260923/work/hvjb-line-video-v03-20260921/render_process.py": "3ab9f8b5b904799cb1c8eba4e07eade42fc5d0b8c12c685feffb8f070b068b3c",
+    "/tmp/hvjb-line-progress-20260923/work/hvjb-line-video-v03-20260921/legacy_model.py": "83eba07a5eaa7717dc24a9e17f218127a6512d88441484d491ba9d8da1aa3e4d",
+    "/tmp/hvjb-line-progress-20260923/work/hvjb-line-video-v03-20260921/inputs/line_process_plan.json": "e640a9cb3008e418a595465d94bfaf6994bbbdb12a6c7ecbe94edd73996c05d2",
+    "/tmp/hvjb-line-progress-20260923/work/hvjb-line-video-v03-20260921/data/concept_v03.json": "6eb3775b07a288c86d97de5074c17ace01cac5b3d8b6a4d472c021a299426216",
+    "/tmp/hvjb-line-progress-20260923/work/hvjb-line-progress-20260923/data/line_review_data.json": "55948e4d2603b4ebe1ccd30160c89baa990623ad96eedc515c17583bac4bb440",
+    "/tmp/hvjb-line-progress-20260923/work/hvjb-line-progress-20260923/audit/product_final_views.json": "8259c68f05a2d43152d69751e783168d7a3cb2328936b44809da211199cdaac4",
+    "/home/rlrk/src/ur15-line-render/render_ur15_line.py": "b87bd76092f3b6a9f279de2ce7f0f7976703e1f54637fcd4dc1c51ed686241f9",
+    "/usr/share/fonts/opentype/noto/NotoSansCJK-Regular.ttc": "b76b0433203017ca80401b2ee0dd69350349871c4b19d504c34dbdd80541690a",
+    "/tmp/hvjb-line-progress-20260923/work/hvjb-line-video-v04-20260923/data/concept_v03_reused.npz": "52eede374a2d782aabf1cc2604801cc64e6f884b39060728c437631a8dca36dc",
+    "/tmp/hvjb-line-progress-20260923/work/hvjb-line-progress-20260923/figures/product_final/after_insertion_bus.png": "1ebdeac6c8e1257618f92393bd1232e972a09052fb478d8086c2b28bf68d98ff",
+    "/tmp/hvjb-line-progress-20260923/work/hvjb-line-progress-20260923/figures/product_final/case.png": "804a3a906d1c6c389190a73dee6f7f6f7ee3d817323f1b725df38d5eec869948",
+    "/tmp/hvjb-line-progress-20260923/work/hvjb-line-progress-20260923/figures/product_final/external_headers.png": "3d141b70f9e1b60e8c4d0dde203f300353408896ea8736f304eaaab18d4214e0",
+    "/tmp/hvjb-line-progress-20260923/work/hvjb-line-progress-20260923/figures/product_final/internal_housings.png": "28750afc206b4788f4e6f998977340f6cbc3e07ab468a8fad2d1e42c55fcd1a0",
+    "/tmp/hvjb-line-progress-20260923/work/hvjb-line-progress-20260923/figures/product_final/main_and_lv_unassigned.png": "9f4fa8b01c35b3fd5693783f621695aaddbcf7df4fa04948d3c228ed1fd89135",
+    "/tmp/hvjb-line-progress-20260923/work/hvjb-line-progress-20260923/figures/product_final/main_fuse_unassigned.png": "a356f01471d61e4cfb7b7028ec5c1c47809b5890ccabc123fdbe7e34eaed890c",
+    "/tmp/hvjb-line-progress-20260923/work/hvjb-line-progress-20260923/figures/product_final/outside_A.png": "3dcfd30f17a6f1a3435f057f6fc71ff751d6f7e0367b33dba91f64d879e443d1",
+    "/tmp/hvjb-line-progress-20260923/work/hvjb-line-progress-20260923/figures/product_final/outside_B.png": "f6ec93e36e019addee1090552c21b350f4ca92716d010eb94d8a4ec16fb837d9",
+    "/tmp/hvjb-line-progress-20260923/work/hvjb-line-progress-20260923/figures/product_final/product.png": "d30a05313b415d3f5862f0016aa13b523eb7bf09e6d65bd2ad9fb0a0dd99ee94",
+    "/tmp/hvjb-line-progress-20260923/work/hvjb-line-progress-20260923/figures/product_final/wires_display_only.png": "459339d8dcc9cc79cf54e53a82a9b226d1176c0782082646221966d45e9898fd",
+    "/tmp/hvjb-line-progress-20260923/work/hvjb-line-video-v05-20260923/render_review.py": "61f7424969caf8fa1f3c11ca03ec4ad25f1f178cd75a7e226ed27d0e1c529245",
+    "/tmp/hvjb-line-progress-20260923/work/hvjb-line-video-v04-20260923/previews/concept_v04/manifest.json": "5dd7e1f92358971f427d54bc2867911d0270ec243f962b0f0e786f72e9b45554",
+    "/tmp/hvjb-line-progress-20260923/work/hvjb-display-continuity-v01-20260923/correct_display.py": "61c0e255965216795fe078894e72fa64de59ff661a7110b6012858be71b7fa68",
+    "/tmp/hvjb-line-progress-20260923/work/hvjb-display-continuity-v01-20260923/audit/correction_verification.json": "d5e52826edc6905a71c7a267bdf74d0b4dce7aff141d9c29f35f60f9c96b98b6",
+    "/tmp/hvjb-line-progress-20260923/work/hvjb-display-continuity-v01-20260923/audit/display_v05_delta.json": "8c83ab80a456085005715d7c8db2a3b5d9a88b4725deb9e78e12a686af1b35fe",
+    "/tmp/hvjb-line-progress-20260923/work/hvjb-line-video-v05-20260923/audit/camera_framing.json": "135ec3153771d0fba5f391dda3f13241921faad9a73f5f8b6a6f72d0e4cf4489",
+    "/tmp/hvjb-line-progress-20260923/work/hvjb-line-video-v05-20260923/prepare_camera.py": "361dce7d48ebf61f0f3cf3a08f5a7e707f3b845593fdb9a50b8a04c35abf3730",
+    "/tmp/hvjb-line-progress-20260923/work/hvjb-line-video-v05-20260923/data/concept_display_v05_framed.npz": "7702cadf9e412895a14c82d1a6b85a6aa659f2978c22e59ddf16e2714c793a60",
+    "/tmp/hvjb-line-progress-20260923/work/hvjb-line-video-v05b-20260923/render_review.py": "99c68006cfa4c9ab1c4d7190918cbd1ecc28548fc7887f44513ef482f8743d66",
+    "/tmp/hvjb-line-progress-20260923/work/hvjb-line-video-v05b-20260923/REVIEW_SCOPE.md": "de58bc063df4bc9c93cb9b2561fab194a5a5bc3dfc8560322cb6cb44204f595f",
+    "/tmp/hvjb-line-progress-20260923/work/hvjb-logistics-review-v01-20260923/audit/logistics_observations.json": "219ebd9fb43f2f69ead76d09a412958b4d606af4665021dab6d882880f59cf03",
+    "/tmp/hvjb-line-progress-20260923/work/hvjb-line-video-v05b-20260923/data/concept_display_v05_reused.npz": "7702cadf9e412895a14c82d1a6b85a6aa659f2978c22e59ddf16e2714c793a60"
+  },
+  "renderer": "/tmp/hvjb-line-progress-20260923/work/hvjb-line-video-v05b-20260923/render_review.py",
+  "camera": "v03_saved_process_camera_v04_screen_layout",
+  "frame_end": 36,
+  "expected_source_samples": [
+    {
+      "feature_id": "INTRO",
+      "saved_frame": 1,
+      "saved_bank_index": 0,
+      "saved_time_s": 0.0
+    },
+    {
+      "feature_id": "S01",
+      "saved_frame": 55,
+      "saved_bank_index": 54,
+      "saved_time_s": 3.6
+    },
+    {
+      "feature_id": "S01",
+      "saved_frame": 73,
+      "saved_bank_index": 72,
+      "saved_time_s": 4.8
+    },
+    {
+      "feature_id": "S01",
+      "saved_frame": 116,
+      "saved_bank_index": 115,
+      "saved_time_s": 7.666666666666667
+    },
+    {
+      "feature_id": "S01",
+      "saved_frame": 124,
+      "saved_bank_index": 123,
+      "saved_time_s": 8.2
+    },
+    {
+      "feature_id": "S02",
+      "saved_frame": 151,
+      "saved_bank_index": 150,
+      "saved_time_s": 10.0
+    },
+    {
+      "feature_id": "S03",
+      "saved_frame": 301,
+      "saved_bank_index": 300,
+      "saved_time_s": 20.0
+    },
+    {
+      "feature_id": "S04",
+      "saved_frame": 439,
+      "saved_bank_index": 438,
+      "saved_time_s": 29.2
+    },
+    {
+      "feature_id": "S05",
+      "saved_frame": 581,
+      "saved_bank_index": 580,
+      "saved_time_s": 38.666666666666664
+    },
+    {
+      "feature_id": "S07",
+      "saved_frame": 801,
+      "saved_bank_index": 800,
+      "saved_time_s": 53.333333333333336
+    },
+    {
+      "feature_id": "S10",
+      "saved_frame": 1101,
+      "saved_bank_index": 1100,
+      "saved_time_s": 73.33333333333333
+    },
+    {
+      "feature_id": "S12",
+      "saved_frame": 1291,
+      "saved_bank_index": 1290,
+      "saved_time_s": 86.0
+    },
+    {
+      "feature_id": "S13",
+      "saved_frame": 1411,
+      "saved_bank_index": 1410,
+      "saved_time_s": 94.0
+    },
+    {
+      "feature_id": "S14",
+      "saved_frame": 1516,
+      "saved_bank_index": 1515,
+      "saved_time_s": 101.0
+    },
+    {
+      "feature_id": "S15",
+      "saved_frame": 1561,
+      "saved_bank_index": 1560,
+      "saved_time_s": 104.0
+    },
+    {
+      "feature_id": "S16",
+      "saved_frame": 1661,
+      "saved_bank_index": 1660,
+      "saved_time_s": 110.66666666666667
+    },
+    {
+      "feature_id": "S16",
+      "saved_frame": 1703,
+      "saved_bank_index": 1702,
+      "saved_time_s": 113.46666666666667
+    },
+    {
+      "feature_id": "OUTRO",
+      "saved_frame": 1771,
+      "saved_bank_index": 1770,
+      "saved_time_s": 118.0
+    }
+  ],
+  "repeat_each_source_sample": 1,
+  "scope_caption": "HVJB 全体工程 v05b｜左：模式動作 / 右：完成状態の部品照合図 / 実機仕様・実タクトは未確定",
+  "phase_prefix": "",
+  "phases": [
+    {
+      "start_s": 0,
+      "stop_s": 3,
+      "label": "1段往復パレット / 20枠共用 / 主担当3腕と補助2腕"
+    },
+    {
+      "start_s": 3,
+      "stop_s": 10,
+      "label": "筐体を支持・位置決めしてからハンド開放"
+    },
+    {
+      "start_s": 10,
+      "stop_s": 14,
+      "label": "入荷済み範囲、空容器回収の仕事を残す"
+    },
+    {
+      "start_s": 14,
+      "stop_s": 24,
+      "label": "接触器・リレー・抵抗等。自由端の案内を継続"
+    },
+    {
+      "start_s": 24,
+      "stop_s": 32,
+      "label": "板側締結を完了。反対端の接続は別に扱う"
+    },
+    {
+      "start_s": 32,
+      "stop_s": 44,
+      "label": "案内役の占有と次の支持先を示す"
+    },
+    {
+      "start_s": 44,
+      "stop_s": 50,
+      "label": "採用済み仮手順。実物の固定点は未確認"
+    },
+    {
+      "start_s": 50,
+      "stop_s": 55,
+      "label": "支持F-Cと自由端案内を維持して持ち替える"
+    },
+    {
+      "start_s": 55,
+      "stop_s": 63,
+      "label": "本体の支持引継ぎ後も自由端案内を続ける"
+    },
+    {
+      "start_s": 63,
+      "stop_s": 67,
+      "label": "隠れたねじを追加せず、未特定箇所を表示"
+    },
+    {
+      "start_s": 67,
+      "stop_s": 75,
+      "label": "通した後の外側支持を引き継ぐまで保持"
+    },
+    {
+      "start_s": 75,
+      "stop_s": 85,
+      "label": "外側取得と内側保持を同じ手に重ねない"
+    },
+    {
+      "start_s": 85,
+      "stop_s": 93,
+      "label": "導体と線を別に保持。主ヒューズは工程未確定"
+    },
+    {
+      "start_s": 93,
+      "stop_s": 97,
+      "label": "未追跡の端末を、接続済みとして描かない"
+    },
+    {
+      "start_s": 97,
+      "stop_s": 103,
+      "label": "内部の残接続を省かない。検査との順序は未定"
+    },
+    {
+      "start_s": 103,
+      "stop_s": 108,
+      "label": "同じ高さ・経路を逆方向へ戻す"
+    },
+    {
+      "start_s": 108,
+      "stop_s": 116,
+      "label": "XYZの保持確認後、パレット保持を解放"
+    },
+    {
+      "start_s": 116,
+      "stop_s": 119,
+      "label": "1段往復パレット / 20枠共用 / 主担当3腕と補助2腕"
+    }
+  ],
+  "scenes": [
+    {
+      "id": "INTRO",
+      "start_s": 0,
+      "stop_s": 3,
+      "source_clock": [
+        0,
+        0
+      ],
+      "screen_duration_s": 3
+    },
+    {
+      "id": "S01",
+      "tasks": [
+        "D00"
+      ],
+      "place_ja": "供給",
+      "title_ja": "20枠から空筐体をパレットへ",
+      "actors_ja": "XYZ / H06筐体",
+      "hold_or_limit_ja": "筐体を支持・位置決めしてからハンド開放",
+      "previous_video_navigation_ja": "4-11",
+      "new_duration_s": null,
+      "trajectory": null,
+      "sequence_kind": "explanatory_storyboard_not_factory_schedule",
+      "start_s": 3,
+      "stop_s": 10,
+      "source_clock": [
+        4,
+        11
+      ],
+      "screen_duration_s": 7
+    },
+    {
+      "id": "S02",
+      "tasks": [
+        "D01",
+        "D81"
+      ],
+      "place_ja": "準備",
+      "title_ja": "線材・端末準備、部品・ボルト補給",
+      "actors_ja": "準備・補給設備",
+      "hold_or_limit_ja": "入荷済み範囲、空容器回収の仕事を残す",
+      "previous_video_navigation_ja": "該当単独場面なし",
+      "new_duration_s": null,
+      "trajectory": null,
+      "sequence_kind": "explanatory_storyboard_not_factory_schedule",
+      "start_s": 10,
+      "stop_s": 14,
+      "source_clock": [
+        11,
+        11
+      ],
+      "screen_duration_s": 4
+    },
+    {
+      "id": "S03",
+      "tasks": [
+        "D10",
+        "D11"
+      ],
+      "place_ja": "外・A",
+      "title_ja": "下板部品の保持中固定・局所配線",
+      "actors_ja": "A主腕 + 共用補助※ / T-A",
+      "hold_or_limit_ja": "接触器・リレー・抵抗等。自由端の案内を継続",
+      "previous_video_navigation_ja": "11-22",
+      "new_duration_s": null,
+      "trajectory": null,
+      "sequence_kind": "explanatory_storyboard_not_factory_schedule",
+      "start_s": 14,
+      "stop_s": 24,
+      "source_clock": [
+        11,
+        19.5
+      ],
+      "screen_duration_s": 10
+    },
+    {
+      "id": "S04",
+      "tasks": [
+        "D20",
+        "D21"
+      ],
+      "place_ja": "外・B",
+      "title_ja": "補機ヒューズ板側の組付け・配線締結",
+      "actors_ja": "B主腕 + 共用補助※ / T-B",
+      "hold_or_limit_ja": "板側締結を完了。反対端の接続は別に扱う",
+      "previous_video_navigation_ja": "11-22",
+      "new_duration_s": null,
+      "trajectory": null,
+      "sequence_kind": "explanatory_storyboard_not_factory_schedule",
+      "start_s": 24,
+      "stop_s": 32,
+      "source_clock": [
+        19.5,
+        22
+      ],
+      "screen_duration_s": 8
+    },
+    {
+      "id": "S05",
+      "tasks": [
+        "D12",
+        "D22"
+      ],
+      "place_ja": "外・C入口",
+      "title_ja": "A/Bユニットと自由端を別々に受け渡す",
+      "actors_ja": "A/B主腕 → C主腕 / 支持",
+      "hold_or_limit_ja": "案内役の占有と次の支持先を示す",
+      "previous_video_navigation_ja": "22-35",
+      "new_duration_s": null,
+      "trajectory": null,
+      "sequence_kind": "explanatory_storyboard_not_factory_schedule",
+      "start_s": 32,
+      "stop_s": 44,
+      "source_clock": [
+        22,
+        35
+      ],
+      "screen_duration_s": 12
+    },
+    {
+      "id": "S06",
+      "tasks": [
+        "D30"
+      ],
+      "place_ja": "外・C",
+      "title_ja": "板合わせ・保持中の板間ねじ固定",
+      "actors_ja": "C主腕 H07 / F-C / T-C",
+      "hold_or_limit_ja": "採用済み仮手順。実物の固定点は未確認",
+      "previous_video_navigation_ja": "35-40",
+      "new_duration_s": null,
+      "trajectory": null,
+      "sequence_kind": "explanatory_storyboard_not_factory_schedule",
+      "start_s": 44,
+      "stop_s": 50,
+      "source_clock": [
+        35,
+        38
+      ],
+      "screen_duration_s": 6
+    },
+    {
+      "id": "S07",
+      "tasks": [
+        "D31"
+      ],
+      "place_ja": "外・C",
+      "title_ja": "支持を残して搬送把持へ切り替える",
+      "actors_ja": "C主腕 H07 → H06ユニット",
+      "hold_or_limit_ja": "支持F-Cと自由端案内を維持して持ち替える",
+      "previous_video_navigation_ja": "35-40",
+      "new_duration_s": null,
+      "trajectory": null,
+      "sequence_kind": "explanatory_storyboard_not_factory_schedule",
+      "start_s": 50,
+      "stop_s": 55,
+      "source_clock": [
+        38,
+        40
+      ],
+      "screen_duration_s": 5
+    },
+    {
+      "id": "S08",
+      "tasks": [
+        "D40"
+      ],
+      "place_ja": "外 → 内",
+      "title_ja": "まとめたユニットを筐体に搭載する",
+      "actors_ja": "C主腕 / C専用補助",
+      "hold_or_limit_ja": "本体の支持引継ぎ後も自由端案内を続ける",
+      "previous_video_navigation_ja": "40-48",
+      "new_duration_s": null,
+      "trajectory": null,
+      "sequence_kind": "explanatory_storyboard_not_factory_schedule",
+      "start_s": 55,
+      "stop_s": 63,
+      "source_clock": [
+        40,
+        48
+      ],
+      "screen_duration_s": 8
+    },
+    {
+      "id": "S09",
+      "tasks": [
+        "D42"
+      ],
+      "place_ja": "内・C",
+      "title_ja": "搭載後の内部工具作業を別場面で示す",
+      "actors_ja": "対象・手先未特定 / T-C",
+      "hold_or_limit_ja": "隠れたねじを追加せず、未特定箇所を表示",
+      "previous_video_navigation_ja": "40-48に統合された表現",
+      "new_duration_s": null,
+      "trajectory": null,
+      "sequence_kind": "explanatory_storyboard_not_factory_schedule",
+      "start_s": 63,
+      "stop_s": 67,
+      "source_clock": [
+        48,
+        48
+      ],
+      "screen_duration_s": 4
+    },
+    {
+      "id": "S10",
+      "tasks": [
+        "D45"
+      ],
+      "place_ja": "側壁・C",
+      "title_ja": "内側ハウジングと線を開口へ通す",
+      "actors_ja": "H05内側 / C専用補助※",
+      "hold_or_limit_ja": "通した後の外側支持を引き継ぐまで保持",
+      "previous_video_navigation_ja": "48-55",
+      "new_duration_s": null,
+      "trajectory": null,
+      "sequence_kind": "explanatory_storyboard_not_factory_schedule",
+      "start_s": 67,
+      "stop_s": 75,
+      "source_clock": [
+        48,
+        48
+      ],
+      "screen_duration_s": 8
+    },
+    {
+      "id": "S11",
+      "tasks": [
+        "D50"
+      ],
+      "place_ja": "側壁・C",
+      "title_ja": "外側ヘッダーの設置・ねじ固定",
+      "actors_ja": "H05外側 / 内側保持役※ / T-C",
+      "hold_or_limit_ja": "外側取得と内側保持を同じ手に重ねない",
+      "previous_video_navigation_ja": "48-55",
+      "new_duration_s": null,
+      "trajectory": null,
+      "sequence_kind": "explanatory_storyboard_not_factory_schedule",
+      "start_s": 75,
+      "stop_s": 85,
+      "source_clock": [
+        49,
+        55
+      ],
+      "screen_duration_s": 10
+    },
+    {
+      "id": "S12",
+      "tasks": [
+        "D60"
+      ],
+      "place_ja": "内・C",
+      "title_ja": "バスバー・丸端子等を保持して締結",
+      "actors_ja": "H03 / 補助H04※ / T-C",
+      "hold_or_limit_ja": "導体と線を別に保持。主ヒューズは工程未確定",
+      "previous_video_navigation_ja": "55-62",
+      "new_duration_s": null,
+      "trajectory": null,
+      "sequence_kind": "explanatory_storyboard_not_factory_schedule",
+      "start_s": 85,
+      "stop_s": 93,
+      "source_clock": [
+        55,
+        62
+      ],
+      "screen_duration_s": 8
+    },
+    {
+      "id": "S13",
+      "tasks": [
+        "D61"
+      ],
+      "place_ja": "C・位置未定",
+      "title_ja": "残るLV/HVIL・不可視端末を別管理",
+      "actors_ja": "個別の対象・手先を照合",
+      "hold_or_limit_ja": "未追跡の端末を、接続済みとして描かない",
+      "previous_video_navigation_ja": "該当単独場面なし",
+      "new_duration_s": null,
+      "trajectory": null,
+      "sequence_kind": "explanatory_storyboard_not_factory_schedule",
+      "start_s": 93,
+      "stop_s": 97,
+      "source_clock": [
+        62,
+        62
+      ],
+      "screen_duration_s": 4
+    },
+    {
+      "id": "S14",
+      "tasks": [
+        "D70",
+        "D71"
+      ],
+      "place_ja": "後工程",
+      "title_ja": "シール・蓋・必要検査を示す",
+      "actors_ja": "H07カバー候補 / 検査設備",
+      "hold_or_limit_ja": "内部の残接続を省かない。検査との順序は未定",
+      "previous_video_navigation_ja": "62-69",
+      "new_duration_s": null,
+      "trajectory": null,
+      "sequence_kind": "explanatory_storyboard_not_factory_schedule",
+      "start_s": 97,
+      "stop_s": 103,
+      "source_clock": [
+        62,
+        69
+      ],
+      "screen_duration_s": 6
+    },
+    {
+      "id": "S15",
+      "tasks": [
+        "D81"
+      ],
+      "place_ja": "同段復路",
+      "title_ja": "完成品を載せたパレットを供給側へ戻す",
+      "actors_ja": "1段コンベア",
+      "hold_or_limit_ja": "同じ高さ・経路を逆方向へ戻す",
+      "previous_video_navigation_ja": "69-74",
+      "new_duration_s": null,
+      "trajectory": null,
+      "sequence_kind": "explanatory_storyboard_not_factory_schedule",
+      "start_s": 103,
+      "stop_s": 108,
+      "source_clock": [
+        69,
+        74
+      ],
+      "screen_duration_s": 5
+    },
+    {
+      "id": "S16",
+      "tasks": [
+        "D80"
+      ],
+      "place_ja": "元の収納枠",
+      "title_ja": "同じXYZで元の空き枠へ完成品を戻す",
+      "actors_ja": "XYZ / H06筐体",
+      "hold_or_limit_ja": "XYZの保持確認後、パレット保持を解放",
+      "previous_video_navigation_ja": "74-82",
+      "new_duration_s": null,
+      "trajectory": null,
+      "sequence_kind": "explanatory_storyboard_not_factory_schedule",
+      "start_s": 108,
+      "stop_s": 116,
+      "source_clock": [
+        74,
+        82
+      ],
+      "screen_duration_s": 8
+    },
+    {
+      "id": "OUTRO",
+      "start_s": 116,
+      "stop_s": 119,
+      "source_clock": [
+        84,
+        84
+      ],
+      "screen_duration_s": 3
+    }
+  ],
+  "tasks_preserved": [
+    "D00",
+    "D01",
+    "D10",
+    "D11",
+    "D12",
+    "D20",
+    "D21",
+    "D22",
+    "D30",
+    "D31",
+    "D40",
+    "D42",
+    "D45",
+    "D50",
+    "D60",
+    "D61",
+    "D70",
+    "D71",
+    "D80",
+    "D81"
+  ],
+  "static_task_scenes": [
+    "S02",
+    "S09",
+    "S13",
+    "S14"
+  ],
+  "output_name": "concept_v05b_preview02",
+  "preview_only": true,
+  "saved_geometry_or_motion_modified": false,
+  "product_reference_configuration": "completed_saved_photo_model_not_intermediate_workpiece",
+  "free_end_count_and_actual_retention": null,
+  "robot_model_selected": false,
+  "actual_takt_s": null,
+  "physical_acceptance_verdict": null,
+  "product_geometry_and_motion_modified": false,
+  "correction_receipt_sha256": "8c83ab80a456085005715d7c8db2a3b5d9a88b4725deb9e78e12a686af1b35fe",
+  "framing_receipt_sha256": "135ec3153771d0fba5f391dda3f13241921faad9a73f5f8b6a6f72d0e4cf4489",
+  "display_environment_modified": true,
+  "display_omissions_count": 19,
+  "conditional_lid_omission": "Before video 103 s; lid placement and fastening are unspecified",
+  "original_v05_plan_sha256": "a8a5c524b812629799e6d64b6b58413b2b4b711045ee799da660135386913061"
+}

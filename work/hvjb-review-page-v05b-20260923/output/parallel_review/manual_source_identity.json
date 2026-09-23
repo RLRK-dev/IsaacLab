@@ -1,0 +1,22 @@
+{
+  "observed_at": "2026-09-23T13:42:33.519850+09:00",
+  "sources": [
+    {
+      "source": "website",
+      "requested_url": "https://www.ampereev.com/wp-content/uploads/2023/10/Atom-Drive-System-User-Guide-V1.pdf",
+      "error": "HTTP Error 404: Not Found",
+      "sha256": null
+    },
+    {
+      "source": "support",
+      "requested_url": "https://help.ampereev.com/hc/en-us/article_attachments/31296839281047",
+      "final_url": "https://help.ampereev.com/hc/en-us/article_attachments/31296839281047",
+      "path": "source_pdfs/atom_drive_user_guide_v1_support.pdf",
+      "bytes": 1045463,
+      "sha256": "4eeec2fa6a32e0c40549c8ff73a13e95979e9a8f7ca5527af786eb721a6c1178"
+    }
+  ],
+  "two_public_guides_byte_identical": null,
+  "authentication_used": false,
+  "connector_part_number_selected": null
+}

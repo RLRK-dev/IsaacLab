@@ -1,0 +1,91 @@
+{
+  "observed_at": "2026-09-23T18:39:45.242215+09:00",
+  "source_observations_sha256": "219ebd9fb43f2f69ead76d09a412958b4d606af4665021dab6d882880f59cf03",
+  "preview_manifest_sha256": "cf5cc01d04a72bedb092e7d7f6296d195759d791b8da101e73ec54a03aa79186",
+  "states": [
+    {
+      "short_ja": "開始",
+      "title_ja": "01区画から筐体を取り出す",
+      "source_sample": 0,
+      "video_s": 0.0,
+      "diagram": "figures/step-1.png",
+      "frame": "figures/frame-1.png",
+      "case_location_symbol": "stock",
+      "completed_symbol": false
+    },
+    {
+      "short_ja": "取出し",
+      "title_ja": "同じXYZでパレットへ渡す",
+      "source_sample": 72,
+      "video_s": 4.8,
+      "diagram": "figures/step-2.png",
+      "frame": "figures/frame-2.png",
+      "case_location_symbol": "hand",
+      "completed_symbol": false
+    },
+    {
+      "short_ja": "組立位置",
+      "title_ja": "筐体を載せたまま工程へ",
+      "source_sample": 1410,
+      "video_s": 94.0,
+      "diagram": "figures/step-3.png",
+      "frame": "figures/frame-3.png",
+      "case_location_symbol": "pallet",
+      "completed_symbol": false
+    },
+    {
+      "short_ja": "復路",
+      "title_ja": "同じ段で供給側へ戻る",
+      "source_sample": 1560,
+      "video_s": 104.0,
+      "diagram": "figures/step-4.png",
+      "frame": "figures/frame-4.png",
+      "case_location_symbol": "pallet",
+      "completed_symbol": true
+    },
+    {
+      "short_ja": "収納搬送",
+      "title_ja": "同じXYZが完成品を受け取る",
+      "source_sample": 1660,
+      "video_s": 110.66666666666667,
+      "diagram": "figures/step-5.png",
+      "frame": "figures/frame-5.png",
+      "case_location_symbol": "hand",
+      "completed_symbol": true
+    },
+    {
+      "short_ja": "収納完了",
+      "title_ja": "空けていた01区画へ戻す",
+      "source_sample": 1770,
+      "video_s": 118.0,
+      "diagram": "figures/step-6.png",
+      "frame": "figures/frame-6.png",
+      "case_location_symbol": "stock",
+      "completed_symbol": true
+    }
+  ],
+  "source_unchanged": true,
+  "actual_browser_review": false,
+  "physical_acceptance_verdict": null,
+  "files": {
+    "all_states.html": "e526a406f774083528b7aa624ef7a9df361b76c6a796a6ed2914010d0f5f2705",
+    "data.json": "ee17ac303bdafe24aaff2ec43860de6981f7ed004561fa727821de0d11ca13c7",
+    "figures/frame-1.png": "68f74dfbb99c8aeabb37082ccc598f761c7fea529d001f47a8801a30f4fb0c7e",
+    "figures/frame-2.png": "c087ef9aff41138931453a6780be79ccb24790d67afbdd6c5aa0f702ac1f0d55",
+    "figures/frame-3.png": "69c5ccaa1bbb4ae712561e4dd64057dbdc80590024b32557343e7c8eacbb33d6",
+    "figures/frame-4.png": "c9df16e92adbef940e919862e466d122696a61d1c80a90cee339e392dd48b75c",
+    "figures/frame-5.png": "1afcfa7f36f57ac469f82a71fdac87ad4d6c99394a170a3152b80d13d81c5eab",
+    "figures/frame-6.png": "ed46f1eab101310b961ea8aedd8c56fcdaf145f36ce2177d302fe64257c03e6d",
+    "figures/step-1.png": "b5807a3d87dc33afe0e8046de3916b0ac936cebcb1e986165d1e680ae016d4a3",
+    "figures/step-2.png": "f7010a1b516b40da0c7c53d22f349fd4c88a16906ce4811eba3ee4e7ce237354",
+    "figures/step-3.png": "22b0d954b1015cca8fb05663690f283f557a7f0f9fcf065039181cf0276b3a66",
+    "figures/step-4.png": "17d32f824c65df3f4620c4a90d4bc633eb4443a338614e17d0ea6e8fce6d1f10",
+    "figures/step-5.png": "3469e25ec878cff6e96e0ba28bacc8b92883f7d8c7f106d08b17a79c5feedbfd",
+    "figures/step-6.png": "9ccbe7a14ded49e28772130cebb1bee12525500fa78e2a644a728cd18b21d9e8",
+    "index.html": "1c540bf74796f408ccf68b35accb55a0128fd7c5ca26031c9d3eec69c3ec9ebc",
+    "logistics.css": "d75894a7a1981da4b97c9c95f1e9af0c87d673fb4d63aaa6afaea5d4ccff5600",
+    "logistics.js": "c58e4b1d7427908bec8991ea927bedbbc0d816a7a1c1a96db379eeda1b93653b",
+    "observations.json": "219ebd9fb43f2f69ead76d09a412958b4d606af4665021dab6d882880f59cf03"
+  },
+  "script_sha256": "3fbb9270fc5c87b9cbe76d38bdf1355fa6dad4db4452ae23a2b1431fda1d8791"
+}

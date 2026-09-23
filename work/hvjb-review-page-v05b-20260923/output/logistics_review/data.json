@@ -1,0 +1,62 @@
+[
+  {
+    "short_ja": "開始",
+    "title_ja": "01区画から筐体を取り出す",
+    "source_sample": 0,
+    "video_s": 0.0,
+    "diagram": "figures/step-1.png",
+    "frame": "figures/frame-1.png",
+    "case_location_symbol": "stock",
+    "completed_symbol": false
+  },
+  {
+    "short_ja": "取出し",
+    "title_ja": "同じXYZでパレットへ渡す",
+    "source_sample": 72,
+    "video_s": 4.8,
+    "diagram": "figures/step-2.png",
+    "frame": "figures/frame-2.png",
+    "case_location_symbol": "hand",
+    "completed_symbol": false
+  },
+  {
+    "short_ja": "組立位置",
+    "title_ja": "筐体を載せたまま工程へ",
+    "source_sample": 1410,
+    "video_s": 94.0,
+    "diagram": "figures/step-3.png",
+    "frame": "figures/frame-3.png",
+    "case_location_symbol": "pallet",
+    "completed_symbol": false
+  },
+  {
+    "short_ja": "復路",
+    "title_ja": "同じ段で供給側へ戻る",
+    "source_sample": 1560,
+    "video_s": 104.0,
+    "diagram": "figures/step-4.png",
+    "frame": "figures/frame-4.png",
+    "case_location_symbol": "pallet",
+    "completed_symbol": true
+  },
+  {
+    "short_ja": "収納搬送",
+    "title_ja": "同じXYZが完成品を受け取る",
+    "source_sample": 1660,
+    "video_s": 110.66666666666667,
+    "diagram": "figures/step-5.png",
+    "frame": "figures/frame-5.png",
+    "case_location_symbol": "hand",
+    "completed_symbol": true
+  },
+  {
+    "short_ja": "収納完了",
+    "title_ja": "空けていた01区画へ戻す",
+    "source_sample": 1770,
+    "video_s": 118.0,
+    "diagram": "figures/step-6.png",
+    "frame": "figures/frame-6.png",
+    "case_location_symbol": "stock",
+    "completed_symbol": true
+  }
+]

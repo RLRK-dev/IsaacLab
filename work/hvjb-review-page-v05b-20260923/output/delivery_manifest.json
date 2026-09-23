@@ -1,0 +1,138 @@
+{
+  "observed_at": "2026-09-23T10:00:03.415183+09:00",
+  "destination": "/home/rlrk/Downloads/HVJB_ライン全体と組立場所_v04_20260923",
+  "files": [
+    {
+      "path": "README.md",
+      "bytes": 4692,
+      "sha256": "20d2034e4086b5a4c465881896805ed6e4c48266faf96a5a9b889fc21ca67f2c"
+    },
+    {
+      "path": "connector_followup.md",
+      "bytes": 3125,
+      "sha256": "90077addb1251205b73c04411eb8519d706197f8bdf3652f6bf01d359b2abfcb"
+    },
+    {
+      "path": "qa_receipt.json",
+      "bytes": 2772,
+      "sha256": "5005a0c5d110579cf7b21b0744b3b0710106d39beae631a273c0d86338672d62"
+    },
+    {
+      "path": "output/document_audit.json",
+      "bytes": 46567,
+      "sha256": "ea5523ca58adde5088c7685cc283ee5dcdd52371fa653b69a34b395b1b88abc0"
+    },
+    {
+      "path": "audit/baseline.json",
+      "bytes": 37783,
+      "sha256": "051570be0a43f9a7bb137d70a637acf8cb38d2ac549a6883836174d7d7b06c3f"
+    },
+    {
+      "path": "audit/product_final_views.json",
+      "bytes": 5527,
+      "sha256": "8259c68f05a2d43152d69751e783168d7a3cb2328936b44809da211199cdaac4"
+    },
+    {
+      "path": "data/20仕事_場所_担当_引継ぎ.csv",
+      "bytes": 4463,
+      "sha256": "f82094d1cbf42ce95ed714def8b39cbfa7e6837ec28ed65d6e69ae4a451d9103"
+    },
+    {
+      "path": "data/92項目_既存工程候補との対応.csv",
+      "bytes": 21412,
+      "sha256": "837cff9c5d853fc6bec46ed6d5c460659fdb7781668c6b5dd7f910594fd6686f"
+    },
+    {
+      "path": "data/line_review_data.json",
+      "bytes": 153359,
+      "sha256": "55948e4d2603b4ebe1ccd30160c89baa990623ad96eedc515c17583bac4bb440"
+    },
+    {
+      "path": "output/pdf/HVJB_ライン全体と組立場所_v04_20260923.pdf",
+      "bytes": 1218383,
+      "sha256": "7ba22646f108ec7a1d9dc26d8dd339dfed5835934809b48aeac6332eeae89e19"
+    },
+    {
+      "path": "output/pages/page-1.png",
+      "bytes": 333261,
+      "sha256": "2758a5673701249bb813f615c8e61e63819439fd321f708915e5d964bc142489"
+    },
+    {
+      "path": "output/pages/page-2.png",
+      "bytes": 341737,
+      "sha256": "edfaee964f45def2781f94e4e05f008a1d7558f1540a72a92ea7707e21efbf9c"
+    },
+    {
+      "path": "output/pages/page-3.png",
+      "bytes": 255264,
+      "sha256": "61501659c82f71ba12e36a78931d513f8e42affc8426a73a6fe2ad8e98049054"
+    },
+    {
+      "path": "output/pages/page-4.png",
+      "bytes": 382155,
+      "sha256": "b5c09dba8959006c3c38c7219676d1dd8f88e70b0a86c5620c3247a7da4c9abf"
+    },
+    {
+      "path": "output/pages/page-5.png",
+      "bytes": 282577,
+      "sha256": "4326afae9b75ec1414e60ccc5e02c41fd686e771bfd1e940eae81b0898dcc5e5"
+    },
+    {
+      "path": "output/pages/page-6.png",
+      "bytes": 297634,
+      "sha256": "f162616064341582f911ba0ae05b6f361498a7ff32c7ef8bc26b2a474af1e6dc"
+    },
+    {
+      "path": "figures/product_final/after_insertion_bus.png",
+      "bytes": 226561,
+      "sha256": "1ebdeac6c8e1257618f92393bd1232e972a09052fb478d8086c2b28bf68d98ff"
+    },
+    {
+      "path": "figures/product_final/case.png",
+      "bytes": 231423,
+      "sha256": "804a3a906d1c6c389190a73dee6f7f6f7ee3d817323f1b725df38d5eec869948"
+    },
+    {
+      "path": "figures/product_final/external_headers.png",
+      "bytes": 224902,
+      "sha256": "3d141b70f9e1b60e8c4d0dde203f300353408896ea8736f304eaaab18d4214e0"
+    },
+    {
+      "path": "figures/product_final/internal_housings.png",
+      "bytes": 222958,
+      "sha256": "28750afc206b4788f4e6f998977340f6cbc3e07ab468a8fad2d1e42c55fcd1a0"
+    },
+    {
+      "path": "figures/product_final/main_and_lv_unassigned.png",
+      "bytes": 224564,
+      "sha256": "9f4fa8b01c35b3fd5693783f621695aaddbcf7df4fa04948d3c228ed1fd89135"
+    },
+    {
+      "path": "figures/product_final/main_fuse_unassigned.png",
+      "bytes": 222219,
+      "sha256": "a356f01471d61e4cfb7b7028ec5c1c47809b5890ccabc123fdbe7e34eaed890c"
+    },
+    {
+      "path": "figures/product_final/outside_A.png",
+      "bytes": 226245,
+      "sha256": "3dcfd30f17a6f1a3435f057f6fc71ff751d6f7e0367b33dba91f64d879e443d1"
+    },
+    {
+      "path": "figures/product_final/outside_B.png",
+      "bytes": 226843,
+      "sha256": "f6ec93e36e019addee1090552c21b350f4ca92716d010eb94d8a4ec16fb837d9"
+    },
+    {
+      "path": "figures/product_final/product.png",
+      "bytes": 240956,
+      "sha256": "d30a05313b415d3f5862f0016aa13b523eb7bf09e6d65bd2ad9fb0a0dd99ee94"
+    },
+    {
+      "path": "figures/product_final/wires_display_only.png",
+      "bytes": 224169,
+      "sha256": "459339d8dcc9cc79cf54e53a82a9b226d1176c0782082646221966d45e9898fd"
+    }
+  ],
+  "overwrote_existing_delivery": false,
+  "formal_physical_validity_verdict": null
+}

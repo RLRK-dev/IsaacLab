@@ -1,0 +1,104 @@
+{
+  "observed_at": "2026-09-23T14:19:17.235024+09:00",
+  "manifest_sha256": "a1a97d200d09980953f02f3b91b1e6f088eb4de5e3ea0f8efc13dbe4d0cdf33e",
+  "cases_preserved": 8,
+  "jobs_preserved": 20,
+  "same_arm_request_overlap_cases": [
+    "AB",
+    "ABC"
+  ],
+  "images": [
+    {
+      "path": "figures/A.png",
+      "size": [
+        1400,
+        850
+      ],
+      "sha256": "5c375d1555a1833631e25a9c6793130be9401cfa197f7c6772ccda6c02db8d78"
+    },
+    {
+      "path": "figures/AB.png",
+      "size": [
+        1400,
+        850
+      ],
+      "sha256": "34b058c27188242a6c6313b37ab0da0607932e220aeca69062abe6c28a0f69fb"
+    },
+    {
+      "path": "figures/ABC.png",
+      "size": [
+        1400,
+        850
+      ],
+      "sha256": "083421e920214c8309a0f47a35e53f2bc330ec97b1accc7e1463f108e0171952"
+    },
+    {
+      "path": "figures/AC.png",
+      "size": [
+        1400,
+        850
+      ],
+      "sha256": "9d313a7e660ff3fccb0d449723503b90e61dc7c95ba47d32e3307fec6a2e13f1"
+    },
+    {
+      "path": "figures/B.png",
+      "size": [
+        1400,
+        850
+      ],
+      "sha256": "fc46eab02749d589d4a2fe5e0554ad8fe10d458acfd8af05f730e28c08147c07"
+    },
+    {
+      "path": "figures/BC.png",
+      "size": [
+        1400,
+        850
+      ],
+      "sha256": "31362453d7b83e651ebc84762a19ae6cbba3019cb8834190a4a3db11208f5be9"
+    },
+    {
+      "path": "figures/C.png",
+      "size": [
+        1400,
+        850
+      ],
+      "sha256": "3b04a56e0012f5379a6cf557aa9a75481b85e8aea62ba110d3bcfec3ddeca37c"
+    },
+    {
+      "path": "figures/NONE.png",
+      "size": [
+        1400,
+        850
+      ],
+      "sha256": "93831e548817d32f86437cd6d782f5a44b1bcc2fa5811d498ea5c3d02c6abce4"
+    },
+    {
+      "path": "figures/handoff.png",
+      "size": [
+        1400,
+        480
+      ],
+      "sha256": "c9735943e480ede27065206d13a17fed4868db48624173051d0585185d4ee286"
+    },
+    {
+      "path": "figures/reservation.png",
+      "size": [
+        1400,
+        550
+      ],
+      "sha256": "b55f02f1044c60d568a61bbc815547c32a07789e17768dc0619a820c7c67b1c7"
+    }
+  ],
+  "node_callbacks": {
+    "stdout": "PLAIN_NODE_CALLBACK_CHECK_COMPLETE cases=8 initial=AC browser=false\n",
+    "stderr": "",
+    "exit_code": 0
+  },
+  "visual_observation": "10 final PNGs opened as a contact sheet; handoff/reservation opened at full size.",
+  "browser_ui_observed": false,
+  "physical_validity_verdict": null,
+  "code_sha256": {
+    "verify_page.py": "1d94532da6616517e944770d05bf4da4cc4dc1c11bdd3c4f50d0b0e421670753",
+    "verify_interactions.js": "da7165ec78c53402af565a56835e1f50b75ba50e5bd92501953ae108ebcf8486"
+  }
+}

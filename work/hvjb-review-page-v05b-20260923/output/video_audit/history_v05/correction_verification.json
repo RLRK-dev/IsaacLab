@@ -1,0 +1,152 @@
+{
+  "old_bank_sha256": "52eede374a2d782aabf1cc2604801cc64e6f884b39060728c437631a8dca36dc",
+  "new_bank_sha256": "bcf0655b84c14048658f78c4db489ce34ef70117ab7a47e5765242b5ff9c2c37",
+  "unchanged_npz_fields": [
+    "time_s",
+    "camera",
+    "span",
+    "object_names"
+  ],
+  "held_intervals_unchanged": {
+    "A": true,
+    "B": true,
+    "C主": true
+  },
+  "product_tools_wires_pallet_columns_50_onward_unchanged": true,
+  "pickup_hand_target_to_part_maximum_display_offset": {
+    "before": 0.08940038331360989,
+    "after": 1.1102230246251565e-16
+  },
+  "regression_original_has_persistent_branch_jump": true,
+  "regression_corrected_difference_tends_to_zero": true,
+  "branch_observations": [
+    {
+      "role": "A",
+      "source_clock": 21.5,
+      "scene": "S04",
+      "before": [
+        {
+          "source_clock_epsilon": 0.001,
+          "matrix_difference_norm": 0.7893344356148925
+        },
+        {
+          "source_clock_epsilon": 1e-06,
+          "matrix_difference_norm": 0.7893351632854388
+        }
+      ],
+      "after": [
+        {
+          "source_clock_epsilon": 0.001,
+          "matrix_difference_norm": 4.582215743517509e-06
+        },
+        {
+          "source_clock_epsilon": 1e-06,
+          "matrix_difference_norm": 4.5861891953772715e-12
+        }
+      ]
+    },
+    {
+      "role": "A",
+      "source_clock": 27.7,
+      "scene": "S05",
+      "before": [
+        {
+          "source_clock_epsilon": 0.001,
+          "matrix_difference_norm": 0.8586262853809299
+        },
+        {
+          "source_clock_epsilon": 1e-06,
+          "matrix_difference_norm": 0.8586253548560024
+        }
+      ],
+      "after": [
+        {
+          "source_clock_epsilon": 0.001,
+          "matrix_difference_norm": 6.517457152622385e-06
+        },
+        {
+          "source_clock_epsilon": 1e-06,
+          "matrix_difference_norm": 6.532054772276979e-12
+        }
+      ]
+    },
+    {
+      "role": "B",
+      "source_clock": 11.7,
+      "scene": "S03",
+      "before": [
+        {
+          "source_clock_epsilon": 0.001,
+          "matrix_difference_norm": 3.761438090587716
+        },
+        {
+          "source_clock_epsilon": 1e-06,
+          "matrix_difference_norm": 3.7614380228844
+        }
+      ],
+      "after": [
+        {
+          "source_clock_epsilon": 0.001,
+          "matrix_difference_norm": 1.8784948978987035e-05
+        },
+        {
+          "source_clock_epsilon": 1e-06,
+          "matrix_difference_norm": 1.8802066258600783e-11
+        }
+      ]
+    },
+    {
+      "role": "B",
+      "source_clock": 34.5,
+      "scene": "S05",
+      "before": [
+        {
+          "source_clock_epsilon": 0.001,
+          "matrix_difference_norm": 3.750178321778026
+        },
+        {
+          "source_clock_epsilon": 1e-06,
+          "matrix_difference_norm": 3.750166757063282
+        }
+      ],
+      "after": [
+        {
+          "source_clock_epsilon": 0.001,
+          "matrix_difference_norm": 2.5456902513334188e-06
+        },
+        {
+          "source_clock_epsilon": 1e-06,
+          "matrix_difference_norm": 2.548483402475802e-12
+        }
+      ]
+    },
+    {
+      "role": "C主",
+      "source_clock": 56.3,
+      "scene": "S12",
+      "before": [
+        {
+          "source_clock_epsilon": 0.001,
+          "matrix_difference_norm": 3.752169278154341
+        },
+        {
+          "source_clock_epsilon": 1e-06,
+          "matrix_difference_norm": 3.7521691726254547
+        }
+      ],
+      "after": [
+        {
+          "source_clock_epsilon": 0.001,
+          "matrix_difference_norm": 4.730293694623865e-06
+        },
+        {
+          "source_clock_epsilon": 1e-06,
+          "matrix_difference_norm": 4.735211060070798e-12
+        }
+      ]
+    }
+  ],
+  "test_scope": "Numerical continuity of schematic display functions, not an accepted robot trajectory.",
+  "physical_validity_verdict": null,
+  "script_sha256": "8262c22bacf56da8d54f5b0ae19409b74f43e863a3e953ea7442f301a51c9b80"
+}

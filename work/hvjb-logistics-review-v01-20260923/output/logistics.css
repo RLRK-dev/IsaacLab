@@ -1,0 +1,18 @@
+:root { color-scheme: light; color: #183b4d; background: #f2f6f8; font: 17px/1.75 system-ui, sans-serif; }
+* { box-sizing: border-box; }
+body { margin: 0; }
+header, main { max-width: 1440px; margin: auto; padding: 24px; }
+h1 { font-size: clamp(26px, 4vw, 42px); }
+h2 { font-size: 26px; }
+a { color: #246797; }
+nav { display: flex; flex-wrap: wrap; gap: 10px; margin: 0 0 24px; }
+button { border: 1px solid #b7ccd6; border-radius: 8px; padding: 13px 18px; font: inherit; background: white; color: inherit; cursor: pointer; }
+button[aria-pressed="true"] { color: white; background: #168773; border-color: #168773; }
+button:focus-visible, a:focus-visible { outline: 3px solid #b97b24; outline-offset: 3px; }
+section { background: white; border: 1px solid #d3e0e6; border-radius: 12px; margin: 0 0 28px; padding: 24px; }
+img { display: block; width: 100%; height: auto; }
+details { margin-top: 20px; }
+summary { cursor: pointer; }
+[hidden] { display: none !important; }
+@media (max-width: 720px) { header, main, section { padding: 14px; } }
+@media print { nav { display: none; } [hidden] { display: block !important; } section { break-before: page; } }

@@ -1,0 +1,1079 @@
+{
+  "observed_at": "2026-09-23T17:21:56.985627+09:00",
+  "basis": "Saved schematic transforms plus the preserved display builder; not a physical simulation.",
+  "source_identity": {
+    "/tmp/hvjb-line-progress-20260923/work/hvjb-line-video-v05-20260923/data/concept_display_v05_framed.npz": "7702cadf9e412895a14c82d1a6b85a6aa659f2978c22e59ddf16e2714c793a60",
+    "/tmp/hvjb-line-progress-20260923/work/hvjb-line-video-v05-20260923/data/concept_v05.json": "a8a5c524b812629799e6d64b6b58413b2b4b711045ee799da660135386913061",
+    "/tmp/hvjb-line-progress-20260923/work/hvjb-line-video-v03-20260921/legacy_model.py": "83eba07a5eaa7717dc24a9e17f218127a6512d88441484d491ba9d8da1aa3e4d"
+  },
+  "sample_count": 1785,
+  "time_units": "video seconds; source_clock is a schematic interpolation clock, not real takt",
+  "position_units": "dimensionless display coordinates, not manufacturing meters",
+  "stock": {
+    "slots": [
+      {
+        "label": "stock_0_0",
+        "display_slot": "01",
+        "columns": [
+          58,
+          59,
+          60,
+          61,
+          62,
+          63,
+          64,
+          65
+        ],
+        "source_slot_anchor_display_units": [
+          -4.7,
+          -0.15,
+          0.855
+        ],
+        "stationary_saved_matrices": true,
+        "saved_origin": [
+          0.0,
+          0.0,
+          -30.0
+        ],
+        "source_hide_origin": true
+      },
+      {
+        "label": "stock_0_1",
+        "display_slot": "02",
+        "columns": [
+          66,
+          67,
+          68,
+          69,
+          70,
+          71,
+          72,
+          73
+        ],
+        "source_slot_anchor_display_units": [
+          -5.6000000000000005,
+          -0.15,
+          0.855
+        ],
+        "stationary_saved_matrices": true,
+        "saved_origin": [
+          -5.6000000000000005,
+          -0.15,
+          0.855
+        ],
+        "source_hide_origin": false
+      },
+      {
+        "label": "stock_0_2",
+        "display_slot": "03",
+        "columns": [
+          74,
+          75,
+          76,
+          77,
+          78,
+          79,
+          80,
+          81
+        ],
+        "source_slot_anchor_display_units": [
+          -6.5,
+          -0.15,
+          0.855
+        ],
+        "stationary_saved_matrices": true,
+        "saved_origin": [
+          -6.5,
+          -0.15,
+          0.855
+        ],
+        "source_hide_origin": false
+      },
+      {
+        "label": "stock_0_3",
+        "display_slot": "04",
+        "columns": [
+          82,
+          83,
+          84,
+          85,
+          86,
+          87,
+          88,
+          89
+        ],
+        "source_slot_anchor_display_units": [
+          -7.4,
+          -0.15,
+          0.855
+        ],
+        "stationary_saved_matrices": true,
+        "saved_origin": [
+          -7.4,
+          -0.15,
+          0.855
+        ],
+        "source_hide_origin": false
+      },
+      {
+        "label": "stock_1_0",
+        "display_slot": "05",
+        "columns": [
+          90,
+          91,
+          92,
+          93,
+          94,
+          95,
+          96,
+          97
+        ],
+        "source_slot_anchor_display_units": [
+          -4.7,
+          0.44999999999999996,
+          0.855
+        ],
+        "stationary_saved_matrices": true,
+        "saved_origin": [
+          -4.7,
+          0.44999999999999996,
+          0.855
+        ],
+        "source_hide_origin": false
+      },
+      {
+        "label": "stock_1_1",
+        "display_slot": "06",
+        "columns": [
+          98,
+          99,
+          100,
+          101,
+          102,
+          103,
+          104,
+          105
+        ],
+        "source_slot_anchor_display_units": [
+          -5.6000000000000005,
+          0.44999999999999996,
+          0.855
+        ],
+        "stationary_saved_matrices": true,
+        "saved_origin": [
+          -5.6000000000000005,
+          0.44999999999999996,
+          0.855
+        ],
+        "source_hide_origin": false
+      },
+      {
+        "label": "stock_1_2",
+        "display_slot": "07",
+        "columns": [
+          106,
+          107,
+          108,
+          109,
+          110,
+          111,
+          112,
+          113
+        ],
+        "source_slot_anchor_display_units": [
+          -6.5,
+          0.44999999999999996,
+          0.855
+        ],
+        "stationary_saved_matrices": true,
+        "saved_origin": [
+          -6.5,
+          0.44999999999999996,
+          0.855
+        ],
+        "source_hide_origin": false
+      },
+      {
+        "label": "stock_1_3",
+        "display_slot": "08",
+        "columns": [
+          114,
+          115,
+          116,
+          117,
+          118,
+          119,
+          120,
+          121
+        ],
+        "source_slot_anchor_display_units": [
+          -7.4,
+          0.44999999999999996,
+          0.855
+        ],
+        "stationary_saved_matrices": true,
+        "saved_origin": [
+          -7.4,
+          0.44999999999999996,
+          0.855
+        ],
+        "source_hide_origin": false
+      },
+      {
+        "label": "stock_2_0",
+        "display_slot": "09",
+        "columns": [
+          122,
+          123,
+          124,
+          125,
+          126,
+          127,
+          128,
+          129
+        ],
+        "source_slot_anchor_display_units": [
+          -4.7,
+          1.05,
+          0.855
+        ],
+        "stationary_saved_matrices": true,
+        "saved_origin": [
+          -4.7,
+          1.05,
+          0.855
+        ],
+        "source_hide_origin": false
+      },
+      {
+        "label": "stock_2_1",
+        "display_slot": "10",
+        "columns": [
+          130,
+          131,
+          132,
+          133,
+          134,
+          135,
+          136,
+          137
+        ],
+        "source_slot_anchor_display_units": [
+          -5.6000000000000005,
+          1.05,
+          0.855
+        ],
+        "stationary_saved_matrices": true,
+        "saved_origin": [
+          -5.6000000000000005,
+          1.05,
+          0.855
+        ],
+        "source_hide_origin": false
+      },
+      {
+        "label": "stock_2_2",
+        "display_slot": "11",
+        "columns": [
+          138,
+          139,
+          140,
+          141,
+          142,
+          143,
+          144,
+          145
+        ],
+        "source_slot_anchor_display_units": [
+          -6.5,
+          1.05,
+          0.855
+        ],
+        "stationary_saved_matrices": true,
+        "saved_origin": [
+          -6.5,
+          1.05,
+          0.855
+        ],
+        "source_hide_origin": false
+      },
+      {
+        "label": "stock_2_3",
+        "display_slot": "12",
+        "columns": [
+          146,
+          147,
+          148,
+          149,
+          150,
+          151,
+          152,
+          153
+        ],
+        "source_slot_anchor_display_units": [
+          -7.4,
+          1.05,
+          0.855
+        ],
+        "stationary_saved_matrices": true,
+        "saved_origin": [
+          -7.4,
+          1.05,
+          0.855
+        ],
+        "source_hide_origin": false
+      },
+      {
+        "label": "stock_3_0",
+        "display_slot": "13",
+        "columns": [
+          154,
+          155,
+          156,
+          157,
+          158,
+          159,
+          160,
+          161
+        ],
+        "source_slot_anchor_display_units": [
+          -4.7,
+          1.65,
+          0.855
+        ],
+        "stationary_saved_matrices": true,
+        "saved_origin": [
+          -4.7,
+          1.65,
+          0.855
+        ],
+        "source_hide_origin": false
+      },
+      {
+        "label": "stock_3_1",
+        "display_slot": "14",
+        "columns": [
+          162,
+          163,
+          164,
+          165,
+          166,
+          167,
+          168,
+          169
+        ],
+        "source_slot_anchor_display_units": [
+          -5.6000000000000005,
+          1.65,
+          0.855
+        ],
+        "stationary_saved_matrices": true,
+        "saved_origin": [
+          -5.6000000000000005,
+          1.65,
+          0.855
+        ],
+        "source_hide_origin": false
+      },
+      {
+        "label": "stock_3_2",
+        "display_slot": "15",
+        "columns": [
+          170,
+          171,
+          172,
+          173,
+          174,
+          175,
+          176,
+          177
+        ],
+        "source_slot_anchor_display_units": [
+          -6.5,
+          1.65,
+          0.855
+        ],
+        "stationary_saved_matrices": true,
+        "saved_origin": [
+          -6.5,
+          1.65,
+          0.855
+        ],
+        "source_hide_origin": false
+      },
+      {
+        "label": "stock_3_3",
+        "display_slot": "16",
+        "columns": [
+          178,
+          179,
+          180,
+          181,
+          182,
+          183,
+          184,
+          185
+        ],
+        "source_slot_anchor_display_units": [
+          -7.4,
+          1.65,
+          0.855
+        ],
+        "stationary_saved_matrices": true,
+        "saved_origin": [
+          -7.4,
+          1.65,
+          0.855
+        ],
+        "source_hide_origin": false
+      },
+      {
+        "label": "stock_4_0",
+        "display_slot": "17",
+        "columns": [
+          186,
+          187,
+          188,
+          189,
+          190,
+          191,
+          192,
+          193
+        ],
+        "source_slot_anchor_display_units": [
+          -4.7,
+          2.25,
+          0.855
+        ],
+        "stationary_saved_matrices": true,
+        "saved_origin": [
+          -4.7,
+          2.25,
+          0.855
+        ],
+        "source_hide_origin": false
+      },
+      {
+        "label": "stock_4_1",
+        "display_slot": "18",
+        "columns": [
+          194,
+          195,
+          196,
+          197,
+          198,
+          199,
+          200,
+          201
+        ],
+        "source_slot_anchor_display_units": [
+          -5.6000000000000005,
+          2.25,
+          0.855
+        ],
+        "stationary_saved_matrices": true,
+        "saved_origin": [
+          -5.6000000000000005,
+          2.25,
+          0.855
+        ],
+        "source_hide_origin": false
+      },
+      {
+        "label": "stock_4_2",
+        "display_slot": "19",
+        "columns": [
+          202,
+          203,
+          204,
+          205,
+          206,
+          207,
+          208,
+          209
+        ],
+        "source_slot_anchor_display_units": [
+          -6.5,
+          2.25,
+          0.855
+        ],
+        "stationary_saved_matrices": true,
+        "saved_origin": [
+          -6.5,
+          2.25,
+          0.855
+        ],
+        "source_hide_origin": false
+      },
+      {
+        "label": "stock_4_3",
+        "display_slot": "20",
+        "columns": [
+          210,
+          211,
+          212,
+          213,
+          214,
+          215,
+          216,
+          217
+        ],
+        "source_slot_anchor_display_units": [
+          -7.4,
+          2.25,
+          0.855
+        ],
+        "stationary_saved_matrices": true,
+        "saved_origin": [
+          -7.4,
+          2.25,
+          0.855
+        ],
+        "source_hide_origin": false
+      }
+    ],
+    "active_case_starts_at_slot_01": true,
+    "active_case_ends_at_slot_01": true,
+    "active_case_start_end_difference_display_units": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "inactive_stock_case_count": 19,
+    "active_case_count": 1,
+    "scope": "One demonstrated product cycle; other 19 case representations stay stationary."
+  },
+  "pallet_center_range": {
+    "minimum": [
+      -3.7,
+      -1.2000000000000002,
+      0.7999999999999999
+    ],
+    "maximum": [
+      2.7,
+      -1.1999999999999997,
+      0.8000000000000002
+    ]
+  },
+  "pallet_single_y": [
+    -1.2000000000000002,
+    -1.2,
+    -1.1999999999999997
+  ],
+  "pallet_single_z": [
+    0.7999999999999999,
+    0.8,
+    0.8000000000000002
+  ],
+  "case_relative_to_pallet_during_transport": {
+    "minimum": [
+      -4.440892098500626e-16,
+      -2.220446049250313e-16,
+      0.039999999999999813
+    ],
+    "maximum": [
+      4.440892098500626e-16,
+      2.220446049250313e-16,
+      0.040000000000000036
+    ]
+  },
+  "xyz_relative_to_case_during_pickup": {
+    "minimum": [
+      0.0,
+      0.0,
+      0.13999999999999968
+    ],
+    "maximum": [
+      0.0,
+      0.0,
+      0.15500000000000003
+    ]
+  },
+  "xyz_relative_to_case_during_return": {
+    "minimum": [
+      0.0,
+      0.0,
+      0.1399999999999999
+    ],
+    "maximum": [
+      0.0,
+      0.0,
+      0.14000000000000035
+    ]
+  },
+  "checkpoints": [
+    {
+      "label_ja": "開始：区画01の筐体",
+      "sample_index": 0,
+      "video_s": 0.0,
+      "source_clock": 0.0,
+      "scene": "INTRO",
+      "case_origin_display_units": [
+        -4.7,
+        -0.15,
+        0.855
+      ],
+      "pallet_center_display_units": [
+        -3.7,
+        -1.2,
+        0.8
+      ],
+      "xyz_hand_target_display_units": [
+        -4.7,
+        -0.15,
+        1.7
+      ],
+      "old_outfeed_hand_hidden_signature": false
+    },
+    {
+      "label_ja": "XYZの接近",
+      "sample_index": 54,
+      "video_s": 3.6,
+      "source_clock": 4.6,
+      "scene": "S01",
+      "case_origin_display_units": [
+        -4.7,
+        -0.15,
+        0.855
+      ],
+      "pallet_center_display_units": [
+        -3.7,
+        -1.2,
+        0.8
+      ],
+      "xyz_hand_target_display_units": [
+        -4.7,
+        -0.15,
+        1.01
+      ],
+      "old_outfeed_hand_hidden_signature": false
+    },
+    {
+      "label_ja": "取出し上昇中",
+      "sample_index": 72,
+      "video_s": 4.8,
+      "source_clock": 5.8,
+      "scene": "S01",
+      "case_origin_display_units": [
+        -4.674516790843321,
+        -0.17675736961451252,
+        1.28
+      ],
+      "pallet_center_display_units": [
+        -3.7,
+        -1.2,
+        0.8
+      ],
+      "xyz_hand_target_display_units": [
+        -4.674516790843321,
+        -0.17675736961451252,
+        1.42
+      ],
+      "old_outfeed_hand_hidden_signature": false
+    },
+    {
+      "label_ja": "パレットへ下降中",
+      "sample_index": 115,
+      "video_s": 7.666666666666667,
+      "source_clock": 8.666666666666668,
+      "scene": "S01",
+      "case_origin_display_units": [
+        -3.7,
+        -1.2,
+        0.8414340740740739
+      ],
+      "pallet_center_display_units": [
+        -3.7,
+        -1.2,
+        0.8
+      ],
+      "xyz_hand_target_display_units": [
+        -3.7,
+        -1.2,
+        0.9814340740740739
+      ],
+      "old_outfeed_hand_hidden_signature": false
+    },
+    {
+      "label_ja": "受渡し後の手先開放中",
+      "sample_index": 123,
+      "video_s": 8.2,
+      "source_clock": 9.2,
+      "scene": "S01",
+      "case_origin_display_units": [
+        -3.7,
+        -1.2,
+        0.84
+      ],
+      "pallet_center_display_units": [
+        -3.7,
+        -1.2,
+        0.8
+      ],
+      "xyz_hand_target_display_units": [
+        -3.7,
+        -1.2,
+        0.98
+      ],
+      "old_outfeed_hand_hidden_signature": false
+    },
+    {
+      "label_ja": "組立位置へ到着",
+      "sample_index": 150,
+      "video_s": 10.0,
+      "source_clock": 11.0,
+      "scene": "S02",
+      "case_origin_display_units": [
+        0.0,
+        -1.2,
+        0.84
+      ],
+      "pallet_center_display_units": [
+        0.0,
+        -1.2,
+        0.8
+      ],
+      "xyz_hand_target_display_units": [
+        -3.7,
+        -1.2,
+        1.65
+      ],
+      "old_outfeed_hand_hidden_signature": false
+    },
+    {
+      "label_ja": "組立位置で待機",
+      "sample_index": 1410,
+      "video_s": 94.0,
+      "source_clock": 62.0,
+      "scene": "S13",
+      "case_origin_display_units": [
+        0.0,
+        -1.2,
+        0.84
+      ],
+      "pallet_center_display_units": [
+        0.0,
+        -1.2,
+        0.8
+      ],
+      "xyz_hand_target_display_units": [
+        -3.7,
+        -1.2,
+        1.65
+      ],
+      "old_outfeed_hand_hidden_signature": false
+    },
+    {
+      "label_ja": "後工程位置への移動中",
+      "sample_index": 1515,
+      "video_s": 101.0,
+      "source_clock": 66.66666666666667,
+      "scene": "S14",
+      "case_origin_display_units": [
+        2.7,
+        -1.1999999999999997,
+        0.8399999999999999
+      ],
+      "pallet_center_display_units": [
+        2.7,
+        -1.1999999999999997,
+        0.8
+      ],
+      "xyz_hand_target_display_units": [
+        -3.7,
+        -1.2,
+        1.65
+      ],
+      "old_outfeed_hand_hidden_signature": true
+    },
+    {
+      "label_ja": "パレット復路",
+      "sample_index": 1560,
+      "video_s": 104.0,
+      "source_clock": 70.0,
+      "scene": "S15",
+      "case_origin_display_units": [
+        1.7000000000000002,
+        -1.2,
+        0.84
+      ],
+      "pallet_center_display_units": [
+        1.7000000000000002,
+        -1.2,
+        0.8
+      ],
+      "xyz_hand_target_display_units": [
+        -3.7,
+        -1.2,
+        1.65
+      ],
+      "old_outfeed_hand_hidden_signature": false
+    },
+    {
+      "label_ja": "同じXYZが取りに行く",
+      "sample_index": 1630,
+      "video_s": 108.66666666666667,
+      "source_clock": 74.66666666666667,
+      "scene": "S16",
+      "case_origin_display_units": [
+        -3.7,
+        -1.2,
+        0.84
+      ],
+      "pallet_center_display_units": [
+        -3.7,
+        -1.2,
+        0.8
+      ],
+      "xyz_hand_target_display_units": [
+        -3.7,
+        -1.2,
+        0.98
+      ],
+      "old_outfeed_hand_hidden_signature": false
+    },
+    {
+      "label_ja": "完成品の取出し中",
+      "sample_index": 1660,
+      "video_s": 110.66666666666667,
+      "source_clock": 76.66666666666667,
+      "scene": "S16",
+      "case_origin_display_units": [
+        -3.9592592592592597,
+        -0.9277777777777777,
+        1.4
+      ],
+      "pallet_center_display_units": [
+        -3.7,
+        -1.2,
+        0.8
+      ],
+      "xyz_hand_target_display_units": [
+        -3.9592592592592597,
+        -0.9277777777777777,
+        1.5399999999999998
+      ],
+      "old_outfeed_hand_hidden_signature": false
+    },
+    {
+      "label_ja": "元の区画へ搬送中",
+      "sample_index": 1687,
+      "video_s": 112.46666666666667,
+      "source_clock": 78.46666666666667,
+      "scene": "S16",
+      "case_origin_display_units": [
+        -4.699999999999999,
+        -0.14999999999999997,
+        1.3312208504801102
+      ],
+      "pallet_center_display_units": [
+        -3.7,
+        -1.2,
+        0.8
+      ],
+      "xyz_hand_target_display_units": [
+        -4.699999999999999,
+        -0.14999999999999997,
+        1.4712208504801105
+      ],
+      "old_outfeed_hand_hidden_signature": false
+    },
+    {
+      "label_ja": "区画01へ下降後",
+      "sample_index": 1702,
+      "video_s": 113.46666666666667,
+      "source_clock": 79.46666666666667,
+      "scene": "S16",
+      "case_origin_display_units": [
+        -4.7,
+        -0.15,
+        0.855
+      ],
+      "pallet_center_display_units": [
+        -3.7,
+        -1.2,
+        0.8
+      ],
+      "xyz_hand_target_display_units": [
+        -4.7,
+        -0.15,
+        0.9949999999999999
+      ],
+      "old_outfeed_hand_hidden_signature": false
+    },
+    {
+      "label_ja": "XYZの開放・上昇後",
+      "sample_index": 1737,
+      "video_s": 115.8,
+      "source_clock": 81.8,
+      "scene": "S16",
+      "case_origin_display_units": [
+        -4.7,
+        -0.15,
+        0.855
+      ],
+      "pallet_center_display_units": [
+        -3.7,
+        -1.2,
+        0.8
+      ],
+      "xyz_hand_target_display_units": [
+        -4.7,
+        -0.15,
+        1.8
+      ],
+      "old_outfeed_hand_hidden_signature": false
+    },
+    {
+      "label_ja": "終点：区画01に戻った状態",
+      "sample_index": 1770,
+      "video_s": 118.0,
+      "source_clock": 84.0,
+      "scene": "OUTRO",
+      "case_origin_display_units": [
+        -4.7,
+        -0.15,
+        0.855
+      ],
+      "pallet_center_display_units": [
+        -3.7,
+        -1.2,
+        0.8
+      ],
+      "xyz_hand_target_display_units": [
+        -4.7,
+        -0.15,
+        1.8
+      ],
+      "old_outfeed_hand_hidden_signature": false
+    }
+  ],
+  "legacy_outfeed_columns": [
+    {
+      "column": 258,
+      "name": "outfeed_carriage"
+    },
+    {
+      "column": 259,
+      "name": "outfeed_z"
+    },
+    {
+      "column": 260,
+      "name": "outfeed_y_bridge"
+    },
+    {
+      "column": 261,
+      "name": "outfeed_palm"
+    },
+    {
+      "column": 262,
+      "name": "outfeed_left_finger"
+    },
+    {
+      "column": 263,
+      "name": "outfeed_right_finger"
+    },
+    {
+      "column": 264,
+      "name": "outfeed_carrier"
+    }
+  ],
+  "legacy_outfeed_saved_visibility": [
+    {
+      "scene": "INTRO",
+      "samples": 45,
+      "outfeed_all_hidden_samples": 0
+    },
+    {
+      "scene": "S01",
+      "samples": 105,
+      "outfeed_all_hidden_samples": 0
+    },
+    {
+      "scene": "S02",
+      "samples": 60,
+      "outfeed_all_hidden_samples": 0
+    },
+    {
+      "scene": "S03",
+      "samples": 150,
+      "outfeed_all_hidden_samples": 0
+    },
+    {
+      "scene": "S04",
+      "samples": 120,
+      "outfeed_all_hidden_samples": 0
+    },
+    {
+      "scene": "S05",
+      "samples": 180,
+      "outfeed_all_hidden_samples": 0
+    },
+    {
+      "scene": "S06",
+      "samples": 90,
+      "outfeed_all_hidden_samples": 0
+    },
+    {
+      "scene": "S07",
+      "samples": 75,
+      "outfeed_all_hidden_samples": 0
+    },
+    {
+      "scene": "S08",
+      "samples": 120,
+      "outfeed_all_hidden_samples": 0
+    },
+    {
+      "scene": "S09",
+      "samples": 60,
+      "outfeed_all_hidden_samples": 0
+    },
+    {
+      "scene": "S10",
+      "samples": 120,
+      "outfeed_all_hidden_samples": 0
+    },
+    {
+      "scene": "S11",
+      "samples": 150,
+      "outfeed_all_hidden_samples": 0
+    },
+    {
+      "scene": "S12",
+      "samples": 120,
+      "outfeed_all_hidden_samples": 0
+    },
+    {
+      "scene": "S13",
+      "samples": 60,
+      "outfeed_all_hidden_samples": 0
+    },
+    {
+      "scene": "S14",
+      "samples": 90,
+      "outfeed_all_hidden_samples": 90
+    },
+    {
+      "scene": "S15",
+      "samples": 75,
+      "outfeed_all_hidden_samples": 0
+    },
+    {
+      "scene": "S16",
+      "samples": 120,
+      "outfeed_all_hidden_samples": 0
+    },
+    {
+      "scene": "OUTRO",
+      "samples": 45,
+      "outfeed_all_hidden_samples": 0
+    }
+  ],
+  "source_unchanged_after_read": true,
+  "new_geometry_or_motion": false,
+  "probe_correction": "Initial read stopped before writing JSON because mixed NumPy indexing moved the selected-column axis. Positions are now sliced first, with the resulting shape checked explicitly. Source data is unchanged.",
+  "pallet_support_or_grasp_performance_verdict": null,
+  "formal_physical_validity_verdict": null,
+  "script_sha256": "9a4b14aef75485601c79f4598b8654ecc888d5c32f5d7d295b49fb7a6cce0880"
+}

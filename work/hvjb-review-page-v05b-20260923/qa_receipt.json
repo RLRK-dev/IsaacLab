@@ -1,0 +1,37 @@
+{
+  "observed_at": "2026-09-23T19:06:07.483864+09:00",
+  "manifest_sha256": "c972ee8fe56632e36db389173a9117199e981b2ba88122cd509588d4da3eb992",
+  "counts": {
+    "jobs": 20,
+    "features": 92,
+    "scenes": 18,
+    "duration_s": 119
+  },
+  "files_read_back": 427,
+  "inherited_document_files_unchanged": 26,
+  "job_feature_scene_payload_unchanged": true,
+  "html_files_checked": [
+    "index_v05_1.html",
+    "index_v04_1.html",
+    "index.html",
+    "index_v04_2.html",
+    "logistics_review/all_states.html",
+    "logistics_review/index.html",
+    "hand_review/index.html",
+    "parallel_review/index.html",
+    "parallel_review/all_cases.html",
+    "unit_review/index.html",
+    "unit_review/all_groups.html"
+  ],
+  "static_local_links_checked": 472,
+  "mp4_files": [
+    "HVJB_line_split_process_concept_v05b_review.mp4"
+  ],
+  "external_links_on_entry": [
+    "https://ampereev.com/documentation/hvjb-5-400-specifications/"
+  ],
+  "browser_ui_observed": false,
+  "browser_limit": "CUA apps and browsers inventory was empty; these checks inspect files and links.",
+  "formal_physical_validity_verdict": null,
+  "script_sha256": "0f47ccf3aeed97c6611a57a34d351072fe73c6a850863885ead59d42837cbbc0"
+}
