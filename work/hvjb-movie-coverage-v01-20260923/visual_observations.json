@@ -1,0 +1,16 @@
+{
+  "recorded_at": "2026-09-23T21:09:13.728870+09:00",
+  "basis": "Direct view_image inspection of the full generated coverage chart in this session",
+  "diagram_inspected": true,
+  "job_rows_inspected": 20,
+  "diagram_sha256": "d5baec8fa1659baef3e457f13f885357f07be865d15713f252b11bd708bb7162",
+  "observations_ja": [
+    "20仕事の行・場所・場面・時刻・表示区分が読める。",
+    "静止説明のみの5仕事は色と文字で示されている。",
+    "D81はS02とS15の二つの照合先を持つ。",
+    "下部に模式動作と静止説明の意味が記載されている。",
+    "HTMLのブラウザ表示・動画操作は未観察。リンク先、ボタン時刻、JavaScript構文は別記録で静的に確認。"
+  ],
+  "browser_ui_observed": false,
+  "physical_validity_verdict": null
+}

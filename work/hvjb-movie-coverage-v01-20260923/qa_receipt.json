@@ -1,0 +1,32 @@
+{
+  "observed_at": "2026-09-23T21:09:13.565844+09:00",
+  "manifest_sha256": "b6ec4365760f43e6773d2b71705c6f28592a8c2bc57ff80708125fc542a27781",
+  "jobs_preserved": 20,
+  "process_scenes_preserved": 16,
+  "static_only_jobs": [
+    "D01",
+    "D42",
+    "D61",
+    "D70",
+    "D71"
+  ],
+  "schematic_motion_jobs": 15,
+  "page_references": [
+    {
+      "page": "coverage_review/index.html",
+      "sha256": "e239644cbd70cf34ce289206dd9e74c49e95a36a7805702398c9758ade901946",
+      "references": 30
+    },
+    {
+      "page": "index_v05b_2.html",
+      "sha256": "7285089d8b611aa7b46104e4005909ea4b50e8acb6d45d67feee79f1a4a51858",
+      "references": 22
+    }
+  ],
+  "node_syntax_exit_code": 0,
+  "browser_ui_observed": false,
+  "new_videos": 0,
+  "existing_movie_sha256": "65ed3f0f861370c55e3d09de5b6d5d17889aea14d1394de757aba7cf2360ba03",
+  "physical_validity_verdict": null,
+  "script_sha256": "1b0fa32cfde6a676c20b2f509d9da223f2baea355cfcfa9ee83731a20645b3a2"
+}

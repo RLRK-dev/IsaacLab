@@ -1,0 +1,42 @@
+{
+  "observed_at": "2026-09-23T20:55:12.158955+09:00",
+  "files": [
+    {
+      "path": "README.md",
+      "sha256": "e108d8026d067b25c87102bbeb9a80e185446f89775b1cc49d6502e36de1bcb0",
+      "bytes": 1400
+    },
+    {
+      "path": "coverage.css",
+      "sha256": "211dd59b0f08766fc946359249828dbbb25fccce0c78f695675345e58b73aa2e",
+      "bytes": 2021
+    },
+    {
+      "path": "coverage.js",
+      "sha256": "92042c1165a6a3e7cd161d11606d13032724f1180f5762bd8057b2ea84414061",
+      "bytes": 539
+    },
+    {
+      "path": "coverage.png",
+      "sha256": "d5baec8fa1659baef3e457f13f885357f07be865d15713f252b11bd708bb7162",
+      "bytes": 371066
+    },
+    {
+      "path": "coverage_data.json",
+      "sha256": "5db3445e17b010dc60288c439215d7b87c671e61a86339ab0c764ac08e904f12",
+      "bytes": 43528
+    },
+    {
+      "path": "index.html",
+      "sha256": "e239644cbd70cf34ce289206dd9e74c49e95a36a7805702398c9758ade901946",
+      "bytes": 11482
+    }
+  ],
+  "entry_sha256": "7285089d8b611aa7b46104e4005909ea4b50e8acb6d45d67feee79f1a4a51858",
+  "source_file_hashes": {
+    "README.md": "e108d8026d067b25c87102bbeb9a80e185446f89775b1cc49d6502e36de1bcb0",
+    "build_page.py": "2b2951ea9e0d140bf1bd7ac1e356e7976d8b1f7d2fae861f1a5d8df1d3ce1d12",
+    "coverage.css": "211dd59b0f08766fc946359249828dbbb25fccce0c78f695675345e58b73aa2e",
+    "coverage.js": "92042c1165a6a3e7cd161d11606d13032724f1180f5762bd8057b2ea84414061"
+  }
+}

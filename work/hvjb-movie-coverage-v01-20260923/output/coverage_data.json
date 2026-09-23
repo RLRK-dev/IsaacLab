@@ -1,0 +1,1585 @@
+{
+  "observed_at": "2026-09-23T20:55:11.911379+09:00",
+  "line_source_sha256": "55948e4d2603b4ebe1ccd30160c89baa990623ad96eedc515c17583bac4bb440",
+  "video_plan_sha256": "d2a9937c621df4b8be60092146890f6a04ccf359efd5023595c41dee61793a7b",
+  "video_sha256": "65ed3f0f861370c55e3d09de5b6d5d17889aea14d1394de757aba7cf2360ba03",
+  "video_filename": "HVJB_line_split_process_concept_v05b_review.mp4",
+  "jobs": [
+    {
+      "job_unmodified": {
+        "id": "D00",
+        "operation": "O00",
+        "title_ja": "筐体供給",
+        "location": "outside_supply",
+        "location_ja": "供給位置",
+        "group": "LOGISTICS",
+        "primary_ja": "XYZ",
+        "hands_ja": "H06 筐体",
+        "assistance_ja": "なし",
+        "transfer_ja": "パレットに支持を渡して開放",
+        "unresolved_ja": "許容把持面・重心・パレット受け位置・20枠の実寸・XYZ移動距離。",
+        "scene_ids": [
+          "S01"
+        ],
+        "review_feature_ids": [
+          "P01"
+        ],
+        "feature_assignment_kind": "existing_review_candidates_not_selected_physical_operations"
+      },
+      "scenes_unmodified": [
+        {
+          "id": "S01",
+          "tasks": [
+            "D00"
+          ],
+          "place_ja": "供給",
+          "title_ja": "20枠から空筐体をパレットへ",
+          "actors_ja": "XYZ / H06筐体",
+          "hold_or_limit_ja": "筐体を支持・位置決めしてからハンド開放",
+          "previous_video_navigation_ja": "4-11",
+          "new_duration_s": null,
+          "trajectory": null,
+          "sequence_kind": "explanatory_storyboard_not_factory_schedule",
+          "start_s": 3,
+          "stop_s": 10,
+          "source_clock": [
+            4,
+            11
+          ],
+          "screen_duration_s": 7
+        }
+      ],
+      "static_scene_ids": [],
+      "schematic_motion_scene_ids": [
+        "S01"
+      ],
+      "display_kind_ja": "模式動作",
+      "physical_completion_verdict": null
+    },
+    {
+      "job_unmodified": {
+        "id": "D01",
+        "operation": "O01",
+        "title_ja": "線材・端末準備",
+        "location": "outside_prep",
+        "location_ja": "筐体外・準備",
+        "group": "OPEN",
+        "primary_ja": "準備設備",
+        "hands_ja": "入荷・加工範囲未定",
+        "assistance_ja": "設備側で別計上",
+        "transfer_ja": "加工後の支持先へ渡す",
+        "unresolved_ja": "入荷単位・全線の両端・線長・品番・加工条件・加工設備",
+        "scene_ids": [
+          "S02"
+        ],
+        "review_feature_ids": [
+          "I01",
+          "I02",
+          "I03",
+          "I04",
+          "I05",
+          "T31",
+          "T32",
+          "T33",
+          "T34",
+          "T41",
+          "T42",
+          "T43",
+          "T44",
+          "L01",
+          "L02",
+          "L03",
+          "L04",
+          "L05",
+          "L06",
+          "L07",
+          "W01",
+          "W02",
+          "W03",
+          "W04",
+          "W05",
+          "W06",
+          "W07",
+          "W08",
+          "W09",
+          "W10",
+          "W11",
+          "W12",
+          "W13",
+          "W14",
+          "WI11",
+          "WI12",
+          "WI21",
+          "WI22",
+          "WI41",
+          "WI42",
+          "WI51",
+          "WI52",
+          "W15",
+          "W16",
+          "W17",
+          "W18",
+          "W19"
+        ],
+        "feature_assignment_kind": "existing_review_candidates_not_selected_physical_operations"
+      },
+      "scenes_unmodified": [
+        {
+          "id": "S02",
+          "tasks": [
+            "D01",
+            "D81"
+          ],
+          "place_ja": "準備",
+          "title_ja": "線材・端末準備、部品・ボルト補給",
+          "actors_ja": "準備・補給設備",
+          "hold_or_limit_ja": "入荷済み範囲、空容器回収の仕事を残す",
+          "previous_video_navigation_ja": "該当単独場面なし",
+          "new_duration_s": null,
+          "trajectory": null,
+          "sequence_kind": "explanatory_storyboard_not_factory_schedule",
+          "start_s": 10,
+          "stop_s": 14,
+          "source_clock": [
+            11,
+            11
+          ],
+          "screen_duration_s": 4
+        }
+      ],
+      "static_scene_ids": [
+        "S02"
+      ],
+      "schematic_motion_scene_ids": [],
+      "display_kind_ja": "静止説明のみ",
+      "physical_completion_verdict": null
+    },
+    {
+      "job_unmodified": {
+        "id": "D10",
+        "operation": "O10",
+        "title_ja": "A 本体部品固定",
+        "location": "outside_A",
+        "location_ja": "筐体外・A",
+        "group": "A",
+        "primary_ja": "A主腕",
+        "hands_ja": "H01 / H02",
+        "assistance_ja": "工具 T-A",
+        "transfer_ja": "締結・工具退避後に開放",
+        "unresolved_ja": "下板の固定点、機械固定と電力端子の区別、抵抗の写真対応",
+        "scene_ids": [
+          "S03"
+        ],
+        "review_feature_ids": [
+          "P02",
+          "P03",
+          "P04",
+          "J01",
+          "J02",
+          "J03",
+          "J04"
+        ],
+        "feature_assignment_kind": "existing_review_candidates_not_selected_physical_operations"
+      },
+      "scenes_unmodified": [
+        {
+          "id": "S03",
+          "tasks": [
+            "D10",
+            "D11"
+          ],
+          "place_ja": "外・A",
+          "title_ja": "下板部品の保持中固定・局所配線",
+          "actors_ja": "A主腕 + 共用補助※ / T-A",
+          "hold_or_limit_ja": "接触器・リレー・抵抗等。自由端の案内を継続",
+          "previous_video_navigation_ja": "11-22",
+          "new_duration_s": null,
+          "trajectory": null,
+          "sequence_kind": "explanatory_storyboard_not_factory_schedule",
+          "start_s": 14,
+          "stop_s": 24,
+          "source_clock": [
+            11,
+            19.5
+          ],
+          "screen_duration_s": 10
+        }
+      ],
+      "static_scene_ids": [],
+      "schematic_motion_scene_ids": [
+        "S03"
+      ],
+      "display_kind_ja": "模式動作",
+      "physical_completion_verdict": null
+    },
+    {
+      "job_unmodified": {
+        "id": "D11",
+        "operation": "O10",
+        "title_ja": "A 配線・接続",
+        "location": "outside_A",
+        "location_ja": "筐体外・A",
+        "group": "A",
+        "primary_ja": "A主腕",
+        "hands_ja": "H04 / H05内側",
+        "assistance_ja": "共用補助※ / T-A",
+        "transfer_ja": "残る自由端の案内を継続",
+        "unresolved_ja": "線の両端・所属・共締め部材・同時に締める大小の点組",
+        "scene_ids": [
+          "S03"
+        ],
+        "review_feature_ids": [
+          "P02",
+          "P03",
+          "P04",
+          "I01",
+          "I02",
+          "I03",
+          "I04",
+          "I05",
+          "T31",
+          "T32",
+          "T33",
+          "T34",
+          "T41",
+          "T42",
+          "T43",
+          "T44",
+          "L01",
+          "L02",
+          "L03",
+          "L04",
+          "L05",
+          "L06",
+          "L07",
+          "J01",
+          "J02",
+          "J03",
+          "J04",
+          "W01",
+          "W02",
+          "W03",
+          "W04",
+          "W05",
+          "W06",
+          "W07",
+          "W08",
+          "W09",
+          "W10",
+          "W11",
+          "W12",
+          "W13",
+          "W14",
+          "WI11",
+          "WI12",
+          "WI21",
+          "WI22",
+          "WI41",
+          "WI42",
+          "WI51",
+          "WI52",
+          "W15",
+          "W16",
+          "W17",
+          "W18",
+          "W19"
+        ],
+        "feature_assignment_kind": "existing_review_candidates_not_selected_physical_operations"
+      },
+      "scenes_unmodified": [
+        {
+          "id": "S03",
+          "tasks": [
+            "D10",
+            "D11"
+          ],
+          "place_ja": "外・A",
+          "title_ja": "下板部品の保持中固定・局所配線",
+          "actors_ja": "A主腕 + 共用補助※ / T-A",
+          "hold_or_limit_ja": "接触器・リレー・抵抗等。自由端の案内を継続",
+          "previous_video_navigation_ja": "11-22",
+          "new_duration_s": null,
+          "trajectory": null,
+          "sequence_kind": "explanatory_storyboard_not_factory_schedule",
+          "start_s": 14,
+          "stop_s": 24,
+          "source_clock": [
+            11,
+            19.5
+          ],
+          "screen_duration_s": 10
+        }
+      ],
+      "static_scene_ids": [],
+      "schematic_motion_scene_ids": [
+        "S03"
+      ],
+      "display_kind_ja": "模式動作",
+      "physical_completion_verdict": null
+    },
+    {
+      "job_unmodified": {
+        "id": "D12",
+        "operation": "O10",
+        "title_ja": "A ユニット受渡し",
+        "location": "outside_transfer",
+        "location_ja": "筐体外",
+        "group": "C",
+        "primary_ja": "A主腕",
+        "hands_ja": "H06 下板用を比較",
+        "assistance_ja": "共用補助※ → C補助※",
+        "transfer_ja": "本体と自由端を別々に引継ぐ",
+        "unresolved_ja": "運搬用手先・許容把持面・自由端数・製品照合・支持付き待ち位置",
+        "scene_ids": [
+          "S05"
+        ],
+        "review_feature_ids": [
+          "P02",
+          "P03",
+          "P04",
+          "W01",
+          "W02",
+          "W03",
+          "W04",
+          "W05",
+          "W06",
+          "W07",
+          "W08",
+          "W09",
+          "W10",
+          "W11",
+          "W12",
+          "W13",
+          "W14",
+          "WI11",
+          "WI12",
+          "WI21",
+          "WI22",
+          "WI41",
+          "WI42",
+          "WI51",
+          "WI52",
+          "W15",
+          "W16",
+          "W17",
+          "W18",
+          "W19"
+        ],
+        "feature_assignment_kind": "existing_review_candidates_not_selected_physical_operations"
+      },
+      "scenes_unmodified": [
+        {
+          "id": "S05",
+          "tasks": [
+            "D12",
+            "D22"
+          ],
+          "place_ja": "外・C入口",
+          "title_ja": "A/Bユニットと自由端を別々に受け渡す",
+          "actors_ja": "A/B主腕 → C主腕 / 支持",
+          "hold_or_limit_ja": "案内役の占有と次の支持先を示す",
+          "previous_video_navigation_ja": "22-35",
+          "new_duration_s": null,
+          "trajectory": null,
+          "sequence_kind": "explanatory_storyboard_not_factory_schedule",
+          "start_s": 32,
+          "stop_s": 44,
+          "source_clock": [
+            22,
+            35
+          ],
+          "screen_duration_s": 12
+        }
+      ],
+      "static_scene_ids": [],
+      "schematic_motion_scene_ids": [
+        "S05"
+      ],
+      "display_kind_ja": "模式動作",
+      "physical_completion_verdict": null
+    },
+    {
+      "job_unmodified": {
+        "id": "D20",
+        "operation": "O20",
+        "title_ja": "B 本体部品固定",
+        "location": "outside_B",
+        "location_ja": "筐体外・B",
+        "group": "B",
+        "primary_ja": "B主腕",
+        "hands_ja": "H02 / H08",
+        "assistance_ja": "工具 T-B",
+        "transfer_ja": "締結・工具退避後に開放",
+        "unresolved_ja": "機械固定と電気共締めの区別、主ヒューズの所属、板の許容保持面",
+        "scene_ids": [
+          "S04"
+        ],
+        "review_feature_ids": [
+          "P05",
+          "P06",
+          "P07",
+          "P08",
+          "P19",
+          "P20",
+          "P21",
+          "P22",
+          "J14",
+          "J15",
+          "J16",
+          "J17",
+          "J18",
+          "J19",
+          "J20",
+          "J21",
+          "J22",
+          "J23"
+        ],
+        "feature_assignment_kind": "existing_review_candidates_not_selected_physical_operations"
+      },
+      "scenes_unmodified": [
+        {
+          "id": "S04",
+          "tasks": [
+            "D20",
+            "D21"
+          ],
+          "place_ja": "外・B",
+          "title_ja": "補機ヒューズ板側の組付け・配線締結",
+          "actors_ja": "B主腕 + 共用補助※ / T-B",
+          "hold_or_limit_ja": "板側締結を完了。反対端の接続は別に扱う",
+          "previous_video_navigation_ja": "11-22",
+          "new_duration_s": null,
+          "trajectory": null,
+          "sequence_kind": "explanatory_storyboard_not_factory_schedule",
+          "start_s": 24,
+          "stop_s": 32,
+          "source_clock": [
+            19.5,
+            22
+          ],
+          "screen_duration_s": 8
+        }
+      ],
+      "static_scene_ids": [],
+      "schematic_motion_scene_ids": [
+        "S04"
+      ],
+      "display_kind_ja": "模式動作",
+      "physical_completion_verdict": null
+    },
+    {
+      "job_unmodified": {
+        "id": "D21",
+        "operation": "O20",
+        "title_ja": "B 配線・接続",
+        "location": "outside_B",
+        "location_ja": "筐体外・B",
+        "group": "B",
+        "primary_ja": "B主腕",
+        "hands_ja": "H04 / H05内側",
+        "assistance_ja": "共用補助※ / T-B",
+        "transfer_ja": "両端保持は同時把持・同時退避",
+        "unresolved_ja": "物理5ヒューズと系統の割当、線の両端、積層、両端保持が必要な対象",
+        "scene_ids": [
+          "S04"
+        ],
+        "review_feature_ids": [
+          "P05",
+          "P06",
+          "P07",
+          "P08",
+          "I01",
+          "I02",
+          "I03",
+          "I04",
+          "I05",
+          "P19",
+          "P20",
+          "P21",
+          "P22",
+          "L01",
+          "L02",
+          "L03",
+          "L04",
+          "L05",
+          "L06",
+          "L07",
+          "J14",
+          "J15",
+          "J16",
+          "J17",
+          "J18",
+          "J19",
+          "J20",
+          "J21",
+          "J22",
+          "J23",
+          "W01",
+          "W02",
+          "W03",
+          "W04",
+          "W05",
+          "W06",
+          "W07",
+          "W08",
+          "W09",
+          "W10",
+          "W11",
+          "W12",
+          "W13",
+          "W14",
+          "WI11",
+          "WI12",
+          "WI21",
+          "WI22",
+          "WI41",
+          "WI42",
+          "WI51",
+          "WI52",
+          "W15",
+          "W16",
+          "W17",
+          "W18",
+          "W19"
+        ],
+        "feature_assignment_kind": "existing_review_candidates_not_selected_physical_operations"
+      },
+      "scenes_unmodified": [
+        {
+          "id": "S04",
+          "tasks": [
+            "D20",
+            "D21"
+          ],
+          "place_ja": "外・B",
+          "title_ja": "補機ヒューズ板側の組付け・配線締結",
+          "actors_ja": "B主腕 + 共用補助※ / T-B",
+          "hold_or_limit_ja": "板側締結を完了。反対端の接続は別に扱う",
+          "previous_video_navigation_ja": "11-22",
+          "new_duration_s": null,
+          "trajectory": null,
+          "sequence_kind": "explanatory_storyboard_not_factory_schedule",
+          "start_s": 24,
+          "stop_s": 32,
+          "source_clock": [
+            19.5,
+            22
+          ],
+          "screen_duration_s": 8
+        }
+      ],
+      "static_scene_ids": [],
+      "schematic_motion_scene_ids": [
+        "S04"
+      ],
+      "display_kind_ja": "模式動作",
+      "physical_completion_verdict": null
+    },
+    {
+      "job_unmodified": {
+        "id": "D22",
+        "operation": "O20",
+        "title_ja": "B ユニット受渡し",
+        "location": "outside_transfer",
+        "location_ja": "筐体外",
+        "group": "C",
+        "primary_ja": "B主腕",
+        "hands_ja": "H07 板用を比較",
+        "assistance_ja": "共用補助※",
+        "transfer_ja": "Cの板保持・案内へ引継ぐ",
+        "unresolved_ja": "板搬送手先・自由端の支持と引継ぎ・待ち位置",
+        "scene_ids": [
+          "S05"
+        ],
+        "review_feature_ids": [
+          "P05",
+          "P06",
+          "P07",
+          "P19",
+          "P20",
+          "P21",
+          "W01",
+          "W02",
+          "W03",
+          "W04",
+          "W05",
+          "W06",
+          "W07",
+          "W08",
+          "W09",
+          "W10",
+          "W11",
+          "W12",
+          "W13",
+          "W14",
+          "WI11",
+          "WI12",
+          "WI21",
+          "WI22",
+          "WI41",
+          "WI42",
+          "WI51",
+          "WI52",
+          "W15",
+          "W16",
+          "W17",
+          "W18",
+          "W19"
+        ],
+        "feature_assignment_kind": "existing_review_candidates_not_selected_physical_operations"
+      },
+      "scenes_unmodified": [
+        {
+          "id": "S05",
+          "tasks": [
+            "D12",
+            "D22"
+          ],
+          "place_ja": "外・C入口",
+          "title_ja": "A/Bユニットと自由端を別々に受け渡す",
+          "actors_ja": "A/B主腕 → C主腕 / 支持",
+          "hold_or_limit_ja": "案内役の占有と次の支持先を示す",
+          "previous_video_navigation_ja": "22-35",
+          "new_duration_s": null,
+          "trajectory": null,
+          "sequence_kind": "explanatory_storyboard_not_factory_schedule",
+          "start_s": 32,
+          "stop_s": 44,
+          "source_clock": [
+            22,
+            35
+          ],
+          "screen_duration_s": 12
+        }
+      ],
+      "static_scene_ids": [],
+      "schematic_motion_scene_ids": [
+        "S05"
+      ],
+      "display_kind_ja": "模式動作",
+      "physical_completion_verdict": null
+    },
+    {
+      "job_unmodified": {
+        "id": "D30",
+        "operation": "O30",
+        "title_ja": "C 板合わせ・固定",
+        "location": "outside_C",
+        "location_ja": "筐体外・C",
+        "group": "C",
+        "primary_ja": "C主腕",
+        "hands_ja": "H07 板用を比較",
+        "assistance_ja": "支持 F-C / 工具 T-C",
+        "transfer_ja": "板保持のまま工具を退避",
+        "unresolved_ja": "板間の支持形状・ねじ点・荷重経路・板保持面",
+        "scene_ids": [
+          "S06"
+        ],
+        "review_feature_ids": [],
+        "feature_assignment_kind": "existing_review_candidates_not_selected_physical_operations"
+      },
+      "scenes_unmodified": [
+        {
+          "id": "S06",
+          "tasks": [
+            "D30"
+          ],
+          "place_ja": "外・C",
+          "title_ja": "板合わせ・保持中の板間ねじ固定",
+          "actors_ja": "C主腕 H07 / F-C / T-C",
+          "hold_or_limit_ja": "採用済み仮手順。実物の固定点は未確認",
+          "previous_video_navigation_ja": "35-40",
+          "new_duration_s": null,
+          "trajectory": null,
+          "sequence_kind": "explanatory_storyboard_not_factory_schedule",
+          "start_s": 44,
+          "stop_s": 50,
+          "source_clock": [
+            35,
+            38
+          ],
+          "screen_duration_s": 6
+        }
+      ],
+      "static_scene_ids": [],
+      "schematic_motion_scene_ids": [
+        "S06"
+      ],
+      "display_kind_ja": "模式動作",
+      "physical_completion_verdict": null
+    },
+    {
+      "job_unmodified": {
+        "id": "D31",
+        "operation": "O30",
+        "title_ja": "C 治具上持ち替え",
+        "location": "outside_C",
+        "location_ja": "筐体外・C",
+        "group": "C",
+        "primary_ja": "C主腕",
+        "hands_ja": "H07 → H06 を比較",
+        "assistance_ja": "F-C / C補助※",
+        "transfer_ja": "支持を残して搬送把持へ",
+        "unresolved_ja": "接合部の荷重受容・搬送把持面・手先交換・自由端案内方法",
+        "scene_ids": [
+          "S07"
+        ],
+        "review_feature_ids": [
+          "I01",
+          "I02",
+          "I03",
+          "I04",
+          "I05",
+          "L01",
+          "L02",
+          "L03",
+          "L04",
+          "L05",
+          "L06",
+          "L07",
+          "W01",
+          "W02",
+          "W03",
+          "W04",
+          "W05",
+          "W06",
+          "W07",
+          "W08",
+          "W09",
+          "W10",
+          "W11",
+          "W12",
+          "W13",
+          "W14",
+          "WI11",
+          "WI12",
+          "WI21",
+          "WI22",
+          "WI41",
+          "WI42",
+          "WI51",
+          "WI52",
+          "W15",
+          "W16",
+          "W17",
+          "W18",
+          "W19"
+        ],
+        "feature_assignment_kind": "existing_review_candidates_not_selected_physical_operations"
+      },
+      "scenes_unmodified": [
+        {
+          "id": "S07",
+          "tasks": [
+            "D31"
+          ],
+          "place_ja": "外・C",
+          "title_ja": "支持を残して搬送把持へ切り替える",
+          "actors_ja": "C主腕 H07 → H06ユニット",
+          "hold_or_limit_ja": "支持F-Cと自由端案内を維持して持ち替える",
+          "previous_video_navigation_ja": "35-40",
+          "new_duration_s": null,
+          "trajectory": null,
+          "sequence_kind": "explanatory_storyboard_not_factory_schedule",
+          "start_s": 50,
+          "stop_s": 55,
+          "source_clock": [
+            38,
+            40
+          ],
+          "screen_duration_s": 5
+        }
+      ],
+      "static_scene_ids": [],
+      "schematic_motion_scene_ids": [
+        "S07"
+      ],
+      "display_kind_ja": "模式動作",
+      "physical_completion_verdict": null
+    },
+    {
+      "job_unmodified": {
+        "id": "D40",
+        "operation": "O40",
+        "title_ja": "C 一体搭載",
+        "location": "insertion",
+        "location_ja": "外 → 内",
+        "group": "C",
+        "primary_ja": "C主腕",
+        "hands_ja": "H06 ユニット用を比較",
+        "assistance_ja": "C補助※ / 筐体側受け",
+        "transfer_ja": "本体開放後も案内は継続",
+        "unresolved_ja": "受け面・把持解除と指の抜け・内寸・全自由端の経路",
+        "scene_ids": [
+          "S08"
+        ],
+        "review_feature_ids": [
+          "P01",
+          "I01",
+          "I02",
+          "I03",
+          "I04",
+          "I05",
+          "L01",
+          "L02",
+          "L03",
+          "L04",
+          "L05",
+          "L06",
+          "L07",
+          "W01",
+          "W02",
+          "W03",
+          "W04",
+          "W05",
+          "W06",
+          "W07",
+          "W08",
+          "W09",
+          "W10",
+          "W11",
+          "W12",
+          "W13",
+          "W14",
+          "WI11",
+          "WI12",
+          "WI21",
+          "WI22",
+          "WI41",
+          "WI42",
+          "WI51",
+          "WI52",
+          "W15",
+          "W16",
+          "W17",
+          "W18",
+          "W19"
+        ],
+        "feature_assignment_kind": "existing_review_candidates_not_selected_physical_operations"
+      },
+      "scenes_unmodified": [
+        {
+          "id": "S08",
+          "tasks": [
+            "D40"
+          ],
+          "place_ja": "外 → 内",
+          "title_ja": "まとめたユニットを筐体に搭載する",
+          "actors_ja": "C主腕 / C専用補助",
+          "hold_or_limit_ja": "本体の支持引継ぎ後も自由端案内を続ける",
+          "previous_video_navigation_ja": "40-48",
+          "new_duration_s": null,
+          "trajectory": null,
+          "sequence_kind": "explanatory_storyboard_not_factory_schedule",
+          "start_s": 55,
+          "stop_s": 63,
+          "source_clock": [
+            40,
+            48
+          ],
+          "screen_duration_s": 8
+        }
+      ],
+      "static_scene_ids": [],
+      "schematic_motion_scene_ids": [
+        "S08"
+      ],
+      "display_kind_ja": "模式動作",
+      "physical_completion_verdict": null
+    },
+    {
+      "job_unmodified": {
+        "id": "D42",
+        "operation": "O42",
+        "title_ja": "C 箱内工具作業",
+        "location": "inside_C",
+        "location_ja": "搭載後・内側",
+        "group": "C",
+        "primary_ja": "C主腕枠",
+        "hands_ja": "対象・手先未特定",
+        "assistance_ja": "T-C / C補助※",
+        "transfer_ja": "対象不明を省略しない",
+        "unresolved_ja": "工具作業点・部材・点数・保持相手・所要時間",
+        "scene_ids": [
+          "S09"
+        ],
+        "review_feature_ids": [
+          "P01",
+          "I01",
+          "I02",
+          "I03",
+          "I04",
+          "I05",
+          "L01",
+          "L02",
+          "L03",
+          "L04",
+          "L05",
+          "L06",
+          "L07",
+          "W01",
+          "W02",
+          "W03",
+          "W04",
+          "W05",
+          "W06",
+          "W07",
+          "W08",
+          "W09",
+          "W10",
+          "W11",
+          "W12",
+          "W13",
+          "W14",
+          "WI11",
+          "WI12",
+          "WI21",
+          "WI22",
+          "WI41",
+          "WI42",
+          "WI51",
+          "WI52",
+          "W15",
+          "W16",
+          "W17",
+          "W18",
+          "W19"
+        ],
+        "feature_assignment_kind": "existing_review_candidates_not_selected_physical_operations"
+      },
+      "scenes_unmodified": [
+        {
+          "id": "S09",
+          "tasks": [
+            "D42"
+          ],
+          "place_ja": "内・C",
+          "title_ja": "搭載後の内部工具作業を別場面で示す",
+          "actors_ja": "対象・手先未特定 / T-C",
+          "hold_or_limit_ja": "隠れたねじを追加せず、未特定箇所を表示",
+          "previous_video_navigation_ja": "40-48に統合された表現",
+          "new_duration_s": null,
+          "trajectory": null,
+          "sequence_kind": "explanatory_storyboard_not_factory_schedule",
+          "start_s": 63,
+          "stop_s": 67,
+          "source_clock": [
+            48,
+            48
+          ],
+          "screen_duration_s": 4
+        }
+      ],
+      "static_scene_ids": [
+        "S09"
+      ],
+      "schematic_motion_scene_ids": [],
+      "display_kind_ja": "静止説明のみ",
+      "physical_completion_verdict": null
+    },
+    {
+      "job_unmodified": {
+        "id": "D45",
+        "operation": "O45",
+        "title_ja": "C 内側端末引出し",
+        "location": "wall_crossing",
+        "location_ja": "内 → 開口 → 外",
+        "group": "C",
+        "primary_ja": "C主腕",
+        "hands_ja": "H05 内側",
+        "assistance_ja": "C補助※",
+        "transfer_ja": "外側で端末支持を引継ぐ",
+        "unresolved_ja": "線付きの通過空間・把持面・各端末順序・外側での一時支持・ロック順",
+        "scene_ids": [
+          "S10"
+        ],
+        "review_feature_ids": [
+          "P01",
+          "I01",
+          "I02",
+          "I03",
+          "I04",
+          "I05",
+          "W01",
+          "W02",
+          "W03",
+          "W04",
+          "W05",
+          "W06",
+          "W07",
+          "W08",
+          "W09",
+          "W10",
+          "W11",
+          "W12",
+          "W13",
+          "W14",
+          "WI11",
+          "WI12",
+          "WI21",
+          "WI22",
+          "WI41",
+          "WI42",
+          "WI51",
+          "WI52",
+          "W15",
+          "W16",
+          "W17",
+          "W18",
+          "W19"
+        ],
+        "feature_assignment_kind": "existing_review_candidates_not_selected_physical_operations"
+      },
+      "scenes_unmodified": [
+        {
+          "id": "S10",
+          "tasks": [
+            "D45"
+          ],
+          "place_ja": "側壁・C",
+          "title_ja": "内側ハウジングと線を開口へ通す",
+          "actors_ja": "H05内側 / C専用補助※",
+          "hold_or_limit_ja": "通した後の外側支持を引き継ぐまで保持",
+          "previous_video_navigation_ja": "48-55",
+          "new_duration_s": null,
+          "trajectory": null,
+          "sequence_kind": "explanatory_storyboard_not_factory_schedule",
+          "start_s": 67,
+          "stop_s": 75,
+          "source_clock": [
+            48,
+            48
+          ],
+          "screen_duration_s": 8
+        }
+      ],
+      "static_scene_ids": [],
+      "schematic_motion_scene_ids": [
+        "S10"
+      ],
+      "display_kind_ja": "模式動作",
+      "physical_completion_verdict": null
+    },
+    {
+      "job_unmodified": {
+        "id": "D50",
+        "operation": "O50",
+        "title_ja": "C 外側口の固定",
+        "location": "wall_interface",
+        "location_ja": "搭載後・側壁両側",
+        "group": "C",
+        "primary_ja": "C主腕",
+        "hands_ja": "H05 外側",
+        "assistance_ja": "T-C / 内側保持役※",
+        "transfer_ja": "全対象穴の締結・工具退避まで保持",
+        "unresolved_ja": "締付順・条件・工具全外形・内側ロックとフランジ固定の順・主2極/LV固定",
+        "scene_ids": [
+          "S11"
+        ],
+        "review_feature_ids": [
+          "P01",
+          "P14",
+          "P15",
+          "P16",
+          "P17",
+          "P18",
+          "I01",
+          "I02",
+          "I03",
+          "I04",
+          "I05"
+        ],
+        "feature_assignment_kind": "existing_review_candidates_not_selected_physical_operations"
+      },
+      "scenes_unmodified": [
+        {
+          "id": "S11",
+          "tasks": [
+            "D50"
+          ],
+          "place_ja": "側壁・C",
+          "title_ja": "外側ヘッダーの設置・ねじ固定",
+          "actors_ja": "H05外側 / 内側保持役※ / T-C",
+          "hold_or_limit_ja": "外側取得と内側保持を同じ手に重ねない",
+          "previous_video_navigation_ja": "48-55",
+          "new_duration_s": null,
+          "trajectory": null,
+          "sequence_kind": "explanatory_storyboard_not_factory_schedule",
+          "start_s": 75,
+          "stop_s": 85,
+          "source_clock": [
+            49,
+            55
+          ],
+          "screen_duration_s": 10
+        }
+      ],
+      "static_scene_ids": [],
+      "schematic_motion_scene_ids": [
+        "S11"
+      ],
+      "display_kind_ja": "模式動作",
+      "physical_completion_verdict": null
+    },
+    {
+      "job_unmodified": {
+        "id": "D60",
+        "operation": "O60",
+        "title_ja": "C 主接続・共締め",
+        "location": "inside_C",
+        "location_ja": "搭載後・内側",
+        "group": "C",
+        "primary_ja": "C主腕",
+        "hands_ja": "H03 / 補助H04候補。H08主ヒューズの工程は未確定",
+        "assistance_ja": "C補助 H04※ / T-C",
+        "transfer_ja": "他の自由端の担当も残す",
+        "unresolved_ja": "部品境界・共締め積層・接続点・大小の組・未接続端の引継ぎ",
+        "scene_ids": [
+          "S12"
+        ],
+        "review_feature_ids": [
+          "P08",
+          "P09",
+          "P10",
+          "P11",
+          "P12",
+          "P13",
+          "P14",
+          "P15",
+          "P16",
+          "P17",
+          "P18",
+          "P22",
+          "L01",
+          "L02",
+          "L03",
+          "L04",
+          "L05",
+          "L06",
+          "L07",
+          "J01",
+          "J02",
+          "J03",
+          "J04",
+          "J05",
+          "J06",
+          "J07",
+          "J08",
+          "J09",
+          "J10",
+          "J11",
+          "J12",
+          "J13",
+          "J14",
+          "J15",
+          "J16",
+          "J17",
+          "J18",
+          "J19",
+          "J20",
+          "J21",
+          "J22",
+          "J23",
+          "W01",
+          "W02",
+          "W03",
+          "W04",
+          "W05",
+          "W06",
+          "W07",
+          "W08",
+          "W09",
+          "W10",
+          "W11",
+          "W12",
+          "W13",
+          "W14",
+          "WI11",
+          "WI12",
+          "WI21",
+          "WI22",
+          "WI41",
+          "WI42",
+          "WI51",
+          "WI52",
+          "W15",
+          "W16",
+          "W17",
+          "W18",
+          "W19"
+        ],
+        "feature_assignment_kind": "existing_review_candidates_not_selected_physical_operations"
+      },
+      "scenes_unmodified": [
+        {
+          "id": "S12",
+          "tasks": [
+            "D60"
+          ],
+          "place_ja": "内・C",
+          "title_ja": "バスバー・丸端子等を保持して締結",
+          "actors_ja": "H03 / 補助H04※ / T-C",
+          "hold_or_limit_ja": "導体と線を別に保持。主ヒューズは工程未確定",
+          "previous_video_navigation_ja": "55-62",
+          "new_duration_s": null,
+          "trajectory": null,
+          "sequence_kind": "explanatory_storyboard_not_factory_schedule",
+          "start_s": 85,
+          "stop_s": 93,
+          "source_clock": [
+            55,
+            62
+          ],
+          "screen_duration_s": 8
+        }
+      ],
+      "static_scene_ids": [],
+      "schematic_motion_scene_ids": [
+        "S12"
+      ],
+      "display_kind_ja": "模式動作",
+      "physical_completion_verdict": null
+    },
+    {
+      "job_unmodified": {
+        "id": "D61",
+        "operation": "O60",
+        "title_ja": "C LV・HVIL接続",
+        "location": "late_interface_unresolved",
+        "location_ja": "搭載後・位置要照合",
+        "group": "OPEN",
+        "primary_ja": "C主腕",
+        "hands_ja": "対象別に照合（元H05候補）。端末の内外位置は未確定",
+        "assistance_ja": "C補助※ / T-C※",
+        "transfer_ja": "個別の挿入・ロック後に引継ぐ",
+        "unresolved_ja": "実配線の両端・極・端子品番・挿入順・HVILの全経路",
+        "scene_ids": [
+          "S13"
+        ],
+        "review_feature_ids": [
+          "P14",
+          "P15",
+          "P16",
+          "P17",
+          "P18",
+          "I01",
+          "I02",
+          "I03",
+          "I04",
+          "I05",
+          "T31",
+          "T32",
+          "T33",
+          "T34",
+          "T41",
+          "T42",
+          "T43",
+          "T44",
+          "W01",
+          "W02",
+          "W03",
+          "W04",
+          "W05",
+          "W06",
+          "W07",
+          "W08",
+          "W09",
+          "W10",
+          "W11",
+          "W12",
+          "W13",
+          "W14",
+          "WI11",
+          "WI12",
+          "WI21",
+          "WI22",
+          "WI41",
+          "WI42",
+          "WI51",
+          "WI52",
+          "W15",
+          "W16",
+          "W17",
+          "W18",
+          "W19"
+        ],
+        "feature_assignment_kind": "existing_review_candidates_not_selected_physical_operations"
+      },
+      "scenes_unmodified": [
+        {
+          "id": "S13",
+          "tasks": [
+            "D61"
+          ],
+          "place_ja": "C・位置未定",
+          "title_ja": "残るLV/HVIL・不可視端末を別管理",
+          "actors_ja": "個別の対象・手先を照合",
+          "hold_or_limit_ja": "未追跡の端末を、接続済みとして描かない",
+          "previous_video_navigation_ja": "該当単独場面なし",
+          "new_duration_s": null,
+          "trajectory": null,
+          "sequence_kind": "explanatory_storyboard_not_factory_schedule",
+          "start_s": 93,
+          "stop_s": 97,
+          "source_clock": [
+            62,
+            62
+          ],
+          "screen_duration_s": 4
+        }
+      ],
+      "static_scene_ids": [
+        "S13"
+      ],
+      "schematic_motion_scene_ids": [],
+      "display_kind_ja": "静止説明のみ",
+      "physical_completion_verdict": null
+    },
+    {
+      "job_unmodified": {
+        "id": "D70",
+        "operation": "O70",
+        "title_ja": "蓋・シール",
+        "location": "top_closure",
+        "location_ja": "筐体上面",
+        "group": "OPEN",
+        "primary_ja": "C主腕を比較",
+        "hands_ja": "H07 カバー",
+        "assistance_ja": "T-C / 支持",
+        "transfer_ja": "検査との順・シール扱いは未定",
+        "unresolved_ja": "蓋・シール構成・保持面・工具点・検査との順序・所要時間",
+        "scene_ids": [
+          "S14"
+        ],
+        "review_feature_ids": [
+          "P01"
+        ],
+        "feature_assignment_kind": "existing_review_candidates_not_selected_physical_operations"
+      },
+      "scenes_unmodified": [
+        {
+          "id": "S14",
+          "tasks": [
+            "D70",
+            "D71"
+          ],
+          "place_ja": "後工程",
+          "title_ja": "シール・蓋・必要検査を示す",
+          "actors_ja": "H07カバー候補 / 検査設備",
+          "hold_or_limit_ja": "内部の残接続を省かない。検査との順序は未定",
+          "previous_video_navigation_ja": "62-69",
+          "new_duration_s": null,
+          "trajectory": null,
+          "sequence_kind": "explanatory_storyboard_not_factory_schedule",
+          "start_s": 97,
+          "stop_s": 103,
+          "source_clock": [
+            62,
+            69
+          ],
+          "screen_duration_s": 6
+        }
+      ],
+      "static_scene_ids": [
+        "S14"
+      ],
+      "schematic_motion_scene_ids": [],
+      "display_kind_ja": "静止説明のみ",
+      "physical_completion_verdict": null
+    },
+    {
+      "job_unmodified": {
+        "id": "D71",
+        "operation": "O70",
+        "title_ja": "検査・記録",
+        "location": "inspection",
+        "location_ja": "検査位置",
+        "group": "OPEN",
+        "primary_ja": "検査設備",
+        "hands_ja": "対象・接続方法未定",
+        "assistance_ja": "C主腕※",
+        "transfer_ja": "検査接続と支持を引継ぐ",
+        "unresolved_ja": "検査項目・条件・合否値・受入経路・支持と接続設備",
+        "scene_ids": [
+          "S14"
+        ],
+        "review_feature_ids": [],
+        "feature_assignment_kind": "existing_review_candidates_not_selected_physical_operations"
+      },
+      "scenes_unmodified": [
+        {
+          "id": "S14",
+          "tasks": [
+            "D70",
+            "D71"
+          ],
+          "place_ja": "後工程",
+          "title_ja": "シール・蓋・必要検査を示す",
+          "actors_ja": "H07カバー候補 / 検査設備",
+          "hold_or_limit_ja": "内部の残接続を省かない。検査との順序は未定",
+          "previous_video_navigation_ja": "62-69",
+          "new_duration_s": null,
+          "trajectory": null,
+          "sequence_kind": "explanatory_storyboard_not_factory_schedule",
+          "start_s": 97,
+          "stop_s": 103,
+          "source_clock": [
+            62,
+            69
+          ],
+          "screen_duration_s": 6
+        }
+      ],
+      "static_scene_ids": [
+        "S14"
+      ],
+      "schematic_motion_scene_ids": [],
+      "display_kind_ja": "静止説明のみ",
+      "physical_completion_verdict": null
+    },
+    {
+      "job_unmodified": {
+        "id": "D80",
+        "operation": "O80",
+        "title_ja": "完成品収納",
+        "location": "outside_output",
+        "location_ja": "共用20区画ストッカ",
+        "group": "LOGISTICS",
+        "primary_ja": "供給と同じXYZ",
+        "hands_ja": "H06 筐体",
+        "assistance_ja": "なし",
+        "transfer_ja": "元の20枠の空き位置へ返す",
+        "unresolved_ja": "完成品の重心・許容把持面・空筐体用爪との共用・元枠の支持と収納空間。",
+        "scene_ids": [
+          "S16"
+        ],
+        "review_feature_ids": [
+          "P01"
+        ],
+        "feature_assignment_kind": "existing_review_candidates_not_selected_physical_operations"
+      },
+      "scenes_unmodified": [
+        {
+          "id": "S16",
+          "tasks": [
+            "D80"
+          ],
+          "place_ja": "元の収納枠",
+          "title_ja": "同じXYZで元の空き枠へ完成品を戻す",
+          "actors_ja": "XYZ / H06筐体",
+          "hold_or_limit_ja": "XYZの保持確認後、パレット保持を解放",
+          "previous_video_navigation_ja": "74-82",
+          "new_duration_s": null,
+          "trajectory": null,
+          "sequence_kind": "explanatory_storyboard_not_factory_schedule",
+          "start_s": 108,
+          "stop_s": 116,
+          "source_clock": [
+            74,
+            82
+          ],
+          "screen_duration_s": 8
+        }
+      ],
+      "static_scene_ids": [],
+      "schematic_motion_scene_ids": [
+        "S16"
+      ],
+      "display_kind_ja": "模式動作",
+      "physical_completion_verdict": null
+    },
+    {
+      "job_unmodified": {
+        "id": "D81",
+        "operation": "O80",
+        "title_ja": "往復・回収・補給",
+        "location": "outside_logistics",
+        "location_ja": "搬送・供給位置",
+        "group": "LOGISTICS",
+        "primary_ja": "搬送・補給設備",
+        "hands_ja": "容器の手先は未定",
+        "assistance_ja": "必要な手扱いは別計上",
+        "transfer_ja": "完成品を載せ同じ段で戻す",
+        "unresolved_ja": "全体のパレット枚数・通行順、回収容器・補給単位・実施間隔・手扱いの設備境界。",
+        "scene_ids": [
+          "S02",
+          "S15"
+        ],
+        "review_feature_ids": [],
+        "feature_assignment_kind": "existing_review_candidates_not_selected_physical_operations"
+      },
+      "scenes_unmodified": [
+        {
+          "id": "S02",
+          "tasks": [
+            "D01",
+            "D81"
+          ],
+          "place_ja": "準備",
+          "title_ja": "線材・端末準備、部品・ボルト補給",
+          "actors_ja": "準備・補給設備",
+          "hold_or_limit_ja": "入荷済み範囲、空容器回収の仕事を残す",
+          "previous_video_navigation_ja": "該当単独場面なし",
+          "new_duration_s": null,
+          "trajectory": null,
+          "sequence_kind": "explanatory_storyboard_not_factory_schedule",
+          "start_s": 10,
+          "stop_s": 14,
+          "source_clock": [
+            11,
+            11
+          ],
+          "screen_duration_s": 4
+        },
+        {
+          "id": "S15",
+          "tasks": [
+            "D81"
+          ],
+          "place_ja": "同段復路",
+          "title_ja": "完成品を載せたパレットを供給側へ戻す",
+          "actors_ja": "1段コンベア",
+          "hold_or_limit_ja": "同じ高さ・経路を逆方向へ戻す",
+          "previous_video_navigation_ja": "69-74",
+          "new_duration_s": null,
+          "trajectory": null,
+          "sequence_kind": "explanatory_storyboard_not_factory_schedule",
+          "start_s": 103,
+          "stop_s": 108,
+          "source_clock": [
+            69,
+            74
+          ],
+          "screen_duration_s": 5
+        }
+      ],
+      "static_scene_ids": [
+        "S02"
+      ],
+      "schematic_motion_scene_ids": [
+        "S15"
+      ],
+      "display_kind_ja": "模式動作＋静止説明",
+      "physical_completion_verdict": null
+    }
+  ],
+  "static_only_jobs": [
+    "D01",
+    "D42",
+    "D61",
+    "D70",
+    "D71"
+  ],
+  "source_static_task_scenes": [
+    "S02",
+    "S09",
+    "S13",
+    "S14"
+  ],
+  "job_count": 20,
+  "process_scene_count": 16,
+  "total_scene_count": 18,
+  "schematic_motion_job_count": 15,
+  "physical_acceptance_verdict": null,
+  "new_video": false
+}

@@ -1,0 +1,53 @@
+{
+  "observed_at": "2026-09-23T21:11:20.988258+09:00",
+  "destination": "/home/rlrk/Downloads/HVJB_ライン全体レビュー_v05b_20260923",
+  "entry": "index_v05b_2.html",
+  "previous_files_preserved": 442,
+  "added_files": 10,
+  "files_total": 452,
+  "files": [
+    {
+      "path": "coverage_review/README.md",
+      "sha256": "e108d8026d067b25c87102bbeb9a80e185446f89775b1cc49d6502e36de1bcb0"
+    },
+    {
+      "path": "coverage_review/coverage.css",
+      "sha256": "211dd59b0f08766fc946359249828dbbb25fccce0c78f695675345e58b73aa2e"
+    },
+    {
+      "path": "coverage_review/coverage.js",
+      "sha256": "92042c1165a6a3e7cd161d11606d13032724f1180f5762bd8057b2ea84414061"
+    },
+    {
+      "path": "coverage_review/coverage.png",
+      "sha256": "d5baec8fa1659baef3e457f13f885357f07be865d15713f252b11bd708bb7162"
+    },
+    {
+      "path": "coverage_review/coverage_data.json",
+      "sha256": "5db3445e17b010dc60288c439215d7b87c671e61a86339ab0c764ac08e904f12"
+    },
+    {
+      "path": "coverage_review/coverage_manifest.json",
+      "sha256": "b6ec4365760f43e6773d2b71705c6f28592a8c2bc57ff80708125fc542a27781"
+    },
+    {
+      "path": "coverage_review/index.html",
+      "sha256": "e239644cbd70cf34ce289206dd9e74c49e95a36a7805702398c9758ade901946"
+    },
+    {
+      "path": "coverage_review/qa_receipt.json",
+      "sha256": "c285f0a5b2aa24dfc04f4d4285d5a563507d85ea7b69b708a08465a6e3609f3e"
+    },
+    {
+      "path": "coverage_review/visual_observations.json",
+      "sha256": "76d39119f598b1c574924772b3680cfddc9dc23c112984a208dd784669e2aa69"
+    },
+    {
+      "path": "index_v05b_2.html",
+      "sha256": "7285089d8b611aa7b46104e4005909ea4b50e8acb6d45d67feee79f1a4a51858"
+    }
+  ],
+  "mp4_count": 1,
+  "movie_sha256_unchanged": "65ed3f0f861370c55e3d09de5b6d5d17889aea14d1394de757aba7cf2360ba03",
+  "script_sha256": "6c32469cfeec424b2254ba71c19083fd20a3ff52e9bb978e710bb6c5aafd555f"
+}
