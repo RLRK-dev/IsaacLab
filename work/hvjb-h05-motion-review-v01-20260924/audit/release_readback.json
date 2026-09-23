@@ -1,0 +1,49 @@
+{
+  "observed_at": "2026-09-24T03:11:14.502502+09:00",
+  "source_identity_sha256": "230621d759fb1232ba12e2b06fcc9aaddcbb3992e000f340bde19d0556f4fe8d",
+  "manifest_sha256": "e4597517855df14432bdb91aae53c91799617db161a1faecfaa19c65182a77e1",
+  "script_sha256": "18d9176a0f50a2e13bb6615ece95d6f709ca650d332e83f2aa0c5ad67db56348",
+  "readback_pngs": 57,
+  "models": [
+    {
+      "feature": "P16",
+      "saved_poses": 28,
+      "mesh_count": 19,
+      "source_frame_first_last": [
+        805,
+        859
+      ],
+      "max_local_transform_readback_error": 3.3306690738754696e-16,
+      "header_transform_constant": true,
+      "pose_order_and_phases_match_source": true
+    },
+    {
+      "feature": "P17",
+      "saved_poses": 29,
+      "mesh_count": 19,
+      "source_frame_first_last": [
+        1305,
+        1361
+      ],
+      "max_local_transform_readback_error": 4.440892098500626e-16,
+      "header_transform_constant": true,
+      "pose_order_and_phases_match_source": true
+    }
+  ],
+  "contact_sheets": [
+    {
+      "file": "audit/contacts/P16.png",
+      "sha256": "79d2e47f75aaa4eb442557374be787842893c85e505362def32234a39b9a8947",
+      "images": 28
+    },
+    {
+      "file": "audit/contacts/P17.png",
+      "sha256": "067ac40170d1ffbf32b0706dd104d79fbf21e410e57160d4c1cc35a268e9cda9",
+      "images": 29
+    }
+  ],
+  "all_source_digests_unchanged": true,
+  "fixed_shared_camera_frames": true,
+  "scope": "Saved-transform consistency and PNG readback; not grasp, collision, fastener or hardware validation.",
+  "physical_acceptance_verdict": null
+}
