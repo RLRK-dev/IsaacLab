@@ -133,7 +133,7 @@ skip = '*.usd,*.usda,*.usdz,*.svg,*.png,_isaac_sim*,*.bib,*.css,*/_build'
 quiet-level = 0
 # the world list should always have words in lower case
 # TE Connectivity is a connector manufacturer referenced in model provenance.
-ignore-words-list = "haa,slq,collapsable,buss,reacher,thirdparty,te"
+ignore-words-list = "haa,slq,collapsable,buss,reacher,thirdparty,te,3st"
 
 
 [tool.pytest.ini_options]

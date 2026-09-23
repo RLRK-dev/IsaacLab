@@ -32,10 +32,16 @@ therefore not been observed in an actual browser in this session. JavaScript
 syntax and static references were checked separately. The PDF, PNGs and MP4 remain
 directly accessible without the page.
 
+The post-staging hook run found two final-newline normalizations and classified
+the manufacturing abbreviation `3ST` as an English ordinal typo. A local commit
+was mistakenly created before that hook result was handled; it was not pushed.
+The newline fixes were reviewed, and `3st` was added to the existing codespell
+word list. The completed tree was checked again before the corrective commit and
+push. Delivered document, video and page bytes were unaffected by this correction.
+
 ## Delivery
 
 `deliver_page.py` appends missing files to the already delivered v04 folder only
 after reading back every existing document file. It refuses changed existing
 paths. The original document manifest and files remain unchanged. The page has
 its own `review_manifest.json`, `page_qa_receipt.json` and append receipt.
-
