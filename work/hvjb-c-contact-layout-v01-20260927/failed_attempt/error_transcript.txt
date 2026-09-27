@@ -1,0 +1,9 @@
+Tool-reported exception from initial build_review.py, exit code 1:
+Traceback (most recent call last):
+  File "/home/rlrk/IsaacLab/work/hvjb-line-progress-20260927/work/hvjb-c-contact-layout-v01-20260927/build_review.py", line 116, in <module>
+    main()
+  File "/home/rlrk/IsaacLab/work/hvjb-line-progress-20260927/work/hvjb-c-contact-layout-v01-20260927/build_review.py", line 92, in main
+    copy(source, output / "sources" / source.name)
+  File "/home/rlrk/IsaacLab/work/hvjb-line-progress-20260927/work/hvjb-c-contact-layout-v01-20260927/build_review.py", line 37, in copy
+    assert not target.exists(), target
+AssertionError: /home/rlrk/IsaacLab/work/hvjb-line-progress-20260927/work/hvjb-c-contact-layout-v01-20260927/delivery/sources/hvjb_receiving_interfaces_v01.json

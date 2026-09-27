@@ -1,0 +1,111 @@
+{
+  "delivered_at": "2026-09-28T00:24:41.652669+09:00",
+  "entry": "/home/rlrk/Downloads/HVJB_C工程_受け台と搬送爪_v01_20260927/index.html",
+  "files": [
+    {
+      "path": "01_C工程_接触域の比較.png",
+      "sha256": "bcb6030a1dc741e3216e464f2a0dc03e1a3c2a2c15e0d330a455615aaa2c4778",
+      "bytes": 95125
+    },
+    {
+      "path": "02_C工程_開放空間の比較.png",
+      "sha256": "775755aec3e8a6eb299a5b1a8dd15d073c05f448d3f7ddd3d0b36786aafd34c6",
+      "bytes": 101867
+    },
+    {
+      "path": "README.md",
+      "sha256": "6f6d0ed3a2393ff9a7839396636696f7f278d6a42e51eacfe284dbafd16381ec",
+      "bytes": 2637
+    },
+    {
+      "path": "RETRY_DELTA.md",
+      "sha256": "41aa72985d171e9c05a3854c5fc59158746aecf6db5f4a514caff4e744c35712",
+      "bytes": 845
+    },
+    {
+      "path": "SCOPE.md",
+      "sha256": "75a788dca04c245efeddf900b6fc6900a313f8d636e6d51639eb43002b9b1ca1",
+      "bytes": 2882
+    },
+    {
+      "path": "VISUAL_DELTA.md",
+      "sha256": "be3e68a84209803d7b1073e5f176381184ce56c51628e5762b15dd9438cb893d",
+      "bytes": 563
+    },
+    {
+      "path": "audit/browser_receipt.json",
+      "sha256": "e1bed92b521155ede2f41a4ae3a8fa0bca38dca2ab6f1fc14cd51e842c437838",
+      "bytes": 67029
+    },
+    {
+      "path": "audit/inputs.json",
+      "sha256": "be38996e76f55d9cf2993f719b4c8d4a3fa0c1d23b9b533221949144568c793d",
+      "bytes": 3131
+    },
+    {
+      "path": "evidence/assembly_024s.png",
+      "sha256": "ae36aa75719958753f4436dfbae171b1c5e969f7d931fab39e227122585bcddc",
+      "bytes": 2360078
+    },
+    {
+      "path": "evidence/assembly_146s.png",
+      "sha256": "fbe7b04dfc8a6881648df420afa5a48c8300d21cb0f9f0756edb83f500077d20",
+      "bytes": 1669340
+    },
+    {
+      "path": "index.html",
+      "sha256": "1770c24b1fdc7b4042c1fbd1526429d13f05c34ef93f766fab21064e6c20ff8c",
+      "bytes": 13887
+    },
+    {
+      "path": "scripts/build_review.py",
+      "sha256": "721187f981d5804998ea46988adcdf78885605ebee827773494caa1f0210529e",
+      "bytes": 5298
+    },
+    {
+      "path": "scripts/c-contact-layout.html",
+      "sha256": "6bc8bcecc5711cf32ec5f1cc865b4b935bbb39ba27200e14db5563aa4cbda9dd",
+      "bytes": 7357
+    },
+    {
+      "path": "scripts/deliver_review.py",
+      "sha256": "17508afbbc65f186c7def21629367cf470434c01ed8df9d6de46e44f5a857833",
+      "bytes": 2355
+    },
+    {
+      "path": "scripts/qa_review.mjs",
+      "sha256": "0c8ec0ab9bc67445f5af5fcdd57a606ae294564c48172326dc07b8583a6e6805",
+      "bytes": 3677
+    },
+    {
+      "path": "scripts/review_template.html",
+      "sha256": "1d595aea53446c64fde31e72d7d8263c07fee9cd108850ac6695ff748eeff0d0",
+      "bytes": 6542
+    },
+    {
+      "path": "sources/audit/hvjb_receiving_interfaces_v01.json",
+      "sha256": "068fea745257b67556b776eb90347ed8423d2b0e49cdb83bf23215fd5b6f63af",
+      "bytes": 5807
+    },
+    {
+      "path": "sources/data/hvjb_receiving_interfaces_v01.json",
+      "sha256": "7c92c0bead1e7cc4b2836bf98e7d3652d23a08cd97bb7fa54a17b013a67d6d73",
+      "bytes": 33749
+    },
+    {
+      "path": "sources/hvjb-c-handoff-v05e-20260927/README.md",
+      "sha256": "2b07c4b887687f269e768d557480f7ca266070064c14422f3317e5944003d9a0",
+      "bytes": 3959
+    },
+    {
+      "path": "sources/hvjb-hand-coverage-v01-20260923/sources/unit_support_sequence.json",
+      "sha256": "52141627e00da0be47699ec1a5f3d8acf744519090b724dc05b06ca137fe848b",
+      "bytes": 2307
+    }
+  ],
+  "new_mp4_count": 0,
+  "existing_video": "/home/rlrk/Downloads/HVJB_C工程受渡しレビュー_v05e_20260927/HVJB_line_split_process_concept_v05e_review.mp4",
+  "existing_video_sha256": "ce31690d14cd14f930aafcae929288eeb6d3e78e8780783b3bb6e10b35001de0",
+  "existing_v05e_files_unchanged": 51,
+  "physical_acceptance_verdict": null
+}

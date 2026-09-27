@@ -1,0 +1,46 @@
+<!doctype html>
+<!-- Copyright (c) 2022-2026, The Isaac Lab Project Developers (https://github.com/isaac-sim/IsaacLab/blob/main/CONTRIBUTORS.md).
+All rights reserved. SPDX-License-Identifier: BSD-3-Clause -->
+<html lang="ja">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>HVJB｜C工程の受け台と搬送爪</title>
+<style>
+:root{font:16px/1.7 "Noto Sans CJK JP",sans-serif;color:#193249;background:#f0f4f7;--font-size-base:16px;--background:#fff;--foreground:#193249;--muted:#e8edf0;--muted-foreground:#627683;--secondary:#d5dee3;--viz-series-1:#187a9b;--viz-series-2:#b47817;--border:#c8d5dd;--primary:#193249;--primary-foreground:#fff}
+*{box-sizing:border-box}body{margin:0}main{max-width:1160px;margin:auto;padding:30px 24px 50px}h1{font-size:28px;margin:0 0 8px}h2{font-size:22px;margin:0 0 12px}h3{font-size:18px;font-weight:500;margin:14px 0 3px}p{margin:9px 0}section{background:#fff;padding:24px;margin:22px 0;border-radius:10px}a{color:#126483}a:focus-visible,button:focus-visible{outline:3px solid #d09b20;outline-offset:3px}.small,.text-small{font-size:13px;line-height:1.6}.muted{color:#536a78}.viz-controls,.viz-row{display:flex;align-items:center;flex-wrap:wrap;gap:10px;margin:10px 0}.btn{font:inherit;border:1px solid #afc2ce;background:#fff;color:#193249;border-radius:6px;padding:9px 12px;cursor:pointer}.btn[aria-pressed=true]{background:#193249;color:#fff;border-color:#193249}hr{border:0;border-top:1px solid #d9e2e8;margin:18px 0}.evidence{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px}.evidence img{display:block;width:100%;height:auto}figure{margin:0}figcaption{font-size:14px;margin-top:8px}.scroll{overflow-x:auto}table{width:100%;border-collapse:collapse;font-size:14px}th,td{text-align:left;padding:13px 12px;vertical-align:top;border-bottom:1px solid #d9e2e8}th{background:#eef3f5}.tag{display:inline-block;color:#7c5216;background:#fff0d4;padding:3px 10px;border-radius:5px;margin-bottom:12px}.links{display:flex;gap:12px 25px;flex-wrap:wrap;margin-top:18px}li{margin:7px 0}
+@media(max-width:640px){main{padding:20px 12px}section{padding:18px 12px}.evidence{grid-template-columns:1fr}h1{font-size:23px}th,td{padding:10px 7px}.scroll{font-size:13px}}
+</style>
+<main>
+<header><span class="tag">接触域の比較 v01 · 2026-09-27</span><h1>C工程：受け台と搬送爪を干渉させない配置を考える</h1>
+<p>受け台が支える場所と、指が入る場所を分けて比較します。採用形状を決める前の模式図です。</p>
+<nav class="links"><a href="01_C工程_接触域の比較.png">比較画像</a><a href="02_C工程_開放空間の比較.png">開放空間の画像</a><a href="../HVJB_C工程受渡しレビュー_v05e_20260927/index.html">既存の工程動画 v05e</a></nav></header>
+<section id="figure-pack"><h2>2案を同じ受渡し場面で見る</h2>
+<p class="small muted">中央の板はユニットの記号です。実物の下板輪郭・爪位置・支持面積を表していません。</p>
+__FRAGMENT__
+</section>
+<section><h2>比較する違い</h2>
+<div class="scroll"><table><thead><tr><th>案</th><th>保持の考え方</th><th>具体化に必要な確認</th></tr></thead><tbody>
+<tr><th>側面輪郭＋下受け</th><td>側縁を位置決めし、板の下側にも荷重を受ける面を設ける候補。</td><td>板裏へ接触できるか。F-C・筐体内の受けを避けられるか。着座後に下受けを横へ抜けるか。</td></tr>
+<tr><th>側面輪郭のみ</th><td>側縁と端当てで位置を決め、板下へ出る爪を減らす候補。</td><td>実際の縁形状、接触面積・板の変形、摩擦・保持力。側壁との隙間と上方退避経路。</td></tr>
+</tbody></table></div>
+<p>対向する2爪の前後に計4か所の輪郭受けを置く考え方は既存H06系の比較方針です。
+今回の中央受け域と下受け形状は配置を考えるための追加図で、接触位置・爪寸法・支持数は採用していません。</p>
+<p class="small muted">H06筐体用とH06ユニット用は別用途。H07から搬送手先への切替方式、板同士の固定部、自由端ごとの保持担当も具体化が残ります。図の隙間を干渉なし・把持成立の根拠にはしません。</p>
+</section>
+<section><h2>実物映像で見えている範囲</h2>
+<div class="evidence">
+<figure><img src="evidence/assembly_024s.png" alt="Ampere公式映像24秒、筐体外の下板と別置きのヒューズ板"><figcaption><b>24秒：下板の縁が一部見える</b><br>全輪郭、厚さ、裏面、把持を許容する面は確認できません。</figcaption></figure>
+<figure><img src="evidence/assembly_146s.png" alt="Ampere公式映像146秒、下板側とヒューズ板側を一緒に筐体へ運ぶ場面"><figcaption><b>146秒：両ユニットを一緒に運ぶ</b><br>手に隠れた接触位置や板間の固定具は、この画面から確定できません。</figcaption></figure>
+</div>
+<p class="small">出典：<a href="https://www.youtube.com/watch?v=Sm_D-vmNYqc">Ampere EV公式組立映像（2025年）</a>の保存フレーム。画像は無変更です。2022年の製品写真モデルとの同一製造版対応は未確認です。</p>
+<p>現在の製品モデルには独立した可搬下板がありません。筐体P01の底面を切り出して代用せず、下板の把持面と筐体内の受けが分かってから実形状へ対応させます。</p>
+</section>
+<section><h2>今回の反映範囲</h2>
+<p>追加したのは、この接触域・開放空間の比較図です。既存v05eの動画とアーム動作、v06原本は変更していません。新しい動画は生成していません。</p>
+<p>公表された形状例として、<a href="https://schunk.com/us/en/gripping-systems/accessories/fgr/c/PGR_6393">SCHUNK FGRのワーク側形状の個別設計</a>と
+<a href="https://schunk.com/us/en/konfigurator-fgr/cc/product/000000000001327643">公式コンフィギュレータの段付き把持面</a>を参照しました。これらの製品採用・荷重値・ストローク値を決めたものではありません。</p>
+<p class="small muted">表示・根拠資料の照合まで。把持力、締結品質、実機成立の正式判定は独立レビュー経路に残します。</p>
+<nav class="links"><a href="README.md">作成記録</a><a href="audit/inputs.json">入力と保存値の記録</a></nav>
+</section>
+</main>
+</html>

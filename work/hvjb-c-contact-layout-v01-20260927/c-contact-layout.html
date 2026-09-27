@@ -1,0 +1,113 @@
+<!-- Copyright (c) 2022-2026, The Isaac Lab Project Developers (https://github.com/isaac-sim/IsaacLab/blob/main/CONTRIBUTORS.md).
+All rights reserved. SPDX-License-Identifier: BSD-3-Clause -->
+<div id="hvjb-c-contact-layout">
+  <div class="viz-controls" role="group" aria-label="受渡しの場面">
+    <button type="button" class="btn" data-stage="0" aria-pressed="false">1 受け上</button>
+    <button type="button" class="btn" data-stage="1" aria-pressed="true">2 搬送把持</button>
+    <button type="button" class="btn" data-stage="2" aria-pressed="false">3 搬送</button>
+    <button type="button" class="btn" data-stage="3" aria-pressed="false">4 着座</button>
+    <button type="button" class="btn" data-stage="4" aria-pressed="false">5 開放の検討</button>
+  </div>
+  <div class="viz-row text-small"><span>比較模式図・実寸ではない</span><span>対向2爪／前後4接触域を比較</span></div>
+  <div class="contact-views">
+    <div><h3>側面輪郭＋下受け</h3><div data-view="ledge"></div></div>
+    <div><h3>側面輪郭のみ</h3><div data-view="side"></div></div>
+  </div>
+  <div class="text-small" aria-live="polite" data-detail></div>
+  <hr>
+  <div data-plan></div>
+  <div class="viz-row text-small"><span>実際の輪郭・支持面・指の開放域は未確定</span></div>
+</div>
+<style>
+#hvjb-c-contact-layout .contact-views{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
+#hvjb-c-contact-layout svg{display:block;width:100%;overflow:visible}
+#hvjb-c-contact-layout .contact-svg text{fill:var(--foreground)}
+#hvjb-c-contact-layout .contact-svg .part{fill:var(--muted);stroke:var(--foreground);stroke-width:1.2}
+#hvjb-c-contact-layout .contact-svg .support{fill:var(--secondary);stroke:var(--muted-foreground);stroke-width:1.2}
+#hvjb-c-contact-layout .contact-svg .finger{fill:var(--viz-series-1);fill-opacity:.22;stroke:var(--viz-series-1);stroke-width:2}
+#hvjb-c-contact-layout .contact-svg .uncertain{fill:var(--viz-series-2);fill-opacity:.15;stroke:var(--viz-series-2);stroke-dasharray:4 4}
+#hvjb-c-contact-layout .contact-svg .line{fill:none;stroke:var(--foreground);stroke-width:1.3}
+#hvjb-c-contact-layout .contact-svg .guide{fill:none;stroke:var(--muted-foreground);stroke-width:1;stroke-dasharray:4 4}
+#hvjb-c-contact-layout .contact-svg .ghost{fill:none;stroke:var(--viz-series-1);stroke-width:1.5;stroke-dasharray:4 4}
+@media(max-width:560px){#hvjb-c-contact-layout .contact-views{grid-template-columns:1fr}}
+</style>
+<script>
+(() => {
+  const root = document.getElementById('hvjb-c-contact-layout');
+  const details = [
+    'F-Cに支持を残し、H07から搬送手先へ切替。切替方式は未定。',
+    '爪の接近域とF-Cの支持域を分ける。実際の接触位置は未採用。',
+    '本体は搬送手先、自由端は別担当。板間固定の荷重受容は未確認。',
+    '筐体内の受けへ支持を移す場面。受けの実位置・高さは未確定。',
+    '破線は開放先の検討域。側方の隙間と板下の抜け道を確認する。'
+  ];
+  let stage = 1;
+  const rect = (x,y,w,h,c) => `<rect x="${x}" y="${y}" width="${w}" height="${h}" class="${c}"/>`;
+  const txt = (x,y,s,anchor='middle') => `<text x="${x}" y="${y}" text-anchor="${anchor}" class="text-small">${s}</text>`;
+  const line = (d,c='line') => `<path d="${d}" class="${c}"/>`;
+  const svg = (w,h,label,body) => `<svg class="contact-svg" viewBox="0 0 ${w} ${h}" role="img" aria-label="${label}" xmlns="http://www.w3.org/2000/svg">${body}</svg>`;
+  function sideView(kind, width) {
+    const w = Math.max(270, Math.round(width)), mid=w/2, left=w*.25, right=w*.75;
+    const bottom=stage===2?210:246, top=bottom-18, receiver=stage>=3;
+    let body=txt(mid,28,stage===0?'本体はF-Cの受け上':stage===2?'搬送中の支持担当':receiver?'筐体内の断面記号':'把持域と支持域の分担');
+    if(receiver){
+      body+=rect(17,138,15,186,'support')+rect(w-32,138,15,186,'support')+rect(17,314,w-34,10,'support');
+      body+=rect(33,174,left-33,100,'uncertain')+rect(right,174,w-33-right,100,'uncertain');
+      body+=txt(mid,348,'側壁との隙間・受け高さは未確定');
+    }
+    if(stage!==2){
+      body+=rect(mid-32,bottom,64,receiver?68:56,'support');
+      body+=txt(mid,288,receiver?'筐体内の受け':'F-Cの受け');
+    }else{
+      body+=txt(mid,291,kind==='ledge'?'下受けへ荷重を渡す比較':'鉛直保持は摩擦等の検証が必要');
+    }
+    body+=rect(left,top,right-left,18,'part');
+    body+=rect(mid-23,top-90,46,88,'part');
+    body+=line(`M${left+6} ${top-6}H${right-6}`,'guide');
+    body+=txt(mid,top-108,'ユニット記号');
+    const jaw=(x,mirror,offset=0,c='finger')=>{
+      const outer=x+mirror*(18+offset),inner=x+mirror*offset;
+      const lip=kind==='ledge'?`H${x-mirror*16+mirror*offset}V${bottom+10}H${outer}`:`H${outer}`;
+      return line(`M${outer} ${top-52}H${inner}V${bottom}${lip}Z`,c);
+    };
+    if(stage===0){
+      body+=jaw(left,-1,25,'ghost')+jaw(right,1,25,'ghost');
+      body+=txt(mid,322,'破線：搬送爪の接近域を比較');
+    }else{
+      body+=jaw(left,-1)+jaw(right,1);
+      if(stage===4){
+        body+=jaw(left,-1,25,'ghost')+jaw(right,1,25,'ghost');
+        body+=line(`M${left-8} ${top-31}h-26m6-5l-6 5 6 5`);
+        body+=line(`M${right+8} ${top-31}h26m-6-5l6 5-6 5`);
+        body+=txt(mid,379,kind==='ledge'?'下受けを抜ける板下空間も必要':'横へ開いた後の上方退避も確認');
+      }
+    }
+    if(!receiver&&stage!==0) body+=txt(mid,344,kind==='ledge'?'板縁・裏面を受けられることが前提':'側面形状と端当てで姿勢を決める比較');
+    body+=txt(mid,410,'上押さえ・追加の腕は描かない');
+    return svg(w,428,`${kind==='ledge'?'側面輪郭と下受け':'側面輪郭のみ'}、${details[stage]}`,body);
+  }
+  function planView(width){
+    const w=Math.max(270,Math.round(width)),m=w/2,span=Math.min(w-100,420),l=m-span/2,r=m+span/2;
+    let body=txt(m,24,'上から見た接触域の配置候補');
+    body+=rect(l,63,span,138,'part');
+    body+=rect(m-span*.17,82,span*.34,100,'support');
+    body+=txt(m,123,'F-Cの');body+=txt(m,144,'支持域候補');
+    for(const y of [79,164]){
+      body+=rect(l-9,y,18,22,'finger')+rect(r-9,y,18,22,'finger');
+    }
+    body+=line(`M${l-20} 75V190M${r+20} 75V190`);
+    body+=txt(m,231,'左右2爪 × 前後2か所の輪郭受け');
+    body+=txt(m,253,'輪郭・接触位置・支持面積は未採用');
+    return svg(w,278,'中央の支持域候補と左右4か所の爪接触域候補を分離した模式平面図',body);
+  }
+  function render(){
+    for(const element of root.querySelectorAll('[data-view]')) element.innerHTML=sideView(element.dataset.view,element.clientWidth);
+    const plan=root.querySelector('[data-plan]');plan.innerHTML=planView(plan.clientWidth);
+    root.querySelector('[data-detail]').textContent=details[stage];
+    for(const button of root.querySelectorAll('[data-stage]')) button.setAttribute('aria-pressed',String(Number(button.dataset.stage)===stage));
+    root.dataset.stage=stage;
+  }
+  for(const button of root.querySelectorAll('[data-stage]')) button.addEventListener('click',()=>{stage=Number(button.dataset.stage);render();});
+  new ResizeObserver(render).observe(root);render();
+})();
+</script>

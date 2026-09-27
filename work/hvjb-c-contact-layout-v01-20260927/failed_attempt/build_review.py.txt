@@ -1,0 +1,116 @@
+# Copyright (c) 2022-2026, The Isaac Lab Project Developers (https://github.com/isaac-sim/IsaacLab/blob/main/CONTRIBUTORS.md).
+# All rights reserved.
+#
+# SPDX-License-Identifier: BSD-3-Clause
+"""Package a contact-layout comparison without changing any product or motion bank."""
+
+from __future__ import annotations
+
+import hashlib
+import json
+import shutil
+from datetime import datetime
+from pathlib import Path
+from zoneinfo import ZoneInfo
+
+ROOT = Path(__file__).resolve().parent
+OP040 = Path("/home/rlrk/IsaacLab-op040/eval_runs/ur15_jb_harness_revision_20260907")
+DESTINATION = Path("/home/rlrk/Downloads/HVJB_C工程_受け台と搬送爪_v01_20260927")
+PINNED_FRAMES = {
+    "assembly_024s.png": "ae36aa75719958753f4436dfbae171b1c5e969f7d931fab39e227122585bcddc",
+    "assembly_146s.png": "fbe7b04dfc8a6881648df420afa5a48c8300d21cb0f9f0756edb83f500077d20",
+}
+
+
+def digest(path: Path) -> str:
+    with path.open("rb") as stream:
+        return hashlib.file_digest(stream, "sha256").hexdigest()
+
+
+def write(path: Path, value: dict) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    with path.open("x") as stream:
+        stream.write(json.dumps(value, ensure_ascii=False, indent=2) + "\n")
+
+
+def copy(source: Path, target: Path) -> None:
+    assert not target.exists(), target
+    target.parent.mkdir(parents=True, exist_ok=True)
+    shutil.copy2(source, target)
+    assert digest(source) == digest(target)
+
+
+def main() -> None:
+    output = ROOT / "delivery"
+    assert not output.exists(), output
+    old_receipt = json.loads((ROOT.parent / "hvjb-c-handoff-v05e-20260927/audit/delivery_receipt.json").read_text())
+    old_root = Path(old_receipt["entry"]).parent
+    for row in old_receipt["files"]:
+        assert digest(old_root / row["path"]) == row["sha256"], row["path"]
+    report = {
+        "observed_at": datetime.now(ZoneInfo("Asia/Tokyo")).isoformat(),
+        "prior_art": {"keywords": ["HVJB", "F-C", "ユニット搬送把持"], "exit_code": 0, "blockers": 0},
+        "source_frames": [],
+        "source_files": [],
+        "comparison_only": ["side_contour", "side_contour_with_lower_support", "receiver_and_finger_contact_zones"],
+        "adopted_new_hardware": False,
+        "real_dimensions": None,
+        "selected_contact_surfaces": None,
+        "new_video_count": 0,
+        "motion_bank_modified": False,
+        "prior_v05e_files_checked": len(old_receipt["files"]),
+        "prior_v05e_video_sha256": old_receipt["video_sha256"],
+        "formal_physical_validity_verdict": None,
+        "public_references": [
+            {
+                "url": "https://www.youtube.com/watch?v=Sm_D-vmNYqc",
+                "basis": "Local original frames verified against the existing receiving-interface audit",
+            },
+            {
+                "url": "https://schunk.com/us/en/gripping-systems/accessories/fgr/c/PGR_6393",
+                "basis": "Official page read on 2026-09-27: custom workpiece-side finger shape",
+            },
+            {
+                "url": "https://schunk.com/us/en/konfigurator-fgr/cc/product/000000000001327643",
+                "basis": "Official indexed result read on 2026-09-27: inward stepped gripping surface",
+                "open_result": "Web open returned cache miss; no CAD or operating specification fetched",
+            },
+        ],
+    }
+    for name, expected in PINNED_FRAMES.items():
+        source = OP040 / "references/hvjb_plate_sequence_20260916" / name
+        assert digest(source) == expected, source
+        copy(source, output / "evidence" / name)
+        report["source_frames"].append({"source": str(source), "sha256": expected, "pixel_transform": "none"})
+    sources = [
+        OP040 / "data/hvjb_receiving_interfaces_v01.json",
+        OP040 / "audit/hvjb_receiving_interfaces_v01.json",
+        ROOT.parent / "hvjb-hand-coverage-v01-20260923/sources/unit_support_sequence.json",
+        ROOT.parent / "hvjb-c-handoff-v05e-20260927/README.md",
+    ]
+    for source in sources:
+        copy(source, output / "sources" / source.name)
+        report["source_files"].append({"path": str(source), "sha256": digest(source)})
+    for name in ("README.md", "SCOPE.md"):
+        copy(ROOT / name, output / name)
+    for name in (
+        "c-contact-layout.html",
+        "review_template.html",
+        "build_review.py",
+        "qa_review.mjs",
+        "deliver_review.py",
+    ):
+        copy(ROOT / name, output / "scripts" / name)
+    fragment = (ROOT / "c-contact-layout.html").read_text()
+    assert '\\"' not in fragment and "\\n" not in fragment
+    template = (ROOT / "review_template.html").read_text()
+    assert template.count("__FRAGMENT__") == 1
+    (output / "index.html").write_text(template.replace("__FRAGMENT__", fragment))
+    write(ROOT / "audit/inputs.json", report)
+    copy(ROOT / "audit/inputs.json", output / "audit/inputs.json")
+    copy(Path("/tmp/hvjb-unit-contact-prior-art-20260927.log"), ROOT / "audit/prior_art.txt")
+    print(f"C_CONTACT_PACKAGED frames=2 old_files_checked={len(old_receipt['files'])} new_mp4=0", flush=True)
+
+
+if __name__ == "__main__":
+    main()

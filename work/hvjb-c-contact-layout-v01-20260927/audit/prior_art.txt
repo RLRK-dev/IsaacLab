@@ -1,0 +1,3 @@
+keywords=['HVJB', 'F-C', 'ユニット搬送把持']
+findings=0 blockers=0 lessons=0
+PASS: no related prior-art hits found in configured roots.
