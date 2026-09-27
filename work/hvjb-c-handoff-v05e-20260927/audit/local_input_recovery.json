@@ -1,0 +1,75 @@
+{
+  "exact_input_copies": [
+    {
+      "source": "/home/rlrk/IsaacLab/work/hvjb-line-progress-20260927/work/hvjb-h06-motion-review-v01-20260924/source_identity.json",
+      "copy": "/home/rlrk/IsaacLab/work/hvjb-line-progress-20260927/work/hvjb-c-handoff-v05e-20260927/inputs/H06/source_identity.json",
+      "sha256": "574ae93e7d5cc44c6b5a7864c5848eedd9274d72cb0ab4fa60567c871f233ddf"
+    },
+    {
+      "source": "/home/rlrk/IsaacLab/work/hvjb-pallet-location-v01-20260920/output/models/H06_FC02_handoff_populated_comparison.glb",
+      "copy": "/home/rlrk/IsaacLab/work/hvjb-line-progress-20260927/work/hvjb-c-handoff-v05e-20260927/inputs/H06/sources/H06_FC02_handoff_populated_comparison.glb",
+      "sha256": "c2c76dbd4fe6d408e0b9cbe9d3025619cde72457a98f6aa3b89367b707f1ad52"
+    },
+    {
+      "source": "/home/rlrk/IsaacLab/work/hvjb-line-progress-20260927/work/hvjb-h06-motion-review-v01-20260924/sources/handoff_sequence_observations.json",
+      "copy": "/home/rlrk/IsaacLab/work/hvjb-line-progress-20260927/work/hvjb-c-handoff-v05e-20260927/inputs/H06/sources/handoff_sequence_observations.json",
+      "sha256": "8b78ecc507c109ae2f0b4490887071781d7382bd2105569a7ef64a325b58b6e3"
+    },
+    {
+      "source": "/home/rlrk/IsaacLab/work/hvjb-line-progress-20260927/work/hvjb-h06-motion-review-v01-20260924/sources/pallet_location_observations.json",
+      "copy": "/home/rlrk/IsaacLab/work/hvjb-line-progress-20260927/work/hvjb-c-handoff-v05e-20260927/inputs/H06/sources/pallet_location_observations.json",
+      "sha256": "3e1c06676079bf863cda76baa515201eb474efb0c1effc4f9d69c22abf1c2d93"
+    },
+    {
+      "source": "/home/rlrk/IsaacLab/work/hvjb-line-progress-20260927/work/hvjb-h06-motion-review-v01-20260924/sources/README.md",
+      "copy": "/home/rlrk/IsaacLab/work/hvjb-line-progress-20260927/work/hvjb-c-handoff-v05e-20260927/inputs/H06/sources/README.md",
+      "sha256": "5c1e96ef91d6c44f7ac7e5106da8aef4e1b8428c5ad00710e9e8384f09d6554f"
+    },
+    {
+      "source": "/home/rlrk/IsaacLab/work/hvjb-line-progress-20260927/work/hvjb-h05-motion-review-v01-20260924/data/release_identity.json",
+      "copy": "/home/rlrk/IsaacLab/work/hvjb-line-progress-20260927/work/hvjb-c-handoff-v05e-20260927/inputs/H05/data/release_identity.json",
+      "sha256": "230621d759fb1232ba12e2b06fcc9aaddcbb3992e000f340bde19d0556f4fe8d"
+    },
+    {
+      "source": "/home/rlrk/IsaacLab-op040/eval_runs/ur15_jb_harness_revision_20260907/data/header_review_v03/motion.npz",
+      "copy": "/home/rlrk/IsaacLab/work/hvjb-line-progress-20260927/work/hvjb-c-handoff-v05e-20260927/inputs/H05/sources/motion.npz",
+      "sha256": "b84b0f77a20cf2dd61c512514f4183c70bd3486e44b5c47dbcc8146b1be1b1e9"
+    },
+    {
+      "source": "/home/rlrk/IsaacLab/work/hvjb-line-progress-20260927/work/hvjb-h05-motion-review-v01-20260924/sources/hvjb_header_release_v01.json",
+      "copy": "/home/rlrk/IsaacLab/work/hvjb-line-progress-20260927/work/hvjb-c-handoff-v05e-20260927/inputs/H05/sources/hvjb_header_release_v01.json",
+      "sha256": "02963ae778e91d3aaf45e2b603395672b09fc756388a6dcabfaf72b85790ba14"
+    },
+    {
+      "source": "/home/rlrk/IsaacLab/work/hvjb-line-progress-20260927/work/hvjb-h05-motion-review-v01-20260924/sources/contour_observations.json",
+      "copy": "/home/rlrk/IsaacLab/work/hvjb-line-progress-20260927/work/hvjb-c-handoff-v05e-20260927/inputs/H05/sources/contour_observations.json",
+      "sha256": "736d72b9c7ca7576c1c9b07f0a0677be68f29cc39e3bc5b21d62633da69c12d7"
+    },
+    {
+      "source": "/home/rlrk/IsaacLab/work/hvjb-line-progress-20260927/work/hvjb-h05-motion-review-v01-20260924/sources/README.md",
+      "copy": "/home/rlrk/IsaacLab/work/hvjb-line-progress-20260927/work/hvjb-c-handoff-v05e-20260927/inputs/H05/sources/README.md",
+      "sha256": "5016bf5987370e7138592b3964f8511b2cdb1cd49aa0d33d602e23c6b354f38b"
+    },
+    {
+      "source": "/home/rlrk/IsaacLab/work/hvjb-contour-grasp-v01-20260920/output/models/P16_contour_comparison.glb",
+      "copy": "/home/rlrk/IsaacLab/work/hvjb-line-progress-20260927/work/hvjb-c-handoff-v05e-20260927/inputs/H05/sources/P16_contour_comparison.glb",
+      "sha256": "577451c02afe65d62ffcd13edd37f7158ac6a8e930c95c5ed1d4607a695719a3"
+    },
+    {
+      "source": "/home/rlrk/IsaacLab/work/hvjb-contour-grasp-v01-20260920/output/models/P17_contour_comparison.glb",
+      "copy": "/home/rlrk/IsaacLab/work/hvjb-line-progress-20260927/work/hvjb-c-handoff-v05e-20260927/inputs/H05/sources/P17_contour_comparison.glb",
+      "sha256": "8c63b5b3e85d18c7e935849b145caecd30c39886dcf5d72fa337495280a1e0bf"
+    },
+    {
+      "source": "/home/rlrk/IsaacLab/work/hvjb-line-progress-20260927/work/hvjb-h05-motion-review-v01-20260924/data/P16_saved_release.npz",
+      "copy": "/home/rlrk/IsaacLab/work/hvjb-line-progress-20260927/work/hvjb-c-handoff-v05e-20260927/inputs/H05/data/P16_saved_release.npz",
+      "sha256": "3cdd46967e3410c2a66a3346feb665feb7847aa4bd71be32b61c1f4bd47483a8"
+    },
+    {
+      "source": "/home/rlrk/IsaacLab/work/hvjb-line-progress-20260927/work/hvjb-h05-motion-review-v01-20260924/data/P17_saved_release.npz",
+      "copy": "/home/rlrk/IsaacLab/work/hvjb-line-progress-20260927/work/hvjb-c-handoff-v05e-20260927/inputs/H05/data/P17_saved_release.npz",
+      "sha256": "8ee0196965b81a3f8856f8736370ec8be76d8a9db2091eecc8d0d9210bec048c"
+    }
+  ],
+  "physical_acceptance_verdict": null
+}

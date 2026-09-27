@@ -1,0 +1,2 @@
+[INFO] Using python from: /home/rlrk/src/ur15-line-render/venv/bin/python
+C_REGRIP_DISPLAY_COMPLETE changed_samples=69 sha256=c15581e024c014fae93e85788ac9218e427804c2c27064464fca30c14f8e37a6

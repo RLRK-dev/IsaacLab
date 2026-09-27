@@ -1,0 +1,137 @@
+{
+  "kind": "saved_main_and_local_display_sources",
+  "sources": {
+    "main": {
+      "path": "/home/rlrk/IsaacLab/work/hvjb-line-progress-20260927/work/hvjb-c-handoff-v05e-20260927/previews/main/manifest.json",
+      "sha256": "5c6675b1bc56da5d7b20c4ae2a70785b9429a6ec9498010307dd008e722652b4"
+    },
+    "H06": {
+      "path": "/home/rlrk/IsaacLab/work/hvjb-line-progress-20260927/work/hvjb-c-handoff-v05e-20260927/inputs/H06/output/process/manifest.json",
+      "sha256": "ba4283e6ff3f1a7c61b241f3273817e06124e783eb1526c18a548e49326801f8"
+    },
+    "H05": {
+      "path": "/home/rlrk/IsaacLab/work/hvjb-line-progress-20260927/work/hvjb-c-handoff-v05e-20260927/inputs/H05/output/process/manifest.json",
+      "sha256": "00f513b15d3c81c941a112b817aa8154b5cef32bb07cbf6d75ac0872cb297e6b"
+    },
+    "detail": {
+      "path": "/home/rlrk/IsaacLab/work/hvjb-line-progress-20260927/work/hvjb-c-handoff-v05e-20260927/previews/detail/manifest.json",
+      "sha256": "0b859ff83f97f0c000c1c586cd898abec6ebf0a4441065b4c2d9397f3a07ed0d"
+    }
+  },
+  "chapters": [
+    {
+      "id": "MAIN",
+      "start_s": 0,
+      "stop_s": 119,
+      "label_ja": "ライン全体・20仕事"
+    },
+    {
+      "id": "H06_loading",
+      "start_s": 119,
+      "stop_s": 129,
+      "label_ja": "H06 空筐体の載置と開放"
+    },
+    {
+      "id": "H06_pickup",
+      "start_s": 129,
+      "stop_s": 139,
+      "label_ja": "H06 再把持と取出し"
+    },
+    {
+      "id": "H05_P16",
+      "start_s": 139,
+      "stop_s": 147,
+      "label_ja": "H05 3口ヘッダーの開放・退避"
+    },
+    {
+      "id": "H05_P17",
+      "start_s": 147,
+      "stop_s": 155.2,
+      "label_ja": "H05 2口ヘッダーの開放・退避"
+    },
+    {
+      "id": "C_DETAIL",
+      "start_s": 155.2,
+      "stop_s": 209.2,
+      "label_ja": "C工程の受渡し・持ち替え・搭載"
+    }
+  ],
+  "C_detail_steps": [
+    {
+      "step": 1,
+      "start_s": 155.2,
+      "stop_s": 161.2,
+      "label_ja": "A側の本体をF-Cへ"
+    },
+    {
+      "step": 2,
+      "start_s": 161.2,
+      "stop_s": 169.2,
+      "label_ja": "B側の板を合流"
+    },
+    {
+      "step": 3,
+      "start_s": 169.2,
+      "stop_s": 175.2,
+      "label_ja": "板保持を続けて工具退避"
+    },
+    {
+      "step": 4,
+      "start_s": 175.2,
+      "stop_s": 178.2,
+      "label_ja": "① 位置を保って指を開く"
+    },
+    {
+      "step": 5,
+      "start_s": 178.2,
+      "stop_s": 181.2,
+      "label_ja": "② 指を開いたまま上昇"
+    },
+    {
+      "step": 6,
+      "start_s": 181.2,
+      "stop_s": 185.2,
+      "label_ja": "③ 上方で向き・開き幅を変更"
+    },
+    {
+      "step": 7,
+      "start_s": 185.2,
+      "stop_s": 189.2,
+      "label_ja": "④ 開いた指を把持位置へ下ろす"
+    },
+    {
+      "step": 8,
+      "start_s": 189.2,
+      "stop_s": 192.2,
+      "label_ja": "⑤ 搬送把持を開始"
+    },
+    {
+      "step": 9,
+      "start_s": 192.2,
+      "stop_s": 199.2,
+      "label_ja": "本体と自由端を分担して搬送"
+    },
+    {
+      "step": 10,
+      "start_s": 199.2,
+      "stop_s": 202.2,
+      "label_ja": "筐体側の受けへ支持を渡す"
+    },
+    {
+      "step": 11,
+      "start_s": 202.2,
+      "stop_s": 206.2,
+      "label_ja": "搬送指を開いて上方へ退避"
+    },
+    {
+      "step": 12,
+      "start_s": 206.2,
+      "stop_s": 209.2,
+      "label_ja": "搭載後も自由端の担当を残す"
+    }
+  ],
+  "H05_display": "Unchanged saved poses; 3 repeats plus 18 extra first/last frames.",
+  "H06_display": "Unchanged comparison endpoints and original display interpolation.",
+  "C_detail_display": "Arm link/joint display nodes omitted; original camera and saved hand/product poses.",
+  "physical_acceptance_verdict": null
+}

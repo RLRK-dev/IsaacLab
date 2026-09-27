@@ -1,0 +1,14 @@
+[INFO] Using python from: /home/rlrk/src/ur15-line-render/venv/bin/python
+Traceback (most recent call last):
+  File "/home/rlrk/IsaacLab/work/hvjb-line-progress-20260927/work/hvjb-c-handoff-v05e-20260927/build_motion.py", line 148, in <module>
+    main()
+  File "/home/rlrk/IsaacLab/work/hvjb-line-progress-20260927/work/hvjb-c-handoff-v05e-20260927/build_motion.py", line 121, in main
+    poses, observations = make_poses(data, prior.old.Model(), prior.sample)
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/rlrk/IsaacLab/work/hvjb-line-progress-20260927/work/hvjb-c-handoff-v05e-20260927/build_motion.py", line 85, in make_poses
+    points, gaps, yaws = keys_from_saved(data)
+                         ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/rlrk/IsaacLab/work/hvjb-line-progress-20260927/work/hvjb-c-handoff-v05e-20260927/build_motion.py", line 63, in keys_from_saved
+    assert abs(open_panel - 0.20) < 1e-12
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError

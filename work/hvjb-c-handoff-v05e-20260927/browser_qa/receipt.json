@@ -1,0 +1,137 @@
+{
+  "observed_at": "2026-09-27T09:03:15.656Z",
+  "entry": "/home/rlrk/IsaacLab/work/hvjb-line-progress-20260927/work/hvjb-c-handoff-v05e-20260927/delivery/index.html",
+  "metadata": {
+    "duration": 209.2,
+    "width": 1920,
+    "height": 1080,
+    "src": "file:///home/rlrk/IsaacLab/work/hvjb-line-progress-20260927/work/hvjb-c-handoff-v05e-20260927/delivery/HVJB_line_split_process_concept_v05e_review.mp4"
+  },
+  "seeks": [
+    {
+      "button": 0,
+      "expected": 175.2,
+      "time": 175.21895,
+      "decoded_frame_time": 175.2,
+      "error": null
+    },
+    {
+      "button": 1,
+      "expected": 155.2,
+      "time": 155.219962,
+      "decoded_frame_time": 155.2,
+      "error": null
+    },
+    {
+      "button": 2,
+      "expected": 50,
+      "time": 50.00932,
+      "decoded_frame_time": 50,
+      "error": null
+    },
+    {
+      "button": 3,
+      "expected": 0,
+      "time": 0.008307,
+      "decoded_frame_time": 0,
+      "error": null
+    },
+    {
+      "button": 4,
+      "expected": 155.2,
+      "time": 155.212829,
+      "decoded_frame_time": 155.2,
+      "error": null
+    },
+    {
+      "button": 5,
+      "expected": 161.2,
+      "time": 161.204403,
+      "decoded_frame_time": 161.2,
+      "error": null
+    },
+    {
+      "button": 6,
+      "expected": 169.2,
+      "time": 169.210135,
+      "decoded_frame_time": 169.2,
+      "error": null
+    },
+    {
+      "button": 7,
+      "expected": 175.2,
+      "time": 175.219885,
+      "decoded_frame_time": 175.2,
+      "error": null
+    },
+    {
+      "button": 8,
+      "expected": 178.2,
+      "time": 178.214627,
+      "decoded_frame_time": 178.2,
+      "error": null
+    },
+    {
+      "button": 9,
+      "expected": 181.2,
+      "time": 181.212838,
+      "decoded_frame_time": 181.2,
+      "error": null
+    },
+    {
+      "button": 10,
+      "expected": 185.2,
+      "time": 185.212144,
+      "decoded_frame_time": 185.2,
+      "error": null
+    },
+    {
+      "button": 11,
+      "expected": 189.2,
+      "time": 189.207123,
+      "decoded_frame_time": 189.2,
+      "error": null
+    },
+    {
+      "button": 12,
+      "expected": 192.2,
+      "time": 192.206542,
+      "decoded_frame_time": 192.2,
+      "error": null
+    },
+    {
+      "button": 13,
+      "expected": 199.2,
+      "time": 199.205553,
+      "decoded_frame_time": 199.2,
+      "error": null
+    },
+    {
+      "button": 14,
+      "expected": 202.2,
+      "time": 202.208799,
+      "decoded_frame_time": 202.2,
+      "error": null
+    },
+    {
+      "button": 15,
+      "expected": 206.2,
+      "time": 206.212898,
+      "decoded_frame_time": 206.2,
+      "error": null
+    }
+  ],
+  "images": [
+    {
+      "src": "01_C工程_受渡しと持ち替え.jpg",
+      "loaded": true
+    },
+    {
+      "src": "02_C工程_把持と筐体搭載.jpg",
+      "loaded": true
+    }
+  ],
+  "desktopOverflow": false,
+  "mobileOverflow": false,
+  "errors": []
+}

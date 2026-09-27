@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="ja">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>HVJB C工程の受渡し・持ち替え v05e</title>
+<style>
+:root{color-scheme:light;font-family:"Noto Sans CJK JP","Yu Gothic",sans-serif;color:#173b4d;background:#edf3f6}
+*{box-sizing:border-box}body{margin:0}main{max-width:1400px;margin:auto;padding:32px 24px 64px}
+h1{font-size:clamp(25px,3vw,38px);margin:10px 0 18px}h2{font-size:24px;margin:0 0 16px}p{line-height:1.85}
+.tag{letter-spacing:.08em;color:#177f6d;font-size:14px;font-weight:700}.lead{max-width:1000px;font-size:18px}
+.panel{background:#fff;border:1px solid #cbdae2;border-radius:12px;padding:24px;margin:24px 0}
+video{width:100%;display:block;background:#dce6eb;aspect-ratio:16/9;border-radius:8px}
+.buttons{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px}button,a.download{border:1px solid #9bb5bf;border-radius:7px;padding:12px 16px;background:#f5f9fa;color:#173b4d;font:inherit;cursor:pointer;text-decoration:none}
+button:hover,button[aria-pressed=true]{background:#177f6d;color:#fff;border-color:#177f6d}button:focus-visible,a:focus-visible{outline:3px solid #d99737;outline-offset:3px}
+.minor{color:#566f7d;font-size:14px}.row{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.role{border-left:4px solid #177f6d;padding:0 16px}.role b{display:block;margin-bottom:10px}
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.steps button{text-align:left;display:flex;flex-direction:column;gap:8px;min-height:110px}.steps span{font-size:13px;opacity:.8}
+.figures{display:grid;grid-template-columns:1fr 1fr;gap:18px}.figures img{width:100%;height:auto;display:block;border:1px solid #cfdee5}.figures a{color:inherit;text-decoration:none}.figures p{margin:7px 0}
+a{color:#086e86}#now{min-height:28px;font-size:15px;margin:12px 0 0}.foot{border-top:1px solid #c4d6de;padding-top:16px;margin-top:30px}
+@media(max-width:850px){.steps{grid-template-columns:1fr 1fr}.row,.figures{grid-template-columns:1fr}main{padding:20px 12px}.panel{padding:16px}}
+</style>
+<main>
+<div class="tag">HVJB / 工程動作レビュー / v05e / 2026-09-27</div>
+<h1>C工程の持ち替えを、5段階で確認する</h1>
+<p class="lead">板を保持した手を開き、上へ退避し、向きを変え、搬送把持位置へ下ろして閉じる。持ち替え中は支持台にユニットを残し、自由端の案内担当を継続する工程案です。</p>
+<div class="panel">
+<video id="review" controls preload="metadata" poster="figures/06.png"><source src="HVJB_line_split_process_concept_v05e_review.mp4" type="video/mp4"></video>
+<div class="buttons">
+<button data-seek="175.2">今回の持ち替えを見る · 2:55</button>
+<button data-seek="155.2">C工程の説明章 · 2:35</button>
+<button data-seek="50">主工程で見る · 0:50</button>
+<button data-seek="0">ライン全体を最初から</button>
+<a class="download" href="HVJB_line_split_process_concept_v05e_review.mp4" download>動画を開く／保存</a>
+</div>
+<p id="now" aria-live="polite">動画は1本、3分29.2秒。各ボタンで該当箇所へ移動して再生します。</p>
+<p class="minor">前半はライン全体、1:59から筐体・ヘッダーの局所説明、2:35からC工程の説明です。動作は模式表示で、実機仕様・実タクトは未確定です。</p>
+</div>
+<div class="panel">
+<h2>持ち替え中の役割</h2>
+<div class="row">
+<div class="role"><b>F-C：本体の支持を残す</b>手を開いてから搬送把持を始めるまで、台上でユニットを支持する案。</div>
+<div class="role"><b>C主担当：板保持から搬送把持へ</b>工具が退避した後、開放・上昇・向き変更・下降・把持を分けて表示。</div>
+<div class="role"><b>C専用補助：自由端の案内を続ける</b>本体の搭載が終わっても、自由端が次の支持へ移るまでは担当を残す。</div>
+</div>
+</div>
+<div class="panel"><h2>C工程を段階ごとに見る</h2><div class="steps">__STEP_BUTTONS__</div>
+<p class="minor">この章だけ腕リンクを省略し、手先と製品を見やすくしています。主工程と同じ保存姿勢を説明用の時間配分で再生します。</p></div>
+<div class="panel"><h2>静止画で確認</h2><div class="figures">
+<a href="01_C工程_受渡しと持ち替え.jpg"><img src="01_C工程_受渡しと持ち替え.jpg" alt="C工程の受渡しから持ち替えまでの6場面"><p>01 · 受渡しと持ち替え（クリックで拡大）</p></a>
+<a href="02_C工程_把持と筐体搭載.jpg"><img src="02_C工程_把持と筐体搭載.jpg" alt="C工程の搬送把持から筐体搭載までの6場面"><p>02 · 把持と筐体搭載（クリックで拡大）</p></a>
+</div><p class="minor">この2枚はフォルダ直下にも置いています。各段階の元画像は <a href="figures/01.png">figures/01.png</a> から12枚です。</p></div>
+<div class="panel"><h2>今回変えた点と、残る具体化</h2>
+<p>C主担当の50〜55秒の表示を変更しました。ユニット・他腕・工具・カメラの保存値は維持しています。手を開閉する間の位置保持と、台上のユニット姿勢をデータで確認しました。</p>
+<p>F-Cの支持形状、ユニット用の把持面・爪、H07から搬送手先への切替方式、全自由端の保持方法は未確定です。指が向きや幅を変える表示だけで、同じ実ハンドで兼用できると確定したものではありません。</p>
+<p class="minor">把持力・締結品質・干渉・実機成立の正式判定は含みません。<a href="README.md">変更と検証の記録</a> / <a href="audit/saved_motion_observations.json">保存姿勢の読戻し</a></p>
+</div>
+<div class="foot"><a href="../HVJB_保持と受渡しレビュー_v05d2_20260927/index_v05d_2.html">既存の20仕事・各フィンガ・部品照合のレビューを開く</a><p class="minor">既存のv05d.2資料と動画は元のフォルダに保存しています。</p></div>
+</main>
+<script>
+const video=document.getElementById('review'), status=document.getElementById('now');
+const buttons=[...document.querySelectorAll('button[data-seek]')];
+buttons.forEach(button=>button.addEventListener('click',async()=>{
+  const seek=Number(button.dataset.seek);
+  const move=async()=>{video.currentTime=seek;buttons.forEach(b=>b.setAttribute('aria-pressed',String(b===button)));
+    status.textContent=button.textContent.trim();
+    try{await video.play()}catch{status.textContent+=' · 再生ボタンを押してください';}
+    video.scrollIntoView({block:'center',behavior:'smooth'});
+  };
+  if(video.readyState>=1) await move(); else video.addEventListener('loadedmetadata',move,{once:true});
+}));
+video.addEventListener('error',()=>status.textContent='動画を読み込めません。同じフォルダ内のMP4を確認してください。');
+</script>
+</html>

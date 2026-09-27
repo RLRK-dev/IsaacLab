@@ -1,0 +1,8 @@
+/data/*.npz
+/inputs/
+/previews/
+/local_output/
+/delivery/
+/*.mp4
+!/logs/
+!/logs/*.txt

@@ -1,0 +1,166 @@
+{
+  "basis": "Saved display matrices, not measured contact or holding signals",
+  "coordinate_units": "dimensionless display coordinates; illustration seconds",
+  "source_sha256": "0bb2f0e4e55e40def49cd2cfd7eecf99e0e7a4bdc9b7ea4097768f7c1cc00044",
+  "new_bank_sha256": "c15581e024c014fae93e85788ac9218e427804c2c27064464fca30c14f8e37a6",
+  "main_opening_window_indices": [
+    750,
+    762
+  ],
+  "old_hand_target_max_displacement_in_opening_window": 0.2502852158972139,
+  "new_hand_target_max_displacement_in_opening_window": 5.551115123125783e-17,
+  "main_closing_window_indices": [
+    809,
+    825
+  ],
+  "new_hand_target_max_displacement_in_closing_window": 5.551115123125783e-17,
+  "unit_matrix_max_delta_during_regrip": 0.0,
+  "auxiliary_matrix_max_delta_during_regrip": 0.0,
+  "tool_C_matrix_max_delta_during_regrip": 4.440892098500626e-16,
+  "sampled_hand_states": [
+    {
+      "index": 750,
+      "illustration_time_s": 50.0,
+      "hand_target": [
+        -0.33,
+        0.47,
+        1.1362500010430814
+      ],
+      "display_gap": 0.048000000000000015,
+      "display_yaw_rad": 1.5707963267948963
+    },
+    {
+      "index": 755,
+      "illustration_time_s": 50.333333333333336,
+      "hand_target": [
+        -0.33,
+        0.47,
+        1.1362500010430814
+      ],
+      "display_gap": 0.048000000000000015,
+      "display_yaw_rad": 1.5707963267948963
+    },
+    {
+      "index": 762,
+      "illustration_time_s": 50.8,
+      "hand_target": [
+        -0.33,
+        0.47,
+        1.1362500010430814
+      ],
+      "display_gap": 0.1957439999999991,
+      "display_yaw_rad": 1.5707963267948963
+    },
+    {
+      "index": 763,
+      "illustration_time_s": 50.86666666666667,
+      "hand_target": [
+        -0.33,
+        0.47,
+        1.1365440978256247
+      ],
+      "display_gap": 0.19999999999999982,
+      "display_yaw_rad": 1.5707963267948963
+    },
+    {
+      "index": 778,
+      "illustration_time_s": 51.86666666666667,
+      "hand_target": [
+        -0.33,
+        0.47,
+        1.5283376297355493
+      ],
+      "display_gap": 0.19999999999999982,
+      "display_yaw_rad": 1.5707963267948963
+    },
+    {
+      "index": 779,
+      "illustration_time_s": 51.93333333333333,
+      "hand_target": [
+        -0.32821673525377254,
+        0.46901920438957484,
+        1.5295014351851854
+      ],
+      "display_gap": 0.20517146776405956,
+      "display_yaw_rad": 1.5567905982295112
+    },
+    {
+      "index": 787,
+      "illustration_time_s": 52.46666666666667,
+      "hand_target": [
+        -0.1317832647462275,
+        0.3609807956104251,
+        1.5295014351851852
+      ],
+      "display_gap": 0.7748285322359405,
+      "display_yaw_rad": 0.01400572856538493
+    },
+    {
+      "index": 788,
+      "illustration_time_s": 52.53333333333333,
+      "hand_target": [
+        -0.13,
+        0.36,
+        1.5284896899907818
+      ],
+      "display_gap": 0.7800000000000002,
+      "display_yaw_rad": 0.0
+    },
+    {
+      "index": 808,
+      "illustration_time_s": 53.86666666666667,
+      "hand_target": [
+        -0.13,
+        0.36,
+        0.9260117451944034
+      ],
+      "display_gap": 0.7800000000000002,
+      "display_yaw_rad": 0.0
+    },
+    {
+      "index": 809,
+      "illustration_time_s": 53.93333333333333,
+      "hand_target": [
+        -0.13,
+        0.36000000000000004,
+        0.925
+      ],
+      "display_gap": 0.7787808290766873,
+      "display_yaw_rad": 0.0
+    },
+    {
+      "index": 818,
+      "illustration_time_s": 54.53333333333333,
+      "hand_target": [
+        -0.13,
+        0.36,
+        0.925
+      ],
+      "display_gap": 0.6203101872924358,
+      "display_yaw_rad": 0.0
+    },
+    {
+      "index": 819,
+      "illustration_time_s": 54.6,
+      "hand_target": [
+        -0.13,
+        0.36,
+        0.925
+      ],
+      "display_gap": 0.62,
+      "display_yaw_rad": 0.0
+    },
+    {
+      "index": 825,
+      "illustration_time_s": 55.0,
+      "hand_target": [
+        -0.13,
+        0.36,
+        0.925
+      ],
+      "display_gap": 0.62,
+      "display_yaw_rad": 0.0
+    }
+  ],
+  "physical_acceptance_verdict": null
+}
