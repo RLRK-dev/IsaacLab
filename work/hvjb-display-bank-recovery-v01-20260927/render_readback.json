@@ -1,0 +1,412 @@
+{
+  "observed_at": "2026-09-27T15:09:09.250230+09:00",
+  "input_sha256": {
+    "/home/rlrk/IsaacLab/work/hvjb-line-progress-20260927/work/hvjb-xyz-display-v01-20260924/audit/display_delta.json": "d10151019ec841877e17c4409f6223e1e19ba8a940c0c66b12d755b245f24ac3",
+    "/home/rlrk/IsaacLab/work/hvjb-line-progress-20260927/work/hvjb-hold-display-v01-20260924/audit/hold_display_delta.json": "4955ccfbf4863d6bb4373a98593352f9d1ed9405d7fe54c77dc616e2cf97aebd",
+    "/home/rlrk/IsaacLab/work/hvjb-line-progress-20260927/work/hvjb-panel-display-v02-20260924/audit/panel_display_delta.json": "41bf5d89e3f740b6d4cbbf4ebe2b23e2801d6c93c285cd92974a86ffce78f4e2",
+    "/home/rlrk/IsaacLab/work/hvjb-line-progress-20260927/work/hvjb-panel-display-v02-20260924/audit/panel_envelopes.json": "8728c96de76d9565279feaf638973a079380e703b94759071a94265720496637",
+    "/home/rlrk/IsaacLab/work/hvjb-line-progress-20260927/work/hvjb-line-video-v05b-20260923/data/concept_v05b.json": "d2a9937c621df4b8be60092146890f6a04ccf359efd5023595c41dee61793a7b",
+    "/home/rlrk/IsaacLab/work/hvjb-line-progress-20260927/work/hvjb-display-continuity-v01-20260923/probe_saved.py": "c58c517ee79e2ac1c390478924e49a430038537dfa8ebb759e8c2b7153351be5",
+    "/home/rlrk/IsaacLab/work/hvjb-line-progress-20260927/work/hvjb-xyz-display-v01-20260924/correct_infeed.py": "4124520a1eac634ffcfccdc96026ed77c342f0075b8b4b4037a6fcd93d050f2c",
+    "/home/rlrk/IsaacLab/work/hvjb-line-progress-20260927/work/hvjb-panel-display-v02-20260924/build_bank.py": "32fa8518f63806ad48563b96d561d63c4ad11f77ac45154d3ab37930fe268111",
+    "/home/rlrk/IsaacLab/work/hvjb-line-progress-20260927/work/hvjb-panel-display-v02-20260924/correct_panel.py": "7d658be24dbf1fc0093d732ae5268e424fa766b598b7a3ec4634a7a6cf410b75",
+    "/home/rlrk/IsaacLab/work/hvjb-line-progress-20260927/work/hvjb-panel-display-v02-20260924/probe_panel.py": "51b409a34b43e023af2c19a4634041aaa9325d927df05d35180bed2c659c7f86",
+    "/home/rlrk/IsaacLab/work/hvjb-line-progress-20260927/work/hvjb-line-video-v04-20260923/render_review.py": "068e446492ab4d8d4e1d95fb78bcf839646fd569f5bbe3d785d570a09732407f",
+    "/home/rlrk/IsaacLab/work/hvjb-line-progress-20260927/work/hvjb-line-video-v03-20260921/render_process.py": "3ab9f8b5b904799cb1c8eba4e07eade42fc5d0b8c12c685feffb8f070b068b3c",
+    "/home/rlrk/IsaacLab/work/hvjb-line-progress-20260927/work/hvjb-line-video-v03-20260921/legacy_model.py": "83eba07a5eaa7717dc24a9e17f218127a6512d88441484d491ba9d8da1aa3e4d",
+    "/home/rlrk/IsaacLab/work/hvjb-line-progress-20260927/work/hvjb-line-video-v03-20260921/inputs/line_process_plan.json": "e640a9cb3008e418a595465d94bfaf6994bbbdb12a6c7ecbe94edd73996c05d2",
+    "/home/rlrk/IsaacLab/work/hvjb-line-progress-20260927/work/hvjb-line-video-v03-20260921/data/concept_v03.json": "6eb3775b07a288c86d97de5074c17ace01cac5b3d8b6a4d472c021a299426216",
+    "/home/rlrk/IsaacLab/work/hvjb-line-progress-20260927/work/hvjb-line-progress-20260923/data/line_review_data.json": "55948e4d2603b4ebe1ccd30160c89baa990623ad96eedc515c17583bac4bb440",
+    "/home/rlrk/IsaacLab/work/hvjb-line-progress-20260927/work/hvjb-line-progress-20260923/audit/product_final_views.json": "8259c68f05a2d43152d69751e783168d7a3cb2328936b44809da211199cdaac4",
+    "/home/rlrk/src/ur15-line-render/render_ur15_line.py": "b87bd76092f3b6a9f279de2ce7f0f7976703e1f54637fcd4dc1c51ed686241f9",
+    "/usr/share/fonts/opentype/noto/NotoSansCJK-Regular.ttc": "b76b0433203017ca80401b2ee0dd69350349871c4b19d504c34dbdd80541690a",
+    "/home/rlrk/IsaacLab/work/hvjb-line-progress-20260927/work/hvjb-line-progress-20260923/figures/product_final/after_insertion_bus.png": "1ebdeac6c8e1257618f92393bd1232e972a09052fb478d8086c2b28bf68d98ff",
+    "/home/rlrk/IsaacLab/work/hvjb-line-progress-20260927/work/hvjb-line-progress-20260923/figures/product_final/case.png": "804a3a906d1c6c389190a73dee6f7f6f7ee3d817323f1b725df38d5eec869948",
+    "/home/rlrk/IsaacLab/work/hvjb-line-progress-20260927/work/hvjb-line-progress-20260923/figures/product_final/external_headers.png": "3d141b70f9e1b60e8c4d0dde203f300353408896ea8736f304eaaab18d4214e0",
+    "/home/rlrk/IsaacLab/work/hvjb-line-progress-20260927/work/hvjb-line-progress-20260923/figures/product_final/internal_housings.png": "28750afc206b4788f4e6f998977340f6cbc3e07ab468a8fad2d1e42c55fcd1a0",
+    "/home/rlrk/IsaacLab/work/hvjb-line-progress-20260927/work/hvjb-line-progress-20260923/figures/product_final/main_and_lv_unassigned.png": "9f4fa8b01c35b3fd5693783f621695aaddbcf7df4fa04948d3c228ed1fd89135",
+    "/home/rlrk/IsaacLab/work/hvjb-line-progress-20260927/work/hvjb-line-progress-20260923/figures/product_final/main_fuse_unassigned.png": "a356f01471d61e4cfb7b7028ec5c1c47809b5890ccabc123fdbe7e34eaed890c",
+    "/home/rlrk/IsaacLab/work/hvjb-line-progress-20260927/work/hvjb-line-progress-20260923/figures/product_final/outside_A.png": "3dcfd30f17a6f1a3435f057f6fc71ff751d6f7e0367b33dba91f64d879e443d1",
+    "/home/rlrk/IsaacLab/work/hvjb-line-progress-20260927/work/hvjb-line-progress-20260923/figures/product_final/outside_B.png": "f6ec93e36e019addee1090552c21b350f4ca92716d010eb94d8a4ec16fb837d9",
+    "/home/rlrk/IsaacLab/work/hvjb-line-progress-20260927/work/hvjb-line-progress-20260923/figures/product_final/product.png": "d30a05313b415d3f5862f0016aa13b523eb7bf09e6d65bd2ad9fb0a0dd99ee94",
+    "/home/rlrk/IsaacLab/work/hvjb-line-progress-20260927/work/hvjb-line-progress-20260923/figures/product_final/wires_display_only.png": "459339d8dcc9cc79cf54e53a82a9b226d1176c0782082646221966d45e9898fd",
+    "/home/rlrk/IsaacLab/work/hvjb-line-progress-20260927/work/hvjb-line-video-v05-20260923/render_review.py": "61f7424969caf8fa1f3c11ca03ec4ad25f1f178cd75a7e226ed27d0e1c529245",
+    "/home/rlrk/IsaacLab/work/hvjb-line-progress-20260927/work/hvjb-display-continuity-v01-20260923/correct_display.py": "61c0e255965216795fe078894e72fa64de59ff661a7110b6012858be71b7fa68",
+    "/home/rlrk/IsaacLab/work/hvjb-line-progress-20260927/work/hvjb-display-continuity-v01-20260923/audit/correction_verification.json": "d5e52826edc6905a71c7a267bdf74d0b4dce7aff141d9c29f35f60f9c96b98b6",
+    "/home/rlrk/IsaacLab/work/hvjb-line-progress-20260927/work/hvjb-display-continuity-v01-20260923/audit/display_v05_delta.json": "8c83ab80a456085005715d7c8db2a3b5d9a88b4725deb9e78e12a686af1b35fe",
+    "/home/rlrk/IsaacLab/work/hvjb-line-progress-20260927/work/hvjb-line-video-v05-20260923/audit/camera_framing.json": "135ec3153771d0fba5f391dda3f13241921faad9a73f5f8b6a6f72d0e4cf4489",
+    "/home/rlrk/IsaacLab/work/hvjb-line-progress-20260927/work/hvjb-line-video-v05-20260923/prepare_camera.py": "361dce7d48ebf61f0f3cf3a08f5a7e707f3b845593fdb9a50b8a04c35abf3730",
+    "/home/rlrk/IsaacLab/work/hvjb-line-progress-20260927/work/hvjb-line-video-v05b-20260923/render_review.py": "99c68006cfa4c9ab1c4d7190918cbd1ecc28548fc7887f44513ef482f8743d66",
+    "/home/rlrk/IsaacLab/work/hvjb-line-progress-20260927/work/hvjb-line-video-v05b-20260923/REVIEW_SCOPE.md": "de58bc063df4bc9c93cb9b2561fab194a5a5bc3dfc8560322cb6cb44204f595f",
+    "/home/rlrk/IsaacLab/work/hvjb-line-progress-20260927/work/hvjb-logistics-review-v01-20260923/audit/logistics_observations.json": "219ebd9fb43f2f69ead76d09a412958b4d606af4665021dab6d882880f59cf03",
+    "/home/rlrk/IsaacLab/work/hvjb-line-progress-20260927/work/hvjb-hold-display-v01-20260924/build_bank.py": "d934d25dc9201635c985eb3d71902301859003f8293fca8da985a1d3d5b2d140",
+    "/home/rlrk/IsaacLab/work/hvjb-line-progress-20260927/work/hvjb-hold-display-v01-20260924/correct_holds.py": "94985af0b5d1c22c10ad31d254130d7f6d04fa966bae123c591079510b8e7435",
+    "/home/rlrk/IsaacLab/work/hvjb-line-progress-20260927/work/hvjb-hold-display-v01-20260924/probe_holds.py": "ca629a15833b48d2a20fe3c644c668a6f838c47e1ade3d19302446abb0813431",
+    "/home/rlrk/IsaacLab/work/hvjb-line-progress-20260927/work/hvjb-display-bank-recovery-v01-20260927/recover_bank.py": "c4f25d67bdf622579cf80a969514426530472f2fd7601a02f1d90d7c500cb340",
+    "/home/rlrk/.local/share/Trash/files/HVJB_ライン全体レビュー_v05b_20260923/video_data/concept_display_v05_reused.npz": "7702cadf9e412895a14c82d1a6b85a6aa659f2978c22e59ddf16e2714c793a60",
+    "/home/rlrk/IsaacLab/work/hvjb-line-progress-20260927/work/hvjb-display-bank-recovery-v01-20260927/recovery.json": "089d8da2bc29613ddd67ec5e6cf646b0abedecabc117139f4cc6c56d0b6b9595",
+    "/home/rlrk/IsaacLab/work/hvjb-line-progress-20260927/work/hvjb-display-bank-recovery-v01-20260927/recovered/panel_v05d.npz": "0bb2f0e4e55e40def49cd2cfd7eecf99e0e7a4bdc9b7ea4097768f7c1cc00044",
+    "/home/rlrk/IsaacLab/work/hvjb-line-progress-20260927/work/hvjb-display-bank-recovery-v01-20260927/render_recovered.py": "af8e2bc6a5144b5b3306d1c11b1c248cb84bba66a24735ec0191ad7f22f69adc"
+  },
+  "images": [
+    {
+      "feature_id": "S01",
+      "saved_frame": 55,
+      "saved_bank_index": 54,
+      "saved_time_s": 3.6,
+      "view": "process",
+      "frame": 1,
+      "camera": "v03_saved_process_camera_v04_screen_layout",
+      "file": "00001.png",
+      "sha256": "95348b2a8e82232780eef5f7ceadb79390de4a3329fdf258e3e08e37cccd7d49",
+      "display_segment": "saved_sample",
+      "original_sample_index": 54
+    },
+    {
+      "feature_id": "S01",
+      "saved_frame": 73,
+      "saved_bank_index": 72,
+      "saved_time_s": 4.8,
+      "view": "process",
+      "frame": 3,
+      "camera": "v03_saved_process_camera_v04_screen_layout",
+      "file": "00002.png",
+      "sha256": "c087ef9aff41138931453a6780be79ccb24790d67afbdd6c5aa0f702ac1f0d55",
+      "display_segment": "saved_sample",
+      "original_sample_index": 72
+    },
+    {
+      "feature_id": "S01",
+      "saved_frame": 124,
+      "saved_bank_index": 123,
+      "saved_time_s": 8.2,
+      "view": "process",
+      "frame": 5,
+      "camera": "v03_saved_process_camera_v04_screen_layout",
+      "file": "00003.png",
+      "sha256": "0493be7b5cba85503ec5a1c4497ece56b2a86f232c3db00590eac52d69eafef9",
+      "display_segment": "saved_sample",
+      "original_sample_index": 123
+    },
+    {
+      "feature_id": "S03",
+      "saved_frame": 316,
+      "saved_bank_index": 315,
+      "saved_time_s": 21.0,
+      "view": "process",
+      "frame": 7,
+      "camera": "v03_saved_process_camera_v04_screen_layout",
+      "file": "00004.png",
+      "sha256": "c916449e8556345edc1c09544c1a9054ee054ff169b72e359a78ecdd319e1afc",
+      "display_segment": "saved_sample",
+      "original_sample_index": 315
+    },
+    {
+      "feature_id": "S05",
+      "saved_frame": 651,
+      "saved_bank_index": 650,
+      "saved_time_s": 43.333333333333336,
+      "view": "process",
+      "frame": 9,
+      "camera": "v03_saved_process_camera_v04_screen_layout",
+      "file": "00005.png",
+      "sha256": "52537fe63b2fdec6ab60fe9f4bc26bbad13b56946f592925a9cea0840f4dab3a",
+      "display_segment": "saved_sample",
+      "original_sample_index": 650
+    },
+    {
+      "feature_id": "S06",
+      "saved_frame": 691,
+      "saved_bank_index": 690,
+      "saved_time_s": 46.0,
+      "view": "process",
+      "frame": 11,
+      "camera": "v03_saved_process_camera_v04_screen_layout",
+      "file": "00006.png",
+      "sha256": "2fa98bdf6bcdb7a0a108b52368bf201d1209d9b4fb9c5ae607e8a6b18a2cc1ad",
+      "display_segment": "saved_sample",
+      "original_sample_index": 690
+    },
+    {
+      "feature_id": "S07",
+      "saved_frame": 758,
+      "saved_bank_index": 757,
+      "saved_time_s": 50.46666666666667,
+      "view": "process",
+      "frame": 13,
+      "camera": "v03_saved_process_camera_v04_screen_layout",
+      "file": "00007.png",
+      "sha256": "5f6e7305c52dfabeea1cec743bc7da504c846139642d6a4dee1a982eab4a019e",
+      "display_segment": "saved_sample",
+      "original_sample_index": 757
+    },
+    {
+      "feature_id": "S08",
+      "saved_frame": 826,
+      "saved_bank_index": 825,
+      "saved_time_s": 55.0,
+      "view": "process",
+      "frame": 15,
+      "camera": "v03_saved_process_camera_v04_screen_layout",
+      "file": "00008.png",
+      "sha256": "2769fb9b2be42157790a9f6df81c99948726c419ad7962ad1b1bf588e2c30584",
+      "display_segment": "saved_sample",
+      "original_sample_index": 825
+    },
+    {
+      "feature_id": "S08",
+      "saved_frame": 921,
+      "saved_bank_index": 920,
+      "saved_time_s": 61.333333333333336,
+      "view": "process",
+      "frame": 17,
+      "camera": "v03_saved_process_camera_v04_screen_layout",
+      "file": "00009.png",
+      "sha256": "95efeb8b500eb5f6c9b779b1356e81a40ac0aea64b3b2807ff8863cb1dbf6ef6",
+      "display_segment": "saved_sample",
+      "original_sample_index": 920
+    },
+    {
+      "feature_id": "S11",
+      "saved_frame": 1196,
+      "saved_bank_index": 1195,
+      "saved_time_s": 79.66666666666667,
+      "view": "process",
+      "frame": 19,
+      "camera": "v03_saved_process_camera_v04_screen_layout",
+      "file": "00010.png",
+      "sha256": "336cb1f67fe5c30ab5797405233c6d62768fa95b5006843b010295cf21768dc2",
+      "display_segment": "saved_sample",
+      "original_sample_index": 1195
+    },
+    {
+      "feature_id": "S16",
+      "saved_frame": 1661,
+      "saved_bank_index": 1660,
+      "saved_time_s": 110.66666666666667,
+      "view": "process",
+      "frame": 21,
+      "camera": "v03_saved_process_camera_v04_screen_layout",
+      "file": "00011.png",
+      "sha256": "1afcfa7f36f57ac469f82a71fdac87ad4d6c99394a170a3152b80d13d81c5eab",
+      "display_segment": "saved_sample",
+      "original_sample_index": 1660
+    },
+    {
+      "feature_id": "S16",
+      "saved_frame": 1703,
+      "saved_bank_index": 1702,
+      "saved_time_s": 113.46666666666667,
+      "view": "process",
+      "frame": 23,
+      "camera": "v03_saved_process_camera_v04_screen_layout",
+      "file": "00012.png",
+      "sha256": "803e1ca0b7d5730289a30d56762bf453f048760087f6ea2203223a4dec951402",
+      "display_segment": "saved_sample",
+      "original_sample_index": 1702
+    }
+  ],
+  "contact_sheets": [
+    {
+      "file": "contact_1.jpg",
+      "sha256": "64c115ee231a80bee9c09c757379cbad1b3c398980cbf0419e166397556041d9"
+    },
+    {
+      "file": "contact_2.jpg",
+      "sha256": "47ad5cc5c8344b22cf6a5a9e582017b97a75709db010c131ac96ea87f08ac5b3"
+    }
+  ],
+  "display_nodes_omitted": [
+    {
+      "name": "table_top",
+      "dimensions_display_units": [
+        1.1,
+        0.8,
+        0.06
+      ],
+      "position": [
+        4.0,
+        -0.1,
+        0.82
+      ],
+      "old_out_table": true
+    },
+    {
+      "name": "table_leg",
+      "dimensions_display_units": [
+        0.06,
+        0.06,
+        0.8
+      ],
+      "position": [
+        3.56,
+        -0.396,
+        0.4
+      ],
+      "old_out_table": true
+    },
+    {
+      "name": "table_leg",
+      "dimensions_display_units": [
+        0.06,
+        0.06,
+        0.8
+      ],
+      "position": [
+        3.56,
+        0.19599999999999998,
+        0.4
+      ],
+      "old_out_table": true
+    },
+    {
+      "name": "table_leg",
+      "dimensions_display_units": [
+        0.06,
+        0.06,
+        0.8
+      ],
+      "position": [
+        4.44,
+        -0.396,
+        0.4
+      ],
+      "old_out_table": true
+    },
+    {
+      "name": "table_leg",
+      "dimensions_display_units": [
+        0.06,
+        0.06,
+        0.8
+      ],
+      "position": [
+        4.44,
+        0.19599999999999998,
+        0.4
+      ],
+      "old_out_table": true
+    },
+    {
+      "name": "xyz_post",
+      "dimensions_display_units": [
+        0.065,
+        0.065,
+        1.65
+      ],
+      "position": [
+        2.55,
+        -1.6,
+        1.16
+      ],
+      "old_out_table": false
+    },
+    {
+      "name": "xyz_post",
+      "dimensions_display_units": [
+        0.065,
+        0.065,
+        1.65
+      ],
+      "position": [
+        2.55,
+        0.7,
+        1.16
+      ],
+      "old_out_table": false
+    },
+    {
+      "name": "xyz_rail",
+      "dimensions_display_units": [
+        0.085,
+        2.3,
+        0.1
+      ],
+      "position": [
+        2.55,
+        -0.45000000000000007,
+        2.0
+      ],
+      "old_out_table": false
+    },
+    {
+      "name": "xyz_post",
+      "dimensions_display_units": [
+        0.065,
+        0.065,
+        1.65
+      ],
+      "position": [
+        4.25,
+        -1.6,
+        1.16
+      ],
+      "old_out_table": false
+    },
+    {
+      "name": "xyz_post",
+      "dimensions_display_units": [
+        0.065,
+        0.065,
+        1.65
+      ],
+      "position": [
+        4.25,
+        0.7,
+        1.16
+      ],
+      "old_out_table": false
+    },
+    {
+      "name": "xyz_rail",
+      "dimensions_display_units": [
+        0.085,
+        2.3,
+        0.1
+      ],
+      "position": [
+        4.25,
+        -0.45000000000000007,
+        2.0
+      ],
+      "old_out_table": false
+    },
+    {
+      "name": "outfeed_carriage",
+      "dynamic_column": 258
+    },
+    {
+      "name": "outfeed_z",
+      "dynamic_column": 259
+    },
+    {
+      "name": "outfeed_y_bridge",
+      "dynamic_column": 260
+    },
+    {
+      "name": "outfeed_palm",
+      "dynamic_column": 261
+    },
+    {
+      "name": "outfeed_left_finger",
+      "dynamic_column": 262
+    },
+    {
+      "name": "outfeed_right_finger",
+      "dynamic_column": 263
+    },
+    {
+      "name": "outfeed_carrier",
+      "dynamic_column": 264
+    },
+    {
+      "name": "test_probe",
+      "dynamic_column": 271
+    }
+  ],
+  "text_elements_checked": 236,
+  "unchanged_existing_renderer": true,
+  "unchanged_saved_camera": true,
+  "new_mp4_created": false,
+  "physical_acceptance_verdict": null
+}

@@ -1,0 +1,22 @@
+[
+  {
+    "raw_log": "recovery.log",
+    "raw_sha256": "15172d4420694b409d1df1b592d6b643b7404dce50225c0a1853749d74467b1a",
+    "readable_log": "recovery_stdout.txt"
+  },
+  {
+    "raw_log": "render.log",
+    "raw_sha256": "8b84b431727e6d84eea2543da4d2e0131ccba28f0daa0001516cbe82874a07a6",
+    "readable_log": "render_stdout.txt"
+  },
+  {
+    "raw_log": "delivery.log",
+    "raw_sha256": "86454f5d72bf6244f3d0f5e3df8abf2ca4fb0081799c954131406fb983e35144",
+    "readable_log": "delivery_stdout.txt"
+  },
+  {
+    "raw_log": "precommit_after_stage.log",
+    "raw_sha256": "39dc8177e327f40f1af7656a158050b976723379f2aab220e35c168b30a1e32d",
+    "readable_log": "precommit_after_stage_stdout.txt"
+  }
+]

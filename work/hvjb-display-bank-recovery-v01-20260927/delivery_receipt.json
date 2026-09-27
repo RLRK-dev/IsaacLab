@@ -1,0 +1,113 @@
+{
+  "observed_at": "2026-09-27T15:24:08.063208+09:00",
+  "destination": "/home/rlrk/Downloads/HVJB_保持と受渡しレビュー_v05d2_20260927/replay_data_20260927",
+  "script_sha256": "7b242569f710914bdb8279f24fca345ca7cd78eec9c5a6f97b5510238c34b766",
+  "prior_receipt_sha256": "e59fede7129fa024683db0fcb90c62ea1a55e6586feaafc7d88c2a7ead70f362",
+  "existing_files_unchanged": 529,
+  "added_data_files": 20,
+  "mp4_count": 1,
+  "video_sha256": "0cdcd4d43831c3f805aa4e5960b666e7965ee6f1ac38b59d31645630d1dd40da",
+  "new_video_created": false,
+  "files": [
+    {
+      "path": "data/source_v05b.npz",
+      "source": "/home/rlrk/IsaacLab/work/hvjb-line-progress-20260927/work/hvjb-display-bank-recovery-v01-20260927/recovered/source_v05b.npz",
+      "sha256": "7702cadf9e412895a14c82d1a6b85a6aa659f2978c22e59ddf16e2714c793a60"
+    },
+    {
+      "path": "data/panel_v05d.npz",
+      "source": "/home/rlrk/IsaacLab/work/hvjb-line-progress-20260927/work/hvjb-display-bank-recovery-v01-20260927/recovered/panel_v05d.npz",
+      "sha256": "0bb2f0e4e55e40def49cd2cfd7eecf99e0e7a4bdc9b7ea4097768f7c1cc00044"
+    },
+    {
+      "path": "audit/recovery.json",
+      "source": "/home/rlrk/IsaacLab/work/hvjb-line-progress-20260927/work/hvjb-display-bank-recovery-v01-20260927/recovery.json",
+      "sha256": "089d8da2bc29613ddd67ec5e6cf646b0abedecabc117139f4cc6c56d0b6b9595"
+    },
+    {
+      "path": "audit/render_readback.json",
+      "source": "/home/rlrk/IsaacLab/work/hvjb-line-progress-20260927/work/hvjb-display-bank-recovery-v01-20260927/render_readback.json",
+      "sha256": "8b478f590617197b21e665d5423b3ba1c8b7d71bfbf93e93620c3ba675ba3c23"
+    },
+    {
+      "path": "contact_1.jpg",
+      "source": "/home/rlrk/IsaacLab/work/hvjb-line-progress-20260927/work/hvjb-display-bank-recovery-v01-20260927/contact_1.jpg",
+      "sha256": "64c115ee231a80bee9c09c757379cbad1b3c398980cbf0419e166397556041d9"
+    },
+    {
+      "path": "contact_2.jpg",
+      "source": "/home/rlrk/IsaacLab/work/hvjb-line-progress-20260927/work/hvjb-display-bank-recovery-v01-20260927/contact_2.jpg",
+      "sha256": "47ad5cc5c8344b22cf6a5a9e582017b97a75709db010c131ac96ea87f08ac5b3"
+    },
+    {
+      "path": "README.md",
+      "source": "/home/rlrk/IsaacLab/work/hvjb-line-progress-20260927/work/hvjb-display-bank-recovery-v01-20260927/README.md",
+      "sha256": "64c35fd85d34898f88269d1983ffd3fb47e8a533fa12ea1181240fb73ad612d1"
+    },
+    {
+      "path": "PRIOR_ART_DELTA.md",
+      "source": "/home/rlrk/IsaacLab/work/hvjb-line-progress-20260927/work/hvjb-display-bank-recovery-v01-20260927/PRIOR_ART_DELTA.md",
+      "sha256": "b39b5bee0bfdbf3e9c43ca84600298c230253214127af97a440f5452e8b3baaf"
+    },
+    {
+      "path": "previews/00001.png",
+      "source": "/home/rlrk/IsaacLab/work/hvjb-line-progress-20260927/work/hvjb-display-bank-recovery-v01-20260927/previews/00001.png",
+      "sha256": "95348b2a8e82232780eef5f7ceadb79390de4a3329fdf258e3e08e37cccd7d49"
+    },
+    {
+      "path": "previews/00002.png",
+      "source": "/home/rlrk/IsaacLab/work/hvjb-line-progress-20260927/work/hvjb-display-bank-recovery-v01-20260927/previews/00002.png",
+      "sha256": "c087ef9aff41138931453a6780be79ccb24790d67afbdd6c5aa0f702ac1f0d55"
+    },
+    {
+      "path": "previews/00003.png",
+      "source": "/home/rlrk/IsaacLab/work/hvjb-line-progress-20260927/work/hvjb-display-bank-recovery-v01-20260927/previews/00003.png",
+      "sha256": "0493be7b5cba85503ec5a1c4497ece56b2a86f232c3db00590eac52d69eafef9"
+    },
+    {
+      "path": "previews/00004.png",
+      "source": "/home/rlrk/IsaacLab/work/hvjb-line-progress-20260927/work/hvjb-display-bank-recovery-v01-20260927/previews/00004.png",
+      "sha256": "c916449e8556345edc1c09544c1a9054ee054ff169b72e359a78ecdd319e1afc"
+    },
+    {
+      "path": "previews/00005.png",
+      "source": "/home/rlrk/IsaacLab/work/hvjb-line-progress-20260927/work/hvjb-display-bank-recovery-v01-20260927/previews/00005.png",
+      "sha256": "52537fe63b2fdec6ab60fe9f4bc26bbad13b56946f592925a9cea0840f4dab3a"
+    },
+    {
+      "path": "previews/00006.png",
+      "source": "/home/rlrk/IsaacLab/work/hvjb-line-progress-20260927/work/hvjb-display-bank-recovery-v01-20260927/previews/00006.png",
+      "sha256": "2fa98bdf6bcdb7a0a108b52368bf201d1209d9b4fb9c5ae607e8a6b18a2cc1ad"
+    },
+    {
+      "path": "previews/00007.png",
+      "source": "/home/rlrk/IsaacLab/work/hvjb-line-progress-20260927/work/hvjb-display-bank-recovery-v01-20260927/previews/00007.png",
+      "sha256": "5f6e7305c52dfabeea1cec743bc7da504c846139642d6a4dee1a982eab4a019e"
+    },
+    {
+      "path": "previews/00008.png",
+      "source": "/home/rlrk/IsaacLab/work/hvjb-line-progress-20260927/work/hvjb-display-bank-recovery-v01-20260927/previews/00008.png",
+      "sha256": "2769fb9b2be42157790a9f6df81c99948726c419ad7962ad1b1bf588e2c30584"
+    },
+    {
+      "path": "previews/00009.png",
+      "source": "/home/rlrk/IsaacLab/work/hvjb-line-progress-20260927/work/hvjb-display-bank-recovery-v01-20260927/previews/00009.png",
+      "sha256": "95efeb8b500eb5f6c9b779b1356e81a40ac0aea64b3b2807ff8863cb1dbf6ef6"
+    },
+    {
+      "path": "previews/00010.png",
+      "source": "/home/rlrk/IsaacLab/work/hvjb-line-progress-20260927/work/hvjb-display-bank-recovery-v01-20260927/previews/00010.png",
+      "sha256": "336cb1f67fe5c30ab5797405233c6d62768fa95b5006843b010295cf21768dc2"
+    },
+    {
+      "path": "previews/00011.png",
+      "source": "/home/rlrk/IsaacLab/work/hvjb-line-progress-20260927/work/hvjb-display-bank-recovery-v01-20260927/previews/00011.png",
+      "sha256": "1afcfa7f36f57ac469f82a71fdac87ad4d6c99394a170a3152b80d13d81c5eab"
+    },
+    {
+      "path": "previews/00012.png",
+      "source": "/home/rlrk/IsaacLab/work/hvjb-line-progress-20260927/work/hvjb-display-bank-recovery-v01-20260927/previews/00012.png",
+      "sha256": "803e1ca0b7d5730289a30d56762bf453f048760087f6ea2203223a4dec951402"
+    }
+  ]
+}

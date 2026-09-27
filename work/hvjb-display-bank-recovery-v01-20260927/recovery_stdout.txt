@@ -1,0 +1,8 @@
+[INFO] Using python from: /home/rlrk/src/ur15-line-render/venv/bin/python
+BANK_READBACK xyz_v05c.npz sha256=21a64890540a06d94c06c6ee8e607f90dbe9c5b69ddf14fe944135614e28c409
+RECOVERED_STAGE xyz_v05c samples=23 exact_sha=True
+BANK_READBACK hold_v05d.npz sha256=72779ccf3e7a15087b45f2eeaa6cb5ccbb0ca1bef3cf7f06ac79a00c379d45b9
+RECOVERED_STAGE hold_v05d samples=493 exact_sha=True
+BANK_READBACK panel_v05d.npz sha256=0bb2f0e4e55e40def49cd2cfd7eecf99e0e7a4bdc9b7ea4097768f7c1cc00044
+RECOVERED_STAGE panel_v05d samples=797 exact_sha=True
+RECOVERY_COMPLETE stages=3 samples=1785 nodes=304 exact_sha=True

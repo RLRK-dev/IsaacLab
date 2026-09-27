@@ -1,0 +1,4 @@
+[INFO] Using python from: /home/rlrk/src/ur15-line-render/venv/bin/python
+V05B_PROCESS_PNG 1/12
+V05B_PROCESS_PNG 12/12
+RECOVERED_RENDER_COMPLETE frames=12 excluded_nodes=19

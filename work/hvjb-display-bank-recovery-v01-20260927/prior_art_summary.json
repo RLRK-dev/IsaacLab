@@ -1,0 +1,60 @@
+{
+  "queries": [
+    [
+      "HVJB",
+      "動画",
+      "再生成",
+      "行列bank"
+    ],
+    [
+      "HVJB",
+      "concept_display",
+      "保存姿勢"
+    ]
+  ],
+  "logs": [
+    {
+      "path": "/tmp/hvjb-video-recovery-prior-art-20260927.log",
+      "sha256": "0e1a5794390151ebed88042b325ac964daa63baeba77d3ab4e41bd92207f2597",
+      "exit_code": 2,
+      "blocker_references": [
+        "BLOCKER: eval_runs/troot_optE_dapg_wholeroute_scope_20260701/MEMORY_OFFSITE_COPIES_20260807/CURRENT_handoff_cc_p6_plankeeper_2026-07-07.md:116",
+        "BLOCKER: eval_runs/troot_optE_dapg_wholeroute_scope_20260701/MEMORY_OFFSITE_COPIES_20260807/CURRENT_handoff_cc_p6_plankeeper_2026-07-07.md:116",
+        "BLOCKER: eval_runs/troot_optE_dapg_wholeroute_scope_20260701/MEMORY_OFFSITE_COPIES_20260807/CURRENT_handoff_cc_p6_plankeeper_2026-07-07.md:211",
+        "BLOCKER: eval_runs/troot_optE_dapg_wholeroute_scope_20260701/MEMORY_OFFSITE_COPIES_20260807/CURRENT_handoff_cc_p6_plankeeper_2026-07-07.md:213",
+        "BLOCKER: eval_runs/troot_optE_dapg_wholeroute_scope_20260701/P6_RESTORED_FILE_OFFSITE_COPY_20260807/handoff_cc_p6_plankeeper_2026-07-07.md:115",
+        "BLOCKER: eval_runs/troot_optE_dapg_wholeroute_scope_20260701/P6_RESTORED_FILE_OFFSITE_COPY_20260807/handoff_cc_p6_plankeeper_2026-07-07.md:115",
+        "BLOCKER: eval_runs/troot_optE_dapg_wholeroute_scope_20260701/P6_RESTORED_FILE_OFFSITE_COPY_20260807/handoff_cc_p6_plankeeper_2026-07-07.md:210",
+        "BLOCKER: eval_runs/troot_optE_dapg_wholeroute_scope_20260701/P6_RESTORED_FILE_OFFSITE_COPY_20260807/handoff_cc_p6_plankeeper_2026-07-07.md:212",
+        "BLOCKER: eval_runs/troot_verbal_teaching_20260705/CANONICAL_MOTION_TABLE_V1.md:3",
+        "BLOCKER: eval_runs/troot_verbal_teaching_20260705/CANONICAL_MOTION_TABLE_V1.md:5",
+        "BLOCKER: eval_runs/ur15_jb_harness_revision_20260907/WORK_LOG.md:5",
+        "BLOCKER: eval_runs/ur15_jb_harness_revision_20260907/WORK_LOG.md:6",
+        "BLOCKER: eval_runs/ur15_jb_harness_revision_20260907/WORK_LOG.md:6",
+        "BLOCKER: eval_runs/ur15_jb_harness_revision_20260907/WORK_LOG.md:8",
+        "BLOCKER: eval_runs/ur15_jb_harness_revision_20260907/WORK_LOG.md:310",
+        "BLOCKER: eval_runs/ur15_jb_harness_revision_20260907/WORK_LOG.md:312",
+        "BLOCKER: eval_runs/ur15_jb_harness_revision_20260907/WORK_LOG.md:312",
+        "BLOCKER: eval_runs/ur15_jb_harness_revision_20260907/WORK_LOG.md:317",
+        "BLOCKER: eval_runs/ur15_jb_harness_revision_20260907/WORK_LOG.md:317",
+        "BLOCKER: eval_runs/ur15_jb_harness_revision_20260907/WORK_LOG.md:579",
+        "BLOCKER: eval_runs/ur15_jb_harness_revision_20260907/WORK_LOG.md:579",
+        "BLOCKER: eval_runs/ur15_jb_harness_revision_20260907/WORK_LOG.md:609",
+        "BLOCKER: eval_runs/ur15_jb_harness_revision_20260907/WORK_LOG.md:784",
+        "BLOCKER: eval_runs/ur15_jb_harness_revision_20260907/analysis/op030_v04_scope_and_delta.md:29",
+        "BLOCKER: eval_runs/ur15_jb_harness_revision_20260907/analysis/op030_v04_scope_and_delta.md:29",
+        "BLOCKER: eval_runs/ur15_jb_harness_revision_20260907/deliverables/UR15_JB_OP020_direct_20260907_v10/WORK_LOG.md:5",
+        "BLOCKER: eval_runs/ur15_jb_harness_revision_20260907/deliverables/UR15_JB_OP020_direct_20260907_v10/WORK_LOG.md:6",
+        "BLOCKER: eval_runs/ur15_jb_harness_revision_20260907/deliverables/UR15_JB_OP020_direct_20260907_v10/WORK_LOG.md:6",
+        "BLOCKER: eval_runs/ur15_jb_harness_revision_20260907/deliverables/UR15_JB_OP020_direct_20260907_v10/WORK_LOG.md:8",
+        "BLOCKER: eval_runs/ur15_jb_harness_revision_20260907/deliverables/UR15_JB_OP030_20260909_v04/analysis/op030_v04_scope_and_delta.md:29"
+      ]
+    },
+    {
+      "path": "/tmp/hvjb-video-recovery-focused-20260927.log",
+      "sha256": "13709d9fc5579e0b03b5f5ebb33ec99b35df990b85916a84f7f263584d9a0aeb",
+      "exit_code": 0,
+      "blocker_references": []
+    }
+  ]
+}
