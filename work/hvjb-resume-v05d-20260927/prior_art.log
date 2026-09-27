@@ -1,0 +1,14 @@
+keywords=['HVJB', '手先', '用途リンク', '対応表']
+findings=8 blockers=0 lessons=1
+LESSON: eval_runs/ur15_jb_harness_revision_20260907/analysis/hvjb_ur15_feasibility_survey_20260915.md:167: keyword='手先': - **UR15継続候補**：必要な手先姿勢と進退空間を確保できる。
+  結果は以下の原因別に整理すると機種判断につながる。
+  - **UR15継続候補**：必要な手先姿勢と進退空間を確保できる。
+  - **工具／ハンド変更候補**：腕は届くが先端外形が障害になる。
+  - **小型／7軸の比較対象**：先端は入るが腕・手首・肘の姿勢が障害になる。
+INFO: eval_runs/ur15_jb_harness_revision_20260907/analysis/hvjb_ur15_feasibility_survey_20260915.md:19: keyword='手先': 5. 手先は入るが肘の姿勢を確保できない場合、7軸アームや設置姿勢変更を比較する。
+INFO: eval_runs/ur15_jb_harness_revision_20260907/analysis/hvjb_ur15_feasibility_survey_20260915.md:92: keyword='手先': | 指先・工具が同時に入らない | 黒被覆を保持した端末と締付軸、内側コネクター | 対象別の細い手先・ノーズ、工具本体を箱外へ置く構成 |
+INFO: eval_runs/ur15_jb_harness_revision_20260907/analysis/hvjb_ur15_feasibility_survey_20260915.md:105: keyword='手先': | A：先組み＋UR15＋専用工具 | 箱外で内部ユニットを組み、UR15で扱う。狭い最終接続は専用手先・設備側工具へ分担 | 筐体壁や上段部品に邪魔される作業を減らす。現行資産を活用 | 実際の部分組立単位、自由端支持、挿入・固定経路が必要 | 最初に比較 |
+INFO: eval_runs/ur15_jb_harness_revision_20260907/analysis/hvjb_ur15_feasibility_survey_20260915.md:106: keyword='手先': | B：UR15と小型アームを併用 | UR15は大きな部材・広い搬送範囲を担当。小部品接続は小型アーム＋専用手先 | 腕・手首の占有空間を減らせる可能性 | 供給台を近くへ配置、工具込み質量・反力、制御と設備構成の見直し | Aで残る難所向け |
+INFO: eval_runs/ur15_jb_harness_revision_20260907/analysis/hvjb_ur15_feasibility_survey_20260915.md:107: keyword='手先': | C：7軸アームを難所へ使用 | 手先位置・向きを維持しながら肘姿勢を選べる余地を使う | 6軸で姿勢が詰まる場合の回避候補 | 手先の幅、配線、保持、工具の同時進入は別課題 | 姿勢が原因と分かった場合 |
+INFO: eval_runs/ur15_jb_harness_revision_20260907/analysis/hvjb_ur15_feasibility_survey_20260915.md:159: keyword='手先': 4. **腕の到達姿勢**：UR15の公式機構・関節範囲に照らし、手先の位置だけでなく向きを含めて解く。
+INFO: eval_runs/ur15_jb_harness_revision_20260907/analysis/hvjb_ur15_feasibility_survey_20260915.md:189: keyword='手先': 既存のT050入力選択、手先の静的メッシュ、工具距離比較、TE CAD、写真台帳、

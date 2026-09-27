@@ -1,0 +1,12 @@
+{
+  "observed_at": "2026-09-27T10:53:10.084222+09:00",
+  "entry": "/home/rlrk/Downloads/HVJB_ライン全体レビュー_v05d_20260924/index_v05d_1.html",
+  "files_added_and_read_back": 7,
+  "original_files_unchanged": 515,
+  "mp4_count": 1,
+  "video_sha256": "0cdcd4d43831c3f805aa4e5960b666e7965ee6f1ac38b59d31645630d1dd40da",
+  "overlay_manifest_sha256": "be50352c68cbff865eac2fe2fc884afb90c8dbb15c41d1716c81509ab9f39602",
+  "qa_receipt_sha256": "e85c027637f6ccbb594d9a447b234f80a6c2aba633239af0db077886ceb9dcd1",
+  "browser_receipt_sha256": "10dfe46a08e2d463478023377495dd217cacb43ced03506a466b5e41ace16e37",
+  "script_sha256": "1ee804b9d91ff3193c21638ab913cf86477ce8d7f09a4e203c9ef9c3b926198d"
+}

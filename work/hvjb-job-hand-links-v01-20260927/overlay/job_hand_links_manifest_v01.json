@@ -1,0 +1,57 @@
+{
+  "observed_at": "2026-09-27T10:15:38.787367+09:00",
+  "entry": "index_v05d_1.html",
+  "files": [
+    {
+      "path": "2026-09-27_手先図への移動.md",
+      "sha256": "939dc3f2293d93fd0195f7fc18a06c773c164c508620e5d5a6d01ab0d9f2863c",
+      "bytes": 512
+    },
+    {
+      "path": "data/job_hand_links_v01.json",
+      "sha256": "74e77215ece29b680ae5f077402604b8276bf57f4f85069870f7959792b62e9a",
+      "bytes": 17492
+    },
+    {
+      "path": "hand_review/index_v02.html",
+      "sha256": "455c5a74aea55fc3fd40db2e859b1e74965b723e4d6e44aace5491f23466ccde",
+      "bytes": 29091
+    },
+    {
+      "path": "index_v05d_1.html",
+      "sha256": "b1454f84ec6718074dbeb10ae06b5c5260b5feeab2998deb6ea55b2d71213b62",
+      "bytes": 127799
+    },
+    {
+      "path": "job_hands_v01.css",
+      "sha256": "af3e4f73ac460a769cb89e70de65d8a3b5f0d67aaaef702a7993f5bc00a606f0",
+      "bytes": 1069
+    },
+    {
+      "path": "review_job_hands_v01.js",
+      "sha256": "3393be717b49a5bb4c3c415518cfad9ed95a0e4417e250ee1f30ccf5a75f5466",
+      "bytes": 11379
+    }
+  ],
+  "source_manifest_sha256": "d7e0f1d05fa2083690f440dfdd289f2d8b8d55156b7d17c876842f180db91790",
+  "source_video_sha256": "0cdcd4d43831c3f805aa4e5960b666e7965ee6f1ac38b59d31645630d1dd40da",
+  "source_variants_sha256": "790f3e0109a473770725b9d676e47baa6d999a4d494f4ab8d5db347e43856006",
+  "counts": {
+    "jobs": 20,
+    "hand_uses": 12,
+    "features": 92,
+    "scenes": 22
+  },
+  "jobs_without_individual_comparison": [
+    "D01",
+    "D42",
+    "D61",
+    "D71",
+    "D81"
+  ],
+  "generator_sha256": "4e50cdef396324b9c7f035bf65c53c973704d0f32b053532b7770cbc071ee336",
+  "helper_sha256": "984755d98616dfacdf66d38477689fb94184ac9b6e36d2af4ac4169e230d3639",
+  "css_sha256": "af3e4f73ac460a769cb89e70de65d8a3b5f0d67aaaef702a7993f5bc00a606f0",
+  "new_video_generated": false,
+  "new_mechanical_design_selected": false
+}

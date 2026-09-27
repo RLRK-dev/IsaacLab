@@ -1,0 +1,31 @@
+{
+  "observed_at": "2026-09-27T10:23:40.522046+09:00",
+  "entry_sha256": "b1454f84ec6718074dbeb10ae06b5c5260b5feeab2998deb6ea55b2d71213b62",
+  "overlay_manifest_sha256": "be50352c68cbff865eac2fe2fc884afb90c8dbb15c41d1716c81509ab9f39602",
+  "original_files_unchanged": 515,
+  "additional_files": 7,
+  "job_feature_scene_records_unchanged": true,
+  "hand_variant_records_unchanged": true,
+  "all_mapping_edges_unchanged": true,
+  "jobs_without_individual_comparison": [
+    "D01",
+    "D42",
+    "D61",
+    "D71",
+    "D81"
+  ],
+  "links": [
+    {
+      "file": "index_v05d_1.html",
+      "links_checked": 29
+    },
+    {
+      "file": "hand_review/index_v02.html",
+      "links_checked": 101
+    }
+  ],
+  "new_javascript_syntax_passed": true,
+  "videos": 1,
+  "new_mechanical_verdict": null,
+  "script_sha256": "b2f7a101e4fa045f9fc6b729fe16c7377e4a16c6b74c36309825969b4a8ecbb2"
+}

@@ -1,0 +1,103 @@
+{
+  "observed_at": "2026-09-24T03:17:53.438453+09:00",
+  "source_sha256": {
+    "/tmp/hvjb-line-progress-20260923/work/hvjb-line-video-v05b-20260923/data/concept_display_v05_reused.npz": "7702cadf9e412895a14c82d1a6b85a6aa659f2978c22e59ddf16e2714c793a60",
+    "/tmp/hvjb-line-progress-20260923/work/hvjb-line-video-v05b-20260923/data/concept_v05b.json": "d2a9937c621df4b8be60092146890f6a04ccf359efd5023595c41dee61793a7b",
+    "/tmp/hvjb-line-progress-20260923/work/hvjb-display-continuity-v01-20260923/probe_saved.py": "c58c517ee79e2ac1c390478924e49a430038537dfa8ebb759e8c2b7153351be5",
+    "/tmp/hvjb-line-progress-20260923/work/hvjb-xyz-display-v01-20260924/correct_infeed.py": "4124520a1eac634ffcfccdc96026ed77c342f0075b8b4b4037a6fcd93d050f2c"
+  },
+  "output_bank": "data/concept_display_v05c.npz",
+  "output_bank_sha256": "21a64890540a06d94c06c6ee8e607f90dbe9c5b69ddf14fe944135614e28c409",
+  "samples": 1785,
+  "changed_samples": 23,
+  "changed_columns": [
+    {
+      "column": 254,
+      "name": "infeed_palm"
+    },
+    {
+      "column": 255,
+      "name": "infeed_left_finger"
+    },
+    {
+      "column": 256,
+      "name": "infeed_right_finger"
+    },
+    {
+      "column": 257,
+      "name": "infeed_carrier"
+    },
+    {
+      "column": 252,
+      "name": "infeed_z"
+    }
+  ],
+  "changed_matrix_elements": "translation Z only",
+  "first_last_changed_video_s": [
+    3.066666666666667,
+    4.533333333333333
+  ],
+  "first_last_changed_source_clock": [
+    4.066666666666666,
+    5.533333333333333
+  ],
+  "maximum_absolute_vertical_correction": 0.015,
+  "pickup_hand_relative_to_case_before": {
+    "minimum": [
+      0.0,
+      0.0,
+      0.13999999999999968
+    ],
+    "maximum": [
+      0.0,
+      0.0,
+      0.15500000000000003
+    ],
+    "range": [
+      0.0,
+      0.0,
+      0.015000000000000346
+    ]
+  },
+  "pickup_hand_relative_to_case_after": {
+    "minimum": [
+      0.0,
+      0.0,
+      0.13999999999999968
+    ],
+    "maximum": [
+      0.0,
+      0.0,
+      0.14000000000000035
+    ],
+    "range": [
+      0.0,
+      0.0,
+      6.661338147750939e-16
+    ]
+  },
+  "return_hand_relative_to_case_unchanged": {
+    "minimum": [
+      0.0,
+      0.0,
+      0.1399999999999999
+    ],
+    "maximum": [
+      0.0,
+      0.0,
+      0.14000000000000035
+    ],
+    "range": [
+      0.0,
+      0.0,
+      4.440892098500626e-16
+    ]
+  },
+  "all_other_saved_elements_bitwise_identical": true,
+  "saved_readback_identical": true,
+  "original_source_unchanged": true,
+  "position_units": "Dimensionless explanatory coordinates, not manufacturing meters.",
+  "basis": "Retain the existing carry offset 0.14; correct its 0.155 pickup endpoint using the existing smoothstep.",
+  "new_robot_ik_or_control": false,
+  "physical_acceptance_verdict": null
+}

@@ -1,0 +1,63 @@
+{
+  "kind": "identified_multiple_saved_sources_not_a_new_robot_motion_bank",
+  "sources": {
+    "v05c_plan": {
+      "path": "/tmp/hvjb-line-progress-20260923/work/hvjb-line-video-v05c-20260924/data/concept_v05c.json",
+      "sha256": "1bc4012b75fd1a83e7dc333864385c6a3c5e0b7ed4ae9c99304307590526e139"
+    },
+    "v05c_manifest": {
+      "path": "/tmp/hvjb-line-progress-20260923/work/hvjb-line-video-v05c-20260924/previews/concept_v05c/manifest.json",
+      "sha256": "6cdaf01b272f1ff3c90296c64429c1070a363ba94dc038660b89dfc426dbd95d"
+    },
+    "changed_manifest": {
+      "path": "/tmp/hvjb-line-progress-20260923/work/hvjb-line-video-v05d-20260924/changed_pngs/manifest.json",
+      "sha256": "fbc7ebbb3ef3ca54002061e84adbcca0330d297a324590941c731aecb10ce68b"
+    },
+    "hold_delta": {
+      "path": "/tmp/hvjb-line-progress-20260923/work/hvjb-hold-display-v01-20260924/audit/hold_display_delta.json",
+      "sha256": "4955ccfbf4863d6bb4373a98593352f9d1ed9405d7fe54c77dc616e2cf97aebd"
+    },
+    "panel_delta": {
+      "path": "/tmp/hvjb-line-progress-20260923/work/hvjb-panel-display-v02-20260924/audit/panel_display_delta.json",
+      "sha256": "41bf5d89e3f740b6d4cbbf4ebe2b23e2801d6c93c285cd92974a86ffce78f4e2"
+    },
+    "panel_readback": {
+      "path": "/tmp/hvjb-line-progress-20260923/work/hvjb-panel-display-v02-20260924/audit/panel_verification.json",
+      "sha256": "0228addacf686e49f53c9ad4c97e0a0ebbfdbbba6bbad76332bb499d8a6dce0b"
+    }
+  },
+  "chapters": [
+    {
+      "id": "MAIN",
+      "start_s": 0,
+      "stop_s": 119,
+      "label_ja": "ライン全体・20仕事"
+    },
+    {
+      "id": "H06_loading",
+      "start_s": 119,
+      "stop_s": 129,
+      "label_ja": "H06 空筐体の載置と開放"
+    },
+    {
+      "id": "H06_pickup",
+      "start_s": 129,
+      "stop_s": 139,
+      "label_ja": "H06 再把持と取出し"
+    },
+    {
+      "id": "H05_P16",
+      "start_s": 139,
+      "stop_s": 147,
+      "label_ja": "H05 3口ヘッダーの開放・退避"
+    },
+    {
+      "id": "H05_P17",
+      "start_s": 147,
+      "stop_s": 155.2,
+      "label_ja": "H05 2口ヘッダーの開放・退避"
+    }
+  ],
+  "local_chapters_same_png_bytes_as_v05c": true,
+  "corrected_main_samples": 922
+}

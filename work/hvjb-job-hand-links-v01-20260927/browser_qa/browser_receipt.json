@@ -1,0 +1,660 @@
+{
+  "observed_at": "2026-09-27T01:35:46.912Z",
+  "browser": "154.0.8037.57",
+  "entry_sha256": "b1454f84ec6718074dbeb10ae06b5c5260b5feeab2998deb6ea55b2d71213b62",
+  "script_sha256": "8869ce953a9f99acbea999206caa4b7a6beb42db9817722a3665c6563c725f37",
+  "observations": [
+    {
+      "job": "D00",
+      "shown_hand_uses": [
+        "H06_CASE"
+      ],
+      "note_visible": true,
+      "images_loaded": true
+    },
+    {
+      "job": "D01",
+      "shown_hand_uses": [],
+      "note_visible": true,
+      "images_loaded": true
+    },
+    {
+      "job": "D10",
+      "shown_hand_uses": [
+        "H01_BODY",
+        "H02_BODY"
+      ],
+      "note_visible": true,
+      "images_loaded": true
+    },
+    {
+      "job": "D11",
+      "shown_hand_uses": [
+        "H04_CABLE"
+      ],
+      "note_visible": true,
+      "images_loaded": true
+    },
+    {
+      "job": "D12",
+      "shown_hand_uses": [
+        "H06_UNIT"
+      ],
+      "note_visible": true,
+      "images_loaded": true
+    },
+    {
+      "job": "D20",
+      "shown_hand_uses": [
+        "H02_BODY",
+        "H08_FUSE"
+      ],
+      "note_visible": true,
+      "images_loaded": true
+    },
+    {
+      "job": "D21",
+      "shown_hand_uses": [
+        "H04_CABLE"
+      ],
+      "note_visible": true,
+      "images_loaded": true
+    },
+    {
+      "job": "D22",
+      "shown_hand_uses": [
+        "H07_PANEL"
+      ],
+      "note_visible": true,
+      "images_loaded": true
+    },
+    {
+      "job": "D30",
+      "shown_hand_uses": [
+        "H07_PANEL"
+      ],
+      "note_visible": true,
+      "images_loaded": true
+    },
+    {
+      "job": "D31",
+      "shown_hand_uses": [
+        "H06_UNIT",
+        "H07_PANEL"
+      ],
+      "note_visible": true,
+      "images_loaded": true
+    },
+    {
+      "job": "D40",
+      "shown_hand_uses": [
+        "H06_UNIT"
+      ],
+      "note_visible": true,
+      "images_loaded": true
+    },
+    {
+      "job": "D42",
+      "shown_hand_uses": [],
+      "note_visible": true,
+      "images_loaded": true
+    },
+    {
+      "job": "D45",
+      "shown_hand_uses": [
+        "H05_INNER"
+      ],
+      "note_visible": true,
+      "images_loaded": true
+    },
+    {
+      "job": "D50",
+      "shown_hand_uses": [
+        "H05_OUTER3",
+        "H05_OUTER2"
+      ],
+      "note_visible": true,
+      "images_loaded": true
+    },
+    {
+      "job": "D60",
+      "shown_hand_uses": [
+        "H03_BUS",
+        "H04_CABLE",
+        "H08_FUSE"
+      ],
+      "note_visible": true,
+      "images_loaded": true
+    },
+    {
+      "job": "D61",
+      "shown_hand_uses": [],
+      "note_visible": true,
+      "images_loaded": true
+    },
+    {
+      "job": "D70",
+      "shown_hand_uses": [
+        "H07_LID"
+      ],
+      "note_visible": true,
+      "images_loaded": true
+    },
+    {
+      "job": "D71",
+      "shown_hand_uses": [],
+      "note_visible": true,
+      "images_loaded": true
+    },
+    {
+      "job": "D80",
+      "shown_hand_uses": [
+        "H06_CASE"
+      ],
+      "note_visible": true,
+      "images_loaded": true
+    },
+    {
+      "job": "D81",
+      "shown_hand_uses": [],
+      "note_visible": true,
+      "images_loaded": true
+    },
+    {
+      "job": "D10",
+      "shown_hand_uses": [
+        "H01_BODY",
+        "H02_BODY"
+      ],
+      "note_visible": true,
+      "images_loaded": true
+    },
+    {
+      "round_trip": "H01_BODY",
+      "job": "D10",
+      "matching_card_and_return": true
+    },
+    {
+      "job": "D10",
+      "shown_hand_uses": [
+        "H01_BODY",
+        "H02_BODY"
+      ],
+      "note_visible": true,
+      "images_loaded": true
+    },
+    {
+      "round_trip": "H02_BODY",
+      "job": "D10",
+      "matching_card_and_return": true
+    },
+    {
+      "job": "D60",
+      "shown_hand_uses": [
+        "H03_BUS",
+        "H04_CABLE",
+        "H08_FUSE"
+      ],
+      "note_visible": true,
+      "images_loaded": true
+    },
+    {
+      "round_trip": "H03_BUS",
+      "job": "D60",
+      "matching_card_and_return": true
+    },
+    {
+      "job": "D11",
+      "shown_hand_uses": [
+        "H04_CABLE"
+      ],
+      "note_visible": true,
+      "images_loaded": true
+    },
+    {
+      "round_trip": "H04_CABLE",
+      "job": "D11",
+      "matching_card_and_return": true
+    },
+    {
+      "job": "D50",
+      "shown_hand_uses": [
+        "H05_OUTER3",
+        "H05_OUTER2"
+      ],
+      "note_visible": true,
+      "images_loaded": true
+    },
+    {
+      "round_trip": "H05_OUTER3",
+      "job": "D50",
+      "matching_card_and_return": true
+    },
+    {
+      "job": "D50",
+      "shown_hand_uses": [
+        "H05_OUTER3",
+        "H05_OUTER2"
+      ],
+      "note_visible": true,
+      "images_loaded": true
+    },
+    {
+      "round_trip": "H05_OUTER2",
+      "job": "D50",
+      "matching_card_and_return": true
+    },
+    {
+      "job": "D45",
+      "shown_hand_uses": [
+        "H05_INNER"
+      ],
+      "note_visible": true,
+      "images_loaded": true
+    },
+    {
+      "round_trip": "H05_INNER",
+      "job": "D45",
+      "matching_card_and_return": true
+    },
+    {
+      "job": "D00",
+      "shown_hand_uses": [
+        "H06_CASE"
+      ],
+      "note_visible": true,
+      "images_loaded": true
+    },
+    {
+      "round_trip": "H06_CASE",
+      "job": "D00",
+      "matching_card_and_return": true
+    },
+    {
+      "job": "D12",
+      "shown_hand_uses": [
+        "H06_UNIT"
+      ],
+      "note_visible": true,
+      "images_loaded": true
+    },
+    {
+      "round_trip": "H06_UNIT",
+      "job": "D12",
+      "matching_card_and_return": true
+    },
+    {
+      "job": "D22",
+      "shown_hand_uses": [
+        "H07_PANEL"
+      ],
+      "note_visible": true,
+      "images_loaded": true
+    },
+    {
+      "round_trip": "H07_PANEL",
+      "job": "D22",
+      "matching_card_and_return": true
+    },
+    {
+      "job": "D70",
+      "shown_hand_uses": [
+        "H07_LID"
+      ],
+      "note_visible": true,
+      "images_loaded": true
+    },
+    {
+      "round_trip": "H07_LID",
+      "job": "D70",
+      "matching_card_and_return": true
+    },
+    {
+      "job": "D20",
+      "shown_hand_uses": [
+        "H02_BODY",
+        "H08_FUSE"
+      ],
+      "note_visible": true,
+      "images_loaded": true
+    },
+    {
+      "round_trip": "H08_FUSE",
+      "job": "D20",
+      "matching_card_and_return": true
+    },
+    {
+      "scene_from_job": "H05_P16",
+      "time": 139,
+      "media_error": null
+    },
+    {
+      "job": "D11",
+      "shown_hand_uses": [
+        "H04_CABLE"
+      ],
+      "note_visible": true,
+      "images_loaded": true
+    },
+    {
+      "browser_back_restores_job": "D11"
+    },
+    {
+      "job": "D31",
+      "shown_hand_uses": [
+        "H06_UNIT",
+        "H07_PANEL"
+      ],
+      "note_visible": true,
+      "images_loaded": true
+    },
+    {
+      "mobile_job": "D31",
+      "widths": {
+        "viewport": 430,
+        "body": 430,
+        "root": 430
+      }
+    },
+    {
+      "job": "D50",
+      "shown_hand_uses": [
+        "H05_OUTER3",
+        "H05_OUTER2"
+      ],
+      "note_visible": true,
+      "images_loaded": true
+    },
+    {
+      "mobile_job": "D50",
+      "widths": {
+        "viewport": 430,
+        "body": 430,
+        "root": 430
+      }
+    },
+    {
+      "job": "D61",
+      "shown_hand_uses": [],
+      "note_visible": true,
+      "images_loaded": true
+    },
+    {
+      "mobile_job": "D61",
+      "widths": {
+        "viewport": 430,
+        "body": 430,
+        "root": 430
+      }
+    }
+  ],
+  "screenshots": [
+    {
+      "file": "browser_qa/desktop_D00.png",
+      "sha256": "5fd103ff9ac6e0936c4ff42ccb9d4700c2988e9e0e7c119e6e4de56fda9bdd31",
+      "viewport": {
+        "width": 1440,
+        "height": 1100
+      }
+    },
+    {
+      "file": "browser_qa/desktop_D31.png",
+      "sha256": "e35dca49e008b269d30ba91674ba08621873981cf380bf1ec1ec3716790c439f",
+      "viewport": {
+        "width": 1440,
+        "height": 1100
+      }
+    },
+    {
+      "file": "browser_qa/desktop_D50.png",
+      "sha256": "e9b01a7b308b09d71ee8b85798608a70a5782645e8e9a2bd3b186c5b4d03158a",
+      "viewport": {
+        "width": 1440,
+        "height": 1100
+      }
+    },
+    {
+      "file": "browser_qa/desktop_D60.png",
+      "sha256": "5a452f0746ecf35469c74ef44362cfad7aab8f7541b3c97321382188b6ca0898",
+      "viewport": {
+        "width": 1440,
+        "height": 1100
+      }
+    },
+    {
+      "file": "browser_qa/desktop_D61.png",
+      "sha256": "edef792e92804f62f7c1c08a8637e9eeae055af02002007e959718277c090259",
+      "viewport": {
+        "width": 1440,
+        "height": 1100
+      }
+    },
+    {
+      "file": "browser_qa/mobile_D31.png",
+      "sha256": "2f80f2faeda8b4577a6e381269393836d6ebfd094013a52af7a45a8d66c33ded",
+      "viewport": {
+        "width": 430,
+        "height": 932
+      }
+    },
+    {
+      "file": "browser_qa/mobile_D50.png",
+      "sha256": "af6a60842e2ed96adfe5c998255f66ba40b88567de731eaa0e654fc4d53aa5fb",
+      "viewport": {
+        "width": 430,
+        "height": 932
+      }
+    },
+    {
+      "file": "browser_qa/mobile_D61.png",
+      "sha256": "c20eb8d2d35ba6a080c8a780d5ee95020cdbe4c0f2f60267948248e712076262",
+      "viewport": {
+        "width": 430,
+        "height": 932
+      }
+    }
+  ],
+  "page_errors": [],
+  "all_requestfailures": [
+    {
+      "url": "file:///home/rlrk/IsaacLab/work/hvjb-line-progress-20260927/work/hvjb-job-hand-links-v01-20260927/preview/HVJB_line_split_process_concept_v05d_review.mp4",
+      "type": "media",
+      "reason": {
+        "errorText": "net::ERR_ABORTED"
+      }
+    },
+    {
+      "url": "file:///home/rlrk/IsaacLab/work/hvjb-line-progress-20260927/work/hvjb-job-hand-links-v01-20260927/preview/HVJB_line_split_process_concept_v05d_review.mp4",
+      "type": "media",
+      "reason": {
+        "errorText": "net::ERR_ABORTED"
+      }
+    },
+    {
+      "url": "file:///home/rlrk/IsaacLab/work/hvjb-line-progress-20260927/work/hvjb-job-hand-links-v01-20260927/preview/HVJB_line_split_process_concept_v05d_review.mp4",
+      "type": "media",
+      "reason": {
+        "errorText": "net::ERR_ABORTED"
+      }
+    },
+    {
+      "url": "file:///home/rlrk/IsaacLab/work/hvjb-line-progress-20260927/work/hvjb-job-hand-links-v01-20260927/preview/HVJB_line_split_process_concept_v05d_review.mp4",
+      "type": "media",
+      "reason": {
+        "errorText": "net::ERR_ABORTED"
+      }
+    },
+    {
+      "url": "file:///home/rlrk/IsaacLab/work/hvjb-line-progress-20260927/work/hvjb-job-hand-links-v01-20260927/preview/HVJB_line_split_process_concept_v05d_review.mp4",
+      "type": "media",
+      "reason": {
+        "errorText": "net::ERR_ABORTED"
+      }
+    },
+    {
+      "url": "file:///home/rlrk/IsaacLab/work/hvjb-line-progress-20260927/work/hvjb-job-hand-links-v01-20260927/preview/HVJB_line_split_process_concept_v05d_review.mp4",
+      "type": "media",
+      "reason": {
+        "errorText": "net::ERR_ABORTED"
+      }
+    },
+    {
+      "url": "file:///home/rlrk/IsaacLab/work/hvjb-line-progress-20260927/work/hvjb-job-hand-links-v01-20260927/preview/HVJB_line_split_process_concept_v05d_review.mp4",
+      "type": "media",
+      "reason": {
+        "errorText": "net::ERR_ABORTED"
+      }
+    },
+    {
+      "url": "file:///home/rlrk/IsaacLab/work/hvjb-line-progress-20260927/work/hvjb-job-hand-links-v01-20260927/preview/HVJB_line_split_process_concept_v05d_review.mp4",
+      "type": "media",
+      "reason": {
+        "errorText": "net::ERR_ABORTED"
+      }
+    },
+    {
+      "url": "file:///home/rlrk/IsaacLab/work/hvjb-line-progress-20260927/work/hvjb-job-hand-links-v01-20260927/preview/HVJB_line_split_process_concept_v05d_review.mp4",
+      "type": "media",
+      "reason": {
+        "errorText": "net::ERR_ABORTED"
+      }
+    },
+    {
+      "url": "file:///home/rlrk/IsaacLab/work/hvjb-line-progress-20260927/work/hvjb-job-hand-links-v01-20260927/preview/HVJB_line_split_process_concept_v05d_review.mp4",
+      "type": "media",
+      "reason": {
+        "errorText": "net::ERR_ABORTED"
+      }
+    },
+    {
+      "url": "file:///home/rlrk/IsaacLab/work/hvjb-line-progress-20260927/work/hvjb-job-hand-links-v01-20260927/preview/HVJB_line_split_process_concept_v05d_review.mp4",
+      "type": "media",
+      "reason": {
+        "errorText": "net::ERR_ABORTED"
+      }
+    },
+    {
+      "url": "file:///home/rlrk/IsaacLab/work/hvjb-line-progress-20260927/work/hvjb-job-hand-links-v01-20260927/preview/HVJB_line_split_process_concept_v05d_review.mp4",
+      "type": "media",
+      "reason": {
+        "errorText": "net::ERR_ABORTED"
+      }
+    },
+    {
+      "url": "file:///home/rlrk/IsaacLab/work/hvjb-line-progress-20260927/work/hvjb-job-hand-links-v01-20260927/preview/HVJB_line_split_process_concept_v05d_review.mp4",
+      "type": "media",
+      "reason": {
+        "errorText": "net::ERR_ABORTED"
+      }
+    },
+    {
+      "url": "file:///home/rlrk/IsaacLab/work/hvjb-line-progress-20260927/work/hvjb-job-hand-links-v01-20260927/preview/HVJB_line_split_process_concept_v05d_review.mp4",
+      "type": "media",
+      "reason": {
+        "errorText": "net::ERR_ABORTED"
+      }
+    }
+  ],
+  "media_cancellations": [
+    {
+      "url": "file:///home/rlrk/IsaacLab/work/hvjb-line-progress-20260927/work/hvjb-job-hand-links-v01-20260927/preview/HVJB_line_split_process_concept_v05d_review.mp4",
+      "type": "media",
+      "reason": {
+        "errorText": "net::ERR_ABORTED"
+      }
+    },
+    {
+      "url": "file:///home/rlrk/IsaacLab/work/hvjb-line-progress-20260927/work/hvjb-job-hand-links-v01-20260927/preview/HVJB_line_split_process_concept_v05d_review.mp4",
+      "type": "media",
+      "reason": {
+        "errorText": "net::ERR_ABORTED"
+      }
+    },
+    {
+      "url": "file:///home/rlrk/IsaacLab/work/hvjb-line-progress-20260927/work/hvjb-job-hand-links-v01-20260927/preview/HVJB_line_split_process_concept_v05d_review.mp4",
+      "type": "media",
+      "reason": {
+        "errorText": "net::ERR_ABORTED"
+      }
+    },
+    {
+      "url": "file:///home/rlrk/IsaacLab/work/hvjb-line-progress-20260927/work/hvjb-job-hand-links-v01-20260927/preview/HVJB_line_split_process_concept_v05d_review.mp4",
+      "type": "media",
+      "reason": {
+        "errorText": "net::ERR_ABORTED"
+      }
+    },
+    {
+      "url": "file:///home/rlrk/IsaacLab/work/hvjb-line-progress-20260927/work/hvjb-job-hand-links-v01-20260927/preview/HVJB_line_split_process_concept_v05d_review.mp4",
+      "type": "media",
+      "reason": {
+        "errorText": "net::ERR_ABORTED"
+      }
+    },
+    {
+      "url": "file:///home/rlrk/IsaacLab/work/hvjb-line-progress-20260927/work/hvjb-job-hand-links-v01-20260927/preview/HVJB_line_split_process_concept_v05d_review.mp4",
+      "type": "media",
+      "reason": {
+        "errorText": "net::ERR_ABORTED"
+      }
+    },
+    {
+      "url": "file:///home/rlrk/IsaacLab/work/hvjb-line-progress-20260927/work/hvjb-job-hand-links-v01-20260927/preview/HVJB_line_split_process_concept_v05d_review.mp4",
+      "type": "media",
+      "reason": {
+        "errorText": "net::ERR_ABORTED"
+      }
+    },
+    {
+      "url": "file:///home/rlrk/IsaacLab/work/hvjb-line-progress-20260927/work/hvjb-job-hand-links-v01-20260927/preview/HVJB_line_split_process_concept_v05d_review.mp4",
+      "type": "media",
+      "reason": {
+        "errorText": "net::ERR_ABORTED"
+      }
+    },
+    {
+      "url": "file:///home/rlrk/IsaacLab/work/hvjb-line-progress-20260927/work/hvjb-job-hand-links-v01-20260927/preview/HVJB_line_split_process_concept_v05d_review.mp4",
+      "type": "media",
+      "reason": {
+        "errorText": "net::ERR_ABORTED"
+      }
+    },
+    {
+      "url": "file:///home/rlrk/IsaacLab/work/hvjb-line-progress-20260927/work/hvjb-job-hand-links-v01-20260927/preview/HVJB_line_split_process_concept_v05d_review.mp4",
+      "type": "media",
+      "reason": {
+        "errorText": "net::ERR_ABORTED"
+      }
+    },
+    {
+      "url": "file:///home/rlrk/IsaacLab/work/hvjb-line-progress-20260927/work/hvjb-job-hand-links-v01-20260927/preview/HVJB_line_split_process_concept_v05d_review.mp4",
+      "type": "media",
+      "reason": {
+        "errorText": "net::ERR_ABORTED"
+      }
+    },
+    {
+      "url": "file:///home/rlrk/IsaacLab/work/hvjb-line-progress-20260927/work/hvjb-job-hand-links-v01-20260927/preview/HVJB_line_split_process_concept_v05d_review.mp4",
+      "type": "media",
+      "reason": {
+        "errorText": "net::ERR_ABORTED"
+      }
+    },
+    {
+      "url": "file:///home/rlrk/IsaacLab/work/hvjb-line-progress-20260927/work/hvjb-job-hand-links-v01-20260927/preview/HVJB_line_split_process_concept_v05d_review.mp4",
+      "type": "media",
+      "reason": {
+        "errorText": "net::ERR_ABORTED"
+      }
+    },
+    {
+      "url": "file:///home/rlrk/IsaacLab/work/hvjb-line-progress-20260927/work/hvjb-job-hand-links-v01-20260927/preview/HVJB_line_split_process_concept_v05d_review.mp4",
+      "type": "media",
+      "reason": {
+        "errorText": "net::ERR_ABORTED"
+      }
+    }
+  ],
+  "unexpected_failed_requests": [],
+  "formal_physical_verdict": null
+}

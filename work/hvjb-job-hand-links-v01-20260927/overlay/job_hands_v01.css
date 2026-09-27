@@ -1,0 +1,15 @@
+.job-hand-heading { margin-top: 0; }
+#job-hand-links { display: grid; gap: 12px; margin: 10px 0 12px; }
+.job-hand-link { display: grid; grid-template-columns: 140px minmax(0, 1fr); gap: 17px; align-items: center; padding: 12px; border: 1px solid #cedde3; border-radius: 7px; background: #f6fafb; text-decoration: none; }
+.job-hand-link:hover { border-color: #16816c; background: #edf7f3; }
+.job-hand-link img { display: block; width: 140px; height: 110px; object-fit: contain; background: white; }
+.job-hand-link strong { display: block; line-height: 1.5; font-size: 16px; overflow-wrap: anywhere; }
+.hand-link-status { display: block; margin: 5px 0; color: #526c78; font-size: 13px; }
+.hand-link-action { font-size: 13px; text-decoration: underline; }
+#job-hand-note { margin-bottom: 22px; }
+@media(max-width: 720px) {
+  .job-hand-link { grid-template-columns: 90px minmax(0, 1fr); gap: 10px; padding: 9px; }
+  .job-hand-link img { width: 90px; height: 90px; }
+  .job-hand-link strong { font-size: 14px; }
+  .hand-link-status, .hand-link-action { font-size: 12px; }
+}

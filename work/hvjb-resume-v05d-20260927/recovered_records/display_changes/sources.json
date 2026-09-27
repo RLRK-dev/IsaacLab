@@ -1,0 +1,42 @@
+[
+  {
+    "file": "A_next_0652.png",
+    "source": "/tmp/hvjb-line-progress-20260923/work/hvjb-hold-display-v01-20260924/comparisons/A_next_0652.png",
+    "sha256": "08b5c4b8b43d3b86f63b374b534147f7e0a4a7c4ebf5c1182cf90b924513b75e"
+  },
+  {
+    "file": "C_header_1195.png",
+    "source": "/tmp/hvjb-line-progress-20260923/work/hvjb-hold-display-v01-20260924/comparisons/C_header_1195.png",
+    "sha256": "92101838bd18ed6d33fc72ee331b92142caf6cf14af56f8b675ebbe8b02301b1"
+  },
+  {
+    "file": "B_first_0315.png",
+    "source": "/tmp/hvjb-line-progress-20260923/work/hvjb-panel-display-v02-20260924/comparisons/B_first_0315.png",
+    "sha256": "ce6fb32ece6e4c664c6e5f8d96d8be0ed61a836c6848e8fe69c7a7ed6151a593"
+  },
+  {
+    "file": "B_next_0825.png",
+    "source": "/tmp/hvjb-line-progress-20260923/work/hvjb-panel-display-v02-20260924/comparisons/B_next_0825.png",
+    "sha256": "e9db78dfd2abb1e1ff1f84dea262e5aaf627b0fc433b2855c31775a6a5bd85d4"
+  },
+  {
+    "file": "C_approach_0637.png",
+    "source": "/tmp/hvjb-line-progress-20260923/work/hvjb-panel-display-v02-20260924/comparisons/C_approach_0637.png",
+    "sha256": "a53eb367b3857f5050ef5af841bfea35e4029c999360daf787896b3da830d631"
+  },
+  {
+    "file": "BC_transfer_0650.png",
+    "source": "/tmp/hvjb-line-progress-20260923/work/hvjb-panel-display-v02-20260924/comparisons/BC_transfer_0650.png",
+    "sha256": "4c6b223e21116fff07033a934de5506f297114e0533cd5579931bacac9daae89"
+  },
+  {
+    "file": "C_panel_0690.png",
+    "source": "/tmp/hvjb-line-progress-20260923/work/hvjb-panel-display-v02-20260924/comparisons/C_panel_0690.png",
+    "sha256": "ebe5352896d5f3c78dc54adad7b6b7b4a1ac0f2ecc0dbd6f4a6d4ccc5b675eae"
+  },
+  {
+    "file": "C_regrip_0757.png",
+    "source": "/tmp/hvjb-line-progress-20260923/work/hvjb-panel-display-v02-20260924/comparisons/C_regrip_0757.png",
+    "sha256": "f719e1d292569478e13ca3c365b51b6f8985f54274e7111a2e78715d5d7be03a"
+  }
+]
