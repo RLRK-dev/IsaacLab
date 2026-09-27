@@ -1,0 +1,3 @@
+keywords=['HVJB', '手先切替', 'H07', 'H06']
+findings=0 blockers=0 lessons=0
+PASS: no related prior-art hits found in configured roots.

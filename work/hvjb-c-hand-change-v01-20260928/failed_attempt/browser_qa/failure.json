@@ -1,0 +1,4996 @@
+{
+  "error": "AssertionError [ERR_ASSERTION]: {\"width\":390,\"method\":\"jaws\",\"stage\":0,\"pressed\":2,\"overflow\":false,\"support\":\"下板：F-C ／ ヒューズ板：C主腕\",\"labels\":[{\"text\":\"C主腕\",\"font_size_px\":15.370554956896552,\"clipped\":false},{\"text\":\"同じ爪の輪郭を両用途で使う\",\"font_size_px\":15.370554956896552,\"clipped\":false},{\"text\":\"交換する部品はない候補\",\"font_size_px\":14.516635237068964,\"clipped\":false},{\"text\":\"C主腕\",\"font_size_px\":15.370554956896552,\"clipped\":false},{\"text\":\"交換境界\",\"font_size_px\":15.370554956896552,\"clipped\":false},{\"text\":\"爪をH07用 → 搬送用へ\",\"font_size_px\":15.370554956896552,\"clipped\":false},{\"text\":\"腕側には同じ本体が残る\",\"font_size_px\":14.516635237068964,\"clipped\":false},{\"text\":\"C主腕\",\"font_size_px\":15.370554956896552,\"clipped\":false},{\"text\":\"交換境界\",\"font_size_px\":15.370554956896552,\"clipped\":false},{\"text\":\"本体＋爪をH07 → H06へ\",\"font_size_px\":15.370554956896552,\"clipped\":false},{\"text\":\"腕側には交換部マスタが残る\",\"font_size_px\":14.516635237068964,\"clipped\":false},{\"text\":\"F-C → 作業台へ支持\",\"font_size_px\":15.370216836734695,\"clipped\":false},{\"text\":\"下板\",\"font_size_px\":15.370216836734695,\"clipped\":false},{\"text\":\"板\",\"font_size_px\":15.370216836734695,\"clipped\":false},{\"text\":\"C主腕：H07で板保持\",\"font_size_px\":15.370216836734695,\"clipped\":false},{\"text\":\"腕側にある部品\",\"font_size_px\":15.370216836734695,\"clipped\":false},{\"text\":\"H07側を装着\",\"font_size_px\":14.516315901360544,\"clipped\":false},{\"text\":\"空き\",\"font_size_px\":14.516315901360544,\"clipped\":false},{\"text\":\"H07用\",\"font_size_px\":15.370216836734695,\"clipped\":false},{\"text\":\"ユニット搬送用\",\"font_size_px\":15.370216836734695,\"clipped\":false},{\"text\":\"置台：爪の組だけを保管\",\"font_size_px\":14.516315901360544,\"clipped\":true}]}",
+  "states": [
+    {
+      "width": 1440,
+      "method": "common",
+      "stage": 0,
+      "pressed": 2,
+      "overflow": false,
+      "support": "下板：F-C ／ ヒューズ板：C主腕",
+      "labels": [
+        {
+          "text": "C主腕",
+          "font_size_px": 14,
+          "clipped": false
+        },
+        {
+          "text": "同じ爪の輪郭を両用途で使う",
+          "font_size_px": 14,
+          "clipped": false
+        },
+        {
+          "text": "交換する部品はない候補",
+          "font_size_px": 13,
+          "clipped": false
+        },
+        {
+          "text": "C主腕",
+          "font_size_px": 14,
+          "clipped": false
+        },
+        {
+          "text": "交換境界",
+          "font_size_px": 14,
+          "clipped": false
+        },
+        {
+          "text": "爪をH07用 → 搬送用へ",
+          "font_size_px": 14,
+          "clipped": false
+        },
+        {
+          "text": "腕側には同じ本体が残る",
+          "font_size_px": 13,
+          "clipped": false
+        },
+        {
+          "text": "C主腕",
+          "font_size_px": 14,
+          "clipped": false
+        },
+        {
+          "text": "交換境界",
+          "font_size_px": 14,
+          "clipped": false
+        },
+        {
+          "text": "本体＋爪をH07 → H06へ",
+          "font_size_px": 14,
+          "clipped": false
+        },
+        {
+          "text": "腕側には交換部マスタが残る",
+          "font_size_px": 13,
+          "clipped": false
+        },
+        {
+          "text": "F-C → 作業台へ支持",
+          "font_size_px": 14.523809523809522,
+          "clipped": false
+        },
+        {
+          "text": "下板",
+          "font_size_px": 14.523809523809522,
+          "clipped": false
+        },
+        {
+          "text": "板",
+          "font_size_px": 14.523809523809522,
+          "clipped": false
+        },
+        {
+          "text": "C主腕：H07で板保持",
+          "font_size_px": 14.523809523809522,
+          "clipped": false
+        },
+        {
+          "text": "交換部・置台を使わない候補",
+          "font_size_px": 14.523809523809522,
+          "clipped": false
+        },
+        {
+          "text": "板保持の輪郭を使用",
+          "font_size_px": 14.523809523809522,
+          "clipped": false
+        },
+        {
+          "text": "爪そのものは同じ形を保つ",
+          "font_size_px": 13.486394557823129,
+          "clipped": false
+        },
+        {
+          "text": "両用途を満たす実形状は未設計",
+          "font_size_px": 13.486394557823129,
+          "clipped": false
+        }
+      ]
+    },
+    {
+      "width": 1440,
+      "method": "common",
+      "stage": 1,
+      "pressed": 2,
+      "overflow": false,
+      "support": "一体ユニット：F-C（板間固定の前提）",
+      "labels": [
+        {
+          "text": "C主腕",
+          "font_size_px": 14,
+          "clipped": false
+        },
+        {
+          "text": "同じ爪の輪郭を両用途で使う",
+          "font_size_px": 14,
+          "clipped": false
+        },
+        {
+          "text": "交換する部品はない候補",
+          "font_size_px": 13,
+          "clipped": false
+        },
+        {
+          "text": "C主腕",
+          "font_size_px": 14,
+          "clipped": false
+        },
+        {
+          "text": "交換境界",
+          "font_size_px": 14,
+          "clipped": false
+        },
+        {
+          "text": "爪をH07用 → 搬送用へ",
+          "font_size_px": 14,
+          "clipped": false
+        },
+        {
+          "text": "腕側には同じ本体が残る",
+          "font_size_px": 13,
+          "clipped": false
+        },
+        {
+          "text": "C主腕",
+          "font_size_px": 14,
+          "clipped": false
+        },
+        {
+          "text": "交換境界",
+          "font_size_px": 14,
+          "clipped": false
+        },
+        {
+          "text": "本体＋爪をH07 → H06へ",
+          "font_size_px": 14,
+          "clipped": false
+        },
+        {
+          "text": "腕側には交換部マスタが残る",
+          "font_size_px": 13,
+          "clipped": false
+        },
+        {
+          "text": "F-C → 作業台へ支持",
+          "font_size_px": 14.523809523809522,
+          "clipped": false
+        },
+        {
+          "text": "下板",
+          "font_size_px": 14.523809523809522,
+          "clipped": false
+        },
+        {
+          "text": "板",
+          "font_size_px": 14.523809523809522,
+          "clipped": false
+        },
+        {
+          "text": "C主腕：開放して退避",
+          "font_size_px": 14.523809523809522,
+          "clipped": false
+        },
+        {
+          "text": "本体はF-Cに残る",
+          "font_size_px": 14.523809523809522,
+          "clipped": false
+        },
+        {
+          "text": "交換部・置台を使わない候補",
+          "font_size_px": 14.523809523809522,
+          "clipped": false
+        },
+        {
+          "text": "板保持の輪郭を使用",
+          "font_size_px": 14.523809523809522,
+          "clipped": false
+        },
+        {
+          "text": "爪そのものは同じ形を保つ",
+          "font_size_px": 13.486394557823129,
+          "clipped": false
+        },
+        {
+          "text": "両用途を満たす実形状は未設計",
+          "font_size_px": 13.486394557823129,
+          "clipped": false
+        }
+      ]
+    },
+    {
+      "width": 1440,
+      "method": "common",
+      "stage": 2,
+      "pressed": 2,
+      "overflow": false,
+      "support": "一体ユニット：F-C（板間固定の前提）",
+      "labels": [
+        {
+          "text": "C主腕",
+          "font_size_px": 14,
+          "clipped": false
+        },
+        {
+          "text": "同じ爪の輪郭を両用途で使う",
+          "font_size_px": 14,
+          "clipped": false
+        },
+        {
+          "text": "交換する部品はない候補",
+          "font_size_px": 13,
+          "clipped": false
+        },
+        {
+          "text": "C主腕",
+          "font_size_px": 14,
+          "clipped": false
+        },
+        {
+          "text": "交換境界",
+          "font_size_px": 14,
+          "clipped": false
+        },
+        {
+          "text": "爪をH07用 → 搬送用へ",
+          "font_size_px": 14,
+          "clipped": false
+        },
+        {
+          "text": "腕側には同じ本体が残る",
+          "font_size_px": 13,
+          "clipped": false
+        },
+        {
+          "text": "C主腕",
+          "font_size_px": 14,
+          "clipped": false
+        },
+        {
+          "text": "交換境界",
+          "font_size_px": 14,
+          "clipped": false
+        },
+        {
+          "text": "本体＋爪をH07 → H06へ",
+          "font_size_px": 14,
+          "clipped": false
+        },
+        {
+          "text": "腕側には交換部マスタが残る",
+          "font_size_px": 13,
+          "clipped": false
+        },
+        {
+          "text": "F-C → 作業台へ支持",
+          "font_size_px": 14.523809523809522,
+          "clipped": false
+        },
+        {
+          "text": "下板",
+          "font_size_px": 14.523809523809522,
+          "clipped": false
+        },
+        {
+          "text": "板",
+          "font_size_px": 14.523809523809522,
+          "clipped": false
+        },
+        {
+          "text": "C主腕は手先の切替中",
+          "font_size_px": 14.523809523809522,
+          "clipped": false
+        },
+        {
+          "text": "姿勢・使用輪郭を切り替える",
+          "font_size_px": 13.486394557823129,
+          "clipped": false
+        },
+        {
+          "text": "本体はF-Cに残る",
+          "font_size_px": 14.523809523809522,
+          "clipped": false
+        },
+        {
+          "text": "交換部・置台を使わない候補",
+          "font_size_px": 14.523809523809522,
+          "clipped": false
+        },
+        {
+          "text": "開放して姿勢を切替",
+          "font_size_px": 14.523809523809522,
+          "clipped": false
+        },
+        {
+          "text": "爪そのものは同じ形を保つ",
+          "font_size_px": 13.486394557823129,
+          "clipped": false
+        },
+        {
+          "text": "両用途を満たす実形状は未設計",
+          "font_size_px": 13.486394557823129,
+          "clipped": false
+        }
+      ]
+    },
+    {
+      "width": 1440,
+      "method": "common",
+      "stage": 3,
+      "pressed": 2,
+      "overflow": false,
+      "support": "一体ユニット：F-C（板間固定の前提）",
+      "labels": [
+        {
+          "text": "C主腕",
+          "font_size_px": 14,
+          "clipped": false
+        },
+        {
+          "text": "同じ爪の輪郭を両用途で使う",
+          "font_size_px": 14,
+          "clipped": false
+        },
+        {
+          "text": "交換する部品はない候補",
+          "font_size_px": 13,
+          "clipped": false
+        },
+        {
+          "text": "C主腕",
+          "font_size_px": 14,
+          "clipped": false
+        },
+        {
+          "text": "交換境界",
+          "font_size_px": 14,
+          "clipped": false
+        },
+        {
+          "text": "爪をH07用 → 搬送用へ",
+          "font_size_px": 14,
+          "clipped": false
+        },
+        {
+          "text": "腕側には同じ本体が残る",
+          "font_size_px": 13,
+          "clipped": false
+        },
+        {
+          "text": "C主腕",
+          "font_size_px": 14,
+          "clipped": false
+        },
+        {
+          "text": "交換境界",
+          "font_size_px": 14,
+          "clipped": false
+        },
+        {
+          "text": "本体＋爪をH07 → H06へ",
+          "font_size_px": 14,
+          "clipped": false
+        },
+        {
+          "text": "腕側には交換部マスタが残る",
+          "font_size_px": 13,
+          "clipped": false
+        },
+        {
+          "text": "F-C → 作業台へ支持",
+          "font_size_px": 14.523809523809522,
+          "clipped": false
+        },
+        {
+          "text": "下板",
+          "font_size_px": 14.523809523809522,
+          "clipped": false
+        },
+        {
+          "text": "板",
+          "font_size_px": 14.523809523809522,
+          "clipped": false
+        },
+        {
+          "text": "C主腕は手先の切替中",
+          "font_size_px": 14.523809523809522,
+          "clipped": false
+        },
+        {
+          "text": "姿勢・使用輪郭を切り替える",
+          "font_size_px": 13.486394557823129,
+          "clipped": false
+        },
+        {
+          "text": "本体はF-Cに残る",
+          "font_size_px": 14.523809523809522,
+          "clipped": false
+        },
+        {
+          "text": "交換部・置台を使わない候補",
+          "font_size_px": 14.523809523809522,
+          "clipped": false
+        },
+        {
+          "text": "搬送用の輪郭を使用",
+          "font_size_px": 14.523809523809522,
+          "clipped": false
+        },
+        {
+          "text": "爪そのものは同じ形を保つ",
+          "font_size_px": 13.486394557823129,
+          "clipped": false
+        },
+        {
+          "text": "両用途を満たす実形状は未設計",
+          "font_size_px": 13.486394557823129,
+          "clipped": false
+        }
+      ]
+    },
+    {
+      "width": 1440,
+      "method": "common",
+      "stage": 4,
+      "pressed": 2,
+      "overflow": false,
+      "support": "F-Cに支持を残してC主腕で把持",
+      "labels": [
+        {
+          "text": "C主腕",
+          "font_size_px": 14,
+          "clipped": false
+        },
+        {
+          "text": "同じ爪の輪郭を両用途で使う",
+          "font_size_px": 14,
+          "clipped": false
+        },
+        {
+          "text": "交換する部品はない候補",
+          "font_size_px": 13,
+          "clipped": false
+        },
+        {
+          "text": "C主腕",
+          "font_size_px": 14,
+          "clipped": false
+        },
+        {
+          "text": "交換境界",
+          "font_size_px": 14,
+          "clipped": false
+        },
+        {
+          "text": "爪をH07用 → 搬送用へ",
+          "font_size_px": 14,
+          "clipped": false
+        },
+        {
+          "text": "腕側には同じ本体が残る",
+          "font_size_px": 13,
+          "clipped": false
+        },
+        {
+          "text": "C主腕",
+          "font_size_px": 14,
+          "clipped": false
+        },
+        {
+          "text": "交換境界",
+          "font_size_px": 14,
+          "clipped": false
+        },
+        {
+          "text": "本体＋爪をH07 → H06へ",
+          "font_size_px": 14,
+          "clipped": false
+        },
+        {
+          "text": "腕側には交換部マスタが残る",
+          "font_size_px": 13,
+          "clipped": false
+        },
+        {
+          "text": "F-C → 作業台へ支持",
+          "font_size_px": 14.523809523809522,
+          "clipped": false
+        },
+        {
+          "text": "下板",
+          "font_size_px": 14.523809523809522,
+          "clipped": false
+        },
+        {
+          "text": "板",
+          "font_size_px": 14.523809523809522,
+          "clipped": false
+        },
+        {
+          "text": "C主腕：支持上で搬送把持",
+          "font_size_px": 14.523809523809522,
+          "clipped": false
+        },
+        {
+          "text": "本体はF-Cに残る",
+          "font_size_px": 14.523809523809522,
+          "clipped": false
+        },
+        {
+          "text": "交換部・置台を使わない候補",
+          "font_size_px": 14.523809523809522,
+          "clipped": false
+        },
+        {
+          "text": "搬送用の輪郭を使用",
+          "font_size_px": 14.523809523809522,
+          "clipped": false
+        },
+        {
+          "text": "爪そのものは同じ形を保つ",
+          "font_size_px": 13.486394557823129,
+          "clipped": false
+        },
+        {
+          "text": "両用途を満たす実形状は未設計",
+          "font_size_px": 13.486394557823129,
+          "clipped": false
+        }
+      ]
+    },
+    {
+      "width": 1440,
+      "method": "common",
+      "stage": 5,
+      "pressed": 2,
+      "overflow": false,
+      "support": "本体：C主腕 ／ 自由端：別担当",
+      "labels": [
+        {
+          "text": "C主腕",
+          "font_size_px": 14,
+          "clipped": false
+        },
+        {
+          "text": "同じ爪の輪郭を両用途で使う",
+          "font_size_px": 14,
+          "clipped": false
+        },
+        {
+          "text": "交換する部品はない候補",
+          "font_size_px": 13,
+          "clipped": false
+        },
+        {
+          "text": "C主腕",
+          "font_size_px": 14,
+          "clipped": false
+        },
+        {
+          "text": "交換境界",
+          "font_size_px": 14,
+          "clipped": false
+        },
+        {
+          "text": "爪をH07用 → 搬送用へ",
+          "font_size_px": 14,
+          "clipped": false
+        },
+        {
+          "text": "腕側には同じ本体が残る",
+          "font_size_px": 13,
+          "clipped": false
+        },
+        {
+          "text": "C主腕",
+          "font_size_px": 14,
+          "clipped": false
+        },
+        {
+          "text": "交換境界",
+          "font_size_px": 14,
+          "clipped": false
+        },
+        {
+          "text": "本体＋爪をH07 → H06へ",
+          "font_size_px": 14,
+          "clipped": false
+        },
+        {
+          "text": "腕側には交換部マスタが残る",
+          "font_size_px": 13,
+          "clipped": false
+        },
+        {
+          "text": "F-C → 作業台へ支持",
+          "font_size_px": 14.523809523809522,
+          "clipped": false
+        },
+        {
+          "text": "下板",
+          "font_size_px": 14.523809523809522,
+          "clipped": false
+        },
+        {
+          "text": "板",
+          "font_size_px": 14.523809523809522,
+          "clipped": false
+        },
+        {
+          "text": "C主腕：ユニットを搬送",
+          "font_size_px": 14.523809523809522,
+          "clipped": false
+        },
+        {
+          "text": "支持を引き継いで上昇",
+          "font_size_px": 14.523809523809522,
+          "clipped": false
+        },
+        {
+          "text": "交換部・置台を使わない候補",
+          "font_size_px": 14.523809523809522,
+          "clipped": false
+        },
+        {
+          "text": "搬送用の輪郭を使用",
+          "font_size_px": 14.523809523809522,
+          "clipped": false
+        },
+        {
+          "text": "爪そのものは同じ形を保つ",
+          "font_size_px": 13.486394557823129,
+          "clipped": false
+        },
+        {
+          "text": "両用途を満たす実形状は未設計",
+          "font_size_px": 13.486394557823129,
+          "clipped": false
+        }
+      ]
+    },
+    {
+      "width": 1440,
+      "method": "jaws",
+      "stage": 0,
+      "pressed": 2,
+      "overflow": false,
+      "support": "下板：F-C ／ ヒューズ板：C主腕",
+      "labels": [
+        {
+          "text": "C主腕",
+          "font_size_px": 14,
+          "clipped": false
+        },
+        {
+          "text": "同じ爪の輪郭を両用途で使う",
+          "font_size_px": 14,
+          "clipped": false
+        },
+        {
+          "text": "交換する部品はない候補",
+          "font_size_px": 13,
+          "clipped": false
+        },
+        {
+          "text": "C主腕",
+          "font_size_px": 14,
+          "clipped": false
+        },
+        {
+          "text": "交換境界",
+          "font_size_px": 14,
+          "clipped": false
+        },
+        {
+          "text": "爪をH07用 → 搬送用へ",
+          "font_size_px": 14,
+          "clipped": false
+        },
+        {
+          "text": "腕側には同じ本体が残る",
+          "font_size_px": 13,
+          "clipped": false
+        },
+        {
+          "text": "C主腕",
+          "font_size_px": 14,
+          "clipped": false
+        },
+        {
+          "text": "交換境界",
+          "font_size_px": 14,
+          "clipped": false
+        },
+        {
+          "text": "本体＋爪をH07 → H06へ",
+          "font_size_px": 14,
+          "clipped": false
+        },
+        {
+          "text": "腕側には交換部マスタが残る",
+          "font_size_px": 13,
+          "clipped": false
+        },
+        {
+          "text": "F-C → 作業台へ支持",
+          "font_size_px": 14.523809523809522,
+          "clipped": false
+        },
+        {
+          "text": "下板",
+          "font_size_px": 14.523809523809522,
+          "clipped": false
+        },
+        {
+          "text": "板",
+          "font_size_px": 14.523809523809522,
+          "clipped": false
+        },
+        {
+          "text": "C主腕：H07で板保持",
+          "font_size_px": 14.523809523809522,
+          "clipped": false
+        },
+        {
+          "text": "腕側にある部品",
+          "font_size_px": 14.523809523809522,
+          "clipped": false
+        },
+        {
+          "text": "H07側を装着",
+          "font_size_px": 13.486394557823129,
+          "clipped": false
+        },
+        {
+          "text": "空き",
+          "font_size_px": 13.486394557823129,
+          "clipped": false
+        },
+        {
+          "text": "H07用",
+          "font_size_px": 14.523809523809522,
+          "clipped": false
+        },
+        {
+          "text": "ユニット搬送用",
+          "font_size_px": 14.523809523809522,
+          "clipped": false
+        },
+        {
+          "text": "置台：爪の組だけを保管",
+          "font_size_px": 13.486394557823129,
+          "clipped": false
+        }
+      ]
+    },
+    {
+      "width": 1440,
+      "method": "jaws",
+      "stage": 1,
+      "pressed": 2,
+      "overflow": false,
+      "support": "一体ユニット：F-C（板間固定の前提）",
+      "labels": [
+        {
+          "text": "C主腕",
+          "font_size_px": 14,
+          "clipped": false
+        },
+        {
+          "text": "同じ爪の輪郭を両用途で使う",
+          "font_size_px": 14,
+          "clipped": false
+        },
+        {
+          "text": "交換する部品はない候補",
+          "font_size_px": 13,
+          "clipped": false
+        },
+        {
+          "text": "C主腕",
+          "font_size_px": 14,
+          "clipped": false
+        },
+        {
+          "text": "交換境界",
+          "font_size_px": 14,
+          "clipped": false
+        },
+        {
+          "text": "爪をH07用 → 搬送用へ",
+          "font_size_px": 14,
+          "clipped": false
+        },
+        {
+          "text": "腕側には同じ本体が残る",
+          "font_size_px": 13,
+          "clipped": false
+        },
+        {
+          "text": "C主腕",
+          "font_size_px": 14,
+          "clipped": false
+        },
+        {
+          "text": "交換境界",
+          "font_size_px": 14,
+          "clipped": false
+        },
+        {
+          "text": "本体＋爪をH07 → H06へ",
+          "font_size_px": 14,
+          "clipped": false
+        },
+        {
+          "text": "腕側には交換部マスタが残る",
+          "font_size_px": 13,
+          "clipped": false
+        },
+        {
+          "text": "F-C → 作業台へ支持",
+          "font_size_px": 14.523809523809522,
+          "clipped": false
+        },
+        {
+          "text": "下板",
+          "font_size_px": 14.523809523809522,
+          "clipped": false
+        },
+        {
+          "text": "板",
+          "font_size_px": 14.523809523809522,
+          "clipped": false
+        },
+        {
+          "text": "C主腕：開放して退避",
+          "font_size_px": 14.523809523809522,
+          "clipped": false
+        },
+        {
+          "text": "本体はF-Cに残る",
+          "font_size_px": 14.523809523809522,
+          "clipped": false
+        },
+        {
+          "text": "腕側にある部品",
+          "font_size_px": 14.523809523809522,
+          "clipped": false
+        },
+        {
+          "text": "H07側を装着",
+          "font_size_px": 13.486394557823129,
+          "clipped": false
+        },
+        {
+          "text": "空き",
+          "font_size_px": 13.486394557823129,
+          "clipped": false
+        },
+        {
+          "text": "H07用",
+          "font_size_px": 14.523809523809522,
+          "clipped": false
+        },
+        {
+          "text": "ユニット搬送用",
+          "font_size_px": 14.523809523809522,
+          "clipped": false
+        },
+        {
+          "text": "置台：爪の組だけを保管",
+          "font_size_px": 13.486394557823129,
+          "clipped": false
+        }
+      ]
+    },
+    {
+      "width": 1440,
+      "method": "jaws",
+      "stage": 2,
+      "pressed": 2,
+      "overflow": false,
+      "support": "一体ユニット：F-C（板間固定の前提）",
+      "labels": [
+        {
+          "text": "C主腕",
+          "font_size_px": 14,
+          "clipped": false
+        },
+        {
+          "text": "同じ爪の輪郭を両用途で使う",
+          "font_size_px": 14,
+          "clipped": false
+        },
+        {
+          "text": "交換する部品はない候補",
+          "font_size_px": 13,
+          "clipped": false
+        },
+        {
+          "text": "C主腕",
+          "font_size_px": 14,
+          "clipped": false
+        },
+        {
+          "text": "交換境界",
+          "font_size_px": 14,
+          "clipped": false
+        },
+        {
+          "text": "爪をH07用 → 搬送用へ",
+          "font_size_px": 14,
+          "clipped": false
+        },
+        {
+          "text": "腕側には同じ本体が残る",
+          "font_size_px": 13,
+          "clipped": false
+        },
+        {
+          "text": "C主腕",
+          "font_size_px": 14,
+          "clipped": false
+        },
+        {
+          "text": "交換境界",
+          "font_size_px": 14,
+          "clipped": false
+        },
+        {
+          "text": "本体＋爪をH07 → H06へ",
+          "font_size_px": 14,
+          "clipped": false
+        },
+        {
+          "text": "腕側には交換部マスタが残る",
+          "font_size_px": 13,
+          "clipped": false
+        },
+        {
+          "text": "F-C → 作業台へ支持",
+          "font_size_px": 14.523809523809522,
+          "clipped": false
+        },
+        {
+          "text": "下板",
+          "font_size_px": 14.523809523809522,
+          "clipped": false
+        },
+        {
+          "text": "板",
+          "font_size_px": 14.523809523809522,
+          "clipped": false
+        },
+        {
+          "text": "C主腕は手先の切替中",
+          "font_size_px": 14.523809523809522,
+          "clipped": false
+        },
+        {
+          "text": "置台へ移動して交換する",
+          "font_size_px": 13.486394557823129,
+          "clipped": false
+        },
+        {
+          "text": "本体はF-Cに残る",
+          "font_size_px": 14.523809523809522,
+          "clipped": false
+        },
+        {
+          "text": "腕側にある部品",
+          "font_size_px": 14.523809523809522,
+          "clipped": false
+        },
+        {
+          "text": "共通の本体のみ",
+          "font_size_px": 13.486394557823129,
+          "clipped": false
+        },
+        {
+          "text": "H07用",
+          "font_size_px": 14.523809523809522,
+          "clipped": false
+        },
+        {
+          "text": "ユニット搬送用",
+          "font_size_px": 14.523809523809522,
+          "clipped": false
+        },
+        {
+          "text": "置台：爪の組だけを保管",
+          "font_size_px": 13.486394557823129,
+          "clipped": false
+        }
+      ]
+    },
+    {
+      "width": 1440,
+      "method": "jaws",
+      "stage": 3,
+      "pressed": 2,
+      "overflow": false,
+      "support": "一体ユニット：F-C（板間固定の前提）",
+      "labels": [
+        {
+          "text": "C主腕",
+          "font_size_px": 14,
+          "clipped": false
+        },
+        {
+          "text": "同じ爪の輪郭を両用途で使う",
+          "font_size_px": 14,
+          "clipped": false
+        },
+        {
+          "text": "交換する部品はない候補",
+          "font_size_px": 13,
+          "clipped": false
+        },
+        {
+          "text": "C主腕",
+          "font_size_px": 14,
+          "clipped": false
+        },
+        {
+          "text": "交換境界",
+          "font_size_px": 14,
+          "clipped": false
+        },
+        {
+          "text": "爪をH07用 → 搬送用へ",
+          "font_size_px": 14,
+          "clipped": false
+        },
+        {
+          "text": "腕側には同じ本体が残る",
+          "font_size_px": 13,
+          "clipped": false
+        },
+        {
+          "text": "C主腕",
+          "font_size_px": 14,
+          "clipped": false
+        },
+        {
+          "text": "交換境界",
+          "font_size_px": 14,
+          "clipped": false
+        },
+        {
+          "text": "本体＋爪をH07 → H06へ",
+          "font_size_px": 14,
+          "clipped": false
+        },
+        {
+          "text": "腕側には交換部マスタが残る",
+          "font_size_px": 13,
+          "clipped": false
+        },
+        {
+          "text": "F-C → 作業台へ支持",
+          "font_size_px": 14.523809523809522,
+          "clipped": false
+        },
+        {
+          "text": "下板",
+          "font_size_px": 14.523809523809522,
+          "clipped": false
+        },
+        {
+          "text": "板",
+          "font_size_px": 14.523809523809522,
+          "clipped": false
+        },
+        {
+          "text": "C主腕は手先の切替中",
+          "font_size_px": 14.523809523809522,
+          "clipped": false
+        },
+        {
+          "text": "置台へ移動して交換する",
+          "font_size_px": 13.486394557823129,
+          "clipped": false
+        },
+        {
+          "text": "本体はF-Cに残る",
+          "font_size_px": 14.523809523809522,
+          "clipped": false
+        },
+        {
+          "text": "腕側にある部品",
+          "font_size_px": 14.523809523809522,
+          "clipped": false
+        },
+        {
+          "text": "ユニット搬送側を装着",
+          "font_size_px": 13.486394557823129,
+          "clipped": false
+        },
+        {
+          "text": "H07用",
+          "font_size_px": 14.523809523809522,
+          "clipped": false
+        },
+        {
+          "text": "空き",
+          "font_size_px": 13.486394557823129,
+          "clipped": false
+        },
+        {
+          "text": "ユニット搬送用",
+          "font_size_px": 14.523809523809522,
+          "clipped": false
+        },
+        {
+          "text": "置台：爪の組だけを保管",
+          "font_size_px": 13.486394557823129,
+          "clipped": false
+        }
+      ]
+    },
+    {
+      "width": 1440,
+      "method": "jaws",
+      "stage": 4,
+      "pressed": 2,
+      "overflow": false,
+      "support": "F-Cに支持を残してC主腕で把持",
+      "labels": [
+        {
+          "text": "C主腕",
+          "font_size_px": 14,
+          "clipped": false
+        },
+        {
+          "text": "同じ爪の輪郭を両用途で使う",
+          "font_size_px": 14,
+          "clipped": false
+        },
+        {
+          "text": "交換する部品はない候補",
+          "font_size_px": 13,
+          "clipped": false
+        },
+        {
+          "text": "C主腕",
+          "font_size_px": 14,
+          "clipped": false
+        },
+        {
+          "text": "交換境界",
+          "font_size_px": 14,
+          "clipped": false
+        },
+        {
+          "text": "爪をH07用 → 搬送用へ",
+          "font_size_px": 14,
+          "clipped": false
+        },
+        {
+          "text": "腕側には同じ本体が残る",
+          "font_size_px": 13,
+          "clipped": false
+        },
+        {
+          "text": "C主腕",
+          "font_size_px": 14,
+          "clipped": false
+        },
+        {
+          "text": "交換境界",
+          "font_size_px": 14,
+          "clipped": false
+        },
+        {
+          "text": "本体＋爪をH07 → H06へ",
+          "font_size_px": 14,
+          "clipped": false
+        },
+        {
+          "text": "腕側には交換部マスタが残る",
+          "font_size_px": 13,
+          "clipped": false
+        },
+        {
+          "text": "F-C → 作業台へ支持",
+          "font_size_px": 14.523809523809522,
+          "clipped": false
+        },
+        {
+          "text": "下板",
+          "font_size_px": 14.523809523809522,
+          "clipped": false
+        },
+        {
+          "text": "板",
+          "font_size_px": 14.523809523809522,
+          "clipped": false
+        },
+        {
+          "text": "C主腕：支持上で搬送把持",
+          "font_size_px": 14.523809523809522,
+          "clipped": false
+        },
+        {
+          "text": "本体はF-Cに残る",
+          "font_size_px": 14.523809523809522,
+          "clipped": false
+        },
+        {
+          "text": "腕側にある部品",
+          "font_size_px": 14.523809523809522,
+          "clipped": false
+        },
+        {
+          "text": "ユニット搬送側を装着",
+          "font_size_px": 13.486394557823129,
+          "clipped": false
+        },
+        {
+          "text": "H07用",
+          "font_size_px": 14.523809523809522,
+          "clipped": false
+        },
+        {
+          "text": "空き",
+          "font_size_px": 13.486394557823129,
+          "clipped": false
+        },
+        {
+          "text": "ユニット搬送用",
+          "font_size_px": 14.523809523809522,
+          "clipped": false
+        },
+        {
+          "text": "置台：爪の組だけを保管",
+          "font_size_px": 13.486394557823129,
+          "clipped": false
+        }
+      ]
+    },
+    {
+      "width": 1440,
+      "method": "jaws",
+      "stage": 5,
+      "pressed": 2,
+      "overflow": false,
+      "support": "本体：C主腕 ／ 自由端：別担当",
+      "labels": [
+        {
+          "text": "C主腕",
+          "font_size_px": 14,
+          "clipped": false
+        },
+        {
+          "text": "同じ爪の輪郭を両用途で使う",
+          "font_size_px": 14,
+          "clipped": false
+        },
+        {
+          "text": "交換する部品はない候補",
+          "font_size_px": 13,
+          "clipped": false
+        },
+        {
+          "text": "C主腕",
+          "font_size_px": 14,
+          "clipped": false
+        },
+        {
+          "text": "交換境界",
+          "font_size_px": 14,
+          "clipped": false
+        },
+        {
+          "text": "爪をH07用 → 搬送用へ",
+          "font_size_px": 14,
+          "clipped": false
+        },
+        {
+          "text": "腕側には同じ本体が残る",
+          "font_size_px": 13,
+          "clipped": false
+        },
+        {
+          "text": "C主腕",
+          "font_size_px": 14,
+          "clipped": false
+        },
+        {
+          "text": "交換境界",
+          "font_size_px": 14,
+          "clipped": false
+        },
+        {
+          "text": "本体＋爪をH07 → H06へ",
+          "font_size_px": 14,
+          "clipped": false
+        },
+        {
+          "text": "腕側には交換部マスタが残る",
+          "font_size_px": 13,
+          "clipped": false
+        },
+        {
+          "text": "F-C → 作業台へ支持",
+          "font_size_px": 14.523809523809522,
+          "clipped": false
+        },
+        {
+          "text": "下板",
+          "font_size_px": 14.523809523809522,
+          "clipped": false
+        },
+        {
+          "text": "板",
+          "font_size_px": 14.523809523809522,
+          "clipped": false
+        },
+        {
+          "text": "C主腕：ユニットを搬送",
+          "font_size_px": 14.523809523809522,
+          "clipped": false
+        },
+        {
+          "text": "支持を引き継いで上昇",
+          "font_size_px": 14.523809523809522,
+          "clipped": false
+        },
+        {
+          "text": "腕側にある部品",
+          "font_size_px": 14.523809523809522,
+          "clipped": false
+        },
+        {
+          "text": "ユニット搬送側を装着",
+          "font_size_px": 13.486394557823129,
+          "clipped": false
+        },
+        {
+          "text": "H07用",
+          "font_size_px": 14.523809523809522,
+          "clipped": false
+        },
+        {
+          "text": "空き",
+          "font_size_px": 13.486394557823129,
+          "clipped": false
+        },
+        {
+          "text": "ユニット搬送用",
+          "font_size_px": 14.523809523809522,
+          "clipped": false
+        },
+        {
+          "text": "置台：爪の組だけを保管",
+          "font_size_px": 13.486394557823129,
+          "clipped": false
+        }
+      ]
+    },
+    {
+      "width": 1440,
+      "method": "whole",
+      "stage": 0,
+      "pressed": 2,
+      "overflow": false,
+      "support": "下板：F-C ／ ヒューズ板：C主腕",
+      "labels": [
+        {
+          "text": "C主腕",
+          "font_size_px": 14,
+          "clipped": false
+        },
+        {
+          "text": "同じ爪の輪郭を両用途で使う",
+          "font_size_px": 14,
+          "clipped": false
+        },
+        {
+          "text": "交換する部品はない候補",
+          "font_size_px": 13,
+          "clipped": false
+        },
+        {
+          "text": "C主腕",
+          "font_size_px": 14,
+          "clipped": false
+        },
+        {
+          "text": "交換境界",
+          "font_size_px": 14,
+          "clipped": false
+        },
+        {
+          "text": "爪をH07用 → 搬送用へ",
+          "font_size_px": 14,
+          "clipped": false
+        },
+        {
+          "text": "腕側には同じ本体が残る",
+          "font_size_px": 13,
+          "clipped": false
+        },
+        {
+          "text": "C主腕",
+          "font_size_px": 14,
+          "clipped": false
+        },
+        {
+          "text": "交換境界",
+          "font_size_px": 14,
+          "clipped": false
+        },
+        {
+          "text": "本体＋爪をH07 → H06へ",
+          "font_size_px": 14,
+          "clipped": false
+        },
+        {
+          "text": "腕側には交換部マスタが残る",
+          "font_size_px": 13,
+          "clipped": false
+        },
+        {
+          "text": "F-C → 作業台へ支持",
+          "font_size_px": 14.523809523809522,
+          "clipped": false
+        },
+        {
+          "text": "下板",
+          "font_size_px": 14.523809523809522,
+          "clipped": false
+        },
+        {
+          "text": "板",
+          "font_size_px": 14.523809523809522,
+          "clipped": false
+        },
+        {
+          "text": "C主腕：H07で板保持",
+          "font_size_px": 14.523809523809522,
+          "clipped": false
+        },
+        {
+          "text": "腕側にある部品",
+          "font_size_px": 14.523809523809522,
+          "clipped": false
+        },
+        {
+          "text": "H07側を装着",
+          "font_size_px": 13.486394557823129,
+          "clipped": false
+        },
+        {
+          "text": "空き",
+          "font_size_px": 13.486394557823129,
+          "clipped": false
+        },
+        {
+          "text": "H07用",
+          "font_size_px": 14.523809523809522,
+          "clipped": false
+        },
+        {
+          "text": "ユニット搬送用",
+          "font_size_px": 14.523809523809522,
+          "clipped": false
+        },
+        {
+          "text": "置台：本体＋爪を保管",
+          "font_size_px": 13.486394557823129,
+          "clipped": false
+        }
+      ]
+    },
+    {
+      "width": 1440,
+      "method": "whole",
+      "stage": 1,
+      "pressed": 2,
+      "overflow": false,
+      "support": "一体ユニット：F-C（板間固定の前提）",
+      "labels": [
+        {
+          "text": "C主腕",
+          "font_size_px": 14,
+          "clipped": false
+        },
+        {
+          "text": "同じ爪の輪郭を両用途で使う",
+          "font_size_px": 14,
+          "clipped": false
+        },
+        {
+          "text": "交換する部品はない候補",
+          "font_size_px": 13,
+          "clipped": false
+        },
+        {
+          "text": "C主腕",
+          "font_size_px": 14,
+          "clipped": false
+        },
+        {
+          "text": "交換境界",
+          "font_size_px": 14,
+          "clipped": false
+        },
+        {
+          "text": "爪をH07用 → 搬送用へ",
+          "font_size_px": 14,
+          "clipped": false
+        },
+        {
+          "text": "腕側には同じ本体が残る",
+          "font_size_px": 13,
+          "clipped": false
+        },
+        {
+          "text": "C主腕",
+          "font_size_px": 14,
+          "clipped": false
+        },
+        {
+          "text": "交換境界",
+          "font_size_px": 14,
+          "clipped": false
+        },
+        {
+          "text": "本体＋爪をH07 → H06へ",
+          "font_size_px": 14,
+          "clipped": false
+        },
+        {
+          "text": "腕側には交換部マスタが残る",
+          "font_size_px": 13,
+          "clipped": false
+        },
+        {
+          "text": "F-C → 作業台へ支持",
+          "font_size_px": 14.523809523809522,
+          "clipped": false
+        },
+        {
+          "text": "下板",
+          "font_size_px": 14.523809523809522,
+          "clipped": false
+        },
+        {
+          "text": "板",
+          "font_size_px": 14.523809523809522,
+          "clipped": false
+        },
+        {
+          "text": "C主腕：開放して退避",
+          "font_size_px": 14.523809523809522,
+          "clipped": false
+        },
+        {
+          "text": "本体はF-Cに残る",
+          "font_size_px": 14.523809523809522,
+          "clipped": false
+        },
+        {
+          "text": "腕側にある部品",
+          "font_size_px": 14.523809523809522,
+          "clipped": false
+        },
+        {
+          "text": "H07側を装着",
+          "font_size_px": 13.486394557823129,
+          "clipped": false
+        },
+        {
+          "text": "空き",
+          "font_size_px": 13.486394557823129,
+          "clipped": false
+        },
+        {
+          "text": "H07用",
+          "font_size_px": 14.523809523809522,
+          "clipped": false
+        },
+        {
+          "text": "ユニット搬送用",
+          "font_size_px": 14.523809523809522,
+          "clipped": false
+        },
+        {
+          "text": "置台：本体＋爪を保管",
+          "font_size_px": 13.486394557823129,
+          "clipped": false
+        }
+      ]
+    },
+    {
+      "width": 1440,
+      "method": "whole",
+      "stage": 2,
+      "pressed": 2,
+      "overflow": false,
+      "support": "一体ユニット：F-C（板間固定の前提）",
+      "labels": [
+        {
+          "text": "C主腕",
+          "font_size_px": 14,
+          "clipped": false
+        },
+        {
+          "text": "同じ爪の輪郭を両用途で使う",
+          "font_size_px": 14,
+          "clipped": false
+        },
+        {
+          "text": "交換する部品はない候補",
+          "font_size_px": 13,
+          "clipped": false
+        },
+        {
+          "text": "C主腕",
+          "font_size_px": 14,
+          "clipped": false
+        },
+        {
+          "text": "交換境界",
+          "font_size_px": 14,
+          "clipped": false
+        },
+        {
+          "text": "爪をH07用 → 搬送用へ",
+          "font_size_px": 14,
+          "clipped": false
+        },
+        {
+          "text": "腕側には同じ本体が残る",
+          "font_size_px": 13,
+          "clipped": false
+        },
+        {
+          "text": "C主腕",
+          "font_size_px": 14,
+          "clipped": false
+        },
+        {
+          "text": "交換境界",
+          "font_size_px": 14,
+          "clipped": false
+        },
+        {
+          "text": "本体＋爪をH07 → H06へ",
+          "font_size_px": 14,
+          "clipped": false
+        },
+        {
+          "text": "腕側には交換部マスタが残る",
+          "font_size_px": 13,
+          "clipped": false
+        },
+        {
+          "text": "F-C → 作業台へ支持",
+          "font_size_px": 14.523809523809522,
+          "clipped": false
+        },
+        {
+          "text": "下板",
+          "font_size_px": 14.523809523809522,
+          "clipped": false
+        },
+        {
+          "text": "板",
+          "font_size_px": 14.523809523809522,
+          "clipped": false
+        },
+        {
+          "text": "C主腕は手先の切替中",
+          "font_size_px": 14.523809523809522,
+          "clipped": false
+        },
+        {
+          "text": "置台へ移動して交換する",
+          "font_size_px": 13.486394557823129,
+          "clipped": false
+        },
+        {
+          "text": "本体はF-Cに残る",
+          "font_size_px": 14.523809523809522,
+          "clipped": false
+        },
+        {
+          "text": "腕側にある部品",
+          "font_size_px": 14.523809523809522,
+          "clipped": false
+        },
+        {
+          "text": "交換部のマスタのみ",
+          "font_size_px": 13.486394557823129,
+          "clipped": false
+        },
+        {
+          "text": "H07用",
+          "font_size_px": 14.523809523809522,
+          "clipped": false
+        },
+        {
+          "text": "ユニット搬送用",
+          "font_size_px": 14.523809523809522,
+          "clipped": false
+        },
+        {
+          "text": "置台：本体＋爪を保管",
+          "font_size_px": 13.486394557823129,
+          "clipped": false
+        }
+      ]
+    },
+    {
+      "width": 1440,
+      "method": "whole",
+      "stage": 3,
+      "pressed": 2,
+      "overflow": false,
+      "support": "一体ユニット：F-C（板間固定の前提）",
+      "labels": [
+        {
+          "text": "C主腕",
+          "font_size_px": 14,
+          "clipped": false
+        },
+        {
+          "text": "同じ爪の輪郭を両用途で使う",
+          "font_size_px": 14,
+          "clipped": false
+        },
+        {
+          "text": "交換する部品はない候補",
+          "font_size_px": 13,
+          "clipped": false
+        },
+        {
+          "text": "C主腕",
+          "font_size_px": 14,
+          "clipped": false
+        },
+        {
+          "text": "交換境界",
+          "font_size_px": 14,
+          "clipped": false
+        },
+        {
+          "text": "爪をH07用 → 搬送用へ",
+          "font_size_px": 14,
+          "clipped": false
+        },
+        {
+          "text": "腕側には同じ本体が残る",
+          "font_size_px": 13,
+          "clipped": false
+        },
+        {
+          "text": "C主腕",
+          "font_size_px": 14,
+          "clipped": false
+        },
+        {
+          "text": "交換境界",
+          "font_size_px": 14,
+          "clipped": false
+        },
+        {
+          "text": "本体＋爪をH07 → H06へ",
+          "font_size_px": 14,
+          "clipped": false
+        },
+        {
+          "text": "腕側には交換部マスタが残る",
+          "font_size_px": 13,
+          "clipped": false
+        },
+        {
+          "text": "F-C → 作業台へ支持",
+          "font_size_px": 14.523809523809522,
+          "clipped": false
+        },
+        {
+          "text": "下板",
+          "font_size_px": 14.523809523809522,
+          "clipped": false
+        },
+        {
+          "text": "板",
+          "font_size_px": 14.523809523809522,
+          "clipped": false
+        },
+        {
+          "text": "C主腕は手先の切替中",
+          "font_size_px": 14.523809523809522,
+          "clipped": false
+        },
+        {
+          "text": "置台へ移動して交換する",
+          "font_size_px": 13.486394557823129,
+          "clipped": false
+        },
+        {
+          "text": "本体はF-Cに残る",
+          "font_size_px": 14.523809523809522,
+          "clipped": false
+        },
+        {
+          "text": "腕側にある部品",
+          "font_size_px": 14.523809523809522,
+          "clipped": false
+        },
+        {
+          "text": "ユニット搬送側を装着",
+          "font_size_px": 13.486394557823129,
+          "clipped": false
+        },
+        {
+          "text": "H07用",
+          "font_size_px": 14.523809523809522,
+          "clipped": false
+        },
+        {
+          "text": "空き",
+          "font_size_px": 13.486394557823129,
+          "clipped": false
+        },
+        {
+          "text": "ユニット搬送用",
+          "font_size_px": 14.523809523809522,
+          "clipped": false
+        },
+        {
+          "text": "置台：本体＋爪を保管",
+          "font_size_px": 13.486394557823129,
+          "clipped": false
+        }
+      ]
+    },
+    {
+      "width": 1440,
+      "method": "whole",
+      "stage": 4,
+      "pressed": 2,
+      "overflow": false,
+      "support": "F-Cに支持を残してC主腕で把持",
+      "labels": [
+        {
+          "text": "C主腕",
+          "font_size_px": 14,
+          "clipped": false
+        },
+        {
+          "text": "同じ爪の輪郭を両用途で使う",
+          "font_size_px": 14,
+          "clipped": false
+        },
+        {
+          "text": "交換する部品はない候補",
+          "font_size_px": 13,
+          "clipped": false
+        },
+        {
+          "text": "C主腕",
+          "font_size_px": 14,
+          "clipped": false
+        },
+        {
+          "text": "交換境界",
+          "font_size_px": 14,
+          "clipped": false
+        },
+        {
+          "text": "爪をH07用 → 搬送用へ",
+          "font_size_px": 14,
+          "clipped": false
+        },
+        {
+          "text": "腕側には同じ本体が残る",
+          "font_size_px": 13,
+          "clipped": false
+        },
+        {
+          "text": "C主腕",
+          "font_size_px": 14,
+          "clipped": false
+        },
+        {
+          "text": "交換境界",
+          "font_size_px": 14,
+          "clipped": false
+        },
+        {
+          "text": "本体＋爪をH07 → H06へ",
+          "font_size_px": 14,
+          "clipped": false
+        },
+        {
+          "text": "腕側には交換部マスタが残る",
+          "font_size_px": 13,
+          "clipped": false
+        },
+        {
+          "text": "F-C → 作業台へ支持",
+          "font_size_px": 14.523809523809522,
+          "clipped": false
+        },
+        {
+          "text": "下板",
+          "font_size_px": 14.523809523809522,
+          "clipped": false
+        },
+        {
+          "text": "板",
+          "font_size_px": 14.523809523809522,
+          "clipped": false
+        },
+        {
+          "text": "C主腕：支持上で搬送把持",
+          "font_size_px": 14.523809523809522,
+          "clipped": false
+        },
+        {
+          "text": "本体はF-Cに残る",
+          "font_size_px": 14.523809523809522,
+          "clipped": false
+        },
+        {
+          "text": "腕側にある部品",
+          "font_size_px": 14.523809523809522,
+          "clipped": false
+        },
+        {
+          "text": "ユニット搬送側を装着",
+          "font_size_px": 13.486394557823129,
+          "clipped": false
+        },
+        {
+          "text": "H07用",
+          "font_size_px": 14.523809523809522,
+          "clipped": false
+        },
+        {
+          "text": "空き",
+          "font_size_px": 13.486394557823129,
+          "clipped": false
+        },
+        {
+          "text": "ユニット搬送用",
+          "font_size_px": 14.523809523809522,
+          "clipped": false
+        },
+        {
+          "text": "置台：本体＋爪を保管",
+          "font_size_px": 13.486394557823129,
+          "clipped": false
+        }
+      ]
+    },
+    {
+      "width": 1440,
+      "method": "whole",
+      "stage": 5,
+      "pressed": 2,
+      "overflow": false,
+      "support": "本体：C主腕 ／ 自由端：別担当",
+      "labels": [
+        {
+          "text": "C主腕",
+          "font_size_px": 14,
+          "clipped": false
+        },
+        {
+          "text": "同じ爪の輪郭を両用途で使う",
+          "font_size_px": 14,
+          "clipped": false
+        },
+        {
+          "text": "交換する部品はない候補",
+          "font_size_px": 13,
+          "clipped": false
+        },
+        {
+          "text": "C主腕",
+          "font_size_px": 14,
+          "clipped": false
+        },
+        {
+          "text": "交換境界",
+          "font_size_px": 14,
+          "clipped": false
+        },
+        {
+          "text": "爪をH07用 → 搬送用へ",
+          "font_size_px": 14,
+          "clipped": false
+        },
+        {
+          "text": "腕側には同じ本体が残る",
+          "font_size_px": 13,
+          "clipped": false
+        },
+        {
+          "text": "C主腕",
+          "font_size_px": 14,
+          "clipped": false
+        },
+        {
+          "text": "交換境界",
+          "font_size_px": 14,
+          "clipped": false
+        },
+        {
+          "text": "本体＋爪をH07 → H06へ",
+          "font_size_px": 14,
+          "clipped": false
+        },
+        {
+          "text": "腕側には交換部マスタが残る",
+          "font_size_px": 13,
+          "clipped": false
+        },
+        {
+          "text": "F-C → 作業台へ支持",
+          "font_size_px": 14.523809523809522,
+          "clipped": false
+        },
+        {
+          "text": "下板",
+          "font_size_px": 14.523809523809522,
+          "clipped": false
+        },
+        {
+          "text": "板",
+          "font_size_px": 14.523809523809522,
+          "clipped": false
+        },
+        {
+          "text": "C主腕：ユニットを搬送",
+          "font_size_px": 14.523809523809522,
+          "clipped": false
+        },
+        {
+          "text": "支持を引き継いで上昇",
+          "font_size_px": 14.523809523809522,
+          "clipped": false
+        },
+        {
+          "text": "腕側にある部品",
+          "font_size_px": 14.523809523809522,
+          "clipped": false
+        },
+        {
+          "text": "ユニット搬送側を装着",
+          "font_size_px": 13.486394557823129,
+          "clipped": false
+        },
+        {
+          "text": "H07用",
+          "font_size_px": 14.523809523809522,
+          "clipped": false
+        },
+        {
+          "text": "空き",
+          "font_size_px": 13.486394557823129,
+          "clipped": false
+        },
+        {
+          "text": "ユニット搬送用",
+          "font_size_px": 14.523809523809522,
+          "clipped": false
+        },
+        {
+          "text": "置台：本体＋爪を保管",
+          "font_size_px": 13.486394557823129,
+          "clipped": false
+        }
+      ]
+    },
+    {
+      "width": 736,
+      "method": "common",
+      "stage": 0,
+      "pressed": 2,
+      "overflow": false,
+      "support": "下板：F-C ／ ヒューズ板：C主腕",
+      "labels": [
+        {
+          "text": "C主腕",
+          "font_size_px": 16.123383620689655,
+          "clipped": false
+        },
+        {
+          "text": "同じ爪の輪郭を両用途で使う",
+          "font_size_px": 16.123383620689655,
+          "clipped": false
+        },
+        {
+          "text": "交換する部品はない候補",
+          "font_size_px": 14.971713362068966,
+          "clipped": false
+        },
+        {
+          "text": "C主腕",
+          "font_size_px": 16.123383620689655,
+          "clipped": false
+        },
+        {
+          "text": "交換境界",
+          "font_size_px": 16.123383620689655,
+          "clipped": false
+        },
+        {
+          "text": "爪をH07用 → 搬送用へ",
+          "font_size_px": 16.123383620689655,
+          "clipped": false
+        },
+        {
+          "text": "腕側には同じ本体が残る",
+          "font_size_px": 14.971713362068966,
+          "clipped": false
+        },
+        {
+          "text": "C主腕",
+          "font_size_px": 16.123383620689655,
+          "clipped": false
+        },
+        {
+          "text": "交換境界",
+          "font_size_px": 16.123383620689655,
+          "clipped": false
+        },
+        {
+          "text": "本体＋爪をH07 → H06へ",
+          "font_size_px": 16.123383620689655,
+          "clipped": false
+        },
+        {
+          "text": "腕側には交換部マスタが残る",
+          "font_size_px": 14.971713362068966,
+          "clipped": false
+        },
+        {
+          "text": "F-C → 作業台へ支持",
+          "font_size_px": 16.123511904761905,
+          "clipped": false
+        },
+        {
+          "text": "下板",
+          "font_size_px": 16.123511904761905,
+          "clipped": false
+        },
+        {
+          "text": "板",
+          "font_size_px": 16.123511904761905,
+          "clipped": false
+        },
+        {
+          "text": "C主腕：H07で板保持",
+          "font_size_px": 16.123511904761905,
+          "clipped": false
+        },
+        {
+          "text": "交換部・置台を使わない候補",
+          "font_size_px": 16.123511904761905,
+          "clipped": false
+        },
+        {
+          "text": "板保持の輪郭を使用",
+          "font_size_px": 16.123511904761905,
+          "clipped": false
+        },
+        {
+          "text": "爪そのものは同じ形を保つ",
+          "font_size_px": 14.971832482993197,
+          "clipped": false
+        },
+        {
+          "text": "両用途を満たす実形状は未設計",
+          "font_size_px": 14.971832482993197,
+          "clipped": false
+        }
+      ]
+    },
+    {
+      "width": 736,
+      "method": "common",
+      "stage": 1,
+      "pressed": 2,
+      "overflow": false,
+      "support": "一体ユニット：F-C（板間固定の前提）",
+      "labels": [
+        {
+          "text": "C主腕",
+          "font_size_px": 16.123383620689655,
+          "clipped": false
+        },
+        {
+          "text": "同じ爪の輪郭を両用途で使う",
+          "font_size_px": 16.123383620689655,
+          "clipped": false
+        },
+        {
+          "text": "交換する部品はない候補",
+          "font_size_px": 14.971713362068966,
+          "clipped": false
+        },
+        {
+          "text": "C主腕",
+          "font_size_px": 16.123383620689655,
+          "clipped": false
+        },
+        {
+          "text": "交換境界",
+          "font_size_px": 16.123383620689655,
+          "clipped": false
+        },
+        {
+          "text": "爪をH07用 → 搬送用へ",
+          "font_size_px": 16.123383620689655,
+          "clipped": false
+        },
+        {
+          "text": "腕側には同じ本体が残る",
+          "font_size_px": 14.971713362068966,
+          "clipped": false
+        },
+        {
+          "text": "C主腕",
+          "font_size_px": 16.123383620689655,
+          "clipped": false
+        },
+        {
+          "text": "交換境界",
+          "font_size_px": 16.123383620689655,
+          "clipped": false
+        },
+        {
+          "text": "本体＋爪をH07 → H06へ",
+          "font_size_px": 16.123383620689655,
+          "clipped": false
+        },
+        {
+          "text": "腕側には交換部マスタが残る",
+          "font_size_px": 14.971713362068966,
+          "clipped": false
+        },
+        {
+          "text": "F-C → 作業台へ支持",
+          "font_size_px": 16.123511904761905,
+          "clipped": false
+        },
+        {
+          "text": "下板",
+          "font_size_px": 16.123511904761905,
+          "clipped": false
+        },
+        {
+          "text": "板",
+          "font_size_px": 16.123511904761905,
+          "clipped": false
+        },
+        {
+          "text": "C主腕：開放して退避",
+          "font_size_px": 16.123511904761905,
+          "clipped": false
+        },
+        {
+          "text": "本体はF-Cに残る",
+          "font_size_px": 16.123511904761905,
+          "clipped": false
+        },
+        {
+          "text": "交換部・置台を使わない候補",
+          "font_size_px": 16.123511904761905,
+          "clipped": false
+        },
+        {
+          "text": "板保持の輪郭を使用",
+          "font_size_px": 16.123511904761905,
+          "clipped": false
+        },
+        {
+          "text": "爪そのものは同じ形を保つ",
+          "font_size_px": 14.971832482993197,
+          "clipped": false
+        },
+        {
+          "text": "両用途を満たす実形状は未設計",
+          "font_size_px": 14.971832482993197,
+          "clipped": false
+        }
+      ]
+    },
+    {
+      "width": 736,
+      "method": "common",
+      "stage": 2,
+      "pressed": 2,
+      "overflow": false,
+      "support": "一体ユニット：F-C（板間固定の前提）",
+      "labels": [
+        {
+          "text": "C主腕",
+          "font_size_px": 16.123383620689655,
+          "clipped": false
+        },
+        {
+          "text": "同じ爪の輪郭を両用途で使う",
+          "font_size_px": 16.123383620689655,
+          "clipped": false
+        },
+        {
+          "text": "交換する部品はない候補",
+          "font_size_px": 14.971713362068966,
+          "clipped": false
+        },
+        {
+          "text": "C主腕",
+          "font_size_px": 16.123383620689655,
+          "clipped": false
+        },
+        {
+          "text": "交換境界",
+          "font_size_px": 16.123383620689655,
+          "clipped": false
+        },
+        {
+          "text": "爪をH07用 → 搬送用へ",
+          "font_size_px": 16.123383620689655,
+          "clipped": false
+        },
+        {
+          "text": "腕側には同じ本体が残る",
+          "font_size_px": 14.971713362068966,
+          "clipped": false
+        },
+        {
+          "text": "C主腕",
+          "font_size_px": 16.123383620689655,
+          "clipped": false
+        },
+        {
+          "text": "交換境界",
+          "font_size_px": 16.123383620689655,
+          "clipped": false
+        },
+        {
+          "text": "本体＋爪をH07 → H06へ",
+          "font_size_px": 16.123383620689655,
+          "clipped": false
+        },
+        {
+          "text": "腕側には交換部マスタが残る",
+          "font_size_px": 14.971713362068966,
+          "clipped": false
+        },
+        {
+          "text": "F-C → 作業台へ支持",
+          "font_size_px": 16.123511904761905,
+          "clipped": false
+        },
+        {
+          "text": "下板",
+          "font_size_px": 16.123511904761905,
+          "clipped": false
+        },
+        {
+          "text": "板",
+          "font_size_px": 16.123511904761905,
+          "clipped": false
+        },
+        {
+          "text": "C主腕は手先の切替中",
+          "font_size_px": 16.123511904761905,
+          "clipped": false
+        },
+        {
+          "text": "姿勢・使用輪郭を切り替える",
+          "font_size_px": 14.971832482993197,
+          "clipped": false
+        },
+        {
+          "text": "本体はF-Cに残る",
+          "font_size_px": 16.123511904761905,
+          "clipped": false
+        },
+        {
+          "text": "交換部・置台を使わない候補",
+          "font_size_px": 16.123511904761905,
+          "clipped": false
+        },
+        {
+          "text": "開放して姿勢を切替",
+          "font_size_px": 16.123511904761905,
+          "clipped": false
+        },
+        {
+          "text": "爪そのものは同じ形を保つ",
+          "font_size_px": 14.971832482993197,
+          "clipped": false
+        },
+        {
+          "text": "両用途を満たす実形状は未設計",
+          "font_size_px": 14.971832482993197,
+          "clipped": false
+        }
+      ]
+    },
+    {
+      "width": 736,
+      "method": "common",
+      "stage": 3,
+      "pressed": 2,
+      "overflow": false,
+      "support": "一体ユニット：F-C（板間固定の前提）",
+      "labels": [
+        {
+          "text": "C主腕",
+          "font_size_px": 16.123383620689655,
+          "clipped": false
+        },
+        {
+          "text": "同じ爪の輪郭を両用途で使う",
+          "font_size_px": 16.123383620689655,
+          "clipped": false
+        },
+        {
+          "text": "交換する部品はない候補",
+          "font_size_px": 14.971713362068966,
+          "clipped": false
+        },
+        {
+          "text": "C主腕",
+          "font_size_px": 16.123383620689655,
+          "clipped": false
+        },
+        {
+          "text": "交換境界",
+          "font_size_px": 16.123383620689655,
+          "clipped": false
+        },
+        {
+          "text": "爪をH07用 → 搬送用へ",
+          "font_size_px": 16.123383620689655,
+          "clipped": false
+        },
+        {
+          "text": "腕側には同じ本体が残る",
+          "font_size_px": 14.971713362068966,
+          "clipped": false
+        },
+        {
+          "text": "C主腕",
+          "font_size_px": 16.123383620689655,
+          "clipped": false
+        },
+        {
+          "text": "交換境界",
+          "font_size_px": 16.123383620689655,
+          "clipped": false
+        },
+        {
+          "text": "本体＋爪をH07 → H06へ",
+          "font_size_px": 16.123383620689655,
+          "clipped": false
+        },
+        {
+          "text": "腕側には交換部マスタが残る",
+          "font_size_px": 14.971713362068966,
+          "clipped": false
+        },
+        {
+          "text": "F-C → 作業台へ支持",
+          "font_size_px": 16.123511904761905,
+          "clipped": false
+        },
+        {
+          "text": "下板",
+          "font_size_px": 16.123511904761905,
+          "clipped": false
+        },
+        {
+          "text": "板",
+          "font_size_px": 16.123511904761905,
+          "clipped": false
+        },
+        {
+          "text": "C主腕は手先の切替中",
+          "font_size_px": 16.123511904761905,
+          "clipped": false
+        },
+        {
+          "text": "姿勢・使用輪郭を切り替える",
+          "font_size_px": 14.971832482993197,
+          "clipped": false
+        },
+        {
+          "text": "本体はF-Cに残る",
+          "font_size_px": 16.123511904761905,
+          "clipped": false
+        },
+        {
+          "text": "交換部・置台を使わない候補",
+          "font_size_px": 16.123511904761905,
+          "clipped": false
+        },
+        {
+          "text": "搬送用の輪郭を使用",
+          "font_size_px": 16.123511904761905,
+          "clipped": false
+        },
+        {
+          "text": "爪そのものは同じ形を保つ",
+          "font_size_px": 14.971832482993197,
+          "clipped": false
+        },
+        {
+          "text": "両用途を満たす実形状は未設計",
+          "font_size_px": 14.971832482993197,
+          "clipped": false
+        }
+      ]
+    },
+    {
+      "width": 736,
+      "method": "common",
+      "stage": 4,
+      "pressed": 2,
+      "overflow": false,
+      "support": "F-Cに支持を残してC主腕で把持",
+      "labels": [
+        {
+          "text": "C主腕",
+          "font_size_px": 16.123383620689655,
+          "clipped": false
+        },
+        {
+          "text": "同じ爪の輪郭を両用途で使う",
+          "font_size_px": 16.123383620689655,
+          "clipped": false
+        },
+        {
+          "text": "交換する部品はない候補",
+          "font_size_px": 14.971713362068966,
+          "clipped": false
+        },
+        {
+          "text": "C主腕",
+          "font_size_px": 16.123383620689655,
+          "clipped": false
+        },
+        {
+          "text": "交換境界",
+          "font_size_px": 16.123383620689655,
+          "clipped": false
+        },
+        {
+          "text": "爪をH07用 → 搬送用へ",
+          "font_size_px": 16.123383620689655,
+          "clipped": false
+        },
+        {
+          "text": "腕側には同じ本体が残る",
+          "font_size_px": 14.971713362068966,
+          "clipped": false
+        },
+        {
+          "text": "C主腕",
+          "font_size_px": 16.123383620689655,
+          "clipped": false
+        },
+        {
+          "text": "交換境界",
+          "font_size_px": 16.123383620689655,
+          "clipped": false
+        },
+        {
+          "text": "本体＋爪をH07 → H06へ",
+          "font_size_px": 16.123383620689655,
+          "clipped": false
+        },
+        {
+          "text": "腕側には交換部マスタが残る",
+          "font_size_px": 14.971713362068966,
+          "clipped": false
+        },
+        {
+          "text": "F-C → 作業台へ支持",
+          "font_size_px": 16.123511904761905,
+          "clipped": false
+        },
+        {
+          "text": "下板",
+          "font_size_px": 16.123511904761905,
+          "clipped": false
+        },
+        {
+          "text": "板",
+          "font_size_px": 16.123511904761905,
+          "clipped": false
+        },
+        {
+          "text": "C主腕：支持上で搬送把持",
+          "font_size_px": 16.123511904761905,
+          "clipped": false
+        },
+        {
+          "text": "本体はF-Cに残る",
+          "font_size_px": 16.123511904761905,
+          "clipped": false
+        },
+        {
+          "text": "交換部・置台を使わない候補",
+          "font_size_px": 16.123511904761905,
+          "clipped": false
+        },
+        {
+          "text": "搬送用の輪郭を使用",
+          "font_size_px": 16.123511904761905,
+          "clipped": false
+        },
+        {
+          "text": "爪そのものは同じ形を保つ",
+          "font_size_px": 14.971832482993197,
+          "clipped": false
+        },
+        {
+          "text": "両用途を満たす実形状は未設計",
+          "font_size_px": 14.971832482993197,
+          "clipped": false
+        }
+      ]
+    },
+    {
+      "width": 736,
+      "method": "common",
+      "stage": 5,
+      "pressed": 2,
+      "overflow": false,
+      "support": "本体：C主腕 ／ 自由端：別担当",
+      "labels": [
+        {
+          "text": "C主腕",
+          "font_size_px": 16.123383620689655,
+          "clipped": false
+        },
+        {
+          "text": "同じ爪の輪郭を両用途で使う",
+          "font_size_px": 16.123383620689655,
+          "clipped": false
+        },
+        {
+          "text": "交換する部品はない候補",
+          "font_size_px": 14.971713362068966,
+          "clipped": false
+        },
+        {
+          "text": "C主腕",
+          "font_size_px": 16.123383620689655,
+          "clipped": false
+        },
+        {
+          "text": "交換境界",
+          "font_size_px": 16.123383620689655,
+          "clipped": false
+        },
+        {
+          "text": "爪をH07用 → 搬送用へ",
+          "font_size_px": 16.123383620689655,
+          "clipped": false
+        },
+        {
+          "text": "腕側には同じ本体が残る",
+          "font_size_px": 14.971713362068966,
+          "clipped": false
+        },
+        {
+          "text": "C主腕",
+          "font_size_px": 16.123383620689655,
+          "clipped": false
+        },
+        {
+          "text": "交換境界",
+          "font_size_px": 16.123383620689655,
+          "clipped": false
+        },
+        {
+          "text": "本体＋爪をH07 → H06へ",
+          "font_size_px": 16.123383620689655,
+          "clipped": false
+        },
+        {
+          "text": "腕側には交換部マスタが残る",
+          "font_size_px": 14.971713362068966,
+          "clipped": false
+        },
+        {
+          "text": "F-C → 作業台へ支持",
+          "font_size_px": 16.123511904761905,
+          "clipped": false
+        },
+        {
+          "text": "下板",
+          "font_size_px": 16.123511904761905,
+          "clipped": false
+        },
+        {
+          "text": "板",
+          "font_size_px": 16.123511904761905,
+          "clipped": false
+        },
+        {
+          "text": "C主腕：ユニットを搬送",
+          "font_size_px": 16.123511904761905,
+          "clipped": false
+        },
+        {
+          "text": "支持を引き継いで上昇",
+          "font_size_px": 16.123511904761905,
+          "clipped": false
+        },
+        {
+          "text": "交換部・置台を使わない候補",
+          "font_size_px": 16.123511904761905,
+          "clipped": false
+        },
+        {
+          "text": "搬送用の輪郭を使用",
+          "font_size_px": 16.123511904761905,
+          "clipped": false
+        },
+        {
+          "text": "爪そのものは同じ形を保つ",
+          "font_size_px": 14.971832482993197,
+          "clipped": false
+        },
+        {
+          "text": "両用途を満たす実形状は未設計",
+          "font_size_px": 14.971832482993197,
+          "clipped": false
+        }
+      ]
+    },
+    {
+      "width": 736,
+      "method": "jaws",
+      "stage": 0,
+      "pressed": 2,
+      "overflow": false,
+      "support": "下板：F-C ／ ヒューズ板：C主腕",
+      "labels": [
+        {
+          "text": "C主腕",
+          "font_size_px": 16.123383620689655,
+          "clipped": false
+        },
+        {
+          "text": "同じ爪の輪郭を両用途で使う",
+          "font_size_px": 16.123383620689655,
+          "clipped": false
+        },
+        {
+          "text": "交換する部品はない候補",
+          "font_size_px": 14.971713362068966,
+          "clipped": false
+        },
+        {
+          "text": "C主腕",
+          "font_size_px": 16.123383620689655,
+          "clipped": false
+        },
+        {
+          "text": "交換境界",
+          "font_size_px": 16.123383620689655,
+          "clipped": false
+        },
+        {
+          "text": "爪をH07用 → 搬送用へ",
+          "font_size_px": 16.123383620689655,
+          "clipped": false
+        },
+        {
+          "text": "腕側には同じ本体が残る",
+          "font_size_px": 14.971713362068966,
+          "clipped": false
+        },
+        {
+          "text": "C主腕",
+          "font_size_px": 16.123383620689655,
+          "clipped": false
+        },
+        {
+          "text": "交換境界",
+          "font_size_px": 16.123383620689655,
+          "clipped": false
+        },
+        {
+          "text": "本体＋爪をH07 → H06へ",
+          "font_size_px": 16.123383620689655,
+          "clipped": false
+        },
+        {
+          "text": "腕側には交換部マスタが残る",
+          "font_size_px": 14.971713362068966,
+          "clipped": false
+        },
+        {
+          "text": "F-C → 作業台へ支持",
+          "font_size_px": 16.123511904761905,
+          "clipped": false
+        },
+        {
+          "text": "下板",
+          "font_size_px": 16.123511904761905,
+          "clipped": false
+        },
+        {
+          "text": "板",
+          "font_size_px": 16.123511904761905,
+          "clipped": false
+        },
+        {
+          "text": "C主腕：H07で板保持",
+          "font_size_px": 16.123511904761905,
+          "clipped": false
+        },
+        {
+          "text": "腕側にある部品",
+          "font_size_px": 16.123511904761905,
+          "clipped": false
+        },
+        {
+          "text": "H07側を装着",
+          "font_size_px": 14.971832482993197,
+          "clipped": false
+        },
+        {
+          "text": "空き",
+          "font_size_px": 14.971832482993197,
+          "clipped": false
+        },
+        {
+          "text": "H07用",
+          "font_size_px": 16.123511904761905,
+          "clipped": false
+        },
+        {
+          "text": "ユニット搬送用",
+          "font_size_px": 16.123511904761905,
+          "clipped": false
+        },
+        {
+          "text": "置台：爪の組だけを保管",
+          "font_size_px": 14.971832482993197,
+          "clipped": false
+        }
+      ]
+    },
+    {
+      "width": 736,
+      "method": "jaws",
+      "stage": 1,
+      "pressed": 2,
+      "overflow": false,
+      "support": "一体ユニット：F-C（板間固定の前提）",
+      "labels": [
+        {
+          "text": "C主腕",
+          "font_size_px": 16.123383620689655,
+          "clipped": false
+        },
+        {
+          "text": "同じ爪の輪郭を両用途で使う",
+          "font_size_px": 16.123383620689655,
+          "clipped": false
+        },
+        {
+          "text": "交換する部品はない候補",
+          "font_size_px": 14.971713362068966,
+          "clipped": false
+        },
+        {
+          "text": "C主腕",
+          "font_size_px": 16.123383620689655,
+          "clipped": false
+        },
+        {
+          "text": "交換境界",
+          "font_size_px": 16.123383620689655,
+          "clipped": false
+        },
+        {
+          "text": "爪をH07用 → 搬送用へ",
+          "font_size_px": 16.123383620689655,
+          "clipped": false
+        },
+        {
+          "text": "腕側には同じ本体が残る",
+          "font_size_px": 14.971713362068966,
+          "clipped": false
+        },
+        {
+          "text": "C主腕",
+          "font_size_px": 16.123383620689655,
+          "clipped": false
+        },
+        {
+          "text": "交換境界",
+          "font_size_px": 16.123383620689655,
+          "clipped": false
+        },
+        {
+          "text": "本体＋爪をH07 → H06へ",
+          "font_size_px": 16.123383620689655,
+          "clipped": false
+        },
+        {
+          "text": "腕側には交換部マスタが残る",
+          "font_size_px": 14.971713362068966,
+          "clipped": false
+        },
+        {
+          "text": "F-C → 作業台へ支持",
+          "font_size_px": 16.123511904761905,
+          "clipped": false
+        },
+        {
+          "text": "下板",
+          "font_size_px": 16.123511904761905,
+          "clipped": false
+        },
+        {
+          "text": "板",
+          "font_size_px": 16.123511904761905,
+          "clipped": false
+        },
+        {
+          "text": "C主腕：開放して退避",
+          "font_size_px": 16.123511904761905,
+          "clipped": false
+        },
+        {
+          "text": "本体はF-Cに残る",
+          "font_size_px": 16.123511904761905,
+          "clipped": false
+        },
+        {
+          "text": "腕側にある部品",
+          "font_size_px": 16.123511904761905,
+          "clipped": false
+        },
+        {
+          "text": "H07側を装着",
+          "font_size_px": 14.971832482993197,
+          "clipped": false
+        },
+        {
+          "text": "空き",
+          "font_size_px": 14.971832482993197,
+          "clipped": false
+        },
+        {
+          "text": "H07用",
+          "font_size_px": 16.123511904761905,
+          "clipped": false
+        },
+        {
+          "text": "ユニット搬送用",
+          "font_size_px": 16.123511904761905,
+          "clipped": false
+        },
+        {
+          "text": "置台：爪の組だけを保管",
+          "font_size_px": 14.971832482993197,
+          "clipped": false
+        }
+      ]
+    },
+    {
+      "width": 736,
+      "method": "jaws",
+      "stage": 2,
+      "pressed": 2,
+      "overflow": false,
+      "support": "一体ユニット：F-C（板間固定の前提）",
+      "labels": [
+        {
+          "text": "C主腕",
+          "font_size_px": 16.123383620689655,
+          "clipped": false
+        },
+        {
+          "text": "同じ爪の輪郭を両用途で使う",
+          "font_size_px": 16.123383620689655,
+          "clipped": false
+        },
+        {
+          "text": "交換する部品はない候補",
+          "font_size_px": 14.971713362068966,
+          "clipped": false
+        },
+        {
+          "text": "C主腕",
+          "font_size_px": 16.123383620689655,
+          "clipped": false
+        },
+        {
+          "text": "交換境界",
+          "font_size_px": 16.123383620689655,
+          "clipped": false
+        },
+        {
+          "text": "爪をH07用 → 搬送用へ",
+          "font_size_px": 16.123383620689655,
+          "clipped": false
+        },
+        {
+          "text": "腕側には同じ本体が残る",
+          "font_size_px": 14.971713362068966,
+          "clipped": false
+        },
+        {
+          "text": "C主腕",
+          "font_size_px": 16.123383620689655,
+          "clipped": false
+        },
+        {
+          "text": "交換境界",
+          "font_size_px": 16.123383620689655,
+          "clipped": false
+        },
+        {
+          "text": "本体＋爪をH07 → H06へ",
+          "font_size_px": 16.123383620689655,
+          "clipped": false
+        },
+        {
+          "text": "腕側には交換部マスタが残る",
+          "font_size_px": 14.971713362068966,
+          "clipped": false
+        },
+        {
+          "text": "F-C → 作業台へ支持",
+          "font_size_px": 16.123511904761905,
+          "clipped": false
+        },
+        {
+          "text": "下板",
+          "font_size_px": 16.123511904761905,
+          "clipped": false
+        },
+        {
+          "text": "板",
+          "font_size_px": 16.123511904761905,
+          "clipped": false
+        },
+        {
+          "text": "C主腕は手先の切替中",
+          "font_size_px": 16.123511904761905,
+          "clipped": false
+        },
+        {
+          "text": "置台へ移動して交換する",
+          "font_size_px": 14.971832482993197,
+          "clipped": false
+        },
+        {
+          "text": "本体はF-Cに残る",
+          "font_size_px": 16.123511904761905,
+          "clipped": false
+        },
+        {
+          "text": "腕側にある部品",
+          "font_size_px": 16.123511904761905,
+          "clipped": false
+        },
+        {
+          "text": "共通の本体のみ",
+          "font_size_px": 14.971832482993197,
+          "clipped": false
+        },
+        {
+          "text": "H07用",
+          "font_size_px": 16.123511904761905,
+          "clipped": false
+        },
+        {
+          "text": "ユニット搬送用",
+          "font_size_px": 16.123511904761905,
+          "clipped": false
+        },
+        {
+          "text": "置台：爪の組だけを保管",
+          "font_size_px": 14.971832482993197,
+          "clipped": false
+        }
+      ]
+    },
+    {
+      "width": 736,
+      "method": "jaws",
+      "stage": 3,
+      "pressed": 2,
+      "overflow": false,
+      "support": "一体ユニット：F-C（板間固定の前提）",
+      "labels": [
+        {
+          "text": "C主腕",
+          "font_size_px": 16.123383620689655,
+          "clipped": false
+        },
+        {
+          "text": "同じ爪の輪郭を両用途で使う",
+          "font_size_px": 16.123383620689655,
+          "clipped": false
+        },
+        {
+          "text": "交換する部品はない候補",
+          "font_size_px": 14.971713362068966,
+          "clipped": false
+        },
+        {
+          "text": "C主腕",
+          "font_size_px": 16.123383620689655,
+          "clipped": false
+        },
+        {
+          "text": "交換境界",
+          "font_size_px": 16.123383620689655,
+          "clipped": false
+        },
+        {
+          "text": "爪をH07用 → 搬送用へ",
+          "font_size_px": 16.123383620689655,
+          "clipped": false
+        },
+        {
+          "text": "腕側には同じ本体が残る",
+          "font_size_px": 14.971713362068966,
+          "clipped": false
+        },
+        {
+          "text": "C主腕",
+          "font_size_px": 16.123383620689655,
+          "clipped": false
+        },
+        {
+          "text": "交換境界",
+          "font_size_px": 16.123383620689655,
+          "clipped": false
+        },
+        {
+          "text": "本体＋爪をH07 → H06へ",
+          "font_size_px": 16.123383620689655,
+          "clipped": false
+        },
+        {
+          "text": "腕側には交換部マスタが残る",
+          "font_size_px": 14.971713362068966,
+          "clipped": false
+        },
+        {
+          "text": "F-C → 作業台へ支持",
+          "font_size_px": 16.123511904761905,
+          "clipped": false
+        },
+        {
+          "text": "下板",
+          "font_size_px": 16.123511904761905,
+          "clipped": false
+        },
+        {
+          "text": "板",
+          "font_size_px": 16.123511904761905,
+          "clipped": false
+        },
+        {
+          "text": "C主腕は手先の切替中",
+          "font_size_px": 16.123511904761905,
+          "clipped": false
+        },
+        {
+          "text": "置台へ移動して交換する",
+          "font_size_px": 14.971832482993197,
+          "clipped": false
+        },
+        {
+          "text": "本体はF-Cに残る",
+          "font_size_px": 16.123511904761905,
+          "clipped": false
+        },
+        {
+          "text": "腕側にある部品",
+          "font_size_px": 16.123511904761905,
+          "clipped": false
+        },
+        {
+          "text": "ユニット搬送側を装着",
+          "font_size_px": 14.971832482993197,
+          "clipped": false
+        },
+        {
+          "text": "H07用",
+          "font_size_px": 16.123511904761905,
+          "clipped": false
+        },
+        {
+          "text": "空き",
+          "font_size_px": 14.971832482993197,
+          "clipped": false
+        },
+        {
+          "text": "ユニット搬送用",
+          "font_size_px": 16.123511904761905,
+          "clipped": false
+        },
+        {
+          "text": "置台：爪の組だけを保管",
+          "font_size_px": 14.971832482993197,
+          "clipped": false
+        }
+      ]
+    },
+    {
+      "width": 736,
+      "method": "jaws",
+      "stage": 4,
+      "pressed": 2,
+      "overflow": false,
+      "support": "F-Cに支持を残してC主腕で把持",
+      "labels": [
+        {
+          "text": "C主腕",
+          "font_size_px": 16.123383620689655,
+          "clipped": false
+        },
+        {
+          "text": "同じ爪の輪郭を両用途で使う",
+          "font_size_px": 16.123383620689655,
+          "clipped": false
+        },
+        {
+          "text": "交換する部品はない候補",
+          "font_size_px": 14.971713362068966,
+          "clipped": false
+        },
+        {
+          "text": "C主腕",
+          "font_size_px": 16.123383620689655,
+          "clipped": false
+        },
+        {
+          "text": "交換境界",
+          "font_size_px": 16.123383620689655,
+          "clipped": false
+        },
+        {
+          "text": "爪をH07用 → 搬送用へ",
+          "font_size_px": 16.123383620689655,
+          "clipped": false
+        },
+        {
+          "text": "腕側には同じ本体が残る",
+          "font_size_px": 14.971713362068966,
+          "clipped": false
+        },
+        {
+          "text": "C主腕",
+          "font_size_px": 16.123383620689655,
+          "clipped": false
+        },
+        {
+          "text": "交換境界",
+          "font_size_px": 16.123383620689655,
+          "clipped": false
+        },
+        {
+          "text": "本体＋爪をH07 → H06へ",
+          "font_size_px": 16.123383620689655,
+          "clipped": false
+        },
+        {
+          "text": "腕側には交換部マスタが残る",
+          "font_size_px": 14.971713362068966,
+          "clipped": false
+        },
+        {
+          "text": "F-C → 作業台へ支持",
+          "font_size_px": 16.123511904761905,
+          "clipped": false
+        },
+        {
+          "text": "下板",
+          "font_size_px": 16.123511904761905,
+          "clipped": false
+        },
+        {
+          "text": "板",
+          "font_size_px": 16.123511904761905,
+          "clipped": false
+        },
+        {
+          "text": "C主腕：支持上で搬送把持",
+          "font_size_px": 16.123511904761905,
+          "clipped": false
+        },
+        {
+          "text": "本体はF-Cに残る",
+          "font_size_px": 16.123511904761905,
+          "clipped": false
+        },
+        {
+          "text": "腕側にある部品",
+          "font_size_px": 16.123511904761905,
+          "clipped": false
+        },
+        {
+          "text": "ユニット搬送側を装着",
+          "font_size_px": 14.971832482993197,
+          "clipped": false
+        },
+        {
+          "text": "H07用",
+          "font_size_px": 16.123511904761905,
+          "clipped": false
+        },
+        {
+          "text": "空き",
+          "font_size_px": 14.971832482993197,
+          "clipped": false
+        },
+        {
+          "text": "ユニット搬送用",
+          "font_size_px": 16.123511904761905,
+          "clipped": false
+        },
+        {
+          "text": "置台：爪の組だけを保管",
+          "font_size_px": 14.971832482993197,
+          "clipped": false
+        }
+      ]
+    },
+    {
+      "width": 736,
+      "method": "jaws",
+      "stage": 5,
+      "pressed": 2,
+      "overflow": false,
+      "support": "本体：C主腕 ／ 自由端：別担当",
+      "labels": [
+        {
+          "text": "C主腕",
+          "font_size_px": 16.123383620689655,
+          "clipped": false
+        },
+        {
+          "text": "同じ爪の輪郭を両用途で使う",
+          "font_size_px": 16.123383620689655,
+          "clipped": false
+        },
+        {
+          "text": "交換する部品はない候補",
+          "font_size_px": 14.971713362068966,
+          "clipped": false
+        },
+        {
+          "text": "C主腕",
+          "font_size_px": 16.123383620689655,
+          "clipped": false
+        },
+        {
+          "text": "交換境界",
+          "font_size_px": 16.123383620689655,
+          "clipped": false
+        },
+        {
+          "text": "爪をH07用 → 搬送用へ",
+          "font_size_px": 16.123383620689655,
+          "clipped": false
+        },
+        {
+          "text": "腕側には同じ本体が残る",
+          "font_size_px": 14.971713362068966,
+          "clipped": false
+        },
+        {
+          "text": "C主腕",
+          "font_size_px": 16.123383620689655,
+          "clipped": false
+        },
+        {
+          "text": "交換境界",
+          "font_size_px": 16.123383620689655,
+          "clipped": false
+        },
+        {
+          "text": "本体＋爪をH07 → H06へ",
+          "font_size_px": 16.123383620689655,
+          "clipped": false
+        },
+        {
+          "text": "腕側には交換部マスタが残る",
+          "font_size_px": 14.971713362068966,
+          "clipped": false
+        },
+        {
+          "text": "F-C → 作業台へ支持",
+          "font_size_px": 16.123511904761905,
+          "clipped": false
+        },
+        {
+          "text": "下板",
+          "font_size_px": 16.123511904761905,
+          "clipped": false
+        },
+        {
+          "text": "板",
+          "font_size_px": 16.123511904761905,
+          "clipped": false
+        },
+        {
+          "text": "C主腕：ユニットを搬送",
+          "font_size_px": 16.123511904761905,
+          "clipped": false
+        },
+        {
+          "text": "支持を引き継いで上昇",
+          "font_size_px": 16.123511904761905,
+          "clipped": false
+        },
+        {
+          "text": "腕側にある部品",
+          "font_size_px": 16.123511904761905,
+          "clipped": false
+        },
+        {
+          "text": "ユニット搬送側を装着",
+          "font_size_px": 14.971832482993197,
+          "clipped": false
+        },
+        {
+          "text": "H07用",
+          "font_size_px": 16.123511904761905,
+          "clipped": false
+        },
+        {
+          "text": "空き",
+          "font_size_px": 14.971832482993197,
+          "clipped": false
+        },
+        {
+          "text": "ユニット搬送用",
+          "font_size_px": 16.123511904761905,
+          "clipped": false
+        },
+        {
+          "text": "置台：爪の組だけを保管",
+          "font_size_px": 14.971832482993197,
+          "clipped": false
+        }
+      ]
+    },
+    {
+      "width": 736,
+      "method": "whole",
+      "stage": 0,
+      "pressed": 2,
+      "overflow": false,
+      "support": "下板：F-C ／ ヒューズ板：C主腕",
+      "labels": [
+        {
+          "text": "C主腕",
+          "font_size_px": 16.123383620689655,
+          "clipped": false
+        },
+        {
+          "text": "同じ爪の輪郭を両用途で使う",
+          "font_size_px": 16.123383620689655,
+          "clipped": false
+        },
+        {
+          "text": "交換する部品はない候補",
+          "font_size_px": 14.971713362068966,
+          "clipped": false
+        },
+        {
+          "text": "C主腕",
+          "font_size_px": 16.123383620689655,
+          "clipped": false
+        },
+        {
+          "text": "交換境界",
+          "font_size_px": 16.123383620689655,
+          "clipped": false
+        },
+        {
+          "text": "爪をH07用 → 搬送用へ",
+          "font_size_px": 16.123383620689655,
+          "clipped": false
+        },
+        {
+          "text": "腕側には同じ本体が残る",
+          "font_size_px": 14.971713362068966,
+          "clipped": false
+        },
+        {
+          "text": "C主腕",
+          "font_size_px": 16.123383620689655,
+          "clipped": false
+        },
+        {
+          "text": "交換境界",
+          "font_size_px": 16.123383620689655,
+          "clipped": false
+        },
+        {
+          "text": "本体＋爪をH07 → H06へ",
+          "font_size_px": 16.123383620689655,
+          "clipped": false
+        },
+        {
+          "text": "腕側には交換部マスタが残る",
+          "font_size_px": 14.971713362068966,
+          "clipped": false
+        },
+        {
+          "text": "F-C → 作業台へ支持",
+          "font_size_px": 16.123511904761905,
+          "clipped": false
+        },
+        {
+          "text": "下板",
+          "font_size_px": 16.123511904761905,
+          "clipped": false
+        },
+        {
+          "text": "板",
+          "font_size_px": 16.123511904761905,
+          "clipped": false
+        },
+        {
+          "text": "C主腕：H07で板保持",
+          "font_size_px": 16.123511904761905,
+          "clipped": false
+        },
+        {
+          "text": "腕側にある部品",
+          "font_size_px": 16.123511904761905,
+          "clipped": false
+        },
+        {
+          "text": "H07側を装着",
+          "font_size_px": 14.971832482993197,
+          "clipped": false
+        },
+        {
+          "text": "空き",
+          "font_size_px": 14.971832482993197,
+          "clipped": false
+        },
+        {
+          "text": "H07用",
+          "font_size_px": 16.123511904761905,
+          "clipped": false
+        },
+        {
+          "text": "ユニット搬送用",
+          "font_size_px": 16.123511904761905,
+          "clipped": false
+        },
+        {
+          "text": "置台：本体＋爪を保管",
+          "font_size_px": 14.971832482993197,
+          "clipped": false
+        }
+      ]
+    },
+    {
+      "width": 736,
+      "method": "whole",
+      "stage": 1,
+      "pressed": 2,
+      "overflow": false,
+      "support": "一体ユニット：F-C（板間固定の前提）",
+      "labels": [
+        {
+          "text": "C主腕",
+          "font_size_px": 16.123383620689655,
+          "clipped": false
+        },
+        {
+          "text": "同じ爪の輪郭を両用途で使う",
+          "font_size_px": 16.123383620689655,
+          "clipped": false
+        },
+        {
+          "text": "交換する部品はない候補",
+          "font_size_px": 14.971713362068966,
+          "clipped": false
+        },
+        {
+          "text": "C主腕",
+          "font_size_px": 16.123383620689655,
+          "clipped": false
+        },
+        {
+          "text": "交換境界",
+          "font_size_px": 16.123383620689655,
+          "clipped": false
+        },
+        {
+          "text": "爪をH07用 → 搬送用へ",
+          "font_size_px": 16.123383620689655,
+          "clipped": false
+        },
+        {
+          "text": "腕側には同じ本体が残る",
+          "font_size_px": 14.971713362068966,
+          "clipped": false
+        },
+        {
+          "text": "C主腕",
+          "font_size_px": 16.123383620689655,
+          "clipped": false
+        },
+        {
+          "text": "交換境界",
+          "font_size_px": 16.123383620689655,
+          "clipped": false
+        },
+        {
+          "text": "本体＋爪をH07 → H06へ",
+          "font_size_px": 16.123383620689655,
+          "clipped": false
+        },
+        {
+          "text": "腕側には交換部マスタが残る",
+          "font_size_px": 14.971713362068966,
+          "clipped": false
+        },
+        {
+          "text": "F-C → 作業台へ支持",
+          "font_size_px": 16.123511904761905,
+          "clipped": false
+        },
+        {
+          "text": "下板",
+          "font_size_px": 16.123511904761905,
+          "clipped": false
+        },
+        {
+          "text": "板",
+          "font_size_px": 16.123511904761905,
+          "clipped": false
+        },
+        {
+          "text": "C主腕：開放して退避",
+          "font_size_px": 16.123511904761905,
+          "clipped": false
+        },
+        {
+          "text": "本体はF-Cに残る",
+          "font_size_px": 16.123511904761905,
+          "clipped": false
+        },
+        {
+          "text": "腕側にある部品",
+          "font_size_px": 16.123511904761905,
+          "clipped": false
+        },
+        {
+          "text": "H07側を装着",
+          "font_size_px": 14.971832482993197,
+          "clipped": false
+        },
+        {
+          "text": "空き",
+          "font_size_px": 14.971832482993197,
+          "clipped": false
+        },
+        {
+          "text": "H07用",
+          "font_size_px": 16.123511904761905,
+          "clipped": false
+        },
+        {
+          "text": "ユニット搬送用",
+          "font_size_px": 16.123511904761905,
+          "clipped": false
+        },
+        {
+          "text": "置台：本体＋爪を保管",
+          "font_size_px": 14.971832482993197,
+          "clipped": false
+        }
+      ]
+    },
+    {
+      "width": 736,
+      "method": "whole",
+      "stage": 2,
+      "pressed": 2,
+      "overflow": false,
+      "support": "一体ユニット：F-C（板間固定の前提）",
+      "labels": [
+        {
+          "text": "C主腕",
+          "font_size_px": 16.123383620689655,
+          "clipped": false
+        },
+        {
+          "text": "同じ爪の輪郭を両用途で使う",
+          "font_size_px": 16.123383620689655,
+          "clipped": false
+        },
+        {
+          "text": "交換する部品はない候補",
+          "font_size_px": 14.971713362068966,
+          "clipped": false
+        },
+        {
+          "text": "C主腕",
+          "font_size_px": 16.123383620689655,
+          "clipped": false
+        },
+        {
+          "text": "交換境界",
+          "font_size_px": 16.123383620689655,
+          "clipped": false
+        },
+        {
+          "text": "爪をH07用 → 搬送用へ",
+          "font_size_px": 16.123383620689655,
+          "clipped": false
+        },
+        {
+          "text": "腕側には同じ本体が残る",
+          "font_size_px": 14.971713362068966,
+          "clipped": false
+        },
+        {
+          "text": "C主腕",
+          "font_size_px": 16.123383620689655,
+          "clipped": false
+        },
+        {
+          "text": "交換境界",
+          "font_size_px": 16.123383620689655,
+          "clipped": false
+        },
+        {
+          "text": "本体＋爪をH07 → H06へ",
+          "font_size_px": 16.123383620689655,
+          "clipped": false
+        },
+        {
+          "text": "腕側には交換部マスタが残る",
+          "font_size_px": 14.971713362068966,
+          "clipped": false
+        },
+        {
+          "text": "F-C → 作業台へ支持",
+          "font_size_px": 16.123511904761905,
+          "clipped": false
+        },
+        {
+          "text": "下板",
+          "font_size_px": 16.123511904761905,
+          "clipped": false
+        },
+        {
+          "text": "板",
+          "font_size_px": 16.123511904761905,
+          "clipped": false
+        },
+        {
+          "text": "C主腕は手先の切替中",
+          "font_size_px": 16.123511904761905,
+          "clipped": false
+        },
+        {
+          "text": "置台へ移動して交換する",
+          "font_size_px": 14.971832482993197,
+          "clipped": false
+        },
+        {
+          "text": "本体はF-Cに残る",
+          "font_size_px": 16.123511904761905,
+          "clipped": false
+        },
+        {
+          "text": "腕側にある部品",
+          "font_size_px": 16.123511904761905,
+          "clipped": false
+        },
+        {
+          "text": "交換部のマスタのみ",
+          "font_size_px": 14.971832482993197,
+          "clipped": false
+        },
+        {
+          "text": "H07用",
+          "font_size_px": 16.123511904761905,
+          "clipped": false
+        },
+        {
+          "text": "ユニット搬送用",
+          "font_size_px": 16.123511904761905,
+          "clipped": false
+        },
+        {
+          "text": "置台：本体＋爪を保管",
+          "font_size_px": 14.971832482993197,
+          "clipped": false
+        }
+      ]
+    },
+    {
+      "width": 736,
+      "method": "whole",
+      "stage": 3,
+      "pressed": 2,
+      "overflow": false,
+      "support": "一体ユニット：F-C（板間固定の前提）",
+      "labels": [
+        {
+          "text": "C主腕",
+          "font_size_px": 16.123383620689655,
+          "clipped": false
+        },
+        {
+          "text": "同じ爪の輪郭を両用途で使う",
+          "font_size_px": 16.123383620689655,
+          "clipped": false
+        },
+        {
+          "text": "交換する部品はない候補",
+          "font_size_px": 14.971713362068966,
+          "clipped": false
+        },
+        {
+          "text": "C主腕",
+          "font_size_px": 16.123383620689655,
+          "clipped": false
+        },
+        {
+          "text": "交換境界",
+          "font_size_px": 16.123383620689655,
+          "clipped": false
+        },
+        {
+          "text": "爪をH07用 → 搬送用へ",
+          "font_size_px": 16.123383620689655,
+          "clipped": false
+        },
+        {
+          "text": "腕側には同じ本体が残る",
+          "font_size_px": 14.971713362068966,
+          "clipped": false
+        },
+        {
+          "text": "C主腕",
+          "font_size_px": 16.123383620689655,
+          "clipped": false
+        },
+        {
+          "text": "交換境界",
+          "font_size_px": 16.123383620689655,
+          "clipped": false
+        },
+        {
+          "text": "本体＋爪をH07 → H06へ",
+          "font_size_px": 16.123383620689655,
+          "clipped": false
+        },
+        {
+          "text": "腕側には交換部マスタが残る",
+          "font_size_px": 14.971713362068966,
+          "clipped": false
+        },
+        {
+          "text": "F-C → 作業台へ支持",
+          "font_size_px": 16.123511904761905,
+          "clipped": false
+        },
+        {
+          "text": "下板",
+          "font_size_px": 16.123511904761905,
+          "clipped": false
+        },
+        {
+          "text": "板",
+          "font_size_px": 16.123511904761905,
+          "clipped": false
+        },
+        {
+          "text": "C主腕は手先の切替中",
+          "font_size_px": 16.123511904761905,
+          "clipped": false
+        },
+        {
+          "text": "置台へ移動して交換する",
+          "font_size_px": 14.971832482993197,
+          "clipped": false
+        },
+        {
+          "text": "本体はF-Cに残る",
+          "font_size_px": 16.123511904761905,
+          "clipped": false
+        },
+        {
+          "text": "腕側にある部品",
+          "font_size_px": 16.123511904761905,
+          "clipped": false
+        },
+        {
+          "text": "ユニット搬送側を装着",
+          "font_size_px": 14.971832482993197,
+          "clipped": false
+        },
+        {
+          "text": "H07用",
+          "font_size_px": 16.123511904761905,
+          "clipped": false
+        },
+        {
+          "text": "空き",
+          "font_size_px": 14.971832482993197,
+          "clipped": false
+        },
+        {
+          "text": "ユニット搬送用",
+          "font_size_px": 16.123511904761905,
+          "clipped": false
+        },
+        {
+          "text": "置台：本体＋爪を保管",
+          "font_size_px": 14.971832482993197,
+          "clipped": false
+        }
+      ]
+    },
+    {
+      "width": 736,
+      "method": "whole",
+      "stage": 4,
+      "pressed": 2,
+      "overflow": false,
+      "support": "F-Cに支持を残してC主腕で把持",
+      "labels": [
+        {
+          "text": "C主腕",
+          "font_size_px": 16.123383620689655,
+          "clipped": false
+        },
+        {
+          "text": "同じ爪の輪郭を両用途で使う",
+          "font_size_px": 16.123383620689655,
+          "clipped": false
+        },
+        {
+          "text": "交換する部品はない候補",
+          "font_size_px": 14.971713362068966,
+          "clipped": false
+        },
+        {
+          "text": "C主腕",
+          "font_size_px": 16.123383620689655,
+          "clipped": false
+        },
+        {
+          "text": "交換境界",
+          "font_size_px": 16.123383620689655,
+          "clipped": false
+        },
+        {
+          "text": "爪をH07用 → 搬送用へ",
+          "font_size_px": 16.123383620689655,
+          "clipped": false
+        },
+        {
+          "text": "腕側には同じ本体が残る",
+          "font_size_px": 14.971713362068966,
+          "clipped": false
+        },
+        {
+          "text": "C主腕",
+          "font_size_px": 16.123383620689655,
+          "clipped": false
+        },
+        {
+          "text": "交換境界",
+          "font_size_px": 16.123383620689655,
+          "clipped": false
+        },
+        {
+          "text": "本体＋爪をH07 → H06へ",
+          "font_size_px": 16.123383620689655,
+          "clipped": false
+        },
+        {
+          "text": "腕側には交換部マスタが残る",
+          "font_size_px": 14.971713362068966,
+          "clipped": false
+        },
+        {
+          "text": "F-C → 作業台へ支持",
+          "font_size_px": 16.123511904761905,
+          "clipped": false
+        },
+        {
+          "text": "下板",
+          "font_size_px": 16.123511904761905,
+          "clipped": false
+        },
+        {
+          "text": "板",
+          "font_size_px": 16.123511904761905,
+          "clipped": false
+        },
+        {
+          "text": "C主腕：支持上で搬送把持",
+          "font_size_px": 16.123511904761905,
+          "clipped": false
+        },
+        {
+          "text": "本体はF-Cに残る",
+          "font_size_px": 16.123511904761905,
+          "clipped": false
+        },
+        {
+          "text": "腕側にある部品",
+          "font_size_px": 16.123511904761905,
+          "clipped": false
+        },
+        {
+          "text": "ユニット搬送側を装着",
+          "font_size_px": 14.971832482993197,
+          "clipped": false
+        },
+        {
+          "text": "H07用",
+          "font_size_px": 16.123511904761905,
+          "clipped": false
+        },
+        {
+          "text": "空き",
+          "font_size_px": 14.971832482993197,
+          "clipped": false
+        },
+        {
+          "text": "ユニット搬送用",
+          "font_size_px": 16.123511904761905,
+          "clipped": false
+        },
+        {
+          "text": "置台：本体＋爪を保管",
+          "font_size_px": 14.971832482993197,
+          "clipped": false
+        }
+      ]
+    },
+    {
+      "width": 736,
+      "method": "whole",
+      "stage": 5,
+      "pressed": 2,
+      "overflow": false,
+      "support": "本体：C主腕 ／ 自由端：別担当",
+      "labels": [
+        {
+          "text": "C主腕",
+          "font_size_px": 16.123383620689655,
+          "clipped": false
+        },
+        {
+          "text": "同じ爪の輪郭を両用途で使う",
+          "font_size_px": 16.123383620689655,
+          "clipped": false
+        },
+        {
+          "text": "交換する部品はない候補",
+          "font_size_px": 14.971713362068966,
+          "clipped": false
+        },
+        {
+          "text": "C主腕",
+          "font_size_px": 16.123383620689655,
+          "clipped": false
+        },
+        {
+          "text": "交換境界",
+          "font_size_px": 16.123383620689655,
+          "clipped": false
+        },
+        {
+          "text": "爪をH07用 → 搬送用へ",
+          "font_size_px": 16.123383620689655,
+          "clipped": false
+        },
+        {
+          "text": "腕側には同じ本体が残る",
+          "font_size_px": 14.971713362068966,
+          "clipped": false
+        },
+        {
+          "text": "C主腕",
+          "font_size_px": 16.123383620689655,
+          "clipped": false
+        },
+        {
+          "text": "交換境界",
+          "font_size_px": 16.123383620689655,
+          "clipped": false
+        },
+        {
+          "text": "本体＋爪をH07 → H06へ",
+          "font_size_px": 16.123383620689655,
+          "clipped": false
+        },
+        {
+          "text": "腕側には交換部マスタが残る",
+          "font_size_px": 14.971713362068966,
+          "clipped": false
+        },
+        {
+          "text": "F-C → 作業台へ支持",
+          "font_size_px": 16.123511904761905,
+          "clipped": false
+        },
+        {
+          "text": "下板",
+          "font_size_px": 16.123511904761905,
+          "clipped": false
+        },
+        {
+          "text": "板",
+          "font_size_px": 16.123511904761905,
+          "clipped": false
+        },
+        {
+          "text": "C主腕：ユニットを搬送",
+          "font_size_px": 16.123511904761905,
+          "clipped": false
+        },
+        {
+          "text": "支持を引き継いで上昇",
+          "font_size_px": 16.123511904761905,
+          "clipped": false
+        },
+        {
+          "text": "腕側にある部品",
+          "font_size_px": 16.123511904761905,
+          "clipped": false
+        },
+        {
+          "text": "ユニット搬送側を装着",
+          "font_size_px": 14.971832482993197,
+          "clipped": false
+        },
+        {
+          "text": "H07用",
+          "font_size_px": 16.123511904761905,
+          "clipped": false
+        },
+        {
+          "text": "空き",
+          "font_size_px": 14.971832482993197,
+          "clipped": false
+        },
+        {
+          "text": "ユニット搬送用",
+          "font_size_px": 16.123511904761905,
+          "clipped": false
+        },
+        {
+          "text": "置台：本体＋爪を保管",
+          "font_size_px": 14.971832482993197,
+          "clipped": false
+        }
+      ]
+    },
+    {
+      "width": 390,
+      "method": "common",
+      "stage": 0,
+      "pressed": 2,
+      "overflow": false,
+      "support": "下板：F-C ／ ヒューズ板：C主腕",
+      "labels": [
+        {
+          "text": "C主腕",
+          "font_size_px": 15.370554956896552,
+          "clipped": false
+        },
+        {
+          "text": "同じ爪の輪郭を両用途で使う",
+          "font_size_px": 15.370554956896552,
+          "clipped": false
+        },
+        {
+          "text": "交換する部品はない候補",
+          "font_size_px": 14.516635237068964,
+          "clipped": false
+        },
+        {
+          "text": "C主腕",
+          "font_size_px": 15.370554956896552,
+          "clipped": false
+        },
+        {
+          "text": "交換境界",
+          "font_size_px": 15.370554956896552,
+          "clipped": false
+        },
+        {
+          "text": "爪をH07用 → 搬送用へ",
+          "font_size_px": 15.370554956896552,
+          "clipped": false
+        },
+        {
+          "text": "腕側には同じ本体が残る",
+          "font_size_px": 14.516635237068964,
+          "clipped": false
+        },
+        {
+          "text": "C主腕",
+          "font_size_px": 15.370554956896552,
+          "clipped": false
+        },
+        {
+          "text": "交換境界",
+          "font_size_px": 15.370554956896552,
+          "clipped": false
+        },
+        {
+          "text": "本体＋爪をH07 → H06へ",
+          "font_size_px": 15.370554956896552,
+          "clipped": false
+        },
+        {
+          "text": "腕側には交換部マスタが残る",
+          "font_size_px": 14.516635237068964,
+          "clipped": false
+        },
+        {
+          "text": "F-C → 作業台へ支持",
+          "font_size_px": 15.370216836734695,
+          "clipped": false
+        },
+        {
+          "text": "下板",
+          "font_size_px": 15.370216836734695,
+          "clipped": false
+        },
+        {
+          "text": "板",
+          "font_size_px": 15.370216836734695,
+          "clipped": false
+        },
+        {
+          "text": "C主腕：H07で板保持",
+          "font_size_px": 15.370216836734695,
+          "clipped": false
+        },
+        {
+          "text": "交換部・置台を使わない候補",
+          "font_size_px": 15.370216836734695,
+          "clipped": false
+        },
+        {
+          "text": "板保持の輪郭を使用",
+          "font_size_px": 15.370216836734695,
+          "clipped": false
+        },
+        {
+          "text": "爪そのものは同じ形を保つ",
+          "font_size_px": 14.516315901360544,
+          "clipped": false
+        },
+        {
+          "text": "両用途を満たす実形状は未設計",
+          "font_size_px": 14.516315901360544,
+          "clipped": false
+        }
+      ]
+    },
+    {
+      "width": 390,
+      "method": "common",
+      "stage": 1,
+      "pressed": 2,
+      "overflow": false,
+      "support": "一体ユニット：F-C（板間固定の前提）",
+      "labels": [
+        {
+          "text": "C主腕",
+          "font_size_px": 15.370554956896552,
+          "clipped": false
+        },
+        {
+          "text": "同じ爪の輪郭を両用途で使う",
+          "font_size_px": 15.370554956896552,
+          "clipped": false
+        },
+        {
+          "text": "交換する部品はない候補",
+          "font_size_px": 14.516635237068964,
+          "clipped": false
+        },
+        {
+          "text": "C主腕",
+          "font_size_px": 15.370554956896552,
+          "clipped": false
+        },
+        {
+          "text": "交換境界",
+          "font_size_px": 15.370554956896552,
+          "clipped": false
+        },
+        {
+          "text": "爪をH07用 → 搬送用へ",
+          "font_size_px": 15.370554956896552,
+          "clipped": false
+        },
+        {
+          "text": "腕側には同じ本体が残る",
+          "font_size_px": 14.516635237068964,
+          "clipped": false
+        },
+        {
+          "text": "C主腕",
+          "font_size_px": 15.370554956896552,
+          "clipped": false
+        },
+        {
+          "text": "交換境界",
+          "font_size_px": 15.370554956896552,
+          "clipped": false
+        },
+        {
+          "text": "本体＋爪をH07 → H06へ",
+          "font_size_px": 15.370554956896552,
+          "clipped": false
+        },
+        {
+          "text": "腕側には交換部マスタが残る",
+          "font_size_px": 14.516635237068964,
+          "clipped": false
+        },
+        {
+          "text": "F-C → 作業台へ支持",
+          "font_size_px": 15.370216836734695,
+          "clipped": false
+        },
+        {
+          "text": "下板",
+          "font_size_px": 15.370216836734695,
+          "clipped": false
+        },
+        {
+          "text": "板",
+          "font_size_px": 15.370216836734695,
+          "clipped": false
+        },
+        {
+          "text": "C主腕：開放して退避",
+          "font_size_px": 15.370216836734695,
+          "clipped": false
+        },
+        {
+          "text": "本体はF-Cに残る",
+          "font_size_px": 15.370216836734695,
+          "clipped": false
+        },
+        {
+          "text": "交換部・置台を使わない候補",
+          "font_size_px": 15.370216836734695,
+          "clipped": false
+        },
+        {
+          "text": "板保持の輪郭を使用",
+          "font_size_px": 15.370216836734695,
+          "clipped": false
+        },
+        {
+          "text": "爪そのものは同じ形を保つ",
+          "font_size_px": 14.516315901360544,
+          "clipped": false
+        },
+        {
+          "text": "両用途を満たす実形状は未設計",
+          "font_size_px": 14.516315901360544,
+          "clipped": false
+        }
+      ]
+    },
+    {
+      "width": 390,
+      "method": "common",
+      "stage": 2,
+      "pressed": 2,
+      "overflow": false,
+      "support": "一体ユニット：F-C（板間固定の前提）",
+      "labels": [
+        {
+          "text": "C主腕",
+          "font_size_px": 15.370554956896552,
+          "clipped": false
+        },
+        {
+          "text": "同じ爪の輪郭を両用途で使う",
+          "font_size_px": 15.370554956896552,
+          "clipped": false
+        },
+        {
+          "text": "交換する部品はない候補",
+          "font_size_px": 14.516635237068964,
+          "clipped": false
+        },
+        {
+          "text": "C主腕",
+          "font_size_px": 15.370554956896552,
+          "clipped": false
+        },
+        {
+          "text": "交換境界",
+          "font_size_px": 15.370554956896552,
+          "clipped": false
+        },
+        {
+          "text": "爪をH07用 → 搬送用へ",
+          "font_size_px": 15.370554956896552,
+          "clipped": false
+        },
+        {
+          "text": "腕側には同じ本体が残る",
+          "font_size_px": 14.516635237068964,
+          "clipped": false
+        },
+        {
+          "text": "C主腕",
+          "font_size_px": 15.370554956896552,
+          "clipped": false
+        },
+        {
+          "text": "交換境界",
+          "font_size_px": 15.370554956896552,
+          "clipped": false
+        },
+        {
+          "text": "本体＋爪をH07 → H06へ",
+          "font_size_px": 15.370554956896552,
+          "clipped": false
+        },
+        {
+          "text": "腕側には交換部マスタが残る",
+          "font_size_px": 14.516635237068964,
+          "clipped": false
+        },
+        {
+          "text": "F-C → 作業台へ支持",
+          "font_size_px": 15.370216836734695,
+          "clipped": false
+        },
+        {
+          "text": "下板",
+          "font_size_px": 15.370216836734695,
+          "clipped": false
+        },
+        {
+          "text": "板",
+          "font_size_px": 15.370216836734695,
+          "clipped": false
+        },
+        {
+          "text": "C主腕は手先の切替中",
+          "font_size_px": 15.370216836734695,
+          "clipped": false
+        },
+        {
+          "text": "姿勢・使用輪郭を切り替える",
+          "font_size_px": 14.516315901360544,
+          "clipped": false
+        },
+        {
+          "text": "本体はF-Cに残る",
+          "font_size_px": 15.370216836734695,
+          "clipped": false
+        },
+        {
+          "text": "交換部・置台を使わない候補",
+          "font_size_px": 15.370216836734695,
+          "clipped": false
+        },
+        {
+          "text": "開放して姿勢を切替",
+          "font_size_px": 15.370216836734695,
+          "clipped": false
+        },
+        {
+          "text": "爪そのものは同じ形を保つ",
+          "font_size_px": 14.516315901360544,
+          "clipped": false
+        },
+        {
+          "text": "両用途を満たす実形状は未設計",
+          "font_size_px": 14.516315901360544,
+          "clipped": false
+        }
+      ]
+    },
+    {
+      "width": 390,
+      "method": "common",
+      "stage": 3,
+      "pressed": 2,
+      "overflow": false,
+      "support": "一体ユニット：F-C（板間固定の前提）",
+      "labels": [
+        {
+          "text": "C主腕",
+          "font_size_px": 15.370554956896552,
+          "clipped": false
+        },
+        {
+          "text": "同じ爪の輪郭を両用途で使う",
+          "font_size_px": 15.370554956896552,
+          "clipped": false
+        },
+        {
+          "text": "交換する部品はない候補",
+          "font_size_px": 14.516635237068964,
+          "clipped": false
+        },
+        {
+          "text": "C主腕",
+          "font_size_px": 15.370554956896552,
+          "clipped": false
+        },
+        {
+          "text": "交換境界",
+          "font_size_px": 15.370554956896552,
+          "clipped": false
+        },
+        {
+          "text": "爪をH07用 → 搬送用へ",
+          "font_size_px": 15.370554956896552,
+          "clipped": false
+        },
+        {
+          "text": "腕側には同じ本体が残る",
+          "font_size_px": 14.516635237068964,
+          "clipped": false
+        },
+        {
+          "text": "C主腕",
+          "font_size_px": 15.370554956896552,
+          "clipped": false
+        },
+        {
+          "text": "交換境界",
+          "font_size_px": 15.370554956896552,
+          "clipped": false
+        },
+        {
+          "text": "本体＋爪をH07 → H06へ",
+          "font_size_px": 15.370554956896552,
+          "clipped": false
+        },
+        {
+          "text": "腕側には交換部マスタが残る",
+          "font_size_px": 14.516635237068964,
+          "clipped": false
+        },
+        {
+          "text": "F-C → 作業台へ支持",
+          "font_size_px": 15.370216836734695,
+          "clipped": false
+        },
+        {
+          "text": "下板",
+          "font_size_px": 15.370216836734695,
+          "clipped": false
+        },
+        {
+          "text": "板",
+          "font_size_px": 15.370216836734695,
+          "clipped": false
+        },
+        {
+          "text": "C主腕は手先の切替中",
+          "font_size_px": 15.370216836734695,
+          "clipped": false
+        },
+        {
+          "text": "姿勢・使用輪郭を切り替える",
+          "font_size_px": 14.516315901360544,
+          "clipped": false
+        },
+        {
+          "text": "本体はF-Cに残る",
+          "font_size_px": 15.370216836734695,
+          "clipped": false
+        },
+        {
+          "text": "交換部・置台を使わない候補",
+          "font_size_px": 15.370216836734695,
+          "clipped": false
+        },
+        {
+          "text": "搬送用の輪郭を使用",
+          "font_size_px": 15.370216836734695,
+          "clipped": false
+        },
+        {
+          "text": "爪そのものは同じ形を保つ",
+          "font_size_px": 14.516315901360544,
+          "clipped": false
+        },
+        {
+          "text": "両用途を満たす実形状は未設計",
+          "font_size_px": 14.516315901360544,
+          "clipped": false
+        }
+      ]
+    },
+    {
+      "width": 390,
+      "method": "common",
+      "stage": 4,
+      "pressed": 2,
+      "overflow": false,
+      "support": "F-Cに支持を残してC主腕で把持",
+      "labels": [
+        {
+          "text": "C主腕",
+          "font_size_px": 15.370554956896552,
+          "clipped": false
+        },
+        {
+          "text": "同じ爪の輪郭を両用途で使う",
+          "font_size_px": 15.370554956896552,
+          "clipped": false
+        },
+        {
+          "text": "交換する部品はない候補",
+          "font_size_px": 14.516635237068964,
+          "clipped": false
+        },
+        {
+          "text": "C主腕",
+          "font_size_px": 15.370554956896552,
+          "clipped": false
+        },
+        {
+          "text": "交換境界",
+          "font_size_px": 15.370554956896552,
+          "clipped": false
+        },
+        {
+          "text": "爪をH07用 → 搬送用へ",
+          "font_size_px": 15.370554956896552,
+          "clipped": false
+        },
+        {
+          "text": "腕側には同じ本体が残る",
+          "font_size_px": 14.516635237068964,
+          "clipped": false
+        },
+        {
+          "text": "C主腕",
+          "font_size_px": 15.370554956896552,
+          "clipped": false
+        },
+        {
+          "text": "交換境界",
+          "font_size_px": 15.370554956896552,
+          "clipped": false
+        },
+        {
+          "text": "本体＋爪をH07 → H06へ",
+          "font_size_px": 15.370554956896552,
+          "clipped": false
+        },
+        {
+          "text": "腕側には交換部マスタが残る",
+          "font_size_px": 14.516635237068964,
+          "clipped": false
+        },
+        {
+          "text": "F-C → 作業台へ支持",
+          "font_size_px": 15.370216836734695,
+          "clipped": false
+        },
+        {
+          "text": "下板",
+          "font_size_px": 15.370216836734695,
+          "clipped": false
+        },
+        {
+          "text": "板",
+          "font_size_px": 15.370216836734695,
+          "clipped": false
+        },
+        {
+          "text": "C主腕：支持上で搬送把持",
+          "font_size_px": 15.370216836734695,
+          "clipped": false
+        },
+        {
+          "text": "本体はF-Cに残る",
+          "font_size_px": 15.370216836734695,
+          "clipped": false
+        },
+        {
+          "text": "交換部・置台を使わない候補",
+          "font_size_px": 15.370216836734695,
+          "clipped": false
+        },
+        {
+          "text": "搬送用の輪郭を使用",
+          "font_size_px": 15.370216836734695,
+          "clipped": false
+        },
+        {
+          "text": "爪そのものは同じ形を保つ",
+          "font_size_px": 14.516315901360544,
+          "clipped": false
+        },
+        {
+          "text": "両用途を満たす実形状は未設計",
+          "font_size_px": 14.516315901360544,
+          "clipped": false
+        }
+      ]
+    },
+    {
+      "width": 390,
+      "method": "common",
+      "stage": 5,
+      "pressed": 2,
+      "overflow": false,
+      "support": "本体：C主腕 ／ 自由端：別担当",
+      "labels": [
+        {
+          "text": "C主腕",
+          "font_size_px": 15.370554956896552,
+          "clipped": false
+        },
+        {
+          "text": "同じ爪の輪郭を両用途で使う",
+          "font_size_px": 15.370554956896552,
+          "clipped": false
+        },
+        {
+          "text": "交換する部品はない候補",
+          "font_size_px": 14.516635237068964,
+          "clipped": false
+        },
+        {
+          "text": "C主腕",
+          "font_size_px": 15.370554956896552,
+          "clipped": false
+        },
+        {
+          "text": "交換境界",
+          "font_size_px": 15.370554956896552,
+          "clipped": false
+        },
+        {
+          "text": "爪をH07用 → 搬送用へ",
+          "font_size_px": 15.370554956896552,
+          "clipped": false
+        },
+        {
+          "text": "腕側には同じ本体が残る",
+          "font_size_px": 14.516635237068964,
+          "clipped": false
+        },
+        {
+          "text": "C主腕",
+          "font_size_px": 15.370554956896552,
+          "clipped": false
+        },
+        {
+          "text": "交換境界",
+          "font_size_px": 15.370554956896552,
+          "clipped": false
+        },
+        {
+          "text": "本体＋爪をH07 → H06へ",
+          "font_size_px": 15.370554956896552,
+          "clipped": false
+        },
+        {
+          "text": "腕側には交換部マスタが残る",
+          "font_size_px": 14.516635237068964,
+          "clipped": false
+        },
+        {
+          "text": "F-C → 作業台へ支持",
+          "font_size_px": 15.370216836734695,
+          "clipped": false
+        },
+        {
+          "text": "下板",
+          "font_size_px": 15.370216836734695,
+          "clipped": false
+        },
+        {
+          "text": "板",
+          "font_size_px": 15.370216836734695,
+          "clipped": false
+        },
+        {
+          "text": "C主腕：ユニットを搬送",
+          "font_size_px": 15.370216836734695,
+          "clipped": false
+        },
+        {
+          "text": "支持を引き継いで上昇",
+          "font_size_px": 15.370216836734695,
+          "clipped": false
+        },
+        {
+          "text": "交換部・置台を使わない候補",
+          "font_size_px": 15.370216836734695,
+          "clipped": false
+        },
+        {
+          "text": "搬送用の輪郭を使用",
+          "font_size_px": 15.370216836734695,
+          "clipped": false
+        },
+        {
+          "text": "爪そのものは同じ形を保つ",
+          "font_size_px": 14.516315901360544,
+          "clipped": false
+        },
+        {
+          "text": "両用途を満たす実形状は未設計",
+          "font_size_px": 14.516315901360544,
+          "clipped": false
+        }
+      ]
+    },
+    {
+      "width": 390,
+      "method": "jaws",
+      "stage": 0,
+      "pressed": 2,
+      "overflow": false,
+      "support": "下板：F-C ／ ヒューズ板：C主腕",
+      "labels": [
+        {
+          "text": "C主腕",
+          "font_size_px": 15.370554956896552,
+          "clipped": false
+        },
+        {
+          "text": "同じ爪の輪郭を両用途で使う",
+          "font_size_px": 15.370554956896552,
+          "clipped": false
+        },
+        {
+          "text": "交換する部品はない候補",
+          "font_size_px": 14.516635237068964,
+          "clipped": false
+        },
+        {
+          "text": "C主腕",
+          "font_size_px": 15.370554956896552,
+          "clipped": false
+        },
+        {
+          "text": "交換境界",
+          "font_size_px": 15.370554956896552,
+          "clipped": false
+        },
+        {
+          "text": "爪をH07用 → 搬送用へ",
+          "font_size_px": 15.370554956896552,
+          "clipped": false
+        },
+        {
+          "text": "腕側には同じ本体が残る",
+          "font_size_px": 14.516635237068964,
+          "clipped": false
+        },
+        {
+          "text": "C主腕",
+          "font_size_px": 15.370554956896552,
+          "clipped": false
+        },
+        {
+          "text": "交換境界",
+          "font_size_px": 15.370554956896552,
+          "clipped": false
+        },
+        {
+          "text": "本体＋爪をH07 → H06へ",
+          "font_size_px": 15.370554956896552,
+          "clipped": false
+        },
+        {
+          "text": "腕側には交換部マスタが残る",
+          "font_size_px": 14.516635237068964,
+          "clipped": false
+        },
+        {
+          "text": "F-C → 作業台へ支持",
+          "font_size_px": 15.370216836734695,
+          "clipped": false
+        },
+        {
+          "text": "下板",
+          "font_size_px": 15.370216836734695,
+          "clipped": false
+        },
+        {
+          "text": "板",
+          "font_size_px": 15.370216836734695,
+          "clipped": false
+        },
+        {
+          "text": "C主腕：H07で板保持",
+          "font_size_px": 15.370216836734695,
+          "clipped": false
+        },
+        {
+          "text": "腕側にある部品",
+          "font_size_px": 15.370216836734695,
+          "clipped": false
+        },
+        {
+          "text": "H07側を装着",
+          "font_size_px": 14.516315901360544,
+          "clipped": false
+        },
+        {
+          "text": "空き",
+          "font_size_px": 14.516315901360544,
+          "clipped": false
+        },
+        {
+          "text": "H07用",
+          "font_size_px": 15.370216836734695,
+          "clipped": false
+        },
+        {
+          "text": "ユニット搬送用",
+          "font_size_px": 15.370216836734695,
+          "clipped": false
+        },
+        {
+          "text": "置台：爪の組だけを保管",
+          "font_size_px": 14.516315901360544,
+          "clipped": true
+        }
+      ]
+    }
+  ],
+  "errors": []
+}

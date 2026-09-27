@@ -1,0 +1,118 @@
+{
+  "delivered_at": "2026-09-28T01:31:28.400373+09:00",
+  "entry": "/home/rlrk/Downloads/HVJB_C工程_手先切替の比較_v01_20260928/index.html",
+  "files": [
+    {
+      "path": "01_C工程_手先切替3案.png",
+      "sha256": "a34f3dba8c89da04d8567550503235959315eb276fc2e946de37b25e8571fa16",
+      "bytes": 156558
+    },
+    {
+      "path": "02_C工程_交換中の支持.png",
+      "sha256": "3b96152729f602b3ebc7f09e9527fe2468aa85080bdc90ac4b2106cbfbc9f148",
+      "bytes": 191175
+    },
+    {
+      "path": "README.md",
+      "sha256": "05fdb972c5b68ed28bde5b48b469bc91731a706466248d654e42f95914fb331c",
+      "bytes": 2340
+    },
+    {
+      "path": "SCOPE.md",
+      "sha256": "2da7ae4f274b77f38f038f14d00e1fab7220ba8189eabb5f4a15851ea7c9d696",
+      "bytes": 2753
+    },
+    {
+      "path": "VISUAL_DELTA.md",
+      "sha256": "44a4b64eff237986bcabd382859bd4669eab51b348cb1c1bd25df634cad78cb4",
+      "bytes": 1168
+    },
+    {
+      "path": "audit/browser_receipt.json",
+      "sha256": "0b97cbcf719b8133cd7b12adaab07f1da2fcfa98df8b923c9647767a32b99076",
+      "bytes": 224271
+    },
+    {
+      "path": "audit/inputs.json",
+      "sha256": "4897ee93d4b867f294561beac20918696fdd6909009669a3e4f5b9bf55fe637f",
+      "bytes": 3733
+    },
+    {
+      "path": "audit/prior_art.txt",
+      "sha256": "84299188a8c8ba3e1ab177041390fd07ff0dfe83291d07bb3c94efc749e3baca",
+      "bytes": 139
+    },
+    {
+      "path": "comparison.json",
+      "sha256": "6c2c61b8d4974b54592aa5a0f34bd001349325f73e38744fc2281c0a773a45df",
+      "bytes": 3208
+    },
+    {
+      "path": "index.html",
+      "sha256": "782ba17cd7218b6ba0ab294d9518e217d22a8c90f58ab63e5c0cab58f07efafa",
+      "bytes": 21244
+    },
+    {
+      "path": "scripts/deliver_review.py",
+      "sha256": "9b375b8ef08bbf3708934d868d7ed3012591f5f806b19cb9017e9e569ebc58b6",
+      "bytes": 2266
+    },
+    {
+      "path": "scripts/package_review.py",
+      "sha256": "b2f3eb8c20af1ea9bc3eaf7bb025a13ecb884e6a1ed75703d3c1dd2aa6fb1176",
+      "bytes": 5351
+    },
+    {
+      "path": "scripts/qa_review.mjs",
+      "sha256": "d5b5a0a5cd4504968196c9d71b53123ce50765993b1340689cde872e64598391",
+      "bytes": 4349
+    },
+    {
+      "path": "scripts/review_template.html",
+      "sha256": "9156911683e2501a40444f47867a1b0a019c7df87f3e5467728b1ffbea562951",
+      "bytes": 18298
+    },
+    {
+      "path": "sources/hvjb-c-contact-layout-v01-20260927/build_review.py",
+      "sha256": "721187f981d5804998ea46988adcdf78885605ebee827773494caa1f0210529e",
+      "bytes": 5298
+    },
+    {
+      "path": "sources/hvjb-c-handoff-v05e-20260927/README.md",
+      "sha256": "2b07c4b887687f269e768d557480f7ca266070064c14422f3317e5944003d9a0",
+      "bytes": 3959
+    },
+    {
+      "path": "sources/hvjb-hand-coverage-v01-20260923/sources/unit_support_sequence.json",
+      "sha256": "52141627e00da0be47699ec1a5f3d8acf744519090b724dc05b06ca137fe848b",
+      "bytes": 2307
+    },
+    {
+      "path": "sources/hvjb-hand-plan-v01-20260920/data/hand_plan.json",
+      "sha256": "ecbd1ae45e269e823ffa7f783744d210758065d874c6cd50cf7b00e55a1977e0",
+      "bytes": 215541
+    },
+    {
+      "path": "sources/hvjb-hand-plan-v01-20260920/draw_plan.py",
+      "sha256": "f20d23ee507221a8be1f5c774988246562d3adc86c49dd1c6bbe6c15a35b3388",
+      "bytes": 22059
+    }
+  ],
+  "prior_deliveries_unchanged": [
+    {
+      "entry": "/home/rlrk/Downloads/HVJB_C工程_受け台と搬送爪_v01_20260927/index.html",
+      "unchanged_files": 20,
+      "receipt": "/home/rlrk/IsaacLab/work/hvjb-line-progress-20260927/work/hvjb-c-contact-layout-v01-20260927/audit/delivery_receipt.json"
+    },
+    {
+      "entry": "/home/rlrk/Downloads/HVJB_C工程受渡しレビュー_v05e_20260927/index.html",
+      "unchanged_files": 51,
+      "receipt": "/home/rlrk/IsaacLab/work/hvjb-line-progress-20260927/work/hvjb-c-handoff-v05e-20260927/audit/delivery_receipt.json"
+    }
+  ],
+  "existing_video": "/home/rlrk/Downloads/HVJB_C工程受渡しレビュー_v05e_20260927/HVJB_line_split_process_concept_v05e_review.mp4",
+  "existing_video_sha256": "ce31690d14cd14f930aafcae929288eeb6d3e78e8780783b3bb6e10b35001de0",
+  "new_mp4_count": 0,
+  "selected_mechanism": null,
+  "physical_acceptance_verdict": null
+}

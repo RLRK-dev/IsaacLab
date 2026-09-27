@@ -1,0 +1,83 @@
+{
+  "observed_at": "2026-09-28T01:25:13.880496+09:00",
+  "prior_art": {
+    "keywords": [
+      "HVJB",
+      "手先切替",
+      "H07",
+      "H06"
+    ],
+    "exit_code": 0,
+    "blockers": 0
+  },
+  "reuse": {
+    "helpers": "/home/rlrk/IsaacLab/work/hvjb-line-progress-20260927/work/hvjb-c-contact-layout-v01-20260927/build_review.py",
+    "sha256": "721187f981d5804998ea46988adcdf78885605ebee827773494caa1f0210529e"
+  },
+  "prior_deliveries": [
+    {
+      "entry": "/home/rlrk/Downloads/HVJB_C工程_受け台と搬送爪_v01_20260927/index.html",
+      "unchanged_files": 20,
+      "receipt": "/home/rlrk/IsaacLab/work/hvjb-line-progress-20260927/work/hvjb-c-contact-layout-v01-20260927/audit/delivery_receipt.json"
+    },
+    {
+      "entry": "/home/rlrk/Downloads/HVJB_C工程受渡しレビュー_v05e_20260927/index.html",
+      "unchanged_files": 51,
+      "receipt": "/home/rlrk/IsaacLab/work/hvjb-line-progress-20260927/work/hvjb-c-handoff-v05e-20260927/audit/delivery_receipt.json"
+    }
+  ],
+  "source_files": [
+    {
+      "source": "/home/rlrk/IsaacLab/work/hvjb-line-progress-20260927/work/hvjb-hand-plan-v01-20260920/data/hand_plan.json",
+      "copy": "sources/hvjb-hand-plan-v01-20260920/data/hand_plan.json",
+      "sha256": "ecbd1ae45e269e823ffa7f783744d210758065d874c6cd50cf7b00e55a1977e0"
+    },
+    {
+      "source": "/home/rlrk/IsaacLab/work/hvjb-line-progress-20260927/work/hvjb-hand-plan-v01-20260920/draw_plan.py",
+      "copy": "sources/hvjb-hand-plan-v01-20260920/draw_plan.py",
+      "sha256": "f20d23ee507221a8be1f5c774988246562d3adc86c49dd1c6bbe6c15a35b3388"
+    },
+    {
+      "source": "/home/rlrk/IsaacLab/work/hvjb-line-progress-20260927/work/hvjb-hand-coverage-v01-20260923/sources/unit_support_sequence.json",
+      "copy": "sources/hvjb-hand-coverage-v01-20260923/sources/unit_support_sequence.json",
+      "sha256": "52141627e00da0be47699ec1a5f3d8acf744519090b724dc05b06ca137fe848b"
+    },
+    {
+      "source": "/home/rlrk/IsaacLab/work/hvjb-line-progress-20260927/work/hvjb-c-handoff-v05e-20260927/README.md",
+      "copy": "sources/hvjb-c-handoff-v05e-20260927/README.md",
+      "sha256": "2b07c4b887687f269e768d557480f7ca266070064c14422f3317e5944003d9a0"
+    },
+    {
+      "source": "/home/rlrk/IsaacLab/work/hvjb-line-progress-20260927/work/hvjb-c-contact-layout-v01-20260927/build_review.py",
+      "copy": "sources/hvjb-c-contact-layout-v01-20260927/build_review.py",
+      "sha256": "721187f981d5804998ea46988adcdf78885605ebee827773494caa1f0210529e"
+    }
+  ],
+  "selected_method": null,
+  "selected_manufacturer_part": null,
+  "real_dimensions": null,
+  "cycle_time_s": null,
+  "new_mp4_count": 0,
+  "product_or_motion_modified": false,
+  "formal_physical_acceptance": null,
+  "public_references": [
+    {
+      "url": "https://schunk.com/us/en/gripping-systems/accessories/bsws-r-pgzn-plus/c/PGR_7219",
+      "read_on": "2026-09-28",
+      "basis": "Official description of automatic jaw change retaining the gripper body.",
+      "not_adopted": "No fit, jaw design, stroke, sensor, load or cycle-time specification selected."
+    },
+    {
+      "url": "https://schunk.com/us/en/products/automation-technology/cps",
+      "read_on": "2026-09-28",
+      "basis": "Official description of master/adapter automatic tool changing and media connections.",
+      "not_adopted": "No specific changer size, compatibility, connection or actuation selected."
+    },
+    {
+      "url": "https://schunk.com/us/en/automation-technology/accessories/cts/c/PGR_7391",
+      "read_on": "2026-09-28",
+      "basis": "Official description of storage racks for the automatic tool changer family.",
+      "not_adopted": "No rack location, mounting geometry or operating path selected."
+    }
+  ]
+}

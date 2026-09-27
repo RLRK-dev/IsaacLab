@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>HVJB C工程｜手先切替の3案</title>
+<style>
+:root{color-scheme:light;--ink:#182c3d;--muted:#526577;--paper:#f3f6f8;--line:#cbd7de;--blue:#1877ad;--green:#248876;--gold:#985a12;--pink:#9b4774}
+*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font-family:"Noto Sans CJK JP","Noto Sans JP",sans-serif;font-size:16px;line-height:1.65}main{max-width:1360px;margin:auto;padding:28px}h1{font-size:30px;line-height:1.35;margin:8px 0 14px}h2{font-size:23px;margin:0 0 12px}h3{font-size:19px;line-height:1.4;margin:0 0 10px}p{margin:8px 0 12px}a{color:#126794;overflow-wrap:anywhere}.eyebrow{font-size:13px;letter-spacing:.06em;font-weight:bold;color:var(--muted)}.muted,.note{color:var(--muted);font-size:14px}.tag{display:inline-block;background:#f6e9d8;color:#754514;border-radius:4px;font-size:13px;font-weight:bold;padding:3px 9px}.section{margin-top:24px;border:1px solid var(--line);background:white;padding:24px;border-radius:12px}.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}.card{border:1px solid var(--line);border-radius:9px;padding:18px;min-width:0}.card p{font-size:14px}.card .lead{font-weight:bold;font-size:16px}.limit{border-left:3px solid var(--gold);padding-left:10px;color:#78470b}.method-svg,.scene-svg{display:block;width:100%;height:auto}.method-svg{max-width:356px;margin:8px auto}.method-svg text,.scene-svg text{font-family:inherit;fill:var(--ink);font-size:14px}.method-svg .minor,.scene-svg .minor{font-size:13px;fill:var(--muted)}.buttons{display:flex;gap:9px;flex-wrap:wrap;margin:16px 0}button{font:inherit;font-size:14px;line-height:1.5;padding:9px 14px;border:1px solid #afc1cd;border-radius:6px;background:white;color:var(--ink);cursor:pointer}button:hover{background:#eaf3f8}button[aria-pressed=true]{background:#183c56;border-color:#183c56;color:white}button:focus-visible{outline:3px solid #da9629;outline-offset:3px}.steps{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:8px}.steps button{padding:9px 7px;text-align:left}.steps b{display:block;font-size:12px;color:inherit}.caption{background:#edf5f9;padding:12px 16px;border-radius:7px;margin-top:12px}.caption p:last-child{margin-bottom:0}.support{background:#e9f4ef;border-left:4px solid var(--green);padding:10px 13px}.roles{display:grid;gap:12px;margin-top:16px}.role{border-bottom:1px solid #dce4e9;padding-bottom:10px;font-size:14px}.role strong{display:block;margin-bottom:3px}.role:last-child{border:0}.pill{display:inline-block;padding:2px 8px;font-size:12px;background:#fff0df;color:#7a480f;border-radius:3px}.legend{display:flex;gap:16px;flex-wrap:wrap;font-size:13px;margin:12px 0}.swatch{display:inline-block;width:13px;height:13px;vertical-align:-1px;margin-right:5px;border-radius:2px}.links{display:flex;gap:20px;flex-wrap:wrap}.sources li{margin-bottom:10px;font-size:14px}footer{padding:25px 0;font-size:13px;color:var(--muted)}.method-note{min-height:52px}.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}
+@media(max-width:1100px){.grid{grid-template-columns:1fr}.card{max-width:none}.method-svg,.scene-svg{max-width:410px;margin:auto}.steps{grid-template-columns:repeat(3,minmax(0,1fr))}.method-note{min-height:0}}
+@media(max-width:500px){main{padding:14px}h1{font-size:25px}h2{font-size:21px}.section{padding:15px}.card{padding:12px}.steps{grid-template-columns:repeat(2,minmax(0,1fr))}.buttons button{flex:1 1 100%}.grid{gap:12px}}
+@media(max-width:500px){.method-svg text,.scene-svg text{font-size:18px}.method-svg .minor,.scene-svg .minor{font-size:17px}}
+</style>
+</head>
+<body><main id="review" data-method="common" data-stage="0">
+<header><div class="eyebrow">HVJB / C工程 / 2026-09-28</div><h1>板を保持した後、<br>搬送する手先へどう切り替えるか</h1><p>同じC主腕で、<strong>H07（板保持）→ H06（ユニット搬送）</strong>を担当する3案です。</p><span class="tag">比較中・方式未選定</span><p class="note">図は部品の分かれ方と支持の担当を示す記号図です。実際の爪形状・寸法・交換位置・軌道はまだ割り当てていません。</p></header>
+<section class="section" id="config-capture"><h2>01　何を残して、何を交換するか</h2><div class="legend"><span><i class="swatch" style="background:#3b4953"></i>手先本体</span><span><i class="swatch" style="background:#1877ad"></i>爪</span><span><i class="swatch" style="background:#9b4774"></i>交換部の候補</span></div><div class="grid" id="method-cards"></div><p class="note">H06はユニット搬送用です。筐体搬送用H06との互換は未確認。C工程全体の手先数を、この2用途だけで確定する図ではありません。</p></section>
+<section class="section" id="sequence-capture"><h2>02　切替中も、支持は残す</h2><div class="buttons" id="method-buttons" aria-label="図で確認する比較方式"></div><div class="steps" id="stage-buttons" aria-label="工程の場面"></div><div class="caption" aria-live="polite"><strong id="current-title"></strong><p id="current-detail"></p></div><p class="method-note note" id="method-note"></p>
+<div class="grid"><article class="card"><h3>作業台に残るユニット</h3><svg id="work-scene" class="scene-svg" viewBox="0 0 356 294" role="img" aria-label="ユニットの支持とC主腕の位置"></svg><div class="support" id="support-text"></div><p class="note">板間固定が荷重を受けるという工程上の前提です。実接合部・支持面・把持面は未確認です。</p></article>
+<article class="card"><h3 id="exchange-title"></h3><svg id="exchange-scene" class="scene-svg" viewBox="0 0 356 294" role="img" aria-label="腕側に残る部品と置台内の部品"></svg><p id="exchange-note"></p></article>
+<article class="card"><h3>腕と工具の担当</h3><div class="roles"><div class="role"><strong>C主腕 <span class="pill">全場面で使用中</span></strong><span id="primary-role"></span></div><div class="role"><strong>C補助などの自由端案内</strong>必要な案内を継続。手先切替中だからといって、空きにはしません。</div><div class="role"><strong>据置の締付工具</strong><span id="tool-role"></span></div><div class="role"><strong>追加の腕は決めない</strong>複数自由端の個別案内と共用補助の付き添いは、既存の未採用比較のままです。</div></div></article></div>
+<p class="note">番号は順序を示します。所要時間は未設定です。既存動画の持ち替え5説明秒を、実交換時間には使いません。</p></section>
+<section class="section"><h2>既存資料とのつながり</h2><p>保持を終えてから、開放・退避・切替・再把持へ進みます。部品用と搬送用の爪を同じ描画で広げただけでは、実際に兼用できる根拠にはなりません。</p><div class="links"><a href="../HVJB_C工程_受け台と搬送爪_v01_20260927/index.html" data-local-link>前回：受け台と搬送爪の接触域</a><a href="../HVJB_C工程受渡しレビュー_v05e_20260927/index.html" data-local-link>既存の工程レビュー動画 v05e</a></div><p class="note">今回追加したのは比較図です。動画は既存の1種類を参照し、製品モデル・保存動作は変更していません。</p></section>
+<section class="section"><h2>方式の参照先</h2><ul class="sources"><li>既存の手先計画：D30 / D31 / D40。「兼用爪・交換式爪・手先一式交換」の比較候補を継承。</li><li><a href="https://schunk.com/us/en/gripping-systems/accessories/bsws-r-pgzn-plus/c/PGR_7219">SCHUNK BSWS-R-PGZN-plus</a>：本体を残す自動爪交換の方式例。今回のグリッパへの適合は未確認。</li><li><a href="https://schunk.com/us/en/products/automation-technology/cps">SCHUNK CPS</a> / <a href="https://schunk.com/us/en/automation-technology/accessories/cts/c/PGR_7391">CTS</a>：手首での手先交換と置台の方式例。サイズ・型式・接続仕様は未選定。</li></ul><p class="note">公式資料の参照日：2026-09-28。メーカー形状やロック動作の再現図ではありません。記録は audit/inputs.json にあります。</p></section>
+<footer>比較図 v01 · 正式な物理妥当性判定は含みません。把持・交換・実機成立の判定は独立レビュー経路に残します。</footer>
+</main>
+<script id="comparison-data" type="application/json">__COMPARISON_DATA__</script>
+<script>
+const data=JSON.parse(document.getElementById('comparison-data').textContent);
+const root=document.getElementById('review');
+let method='common',stage=0;
+const rect=(x,y,w,h,fill,rx=0,extra='')=>`<rect x="${x}" y="${y}" width="${w}" height="${h}" rx="${rx}" fill="${fill}" ${extra}/>`;
+const line=(x1,y1,x2,y2,stroke='#728797',extra='')=>`<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="${stroke}" stroke-width="2" ${extra}/>`;
+const label=(x,y,text,extra='')=>`<text x="${x}" y="${y}" ${extra}>${text}</text>`;
+const palette={body:'#3b4953',jaw:'#1877ad',wrist:'#b1c0ca',joint:'#9b4774',unit:'#cbd7df',panel:'#e3a963',support:'#88bdaf'};
+function jaws(x,y,gap=72,variant='panel'){
+ const length=variant==='unit'?42:37;
+ return rect(x-gap/2-9,y,9,length,palette.jaw)+rect(x+gap/2,y,9,length,palette.jaw)+
+   rect(x-gap/2-9,y+length-8,17,8,palette.jaw)+rect(x+gap/2-8,y+length-8,17,8,palette.jaw);
+}
+function hand(x,y,{kind='panel',wrist=true,joint=false,body=true,withJaws=true,scale=1}={}){
+ let out='';
+ if(wrist) out+=rect(-15,-31,30,31,palette.wrist,3);
+ if(joint) out+=rect(-26,-8,52,8,palette.joint,2);
+ if(body) out+=rect(-55,0,110,37,palette.body,4);
+ if(withJaws) out+=jaws(0,37,kind==='unit'?96:72,kind);
+ return `<g transform="translate(${x} ${y}) scale(${scale})">${out}</g>`;
+}
+function methodDrawing(item){
+ let out=label(178,22,'C主腕', 'text-anchor="middle"')+hand(178,76,{kind:'panel',joint:item.id==='whole'});
+ if(item.id==='common'){
+   out+=line(102,74,80,74,'#248876')+line(80,74,80,153,'#248876')+line(80,153,102,153,'#248876');
+   out+=label(178,185,'同じ爪の輪郭を両用途で使う','text-anchor="middle"');
+   out+=label(178,210,'交換する部品はない候補','text-anchor="middle" class="minor"');
+ } else {
+   const y=item.id==='jaws'?113:68;
+   out+=line(76,y,287,y,palette.joint,'stroke-dasharray="5 4"');
+   out+=label(285,y-10,'交換境界','text-anchor="end"');
+   out+=label(178,185,item.id==='jaws'?'爪をH07用 → 搬送用へ':'本体＋爪をH07 → H06へ','text-anchor="middle"');
+   out+=label(178,210,item.id==='jaws'?'腕側には同じ本体が残る':'腕側には交換部マスタが残る','text-anchor="middle" class="minor"');
+ }
+ return `<svg class="method-svg" viewBox="0 0 356 232" role="img" aria-label="${item.name}の交換境界">${out}</svg>`;
+}
+document.getElementById('method-cards').innerHTML=data.methods.map(item=>`<article class="card"><h3>${item.name}</h3><p class="lead">${item.body}</p>${methodDrawing(item)}<p>${item.change}</p><p class="limit">${item.limit}</p><p><strong>確認すること</strong><br>${item.needs}</p></article>`).join('');
+document.getElementById('method-buttons').innerHTML=data.methods.map(item=>`<button type="button" data-method="${item.id}" aria-pressed="${item.id===method}">${item.name}</button>`).join('');
+document.getElementById('stage-buttons').innerHTML=data.stages.map((item,i)=>`<button type="button" data-stage="${i}" aria-pressed="${i===stage}"><b>${String(i+1).padStart(2,'0')}</b>${item.name}</button>`).join('');
+function workDrawing(){
+ const lift=stage===5?-42:0;
+ let out=rect(36,237,284,10,'#a9bac6')+rect(55,247,13,28,'#bac7d0')+rect(288,247,13,28,'#bac7d0');
+ out+=rect(104,181,35,56,palette.support)+rect(217,181,35,56,palette.support);
+ out+=label(178,284,'F-C → 作業台へ支持','text-anchor="middle"');
+ out+=`<g transform="translate(0 ${lift})">${rect(95,164,166,17,palette.unit,2)}${rect(111,141,32,23,'#8c9da8',3)}${rect(212,141,31,23,'#8c9da8',3)}${rect(135,137,5,27,'#6e8290')}${rect(216,137,5,27,'#6e8290')}${rect(134,130,88,8,palette.panel,2)}${line(261,168,292,152)}${label(294,147,'下板','text-anchor="middle"')}${label(178,121,'板','text-anchor="middle"')}</g>`;
+ if(stage===0){
+   out+=rect(64,34,228,39,'#e7f2f9',6)+label(178,59,'C主腕：H07で板保持','text-anchor="middle"');
+   out+=line(178,73,178,108,'#1877ad')+line(178,108,173,101,'#1877ad')+line(178,108,183,101,'#1877ad');
+ } else if(stage===1){
+   out+=rect(64,34,228,39,'#e7f2f9',6)+label(178,59,'C主腕：開放して退避','text-anchor="middle"');
+   out+=line(178,111,178,80,'#1877ad')+line(178,80,173,87,'#1877ad')+line(178,80,183,87,'#1877ad');
+ } else if(stage>=4){
+   out+=rect(39,24,278,39,'#e7f2f9',6)+label(178,49,stage===4?'C主腕：支持上で搬送把持':'C主腕：ユニットを搬送','text-anchor="middle"');
+   out+=line(65,63,65,171+lift,'#1877ad')+line(65,171+lift,91,171+lift,'#1877ad');
+   out+=line(91,171+lift,84,166+lift,'#1877ad')+line(91,171+lift,84,176+lift,'#1877ad');
+ } else {
+   out+=rect(51,36,254,53,'#edf3f7',6);
+   out+=label(178,58,'C主腕は手先の切替中','text-anchor="middle"');
+   out+=label(178,79,method==='common'?'姿勢・使用輪郭を切り替える':'置台へ移動して交換する','text-anchor="middle" class="minor"');
+ }
+ if(stage>0&&stage<5) out+=label(178,210,'本体はF-Cに残る','text-anchor="middle"');
+ if(stage===5) out+=label(178,204,'支持を引き継いで上昇','text-anchor="middle"');
+ return out;
+}
+function rackSlot(x,y,occupied,kind){
+ let out=rect(x-67,y,134,115,'#f5f8fa',8,`stroke="#bac9d3" ${occupied?'':'stroke-dasharray="5 4"'}`);
+ if(occupied){
+   if(method==='jaws') out+=`<g transform="translate(${x} ${y+11})">${jaws(0,20,kind==='unit'?84:62,kind)}</g>`;
+   else out+=hand(x,y+17,{kind,wrist:false,joint:true,scale:.78});
+ } else out+=label(x,y+57,'空き','text-anchor="middle" class="minor"');
+ out+=label(x,y+103,kind==='panel'?'H07用':'ユニット搬送用','text-anchor="middle"');
+ return out;
+}
+function exchangeDrawing(){
+ if(method==='common'){
+   return label(178,22,'交換部・置台を使わない候補','text-anchor="middle"')+hand(178,80,{kind:'panel'})+
+    label(178,188,stage<2?'板保持の輪郭を使用':stage===2?'開放して姿勢を切替':'搬送用の輪郭を使用','text-anchor="middle"')+
+    label(178,222,'爪そのものは同じ形を保つ','text-anchor="middle" class="minor"')+
+    label(178,249,'両用途を満たす実形状は未設計','text-anchor="middle" class="minor"');
+ }
+ const oldStored=stage>=2,newStored=stage<=2;
+ let out=label(178,22,'腕側にある部品','text-anchor="middle"');
+ if(stage===2){
+   out+=hand(178,61,{joint:method==='whole',body:method==='jaws',withJaws:false});
+   out+=label(178,119,method==='jaws'?'共通の本体のみ':'交換部のマスタのみ','text-anchor="middle" class="minor"');
+ } else {
+   out+=hand(178,51,{kind:stage<2?'panel':'unit',joint:method==='whole',scale:.72});
+   out+=label(178,119,stage<2?'H07側を装着':'ユニット搬送側を装着','text-anchor="middle" class="minor"');
+ }
+ out+=rackSlot(93,139,oldStored,'panel')+rackSlot(263,139,newStored,'unit');
+ out+=line(26,268,330,268)+line(49,268,49,281)+line(308,268,308,281);
+ out+=label(178,290,method==='jaws'?'置台：爪の組だけを保管':'置台：本体＋爪を保管','text-anchor="middle" class="minor"');
+ return out;
+}
+const primaryRoles=['板保持を続けて工具退避を待つ。','爪を開き、板から退避する。','兼用姿勢への切替、または旧爪・旧手先を置く。','搬送側へ切り替え、装着・種類を確認する工程。','F-Cの支持を残し、搬送把持へ移る。','支持を引き継いでユニットを持ち上げる。'];
+function render(){
+ const item=data.methods.find(item=>item.id===method),current=data.stages[stage];
+ root.dataset.method=method;root.dataset.stage=stage;
+ document.querySelectorAll('button[data-method]').forEach(button=>button.setAttribute('aria-pressed',button.dataset.method===method));
+ document.querySelectorAll('button[data-stage]').forEach(button=>button.setAttribute('aria-pressed',Number(button.dataset.stage)===stage));
+ document.getElementById('current-title').textContent=`${item.short}｜${stage+1}. ${current.name}`;
+ document.getElementById('current-detail').textContent=current.detail;
+ document.getElementById('method-note').textContent=item.limit;
+ document.getElementById('support-text').textContent=current.support;
+ document.getElementById('work-scene').innerHTML=workDrawing();
+ document.getElementById('exchange-title').textContent=method==='common'?'同じ手先を使う':'交換部品の所在';
+ document.getElementById('exchange-scene').innerHTML=exchangeDrawing();
+ document.getElementById('exchange-note').textContent=method==='common'?'H07用とユニット搬送用の接触輪郭を、同じ爪に共存させられるかを比較します。':method==='jaws'?'本体は腕から外しません。爪の装着と種類を確認する工程を含めます。検出仕様は未定です。':'手首の交換部で手先を付け替えます。ロック・接続・種類・手先座標の確認方法は未定です。';
+ document.getElementById('primary-role').textContent=primaryRoles[stage];
+ document.getElementById('tool-role').textContent=stage===0?'板保持を続けたまま工具を退避する段階です。':'退避状態を保つ想定です。工具をフィンガでつかむ工程にはしません。';
+}
+document.getElementById('method-buttons').addEventListener('click',event=>{const button=event.target.closest('button');if(button){method=button.dataset.method;render();}});
+document.getElementById('stage-buttons').addEventListener('click',event=>{const button=event.target.closest('button');if(button){stage=Number(button.dataset.stage);render();}});
+render();
+</script></body></html>
