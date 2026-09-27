@@ -1,0 +1,872 @@
+{
+  "observed_at": "2026-09-27T03:44:53.904Z",
+  "browser": "154.0.8037.57",
+  "entry_sha256": "91c0e6958cde31cba1ec2e271d85fa559b946fcdbfe02989dd21be6008ee8455",
+  "script_sha256": "85cb036c4ab252c4eb8c122a56399d67ec7faef42865c2231be54099dbebbdf7",
+  "observations": [
+    {
+      "job": "D00",
+      "phases_and_roles_match": true,
+      "reservations": []
+    },
+    {
+      "job": "D00",
+      "phases_and_roles_match": true,
+      "reservations": []
+    },
+    {
+      "hold_job_round_trip": "D00"
+    },
+    {
+      "job": "D01",
+      "phases_and_roles_match": true,
+      "reservations": []
+    },
+    {
+      "job": "D01",
+      "phases_and_roles_match": true,
+      "reservations": []
+    },
+    {
+      "hold_job_round_trip": "D01"
+    },
+    {
+      "job": "D10",
+      "phases_and_roles_match": true,
+      "reservations": []
+    },
+    {
+      "job": "D10",
+      "phases_and_roles_match": true,
+      "reservations": []
+    },
+    {
+      "hold_job_round_trip": "D10"
+    },
+    {
+      "job": "D11",
+      "phases_and_roles_match": true,
+      "reservations": []
+    },
+    {
+      "job": "D11",
+      "phases_and_roles_match": true,
+      "reservations": []
+    },
+    {
+      "hold_job_round_trip": "D11"
+    },
+    {
+      "job": "D12",
+      "phases_and_roles_match": true,
+      "reservations": []
+    },
+    {
+      "job": "D12",
+      "phases_and_roles_match": true,
+      "reservations": []
+    },
+    {
+      "hold_job_round_trip": "D12"
+    },
+    {
+      "job": "D20",
+      "phases_and_roles_match": true,
+      "reservations": []
+    },
+    {
+      "job": "D20",
+      "phases_and_roles_match": true,
+      "reservations": []
+    },
+    {
+      "hold_job_round_trip": "D20"
+    },
+    {
+      "job": "D21",
+      "phases_and_roles_match": true,
+      "reservations": []
+    },
+    {
+      "job": "D21",
+      "phases_and_roles_match": true,
+      "reservations": []
+    },
+    {
+      "hold_job_round_trip": "D21"
+    },
+    {
+      "job": "D22",
+      "phases_and_roles_match": true,
+      "reservations": []
+    },
+    {
+      "job": "D22",
+      "phases_and_roles_match": true,
+      "reservations": []
+    },
+    {
+      "hold_job_round_trip": "D22"
+    },
+    {
+      "job": "D30",
+      "phases_and_roles_match": true,
+      "reservations": [
+        "HOLD_PANEL_TO_CARRY"
+      ]
+    },
+    {
+      "job": "D30",
+      "phases_and_roles_match": true,
+      "reservations": [
+        "HOLD_PANEL_TO_CARRY"
+      ]
+    },
+    {
+      "hold_job_round_trip": "D30"
+    },
+    {
+      "job": "D31",
+      "phases_and_roles_match": true,
+      "reservations": [
+        "HOLD_PANEL_TO_CARRY",
+        "GUIDE_THROUGH_INSERTION"
+      ]
+    },
+    {
+      "job": "D31",
+      "phases_and_roles_match": true,
+      "reservations": [
+        "HOLD_PANEL_TO_CARRY",
+        "GUIDE_THROUGH_INSERTION"
+      ]
+    },
+    {
+      "hold_job_round_trip": "D31"
+    },
+    {
+      "job": "D40",
+      "phases_and_roles_match": true,
+      "reservations": [
+        "HOLD_PANEL_TO_CARRY",
+        "GUIDE_THROUGH_INSERTION"
+      ]
+    },
+    {
+      "job": "D40",
+      "phases_and_roles_match": true,
+      "reservations": [
+        "HOLD_PANEL_TO_CARRY",
+        "GUIDE_THROUGH_INSERTION"
+      ]
+    },
+    {
+      "hold_job_round_trip": "D40"
+    },
+    {
+      "job": "D42",
+      "phases_and_roles_match": true,
+      "reservations": [
+        "GUIDE_THROUGH_INSERTION"
+      ]
+    },
+    {
+      "job": "D42",
+      "phases_and_roles_match": true,
+      "reservations": [
+        "GUIDE_THROUGH_INSERTION"
+      ]
+    },
+    {
+      "hold_job_round_trip": "D42"
+    },
+    {
+      "job": "D45",
+      "phases_and_roles_match": true,
+      "reservations": [
+        "GUIDE_THROUGH_INSERTION"
+      ]
+    },
+    {
+      "job": "D45",
+      "phases_and_roles_match": true,
+      "reservations": [
+        "GUIDE_THROUGH_INSERTION"
+      ]
+    },
+    {
+      "hold_job_round_trip": "D45"
+    },
+    {
+      "job": "D50",
+      "phases_and_roles_match": true,
+      "reservations": [
+        "GUIDE_THROUGH_INSERTION"
+      ]
+    },
+    {
+      "job": "D50",
+      "phases_and_roles_match": true,
+      "reservations": [
+        "GUIDE_THROUGH_INSERTION"
+      ]
+    },
+    {
+      "hold_job_round_trip": "D50"
+    },
+    {
+      "job": "D60",
+      "phases_and_roles_match": true,
+      "reservations": []
+    },
+    {
+      "job": "D60",
+      "phases_and_roles_match": true,
+      "reservations": []
+    },
+    {
+      "hold_job_round_trip": "D60"
+    },
+    {
+      "job": "D61",
+      "phases_and_roles_match": true,
+      "reservations": []
+    },
+    {
+      "job": "D61",
+      "phases_and_roles_match": true,
+      "reservations": []
+    },
+    {
+      "hold_job_round_trip": "D61"
+    },
+    {
+      "job": "D70",
+      "phases_and_roles_match": true,
+      "reservations": []
+    },
+    {
+      "job": "D70",
+      "phases_and_roles_match": true,
+      "reservations": []
+    },
+    {
+      "hold_job_round_trip": "D70"
+    },
+    {
+      "job": "D71",
+      "phases_and_roles_match": true,
+      "reservations": []
+    },
+    {
+      "job": "D71",
+      "phases_and_roles_match": true,
+      "reservations": []
+    },
+    {
+      "hold_job_round_trip": "D71"
+    },
+    {
+      "job": "D80",
+      "phases_and_roles_match": true,
+      "reservations": []
+    },
+    {
+      "job": "D80",
+      "phases_and_roles_match": true,
+      "reservations": []
+    },
+    {
+      "hold_job_round_trip": "D80"
+    },
+    {
+      "job": "D81",
+      "phases_and_roles_match": true,
+      "reservations": []
+    },
+    {
+      "job": "D81",
+      "phases_and_roles_match": true,
+      "reservations": []
+    },
+    {
+      "hold_job_round_trip": "D81"
+    },
+    {
+      "job": "D10",
+      "phases_and_roles_match": true,
+      "reservations": []
+    },
+    {
+      "hand_round_trip": "H01_BODY",
+      "returns_to_updated_entry": true
+    },
+    {
+      "job": "D10",
+      "phases_and_roles_match": true,
+      "reservations": []
+    },
+    {
+      "hand_round_trip": "H02_BODY",
+      "returns_to_updated_entry": true
+    },
+    {
+      "job": "D60",
+      "phases_and_roles_match": true,
+      "reservations": []
+    },
+    {
+      "hand_round_trip": "H03_BUS",
+      "returns_to_updated_entry": true
+    },
+    {
+      "job": "D11",
+      "phases_and_roles_match": true,
+      "reservations": []
+    },
+    {
+      "hand_round_trip": "H04_CABLE",
+      "returns_to_updated_entry": true
+    },
+    {
+      "job": "D50",
+      "phases_and_roles_match": true,
+      "reservations": [
+        "GUIDE_THROUGH_INSERTION"
+      ]
+    },
+    {
+      "hand_round_trip": "H05_OUTER3",
+      "returns_to_updated_entry": true
+    },
+    {
+      "job": "D50",
+      "phases_and_roles_match": true,
+      "reservations": [
+        "GUIDE_THROUGH_INSERTION"
+      ]
+    },
+    {
+      "hand_round_trip": "H05_OUTER2",
+      "returns_to_updated_entry": true
+    },
+    {
+      "job": "D45",
+      "phases_and_roles_match": true,
+      "reservations": [
+        "GUIDE_THROUGH_INSERTION"
+      ]
+    },
+    {
+      "hand_round_trip": "H05_INNER",
+      "returns_to_updated_entry": true
+    },
+    {
+      "job": "D00",
+      "phases_and_roles_match": true,
+      "reservations": []
+    },
+    {
+      "hand_round_trip": "H06_CASE",
+      "returns_to_updated_entry": true
+    },
+    {
+      "job": "D12",
+      "phases_and_roles_match": true,
+      "reservations": []
+    },
+    {
+      "hand_round_trip": "H06_UNIT",
+      "returns_to_updated_entry": true
+    },
+    {
+      "job": "D22",
+      "phases_and_roles_match": true,
+      "reservations": []
+    },
+    {
+      "hand_round_trip": "H07_PANEL",
+      "returns_to_updated_entry": true
+    },
+    {
+      "job": "D70",
+      "phases_and_roles_match": true,
+      "reservations": []
+    },
+    {
+      "hand_round_trip": "H07_LID",
+      "returns_to_updated_entry": true
+    },
+    {
+      "job": "D20",
+      "phases_and_roles_match": true,
+      "reservations": []
+    },
+    {
+      "hand_round_trip": "H08_FUSE",
+      "returns_to_updated_entry": true
+    },
+    {
+      "job": "D12",
+      "phases_and_roles_match": true,
+      "reservations": []
+    },
+    {
+      "scene_from_hold": "S05",
+      "time": 32,
+      "back_restores_hold": "D12"
+    },
+    {
+      "job": "D31",
+      "phases_and_roles_match": true,
+      "reservations": [
+        "HOLD_PANEL_TO_CARRY",
+        "GUIDE_THROUGH_INSERTION"
+      ]
+    },
+    {
+      "scene_from_hold": "S07",
+      "time": 50,
+      "back_restores_hold": "D31"
+    },
+    {
+      "job": "D40",
+      "phases_and_roles_match": true,
+      "reservations": [
+        "HOLD_PANEL_TO_CARRY",
+        "GUIDE_THROUGH_INSERTION"
+      ]
+    },
+    {
+      "scene_from_hold": "S08",
+      "time": 55,
+      "back_restores_hold": "D40"
+    },
+    {
+      "job": "D42",
+      "phases_and_roles_match": true,
+      "reservations": [
+        "GUIDE_THROUGH_INSERTION"
+      ]
+    },
+    {
+      "scene_from_hold": "S09",
+      "time": 63,
+      "back_restores_hold": "D42"
+    },
+    {
+      "job": "D45",
+      "phases_and_roles_match": true,
+      "reservations": [
+        "GUIDE_THROUGH_INSERTION"
+      ]
+    },
+    {
+      "scene_from_hold": "S10",
+      "time": 67,
+      "back_restores_hold": "D45"
+    },
+    {
+      "job": "D50",
+      "phases_and_roles_match": true,
+      "reservations": [
+        "GUIDE_THROUGH_INSERTION"
+      ]
+    },
+    {
+      "scene_from_hold": "H05_P16",
+      "time": 139,
+      "back_restores_hold": "D50"
+    },
+    {
+      "job": "D81",
+      "phases_and_roles_match": true,
+      "reservations": []
+    },
+    {
+      "scene_from_hold": "S15",
+      "time": 103,
+      "back_restores_hold": "D81"
+    },
+    {
+      "job": "D80",
+      "phases_and_roles_match": true,
+      "reservations": []
+    },
+    {
+      "scene_from_hold": "S16",
+      "time": 108,
+      "back_restores_hold": "D80"
+    },
+    {
+      "keyboard_tabs_checked": true
+    },
+    {
+      "job": "D31",
+      "phases_and_roles_match": true,
+      "reservations": [
+        "HOLD_PANEL_TO_CARRY",
+        "GUIDE_THROUGH_INSERTION"
+      ]
+    },
+    {
+      "mobile_hold": "D31",
+      "widths": {
+        "viewport": 430,
+        "body": 430,
+        "root": 430
+      }
+    },
+    {
+      "job": "D50",
+      "phases_and_roles_match": true,
+      "reservations": [
+        "GUIDE_THROUGH_INSERTION"
+      ]
+    },
+    {
+      "mobile_hold": "D50",
+      "widths": {
+        "viewport": 430,
+        "body": 430,
+        "root": 430
+      }
+    },
+    {
+      "job": "D81",
+      "phases_and_roles_match": true,
+      "reservations": []
+    },
+    {
+      "mobile_hold": "D81",
+      "widths": {
+        "viewport": 430,
+        "body": 430,
+        "root": 430
+      }
+    }
+  ],
+  "screenshots": [
+    {
+      "file": "browser_qa/desktop_overview.png",
+      "sha256": "a7e31e6724f45783065da492194c1d63047f6a74c95f89c1b24a64cfaa94b8c4",
+      "viewport": {
+        "width": 1540,
+        "height": 1100
+      }
+    },
+    {
+      "file": "browser_qa/desktop_D31.png",
+      "sha256": "2886959a1e051d136a260465671edd8594b2fd0065b43687017986f57e91a01a",
+      "viewport": {
+        "width": 1540,
+        "height": 1100
+      }
+    },
+    {
+      "file": "browser_qa/desktop_D45.png",
+      "sha256": "eb470a991c2049ad0c6da34e3f87b905866a220cfec3a21c6408bbed631f7680",
+      "viewport": {
+        "width": 1540,
+        "height": 1100
+      }
+    },
+    {
+      "file": "browser_qa/desktop_D50.png",
+      "sha256": "2885930b1f62e2fdfcd3e8e4c25d634b7352315bed5ae54419e2981f965d0c06",
+      "viewport": {
+        "width": 1540,
+        "height": 1100
+      }
+    },
+    {
+      "file": "browser_qa/desktop_D81.png",
+      "sha256": "d848e4b40eaacf2e3ce426e52379d6efec6b65ee4cec00ec37267086e28b45e3",
+      "viewport": {
+        "width": 1540,
+        "height": 1100
+      }
+    },
+    {
+      "file": "browser_qa/mobile_D50.png",
+      "sha256": "80517c7a85ba5328884f554f5b0806658ba47fbd1b6c48df230e20457903a642",
+      "viewport": {
+        "width": 430,
+        "height": 932
+      }
+    }
+  ],
+  "page_errors": [],
+  "all_requestfailures": [
+    {
+      "url": "file:///home/rlrk/IsaacLab/work/hvjb-line-progress-20260927/work/hvjb-handoff-trace-v01-20260927/preview/HVJB_line_split_process_concept_v05d_review.mp4",
+      "type": "media",
+      "reason": {
+        "errorText": "net::ERR_ABORTED"
+      }
+    },
+    {
+      "url": "file:///home/rlrk/IsaacLab/work/hvjb-line-progress-20260927/work/hvjb-handoff-trace-v01-20260927/preview/HVJB_line_split_process_concept_v05d_review.mp4",
+      "type": "media",
+      "reason": {
+        "errorText": "net::ERR_ABORTED"
+      }
+    },
+    {
+      "url": "file:///home/rlrk/IsaacLab/work/hvjb-line-progress-20260927/work/hvjb-handoff-trace-v01-20260927/preview/HVJB_line_split_process_concept_v05d_review.mp4",
+      "type": "media",
+      "reason": {
+        "errorText": "net::ERR_ABORTED"
+      }
+    },
+    {
+      "url": "file:///home/rlrk/IsaacLab/work/hvjb-line-progress-20260927/work/hvjb-handoff-trace-v01-20260927/preview/HVJB_line_split_process_concept_v05d_review.mp4",
+      "type": "media",
+      "reason": {
+        "errorText": "net::ERR_ABORTED"
+      }
+    },
+    {
+      "url": "file:///home/rlrk/IsaacLab/work/hvjb-line-progress-20260927/work/hvjb-handoff-trace-v01-20260927/preview/HVJB_line_split_process_concept_v05d_review.mp4",
+      "type": "media",
+      "reason": {
+        "errorText": "net::ERR_ABORTED"
+      }
+    },
+    {
+      "url": "file:///home/rlrk/IsaacLab/work/hvjb-line-progress-20260927/work/hvjb-handoff-trace-v01-20260927/preview/HVJB_line_split_process_concept_v05d_review.mp4",
+      "type": "media",
+      "reason": {
+        "errorText": "net::ERR_ABORTED"
+      }
+    },
+    {
+      "url": "file:///home/rlrk/IsaacLab/work/hvjb-line-progress-20260927/work/hvjb-handoff-trace-v01-20260927/preview/HVJB_line_split_process_concept_v05d_review.mp4",
+      "type": "media",
+      "reason": {
+        "errorText": "net::ERR_ABORTED"
+      }
+    },
+    {
+      "url": "file:///home/rlrk/IsaacLab/work/hvjb-line-progress-20260927/work/hvjb-handoff-trace-v01-20260927/preview/HVJB_line_split_process_concept_v05d_review.mp4",
+      "type": "media",
+      "reason": {
+        "errorText": "net::ERR_ABORTED"
+      }
+    },
+    {
+      "url": "file:///home/rlrk/IsaacLab/work/hvjb-line-progress-20260927/work/hvjb-handoff-trace-v01-20260927/preview/HVJB_line_split_process_concept_v05d_review.mp4",
+      "type": "media",
+      "reason": {
+        "errorText": "net::ERR_ABORTED"
+      }
+    },
+    {
+      "url": "file:///home/rlrk/IsaacLab/work/hvjb-line-progress-20260927/work/hvjb-handoff-trace-v01-20260927/preview/HVJB_line_split_process_concept_v05d_review.mp4",
+      "type": "media",
+      "reason": {
+        "errorText": "net::ERR_ABORTED"
+      }
+    },
+    {
+      "url": "file:///home/rlrk/IsaacLab/work/hvjb-line-progress-20260927/work/hvjb-handoff-trace-v01-20260927/preview/HVJB_line_split_process_concept_v05d_review.mp4",
+      "type": "media",
+      "reason": {
+        "errorText": "net::ERR_ABORTED"
+      }
+    },
+    {
+      "url": "file:///home/rlrk/IsaacLab/work/hvjb-line-progress-20260927/work/hvjb-handoff-trace-v01-20260927/preview/HVJB_line_split_process_concept_v05d_review.mp4",
+      "type": "media",
+      "reason": {
+        "errorText": "net::ERR_ABORTED"
+      }
+    },
+    {
+      "url": "file:///home/rlrk/IsaacLab/work/hvjb-line-progress-20260927/work/hvjb-handoff-trace-v01-20260927/preview/HVJB_line_split_process_concept_v05d_review.mp4",
+      "type": "media",
+      "reason": {
+        "errorText": "net::ERR_ABORTED"
+      }
+    },
+    {
+      "url": "file:///home/rlrk/IsaacLab/work/hvjb-line-progress-20260927/work/hvjb-handoff-trace-v01-20260927/preview/HVJB_line_split_process_concept_v05d_review.mp4",
+      "type": "media",
+      "reason": {
+        "errorText": "net::ERR_ABORTED"
+      }
+    },
+    {
+      "url": "file:///home/rlrk/IsaacLab/work/hvjb-line-progress-20260927/work/hvjb-handoff-trace-v01-20260927/preview/HVJB_line_split_process_concept_v05d_review.mp4",
+      "type": "media",
+      "reason": {
+        "errorText": "net::ERR_ABORTED"
+      }
+    },
+    {
+      "url": "file:///home/rlrk/IsaacLab/work/hvjb-line-progress-20260927/work/hvjb-handoff-trace-v01-20260927/preview/HVJB_line_split_process_concept_v05d_review.mp4",
+      "type": "media",
+      "reason": {
+        "errorText": "net::ERR_ABORTED"
+      }
+    },
+    {
+      "url": "file:///home/rlrk/IsaacLab/work/hvjb-line-progress-20260927/work/hvjb-handoff-trace-v01-20260927/preview/HVJB_line_split_process_concept_v05d_review.mp4",
+      "type": "media",
+      "reason": {
+        "errorText": "net::ERR_ABORTED"
+      }
+    },
+    {
+      "url": "file:///home/rlrk/IsaacLab/work/hvjb-line-progress-20260927/work/hvjb-handoff-trace-v01-20260927/preview/HVJB_line_split_process_concept_v05d_review.mp4",
+      "type": "media",
+      "reason": {
+        "errorText": "net::ERR_ABORTED"
+      }
+    },
+    {
+      "url": "file:///home/rlrk/IsaacLab/work/hvjb-line-progress-20260927/work/hvjb-handoff-trace-v01-20260927/preview/HVJB_line_split_process_concept_v05d_review.mp4",
+      "type": "media",
+      "reason": {
+        "errorText": "net::ERR_ABORTED"
+      }
+    }
+  ],
+  "media_cancellations": [
+    {
+      "url": "file:///home/rlrk/IsaacLab/work/hvjb-line-progress-20260927/work/hvjb-handoff-trace-v01-20260927/preview/HVJB_line_split_process_concept_v05d_review.mp4",
+      "type": "media",
+      "reason": {
+        "errorText": "net::ERR_ABORTED"
+      }
+    },
+    {
+      "url": "file:///home/rlrk/IsaacLab/work/hvjb-line-progress-20260927/work/hvjb-handoff-trace-v01-20260927/preview/HVJB_line_split_process_concept_v05d_review.mp4",
+      "type": "media",
+      "reason": {
+        "errorText": "net::ERR_ABORTED"
+      }
+    },
+    {
+      "url": "file:///home/rlrk/IsaacLab/work/hvjb-line-progress-20260927/work/hvjb-handoff-trace-v01-20260927/preview/HVJB_line_split_process_concept_v05d_review.mp4",
+      "type": "media",
+      "reason": {
+        "errorText": "net::ERR_ABORTED"
+      }
+    },
+    {
+      "url": "file:///home/rlrk/IsaacLab/work/hvjb-line-progress-20260927/work/hvjb-handoff-trace-v01-20260927/preview/HVJB_line_split_process_concept_v05d_review.mp4",
+      "type": "media",
+      "reason": {
+        "errorText": "net::ERR_ABORTED"
+      }
+    },
+    {
+      "url": "file:///home/rlrk/IsaacLab/work/hvjb-line-progress-20260927/work/hvjb-handoff-trace-v01-20260927/preview/HVJB_line_split_process_concept_v05d_review.mp4",
+      "type": "media",
+      "reason": {
+        "errorText": "net::ERR_ABORTED"
+      }
+    },
+    {
+      "url": "file:///home/rlrk/IsaacLab/work/hvjb-line-progress-20260927/work/hvjb-handoff-trace-v01-20260927/preview/HVJB_line_split_process_concept_v05d_review.mp4",
+      "type": "media",
+      "reason": {
+        "errorText": "net::ERR_ABORTED"
+      }
+    },
+    {
+      "url": "file:///home/rlrk/IsaacLab/work/hvjb-line-progress-20260927/work/hvjb-handoff-trace-v01-20260927/preview/HVJB_line_split_process_concept_v05d_review.mp4",
+      "type": "media",
+      "reason": {
+        "errorText": "net::ERR_ABORTED"
+      }
+    },
+    {
+      "url": "file:///home/rlrk/IsaacLab/work/hvjb-line-progress-20260927/work/hvjb-handoff-trace-v01-20260927/preview/HVJB_line_split_process_concept_v05d_review.mp4",
+      "type": "media",
+      "reason": {
+        "errorText": "net::ERR_ABORTED"
+      }
+    },
+    {
+      "url": "file:///home/rlrk/IsaacLab/work/hvjb-line-progress-20260927/work/hvjb-handoff-trace-v01-20260927/preview/HVJB_line_split_process_concept_v05d_review.mp4",
+      "type": "media",
+      "reason": {
+        "errorText": "net::ERR_ABORTED"
+      }
+    },
+    {
+      "url": "file:///home/rlrk/IsaacLab/work/hvjb-line-progress-20260927/work/hvjb-handoff-trace-v01-20260927/preview/HVJB_line_split_process_concept_v05d_review.mp4",
+      "type": "media",
+      "reason": {
+        "errorText": "net::ERR_ABORTED"
+      }
+    },
+    {
+      "url": "file:///home/rlrk/IsaacLab/work/hvjb-line-progress-20260927/work/hvjb-handoff-trace-v01-20260927/preview/HVJB_line_split_process_concept_v05d_review.mp4",
+      "type": "media",
+      "reason": {
+        "errorText": "net::ERR_ABORTED"
+      }
+    },
+    {
+      "url": "file:///home/rlrk/IsaacLab/work/hvjb-line-progress-20260927/work/hvjb-handoff-trace-v01-20260927/preview/HVJB_line_split_process_concept_v05d_review.mp4",
+      "type": "media",
+      "reason": {
+        "errorText": "net::ERR_ABORTED"
+      }
+    },
+    {
+      "url": "file:///home/rlrk/IsaacLab/work/hvjb-line-progress-20260927/work/hvjb-handoff-trace-v01-20260927/preview/HVJB_line_split_process_concept_v05d_review.mp4",
+      "type": "media",
+      "reason": {
+        "errorText": "net::ERR_ABORTED"
+      }
+    },
+    {
+      "url": "file:///home/rlrk/IsaacLab/work/hvjb-line-progress-20260927/work/hvjb-handoff-trace-v01-20260927/preview/HVJB_line_split_process_concept_v05d_review.mp4",
+      "type": "media",
+      "reason": {
+        "errorText": "net::ERR_ABORTED"
+      }
+    },
+    {
+      "url": "file:///home/rlrk/IsaacLab/work/hvjb-line-progress-20260927/work/hvjb-handoff-trace-v01-20260927/preview/HVJB_line_split_process_concept_v05d_review.mp4",
+      "type": "media",
+      "reason": {
+        "errorText": "net::ERR_ABORTED"
+      }
+    },
+    {
+      "url": "file:///home/rlrk/IsaacLab/work/hvjb-line-progress-20260927/work/hvjb-handoff-trace-v01-20260927/preview/HVJB_line_split_process_concept_v05d_review.mp4",
+      "type": "media",
+      "reason": {
+        "errorText": "net::ERR_ABORTED"
+      }
+    },
+    {
+      "url": "file:///home/rlrk/IsaacLab/work/hvjb-line-progress-20260927/work/hvjb-handoff-trace-v01-20260927/preview/HVJB_line_split_process_concept_v05d_review.mp4",
+      "type": "media",
+      "reason": {
+        "errorText": "net::ERR_ABORTED"
+      }
+    },
+    {
+      "url": "file:///home/rlrk/IsaacLab/work/hvjb-line-progress-20260927/work/hvjb-handoff-trace-v01-20260927/preview/HVJB_line_split_process_concept_v05d_review.mp4",
+      "type": "media",
+      "reason": {
+        "errorText": "net::ERR_ABORTED"
+      }
+    },
+    {
+      "url": "file:///home/rlrk/IsaacLab/work/hvjb-line-progress-20260927/work/hvjb-handoff-trace-v01-20260927/preview/HVJB_line_split_process_concept_v05d_review.mp4",
+      "type": "media",
+      "reason": {
+        "errorText": "net::ERR_ABORTED"
+      }
+    }
+  ],
+  "unexpected_failed_requests": [],
+  "formal_physical_verdict": null
+}

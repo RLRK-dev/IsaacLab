@@ -1,0 +1,8 @@
+{
+  "observed_at": "2026-09-27T13:33:07.529664+09:00",
+  "index_sha256_read_before_append": "bd7c594e649efecc8e4b7b23d1abc2d19f42065b08763a89b3039293005f6e92",
+  "previous_prefix_sha256": "eef3d184b83ed65c97970dfffbee31d7a672682cb1dc5d7d6ffe5457557aa137",
+  "previous_bytes": 3467296,
+  "entry_sha256": "5a3003150ed57d53186e87680007293aebaaa2ef7c956de62701cb6e3a7bbac1",
+  "previous_prefix_unchanged": true
+}

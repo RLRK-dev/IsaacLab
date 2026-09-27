@@ -1,0 +1,38 @@
+    <section id="panel-holds" role="tabpanel" aria-labelledby="tab-holds" hidden>
+      <div class="section-heading"><h2>保持しているものを、次の支持先まで追う</h2><a href="data/handoff_trace_v01.json" class="text-link" download>対応記録 JSON</a></div>
+      <p class="secondary">仕事を選ぶと、取得・保持・引継ぎと、その後も残る担当を表示します。既存の工程案を整理した図です。支持面や把持動作が未確定の仕事も含みます。</p>
+      <div class="hold-layout">
+        <div id="hold-map" aria-label="仕事を選ぶ工程図">
+          <div class="hold-group" data-hold-group="supply"><h3>供給・事前準備</h3><div class="hold-choices"></div></div>
+          <div class="hold-branches">
+            <div class="hold-group" data-hold-group="A"><h3>A · 下板側を箱外で組立</h3><div class="hold-choices"></div></div>
+            <div class="hold-group" data-hold-group="B"><h3>B · ヒューズ板を箱外で組立</h3><div class="hold-choices"></div></div>
+          </div>
+          <p class="hold-shared">A/Bの補助1腕は共用。保持中の担当を終え、引継ぎ・開放・退避後に切り替える。</p>
+          <div class="hold-merge-arrow" aria-hidden="true">A ↘　合流　↙ B</div>
+          <div class="hold-group" data-hold-group="merge"><h3>Cへ本体と自由端を引継ぐ</h3><div class="hold-choices"></div><p>A/Bどちらを先に渡すかは未選定。</p></div>
+          <div class="hold-merge-arrow" aria-hidden="true">↓</div>
+          <div class="hold-group" data-hold-group="C"><h3>C · 箱外結合 → 搭載 → 側壁作業</h3><div class="hold-choices"></div></div>
+          <div class="hold-group" data-hold-group="remaining"><h3>C · 残る接続</h3><div class="hold-choices"></div><p>個々の端末順は未選定。</p></div>
+          <div class="hold-group" data-hold-group="after"><h3>後工程</h3><div class="hold-choices"></div><p>蓋と検査の詳細順は未選定。</p></div>
+          <div class="hold-group" data-hold-group="return"><h3>同じ段で戻す → 元の空き枠へ</h3><div class="hold-choices"></div></div>
+          <p class="secondary small">A/Bは並行方針。同じ補助を同時には使えません。図の順・幅は生産の時刻やタクトを表しません。D81の補給・回収は前工程にも関係します。</p>
+          <a href="parallel_review/index.html">補助の同時要求を8条件で比較する →</a>
+        </div>
+        <article id="hold-detail" class="detail-panel" aria-live="polite">
+          <div id="hold-kicker" class="eyebrow"></div><h3 id="hold-title"></h3>
+          <div id="hold-status" class="hold-status"></div>
+          <div class="hold-actors"><div><span>主担当・手先</span><strong id="hold-primary"></strong><p id="hold-hands"></p></div><div><span>補助・支持</span><strong id="hold-assist"></strong></div></div>
+          <ol class="hold-flow">
+            <li><span class="hold-phase">1 · 取得・開始</span><p id="hold-start"></p></li>
+            <li><span class="hold-phase">2 · 保持・作業中</span><p id="hold-keep"></p></li>
+            <li><span class="hold-phase">3 · 引継ぎ・退避</span><p id="hold-end"></p></li>
+          </ol>
+          <div class="hold-continuity"><h4>次の仕事へ移るとき</h4><p id="hold-reuse"></p><div id="hold-reservations"></div></div>
+          <h4>引継ぎで残っている確認</h4><p id="hold-unresolved" class="secondary"></p>
+          <h4>手先の比較図・対象部品</h4><div id="hold-job-links" class="button-row"></div>
+          <h4>同じ動画の対応場面</h4><div id="hold-scene-links" class="button-row"></div><p class="secondary small">動画には概略表示・静止説明も含まれます。この図の全作業が動作として再現済みという意味ではありません。</p>
+          <p id="hold-basis" class="secondary small"></p>
+        </article>
+      </div>
+    </section>

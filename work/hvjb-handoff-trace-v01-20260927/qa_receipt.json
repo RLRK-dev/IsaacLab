@@ -1,0 +1,49 @@
+{
+  "observed_at": "2026-09-27T12:41:34.908360+09:00",
+  "entry_sha256": "91c0e6958cde31cba1ec2e271d85fa559b946fcdbfe02989dd21be6008ee8455",
+  "overlay_manifest_sha256": "26a6263895d98dd67d50686834a45498181fd46efc1f6a2665eb98088d3528a2",
+  "unchanged_files": 522,
+  "new_files": 7,
+  "job_feature_scene_records_unchanged": true,
+  "hand_use_records_unchanged": true,
+  "support_reservation_records_unchanged": true,
+  "inherited_description_ids": [
+    "D10",
+    "D11",
+    "D12",
+    "D20",
+    "D21",
+    "D22",
+    "D30",
+    "D31",
+    "D40",
+    "D42",
+    "D45",
+    "D50",
+    "D60",
+    "D61",
+    "D70",
+    "D71"
+  ],
+  "current_description_ids": [
+    "D00",
+    "D01",
+    "D80",
+    "D81"
+  ],
+  "links": [
+    {
+      "file": "index_v05d_2.html",
+      "links_checked": 32
+    },
+    {
+      "file": "hand_review/index_v03.html",
+      "links_checked": 101
+    }
+  ],
+  "video_count": 1,
+  "video_sha256": "0cdcd4d43831c3f805aa4e5960b666e7965ee6f1ac38b59d31645630d1dd40da",
+  "new_javascript_syntax_passed": true,
+  "script_sha256": "ec50a941a4c3dd3365d812ccfb9c030c440d12e87c3c643370d790c8778bffe3",
+  "physical_acceptance_verdict": null
+}

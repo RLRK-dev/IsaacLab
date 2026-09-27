@@ -1,0 +1,35 @@
+.hold-layout { display:grid; grid-template-columns:minmax(330px,420px) minmax(0,1fr); gap:26px; margin-top:24px; }
+#hold-map { min-width:0; }
+.hold-group { background:white; border:1px solid var(--line); border-radius:8px; padding:12px; margin-bottom:10px; }
+.hold-group h3 { font-size:16px; margin:0 0 8px; }
+.hold-group p { font-size:13px; color:var(--muted); margin-top:6px; }
+.hold-branches { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+.hold-branches .hold-group { background:#edf6f3; margin-bottom:0; }
+.hold-choices { display:flex; flex-wrap:wrap; gap:5px; }
+.hold-choices button { background:var(--wash); border:1px solid var(--line); border-radius:4px; text-align:left; padding:7px 8px; font-size:13px; line-height:1.45; flex:1 1 46%; min-width:0; }
+.hold-branches .hold-choices button { flex-basis:100%; }
+.hold-choices button[aria-pressed="true"] { background:#126c5b; border-color:#126c5b; color:white; }
+.hold-choices button span { display:block; font-size:12px; opacity:.85; }
+.hold-shared { font-size:13px; background:#fff1d9; border-left:3px solid #c89039; padding:9px 12px; margin:10px 0 0; }
+.hold-merge-arrow { text-align:center; font-size:17px; color:var(--muted); line-height:1.5; }
+#hold-map > p.small { margin:14px 0; }
+.hold-status { color:#766039; background:#fff5e4; padding:8px 12px; border-radius:4px; font-size:14px; margin-bottom:15px; }
+.hold-actors { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:22px; }
+.hold-actors > div { padding:12px; border-left:3px solid var(--accent); background:#f1f7f5; min-width:0; }
+.hold-actors span { display:block; color:var(--muted); font-size:13px; }
+.hold-actors strong { display:block; font-size:17px; }
+.hold-actors p { font-size:14px; }
+.hold-flow { list-style:none; padding:0; margin:0; display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:24px; }
+.hold-flow li { position:relative; padding:13px; background:#edf3f8; border-top:3px solid #6d91aa; font-size:15px; }
+.hold-flow li:not(:last-child)::after { content:"→"; position:absolute; right:-21px; top:50%; color:#608297; }
+.hold-phase { display:block; font-size:13px; color:#335e79; font-weight:600; margin-bottom:10px; }
+.hold-continuity { border-left:4px solid #367da5; padding:12px 15px; background:#eff6fc; margin-top:22px; font-size:15px; }
+.hold-continuity h4 { margin:0 0 7px; }
+.hold-reservation { border-top:1px solid #c9dce9; margin-top:10px; padding-top:10px; font-size:14px; }
+.hold-reservation strong { display:block; margin-bottom:3px; }
+.hold-reservation small { display:block; color:var(--muted); margin-top:5px; }
+#hold-basis { margin-top:24px; padding-top:15px; border-top:1px solid var(--line); }
+.hold-entry-link { margin:12px 0; }
+@media(max-width:1150px) { .hold-flow { grid-template-columns:1fr; gap:23px; } .hold-flow li:not(:last-child)::after { content:"↓"; left:50%; top:auto; bottom:-25px; } }
+@media(max-width:900px) { .hold-layout { grid-template-columns:1fr; } .hold-choices button { flex:1 1 29%; } #hold-detail { scroll-margin-top:10px; } }
+@media(max-width:520px) { .hold-actors { grid-template-columns:1fr; gap:9px; } .hold-layout { gap:18px; } .hold-choices button { flex-basis:44%; } }

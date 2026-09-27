@@ -1,0 +1,51 @@
+{
+  "observed_at": "2026-09-27T12:31:06.240734+09:00",
+  "entry": "index_v05d_2.html",
+  "files": [
+    {
+      "path": "2026-09-27_保持と受渡し.md",
+      "sha256": "18dad0cc423ddbc22f7bb06649a4a6d403a415e625ff0635996139b47ed72e0c",
+      "bytes": 744
+    },
+    {
+      "path": "data/handoff_trace_v01.json",
+      "sha256": "5d6b90293c6130428aaf3fb7d323302e550501ed1259d623b37767954ab41bcd",
+      "bytes": 17352
+    },
+    {
+      "path": "hand_review/index_v03.html",
+      "sha256": "6c19810fa8b7a3d8af4445ae79cb54c5c433f38201ce86e56a57986e5c24ebbb",
+      "bytes": 29091
+    },
+    {
+      "path": "handoffs_v01.css",
+      "sha256": "9b377ff0731bc5583925ba7826fce3b9d2e19acb5385585db33533d6980ac674",
+      "bytes": 3199
+    },
+    {
+      "path": "index_v05d_2.html",
+      "sha256": "91c0e6958cde31cba1ec2e271d85fa559b946fcdbfe02989dd21be6008ee8455",
+      "bytes": 147369
+    },
+    {
+      "path": "review_handoffs_v01.js",
+      "sha256": "f4cab2a116932aad6a9b5362c6019477ef44d803d41b818527fe2d0c2a6621be",
+      "bytes": 14890
+    }
+  ],
+  "generator_sha256": "a2c646f4928abe7e0d8fc11a27e7c0a79c8935a1c9d3046d960f609d04cc497f",
+  "inputs_sha256": {
+    "panel.html": "9b13950767544ea6ef337e8e298f9e43e5873760a765ab033f985b9e63cea328",
+    "trace.js": "3a0081150c6c01c16912e0ee2629f3faec4de394fcd2d1afe89a298ef5e1ef43",
+    "trace.css": "9b377ff0731bc5583925ba7826fce3b9d2e19acb5385585db33533d6980ac674"
+  },
+  "source_previous_overlay_sha256": "be50352c68cbff865eac2fe2fc884afb90c8dbb15c41d1716c81509ab9f39602",
+  "counts": {
+    "jobs": 20,
+    "features": 92,
+    "hand_uses": 12,
+    "scenes": 22
+  },
+  "new_movie_generated": false,
+  "new_mechanical_design_selected": false
+}

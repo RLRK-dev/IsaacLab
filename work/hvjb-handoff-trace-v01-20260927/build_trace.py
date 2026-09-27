@@ -1,0 +1,226 @@
+# Copyright (c) 2022-2026, The Isaac Lab Project Developers (https://github.com/isaac-sim/IsaacLab/blob/main/CONTRIBUTORS.md).
+# All rights reserved.
+#
+# SPDX-License-Identifier: BSD-3-Clause
+
+"""Connect inherited support descriptions with the existing job and video review."""
+
+import hashlib
+import json
+import re
+import shutil
+from datetime import datetime
+from pathlib import Path
+from zoneinfo import ZoneInfo
+
+ROOT = Path(__file__).resolve().parent
+WORK = ROOT.parent
+SOURCE = WORK / "hvjb-job-hand-links-v01-20260927/preview"
+PLAN = WORK / "hvjb-line-process-v03-20260921/inputs/hand_plan.json"
+PARALLEL = WORK / "hvjb-parallel-roles-v01-20260923/data/parallel_review_data.json"
+ENTRY = "index_v05d_2.html"
+SCRIPT = "review_handoffs_v01.js"
+DATA = "data/handoff_trace_v01.json"
+MANIFEST = "handoff_trace_manifest_v01.json"
+GROUPS = [
+    {"id": "supply", "jobs": ["D00", "D01"]},
+    {"id": "A", "jobs": ["D10", "D11"]},
+    {"id": "B", "jobs": ["D20", "D21"]},
+    {"id": "merge", "jobs": ["D12", "D22"]},
+    {"id": "C", "jobs": ["D30", "D31", "D40", "D42", "D45", "D50"]},
+    {"id": "remaining", "jobs": ["D60", "D61"]},
+    {"id": "after", "jobs": ["D70", "D71"]},
+    {"id": "return", "jobs": ["D81", "D80"]},
+]
+CURRENT_DESCRIPTIONS = {
+    "D00": {
+        "start_ja": "共用20区画ストッカから、XYZが空筐体を取得する",
+        "keep_ja": "H06筐体用で保持し、パレットの受け位置へ運ぶ",
+        "end_ja": "パレットに支持・位置決めを引き継いでから指を開放・退避する",
+        "reuse_ja": "同じXYZを完成品の収納にも使う。受渡しの途中で別の取得へ移らない",
+    },
+    "D01": {
+        "start_ja": "入荷済みの範囲と、準備が必要な線・端末を照合する",
+        "keep_ja": "加工が必要な場合の保持・案内は、準備設備側で検討する",
+        "end_ja": "準備後の線と端末を、次の支持・案内へ引き継ぐ",
+        "reuse_ja": "入荷・加工の範囲が未定。必要な設備や手扱いをゼロと扱わない",
+    },
+    "D80": {
+        "start_ja": "戻ってきたパレット上の完成品を、供給と同じXYZが把持する",
+        "keep_ja": "筐体を保持し、空筐体を取り出した元のストッカ枠へ運ぶ",
+        "end_ja": "元の空き枠へ支持を渡してから指を開放・退避する",
+        "reuse_ja": "20区画は空筐体と完成品で共用。完成品の把持面・重心・収納空間は確認が残る",
+    },
+    "D81": {
+        "start_ja": "後工程完了を仮定した完成品パレットと、補給・回収対象を区別する",
+        "keep_ja": "完成品はパレットに載せたまま、同じ1段コンベアで供給側へ戻す",
+        "end_ja": "供給側でD80のXYZ取出しへ渡す。補給品・空容器はそれぞれの受けへ引き継ぐ",
+        "reuse_ja": "全体のパレット枚数・通行順と、補給・回収の設備境界は未選定。主組立の保持を中断しない",
+    },
+}
+
+
+def sha(path: Path) -> str:
+    return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
+def read_payload(page: str, script_id: str) -> dict:
+    match = re.search(rf'<script id="{script_id}" type="application/json">(.*?)</script>', page, re.S)
+    assert match, script_id
+    return json.loads(match.group(1))
+
+
+def replace_once(text: str, before: str, after: str) -> str:
+    assert text.count(before) == 1, before
+    return text.replace(before, after, 1)
+
+
+def make_data(payload: dict) -> dict:
+    plan = json.loads(PLAN.read_text())
+    parallel = json.loads(PARALLEL.read_text())
+    source_cards = {row["id"]: row["source_card_unmodified"] for row in plan["cards"]}
+    rows = []
+    for job in payload["jobs"]:
+        job_id = job["id"]
+        if job_id in CURRENT_DESCRIPTIONS:
+            phases = CURRENT_DESCRIPTIONS[job_id]
+            basis = "現行v05dの仕事表と確定済み物流方針に沿う説明。旧保存カードの物流候補は使用していません。"
+            if job_id == "D01":
+                basis = "現行v05dの未確定範囲に沿う説明。加工設備や加工動作の採用を決めた記述ではありません。"
+            origin = "current_job_and_user_directions"
+        else:
+            phases = {key: source_cards[job_id][key] for key in ("start_ja", "keep_ja", "end_ja", "reuse_ja")}
+            basis = "既存の手先計画から取得・保持・引継ぎの説明を再掲。主担当・手先・未確定事項は現行v05dの仕事表です。"
+            origin = "hand_plan.source_card_unmodified"
+        unresolved_motion = job_id in ("D01", "D42", "D61", "D70", "D71")
+        rows.append(
+            {
+                "id": job_id,
+                **phases,
+                "status_ja": "具体的な施工動作は未確定"
+                if unresolved_motion
+                else "既存工程案 · 支持面・手先の実適用は検討中",
+                "basis_ja": basis,
+                "description_source": origin,
+            }
+        )
+    mapped = [job for group in GROUPS for job in group["jobs"]]
+    assert len(mapped) == len(set(mapped)) == len(rows) == 20
+    assert set(mapped) == {row["id"] for row in rows}
+    return {
+        "scope": "Support and handoff descriptions linked to existing jobs, not a timed schedule or controller",
+        "groups": GROUPS,
+        "jobs": rows,
+        "reservations": parallel["cross_task_reservations_unmodified"],
+        "description_overrides": list(CURRENT_DESCRIPTIONS),
+        "source_sha256": {str(path.relative_to(WORK)): sha(path) for path in (PLAN, PARALLEL)},
+        "source_entry_sha256": sha(SOURCE / "index_v05d_1.html"),
+        "time_values_s": None,
+        "new_physical_assignment": None,
+        "physical_acceptance_verdict": None,
+    }
+
+
+def write_entry(out: Path, original: str, trace: dict) -> None:
+    page = replace_once(original, "レビュー v05d.1</title>", "レビュー v05d.2</title>")
+    page = replace_once(page, 'src="review_job_hands_v01.js"', f'src="{SCRIPT}"')
+    page = page.replace("hand_review/index_v02.html", "hand_review/index_v03.html")
+    page = replace_once(page, "</head>", '  <link rel="stylesheet" href="handoffs_v01.css">\n</head>')
+    marker = '    <button id="tab-jobs"'
+    page = replace_once(
+        page,
+        marker,
+        '    <button id="tab-holds" role="tab" aria-controls="panel-holds"'
+        ' aria-selected="false" type="button">保持と受渡し</button>\n' + marker,
+    )
+    marker = '    <section id="panel-jobs"'
+    page = replace_once(page, marker, (ROOT / "panel.html").read_text() + "\n" + marker)
+    marker = '<h4 class="job-hand-heading">'
+    page = replace_once(
+        page,
+        marker,
+        '<div class="button-row hold-entry-link"><button id="job-hold-link" type="button">'
+        "この仕事の保持と受渡しを図で見る →</button></div>" + marker,
+    )
+    encoded = json.dumps(trace, ensure_ascii=False, separators=(",", ":"))
+    page = replace_once(
+        page, "</body>", f'<script id="handoff-trace-data" type="application/json">{encoded}</script>\n</body>'
+    )
+    assert read_payload(page, "review-data") == read_payload(original, "review-data")
+    assert read_payload(page, "hand-usage-data") == read_payload(original, "hand-usage-data")
+    (out / ENTRY).write_text(page)
+
+
+def write_script(out: Path) -> None:
+    script = (SOURCE / "review_job_hands_v01.js").read_text()
+    script = replace_once(
+        script, '["video", "jobs", "features", "diagrams"]', '["video", "holds", "jobs", "features", "diagrams"]'
+    )
+    script = script.replace("hand_review/index_v02.html", "hand_review/index_v03.html")
+    marker = "  const diagramNames = "
+    script = replace_once(script, marker, (ROOT / "trace.js").read_text() + "\n" + marker)
+    marker = '    const jobId = params.get("job");'
+    script = replace_once(
+        script,
+        marker,
+        '    const holdId = params.get("hold");\n    if (holdId && holds.has(holdId)) { chooseHold(holdId); return; }\n'
+        + marker,
+    )
+    (out / SCRIPT).write_text(script)
+
+
+def main() -> None:
+    out = ROOT / "overlay"
+    out.mkdir(exist_ok=False)
+    original = (SOURCE / "index_v05d_1.html").read_text()
+    payload = read_payload(original, "review-data")
+    assert (len(payload["jobs"]), len(payload["features"]), len(payload["scenes"])) == (20, 92, 22)
+    trace = make_data(payload)
+    write_entry(out, original, trace)
+    write_script(out)
+    (out / "hand_review").mkdir()
+    hand_page = (SOURCE / "hand_review/index_v02.html").read_text().replace("index_v05d_1.html", ENTRY)
+    (out / "hand_review/index_v03.html").write_text(hand_page)
+    shutil.copy2(ROOT / "trace.css", out / "handoffs_v01.css")
+    (out / "data").mkdir()
+    (out / DATA).write_text(json.dumps(trace, ensure_ascii=False, indent=2) + "\n")
+    (out / "2026-09-27_保持と受渡し.md").write_text(
+        "# 保持と受渡しを追う\n\n"
+        f"`{ENTRY}#hold=D12` を開き、工程図の仕事を選んでください。\n"
+        "本体の支持と自由端の案内を区別し、取得・保持・引継ぎと継続担当を表示します。\n"
+        "手先図・対象部品・既存動画へ移動できます。20仕事の内容と動画1本は従来のままです。\n\n"
+        "A/Bの並行方針、共用補助の同時使用制限、C補助の引継ぎまでの継続予約を維持します。\n"
+        "説明の順番・幅からタクトは読み取れません。支持面・実配線・動作未確定の箇所を残しています。\n"
+        "古い保存カードの2段循環・別払出し役を使わず、1段往復・共用XYZ・20区画の最新方針を示します。\n"
+    )
+    files = [
+        {"path": str(path.relative_to(out)), "sha256": sha(path), "bytes": path.stat().st_size}
+        for path in sorted(out.rglob("*"))
+        if path.is_file()
+    ]
+    assert len(files) == 6 and all(not (SOURCE / row["path"]).exists() for row in files)
+    manifest = {
+        "observed_at": datetime.now(ZoneInfo("Asia/Tokyo")).isoformat(),
+        "entry": ENTRY,
+        "files": files,
+        "generator_sha256": sha(Path(__file__)),
+        "inputs_sha256": {name: sha(ROOT / name) for name in ("panel.html", "trace.js", "trace.css")},
+        "source_previous_overlay_sha256": sha(SOURCE / "job_hand_links_manifest_v01.json"),
+        "counts": {"jobs": 20, "features": 92, "hand_uses": 12, "scenes": 22},
+        "new_movie_generated": False,
+        "new_mechanical_design_selected": False,
+    }
+    (out / MANIFEST).write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + "\n")
+    preview = ROOT / "preview"
+    assert not preview.exists()
+    shutil.copytree(SOURCE, preview)
+    for row in files + [{"path": MANIFEST}]:
+        dest = preview / row["path"]
+        assert not dest.exists()
+        dest.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copy2(out / row["path"], dest)
+    print("HANDOFF_TRACE_BUILT jobs=20 preserved_jobs_features_scenes=true new_videos=0")
+
+
+if __name__ == "__main__":
+    main()

@@ -1,0 +1,9 @@
+{
+  "observed_at": "2026-09-27T13:12:03.075982+09:00",
+  "executed_generator_sha256": "a2c646f4928abe7e0d8fc11a27e7c0a79c8935a1c9d3046d960f609d04cc497f",
+  "formatted_generator_sha256": "14b1f3faff3fde7fa9351bec78354b7b2bb2ea77f3b3454497857e027b9c9428",
+  "abstract_syntax_trees_equal": true,
+  "change": "ruff-format joined two string-concatenation lines; one quote style changed",
+  "generated_files_rewritten": false,
+  "browser_entry_sha256_unchanged": "91c0e6958cde31cba1ec2e271d85fa559b946fcdbfe02989dd21be6008ee8455"
+}
